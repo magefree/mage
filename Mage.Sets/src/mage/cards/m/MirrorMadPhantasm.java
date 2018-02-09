@@ -40,8 +40,8 @@ import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -54,7 +54,7 @@ import mage.players.Player;
 public class MirrorMadPhantasm extends CardImpl {
 
     public MirrorMadPhantasm(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
         this.subtype.add(SubType.SPIRIT);
 
         this.power = new MageInt(5);
@@ -96,19 +96,21 @@ class MirrorMadPhantasmEffect extends OneShotEffect {
                 perm.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
                 player.shuffleLibrary(source, game);
                 Cards cards = new CardsImpl();
-                while (true) {
+                while (player.getLibrary().hasCards()) {
                     Card card = player.getLibrary().removeFromTop(game);
                     if (card == null) {
                         break;
                     }
                     if (card.getName().equals("Mirror-Mad Phantasm")) {
-                        card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), player.getId());
+                        player.moveCards(card, Zone.BATTLEFIELD, source, game);
                         break;
                     }
                     cards.add(card);
                 }
-                player.revealCards("Mirror-Mad Phantasm", cards, game);
-                player.moveCards(cards, Zone.GRAVEYARD, source, game);
+                if (!cards.isEmpty()) {
+                    player.revealCards("Mirror-Mad Phantasm", cards, game);
+                    player.moveCards(cards, Zone.GRAVEYARD, source, game);
+                }
                 return true;
             }
         }
