@@ -42,9 +42,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
@@ -62,9 +62,8 @@ import mage.target.common.TargetCreaturePermanent;
 public class PollenbrightWings extends CardImpl {
 
     public PollenbrightWings(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{G}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{G}{W}");
         this.subtype.add(SubType.AURA);
-
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
@@ -73,7 +72,8 @@ public class PollenbrightWings extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
         // Enchanted creature has flying.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield)));
         // Whenever enchanted creature deals combat damage to a player, create that many 1/1 green Saproling creature tokens.
         this.addAbility(new PollenbrightWingsAbility());
     }
@@ -111,10 +111,10 @@ class PollenbrightWingsAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        DamagedPlayerEvent damageEvent = (DamagedPlayerEvent)event;
-        Permanent p = game.getPermanent(event.getSourceId());
-        if (damageEvent.isCombatDamage() && p != null && p.getAttachments().contains(this.getSourceId())) {
-            game.getState().setValue(new StringBuilder("Damage_").append(getSourceId().toString()).toString(), new Integer(damageEvent.getAmount()));
+        DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
+        Permanent damageSource = game.getPermanent(event.getSourceId());
+        if (damageEvent.isCombatDamage() && damageSource != null && damageSource.getAttachments().contains(this.getSourceId())) {
+            game.getState().setValue("Damage_" + getSourceId(), damageEvent.getAmount());
             return true;
         }
         return false;
@@ -144,9 +144,9 @@ class PollenbrightWingsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Integer damage = (Integer) game.getState().getValue(new StringBuilder("Damage_").append(source.getSourceId().toString()).toString());
+        Integer damage = (Integer) game.getState().getValue("Damage_" + source.getSourceId());
         if (damage != null) {
-            return (new CreateTokenEffect(new SaprolingToken(), damage.intValue()).apply(game, source));
+            return (new CreateTokenEffect(new SaprolingToken(), damage).apply(game, source));
         }
         return false;
     }
