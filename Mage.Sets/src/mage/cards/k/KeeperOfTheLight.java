@@ -27,28 +27,24 @@
  */
 package mage.cards.k;
 
-import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
-import mage.constants.SubType;
+import mage.MageObject;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.condition.Condition;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
-import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.effects.common.GainLifeEffect;
-import mage.cards.Card;
+import mage.filter.FilterOpponent;
 import mage.game.Game;
 import mage.players.Player;
-import mage.filter.FilterOpponent;
 import mage.target.TargetPlayer;
 
 /**
@@ -59,20 +55,20 @@ public class KeeperOfTheLight extends CardImpl {
 
     public KeeperOfTheLight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{W}");
-        
+
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 
-        // {W}, {tap}: Choose target opponent who had more life than you did as you activated this ability. You gain 3 life.
-	Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, 
-                    new GainLifeEffect(new StaticValue(3), "Choose target opponent who had more life than you did as you activated this ability. You gain 3 life."), 
-                    new TapSourceCost(), KeeperOfTheLightCondition.instance);
-        ability.addCost(new ManaCostsImpl("{W}"));
+        // {W}, {T}: Choose target opponent who had more life than you did as you activated this ability. You gain 3 life.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new GainLifeEffect(3).setText("Choose target opponent who had more life than you did as you activated this ability. You gain 3 life."),
+                new ManaCostsImpl("{W}"));
+        ability.addCost(new TapSourceCost());
         ability.addTarget(new KeeperOfTheLightTarget());
         this.addAbility(ability);
-                
+
     }
 
     public KeeperOfTheLight(final KeeperOfTheLight card) {
@@ -88,15 +84,7 @@ public class KeeperOfTheLight extends CardImpl {
 class KeeperOfTheLightTarget extends TargetPlayer {
 
     public KeeperOfTheLightTarget() {
-        this(false);
-    }
-
-    public KeeperOfTheLightTarget(boolean notTarget) {
-        this(new FilterOpponent("opponent who had more life than you did as you activated this ability"), notTarget);
-    }
-
-    public KeeperOfTheLightTarget(FilterOpponent filter, boolean notTarget) {
-        super(1, 1, notTarget, filter);
+        super(1, 1, false, new FilterOpponent("opponent that has more life than you"));
     }
 
     public KeeperOfTheLightTarget(final KeeperOfTheLightTarget target) {
@@ -108,43 +96,36 @@ class KeeperOfTheLightTarget extends TargetPlayer {
         Set<UUID> availablePossibleTargets = super.possibleTargets(sourceId, sourceControllerId, game);
         Set<UUID> possibleTargets = new HashSet<>();
         int lifeController = game.getPlayer(sourceControllerId).getLife();
-        
+
         for (UUID targetId : availablePossibleTargets) {
             Player opponent = game.getPlayer(targetId);
-            if (opponent != null){
+            if (opponent != null) {
                 int lifeOpponent = opponent.getLife();
-                if (lifeOpponent > lifeController){
+                if (lifeOpponent > lifeController) {
                     possibleTargets.add(targetId);
                 }
             }
         }
         return possibleTargets;
     }
-    
-    @Override
-    public KeeperOfTheLightTarget copy() {
-        return new KeeperOfTheLightTarget(this);
-    }
-    
-    @Override
-    public String toString() {
-        return "opponent who had more life than you did as you activated this ability";
-    }
-}
-
-enum KeeperOfTheLightCondition implements Condition {
-
-    instance;
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
+    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+        int count = 0;
+        MageObject targetSource = game.getObject(sourceId);
+        Player controller = game.getPlayer(sourceControllerId);
         if (controller != null) {
-            int controllerLife = controller.getLife();
-            
-            for (UUID playerId : game.getPlayerList()){
-                if (controllerLife < game.getPlayer(playerId).getLife()){
-                    return true;
+            for (UUID playerId : game.getState().getPlayersInRange(sourceControllerId, game)) {
+                Player player = game.getPlayer(playerId);
+                if (player != null
+                        && controller.getLife() < player.getLife()
+                        && !player.hasLeft()
+                        && filter.match(player, sourceId, sourceControllerId, game)
+                        && player.canBeTargetedBy(targetSource, sourceControllerId, game)) {
+                    count++;
+                    if (count >= this.minNumberOfTargets) {
+                        return true;
+                    }
                 }
             }
         }
@@ -152,9 +133,7 @@ enum KeeperOfTheLightCondition implements Condition {
     }
 
     @Override
-    public String toString() {
-        return "you have less life than an opponent";
+    public KeeperOfTheLightTarget copy() {
+        return new KeeperOfTheLightTarget(this);
     }
-
 }
-
