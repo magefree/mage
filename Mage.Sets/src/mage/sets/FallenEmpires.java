@@ -44,6 +44,7 @@ import mage.cards.h.HighTide;
 import mage.cards.h.Homarid;
 import mage.cards.h.HomaridWarrior;
 import mage.cards.h.HymnToTourach;
+import mage.cards.i.IcatianInfantry;
 import mage.cards.i.IcatianJavelineers;
 import mage.cards.i.IcatianMoneychanger;
 import mage.cards.i.IcatianScout;
@@ -170,6 +171,10 @@ public class FallenEmpires extends ExpansionSet {
         cards.add(new SetCardInfo("Hymn to Tourach", 13, Rarity.COMMON, HymnToTourach.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hymn to Tourach", 14, Rarity.COMMON, HymnToTourach.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hymn to Tourach", 15, Rarity.COMMON, HymnToTourach.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Icatian Infantry", 144, Rarity.COMMON, IcatianInfantry.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Icatian Infantry", 145, Rarity.COMMON, IcatianInfantry.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Icatian Infantry", 146, Rarity.COMMON, IcatianInfantry.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Icatian Infantry", 147, Rarity.COMMON, IcatianInfantry.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Icatian Javelineers", 148, Rarity.COMMON, IcatianJavelineers.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Icatian Javelineers", 149, Rarity.COMMON, IcatianJavelineers.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Icatian Javelineers", 150, Rarity.COMMON, IcatianJavelineers.class, NON_FULL_USE_VARIOUS));
