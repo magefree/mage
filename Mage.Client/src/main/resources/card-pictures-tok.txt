@@ -45,10 +45,10 @@
 #|Generate|TOK:PTC|Wolf||
 #|Generate|TOK:PTC|Wurm||
 #|Generate|TOK:WMCQ|Angel||
-|Generate|EMBLEM!:AKH|Emblem Gideon|||GideonOfTheTrialsEmblem|
 |Generate|EMBLEM!:BFZ|Emblem Gideon|||GideonAllyOfZendikarEmblem|
 |Generate|EMBLEM!:BFZ|Emblem Kiora|||KioraMasterOfTheDepthsEmblem|
 |Generate|EMBLEM!:BFZ|Emblem Nixilis|||ObNixilisReignitedEmblem|
+|Generate|EMBLEM!:AKH|Emblem Gideon|||GideonOfTheTrialsEmblem|
 |Generate|EMBLEM!:C14|Emblem Daretti|||DarettiScrapSavantEmblem|
 |Generate|EMBLEM!:C14|Emblem Daretti||Emblem Daretti|DarettiScrapSavantEmblem|
 |Generate|EMBLEM!:C14|Emblem Nixilis|||ObNixilisOfTheBlackOathEmblem|
@@ -73,7 +73,7 @@
 |Generate|EMBLEM!:ORI|Emblem Liliana|||LilianaDefiantNecromancerEmblem|
 |Generate|EMBLEM!:SOI|Emblem Arlinn|||ArlinnEmbracedByTheMoonEmblem|
 |Generate|EMBLEM!:SOI|Emblem Jace|||JaceUnravelerOfSecretsEmblem|
-|Generate|EMBLEM-:THS|Elspeth, Suns Champion||Emblem Elspeth|ElspethSunsChampionEmblem|
+|Generate|EMBLEM:THS|Elspeth, Suns Champion||Emblem Elspeth|ElspethSunsChampionEmblem|
 |Generate|EMBLEM:AVR|Tamiyo, the Moon Sage||Emblem Tamiyo|TamiyoTheMoonSageEmblem|
 |Generate|EMBLEM:BNG|Kiora, the Crashing Wave||Emblem Kiora|KioraEmblem|
 |Generate|EMBLEM:DDI|Koth of the Hammer||Emblem Koth|KothOfTheHammerEmblem|
@@ -484,8 +484,8 @@
 |Generate|TOK:DKA|Zombie|||ZombieToken|
 |Generate|TOK:DRB|Saproling|||SaprolingToken|
 |Generate|TOK:DST|Beast|||BeastToken|
-|Generate|TOK:DST|Elemental|||WandOfTheElementsFirstToken|
-|Generate|TOK:DST|Elemental|||WandOfTheElementsSecondToken|
+|Generate|TOK:DST|Elemental|1||WandOfTheElementsFirstToken|
+|Generate|TOK:DST|Elemental|2||WandOfTheElementsSecondToken|
 |Generate|TOK:DST|InsectWirefly|||WireflyToken|
 |Generate|TOK:DST|Insect|||InsectToken|
 |Generate|TOK:DST|Myr|||MyrToken|
@@ -731,7 +731,7 @@
 |Generate|TOK:M15|Beast|2||GarrukApexPredatorBeastToken|
 |Generate|TOK:M15|Dragon|||BroodKeeperDragonToken|
 |Generate|TOK:M15|Goblin|1||GoblinTokenWithHaste|
-|Generate|TOK:M15|Goblin|2||GoblinToken|
+# |Generate|TOK:M15|Goblin|2||GoblinToken|  #does not exist
 |Generate|TOK:M15|Insect|||InsectToken|
 |Generate|TOK:M15|Land Mine|||LandMineToken|
 |Generate|TOK:M15|Sliver|||SliverToken|
@@ -1000,8 +1000,7 @@
 |Generate|TOK:SOM|Cat|||CatToken|
 |Generate|TOK:SOM|Goblin|||GoblinToken|
 |Generate|TOK:SOM|Golem|||GolemToken|
-|Generate|TOK:SOM|Insect|1||InsectToken|
-|Generate|TOK:SOM|Insect|2||InsectInfectToken|
+|Generate|TOK:SOM|Insect|||InsectInfectToken|
 |Generate|TOK:SOM|Myr|||MyrToken|
 |Generate|TOK:SOM|Soldier|||SoldierToken|
 |Generate|TOK:SOM|Wolf|||WolfToken|
@@ -1068,7 +1067,7 @@
 |Generate|TOK:USG|Minion|||MinionToken|
 |Generate|TOK:USG|Saproling|||SaprolingToken|
 |Generate|TOK:UST|Dragon|||DragonTokenGold|
-|Generate|TOK:UST|StormCrow|||StormCrowToken|
+|Generate|TOK:UST|Storm Crow|||StormCrowToken|
 |Generate|TOK:V10|Wolf|||WolfToken|
 |Generate|TOK:V11|Faerie Rogue|||OonaQueenFaerieToken|
 |Generate|TOK:V12|Spirit|||SpiritToken|

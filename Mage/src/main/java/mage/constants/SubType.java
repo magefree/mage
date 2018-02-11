@@ -198,7 +198,7 @@ public enum SubType {
     LHURGOYF("Lhurgoyf", SubTypeSet.CreatureType),
     LICID("Licid", SubTypeSet.CreatureType),
     LIZARD("Lizard", SubTypeSet.CreatureType),
-    LOBSTER("Lobster", SubTypeSet.CreatureType, true),  // Unglued
+    LOBSTER("Lobster", SubTypeSet.CreatureType, true), // Unglued
     // M
     MANTELLIAN("Mantellian", SubTypeSet.CreatureType, true), // Star Wars
     MANTICORE("Manticore", SubTypeSet.CreatureType),
@@ -440,6 +440,16 @@ public enum SubType {
 
     public SubTypeSet getSubTypeSet() {
         return subTypeSet;
+    }
+
+    public static Set<SubType> getPlaneswalkerTypes(boolean withCustomSets) {
+        Set<SubType> subTypes = EnumSet.noneOf(SubType.class);
+        for (SubType subType : values()) {
+            if (subType.getSubTypeSet() == SubTypeSet.PlaneswalkerType && (withCustomSets || !subType.customSet)) {
+                subTypes.add(subType);
+            }
+        }
+        return subTypes;
     }
 
     public static Set<SubType> getCreatureTypes(boolean customSet) {

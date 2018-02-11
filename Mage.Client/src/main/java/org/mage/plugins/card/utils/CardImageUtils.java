@@ -56,8 +56,7 @@ public final class CardImageUtils {
      */
     public static String generateFullTokenImagePath(CardDownloadData card) {
         if (card.isToken()) {
-            String filePath = getTokenImagePath(card);
-            return filePath;
+            return getTokenImagePath(card);
         }
         return "";
     }
@@ -67,23 +66,29 @@ public final class CardImageUtils {
 
         TFile file = new TFile(filename);
         if (!file.exists()) {
-            filename = generateTokenDescriptorImagePath(card);
-        }
-
-        file = new TFile(filename);
-        if (!file.exists()) {
-            CardDownloadData updated = new CardDownloadData(card);
-            updated.setName(card.getName() + " 1");
-            filename = buildImagePathToCard(updated);
-            file = new TFile(filename);
-            if (!file.exists()) {
-                updated = new CardDownloadData(card);
-                updated.setName(card.getName() + " 2");
-                filename = buildImagePathToCard(updated);
+            String tokenDescriptorfilename = generateTokenDescriptorImagePath(card);
+            if (!tokenDescriptorfilename.isEmpty()) {
+                file = new TFile(filename);
+                if (file.exists()) {
+                    return tokenDescriptorfilename;
+                }
             }
         }
-
         return filename;
+
+// makes no longer sense
+//        file = new TFile(filename);
+//        if (!file.exists()) {
+//            CardDownloadData updated = new CardDownloadData(card);
+//            updated.setName(card.getName() + " 1");
+//            filename = buildImagePathToCard(updated);
+//            file = new TFile(filename);
+//            if (!file.exists()) {
+//                updated = new CardDownloadData(card);
+//                updated.setName(card.getName() + " 2");
+//                filename = buildImagePathToCard(updated);
+//            }
+//        }
     }
 
     private static String searchForCardImage(CardDownloadData card) {
@@ -208,7 +213,7 @@ public final class CardImageUtils {
         if (card.getUsesVariousArt()) {
             finalFileName = cardName + '.' + card.getCollectorId() + ".full.jpg";
         } else {
-            if (card.getUsesVariousArt()){
+            if (card.getUsesVariousArt()) {
                 // only various arts can be same name, but different postfixes (a,b,c,d,e)
                 int len = card.getCollectorId().length();
                 if (Character.isLetter(card.getCollectorId().charAt(len - 1))) {

@@ -25,11 +25,11 @@
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.game.permanent.token;
+
+import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.MageInt;
 
 /**
  *
@@ -39,6 +39,7 @@ public class WandOfTheElementsSecondToken extends Token {
 
     public WandOfTheElementsSecondToken() {
         super("Elemental", "3/3 red Elemental creature token");
+        setTokenType(2);
         cardType.add(CardType.CREATURE);
         this.subtype.add(SubType.ELEMENTAL);
         this.color.setRed(true);

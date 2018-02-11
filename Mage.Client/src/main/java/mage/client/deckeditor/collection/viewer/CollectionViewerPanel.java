@@ -24,7 +24,7 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
+ */
 package mage.client.deckeditor.collection.viewer;
 
 import java.awt.Color;
@@ -47,7 +47,6 @@ import mage.client.plugins.impl.Plugins;
 import mage.client.util.gui.FastSearchUtil;
 import mage.client.util.sets.ConstructedFormats;
 import org.apache.log4j.Logger;
-
 
 /**
  * Pane with big card and mage book.
@@ -75,7 +74,7 @@ public final class CollectionViewerPanel extends JPanel {
         this.hidePopup();
         this.bigCard = null;
     }
-    
+
     public void initComponents() {
         buttonsPanel = new javax.swing.JPanel();
         buttonsPanel.setOpaque(false);
@@ -117,6 +116,7 @@ public final class CollectionViewerPanel extends JPanel {
         btnSetFastSearch.setPreferredSize(new java.awt.Dimension(32, 32));
         btnSetFastSearch.setMaximumSize(new java.awt.Dimension(32, 32));
         btnSetFastSearch.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 FastSearchUtil.showFastSearchForStringComboBox(formats, FastSearchUtil.DEFAULT_EXPANSION_SEARCH_MESSAGE);
             }
@@ -169,20 +169,21 @@ public final class CollectionViewerPanel extends JPanel {
         next.addActionListener(e -> mageBook.next());
         buttonPanel.add(next);
 
-        JLabel label4 = new JLabel("Show cards or tokens:");
-        label3.setAlignmentX(Component.LEFT_ALIGNMENT);
-        label3.setForeground(Color.white);
-        buttonsPanel.add(label4);
+        JLabel labelCardTokenSwitch = new JLabel("Show cards or tokens:");
+        labelCardTokenSwitch.setAlignmentX(Component.LEFT_ALIGNMENT);
+        labelCardTokenSwitch.setForeground(Color.white);
+        buttonsPanel.add(labelCardTokenSwitch);
 
         JCheckBox cardsOrTokens = new JCheckBox("Display Cards");
         cardsOrTokens.setSelected(true);
+        cardsOrTokens.setForeground(Color.white);
         cardsOrTokens.setToolTipText("Select to show Cards or Tokens(and emblems) for the chosen set");
         cardsOrTokens.addActionListener(e -> mageBook.cardsOrTokens(cardsOrTokens.isSelected()));
         buttonsPanel.add(cardsOrTokens);
 
         formats.addActionListener(e -> {
             if (mageBook != null) {
-                String format = (String)formats.getSelectedItem();
+                String format = (String) formats.getSelectedItem();
                 MageFrame.getPreferences().put(CollectionViewerPanel.FORMAT_CONFIG_KEY, format);
                 mageBook.updateDispayedSets(format);
             }
@@ -233,11 +234,13 @@ public final class CollectionViewerPanel extends JPanel {
             c = c.getParent();
         }
         if (c != null) {
-            ((CollectionViewerPane)c).removeFrame();
+            ((CollectionViewerPane) c).removeFrame();
         }
 
     }
+
     private final class MageBookContainer extends JPanel {
+
         public MageBookContainer() {
             super();
             initComponents();
@@ -246,7 +249,7 @@ public final class CollectionViewerPanel extends JPanel {
         public void initComponents() {
             jPanel = new JPanel();
             jScrollPane1 = new JScrollPane(jPanel);
-            jScrollPane1.getViewport().setBackground(new Color(0,0,0,0));
+            jScrollPane1.getViewport().setBackground(new Color(0, 0, 0, 0));
 
             jPanel.setLayout(new GridBagLayout()); // centers mage book
             jPanel.setBackground(new Color(0, 0, 0, 0));

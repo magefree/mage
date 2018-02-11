@@ -51,6 +51,7 @@ public class RekindlingPhoenixToken extends Token {
 
     public RekindlingPhoenixToken() {
         super("Elemental", "0/1 red Elemental creature token with \"At the beginning of your upkeep, sacrifice this creature and return target card named Rekindling Phoenix from your graveyard to the battlefield. It gains haste until end of turn.\"");
+        setTokenType(1);
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.THRULL);
         color.setRed(true);

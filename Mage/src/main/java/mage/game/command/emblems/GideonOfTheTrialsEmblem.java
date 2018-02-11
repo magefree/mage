@@ -47,7 +47,7 @@ import mage.game.events.GameEvent;
 public class GideonOfTheTrialsEmblem extends Emblem {
 
     public GideonOfTheTrialsEmblem() {
-        this.setName("Emblem - Gideon of the Trials");
+        this.setName("Emblem - Gideon");
         Ability ability = new SimpleStaticAbility(Zone.COMMAND, new GideonOfTheTrialsCantLoseEffect());
         this.getAbilities().add(ability);
     }
