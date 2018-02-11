@@ -45,8 +45,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
@@ -54,7 +54,7 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.TargetPlayer;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -96,7 +96,6 @@ class SwordOfWarAndPeaceAbility extends TriggeredAbilityImpl {
     public SwordOfWarAndPeaceAbility() {
         super(Zone.BATTLEFIELD, new SwordOfWarAndPeaceDamageEffect());
         this.addEffect(new GainLifeEffect(new CardsInControllerHandCount()));
-        this.addTarget(new TargetPlayer(1, 1, true));
     }
 
     public SwordOfWarAndPeaceAbility(final SwordOfWarAndPeaceAbility ability) {
@@ -118,8 +117,7 @@ class SwordOfWarAndPeaceAbility extends TriggeredAbilityImpl {
         DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
         Permanent damageSource = game.getPermanentOrLKIBattlefield(event.getSourceId());
         if (damageEvent.isCombatDamage() && damageSource != null && damageSource.getAttachments().contains(this.getSourceId())) {
-            getTargets().get(0).clearChosen();
-            getTargets().get(0).add(event.getPlayerId(), game);
+            getEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));
             return true;
         }
         return false;
@@ -144,9 +142,9 @@ class SwordOfWarAndPeaceDamageEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player target = game.getPlayer(source.getFirstTarget());
-        if (target != null) {
-            target.damage(target.getHand().size(), source.getSourceId(), game, false, true);
+        Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
+        if (targetPlayer != null) {
+            targetPlayer.damage(targetPlayer.getHand().size(), source.getSourceId(), game, false, true);
         }
         return true;
     }

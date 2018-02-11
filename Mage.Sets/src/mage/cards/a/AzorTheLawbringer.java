@@ -43,9 +43,9 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -57,9 +57,9 @@ import mage.target.targetpointer.FixedTarget;
  * @author LevelX2 & L_J
  */
 public class AzorTheLawbringer extends CardImpl {
- 
+
     public AzorTheLawbringer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{W}{U}{U}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPHINX);
         this.power = new MageInt(6);
@@ -70,7 +70,7 @@ public class AzorTheLawbringer extends CardImpl {
 
         // When Azor, the Lawbringer enters the battlefield, each opponent can’t cast instant or sorcery spells during that player’s next turn.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new AzorTheLawbringerEntersBattlefieldEffect(), false));
-        
+
         // Whenever Azor attacks, you may pay {X}{W}{U}{U}. If you do, you gain X life and draw X cards.
         this.addAbility(new AttacksTriggeredAbility(new AzorTheLawbringerAttacksEffect(), false));
     }
@@ -192,6 +192,7 @@ class AzorTheLawbringerAttacksEffect extends OneShotEffect {
                 int costX = controller.announceXMana(0, Integer.MAX_VALUE, "Announce the value for {X}", game, source);
                 cost.add(new GenericManaCost(costX));
                 if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false, null)) {
+                    controller.resetStoredBookmark(game); // otherwise you can undo the payment
                     controller.gainLife(costX, game);
                     controller.drawCards(costX, game);
                     return true;

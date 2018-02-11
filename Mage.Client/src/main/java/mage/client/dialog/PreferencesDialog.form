@@ -80,6 +80,7 @@
                           <Component id="main_card" alignment="1" max="32767" attributes="0"/>
                           <Component id="main_gamelog" alignment="1" max="32767" attributes="0"/>
                           <Component id="main_game" alignment="0" max="32767" attributes="0"/>
+                          <Component id="main_battlefield" alignment="1" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -94,12 +95,73 @@
                       <Component id="main_game" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="main_gamelog" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="main_battlefield" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="154" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
+            <Container class="javax.swing.JPanel" name="main_gamelog">
+              <Properties>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                    <TitledBorder title="Game log">
+                      <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
+                        <EtchetBorder/>
+                      </Border>
+                    </TitledBorder>
+                  </Border>
+                </Property>
+              </Properties>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="cbDraftLogAutoSave" max="32767" attributes="0"/>
+                              <Component id="cbGameLogAutoSave" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Component id="cbGameLogAutoSave" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="cbDraftLogAutoSave" alignment="1" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JCheckBox" name="cbGameLogAutoSave">
+                  <Properties>
+                    <Property name="selected" type="boolean" value="true"/>
+                    <Property name="text" type="java.lang.String" value="Auto save game logs     (to &quot;../Mage.Client/gamelogs/&quot; directory)"/>
+                    <Property name="toolTipText" type="java.lang.String" value="The logs of all your games will be saved to the mentioned folder if this option is switched on."/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbGameLogAutoSaveActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JCheckBox" name="cbDraftLogAutoSave">
+                  <Properties>
+                    <Property name="selected" type="boolean" value="true"/>
+                    <Property name="text" type="java.lang.String" value="Auto save draft logs     (to &quot;../Mage.Client/gamelogs/&quot; directory)"/>
+                    <Property name="toolTipText" type="java.lang.String" value="The logs of all your games will be saved to the mentioned folder if this option is switched on."/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbDraftLogAutoSaveActionPerformed"/>
+                  </Events>
+                </Component>
+              </SubComponents>
+            </Container>
             <Container class="javax.swing.JPanel" name="main_card">
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -159,7 +221,7 @@
                     <Property name="toolTipText" type="java.lang.String" value="Write the card&apos;s name on the card to make the card name more recognizable."/>
                     <Property name="actionCommand" type="java.lang.String" value=""/>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                      <Color id="Standardcursor"/>
+                      <Color id="Default Cursor"/>
                     </Property>
                   </Properties>
                   <Events>
@@ -189,16 +251,11 @@
                   <Properties>
                     <Property name="selected" type="boolean" value="true"/>
                     <Property name="toolTipText" type="java.lang.String" value="Show the path Xmage is expecting for this card&apos;s image (only displays if missing)"/>
-                    <Property name="actionCommand" type="java.lang.String" value=""/>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                       <Color id="Default Cursor"/>
                     </Property>
                     <Property name="label" type="java.lang.String" value="Display image path for missing images"/>
                   </Properties>
-                  <AccessibilityProperties>
-                    <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Display image path for missing images"/>
-                    <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value="Show the path Xmage is expecting for this card&apos;s image (only displays if missing)"/>
-                  </AccessibilityProperties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="showFullImagePathActionPerformed"/>
                   </Events>
@@ -226,13 +283,13 @@
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="showPlayerNamesPermanently" alignment="0" max="32767" attributes="0"/>
                               <Component id="nonLandPermanentsInOnePile" alignment="0" max="32767" attributes="0"/>
-                              <Component id="showAbilityPickerForced" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="cbConfirmEmptyManaPool" alignment="0" max="32767" attributes="0"/>
                               <Component id="cbAllowRequestToShowHandCards" alignment="0" max="32767" attributes="0"/>
                               <Component id="cbShowStormCounter" alignment="0" max="32767" attributes="0"/>
                               <Component id="cbAskMoveToGraveOrder" alignment="0" max="32767" attributes="0"/>
+                              <Component id="showAbilityPickerForced" alignment="0" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="255" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -339,11 +396,11 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Container class="javax.swing.JPanel" name="main_gamelog">
+            <Container class="javax.swing.JPanel" name="main_battlefield">
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                    <TitledBorder title="Game log">
+                    <TitledBorder title="Battlefield">
                       <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
                         <EtchetBorder/>
                       </Border>
@@ -355,46 +412,50 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="cbDraftLogAutoSave" max="32767" attributes="0"/>
-                              <Component id="cbGameLogAutoSave" max="32767" attributes="0"/>
-                          </Group>
+                          <Component id="lblBattlefieldFeedbackColorizingMode" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="cbBattlefieldFeedbackColorizingMode" min="-2" pref="278" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Component id="cbGameLogAutoSave" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="cbDraftLogAutoSave" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lblBattlefieldFeedbackColorizingMode" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cbBattlefieldFeedbackColorizingMode" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JCheckBox" name="cbGameLogAutoSave">
+                <Component class="javax.swing.JComboBox" name="cbBattlefieldFeedbackColorizingMode">
                   <Properties>
-                    <Property name="selected" type="boolean" value="true"/>
-                    <Property name="text" type="java.lang.String" value="Auto save game logs     (to &quot;../Mage.Client/gamelogs/&quot; directory)"/>
-                    <Property name="toolTipText" type="java.lang.String" value="The logs of all your games will be saved to the mentioned folder if this option is switched on."/>
+                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                      <StringArray count="3">
+                        <StringItem index="0" value="Disable colorizing"/>
+                        <StringItem index="1" value="Enable one color for all phases"/>
+                        <StringItem index="2" value="Enable multicolor for different phases"/>
+                      </StringArray>
+                    </Property>
+                    <Property name="toolTipText" type="java.lang.String" value="Battlefield feedback panel colorizing on your turn (e.g. use green color if you must select card or answer to request)"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbGameLogAutoSaveActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbBattlefieldFeedbackColorizingModeActionPerformed"/>
                   </Events>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value=""/>
+                  </AuxValues>
                 </Component>
-                <Component class="javax.swing.JCheckBox" name="cbDraftLogAutoSave">
+                <Component class="javax.swing.JLabel" name="lblBattlefieldFeedbackColorizingMode">
                   <Properties>
-                    <Property name="selected" type="boolean" value="true"/>
-                    <Property name="text" type="java.lang.String" value="Auto save draft logs     (to &quot;../Mage.Client/gamelogs/&quot; directory)"/>
-                    <Property name="toolTipText" type="java.lang.String" value="The logs of all your games will be saved to the mentioned folder if this option is switched on."/>
+                    <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                      <ComponentRef name="cbBattlefieldFeedbackColorizingMode"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Feedback panel colorizing:"/>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbDraftLogAutoSaveActionPerformed"/>
-                  </Events>
                 </Component>
               </SubComponents>
             </Container>

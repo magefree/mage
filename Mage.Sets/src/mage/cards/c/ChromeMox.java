@@ -182,12 +182,7 @@ class ChromeMoxManaEffect extends ManaEffect {
                         if (choice.getChoices().size() == 1) {
                             choice.setChoice(choice.getChoices().iterator().next());
                         } else {
-                            while (!player.choose(outcome, choice, game)) {
-                                if (!player.canRespond()) {
-                                    return false;
-                                }
-                            }
-                            if (choice.getChoice() == null) {
+                            if (!player.choose(outcome, choice, game)) {
                                 return false;
                             }
                         }

@@ -1,12 +1,11 @@
 package mage.abilities.effects.common;
 
+import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.choices.ChoiceColor;
 import mage.game.Game;
 import mage.players.Player;
-
-import java.util.UUID;
 
 /**
  *
@@ -16,7 +15,7 @@ public class AddManaOfAnyColorToManaPoolTargetPlayerEffect extends ManaEffect {
 
     public AddManaOfAnyColorToManaPoolTargetPlayerEffect(String textManaPoolOwner) {
         super();
-        this.staticText = (textManaPoolOwner.equals("his or her")?"that player adds ":"add ") + "one mana of any color" + " to " + textManaPoolOwner + " mana pool";
+        this.staticText = (textManaPoolOwner.equals("his or her") ? "that player adds " : "add ") + "one mana of any color" + " to " + textManaPoolOwner + " mana pool";
     }
 
     public AddManaOfAnyColorToManaPoolTargetPlayerEffect(final AddManaOfAnyColorToManaPoolTargetPlayerEffect effect) {
@@ -27,19 +26,12 @@ public class AddManaOfAnyColorToManaPoolTargetPlayerEffect extends ManaEffect {
     public boolean apply(Game game, Ability source) {
         UUID playerId = (UUID) game.getState().getValue(source.getSourceId() + "_player");
         Player player = game.getPlayer(playerId);
-        if (player != null) {
-            ChoiceColor choice = new ChoiceColor();
-            while (!player.choose(outcome, choice, game)) {
-                if (!player.canRespond()) {
-                    return false;
-                }
-            }
+        ChoiceColor choice = new ChoiceColor();
+        if (player != null && player.choose(outcome, choice, game)) {
             Mana mana = choice.getMana(1);
-            if (mana != null) {
-                checkToFirePossibleEvents(mana, game, source);
-                player.getManaPool().addMana(mana, game, source);
-                return true;
-            }
+            checkToFirePossibleEvents(mana, game, source);
+            player.getManaPool().addMana(mana, game, source);
+            return true;
         }
         return false;
     }
@@ -55,4 +47,3 @@ public class AddManaOfAnyColorToManaPoolTargetPlayerEffect extends ManaEffect {
     }
 
 }
-

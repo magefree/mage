@@ -904,7 +904,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         tbUncommon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/rarity_uncommon_20.png"))); // NOI18N
         tbUncommon.setSelected(true);
         tbUncommon.setToolTipText("<html><strong>Uncommon</strong><br/>" 
-            + tbUncommon.getToolTipText());
+            + tbRarities.getToolTipText());
         tbUncommon.setActionCommand("Uncommon");
         tbUncommon.setFocusable(false);
         tbUncommon.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);

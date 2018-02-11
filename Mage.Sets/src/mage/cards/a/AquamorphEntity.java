@@ -54,7 +54,7 @@ import mage.players.Player;
 public class AquamorphEntity extends CardImpl {
 
     public AquamorphEntity(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
         this.subtype.add(SubType.SHAPESHIFTER);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
@@ -136,11 +136,9 @@ class AquamorphEntityReplacementEffect extends ReplacementEffectImpl {
             choice.getChoices().add(choice15);
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null) {
-                while (!choice.isChosen()) {
-                    controller.choose(Outcome.Neutral, choice, game);
-                    if (!controller.canRespond()) {
-                        return false;
-                    }
+                if (!controller.choose(Outcome.Neutral, choice, game)) {
+                    discard();
+                    return false;
                 }
             }
             int power = 0;

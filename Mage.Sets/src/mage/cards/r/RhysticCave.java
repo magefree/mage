@@ -28,7 +28,6 @@
 package mage.cards.r;
 
 import java.util.UUID;
-import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
@@ -130,38 +129,29 @@ class RhysticCaveManaEffect extends ManaEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject mageObject = game.getPermanentOrLKIBattlefield(source.getSourceId()); //get obj reference to Rhystic Cave
-        if (controller != null) {
-            if (mageObject != null) {
-                ChoiceColor choice = new ChoiceColor(true);
-                controller.choose(outcome, choice, game);
-                if (choice.getColor() != null) {
-                    String color = choice.getColor().toString();
-                    switch (color) {
-                        case "R":
-                            chosenMana.setRed(1);
-                            break;
-                        case "U":
-                            chosenMana.setBlue(1);
-                            break;
-                        case "W":
-                            chosenMana.setWhite(1);
-                            break;
-                        case "B":
-                            chosenMana.setBlack(1);
-                            break;
-                        case "G":
-                            chosenMana.setGreen(1);
-                            break;
-                    }
-                }
-                checkToFirePossibleEvents(chosenMana, game, source);
-                controller.getManaPool().addMana(chosenMana, game, source);
-                return true;
+        ChoiceColor choice = new ChoiceColor(true);
+        if (controller != null && controller.choose(outcome, choice, game)) {
+            switch (choice.getColor().toString()) {
+                case "R":
+                    chosenMana.setRed(1);
+                    break;
+                case "U":
+                    chosenMana.setBlue(1);
+                    break;
+                case "W":
+                    chosenMana.setWhite(1);
+                    break;
+                case "B":
+                    chosenMana.setBlack(1);
+                    break;
+                case "G":
+                    chosenMana.setGreen(1);
+                    break;
             }
-
+            checkToFirePossibleEvents(chosenMana, game, source);
+            controller.getManaPool().addMana(chosenMana, game, source);
+            return true;
         }
-
         return false;
     }
 

@@ -51,6 +51,7 @@ public class Tempest extends ExpansionSet {
         cards.add(new SetCardInfo("Canyon Drake", 166, Rarity.RARE, mage.cards.c.CanyonDrake.class));
         cards.add(new SetCardInfo("Canyon Wildcat", 167, Rarity.COMMON, mage.cards.c.CanyonWildcat.class));
         cards.add(new SetCardInfo("Capsize", 55, Rarity.COMMON, mage.cards.c.Capsize.class));
+        cards.add(new SetCardInfo("Carrionette", 5, Rarity.RARE, mage.cards.c.Carrionette.class));
         cards.add(new SetCardInfo("Chaotic Goo", 168, Rarity.RARE, mage.cards.c.ChaoticGoo.class));
         cards.add(new SetCardInfo("Charging Rhino", 112, Rarity.UNCOMMON, mage.cards.c.ChargingRhino.class));
         cards.add(new SetCardInfo("Chill", 56, Rarity.UNCOMMON, mage.cards.c.Chill.class));

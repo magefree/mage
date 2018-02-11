@@ -59,7 +59,7 @@ public class WashOut extends CardImpl {
     }
 
     public WashOut(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{U}");
 
         // Return all permanents of the color of your choice to their owners' hands.
         this.getSpellAbility().addEffect(new WashOutEffect());
@@ -90,18 +90,15 @@ class WashOutEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            ChoiceColor choice = new ChoiceColor();
-            controller.choose(Outcome.ReturnToHand, choice, game);
+        ChoiceColor choice = new ChoiceColor();
+        if (controller != null && controller.choose(Outcome.ReturnToHand, choice, game)) {
             ObjectColor color = choice.getColor();
-            if (color != null) {
-                FilterPermanent filter = new FilterPermanent();
-                filter.add(new ColorPredicate(color));
-                for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-                    permanent.moveToZone(Zone.HAND, source.getSourceId(), game, true);
-                }
-                return true;
+            FilterPermanent filter = new FilterPermanent();
+            filter.add(new ColorPredicate(color));
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+                permanent.moveToZone(Zone.HAND, source.getSourceId(), game, true);
             }
+            return true;
         }
         return false;
     }

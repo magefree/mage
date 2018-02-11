@@ -51,7 +51,7 @@ import mage.players.Player;
 public class Extinction extends CardImpl {
 
     public Extinction(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{B}");
 
         // Destroy all creatures of the creature type of your choice.
         this.getSpellAbility().addEffect(new ExtinctionEffect());
@@ -82,16 +82,9 @@ class ExtinctionEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
-        if (player != null) {
-            Choice typeChoice = new ChoiceCreatureType(sourceObject);
-            while (!player.choose(outcome, typeChoice, game)) {
-                if (!player.canRespond()) {
-                    return false;
-                }
-            }
-            if (typeChoice.getChoice() != null) {
-                game.informPlayers(sourceObject.getLogName() + " chosen type: " + typeChoice.getChoice());
-            }
+        Choice typeChoice = new ChoiceCreatureType(sourceObject);
+        if (player != null && player.choose(outcome, typeChoice, game)) {
+            game.informPlayers(sourceObject.getLogName() + " chosen type: " + typeChoice.getChoice());
             FilterCreaturePermanent filterCreaturePermanent = new FilterCreaturePermanent();
             filterCreaturePermanent.add(new SubtypePredicate(SubType.byDescription(typeChoice.getChoice())));
             for (Permanent creature : game.getBattlefield().getActivePermanents(filterCreaturePermanent, source.getSourceId(), game)) {

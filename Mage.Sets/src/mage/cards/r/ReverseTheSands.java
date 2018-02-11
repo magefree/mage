@@ -48,8 +48,7 @@ import mage.players.Player;
 public class ReverseTheSands extends CardImpl {
 
     public ReverseTheSands(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{6}{W}{W}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{6}{W}{W}");
 
         // Redistribute any number of players' life totals.
         this.getSpellAbility().addEffect(new ReverseTheSandsEffect());
@@ -100,7 +99,9 @@ class ReverseTheSandsEffect extends OneShotEffect {
                     String selectedChoice;
                     if (choices.size() > 1) {
                         lifeChoice.setMessage("Which players life should get player " + player.getLogName());
-                        controller.choose(Outcome.Detriment, lifeChoice, game);
+                        if (!controller.choose(Outcome.Detriment, lifeChoice, game)) {
+                            return false;
+                        }
                         selectedChoice = lifeChoice.getChoice();
                     } else {
                         selectedChoice = choices.iterator().next();

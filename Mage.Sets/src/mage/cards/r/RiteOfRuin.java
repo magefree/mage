@@ -97,7 +97,10 @@ class RiteOfRuinEffect extends OneShotEffect {
         choice.setMessage("Choose a card type");
         choice.setChoices(choices);
 
-        while (controller.canRespond() && controller.choose(Outcome.Sacrifice, choice, game) && choices.size() > 1) {
+        while (choices.size() > 1) {
+            if (!controller.choose(Outcome.Sacrifice, choice, game)) {
+                return false;
+            }
             order.add(getCardType(choice.getChoice()));
             choices.remove(choice.getChoice());
             choice.clearChoice();

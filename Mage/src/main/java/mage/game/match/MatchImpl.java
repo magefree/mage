@@ -444,6 +444,9 @@ public abstract class MatchImpl implements Match {
         if (getDraws() > 0) {
             sb.append("   Draws: ").append(getDraws()).append("<br/>");
         }
+        if (options.getRange() != null) {
+            sb.append("   Range: ").append(options.getRange().toString()).append("<br/>");
+        }
         sb.append("<br/>").append("Match is ").append(this.getOptions().isRated() ? "" : "not ").append("rated<br/>");
         sb.append("You have to win ").append(this.getWinsNeeded()).append(this.getWinsNeeded() == 1 ? " game" : " games").append(" to win the complete match<br/>");
         sb.append("<br/>Game has started<br/><br/>");

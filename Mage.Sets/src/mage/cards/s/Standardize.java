@@ -88,10 +88,8 @@ class StandardizeEffect extends OneShotEffect {
             Choice typeChoice = new ChoiceCreatureType(sourceObject);
             typeChoice.setMessage("Choose a creature type other than Wall");
             typeChoice.getChoices().remove("Wall");
-            while (!player.choose(Outcome.BoostCreature, typeChoice, game)) {
-                if (!player.canRespond()) {
-                    return false;
-                }
+            if (!player.choose(Outcome.BoostCreature, typeChoice, game)) {
+                return false;
             }
             game.informPlayers(sourceObject.getLogName() + ": " + player.getLogName() + " has chosen " + typeChoice.getChoice());
             chosenType = typeChoice.getChoice();

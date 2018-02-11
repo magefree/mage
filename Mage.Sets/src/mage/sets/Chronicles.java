@@ -90,6 +90,7 @@ public class Chronicles extends ExpansionSet {
         cards.add(new SetCardInfo("Fallen Angel", 4, Rarity.UNCOMMON, mage.cards.f.FallenAngel.class));
         cards.add(new SetCardInfo("Feldon's Cane", 77, Rarity.COMMON, mage.cards.f.FeldonsCane.class));
         cards.add(new SetCardInfo("Fire Drake", 47, Rarity.UNCOMMON, mage.cards.f.FireDrake.class));
+        cards.add(new SetCardInfo("Fishliver Oil", 20, Rarity.COMMON, mage.cards.f.FishliverOil.class));
         cards.add(new SetCardInfo("Flash Flood", 21, Rarity.COMMON, mage.cards.f.FlashFlood.class));
         cards.add(new SetCardInfo("Fountain of Youth", 78, Rarity.COMMON, mage.cards.f.FountainOfYouth.class));
         cards.add(new SetCardInfo("Gabriel Angelfire", 111, Rarity.RARE, mage.cards.g.GabrielAngelfire.class));
@@ -113,6 +114,7 @@ public class Chronicles extends ExpansionSet {
         cards.add(new SetCardInfo("Marhault Elsdragon", 114, Rarity.UNCOMMON, mage.cards.m.MarhaultElsdragon.class));
         cards.add(new SetCardInfo("Metamorphosis", 38, Rarity.COMMON, mage.cards.m.Metamorphosis.class));
         cards.add(new SetCardInfo("Mountain Yeti", 53, Rarity.COMMON, mage.cards.m.MountainYeti.class));
+        cards.add(new SetCardInfo("Nebuchadnezzar", 115, Rarity.RARE, mage.cards.n.Nebuchadnezzar.class));
         cards.add(new SetCardInfo("Nicol Bolas", 116, Rarity.RARE, mage.cards.n.NicolBolas.class));
         cards.add(new SetCardInfo("Obelisk of Undoing", 84, Rarity.RARE, mage.cards.o.ObeliskOfUndoing.class));
         cards.add(new SetCardInfo("Palladia-Mors", 117, Rarity.RARE, mage.cards.p.PalladiaMors.class));
@@ -123,16 +125,17 @@ public class Chronicles extends ExpansionSet {
         cards.add(new SetCardInfo("Recall", 24, Rarity.UNCOMMON, mage.cards.r.Recall.class));
         cards.add(new SetCardInfo("Remove Soul", 25, Rarity.COMMON, mage.cards.r.RemoveSoul.class));
         cards.add(new SetCardInfo("Repentant Blacksmith", 67, Rarity.COMMON, mage.cards.r.RepentantBlacksmith.class));
-        cards.add(new SetCardInfo("Revelation", 87, Rarity.RARE, mage.cards.r.Revelation.class));
+        cards.add(new SetCardInfo("Revelation", 40, Rarity.RARE, mage.cards.r.Revelation.class));
         cards.add(new SetCardInfo("Rubinia Soulsinger", 118, Rarity.RARE, mage.cards.r.RubiniaSoulsinger.class));
         cards.add(new SetCardInfo("Safe Haven", 93, Rarity.RARE, mage.cards.s.SafeHaven.class));
         cards.add(new SetCardInfo("Scavenger Folk", 41, Rarity.COMMON, mage.cards.s.ScavengerFolk.class));
-        cards.add(new SetCardInfo("Sentinel", 281, Rarity.RARE, mage.cards.s.Sentinel.class));
+        cards.add(new SetCardInfo("Sentinel", 87, Rarity.RARE, mage.cards.s.Sentinel.class));
         cards.add(new SetCardInfo("Serpent Generator", 88, Rarity.RARE, mage.cards.s.SerpentGenerator.class));
         cards.add(new SetCardInfo("Shield Wall", 68, Rarity.UNCOMMON, mage.cards.s.ShieldWall.class));
         cards.add(new SetCardInfo("Shimian Night Stalker", 8, Rarity.UNCOMMON, mage.cards.s.ShimianNightStalker.class));
         cards.add(new SetCardInfo("Sivitri Scarzam", 119, Rarity.UNCOMMON, mage.cards.s.SivitriScarzam.class));
         cards.add(new SetCardInfo("Sol'kanar the Swamp King", 120, Rarity.RARE, mage.cards.s.SolkanarTheSwampKing.class));
+        cards.add(new SetCardInfo("Stangg", 121, Rarity.RARE, mage.cards.s.Stangg.class));
         cards.add(new SetCardInfo("Storm Seeker", 42, Rarity.UNCOMMON, mage.cards.s.StormSeeker.class));
         cards.add(new SetCardInfo("Teleport", 26, Rarity.RARE, mage.cards.t.Teleport.class));
         cards.add(new SetCardInfo("The Wretched", 11, Rarity.RARE, mage.cards.t.TheWretched.class));

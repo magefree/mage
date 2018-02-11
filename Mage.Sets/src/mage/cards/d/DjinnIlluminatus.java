@@ -44,6 +44,7 @@ import mage.game.stack.StackObject;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import mage.game.permanent.Permanent;
 
 /**
  *
@@ -98,9 +99,16 @@ class DjinnIlluminatusGainReplicateEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        Permanent djinn = game.getPermanent(source.getSourceId());
+        if (djinn == null) {
+            return false;
+        }
         for (StackObject stackObject : game.getStack()) {
             // only spells cast, so no copies of spells
-            if ((stackObject instanceof Spell) && !stackObject.isCopy() && stackObject.getControllerId().equals(source.getControllerId())) {
+            if ((stackObject instanceof Spell) 
+                    && !stackObject.isCopy() 
+                    && stackObject.getControllerId().equals(source.getControllerId())
+                    && djinn.getControllerId().equals(source.getControllerId())) { // verify that the controller of the djinn cast that spell
                 Spell spell = (Spell) stackObject;
                 if (filter.match(stackObject, game)) {
                     ReplicateAbility replicateAbility = replicateAbilities.computeIfAbsent(spell.getId(), k -> new ReplicateAbility(spell.getCard(), spell.getSpellAbility().getManaCosts().getText()));

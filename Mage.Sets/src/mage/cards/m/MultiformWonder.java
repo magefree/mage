@@ -27,6 +27,9 @@
  */
 package mage.cards.m;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -49,10 +52,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
-
 /**
  *
  * @author LevelX2
@@ -60,7 +59,7 @@ import java.util.UUID;
 public class MultiformWonder extends CardImpl {
 
     public MultiformWonder(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{5}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");
         this.subtype.add(SubType.CONSTRUCT);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
@@ -116,10 +115,8 @@ class MultiformWonderEffect extends OneShotEffect {
             Choice choice = new ChoiceImpl(true);
             choice.setMessage("Choose ability to add");
             choice.setChoices(choices);
-            while (!controller.choose(outcome, choice, game)) {
-                if (!controller.canRespond()) {
-                    return false;
-                }
+            if (!controller.choose(outcome, choice, game)) {
+                return false;
             }
 
             Ability gainedAbility;

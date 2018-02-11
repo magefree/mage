@@ -41,8 +41,8 @@ import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -54,7 +54,7 @@ import mage.players.Player;
 public class ManaforgeCinder extends CardImpl {
 
     public ManaforgeCinder(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B/R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B/R}");
         this.subtype.add(SubType.ELEMENTAL);
         this.subtype.add(SubType.SHAMAN);
         this.power = new MageInt(1);
@@ -62,7 +62,7 @@ public class ManaforgeCinder extends CardImpl {
 
         // {1}: Add {B} or {R} to your mana pool. Activate this ability no more than three times each turn.
         this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new ManaforgeCinderManaEffect(), new ManaCostsImpl("{1}"), 3));
-        
+
     }
 
     public ManaforgeCinder(final ManaforgeCinder card) {
@@ -74,8 +74,6 @@ public class ManaforgeCinder extends CardImpl {
         return new ManaforgeCinder(this);
     }
 }
-
-
 
 class ManaforgeCinderManaEffect extends OneShotEffect {
 
@@ -104,10 +102,8 @@ class ManaforgeCinderManaEffect extends OneShotEffect {
             manaChoice.setChoices(choices);
             manaChoice.setMessage("Select black or red mana to add to your mana pool");
             Mana mana = new Mana();
-            while (!controller.choose(Outcome.Benefit, manaChoice, game)) {
-                if (!controller.canRespond()) {
-                    return false;
-                }
+            if (!controller.choose(Outcome.Benefit, manaChoice, game)) {
+                return false;
             }
             if (manaChoice.getChoice() == null) {
                 return false;

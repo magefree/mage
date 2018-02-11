@@ -83,12 +83,13 @@ public class MeldEffect extends OneShotEffect {
             if (meldWithList.isEmpty()) {
                 return false; // possible permanent has left the battlefield meanwhile
             }
-            UUID meldWithId;
+            UUID meldWithId = null;
             if (meldWithList.size() == 1) {
                 meldWithId = meldWithList.iterator().next();
             } else {
-                controller.choose(Outcome.BoostCreature, target, sourceId, game);
-                meldWithId = target.getFirstTarget();
+                if (controller.choose(Outcome.BoostCreature, target, sourceId, game)) {
+                    meldWithId = target.getFirstTarget();
+                }
             }
             // Exile the two permanents to meld.
             Permanent sourcePermanent = game.getPermanent(sourceId);

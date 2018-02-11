@@ -27,6 +27,9 @@
  */
 package mage.cards.l;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -42,17 +45,13 @@ import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.players.Player;
-
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 
 /**
  *
@@ -61,7 +60,7 @@ import java.util.UUID;
 public class LunarAvenger extends CardImpl {
 
     public LunarAvenger(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{7}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{7}");
         this.subtype.add(SubType.GOLEM);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
@@ -114,12 +113,9 @@ class LunarAvengerEffect extends OneShotEffect {
             Choice choice = new ChoiceImpl(true);
             choice.setMessage("Choose ability to add");
             choice.setChoices(choices);
-            while (!controller.choose(outcome, choice, game)) {
-                if (!controller.canRespond()) {
-                    return false;
-                }
+            if (!controller.choose(outcome, choice, game)) {
+                return false;
             }
-
             Ability gainedAbility;
             String chosen = choice.getChoice();
             switch (chosen) {

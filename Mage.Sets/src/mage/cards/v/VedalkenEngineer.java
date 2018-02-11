@@ -43,8 +43,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.ChoiceColor;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -56,7 +56,7 @@ import mage.players.Player;
 public class VedalkenEngineer extends CardImpl {
 
     public VedalkenEngineer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.subtype.add(SubType.VEDALKEN);
         this.subtype.add(SubType.ARTIFICER);
 
@@ -114,7 +114,7 @@ class VedalkenEngineerAbility extends ActivatedManaAbilityImpl {
 
     public VedalkenEngineerAbility(Cost cost, int amount, ConditionalManaBuilder manaBuilder) {
         super(Zone.BATTLEFIELD, new VedalkenEngineerEffect(amount, manaBuilder), cost);
-        this.netMana.add(new Mana(0,0,0,0,0,0, amount, 0));
+        this.netMana.add(new Mana(0, 0, 0, 0, 0, 0, amount, 0));
     }
 
     public VedalkenEngineerAbility(final VedalkenEngineerAbility ability) {
@@ -153,21 +153,15 @@ class VedalkenEngineerEffect extends ManaEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
-            return false;
-        }
-
         ChoiceColor choiceColor = new ChoiceColor(true);
-        while (!controller.choose(Outcome.Benefit, choiceColor, game)) {
-            if (!controller.canRespond()) {
-                return false;
-            }
+        if (controller != null && controller.choose(Outcome.Benefit, choiceColor, game)) {
+            Mana mana = choiceColor.getMana(amount);
+            Mana condMana = manaBuilder.setMana(mana, source, game).build();
+            checkToFirePossibleEvents(condMana, game, source);
+            controller.getManaPool().addMana(condMana, game, source);
+            return true;
         }
-        Mana mana = choiceColor.getMana(amount);
-        Mana condMana = manaBuilder.setMana(mana, source, game).build();
-        checkToFirePossibleEvents(condMana, game, source);
-        controller.getManaPool().addMana(condMana, game, source);
-        return true;
+        return false;
     }
 
     @Override

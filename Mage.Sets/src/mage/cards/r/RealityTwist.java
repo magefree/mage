@@ -27,6 +27,7 @@
  */
 package mage.cards.r;
 
+import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -43,8 +44,6 @@ import mage.game.events.GameEvent;
 import mage.game.events.ManaEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-
-import java.util.UUID;
 
 /**
  *
@@ -117,7 +116,9 @@ class RealityTwistEffect extends ReplacementEffectImpl {
             if (choice.getChoices().size() == 1) {
                 chosenColor = choice.getChoices().iterator().next();
             } else {
-                controller.choose(Outcome.PutManaInPool, choice, game);
+                if (!controller.choose(Outcome.PutManaInPool, choice, game)) {
+                    return false;
+                }
                 chosenColor = choice.getChoice();
             }
             ManaEvent manaEvent = (ManaEvent) event;

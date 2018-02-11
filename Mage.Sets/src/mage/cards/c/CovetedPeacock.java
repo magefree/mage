@@ -61,9 +61,10 @@ public class CovetedPeacock extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever Coveted Peacock attacks, you may goad target creature defending player controls.
-        Ability ability = new AttacksTriggeredAbility(new GoadTargetEffect(), true, "Whenever {this} attacks, you may goad target creature defending player controls");
+        Ability ability = new AttacksTriggeredAbility(new GoadTargetEffect(), true, "Whenever {this} attacks, you may goad target creature defending player controls.");
         ability.addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("creature defending player controls")));
         originalId = ability.getOriginalId();
+        this.addAbility(ability);
     }
 
     public CovetedPeacock(final CovetedPeacock card) {

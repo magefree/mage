@@ -45,7 +45,6 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetPermanentOrPlayerWithCounter;
 
-
 /**
  * @author nantuko
  */
@@ -88,13 +87,16 @@ public class ProliferateEffect extends OneShotEffect {
                         }
                         choice.setChoices(choices);
                         choice.setMessage("Choose a counter to proliferate (" + permanent.getIdName() + ')');
-                        controller.choose(Outcome.Benefit, choice, game);
-                        for (Counter counter : permanent.getCounters(game).values()) {
-                            if (counter.getName().equals(choice.getChoice())) {
-                                Counter newCounter = new Counter(counter.getName());
-                                permanent.addCounters(newCounter, source, game);
-                                break;
+                        if (controller.choose(Outcome.Benefit, choice, game)) {
+                            for (Counter counter : permanent.getCounters(game).values()) {
+                                if (counter.getName().equals(choice.getChoice())) {
+                                    Counter newCounter = new Counter(counter.getName());
+                                    permanent.addCounters(newCounter, source, game);
+                                    break;
+                                }
                             }
+                        } else {
+                            return false;
                         }
                     }
                 }
@@ -115,13 +117,16 @@ public class ProliferateEffect extends OneShotEffect {
                             }
                             choice.setChoices(choices);
                             choice.setMessage("Choose a counter to proliferate (" + player.getLogName() + ')');
-                            controller.choose(Outcome.Benefit, choice, game);
-                            for (Counter counter : player.getCounters().values()) {
-                                if (counter.getName().equals(choice.getChoice())) {
-                                    Counter newCounter = new Counter(counter.getName());
-                                    player.addCounters(newCounter, game);
-                                    break;
+                            if (controller.choose(Outcome.Benefit, choice, game)) {
+                                for (Counter counter : player.getCounters().values()) {
+                                    if (counter.getName().equals(choice.getChoice())) {
+                                        Counter newCounter = new Counter(counter.getName());
+                                        player.addCounters(newCounter, game);
+                                        break;
+                                    }
                                 }
+                            } else {
+                                return false;
                             }
                         }
                     }

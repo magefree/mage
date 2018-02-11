@@ -56,13 +56,13 @@ import mage.watchers.Watcher;
 public class BoseijuWhoSheltersAll extends CardImpl {
 
     public BoseijuWhoSheltersAll(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
         this.addSuperType(SuperType.LEGENDARY);
 
         // Boseiju, Who Shelters All enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
 
-        // {tap}, Pay 2 life: Add {C} to your mana pool. If that mana is spent on an instant or sorcery spell, that spell can't be countered by spells or abilities.
+        // {T}, Pay 2 life: Add {C} to your mana pool. If that mana is spent on an instant or sorcery spell, that spell can't be countered by spells or abilities.
         Mana mana = Mana.ColorlessMana(1);
         mana.setFlag(true); // used to indicate this mana ability
         SimpleManaAbility ability = new SimpleManaAbility(Zone.BATTLEFIELD, mana, new TapSourceCost());

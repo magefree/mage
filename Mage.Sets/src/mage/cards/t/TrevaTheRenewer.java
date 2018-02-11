@@ -40,8 +40,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.ChoiceColor;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -55,7 +55,7 @@ import mage.players.Player;
 public class TrevaTheRenewer extends CardImpl {
 
     public TrevaTheRenewer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{W}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{W}{U}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(6);
@@ -78,30 +78,29 @@ public class TrevaTheRenewer extends CardImpl {
 }
 
 class TrevaTheRenewerEffect extends OneShotEffect {
-    
+
     public TrevaTheRenewerEffect() {
         super(Outcome.Benefit);
         this.staticText = "choose a color, then you gain 1 life for each permanent of that color.";
     }
-    
+
     public TrevaTheRenewerEffect(final TrevaTheRenewerEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public TrevaTheRenewerEffect copy() {
         return new TrevaTheRenewerEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());        
+        Player controller = game.getPlayer(source.getControllerId());
         if (controller == null) {
             return false;
         }
         ChoiceColor choice = new ChoiceColor();
-        controller.choose(outcome, choice, game);
-        if (choice.getColor() != null) {
+        if (controller.choose(outcome, choice, game)) {
             game.informPlayers(new StringBuilder(controller.getLogName()).append(" chooses ").append(choice.getColor()).toString());
             FilterPermanent filter = new FilterPermanent();
             filter.add(new ColorPredicate(choice.getColor()));

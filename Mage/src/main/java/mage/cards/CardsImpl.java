@@ -27,14 +27,14 @@
  */
 package mage.cards;
 
+import java.io.Serializable;
+import java.util.*;
+import java.util.stream.Collectors;
+import mage.MageObject;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.util.RandomUtil;
 import mage.util.ThreadLocalStringBuilder;
-
-import java.io.Serializable;
-import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -105,7 +105,11 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
             return null;
         }
         UUID[] cards = this.toArray(new UUID[this.size()]);
-        return game.getCard(cards[RandomUtil.nextInt(cards.length)]);
+        MageObject object = game.getObject(cards[RandomUtil.nextInt(cards.length)]); // neccessary if permanent tokens are in the collection
+        if (object instanceof Card) {
+            return (Card) object;
+        }
+        return null;
     }
 
     @Override
@@ -151,7 +155,7 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
     @Override
     public Set<Card> getCards(Game game) {
         Set<Card> cards = new LinkedHashSet<>();
-        for (Iterator<UUID> it = this.iterator(); it.hasNext(); ) { // Changed to iterator because of ConcurrentModificationException
+        for (Iterator<UUID> it = this.iterator(); it.hasNext();) { // Changed to iterator because of ConcurrentModificationException
             UUID cardId = it.next();
 
             Card card = game.getCard(cardId);

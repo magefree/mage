@@ -50,7 +50,7 @@ import mage.target.common.TargetOpponent;
 public class InfiniteObliteration extends CardImpl {
 
     public InfiniteObliteration(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}{B}");
 
         // Name a creature card.  Search target opponent's graveyard, hand, and library
         // for any number of cards with that name and exile them.  Then that player shuffles his or her library.
@@ -88,10 +88,8 @@ class InfiniteObliterationEffect extends SearchTargetGraveyardHandLibraryForCard
             cardChoice.clearChoice();
             cardChoice.setMessage("Name a creature card");
 
-            while (!controller.choose(Outcome.Exile, cardChoice, game)) {
-                if (!controller.canRespond()) {
-                    return false;
-                }
+            if (!controller.choose(Outcome.Exile, cardChoice, game)) {
+                return false;
             }
             String cardName;
             cardName = cardChoice.getChoice();

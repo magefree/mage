@@ -43,8 +43,8 @@ import mage.cards.CardsImpl;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -120,10 +120,8 @@ class XenagosManaEffect extends OneShotEffect {
 
             for (int i = 0; i < x; i++) {
                 Mana mana = new Mana();
-                while (!player.choose(Outcome.Benefit, manaChoice, game)) {
-                    if (!player.canRespond()) {
-                        return false;
-                    }
+                if (!player.choose(Outcome.Benefit, manaChoice, game)) {
+                    return false;
                 }
                 if (manaChoice.getChoice() == null) {  // can happen if player leaves game
                     return false;

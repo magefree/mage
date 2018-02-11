@@ -54,7 +54,7 @@ import mage.players.Player;
 public class WalkingDesecration extends CardImpl {
 
     public WalkingDesecration(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.subtype.add(SubType.ZOMBIE);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
@@ -90,16 +90,9 @@ class WalkingDesecrationEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
-        if (player != null) {
-            Choice typeChoice = new ChoiceCreatureType(sourceObject);
-            while (!player.choose(outcome, typeChoice, game)) {
-                if (!player.canRespond()) {
-                    return false;
-                }
-            }
-            if (typeChoice.getChoice() != null) {
-                game.informPlayers(sourceObject.getLogName() + " chosen type: " + typeChoice.getChoice());
-            }
+        Choice typeChoice = new ChoiceCreatureType(sourceObject);
+        if (player != null && player.choose(outcome, typeChoice, game)) {
+            game.informPlayers(sourceObject.getLogName() + " chosen type: " + typeChoice.getChoice());
             FilterCreaturePermanent filter = new FilterCreaturePermanent();
             filter.add(new SubtypePredicate(SubType.byDescription(typeChoice.getChoice())));
             RequirementEffect effect = new AttacksIfAbleAllEffect(filter, Duration.EndOfTurn);

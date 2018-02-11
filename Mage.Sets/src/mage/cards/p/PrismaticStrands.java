@@ -65,7 +65,7 @@ public class PrismaticStrands extends CardImpl {
     }
 
     public PrismaticStrands(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{W}");
 
         // Prevent all damage that sources of the color of your choice would deal this turn.
         this.getSpellAbility().addEffect(new PrismaticStrandsEffect());

@@ -47,7 +47,7 @@ import mage.target.TargetCard;
 public class DeployTheGatewatch extends CardImpl {
 
     public DeployTheGatewatch(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{W}{W}");
 
         // Look at the top seven cards of your library. Put up to two planeswalker cards from among them onto the battlefield.
         // Put the rest on the bottom of your library in a random order.
@@ -90,15 +90,15 @@ class DeployTheGatewatchEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
 
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
             return false;
         }
         // Look at the top seven cards of your library.
         Cards cards = new CardsImpl();
         boolean planeswalkerIncluded = false;
         for (int i = 0; i < 7; i++) {
-            Card card = player.getLibrary().removeFromTop(game);
+            Card card = controller.getLibrary().removeFromTop(game);
             if (card != null) {
                 cards.add(card);
                 if (filter.match(card, game)) {
@@ -106,26 +106,20 @@ class DeployTheGatewatchEffect extends OneShotEffect {
                 }
             }
         }
-        player.lookAtCards("Deploy the Gatewatch", cards, game);
+        controller.lookAtCards("Deploy the Gatewatch", cards, game);
 
         // Put up to two planeswalker cards from among them onto the battlefield.
         if (planeswalkerIncluded) {
             TargetCard target = new TargetCard(0, 2, Zone.LIBRARY, filter);
-            if (player.choose(Outcome.DrawCard, cards, target, game)) {
+            if (controller.choose(Outcome.DrawCard, cards, target, game)) {
                 Cards pickedCards = new CardsImpl(target.getTargets());
                 cards.removeAll(pickedCards);
-                player.moveCards(pickedCards.getCards(game), Zone.BATTLEFIELD, source, game);
+                controller.moveCards(pickedCards.getCards(game), Zone.BATTLEFIELD, source, game);
             }
         }
 
         // Put the rest on the bottom of your library in a random order
-        while (!cards.isEmpty()) {
-            Card card = cards.getRandom(game);
-            if (card != null) {
-                cards.remove(card);
-                card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
-            }
-        }
+        controller.putCardsOnBottomOfLibrary(cards, game, source, false);
         return true;
     }
 }

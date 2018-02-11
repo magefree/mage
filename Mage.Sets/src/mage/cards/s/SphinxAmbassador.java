@@ -41,8 +41,8 @@ import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -56,7 +56,7 @@ import mage.target.common.TargetCardInLibrary;
 public class SphinxAmbassador extends CardImpl {
 
     public SphinxAmbassador(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");
         this.subtype.add(SubType.SPHINX);
 
         this.power = new MageInt(5);
@@ -115,16 +115,14 @@ class SphinxAmbassadorEffect extends OneShotEffect {
                 Choice cardChoice = new ChoiceImpl();
                 cardChoice.setChoices(choices);
                 cardChoice.clearChoice();
-                while (!targetPlayer.choose(Outcome.Benefit, cardChoice, game)) {
-                    if (!targetPlayer.canRespond()) {
-                        return false;
-                    }
+                if (!targetPlayer.choose(Outcome.Benefit, cardChoice, game)) {
+                    return false;
                 }
                 String cardName = cardChoice.getChoice();
 
-                game.informPlayers(new StringBuilder(sourcePermanent.getName()).append(", named card: [").append(cardName).append(']').toString());
+                game.informPlayers(sourcePermanent.getName() + ", named card: [" + cardName + ']');
                 if (!card.getName().equals(cardName) && card.isCreature()) {
-                    if (controller.chooseUse(outcome, new StringBuilder("Put ").append(card.getName()).append(" onto the battlefield?").toString(), source, game)) {
+                    if (controller.chooseUse(outcome, "Put " + card.getName() + " onto the battlefield?", source, game)) {
                         controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                     }
                 }

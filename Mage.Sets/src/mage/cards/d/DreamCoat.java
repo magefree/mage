@@ -41,9 +41,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.ChoiceColor;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -109,8 +109,7 @@ class BecomesColorOrColorsEnchantedEffect extends OneShotEffect {
                     }
                 }
                 ChoiceColor choiceColor = new ChoiceColor();
-                controller.choose(Outcome.Benefit, choiceColor, game);
-                if (!controller.canRespond()) {
+                if (!controller.choose(Outcome.Benefit, choiceColor, game)) {
                     return false;
                 }
                 if (!game.isSimulation()) {

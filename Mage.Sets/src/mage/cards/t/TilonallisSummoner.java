@@ -32,25 +32,28 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
+import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.CitysBlessingCondition;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.keyword.AscendAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
+import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.game.permanent.token.TilonallisSummonerElementalToken;
 import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
+import mage.target.targetpointer.FixedTargets;
 
 /**
  *
@@ -108,18 +111,14 @@ class TilonallisSummonerEffect extends OneShotEffect {
                 int costX = controller.announceXMana(0, Integer.MAX_VALUE, "Announce the value for {X}", game, source);
                 cost.add(new GenericManaCost(costX));
                 if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false, null)) {
+                    controller.resetStoredBookmark(game); // otherwise you can undo the payment
                     CreateTokenEffect effect = new CreateTokenEffect(new TilonallisSummonerElementalToken(), costX, true, true);
                     effect.apply(game, source);
-                    if (!CitysBlessingCondition.instance.apply(game, source)) {
-                        for (UUID tokenId : effect.getLastAddedTokenIds()) {
-                            Permanent tokenPermanent = game.getPermanent(tokenId);
-                            if (tokenPermanent != null) {
-                                ExileTargetEffect exileEffect = new ExileTargetEffect(null, "", Zone.BATTLEFIELD);
-                                exileEffect.setTargetPointer(new FixedTarget(tokenPermanent, game));
-                                game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect), source);
-                            }
-                        }
-                    }
+                    Effect exileEffect = new ExileTargetEffect(null, "", Zone.BATTLEFIELD)
+                            .setText("exile those tokens unless you have the city's blessing");
+                    exileEffect.setTargetPointer(new FixedTargets(new CardsImpl(effect.getLastAddedTokenIds()), game));
+                    game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
+                            Zone.ALL, exileEffect, TargetController.ANY, new InvertCondition(CitysBlessingCondition.instance)), source);
                 }
             }
             return true;

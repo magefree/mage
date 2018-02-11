@@ -142,11 +142,7 @@ class GontiLordOfLuxuryEffect extends OneShotEffect {
                 }
             }
             // then put the rest on the bottom of that library in a random order
-            while (!topCards.isEmpty() && controller.isInGame()) {
-                Card libCard = topCards.getRandom(game);
-                topCards.remove(libCard);
-                controller.moveCardToLibraryWithInfo(libCard, source.getSourceId(), game, Zone.LIBRARY, false, false);
-            }
+            controller.putCardsOnBottomOfLibrary(topCards, game, source, false);
             return true;
         }
 

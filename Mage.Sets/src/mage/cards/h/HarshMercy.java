@@ -55,7 +55,7 @@ import mage.players.Player;
 public class HarshMercy extends CardImpl {
 
     public HarshMercy(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{W}");
 
         // Each player chooses a creature type. Destroy all creatures that aren't of a type chosen this way. They can't be regenerated.
         this.getSpellAbility().addEffect(new HarshMercyEffect());
@@ -97,10 +97,8 @@ class HarshMercyEffect extends OneShotEffect {
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 Choice typeChoice = new ChoiceCreatureType(sourceObject);
-                while (!player.choose(Outcome.DestroyPermanent, typeChoice, game)) {
-                    if (!player.canRespond()) {
-                        continue PlayerIteration;
-                    }
+                if (!player.choose(Outcome.DestroyPermanent, typeChoice, game)) {
+                    continue PlayerIteration;
                 }
                 String chosenType = typeChoice.getChoice();
                 if (chosenType != null) {

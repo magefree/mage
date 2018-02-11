@@ -187,15 +187,9 @@ class SasayasEssenceManaEffectEffect extends ManaEffect {
                         if (choice.getChoices().size() == 1) {
                             choice.setChoice(choice.getChoices().iterator().next());
                         } else {
-                            while (!choice.isChosen()) {
-                                controller.choose(outcome, choice, game);
-                                if (!controller.canRespond()) {
-                                    return false;
-                                }
+                            if (!controller.choose(outcome, choice, game)) {
+                                return false;
                             }
-                        }
-                        if (choice.getChoice() == null) {
-                            return false;
                         }
                         switch (choice.getChoice()) {
                             case "Black":

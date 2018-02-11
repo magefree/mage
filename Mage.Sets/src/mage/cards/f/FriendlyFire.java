@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class FriendlyFire extends CardImpl {
 
     public FriendlyFire(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{R}");
 
         // Target creature's controller reveals a card at random from his or her hand. Friendly Fire deals damage to that creature and that player equal to the revealed card's converted mana cost.
         this.getSpellAbility().addEffect(new FriendlyFireEffect());
@@ -92,12 +92,14 @@ class FriendlyFireEffect extends OneShotEffect {
                     if (!controllerOfTargetCreature.getHand().isEmpty()) {
                         Cards cards = new CardsImpl();
                         Card card = controllerOfTargetCreature.getHand().getRandom(game);
-                        cards.add(card);
-                        controllerOfTargetCreature.revealCards(sourceObject.getName(), cards, game);
-                        int damage = card.getConvertedManaCost();
-                        targetCreature.damage(damage, source.getSourceId(), game, false, true);
-                        controllerOfTargetCreature.damage(damage, source.getSourceId(), game, false, true);
-                        return true;
+                        if (card != null) {
+                            cards.add(card);
+                            controllerOfTargetCreature.revealCards(sourceObject.getName(), cards, game);
+                            int damage = card.getConvertedManaCost();
+                            targetCreature.damage(damage, source.getSourceId(), game, false, true);
+                            controllerOfTargetCreature.damage(damage, source.getSourceId(), game, false, true);
+                            return true;
+                        }
                     }
                 }
             }

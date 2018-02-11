@@ -113,6 +113,7 @@ public class Alliances extends ExpansionSet {
         cards.add(new SetCardInfo("Lim-Dul's High Guard", 18, Rarity.COMMON, LimDulsHighGuard.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lim-Dul's Paladin", 191, Rarity.UNCOMMON, mage.cards.l.LimDulsPaladin.class));
         cards.add(new SetCardInfo("Lim-Dul's Vault", 192, Rarity.UNCOMMON, mage.cards.l.LimDulsVault.class));
+        cards.add(new SetCardInfo("Lodestone Bauble", 164, Rarity.RARE, mage.cards.l.LodestoneBauble.class));
         cards.add(new SetCardInfo("Lord of Tresserhorn", 193, Rarity.RARE, mage.cards.l.LordOfTresserhorn.class));
         cards.add(new SetCardInfo("Martyrdom", 138, Rarity.COMMON, mage.cards.m.Martyrdom.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Martyrdom", 139, Rarity.COMMON, mage.cards.m.Martyrdom.class, NON_FULL_USE_VARIOUS));

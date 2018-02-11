@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -50,9 +49,9 @@ import mage.game.permanent.Permanent;
 public class SenseisDiviningTop extends CardImpl {
 
     public SenseisDiviningTop(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new LookLibraryControllerEffect(3),new ManaCostsImpl("{1}")));
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1),new TapSourceCost());
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new LookLibraryControllerEffect(3, false, true), new ManaCostsImpl("{1}")));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new TapSourceCost());
         ability.addEffect(new SenseisDiviningTopEffect());
         this.addAbility(ability);
     }

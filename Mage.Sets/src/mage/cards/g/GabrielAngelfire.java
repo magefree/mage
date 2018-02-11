@@ -74,7 +74,7 @@ public class GabrielAngelfire extends CardImpl {
 }
 
 class GabrielAngelfireGainAbilityEffect extends GainAbilitySourceEffect {
-    
+
     private static final Set<String> choices = new LinkedHashSet<>();
     private boolean sameStep = true;
 
@@ -112,6 +112,7 @@ class GabrielAngelfireGainAbilityEffect extends GainAbilitySourceEffect {
         return false;
     }
 
+    @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
         Player controller = game.getPlayer(source.getControllerId());
@@ -121,9 +122,6 @@ class GabrielAngelfireGainAbilityEffect extends GainAbilitySourceEffect {
             choice.setChoices(choices);
             if (controller.choose(outcome, choice, game)) {
                 switch (choice.getChoice()) {
-                    // case "Flying":
-                        // ability = FlyingAbility.getInstance();
-                        // break;
                     case "First strike":
                         ability = FirstStrikeAbility.getInstance();
                         break;
@@ -137,6 +135,8 @@ class GabrielAngelfireGainAbilityEffect extends GainAbilitySourceEffect {
                         ability = FlyingAbility.getInstance();
                         break;
                 }
+            } else {
+                discard();
             }
         }
     }

@@ -27,6 +27,9 @@
  */
 package mage.abilities.effects.common;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.choices.Choice;
@@ -35,10 +38,6 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  *
@@ -78,20 +77,14 @@ public class ChooseModeEffect extends OneShotEffect {
             Choice choice = new ChoiceImpl(true);
             choice.setMessage(choiceMessage);
             choice.getChoices().addAll(modes);
-            while (!choice.isChosen()) {
-                if (!controller.canRespond()) {
-                    return false;
-                }
-                controller.choose(Outcome.Neutral, choice, game);
-            }
-            if (choice.isChosen()) {
+            if (controller.choose(Outcome.Neutral, choice, game)) {
                 if (!game.isSimulation()) {
                     game.informPlayers(sourcePermanent.getLogName() + ": " + controller.getLogName() + " has chosen " + choice.getChoice());
                 }
                 game.getState().setValue(source.getSourceId() + "_modeChoice", choice.getChoice());
                 sourcePermanent.addInfo("_modeChoice", "<font color = 'blue'>Chosen mode: " + choice.getChoice() + "</font>", game);
+                return true;
             }
-            return true;
         }
         return false;
     }

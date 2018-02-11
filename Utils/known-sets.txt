@@ -89,6 +89,7 @@ Gatecrash|Gatecrash|
 Grand Prix|GrandPrix|
 Guildpact|Guildpact|
 Guru|Guru|
+Happy Holidays|HappyHolidays|
 HASCON Promo 2017|HasconPromo2017|
 Heroes of the Realm|HeroesOfTheRealm|
 Homelands|Homelands|

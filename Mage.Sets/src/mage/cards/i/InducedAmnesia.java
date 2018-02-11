@@ -132,7 +132,7 @@ class InducedAmnesiaReturnEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (controller != null && sourcePermanent != null) {
-            UUID exileId = CardUtil.getCardExileZoneId(game, source);
+            UUID exileId = CardUtil.getCardExileZoneId(game, source.getSourceId(), true);
             int numberOfCards = 0;
             ExileZone exileZone = game.getExile().getExileZone(exileId);
             if (exileZone != null) {

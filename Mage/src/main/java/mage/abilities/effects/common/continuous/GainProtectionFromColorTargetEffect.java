@@ -77,18 +77,12 @@ public class GainProtectionFromColorTargetEffect extends GainAbilityTargetEffect
         MageObject sourceObject = game.getObject(source.getSourceId());
         Player controller = game.getPlayer(source.getControllerId());
         if (sourceObject != null && controller != null) {
-            if (!choice.isChosen()) {
-                while (!choice.isChosen()) {
-                    controller.choose(Outcome.Protect, choice, game);
-                    if (!controller.canRespond()) {
-                        return;
-                    }
-                }
-                if (choice.isChosen() && !game.isSimulation()) {
-                    game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " has chosen protection from " + choice.getChoice());
-                }
+            if (controller.choose(Outcome.Protect, choice, game)) {
+                game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " has chosen protection from " + choice.getChoice());
+                return;
             }
         }
+        discard();
     }
 
     @Override

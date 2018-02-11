@@ -42,11 +42,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.ChoiceColor;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterObject;
@@ -64,7 +64,7 @@ import mage.target.targetpointer.FixedTarget;
 public class Wishmonger extends CardImpl {
 
     public Wishmonger(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
         this.subtype.add(SubType.UNICORN);
         this.subtype.add(SubType.MONGER);
         this.power = new MageInt(3);
@@ -104,31 +104,30 @@ class WishmongerEffect extends OneShotEffect {
         Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (targetCreature != null) {
             Player player = game.getPlayer(targetCreature.getControllerId());
-            if (player != null) {
-                ChoiceColor colorChoice = new ChoiceColor();
-                if (player.choose(Outcome.Neutral, colorChoice, game)) {
-                    game.informPlayers(targetCreature.getName() + ": " + player.getLogName() + " has chosen " + colorChoice.getChoice());
-                    game.getState().setValue(targetCreature.getId() + "_color", colorChoice.getColor());
-                    
-                    ObjectColor protectColor = (ObjectColor) game.getState().getValue(targetCreature.getId() + "_color");
-                    if (protectColor != null) {
-                        ContinuousEffect effect = new ProtectionChosenColorTargetEffect();
-                        effect.setTargetPointer(new FixedTarget(targetCreature, game));
-                        game.addEffect(effect, source);
-                    }
+            ChoiceColor colorChoice = new ChoiceColor();
+            if (player != null && player.choose(Outcome.Neutral, colorChoice, game)) {
+                game.informPlayers(targetCreature.getName() + ": " + player.getLogName() + " has chosen " + colorChoice.getChoice());
+                game.getState().setValue(targetCreature.getId() + "_color", colorChoice.getColor());
+
+                ObjectColor protectColor = (ObjectColor) game.getState().getValue(targetCreature.getId() + "_color");
+                if (protectColor != null) {
+                    ContinuousEffect effect = new ProtectionChosenColorTargetEffect();
+                    effect.setTargetPointer(new FixedTarget(targetCreature, game));
+                    game.addEffect(effect, source);
                 }
                 return true;
             }
         }
+
         return false;
     }
 
     @Override
     public WishmongerEffect copy() {
         return new WishmongerEffect(this);
+
     }
 }
-
 
 class ProtectionChosenColorTargetEffect extends ContinuousEffectImpl {
 

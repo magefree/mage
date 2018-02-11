@@ -105,6 +105,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private static final String GRAY_MODE_ARG = "-gray";
     private static final String FILL_SCREEN_ARG = "-fullscreen";
 
+    private static final String NOT_CONNECTED_TEXT = "<not connected>";
     private static MageFrame instance;
 
     private final ConnectDialog connectDialog;
@@ -300,7 +301,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         }
 
         setGUISize();
-
+        setConnectButtonText(NOT_CONNECTED_TEXT);
         SwingUtilities.invokeLater(() -> {
             disableButtons();
             if (PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_CHECK, "false").equals("true")) {
@@ -329,7 +330,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private void setWindowTitle() {
         setTitle(TITLE_NAME + "  Client: "
                 + (VERSION == null ? "<not available>" : VERSION.toString()) + "  Server: "
-                + ((SessionHandler.getSession() != null && SessionHandler.isConnected()) ? SessionHandler.getVersionInfo() : "<not connected>"));
+                + ((SessionHandler.getSession() != null && SessionHandler.isConnected()) ? SessionHandler.getVersionInfo() : NOT_CONNECTED_TEXT));
     }
 
     private void addTooltipContainer() {
@@ -431,13 +432,13 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         }
     }
 
-    public static boolean isChrismasTime(Date currentTime){
+    public static boolean isChrismasTime(Date currentTime) {
         // from december 15 to january 15
         Calendar cal = new GregorianCalendar();
         cal.setTime(currentTime);
 
-        int currentYear =  cal.get(Calendar.YEAR);
-        if (cal.get(Calendar.MONTH) == Calendar.JANUARY){
+        int currentYear = cal.get(Calendar.YEAR);
+        if (cal.get(Calendar.MONTH) == Calendar.JANUARY) {
             currentYear = currentYear - 1;
         }
 
@@ -455,12 +456,12 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
         String filename;
         float ratio;
-        if (isChrismasTime(Calendar.getInstance().getTime())){
+        if (isChrismasTime(Calendar.getInstance().getTime())) {
             // chrismass logo
             LOGGER.info("Yo Ho Ho, Merry Christmas and a Happy New Year");
             filename = "/label-xmage-christmas.png";
             ratio = 539.0f / 318.0f;
-        }else{
+        } else {
             // standard logo
             filename = "/label-xmage.png";
             ratio = 509.0f / 288.0f;
@@ -797,7 +798,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         btnPreferences = new javax.swing.JButton();
         jSeparator4 = new javax.swing.JToolBar.Separator();
         btnConnect = new javax.swing.JButton();
-        lblStatus = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JToolBar.Separator();
         btnDeckEditor = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JToolBar.Separator();
@@ -827,11 +827,15 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
         btnPreferences.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu/preferences.png"))); // NOI18N
         btnPreferences.setText("Preferences");
-        btnPreferences.setToolTipText("Change the settings for the different areas of XMage.");
+        btnPreferences.setToolTipText("By changing the settings in the preferences window you can adjust the look and behaviour of xmage.");
         btnPreferences.setFocusable(false);
         btnPreferences.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnPreferences.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnPreferences.addActionListener(evt -> btnPreferencesActionPerformed(evt));
+        btnPreferences.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPreferencesActionPerformed(evt);
+            }
+        });
         mageToolbar.add(btnPreferences);
         mageToolbar.add(jSeparator4);
 
@@ -840,14 +844,12 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         btnConnect.setFocusable(false);
         btnConnect.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnConnect.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnConnect.addActionListener(evt -> btnConnectActionPerformed(evt));
+        btnConnect.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConnectActionPerformed(evt);
+            }
+        });
         mageToolbar.add(btnConnect);
-
-        lblStatus.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblStatus.setText("Not connected");
-        lblStatus.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        lblStatus.setInheritsPopupMenu(false);
-        mageToolbar.add(lblStatus);
         mageToolbar.add(jSeparator1);
 
         btnDeckEditor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu/deck_editor.png"))); // NOI18N
@@ -856,7 +858,11 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         btnDeckEditor.setFocusable(false);
         btnDeckEditor.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnDeckEditor.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnDeckEditor.addActionListener(evt -> btnDeckEditorActionPerformed(evt));
+        btnDeckEditor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeckEditorActionPerformed(evt);
+            }
+        });
         mageToolbar.add(btnDeckEditor);
         mageToolbar.add(jSeparator2);
 
@@ -866,7 +872,11 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         btnCollectionViewer.setFocusable(false);
         btnCollectionViewer.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnCollectionViewer.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnCollectionViewer.addActionListener(evt -> btnCollectionViewerActionPerformed(evt));
+        btnCollectionViewer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCollectionViewerActionPerformed(evt);
+            }
+        });
         mageToolbar.add(btnCollectionViewer);
         mageToolbar.add(jSeparator5);
 
@@ -876,17 +886,25 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         btnSendFeedback.setFocusable(false);
         btnSendFeedback.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnSendFeedback.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnSendFeedback.addActionListener(evt -> btnSendFeedbackActionPerformed(evt));
+        btnSendFeedback.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSendFeedbackActionPerformed(evt);
+            }
+        });
         mageToolbar.add(btnSendFeedback);
         mageToolbar.add(jSeparator6);
 
         btnSymbols.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu/symbol.png"))); // NOI18N
         btnSymbols.setText("Symbols");
-        btnSymbols.setToolTipText("<HTML>Load symbols from the internet.<br>\nYou need to do that only once.");
+        btnSymbols.setToolTipText("<HTML>Load the mana and other card symbols from the internet.<br>\nOtherwise you only see the replacement sequence like {U} for blue mana symbol.<br>\nYou need to do that only once.");
         btnSymbols.setFocusable(false);
         btnSymbols.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnSymbols.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnSymbols.addActionListener(evt -> btnSymbolsActionPerformed(evt));
+        btnSymbols.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSymbolsActionPerformed(evt);
+            }
+        });
         mageToolbar.add(btnSymbols);
         mageToolbar.add(jSeparatorSymbols);
 
@@ -896,7 +914,11 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         btnImages.setFocusable(false);
         btnImages.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnImages.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnImages.addActionListener(evt -> btnImagesActionPerformed(evt));
+        btnImages.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImagesActionPerformed(evt);
+            }
+        });
         mageToolbar.add(btnImages);
         mageToolbar.add(jSeparatorImages);
 
@@ -906,7 +928,11 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         btnAbout.setFocusable(false);
         btnAbout.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnAbout.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnAbout.addActionListener(evt -> btnAboutActionPerformed(evt));
+        btnAbout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAboutActionPerformed(evt);
+            }
+        });
         mageToolbar.add(btnAbout);
         mageToolbar.add(jSeparator7);
 
@@ -1201,20 +1227,18 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private javax.swing.JToolBar.Separator jSeparator7;
     private javax.swing.JToolBar.Separator jSeparatorImages;
     private javax.swing.JToolBar.Separator jSeparatorSymbols;
-    private javax.swing.JLabel lblStatus;
     private javax.swing.JToolBar mageToolbar;
     // End of variables declaration//GEN-END:variables
 
     private static final long serialVersionUID = -9104885239063142218L;
     private ImagePanel backgroundPane;
     private final TablesPane tablesPane;
-//    private CollectionViewerPane collectionViewerPane;
 
-    public void setStatusText(String status) {
-        this.lblStatus.setText(status);
+    public void setConnectButtonText(String status) {
+        this.btnConnect.setText(status);
         changeGUISize(); // Needed to layout the tooltbar after text length change
-        this.lblStatus.repaint();
-        this.lblStatus.revalidate();
+        this.btnConnect.repaint();
+        this.btnConnect.revalidate();
     }
 
     public static MageUI getUI() {
@@ -1272,11 +1296,11 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     @Override
     public void connected(final String message) {
         if (SwingUtilities.isEventDispatchThread()) {
-            setStatusText(message);
+            setConnectButtonText(message);
             enableButtons();
         } else {
             SwingUtilities.invokeLater(() -> {
-                setStatusText(message);
+                setConnectButtonText(message);
                 enableButtons();
             });
         }
@@ -1286,14 +1310,14 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     public void disconnected(final boolean errorCall) {
         if (SwingUtilities.isEventDispatchThread()) { // Returns true if the current thread is an AWT event dispatching thread.
             LOGGER.info("DISCONNECTED (Event Dispatch Thread)");
-            setStatusText("Not connected");
+            setConnectButtonText(NOT_CONNECTED_TEXT);
             disableButtons();
             hideGames();
             hideTables();
         } else {
             LOGGER.info("DISCONNECTED (NO Event Dispatch Thread)");
             SwingUtilities.invokeLater(() -> {
-                setStatusText("Not connected");
+                setConnectButtonText(NOT_CONNECTED_TEXT);
                 disableButtons();
                 hideGames();
                 hideTables();

@@ -55,7 +55,7 @@ import mage.players.Player;
 public class CoalitionRelic extends CardImpl {
 
     public CoalitionRelic(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // {tap}: Add one mana of any color to your mana pool.
         this.addAbility(new AnyColorManaAbility());
@@ -101,11 +101,8 @@ class CoalitionRelicEffect extends OneShotEffect {
             Mana mana = new Mana();
             ChoiceColor choice = new ChoiceColor();
             for (int i = 0; i < chargeCounters; i++) {
-                while (!choice.isChosen()) {
-                    if (!player.canRespond()) {
-                        return false;
-                    }
-                    player.choose(outcome, choice, game);
+                if (!player.choose(outcome, choice, game)) {
+                    return false;
                 }
                 choice.increaseMana(mana);
                 choice.clearChoice();

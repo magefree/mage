@@ -65,7 +65,7 @@ public class SarkhanUnbroken extends CardImpl {
     }
 
     public SarkhanUnbroken(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{G}{U}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{G}{U}{R}");
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.SARKHAN);
 
@@ -125,13 +125,9 @@ class SarkhanUnbrokenAbility1 extends OneShotEffect {
             manaChoice.setMessage("Select color of mana to add");
 
             Mana mana = new Mana();
-
-            controller.choose(Outcome.Benefit, manaChoice, game);
-
-            if (manaChoice.getChoice() == null) {
+            if (!controller.choose(Outcome.Benefit, manaChoice, game)) {
                 return false;
             }
-
             switch (manaChoice.getChoice()) {
                 case "White":
                     mana.increaseWhite();

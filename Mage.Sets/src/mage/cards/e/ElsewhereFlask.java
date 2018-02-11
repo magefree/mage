@@ -79,7 +79,7 @@ class ElsewhereFlaskEffect extends OneShotEffect {
 
     public ElsewhereFlaskEffect() {
         super(Outcome.Neutral);
-        this.staticText = "Choose a basic land type.  Each land you control becomes that type until end of turn";
+        this.staticText = "Choose a basic land type. Each land you control becomes that type until end of turn";
     }
 
     public ElsewhereFlaskEffect(final ElsewhereFlaskEffect effect) {
@@ -94,11 +94,9 @@ class ElsewhereFlaskEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            Choice choice = new ChoiceBasicLandType();
-            if (player.choose(Outcome.Neutral, choice, game)) {
-                game.getState().setValue(source.getSourceId().toString() + "_ElsewhereFlask", choice.getChoice());
-            }
+        Choice choice = new ChoiceBasicLandType();
+        if (player != null && player.choose(Outcome.Neutral, choice, game)) {
+            game.getState().setValue(source.getSourceId().toString() + "_ElsewhereFlask", choice.getChoice());
             game.addEffect(new ElsewhereFlaskContinuousEffect(), source);
             return true;
         }

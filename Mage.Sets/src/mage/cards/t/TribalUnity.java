@@ -27,6 +27,7 @@
  */
 package mage.cards.t;
 
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -45,8 +46,6 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
-
-import java.util.UUID;
 
 /**
  * @author anonymous
@@ -70,8 +69,8 @@ public class TribalUnity extends CardImpl {
     }
 }
 
-
 class TribalUnityEffect extends OneShotEffect {
+
     protected DynamicValue amount;
 
     public TribalUnityEffect(DynamicValue amount) {
@@ -87,16 +86,14 @@ class TribalUnityEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
-        int boost = amount.calculate(game, source, this);
-        if (player != null) {
-            Choice typeChoice = new ChoiceCreatureType(sourceObject);
-            while (!player.choose(outcome, typeChoice, game)) {
-                if (!player.canRespond()) {
-                    return false;
-                }
-            }
+        if (sourceObject == null) {
+            return false;
+        }
+        Player player = game.getPlayer(source.getControllerId());
+        Choice typeChoice = new ChoiceCreatureType(sourceObject);
+        if (player != null && player.choose(outcome, typeChoice, game)) {
+            int boost = amount.calculate(game, source, this);
             if (typeChoice.getChoice() != null) {
                 game.informPlayers(sourceObject.getLogName() + " chosen type: " + typeChoice.getChoice());
             }

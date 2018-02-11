@@ -45,16 +45,16 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  */
 public class VernalEquinox extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("creature and enchantment cards");
+    private static final FilterCard filter = new FilterCard("creature and enchantment spells");
 
     static {
         filter.add(Predicates.or(new CardTypePredicate(CardType.CREATURE), new CardTypePredicate(CardType.ENCHANTMENT)));
     }
 
     public VernalEquinox(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");
 
-        // Any player may cast creature and enchantment cards as though they had flash.
+        // Any player may cast creature and enchantment spells as though they had flash.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CastAsThoughItHadFlashAllEffect(Duration.WhileOnBattlefield, filter, true)));
 
     }

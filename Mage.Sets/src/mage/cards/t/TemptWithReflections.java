@@ -51,7 +51,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public class TemptWithReflections extends CardImpl {
 
     public TemptWithReflections(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{U}");
 
         // Tempting offer - Choose target creature you control. Create a token that's a copy of that creature. Each opponent may create a token that's a copy of that creature. For each opponent who does, create a token that's a copy of that creature.
         this.getSpellAbility().addEffect(new TemptWithReflectionsEffect());
@@ -114,9 +114,8 @@ class TemptWithReflectionsEffect extends OneShotEffect {
                 effect = new CreateTokenCopyTargetEffect(playerId);
                 effect.setTargetPointer(getTargetPointer());
                 effect.apply(game, source);
-            }
 
-            if (!playersSaidYes.isEmpty()) {
+                // create a token for the source controller as well
                 effect = new CreateTokenCopyTargetEffect();
                 effect.setTargetPointer(getTargetPointer());
                 effect.apply(game, source);

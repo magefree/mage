@@ -90,10 +90,8 @@ class RoarOfTheCrowdEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             Choice typeChoice = new ChoiceCreatureType(game.getObject(source.getSourceId()));
-            while (!player.choose(Outcome.LoseLife, typeChoice, game)) {
-                if (!player.canRespond()) {
-                    return false;
-                }
+            if (!player.choose(Outcome.LoseLife, typeChoice, game)) {
+                return false;
             }
             FilterControlledPermanent filter = new FilterControlledPermanent();
             filter.add(new SubtypePredicate(SubType.byDescription(typeChoice.getChoice())));

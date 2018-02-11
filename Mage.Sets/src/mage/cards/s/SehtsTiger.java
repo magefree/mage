@@ -95,24 +95,15 @@ class SehtsTigerEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject mageObject = game.getObject(source.getSourceId());
-        if (controller != null && mageObject != null) {
-            ChoiceColor choice = new ChoiceColor();
-            while (!choice.isChosen()) {
-                controller.choose(Outcome.Protect, choice, game);
-                if (!controller.canRespond()) {
-                    return false;
-                }
-            }
-            if (choice.getColor() != null) {
-                game.informPlayers(mageObject.getLogName() + ": " + controller.getLogName() + " has chosen " + choice.getChoice());
-                FilterCard filter = new FilterCard();
-                filter.add(new ColorPredicate(choice.getColor()));
-                filter.setMessage(choice.getChoice());
-                Ability ability = new ProtectionAbility(filter);
-                game.addEffect(new GainAbilityControllerEffect(ability, Duration.EndOfTurn), source);
-                return true;
-            }
-
+        ChoiceColor choice = new ChoiceColor();
+        if (controller != null && mageObject != null && controller.choose(Outcome.Protect, choice, game)) {
+            game.informPlayers(mageObject.getLogName() + ": " + controller.getLogName() + " has chosen " + choice.getChoice());
+            FilterCard filter = new FilterCard();
+            filter.add(new ColorPredicate(choice.getColor()));
+            filter.setMessage(choice.getChoice());
+            Ability ability = new ProtectionAbility(filter);
+            game.addEffect(new GainAbilityControllerEffect(ability, Duration.EndOfTurn), source);
+            return true;
         }
         return false;
     }

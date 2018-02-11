@@ -45,9 +45,9 @@ import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -62,7 +62,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class PemminsAura extends CardImpl {
 
     public PemminsAura(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}{U}");
         this.subtype.add(SubType.AURA);
 
         // Enchant creature
@@ -126,18 +126,14 @@ class PemminsAuraBoostEnchantedEffect extends OneShotEffect {
             choice.setMessage("Select how to boost");
             choice.getChoices().add(CHOICE_1);
             choice.getChoices().add(CHOICE_2);
-            while (!choice.isChosen()) {
-                if (!controller.canRespond()) {
-                    return false;
+            if (!controller.choose(outcome, choice, game)) {
+                if (choice.getChoice().equals(CHOICE_1)) {
+                    game.addEffect(new BoostEnchantedEffect(+1, -1, Duration.EndOfTurn), source);
+                } else {
+                    game.addEffect(new BoostEnchantedEffect(-1, +1, Duration.EndOfTurn), source);
                 }
-                controller.choose(outcome, choice, game);
+                return true;
             }
-            if (choice.getChoice().equals(CHOICE_1)) {
-                game.addEffect(new BoostEnchantedEffect(+1, -1, Duration.EndOfTurn), source);
-            } else {
-                game.addEffect(new BoostEnchantedEffect(-1, +1, Duration.EndOfTurn), source);
-            }
-            return true;
         }
         return false;
     }

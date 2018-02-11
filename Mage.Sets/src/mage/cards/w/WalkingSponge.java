@@ -44,9 +44,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -60,7 +60,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class WalkingSponge extends CardImpl {
 
     public WalkingSponge(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.subtype.add(SubType.SPONGE);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
@@ -99,9 +99,9 @@ class WalkingSpongeEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
+        Player controller = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (player != null || permanent != null) {
+        if (controller != null && permanent != null) {
             ChoiceImpl chooseAbility = new ChoiceImpl();
             chooseAbility.setMessage("What ability do you wish to remove? (default is Flying)");
             Set<String> choice = new LinkedHashSet<>();
@@ -111,20 +111,18 @@ class WalkingSpongeEffect extends OneShotEffect {
             chooseAbility.setChoices(choice);
             // since the player can't pick "no ability", let's default to the first option
             Ability ability = FlyingAbility.getInstance();
-    
-            if (player.choose(Outcome.UnboostCreature, chooseAbility, game)) {
+
+            if (controller.choose(Outcome.UnboostCreature, chooseAbility, game)) {
                 String chosenAbility = chooseAbility.getChoice();
-                // if (chosenAbility.equals("Flying")) {
-                //    ability = FlyingAbility.getInstance();
-                // }
                 if (chosenAbility.equals("First strike")) {
                     ability = FirstStrikeAbility.getInstance();
-                }
-                else if (chosenAbility.equals("Trample")) {
+                } else if (chosenAbility.equals("Trample")) {
                     ability = TrampleAbility.getInstance();
                 }
+            } else {
+                return false;
             }
-            game.informPlayers(player.getLogName() + " has chosen " + ability.getRule());
+            game.informPlayers(controller.getLogName() + " has chosen " + ability.getRule());
             ContinuousEffect effect = new LoseAbilityTargetEffect(ability, Duration.EndOfTurn);
             game.addEffect(effect, source);
             return true;

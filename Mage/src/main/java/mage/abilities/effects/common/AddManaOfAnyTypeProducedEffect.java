@@ -84,10 +84,9 @@ public class AddManaOfAnyTypeProducedEffect extends ManaEffect {
                 if (choice.getChoices().size() == 1) {
                     choice.setChoice(choice.getChoices().iterator().next());
                 } else {
-                    targetController.choose(outcome, choice, game);
-                }
-                if (choice.getChoice() == null) {
-                    return false;
+                    if (!targetController.choose(outcome, choice, game)) {
+                        return false;
+                    }
                 }
                 Mana newMana = new Mana();
                 switch (choice.getChoice()) {

@@ -36,8 +36,8 @@ import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
@@ -49,13 +49,14 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  */
 public class YevaNaturesHerald extends CardImpl {
 
-    private static final FilterCreatureCard filter = new FilterCreatureCard("green creature cards");
+    private static final FilterCreatureCard filter = new FilterCreatureCard("green creature spells");
+
     static {
         filter.add(new ColorPredicate(ObjectColor.GREEN));
     }
 
     public YevaNaturesHerald(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.SHAMAN);
@@ -65,7 +66,7 @@ public class YevaNaturesHerald extends CardImpl {
 
         // Flash
         this.addAbility(FlashAbility.getInstance());
-        // You may cast green creature cards as though they had flash.
+        // You may cast green creature spells as though they had flash.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CastAsThoughItHadFlashAllEffect(Duration.WhileOnBattlefield, filter)));
     }
 

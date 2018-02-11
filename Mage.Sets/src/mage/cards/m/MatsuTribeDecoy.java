@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class MatsuTribeDecoy extends CardImpl {
 
     public MatsuTribeDecoy(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
         this.subtype.add(SubType.SNAKE);
         this.subtype.add(SubType.WARRIOR);
 
@@ -59,8 +59,8 @@ public class MatsuTribeDecoy extends CardImpl {
 
         // {2}{G}: Target creature blocks Matsu-Tribe Decoy this turn if able.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MustBeBlockedByTargetSourceEffect(), new ManaCostsImpl("{2}{G}"));
-    ability.addTarget(new TargetCreaturePermanent());
-    this.addAbility(ability);
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
         // Whenever Kashi-Tribe Reaver deals combat damage to a creature, tap that creature and it doesn't untap during its controller's next untap step.
         Ability ability2;
         ability2 = new DealsDamageToACreatureTriggeredAbility(new TapTargetEffect("that creature"), true, false, true);

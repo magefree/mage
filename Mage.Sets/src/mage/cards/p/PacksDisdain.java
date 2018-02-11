@@ -56,7 +56,7 @@ import mage.target.targetpointer.FixedTarget;
 public class PacksDisdain extends CardImpl {
 
     public PacksDisdain(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{B}");
 
         // Choose a creature type. Target creature gets -1/-1 until end of turn for each permanent of the chosen type you control.
         this.getSpellAbility().addEffect(new PacksDisdainEffect());
@@ -92,13 +92,8 @@ class PacksDisdainEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            Choice typeChoice = new ChoiceCreatureType(game.getObject(source.getSourceId()));
-            while (!player.choose(Outcome.UnboostCreature, typeChoice, game)) {
-                if (!player.canRespond()) {
-                    return false;
-                }
-            }
+        Choice typeChoice = new ChoiceCreatureType(game.getObject(source.getSourceId()));
+        if (player != null && player.choose(Outcome.UnboostCreature, typeChoice, game)) {
             FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
             filter.add(new SubtypePredicate(SubType.byDescription(typeChoice.getChoice())));
             DynamicValue negativePermanentsCount = new PermanentsOnBattlefieldCount(filter, -1);

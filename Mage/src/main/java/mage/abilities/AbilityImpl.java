@@ -342,7 +342,7 @@ public abstract class AbilityImpl implements Ability {
                     && !getTargets().isEmpty()) {
                 Outcome outcome = getEffects().isEmpty() ? Outcome.Detriment : getEffects().get(0).getOutcome();
                 if (getTargets().chooseTargets(outcome, this.controllerId, this, noMana, game) == false) {
-                    if ((variableManaCost != null || announceString != null) && !game.isSimulation()) {
+                    if ((variableManaCost != null || announceString != null)) {
                         game.informPlayer(controller, (sourceObject != null ? sourceObject.getIdName() : "") + ": no valid targets");
                     }
                     return false; // when activation of ability is canceled during target selection
@@ -405,15 +405,13 @@ public abstract class AbilityImpl implements Ability {
             logger.debug("activate failed - non mana costs");
             return false;
         }
-        if (!game.isSimulation()) {
-            // inform about x costs now, so canceled announcements are not shown in the log
-            if ((announceString != null) && (!announceString.equals(""))) {
-                game.informPlayers(announceString);
-            }
-            if (variableManaCost != null) {
-                int xValue = getManaCostsToPay().getX();
-                game.informPlayers(controller.getLogName() + " announces a value of " + xValue + " for " + variableManaCost.getText());
-            }
+        // inform about x costs now, so canceled announcements are not shown in the log
+        if ((announceString != null) && (!announceString.equals(""))) {
+            game.informPlayers(announceString);
+        }
+        if (variableManaCost != null) {
+            int xValue = getManaCostsToPay().getX();
+            game.informPlayers(controller.getLogName() + " announces a value of " + xValue + " for " + variableManaCost.getText());
         }
         activated = true;
         // fire if tapped for mana (may only fire now because else costs of ability itself can be payed with mana of abilities that trigger for that event

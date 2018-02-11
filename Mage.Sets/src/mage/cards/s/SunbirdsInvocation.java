@@ -87,9 +87,11 @@ class SunbirdsInvocationTriggeredAbility extends SpellCastControllerTriggeredAbi
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getPlayerId().equals(this.getControllerId())) {
+        if (event.getPlayerId().equals(getControllerId())) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null && spell.getFromZone() == Zone.HAND) {
+            if (spell != null
+                    && spell.getFromZone().equals(Zone.HAND)
+                    && spell.getOwnerId().equals(getControllerId())) { // must be from the controller's hand
                 if (spell.getCard() != null) {
                     for (Effect effect : getEffects()) {
                         effect.setTargetPointer(new FixedTarget(spell.getId()));
@@ -132,7 +134,8 @@ class SunbirdsInvocationEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
-        if (controller == null || sourceObject == null) {
+        if (controller == null
+                || sourceObject == null) {
             return false;
         }
         Spell spell = game.getSpellOrLKIStack(this.getTargetPointer().getFirst(game, source));
@@ -152,7 +155,7 @@ class SunbirdsInvocationEffect extends OneShotEffect {
             if (controller.chooseTarget(Outcome.PlayForFree, cards, target, source, game)) {
                 Card card = cards.get(target.getFirstTarget(), game);
                 if (card != null) {
-                    if (controller.chooseUse(outcome, "Cast " + card.getLogName() + " without paying its mana cost?", source, game)) {
+                    if (controller.chooseUse(Outcome.Benefit, "Cast " + card.getLogName() + " without paying its mana cost?", source, game)) {
                         controller.cast(card.getSpellAbility(), game, true);
                         cards.remove(card);
                     }
@@ -167,7 +170,6 @@ class SunbirdsInvocationEffect extends OneShotEffect {
                 card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
             }
         }
-
         return true;
     }
 

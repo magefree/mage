@@ -33,7 +33,6 @@ import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.GainProtectionFromColorTargetEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -101,25 +100,27 @@ class BatheInLightEffect extends OneShotEffect {
             Permanent target = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (target != null) {
                 ChoiceColor colorChoice = new ChoiceColor();
-                if (controller.choose(Outcome.Benefit, colorChoice, game)) {
-                    game.informPlayers(target.getName() + ": " + controller.getLogName() + " has chosen " + colorChoice.getChoice());
-                    game.getState().setValue(target.getId() + "_color", colorChoice.getColor());
-                
-                    ObjectColor protectColor = (ObjectColor) game.getState().getValue(target.getId() + "_color");
-                    if (protectColor != null) {
-                        ContinuousEffect effect = new ProtectionChosenColorTargetEffect();
-                        game.addEffect(effect, source);
-                        ObjectColor color = target.getColor(game);
-                        for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source.getSourceId(), game)) {
-                            if (permanent != target && permanent.getColor(game).shares(color)) {
-                                game.getState().setValue(permanent.getId() + "_color", colorChoice.getColor());
-                                effect.setTargetPointer(new FixedTarget(permanent, game));
-                                game.addEffect(effect, source);
-                            }
+                if (!controller.choose(Outcome.Benefit, colorChoice, game)) {
+                    return false;
+                }
+                game.informPlayers(target.getName() + ": " + controller.getLogName() + " has chosen " + colorChoice.getChoice());
+                game.getState().setValue(target.getId() + "_color", colorChoice.getColor());
+
+                ObjectColor protectColor = (ObjectColor) game.getState().getValue(target.getId() + "_color");
+                if (protectColor != null) {
+                    ContinuousEffect effect = new ProtectionChosenColorTargetEffect();
+                    game.addEffect(effect, source);
+                    ObjectColor color = target.getColor(game);
+                    for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source.getSourceId(), game)) {
+                        if (permanent != target && permanent.getColor(game).shares(color)) {
+                            game.getState().setValue(permanent.getId() + "_color", colorChoice.getColor());
+                            effect.setTargetPointer(new FixedTarget(permanent, game));
+                            game.addEffect(effect, source);
                         }
                     }
+
                 }
-            return true;
+                return true;
             }
         }
         return false;

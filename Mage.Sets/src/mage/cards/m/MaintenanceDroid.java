@@ -27,6 +27,9 @@
  */
 package mage.cards.m;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -40,8 +43,8 @@ import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
@@ -49,10 +52,6 @@ import mage.filter.predicate.other.CounterCardPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
-
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 
 /**
  *
@@ -67,7 +66,7 @@ public class MaintenanceDroid extends CardImpl {
     }
 
     public MaintenanceDroid(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{W}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{W}{U}");
         this.subtype.add(SubType.DROID);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
@@ -121,10 +120,8 @@ class MaintenanceDroidEffect extends OneShotEffect {
             Choice choice = new ChoiceImpl(true);
             choice.setMessage("Choose mode");
             choice.setChoices(choices);
-            while (!controller.choose(outcome, choice, game)) {
-                if (!controller.canRespond()) {
-                    return false;
-                }
+            if (!controller.choose(outcome, choice, game)) {
+                return false;
             }
 
             String chosen = choice.getChoice();

@@ -52,6 +52,7 @@ import static mage.constants.Constants.Option.ORIGINAL_ID;
 import static mage.constants.Constants.Option.SECOND_MESSAGE;
 import static mage.constants.Constants.Option.SPECIAL_BUTTON;
 import mage.constants.PlayerAction;
+import mage.constants.TurnPhase;
 import org.apache.log4j.Logger;
 
 /**
@@ -97,7 +98,8 @@ public class FeedbackPanel extends javax.swing.JPanel {
     private void setGUISize() {
     }
 
-    public void getFeedback(FeedbackMode mode, String message, boolean special, Map<String, Serializable> options, int messageId) {
+    public void getFeedback(FeedbackMode mode, String message, boolean special, Map<String, Serializable> options,
+                            int messageId, boolean gameNeedUserFeedback, TurnPhase gameTurnPhase) {
         synchronized (this) {
             if (messageId < this.lastMessageId) {
                 LOGGER.warn("ignoring message from later source: " + messageId + ", text=" + message);
@@ -151,6 +153,8 @@ public class FeedbackPanel extends javax.swing.JPanel {
         this.helper.setLinks(btnLeft, btnRight, btnSpecial, btnUndo);
 
         this.helper.setVisible(true);
+        this.helper.setGameNeedFeedback(gameNeedUserFeedback, gameTurnPhase);
+        this.helper.autoSizeButtonsAndFeedbackState();
     }
 
     private void setButtonState(String leftText, String rightText, FeedbackMode mode) {
@@ -211,6 +215,8 @@ public class FeedbackPanel extends javax.swing.JPanel {
             if (options.containsKey("dialog")) {
                 connectedDialog = (MageDialog) options.get("dialog");
             }
+
+            this.helper.autoSizeButtonsAndFeedbackState();
         }
     }
 

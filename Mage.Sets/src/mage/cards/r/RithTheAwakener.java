@@ -40,8 +40,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.ChoiceColor;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -56,7 +56,7 @@ import mage.players.Player;
 public class RithTheAwakener extends CardImpl {
 
     public RithTheAwakener(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{G}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{G}{W}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRAGON);
 
@@ -67,7 +67,7 @@ public class RithTheAwakener extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // Whenever Rith, the Awakener deals combat damage to a player, you may pay {2}{G}. If you do, choose a color, then create a 1/1 green Saproling creature token for each permanent of that color.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
-                new DoIfCostPaid(new RithTheAwakenerEffect(), new ManaCostsImpl("{2}{G}")), false));        
+                new DoIfCostPaid(new RithTheAwakenerEffect(), new ManaCostsImpl("{2}{G}")), false));
     }
 
     public RithTheAwakener(final RithTheAwakener card) {
@@ -81,30 +81,29 @@ public class RithTheAwakener extends CardImpl {
 }
 
 class RithTheAwakenerEffect extends OneShotEffect {
-    
+
     public RithTheAwakenerEffect() {
         super(Outcome.Benefit);
         this.staticText = "choose a color, then create a 1/1 green Saproling creature token for each permanent of that color";
     }
-    
+
     public RithTheAwakenerEffect(final RithTheAwakenerEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public RithTheAwakenerEffect copy() {
         return new RithTheAwakenerEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());        
+        Player controller = game.getPlayer(source.getControllerId());
         if (controller == null) {
             return false;
         }
         ChoiceColor choice = new ChoiceColor();
-        controller.choose(outcome, choice, game);
-        if (choice.getColor() != null) {
+        if (controller.choose(outcome, choice, game)) {
             game.informPlayers(new StringBuilder(controller.getLogName()).append(" chooses ").append(choice.getColor()).toString());
             FilterPermanent filter = new FilterPermanent();
             filter.add(new ColorPredicate(choice.getColor()));

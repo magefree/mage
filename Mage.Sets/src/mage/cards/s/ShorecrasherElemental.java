@@ -45,9 +45,9 @@ import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -60,7 +60,7 @@ import mage.players.Player;
 public class ShorecrasherElemental extends CardImpl {
 
     public ShorecrasherElemental(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}{U}{U}");
         this.subtype.add(SubType.ELEMENTAL);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
@@ -106,9 +106,9 @@ class ShorecrasherElementalEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent shorecrasherElemental = game.getPermanent(source.getSourceId());
         MageObject sourceObject = source.getSourceObject(game);
-        if (shorecrasherElemental != null &&
-                sourceObject != null &&
-                new MageObjectReference(sourceObject, game).refersTo(shorecrasherElemental, game)) {
+        if (shorecrasherElemental != null
+                && sourceObject != null
+                && new MageObjectReference(sourceObject, game).refersTo(shorecrasherElemental, game)) {
             if (shorecrasherElemental.moveToExile(source.getSourceId(), sourceObject.getName(), source.getSourceId(), game)) {
                 Card card = game.getExile().getCard(source.getSourceId(), game);
                 if (card != null) {
@@ -149,18 +149,14 @@ class ShorecrasherElementalBoostEffect extends OneShotEffect {
             choice.setMessage("Select how to boost");
             choice.getChoices().add(CHOICE_1);
             choice.getChoices().add(CHOICE_2);
-            while (!choice.isChosen()) {
-                if (!controller.canRespond()) {
-                    return false;
+            if (controller.choose(outcome, choice, game)) {
+                if (choice.getChoice().equals(CHOICE_1)) {
+                    game.addEffect(new BoostSourceEffect(+1, -1, Duration.EndOfTurn), source);
+                } else {
+                    game.addEffect(new BoostSourceEffect(-1, +1, Duration.EndOfTurn), source);
                 }
-                controller.choose(outcome, choice, game);
+                return true;
             }
-            if (choice.getChoice().equals(CHOICE_1)) {
-                game.addEffect(new BoostSourceEffect(+1, -1, Duration.EndOfTurn), source);
-            } else {
-                game.addEffect(new BoostSourceEffect(-1, +1, Duration.EndOfTurn), source);
-            }
-            return true;
         }
         return false;
     }

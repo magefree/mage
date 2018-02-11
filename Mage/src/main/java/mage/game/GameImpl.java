@@ -2272,6 +2272,11 @@ public abstract class GameImpl implements Game, Serializable {
         return state.getPlayers();
     }
 
+    /**
+     * Return a list of all players ignoring the range of visible players
+     *
+     * @return
+     */
     @Override
     public PlayerList getPlayerList() {
         return state.getPlayerList();

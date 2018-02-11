@@ -82,7 +82,7 @@
               <Image iconType="3" name="/menu/preferences.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Preferences"/>
-            <Property name="toolTipText" type="java.lang.String" value="Change the settings for the different areas of XMage."/>
+            <Property name="toolTipText" type="java.lang.String" value="By changing the settings in the preferences window you can adjust the look and behaviour of xmage."/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="4"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
@@ -106,14 +106,6 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnConnectActionPerformed"/>
           </Events>
-        </Component>
-        <Component class="javax.swing.JLabel" name="lblStatus">
-          <Properties>
-            <Property name="horizontalAlignment" type="int" value="2"/>
-            <Property name="text" type="java.lang.String" value="Not connected"/>
-            <Property name="horizontalTextPosition" type="int" value="0"/>
-            <Property name="inheritsPopupMenu" type="boolean" value="false"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JToolBar$Separator" name="jSeparator1">
         </Component>
@@ -174,7 +166,7 @@
               <Image iconType="3" name="/menu/symbol.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Symbols"/>
-            <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;Load symbols from the internet.&lt;br&gt;&#xa;You need to do that only once."/>
+            <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;Load the mana and other card symbols from the internet.&lt;br&gt;&#xa;Otherwise you only see the replacement sequence like {U} for blue mana symbol.&lt;br&gt;&#xa;You need to do that only once."/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="4"/>
             <Property name="verticalTextPosition" type="int" value="3"/>

@@ -83,7 +83,7 @@ public class KeeperOfTheDead extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 
-        // {B}, {tap}: Choose target opponent who had at least two fewer creature cards in his or her graveyard than you did as you activated this ability. Destroy target nonblack creature he or she controls.
+        // {B}, {T}: Choose target opponent who had at least two fewer creature cards in his or her graveyard than you did as you activated this ability. Destroy target nonblack creature he or she controls.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new KeeperOfTheDeadEffect(), new TapSourceCost());
         ability.addCost(new ManaCostsImpl("{B}"));
         ability.addTarget(new TargetPlayer(1, 1, false, filter));
@@ -136,10 +136,10 @@ class KeeperOfDeadPredicate implements ObjectSourcePlayerPredicate<ObjectSourceP
 
 class KeeperOfTheDeadCreatureTarget extends TargetPermanent {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack creature");
+    private static final FilterCreaturePermanent nonblackCreaturefilter = new FilterCreaturePermanent("nonblack creature");
 
     static {
-        filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
+        nonblackCreaturefilter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
     }
 
     public KeeperOfTheDeadCreatureTarget() {
@@ -179,7 +179,7 @@ class KeeperOfTheDeadCreatureTarget extends TargetPermanent {
             UUID playerId = ((StackObject) object).getStackAbility().getFirstTarget();
             for (UUID targetId : availablePossibleTargets) {
                 Permanent permanent = game.getPermanent(targetId);
-                if (permanent != null && filter.match(permanent, game) && permanent.getControllerId().equals(playerId)) {
+                if (permanent != null && nonblackCreaturefilter.match(permanent, game) && permanent.getControllerId().equals(playerId)) {
                     possibleTargets.add(targetId);
                 }
             }

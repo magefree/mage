@@ -105,7 +105,7 @@ class MoxDiamondReplacementEffect extends ReplacementEffectImpl {
                 player.discard(game.getCard(target.getFirstTarget()), source, game);
                 return false;
             } else {
-                Permanent permanent = game.getPermanent(event.getTargetId());
+                Permanent permanent = game.getPermanentEntering(event.getTargetId());
                 if (permanent != null) {
                     player.moveCards(permanent, Zone.GRAVEYARD, source, game);
                 }

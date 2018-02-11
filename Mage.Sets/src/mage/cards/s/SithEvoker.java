@@ -27,6 +27,9 @@
  */
 package mage.cards.s;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -41,18 +44,14 @@ import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
-
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 
 /**
  *
@@ -115,12 +114,9 @@ class SithEvokerEffect extends OneShotEffect {
             Choice choice = new ChoiceImpl(true);
             choice.setMessage("Choose mode");
             choice.setChoices(choices);
-            while (!controller.choose(outcome, choice, game)) {
-                if (!controller.canRespond()) {
-                    return false;
-                }
+            if (!controller.choose(outcome, choice, game)) {
+                return false;
             }
-
             Card sourceCard = game.getCard(source.getSourceId());
             if (sourceCard != null) {
                 for (Object cost : source.getCosts()) {

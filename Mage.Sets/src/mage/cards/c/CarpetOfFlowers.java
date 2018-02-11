@@ -27,6 +27,7 @@
  */
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -46,8 +47,6 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
-
-import java.util.UUID;
 
 /**
  *
@@ -152,14 +151,8 @@ class CarpetOfFlowersEffect extends ManaEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            ChoiceColor choice = new ChoiceColor();
-            while (!choice.isChosen()) {
-                controller.choose(Outcome.Benefit, choice, game);
-                if (!controller.canRespond()) {
-                    return false;
-                }
-            }
+        ChoiceColor choice = new ChoiceColor();
+        if (controller != null && controller.choose(Outcome.Benefit, choice, game)) {
             int count = game.getBattlefield().count(filter, source.getSourceId(), source.getTargets().getFirstTarget(), game);
             if (count > 0) {
                 Mana mana = new Mana();

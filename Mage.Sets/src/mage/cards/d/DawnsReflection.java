@@ -38,8 +38,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.ChoiceColor;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -135,10 +135,8 @@ class DawnsReflectionManaEffect extends ManaEffect {
             Mana mana = new Mana();
             for (int i = 0; i < x; i++) {
                 ChoiceColor choiceColor = new ChoiceColor();
-                while (!controller.choose(Outcome.Benefit, choiceColor, game)) {
-                    if (!controller.isInGame()) {
-                        return false;
-                    }
+                if (!controller.choose(Outcome.Benefit, choiceColor, game)) {
+                    return false;
                 }
                 choiceColor.increaseMana(mana);
             }

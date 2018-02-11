@@ -27,6 +27,9 @@
  */
 package mage.cards.j;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -46,10 +49,6 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 
 /**
  *
@@ -127,6 +126,8 @@ class JodahsAvengerEffect extends ContinuousEffectImpl {
                         gainedAbility = ProtectionAbility.from(ObjectColor.RED);
                         break;
                 }
+            } else {
+                discard();
             }
         }
     }

@@ -27,6 +27,10 @@
  */
 package mage.cards.m;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
@@ -47,11 +51,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.players.PlayerList;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
-
 /**
  *
  * @author LevelX2
@@ -62,7 +61,7 @@ public class MysticBarrier extends CardImpl {
     static final String ALLOW_ATTACKING_RIGHT = "Allow attacking right";
 
     public MysticBarrier(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{W}");
 
         // When Mystic Barrier enters the battlefield or at the beginning of your upkeep, choose left or right.
         this.addAbility(new MysticBarrierTriggeredAbility());
@@ -95,12 +94,12 @@ class MysticBarrierTriggeredAbility extends TriggeredAbilityImpl {
     public MysticBarrierTriggeredAbility copy() {
         return new MysticBarrierTriggeredAbility(this);
     }
-    
+
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == EventType.ENTERS_THE_BATTLEFIELD || event.getType() == EventType.UPKEEP_STEP_PRE;
     }
-    
+
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == EventType.ENTERS_THE_BATTLEFIELD) {
@@ -118,14 +117,8 @@ class MysticBarrierTriggeredAbility extends TriggeredAbilityImpl {
 
 class MysticBarrierChooseEffect extends OneShotEffect {
 
-    static final String[] SET_VALUES = new String[] { MysticBarrier.ALLOW_ATTACKING_LEFT, MysticBarrier.ALLOW_ATTACKING_RIGHT };
+    static final String[] SET_VALUES = new String[]{MysticBarrier.ALLOW_ATTACKING_LEFT, MysticBarrier.ALLOW_ATTACKING_RIGHT};
     static final Set<String> CHOICES = new HashSet<>(Arrays.asList(SET_VALUES));
-    final static Choice DIRECTION_CHOICE = new ChoiceImpl(true);
-    static {
-        DIRECTION_CHOICE.setChoices(CHOICES);
-        DIRECTION_CHOICE.setMessage("Direction each player may only attack to");
-        DIRECTION_CHOICE.isRequired();
-    }
 
     public MysticBarrierChooseEffect() {
         super(Outcome.Benefit);
@@ -145,15 +138,14 @@ class MysticBarrierChooseEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            DIRECTION_CHOICE.clearChoice();
-            while (!DIRECTION_CHOICE.isChosen() && controller.canRespond()) {
-                controller.choose(outcome, DIRECTION_CHOICE, game);
-            }
-            if (!DIRECTION_CHOICE.getChoice().isEmpty()) {
-                game.getState().setValue(new StringBuilder("attack_direction_").append(source.getSourceId()).toString(), DIRECTION_CHOICE.getChoice());
+            Choice directionChoice = new ChoiceImpl(true);
+            directionChoice.setChoices(CHOICES);
+            directionChoice.setMessage("Direction each player may only attack to");
+            directionChoice.isRequired();
+            if (!controller.choose(outcome, directionChoice, game)) {
+                game.getState().setValue("attack_direction_" + source.getSourceId(), directionChoice.getChoice());
                 return true;
             }
-
         }
         return false;
     }
@@ -161,12 +153,12 @@ class MysticBarrierChooseEffect extends OneShotEffect {
 
 class MysticBarrierReplacementEffect extends ReplacementEffectImpl {
 
-    MysticBarrierReplacementEffect ( ) {
+    MysticBarrierReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Each player may attack only the opponent seated nearest him or her in the last chosen direction and planeswalkers controlled by that player";
     }
 
-    MysticBarrierReplacementEffect ( MysticBarrierReplacementEffect effect ) {
+    MysticBarrierReplacementEffect(MysticBarrierReplacementEffect effect) {
         super(effect);
     }
 
@@ -179,7 +171,7 @@ class MysticBarrierReplacementEffect extends ReplacementEffectImpl {
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.DECLARE_ATTACKER;
     }
-    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (game.getPlayers().size() > 2) {
@@ -217,7 +209,7 @@ class MysticBarrierReplacementEffect extends ReplacementEffectImpl {
                                     return true;
                                 }
                             }
-                        }                        
+                        }
                     }
                 }
             }

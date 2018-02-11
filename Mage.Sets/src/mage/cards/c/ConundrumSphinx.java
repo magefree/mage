@@ -102,10 +102,8 @@ class ConundrumSphinxEffect extends OneShotEffect {
                     if (player.getLibrary().hasCards()) {
                         cardChoice.clearChoice();
                         cardChoice.setMessage("Name a card");
-                        while (!player.choose(Outcome.DrawCard, cardChoice, game) && player.canRespond()) {
-                            if (!player.canRespond()) {
-                                continue Players;
-                            }
+                        if (!player.choose(Outcome.DrawCard, cardChoice, game) && player.canRespond()) {
+                            continue Players;
                         }
                         String cardName = cardChoice.getChoice();
                         game.informPlayers(sourceObject.getLogName() + ", player: " + player.getLogName() + ", named: [" + cardName + ']');

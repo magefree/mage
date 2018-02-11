@@ -51,7 +51,7 @@ import mage.target.TargetPlayer;
 public class Addle extends CardImpl {
 
     public Addle(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}");
 
         // Choose a color. Target player reveals his or her hand and you choose a card of that color from it. That player discards that card.
         this.getSpellAbility().addEffect(new AddleEffect());
@@ -87,17 +87,14 @@ class AddleEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if(controller != null) {
-            ChoiceColor choice = new ChoiceColor();
-            controller.choose(outcome, choice, game);
+        ChoiceColor choice = new ChoiceColor();
+        if (controller != null && controller.choose(outcome, choice, game)) {
             ObjectColor color = choice.getColor();
-            if(color != null) {
-                game.informPlayers(controller.getLogName() + " chooses " + color + '.');
-                FilterCard filter = new FilterCard();
-                filter.add(new ColorPredicate(color));
-                Effect effect = new DiscardCardYouChooseTargetEffect(filter);
-                return effect.apply(game, source);
-            }
+            game.informPlayers(controller.getLogName() + " chooses " + color + '.');
+            FilterCard filter = new FilterCard();
+            filter.add(new ColorPredicate(color));
+            Effect effect = new DiscardCardYouChooseTargetEffect(filter);
+            return effect.apply(game, source);
         }
         return false;
     }

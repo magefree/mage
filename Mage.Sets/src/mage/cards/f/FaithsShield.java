@@ -92,11 +92,8 @@ class FaithsShieldEffect extends OneShotEffect {
         if (controller != null && mageObject != null) {
             if (FatefulHourCondition.instance.apply(game, source)) {
                 ChoiceColor choice = new ChoiceColor();
-                while (!choice.isChosen()) {
-                    controller.choose(Outcome.Protect, choice, game);
-                    if (!controller.canRespond()) {
-                        return false;
-                    }
+                if (!controller.choose(Outcome.Protect, choice, game)) {
+                    return false;
                 }
                 if (choice.getColor() != null) {
                     game.informPlayers(mageObject.getLogName() + ": " + controller.getLogName() + " has chosen " + choice.getChoice());

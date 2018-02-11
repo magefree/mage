@@ -68,7 +68,7 @@ public class BestowTest extends CardTestPlayerBase {
     @Test
     public void bestowEnchantmentToCreature() {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
-        addCard(Zone.BATTLEFIELD, playerA, "Silent Artisan");
+        addCard(Zone.BATTLEFIELD, playerA, "Silent Artisan"); // 3/5
         addCard(Zone.HAND, playerA, "Hopeful Eidolon");
         addCard(Zone.HAND, playerA, "Gods Willing");
 

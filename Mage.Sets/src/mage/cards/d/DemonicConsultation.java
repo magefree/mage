@@ -48,7 +48,7 @@ import mage.players.Player;
 public class DemonicConsultation extends CardImpl {
 
     public DemonicConsultation(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{B}");
 
         // Name a card. Exile the top six cards of your library, then reveal cards from the top of your library until you reveal the named card. Put that card into your hand and exile all other cards revealed this way.
         this.getSpellAbility().addEffect(new DemonicConsultationEffect());
@@ -88,10 +88,8 @@ class DemonicConsultationEffect extends OneShotEffect {
             // Name a card.
             Choice choice = new ChoiceImpl();
             choice.setChoices(CardRepository.instance.getNames());
-            while (!controller.choose(Outcome.Benefit, choice, game)) {
-                if (!controller.canRespond()) {
-                    return false;
-                }
+            if (!controller.choose(Outcome.Benefit, choice, game)) {
+                return false;
             }
             String name = choice.getChoice();
             game.informPlayers("Card named: " + name);

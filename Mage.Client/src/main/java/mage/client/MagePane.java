@@ -35,15 +35,13 @@ package mage.client;
 
 import java.awt.AWTEvent;
 import java.awt.KeyboardFocusManager;
-import java.beans.PropertyVetoException;
-import javax.swing.*;
-import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
 public abstract class MagePane extends javax.swing.JLayeredPane {
+
     private String title = "no title set";
 
     /**

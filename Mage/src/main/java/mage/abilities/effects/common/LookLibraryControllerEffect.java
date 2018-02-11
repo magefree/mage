@@ -177,18 +177,9 @@ public class LookLibraryControllerEffect extends OneShotEffect {
         switch (targetZoneLookedCards) {
             case LIBRARY:
                 if (putOnTop) {
-                    player.putCardsOnTopOfLibrary(cards, game, source, true);
+                    player.putCardsOnTopOfLibrary(cards, game, source, !backInRandomOrder);
                 } else {
-                    if (backInRandomOrder) {
-                        Cards newOrder = new CardsImpl();
-                        while (!cards.isEmpty()) {
-                            Card card = cards.getRandom(game);
-                            newOrder.add(card);
-                            cards.remove(card);
-                        }
-                        cards = newOrder;
-                    }
-                    player.putCardsOnBottomOfLibrary(cards, game, source, true);
+                    player.putCardsOnBottomOfLibrary(cards, game, source, !backInRandomOrder);
                 }
                 break;
             case GRAVEYARD:

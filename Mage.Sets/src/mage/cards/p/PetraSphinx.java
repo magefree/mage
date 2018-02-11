@@ -94,15 +94,12 @@ class PetraSphinxEffect extends OneShotEffect {
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
         if (controller != null && sourceObject != null && player != null) {
 
-
             if (player.getLibrary().hasCards()) {
                 Choice cardChoice = new ChoiceImpl();
                 cardChoice.setChoices(CardRepository.instance.getNames());
                 cardChoice.setMessage("Name a card");
-                while (!player.choose(Outcome.DrawCard, cardChoice, game)) {
-                    if (!player.canRespond()) {
-                        return false;
-                    }
+                if (!player.choose(Outcome.DrawCard, cardChoice, game)) {
+                    return false;
                 }
                 String cardName = cardChoice.getChoice();
                 game.informPlayers(sourceObject.getLogName() + ", player: " + player.getLogName() + ", named: [" + cardName + ']');

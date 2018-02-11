@@ -206,3 +206,4 @@ Worldwake|WWK|
 Ixalan|XLN|
 Zendikar|ZEN|
 Star Wars|SWS|
+Happy Holidays|HHO|
