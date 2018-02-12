@@ -254,6 +254,14 @@ public class SubTypeChangingEffectsTest extends CardTestPlayerBase {
         // Creatures you control are the chosen type in addition to their other types. The same is true for creature spells you control and creature cards you own that aren't on the battlefield.
         addCard(Zone.HAND, playerA, "Arcane Adaptation", 1); // Enchantment {2}{U}
         addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 8);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
+
+        // Create a 5/5 green Wurm creature token with trample.
+        addCard(Zone.HAND, playerA, "Advent of the Wurm", 1); // Instant {1}{G}{G}{W}
+        // Create a 4/4 green Beast creature token.
+        // Flashback {2}{G}{G}{G} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
+        addCard(Zone.HAND, playerA, "Beast Attack", 1); // Instant {2}{G}{G}{G}
 
         addCard(Zone.HAND, playerA, "Silvercoat Lion");
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
@@ -266,8 +274,12 @@ public class SubTypeChangingEffectsTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion");
         addCard(Zone.GRAVEYARD, playerA, "Silvercoat Lion");
 
+        castSpell(1, PhaseStep.UPKEEP, playerA, "Advent of the Wurm");
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Arcane Adaptation");
         setChoice(playerA, "Orc");
+
+        castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, "Beast Attack");
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Disenchant", "Arcane Adaptation");
 
@@ -275,11 +287,21 @@ public class SubTypeChangingEffectsTest extends CardTestPlayerBase {
         execute();
 
         assertGraveyardCount(playerA, "Arcane Adaptation", 1);
+        assertGraveyardCount(playerA, "Advent of the Wurm", 1);
+        assertGraveyardCount(playerA, "Beast Attack", 1);
         assertGraveyardCount(playerB, "Disenchant", 1);
 
         Permanent silvercoatLion = getPermanent("Silvercoat Lion", playerA);
         Assert.assertEquals(true, silvercoatLion.getSubtype(currentGame).contains(SubType.CAT));
         Assert.assertEquals(false, silvercoatLion.getSubtype(currentGame).contains(SubType.ORC));
+
+        Permanent beast = getPermanent("Beast", playerA);
+        Assert.assertEquals(true, beast.getSubtype(currentGame).contains(SubType.BEAST));
+        Assert.assertEquals(false, beast.getSubtype(currentGame).contains(SubType.ORC));
+
+        Permanent wurm = getPermanent("Wurm", playerA);
+        Assert.assertEquals(true, wurm.getSubtype(currentGame).contains(SubType.WURM));
+        Assert.assertEquals(false, wurm.getSubtype(currentGame).contains(SubType.ORC));
 
         for (Card card : playerA.getLibrary().getCards(currentGame)) {
             if (card.isCreature()) {
