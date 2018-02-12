@@ -31,7 +31,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.Proxy;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
@@ -43,6 +45,7 @@ import mage.constants.SubType;
 import org.apache.log4j.Logger;
 import org.mage.plugins.card.images.CardDownloadData;
 import org.mage.plugins.card.images.DownloadPictures;
+import org.mage.plugins.card.utils.CardImageUtils;
 
 /**
  *
@@ -225,10 +228,13 @@ public enum TokensMtgImageSource implements CardImageSource {
                     logger.warn("Failed to get tokens description from resource file tokens-mtg-onl-list.csv", exception);
                 }
 
+                String urlString = "http://tokens.mtg.onl/data/SetsWithTokens.csv";
+                Proxy proxy = CardImageUtils.getProxyFromPreferences();
+                URLConnection conn = proxy == null ? new URL(urlString).openConnection() : new URL(urlString).openConnection(proxy);
+
                 // description on site may contain new information
                 // try to add it
-                URL url = new URL("http://tokens.mtg.onl/data/SetsWithTokens.csv");
-                try (InputStream inputStream = url.openStream()) {
+                try (InputStream inputStream = conn.getURL().openStream()) {
                     List<TokenData> siteTokensData = parseTokensData(inputStream);
                     for (TokenData siteData : siteTokensData) {
                         // logger.info("TOK: " + siteData.getExpansionSetCode() + "/" + siteData.getName());
