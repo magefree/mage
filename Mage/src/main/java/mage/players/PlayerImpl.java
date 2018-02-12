@@ -1182,9 +1182,11 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     protected void restoreState(int bookmark, String text, Game game) {
-        game.restoreState(bookmark, text);
-        if (storedBookmark >= bookmark) {
-            resetStoredBookmark(game);
+        if (storedBookmark > -1) { // e.g. a turn rollback sets this to -1 so no more rollback of current action may be done
+            game.restoreState(bookmark, text);
+            if (storedBookmark >= bookmark) {
+                resetStoredBookmark(game);
+            }
         }
     }
 
@@ -2334,12 +2336,13 @@ public abstract class PlayerImpl implements Player, Serializable {
                     count = searchedLibrary.count(target.getFilter(), game);
                 } else {
                     Player targetPlayer = game.getPlayer(targetPlayerId);
-                    if (targetPlayer != null) {
-                        if (cardsFromTop == null) {
-                            cardsFromTop = new ArrayList<>(targetPlayer.getLibrary().getTopCards(game, librarySearchLimit));
-                        } else {
-                            cardsFromTop.retainAll(targetPlayer.getLibrary().getCards(game));
-                        }
+                    if (targetPlayer == null) {
+                        return false;
+                    }
+                    if (cardsFromTop == null) {
+                        cardsFromTop = new ArrayList<>(targetPlayer.getLibrary().getTopCards(game, librarySearchLimit));
+                    } else {
+                        cardsFromTop.retainAll(targetPlayer.getLibrary().getCards(game));
                     }
                     newTarget.setCardLimit(Math.min(librarySearchLimit, cardsFromTop.size()));
                     count = Math.min(searchedLibrary.count(target.getFilter(), game), librarySearchLimit);
@@ -2390,7 +2393,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                         chooseCard.setMessage("Which creature do you wish to cast from your library?");
                         Set<String> choice = new LinkedHashSet<>();
                         for (Entry<UUID, String> entry : libraryCastableCardTracker.entrySet()) {
-                            choice.add(new AbstractMap.SimpleEntry<UUID, String>(entry).getValue());
+                            choice.add(new AbstractMap.SimpleEntry<>(entry).getValue());
                         }
                         chooseCard.setChoices(choice);
                         while (!choice.isEmpty()) {
@@ -2454,6 +2457,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     /**
      * @param game
      * @param appliedEffects
+     * @param numSides Number of sides the dice has
      * @return the number that the player rolled
      */
     @Override
@@ -3214,8 +3218,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public void setStoredBookmark(int storedBookmark
-    ) {
+    public void setStoredBookmark(int storedBookmark) {
         this.storedBookmark = storedBookmark;
     }
 
@@ -3801,5 +3804,12 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
 
         return this.getId().equals(obj.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 89 * hash + Objects.hashCode(this.playerId);
+        return hash;
     }
 }

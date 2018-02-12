@@ -2953,6 +2953,7 @@ public abstract class GameImpl implements Game, Serializable {
                     executingRollback = true;
                     for (Player playerObject : getPlayers().values()) {
                         if (playerObject.isHuman() && playerObject.isInGame()) {
+                            playerObject.resetStoredBookmark(this);
                             playerObject.abort();
                             playerObject.resetPlayerPassedActions();
                         }
