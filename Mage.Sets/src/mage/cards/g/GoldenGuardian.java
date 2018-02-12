@@ -151,10 +151,7 @@ class GoldenGuardianDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (((ZoneChangeEvent) event).isDiesEvent()) {
-            return true;
-        }
-        return false;
+        return ((ZoneChangeEvent) event).isDiesEvent() && event.getTargetId().equals(getSourceId());
     }
 
     @Override
