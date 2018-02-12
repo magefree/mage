@@ -1884,6 +1884,7 @@ public abstract class GameImpl implements Game, Serializable {
                                     if (card != null && card.isCreature()) {
                                         UUID wasAttachedTo = perm.getAttachedTo();
                                         perm.attachTo(null, this);
+                                        BestowAbility.becomeCreature(perm, this);
                                         fireEvent(new GameEvent(GameEvent.EventType.UNATTACHED, wasAttachedTo, perm.getId(), perm.getControllerId()));
                                     } else if (movePermanentToGraveyardWithInfo(perm)) {
                                         somethingHappened = true;
@@ -1909,7 +1910,9 @@ public abstract class GameImpl implements Game, Serializable {
                             if (attachedTo == null
                                     || !((TargetCard) spellAbility.getTargets().get(0)).canTarget(perm.getControllerId(), perm.getAttachedTo(), spellAbility, this)) {
                                 if (movePermanentToGraveyardWithInfo(perm)) {
-                                    attachedTo.removeAttachment(perm.getId(), this);
+                                    if (attachedTo != null) {
+                                        attachedTo.removeAttachment(perm.getId(), this);
+                                    }
                                     somethingHappened = true;
                                 }
                             }
