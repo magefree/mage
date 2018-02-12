@@ -143,7 +143,6 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
     @Override
     public boolean choose(Outcome outcome, Target target, UUID sourceId, Game game, Map<String, Serializable> options) {
-        System.out.println("choose in ComputerPlayer");
         if (log.isDebugEnabled()) {
             log.debug("chooseTarget: " + outcome.toString() + ':' + target.toString());
         }
@@ -397,7 +396,6 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
     @Override
     public boolean chooseTarget(Outcome outcome, Target target, Ability source, Game game) {
-        System.out.println("chooseTarget in ComputerPlayer");
         if (log.isDebugEnabled()) {
             log.debug("chooseTarget: " + outcome.toString() + ':' + target.toString());
         }
@@ -756,7 +754,6 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     } //end of chooseTarget method
 
     protected Card pickTarget(List<Card> cards, Outcome outcome, Target target, Ability source, Game game) {
-        System.out.println("pickTarget in ComputerPlayer");
         Card card;
         while (!cards.isEmpty()) {
             if (outcome.isGood()) {
@@ -778,7 +775,6 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
     @Override
     public boolean chooseTargetAmount(Outcome outcome, TargetAmount target, Ability source, Game game) {
-        System.out.println("chooseTargetAmount in ComputerPlayer");
         if (log.isDebugEnabled()) {
             log.debug("chooseTarget: " + outcome.toString() + ':' + target.toString());
         }
@@ -819,7 +815,6 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
     @Override
     public boolean priority(Game game) {
-        System.out.println("priority in ComputerPlayer");
         game.resumeTimer(getTurnControlledBy());
         log.debug("priority");
         boolean result = priorityPlay(game);
@@ -828,7 +823,6 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     }
 
     private boolean priorityPlay(Game game) {
-        System.out.println("priorityPlay in ComputerPlayer");
         UUID opponentId = game.getOpponents(playerId).iterator().next();
         if (game.getActivePlayerId().equals(playerId)) {
             if (game.isMainPhase() && game.getStack().isEmpty()) {
@@ -985,7 +979,6 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     }
 
     protected void findPlayables(Game game) {
-        System.out.println("Here in findPlayables");
         playableInstant.clear();
         playableNonInstant.clear();
         unplayable.clear();
