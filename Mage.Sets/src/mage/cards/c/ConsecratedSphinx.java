@@ -48,7 +48,7 @@ import mage.game.events.GameEvent.EventType;
 public class ConsecratedSphinx extends CardImpl {
 
     public ConsecratedSphinx(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
         this.subtype.add(SubType.SPHINX);
 
         this.power = new MageInt(4);
@@ -94,7 +94,8 @@ class ConsecratedSphinxTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return game.getOpponents(this.getControllerId()).contains(event.getPlayerId());
+        return game.getOpponents(getControllerId()).contains(event.getPlayerId())
+                && game.getPermanent(sourceId) != null; // the Sphinx must be on the battlefield
     }
 
     @Override
