@@ -753,7 +753,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             currentConnection.setPort(port);
             String allMAC = "";
             try {
-                allMAC = currentConnection.getMAC();
+                allMAC = Connection.getMAC();
             } catch (SocketException ex) {
             }
             currentConnection.setUserIdStr(System.getProperty("user.name") + ":" + System.getProperty("os.name") + ":" + MagePreferences.getUserNames() + ":" + allMAC);

@@ -27,6 +27,19 @@
  */
 package mage.client.deckeditor.collection.viewer;
 
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import static java.lang.Math.min;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.UUID;
+import javax.imageio.ImageIO;
+import javax.swing.*;
 import mage.cards.*;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
@@ -42,29 +55,15 @@ import mage.client.util.sets.ConstructedFormats;
 import mage.components.ImagePanel;
 import mage.components.ImagePanelStyle;
 import mage.constants.Rarity;
-import mage.view.CardView;
-import org.apache.log4j.Logger;
-import org.mage.card.arcane.ManaSymbols;
-
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.util.*;
-import java.util.List;
-
 import mage.game.command.Emblem;
 import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.Token;
+import mage.view.CardView;
 import mage.view.EmblemView;
 import mage.view.PermanentView;
+import org.apache.log4j.Logger;
+import org.mage.card.arcane.ManaSymbols;
 import org.mage.plugins.card.images.CardDownloadData;
-
-import static java.lang.Math.min;
 import static org.mage.plugins.card.images.DownloadPictures.getTokenCardUrls;
 
 /**
@@ -143,7 +142,6 @@ public class MageBook extends JComponent {
         add(jPanelRight, BorderLayout.LINE_END);
 
         int captionHeight = Math.max(30, pageLeft.getHeight()); // caption size = next-prev images
-
 
         // Top Panel (left page + (caption / stats) + right page
         jPanelTop = new JPanel();
@@ -290,11 +288,9 @@ public class MageBook extends JComponent {
 
     public int showTokens() {
         jLayeredPane.removeAll();
-
         List<Token> tokens = getTokens(currentPage, currentSet);
-        int size = tokens.size();
-
         if (tokens != null && tokens.size() > 0) {
+            int size = tokens.size();
             Rectangle rectangle = new Rectangle();
             rectangle.translate(OFFSET_X, OFFSET_Y);
             for (int i = 0; i < min(conf.CARDS_PER_PAGE / 2, size); i++) {
@@ -316,35 +312,34 @@ public class MageBook extends JComponent {
 
             jLayeredPane.repaint();
         }
-        
+
         return tokens.size();
     }
 
     public void showEmblems(int numTokens) {
         List<Emblem> emblems = getEmblems(currentPage, currentSet, numTokens);
-        int size = emblems.size();
-        System.out.println ("Size of origins in " + currentSet + " = " + emblems.size());
-
+        // System.out.println ("Size of origins in " + currentSet + " = " + emblems.size());
         if (emblems != null && emblems.size() > 0) {
+            int size = emblems.size();
             Rectangle rectangle = new Rectangle();
             rectangle.translate(OFFSET_X, OFFSET_Y);
             // calculate the x offset of the second (right) page
             int second_page_x = (conf.WIDTH - 2 * LEFT_RIGHT_PAGES_WIDTH)
                     - (cardDimensions.frameWidth + CardPosition.GAP_X) * conf.CARD_COLUMNS + CardPosition.GAP_X - OFFSET_X;
 
-            // Already have numTokens tokens presented. Appending the emblems to the end of these.            
+            // Already have numTokens tokens presented. Appending the emblems to the end of these.
             numTokens = numTokens % conf.CARDS_PER_PAGE;
             if (numTokens < conf.CARDS_PER_PAGE / 2) {
                 for (int z = 0; z < numTokens && z < conf.CARDS_PER_PAGE / 2; z++) {
                     rectangle = CardPosition.translatePosition(z, rectangle, conf);
                 }
             } else {
-                rectangle.setLocation(second_page_x, OFFSET_Y);            
+                rectangle.setLocation(second_page_x, OFFSET_Y);
                 for (int z = 0; z < numTokens - conf.CARDS_PER_PAGE / 2; z++) {
                     rectangle = CardPosition.translatePosition(z, rectangle, conf);
                 }
             }
-            
+
             int lastI = 0;
             for (int i = 0; i < size && i + numTokens < conf.CARDS_PER_PAGE / 2; i++) {
                 Emblem emblem = emblems.get(i);
@@ -388,8 +383,7 @@ public class MageBook extends JComponent {
         int dx = implemented ? 15 : 5;
         label.setBounds(rectangle.x + dx, rectangle.y + cardDimensions.frameHeight + 7, 110, 30);
         jLayeredPane.add(label);
-        */
-
+         */
         // card number label
         JLabel cardNumber = new JLabel();
         int dy = -5; // image panel have empty space in bottom (bug?), need to move label up
@@ -436,26 +430,25 @@ public class MageBook extends JComponent {
         return cards.subList(start, end);
     }
 
-    private void updateCardStats(String setCode, boolean isCardsShow){
+    private void updateCardStats(String setCode, boolean isCardsShow) {
         // sets do not have total cards number, it's a workaround
 
         ExpansionSet set = Sets.findSet(setCode);
-        if (set != null){
+        if (set != null) {
             setCaption.setText(set.getCode() + " - " + set.getName());
-        }else{
+        } else {
             setCaption.setText("ERROR");
             setInfo.setText("ERROR");
             return;
         }
 
-        if (!isCardsShow){
+        if (!isCardsShow) {
             // tokens or emblems, stats not need
             setInfo.setText("");
             return;
         }
 
         // cards stats
-
         int startNumber = 9999;
         int endNumber = 0;
 
@@ -463,11 +456,11 @@ public class MageBook extends JComponent {
 
         // first run for numbers list
         LinkedList<Integer> haveNumbers = new LinkedList<>();
-        for (ExpansionSet.SetCardInfo card: cards){
+        for (ExpansionSet.SetCardInfo card : cards) {
             int cardNumber = card.getCardNumberAsInt();
 
             // skip xmage special numbers for cards (TODO: replace full art cards numbers from 180+20 to 180b, 180c and vice versa like scryfall)
-            if(cardNumber > 500){
+            if (cardNumber > 500) {
                 continue;
             }
 
@@ -479,19 +472,19 @@ public class MageBook extends JComponent {
         // second run for empty numbers
         int countHave = haveNumbers.size();
         int countNotHave = 0;
-        if (cards.size() > 0){
-           for(int i = startNumber; i <= endNumber; i++){
-               if(!haveNumbers.contains(i)){
-                   countNotHave++;
-               }
-           }
+        if (cards.size() > 0) {
+            for (int i = startNumber; i <= endNumber; i++) {
+                if (!haveNumbers.contains(i)) {
+                    countNotHave++;
+                }
+            }
         }
 
         // result
         setInfo.setText(String.format("Have %d cards of %d", countHave, countHave + countNotHave));
         if (countNotHave > 0) {
             setInfo.setForeground(new Color(150, 0, 0));
-        }else{
+        } else {
             setInfo.setForeground(jLayeredPane.getForeground());
         }
     }
@@ -520,21 +513,10 @@ public class MageBook extends JComponent {
                     if (newToken != null && newToken instanceof mage.game.permanent.token.Token) {
                         ((Token) newToken).setExpansionSetCodeForImage(set);
                         ((Token) newToken).setOriginalExpansionSetCode(set);
+                        ((Token) newToken).setTokenType(token.getType());
                         tokens.add((Token) newToken);
                     }
-                } catch (ClassNotFoundException ex) {
-                    // Swallow exception
-                } catch (NoSuchMethodException ex) {
-                    // Swallow exception
-                } catch (SecurityException ex) {
-                    // Swallow exception
-                } catch (InstantiationException ex) {
-                    // Swallow exception
-                } catch (IllegalAccessException ex) {
-                    // Swallow exception
-                } catch (IllegalArgumentException ex) {
-                    // Swallow exception
-                } catch (InvocationTargetException ex) {
+                } catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
                     // Swallow exception
                 }
             }
@@ -571,7 +553,7 @@ public class MageBook extends JComponent {
                     Object newEmblem = cons.newInstance();
                     if (newEmblem != null && newEmblem instanceof mage.game.command.Emblem) {
                         ((Emblem) newEmblem).setExpansionSetCodeForImage(set);
-                        
+
                         emblems.add((Emblem) newEmblem);
                     }
                 } catch (ClassNotFoundException ex) {
@@ -593,12 +575,12 @@ public class MageBook extends JComponent {
         }
         int start = 0;
         int end = emblems.size();
-        
-        if ((page + 1) * conf.CARDS_PER_PAGE < numTokens + emblems.size()) { 
+
+        if ((page + 1) * conf.CARDS_PER_PAGE < numTokens + emblems.size()) {
             end = (page + 1) * conf.CARDS_PER_PAGE - numTokens;
             pageRight.setVisible(true);
         }
-        
+
         if (emblems.size() > conf.CARDS_PER_PAGE) {
             pageLeft.setVisible(true);
             pageRight.setVisible(true);

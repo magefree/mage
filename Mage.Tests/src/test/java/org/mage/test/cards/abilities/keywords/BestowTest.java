@@ -27,7 +27,10 @@
  */
 package org.mage.test.cards.abilities.keywords;
 
+import mage.abilities.mana.ManaOptions;
+import mage.constants.CardType;
 import mage.constants.PhaseStep;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
 import org.junit.Assert;
@@ -445,4 +448,48 @@ public class BestowTest extends CardTestPlayerBase {
         assertTapped("Elite Vanguard", true);
         assertPowerToughness(playerA, "Elite Vanguard", 5, 3); // 2/1 + 3/2 = 5/3
     }
+
+    /**
+     * When a creature with Nighthowler attatched gets enchanted with Song of
+     * the Dryads, Nightholwer doesn't become a creature and gets turned into a
+     * card without stats.
+     */
+    @Test
+    public void testEnchantedChangedWithSongOfTheDryads() {
+        // Enchantment Creature — Horror
+        // 0/0
+        // Bestow {2}{B}{B}
+        // Nighthowler and enchanted creature each get +X/+X, where X is the number of creature cards in all graveyards.
+        addCard(Zone.HAND, playerA, "Nighthowler");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion"); // {1}{W} 2/2 creature
+
+        addCard(Zone.GRAVEYARD, playerA, "Pillarfield Ox");
+        addCard(Zone.GRAVEYARD, playerB, "Pillarfield Ox");
+
+        // Enchant permanent
+        // Enchanted permanent is a colorless Forest land.
+        addCard(Zone.BATTLEFIELD, playerB, "Forest", 3);
+        addCard(Zone.HAND, playerB, "Song of the Dryads"); // Enchantment Aura {2}{G}
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Nighthowler using bestow", "Silvercoat Lion");
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Song of the Dryads", "Silvercoat Lion");
+        setStopAt(2, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerB, "Song of the Dryads", 1);
+
+        ManaOptions options = playerA.getAvailableManaTest(currentGame);
+        Assert.assertEquals("Player should be able to create 1 green mana", "{G}", options.get(0).toString());
+
+        assertPermanentCount(playerA, "Nighthowler", 1);
+        assertPowerToughness(playerA, "Nighthowler", 2, 2);
+        assertType("Nighthowler", CardType.CREATURE, true);
+        assertType("Nighthowler", CardType.ENCHANTMENT, true);
+
+        Permanent nighthowler = getPermanent("Nighthowler");
+        Assert.assertFalse("The unattached Nighthowler may not have the aura subtype.", nighthowler.getSubtype(currentGame).contains(SubType.AURA));
+    }
+
 }

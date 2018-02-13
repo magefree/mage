@@ -39,6 +39,7 @@ public class TilonallisSummonerElementalToken extends Token {
 
     public TilonallisSummonerElementalToken() {
         super("Elemental", "1/1 red Elemental creature tokens");
+        setTokenType(2);
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.ELEMENTAL);
 
