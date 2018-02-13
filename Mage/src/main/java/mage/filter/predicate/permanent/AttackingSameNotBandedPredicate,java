@@ -49,11 +49,9 @@ public class AttackingSameNotBandedPredicate implements Predicate<Permanent> {
     @Override
     public boolean apply(Permanent input, Game game) {
         CombatGroup combatGroup = game.getCombat().findGroup(input.getId());
-        if (combatGroup != null) {
-            return input.isAttacking()
+        return combatGroup != null
+                    && input.isAttacking()
                     && input.getBandedCards().isEmpty()
                     && combatGroup.getDefenderId().equals(defenderId);
-        }
-        return false;
     }
 }
