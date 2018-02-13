@@ -34,6 +34,23 @@ public final class ArrowUtil {
         }
     }
 
+    public static void drawArrowsForBandedCards(TransferData data, Point parentPoint) {
+        if (data.card.getBandedCards() != null && !data.card.getBandedCards().isEmpty()) {
+            Point me = new Point(data.locationOnScreen);
+            me.translate(-parentPoint.x, -parentPoint.y);
+            for (PlayAreaPanel pa : MageFrame.getGame(data.gameId).getPlayers().values()) {
+                for (UUID uuid : data.card.getBandedCards()) {
+                    MagePermanent permanent = pa.getBattlefieldPanel().getPermanents().get(uuid);
+                    if (permanent != null) {
+                        Point target = permanent.getLocationOnScreen();
+                        target.translate(-parentPoint.x, -parentPoint.y);
+                        ArrowBuilder.getBuilder().addArrow(data.gameId, (int) me.getX() + 35, (int) me.getY(), (int) target.getX() + 40, (int) target.getY() + 10, Color.yellow, ArrowBuilder.Type.BANDED);
+                    }
+                }
+            }
+        }
+    }
+
     public static void drawArrowsForEnchantPlayers(TransferData data, Point parentPoint) {
         if (data.gameId != null && MageFrame.getGame(data.gameId) != null) {
             for (PlayAreaPanel pa : MageFrame.getGame(data.gameId).getPlayers().values()) {

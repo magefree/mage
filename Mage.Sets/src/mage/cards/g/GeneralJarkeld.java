@@ -113,22 +113,36 @@ class GeneralJarkeldSwitchBlockersEffect extends OneShotEffect {
                     Set<Permanent> blockers2 = new HashSet<>();
                     Set<Permanent> multiBlockers = new HashSet<>();
                     
+                    blockerSearch1:
                     for (UUID blockerId : chosenGroup1.getBlockers()) {
                         Permanent blocker = game.getPermanent(blockerId);
                         if (blocker != null) {
-                            if (blocker.getBlocking() > 1) {
-                                multiBlockers.add(blocker);
+                            if (game.getCombat().blockingGroupsContains(blocker.getId())) { // if (blocker.getBlocking() > 1) {
+                                for (CombatGroup group : game.getCombat().getBlockingGroups()) {
+                                    if (group.getAttackers().size() > 1) {
+                                        multiBlockers.add(blocker);
+                                        continue blockerSearch1;
+                                    }
+                                }
+                                blockers1.add(blocker); // this should not happen
                             } else {
                                 blockers1.add(blocker);
                             }
                         }
                     }
                     
+                    blockerSearch2:
                     for (UUID blockerId : chosenGroup2.getBlockers()) {
                         Permanent blocker = game.getPermanent(blockerId);
                         if (blocker != null) {
-                            if (blocker.getBlocking() > 1) {
-                                multiBlockers.add(blocker);
+                            if (game.getCombat().blockingGroupsContains(blocker.getId())) { // if (blocker.getBlocking() > 1) {
+                                for (CombatGroup group : game.getCombat().getBlockingGroups()) {
+                                    if (group.getAttackers().size() > 1) {
+                                        multiBlockers.add(blocker);
+                                        continue blockerSearch2;
+                                    }
+                                }
+                                blockers2.add(blocker); // this should not happen
                             } else {
                                 blockers2.add(blocker);
                             }
@@ -141,11 +155,11 @@ class GeneralJarkeldSwitchBlockersEffect extends OneShotEffect {
                     
                     // the ability doesn't unblock a group that loses all blockers, however it will newly block a previously unblocked group if it gains a blocker this way
                     if (!(chosenGroup1.getBlockers().isEmpty())) {
-                        chosenGroup1.setBlocked(true);
+                        chosenGroup1.setBlocked(true, game);
                         chosenGroup1.pickBlockerOrder(attacker1.getControllerId(), game);
                     }
                     if (!(chosenGroup2.getBlockers().isEmpty())) {
-                        chosenGroup2.setBlocked(true);
+                        chosenGroup2.setBlocked(true, game);
                         chosenGroup2.pickBlockerOrder(attacker2.getControllerId(), game);
                     }
                     return true;
@@ -168,42 +182,40 @@ class GeneralJarkeldSwitchBlockersEffect extends OneShotEffect {
         // for handling multi-blockers (Two Headed Giant of Foriys, etc.)
         blockerIteration:
         for (Permanent blocker : blockers) {
-            if (blocker.getBlocking() > 1) {
-                CombatGroup blockGroup = null;
-                for (CombatGroup group : game.getCombat().getBlockingGroups()) {
-                    if (group.getBlockers().contains(blocker.getId())) {
-                        blockGroup = group;
-                        break;
+            CombatGroup blockGroup = null;
+            for (CombatGroup group : game.getCombat().getBlockingGroups()) {
+                if (group.getBlockers().contains(blocker.getId())) {
+                    blockGroup = group;
+                    break;
+                }
+            }
+            if (blockGroup != null) {
+                CombatGroup chosenGroup = null;
+                boolean sameBlocked = false;
+                for (CombatGroup group : game.getCombat().getGroups()) {
+                    if (group.getBlocked() && group.getBlockers().contains(blocker.getId())) {
+                        if (group == chosenGroup1 || group == chosenGroup2) {
+                            if (sameBlocked) {
+                                continue blockerIteration;
+                            }
+                            sameBlocked = true;
+                            chosenGroup = group;
+                        }
                     }
                 }
-                if (blockGroup != null) {
-                    CombatGroup chosenGroup = null;
-                    boolean sameBlocked = false;
-                    for (CombatGroup group : game.getCombat().getGroups()) {
-                        if (group.getBlocked() && group.getBlockers().contains(blocker.getId())) {
-                            if (group == chosenGroup1 || group == chosenGroup2) {
-                                if (sameBlocked) {
-                                    continue blockerIteration;
-                                }
-                                sameBlocked = true;
-                                chosenGroup = group;
-                            }
-                        }
+                
+                if (sameBlocked && chosenGroup != null) { // if none (should not happen) or all the blockers correspond to Jarkeld's targets, the blockers remain the same
+                    CombatGroup otherGroup = (chosenGroup.equals(chosenGroup1) ? chosenGroup2 : chosenGroup1);
+                    chosenGroup.remove(blocker.getId());
+                    for (UUID attacker : chosenGroup.getAttackers()) {
+                        blockGroup.remove(attacker);
                     }
-                    
-                    if (sameBlocked && chosenGroup != null) { // if none (should not happen) or all the blockers correspond to Jarkeld's targets, the blockers remain the same
-                        CombatGroup otherGroup = (chosenGroup.equals(chosenGroup1) ? chosenGroup2 : chosenGroup1);
-                        chosenGroup.remove(blocker.getId());
-                        for (UUID attacker : chosenGroup.getAttackers()) {
-                            blockGroup.remove(attacker);
-                        }
-                        otherGroup.addBlockerToGroup(blocker.getId(), controller.getId(), game);
-                        for (UUID attacker : otherGroup.getAttackers()) {
-                            // 10/4/2004 	The new blocker does not trigger any abilities which trigger on creatures becoming blockers, because the creatures were already blockers and the simple change of who is blocking does not trigger such abilities.
-                            game.getCombat().addBlockingGroup(blocker.getId(), attacker, controller.getId(), game);
-                        }
-                        blockGroup.pickAttackerOrder(blocker.getControllerId(), game);
+                    otherGroup.addBlockerToGroup(blocker.getId(), controller.getId(), game);
+                    for (UUID attacker : otherGroup.getAttackers()) {
+                        // 10/4/2004 	The new blocker does not trigger any abilities which trigger on creatures becoming blockers, because the creatures were already blockers and the simple change of who is blocking does not trigger such abilities.
+                        game.getCombat().addBlockingGroup(blocker.getId(), attacker, controller.getId(), game);
                     }
+                    blockGroup.pickAttackerOrder(blocker.getControllerId(), game);
                 }
             }
         }

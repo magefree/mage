@@ -121,7 +121,7 @@ class BalduvianWarlordUnblockEffect extends OneShotEffect {
                 if (combatGroups != null) {
                     for (CombatGroup combatGroup : combatGroups) {
                         if (combatGroup != null) {
-                            combatGroup.setBlocked(false);
+                            combatGroup.setBlocked(false, game);
                         }
                     }
                 }

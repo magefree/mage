@@ -74,7 +74,7 @@ public class SorrowsPath extends CardImpl {
         this.addAbility(ability);
         
         // Whenever Sorrow's Path becomes tapped, it deals 2 damage to you and each creature you control.
-        Ability ability2 = new BecomesTappedSourceTriggeredAbility(new DamageControllerEffect(2 , "it"));
+        Ability ability2 = new BecomesTappedSourceTriggeredAbility(new DamageControllerEffect(2));
         ability2.addEffect(new DamageAllEffect(2, new FilterControlledCreaturePermanent()).setText("and each creature you control"));
         this.addAbility(ability2);
     }
@@ -152,7 +152,7 @@ class SorrowsPathSwitchBlockersEffect extends OneShotEffect {
     }
 
     private CombatGroup findBlockingGroup(Permanent blocker, Game game) {
-        if (blocker.getBlocking() > 1) {
+        if (game.getCombat().blockingGroupsContains(blocker.getId())) { // if (blocker.getBlocking() > 1) {
             for (CombatGroup group : game.getCombat().getBlockingGroups()) {
                 if (group.getBlockers().contains(blocker.getId())) {
                     return group;
@@ -176,7 +176,7 @@ class SorrowsPathSwitchBlockersEffect extends OneShotEffect {
         }
         return true;
     }
-    
+
     private void reassignBlocker(Permanent blocker, Set<Permanent> attackers, Game game) {
         for (Permanent attacker : attackers) {
             CombatGroup group = game.getCombat().findGroup(attacker.getId());

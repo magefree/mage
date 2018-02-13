@@ -355,6 +355,14 @@ public interface Permanent extends Card, Controllable {
      */
     void clearPairedCard();
 
+    void addBandedCard(UUID bandedCard);
+
+    void removeBandedCard(UUID bandedCard);
+
+    List<UUID> getBandedCards();
+
+    void clearBandedCards();
+
     void setMorphed(boolean value);
 
     boolean isMorphed();
