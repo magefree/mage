@@ -147,8 +147,8 @@ class EyeOfTheStormEffect1 extends OneShotEffect {
         if (spell != null && eyeOfTheStorm != null) {
             Player spellController = game.getPlayer(spell.getControllerId());
             Card card = spell.getCard();
-            if (spellController == null 
-                    || card == null 
+            if (spellController == null
+                    || card == null
                     || !instantOrSorceryfilter.match(card, game)) {
                 return false;
             }
@@ -159,14 +159,14 @@ class EyeOfTheStormEffect1 extends OneShotEffect {
 
             eyeOfTheStorm.imprint(card.getId(), game);// technically, using the imprint functionality here is not correct.
 
-            if (eyeOfTheStorm.getImprinted() != null 
+            if (eyeOfTheStorm.getImprinted() != null
                     && !eyeOfTheStorm.getImprinted().isEmpty()) {
                 CardsImpl copiedCards = new CardsImpl();
                 for (UUID uuid : eyeOfTheStorm.getImprinted()) {
                     card = game.getCard(uuid);
 
                     // Check if owner of card is still in game
-                    if (card != null 
+                    if (card != null
                             && game.getPlayer(card.getOwnerId()) != null) {
                         if (card.isSplitCard()) {
                             copiedCards.add(((SplitCard) card).getLeftHalfCard());
@@ -178,7 +178,7 @@ class EyeOfTheStormEffect1 extends OneShotEffect {
                 }
 
                 boolean continueCasting = true;
-                while (continueCasting) {
+                while (spellController.isInGame() && continueCasting) {
                     continueCasting = copiedCards.size() > 1 && spellController.chooseUse(outcome, "Cast one of the copied cards without paying its mana cost?", source, game);
 
                     Card cardToCopy;

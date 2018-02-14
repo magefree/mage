@@ -45,7 +45,7 @@ import mage.target.common.TargetCreatureOrPlayer;
 /**
  *
  * @author KholdFuzion
-
+ *
  */
 public class DrainLife extends CardImpl {
 
@@ -55,10 +55,8 @@ public class DrainLife extends CardImpl {
         filterBlack.setBlack(true);
     }
 
-
     public DrainLife(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{1}{B}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{1}{B}");
 
         // Spend only black mana on X.
         // Drain Life deals X damage to target creature or player. You gain life equal to the damage dealt, but not more life than the player's life total before Drain Life dealt damage or the creature's toughness.
@@ -84,7 +82,7 @@ class DrainLifeEffect extends OneShotEffect {
 
     public DrainLifeEffect() {
         super(Outcome.Damage);
-        staticText = "Drain Life deals X damage to target creature or player. You gain life equal to the damage dealt, but not more life than the player's life total before Drain Life dealt damage or the creature's toughness.";
+        staticText = "Spend only black mana on X.<br>{this} deals X damage to target creature or player. You gain life equal to the damage dealt, but not more life than the player's life total before Drain Life dealt damage or the creature's toughness";
     }
 
     public DrainLifeEffect(final DrainLifeEffect effect) {
@@ -97,7 +95,7 @@ class DrainLifeEffect extends OneShotEffect {
         int lifetogain = amount;
         if (amount > 0) {
             Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-            if (permanent != null ) {
+            if (permanent != null) {
                 if (permanent.getToughness().getValue() < amount) {
                     lifetogain = permanent.getToughness().getValue();
                 }

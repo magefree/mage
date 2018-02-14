@@ -1333,6 +1333,10 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public void setPairedCard(MageObjectReference pairedCard) {
         this.pairedPermanent = pairedCard;
+        if (pairedCard == null) {
+            // remove existing soulbond info text
+            this.addInfo("soulbond", null, null);
+        }
     }
 
     @Override

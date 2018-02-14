@@ -38,6 +38,7 @@ import mage.cards.Card;
 import mage.cards.SplitCard;
 import mage.constants.AbilityType;
 import mage.constants.AsThoughEffectType;
+import mage.constants.SpellAbilityCastMode;
 import mage.constants.SpellAbilityType;
 import mage.constants.TimingRule;
 import mage.constants.Zone;
@@ -51,6 +52,7 @@ import mage.players.Player;
 public class SpellAbility extends ActivatedAbilityImpl {
 
     protected SpellAbilityType spellAbilityType;
+    protected SpellAbilityCastMode spellAbilityCastMode;
     protected String cardName;
 
     public SpellAbility(ManaCost cost, String cardName) {
@@ -62,23 +64,22 @@ public class SpellAbility extends ActivatedAbilityImpl {
     }
 
     public SpellAbility(ManaCost cost, String cardName, Zone zone, SpellAbilityType spellAbilityType) {
+        this(cost, cardName, zone, spellAbilityType, SpellAbilityCastMode.NORMAL);
+    }
+
+    public SpellAbility(ManaCost cost, String cardName, Zone zone, SpellAbilityType spellAbilityType, SpellAbilityCastMode spellAbilityCastMode) {
         super(AbilityType.SPELL, zone);
         this.cardName = cardName;
         this.spellAbilityType = spellAbilityType;
+        this.spellAbilityCastMode = spellAbilityCastMode;
         this.addManaCost(cost);
-        switch (spellAbilityType) {
-            case SPLIT_FUSED:
-                this.name = "Cast fused " + cardName;
-                break;
-            default:
-                this.name = "Cast " + cardName;
-        }
-
+        setSpellName();
     }
 
     public SpellAbility(final SpellAbility ability) {
         super(ability);
         this.spellAbilityType = ability.spellAbilityType;
+        this.spellAbilityCastMode = ability.spellAbilityCastMode;
         this.cardName = ability.cardName;
     }
 
@@ -209,4 +210,24 @@ public class SpellAbility extends ActivatedAbilityImpl {
         }
         return amount * xMultiplier;
     }
+
+    private void setSpellName() {
+        switch (spellAbilityType) {
+            case SPLIT_FUSED:
+                this.name = "Cast fused " + cardName;
+                break;
+            default:
+                this.name = "Cast " + cardName + (this.spellAbilityCastMode != SpellAbilityCastMode.NORMAL ? " by " + spellAbilityCastMode.toString() : "");
+        }
+    }
+
+    public SpellAbilityCastMode getSpellAbilityCastMode() {
+        return spellAbilityCastMode;
+    }
+
+    public void setSpellAbilityCastMode(SpellAbilityCastMode spellAbilityCastMode) {
+        this.spellAbilityCastMode = spellAbilityCastMode;
+        setSpellName();
+    }
+
 }

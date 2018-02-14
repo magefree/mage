@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
+ * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are
  * permitted provided that the following conditions are met:
@@ -25,73 +25,24 @@
  * authors and should not be interpreted as representing official policies, either expressed
  * or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.utils;
-
-import java.io.Serializable;
+package mage.constants;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author LevelX2
  */
-public class MageVersion implements Serializable, Comparable<MageVersion> {
+public enum SpellAbilityCastMode {
+    NORMAL("Normal"),
+    MADNESS("Madness");
 
-    /**
-     *
-     */
-    public final static int MAGE_VERSION_MAJOR = 1;
-    public final static int MAGE_VERSION_MINOR = 4;
-    public final static int MAGE_VERSION_PATCH = 27;
-    public final static String MAGE_VERSION_MINOR_PATCH = "V4";
-    public final static String MAGE_VERSION_INFO = "";
+    private final String text;
 
-    private final int major;
-    private final int minor;
-    private final int patch;
-    private final String minorPatch; // doesn't matter for compatibility
-
-    private String info = "";
-
-    public MageVersion(int major, int minor, int patch, String minorPatch, String info) {
-        this.major = major;
-        this.minor = minor;
-        this.patch = patch;
-        this.minorPatch = minorPatch;
-        this.info = info;
-    }
-
-    public int getMajor() {
-        return major;
-    }
-
-    public int getMinor() {
-        return minor;
-    }
-
-    public int getPatch() {
-        return patch;
-    }
-
-    public String getMinorPatch() {
-        return minorPatch;
+    SpellAbilityCastMode(String text) {
+        this.text = text;
     }
 
     @Override
     public String toString() {
-        return major + "." + minor + '.' + patch + info + minorPatch;
+        return text;
     }
-
-    @Override
-    public int compareTo(MageVersion o) {
-        if (major != o.major) {
-            return major - o.major;
-        }
-        if (minor != o.minor) {
-            return minor - o.minor;
-        }
-        if (patch != o.patch) {
-            return patch - o.patch;
-        }
-        return info.compareTo(o.info);
-    }
-
 }

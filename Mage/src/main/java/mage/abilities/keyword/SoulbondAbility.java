@@ -32,7 +32,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SetTargetPointer;
 import mage.constants.TargetController;
@@ -47,6 +46,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
+import mage.util.GameLog;
 
 /**
  * 702.94. Soulbond
@@ -168,7 +168,9 @@ class SoulboundEntersSelfEffect extends OneShotEffect {
                         Permanent chosen = game.getPermanent(target.getFirstTarget());
                         if (chosen != null) {
                             chosen.setPairedCard(new MageObjectReference(permanent, game));
+                            chosen.addInfo("soulbond", "Soulbond to " + GameLog.getColoredObjectIdNameForTooltip(permanent), game);
                             permanent.setPairedCard(new MageObjectReference(chosen, game));
+                            permanent.addInfo("soulbond", "Soulbond to " + GameLog.getColoredObjectIdNameForTooltip(chosen), game);
                             if (!game.isSimulation()) {
                                 game.informPlayers(controller.getLogName() + " soulbonds " + permanent.getLogName() + " with " + chosen.getLogName());
                             }

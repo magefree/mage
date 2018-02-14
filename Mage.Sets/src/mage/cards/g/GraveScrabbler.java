@@ -2,10 +2,8 @@ package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.condition.Condition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
@@ -16,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreatureCard;
-import mage.game.Game;
 import mage.target.common.TargetCardInGraveyard;
 
 public class GraveScrabbler extends CardImpl {
@@ -35,7 +32,7 @@ public class GraveScrabbler extends CardImpl {
         //you may return target creature card from a graveyard to its owner's hand.
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), true);
         ability.addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card in a graveyard")));
-        this.addAbility(new ConditionalTriggeredAbility(ability, MadnessPaidCondition.instance,
+        this.addAbility(new ConditionalTriggeredAbility(ability, MadnessAbility.GetCondition(),
                 "When {this} enters the battlefield, if its madness cost was paid, you may return target creature card from a graveyard to its owner's hand."));
     }
 
@@ -46,24 +43,6 @@ public class GraveScrabbler extends CardImpl {
     @Override
     public Card copy() {
         return new GraveScrabbler(this);
-    }
-
-}
-
-enum MadnessPaidCondition implements Condition {
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(source.getSourceId());
-        if (card != null) {
-            for (Ability ability : card.getAbilities()) {
-                if (ability instanceof MadnessAbility) {
-                    return ((MadnessAbility) ability).getCosts().isPaid();
-                }
-            }
-        }
-        return false;
     }
 
 }

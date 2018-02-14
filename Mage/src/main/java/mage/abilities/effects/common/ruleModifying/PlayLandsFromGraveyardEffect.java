@@ -11,8 +11,6 @@ import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.players.Player;
 
-import java.util.UUID;
-
 public class PlayLandsFromGraveyardEffect extends ContinuousEffectImpl {
 
     public PlayLandsFromGraveyardEffect() {
@@ -33,11 +31,10 @@ public class PlayLandsFromGraveyardEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            for (UUID cardId: player.getGraveyard()) {
-                Card card = game.getCard(cardId);
-                if(card != null && card.isLand()){
+            for (Card card : player.getGraveyard().getCards(game)) {
+                if (card != null && card.isLand()) {
                     PlayLandFromGraveyardAbility ability = new PlayLandFromGraveyardAbility(card.getName());
-                    ability.setSourceId(cardId);
+                    ability.setSourceId(card.getId());
                     ability.setControllerId(card.getOwnerId());
                     game.getState().addOtherAbility(card, ability);
                 }
