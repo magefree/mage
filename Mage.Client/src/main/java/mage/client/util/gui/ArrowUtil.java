@@ -44,7 +44,7 @@ public final class ArrowUtil {
                     if (permanent != null) {
                         Point target = permanent.getLocationOnScreen();
                         target.translate(-parentPoint.x, -parentPoint.y);
-                        ArrowBuilder.getBuilder().addArrow(data.gameId, (int) me.getX() + 35, (int) me.getY(), (int) target.getX() + 40, (int) target.getY() + 10, Color.yellow, ArrowBuilder.Type.BANDED);
+                        ArrowBuilder.getBuilder().addArrow(data.gameId, (int) me.getX() + 65, (int) me.getY() + 25, (int) target.getX() + 70, (int) target.getY() + 35, Color.yellow, ArrowBuilder.Type.BANDED);
                     }
                 }
             }
