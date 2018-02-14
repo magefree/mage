@@ -119,12 +119,16 @@ class GeneralJarkeldSwitchBlockersEffect extends OneShotEffect {
                         if (blocker != null) {
                             if (game.getCombat().blockingGroupsContains(blocker.getId())) { // if (blocker.getBlocking() > 1) {
                                 for (CombatGroup group : game.getCombat().getBlockingGroups()) {
-                                    if (group.getAttackers().size() > 1) {
-                                        multiBlockers.add(blocker);
+                                    if (group.getBlockers().contains(blocker.getId())) { 
+                                        int attackerCount = group.getAttackers().size();
+                                        if (attackerCount > 1) {
+                                            multiBlockers.add(blocker);
+                                        } else if (attackerCount == 1) {
+                                            blockers1.add(blocker);
+                                        }
                                         continue blockerSearch1;
                                     }
                                 }
-                                blockers1.add(blocker); // this should not happen
                             } else {
                                 blockers1.add(blocker);
                             }
@@ -137,12 +141,16 @@ class GeneralJarkeldSwitchBlockersEffect extends OneShotEffect {
                         if (blocker != null) {
                             if (game.getCombat().blockingGroupsContains(blocker.getId())) { // if (blocker.getBlocking() > 1) {
                                 for (CombatGroup group : game.getCombat().getBlockingGroups()) {
-                                    if (group.getAttackers().size() > 1) {
-                                        multiBlockers.add(blocker);
+                                    if (group.getBlockers().contains(blocker.getId())) {
+                                        int attackerCount = group.getAttackers().size();
+                                        if (attackerCount > 1) {
+                                            multiBlockers.add(blocker);
+                                        } else if (attackerCount == 1) {
+                                            blockers2.add(blocker);
+                                        }
                                         continue blockerSearch2;
                                     }
                                 }
-                                blockers2.add(blocker); // this should not happen
                             } else {
                                 blockers2.add(blocker);
                             }
