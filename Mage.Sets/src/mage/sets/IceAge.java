@@ -97,6 +97,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Clairvoyance", 63, Rarity.COMMON, mage.cards.c.Clairvoyance.class));
         cards.add(new SetCardInfo("Cold Snap", 241, Rarity.UNCOMMON, mage.cards.c.ColdSnap.class));
         cards.add(new SetCardInfo("Conquer", 180, Rarity.UNCOMMON, mage.cards.c.Conquer.class));
+        cards.add(new SetCardInfo("Cooperation", 242, Rarity.COMMON, mage.cards.c.Cooperation.class));
         cards.add(new SetCardInfo("Counterspell", 64, Rarity.COMMON, mage.cards.c.Counterspell.class));
         cards.add(new SetCardInfo("Crown of the Ages", 290, Rarity.RARE, mage.cards.c.CrownOfTheAges.class));
         cards.add(new SetCardInfo("Curse of Marit Lage", 181, Rarity.RARE, mage.cards.c.CurseOfMaritLage.class));
@@ -108,6 +109,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Demonic Consultation", 9, Rarity.UNCOMMON, mage.cards.d.DemonicConsultation.class));
         cards.add(new SetCardInfo("Despotic Scepter", 291, Rarity.RARE, mage.cards.d.DespoticScepter.class));
         cards.add(new SetCardInfo("Diabolic Vision", 362, Rarity.UNCOMMON, mage.cards.d.DiabolicVision.class));
+        cards.add(new SetCardInfo("Dire Wolves", 118, Rarity.COMMON, mage.cards.d.DireWolves.class));
         cards.add(new SetCardInfo("Disenchant", 244, Rarity.COMMON, mage.cards.d.Disenchant.class));
         cards.add(new SetCardInfo("Drift of the Dead", 11, Rarity.UNCOMMON, mage.cards.d.DriftOfTheDead.class));
         cards.add(new SetCardInfo("Dwarven Armory", 182, Rarity.RARE, mage.cards.d.DwarvenArmory.class));
@@ -137,6 +139,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Forest", 329, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 330, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forgotten Lore", 125, Rarity.UNCOMMON, mage.cards.f.ForgottenLore.class));
+        cards.add(new SetCardInfo("Formation", 249, Rarity.RARE, mage.cards.f.Formation.class));
         cards.add(new SetCardInfo("Foul Familiar", 14, Rarity.COMMON, mage.cards.f.FoulFamiliar.class));
         cards.add(new SetCardInfo("Freyalise's Charm", 128, Rarity.UNCOMMON, mage.cards.f.FreyalisesCharm.class));
         cards.add(new SetCardInfo("Foxfire", 126, Rarity.COMMON, mage.cards.f.Foxfire.class));
@@ -202,7 +205,12 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Kelsinko Ranger", 257, Rarity.COMMON, mage.cards.k.KelsinkoRanger.class));
         cards.add(new SetCardInfo("Kjeldoran Dead", 25, Rarity.COMMON, mage.cards.k.KjeldoranDead.class));
         cards.add(new SetCardInfo("Kjeldoran Frostbeast", 374, Rarity.UNCOMMON, mage.cards.k.KjeldoranFrostbeast.class));
+        cards.add(new SetCardInfo("Kjeldoran Knight", 260, Rarity.RARE, mage.cards.k.KjeldoranKnight.class));
+        cards.add(new SetCardInfo("Kjeldoran Phalanx", 261, Rarity.RARE, mage.cards.k.KjeldoranPhalanx.class));
         cards.add(new SetCardInfo("Kjeldoran Royal Guard", 262, Rarity.RARE, mage.cards.k.KjeldoranRoyalGuard.class));
+        cards.add(new SetCardInfo("Kjeldoran Skycaptain", 263, Rarity.UNCOMMON, mage.cards.k.KjeldoranSkycaptain.class));
+        cards.add(new SetCardInfo("Kjeldoran Skyknight", 264, Rarity.COMMON, mage.cards.k.KjeldoranSkyknight.class));
+        cards.add(new SetCardInfo("Kjeldoran Warrior", 265, Rarity.COMMON, mage.cards.k.KjeldoranWarrior.class));
         cards.add(new SetCardInfo("Knight of Stromgald", 26, Rarity.UNCOMMON, mage.cards.k.KnightOfStromgald.class));
         cards.add(new SetCardInfo("Krovikan Fetish", 28, Rarity.COMMON, mage.cards.k.KrovikanFetish.class));
         cards.add(new SetCardInfo("Krovikan Sorcerer", 81, Rarity.COMMON, mage.cards.k.KrovikanSorcerer.class));
@@ -281,6 +289,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Seizures", 47, Rarity.COMMON, mage.cards.s.Seizures.class));
         cards.add(new SetCardInfo("Shambling Strider", 151, Rarity.COMMON, mage.cards.s.ShamblingStrider.class));
         cards.add(new SetCardInfo("Shatter", 216, Rarity.COMMON, mage.cards.s.Shatter.class));
+        cards.add(new SetCardInfo("Shield Bearer", 276, Rarity.COMMON, mage.cards.s.ShieldBearer.class));
         cards.add(new SetCardInfo("Shield of the Ages", 310, Rarity.UNCOMMON, mage.cards.s.ShieldOfTheAges.class));
         cards.add(new SetCardInfo("Shyft", 96, Rarity.RARE, mage.cards.s.Shyft.class));
         cards.add(new SetCardInfo("Sibilant Spirit", 97, Rarity.RARE, mage.cards.s.SibilantSpirit.class));
@@ -337,6 +346,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Walking Wall", 321, Rarity.UNCOMMON, mage.cards.w.WalkingWall.class));
         cards.add(new SetCardInfo("Wall of Lava", 223, Rarity.UNCOMMON, mage.cards.w.WallOfLava.class));
         cards.add(new SetCardInfo("Wall of Pine Needles", 162, Rarity.UNCOMMON, mage.cards.w.WallOfPineNeedles.class));
+        cards.add(new SetCardInfo("Wall of Shields", 322, Rarity.UNCOMMON, mage.cards.w.WallOfShields.class));
         cards.add(new SetCardInfo("War Chariot", 323, Rarity.UNCOMMON, mage.cards.w.WarChariot.class));
         cards.add(new SetCardInfo("Warning", 279, Rarity.COMMON, mage.cards.w.Warning.class));
         cards.add(new SetCardInfo("Whiteout", 163, Rarity.UNCOMMON, mage.cards.w.Whiteout.class));
