@@ -161,6 +161,7 @@ public class MastersEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Juzam Djinn", 74, Rarity.RARE, mage.cards.j.JuzamDjinn.class));
         cards.add(new SetCardInfo("Keldon Warlord", 101, Rarity.UNCOMMON, mage.cards.k.KeldonWarlord.class));
         cards.add(new SetCardInfo("Khabal Ghoul", 75, Rarity.RARE, mage.cards.k.KhabalGhoul.class));
+        cards.add(new SetCardInfo("Knights of Thorn", 19, Rarity.COMMON, mage.cards.k.KnightsOfThorn.class));
         cards.add(new SetCardInfo("Lake of the Dead", 177, Rarity.RARE, mage.cards.l.LakeOfTheDead.class));
         cards.add(new SetCardInfo("Lightning Bolt", 102, Rarity.COMMON, mage.cards.l.LightningBolt.class));
         cards.add(new SetCardInfo("Lim-Dul's Vault", 148, Rarity.UNCOMMON, mage.cards.l.LimDulsVault.class));
