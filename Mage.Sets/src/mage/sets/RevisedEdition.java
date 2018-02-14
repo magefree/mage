@@ -192,6 +192,7 @@ public class RevisedEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Mijae Djinn", 165, Rarity.RARE, mage.cards.m.MijaeDjinn.class));
         cards.add(new SetCardInfo("Millstone", 265, Rarity.RARE, mage.cards.m.Millstone.class));
         cards.add(new SetCardInfo("Mind Twist", 25, Rarity.RARE, mage.cards.m.MindTwist.class));
+        cards.add(new SetCardInfo("Mishra's War Machine", 266, Rarity.RARE, mage.cards.m.MishrasWarMachine.class));
         cards.add(new SetCardInfo("Mons's Goblin Raiders", 166, Rarity.COMMON, mage.cards.m.MonssGoblinRaiders.class));
         cards.add(new SetCardInfo("Mountain", 290, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 291, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
