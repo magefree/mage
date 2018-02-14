@@ -134,12 +134,6 @@ public final class GuiDisplayUtil {
         for (String rule : card.getRules()) {
             textLines.basicTextLength += rule.length();
         }
-        if (card.getMageObjectType() == MageObjectType.PERMANENT) {
-            if (card.getPairedCard() != null) {
-                textLines.lines.add("<span color='green'><i>Paired with another creature</i></span>");
-                textLines.basicTextLength += 30;
-            }
-        }
         if (card.getMageObjectType().canHaveCounters()) {
             ArrayList<CounterView> counters = new ArrayList<>();
             if (card instanceof PermanentView) {
