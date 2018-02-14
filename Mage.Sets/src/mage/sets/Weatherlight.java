@@ -72,6 +72,7 @@ public class Weatherlight extends ExpansionSet {
         cards.add(new SetCardInfo("Aura of Silence", 123, Rarity.UNCOMMON, mage.cards.a.AuraOfSilence.class));
         cards.add(new SetCardInfo("Avizoa", 35, Rarity.RARE, mage.cards.a.Avizoa.class));
         cards.add(new SetCardInfo("Barrow Ghoul", 3, Rarity.COMMON, mage.cards.b.BarrowGhoul.class));
+        cards.add(new SetCardInfo("Benalish Infantry", 124, Rarity.COMMON, mage.cards.b.BenalishInfantry.class));
         cards.add(new SetCardInfo("Benalish Knight", 125, Rarity.COMMON, mage.cards.b.BenalishKnight.class));
         cards.add(new SetCardInfo("Benalish Missionary", 126, Rarity.COMMON, mage.cards.b.BenalishMissionary.class));
         cards.add(new SetCardInfo("Bloodrock Cyclops", 90, Rarity.COMMON, mage.cards.b.BloodrockCyclops.class));
@@ -198,6 +199,7 @@ public class Weatherlight extends ExpansionSet {
         cards.add(new SetCardInfo("Veteran Explorer", 86, Rarity.UNCOMMON, mage.cards.v.VeteranExplorer.class));
         cards.add(new SetCardInfo("Vitalize", 87, Rarity.COMMON, mage.cards.v.Vitalize.class));
         cards.add(new SetCardInfo("Vodalian Illusionist", 58, Rarity.UNCOMMON, mage.cards.v.VodalianIllusionist.class));
+        cards.add(new SetCardInfo("Volunteer Reserves", 145, Rarity.UNCOMMON, mage.cards.v.VolunteerReserves.class));
         cards.add(new SetCardInfo("Wave of Terror", 28, Rarity.RARE, mage.cards.w.WaveOfTerror.class));
         cards.add(new SetCardInfo("Well of Knowledge", 162, Rarity.RARE, mage.cards.w.WellOfKnowledge.class));
         cards.add(new SetCardInfo("Winding Canyons", 167, Rarity.RARE, mage.cards.w.WindingCanyons.class));
