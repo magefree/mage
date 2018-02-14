@@ -81,6 +81,7 @@ public class MastersEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Ball Lightning", 87, Rarity.RARE, mage.cards.b.BallLightning.class));
         cards.add(new SetCardInfo("Baron Sengir", 58, Rarity.RARE, mage.cards.b.BaronSengir.class));
         cards.add(new SetCardInfo("Basal Thrull", 59, Rarity.COMMON, BasalThrull.class));
+        cards.add(new SetCardInfo("Benalish Hero", 5, Rarity.COMMON, mage.cards.b.BenalishHero.class));
         cards.add(new SetCardInfo("Berserk", 114, Rarity.RARE, mage.cards.b.Berserk.class));
         cards.add(new SetCardInfo("Black Knight", 60, Rarity.UNCOMMON, mage.cards.b.BlackKnight.class));
         cards.add(new SetCardInfo("Blight", 61, Rarity.UNCOMMON, mage.cards.b.Blight.class));
@@ -166,6 +167,7 @@ public class MastersEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Lord of Tresserhorn", 149, Rarity.RARE, mage.cards.l.LordOfTresserhorn.class));
         cards.add(new SetCardInfo("Mana Flare", 103, Rarity.RARE, mage.cards.m.ManaFlare.class));
         cards.add(new SetCardInfo("Marton Stromgald", 104, Rarity.RARE, mage.cards.m.MartonStromgald.class));
+        cards.add(new SetCardInfo("Mesa Pegasus", 20, Rarity.COMMON, mage.cards.m.MesaPegasus.class));
         cards.add(new SetCardInfo("Mindstab Thrull", 76, Rarity.COMMON, MindstabThrull.class));
         cards.add(new SetCardInfo("Mirror Universe", 159, Rarity.RARE, mage.cards.m.MirrorUniverse.class));
         cards.add(new SetCardInfo("Mishra's Factory", 178, Rarity.UNCOMMON, mage.cards.m.MishrasFactory.class));
