@@ -335,7 +335,7 @@ public class FourthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Pearled Unicorn", 39, Rarity.COMMON, mage.cards.p.PearledUnicorn.class));
         cards.add(new SetCardInfo("Personal Incarnation", 40, Rarity.RARE, mage.cards.p.PersonalIncarnation.class));
         cards.add(new SetCardInfo("Piety", 41, Rarity.COMMON, Piety.class));
-        cards.add(new SetCardInfo("Pikemen", 42, Rarity.COMMON, Pikemen.class));
+        cards.add(new SetCardInfo("Pikemen", 42, Rarity.COMMON, mage.cards.p.Pikemen.class));
         cards.add(new SetCardInfo("Purelace", 43, Rarity.RARE, mage.cards.p.Purelace.class));
         cards.add(new SetCardInfo("Red Ward", 44, Rarity.UNCOMMON, mage.cards.r.RedWard.class));
         cards.add(new SetCardInfo("Reverse Damage", 45, Rarity.RARE, mage.cards.r.ReverseDamage.class));
