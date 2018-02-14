@@ -65,6 +65,7 @@ public class Antiquities extends ExpansionSet {
         cards.add(new SetCardInfo("Ashnod's Battle Gear", 4, Rarity.UNCOMMON, mage.cards.a.AshnodsBattleGear.class));
         cards.add(new SetCardInfo("Ashnod's Transmogrant", 5, Rarity.UNCOMMON, mage.cards.a.AshnodsTransmogrant.class));
         cards.add(new SetCardInfo("Atog", 88, Rarity.COMMON, mage.cards.a.Atog.class));
+        cards.add(new SetCardInfo("Battering Ram", 6, Rarity.COMMON, mage.cards.b.BatteringRam.class));
         cards.add(new SetCardInfo("Candelabra of Tawnos", 8, Rarity.RARE, mage.cards.c.CandelabraOfTawnos.class));
         cards.add(new SetCardInfo("Circle of Protection: Artifacts", 97, Rarity.COMMON, mage.cards.c.CircleOfProtectionArtifacts.class));
         cards.add(new SetCardInfo("Citanul Druid", 61, Rarity.UNCOMMON, mage.cards.c.CitanulDruid.class));
@@ -97,6 +98,7 @@ public class Antiquities extends ExpansionSet {
         cards.add(new SetCardInfo("Mishra's Factory", 67, Rarity.UNCOMMON, mage.cards.m.MishrasFactory.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mishra's Factory", 68, Rarity.UNCOMMON, mage.cards.m.MishrasFactory.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mishra's Factory", 69, Rarity.UNCOMMON, mage.cards.m.MishrasFactory.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mishra's War Machine", 22, Rarity.RARE, mage.cards.m.MishrasWarMachine.class));
         cards.add(new SetCardInfo("Mishra's Workshop", 70, Rarity.RARE, mage.cards.m.MishrasWorkshop.class));
         cards.add(new SetCardInfo("Obelisk of Undoing", 23, Rarity.RARE, mage.cards.o.ObeliskOfUndoing.class));
         cards.add(new SetCardInfo("Onulet", 24, Rarity.UNCOMMON, mage.cards.o.Onulet.class));
@@ -128,6 +130,7 @@ public class Antiquities extends ExpansionSet {
         cards.add(new SetCardInfo("Titania's Song", 65, Rarity.UNCOMMON, mage.cards.t.TitaniasSong.class));
         cards.add(new SetCardInfo("Transmute Artifact", 58, Rarity.UNCOMMON, mage.cards.t.TransmuteArtifact.class));
         cards.add(new SetCardInfo("Triskelion", 38, Rarity.RARE, mage.cards.t.Triskelion.class));
+        cards.add(new SetCardInfo("Urza's Avenger", 39, Rarity.RARE, mage.cards.u.UrzasAvenger.class));
         cards.add(new SetCardInfo("Urza's Chalice", 40, Rarity.COMMON, mage.cards.u.UrzasChalice.class));
         cards.add(new SetCardInfo("Urza's Mine", 75, Rarity.UNCOMMON, mage.cards.u.UrzasMine.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Urza's Mine", 76, Rarity.UNCOMMON, mage.cards.u.UrzasMine.class, NON_FULL_USE_VARIOUS));
