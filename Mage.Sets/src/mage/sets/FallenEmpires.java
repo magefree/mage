@@ -182,6 +182,7 @@ public class FallenEmpires extends ExpansionSet {
         cards.add(new SetCardInfo("Icatian Moneychanger", 152, Rarity.COMMON, IcatianMoneychanger.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Icatian Moneychanger", 153, Rarity.COMMON, IcatianMoneychanger.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Icatian Moneychanger", 154, Rarity.COMMON, IcatianMoneychanger.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Icatian Phalanx", 155, Rarity.UNCOMMON, mage.cards.i.IcatianPhalanx.class));
         cards.add(new SetCardInfo("Icatian Priest", 156, Rarity.UNCOMMON, mage.cards.i.IcatianPriest.class));
         cards.add(new SetCardInfo("Icatian Scout", 157, Rarity.COMMON, IcatianScout.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Icatian Scout", 158, Rarity.COMMON, IcatianScout.class, NON_FULL_USE_VARIOUS));
