@@ -150,6 +150,7 @@ public class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Heart of Yavimaya", 231, Rarity.RARE, mage.cards.h.HeartOfYavimaya.class));
         cards.add(new SetCardInfo("Helm of Obedience", 210, Rarity.RARE, mage.cards.h.HelmOfObedience.class));
         cards.add(new SetCardInfo("Icatian Javelineers", 15, Rarity.COMMON, IcatianJavelineers.class));
+        cards.add(new SetCardInfo("Icatian Phalanx", 16, Rarity.COMMON, mage.cards.i.IcatianPhalanx.class));
         cards.add(new SetCardInfo("Icatian Scout", 17, Rarity.COMMON, IcatianScout.class));
         cards.add(new SetCardInfo("Ice Floe", 232, Rarity.UNCOMMON, mage.cards.i.IceFloe.class));
         cards.add(new SetCardInfo("Iceberg", 49, Rarity.UNCOMMON, mage.cards.i.Iceberg.class));
@@ -171,6 +172,7 @@ public class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Kjeldoran Dead", 98, Rarity.COMMON, mage.cards.k.KjeldoranDead.class));
         cards.add(new SetCardInfo("Kjeldoran Home Guard", 22, Rarity.UNCOMMON, mage.cards.k.KjeldoranHomeGuard.class));
         cards.add(new SetCardInfo("Kjeldoran Outpost", 233, Rarity.RARE, mage.cards.k.KjeldoranOutpost.class));
+        cards.add(new SetCardInfo("Kjeldoran Skycaptain", 23, Rarity.COMMON, mage.cards.k.KjeldoranSkycaptain.class));
         cards.add(new SetCardInfo("Knight of Stromgald", 99, Rarity.UNCOMMON, mage.cards.k.KnightOfStromgald.class));
         cards.add(new SetCardInfo("Krovikan Fetish", 100, Rarity.COMMON, mage.cards.k.KrovikanFetish.class));
         cards.add(new SetCardInfo("Krovikan Horror", 101, Rarity.RARE, mage.cards.k.KrovikanHorror.class));
@@ -221,6 +223,7 @@ public class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Screeching Drake", 63, Rarity.COMMON, mage.cards.s.ScreechingDrake.class));
         cards.add(new SetCardInfo("Sea Drake", 64, Rarity.RARE, mage.cards.s.SeaDrake.class));
         cards.add(new SetCardInfo("Sea Spirit", 65, Rarity.UNCOMMON, mage.cards.s.SeaSpirit.class));
+        cards.add(new SetCardInfo("Shield Bearer", 35, Rarity.COMMON, mage.cards.s.ShieldBearer.class));
         cards.add(new SetCardInfo("Shrink", 175, Rarity.COMMON, mage.cards.s.Shrink.class));
         cards.add(new SetCardInfo("Shyft", 66, Rarity.COMMON, mage.cards.s.Shyft.class));
         cards.add(new SetCardInfo("Sibilant Spirit", 67, Rarity.RARE, mage.cards.s.SibilantSpirit.class));
