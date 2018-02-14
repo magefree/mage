@@ -58,7 +58,7 @@ public class WallOfVapor extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
 
-        // Flying
+        // Defender
         this.addAbility(DefenderAbility.getInstance());
 
         // Prevent all damage that would be dealt to Wall of Vapor by creatures it's blocking.
