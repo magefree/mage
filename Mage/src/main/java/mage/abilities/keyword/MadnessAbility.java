@@ -1,8 +1,9 @@
 package mage.abilities.keyword;
 
-import java.util.ArrayList;
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.condition.Condition;
@@ -13,10 +14,13 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SpellAbilityCastMode;
+import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
+import mage.game.stack.Spell;
 import mage.players.Player;
 
 /**
@@ -133,8 +137,6 @@ class MadnessReplacementEffect extends ReplacementEffectImpl {
  */
 class MadnessTriggeredAbility extends TriggeredAbilityImpl {
 
-    //This array holds the Id's of all of the cards that activated madness
-    private static ArrayList<UUID> activatedIds = new ArrayList<>();
     private final UUID madnessOriginalId;
 
     MadnessTriggeredAbility(ManaCosts<ManaCost> madnessCost, UUID madnessOriginalId) {
@@ -176,23 +178,7 @@ class MadnessTriggeredAbility extends TriggeredAbilityImpl {
             }
             return false;
         }
-        activatedIds.add(getSourceId());
         return true;
-    }
-
-    @Override
-    public boolean isActivated() {
-        //Look through the list of activated Ids and see if the current source's Id is one of them
-        for (UUID currentId : activatedIds) {
-            if (currentId.equals(getSourceId())) {
-                //Remove the current source from the list, so if the card is somehow recast without
-                //paying the madness cost, this will return false
-                activatedIds.remove(currentId);
-                return true;
-            }
-        }
-        //If the current source's Id was not found, return false
-        return false;
     }
 
     @Override
@@ -225,17 +211,15 @@ class MadnessCastEffect extends OneShotEffect {
         }
         if (owner != null && card != null
                 && owner.chooseUse(outcome, "Cast " + card.getLogName() + " by madness?", source, game)) {
-            ManaCosts<ManaCost> costRef = card.getSpellAbility().getManaCostsToPay();
+
             // replace with the new cost
+            SpellAbility castByMadness = card.getSpellAbility().copy();
+            ManaCosts<ManaCost> costRef = castByMadness.getManaCostsToPay();
+            castByMadness.setSpellAbilityType(SpellAbilityType.BASE_ALTERNATE);
+            castByMadness.setSpellAbilityCastMode(SpellAbilityCastMode.MADNESS);
             costRef.clear();
             costRef.add(madnessCost);
-            boolean result = owner.cast(card.getSpellAbility(), game, false);
-            // Reset the casting costs (in case the player cancels cast and plays the card later)
-            // TODO: Check if this is neccessary
-            costRef.clear();
-            for (ManaCost manaCost : card.getSpellAbility().getManaCosts()) {
-                costRef.add(manaCost);
-            }
+            boolean result = owner.cast(castByMadness, game, false);
             return result;
 
         }
@@ -254,14 +238,10 @@ enum MadnessCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(source.getSourceId());
-        if (card != null) {
-            for (Ability ability : card.getAbilities()) {
-                if (ability instanceof MadnessTriggeredAbility) {
-                    if (ability.isActivated()) {
-                        return true;
-                    }
-                }
+        MageObject madnessSpell = game.getLastKnownInformation(source.getSourceId(), Zone.STACK, source.getSourceObjectZoneChangeCounter() - 1);
+        if (madnessSpell instanceof Spell) {
+            if (((Spell) madnessSpell).getSpellAbility() != null) {
+                return ((Spell) madnessSpell).getSpellAbility().getSpellAbilityCastMode() == SpellAbilityCastMode.MADNESS;
             }
         }
         return false;
