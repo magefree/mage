@@ -52,6 +52,7 @@ import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceColor;
 import mage.constants.*;
+import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.*;
@@ -809,7 +810,54 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 target.addTarget(opponentId, target.getAmountRemaining(), source, game);
                 return true;
             }
+            return false;
         }
+        if (target.getOriginalTarget() instanceof TargetCreatureOrPlaneswalkerAmount) {
+            List<Permanent> targets;
+            if (outcome.isGood()) {
+                targets = threats(playerId, source.getSourceId(), StaticFilters.FILTER_PERMANENT_CREATURE, game, target.getTargets());
+            } else {
+                targets = threats(opponentId, source.getSourceId(), StaticFilters.FILTER_PERMANENT_CREATURE, game, target.getTargets());
+            }
+            for (Permanent permanent : targets) {
+                if (target.canTarget(getId(), permanent.getId(), source, game)) {
+                    if (permanent.getToughness().getValue() <= target.getAmountRemaining()) {
+                        target.addTarget(permanent.getId(), permanent.getToughness().getValue(), source, game);
+                        return true;
+                    }
+                }
+            }
+            if (target.getFilter() instanceof FilterPermanent) {
+                targets = threats(null, source.getSourceId(), (FilterPermanent) target.getFilter(), game, target.getTargets());
+                Permanent possibleTarget = null;
+                for (Permanent permanent : targets) {
+                    if (target.canTarget(getId(), permanent.getId(), source, game)) {
+                        if (permanent.isCreature()) {
+                            if (permanent.getToughness().getValue() <= target.getAmountRemaining()) {
+                                target.addTarget(permanent.getId(), permanent.getToughness().getValue(), source, game);
+                                return true;
+                            } else {
+                                possibleTarget = permanent;
+                            }
+                        } else if (permanent.isPlaneswalker()) {
+                            int loy = permanent.getCounters(game).getCount(CounterType.LOYALTY);
+                            if (loy <= target.getAmountRemaining()) {
+                                target.addTarget(permanent.getId(), loy, source, game);
+                                return true;
+                            } else {
+                                possibleTarget = permanent;
+                            }
+
+                        }
+                    }
+                }
+                if (possibleTarget != null) {
+                    target.addTarget(possibleTarget.getId(), target.getAmountRemaining(), source, game);
+                    return true;
+                }
+            }
+        }
+        log.warn("No proper AI target handling: " + target.getClass().getName());
         return false;
     }
 

@@ -154,4 +154,67 @@ public class AnimateDeadTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Animate Dead", 1);
     }
 
+    /**
+     * Animate Dead enchanting a creature with a "enters the battlefield"
+     * triggered ability with targets available.
+     */
+    @Test
+    public void testAnimateAndDragonlordAtarkaWithTargets() {
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
+
+        // Enchant creature card in a graveyard
+        // When Animate Dead enters the battlefield, if it's on the battlefield, it loses "enchant creature card in a graveyard"
+        // and gains "enchant creature put onto the battlefield with Animate Dead." Return enchanted creature card to the battlefield
+        // under your control and attach Animate Dead to it. When Animate Dead leaves the battlefield, that creature's controller sacrifices it.
+        // Enchanted creature gets -1/-0.
+        addCard(Zone.HAND, playerA, "Animate Dead"); // {1}{B}
+
+        // Flying
+        // Trample
+        // When Dragonlord Atarka enters the battlefield, it deals 5 damage divided as you choose among any number of target
+        // creatures and/or planeswalkers your opponents control.
+        addCard(Zone.GRAVEYARD, playerB, "Dragonlord Atarka", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 3);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Animate Dead", "Dragonlord Atarka");
+
+        setStopAt(2, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Animate Dead", 1);
+        assertPermanentCount(playerA, "Dragonlord Atarka", 1);
+
+        assertPermanentCount(playerB, "Silvercoat Lion", 1);
+    }
+
+    /**
+     * Animate Dead enchanting a creature with a "enters the battlefield"
+     * triggered ability with no available targets.
+     * https://github.com/magefree/mage/issues/4428
+     */
+    @Test
+    public void testAnimateAndDragonlordAtarkaWithNoTargets() {
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
+
+        // Enchant creature card in a graveyard
+        // When Animate Dead enters the battlefield, if it's on the battlefield, it loses "enchant creature card in a graveyard"
+        // and gains "enchant creature put onto the battlefield with Animate Dead." Return enchanted creature card to the battlefield
+        // under your control and attach Animate Dead to it. When Animate Dead leaves the battlefield, that creature's controller sacrifices it.
+        // Enchanted creature gets -1/-0.
+        addCard(Zone.HAND, playerA, "Animate Dead"); // {1}{B}
+
+        // Flying
+        // Trample
+        // When Dragonlord Atarka enters the battlefield, it deals 5 damage divided as you choose among any number of target
+        // creatures and/or planeswalkers your opponents control.
+        addCard(Zone.GRAVEYARD, playerB, "Dragonlord Atarka", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Animate Dead", "Dragonlord Atarka");
+
+        setStopAt(2, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Animate Dead", 1);
+        assertPermanentCount(playerA, "Dragonlord Atarka", 1);
+    }
 }
