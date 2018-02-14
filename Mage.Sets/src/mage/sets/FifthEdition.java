@@ -62,6 +62,7 @@ public class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Ball Lightning", 210, Rarity.RARE, mage.cards.b.BallLightning.class));
         cards.add(new SetCardInfo("Barbed Sextant", 351, Rarity.COMMON, mage.cards.b.BarbedSextant.class));
         cards.add(new SetCardInfo("Barl's Cage", 352, Rarity.RARE, mage.cards.b.BarlsCage.class));
+        cards.add(new SetCardInfo("Benalish Hero", 286, Rarity.COMMON, mage.cards.b.BenalishHero.class));
         cards.add(new SetCardInfo("Binding Grasp", 74, Rarity.UNCOMMON, mage.cards.b.BindingGrasp.class));
         cards.add(new SetCardInfo("Bird Maiden", 211, Rarity.COMMON, mage.cards.b.BirdMaiden.class));
         cards.add(new SetCardInfo("Birds of Paradise", 142, Rarity.RARE, mage.cards.b.BirdsOfParadise.class));
@@ -205,6 +206,7 @@ public class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Heal", 308, Rarity.COMMON, mage.cards.h.Heal.class));
         cards.add(new SetCardInfo("Healing Salve", 309, Rarity.COMMON, mage.cards.h.HealingSalve.class));
         cards.add(new SetCardInfo("Hecatomb", 29, Rarity.RARE, mage.cards.h.Hecatomb.class));
+        cards.add(new SetCardInfo("Helm of Chatzuk", 376, Rarity.RARE, mage.cards.h.HelmOfChatzuk.class));
         cards.add(new SetCardInfo("Hill Giant", 239, Rarity.COMMON, mage.cards.h.HillGiant.class));
         cards.add(new SetCardInfo("Hollow Trees", 422, Rarity.RARE, mage.cards.h.HollowTrees.class));
         cards.add(new SetCardInfo("Holy Strength", 311, Rarity.COMMON, mage.cards.h.HolyStrength.class));
@@ -281,6 +283,7 @@ public class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Memory Lapse", 103, Rarity.COMMON, mage.cards.m.MemoryLapse.class));
         cards.add(new SetCardInfo("Merfolk of the Pearl Trident", 104, Rarity.COMMON, mage.cards.m.MerfolkOfThePearlTrident.class));
         cards.add(new SetCardInfo("Mesa Falcon", 322, Rarity.COMMON, MesaFalcon.class));
+        cards.add(new SetCardInfo("Mesa Pegasus", 323, Rarity.COMMON, mage.cards.m.MesaPegasus.class));
         cards.add(new SetCardInfo("Millstone", 390, Rarity.RARE, mage.cards.m.Millstone.class));
         cards.add(new SetCardInfo("Mind Bomb", 105, Rarity.UNCOMMON, mage.cards.m.MindBomb.class));
         cards.add(new SetCardInfo("Mind Ravel", 38, Rarity.COMMON, mage.cards.m.MindRavel.class));
