@@ -188,6 +188,7 @@ public class FallenEmpires extends ExpansionSet {
         cards.add(new SetCardInfo("Icatian Scout", 158, Rarity.COMMON, IcatianScout.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Icatian Scout", 159, Rarity.COMMON, IcatianScout.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Icatian Scout", 160, Rarity.COMMON, IcatianScout.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Icatian Skirmishers", 161, Rarity.RARE, mage.cards.i.IcatianSkirmishers.class));
         cards.add(new SetCardInfo("Icatian Store", 183, Rarity.RARE, mage.cards.i.IcatianStore.class));
         cards.add(new SetCardInfo("Icatian Town", 162, Rarity.RARE, mage.cards.i.IcatianTown.class));
         cards.add(new SetCardInfo("Implements of Sacrifice", 173, Rarity.RARE, mage.cards.i.ImplementsOfSacrifice.class));
