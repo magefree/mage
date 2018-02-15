@@ -285,6 +285,7 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Vaevictis Asmadi", 309, Rarity.RARE, mage.cards.v.VaevictisAsmadi.class));
         cards.add(new SetCardInfo("Vampire Bats", 39, Rarity.COMMON, mage.cards.v.VampireBats.class));
         cards.add(new SetCardInfo("Walking Dead", 40, Rarity.COMMON, mage.cards.w.WalkingDead.class));
+        cards.add(new SetCardInfo("Wall of Caltrops", 211, Rarity.COMMON, mage.cards.w.WallOfCaltrops.class));
         cards.add(new SetCardInfo("Wall of Earth", 166, Rarity.COMMON, mage.cards.w.WallOfEarth.class));
         cards.add(new SetCardInfo("Wall of Heat", 167, Rarity.COMMON, mage.cards.w.WallOfHeat.class));
         cards.add(new SetCardInfo("Wall of Light", 212, Rarity.UNCOMMON, mage.cards.w.WallOfLight.class));
