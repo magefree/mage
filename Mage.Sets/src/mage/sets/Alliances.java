@@ -73,6 +73,8 @@ public class Alliances extends ExpansionSet {
         cards.add(new SetCardInfo("Energy Arc", 190, Rarity.UNCOMMON, mage.cards.e.EnergyArc.class));
         cards.add(new SetCardInfo("Enslaved Scout", 104, Rarity.COMMON, EnslavedScout.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Enslaved Scout", 105, Rarity.COMMON, EnslavedScout.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Errand of Duty", 127, Rarity.COMMON, mage.cards.e.ErrandOfDuty.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Errand of Duty", 128, Rarity.COMMON, mage.cards.e.ErrandOfDuty.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Exile", 129, Rarity.RARE, mage.cards.e.Exile.class));
         cards.add(new SetCardInfo("False Demise", 40, Rarity.COMMON, mage.cards.f.FalseDemise.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("False Demise", 41, Rarity.COMMON, mage.cards.f.FalseDemise.class, NON_FULL_USE_VARIOUS));
@@ -122,6 +124,7 @@ public class Alliances extends ExpansionSet {
         cards.add(new SetCardInfo("Mishra's Groundbreaker", 165, Rarity.UNCOMMON, mage.cards.m.MishrasGroundbreaker.class));
         cards.add(new SetCardInfo("Misinformation", 19, Rarity.UNCOMMON, mage.cards.m.Misinformation.class));
         cards.add(new SetCardInfo("Mystic Compass", 166, Rarity.UNCOMMON, mage.cards.m.MysticCompass.class));
+        cards.add(new SetCardInfo("Nature's Blessing", 195, Rarity.UNCOMMON, mage.cards.n.NaturesBlessing.class));
         cards.add(new SetCardInfo("Nature's Chosen", 81, Rarity.UNCOMMON, mage.cards.n.NaturesChosen.class));
         cards.add(new SetCardInfo("Nature's Wrath", 82, Rarity.RARE, mage.cards.n.NaturesWrath.class));
         cards.add(new SetCardInfo("Noble Steeds", 140, Rarity.COMMON, mage.cards.n.NobleSteeds.class, NON_FULL_USE_VARIOUS));
