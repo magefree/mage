@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.d;
+package mage.cards.n;
 
 import java.util.UUID;
 import mage.MageInt;
@@ -38,6 +38,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.keyword.BandingAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -50,52 +51,55 @@ import mage.game.Game;
 
 /**
  *
- * @author North
+ * @author North & L_J
  */
-public class DragonWhelp extends CardImpl {
+public class NalathniDragon extends CardImpl {
 
-    public DragonWhelp(UUID ownerId, CardSetInfo setInfo) {
+    public NalathniDragon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
         this.subtype.add(SubType.DRAGON);
 
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(3);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // {R}: Dragon Whelp gets +1/+0 until end of turn. If this ability has been activated four or more times this turn, sacrifice Dragon Whelp at the beginning of the next end step.
+        // Banding
+        this.addAbility(BandingAbility.getInstance());
+
+        // {R}: Nalathni Dragon gets +1/+0 until end of turn. If this ability has been activated four or more times this turn, sacrifice Nalathni Dragon at the beginning of the next end step.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new BoostSourceEffect(1, 0, Duration.EndOfTurn),
                 new ManaCostsImpl("{R}"));
-        ability.addEffect(new DragonWhelpEffect());
+        ability.addEffect(new NalathniDragonEffect());
         this.addAbility(ability);
     }
 
-    public DragonWhelp(final DragonWhelp card) {
+    public NalathniDragon(final NalathniDragon card) {
         super(card);
     }
 
     @Override
-    public DragonWhelp copy() {
-        return new DragonWhelp(this);
+    public NalathniDragon copy() {
+        return new NalathniDragon(this);
     }
 }
 
-class DragonWhelpEffect extends OneShotEffect {
+class NalathniDragonEffect extends OneShotEffect {
 
-    public DragonWhelpEffect() {
+    public NalathniDragonEffect() {
         super(Outcome.Damage);
         this.staticText = "If this ability has been activated four or more times this turn, sacrifice {this} at the beginning of the next end step";
     }
 
-    public DragonWhelpEffect(final DragonWhelpEffect effect) {
+    public NalathniDragonEffect(final NalathniDragonEffect effect) {
         super(effect);
     }
 
     @Override
-    public DragonWhelpEffect copy() {
-        return new DragonWhelpEffect(this);
+    public NalathniDragonEffect copy() {
+        return new NalathniDragonEffect(this);
     }
 
     @Override
