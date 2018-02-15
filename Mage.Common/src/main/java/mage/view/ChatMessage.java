@@ -29,6 +29,7 @@
 package mage.view;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  *
@@ -38,7 +39,7 @@ public class ChatMessage implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private String username;
-    private String time;
+    private Date time;
     private String message;
     private MessageColor color;
     private SoundToPlay soundToPlay;
@@ -56,15 +57,15 @@ public class ChatMessage implements Serializable {
         PlayerLeft, PlayerQuitTournament, PlayerSubmittedDeck, PlayerWhispered
     }
 
-    public ChatMessage(String username, String message, String time, MessageColor color) {
+    public ChatMessage(String username, String message, Date time, MessageColor color) {
         this(username, message, time, color, null);
     }
 
-    public ChatMessage(String username, String message, String time, MessageColor color, SoundToPlay soundToPlay) {
+    public ChatMessage(String username, String message, Date time, MessageColor color, SoundToPlay soundToPlay) {
         this(username, message, time, color, MessageType.TALK, soundToPlay);
     }
     
-    public ChatMessage(String username, String message, String time, MessageColor color, MessageType messageType, SoundToPlay soundToPlay) {
+    public ChatMessage(String username, String message, Date time, MessageColor color, MessageType messageType, SoundToPlay soundToPlay) {
         this.username = username;
         this.message = message;
         this.time = time;
@@ -93,7 +94,7 @@ public class ChatMessage implements Serializable {
         return username;
     }
 
-    public String getTime() {
+    public Date getTime() {
         return time;
     }
 

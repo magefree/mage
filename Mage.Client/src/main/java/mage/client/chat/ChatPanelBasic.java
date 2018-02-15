@@ -37,6 +37,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -54,6 +56,11 @@ import org.mage.card.arcane.ManaSymbols;
  * @author BetaSteward_at_googlemail.com, nantuko
  */
 public class ChatPanelBasic extends javax.swing.JPanel {
+
+    /**
+     * Time formatter
+     */
+    protected final DateFormat timeFormatter = DateFormat.getTimeInstance(DateFormat.SHORT);
 
     protected UUID chatId;
     /**
@@ -238,10 +245,10 @@ public class ChatPanelBasic extends javax.swing.JPanel {
      */
     Pattern cardNamePattern = Pattern.compile(".*<font bgcolor=orange.*?</font>.*");
 
-    public void receiveMessage(String username, String message, String time, MessageType messageType, MessageColor color) {
+    public void receiveMessage(String username, String message, Date time, MessageType messageType, MessageColor color) {
         StringBuilder text = new StringBuilder();
         if (time != null) {
-            text.append(getColoredText(TIMESTAMP_COLOR, time + ": "));
+            text.append(getColoredText(TIMESTAMP_COLOR, timeFormatter.format(time) + ": "));
             //this.txtConversation.append(TIMESTAMP_COLOR, time + " ");
         }
         String userColor;
