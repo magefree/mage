@@ -124,6 +124,7 @@ public class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Elvish Spirit Guide", 159, Rarity.UNCOMMON, mage.cards.e.ElvishSpiritGuide.class));
         cards.add(new SetCardInfo("Energy Storm", 11, Rarity.RARE, mage.cards.e.EnergyStorm.class));
         cards.add(new SetCardInfo("Enervate", 47, Rarity.COMMON, mage.cards.e.Enervate.class));
+        cards.add(new SetCardInfo("Errand of Duty", 12, Rarity.UNCOMMON, mage.cards.e.ErrandOfDuty.class));
         cards.add(new SetCardInfo("Errantry", 124, Rarity.COMMON, mage.cards.e.Errantry.class));
         cards.add(new SetCardInfo("Essence Filter", 160, Rarity.UNCOMMON, mage.cards.e.EssenceFilter.class));
         cards.add(new SetCardInfo("Essence Flare", 48, Rarity.COMMON, mage.cards.e.EssenceFlare.class));
@@ -189,6 +190,7 @@ public class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Misinformation", 105, Rarity.UNCOMMON, mage.cards.m.Misinformation.class));
         cards.add(new SetCardInfo("Mudslide", 136, Rarity.RARE, mage.cards.m.Mudslide.class));
         cards.add(new SetCardInfo("Narwhal", 57, Rarity.UNCOMMON, mage.cards.n.Narwhal.class));
+        cards.add(new SetCardInfo("Nature's Blessing", 196, Rarity.UNCOMMON, mage.cards.n.NaturesBlessing.class));
         cards.add(new SetCardInfo("Nature's Wrath", 172, Rarity.RARE, mage.cards.n.NaturesWrath.class));
         cards.add(new SetCardInfo("Necrite", 106, Rarity.COMMON, Necrite.class));
         cards.add(new SetCardInfo("Necropotence", 107, Rarity.RARE, mage.cards.n.Necropotence.class));
