@@ -72,6 +72,7 @@ public class ArabianNights extends ExpansionSet {
         cards.add(new SetCardInfo("Bird Maiden", 46, Rarity.COMMON, mage.cards.b.BirdMaiden.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bottle of Suleiman", 72, Rarity.RARE, mage.cards.b.BottleOfSuleiman.class));
         cards.add(new SetCardInfo("Brass Man", 73, Rarity.UNCOMMON, mage.cards.b.BrassMan.class));
+        cards.add(new SetCardInfo("Camel", 58, Rarity.COMMON, mage.cards.c.Camel.class));
         cards.add(new SetCardInfo("City in a Bottle", 74, Rarity.RARE, mage.cards.c.CityInABottle.class));
         cards.add(new SetCardInfo("City of Brass", 85, Rarity.UNCOMMON, mage.cards.c.CityOfBrass.class));
         cards.add(new SetCardInfo("Cuombajj Witches", 1, Rarity.COMMON, mage.cards.c.CuombajjWitches.class));
