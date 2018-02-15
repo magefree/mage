@@ -329,7 +329,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                     target.setRequired(false);
                     if (!target.canChoose(attackingPlayerId, game)
                             || game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARING_ATTACKERS, attackingPlayerId, attackingPlayerId))
-                            || !player.chooseUse(Outcome.AIDontUseIt, "Do you wish to " + (isBanded ? "band " + attacker.getLogName() + " with another " : "form a band with " + attacker.getLogName() +  " and an " ) + "attacking creature?", null, game)) {
+                            || !player.chooseUse(Outcome.Benefit, "Do you wish to " + (isBanded ? "band " + attacker.getLogName() + " with another " : "form a band with " + attacker.getLogName() +  " and an " ) + "attacking creature?", null, game)) {
                         break;
                     }
                     if (target.choose(Outcome.Benefit, attackingPlayerId, null, game)) {
