@@ -668,8 +668,10 @@ public abstract class GameImpl implements Game, Serializable {
         if (!simulation && !this.hasEnded()) { // if player left or game is over no undo is possible - this could lead to wrong winner
             if (bookmark != 0) {
                 if (!savedStates.contains(bookmark - 1)) {
-                    logger.error("It was not possible to do the requested undo operation (bookmark " + (bookmark - 1) + " does not exist) context: " + context);
-                    logger.info("Saved states: " + savedStates.toString());
+                    if (!savedStates.isEmpty()) { // empty if rollback to a turn was requested before, otherwise unclear why
+                        logger.error("It was not possible to do the requested undo operation (bookmark " + (bookmark - 1) + " does not exist) context: " + context);
+                        logger.info("Saved states: " + savedStates.toString());
+                    }
                 } else {
                     int stateNum = savedStates.get(bookmark - 1);
                     removeBookmark(bookmark);
@@ -2972,6 +2974,9 @@ public abstract class GameImpl implements Game, Serializable {
                     informPlayers(GameLog.getPlayerRequestColoredText("Player request: Rolling back to start of turn " + restore.getTurnNum()));
                     state.restoreForRollBack(restore);
                     playerList.setCurrent(state.getPlayerByOrderId());
+                    // Reset temporary created bookmarks because no longer valid after rollback
+                    savedStates.clear();
+                    gameStates.clear();
                     // because restore uses the objects without copy each copy the state again
                     gameStatesRollBack.put(getTurnNum(), state.copy());
                     executingRollback = true;

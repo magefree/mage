@@ -1190,11 +1190,9 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     protected void restoreState(int bookmark, String text, Game game) {
-        if (storedBookmark > -1) { // e.g. a turn rollback sets this to -1 so no more rollback of current action may be done
-            game.restoreState(bookmark, text);
-            if (storedBookmark >= bookmark) {
-                resetStoredBookmark(game);
-            }
+        game.restoreState(bookmark, text);
+        if (storedBookmark >= bookmark) {
+            resetStoredBookmark(game);
         }
     }
 
