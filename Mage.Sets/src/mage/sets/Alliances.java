@@ -181,6 +181,7 @@ public class Alliances extends ExpansionSet {
         cards.add(new SetCardInfo("Tidal Control", 59, Rarity.RARE, mage.cards.t.TidalControl.class));
         cards.add(new SetCardInfo("Tornado", 86, Rarity.RARE, mage.cards.t.Tornado.class));
         cards.add(new SetCardInfo("Unlikely Alliance", 153, Rarity.UNCOMMON, mage.cards.u.UnlikelyAlliance.class));
+        cards.add(new SetCardInfo("Urza's Engine", 180, Rarity.UNCOMMON, mage.cards.u.UrzasEngine.class));
         cards.add(new SetCardInfo("Varchild's Crusader", 120, Rarity.COMMON, mage.cards.v.VarchildsCrusader.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Varchild's Crusader", 121, Rarity.COMMON, mage.cards.v.VarchildsCrusader.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Varchild's War-Riders", 122, Rarity.RARE, mage.cards.v.VarchildsWarRiders.class));
