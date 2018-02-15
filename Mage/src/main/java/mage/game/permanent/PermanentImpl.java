@@ -113,6 +113,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected UUID attachedTo;
     protected int attachedToZoneChangeCounter;
     protected MageObjectReference pairedPermanent;
+    protected List<UUID> bandedCards = new ArrayList<>();
     protected Counters counters;
     protected List<MarkedDamageInfo> markedDamage;
     protected int timesLoyaltyUsed = 0;
@@ -177,6 +178,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.monstrous = permanent.monstrous;
         this.renowned = permanent.renowned;
         this.pairedPermanent = permanent.pairedPermanent;
+        this.bandedCards.addAll(permanent.bandedCards);
         this.timesLoyaltyUsed = permanent.timesLoyaltyUsed;
 
         this.morphed = permanent.morphed;
@@ -1119,32 +1121,44 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         if (tapped && !game.getState().getContinuousEffects().asThough(this.getId(), AsThoughEffectType.BLOCK_TAPPED, this.getControllerId(), game)) {
             return false;
         }
-        Permanent attacker = game.getPermanent(attackerId);
-        if (attacker == null) {
+        Permanent baseAttacker = game.getPermanent(attackerId);
+        if (baseAttacker == null) {
             return false;
         }
-        // controller of attacking permanent must be an opponent
-        if (!game.getPlayer(this.getControllerId()).hasOpponent(attacker.getControllerId(), game)) {
-            return false;
-        }
-        //20101001 - 509.1b
-        // check blocker restrictions
-        for (Map.Entry<RestrictionEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRestrictionEffects(this, game).entrySet()) {
-            for (Ability ability : entry.getValue()) {
-                if (!entry.getKey().canBlock(attacker, this, ability, game)) {
-                    return false;
+        List<UUID> attackerIdsToCheck = new ArrayList<>(baseAttacker.getBandedCards()); // handles banding
+        attackerIdsToCheck.add(attackerId);
+        blockCheck:
+        for (UUID bandedId : attackerIdsToCheck) {
+            Permanent attacker = game.getPermanent(bandedId);
+            if (attacker == null) {
+                continue blockCheck;
+            }
+            // controller of attacking permanent must be an opponent
+            if (!game.getPlayer(this.getControllerId()).hasOpponent(attacker.getControllerId(), game)) {
+                continue blockCheck;
+            }
+            //20101001 - 509.1b
+            // check blocker restrictions
+            for (Map.Entry<RestrictionEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRestrictionEffects(this, game).entrySet()) {
+                for (Ability ability : entry.getValue()) {
+                    if (!entry.getKey().canBlock(attacker, this, ability, game)) {
+                        continue blockCheck;
+                    }
                 }
             }
-        }
-        // check also attacker's restriction effects
-        for (Map.Entry<RestrictionEffect, Set<Ability>> restrictionEntry : game.getContinuousEffects().getApplicableRestrictionEffects(attacker, game).entrySet()) {
-            for (Ability ability : restrictionEntry.getValue()) {
-                if (!restrictionEntry.getKey().canBeBlocked(attacker, this, ability, game)) {
-                    return false;
+            // check also attacker's restriction effects
+            for (Map.Entry<RestrictionEffect, Set<Ability>> restrictionEntry : game.getContinuousEffects().getApplicableRestrictionEffects(attacker, game).entrySet()) {
+                for (Ability ability : restrictionEntry.getValue()) {
+                    if (!restrictionEntry.getKey().canBeBlocked(attacker, this, ability, game)) {
+                        continue blockCheck;
+                    }
                 }
             }
+            if (!attacker.hasProtectionFrom(this, game)) {
+                return true;
+            }
         }
-        return !attacker.hasProtectionFrom(this, game);
+        return false;
     }
 
     @Override
@@ -1333,6 +1347,28 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public void clearPairedCard() {
         this.pairedPermanent = null;
+    }
+
+    @Override
+    public void addBandedCard(UUID bandedCard) {
+        if (!this.bandedCards.contains(bandedCard)) {
+            this.bandedCards.add(bandedCard);
+        }
+    }
+
+    @Override
+    public void removeBandedCard(UUID bandedCard) {
+        this.bandedCards.remove(bandedCard);
+    }
+
+    @Override
+    public List<UUID> getBandedCards() {
+        return bandedCards;
+    }
+
+    @Override
+    public void clearBandedCards() {
+        this.bandedCards.clear();
     }
 
     @Override

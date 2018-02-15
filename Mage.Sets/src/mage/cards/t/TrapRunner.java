@@ -114,7 +114,7 @@ class TrapRunnerEffect extends OneShotEffect {
         if (controller != null && permanent != null) {
             CombatGroup combatGroup = game.getCombat().findGroup(permanent.getId());
             if (combatGroup != null) {
-                combatGroup.setBlocked(true);
+                combatGroup.setBlocked(true, game);
                 game.informPlayers(permanent.getLogName() + " has become blocked");
                 return true;
             }

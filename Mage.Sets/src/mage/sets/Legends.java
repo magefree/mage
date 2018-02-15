@@ -71,6 +71,7 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Arena of the Ancients", 215, Rarity.RARE, mage.cards.a.ArenaOfTheAncients.class));
         cards.add(new SetCardInfo("Avoid Fate", 89, Rarity.COMMON, mage.cards.a.AvoidFate.class));
         cards.add(new SetCardInfo("Axelrod Gunnarson", 259, Rarity.RARE, mage.cards.a.AxelrodGunnarson.class));
+        cards.add(new SetCardInfo("Ayesha Tanaka", 260, Rarity.RARE, mage.cards.a.AyeshaTanaka.class));
         cards.add(new SetCardInfo("Azure Drake", 46, Rarity.UNCOMMON, mage.cards.a.AzureDrake.class));
         cards.add(new SetCardInfo("Backfire", 47, Rarity.UNCOMMON, mage.cards.b.Backfire.class));
         cards.add(new SetCardInfo("Barbary Apes", 90, Rarity.COMMON, mage.cards.b.BarbaryApes.class));
@@ -124,6 +125,7 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Flash Flood", 57, Rarity.COMMON, mage.cards.f.FlashFlood.class));
         cards.add(new SetCardInfo("Floral Spuzzem", 101, Rarity.UNCOMMON, mage.cards.f.FloralSpuzzem.class));
         cards.add(new SetCardInfo("Force Spike", 58, Rarity.COMMON, mage.cards.f.ForceSpike.class));
+        cards.add(new SetCardInfo("Fortified Area", 183, Rarity.UNCOMMON, mage.cards.f.FortifiedArea.class));
         cards.add(new SetCardInfo("Frost Giant", 146, Rarity.UNCOMMON, mage.cards.f.FrostGiant.class));
         cards.add(new SetCardInfo("Gabriel Angelfire", 266, Rarity.RARE, mage.cards.g.GabrielAngelfire.class));
         cards.add(new SetCardInfo("Gaseous Form", 59, Rarity.COMMON, mage.cards.g.GaseousForm.class));
@@ -288,6 +290,7 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Wall of Light", 212, Rarity.UNCOMMON, mage.cards.w.WallOfLight.class));
         cards.add(new SetCardInfo("Wall of Opposition", 168, Rarity.RARE, mage.cards.w.WallOfOpposition.class));
         cards.add(new SetCardInfo("Wall of Putrid Flesh", 41, Rarity.UNCOMMON, mage.cards.w.WallOfPutridFlesh.class));
+        cards.add(new SetCardInfo("Wall of Vapor", 84, Rarity.COMMON, mage.cards.w.WallOfVapor.class));
         cards.add(new SetCardInfo("Wall of Wonder", 85, Rarity.UNCOMMON, mage.cards.w.WallOfWonder.class));
         cards.add(new SetCardInfo("Whirling Dervish", 125, Rarity.UNCOMMON, mage.cards.w.WhirlingDervish.class));
         cards.add(new SetCardInfo("White Mana Battery", 244, Rarity.UNCOMMON, mage.cards.w.WhiteManaBattery.class));

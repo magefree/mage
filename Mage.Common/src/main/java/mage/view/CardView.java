@@ -112,6 +112,7 @@ public class CardView extends SimpleCardView {
     protected List<UUID> targets;
 
     protected UUID pairedCard;
+    protected List<UUID> bandedCards;
     protected boolean paid;
     protected List<CounterView> counters;
 
@@ -201,6 +202,7 @@ public class CardView extends SimpleCardView {
         this.targets = null;
 
         this.pairedCard = cardView.pairedCard;
+        this.bandedCards = null;
         this.paid = cardView.paid;
         this.counters = null;
 
@@ -357,6 +359,10 @@ public class CardView extends SimpleCardView {
                     }
                 }
                 this.pairedCard = permanent.getPairedCard() != null ? permanent.getPairedCard().getSourceId() : null;
+                this.bandedCards = new ArrayList<>();
+                for (UUID bandedCard : permanent.getBandedCards()) {
+                    bandedCards.add(bandedCard);
+                }
                 if (!permanent.getControllerId().equals(permanent.getOwnerId())) {
                     controlledByOwner = false;
                 }
@@ -882,6 +888,10 @@ public class CardView extends SimpleCardView {
 
     public UUID getPairedCard() {
         return pairedCard;
+    }
+
+    public List<UUID> getBandedCards() {
+        return bandedCards;
     }
 
     public int getType() {

@@ -109,6 +109,7 @@ public class TheDark extends ExpansionSet {
         cards.add(new SetCardInfo("Holy Light", 83, Rarity.COMMON, mage.cards.h.HolyLight.class));
         cards.add(new SetCardInfo("Inferno", 70, Rarity.RARE, mage.cards.i.Inferno.class));
         cards.add(new SetCardInfo("Inquisition", 9, Rarity.COMMON, mage.cards.i.Inquisition.class));
+        cards.add(new SetCardInfo("Knights of Thorn", 84, Rarity.RARE, mage.cards.k.KnightsOfThorn.class));
         cards.add(new SetCardInfo("Land Leeches", 42, Rarity.COMMON, mage.cards.l.LandLeeches.class));
         cards.add(new SetCardInfo("Leviathan", 29, Rarity.RARE, mage.cards.l.Leviathan.class));
         cards.add(new SetCardInfo("Living Armor", 101, Rarity.UNCOMMON, mage.cards.l.LivingArmor.class));
@@ -129,6 +130,7 @@ public class TheDark extends ExpansionSet {
         cards.add(new SetCardInfo("Niall Silvain", 45, Rarity.RARE, mage.cards.n.NiallSilvain.class));
         cards.add(new SetCardInfo("Orc General", 72, Rarity.UNCOMMON, mage.cards.o.OrcGeneral.class));
         cards.add(new SetCardInfo("People of the Woods", 46, Rarity.UNCOMMON, mage.cards.p.PeopleOfTheWoods.class));
+        cards.add(new SetCardInfo("Pikemen", 88, Rarity.COMMON, mage.cards.p.Pikemen.class));
         cards.add(new SetCardInfo("Preacher", 89, Rarity.RARE, mage.cards.p.Preacher.class));
         cards.add(new SetCardInfo("Psychic Allergy", 33, Rarity.RARE, mage.cards.p.PsychicAllergy.class));
         cards.add(new SetCardInfo("Rag Man", 13, Rarity.RARE, mage.cards.r.RagMan.class));

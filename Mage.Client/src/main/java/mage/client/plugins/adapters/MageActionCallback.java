@@ -379,6 +379,7 @@ public class MageActionCallback implements ActionCallback {
         ArrowUtil.drawArrowsForTargets(data, parentPoint);
         ArrowUtil.drawArrowsForSource(data, parentPoint);
         ArrowUtil.drawArrowsForPairedCards(data, parentPoint);
+        ArrowUtil.drawArrowsForBandedCards(data, parentPoint);
         ArrowUtil.drawArrowsForEnchantPlayers(data, parentPoint);
         tooltipCard = data.card;
         showTooltipPopup(data, parentComponent, parentPoint);
@@ -441,6 +442,7 @@ public class MageActionCallback implements ActionCallback {
     public void hideGameUpdate(UUID gameId) {
         ArrowBuilder.getBuilder().removeArrowsByType(gameId, ArrowBuilder.Type.TARGET);
         ArrowBuilder.getBuilder().removeArrowsByType(gameId, ArrowBuilder.Type.PAIRED);
+        ArrowBuilder.getBuilder().removeArrowsByType(gameId, ArrowBuilder.Type.BANDED);
         ArrowBuilder.getBuilder().removeArrowsByType(gameId, ArrowBuilder.Type.SOURCE);
         ArrowBuilder.getBuilder().removeArrowsByType(gameId, ArrowBuilder.Type.ENCHANT_PLAYERS);
     }
@@ -452,6 +454,7 @@ public class MageActionCallback implements ActionCallback {
         if (gameId != null) {
             ArrowBuilder.getBuilder().removeArrowsByType(gameId, ArrowBuilder.Type.TARGET);
             ArrowBuilder.getBuilder().removeArrowsByType(gameId, ArrowBuilder.Type.PAIRED);
+            ArrowBuilder.getBuilder().removeArrowsByType(gameId, ArrowBuilder.Type.BANDED);
             ArrowBuilder.getBuilder().removeArrowsByType(gameId, ArrowBuilder.Type.SOURCE);
             ArrowBuilder.getBuilder().removeArrowsByType(gameId, ArrowBuilder.Type.ENCHANT_PLAYERS);
         }

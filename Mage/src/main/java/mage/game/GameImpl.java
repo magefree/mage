@@ -1803,10 +1803,22 @@ public abstract class GameImpl implements Game, Serializable {
                     Permanent paired = perm.getPairedCard().getPermanent(this);
                     if (paired == null || !perm.getControllerId().equals(paired.getControllerId()) || paired.getPairedCard() == null) {
                         perm.setPairedCard(null);
-                        if (paired != null) {
+                        if (paired != null && paired.getPairedCard() != null) {
                             paired.setPairedCard(null);
                         }
                         somethingHappened = true;
+                    }
+                }
+                if (perm.getBandedCards() != null && !perm.getBandedCards().isEmpty()) {
+                    for (UUID bandedId : new ArrayList<>(perm.getBandedCards())) {
+                        Permanent banded = getPermanent(bandedId);
+                        if (banded == null || !perm.getControllerId().equals(banded.getControllerId()) || !banded.getBandedCards().contains(perm.getId())) {
+                            perm.removeBandedCard(bandedId);
+                            if (banded != null && banded.getBandedCards().contains(perm.getId())) {
+                                banded.removeBandedCard(perm.getId());
+                            }
+                            somethingHappened = true;
+                        }
                     }
                 }
             } else if (perm.getPairedCard() != null) {
@@ -1817,6 +1829,15 @@ public abstract class GameImpl implements Game, Serializable {
                     paired.setPairedCard(null);
                 }
                 somethingHappened = true;
+            } else if (perm.getBandedCards() != null && !perm.getBandedCards().isEmpty()) {
+                perm.clearBandedCards();
+                for (UUID bandedId : perm.getBandedCards()) {
+                    Permanent banded = getPermanent(bandedId);
+                    if (banded != null) {
+                        banded.removeBandedCard(perm.getId());
+                    }
+                    somethingHappened = true;
+                }
             }
             if (perm.isPlaneswalker()) {
                 //20091005 - 704.5i

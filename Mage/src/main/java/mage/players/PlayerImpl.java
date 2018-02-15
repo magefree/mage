@@ -832,6 +832,14 @@ public abstract class PlayerImpl implements Player, Serializable {
                 pairedCard.clearPairedCard();
             }
         }
+        if (permanent.getBandedCards() != null && !permanent.getBandedCards().isEmpty()) {
+            for (UUID bandedId : permanent.getBandedCards()) {
+                Permanent banded = game.getPermanent(bandedId);
+                if (banded != null) {
+                    banded.removeBandedCard(permanent.getId());
+                }
+            }
+        }
         return true;
     }
 

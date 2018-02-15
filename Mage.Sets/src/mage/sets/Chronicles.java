@@ -64,6 +64,7 @@ public class Chronicles extends ExpansionSet {
         cards.add(new SetCardInfo("Ashnod's Altar", 72, Rarity.COMMON, mage.cards.a.AshnodsAltar.class));
         cards.add(new SetCardInfo("Ashnod's Transmogrant", 73, Rarity.COMMON, mage.cards.a.AshnodsTransmogrant.class));
         cards.add(new SetCardInfo("Axelrod Gunnarson", 107, Rarity.RARE, mage.cards.a.AxelrodGunnarson.class));
+        cards.add(new SetCardInfo("Ayesha Tanaka", 108, Rarity.RARE, mage.cards.a.AyeshaTanaka.class));
         cards.add(new SetCardInfo("Azure Drake", 15, Rarity.UNCOMMON, mage.cards.a.AzureDrake.class));
         cards.add(new SetCardInfo("Banshee", 1, Rarity.UNCOMMON, mage.cards.b.Banshee.class));
         cards.add(new SetCardInfo("Barl's Cage", 74, Rarity.RARE, mage.cards.b.BarlsCage.class));
@@ -159,7 +160,9 @@ public class Chronicles extends ExpansionSet {
         cards.add(new SetCardInfo("Vaevictis Asmadi", 124, Rarity.RARE, mage.cards.v.VaevictisAsmadi.class));
         cards.add(new SetCardInfo("Wall of Heat", 55, Rarity.COMMON, mage.cards.w.WallOfHeat.class));
         cards.add(new SetCardInfo("Wall of Opposition", 56, Rarity.UNCOMMON, mage.cards.w.WallOfOpposition.class));
+        cards.add(new SetCardInfo("Wall of Vapor", 27, Rarity.COMMON, mage.cards.w.WallOfVapor.class));
         cards.add(new SetCardInfo("Wall of Wonder", 28, Rarity.UNCOMMON, mage.cards.w.WallOfWonder.class));
+        cards.add(new SetCardInfo("War Elephant", 69, Rarity.COMMON, mage.cards.w.WarElephant.class));
         cards.add(new SetCardInfo("Witch Hunter", 70, Rarity.UNCOMMON, mage.cards.w.WitchHunter.class));
         cards.add(new SetCardInfo("Xira Arien", 125, Rarity.RARE, mage.cards.x.XiraArien.class));
         cards.add(new SetCardInfo("Yawgmoth Demon", 14, Rarity.RARE, mage.cards.y.YawgmothDemon.class));

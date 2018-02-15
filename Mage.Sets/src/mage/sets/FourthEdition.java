@@ -205,6 +205,7 @@ public class FourthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Stream of Life", 272, Rarity.COMMON, mage.cards.s.StreamOfLife.class));
         cards.add(new SetCardInfo("Sylvan Library", 273, Rarity.RARE, mage.cards.s.SylvanLibrary.class));
         cards.add(new SetCardInfo("Thicket Basilisk", 274, Rarity.UNCOMMON, mage.cards.t.ThicketBasilisk.class));
+        cards.add(new SetCardInfo("Timber Wolves", 275, Rarity.RARE, mage.cards.t.TimberWolves.class));
         cards.add(new SetCardInfo("Titania's Song", 276, Rarity.RARE, mage.cards.t.TitaniasSong.class));
         cards.add(new SetCardInfo("Tranquility", 277, Rarity.COMMON, mage.cards.t.Tranquility.class));
         cards.add(new SetCardInfo("Tsunami", 278, Rarity.UNCOMMON, mage.cards.t.Tsunami.class));
@@ -299,6 +300,7 @@ public class FourthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Animate Wall", 4, Rarity.RARE, mage.cards.a.AnimateWall.class));
         cards.add(new SetCardInfo("Armageddon", 5, Rarity.RARE, mage.cards.a.Armageddon.class));
         cards.add(new SetCardInfo("Balance", 6, Rarity.RARE, mage.cards.b.Balance.class));
+        cards.add(new SetCardInfo("Benalish Hero", 7, Rarity.COMMON, mage.cards.b.BenalishHero.class));
         cards.add(new SetCardInfo("Black Ward", 8, Rarity.UNCOMMON, mage.cards.b.BlackWard.class));
         cards.add(new SetCardInfo("Blessing", 9, Rarity.RARE, mage.cards.b.Blessing.class));
         cards.add(new SetCardInfo("Blue Ward", 10, Rarity.UNCOMMON, mage.cards.b.BlueWard.class));
@@ -317,6 +319,7 @@ public class FourthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Divine Transformation", 23, Rarity.UNCOMMON, mage.cards.d.DivineTransformation.class));
         cards.add(new SetCardInfo("Elder Land Wurm", 24, Rarity.RARE, mage.cards.e.ElderLandWurm.class));
         cards.add(new SetCardInfo("Eye for an Eye", 25, Rarity.RARE, mage.cards.e.EyeForAnEye.class));
+        cards.add(new SetCardInfo("Fortified Area", 26, Rarity.COMMON, mage.cards.f.FortifiedArea.class));
         cards.add(new SetCardInfo("Green Ward", 27, Rarity.UNCOMMON, mage.cards.g.GreenWard.class));
         cards.add(new SetCardInfo("Healing Salve", 28, Rarity.COMMON, mage.cards.h.HealingSalve.class));
         cards.add(new SetCardInfo("Holy Armor", 29, Rarity.COMMON, mage.cards.h.HolyArmor.class));
@@ -325,11 +328,14 @@ public class FourthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Karma", 32, Rarity.UNCOMMON, mage.cards.k.Karma.class));
         cards.add(new SetCardInfo("Kismet", 33, Rarity.UNCOMMON, mage.cards.k.Kismet.class));
         cards.add(new SetCardInfo("Land Tax", 34, Rarity.RARE, mage.cards.l.LandTax.class));
+        cards.add(new SetCardInfo("Mesa Pegasus", 35, Rarity.COMMON, mage.cards.m.MesaPegasus.class));
+        cards.add(new SetCardInfo("Morale", 36, Rarity.COMMON, mage.cards.m.Morale.class));
         cards.add(new SetCardInfo("Northern Paladin", 37, Rarity.RARE, mage.cards.n.NorthernPaladin.class));
         cards.add(new SetCardInfo("Osai Vultures", 38, Rarity.UNCOMMON, mage.cards.o.OsaiVultures.class));
         cards.add(new SetCardInfo("Pearled Unicorn", 39, Rarity.COMMON, mage.cards.p.PearledUnicorn.class));
         cards.add(new SetCardInfo("Personal Incarnation", 40, Rarity.RARE, mage.cards.p.PersonalIncarnation.class));
         cards.add(new SetCardInfo("Piety", 41, Rarity.COMMON, Piety.class));
+        cards.add(new SetCardInfo("Pikemen", 42, Rarity.COMMON, mage.cards.p.Pikemen.class));
         cards.add(new SetCardInfo("Purelace", 43, Rarity.RARE, mage.cards.p.Purelace.class));
         cards.add(new SetCardInfo("Red Ward", 44, Rarity.UNCOMMON, mage.cards.r.RedWard.class));
         cards.add(new SetCardInfo("Reverse Damage", 45, Rarity.RARE, mage.cards.r.ReverseDamage.class));
@@ -351,6 +357,7 @@ public class FourthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Ankh of Mishra", 294, Rarity.RARE, mage.cards.a.AnkhOfMishra.class));
         cards.add(new SetCardInfo("Armageddon Clock", 295, Rarity.RARE, mage.cards.a.ArmageddonClock.class));
         cards.add(new SetCardInfo("Ashnod's Battle Gear", 296, Rarity.UNCOMMON, mage.cards.a.AshnodsBattleGear.class));
+        cards.add(new SetCardInfo("Battering Ram", 297, Rarity.COMMON, mage.cards.b.BatteringRam.class));
         cards.add(new SetCardInfo("Black Mana Battery", 298, Rarity.RARE, mage.cards.b.BlackManaBattery.class));
         cards.add(new SetCardInfo("Black Vise", 299, Rarity.UNCOMMON, mage.cards.b.BlackVise.class));
         cards.add(new SetCardInfo("Blue Mana Battery", 300, Rarity.RARE, mage.cards.b.BlueManaBattery.class));
@@ -376,6 +383,7 @@ public class FourthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Glasses of Urza", 321, Rarity.UNCOMMON, mage.cards.g.GlassesOfUrza.class));
         cards.add(new SetCardInfo("Grapeshot Catapult", 322, Rarity.COMMON, mage.cards.g.GrapeshotCatapult.class));
         cards.add(new SetCardInfo("Green Mana Battery", 323, Rarity.RARE, mage.cards.g.GreenManaBattery.class));
+        cards.add(new SetCardInfo("Helm of Chatzuk", 324, Rarity.RARE, mage.cards.h.HelmOfChatzuk.class));
         cards.add(new SetCardInfo("Howling Mine", 325, Rarity.RARE, mage.cards.h.HowlingMine.class));
         cards.add(new SetCardInfo("Iron Star", 326, Rarity.UNCOMMON, mage.cards.i.IronStar.class));
         cards.add(new SetCardInfo("Ivory Cup", 327, Rarity.UNCOMMON, mage.cards.i.IvoryCup.class));
@@ -388,6 +396,7 @@ public class FourthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Mana Vault", 334, Rarity.RARE, mage.cards.m.ManaVault.class));
         cards.add(new SetCardInfo("Meekstone", 335, Rarity.RARE, mage.cards.m.Meekstone.class));
         cards.add(new SetCardInfo("Millstone", 336, Rarity.RARE, mage.cards.m.Millstone.class));
+        cards.add(new SetCardInfo("Mishra's War Machine", 337, Rarity.RARE, mage.cards.m.MishrasWarMachine.class));
         cards.add(new SetCardInfo("Nevinyrral's Disk", 338, Rarity.RARE, mage.cards.n.NevinyrralsDisk.class));
         cards.add(new SetCardInfo("Obsianus Golem", 339, Rarity.UNCOMMON, mage.cards.o.ObsianusGolem.class));
         cards.add(new SetCardInfo("Onulet", 340, Rarity.RARE, mage.cards.o.Onulet.class));
@@ -405,11 +414,11 @@ public class FourthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("The Rack", 352, Rarity.UNCOMMON, mage.cards.t.TheRack.class));
         cards.add(new SetCardInfo("Throne of Bone", 353, Rarity.UNCOMMON, mage.cards.t.ThroneOfBone.class));
         cards.add(new SetCardInfo("Triskelion", 354, Rarity.RARE, mage.cards.t.Triskelion.class));
+        cards.add(new SetCardInfo("Urza's Avenger", 355, Rarity.RARE, mage.cards.u.UrzasAvenger.class));
         cards.add(new SetCardInfo("Wall of Spears", 356, Rarity.COMMON, mage.cards.w.WallOfSpears.class));
         cards.add(new SetCardInfo("White Mana Battery", 357, Rarity.RARE, mage.cards.w.WhiteManaBattery.class));
         cards.add(new SetCardInfo("Winter Orb", 358, Rarity.RARE, mage.cards.w.WinterOrb.class));
         cards.add(new SetCardInfo("Wooden Sphere", 359, Rarity.UNCOMMON, mage.cards.w.WoodenSphere.class));
         cards.add(new SetCardInfo("Yotian Soldier", 360, Rarity.COMMON, mage.cards.y.YotianSoldier.class));
-        cards.add(new SetCardInfo("Morale", 36, Rarity.COMMON, mage.cards.m.Morale.class));
     }
 }
