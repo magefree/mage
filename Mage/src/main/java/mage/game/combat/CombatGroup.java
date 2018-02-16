@@ -173,21 +173,16 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
     public void assignDamageToAttackers(boolean first, Game game) {
         if (!blockers.isEmpty() && (!first || hasFirstOrDoubleStrike(game))) {
             // this should only come up if Butcher Orgg is granted the ability to block multiple blockers
-            boolean altDamageMethod = false;
             for (UUID blockerId : blockers) {
                 Permanent blocker = game.getPermanent(blockerId);
                 if (assignsDefendingPlayerAndOrDefendingCreaturesDividedDamage(blocker, blocker.getControllerId(), first, game, false)) {
-                    altDamageMethod = true;
+                    return;
                 }
             }
-            if (altDamageMethod) {
-                // this could be necessary to remake in the future (banding with Butcher Orgg?)
-                return;
-            }
-            if (attackers.size() == 1) {
-                singleAttackerDamage(first, game);
-            } else {
+            if (attackers.size() != 1) {
                 multiAttackerDamage(first, game);
+            // } else {
+                // singleAttackerDamage(first, game);
             }
         }
     }
@@ -462,10 +457,15 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
      * {@link #singleBlockerDamage}.
      *
      * Handles abilities like "{this} an block any number of creatures.".
+     * 
+     * Blocker damage for blockers blocking single creatures is handled in 
+     * the single/multi blocker methods, so this shouldn't be used anymore.
      *
      * @param first
      * @param game
+     * @deprecated
      */
+    @Deprecated
     private void singleAttackerDamage(boolean first, Game game) {
         Permanent blocker = game.getPermanent(blockers.get(0));
         Permanent attacker = game.getPermanent(attackers.get(0));
