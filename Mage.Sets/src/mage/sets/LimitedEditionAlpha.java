@@ -209,6 +209,7 @@ public class LimitedEditionAlpha extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 285, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 286, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plateau", 287, Rarity.RARE, mage.cards.p.Plateau.class));
+        cards.add(new SetCardInfo("Power Leak", 72, Rarity.COMMON, mage.cards.p.PowerLeak.class));
         cards.add(new SetCardInfo("Power Sink", 73, Rarity.COMMON, mage.cards.p.PowerSink.class));
         cards.add(new SetCardInfo("Power Surge", 168, Rarity.RARE, mage.cards.p.PowerSurge.class));
         cards.add(new SetCardInfo("Prodigal Sorcerer", 74, Rarity.COMMON, mage.cards.p.ProdigalSorcerer.class));
