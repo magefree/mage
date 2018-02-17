@@ -235,6 +235,7 @@ public class RevisedEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Regrowth", 121, Rarity.UNCOMMON, mage.cards.r.Regrowth.class));
         cards.add(new SetCardInfo("Resurrection", 218, Rarity.UNCOMMON, mage.cards.r.Resurrection.class));
         cards.add(new SetCardInfo("Reverse Damage", 219, Rarity.RARE, mage.cards.r.ReverseDamage.class));
+        cards.add(new SetCardInfo("Reverse Polarity", 220, Rarity.UNCOMMON, mage.cards.r.ReversePolarity.class));
         cards.add(new SetCardInfo("Righteousness", 221, Rarity.RARE, mage.cards.r.Righteousness.class));
         cards.add(new SetCardInfo("Roc of Kher Ridges", 171, Rarity.RARE, mage.cards.r.RocOfKherRidges.class));
         cards.add(new SetCardInfo("Rock Hydra", 172, Rarity.RARE, mage.cards.r.RockHydra.class));
