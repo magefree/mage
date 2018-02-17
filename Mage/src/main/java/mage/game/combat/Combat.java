@@ -29,23 +29,31 @@ package mage.game.combat;
 
 import java.io.Serializable;
 import java.util.*;
+import java.util.stream.Collectors;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.RequirementEffect;
 import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.keyword.BandingAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.abilities.keyword.special.JohanVigilanceAbility;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreatureForCombatBlock;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.AbilityPredicate;
+import mage.filter.predicate.permanent.AttackingSameNotBandedPredicate;
+import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.players.PlayerList;
+import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetDefender;
 import mage.util.CardUtil;
 import mage.util.Copyable;
@@ -114,6 +122,10 @@ public class Combat implements Serializable, Copyable<Combat> {
 
     public Collection<CombatGroup> getBlockingGroups() {
         return blockingGroups.values();
+    }
+
+    public boolean blockingGroupsContains(UUID blockerId) {
+        return blockingGroups.containsKey(blockerId);
     }
 
     /**
@@ -285,7 +297,8 @@ public class Combat implements Serializable, Copyable<Combat> {
                         attackingPermanent.tap(game); // to tap with event finally here is needed to prevent abusing of Vampire Envoy like cards
                     }
                 }
-                // This can only be used to modify the event, the ttack can't be replaced here
+                handleBanding(attacker, game);
+                // This can only be used to modify the event, the attack can't be replaced here
                 game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.ATTACKER_DECLARED, group.defenderId, attacker, attackingPlayerId));
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.ATTACKER_DECLARED, group.defenderId, attacker, attackingPlayerId));
             }
@@ -297,6 +310,66 @@ public class Combat implements Serializable, Copyable<Combat> {
             Player player = game.getPlayer(attackingPlayerId);
             if (player != null) {
                 game.informPlayers(player.getLogName() + " attacks with " + groups.size() + (groups.size() == 1 ? " creature" : " creatures"));
+            }
+        }
+    }
+
+    private void handleBanding(UUID creatureId, Game game) {
+        Player player = game.getPlayer(attackingPlayerId);
+        Permanent attacker = game.getPermanent(creatureId);
+        if (attacker != null && player != null) {
+            CombatGroup combatGroup = findGroup(attacker.getId());
+            if (combatGroup != null && attacker.getAbilities().containsKey(BandingAbility.getInstance().getId()) && attacker.getBandedCards().isEmpty() && getAttackers().size() > 1) {
+                boolean isBanded = false;
+                FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("attacking creature to band with " + attacker.getLogName());
+                filter.add(Predicates.not(new PermanentIdPredicate(creatureId)));
+                filter.add(new AttackingSameNotBandedPredicate(combatGroup.getDefenderId())); // creature that isn't already banded, and is attacking the same player or planeswalker
+                while (player.canRespond()) {
+                    TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, true);
+                    target.setRequired(false);
+                    if (!target.canChoose(attackingPlayerId, game)
+                            || game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARING_ATTACKERS, attackingPlayerId, attackingPlayerId))
+                            || !player.chooseUse(Outcome.Benefit, "Do you wish to " + (isBanded ? "band " + attacker.getLogName() + " with another " : "form a band with " + attacker.getLogName() +  " and an " ) + "attacking creature?", null, game)) {
+                        break;
+                    }
+                    if (target.choose(Outcome.Benefit, attackingPlayerId, null, game)) {
+                        isBanded = true;
+                        for (UUID targetId: target.getTargets()) {
+                            Permanent permanent = game.getPermanent(targetId);
+                            if (permanent != null) {
+                                if (permanent != null) {
+                                    
+                                    for (UUID bandedId : attacker.getBandedCards()) {
+                                        permanent.addBandedCard(bandedId);
+                                        Permanent banded = game.getPermanent(bandedId);
+                                        if (banded != null) {
+                                            banded.addBandedCard(targetId);
+                                        }
+                                    }
+                                    permanent.addBandedCard(creatureId);
+                                    attacker.addBandedCard(targetId);
+                                    if (!permanent.getAbilities().containsKey(BandingAbility.getInstance().getId())) {
+                                        filter.add(new AbilityPredicate(BandingAbility.class));
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                if (isBanded) {
+                    StringBuilder sb = new StringBuilder(player.getLogName()).append(" formed a band with ").append((attacker.getBandedCards().size() + 1) + " creatures: ");
+                    sb.append(attacker.getLogName());
+                    int i = 0;
+                    for (UUID id : attacker.getBandedCards()) {
+                        i++;
+                        sb.append(", ");
+                        Permanent permanent = game.getPermanent(id);
+                        if (permanent != null) {
+                            sb.append(permanent.getLogName());
+                        }
+                    }
+                    game.informPlayers(sb.toString());
+                }
             }
         }
     }
@@ -1094,14 +1167,16 @@ public class Combat implements Serializable, Copyable<Combat> {
     @SuppressWarnings("deprecation")
     public boolean declareAttacker(UUID creatureId, UUID defenderId, UUID playerId, Game game) {
         Permanent attacker = game.getPermanent(creatureId);
-        if (!attacker.getAbilities().containsKey(VigilanceAbility.getInstance().getId()) && !attacker.getAbilities().containsKey(JohanVigilanceAbility.getInstance().getId())) {
-            if (!attacker.isTapped()) {
-                attacker.setTapped(true);
-                attackersTappedByAttack.add(attacker.getId());
+        if (attacker != null) {
+            if (!attacker.getAbilities().containsKey(VigilanceAbility.getInstance().getId()) && !attacker.getAbilities().containsKey(JohanVigilanceAbility.getInstance().getId())) {
+                if (!attacker.isTapped()) {
+                    attacker.setTapped(true);
+                    attackersTappedByAttack.add(attacker.getId());
+                }
             }
-        }
-        if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARE_ATTACKER, defenderId, creatureId, playerId))) {
-            return addAttackerToCombat(creatureId, defenderId, game);
+            if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARE_ATTACKER, defenderId, creatureId, playerId))) {
+                return addAttackerToCombat(creatureId, defenderId, game);
+            }
         }
         return false;
     }
@@ -1158,17 +1233,37 @@ public class Combat implements Serializable, Copyable<Combat> {
         return true;
     }
 
-    // add blocking group for creatures that block more than one creature
+    /**
+     * Add blocking group for creatures that already block more than one creature
+     *
+     * @param blockerId
+     * @param attackerId
+     * @param playerId
+     * @param game
+     */
     public void addBlockingGroup(UUID blockerId, UUID attackerId, UUID playerId, Game game) {
+        addBlockingGroup(blockerId, attackerId, playerId, game, true);
+    }
+
+    /**
+     * Use the previous addBlockingGroup instead (solveBanding should always be true 
+     * outside this method)
+     *
+     * @param blockerId
+     * @param attackerId
+     * @param playerId
+     * @param game
+     * @param solveBanding check whether also add creatures banded with attackerId
+     */
+    public void addBlockingGroup(UUID blockerId, UUID attackerId, UUID playerId, Game game, boolean solveBanding) {
         Permanent blocker = game.getPermanent(blockerId);
         if (blockerId != null && blocker != null && blocker.getBlocking() > 1) {
-            if (!blockingGroups.containsKey(blockerId)) {
+            if (!blockingGroupsContains(blockerId)) {
                 CombatGroup newGroup = new CombatGroup(playerId, false, playerId);
                 newGroup.blockers.add(blockerId);
                 // add all blocked attackers
                 for (CombatGroup group : groups) {
                     if (group.getBlockers().contains(blockerId)) {
-                        // take into account banding
                         for (UUID attacker : group.attackers) {
                             newGroup.attackers.add(attacker);
                         }
@@ -1176,10 +1271,27 @@ public class Combat implements Serializable, Copyable<Combat> {
                 }
                 blockingGroups.put(blockerId, newGroup);
             } else {
-                //TODO: handle banding
                 blockingGroups.get(blockerId).attackers.add(attackerId);
             }
-            // "blocker.setBlocking(blocker.getBlocking() + 1)" is handled by the attacking combat group
+            // "blocker.setBlocking(blocker.getBlocking() + 1)" is handled by the attacking combat group (in addBlockerToGroup)
+        }
+        if (solveBanding) { 
+            Permanent attacker = game.getPermanent(attackerId);
+            if (attacker != null) {
+                for (UUID bandedId : attacker.getBandedCards()) {
+                    if (!bandedId.equals(attackerId)) {
+                        if (blockingGroups.get(blockerId) == null || !blockingGroups.get(blockerId).attackers.contains(bandedId)) {
+                            Permanent banded = game.getPermanent(bandedId);
+                            CombatGroup bandedGroup = findGroup(bandedId);
+                            if (banded != null && bandedGroup != null) {
+                                bandedGroup.addBlockerToGroup(blockerId, playerId, game);
+                                addBlockingGroup(blockerId, bandedId, playerId, game, false);
+                                blocker.setBlocking(blocker.getBlocking() - 1); // this intends to offset the blocking addition from bandedGroup.addBlockerToGroup
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -1202,8 +1314,18 @@ public class Combat implements Serializable, Copyable<Combat> {
             creature.setBlocking(0);
             creature.setRemovedFromCombat(true);
             for (CombatGroup group : groups) {
+                for (UUID attackerId : group.attackers) {
+                    Permanent attacker = game.getPermanent(attackerId);
+                    if (attacker != null) {
+                        attacker.removeBandedCard(creatureId);
+                    }
+                }
                 result |= group.remove(creatureId);
             }
+            for (CombatGroup blockingGroup : getBlockingGroups()) {
+                result |= blockingGroup.remove(creatureId);
+            }
+            creature.clearBandedCards();
             blockingGroups.remove(creatureId);
             if (result && withInfo) {
                 game.informPlayers(creature.getLogName() + " removed from combat");
@@ -1220,6 +1342,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                 if (creature != null) {
                     creature.setAttacking(false);
                     creature.setBlocking(0);
+                    creature.clearBandedCards();
                 }
             }
             for (UUID blocker : group.blockers) {
@@ -1227,6 +1350,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                 if (creature != null) {
                     creature.setAttacking(false);
                     creature.setBlocking(0);
+                    creature.clearBandedCards();
                 }
             }
         }
@@ -1391,48 +1515,80 @@ public class Combat implements Serializable, Copyable<Combat> {
         }
     }
 
+    /**
+     * Manual player action for undoing one declared blocker 
+     * (used for multi-blocker creatures)
+     *
+     * @param blockerId
+     * @param groupToUnblock
+     * @param game
+     */
     public void removeBlockerGromGroup(UUID blockerId, CombatGroup groupToUnblock, Game game) {
-        // Manual player action for undoing one declared blocker (used for multi-blocker creatures)
         Permanent creature = game.getPermanent(blockerId);
         if (creature != null) {
+            List<CombatGroup> groupsToCheck = new ArrayList<>();
             for (CombatGroup group : groups) {
                 if (group.equals(groupToUnblock) && group.blockers.contains(blockerId)) {
-                    group.blockers.remove(blockerId);
-                    group.blockerOrder.remove(blockerId);
-                    if (group.blockers.isEmpty()) {
-                        group.blocked = false;
+                    groupsToCheck.add(group);
+                    for (UUID attackerId : group.getAttackers()) {
+                        Permanent attacker = game.getPermanent(attackerId);
+                        if (attacker != null) {
+                            for (UUID bandedId : attacker.getBandedCards()) {
+                                if (!bandedId.equals(attackerId)) {
+                                    CombatGroup bandedGroup = findGroup(bandedId);
+                                    if (bandedGroup != null) {
+                                        groupsToCheck.add(bandedGroup);
+                                    }
+                                }
+                            }
+                        }
                     }
-                    if (creature.getBlocking() > 0) {
+                }
+            }
+            for (CombatGroup group : groupsToCheck) {
+                group.blockers.remove(blockerId);
+                group.blockerOrder.remove(blockerId);
+                if (group.blockers.isEmpty()) {
+                    group.blocked = false;
+                }
+                if (creature.getBlocking() > 0) {
+                    if (group.equals(groupToUnblock)) {
                         creature.setBlocking(creature.getBlocking() - 1);
-                    } else {
-                        throw new UnsupportedOperationException("Trying to unblock creature, but blocking number value of creature < 1");
                     }
-                    boolean canRemove = false;
-                    for (CombatGroup blockGroup : getBlockingGroups()) {
-                        if (blockGroup.blockers.contains(blockerId)) {
-                            for (UUID attackerId : group.getAttackers()) {
-                                blockGroup.attackers.remove(attackerId);
-                                blockGroup.attackerOrder.remove(attackerId);
-                            }
-                            if (creature.getBlocking() == 0) {
-                                blockGroup.blockers.remove(blockerId);
-                                blockGroup.attackerOrder.clear();
-                            }
+                } else {
+                    throw new UnsupportedOperationException("Trying to unblock creature, but blocking number value of creature < 1");
+                }
+                boolean canRemove = false;
+                for (CombatGroup blockGroup : getBlockingGroups()) {
+                    if (blockGroup.blockers.contains(blockerId)) {
+                        for (UUID attackerId : group.getAttackers()) {
+                            blockGroup.attackers.remove(attackerId);
+                            blockGroup.attackerOrder.remove(attackerId);
                         }
-                        if (blockGroup.blockers.isEmpty()) {
-                            canRemove = true;
+                        if (creature.getBlocking() == 0) {
+                            blockGroup.blockers.remove(blockerId);
+                            blockGroup.attackerOrder.clear();
                         }
                     }
-                    if (canRemove) {
-                        blockingGroups.remove(blockerId);
+                    if (blockGroup.blockers.isEmpty()) {
+                        canRemove = true;
                     }
+                }
+                if (canRemove) {
+                    blockingGroups.remove(blockerId);
                 }
             }
         }
     }
 
+    /**
+     * Manual player action for undoing all declared blockers 
+     * (used for single-blocker creatures and multi-blockers exceeding blocking limit)
+     *
+     * @param blockerId
+     * @param game
+     */
     public void removeBlocker(UUID blockerId, Game game) {
-        // Manual player action for undoing all declared blockers (used for single-blocker creatures and multi-blockers exceeding blocking limit)
         for (CombatGroup group : groups) {
             if (group.blockers.contains(blockerId)) {
                 group.blockers.remove(blockerId);

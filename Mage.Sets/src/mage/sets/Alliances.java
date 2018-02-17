@@ -73,6 +73,8 @@ public class Alliances extends ExpansionSet {
         cards.add(new SetCardInfo("Energy Arc", 190, Rarity.UNCOMMON, mage.cards.e.EnergyArc.class));
         cards.add(new SetCardInfo("Enslaved Scout", 104, Rarity.COMMON, EnslavedScout.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Enslaved Scout", 105, Rarity.COMMON, EnslavedScout.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Errand of Duty", 127, Rarity.COMMON, mage.cards.e.ErrandOfDuty.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Errand of Duty", 128, Rarity.COMMON, mage.cards.e.ErrandOfDuty.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Exile", 129, Rarity.RARE, mage.cards.e.Exile.class));
         cards.add(new SetCardInfo("False Demise", 40, Rarity.COMMON, mage.cards.f.FalseDemise.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("False Demise", 41, Rarity.COMMON, mage.cards.f.FalseDemise.class, NON_FULL_USE_VARIOUS));
@@ -103,6 +105,8 @@ public class Alliances extends ExpansionSet {
         cards.add(new SetCardInfo("Juniper Order Advocate", 132, Rarity.UNCOMMON, mage.cards.j.JuniperOrderAdvocate.class));
         cards.add(new SetCardInfo("Kaysa", 80, Rarity.RARE, mage.cards.k.Kaysa.class));
         cards.add(new SetCardInfo("Keeper of Tresserhorn", 14, Rarity.RARE, mage.cards.k.KeeperOfTresserhorn.class));
+        cards.add(new SetCardInfo("Kjeldoran Escort", 133, Rarity.COMMON, mage.cards.k.KjeldoranEscort.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Kjeldoran Escort", 134, Rarity.COMMON, mage.cards.k.KjeldoranEscort.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kjeldoran Home Guard", 135, Rarity.UNCOMMON, mage.cards.k.KjeldoranHomeGuard.class));
         cards.add(new SetCardInfo("Kjeldoran Outpost", 184, Rarity.RARE, mage.cards.k.KjeldoranOutpost.class));
         cards.add(new SetCardInfo("Krovikan Horror", 15, Rarity.RARE, mage.cards.k.KrovikanHorror.class));
@@ -120,6 +124,7 @@ public class Alliances extends ExpansionSet {
         cards.add(new SetCardInfo("Mishra's Groundbreaker", 165, Rarity.UNCOMMON, mage.cards.m.MishrasGroundbreaker.class));
         cards.add(new SetCardInfo("Misinformation", 19, Rarity.UNCOMMON, mage.cards.m.Misinformation.class));
         cards.add(new SetCardInfo("Mystic Compass", 166, Rarity.UNCOMMON, mage.cards.m.MysticCompass.class));
+        cards.add(new SetCardInfo("Nature's Blessing", 195, Rarity.UNCOMMON, mage.cards.n.NaturesBlessing.class));
         cards.add(new SetCardInfo("Nature's Chosen", 81, Rarity.UNCOMMON, mage.cards.n.NaturesChosen.class));
         cards.add(new SetCardInfo("Nature's Wrath", 82, Rarity.RARE, mage.cards.n.NaturesWrath.class));
         cards.add(new SetCardInfo("Noble Steeds", 140, Rarity.COMMON, mage.cards.n.NobleSteeds.class, NON_FULL_USE_VARIOUS));
@@ -176,6 +181,7 @@ public class Alliances extends ExpansionSet {
         cards.add(new SetCardInfo("Tidal Control", 59, Rarity.RARE, mage.cards.t.TidalControl.class));
         cards.add(new SetCardInfo("Tornado", 86, Rarity.RARE, mage.cards.t.Tornado.class));
         cards.add(new SetCardInfo("Unlikely Alliance", 153, Rarity.UNCOMMON, mage.cards.u.UnlikelyAlliance.class));
+        cards.add(new SetCardInfo("Urza's Engine", 180, Rarity.UNCOMMON, mage.cards.u.UrzasEngine.class));
         cards.add(new SetCardInfo("Varchild's Crusader", 120, Rarity.COMMON, mage.cards.v.VarchildsCrusader.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Varchild's Crusader", 121, Rarity.COMMON, mage.cards.v.VarchildsCrusader.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Varchild's War-Riders", 122, Rarity.RARE, mage.cards.v.VarchildsWarRiders.class));

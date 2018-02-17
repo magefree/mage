@@ -668,8 +668,10 @@ public abstract class GameImpl implements Game, Serializable {
         if (!simulation && !this.hasEnded()) { // if player left or game is over no undo is possible - this could lead to wrong winner
             if (bookmark != 0) {
                 if (!savedStates.contains(bookmark - 1)) {
-                    logger.error("It was not possible to do the requested undo operation (bookmark " + (bookmark - 1) + " does not exist) context: " + context);
-                    logger.info("Saved states: " + savedStates.toString());
+                    if (!savedStates.isEmpty()) { // empty if rollback to a turn was requested before, otherwise unclear why
+                        logger.error("It was not possible to do the requested undo operation (bookmark " + (bookmark - 1) + " does not exist) context: " + context);
+                        logger.info("Saved states: " + savedStates.toString());
+                    }
                 } else {
                     int stateNum = savedStates.get(bookmark - 1);
                     removeBookmark(bookmark);
@@ -1803,10 +1805,22 @@ public abstract class GameImpl implements Game, Serializable {
                     Permanent paired = perm.getPairedCard().getPermanent(this);
                     if (paired == null || !perm.getControllerId().equals(paired.getControllerId()) || paired.getPairedCard() == null) {
                         perm.setPairedCard(null);
-                        if (paired != null) {
+                        if (paired != null && paired.getPairedCard() != null) {
                             paired.setPairedCard(null);
                         }
                         somethingHappened = true;
+                    }
+                }
+                if (perm.getBandedCards() != null && !perm.getBandedCards().isEmpty()) {
+                    for (UUID bandedId : new ArrayList<>(perm.getBandedCards())) {
+                        Permanent banded = getPermanent(bandedId);
+                        if (banded == null || !perm.getControllerId().equals(banded.getControllerId()) || !banded.getBandedCards().contains(perm.getId())) {
+                            perm.removeBandedCard(bandedId);
+                            if (banded != null && banded.getBandedCards().contains(perm.getId())) {
+                                banded.removeBandedCard(perm.getId());
+                            }
+                            somethingHappened = true;
+                        }
                     }
                 }
             } else if (perm.getPairedCard() != null) {
@@ -1817,6 +1831,15 @@ public abstract class GameImpl implements Game, Serializable {
                     paired.setPairedCard(null);
                 }
                 somethingHappened = true;
+            } else if (perm.getBandedCards() != null && !perm.getBandedCards().isEmpty()) {
+                perm.clearBandedCards();
+                for (UUID bandedId : perm.getBandedCards()) {
+                    Permanent banded = getPermanent(bandedId);
+                    if (banded != null) {
+                        banded.removeBandedCard(perm.getId());
+                    }
+                    somethingHappened = true;
+                }
             }
             if (perm.isPlaneswalker()) {
                 //20091005 - 704.5i
@@ -2951,6 +2974,9 @@ public abstract class GameImpl implements Game, Serializable {
                     informPlayers(GameLog.getPlayerRequestColoredText("Player request: Rolling back to start of turn " + restore.getTurnNum()));
                     state.restoreForRollBack(restore);
                     playerList.setCurrent(state.getPlayerByOrderId());
+                    // Reset temporary created bookmarks because no longer valid after rollback
+                    savedStates.clear();
+                    gameStates.clear();
                     // because restore uses the objects without copy each copy the state again
                     gameStatesRollBack.put(getTurnNum(), state.copy());
                     executingRollback = true;

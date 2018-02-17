@@ -29,6 +29,7 @@ package org.mage.test.cards.abilities.keywords;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -511,5 +512,46 @@ public class FlashbackTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, memnite, 1);
         assertExileCount(playerA, dReturn, 1);
         assertPermanentCount(playerA, bSable, 1);
+    }
+
+    /**
+     * I can play Force of Will with flashback paying his alternative mana cost.
+     * The ruling say no to it, because we only can choose one alternative cost
+     * to a spell, and the flashback cost is already an alternative cost.
+     */
+    @Test
+    @Ignore
+    public void testSnapcasterMageSpellWithAlternateCost() {
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+        // When Snapcaster Mage enters the battlefield, target instant or sorcery card in your graveyard gains flashback until end of turn.
+        // The flashback cost is equal to its mana cost.
+        addCard(Zone.HAND, playerA, "Snapcaster Mage", 2); // Creature{1}{U}
+
+        // You may pay 1 life and exile a blue card from your hand rather than pay Force of Will's mana cost.
+        // Counter target spell.
+        addCard(Zone.GRAVEYARD, playerA, "Force of Will");
+
+        addCard(Zone.HAND, playerB, "Lightning Bolt", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Snapcaster Mage");
+        setChoice(playerA, "Force of Will");
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Lightning Bolt", "Snapcaster Mage");
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Flashback", null, "Lightning Bolt");
+        addTarget(playerA, "Lightning Bolt");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Snapcaster Mage", 0);
+        assertGraveyardCount(playerA, "Snapcaster Mage", 1);
+
+        assertGraveyardCount(playerA, "Force of Will", 1);
+        assertGraveyardCount(playerB, "Lightning Bolt", 1);
+
+        assertLife(playerA, 20);
+
     }
 }

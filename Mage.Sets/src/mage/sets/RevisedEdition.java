@@ -40,6 +40,7 @@ public class RevisedEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Balance", 187, Rarity.RARE, mage.cards.b.Balance.class));
         cards.add(new SetCardInfo("Basalt Monolith", 235, Rarity.UNCOMMON, mage.cards.b.BasaltMonolith.class));
         cards.add(new SetCardInfo("Bayou", 283, Rarity.RARE, mage.cards.b.Bayou.class));
+        cards.add(new SetCardInfo("Benalish Hero", 188, Rarity.COMMON, mage.cards.b.BenalishHero.class));
         cards.add(new SetCardInfo("Birds of Paradise", 94, Rarity.RARE, mage.cards.b.BirdsOfParadise.class));
         cards.add(new SetCardInfo("Black Knight", 3, Rarity.UNCOMMON, mage.cards.b.BlackKnight.class));
         cards.add(new SetCardInfo("Black Vise", 236, Rarity.UNCOMMON, mage.cards.b.BlackVise.class));
@@ -134,6 +135,7 @@ public class RevisedEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Grizzly Bears", 108, Rarity.COMMON, mage.cards.g.GrizzlyBears.class));
         cards.add(new SetCardInfo("Guardian Angel", 205, Rarity.COMMON, mage.cards.g.GuardianAngel.class));
         cards.add(new SetCardInfo("Healing Salve", 206, Rarity.COMMON, mage.cards.h.HealingSalve.class));
+        cards.add(new SetCardInfo("Helm of Chatzuk", 250, Rarity.RARE, mage.cards.h.HelmOfChatzuk.class));
         cards.add(new SetCardInfo("Hill Giant", 157, Rarity.COMMON, mage.cards.h.HillGiant.class));
         cards.add(new SetCardInfo("Holy Armor", 207, Rarity.COMMON, mage.cards.h.HolyArmor.class));
         cards.add(new SetCardInfo("Holy Strength", 208, Rarity.COMMON, mage.cards.h.HolyStrength.class));
@@ -186,9 +188,11 @@ public class RevisedEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Mana Vault", 263, Rarity.RARE, mage.cards.m.ManaVault.class));
         cards.add(new SetCardInfo("Meekstone", 264, Rarity.RARE, mage.cards.m.Meekstone.class));
         cards.add(new SetCardInfo("Merfolk of the Pearl Trident", 68, Rarity.COMMON, mage.cards.m.MerfolkOfThePearlTrident.class));
+        cards.add(new SetCardInfo("Mesa Pegasus", 212, Rarity.COMMON, mage.cards.m.MesaPegasus.class));
         cards.add(new SetCardInfo("Mijae Djinn", 165, Rarity.RARE, mage.cards.m.MijaeDjinn.class));
         cards.add(new SetCardInfo("Millstone", 265, Rarity.RARE, mage.cards.m.Millstone.class));
         cards.add(new SetCardInfo("Mind Twist", 25, Rarity.RARE, mage.cards.m.MindTwist.class));
+        cards.add(new SetCardInfo("Mishra's War Machine", 266, Rarity.RARE, mage.cards.m.MishrasWarMachine.class));
         cards.add(new SetCardInfo("Mons's Goblin Raiders", 166, Rarity.COMMON, mage.cards.m.MonssGoblinRaiders.class));
         cards.add(new SetCardInfo("Mountain", 290, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 291, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
@@ -277,6 +281,7 @@ public class RevisedEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Thicket Basilisk", 125, Rarity.UNCOMMON, mage.cards.t.ThicketBasilisk.class));
         cards.add(new SetCardInfo("Thoughtlace", 85, Rarity.RARE, mage.cards.t.Thoughtlace.class));
         cards.add(new SetCardInfo("Throne of Bone", 279, Rarity.UNCOMMON, mage.cards.t.ThroneOfBone.class));
+        cards.add(new SetCardInfo("Timber Wolves", 126, Rarity.RARE, mage.cards.t.TimberWolves.class));
         cards.add(new SetCardInfo("Titania's Song", 127, Rarity.RARE, mage.cards.t.TitaniasSong.class));
         cards.add(new SetCardInfo("Tranquility", 128, Rarity.COMMON, mage.cards.t.Tranquility.class));
         cards.add(new SetCardInfo("Tropical Island", 303, Rarity.RARE, mage.cards.t.TropicalIsland.class));

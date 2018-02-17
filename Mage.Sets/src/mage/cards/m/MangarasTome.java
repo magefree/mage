@@ -81,7 +81,7 @@ class MangarasTomeSearchEffect extends OneShotEffect {
 
     MangarasTomeSearchEffect() {
         super(Outcome.Neutral);
-        this.staticText = "When Mangara's Tome enters the battlefield, search your library for five cards, exile them in a face-down pile, and shuffle that pile. Then shuffle your library";
+        this.staticText = "search your library for five cards, exile them in a face-down pile, and shuffle that pile. Then shuffle your library";
     }
 
     MangarasTomeSearchEffect(final MangarasTomeSearchEffect effect) {

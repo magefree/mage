@@ -7,15 +7,12 @@ import mage.interfaces.callback.ClientCallback;
 import mage.interfaces.callback.ClientCallbackMethod;
 import mage.view.ChatMessage;
 
-import java.text.DateFormat;
 import java.util.Date;
 import java.util.Optional;
 import java.util.StringTokenizer;
 import java.util.UUID;
 
 public final class LocalCommands {
-
-    private static final DateFormat timeFormatter = DateFormat.getTimeInstance(DateFormat.SHORT);
 
     /**
      * Handler for commands that do not require server interaction, i.e settings etc
@@ -60,7 +57,7 @@ public final class LocalCommands {
     private static void displayLocalCommandResponse(UUID chatId, String response) {
         final String text = new StringBuilder().append("<font color=yellow>").append(response).append("</font>").toString();
         ClientCallback chatMessage = new ClientCallback(ClientCallbackMethod.CHATMESSAGE, chatId,
-                new ChatMessage("", text, timeFormatter.format(new Date()), ChatMessage.MessageColor.BLUE));
+                new ChatMessage("", text, new Date(), ChatMessage.MessageColor.BLUE));
         MageFrame.getInstance().processCallback(chatMessage);
     }
 }

@@ -220,6 +220,7 @@ public class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Mystical Tutor", 80, Rarity.UNCOMMON, mage.cards.m.MysticalTutor.class));
         cards.add(new SetCardInfo("Natural Balance", 129, Rarity.RARE, mage.cards.n.NaturalBalance.class));
         cards.add(new SetCardInfo("Nettletooth Djinn", 130, Rarity.UNCOMMON, mage.cards.n.NettletoothDjinn.class));
+        cards.add(new SetCardInfo("Noble Elephant", 234, Rarity.COMMON, mage.cards.n.NobleElephant.class));
         cards.add(new SetCardInfo("Nocturnal Raid", 30, Rarity.UNCOMMON, mage.cards.n.NocturnalRaid.class));
         cards.add(new SetCardInfo("Pacifism", 236, Rarity.COMMON, mage.cards.p.Pacifism.class));
         cards.add(new SetCardInfo("Painful Memories", 31, Rarity.UNCOMMON, mage.cards.p.PainfulMemories.class));
@@ -304,6 +305,7 @@ public class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Telim'Tor", 197, Rarity.RARE, mage.cards.t.TelimTor.class));
         cards.add(new SetCardInfo("Telim'Tor's Darts", 286, Rarity.UNCOMMON, mage.cards.t.TelimTorsDarts.class));
         cards.add(new SetCardInfo("Telim'Tor's Edict", 198, Rarity.RARE, mage.cards.t.TelimTorsEdict.class));
+        cards.add(new SetCardInfo("Teremko Griffin", 247, Rarity.COMMON, mage.cards.t.TeremkoGriffin.class));
         cards.add(new SetCardInfo("Thirst", 99, Rarity.COMMON, mage.cards.t.Thirst.class));
         cards.add(new SetCardInfo("Tidal Wave", 100, Rarity.UNCOMMON, mage.cards.t.TidalWave.class));
         cards.add(new SetCardInfo("Tombstone Stairwell", 47, Rarity.RARE, mage.cards.t.TombstoneStairwell.class));

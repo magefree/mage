@@ -113,6 +113,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected UUID attachedTo;
     protected int attachedToZoneChangeCounter;
     protected MageObjectReference pairedPermanent;
+    protected List<UUID> bandedCards = new ArrayList<>();
     protected Counters counters;
     protected List<MarkedDamageInfo> markedDamage;
     protected int timesLoyaltyUsed = 0;
@@ -177,6 +178,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.monstrous = permanent.monstrous;
         this.renowned = permanent.renowned;
         this.pairedPermanent = permanent.pairedPermanent;
+        this.bandedCards.addAll(permanent.bandedCards);
         this.timesLoyaltyUsed = permanent.timesLoyaltyUsed;
 
         this.morphed = permanent.morphed;
@@ -1319,6 +1321,10 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public void setPairedCard(MageObjectReference pairedCard) {
         this.pairedPermanent = pairedCard;
+        if (pairedCard == null) {
+            // remove existing soulbond info text
+            this.addInfo("soulbond", null, null);
+        }
     }
 
     @Override
@@ -1329,6 +1335,28 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public void clearPairedCard() {
         this.pairedPermanent = null;
+    }
+
+    @Override
+    public void addBandedCard(UUID bandedCard) {
+        if (!this.bandedCards.contains(bandedCard)) {
+            this.bandedCards.add(bandedCard);
+        }
+    }
+
+    @Override
+    public void removeBandedCard(UUID bandedCard) {
+        this.bandedCards.remove(bandedCard);
+    }
+
+    @Override
+    public List<UUID> getBandedCards() {
+        return bandedCards;
+    }
+
+    @Override
+    public void clearBandedCards() {
+        this.bandedCards.clear();
     }
 
     @Override

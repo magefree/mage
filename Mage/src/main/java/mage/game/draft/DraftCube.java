@@ -30,9 +30,7 @@ package mage.game.draft;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
 import mage.cards.Card;
-import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.util.RandomUtil;

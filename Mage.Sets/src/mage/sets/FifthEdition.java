@@ -62,6 +62,8 @@ public class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Ball Lightning", 210, Rarity.RARE, mage.cards.b.BallLightning.class));
         cards.add(new SetCardInfo("Barbed Sextant", 351, Rarity.COMMON, mage.cards.b.BarbedSextant.class));
         cards.add(new SetCardInfo("Barl's Cage", 352, Rarity.RARE, mage.cards.b.BarlsCage.class));
+        cards.add(new SetCardInfo("Battering Ram", 353, Rarity.COMMON, mage.cards.b.BatteringRam.class));
+        cards.add(new SetCardInfo("Benalish Hero", 286, Rarity.COMMON, mage.cards.b.BenalishHero.class));
         cards.add(new SetCardInfo("Binding Grasp", 74, Rarity.UNCOMMON, mage.cards.b.BindingGrasp.class));
         cards.add(new SetCardInfo("Bird Maiden", 211, Rarity.COMMON, mage.cards.b.BirdMaiden.class));
         cards.add(new SetCardInfo("Birds of Paradise", 142, Rarity.RARE, mage.cards.b.BirdsOfParadise.class));
@@ -205,6 +207,7 @@ public class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Heal", 308, Rarity.COMMON, mage.cards.h.Heal.class));
         cards.add(new SetCardInfo("Healing Salve", 309, Rarity.COMMON, mage.cards.h.HealingSalve.class));
         cards.add(new SetCardInfo("Hecatomb", 29, Rarity.RARE, mage.cards.h.Hecatomb.class));
+        cards.add(new SetCardInfo("Helm of Chatzuk", 376, Rarity.RARE, mage.cards.h.HelmOfChatzuk.class));
         cards.add(new SetCardInfo("Hill Giant", 239, Rarity.COMMON, mage.cards.h.HillGiant.class));
         cards.add(new SetCardInfo("Hollow Trees", 422, Rarity.RARE, mage.cards.h.HollowTrees.class));
         cards.add(new SetCardInfo("Holy Strength", 311, Rarity.COMMON, mage.cards.h.HolyStrength.class));
@@ -216,6 +219,7 @@ public class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Hurloon Minotaur", 240, Rarity.COMMON, mage.cards.h.HurloonMinotaur.class));
         cards.add(new SetCardInfo("Hurricane", 165, Rarity.UNCOMMON, mage.cards.h.Hurricane.class));
         cards.add(new SetCardInfo("Hydroblast", 94, Rarity.UNCOMMON, mage.cards.h.Hydroblast.class));
+        cards.add(new SetCardInfo("Icatian Phalanx", 312, Rarity.UNCOMMON, mage.cards.i.IcatianPhalanx.class));
         cards.add(new SetCardInfo("Icatian Scout", 313, Rarity.COMMON, IcatianScout.class));
         cards.add(new SetCardInfo("Icatian Store", 423, Rarity.RARE, mage.cards.i.IcatianStore.class));
         cards.add(new SetCardInfo("Icatian Town", 314, Rarity.RARE, mage.cards.i.IcatianTown.class));
@@ -253,6 +257,7 @@ public class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Kismet", 319, Rarity.UNCOMMON, mage.cards.k.Kismet.class));
         cards.add(new SetCardInfo("Kjeldoran Dead", 32, Rarity.COMMON, mage.cards.k.KjeldoranDead.class));
         cards.add(new SetCardInfo("Kjeldoran Royal Guard", 320, Rarity.RARE, mage.cards.k.KjeldoranRoyalGuard.class));
+        cards.add(new SetCardInfo("Kjeldoran Skycaptain", 321, Rarity.UNCOMMON, mage.cards.k.KjeldoranSkycaptain.class));
         cards.add(new SetCardInfo("Knight of Stromgald", 33, Rarity.UNCOMMON, mage.cards.k.KnightOfStromgald.class));
         cards.add(new SetCardInfo("Krovikan Fetish", 34, Rarity.COMMON, mage.cards.k.KrovikanFetish.class));
         cards.add(new SetCardInfo("Krovikan Sorcerer", 96, Rarity.COMMON, mage.cards.k.KrovikanSorcerer.class));
@@ -281,6 +286,7 @@ public class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Memory Lapse", 103, Rarity.COMMON, mage.cards.m.MemoryLapse.class));
         cards.add(new SetCardInfo("Merfolk of the Pearl Trident", 104, Rarity.COMMON, mage.cards.m.MerfolkOfThePearlTrident.class));
         cards.add(new SetCardInfo("Mesa Falcon", 322, Rarity.COMMON, MesaFalcon.class));
+        cards.add(new SetCardInfo("Mesa Pegasus", 323, Rarity.COMMON, mage.cards.m.MesaPegasus.class));
         cards.add(new SetCardInfo("Millstone", 390, Rarity.RARE, mage.cards.m.Millstone.class));
         cards.add(new SetCardInfo("Mind Bomb", 105, Rarity.UNCOMMON, mage.cards.m.MindBomb.class));
         cards.add(new SetCardInfo("Mind Ravel", 38, Rarity.COMMON, mage.cards.m.MindRavel.class));
@@ -318,6 +324,7 @@ public class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Phantasmal Forces", 106, Rarity.UNCOMMON, mage.cards.p.PhantasmalForces.class));
         cards.add(new SetCardInfo("Phantasmal Terrain", 107, Rarity.COMMON, mage.cards.p.PhantasmalTerrain.class));
         cards.add(new SetCardInfo("Phantom Monster", 108, Rarity.UNCOMMON, mage.cards.p.PhantomMonster.class));
+        cards.add(new SetCardInfo("Pikemen", 328, Rarity.COMMON, mage.cards.p.Pikemen.class));
         cards.add(new SetCardInfo("Pirate Ship", 109, Rarity.RARE, mage.cards.p.PirateShip.class));
         cards.add(new SetCardInfo("Pit Scorpion", 49, Rarity.COMMON, mage.cards.p.PitScorpion.class));
         cards.add(new SetCardInfo("Plague Rats", 50, Rarity.COMMON, mage.cards.p.PlagueRats.class));
@@ -370,6 +377,7 @@ public class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Shapeshifter", 398, Rarity.UNCOMMON, mage.cards.s.Shapeshifter.class));
         cards.add(new SetCardInfo("Shatter", 265, Rarity.COMMON, mage.cards.s.Shatter.class));
         cards.add(new SetCardInfo("Shatterstorm", 266, Rarity.UNCOMMON, mage.cards.s.Shatterstorm.class));
+        cards.add(new SetCardInfo("Shield Bearer", 338, Rarity.COMMON, mage.cards.s.ShieldBearer.class));
         cards.add(new SetCardInfo("Shield Wall", 339, Rarity.COMMON, mage.cards.s.ShieldWall.class));
         cards.add(new SetCardInfo("Shivan Dragon", 267, Rarity.RARE, mage.cards.s.ShivanDragon.class));
         cards.add(new SetCardInfo("Shrink", 188, Rarity.COMMON, mage.cards.s.Shrink.class));
@@ -421,6 +429,7 @@ public class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Unsummon", 132, Rarity.COMMON, mage.cards.u.Unsummon.class));
         cards.add(new SetCardInfo("Untamed Wilds", 197, Rarity.UNCOMMON, mage.cards.u.UntamedWilds.class));
         cards.add(new SetCardInfo("Updraft", 133, Rarity.COMMON, mage.cards.u.Updraft.class));
+        cards.add(new SetCardInfo("Urza's Avenger", 405, Rarity.RARE, mage.cards.u.UrzasAvenger.class));
         cards.add(new SetCardInfo("Urza's Bauble", 406, Rarity.UNCOMMON, mage.cards.u.UrzasBauble.class));
         cards.add(new SetCardInfo("Urza's Mine", 447, Rarity.COMMON, mage.cards.u.UrzasMine.class));
         cards.add(new SetCardInfo("Urza's Power Plant", 448, Rarity.COMMON, mage.cards.u.UrzasPowerPlant.class));

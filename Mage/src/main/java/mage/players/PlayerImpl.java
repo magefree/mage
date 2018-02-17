@@ -832,6 +832,14 @@ public abstract class PlayerImpl implements Player, Serializable {
                 pairedCard.clearPairedCard();
             }
         }
+        if (permanent.getBandedCards() != null && !permanent.getBandedCards().isEmpty()) {
+            for (UUID bandedId : permanent.getBandedCards()) {
+                Permanent banded = game.getPermanent(bandedId);
+                if (banded != null) {
+                    banded.removeBandedCard(permanent.getId());
+                }
+            }
+        }
         return true;
     }
 
@@ -1182,11 +1190,9 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     protected void restoreState(int bookmark, String text, Game game) {
-        if (storedBookmark > -1) { // e.g. a turn rollback sets this to -1 so no more rollback of current action may be done
-            game.restoreState(bookmark, text);
-            if (storedBookmark >= bookmark) {
-                resetStoredBookmark(game);
-            }
+        game.restoreState(bookmark, text);
+        if (storedBookmark >= bookmark) {
+            resetStoredBookmark(game);
         }
     }
 

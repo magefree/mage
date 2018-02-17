@@ -72,6 +72,7 @@ public class ArabianNights extends ExpansionSet {
         cards.add(new SetCardInfo("Bird Maiden", 46, Rarity.COMMON, mage.cards.b.BirdMaiden.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bottle of Suleiman", 72, Rarity.RARE, mage.cards.b.BottleOfSuleiman.class));
         cards.add(new SetCardInfo("Brass Man", 73, Rarity.UNCOMMON, mage.cards.b.BrassMan.class));
+        cards.add(new SetCardInfo("Camel", 58, Rarity.COMMON, mage.cards.c.Camel.class));
         cards.add(new SetCardInfo("City in a Bottle", 74, Rarity.RARE, mage.cards.c.CityInABottle.class));
         cards.add(new SetCardInfo("City of Brass", 85, Rarity.UNCOMMON, mage.cards.c.CityOfBrass.class));
         cards.add(new SetCardInfo("Cuombajj Witches", 1, Rarity.COMMON, mage.cards.c.CuombajjWitches.class));
@@ -143,6 +144,8 @@ public class ArabianNights extends ExpansionSet {
         cards.add(new SetCardInfo("Stone-Throwing Devils", 14, Rarity.COMMON, StoneThrowingDevils.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stone-Throwing Devils", 15, Rarity.COMMON, StoneThrowingDevils.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Unstable Mutation", 28, Rarity.COMMON, mage.cards.u.UnstableMutation.class));
+        cards.add(new SetCardInfo("War Elephant", 68, Rarity.COMMON, mage.cards.w.WarElephant.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("War Elephant", 69, Rarity.COMMON, mage.cards.w.WarElephant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wyluli Wolf", 40, Rarity.COMMON, mage.cards.w.WyluliWolf.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wyluli Wolf", 41, Rarity.COMMON, mage.cards.w.WyluliWolf.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ydwen Efreet", 54, Rarity.RARE, mage.cards.y.YdwenEfreet.class));

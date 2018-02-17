@@ -27,6 +27,8 @@
  */
 package mage.view;
 
+import java.util.*;
+import java.util.stream.Collectors;
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Abilities;
@@ -50,9 +52,6 @@ import mage.game.stack.StackAbility;
 import mage.target.Target;
 import mage.target.Targets;
 import mage.util.SubTypeList;
-
-import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -113,6 +112,7 @@ public class CardView extends SimpleCardView {
     protected List<UUID> targets;
 
     protected UUID pairedCard;
+    protected List<UUID> bandedCards;
     protected boolean paid;
     protected List<CounterView> counters;
 
@@ -202,6 +202,7 @@ public class CardView extends SimpleCardView {
         this.targets = null;
 
         this.pairedCard = cardView.pairedCard;
+        this.bandedCards = null;
         this.paid = cardView.paid;
         this.counters = null;
 
@@ -352,11 +353,15 @@ public class CardView extends SimpleCardView {
             if (game != null) {
                 if (permanent.getCounters(game) != null && !permanent.getCounters(game).isEmpty()) {
                     this.loyalty = Integer.toString(permanent.getCounters(game).getCount(CounterType.LOYALTY));
-                    this.pairedCard = permanent.getPairedCard() != null ? permanent.getPairedCard().getSourceId() : null;
                     counters = new ArrayList<>();
                     for (Counter counter : permanent.getCounters(game).values()) {
                         counters.add(new CounterView(counter));
                     }
+                }
+                this.pairedCard = permanent.getPairedCard() != null ? permanent.getPairedCard().getSourceId() : null;
+                this.bandedCards = new ArrayList<>();
+                for (UUID bandedCard : permanent.getBandedCards()) {
+                    bandedCards.add(bandedCard);
                 }
                 if (!permanent.getControllerId().equals(permanent.getOwnerId())) {
                     controlledByOwner = false;
@@ -883,6 +888,10 @@ public class CardView extends SimpleCardView {
 
     public UUID getPairedCard() {
         return pairedCard;
+    }
+
+    public List<UUID> getBandedCards() {
+        return bandedCards;
     }
 
     public int getType() {

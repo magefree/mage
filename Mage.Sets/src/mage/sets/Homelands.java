@@ -92,6 +92,7 @@ public class Homelands extends ExpansionSet {
         cards.add(new SetCardInfo("Aysen Highway", 107, Rarity.RARE, mage.cards.a.AysenHighway.class));
         cards.add(new SetCardInfo("Baki's Curse", 27, Rarity.RARE, mage.cards.b.BakisCurse.class));
         cards.add(new SetCardInfo("Baron Sengir", 1, Rarity.RARE, mage.cards.b.BaronSengir.class));
+        cards.add(new SetCardInfo("Beast Walkers", 108, Rarity.RARE, mage.cards.b.BeastWalkers.class));
         cards.add(new SetCardInfo("Black Carriage", 2, Rarity.RARE, mage.cards.b.BlackCarriage.class));
         cards.add(new SetCardInfo("Broken Visage", 3, Rarity.RARE, mage.cards.b.BrokenVisage.class));
         cards.add(new SetCardInfo("Carapace", 54, Rarity.COMMON, mage.cards.c.Carapace.class, NON_FULL_USE_VARIOUS));
@@ -168,6 +169,7 @@ public class Homelands extends ExpansionSet {
         cards.add(new SetCardInfo("Serrated Arrows", 135, Rarity.COMMON, mage.cards.s.SerratedArrows.class));
         cards.add(new SetCardInfo("Shrink", 70, Rarity.COMMON, mage.cards.s.Shrink.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Shrink", 71, Rarity.COMMON, mage.cards.s.Shrink.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Soraya the Falconer", 122, Rarity.RARE, mage.cards.s.SorayaTheFalconer.class));
         cards.add(new SetCardInfo("Spectral Bears", 72, Rarity.UNCOMMON, mage.cards.s.SpectralBears.class));
         cards.add(new SetCardInfo("Torture", 23, Rarity.COMMON, Torture.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Torture", 24, Rarity.COMMON, Torture.class, NON_FULL_USE_VARIOUS));

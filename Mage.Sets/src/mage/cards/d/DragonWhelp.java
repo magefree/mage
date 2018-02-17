@@ -102,7 +102,7 @@ class DragonWhelpEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         ActivationInfo activationInfo = ActivationInfo.getInstance(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
         activationInfo.addActivation(game);
-        if (activationInfo.getActivationCounter() == 4) {
+        if (activationInfo.getActivationCounter() >= 4) {
             DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new SacrificeSourceEffect());
             game.addDelayedTriggeredAbility(delayedAbility, source);
         }

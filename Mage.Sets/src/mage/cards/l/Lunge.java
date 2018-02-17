@@ -44,14 +44,13 @@ import mage.target.targetpointer.SecondTargetPointer;
 public class Lunge extends CardImpl {
 
     public Lunge(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{R}");
 
         // Lunge deals 2 damage to target creature and 2 damage to target player.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(2));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(2).setUseOnlyTargetPointer(true));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
-        Effect effect = new DamageTargetEffect(2);
+        Effect effect = new DamageTargetEffect(2).setUseOnlyTargetPointer(true);
         effect.setTargetPointer(new SecondTargetPointer());
         effect.setText("and 2 damage to target player");
         this.getSpellAbility().addEffect(effect);

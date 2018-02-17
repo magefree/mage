@@ -24,15 +24,13 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.game;
-
-import org.apache.log4j.Logger;
 
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -41,8 +39,6 @@ import java.util.List;
 public class GameStates implements Serializable {
 
     private static final Logger logger = Logger.getLogger(GameStates.class);
-
-//    private final List<byte[]> states;
     private final List<GameState> states;
 
     public GameStates() {
@@ -88,4 +84,7 @@ public class GameStates implements Serializable {
         return null;
     }
 
+    public void clear() {
+        states.clear();
+    }
 }
