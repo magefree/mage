@@ -264,6 +264,7 @@ public class FourthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Giant Strength", 196, Rarity.COMMON, mage.cards.g.GiantStrength.class));
         cards.add(new SetCardInfo("Goblin Balloon Brigade", 197, Rarity.UNCOMMON, mage.cards.g.GoblinBalloonBrigade.class));
         cards.add(new SetCardInfo("Goblin King", 198, Rarity.RARE, mage.cards.g.GoblinKing.class));
+        cards.add(new SetCardInfo("Goblin Rock Sled", 199, Rarity.COMMON, mage.cards.g.GoblinRockSled.class));
         cards.add(new SetCardInfo("Gray Ogre", 200, Rarity.COMMON, mage.cards.g.GrayOgre.class));
         cards.add(new SetCardInfo("Hill Giant", 201, Rarity.COMMON, mage.cards.h.HillGiant.class));
         cards.add(new SetCardInfo("Hurloon Minotaur", 202, Rarity.COMMON, mage.cards.h.HurloonMinotaur.class));
