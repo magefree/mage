@@ -36,7 +36,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -48,14 +48,12 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class Soulblast extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures you control");
-
     public Soulblast(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{R}{R}{R}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{R}{R}{R}");
 
         // As an additional cost to cast Soulblast, sacrifice all creatures you control.
-        this.getSpellAbility().addCost(new SacrificeAllCost(filter));
+        this.getSpellAbility().addCost(new SacrificeAllCost(StaticFilters.FILTER_PERMANENT_CREATURES_CONTROLLED));
+
         // Soulblast deals damage to target creature or player equal to the total power of the sacrificed creatures.
         this.getSpellAbility().addEffect(new SoulblastEffect());
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
@@ -90,7 +88,7 @@ class SoulblastEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int power = 0;
-        for (Cost cost :source.getCosts()) {
+        for (Cost cost : source.getCosts()) {
             if (cost instanceof SacrificeAllCost) {
                 for (Permanent permanent : ((SacrificeAllCost) cost).getPermanents()) {
                     power += permanent.getPower().getValue();
