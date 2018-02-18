@@ -29,7 +29,6 @@ package mage.abilities.costs;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.keyword.FlashbackAbility;
 import mage.abilities.mana.ManaAbility;
 import mage.game.Game;
 import mage.game.stack.StackObject;
@@ -173,7 +172,6 @@ public abstract class VariableCostImpl implements Cost, VariableCost {
         StackObject stackObject = game.getStack().getStackObject(source.getId());
         if (controller != null
                 && (source instanceof ManaAbility
-                || source instanceof FlashbackAbility
                 || stackObject != null)) {
             xValue = controller.announceXCost(getMinValue(source, game), getMaxValue(source, game),
                     "Announce the number of " + actionText, game, source, this);

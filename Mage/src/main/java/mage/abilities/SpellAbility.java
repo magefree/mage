@@ -217,7 +217,7 @@ public class SpellAbility extends ActivatedAbilityImpl {
                 this.name = "Cast fused " + cardName;
                 break;
             default:
-                this.name = "Cast " + cardName + (this.spellAbilityCastMode != SpellAbilityCastMode.NORMAL ? " by " + spellAbilityCastMode.toString() : "");
+                this.name = "Cast " + cardName + (this.spellAbilityCastMode != SpellAbilityCastMode.NORMAL ? " using " + spellAbilityCastMode.toString() : "");
         }
     }
 
@@ -230,4 +230,11 @@ public class SpellAbility extends ActivatedAbilityImpl {
         setSpellName();
     }
 
+    public SpellAbility getSpellAbilityToResolve(Game game) {
+        return this;
+    }
+
+    public void setId(UUID idToUse) {
+        this.id = idToUse;
+    }
 }
