@@ -142,42 +142,50 @@ public class MaximumHandSizeControllerEffect extends ContinuousEffectImpl {
 
     private void setText() {
         StringBuilder sb = new StringBuilder();
-        switch (targetController) {
-            case ANY:
-                if (handSize instanceof StaticValue && ((StaticValue) handSize).getValue() == Integer.MAX_VALUE) {
-                    sb.append("All players have no ");
-                } else {
-                    sb.append("All players ");
-                }
-                break;
-            case OPPONENT:
-                if (handSize instanceof StaticValue && ((StaticValue) handSize).getValue() == Integer.MAX_VALUE) {
-                    sb.append("Each opponent has no ");
-                } else {
-                    sb.append("Each opponent's ");
-                }
-                break;
-            case YOU:
-                if (handSize instanceof StaticValue && ((StaticValue) handSize).getValue() == Integer.MAX_VALUE) {
-                    sb.append("You have no ");
-                } else {
-                    sb.append("Your ");
-                }
-                break;
+        if(handSize instanceof StaticValue && ((StaticValue) handSize).getValue() == Integer.MAX_VALUE) {
+            switch (targetController) {
+                case ANY:
+                        sb.append("Players have no maximum hand size");
+                    break;
+                case OPPONENT:
+                        sb.append("Each opponent has no maximum hand size");
+                    break;
+                case YOU:
+                        sb.append("You have no maximum hand size");
+                    break;
+            }
+        } else {
+            switch (targetController) {
+                case ANY:
+                        sb.append("All players maximum hand size");
+                    break;
+                case OPPONENT:
+                        sb.append("Each opponent's maximum hand size");
+                    break;
+                case YOU:
+                        sb.append("Your maximum hand size");
+                    break;
+            }
+            
+            switch (handSizeModification) {
+                case SET:
+                        sb.append(" is ");
+                    break;
+                case INCREASE:
+                        sb.append(" is increased by ");
+                    break;
+                case REDUCE:
+                        sb.append(" is reduced by ");
+                    break;
+            }
+
+            if (handSize instanceof StaticValue) {
+                sb.append(CardUtil.numberToText(((StaticValue) handSize).getValue()));
+            } else if (!(handSize instanceof StaticValue)) {
+                sb.append(handSize.getMessage());
+            }
         }
-        sb.append("maximum hand size");
-        if (handSizeModification == HandSizeModification.INCREASE) {
-            sb.append(" is increased by ");
-        } else if (handSizeModification == HandSizeModification.REDUCE) {
-            sb.append(" is reduced by ");
-        } else if (!((handSize instanceof StaticValue) && ((StaticValue) handSize).getValue() != Integer.MAX_VALUE) || !(handSize instanceof StaticValue)) {
-            sb.append(" is ");
-        }
-        if ((handSize instanceof StaticValue && ((StaticValue) handSize).getValue() != Integer.MAX_VALUE)) {
-            sb.append(CardUtil.numberToText(((StaticValue) handSize).getValue()));
-        } else if (!(handSize instanceof StaticValue)) {
-            sb.append(handSize.getMessage());
-        }
+        
         if (duration == Duration.EndOfGame) {
             sb.append(" for the rest of the game");
         }
