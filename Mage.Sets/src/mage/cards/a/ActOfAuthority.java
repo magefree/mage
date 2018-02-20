@@ -27,6 +27,7 @@
  */
 package mage.cards.a;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -44,8 +45,6 @@ import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
 
-import java.util.UUID;
-
 /**
  *
  * @author LevelX2
@@ -53,8 +52,7 @@ import java.util.UUID;
 public class ActOfAuthority extends CardImpl {
 
     public ActOfAuthority(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}{W}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}{W}");
 
         // When Act of Authority enters the battlefield, you may exile target artifact or enchantment.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ExileTargetEffect(), true);

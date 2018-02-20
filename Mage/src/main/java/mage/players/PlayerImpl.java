@@ -1158,7 +1158,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
         } else {
             int bookmark = game.bookmarkState();
-            if (ability.activate(game, ability instanceof FlashbackAbility)) {
+            if (ability.activate(game, false)) {
                 ability.resolve(game);
                 game.removeBookmark(bookmark);
                 resetStoredBookmark(game);
@@ -1219,11 +1219,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     result = playManaAbility((ActivatedManaAbilityImpl) ability.copy(), game);
                     break;
                 case SPELL:
-                    if (ability instanceof FlashbackAbility) {
-                        result = playAbility(ability.copy(), game);
-                    } else {
-                        result = cast((SpellAbility) ability, game, false);
-                    }
+                    result = cast((SpellAbility) ability.copy(), game, false);
                     break;
                 default:
                     result = playAbility(ability.copy(), game);

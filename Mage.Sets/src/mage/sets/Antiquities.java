@@ -111,6 +111,7 @@ public class Antiquities extends ExpansionSet {
         cards.add(new SetCardInfo("Primal Clay", 26, Rarity.UNCOMMON, mage.cards.p.PrimalClay.class));
         cards.add(new SetCardInfo("Rakalite", 27, Rarity.UNCOMMON, mage.cards.r.Rakalite.class));
         cards.add(new SetCardInfo("Reconstruction", 56, Rarity.COMMON, mage.cards.r.Reconstruction.class));
+        cards.add(new SetCardInfo("Reverse Polarity", 100, Rarity.COMMON, mage.cards.r.ReversePolarity.class));
         cards.add(new SetCardInfo("Rocket Launcher", 28, Rarity.UNCOMMON, mage.cards.r.RocketLauncher.class));
         cards.add(new SetCardInfo("Sage of Lat-Nam", 57, Rarity.COMMON, mage.cards.s.SageOfLatNam.class));
         cards.add(new SetCardInfo("Shapeshifter", 29, Rarity.RARE, mage.cards.s.Shapeshifter.class));

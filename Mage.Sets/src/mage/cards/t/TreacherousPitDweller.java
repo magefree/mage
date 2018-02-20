@@ -29,6 +29,7 @@ package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -49,7 +50,7 @@ import mage.target.common.TargetOpponent;
 public class TreacherousPitDweller extends CardImpl {
 
     public TreacherousPitDweller(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{B}");
         this.subtype.add(SubType.DEMON);
 
         this.power = new MageInt(4);
@@ -77,24 +78,24 @@ class TreacherousPitDwellerTriggeredAbility extends TriggeredAbilityImpl {
     private static final String ruleText = "When {this} enters the battlefield from a graveyard, ";
 
     public TreacherousPitDwellerTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new TreacherousPitDwellerEffect(),false);
+        super(Zone.BATTLEFIELD, new TreacherousPitDwellerEffect(), false);
         addTarget(new TargetOpponent());
     }
 
     public TreacherousPitDwellerTriggeredAbility(final TreacherousPitDwellerTriggeredAbility ability) {
         super(ability);
     }
-    
+
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
     }
-    
+
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return  event.getTargetId().equals(getSourceId()) && ((EntersTheBattlefieldEvent) event).getFromZone() == Zone.GRAVEYARD;
-    }    
-    
+        return event.getTargetId().equals(getSourceId()) && ((EntersTheBattlefieldEvent) event).getFromZone() == Zone.GRAVEYARD;
+    }
+
     @Override
     public TreacherousPitDwellerTriggeredAbility copy() {
         return new TreacherousPitDwellerTriggeredAbility(this);
@@ -104,7 +105,7 @@ class TreacherousPitDwellerTriggeredAbility extends TriggeredAbilityImpl {
     public String getRule() {
         return ruleText + super.getRule();
     }
-    
+
 }
 
 class TreacherousPitDwellerEffect extends ContinuousEffectImpl {
@@ -125,10 +126,12 @@ class TreacherousPitDwellerEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = (Permanent) source.getSourceObjectIfItStillExists(game);
+        MageObject permanent = source.getSourceObjectIfItStillExists(game); // it can also return Card object
         Player targetOpponent = game.getPlayer(source.getFirstTarget());
-        if (permanent != null && targetOpponent != null) {
-            return permanent.changeControllerId(targetOpponent.getId(), game);
+        if (permanent != null
+                && (permanent instanceof Permanent)
+                && targetOpponent != null) {
+            return ((Permanent) permanent).changeControllerId(targetOpponent.getId(), game);
         } else {
             discard();
         }

@@ -50,6 +50,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.GameException;
 import mage.game.GameOptions;
+import mage.game.GameState;
 import mage.game.Table;
 import mage.game.events.Listener;
 import mage.game.events.PlayerQueryEvent;
@@ -1086,6 +1087,99 @@ public class GameController implements GameCallback {
             return !gameOptions.bannedUsers.contains(user.get().getName());
         }
         return false;
+    }
+
+    public String getGameStateDebugMessage() {
+        if (game == null) {
+            return "";
+        }
+        GameState state = game.getState();
+        if (state == null) {
+            return "";
+        }
+        StringBuilder sb = new StringBuilder();
+        sb.append("<br/>Game State:<br/><font size=-2>");
+        sb.append(state);
+
+        sb.append("<br>Active player is: ");
+        sb.append(game.getPlayer(state.getActivePlayerId()).getName());
+        sb.append("<br>isGameOver: ");
+        sb.append(state.isGameOver());
+        sb.append("<br>Current phase is: ");
+        sb.append(state.getTurn().getPhase());
+        sb.append("<br>getBattlefield: ");
+        sb.append(state.getBattlefield());
+        sb.append("<br>getChoosingPlayerId: ");
+        if (state.getChoosingPlayerId() != null) {
+            sb.append(game.getPlayer(state.getChoosingPlayerId()).getName());
+        } else {
+            sb.append("noone!");
+        }
+        sb.append("<br>getCombat: ");
+        sb.append(state.getCombat());
+        sb.append("<br>getCommand: ");
+        sb.append(state.getCommand());
+        sb.append("<br>getContinuousEffects: ");
+        sb.append(state.getContinuousEffects());
+        sb.append("<br>getCopiedCards: ");
+        sb.append(state.getCopiedCards());
+        sb.append("<br>getDelayed: ");
+        sb.append(state.getDelayed());
+        sb.append("<br>getDesignations: ");
+        sb.append(state.getDesignations());
+        sb.append("<br>getExile: ");
+        sb.append(state.getExile());
+        sb.append("<br>getMonarchId: ");
+        sb.append(state.getMonarchId());
+        sb.append("<br>getNextPermanentOrderNumber: ");
+        sb.append(state.getNextPermanentOrderNumber());
+        sb.append("<br>getPlayerByOrderId: ");
+        if (state.getPlayerByOrderId() != null) {
+            sb.append(game.getPlayer(state.getPlayerByOrderId()).getName());
+        } else {
+            sb.append("noone!");
+        }
+        sb.append("<br>getPlayerList: ");
+        sb.append(state.getPlayerList());
+        sb.append("<br>getPlayers: ");
+        sb.append(state.getPlayers());
+        sb.append("<br>Player with Priority is: ");
+        if (state.getPriorityPlayerId() != null) {
+            sb.append(game.getPlayer(state.getPriorityPlayerId()).getName());
+        } else {
+            sb.append("noone!");
+        }
+        sb.append("<br>getRevealed: ");
+        sb.append(state.getRevealed());
+        sb.append("<br>getSpecialActions: ");
+        sb.append(state.getSpecialActions());
+        sb.append("<br>getStack: ");
+        sb.append(state.getStack());
+        sb.append("<br>getStepNum: ");
+        sb.append(state.getStepNum());
+        sb.append("<br>getTriggers: ");
+        sb.append(state.getTriggers());
+        sb.append("<br>getTurn: ");
+        sb.append(state.getTurn());
+        sb.append("<br>getTurnId: ");
+        sb.append(state.getTurnId());
+        sb.append("<br>getTurnMods: ");
+        sb.append(state.getTurnMods());
+        sb.append("<br>getTurnNum: ");
+        sb.append(state.getTurnNum());
+        sb.append("<br>Future Timeout:");
+        if (futureTimeout != null) {
+            sb.append("Cancelled?=");
+            sb.append(futureTimeout.isCancelled());
+            sb.append(",,,Done?=");
+            sb.append(futureTimeout.isDone());
+            sb.append(",,,GetDelay?=");
+            sb.append((int) futureTimeout.getDelay(TimeUnit.SECONDS));
+        } else {
+            sb.append("Not using future Timeout!");
+        }
+        sb.append("</font>");
+        return sb.toString();
     }
 
 }

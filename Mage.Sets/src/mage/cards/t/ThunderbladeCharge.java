@@ -25,20 +25,22 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.s;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.common.SacrificeAllCost;
+import mage.abilities.common.ControlledCreaturesDealCombatDamagePlayerTriggeredAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.DoIfCostPaid;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.StaticFilters;
+import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreatureOrPlayer;
 
@@ -46,66 +48,57 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author LevelX2
  */
-public class Soulblast extends CardImpl {
+public class ThunderbladeCharge extends CardImpl {
 
-    public Soulblast(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{R}{R}{R}");
+    public ThunderbladeCharge(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{R}{R}");
 
-        // As an additional cost to cast Soulblast, sacrifice all creatures you control.
-        this.getSpellAbility().addCost(new SacrificeAllCost(StaticFilters.FILTER_PERMANENT_CREATURES_CONTROLLED));
-
-        // Soulblast deals damage to target creature or player equal to the total power of the sacrificed creatures.
-        this.getSpellAbility().addEffect(new SoulblastEffect());
+        // Thunderblade Charge deals 3 damage to target creature or player.
+        this.getSpellAbility().addEffect(new DamageTargetEffect(3));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+
+        // Whenever one or more creatures you control deal combat damage to a player, if Thunderblade Charge is in your graveyard, you may pay {2}{R}{R}{R}. If you do, you may cast it without paying its mana cost.
+        this.addAbility(new ControlledCreaturesDealCombatDamagePlayerTriggeredAbility(Zone.GRAVEYARD,
+                new DoIfCostPaid(new ThunderbladeChargeCastEffect(), new ManaCostsImpl("{2}{R}{R}{R}"))
+                        .setText("if {this} is in your graveyard, you may pay {2}{R}{R}{R}. If you do, you may cast it without paying its mana cost")));
     }
 
-    public Soulblast(final Soulblast card) {
+    public ThunderbladeCharge(final ThunderbladeCharge card) {
         super(card);
     }
 
     @Override
-    public Soulblast copy() {
-        return new Soulblast(this);
+    public ThunderbladeCharge copy() {
+        return new ThunderbladeCharge(this);
     }
 }
 
-class SoulblastEffect extends OneShotEffect {
+class ThunderbladeChargeCastEffect extends OneShotEffect {
 
-    public SoulblastEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "Soulblast deals damage to target creature or player equal to the total power of the sacrificed creatures";
+    public ThunderbladeChargeCastEffect() {
+        super(Outcome.PutCreatureInPlay);
+        this.staticText = "you may cast {this} without paying its mana cost";
     }
 
-    public SoulblastEffect(final SoulblastEffect effect) {
+    public ThunderbladeChargeCastEffect(final ThunderbladeChargeCastEffect effect) {
         super(effect);
     }
 
     @Override
-    public SoulblastEffect copy() {
-        return new SoulblastEffect(this);
+    public ThunderbladeChargeCastEffect copy() {
+        return new ThunderbladeChargeCastEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int power = 0;
-        for (Cost cost : source.getCosts()) {
-            if (cost instanceof SacrificeAllCost) {
-                for (Permanent permanent : ((SacrificeAllCost) cost).getPermanents()) {
-                    power += permanent.getPower().getValue();
-                }
-            }
+        Player controller = game.getPlayer(source.getControllerId());
+        Card sourceCard = game.getCard(source.getSourceId());
+        if (controller != null
+                && sourceCard != null
+                && Zone.GRAVEYARD == game.getState().getZone(sourceCard.getId())) {
+            controller.cast(sourceCard.getSpellAbility(), game, true);
+            return true;
         }
-        if (power > 0) {
-            Player player = game.getPlayer(this.getTargetPointer().getFirst(game, source));
-            if (player != null) {
-                player.damage(power, source.getSourceId(), game, false, true);
-            } else {
-                Permanent creature = game.getPermanent(this.getTargetPointer().getFirst(game, source));
-                if (creature != null) {
-                    creature.damage(power, source.getSourceId(), game, false, true);
-                }
-            }
-        }
-        return true;
+        return false;
     }
 }

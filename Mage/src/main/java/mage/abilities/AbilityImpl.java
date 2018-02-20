@@ -44,7 +44,6 @@ import mage.abilities.effects.Effects;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DynamicManaEffect;
 import mage.abilities.effects.common.ManaEffect;
-import mage.abilities.keyword.FlashbackAbility;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.Card;
 import mage.cards.SplitCard;
@@ -337,9 +336,7 @@ public abstract class AbilityImpl implements Ability {
             if (sourceObject != null && this.getAbilityType() != AbilityType.TRIGGERED) { // triggered abilities check this already in playerImpl.triggerAbility
                 sourceObject.adjustTargets(this, game);
             }
-            // Flashback abilities haven't made the choices the underlying spell might need for targeting.
-            if (!(this instanceof FlashbackAbility)
-                    && !getTargets().isEmpty()) {
+            if (!getTargets().isEmpty()) {
                 Outcome outcome = getEffects().isEmpty() ? Outcome.Detriment : getEffects().get(0).getOutcome();
                 if (getTargets().chooseTargets(outcome, this.controllerId, this, noMana, game) == false) {
                     if ((variableManaCost != null || announceString != null)) {
@@ -445,8 +442,15 @@ public abstract class AbilityImpl implements Ability {
 
     @Override
     public boolean activateAlternateOrAdditionalCosts(MageObject sourceObject, boolean noMana, Player controller, Game game) {
+        if (this instanceof SpellAbility) {
+            if (((SpellAbility) this).getSpellAbilityCastMode() != SpellAbilityCastMode.NORMAL) {
+                // A player can't apply two alternative methods of casting or two alternative costs to a single spell.
+                // So can only use alternate costs if the spell is cast in normal mode
+                return false;
+            }
+        }
         boolean alternativeCostisUsed = false;
-        if (sourceObject != null && !(sourceObject instanceof Permanent) && !(this instanceof FlashbackAbility)) {
+        if (sourceObject != null && !(sourceObject instanceof Permanent)) {
             Abilities<Ability> abilities = null;
             if (sourceObject instanceof Card) {
                 abilities = ((Card) sourceObject).getAbilities(game);

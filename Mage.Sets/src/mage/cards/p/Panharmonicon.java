@@ -50,7 +50,7 @@ import mage.game.events.NumberOfTriggersEvent;
 public class Panharmonicon extends CardImpl {
 
     public Panharmonicon(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // If an artifact or creature entering the battlefield causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PanharmoniconEffect()));
@@ -95,7 +95,9 @@ class PanharmoniconEffect extends ReplacementEffectImpl {
             if (source.getControllerId().equals(event.getPlayerId())) {
                 GameEvent sourceEvent = numberOfTriggersEvent.getSourceEvent();
                 // Only EtB triggers
-                if (sourceEvent.getType() == EventType.ENTERS_THE_BATTLEFIELD && sourceEvent instanceof EntersTheBattlefieldEvent) {
+                if (sourceEvent != null
+                        && sourceEvent.getType() == EventType.ENTERS_THE_BATTLEFIELD
+                        && sourceEvent instanceof EntersTheBattlefieldEvent) {
                     EntersTheBattlefieldEvent entersTheBattlefieldEvent = (EntersTheBattlefieldEvent) sourceEvent;
                     // Only for entering artifacts or creatures
                     if (entersTheBattlefieldEvent.getTarget().isArtifact()

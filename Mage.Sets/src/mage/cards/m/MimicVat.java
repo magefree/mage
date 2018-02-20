@@ -38,8 +38,8 @@ import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbil
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
+import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -122,7 +122,7 @@ class MimicVatTriggeredAbility extends TriggeredAbilityImpl {
                 && !(permanent instanceof PermanentToken)
                 && permanent.isCreature()) {
 
-            getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getId()));
+            getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getId(), game));
             return true;
         }
         return false;
@@ -152,22 +152,22 @@ class MimicVatEffect extends OneShotEffect {
         if (controller == null || permanent == null) {
             return false;
         }
-        // return older cards to graveyard
-        Set<Card> toGraveyard = new HashSet<>();
-        for (UUID imprintedId : permanent.getImprinted()) {
-            Card card = game.getCard(imprintedId);
-            if (card != null) {
-                toGraveyard.add(card);
-            }
-        }
-        controller.moveCards(toGraveyard, Zone.GRAVEYARD, source, game);
-        permanent.clearImprinted(game);
-
         // Imprint a new one
-        Card card = game.getCard(getTargetPointer().getFirst(game, source));
-        if (card != null) {
-            controller.moveCardsToExile(card, source, game, true, source.getSourceId(), permanent.getName() + " (Imprint)");
-            permanent.imprint(card.getId(), game);
+        Card newCard = game.getCard(getTargetPointer().getFirst(game, source));
+        if (newCard != null) {
+            // return older cards to graveyard
+            Set<Card> toGraveyard = new HashSet<>();
+            for (UUID imprintedId : permanent.getImprinted()) {
+                Card card = game.getCard(imprintedId);
+                if (card != null) {
+                    toGraveyard.add(card);
+                }
+            }
+            controller.moveCards(toGraveyard, Zone.GRAVEYARD, source, game);
+            permanent.clearImprinted(game);
+
+            controller.moveCardsToExile(newCard, source, game, true, source.getSourceId(), permanent.getName() + " (Imprint)");
+            permanent.imprint(newCard.getId(), game);
         }
 
         return true;

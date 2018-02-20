@@ -33,7 +33,8 @@ package mage.constants;
  */
 public enum SpellAbilityCastMode {
     NORMAL("Normal"),
-    MADNESS("Madness");
+    MADNESS("Madness"),
+    FLASHBACK("Flashback");
 
     private final String text;
 

@@ -68,8 +68,7 @@ public class DiamondKaleidoscope extends CardImpl {
         this.addAbility(ability);
 
         // Sacrifice a Prism token: Add one mana of any color to your mana pool.
-        ability = new AnyColorManaAbility();
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        ability = new AnyColorManaAbility(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
         this.addAbility(ability);
     }
 
