@@ -46,8 +46,7 @@ import mage.filter.FilterCard;
 public class SultaiAscendancy extends CardImpl {
 
     public SultaiAscendancy(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}{G}{U}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{B}{G}{U}");
 
         // At the beginning of your upkeep, look at the top two cards of your library. Put any number of them into your graveyard and the rest on top of your library in any order.
         Effect effect = new LookLibraryAndPickControllerEffect(

@@ -990,7 +990,7 @@ public class TableController {
                             || !match.isDoneSideboarding()
                             || (!matchPlayer.hasQuit() && match.getGame() != null && matchPlayer.getPlayer().isInGame())) {
                         Optional<User> user = UserManager.instance.getUser(userPlayerEntry.getKey());
-                        if (!user.isPresent()) {
+                        if (!user.isPresent() || user.get().isActive()) {
                             logger.warn("- Active user of match is missing: " + matchPlayer.getName());
                             logger.warn("-- matchId:" + match.getId());
                             logger.warn("-- userId:" + userPlayerEntry.getKey());
