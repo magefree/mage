@@ -56,7 +56,7 @@ public class DefenderAbility extends StaticAbility implements MageSingleton {
 
     @Override
     public String getRule() {
-        return "Defender";
+        return "defender";
     }
 
     @Override

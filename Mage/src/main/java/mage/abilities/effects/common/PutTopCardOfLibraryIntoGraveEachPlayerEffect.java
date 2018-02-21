@@ -123,9 +123,12 @@ public class PutTopCardOfLibraryIntoGraveEachPlayerEffect extends OneShotEffect 
                 throw new UnsupportedOperationException("TargetController type not supported.");
         }
         sb.append("puts the top ");
-        sb.append(CardUtil.numberToText(numberCards.toString(), "a"));
-        sb.append(" card");
-        sb.append(numberCards.toString().equals("1") ? "" : "s");
+        if(numberCards.toString().equals("1")) {
+            sb.append("card");
+        } else {
+            sb.append(CardUtil.numberToText(numberCards.toString()));
+            sb.append(" cards");
+        }
         sb.append(" of his or her library into his or her graveyard");
         return sb.toString();
     }

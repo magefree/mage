@@ -89,7 +89,7 @@ public class ProtectionAbility extends StaticAbility {
     @Override
     public String getRule() {
 
-        return "Protection from " + filter.getMessage() + (removeAuras ? "" : ". This effect doesn't remove auras.");
+        return "protection from " + filter.getMessage() + (removeAuras ? "" : ". This effect doesn't remove auras.");
     }
 
     public boolean canTarget(MageObject source, Game game) {

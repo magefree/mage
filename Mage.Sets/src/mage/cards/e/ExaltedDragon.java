@@ -80,7 +80,7 @@ class ExaltedDragonCostToAttackBlockEffect extends PayCostToAttackBlockEffectImp
     ExaltedDragonCostToAttackBlockEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment, RestrictType.ATTACK,
                 new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent("a land"))));
-        staticText = "{this} can't attack unless you sacrifice a land <i>(This cost is paid as attackers are declared.)</i>";
+        staticText = "{this} can't attack unless you sacrifice a land. <i>(This cost is paid as attackers are declared.)</i>";
     }
 
     ExaltedDragonCostToAttackBlockEffect(ExaltedDragonCostToAttackBlockEffect effect) {

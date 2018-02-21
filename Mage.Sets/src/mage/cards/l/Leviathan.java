@@ -118,7 +118,7 @@ class LeviathanCostToAttackBlockEffect extends PayCostToAttackBlockEffectImpl {
     LeviathanCostToAttackBlockEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment, RestrictType.ATTACK,
                 new SacrificeTargetCost(new TargetControlledPermanent(2, 2, filter, false)));
-        staticText = "{this} can't attack unless you sacrifice two Islands <i>(This cost is paid as attackers are declared.)</i>";
+        staticText = "{this} can't attack unless you sacrifice two Islands. <i>(This cost is paid as attackers are declared.)</i>";
     }
 
     LeviathanCostToAttackBlockEffect(LeviathanCostToAttackBlockEffect effect) {
