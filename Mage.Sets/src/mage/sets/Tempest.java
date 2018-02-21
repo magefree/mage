@@ -196,6 +196,7 @@ public class Tempest extends ExpansionSet {
         cards.add(new SetCardInfo("Meditate", 76, Rarity.RARE, mage.cards.m.Meditate.class));
         cards.add(new SetCardInfo("Metallic Sliver", 287, Rarity.COMMON, mage.cards.m.MetallicSliver.class));
         cards.add(new SetCardInfo("Mindwhip Sliver", 39, Rarity.UNCOMMON, mage.cards.m.MindwhipSliver.class));
+        cards.add(new SetCardInfo("Minion of the Wastes", 40, Rarity.RARE, mage.cards.m.MinionOfTheWastes.class));
         cards.add(new SetCardInfo("Mirri's Guile", 130, Rarity.RARE, mage.cards.m.MirrisGuile.class));
         cards.add(new SetCardInfo("Mnemonic Sliver", 77, Rarity.UNCOMMON, mage.cards.m.MnemonicSliver.class));
         cards.add(new SetCardInfo("Mogg Cannon", 288, Rarity.UNCOMMON, mage.cards.m.MoggCannon.class));

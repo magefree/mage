@@ -128,6 +128,7 @@ public class Chronicles extends ExpansionSet {
         cards.add(new SetCardInfo("Repentant Blacksmith", 67, Rarity.COMMON, mage.cards.r.RepentantBlacksmith.class));
         cards.add(new SetCardInfo("Revelation", 40, Rarity.RARE, mage.cards.r.Revelation.class));
         cards.add(new SetCardInfo("Rubinia Soulsinger", 118, Rarity.RARE, mage.cards.r.RubiniaSoulsinger.class));
+        cards.add(new SetCardInfo("Runesword", 86, Rarity.COMMON, mage.cards.r.Runesword.class));
         cards.add(new SetCardInfo("Safe Haven", 93, Rarity.RARE, mage.cards.s.SafeHaven.class));
         cards.add(new SetCardInfo("Scavenger Folk", 41, Rarity.COMMON, mage.cards.s.ScavengerFolk.class));
         cards.add(new SetCardInfo("Sentinel", 87, Rarity.RARE, mage.cards.s.Sentinel.class));
@@ -139,6 +140,7 @@ public class Chronicles extends ExpansionSet {
         cards.add(new SetCardInfo("Stangg", 121, Rarity.RARE, mage.cards.s.Stangg.class));
         cards.add(new SetCardInfo("Storm Seeker", 42, Rarity.UNCOMMON, mage.cards.s.StormSeeker.class));
         cards.add(new SetCardInfo("Teleport", 26, Rarity.RARE, mage.cards.t.Teleport.class));
+        cards.add(new SetCardInfo("The Fallen", 10, Rarity.UNCOMMON, mage.cards.t.TheFallen.class));
         cards.add(new SetCardInfo("The Wretched", 11, Rarity.RARE, mage.cards.t.TheWretched.class));
         cards.add(new SetCardInfo("Tobias Andrion", 122, Rarity.UNCOMMON, mage.cards.t.TobiasAndrion.class));
         cards.add(new SetCardInfo("Tormod's Crypt", 89, Rarity.COMMON, mage.cards.t.TormodsCrypt.class));
