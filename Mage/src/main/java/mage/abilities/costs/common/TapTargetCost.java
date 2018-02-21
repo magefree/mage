@@ -78,6 +78,10 @@ public class TapTargetCost extends CostImpl {
     public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
         return target.canChoose(sourceId, controllerId, game);
     }
+    
+    public TargetControlledPermanent getTarget() {
+        return target;
+    }
 
     @Override
     public TapTargetCost copy() {
