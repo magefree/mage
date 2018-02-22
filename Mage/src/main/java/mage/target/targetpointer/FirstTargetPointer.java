@@ -35,7 +35,7 @@ public class FirstTargetPointer implements TargetPointer {
                 Card card = game.getCard(target);
                 if (card != null) {
                     this.zoneChangeCounter.put(target, card.getZoneChangeCounter(game));
-                }    
+                }
             }
         }
     }
@@ -66,9 +66,9 @@ public class FirstTargetPointer implements TargetPointer {
         if (zoneChangeCounter.containsKey(targetId)) {
             Card card = game.getCard(targetId);
             if (card != null && zoneChangeCounter.containsKey(targetId)
-                        && card.getZoneChangeCounter(game) != zoneChangeCounter.get(targetId)) {
-                    // because if dies trigger has to trigger as permanent has already moved zone, we have to check if target was on the battlefield immed. before
-                    // but no longer if new permanent is already on the battlefield
+                    && card.getZoneChangeCounter(game) != zoneChangeCounter.get(targetId)) {
+                // because if dies trigger has to trigger as permanent has already moved zone, we have to check if target was on the battlefield immed. before
+                // but no longer if new permanent is already on the battlefield
                 Permanent permanent = game.getPermanentOrLKIBattlefield(targetId);
                 if (permanent == null || permanent.getZoneChangeCounter(game) != zoneChangeCounter.get(targetId)) {
                     return null;
@@ -82,4 +82,16 @@ public class FirstTargetPointer implements TargetPointer {
     public TargetPointer copy() {
         return new FirstTargetPointer(this);
     }
+
+    @Override
+    public FixedTarget getFixedTarget(Game game, Ability source) {
+        this.init(game, source);
+        UUID firstId = getFirst(game, source);
+        if (firstId != null) {
+            return new FixedTarget(firstId, game.getState().getZoneChangeCounter(firstId));
+        }
+        return null;
+
+    }
+
 }

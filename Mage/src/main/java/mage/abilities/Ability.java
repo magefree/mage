@@ -45,6 +45,7 @@ import mage.constants.Zone;
 import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.Targets;
@@ -534,6 +535,17 @@ public interface Ability extends Controllable, Serializable {
      * @return
      */
     MageObject getSourceObjectIfItStillExists(Game game);
+
+    /**
+     * Returns the permanent that actually existed while the ability triggerd or
+     * an ability was activated only if it has not changed zone meanwhile. If
+     * not set yet, the current permanent if one exists will be retrieved from
+     * the game and returned.
+     *
+     * @param game
+     * @return
+     */
+    Permanent getSourcePermanentIfItStillExists(Game game);
 
     String getTargetDescription(Targets targets, Game game);
 
