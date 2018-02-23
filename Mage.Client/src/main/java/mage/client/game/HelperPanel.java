@@ -394,7 +394,7 @@ public class HelperPanel extends JPanel {
             }
         } else {
             // inform about other players
-            this.setOpaque(false);
+            this.mainPanel.setOpaque(false);
         }
 
         if (buttons.size() == 0) {
