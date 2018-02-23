@@ -381,7 +381,6 @@ public class ConsolePanel extends javax.swing.JPanel {
                 JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 ConsoleFrame.getSession().toggleActivation(userName);
                 return;
-            }
         }
     }//GEN-LAST:event_btnDeActivateActionPerformed
 

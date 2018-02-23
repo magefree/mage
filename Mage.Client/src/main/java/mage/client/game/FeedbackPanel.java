@@ -64,7 +64,6 @@ public class FeedbackPanel extends javax.swing.JPanel {
     private static final Logger LOGGER = Logger.getLogger(FeedbackPanel.class);
 
     public enum FeedbackMode {
-
         INFORM, QUESTION, CONFIRM, CANCEL, SELECT, END
     }
 

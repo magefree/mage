@@ -141,12 +141,7 @@ class TeferisProtectionAbility extends ProtectionAbility {
     public TeferisProtectionAbility copy() {
         return new TeferisProtectionAbility(this);
     }
-
-    @Override
-    public String getRule() {
-        return "Protection from everything";
-    }
-
+    
     @Override
     public boolean canTarget(MageObject source, Game game) {
         return false;
