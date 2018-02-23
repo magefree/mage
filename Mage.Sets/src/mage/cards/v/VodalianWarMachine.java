@@ -39,6 +39,7 @@ import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.TapTargetCost;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.combat.CanAttackAsThoughItDidntHaveDefenderSourceEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
@@ -58,6 +59,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackAbility;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -93,7 +95,7 @@ public class VodalianWarMachine extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 1, Duration.EndOfTurn), new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, true))));
         
         // When Vodalian War Machine dies, destroy all Merfolk tapped this turn to pay for its abilities.
-        this.addAbility(new DiesTriggeredAbility(new VodalianWarMachineEffect(), false), new VodalianWarMachineWatcher());
+        this.addAbility(new VodalianWarMachineTriggeredAbility(), new VodalianWarMachineWatcher());
     }
 
     public VodalianWarMachine(final VodalianWarMachine card) {
@@ -106,7 +108,51 @@ public class VodalianWarMachine extends CardImpl {
     }
 }
 
+class VodalianWarMachineTriggeredAbility extends DiesTriggeredAbility {
+
+    public VodalianWarMachineTriggeredAbility() {
+        super(new VodalianWarMachineEffect(), false);
+    }
+
+    public VodalianWarMachineTriggeredAbility(VodalianWarMachineTriggeredAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public VodalianWarMachineTriggeredAbility copy() {
+        return new VodalianWarMachineTriggeredAbility(this);
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        Permanent before = ((ZoneChangeEvent) event).getTarget();
+        if (before == null) {
+            return false;
+        }
+        if (super.checkTrigger(event, game)) {
+            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+            if (zEvent.getTarget().isTransformable()) {
+                if (!zEvent.getTarget().getAbilities().contains(this)) {
+                    return false;
+                }
+            }
+            for (Effect effect : getEffects()) {
+                effect.setValue("permanentLeftBattlefield", zEvent.getTarget());
+                if (effect instanceof VodalianWarMachineEffect) {
+                    VodalianWarMachineEffect effectToSet = (VodalianWarMachineEffect) effect;
+                    effectToSet.counter = before.getZoneChangeCounter(game);
+                }
+            }
+            return true;
+        }
+        return false;
+    }
+
+}
+
 class VodalianWarMachineEffect extends OneShotEffect {
+    
+    protected int counter;
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Merfolk tapped this turn to pay for its abilities");
 
@@ -121,6 +167,7 @@ class VodalianWarMachineEffect extends OneShotEffect {
 
     public VodalianWarMachineEffect(final VodalianWarMachineEffect effect) {
         super(effect);
+        counter = effect.counter;
     }
 
     @Override
@@ -133,9 +180,9 @@ class VodalianWarMachineEffect extends OneShotEffect {
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (sourcePermanent != null) {
             VodalianWarMachineWatcher watcher = (VodalianWarMachineWatcher) game.getState().getWatchers().get(VodalianWarMachineWatcher.class.getSimpleName());
-            if (watcher != null && watcher.getTappedMerfolkIds(sourcePermanent.getId(), game) != null) {
+            if (watcher != null && watcher.getTappedMerfolkIds(sourcePermanent.getId(), counter, game) != null) {
                 for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-                    if (watcher.getTappedMerfolkIds(sourcePermanent.getId(), game).contains(permanent.getId())) {
+                    if (watcher.getTappedMerfolkIds(sourcePermanent.getId(), counter, game).contains(permanent.getId())) {
                         permanent.destroy(source.getSourceId(), game, false);
                     }
                 }
@@ -165,8 +212,8 @@ class VodalianWarMachineWatcher extends Watcher {
         return new VodalianWarMachineWatcher(this);
     }
 
-    public Set<UUID> getTappedMerfolkIds(UUID sourceId, Game game) {
-        MageObjectReference mor = new MageObjectReference(sourceId, game);
+    public Set<UUID> getTappedMerfolkIds(UUID sourceId, int counter, Game game) {
+        MageObjectReference mor = new MageObjectReference(sourceId, counter, game);
         return tappedMerfolkIds.get(mor);
     }
 
@@ -184,7 +231,7 @@ class VodalianWarMachineWatcher extends Watcher {
                                 if (cost instanceof TapTargetCost && cost.isPaid()) {
                                     TapTargetCost tapCost = (TapTargetCost) cost;
                                     if (tapCost.getTarget().isChosen()) {
-                                        MageObjectReference mor = new MageObjectReference(sourcePermanent.getId(), sourcePermanent.getZoneChangeCounter(game) + 1, game);
+                                        MageObjectReference mor = new MageObjectReference(sourcePermanent.getId(), sourcePermanent.getZoneChangeCounter(game), game);
                                         Set<UUID> toAdd;
                                         if (tappedMerfolkIds.get(mor) == null) {
                                             toAdd = new HashSet<>();
