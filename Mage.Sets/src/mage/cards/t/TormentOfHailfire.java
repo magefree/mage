@@ -86,31 +86,37 @@ class TormentOfHailfireEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             int repeat = source.getManaCostsToPay().getX();
-            for (int i = 0; i < repeat; i++) {
+            for (int i = 1; i <= repeat; i++) {
                 for (UUID opponentId : game.getOpponents(source.getControllerId())) {
-                    Player opponent = game.getPlayer(opponentId);
-                    if (opponent != null) {
-                        int permanents = game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_NON_LAND, opponentId, game);
-                        if (permanents > 0 && opponent.chooseUse(outcome, "Sacrifices a nonland permanent? (Iteration " + i + " of " + repeat + ")",
-                                "Otherwise you have to discard a card or lose 3 life.", "Sacrifice", "Discard or life loss", source, game)) {
-                            Target target = new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_NON_LAND);
-                            if (opponent.choose(outcome, target, source.getSourceId(), game)) {
-                                Permanent permanent = game.getPermanent(target.getFirstTarget());
-                                if (permanent != null) {
-                                    permanent.sacrifice(source.getSourceId(), game);
-                                    continue;
+                    boolean hasChosen = false;
+                    while (!hasChosen) {
+                        Player opponent = game.getPlayer(opponentId);
+                        if (opponent != null) {
+                            int permanents = game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_NON_LAND, opponentId, game);
+                            if (permanents > 0 && opponent.chooseUse(outcome, "Sacrifices a nonland permanent? (Iteration " + i + " of " + repeat + ")",
+                                    "Otherwise you have to discard a card or lose 3 life.", "Sacrifice", "Discard or life loss", source, game)) {
+                                Target target = new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_NON_LAND);
+                                if (opponent.choose(outcome, target, source.getSourceId(), game)) {
+                                    Permanent permanent = game.getPermanent(target.getFirstTarget());
+                                    if (permanent != null) {
+                                        if (permanent.sacrifice(source.getSourceId(), game)) {
+                                            hasChosen = true;
+                                            continue;
+                                        }
+                                    }
                                 }
                             }
+                            if (!opponent.getHand().isEmpty() && opponent.chooseUse(outcome, "Discard a card? (Iteration " + i + " of " + repeat + ")",
+                                    "Otherwise you lose 3 life.", "Discard", "Lose 3 life", source, game)) {
+                                opponent.discardOne(false, source, game);
+                                hasChosen = true;
+                                continue;
+                            }
+                            opponent.loseLife(3, game, false);
+                            hasChosen = true;
                         }
-                        if (!opponent.getHand().isEmpty() && opponent.chooseUse(outcome, "Discard a card? (Iteration " + i + " of " + repeat + ")",
-                                "Otherwise you lose 3 life.", "Discard", "Lose 3 life", source, game)) {
-                            opponent.discardOne(false, source, game);
-                            continue;
-                        }
-                        opponent.loseLife(3, game, false);
                     }
                 }
-
             }
             return true;
         }
