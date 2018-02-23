@@ -105,7 +105,7 @@ class MinionOfTheWastesEffect extends OneShotEffect {
             controller.loseLife(payAmount, game, false);
             game.informPlayers(new StringBuilder(sourceCard.getLogName()).append(": ").append(controller.getLogName())
                 .append(" pays ").append(payAmount).append(" life").toString());
-            game.addEffect(new SetPowerToughnessSourceEffect(payAmount, payAmount, Duration.WhileOnBattlefield, SubLayer.SetPT_7b), source);
+            game.addEffect(new SetPowerToughnessSourceEffect(payAmount, payAmount, Duration.Custom, SubLayer.SetPT_7b), source);
             return true;
         }
         return false;
