@@ -33,6 +33,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -132,9 +133,9 @@ class VodalianWarMachineEffect extends OneShotEffect {
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (sourcePermanent != null) {
             VodalianWarMachineWatcher watcher = (VodalianWarMachineWatcher) game.getState().getWatchers().get(VodalianWarMachineWatcher.class.getSimpleName());
-            if (watcher != null && watcher.getTappedMerfolkIds(sourcePermanent.getId()) != null) {
+            if (watcher != null && watcher.getTappedMerfolkIds(sourcePermanent.getId(), game) != null) {
                 for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-                    if (watcher.getTappedMerfolkIds(sourcePermanent.getId()).contains(permanent.getId())) {
+                    if (watcher.getTappedMerfolkIds(sourcePermanent.getId(), game).contains(permanent.getId())) {
                         permanent.destroy(source.getSourceId(), game, false);
                     }
                 }
@@ -148,7 +149,7 @@ class VodalianWarMachineEffect extends OneShotEffect {
 
 class VodalianWarMachineWatcher extends Watcher {
 
-    public Map<UUID, Set<UUID>> tappedMerfolkIds = new HashMap<>();
+    public Map<MageObjectReference, Set<UUID>> tappedMerfolkIds = new HashMap<>();
 
     public VodalianWarMachineWatcher() {
         super(VodalianWarMachineWatcher.class.getSimpleName(), WatcherScope.GAME);
@@ -164,33 +165,38 @@ class VodalianWarMachineWatcher extends Watcher {
         return new VodalianWarMachineWatcher(this);
     }
 
-    public Set<UUID> getTappedMerfolkIds(UUID sourceId) {
-        return tappedMerfolkIds.get(sourceId);
+    public Set<UUID> getTappedMerfolkIds(UUID sourceId, Game game) {
+        MageObjectReference mor = new MageObjectReference(sourceId, game);
+        return tappedMerfolkIds.get(mor);
     }
 
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ACTIVATED_ABILITY) {
             if (event.getSourceId() != null) {
-                StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
-                if (stackAbility != null) {
-                    Ability ability = stackAbility.getStackAbility();
-                    if (ability != null) {
-                        for (Cost cost : ability.getCosts()) {
-                            if (cost instanceof TapTargetCost && cost.isPaid()) {
-                                TapTargetCost tapCost = (TapTargetCost) cost;
-                                if (tapCost.getTarget().isChosen()) {
-                                    Set<UUID> toAdd;
-                                    if (tappedMerfolkIds.get(event.getSourceId()) == null) {
-                                        toAdd = new HashSet<>();
-                                    } else {
-                                        toAdd = tappedMerfolkIds.get(event.getSourceId());
+                Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
+                if (sourcePermanent != null) {
+                    StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
+                    if (stackAbility != null) {
+                        Ability ability = stackAbility.getStackAbility();
+                        if (ability != null) {
+                            for (Cost cost : ability.getCosts()) {
+                                if (cost instanceof TapTargetCost && cost.isPaid()) {
+                                    TapTargetCost tapCost = (TapTargetCost) cost;
+                                    if (tapCost.getTarget().isChosen()) {
+                                        MageObjectReference mor = new MageObjectReference(sourcePermanent.getId(), sourcePermanent.getZoneChangeCounter(game) + 1, game);
+                                        Set<UUID> toAdd;
+                                        if (tappedMerfolkIds.get(mor) == null) {
+                                            toAdd = new HashSet<>();
+                                        } else {
+                                            toAdd = tappedMerfolkIds.get(mor);
+                                        }
+                                        for (UUID targetId : tapCost.getTarget().getTargets()) {
+                                            toAdd.add(targetId);
+                                        }
+                                        tappedMerfolkIds.put(mor, toAdd);
+                                        break;
                                     }
-                                    for (UUID targetId : tapCost.getTarget().getTargets()) {
-                                        toAdd.add(targetId);
-                                    }
-                                    tappedMerfolkIds.put(event.getSourceId(), toAdd);
-                                    break;
                                 }
                             }
                         }
