@@ -87,4 +87,13 @@ public class FixedTargets implements TargetPointer {
         return new FixedTargets(this);
     }
 
+    @Override
+    public FixedTarget getFixedTarget(Game game, Ability source) {
+        this.init(game, source);
+        UUID firstId = getFirst(game, source);
+        if (firstId != null) {
+            return new FixedTarget(firstId, game.getState().getZoneChangeCounter(firstId));
+        }
+        return null;
+    }
 }

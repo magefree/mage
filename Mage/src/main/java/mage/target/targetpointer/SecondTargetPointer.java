@@ -80,6 +80,5 @@ public class SecondTargetPointer implements TargetPointer {
             return new FixedTarget(firstId, game.getState().getZoneChangeCounter(firstId));
         }
         return null;
-
     }
 }
