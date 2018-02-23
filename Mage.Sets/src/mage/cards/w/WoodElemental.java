@@ -70,7 +70,7 @@ public class WoodElemental extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new WoodElementalEffect()));
 
         // Wood Elemental's power and toughness are each equal to the number of Forests sacrificed as it entered the battlefield.
-                this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("{this}'s power and toughness are each equal to the number of Forests sacrificed as it entered the battlefield")));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("{this}'s power and toughness are each equal to the number of Forests sacrificed as it entered the battlefield")));
     }
 
     public WoodElemental(final WoodElemental card) {
@@ -123,7 +123,7 @@ class WoodElementalEffect extends OneShotEffect {
                             targetPermanent.sacrifice(source.getSourceId(), game);
                         }
                     }
-                    game.addEffect(new SetPowerToughnessSourceEffect(sacrificedForests, sacrificedForests, Duration.WhileOnBattlefield, SubLayer.SetPT_7b), source);
+                    game.addEffect(new SetPowerToughnessSourceEffect(sacrificedForests, sacrificedForests, Duration.Custom, SubLayer.SetPT_7b), source);
                     return true;
                 }
             }
