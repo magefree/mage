@@ -41,9 +41,9 @@ import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffec
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
@@ -60,7 +60,7 @@ import mage.target.targetpointer.FixedTarget;
 public class CoffinQueen extends CardImpl {
 
     public CoffinQueen(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(1);
@@ -68,14 +68,14 @@ public class CoffinQueen extends CardImpl {
 
         // You may choose not to untap Coffin Queen during your untap step.
         this.addAbility(new SkipUntapOptionalAbility());
-        
+
         // {2}{B}, {tap}: Put target creature card from a graveyard onto the battlefield under your control. When Coffin Queen becomes untapped or you lose control of Coffin Queen, exile that creature.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToBattlefieldTargetEffect(), new ManaCostsImpl("{2}{B}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card from a graveyard")));
-        ability.addEffect(new CoffinQueenCreateDelayedTriggerEffect());        
+        ability.addEffect(new CoffinQueenCreateDelayedTriggerEffect());
         this.addAbility(ability);
-        
+
     }
 
     public CoffinQueen(final CoffinQueen card) {
@@ -87,33 +87,30 @@ public class CoffinQueen extends CardImpl {
         return new CoffinQueen(this);
     }
 }
+
 class CoffinQueenCreateDelayedTriggerEffect extends OneShotEffect {
-    
+
     public CoffinQueenCreateDelayedTriggerEffect() {
         super(Outcome.Detriment);
-        this.staticText = "When Coffin Queen becomes untapped or you lose control of Coffin Queen, exile that creature";
+        this.staticText = "When {this} becomes untapped or you lose control of {this}, exile that creature.";
     }
-    
+
     public CoffinQueenCreateDelayedTriggerEffect(final CoffinQueenCreateDelayedTriggerEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public CoffinQueenCreateDelayedTriggerEffect copy() {
         return new CoffinQueenCreateDelayedTriggerEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent controlledCreature = game.getPermanent(source.getFirstTarget());
         if (controlledCreature != null) {
             DelayedTriggeredAbility delayedAbility = new CoffinQueenDelayedTriggeredAbility();
-            delayedAbility.getEffects().get(0).setTargetPointer(new FixedTarget(controlledCreature.getId()));
-            delayedAbility.setSourceId(source.getSourceId());
-            delayedAbility.setControllerId(source.getControllerId());
-            delayedAbility.setSourceObject(source.getSourceObject(game), game);
-            delayedAbility.init(game);            
-            game.addDelayedTriggeredAbility(delayedAbility);
+            delayedAbility.getEffects().get(0).setTargetPointer(new FixedTarget(controlledCreature, game));
+            game.addDelayedTriggeredAbility(delayedAbility, source);
             return true;
         }
         return false;
@@ -123,7 +120,7 @@ class CoffinQueenCreateDelayedTriggerEffect extends OneShotEffect {
 class CoffinQueenDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     CoffinQueenDelayedTriggeredAbility() {
-        super(new ExileTargetEffect(), Duration.EndOfGame, true); 
+        super(new ExileTargetEffect(), Duration.EndOfGame, true);
     }
 
     CoffinQueenDelayedTriggeredAbility(CoffinQueenDelayedTriggeredAbility ability) {
@@ -136,7 +133,6 @@ class CoffinQueenDelayedTriggeredAbility extends DelayedTriggeredAbility {
                 || event.getType() == EventType.UNTAPPED;
     }
 
-    
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (EventType.LOST_CONTROL == event.getType()
@@ -146,14 +142,14 @@ class CoffinQueenDelayedTriggeredAbility extends DelayedTriggeredAbility {
         return EventType.UNTAPPED == event.getType()
                 && event.getTargetId() != null && event.getTargetId().equals(getSourceId());
     }
-    
+
     @Override
     public CoffinQueenDelayedTriggeredAbility copy() {
         return new CoffinQueenDelayedTriggeredAbility(this);
     }
-    
+
     @Override
     public String getRule() {
-        return "When {this} becomes untapped or you lose control of {this}, exile that creature";
+        return "When {this} becomes untapped or you lose control of {this}, exile that creature.";
     }
 }
