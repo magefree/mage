@@ -96,6 +96,7 @@ public class Visions extends ExpansionSet {
         cards.add(new SetCardInfo("Fireblast", 79, Rarity.COMMON, mage.cards.f.Fireblast.class));
         cards.add(new SetCardInfo("Firestorm Hellkite", 130, Rarity.RARE, mage.cards.f.FirestormHellkite.class));
         cards.add(new SetCardInfo("Flooded Shoreline", 32, Rarity.RARE, mage.cards.f.FloodedShoreline.class));
+        cards.add(new SetCardInfo("Foreshadow", 33, Rarity.UNCOMMON, mage.cards.f.Foreshadow.class));
         cards.add(new SetCardInfo("Freewind Falcon", 105, Rarity.COMMON, mage.cards.f.FreewindFalcon.class));
         cards.add(new SetCardInfo("Funeral Charm", 11, Rarity.COMMON, mage.cards.f.FuneralCharm.class));
         cards.add(new SetCardInfo("Giant Caterpillar", 58, Rarity.COMMON, mage.cards.g.GiantCaterpillar.class));
@@ -105,6 +106,7 @@ public class Visions extends ExpansionSet {
         cards.add(new SetCardInfo("Griffin Canyon", 163, Rarity.RARE, mage.cards.g.GriffinCanyon.class));
         cards.add(new SetCardInfo("Hearth Charm", 82, Rarity.COMMON, mage.cards.h.HearthCharm.class));
         cards.add(new SetCardInfo("Helm of Awakening", 145, Rarity.UNCOMMON, mage.cards.h.HelmOfAwakening.class));
+        cards.add(new SetCardInfo("Honorable Passage", 107, Rarity.UNCOMMON, mage.cards.h.HonorablePassage.class));
         cards.add(new SetCardInfo("Hope Charm", 108, Rarity.COMMON, mage.cards.h.HopeCharm.class));
         cards.add(new SetCardInfo("Hulking Cyclops", 84, Rarity.UNCOMMON, mage.cards.h.HulkingCyclops.class));
         cards.add(new SetCardInfo("Impulse", 34, Rarity.COMMON, mage.cards.i.Impulse.class));
@@ -199,6 +201,7 @@ public class Visions extends ExpansionSet {
         cards.add(new SetCardInfo("Warthog", 74, Rarity.COMMON, mage.cards.w.Warthog.class));
         cards.add(new SetCardInfo("Waterspout Djinn", 50, Rarity.UNCOMMON, mage.cards.w.WaterspoutDjinn.class));
         cards.add(new SetCardInfo("Wicked Reward", 25, Rarity.COMMON, mage.cards.w.WickedReward.class));
+        cards.add(new SetCardInfo("Wind Shear", 75, Rarity.UNCOMMON, mage.cards.w.WindShear.class));
         cards.add(new SetCardInfo("Zhalfirin Crusader", 125, Rarity.RARE, mage.cards.z.ZhalfirinCrusader.class));
     }
 }
