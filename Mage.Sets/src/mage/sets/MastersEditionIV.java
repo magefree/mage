@@ -91,6 +91,7 @@ public class MastersEditionIV extends ExpansionSet {
         cards.add(new SetCardInfo("Bee Sting", 144, Rarity.UNCOMMON, mage.cards.b.BeeSting.class));
         cards.add(new SetCardInfo("Bird Maiden", 110, Rarity.COMMON, mage.cards.b.BirdMaiden.class));
         cards.add(new SetCardInfo("Black Knight", 71, Rarity.UNCOMMON, mage.cards.b.BlackKnight.class));
+        cards.add(new SetCardInfo("Blaze of Glory", 7, Rarity.UNCOMMON, mage.cards.b.BlazeOfGlory.class));
         cards.add(new SetCardInfo("Blue Elemental Blast", 39, Rarity.UNCOMMON, mage.cards.b.BlueElementalBlast.class));
         cards.add(new SetCardInfo("Book of Rass", 183, Rarity.UNCOMMON, mage.cards.b.BookOfRass.class));
         cards.add(new SetCardInfo("Bottle of Suleiman", 184, Rarity.RARE, mage.cards.b.BottleOfSuleiman.class));
