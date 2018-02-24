@@ -21,10 +21,12 @@ import mage.game.permanent.Permanent;
 public class FixedTargets implements TargetPointer {
 
     final ArrayList<MageObjectReference> targets = new ArrayList<>();
+    final ArrayList<UUID> targetsNotInitialized = new ArrayList<>();
+
     private boolean initialized;
 
     public FixedTargets(UUID targetId) {
-        targets.add(new MageObjectReference(targetId));
+        targetsNotInitialized.add(targetId);
         this.initialized = false;
     }
 
@@ -46,6 +48,7 @@ public class FixedTargets implements TargetPointer {
 
     private FixedTargets(final FixedTargets fixedTargets) {
         this.targets.addAll(fixedTargets.targets);
+        this.targetsNotInitialized.addAll(fixedTargets.targetsNotInitialized);
         this.initialized = fixedTargets.initialized;
     }
 
@@ -53,8 +56,8 @@ public class FixedTargets implements TargetPointer {
     public void init(Game game, Ability source) {
         if (!initialized) {
             initialized = true;
-            for (MageObjectReference mor : targets) {
-                mor.setZoneChangeCounter(game.getState().getZoneChangeCounter(mor.getSourceId()));
+            for (UUID targetId : targetsNotInitialized) {
+                targets.add(new MageObjectReference(targetId, game.getState().getZoneChangeCounter(targetId), game));
             }
         }
     }
@@ -87,6 +90,13 @@ public class FixedTargets implements TargetPointer {
         return new FixedTargets(this);
     }
 
+    /**
+     * Returns a fixed target for (and only) the first taget
+     *
+     * @param game
+     * @param source
+     * @return
+     */
     @Override
     public FixedTarget getFixedTarget(Game game, Ability source) {
         this.init(game, source);
