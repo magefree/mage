@@ -170,6 +170,7 @@ public class MastersEditionIV extends ExpansionSet {
         cards.add(new SetCardInfo("Grapeshot Catapult", 204, Rarity.UNCOMMON, mage.cards.g.GrapeshotCatapult.class));
         cards.add(new SetCardInfo("Gravebind", 84, Rarity.COMMON, mage.cards.g.Gravebind.class));
         cards.add(new SetCardInfo("Guardian Beast", 85, Rarity.RARE, mage.cards.g.GuardianBeast.class));
+        cards.add(new SetCardInfo("Harsh Justice", 13, Rarity.RARE, mage.cards.h.HarshJustice.class));
         cards.add(new SetCardInfo("Hasran Ogress", 86, Rarity.COMMON, mage.cards.h.HasranOgress.class));
         cards.add(new SetCardInfo("Healing Salve", 14, Rarity.COMMON, mage.cards.h.HealingSalve.class));
         cards.add(new SetCardInfo("Horn of Deafening", 205, Rarity.UNCOMMON, mage.cards.h.HornOfDeafening.class));
