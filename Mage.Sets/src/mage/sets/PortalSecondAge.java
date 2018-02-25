@@ -95,6 +95,7 @@ public class PortalSecondAge extends ExpansionSet {
         cards.add(new SetCardInfo("Dakmor Sorceress", 11, Rarity.RARE, mage.cards.d.DakmorSorceress.class));
         cards.add(new SetCardInfo("Dark Offering", 12, Rarity.UNCOMMON, mage.cards.d.DarkOffering.class));
         cards.add(new SetCardInfo("Deathcoil Wurm", 65, Rarity.RARE, mage.cards.d.DeathcoilWurm.class));
+        cards.add(new SetCardInfo("Deep Wood", 66, Rarity.UNCOMMON, mage.cards.d.DeepWood.class));
         cards.add(new SetCardInfo("Deja Vu", 35, Rarity.COMMON, mage.cards.d.DejaVu.class));
         cards.add(new SetCardInfo("Denizen of the Deep", 36, Rarity.RARE, mage.cards.d.DenizenOfTheDeep.class));
         cards.add(new SetCardInfo("Earthquake", 94, Rarity.RARE, mage.cards.e.Earthquake.class));
