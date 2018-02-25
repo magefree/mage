@@ -131,6 +131,35 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
         }
     }
 
+    public Mana(final ManaType manaType) {
+        Objects.requireNonNull(manaType, "The passed in ManaType can not be null");
+        switch (manaType) {
+            case GREEN:
+                green = 1;
+                break;
+            case RED:
+                red = 1;
+                break;
+            case BLACK:
+                black = 1;
+                break;
+            case BLUE:
+                blue = 1;
+                break;
+            case WHITE:
+                white = 1;
+                break;
+            case COLORLESS:
+                colorless = 1;
+                break;
+            case GENERIC:
+                generic = 1;
+                break;
+            default:
+                throw new IllegalArgumentException("Unknown manaType: " + manaType);
+        }
+    }
+
     /**
      * Creates a {@link Mana} object with the passed in {@code num} of Red mana.
      * {@code num} can not be a negative value. Negative values will be logged
@@ -222,13 +251,12 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
     }
 
     /**
-     * Creates a {@link Mana} object with the passed in {@code num} of Any
-     * mana. {@code num} can not be a negative value. Negative values will be
-     * logged and set to 0.
+     * Creates a {@link Mana} object with the passed in {@code num} of Any mana.
+     * {@code num} can not be a negative value. Negative values will be logged
+     * and set to 0.
      *
      * @param num value of Any mana to create.
-     * @return a {@link Mana} object with the passed in {@code num} of Any
-     * mana.
+     * @return a {@link Mana} object with the passed in {@code num} of Any mana.
      */
     public static Mana AnyMana(int num) {
         return new Mana(0, 0, 0, 0, 0, 0, notNegative(num, "Any"), 0);
