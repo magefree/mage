@@ -137,6 +137,7 @@ public class MastersEditionIII extends ExpansionSet {
         cards.add(new SetCardInfo("Hammerheim", 207, Rarity.UNCOMMON, mage.cards.h.Hammerheim.class));
         cards.add(new SetCardInfo("Hazezon Tamar", 151, Rarity.RARE, mage.cards.h.HazezonTamar.class));
         cards.add(new SetCardInfo("Heal", 14, Rarity.COMMON, mage.cards.h.Heal.class));
+        cards.add(new SetCardInfo("Heavy Fog", 122, Rarity.COMMON, mage.cards.h.HeavyFog.class));
         cards.add(new SetCardInfo("Hellfire", 70, Rarity.RARE, mage.cards.h.Hellfire.class));
         cards.add(new SetCardInfo("Hua Tuo, Honored Physician", 123, Rarity.RARE, mage.cards.h.HuaTuoHonoredPhysician.class));
         cards.add(new SetCardInfo("Hunding Gjornersen", 152, Rarity.UNCOMMON, mage.cards.h.HundingGjornersen.class));
