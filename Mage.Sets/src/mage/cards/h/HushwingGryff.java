@@ -31,6 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.TriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.keyword.FlashAbility;
@@ -39,9 +40,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityType;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
@@ -55,7 +56,7 @@ import mage.game.permanent.Permanent;
 public class HushwingGryff extends CardImpl {
 
     public HushwingGryff(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
         this.subtype.add(SubType.HIPPOGRIFF);
 
         this.power = new MageInt(2);
@@ -92,10 +93,15 @@ class HushwingGryffEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject mageObject = game.getObject(event.getSourceId());
+        MageObject enteringObject = game.getObject(event.getSourceId());
         MageObject sourceObject = game.getObject(source.getSourceId());
-        if (mageObject != null && sourceObject != null) {
-            return sourceObject.getLogName() + " prevented ability of " + mageObject.getLogName() + " to trigger";
+        Ability ability = (Ability) getValue("targetAbility");
+        if (enteringObject != null && sourceObject != null && ability != null) {
+            MageObject abilitObject = game.getObject(ability.getSourceId());
+            if (abilitObject != null) {
+                return sourceObject.getLogName() + " prevented ability of " + abilitObject.getLogName()
+                        + " to trigger for " + enteringObject.getLogName() + " entering the battlefield.";
+            }
         }
         return null;
     }
@@ -111,7 +117,7 @@ class HushwingGryffEffect extends ContinuousRuleModifyingEffectImpl {
         if (ability != null && ability.getAbilityType() == AbilityType.TRIGGERED) {
             Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
             if (permanent != null && permanent.isCreature()) {
-                return true;
+                return (((TriggeredAbility) ability).checkTrigger(event, game));
             }
         }
         return false;
