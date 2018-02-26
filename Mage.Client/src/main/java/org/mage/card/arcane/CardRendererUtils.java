@@ -52,7 +52,7 @@ public final class CardRendererUtils {
         return bimage;
     }
     
-    private static Color abitbrighter(Color c) {
+    public static Color abitbrighter(Color c) {
         int r = c.getRed();
         int g = c.getGreen();
         int b = c.getBlue();
@@ -68,7 +68,7 @@ public final class CardRendererUtils {
                          alpha);
     }
     
-    private static Color abitdarker(Color c) {
+    public static Color abitdarker(Color c) {
         int r = c.getRed();
         int g = c.getGreen();
         int b = c.getBlue();
@@ -106,6 +106,36 @@ public final class CardRendererUtils {
         g.setPaint(fill);
         g.setColor(abitdarker(g.getColor()));
         g.drawLine(x + 1 + bevel, y + h - 2, x + 1 + bevel + w - 2 * bevel - 2, y + h - 2);
+    }
+    
+    public static void drawZendikarLandBox(Graphics2D g, int x, int y, int w, int h, int bevel, Paint border, Paint fill) {
+        g.setColor(new Color(0, 0, 0, 150));
+
+        g.drawOval(x - 1, y, bevel * 2, h);
+        g.setPaint(border);
+        g.drawOval(x, y, bevel * 2 - 1, h - 1);
+        g.drawOval(x + w - bevel * 2, y, bevel * 2 - 1, h - 1);
+        g.drawOval(x + 1, y + 1, bevel * 2 - 3, h - 3);
+        g.drawOval(x + 1 + w - bevel * 2, y + 1, bevel * 2 - 3, h - 3);
+        
+        // The big circle in the middle.. (diameter=2+1/4 of height) - 3/4 above line, 1/2 below  0.75 + .5 + 1= 2.25 = 9/4
+        g.drawOval(x + w / 2 - h - h/8, y - 3*h/4, 9*h/4, 9*h/4);
+        
+        g.drawRect(x + bevel, y, w - 2 * bevel, h - 1);
+        g.drawRect(x + 1 + bevel, y + 1, w - 2 * bevel - 2, h - 3);
+        g.setPaint(fill);
+        g.setPaint(fill);
+        g.setColor(abitbrighter(g.getColor()));
+        g.drawLine(x + 1 + bevel, y + 1, x + 1 + bevel + w - 2 * bevel - 2, y + 1);
+        g.setPaint(fill);
+        g.setColor(abitdarker(g.getColor()));
+        g.drawLine(x + 1 + bevel, y + h - 2, x + 1 + bevel + w - 2 * bevel - 2, y + h - 2);
+        
+        g.fillOval(x + 2, y + 2, bevel * 2 - 4, h - 4);
+        g.fillOval(x + 2 + w - bevel * 2, y + 2, bevel * 2 - 4, h - 4);
+        g.fillRect(x + bevel, y + 2, w - 2 * bevel, h - 4);
+        
+        g.fillOval(x + w / 2 - h - h/8, y - 3*h/4, 9*h/4, 9*h/4);
     }
 
     // Get the width of a mana cost rendered with ManaSymbols.draw
