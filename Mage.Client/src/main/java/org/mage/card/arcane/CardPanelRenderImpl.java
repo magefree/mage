@@ -302,7 +302,7 @@ public class CardPanelRenderImpl extends CardPanel {
                 = new CardPanelAttributes(cardWidth, cardHeight, isChoosable(), isSelected());
 
         // Draw card itself
-        cardRenderer.draw(g2d, attribs);
+        cardRenderer.draw(g2d, attribs, image);
 
         // Done
         g2d.dispose();
