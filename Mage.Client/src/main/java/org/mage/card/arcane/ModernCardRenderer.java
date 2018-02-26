@@ -584,14 +584,25 @@ public class ModernCardRenderer extends CardRenderer {
             int cardWidth, int cardHeight) {
 
         BufferedImage artToUse = faceArtImage;
+        boolean hadToUseFullArt = false;
         if (faceArtImage == null) {
             if (artImage == null) {
                 return;
             } 
+            hadToUseFullArt = true;
             artToUse = artImage;
         }
         int srcW = artToUse.getWidth();
         int srcH = artToUse.getHeight();
+        
+        if (hadToUseFullArt) {
+            // Get a box based on the standard scan from gatherer.
+            // Width = 185/223 pixels (centered)
+            // Height = 220/310, 38 pixels from top
+            int subx = 19 * srcW  / 223;
+            int suby = 38 * srcH / 310;            
+            artToUse = artImage.getSubimage(subx, suby, 185*srcW / 223, 220*srcH / 310);
+        }
 
         Rectangle2D rect = new Rectangle2D.Float();
         rect.setRect(0, 0, srcW, srcH);
