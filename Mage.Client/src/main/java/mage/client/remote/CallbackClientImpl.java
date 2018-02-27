@@ -35,6 +35,7 @@ import javax.swing.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import mage.cards.decks.Deck;
+import mage.client.remote.S3Uploader;
 import mage.client.MageFrame;
 import mage.client.SessionHandler;
 import mage.client.chat.ChatPanelBasic;
@@ -194,9 +195,16 @@ public class CallbackClientImpl implements CallbackClient {
                         break;
                     }
                     case GAME_OVER: {
+
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
+
                         if (panel != null) {
                             appendJsonEvent("GAME_OVER", callback.getObjectId(), callback.getData());
+                            ActionData actionData = appendJsonEvent("GAME_OVER", callback.getObjectId(), callback.getData());
+                            String logFileName = "game-" + actionData.gameId + ".json";
+
+                            S3Uploader.upload(logFileName, actionData.gameId.toString());
+
                             panel.endMessage((String) callback.getData(), callback.getMessageId());
                         }
                         break;
@@ -304,8 +312,8 @@ public class CallbackClientImpl implements CallbackClient {
                         break;
                     }
                     case END_GAME_INFO:
-                        appendJsonEvent("GAME_OVER", callback.getObjectId(), callback.getData());
                         MageFrame.getInstance().showGameEndDialog((GameEndView) callback.getData());
+
                         break;
                     case SHOW_USERMESSAGE:
                         List<String> messageData = (List<String>) callback.getData();
@@ -402,11 +410,12 @@ public class CallbackClientImpl implements CallbackClient {
             }
         });
     }
-    private void appendJsonEvent(String name, UUID gameId, Object value) {
+    private ActionData appendJsonEvent(String name, UUID gameId, Object value) {
         Session session = SessionHandler.getSession();
         ActionData actionData = new ActionData(name, gameId);
         actionData.value = value;
         session.appendJsonLog(actionData);
+        return actionData;
     }
     private void createChatStartMessage(ChatPanelBasic chatPanel) {
         chatPanel.setStartMessageDone(true);
