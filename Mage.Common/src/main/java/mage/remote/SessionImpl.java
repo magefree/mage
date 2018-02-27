@@ -32,6 +32,11 @@ import java.lang.reflect.UndeclaredThrowableException;
 import java.net.*;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
+import java.io.BufferedWriter;
+import java.io.PrintWriter;
+import java.io.FileWriter;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import mage.MageException;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.repository.CardInfo;
@@ -50,6 +55,7 @@ import mage.interfaces.callback.ClientCallback;
 import mage.players.PlayerType;
 import mage.players.net.UserData;
 import mage.utils.CompressUtil;
+import mage.remote.ActionData;
 import mage.view.*;
 import org.apache.log4j.Logger;
 import org.jboss.remoting.*;
@@ -798,6 +804,9 @@ public class SessionImpl implements Session {
     public boolean sendPlayerUUID(UUID gameId, UUID data) {
         try {
             if (isConnected()) {
+                ActionData actionData = new ActionData("SEND_PLAYER_UUID", gameId, getSessionId());
+                actionData.value = data;
+                appendJsonLog(actionData);
                 server.sendPlayerUUID(gameId, sessionId, data);
                 return true;
             }
@@ -813,6 +822,10 @@ public class SessionImpl implements Session {
     public boolean sendPlayerBoolean(UUID gameId, boolean data) {
         try {
             if (isConnected()) {
+                ActionData actionData = new ActionData("SEND_PLAYER_BOOLEAN", gameId, getSessionId());
+                actionData.value = data;
+                appendJsonLog(actionData);
+
                 server.sendPlayerBoolean(gameId, sessionId, data);
                 return true;
             }
@@ -828,6 +841,10 @@ public class SessionImpl implements Session {
     public boolean sendPlayerInteger(UUID gameId, int data) {
         try {
             if (isConnected()) {
+                ActionData actionData = new ActionData("SEND_PLAYER_INTEGER", gameId, getSessionId());
+                actionData.value = data;
+                appendJsonLog(actionData);
+
                 server.sendPlayerInteger(gameId, sessionId, data);
                 return true;
             }
@@ -843,6 +860,10 @@ public class SessionImpl implements Session {
     public boolean sendPlayerString(UUID gameId, String data) {
         try {
             if (isConnected()) {
+                ActionData actionData = new ActionData("SEND_PLAYER_STRING", gameId, getSessionId());
+                actionData.value = data;
+                appendJsonLog(actionData);
+
                 server.sendPlayerString(gameId, sessionId, data);
                 return true;
             }
@@ -858,6 +879,9 @@ public class SessionImpl implements Session {
     public boolean sendPlayerManaType(UUID gameId, UUID playerId, ManaType data) {
         try {
             if (isConnected()) {
+                ActionData actionData = new ActionData("SEND_PLAYER_MANA_TYPE", gameId, getSessionId());
+                actionData.value = data;
+                appendJsonLog(actionData);
                 server.sendPlayerManaType(gameId, playerId, sessionId, data);
                 return true;
             }
@@ -867,6 +891,19 @@ public class SessionImpl implements Session {
             handleThrowable(t);
         }
         return false;
+    }
+
+    @Override
+    public void appendJsonLog(ActionData actionData) {
+        actionData.sessionId = getSessionId();
+
+        String logFileName = "game-" + actionData.gameId + ".json";
+        System.out.println("Logging to " + logFileName);
+        try(PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(logFileName, true)))) {
+            out.println(actionData.toJson());
+        } catch (IOException e) {
+            System.err.println(e);
+        }
     }
 
     @Override
@@ -1274,6 +1311,11 @@ public class SessionImpl implements Session {
     public boolean sendPlayerAction(PlayerAction passPriorityAction, UUID gameId, Object data) {
         try {
             if (isConnected()) {
+                ActionData actionData = new ActionData("SEND_PLAYER_ACTION", gameId, getSessionId());
+
+                actionData.value = data;
+                appendJsonLog(actionData);
+
                 server.sendPlayerAction(passPriorityAction, gameId, sessionId, data);
                 return true;
             }

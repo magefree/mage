@@ -32,6 +32,9 @@ import java.io.Serializable;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import mage.choices.Choice;
 
 /**
@@ -153,6 +156,13 @@ public class GameClientMessage implements Serializable {
 
     public Choice getChoice() {
         return choice;
+    }
+
+    public String toJson() {
+        Gson gson = new GsonBuilder()
+                .excludeFieldsWithoutExposeAnnotation()
+                .create();
+        return gson.toJson(this);
     }
 
 }
