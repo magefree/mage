@@ -7,7 +7,7 @@ package org.mage.card.arcane;
 
 import java.awt.*;
 import java.awt.font.*;
-import java.awt.geom.QuadCurve2D;
+import java.awt.geom.Path2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -550,25 +550,7 @@ public class ModernCardRenderer extends CardRenderer {
 
             drawZendikarCurvedFace(g, image, x + topxdelta, totalContentInset + boxHeight, ctrlx, ctrly, x2 + botxdelta, y2,
                     x + contentWidth - topxdelta, totalContentInset + boxHeight, cardWidth, ctrly, x2 + contentWidth - botxdelta, y2,
-                    cardWidth, cardHeight);
-
-            QuadCurve2D q = new QuadCurve2D.Float();
-            q.setCurve(x + topxdelta, totalContentInset + boxHeight, ctrlx, ctrly, x2 + botxdelta, y2);
-            g.setColor(boxColor);
-            g.setPaint(borderPaint);
-            g.draw(q);
-            q.setCurve(x + topxdelta - 1, totalContentInset + boxHeight, ctrlx, ctrly, x2 + botxdelta - 1, y2);
-            g.draw(q);
-            q.setCurve(x + contentWidth - topxdelta, totalContentInset + boxHeight, cardWidth, ctrly, x2 + contentWidth - botxdelta, y2);
-            g.draw(q);
-            q.setCurve(x + contentWidth - topxdelta + 1, totalContentInset + boxHeight, cardWidth, ctrly, x2 + contentWidth - botxdelta + 1, y2);
-            g.draw(q);
-
-            g.setColor(Color.BLACK);
-            q.setCurve(x + topxdelta + 1, totalContentInset + boxHeight, ctrlx, ctrly, x2 + botxdelta + 1, y2 - 1);
-            g.draw(q);
-            q.setCurve(x + contentWidth - topxdelta - 1, totalContentInset + boxHeight, cardWidth, ctrly, x2 + contentWidth - botxdelta - 1, y2 - 1);
-            g.draw(q);
+                    boxColor, borderPaint);
 
             drawRulesText(g, textboxKeywords, textboxRules,
                     x, y,
@@ -581,61 +563,57 @@ public class ModernCardRenderer extends CardRenderer {
 
     public void drawZendikarCurvedFace(Graphics2D g2, BufferedImage image, int x, int y, int ctrlx, int ctrly, int w, int h,
             int x2, int y2, int ctrlx2, int ctrly2, int w2, int h2,
-            int cardWidth, int cardHeight) {
+            Color boxColor, Paint paint) {
 
         BufferedImage artToUse = faceArtImage;
         boolean hadToUseFullArt = false;
         if (faceArtImage == null) {
             if (artImage == null) {
                 return;
-            } 
+            }
             hadToUseFullArt = true;
             artToUse = artImage;
         }
         int srcW = artToUse.getWidth();
         int srcH = artToUse.getHeight();
-        
+
         if (hadToUseFullArt) {
             // Get a box based on the standard scan from gatherer.
             // Width = 185/223 pixels (centered)
             // Height = 220/310, 38 pixels from top
-            int subx = 19 * srcW  / 223;
-            int suby = 38 * srcH / 310;            
-            artToUse = artImage.getSubimage(subx, suby, 185*srcW / 223, 220*srcH / 310);
+            int subx = 19 * srcW / 223;
+            int suby = 38 * srcH / 310;
+            artToUse = artImage.getSubimage(subx, suby, 185 * srcW / 223, 220 * srcH / 310);
         }
 
-        Rectangle2D rect = new Rectangle2D.Float();
-        rect.setRect(0, 0, srcW, srcH);
-        g2.clip(rect);
+        Path2D.Double curve = new Path2D.Double();
+        curve.moveTo(x, y);
+        curve.quadTo(ctrlx, ctrly, w, h);
+        curve.lineTo(w2, h);
+        curve.quadTo(ctrlx2, ctrly2, x2, y);
+        curve.lineTo(x, y);
 
-        QuadCurve2D q = new QuadCurve2D.Float();
-        q.setCurve(x, y, ctrlx, ctrly, w, h);
-        g2.setClip(null);
-        g2.clip(q);
-        //g2.drawImage(faceArtImage, x, y, (x2-x), (h2-y), null);
-        Rectangle2D r = q.getBounds2D();
+        Path2D.Double innercurve = new Path2D.Double();
+        innercurve.moveTo(x + 1, y + 1);
+        innercurve.quadTo(ctrlx + 1, ctrly + 1, w + 1, h - 1);
+        innercurve.lineTo(w2 - 1, h - 1);
+        innercurve.quadTo(ctrlx2 - 1, ctrly2 - 1, x2 - 1, y + 1);
+        innercurve.lineTo(x + 1, y + 1);
+
+        Rectangle2D r = curve.getBounds2D();
         int minX = (int) r.getX();
+
+        g2.setClip(innercurve);
         g2.drawImage(artToUse, minX, y, (x2 - x) + (x - minX) * 2, h2 - y, null);
 
-        QuadCurve2D q2 = new QuadCurve2D.Float();
-        q2.setCurve(x2, y2, ctrlx2, ctrly2, w2, h2);
         g2.setClip(null);
-        g2.clip(q2);
-        g2.drawImage(artToUse, minX, y, (x2 - x) + (x - minX) * 2, h2 - y, null);
+        g2.setColor(CardRendererUtils.abitdarker(boxColor));
+        g2.setPaint(paint);
+        g2.draw(curve);
 
-        Polygon p = new Polygon();
-        //x = 10;
-        //y = 0;
-        p.addPoint(x, y);
-        p.addPoint(x2, y);
-        p.addPoint(w2, h2);
-        p.addPoint(w, h2);
-        p.addPoint(x, y);
-        g2.setClip(null);
-        g2.clip(p);
-
-        g2.drawImage(artToUse, minX, y, (x2 - x) + (x - minX) * 2, h2 - y, null);
-        g2.setClip(null);
+        g2.setColor(Color.black);
+        //curve.transform(AffineTransform.getTranslateInstance(-1,-1));
+        g2.draw(innercurve);
     }
 
     // Draw the name line
@@ -919,14 +897,16 @@ public class ModernCardRenderer extends CardRenderer {
                 drawBasicManaTextbox(g, x, y, w, h, ((TextboxBasicManaRule) allRules.get(0)).getBasicManaSymbol());
                 return;
             } else // Big circle in the middle for Zendikar lands
-            if (allRules.size() == 1) {
-                drawBasicManaSymbol(g, x + w / 2 - h - h / 8, y - 3 * h / 4, 9 * h / 4, 9 * h / 4, ((TextboxBasicManaRule) allRules.get(0)).getBasicManaSymbol());
-                return;
-            } else {
-                if (allRules.size() > 1) {
-                    drawBasicManaSymbol(g, x + w / 2 - h - h / 8, y - 3 * h / 4, 9 * h / 4, 9 * h / 4, cardView.getFrameColor().toString());
+            {
+                if (allRules.size() == 1) {
+                    drawBasicManaSymbol(g, x + w / 2 - h - h / 8, y - 3 * h / 4, 9 * h / 4, 9 * h / 4, ((TextboxBasicManaRule) allRules.get(0)).getBasicManaSymbol());
+                    return;
+                } else {
+                    if (allRules.size() > 1) {
+                        drawBasicManaSymbol(g, x + w / 2 - h - h / 8, y - 3 * h / 4, 9 * h / 4, 9 * h / 4, cardView.getFrameColor().toString());
+                    }
+                    return;
                 }
-                return;
             }
         }
 
