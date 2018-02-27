@@ -34,14 +34,20 @@ import mage.remote.interfaces.*;
 
 import java.util.UUID;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
 
 public class ActionData {
+    @Expose
     public UUID gameId;
+    @Expose
     public String sessionId;
+    @Expose
     public String type;
+    @Expose
     public Object value;
+    @Expose
     public String message;
 
     public String toJson() {

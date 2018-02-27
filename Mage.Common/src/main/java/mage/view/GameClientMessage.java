@@ -35,6 +35,8 @@ import java.util.UUID;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.annotations.Expose;
+
 import mage.choices.Choice;
 
 /**
@@ -42,18 +44,29 @@ import mage.choices.Choice;
  * @author BetaSteward_at_googlemail.com
  */
 public class GameClientMessage implements Serializable {
+    @Expose
     private static final long serialVersionUID = 1L;
-
+    @Expose
     private GameView gameView;
+    @Expose
     private CardsView cardsView;
+    @Expose
     private CardsView cardsView2;
+    @Expose
     private String message;
+    @Expose
     private boolean flag;
+    @Expose
     private String[] strings;
+    @Expose
     private Set<UUID> targets;
+    @Expose
     private int min;
+    @Expose
     private int max;
+    @Expose
     private Map<String, Serializable> options;
+    @Expose
     private Choice choice;
 
     public GameClientMessage(GameView gameView) {

@@ -53,6 +53,8 @@ import mage.target.Target;
 import mage.target.Targets;
 import mage.util.SubTypeList;
 
+import com.google.gson.annotations.Expose;
+
 /**
  * @author BetaSteward_at_googlemail.com
  */
@@ -61,11 +63,17 @@ public class CardView extends SimpleCardView {
     private static final long serialVersionUID = 1L;
 
     protected UUID parentId;
+    @Expose
     protected String name;
+    @Expose
     protected String displayName;
+    @Expose
     protected List<String> rules;
+    @Expose
     protected String power;
+    @Expose
     protected String toughness;
+    @Expose
     protected String loyalty = "";
     protected String startingLoyalty;
     protected EnumSet<CardType> cardTypes;
@@ -110,7 +118,6 @@ public class CardView extends SimpleCardView {
     protected ArtRect artRect = ArtRect.NORMAL;
 
     protected List<UUID> targets;
-
     protected UUID pairedCard;
     protected List<UUID> bandedCards;
     protected boolean paid;
