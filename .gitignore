@@ -135,3 +135,4 @@ client_secrets.json
 
 dependency-reduced-pom.xml
 mage-bundle
+/Mage.Client/game-*.json
