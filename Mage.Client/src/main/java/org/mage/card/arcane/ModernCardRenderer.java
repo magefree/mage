@@ -533,7 +533,7 @@ public class ModernCardRenderer extends CardRenderer {
                     contentInset,
                     borderPaint, boxColor);
             drawTypeLine(g, getCardSuperTypeLine(),
-                    totalContentInset + 2, typeLineY + boxHeight + (cardHeight - typeLineY - boxHeight - 4 - borderWidth * 3) / 2 - contentInset,
+                    totalContentInset + contentInset, typeLineY + boxHeight + (cardHeight - typeLineY - boxHeight - 4 - borderWidth * 3) / 2 - contentInset,
                     contentWidth / 2 - boxHeight, boxHeight - 4, false);
             drawTypeLine(g, getCardSubTypeLine(),
                     totalContentInset + 4 * contentWidth / 7 + boxHeight, typeLineY + boxHeight + (cardHeight - typeLineY - boxHeight - 4 - borderWidth * 3) / 2 - contentInset,
