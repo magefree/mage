@@ -156,9 +156,12 @@ public abstract class GameImpl implements Game, Serializable {
     private final int startLife;
     protected PlayerList playerList;
 
+    // infinite loop check (no copy of this attributes neccessary)
     private int infiniteLoopCounter; // used to check if the game is in an infinite loop
     private int lastNumberOfAbilitiesOnTheStack; // used to check how long no new ability was put to stack
+    private List<Integer> lastPlayersLifes = null; // if life is going down, it's no infinite loop
     private final LinkedList<UUID> stackObjectsCheck = new LinkedList<>(); // used to check if different sources used the stack
+
     // used to set the counters a permanent adds the battlefield (if no replacement effect is used e.g. Persist)
     protected Map<UUID, Counters> enterWithCounters = new HashMap<>();
     // used to proceed player conceding requests
@@ -1418,6 +1421,23 @@ public abstract class GameImpl implements Game, Serializable {
     protected void checkInfiniteLoop(UUID removedStackObjectSourceId) {
         if (stackObjectsCheck.contains(removedStackObjectSourceId)
                 && getStack().size() >= lastNumberOfAbilitiesOnTheStack) {
+            // Create a list of players life
+            List<Integer> newLastPlayersLifes = new ArrayList<>();
+            for (Player player : this.getPlayers().values()) {
+                newLastPlayersLifes.add(player.getLife());
+            }
+            // Check if a player is loosing life
+            if (lastPlayersLifes != null && lastPlayersLifes.size() == newLastPlayersLifes.size()) {
+                for (int i = 0; i < newLastPlayersLifes.size(); i++) {
+                    if (newLastPlayersLifes.get(i) < lastPlayersLifes.get(i)) {
+                        // player is loosing life
+                        lastPlayersLifes = null;
+                        infiniteLoopCounter = 0; // reset the infinite counter
+                    }
+                }
+            } else {
+                lastPlayersLifes = newLastPlayersLifes;
+            }
             infiniteLoopCounter++;
             if (infiniteLoopCounter > 15) {
                 Player controller = getPlayer(getControllerId(removedStackObjectSourceId));

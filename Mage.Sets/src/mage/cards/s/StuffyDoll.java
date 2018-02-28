@@ -41,8 +41,8 @@ import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -56,7 +56,7 @@ import mage.players.Player;
 public class StuffyDoll extends CardImpl {
 
     public StuffyDoll(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{5}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");
         this.subtype.add(SubType.CONSTRUCT);
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
@@ -67,7 +67,7 @@ public class StuffyDoll extends CardImpl {
         this.addAbility(IndestructibleAbility.getInstance());
         // Whenever Stuffy Doll is dealt damage, it deals that much damage to the chosen player.
         this.addAbility(new StuffyDollTriggeredAbility());
-        // {tap}: Stuffy Doll deals 1 damage to itself.
+        // {T}: Stuffy Doll deals 1 damage to itself.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageSelfEffect(1), new TapSourceCost()));
     }
 
