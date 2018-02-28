@@ -332,7 +332,7 @@ public class ModernCardRenderer extends CardRenderer {
             return TYPE_LINE_Y_FRAC;
         }
     }
-    
+
     private boolean isZendikarFullArtLand() {
         return cardView.getFrameStyle() == FrameStyle.BFZ_FULL_ART_BASIC || cardView.getFrameStyle() == FrameStyle.ZEN_FULL_ART_BASIC;
     }
@@ -525,7 +525,7 @@ public class ModernCardRenderer extends CardRenderer {
         } else {
             int x = totalContentInset;
             int y = typeLineY + boxHeight + (cardHeight - typeLineY - boxHeight - 4 - borderWidth * 3) / 2 - contentInset;
-            int w = contentWidth - 2;
+            int w = contentWidth;
             int h = boxHeight - 4;
 
             CardRendererUtils.drawZendikarLandBox(g,
@@ -533,7 +533,7 @@ public class ModernCardRenderer extends CardRenderer {
                     contentInset,
                     borderPaint, boxColor);
             drawTypeLine(g, getCardSuperTypeLine(),
-                    totalContentInset + 2, typeLineY + boxHeight + (cardHeight - typeLineY - boxHeight - 4 - borderWidth * 3) / 2 - contentInset,
+                    totalContentInset + contentInset, typeLineY + boxHeight + (cardHeight - typeLineY - boxHeight - 4 - borderWidth * 3) / 2 - contentInset,
                     contentWidth / 2 - boxHeight, boxHeight - 4, false);
             drawTypeLine(g, getCardSubTypeLine(),
                     totalContentInset + 4 * contentWidth / 7 + boxHeight, typeLineY + boxHeight + (cardHeight - typeLineY - boxHeight - 4 - borderWidth * 3) / 2 - contentInset,
@@ -558,7 +558,7 @@ public class ModernCardRenderer extends CardRenderer {
                 int topxdelta = 45 * contentWidth / 1000;
                 int endydelta = 60 * (totalContentInset + y2) / 265;
                 int x2 = x + contentWidth;
-                
+
                 // Curve ends at 60 out of 265
                 drawBFZCurvedFace(g, image, x, yb, x2, y2,
                         topxdelta, endydelta,
@@ -628,8 +628,8 @@ public class ModernCardRenderer extends CardRenderer {
         //curve.transform(AffineTransform.getTranslateInstance(-1,-1));
         g2.draw(innercurve);
     }
-    
-    public void drawBFZCurvedFace(Graphics2D g2, BufferedImage image, int x, int y, int x2, int y2, 
+
+    public void drawBFZCurvedFace(Graphics2D g2, BufferedImage image, int x, int y, int x2, int y2,
             int topxdelta, int endydelta,
             Color boxColor, Paint paint) {
         BufferedImage artToUse = faceArtImage;
@@ -663,13 +663,13 @@ public class ModernCardRenderer extends CardRenderer {
         curve.lineTo(x + topxdelta, y);
 
         Path2D.Double innercurve = new Path2D.Double();
-        innercurve.moveTo(x + topxdelta, y+1);
-        innercurve.quadTo(x+1, y + endydelta / 2, x+1, y + endydelta);
-        innercurve.lineTo(x+1, y2-1);
-        innercurve.lineTo(x2-1, y2-1);
-        innercurve.lineTo(x2-1, y + endydelta);
-        innercurve.quadTo(x2-1, y + endydelta / 2, x2 - topxdelta, y+1);
-        innercurve.lineTo(x + topxdelta, y+1);
+        innercurve.moveTo(x + topxdelta, y + 1);
+        innercurve.quadTo(x + 1, y + endydelta / 2, x + 1, y + endydelta);
+        innercurve.lineTo(x + 1, y2 - 1);
+        innercurve.lineTo(x2 - 1, y2 - 1);
+        innercurve.lineTo(x2 - 1, y + endydelta);
+        innercurve.quadTo(x2 - 1, y + endydelta / 2, x2 - topxdelta, y + 1);
+        innercurve.lineTo(x + topxdelta, y + 1);
 
         Rectangle2D r = curve.getBounds2D();
         int minX = (int) r.getX();
@@ -969,7 +969,8 @@ public class ModernCardRenderer extends CardRenderer {
             } else // Big circle in the middle for Zendikar lands
             {
                 if (allRules.size() == 1) {
-                    drawBasicManaSymbol(g, x + w / 2 - h - h / 8, y - 3 * h / 4, 9 * h / 4, 9 * h / 4, ((TextboxBasicManaRule) allRules.get(0)).getBasicManaSymbol());
+                    // Size of mana symbol = 9/4 * h, 3/4h above line
+                    drawBasicManaSymbol(g, x + w / 2 - 9 * h / 8 + 1, y - 3 * h / 4, 9 * h / 4, 9 * h / 4, ((TextboxBasicManaRule) allRules.get(0)).getBasicManaSymbol());
                     return;
                 } else {
                     if (allRules.size() > 1) {
