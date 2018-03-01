@@ -750,6 +750,78 @@ public class Combat implements Serializable, Copyable<Combat> {
                                 potentialBlockers.add(creature.getId());
                             }
                         }
+                        // check the mustBlockAllAttackers requirement for creatures already blocking (Blaze of Glory) -------------------------------
+                        if (effect.mustBlockAllAttackers(game)) {
+                            // find all the attackers that the creature can block (and no restictions prevent this)
+                            Set<UUID> attackersToBlock = new HashSet<>();
+                            boolean mayBlock = false;
+                            for (UUID attackingCreatureId : getAttackers()) {
+                                if (creature.canBlock(attackingCreatureId, game)) {
+                                    Permanent attackingCreature = game.getPermanent(attackingCreatureId);
+                                    if (attackingCreature != null) {
+                                        // check if the attacker is already blocked by a max of blockers, so blocker can't block it also
+                                        if (attackingCreature.getMaxBlockedBy() != 0) { // 0 = no restriction about the number of possible blockers
+                                            int alreadyBlockingCreatures = 0;
+                                            for (CombatGroup group : getGroups()) {
+                                                if (group.getAttackers().contains(attackingCreatureId)) {
+                                                    alreadyBlockingCreatures = group.getBlockers().size();
+                                                    break;
+                                                }
+                                            }
+                                            if (attackingCreature.getMaxBlockedBy() <= alreadyBlockingCreatures) {
+                                                continue; // Attacker can't be blocked by more blockers so check next attacker
+                                            }
+                                        }
+                                        // check restrictions of the creature to block that prevent it can be blocked (note L_J: not sure what this refers to...)
+
+                                        // check if enough possible blockers are available, if true, mayBlock can be set to true
+                                        if (attackingCreature.getMinBlockedBy() > 1) {
+                                          int alreadyBlockingCreatures = 0;
+                                            for (CombatGroup group : getGroups()) {
+                                                if (group.getAttackers().contains(attackingCreatureId)) {
+                                                    alreadyBlockingCreatures = group.getBlockers().size();
+                                                    break;
+                                                }
+                                            }
+                                            if (attackingCreature.getMinBlockedBy() >= alreadyBlockingCreatures) {
+                                                continue; // Attacker can't be blocked by the current blocker amount so check next attacker
+                                            }
+                                        } else {
+                                            attackersToBlock.add(attackingCreatureId);
+                                        }
+                                    }
+                                }
+                            }
+                            if (!attackersToBlock.isEmpty()) {
+                                for (UUID attackerId : attackersToBlock) {
+                                    if (!findGroup(attackerId).getBlockers().contains(creature.getId())) {
+                                        mayBlock = true;
+                                        break;
+                                    }
+                                }
+                            }
+                            // if creature can block more attackers, inform human player or set blocks for AI player
+                            if (mayBlock) {
+                                if (controller.isHuman()) {
+                                    if (!game.isSimulation()) {
+                                        game.informPlayer(controller, "Creature should block all attackers it's able to this turn: " + creature.getIdName());
+                                    }
+                                } else {
+                                    Player defender = game.getPlayer(creature.getControllerId());
+                                    if (defender != null) {
+                                        for (UUID attackingCreatureId : getAttackers()) {
+                                            if (creature.canBlock(attackingCreatureId, game)
+                                                    && !findGroup(attackingCreatureId).getBlockers().contains(creature.getId())
+                                                    && attackersToBlock.contains(attackingCreatureId)) {
+                                                // TODO: might need to revisit this (calls some pickBlockerOrder instances even for a single blocker - damage distribution appears to be working correctly however)
+                                                defender.declareBlocker(defender.getId(), creature.getId(), attackingCreatureId, game);
+                                            }
+                                        }
+                                    }
+                                }
+                                return false;
+                            }
+                        }
                     }
                 }
 
@@ -773,10 +845,9 @@ public class Combat implements Serializable, Copyable<Combat> {
                             }
                         }
 
-                        // check the mustBlockAny requirement ----------------------------------------
-                        if (effect.mustBlockAny(game)) {
-                            // check that it can block at least one of the attackers
-                            // and no restictions prevent this
+                        // check the mustBlockAny requirement (and mustBlockAllAttackers for not blocking creatures) ----------------------------------------
+                        if (effect.mustBlockAny(game) || effect.mustBlockAllAttackers(game)) {
+                            // check that it can block at least one of the attackers and no restictions prevent this
                             boolean mayBlock = false;
                             for (UUID attackingCreatureId : getAttackers()) {
                                 if (creature.canBlock(attackingCreatureId, game)) {
@@ -792,15 +863,23 @@ public class Combat implements Serializable, Copyable<Combat> {
                                                 }
                                             }
                                             if (attackingCreature.getMaxBlockedBy() <= alreadyBlockingCreatures) {
-                                                // Attacker can't be blocked by more blockers so check next attacker
-                                                continue;
+                                                continue; // Attacker can't be blocked by more blockers so check next attacker
                                             }
                                         }
-                                        // check restrictions of the creature to block that prevent it can be blocked
+                                        // check restrictions of the creature to block that prevent it can be blocked (note L_J: not sure what this refers to...)
 
+                                        // check if enough possible blockers are available, if true, mayBlock can be set to true
                                         if (attackingCreature.getMinBlockedBy() > 1) {
-                                            // TODO: check if enough possible blockers are available, if true, mayBlock can be set to true
-
+                                          int alreadyBlockingCreatures = 0;
+                                            for (CombatGroup group : getGroups()) {
+                                                if (group.getAttackers().contains(attackingCreatureId)) {
+                                                    alreadyBlockingCreatures = group.getBlockers().size();
+                                                    break;
+                                                }
+                                            }
+                                            if (attackingCreature.getMinBlockedBy() >= alreadyBlockingCreatures) {
+                                                continue; // Attacker can't be blocked by the current blocker amount so check next attacker
+                                            }
                                         } else {
                                             mayBlock = true;
                                             break;
@@ -808,7 +887,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                                     }
                                 }
                             }
-                            // if so inform human player or set block for AI player
+                            // if creature can block, inform human player or set block for AI player
                             if (mayBlock) {
                                 if (controller.isHuman()) {
                                     if (!game.isSimulation()) {
@@ -818,7 +897,8 @@ public class Combat implements Serializable, Copyable<Combat> {
                                     Player defender = game.getPlayer(creature.getControllerId());
                                     if (defender != null) {
                                         for (UUID attackingCreatureId : getAttackers()) {
-                                            if (creature.canBlock(attackingCreatureId, game)) {
+                                            if (creature.canBlock(attackingCreatureId, game)
+                                                    && !findGroup(attackingCreatureId).getBlockers().contains(creature.getId())) {
                                                 defender.declareBlocker(defender.getId(), creature.getId(), attackingCreatureId, game);
                                                 break;
                                             }

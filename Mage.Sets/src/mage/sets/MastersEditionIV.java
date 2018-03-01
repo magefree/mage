@@ -91,6 +91,7 @@ public class MastersEditionIV extends ExpansionSet {
         cards.add(new SetCardInfo("Bee Sting", 144, Rarity.UNCOMMON, mage.cards.b.BeeSting.class));
         cards.add(new SetCardInfo("Bird Maiden", 110, Rarity.COMMON, mage.cards.b.BirdMaiden.class));
         cards.add(new SetCardInfo("Black Knight", 71, Rarity.UNCOMMON, mage.cards.b.BlackKnight.class));
+        cards.add(new SetCardInfo("Blaze of Glory", 7, Rarity.UNCOMMON, mage.cards.b.BlazeOfGlory.class));
         cards.add(new SetCardInfo("Blue Elemental Blast", 39, Rarity.UNCOMMON, mage.cards.b.BlueElementalBlast.class));
         cards.add(new SetCardInfo("Book of Rass", 183, Rarity.UNCOMMON, mage.cards.b.BookOfRass.class));
         cards.add(new SetCardInfo("Bottle of Suleiman", 184, Rarity.RARE, mage.cards.b.BottleOfSuleiman.class));
@@ -169,6 +170,7 @@ public class MastersEditionIV extends ExpansionSet {
         cards.add(new SetCardInfo("Grapeshot Catapult", 204, Rarity.UNCOMMON, mage.cards.g.GrapeshotCatapult.class));
         cards.add(new SetCardInfo("Gravebind", 84, Rarity.COMMON, mage.cards.g.Gravebind.class));
         cards.add(new SetCardInfo("Guardian Beast", 85, Rarity.RARE, mage.cards.g.GuardianBeast.class));
+        cards.add(new SetCardInfo("Harsh Justice", 13, Rarity.RARE, mage.cards.h.HarshJustice.class));
         cards.add(new SetCardInfo("Hasran Ogress", 86, Rarity.COMMON, mage.cards.h.HasranOgress.class));
         cards.add(new SetCardInfo("Healing Salve", 14, Rarity.COMMON, mage.cards.h.HealingSalve.class));
         cards.add(new SetCardInfo("Horn of Deafening", 205, Rarity.UNCOMMON, mage.cards.h.HornOfDeafening.class));
@@ -181,6 +183,7 @@ public class MastersEditionIV extends ExpansionSet {
         cards.add(new SetCardInfo("Jade Monolith", 208, Rarity.RARE, mage.cards.j.JadeMonolith.class));
         cards.add(new SetCardInfo("Juggernaut", 209, Rarity.UNCOMMON, mage.cards.j.Juggernaut.class));
         cards.add(new SetCardInfo("Junún Efreet", 88, Rarity.UNCOMMON, mage.cards.j.JununEfreet.class));
+        cards.add(new SetCardInfo("Just Fate", 16, Rarity.COMMON, mage.cards.j.JustFate.class));
         cards.add(new SetCardInfo("Kismet", 17, Rarity.RARE, mage.cards.k.Kismet.class));
         cards.add(new SetCardInfo("Kormus Bell", 210, Rarity.RARE, mage.cards.k.KormusBell.class));
         cards.add(new SetCardInfo("Kudzu", 159, Rarity.UNCOMMON, mage.cards.k.Kudzu.class));

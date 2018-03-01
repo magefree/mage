@@ -100,14 +100,17 @@ public class Portal extends ExpansionSet {
         cards.add(new SetCardInfo("Craven Giant", 126, Rarity.COMMON, mage.cards.c.CravenGiant.class));
         cards.add(new SetCardInfo("Craven Knight", 7, Rarity.COMMON, mage.cards.c.CravenKnight.class));
         cards.add(new SetCardInfo("Cruel Bargain", 8, Rarity.RARE, mage.cards.c.CruelBargain.class));
+        cards.add(new SetCardInfo("Cruel Fate", 51, Rarity.RARE, mage.cards.c.CruelFate.class));
         cards.add(new SetCardInfo("Cruel Tutor", 9, Rarity.RARE, mage.cards.c.CruelTutor.class));
         cards.add(new SetCardInfo("Deep-Sea Serpent", 52, Rarity.UNCOMMON, mage.cards.d.DeepSeaSerpent.class));
+        cards.add(new SetCardInfo("Deep Wood", 86, Rarity.UNCOMMON, mage.cards.d.DeepWood.class));
         cards.add(new SetCardInfo("Defiant Stand", 174, Rarity.UNCOMMON, mage.cards.d.DefiantStand.class));
         cards.add(new SetCardInfo("Deja Vu", 53, Rarity.COMMON, mage.cards.d.DejaVu.class));
         cards.add(new SetCardInfo("Desert Drake", 127, Rarity.UNCOMMON, mage.cards.d.DesertDrake.class));
         cards.add(new SetCardInfo("Devastation", 128, Rarity.RARE, mage.cards.d.Devastation.class));
         cards.add(new SetCardInfo("Devoted Hero", 175, Rarity.COMMON, mage.cards.d.DevotedHero.class));
         cards.add(new SetCardInfo("Djinn of the Lamp", 54, Rarity.RARE, mage.cards.d.DjinnOfTheLamp.class));
+        cards.add(new SetCardInfo("Dread Charge", 10, Rarity.RARE, mage.cards.d.DreadCharge.class));
         cards.add(new SetCardInfo("Dread Reaper", 11, Rarity.RARE, mage.cards.d.DreadReaper.class));
         cards.add(new SetCardInfo("Dry Spell", 12, Rarity.UNCOMMON, DrySpell.class));
         cards.add(new SetCardInfo("Earthquake", 129, Rarity.RARE, mage.cards.e.Earthquake.class));
@@ -143,6 +146,7 @@ public class Portal extends ExpansionSet {
         cards.add(new SetCardInfo("Grizzly Bears", 94, Rarity.COMMON, mage.cards.g.GrizzlyBears.class));
         cards.add(new SetCardInfo("Hand of Death", 18, Rarity.COMMON, mage.cards.h.HandOfDeath.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hand of Death", 19, Rarity.COMMON, mage.cards.h.HandOfDeath.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Harsh Justice", 180, Rarity.RARE, mage.cards.h.HarshJustice.class));
         cards.add(new SetCardInfo("Highland Giant", 137, Rarity.COMMON, mage.cards.h.HighlandGiant.class));
         cards.add(new SetCardInfo("Hill Giant", 138, Rarity.COMMON, mage.cards.h.HillGiant.class));
         cards.add(new SetCardInfo("Horned Turtle", 58, Rarity.COMMON, mage.cards.h.HornedTurtle.class));
@@ -245,6 +249,7 @@ public class Portal extends ExpansionSet {
         cards.add(new SetCardInfo("Sylvan Tutor", 114, Rarity.RARE, mage.cards.s.SylvanTutor.class));
         cards.add(new SetCardInfo("Symbol of Unsummoning", 71, Rarity.COMMON, mage.cards.s.SymbolOfUnsummoning.class));
         cards.add(new SetCardInfo("Taunt", 72, Rarity.RARE, mage.cards.t.Taunt.class));
+        cards.add(new SetCardInfo("Temporary Truce", 195, Rarity.RARE, mage.cards.t.TemporaryTruce.class));
         cards.add(new SetCardInfo("Theft of Dreams", 73, Rarity.UNCOMMON, mage.cards.t.TheftOfDreams.class));
         cards.add(new SetCardInfo("Thing from the Deep", 74, Rarity.RARE, mage.cards.t.ThingFromTheDeep.class));
         cards.add(new SetCardInfo("Thundering Wurm", 115, Rarity.RARE, mage.cards.t.ThunderingWurm.class));
