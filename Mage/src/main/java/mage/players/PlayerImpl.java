@@ -1274,7 +1274,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         return false;
     }
 
-    protected LinkedHashMap<UUID, ActivatedAbility> getSpellAbilities(MageObject object, Zone zone, Game game) {
+    public LinkedHashMap<UUID, ActivatedAbility> getSpellAbilities(MageObject object, Zone zone, Game game) {
         LinkedHashMap<UUID, ActivatedAbility> useable = new LinkedHashMap<>();
         for (Ability ability : object.getAbilities()) {
             if (ability instanceof SpellAbility) {

@@ -1433,6 +1433,7 @@ public abstract class GameImpl implements Game, Serializable {
                         // player is loosing life
                         lastPlayersLifes = null;
                         infiniteLoopCounter = 0; // reset the infinite counter
+                        break;
                     }
                 }
             } else {
