@@ -208,7 +208,7 @@ public enum ScryfallImageSource implements CardImageSource {
         supportedSets.add("RIX");
         supportedSets.add("WMCQ");
         supportedSets.add("PPRO");
-//        supportedSets.add("A25");
+        supportedSets.add("A25");
 //        supportedSets.add("DOM");
 //        supportedSets.add("M19");
 

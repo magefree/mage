@@ -66,7 +66,7 @@ public class GathererSets implements Iterable<DownloadJob> {
         //"APAC" -- gatherer do not have that set, scrly have PALP
         //"ARENA" -- is't many set with different codes, not one
         "CLASH", "CP", "DD3GVL", "DPA", "EURO", "FNMP", "GPX", "GRC", "GUR", "H17", "JR", "MBP", "MGDC", "MLP", "MPRP", "MPS-AKH", "PTC", "S00", "S99", "SUS", "SWS", "UGIN", "UGL", "V10", "V17", "WMCQ", // need to fix
-        "H09", "PD2", "PD3", "UNH", "CM1", "E02", "V11", "M25", "UST", "IMA", "DD2", "EVG", "DDC", "DDE", "DDD", "DDT", "8EB", "9EB", "CHR" // ok
+        "H09", "PD2", "PD3", "UNH", "CM1", "E02", "V11", "A25", "UST", "IMA", "DD2", "EVG", "DDC", "DDE", "DDD", "DDT", "8EB", "9EB", "CHR" // ok
     // current testing
     };
 
