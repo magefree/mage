@@ -28,11 +28,9 @@
 package mage.cards.u;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -44,13 +42,12 @@ import mage.watchers.common.CastFromHandWatcher;
 
 /**
  *
- * @author fireshoes
+ * @author chrvanorle
  */
 public class UphillBattle extends CardImpl {
-
+    
     public UphillBattle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");
-        
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new UphillBattleTapEffect()), new CastFromHandWatcher());
     }
 
@@ -78,10 +75,9 @@ class UphillBattleTapEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent target = ((EntersTheBattlefieldEvent) event).getTarget();
-        
         CastFromHandWatcher watcher = (CastFromHandWatcher) game.getState().getWatchers().get(CastFromHandWatcher.class.getSimpleName());
         
-        if (target != null && watcher != null && watcher.spellWasCastFromHand(source.getSourceId())) {
+        if (target != null && watcher != null && watcher.spellWasCastFromHand(target.getId())) {
             target.setTapped(true);
         }
         return false;
