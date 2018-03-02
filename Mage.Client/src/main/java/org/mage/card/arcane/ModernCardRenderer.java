@@ -7,6 +7,7 @@ package org.mage.card.arcane;
 
 import java.awt.*;
 import java.awt.font.*;
+import java.awt.geom.Arc2D;
 import java.awt.geom.Path2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
@@ -541,15 +542,10 @@ public class ModernCardRenderer extends CardRenderer {
 
             if (cardView.getFrameStyle() == FrameStyle.ZEN_FULL_ART_BASIC) {
                 // Draw curved lines (old Zendikar land style) - bigger (around 6%) inset on curve on bottom than inset (around 4.5%) on top...
-                int x2 = x;
+                int x2 = x + contentWidth;
                 int y2 = y;
-                int topxdelta = 45 * contentWidth / 1000;
-                int botxdelta = 58 * contentWidth / 1000;
-                int ctrlx = 0;
-                int ctrly = (totalContentInset + y2) / 2;
-
-                drawZendikarCurvedFace(g, image, x + topxdelta, totalContentInset + boxHeight, ctrlx, ctrly, x2 + botxdelta, y2,
-                        x + contentWidth - topxdelta, totalContentInset + boxHeight, cardWidth, ctrly, x2 + contentWidth - botxdelta, y2,
+                int thisy = totalContentInset + boxHeight;
+                drawZendikarCurvedFace(g, image, x, thisy, x2, y2,                        
                         boxColor, borderPaint);
             } else if (cardView.getFrameStyle() == FrameStyle.BFZ_FULL_ART_BASIC) {
                 // Draw curved lines (BFZ land style) 
@@ -574,8 +570,7 @@ public class ModernCardRenderer extends CardRenderer {
         drawBottomRight(g, borderPaint, boxColor);
     }
 
-    public void drawZendikarCurvedFace(Graphics2D g2, BufferedImage image, int x, int y, int ctrlx, int ctrly, int w, int h,
-            int x2, int y2, int ctrlx2, int ctrly2, int w2, int h2,
+    public void drawZendikarCurvedFace(Graphics2D g2, BufferedImage image, int x, int y, int x2, int y2,
             Color boxColor, Paint paint) {
 
         BufferedImage artToUse = faceArtImage;
@@ -600,33 +595,27 @@ public class ModernCardRenderer extends CardRenderer {
         }
 
         Path2D.Double curve = new Path2D.Double();
-        curve.moveTo(x, y);
-        curve.quadTo(ctrlx, ctrly, w, h);
-        curve.lineTo(w2, h);
-        curve.quadTo(ctrlx2, ctrly2, x2, y);
-        curve.lineTo(x, y);
 
-        Path2D.Double innercurve = new Path2D.Double();
-        innercurve.moveTo(x + 1, y + 1);
-        innercurve.quadTo(ctrlx + 1, ctrly + 1, w + 1, h - 1);
-        innercurve.lineTo(w2 - 1, h - 1);
-        innercurve.quadTo(ctrlx2 - 1, ctrly2 - 1, x2 - 1, y + 1);
-        innercurve.lineTo(x + 1, y + 1);
+        int ew = x2 - x;
+        int eh = 700 * (y2 - y) / 335;
+        Arc2D arc = new Arc2D.Double(x, y - 197 * eh / 700, ew, eh, 0, 360, Arc2D.OPEN);
+        Arc2D innerarc = new Arc2D.Double(x + 1, y - 197 * eh / 700 + 1, ew - 2, eh - 2, 0, 360, Arc2D.OPEN);
+
+        curve.append(new Rectangle2D.Double(x, y, x2 - x, y2 - y), false);
+        g2.setClip(new Rectangle2D.Double(x, y, x2 - x, y2 - y));
+        g2.setClip(arc);
 
         Rectangle2D r = curve.getBounds2D();
-        int minX = (int) r.getX();
+        g2.drawImage(artToUse, x, y, x2 - x, y2 - y, null);
+        g2.setClip(null);
+        g2.setClip(new Rectangle2D.Double(x, y, x2 - x, y2 - y));
 
-        g2.setClip(innercurve);
-        g2.drawImage(artToUse, minX, y, (x2 - x) + (x - minX) * 2, h2 - y, null);
+        g2.setColor(CardRendererUtils.abitdarker(boxColor));
+        g2.draw(arc);
+        g2.setColor(Color.black);
+        g2.draw(innerarc);
 
         g2.setClip(null);
-        g2.setColor(CardRendererUtils.abitdarker(boxColor));
-        g2.setPaint(paint);
-        g2.draw(curve);
-
-        g2.setColor(Color.black);
-        //curve.transform(AffineTransform.getTranslateInstance(-1,-1));
-        g2.draw(innercurve);
     }
 
     public void drawBFZCurvedFace(Graphics2D g2, BufferedImage image, int x, int y, int x2, int y2,
@@ -967,8 +956,7 @@ public class ModernCardRenderer extends CardRenderer {
                 drawBasicManaTextbox(g, x, y, w, h, ((TextboxBasicManaRule) allRules.get(0)).getBasicManaSymbol());
                 return;
             } else // Big circle in the middle for Zendikar lands
-            {
-                if (allRules.size() == 1) {
+             if (allRules.size() == 1) {
                     // Size of mana symbol = 9/4 * h, 3/4h above line
                     drawBasicManaSymbol(g, x + w / 2 - 9 * h / 8 + 1, y - 3 * h / 4, 9 * h / 4, 9 * h / 4, ((TextboxBasicManaRule) allRules.get(0)).getBasicManaSymbol());
                     return;
@@ -978,7 +966,6 @@ public class ModernCardRenderer extends CardRenderer {
                     }
                     return;
                 }
-            }
         }
 
         // Go through possible font sizes in descending order to find the best fit
