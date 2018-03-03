@@ -124,7 +124,7 @@ public enum ConfigSettings {
         return config.getServer().getMaxAiOpponents();
     }
 
-    public Boolean isSaveGameActivated() {
+   public Boolean isSaveGameActivated() {
         return config.getServer().isSaveGameActivated();
     }
 
@@ -182,6 +182,30 @@ public enum ConfigSettings {
 
     public List<Plugin> getDeckTypes() {
         return config.getDeckTypes().getDeckType();
+    }
+
+    public String getSigningKey() {
+        //
+        // TODO: I can't get JAXB to regenerate the config
+        //       java classes; so diverving from the pattern
+        //       here for now. Posted the build log here:
+        //       https://gist.github.com/hooptie45/77fd37eba03861bd7b262f5dd7f4e92a
+        //
+        // TODO: This would probably be better
+        //       as an ENV var, as I'm not crazy about storing the
+        //       key in the repo, a production deploy
+        //
+        // TODO: Follow up about the S3 bucket keys, which
+        //       are needed for the logging work in #4554;
+        //       but couldn't find a good place to but them.
+        //
+        // NOTE: The fallback key is ONLY meant for local dev,
+        //       is it possile to throw based on the current
+        //       deployment ENV? Might be a good time to
+        //       indroduce a containerized system.
+        //
+        return System.getenv("JWT_SIGNING_KEY") != null ? System.getenv("JWT_SIGNING_KEY")
+                                                        : "f85a25571c20c0fadfd7a52f769747c7c62f8910";
     }
 
 }

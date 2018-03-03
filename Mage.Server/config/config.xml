@@ -40,6 +40,7 @@
             backlogSize="200"
             numAcceptThreads="2"
             maxPoolSize="300"
+            signingKey="f85a25571c20c0fadfd7a52f769747c7c62f8910"
             leasePeriod="5000"
             socketWriteTimeout="10000"
             maxGameThreads="10"
