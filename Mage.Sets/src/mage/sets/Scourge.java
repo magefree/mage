@@ -126,6 +126,7 @@ public class Scourge extends ExpansionSet {
         cards.add(new SetCardInfo("Guilty Conscience", 17, Rarity.COMMON, mage.cards.g.GuiltyConscience.class));
         cards.add(new SetCardInfo("Hindering Touch", 37, Rarity.COMMON, mage.cards.h.HinderingTouch.class));
         cards.add(new SetCardInfo("Hunting Pack", 121, Rarity.UNCOMMON, mage.cards.h.HuntingPack.class));
+        cards.add(new SetCardInfo("Karona's Zealot", 18, Rarity.UNCOMMON, mage.cards.k.KaronasZealot.class));
         cards.add(new SetCardInfo("Karona, False God", 138, Rarity.RARE, mage.cards.k.KaronaFalseGod.class));
         cards.add(new SetCardInfo("Krosan Drover", 122, Rarity.COMMON, mage.cards.k.KrosanDrover.class));
         cards.add(new SetCardInfo("Krosan Warchief", 123, Rarity.UNCOMMON, mage.cards.k.KrosanWarchief.class));
