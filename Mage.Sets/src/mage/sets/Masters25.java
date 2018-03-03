@@ -71,7 +71,7 @@ public class Masters25 extends ExpansionSet {
         cards.add(new SetCardInfo("Geist of the Moors", 15, Rarity.COMMON, mage.cards.g.GeistOfTheMoors.class));
         cards.add(new SetCardInfo("Gods Willing", 16, Rarity.COMMON, mage.cards.g.GodsWilling.class));
         cards.add(new SetCardInfo("Griffin Protector", 17, Rarity.COMMON, mage.cards.g.GriffinProtector.class));
-        //cards.add(new SetCardInfo("Karona's Zealot", 18, Rarity.UNCOMMON, mage.cards.k.KaronasZealot.class));
+        cards.add(new SetCardInfo("Karona's Zealot", 18, Rarity.UNCOMMON, mage.cards.k.KaronasZealot.class));
         cards.add(new SetCardInfo("Knight of the Skyward Eye", 19, Rarity.COMMON, mage.cards.k.KnightOfTheSkywardEye.class));
         cards.add(new SetCardInfo("Kongming, 'Sleeping Dragon'", 20, Rarity.UNCOMMON, mage.cards.k.KongmingSleepingDragon.class));
         cards.add(new SetCardInfo("Kor Firewalker", 21, Rarity.UNCOMMON, mage.cards.k.KorFirewalker.class));
