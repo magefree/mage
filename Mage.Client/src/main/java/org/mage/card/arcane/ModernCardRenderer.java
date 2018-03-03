@@ -8,8 +8,10 @@ package org.mage.card.arcane;
 import java.awt.*;
 import java.awt.font.*;
 import java.awt.geom.Arc2D;
+import java.awt.geom.Area;
 import java.awt.geom.Path2D;
 import java.awt.geom.Rectangle2D;
+import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
@@ -70,6 +72,13 @@ public class ModernCardRenderer extends CardRenderer {
         BufferedImage img = CardRendererUtils.toBufferedImage(icon.getImage());
         return new TexturePaint(img, new Rectangle(0, 0, img.getWidth(), img.getHeight()));
     }
+    
+    private static BufferedImage loadBackgroundImage(String name) {
+        URL url = ModernCardRenderer.class.getResource("/cardrender/background_texture_" + name + ".png");
+        ImageIcon icon = new ImageIcon(url);
+        BufferedImage img = CardRendererUtils.toBufferedImage(icon.getImage());
+        return img;
+    }    
 
     private static BufferedImage loadFramePart(String name) {
         URL url = ModernCardRenderer.class.getResource("/cardrender/" + name + ".png");
@@ -99,6 +108,16 @@ public class ModernCardRenderer extends CardRenderer {
     public static final Paint BG_TEXTURE_ARTIFACT = loadBackgroundTexture("artifact");
     public static final Paint BG_TEXTURE_LAND = loadBackgroundTexture("land");
     public static final Paint BG_TEXTURE_VEHICLE = loadBackgroundTexture("vehicle");
+    
+    public static final BufferedImage BG_IMG_WHITE = loadBackgroundImage("white");
+    public static final BufferedImage BG_IMG_BLUE = loadBackgroundImage("blue");
+    public static final BufferedImage BG_IMG_BLACK = loadBackgroundImage("black");
+    public static final BufferedImage BG_IMG_RED = loadBackgroundImage("red");
+    public static final BufferedImage BG_IMG_GREEN = loadBackgroundImage("green");
+    public static final BufferedImage BG_IMG_GOLD = loadBackgroundImage("gold");
+    public static final BufferedImage BG_IMG_ARTIFACT = loadBackgroundImage("artifact");
+    public static final BufferedImage BG_IMG_LAND = loadBackgroundImage("land");
+    public static final BufferedImage BG_IMG_VEHICLE = loadBackgroundImage("vehicle");
 
     public static final BufferedImage FRAME_INVENTION = loadFramePart("invention_frame");
 
@@ -281,27 +300,30 @@ public class ModernCardRenderer extends CardRenderer {
             // Just draw a brown rectangle
             drawCardBack(g);
         } else {
-            BufferedImage bufferedImage = new BufferedImage(300, 300, BufferedImage.TYPE_INT_RGB);
-
-            // Set texture to paint with
-            g.setPaint(getBackgroundPaint(cardView.getColor(), cardView.getCardTypes(), cardView.getSubTypes()));
+            BufferedImage bg = getBackgroundImage(cardView.getColor(), cardView.getCardTypes(), cardView.getSubTypes());
+            if (bg == null) {
+                return;
+            }
+            int bgw = bg.getWidth();
+            int bgh = bg.getHeight();
 
             // Draw main part (most of card)
-            g.fillRoundRect(
-                    borderWidth, borderWidth,
+            RoundRectangle2D rr = new RoundRectangle2D.Double(borderWidth, borderWidth,
                     cardWidth - borderWidth * 2, cardHeight - borderWidth * 4 - cornerRadius * 2,
                     cornerRadius - 1, cornerRadius - 1);
+            Area a = new Area(rr);
 
-            // Draw the M15 rounded "swoosh" at the bottom
-            g.fillRoundRect(
-                    borderWidth, cardHeight - borderWidth * 4 - cornerRadius * 4,
+            RoundRectangle2D rr2 = new RoundRectangle2D.Double(borderWidth, cardHeight - borderWidth * 4 - cornerRadius * 4,
                     cardWidth - borderWidth * 2, cornerRadius * 4,
                     cornerRadius * 2, cornerRadius * 2);
-
-            // Draw the cutout into the "swoosh" for the textbox to lie over
-            g.fillRect(
-                    borderWidth + contentInset, cardHeight - borderWidth * 5,
-                    cardWidth - borderWidth * 2 - contentInset * 2, borderWidth * 2);
+            a.add(new Area(rr2));
+            
+            // Draw the M15 rounded "swoosh" at the bottom
+            Rectangle r = new Rectangle(borderWidth + contentInset, cardHeight - borderWidth * 5, cardWidth - borderWidth * 2 - contentInset * 2, borderWidth * 2);
+            a.add(new Area(r));
+            g.setClip(a);
+            g.drawImage(bg, 0, 0, cardWidth, cardHeight, 0, 0, bgw, bgh, BOX_BLUE, null);            
+            g.setClip(null);
         }
     }
 
@@ -545,7 +567,7 @@ public class ModernCardRenderer extends CardRenderer {
                 int x2 = x + contentWidth;
                 int y2 = y;
                 int thisy = totalContentInset + boxHeight;
-                drawZendikarCurvedFace(g, image, x, thisy, x2, y2,                        
+                drawZendikarCurvedFace(g, image, x, thisy, x2, y2,
                         boxColor, borderPaint);
             } else if (cardView.getFrameStyle() == FrameStyle.BFZ_FULL_ART_BASIC) {
                 // Draw curved lines (BFZ land style) 
@@ -1249,7 +1271,34 @@ public class ModernCardRenderer extends CardRenderer {
             return new Color(71, 86, 101);
         }
     }
-
+    
+    // Determine which background image to use from a set of colors
+    // and the current card.
+    protected static BufferedImage getBackgroundImage(ObjectColor colors, Collection<CardType> types, SubTypeList subTypes) {
+        if (subTypes.contains(SubType.VEHICLE)) {
+            return BG_IMG_VEHICLE;
+        } else if (types.contains(CardType.LAND)) {
+            return BG_IMG_LAND;
+        } else if (types.contains(CardType.ARTIFACT)) {
+            return BG_IMG_ARTIFACT;
+        } else if (colors.isMulticolored()) {
+            return BG_IMG_GOLD;
+        } else if (colors.isWhite()) {
+            return BG_IMG_WHITE;
+        } else if (colors.isBlue()) {
+            return BG_IMG_BLUE;
+        } else if (colors.isBlack()) {
+            return BG_IMG_BLACK;
+        } else if (colors.isRed()) {
+            return BG_IMG_RED;
+        } else if (colors.isGreen()) {
+            return BG_IMG_GREEN;
+        } else {
+            // Colorless
+            return null;
+        }
+    }
+    
     // Get the box color for the given colors
     protected Color getBoxColor(ObjectColor colors, Collection<CardType> types, boolean isNightCard) {
         if (cardView.isAbility()) {
