@@ -118,7 +118,8 @@ public class ModernCardRenderer extends CardRenderer {
     public static final BufferedImage BG_IMG_ARTIFACT = loadBackgroundImage("artifact");
     public static final BufferedImage BG_IMG_LAND = loadBackgroundImage("land");
     public static final BufferedImage BG_IMG_VEHICLE = loadBackgroundImage("vehicle");
-
+    public static final BufferedImage BG_IMG_COLORLESS = loadBackgroundImage("colorless");
+    
     public static final BufferedImage FRAME_INVENTION = loadFramePart("invention_frame");
 
     public static final Color BORDER_WHITE = new Color(216, 203, 188);
@@ -1295,7 +1296,7 @@ public class ModernCardRenderer extends CardRenderer {
             return BG_IMG_GREEN;
         } else {
             // Colorless
-            return null;
+            return BG_IMG_COLORLESS;
         }
     }
     
