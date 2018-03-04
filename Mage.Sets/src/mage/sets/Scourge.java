@@ -146,6 +146,7 @@ public class Scourge extends ExpansionSet {
         cards.add(new SetCardInfo("Parallel Thoughts", 44, Rarity.RARE, mage.cards.p.ParallelThoughts.class));
         cards.add(new SetCardInfo("Pemmin's Aura", 45, Rarity.UNCOMMON, mage.cards.p.PemminsAura.class));
         cards.add(new SetCardInfo("Primitive Etchings", 126, Rarity.RARE, mage.cards.p.PrimitiveEtchings.class));
+        cards.add(new SetCardInfo("Proteus Machine", 141, Rarity.UNCOMMON, mage.cards.p.ProteusMachine.class));
         cards.add(new SetCardInfo("Putrid Raptor", 71, Rarity.UNCOMMON, mage.cards.p.PutridRaptor.class));
         cards.add(new SetCardInfo("Pyrostatic Pillar", 100, Rarity.UNCOMMON, mage.cards.p.PyrostaticPillar.class));
         cards.add(new SetCardInfo("Rain of Blades", 20, Rarity.UNCOMMON, mage.cards.r.RainOfBlades.class));
