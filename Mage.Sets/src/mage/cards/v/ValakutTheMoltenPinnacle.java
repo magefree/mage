@@ -32,6 +32,7 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.mana.RedManaAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -106,7 +107,8 @@ class ValakutTheMoltenPinnacleTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent != null && permanent.isLand() && permanent.getControllerId().equals(this.getControllerId())) {
+        Permanent source =  game.getPermanent(sourceId);
+        if (source != null && permanent != null && permanent.isLand() && permanent.getControllerId().equals(this.getControllerId())) {
             if (permanent.hasSubtype(SubType.MOUNTAIN, game)) {
                 return true;
             }
