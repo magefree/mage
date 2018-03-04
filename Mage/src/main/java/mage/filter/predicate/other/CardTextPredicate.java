@@ -27,6 +27,7 @@
  */
 package mage.filter.predicate.other;
 
+import java.util.HashMap;
 import mage.cards.Card;
 import mage.cards.SplitCard;
 import mage.constants.SubType;
@@ -44,21 +45,38 @@ public class CardTextPredicate implements Predicate<Card> {
     private final boolean inNames;
     private final boolean inTypes;
     private final boolean inRules;
+    private final boolean isUnique;
+    private HashMap<String, Boolean> seenCards = null;
 
-    public CardTextPredicate(String text, boolean inNames, boolean inTypes, boolean inRules) {
+    public CardTextPredicate(String text, boolean inNames, boolean inTypes, boolean inRules, boolean isUnique) {
         this.text = text;
         this.inNames = inNames;
         this.inTypes = inTypes;
         this.inRules = inRules;
+        this.isUnique = isUnique;
+        seenCards = new HashMap<>();
     }
 
     @Override
     public boolean apply(Card input, Game game) {
-        if (text.isEmpty()) {
+        if (text.isEmpty() && !isUnique) {
             return true;
         }
+
+        if (text.isEmpty() && isUnique) {
+            boolean found = !seenCards.keySet().contains(input.getName());
+            seenCards.put(input.getName(), true);
+            return found;
+        }
+
         // first check in card name
         if (inNames && input.getName().toLowerCase().contains(text.toLowerCase())) {
+            if (isUnique && seenCards.keySet().contains(input.getName())) {
+                return false;
+            }
+            if (isUnique) {
+                seenCards.put(input.getName(), true);
+            }
             return true;
         }
 
@@ -105,11 +123,18 @@ public class CardTextPredicate implements Predicate<Card> {
                     }
                 }
             }
+
+            if (found && isUnique && seenCards.keySet().contains(input.getName())) {
+                found = false;
+            }
             if (!found) {
                 return false;
             }
         }
 
+        if (isUnique) {
+            seenCards.put(input.getName(), true);
+        }
         return true;
     }
 
