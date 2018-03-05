@@ -78,6 +78,7 @@ public class DoIfCostPaid extends OneShotEffect {
             if (cost.canPay(source, source.getSourceId(), player.getId(), game)
                     && executingEffects.size() > 0 && (!optional || player.chooseUse(executingEffects.get(0).getOutcome(), message, source, game))) {
                 cost.clearPaid();
+                int bookmark = game.bookmarkState();
                 if (cost.pay(source, game, source.getSourceId(), player.getId(), false)) {
                     for (Effect effect : executingEffects) {
                         effect.setTargetPointer(this.targetPointer);
@@ -98,6 +99,8 @@ public class DoIfCostPaid extends OneShotEffect {
                             game.addEffect((ContinuousEffect) effect, source);
                         }
                     }
+                }else{
+                    game.restoreState(bookmark, "Did not pay");
                 }
             }
             else if (!otherwiseEffects.isEmpty()) {
