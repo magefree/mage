@@ -108,7 +108,8 @@ class DjinnIlluminatusGainReplicateEffect extends ContinuousEffectImpl {
             if ((stackObject instanceof Spell) 
                     && !stackObject.isCopy() 
                     && stackObject.getControllerId().equals(source.getControllerId())
-                    && djinn.getControllerId().equals(source.getControllerId())) { // verify that the controller of the djinn cast that spell
+                    && djinn.getControllerId().equals(source.getControllerId())  // verify that the controller of the djinn cast that spell
+                    && !stackObject.getManaCost().isEmpty()) { //handle cases like Ancestral Vision
                 Spell spell = (Spell) stackObject;
                 if (filter.match(stackObject, game)) {
                     ReplicateAbility replicateAbility = replicateAbilities.computeIfAbsent(spell.getId(), k -> new ReplicateAbility(spell.getCard(), spell.getSpellAbility().getManaCosts().getText()));

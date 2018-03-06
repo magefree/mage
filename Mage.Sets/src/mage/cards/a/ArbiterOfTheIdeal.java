@@ -29,6 +29,7 @@ package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
@@ -53,7 +54,7 @@ import mage.target.targetpointer.FixedTarget;
 public class ArbiterOfTheIdeal extends CardImpl {
 
     public ArbiterOfTheIdeal(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
         this.subtype.add(SubType.SPHINX);
 
         this.power = new MageInt(4);
@@ -79,6 +80,7 @@ public class ArbiterOfTheIdeal extends CardImpl {
 class ArbiterOfTheIdealEffect extends OneShotEffect {
 
     private static final FilterCard filter = new FilterCard();
+
     static {
         filter.add(Predicates.or(
                 new CardTypePredicate(CardType.ARTIFACT),
@@ -102,32 +104,25 @@ class ArbiterOfTheIdealEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = source.getSourceObject(game);
+        if (controller == null || sourceObject == null) {
             return false;
         }
-
-        if (player.getLibrary().hasCards()) {
-            Card card = player.getLibrary().getFromTop(game);
-            Cards cards = new CardsImpl();
-            cards.add(card);
-            player.revealCards("Arbiter of the Ideal", cards, game);
-
-            if (card != null) {
-                if (filter.match(card, game) && player.chooseUse(outcome, new StringBuilder("Put ").append(card.getName()).append("onto battlefield?").toString(), source, game)) {
-                    card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), source.getControllerId());
-                    Permanent permanent = game.getPermanent(card.getId());
-                    if (permanent != null) {
-                        permanent.addCounters(new Counter("Manifestation"), source, game);
-                        ContinuousEffect effect = new AddCardTypeTargetEffect(Duration.Custom, CardType.ENCHANTMENT);
-                        effect.setTargetPointer(new FixedTarget(permanent.getId()));
-                        game.addEffect(effect, source);
-                    }
+        Card card = controller.getLibrary().getFromTop(game);
+        if (card != null) {
+            controller.revealCards(sourceObject.getIdName(), new CardsImpl(card), game);
+            if (filter.match(card, game) && controller.chooseUse(outcome, "Put " + card.getName() + "onto battlefield?", source, game)) {
+                controller.moveCards(card, Zone.BATTLEFIELD, source, game);
+                Permanent permanent = game.getPermanent(card.getId());
+                if (permanent != null) {
+                    permanent.addCounters(new Counter("Manifestation"), source, game);
+                    ContinuousEffect effect = new AddCardTypeTargetEffect(Duration.Custom, CardType.ENCHANTMENT);
+                    effect.setTargetPointer(new FixedTarget(permanent, game));
+                    game.addEffect(effect, source);
                 }
             }
-            return true;
         }
-
-        return false;
+        return true;
     }
 }

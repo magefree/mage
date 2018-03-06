@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.m;
 
 import java.io.Serializable;
@@ -50,9 +49,11 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.game.permanent.token.MyrToken;
 import mage.players.Player;
 import mage.target.TargetPermanent;
+import mage.watchers.common.CreatureAttackedWhichPlayerWatcher;
 
 /**
  *
@@ -61,7 +62,7 @@ import mage.target.TargetPermanent;
 public class MyrBattlesphere extends CardImpl {
 
     public MyrBattlesphere(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{7}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{7}");
         this.subtype.add(SubType.MYR);
         this.subtype.add(SubType.CONSTRUCT);
         this.power = new MageInt(4);
@@ -71,7 +72,8 @@ public class MyrBattlesphere extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new MyrToken(), 4), false));
 
         // Whenever Myr Battlesphere attacks, you may tap X untapped Myr you control. If you do, Myr Battlesphere gets +X/+0 until end of turn and deals X damage to defending player.
-        this.addAbility(new AttacksTriggeredAbility(new MyrBattlesphereEffect(), true));
+        this.addAbility(new AttacksTriggeredAbility(new MyrBattlesphereEffect(), true), new CreatureAttackedWhichPlayerWatcher());
+
     }
 
     public MyrBattlesphere(final MyrBattlesphere card) {
@@ -107,42 +109,46 @@ class MyrBattlesphereEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            int tappedAmount = 0;
-            TargetPermanent target = new TargetPermanent(0,1,filter, false);
-            while (true && controller.canRespond()) {
-                target.clearChosen();
-                if (target.canChoose(source.getControllerId(), game)) {
-                    Map<String, Serializable> options = new HashMap<>();
-                    options.put("UI.right.btn.text", "Myr tapping complete");
-                    controller.choose(outcome, target, source.getControllerId(), game, options);
-                    if (!target.getTargets().isEmpty()) {
-                        UUID creature = target.getFirstTarget();
-                        if (creature != null) {
-                            game.getPermanent(creature).tap(game);
-                            tappedAmount++;
+            CreatureAttackedWhichPlayerWatcher watcher = (CreatureAttackedWhichPlayerWatcher) game.getState().getWatchers().get(CreatureAttackedWhichPlayerWatcher.class.getSimpleName());
+            if (watcher != null) {
+                // even if the Myr Battlesphere is off the battlefield, it still does damage to the defender
+                Permanent myr = game.getPermanentOrLKIBattlefield(source.getSourceId());
+                UUID defenderId = watcher.getPlayerAttackedThisTurnByCreature(myr.getId());
+                Player defender = game.getPlayer(defenderId);
+                int tappedAmount = 0;
+                TargetPermanent target = new TargetPermanent(0, 1, filter, false);
+                while (true && controller.canRespond()) {
+                    target.clearChosen();
+                    if (target.canChoose(source.getControllerId(), game)) {
+                        Map<String, Serializable> options = new HashMap<>();
+                        options.put("UI.right.btn.text", "Myr tapping complete");
+                        controller.choose(outcome, target, source.getControllerId(), game, options);
+                        if (!target.getTargets().isEmpty()) {
+                            UUID creature = target.getFirstTarget();
+                            if (creature != null) {
+                                game.getPermanent(creature).tap(game);
+                                tappedAmount++;
+                            }
+                        } else {
+                            break;
                         }
                     } else {
                         break;
                     }
                 }
-                else {
-                    break;
-                }
-            }
-            if (tappedAmount > 0) {
-                game.informPlayers(new StringBuilder(controller.getLogName()).append(" taps ").append(tappedAmount).append(" Myrs").toString());
-                // boost effect
-                game.addEffect(new BoostSourceEffect(tappedAmount, 0, Duration.EndOfTurn), source);
-                // damage to defender
-                UUID defenderId = game.getCombat().getDefendingPlayerId(source.getSourceId(), game);
-                Player defender = game.getPlayer(defenderId);
-                if (defender != null) {
-                    defender.damage(tappedAmount, source.getSourceId(), game, false, true);
-                    return true;
-                }
+                if (tappedAmount > 0) {
+                    game.informPlayers(new StringBuilder(controller.getLogName()).append(" taps ").append(tappedAmount).append(" Myrs").toString());
+                    // boost effect
+                    game.addEffect(new BoostSourceEffect(tappedAmount, 0, Duration.EndOfTurn), source);
+                    // damage to defender
+                    if (defender != null) {
+                        defender.damage(tappedAmount, myr.getId(), game, false, true);
+                        return true;
+                    }
 
+                }
+                return true;
             }
-            return true;
         }
         return false;
     }

@@ -30,6 +30,7 @@ package mage.cards.k;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -61,7 +62,9 @@ public class KrosanDrover extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Creature spells you cast with converted mana cost 6 or greater cost {2} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 2)));
+        Effect effect = new SpellsCostReductionControllerEffect(filter, 2);
+        effect.setText("Creature spells you cast with converted mana cost 6 or greater cost {2} less to cast.");
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
     public KrosanDrover(final KrosanDrover card) {

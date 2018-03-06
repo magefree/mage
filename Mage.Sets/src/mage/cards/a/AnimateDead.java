@@ -100,7 +100,7 @@ class AnimateDeadReAttachEffect extends OneShotEffect {
 
     public AnimateDeadReAttachEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Return enchanted creature card to the battlefield under your control and attach {this} to it";
+        this.staticText = "return enchanted creature card to the battlefield under your control and attach {this} to it";
     }
 
     public AnimateDeadReAttachEffect(final AnimateDeadReAttachEffect effect) {

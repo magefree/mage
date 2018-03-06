@@ -1,10 +1,9 @@
 package mage.target.targetpointer;
 
+import java.util.*;
 import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.game.Game;
-
-import java.util.*;
 
 public class SecondTargetPointer implements TargetPointer {
 
@@ -59,7 +58,7 @@ public class SecondTargetPointer implements TargetPointer {
             if (zoneChangeCounter.containsKey(targetId)) {
                 Card card = game.getCard(targetId);
                 if (card != null && zoneChangeCounter.containsKey(targetId)
-                            && card.getZoneChangeCounter(game) != zoneChangeCounter.get(targetId)) {
+                        && card.getZoneChangeCounter(game) != zoneChangeCounter.get(targetId)) {
                     return null;
                 }
             }
@@ -71,5 +70,15 @@ public class SecondTargetPointer implements TargetPointer {
     @Override
     public TargetPointer copy() {
         return new SecondTargetPointer(this);
+    }
+
+    @Override
+    public FixedTarget getFixedTarget(Game game, Ability source) {
+        this.init(game, source);
+        UUID firstId = getFirst(game, source);
+        if (firstId != null) {
+            return new FixedTarget(firstId, game.getState().getZoneChangeCounter(firstId));
+        }
+        return null;
     }
 }

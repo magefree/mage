@@ -17,10 +17,10 @@ import mage.view.PermanentView;
 
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
-import java.awt.image.BufferedImage;
 import java.awt.image.RasterFormatException;
 import java.util.ArrayList;
 import java.util.List;
+import java.awt.image.BufferedImage;
 
 /**
  * @author stravant@gmail.com
@@ -201,7 +201,8 @@ public abstract class CardRenderer {
     // The Draw Method
     // The draw method takes the information caculated by the constructor
     // and uses it to draw to a concrete size of card and graphics.
-    public void draw(Graphics2D g, CardPanelAttributes attribs) {
+    public void draw(Graphics2D g, CardPanelAttributes attribs, BufferedImage image) {
+
         // Pre template method layout, to calculate shared layout info
         layout(attribs.cardWidth, attribs.cardHeight);
         isSelected = attribs.isSelected;
@@ -211,7 +212,7 @@ public abstract class CardRenderer {
         drawBorder(g);
         drawBackground(g);
         drawArt(g);
-        drawFrame(g);
+        drawFrame(g, image);
         if (!cardView.isAbility()) {
             drawOverlays(g);
             drawCounters(g);
@@ -226,7 +227,7 @@ public abstract class CardRenderer {
 
     protected abstract void drawArt(Graphics2D g);
 
-    protected abstract void drawFrame(Graphics2D g);
+    protected abstract void drawFrame(Graphics2D g, BufferedImage image);
 
     // Template methods that are possible to override, but unlikely to be
     // overridden.
@@ -462,20 +463,42 @@ public abstract class CardRenderer {
             }
         } else {
             StringBuilder sbType = new StringBuilder();
-            for (SuperType superType : cardView.getSuperTypes()) {
-                sbType.append(superType).append(' ');
-            }
-            for (CardType cardType : cardView.getCardTypes()) {
-                sbType.append(cardType.toString()).append(' ');
-            }
-            if (!cardView.getSubTypes().isEmpty()) {
-                sbType.append("- ");
-                for (SubType subType : cardView.getSubTypes()) {
-                    sbType.append(subType).append(' ');
+            String spType = getCardSuperTypeLine();
+            String subType = getCardSubTypeLine();
+            if (spType.equalsIgnoreCase("")) {
+                sbType.append(subType);
+            } else {
+                sbType.append(spType);
+                if (!subType.equalsIgnoreCase("")) {
+                    sbType.append("- ");
+                    sbType.append(subType);
                 }
             }
+
             return sbType.toString();
         }
+    }
+
+    protected String getCardSuperTypeLine() {
+        StringBuilder spType = new StringBuilder();
+        for (SuperType superType : cardView.getSuperTypes()) {
+            spType.append(superType).append(' ');
+        }
+        for (CardType cardType : cardView.getCardTypes()) {
+            spType.append(cardType.toString()).append(' ');
+        }
+        return spType.toString();
+    }
+
+    protected String getCardSubTypeLine() {
+        StringBuilder subType = new StringBuilder();
+
+        if (!cardView.getSubTypes().isEmpty()) {
+            for (SubType sType : cardView.getSubTypes()) {
+                subType.append(sType).append(' ');
+            }
+        }
+        return subType.toString();
     }
 
     // Set the card art image (CardPanel will give it to us when it

@@ -8,6 +8,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 public class WickedReward extends CardImpl {
 
@@ -19,6 +20,7 @@ public class WickedReward extends CardImpl {
 
         //Target creature gets +4/+2 until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(4, 2, Duration.EndOfTurn));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     public WickedReward(WickedReward other){

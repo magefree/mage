@@ -111,4 +111,47 @@ public class MimicVatTest extends CardTestPlayerBase {
 
     }
 
+    /**
+     * Player A has Mimic Vat and plays Sidisi, Undead Vizier and exploits.
+     * Player N responds to Mimic Vat Trigger with Shred Memory, exiling Sidisi.
+     * Sidisi gets exiled but then xmage allows player A to imprint the
+     * creature, which shouldn't be possible.
+     */
+    @Test
+    public void TestExileFails() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        // Imprint - Whenever a nontoken creature dies, you may exile that card. If you do, return each other card exiled with Mimic Vat to its owner's graveyard.
+        // {3}, {T}: Create a token that's a copy of a card exiled with Mimic Vat. It gains haste. Exile it at the beginning of the next end step.
+        addCard(Zone.BATTLEFIELD, playerA, "Mimic Vat", 1); // Artifact {3}
+
+        addCard(Zone.HAND, playerA, "Lightning Bolt", 1);
+
+        addCard(Zone.BATTLEFIELD, playerB, "Swamp", 2);
+        // Exile up to four target cards from a single graveyard.
+        // Transmute {1}{B}{B}
+        addCard(Zone.HAND, playerB, "Shred Memory", 1); // Instant {1}{B}
+
+        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Silvercoat Lion");
+        setChoice(playerA, "Yes");
+        setChoice(playerA, "Silvercoat Lion");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Shred Memory", "Silvercoat Lion", "Whenever a nontoken creature dies");
+        setChoice(playerA, "Yes");
+
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}, {T}: Create a token that's a copy of a card exiled with ");
+        setChoice(playerA, "Yes");
+        setChoice(playerA, "Silvercoat Lion");
+
+        setStopAt(3, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, "Lightning Bolt", 1);
+        assertGraveyardCount(playerB, "Shred Memory", 1);
+
+        assertExileCount(playerB, "Silvercoat Lion", 1);
+        assertPermanentCount(playerA, "Silvercoat Lion", 0);
+
+    }
 }

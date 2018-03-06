@@ -286,7 +286,7 @@ public class CreateTokenCopyTargetEffect extends OneShotEffect {
             sb.append("tokens that are copies of target ");
         }
         if (!mode.getTargets().isEmpty()) {
-            sb.append(mode.getTargets().get(0).getMessage());
+            sb.append(mode.getTargets().get(0).getTargetName());
         } else {
             throw new UnsupportedOperationException("Using default rule generation of target effect without having a target object");
         }

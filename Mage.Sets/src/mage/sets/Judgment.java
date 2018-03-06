@@ -163,6 +163,7 @@ public class Judgment extends ExpansionSet {
         cards.add(new SetCardInfo("Swelter", 101, Rarity.UNCOMMON, mage.cards.s.Swelter.class));
         cards.add(new SetCardInfo("Swirling Sandstorm", 102, Rarity.COMMON, mage.cards.s.SwirlingSandstorm.class));
         cards.add(new SetCardInfo("Sylvan Safekeeper", 133, Rarity.RARE, mage.cards.s.SylvanSafekeeper.class));
+        cards.add(new SetCardInfo("Telekinetic Bonds", 52, Rarity.RARE, mage.cards.t.TelekineticBonds.class));
         cards.add(new SetCardInfo("Test of Endurance", 29, Rarity.RARE, mage.cards.t.TestOfEndurance.class));
         cards.add(new SetCardInfo("Thriss, Nantuko Primus", 134, Rarity.RARE, mage.cards.t.ThrissNantukoPrimus.class));
         cards.add(new SetCardInfo("Toxic Stench", 74, Rarity.COMMON, mage.cards.t.ToxicStench.class));

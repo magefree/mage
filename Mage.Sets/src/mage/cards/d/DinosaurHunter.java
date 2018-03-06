@@ -28,17 +28,14 @@
 package mage.cards.d;
 
 import java.util.UUID;
-
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.*;
-import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
+import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
@@ -47,12 +44,6 @@ import mage.target.targetpointer.FixedTarget;
  * @author JayDi85
  */
 public class DinosaurHunter extends CardImpl {
-
-    private static final FilterControlledCreaturePermanent filterAnotherDino = new FilterControlledCreaturePermanent();
-    static {
-        filterAnotherDino.add(new AnotherPredicate());
-        filterAnotherDino.add(new SubtypePredicate(SubType.DINOSAUR));
-    }
 
     public DinosaurHunter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
@@ -78,11 +69,6 @@ public class DinosaurHunter extends CardImpl {
 
 class DinosaurHunterAbility extends TriggeredAbilityImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
-    static {
-        filter.add(new SubtypePredicate(SubType.DINOSAUR));
-    }
-
     DinosaurHunterAbility() {
         super(Zone.BATTLEFIELD, new DestroyTargetEffect());
     }
@@ -103,11 +89,13 @@ class DinosaurHunterAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent sourcePermanet = game.getPermanent(event.getSourceId());
-        Permanent targetPermanet = game.getPermanent(event.getTargetId());
-        if (sourcePermanet != null && targetPermanet != null && event.getSourceId().equals(sourceId) && filter.match(targetPermanet, game)) {
-            getEffects().get(0).setTargetPointer(new FixedTarget(event.getTargetId()));
-            return true;
+        if (((DamageEvent) event).isCombatDamage()
+                && event.getSourceId().equals(getSourceId())) {
+            Permanent targetPermanet = game.getPermanentOrLKIBattlefield(event.getTargetId());
+            if (targetPermanet.hasSubtype(SubType.DINOSAUR, game)) {
+                getEffects().get(0).setTargetPointer(new FixedTarget(targetPermanet, game));
+                return true;
+            }
         }
         return false;
     }

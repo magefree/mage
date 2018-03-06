@@ -232,7 +232,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         FilterCard filter = new FilterCard();
 
         String name = jTextFieldSearch.getText().trim();
-        filter.add(new CardTextPredicate(name, chkNames.isSelected(), chkTypes.isSelected(), chkRules.isSelected()));
+        filter.add(new CardTextPredicate(name, chkNames.isSelected(), chkTypes.isSelected(), chkRules.isSelected(), chkUnique.isSelected()));
 
         if (limited) {
             ArrayList<Predicate<MageObject>> predicates = new ArrayList<>();
@@ -543,6 +543,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         chkNames = new javax.swing.JCheckBox();
         chkTypes = new javax.swing.JCheckBox();
         chkRules = new javax.swing.JCheckBox();
+        chkUnique = new javax.swing.JCheckBox();
         jButtonSearch = new javax.swing.JButton();
         jButtonClean = new javax.swing.JButton();
         cardCountLabel = new javax.swing.JLabel();
@@ -1062,6 +1063,22 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
                 chkRulesActionPerformed(evt);
             }
         });
+        
+        chkUnique.setSelected(true);
+        chkUnique.setText("Unique");
+        chkUnique.setToolTipText("Singleton results only.");
+        chkUnique.setFocusable(false);
+        chkUnique.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        chkUnique.setMaximumSize(new java.awt.Dimension(69, 16));
+        chkUnique.setMinimumSize(new java.awt.Dimension(69, 16));
+        chkUnique.setPreferredSize(new java.awt.Dimension(69, 16));
+        chkUnique.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        chkUnique.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkUniqueActionPerformed(evt);
+            }
+        });
+
 
         jButtonSearch.setText("Search");
         jButtonSearch.setToolTipText("Performs the search.");
@@ -1109,6 +1126,8 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
                 .addComponent(chkTypes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(chkRules, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(chkUnique, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(5, 5, 5)
                 .addComponent(cardCountLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1122,6 +1141,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
                 .addGroup(cardSelectorBottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(chkTypes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(chkRules, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(chkUnique, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(chkNames, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(cardSelectorBottomPanelLayout.createSequentialGroup()
                         .addGroup(cardSelectorBottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1341,6 +1361,10 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         // TODO add your handling code here:
     }//GEN-LAST:event_chkRulesActionPerformed
 
+    private void chkUniqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkRulesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chkRulesActionPerformed
+
     private void btnExpansionSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExpansionSearchActionPerformed
         FastSearchUtil.showFastSearchForStringComboBox(cbExpansionSet, "Select set or expansion");
     }//GEN-LAST:event_btnExpansionSearchActionPerformed
@@ -1418,6 +1442,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
     private javax.swing.JCheckBox chkPennyDreadful;
     private javax.swing.JCheckBox chkPiles;
     private javax.swing.JCheckBox chkRules;
+    private javax.swing.JCheckBox chkUnique;
     private javax.swing.JCheckBox chkTypes;
     private javax.swing.JButton jButtonAddToMain;
     private javax.swing.JButton jButtonAddToSideboard;

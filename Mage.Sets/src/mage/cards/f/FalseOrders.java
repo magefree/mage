@@ -175,20 +175,41 @@ class FalseOrdersUnblockEffect extends OneShotEffect {
                                 // Relevant ruling for Balduvian Warlord:
                                 // 7/15/2006 	If an attacking creature has an ability that triggers “When this creature becomes blocked,” 
                                 // it triggers when a creature blocks it due to the Warlord’s ability only if it was unblocked at that point.
-                                
                                 boolean notYetBlocked = chosenGroup.getBlockers().isEmpty();
-                                chosenGroup.addBlocker(permanent.getId(), controller.getId(), game);
+                                chosenGroup.addBlockerToGroup(permanent.getId(), controller.getId(), game);
+                                game.getCombat().addBlockingGroup(permanent.getId(), chosenPermanent.getId(), controller.getId(), game); // 702.21h
                                 if (notYetBlocked) {
                                     game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CREATURE_BLOCKED, chosenPermanent.getId(), null));
+                                    for (UUID bandedId : chosenPermanent.getBandedCards()) {
+                                        CombatGroup bandedGroup = game.getCombat().findGroup(bandedId);
+                                        if (bandedGroup != null && chosenGroup.getBlockers().size() == 1) {
+                                            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CREATURE_BLOCKED, bandedId, null));
+                                        }
+                                    }
                                 }
                                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.BLOCKER_DECLARED, chosenPermanent.getId(), permanent.getId(), permanent.getControllerId()));
                             }
+                            CombatGroup blockGroup = findBlockingGroup(permanent, game); // a new blockingGroup is formed, so it's necessary to find it again
+                            if (blockGroup != null) {
+                                blockGroup.pickAttackerOrder(permanent.getControllerId(), game);
+                            }
                         }
                     }
-                }    
+                }
                 return true;
             }
         }
         return false;
+    }
+
+    private CombatGroup findBlockingGroup(Permanent blocker, Game game) {
+        if (game.getCombat().blockingGroupsContains(blocker.getId())) { // if (blocker.getBlocking() > 1) {
+            for (CombatGroup group : game.getCombat().getBlockingGroups()) {
+                if (group.getBlockers().contains(blocker.getId())) {
+                    return group;
+                }
+            }
+        }
+        return null;
     }
 }

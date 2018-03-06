@@ -95,6 +95,7 @@ public class PortalSecondAge extends ExpansionSet {
         cards.add(new SetCardInfo("Dakmor Sorceress", 11, Rarity.RARE, mage.cards.d.DakmorSorceress.class));
         cards.add(new SetCardInfo("Dark Offering", 12, Rarity.UNCOMMON, mage.cards.d.DarkOffering.class));
         cards.add(new SetCardInfo("Deathcoil Wurm", 65, Rarity.RARE, mage.cards.d.DeathcoilWurm.class));
+        cards.add(new SetCardInfo("Deep Wood", 66, Rarity.UNCOMMON, mage.cards.d.DeepWood.class));
         cards.add(new SetCardInfo("Deja Vu", 35, Rarity.COMMON, mage.cards.d.DejaVu.class));
         cards.add(new SetCardInfo("Denizen of the Deep", 36, Rarity.RARE, mage.cards.d.DenizenOfTheDeep.class));
         cards.add(new SetCardInfo("Earthquake", 94, Rarity.RARE, mage.cards.e.Earthquake.class));
@@ -116,6 +117,7 @@ public class PortalSecondAge extends ExpansionSet {
         cards.add(new SetCardInfo("Goblin Mountaineer", 101, Rarity.COMMON, mage.cards.g.GoblinMountaineer.class));
         cards.add(new SetCardInfo("Goblin Piker", 102, Rarity.COMMON, mage.cards.g.GoblinPiker.class));
         cards.add(new SetCardInfo("Goblin Raider", 103, Rarity.COMMON, mage.cards.g.GoblinRaider.class));
+        cards.add(new SetCardInfo("Goblin War Cry", 104, Rarity.UNCOMMON, mage.cards.g.GoblinWarCry.class));
         cards.add(new SetCardInfo("Goblin War Strike", 105, Rarity.COMMON, mage.cards.g.GoblinWarStrike.class));
         cards.add(new SetCardInfo("Golden Bear", 67, Rarity.COMMON, mage.cards.g.GoldenBear.class));
         cards.add(new SetCardInfo("Hand of Death", 14, Rarity.COMMON, mage.cards.h.HandOfDeath.class));
@@ -127,6 +129,7 @@ public class PortalSecondAge extends ExpansionSet {
         cards.add(new SetCardInfo("Island", 155, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 156, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jagged Lightning", 106, Rarity.UNCOMMON, mage.cards.j.JaggedLightning.class));
+        cards.add(new SetCardInfo("Just Fate", 137, Rarity.RARE, mage.cards.j.JustFate.class));
         cards.add(new SetCardInfo("Kiss of Death", 16, Rarity.UNCOMMON, mage.cards.k.KissOfDeath.class));
         cards.add(new SetCardInfo("Lava Axe", 107, Rarity.COMMON, mage.cards.l.LavaAxe.class));
         cards.add(new SetCardInfo("Lone Wolf", 71, Rarity.UNCOMMON, mage.cards.l.LoneWolf.class));
@@ -212,6 +215,7 @@ public class PortalSecondAge extends ExpansionSet {
         cards.add(new SetCardInfo("Vengeance", 147, Rarity.UNCOMMON, mage.cards.v.Vengeance.class));
         cards.add(new SetCardInfo("Volcanic Hammer", 119, Rarity.COMMON, mage.cards.v.VolcanicHammer.class));
         cards.add(new SetCardInfo("Volunteer Militia", 148, Rarity.COMMON, mage.cards.v.VolunteerMilitia.class));
+        cards.add(new SetCardInfo("Warrior's Stand", 149, Rarity.UNCOMMON, mage.cards.w.WarriorsStand.class));
         cards.add(new SetCardInfo("Wildfire", 120, Rarity.RARE, mage.cards.w.Wildfire.class));
         cards.add(new SetCardInfo("Wild Griffin", 150, Rarity.COMMON, mage.cards.w.WildGriffin.class));
         cards.add(new SetCardInfo("Wild Ox", 90, Rarity.UNCOMMON, mage.cards.w.WildOx.class));

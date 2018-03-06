@@ -45,16 +45,16 @@ import mage.target.targetpointer.FixedTarget;
 /**
  *
  * @author KholdFuzion
-
+ *
  */
 public class AnkhOfMishra extends CardImpl {
-    
+
     public AnkhOfMishra(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         //  Whenever a land enters the battlefield, Ankh of Mishra deals 2 damage to that land's controller.
         this.addAbility(new AnkhOfMishraAbility());
-        
+
     }
 
     public AnkhOfMishra(final AnkhOfMishra card) {
@@ -70,16 +70,16 @@ public class AnkhOfMishra extends CardImpl {
 class AnkhOfMishraAbility extends TriggeredAbilityImpl {
 
     public AnkhOfMishraAbility() {
-            super(Zone.BATTLEFIELD, new DamageTargetEffect(2));
+        super(Zone.BATTLEFIELD, new DamageTargetEffect(2));
     }
 
     AnkhOfMishraAbility(final AnkhOfMishraAbility ability) {
-            super(ability);
+        super(ability);
     }
 
     @Override
     public AnkhOfMishraAbility copy() {
-            return new AnkhOfMishraAbility(this);
+        return new AnkhOfMishraAbility(this);
     }
 
     @Override
@@ -104,6 +104,6 @@ class AnkhOfMishraAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a land enters the battlefield, Ankh of Mishra deals 2 damage to that land's controller.";
+        return "Whenever a land enters the battlefield, {this} deals 2 damage to that land's controller.";
     }
 }

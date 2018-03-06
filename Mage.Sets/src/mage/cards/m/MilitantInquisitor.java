@@ -49,7 +49,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class MilitantInquisitor extends CardImpl {
     
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("equipment you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Equipment you control");
 
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));

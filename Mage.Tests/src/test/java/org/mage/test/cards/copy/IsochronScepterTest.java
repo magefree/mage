@@ -118,11 +118,11 @@ public class IsochronScepterTest extends CardTestPlayerBase {
     public void testAngelsGrace() {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
         addCard(Zone.HAND, playerA, "Isochron Scepter");
+
         // Split second (As long as this spell is on the stack, players can't cast spells or activate abilities that aren't mana abilities.)
         // You can't lose the game this turn and your opponents can't win the game this turn.
         // Until end of turn, damage that would reduce your life total to less than 1 reduces it to 1 instead.
-
-        addCard(Zone.HAND, playerA, "Angel's Grace");
+        addCard(Zone.HAND, playerA, "Angel's Grace"); // Instant {W}
 
         addCard(Zone.BATTLEFIELD, playerB, "Dross Crocodile", 4);// 5/1
         addCard(Zone.HAND, playerB, "Lightning Bolt", 2);
@@ -149,9 +149,6 @@ public class IsochronScepterTest extends CardTestPlayerBase {
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertExileCount("Angel's Grace", 1);
-        assertGraveyardCount(playerA, "Angel's Grace", 0);
-
         assertLife(playerA, 1);
         assertLife(playerB, 20);
 
@@ -159,6 +156,9 @@ public class IsochronScepterTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Dross Crocodile", 1);
         assertPermanentCount(playerB, "Dross Crocodile", 3);
         assertPermanentCount(playerA, "Isochron Scepter", 1);
+
+        assertExileCount("Angel's Grace", 1);
+        assertGraveyardCount(playerA, "Angel's Grace", 0);
 
     }
 

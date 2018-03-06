@@ -86,12 +86,12 @@ public class SpreadingSeasTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void testUtopiaSprawlWithSpreadingSeas(){
+    public void testUtopiaSprawlWithSpreadingSeas() {
         addCard(Zone.HAND, playerA, "Spreading Seas", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 10);
         addCard(Zone.HAND, playerA, "Utopia Sprawl");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Utopia Sprawl","Forest");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Utopia Sprawl", "Forest");
         setChoice(playerA, "Green");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Spreading Seas", "Forest");
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
@@ -99,9 +99,8 @@ public class SpreadingSeasTest extends CardTestPlayerBase {
         assertNotSubtype("Forest", SubType.FOREST);
     }
 
-
     @Test
-    public void testSpreadingSeasWithUrzaLand(){
+    public void testSpreadingSeasWithUrzaLand() {
         addCard(Zone.HAND, playerA, "Spreading Seas", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Urza's Tower", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 10);
@@ -111,4 +110,40 @@ public class SpreadingSeasTest extends CardTestPlayerBase {
         assertNotSubtype("Urza's Tower", SubType.URZAS);
         assertNotSubtype("Urza's Tower", SubType.TOWER);
     }
+
+    /**
+     * https://github.com/magefree/mage/issues/4529 Some spell effects that
+     * effect the use of mana abilities on lands are inoperative. Example
+     * Spreading Seas transforms enchanted land into an island and it loses all
+     * other abilities. The AI does not recognize this and is able to use all
+     * abilities of the enchanted land including all previous mana abilities and
+     * activated abilities, in addition to now also being an island due to
+     * Spreading Sea's effect.
+     */
+    @Test
+    public void testSpreadingRemovesOtherAbilities() {
+
+        // Enchant land
+        // When Spreading Seas enters the battlefield, draw a card.
+        // Enchanted land is an Island.
+        addCard(Zone.HAND, playerA, "Spreading Seas", 1); // ENCHANTMENT {1}{U}
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+
+        // {T}: Add {C} to your mana pool.
+        // {1}{R}, {T}: Create a 0/1 red Kobold creature token named Kobolds of Kher Keep.
+        addCard(Zone.BATTLEFIELD, playerB, "Kher Keep", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Spreading Seas", "Kher Keep");
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "{1}{R}"); // Ability should not be available
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Spreading Seas", 1);
+
+        assertPermanentCount(playerB, "Kobolds of Kher Keep", 0);
+        assertTapped("Kher Keep", false);
+    }
+
 }

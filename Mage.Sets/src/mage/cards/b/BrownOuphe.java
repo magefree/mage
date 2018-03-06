@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -35,17 +36,12 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AbilityType;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.FilterStackObject;
-import mage.filter.predicate.Predicate;
-import mage.game.Game;
-import mage.game.stack.StackAbility;
-import mage.target.common.TargetActivatedOrTriggeredAbility;
-
-import java.util.UUID;
+import mage.filter.FilterAbility;
+import mage.filter.predicate.ability.ArtifactSourcePredicate;
+import mage.target.common.TargetActivatedAbility;
 
 /**
  *
@@ -53,7 +49,7 @@ import java.util.UUID;
  */
 public class BrownOuphe extends CardImpl {
 
-    private final static FilterStackObject filter = new FilterStackObject("activated ability from an artifact source");
+    private final static FilterAbility filter = new FilterAbility("activated ability from an artifact source");
 
     static {
         filter.add(new ArtifactSourcePredicate());
@@ -69,7 +65,7 @@ public class BrownOuphe extends CardImpl {
         // {1}{G}, {tap}: Counter target activated ability from an artifact source.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new ManaCostsImpl<>("{1}{G}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetActivatedOrTriggeredAbility(filter));
+        ability.addTarget(new TargetActivatedAbility(filter));
         this.addAbility(ability);
     }
 
@@ -80,24 +76,5 @@ public class BrownOuphe extends CardImpl {
     @Override
     public BrownOuphe copy() {
         return new BrownOuphe(this);
-    }
-}
-
-class ArtifactSourcePredicate implements Predicate<Ability> {
-
-    public ArtifactSourcePredicate() {
-    }
-
-    @Override
-    public boolean apply(Ability input, Game game) {
-        if (input instanceof StackAbility) {
-            return input.getSourceObject(game).isArtifact() && input.getAbilityType() == AbilityType.ACTIVATED;
-        }
-        return false;
-    }
-
-    @Override
-    public String toString() {
-        return "Source(Artifact)";
     }
 }

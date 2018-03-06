@@ -44,7 +44,7 @@ public class PlayerAttackedStepWatcher extends Watcher {
     private final Map<UUID, Integer> playerAttacked = new HashMap<>();
 
     public PlayerAttackedStepWatcher() {
-        super(PlayerAttackedWatcher.class.getSimpleName(), WatcherScope.GAME);
+        super(PlayerAttackedStepWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public PlayerAttackedStepWatcher(final PlayerAttackedStepWatcher watcher) {

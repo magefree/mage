@@ -29,23 +29,18 @@ package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  * @author Loki
@@ -53,7 +48,7 @@ import mage.target.targetpointer.FixedTarget;
 public class ArchonOfRedemption extends CardImpl {
 
     public ArchonOfRedemption(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
         this.subtype.add(SubType.ARCHON);
 
         this.power = new MageInt(3);
@@ -75,8 +70,9 @@ public class ArchonOfRedemption extends CardImpl {
 }
 
 class ArchonOfRedemptionTriggeredAbility extends TriggeredAbilityImpl {
+
     ArchonOfRedemptionTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new ArchonOfRedemptionEffect(), true);
+        super(Zone.BATTLEFIELD, null, true);
     }
 
     ArchonOfRedemptionTriggeredAbility(final ArchonOfRedemptionTriggeredAbility ability) {
@@ -95,15 +91,13 @@ class ArchonOfRedemptionTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        UUID targetId = event.getTargetId();
-        Permanent permanent = game.getPermanent(targetId);
-        if (permanent.getControllerId().equals(this.controllerId)
+        Permanent permanent = game.getPermanent(event.getTargetId());
+        if (permanent.getControllerId().equals(getControllerId())
                 && permanent.isCreature()
-                && (targetId.equals(this.getSourceId())
-                || (permanent.getAbilities().contains(FlyingAbility.getInstance()) && !targetId.equals(this.getSourceId())))) {
-            for (Effect effect : this.getEffects()) {
-                effect.setTargetPointer(new FixedTarget(event.getTargetId()));
-            }
+                && (permanent.getId().equals(getSourceId())
+                || (permanent.getAbilities().contains(FlyingAbility.getInstance())))) {
+            this.getEffects().clear();
+            this.addEffect(new GainLifeEffect(permanent.getPower().getValue()));
             return true;
         }
         return false;
@@ -111,35 +105,6 @@ class ArchonOfRedemptionTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever {this} or another creature with flying enters the battlefield under your control, you may gain life equal to that creature's power";
-    }
-}
-
-class ArchonOfRedemptionEffect extends OneShotEffect {
-    ArchonOfRedemptionEffect() {
-        super(Outcome.GainLife);
-    }
-
-    ArchonOfRedemptionEffect(final ArchonOfRedemptionEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent p = game.getPermanent(targetPointer.getFirst(game, source));
-        Player player = game.getPlayer(source.getControllerId());
-        if (p == null) {
-            p = (Permanent) game.getLastKnownInformation(targetPointer.getFirst(game, source), Zone.BATTLEFIELD);
-        }
-        if (p != null && player != null) {
-            player.gainLife(p.getPower().getValue(), game);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public ArchonOfRedemptionEffect copy() {
-        return new ArchonOfRedemptionEffect(this);
+        return "Whenever {this} or another creature with flying enters the battlefield under your control, you may gain life equal to that creature's power.";
     }
 }

@@ -126,6 +126,7 @@ public class TheDark extends ExpansionSet {
         cards.add(new SetCardInfo("Miracle Worker", 86, Rarity.COMMON, mage.cards.m.MiracleWorker.class));
         cards.add(new SetCardInfo("Morale", 87, Rarity.COMMON, mage.cards.m.Morale.class));
         cards.add(new SetCardInfo("Murk Dwellers", 11, Rarity.COMMON, mage.cards.m.MurkDwellers.class));
+        cards.add(new SetCardInfo("Nameless Race", 12, Rarity.RARE, mage.cards.n.NamelessRace.class));
         cards.add(new SetCardInfo("Necropolis", 102, Rarity.RARE, mage.cards.n.Necropolis.class));
         cards.add(new SetCardInfo("Niall Silvain", 45, Rarity.RARE, mage.cards.n.NiallSilvain.class));
         cards.add(new SetCardInfo("Orc General", 72, Rarity.UNCOMMON, mage.cards.o.OrcGeneral.class));
@@ -135,6 +136,7 @@ public class TheDark extends ExpansionSet {
         cards.add(new SetCardInfo("Psychic Allergy", 33, Rarity.RARE, mage.cards.p.PsychicAllergy.class));
         cards.add(new SetCardInfo("Rag Man", 13, Rarity.RARE, mage.cards.r.RagMan.class));
         cards.add(new SetCardInfo("Riptide", 34, Rarity.COMMON, mage.cards.r.Riptide.class));
+        cards.add(new SetCardInfo("Runesword", 104, Rarity.RARE, mage.cards.r.Runesword.class));
         cards.add(new SetCardInfo("Safe Haven", 115, Rarity.RARE, mage.cards.s.SafeHaven.class));
         cards.add(new SetCardInfo("Savaen Elves", 47, Rarity.COMMON, mage.cards.s.SavaenElves.class));
         cards.add(new SetCardInfo("Scarecrow", 105, Rarity.RARE, mage.cards.s.Scarecrow.class));
@@ -152,6 +154,7 @@ public class TheDark extends ExpansionSet {
         cards.add(new SetCardInfo("Stone Calendar", 108, Rarity.RARE, mage.cards.s.StoneCalendar.class));
         cards.add(new SetCardInfo("Sunken City", 35, Rarity.COMMON, mage.cards.s.SunkenCity.class));
         cards.add(new SetCardInfo("Tangle Kelp", 36, Rarity.RARE, mage.cards.t.TangleKelp.class));
+        cards.add(new SetCardInfo("The Fallen", 15, Rarity.RARE, mage.cards.t.TheFallen.class));
         cards.add(new SetCardInfo("Tivadar's Crusade", 91, Rarity.UNCOMMON, mage.cards.t.TivadarsCrusade.class));
         cards.add(new SetCardInfo("Tormod's Crypt", 109, Rarity.UNCOMMON, mage.cards.t.TormodsCrypt.class));
         cards.add(new SetCardInfo("Tower of Coireall", 110, Rarity.RARE, mage.cards.t.TowerOfCoireall.class));

@@ -96,7 +96,7 @@ public class PreventDamageByTargetEffect extends PreventionEffectImpl {
             StringBuilder sb = new StringBuilder();
             sb.append("Prevent all");
             if (onlyCombat) {
-                sb.append(" combat ");
+                sb.append(" combat");
             }
             sb.append(" damage target ");
             sb.append(mode.getTargets().get(0).getTargetName()).append(" would deal ").append(duration.toString());

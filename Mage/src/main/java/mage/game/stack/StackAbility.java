@@ -50,6 +50,7 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.Targets;
@@ -529,12 +530,17 @@ public class StackAbility extends StackObjImpl implements Ability {
 
     @Override
     public MageObject getSourceObject(Game game) {
-        return game.getBaseObject(getSourceId());
+        return this.ability.getSourceObject(game);
     }
 
     @Override
     public MageObject getSourceObjectIfItStillExists(Game game) {
-        throw new UnsupportedOperationException("Not supported.");
+        return this.ability.getSourceObjectIfItStillExists(game);
+    }
+
+    @Override
+    public Permanent getSourcePermanentIfItStillExists(Game game) {
+        return this.ability.getSourcePermanentIfItStillExists(game);
     }
 
     @Override

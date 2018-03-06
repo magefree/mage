@@ -75,6 +75,7 @@ public class Unstable extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 212, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(FrameStyle.UNH_FULL_ART_BASIC, false)));
         cards.add(new SetCardInfo("Snickering Squirrel", 68, Rarity.COMMON, mage.cards.s.SnickeringSquirrel.class));
         cards.add(new SetCardInfo("Squirrel-Powered Scheme", 70, Rarity.UNCOMMON, mage.cards.s.SquirrelPoweredScheme.class));
+        cards.add(new SetCardInfo("Steamflogger Boss", 93, Rarity.RARE, mage.cards.s.SteamfloggerBoss.class));
         cards.add(new SetCardInfo("Steel Squirrel", 162, Rarity.UNCOMMON, mage.cards.s.SteelSquirrel.class));
         cards.add(new SetCardInfo("Summon the Pack", 74, Rarity.MYTHIC, mage.cards.s.SummonThePack.class));
         cards.add(new SetCardInfo("Swamp", 214, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(FrameStyle.UNH_FULL_ART_BASIC, false)));
