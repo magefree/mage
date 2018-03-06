@@ -27,6 +27,8 @@
  */
 package mage.cards.u;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -38,7 +40,8 @@ import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.watchers.common.CastFromHandWatcher;
+import mage.watchers.Watcher;
+import mage.watchers.common.CreatureWasCastWatcher;
 
 /**
  *
@@ -48,7 +51,10 @@ public class UphillBattle extends CardImpl {
     
     public UphillBattle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new UphillBattleTapEffect()), new CastFromHandWatcher());
+        Ability tapAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, new UphillBattleTapEffect());
+        tapAbility.addWatcher(new CreatureWasCastWatcher());
+        tapAbility.addWatcher(new PlayCreatureLandWatcher());
+        addAbility(tapAbility);
     }
 
     public UphillBattle(final UphillBattle card) {
@@ -61,6 +67,58 @@ public class UphillBattle extends CardImpl {
     }
 }
 
+class PlayCreatureLandWatcher extends Watcher {
+
+    final Set<UUID> playerPlayedLand = new HashSet<>(); // player that played land
+    final Set<UUID> landPlayed = new HashSet<>(); // land played
+
+    public PlayCreatureLandWatcher() {
+        super(PlayCreatureLandWatcher.class.getSimpleName(), WatcherScope.GAME);
+    }
+
+    public PlayCreatureLandWatcher(final PlayCreatureLandWatcher watcher) {
+        super(watcher);
+        playerPlayedLand.addAll(watcher.playerPlayedLand);
+        landPlayed.addAll(watcher.landPlayed);
+    }
+
+    @Override
+    public PlayCreatureLandWatcher copy() {
+        return new PlayCreatureLandWatcher(this);
+    }
+
+    @Override
+    public void watch(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.PLAY_LAND) {
+            
+            Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
+            if (permanent != null
+                    && permanent.isLand()
+                    && permanent.isCreature()
+                    && !playerPlayedLand.contains(event.getPlayerId())) {
+                playerPlayedLand.add(event.getPlayerId());
+                landPlayed.add(event.getTargetId());
+            }
+        }
+    }
+
+    @Override
+    public void reset() {
+        playerPlayedLand.clear();
+        landPlayed.clear();
+        super.reset();
+    }
+
+    public boolean landPlayed(UUID playerId) {
+        return playerPlayedLand.contains(playerId);
+    }
+
+    public boolean wasLandPlayed(UUID landId) {
+        return landPlayed.contains(landId);
+    }
+}
+
+
 class UphillBattleTapEffect extends ReplacementEffectImpl {
 
     UphillBattleTapEffect() {
@@ -71,13 +129,16 @@ class UphillBattleTapEffect extends ReplacementEffectImpl {
     UphillBattleTapEffect(final UphillBattleTapEffect effect) {
         super(effect);
     }
-
+    
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent target = ((EntersTheBattlefieldEvent) event).getTarget();
-        CastFromHandWatcher watcher = (CastFromHandWatcher) game.getState().getWatchers().get(CastFromHandWatcher.class.getSimpleName());
+        CreatureWasCastWatcher creatureSpellWatcher = (CreatureWasCastWatcher) game.getState().getWatchers().get(CreatureWasCastWatcher.class.getSimpleName());
+        PlayCreatureLandWatcher landWatcher = (PlayCreatureLandWatcher) game.getState().getWatchers().get(PlayCreatureLandWatcher.class.getSimpleName());
         
-        if (target != null && watcher != null && watcher.spellWasCastFromHand(target.getId())) {
+        if (target != null
+                && ((creatureSpellWatcher != null && creatureSpellWatcher.wasCreatureCastThisTurn(target.getId()))
+                || (landWatcher != null && landWatcher.wasLandPlayed(target.getId())))) {
             target.setTapped(true);
         }
         return false;
@@ -92,7 +153,7 @@ class UphillBattleTapEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
             Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
-            if (permanent != null && (permanent.isCreature())) {
+            if (permanent != null && permanent.isCreature()) {
                 return true;
             }
         }
