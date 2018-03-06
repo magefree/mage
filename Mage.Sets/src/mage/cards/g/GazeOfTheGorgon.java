@@ -27,10 +27,13 @@
  */
 package mage.cards.g;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.RegenerateTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -42,10 +45,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.common.BlockedAttackerWatcher;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 /**
  *
@@ -60,8 +59,7 @@ public class GazeOfTheGorgon extends CardImpl {
         // Regenerate target creature. At end of combat, destroy all creatures that blocked or were blocked by that creature this turn.
         this.getSpellAbility().addEffect(new RegenerateTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(
-                new AtTheEndOfCombatDelayedTriggeredAbility(new GazeOfTheGorgonEffect())));
+        this.getSpellAbility().addEffect(new GazeOfTheGorgonCreateDelayedTriggeredAbilityEffect());
         this.getSpellAbility().addWatcher(new BlockedAttackerWatcher());
     }
 
@@ -75,15 +73,46 @@ public class GazeOfTheGorgon extends CardImpl {
     }
 }
 
-class GazeOfTheGorgonEffect extends OneShotEffect {
+class GazeOfTheGorgonCreateDelayedTriggeredAbilityEffect extends OneShotEffect {
 
-    public GazeOfTheGorgonEffect() {
+    public GazeOfTheGorgonCreateDelayedTriggeredAbilityEffect() {
+        super(Outcome.Benefit);
+        this.staticText = "At this turn's next end of combat, destroy all creatures that blocked or were blocked by it this turn";
+    }
+
+    public GazeOfTheGorgonCreateDelayedTriggeredAbilityEffect(final GazeOfTheGorgonCreateDelayedTriggeredAbilityEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public GazeOfTheGorgonCreateDelayedTriggeredAbilityEffect copy() {
+        return new GazeOfTheGorgonCreateDelayedTriggeredAbilityEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        if (!source.getTargets().isEmpty() && source.getFirstTarget() != null) {
+            MageObjectReference mor = new MageObjectReference(source.getFirstTarget(), game);
+            AtTheEndOfCombatDelayedTriggeredAbility delayedAbility = new AtTheEndOfCombatDelayedTriggeredAbility(new GazeOfTheGorgonEffect(mor));
+            game.addDelayedTriggeredAbility(delayedAbility, source);
+            return true;
+        }
+        return false;
+    }
+}
+
+class GazeOfTheGorgonEffect extends OneShotEffect {
+    
+    MageObjectReference targetCreature;
+
+    public GazeOfTheGorgonEffect(MageObjectReference targetCreature) {
         super(Outcome.DestroyPermanent);
-        this.staticText = "destroy all creatures that blocked or were blocked by that creature this turn";
+        this.targetCreature = targetCreature;
     }
 
     public GazeOfTheGorgonEffect(final GazeOfTheGorgonEffect effect) {
         super(effect);
+        targetCreature = effect.targetCreature;
     }
 
     @Override
@@ -94,14 +123,13 @@ class GazeOfTheGorgonEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent targetCreature = game.getPermanentOrLKIBattlefield(source.getTargets().getFirstTarget());
         if (controller != null && targetCreature != null) {
             BlockedAttackerWatcher watcher = (BlockedAttackerWatcher) game.getState().getWatchers().get(BlockedAttackerWatcher.class.getSimpleName());
             if (watcher != null) {
                 List<Permanent> toDestroy = new ArrayList<>();
                 for (Permanent creature : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source.getSourceId(), game)) {
-                    if (!creature.getId().equals(targetCreature.getId())) {
-                        if (watcher.creatureHasBlockedAttacker(creature, targetCreature, game) || watcher.creatureHasBlockedAttacker(targetCreature, creature, game)) {
+                    if (!creature.getId().equals(targetCreature.getSourceId())) {
+                        if (watcher.creatureHasBlockedAttacker(new MageObjectReference(creature, game), targetCreature, game) || watcher.creatureHasBlockedAttacker(targetCreature, new MageObjectReference(creature, game), game)) {
                             toDestroy.add(creature);
                         }
                     }

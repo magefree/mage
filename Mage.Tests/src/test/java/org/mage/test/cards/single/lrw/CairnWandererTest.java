@@ -80,28 +80,28 @@ public class CairnWandererTest  extends CardTestPlayerBase {
         addCard(Zone.GRAVEYARD, playerA, "Typhoid Rats");
         
         // Testing HasteAbility.
-        addCard(Zone.GRAVEYARD, playerA, "Raging Goblin");
+        addCard(Zone.GRAVEYARD, playerB, "Raging Goblin");
         
         // Testing LandwalkAbility.
-        addCard(Zone.GRAVEYARD, playerA, "Zodiac Rooster");
+        addCard(Zone.GRAVEYARD, playerB, "Zodiac Rooster");
         
         // Testing LifelinkAbility.
-        addCard(Zone.GRAVEYARD, playerA, "Trained Caracal");
+        addCard(Zone.GRAVEYARD, playerB, "Trained Caracal");
         
         // Testing ProtectionAbility.
-        addCard(Zone.GRAVEYARD, playerA, "Progenitus");
+        addCard(Zone.GRAVEYARD, playerB, "Progenitus");
         
         // Testing ReachAbility.
-        addCard(Zone.GRAVEYARD, playerA, "Tree Monkey");
+        addCard(Zone.GRAVEYARD, playerB, "Tree Monkey");
         
         // Testing TrampleAbility.
-        addCard(Zone.GRAVEYARD, playerA, "Defiant Elf");
+        addCard(Zone.GRAVEYARD, playerB, "Defiant Elf");
         
         // Testing ShroudAbility.
-        addCard(Zone.GRAVEYARD, playerA, "Elvish Lookout");
+        addCard(Zone.GRAVEYARD, playerB, "Elvish Lookout");
         
         // Testing VigilanceAbility.
-        addCard(Zone.GRAVEYARD, playerA, "Veteran Cavalier");
+        addCard(Zone.GRAVEYARD, playerB, "Veteran Cavalier");
         
         execute();
         

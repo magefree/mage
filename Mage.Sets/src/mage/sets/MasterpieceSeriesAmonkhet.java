@@ -27,9 +27,7 @@
  */
 package mage.sets;
 
-import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
-import mage.cards.FrameStyle;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
@@ -50,7 +48,6 @@ public class MasterpieceSeriesAmonkhet extends ExpansionSet {
         this.blockName = "Masterpiece Series";
         this.hasBoosters = false;
         this.hasBasicLands = false;
-        CardGraphicInfo cardGraphicInfo = new CardGraphicInfo(FrameStyle.KLD_INVENTION, false);
 
         cards.add(new SetCardInfo("Aggravated Assault", 25, Rarity.SPECIAL, mage.cards.a.AggravatedAssault.class));
         cards.add(new SetCardInfo("Armageddon", 31, Rarity.SPECIAL, mage.cards.a.Armageddon.class));

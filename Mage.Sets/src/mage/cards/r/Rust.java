@@ -28,17 +28,13 @@
 package mage.cards.r;
 
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AbilityType;
 import mage.constants.CardType;
-import mage.filter.FilterStackObject;
-import mage.filter.predicate.Predicate;
-import mage.game.Game;
-import mage.game.stack.StackAbility;
-import mage.target.common.TargetActivatedOrTriggeredAbility;
+import mage.filter.FilterAbility;
+import mage.filter.predicate.ability.ArtifactSourcePredicate;
+import mage.target.common.TargetActivatedAbility;
 
 /**
  *
@@ -46,7 +42,7 @@ import mage.target.common.TargetActivatedOrTriggeredAbility;
  */
 public class Rust extends CardImpl {
 
-    private final static FilterStackObject filter = new FilterStackObject("activated ability from an artifact source");
+    private final static FilterAbility filter = new FilterAbility("activated ability from an artifact source");
 
     static {
         filter.add(new ArtifactSourcePredicate());
@@ -57,7 +53,7 @@ public class Rust extends CardImpl {
 
         // Counter target activated ability from an artifact source.
         this.getSpellAbility().addEffect(new CounterTargetEffect());
-        this.getSpellAbility().addTarget(new TargetActivatedOrTriggeredAbility(filter));
+        this.getSpellAbility().addTarget(new TargetActivatedAbility(filter));
     }
 
     public Rust(final Rust card) {
@@ -67,24 +63,5 @@ public class Rust extends CardImpl {
     @Override
     public Rust copy() {
         return new Rust(this);
-    }
-}
-
-class ArtifactSourcePredicate implements Predicate<Ability> {
-
-    public ArtifactSourcePredicate() {
-    }
-
-    @Override
-    public boolean apply(Ability input, Game game) {
-        if (input instanceof StackAbility) {
-            return input.getSourceObject(game).isArtifact() && input.getAbilityType() == AbilityType.ACTIVATED;
-        }
-        return false;
-    }
-
-    @Override
-    public String toString() {
-        return "Source(Artifact)";
     }
 }

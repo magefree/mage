@@ -86,7 +86,7 @@ class TormentOfHailfireEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             int repeat = source.getManaCostsToPay().getX();
-            for (int i = 0; i < repeat; i++) {
+            for (int i = 1; i <= repeat; i++) {
                 for (UUID opponentId : game.getOpponents(source.getControllerId())) {
                     Player opponent = game.getPlayer(opponentId);
                     if (opponent != null) {
@@ -97,8 +97,9 @@ class TormentOfHailfireEffect extends OneShotEffect {
                             if (opponent.choose(outcome, target, source.getSourceId(), game)) {
                                 Permanent permanent = game.getPermanent(target.getFirstTarget());
                                 if (permanent != null) {
-                                    permanent.sacrifice(source.getSourceId(), game);
-                                    continue;
+                                    if (permanent.sacrifice(source.getSourceId(), game)) {
+                                        continue;
+                                    }
                                 }
                             }
                         }

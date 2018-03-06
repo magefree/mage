@@ -35,7 +35,6 @@ import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.AdjustingSourceCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.GainLifeTargetEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.effects.common.RegenerateSourceEffect;
@@ -58,7 +57,7 @@ import mage.util.CardUtil;
 public class LaquatussChampion extends CardImpl {
 
     public LaquatussChampion(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
         this.subtype.add(SubType.NIGHTMARE);
         this.subtype.add(SubType.HORROR);
 
@@ -126,9 +125,7 @@ class LaquatussChampionLeavesBattlefieldTriggeredAbility extends LeavesBattlefie
             String key = CardUtil.getCardZoneString("targetPlayer", this.getSourceId(), game, true);
             Object object = game.getState().getValue(key);
             if (object instanceof UUID) {
-                for (Effect effect : this.getEffects()) {
-                    effect.setTargetPointer(new FixedTarget((UUID) object));
-                }
+                this.getEffects().setTargetPointer(new FixedTarget((UUID) object));
                 return true;
             }
         }

@@ -44,7 +44,7 @@ public class TargetActivatedOrTriggeredAbility extends TargetObject {
     protected final FilterStackObject filter;
 
     public TargetActivatedOrTriggeredAbility() {
-        this(new FilterStackObject());
+        this(new FilterStackObject("activated or triggered ability"));
     }
 
     public TargetActivatedOrTriggeredAbility(FilterStackObject filter) {

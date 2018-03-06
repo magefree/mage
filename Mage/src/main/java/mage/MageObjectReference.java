@@ -47,7 +47,7 @@ public class MageObjectReference implements Comparable<MageObjectReference>, Ser
     private static final Logger logger = Logger.getLogger(MageObjectReference.class);
 
     private final UUID sourceId;
-    private int zoneChangeCounter;
+    private final int zoneChangeCounter;
 
     public MageObjectReference(MageObject mageObject, Game game) {
         this.sourceId = mageObject.getId();
@@ -166,9 +166,5 @@ public class MageObjectReference implements Comparable<MageObjectReference>, Ser
             return card;
         }
         return null;
-    }
-
-    public void setZoneChangeCounter(int zoneChangeCounter) {
-        this.zoneChangeCounter = zoneChangeCounter;
     }
 }

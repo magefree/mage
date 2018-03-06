@@ -117,7 +117,7 @@ Magic 2013|M13|
 Magic 2014|M14|
 Magic 2015|M15|
 Core 2019|M19|
-Masters 25|M25|
+Masters 25|A25|
 Magic: The Gathering-Commander|CMD|
 Magic: The Gathering-Conspiracy|CNS|
 Media Inserts|MBP|

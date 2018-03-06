@@ -179,7 +179,13 @@ public final class StaticFilters {
 
     static {
         FILTER_CONTROLLED_CREATURE.setLockedFilter(true);
+    }    
+    public static final FilterControlledCreaturePermanent FILTER_CONTROLLED_CREATURES = new FilterControlledCreaturePermanent("creatures you control");
+
+    static {
+        FILTER_CONTROLLED_CREATURES.setLockedFilter(true);
     }
+    
     public static final FilterControlledCreaturePermanent FILTER_CONTROLLED_A_CREATURE = new FilterControlledCreaturePermanent("a creature you control");
 
     static {

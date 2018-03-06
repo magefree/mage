@@ -171,6 +171,7 @@ public class FutureSight extends ExpansionSet {
         cards.add(new SetCardInfo("Petrified Plating", 133, Rarity.COMMON, mage.cards.p.PetrifiedPlating.class));
         cards.add(new SetCardInfo("Phosphorescent Feast", 149, Rarity.UNCOMMON, mage.cards.p.PhosphorescentFeast.class));
         cards.add(new SetCardInfo("Pooling Venom", 74, Rarity.UNCOMMON, mage.cards.p.PoolingVenom.class));
+        cards.add(new SetCardInfo("Putrid Cyclops", 75, Rarity.COMMON, mage.cards.p.PutridCyclops.class));
         cards.add(new SetCardInfo("Pyromancer's Swath", 104, Rarity.RARE, mage.cards.p.PyromancersSwath.class));
         cards.add(new SetCardInfo("Quagnoth", 150, Rarity.RARE, mage.cards.q.Quagnoth.class));
         cards.add(new SetCardInfo("Quiet Disrepair", 134, Rarity.COMMON, mage.cards.q.QuietDisrepair.class));
@@ -189,6 +190,7 @@ public class FutureSight extends ExpansionSet {
         cards.add(new SetCardInfo("Scout's Warning", 16, Rarity.RARE, mage.cards.s.ScoutsWarning.class));
         cards.add(new SetCardInfo("Second Wind", 57, Rarity.UNCOMMON, mage.cards.s.SecondWind.class));
         cards.add(new SetCardInfo("Seht's Tiger", 31, Rarity.RARE, mage.cards.s.SehtsTiger.class));
+        cards.add(new SetCardInfo("Shah of Naar Isle", 119, Rarity.RARE, mage.cards.s.ShahOfNaarIsle.class));
         cards.add(new SetCardInfo("Shapeshifter's Marrow", 58, Rarity.RARE, mage.cards.s.ShapeshiftersMarrow.class));
         cards.add(new SetCardInfo("Shimian Specter", 76, Rarity.RARE, mage.cards.s.ShimianSpecter.class));
         cards.add(new SetCardInfo("Shivan Sand-Mage", 108, Rarity.UNCOMMON, mage.cards.s.ShivanSandMage.class));
@@ -206,6 +208,7 @@ public class FutureSight extends ExpansionSet {
         cards.add(new SetCardInfo("Spirit en-Dal", 17, Rarity.UNCOMMON, mage.cards.s.SpiritEnDal.class));
         cards.add(new SetCardInfo("Sporoloth Ancient", 152, Rarity.COMMON, mage.cards.s.SporolothAncient.class));
         cards.add(new SetCardInfo("Sprout Swarm", 138, Rarity.COMMON, mage.cards.s.SproutSwarm.class));
+        cards.add(new SetCardInfo("Steamflogger Boss", 121, Rarity.RARE, mage.cards.s.SteamfloggerBoss.class));
         cards.add(new SetCardInfo("Storm Entity", 122, Rarity.UNCOMMON, mage.cards.s.StormEntity.class));
         cards.add(new SetCardInfo("Street Wraith", 90, Rarity.UNCOMMON, mage.cards.s.StreetWraith.class));
         cards.add(new SetCardInfo("Stronghold Rats", 79, Rarity.UNCOMMON, mage.cards.s.StrongholdRats.class));
@@ -215,6 +218,7 @@ public class FutureSight extends ExpansionSet {
         cards.add(new SetCardInfo("Tarmogoyf", 153, Rarity.RARE, mage.cards.t.Tarmogoyf.class));
         cards.add(new SetCardInfo("Tarox Bladewing", 123, Rarity.RARE, mage.cards.t.TaroxBladewing.class));
         cards.add(new SetCardInfo("Thornweald Archer", 154, Rarity.COMMON, mage.cards.t.ThornwealdArcher.class));
+        cards.add(new SetCardInfo("Thunderblade Charge", 124, Rarity.RARE, mage.cards.t.ThunderbladeCharge.class));
         cards.add(new SetCardInfo("Tolaria West", 173, Rarity.UNCOMMON, mage.cards.t.TolariaWest.class));
         cards.add(new SetCardInfo("Tombstalker", 91, Rarity.RARE, mage.cards.t.Tombstalker.class));
         cards.add(new SetCardInfo("Unblinking Bleb", 45, Rarity.COMMON, mage.cards.u.UnblinkingBleb.class));

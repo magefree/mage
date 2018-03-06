@@ -37,16 +37,13 @@ import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.abilities.keyword.BandingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AbilityType;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
-import mage.filter.FilterStackObject;
-import mage.filter.predicate.Predicate;
-import mage.game.Game;
-import mage.game.stack.StackAbility;
-import mage.target.common.TargetActivatedOrTriggeredAbility;
+import mage.filter.FilterAbility;
+import mage.filter.predicate.ability.ArtifactSourcePredicate;
+import mage.target.common.TargetActivatedAbility;
 
 /**
  *
@@ -54,26 +51,26 @@ import mage.target.common.TargetActivatedOrTriggeredAbility;
  */
 public class AyeshaTanaka extends CardImpl {
 
-    private final static FilterStackObject filter = new FilterStackObject("activated ability from an artifact source");
+    private final static FilterAbility filter = new FilterAbility("activated ability from an artifact source");
 
     static {
         filter.add(new ArtifactSourcePredicate());
     }
 
     public AyeshaTanaka(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{W}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{W}{U}{U}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ARTIFICER);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        
+
         // Banding
         this.addAbility(BandingAbility.getInstance());
 
         // {T}: Counter target activated ability from an artifact source unless that ability's controller pays {W}.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterUnlessPaysEffect(new ManaCostsImpl("{W}")), new TapSourceCost());
-        ability.addTarget(new TargetActivatedOrTriggeredAbility(filter));
+        ability.addTarget(new TargetActivatedAbility(filter));
         this.addAbility(ability);
     }
 
@@ -84,24 +81,5 @@ public class AyeshaTanaka extends CardImpl {
     @Override
     public AyeshaTanaka copy() {
         return new AyeshaTanaka(this);
-    }
-}
-
-class ArtifactSourcePredicate implements Predicate<Ability> {
-
-    public ArtifactSourcePredicate() {
-    }
-
-    @Override
-    public boolean apply(Ability input, Game game) {
-        if (input instanceof StackAbility) {
-            return input.getSourceObject(game).isArtifact() && input.getAbilityType() == AbilityType.ACTIVATED;
-        }
-        return false;
-    }
-
-    @Override
-    public String toString() {
-        return "Source(Artifact)";
     }
 }

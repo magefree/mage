@@ -219,6 +219,7 @@ public class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Maggot Therapy", 145, Rarity.COMMON, mage.cards.m.MaggotTherapy.class));
         cards.add(new SetCardInfo("Magistrate's Scepter", 304, Rarity.RARE, mage.cards.m.MagistratesScepter.class));
         cards.add(new SetCardInfo("Magistrate's Veto", 204, Rarity.UNCOMMON, mage.cards.m.MagistratesVeto.class));
+        cards.add(new SetCardInfo("Mercadia's Downfall", 205, Rarity.UNCOMMON, mage.cards.m.MercadiasDownfall.class));
         cards.add(new SetCardInfo("Mercadian Bazaar", 321, Rarity.UNCOMMON, mage.cards.m.MercadianBazaar.class));
         cards.add(new SetCardInfo("Midnight Ritual", 146, Rarity.RARE, mage.cards.m.MidnightRitual.class));
         cards.add(new SetCardInfo("Misdirection", 87, Rarity.RARE, mage.cards.m.Misdirection.class));

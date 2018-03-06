@@ -1,15 +1,14 @@
 package mage.target.targetpointer;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.UUID;
 
 public class FixedTarget implements TargetPointer {
 
@@ -65,10 +64,7 @@ public class FixedTarget implements TargetPointer {
     public void init(Game game, Ability source) {
         if (!initialized) {
             initialized = true;
-            Card card = game.getCard(targetId);
-            if (card != null) {
-                this.zoneChangeCounter = card.getZoneChangeCounter(game);
-            }
+            this.zoneChangeCounter = game.getState().getZoneChangeCounter(targetId);
         }
     }
 
@@ -119,6 +115,12 @@ public class FixedTarget implements TargetPointer {
             permanent = (Permanent) game.getLastKnownInformation(targetId, Zone.BATTLEFIELD, zoneChangeCounter);
         }
         return permanent;
+    }
+
+    @Override
+    public FixedTarget getFixedTarget(Game game, Ability source) {
+        init(game, source);
+        return this;
     }
 
 }

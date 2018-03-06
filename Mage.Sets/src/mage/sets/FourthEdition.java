@@ -142,6 +142,7 @@ public class FourthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Phantasmal Terrain", 89, Rarity.COMMON, mage.cards.p.PhantasmalTerrain.class));
         cards.add(new SetCardInfo("Phantom Monster", 90, Rarity.UNCOMMON, mage.cards.p.PhantomMonster.class));
         cards.add(new SetCardInfo("Pirate Ship", 91, Rarity.RARE, mage.cards.p.PirateShip.class));
+        cards.add(new SetCardInfo("Power Leak", 92, Rarity.COMMON, mage.cards.p.PowerLeak.class));
         cards.add(new SetCardInfo("Power Sink", 93, Rarity.COMMON, mage.cards.p.PowerSink.class));
         cards.add(new SetCardInfo("Prodigal Sorcerer", 94, Rarity.COMMON, mage.cards.p.ProdigalSorcerer.class));
         cards.add(new SetCardInfo("Psionic Entity", 95, Rarity.RARE, mage.cards.p.PsionicEntity.class));
@@ -263,6 +264,7 @@ public class FourthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Giant Strength", 196, Rarity.COMMON, mage.cards.g.GiantStrength.class));
         cards.add(new SetCardInfo("Goblin Balloon Brigade", 197, Rarity.UNCOMMON, mage.cards.g.GoblinBalloonBrigade.class));
         cards.add(new SetCardInfo("Goblin King", 198, Rarity.RARE, mage.cards.g.GoblinKing.class));
+        cards.add(new SetCardInfo("Goblin Rock Sled", 199, Rarity.COMMON, mage.cards.g.GoblinRockSled.class));
         cards.add(new SetCardInfo("Gray Ogre", 200, Rarity.COMMON, mage.cards.g.GrayOgre.class));
         cards.add(new SetCardInfo("Hill Giant", 201, Rarity.COMMON, mage.cards.h.HillGiant.class));
         cards.add(new SetCardInfo("Hurloon Minotaur", 202, Rarity.COMMON, mage.cards.h.HurloonMinotaur.class));

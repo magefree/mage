@@ -28,24 +28,22 @@
 package mage.cards.e;
 
 import java.util.UUID;
-import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
 import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
+import mage.target.TargetSource;
 
 /**
- *
- * @author MarcoMarin
+ * 
+ * @author L_J
  */
 public class EyeForAnEye extends CardImpl {
 
@@ -53,8 +51,7 @@ public class EyeForAnEye extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}{W}");
 
         // The next time a source of your choice would deal damage to you this turn, instead that source deals that much damage to you and Eye for an Eye deals that much damage to that source's controller.
-        this.addAbility(new EyeForAnEyeTriggeredAbility(new EyeForAnEyeEffect()));
-        
+        this.getSpellAbility().addEffect(new EyeForAnEyeEffect());
     }
 
     public EyeForAnEye(final EyeForAnEye card) {
@@ -67,48 +64,19 @@ public class EyeForAnEye extends CardImpl {
     }
 }
 
-class EyeForAnEyeTriggeredAbility extends TriggeredAbilityImpl {
+class EyeForAnEyeEffect extends ReplacementEffectImpl {
 
-    public EyeForAnEyeTriggeredAbility(Effect effect) {
-        super(Zone.BATTLEFIELD, effect);
-    }
-
-    public EyeForAnEyeTriggeredAbility(final EyeForAnEyeTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public EyeForAnEyeTriggeredAbility copy() {
-        return new EyeForAnEyeTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        MageObject sourceObject = game.getObject(event.getSourceId());
-        this.getEffects().get(0).setValue("damageAmount", event.getAmount());
-        this.getEffects().get(0).setTargetPointer(new FixedTarget(game.getControllerId(sourceObject.getId())));
-        return true;
-    }
-
-    @Override
-    public String getRule() {
-        return "The next time a source of your choice would deal damage to you this turn, instead that source deals that much damage to you and {this} deals that much damage to that source's controller.";
-    }
-}
-
-class EyeForAnEyeEffect extends OneShotEffect {
+    private final TargetSource damageSource;
 
     public EyeForAnEyeEffect() {
-        super(Outcome.Damage);
+        super(Duration.EndOfTurn, Outcome.RedirectDamage);
+        staticText = "The next time a source of your choice would deal damage to you this turn, instead that source deals that much damage to you and {this} deals that much damage to that source's controller";
+        this.damageSource = new TargetSource();
     }
 
     public EyeForAnEyeEffect(final EyeForAnEyeEffect effect) {
         super(effect);
+        this.damageSource = effect.damageSource.copy();
     }
 
     @Override
@@ -117,14 +85,47 @@ class EyeForAnEyeEffect extends OneShotEffect {
     }
 
     @Override
+    public void init(Ability source, Game game) {
+        this.damageSource.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), game);
+        super.init(source, game);
+    }
+
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DAMAGE_PLAYER;
+    }
+
+    @Override
     public boolean apply(Game game, Ability source) {
-        Integer damageAmount = (Integer) this.getValue("damageAmount");
-        UUID targetId = this.targetPointer.getFirst(game, source);
-        if (damageAmount != null && targetId != null) {
-            Player player = game.getPlayer(targetId);
-            if (player != null) {
-                    player.damage(damageAmount, targetId, game, false, true);
+        return true;
+    }
+
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        Player controller = game.getPlayer(source.getControllerId());
+        DamageEvent damageEvent = (DamageEvent) event;
+        if (controller != null) {
+            controller.damage(damageEvent.getAmount(), damageEvent.getSourceId(), game, damageEvent.isCombatDamage(), damageEvent.isPreventable(), damageEvent.getAppliedEffects());
+            UUID sourceControllerId = game.getControllerId(damageEvent.getSourceId());
+            if (sourceControllerId != null) {
+                Player sourceController = game.getPlayer(sourceControllerId);
+                if (sourceController != null) {
+                    sourceController.damage(damageEvent.getAmount(), source.getSourceId(), game, false, true);
                     return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        Player controller = game.getPlayer(source.getControllerId());
+        DamageEvent damageEvent = (DamageEvent) event;
+        if (controller != null) {
+            if (controller.getId() == damageEvent.getTargetId() && damageEvent.getSourceId().equals(damageSource.getFirstTarget())) {
+                this.discard();
+                return true;
             }
         }
         return false;

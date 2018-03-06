@@ -50,10 +50,10 @@ public class MerfolkRaiders extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
-        // Phasing
-        this.addAbility(PhasingAbility.getInstance());
         // Islandwalk
         this.addAbility(new IslandwalkAbility());
+        // Phasing
+        this.addAbility(PhasingAbility.getInstance());
     }
 
     public MerfolkRaiders(final MerfolkRaiders card) {

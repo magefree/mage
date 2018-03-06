@@ -118,10 +118,19 @@ public class ManaPool implements Serializable {
             // if manual payment and the needed mana type was not unlocked, nothing will be paid
             return false;
         }
+        ManaType possibleAsThoughtPoolManaType = null;
         if (autoPayment && autoPaymentRestricted && !wasManaAddedBeyondStock() && manaType != unlockedManaType) {
             // if automatic restricted payment and there is already mana in the pool
             // and the needed mana type was not unlocked, nothing will be paid
-            return false;
+            if (unlockedManaType != null) {
+                ManaPoolItem checkItem = new ManaPoolItem();
+                checkItem.add(unlockedManaType, 1);
+                possibleAsThoughtPoolManaType = game.getContinuousEffects().asThoughMana(manaType, checkItem, ability.getSourceId(), ability, ability.getControllerId(), game);
+            }
+            // Check if it's possible to use mana as thought for the unlocked manatype in the mana pool for this ability
+            if (possibleAsThoughtPoolManaType == null || possibleAsThoughtPoolManaType != unlockedManaType) {
+                return false; // if it's not possible return
+            }
         }
 
         if (getConditional(manaType, ability, filter, game, costToPay) > 0) {
@@ -138,7 +147,7 @@ public class ManaPool implements Serializable {
                     }
                 }
             }
-            if (manaType != unlockedManaType && autoPayment && autoPaymentRestricted && mana.count() == mana.getStock()) {
+            if (possibleAsThoughtPoolManaType == null && manaType != unlockedManaType && autoPayment && autoPaymentRestricted && mana.count() == mana.getStock()) {
                 // no mana added beyond the stock so don't auto pay this
                 continue;
             }

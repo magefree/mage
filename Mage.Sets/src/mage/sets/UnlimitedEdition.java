@@ -44,6 +44,7 @@ public class UnlimitedEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Black Lotus", 233, Rarity.RARE, mage.cards.b.BlackLotus.class));
         cards.add(new SetCardInfo("Black Vise", 234, Rarity.UNCOMMON, mage.cards.b.BlackVise.class));
         cards.add(new SetCardInfo("Black Ward", 189, Rarity.UNCOMMON, mage.cards.b.BlackWard.class));
+        cards.add(new SetCardInfo("Blaze of Glory", 190, Rarity.RARE, mage.cards.b.BlazeOfGlory.class));
         cards.add(new SetCardInfo("Blessing", 191, Rarity.RARE, mage.cards.b.Blessing.class));
         cards.add(new SetCardInfo("Blue Elemental Blast", 50, Rarity.COMMON, mage.cards.b.BlueElementalBlast.class));
         cards.add(new SetCardInfo("Blue Ward", 192, Rarity.UNCOMMON, mage.cards.b.BlueWard.class));
@@ -214,6 +215,7 @@ public class UnlimitedEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 290, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 291, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plateau", 292, Rarity.RARE, mage.cards.p.Plateau.class));
+        cards.add(new SetCardInfo("Power Leak", 72, Rarity.COMMON, mage.cards.p.PowerLeak.class));
         cards.add(new SetCardInfo("Power Sink", 73, Rarity.COMMON, mage.cards.p.PowerSink.class));
         cards.add(new SetCardInfo("Power Surge", 168, Rarity.RARE, mage.cards.p.PowerSurge.class));
         cards.add(new SetCardInfo("Prodigal Sorcerer", 74, Rarity.COMMON, mage.cards.p.ProdigalSorcerer.class));

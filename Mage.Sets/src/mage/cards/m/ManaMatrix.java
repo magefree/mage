@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  */
 public class ManaMatrix extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("instant and enchantment spells");
+    private static final FilterCard filter = new FilterCard("Instant and enchantment spells");
     
     static {
         filter.add(Predicates.or(

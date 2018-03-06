@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
 
 public class LyevDecree extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures your opponent controls");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures your opponents control");
     static {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
@@ -56,7 +56,7 @@ public class LyevDecree extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{W}");
 
 
-        // Detain up to two target creatures your opponent controls.
+        // Detain up to two target creatures your opponents control.
         this.getSpellAbility().addEffect(new DetainTargetEffect());
         Target target = new TargetCreaturePermanent(0,2,filter,false);
         this.getSpellAbility().addTarget(target);

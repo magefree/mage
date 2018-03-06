@@ -65,7 +65,7 @@ public class TotemArmorAbility extends SimpleStaticAbility {
 
     @Override
     public String getRule() {
-        return "Totem Armor <i>(If enchanted creature would be destroyed, instead remove all damage from it and destroy this Aura.)</i>";
+        return "Totem armor <i>(If enchanted creature would be destroyed, instead remove all damage from it and destroy this Aura.)</i>";
     }
 }
 

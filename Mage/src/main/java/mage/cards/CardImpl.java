@@ -29,7 +29,6 @@ package mage.cards;
 
 import java.lang.reflect.Constructor;
 import java.util.*;
-
 import mage.MageObject;
 import mage.MageObjectImpl;
 import mage.Mana;
@@ -165,6 +164,12 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             secondSideCardClazz = card.secondSideCardClazz;
             nightCard = card.nightCard;
         }
+        if (card.spellAbility != null) {
+            spellAbility = card.getSpellAbility().copy();
+        } else {
+            spellAbility = null;
+        }
+
         flipCard = card.flipCard;
         flipCardName = card.flipCardName;
         splitCard = card.splitCard;
@@ -177,6 +182,9 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         this.objectId = UUID.randomUUID();
         this.abilities.newOriginalId();
         this.abilities.setSourceId(objectId);
+        if (this.spellAbility != null) {
+            this.spellAbility.setSourceId(objectId);
+        }
     }
 
     public static Card createCard(String name, CardSetInfo setInfo) {
@@ -508,7 +516,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         Card mainCard = getMainCard();
         ZoneChangeEvent event = new ZoneChangeEvent(mainCard.getId(), ability.getId(), controllerId, fromZone, Zone.STACK);
         ZoneChangeInfo.Stack info
-                = new ZoneChangeInfo.Stack(event, new Spell(this, ability.copy(), controllerId, event.getFromZone()));
+                = new ZoneChangeInfo.Stack(event, new Spell(this, ability.getSpellAbilityToResolve(game), controllerId, event.getFromZone()));
         return ZonesHandler.cast(info, game);
     }
 

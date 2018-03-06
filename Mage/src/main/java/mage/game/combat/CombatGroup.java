@@ -173,21 +173,16 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
     public void assignDamageToAttackers(boolean first, Game game) {
         if (!blockers.isEmpty() && (!first || hasFirstOrDoubleStrike(game))) {
             // this should only come up if Butcher Orgg is granted the ability to block multiple blockers
-            boolean altDamageMethod = false;
             for (UUID blockerId : blockers) {
                 Permanent blocker = game.getPermanent(blockerId);
                 if (assignsDefendingPlayerAndOrDefendingCreaturesDividedDamage(blocker, blocker.getControllerId(), first, game, false)) {
-                    altDamageMethod = true;
+                    return;
                 }
             }
-            if (altDamageMethod) {
-                // this could be necessary to remake in the future (banding with Butcher Orgg?)
-                return;
-            }
-            if (attackers.size() == 1) {
-                singleAttackerDamage(first, game);
-            } else {
+            if (attackers.size() != 1) {
                 multiAttackerDamage(first, game);
+            // } else {
+                // singleAttackerDamage(first, game);
             }
         }
     }
@@ -462,10 +457,15 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
      * {@link #singleBlockerDamage}.
      *
      * Handles abilities like "{this} an block any number of creatures.".
+     * 
+     * Blocker damage for blockers blocking single creatures is handled in 
+     * the single/multi blocker methods, so this shouldn't be used anymore.
      *
      * @param first
      * @param game
+     * @deprecated
      */
+    @Deprecated
     private void singleAttackerDamage(boolean first, Game game) {
         Permanent blocker = game.getPermanent(blockers.get(0));
         Permanent attacker = game.getPermanent(attackers.get(0));
@@ -732,42 +732,35 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
 
         for (UUID uuid : attackers) {
             Permanent attacker = game.getPermanent(uuid);
-            // Check if there are enough blockers to have a legal block
-            if (attacker != null && this.blocked && attacker.getMinBlockedBy() > 1 && !blockers.isEmpty() && blockers.size() < attacker.getMinBlockedBy()) {
-                for (UUID blockerId : blockers) {
-                    Permanent blocker = game.getPermanent(blockerId);
-                    if (blocker != null) {
-                        blocker.setBlocking(blocker.getBlocking() - 1);
+            if (attacker != null && this.blocked) {
+                // Check if there are enough blockers to have a legal block
+                if (attacker.getMinBlockedBy() > 1 && !blockers.isEmpty() && blockers.size() < attacker.getMinBlockedBy()) {
+                    for (UUID blockerId : new ArrayList<>(blockers)) {
+                        game.getCombat().removeBlocker(blockerId, game);
                     }
-                }
-                blockers.clear();
-                blockerOrder.clear();
-                this.blocked = false;
-                if (!game.isSimulation()) {
-                    game.informPlayers(attacker.getLogName() + " can't be blocked except by " + attacker.getMinBlockedBy() + " or more creatures. Blockers discarded.");
-                }
-                blockWasLegal = false;
-            }
-            // Check if there are too many blockers (maxBlockedBy = 0 means no restrictions)
-            if (attacker != null && this.blocked && attacker.getMaxBlockedBy() > 0 && attacker.getMaxBlockedBy() < blockers.size()) {
-                for (UUID blockerId : blockers) {
-                    Permanent blocker = game.getPermanent(blockerId);
-                    if (blocker != null) {
-                        blocker.setBlocking(blocker.getBlocking() - 1);
+                    blockers.clear();
+                    blockerOrder.clear();
+                    if (!game.isSimulation()) {
+                        game.informPlayers(attacker.getLogName() + " can't be blocked except by " + attacker.getMinBlockedBy() + " or more creatures. Blockers discarded.");
                     }
+                    blockWasLegal = false;
                 }
-                blockers.clear();
-                blockerOrder.clear();
-                this.blocked = false;
-                if (!game.isSimulation()) {
-                    game.informPlayers(new StringBuilder(attacker.getLogName())
-                            .append(" can't be blocked by more than ").append(attacker.getMaxBlockedBy())
-                            .append(attacker.getMaxBlockedBy() == 1 ? " creature." : " creatures.")
-                            .append(" Blockers discarded.").toString());
+                // Check if there are too many blockers (maxBlockedBy = 0 means no restrictions)
+                if (attacker.getMaxBlockedBy() > 0 && attacker.getMaxBlockedBy() < blockers.size()) {
+                    for (UUID blockerId : new ArrayList<>(blockers)) {
+                        game.getCombat().removeBlocker(blockerId, game);
+                    }
+                    blockers.clear();
+                    blockerOrder.clear();
+                    if (!game.isSimulation()) {
+                        game.informPlayers(new StringBuilder(attacker.getLogName())
+                                .append(" can't be blocked by more than ").append(attacker.getMaxBlockedBy())
+                                .append(attacker.getMaxBlockedBy() == 1 ? " creature." : " creatures.")
+                                .append(" Blockers discarded.").toString());
+                    }
+                    blockWasLegal = false;
                 }
-                blockWasLegal = false;
             }
-
         }
         return blockWasLegal;
     }

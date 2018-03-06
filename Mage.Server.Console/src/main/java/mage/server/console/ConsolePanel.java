@@ -345,22 +345,53 @@ public class ConsolePanel extends javax.swing.JPanel {
 
     private void btnEndSessionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEndSessionActionPerformed
         int row = this.tblUsers.convertRowIndexToModel(tblUsers.getSelectedRow());
-        ConsoleFrame.getSession().endUserSession((String) tableUserModel.getValueAt(row, TableUserModel.POS_GAME_INFO));
+        String userSessionId = (String) tableUserModel.getValueAt(row, TableUserModel.POS_GAME_INFO);
+        
+        if (JOptionPane.showConfirmDialog(null, "Are you sure you mean to end userSessionId " + userSessionId + '?', "WARNING",
+                    JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            ConsoleFrame.getSession().endUserSession(userSessionId);
+        }
     }//GEN-LAST:event_btnEndSessionActionPerformed
 
     private void btnMuteUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMuteUserActionPerformed
-        int row = this.tblUsers.convertRowIndexToModel(tblUsers.getSelectedRow());
-        ConsoleFrame.getSession().muteUserChat((String) tableUserModel.getValueAt(row, TableUserModel.POS_USER_NAME), ((Number) spinnerMuteDurationMinutes.getValue()).longValue());
+         int row = this.tblUsers.convertRowIndexToModel(tblUsers.getSelectedRow());
+        String userName = (String) tableUserModel.getValueAt(row, TableUserModel.POS_USER_NAME);
+        long durationMinute = ((Number) spinnerMuteDurationMinutes.getValue()).longValue();
+        if (JOptionPane.showConfirmDialog(null, "Are you sure you mean to mute user: " + userName + " for " + durationMinute + " minutes?", "WARNING",
+                    JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            ConsoleFrame.getSession().muteUserChat(userName, durationMinute);
+        }
     }//GEN-LAST:event_btnMuteUserActionPerformed
 
     private void btnDeActivateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeActivateActionPerformed
         int row = this.tblUsers.convertRowIndexToModel(tblUsers.getSelectedRow());
-        ConsoleFrame.getSession().toggleActivation((String) tableUserModel.getValueAt(row, TableUserModel.POS_USER_NAME));
+        String userName = (String) tableUserModel.getValueAt(row, TableUserModel.POS_USER_NAME);
+        
+        if (JOptionPane.showConfirmDialog(null, "Did you want to set user: " + userName + " to active?", "WARNING",
+                JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            ConsoleFrame.getSession().setActivation(userName, true);
+            return;
+        }
+        if (JOptionPane.showConfirmDialog(null, "Did you want to set user: " + userName + " to inactive?", "WARNING",
+                JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+           ConsoleFrame.getSession().setActivation(userName, false);
+           return;
+        }
+        if (JOptionPane.showConfirmDialog(null, "Are you sure you mean to toggle activation for user: " + userName + '?', "WARNING",
+                JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                ConsoleFrame.getSession().toggleActivation(userName);
+                return;
+        }
     }//GEN-LAST:event_btnDeActivateActionPerformed
 
     private void btnLockUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLockUserActionPerformed
         int row = this.tblUsers.convertRowIndexToModel(tblUsers.getSelectedRow());
-        ConsoleFrame.getSession().lockUser((String) tableUserModel.getValueAt(row, TableUserModel.POS_USER_NAME), ((Number) spinnerMuteDurationMinutes.getValue()).longValue());
+        String userName = (String) tableUserModel.getValueAt(row, TableUserModel.POS_USER_NAME);
+        long durationMinute = ((Number) spinnerMuteDurationMinutes.getValue()).longValue();
+        if (JOptionPane.showConfirmDialog(null, "Are you sure you mean to lock user: " + userName + " for " + durationMinute + " minutes?", "WARNING",
+                    JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            ConsoleFrame.getSession().lockUser(userName, durationMinute);
+        }
     }//GEN-LAST:event_btnLockUserActionPerformed
 
     private void btnRemoveTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveTableActionPerformed
