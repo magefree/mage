@@ -45,6 +45,7 @@ import mage.server.draft.CubeFactory;
 import mage.server.game.DeckValidatorFactory;
 import mage.server.game.GameFactory;
 import mage.server.game.PlayerFactory;
+import mage.server.graphql.HttpMain;
 import mage.server.http.Application;
 import mage.server.http.util.JwtAuthHelper;
 import mage.server.record.UserStatsRepository;
@@ -235,7 +236,6 @@ public final class Main {
                 logger.info("Started MAGE server - listening on " + connection.toString());
 
                 HttpMain.main(new String[]{});
-
                 if (testMode) {
                     logger.info("MAGE server running in test mode");
                 }

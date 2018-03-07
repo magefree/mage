@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Subscriptions over Web Sockets</title>
+    <style>
+        body {
+            font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+            font-weight: 300;
+        }
+
+        .networking {
+            display: none;
+        }
+
+        .stockTicker {
+            border: solid black 1px;
+            margin: 2px;
+            min-height: 400px
+        }
+
+        .stockWrapper {
+            display: block;
+            padding: 20px;
+            font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+            font-weight: 300;
+        }
+
+        .stockSymbol {
+            font-weight: 600;
+        }
+
+        .stockPrice {
+            font-weight: 600;
+            color: red;
+        }
+
+        .stockUp {
+            font-weight: 600;
+            color: green;
+        }
+    </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script>
+
+        function networkBlip() {
+
+            var $networking = $('.networking');
+            if (!$networking.is(":visible")) {
+                $networking.show(100, function () {
+                    var $that = $(this);
+                    setTimeout(function () {
+                        $that.hide();
+                    }, 500)
+                });
+            }
+        }
+
+        function subscribeToStocks() {
+
+            var exampleSocket = new WebSocket("ws://localhost:3000/stockticker");
+            networkBlip();
+
+            exampleSocket.onopen = function () {
+                networkBlip();
+                console.log("web socket opened");
+
+                var query = 'subscription StockCodeSubscription { \n' +
+                    '    stockQuotes {' +
+                    '       dateTime\n' +
+                    '       stockCode\n' +
+                    '       stockPrice\n' +
+                    '       stockPriceChange\n' +
+                    '     }' +
+                    '}';
+                var graphqlMsg = {
+                    query: query,
+                    variables: {}
+                };
+                exampleSocket.send(JSON.stringify(graphqlMsg));
+            };
+
+            var STOCK_CODES_UPDATES = {};
+
+            exampleSocket.onmessage = function (event) {
+                networkBlip();
+
+                var data = event.data;
+                var msg = JSON.parse(data);
+                console.log(data);
+                var stockCode = msg.stockCode;
+                var stockList = STOCK_CODES_UPDATES[stockCode];
+                if (stockList) {
+                    if (stockList.length > 7) {
+                        stockList.shift()
+                    }
+                    stockList.push(msg)
+                } else {
+                    STOCK_CODES_UPDATES[stockCode] = [msg];
+                }
+
+                var htmlStr = '';
+                Object.keys(STOCK_CODES_UPDATES).forEach(function (stockCode) {
+                    var stockList = STOCK_CODES_UPDATES[stockCode];
+                    htmlStr += '<div class="stockWrapper">';
+                    htmlStr += '<span class="stockSymbol"> ' + stockCode + ' </span>';
+                    stockList.forEach(function (stock) {
+                        var stockPrice = stock['stockPrice'];
+
+                        if (stock.stockPriceChange > 0) {
+                            htmlStr += '<span class="stockPrice, stockUp">$' + stockPrice + '</span>';
+                        } else {
+                            htmlStr += '<span class="stockPrice">$' + stockPrice + '</span>';
+                        }
+                        htmlStr += ', ';
+                    });
+                    htmlStr += '</div>';
+                });
+                $('.stockTicker').html(htmlStr)
+            };
+        }
+
+        window.addEventListener("load", subscribeToStocks);
+    </script>
+</head>
+<body>
+
+<div class="jumbotron text-center">
+    <h2>graphql-java Subscriptions</h2>
+    <p>An example of graphql-java subscriptions sending the continous updates over websockets</p>
+</div>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-1">
+            <img src="https://avatars1.githubusercontent.com/u/14289921?s=200&v=4"
+                 class="img-thumbnail" alt="graphql-java" width="400" height="400">
+        </div>
+        <div class="col-sm-3">
+            <h3>Explanation</h3>
+            <p>This demonstrates the use of graphql subscriptions and web sockets to send a stream of imagined stock
+                price
+                updates to this page.</p>
+            <p>The updates are continuously sent from a server side publish and subscribe system (RxJava in this case)
+                and
+                pushed
+                down to the browser client while applying graphql shapes to the subscription data</p>
+            <p>The graphql query used in this example is :</p>
+            <pre>
+subscription StockCodeSubscription {
+    stockQuotes {
+        dateTime
+        stockCode
+        stockPrice
+        stockPriceChange
+    }
+}
+            </pre>
+        </div>
+        <div class="col-sm-8">
+            <h3>Stock Price Updates</h3>
+            <div class="stockTicker">Pending subscription...</div>
+            <div class="networking">📡</div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

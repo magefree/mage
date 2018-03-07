@@ -1,0 +1,22 @@
+#
+# Schemas must have at least a query root type
+#
+schema {
+    query: Query
+    subscription : Subscription
+}
+
+type Query {
+    helo : String
+}
+
+type Subscription {
+    stockQuotes(stockCodes:[String]) : StockPriceUpdate!
+}
+
+type StockPriceUpdate {
+    dateTime : String
+    stockCode : String
+    stockPrice : Float
+    stockPriceChange : Float
+}
