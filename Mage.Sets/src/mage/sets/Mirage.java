@@ -79,6 +79,7 @@ public class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Boomerang", 56, Rarity.COMMON, mage.cards.b.Boomerang.class));
         cards.add(new SetCardInfo("Breathstealer", 7, Rarity.COMMON, mage.cards.b.Breathstealer.class));
         cards.add(new SetCardInfo("Brushwagg", 106, Rarity.RARE, mage.cards.b.Brushwagg.class));
+        cards.add(new SetCardInfo("Builder's Bane", 160, Rarity.COMMON, mage.cards.b.BuildersBane.class));
         cards.add(new SetCardInfo("Burning Palm Efreet", 161, Rarity.UNCOMMON, mage.cards.b.BurningPalmEfreet.class));
         cards.add(new SetCardInfo("Burning Shield Askari", 162, Rarity.COMMON, mage.cards.b.BurningShieldAskari.class));
         cards.add(new SetCardInfo("Cadaverous Bloom", 318, Rarity.RARE, mage.cards.c.CadaverousBloom.class));
