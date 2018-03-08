@@ -33,6 +33,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -90,11 +91,10 @@ class PlayCreatureLandWatcher extends Watcher {
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.PLAY_LAND) {
-            
-            Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
-            if (permanent != null
-                    && permanent.isLand()
-                    && permanent.isCreature()
+            Card card = game.getCard(event.getTargetId());
+            if (card != null
+                    && card.isLand()
+                    && card.isCreature()
                     && !playerPlayedLand.contains(event.getPlayerId())) {
                 playerPlayedLand.add(event.getPlayerId());
                 landPlayed.add(event.getTargetId());
