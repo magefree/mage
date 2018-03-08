@@ -15,6 +15,7 @@
     <name>Mage Client</name>
 
     <dependencies>
+
         <dependency>
             <groupId>org.mage</groupId>
             <artifactId>mage</artifactId>
@@ -67,6 +68,11 @@
             <groupId>org.jetlang</groupId>
             <artifactId>jetlang</artifactId>
             <version>0.2.9</version>
+        </dependency>
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk-s3</artifactId>
+            <version>1.11.286</version>
         </dependency>
         <dependency>
             <groupId>com.jgoodies</groupId>

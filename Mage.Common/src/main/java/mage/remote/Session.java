@@ -38,6 +38,7 @@ import mage.remote.interfaces.PlayerActions;
 import mage.remote.interfaces.Replays;
 import mage.remote.interfaces.ServerState;
 import mage.remote.interfaces.Testable;
+import mage.remote.ActionData;
 
 /**
  * Extracted interface for SessionImpl class.
@@ -45,5 +46,5 @@ import mage.remote.interfaces.Testable;
  * @author noxx
  */
 public interface Session extends ClientData, Connect, GamePlay, GameTypes, ServerState, ChatSession, Feedback, PlayerActions, Replays, Testable {
-
+    public void appendJsonLog(ActionData actionData);
 }
