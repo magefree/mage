@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.game.match;
 
 import mage.constants.MatchTimeLimit;
@@ -61,6 +60,7 @@ public class MatchOptions implements Serializable {
     protected String password;
     protected SkillLevel skillLevel;
     protected boolean rollbackTurnsAllowed;
+    protected boolean spectatorsAllowed;
     protected int quitRatio;
     protected int edhPowerLevel;
     protected boolean rated;
@@ -79,8 +79,7 @@ public class MatchOptions implements Serializable {
         this.multiPlayer = false;
         this.numSeats = 2;
     }*/
-
-    public MatchOptions(String name, String gameType, boolean multiPlayer, int numSeats ) {
+    public MatchOptions(String name, String gameType, boolean multiPlayer, int numSeats) {
         this.name = name;
         this.gameType = gameType;
         this.password = "";
@@ -178,7 +177,7 @@ public class MatchOptions implements Serializable {
     public MatchTimeLimit getMatchTimeLimit() {
         return this.matchTimeLimit;
     }
-    
+
     public void setMatchTimeLimit(MatchTimeLimit matchTimeLimit) {
         this.matchTimeLimit = matchTimeLimit;
     }
@@ -207,6 +206,14 @@ public class MatchOptions implements Serializable {
         this.rollbackTurnsAllowed = rollbackTurnsAllowed;
     }
 
+    public boolean isSpectatorsAllowed() {
+        return spectatorsAllowed;
+    }
+
+    public void setSpectatorsAllowed(boolean spectatorsAllowed) {
+        this.spectatorsAllowed = spectatorsAllowed;
+    }
+
     public int getQuitRatio() {
         return quitRatio;
     }
@@ -214,7 +221,7 @@ public class MatchOptions implements Serializable {
     public void setQuitRatio(int quitRatio) {
         this.quitRatio = quitRatio;
     }
-    
+
     public int getEdhPowerLevel() {
         return edhPowerLevel;
     }

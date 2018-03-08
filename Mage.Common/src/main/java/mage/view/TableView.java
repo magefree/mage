@@ -65,6 +65,7 @@ public class TableView implements Serializable {
     private final boolean limited;
     private final boolean rated;
     private final boolean passworded;
+    private final boolean spectatorsAllowed;
 
     public TableView(Table table) {
         this.tableId = table.getId();
@@ -139,6 +140,7 @@ public class TableView implements Serializable {
             this.limited = table.getMatch().getOptions().isLimited();
             this.rated = table.getMatch().getOptions().isRated();
             this.passworded = !table.getMatch().getOptions().getPassword().isEmpty();
+            this.spectatorsAllowed = table.getMatch().getOptions().isSpectatorsAllowed();
         } else {
             // TOURNAMENT
             if (table.getTournament().getOptions().getNumberRounds() > 0) {
@@ -186,6 +188,7 @@ public class TableView implements Serializable {
             this.limited = table.getTournament().getOptions().getMatchOptions().isLimited();
             this.rated = table.getTournament().getOptions().getMatchOptions().isRated();
             this.passworded = !table.getTournament().getOptions().getPassword().isEmpty();
+            this.spectatorsAllowed = table.getTournament().getOptions().isWatchingAllowed();
         }
     }
 
@@ -200,6 +203,11 @@ public class TableView implements Serializable {
     public String getControllerName() {
         return controllerName;
     }
+    
+    public boolean getSpectatorsAllowed() {
+        return spectatorsAllowed;
+    }
+    
 
     public String getGameType() {
         return gameType;
