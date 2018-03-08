@@ -268,7 +268,7 @@ public enum WizardCardsImageSource implements CardImageSource {
         supportedSets.add("V17"); // From the Vault: Transform
         supportedSets.add("UST"); // Unstable
         supportedSets.add("RIX"); // Rivals of Ixalan
-//        supportedSets.add("A25"); // Masters 25
+        supportedSets.add("A25"); // Masters 25
 //        supportedSets.add("DOM"); // Dominaria
 //        supportedSets.add("M19"); // Core 2019
 
