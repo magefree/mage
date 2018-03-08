@@ -52,6 +52,7 @@ public class BuildersBane extends CardImpl {
     public BuildersBane(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{X}{R}");
 
+        // Destroy X target artifacts. Builder's Bane deals damage to each player equal to the number of artifacts he or she controlled put into a graveyard this way.
         this.getSpellAbility().addTarget(new TargetArtifactPermanent());
         this.getSpellAbility().addEffect(new BuildersBaneEffect());
     }
@@ -79,7 +80,7 @@ class BuildersBaneEffect extends OneShotEffect {
 
     public BuildersBaneEffect() {
         super(Outcome.DestroyPermanent);
-        this.staticText = "Destroy X target artifacts. Builder's Bane deals damage to each player equal to the number of artifacts he or she controlled put into a graveyard this way.";
+        this.staticText = "Destroy X target artifacts. {this} deals damage to each player equal to the number of artifacts he or she controlled put into a graveyard this way";
     }
 
     public BuildersBaneEffect(final BuildersBaneEffect effect) {
@@ -109,8 +110,10 @@ class BuildersBaneEffect extends OneShotEffect {
 
         // Builder's Bane deals damage to each player equal to the number of artifacts he or she controlled put into a graveyard this way.
         for (Map.Entry<UUID, Integer> entry : destroyedArtifactPerPlayer.entrySet()) {
-            Player player = game.getState().getPlayer(entry.getKey());
-            player.damage(entry.getValue(), source.getSourceId(), game, false, true);
+            Player player = game.getPlayer(entry.getKey());
+            if(player != null) {
+                player.damage(entry.getValue(), source.getSourceId(), game, false, true);
+            }
         }
 
         return true;
