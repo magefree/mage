@@ -29,7 +29,6 @@ package mage.cards.n;
 
 import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -48,7 +47,7 @@ import mage.target.targetpointer.FixedTarget;
 public class NoMercy extends CardImpl {
 
     public NoMercy(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");
 
         // Whenever a creature deals damage to you, destroy it.
         this.addAbility(new NoMercyTriggeredAbility());
@@ -88,9 +87,7 @@ public class NoMercy extends CardImpl {
             if (event.getPlayerId().equals(this.getControllerId())) {
                 Permanent permanent = game.getPermanent(event.getSourceId());
                 if (permanent != null && permanent.isCreature()) {
-                    for (Effect effect : this.getEffects()) {
-                        effect.setTargetPointer(new FixedTarget(event.getSourceId()));
-                    }
+                    this.getEffects().setTargetPointer(new FixedTarget(permanent, game));
                     return true;
                 }
             }
