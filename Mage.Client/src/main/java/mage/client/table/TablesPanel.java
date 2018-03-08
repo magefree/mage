@@ -1444,11 +1444,14 @@ class TableTableModel extends AbstractTableModel {
                         if (tables[arg0].isTournament()) {
                             return "Show";
                         } else {
-                            owner = tables[arg0].getControllerName();
+                            owner = tables[arg0].getControllerName();                            
                             if (SessionHandler.getSession() != null && owner.equals(SessionHandler.getUserName())) {
                                 return "";
                             }
-                            return "Watch";
+                            if (tables[arg0].getSpectatorsAllowed()) {
+                                return "Watch";
+                            }
+                            return "";
                         }
                     default:
                         return "";
