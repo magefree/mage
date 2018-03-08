@@ -281,7 +281,7 @@
     <Component class="javax.swing.JCheckBox" name="chkSpectatorsAllowed">
       <Properties>
         <Property name="text" type="java.lang.String" value="Spectators allowed"/>
-        <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;Allow to rollback to the start of previous turns&lt;br&gt;&#xa;if all players agree.&#xa;"/>
+        <Property name="toolTipText" type="java.lang.String" value="Allow spectators to view your game."/>
       </Properties>
     </Component>
 
