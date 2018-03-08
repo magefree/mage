@@ -27,16 +27,14 @@
  */
 package mage.remote;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.lang.reflect.UndeclaredThrowableException;
 import java.net.*;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
-import java.io.BufferedWriter;
-import java.io.PrintWriter;
-import java.io.FileWriter;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import mage.MageException;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.repository.CardInfo;
@@ -55,7 +53,6 @@ import mage.interfaces.callback.ClientCallback;
 import mage.players.PlayerType;
 import mage.players.net.UserData;
 import mage.utils.CompressUtil;
-import mage.remote.ActionData;
 import mage.view.*;
 import org.apache.log4j.Logger;
 import org.jboss.remoting.*;
@@ -896,10 +893,8 @@ public class SessionImpl implements Session {
     @Override
     public void appendJsonLog(ActionData actionData) {
         actionData.sessionId = getSessionId();
-
         String logFileName = "game-" + actionData.gameId + ".json";
-        System.out.println("Logging to " + logFileName);
-        try(PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(logFileName, true)))) {
+        try (PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(logFileName, true)))) {
             out.println(actionData.toJson());
         } catch (IOException e) {
             System.err.println(e);

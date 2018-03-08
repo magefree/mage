@@ -25,20 +25,17 @@
  * authors and should not be interpreted as representing official policies, either expressed
  * or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.remote;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import mage.remote.interfaces.*;
-
-import java.util.UUID;
-
-import com.google.gson.annotations.Expose;
 import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.annotations.Expose;
+import java.util.UUID;
 
 public class ActionData {
+
     @Expose
     public UUID gameId;
     @Expose
@@ -69,57 +66,59 @@ public class ActionData {
     }
 
     public class CustomExclusionStrategy implements ExclusionStrategy {
+
         // FIXME: Very crude way of whitelisting, as it applies to all levels of the JSON tree.
-        private final java.util.Set<String> KEEP = new java.util.HashSet<String>(
+        private final java.util.Set<String> KEEP = new java.util.HashSet<>(
                 java.util.Arrays.asList(
                         new String[]{
-                                "id",
-                                "choice",
-                                "damage",
-                                "abilityType",
-                                "ability",
-                                "abilities",
-                                "method",
-                                "data",
-                                "options",
-                                "life",
-                                "players",
-                                "zone",
-                                "step",
-                                "phase",
-                                "attackers",
-                                "blockers",
-                                "tapped",
-                                "damage",
-                                "combat",
-                                "paid",
-                                "hand",
-                                "stack",
-                                "convertedManaCost",
-                                "gameId",
-                                "canPlayInHand",
-                                "gameView",
-                                "sessionId",
-                                "power",
-                                "choices",
-                                "targets",
-                                "loyalty",
-                                "toughness",
-                                "power",
-                                "type",
-                                "priorityTime",
-                                "manaCost",
-                                "value",
-                                "message",
-                                "cardsView",
-                                "name",
-                                "count",
-                                "counters",
-                                "battlefield",
-                                "parentId"
+                            "id",
+                            "choice",
+                            "damage",
+                            "abilityType",
+                            "ability",
+                            "abilities",
+                            "method",
+                            "data",
+                            "options",
+                            "life",
+                            "players",
+                            "zone",
+                            "step",
+                            "phase",
+                            "attackers",
+                            "blockers",
+                            "tapped",
+                            "damage",
+                            "combat",
+                            "paid",
+                            "hand",
+                            "stack",
+                            "convertedManaCost",
+                            "gameId",
+                            "canPlayInHand",
+                            "gameView",
+                            "sessionId",
+                            "power",
+                            "choices",
+                            "targets",
+                            "loyalty",
+                            "toughness",
+                            "power",
+                            "type",
+                            "priorityTime",
+                            "manaCost",
+                            "value",
+                            "message",
+                            "cardsView",
+                            "name",
+                            "count",
+                            "counters",
+                            "battlefield",
+                            "parentId"
                         }));
 
-        public CustomExclusionStrategy() {}
+        public CustomExclusionStrategy() {
+        }
 
         // This method is called for all fields. if the method returns true the
         // field is excluded from serialization

@@ -1,27 +1,26 @@
 package mage.client.remote;
 
-import java.io.File;
-
 import com.amazonaws.AmazonClientException;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.transfer.TransferManager;
 import com.amazonaws.services.s3.transfer.Upload;
+import java.io.File;
 import org.apache.log4j.Logger;
 
-import javax.xml.crypto.Data;
-
-
 public class S3Uploader {
+
     private static final Logger logger = Logger.getLogger(S3Uploader.class);
 
     public static Boolean upload(String filePath, String keyName) throws Exception {
         String existingBucketName = System.getenv("S3_BUCKET") != null ? System.getenv("S3_BUCKET")
-                                                                       : "xmage-game-logs-dev";
+                : "xmage-game-logs-dev";
 
         String accessKeyId = System.getenv("AWS_ACCESS_ID");
         String secretKeyId = System.getenv("AWS_SECRET_KEY");
 
-        if(accessKeyId == "" || secretKeyId == "" || existingBucketName == "") {
+        if (accessKeyId == null || "".equals(accessKeyId)
+                || secretKeyId == null || "".equals(secretKeyId)
+                || existingBucketName == null || "".equals(existingBucketName)) {
             logger.info("Aborting json log sync.");
             return false;
         }
@@ -39,8 +38,7 @@ public class S3Uploader {
             new File(path);
             return true;
         } catch (AmazonClientException amazonClientException) {
-            System.out.println("Unable to upload file, upload was aborted.");
-            amazonClientException.printStackTrace();
+            logger.fatal("Unable to upload file, upload was aborted.", amazonClientException);
             return false;
         }
     }

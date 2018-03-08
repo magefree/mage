@@ -31,11 +31,7 @@ import java.awt.event.KeyEvent;
 import java.util.List;
 import java.util.UUID;
 import javax.swing.*;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import mage.cards.decks.Deck;
-import mage.client.remote.S3Uploader;
 import mage.client.MageFrame;
 import mage.client.SessionHandler;
 import mage.client.chat.ChatPanelBasic;
@@ -53,7 +49,6 @@ import mage.interfaces.callback.CallbackClient;
 import mage.interfaces.callback.ClientCallback;
 import mage.remote.ActionData;
 import mage.remote.Session;
-import mage.remote.SessionImpl;
 import mage.utils.CompressUtil;
 import mage.view.*;
 import mage.view.ChatMessage.MessageType;
@@ -410,6 +405,7 @@ public class CallbackClientImpl implements CallbackClient {
             }
         });
     }
+
     private ActionData appendJsonEvent(String name, UUID gameId, Object value) {
         Session session = SessionHandler.getSession();
         ActionData actionData = new ActionData(name, gameId);
@@ -417,6 +413,7 @@ public class CallbackClientImpl implements CallbackClient {
         session.appendJsonLog(actionData);
         return actionData;
     }
+
     private void createChatStartMessage(ChatPanelBasic chatPanel) {
         chatPanel.setStartMessageDone(true);
         ChatPanelBasic usedPanel = chatPanel;
