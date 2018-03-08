@@ -49,9 +49,11 @@ import mage.watchers.common.CreatureWasCastWatcher;
  * @author chrvanorle
  */
 public class UphillBattle extends CardImpl {
-    
+
     public UphillBattle(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
+
+        // Creatures played by your opponents enter the battlefield tapped.
         Ability tapAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, new UphillBattleTapEffect());
         tapAbility.addWatcher(new CreatureWasCastWatcher());
         tapAbility.addWatcher(new PlayCreatureLandWatcher());
@@ -118,7 +120,6 @@ class PlayCreatureLandWatcher extends Watcher {
     }
 }
 
-
 class UphillBattleTapEffect extends ReplacementEffectImpl {
 
     UphillBattleTapEffect() {
@@ -129,13 +130,13 @@ class UphillBattleTapEffect extends ReplacementEffectImpl {
     UphillBattleTapEffect(final UphillBattleTapEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent target = ((EntersTheBattlefieldEvent) event).getTarget();
         CreatureWasCastWatcher creatureSpellWatcher = (CreatureWasCastWatcher) game.getState().getWatchers().get(CreatureWasCastWatcher.class.getSimpleName());
         PlayCreatureLandWatcher landWatcher = (PlayCreatureLandWatcher) game.getState().getWatchers().get(PlayCreatureLandWatcher.class.getSimpleName());
-        
+
         if (target != null
                 && ((creatureSpellWatcher != null && creatureSpellWatcher.wasCreatureCastThisTurn(target.getId()))
                 || (landWatcher != null && landWatcher.wasLandPlayed(target.getId())))) {

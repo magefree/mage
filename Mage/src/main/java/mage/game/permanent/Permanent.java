@@ -59,7 +59,6 @@ public interface Permanent extends Card, Controllable {
      * @param tapped
      * @deprecated
      */
-    @Deprecated
     void setTapped(boolean tapped);
 
     boolean canTap();
