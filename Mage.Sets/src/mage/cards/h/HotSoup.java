@@ -104,10 +104,7 @@ class HotSoupTriggeredAbility extends TriggeredAbilityImpl {
         Permanent equipment = game.getPermanent(this.getSourceId());
         if (equipment != null && equipment.getAttachedTo() != null) {
             if (Objects.equals(event.getTargetId(), equipment.getAttachedTo())) {
-                for(Effect effect : this.getEffects())
-                {
-                    effect.setTargetPointer(new FixedTarget(equipment.getAttachedTo()));
-                }
+                this.getEffects().setTargetPointer(new FixedTarget(equipment.getAttachedTo(), game));
                 return true;
             }
         }
