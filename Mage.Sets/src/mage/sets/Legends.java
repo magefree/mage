@@ -135,6 +135,7 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Glyph of Destruction", 148, Rarity.COMMON, mage.cards.g.GlyphOfDestruction.class));
         cards.add(new SetCardInfo("Glyph of Doom", 14, Rarity.COMMON, mage.cards.g.GlyphOfDoom.class));
         cards.add(new SetCardInfo("Glyph of Life", 184, Rarity.COMMON, mage.cards.g.GlyphOfLife.class));
+        cards.add(new SetCardInfo("Gosta Dirk", 267, Rarity.RARE, mage.cards.g.GostaDirk.class));
         cards.add(new SetCardInfo("Gravity Sphere", 149, Rarity.RARE, mage.cards.g.GravitySphere.class));
         cards.add(new SetCardInfo("Great Defender", 185, Rarity.UNCOMMON, mage.cards.g.GreatDefender.class));
         cards.add(new SetCardInfo("Greater Realm of Preservation", 187, Rarity.UNCOMMON, mage.cards.g.GreaterRealmOfPreservation.class));
@@ -189,6 +190,7 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Lifeblood", 196, Rarity.RARE, mage.cards.l.Lifeblood.class));
         cards.add(new SetCardInfo("Living Plane", 107, Rarity.RARE, mage.cards.l.LivingPlane.class));
         cards.add(new SetCardInfo("Livonya Silone", 282, Rarity.RARE, mage.cards.l.LivonyaSilone.class));
+        cards.add(new SetCardInfo("Lord Magnus", 283, Rarity.UNCOMMON, mage.cards.l.LordMagnus.class));
         cards.add(new SetCardInfo("Lost Soul", 25, Rarity.COMMON, mage.cards.l.LostSoul.class));
         cards.add(new SetCardInfo("Mana Drain", 65, Rarity.UNCOMMON, mage.cards.m.ManaDrain.class));
         cards.add(new SetCardInfo("Mana Matrix", 230, Rarity.RARE, mage.cards.m.ManaMatrix.class));
@@ -282,6 +284,7 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Typhoon", 123, Rarity.RARE, mage.cards.t.Typhoon.class));
         cards.add(new SetCardInfo("Underworld Dreams", 38, Rarity.UNCOMMON, mage.cards.u.UnderworldDreams.class));
         cards.add(new SetCardInfo("Untamed Wilds", 124, Rarity.UNCOMMON, mage.cards.u.UntamedWilds.class));
+        cards.add(new SetCardInfo("Ur-Drago", 308, Rarity.RARE, mage.cards.u.UrDrago.class));
         cards.add(new SetCardInfo("Urborg", 255, Rarity.UNCOMMON, mage.cards.u.Urborg.class));
         cards.add(new SetCardInfo("Vaevictis Asmadi", 309, Rarity.RARE, mage.cards.v.VaevictisAsmadi.class));
         cards.add(new SetCardInfo("Vampire Bats", 39, Rarity.COMMON, mage.cards.v.VampireBats.class));
