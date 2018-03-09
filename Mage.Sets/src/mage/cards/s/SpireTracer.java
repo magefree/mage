@@ -76,7 +76,7 @@ class CantBeBlockedExceptByCreaturesWithFlyingOrReachEffect extends RestrictionE
 
     public CantBeBlockedExceptByCreaturesWithFlyingOrReachEffect() {
         super(Duration.WhileOnBattlefield);
-        staticText = "Can't be blocked except by creatures with flying or reach";
+        staticText = "{this} can't be blocked except by creatures with flying or reach";
     }
 
     public CantBeBlockedExceptByCreaturesWithFlyingOrReachEffect(final CantBeBlockedExceptByCreaturesWithFlyingOrReachEffect effect) {

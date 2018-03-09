@@ -131,6 +131,35 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
         }
     }
 
+    public Mana(final ManaType manaType) {
+        Objects.requireNonNull(manaType, "The passed in ManaType can not be null");
+        switch (manaType) {
+            case GREEN:
+                green = 1;
+                break;
+            case RED:
+                red = 1;
+                break;
+            case BLACK:
+                black = 1;
+                break;
+            case BLUE:
+                blue = 1;
+                break;
+            case WHITE:
+                white = 1;
+                break;
+            case COLORLESS:
+                colorless = 1;
+                break;
+            case GENERIC:
+                generic = 1;
+                break;
+            default:
+                throw new IllegalArgumentException("Unknown manaType: " + manaType);
+        }
+    }
+
     /**
      * Creates a {@link Mana} object with the passed in {@code num} of Red mana.
      * {@code num} can not be a negative value. Negative values will be logged
@@ -222,13 +251,12 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
     }
 
     /**
-     * Creates a {@link Mana} object with the passed in {@code num} of Any
-     * mana. {@code num} can not be a negative value. Negative values will be
-     * logged and set to 0.
+     * Creates a {@link Mana} object with the passed in {@code num} of Any mana.
+     * {@code num} can not be a negative value. Negative values will be logged
+     * and set to 0.
      *
      * @param num value of Any mana to create.
-     * @return a {@link Mana} object with the passed in {@code num} of Any
-     * mana.
+     * @return a {@link Mana} object with the passed in {@code num} of Any mana.
      */
     public static Mana AnyMana(int num) {
         return new Mana(0, 0, 0, 0, 0, 0, notNegative(num, "Any"), 0);
@@ -490,25 +518,46 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
         if (generic > 0) {
             sbMana.append('{').append(Integer.toString(generic)).append('}');
         }
-        for (int i = 0; i < colorless; i++) {
+        if (colorless >= 20) { 
+            sbMana.append(Integer.toString(colorless)).append("{C}");
+        }
+        if (white >= 20) { 
+            sbMana.append(Integer.toString(white)).append("{W}");
+        }
+        if (blue >= 20) { 
+            sbMana.append(Integer.toString(blue)).append("{U}");
+        }
+        if (black >= 20) { 
+            sbMana.append(Integer.toString(black)).append("{B}");
+        }
+        if (red >= 20) { 
+            sbMana.append(Integer.toString(red)).append("{R}");
+        }
+        if (green >= 20) { 
+            sbMana.append(Integer.toString(green)).append("{G}");
+        }
+        if (any >= 20) { 
+            sbMana.append(Integer.toString(any)).append("{Any}");
+        }
+        for (int i = 0; i < colorless && colorless < 20; i++) {
             sbMana.append("{C}");
         }
-        for (int i = 0; i < white; i++) {
+        for (int i = 0; i < white && white < 20; i++) {
             sbMana.append("{W}");
         }
-        for (int i = 0; i < blue; i++) {
+        for (int i = 0; i < blue && blue < 20; i++) {
             sbMana.append("{U}");
         }
-        for (int i = 0; i < black; i++) {
+        for (int i = 0; i < black && black < 20; i++) {
             sbMana.append("{B}");
         }
-        for (int i = 0; i < red; i++) {
+        for (int i = 0; i < red && red < 20; i++) {
             sbMana.append("{R}");
         }
-        for (int i = 0; i < green; i++) {
+        for (int i = 0; i < green && green < 20; i++) {
             sbMana.append("{G}");
         }
-        for (int i = 0; i < any; i++) {
+        for (int i = 0; i < any && any < 20; i++) {
             sbMana.append("{Any}");
         }
         return sbMana.toString();

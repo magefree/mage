@@ -107,11 +107,11 @@ class PandemoniumEffect extends OneShotEffect {
             if (enteringCreature != null) {
                 Permanent targetPermanent = game.getPermanent(source.getTargets().getFirstTarget());
                 if (targetPermanent != null) {
-                    targetPermanent.damage(enteringCreature.getPower().getValue(), source.getSourceId(), game, false, true);
+                    targetPermanent.damage(enteringCreature.getPower().getValue(), enteringCreature.getId(), game, false, true);
                 } else {
                     Player targetPlayer = game.getPlayer(source.getTargets().getFirstTarget());
                     if (targetPlayer != null) {
-                        targetPlayer.damage(enteringCreature.getPower().getValue(), source.getSourceId(), game, false, true);
+                        targetPlayer.damage(enteringCreature.getPower().getValue(), enteringCreature.getId(), game, false, true);
                     }
                 }
                 return true;

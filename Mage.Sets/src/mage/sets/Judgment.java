@@ -130,6 +130,7 @@ public class Judgment extends ExpansionSet {
         cards.add(new SetCardInfo("Mirari's Wake", 139, Rarity.RARE, mage.cards.m.MirarisWake.class));
         cards.add(new SetCardInfo("Mirror Wall", 47, Rarity.COMMON, mage.cards.m.MirrorWall.class));
         cards.add(new SetCardInfo("Mist of Stagnation", 48, Rarity.RARE, mage.cards.m.MistOfStagnation.class));
+        cards.add(new SetCardInfo("Morality Shift", 70, Rarity.RARE, mage.cards.m.MoralityShift.class));
         cards.add(new SetCardInfo("Nantuko Monastery", 142, Rarity.UNCOMMON, mage.cards.n.NantukoMonastery.class));
         cards.add(new SetCardInfo("Nantuko Tracer", 125, Rarity.COMMON, mage.cards.n.NantukoTracer.class));
         cards.add(new SetCardInfo("Nomad Mythmaker", 15, Rarity.RARE, mage.cards.n.NomadMythmaker.class));
@@ -163,6 +164,7 @@ public class Judgment extends ExpansionSet {
         cards.add(new SetCardInfo("Swelter", 101, Rarity.UNCOMMON, mage.cards.s.Swelter.class));
         cards.add(new SetCardInfo("Swirling Sandstorm", 102, Rarity.COMMON, mage.cards.s.SwirlingSandstorm.class));
         cards.add(new SetCardInfo("Sylvan Safekeeper", 133, Rarity.RARE, mage.cards.s.SylvanSafekeeper.class));
+        cards.add(new SetCardInfo("Telekinetic Bonds", 52, Rarity.RARE, mage.cards.t.TelekineticBonds.class));
         cards.add(new SetCardInfo("Test of Endurance", 29, Rarity.RARE, mage.cards.t.TestOfEndurance.class));
         cards.add(new SetCardInfo("Thriss, Nantuko Primus", 134, Rarity.RARE, mage.cards.t.ThrissNantukoPrimus.class));
         cards.add(new SetCardInfo("Toxic Stench", 74, Rarity.COMMON, mage.cards.t.ToxicStench.class));

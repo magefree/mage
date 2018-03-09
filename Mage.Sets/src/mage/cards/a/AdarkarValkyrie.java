@@ -109,7 +109,7 @@ class AdarkarValkyrieEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        DelayedTriggeredAbility delayedAbility = new AdarkarValkyrieDelayedTriggeredAbility(new FixedTarget(this.getTargetPointer().getFirst(game, source)));
+        DelayedTriggeredAbility delayedAbility = new AdarkarValkyrieDelayedTriggeredAbility(getTargetPointer().getFixedTarget(game, source));
         game.addDelayedTriggeredAbility(delayedAbility, source);
         return false;
     }

@@ -57,7 +57,7 @@ public class TargetActivatedAbility extends TargetObject {
         this.minNumberOfTargets = 1;
         this.maxNumberOfTargets = 1;
         this.zone = Zone.STACK;
-        this.targetName = "activated ability";
+        this.targetName = filter.getMessage();
         this.filter = filter;
     }
 

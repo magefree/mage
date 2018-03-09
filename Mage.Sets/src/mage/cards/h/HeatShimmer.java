@@ -29,10 +29,9 @@ package mage.cards.h;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.delayed.AtTheEndOfTurnStepPostDelayedTriggeredAbility;
-import mage.abilities.effects.Effect;
+import mage.abilities.DelayedTriggeredAbility;
+import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.cards.CardImpl;
@@ -52,7 +51,7 @@ import mage.target.targetpointer.FixedTarget;
 public class HeatShimmer extends CardImpl {
 
     public HeatShimmer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{R}");
 
         // Create a token that's a copy of target creature. That token has haste and "At the beginning of the end step, exile this permanent."
         this.getSpellAbility().addEffect(new HeatShimmerEffect());
@@ -89,15 +88,15 @@ class HeatShimmerEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
-        if (controller != null && permanent != null) {
+        if (controller != null
+                && permanent != null) {
             CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(source.getControllerId(), null, true);
             effect.setTargetPointer(new FixedTarget(permanent, game));
             effect.apply(game, source);
-            for (Permanent addedToken : effect.getAddedPermanent()) {
-                Effect exileEffect = new ExileTargetEffect();
-                exileEffect.setTargetPointer(new FixedTarget(addedToken, game));
-                new CreateDelayedTriggeredAbilityEffect(new AtTheEndOfTurnStepPostDelayedTriggeredAbility(exileEffect), false).apply(game, source);
-            }
+            ExileTargetEffect exileEffect = new ExileTargetEffect();
+            exileEffect.setTargetPointer(new FixedTarget(effect.getAddedPermanent().get(0), game));
+            DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);
+            game.addDelayedTriggeredAbility(delayedAbility, source);
             return true;
         }
         return false;

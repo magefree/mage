@@ -45,7 +45,7 @@ public class CantBeBlockedByCreaturesAllEffect extends RestrictionEffect {
     private final FilterCreaturePermanent filterCreatures;
 
     public CantBeBlockedByCreaturesAllEffect(FilterCreaturePermanent filterCreatures, FilterCreaturePermanent filterBlockedBy, Duration duration) {
-        super(Duration.WhileOnBattlefield);
+        super(duration);
         this.filterCreatures = filterCreatures;
         this.filterBlockedBy = filterBlockedBy;
         staticText = new StringBuilder(filterCreatures.getMessage()).append(" can't be blocked ")

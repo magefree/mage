@@ -1097,6 +1097,8 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (!ignoreTiming && !playLandAbility.canActivate(this.playerId, game)) {
             return false;
         }
+        
+        game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PLAY_LAND, card.getId(), card.getId(), playerId));
         //20091005 - 305.1
         if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.PLAY_LAND, card.getId(), card.getId(), playerId))) {
             // int bookmark = game.bookmarkState();
@@ -1113,7 +1115,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             // what makes no real sense. So it makes no sense to generally do a restorState here.
             // restoreState(bookmark, card.getName(), game);
         }
-        // if the to play the land is replaced (e.g. Kjeldoran Outpos and don't sacrificing a Plains) it's a valid satte so returning true here
+        // if the to play the land is replaced (e.g. Kjeldoran Outpos and don't sacrificing a Plains) it's a valid state so returning true here
         return true;
     }
 
@@ -1274,7 +1276,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         return false;
     }
 
-    protected LinkedHashMap<UUID, ActivatedAbility> getSpellAbilities(MageObject object, Zone zone, Game game) {
+    public LinkedHashMap<UUID, ActivatedAbility> getSpellAbilities(MageObject object, Zone zone, Game game) {
         LinkedHashMap<UUID, ActivatedAbility> useable = new LinkedHashMap<>();
         for (Ability ability : object.getAbilities()) {
             if (ability instanceof SpellAbility) {

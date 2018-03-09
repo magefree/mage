@@ -229,6 +229,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_NEW_TABLE_GAME_TYPE = "newTableGameType";
     public static final String KEY_NEW_TABLE_NUMBER_OF_WINS = "newTableNumberOfWins";
     public static final String KEY_NEW_TABLE_ROLLBACK_TURNS_ALLOWED = "newTableRollbackTurnsAllowed";
+    public static final String KEY_NEW_TABLE_SPECTATORS_ALLOWED = "newTableSpectatorsAllowed";
     public static final String KEY_NEW_TABLE_NUMBER_OF_FREE_MULLIGANS = "newTableNumberOfFreeMulligans";
     public static final String KEY_NEW_TABLE_DECK_FILE = "newTableDeckFile";
     public static final String KEY_NEW_TABLE_RANGE = "newTableRange";

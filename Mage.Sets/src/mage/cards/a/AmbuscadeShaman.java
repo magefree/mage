@@ -51,17 +51,17 @@ import mage.target.targetpointer.FixedTarget;
 public class AmbuscadeShaman extends CardImpl {
 
     public AmbuscadeShaman(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.subtype.add(SubType.ORC);
         this.subtype.add(SubType.SHAMAN);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
         // Whenever Ambuscade Shaman or another creature enters the battlefield under your control, that creature gets +2/+2 until end of turn.
-        Effect effect = new BoostTargetEffect(2,2, Duration.EndOfTurn);
+        Effect effect = new BoostTargetEffect(2, 2, Duration.EndOfTurn);
         effect.setText("that creature gets +2/+2 until end of turn");
         this.addAbility(new AmbuscadeShamanTriggeredAbility(effect));
-        
+
         // Dash {3}{B} <i>(You may cast this spell for its dash cost. If you do, it gains haste, and it's returned from the battlefield to its owner's hand at the beginning of the next end step.)</i>);
         this.addAbility(new DashAbility(this, "{3}{B}"));
 
@@ -103,9 +103,7 @@ class AmbuscadeShamanTriggeredAbility extends TriggeredAbilityImpl {
         Permanent permanent = game.getPermanent(targetId);
         if (permanent.getControllerId().equals(this.controllerId)
                 && permanent.isCreature()) {
-            for (Effect effect : this.getEffects()) {
-                effect.setTargetPointer(new FixedTarget(event.getTargetId()));
-            }
+            this.getEffects().setTargetPointer(new FixedTarget(permanent, game));
             return true;
         }
         return false;

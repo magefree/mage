@@ -219,6 +219,7 @@ public class Tempest extends ExpansionSet {
         cards.add(new SetCardInfo("Opportunist", 194, Rarity.UNCOMMON, mage.cards.o.Opportunist.class));
         cards.add(new SetCardInfo("Oracle en-Vec", 243, Rarity.RARE, mage.cards.o.OracleEnVec.class));
         cards.add(new SetCardInfo("Orim, Samite Healer", 244, Rarity.RARE, mage.cards.o.OrimSamiteHealer.class));
+        cards.add(new SetCardInfo("Orim's Prayer", 245, Rarity.UNCOMMON, mage.cards.o.OrimsPrayer.class));
         cards.add(new SetCardInfo("Overrun", 137, Rarity.UNCOMMON, mage.cards.o.Overrun.class));
         cards.add(new SetCardInfo("Pacifism", 246, Rarity.COMMON, mage.cards.p.Pacifism.class));
         cards.add(new SetCardInfo("Pallimud", 195, Rarity.RARE, mage.cards.p.Pallimud.class));

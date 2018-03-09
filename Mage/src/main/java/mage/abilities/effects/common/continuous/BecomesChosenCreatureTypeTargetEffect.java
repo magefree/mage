@@ -17,17 +17,24 @@ import mage.target.targetpointer.FixedTarget;
 public class BecomesChosenCreatureTypeTargetEffect extends OneShotEffect {
 
     private final boolean nonWall;
+    private final Duration duration;
 
     public BecomesChosenCreatureTypeTargetEffect() {
-        this(false);
+        this(false, Duration.EndOfTurn);
     }
 
     public BecomesChosenCreatureTypeTargetEffect(boolean nonWall) {
+        this(nonWall, Duration.EndOfTurn);
+    }
+
+    public BecomesChosenCreatureTypeTargetEffect(boolean nonWall, Duration duration) {
         super(Outcome.BoostCreature);
         this.nonWall = nonWall;
-        if (nonWall) {
+        this.duration = duration;
+        if(nonWall) {
             staticText = "choose a creature type other than Wall. Target creature becomes that type until end of turn";
-        } else {
+        }
+        else {
             staticText = "target creature becomes the creature type of your choice until end of turn";
         }
 
@@ -36,6 +43,7 @@ public class BecomesChosenCreatureTypeTargetEffect extends OneShotEffect {
     public BecomesChosenCreatureTypeTargetEffect(final BecomesChosenCreatureTypeTargetEffect effect) {
         super(effect);
         this.nonWall = effect.nonWall;
+        this.duration = effect.duration;
     }
 
     @Override
@@ -46,21 +54,23 @@ public class BecomesChosenCreatureTypeTargetEffect extends OneShotEffect {
         if (player != null && card != null) {
             Choice typeChoice = new ChoiceCreatureType();
             String msg = "Choose a creature type";
-            if (nonWall) {
+            if(nonWall) {
                 msg += " other than Wall";
             }
             typeChoice.setMessage(msg);
-            if (nonWall) {
+            if(nonWall) {
                 typeChoice.getChoices().remove(SubType.WALL.getDescription());
             }
-            if (!player.choose(Outcome.BoostCreature, typeChoice, game)) {
-                return false;
+            while (!player.choose(Outcome.BoostCreature, typeChoice, game)) {
+                if (!player.canRespond()) {
+                    return false;
+                }
             }
             game.informPlayers(card.getName() + ": " + player.getLogName() + " has chosen " + typeChoice.getChoice());
             chosenType = typeChoice.getChoice();
             if (chosenType != null && !chosenType.isEmpty()) {
                 // ADD TYPE TO TARGET
-                ContinuousEffect effect = new BecomesCreatureTypeTargetEffect(Duration.EndOfTurn, SubType.byDescription(chosenType));
+                ContinuousEffect effect = new BecomesCreatureTypeTargetEffect(duration, SubType.byDescription(chosenType));
                 effect.setTargetPointer(new FixedTarget(getTargetPointer().getFirst(game, source)));
                 game.addEffect(effect, source);
                 return true;

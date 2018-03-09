@@ -44,6 +44,7 @@ public class LimitedEditionBeta extends ExpansionSet {
         cards.add(new SetCardInfo("Black Lotus", 233, Rarity.RARE, mage.cards.b.BlackLotus.class));
         cards.add(new SetCardInfo("Black Vise", 234, Rarity.UNCOMMON, mage.cards.b.BlackVise.class));
         cards.add(new SetCardInfo("Black Ward", 5, Rarity.UNCOMMON, mage.cards.b.BlackWard.class));
+        cards.add(new SetCardInfo("Blaze of Glory", 6, Rarity.RARE, mage.cards.b.BlazeOfGlory.class));
         cards.add(new SetCardInfo("Blessing", 7, Rarity.RARE, mage.cards.b.Blessing.class));
         cards.add(new SetCardInfo("Blue Elemental Blast", 50, Rarity.COMMON, mage.cards.b.BlueElementalBlast.class));
         cards.add(new SetCardInfo("Blue Ward", 8, Rarity.UNCOMMON, mage.cards.b.BlueWard.class));

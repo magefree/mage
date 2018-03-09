@@ -94,9 +94,12 @@ class ActOfAuthorityEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent targetPermanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
         if (targetPermanent != null && new ExileTargetEffect().apply(game, source)) {
-            ContinuousEffect effect = new ActOfAuthorityGainControlEffect(Duration.Custom, targetPermanent.getControllerId());
-            effect.setTargetPointer(new FixedTarget(source.getSourceId()));
-            game.addEffect(effect, source);
+            Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
+            if (sourcePermanent != null) {
+                ContinuousEffect effect = new ActOfAuthorityGainControlEffect(Duration.Custom, targetPermanent.getControllerId());
+                effect.setTargetPointer(new FixedTarget(sourcePermanent, game));
+                game.addEffect(effect, source);
+            }
             return true;
         }
         return false;

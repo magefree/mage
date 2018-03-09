@@ -41,6 +41,9 @@
                               <Component id="lblFreeMulligans" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="spnFreeMulligans" min="-2" pref="50" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="chkSpectatorsAllowed" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Component id="txtName" min="-2" pref="178" max="-2" attributes="0"/>
@@ -152,6 +155,7 @@
                       <Component id="spnFreeMulligans" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblFreeMulligans" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="chkRollbackTurnsAllowed" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="chkSpectatorsAllowed" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="cbGameType" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -274,6 +278,13 @@
         <Property name="toolTipText" type="java.lang.String" value="The number of mulligans a player can use without decreasing the number of drawn cards."/>
       </Properties>
     </Component>
+    <Component class="javax.swing.JCheckBox" name="chkSpectatorsAllowed">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Spectators allowed"/>
+        <Property name="toolTipText" type="java.lang.String" value="Allow spectators to view your game."/>
+      </Properties>
+    </Component>
+
     <Component class="javax.swing.JSpinner" name="spnFreeMulligans">
     </Component>
     <Component class="javax.swing.JLabel" name="lblNumPlayers">

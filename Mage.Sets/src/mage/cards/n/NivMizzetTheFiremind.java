@@ -51,18 +51,23 @@ import mage.target.common.TargetCreatureOrPlayer;
 public class NivMizzetTheFiremind extends CardImpl {
 
     public NivMizzetTheFiremind(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{U}{R}{R}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRAGON);
         this.subtype.add(SubType.WIZARD);
 
-
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
+
+        // Flying
         this.addAbility(FlyingAbility.getInstance());
+
+        // Whenever you draw a card, Niv-Mizzet, the Firemind deals 1 damage to target creature or player.
         Ability ability = new DrawCardControllerTriggeredAbility(new DamageTargetEffect(1), false);
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
+
+        // {T}: Draw a card.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new TapSourceCost()));
     }
 

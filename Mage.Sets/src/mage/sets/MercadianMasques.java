@@ -219,6 +219,7 @@ public class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Maggot Therapy", 145, Rarity.COMMON, mage.cards.m.MaggotTherapy.class));
         cards.add(new SetCardInfo("Magistrate's Scepter", 304, Rarity.RARE, mage.cards.m.MagistratesScepter.class));
         cards.add(new SetCardInfo("Magistrate's Veto", 204, Rarity.UNCOMMON, mage.cards.m.MagistratesVeto.class));
+        cards.add(new SetCardInfo("Mercadia's Downfall", 205, Rarity.UNCOMMON, mage.cards.m.MercadiasDownfall.class));
         cards.add(new SetCardInfo("Mercadian Bazaar", 321, Rarity.UNCOMMON, mage.cards.m.MercadianBazaar.class));
         cards.add(new SetCardInfo("Midnight Ritual", 146, Rarity.RARE, mage.cards.m.MidnightRitual.class));
         cards.add(new SetCardInfo("Misdirection", 87, Rarity.RARE, mage.cards.m.Misdirection.class));
@@ -357,6 +358,7 @@ public class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Two-Headed Dragon", 221, Rarity.RARE, mage.cards.t.TwoHeadedDragon.class));
         cards.add(new SetCardInfo("Undertaker", 167, Rarity.COMMON, mage.cards.u.Undertaker.class));
         cards.add(new SetCardInfo("Unmask", 168, Rarity.RARE, mage.cards.u.Unmask.class));
+        cards.add(new SetCardInfo("Uphill Battle", 222, Rarity.UNCOMMON, mage.cards.u.UphillBattle.class));
         cards.add(new SetCardInfo("Vendetta", 170, Rarity.COMMON, mage.cards.v.Vendetta.class));
         cards.add(new SetCardInfo("Venomous Dragonfly", 282, Rarity.COMMON, mage.cards.v.VenomousDragonfly.class));
         cards.add(new SetCardInfo("Vernal Equinox", 283, Rarity.RARE, mage.cards.v.VernalEquinox.class));

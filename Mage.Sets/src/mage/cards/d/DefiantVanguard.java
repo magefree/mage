@@ -124,7 +124,7 @@ class DefiantVanguardEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent thisCreature = game.getPermanentOrLKIBattlefield(source.getId());
+        Permanent thisCreature = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (controller != null && thisCreature != null) {
             BlockedAttackerWatcher watcher = (BlockedAttackerWatcher) game.getState().getWatchers().get(BlockedAttackerWatcher.class.getSimpleName());
             if (watcher != null) {
@@ -136,10 +136,10 @@ class DefiantVanguardEffect extends OneShotEffect {
                         }
                     }
                 }
+                thisCreature.destroy(source.getSourceId(), game, false);
                 for (Permanent creature : toDestroy) {
                     creature.destroy(source.getSourceId(), game, false);
                 }
-                thisCreature.destroy(source.getSourceId(), game, false);
                 return true;
             }
         }

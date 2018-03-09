@@ -48,7 +48,7 @@ public class SpellsCostIncreasementAllEffect extends CostModificationEffectImpl 
     private int amount;
 
     public SpellsCostIncreasementAllEffect(int amount) {
-        this(new FilterCard("All Spells "), amount);
+        this(new FilterCard("Spells"), amount);
     }
 
     public SpellsCostIncreasementAllEffect(FilterCard filter, int amount) {

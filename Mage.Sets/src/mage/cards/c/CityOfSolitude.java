@@ -28,6 +28,7 @@
 package mage.cards.c;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
@@ -48,7 +49,7 @@ import mage.game.events.GameEvent.EventType;
 public class CityOfSolitude extends CardImpl {
 
     public CityOfSolitude(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
 
         // Players can cast spells and activate abilities only during their own turns.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CityOfSolitudeEffect()));
@@ -74,12 +75,22 @@ class CityOfSolitudeEffect extends ContinuousRuleModifyingEffectImpl {
     CityOfSolitudeEffect(final CityOfSolitudeEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == EventType.CAST_SPELL || event.getType() == EventType.ACTIVATE_ABILITY;
     }
-    
+
+    @Override
+    public String getInfoMessage(Ability source, GameEvent event, Game game) {
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject eventObject = game.getObject(event.getSourceId());
+        if (sourceObject != null && eventObject != null) {
+            return "You can cast or activate anability of " + eventObject.getIdName() + "  only during your own turns (" + sourceObject.getIdName() + "). ";
+        }
+        return null;
+    }
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         return !game.getActivePlayerId().equals(event.getPlayerId());

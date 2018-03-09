@@ -28,6 +28,7 @@
 package mage.cards.i;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.RestrictionEffect;
@@ -88,7 +89,7 @@ class InterdictPredicate implements Predicate<Ability> {
     @Override
     public boolean apply(Ability input, Game game) {
         if (input instanceof StackAbility && input.getAbilityType() == AbilityType.ACTIVATED) {
-            Permanent sourceObject = game.getPermanentOrLKIBattlefield(input.getSourceId());
+            MageObject sourceObject = input.getSourceObject(game);
             if (sourceObject != null) {
                 return (sourceObject.isArtifact()
                         || sourceObject.isEnchantment()
@@ -120,9 +121,12 @@ class InterdictCounterEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         StackObject stackObject = game.getStack().getStackObject(source.getFirstTarget());
         if (stackObject != null && game.getStack().counter(source.getFirstTarget(), source.getSourceId(), game)) {
-            InterdictCantActivateEffect effect = new InterdictCantActivateEffect();
-            effect.setTargetPointer(new FixedTarget(stackObject.getSourceId()));
-            game.getContinuousEffects().addEffect(effect, source);
+            Permanent sourcePermanent = stackObject.getStackAbility().getSourcePermanentIfItStillExists(game);
+            if (sourcePermanent != null) {
+                InterdictCantActivateEffect effect = new InterdictCantActivateEffect();
+                effect.setTargetPointer(new FixedTarget(sourcePermanent, game));
+                game.getContinuousEffects().addEffect(effect, source);
+            }
             return true;
         }
         return false;
@@ -143,7 +147,7 @@ class InterdictCantActivateEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return getTargetPointer().getFirst(game, source).equals(permanent.getId());
+        return permanent.getId().equals(getTargetPointer().getFirst(game, source));
     }
 
     @Override

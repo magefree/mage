@@ -1212,6 +1212,19 @@ public abstract class AbilityImpl implements Ability {
     }
 
     @Override
+    public Permanent getSourcePermanentIfItStillExists(Game game) {
+        if (sourceObject == null) {
+            setSourceObject(game.getObject(getSourceId()), game);
+        }
+        if (sourceObject instanceof Permanent) {
+            if (game.getState().getZoneChangeCounter(getSourceId()) == getSourceObjectZoneChangeCounter()) {
+                return (Permanent) sourceObject;
+            }
+        }
+        return null;
+    }
+
+    @Override
     public int getSourceObjectZoneChangeCounter() {
         return sourceObjectZoneChangeCounter;
     }

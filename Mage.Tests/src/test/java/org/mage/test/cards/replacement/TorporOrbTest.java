@@ -41,7 +41,8 @@ public class TorporOrbTest extends CardTestPlayerBase {
      */
     @Test
     public void testPitTweller() {
-        addCard(Zone.BATTLEFIELD, playerB, "Torpor Orb");
+        // Creatures entering the battlefield don't cause abilities to trigger.
+        addCard(Zone.BATTLEFIELD, playerB, "Hushwing Gryff");
         addCard(Zone.BATTLEFIELD, playerB, "Treacherous Pit-Dweller");  // 4/3
 
         addCard(Zone.HAND, playerA, "Lightning Bolt");

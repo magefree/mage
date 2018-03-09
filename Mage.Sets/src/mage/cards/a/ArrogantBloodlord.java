@@ -53,7 +53,7 @@ import mage.target.targetpointer.FixedTarget;
 public class ArrogantBloodlord extends CardImpl {
 
     public ArrogantBloodlord(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
         this.subtype.add(SubType.VAMPIRE);
         this.subtype.add(SubType.KNIGHT);
 
@@ -104,11 +104,8 @@ class ArrogantBloodlordTriggeredAbility extends TriggeredAbilityImpl {
                 && Objects.equals(blocked, arrogantBloodlord)) {
             return true;
         }
-        if (blocker != null && Objects.equals(blocker, arrogantBloodlord)
-                && game.getPermanent(event.getTargetId()).getPower().getValue() < 2) {
-            return true;
-        }
-        return false;
+        return blocker != null && Objects.equals(blocker, arrogantBloodlord)
+                && game.getPermanent(event.getTargetId()).getPower().getValue() < 2;
     }
 
     @Override
@@ -133,7 +130,7 @@ class ArrogantBloodlordEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
             AtTheEndOfCombatDelayedTriggeredAbility delayedAbility = new AtTheEndOfCombatDelayedTriggeredAbility(new DestroyTargetEffect());
-            delayedAbility.getEffects().get(0).setTargetPointer(new FixedTarget(source.getSourceId()));
+            delayedAbility.getEffects().get(0).setTargetPointer(new FixedTarget(permanent, game));
             game.addDelayedTriggeredAbility(delayedAbility, source);
             return true;
         }

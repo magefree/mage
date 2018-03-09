@@ -83,6 +83,7 @@ public class PortalThreeKingdoms extends ExpansionSet {
         cards.add(new SetCardInfo("Dong Zhou, the Tyrant", 109, Rarity.RARE, mage.cards.d.DongZhouTheTyrant.class));
         cards.add(new SetCardInfo("Eightfold Maze", 2, Rarity.RARE, mage.cards.e.EightfoldMaze.class));
         cards.add(new SetCardInfo("Empty City Ruse", 3, Rarity.UNCOMMON, mage.cards.e.EmptyCityRuse.class));
+        cards.add(new SetCardInfo("Eunuchs' Intrigues", 110, Rarity.UNCOMMON, mage.cards.e.EunuchsIntrigues.class));
         cards.add(new SetCardInfo("Exhaustion", 42, Rarity.RARE, mage.cards.e.Exhaustion.class));
         cards.add(new SetCardInfo("Extinguish", 43, Rarity.COMMON, mage.cards.e.Extinguish.class));
         cards.add(new SetCardInfo("False Defeat", 4, Rarity.COMMON, mage.cards.f.FalseDefeat.class));
@@ -99,6 +100,7 @@ public class PortalThreeKingdoms extends ExpansionSet {
         cards.add(new SetCardInfo("Ghostly Visit", 76, Rarity.COMMON, mage.cards.g.GhostlyVisit.class));
         cards.add(new SetCardInfo("Guan Yu's 1,000-Li March", 7, Rarity.RARE, mage.cards.g.GuanYus1000LiMarch.class));
         cards.add(new SetCardInfo("Guan Yu, Sainted Warrior", 6, Rarity.RARE, mage.cards.g.GuanYuSaintedWarrior.class));
+        cards.add(new SetCardInfo("Heavy Fog", 136, Rarity.UNCOMMON, mage.cards.h.HeavyFog.class));
         cards.add(new SetCardInfo("Huang Zhong, Shu General", 8, Rarity.RARE, mage.cards.h.HuangZhongShuGeneral.class));
         cards.add(new SetCardInfo("Hua Tuo, Honored Physician", 137, Rarity.RARE, mage.cards.h.HuaTuoHonoredPhysician.class));
         cards.add(new SetCardInfo("Hunting Cheetah", 138, Rarity.UNCOMMON, mage.cards.h.HuntingCheetah.class));
@@ -110,6 +112,7 @@ public class PortalThreeKingdoms extends ExpansionSet {
         cards.add(new SetCardInfo("Island", 170, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 171, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kongming, \"Sleeping Dragon\"", 9, Rarity.RARE, mage.cards.k.KongmingSleepingDragon.class));
+        cards.add(new SetCardInfo("Kongming's Contraptions", 10, Rarity.RARE, mage.cards.k.KongmingsContraptions.class));
         cards.add(new SetCardInfo("Lady Sun", 45, Rarity.RARE, mage.cards.l.LadySun.class));
         cards.add(new SetCardInfo("Lady Zhurong, Warrior Queen", 139, Rarity.RARE, mage.cards.l.LadyZhurongWarriorQueen.class));
         cards.add(new SetCardInfo("Liu Bei, Lord of Shu", 11, Rarity.RARE, mage.cards.l.LiuBeiLordOfShu.class));
@@ -185,6 +188,7 @@ public class PortalThreeKingdoms extends ExpansionSet {
         cards.add(new SetCardInfo("Virtuous Charge", 29, Rarity.COMMON, mage.cards.v.VirtuousCharge.class));
         cards.add(new SetCardInfo("Volunteer Militia", 30, Rarity.COMMON, mage.cards.v.VolunteerMilitia.class));
         cards.add(new SetCardInfo("Warrior's Oath", 124, Rarity.RARE, mage.cards.w.WarriorsOath.class));
+        cards.add(new SetCardInfo("Warrior's Stand", 31, Rarity.UNCOMMON, mage.cards.w.WarriorsStand.class));
         cards.add(new SetCardInfo("Wei Ambush Force", 85, Rarity.COMMON, mage.cards.w.WeiAmbushForce.class));
         cards.add(new SetCardInfo("Wei Assassins", 86, Rarity.UNCOMMON, mage.cards.w.WeiAssassins.class));
         cards.add(new SetCardInfo("Wei Elite Companions", 87, Rarity.UNCOMMON, mage.cards.w.WeiEliteCompanions.class));

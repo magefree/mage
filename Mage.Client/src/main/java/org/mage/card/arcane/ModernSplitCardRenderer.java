@@ -8,6 +8,7 @@ import mage.view.CardView;
 
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +18,7 @@ import java.util.List;
 public class ModernSplitCardRenderer extends ModernCardRenderer {
 
     private class HalfCardProps {
+
         int x, y, w, h, cw, ch;
 
         String name;
@@ -27,7 +29,11 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
         ArrayList<TextboxRule> keywords = new ArrayList<>();
     }
 
-    private static ArrayList<CardType> ONLY_LAND_TYPE = new ArrayList<CardType>() {{add(CardType.LAND);}};
+    private static ArrayList<CardType> ONLY_LAND_TYPE = new ArrayList<CardType>() {
+        {
+            add(CardType.LAND);
+        }
+    };
 
     // Right and left halves of the card content
     private HalfCardProps rightHalf = new HalfCardProps();
@@ -88,20 +94,20 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
         // Decide size of divider
         if (isAftermath()) {
             dividerSize = borderWidth;
-            dividerAt = (int)(cardHeight*0.54);
+            dividerAt = (int) (cardHeight * 0.54);
         } else {
-            int availHeight = cardHeight - totalContentInset - 3*borderWidth;
-            dividerSize = borderWidth*2;
-            dividerAt = (int)(totalContentInset + availHeight * 0.5 - borderWidth);
+            int availHeight = cardHeight - totalContentInset - 3 * borderWidth;
+            dividerSize = borderWidth * 2;
+            dividerAt = (int) (totalContentInset + availHeight * 0.5 - borderWidth);
         }
 
         // Decide size of each halves box
         rightHalf.x = leftHalf.x = totalContentInset;
-        rightHalf.w = leftHalf.w = cardWidth - 2*totalContentInset;
+        rightHalf.w = leftHalf.w = cardWidth - 2 * totalContentInset;
         leftHalf.y = totalContentInset;
         leftHalf.h = dividerAt - totalContentInset;
         rightHalf.y = dividerAt + dividerSize;
-        rightHalf.h = cardHeight - rightHalf.y - borderWidth*3;
+        rightHalf.h = cardHeight - rightHalf.y - borderWidth * 3;
 
         // Content width / height (Exchanged from width / height if the card part is rotated)
         if (isAftermath()) {
@@ -126,7 +132,7 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
     private ObjectColor getColorFromManaCostHack(ManaCosts costs) {
         ObjectColor c = new ObjectColor();
         List<String> symbols = costs.getSymbols();
-        for (String symbol: symbols) {
+        for (String symbol : symbols) {
             if (symbol.contains("W")) {
                 c.setWhite(true);
             } else if (symbol.contains("U")) {
@@ -154,18 +160,18 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
                 // Draw main part (most of card)
                 g.fillRoundRect(
                         borderWidth, borderWidth,
-                        cardWidth - 2*borderWidth, leftHalf.h + contentInset - borderWidth - 2*cornerRadius + (cornerRadius - 1),
+                        cardWidth - 2 * borderWidth, leftHalf.h + contentInset - borderWidth - 2 * cornerRadius + (cornerRadius - 1),
                         cornerRadius - 1, cornerRadius - 1);
 
                 // Draw the M15 rounded "swoosh" at the bottom
                 g.fillRoundRect(
-                        borderWidth, dividerAt - borderWidth - 4*cornerRadius,
-                        cardWidth - 2*borderWidth, cornerRadius * 4,
+                        borderWidth, dividerAt - borderWidth - 4 * cornerRadius,
+                        cardWidth - 2 * borderWidth, cornerRadius * 4,
                         cornerRadius * 2, cornerRadius * 2);
 
                 // Draw the cutout into the "swoosh" for the textbox to lie over
                 g.fillRect(
-                        borderWidth + contentInset, dividerAt - 2*borderWidth,
+                        borderWidth + contentInset, dividerAt - 2 * borderWidth,
                         cardWidth - borderWidth * 2 - contentInset * 2, borderWidth * 2);
             }
 
@@ -176,8 +182,8 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
                 // Draw the M15 rounded "swoosh"es at the top and bottom
                 g.fillRoundRect(
                         borderWidth, dividerAt + dividerSize + borderWidth,
-                        cardWidth - 2*borderWidth, rightHalf.h - 2*borderWidth,
-                        cornerRadius*2, cornerRadius*2);
+                        cardWidth - 2 * borderWidth, rightHalf.h - 2 * borderWidth,
+                        cornerRadius * 2, cornerRadius * 2);
 
                 // Draw the cutout into the "swoosh" for the textbox to lie over
                 g.fillRect(
@@ -236,8 +242,8 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
         // Background of textbox
         g.setPaint(textboxPaint);
         g.fillRect(
-            1, typeLineY,
-            half.cw - 2, half.ch - typeLineY - 1);
+                1, typeLineY,
+                half.cw - 2, half.ch - typeLineY - 1);
 
         // Draw the name line box
         CardRendererUtils.drawRoundedBox(g,
@@ -261,7 +267,7 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
         // Draw the type line
         drawTypeLine(g, half.typeLineString,
                 0, typeLineY,
-                half.cw, boxHeight - 4);
+                half.cw, boxHeight - 4, true);
 
         // Draw the textbox rules
         drawRulesText(g, half.keywords, half.rules,
@@ -270,13 +276,13 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
     }
 
     private Graphics2D getUnmodifiedHalfContext(Graphics2D g) {
-        Graphics2D g2 = (Graphics2D)g.create();
+        Graphics2D g2 = (Graphics2D) g.create();
         g2.translate(leftHalf.x, leftHalf.y);
         return g2;
     }
 
     private Graphics2D getAftermathHalfContext(Graphics2D g) {
-        Graphics2D g2 = (Graphics2D)g.create();
+        Graphics2D g2 = (Graphics2D) g.create();
         g2.translate(rightHalf.x, rightHalf.y);
         g2.rotate(Math.PI / 2);
         g2.translate(0, -rightHalf.w);
@@ -284,7 +290,7 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
     }
 
     private Graphics2D getLeftHalfContext(Graphics2D g) {
-        Graphics2D g2 = (Graphics2D)g.create();
+        Graphics2D g2 = (Graphics2D) g.create();
         g2.translate(leftHalf.x, leftHalf.y);
         g2.rotate(-Math.PI / 2);
         g2.translate(-leftHalf.cw, 0);
@@ -292,7 +298,7 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
     }
 
     private Graphics2D getRightHalfContext(Graphics2D g) {
-        Graphics2D g2 = (Graphics2D)g.create();
+        Graphics2D g2 = (Graphics2D) g.create();
         g2.translate(rightHalf.x, rightHalf.y);
         g2.rotate(-Math.PI / 2);
         g2.translate(-rightHalf.cw, 0);
@@ -300,13 +306,13 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
     }
 
     @Override
-    protected void drawFrame(Graphics2D g) {
+    protected void drawFrame(Graphics2D g, BufferedImage image) {
         if (isAftermath()) {
-            drawSplitHalfFrame(getUnmodifiedHalfContext(g), leftHalf, (int)(leftHalf.ch * TYPE_LINE_Y_FRAC));
+            drawSplitHalfFrame(getUnmodifiedHalfContext(g), leftHalf, (int) (leftHalf.ch * TYPE_LINE_Y_FRAC));
             drawSplitHalfFrame(getAftermathHalfContext(g), rightHalf, (rightHalf.ch - boxHeight) / 2);
         } else {
-            drawSplitHalfFrame(getLeftHalfContext(g), leftHalf, (int)(leftHalf.ch * TYPE_LINE_Y_FRAC));
-            drawSplitHalfFrame(getRightHalfContext(g), rightHalf, (int)(rightHalf.ch * TYPE_LINE_Y_FRAC));
+            drawSplitHalfFrame(getLeftHalfContext(g), leftHalf, (int) (leftHalf.ch * TYPE_LINE_Y_FRAC));
+            drawSplitHalfFrame(getRightHalfContext(g), rightHalf, (int) (rightHalf.ch * TYPE_LINE_Y_FRAC));
             if (isFuse()) {
                 Graphics2D g2 = getRightHalfContext(g);
                 int totalFuseBoxWidth = rightHalf.cw * 2 + 2 * borderWidth + dividerSize;
@@ -319,7 +325,7 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
                         borderPaint, boxColor);
                 drawNameLine(g2, "Fuse (You may cast both halves from your hand)", "",
                         0, rightHalf.ch,
-                        totalFuseBoxWidth - 2*borderWidth, boxHeight);
+                        totalFuseBoxWidth - 2 * borderWidth, boxHeight);
             }
         }
     }

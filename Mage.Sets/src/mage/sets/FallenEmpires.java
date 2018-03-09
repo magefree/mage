@@ -268,6 +268,7 @@ public class FallenEmpires extends ExpansionSet {
         cards.add(new SetCardInfo("Vodalian Soldiers", 63, Rarity.COMMON, VodalianSoldiers.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vodalian Soldiers", 64, Rarity.COMMON, VodalianSoldiers.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vodalian Soldiers", 65, Rarity.COMMON, VodalianSoldiers.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Vodalian War Machine", 66, Rarity.RARE, mage.cards.v.VodalianWarMachine.class));
         cards.add(new SetCardInfo("Zelyon Sword", 176, Rarity.RARE, mage.cards.z.ZelyonSword.class));
     }
 }
