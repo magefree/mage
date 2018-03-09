@@ -190,16 +190,15 @@ public class CallbackClientImpl implements CallbackClient {
                         break;
                     }
                     case GAME_OVER: {
-
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
-
                         if (panel != null) {
-                            appendJsonEvent("GAME_OVER", callback.getObjectId(), callback.getData());
-                            ActionData actionData = appendJsonEvent("GAME_OVER", callback.getObjectId(), callback.getData());
-                            String logFileName = "game-" + actionData.gameId + ".json";
-
-                            S3Uploader.upload(logFileName, actionData.gameId.toString());
-
+                            Session session = SessionHandler.getSession();
+                            if (session.isJsonLogActive()) {
+                                appendJsonEvent("GAME_OVER", callback.getObjectId(), callback.getData());
+                                ActionData actionData = appendJsonEvent("GAME_OVER", callback.getObjectId(), callback.getData());
+                                String logFileName = "game-" + actionData.gameId + ".json";
+                                S3Uploader.upload(logFileName, actionData.gameId.toString());
+                            }
                             panel.endMessage((String) callback.getData(), callback.getMessageId());
                         }
                         break;
@@ -408,10 +407,13 @@ public class CallbackClientImpl implements CallbackClient {
 
     private ActionData appendJsonEvent(String name, UUID gameId, Object value) {
         Session session = SessionHandler.getSession();
-        ActionData actionData = new ActionData(name, gameId);
-        actionData.value = value;
-        session.appendJsonLog(actionData);
-        return actionData;
+        if (session.isJsonLogActive()) {
+            ActionData actionData = new ActionData(name, gameId);
+            actionData.value = value;
+            session.appendJsonLog(actionData);
+            return actionData;
+        }
+        return null;
     }
 
     private void createChatStartMessage(ChatPanelBasic chatPanel) {
