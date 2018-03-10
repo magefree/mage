@@ -109,6 +109,12 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
                 }
                 return false;
             case DECLARE_BLOCKERS:
+                printOutState(game);
+                if (actions.isEmpty()) {
+                    calculateActions(game);
+                }
+                act(game);
+                return true;
             case FIRST_COMBAT_DAMAGE:
             case COMBAT_DAMAGE:
             case END_COMBAT:
