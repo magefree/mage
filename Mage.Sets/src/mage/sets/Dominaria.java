@@ -53,6 +53,9 @@ public class Dominaria extends ExpansionSet {
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
 
+        cards.add(new SetCardInfo("Ghitu Lavarunner", 1, Rarity.COMMON, mage.cards.g.GhituLavarunner.class));
+        cards.add(new SetCardInfo("Wizard's Lightning", 2, Rarity.COMMON, mage.cards.w.WizardsLightning.class));
+        cards.add(new SetCardInfo("Jaya Ballard", 3, Rarity.MYTHIC, mage.cards.j.JayaBallard.class));
         cards.add(new SetCardInfo("Benalish Marshal", 10, Rarity.UNCOMMON, mage.cards.b.BenalishMarshal.class));
         cards.add(new SetCardInfo("Charge", 11, Rarity.COMMON, mage.cards.c.Charge.class));
         cards.add(new SetCardInfo("Invoke the Divine", 13, Rarity.COMMON, mage.cards.i.InvokeTheDivine.class));
