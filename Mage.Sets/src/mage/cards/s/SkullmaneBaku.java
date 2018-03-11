@@ -25,34 +25,34 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.RemoveVariableCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  * @author LevelX2
@@ -60,12 +60,12 @@ import mage.target.common.TargetCreaturePermanent;
 public class SkullmaneBaku extends CardImpl {
 
     public SkullmaneBaku(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
         this.subtype.add(SubType.SPIRIT);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
-        
+
         // Whenever you cast a Spirit or Arcane spell, you may put a ki counter on Skullmane Baku.
         this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.KI.createInstance()), StaticFilters.SPIRIT_OR_ARCANE_CARD, true));
 
@@ -85,7 +85,7 @@ public class SkullmaneBaku extends CardImpl {
     public SkullmaneBaku copy() {
         return new SkullmaneBaku(this);
     }
-    
+
     static class SkullmaneBakuUnboostEffect extends OneShotEffect {
 
         public SkullmaneBakuUnboostEffect() {
@@ -102,12 +102,14 @@ public class SkullmaneBaku extends CardImpl {
             int numberToUnboost = 0;
             for (Cost cost : source.getCosts()) {
                 if (cost instanceof RemoveVariableCountersSourceCost) {
-                    numberToUnboost = ((RemoveVariableCountersSourceCost)cost).getAmount() * -1;
+                    numberToUnboost = ((RemoveVariableCountersSourceCost) cost).getAmount() * -1;
                 }
             }
-            Permanent creature = game.getPermanent(targetPointer.getFirst(game, source));
+            Permanent creature = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (creature != null && numberToUnboost != 0) {
-                creature.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(numberToUnboost, numberToUnboost, Duration.EndOfTurn)), source.getSourceId(), game, false);
+                ContinuousEffect effect = new BoostTargetEffect(numberToUnboost, numberToUnboost, Duration.EndOfTurn);
+                effect.setTargetPointer(new FixedTarget(creature, game));
+                game.addEffect(effect, source);
             }
             return true;
         }
