@@ -35,7 +35,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
-import mage.game.events.DamageEvent;
+import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
@@ -89,7 +89,7 @@ class DinosaurHunterAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (((DamageEvent) event).isCombatDamage()
+        if (((DamagedEvent) event).isCombatDamage()
                 && event.getSourceId().equals(getSourceId())) {
             Permanent targetPermanet = game.getPermanentOrLKIBattlefield(event.getTargetId());
             if (targetPermanet.hasSubtype(SubType.DINOSAUR, game)) {
