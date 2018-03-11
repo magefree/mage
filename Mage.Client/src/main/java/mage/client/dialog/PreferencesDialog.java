@@ -192,6 +192,11 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_DECK_EDITOR_LAST_SORT = "deckEditorLastSort";
     public static final String KEY_DECK_EDITOR_LAST_SEPARATE_CREATURES = "deckEditorLastSeparateCreatures";
 
+    public static final String KEY_DECK_EDITOR_SEARCH_NAMES = "deckEditorSearchNames";
+    public static final String KEY_DECK_EDITOR_SEARCH_TYPES = "deckEditorSearchTypes";
+    public static final String KEY_DECK_EDITOR_SEARCH_RULES = "deckEditorSearchRules";
+    public static final String KEY_DECK_EDITOR_SEARCH_UNIQUE = "deckEditorSearchUnique";
+
     // positions of divider bars
     public static final String KEY_TABLES_DIVIDER_LOCATION_1 = "tablePanelDividerLocation1";
     public static final String KEY_TABLES_DIVIDER_LOCATION_2 = "tablePanelDividerLocation2";
