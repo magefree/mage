@@ -44,8 +44,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 
 /**
  *
@@ -158,11 +156,7 @@ class UnearthLeavesBattlefieldEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null && permanent != null) {
-            controller.moveCardToExileWithInfo(permanent, null, "", source.getSourceId(), game, Zone.BATTLEFIELD, true);
-        }
-        return true;
+        ((ZoneChangeEvent) event).setToZone(Zone.EXILED);
+        return false;
     }
 }

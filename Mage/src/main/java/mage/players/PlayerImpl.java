@@ -1097,7 +1097,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (!ignoreTiming && !playLandAbility.canActivate(this.playerId, game)) {
             return false;
         }
-        
+
         game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PLAY_LAND, card.getId(), card.getId(), playerId));
         //20091005 - 305.1
         if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.PLAY_LAND, card.getId(), card.getId(), playerId))) {
@@ -3602,11 +3602,8 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public boolean moveCardToExileWithInfo(Card card, UUID exileId,
-            String exileName, UUID sourceId,
-            Game game, Zone fromZone,
-            boolean withName
-    ) {
+    public boolean moveCardToExileWithInfo(Card card, UUID exileId, String exileName, UUID sourceId,
+            Game game, Zone fromZone, boolean withName) {
         if (card == null) {
             return false;
         }
