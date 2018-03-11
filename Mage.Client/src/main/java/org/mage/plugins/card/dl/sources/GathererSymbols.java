@@ -9,7 +9,6 @@ import com.google.common.collect.AbstractIterator;
 import java.io.File;
 import static java.lang.String.format;
 import java.util.Iterator;
-
 import mage.client.constants.Constants;
 import org.mage.plugins.card.dl.DownloadJob;
 import static org.mage.plugins.card.dl.DownloadJob.fromURL;
@@ -42,7 +41,7 @@ public class GathererSymbols implements Iterable<DownloadJob> {
     public GathererSymbols() {
         outDir = new File(getImagesDir() + Constants.RESOURCE_PATH_SYMBOLS);
 
-        if (!outDir.exists()){
+        if (!outDir.exists()) {
             outDir.mkdirs();
         }
     }
@@ -76,8 +75,9 @@ public class GathererSymbols implements Iterable<DownloadJob> {
                     File dst = new File(dir, symbol + ".gif");
 
                     /**
-                     * Handle a bug on Gatherer where a few symbols are missing at the large size.
-                     * Fall back to using the medium symbol for those cases.
+                     * Handle a bug on Gatherer where a few symbols are missing
+                     * at the large size. Fall back to using the medium symbol
+                     * for those cases.
                      */
                     int modSizeIndex = sizeIndex;
                     if (sizeIndex == 2) {
@@ -93,7 +93,7 @@ public class GathererSymbols implements Iterable<DownloadJob> {
                                 break;
 
                             default:
-                                // Nothing to do, symbol is available in the large size
+                            // Nothing to do, symbol is available in the large size
                         }
                     }
 
