@@ -43,7 +43,7 @@ public class CantHaveCountersSourceEffect extends ContinuousRuleModifyingEffectI
 
     public CantHaveCountersSourceEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "{this} can't have counters placed on it";
+        staticText = "{this} can't have counters put on it";
     }
 
     public CantHaveCountersSourceEffect(final CantHaveCountersSourceEffect effect) {

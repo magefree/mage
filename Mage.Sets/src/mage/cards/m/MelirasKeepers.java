@@ -51,7 +51,7 @@ public class MelirasKeepers extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        // Melira's Keepers can't have counters placed on it
+        // Melira's Keepers can't have counters put on it
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantHaveCountersSourceEffect()));
     }
 
