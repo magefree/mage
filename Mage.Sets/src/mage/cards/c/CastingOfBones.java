@@ -25,49 +25,51 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.s;
+package mage.cards.c;
 
 import java.util.UUID;
-import mage.MageInt;
+import mage.constants.SubType;
+import mage.target.common.TargetCreaturePermanent;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.DrawDiscardOneOfThemEffect;
+import mage.abilities.common.DiesAttachedTriggeredAbility;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.DrawDiscardControllerEffect;
+import mage.constants.Outcome;
+import mage.target.TargetPermanent;
+import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.filter.common.FilterControlledLandPermanent;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
- * @author Quercitron
+ * @author AMWJ
  */
-public class SoldeviSage extends CardImpl {
+public class CastingOfBones extends CardImpl {
 
-    public SoldeviSage(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.WIZARD);
+    public CastingOfBones(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
+        
+        this.subtype.add(SubType.AURA);
 
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-
-        // {tap}, Sacrifice two lands: Draw three cards, then discard one of them.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardOneOfThemEffect(3), new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(2, 2, new FilterControlledLandPermanent("two lands"), true)));
+        // Enchant creature
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.DrawCard));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Discard));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
+
+        // When enchanted creature dies, draw three cards, then discard one of them.
+        this.addAbility(new DiesAttachedTriggeredAbility(new DrawDiscardControllerEffect(3, 1), "enchanted creature"));
     }
 
-    public SoldeviSage(final SoldeviSage card) {
+    public CastingOfBones(final CastingOfBones card) {
         super(card);
     }
 
     @Override
-    public SoldeviSage copy() {
-        return new SoldeviSage(this);
+    public CastingOfBones copy() {
+        return new CastingOfBones(this);
     }
 }

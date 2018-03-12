@@ -34,23 +34,16 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.cards.Card;
+import mage.abilities.effects.common.DrawDiscardOneOfThemEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.TargetCard;
 import mage.target.common.TargetCardInHand;
 
 /**
@@ -79,7 +72,7 @@ public class KrovikanSorcerer extends CardImpl {
         this.addAbility(ability);
         
         // {tap}, Discard a black card: Draw two cards, then discard one of them.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new KrovikanSorcererEffect(), new TapSourceCost());
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardOneOfThemEffect(2), new TapSourceCost());
         ability.addCost(new DiscardTargetCost(new TargetCardInHand(filterBlack)));
         this.addAbility(ability);
     }
@@ -91,49 +84,5 @@ public class KrovikanSorcerer extends CardImpl {
     @Override
     public KrovikanSorcerer copy() {
         return new KrovikanSorcerer(this);
-    }
-}
-
-class KrovikanSorcererEffect extends OneShotEffect {
-
-    KrovikanSorcererEffect() {
-        super(Outcome.DrawCard);
-        this.staticText = "Draw two cards, then discard one of them";
-    }
-
-    KrovikanSorcererEffect(final KrovikanSorcererEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public KrovikanSorcererEffect copy() {
-        return new KrovikanSorcererEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            Cards initialHand = player.getHand().copy();
-            player.drawCards(2, game);
-            Cards drawnCards = new CardsImpl();
-            for (UUID cardId : player.getHand()) {
-                if (!initialHand.contains(cardId)) {
-                    drawnCards.add(cardId);
-                }
-            }
-            if (!drawnCards.isEmpty()) {
-                TargetCard cardToDiscard = new TargetCard(Zone.HAND, new FilterCard("card to discard"));
-                cardToDiscard.setNotTarget(true);
-                if (player.choose(Outcome.Discard, drawnCards, cardToDiscard, game)) {
-                    Card card = player.getHand().get(cardToDiscard.getFirstTarget(), game);
-                    if (card != null) {
-                        return player.discard(card, source, game);
-                    }
-                }
-            }
-            return true;
-        }
-        return false;
     }
 }
