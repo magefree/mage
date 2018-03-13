@@ -697,7 +697,9 @@ public enum WizardCardsImageSource implements CardImageSource {
     private String normalizeName(String name) {
         //Split card
         if (name.contains("//")) {
-            name = name.substring(0, name.indexOf('(') - 1);
+            if (name.indexOf('(') > 0) {
+                name = name.substring(0, name.indexOf('(') - 1);
+            }
         }
         //Special timeshifted name
         if (name.startsWith("XX")) {
