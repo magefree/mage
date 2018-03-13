@@ -73,7 +73,7 @@ public class PreventNextDamageFromChosenSourceToTargetEffect extends PreventionE
         StringBuilder sb = new StringBuilder("The next time a ").append(targetSource.getFilter().getMessage());
         sb.append(" of your choice would deal damage to target ");
         sb.append(mode.getTargets().get(0).getTargetName());
-        if (duration.equals(Duration.EndOfTurn)) {
+        if (duration == Duration.EndOfTurn) {
             sb.append(" this turn");
         }
         sb.append(", prevent that damage");

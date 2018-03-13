@@ -27,12 +27,15 @@
  */
 package mage.target;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.constants.Outcome;
 import mage.game.Game;
+import mage.game.events.GameEvent;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -50,13 +53,7 @@ public class Targets extends ArrayList<Target> {
     }
 
     public List<Target> getUnchosen() {
-        List<Target> unchosen = new ArrayList<>();
-        for (Target target : this) {
-            if (!target.isChosen()) {
-                unchosen.add(target);
-            }
-        }
-        return unchosen;
+        return stream().filter(target -> !target.isChosen()).collect(Collectors.toList());
     }
 
     public void clearChosen() {
@@ -66,12 +63,7 @@ public class Targets extends ArrayList<Target> {
     }
 
     public boolean isChosen() {
-        for (Target target : this) {
-            if (!target.isChosen()) {
-                return false;
-            }
-        }
-        return true;
+        return stream().allMatch(Target::isChosen);
     }
 
     public boolean choose(Outcome outcome, UUID playerId, UUID sourceId, Game game) {
@@ -94,17 +86,24 @@ public class Targets extends ArrayList<Target> {
             if (!canChoose(source.getSourceId(), playerId, game)) {
                 return false;
             }
+            int state = game.bookmarkState();
             while (!isChosen()) {
                 Target target = this.getUnchosen().get(0);
                 UUID targetController = playerId;
                 if (target.getTargetController() != null) { // some targets can have controller different than ability controller
                     targetController = target.getTargetController();
                 }
-                if (noMana) { // if cast without mana (e.g. by supend you may notr be able to cancel the casting if you are able to cast it
+                if (noMana) { // if cast without mana (e.g. by suspend you may not be able to cancel the casting if you are able to cast it
                     target.setRequired(true);
                 }
                 if (!target.chooseTarget(outcome, targetController, source, game)) {
                     return false;
+                }
+                // Check if there are some rules for targets are violated, if so reset the targets and start again
+                if (this.getUnchosen().isEmpty()
+                        && game.replaceEvent(new GameEvent(GameEvent.EventType.TARGETS_VALID, source.getSourceId(), source.getSourceId(), source.getControllerId()), source)) {
+                    game.restoreState(state, "Targets");
+                    clearChosen();
                 }
             }
         }
@@ -114,12 +113,8 @@ public class Targets extends ArrayList<Target> {
     public boolean stillLegal(Ability source, Game game) {
         // 608.2
         // The spell or ability is countered if all its targets, for every instance of the word "target," are now illegal
-        int illegalCount = 0;
-        for (Target target : this) {
-            if (!target.isLegal(source, game)) {
-                illegalCount++;
-            }
-        }
+        int illegalCount = (int) stream().filter(target -> !target.isLegal(source, game)).count();
+
         // it is legal when either there is no target or not all targets are illegal
         return this.isEmpty() || this.size() != illegalCount;
     }
@@ -134,12 +129,7 @@ public class Targets extends ArrayList<Target> {
      * @return - true if enough valid targets exist
      */
     public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
-        for (Target target : this) {
-            if (!target.canChoose(sourceId, sourceControllerId, game)) {
-                return false;
-            }
-        }
-        return true;
+        return stream().allMatch(target -> target.canChoose(sourceId, sourceControllerId, game));
     }
 
     /**
@@ -152,12 +142,7 @@ public class Targets extends ArrayList<Target> {
      * @return - true if enough valid objects exist
      */
     public boolean canChoose(UUID sourceControllerId, Game game) {
-        for (Target target : this) {
-            if (!target.canChoose(sourceControllerId, game)) {
-                return false;
-            }
-        }
-        return true;
+        return stream().allMatch(target -> target.canChoose(sourceControllerId, game));
     }
 
     public UUID getFirstTarget() {
@@ -166,7 +151,6 @@ public class Targets extends ArrayList<Target> {
         }
         return null;
     }
-
     public Targets copy() {
         return new Targets(this);
     }

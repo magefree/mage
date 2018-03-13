@@ -16,20 +16,13 @@ import mage.game.Game;
  *
  * @author LevelX2
  */
-public class BeforeBlockersAreDeclaredCondition implements Condition {
+public enum BeforeBlockersAreDeclaredCondition implements Condition {
 
-    private static final BeforeBlockersAreDeclaredCondition fInstance = new BeforeBlockersAreDeclaredCondition();
-
-    public static Condition getInstance() {
-        return fInstance;
-    }
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return !(game.getStep().getType().equals(PhaseStep.DECLARE_BLOCKERS)
-                || game.getStep().getType().equals(PhaseStep.FIRST_COMBAT_DAMAGE)
-                || game.getStep().getType().equals(PhaseStep.COMBAT_DAMAGE)
-                || game.getStep().getType().equals(PhaseStep.END_COMBAT));
+        return game.getStep().getType().isBefore(PhaseStep.DECLARE_BLOCKERS);
     }
 
     @Override

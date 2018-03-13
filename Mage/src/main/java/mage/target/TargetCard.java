@@ -30,6 +30,8 @@ package mage.target;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
+import mage.MageItem;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.constants.Zone;
@@ -44,7 +46,7 @@ import mage.players.Player;
  */
 public class TargetCard extends TargetObject {
 
-    protected FilterCard filter;
+    protected final FilterCard filter;
 
     protected TargetCard(Zone zone) {
         this(1, 1, zone, new FilterCard());
@@ -85,6 +87,9 @@ public class TargetCard extends TargetObject {
     @Override
     public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
         int possibleTargets = 0;
+        if (getNumberOfTargets() == 0) { // if 0 target is valid, the canChoose is always true
+            return true;
+        }
         for (UUID playerId : game.getState().getPlayersInRange(sourceControllerId, game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
@@ -200,11 +205,7 @@ public class TargetCard extends TargetObject {
     }
 
     public Set<UUID> possibleTargets(UUID sourceControllerId, Cards cards, Game game) {
-        Set<UUID> possibleTargets = new HashSet<>();
-        for (Card card : cards.getCards(filter, game)) {
-            possibleTargets.add(card.getId());
-        }
-        return possibleTargets;
+        return cards.getCards(filter,game).stream().map(MageItem::getId).collect(Collectors.toSet());
     }
 
     @Override
@@ -214,10 +215,7 @@ public class TargetCard extends TargetObject {
 
     public boolean canTarget(UUID id, Cards cards, Game game) {
         Card card = cards.get(id, game);
-        if (card != null) {
-            return filter.match(card, game);
-        }
-        return false;
+        return card != null && filter.match(card, game);
     }
 
     @Override

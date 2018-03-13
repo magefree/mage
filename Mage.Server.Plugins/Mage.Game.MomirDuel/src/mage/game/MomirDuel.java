@@ -29,7 +29,6 @@ package mage.game;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -40,6 +39,8 @@ import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.InfoEffect;
 import mage.cards.Card;
+import mage.cards.ExpansionSet;
+import mage.cards.Sets;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
@@ -48,14 +49,17 @@ import mage.constants.MultiplayerAttackOption;
 import mage.constants.Outcome;
 import mage.constants.PhaseStep;
 import mage.constants.RangeOfInfluence;
+import mage.constants.SetType;
 import mage.constants.TimingRule;
 import mage.constants.Zone;
 import mage.game.command.Emblem;
+import mage.game.command.emblems.MomirEmblem;
 import mage.game.match.MatchType;
 import mage.game.permanent.token.EmptyToken;
 import mage.game.turn.TurnMod;
 import mage.players.Player;
 import mage.util.CardUtil;
+import mage.util.RandomUtil;
 
 /**
  *
@@ -87,7 +91,8 @@ public class MomirDuel extends GameImpl {
         for (UUID playerId : state.getPlayerList(startingPlayerId)) {
             Player player = getPlayer(playerId);
             if (player != null) {
-                addEmblem(new MomirEmblem(), ability, playerId);
+                CardInfo cardInfo = CardRepository.instance.findCard("Momir Vig, Simic Visionary");
+                addEmblem(new MomirEmblem(), cardInfo.getCard(), playerId);
             }
         }
         getState().addAbility(ability, null);
@@ -116,55 +121,4 @@ public class MomirDuel extends GameImpl {
         return new MomirDuel(this);
     }
 
-}
-
-// faking Vanguard as an Emblem; need to come back to this and add a new type of CommandObject
-class MomirEmblem extends Emblem {
-
-    public MomirEmblem() {
-        setName("Momir Vig, Simic Visionary");
-        //TODO: setExpansionSetCodeForImage(???);
-        // {X}, Discard a card: Put a token into play as a copy of a random creature card with converted mana cost X. Play this ability only any time you could play a sorcery and only once each turn.
-        LimitedTimesPerTurnActivatedAbility ability = new LimitedTimesPerTurnActivatedAbility(Zone.COMMAND, new MomirEffect(), new VariableManaCost());
-        ability.addCost(new DiscardCardCost());
-        ability.setTiming(TimingRule.SORCERY);
-        this.getAbilities().add(ability);
-
-    }
-}
-
-class MomirEffect extends OneShotEffect {
-
-    private static final Random rnd = new Random();
-
-    public MomirEffect() {
-        super(Outcome.PutCreatureInPlay);
-    }
-
-    public MomirEffect(MomirEffect effect) {
-        super(effect);
-        staticText = "Put a token into play as a copy of a random creature card with converted mana cost X";
-    }
-
-    @Override
-    public MomirEffect copy() {
-        return new MomirEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        int value = source.getManaCostsToPay().getX();
-        // should this be random across card names, or card printings?
-        CardCriteria criteria = new CardCriteria().types(CardType.CREATURE).convertedManaCost(value);
-        List<CardInfo> options = CardRepository.instance.findCards(criteria);
-        if (options != null && !options.isEmpty()) {
-            Card card = options.get(rnd.nextInt(options.size())).getCard();
-            EmptyToken token = new EmptyToken();
-            CardUtil.copyTo(token).from(card);
-            token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId(), false, false);
-        } else {
-            game.informPlayers("No random creature card with converted mana cost of " + value + " was found.");
-        }
-        return true;
-    }
 }

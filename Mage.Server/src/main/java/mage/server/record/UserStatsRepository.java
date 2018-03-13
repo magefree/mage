@@ -7,16 +7,18 @@ import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.support.DatabaseConnection;
 import com.j256.ormlite.table.TableUtils;
-import java.io.File;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
 import mage.cards.repository.RepositoryUtil;
 import mage.game.result.ResultProtos;
 import mage.server.rating.GlickoRating;
 import mage.server.rating.GlickoRatingSystem;
 import org.apache.log4j.Logger;
+
+import java.io.File;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public enum UserStatsRepository {
 
@@ -29,7 +31,7 @@ public enum UserStatsRepository {
 
     private Dao<UserStats, Object> dao;
 
-    private UserStatsRepository() {
+    UserStatsRepository() {
         File file = new File("db");
         if (!file.exists()) {
             file.mkdirs();
@@ -68,9 +70,9 @@ public enum UserStatsRepository {
     public UserStats getUser(String userName) {
         try {
             QueryBuilder<UserStats, Object> qb = dao.queryBuilder();
-            qb.where().eq("userName", userName);
+            qb.limit(1L).where().eq("userName", userName);
             List<UserStats> users = dao.query(qb.prepare());
-            if (users.size() == 1) {
+            if (!users.isEmpty()) {
                 return users.get(0);
             }
         } catch (SQLException ex) {
@@ -92,9 +94,9 @@ public enum UserStatsRepository {
     public long getLatestEndTimeMs() {
         try {
           QueryBuilder<UserStats, Object> qb = dao.queryBuilder();
-          qb.orderBy("endTimeMs", false).limit(1);
+            qb.orderBy("endTimeMs", false).limit(1L);
           List<UserStats> users = dao.query(qb.prepare());
-          if (users.size() == 1) {
+            if (!users.isEmpty()) {
               return users.get(0).getEndTimeMs();
           }
         } catch (SQLException ex) {
@@ -106,7 +108,7 @@ public enum UserStatsRepository {
     // updateUserStats reads tables finished after the last DB update and reflects it to the DB.
     // It returns the list of user names that are upated.
     public List<String> updateUserStats() {
-        HashSet<String> updatedUsers = new HashSet();
+        Set<String> updatedUsers = new HashSet<>();
         // Lock the DB so that no other updateUserStats runs at the same time.
         synchronized(this) {
             long latestEndTimeMs = this.getLatestEndTimeMs();

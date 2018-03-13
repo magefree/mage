@@ -55,7 +55,6 @@ public class TargetArtifactPermanent extends TargetPermanent {
 
     public TargetArtifactPermanent(int minNumTargets, int maxNumTargets, FilterArtifactPermanent filter, boolean notTarget) {
         super(minNumTargets, maxNumTargets, filter, notTarget);
-        this.targetName = filter.getMessage();
     }
 
     public TargetArtifactPermanent(final TargetArtifactPermanent target) {

@@ -90,7 +90,7 @@ public class SearchLibraryPutInHandEffect extends SearchEffect {
         }
         target.clearChosen();
         if (controller.searchLibrary(target, game)) {
-            if (target.getTargets().size() > 0) {
+            if (!target.getTargets().isEmpty()) {
                 Cards cards = new CardsImpl();
                 for (UUID cardId : target.getTargets()) {
                     Card card = game.getCard(cardId);
@@ -98,7 +98,7 @@ public class SearchLibraryPutInHandEffect extends SearchEffect {
                         cards.add(card);
                     }
                 }
-                controller.moveCards(cards, null, Zone.HAND, source, game);
+                controller.moveCards(cards, Zone.HAND, source, game);
                 if (revealCards) {
                     String name = "Reveal";
                     Card sourceCard = game.getCard(source.getSourceId());
@@ -121,7 +121,7 @@ public class SearchLibraryPutInHandEffect extends SearchEffect {
         StringBuilder sb = new StringBuilder();
         sb.append(rulePrefix);
         if (target.getNumberOfTargets() == 0 && target.getMaxNumberOfTargets() > 0) {
-            sb.append("up to ").append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(" ");
+            sb.append("up to ").append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(' ');
             sb.append(target.getTargetName()).append(revealCards ? ", reveal them," : "").append(" and put them into your hand");
         } else {
             sb.append("a ").append(target.getTargetName()).append(revealCards ? ", reveal it," : "").append(" and put that card into your hand");

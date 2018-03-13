@@ -33,9 +33,25 @@
  */
 package mage.client.draft;
 
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Image;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
+import mage.client.MageFrame;
+import mage.client.SessionHandler;
+import mage.client.components.tray.MageTray;
+import mage.client.deckeditor.SortSettingDraft;
+import mage.client.dialog.PreferencesDialog;
+import mage.client.plugins.impl.Plugins;
+import mage.client.util.*;
+import mage.client.util.Event;
+import mage.client.util.audio.AudioManager;
+import mage.client.util.gui.BufferedImageBuilder;
+import mage.constants.PlayerAction;
+import mage.view.*;
+import org.apache.log4j.Logger;
+
+import javax.swing.*;
+import javax.swing.Timer;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -46,43 +62,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.text.SimpleDateFormat;
-import java.util.Collection;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
-import javax.swing.AbstractAction;
-import javax.swing.ImageIcon;
-import javax.swing.JComponent;
-import javax.swing.JMenuItem;
-import javax.swing.JPopupMenu;
-import javax.swing.KeyStroke;
-import javax.swing.Timer;
-import mage.cards.repository.CardInfo;
-import mage.cards.repository.CardRepository;
-import mage.client.MageFrame;
-import mage.client.components.tray.MageTray;
-import mage.client.deckeditor.SortSettingDraft;
-import mage.client.dialog.PreferencesDialog;
-import mage.client.plugins.impl.Plugins;
-import mage.client.util.CardsViewUtil;
-import mage.client.util.Event;
-import mage.client.util.GUISizeHelper;
-import mage.client.util.ImageHelper;
-import mage.client.util.Listener;
-import mage.client.util.audio.AudioManager;
-import mage.client.util.gui.BufferedImageBuilder;
-import mage.constants.PlayerAction;
-import mage.remote.Session;
-import mage.view.CardsView;
-import mage.view.DraftPickView;
-import mage.view.DraftView;
-import mage.view.SimpleCardView;
-import mage.view.SimpleCardsView;
-import mage.view.UserRequestMessage;
-import org.apache.log4j.Logger;
+import java.util.*;
 
 /**
  *
@@ -93,7 +73,6 @@ public class DraftPanel extends javax.swing.JPanel {
     private static final Logger LOGGER = Logger.getLogger(DraftPanel.class);
 
     private UUID draftId;
-    private Session session;
     private Timer countdown;
     private int timeout;
 
@@ -106,7 +85,7 @@ public class DraftPanel extends javax.swing.JPanel {
     // all cards picked
     protected SimpleCardsView pickedCards;
     // all cards picked
-    protected SimpleCardsView pickedCardsShown = new SimpleCardsView();
+    protected final SimpleCardsView pickedCardsShown = new SimpleCardsView();
     // id of card with popup menu
     protected UUID cardIdPopupMenu;
 
@@ -146,17 +125,14 @@ public class DraftPanel extends javax.swing.JPanel {
         draftLeftPane.setOpaque(false);
 
         countdown = new Timer(1000,
-                new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (--timeout > 0) {
-                    setTimeout(timeout);
-                } else {
-                    setTimeout(0);
-                    countdown.stop();
+                e -> {
+                    if (--timeout > 0) {
+                        setTimeout(timeout);
+                    } else {
+                        setTimeout(0);
+                        countdown.stop();
+                    }
                 }
-            }
-        }
         );
     }
 
@@ -183,9 +159,8 @@ public class DraftPanel extends javax.swing.JPanel {
 
     public synchronized void showDraft(UUID draftId) {
         this.draftId = draftId;
-        session = MageFrame.getSession();
         MageFrame.addDraft(draftId, this);
-        if (!session.joinDraft(draftId)) {
+        if (!SessionHandler.joinDraft(draftId)) {
             hideDraft();
         }
 
@@ -193,7 +168,7 @@ public class DraftPanel extends javax.swing.JPanel {
             // If we are logging the draft create a file that will contain
             // the log.
             SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
-            logFilename = "Draft_" + sdf.format(new Date()) + "_" + draftId + ".txt";
+            logFilename = "Draft_" + sdf.format(new Date()) + '_' + draftId + ".txt";
             try {
                 Files.write(pathToDraftLog(), "".getBytes(), StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
             } catch (IOException ex) {
@@ -308,18 +283,15 @@ public class DraftPanel extends javax.swing.JPanel {
         loadCardsToPickedCardsArea(draftPickView.getPicks());
 
         this.draftPicks.clearCardEventListeners();
-        this.draftPicks.addCardEventListener(new Listener<Event>() {
-            @Override
-            public void event(Event event) {
-                if (event.getEventName().equals("show-popup-menu")) {
-                    if (event.getSource() != null) {
-                        // Popup Menu Card
-                        cardIdPopupMenu = ((SimpleCardView) event.getSource()).getId();
-                        popupMenuCardPanel.show(event.getComponent(), event.getxPos(), event.getyPos());
-                    } else {
-                        // Popup Menu area
-                        popupMenuPickedArea.show(event.getComponent(), event.getxPos(), event.getyPos());
-                    }
+        this.draftPicks.addCardEventListener((Listener<Event>) event -> {
+            if (event.getEventType() == ClientEventType.SHOW_POP_UP_MENU) {
+                if (event.getSource() != null) {
+                    // Popup Menu Card
+                    cardIdPopupMenu = ((SimpleCardView) event.getSource()).getId();
+                    popupMenuCardPanel.show(event.getComponent(), event.getxPos(), event.getyPos());
+                } else {
+                    // Popup Menu area
+                    popupMenuPickedArea.show(event.getComponent(), event.getxPos(), event.getyPos());
                 }
             }
         }
@@ -329,30 +301,27 @@ public class DraftPanel extends javax.swing.JPanel {
         draftBooster.loadBooster(CardsViewUtil.convertSimple(draftPickView.getBooster()), bigCard);
         this.draftBooster.clearCardEventListeners();
         this.draftBooster.addCardEventListener(
-                new Listener<Event>() {
-            @Override
-            public void event(Event event) {
-                if (event.getEventName().equals("pick-a-card")) {
-                    SimpleCardView source = (SimpleCardView) event.getSource();
-                    DraftPickView view = session.sendCardPick(draftId, source.getId(), cardsHidden);
-                    if (view != null) {
-                        loadCardsToPickedCardsArea(view.getPicks());
-                        draftBooster.loadBooster(EMPTY_VIEW, bigCard);
-                        Plugins.getInstance().getActionCallback().hideTooltipPopup();
-                        setMessage("Waiting for other players");
+                (Listener<Event>) event -> {
+                    if (event.getEventType() == ClientEventType.PICK_A_CARD) {
+                        SimpleCardView source = (SimpleCardView) event.getSource();
+                        DraftPickView view = SessionHandler.sendCardPick(draftId, source.getId(), cardsHidden);
+                        if (view != null) {
+                            loadCardsToPickedCardsArea(view.getPicks());
+                            draftBooster.loadBooster(EMPTY_VIEW, bigCard);
+                            Plugins.instance.getActionCallback().hideOpenComponents();
+                            setMessage("Waiting for other players");
+                        }
+                    }
+                    if (event.getEventType() == ClientEventType.MARK_A_CARD) {
+                        SimpleCardView source = (SimpleCardView) event.getSource();
+                        SessionHandler.sendCardMark(draftId, source.getId());
                     }
                 }
-                if (event.getEventName().equals("mark-a-card")) {
-                    SimpleCardView source = (SimpleCardView) event.getSource();
-                    session.sendCardMark(draftId, source.getId());
-                }
-            }
-        }
         );
         setMessage("Pick a card");
         if (!MageFrame.getInstance().isActive()) {
-            MageTray.getInstance().displayMessage("Pick the next card.");
-            MageTray.getInstance().blink();
+            MageTray.instance.displayMessage("Pick the next card.");
+            MageTray.instance.blink();
         }
         countdown.stop();
         this.timeout = draftPickView.getTimeout();
@@ -377,12 +346,12 @@ public class DraftPanel extends javax.swing.JPanel {
         int second = s - (minute * 60);
         String text;
         if (minute < 10) {
-            text = "0" + Integer.toString(minute) + ":";
+            text = '0' + Integer.toString(minute) + ':';
         } else {
-            text = Integer.toString(minute) + ":";
+            text = Integer.toString(minute) + ':';
         }
         if (second < 10) {
-            text = text + "0" + Integer.toString(second);
+            text = text + '0' + Integer.toString(second);
         } else {
             text = text + Integer.toString(second);
         }
@@ -424,12 +393,7 @@ public class DraftPanel extends javax.swing.JPanel {
         popupMenuPickedArea.add(menuItem);
 
         // Confirm (F9)
-        menuItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                showAgainAllHiddenCards();
-            }
-        });
+        menuItem.addActionListener(e -> showAgainAllHiddenCards());
 
         // popupMenuPickedArea.addSeparator();
     }
@@ -442,12 +406,7 @@ public class DraftPanel extends javax.swing.JPanel {
         popupMenuCardPanel.add(menuItem);
 
         // Hide Card
-        menuItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                hideThisCard(cardIdPopupMenu);
-            }
-        });
+        menuItem.addActionListener(e -> hideThisCard(cardIdPopupMenu));
 
         // popupMenuCardPanel.addSeparator();
     }
@@ -610,11 +569,7 @@ public class DraftPanel extends javax.swing.JPanel {
         draftLeftPane.setVerifyInputWhenFocusTarget(false);
 
         btnQuitTournament.setText("Quit Tournament");
-        btnQuitTournament.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnQuitTournamentActionPerformed(evt);
-            }
-        });
+        btnQuitTournament.addActionListener(evt -> btnQuitTournamentActionPerformed(evt));
 
         lblPack1.setText("Pack 1:");
 

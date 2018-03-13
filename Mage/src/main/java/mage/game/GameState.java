@@ -28,35 +28,16 @@
 package mage.game;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedHashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import mage.MageObject;
-import mage.abilities.Abilities;
-import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
-import mage.abilities.DelayedTriggeredAbilities;
-import mage.abilities.DelayedTriggeredAbility;
-import mage.abilities.MageSingleton;
-import mage.abilities.Mode;
-import mage.abilities.SpecialActions;
-import mage.abilities.StaticAbility;
-import mage.abilities.TriggeredAbilities;
-import mage.abilities.TriggeredAbility;
+import mage.abilities.*;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffects;
 import mage.abilities.effects.Effect;
 import mage.cards.Card;
 import mage.cards.SplitCard;
 import mage.constants.Zone;
+import mage.designations.Designation;
 import mage.game.combat.Combat;
 import mage.game.combat.CombatGroup;
 import mage.game.command.Command;
@@ -108,8 +89,11 @@ public class GameState implements Serializable, Copyable<GameState> {
     private TurnMods turnMods;
     private UUID activePlayerId; // playerId which turn it is
     private UUID priorityPlayerId; // player that has currently priority
+    private UUID playerByOrderId; // player that has currently priority
+    private UUID monarchId; // player that is the monarch
     private SpellStack stack;
     private Command command;
+    private List<Designation> designations = new ArrayList<>();
     private Exile exile;
     private Battlefield battlefield;
     private int turnNum = 1;
@@ -161,10 +145,13 @@ public class GameState implements Serializable, Copyable<GameState> {
 
         this.activePlayerId = state.activePlayerId;
         this.priorityPlayerId = state.priorityPlayerId;
+        this.playerByOrderId = state.playerByOrderId;
+        this.monarchId = state.monarchId;
         this.turn = state.turn.copy();
 
         this.stack = state.stack.copy();
         this.command = state.command.copy();
+        this.designations.addAll(state.designations);
         this.exile = state.exile.copy();
         this.battlefield = state.battlefield.copy();
         this.turnNum = state.turnNum;
@@ -182,7 +169,11 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.turnMods = state.turnMods.copy();
         this.watchers = state.watchers.copy();
         for (Map.Entry<String, Object> entry : state.values.entrySet()) {
-            this.values.put(entry.getKey(), entry.getValue());
+            if (entry.getValue() instanceof HashSet) {
+                this.values.put(entry.getKey(), (HashSet) ((HashSet) entry.getValue()).clone());
+            } else {
+                this.values.put(entry.getKey(), entry.getValue());
+            }
         }
         this.zones.putAll(state.zones);
         this.simultaneousEvents.addAll(state.simultaneousEvents);
@@ -204,10 +195,13 @@ public class GameState implements Serializable, Copyable<GameState> {
 
     public void restore(GameState state) {
         this.activePlayerId = state.activePlayerId;
-        this.playerList.setCurrent(state.playerList.get());
+        this.playerList.setCurrent(state.activePlayerId);
+        this.playerByOrderId = state.playerByOrderId;
         this.priorityPlayerId = state.priorityPlayerId;
+        this.monarchId = state.monarchId;
         this.stack = state.stack;
         this.command = state.command;
+        this.designations = state.designations;
         this.exile = state.exile;
         this.battlefield = state.battlefield;
         this.turnNum = state.turnNum;
@@ -250,7 +244,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         StringBuilder sb = threadLocalBuilder.get();
 
         sb.append(turn.getValue(turnNum));
-        sb.append(activePlayerId).append(priorityPlayerId);
+        sb.append(activePlayerId).append(priorityPlayerId).append(playerByOrderId);
 
         for (Player player : players.values()) {
             sb.append("player").append(player.getLife()).append("hand");
@@ -264,7 +258,7 @@ public class GameState implements Serializable, Copyable<GameState> {
 
         sb.append("permanents");
         for (Permanent permanent : battlefield.getAllPermanents()) {
-            sb.append(permanent.getValue());
+            sb.append(permanent.getValue(this));
         }
 
         sb.append("spells");
@@ -288,7 +282,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         StringBuilder sb = threadLocalBuilder.get();
 
         sb.append(turn.getValue(turnNum));
-        sb.append(activePlayerId).append(priorityPlayerId);
+        sb.append(activePlayerId).append(priorityPlayerId).append(playerByOrderId);
 
         for (Player player : players.values()) {
             sb.append("player").append(player.isPassed()).append(player.getLife()).append("hand");
@@ -305,7 +299,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         sb.append("permanents");
         List<String> perms = new ArrayList<>();
         for (Permanent permanent : battlefield.getAllPermanents()) {
-            perms.add(permanent.getValue());
+            perms.add(permanent.getValue(this));
         }
         Collections.sort(perms);
         sb.append(perms);
@@ -314,7 +308,8 @@ public class GameState implements Serializable, Copyable<GameState> {
         for (StackObject spell : stack) {
             sb.append(spell.getControllerId()).append(spell.getName());
             sb.append(spell.getStackAbility().toString());
-            for (Mode mode : spell.getStackAbility().getModes().getSelectedModes()) {
+            for (UUID modeId : spell.getStackAbility().getModes().getSelectedModes()) {
+                Mode mode = spell.getStackAbility().getModes().get(modeId);
                 if (!mode.getTargets().isEmpty()) {
                     sb.append("targets");
                     for (Target target : mode.getTargets()) {
@@ -340,11 +335,11 @@ public class GameState implements Serializable, Copyable<GameState> {
         StringBuilder sb = threadLocalBuilder.get();
 
         sb.append(turn.getValue(turnNum));
-        sb.append(activePlayerId).append(priorityPlayerId);
+        sb.append(activePlayerId).append(priorityPlayerId).append(playerByOrderId);
 
         for (Player player : players.values()) {
             sb.append("player").append(player.isPassed()).append(player.getLife()).append("hand");
-            if (playerId == player.getId()) {
+            if (Objects.equals(playerId, player.getId())) {
                 sb.append(player.getHand().getValue(game));
             } else {
                 sb.append(player.getHand().size());
@@ -357,7 +352,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         sb.append("permanents");
         List<String> perms = new ArrayList<>();
         for (Permanent permanent : battlefield.getAllPermanents()) {
-            perms.add(permanent.getValue());
+            perms.add(permanent.getValue(this));
         }
         Collections.sort(perms);
         sb.append(perms);
@@ -366,7 +361,8 @@ public class GameState implements Serializable, Copyable<GameState> {
         for (StackObject spell : stack) {
             sb.append(spell.getControllerId()).append(spell.getName());
             sb.append(spell.getStackAbility().toString());
-            for (Mode mode : spell.getStackAbility().getModes().getSelectedModes()) {
+            for (UUID modeId : spell.getStackAbility().getModes().getSelectedModes()) {
+                Mode mode = spell.getStackAbility().getModes().get(modeId);
                 if (!mode.getTargets().isEmpty()) {
                     sb.append("targets");
                     for (Target target : mode.getTargets()) {
@@ -404,12 +400,28 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.activePlayerId = activePlayerId;
     }
 
+    public UUID getPlayerByOrderId() {
+        return playerByOrderId;
+    }
+
+    public void setPlayerByOrderId(UUID playerByOrderId) {
+        this.playerByOrderId = playerByOrderId;
+    }
+
     public UUID getPriorityPlayerId() {
         return priorityPlayerId;
     }
 
     public void setPriorityPlayerId(UUID priorityPlayerId) {
         this.priorityPlayerId = priorityPlayerId;
+    }
+
+    public UUID getMonarchId() {
+        return monarchId;
+    }
+
+    public void setMonarchId(UUID monarchId) {
+        this.monarchId = monarchId;
     }
 
     public UUID getChoosingPlayerId() {
@@ -430,6 +442,10 @@ public class GameState implements Serializable, Copyable<GameState> {
 
     public Exile getExile() {
         return exile;
+    }
+
+    public List<Designation> getDesignations() {
+        return designations;
     }
 
     public Command getCommand() {
@@ -526,11 +542,10 @@ public class GameState implements Serializable, Copyable<GameState> {
     // 608.2e
     public void processAction(Game game) {
         game.getState().handleSimultaneousEvent(game);
-        applyEffects(game);
+        game.applyEffects();
     }
 
     public void applyEffects(Game game) {
-        game.resetShortLivingLKI();
         for (Player player : players.values()) {
             player.reset();
         }
@@ -545,13 +560,13 @@ public class GameState implements Serializable, Copyable<GameState> {
     public void removeEocEffects(Game game) {
         effects.removeEndOfCombatEffects();
         delayed.removeEndOfCombatAbilities();
-        applyEffects(game);
+        game.applyEffects();
     }
 
     public void removeEotEffects(Game game) {
         effects.removeEndOfTurnEffects();
         delayed.removeEndOfTurnAbilities();
-        applyEffects(game);
+        game.applyEffects();
     }
 
     public void addEffect(ContinuousEffect effect, Ability source) {
@@ -784,7 +799,8 @@ public class GameState implements Serializable, Copyable<GameState> {
 
     public void addAbility(Ability ability, MageObject attachedTo) {
         if (ability instanceof StaticAbility) {
-            for (Mode mode : ability.getModes().getSelectedModes()) {
+            for (UUID modeId : ability.getModes().getSelectedModes()) {
+                Mode mode = ability.getModes().get(modeId);
                 for (Effect effect : mode.getEffects()) {
                     if (effect instanceof ContinuousEffect) {
                         addEffect((ContinuousEffect) effect, ability);
@@ -806,7 +822,8 @@ public class GameState implements Serializable, Copyable<GameState> {
      */
     public void addAbility(Ability ability, UUID sourceId, Card attachedTo) {
         if (ability instanceof StaticAbility) {
-            for (Mode mode : ability.getModes().getSelectedModes()) {
+            for (UUID modeId : ability.getModes().getSelectedModes()) {
+                Mode mode = ability.getModes().get(modeId);
                 for (Effect effect : mode.getEffects()) {
                     if (effect instanceof ContinuousEffect) {
                         addEffect((ContinuousEffect) effect, sourceId, ability);
@@ -826,6 +843,14 @@ public class GameState implements Serializable, Copyable<GameState> {
         }
         for (Ability sub : ability.getSubAbilities()) {
             addAbility(sub, sourceId, attachedTo);
+        }
+    }
+
+    public void addDesignation(Designation designation, Game game, UUID controllerId) {
+        getDesignations().add(designation);
+        for (Ability ability : designation.getAbilities()) {
+            ability.setControllerId(controllerId);
+            addAbility(ability, designation.getId(), null);
         }
     }
 
@@ -889,8 +914,10 @@ public class GameState implements Serializable, Copyable<GameState> {
 
     /**
      * Best only use immutable objects, otherwise the states/values of the
-     * object may be changed by AI simulation, because the Value objects are not
-     * copied as the state class is copied.
+     * object may be changed by AI simulation or rollbacks, because the Value
+     * objects are not copied as the state class is copied. Mutable supported:
+     * HashSet with immutable entries (e.g. HashSet< UUID > or HashSet< String
+     * >)
      *
      * @param valueId
      * @param value
@@ -994,6 +1021,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         stack.clear();
         exile.clear();
         command.clear();
+        designations.clear();
         revealed.clear();
         lookedAt.clear();
         turnNum = 0;
@@ -1043,9 +1071,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     public CardState getCardState(UUID cardId) {
-        if (!cardState.containsKey(cardId)) {
-            cardState.put(cardId, new CardState());
-        }
+        cardState.putIfAbsent(cardId, new CardState());
         return cardState.get(cardId);
     }
 
@@ -1053,12 +1079,8 @@ public class GameState implements Serializable, Copyable<GameState> {
         return cardAttribute.get(cardId);
     }
 
-    public CardAttribute getCreateCardAttribute(Card card) {
-        CardAttribute cardAtt = cardAttribute.get(card.getId());
-        if (cardAtt == null) {
-            cardAtt = new CardAttribute(card);
-            cardAttribute.put(card.getId(), cardAtt);
-        }
+    public CardAttribute getCreateCardAttribute(Card card, Game game) {
+        CardAttribute cardAtt = cardAttribute.computeIfAbsent(card.getId(), k -> new CardAttribute(card, game));
         return cardAtt;
     }
 

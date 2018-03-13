@@ -1,5 +1,7 @@
 package mage.constants;
 
+import mage.game.turn.Phase;
+
 /**
  *
  * @author North
@@ -11,7 +13,7 @@ public enum PhaseStep {
     PRECOMBAT_MAIN ("Precombat Main", 3,"precombat main step"),
     BEGIN_COMBAT ("Begin Combat", 4, "begin combat step"),
     DECLARE_ATTACKERS ("Declare Attackers", 5, "declare attackers step"),
-    DECLARE_BLOCKERS ("Declare Blockers", 6, "declare blockers"),
+    DECLARE_BLOCKERS ("Declare Blockers", 6, "declare blockers step"),
     FIRST_COMBAT_DAMAGE ("First Combat Damage", 7, "first combat damage"),
     COMBAT_DAMAGE ("Combat Damage", 8, "combat damage step"),
     END_COMBAT ("End Combat", 9, "end combat step"),
@@ -31,6 +33,14 @@ public enum PhaseStep {
         this.text = text;
         this.index = index;
         this.stepText = stepText;
+    }
+
+    public boolean isBefore(PhaseStep other){
+        return this.getIndex()<other.getIndex();
+    }
+
+    public boolean isAfter(PhaseStep other){
+        return this.getIndex()>other.getIndex();
     }
 
     public int getIndex() {

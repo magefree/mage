@@ -40,10 +40,12 @@ import mage.abilities.effects.Effects;
 import mage.constants.AbilityType;
 import mage.constants.AbilityWord;
 import mage.constants.EffectType;
+import mage.constants.TargetAdjustment;
 import mage.constants.Zone;
 import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.Targets;
@@ -409,8 +411,9 @@ public interface Ability extends Controllable, Serializable {
      * true = show the rule at the top position of the rules
      *
      * @param ruleAtTheTop
+     * @return
      */
-    void setRuleAtTheTop(boolean ruleAtTheTop);
+    Ability setRuleAtTheTop(boolean ruleAtTheTop);
 
     /**
      * Returns true if this ability has to work also with face down object (set
@@ -533,9 +536,24 @@ public interface Ability extends Controllable, Serializable {
      */
     MageObject getSourceObjectIfItStillExists(Game game);
 
+    /**
+     * Returns the permanent that actually existed while the ability triggerd or
+     * an ability was activated only if it has not changed zone meanwhile. If
+     * not set yet, the current permanent if one exists will be retrieved from
+     * the game and returned.
+     *
+     * @param game
+     * @return
+     */
+    Permanent getSourcePermanentIfItStillExists(Game game);
+
     String getTargetDescription(Targets targets, Game game);
 
     void setCanFizzle(boolean canFizzle);
 
     boolean canFizzle();
+
+    void setTargetAdjustment(TargetAdjustment targetAdjustment);
+
+    TargetAdjustment getTargetAdjustment();
 }

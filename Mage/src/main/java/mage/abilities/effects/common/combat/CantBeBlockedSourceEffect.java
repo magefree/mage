@@ -45,7 +45,7 @@ public class CantBeBlockedSourceEffect extends RestrictionEffect {
     public CantBeBlockedSourceEffect(Duration duration) {
         super(duration);
         this.staticText = "{this} can't be blocked";
-        if (Duration.EndOfTurn.equals(this.duration)) {
+        if (this.duration == Duration.EndOfTurn) {
             this.staticText += " this turn";
         }
     }

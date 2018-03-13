@@ -24,8 +24,7 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.target.common;
 
 import mage.constants.Zone;
@@ -57,7 +56,11 @@ public class TargetCreatureOrPlayer extends TargetImpl {
     public TargetCreatureOrPlayer(int numTargets) {
         this(numTargets, numTargets, new FilterCreatureOrPlayer());
     }
-    
+
+    public TargetCreatureOrPlayer(FilterCreatureOrPlayer filter) {
+        this(1, 1, filter);
+    }
+
     public TargetCreatureOrPlayer(int numTargets, int maxNumTargets) {
         this(numTargets, maxNumTargets, new FilterCreatureOrPlayer());
     }
@@ -87,10 +90,7 @@ public class TargetCreatureOrPlayer extends TargetImpl {
             return filter.match(permanent, game);
         }
         Player player = game.getPlayer(id);
-        if (player != null) {
-            return filter.match(player, game);
-        }
-        return false;
+        return player != null && filter.match(player, game);
     }
 
     @Override
@@ -116,15 +116,13 @@ public class TargetCreatureOrPlayer extends TargetImpl {
         if (permanent != null) {
             return filter.match(permanent, game);
         }
-        if (player != null) {
-            return filter.match(player, game);
-        }
-        return false;
+        return player != null && filter.match(player, game);
     }
 
     /**
-     * Checks if there are enough {@link Permanent} or {@link Player} that can be chosen.  Should only be used
-     * for Ability targets since this checks for protection, shroud etc.
+     * Checks if there are enough {@link Permanent} or {@link Player} that can
+     * be chosen. Should only be used for Ability targets since this checks for
+     * protection, shroud etc.
      *
      * @param sourceId - the target event source
      * @param sourceControllerId - controller of the target event source
@@ -135,7 +133,7 @@ public class TargetCreatureOrPlayer extends TargetImpl {
     public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
         int count = 0;
         MageObject targetSource = game.getObject(sourceId);
-        for (UUID playerId: game.getState().getPlayersInRange(sourceControllerId, game)) {
+        for (UUID playerId : game.getState().getPlayersInRange(sourceControllerId, game)) {
             Player player = game.getPlayer(playerId);
             if (player != null && player.canBeTargetedBy(targetSource, sourceControllerId, game) && filter.match(player, game)) {
                 count++;
@@ -144,7 +142,7 @@ public class TargetCreatureOrPlayer extends TargetImpl {
                 }
             }
         }
-        for (Permanent permanent: game.getBattlefield().getActivePermanents(filter.getCreatureFilter(), sourceControllerId, game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter.getCreatureFilter(), sourceControllerId, game)) {
             if (permanent.canBeTargetedBy(targetSource, sourceControllerId, game) && filter.match(permanent, sourceId, sourceControllerId, game)) {
                 count++;
                 if (count >= this.minNumberOfTargets) {
@@ -156,8 +154,9 @@ public class TargetCreatureOrPlayer extends TargetImpl {
     }
 
     /**
-     * Checks if there are enough {@link Permanent} or {@link Player} that can be selected.  Should not be used
-     * for Ability targets since this does not check for protection, shroud etc.
+     * Checks if there are enough {@link Permanent} or {@link Player} that can
+     * be selected. Should not be used for Ability targets since this does not
+     * check for protection, shroud etc.
      *
      * @param sourceControllerId - controller of the select event
      * @param game
@@ -166,7 +165,7 @@ public class TargetCreatureOrPlayer extends TargetImpl {
     @Override
     public boolean canChoose(UUID sourceControllerId, Game game) {
         int count = 0;
-        for (UUID playerId: game.getState().getPlayersInRange(sourceControllerId, game)) {
+        for (UUID playerId : game.getState().getPlayersInRange(sourceControllerId, game)) {
             Player player = game.getPlayer(playerId);
             if (player != null && filter.match(player, game)) {
                 count++;
@@ -175,7 +174,7 @@ public class TargetCreatureOrPlayer extends TargetImpl {
                 }
             }
         }
-        for (Permanent permanent: game.getBattlefield().getActivePermanents(filter.getCreatureFilter(), sourceControllerId, game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter.getCreatureFilter(), sourceControllerId, game)) {
             if (filter.match(permanent, null, sourceControllerId, game)) {
                 count++;
                 if (count >= this.minNumberOfTargets) {
@@ -190,7 +189,7 @@ public class TargetCreatureOrPlayer extends TargetImpl {
     public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
         MageObject targetSource = game.getObject(sourceId);
-        for (UUID playerId: game.getState().getPlayersInRange(sourceControllerId, game)) {
+        for (UUID playerId : game.getState().getPlayersInRange(sourceControllerId, game)) {
             Player player = game.getPlayer(playerId);
             if (player != null
                     && player.canBeTargetedBy(targetSource, sourceControllerId, game)
@@ -198,7 +197,7 @@ public class TargetCreatureOrPlayer extends TargetImpl {
                 possibleTargets.add(playerId);
             }
         }
-        for (Permanent permanent: game.getBattlefield().getActivePermanents(filter.getCreatureFilter(), sourceControllerId, game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter.getCreatureFilter(), sourceControllerId, game)) {
             if (permanent.canBeTargetedBy(targetSource, sourceControllerId, game)
                     && filter.getCreatureFilter().match(permanent, sourceId, sourceControllerId, game)) {
                 possibleTargets.add(permanent.getId());
@@ -210,13 +209,13 @@ public class TargetCreatureOrPlayer extends TargetImpl {
     @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
-        for (UUID playerId: game.getState().getPlayersInRange(sourceControllerId, game)) {
+        for (UUID playerId : game.getState().getPlayersInRange(sourceControllerId, game)) {
             Player player = game.getPlayer(playerId);
             if (player != null && filter.getPlayerFilter().match(player, game)) {
                 possibleTargets.add(playerId);
             }
         }
-        for (Permanent permanent: game.getBattlefield().getActivePermanents(filter.getCreatureFilter(), sourceControllerId, game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter.getCreatureFilter(), sourceControllerId, game)) {
             if (filter.getCreatureFilter().match(permanent, null, sourceControllerId, game)) {
                 possibleTargets.add(permanent.getId());
             }
@@ -227,15 +226,14 @@ public class TargetCreatureOrPlayer extends TargetImpl {
     @Override
     public String getTargetedName(Game game) {
         StringBuilder sb = new StringBuilder();
-        for (UUID targetId: getTargets()) {
+        for (UUID targetId : getTargets()) {
             Permanent permanent = game.getPermanent(targetId);
             if (permanent != null) {
-                sb.append(permanent.getLogName()).append(" ");
-            }
-            else {
+                sb.append(permanent.getLogName()).append(' ');
+            } else {
                 Player player = game.getPlayer(targetId);
                 if (player != null) {
-                    sb.append(player.getLogName()).append(" ");
+                    sb.append(player.getLogName()).append(' ');
                 }
             }
         }

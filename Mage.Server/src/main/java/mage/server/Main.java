@@ -28,13 +28,15 @@
 package mage.server;
 
 import java.io.File;
-import java.io.FilenameFilter;
+import java.io.IOException;
 import java.net.InetAddress;
 import java.net.MalformedURLException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import javax.management.MBeanServer;
+import mage.cards.ExpansionSet;
+import mage.cards.Sets;
 import mage.cards.repository.CardScanner;
+import mage.cards.repository.PluginClassloaderRegistery;
 import mage.game.match.MatchType;
 import mage.game.tournament.TournamentType;
 import mage.interfaces.MageServer;
@@ -53,14 +55,7 @@ import mage.server.util.config.GamePlugin;
 import mage.server.util.config.Plugin;
 import mage.utils.MageVersion;
 import org.apache.log4j.Logger;
-import org.jboss.remoting.Client;
-import org.jboss.remoting.ClientDisconnectedException;
-import org.jboss.remoting.ConnectionListener;
-import org.jboss.remoting.InvocationRequest;
-import org.jboss.remoting.InvokerLocator;
-import org.jboss.remoting.Remoting;
-import org.jboss.remoting.ServerInvocationHandler;
-import org.jboss.remoting.ServerInvoker;
+import org.jboss.remoting.*;
 import org.jboss.remoting.callback.InvokerCallbackHandler;
 import org.jboss.remoting.callback.ServerInvokerCallbackHandler;
 import org.jboss.remoting.transport.Connector;
@@ -71,10 +66,9 @@ import org.jboss.remoting.transporter.TransporterServer;
 import org.w3c.dom.Element;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
-public class Main {
+public final class Main {
 
     private static final Logger logger = Logger.getLogger(Main.class);
     private static final MageVersion version = new MageVersion(MageVersion.MAGE_VERSION_MAJOR, MageVersion.MAGE_VERSION_MINOR, MageVersion.MAGE_VERSION_PATCH, MageVersion.MAGE_VERSION_MINOR_PATCH, MageVersion.MAGE_VERSION_INFO);
@@ -82,9 +76,11 @@ public class Main {
     private static final String testModeArg = "-testMode=";
     private static final String fastDBModeArg = "-fastDbMode=";
     private static final String adminPasswordArg = "-adminPassword=";
-    private static final String pluginFolder = "plugins";
 
-    public static PluginClassLoader classLoader = new PluginClassLoader();
+    private static final File pluginFolder = new File("plugins");
+    private static final File extensionFolder = new File("extensions");
+
+    public static final PluginClassLoader classLoader = new PluginClassLoader();
     public static TransporterServer server;
     protected static boolean testMode;
     protected static boolean fastDbMode;
@@ -109,6 +105,49 @@ public class Main {
             }
         }
 
+        if (ConfigSettings.instance.isAuthenticationActivated()) {
+            logger.info("Check authorized user DB version ...");
+            if (!AuthorizedUserRepository.instance.checkAlterAndMigrateAuthorizedUser()) {
+                logger.fatal("Failed to start server.");
+                return;
+            }
+            logger.info("Done.");
+        }
+
+        logger.info("Loading extension packages...");
+        if (!extensionFolder.exists()) {
+            if (!extensionFolder.mkdirs()) {
+                logger.error("Could not create extensions directory.");
+            }
+        }
+        File[] extensionDirectories = extensionFolder.listFiles();
+        List<ExtensionPackage> extensions = new ArrayList<>();
+        if (extensionDirectories != null) {
+            for (File f : extensionDirectories) {
+                if (f.isDirectory()) {
+                    try {
+                        logger.info(" - Loading extension from " + f);
+                        extensions.add(ExtensionPackageLoader.loadExtension(f));
+                    } catch (IOException e) {
+                        logger.error("Could not load extension in " + f + '!', e);
+                    }
+                }
+            }
+        }
+        logger.info("Done.");
+
+        if (!extensions.isEmpty()) {
+            logger.info("Registering custom sets...");
+            for (ExtensionPackage pkg : extensions) {
+                for (ExpansionSet set : pkg.getSets()) {
+                    logger.info("- Loading " + set.getName() + " (" + set.getCode() + ')');
+                    Sets.getInstance().addSet(set);
+                }
+                PluginClassloaderRegistery.registerPluginClassloader(pkg.getClassLoader());
+            }
+            logger.info("Done.");
+        }
+
         logger.info("Loading cards...");
         if (fastDbMode) {
             CardScanner.scanned = true;
@@ -120,23 +159,35 @@ public class Main {
         logger.info("Updating user stats DB...");
         UserStatsRepository.instance.updateUserStats();
         logger.info("Done.");
-
         deleteSavedGames();
-        ConfigSettings config = ConfigSettings.getInstance();
+        ConfigSettings config = ConfigSettings.instance;
         for (GamePlugin plugin : config.getGameTypes()) {
-            GameFactory.getInstance().addGameType(plugin.getName(), loadGameType(plugin), loadPlugin(plugin));
+            GameFactory.instance.addGameType(plugin.getName(), loadGameType(plugin), loadPlugin(plugin));
         }
         for (GamePlugin plugin : config.getTournamentTypes()) {
-            TournamentFactory.getInstance().addTournamentType(plugin.getName(), loadTournamentType(plugin), loadPlugin(plugin));
+            TournamentFactory.instance.addTournamentType(plugin.getName(), loadTournamentType(plugin), loadPlugin(plugin));
         }
         for (Plugin plugin : config.getPlayerTypes()) {
-            PlayerFactory.getInstance().addPlayerType(plugin.getName(), loadPlugin(plugin));
+            PlayerFactory.instance.addPlayerType(plugin.getName(), loadPlugin(plugin));
         }
         for (Plugin plugin : config.getDraftCubes()) {
-            CubeFactory.getInstance().addDraftCube(plugin.getName(), loadPlugin(plugin));
+            CubeFactory.instance.addDraftCube(plugin.getName(), loadPlugin(plugin));
         }
         for (Plugin plugin : config.getDeckTypes()) {
-            DeckValidatorFactory.getInstance().addDeckType(plugin.getName(), loadPlugin(plugin));
+            DeckValidatorFactory.instance.addDeckType(plugin.getName(), loadPlugin(plugin));
+        }
+
+        for (ExtensionPackage pkg : extensions) {
+            Map<String, Class> draftCubes = pkg.getDraftCubes();
+            for (String name : draftCubes.keySet()) {
+                logger.info("Loading extension: [" + name + "] " + draftCubes.get(name).toString());
+                CubeFactory.instance.addDraftCube(name, draftCubes.get(name));
+            }
+            Map<String, Class> deckTypes = pkg.getDeckTypes();
+            for (String name : deckTypes.keySet()) {
+                logger.info("Loading extension: [" + name + "] " + deckTypes.get(name));
+                DeckValidatorFactory.instance.addDeckType(name, deckTypes.get(name));
+            }
         }
 
         logger.info("Config - max seconds idle: " + config.getMaxSecondsIdle());
@@ -150,6 +201,7 @@ public class Main {
         logger.info("Config - save game active: " + (config.isSaveGameActivated() ? "true" : "false"));
         logger.info("Config - backlog size    : " + config.getBacklogSize());
         logger.info("Config - lease period    : " + config.getLeasePeriod());
+        logger.info("Config - sock wrt timeout: " + config.getSocketWriteTimeout());
         logger.info("Config - max pool size   : " + config.getMaxPoolSize());
         logger.info("Config - num accp.threads: " + config.getNumAcceptThreads());
         logger.info("Config - second.bind port: " + config.getSecondaryBindPort());
@@ -187,12 +239,12 @@ public class Main {
     }
 
     static void initStatistics() {
-        ServerMessagesUtil.getInstance().setStartDate(System.currentTimeMillis());
+        ServerMessagesUtil.instance.setStartDate(System.currentTimeMillis());
     }
 
     static boolean isAlreadyRunning(InvokerLocator serverLocator) {
         Map<String, String> metadata = new HashMap<>();
-        metadata.put(SocketWrapper.WRITE_TIMEOUT, "2000");
+        metadata.put(SocketWrapper.WRITE_TIMEOUT, String.valueOf(ConfigSettings.instance.getSocketWriteTimeout()));
         metadata.put("generalizeSocketException", "true");
         try {
             MageServer testServer = (MageServer) TransporterClient.createTransporterClient(serverLocator.getLocatorURI(), MageServer.class, metadata);
@@ -210,25 +262,29 @@ public class Main {
 
         @Override
         public void handleConnectionException(Throwable throwable, Client client) {
-            Session session = SessionManager.getInstance().getSession(client.getSessionId());
-            if (session != null) {
+            String sessionId = client.getSessionId();
+            Optional<Session> session = SessionManager.instance.getSession(sessionId);
+            if (!session.isPresent()) {
+                logger.trace("Session not found : " + sessionId);
+            } else {
+                UUID userId = session.get().getUserId();
                 StringBuilder sessionInfo = new StringBuilder();
-                User user = UserManager.getInstance().getUser(session.getUserId());
-                if (user != null) {
-                    sessionInfo.append(user.getName());
+                Optional<User> user = UserManager.instance.getUser(userId);
+                if (user.isPresent()) {
+                    sessionInfo.append(user.get().getName()).append(" [").append(user.get().getGameInfo()).append(']');
                 } else {
                     sessionInfo.append("[user missing] ");
                 }
-                sessionInfo.append(" at ").append(session.getHost()).append(" sessionId: ").append(session.getId());
+                sessionInfo.append(" at ").append(session.get().getHost()).append(" sessionId: ").append(session.get().getId());
                 if (throwable instanceof ClientDisconnectedException) {
                     // Seems like the random diconnects from public server land here and should not be handled as explicit disconnects
                     // So it should be possible to reconnect to server and continue games if DisconnectReason is set to LostConnection
-                    //SessionManager.getInstance().disconnect(client.getSessionId(), DisconnectReason.Disconnected);
-                    SessionManager.getInstance().disconnect(client.getSessionId(), DisconnectReason.LostConnection);
+                    //SessionManager.instance.disconnect(client.getSessionId(), DisconnectReason.Disconnected);
+                    SessionManager.instance.disconnect(client.getSessionId(), DisconnectReason.LostConnection);
                     logger.info("CLIENT DISCONNECTED - " + sessionInfo);
                     logger.debug("Stack Trace", throwable);
                 } else {
-                    SessionManager.getInstance().disconnect(client.getSessionId(), DisconnectReason.LostConnection);
+                    SessionManager.instance.disconnect(client.getSessionId(), DisconnectReason.LostConnection);
                     logger.info("LOST CONNECTION - " + sessionInfo);
                     if (logger.isDebugEnabled()) {
                         if (throwable == null) {
@@ -238,7 +294,9 @@ public class Main {
                         }
                     }
                 }
+
             }
+
         }
     }
 
@@ -246,10 +304,10 @@ public class Main {
 
         protected Connector connector;
 
-        public MageTransporterServer(InvokerLocator locator, Object target, String subsystem, MageServerInvocationHandler callback) throws Exception {
+        public MageTransporterServer(InvokerLocator locator, Object target, String subsystem, MageServerInvocationHandler serverInvocationHandler) throws Exception {
             super(locator, target, subsystem);
-            connector.addInvocationHandler("callback", callback);
-            connector.setLeasePeriod(ConfigSettings.getInstance().getLeasePeriod());
+            connector.addInvocationHandler("callback", serverInvocationHandler);
+            connector.setLeasePeriod(ConfigSettings.instance.getLeasePeriod());
             connector.addConnectionListener(new ClientConnectionListener());
         }
 
@@ -269,18 +327,44 @@ public class Main {
 
         @Override
         public void setMBeanServer(MBeanServer server) {
-
+            /**
+             * An MBean is a managed Java object, similar to a JavaBeans
+             * component, that follows the design patterns set forth in the JMX
+             * specification. An MBean can represent a device, an application,
+             * or any resource that needs to be managed. MBeans expose a
+             * management interface that consists of the following:
+             *
+             * A set of readable or writable attributes, or both. A set of
+             * invokable operations. A self-description.
+             *
+             */
+            if (server != null) {
+                logger.info("Default domain: " + server.getDefaultDomain());
+            }
         }
 
         @Override
         public void setInvoker(ServerInvoker invoker) {
-            ((BisocketServerInvoker) invoker).setSecondaryBindPort(ConfigSettings.getInstance().getSecondaryBindPort());
-            ((BisocketServerInvoker) invoker).setBacklog(ConfigSettings.getInstance().getBacklogSize());
-            ((BisocketServerInvoker) invoker).setNumAcceptThreads(ConfigSettings.getInstance().getNumAcceptThreads());
+            ((BisocketServerInvoker) invoker).setSecondaryBindPort(ConfigSettings.instance.getSecondaryBindPort());
+            ((BisocketServerInvoker) invoker).setBacklog(ConfigSettings.instance.getBacklogSize());
+            ((BisocketServerInvoker) invoker).setNumAcceptThreads(ConfigSettings.instance.getNumAcceptThreads());
+        }
+
+        @Override
+        public void addListener(InvokerCallbackHandler callbackHandler) {
+            // Called for every client connecting to the server
+            ServerInvokerCallbackHandler handler = (ServerInvokerCallbackHandler) callbackHandler;
+            try {
+                String sessionId = handler.getClientSessionId();
+                SessionManager.instance.createSession(sessionId, callbackHandler);
+            } catch (Throwable ex) {
+                logger.fatal("", ex);
+            }
         }
 
         @Override
         public Object invoke(final InvocationRequest invocation) throws Throwable {
+            // Called for every client connecting to the server (after add Listener)
             String sessionId = invocation.getSessionId();
             Map map = invocation.getRequestPayload();
             String host;
@@ -290,33 +374,27 @@ public class Main {
             } else {
                 host = "localhost";
             }
-            SessionManager.getInstance().getSession(sessionId).setHost(host);
-            return null;
-        }
-
-        @Override
-        public void addListener(InvokerCallbackHandler callbackHandler) {
-            ServerInvokerCallbackHandler handler = (ServerInvokerCallbackHandler) callbackHandler;
-            try {
-                String sessionId = handler.getClientSessionId();
-                SessionManager.getInstance().createSession(sessionId, callbackHandler);
-            } catch (Throwable ex) {
-                logger.fatal("", ex);
+            Optional<Session> session = SessionManager.instance.getSession(sessionId);
+            if (!session.isPresent()) {
+                logger.error("Session not found : " + sessionId);
+            } else {
+                session.get().setHost(host);
             }
+            return null;
         }
 
         @Override
         public void removeListener(InvokerCallbackHandler callbackHandler) {
             ServerInvokerCallbackHandler handler = (ServerInvokerCallbackHandler) callbackHandler;
             String sessionId = handler.getClientSessionId();
-            SessionManager.getInstance().disconnect(sessionId, DisconnectReason.Disconnected);
+            SessionManager.instance.disconnect(sessionId, DisconnectReason.Disconnected);
         }
 
     }
 
     private static Class<?> loadPlugin(Plugin plugin) {
         try {
-            classLoader.addURL(new File(pluginFolder + "/" + plugin.getJar()).toURI().toURL());
+            classLoader.addURL(new File(pluginFolder, plugin.getJar()).toURI().toURL());
             logger.debug("Loading plugin: " + plugin.getClassName());
             return Class.forName(plugin.getClassName(), true, classLoader);
         } catch (ClassNotFoundException ex) {
@@ -329,9 +407,9 @@ public class Main {
 
     private static MatchType loadGameType(GamePlugin plugin) {
         try {
-            classLoader.addURL(new File(pluginFolder + "/" + plugin.getJar()).toURI().toURL());
+            classLoader.addURL(new File(pluginFolder, plugin.getJar()).toURI().toURL());
             logger.debug("Loading game type: " + plugin.getClassName());
-            return (MatchType) Class.forName(plugin.getTypeName(), true, classLoader).newInstance();
+            return (MatchType) Class.forName(plugin.getTypeName(), true, classLoader).getConstructor().newInstance();
         } catch (ClassNotFoundException ex) {
             logger.warn("Game type not found:" + plugin.getJar() + " - check plugin folder", ex);
         } catch (Exception ex) {
@@ -342,9 +420,9 @@ public class Main {
 
     private static TournamentType loadTournamentType(GamePlugin plugin) {
         try {
-            classLoader.addURL(new File(pluginFolder + "/" + plugin.getJar()).toURI().toURL());
+            classLoader.addURL(new File(pluginFolder, plugin.getJar()).toURI().toURL());
             logger.debug("Loading tournament type: " + plugin.getClassName());
-            return (TournamentType) Class.forName(plugin.getTypeName(), true, classLoader).newInstance();
+            return (TournamentType) Class.forName(plugin.getTypeName(), true, classLoader).getConstructor().newInstance();
         } catch (ClassNotFoundException ex) {
             logger.warn("Tournament type not found:" + plugin.getName() + " / " + plugin.getJar() + " - check plugin folder", ex);
         } catch (Exception ex) {
@@ -359,12 +437,7 @@ public class Main {
             directory.mkdirs();
         }
         File[] files = directory.listFiles(
-                new FilenameFilter() {
-                    @Override
-                    public boolean accept(File dir, String name) {
-                        return name.endsWith(".game");
-                    }
-                }
+                (dir, name) -> name.endsWith(".game")
         );
         for (File file : files) {
             file.delete();

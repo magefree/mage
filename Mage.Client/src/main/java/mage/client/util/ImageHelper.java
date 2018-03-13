@@ -27,41 +27,30 @@
  */
 package mage.client.util;
 
-import com.mortennobel.imagescaling.ResampleOp;
 import java.awt.Graphics2D;
-import java.awt.GraphicsConfiguration;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.Rectangle;
-import java.awt.RenderingHints;
-import java.awt.Transparency;
-import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
-import java.awt.image.MemoryImageSource;
-import java.awt.image.PixelGrabber;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import javax.imageio.ImageIO;
-import mage.cards.CardDimensions;
 import static mage.client.constants.Constants.FRAME_MAX_HEIGHT;
 import static mage.client.constants.Constants.FRAME_MAX_WIDTH;
 import static mage.client.constants.Constants.SYMBOL_MAX_SPACE;
 import mage.view.CardView;
 import org.mage.card.arcane.UI;
-import org.mage.plugins.card.images.ImageCache;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ImageHelper {
+public final class ImageHelper {
 
-    protected static HashMap<String, BufferedImage> images = new HashMap<>();
-    protected static HashMap<String, BufferedImage> backgrounds = new HashMap<>();
+    protected static final HashMap<String, BufferedImage> images = new HashMap<>();
+    protected static final HashMap<String, BufferedImage> backgrounds = new HashMap<>();
 
     public static BufferedImage loadImage(String ref, int width, int height) {
         BufferedImage image = loadImage(ref);
@@ -97,7 +86,7 @@ public class ImageHelper {
     }
 
     public static void drawCosts(List<String> costs, Graphics2D g, int xOffset, int yOffset, ImageObserver o) {
-        if (costs.size() > 0) {
+        if (!costs.isEmpty()) {
             int costLeft = xOffset;
             for (int i = costs.size() - 1; i >= 0; i--) {
                 String symbol = costs.get(i);
@@ -151,13 +140,8 @@ public class ImageHelper {
      * @return
      */
     public static Image getImageFromResources(String path) {
-        InputStream stream;
-        stream = UI.class.getResourceAsStream(path);
-        if (stream == null) {
-            throw new IllegalArgumentException("Couldn't find image in resources: " + path);
-        }
 
-        try {
+        try(InputStream stream = UI.class.getResourceAsStream(path)) {
             ImageIO.setUseCache(false);
             BufferedImage image = ImageIO.read(stream);
             return image;

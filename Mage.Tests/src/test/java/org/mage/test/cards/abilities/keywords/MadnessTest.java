@@ -27,6 +27,7 @@
  */
 package org.mage.test.cards.abilities.keywords;
 
+import mage.abilities.keyword.HasteAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Test;
@@ -111,7 +112,7 @@ public class MadnessTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Falkenrath Gorger", 1);
 
         // Sacrifice a creature: Vampire Aristocrat gets +2/+2 until end of turn.
-        addCard(Zone.HAND, playerA, "Vampire Aristocrat");
+        addCard(Zone.HAND, playerA, "Vampire Aristocrat"); // {2}{B}
 
         addCard(Zone.BATTLEFIELD, playerB, "Swamp", 6);
         // Target player discards two cards. If you cast this spell during your main phase, that player discards four cards instead.
@@ -157,4 +158,63 @@ public class MadnessTest extends CardTestPlayerBase {
 
     }
 
+    /**
+     * Falkenrath Gorger + Asylum Visitor (& probably any Vampire with printed
+     * Madness) + Olivia, Mobilized for War - Haste part of the triggered effect
+     * may not affect entering Vampire properly, please read further for more
+     * details.
+     *
+     * When I cast Falkenrath Gorger and then discarded Asylum Visitor with
+     * Olivia, Mobilized for War 's triggered ability, two Madness pop-ups
+     * appeared, I have used the first one, Asylum Visitor entered the
+     * battlefield, Olivia triggered again and I used the ability to give Asylum
+     * Visitor Haste and +1/+1. Then the second Madness trigger resolved for the
+     * Visitor and I have cancelled it (by choosing "No" at first pop-up, but
+     * from what I have tested, the choice at this point does not matter).
+     * Asylum Visitor lost Haste and was both visually and functionally affected
+     * by Summoning Sickness.
+     *
+     * I was able to avoid this issue by cancelling the first Madness pop-up and
+     * then using only the second one.
+     */
+    @Test
+    public void testFalkenrathGorgerWithAsylumVisitor() {
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+
+        // Flying
+        // Whenever another creature enters the battlefield under your control, you may discard a card. If you do, put a +1/+1 counter on that creature,
+        // it gains haste until end of turn, and it becomes a Vampire in addition to its other types.
+        addCard(Zone.BATTLEFIELD, playerA, "Olivia, Mobilized for War", 1);
+
+        // Each Vampire creature card you own that isn't on the battlefield has madness. Its madness cost is equal to its mana cost.
+        addCard(Zone.HAND, playerA, "Falkenrath Gorger", 1); // Creature Vampire 2/1 {R}
+        // At the beginning of each player's upkeep, if that player has no cards in hand, you draw a card and you lose 1 life.
+        // Madness {1}{B}
+        addCard(Zone.HAND, playerA, "Asylum Visitor"); // Creature Vampire 3/1 {1}{B}
+        addCard(Zone.HAND, playerA, "Forest");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Falkenrath Gorger");
+        setChoice(playerA, "Yes"); // Discard a card and put a +1/+1 counter on that creature, it gains haste until end of turn, and it becomes a Vampire in addition to its other types?
+        setChoice(playerA, "Asylum Visitor");
+        setChoice(playerA, "Yes"); // When this card is exiled this way, you may cast it by paying {1}{B} instead of putting it into your graveyard.
+        setChoice(playerA, "Yes"); // Cast Asylum Visitor by madness?
+        setChoice(playerA, "Yes"); // Discard a card and put a +1/+1 counter on that creature, it gains haste until end of turn, and it becomes a Vampire in addition to its other types?
+        setChoice(playerA, "Forest");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Falkenrath Gorger", 1);
+        assertPermanentCount(playerA, "Asylum Visitor", 1);
+
+        assertPowerToughness(playerA, "Falkenrath Gorger", 3, 2);
+        assertAbility(playerA, "Falkenrath Gorger", HasteAbility.getInstance(), true);
+
+        assertPowerToughness(playerA, "Asylum Visitor", 4, 2);
+        assertAbility(playerA, "Asylum Visitor", HasteAbility.getInstance(), true);
+
+        assertGraveyardCount(playerA, "Forest", 1);
+
+    }
 }

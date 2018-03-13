@@ -27,9 +27,8 @@ import org.mage.plugins.card.utils.CardImageUtils;
  */
 public class DownloadJob extends AbstractLaternaBean {
 
-    public static enum State {
-
-        NEW, WORKING, FINISHED, ABORTED;
+    public enum State {
+        NEW, WORKING, FINISHED, ABORTED
     }
 
     private final String name;
@@ -90,7 +89,7 @@ public class DownloadJob extends AbstractLaternaBean {
     public void setError(String message, Exception error) {
         if (message == null) {
 
-            message = "Download of " + this.getName() + "from " + this.getSource().toString() + " caused error: " + error.toString();
+            message = "Download of " + name + "from " + source.toString() + " caused error: " + error.toString();
         }
 //        log.warn(message, error);
         log.warn(message);
@@ -167,7 +166,7 @@ public class DownloadJob extends AbstractLaternaBean {
 
             @Override
             public String toString() {
-                return proxy != null ? proxy.type().toString() + " " : "" + url;
+                return proxy != null ? proxy.type().toString() + ' ' : url;
             }
 
         };
@@ -196,7 +195,7 @@ public class DownloadJob extends AbstractLaternaBean {
 
             @Override
             public String toString() {
-                return proxy != null ? proxy.type().toString() + " " : "" + url;
+                return proxy != null ? proxy.type().toString() + ' ' : String.valueOf(url);
             }
         };
     }

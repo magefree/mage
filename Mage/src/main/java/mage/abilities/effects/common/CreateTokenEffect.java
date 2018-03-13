@@ -27,16 +27,22 @@
  */
 package mage.abilities.effects.common;
 
-import java.util.ArrayList;
-import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
+import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
+import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
+
+import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  *
@@ -97,6 +103,7 @@ public class CreateTokenEffect extends OneShotEffect {
         token.putOntoBattlefield(value, game, source.getSourceId(), source.getControllerId(), tapped, attacking);
         this.lastAddedTokenId = token.getLastAddedToken();
         this.lastAddedTokenIds = token.getLastAddedTokenIds();
+
         return true;
     }
 
@@ -108,28 +115,59 @@ public class CreateTokenEffect extends OneShotEffect {
         return lastAddedTokenIds;
     }
 
-    private void setText() {
-        StringBuilder sb = new StringBuilder("put ");
-        if (amount.toString().equals("1")) {
-            sb.append("a ").append(token.getDescription());
-        } else {
-            sb.append(CardUtil.numberToText(amount.toString())).append(" ").append(token.getDescription());
-            if (token.getDescription().endsWith("token")) {
-                sb.append("s ");
+    public void exileTokensCreatedAtNextEndStep(Game game, Ability source) {
+        for (UUID tokenId : this.getLastAddedTokenIds()) {
+            Permanent tokenPermanent = game.getPermanent(tokenId);
+            if (tokenPermanent != null) {
+                ExileTargetEffect exileEffect = new ExileTargetEffect(null, "", Zone.BATTLEFIELD);
+                exileEffect.setTargetPointer(new FixedTarget(tokenPermanent, game));
+                game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect), source);
             }
         }
-        sb.append(" onto the battlefield");
-        if (tapped) {
-            sb.append(" tapped");
+    }
+
+    public void exileTokensCreatedAtEndOfCombat(Game game, Ability source) {
+        for (UUID tokenId : this.getLastAddedTokenIds()) {
+            Permanent tokenPermanent = game.getPermanent(tokenId);
+            if (tokenPermanent != null) {
+                ExileTargetEffect exileEffect = new ExileTargetEffect(null, "", Zone.BATTLEFIELD);
+                exileEffect.setTargetPointer(new FixedTarget(tokenPermanent, game));
+                game.addDelayedTriggeredAbility(new AtTheEndOfCombatDelayedTriggeredAbility(exileEffect), source);
+            }
+        }
+    }
+
+    private void setText() {
+        StringBuilder sb = new StringBuilder("create ");
+        if (amount.toString().equals("1")) {
+            sb.append("a ");
+            if (tapped && !attacking) {
+                sb.append("tapped ");
+            }
+            sb.append(token.getDescription());
+        } else {
+            sb.append(CardUtil.numberToText(amount.toString())).append(' ');
+            if (tapped && !attacking) {
+                sb.append("tapped ");
+            }
+            sb.append(token.getDescription());
+            if (token.getDescription().endsWith("token")) {
+                sb.append("s");
+            }
+            int tokenLocation = sb.indexOf("token ");
+            if (tokenLocation != -1) {
+                sb.replace(tokenLocation, tokenLocation + 6, "tokens ");
+            }
         }
         if (attacking) {
+            sb.append(" that are");
             if (tapped) {
-                sb.append(" and");
+                sb.append(" tapped and");
             }
             sb.append(" attacking");
         }
         String message = amount.getMessage();
-        if (message.length() > 0) {
+        if (!message.isEmpty()) {
             if (amount.toString().equals("X")) {
                 sb.append(", where X is ");
             } else {
@@ -139,5 +177,4 @@ public class CreateTokenEffect extends OneShotEffect {
         sb.append(message);
         staticText = sb.toString();
     }
-
 }

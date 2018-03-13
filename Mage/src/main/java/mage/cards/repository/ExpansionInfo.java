@@ -16,7 +16,7 @@ public class ExpansionInfo {
 
     @DatabaseField(unique = true)
     protected String name;
-    @DatabaseField(unique = true)
+    @DatabaseField(id = true,unique = true)
     protected String code;
     @DatabaseField
     protected String blockName;

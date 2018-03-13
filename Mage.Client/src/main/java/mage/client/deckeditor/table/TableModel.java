@@ -27,37 +27,17 @@
  */
 package mage.client.deckeditor.table;
 
-import java.awt.Dimension;
-import java.awt.Image;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.UUID;
-import javax.swing.JTable;
-import javax.swing.table.AbstractTableModel;
-import javax.swing.table.TableColumnModel;
 import mage.client.MageFrame;
 import mage.client.cards.BigCard;
 import mage.client.cards.CardEventSource;
 import mage.client.cards.ICardGrid;
 import mage.client.deckeditor.SortSetting;
 import mage.client.plugins.impl.Plugins;
+import mage.client.util.ClientEventType;
 import mage.client.util.Config;
 import mage.client.util.Event;
-import mage.client.util.ImageHelper;
 import mage.client.util.Listener;
 import mage.client.util.gui.GuiDisplayUtil;
-import mage.constants.CardType;
 import mage.constants.EnlargeMode;
 import mage.view.CardView;
 import mage.view.CardsView;
@@ -65,6 +45,16 @@ import org.apache.log4j.Logger;
 import org.jdesktop.swingx.JXPanel;
 import org.mage.card.arcane.ManaSymbols;
 import org.mage.card.arcane.UI;
+
+import javax.swing.*;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableColumnModel;
+import java.awt.*;
+import java.awt.event.*;
+import java.awt.image.BufferedImage;
+import java.util.*;
+import java.util.List;
+import java.util.Map.Entry;
 
 /**
  * Table Model for card list.
@@ -77,7 +67,7 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
 
     private static final Logger log = Logger.getLogger(TableModel.class);
 
-    protected CardEventSource cardEventSource = new CardEventSource();
+    protected final CardEventSource cardEventSource = new CardEventSource();
     protected BigCard bigCard;
     protected UUID gameId;
     private final Map<UUID, CardView> cards = new LinkedHashMap<>();
@@ -88,7 +78,8 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
     private boolean displayNoCopies = false;
     private UpdateCountsCallback updateCountsCallback;
 
-    private final String column[] = {"Qty", "Name", "Cost", "Color", "Type", "Stats", "Rarity", "Set"};
+    private final String column[] = {"Qty", "Name", "Cost", "Color", "Type", "Stats", "Rarity", "Set", "#"};
+    public final int COLUMN_INDEX_COST = 2;
 
     private SortSetting sortSetting;
     private int recentSortedColumn;
@@ -135,29 +126,29 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
                     addCard(card, bigCard, gameId);
                 }
                 if (updateCountsCallback != null) {
-                    if (card.getCardTypes().contains(CardType.LAND)) {
+                    if (card.isLand()) {
                         landCount++;
                     }
-                    if (card.getCardTypes().contains(CardType.CREATURE)) {
+                    if (card.isCreature()) {
                         creatureCount++;
                     }
-                    if (card.getCardTypes().contains(CardType.INSTANT)) {
+                    if (card.isInstant()) {
                         instantCount++;
                     }
-                    if (card.getCardTypes().contains(CardType.SORCERY)) {
+                    if (card.isSorcery()) {
                         sorceryCount++;
                     }
-                    if (card.getCardTypes().contains(CardType.ENCHANTMENT)) {
+                    if (card.isEnchantment()) {
                         enchantmentCount++;
                     }
-                    if (card.getCardTypes().contains(CardType.ARTIFACT)) {
+                    if (card.isArtifact()) {
                         artifactCount++;
                     }
                 }
             }
 
             // no easy logic for merge :)
-            for (Iterator<Entry<UUID, CardView>> i = cards.entrySet().iterator(); i.hasNext();) {
+            for (Iterator<Entry<UUID, CardView>> i = cards.entrySet().iterator(); i.hasNext(); ) {
                 Entry<UUID, CardView> entry = i.next();
                 if (!showCards.containsKey(entry.getKey())) {
                     i.remove();
@@ -179,7 +170,7 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
                                         String key1 = cv.getName() + cv.getExpansionSetCode() + cv.getCardNumber();
                                         for (CardView cardView : cards.values()) {
                                             String key2 = cardView.getName() + cardView.getExpansionSetCode() + cardView.getCardNumber();
-                                            if ((key1).equals(key2)) {
+                                            if (key1.equals(key2)) {
                                                 view.set(j, cardView);
                                                 break;
                                             }
@@ -192,12 +183,7 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
                             }
                         }
                     } else {
-                        for (CardView cv : view) {
-                            if (cv.getId().equals(entry.getKey())) {
-                                view.remove(cv);
-                                break;
-                            }
-                        }
+                        view.removeIf(cardView -> cardView.getId().equals(entry.getKey()));
                     }
                 }
             }
@@ -254,6 +240,10 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
             case 1:
                 return c.getName();
             case 2:
+                // new svg images version
+                return ManaSymbols.getStringManaCost(c.getManaCost());
+                /*
+                // old html images version
                 String manaCost = "";
                 for (String m : c.getManaCost()) {
                     manaCost += m;
@@ -261,17 +251,21 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
                 String castingCost = UI.getDisplayManaCost(manaCost);
                 castingCost = ManaSymbols.replaceSymbolsWithHTML(castingCost, ManaSymbols.Type.TABLE);
                 return "<html>" + castingCost + "</html>";
+                return castingCost;
+                */
             case 3:
-                return CardHelper.getColor(c);
+                return c.getColorText();
             case 4:
-                return CardHelper.getType(c);
+                return c.getTypeText();
             case 5:
-                return CardHelper.isCreature(c) ? c.getPower() + "/"
+                return c.isCreature() ? c.getPower() + '/'
                         + c.getToughness() : "-";
             case 6:
                 return c.getRarity().toString();
             case 7:
                 return c.getExpansionSetCode();
+            case 8:
+                return c.getCardNumber();
             default:
                 return "error";
         }
@@ -305,12 +299,7 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
 
     public void removeCard(UUID cardId) {
         cards.remove(cardId);
-        for (CardView cv : view) {
-            if (cv.getId().equals(cardId)) {
-                view.remove(cv);
-                break;
-            }
-        }
+        view.removeIf(cardView -> cardView.getId().equals(cardId));
     }
 
     @Override
@@ -325,25 +314,25 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
 
     public void setNumber(int index, int number) {
         CardView card = view.get(index);
-        cardEventSource.setNumber(card, "set-number", number);
+        cardEventSource.fireEvent(card, ClientEventType.SET_NUMBER, number);
     }
 
     public void doubleClick(int index) {
         CardView card = view.get(index);
-        cardEventSource.doubleClick(card, "double-click");
+        cardEventSource.fireEvent(card, ClientEventType.DOUBLE_CLICK);
     }
 
     public void altDoubleClick(int index) {
         CardView card = view.get(index);
-        cardEventSource.altDoubleClick(card, "alt-double-click");
+        cardEventSource.fireEvent(card, ClientEventType.ALT_DOUBLE_CLICK);
     }
 
     public void removeFromMainEvent(int index) {
-        cardEventSource.removeFromMainEvent("remove-main");
+        cardEventSource.fireEvent(ClientEventType.REMOVE_MAIN);
     }
 
     public void removeFromSideEvent(int index) {
-        cardEventSource.removeFromSideboardEvent("remove-sideboard");
+        cardEventSource.fireEvent(ClientEventType.REMOVE_SIDEBOARD);
     }
 
     public void addListeners(final JTable table) {
@@ -406,10 +395,10 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
         CardView card = view.get(row);
         if (!card.getId().equals(bigCard.getCardId())) {
             if (!MageFrame.isLite()) {
-                Image image = Plugins.getInstance().getOriginalImage(card);
+                Image image = Plugins.instance.getOriginalImage(card);
                 if (image != null && image instanceof BufferedImage) {
                     // XXX: scaled to fit width
-                    bigCard.setCard(card.getId(), EnlargeMode.NORMAL, image, new ArrayList<String>(), false);
+                    bigCard.setCard(card.getId(), EnlargeMode.NORMAL, image, new ArrayList<>(), false);
                 } else {
                     drawCardText(card);
                 }
@@ -436,7 +425,7 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
         recentAscending = ascending;
 
         MageCardComparator sorter = new MageCardComparator(column, ascending);
-        Collections.sort(view, sorter);
+        view.sort(sorter);
 
         fireTableDataChanged();
 

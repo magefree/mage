@@ -76,10 +76,7 @@ public class CantAttackIfDefenderControlsPermanent extends RestrictionEffect {
         } else {
             defendingPlayerId = defenderId;
         }
-        if (defendingPlayerId != null && game.getBattlefield().countAll(filter, defendingPlayerId, game) > 0) {
-            return false;
-        }
-        return true;
+        return !(defendingPlayerId != null && game.getBattlefield().countAll(filter, defendingPlayerId, game) > 0);
     }
 
     @Override

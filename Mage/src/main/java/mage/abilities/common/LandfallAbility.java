@@ -50,11 +50,11 @@ public class LandfallAbility extends TriggeredAbilityImpl {
         this(Zone.BATTLEFIELD, effect, optional);
     }
 
-    public LandfallAbility(Zone zone, Effect effect, Boolean optional) {
+    public LandfallAbility(Zone zone, Effect effect, boolean optional) {
         this(zone, effect, optional, SetTargetPointer.NONE);
     }
 
-    public LandfallAbility(Zone zone, Effect effect, Boolean optional, SetTargetPointer setTargetPointer) {
+    public LandfallAbility(Zone zone, Effect effect, boolean optional, SetTargetPointer setTargetPointer) {
         super(zone, effect, optional);
         this.setTargetPointer = setTargetPointer;
     }
@@ -74,10 +74,10 @@ public class LandfallAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
         if (permanent != null
-                && permanent.getCardType().contains(CardType.LAND)
+                && permanent.isLand()
                 && permanent.getControllerId().equals(this.controllerId)) {
             triggeringLand = permanent;
-            if (setTargetPointer.equals(SetTargetPointer.PERMANENT)) {
+            if (setTargetPointer == SetTargetPointer.PERMANENT) {
                 for (Effect effect : getAllEffects()) {
                     effect.setTargetPointer(new FixedTarget(permanent, game));
                 }

@@ -35,7 +35,9 @@
 package mage.client.dialog;
 
 import java.awt.Point;
-import javax.swing.SpinnerNumberModel;
+import javax.swing.*;
+
+import mage.client.MageFrame;
 import mage.client.util.SettingsManager;
 import mage.client.util.gui.GuiDisplayUtil;
 
@@ -60,7 +62,14 @@ public class PickNumberDialog extends MageDialog {
         this.btnCancel.setVisible(false);
         this.pack();
 
-        Point centered = SettingsManager.getInstance().getComponentPosition(getWidth(), getHeight());
+        // window settings
+        if (this.isModal()){
+            MageFrame.getDesktop().add(this, JLayeredPane.MODAL_LAYER);
+        }else{
+            MageFrame.getDesktop().add(this, JLayeredPane.PALETTE_LAYER);
+        }
+
+        Point centered = SettingsManager.instance.getComponentPosition(getWidth(), getHeight());
         this.setLocation(centered.x, centered.y);
         GuiDisplayUtil.keepComponentInsideScreen(centered.x, centered.y, this);
         
@@ -90,21 +99,13 @@ public class PickNumberDialog extends MageDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         lblMessage = new javax.swing.JTextPane();
 
-        spnAmount.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), null, null, Integer.valueOf(1)));
+        spnAmount.setModel(new javax.swing.SpinnerNumberModel(1, null, null, 1));
 
         btnCancel.setText("Cancel");
-        btnCancel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelActionPerformed(evt);
-            }
-        });
+        btnCancel.addActionListener(evt -> btnCancelActionPerformed(evt));
 
         btnOk.setText("OK");
-        btnOk.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnOkActionPerformed(evt);
-            }
-        });
+        btnOk.addActionListener(evt -> btnOkActionPerformed(evt));
 
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 

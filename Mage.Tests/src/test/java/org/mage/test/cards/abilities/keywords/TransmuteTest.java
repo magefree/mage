@@ -73,18 +73,48 @@ public class TransmuteTest extends CardTestPlayerBase {
     @Test
     public void searchSplittedCardOneManaCmcSpell() {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
-        addCard(Zone.HAND, playerA, "Dizzy Spell");
+        // Target creature gets -3/-0 until end of turn.
+        // Transmute {1}{U}{U} ({1}{U}{U}, Discard this card: Search your library for a card with the same converted mana cost as this card, reveal it, and put it into your hand. Then shuffle your library. Transmute only as a sorcery.)
+        addCard(Zone.HAND, playerA, "Dizzy Spell"); // Instant {U}
 
+        // Wear {1}{R}
+        // Destroy target artifact.
+        // Tear {W}
+        // Destroy target enchantment.
         addCard(Zone.LIBRARY, playerA, "Wear // Tear");
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Transmute {1}{U}{U}");
+        setChoice(playerA, "Wear // Tear");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertGraveyardCount(playerA, "Dizzy Spell", 1);
-        assertHandCount(playerA, "Wear", 1); // Filter search can only search for one side of a split card
-        assertHandCount(playerA, "Tear", 1); // Filter search can only search for one side of a split card
+        assertHandCount(playerA, "Wear // Tear", 0);
+    }
+
+    @Test
+    public void searchSplittedCardThreeManaCmcSpell() {
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
+        // Counter target spell unless its controller discards his or her hand.
+        // Transmute {1}{U}{B}
+        addCard(Zone.HAND, playerA, "Perplex"); // Instant {1}{U}{B}
+
+        // Wear {1}{R}
+        // Destroy target artifact.
+        // Tear {W}
+        // Destroy target enchantment.
+        addCard(Zone.LIBRARY, playerA, "Wear // Tear");
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Transmute {1}{U}{B}");
+        setChoice(playerA, "Wear // Tear");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, "Perplex", 1);
+        assertHandCount(playerA, "Wear // Tear", 1);
     }
 
 }

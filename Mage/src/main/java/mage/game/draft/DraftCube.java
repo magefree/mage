@@ -29,11 +29,11 @@ package mage.game.draft;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
+import java.util.Objects;
 import mage.cards.Card;
-import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
+import mage.util.RandomUtil;
 import org.apache.log4j.Logger;
 
 /**
@@ -71,9 +71,8 @@ public abstract class DraftCube {
 
     private static final Logger logger = Logger.getLogger(DraftCube.class);
 
-    private static final Random rnd = new Random();
     private final String name;
-    private final int boosterSize = 15;
+    private static final int boosterSize = 15;
 
     protected List<CardIdentity> cubeCards = new ArrayList<>();
     protected List<CardIdentity> leftCubeCards = new ArrayList<>();
@@ -100,17 +99,13 @@ public abstract class DraftCube {
             boolean done = false;
             int notValid = 0;
             while (!done) {
-                int index = rnd.nextInt(leftCubeCards.size());
+                int index = RandomUtil.nextInt(leftCubeCards.size());
                 CardIdentity cardId = leftCubeCards.get(index);
                 leftCubeCards.remove(index);
                 if (!cardId.getName().isEmpty()) {
                     CardInfo cardInfo = null;
                     if (!cardId.getExtension().isEmpty()) {
-                        CardCriteria criteria = new CardCriteria().name(cardId.getName()).setCodes(cardId.extension);
-                        List<CardInfo> cardList = CardRepository.instance.findCards(criteria);
-                        if (cardList != null && cardList.size() > 0) {
-                            cardInfo = cardList.get(0);
-                        }
+                        cardInfo = CardRepository.instance.findCardWPreferredSet(cardId.getName(), cardId.getExtension(), false);
                     } else {
                         cardInfo = CardRepository.instance.findPreferedCoreExpansionCard(cardId.getName(), false);
                     }
@@ -119,11 +114,11 @@ public abstract class DraftCube {
                         booster.add(cardInfo.getCard());
                         done = true;
                     } else {
-                        logger.warn(new StringBuilder(this.getName()).append(" - Card not found: ").append(cardId.getName()).append(":").append(cardId.extension));
+                        logger.warn(new StringBuilder(this.getName()).append(" - Card not found: ").append(cardId.getName()).append(':').append(cardId.extension));
                         notValid++;
                     }
                 } else {
-                    logger.error(new StringBuilder(this.getName()).append(" - Empty card name: ").append(cardId.getName()).append(":").append(cardId.extension));
+                    logger.error(new StringBuilder(this.getName()).append(" - Empty card name: ").append(cardId.getName()).append(':').append(cardId.extension));
                     notValid++;
                 }
 
@@ -146,7 +141,7 @@ public abstract class DraftCube {
         }
 
         for (int i = leftCubeCards.size() - 1; i >= 0; i--) {
-            if (leftCubeCards.get(i) == cardId) {
+            if (Objects.equals(leftCubeCards.get(i), cardId)) {
                 leftCubeCards.remove(i);
                 return;
             }

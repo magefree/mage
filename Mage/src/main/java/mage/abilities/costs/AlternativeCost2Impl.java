@@ -145,8 +145,6 @@ public class AlternativeCost2Impl<T extends AlternativeCost2Impl<T>> extends Cos
         return activated;
     }
 
-    ;
-
     @Override
     public AlternativeCost2Impl copy() {
         return new AlternativeCost2Impl(this);

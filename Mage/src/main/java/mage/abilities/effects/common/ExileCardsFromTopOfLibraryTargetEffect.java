@@ -53,7 +53,7 @@ public class ExileCardsFromTopOfLibraryTargetEffect extends OneShotEffect {
         if (targetPlayer != null) {
             Cards cards = new CardsImpl();
             cards.addAll(targetPlayer.getLibrary().getTopCards(game, amount));
-            return targetPlayer.moveCards(cards, null, Zone.EXILED, source, game);
+            return targetPlayer.moveCards(cards, Zone.EXILED, source, game);
         }
         return false;
     }

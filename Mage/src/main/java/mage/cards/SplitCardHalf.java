@@ -15,4 +15,6 @@ public interface SplitCardHalf extends Card {
     SplitCardHalf copy();
 
     void setParentCard(SplitCard card);
+
+    SplitCard getParentCard();
 }

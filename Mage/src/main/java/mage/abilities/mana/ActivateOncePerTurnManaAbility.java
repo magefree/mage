@@ -24,44 +24,32 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.abilities.mana;
 
-import java.util.UUID;
 import mage.Mana;
 import mage.abilities.costs.Cost;
 import mage.abilities.effects.common.AddManaOfAnyColorEffect;
 import mage.abilities.effects.common.BasicManaEffect;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.util.CardUtil;
 
 /**
  *
  * @author LevelX2
  */
-public class ActivateOncePerTurnManaAbility extends ManaAbility {
-
-    class ActivationInfo {
-        
-        public int turnNum;
-        public int activationCounter;
-
-        public ActivationInfo(int turnNum, int activationCounter) {
-            this.turnNum = turnNum;
-            this.activationCounter = activationCounter;
-        }
-    }
+public class ActivateOncePerTurnManaAbility extends ActivatedManaAbilityImpl {
 
     public ActivateOncePerTurnManaAbility(Zone zone, BasicManaEffect effect, Cost cost) {
         super(zone, effect, cost);
         this.netMana.add(effect.getMana());
+        this.maxActivationsPerTurn = 1;
     }
 
     public ActivateOncePerTurnManaAbility(Zone zone, AddManaOfAnyColorEffect effect, Cost cost) {
         super(zone, effect, cost);
-        this.netMana.add(new Mana(0,0,0,0,0,0,effect.getAmount(), 0));
+        this.netMana.add(new Mana(0, 0, 0, 0, 0, 0, effect.getAmount(), 0));
+        this.maxActivationsPerTurn = 1;
     }
 
     public ActivateOncePerTurnManaAbility(ActivateOncePerTurnManaAbility ability) {
@@ -69,34 +57,9 @@ public class ActivateOncePerTurnManaAbility extends ManaAbility {
     }
 
     @Override
-    public boolean canActivate(UUID playerId, Game game) {
-        if (super.canActivate(playerId, game)) {
-            ActivationInfo activationInfo = getActivationInfo(game);
-            if (activationInfo == null || activationInfo.turnNum != game.getTurnNum() || activationInfo.activationCounter < 1) {
-                return true;
-            }
-        }
-        return false;
-    }
-    
-    @Override
     public boolean activate(Game game, boolean noMana) {
         if (canActivate(this.controllerId, game)) {
-            if (super.activate(game, noMana)) {
-                ActivationInfo activationInfo = getActivationInfo(game);
-                if (activationInfo == null) {
-                    activationInfo = new ActivationInfo(game.getTurnNum(), 1);
-                } else {
-                    if (activationInfo.turnNum != game.getTurnNum()) {
-                        activationInfo.turnNum = game.getTurnNum();
-                        activationInfo.activationCounter = 1;
-                    } else {
-                        activationInfo.activationCounter++;
-                    }
-                }
-                setActivationInfo(activationInfo, game);
-                return true;
-            }
+            return super.activate(game, noMana);
         }
         return false;
     }
@@ -111,18 +74,4 @@ public class ActivateOncePerTurnManaAbility extends ManaAbility {
         return new ActivateOncePerTurnManaAbility(this);
     }
 
-    private ActivationInfo getActivationInfo(Game game) {
-        Integer turnNum = (Integer) game.getState().getValue(CardUtil.getCardZoneString("activationsTurn", sourceId, game));
-        Integer activationCount = (Integer) game.getState().getValue(CardUtil.getCardZoneString("activationsCount", sourceId, game));
-        if (turnNum == null || activationCount == null) {
-            return null;
-        }
-        return new ActivationInfo(turnNum, activationCount);
-    }
-    
-    private void setActivationInfo(ActivationInfo activationInfo, Game game) {
-        game.getState().setValue(CardUtil.getCardZoneString("activationsTurn", sourceId, game), activationInfo.turnNum);
-        game.getState().setValue(CardUtil.getCardZoneString("activationsCount", sourceId, game), activationInfo.activationCounter);
-    }    
-    
 }

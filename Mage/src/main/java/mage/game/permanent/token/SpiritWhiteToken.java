@@ -33,6 +33,7 @@ import java.util.List;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  * @author nantuko
@@ -42,7 +43,7 @@ public class SpiritWhiteToken extends Token {
     final static private List<String> tokenImageSets = new ArrayList<>();
 
     static {
-        tokenImageSets.addAll(Arrays.asList("AVR", "C14", "CNS", "DDC", "DDK", "FRF", "ISD", "KTK", "M15", "MM2", "SHM", "SOI"));
+        tokenImageSets.addAll(Arrays.asList("AVR", "C14", "CNS", "DDC", "DDK", "FRF", "ISD", "KTK", "M15", "MM2", "SHM", "SOI", "EMA", "C16", "MM3", "CMA", "E01"));
     }
 
     public SpiritWhiteToken() {
@@ -61,11 +62,11 @@ public class SpiritWhiteToken extends Token {
             setTokenType(tokenType);
         }
         cardType.add(CardType.CREATURE);
-        subtype.add("Spirit");
+        subtype.add(SubType.SPIRIT);
         color.setWhite(true);
         power = new MageInt(1);
         toughness = new MageInt(1);
-        
+
         addAbility(FlyingAbility.getInstance());
     }
 
@@ -74,6 +75,12 @@ public class SpiritWhiteToken extends Token {
         super.setExpansionSetCodeForImage(code);
         if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("AVR")) {
             setTokenType(1);
+        }
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("C16")) {
+            setTokenType(2);
+        }
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("EMA")) {
+            setTokenType(2);
         }
     }
 

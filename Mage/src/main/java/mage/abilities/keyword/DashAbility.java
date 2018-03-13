@@ -76,8 +76,9 @@ public class DashAbility extends StaticAbility implements AlternativeSourceCosts
         this.addDashCost(manaString);
         Ability ability = new EntersBattlefieldAbility(
                 new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.Custom, false),
-                DashedCondition.getInstance(), "", "");
+                DashedCondition.instance, "", "");
         ability.addEffect(new DashAddDelayedTriggeredAbilityEffect());
+        ability.setRuleVisible(false);
         addSubAbility(ability);
 
     }
@@ -179,7 +180,7 @@ public class DashAbility extends StaticAbility implements AlternativeSourceCosts
             ++numberCosts;
         }
         if (numberCosts == 1) {
-            sb.append(" ").append(remarkText);
+            sb.append(' ').append(remarkText);
         }
 
         return sb.toString();

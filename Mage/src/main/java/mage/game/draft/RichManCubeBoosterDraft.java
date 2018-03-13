@@ -27,10 +27,8 @@
  */
 package mage.game.draft;
 
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
+
 import mage.cards.Card;
 import mage.cards.ExpansionSet;
 import mage.game.draft.DraftCube.CardIdentity;
@@ -90,7 +88,7 @@ public class RichManCubeBoosterDraft extends DraftImpl {
 
                 List<Card> nextBooster = draftCube.createBooster();
                 next.setBooster(nextBooster);
-                if (nextId == startId) {
+                if (Objects.equals(nextId, startId)) {
                     break;
                 }
                 nextId = table.getNext();

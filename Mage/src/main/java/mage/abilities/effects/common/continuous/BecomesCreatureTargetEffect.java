@@ -27,21 +27,17 @@
  */
 package mage.abilities.effects.common.continuous;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.cards.repository.CardRepository;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 import mage.target.Target;
 import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -88,22 +84,22 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
                     case TypeChangingEffects_4:
                         if (sublayer == SubLayer.NA) {
                             if (loseAllAbilities) {
-                                permanent.getSubtype().retainAll(CardRepository.instance.getLandTypes());
-                                permanent.getSubtype().addAll(token.getSubtype());
+                                permanent.getSubtype(game).retainAll(SubType.getLandTypes(false));
+                                permanent.getSubtype(game).addAll(token.getSubtype(game));
                             } else {
-                                if (token.getSubtype().size() > 0) {
-                                    for (String subtype : token.getSubtype()) {
-                                        if (!permanent.getSubtype().contains(subtype)) {
-                                            permanent.getSubtype().add(subtype);
+                                if (!token.getSubtype(game).isEmpty()) {
+                                    for (SubType subtype : token.getSubtype(game)) {
+                                        if (!permanent.hasSubtype(subtype, game)) {
+                                            permanent.getSubtype(game).add(subtype);
                                         }
                                     }
 
                                 }
                             }
-                            if (token.getCardType().size() > 0) {
+                            if (!token.getCardType().isEmpty()) {
                                 for (CardType t : token.getCardType()) {
                                     if (!permanent.getCardType().contains(t)) {
-                                        permanent.getCardType().add(t);
+                                        permanent.addCardType(t);
                                     }
                                 }
                             }
@@ -128,7 +124,7 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
                             permanent.removeAllAbilities(source.getSourceId(), game);
                         }
                         if (sublayer == SubLayer.NA) {
-                            if (token.getAbilities().size() > 0) {
+                            if (!token.getAbilities().isEmpty()) {
                                 for (Ability ability : token.getAbilities()) {
                                     permanent.addAbility(ability, source.getSourceId(), game);
                                 }
@@ -144,7 +140,7 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
                 result = true;
             }
         }
-        if (!result && this.duration.equals(Duration.Custom)) {
+        if (!result && this.duration == Duration.Custom) {
             this.discard();
         }
         return result;
@@ -184,7 +180,7 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
             sb.append(" becomes a ");
         }
         sb.append(token.getDescription());
-        sb.append(" ").append(duration.toString());
+        sb.append(' ').append(duration.toString());
         if (addStillALandText) {
             if (target.getMaxNumberOfTargets() > 1) {
                 sb.append(". They're still lands");

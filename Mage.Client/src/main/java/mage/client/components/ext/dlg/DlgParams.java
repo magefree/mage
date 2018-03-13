@@ -38,7 +38,7 @@ public class DlgParams {
 
     boolean isAI = false;
 
-    public HashSet<String> manaChoices = new HashSet<String>();
+    public HashSet<String> manaChoices = new HashSet<>();
 
     public int getPlayerID() {
         return playerID;

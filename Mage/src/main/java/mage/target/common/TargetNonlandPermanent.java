@@ -55,7 +55,6 @@ public class TargetNonlandPermanent extends TargetPermanent {
 
     public TargetNonlandPermanent(int minNumTargets, int maxNumTargets, FilterNonlandPermanent filter, boolean notTarget) {
         super(minNumTargets, maxNumTargets, filter, notTarget);
-        this.targetName = filter.getMessage();
     }
 
     public TargetNonlandPermanent(final TargetNonlandPermanent target) {

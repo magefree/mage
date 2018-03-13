@@ -61,7 +61,7 @@ import mage.view.PlayerView;
  */
 public class GameEndDialog extends MageDialog {
 
-    private final DateFormat df = DateFormat.getDateTimeInstance();;
+    private final DateFormat df = DateFormat.getDateTimeInstance();
 
 
     /** Creates new form GameEndDialog
@@ -100,7 +100,7 @@ public class GameEndDialog extends MageDialog {
 
         StringBuilder sb = new StringBuilder();
         for (PlayerView player : gameEndView.getPlayers()) {
-            sb.append(player.getName()).append(" Life: ").append(player.getLife()).append(" ");
+            sb.append(player.getName()).append(" Life: ").append(player.getLife()).append(' ');
         }
         this.txtLife.setText(sb.toString());
 
@@ -128,8 +128,8 @@ public class GameEndDialog extends MageDialog {
                 sdf.applyPattern( "yyyyMMdd_HHmmss" );
                 String fileName = new StringBuilder(dir).append(File.separator)
                         .append(sdf.format(gameEndView.getStartTime()))
-                        .append("_").append(gameEndView.getMatchView().getGameType())
-                        .append("_").append(gameEndView.getMatchView().getGames().size())
+                        .append('_').append(gameEndView.getMatchView().getGameType())
+                        .append('_').append(gameEndView.getMatchView().getGames().size())
                         .append(".txt").toString();
                 PrintWriter out = new PrintWriter(fileName);
                 out.print(gamePanel.getGameLog());
@@ -290,11 +290,7 @@ public class GameEndDialog extends MageDialog {
         tabPane.addTab("Statistics", tabStatistics);
 
         btnOk.setText("OK");
-        btnOk.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnOkActionPerformed(evt);
-            }
-        });
+        btnOk.addActionListener(evt -> btnOkActionPerformed(evt));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

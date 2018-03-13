@@ -88,24 +88,25 @@ public class CopySpellTest extends CardTestPlayerBase {
         assertPowerToughness(playerB, "Silvercoat Lion", 2, 2);
         assertAbility(playerB, "Silvercoat Lion", FlyingAbility.getInstance(), false);
     }
-    
+
     /**
-     *  Reported bug: "Silverfur Partisan and fellow wolves did not trigger off of copies of Strength of Arms made by Zada, Hedron Grinder. 
-     * Not sure about other spells, but I imagine similar results."
+     * Reported bug: "Silverfur Partisan and fellow wolves did not trigger off
+     * of copies of Strength of Arms made by Zada, Hedron Grinder. Not sure
+     * about other spells, but I imagine similar results."
      */
     @Test
     public void ZadaHedronSilverfurPartisan() {
-    
+
         // {2}{G}
         // Trample
         // Whenever a Wolf or Werewolf you control becomes the target of an instant or sorcery spell, put a 2/2 green Wolf creature token onto the battlefield.
         addCard(Zone.BATTLEFIELD, playerA, "Silverfur Partisan"); // 2/2 Wolf Warrior
-        
+
         // Whenever you cast an instant or sorcery spell that targets only Zada, Hedron Grinder, copy that spell for each other creature you control that the spell could target. Each copy targets a different one of those creatures.
-        addCard(Zone.BATTLEFIELD, playerA, "Zada, Hedron Grinder", 1);   
-        
+        addCard(Zone.BATTLEFIELD, playerA, "Zada, Hedron Grinder", 1);
+
         // Target creature gets +3/+3 until end of turn.
-        addCard(Zone.HAND, playerA, "Giant Growth", 1); // {G}   
+        addCard(Zone.HAND, playerA, "Giant Growth", 1); // {G}
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
 
@@ -204,36 +205,89 @@ public class CopySpellTest extends CardTestPlayerBase {
         assertHandCount(playerA, "Evermind", 1);
         assertHandCount(playerA, 3); // Evermind + 1 card from Evermind spliced on cast Into the fray and 1 from the copied spell with splice
     }
-    
+
     /**
-     * {4}{U} Enchantment (Enchant Player)
-     * Whenever enchanted player casts an instant or sorcery spell, each other player may copy that spell 
-     * and may choose new targets for the copy he or she controls.
-     * 
-     * Reported bug: "A player with Curse of Echoes attached to them played Bribery and the player who controlled the curse had control 
-     * of all 3 copies. This seems to be the case for all spells."
+     * {4}{U} Enchantment (Enchant Player) Whenever enchanted player casts an
+     * instant or sorcery spell, each other player may copy that spell and may
+     * choose new targets for the copy he or she controls.
+     *
+     * Reported bug: "A player with Curse of Echoes attached to them played
+     * Bribery and the player who controlled the curse had control of all 3
+     * copies. This seems to be the case for all spells."
      */
     @Test
     public void testCurseOfEchoes() {
-        
+
         addCard(Zone.HAND, playerA, "Curse of Echoes");
         addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
         addCard(Zone.HAND, playerB, "Lightning Bolt");
         addCard(Zone.BATTLEFIELD, playerB, "Mountain");
-        
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Curse of Echoes");
         addTarget(playerA, playerB);
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt");
         addTarget(playerB, playerA); // original target
         setChoice(playerA, "Yes");
         addTarget(playerA, playerB);
-        
+
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
-        
+
         assertGraveyardCount(playerB, "Lightning Bolt", 1);
         assertLife(playerA, 17); // still takes original spell's damage
         assertLife(playerB, 17); // copy redirected
     }
 
+    /**
+     * What happened was my opponent had an Atraxa, Praetors' Voice and a
+     * Walking Ballista with 2 counters in play. On my turn, I cast Flame Slash
+     * targeting Atraxa and holding priority, then I cast Dualcaster Mage. I
+     * change the target of the Flame Slash copy to Walking Ballista. My
+     * opponent removes the counters from Ballista to kill a 2/2 creature of
+     * mine. Game log says both Flame Slashes fizzle, and Atraxa ends up still
+     * being in play at the end of it all. Only the Flame Slash targeting
+     * Walking Ballista should have fizzled.
+     */
+    @Test
+    public void testOnlyCopyFizzles() {
+
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        // Flying, vigilance, deathtouch, lifelink
+        // At the beginning of your end step, proliferate.
+        addCard(Zone.BATTLEFIELD, playerA, "Atraxa, Praetors' Voice", 4);
+        // Walking Ballista enters the battlefield with X +1/+1 counters on it.
+        // {4}: Put a +1/+1 counter on Walking Ballista.
+        // Remove a +1/+1 counter from Walking Ballista: It deals 1 damage to target creature or player.
+        addCard(Zone.HAND, playerA, "Walking Ballista"); // {X}{X}
+
+        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1);
+        // Flame Slash deals 4 damage to target creature.
+        addCard(Zone.HAND, playerB, "Flame Slash"); // Sorcery {R}
+        // Flash
+        // When Dualcaster Mage enters the battlefield, copy target instant or sorcery spell. You may choose new targets for the copy.
+        addCard(Zone.HAND, playerB, "Dualcaster Mage"); // Creature {1}{R}{R}
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 4);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Walking Ballista");
+        setChoice(playerA, "X=1");
+        setChoice(playerA, "Walking Ballista"); // for proliferate
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Flame Slash", "Atraxa, Praetors' Voice");
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Dualcaster Mage");
+        addTarget(playerB, "Flame Slash"); // original target
+        setChoice(playerB, "Yes");
+        addTarget(playerB, "Walking Ballista");
+
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Remove a", "Silvercoat Lion", "Flame Slash", StackClause.WHILE_COPY_ON_STACK);
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Remove a", "Silvercoat Lion", "Flame Slash", StackClause.WHILE_COPY_ON_STACK);
+        setStopAt(2, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerB, "Silvercoat Lion", 1);
+        assertPermanentCount(playerB, "Dualcaster Mage", 1);
+        assertPermanentCount(playerA, "Atraxa, Praetors' Voice", 0);
+        assertPermanentCount(playerA, "Walking Ballista", 0);
+        assertGraveyardCount(playerB, "Flame Slash", 1);
+
+    }
 }

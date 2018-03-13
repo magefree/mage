@@ -46,12 +46,15 @@ public class WinLoseEffectsTest extends CardTestPlayerBase {
      * game loss rather than the card draw.
      */
     @Test
-    public void testCard() {
+    public void testPlatinumAngelAndLaboratoryManiac() {
+        // Platinum Angel {7} - Flying  - 4/4
+        // You can't lose the game and your opponents can't win the game.
         addCard(Zone.BATTLEFIELD, playerA, "Platinum Angel");
+        // Laboratory Maniac {2}{U} - Creature Wizard - 2/3
+        // If you would draw a card while your library has no cards in it, you win the game instead.
         addCard(Zone.BATTLEFIELD, playerA, "Laboratory Maniac", 1);
         // If you would draw a card, draw two cards instead. 
         addCard(Zone.BATTLEFIELD, playerA, "Thought Reflection", 4);
-
 
         setStopAt(40, PhaseStep.END_TURN);
         execute();
@@ -60,8 +63,39 @@ public class WinLoseEffectsTest extends CardTestPlayerBase {
         Assert.assertTrue("Player A has not won but should have", playerA.hasWon());
         assertLife(playerA, 20);
         assertLife(playerB, 20);
-
     }
+    
+    /*
+     * Reported bug: My library was empty and I controlled Platinum Angel. I had already "drawn" from an empty library but hadn't lost due to the angel's effect. 
+     * My opponent cast Set Adrift on the Angel, and I lost immediately when it resolved.
+    */
+    @Test
+    public void testPlatinumAngelBouncedWithEmptyLibrary() {
+        
+        // Platinum Angel {7} - Flying  - 4/4
+        // You can't lose the game and your opponents can't win the game. 
+        addCard(Zone.BATTLEFIELD, playerA, "Platinum Angel");    
+        
+        // Set Adrift {5}{U} - Sorcery
+        // Delve (Each card you exile from your graveyard while casting this spell pays for {1}
+        // Put target nonland permanent on top of its owner's library.
+        addCard(Zone.HAND, playerB, "Set Adrift", 1);        
+        removeAllCardsFromLibrary(playerA);
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 6);
+        
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Set Adrift");
+        addTarget(playerB, "Platinum Angel");
+        
+        setStopAt(2, PhaseStep.BEGIN_COMBAT);
+        execute();
+        
+        assertGraveyardCount(playerB, "Set Adrift", 1);
+        assertPermanentCount(playerA, "Platinum Angel", 0);
+        assertLibraryCount(playerA, 1); // Angel returned to top of library
+        assertLibraryCount(playerA, "Platinum Angel", 1);
+        Assert.assertFalse("Player A should not have lost yet", playerA.hasLost());  
+    }
+    
     /**
      * If I have resolved an Angel's Grace this turn, have an empty library, a Laboratory Maniac on 
      * the battlefield, and would draw a card, nothing happens. I should win the game if the card drawing effect resolves.

@@ -72,4 +72,32 @@ public class PutToGraveyardTest extends CardTestPlayerBase {
 
     }
 
+    /**
+     * Oracle of Dust does not seem to actually move cards from exile into the
+     * opponent's graveyard, even though every other part of the ability works
+     * just fine.
+     */
+    @Test
+    public void testExileToGraveyard2() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
+        // Devoid
+        // {2}, Put a card an opponent owns from exile into that player's graveyard: Draw a card, then discard a card.
+        addCard(Zone.BATTLEFIELD, playerA, "Oracle of Dust", 1); // {4}{U}
+
+        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion");
+        // Exile target creature. Its controller gains life equal to its power.
+        addCard(Zone.HAND, playerA, "Swords to Plowshares");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Swords to Plowshares", "Silvercoat Lion");
+
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{2}");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertGraveyardCount(playerA, "Swords to Plowshares", 1);
+        assertGraveyardCount(playerB, "Silvercoat Lion", 1);
+        assertGraveyardCount(playerA, 2);
+
+    }
 }

@@ -49,6 +49,8 @@ public class DontUntapInControllersNextUntapStepTargetEffect extends ContinuousR
 
     private UUID onlyIfControlledByPlayer;
     private String targetName;
+    // used for Telekinesis - skips next two untap steps if true
+    private boolean twoSteps;
     // holds the info what target was already handled in Untap of its controller
     private final Map<UUID, Boolean> handledTargetsDuringTurn = new HashMap<>();
 
@@ -63,7 +65,7 @@ public class DontUntapInControllersNextUntapStepTargetEffect extends ContinuousR
     }
 
     public DontUntapInControllersNextUntapStepTargetEffect(String targetName) {
-        this(targetName, null);
+        this(targetName, false, null);
     }
 
     /**
@@ -73,14 +75,20 @@ public class DontUntapInControllersNextUntapStepTargetEffect extends ContinuousR
      * controlled by that controller, null = it works for all players
      */
     public DontUntapInControllersNextUntapStepTargetEffect(String targetName, UUID onlyIfControlledByPlayer) {
+        this(targetName, false, onlyIfControlledByPlayer);
+    }
+
+    public DontUntapInControllersNextUntapStepTargetEffect(String targetName, boolean twoSteps, UUID onlyIfControlledByPlayer) {
         super(Duration.Custom, Outcome.Detriment, false, true);
         this.targetName = targetName;
+        this.twoSteps = twoSteps;
         this.onlyIfControlledByPlayer = onlyIfControlledByPlayer;
     }
 
     public DontUntapInControllersNextUntapStepTargetEffect(final DontUntapInControllersNextUntapStepTargetEffect effect) {
         super(effect);
         this.targetName = effect.targetName;
+        this.twoSteps = effect.twoSteps;
         this.handledTargetsDuringTurn.putAll(effect.handledTargetsDuringTurn);
         this.onlyIfControlledByPlayer = effect.onlyIfControlledByPlayer;
     }
@@ -100,7 +108,7 @@ public class DontUntapInControllersNextUntapStepTargetEffect extends ContinuousR
         MageObject mageObject = game.getObject(source.getSourceId());
         Permanent permanentToUntap = game.getPermanent((event.getTargetId()));
         if (permanentToUntap != null && mageObject != null) {
-            return permanentToUntap.getLogName() + " doesn't untap (" + mageObject.getLogName() + ")";
+            return permanentToUntap.getLogName() + " doesn't untap (" + mageObject.getLogName() + ')';
         }
         return null;
     }
@@ -112,28 +120,29 @@ public class DontUntapInControllersNextUntapStepTargetEffect extends ContinuousR
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        // the check if a permanent untap pahse is already handled is needed if multiple effects are added to prevent untap in next untap step of controller
+        // the check if a permanent untap phase is already handled is needed if multiple effects are added to prevent untap in next untap step of controller
         // if we don't check it for every untap step of a turn only one effect would be consumed instead of all be valid for the next untap step
-        if (GameEvent.EventType.UNTAP_STEP.equals(event.getType())) {
+        if (event.getType() == EventType.UNTAP_STEP) {
             boolean allHandled = true;
             for (UUID targetId : getTargetPointer().getTargets(game, source)) {
                 Permanent permanent = game.getPermanent(targetId);
                 if (permanent != null) {
                     if (game.getActivePlayerId().equals(permanent.getControllerId())
-                            || (game.getActivePlayerId().equals(onlyIfControlledByPlayer))) { // if effect works only for specific player, all permanents have to be set to handled in that players untap step
+                            && ((onlyIfControlledByPlayer == null) || (game.getActivePlayerId().equals(onlyIfControlledByPlayer)))) { // if effect works only for specific player, all permanents have to be set to handled in that players untap step
                         if (!handledTargetsDuringTurn.containsKey(targetId)) {
                             // it's the untep step of the current controller and the effect was not handled for this target yet, so do it now
                             handledTargetsDuringTurn.put(targetId, false);
                             allHandled = false;
                         } else if (!handledTargetsDuringTurn.get(targetId)) {
                             // if it was already ready to be handled on an previous Untap step set it to done if not already so
-                            handledTargetsDuringTurn.put(targetId, true);
+                            handledTargetsDuringTurn.put(targetId, !twoSteps);
                         }
                     } else {
                         allHandled = false;
                     }
                 }
             }
+            
             if (allHandled) {
                 discard();
             }
@@ -145,8 +154,10 @@ public class DontUntapInControllersNextUntapStepTargetEffect extends ContinuousR
                     && getTargetPointer().getTargets(game, source).contains(event.getTargetId())) {
                 Permanent permanent = game.getPermanent(event.getTargetId());
                 if (permanent != null && game.getActivePlayerId().equals(permanent.getControllerId())) {
-                    handledTargetsDuringTurn.put(event.getTargetId(), true);
-                    return true;
+                    if ((onlyIfControlledByPlayer == null) || game.getActivePlayerId().equals(onlyIfControlledByPlayer)) { // If onlyIfControlledByPlayer is set, then don't apply unless we're currently controlled by the specified player.
+                        handledTargetsDuringTurn.put(event.getTargetId(), !twoSteps);
+                        return true;
+                    }
                 }
             }
         }
@@ -158,13 +169,13 @@ public class DontUntapInControllersNextUntapStepTargetEffect extends ContinuousR
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        if (targetName != null && targetName.length() > 0) {
+        if (targetName != null && !targetName.isEmpty()) {
             if (targetName.equals("Those creatures") || targetName.equals("They")) {
-                return targetName + " don't untap during their controller's next untap step";
+                return targetName + " don't untap during their controller's next " + (twoSteps ? "two " : "") + "untap step" + (twoSteps ? "s" : "");
             } else
-                return targetName + " doesn't untap during its controller's next untap step";
+                return targetName + " doesn't untap during its controller's next " + (twoSteps ? "two " : "") + "untap step" + (twoSteps ? "s" : "");
         } else {
-            return "target " + (mode == null ? "creature" : mode.getTargets().get(0).getTargetName()) + " doesn't untap during its controller's next untap step";
+            return "target " + (mode == null ? "creature" : mode.getTargets().get(0).getTargetName()) + " doesn't untap during its controller's next " + (twoSteps ? "two " : "") + "untap step" + (twoSteps ? "s" : "");
         }
     }
 

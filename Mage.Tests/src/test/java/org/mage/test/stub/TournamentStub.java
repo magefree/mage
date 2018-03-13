@@ -38,12 +38,9 @@ import mage.game.events.Listener;
 import mage.game.events.PlayerQueryEvent;
 import mage.game.events.TableEvent;
 import mage.game.result.ResultProtos;
-import mage.game.tournament.Round;
-import mage.game.tournament.Tournament;
-import mage.game.tournament.TournamentOptions;
-import mage.game.tournament.TournamentPlayer;
-import mage.game.tournament.TournamentType;
+import mage.game.tournament.*;
 import mage.players.Player;
+import mage.players.PlayerType;
 
 /**
  *
@@ -59,7 +56,7 @@ public class TournamentStub implements Tournament {
     }
 
     @Override
-    public void addPlayer(Player player, String playerType) {
+    public void addPlayer(Player player, PlayerType playerType) {
 
     }
 
@@ -114,8 +111,8 @@ public class TournamentStub implements Tournament {
     }
 
     @Override
-    public void updateDeck(UUID playerId, Deck deck) {
-
+    public boolean updateDeck(UUID playerId, Deck deck) {
+        return true;
     }
 
     @Override

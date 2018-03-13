@@ -43,6 +43,7 @@ public interface ImageManager {
     Image getSkipStackButtonImage();
     Image getSkipEndStepBeforeYourTurnButtonImage();
     Image getSkipYourNextTurnButtonImage();
+    Image getToggleRecordMacroButtonImage();
 
 
     Image getPhaseImage(String phase);

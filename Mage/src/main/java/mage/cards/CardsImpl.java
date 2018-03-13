@@ -28,30 +28,21 @@
 package mage.cards;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
+import mage.MageObject;
 import mage.filter.FilterCard;
 import mage.game.Game;
+import mage.util.RandomUtil;
 import mage.util.ThreadLocalStringBuilder;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializable {
 
     private static final ThreadLocalStringBuilder threadLocalBuilder = new ThreadLocalStringBuilder(200);
 
-    private static Random rnd = new Random();
     private UUID ownerId;
 
     public CardsImpl() {
@@ -110,33 +101,26 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
 
     @Override
     public Card getRandom(Game game) {
-        if (this.size() == 0) {
+        if (this.isEmpty()) {
             return null;
         }
         UUID[] cards = this.toArray(new UUID[this.size()]);
-        return game.getCard(cards[rnd.nextInt(cards.length)]);
+        MageObject object = game.getObject(cards[RandomUtil.nextInt(cards.length)]); // neccessary if permanent tokens are in the collection
+        if (object instanceof Card) {
+            return (Card) object;
+        }
+        return null;
     }
 
     @Override
     public int count(FilterCard filter, Game game) {
-        int result = 0;
-        for (UUID cardId : this) {
-            if (filter.match(game.getCard(cardId), game)) {
-                result++;
-            }
-        }
-        return result;
+        return (int) stream().filter(cardId -> filter.match(game.getCard(cardId), game)).count();
     }
 
     @Override
     public int count(FilterCard filter, UUID playerId, Game game) {
-        int result = 0;
-        for (UUID card : this) {
-            if (filter.match(game.getCard(card), playerId, game)) {
-                result++;
-            }
-        }
-        return result;
+        return (int) this.stream().filter(card -> filter.match(game.getCard(card), playerId, game)).count();
+
     }
 
     @Override
@@ -144,13 +128,8 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
         if (sourceId == null) {
             return count(filter, playerId, game);
         }
-        int result = 0;
-        for (UUID card : this) {
-            if (filter.match(game.getCard(card), sourceId, playerId, game)) {
-                result++;
-            }
-        }
-        return result;
+        return (int) this.stream().filter(card -> filter.match(game.getCard(card), sourceId, playerId, game)).count();
+
     }
 
     @Override
@@ -170,22 +149,19 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
 
     @Override
     public Set<Card> getCards(FilterCard filter, Game game) {
-        Set<Card> cards = new LinkedHashSet<>();
-        for (UUID card : this) {
-            boolean match = filter.match(game.getCard(card), game);
-            if (match) {
-                cards.add(game.getCard(card));
-            }
-        }
-        return cards;
+        return stream().map(game::getCard).filter(card -> filter.match(card, game)).collect(Collectors.toSet());
     }
 
     @Override
     public Set<Card> getCards(Game game) {
         Set<Card> cards = new LinkedHashSet<>();
-        for (Iterator<UUID> it = this.iterator(); it.hasNext();) { // Changed to iterator becuase of ConcurrentModificationException
+        for (Iterator<UUID> it = this.iterator(); it.hasNext();) { // Changed to iterator because of ConcurrentModificationException
             UUID cardId = it.next();
+
             Card card = game.getCard(cardId);
+            if (card == null) {
+                card = game.getPermanent(cardId); // needed to get TokenCard objects
+            }
             if (card != null) { // this can happen during the cancelation (player concedes) of a game
                 cards.add(card);
             }
@@ -203,7 +179,7 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
         }
         Collections.sort(cards);
         for (String name : cards) {
-            sb.append(name).append(":");
+            sb.append(name).append(':');
         }
         return sb.toString();
     }
@@ -227,9 +203,7 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
         Map<String, Card> cards = new HashMap<>();
         for (UUID cardId : this) {
             Card card = game.getCard(cardId);
-            if (!cards.containsKey(card.getName())) {
-                cards.put(card.getName(), card);
-            }
+            cards.putIfAbsent(card.getName(), card);
         }
         return cards.values();
     }

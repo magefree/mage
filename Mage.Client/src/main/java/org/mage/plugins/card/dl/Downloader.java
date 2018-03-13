@@ -57,7 +57,7 @@ public class Downloader extends AbstractLaternaBean implements Disposable {
 
     @Override
     public void dispose() {
-        for (DownloadJob j : getJobs()) {
+        for (DownloadJob j : jobs) {
             switch (j.getState()) {
                 case NEW:
                 case WORKING:
@@ -153,6 +153,10 @@ public class Downloader extends AbstractLaternaBean implements Disposable {
                         } finally {
                             try {
                                 os.close();
+                                if (!dst.isValid()) {
+                                    dst.delete();
+                                    logger.warn("Resource not found " + job.getName() + " from " + job.getSource().toString());
+                                }
                             } catch (IOException ex) {
                                 logger.warn("While closing", ex);
                             }

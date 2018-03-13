@@ -39,6 +39,7 @@ public class HoverButton extends JPanel implements MouseListener {
 
     private String topText;
     private Image topTextImage;
+    private Image topTextImageRight;
 
     private boolean isHovered = false;
     private boolean isSelected = false;
@@ -129,6 +130,9 @@ public class HoverButton extends JPanel implements MouseListener {
         }
         if (topTextImage != null) {
             g.drawImage(topTextImage, 4, 3, this);
+        }
+        if (topTextImageRight != null) {
+            g.drawImage(topTextImageRight, this.getWidth() - 20, 3, this);
         }
         if (overlayImage != null) {
             g.drawImage(overlayImage, (imageSize.width - overlayImageSize.width) / 2, 10, this);
@@ -295,6 +299,10 @@ public class HoverButton extends JPanel implements MouseListener {
     public void setTopTextImage(Image topTextImage) {
         this.topTextImage = topTextImage;
         this.textOffsetX = -1; // rest for new clculation
+    }
+
+    public void setTopTextImageRight(Image topTextImage) {
+        this.topTextImageRight = topTextImage;
     }
 
     public void setTextAlwaysVisible(boolean textAlwaysVisible) {

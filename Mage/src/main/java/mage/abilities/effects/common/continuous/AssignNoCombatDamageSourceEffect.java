@@ -106,8 +106,8 @@ public class AssignNoCombatDamageSourceEffect extends ReplacementEffectImpl {
                 text += " this combat";
                 break;
             default:
-                if (duration.toString().length() > 0) {
-                    text += " " + duration.toString();
+                if (!duration.toString().isEmpty()) {
+                    text += ' ' + duration.toString();
                 }
         }
         return text;

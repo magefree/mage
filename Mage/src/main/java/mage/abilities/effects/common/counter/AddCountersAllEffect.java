@@ -36,6 +36,7 @@ import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 /**
  *
@@ -66,9 +67,9 @@ public class AddCountersAllEffect extends OneShotEffect {
         if (controller != null && sourceObject != null) {
             if (counter != null) {
                 for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-                    permanent.addCounters(counter.copy(), game);
+                    permanent.addCounters(counter.copy(), source, game);
                     if (!game.isSimulation()) {
-                        game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " puts " + counter.getCount() + " " + counter.getName().toLowerCase()
+                        game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " puts " + counter.getCount() + ' ' + counter.getName().toLowerCase()
                                 + " counter on " + permanent.getLogName());
                     }
                 }
@@ -82,7 +83,7 @@ public class AddCountersAllEffect extends OneShotEffect {
         StringBuilder sb = new StringBuilder();
         sb.append("put ");
         if (counter.getCount() > 1) {
-            sb.append(Integer.toString(counter.getCount())).append(" ").append(counter.getName().toLowerCase()).append(" counters on each ");
+            sb.append(CardUtil.numberToText(counter.getCount(), "a")).append(' ').append(counter.getName().toLowerCase()).append(" counters on each ");
         } else {
             sb.append("a ").append(counter.getName().toLowerCase()).append(" counter on each ");
         }

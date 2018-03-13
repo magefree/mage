@@ -43,10 +43,10 @@ import mage.players.Player;
  */
 public class ExileSpellEffect extends OneShotEffect implements MageSingleton {
 
-    private static final ExileSpellEffect fINSTANCE = new ExileSpellEffect();
+    private static final ExileSpellEffect instance = new ExileSpellEffect();
 
     public static ExileSpellEffect getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private ExileSpellEffect() {
@@ -56,7 +56,7 @@ public class ExileSpellEffect extends OneShotEffect implements MageSingleton {
 
     @Override
     public ExileSpellEffect copy() {
-        return fINSTANCE;
+        return instance;
     }
 
     @Override

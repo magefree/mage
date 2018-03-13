@@ -31,6 +31,7 @@ package mage.game.tournament;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import mage.cards.decks.Deck;
 import mage.game.draft.DraftCube;
 
 /**
@@ -45,7 +46,7 @@ public class LimitedOptions implements Serializable {
     protected DraftCube draftCube;
     protected int numberBoosters;
     protected boolean isRandom;
-    protected String cubeFromDeckFilename = "";
+    protected Deck cubeFromDeck = null;
 
     public List<String> getSetCodes() {
         return sets;
@@ -67,12 +68,12 @@ public class LimitedOptions implements Serializable {
         this.draftCubeName = draftCubeName;
     }
 
-    public void setCubeFromDeckFilename(String cubeFromDeckFilename) {
-        this.cubeFromDeckFilename = cubeFromDeckFilename;
+    public void setCubeFromDeck(Deck cubeFromDeck) {
+        this.cubeFromDeck = cubeFromDeck;
     }
 
-    public String getCubeFromDeckFilename() {
-        return cubeFromDeckFilename;
+    public Deck getCubeFromDeck() {
+        return cubeFromDeck;
     }
 
     public DraftCube getDraftCube() {

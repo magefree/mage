@@ -25,7 +25,7 @@ public class ThingInTheIceTest extends CardTestPlayerBase {
      */
     @Test
     public void testClueTokens() {
-        // Whenever a land enters the battlefield under your control, investigate. <i>(Put a colorless Clue artifact token onto the battlefield with "{2}, Sacrifice this artifact: Draw a card.")</i>
+        // Whenever a land enters the battlefield under your control, investigate. <i>(Create a colorless Clue artifact token onto the battlefield with "{2}, Sacrifice this artifact: Draw a card.")</i>
         // Whenever you sacrifice a Clue, put a +1/+1 counter on Tireless Tracker.
         addCard(Zone.BATTLEFIELD, playerA, "Tireless Tracker", 1); // Human, Scout 3/2
         addCard(Zone.HAND, playerA, "Forest", 1);

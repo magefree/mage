@@ -13,12 +13,13 @@ import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import mage.client.MageFrame;
 import mage.client.dialog.PreferencesDialog;
+import org.mage.card.arcane.CardRenderer;
 
 /**
  *
  * @author LevelX2
  */
-public class GUISizeHelper {
+public final class GUISizeHelper {
 
     // relate the native image card size to a value of the size scale
     final static int CARD_IMAGE_WIDTH = 312;
@@ -74,6 +75,7 @@ public class GUISizeHelper {
 
     public static Dimension editorCardDimension;
     public static int editorCardOffsetSize;
+    public static int enlargedImageHeight;
 
     public static int getTableRowHeight() {
         int fontSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_TABLE_FONT_SIZE, 14);
@@ -139,7 +141,9 @@ public class GUISizeHelper {
 
         int otherZonesCardSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_CARD_OTHER_ZONES_SIZE, 14);
         otherZonesCardDimension = new Dimension(CARD_IMAGE_WIDTH * otherZonesCardSize / 42, CARD_IMAGE_HEIGHT * otherZonesCardSize / 42);
-        if (otherZonesCardSize > 29) {
+        if (PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_RENDERING_FALLBACK, "false").equals("false")) {
+            otherZonesCardVerticalOffset = CardRenderer.getCardTopHeight(otherZonesCardDimension.width);
+        } else if (otherZonesCardSize > 29) {
             otherZonesCardVerticalOffset = otherZonesCardDimension.height / 8;
         } else {
             otherZonesCardVerticalOffset = otherZonesCardDimension.height / 10;
@@ -152,7 +156,13 @@ public class GUISizeHelper {
 
         int editorCardSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_CARD_EDITOR_SIZE, 14);
         editorCardDimension = new Dimension(CARD_IMAGE_WIDTH * editorCardSize / 42, CARD_IMAGE_HEIGHT * editorCardSize / 42);
-        editorCardOffsetSize = 2 * PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_CARD_OFFSET_SIZE, 14) - 10;
+        if (PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_RENDERING_FALLBACK, "false").equals("false")) {
+            editorCardOffsetSize = CardRenderer.getCardTopHeight(editorCardDimension.width);
+        } else {
+            editorCardOffsetSize = 2 * PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_CARD_OFFSET_SIZE, 14) - 10;
+        }
+
+        enlargedImageHeight = 25 * PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GUI_ENLARGED_IMAGE_SIZE, 20);
     }
 
     public static void changePopupMenuFont(JPopupMenu popupMenu) {

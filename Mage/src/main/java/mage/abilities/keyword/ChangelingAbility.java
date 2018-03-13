@@ -28,10 +28,11 @@
 
 package mage.abilities.keyword;
 
-import java.io.ObjectStreamException;
 import mage.abilities.MageSingleton;
 import mage.abilities.StaticAbility;
 import mage.constants.Zone;
+
+import java.io.ObjectStreamException;
 
 
 /**
@@ -44,19 +45,18 @@ import mage.constants.Zone;
  * @author nantuko
  */
 public class ChangelingAbility extends StaticAbility implements MageSingleton {
-    public static final String ALL_CREATURE_TYPE = "All Creature Type";
-    private static final ChangelingAbility fINSTANCE =  new ChangelingAbility();
+    private static final ChangelingAbility instance =  new ChangelingAbility();
 
     private Object readResolve() throws ObjectStreamException {
-        return fINSTANCE;
+        return instance;
     }
 
     public static ChangelingAbility getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private ChangelingAbility() {
-        super(Zone.BATTLEFIELD, null);
+        super(Zone.ALL, null);
     }
 
     @Override
@@ -66,6 +66,6 @@ public class ChangelingAbility extends StaticAbility implements MageSingleton {
 
     @Override
     public ChangelingAbility copy() {
-        return fINSTANCE;
+        return instance;
     }
 }

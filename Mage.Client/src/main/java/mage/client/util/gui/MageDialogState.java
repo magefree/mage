@@ -37,9 +37,9 @@ import mage.client.dialog.MageDialog;
  */
 public class MageDialogState {
 
-    Dimension dimension;
-    int xPos;
-    int yPos;
+    final Dimension dimension;
+    final int xPos;
+    final int yPos;
 
     public MageDialogState(MageDialog mageDialog) {
         this.dimension = mageDialog.getSize();

@@ -31,6 +31,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 import mage.Mana;
 import mage.abilities.Ability;
+import mage.abilities.ActivatedAbility;
 import mage.abilities.SpellAbility;
 import mage.cards.Card;
 import mage.choices.ChoiceImpl;
@@ -54,7 +55,7 @@ public class SpellsCostReductionAllEffect extends CostModificationEffectImpl {
     private final boolean upTo;
 
     public SpellsCostReductionAllEffect(int amount) {
-        this(new FilterCard("All Spells "), amount);
+        this(new FilterCard("Spells"), amount);
     }
 
     public SpellsCostReductionAllEffect(FilterCard filter, int amount) {
@@ -67,7 +68,7 @@ public class SpellsCostReductionAllEffect extends CostModificationEffectImpl {
         this.amount = amount;
         this.upTo = upTo;
 
-        this.staticText = filter.getMessage() + " cost " + (upTo ? "up to " : "") + "{" + amount + "} less to cast";
+        this.staticText = filter.getMessage() + " cost " + (upTo ? "up to " : "") + '{' + amount + "} less to cast";
     }
 
     protected SpellsCostReductionAllEffect(SpellsCostReductionAllEffect effect) {
@@ -78,8 +79,19 @@ public class SpellsCostReductionAllEffect extends CostModificationEffectImpl {
     }
 
     @Override
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+    }
+
+    @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
         if (upTo) {
+            if (abilityToModify instanceof ActivatedAbility) {
+                if (((ActivatedAbility) abilityToModify).isCheckPlayableMode()) {
+                    CardUtil.reduceCost(abilityToModify, this.amount);
+                    return true;
+                }
+            }
             Mana mana = abilityToModify.getManaCostsToPay().getMana();
             int reduceMax = mana.getGeneric();
             if (reduceMax > 2) {
@@ -100,23 +112,14 @@ public class SpellsCostReductionAllEffect extends CostModificationEffectImpl {
                 if (controller.choose(Outcome.Benefit, choice, game)) {
                     int reduce = Integer.parseInt(choice.getChoice());
                     CardUtil.reduceCost(abilityToModify, reduce);
+                } else {
+                    return false;
                 }
             }
         } else {
-
             CardUtil.reduceCost(abilityToModify, this.amount);
         }
         return true;
-    }
-
-    /**
-     * Overwrite this in effect that inherits from this
-     *
-     * @param source
-     * @param game
-     */
-    protected void setRuntimeData(Ability source, Game game) {
-
     }
 
     /**

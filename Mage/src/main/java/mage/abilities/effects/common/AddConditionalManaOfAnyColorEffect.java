@@ -35,6 +35,7 @@ import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.choices.ChoiceColor;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 /**
  * @author noxx
@@ -59,8 +60,12 @@ public class AddConditionalManaOfAnyColorEffect extends ManaEffect {
         this.manaBuilder = manaBuilder;
         this.oneChoice = oneChoice;
         //
-        staticText = "Add " + amount + " mana of "
-                + (oneChoice ? "any one color" : "in any combination of colors")
+        staticText = "Add "
+                + (amount instanceof StaticValue ? (CardUtil.numberToText(((StaticValue) amount).toString())) : "")
+                + " mana "
+                + (oneChoice ? "of any"
+                        + (amount instanceof StaticValue && (((StaticValue) amount).toString()).equals("1") ? "" : " one")
+                        + " color" : "in any combination of colors")
                 + " to your mana pool. " + manaBuilder.getRule();
     }
 
@@ -85,26 +90,17 @@ public class AddConditionalManaOfAnyColorEffect extends ManaEffect {
 
         int value = amount.calculate(game, source, this);
         boolean result = false;
-        ChoiceColor choice = new ChoiceColor(false);
-        for (int i = 0; i < value; i++) {
-            if (!choice.isChosen()) {
-                if (!controller.choose(outcome, choice, game)) {
-                    return false;
-                }
-            }
-            Mana mana = null;
-            if (choice.getColor().isBlack()) {
-                mana = manaBuilder.setMana(Mana.BlackMana(1), source, game).build();
-            } else if (choice.getColor().isBlue()) {
-                mana = manaBuilder.setMana(Mana.BlueMana(1), source, game).build();
-            } else if (choice.getColor().isRed()) {
-                mana = manaBuilder.setMana(Mana.RedMana(1), source, game).build();
-            } else if (choice.getColor().isGreen()) {
-                mana = manaBuilder.setMana(Mana.GreenMana(1), source, game).build();
-            } else if (choice.getColor().isWhite()) {
-                mana = manaBuilder.setMana(Mana.WhiteMana(1), source, game).build();
-            }
+        ChoiceColor choice = new ChoiceColor(true);
 
+        for (int i = 0; i < value; i++) {
+            controller.choose(outcome, choice, game);
+            if (choice.getChoice() == null) {
+                return false;
+            }
+            Mana mana = choice.getMana(1);
+            if (mana != null) {
+                mana = manaBuilder.setMana(mana, source, game).build();
+            }
             if (mana != null) {
                 checkToFirePossibleEvents(mana, game, source);
                 controller.getManaPool().addMana(mana, game, source);

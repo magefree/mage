@@ -30,9 +30,9 @@ package mage.abilities.common;
 import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
-import mage.constants.CardType;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -43,26 +43,31 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-
 public class AttacksAllTriggeredAbility extends TriggeredAbilityImpl {
 
     protected FilterCreaturePermanent filter;
     protected boolean attacksYouOrYourPlaneswalker;
     protected SetTargetPointer setTargetPointer;
+    protected boolean controller;
 
     public AttacksAllTriggeredAbility(Effect effect, boolean optional) {
-        this(effect, optional, new FilterCreaturePermanent(), SetTargetPointer.NONE, false);
+        this(effect, optional, StaticFilters.FILTER_PERMANENT_CREATURE, SetTargetPointer.NONE, false);
     }
 
     public AttacksAllTriggeredAbility(Effect effect, boolean optional, boolean attacksYouOrYourPlaneswalker) {
-        this(effect, optional, new FilterCreaturePermanent(), SetTargetPointer.NONE, attacksYouOrYourPlaneswalker);
+        this(effect, optional, StaticFilters.FILTER_PERMANENT_CREATURE, SetTargetPointer.NONE, attacksYouOrYourPlaneswalker);
     }
 
     public AttacksAllTriggeredAbility(Effect effect, boolean optional, FilterCreaturePermanent filter, SetTargetPointer setTargetPointer, boolean attacksYouOrYourPlaneswalker) {
+        this(effect, optional, filter, setTargetPointer, attacksYouOrYourPlaneswalker, false);
+    }
+
+    public AttacksAllTriggeredAbility(Effect effect, boolean optional, FilterCreaturePermanent filter, SetTargetPointer setTargetPointer, boolean attacksYouOrYourPlaneswalker, boolean controller) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.filter = filter;
         this.attacksYouOrYourPlaneswalker = attacksYouOrYourPlaneswalker;
         this.setTargetPointer = setTargetPointer;
+        this.controller = controller;
     }
 
     public AttacksAllTriggeredAbility(final AttacksAllTriggeredAbility ability) {
@@ -70,6 +75,7 @@ public class AttacksAllTriggeredAbility extends TriggeredAbilityImpl {
         this.filter = ability.filter.copy();
         this.attacksYouOrYourPlaneswalker = ability.attacksYouOrYourPlaneswalker;
         this.setTargetPointer = ability.setTargetPointer;
+        this.controller = ability.controller;
     }
 
     @Override
@@ -87,7 +93,7 @@ public class AttacksAllTriggeredAbility extends TriggeredAbilityImpl {
                     check = true;
                 } else {
                     Permanent planeswalker = game.getPermanent(event.getTargetId());
-                    if (planeswalker != null && planeswalker.getCardType().contains(CardType.PLANESWALKER) && planeswalker.getControllerId().equals(getControllerId())) {
+                    if (planeswalker != null && planeswalker.isPlaneswalker() && planeswalker.getControllerId().equals(getControllerId())) {
                         check = true;
                     }
                 }
@@ -95,21 +101,20 @@ public class AttacksAllTriggeredAbility extends TriggeredAbilityImpl {
                     return false;
                 }
             }
-            switch(setTargetPointer) {
+            switch (setTargetPointer) {
                 case PERMANENT:
-                    for (Effect effect: getEffects()) {
+                    for (Effect effect : getEffects()) {
                         effect.setTargetPointer(new FixedTarget(permanent.getId()));
                     }
                     break;
                 case PLAYER:
-                    UUID defendingPlayerId = game.getCombat().getDefendingPlayerId(permanent.getId(), game);
-                    if (defendingPlayerId != null) {
-                        for (Effect effect: getEffects()) {
-                            effect.setTargetPointer(new FixedTarget(defendingPlayerId));
+                    UUID playerId = controller ? permanent.getControllerId() : game.getCombat().getDefendingPlayerId(permanent.getId(), game);
+                    if (playerId != null) {
+                        for (Effect effect : getEffects()) {
+                            effect.setTargetPointer(new FixedTarget(playerId));
                         }
                     }
                     break;
-
             }
             return true;
         }
@@ -123,7 +128,7 @@ public class AttacksAllTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a " + filter.getMessage() + " attacks" + (attacksYouOrYourPlaneswalker ? " you or a planeswalker you control":"") +", " + super.getRule();
+        return "Whenever a " + filter.getMessage() + " attacks" + (attacksYouOrYourPlaneswalker ? " you or a planeswalker you control" : "") + ", " + super.getRule();
     }
 
 }

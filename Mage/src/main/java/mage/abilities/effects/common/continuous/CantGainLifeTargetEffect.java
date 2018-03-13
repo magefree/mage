@@ -48,10 +48,10 @@ public class CantGainLifeTargetEffect extends ContinuousEffectImpl {
         super(duration, Layer.PlayerEffects, SubLayer.NA, Outcome.Benefit);
         StringBuilder sb = new StringBuilder("If that player would gain life");
         if (!this.duration.toString().isEmpty()) {
-            if (duration.equals(Duration.EndOfTurn)) {
+            if (duration == Duration.EndOfTurn) {
                 sb.append("this turn, ");
             } else {
-                sb.append(" ").append(duration.toString());
+                sb.append(' ').append(duration.toString());
             }
         }
         sb.append("that player gains no life instead");

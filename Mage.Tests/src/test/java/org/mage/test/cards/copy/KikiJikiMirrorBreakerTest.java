@@ -30,7 +30,7 @@ package org.mage.test.cards.copy;
 import mage.abilities.keyword.HasteAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import org.junit.Assert;
@@ -49,7 +49,7 @@ public class KikiJikiMirrorBreakerTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Kiki-Jiki, Mirror Breaker", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Voice of Resurgence", 1);
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Put a token that's a copy of target nonlegendary creature you control onto the battlefield. That token has haste. Sacrifice it at the beginning of the next end step.");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Create a token that's a copy of target nonlegendary creature you control. That token has haste. Sacrifice it at the beginning of the next end step.");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -65,7 +65,7 @@ public class KikiJikiMirrorBreakerTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Kiki-Jiki, Mirror Breaker", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Voice of Resurgence", 1);
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Put a token that's a copy of target nonlegendary creature you control onto the battlefield. That token has haste. Sacrifice it at the beginning of the next end step.");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Create a token that's a copy of target nonlegendary creature you control. That token has haste. Sacrifice it at the beginning of the next end step.");
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -86,7 +86,7 @@ public class KikiJikiMirrorBreakerTest extends CardTestPlayerBase {
         // Flamebreak deals 3 damage to each creature without flying and each player. Creatures dealt damage this way can't be regenerated this turn.
         addCard(Zone.HAND, playerB, "Flamebreak");
 
-        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Put a token that's a copy of target nonlegendary creature you control onto the battlefield. That token has haste. Sacrifice it at the beginning of the next end step.");
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Create a token that's a copy of target nonlegendary creature you control. That token has haste. Sacrifice it at the beginning of the next end step.");
 
         castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Flamebreak");
         setStopAt(2, PhaseStep.END_TURN);
@@ -121,7 +121,7 @@ public class KikiJikiMirrorBreakerTest extends CardTestPlayerBase {
 
         castSpell(2, PhaseStep.UPKEEP, playerA, "Blustersquall", "Humble Defector"); // Tap nontoken Defector so only the Token can be used later
 
-        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{T}: Put a token that's a copy of target nonlegendary creature you control onto the battlefield. That token has haste. Sacrifice it at the beginning of the next end step.");
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{T}: Create a token that's a copy of target nonlegendary creature you control. That token has haste. Sacrifice it at the beginning of the next end step.");
 
         activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "{T}: Draw two cards. Target opponent gains control");
 
@@ -163,7 +163,7 @@ public class KikiJikiMirrorBreakerTest extends CardTestPlayerBase {
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Body Double");
         setChoice(playerB, "Silvercoat Lion");
 
-        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{T}: Put a token that's a copy of target nonlegendary creature you control onto the battlefield. That token has haste. Sacrifice it at the beginning of the next end step.");
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{T}: Create a token that's a copy of target nonlegendary creature you control. That token has haste. Sacrifice it at the beginning of the next end step.");
 
         attack(2, playerB, "Silvercoat Lion");
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
@@ -173,7 +173,7 @@ public class KikiJikiMirrorBreakerTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Silvercoat Lion", 2); // one from Body Double and one from Kiki
 
         Permanent kikiCopy = null;
-        for (Permanent permanent : currentGame.getState().getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), currentGame)) {
+        for (Permanent permanent : currentGame.getState().getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, currentGame)) {
             if (permanent.getName().equals("Silvercoat Lion") && (permanent instanceof PermanentToken)) {
                 kikiCopy = permanent;
                 break;

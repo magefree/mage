@@ -39,7 +39,8 @@ public enum Outcome {
     Detriment(false),
     Neutral(true),
     Removal(false),
-    AIDontUseIt(false);
+    AIDontUseIt(false),
+    Vote(true);
     private final boolean good;
     private boolean canTargetAll;
 

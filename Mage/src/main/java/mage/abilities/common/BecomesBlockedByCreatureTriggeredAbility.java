@@ -27,9 +27,9 @@
  */
 package mage.abilities.common;
 
-import mage.constants.Zone;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -42,7 +42,7 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class BecomesBlockedByCreatureTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    private FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     public BecomesBlockedByCreatureTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
@@ -55,6 +55,7 @@ public class BecomesBlockedByCreatureTriggeredAbility extends TriggeredAbilityIm
 
     public BecomesBlockedByCreatureTriggeredAbility(final BecomesBlockedByCreatureTriggeredAbility ability) {
         super(ability);
+        this.filter = ability.filter;
     }
 
     @Override
@@ -67,9 +68,7 @@ public class BecomesBlockedByCreatureTriggeredAbility extends TriggeredAbilityIm
         if (event.getTargetId().equals(this.getSourceId())) {
             Permanent blocker = game.getPermanent(event.getSourceId());
             if (filter.match(blocker, game)) {
-                for (Effect effect : this.getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(event.getSourceId()));
-                }
+                this.getEffects().setTargetPointer(new FixedTarget(blocker, game));
                 return true;
             }
         }
@@ -78,7 +77,9 @@ public class BecomesBlockedByCreatureTriggeredAbility extends TriggeredAbilityIm
 
     @Override
     public String getRule() {
-        return "Whenever {this} becomes blocked by a " + filter.getMessage() + ", " + super.getRule();
+        return "Whenever {this} becomes blocked by "
+                + (filter.getMessage().startsWith("an ") ? "" : "a ")
+                + filter.getMessage() + ", " + super.getRule();
     }
 
     @Override

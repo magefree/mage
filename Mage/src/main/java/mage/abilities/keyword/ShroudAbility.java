@@ -40,14 +40,14 @@ import java.io.ObjectStreamException;
  */
 public class ShroudAbility extends StaticAbility implements MageSingleton {
 
-    private static final ShroudAbility fINSTANCE =  new ShroudAbility();
+    private static final ShroudAbility instance =  new ShroudAbility();
 
     private Object readResolve() throws ObjectStreamException {
-        return fINSTANCE;
+        return instance;
     }
 
     public static ShroudAbility getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private ShroudAbility() {
@@ -56,12 +56,12 @@ public class ShroudAbility extends StaticAbility implements MageSingleton {
 
     @Override
     public String getRule() {
-        return "Shroud";
+        return "shroud";
     }
 
     @Override
     public ShroudAbility copy() {
-        return fINSTANCE;
+        return instance;
     }
 
 }

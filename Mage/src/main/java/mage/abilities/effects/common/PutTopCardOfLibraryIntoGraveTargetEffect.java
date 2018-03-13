@@ -68,13 +68,14 @@ public class PutTopCardOfLibraryIntoGraveTargetEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
         if (player != null) {
-            return player.moveCards(player.getLibrary().getTopCards(game, numberCards.calculate(game, source, this)), Zone.GRAVEYARD, source, game);
+            player.moveCards(player.getLibrary().getTopCards(game, numberCards.calculate(game, source, this)), Zone.GRAVEYARD, source, game);
+            return true;
         }
         return false;
     }
 
     private String setText() {
-        StringBuilder sb = new StringBuilder("Target player puts the top ");
+        StringBuilder sb = new StringBuilder("target player puts the top ");
         if (numberCards.toString().equals("1")) {
             sb.append(" card");
         } else {

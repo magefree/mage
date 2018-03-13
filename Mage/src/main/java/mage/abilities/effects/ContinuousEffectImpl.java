@@ -51,7 +51,6 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public abstract class ContinuousEffectImpl extends EffectImpl implements ContinuousEffect {
@@ -66,7 +65,7 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
     protected List<MageObjectReference> affectedObjectList = new ArrayList<>();
     protected boolean temporary = false;
     protected EnumSet<DependencyType> dependencyTypes; // this effect has the dependencyTypes defined here
-    protected DependencyType dependendToType; // this effect is dependent to this type
+    protected EnumSet<DependencyType> dependendToTypes; // this effect is dependent to this types
     /*
      A Characteristic Defining Ability (CDA) is an ability that defines a characteristic of a card or token.
      There are 3 specific rules that distinguish a CDA from other abilities.
@@ -86,7 +85,7 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
         this.order = 0;
         this.effectType = EffectType.CONTINUOUS;
         this.dependencyTypes = EnumSet.noneOf(DependencyType.class);
-        this.dependendToType = null;
+        this.dependendToTypes = EnumSet.noneOf(DependencyType.class);
     }
 
     public ContinuousEffectImpl(Duration duration, Layer layer, SubLayer sublayer, Outcome outcome) {
@@ -109,7 +108,7 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
         this.startingTurn = effect.startingTurn;
         this.startingControllerId = effect.startingControllerId;
         this.dependencyTypes = effect.dependencyTypes;
-        this.dependendToType = effect.dependendToType;
+        this.dependendToTypes = effect.dependendToTypes;
         this.characterDefining = effect.characterDefining;
     }
 
@@ -164,6 +163,7 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
      */
     @Override
     public void discard() {
+        this.used = true; // to prevent further usage before effect is removed
         this.discarded = true;
     }
 
@@ -171,9 +171,9 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
     public void init(Ability source, Game game) {
         targetPointer.init(game, source);
         //20100716 - 611.2c
-        if (AbilityType.ACTIVATED.equals(source.getAbilityType())
-                || AbilityType.SPELL.equals(source.getAbilityType())
-                || AbilityType.TRIGGERED.equals(source.getAbilityType())) {
+        if (AbilityType.ACTIVATED == source.getAbilityType()
+                || AbilityType.SPELL == source.getAbilityType()
+                || AbilityType.TRIGGERED == source.getAbilityType()) {
             if (layer != null) {
                 switch (layer) {
                     case CopyEffects_1:
@@ -197,7 +197,7 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
 
     @Override
     public boolean isInactive(Ability source, Game game) {
-        if (duration.equals(Duration.UntilYourNextTurn)) {
+        if (duration == Duration.UntilYourNextTurn) {
             Player player = game.getPlayer(startingControllerId);
             if (player != null) {
                 if (player.isInGame()) {
@@ -270,20 +270,28 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
 
     @Override
     public Set<UUID> isDependentTo(List<ContinuousEffect> allEffectsInLayer) {
-        if (dependendToType != null) {
-            // the dependent classes needs to be an enclosed class for dependent check of continuous effects
-            Set<UUID> dependentTo = null;
+        Set<UUID> dependentToEffects = new HashSet<UUID>();
+        if (dependendToTypes != null) {
             for (ContinuousEffect effect : allEffectsInLayer) {
-                if (effect.getDependencyTypes().contains(dependendToType)) {
-                    if (dependentTo == null) {
-                        dependentTo = new HashSet<>();
+                if (!effect.getId().equals(this.getId())) {
+                    for (DependencyType dependencyType : effect.getDependencyTypes()) {
+                        if (dependendToTypes.contains(dependencyType)) {
+                            dependentToEffects.add(effect.getId());
+                            break;
+                        }
                     }
-                    dependentTo.add(effect.getId());
                 }
             }
-            return dependentTo;
         }
-        return null;
+        return dependentToEffects;
+        /*
+            return allEffectsInLayer.stream()
+                    .filter(effect -> effect.getDependencyTypes().contains(dependendToTypes))
+                    .map(Effect::getId)
+                    .collect(Collectors.toSet());
+
+        }
+        return new HashSet<>();*/
     }
 
     @Override
@@ -298,7 +306,13 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
 
     @Override
     public void setDependedToType(DependencyType dependencyType) {
-        dependendToType = dependencyType;
+        dependendToTypes.clear();
+        dependendToTypes.add(dependencyType);
+    }
+
+    @Override
+    public void addDependedToType(DependencyType dependencyType) {
+        dependendToTypes.add(dependencyType);
     }
 
 }

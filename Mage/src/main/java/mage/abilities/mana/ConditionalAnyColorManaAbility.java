@@ -44,7 +44,7 @@ import mage.game.Game;
  *
  * @author noxx
  */
-public class ConditionalAnyColorManaAbility extends ManaAbility {
+public class ConditionalAnyColorManaAbility extends ActivatedManaAbilityImpl {
 
     private DynamicValue amount;
 
@@ -78,7 +78,7 @@ public class ConditionalAnyColorManaAbility extends ManaAbility {
     }
 
     @Override
-    public boolean definesMana() {
+    public boolean definesMana(Game game) {
         return true;
     }
 

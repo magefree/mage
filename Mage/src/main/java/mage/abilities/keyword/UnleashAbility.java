@@ -101,11 +101,11 @@ class UnleashReplacementEffect extends ReplacementEffectImpl {
         Permanent creature = ((EntersTheBattlefieldEvent) event).getTarget();
         Player controller = game.getPlayer(source.getControllerId());
         if (creature != null && controller != null) {
-            if (controller.chooseUse(outcome, "Unleash " + creature.getLogName() + "?", source, game)) {
+            if (controller.chooseUse(outcome, "Unleash " + creature.getLogName() + '?', source, game)) {
                 if (!game.isSimulation()) {
                     game.informPlayers(controller.getLogName() + " unleashes " + creature.getName());
                 }
-                creature.addCounters(CounterType.P1P1.createInstance(), game);
+                creature.addCounters(CounterType.P1P1.createInstance(), source, game, event.getAppliedEffects());
             }
         }
         return false;
@@ -136,7 +136,7 @@ class UnleashRestrictionEffect extends RestrictionEffect {
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
         if (permanent != null && permanent.getId().equals(source.getSourceId())) {
-            if (permanent.getCounters().getCount(CounterType.P1P1) > 0) {
+            if (permanent.getCounters(game).getCount(CounterType.P1P1) > 0) {
                 return true;
             }
         }

@@ -201,7 +201,7 @@ public class BattlefieldThaumaturgeTest extends CardTestPlayerBase {
          *  For each creature destroyed this way, its controller puts a 4/4 red Dragon creature token with flying onto the battlefield.
          *  Battlefield Thaumaturge should reduce the cost of the spell when cast, before he is destroyed and replaced with a dragon.
          */
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Descent of the Dragons", createTargetingString(playerACreatures) + "^" + createTargetingString(playerBCreatures));
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Descent of the Dragons", createTargetingString(playerACreatures) + '^' + createTargetingString(playerBCreatures));
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 

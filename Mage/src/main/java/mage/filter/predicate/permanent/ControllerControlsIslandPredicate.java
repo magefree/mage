@@ -27,6 +27,7 @@
  */
 package mage.filter.predicate.permanent;
 
+import mage.constants.SubType;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -41,8 +42,8 @@ import mage.game.permanent.Permanent;
 public class ControllerControlsIslandPredicate implements Predicate<Permanent> {
 
     public static final FilterLandPermanent filter = new FilterLandPermanent("Island");
-    {
-        filter.add(new SubtypePredicate("Island"));
+    static {
+        filter.add(new SubtypePredicate(SubType.ISLAND));
     }
 
     @Override

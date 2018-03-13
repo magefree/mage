@@ -1,6 +1,5 @@
 package org.mage.test.combat;
 
-
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -74,9 +73,8 @@ public class DamageDistributionTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Drogskol Reaver");
         addCard(Zone.BATTLEFIELD, playerB, "Primal Rage");
 
-
         attack(2, playerB, "Drogskol Reaver");
-        block(2,playerA,"Darksteel Gargoyle","Drogskol Reaver");
+        block(2, playerA, "Darksteel Gargoyle", "Drogskol Reaver");
         setStopAt(2, PhaseStep.END_TURN);
         execute();
 
@@ -91,22 +89,21 @@ public class DamageDistributionTest extends CardTestPlayerBase {
     }
 
     /**
-     * 
+     *
      */
-
     @Test
     public void testDoubleStrikeTrampleVersusIndestructibleGod() {
         /**
-         * Heliod, God of the Sun
-         * Legendary Enchantment Creature — God 5/6, 3W
-         * Indestructible
-         * As long as your devotion to white is less than five, Heliod isn't a creature. (Each {W} in the mana costs of permanents you control counts toward your devotion to white.)
-         * Other creatures you control have vigilance.
-         * {2}{W}{W}: Put a 2/1 white Cleric enchantment creature token onto the battlefield.
+         * Heliod, God of the Sun Legendary Enchantment Creature — God 5/6, 3W
+         * Indestructible As long as your devotion to white is less than five,
+         * Heliod isn't a creature. (Each {W} in the mana costs of permanents
+         * you control counts toward your devotion to white.) Other creatures
+         * you control have vigilance. {2}{W}{W}: Create a 2/1 white Cleric
+         * enchantment creature token.
          */
         addCard(Zone.BATTLEFIELD, playerA, "Heliod, God of the Sun");
         addCard(Zone.BATTLEFIELD, playerA, "Terra Eternal"); // only for devotion
-        addCard(Zone.BATTLEFIELD, playerA, "Terra Eternal"); // only for devotion 
+        addCard(Zone.BATTLEFIELD, playerA, "Terra Eternal"); // only for devotion
 
         /* Primeval Titan
          * Creature — Giant 6/6, 4GG
@@ -124,10 +121,9 @@ public class DamageDistributionTest extends CardTestPlayerBase {
         // Enchanted creature has double strike.
         addCard(Zone.HAND, playerB, "Battle Mastery");
 
-
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Battle Mastery","Primeval Titan");
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Battle Mastery", "Primeval Titan");
         attack(2, playerB, "Primeval Titan");
-        block(2,playerA,"Heliod, God of the Sun","Primeval Titan");
+        block(2, playerA, "Heliod, God of the Sun", "Primeval Titan");
         setStopAt(2, PhaseStep.END_TURN);
         execute();
 
@@ -142,8 +138,8 @@ public class DamageDistributionTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Heliod, God of the Sun", 1);
         assertPowerToughness(playerA, "Heliod, God of the Sun", 5, 6);
         assertPermanentCount(playerB, "Primeval Titan", 1);
-        assertPowerToughness(playerB, "Primeval Titan", 6,6);
-        
+        assertPowerToughness(playerB, "Primeval Titan", 6, 6);
+
     }
 
     /**
@@ -151,24 +147,24 @@ public class DamageDistributionTest extends CardTestPlayerBase {
      */
     @Test
     public void testCombatDamagePhyrexianUnlife() {
-        addCard(Zone.HAND, playerA, "Lightning Bolt",6);
-        addCard(Zone.BATTLEFIELD, playerA, "Mountain",6);
+        addCard(Zone.HAND, playerA, "Lightning Bolt", 6);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 6);
         /**
-         * Phyrexian Unlife  {2}{W}
-         * Enchantment
+         * Phyrexian Unlife {2}{W} Enchantment
          *
-         * You don't lose the game for having 0 or less life.
-         * As long as you have 0 or less life, all damage is dealt to you as though its source had infect.
+         * You don't lose the game for having 0 or less life. As long as you
+         * have 0 or less life, all damage is dealt to you as though its source
+         * had infect.
          */
         addCard(Zone.BATTLEFIELD, playerA, "Phyrexian Unlife");
-        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion",2);
+        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 2);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt","targetPlayer=PlayerA");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt","targetPlayer=PlayerA");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt","targetPlayer=PlayerA");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt","targetPlayer=PlayerA");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt","targetPlayer=PlayerA");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt","targetPlayer=PlayerA");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "targetPlayer=PlayerA");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "targetPlayer=PlayerA");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "targetPlayer=PlayerA");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "targetPlayer=PlayerA");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "targetPlayer=PlayerA");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "targetPlayer=PlayerA");
 
         attack(2, playerB, "Silvercoat Lion");
         attack(2, playerB, "Silvercoat Lion");

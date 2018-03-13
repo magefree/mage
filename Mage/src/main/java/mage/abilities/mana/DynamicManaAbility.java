@@ -41,7 +41,7 @@ import mage.game.Game;
  *
  * @author North
  */
-public class DynamicManaAbility extends ManaAbility {
+public class DynamicManaAbility extends ActivatedManaAbilityImpl {
 
     private DynamicManaEffect manaEffect;
     private String rule;
@@ -114,5 +114,10 @@ public class DynamicManaAbility extends ManaAbility {
             newNetMana.add(manaEffect.computeMana(true, game, this));
         }
         return newNetMana;
+    }
+
+    @Override
+    public boolean definesMana(Game game) {
+        return true;
     }
 }

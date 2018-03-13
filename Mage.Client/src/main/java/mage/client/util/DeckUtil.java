@@ -41,7 +41,7 @@ import org.apache.log4j.Logger;
  *
  * @author nantuko
  */
-public class DeckUtil {
+public final class DeckUtil {
 
     private static final Logger log = Logger.getLogger(DeckUtil.class);
 

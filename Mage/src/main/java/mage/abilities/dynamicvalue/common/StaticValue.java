@@ -43,4 +43,8 @@ public class StaticValue implements DynamicValue {
     public String getMessage() {
         return message;
     }
+
+    public int getValue() {
+        return value;
+    }
 }

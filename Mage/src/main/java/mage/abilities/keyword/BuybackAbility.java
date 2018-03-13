@@ -36,6 +36,7 @@ import mage.abilities.costs.Costs;
 import mage.abilities.costs.OptionalAdditionalCost;
 import mage.abilities.costs.OptionalAdditionalCostImpl;
 import mage.abilities.costs.OptionalAdditionalSourceCosts;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
@@ -66,6 +67,7 @@ public class BuybackAbility extends StaticAbility implements OptionalAdditionalS
     private static final String reminderTextCost = "You may {cost} in addition to any other costs as you cast this spell. If you do, put this card into your hand as it resolves.";
     private static final String reminderTextMana = "You may pay an additional {cost} as you cast this spell. If you do, put this card into your hand as it resolves.";
     protected OptionalAdditionalCost buybackCost;
+    private int amountToReduceBy = 0;
 
     public BuybackAbility(String manaString) {
         super(Zone.STACK, new BuybackEffect());
@@ -96,17 +98,51 @@ public class BuybackAbility extends StaticAbility implements OptionalAdditionalS
         }
     }
 
+    public void resetReduceCost() {
+        amountToReduceBy = 0;
+    }
+
+    // Called by Memory Crystal to reduce mana costs.
+    public int reduceCost(int genericManaToReduce) {
+        int amountToReduce = genericManaToReduce;
+        boolean foundCostToReduce = false;
+        if (buybackCost != null) {
+            for (Object cost : ((Costs) buybackCost)) {
+                if (cost instanceof ManaCostsImpl) {
+                    for (Object c : (ManaCostsImpl) cost) {
+                        if (c instanceof GenericManaCost) {
+                            int newCostCMC = ((GenericManaCost) c).convertedManaCost() - amountToReduceBy - genericManaToReduce;
+                            foundCostToReduce = true;
+                            if (newCostCMC > 0) {
+                                amountToReduceBy += genericManaToReduce;
+                            } else {
+                                amountToReduce = ((GenericManaCost) c).convertedManaCost() - amountToReduceBy;
+                                amountToReduceBy = ((GenericManaCost) c).convertedManaCost();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        if (foundCostToReduce) {
+            return amountToReduce;
+        }
+        return 0;
+    }
+
     @Override
     public boolean isActivated() {
         if (buybackCost != null) {
             return buybackCost.isActivated();
         }
+        resetReduceCost();
         return false;
     }
 
     public void resetBuyback() {
         if (buybackCost != null) {
             buybackCost.reset();
+            resetReduceCost();
         }
     }
 
@@ -138,7 +174,7 @@ public class BuybackAbility extends StaticAbility implements OptionalAdditionalS
         StringBuilder sb = new StringBuilder();
         if (buybackCost != null) {
             sb.append(buybackCost.getText(false));
-            sb.append(" ").append(buybackCost.getReminderText());
+            sb.append(' ').append(buybackCost.getReminderText());
         }
         return sb.toString();
     }
@@ -186,7 +222,7 @@ class BuybackEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getTargetId().equals(source.getSourceId())) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getFromZone() == Zone.STACK
+            if (zEvent.getFromZone() == Zone.STACK && zEvent.getToZone() == Zone.GRAVEYARD
                     && source.getSourceId().equals(event.getSourceId())) { // if spell fizzled, the sourceId is null
                 return true;
             }

@@ -1,6 +1,5 @@
 package org.mage.plugins.card.info;
 
-import java.awt.Color;
 import java.awt.Component;
 import javax.swing.JEditorPane;
 import javax.swing.SwingUtilities;
@@ -35,7 +34,6 @@ public class CardInfoPaneImpl extends JEditorPane implements CardInfoPane {
     public CardInfoPaneImpl() {
         UI.setHTMLEditorKit(this);
         setEditable(false);
-        setBackground(Color.white);
         setGUISize();
     }
 
@@ -53,28 +51,15 @@ public class CardInfoPaneImpl extends JEditorPane implements CardInfoPane {
 
     @Override
     public void setCard(final CardView card, final Component container) {
-        if (card == null || isCurrentCard(card)) {
-            return;
-        }
         currentCard = card;
 
         try {
-            if (!card.equals(currentCard)) {
-                return;
-            }
-
-            SwingUtilities.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    if (!card.equals(currentCard)) {
-                        return;
-                    }
-                    TextLines textLines = GuiDisplayUtil.getTextLinesfromCardView(card);
-                    StringBuilder buffer = GuiDisplayUtil.getRulefromCardView(card, textLines);
-                    resizeTooltipIfNeeded(container, textLines.basicTextLength, textLines.lines.size());
-                    setText(buffer.toString());
-                    setCaretPosition(0);
-                }
+            SwingUtilities.invokeLater(() -> {
+                TextLines textLines = GuiDisplayUtil.getTextLinesfromCardView(card);
+                StringBuilder buffer = GuiDisplayUtil.getRulefromCardView(card, textLines);
+                resizeTooltipIfNeeded(container, textLines.basicTextLength, textLines.lines.size());
+                setText(buffer.toString());
+                setCaretPosition(0);
             });
 
         } catch (Exception e) {
@@ -115,6 +100,6 @@ public class CardInfoPaneImpl extends JEditorPane implements CardInfoPane {
 
     @Override
     public boolean isCurrentCard(CardView card) {
-        return currentCard != null && card.equals(currentCard);
+        return currentCard != null && currentCard.equals(card);
     }
 }

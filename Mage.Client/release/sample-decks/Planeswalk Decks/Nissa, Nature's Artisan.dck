@@ -1,0 +1,24 @@
+4 [KLD:272] Terrain Elemental
+2 [KLD:273] Verdant Crescendo
+2 [KLD:141] Appetite for the Unnatural
+1 [KLD:270] Nissa, Nature's Artisan
+2 [KLD:171] Thriving Rhino
+2 [KLD:161] Longtusk Cub
+3 [KLD:271] Guardian of the Great Conduit
+2 [KLD:53] Janjeet Sentry
+1 [KLD:167] Riparian Tiger
+3 [KLD:145] Attune with Aether
+2 [KLD:54] Long-Finned Skywhale
+2 [KLD:142] Arborback Stomper
+4 [KLD:274] Woodland Stream
+11 [KLD:263] Forest
+2 [KLD:66] Thriving Turtle
+2 [KLD:55] Malfunction
+8 [KLD:253] Island
+2 [KLD:180] Empyreal Voyager
+1 [KLD:39] Aethersquall Ancient
+1 [KLD:168] Sage of Shaila's Claim
+2 [KLD:169] Servant of the Conduit
+1 [KLD:147] Bristling Hydra
+LAYOUT MAIN:(1,8)(CMC,false,50)|([KLD:263],[KLD:263],[KLD:263],[KLD:263],[KLD:263],[KLD:263],[KLD:263],[KLD:263],[KLD:263],[KLD:263],[KLD:263],[KLD:253],[KLD:253],[KLD:253],[KLD:253],[KLD:253],[KLD:253],[KLD:253],[KLD:253],[KLD:274],[KLD:274],[KLD:274],[KLD:274])([KLD:145],[KLD:145],[KLD:145],[KLD:66],[KLD:66])([KLD:161],[KLD:161],[KLD:168],[KLD:169],[KLD:169],[KLD:272],[KLD:272],[KLD:272],[KLD:272])([KLD:141],[KLD:141],[KLD:180],[KLD:180],[KLD:53],[KLD:53],[KLD:171],[KLD:171])([KLD:147],[KLD:271],[KLD:271],[KLD:271],[KLD:54],[KLD:54],[KLD:55],[KLD:55],[KLD:273],[KLD:273])([KLD:142],[KLD:142],[KLD:167])([KLD:270])([KLD:39])
+LAYOUT SIDEBOARD:(0,0)(NONE,false,50)|

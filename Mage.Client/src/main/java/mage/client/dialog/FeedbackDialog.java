@@ -28,7 +28,7 @@
 
 package mage.client.dialog;
 
-import mage.client.MageFrame;
+import mage.client.SessionHandler;
 import org.apache.log4j.Logger;
 
 import javax.swing.*;
@@ -42,7 +42,7 @@ public class FeedbackDialog extends javax.swing.JDialog {
 
     private static final Logger log = Logger.getLogger(PreferencesDialog.class);
 
-    private String[] feedbackTypes = {"", "Bug or \"something doesn't work\"",
+    private final String[] feedbackTypes = {"", "Bug or \"something doesn't work\"",
         "Feature or \"I need that function\"",
         "Thank you or \"Devs, you are so cool!\"",
         "Question or \"I'm so curious about\""};
@@ -185,18 +185,10 @@ public class FeedbackDialog extends javax.swing.JDialog {
         jTabbedPane1.addTab("Give feedback", jPanel6);
 
         sendButton.setText("Send");
-        sendButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sendButtonActionPerformed(evt);
-            }
-        });
+        sendButton.addActionListener(evt -> sendButtonActionPerformed(evt));
 
         cancelButton.setText("Cancel");
-        cancelButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelButtonActionPerformed(evt);
-            }
-        });
+        cancelButton.addActionListener(evt -> cancelButtonActionPerformed(evt));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -254,7 +246,7 @@ public class FeedbackDialog extends javax.swing.JDialog {
         if (email.length() > 100) {
             email = email.substring(0, 100);
         }
-        if (MageFrame.getSession().sendFeedback(title, type, message, email)) {
+        if (SessionHandler.sendFeedback(title, type, message, email)) {
             JOptionPane.showMessageDialog(null, "Feedback was sent. Thank you!", "Success", JOptionPane.INFORMATION_MESSAGE);
             reset();
             dialog.setVisible(false);
@@ -293,14 +285,12 @@ public class FeedbackDialog extends javax.swing.JDialog {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                if (!dialog.isVisible()) {
-                    dialog.setLocation(300, 200);
-                    dialog.setVisible(true);
-                } else {
-                    dialog.requestFocus();
-                }
+        java.awt.EventQueue.invokeLater(() -> {
+            if (!dialog.isVisible()) {
+                dialog.setLocation(300, 200);
+                dialog.setVisible(true);
+            } else {
+                dialog.requestFocus();
             }
         });
     }

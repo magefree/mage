@@ -27,14 +27,8 @@
  */
 package mage.server;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 import mage.cards.decks.Deck;
@@ -44,6 +38,7 @@ import mage.game.Table;
 import mage.game.result.ResultProtos;
 import mage.game.tournament.TournamentPlayer;
 import mage.interfaces.callback.ClientCallback;
+import mage.interfaces.callback.ClientCallbackMethod;
 import mage.players.net.UserData;
 import mage.server.draft.DraftSession;
 import mage.server.game.GameManager;
@@ -61,7 +56,6 @@ import mage.view.TableClientMessage;
 import org.apache.log4j.Logger;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class User {
@@ -70,7 +64,10 @@ public class User {
 
     public enum UserState {
 
-        Created, Connected, Disconnected, Reconnected, Expired;
+        Created, // Used if user is created an not connected to the session
+        Connected, // Used if user is correctly connected
+        Disconnected, // Used if the user lost connection
+        Offline // set if the user was disconnected and expired or regularly left XMage. Removed is the user later after some time
     }
 
     private final UUID userId;
@@ -78,7 +75,7 @@ public class User {
     private final String host;
     private final Date connectionTime;
     private final Map<UUID, Table> tables;
-    private final ArrayList<UUID> tablesToDelete;
+    private final List<UUID> tablesToDelete;
     private final Map<UUID, GameSessionPlayer> gameSessions;
     private final Map<UUID, DraftSession> draftSessions;
     private final Map<UUID, UUID> userTournaments; // playerId, tournamentId
@@ -91,15 +88,32 @@ public class User {
     private UserState userState;
     private UserData userData;
     private UserStats userStats;
+    private Date chatLockedUntil;
+    private boolean active;
+    private Date lockedUntil;
+    private final AuthorizedUser authorizedUser;
+    private String clientVersion;
+    private String userIdStr;
 
-    public User(String userName, String host) {
+    public User(String userName, String host, AuthorizedUser authorizedUser) {
         this.userId = UUID.randomUUID();
         this.userName = userName;
         this.host = host;
         this.userState = UserState.Created;
-
         this.connectionTime = new Date();
         this.lastActivity = new Date();
+        if (authorizedUser != null) {
+            this.active = authorizedUser.active;
+            this.chatLockedUntil = authorizedUser.chatLockedUntil;
+            this.lockedUntil = authorizedUser.lockedUntil;
+            this.authorizedUser = authorizedUser;
+            updateAuthorizedUser();
+        } else {
+            this.active = true;
+            this.chatLockedUntil = null;
+            this.lockedUntil = null;
+            this.authorizedUser = null;
+        }
 
         this.tables = new ConcurrentHashMap<>();
         this.gameSessions = new ConcurrentHashMap<>();
@@ -110,6 +124,8 @@ public class User {
         this.watchedGames = new ArrayList<>();
         this.tablesToDelete = new ArrayList<>();
         this.sessionId = "";
+        this.clientVersion = "";
+        this.userIdStr = "";
     }
 
     public String getName() {
@@ -128,51 +144,85 @@ public class User {
         return sessionId;
     }
 
+    public Date getChatLockedUntil() {
+        return chatLockedUntil;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public Date getLockedUntil() {
+        return lockedUntil;
+    }
+
     public void setSessionId(String sessionId) {
         this.sessionId = sessionId;
         if (sessionId.isEmpty()) {
-            userState = UserState.Disconnected;
+            setUserState(UserState.Disconnected);
             lostConnection();
             logger.trace("USER - lost connection: " + userName + " id: " + userId);
 
         } else if (userState == UserState.Created) {
-            userState = UserState.Connected;
+            setUserState(UserState.Connected);
             logger.trace("USER - created: " + userName + " id: " + userId);
         } else {
-            userState = UserState.Reconnected;
+            setUserState(UserState.Connected);
             reconnect();
             logger.trace("USER - reconnected: " + userName + " id: " + userId);
         }
+    }
+
+    public void setClientVersion(String clientVersion) {
+        this.clientVersion = clientVersion;
+    }
+
+    public void setUserIdStr(String userIdStr) {
+        this.userIdStr = userIdStr;
+    }
+
+    public String getUserIdStr() {
+        return this.userIdStr;
+    }
+
+    public String getClientVersion() {
+        return clientVersion;
+    }
+
+    public void setChatLockedUntil(Date chatLockedUntil) {
+        this.chatLockedUntil = chatLockedUntil;
+        updateAuthorizedUser();
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+        updateAuthorizedUser();
+    }
+
+    public void setLockedUntil(Date lockedUntil) {
+        this.lockedUntil = lockedUntil;
+        updateAuthorizedUser();
     }
 
     public void lostConnection() {
         // Because watched games don't get restored after reconnection call stop watching
         for (Iterator<UUID> iterator = watchedGames.iterator(); iterator.hasNext();) {
             UUID gameId = iterator.next();
-            GameManager.getInstance().stopWatching(gameId, userId);
+            GameManager.instance.stopWatching(gameId, userId);
             iterator.remove();
         }
-        ServerMessagesUtil.getInstance().incLostConnection();
+        ServerMessagesUtil.instance.incLostConnection();
     }
 
     public boolean isConnected() {
-        return userState.equals(UserState.Connected) || userState.equals(UserState.Reconnected);
+        return userState == UserState.Connected;
     }
 
     public String getDisconnectDuration() {
         long secondsDisconnected = getSecondsDisconnected();
-        long secondsLeft;
-        String sign = "";
-        if (secondsDisconnected > (3 * 60)) {
-            sign = "-";
-            secondsLeft = secondsDisconnected - (3 * 60);
-        } else {
-            secondsLeft = (3 * 60) - secondsDisconnected;
-        }
-
-        int minutes = (int) secondsLeft / 60;
-        int seconds = (int) secondsLeft % 60;
-        return new StringBuilder(sign).append(Integer.toString(minutes)).append(":").append(seconds > 9 ? seconds : "0" + Integer.toString(seconds)).toString();
+        int minutes = (int) secondsDisconnected / 60;
+        int seconds = (int) secondsDisconnected % 60;
+        return Integer.toString(minutes) + ':' + (seconds > 9 ? seconds : '0' + Integer.toString(seconds));
     }
 
     public long getSecondsDisconnected() {
@@ -183,87 +233,104 @@ public class User {
         return connectionTime;
     }
 
+    public Date getLastActivity() {
+        return lastActivity;
+    }
+
+    public String getConnectionDuration() {
+        int minutes = (int) SystemUtil.getDateDiff(connectionTime, new Date(), TimeUnit.SECONDS) / 60;
+        int hours = 0;
+        if (minutes > 59) {
+            hours = (int) minutes / 60;
+            minutes = minutes - (hours * 60);
+        }
+        return Integer.toString(hours) + ":" + (minutes > 9 ? Integer.toString(minutes) : '0' + Integer.toString(minutes));
+    }
+
     public void fireCallback(final ClientCallback call) {
         if (isConnected()) {
-            Session session = SessionManager.getInstance().getSession(sessionId);
-            if (session != null) {
-                session.fireCallback(call);
-            }
+            SessionManager.instance.getSession(sessionId).ifPresent(session
+                    -> session.fireCallback(call)
+            );
         }
     }
 
     public void ccJoinedTable(final UUID roomId, final UUID tableId, boolean isTournament) {
-        fireCallback(new ClientCallback("joinedTable", tableId, new TableClientMessage(roomId, tableId, isTournament)));
+        fireCallback(new ClientCallback(ClientCallbackMethod.JOINED_TABLE, tableId, new TableClientMessage(roomId, tableId, isTournament)));
     }
 
     public void ccGameStarted(final UUID gameId, final UUID playerId) {
-        fireCallback(new ClientCallback("startGame", gameId, new TableClientMessage(gameId, playerId)));
+        fireCallback(new ClientCallback(ClientCallbackMethod.START_GAME, gameId, new TableClientMessage(gameId, playerId)));
     }
 
     public void ccDraftStarted(final UUID draftId, final UUID playerId) {
-        fireCallback(new ClientCallback("startDraft", draftId, new TableClientMessage(draftId, playerId)));
+        fireCallback(new ClientCallback(ClientCallbackMethod.START_DRAFT, draftId, new TableClientMessage(draftId, playerId)));
     }
 
     public void ccTournamentStarted(final UUID tournamentId, final UUID playerId) {
-        fireCallback(new ClientCallback("startTournament", tournamentId, new TableClientMessage(tournamentId, playerId)));
+        fireCallback(new ClientCallback(ClientCallbackMethod.START_TOURNAMENT, tournamentId, new TableClientMessage(tournamentId, playerId)));
     }
 
     public void ccSideboard(final Deck deck, final UUID tableId, final int time, boolean limited) {
-        fireCallback(new ClientCallback("sideboard", tableId, new TableClientMessage(deck, tableId, time, limited)));
+        fireCallback(new ClientCallback(ClientCallbackMethod.SIDEBOARD, tableId, new TableClientMessage(deck, tableId, time, limited)));
         sideboarding.put(tableId, deck);
     }
 
+    public void ccViewLimitedDeck(final Deck deck, final UUID tableId, final int time, boolean limited) {
+        fireCallback(new ClientCallback(ClientCallbackMethod.VIEW_LIMITED_DECK, tableId, new TableClientMessage(deck, tableId, time, limited)));
+    }
+
     public void ccConstruct(final Deck deck, final UUID tableId, final int time) {
-        fireCallback(new ClientCallback("construct", tableId, new TableClientMessage(deck, tableId, time)));
+        fireCallback(new ClientCallback(ClientCallbackMethod.CONSTRUCT, tableId, new TableClientMessage(deck, tableId, time)));
     }
 
     public void ccShowTournament(final UUID tournamentId) {
-        fireCallback(new ClientCallback("showTournament", tournamentId));
+        fireCallback(new ClientCallback(ClientCallbackMethod.SHOW_TOURNAMENT, tournamentId));
     }
 
     public void ccShowGameEndDialog(final UUID gameId) {
-        fireCallback(new ClientCallback("showGameEndDialog", gameId));
+        fireCallback(new ClientCallback(ClientCallbackMethod.SHOW_GAME_END_DIALOG, gameId));
     }
 
     public void showUserMessage(final String titel, String message) {
         List<String> messageData = new LinkedList<>();
         messageData.add(titel);
         messageData.add(message);
-        fireCallback(new ClientCallback("showUserMessage", null, messageData));
+        fireCallback(new ClientCallback(ClientCallbackMethod.SHOW_USERMESSAGE, null, messageData));
     }
 
     public boolean ccWatchGame(final UUID gameId) {
-        fireCallback(new ClientCallback("watchGame", gameId));
+        fireCallback(new ClientCallback(ClientCallbackMethod.WATCHGAME, gameId));
         return true;
     }
 
     public void ccReplayGame(final UUID gameId) {
-        fireCallback(new ClientCallback("replayGame", gameId));
+        fireCallback(new ClientCallback(ClientCallbackMethod.REPLAY_GAME, gameId));
     }
 
     public void sendPlayerUUID(final UUID gameId, final UUID data) {
         lastActivity = new Date();
-        GameManager.getInstance().sendPlayerUUID(gameId, userId, data);
+        GameManager.instance.sendPlayerUUID(gameId, userId, data);
     }
 
     public void sendPlayerString(final UUID gameId, final String data) {
         lastActivity = new Date();
-        GameManager.getInstance().sendPlayerString(gameId, userId, data);
+        GameManager.instance.sendPlayerString(gameId, userId, data);
     }
 
     public void sendPlayerManaType(final UUID gameId, final UUID playerId, final ManaType data) {
         lastActivity = new Date();
-        GameManager.getInstance().sendPlayerManaType(gameId, playerId, userId, data);
+        GameManager.instance.sendPlayerManaType(gameId, playerId, userId, data);
     }
 
     public void sendPlayerBoolean(final UUID gameId, final Boolean data) {
         lastActivity = new Date();
-        GameManager.getInstance().sendPlayerBoolean(gameId, userId, data);
+        GameManager.instance.sendPlayerBoolean(gameId, userId, data);
     }
 
     public void sendPlayerInteger(final UUID gameId, final Integer data) {
         lastActivity = new Date();
-        GameManager.getInstance().sendPlayerInteger(gameId, userId, data);
+        GameManager.instance.sendPlayerInteger(gameId, userId, data);
     }
 
     public void updateLastActivity(String pingInfo) {
@@ -272,19 +339,17 @@ public class User {
         }
         lastActivity = new Date();
         if (userState == UserState.Disconnected) { // this can happen if user reconnects very fast after disconnect
-            userState = UserState.Reconnected;
+            setUserState(UserState.Connected);
         }
     }
 
     public boolean isExpired(Date expired) {
         if (lastActivity.before(expired)) {
             logger.trace(userName + " is expired!");
-            userState = UserState.Expired;
             return true;
         }
         logger.trace("isExpired: User " + userName + " lastActivity: " + lastActivity + " expired: " + expired);
         return false;
-        /*userState == UserState.Disconnected && */
 
     }
 
@@ -293,18 +358,20 @@ public class User {
         for (Entry<UUID, Table> entry : tables.entrySet()) {
             ccJoinedTable(entry.getValue().getRoomId(), entry.getValue().getId(), entry.getValue().isTournament());
         }
-        for (Entry<UUID, UUID> entry : userTournaments.entrySet()) {
-            TournamentController tournamentController = TournamentManager.getInstance().getTournamentController(entry.getValue());
+        for (Iterator<Entry<UUID, UUID>> iterator = userTournaments.entrySet().iterator(); iterator.hasNext();) {
+            Entry<UUID, UUID> next = iterator.next();
+            TournamentController tournamentController = TournamentManager.instance.getTournamentController(next.getValue());
             if (tournamentController != null) {
-                ccTournamentStarted(entry.getValue(), entry.getKey());
-                tournamentController.rejoin(entry.getKey());
+                ccTournamentStarted(next.getValue(), next.getKey());
+                tournamentController.rejoin(next.getKey());
+            } else {
+                iterator.remove(); // tournament has ended meanwhile
             }
         }
-
         for (Entry<UUID, GameSessionPlayer> entry : gameSessions.entrySet()) {
             ccGameStarted(entry.getValue().getGameId(), entry.getKey());
             entry.getValue().init();
-            GameManager.getInstance().sendPlayerString(entry.getValue().getGameId(), userId, "");
+            GameManager.instance.sendPlayerString(entry.getValue().getGameId(), userId, "");
         }
 
         for (Entry<UUID, DraftSession> entry : draftSessions.entrySet()) {
@@ -317,10 +384,16 @@ public class User {
             entry.getValue().construct(0); // TODO: Check if this is correct
         }
         for (Entry<UUID, Deck> entry : sideboarding.entrySet()) {
-            TableController controller = TableManager.getInstance().getController(entry.getKey());
-            ccSideboard(entry.getValue(), entry.getKey(), controller.getRemainingTime(), controller.getOptions().isLimited());
+            Optional<TableController> controller = TableManager.instance.getController(entry.getKey());
+            if (controller.isPresent()) {
+                ccSideboard(entry.getValue(), entry.getKey(), controller.get().getRemainingTime(), controller.get().getOptions().isLimited());
+            } else {
+                // Table is missing after connection was lost during sideboard.
+                // Means other players were removed or conceded the game?
+                logger.debug(getName() + " reconnects during sideboarding but tableId not found: " + entry.getKey());
+            }
         }
-        ServerMessagesUtil.getInstance().incReconnects();
+        ServerMessagesUtil.instance.incReconnects();
         logger.trace(userName + " ended reconnect");
     }
 
@@ -368,37 +441,40 @@ public class User {
         sideboarding.remove(tableId);
     }
 
-    public void remove(DisconnectReason reason) {
-        logger.trace("REMOVE " + getName() + " Draft sessions " + draftSessions.size());
+    public void removeUserFromAllTables(DisconnectReason reason) {
+        logger.trace("REMOVE " + userName + " Draft sessions " + draftSessions.size());
         for (DraftSession draftSession : draftSessions.values()) {
             draftSession.setKilled();
         }
         draftSessions.clear();
-        logger.trace("REMOVE " + getName() + " Tournament sessions " + userTournaments.size());
+        logger.trace("REMOVE " + userName + " Tournament sessions " + userTournaments.size());
         for (UUID tournamentId : userTournaments.values()) {
-            TournamentManager.getInstance().quit(tournamentId, getId());
+            TournamentManager.instance.quit(tournamentId, userId);
         }
         userTournaments.clear();
-        logger.trace("REMOVE " + getName() + " Tables " + tables.size());
+        constructing.clear();
+        logger.trace("REMOVE " + userName + " Tables " + tables.size());
         for (Entry<UUID, Table> entry : tables.entrySet()) {
             logger.debug("-- leave tableId: " + entry.getValue().getId());
-            TableManager.getInstance().leaveTable(userId, entry.getValue().getId());
+            TableManager.instance.leaveTable(userId, entry.getValue().getId());
         }
         tables.clear();
-        logger.trace("REMOVE " + getName() + " Game sessions: " + gameSessions.size());
+        sideboarding.clear();
+        logger.trace("REMOVE " + userName + " Game sessions: " + gameSessions.size());
         for (GameSessionPlayer gameSessionPlayer : gameSessions.values()) {
             logger.debug("-- kill game session of gameId: " + gameSessionPlayer.getGameId());
-            GameManager.getInstance().quitMatch(gameSessionPlayer.getGameId(), userId);
+            GameManager.instance.quitMatch(gameSessionPlayer.getGameId(), userId);
             gameSessionPlayer.quitGame();
         }
         gameSessions.clear();
-        logger.trace("REMOVE " + getName() + " watched Games " + watchedGames.size());
-        for (UUID gameId : watchedGames) {
-            GameManager.getInstance().stopWatching(gameId, userId);
+        logger.trace("REMOVE " + userName + " watched Games " + watchedGames.size());
+        for (Iterator<UUID> it = watchedGames.iterator(); it.hasNext();) { // Iterator to prevent ConcurrentModificationException
+            UUID gameId = it.next();
+            GameManager.instance.stopWatching(gameId, userId);
         }
         watchedGames.clear();
-        logger.trace("REMOVE " + getName() + " Chats ");
-        ChatManager.getInstance().removeUser(userId, reason);
+        logger.trace("REMOVE " + userName + " Chats ");
+        ChatManager.instance.removeUser(userId, reason);
     }
 
     public void setUserData(UserData userData) {
@@ -447,20 +523,24 @@ public class User {
                                             tournament++;
                                             break;
                                     }
-
-                                    if (!isConnected()) {
-                                        tournamentPlayer.setDisconnectInfo(" (discon. " + getDisconnectDuration() + ")");
-                                    } else {
-                                        tournamentPlayer.setDisconnectInfo("");
+                                    switch (getUserState()) {
+                                        case Disconnected:
+                                            tournamentPlayer.setDisconnectInfo(" (discon. " + getDisconnectDuration() + ')');
+                                            break;
+                                        case Offline:
+                                            tournamentPlayer.setDisconnectInfo(" Offline");
+                                            break;
+                                        default:
+                                            tournamentPlayer.setDisconnectInfo("");
                                     }
                                 }
                             } else {
                                 // can happen if tournamet has just ended
-                                logger.debug(getName() + " tournament player missing - tableId:" + table.getId(), null);
+                                logger.debug(userName + " tournament player missing - tableId:" + table.getId(), null);
                                 tablesToDelete.add(tableEntry.getKey());
                             }
                         } else {
-                            logger.error(getName() + " tournament key missing - tableId: " + table.getId(), null);
+                            logger.error(userName + " tournament key missing - tableId: " + table.getId(), null);
                         }
                     } else {
                         switch (table.getState()) {
@@ -487,25 +567,25 @@ public class User {
             tablesToDelete.clear();
         }
         if (waiting > 0) {
-            sb.append("Wait: ").append(waiting).append(" ");
+            sb.append("Wait: ").append(waiting).append(' ');
         }
         if (match > 0) {
-            sb.append("Match: ").append(match).append(" ");
+            sb.append("Match: ").append(match).append(' ');
         }
         if (sideboard > 0) {
-            sb.append("Sideb: ").append(sideboard).append(" ");
+            sb.append("Sideb: ").append(sideboard).append(' ');
         }
         if (draft > 0) {
-            sb.append("Draft: ").append(draft).append(" ");
+            sb.append("Draft: ").append(draft).append(' ');
         }
         if (construct > 0) {
-            sb.append("Const: ").append(construct).append(" ");
+            sb.append("Const: ").append(construct).append(' ');
         }
         if (tournament > 0) {
-            sb.append("Tourn: ").append(tournament).append(" ");
+            sb.append("Tourn: ").append(tournament).append(' ');
         }
-        if (watchedGames.size() > 0) {
-            sb.append("Watch: ").append(watchedGames.size()).append(" ");
+        if (!watchedGames.isEmpty()) {
+            sb.append("Watch: ").append(watchedGames.size()).append(' ');
         }
         return sb.toString();
     }
@@ -522,11 +602,18 @@ public class User {
         return userState;
     }
 
+    public void setUserState(UserState userState) {
+        this.userState = userState;
+    }
+
     public String getPingInfo() {
-        if (isConnected()) {
-            return pingInfo;
-        } else {
-            return " (discon. " + getDisconnectDuration() + ")";
+        switch (getUserState()) {
+            case Disconnected:
+                return " (discon. " + getDisconnectDuration() + ')';
+            case Offline:
+                return " Offline";
+            default:
+                return pingInfo + " " + getConnectionDuration();
         }
     }
 
@@ -605,10 +692,10 @@ public class User {
         if (proto.getMatchesQuit() > 0) {
             quit.add("Q:" + Integer.toString(proto.getMatchesQuit()));
         }
-        if (quit.size() > 0) {
+        if (!quit.isEmpty()) {
             builder.append(" (");
             joinStrings(builder, quit, " ");
-            builder.append(")");
+            builder.append(')');
         }
         return builder.toString();
     }
@@ -637,10 +724,10 @@ public class User {
         if (proto.getTourneysQuitDuringRound() > 0) {
             quit.add("R:" + Integer.toString(proto.getTourneysQuitDuringRound()));
         }
-        if (quit.size() > 0) {
+        if (!quit.isEmpty()) {
             builder.append(" (");
             joinStrings(builder, quit, " ");
-            builder.append(")");
+            builder.append(')');
         }
         return builder.toString();
     }
@@ -710,7 +797,7 @@ public class User {
     public int getNumberOfNotStartedTables() {
         int number = 0;
         for (Table table : tables.values()) {
-            if (table.getState().equals(TableState.WAITING) || table.getState().equals(TableState.STARTING)) {
+            if (table.getState() == TableState.WAITING || table.getState() == TableState.STARTING) {
                 number++;
             }
         }
@@ -720,15 +807,34 @@ public class User {
     public int getNumberOfNotFinishedTables() {
         int number = 0;
         for (Table table : tables.values()) {
-            if (table.getState().equals(TableState.FINISHED)) {
+            if (table.getState() == TableState.FINISHED) {
                 number++;
             } else {
-                TableController tableController = TableManager.getInstance().getController(table.getId());
-                if (tableController != null && tableController.isUserStillActive(userId)) {
+                Optional<TableController> tableController = TableManager.instance.getController(table.getId());
+                if (!tableController.isPresent()) {
+                    logger.error("table not found : " + table.getId());
+                } else if (tableController.get().isUserStillActive(userId)) {
                     number++;
                 }
             }
         }
         return number;
+    }
+
+    public String getEmail() {
+        if (authorizedUser != null) {
+            return authorizedUser.email;
+        }
+        return "";
+    }
+
+    private void updateAuthorizedUser() {
+        if (authorizedUser != null) {
+            authorizedUser.lastConnection = this.connectionTime;
+            authorizedUser.chatLockedUntil = this.chatLockedUntil;
+            authorizedUser.lockedUntil = this.lockedUntil;
+            authorizedUser.active = this.active;
+            AuthorizedUserRepository.instance.update(authorizedUser);
+        }
     }
 }

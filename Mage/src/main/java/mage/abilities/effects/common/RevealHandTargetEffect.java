@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.effects.common;
 
 import mage.MageObject;
@@ -43,11 +42,11 @@ import mage.players.Player;
 public class RevealHandTargetEffect extends OneShotEffect {
 
     private final TargetController targetController;
-    
+
     public RevealHandTargetEffect() {
         this(TargetController.OPPONENT);
     }
-    
+
     public RevealHandTargetEffect(TargetController targetController) {
         super(Outcome.Discard);
         this.targetController = targetController;
@@ -64,7 +63,7 @@ public class RevealHandTargetEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getFirstTarget());
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (player != null && sourceObject != null) {
-            player.revealCards(sourceObject.getName(), player.getHand(), game);
+            player.revealCards(sourceObject.getIdName(), player.getHand(), game);
             return true;
         }
         return false;
@@ -74,7 +73,7 @@ public class RevealHandTargetEffect extends OneShotEffect {
     public RevealHandTargetEffect copy() {
         return new RevealHandTargetEffect(this);
     }
-    
+
     private String getText() {
         StringBuilder sb = new StringBuilder("Target ");
         switch (targetController) {

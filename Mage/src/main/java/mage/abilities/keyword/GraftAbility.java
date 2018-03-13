@@ -71,7 +71,7 @@ public class GraftAbility extends TriggeredAbilityImpl {
         this.amount = amount;
         StringBuilder sb = new StringBuilder();
         for (CardType theCardtype : card.getCardType()) {
-            sb.append(theCardtype.toString().toLowerCase(Locale.ENGLISH)).append(" ");
+            sb.append(theCardtype.toString().toLowerCase(Locale.ENGLISH)).append(' ');
         }
         this.cardtype = sb.toString().trim();
         addSubAbility(new GraftStaticAbility(amount));
@@ -95,7 +95,7 @@ public class GraftAbility extends TriggeredAbilityImpl {
         if (sourcePermanent != null
                 && permanent != null
                 && !sourcePermanent.getId().equals(permanent.getId())
-                && sourcePermanent.getCounters().containsKey(CounterType.P1P1)
+                && sourcePermanent.getCounters(game).containsKey(CounterType.P1P1)
                 && filter.match(permanent, game)) {
             for (Effect effect : this.getEffects()) {
                 effect.setTargetPointer(new FixedTarget(event.getTargetId()));
@@ -113,7 +113,7 @@ public class GraftAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         StringBuilder sb = new StringBuilder("Graft");
-        sb.append(" ").append(amount).append(" <i>(This ").append(cardtype).append(" enters the battlefield with ")
+        sb.append(' ').append(amount).append(" <i>(This ").append(cardtype).append(" enters the battlefield with ")
                 .append(amount == 1 ? "a" : CardUtil.numberToText(amount))
                 .append(" +1/+1 counter on it. Whenever a creature enters the battlefield, you may move a +1/+1 counter from this ")
                 .append(cardtype).append(" onto it.)</i>");
@@ -168,12 +168,12 @@ class GraftDistributeCounterEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (sourcePermanent != null) {
-            int numberOfCounters = sourcePermanent.getCounters().getCount(CounterType.P1P1);
+            int numberOfCounters = sourcePermanent.getCounters(game).getCount(CounterType.P1P1);
             if (numberOfCounters > 0) {
                 Permanent targetCreature = game.getPermanent(targetPointer.getFirst(game, source));
                 if (targetCreature != null) {
                     sourcePermanent.removeCounters(CounterType.P1P1.getName(), 1, game);
-                    targetCreature.addCounters(CounterType.P1P1.createInstance(1), game);
+                    targetCreature.addCounters(CounterType.P1P1.createInstance(1), source, game);
                     if (!game.isSimulation()) {
                         game.informPlayers("Moved one +1/+1 counter from " + sourcePermanent.getLogName() + " to " + targetCreature.getLogName());
                     }

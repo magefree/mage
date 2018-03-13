@@ -59,14 +59,14 @@ import java.io.ObjectStreamException;
  */
 public class InfectAbility extends StaticAbility implements MageSingleton {
 
-    private static final InfectAbility fINSTANCE =  new InfectAbility();
+    private static final InfectAbility instance =  new InfectAbility();
 
     private Object readResolve() throws ObjectStreamException {
-        return fINSTANCE;
+        return instance;
     }
 
     public static InfectAbility getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private InfectAbility() {
@@ -80,7 +80,7 @@ public class InfectAbility extends StaticAbility implements MageSingleton {
 
     @Override
     public InfectAbility copy() {
-        return fINSTANCE;
+        return instance;
     }
 
 }

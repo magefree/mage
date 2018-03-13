@@ -24,8 +24,7 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.target;
 
 import mage.MageObject;
@@ -44,7 +43,7 @@ import java.util.UUID;
  */
 public class TargetPlayer extends TargetImpl {
 
-    protected FilterPlayer filter;
+    protected final FilterPlayer filter;
 
     public TargetPlayer() {
         this(1, 1, false);
@@ -77,8 +76,8 @@ public class TargetPlayer extends TargetImpl {
     }
 
     /**
-     * Checks if there are enough {@link Player} that can be chosen.  Should only be used
-     * for Ability targets since this checks for protection, shroud etc.
+     * Checks if there are enough {@link Player} that can be chosen. Should only
+     * be used for Ability targets since this checks for protection, shroud etc.
      *
      * @param sourceId - the target event source
      * @param sourceControllerId - controller of the target event source
@@ -89,7 +88,7 @@ public class TargetPlayer extends TargetImpl {
     public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
         int count = 0;
         MageObject targetSource = game.getObject(sourceId);
-        for (UUID playerId: game.getState().getPlayersInRange(sourceControllerId, game)) {
+        for (UUID playerId : game.getState().getPlayersInRange(sourceControllerId, game)) {
             Player player = game.getPlayer(playerId);
             if (player != null && !player.hasLeft() && filter.match(player, sourceId, sourceControllerId, game)) {
                 if (player.canBeTargetedBy(targetSource, sourceControllerId, game)) {
@@ -104,8 +103,9 @@ public class TargetPlayer extends TargetImpl {
     }
 
     /**
-     * Checks if there are enough {@link Player} that can be selected.  Should not be used
-     * for Ability targets since this does not check for protection, shroud etc.
+     * Checks if there are enough {@link Player} that can be selected. Should
+     * not be used for Ability targets since this does not check for protection,
+     * shroud etc.
      *
      * @param sourceControllerId - controller of the select event
      * @param game
@@ -114,7 +114,7 @@ public class TargetPlayer extends TargetImpl {
     @Override
     public boolean canChoose(UUID sourceControllerId, Game game) {
         int count = 0;
-        for (UUID playerId: game.getState().getPlayersInRange(sourceControllerId, game)) {
+        for (UUID playerId : game.getState().getPlayersInRange(sourceControllerId, game)) {
             Player player = game.getPlayer(playerId);
             if (player != null && !player.hasLeft() && filter.match(player, game)) {
                 count++;
@@ -130,7 +130,7 @@ public class TargetPlayer extends TargetImpl {
     public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
         MageObject targetSource = game.getObject(sourceId);
-        for (UUID playerId: game.getState().getPlayersInRange(sourceControllerId, game)) {
+        for (UUID playerId : game.getState().getPlayersInRange(sourceControllerId, game)) {
             Player player = game.getPlayer(playerId);
             if (player != null && !player.hasLeft() && filter.match(player, sourceId, sourceControllerId, game)) {
                 if (isNotTarget() || player.canBeTargetedBy(targetSource, sourceControllerId, game)) {
@@ -144,7 +144,7 @@ public class TargetPlayer extends TargetImpl {
     @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
-        for (UUID playerId: game.getState().getPlayersInRange(sourceControllerId, game)) {
+        for (UUID playerId : game.getState().getPlayersInRange(sourceControllerId, game)) {
             Player player = game.getPlayer(playerId);
             if (player != null && !player.hasLeft() && filter.match(player, game)) {
                 possibleTargets.add(playerId);
@@ -156,21 +156,16 @@ public class TargetPlayer extends TargetImpl {
     @Override
     public boolean isLegal(Ability source, Game game) {
         //20101001 - 608.2b
-        for (UUID playerId: targets.keySet()) {
-            if (canTarget(playerId, source, game)) {
-                return true;
-            }
+        if (getNumberOfTargets() == 0 && targets.isEmpty()) {
+            return true; // 0 targets selected is valid
         }
-        return false;
+        return targets.keySet().stream().anyMatch(playerId -> canTarget(playerId, source, game));
     }
 
     @Override
     public boolean canTarget(UUID id, Game game) {
         Player player = game.getPlayer(id);
-        if (player != null) {
-            return filter.match(player, game);
-        }
-        return false;
+        return player != null && filter.match(player, game);
     }
 
     @Override
@@ -195,10 +190,10 @@ public class TargetPlayer extends TargetImpl {
     @Override
     public String getTargetedName(Game game) {
         StringBuilder sb = new StringBuilder();
-        for (UUID targetId: getTargets()) {
+        for (UUID targetId : getTargets()) {
             Player player = game.getPlayer(targetId);
             if (player != null) {
-                sb.append(player.getLogName()).append(" ");
+                sb.append(player.getLogName()).append(' ');
             } else {
                 sb.append("[target missing]");
             }

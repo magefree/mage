@@ -41,9 +41,15 @@ import mage.game.permanent.Permanent;
 public class SourceMatchesFilterCondition implements Condition {
 
     private FilterPermanent FILTER;
+    private String text;
 
     public SourceMatchesFilterCondition(FilterPermanent filter) {
+        this(null, filter);
+    }
+
+    public SourceMatchesFilterCondition(String text, FilterPermanent filter) {
         this.FILTER = filter;
+        this.text = text;
     }
 
     @Override
@@ -55,5 +61,13 @@ public class SourceMatchesFilterCondition implements Condition {
             }
         }
         return false;
+    }
+
+    @Override
+    public String toString() {
+        if (text != null) {
+            return text;
+        }
+        return super.toString();
     }
 }

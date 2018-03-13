@@ -73,7 +73,6 @@ public class HideawayTest extends CardTestPlayerBase {
         for (Card card : currentGame.getExile().getAllCards(currentGame)) {
             Assert.assertTrue("Exiled card is not face down", card.isFaceDown(currentGame));
         }
-
     }
 
     /**
@@ -223,5 +222,79 @@ public class HideawayTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Ghost Quarter", 1);
         assertTapped("Windbrisk Heights", true);
         Assert.assertEquals(playerA.getLandsPlayed(), 2);
+    }
+
+    /**
+     * Reported bug issue #3310: Shelldock's hideaway requirement is for any library to have 20 or fewer cards, it only allows itself to be activated
+     * sometimes when the owner of Shelldock's library has 20 or fewer cards, never the opponents is 20 or fewer
+     */
+    @Test
+    public void shelldockIsleHideawayConditionOwnLibrary() {
+
+         /*
+         Shelldock Isle
+         Land Hideaway
+         {T}: Add {U} to your mana pool.
+         {U}, {T}: You may play the exiled card without paying its mana cost if a library has twenty or fewer cards in it.
+        */
+        String sIsle = "Shelldock Isle";
+        String ulamog = "Ulamog's Crusher"; // {8} 8/8 annihilator 2 attacks each turn if able
+
+        addCard(Zone.BATTLEFIELD, playerA, "Island");
+        addCard(Zone.HAND, playerA, sIsle);
+        removeAllCardsFromLibrary(playerA);
+        addCard(Zone.LIBRARY, playerA, ulamog, 4);
+        skipInitShuffling();
+
+        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, sIsle);
+        setChoice(playerA, ulamog);
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{U}");
+
+        setStopAt(3, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertTappedCount("Island", true, 1);
+        assertPermanentCount(playerA, sIsle, 1);
+        assertLibraryCount(playerA, 2);
+        assertPermanentCount(playerA, ulamog, 1);
+    }
+
+    /**
+     * Reported bug issue #3310: Shelldock's hideaway requirement is for any library to have 20 or fewer cards, it only allows itself to be activated
+     * sometimes when the owner of Shelldock's library has 20 or fewer cards, never the opponents is 20 or fewer
+     *
+     * NOTE: test is currently failing due to bug in code. see issue #3310
+     */
+    @Test
+    public void shelldockIsleHideawayConditionOpponentsLibrary() {
+
+         /*
+         Shelldock Isle
+         Land Hideaway
+         {T}: Add {U} to your mana pool.
+         {U}, {T}: You may play the exiled card without paying its mana cost if a library has twenty or fewer cards in it.
+        */
+        String sIsle = "Shelldock Isle";
+        String ulamog = "Ulamog's Crusher"; // {8} 8/8 annihilator 2 attacks each turn if able
+        String bSable = "Bronze Sable"; // {2} 2/1 artifact creature
+
+        addCard(Zone.BATTLEFIELD, playerA, "Island");
+        addCard(Zone.HAND, playerA, sIsle);
+        removeAllCardsFromLibrary(playerB);
+        addCard(Zone.LIBRARY, playerA, ulamog, 4);
+        addCard(Zone.LIBRARY, playerB, bSable, 4);
+        skipInitShuffling();
+
+        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, sIsle);
+        setChoice(playerA, ulamog);
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{U}");
+
+        setStopAt(3, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, sIsle, 1);
+        assertLibraryCount(playerB, 3); // opponents library less than 20 so should be able to activate shelldock
+        assertTappedCount("Island", true, 1);
+        assertPermanentCount(playerA, ulamog, 1);
     }
 }

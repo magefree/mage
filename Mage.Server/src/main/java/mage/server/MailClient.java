@@ -10,16 +10,16 @@ import javax.mail.internet.MimeMessage;
 import mage.server.util.ConfigSettings;
 import org.apache.log4j.Logger;
 
-public class MailClient {
+public final class MailClient {
 
     private static final Logger logger = Logger.getLogger(Main.class);
 
     public static boolean sendMessage(String email, String subject, String text) {
-        if (email.length() == 0) {
+        if (email.isEmpty()) {
             logger.info("Email is not sent because the address is empty");
             return false;
         }
-        ConfigSettings config = ConfigSettings.getInstance();
+        ConfigSettings config = ConfigSettings.instance;
 
         Properties properties = System.getProperties();
         properties.setProperty("mail.smtps.host", config.getMailSmtpHost());
@@ -37,8 +37,7 @@ public class MailClient {
             message.setSubject(subject);
             message.setText(text);
 
-            Transport trnsport;
-            trnsport = session.getTransport("smtps");
+            Transport trnsport = session.getTransport("smtps");
             trnsport.connect(null, properties.getProperty("mail.password"));
             message.saveChanges();
             trnsport.sendMessage(message, message.getAllRecipients());

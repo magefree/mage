@@ -29,10 +29,8 @@
 package mage.client.deck.generator;
 
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import java.awt.*;
-import java.util.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -41,13 +39,13 @@ import java.util.List;
 public class RatioAdjustingSliderPanel extends JPanel {
 
     private JStorageSlider creatureSlider, nonCreatureSlider, landSlider;
-    private List<JLabel> textLabels = new ArrayList<>();
+    private final List<JLabel> textLabels = new ArrayList<>();
     private AdjustingSliderGroup sg;
 
-    private class JStorageSlider extends JSlider {
+    private static class JStorageSlider extends JSlider {
 
         // Slider stores its initial value to revert to when reset
-        private int defaultValue;
+        private final int defaultValue;
         private int previousValue;
 
         public JStorageSlider(int min, int max, int value) {
@@ -76,7 +74,7 @@ public class RatioAdjustingSliderPanel extends JPanel {
 
     }
 
-    private class AdjustingSliderGroup
+    private static class AdjustingSliderGroup
     {
         private final ArrayList<JStorageSlider> storageSliders;
         private int sliderIndex = 0;
@@ -86,12 +84,7 @@ public class RatioAdjustingSliderPanel extends JPanel {
             storageSliders = new ArrayList<>();
             for(JStorageSlider slider: sliders) {
                 storageSliders.add(slider);
-                slider.addChangeListener(new ChangeListener() {
-                    @Override
-                    public void stateChanged(ChangeEvent e) {
-                        fireSliderChangedEvent((JStorageSlider) e.getSource());
-                    }
-                });
+                slider.addChangeListener(e -> fireSliderChangedEvent((JStorageSlider) e.getSource()));
             }
         }
         public void fireSliderChangedEvent(JStorageSlider source) {
@@ -175,21 +168,18 @@ public class RatioAdjustingSliderPanel extends JPanel {
 
     private static JLabel createChangingPercentageLabel(final JSlider slider)  {
 
-        final JLabel label = new JLabel("      " + String.valueOf(slider.getValue()) + "%");
+        final JLabel label = new JLabel("      " + String.valueOf(slider.getValue()) + '%');
 
-        slider.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                String value = String.valueOf(slider.getValue());
-                StringBuilder labelBuilder = new StringBuilder();
-                // Pad with spaces so all percentage labels are of equal size
-                for(int i = 0; i < (5-value.length()); i++) {
-                    labelBuilder.append("  ");
-                }
-                labelBuilder.append(value);
-                labelBuilder.append("%");
-                label.setText(labelBuilder.toString());
+        slider.addChangeListener(e -> {
+            String value = String.valueOf(slider.getValue());
+            StringBuilder labelBuilder = new StringBuilder();
+            // Pad with spaces so all percentage labels are of equal size
+            for(int i = 0; i < (5-value.length()); i++) {
+                labelBuilder.append("  ");
             }
+            labelBuilder.append(value);
+            labelBuilder.append('%');
+            label.setText(labelBuilder.toString());
         });
         return label;
     }

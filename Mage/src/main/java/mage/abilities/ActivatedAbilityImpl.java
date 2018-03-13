@@ -28,12 +28,15 @@
 package mage.abilities;
 
 import java.util.UUID;
+import mage.MageObject;
+import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.PhyrexianManaCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
+import mage.abilities.mana.ManaOptions;
 import mage.cards.Card;
 import mage.constants.AbilityType;
 import mage.constants.AsThoughEffectType;
@@ -41,7 +44,9 @@ import mage.constants.TargetController;
 import mage.constants.TimingRule;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.command.Emblem;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 
 /**
  *
@@ -49,6 +54,19 @@ import mage.game.permanent.Permanent;
  */
 public abstract class ActivatedAbilityImpl extends AbilityImpl implements ActivatedAbility {
 
+    protected static class ActivationInfo {
+
+        public int turnNum;
+        public int activationCounter;
+
+        public ActivationInfo(int turnNum, int activationCounter) {
+            this.turnNum = turnNum;
+            this.activationCounter = activationCounter;
+        }
+    }
+
+    protected int maxActivationsPerTurn = Integer.MAX_VALUE;
+    protected Condition condition;
     protected TimingRule timing = TimingRule.INSTANT;
     protected TargetController mayActivate = TargetController.YOU;
     protected UUID activatorId;
@@ -65,6 +83,8 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
         mayActivate = ability.mayActivate;
         activatorId = ability.activatorId;
         checkPlayableMode = ability.checkPlayableMode;
+        maxActivationsPerTurn = ability.maxActivationsPerTurn;
+        condition = ability.condition;
     }
 
     public ActivatedAbilityImpl(Zone zone) {
@@ -158,6 +178,9 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
     @Override
     public boolean canActivate(UUID playerId, Game game) {
         //20091005 - 602.2
+        if (!(hasMoreActivationsThisTurn(game) && (condition == null || condition.apply(game, this)))) {
+            return false;
+        }
         switch (mayActivate) {
             case ANY:
                 break;
@@ -170,6 +193,12 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
 
             case OPPONENT:
                 if (!game.getPlayer(controllerId).hasOpponent(playerId, game)) {
+                    return false;
+                }
+                break;
+            case OWNER:
+                Permanent permanent = game.getPermanent(getSourceId());
+                if (!permanent.getOwnerId().equals(playerId)) {
                     return false;
                 }
                 break;
@@ -199,13 +228,22 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
         return false;
     }
 
+    @Override
+    public ManaOptions getMinimumCostToActivate(UUID playerId, Game game) {
+        return getManaCostsToPay().getOptions();
+    }
+
     protected boolean controlsAbility(UUID playerId, Game game) {
         if (this.controllerId != null && this.controllerId.equals(playerId)) {
             return true;
         } else {
-            Card card = (Card) game.getObject(this.sourceId);
-            if (card != null && game.getState().getZone(this.sourceId) != Zone.BATTLEFIELD) {
-                return card.getOwnerId().equals(playerId);
+            MageObject mageObject = game.getObject(this.sourceId);
+            if (mageObject instanceof Emblem) {
+                return ((Emblem) mageObject).getControllerId().equals(playerId);
+            } else {
+                if (game.getState().getZone(this.sourceId) != Zone.BATTLEFIELD) {
+                    return ((Card) mageObject).getOwnerId().equals(playerId);
+                }
             }
         }
         return false;
@@ -237,4 +275,55 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
         return checkPlayableMode;
     }
 
+    protected boolean hasMoreActivationsThisTurn(Game game) {
+        if (getMaxActivationsPerTurn(game) == Integer.MAX_VALUE) {
+            return true;
+        }
+        ActivationInfo activationInfo = getActivationInfo(game);
+        return activationInfo == null
+                || activationInfo.turnNum != game.getTurnNum()
+                || activationInfo.activationCounter < getMaxActivationsPerTurn(game);
+    }
+
+    @Override
+    public boolean activate(Game game, boolean noMana) {
+        if (hasMoreActivationsThisTurn(game)) {
+            if (super.activate(game, noMana)) {
+                ActivationInfo activationInfo = getActivationInfo(game);
+                if (activationInfo == null) {
+                    activationInfo = new ActivationInfo(game.getTurnNum(), 1);
+                } else if (activationInfo.turnNum != game.getTurnNum()) {
+                    activationInfo.turnNum = game.getTurnNum();
+                    activationInfo.activationCounter = 1;
+                } else {
+                    activationInfo.activationCounter++;
+                }
+                setActivationInfo(activationInfo, game);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void setMaxActivationsPerTurn(int maxActivationsPerTurn) {
+        this.maxActivationsPerTurn = maxActivationsPerTurn;
+    }
+
+    public int getMaxActivationsPerTurn(Game game) {
+        return maxActivationsPerTurn;
+    }
+
+    protected ActivationInfo getActivationInfo(Game game) {
+        Integer turnNum = (Integer) game.getState().getValue(CardUtil.getCardZoneString("activationsTurn" + originalId, sourceId, game));
+        Integer activationCount = (Integer) game.getState().getValue(CardUtil.getCardZoneString("activationsCount" + originalId, sourceId, game));
+        if (turnNum == null || activationCount == null) {
+            return null;
+        }
+        return new ActivationInfo(turnNum, activationCount);
+    }
+
+    protected void setActivationInfo(ActivationInfo activationInfo, Game game) {
+        game.getState().setValue(CardUtil.getCardZoneString("activationsTurn" + originalId, sourceId, game), activationInfo.turnNum);
+        game.getState().setValue(CardUtil.getCardZoneString("activationsCount" + originalId, sourceId, game), activationInfo.activationCounter);
+    }
 }

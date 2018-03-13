@@ -28,12 +28,11 @@
 package mage.filter;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 import mage.cards.Card;
-import mage.cards.SplitCard;
 import mage.filter.predicate.ObjectPlayer;
 import mage.filter.predicate.ObjectPlayerPredicate;
 import mage.filter.predicate.ObjectSourcePlayer;
@@ -41,7 +40,6 @@ import mage.filter.predicate.Predicates;
 import mage.game.Game;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  * @author North
  */
@@ -77,12 +75,7 @@ public class FilterCard extends FilterObject<Card> {
         if (card == null) {
             return false;
         }
-        if (card.isSplitCard()) {
-            return super.match(((SplitCard) card).getLeftHalfCard(), game)
-                    || super.match(((SplitCard) card).getRightHalfCard(), game);
-        } else {
-            return super.match(card, game);
-        }
+        return super.match(card, game);
     }
 
     public boolean match(Card card, UUID playerId, Game game) {
@@ -105,17 +98,12 @@ public class FilterCard extends FilterObject<Card> {
     }
 
     public Set<Card> filter(Set<Card> cards, Game game) {
-        Set<Card> filtered = new HashSet<>();
-        for (Card card : cards) {
-            if (match(card, game)) {
-                filtered.add(card);
-            }
-        }
-        return filtered;
+        return cards.stream().filter(card -> match(card, game)).collect(Collectors.toSet());
+
     }
 
     public boolean hasPredicates() {
-        return predicates.size() > 0;
+        return !predicates.isEmpty();
     }
 
     @Override

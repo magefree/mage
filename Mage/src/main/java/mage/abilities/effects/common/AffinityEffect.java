@@ -44,10 +44,7 @@ public class AffinityEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify instanceof SpellAbility && abilityToModify.getSourceId().equals(source.getSourceId())) {
-            return true;
-        }
-        return false;
+        return abilityToModify instanceof SpellAbility && abilityToModify.getSourceId().equals(source.getSourceId());
     }
 
     @Override

@@ -72,7 +72,7 @@ public class PayVariableLoyaltyCost extends VariableCostImpl  {
         int maxValue = 0;
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
-            maxValue = permanent.getCounters().getCount(CounterType.LOYALTY.getName());
+            maxValue = permanent.getCounters(game).getCount(CounterType.LOYALTY.getName());
         }
         return maxValue;
     }

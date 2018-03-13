@@ -34,20 +34,19 @@ import mage.constants.TurnPhase;
 import mage.game.Game;
 
 /**
- *
  * @author LevelX2
  */
 public class IsPhaseCondition implements Condition {
 
     protected TurnPhase turnPhase;
 
-    public  IsPhaseCondition(TurnPhase turnPhase) {
+    public IsPhaseCondition(TurnPhase turnPhase) {
         this.turnPhase = turnPhase;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return turnPhase.equals(game.getTurn().getPhaseType());
+        return turnPhase == game.getTurn().getPhaseType();
     }
 
     @Override

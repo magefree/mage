@@ -46,14 +46,14 @@ import mage.constants.Zone;
 public class LieutenantAbility extends SimpleStaticAbility {
 
     public LieutenantAbility(ContinuousEffect effect) {
-        super(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield), CommanderInPlayCondition.getInstance(), "<i>Lieutenant</i> - As long as you control your commander, {this} gets +2/+2"));
-        this.addEffect(new ConditionalContinuousEffect(effect, CommanderInPlayCondition.getInstance(), effect.getText(null)));
+        super(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield), CommanderInPlayCondition.instance, "<i>Lieutenant</i> - As long as you control your commander, {this} gets +2/+2"));
+        this.addEffect(new ConditionalContinuousEffect(effect, CommanderInPlayCondition.instance, effect.getText(null)));
     }
     
     public LieutenantAbility(Effects effects) {
-        super(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield), CommanderInPlayCondition.getInstance(), "<i>Lieutenant</i> - As long as you control your commander, {this} gets +2/+2"));
+        super(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield), CommanderInPlayCondition.instance, "<i>Lieutenant</i> - As long as you control your commander, {this} gets +2/+2"));
         for (Effect effect : effects) {
-            this.addEffect(new ConditionalContinuousEffect((ContinuousEffect) effect, CommanderInPlayCondition.getInstance(), effect.getText(null)));
+            this.addEffect(new ConditionalContinuousEffect((ContinuousEffect) effect, CommanderInPlayCondition.instance, effect.getText(null)));
         }
     }
 

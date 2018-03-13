@@ -27,15 +27,9 @@
  */
 package mage.game.permanent;
 
-import java.util.ArrayList;
 import java.util.UUID;
 import mage.cards.Card;
-import mage.cards.CardsImpl;
-import mage.cards.MeldCard;
-import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.ZoneChangeEvent;
-import mage.players.Player;
 
 /**
  *
@@ -51,127 +45,8 @@ public class PermanentMeld extends PermanentCard {
     public int getConvertedManaCost() {
         if (this.isCopy()) {
             return 0;
-        }
-        else {
+        } else {
             return this.getCard().getConvertedManaCost();
-        }
-    }
-
-    @Override
-    public boolean moveToZone(Zone toZone, UUID sourceId, Game game, boolean flag, ArrayList<UUID> appliedEffects) {
-        ZoneChangeEvent event = new ZoneChangeEvent(this.getId(), sourceId, this.getOwnerId(), Zone.BATTLEFIELD, toZone, appliedEffects);
-        if (!game.replaceEvent(event)) {
-            Player controller = game.getPlayer(this.getControllerId());
-            if (controller != null) {
-                controller.removeFromBattlefield(this, game);
-                updateZoneChangeCounter(game);
-                MeldCard meldCard = (MeldCard) this.getCard();
-                Card topHalfCard = meldCard.getTopHalfCard();
-                Card bottomHalfCard = meldCard.getBottomHalfCard();
-                switch (event.getToZone()) {
-                    case GRAVEYARD:
-                        game.getPlayer(this.getOwnerId()).putInGraveyard(topHalfCard, game, true);
-                        game.getPlayer(this.getOwnerId()).putInGraveyard(bottomHalfCard, game, true);
-                        break;
-                    case HAND:
-                        game.getPlayer(this.getOwnerId()).getHand().add(topHalfCard);
-                        game.getPlayer(this.getOwnerId()).getHand().add(bottomHalfCard);
-                        break;
-                    case EXILED:
-                        game.getExile().getPermanentExile().add(topHalfCard);
-                        game.getExile().getPermanentExile().add(bottomHalfCard);
-                        break;
-                    case LIBRARY:
-                        CardsImpl cardsToMove = new CardsImpl();
-                        cardsToMove.add(topHalfCard);
-                        cardsToMove.add(bottomHalfCard);
-                        if (flag) {
-                            controller.putCardsOnTopOfLibrary(cardsToMove, game, null, true);
-                        }
-                        else {
-                            controller.putCardsOnBottomOfLibrary(cardsToMove, game, null, true);
-                        }
-                        break;
-                    default:
-                        return false;
-                }
-                meldCard.setMelded(false);
-                game.setZone(topHalfCard.getId(), event.getToZone());
-                game.setZone(bottomHalfCard.getId(), event.getToZone());
-                meldCard.setTopLastZoneChangeCounter(topHalfCard.getZoneChangeCounter(game));
-                meldCard.setBottomLastZoneChangeCounter(bottomHalfCard.getZoneChangeCounter(game));
-                game.addSimultaneousEvent(event);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game, ArrayList<UUID> appliedEffects) {
-        ZoneChangeEvent event = new ZoneChangeEvent(this.getId(), sourceId, this.getOwnerId(), Zone.BATTLEFIELD, Zone.EXILED, appliedEffects);
-        if (!game.replaceEvent(event)) {
-            Player controller = game.getPlayer(this.getControllerId());
-            if (controller != null) {
-                controller.removeFromBattlefield(this, game);
-                updateZoneChangeCounter(game);
-                MeldCard meldCard = (MeldCard) this.getCard();
-                Card topHalfCard = meldCard.getTopHalfCard();
-                Card bottomHalfCard = meldCard.getBottomHalfCard();
-                switch (event.getToZone()) {
-                    case GRAVEYARD:
-                        game.getPlayer(this.getOwnerId()).putInGraveyard(topHalfCard, game, true);
-                        game.getPlayer(this.getOwnerId()).putInGraveyard(bottomHalfCard, game, true);
-                        break;
-                    case HAND:
-                        game.getPlayer(this.getOwnerId()).getHand().add(topHalfCard);
-                        game.getPlayer(this.getOwnerId()).getHand().add(bottomHalfCard);
-                        break;
-                    case EXILED:
-                        if (exileId == null) {
-                            game.getExile().getPermanentExile().add(topHalfCard);
-                            game.getExile().getPermanentExile().add(bottomHalfCard);
-                        }
-                        else {
-                            game.getExile().createZone(exileId, name).add(topHalfCard);
-                            game.getExile().getExileZone(exileId).add(bottomHalfCard);
-                        }
-                        break;
-                    case LIBRARY:
-                        CardsImpl cardsToMove = new CardsImpl();
-                        cardsToMove.add(topHalfCard);
-                        cardsToMove.add(bottomHalfCard);
-                        if (event.getFlag()) {
-                            controller.putCardsOnTopOfLibrary(cardsToMove, game, null, true);
-                        }
-                        else {
-                            controller.putCardsOnBottomOfLibrary(cardsToMove, game, null, true);
-                        }
-                        break;
-                    default:
-                        return false;
-                }
-                meldCard.setMelded(false);
-                game.setZone(topHalfCard.getId(), event.getToZone());
-                game.setZone(bottomHalfCard.getId(), event.getToZone());
-                meldCard.setTopLastZoneChangeCounter(topHalfCard.getZoneChangeCounter(game));
-                meldCard.setBottomLastZoneChangeCounter(bottomHalfCard.getZoneChangeCounter(game));
-                game.addSimultaneousEvent(event);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public void addCounters(String name, int amount, Game game, ArrayList<UUID> appliedEffects) {
-        MeldCard meldCard = (MeldCard) this.getCard();
-        if (meldCard.isMelded()) {
-            super.addCounters(name, amount, game, appliedEffects);
-        }
-        else {
-            meldCard.getTopHalfCard().addCounters(name, amount, game, appliedEffects);
-            meldCard.getBottomHalfCard().addCounters(name, amount, game, appliedEffects);
         }
     }
 }

@@ -28,11 +28,9 @@
 
 package mage.client.table;
 
+import mage.client.util.*;
+
 import java.io.Serializable;
-import mage.client.util.Event;
-import mage.client.util.EventDispatcher;
-import mage.client.util.EventSource;
-import mage.client.util.Listener;
 
 /**
  *
@@ -48,7 +46,7 @@ public class PlayerTypeEventSource implements EventSource<Event>, Serializable {
     }
 
     public void playerTypeChanged() {
-        dispatcher.fireEvent(new Event(null, "playerTypeChanged"));
+        dispatcher.fireEvent(new Event(null, ClientEventType.PLAYER_TYPE_CHANGED));
     }
 
     @Override

@@ -24,26 +24,27 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.cards.basiclands;
 
 import java.util.UUID;
+
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.abilities.mana.ManaAbility;
+import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.CardImpl;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public abstract class BasicLand extends CardImpl {
 
-    public BasicLand(UUID ownerId, int cardNumber, String name, ManaAbility mana) {
-        super(ownerId, cardNumber, name, Rarity.LAND, new CardType[]{CardType.LAND}, null);
-        this.supertype.add("Basic");
-        this.subtype.add(name);
+    public BasicLand(UUID ownerId, CardSetInfo setInfo, ActivatedManaAbilityImpl mana) {
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, null);
+        addSuperType(SuperType.BASIC);
+        this.subtype.add(SubType.byDescription(name));
         this.addAbility(mana);
     }
 

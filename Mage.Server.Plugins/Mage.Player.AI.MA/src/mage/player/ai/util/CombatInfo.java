@@ -12,12 +12,12 @@ import java.util.Map;
  */
 public class CombatInfo {
 
-    private Map<Permanent, List<Permanent>> combat = new HashMap<Permanent, List<Permanent>>();
+    private Map<Permanent, List<Permanent>> combat = new HashMap<>();
 
     public void addPair(Permanent attacker, Permanent blocker) {
         List<Permanent> blockers = combat.get(attacker);
         if (blockers == null) {
-            blockers = new ArrayList<Permanent>();
+            blockers = new ArrayList<>();
             combat.put(attacker, blockers);
         }
         blockers.add(blocker);

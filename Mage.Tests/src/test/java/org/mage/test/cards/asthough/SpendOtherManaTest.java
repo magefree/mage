@@ -118,7 +118,7 @@ public class SpendOtherManaTest extends CardTestPlayerBase {
         // <i>Spell mastery</i> - If there are two or more instant and/or sorcery cards in your graveyard, add {B}{B}{B} to your mana pool.
         addCard(Zone.HAND, playerA, "Dark Petition"); // {3}{B}{B}
 
-        // +1: Put a 0/1 green Plant creature token onto the battlefield.
+        // +1: Create a 0/1 green Plant creature token onto the battlefield.
         // -2: Put a +1/+1 counter on each creature you control.
         // -7: You gain X life and draw X cards, where X is the number of lands you control.
         addCard(Zone.LIBRARY, playerA, "Nissa, Voice of Zendikar"); // {1}{G}{G}
@@ -134,4 +134,34 @@ public class SpendOtherManaTest extends CardTestPlayerBase {
         assertHandCount(playerA, "Nissa, Voice of Zendikar", 0);
         assertPermanentCount(playerA, "Nissa, Voice of Zendikar", 1);
     }
+
+    @Test
+    public void testUseSpendManaAsThoughWithManaFromPool() {
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
+
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion"); // Creature {1}{W}
+
+        // When Hostage Taker enters the battlefield, exile another target artifact or creature until Hostage Taker leaves the battlefield.
+        // You may cast that card as long as it remains exiled, and you may spend mana as though it were mana of any type to cast that spell.
+        addCard(Zone.HAND, playerA, "Hostage Taker"); // {2}{U}{B}
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Hostage Taker");
+        setChoice(playerA, "Silvercoat Lion");
+
+        activateManaAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{T}: Add {R} to your mana pool."); // red mana to pool
+        activateManaAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{T}: Add {R} to your mana pool."); // red mana to pool
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Silvercoat Lion"); // cast it from exile with red mana from pool
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Hostage Taker", 1);
+        assertTappedCount("Mountain", true, 4);
+
+        assertPermanentCount(playerA, "Silvercoat Lion", 1);
+
+    }
+
 }

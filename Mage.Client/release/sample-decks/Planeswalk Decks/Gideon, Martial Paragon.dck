@@ -1,0 +1,24 @@
+1 [AKH:270] Gideon, Martial Paragon
+2 [AKH:272] Gideon's Resolve
+10 [AKH:250] Plains
+3 [AKH:271] Companion of the Trials
+1 [AKH:10] Devoted Crop-Mate
+1 [AKH:31] Tah-Crop Elite
+2 [AKH:29] Sparring Mummy
+1 [AKH:18] Impeccable Timing
+3 [AKH:17] Gust Walker
+1 [AKH:16] Glory-Bound Initiate
+3 [AKH:117] Ahn-Crop Crasher
+2 [AKH:139] Hyena Pack
+2 [AKH:129] Electrify
+1 [AKH:146] Pathmaker Initiate
+2 [AKH:124] Cartouche of Zeal
+2 [AKH:200] Honored Crop-Captain
+1 [AKH:137] Hazoret's Favor
+4 [AKH:274] Stone Quarry
+4 [AKH:273] Graceful Cat
+3 [AKH:152] Trial of Zeal
+1 [AKH:144] Nef-Crop Entangler
+10 [AKH:253] Mountain
+LAYOUT MAIN:(1,6)(CMC,false,50)|([AKH:274],[AKH:274],[AKH:274],[AKH:274],[AKH:250],[AKH:250],[AKH:250],[AKH:250],[AKH:250],[AKH:250],[AKH:250],[AKH:250],[AKH:250],[AKH:250],[AKH:253],[AKH:253],[AKH:253],[AKH:253],[AKH:253],[AKH:253],[AKH:253],[AKH:253],[AKH:253],[AKH:253])([AKH:124],[AKH:124])([AKH:16],[AKH:17],[AKH:17],[AKH:17],[AKH:144],[AKH:146],[AKH:200],[AKH:200],[AKH:18])([AKH:271],[AKH:271],[AKH:271],[AKH:10],[AKH:273],[AKH:273],[AKH:273],[AKH:273],[AKH:117],[AKH:117],[AKH:117],[AKH:137],[AKH:152],[AKH:152],[AKH:152])([AKH:29],[AKH:29],[AKH:31],[AKH:139],[AKH:139],[AKH:129],[AKH:129])([AKH:270],[AKH:272],[AKH:272])
+LAYOUT SIDEBOARD:(0,0)(NONE,false,50)|

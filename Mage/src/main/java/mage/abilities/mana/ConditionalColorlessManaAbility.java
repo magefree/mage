@@ -16,7 +16,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class ConditionalColorlessManaAbility extends ManaAbility {
+public class ConditionalColorlessManaAbility extends ActivatedManaAbilityImpl {
 
     public ConditionalColorlessManaAbility(int amount, ConditionalManaBuilder manaBuilder) {
         this(new TapSourceCost(), amount, manaBuilder);
@@ -24,7 +24,7 @@ public class ConditionalColorlessManaAbility extends ManaAbility {
 
     public ConditionalColorlessManaAbility(Cost cost, int amount, ConditionalManaBuilder manaBuilder) {
         super(Zone.BATTLEFIELD, new AddConditionalColorlessManaEffect(amount, manaBuilder), cost);
-        this.netMana.add(new Mana(0, 0, 0, 0, 0, 0, 0, amount));
+        this.netMana.add(Mana.ColorlessMana(amount));
     }
 
     public ConditionalColorlessManaAbility(final ConditionalColorlessManaAbility ability) {

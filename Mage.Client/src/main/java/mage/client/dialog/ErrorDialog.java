@@ -76,11 +76,7 @@ public class ErrorDialog extends MageDialog {
         setTitle("Error");
 
         btnOK.setText("OK");
-        btnOK.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnOKActionPerformed(evt);
-            }
-        });
+        btnOK.addActionListener(this::btnOKActionPerformed);
 
         lblMessage.setColumns(20);
         lblMessage.setEditable(false);

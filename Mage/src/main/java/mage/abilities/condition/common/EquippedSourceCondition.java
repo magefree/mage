@@ -27,24 +27,22 @@
  */
 package mage.abilities.condition.common;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
+import mage.constants.SubType;
 
 /**
  * Describes condition when creature is equipped.
  *
  * @author nantuko
  */
-public class EquippedSourceCondition implements Condition {
+public enum EquippedSourceCondition implements Condition {
 
-    private static final EquippedSourceCondition fInstance = new EquippedSourceCondition();
-
-    public static Condition getInstance() {
-        return fInstance;
-    }
+   instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
@@ -52,7 +50,7 @@ public class EquippedSourceCondition implements Condition {
         if (permanent != null) {
             for (UUID uuid : permanent.getAttachments()) {
                 Permanent attached = game.getBattlefield().getPermanent(uuid);
-                if (attached != null && attached.getSubtype().contains("Equipment")) {
+                if (attached != null && attached.hasSubtype(SubType.EQUIPMENT, game)) {
                     return true;
                 }
             }

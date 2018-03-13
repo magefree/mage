@@ -29,6 +29,7 @@ package org.mage.test.cards.continuous;
 
 import mage.constants.CardType;
 import mage.constants.PhaseStep;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.Filter;
@@ -50,7 +51,7 @@ public class DaxosTheReturnedTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 8);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
         // Whenever you cast an enchantment spell, you get an experience counter.
-        // {1}{W}{B}: Put a white and black Spirit enchantment creature token onto the battlefield. It has
+        // {1}{W}{B}: Create a white and black Spirit enchantment creature token onto the battlefield. It has
         // "This creature's power and toughness are each equal to the number of experience counters you have."
         addCard(Zone.BATTLEFIELD, playerA, "Daxos the Returned");
 
@@ -69,7 +70,7 @@ public class DaxosTheReturnedTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Underworld Dreams", 2);
         assertCounterCount(playerA, CounterType.EXPERIENCE, 2);
         assertPowerToughness(playerA, "Spirit", 2, 2, Filter.ComparisonScope.All);
-        assertType("Spirit", CardType.ENCHANTMENT, "Spirit");
+        assertType("Spirit", CardType.ENCHANTMENT, SubType.SPIRIT);
 
     }
 

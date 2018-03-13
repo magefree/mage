@@ -33,7 +33,6 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author LevelX2
  */
 public class PlayFromNonHandZoneTest extends CardTestPlayerBase {
@@ -134,6 +133,39 @@ public class PlayFromNonHandZoneTest extends CardTestPlayerBase {
         assertHandCount(playerB, "Plains", 1);
         assertLife(playerA, 17);
         assertLife(playerB, 22);
+
+    }
+
+    @Test
+    public void testNarsetEnlightenedMasterAdditionalCost() {
+        // First strike
+        // Hexproof
+        // Whenever Narset, Enlightented Master attacks, exile the top four cards of your library. Until end of turn, you may cast noncreature cards exiled with Narset this turn without paying their mana costs.
+        skipInitShuffling();
+
+        addCard(Zone.BATTLEFIELD, playerB, "Narset, Enlightened Master", 1);
+        addCard(Zone.HAND, playerB, "Swamp");
+        addCard(Zone.LIBRARY, playerB, "Plains");
+        addCard(Zone.LIBRARY, playerB, "Plains");
+        addCard(Zone.LIBRARY, playerB, "Plains");
+        addCard(Zone.LIBRARY, playerB, "Cathartic Reunion");
+        addCard(Zone.LIBRARY, playerB, "Forest");
+
+        attack(2, playerB, "Narset, Enlightened Master");
+
+        castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Cathartic Reunion");
+        setChoice(playerB, "Swamp^Forest");
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+
+        assertHandCount(playerB, 3);
+        assertGraveyardCount(playerB, "Forest", 1);
+        assertGraveyardCount(playerB, "Swamp", 1);
+        assertGraveyardCount(playerB, "Cathartic Reunion", 1);
+        assertGraveyardCount(playerB, 3);
+        assertExileCount(playerB, "Plains", 3);
+        assertExileCount(playerB, 3);
+
 
     }
 

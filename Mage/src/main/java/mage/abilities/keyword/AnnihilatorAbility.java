@@ -27,22 +27,23 @@
  */
 package mage.abilities.keyword;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetControlledPermanent;
 import mage.util.CardUtil;
+
+import java.util.Objects;
+import java.util.UUID;
 
 /**
  * 702.84. Annihilator 702.84a Annihilator is a triggered ability. "Annihilator
@@ -79,9 +80,9 @@ public class AnnihilatorAbility extends TriggeredAbilityImpl {
             UUID defendingPlayerId = game.getCombat().getDefendingPlayerId(sourceId, game);
             if (defendingPlayerId != null) {
                 // the id has to be set here because the source can be leave battlefield
-                for (Effect effect : getEffects()) {
+                getEffects().forEach((effect) -> {
                     effect.setValue("defendingPlayerId", defendingPlayerId);
-                }
+                });
                 return true;
             }
         }
@@ -90,7 +91,7 @@ public class AnnihilatorAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Annihilator " + count + "<i>(Whenever this creature attacks, defending player sacrifices "
+        return "Annihilator " + count + " <i>(Whenever this creature attacks, defending player sacrifices "
                 + (count == 1 ? "a permanent" : CardUtil.numberToText(count) + " permanents") + ".)</i>";
     }
 
@@ -104,7 +105,6 @@ public class AnnihilatorAbility extends TriggeredAbilityImpl {
 class AnnihilatorEffect extends OneShotEffect {
 
     private final int count;
-    private static final FilterControlledPermanent FILTER = new FilterControlledPermanent();
 
     AnnihilatorEffect(int count) {
         super(Outcome.Sacrifice);
@@ -124,20 +124,22 @@ class AnnihilatorEffect extends OneShotEffect {
             player = game.getPlayer(defendingPlayerId);
         }
         if (player != null) {
-            int amount = Math.min(count, game.getBattlefield().countAll(FILTER, player.getId(), game));
-            Target target = new TargetControlledPermanent(amount, amount, FILTER, true);
-            if (target.canChoose(player.getId(), game)) {
-                while (!target.isChosen() && target.canChoose(player.getId(), game) && player.canRespond()) {
-                    player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
-                }
-                for (int idx = 0; idx < target.getTargets().size(); idx++) {
-                    Permanent permanent = game.getPermanent(target.getTargets().get(idx));
-                    if (permanent != null) {
-                        permanent.sacrifice(source.getSourceId(), game);
+            int amount = Math.min(count, game.getBattlefield().countAll(new FilterControlledPermanent(), player.getId(), game));
+            if (amount > 0) {
+                Target target = new TargetControlledPermanent(amount, amount, new FilterControlledPermanent(), true);
+                if (target.canChoose(player.getId(), game)) {
+                    while (player.canRespond()
+                            && target.canChoose(player.getId(), game)
+                            && !target.isChosen()) {
+                        player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
                     }
+                    target.getTargets().stream()
+                            .map(game::getPermanent)
+                            .filter(Objects::nonNull)
+                            .forEach(permanent -> permanent.sacrifice(source.getSourceId(), game));
                 }
+                return true;
             }
-            return true;
         }
         return false;
     }

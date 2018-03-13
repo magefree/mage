@@ -40,7 +40,7 @@ import mage.game.stack.Spell;
  */
 public class BecomesTargetControllerSpellTriggeredAbility extends TriggeredAbilityImpl {
 
-    public BecomesTargetControllerSpellTriggeredAbility(Effect effect, Boolean optional) {
+    public BecomesTargetControllerSpellTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
     }
 

@@ -3,9 +3,10 @@ package mage.game.permanent.token;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.keyword.VigilanceAbility;
+import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -16,14 +17,17 @@ public class KnightToken extends Token {
     final static private List<String> tokenImageSets = new ArrayList<>();
 
     static {
-        tokenImageSets.addAll(Arrays.asList("ORI", "RTR"));
+        tokenImageSets.addAll(Arrays.asList("ORI", "RTR", "C15", "CMA"));
     }
 
     public KnightToken() {
         super("Knight", "2/2 white Knight creature token with vigilance");
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("C15")) {
+            setTokenType(2);
+        }
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
-        subtype.add("Knight");
+        subtype.add(SubType.KNIGHT);
         power = new MageInt(2);
         toughness = new MageInt(2);
         this.addAbility(VigilanceAbility.getInstance());

@@ -27,12 +27,13 @@
  */
 package mage.abilities.condition.common;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.condition.Condition;
+import mage.constants.ComparisonType;
 import mage.abilities.condition.IntCompareCondition;
 import mage.game.Game;
 import mage.watchers.common.PlayerLostLifeWatcher;
+
+import java.util.UUID;
 
 /**
  * Describes condition when an opponent has lost an amount of life
@@ -41,16 +42,16 @@ import mage.watchers.common.PlayerLostLifeWatcher;
  */
 public class OpponentLostLifeCondition extends IntCompareCondition {
 
-    public OpponentLostLifeCondition(Condition.ComparisonType type, int value) {
+    public OpponentLostLifeCondition(ComparisonType type, int value) {
         super(type, value);
     }
 
     @Override
     protected int getInputValue(Game game, Ability source) {
         int maxLostLive = 0;
-        PlayerLostLifeWatcher watcher = (PlayerLostLifeWatcher) game.getState().getWatchers().get("PlayerLostLifeWatcher");
+        PlayerLostLifeWatcher watcher = (PlayerLostLifeWatcher) game.getState().getWatchers().get(PlayerLostLifeWatcher.class.getSimpleName());
         if (watcher != null) {
-            for (UUID opponentId: game.getOpponents(source.getControllerId())) {
+            for (UUID opponentId : game.getOpponents(source.getControllerId())) {
                 int lostLive = watcher.getLiveLost(opponentId);
                 if (lostLive > maxLostLive) {
                     maxLostLive = lostLive;
@@ -63,14 +64,14 @@ public class OpponentLostLifeCondition extends IntCompareCondition {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("if an opponent lost ");
-        switch(type) {
-            case GreaterThan:
-                sb.append(value+1).append(" or more life this turn ");
+        switch (type) {
+            case MORE_THAN:
+                sb.append(value + 1).append(" or more life this turn ");
                 break;
-            case Equal:
+            case EQUAL_TO:
                 sb.append(value).append(" life this turn ");
                 break;
-            case LessThan:
+            case FEWER_THAN:
                 sb.append(" less than ").append(value).append(" life this turn ");
                 break;
         }

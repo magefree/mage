@@ -81,7 +81,7 @@ public class BigCard extends JComponent {
 
     public BigCard(boolean rotated) {
         initComponents();
-        if (!Plugins.getInstance().isCardPluginLoaded()) {
+        if (!Plugins.instance.isCardPluginLoaded()) {
             initBounds(rotated);
         }
         setDoubleBuffered(true);
@@ -111,7 +111,7 @@ public class BigCard extends JComponent {
             image = TransformedImageCache.getResizedImage((BufferedImage)image, getWidth(), getHeight());
         }
 
-        if (this.cardId == null || !enlargeMode.equals(this.enlargeMode) || !this.cardId.equals(cardId)) {
+        if (this.cardId == null || enlargeMode != this.enlargeMode || !this.cardId.equals(cardId)) {
             if (this.panel != null) {
                 remove(this.panel);
             }
@@ -141,7 +141,7 @@ public class BigCard extends JComponent {
 
         try {
             for (String line : strings) {
-                doc.insertString(doc.getLength(), line + "\n", doc.getStyle("regular"));
+                doc.insertString(doc.getLength(), line + '\n', doc.getStyle("regular"));
             }
         } catch (BadLocationException ble) {
         }

@@ -27,9 +27,6 @@
  */
 package mage.abilities.effects.common;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ReplacementEffectImpl;
@@ -45,6 +42,12 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
+import mage.util.SubTypeList;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * Effect for the DevourAbility
@@ -67,37 +70,6 @@ public class DevourEffect extends ReplacementEffectImpl {
         filter.add(new AnotherPredicate());
     }
     private final DevourFactor devourFactor;
-
-    public enum DevourFactor {
-
-        Devour1("Devour 1", "that many +1/+1 counters on it", 1),
-        Devour2("Devour 2", "twice that many +1/+1 counters on it", 2),
-        Devour3("Devour 3", "three times that many +1/+1 counters on it", 3),
-        DevourX("Devour X, where X is the number of creatures devoured this way", "X +1/+1 counters on it for each of those creatures", Integer.MAX_VALUE);
-
-        private final String text;
-        private final String ruleText;
-        private final int factor;
-
-        DevourFactor(String text, String ruleText, int factor) {
-            this.text = text;
-            this.ruleText = ruleText;
-            this.factor = factor;
-        }
-
-        @Override
-        public String toString() {
-            return text;
-        }
-
-        public String getRuleText() {
-            return ruleText;
-        }
-
-        public int getFactor() {
-            return factor;
-        }
-    }
 
     public DevourEffect(DevourFactor devourFactor) {
         super(Duration.EndOfGame, Outcome.Detriment);
@@ -141,8 +113,8 @@ public class DevourEffect extends ReplacementEffectImpl {
             }
             if (controller.chooseUse(Outcome.Detriment, "Devour creatures?", source, game)) {
                 controller.chooseTarget(Outcome.Detriment, target, source, game);
-                if (target.getTargets().size() > 0) {
-                    List<ArrayList<String>> cardSubtypes = new ArrayList<>();
+                if (!target.getTargets().isEmpty()) {
+                    List<SubTypeList> cardSubtypes = new ArrayList<>();
                     int devouredCreatures = target.getTargets().size();
                     if (!game.isSimulation()) {
                         game.informPlayers(creature.getLogName() + " devours " + devouredCreatures + " creatures");
@@ -150,7 +122,7 @@ public class DevourEffect extends ReplacementEffectImpl {
                     for (UUID targetId : target.getTargets()) {
                         Permanent targetCreature = game.getPermanent(targetId);
                         if (targetCreature != null) {
-                            cardSubtypes.add((ArrayList<String>) targetCreature.getSubtype());
+                            cardSubtypes.add(targetCreature.getSubtype(game));
                         }
                         if (targetCreature == null || !targetCreature.sacrifice(source.getSourceId(), game)) {
                             return false;
@@ -162,7 +134,7 @@ public class DevourEffect extends ReplacementEffectImpl {
                     } else {
                         amountCounters = devouredCreatures * devourFactor.getFactor();
                     }
-                    creature.addCounters(CounterType.P1P1.createInstance(amountCounters), game);
+                    creature.addCounters(CounterType.P1P1.createInstance(amountCounters), source, game);
                     game.getState().setValue(creature.getId().toString() + "devoured", cardSubtypes);
                 }
 
@@ -184,7 +156,7 @@ public class DevourEffect extends ReplacementEffectImpl {
         if (object != null) {
             return (List<ArrayList<String>>) object;
         }
-        return new ArrayList<>();
+        return Collections.emptyList();
     }
 
     public int getDevouredCreaturesAmount(Game game, UUID permanentId) {
@@ -198,5 +170,36 @@ public class DevourEffect extends ReplacementEffectImpl {
     @Override
     public DevourEffect copy() {
         return new DevourEffect(this);
+    }
+
+    public enum DevourFactor {
+
+        Devour1("Devour 1", "that many +1/+1 counters on it", 1),
+        Devour2("Devour 2", "twice that many +1/+1 counters on it", 2),
+        Devour3("Devour 3", "three times that many +1/+1 counters on it", 3),
+        DevourX("Devour X, where X is the number of creatures devoured this way", "X +1/+1 counters on it for each of those creatures", Integer.MAX_VALUE);
+
+        private final String text;
+        private final String ruleText;
+        private final int factor;
+
+        DevourFactor(String text, String ruleText, int factor) {
+            this.text = text;
+            this.ruleText = ruleText;
+            this.factor = factor;
+        }
+
+        @Override
+        public String toString() {
+            return text;
+        }
+
+        public String getRuleText() {
+            return ruleText;
+        }
+
+        public int getFactor() {
+            return factor;
+        }
     }
 }

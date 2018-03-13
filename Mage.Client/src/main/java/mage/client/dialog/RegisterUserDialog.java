@@ -6,19 +6,17 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import javax.swing.SwingWorker;
 import mage.client.MageFrame;
+import mage.client.SessionHandler;
 import mage.client.preference.MagePreferences;
 import mage.remote.Connection;
-import mage.remote.Session;
-import mage.remote.SessionImpl;
 import org.apache.log4j.Logger;
 
 public class RegisterUserDialog extends MageDialog {
 
     private static final Logger logger = Logger.getLogger(ConnectDialog.class);
-    private ConnectDialog connectDialog;
+    private final ConnectDialog connectDialog;
     private Connection connection;
     private ConnectTask task;
-    private Session session;
 
     /**
      * Creates new form RegisterUserDialog
@@ -80,25 +78,13 @@ public class RegisterUserDialog extends MageDialog {
         lblPassword.setLabelFor(txtPassword);
         lblPassword.setText("Password:");
 
-        txtUserName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtUserNameActionPerformed(evt);
-            }
-        });
+        txtUserName.addActionListener(evt -> txtUserNameActionPerformed(evt));
 
         btnRegister.setText("Register");
-        btnRegister.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegisterActionPerformed(evt);
-            }
-        });
+        btnRegister.addActionListener(evt -> btnRegisterActionPerformed(evt));
 
         btnCancel.setText("Cancel");
-        btnCancel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelActionPerformed(evt);
-            }
-        });
+        btnCancel.addActionListener(evt -> btnCancelActionPerformed(evt));
 
         lblStatus.setToolTipText("");
 
@@ -114,7 +100,7 @@ public class RegisterUserDialog extends MageDialog {
 
         lblEmailReasoning.setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
         lblEmailReasoning.setLabelFor(txtEmail);
-        lblEmailReasoning.setText("(used for password reset)");
+        lblEmailReasoning.setText("(used for password reset and sending initial password)");
         lblEmailReasoning.setToolTipText("");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -226,8 +212,7 @@ public class RegisterUserDialog extends MageDialog {
         protected Boolean doInBackground() throws Exception {
             lblStatus.setText("Connecting...");
             btnRegister.setEnabled(false);
-            session = new SessionImpl(MageFrame.getInstance());
-            result = session.register(connection);
+            result = SessionHandler.register(connection);
             return result;
         }
 

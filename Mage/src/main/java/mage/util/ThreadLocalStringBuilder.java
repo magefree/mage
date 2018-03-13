@@ -6,7 +6,7 @@ package mage.util;
  */
 public class ThreadLocalStringBuilder extends ThreadLocal<StringBuilder> {
 
-    private int size;
+    private final int size;
     
     public ThreadLocalStringBuilder(int size) {
         this.size = size;

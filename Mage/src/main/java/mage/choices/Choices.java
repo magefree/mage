@@ -27,12 +27,14 @@
  */
 package mage.choices;
 
-import java.util.ArrayList;
-import java.util.List;
 import mage.abilities.Ability;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -57,13 +59,9 @@ public class Choices extends ArrayList<Choice> {
     }
 
     public List<Choice> getUnchosen() {
-        List<Choice> unchosen = new ArrayList<>();
-        for (Choice choice : this) {
-            if (!choice.isChosen()) {
-                unchosen.add(choice);
-            }
-        }
-        return unchosen;
+        return stream()
+                .filter(choice -> !choice.isChosen())
+                .collect(Collectors.toList());
     }
 
     public void clearChosen() {

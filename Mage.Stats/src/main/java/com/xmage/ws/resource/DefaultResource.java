@@ -3,9 +3,8 @@ package com.xmage.ws.resource;
 import com.xmage.core.decorators.Decorator;
 import com.xmage.ws.model.DomainErrors;
 import com.xmage.ws.representer.Representer;
-import net.minidev.json.JSONObject;
-
 import java.util.ArrayList;
+import net.minidev.json.JSONObject;
 
 /**
  *
@@ -19,8 +18,8 @@ public abstract class DefaultResource<R> implements Resource<R> {
 
     protected Representer<R> representer;
 
-    protected java.util.List<Decorator> decorators = new ArrayList<Decorator>();
-    
+    protected java.util.List<Decorator> decorators = new ArrayList<>();
+
     protected int version;
 
     protected DefaultResource(Representer<R> representer) {

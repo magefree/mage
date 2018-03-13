@@ -76,8 +76,7 @@ public class ExileTargetForSourceEffect extends OneShotEffect {
                         }
                     }
                 }
-            }
-            else {
+            } else {
                 for (UUID targetId : targetPointer.getTargets(game, source)) {
                     MageObject mageObject = game.getObject(targetId);
                     if (mageObject != null) {
@@ -99,6 +98,8 @@ public class ExileTargetForSourceEffect extends OneShotEffect {
 
         if (mode.getTargets().isEmpty()) {
             return "exile it";
+        } else if (mode.getTargets().get(0).getTargetName().startsWith("another")) {
+            return "exile " + mode.getTargets().get(0).getTargetName();
         } else {
             return "exile target " + mode.getTargets().get(0).getTargetName();
         }

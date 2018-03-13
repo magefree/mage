@@ -114,7 +114,7 @@ public class ButtonColumn extends AbstractCellEditor implements TableCellRendere
         if (table.getRowCount() > 0 && table.getRowCount() >= table.getEditingRow() && table.getEditingRow() >= 0) {
             int row = table.convertRowIndexToModel(table.getEditingRow());
             fireEditingStopped();
-            ActionEvent event = new ActionEvent(table, ActionEvent.ACTION_PERFORMED, "" + row);
+            ActionEvent event = new ActionEvent(table, ActionEvent.ACTION_PERFORMED, String.valueOf(row));
             action.actionPerformed(event);
         }
     }

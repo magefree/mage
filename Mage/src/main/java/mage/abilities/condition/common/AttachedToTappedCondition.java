@@ -34,16 +34,11 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author LevelX2
  */
-public class AttachedToTappedCondition implements Condition {
+public enum AttachedToTappedCondition implements Condition {
+    instance;
 
-    private static final AttachedToTappedCondition fInstance = new AttachedToTappedCondition();
-
-    public static AttachedToTappedCondition getInstance() {
-        return fInstance;
-    }
 
     @Override
     public boolean apply(Game game, Ability source) {

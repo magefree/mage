@@ -68,7 +68,10 @@ public class SpellCostReductionSourceEffect extends CostModificationEffectImpl {
         this.amount = amount;
         this.condition = condition;
         StringBuilder sb = new StringBuilder();
-        sb.append("{this} costs {").append(amount).append("} less to cast if ").append(this.condition.toString());
+        sb.append("{this} costs {")
+                .append(amount).append("} less to cast ")
+                .append((this.condition.toString().startsWith("if ") ? "" : "if "))
+                .append(this.condition.toString());
         this.staticText = sb.toString();
     }
 

@@ -24,8 +24,7 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.abilities.keyword;
 
 import mage.constants.Zone;
@@ -40,14 +39,14 @@ import java.io.ObjectStreamException;
  */
 public class ReachAbility extends StaticAbility implements MageSingleton {
 
-    private static final ReachAbility fINSTANCE =  new ReachAbility();
+    private static final ReachAbility instance = new ReachAbility();
 
     private Object readResolve() throws ObjectStreamException {
-        return fINSTANCE;
+        return instance;
     }
 
     public static ReachAbility getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private ReachAbility() {
@@ -56,12 +55,12 @@ public class ReachAbility extends StaticAbility implements MageSingleton {
 
     @Override
     public String getRule() {
-        return "Reach";
+        return "reach";
     }
 
     @Override
     public ReachAbility copy() {
-        return fINSTANCE;
+        return instance;
     }
 
 }

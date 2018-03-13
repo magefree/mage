@@ -47,6 +47,7 @@ public class CastBRGCommanderTest extends CardTestCommanderDuelBase {
         // When you cast Prossh, Skyraider of Kher, put X 0/1 red Kobold creature tokens named Kobolds of Kher Keep onto the battlefield, where X is the amount of mana spent to cast Prossh.
         // Sacrifice another creature: Prossh gets +1/+0 until end of turn.
         setDecknamePlayerA("Power Hungry.dck"); // Commander = Prosssh, Skyrider of Kher {3}{B}{R}{G}
+        setDecknamePlayerB("CommanderDuel_UW.dck"); //  Daxos of Meletis {1}{W}{U}
         return super.createNewGameAndPlayers();
     }
 
@@ -96,7 +97,36 @@ public class CastBRGCommanderTest extends CardTestCommanderDuelBase {
         assertGraveyardCount(playerA, "Karn Liberated", 0);
         assertPermanentCount(playerA, "Silvercoat Lion", 2);
         assertCommandZoneCount(playerA, "Prossh, Skyraider of Kher", 1);
-        assertCommandZoneCount(playerB, "Ob Nixilis of the Black Oath", 1);
+        assertCommandZoneCount(playerB, "Daxos of Meletis", 1);
 
     }
+
+    /**
+     * Mogg infestation creates tokens "for each creature that died this way".
+     * When a commander is moved to a command zone, it doesn't "die", and thus
+     * should not create tokens.
+     */
+    @Test
+    public void castMoggInfestation() {
+        // Destroy all creatures target player controls. For each creature that died this way, create two 1/1 red Goblin creature tokens under that player's control.
+        addCard(Zone.HAND, playerA, "Mogg Infestation", 1); // Sorcery {3}{R}{R}
+
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
+
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 2);
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 1);
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Daxos of Meletis");
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Mogg Infestation");
+
+        setStopAt(3, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, "Mogg Infestation", 1);
+        assertCommandZoneCount(playerB, "Daxos of Meletis", 1);
+
+        assertPermanentCount(playerB, "Goblin", 0);
+
+    }
+
 }

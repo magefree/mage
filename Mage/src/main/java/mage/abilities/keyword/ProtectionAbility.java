@@ -29,15 +29,17 @@ package mage.abilities.keyword;
 
 import java.util.UUID;
 import mage.MageObject;
+import mage.ObjectColor;
 import mage.abilities.StaticAbility;
 import mage.cards.Card;
-import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.FilterObject;
 import mage.filter.FilterPermanent;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
@@ -67,6 +69,18 @@ public class ProtectionAbility extends StaticAbility {
         this.auraIdNotToBeRemoved = ability.auraIdNotToBeRemoved;
     }
 
+    public static ProtectionAbility from(ObjectColor color) {
+        FilterObject filter = new FilterObject(color.getDescription());
+        filter.add(new ColorPredicate(color));
+        return new ProtectionAbility(filter);
+    }
+
+    public static ProtectionAbility from(ObjectColor color1, ObjectColor color2) {
+        FilterObject filter = new FilterObject(color1.getDescription() + " and from " + color2.getDescription());
+        filter.add(Predicates.or(new ColorPredicate(color1), new ColorPredicate(color2)));
+        return new ProtectionAbility(filter);
+    }
+
     @Override
     public ProtectionAbility copy() {
         return new ProtectionAbility(this);
@@ -75,7 +89,7 @@ public class ProtectionAbility extends StaticAbility {
     @Override
     public String getRule() {
 
-        return "Protection from " + filter.getMessage() + (removeAuras ? "" : ". This effect doesn't remove auras.");
+        return "protection from " + filter.getMessage() + (removeAuras ? "" : ". This effect doesn't remove auras.");
     }
 
     public boolean canTarget(MageObject source, Game game) {
@@ -97,10 +111,10 @@ public class ProtectionAbility extends StaticAbility {
                 return !filter.match(source, game);
             }
             // Problem here is that for the check if a player can play a Spell, the source
-            // object is still a card and not a spell yet. So retunr only if the source object can't be a spell
-            // otherwise the following FilterObject check will be appied
+            // object is still a card and not a spell yet. So return only if the source object can't be a spell
+            // otherwise the following FilterObject check will be applied
             if (source instanceof StackObject
-                    || (!source.getCardType().contains(CardType.INSTANT) && !source.getCardType().contains(CardType.SORCERY))) {
+                    || (!source.isInstant() && !source.isSorcery())) {
                 return true;
             }
         }

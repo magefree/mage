@@ -44,9 +44,9 @@ public class TransformAbility extends SimpleStaticAbility {
     public static final String NO_SPELLS_TRANSFORM_RULE = "At the beginning of each upkeep, if no spells were cast last turn, transform {this}.";
     public static final String TWO_OR_MORE_SPELLS_TRANSFORM_RULE = "At the beginning of each upkeep, if a player cast two or more spells last turn, transform {this}.";
 
-    // this state value controlls if a permanent enters the battlefield already transformed 
+    // this state value controlls if a permanent enters the battlefield already transformed
     public static final String VALUE_KEY_ENTER_TRANSFORMED = "EnterTransformed";
-    
+
     public TransformAbility() {
         super(Zone.BATTLEFIELD, new TransformEffect());
     }
@@ -77,15 +77,15 @@ public class TransformAbility extends SimpleStaticAbility {
         permanent.getManaCost().add(sourceCard.getManaCost());
         permanent.getCardType().clear();
         for (CardType type : sourceCard.getCardType()) {
-            permanent.getCardType().add(type);
+            permanent.addCardType(type);
         }
-        permanent.getSubtype().clear();
-        for (String type : sourceCard.getSubtype()) {
-            permanent.getSubtype().add(type);
+        permanent.getSubtype(game).clear();
+        for (SubType type : sourceCard.getSubtype(game)) {
+            permanent.getSubtype(game).add(type);
         }
-        permanent.getSupertype().clear();
-        for (String type : sourceCard.getSupertype()) {
-            permanent.getSupertype().add(type);
+        permanent.getSuperType().clear();
+        for (SuperType type : sourceCard.getSuperType()) {
+            permanent.addSuperType(type);
         }
         permanent.setExpansionSetCode(sourceCard.getExpansionSetCode());
         permanent.getAbilities().clear();
@@ -94,6 +94,7 @@ public class TransformAbility extends SimpleStaticAbility {
         }
         permanent.getPower().setValue(sourceCard.getPower().getValue());
         permanent.getToughness().setValue(sourceCard.getToughness().getValue());
+        permanent.setTransformable(sourceCard.isTransformable());
     }
 }
 

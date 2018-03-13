@@ -37,7 +37,6 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class DiesTriggeredAbility extends ZoneChangeTriggeredAbility {
@@ -58,18 +57,26 @@ public class DiesTriggeredAbility extends ZoneChangeTriggeredAbility {
     public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
         // check it was previously on battlefield
         Permanent before = ((ZoneChangeEvent) event).getTarget();
+        if (before == null) {
+            return false;
+        }
         if (!(before instanceof PermanentToken) && !this.hasSourceObjectAbility(game, before, event)) {
             return false;
         }
         // check now it is in graveyard
-        Zone after = game.getState().getZone(sourceId);
-        return before != null && after != null && Zone.GRAVEYARD.match(after);
+        if (before.getZoneChangeCounter(game) + 1 == game.getState().getZoneChangeCounter(sourceId)) {
+            Zone after = game.getState().getZone(sourceId);
+            return after != null && Zone.GRAVEYARD.match(after);
+        } else {
+            // Already moved to another zone, so guess it's ok
+            return true;
+        }
     }
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
         if (super.checkEventType(event, game)) {
-            return ((ZoneChangeEvent) event).getFromZone().equals(Zone.BATTLEFIELD) && ((ZoneChangeEvent) event).getToZone().equals(Zone.GRAVEYARD);
+            return ((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD && ((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD;
         }
         return false;
     }
@@ -83,7 +90,7 @@ public class DiesTriggeredAbility extends ZoneChangeTriggeredAbility {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (super.checkTrigger(event, game)) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getTarget().canTransform()) {
+            if (zEvent.getTarget().isTransformable()) {
                 if (!zEvent.getTarget().getAbilities().contains(this)) {
                     return false;
                 }

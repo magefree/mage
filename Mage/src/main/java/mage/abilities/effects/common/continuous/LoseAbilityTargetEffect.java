@@ -27,7 +27,9 @@
  */
 package mage.abilities.effects.common.continuous;
 
+import java.util.Iterator;
 import mage.abilities.Ability;
+import mage.abilities.MageSingleton;
 import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.Duration;
@@ -69,8 +71,17 @@ public class LoseAbilityTargetEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (permanent != null) {
-            while (permanent.getAbilities().contains(ability)) {
-                permanent.getAbilities().remove(ability);
+            if (ability instanceof MageSingleton) {
+                while (permanent.getAbilities().contains(ability)) {
+                    permanent.getAbilities().remove(ability);
+                }
+            } else {
+                for (Iterator<Ability> iter = permanent.getAbilities().iterator(); iter.hasNext();) {
+                    Ability ab = iter.next();
+                    if (ab.getClass().equals(ability.getClass())) {
+                        iter.remove();
+                    }
+                }
             }
         }
         return true;
@@ -93,7 +104,7 @@ public class LoseAbilityTargetEffect extends ContinuousEffectImpl {
         }
         sb.append(ability.getRule());
         if (!duration.toString().isEmpty()) {
-            sb.append(" ").append(duration.toString());
+            sb.append(' ').append(duration.toString());
         }
         return sb.toString();
     }

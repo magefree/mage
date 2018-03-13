@@ -38,14 +38,14 @@ import mage.constants.Zone;
  */
 public class TrampleAbility extends StaticAbility implements MageSingleton {
 
-    private static final TrampleAbility fINSTANCE = new TrampleAbility();
+    private static final TrampleAbility instance = new TrampleAbility();
 
     private Object readResolve() throws ObjectStreamException {
-        return fINSTANCE;
+        return instance;
     }
 
     public static TrampleAbility getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private TrampleAbility() {
@@ -59,7 +59,7 @@ public class TrampleAbility extends StaticAbility implements MageSingleton {
 
     @Override
     public TrampleAbility copy() {
-        return fINSTANCE;
+        return instance;
     }
 
 }

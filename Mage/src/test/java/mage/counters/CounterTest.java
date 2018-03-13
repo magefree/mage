@@ -1,9 +1,10 @@
 package mage.counters;
 
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import java.util.Objects;
 
 /**
  * Custom unit tests for {@link Counter}
@@ -17,20 +18,6 @@ public class CounterTest {
         counter = new Counter("test", 1);
     }
 
-
-    @Test
-    public void shouldIncreaseCounter() {
-        // given
-
-        // when
-        counter.increase();
-
-        // then
-        assertEquals(2, counter.getCount());
-        assertEquals("test", counter.getName());
-    }
-
-
     @Test
     public void shouldAddMana() {
         // given
@@ -42,37 +29,9 @@ public class CounterTest {
         assertEquals(6, counter.getCount());
     }
 
-
-    @Test
-    public void shouldDecreaseCounter() {
-        // given
-
-
-        // when
-        counter.decrease();
-
-        // then
-        assertEquals(0, counter.getCount());
-    }
-
-
-    @Test
-    public void shouldNotDecreaseToLessThanZero() {
-        // given
-
-        // when
-        counter.decrease();
-        counter.decrease();
-
-        // then
-        assertEquals(0, counter.getCount());
-    }
-
-
     @Test
     public void shouldRemoveCounters() {
         // given
-
 
         // when
         counter.remove(1);
@@ -80,7 +39,6 @@ public class CounterTest {
         // then
         assertEquals(0, counter.getCount());
     }
-
 
     @Test
     public void shouldNotRemoveMoreCountersThanAvailable() {
@@ -93,7 +51,6 @@ public class CounterTest {
         assertEquals(0, counter.getCount());
     }
 
-
     @Test
     public void shouldReturnCopy() {
         // given
@@ -103,9 +60,8 @@ public class CounterTest {
 
         // then
         assertEquals(copy, counter);
-        assertFalse(copy == counter);
+        assertNotSame(copy, counter);
     }
-
 
     @Test
     public void shouldCreateCounterFromCounter() {
@@ -119,11 +75,9 @@ public class CounterTest {
         assertEquals("test", copy.getName());
     }
 
-
     @Test
     public void shouldCreatDefaultCounter() {
         // given
-
 
         // when
         Counter defaultCounter = new Counter("default");

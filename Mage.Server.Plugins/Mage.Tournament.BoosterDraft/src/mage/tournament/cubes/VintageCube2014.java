@@ -43,7 +43,7 @@ public class VintageCube2014 extends DraftCube {
         cubeCards.add(new CardIdentity("Accorder Paladin", ""));
         cubeCards.add(new CardIdentity("Acidic Slime", ""));
         cubeCards.add(new CardIdentity("Adarkar Wastes", ""));
-        cubeCards.add(new CardIdentity("AEther Vial", ""));
+        cubeCards.add(new CardIdentity("Aether Vial", ""));
         cubeCards.add(new CardIdentity("Ajani Goldmane", ""));
         cubeCards.add(new CardIdentity("Ajani Vengeant", ""));
         cubeCards.add(new CardIdentity("Ajani, Caller of the Pride", ""));

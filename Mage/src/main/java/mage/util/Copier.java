@@ -64,11 +64,8 @@ public class Copier<T> {
             ObjectInputStream in = new CopierObjectInputStream(loader, fbos.getInputStream());
             copy = (T) in.readObject();
         }
-        catch(IOException e) {
+        catch(IOException | ClassNotFoundException e) {
             e.printStackTrace();
-        }
-        catch(ClassNotFoundException cnfe) {
-            cnfe.printStackTrace();
         }
         return copy;
 
@@ -99,11 +96,8 @@ public class Copier<T> {
         try (ObjectInputStream in = new CopierObjectInputStream(loader, new GZIPInputStream(new ByteArrayInputStream(buffer)))) {
             copy = (T) in.readObject();
         }
-        catch(IOException e) {
+        catch(IOException | ClassNotFoundException e) {
             e.printStackTrace();
-        }
-        catch(ClassNotFoundException cnfe) {
-            cnfe.printStackTrace();
         }
         return copy;
     }

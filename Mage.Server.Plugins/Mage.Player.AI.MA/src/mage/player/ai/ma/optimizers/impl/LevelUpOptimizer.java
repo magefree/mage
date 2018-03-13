@@ -30,7 +30,7 @@ public class LevelUpOptimizer extends BaseTreeOptimizer {
                 if (permanent != null && permanent instanceof PermanentCard) {
                     PermanentCard leveler = (PermanentCard) permanent;
                     // check already existing Level counters and compare to maximum that make sense
-                    if (permanent.getCounters().getCount(CounterType.LEVEL) >= leveler.getMaxLevelCounters()) {
+                    if (permanent.getCounters(game).getCount(CounterType.LEVEL) >= leveler.getMaxLevelCounters()) {
                         removeAbility(ability);
                     }
                 }

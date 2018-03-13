@@ -53,16 +53,16 @@ public class PutPermanentOnBattlefieldEffect extends OneShotEffect {
         } else {
             player = game.getPlayer(source.getControllerId());
         }
-        String choiceText = "Put " + filter.getMessage() + " from your hand onto the battlefield?";
-        if (player == null || !player.chooseUse(Outcome.PutCardInPlay, choiceText, source, game)) {
+        if (player == null) {
             return false;
         }
-
-        TargetCardInHand target = new TargetCardInHand(filter);
-        if (player.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
-            Card card = game.getCard(target.getFirstTarget());
-            if (card != null) {
-                return player.moveCards(card, Zone.BATTLEFIELD, source, game);
+        if (player.chooseUse(Outcome.PutCardInPlay, "Put " + filter.getMessage() + " from your hand onto the battlefield?", source, game)) {
+            TargetCardInHand target = new TargetCardInHand(filter);
+            if (player.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
+                Card card = game.getCard(target.getFirstTarget());
+                if (card != null) {
+                    return player.moveCards(card, Zone.BATTLEFIELD, source, game);
+                }
             }
         }
         return true;

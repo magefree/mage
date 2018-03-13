@@ -1,6 +1,5 @@
 package org.mage.test.cards.copy;
 
-import mage.constants.CardType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.filter.Filter;
@@ -42,7 +41,7 @@ public class ProgenitorMimicTest extends CardTestPlayerBase {
         int nonTokens = 0;
         for (Permanent permanent : currentGame.getBattlefield().getAllPermanents()) {
             if (permanent.getControllerId().equals(playerB.getId())) {
-                if (permanent.getCardType().contains(CardType.CREATURE)) {
+                if (permanent.isCreature()) {
                     if (permanent instanceof PermanentToken) {
                         tokens++;
                     } else {
@@ -122,7 +121,7 @@ public class ProgenitorMimicTest extends CardTestPlayerBase {
         int nonTokens = 0;
         for (Permanent permanent : currentGame.getBattlefield().getAllPermanents()) {
             if (permanent.getControllerId().equals(playerB.getId())) {
-                if (permanent.getCardType().contains(CardType.CREATURE)) {
+                if (permanent.isCreature()) {
                     if (permanent instanceof PermanentToken) {
                         tokens++;
                     } else {

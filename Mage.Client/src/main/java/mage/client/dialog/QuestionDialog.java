@@ -75,18 +75,10 @@ public class QuestionDialog extends MageDialog {
         lblQuestion.setText("question");
 
         btnNo.setText("No");
-        btnNo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNoActionPerformed(evt);
-            }
-        });
+        btnNo.addActionListener(evt -> btnNoActionPerformed(evt));
 
         btnYes.setText("Yes");
-        btnYes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnYesActionPerformed(evt);
-            }
-        });
+        btnYes.addActionListener(evt -> btnYesActionPerformed(evt));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

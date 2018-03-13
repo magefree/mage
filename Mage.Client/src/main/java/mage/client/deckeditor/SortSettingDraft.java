@@ -36,10 +36,10 @@ import mage.client.dialog.PreferencesDialog;
  */
 public class SortSettingDraft extends SortSetting {
 
-    private final static SortSettingDraft fInstance = new SortSettingDraft();
+    private final static SortSettingDraft instance = new SortSettingDraft();
 
     public static SortSettingDraft getInstance() {
-        return fInstance;
+        return instance;
     }
 
     private SortSettingDraft() {

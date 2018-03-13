@@ -71,7 +71,7 @@ public class GainAbilityTargetEffect extends ContinuousEffectImpl {
 
     public GainAbilityTargetEffect(Ability ability, Duration duration, String rule, boolean onCard, Layer layer, SubLayer subLayer) {
         super(duration, layer, subLayer,
-                ability.getEffects().size() > 0 ? ability.getEffects().get(0).getOutcome() : Outcome.AddAbility);
+                !ability.getEffects().isEmpty() ? ability.getEffects().get(0).getOutcome() : Outcome.AddAbility);
         this.ability = ability;
         staticText = rule;
         this.onCard = onCard;
@@ -111,7 +111,7 @@ public class GainAbilityTargetEffect extends ContinuousEffectImpl {
         if (super.isInactive(source, game)) {
             return true;
         }
-        if (durationPhaseStep != null && durationPhaseStep.equals(game.getPhase().getStep().getType())) {
+        if (durationPhaseStep != null && durationPhaseStep == game.getPhase().getStep().getType()) {
             if (!sameStep && game.getActivePlayerId().equals(durationPlayerId) || game.getPlayer(durationPlayerId).hasReachedNextTurnAfterLeaving()) {
                 return true;
             }
@@ -137,7 +137,7 @@ public class GainAbilityTargetEffect extends ContinuousEffectImpl {
                     affectedTargets++;
                 }
             }
-            if (duration.equals(Duration.OneUse)) {
+            if (duration == Duration.OneUse) {
                 discard();
             }
         } else {
@@ -149,7 +149,7 @@ public class GainAbilityTargetEffect extends ContinuousEffectImpl {
                 }
             }
         }
-        if (duration.equals(Duration.Custom) && affectedTargets == 0) {
+        if (duration == Duration.Custom && affectedTargets == 0) {
             this.discard();
         }
         return affectedTargets > 0;
@@ -162,9 +162,11 @@ public class GainAbilityTargetEffect extends ContinuousEffectImpl {
         }
         StringBuilder sb = new StringBuilder();
         Target target = mode.getTargets().get(0);
-        if (target.getMaxNumberOfTargets() > 1) {
+        if (target.getMaxNumberOfTargets() == Integer.MAX_VALUE) {
+            sb.append("any number of target ").append(target.getTargetName()).append(" gain ");
+        } else if (target.getMaxNumberOfTargets() > 1) {
             if (target.getNumberOfTargets() < target.getMaxNumberOfTargets()) {
-                sb.append("Up to");
+                sb.append("up to ");
             }
             sb.append(target.getMaxNumberOfTargets()).append(" target ").append(target.getTargetName()).append(" gain ");
         } else {
@@ -178,7 +180,7 @@ public class GainAbilityTargetEffect extends ContinuousEffectImpl {
         if (durationPhaseStep != null) {
             sb.append(" until your next ").append(durationPhaseStep.toString().toLowerCase(Locale.ENGLISH));
         } else if (!duration.toString().isEmpty()) {
-            sb.append(" ").append(duration.toString());
+            sb.append(' ').append(duration.toString());
         }
         return sb.toString();
     }

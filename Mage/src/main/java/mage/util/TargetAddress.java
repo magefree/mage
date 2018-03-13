@@ -42,9 +42,9 @@ import mage.target.Target;
  */
 public class TargetAddress {
 
-    protected int spellAbilityIndex;
-    protected UUID mode;
-    protected int targetIndex;
+    protected final int spellAbilityIndex;
+    protected final UUID mode;
+    protected final int targetIndex;
 
     public TargetAddress(int spellAbilityIndex, UUID mode, int targetIndex) {
         this.spellAbilityIndex = spellAbilityIndex;
@@ -68,9 +68,9 @@ public class TargetAddress {
 
     protected static class TargetAddressIterator implements Iterator<TargetAddress> {
 
-        protected Iterator<SpellAbility> spellAbilityIterator;
+        protected final Iterator<SpellAbility> spellAbilityIterator;
         protected Integer lastSpellAbilityIndex = null;
-        protected Iterator<Mode> modeIterator = null;
+        protected Iterator<UUID> modeIterator = null;
         protected Modes modes = null;
         protected UUID lastMode = null;
         protected Iterator<Target> targetIterator = null;
@@ -127,7 +127,7 @@ public class TargetAddress {
                 }
 
                 if (modeIterator != null && modeIterator.hasNext()) {
-                    lastMode = modeIterator.next().getId();
+                    lastMode = modeIterator.next();
                     targetIterator = modes.get(lastMode).getTargets().iterator();
                 } else {
                     lastMode = null;

@@ -1,22 +1,26 @@
 package org.mage.test.sets;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import mage.cards.Card;
+import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardScanner;
 import mage.sets.FateReforged;
 import mage.sets.MastersEditionII;
 import mage.sets.MastersEditionIV;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mage.test.serverside.base.MageTestBase;
 
 /**
  *
- * @author nigelzor
+ * @author nigelzor, JayDi85
  */
 public class BoosterGenerationTest extends MageTestBase {
 
@@ -56,15 +60,43 @@ public class BoosterGenerationTest extends MageTestBase {
     }
 
     @Test
-    public void testMastersEditionIV() {
+    public void testMastersEditionIV_UrzaSpecialLandsList() {
+
+        List<String> needUrzaList = Arrays.asList(
+                "Urza's Mine",
+                "Urza's Power Plant",
+                "Urza's Tower"
+        );
+
+        List<CardInfo> setOrzaList = MastersEditionIV.getInstance().getSpecialLand();
+        Assert.assertEquals("Urza special lands must have 4 variation for each of 3 card", 3 * 4, setOrzaList.size());
+
+        List<String> foundedUrzaList = new ArrayList<>();
+        for (CardInfo cardInfo: setOrzaList) {
+            Assert.assertTrue("card " + cardInfo.getName() + " must be in urza's list", needUrzaList.contains(cardInfo.getName()));
+            foundedUrzaList.add(cardInfo.getName());
+        }
+
+        for (String needName: needUrzaList) {
+            Assert.assertTrue("can't find need card " + needName + " in special land list", foundedUrzaList.contains(needName));
+        }
+    }
+
+    @Test
+    public void testMastersEditionIV_UrzaSpecialLandInBoosters() {
+        // ME4 replace all basic lands with special (1 per booster)
+        // https://mtg.gamepedia.com/Masters_Edition_IV
         List<String> urzaLand = Arrays.asList(
                 "Urza's Mine",
                 "Urza's Power Plant",
                 "Urza's Tower"
         );
-        List<Card> booster = MastersEditionIV.getInstance().createBooster();
-        assertTrue(str(booster), contains(booster, urzaLand, "ME4"));
-        assertFalse(str(booster), contains(booster, basics, null));
+
+        for(int i = 1; i <= 5; i++) {
+            List<Card> booster = MastersEditionIV.getInstance().createBooster();
+            assertTrue(str(booster), contains(booster, urzaLand, "ME4"));
+            assertFalse(str(booster), contains(booster, basics, null));
+        }
     }
 
     private static String str(List<Card> cards) {
@@ -77,26 +109,19 @@ public class BoosterGenerationTest extends MageTestBase {
                 sb.append(", ");
             }
         }
-        sb.append("] (").append(cards.size()).append(")");
+        sb.append("] (").append(cards.size()).append(')');
         return sb.toString();
     }
 
     private static boolean contains(List<Card> cards, List<String> names, String code) {
-        for (String name : names) {
-            if (contains(cards, name, code)) {
-                return true;
-            }
-        }
-        return false;
+        return names.stream().anyMatch((name) -> (contains(cards, name, code)));
     }
 
     private static boolean contains(List<Card> cards, String name, String code) {
-        for (Card card : cards) {
-            if (card.getName().equals(name) && (code == null || card.getExpansionSetCode().equals(code))) {
-                return true;
-            }
-        }
-        return false;
+        return cards.stream().anyMatch((card)
+                -> (card.getName().equals(name)
+                && (code == null || card.getExpansionSetCode().equals(code)))
+        );
     }
 
 }

@@ -27,7 +27,6 @@
  */
 package org.mage.test.cards.abilities.keywords;
 
-import mage.constants.CardType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -209,8 +208,8 @@ public class TransformTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Startled Awake", 0);
         assertPermanentCount(playerA, "Persistent Nightmare", 1); // Night-side card of Startled Awake
         Permanent nightmare = getPermanent("Persistent Nightmare", playerA);
-        Assert.assertTrue("Has to have creature card type", nightmare.getCardType().contains(CardType.CREATURE));
-        Assert.assertFalse("Has not to have sorcery card type", nightmare.getCardType().contains(CardType.SORCERY));
+        Assert.assertTrue("Has to have creature card type", nightmare.isCreature());
+        Assert.assertFalse("Has not to have sorcery card type", nightmare.isSorcery());
     }
 
     /**
@@ -245,4 +244,148 @@ public class TransformTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerB, "Lambholt Pacifist", 1);
     }
+
+    /**
+     * Mirror Mockery copies the front face of a Transformed card rather than
+     * the current face.
+     *
+     * It's worth pointing out that my opponent cast Mirror Mockery the previous
+     * turn - after it had transformed. I should have included the part of the
+     * log that showed that Mirror Mockery was applied to the Unimpeded
+     * Trespasser.
+     */
+    @Test
+    public void testTransformCopyrnansformed() {
+        // Skulk (This creature can't be blocked by creatures with greater power.)
+        // When Uninvited Geist deals combat damage to a player, transform it.
+        addCard(Zone.BATTLEFIELD, playerA, "Uninvited Geist"); // Creature 2/2 {2}{U}
+        // Transformed side: Unimpeded Trespasser - Creature 3/3
+        // Unimpeded Trespasser can't be blocked.
+
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
+        // Enchant creature
+        // Whenever enchanted creature attacks, you may put a token onto the battlefield that's a copy of that creature. Exile that token at the end of combat.
+        addCard(Zone.HAND, playerB, "Mirror Mockery"); // {1}{U}
+
+        attack(1, playerA, "Uninvited Geist");
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Mirror Mockery", "Unimpeded Trespasser");
+
+        attack(3, playerA, "Unimpeded Trespasser");
+
+        setStopAt(3, PhaseStep.COMBAT_DAMAGE);
+        execute();
+
+        assertLife(playerB, 15);
+
+        assertPermanentCount(playerB, "Mirror Mockery", 1);
+        assertPermanentCount(playerA, "Unimpeded Trespasser", 1);
+        assertPermanentCount(playerB, "Unimpeded Trespasser", 1);
+        assertPowerToughness(playerB, "Unimpeded Trespasser", 3, 3);
+    }
+
+    /**
+     * Archangel Avacyn still transforms after being bounced by an Eldrazi
+     * Displacer with her trigger on the stack.
+     */
+    @Test
+    public void testTransformArchangelAvacyn() {
+        // Flash, Flying, Vigilance
+        // When Archangel Avacyn enters the battlefield, creatures you control gain indestructible until end of turn.
+        // When a non-Angel creature you control dies, transform Archangel Avacyn at the beginning of the next upkeep.
+        addCard(Zone.BATTLEFIELD, playerA, "Archangel Avacyn"); // Creature 4/4
+        // Transformed side: Avacyn, the Purifier - Creature 6/5
+        // Flying
+        // When this creature transforms into Avacyn, the Purifier, it deals 3 damage to each other creature and each opponent.
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
+        addCard(Zone.HAND, playerA, "Lightning Bolt");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain");
+
+        // Devoid
+        // {2}{C}: Exile another target creature, then return it to the battlefield tapped under its owner's control.
+        addCard(Zone.BATTLEFIELD, playerB, "Eldrazi Displacer", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Wastes", 3);
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Silvercoat Lion");
+
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{2}{C}", "Archangel Avacyn", "Whenever a non-Angel creature you control dies");
+
+        setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertGraveyardCount(playerA, "Lightning Bolt", 1);
+        assertGraveyardCount(playerA, "Silvercoat Lion", 1);
+
+        assertPermanentCount(playerB, "Eldrazi Displacer", 1);
+        assertPermanentCount(playerA, "Avacyn, the Purifier", 0);
+        assertPermanentCount(playerA, "Archangel Avacyn", 1);
+    }
+
+    /**
+     * Cards that transform if no spells cast last turn should not transform if
+     * the cards were added on turn 1. This would happen with tests and cheat
+     * testing.
+     */
+    @Test
+    public void testNoSpellsCastLastTurnTransformDoesNotTriggerTurn1() {
+
+        // At the beginning of each upkeep, if no spells were cast last turn, transform Hinterland Logger.
+        addCard(Zone.BATTLEFIELD, playerA, "Hinterland Logger");
+
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, "Hinterland Logger", 1);
+    }
+
+    /**
+     * I had Huntmaster of the Fells in play. Opponent had Eldrazi Displacer.
+     * Huntmaster triggered to transform during my opponent's upkeep. While this
+     * was on stack, my opponent used Displacer's ability targeting Huntmaster.
+     * That ability resolved and Huntmaster still transformed like it never left
+     * the battlefield.
+     *
+     * http://www.slightlymagic.net/forum/viewtopic.php?f=70&t=20014&p=210533#p210513
+     *
+     * The transform effect on the stack should fizzle. The card brought back
+     * from Exile should be a new object unless I am interpreting the rules
+     * incorrectly. The returned permanent uses the same GUID.
+     */
+    @Test
+    public void testHuntmaster() {
+        // Whenever this creature enters the battlefield or transforms into Huntmaster of the Fells, create a 2/2 green Wolf creature token and you gain 2 life.
+        // At the beginning of each upkeep, if no spells were cast last turn, transform Huntmaster of the Fells.
+        // Ravager of the Fells
+        // Whenever this creature transforms into Ravager of the Fells, it deals 2 damage to target opponent and 2 damage to up to one target creature that player controls.
+        // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Ravager of the Fells.
+        addCard(Zone.HAND, playerA, "Huntmaster of the Fells"); // Creature {2}{R}{G}
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+
+        // Devoid
+        // {2}{C}: Exile another target creature, then return it to the battlefield tapped under its owner's control.
+        addCard(Zone.HAND, playerB, "Eldrazi Displacer", 1); // Creature {2}{W}
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 2);
+        addCard(Zone.BATTLEFIELD, playerB, "Wastes", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Huntmaster of the Fells");
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Eldrazi Displacer");
+
+        activateAbility(4, PhaseStep.UPKEEP, playerB, "{2}{C}", "Huntmaster of the Fells", "At the beginning of each upkeep");
+
+        setStopAt(4, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertLife(playerA, 24);
+        assertPermanentCount(playerA, "Wolf", 2);
+
+        assertPermanentCount(playerB, "Eldrazi Displacer", 1);
+
+        assertPermanentCount(playerA, "Ravager of the Fells", 0);
+        assertPermanentCount(playerA, "Huntmaster of the Fells", 1);
+        assertTappedCount("Plains", true, 2);
+        assertTappedCount("Wastes", true, 1);
+
+    }
+
 }

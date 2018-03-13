@@ -35,7 +35,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- * 
+ *
  * @author nantuko
  */
 public class SourceHasCounterCondition implements Condition {
@@ -76,18 +76,32 @@ public class SourceHasCounterCondition implements Condition {
             if (card != null) {
                 count = card.getCounters(game).getCount(counterType);
             } else {
-                count = permanent.getCounters().getCount(counterType);
+                count = permanent.getCounters(game).getCount(counterType);
             }
             if (to == Integer.MAX_VALUE) {
                 return count >= from;
             }
             return count >= from && count <= to;
-        } else { // single compare (lte)
+        } else // single compare (lte)
+        {
             if (card != null) {
                 return card.getCounters(game).getCount(counterType) >= amount;
-            } else  {
-                return permanent.getCounters().getCount(counterType) >= amount;
+            } else {
+                return permanent.getCounters(game).getCount(counterType) >= amount;
             }
+        }
+    }
+
+    @Override
+    public String toString() {
+        if (from != -1) { //range compare
+            if (to == Integer.MAX_VALUE) {
+                return "{this} has equal to or more than " + from + " " + this.counterType.toString() + " counters";
+            }
+            return "{this} has between " + from + " and " + to + " " + this.counterType.toString() + " counters";
+        } else // single compare (lte)
+        {
+            return "{this} has equal or more than " + amount + " " + this.counterType.toString() + " counters";
         }
     }
 }

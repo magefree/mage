@@ -36,8 +36,8 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.constants.Zone;
 import mage.filter.Filter;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureOrPlayer;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -49,7 +49,7 @@ import mage.target.TargetAmount;
  */
 public class TargetCreatureOrPlayerAmount extends TargetAmount {
 
-    protected FilterCreatureOrPlayer filter;
+    protected final FilterCreatureOrPlayer filter;
 
     public TargetCreatureOrPlayerAmount(int amount) {
         // 107.1c If a rule or ability instructs a player to choose “any number,” that player may choose
@@ -84,10 +84,7 @@ public class TargetCreatureOrPlayerAmount extends TargetAmount {
             return filter.match(permanent, game);
         }
         Player player = game.getPlayer(objectId);
-        if (player != null) {
-            return filter.match(player, game);
-        }
-        return false;
+        return player != null && filter.match(player, game);
     }
 
     @Override
@@ -108,10 +105,7 @@ public class TargetCreatureOrPlayerAmount extends TargetAmount {
         if (permanent != null) {
             return filter.match(permanent, game);
         }
-        if (player != null) {
-            return filter.match(player, game);
-        }
-        return false;
+        return player != null && filter.match(player, game);
     }
 
     @Override
@@ -132,7 +126,7 @@ public class TargetCreatureOrPlayerAmount extends TargetAmount {
                 }
             }
         }
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), sourceControllerId, game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, sourceControllerId, game)) {
             if (permanent.canBeTargetedBy(targetSource, sourceControllerId, game) && filter.match(permanent, sourceId, sourceControllerId, game)) {
                 count++;
                 if (count >= this.minNumberOfTargets) {
@@ -155,7 +149,7 @@ public class TargetCreatureOrPlayerAmount extends TargetAmount {
                 }
             }
         }
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), sourceControllerId, game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, sourceControllerId, game)) {
             if (filter.match(permanent, null, sourceControllerId, game)) {
                 count++;
                 if (count >= this.minNumberOfTargets) {
@@ -176,7 +170,7 @@ public class TargetCreatureOrPlayerAmount extends TargetAmount {
                 possibleTargets.add(playerId);
             }
         }
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), sourceControllerId, game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, sourceControllerId, game)) {
             if (permanent.canBeTargetedBy(targetSource, sourceControllerId, game) && filter.match(permanent, sourceId, sourceControllerId, game)) {
                 possibleTargets.add(permanent.getId());
             }
@@ -193,7 +187,7 @@ public class TargetCreatureOrPlayerAmount extends TargetAmount {
                 possibleTargets.add(playerId);
             }
         }
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), sourceControllerId, game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, sourceControllerId, game)) {
             if (filter.match(permanent, null, sourceControllerId, game)) {
                 possibleTargets.add(permanent.getId());
             }
@@ -207,10 +201,10 @@ public class TargetCreatureOrPlayerAmount extends TargetAmount {
         for (UUID targetId : getTargets()) {
             Permanent permanent = game.getPermanent(targetId);
             if (permanent != null) {
-                sb.append(permanent.getLogName()).append("(").append(getTargetAmount(targetId)).append(") ");
+                sb.append(permanent.getLogName()).append('(').append(getTargetAmount(targetId)).append(") ");
             } else {
                 Player player = game.getPlayer(targetId);
-                sb.append(player.getLogName()).append("(").append(getTargetAmount(targetId)).append(") ");
+                sb.append(player.getLogName()).append('(').append(getTargetAmount(targetId)).append(") ");
             }
         }
         return sb.toString();

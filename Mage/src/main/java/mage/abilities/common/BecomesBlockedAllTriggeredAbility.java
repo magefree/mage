@@ -71,9 +71,7 @@ public class BecomesBlockedAllTriggeredAbility extends TriggeredAbilityImpl {
         Permanent permanent = game.getPermanent(event.getTargetId());
         if (permanent != null && filter.match(permanent, getSourceId(), getControllerId(), game)) {
             if (setTargetPointer) {
-                for (Effect effect : this.getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(event.getTargetId()));
-                }
+                this.getEffects().setTargetPointer(new FixedTarget(event.getTargetId()));
             }
             return true;
         }

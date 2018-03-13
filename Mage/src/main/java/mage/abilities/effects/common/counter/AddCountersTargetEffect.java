@@ -41,6 +41,7 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.Target;
 import mage.util.CardUtil;
 
 /**
@@ -95,13 +96,13 @@ public class AddCountersTargetEffect extends OneShotEffect {
                         newCounter.remove(newCounter.getCount());
                     }
                     newCounter.add(calculated);
-                    int before = permanent.getCounters().getCount(counter.getName());
-                    permanent.addCounters(newCounter, game);
-                    int numberAdded = permanent.getCounters().getCount(counter.getName()) - before;
+                    int before = permanent.getCounters(game).getCount(counter.getName());
+                    permanent.addCounters(newCounter, source, game);
+                    int numberAdded = permanent.getCounters(game).getCount(counter.getName()) - before;
                     affectedTargets++;
                     if (!game.isSimulation()) {
                         game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " puts "
-                                + numberAdded + " " + counter.getName().toLowerCase() + " counter on " + permanent.getLogName());
+                                + numberAdded + ' ' + counter.getName().toLowerCase() + " counter on " + permanent.getLogName());
                     }
                 } else if (player != null) {
                     Counter newCounter = counter.copy();
@@ -110,19 +111,19 @@ public class AddCountersTargetEffect extends OneShotEffect {
                     affectedTargets++;
                     if (!game.isSimulation()) {
                         game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " puts "
-                                + counter.getCount() + " " + counter.getName().toLowerCase() + " counter on " + player.getLogName());
+                                + counter.getCount() + ' ' + counter.getName().toLowerCase() + " counter on " + player.getLogName());
                     }
                 } else if (card != null) {
-                    card.addCounters(counter.getName(), counter.getCount(), game);
+                    card.addCounters(counter, source, game);
                     if (!game.isSimulation()) {
-                        game.informPlayers(new StringBuilder("Added ").append(counter.getCount()).append(" ").append(counter.getName())
+                        game.informPlayers(new StringBuilder("Added ").append(counter.getCount()).append(' ').append(counter.getName())
                                 .append(" counter to ").append(card.getName())
-                                .append(" (").append(card.getCounters(game).getCount(counter.getName())).append(")").toString());
+                                .append(" (").append(card.getCounters(game).getCount(counter.getName())).append(')').toString());
                     }
                     return true;
                 }
             }
-            return affectedTargets > 0;
+            return true;
         }
         return false;
     }
@@ -135,27 +136,35 @@ public class AddCountersTargetEffect extends OneShotEffect {
         StringBuilder sb = new StringBuilder();
         sb.append("put ");
         if (counter.getCount() > 1) {
-            sb.append(CardUtil.numberToText(counter.getCount())).append(" ");
+            sb.append(CardUtil.numberToText(counter.getCount())).append(' ');
         } else {
             sb.append("a ");
         }
         sb.append(counter.getName().toLowerCase()).append(" counter");
         if (counter.getCount() > 1) {
-            sb.append("s");
+            sb.append('s');
         }
         sb.append(" on ");
 
-        // TODO: add normal text infrastructure for target pointers
-        if (mode.getTargets().size() > 0) {
-            String targetName = mode.getTargets().get(0).getTargetName();
-            if (!targetName.startsWith("another")) {
-                sb.append("target ");
+        if (!mode.getTargets().isEmpty()) {
+            Target target = mode.getTargets().get(0);
+            if (target.getNumberOfTargets() == 0) {
+                sb.append("up to ");
             }
-            sb.append(targetName);
+
+            if (target.getMaxNumberOfTargets() > 1 || target.getNumberOfTargets() == 0) {
+                sb.append(target.getMaxNumberOfTargets()).append(" target ").append(target.getTargetName());
+            } else {
+                if (!target.getTargetName().startsWith("another")) {
+                    sb.append("target ");
+                }
+                sb.append(target.getTargetName());
+            }
         } else {
-            sb.append("it");
+            sb.append("that creature");
         }
-        if (amount.getMessage().length() > 0) {
+
+        if (!amount.getMessage().isEmpty()) {
             sb.append(" for each ").append(amount.getMessage());
         }
         return sb.toString();

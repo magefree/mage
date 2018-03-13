@@ -51,28 +51,25 @@ public class MageTextArea extends JEditorPane {
         text = text.replace("\r\n", "<div style='font-size:5pt'></div>");
 
         final String basicText = ManaSymbols.replaceSymbolsWithHTML(text, ManaSymbols.Type.DIALOG);
-        if (text.length() > 0) {
+        if (!text.isEmpty()) {
             buffer.append(basicText);
         }
 
         buffer.append("</b></center></body></html>");
 
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                String promptText = buffer.toString();
-                MageTextArea.super.setText(promptText);
-                // in case the text don't fit in the panel a tooltip with the text is added
-                if (panelWidth > 0 && MageTextArea.this.getPreferredSize().getWidth() > panelWidth) {
-                    String tooltip = "<html><center><body style='font-family:Dialog;font-size:"
-                            + GUISizeHelper.gameDialogAreaFontSizeBig
-                            + ";color: #FFFFFF'><p width='500'>" + basicText + "</p></body></html>";
-                    MageTextArea.super.setToolTipText(tooltip);
-                } else {
-                    MageTextArea.super.setToolTipText(null);
-                }
-                setCaretPosition(0);
+        SwingUtilities.invokeLater(() -> {
+            String promptText = buffer.toString();
+            MageTextArea.super.setText(promptText);
+            // in case the text don't fit in the panel a tooltip with the text is added
+            if (panelWidth > 0 && MageTextArea.this.getPreferredSize().getWidth() > panelWidth) {
+                String tooltip = "<html><center><body style='font-family:Dialog;font-size:"
+                        + GUISizeHelper.gameDialogAreaFontSizeBig
+                        + ";color: #FFFFFF'><p width='500'>" + basicText + "</p></body></html>";
+                MageTextArea.super.setToolTipText(tooltip);
+            } else {
+                MageTextArea.super.setToolTipText(null);
             }
+            setCaretPosition(0);
         });
     }
 }

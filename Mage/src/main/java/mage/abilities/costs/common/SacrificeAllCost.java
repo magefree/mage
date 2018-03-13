@@ -38,7 +38,6 @@ import mage.constants.AbilityType;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -56,17 +55,16 @@ public class SacrificeAllCost extends CostImpl {
 
     public SacrificeAllCost(final SacrificeAllCost cost) {
         super(cost);
-        for (Permanent permanent: cost.permanents) {
-            this.permanents.add(permanent.copy());
-        }
+        this.permanents.addAll(cost.permanents); // because this are already copied permanents, they can't change, so no copy again is needed
         this.filter = cost.filter.copy();
     }
 
     @Override
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, controllerId, game)) {
-            permanents.add(permanent.copy());
-            permanent.sacrifice(sourceId, game);
+            if (permanent.sacrifice(sourceId, game)) {
+                permanents.add(permanent.copy());
+            }
         }
         paid = true;
         return paid;
@@ -75,7 +73,7 @@ public class SacrificeAllCost extends CostImpl {
     @Override
     public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
         UUID activator = controllerId;
-        if (ability.getAbilityType().equals(AbilityType.ACTIVATED) || ability.getAbilityType().equals(AbilityType.SPECIAL_ACTION)) {
+        if (ability.getAbilityType() == AbilityType.ACTIVATED || ability.getAbilityType() == AbilityType.SPECIAL_ACTION) {
             if (((ActivatedAbilityImpl) ability).getActivatorId() != null) {
                 activator = ((ActivatedAbilityImpl) ability).getActivatorId();
             } else {
@@ -83,13 +81,13 @@ public class SacrificeAllCost extends CostImpl {
                 activator = controllerId;
             }
         }
-        
-        for (Permanent permanent :game.getBattlefield().getAllActivePermanents(filter, controllerId, game)) {
-        	if(!game.getPlayer(activator).canPaySacrificeCost(permanent, sourceId, controllerId, game)) {
-        		return false;
-        	}
+
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, controllerId, game)) {
+            if (!game.getPlayer(activator).canPaySacrificeCost(permanent, sourceId, controllerId, game)) {
+                return false;
+            }
         }
-        
+
         return true;
     }
 

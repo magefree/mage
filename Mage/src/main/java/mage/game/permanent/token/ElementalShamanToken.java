@@ -25,11 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.game.permanent.token;
 
+package mage.game.permanent.token;
+import java.util.ArrayList;
 import java.util.Arrays;
-import mage.constants.CardType;
+import java.util.List;
 import mage.MageInt;
+import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -37,13 +40,24 @@ import mage.MageInt;
  */
 public class ElementalShamanToken extends Token {
 
+    final static private List<String> tokenImageSets = new ArrayList<>();
+
+    static {
+        tokenImageSets.addAll(Arrays.asList("C15", "DD3JVC", "DD2", "LRW"));
+    }
+
     public ElementalShamanToken() {
+        this("LRW");
+    }
+
+    public ElementalShamanToken(String setCode) {
         super("Elemental Shaman", "3/1 red Elemental Shaman creature token");
-        availableImageSetCodes.addAll(Arrays.asList("LRW", "DD2"));
+        availableImageSetCodes = tokenImageSets;
+        setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.CREATURE);
         color.setRed(true);
-        subtype.add("Elemental");
-        subtype.add("Shaman");
+        subtype.add(SubType.ELEMENTAL);
+        subtype.add(SubType.SHAMAN);
         power = new MageInt(3);
         toughness = new MageInt(1);
     }

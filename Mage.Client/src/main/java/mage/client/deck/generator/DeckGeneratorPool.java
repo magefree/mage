@@ -32,6 +32,7 @@ import mage.cards.Card;
 import mage.cards.decks.Deck;
 import mage.cards.repository.CardInfo;
 import mage.constants.ColoredManaSymbol;
+import mage.util.RandomUtil;
 
 import java.util.*;
 
@@ -43,12 +44,12 @@ public class DeckGeneratorPool
 {
 
 
-    public static int DEFAULT_CREATURE_PERCENTAGE = 38;
-    public static int DEFAULT_NON_CREATURE_PERCENTAGE = 21;
-    public static int DEFAULT_LAND_PERCENTAGE = 41;
+    public static final int DEFAULT_CREATURE_PERCENTAGE = 38;
+    public static final int DEFAULT_NON_CREATURE_PERCENTAGE = 21;
+    public static final int DEFAULT_LAND_PERCENTAGE = 41;
 
     private final List<ColoredManaSymbol> allowedColors;
-    private boolean colorlessAllowed;
+    private final boolean colorlessAllowed;
     private final List<DeckGeneratorCMC.CMC> poolCMCs;
     private final int creatureCount;
     private final int nonCreatureCount;
@@ -57,14 +58,14 @@ public class DeckGeneratorPool
     private final int deckSize;
 
     // Count how many copies of the card exists in the deck to check we don't go over 4 copies (or 1 for singleton)
-    private Map<String, Integer> cardCounts = new HashMap<>();
+    private final Map<String, Integer> cardCounts = new HashMap<>();
     // If there is only a single color selected to generate a deck
     private boolean monoColored = false;
     // List of cards so far in the deck
-    private List<Card> deckCards = new ArrayList<>();
+    private final List<Card> deckCards = new ArrayList<>();
     // List of reserve cards found to fix up undersized decks
-    private List<Card> reserveSpells = new ArrayList<>();
-    private Deck deck;
+    private final List<Card> reserveSpells = new ArrayList<>();
+    private final Deck deck;
 
     /**
      * Creates a card pool with specified criterea used when generating a deck.
@@ -390,7 +391,6 @@ public class DeckGeneratorPool
      */
     private List<Card> getFixedSpells()
     {
-        Random random = new Random();
         int spellSize = deckCards.size();
         int nonLandSize = (deckSize - landCount);
 
@@ -409,7 +409,7 @@ public class DeckGeneratorPool
                     spellsToAdd.add(reserveSpells.get(i));
 
                 for (int i = spellsNeeded + 1; i < reserveSpells.size() - 1; i++) {
-                    int j = random.nextInt(i);
+                    int j = RandomUtil.nextInt(i);
                     Card randomCard = reserveSpells.get(j);
                     if (isValidSpellCard(randomCard) && j < spellsToAdd.size()) {
                         spellsToAdd.set(j, randomCard);
@@ -424,7 +424,7 @@ public class DeckGeneratorPool
         else if(spellSize > (deckSize - landCount)) {
             int spellsRemoved = (spellSize)-(deckSize-landCount);
             for(int i = 0; i < spellsRemoved; ++i) {
-                deckCards.remove(random.nextInt(deckCards.size()));
+                deckCards.remove(RandomUtil.nextInt(deckCards.size()));
             }
         }
 

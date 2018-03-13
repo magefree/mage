@@ -44,6 +44,7 @@ import mage.players.Player;
 public class DamagePlayersEffect extends OneShotEffect {
     private DynamicValue amount;
     private TargetController controller;
+    private String sourceName = "{source}";
 
     public DamagePlayersEffect(int amount) {
         this(Outcome.Damage, new StaticValue(amount));
@@ -51,6 +52,13 @@ public class DamagePlayersEffect extends OneShotEffect {
 
     public DamagePlayersEffect(int amount, TargetController controller) {
         this(Outcome.Damage, new StaticValue(amount), controller);
+    }
+
+    public DamagePlayersEffect(int amount, TargetController controller, String whoDealDamageName) {
+        this(Outcome.Damage, new StaticValue(amount), controller);
+
+        this.sourceName = whoDealDamageName;
+        setText(); // TODO: replace to @Override public String getText()
     }
 
     public DamagePlayersEffect(Outcome outcome, DynamicValue amount) {
@@ -69,6 +77,7 @@ public class DamagePlayersEffect extends OneShotEffect {
         super(effect);
         this.amount = effect.amount;
         this.controller = effect.controller;
+        this.sourceName = effect.sourceName;
     }
 
     @Override
@@ -103,7 +112,7 @@ public class DamagePlayersEffect extends OneShotEffect {
 
     private void setText()
     {
-        StringBuilder sb = new StringBuilder("{source} deals ").append(amount.toString());
+        StringBuilder sb = new StringBuilder().append(this.sourceName).append(" deals ").append(amount.toString());
         switch (controller) {
             case ANY:
                 sb.append(" damage to each player");

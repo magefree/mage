@@ -47,6 +47,7 @@ public class BoostEnchantedEffect extends ContinuousEffectImpl {
 
     private DynamicValue power;
     private DynamicValue toughness;
+    private boolean lockedIn = false;
 
     public BoostEnchantedEffect(int power, int toughness) {
         this(power, toughness, Duration.WhileOnBattlefield);
@@ -71,6 +72,7 @@ public class BoostEnchantedEffect extends ContinuousEffectImpl {
         super(effect);
         this.power = effect.power.copy();
         this.toughness = effect.toughness.copy();
+        this.lockedIn = effect.lockedIn;
     }
 
     @Override
@@ -81,6 +83,10 @@ public class BoostEnchantedEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
+        if (lockedIn) {
+            power = new StaticValue(power.calculate(game, source, this));
+            toughness = new StaticValue(toughness.calculate(game, source, this));
+        }
         if (affectedObjectsSet) {
             // Added boosts of activated or triggered abilities exist independent from the source they are created by
             // so a continuous effect for the permanent itself with the attachment is created
@@ -113,31 +119,48 @@ public class BoostEnchantedEffect extends ContinuousEffectImpl {
         return true;
     }
 
+    public void setLockedIn(boolean lockedIn) {
+        this.lockedIn = lockedIn;
+    }
+
     private void setText() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Enchanted creature gets ");
+        sb.append("enchanted creature gets ");
         String p = power.toString();
         if (!p.startsWith("-")) {
-            sb.append("+");
+            sb.append('+');
         }
-        sb.append(p).append("/");
+        sb.append(p).append('/');
         String t = toughness.toString();
         if (!t.startsWith("-")) {
             if (p.startsWith("-")) {
-                sb.append("-");
+                sb.append('-');
             } else {
-                sb.append("+");
+                sb.append('+');
             }
         }
         sb.append(t);
         if (duration != Duration.WhileOnBattlefield) {
-            sb.append(" ").append(duration.toString());
+            sb.append(' ').append(duration.toString());
         }
-        String message = power.getMessage();
-        if (message.length() > 0) {
-            sb.append(" for each ");
+        String message = null;
+        String fixedPart = null;
+        if (t.contains("X")) {
+            message = toughness.getMessage();
+            fixedPart = ", where X is ";
+        } else if (p.contains("X")) {
+            message = power.getMessage();
+            fixedPart = ", where X is ";
+        } else if (!power.getMessage().isEmpty()) {
+            message = power.getMessage();
+            fixedPart = " for each ";
+        } else if (!toughness.getMessage().isEmpty()) {
+            message = toughness.getMessage();
+            fixedPart = " for each ";
         }
-        sb.append(message);
+        if (message != null && !message.isEmpty() && fixedPart != null) {
+            sb.append(fixedPart).append(message);
+        }
         staticText = sb.toString();
     }
 

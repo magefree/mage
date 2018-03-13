@@ -10,14 +10,9 @@ import mage.game.permanent.Permanent;
 /**
  * Created by glerman on 20/6/15.
  */
-public class LastTimeCounterRemovedCondition implements Condition{
+public enum LastTimeCounterRemovedCondition implements Condition{
 
-
-  private static final LastTimeCounterRemovedCondition fInstance = new LastTimeCounterRemovedCondition();
-
-  public static LastTimeCounterRemovedCondition getInstance() {
-    return fInstance;
-  }
+instance;
 
   @Override
   public boolean apply(Game game, Ability source) {
@@ -26,7 +21,7 @@ public class LastTimeCounterRemovedCondition implements Condition{
       permanent = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
     }
     if (permanent != null) {
-      final int timeCounters = permanent.getCounters().getCount(CounterType.TIME);
+      final int timeCounters = permanent.getCounters(game).getCount(CounterType.TIME);
       return timeCounters == 0;
     } else {
       return false;

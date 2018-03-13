@@ -43,7 +43,7 @@ public class EnchantedPredicate implements Predicate<Permanent> {
     public boolean apply(Permanent input, Game game) {
         for (UUID attachmentId : input.getAttachments()) {
             Permanent attachment = game.getPermanent(attachmentId);
-            if (attachment != null && attachment.getCardType().contains(CardType.ENCHANTMENT)) {
+            if (attachment != null && attachment.isEnchantment()) {
                 return true;
             }
         }

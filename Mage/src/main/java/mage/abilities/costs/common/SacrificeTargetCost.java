@@ -53,7 +53,7 @@ public class SacrificeTargetCost extends CostImpl {
         target.setNotTarget(true); // sacrifice is never targeted
         this.text = "sacrifice "
                 + ((target.getNumberOfTargets() != 1 || (target.getTargetName().startsWith("an") || target.getTargetName().startsWith("a ")))
-                ? "" : "a ") + target.getTargetName();
+                ? "" : (target.getTargetName().startsWith("artifact") ? "an " : "a ")) + target.getTargetName();
         target.setTargetName(target.getTargetName() + " (to sacrifice)");
     }
 
@@ -71,7 +71,7 @@ public class SacrificeTargetCost extends CostImpl {
     @Override
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
         UUID activator = controllerId;
-        if (ability.getAbilityType().equals(AbilityType.ACTIVATED) || ability.getAbilityType().equals(AbilityType.SPECIAL_ACTION)) {
+        if (ability.getAbilityType() == AbilityType.ACTIVATED || ability.getAbilityType() == AbilityType.SPECIAL_ACTION) {
             activator = ((ActivatedAbilityImpl) ability).getActivatorId();
         }
         if (targets.choose(Outcome.Sacrifice, activator, sourceId, game)) {
@@ -93,7 +93,7 @@ public class SacrificeTargetCost extends CostImpl {
     @Override
     public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
         UUID activator = controllerId;
-        if (ability.getAbilityType().equals(AbilityType.ACTIVATED) || ability.getAbilityType().equals(AbilityType.SPECIAL_ACTION)) {
+        if (ability.getAbilityType() == AbilityType.ACTIVATED || ability.getAbilityType() == AbilityType.SPECIAL_ACTION) {
             if (((ActivatedAbilityImpl) ability).getActivatorId() != null) {
                 activator = ((ActivatedAbilityImpl) ability).getActivatorId();
             } else {

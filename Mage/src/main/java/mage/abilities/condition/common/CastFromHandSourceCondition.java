@@ -13,7 +13,9 @@ import mage.watchers.common.CastFromHandWatcher;
  *
  * @author Loki
  */
-public class CastFromHandSourceCondition implements Condition {
+public enum CastFromHandSourceCondition implements Condition {
+
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
@@ -31,7 +33,7 @@ public class CastFromHandSourceCondition implements Condition {
                     return false;
                 }
             }
-            CastFromHandWatcher watcher = (CastFromHandWatcher) game.getState().getWatchers().get(CastFromHandWatcher.class.getName());
+            CastFromHandWatcher watcher = (CastFromHandWatcher) game.getState().getWatchers().get(CastFromHandWatcher.class.getSimpleName());
             if (watcher != null && watcher.spellWasCastFromHand(source.getSourceId())) {
                 return true;
             }

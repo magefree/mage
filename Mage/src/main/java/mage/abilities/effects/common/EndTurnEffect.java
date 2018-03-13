@@ -48,7 +48,7 @@ public class EndTurnEffect extends OneShotEffect {
         if (!game.isSimulation()) {
             game.informPlayers("The current turn ends");
         }
-        return game.endTurn();
+        return game.endTurn(source);
     }
 
     @Override

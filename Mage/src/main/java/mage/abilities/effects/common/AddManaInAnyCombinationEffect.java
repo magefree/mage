@@ -134,7 +134,7 @@ public class AddManaInAnyCombinationEffect extends ManaEffect {
                 if (i > 1) {
                     sb.append(" and/or ");
                 }
-                sb.append("{").append(coloredManaSymbol.toString()).append("}");
+                sb.append('{').append(coloredManaSymbol.toString()).append('}');
             }
         }
         sb.append(" to your mana pool");

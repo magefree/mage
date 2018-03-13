@@ -1,0 +1,86 @@
+1 [CMD:151] Elvish Aberration
+1 [CMD:272] Evolving Wilds
+1 [CMD:63] Spell Crumple
+1 [CMD:150] Deadwood Treefolk
+1 [CMD:197] Electrolyze
+1 [CMD:153] Explosive Vegetation
+1 [CMD:274] Fungal Reaches
+1 [CMD:196] Edric, Spymaster of Trest
+1 [CMD:155] Fierce Empath
+1 [CMD:199] Firespout
+1 [CMD:232] Valley Rannet
+1 [CMD:276] Gruul Turf
+1 [CMD:198] Fire // Ice
+1 [CMD:110] Avatar of Fury
+1 [CMD:68] Vow of Flight
+2 [CMD:311] Mountain
+1 [CMD:157] Garruk Wildspeaker
+1 [CMD:113] Chain Reaction
+1 [CMD:278] Izzet Boilerworks
+1 [CMD:233] Vengeful Rebirth
+1 [CMD:277] Homeward Path
+2 [CMD:313] Mountain
+1 [CMD:115] Chartooth Cougar
+2 [CMD:312] Mountain
+4 [CMD:315] Forest
+1 [CMD:65] Trench Gorger
+2 [CMD:314] Mountain
+3 [CMD:317] Forest
+1 [CMD:119] Disaster Radius
+1 [CMD:118] Death by Dragons
+3 [CMD:316] Forest
+1 [CMD:190] Colossal Might
+1 [CMD:181] Animar, Soul of Elements
+1 [CMD:261] Sol Ring
+1 [CMD:188] Call the Skybreaker
+1 [CMD:143] Baloth Woodcrasher
+1 [CMD:222] Savage Twister
+1 [CMD:148] Cultivate
+1 [CMD:269] Command Tower
+1 [CMD:147] Collective Voyage
+2 [CMD:304] Island
+2 [CMD:303] Island
+1 [CMD:226] Simic Sky Swallower
+1 [CMD:306] Island
+2 [CMD:305] Island
+1 [CMD:219] Prophetic Bolt
+1 [CMD:294] Vivid Creek
+1 [CMD:40] Brainstorm
+1 [CMD:250] Gruul Signet
+1 [CMD:293] Vivid Crag
+1 [CMD:252] Izzet Signet
+1 [CMD:175] Tribute to the Wild
+1 [CMD:295] Vivid Grove
+1 [CMD:177] Veteran Explorer
+1 [CMD:133] Rapacious One
+1 [CMD:253] Lightning Greaves
+1 [CMD:256] Prophetic Prism
+1 [CMD:135] Spitebellows
+1 [CMD:1] Artisan of Kozilek
+1 [CMD:178] Vow of Wildness
+1 [CMD:134] Ruination
+1 [CMD:214] Nucklavee
+1 [CMD:42] Conundrum Sphinx
+1 [CMD:138] Vow of Lightning
+1 [CMD:259] Simic Signet
+1 [CMD:39] Aethersnipe
+1 [CMD:290] Temple of the False God
+1 [CMD:160] Hunting Pack
+1 [CMD:280] Kazandu Refuge
+1 [CMD:162] Invigorate
+1 [CMD:161] Hydra Omnivore
+1 [CMD:164] Krosan Tusker
+1 [CMD:285] Rupture Spire
+1 [CMD:163] Kodama's Reach
+1 [CMD:166] Magus of the Vineyard
+1 [CMD:122] Faultgrinder
+1 [CMD:242] Armillary Sphere
+1 [CMD:288] Simic Growth Chamber
+1 [CMD:203] Hull Breach
+1 [CMD:128] Magmatic Force
+1 [CMD:204] Intet, the Dreamer
+1 [CMD:56] Ray of Command
+3 [CMD:318] Forest
+SB: 1 [CMD:220] Riku of Two Reflections
+LAYOUT MAIN:(1,10)(CMC,false,50)|([CMD:269],[CMD:272],[CMD:315],[CMD:315],[CMD:315],[CMD:315],[CMD:316],[CMD:316],[CMD:316],[CMD:317],[CMD:317],[CMD:317],[CMD:318],[CMD:318],[CMD:318],[CMD:274],[CMD:276],[CMD:277],[CMD:303],[CMD:303],[CMD:304],[CMD:304],[CMD:305],[CMD:305],[CMD:306],[CMD:278],[CMD:280],[CMD:311],[CMD:311],[CMD:312],[CMD:312],[CMD:313],[CMD:313],[CMD:314],[CMD:314],[CMD:285],[CMD:288],[CMD:290],[CMD:293],[CMD:294],[CMD:295])([CMD:40],[CMD:147],[CMD:166],[CMD:261],[CMD:177])([CMD:242],[CMD:190],[CMD:250],[CMD:203],[CMD:252],[CMD:253],[CMD:256],[CMD:222],[CMD:259],[CMD:175])([CMD:181],[CMD:148],[CMD:196],[CMD:197],[CMD:155],[CMD:199],[CMD:162],[CMD:163],[CMD:63],[CMD:68],[CMD:138],[CMD:178])([CMD:113],[CMD:42],[CMD:153],[CMD:198],[CMD:157],[CMD:56],[CMD:134])([CMD:219])([CMD:39],[CMD:143],[CMD:115],[CMD:150],[CMD:118],[CMD:151],[CMD:161],[CMD:204],[CMD:214],[CMD:133],[CMD:135],[CMD:232],[CMD:233])([CMD:188],[CMD:119],[CMD:122],[CMD:160],[CMD:164],[CMD:226])([CMD:110],[CMD:128],[CMD:65])([CMD:1])
+LAYOUT SIDEBOARD:(1,1)(NONE,false,50)|([CMD:220])

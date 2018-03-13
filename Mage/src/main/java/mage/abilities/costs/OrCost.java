@@ -99,7 +99,7 @@ public class OrCost implements Cost {
                 if (firstCost instanceof ManaCost) {
                     sb.append("Pay ");
                 }
-                sb.append(firstCost.getText()).append("?");
+                sb.append(firstCost.getText()).append('?');
                 if (controller.chooseUse(Outcome.Detriment, sb.toString(), ability, game)) {
                     selectedCost = firstCost;
                 } else {

@@ -143,7 +143,7 @@ public class ReplicateAbility extends StaticAbility implements OptionalAdditiona
         StringBuilder sb = new StringBuilder();
         if (additionalCost != null) {
             sb.append(additionalCost.getText(false));
-            sb.append(" ").append(additionalCost.getReminderText());
+            sb.append(' ').append(additionalCost.getReminderText());
         }
         return sb.toString();
     }

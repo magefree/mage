@@ -46,13 +46,15 @@ if(!exists $knownSets{$setName}) {
 my $packageName = $knownSets{$setName};
 
 $setName =~ s/"/\\"/g;
-system("./gen-existing-cards-by-set.pl \"$setName\"");
+system("gen-existing-cards-by-set.pl \"$setName\"");
 
 # Generate missing simple cards
 print "Simple cards generated: \n";
 foreach my $cardName (@setCards) {
+    print "CardName: ".${$cardName}[0]." \n";
     my $fileName = "../Mage.Sets/src/mage/sets/" . $packageName . "/" . toCamelCase(${$cardName}[0]) . ".java";
     if(!-e $fileName) {
-        system("./gen-card.pl \"${$cardName}[0]\" true");
+        print "fileName: ".$fileName." \n";
+        system("gen-card.pl \"${$cardName}[0]\" true");
     }
 }

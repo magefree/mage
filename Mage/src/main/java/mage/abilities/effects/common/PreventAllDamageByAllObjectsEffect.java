@@ -75,7 +75,7 @@ public class PreventAllDamageByAllObjectsEffect extends PreventionEffectImpl {
             sb.append("combat ");
         }
         sb.append("damage that would be dealt");
-        if (duration.equals(Duration.EndOfTurn)) {
+        if (duration == Duration.EndOfTurn) {
             sb.append(" this turn");
         }
         if (filter != null) {

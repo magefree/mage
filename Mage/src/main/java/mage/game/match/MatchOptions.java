@@ -25,17 +25,20 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.game.match;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import mage.constants.MatchTimeLimit;
 import mage.constants.MultiplayerAttackOption;
 import mage.constants.RangeOfInfluence;
 import mage.constants.SkillLevel;
 import mage.game.result.ResultProtos;
+import mage.players.PlayerType;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  *
@@ -51,22 +54,53 @@ public class MatchOptions implements Serializable {
     protected String gameType;
     protected String deckType;
     protected boolean limited;
-    protected List<String> playerTypes = new ArrayList<>();
+    protected List<PlayerType> playerTypes = new ArrayList<>();
+    protected boolean multiPlayer;
+    protected int numSeats;
     protected String password;
     protected SkillLevel skillLevel;
     protected boolean rollbackTurnsAllowed;
+    protected boolean spectatorsAllowed;
     protected int quitRatio;
+    protected int edhPowerLevel;
     protected boolean rated;
+    protected int numSeatsForMatch;
+    protected Set<String> bannedUsers = new HashSet<>();
 
     /**
      * Time each player has during the game to play using his\her priority.
      */
     protected MatchTimeLimit matchTimeLimit; // 0 = no priorityTime handling
 
-    public MatchOptions(String name, String gameType) {
+    /*public MatchOptions(String name, String gameType) {
         this.name = name;
         this.gameType = gameType;
         this.password = "";
+        this.multiPlayer = false;
+        this.numSeats = 2;
+    }*/
+    public MatchOptions(String name, String gameType, boolean multiPlayer, int numSeats) {
+        this.name = name;
+        this.gameType = gameType;
+        this.password = "";
+        this.multiPlayer = multiPlayer;
+        this.numSeats = numSeats;
+    }
+
+    public void setNumSeats (int numSeats) {
+        this.numSeats = numSeats;
+    }
+
+    public int getNumSeats () {
+        return numSeats;
+    }
+
+    public void setMultiPlayer(boolean multiPlayer) {
+        this.multiPlayer = multiPlayer;
+    }
+
+    public boolean getMultiPlayer() {
+        return multiPlayer;
     }
 
     public String getName() {
@@ -121,7 +155,7 @@ public class MatchOptions implements Serializable {
         this.deckType = deckType;
     }
 
-    public List<String> getPlayerTypes() {
+    public List<PlayerType> getPlayerTypes() {
         return playerTypes;
     }
 
@@ -143,7 +177,7 @@ public class MatchOptions implements Serializable {
     public MatchTimeLimit getMatchTimeLimit() {
         return this.matchTimeLimit;
     }
-    
+
     public void setMatchTimeLimit(MatchTimeLimit matchTimeLimit) {
         this.matchTimeLimit = matchTimeLimit;
     }
@@ -172,6 +206,14 @@ public class MatchOptions implements Serializable {
         this.rollbackTurnsAllowed = rollbackTurnsAllowed;
     }
 
+    public boolean isSpectatorsAllowed() {
+        return spectatorsAllowed;
+    }
+
+    public void setSpectatorsAllowed(boolean spectatorsAllowed) {
+        this.spectatorsAllowed = spectatorsAllowed;
+    }
+
     public int getQuitRatio() {
         return quitRatio;
     }
@@ -180,12 +222,28 @@ public class MatchOptions implements Serializable {
         this.quitRatio = quitRatio;
     }
 
+    public int getEdhPowerLevel() {
+        return edhPowerLevel;
+    }
+
+    public void setEdhPowerLevel(int edhPowerLevel) {
+        this.edhPowerLevel = edhPowerLevel;
+    }
+
     public boolean isRated() {
         return rated;
     }
 
     public void setRated(boolean rated) {
         this.rated = rated;
+    }
+
+    public Set<String> getBannedUsers() {
+        return bannedUsers;
+    }
+
+    public void setBannedUsers(Set<String> bannedUsers) {
+        this.bannedUsers = bannedUsers;
     }
 
     public ResultProtos.MatchOptionsProto toProto() {

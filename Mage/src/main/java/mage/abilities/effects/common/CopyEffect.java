@@ -27,24 +27,19 @@
  */
 package mage.abilities.effects.common;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.Card;
-import mage.constants.AbilityType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.game.permanent.PermanentToken;
 import mage.util.functions.ApplyToPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -86,7 +81,7 @@ public class CopyEffect extends ContinuousEffectImpl {
         Permanent permanent = game.getPermanent(copyToObjectId);
         if (permanent != null) {
             affectedObjectList.add(new MageObjectReference(permanent, game));
-        } else if (source.getAbilityType().equals(AbilityType.STATIC)) {
+        } else if (source.getAbilityType() == AbilityType.STATIC) {
             // for replacement effects that let a permanent enter the battlefield as a copy of another permanent we need to apply that copy
             // before the permanent is added to the battlefield
             permanent = game.getPermanentEntering(copyToObjectId);
@@ -104,6 +99,10 @@ public class CopyEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        if (affectedObjectList.isEmpty()) {
+            this.discard();
+            return false;
+        }
         Permanent permanent = affectedObjectList.get(0).getPermanent(game);
         if (permanent == null) {
             permanent = (Permanent) game.getLastKnownInformation(getSourceId(), Zone.BATTLEFIELD, source.getSourceObjectZoneChangeCounter());
@@ -124,15 +123,15 @@ public class CopyEffect extends ContinuousEffectImpl {
         permanent.getManaCost().add(copyFromObject.getManaCost());
         permanent.getCardType().clear();
         for (CardType type : copyFromObject.getCardType()) {
-            permanent.getCardType().add(type);
+            permanent.addCardType(type);
         }
-        permanent.getSubtype().clear();
-        for (String type : copyFromObject.getSubtype()) {
-            permanent.getSubtype().add(type);
+        permanent.getSubtype(game).clear();
+        for (SubType type : copyFromObject.getSubtype(game)) {
+            permanent.getSubtype(game).add(type);
         }
-        permanent.getSupertype().clear();
-        for (String type : copyFromObject.getSupertype()) {
-            permanent.getSupertype().add(type);
+        permanent.getSuperType().clear();
+        for (SuperType type : copyFromObject.getSuperType()) {
+            permanent.addSuperType(type);
         }
 
         permanent.removeAllAbilities(source.getSourceId(), game);

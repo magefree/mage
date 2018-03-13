@@ -9,5 +9,5 @@ public enum AudioGroup {
     GameSounds,
     DraftSounds,
     SkipSounds,
-    OtherSounds;
+    OtherSounds
 }

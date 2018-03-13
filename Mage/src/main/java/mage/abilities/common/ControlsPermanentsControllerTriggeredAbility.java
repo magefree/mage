@@ -27,10 +27,10 @@
  */
 package mage.abilities.common;
 
+import mage.constants.ComparisonType;
 import mage.abilities.StateTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;
-import mage.filter.Filter.ComparisonType;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -46,6 +46,10 @@ public class ControlsPermanentsControllerTriggeredAbility extends StateTriggered
     protected final FilterPermanent filter;
     protected final ComparisonType type;
     protected final int value;
+
+    public ControlsPermanentsControllerTriggeredAbility(FilterPermanent filter, Effect effect){
+        this(filter, ComparisonType.MORE_THAN, 0, effect);
+    }
 
     public ControlsPermanentsControllerTriggeredAbility(FilterPermanent filter, ComparisonType type, int value, Effect effect) {
         super(Zone.BATTLEFIELD, effect);
@@ -69,24 +73,7 @@ public class ControlsPermanentsControllerTriggeredAbility extends StateTriggered
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         int inputValue = game.getBattlefield().countAll(filter, getControllerId(), game);
-        switch (type) {
-            case Equal:
-                if (inputValue != value) {
-                    return false;
-                }
-                break;
-            case GreaterThan:
-                if (inputValue <= value) {
-                    return false;
-                }
-                break;
-            case LessThan:
-                if (inputValue >= value) {
-                    return false;
-                }
-                break;
-        }
-        return true;
+        return ComparisonType.compare(inputValue, type, value);
     }
 
     @Override

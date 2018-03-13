@@ -39,31 +39,34 @@ import org.mage.plugins.card.images.CardDownloadData;
  * @author LevelX2
  */
 
-public class MtgImageSource implements CardImageSource {
+public enum  MtgImageSource implements CardImageSource {
 
-    private static CardImageSource instance = new MtgImageSource();
-    
-    public static CardImageSource getInstance() {
-        if (instance == null) {
-            instance = new MtgImageSource();
-        }
-        return instance;
-    }
+   instance;
 
     @Override
     public String getSourceName() {
         return "mtgimage.com";
     }
+    
+    @Override
+    public String getNextHttpImageUrl() {
+        return null;
+    }
+    
+    @Override
+    public String getFileForHttpImage(String httpImageUrl) {
+        return null;
+    }
 
     @Override
     public String generateURL(CardDownloadData card) throws Exception {
-        Integer collectorId = card.getCollectorId();
+        String collectorId = card.getCollectorId();
         String cardSet = card.getSet();
         if (collectorId == null || cardSet == null) {
             throw new Exception("Wrong parameters for image: collector id: " + collectorId + ",card set: " + cardSet);
         }
         StringBuilder url = new StringBuilder("http://mtgimage.com/set/");
-            url.append(cardSet.toUpperCase()).append("/");
+            url.append(cardSet.toUpperCase()).append('/');
 
         if (card.isSplitCard()) {            
             url.append(card.getDownloadName().replaceAll(" // ", ""));
@@ -76,9 +79,9 @@ public class MtgImageSource implements CardImageSource {
         }
         if (card.isFlipCard()) {
             if (card.isFlippedSide()) { // download rotated by 180 degree image
-                url.append("b");
+                url.append('b');
             } else {
-                url.append("a");
+                url.append('a');
             }
         }
         url.append(".jpg");
@@ -92,7 +95,21 @@ public class MtgImageSource implements CardImageSource {
     }
 
     @Override
-    public Float getAverageSize() {
+    public float getAverageSize() {
         return 70.0f;
+    }
+    
+    @Override
+    public int getTotalImages() {
+        return -1;
+    }
+    
+    @Override
+    public boolean isTokenSource() {
+        return false;
+    }
+
+    @Override
+    public void doPause(String httpImageUrl) {
     }
 }

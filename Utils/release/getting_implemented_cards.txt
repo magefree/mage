@@ -90,6 +90,41 @@ git log d0ecb473da0833be5fe52f5ac72a125cc091f7fe..head --diff-filter=A --name-st
 since 1.4.13v1
 git log 80f4ab770b78b7a7211490ff961ee90998bdc01c..head --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
 
+since 1.4.13v3
+git log 7c2eaf9510b1b49fecc28f5c8e68d5377c7a7e3e..head --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
+
+since 1.4.14v0
+git log 7c2eaf9510b1b49fecc28f5c8e68d5377c7a7e3e..head --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
+
+since 1.4.15v0
+git log 79f8617cd3c997d89770094d7a44294b0a48731f..head --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
+
+since 1.4.15v2
+git log d9c804602ea116d80a74d53eaf07ee7a15cd7d81..head --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
+
+since 1.4.15v5
+git log 73a2ccda9b36552a09cb2b6a5aef37559866d7fc..head --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
+
+since 1.4.16v0
+git log a6747590b336329404d34f3b1780b5fe9aab7340..head --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
+
+since 1.4.17V0
+git log b2bd7f5e24db9a1e5c07c64e66583ec183bb5bd8..head --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/cards\///p" | sort > added_cards.txt
+
+since 1.4.18V0
+git log 0c634272888b6c3f2bd70dd0a2776dc3222a2b23..head --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/cards\///p" | sort > added_cards.txt
+
+since 1.4.19V0
+git log 7481b7f5b2e82698506a7dcdda3d5d335664bd60..head --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/cards\///p" | sort > added_cards.txt
+
+since 1.4.19V1
+git log 61dd62b148ece4c0f9b45cb7ddbc4a2515cb7615..head --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/cards\///p" | sort > added_cards.txt
+
+since 1.4.20V0
+git log 13659e064c0bd4e757e3030f236e04e2bd3dd810..head --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/cards\///p" | sort > added_cards.txt
+
+
+
 3. Copy added_cards.txt to trunk\Utils folder
 4. Run script:
 > perl extract_in_wiki_format.perl

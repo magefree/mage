@@ -39,13 +39,9 @@ import mage.game.permanent.Permanent;
  */
 
 
-public class SourceTappedCondition implements Condition {
+public enum SourceTappedCondition implements Condition {
 
-    private static final SourceTappedCondition fInstance = new SourceTappedCondition();
-
-    public static SourceTappedCondition getInstance() {
-        return fInstance;
-    }
+   instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

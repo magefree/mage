@@ -33,7 +33,21 @@ package mage.constants;
  */
 public enum Zone {
 
-    HAND, GRAVEYARD, LIBRARY, BATTLEFIELD, STACK, EXILED, ALL, OUTSIDE, COMMAND;
+    HAND(false),
+    GRAVEYARD(true),
+    LIBRARY(false),
+    BATTLEFIELD(true),
+    STACK(true),
+    EXILED(true),
+    ALL(false),
+    OUTSIDE(false),
+    COMMAND(true);
+
+    private final boolean isPublic;
+
+    Zone(boolean isPublic) {
+        this.isPublic = isPublic;
+    }
 
     public boolean match(Zone zone) {
         return (this == zone || this == ALL || zone == ALL);
@@ -41,10 +55,13 @@ public enum Zone {
 
     @Override
     public String toString() {
-        if (this.equals(EXILED)) {
+        if (this == EXILED) {
             return "exile zone";
         }
-        return super.toString(); //To change body of generated methods, choose Tools | Templates.
+        return super.toString();
     }
 
+    public boolean isPublicZone() {
+        return isPublic;
+    }
 }

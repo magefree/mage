@@ -24,8 +24,7 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.player.human;
 
 import java.io.Serializable;
@@ -44,6 +43,36 @@ public class PlayerResponse implements Serializable {
     private Integer responseInteger;
     private ManaType responseManaType;
     private UUID responseManaTypePlayerId;
+    private Boolean responseConcedeCheck;
+
+    public PlayerResponse() {
+        clear();
+    }
+
+    @Override
+    public String toString() {
+        return ((responseString == null) ? "null" : responseString)
+                + ',' + responseUUID
+                + ',' + responseBoolean
+                + ',' + responseInteger
+                + ',' + responseManaType
+                + ',' + responseManaTypePlayerId
+                + ',' + responseConcedeCheck;
+    }
+
+    public PlayerResponse(PlayerResponse other) {
+        copy(other);
+    }
+
+    public void copy(PlayerResponse other) {
+        responseString = other.responseString;
+        responseUUID = other.responseUUID;
+        responseBoolean = other.responseBoolean;
+        responseInteger = other.responseInteger;
+        responseManaType = other.responseManaType;
+        responseManaTypePlayerId = other.responseManaTypePlayerId;
+        responseConcedeCheck = other.responseConcedeCheck;
+    }
 
     public void clear() {
         responseString = null;
@@ -52,6 +81,7 @@ public class PlayerResponse implements Serializable {
         responseInteger = null;
         responseManaType = null;
         responseManaTypePlayerId = null;
+        responseConcedeCheck = null;
     }
 
     public String getString() {
@@ -76,6 +106,17 @@ public class PlayerResponse implements Serializable {
 
     public void setBoolean(Boolean responseBoolean) {
         this.responseBoolean = responseBoolean;
+    }
+
+    public Boolean getResponseConcedeCheck() {
+        if (responseConcedeCheck == null) {
+            return false;
+        }
+        return responseConcedeCheck;
+    }
+
+    public void setResponseConcedeCheck() {
+        this.responseConcedeCheck = true;
     }
 
     public Integer getInteger() {

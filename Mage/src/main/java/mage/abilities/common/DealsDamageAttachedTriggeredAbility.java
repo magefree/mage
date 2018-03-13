@@ -13,20 +13,19 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author LevelX2
  */
 
 public class DealsDamageAttachedTriggeredAbility extends TriggeredAbilityImpl {
-        
+
     public DealsDamageAttachedTriggeredAbility(Zone zone, Effect effect, boolean optional) {
         super(zone, effect, optional);
     }
-    
+
     public DealsDamageAttachedTriggeredAbility(final DealsDamageAttachedTriggeredAbility ability) {
         super(ability);
     }
-    
+
     @Override
     public DealsDamageAttachedTriggeredAbility copy() {
         return new DealsDamageAttachedTriggeredAbility(this);
@@ -34,11 +33,11 @@ public class DealsDamageAttachedTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType().equals(GameEvent.EventType.DAMAGED_CREATURE)
-                || event.getType().equals(GameEvent.EventType.DAMAGED_PLAYER)
-                || event.getType().equals(GameEvent.EventType.DAMAGED_PLANESWALKER);
+        return event.getType() == GameEvent.EventType.DAMAGED_CREATURE
+                || event.getType() == GameEvent.EventType.DAMAGED_PLAYER
+                || event.getType() == GameEvent.EventType.DAMAGED_PLANESWALKER;
     }
-    
+
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent enchantment = game.getPermanent(this.getSourceId());
@@ -54,7 +53,7 @@ public class DealsDamageAttachedTriggeredAbility extends TriggeredAbilityImpl {
         }
         return false;
     }
-    
+
     @Override
     public String getRule() {
         return "Whenever enchanted creature deals damage, " + super.getRule();

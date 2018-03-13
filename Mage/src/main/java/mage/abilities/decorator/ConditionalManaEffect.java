@@ -79,35 +79,25 @@ public class ConditionalManaEffect extends ManaEffect {
             otherwiseEffect.setTargetPointer(this.targetPointer);
         }
         Mana mana = getMana(game, source);
-
-        if (mana != null && mana.getAny() > 0) {
+        if (mana == null) {
+            return false;
+        }
+        if (mana.getAny() > 0) {
             int amount = mana.getAny();
 
             ChoiceColor choice = new ChoiceColor(true);
             Mana createdMana = null;
             if (controller.choose(outcome, choice, game)) {
-                if (choice.getColor() == null) {
-                    return false; // it happens, don't know how
-                }
-
-                if (choice.getColor().isBlack()) {
-                    createdMana = Mana.BlackMana(amount);
-                } else if (choice.getColor().isBlue()) {
-                    createdMana = Mana.BlueMana(amount);
-                } else if (choice.getColor().isRed()) {
-                    createdMana = Mana.RedMana(amount);
-                } else if (choice.getColor().isGreen()) {
-                    createdMana = Mana.GreenMana(amount);
-                } else if (choice.getColor().isWhite()) {
-                    createdMana = Mana.WhiteMana(amount);
-                }
+                createdMana = choice.getMana(amount);
+            }
+            if (createdMana == null) {
+                return false;
             }
             mana = createdMana;
+            // because the mana type is now choosen, fire the event with the mana information
+            checkToFirePossibleEvents(mana, game, source);
         }
-
-        if (mana != null) {
-            controller.getManaPool().addMana(mana, game, source);
-        }
+        controller.getManaPool().addMana(mana, game, source);
         return true;
     }
 
@@ -117,16 +107,12 @@ public class ConditionalManaEffect extends ManaEffect {
     }
 
     @Override
-    public Mana getMana(Game game, Ability source
-    ) {
+    public Mana getMana(Game game, Ability source) {
         Mana mana = null;
         if (condition.apply(game, source)) {
             mana = effect.getMana();
         } else if (otherwiseEffect != null) {
             mana = otherwiseEffect.getMana();
-        }
-        if (mana != null) {
-            checkToFirePossibleEvents(mana, game, source);
         }
         return mana;
     }

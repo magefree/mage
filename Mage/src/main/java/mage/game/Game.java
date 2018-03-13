@@ -28,13 +28,7 @@
 package mage.game;
 
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import mage.MageItem;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -50,11 +44,7 @@ import mage.cards.Cards;
 import mage.cards.MeldCard;
 import mage.cards.decks.Deck;
 import mage.choices.Choice;
-import mage.constants.Duration;
-import mage.constants.MultiplayerAttackOption;
-import mage.constants.PlayerAction;
-import mage.constants.RangeOfInfluence;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.Counters;
 import mage.game.combat.Combat;
 import mage.game.command.Commander;
@@ -67,6 +57,7 @@ import mage.game.match.MatchType;
 import mage.game.permanent.Battlefield;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
+import mage.game.stack.Spell;
 import mage.game.stack.SpellStack;
 import mage.game.turn.Phase;
 import mage.game.turn.Step;
@@ -116,6 +107,10 @@ public interface Game extends MageItem, Serializable {
 
     UUID getOwnerId(MageObject object);
 
+    Spell getSpell(UUID spellId);
+
+    Spell getSpellOrLKIStack(UUID spellId);
+
     Permanent getPermanent(UUID permanentId);
 
     Permanent getPermanentOrLKIBattlefield(UUID permanentId);
@@ -128,11 +123,11 @@ public interface Game extends MageItem, Serializable {
 
     Card getCard(UUID cardId);
 
-    Ability getAbility(UUID abilityId, UUID sourceId);
+    Optional<Ability> getAbility(UUID abilityId, UUID sourceId);
 
     void setZone(UUID objectId, Zone zone);
 
-    void addPlayer(Player player, Deck deck) throws GameException;
+    void addPlayer(Player player, Deck deck);
 
     Player getPlayer(UUID playerId);
 
@@ -178,7 +173,7 @@ public interface Game extends MageItem, Serializable {
 
     UUID getPriorityPlayerId();
 
-    boolean gameOver(UUID playerId);
+    boolean checkIfGameIsOver();
 
     boolean hasEnded();
 
@@ -236,6 +231,8 @@ public interface Game extends MageItem, Serializable {
     void addPlayerQueryEventListener(Listener<PlayerQueryEvent> listener);
 
     void fireAskPlayerEvent(UUID playerId, MessageToClient message, Ability source);
+
+    void fireAskPlayerEvent(UUID playerId, MessageToClient message, Ability source, Map<String, Serializable> options);
 
     void fireChooseChoiceEvent(UUID playerId, Choice choice);
 
@@ -333,10 +330,10 @@ public interface Game extends MageItem, Serializable {
     void end();
 
     void cleanUp();
+
     /*
      * Gives back the number of cards the player has after the next mulligan
      */
-
     int mulliganDownTo(UUID playerId);
 
     void mulligan(UUID playerId);
@@ -350,6 +347,8 @@ public interface Game extends MageItem, Serializable {
 
     void concede(UUID playerId);
 
+    void setConcedingPlayer(UUID playerId);
+
     void setManaPaymentMode(UUID playerId, boolean autoPayment);
 
     void setManaPaymentModeRestricted(UUID playerId, boolean autoPaymentRestricted);
@@ -362,9 +361,9 @@ public interface Game extends MageItem, Serializable {
 
     void addEffect(ContinuousEffect continuousEffect, Ability source);
 
-    void addEmblem(Emblem emblem, Ability source);
+    void addEmblem(Emblem emblem, MageObject sourceObject, Ability source);
 
-    void addEmblem(Emblem emblem, Ability source, UUID toPlayerId);
+    void addEmblem(Emblem emblem, MageObject sourceObject, UUID toPlayerId);
 
     void addCommander(Commander commander);
 
@@ -400,7 +399,7 @@ public interface Game extends MageItem, Serializable {
 
     void playPriority(UUID activePlayerId, boolean resuming);
 
-    boolean endTurn();
+    boolean endTurn(Ability source);
 
     int doAction(MageAction action);
 
@@ -435,7 +434,7 @@ public interface Game extends MageItem, Serializable {
     // controlling the behaviour of replacement effects while permanents entering the battlefield
     void setScopeRelevant(boolean scopeRelevant);
 
-    public boolean getScopeRelevant();
+    boolean getScopeRelevant();
 
     // players' timers
     void initTimer(UUID playerId);
@@ -450,6 +449,8 @@ public interface Game extends MageItem, Serializable {
 
     UUID getStartingPlayerId();
 
+    void setStartingPlayerId(UUID startingPlayerId);
+
     void saveRollBackGameState();
 
     boolean canRollbackTurns(int turnsToRollback);
@@ -461,4 +462,8 @@ public interface Game extends MageItem, Serializable {
     void setEnterWithCounters(UUID sourceId, Counters counters);
 
     Counters getEnterWithCounters(UUID sourceId);
+
+    UUID getMonarchId();
+
+    void setMonarchId(Ability source, UUID monarchId);
 }

@@ -81,7 +81,7 @@ public class AjaniTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Kor Ally", 2);
         assertPermanentCount(playerA, "Oath of Gideon", 1);
         assertPermanentCount(playerA, "Ajani Goldmane", 1);
-        assertCounterCount("Ajani Goldmane", CounterType.LOYALTY, 6);  // 5 + 1 = 5
+        assertCounterCount("Ajani Goldmane", CounterType.LOYALTY, 6);  // 4 + 1 + 1 = 6
 
         assertLife(playerA, 22);
         assertLife(playerB, 20);

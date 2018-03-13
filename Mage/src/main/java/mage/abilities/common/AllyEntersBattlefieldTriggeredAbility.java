@@ -29,6 +29,7 @@ package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
@@ -56,12 +57,9 @@ public class AllyEntersBattlefieldTriggeredAbility extends TriggeredAbilityImpl 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         EntersTheBattlefieldEvent ebe = (EntersTheBattlefieldEvent) event;
-        if (ebe.getTarget().getControllerId().equals(this.controllerId)
+        return ebe.getTarget().getControllerId().equals(this.controllerId)
                 && (event.getTargetId().equals(this.getSourceId())
-                || (ebe.getTarget().hasSubtype("Ally") && !event.getTargetId().equals(this.getSourceId())))) {
-            return true;
-        }
-        return false;
+                || (ebe.getTarget().hasSubtype(SubType.ALLY, game) && !event.getTargetId().equals(this.getSourceId())));
     }
 
     @Override

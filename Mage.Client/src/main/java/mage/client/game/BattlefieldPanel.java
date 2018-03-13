@@ -33,15 +33,6 @@
  */
 package mage.client.game;
 
-import java.awt.*;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.util.*;
-import java.util.List;
-import java.util.Map.Entry;
-import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
 import mage.cards.MagePermanent;
 import mage.client.cards.BigCard;
 import mage.client.cards.Permanent;
@@ -51,10 +42,18 @@ import mage.client.util.GUISizeHelper;
 import mage.client.util.audio.AudioManager;
 import mage.client.util.layout.CardLayoutStrategy;
 import mage.client.util.layout.impl.OldCardLayoutStrategy;
-import mage.constants.CardType;
-import mage.utils.CardUtil;
 import mage.view.CounterView;
 import mage.view.PermanentView;
+
+import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.util.*;
+import java.util.List;
+import java.util.Map.Entry;
 
 /**
  *
@@ -155,15 +154,14 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
                 changed = true;
             } else {
                 if (!changed) {
-                    changed = CardUtil.isCreature(oldMagePermanent.getOriginalPermanent()) != CardUtil.isCreature(permanent);
+                    changed = oldMagePermanent.getOriginalPermanent().isCreature() != permanent.isCreature();
                     if (!changed) {
                         int s1 = permanent.getAttachments() == null ? 0 : permanent.getAttachments().size();
                         int s2 = oldMagePermanent.getLinks().size();
                         if (s1 != s2) {
                             changed = true;
                         } else if (s1 > 0) {
-                            Set<UUID> attachmentIds = new HashSet<>();
-                            attachmentIds.addAll(permanent.getAttachments());
+                            Set<UUID> attachmentIds = new HashSet<>(permanent.getAttachments());
                             for (MagePermanent magePermanent : oldMagePermanent.getLinks()) {
                                 if (!attachmentIds.contains(magePermanent.getOriginalPermanent().getId())) {
                                     // that means that the amount of attachments is the same
@@ -253,8 +251,8 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
         if (cardDimension == null) {
             cardDimension = new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
         }
-        final MagePermanent perm = Plugins.getInstance().getMagePermanent(permanent, bigCard, cardDimension, gameId, true);
-        if (!Plugins.getInstance().isCardPluginLoaded()) {
+        final MagePermanent perm = Plugins.instance.getMagePermanent(permanent, bigCard, cardDimension, gameId, true);
+        if (!Plugins.instance.isCardPluginLoaded()) {
             //perm.setBounds(findEmptySpace(new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight)));
         } else {
             //perm.setAlpha(0);
@@ -263,12 +261,12 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
 
         BattlefieldPanel.this.jPanel.add(perm, 10);
         //this.jPanel.add(perm);
-        if (!Plugins.getInstance().isCardPluginLoaded()) {
+        if (!Plugins.instance.isCardPluginLoaded()) {
             moveToFront(perm);
             perm.update(permanent);
         } else {
             moveToFront(jPanel);
-            Plugins.getInstance().onAddCard(perm, 1);
+            Plugins.instance.onAddCard(perm, 1);
             /*Thread t = new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -280,9 +278,9 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
             }*/
         }
 
-        if (permanent.getCardTypes().contains(CardType.ARTIFACT)) {
+        if (permanent.isArtifact()) {
             addedArtifact = true;
-        } else if (permanent.getCardTypes().contains(CardType.CREATURE)) {
+        } else if (permanent.isCreature()) {
             addedCreature = true;
         } else {
             addedPermanent = true;
@@ -299,17 +297,14 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
                 }
             } else if (comp instanceof MagePermanent) {
                 if (((MagePermanent) comp).getOriginal().getId().equals(permanentId)) {
-                    Thread t = new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Plugins.getInstance().onRemoveCard((MagePermanent) comp, count);
-                            comp.setVisible(false);
-                            BattlefieldPanel.this.jPanel.remove(comp);
-                        }
+                    Thread t = new Thread(() -> {
+                        Plugins.instance.onRemoveCard((MagePermanent) comp, count);
+                        comp.setVisible(false);
+                        BattlefieldPanel.this.jPanel.remove(comp);
                     });
                     t.start();
                 }
-                if (((MagePermanent) comp).getOriginal().getCardTypes().contains(CardType.CREATURE)) {
+                if (((MagePermanent) comp).getOriginal().isCreature()) {
                     removedCreature = true;
                 }
             }

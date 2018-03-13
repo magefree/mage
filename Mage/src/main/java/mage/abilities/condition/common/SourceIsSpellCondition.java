@@ -38,17 +38,13 @@ import mage.game.Game;
  * @author LevelX2
  */
 
-public class SourceIsSpellCondition implements Condition {
+public enum  SourceIsSpellCondition implements Condition {
 
-    private static final SourceIsSpellCondition fInstance = new SourceIsSpellCondition();
-
-    public static Condition getInstance() {
-        return fInstance;
-    }
+instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
         MageObject object = game.getObject(source.getSourceId());
-        return object != null && !object.getCardType().contains(CardType.LAND);
+        return object != null && !object.isLand();
     }
 }

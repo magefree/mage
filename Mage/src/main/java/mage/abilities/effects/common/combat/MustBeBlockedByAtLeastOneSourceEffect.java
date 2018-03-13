@@ -68,7 +68,7 @@ public class MustBeBlockedByAtLeastOneSourceEffect extends RequirementEffect {
 
     public MustBeBlockedByAtLeastOneSourceEffect(Duration duration) {
         super(duration);
-        staticText = "{this} must be blocked " + (duration.equals(Duration.EndOfTurn) ? "this turn " : "") + "if able";
+        staticText = "{this} must be blocked " + (duration == Duration.EndOfTurn ? "this turn " : "") + "if able";
     }
 
     public MustBeBlockedByAtLeastOneSourceEffect(final MustBeBlockedByAtLeastOneSourceEffect effect) {

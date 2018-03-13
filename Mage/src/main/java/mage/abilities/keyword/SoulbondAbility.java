@@ -32,7 +32,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SetTargetPointer;
 import mage.constants.TargetController;
@@ -47,6 +46,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
+import mage.util.GameLog;
 
 /**
  * 702.94. Soulbond
@@ -102,7 +102,7 @@ public class SoulbondAbility extends EntersBattlefieldTriggeredAbility {
         boolean self = false;
         boolean other = false;
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(getControllerId())) {
-            if (permanent.getCardType().contains(CardType.CREATURE)) {
+            if (permanent.isCreature()) {
                 if (permanent.getId().equals(getSourceId())) {
                     if (permanent.getControllerId().equals(getControllerId())) {
                         self = true;
@@ -158,7 +158,7 @@ class SoulboundEntersSelfEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null && permanent.getCardType().contains(CardType.CREATURE)) {
+        if (permanent != null && permanent.isCreature()) {
             Player controller = game.getPlayer(permanent.getControllerId());
             if (controller != null) {
                 TargetControlledPermanent target = new TargetControlledPermanent(filter);
@@ -168,7 +168,9 @@ class SoulboundEntersSelfEffect extends OneShotEffect {
                         Permanent chosen = game.getPermanent(target.getFirstTarget());
                         if (chosen != null) {
                             chosen.setPairedCard(new MageObjectReference(permanent, game));
+                            chosen.addInfo("soulbond", "Soulbond to " + GameLog.getColoredObjectIdNameForTooltip(permanent), game);
                             permanent.setPairedCard(new MageObjectReference(chosen, game));
+                            permanent.addInfo("soulbond", "Soulbond to " + GameLog.getColoredObjectIdNameForTooltip(chosen), game);
                             if (!game.isSimulation()) {
                                 game.informPlayers(controller.getLogName() + " soulbonds " + permanent.getLogName() + " with " + chosen.getLogName());
                             }
@@ -259,11 +261,11 @@ class SoulboundEntersOtherEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null && permanent.getPairedCard() == null
-                && permanent.getCardType().contains(CardType.CREATURE)) {
+                && permanent.isCreature()) {
             Player controller = game.getPlayer(permanent.getControllerId());
             if (controller != null) {
                 Permanent enteringPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-                if (enteringPermanent != null && enteringPermanent.getCardType().contains(CardType.CREATURE) && enteringPermanent.getPairedCard() == null) {
+                if (enteringPermanent != null && enteringPermanent.isCreature() && enteringPermanent.getPairedCard() == null) {
                     enteringPermanent.setPairedCard(new MageObjectReference(permanent, game));
                     permanent.setPairedCard(new MageObjectReference(enteringPermanent, game));
                     if (!game.isSimulation()) {

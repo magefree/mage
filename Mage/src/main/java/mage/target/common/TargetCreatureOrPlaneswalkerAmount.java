@@ -47,7 +47,7 @@
      */
     public class TargetCreatureOrPlaneswalkerAmount extends TargetAmount {
 
-        protected FilterCreatureOrPlaneswalkerPermanent filter;
+        protected final FilterCreatureOrPlaneswalkerPermanent filter;
 
         public TargetCreatureOrPlaneswalkerAmount(int amount) {
             // 107.1c If a rule or ability instructs a player to choose “any number,” that player may choose
@@ -85,10 +85,7 @@
         @Override
         public boolean canTarget(UUID objectId, Game game) {
             Permanent permanent = game.getPermanent(objectId);
-            if (permanent != null) {
-                return filter.match(permanent, game);
-            }
-            return false;
+            return permanent != null && filter.match(permanent, game);
         }
 
         @Override
@@ -168,7 +165,7 @@
             for (UUID targetId : getTargets()) {
                 Permanent permanent = game.getPermanent(targetId);
                 if (permanent != null) {
-                    sb.append(permanent.getLogName()).append("(").append(getTargetAmount(targetId)).append(") ");
+                    sb.append(permanent.getLogName()).append('(').append(getTargetAmount(targetId)).append(") ");
                 }
             }
             return sb.toString();

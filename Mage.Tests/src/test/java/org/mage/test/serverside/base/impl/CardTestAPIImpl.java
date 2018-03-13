@@ -121,7 +121,7 @@ public abstract class CardTestAPIImpl extends MageTestBase implements CardTestAP
     public void addCard(Zone gameZone, TestPlayer player, String cardName, int count, boolean tapped) {
 
 
-        if (gameZone.equals(Zone.BATTLEFIELD)) {
+        if (gameZone == Zone.BATTLEFIELD) {
             for (int i = 0; i < count; i++) {
                 CardInfo cardInfo = CardRepository.instance.findCard(cardName);
                 Card card = cardInfo != null ? cardInfo.getCard() : null;
@@ -158,19 +158,19 @@ public abstract class CardTestAPIImpl extends MageTestBase implements CardTestAP
      */
     private List<Card> getCardList(Zone gameZone, Player player) {
         if (player.equals(playerA)) {
-            if (gameZone.equals(Zone.HAND)) {
+            if (gameZone == Zone.HAND) {
                 return handCardsA;
-            } else if (gameZone.equals(Zone.GRAVEYARD)) {
+            } else if (gameZone == Zone.GRAVEYARD) {
                 return graveyardCardsA;
-            } else if (gameZone.equals(Zone.LIBRARY)) {
+            } else if (gameZone == Zone.LIBRARY) {
                 return libraryCardsA;
             }
         } else if (player.equals(playerB)) {
-            if (gameZone.equals(Zone.HAND)) {
+            if (gameZone == Zone.HAND) {
                 return handCardsB;
-            } else if (gameZone.equals(Zone.GRAVEYARD)) {
+            } else if (gameZone == Zone.GRAVEYARD) {
                 return graveyardCardsB;
-            } else if (gameZone.equals(Zone.LIBRARY)) {
+            } else if (gameZone == Zone.LIBRARY) {
                 return libraryCardsB;
             }
         }
@@ -289,12 +289,12 @@ public abstract class CardTestAPIImpl extends MageTestBase implements CardTestAP
         for (Permanent permanent : currentGame.getBattlefield().getAllActivePermanents(player.getId())) {
             if (permanent.getName().equals(cardName)) {
                 count++;
-                if (scope.equals(Filter.ComparisonScope.All)) {
-                    Assert.assertEquals("Power is not the same (" + power + " vs. " + permanent.getPower().getValue() + ")",
+                if (scope == Filter.ComparisonScope.All) {
+                    Assert.assertEquals("Power is not the same (" + power + " vs. " + permanent.getPower().getValue() + ')',
                             power, permanent.getPower().getValue());
-                    Assert.assertEquals("Toughness is not the same (" + toughness + " vs. " + permanent.getToughness().getValue() + ")",
+                    Assert.assertEquals("Toughness is not the same (" + toughness + " vs. " + permanent.getToughness().getValue() + ')',
                             toughness, permanent.getToughness().getValue());
-                } else if (scope.equals(Filter.ComparisonScope.Any)) {
+                } else if (scope == Filter.ComparisonScope.Any) {
                     if (power == permanent.getPower().getValue() && toughness == permanent.getToughness().getValue()) {
                         fit++;
                         break;
@@ -306,7 +306,7 @@ public abstract class CardTestAPIImpl extends MageTestBase implements CardTestAP
         Assert.assertTrue("There is no such permanent under player's control, player=" + player.getName() +
                 ", cardName=" + cardName, count > 0);
 
-        if (scope.equals(Filter.ComparisonScope.Any)) {
+        if (scope == Filter.ComparisonScope.Any) {
             Assert.assertTrue("There is no such creature under player's control with specified power&toughness, player=" + player.getName() +
                     ", cardName=" + cardName, fit > 0);
         }
@@ -372,7 +372,7 @@ public abstract class CardTestAPIImpl extends MageTestBase implements CardTestAP
                 }
             }
         }
-        Assert.assertEquals("(Battlefield) Card counts are not equal (" + cardName + ")", count, actualCount);
+        Assert.assertEquals("(Battlefield) Card counts are not equal (" + cardName + ')', count, actualCount);
     }
 
     public Permanent getPermanent(String cardName, UUID controller) {
@@ -387,7 +387,7 @@ public abstract class CardTestAPIImpl extends MageTestBase implements CardTestAP
             }
         }
         Assert.assertNotNull("Couldn't find a card with specified name: " + cardName, permanent0);
-        Assert.assertEquals("More than one permanent was found: " + cardName + "(" + count + ")", 1, count);
+        Assert.assertEquals("More than one permanent was found: " + cardName + '(' + count + ')', 1, count);
         return permanent0;
     }
 

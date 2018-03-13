@@ -41,8 +41,12 @@ public class BecomesMonstrousSourceTriggeredAbility extends TriggeredAbilityImpl
 
     private int monstrosityValue;
 
+    public BecomesMonstrousSourceTriggeredAbility(Effect effect, boolean optional) {
+        super(Zone.BATTLEFIELD, effect, optional);
+    }
+
     public BecomesMonstrousSourceTriggeredAbility(Effect effect) {
-        super(Zone.BATTLEFIELD, effect, false);
+        this(effect, false);
     }
 
     public BecomesMonstrousSourceTriggeredAbility(final BecomesMonstrousSourceTriggeredAbility ability) {

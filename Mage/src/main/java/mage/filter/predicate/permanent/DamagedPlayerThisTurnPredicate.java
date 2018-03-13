@@ -54,14 +54,14 @@ public class DamagedPlayerThisTurnPredicate implements ObjectPlayerPredicate<Obj
 
         switch (controller) {
             case YOU:
-                PlayerDamagedBySourceWatcher watcher = (PlayerDamagedBySourceWatcher) game.getState().getWatchers().get("PlayerDamagedBySource", playerId);
+                PlayerDamagedBySourceWatcher watcher = (PlayerDamagedBySourceWatcher) game.getState().getWatchers().get(PlayerDamagedBySourceWatcher.class.getSimpleName(), playerId);
                 if (watcher != null) {
                     return watcher.hasSourceDoneDamage(object.getId(), game);
                 }
                 break;
             case OPPONENT:
                 for (UUID opponentId : game.getOpponents(playerId)) {
-                    watcher = (PlayerDamagedBySourceWatcher) game.getState().getWatchers().get("PlayerDamagedBySource", opponentId);
+                    watcher = (PlayerDamagedBySourceWatcher) game.getState().getWatchers().get(PlayerDamagedBySourceWatcher.class.getSimpleName(), opponentId);
                     if (watcher != null) {
                         return watcher.hasSourceDoneDamage(object.getId(), game);
                     }
@@ -70,7 +70,7 @@ public class DamagedPlayerThisTurnPredicate implements ObjectPlayerPredicate<Obj
             case NOT_YOU:
                 for (UUID notYouId : game.getState().getPlayersInRange(playerId, game)) {
                     if (!notYouId.equals(playerId)) {
-                        watcher = (PlayerDamagedBySourceWatcher) game.getState().getWatchers().get("PlayerDamagedBySource", notYouId);
+                        watcher = (PlayerDamagedBySourceWatcher) game.getState().getWatchers().get(PlayerDamagedBySourceWatcher.class.getSimpleName(), notYouId);
                         if (watcher != null) {
                             return watcher.hasSourceDoneDamage(object.getId(), game);
                         }
@@ -79,7 +79,7 @@ public class DamagedPlayerThisTurnPredicate implements ObjectPlayerPredicate<Obj
                 break;
             case ANY:
                 for (UUID anyId : game.getState().getPlayersInRange(playerId, game)) {
-                    watcher = (PlayerDamagedBySourceWatcher) game.getState().getWatchers().get("PlayerDamagedBySource", anyId);
+                    watcher = (PlayerDamagedBySourceWatcher) game.getState().getWatchers().get(PlayerDamagedBySourceWatcher.class.getSimpleName(), anyId);
                     if (watcher != null) {
                         return watcher.hasSourceDoneDamage(object.getId(), game);
                     }

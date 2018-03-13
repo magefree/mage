@@ -54,7 +54,7 @@ public class HeartstoneTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Lightning Bolt");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", playerA);
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}{U},Tap two untapped Wizards you control: Copy target instant or sorcery spell. You may choose new targets for the copy.", "Lightning Bolt");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}{U}, Tap two untapped Wizards you control: Copy target instant or sorcery spell. You may choose new targets for the copy.", "Lightning Bolt");
         setChoice(playerA, "Yes");
         addTarget(playerA, playerB);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

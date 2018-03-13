@@ -172,7 +172,7 @@ public class BloodchiefAscensionTest extends CardTestMultiPlayerBase {
         addCard(Zone.HAND, playerB, "Bellows Lizard", 5);
 
         // Player order: A -> D -> C -> B
-        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerD, "{U},{T}: Each player discards");
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerD, "{U}, {T}: Each player discards");
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
 

@@ -1,5 +1,7 @@
 package org.mage.plugins.card.images;
 
+import mage.util.CardUtil;
+
 import java.util.Objects;
 
 /**
@@ -10,28 +12,40 @@ public class CardDownloadData {
 
     private String name;
     private String downloadName;
+    private String fileName = "";
     private String set;
     private String tokenSetCode;
-    private Integer collectorId;
-    private Integer type;
+    private String tokenDescriptor;
+    private final String collectorId;
+    private final Integer type;
     private boolean token;
-    private boolean twoFacedCard;
-    private boolean secondSide;
+    private final boolean twoFacedCard;
+    private final boolean secondSide;
     private boolean flipCard;
     private boolean flippedSide;
     private boolean splitCard;
-    private boolean usesVariousArt;
+    private final boolean usesVariousArt;
+    private String tokenClassName;
     private boolean isType2;
 
-    public CardDownloadData(String name, String set, Integer collectorId, boolean usesVariousArt, Integer type, String tokenSetCode) {
-        this(name, set, collectorId, usesVariousArt, type, tokenSetCode, false);
+    public CardDownloadData(String name, String set, String collectorId, boolean usesVariousArt, Integer type, String tokenSetCode, String tokenDescriptor) {
+        this(name, set, collectorId, usesVariousArt, type, tokenSetCode, tokenDescriptor, false, "");
     }
 
-    public CardDownloadData(String name, String set, Integer collectorId, boolean usesVariousArt, Integer type, String tokenSetCode, boolean token) {
-        this(name, set, collectorId, usesVariousArt, type, tokenSetCode, token, false, false);
+    public CardDownloadData(String name, String set, String collectorId, boolean usesVariousArt, Integer type, String tokenSetCode, String tokenDescriptor, boolean token) {
+        this(name, set, collectorId, usesVariousArt, type, tokenSetCode, tokenDescriptor, token, false, false, "");
     }
 
-    public CardDownloadData(String name, String set, Integer collectorId, boolean usesVariousArt, Integer type, String tokenSetCode, boolean token, boolean twoFacedCard, boolean secondSide) {
+    public CardDownloadData(String name, String set, String collectorId, boolean usesVariousArt, Integer type, String tokenSetCode, String tokenDescriptor, boolean token, String fileName) {
+        this(name, set, collectorId, usesVariousArt, type, tokenSetCode, tokenDescriptor, token, false, false, "");
+        this.fileName = fileName;
+    }
+
+    public CardDownloadData(String name, String set, String collectorId, boolean usesVariousArt, Integer type, String tokenSetCode, String tokenDescriptor, boolean token, boolean twoFacedCard, boolean secondSide) {
+        this(name, set, collectorId, usesVariousArt, type, tokenSetCode, tokenDescriptor, token, twoFacedCard, secondSide, "");
+    }
+
+    public CardDownloadData(String name, String set, String collectorId, boolean usesVariousArt, Integer type, String tokenSetCode, String tokenDescriptor, boolean token, boolean twoFacedCard, boolean secondSide, String tokenClassName) {
         this.name = name;
         this.set = set;
         this.collectorId = collectorId;
@@ -41,6 +55,12 @@ public class CardDownloadData {
         this.twoFacedCard = twoFacedCard;
         this.secondSide = secondSide;
         this.tokenSetCode = tokenSetCode;
+        this.tokenDescriptor = tokenDescriptor;
+        this.tokenClassName = tokenClassName;
+
+        if (this.tokenDescriptor == null || this.tokenDescriptor.equalsIgnoreCase("")) {
+            this.tokenDescriptor = lastDitchTokenDescriptor();
+        }
     }
 
     public CardDownloadData(final CardDownloadData card) {
@@ -53,6 +73,10 @@ public class CardDownloadData {
         this.type = card.type;
         this.usesVariousArt = card.usesVariousArt;
         this.tokenSetCode = card.tokenSetCode;
+        this.tokenDescriptor = card.tokenDescriptor;
+        this.tokenClassName = card.tokenClassName;
+        this.fileName = card.fileName;
+
     }
 
     @Override
@@ -102,12 +126,29 @@ public class CardDownloadData {
         return hash;
     }
 
-    public Integer getCollectorId() {
+    public String getCollectorId() {
         return collectorId;
+    }
+
+    public Integer getCollectorIdAsInt() {
+        return CardUtil.parseCardNumberAsInt(collectorId);
+    }
+
+    public boolean isCollectorIdWithStr(){
+        // card have special numbers like "103a", "180b" (scryfall style)
+        return !getCollectorId().equals(getCollectorIdAsInt().toString());
     }
 
     public String getName() {
         return name;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 
     public void setName(String name) {
@@ -128,6 +169,29 @@ public class CardDownloadData {
 
     public void setTokenSetCode(String tokenSetCode) {
         this.tokenSetCode = tokenSetCode;
+    }
+
+    public String getTokenDescriptor() {
+        return tokenDescriptor;
+    }
+
+    public void setTokenClassName(String tokenClassName) {
+        this.tokenClassName = tokenClassName;
+    }
+
+    public String getTokenClassName() {
+        return tokenClassName;
+    }
+
+    public void setTokenDescriptor(String tokenDescriptor) {
+        this.tokenDescriptor = tokenDescriptor;
+    }
+
+    private String lastDitchTokenDescriptor() {
+        String tmpName = this.name.replaceAll("[^a-zA-Z0-9]", "");
+        String descriptor = tmpName + "....";
+        descriptor = descriptor.toUpperCase();
+        return descriptor;
     }
 
     public boolean isToken() {

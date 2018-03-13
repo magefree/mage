@@ -24,8 +24,7 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
@@ -45,6 +44,7 @@ public class AttacksCreatureYouControlTriggeredAbility extends TriggeredAbilityI
 
     protected FilterControlledCreaturePermanent filter;
     protected boolean setTargetPointer;
+    protected boolean once = false;
 
     public AttacksCreatureYouControlTriggeredAbility(Effect effect) {
         this(effect, false);
@@ -74,6 +74,10 @@ public class AttacksCreatureYouControlTriggeredAbility extends TriggeredAbilityI
         this.setTargetPointer = ability.setTargetPointer;
     }
 
+    public void setOnce(boolean once) {
+        this.once = once;
+    }
+
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.ATTACKER_DECLARED;
@@ -84,9 +88,7 @@ public class AttacksCreatureYouControlTriggeredAbility extends TriggeredAbilityI
         Permanent sourcePermanent = game.getPermanent(event.getSourceId());
         if (sourcePermanent != null && filter.match(sourcePermanent, sourceId, controllerId, game)) {
             if (setTargetPointer) {
-                for (Effect effect : this.getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(event.getSourceId()));
-                }
+                this.getEffects().setTargetPointer(new FixedTarget(event.getSourceId()));
             }
             return true;
         }
@@ -100,7 +102,6 @@ public class AttacksCreatureYouControlTriggeredAbility extends TriggeredAbilityI
 
     @Override
     public String getRule() {
-        return "Whenever a " + filter.getMessage() + " attacks, " + super.getRule();
+        return "When" + (once ? "" : "ever") + " a" + (filter.getMessage().startsWith("a") ? "n " : " ") + filter.getMessage() + " attacks, " + super.getRule();
     }
-
 }

@@ -85,23 +85,27 @@ public class CounterTargetWithReplacementEffect extends OneShotEffect {
         StringBuilder sb = new StringBuilder("Counter target ");
         sb.append(mode.getTargets().get(0).getTargetName());
         sb.append(". If that spell is countered this way, ");
-        if (targetZone.equals(Zone.EXILED)) {
+        if (targetZone == Zone.EXILED) {
             sb.append("exile it instead of putting it into its owner's graveyard");
         }
-        if (targetZone.equals(Zone.HAND)) {
+        if (targetZone == Zone.HAND) {
             sb.append("put it into its owner's hand instead of into that player's graveyard");
         }
-        if (targetZone.equals(Zone.LIBRARY)) {
+        if (targetZone == Zone.LIBRARY) {
             sb.append("put it on ");
             switch (zoneDetail) {
                 case BOTTOM:
                     sb.append("the bottom");
+                    break;
                 case TOP:
                     sb.append("top");
+                    break;
                 case CHOOSE:
                     sb.append("top or bottom");
+                    break;
                 case NONE:
                     sb.append("<not allowed value>");
+                    break;
             }
             sb.append(" of its owner's library instead of into that player's graveyard");
         }

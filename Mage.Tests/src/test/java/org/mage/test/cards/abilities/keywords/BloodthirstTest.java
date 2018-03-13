@@ -67,7 +67,7 @@ public class BloodthirstTest extends CardTestPlayerBase {
     public void testBloodlord() {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 8);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
-        // Bloodthirst 3
+        // Bloodthirst 3 (If an opponent was dealt damage this turn, this creature enters the battlefield with 3 +1/+1 counters)
         // Whenever you cast a Vampire creature spell, it gains bloodthirst 3
         addCard(Zone.HAND, playerA, "Bloodlord of Vaasgoth"); // {3}{B}{B}
         addCard(Zone.HAND, playerA, "Barony Vampire"); // 3/2  {2}{B}

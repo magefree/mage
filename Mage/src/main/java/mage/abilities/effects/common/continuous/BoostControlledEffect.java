@@ -146,7 +146,6 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
                     perm.addToughness(toughness.calculate(game, source, this));
                 }
             }
-
         }
         return true;
     }
@@ -162,15 +161,15 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
 
         String p = power.toString();
         if (!p.startsWith("-")) {
-            sb.append("+");
+            sb.append('+');
         }
-        sb.append(p).append("/");
+        sb.append(p).append('/');
         String t = toughness.toString();
         if (!t.startsWith("-")) {
             if (p.startsWith("-")) {
-                sb.append("-");
+                sb.append('-');
             } else {
-                sb.append("+");
+                sb.append('+');
             }
         }
         sb.append(t);

@@ -24,13 +24,12 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.sets;
 
-import java.util.GregorianCalendar;
-import mage.constants.SetType;
 import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
+import mage.constants.SetType;
 
 /**
  *
@@ -38,16 +37,22 @@ import mage.cards.ExpansionSet;
  */
 public class WorldMagicCupQualifier extends ExpansionSet {
 
-    private static final WorldMagicCupQualifier fINSTANCE =  new WorldMagicCupQualifier();
+    private static final WorldMagicCupQualifier instance = new WorldMagicCupQualifier();
 
     public static WorldMagicCupQualifier getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private WorldMagicCupQualifier() {
-        super("World Magic Cup Qualifier", "WMCQ", "mage.sets.worldmagiccupqualifier", new GregorianCalendar(2011, 6, 17).getTime(), SetType.PROMOTIONAL);
+        super("World Magic Cup Qualifier", "WMCQ", ExpansionSet.buildDate(2011, 6, 17), SetType.PROMOTIONAL);
         this.hasBoosters = false;
         this.hasBasicLands = false;
+        // https://mtg.gamepedia.com/World_Magic_Cup_Qualifiers
+        cards.add(new SetCardInfo("Abrupt Decay", 2016, Rarity.RARE, mage.cards.a.AbruptDecay.class));
+        cards.add(new SetCardInfo("Geist of Saint Traft", 2014, Rarity.MYTHIC, mage.cards.g.GeistOfSaintTraft.class));
+        cards.add(new SetCardInfo("Inkmoth Nexus", 2017, Rarity.SPECIAL, mage.cards.i.InkmothNexus.class));
+        cards.add(new SetCardInfo("Thalia, Guardian of Thraben", 2015, Rarity.RARE, mage.cards.t.ThaliaGuardianOfThraben.class));
+        cards.add(new SetCardInfo("Vengevine", 2013, Rarity.MYTHIC, mage.cards.v.Vengevine.class));
     }
 
 }

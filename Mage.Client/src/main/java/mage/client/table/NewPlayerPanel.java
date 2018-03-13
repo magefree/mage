@@ -34,13 +34,14 @@
 
 package mage.client.table;
 
-import java.io.File;
-import java.io.IOException;
-import javax.swing.JFileChooser;
-import javax.swing.filechooser.FileFilter;
 import mage.client.MageFrame;
 import mage.client.deck.generator.DeckGenerator;
 import mage.client.util.Config;
+
+import javax.swing.*;
+import javax.swing.filechooser.FileFilter;
+import java.io.File;
+import java.io.IOException;
 
 /**
  *
@@ -65,9 +66,6 @@ public class NewPlayerPanel extends javax.swing.JPanel {
         this.txtPlayerDeck.setText(deckPath);
         if (Config.defaultComputerName != null) {
             this.txtPlayerName.setText(Config.defaultComputerName);
-        }
-        if (cbLevel.getModel().getSize() > 0) {
-            cbLevel.setSelectedIndex(cbLevel.getModel().getSize()/2);
         }
     }
 
@@ -115,11 +113,11 @@ public class NewPlayerPanel extends javax.swing.JPanel {
 
 
     public int getLevel() {
-        return Integer.valueOf((String)this.cbLevel.getSelectedItem());
+        return (Integer)spnLevel.getValue();
     }
 
     public void showLevel(boolean show) {
-        this.cbLevel.setVisible(show);
+        this.spnLevel.setVisible(show);
         this.lblLevel.setVisible(show);
     }
 
@@ -146,29 +144,21 @@ public class NewPlayerPanel extends javax.swing.JPanel {
         btnPlayerDeck = new javax.swing.JButton();
         btnGenerate = new javax.swing.JButton();
         lblLevel = new javax.swing.JLabel();
-        cbLevel = new javax.swing.JComboBox();
+        spnLevel = new javax.swing.JSpinner();
 
         lblPlayerName.setText("Name:");
 
         lblPlayerDeck.setText("Deck:");
 
         btnPlayerDeck.setText("...");
-        btnPlayerDeck.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPlayerDeckActionPerformed(evt);
-            }
-        });
+        btnPlayerDeck.addActionListener(evt -> btnPlayerDeckActionPerformed(evt));
 
         btnGenerate.setText("Generate");
-        btnGenerate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGenerateActionPerformed(evt);
-            }
-        });
+        btnGenerate.addActionListener(evt -> btnGenerateActionPerformed(evt));
 
         lblLevel.setText("Skill:");
 
-        cbLevel.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
+        spnLevel.setModel(new javax.swing.SpinnerNumberModel(6, 1, 10, 1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -182,18 +172,19 @@ public class NewPlayerPanel extends javax.swing.JPanel {
                     .addComponent(lblPlayerName))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtPlayerName, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
-                    .addComponent(txtPlayerDeck, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE))
+                    .addComponent(txtPlayerName, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
+                    .addComponent(txtPlayerDeck, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnPlayerDeck, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnGenerate, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblLevel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbLevel, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(spnLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(64, 64, 64))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -202,7 +193,7 @@ public class NewPlayerPanel extends javax.swing.JPanel {
                     .addComponent(txtPlayerName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblPlayerName)
                     .addComponent(lblLevel)
-                    .addComponent(cbLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(spnLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(3, 3, 3)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPlayerDeck)
@@ -224,10 +215,10 @@ public class NewPlayerPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGenerate;
     private javax.swing.JButton btnPlayerDeck;
-    private javax.swing.JComboBox cbLevel;
     private javax.swing.JLabel lblLevel;
     private javax.swing.JLabel lblPlayerDeck;
     private javax.swing.JLabel lblPlayerName;
+    private javax.swing.JSpinner spnLevel;
     private javax.swing.JTextField txtPlayerDeck;
     private javax.swing.JTextField txtPlayerName;
     // End of variables declaration//GEN-END:variables

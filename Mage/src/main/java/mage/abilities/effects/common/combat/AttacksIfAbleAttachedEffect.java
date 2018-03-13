@@ -44,11 +44,7 @@ public class AttacksIfAbleAttachedEffect extends RequirementEffect {
 
     public AttacksIfAbleAttachedEffect(Duration duration, AttachmentType attachmentType) {
         super(duration);
-        if (attachmentType.equals(AttachmentType.AURA)) {
-            this.staticText = "Enchanted creature attacks each turn if able";
-        } else {
-            this.staticText = "Equipped creature attacks each turn if able";
-        }
+        this.staticText = attachmentType.verb() + " creature attacks each turn if able";
     }
 
     public AttacksIfAbleAttachedEffect(final AttacksIfAbleAttachedEffect effect) {

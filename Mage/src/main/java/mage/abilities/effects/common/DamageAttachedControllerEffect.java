@@ -30,6 +30,8 @@ package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
 import mage.abilities.Mode;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.game.Game;
@@ -42,9 +44,14 @@ import mage.players.Player;
  */
 public class DamageAttachedControllerEffect extends OneShotEffect {
 
-    protected int amount;
+    protected DynamicValue amount;
 
     public DamageAttachedControllerEffect(int amount) {
+        super(Outcome.Damage);
+        this.amount = new StaticValue(amount);
+    }
+    
+    public DamageAttachedControllerEffect(DynamicValue amount) {
         super(Outcome.Damage);
         this.amount = amount;
     }
@@ -71,7 +78,7 @@ public class DamageAttachedControllerEffect extends OneShotEffect {
         }
         Player player = game.getPlayer(enchanted.getControllerId());
         if(player != null) {
-            player.damage(amount, source.getSourceId(), game, false, true);
+            player.damage(amount.calculate(game, source, this), source.getSourceId(), game, false, true);
             return true;
         }
         return false;
@@ -82,7 +89,9 @@ public class DamageAttachedControllerEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        return "{this} deals " + amount + " damage to that creature's controller";
+        if ("equal to".equals(amount.toString())) {
+            return "{this} deals damage " + amount + " that creatures toughness to that creature's controller";
+        }
+         return "{this} deals " + amount + " damage to that creature's controller";
     }
-
 }

@@ -10,7 +10,7 @@ import java.util.List;
  *
  * @author noxx
  */
-public class FileHelper {
+public final class FileHelper {
 
     private FileHelper() {
     }
@@ -18,22 +18,12 @@ public class FileHelper {
     /**
      * Filters out dirs.
      */
-    private static final FileFilter anyFileFilter = new FileFilter() {
-        @Override
-        public boolean accept(File f) {
-            return f.isFile();
-        }
-    };
+    private static final FileFilter anyFileFilter = f -> f.isFile();
 
     /**
      * Filters out jars.
      */
-    private static final FilenameFilter jarFileFilter = new FilenameFilter() {
-        @Override
-        public boolean accept(File dir, String name) {
-            return name.endsWith(".jar");
-        }
-    };
+    private static final FilenameFilter jarFileFilter = (dir, name) -> name.endsWith(".jar");
 
     /**
      * Gets .jar files from specified folder.
@@ -42,7 +32,7 @@ public class FileHelper {
      * @return
      */
     public static List<File> findJarsInDir(String dir) {
-        ArrayList<File> result = new ArrayList<File>();
+        ArrayList<File> result = new ArrayList<>();
         File directory = new File(dir);
         if (directory.exists() && directory.isDirectory()) {
             for (File jar : directory.listFiles(jarFileFilter)) {
@@ -59,7 +49,7 @@ public class FileHelper {
      * @return
      */
     public static List<File> findAllFilesInDir(String dir) {
-        ArrayList<File> result = new ArrayList<File>();
+        ArrayList<File> result = new ArrayList<>();
         File directory = new File(dir);
         if (directory.exists() && directory.isDirectory()) {
             for (File jar : directory.listFiles(anyFileFilter)) {

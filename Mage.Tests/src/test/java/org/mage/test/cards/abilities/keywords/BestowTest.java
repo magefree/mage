@@ -27,8 +27,10 @@
  */
 package org.mage.test.cards.abilities.keywords;
 
+import mage.abilities.mana.ManaOptions;
 import mage.constants.CardType;
 import mage.constants.PhaseStep;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
 import org.junit.Assert;
@@ -69,7 +71,7 @@ public class BestowTest extends CardTestPlayerBase {
     @Test
     public void bestowEnchantmentToCreature() {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
-        addCard(Zone.BATTLEFIELD, playerA, "Silent Artisan");
+        addCard(Zone.BATTLEFIELD, playerA, "Silent Artisan"); // 3/5
         addCard(Zone.HAND, playerA, "Hopeful Eidolon");
         addCard(Zone.HAND, playerA, "Gods Willing");
 
@@ -109,7 +111,7 @@ public class BestowTest extends CardTestPlayerBase {
         // because Boon Satyr is no creature on the battlefield, evolve may not trigger
         assertPermanentCount(playerA, "Boon Satyr", 1);
         Permanent boonSatyr = getPermanent("Boon Satyr", playerA);
-        Assert.assertTrue("Boon Satyr may not be a creature", !boonSatyr.getCardType().contains(CardType.CREATURE));
+        Assert.assertTrue("Boon Satyr may not be a creature", !boonSatyr.isCreature());
         assertPermanentCount(playerA, "Silent Artisan", 1);
         assertPermanentCount(playerA, "Experiment One", 1);
         assertPowerToughness(playerA, "Experiment One", 1, 1);
@@ -145,8 +147,8 @@ public class BestowTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Hopeful Eidolon", 1, 1);
 
         Permanent hopefulEidolon = getPermanent("Hopeful Eidolon", playerA);
-        Assert.assertTrue("Hopeful Eidolon has to be a creature but is not", hopefulEidolon.getCardType().contains(CardType.CREATURE));
-        Assert.assertTrue("Hopeful Eidolon has to be an enchantment but is not", hopefulEidolon.getCardType().contains(CardType.ENCHANTMENT));
+        Assert.assertTrue("Hopeful Eidolon has to be a creature but is not", hopefulEidolon.isCreature());
+        Assert.assertTrue("Hopeful Eidolon has to be an enchantment but is not", hopefulEidolon.isEnchantment());
 
     }
 
@@ -360,7 +362,134 @@ public class BestowTest extends CardTestPlayerBase {
         assertPowerToughness(playerB, "Nighthowler", 2, 2);
         Permanent nighthowler = getPermanent("Nighthowler", playerB);
 
-        Assert.assertEquals("Nighthowler has to be a creature", true, nighthowler.getCardType().contains(CardType.CREATURE));
-
+        Assert.assertEquals("Nighthowler has to be a creature", true, nighthowler.isCreature());
     }
+
+    @Test
+    public void testSightlessBrawlerCantAttackAloneEnforced() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
+        // Enchantment Creature — Human Warrior
+        // 3/2
+        // Bestow 4W (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)
+        // Sightless Brawler can't attack alone.
+        // Enchanted creature gets +3/+2 and can't attack alone.
+        addCard(Zone.BATTLEFIELD, playerA, "Sightless Brawler");
+
+        attack(1, playerA, "Sightless Brawler");
+        setStopAt(1, PhaseStep.END_COMBAT);
+        execute();
+
+        assertLife(playerB, 20);
+        assertTapped("Sightless Brawler", false);
+    }
+
+    @Test
+    public void testSightlessBrawlerAttacksWithOthers() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
+        // Enchantment Creature — Human Warrior
+        // 3/2
+        // Bestow 4W (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)
+        // Sightless Brawler can't attack alone.
+        // Enchanted creature gets +3/+2 and can't attack alone.
+        addCard(Zone.BATTLEFIELD, playerA, "Sightless Brawler"); // 3/2
+        addCard(Zone.BATTLEFIELD, playerA, "Elite Vanguard"); // {W} 2/1 creature
+
+        attack(1, playerA, "Sightless Brawler");
+        attack(1, playerA, "Elite Vanguard");
+        setStopAt(1, PhaseStep.END_COMBAT);
+        execute();
+
+        assertLife(playerB, 15);
+        assertTapped("Sightless Brawler", true);
+    }
+
+    @Test
+    public void testSightlessBrawlerBestowedCantAttackAloneEnforced() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
+        // Enchantment Creature — Human Warrior
+        // 3/2
+        // Bestow 4W (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)
+        // Sightless Brawler can't attack alone.
+        // Enchanted creature gets +3/+2 and can't attack alone.
+        addCard(Zone.HAND, playerA, "Sightless Brawler");
+        addCard(Zone.BATTLEFIELD, playerA, "Elite Vanguard"); // {W} 2/1 creature
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sightless Brawler using bestow", "Elite Vanguard");
+        attack(1, playerA, "Elite Vanguard");
+        setStopAt(1, PhaseStep.END_COMBAT);
+        execute();
+
+        assertHandCount(playerA, "Sightless Brawler", 0);
+        assertLife(playerB, 20);
+        assertTapped("Elite Vanguard", false);
+        assertPowerToughness(playerA, "Elite Vanguard", 5, 3); // 2/1 + 3/2 = 5/3
+    }
+
+    @Test
+    public void testSightlessBrawlerBestowedAttacksWithOthers() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
+        // Enchantment Creature — Human Warrior
+        // 3/2
+        // Bestow 4W (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)
+        // Sightless Brawler can't attack alone.
+        // Enchanted creature gets +3/+2 and can't attack alone.
+        addCard(Zone.HAND, playerA, "Sightless Brawler");
+        addCard(Zone.BATTLEFIELD, playerA, "Elite Vanguard"); // {W} 2/1 creature
+        addCard(Zone.BATTLEFIELD, playerA, "Memnite"); // {1} 1/1
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sightless Brawler using bestow", "Elite Vanguard");
+        attack(1, playerA, "Elite Vanguard");
+        attack(1, playerA, "Memnite");
+        setStopAt(1, PhaseStep.END_COMBAT);
+        execute();
+
+        assertHandCount(playerA, "Sightless Brawler", 0);
+        assertLife(playerB, 14);
+        assertTapped("Elite Vanguard", true);
+        assertPowerToughness(playerA, "Elite Vanguard", 5, 3); // 2/1 + 3/2 = 5/3
+    }
+
+    /**
+     * When a creature with Nighthowler attatched gets enchanted with Song of
+     * the Dryads, Nightholwer doesn't become a creature and gets turned into a
+     * card without stats.
+     */
+    @Test
+    public void testEnchantedChangedWithSongOfTheDryads() {
+        // Enchantment Creature — Horror
+        // 0/0
+        // Bestow {2}{B}{B}
+        // Nighthowler and enchanted creature each get +X/+X, where X is the number of creature cards in all graveyards.
+        addCard(Zone.HAND, playerA, "Nighthowler");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion"); // {1}{W} 2/2 creature
+
+        addCard(Zone.GRAVEYARD, playerA, "Pillarfield Ox");
+        addCard(Zone.GRAVEYARD, playerB, "Pillarfield Ox");
+
+        // Enchant permanent
+        // Enchanted permanent is a colorless Forest land.
+        addCard(Zone.BATTLEFIELD, playerB, "Forest", 3);
+        addCard(Zone.HAND, playerB, "Song of the Dryads"); // Enchantment Aura {2}{G}
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Nighthowler using bestow", "Silvercoat Lion");
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Song of the Dryads", "Silvercoat Lion");
+        setStopAt(2, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerB, "Song of the Dryads", 1);
+
+        ManaOptions options = playerA.getAvailableManaTest(currentGame);
+        Assert.assertEquals("Player should be able to create 1 green mana", "{G}", options.get(0).toString());
+
+        assertPermanentCount(playerA, "Nighthowler", 1);
+        assertPowerToughness(playerA, "Nighthowler", 2, 2);
+        assertType("Nighthowler", CardType.CREATURE, true);
+        assertType("Nighthowler", CardType.ENCHANTMENT, true);
+
+        Permanent nighthowler = getPermanent("Nighthowler");
+        Assert.assertFalse("The unattached Nighthowler may not have the aura subtype.", nighthowler.getSubtype(currentGame).contains(SubType.AURA));
+    }
+
 }

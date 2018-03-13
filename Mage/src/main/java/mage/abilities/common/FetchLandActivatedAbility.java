@@ -28,7 +28,6 @@
 
 package mage.abilities.common;
 
-import java.util.ArrayList;
 import mage.MageObject;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.common.PayLifeCost;
@@ -37,6 +36,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicate;
@@ -45,17 +45,21 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
 public class FetchLandActivatedAbility extends ActivatedAbilityImpl {
 
-    public FetchLandActivatedAbility(String[] subtypes) {
+    public FetchLandActivatedAbility(Set<SubType> subtypes) {
         this(true, subtypes);
     }
 
-    public FetchLandActivatedAbility(boolean withDamage, String[] subtypes) {
+    public FetchLandActivatedAbility(boolean withDamage, Set<SubType> subtypes) {
         super(Zone.BATTLEFIELD, null);
         addCost(new TapSourceCost());
         if (withDamage) {
@@ -64,8 +68,8 @@ public class FetchLandActivatedAbility extends ActivatedAbilityImpl {
         addCost(new SacrificeSourceCost());
         FilterCard filter = new FilterCard(subTypeNames(subtypes));
         filter.add(new CardTypePredicate(CardType.LAND));
-        ArrayList<Predicate<MageObject>> subtypePredicates = new ArrayList<>();
-        for (String subtype : subtypes) {
+        List<Predicate<MageObject>> subtypePredicates = new ArrayList<>();
+        for (SubType subtype : subtypes) {
             subtypePredicates.add(new SubtypePredicate(subtype));
         }
         filter.add(Predicates.or(subtypePredicates));
@@ -77,10 +81,10 @@ public class FetchLandActivatedAbility extends ActivatedAbilityImpl {
         super(ability);
     }
 
-    private String subTypeNames(String[] subTypes) {
+    private String subTypeNames(Set<SubType> subTypes) {
         StringBuilder sb = new StringBuilder();
-        for (String subType: subTypes) {
-            sb.append(subType).append(" or ");
+        for (SubType subType: subTypes) {
+            sb.append(subType.getDescription()).append(" or ");
         }
         return sb.substring(0, sb.length() - 4);
     }

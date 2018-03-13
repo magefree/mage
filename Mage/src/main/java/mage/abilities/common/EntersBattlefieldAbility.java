@@ -88,14 +88,14 @@ public class EntersBattlefieldAbility extends StaticAbility {
 
     @Override
     public void addEffect(Effect effect) {
-        if (getEffects().size() > 0) {
+        if (!getEffects().isEmpty()) {
             Effect entersBattlefieldEffect = this.getEffects().get(0);
             if (entersBattlefieldEffect instanceof EntersBattlefieldEffect) {
                 ((EntersBattlefieldEffect) entersBattlefieldEffect).addEffect(effect);
                 return;
             }
         }
-        super.addEffect(effect); //To change body of generated methods, choose Tools | Templates.
+        super.addEffect(effect);
     }
 
     @Override
@@ -108,6 +108,7 @@ public class EntersBattlefieldAbility extends StaticAbility {
         if (abilityRule != null && !abilityRule.isEmpty()) {
             return abilityRule;
         }
-        return (optional ? "you may have " : "") + "{this} enter" + (optional ? "" : "s") + " the battlefield " + super.getRule();
+        String superRule = super.getRule();
+        return (optional ? "you may have " : "") + "{this} enter" + (optional ? "" : "s") + " the battlefield" + (superRule.charAt(0) == ' ' ? "" : " ") + superRule;
     }
 }

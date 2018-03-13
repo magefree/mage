@@ -24,11 +24,9 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.abilities.keyword;
 
-import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.abilities.Ability;
 import mage.abilities.EvasionAbility;
@@ -45,14 +43,14 @@ import java.io.ObjectStreamException;
  */
 public class FearAbility extends EvasionAbility implements MageSingleton {
 
-    private static final FearAbility fINSTANCE =  new FearAbility();
+    private static final FearAbility instance = new FearAbility();
 
     private Object readResolve() throws ObjectStreamException {
-        return fINSTANCE;
+        return instance;
     }
 
     public static FearAbility getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private FearAbility() {
@@ -61,12 +59,12 @@ public class FearAbility extends EvasionAbility implements MageSingleton {
 
     @Override
     public String getRule() {
-        return "Fear";
+        return "fear";
     }
 
     @Override
     public FearAbility copy() {
-        return fINSTANCE;
+        return instance;
     }
 
 }
@@ -83,18 +81,12 @@ class FearEffect extends RestrictionEffect implements MageSingleton {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (permanent.getAbilities().containsKey(FearAbility.getInstance().getId())) {
-            return true;
-        }
-        return false;
+        return permanent.getAbilities().containsKey(FearAbility.getInstance().getId());
     }
 
     @Override
     public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        if (blocker.getCardType().contains(CardType.ARTIFACT) || blocker.getColor(game).isBlack()) {
-            return true;
-        }
-        return false;
+        return blocker.isArtifact() || blocker.getColor(game).isBlack();
     }
 
     @Override

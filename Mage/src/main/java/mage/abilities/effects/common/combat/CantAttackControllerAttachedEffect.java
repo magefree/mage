@@ -46,11 +46,7 @@ public class CantAttackControllerAttachedEffect extends RestrictionEffect {
 
     public CantAttackControllerAttachedEffect(AttachmentType attachmentType) {
         super(Duration.WhileOnBattlefield);
-        if (attachmentType.equals(AttachmentType.AURA)) {
-            this.staticText = "Enchanted creature can't attack you or a planeswalker you control";
-        } else {
-            this.staticText = "Equipped creature can't attack you or a planeswalker you control";
-        }
+        this.staticText = attachmentType.verb() + " creature can't attack you or a planeswalker you control";
     }
 
     public CantAttackControllerAttachedEffect(final CantAttackControllerAttachedEffect effect) {

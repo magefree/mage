@@ -38,6 +38,7 @@ import mage.game.Game;
  *
  * @author LevelX2
  */
+@FunctionalInterface
 public interface AlternateManaPaymentAbility {
     /**
      * Adds the special action to the state, that allows the user to do the alternate mana payment

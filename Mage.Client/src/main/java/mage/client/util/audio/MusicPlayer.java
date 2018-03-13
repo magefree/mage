@@ -1,7 +1,8 @@
 package mage.client.util.audio;
 
-import java.io.File;
 import java.awt.List;
+import java.io.File;
+import java.util.concurrent.TimeUnit;
 import javax.sound.sampled.*;
 import mage.client.constants.Constants;
 import mage.client.dialog.PreferencesDialog;
@@ -16,7 +17,7 @@ public class MusicPlayer {
     private static final Logger log = Logger.getLogger(AudioManager.class);
     String filepath;
     String filename;
-    List filelist = new List();
+    final List filelist = new List();
     static MusicPlayer player = null;
 
     //open file and add list
@@ -75,7 +76,7 @@ public class MusicPlayer {
             player.breaked_out = true;
             player.breaked = true;
             try {
-                Thread.sleep(100);
+                TimeUnit.MILLISECONDS.sleep(100);
             } catch (Exception e) {
                 log.error("Thread error: " + e);
             }
@@ -112,14 +113,14 @@ public class MusicPlayer {
                 volume = (FloatControl) sourceDataLine.getControl(FloatControl.Type.MASTER_GAIN);
                 sourceDataLine.start();
             } catch (Exception e) {
-                log.error("Couldn't load file: " + file + " " + e);
+                log.error("Couldn't load file: " + file + ' ' + e);
             }
 
         }
 
         public void run() {
             try {
-                Thread.sleep(100);
+                TimeUnit.MILLISECONDS.sleep(100);
             } catch (Exception e) {
             }
             while (!stopped) {
@@ -130,7 +131,7 @@ public class MusicPlayer {
                 PlayThread.start();
                 while (!(breaked || breaked_out)) {
                     try {
-                        Thread.sleep(10);
+                        TimeUnit.MILLISECONDS.sleep(10);
                     } catch (Exception e) {
                         log.error("Thread error: " + e);
                     }
@@ -138,11 +139,11 @@ public class MusicPlayer {
                 breaked = false;
             }
         }
-    };
+    }
 
     class PlayThread extends Thread {
 
-        byte tempBuffer[] = new byte[320];
+        final byte[] tempBuffer = new byte[320];
 
         public void run() {
             try {
@@ -165,5 +166,5 @@ public class MusicPlayer {
                 log.error("Thread error: " + e);
             }
         }
-    };
+    }
 }

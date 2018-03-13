@@ -100,7 +100,7 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
     protected static final String ABILITY_KEYWORD = "Morph";
     protected static final String ABILITY_KEYWORD_MEGA = "Megamorph";
     protected static final String REMINDER_TEXT = "<i>(You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)</i>";
-    protected static final String REMINDER_TEXT_MEGA = "<i>(You may cast this card face down as a 2/2 creature for {3}. Turn it face up at any time for its megamorph cost and put a +1/+1 counter on it.)</i>";
+    protected static final String REMINDER_TEXT_MEGA = "<i>(You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its megamorph cost and put a +1/+1 counter on it.)</i>";
     protected String ruleText;
     protected AlternativeCost2Impl alternateCosts = new AlternativeCost2Impl(ABILITY_KEYWORD, REMINDER_TEXT, new GenericManaCost(3));
     protected Costs<Cost> morphCosts;
@@ -127,9 +127,9 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
         this.setWorksFaceDown(true);
         StringBuilder sb = new StringBuilder();
         if (megamorph) {
-            sb.append(ABILITY_KEYWORD_MEGA).append(" ");
+            sb.append(ABILITY_KEYWORD_MEGA).append(' ');
         } else {
-            sb.append(ABILITY_KEYWORD).append(" ");
+            sb.append(ABILITY_KEYWORD).append(' ');
         }
         name = ABILITY_KEYWORD;
         for (Cost cost : morphCosts) {
@@ -138,7 +138,11 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
                 break;
             }
         }
-        sb.append(morphCosts.getText()).append(" ");
+        sb.append(morphCosts.getText());
+        if (!(morphCosts.get(morphCosts.size() - 1) instanceof ManaCosts)) {
+            sb.append('.');
+        }
+        sb.append(' ');
         if (megamorph) {
             sb.append(REMINDER_TEXT_MEGA);
         } else {
@@ -199,7 +203,7 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
 
     @Override
     public boolean askToActivateAlternativeCosts(Ability ability, Game game) {
-        if (ability.getAbilityType().equals(AbilityType.SPELL)) {
+        if (ability.getAbilityType() == AbilityType.SPELL) {
             Player player = game.getPlayer(controllerId);
             Spell spell = game.getStack().getSpell(ability.getId());
             if (player != null && spell != null) {
@@ -226,13 +230,14 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
                         spellColor.setGreen(false);
                         spellColor.setWhite(false);
                         spellColor.setBlue(false);
+                        spell.getSubtype(game).clear();
                     } else {
                         spell.setFaceDown(false, game);
                     }
                 }
             }
         }
-        if (ability.getAbilityType().equals(AbilityType.PLAY_LAND)) {
+        if (ability.getAbilityType() == AbilityType.PLAY_LAND) {
             Player player = game.getPlayer(controllerId);
             if (player != null) {
                 this.resetMorph();
@@ -282,10 +287,7 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
 
     @Override
     public String getCastMessageSuffix(Game game) {
-        StringBuilder sb = new StringBuilder();
-        int position = 0;
-        sb.append(alternateCosts.getCastSuffixMessage(position));
-        return sb.toString();
+        return alternateCosts.getCastSuffixMessage(0);
     }
 
     @Override
@@ -295,15 +297,15 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
     }
 
     public static void setPermanentToFaceDownCreature(MageObject mageObject) {
-        mageObject.getPower().initValue(2);
-        mageObject.getToughness().initValue(2);
+        mageObject.getPower().modifyBaseValue(2);
+        mageObject.getToughness().modifyBaseValue(2);
         mageObject.getAbilities().clear();
         mageObject.getColor(null).setColor(new ObjectColor());
         mageObject.setName("");
         mageObject.getCardType().clear();
-        mageObject.getCardType().add(CardType.CREATURE);
-        mageObject.getSubtype().clear();
-        mageObject.getSupertype().clear();
+        mageObject.addCardType(CardType.CREATURE);
+        mageObject.getSubtype(null).clear();
+        mageObject.getSuperType().clear();
         mageObject.getManaCost().clear();
         if (mageObject instanceof Permanent) {
             ((Permanent) mageObject).setExpansionSetCode("");

@@ -1,19 +1,20 @@
 package mage.abilities.dynamicvalue.common;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
-import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  * @author Loki
  */
 public class DomainValue implements DynamicValue {
 
-    private Integer amount;
+    private int amount;
     private boolean countTargetPlayer;
     private UUID playerId;
 
@@ -25,16 +26,16 @@ public class DomainValue implements DynamicValue {
         this(1, countTargetPlayer);
     }
 
-    public DomainValue(Integer amount) {
+    public DomainValue(int amount) {
         this(amount, false);
     }
 
-    public DomainValue(Integer amount, boolean countTargetPlayer) {
+    public DomainValue(int amount, boolean countTargetPlayer) {
         this.amount = amount;
         this.countTargetPlayer = countTargetPlayer;
     }
 
-    public DomainValue(Integer amount, UUID playerId) {
+    public DomainValue(int amount, UUID playerId) {
         this(amount, false);
         this.playerId = playerId;
     }
@@ -61,20 +62,20 @@ public class DomainValue implements DynamicValue {
             targetPlayer = sourceAbility.getControllerId();
         }
         for (Permanent p : game.getBattlefield().getAllActivePermanents(targetPlayer)) {
-            if (p.getCardType().contains(CardType.LAND)) {
-                if (havePlains == 0 && p.getSubtype().contains("Plains")) {
+            if (p.isLand()) {
+                if (havePlains == 0 && p.hasSubtype(SubType.PLAINS, game)) {
                     havePlains = 1;
                 }
-                if (haveIslands == 0 && p.getSubtype().contains("Island")) {
+                if (haveIslands == 0 && p.hasSubtype(SubType.ISLAND, game)) {
                     haveIslands = 1;
                 }
-                if (haveMountains == 0 && p.getSubtype().contains("Mountain")) {
+                if (haveMountains == 0 && p.hasSubtype(SubType.MOUNTAIN, game)) {
                     haveMountains = 1;
                 }
-                if (haveSwamps == 0 && p.getSubtype().contains("Swamp")) {
+                if (haveSwamps == 0 && p.hasSubtype(SubType.SWAMP, game)) {
                     haveSwamps = 1;
                 }
-                if (haveForests == 0 && p.getSubtype().contains("Forest")) {
+                if (haveForests == 0 && p.hasSubtype(SubType.FOREST, game)) {
                     haveForests = 1;
                 }
             }
@@ -89,15 +90,15 @@ public class DomainValue implements DynamicValue {
 
     @Override
     public String toString() {
-        return amount.toString();
+        return String.valueOf(amount);
     }
 
-    public Integer getAmount() {
+    public int getAmount() {
         return amount;
     }
 
     @Override
     public String getMessage() {
-        return "basic land type among lands you control";
+        return "basic land type among lands " + (countTargetPlayer ? "he or she controls" : "you control");
     }
 }

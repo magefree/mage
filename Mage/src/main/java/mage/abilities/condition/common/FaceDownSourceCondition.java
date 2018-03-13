@@ -39,13 +39,9 @@ import mage.game.permanent.Permanent;
  * @author LevelX2
  */
 
-public class FaceDownSourceCondition implements Condition {
+public enum FaceDownSourceCondition implements Condition {
 
-    private final static FaceDownSourceCondition fInstance = new FaceDownSourceCondition();
-
-    public static Condition getInstance() {
-        return fInstance;
-    }
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

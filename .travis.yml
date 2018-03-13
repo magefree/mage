@@ -1,0 +1,5 @@
+sudo: required
+dist: trusty
+language: java
+before_install:
+  - echo "MAVEN_OPTS='-Xmx2g'" > ~/.mavenrc

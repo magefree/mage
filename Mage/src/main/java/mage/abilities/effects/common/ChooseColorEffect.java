@@ -59,14 +59,8 @@ public class ChooseColorEffect extends OneShotEffect {
         if (mageObject == null) {
             mageObject = game.getObject(source.getSourceId());
         }
-        if (controller != null && mageObject != null) {
-            ChoiceColor choice = new ChoiceColor();
-            while (!choice.isChosen()) {
-                controller.choose(outcome, choice, game);
-                if (!controller.canRespond()) {
-                    return false;
-                }
-            }
+        ChoiceColor choice = new ChoiceColor();
+        if (controller != null && mageObject != null && controller.choose(outcome, choice, game)) {
             if (!game.isSimulation()) {
                 game.informPlayers(mageObject.getLogName() + ": " + controller.getLogName() + " has chosen " + choice.getChoice());
             }

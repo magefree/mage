@@ -27,17 +27,19 @@
  */
 package mage.game.permanent.token;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.util.RandomUtil;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  *
@@ -51,10 +53,10 @@ public class ClueArtifactToken extends Token {
     }
 
     public ClueArtifactToken() {
-        super("Clue", "colorless Clue artifact token onto the battlefield with \"{2}, Sacrifice this artifact: Draw a card.\"");
+        super("Clue", "colorless Clue artifact token with \"{2}, Sacrifice this artifact: Draw a card.\"");
         availableImageSetCodes = tokenImageSets;
         cardType.add(CardType.ARTIFACT);
-        subtype.add("Clue");
+        subtype.add(SubType.CLUE);
 
         // {2}, Sacrifice this artifact: Draw a card.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new GenericManaCost(2));
@@ -64,15 +66,14 @@ public class ClueArtifactToken extends Token {
         this.addAbility(ability);
     }
 
-
     @Override
     public void setExpansionSetCodeForImage(String code) {
         super.setExpansionSetCodeForImage(code);
         if (getOriginalExpansionSetCode().equals("SOI")) {
-            this.setTokenType(new Random().nextInt(6) + 1); // 6 different images
+            this.setTokenType(RandomUtil.nextInt(6) + 1); // 6 different images
         }
         if (getOriginalExpansionSetCode().equals("EDM")) {
-            this.setTokenType(new Random().nextInt(6) + 1); // 6 different images
+            this.setTokenType(RandomUtil.nextInt(6) + 1); // 6 different images
         }
     }
 

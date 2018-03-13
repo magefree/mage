@@ -74,13 +74,6 @@ public class Counter implements Serializable {
     }
 
     /**
-     * Increases the {@code count} by 1
-     */
-    public void increase() {
-        count++;
-    }
-
-    /**
      * Adds the passed in {@code amount} to the {@code count}
      *
      * @param amount the value to add to the {@code count}
@@ -158,10 +151,7 @@ public class Counter implements Serializable {
 
         Counter counter = (Counter) o;
 
-        if (count != counter.count) {
-            return false;
-        }
-        return !(name != null ? !name.equals(counter.name) : counter.name != null);
+        return count == counter.count && !(name != null ? !name.equals(counter.name) : counter.name != null);
 
     }
 

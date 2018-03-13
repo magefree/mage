@@ -39,7 +39,7 @@ import mage.abilities.costs.mana.AlternateManaPaymentAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
+import mage.choices.ChoiceColor;
 import mage.constants.AbilityType;
 import mage.constants.ManaType;
 import mage.constants.Outcome;
@@ -115,7 +115,7 @@ public class ConvokeAbility extends SimpleStaticAbility implements AlternateMana
     public void addSpecialAction(Ability source, Game game, ManaCost unpaid) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && game.getBattlefield().contains(filterUntapped, controller.getId(), 1, game)) {
-            if (source.getAbilityType().equals(AbilityType.SPELL)) {
+            if (source.getAbilityType() == AbilityType.SPELL) {
                 SpecialAction specialAction = new ConvokeSpecialAction(unpaid);
                 specialAction.setControllerId(source.getControllerId());
                 specialAction.setSourceId(source.getSourceId());
@@ -208,15 +208,12 @@ class ConvokeEffect extends OneShotEffect {
                 if (!perm.isTapped() && perm.tap(game)) {
                     ManaPool manaPool = controller.getManaPool();
                     Choice chooseManaType = buildChoice(perm.getColor(game), unpaid.getMana());
-                    if (chooseManaType.getChoices().size() > 0) {
+                    if (!chooseManaType.getChoices().isEmpty()) {
                         if (chooseManaType.getChoices().size() > 1) {
                             chooseManaType.getChoices().add("Colorless");
                             chooseManaType.setMessage("Choose mana color to reduce from " + perm.getName());
-                            while (!chooseManaType.isChosen()) {
-                                controller.choose(Outcome.Benefit, chooseManaType, game);
-                                if (!controller.canRespond()) {
-                                    return false;
-                                }
+                            if (!controller.choose(Outcome.Benefit, chooseManaType, game)) {
+                                return false;
                             }
                         } else {
                             chooseManaType.setChoice(chooseManaType.getChoices().iterator().next());
@@ -251,9 +248,7 @@ class ConvokeEffect extends OneShotEffect {
                         manaPool.unlockManaType(ManaType.COLORLESS);
                         manaName = "colorless";
                     }
-                    if (!game.isSimulation()) {
-                        game.informPlayers("Convoke: " + controller.getLogName() + " taps " + perm.getLogName() + " to pay one " + manaName + " mana");
-                    }
+                    game.informPlayers("Convoke: " + controller.getLogName() + " taps " + perm.getLogName() + " to pay one " + manaName + " mana");
                 }
 
             }
@@ -263,7 +258,8 @@ class ConvokeEffect extends OneShotEffect {
     }
 
     private Choice buildChoice(ObjectColor creatureColor, Mana mana) {
-        Choice choice = new ChoiceImpl();
+        Choice choice = new ChoiceColor();
+        choice.getChoices().clear();
         if (creatureColor.isBlack() && mana.getBlack() > 0) {
             choice.getChoices().add("Black");
         }

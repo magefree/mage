@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
+import mage.abilities.Ability;
 import mage.constants.PhaseStep;
 import mage.constants.TurnPhase;
 import mage.counters.CounterType;
@@ -126,7 +127,7 @@ public class Turn implements Serializable {
     public boolean play(Game game, Player activePlayer) {
         activePlayer.becomesActivePlayer();
         this.setDeclareAttackersStepStarted(false);
-        if (game.isPaused() || game.gameOver(null)) {
+        if (game.isPaused() || game.checkIfGameIsOver()) {
             return false;
         }
 
@@ -142,10 +143,10 @@ public class Turn implements Serializable {
         resetCounts();
         game.getPlayer(activePlayer.getId()).beginTurn(game);
         for (Phase phase : phases) {
-            if (game.isPaused() || game.gameOver(null)) {
+            if (game.isPaused() || game.checkIfGameIsOver()) {
                 return false;
             }
-            if (!isEndTurnRequested() || phase.getType().equals(TurnPhase.END)) {
+            if (!isEndTurnRequested() || phase.getType() == TurnPhase.END) {
                 currentPhase = phase;
                 game.fireEvent(new GameEvent(GameEvent.EventType.PHASE_CHANGED, activePlayer.getId(), null, activePlayer.getId()));
                 if (!game.getState().getTurnMods().skipPhase(activePlayer.getId(), currentPhase.getType())) {
@@ -188,7 +189,7 @@ public class Turn implements Serializable {
         }
         while (it.hasNext()) {
             phase = it.next();
-            if (game.isPaused() || game.gameOver(null)) {
+            if (game.isPaused() || game.checkIfGameIsOver()) {
                 return;
             }
             currentPhase = phase;
@@ -222,40 +223,41 @@ public class Turn implements Serializable {
     }
 
     private boolean playExtraPhases(Game game, TurnPhase afterPhase) {
-        TurnMod extraPhaseTurnMod = game.getState().getTurnMods().extraPhase(activePlayerId, afterPhase);
-        if (extraPhaseTurnMod == null) {
-            return false;
+        while (true) {
+            TurnMod extraPhaseTurnMod = game.getState().getTurnMods().extraPhase(activePlayerId, afterPhase);
+            if (extraPhaseTurnMod == null) {
+                return false;
+            }
+            TurnPhase extraPhase = extraPhaseTurnMod.getExtraPhase();
+            if (extraPhase == null) {
+                return false;
+            }
+            Phase phase;
+            switch (extraPhase) {
+                case BEGINNING:
+                    phase = new BeginningPhase();
+                    break;
+                case PRECOMBAT_MAIN:
+                    phase = new PreCombatMainPhase();
+                    break;
+                case COMBAT:
+                    phase = new CombatPhase();
+                    break;
+                case POSTCOMBAT_MAIN:
+                    phase = new PostCombatMainPhase();
+                    break;
+                default:
+                    phase = new EndPhase();
+            }
+            currentPhase = phase;
+            game.fireEvent(new GameEvent(GameEvent.EventType.PHASE_CHANGED, activePlayerId, extraPhaseTurnMod.getId(), activePlayerId));
+            Player activePlayer = game.getPlayer(activePlayerId);
+            if (activePlayer != null && !game.isSimulation()) {
+                game.informPlayers(activePlayer.getLogName() + " starts an additional " + phase.getType().toString() + " phase");
+            }
+            phase.play(game, activePlayerId);
+            afterPhase = extraPhase;
         }
-        TurnPhase extraPhase = extraPhaseTurnMod.getExtraPhase();
-        if (extraPhase == null) {
-            return false;
-        }
-        Phase phase;
-        switch (extraPhase) {
-            case BEGINNING:
-                phase = new BeginningPhase();
-                break;
-            case PRECOMBAT_MAIN:
-                phase = new PreCombatMainPhase();
-                break;
-            case COMBAT:
-                phase = new CombatPhase();
-                break;
-            case POSTCOMBAT_MAIN:
-                phase = new PostCombatMainPhase();
-                break;
-            default:
-                phase = new EndPhase();
-        }
-        currentPhase = phase;
-        game.fireEvent(new GameEvent(GameEvent.EventType.PHASE_CHANGED, activePlayerId, extraPhaseTurnMod.getId(), activePlayerId));
-        Player activePlayer = game.getPlayer(activePlayerId);
-        if (activePlayer != null && !game.isSimulation()) {
-            game.informPlayers(activePlayer.getLogName() + " starts an additional " + phase.getType().toString() + " phase");
-        }
-        phase.play(game, activePlayerId);
-
-        return true;
     }
 
     /*protected void playExtraTurns(Game game) {
@@ -268,18 +270,21 @@ public class Turn implements Serializable {
      *
      * @param game
      * @param activePlayerId
+     * @param source
      */
-    public void endTurn(Game game, UUID activePlayerId) {
+    public void endTurn(Game game, UUID activePlayerId, Ability source) {
         // Ending the turn this way (Time Stop) means the following things happen in order:
 
         setEndTurnRequested(true);
 
-        // 1) All spells and abilities on the stack are exiled. This includes Time Stop, though it will continue to resolve.
+        // 1) All spells and abilities on the stack are exiled. This includes (e.g.) Time Stop, though it will continue to resolve.
         // It also includes spells and abilities that can't be countered.
-        while (!game.getStack().isEmpty()) {
-            StackObject stackObject = game.getStack().removeLast();
+        while (!game.hasEnded() && !game.getStack().isEmpty()) {
+            StackObject stackObject = game.getStack().peekFirst();
             if (stackObject instanceof Spell) {
-                ((Spell) stackObject).moveToExile(null, "", null, game);
+                ((Spell) stackObject).moveToExile(null, "", source.getSourceId(), game);
+            } else {
+                game.getStack().remove(stackObject); // stack ability
             }
         }
         // 2) All attacking and blocking creatures are removed from combat.
@@ -328,16 +333,17 @@ public class Turn implements Serializable {
 
     public String getValue(int turnNum) {
         StringBuilder sb = threadLocalBuilder.get();
-        sb.append("[").append(turnNum)
-                .append(":").append(currentPhase.getType())
-                .append(":").append(currentPhase.getStep().getType())
-                .append("]");
+        sb.append('[').append(turnNum)
+                .append(':').append(currentPhase.getType())
+                .append(':').append(currentPhase.getStep().getType())
+                .append(']');
 
         return sb.toString();
     }
 
     private void logStartOfTurn(Game game, Player player) {
-        StringBuilder sb = new StringBuilder("Turn ").append(game.getState().getTurnNum()).append(" ");
+        StringBuilder sb = new StringBuilder(game.getState().isExtraTurn() ? "Extra turn" : "Turn ");
+        sb.append(game.getState().getTurnNum()).append(' ');
         sb.append(player.getLogName());
         sb.append(" (");
         int delimiter = game.getPlayers().size() - 1;
@@ -345,14 +351,14 @@ public class Turn implements Serializable {
             sb.append(gamePlayer.getLife());
             int poison = gamePlayer.getCounters().getCount(CounterType.POISON);
             if (poison > 0) {
-                sb.append("[P:").append(poison).append("]");
+                sb.append("[P:").append(poison).append(']');
             }
             if (delimiter > 0) {
                 sb.append(" - ");
                 delimiter--;
             }
         }
-        sb.append(")");
+        sb.append(')');
         game.fireStatusEvent(sb.toString(), true);
     }
 }

@@ -77,17 +77,11 @@ public class BecomesColorSourceEffect extends ContinuousEffectImpl {
         }
         if (setColor == null) {
             ChoiceColor choice = new ChoiceColor();
-            while (!choice.isChosen()) {
-                controller.choose(Outcome.PutManaInPool, choice, game);
-                if (!controller.canRespond()) {
-                    return;
-                }
-            }
-            if (choice.getColor() != null) {
-                setColor = choice.getColor();
-            } else {
+            if (!controller.choose(Outcome.PutManaInPool, choice, game)) {
+                discard();
                 return;
             }
+            setColor = choice.getColor();
             if (!game.isSimulation()) {
                 game.informPlayers(controller.getLogName() + " has chosen the color: " + setColor.toString());
             }
@@ -109,9 +103,8 @@ public class BecomesColorSourceEffect extends ContinuousEffectImpl {
                 this.discard();
             }
             return true;
-        } else {
-            throw new UnsupportedOperationException("No color set");
         }
+        return false;
     }
 
     @Override
@@ -120,6 +113,6 @@ public class BecomesColorSourceEffect extends ContinuousEffectImpl {
             return staticText;
         }
         return "{this} becomes " + (setColor == null ? "the color of your choice" : setColor.getDescription())
-                + " " + duration.toString();
+                + ' ' + duration.toString();
     }
 }

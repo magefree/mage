@@ -27,33 +27,32 @@
  */
 package mage.client.dialog;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.UUID;
-import javax.swing.*;
-
 import mage.cards.decks.importer.DeckImporterUtil;
 import mage.client.MageFrame;
+import mage.client.SessionHandler;
 import mage.client.components.MageComponents;
 import mage.client.table.TablePlayerPanel;
 import mage.client.util.Event;
+import mage.client.util.IgnoreList;
 import mage.client.util.Listener;
 import mage.constants.MatchTimeLimit;
 import mage.constants.MultiplayerAttackOption;
 import mage.constants.RangeOfInfluence;
 import mage.constants.SkillLevel;
 import mage.game.match.MatchOptions;
-import mage.remote.Session;
+import mage.players.PlayerType;
 import mage.view.GameTypeView;
 import mage.view.TableView;
 import org.apache.log4j.Logger;
 
+import javax.swing.*;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class NewTableDialog extends MageDialog {
@@ -63,10 +62,9 @@ public class NewTableDialog extends MageDialog {
     private TableView table;
     private UUID playerId;
     private UUID roomId;
-    private final Session session;
     private String lastSessionId;
     private final List<TablePlayerPanel> players = new ArrayList<>();
-    private final List<String> prefPlayerTypes = new ArrayList<>();
+    private final List<PlayerType> prefPlayerTypes = new ArrayList<>();
 
     private static final String LIMITED = "Limited";
 
@@ -74,13 +72,13 @@ public class NewTableDialog extends MageDialog {
      * Creates new form NewTableDialog
      */
     public NewTableDialog() {
-        session = MageFrame.getSession();
         lastSessionId = "";
         initComponents();
         player1Panel.showLevel(false);
         this.spnNumWins.setModel(new SpinnerNumberModel(1, 1, 5, 1));
         this.spnFreeMulligans.setModel(new SpinnerNumberModel(0, 0, 5, 1));
         this.spnQuitRatio.setModel(new SpinnerNumberModel(100, 0, 100, 5));
+        this.spnEdhPowerLevel.setModel(new SpinnerNumberModel(100, 0, 100, 5));
         MageFrame.getUI().addButton(MageComponents.NEW_TABLE_OK_BUTTON, btnOK);
     }
 
@@ -104,6 +102,7 @@ public class NewTableDialog extends MageDialog {
         lblGameType = new javax.swing.JLabel();
         cbGameType = new javax.swing.JComboBox();
         chkRollbackTurnsAllowed = new javax.swing.JCheckBox();
+        chkSpectatorsAllowed = new javax.swing.JCheckBox();
         chkRated = new javax.swing.JCheckBox();
         lblFreeMulligans = new javax.swing.JLabel();
         spnFreeMulligans = new javax.swing.JSpinner();
@@ -125,9 +124,13 @@ public class NewTableDialog extends MageDialog {
         pnlOtherPlayers = new javax.swing.JPanel();
         jSeparator1 = new javax.swing.JSeparator();
         btnOK = new javax.swing.JButton();
+        btnPreviousConfiguration1 = new javax.swing.JButton();
+        btnPreviousConfiguration2 = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
         lblQuitRatio = new javax.swing.JLabel();
+        lblEdhPowerLevel = new javax.swing.JLabel();
         spnQuitRatio = new javax.swing.JSpinner();
+        spnEdhPowerLevel = new javax.swing.JSpinner();
 
         setTitle("New Table");
 
@@ -144,14 +147,13 @@ public class NewTableDialog extends MageDialog {
 
         lblGameType.setText("Game Type:");
 
-        cbGameType.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbGameTypeActionPerformed(evt);
-            }
-        });
+        cbGameType.addActionListener(evt -> cbGameTypeActionPerformed(evt));
 
         chkRollbackTurnsAllowed.setText("Allow rollbacks");
         chkRollbackTurnsAllowed.setToolTipText("<HTML>Allow to rollback to the start of previous turns<br>\nif all players agree.\n");
+
+        chkSpectatorsAllowed.setText("Allow Spectators");
+        chkSpectatorsAllowed.setToolTipText("<HTML>Allow spectators to watch.\n");
 
         chkRated.setText("Rated");
         chkRated.setToolTipText("Indicates if matches will be rated.");
@@ -162,11 +164,7 @@ public class NewTableDialog extends MageDialog {
         lblNumPlayers.setLabelFor(spnNumPlayers);
         lblNumPlayers.setText("Players");
 
-        spnNumPlayers.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                numPlayersChanged(evt);
-            }
-        });
+        spnNumPlayers.addChangeListener(evt -> numPlayersChanged(evt));
 
         lblRange.setLabelFor(cbRange);
         lblRange.setText("Range of Influence");
@@ -187,11 +185,7 @@ public class NewTableDialog extends MageDialog {
         lblNumWins.setText("Wins");
         lblNumWins.setToolTipText("How many games has a player to win to win the match.");
 
-        spnNumWins.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                spnNumWinsnumPlayersChanged(evt);
-            }
-        });
+        spnNumWins.addChangeListener(evt -> spnNumWinsnumPlayersChanged(evt));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel1.setText("Player 1 (You)");
@@ -202,171 +196,187 @@ public class NewTableDialog extends MageDialog {
         pnlOtherPlayers.setLayout(new java.awt.GridLayout(0, 1));
 
         btnOK.setText("OK");
-        btnOK.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnOKActionPerformed(evt);
-            }
-        });
+        btnOK.addActionListener(evt -> btnOKActionPerformed(evt));
+
+        btnPreviousConfiguration1.setText("M1");
+        btnPreviousConfiguration1.setToolTipText("Load saved Match configuration #1");
+        btnPreviousConfiguration1.addActionListener(evt -> btnPreviousConfigurationActionPerformed(evt, 1));
+        btnPreviousConfiguration2.setText("M2");
+        btnPreviousConfiguration2.setToolTipText("Load saved Match configuration #2");
+        btnPreviousConfiguration2.addActionListener(evt -> btnPreviousConfigurationActionPerformed(evt, 2));
 
         btnCancel.setText("Cancel");
-        btnCancel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelActionPerformed(evt);
-            }
-        });
+        btnCancel.addActionListener(evt -> btnCancelActionPerformed(evt));
 
         lblQuitRatio.setText("Allowed quit %");
+        lblEdhPowerLevel.setText("EDH power level");
 
         spnQuitRatio.setToolTipText("Players with quit % more than this value can't join this table");
+        spnEdhPowerLevel.setToolTipText("Players with decks with a higher power level can't join this table");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(lblName)
+                                                        .addComponent(lbDeckType)
+                                                        .addComponent(lblGameType))
+                                                .addGap(6, 6, 6)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addComponent(cbGameType, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addGap(18, 18, 18)
+                                                                .addComponent(chkRollbackTurnsAllowed)
+                                                                .addGap(13, 13, 13)
+                                                                .addComponent(lblFreeMulligans)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                .addComponent(spnFreeMulligans, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addGap(13, 13, 13)
+                                                                .addComponent(chkSpectatorsAllowed))
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                .addComponent(lbTimeLimit)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                .addComponent(cbTimeLimit, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                .addComponent(lblPassword)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                .addComponent(btnPreviousConfiguration1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                .addComponent(btnPreviousConfiguration2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addComponent(cbDeckType, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                                .addComponent(chkRated)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                                .addComponent(lblQuitRatio)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                .addComponent(spnQuitRatio, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addComponent(lblEdhPowerLevel)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                .addComponent(spnEdhPowerLevel, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(0, 0, Short.MAX_VALUE)
+                                                .addComponent(btnOK)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(btnCancel))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(lblNumPlayers)
+                                                        .addComponent(spnNumPlayers, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(lblRange)
+                                                        .addComponent(cbRange, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addComponent(lblAttack)
+                                                                .addGap(116, 116, 116)
+                                                                .addComponent(lblSkillLevel))
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addComponent(cbAttackOption, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                .addComponent(cbSkillLevel, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                .addGap(18, 18, 18)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(lblNumWins)
+                                                        .addComponent(spnNumWins, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(jSeparator2)
+                                        .addComponent(player1Panel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(pnlOtherPlayers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addContainerGap())
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblName)
-                            .addComponent(lbDeckType)
-                            .addComponent(lblGameType))
-                        .addGap(6, 6, 6)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(cbGameType, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(chkRollbackTurnsAllowed)
-                                .addGap(13, 13, 13)
-                                .addComponent(lblFreeMulligans)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(spnFreeMulligans, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lbTimeLimit)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbTimeLimit, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblPassword)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(cbDeckType, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(chkRated)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lblQuitRatio)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(spnQuitRatio, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnOK)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCancel))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblNumPlayers)
-                            .addComponent(spnNumPlayers, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblRange)
-                            .addComponent(cbRange, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblAttack)
-                                .addGap(116, 116, 116)
-                                .addComponent(lblSkillLevel))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(cbAttackOption, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbSkillLevel, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblNumWins)
-                            .addComponent(spnNumWins, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jSeparator2)
-                    .addComponent(player1Panel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlOtherPlayers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING))
-                .addContainerGap())
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jSeparator3, javax.swing.GroupLayout.DEFAULT_SIZE, 660, Short.MAX_VALUE)
-                    .addContainerGap()))
+                                .addGroup(layout.createSequentialGroup()
+                                        .addContainerGap()
+                                        .addComponent(jSeparator3, javax.swing.GroupLayout.DEFAULT_SIZE, 660, Short.MAX_VALUE)
+                                        .addContainerGap()))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(4, 4, 4)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblName)
-                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblPassword)
-                    .addComponent(lbTimeLimit)
-                    .addComponent(cbTimeLimit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbDeckType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbDeckType)
-                    .addComponent(lblQuitRatio)
-                    .addComponent(chkRated)
-                    .addComponent(spnQuitRatio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(spnFreeMulligans, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblFreeMulligans)
-                        .addComponent(chkRollbackTurnsAllowed))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(cbGameType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblGameType)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(lblNumPlayers)
-                        .addGap(0, 0, 0)
-                        .addComponent(spnNumPlayers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(4, 4, 4)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(lblName)
+                                        .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnPreviousConfiguration1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnPreviousConfiguration2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(lblPassword)
+                                        .addComponent(lbTimeLimit)
+                                        .addComponent(cbTimeLimit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(cbDeckType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(lbDeckType)
+                                        .addComponent(lblQuitRatio)
+                                        .addComponent(chkRated)
+                                        .addComponent(spnQuitRatio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(lblEdhPowerLevel)
+                                        .addComponent(chkRated)
+                                        .addComponent(spnEdhPowerLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                .addComponent(spnFreeMulligans, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(lblFreeMulligans)
+                                                .addComponent(chkRollbackTurnsAllowed)
+                                                .addComponent(chkSpectatorsAllowed))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                .addComponent(cbGameType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(lblGameType)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(6, 6, 6)
+                                                .addComponent(lblNumPlayers)
+                                                .addGap(0, 0, 0)
+                                                .addComponent(spnNumPlayers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(lblSkillLevel)
+                                                        .addComponent(lblNumWins)
+                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                                .addComponent(lblRange)
+                                                                .addComponent(lblAttack)))
+                                                .addGap(0, 0, 0)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(cbRange, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(cbAttackOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(cbSkillLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(spnNumWins, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel1)
+                                .addGap(0, 0, 0)
+                                .addComponent(player1Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(16, 16, 16)
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(pnlOtherPlayers, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(btnCancel)
+                                        .addComponent(btnOK))
+                                .addGap(0, 0, 0))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblSkillLevel)
-                            .addComponent(lblNumWins)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(lblRange)
-                                .addComponent(lblAttack)))
-                        .addGap(0, 0, 0)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cbRange, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbAttackOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbSkillLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(spnNumWins, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
-                .addGap(0, 0, 0)
-                .addComponent(player1Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlOtherPlayers, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCancel)
-                    .addComponent(btnOK))
-                .addGap(0, 0, 0))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(201, 201, 201)
-                    .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(167, Short.MAX_VALUE)))
+                                .addGroup(layout.createSequentialGroup()
+                                        .addGap(201, 201, 201)
+                                        .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addContainerGap(167, Short.MAX_VALUE)))
         );
 
         pack();
@@ -378,10 +388,15 @@ public class NewTableDialog extends MageDialog {
         this.hideDialog();
     }//GEN-LAST:event_btnCancelActionPerformed
 
+    private void btnPreviousConfigurationActionPerformed(java.awt.event.ActionEvent evt, int i) {//GEN-FIRST:event_btnPreviousConfigurationActionPerformed
+        currentSettingVersion = i;
+        setGameSettingsFromPrefs(currentSettingVersion);
+    }//GEN-LAST:event_btnPreviousConfigurationActionPerformed
+
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
         GameTypeView gameType = (GameTypeView) cbGameType.getSelectedItem();
-        MatchOptions options = new MatchOptions(this.txtName.getText(), gameType.getName());
-        options.getPlayerTypes().add("Human");
+        MatchOptions options = new MatchOptions(this.txtName.getText(), gameType.getName(), false, 2);
+        options.getPlayerTypes().add(PlayerType.HUMAN);
         for (TablePlayerPanel player : players) {
             options.getPlayerTypes().add(player.getPlayerType());
         }
@@ -393,33 +408,37 @@ public class NewTableDialog extends MageDialog {
         options.setRange((RangeOfInfluence) this.cbRange.getSelectedItem());
         options.setWinsNeeded((Integer) this.spnNumWins.getValue());
         options.setRollbackTurnsAllowed(chkRollbackTurnsAllowed.isSelected());
+        options.setSpectatorsAllowed(chkSpectatorsAllowed.isSelected());
         options.setRated(chkRated.isSelected());
         options.setFreeMulligans((Integer) this.spnFreeMulligans.getValue());
         options.setPassword(this.txtPassword.getText());
         options.setQuitRatio((Integer) this.spnQuitRatio.getValue());
+        options.setEdhPowerLevel((Integer) this.spnEdhPowerLevel.getValue());
+        String serverAddress = SessionHandler.getSession().getServerHostname().orElseGet(() -> "");
+        options.setBannedUsers(IgnoreList.ignoreList(serverAddress));
         if (!checkMatchOptions(options)) {
             return;
         }
         saveGameSettingsToPrefs(options, this.player1Panel.getDeckFile());
 
-        table = session.createTable(roomId, options);
+        table = SessionHandler.createTable(roomId, options);
         if (table == null) {
             JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Error creating table.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
         try {
-            if (session.joinTable(
+            if (SessionHandler.joinTable(
                     roomId,
                     table.getTableId(),
                     this.player1Panel.getPlayerName(),
-                    "Human", 1,
+                    PlayerType.HUMAN, 1,
                     DeckImporterUtil.importDeck(this.player1Panel.getDeckFile()),
                     this.txtPassword.getText())) {
                 for (TablePlayerPanel player : players) {
-                    if (!player.getPlayerType().equals("Human")) {
+                    if (player.getPlayerType() != PlayerType.HUMAN) {
                         if (!player.joinTable(roomId, table.getTableId())) {
                             // error message must be send by the server
-                            session.removeTable(roomId, table.getTableId());
+                            SessionHandler.removeTable(roomId, table.getTableId());
                             table = null;
                             return;
                         }
@@ -436,7 +455,7 @@ public class NewTableDialog extends MageDialog {
             handleError(ex);
         }
         // JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Error joining table.", "Error", JOptionPane.ERROR_MESSAGE);
-        session.removeTable(roomId, table.getTableId());
+        SessionHandler.removeTable(roomId, table.getTableId());
         table = null;
     }//GEN-LAST:event_btnOKActionPerformed
 
@@ -463,6 +482,7 @@ public class NewTableDialog extends MageDialog {
         switch (options.getDeckType()) {
             case "Variant Magic - Commander":
             case "Variant Magic - Duel Commander":
+            case "Variant Magic - MTGO 1v1 Commander":
                 if (!options.getGameType().startsWith("Commander")) {
                     JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Deck type Commander needs also a Commander game type", "Error", JOptionPane.ERROR_MESSAGE);
                     return false;
@@ -484,7 +504,9 @@ public class NewTableDialog extends MageDialog {
         switch (options.getGameType()) {
             case "Commander Two Player Duel":
             case "Commander Free For All":
-                if (!options.getDeckType().equals("Variant Magic - Commander") && !options.getDeckType().equals("Variant Magic - Duel Commander")) {
+                if (!options.getDeckType().equals("Variant Magic - Commander")
+                        && !options.getDeckType().equals("Variant Magic - Duel Commander")
+                        && !options.getDeckType().equals("Variant Magic - MTGO 1v1 Commander")) {
                     JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Deck type Commander needs also a Commander game type", "Error", JOptionPane.ERROR_MESSAGE);
                     return false;
                 }
@@ -517,19 +539,14 @@ public class NewTableDialog extends MageDialog {
         if (numPlayers > players.size()) {
             while (players.size() != numPlayers) {
                 TablePlayerPanel playerPanel = new TablePlayerPanel();
-                String playerType = "Human";
-                if (prefPlayerTypes.size() >= players.size() && players.size() > 0) {
+                PlayerType playerType = PlayerType.HUMAN;
+                if (prefPlayerTypes.size() >= players.size() && !players.isEmpty()) {
                     playerType = prefPlayerTypes.get(players.size() - 1);
                 }
                 playerPanel.init(players.size() + 2, playerType);
                 players.add(playerPanel);
                 playerPanel.addPlayerTypeEventListener(
-                        new Listener<Event>() {
-                            @Override
-                            public void event(Event event) {
-                                drawPlayers();
-                            }
-                        }
+                        (Listener<Event>) event -> drawPlayers()
                 );
             }
 
@@ -560,11 +577,11 @@ public class NewTableDialog extends MageDialog {
 
     public void showDialog(UUID roomId) {
         this.roomId = roomId;
-        if (!lastSessionId.equals(MageFrame.getSession().getSessionId())) {
-            lastSessionId = session.getSessionId();
-            this.player1Panel.setPlayerName(session.getUserName());
-            cbGameType.setModel(new DefaultComboBoxModel(session.getGameTypes().toArray()));
-            cbDeckType.setModel(new DefaultComboBoxModel(session.getDeckTypes()));
+        if (!lastSessionId.equals(SessionHandler.getSessionId())) {
+            lastSessionId = SessionHandler.getSessionId();
+            this.player1Panel.setPlayerName(SessionHandler.getUserName());
+            cbGameType.setModel(new DefaultComboBoxModel(SessionHandler.getGameTypes().toArray()));
+            cbDeckType.setModel(new DefaultComboBoxModel(SessionHandler.getDeckTypes()));
             selectLimitedByDefault();
             cbTimeLimit.setModel(new DefaultComboBoxModel(MatchTimeLimit.values()));
             cbRange.setModel(new DefaultComboBoxModel(RangeOfInfluence.values()));
@@ -575,11 +592,12 @@ public class NewTableDialog extends MageDialog {
             for (TablePlayerPanel tablePlayerPanel : players) {
                 tablePlayerPanel.init(i++, tablePlayerPanel.getPlayerType());
             }
-            setGameSettingsFromPrefs();
             this.setModal(true);
             setGameOptions();
             this.setLocation(150, 100);
         }
+        currentSettingVersion = 0;
+        setGameSettingsFromPrefs(currentSettingVersion);
         this.setVisible(true);
     }
 
@@ -604,47 +622,62 @@ public class NewTableDialog extends MageDialog {
     /**
      * set the table settings from java prefs
      */
-    private void setGameSettingsFromPrefs() {
-        txtName.setText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_NAME, "Game"));
-        txtPassword.setText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_PASSWORD, ""));
+    int currentSettingVersion = 0;
+    private void setGameSettingsFromPrefs(int version) {
+        currentSettingVersion = version;
+        String versionStr = "";
+        if (currentSettingVersion == 1) {
+            versionStr = "1";
+            btnPreviousConfiguration1.requestFocus();
+        } else if (currentSettingVersion == 2) {
+            versionStr = "2";
+            btnPreviousConfiguration2.requestFocus();
+        } else {
+            btnPreviousConfiguration2.getParent().requestFocus();
+        }
+        txtName.setText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_NAME + versionStr, "Game"));
+        txtPassword.setText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_PASSWORD + versionStr, ""));
 
-        String playerTypes = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_PLAYER_TYPES, "Human");
+        String playerTypes = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_PLAYER_TYPES + versionStr, "Human");
         prefPlayerTypes.clear();
-        prefPlayerTypes.addAll(Arrays.asList(playerTypes.split(",")));
-        this.spnNumPlayers.setValue(Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_NUMBER_PLAYERS, "2")));
+        for (String pType : playerTypes.split(",")) {
+            prefPlayerTypes.add(PlayerType.getByDescription(pType));
+        }
+        this.spnNumPlayers.setValue(Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_NUMBER_PLAYERS + versionStr, "2")));
 
-        String gameTypeName = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_GAME_TYPE, "Two Player Duel");
-        for (GameTypeView gtv : session.getGameTypes()) {
+        String gameTypeName = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_GAME_TYPE + versionStr, "Two Player Duel");
+        for (GameTypeView gtv : SessionHandler.getGameTypes()) {
             if (gtv.getName().equals(gameTypeName)) {
                 cbGameType.setSelectedItem(gtv);
                 break;
             }
         }
-        int timeLimit = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_TIME_LIMIT, "1500"));
+        int timeLimit = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_TIME_LIMIT + versionStr, "1500"));
         for (MatchTimeLimit mtl : MatchTimeLimit.values()) {
             if (mtl.getTimeLimit() == timeLimit) {
                 this.cbTimeLimit.setSelectedItem(mtl);
                 break;
             }
         }
-        cbDeckType.setSelectedItem(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_DECK_TYPE, "Limited"));
-        String deckFile = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_DECK_FILE, null);
+        cbDeckType.setSelectedItem(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_DECK_TYPE + versionStr, "Limited"));
+        String deckFile = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_DECK_FILE + versionStr, null);
         if (deckFile != null) {
             this.player1Panel.setDeckFile(deckFile);
         }
-        this.spnNumWins.setValue(Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_NUMBER_OF_WINS, "2")));
-        this.chkRollbackTurnsAllowed.setSelected(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_ROLLBACK_TURNS_ALLOWED, "Yes").equals("Yes"));
-        this.chkRated.setSelected(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_RATED, "No").equals("Yes"));
-        this.spnFreeMulligans.setValue(Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_NUMBER_OF_FREE_MULLIGANS, "0")));
+        this.spnNumWins.setValue(Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_NUMBER_OF_WINS + versionStr, "2")));
+        this.chkRollbackTurnsAllowed.setSelected(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_ROLLBACK_TURNS_ALLOWED + versionStr, "Yes").equals("Yes"));
+        this.chkSpectatorsAllowed.setSelected(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_SPECTATORS_ALLOWED + versionStr, "Yes").equals("Yes"));
+        this.chkRated.setSelected(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_RATED + versionStr, "No").equals("Yes"));
+        this.spnFreeMulligans.setValue(Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_NUMBER_OF_FREE_MULLIGANS + versionStr, "0")));
 
-        int range = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_RANGE, "1"));
+        int range = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_RANGE + versionStr, "1"));
         for (RangeOfInfluence roi : RangeOfInfluence.values()) {
             if (roi.getRange() == range) {
                 this.cbRange.setSelectedItem(roi);
                 break;
             }
         }
-        String attackOption = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_ATTACK_OPTION, "Attack Multiple Players");
+        String attackOption = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_ATTACK_OPTION + versionStr, "Attack Multiple Players");
         for (MultiplayerAttackOption mao : MultiplayerAttackOption.values()) {
             if (mao.toString().equals(attackOption)) {
                 this.cbAttackOption.setSelectedItem(mao);
@@ -660,6 +693,7 @@ public class NewTableDialog extends MageDialog {
         }
 
         this.spnQuitRatio.setValue(Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_QUIT_RATIO, "100")));
+        this.spnEdhPowerLevel.setValue(0);
     }
 
     /**
@@ -670,36 +704,43 @@ public class NewTableDialog extends MageDialog {
      * @param deckFile
      */
     private void saveGameSettingsToPrefs(MatchOptions options, String deckFile) {
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_NAME, options.getName());
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_PASSWORD, options.getPassword());
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_DECK_TYPE, options.getDeckType());
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_TIME_LIMIT, Integer.toString(options.getPriorityTime()));
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_GAME_TYPE, options.getGameType());
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_NUMBER_OF_WINS, Integer.toString(options.getWinsNeeded()));
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_ROLLBACK_TURNS_ALLOWED, options.isRollbackTurnsAllowed() ? "Yes" : "No");
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_RATED, options.isRated() ? "Yes" : "No");
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_NUMBER_OF_FREE_MULLIGANS, Integer.toString(options.getFreeMulligans()));
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_DECK_FILE, deckFile);
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_NUMBER_PLAYERS, spnNumPlayers.getValue().toString());
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_RANGE, Integer.toString(options.getRange().getRange()));
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_ATTACK_OPTION, options.getAttackOption().toString());
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_SKILL_LEVEL, options.getSkillLevel().toString());
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_QUIT_RATIO, Integer.toString(options.getQuitRatio()));
+        String versionStr = "";
+        if (currentSettingVersion == 1) {
+            versionStr = "1";
+        } else if (currentSettingVersion == 2) {
+            versionStr = "2";
+        }
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_NAME + versionStr, options.getName());
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_PASSWORD + versionStr, options.getPassword());
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_DECK_TYPE + versionStr, options.getDeckType());
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_TIME_LIMIT + versionStr, Integer.toString(options.getPriorityTime()));
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_GAME_TYPE + versionStr, options.getGameType());
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_NUMBER_OF_WINS + versionStr, Integer.toString(options.getWinsNeeded()));
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_ROLLBACK_TURNS_ALLOWED + versionStr, options.isRollbackTurnsAllowed() ? "Yes" : "No");
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_RATED + versionStr, options.isRated() ? "Yes" : "No");
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_NUMBER_OF_FREE_MULLIGANS + versionStr, Integer.toString(options.getFreeMulligans()));
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_DECK_FILE + versionStr, deckFile);
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_NUMBER_PLAYERS + versionStr, spnNumPlayers.getValue().toString());
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_RANGE + versionStr, Integer.toString(options.getRange().getRange()));
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_ATTACK_OPTION + versionStr, options.getAttackOption().toString());
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_SKILL_LEVEL + versionStr, options.getSkillLevel().toString());
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_QUIT_RATIO + versionStr, Integer.toString(options.getQuitRatio()));
         StringBuilder playerTypesString = new StringBuilder();
-        ListIterator iterator = players.listIterator();
-        while (iterator.hasNext()) {
+        for (Object player : players) {
             if (playerTypesString.length() > 0) {
-                playerTypesString.append(",");
+                playerTypesString.append(',');
             }
-            TablePlayerPanel tpp = (TablePlayerPanel) iterator.next();
+            TablePlayerPanel tpp = (TablePlayerPanel) player;
             playerTypesString.append(tpp.getPlayerType());
         }
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_PLAYER_TYPES, playerTypesString.toString());
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_PLAYER_TYPES + versionStr, playerTypesString.toString());
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnOK;
+    private javax.swing.JButton btnPreviousConfiguration1;
+    private javax.swing.JButton btnPreviousConfiguration2;
     private javax.swing.JComboBox cbAttackOption;
     private javax.swing.JComboBox cbDeckType;
     private javax.swing.JComboBox cbGameType;
@@ -707,6 +748,7 @@ public class NewTableDialog extends MageDialog {
     private javax.swing.JComboBox cbSkillLevel;
     private javax.swing.JComboBox cbTimeLimit;
     private javax.swing.JCheckBox chkRollbackTurnsAllowed;
+    private javax.swing.JCheckBox chkSpectatorsAllowed;
     private javax.swing.JCheckBox chkRated;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -723,6 +765,7 @@ public class NewTableDialog extends MageDialog {
     private javax.swing.JLabel lblNumWins;
     private javax.swing.JLabel lblPassword;
     private javax.swing.JLabel lblQuitRatio;
+    private javax.swing.JLabel lblEdhPowerLevel;
     private javax.swing.JLabel lblRange;
     private javax.swing.JLabel lblSkillLevel;
     private mage.client.table.NewPlayerPanel player1Panel;
@@ -731,8 +774,8 @@ public class NewTableDialog extends MageDialog {
     private javax.swing.JSpinner spnNumPlayers;
     private javax.swing.JSpinner spnNumWins;
     private javax.swing.JSpinner spnQuitRatio;
+    private javax.swing.JSpinner spnEdhPowerLevel;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtPassword;
     // End of variables declaration//GEN-END:variables
-
 }

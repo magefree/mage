@@ -39,14 +39,14 @@ import mage.constants.Zone;
  */
 public class FlashAbility extends StaticAbility implements MageSingleton {
 
-    private static final FlashAbility fINSTANCE =  new FlashAbility();
+    private static final FlashAbility instance =  new FlashAbility();
 
     private Object readResolve() throws ObjectStreamException {
-        return fINSTANCE;
+        return instance;
     }
 
     public static FlashAbility getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private FlashAbility() {
@@ -60,7 +60,7 @@ public class FlashAbility extends StaticAbility implements MageSingleton {
 
     @Override
     public FlashAbility copy() {
-        return fINSTANCE;
+        return instance;
     }
 
 }

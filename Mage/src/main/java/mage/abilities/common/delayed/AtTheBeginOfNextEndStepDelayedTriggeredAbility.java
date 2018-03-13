@@ -28,7 +28,9 @@
 package mage.abilities.common.delayed;
 
 import mage.abilities.DelayedTriggeredAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.effects.Effect;
+import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -42,6 +44,7 @@ import mage.game.permanent.Permanent;
 public class AtTheBeginOfNextEndStepDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     private TargetController targetController;
+    private Condition condition;
 
     public AtTheBeginOfNextEndStepDelayedTriggeredAbility(Effect effect) {
         this(effect, TargetController.ANY);
@@ -52,14 +55,20 @@ public class AtTheBeginOfNextEndStepDelayedTriggeredAbility extends DelayedTrigg
     }
 
     public AtTheBeginOfNextEndStepDelayedTriggeredAbility(Zone zone, Effect effect, TargetController targetController) {
-        super(effect);
+        this(zone, effect, targetController, null);
+    }
+
+    public AtTheBeginOfNextEndStepDelayedTriggeredAbility(Zone zone, Effect effect, TargetController targetController, Condition condition) {
+        super(effect, Duration.Custom);
         this.zone = zone;
         this.targetController = targetController;
+        this.condition = condition;
     }
 
     public AtTheBeginOfNextEndStepDelayedTriggeredAbility(final AtTheBeginOfNextEndStepDelayedTriggeredAbility ability) {
         super(ability);
         this.targetController = ability.targetController;
+        this.condition = ability.condition;
     }
 
     @Override
@@ -69,26 +78,30 @@ public class AtTheBeginOfNextEndStepDelayedTriggeredAbility extends DelayedTrigg
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
+        boolean correctEndPhase = false;
         switch (targetController) {
             case ANY:
-                return true;
+                correctEndPhase = true;
+                break;
             case YOU:
-                boolean yours = event.getPlayerId().equals(this.controllerId);
-                return yours;
+                correctEndPhase = event.getPlayerId().equals(this.controllerId);
+                break;
             case OPPONENT:
                 if (game.getPlayer(this.getControllerId()).hasOpponent(event.getPlayerId(), game)) {
-                    return true;
+                    correctEndPhase = true;
                 }
                 break;
-
             case CONTROLLER_ATTACHED_TO:
                 Permanent attachment = game.getPermanent(sourceId);
                 if (attachment != null && attachment.getAttachedTo() != null) {
                     Permanent attachedTo = game.getPermanent(attachment.getAttachedTo());
                     if (attachedTo != null && attachedTo.getControllerId().equals(event.getPlayerId())) {
-                        return true;
+                        correctEndPhase = true;
                     }
                 }
+        }
+        if (correctEndPhase) {
+            return !(condition != null && !condition.apply(game, this));
         }
         return false;
     }

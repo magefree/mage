@@ -27,7 +27,6 @@
  */
 package mage.abilities.keyword;
 
-import java.util.Iterator;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -38,13 +37,12 @@ import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.SpliceCardEffectImpl;
 import mage.cards.Card;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SpellAbilityType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.players.Player;
+
+import java.util.Iterator;
 
 
 /**
@@ -182,7 +180,7 @@ class SpliceOntoArcaneEffect extends SpliceCardEffectImpl {
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         MageObject object = game.getObject(abilityToModify.getSourceId());
-        if (object != null && object.getSubtype().contains("Arcane")) {
+        if (object != null && object.hasSubtype(SubType.ARCANE, game)) {
             return spliceSpellCanBeActivated(source, game);
         }
         return false;

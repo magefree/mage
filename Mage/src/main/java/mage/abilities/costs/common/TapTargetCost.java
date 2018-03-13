@@ -51,7 +51,7 @@ public class TapTargetCost extends CostImpl {
         this.text
                 = new StringBuilder("Tap ")
                 .append((target.getTargetName().startsWith("a ") || target.getTargetName().startsWith("an ") || target.getTargetName().startsWith("another"))
-                        ? "" : CardUtil.numberToText(target.getMaxNumberOfTargets()) + " ")
+                        ? "" : CardUtil.numberToText(target.getMaxNumberOfTargets()) + ' ')
                 .append(target.getTargetName()).toString();
     }
 
@@ -77,6 +77,10 @@ public class TapTargetCost extends CostImpl {
     @Override
     public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
         return target.canChoose(sourceId, controllerId, game);
+    }
+    
+    public TargetControlledPermanent getTarget() {
+        return target;
     }
 
     @Override

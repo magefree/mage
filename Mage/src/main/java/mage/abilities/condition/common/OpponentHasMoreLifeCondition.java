@@ -28,21 +28,21 @@
 
 package mage.abilities.condition.common;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  *
  * @author fireshoes
  */
 
-public class OpponentHasMoreLifeCondition implements Condition {
+public enum OpponentHasMoreLifeCondition implements Condition {
 
-    public OpponentHasMoreLifeCondition() {
-    }
+    instance;
     
     @Override
     public boolean apply(Game game, Ability source) {

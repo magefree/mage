@@ -38,14 +38,14 @@ import mage.constants.Zone;
  */
 public class DoubleStrikeAbility extends StaticAbility implements MageSingleton {
 
-    private static final DoubleStrikeAbility fINSTANCE = new DoubleStrikeAbility();
+    private static final DoubleStrikeAbility instance = new DoubleStrikeAbility();
 
     private Object readResolve() throws ObjectStreamException {
-        return fINSTANCE;
+        return instance;
     }
 
     public static DoubleStrikeAbility getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private DoubleStrikeAbility() {
@@ -59,7 +59,7 @@ public class DoubleStrikeAbility extends StaticAbility implements MageSingleton 
 
     @Override
     public DoubleStrikeAbility copy() {
-        return fINSTANCE;
+        return instance;
     }
 
 }

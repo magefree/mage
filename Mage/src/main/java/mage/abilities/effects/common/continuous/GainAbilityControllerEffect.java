@@ -63,7 +63,7 @@ public class GainAbilityControllerEffect extends ContinuousEffectImpl {
         this.ability = ability;
         staticText = "You have " + ability.getRule();
         if (!duration.toString().isEmpty()) {
-            staticText += " " + duration.toString();
+            staticText += ' ' + duration.toString();
         }
     }
 
@@ -82,7 +82,7 @@ public class GainAbilityControllerEffect extends ContinuousEffectImpl {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             player.addAbility(ability);
-            if (duration.equals(Duration.Custom)) {
+            if (duration == Duration.Custom) {
                 if (game.getPermanent(source.getSourceId()) == null) {
                     discard();
                 }

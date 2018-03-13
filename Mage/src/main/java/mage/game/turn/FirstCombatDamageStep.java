@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.game.turn;
 
 import java.util.UUID;
 import mage.constants.PhaseStep;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
+import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 
 /**
@@ -52,6 +52,12 @@ public class FirstCombatDamageStep extends Step {
     }
 
     @Override
+    public void priority(Game game, UUID activePlayerId, boolean resuming) {
+        game.fireEvent(new GameEvent(EventType.COMBAT_DAMAGE_STEP_PRIORITY, null, null, activePlayerId));
+        super.priority(game, activePlayerId, resuming);
+    }
+
+    @Override
     public boolean skipStep(Game game, UUID activePlayerId) {
         if (game.getCombat().noAttackers()) {
             return true;
@@ -65,14 +71,14 @@ public class FirstCombatDamageStep extends Step {
     @Override
     public void beginStep(Game game, UUID activePlayerId) {
         super.beginStep(game, activePlayerId);
-        for (CombatGroup group: game.getCombat().getGroups()) {
+        for (CombatGroup group : game.getCombat().getGroups()) {
             group.assignDamageToBlockers(true, game);
         }
         for (CombatGroup group : game.getCombat().getBlockingGroups()) {
             group.assignDamageToAttackers(true, game);
         }
 
-        for (CombatGroup group: game.getCombat().getGroups()) {
+        for (CombatGroup group : game.getCombat().getGroups()) {
             group.applyDamage(game);
         }
 

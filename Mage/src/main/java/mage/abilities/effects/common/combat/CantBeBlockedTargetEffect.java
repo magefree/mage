@@ -81,11 +81,14 @@ public class CantBeBlockedTargetEffect extends RestrictionEffect {
 
         StringBuilder sb = new StringBuilder();
         Target target = mode.getTargets().get(0);
-        if (target.getMaxNumberOfTargets() > 1) {
-            if (target.getMaxNumberOfTargets() != target.getNumberOfTargets()) {
-                sb.append("up to ");
+        if (target.getMaxNumberOfTargets() != target.getNumberOfTargets()) {
+            sb.append("up to ");
+            if (target.getMaxNumberOfTargets() == 1) {
+                sb.append("one ");
             }
-            sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(" ");
+        }
+        if (target.getMaxNumberOfTargets() > 1) {
+            sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(' ');
         }
         sb.append("target ").append(mode.getTargets().get(0).getTargetName());
         if (target.getMaxNumberOfTargets() > 1) {
@@ -94,7 +97,7 @@ public class CantBeBlockedTargetEffect extends RestrictionEffect {
             sb.append(" can't be blocked");
         }
 
-        if (Duration.EndOfTurn.equals(this.duration)) {
+        if (Duration.EndOfTurn == this.duration) {
             sb.append(" this turn");
         }
         return sb.toString();

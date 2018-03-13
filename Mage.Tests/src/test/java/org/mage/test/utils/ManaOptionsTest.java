@@ -35,12 +35,13 @@ import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
+import static org.mage.test.utils.ManaOptionsTestUtils.*;
 
 /**
  * This test checks if the calculated possible mana options are correct related
  * to the given mana sources available.
  *
- * @author LevelX2
+ * @author LevelX2, JayDi85
  */
 public class ManaOptionsTest extends CardTestPlayerBase {
 
@@ -52,9 +53,10 @@ public class ManaOptionsTest extends CardTestPlayerBase {
         execute();
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+        assertDuplicatedManaOptions(manaOptions);
 
         Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
-        Assert.assertEquals("{G}{G}{G}", getManaOption(0, manaOptions));
+        assertManaOptions("{G}{G}{G}", manaOptions);
 
     }
 
@@ -69,12 +71,13 @@ public class ManaOptionsTest extends CardTestPlayerBase {
         execute();
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+        assertDuplicatedManaOptions(manaOptions);
 
         Assert.assertEquals("mana variations don't fit", 4, manaOptions.size());
-        Assert.assertEquals("{G}{G}{G}", getManaOption(0, manaOptions));
-        Assert.assertEquals("{R}{G}{G}{W}", getManaOption(1, manaOptions));
-        Assert.assertEquals("{R}{R}{G}{W}{W}", getManaOption(2, manaOptions));
-        Assert.assertEquals("{R}{R}{R}{W}{W}{W}", getManaOption(3, manaOptions));
+        assertManaOptions("{G}{G}{G}", manaOptions);
+        assertManaOptions("{W}{R}{G}{G}", manaOptions);
+        assertManaOptions("{W}{W}{R}{R}{G}", manaOptions);
+        assertManaOptions("{W}{W}{W}{R}{R}{R}", manaOptions);
 
     }
 
@@ -89,18 +92,19 @@ public class ManaOptionsTest extends CardTestPlayerBase {
         execute();
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+        assertDuplicatedManaOptions(manaOptions);
 
         Assert.assertEquals("mana variations don't fit", 10, manaOptions.size());
-        Assert.assertEquals("{C}{C}{C}", getManaOption(0, manaOptions));
-        Assert.assertEquals("{C}{C}{W}", getManaOption(1, manaOptions));
-        Assert.assertEquals("{C}{C}{U}", getManaOption(2, manaOptions));
-        Assert.assertEquals("{C}{W}{W}", getManaOption(3, manaOptions));
-        Assert.assertEquals("{C}{U}{W}", getManaOption(4, manaOptions));
-        Assert.assertEquals("{C}{U}{U}", getManaOption(5, manaOptions));
-        Assert.assertEquals("{W}{W}{W}", getManaOption(6, manaOptions));
-        Assert.assertEquals("{U}{W}{W}", getManaOption(7, manaOptions));
-        Assert.assertEquals("{U}{U}{W}", getManaOption(8, manaOptions));
-        Assert.assertEquals("{U}{U}{U}", getManaOption(9, manaOptions));
+        assertManaOptions("{C}{C}{C}", manaOptions);
+        assertManaOptions("{C}{C}{W}", manaOptions);
+        assertManaOptions("{C}{C}{U}", manaOptions);
+        assertManaOptions("{C}{W}{W}", manaOptions);
+        assertManaOptions("{C}{W}{U}", manaOptions);
+        assertManaOptions("{C}{U}{U}", manaOptions);
+        assertManaOptions("{W}{W}{W}", manaOptions);
+        assertManaOptions("{W}{W}{U}", manaOptions);
+        assertManaOptions("{W}{U}{U}", manaOptions);
+        assertManaOptions("{U}{U}{U}", manaOptions);
     }
 
     // Chromatic Sphere
@@ -114,9 +118,10 @@ public class ManaOptionsTest extends CardTestPlayerBase {
         execute();
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+        assertDuplicatedManaOptions(manaOptions);
 
         Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
-        Assert.assertEquals("{Any}{Any}", getManaOption(0, manaOptions));
+        assertManaOptions("{Any}{Any}", manaOptions);
     }
 
     // Orochi Leafcaller
@@ -131,9 +136,10 @@ public class ManaOptionsTest extends CardTestPlayerBase {
         execute();
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+        assertDuplicatedManaOptions(manaOptions);
 
         Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
-        Assert.assertEquals("{W}{W}{Any}{Any}", getManaOption(0, manaOptions));
+        assertManaOptions("{W}{W}{Any}{Any}", manaOptions);
     }
 
     // Crystal Quarry
@@ -149,9 +155,10 @@ public class ManaOptionsTest extends CardTestPlayerBase {
         execute();
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+        assertDuplicatedManaOptions(manaOptions);
 
         Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
-        Assert.assertEquals("{C}{G}{G}{W}{W}", getManaOption(0, manaOptions));
+        assertManaOptions("{C}{W}{W}{G}{G}",  manaOptions);
     }
 
     // Crystal Quarry
@@ -167,10 +174,11 @@ public class ManaOptionsTest extends CardTestPlayerBase {
         execute();
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+        assertDuplicatedManaOptions(manaOptions);
 
         Assert.assertEquals("mana variations don't fit", 2, manaOptions.size());
-        Assert.assertEquals("{C}{G}{G}{G}{W}{W}", getManaOption(0, manaOptions));
-        Assert.assertEquals("{R}{G}{U}{W}{B}", getManaOption(1, manaOptions));
+        assertManaOptions("{C}{W}{W}{G}{G}{G}", manaOptions);
+        assertManaOptions("{W}{U}{B}{R}{G}", manaOptions);
     }
 
     // Nykthos, Shrine to Nyx
@@ -186,28 +194,30 @@ public class ManaOptionsTest extends CardTestPlayerBase {
         execute();
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+        assertDuplicatedManaOptions(manaOptions);
 
         Assert.assertEquals("mana variations don't fit", 2, manaOptions.size());
-        Assert.assertEquals("{C}{G}{G}{G}", getManaOption(0, manaOptions));
-        Assert.assertEquals("{G}{G}{G}{G}{G}", getManaOption(1, manaOptions));
+        assertManaOptions("{C}{G}{G}{G}", manaOptions);
+        assertManaOptions("{G}{G}{G}{G}{G}", manaOptions);
     }
 
     @Test
     public void testNykthos2() {
         addCard(Zone.BATTLEFIELD, playerA, "Sedge Scorpion", 4);
         addCard(Zone.BATTLEFIELD, playerA, "Akroan Crusader", 3);
-        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
-        addCard(Zone.BATTLEFIELD, playerA, "Nykthos, Shrine to Nyx", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3); // {G}
+        addCard(Zone.BATTLEFIELD, playerA, "Nykthos, Shrine to Nyx", 1); // {C}
 
         setStopAt(1, PhaseStep.UPKEEP);
         execute();
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+        assertDuplicatedManaOptions(manaOptions);
 
         Assert.assertEquals("mana variations don't fit", 3, manaOptions.size());
-        Assert.assertEquals("{C}{G}{G}{G}", getManaOption(0, manaOptions));
-        Assert.assertEquals("{G}{G}{G}{G}{G}", getManaOption(1, manaOptions));
-        Assert.assertEquals("{R}{R}{R}{G}", getManaOption(2, manaOptions));
+        assertManaOptions("{C}{G}{G}{G}", manaOptions);
+        assertManaOptions("{G}{G}{G}{G}{G}", manaOptions);
+        assertManaOptions("{R}{R}{R}{G}", manaOptions);
     }
 
     @Test
@@ -220,13 +230,46 @@ public class ManaOptionsTest extends CardTestPlayerBase {
         execute();
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+        assertDuplicatedManaOptions(manaOptions);
 
         Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
-        Assert.assertEquals("{C}{G}{Any}", getManaOption(0, manaOptions));
+        assertManaOptions("{C}{G}{Any}", manaOptions);
     }
 
     @Test
-    public void testMix1() {
+    public void testDuplicatedDontHave1() {
+        addCard(Zone.BATTLEFIELD, playerA, "City of Brass", 2); // Any
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+
+        setStopAt(1, PhaseStep.UPKEEP);
+        execute();
+
+        ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+        assertDuplicatedManaOptions(manaOptions);
+    }
+
+    @Test
+    public void testDuplicatedDontHave3() {
+        addCard(Zone.BATTLEFIELD, playerA, "Grove of the Burnwillows", 2); // R or G
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+
+        setStopAt(1, PhaseStep.UPKEEP);
+        execute();
+
+        ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+        assertDuplicatedManaOptions(manaOptions);
+    }
+
+    @Test
+    public void testDuplicatedHave() {
+        // getManaAvailable return any combination of mana variants evailable to player
+        // if mana ability cost another mana then if replaced in mana cost
+        // example:
+        // 1x forest
+        // 1x Chromatic Star ({1}, {T}, Sacrifice Chromatic Star: Add one mana of any color to your mana pool.)
+        // give {G}{Any}, but after pay it transform to {Any} (1 green will be pay)
+        // That's why there are can be duplicated records in getManaAvailable
+
         // {1}, {T}, Sacrifice Chromatic Star: Add one mana of any color to your mana pool.
         // When Chromatic Star is put into a graveyard from the battlefield, draw a card.
         addCard(Zone.BATTLEFIELD, playerA, "Chromatic Star", 1);
@@ -242,10 +285,9 @@ public class ManaOptionsTest extends CardTestPlayerBase {
         execute();
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
-
-        Assert.assertEquals("mana variations don't fit", 2, manaOptions.size());
-        Assert.assertEquals("{Any}{Any}", getManaOption(0, manaOptions));
-        Assert.assertEquals("{Any}{Any}", getManaOption(1, manaOptions));
+        Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
+        assertDuplicatedManaOptions(manaOptions);
+        assertManaOptions("{Any}{Any}", manaOptions);
     }
 
     @Test
@@ -257,12 +299,13 @@ public class ManaOptionsTest extends CardTestPlayerBase {
         execute();
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+        assertDuplicatedManaOptions(manaOptions);
 
         Assert.assertEquals("mana variations don't fit", 4, manaOptions.size());
-        Assert.assertEquals("{C}{W}", getManaOption(0, manaOptions));
-        Assert.assertEquals("{W}{W}", getManaOption(1, manaOptions));
-        Assert.assertEquals("{W}{B}", getManaOption(2, manaOptions));
-        Assert.assertEquals("{B}{B}", getManaOption(3, manaOptions));
+        assertManaOptions("{C}{W}", manaOptions);
+        assertManaOptions("{W}{W}", manaOptions);
+        assertManaOptions("{W}{B}", manaOptions);
+        assertManaOptions("{B}{B}", manaOptions);
     }
 
     /**
@@ -278,9 +321,10 @@ public class ManaOptionsTest extends CardTestPlayerBase {
         execute();
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+        assertDuplicatedManaOptions(manaOptions);
 
         Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
-        Assert.assertEquals("{W}{B}", getManaOption(0, manaOptions));
+        assertManaOptions("{W}{B}", manaOptions);
     }
 
     @Test
@@ -293,10 +337,11 @@ public class ManaOptionsTest extends CardTestPlayerBase {
         execute();
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+        assertDuplicatedManaOptions(manaOptions);
 
         Assert.assertEquals("mana variations don't fit", 2, manaOptions.size());
-        Assert.assertEquals("{W}{B}{B}", getManaOption(0, manaOptions));
-        Assert.assertEquals("{B}{B}{B}", getManaOption(1, manaOptions));
+        assertManaOptions("{W}{B}{B}", manaOptions);
+        assertManaOptions("{B}{B}{B}", manaOptions);
     }
 
     @Test
@@ -312,9 +357,10 @@ public class ManaOptionsTest extends CardTestPlayerBase {
         execute();
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+        assertDuplicatedManaOptions(manaOptions);
 
         Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
-        Assert.assertEquals("{C}{W}{B}", getManaOption(0, manaOptions));
+        assertManaOptions("{C}{W}{B}", manaOptions);
     }
 
     @Test
@@ -331,9 +377,10 @@ public class ManaOptionsTest extends CardTestPlayerBase {
         execute();
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+        assertDuplicatedManaOptions(manaOptions);
 
         Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
-        Assert.assertEquals("{C}{C}{C}{C}{W}{B}", getManaOption(0, manaOptions));
+        assertManaOptions("{C}{C}{C}{C}{W}{B}", manaOptions);
     }
 
     @Test
@@ -349,17 +396,9 @@ public class ManaOptionsTest extends CardTestPlayerBase {
         execute();
 
         ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+        assertDuplicatedManaOptions(manaOptions);
 
         Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
-        Assert.assertEquals("{B}{B}", getManaOption(0, manaOptions));
-    }
-
-    // TODO
-    // Test Calciform Pools combination mana lands
-    private String getManaOption(int index, ManaOptions manaOptions) {
-        if (manaOptions.size() < index + 1) {
-            return "";
-        }
-        return manaOptions.get(index).toString();
+        assertManaOptions("{B}{B}", manaOptions);
     }
 }

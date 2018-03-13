@@ -38,13 +38,9 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class EquipmentAttachedCondition implements Condition {
+public enum EquipmentAttachedCondition implements Condition {
 
-    private static final EquipmentAttachedCondition fInstance = new EquipmentAttachedCondition();
-
-    public static Condition getInstance() {
-        return fInstance;
-    }
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

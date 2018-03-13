@@ -6,11 +6,13 @@ import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
 import org.junit.Assert;
+
+import org.junit.Test;
+import org.mage.test.serverside.base.CardTestPlayerBase;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import org.junit.Test;
-import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  * @author noxx

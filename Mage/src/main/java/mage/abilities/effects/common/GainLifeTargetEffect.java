@@ -85,17 +85,17 @@ public class GainLifeTargetEffect extends OneShotEffect {
         StringBuilder sb = new StringBuilder();
         String message = life.getMessage();
 
-        if (mode.getTargets().size() > 0) {
+        if (!mode.getTargets().isEmpty()) {
             sb.append("Target ").append(mode.getTargets().get(0).getTargetName());
         } else {
             sb.append("that player");
         }
         sb.append(" gains ");
         if (message.isEmpty() || !message.equals("1")) {
-            sb.append(life.toString()).append(" ");
+            sb.append(life.toString()).append(' ');
         }
         sb.append("life");
-        if (message.length() > 0) {
+        if (!message.isEmpty()) {
             sb.append(message.equals("1") ? " equal to the number of " : " for each ");
             sb.append(message);
         }

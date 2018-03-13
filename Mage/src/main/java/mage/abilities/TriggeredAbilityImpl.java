@@ -31,6 +31,7 @@ import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.effects.Effect;
 import mage.constants.AbilityType;
+import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -88,7 +89,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
             MageObject object = game.getObject(getSourceId());
             Player player = game.getPlayer(this.getControllerId());
             if (player != null && object != null) {
-                if (!player.chooseUse(getEffects().get(0).getOutcome(), (object != null ? this.getRule(object.getLogName()) : this.getRule()), this, game)) {
+                if (!player.chooseUse(getEffects().isEmpty() ? Outcome.Detriment : getEffects().get(0).getOutcome(), this.getRule(object.getLogName()), this, game)) {
                     return false;
                 }
             } else {
@@ -187,7 +188,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
                 case ZONE_CHANGE:
                 case DESTROYED_PERMANENT:
                     if (isLeavesTheBattlefieldTrigger()) {
-                        if (event.getType().equals(EventType.DESTROYED_PERMANENT)) {
+                        if (event.getType() == EventType.DESTROYED_PERMANENT) {
                             source = game.getLastKnownInformation(getSourceId(), Zone.BATTLEFIELD);
                         } else if (((ZoneChangeEvent) event).getTarget() != null) {
                             source = ((ZoneChangeEvent) event).getTarget();
@@ -216,7 +217,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
 
     /*
      603.6c,603.6d
-     This has to be set, if the triggered ability has to check back in time if the permanent the ability is connected to had the ability on the battlefeild while the trigger is checked
+     This has to be set, if the triggered ability has to check back in time if the permanent the ability is connected to had the ability on the battlefield while the trigger is checked
      */
     @Override
     public final void setLeavesTheBattlefieldTrigger(boolean leavesTheBattlefieldTrigger) {

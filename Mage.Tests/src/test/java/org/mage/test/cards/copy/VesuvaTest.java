@@ -96,7 +96,7 @@ public class VesuvaTest extends CardTestPlayerBase {
 
         Permanent darkDepth = getPermanent("Dark Depths", playerA);
         if (darkDepth != null) {
-            Assert.assertEquals(10, darkDepth.getCounters().getCount("ice"));
+            Assert.assertEquals(10, darkDepth.getCounters(currentGame).getCount("ice"));
         }
         assertTappedCount("Dark Depths", true, 1);
     }

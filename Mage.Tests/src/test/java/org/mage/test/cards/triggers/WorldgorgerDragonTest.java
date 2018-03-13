@@ -86,6 +86,7 @@ public class WorldgorgerDragonTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Staunch Defenders", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Animate Dead", "Worldgorger Dragon");
+        setChoice(playerA, "When {this} enters the battlefield, if it's");
 
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
@@ -112,6 +113,13 @@ public class WorldgorgerDragonTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Volcanic Geyser", playerB, 22);
         setChoice(playerA, "X=20");
+
+        // not an infinite loop resulting in a draw
+        for (int i = 0; i < 6; ++i)
+        {
+            setChoice(playerA, "No");
+            setChoice(playerB, "No");
+        }
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

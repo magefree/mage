@@ -27,8 +27,10 @@
  */
 package mage.game;
 
-import java.io.Serializable;
 import mage.players.Player;
+import mage.players.PlayerType;
+
+import java.io.Serializable;
 
 /**
  *
@@ -37,18 +39,18 @@ import mage.players.Player;
 public class Seat implements Serializable {
 
 //    private static final Logger logger = Logger.getLogger(Seat.class);
-    private String playerType;
+    private PlayerType playerType;
     private Player player;
 
-    public Seat(String playerType) {
+    public Seat(PlayerType playerType) {
         this.playerType = playerType;
     }
 
-    public String getPlayerType() {
+    public PlayerType getPlayerType() {
         return playerType;
     }
 
-    public void setPlayerType(String playerType) {
+    public void setPlayerType(PlayerType playerType) {
         this.playerType = playerType;
     }
 

@@ -24,18 +24,17 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
+ */
 package mage.client.deckeditor.collection.viewer;
 
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -45,9 +44,9 @@ import mage.client.MageFrame;
 import mage.client.cards.BigCard;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.plugins.impl.Plugins;
+import mage.client.util.gui.FastSearchUtil;
 import mage.client.util.sets.ConstructedFormats;
 import org.apache.log4j.Logger;
-
 
 /**
  * Pane with big card and mage book.
@@ -58,8 +57,8 @@ public final class CollectionViewerPanel extends JPanel {
 
     private static final Logger logger = Logger.getLogger(CollectionViewerPanel.class);
 
-    protected static String LAYOYT_CONFIG_KEY = "collectionViewerLayoutConfig";
-    protected static String FORMAT_CONFIG_KEY = "collectionViewerFormat";
+    protected static final String LAYOYT_CONFIG_KEY = "collectionViewerLayoutConfig";
+    private static final String FORMAT_CONFIG_KEY = "collectionViewerFormat";
 
     public CollectionViewerPanel() {
         initComponents();
@@ -75,108 +74,127 @@ public final class CollectionViewerPanel extends JPanel {
         this.hidePopup();
         this.bigCard = null;
     }
-    
+
     public void initComponents() {
-        jPanel1 = new javax.swing.JPanel();
-        jPanel1.setOpaque(false);
+        buttonsPanel = new javax.swing.JPanel();
+        buttonsPanel.setOpaque(false);
         bigCard = new BigCard();
-        BoxLayout boxlayout = new BoxLayout(jPanel1, BoxLayout.PAGE_AXIS);
-        jPanel1.setLayout(boxlayout);
+        BoxLayout boxlayout = new BoxLayout(buttonsPanel, BoxLayout.PAGE_AXIS);
+        buttonsPanel.setLayout(boxlayout);
         btnExit = new javax.swing.JButton();
         btnExit.setAlignmentX(Component.LEFT_ALIGNMENT);
-        jPanel1.add(btnExit);
+        buttonsPanel.add(btnExit);
 
         JLabel label1 = new JLabel("Choose format:");
         label1.setAlignmentX(Component.LEFT_ALIGNMENT);
         label1.setForeground(Color.white);
-        jPanel1.add(label1);
+        buttonsPanel.add(label1);
 
+        // SELECT SET
+        // panel
+        setPanel = new JPanel();
+        setPanel.setLayout(new javax.swing.BoxLayout(setPanel, javax.swing.BoxLayout.LINE_AXIS));
+        setPanel.setOpaque(false);
+        setPanel.setPreferredSize(new Dimension(200, 25));
+        setPanel.setMaximumSize(new Dimension(200, 25));
+        setPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        buttonsPanel.add(setPanel);
+        // combo set
         formats = new JComboBox<>(ConstructedFormats.getTypes());
         formats.setSelectedItem(ConstructedFormats.getDefault());
-        formats.setPreferredSize(new Dimension(250, 25));
-        formats.setMaximumSize(new Dimension(250, 25));
-        formats.setAlignmentX(Component.LEFT_ALIGNMENT);
-        jPanel1.add(formats);
+        formats.setAlignmentX(0.0F);
+        formats.setMinimumSize(new Dimension(50, 25));
+        formats.setPreferredSize(new Dimension(50, 25));
+        formats.setMaximumSize(new Dimension(Integer.MAX_VALUE, 25));
+        setPanel.add(formats);
+        // search button
+        btnSetFastSearch = new JButton();
+        btnSetFastSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/search_24.png")));
+        btnSetFastSearch.setToolTipText(FastSearchUtil.DEFAULT_EXPANSION_TOOLTIP_MESSAGE);
+        btnSetFastSearch.setAlignmentX(1.0F);
+        btnSetFastSearch.setMinimumSize(new java.awt.Dimension(24, 24));
+        btnSetFastSearch.setPreferredSize(new java.awt.Dimension(32, 32));
+        btnSetFastSearch.setMaximumSize(new java.awt.Dimension(32, 32));
+        btnSetFastSearch.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FastSearchUtil.showFastSearchForStringComboBox(formats, FastSearchUtil.DEFAULT_EXPANSION_SEARCH_MESSAGE);
+            }
+        });
+        setPanel.add(btnSetFastSearch);
 
         JLabel label2 = new JLabel("Choose size:");
         label2.setAlignmentX(Component.LEFT_ALIGNMENT);
         label2.setForeground(Color.white);
-        jPanel1.add(label2);
+        buttonsPanel.add(label2);
 
         small3x3 = new JRadioButton("3x3");
         small3x3.setForeground(Color.white);
         boolean selected3x3 = MageFrame.getPreferences().get(LAYOYT_CONFIG_KEY, MageBook.LAYOUT_3x3).equals(MageBook.LAYOUT_3x3);
         small3x3.setSelected(selected3x3);
-        small3x3.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                big4x4.setSelected(false);
-                mageBook.updateSize(MageBook.LAYOUT_3x3);
-                MageFrame.getPreferences().put(LAYOYT_CONFIG_KEY, MageBook.LAYOUT_3x3);
-            }
+        small3x3.addActionListener(e -> {
+            big4x4.setSelected(false);
+            mageBook.updateSize(MageBook.LAYOUT_3x3);
+            MageFrame.getPreferences().put(LAYOYT_CONFIG_KEY, MageBook.LAYOUT_3x3);
         });
-        jPanel1.add(small3x3);
+        buttonsPanel.add(small3x3);
 
         big4x4 = new JRadioButton("4x4");
         big4x4.setForeground(Color.white);
         big4x4.setSelected(!selected3x3);
-        big4x4.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                small3x3.setSelected(false);
-                mageBook.updateSize(MageBook.LAYOUT_4x4);
-                MageFrame.getPreferences().put(LAYOYT_CONFIG_KEY, MageBook.LAYOUT_4x4);
-            }
+        big4x4.addActionListener(e -> {
+            small3x3.setSelected(false);
+            mageBook.updateSize(MageBook.LAYOUT_4x4);
+            MageFrame.getPreferences().put(LAYOYT_CONFIG_KEY, MageBook.LAYOUT_4x4);
         });
-        jPanel1.add(big4x4);
+        buttonsPanel.add(big4x4);
 
         JLabel label3 = new JLabel("Switch tabs:");
         label3.setAlignmentX(Component.LEFT_ALIGNMENT);
         label3.setForeground(Color.white);
-        jPanel1.add(label3);
+        buttonsPanel.add(label3);
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.setPreferredSize(new Dimension(200, 100));
         buttonPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 100));
         buttonPanel.setOpaque(false);
         buttonPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
-        jPanel1.add(buttonPanel);
+        buttonsPanel.add(buttonPanel);
 
         JButton prev = new JButton("Prev");
-        prev.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                mageBook.prev();
-            }
-        });
+        prev.addActionListener(e -> mageBook.prev());
         buttonPanel.add(prev);
 
         JButton next = new JButton("Next");
-        next.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                mageBook.next();
-            }
-        });
+        next.addActionListener(e -> mageBook.next());
         buttonPanel.add(next);
 
-        formats.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (mageBook != null) {
-                    String format = (String)formats.getSelectedItem();
-                    MageFrame.getPreferences().put(CollectionViewerPanel.FORMAT_CONFIG_KEY, format);
-                    mageBook.updateDispayedSets(format);
-                }
+        JLabel labelCardTokenSwitch = new JLabel("Show cards or tokens:");
+        labelCardTokenSwitch.setAlignmentX(Component.LEFT_ALIGNMENT);
+        labelCardTokenSwitch.setForeground(Color.white);
+        buttonsPanel.add(labelCardTokenSwitch);
+
+        JCheckBox cardsOrTokens = new JCheckBox("Display Cards");
+        cardsOrTokens.setSelected(true);
+        cardsOrTokens.setForeground(Color.white);
+        cardsOrTokens.setToolTipText("Select to show Cards or Tokens(and emblems) for the chosen set");
+        cardsOrTokens.addActionListener(e -> mageBook.cardsOrTokens(cardsOrTokens.isSelected()));
+        buttonsPanel.add(cardsOrTokens);
+
+        formats.addActionListener(e -> {
+            if (mageBook != null) {
+                String format = (String) formats.getSelectedItem();
+                MageFrame.getPreferences().put(CollectionViewerPanel.FORMAT_CONFIG_KEY, format);
+                mageBook.updateDispayedSets(format);
             }
         });
 
-        jPanel1.add(Box.createVerticalGlue());
+        buttonsPanel.add(Box.createVerticalGlue());
 
         bigCard.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         bigCard.setAlignmentX(Component.LEFT_ALIGNMENT);
         bigCard.setAlignmentY(Component.BOTTOM_ALIGNMENT);
-        jPanel1.add(bigCard);
+        buttonsPanel.add(bigCard);
 
         jPanel2 = new MageBookContainer();
         jPanel2.setOpaque(false);
@@ -186,23 +204,18 @@ public final class CollectionViewerPanel extends JPanel {
         layout.setHorizontalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(buttonsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, 0)
                                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 604, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(buttonsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 615, Short.MAX_VALUE)
         );
 
         btnExit.setText("Exit");
-        btnExit.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnExitActionPerformed(evt);
-            }
-        });
+        btnExit.addActionListener(evt -> btnExitActionPerformed(evt));
 
     }
 
@@ -211,7 +224,7 @@ public final class CollectionViewerPanel extends JPanel {
     }
 
     private void hidePopup() {
-        Plugins.getInstance().getActionCallback().mouseExited(null, null);
+        Plugins.instance.getActionCallback().mouseExited(null, null);
     }
 
     public void removeCollectionViewer() {
@@ -221,11 +234,13 @@ public final class CollectionViewerPanel extends JPanel {
             c = c.getParent();
         }
         if (c != null) {
-            ((CollectionViewerPane)c).removeFrame();
+            ((CollectionViewerPane) c).removeFrame();
         }
 
     }
+
     private final class MageBookContainer extends JPanel {
+
         public MageBookContainer() {
             super();
             initComponents();
@@ -234,7 +249,7 @@ public final class CollectionViewerPanel extends JPanel {
         public void initComponents() {
             jPanel = new JPanel();
             jScrollPane1 = new JScrollPane(jPanel);
-            jScrollPane1.getViewport().setBackground(new Color(0,0,0,0));
+            jScrollPane1.getViewport().setBackground(new Color(0, 0, 0, 0));
 
             jPanel.setLayout(new GridBagLayout()); // centers mage book
             jPanel.setBackground(new Color(0, 0, 0, 0));
@@ -255,8 +270,10 @@ public final class CollectionViewerPanel extends JPanel {
         }
     }
 
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel buttonsPanel;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel setPanel;
+    private javax.swing.JButton btnSetFastSearch;
     private mage.client.cards.BigCard bigCard;
     private javax.swing.JButton btnExit;
     private JComboBox formats;

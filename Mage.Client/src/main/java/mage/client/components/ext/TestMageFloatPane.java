@@ -7,7 +7,7 @@ import javax.swing.*;
 /**
  * @author ayratn
  */
-public class TestMageFloatPane {
+public final class TestMageFloatPane {
 
     public static void main(String... args) {
         JFrame f = new JFrame();

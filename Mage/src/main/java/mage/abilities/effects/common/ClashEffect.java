@@ -83,10 +83,10 @@ import mage.target.common.TargetOpponent;
  */
 public class ClashEffect extends OneShotEffect implements MageSingleton {
 
-    private static final ClashEffect fINSTANCE = new ClashEffect();
+    private static final ClashEffect instance = new ClashEffect();
 
     private Object readResolve() throws ObjectStreamException {
-        return fINSTANCE;
+        return instance;
     }
 
     private ClashEffect() {
@@ -95,7 +95,7 @@ public class ClashEffect extends OneShotEffect implements MageSingleton {
     }
 
     public static ClashEffect getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     public ClashEffect(final ClashEffect effect) {
@@ -128,24 +128,24 @@ public class ClashEffect extends OneShotEffect implements MageSingleton {
                     // Reveal top cards of involved players
                     StringBuilder message = new StringBuilder("Clash: ");
                     message.append(controller.getLogName());
-                    if (controller.getLibrary().size() > 0) {
+                    if (controller.getLibrary().hasCards()) {
                         Cards cards = new CardsImpl();
                         cardController = controller.getLibrary().getFromTop(game);
                         cards.add(cardController);
                         controller.revealCards(sourceObject.getIdName() + ": Clash card of " + controller.getName(), cards, game);
                         cmcController = cardController.getConvertedManaCost();
-                        message.append(" (").append(cmcController).append(")");
+                        message.append(" (").append(cmcController).append(')');
                     } else {
                         message.append(" no card");
                     }
                     message.append(" vs. ").append(opponent.getLogName());
-                    if (opponent.getLibrary().size() > 0) {
+                    if (opponent.getLibrary().hasCards()) {
                         Cards cards = new CardsImpl();
                         cardOpponent = opponent.getLibrary().getFromTop(game);
                         cards.add(cardOpponent);
                         opponent.revealCards(sourceObject.getIdName() + ": Clash card of " + opponent.getName(), cards, game);
                         cmcOpponent = cardOpponent.getConvertedManaCost();
-                        message.append(" (").append(cmcOpponent).append(")");
+                        message.append(" (").append(cmcOpponent).append(')');
                     } else {
                         message.append(" no card");
                     }

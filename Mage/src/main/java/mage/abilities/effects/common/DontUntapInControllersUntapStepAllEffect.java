@@ -82,7 +82,7 @@ public class DontUntapInControllersUntapStepAllEffect extends ContinuousRuleModi
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (PhaseStep.UNTAP.equals(game.getTurn().getStepType())) {
+        if (game.getTurn().getStepType() == PhaseStep.UNTAP) {
             Permanent permanent = game.getPermanent(event.getTargetId());
             if (permanent != null) {
                 switch(targetController) {

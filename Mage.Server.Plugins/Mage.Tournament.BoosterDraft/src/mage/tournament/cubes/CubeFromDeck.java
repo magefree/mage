@@ -27,9 +27,9 @@
  */
 package mage.tournament.cubes;
 
+import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardInfo;
 import mage.cards.decks.DeckCardLists;
-import mage.cards.decks.importer.DeckImporterUtil;
 import mage.game.draft.DraftCube.CardIdentity;
 import mage.game.draft.DraftCube;
 
@@ -39,11 +39,14 @@ import mage.game.draft.DraftCube;
  */
 public class CubeFromDeck extends DraftCube {
 
-    public CubeFromDeck(String chosenDckFile) {
+    public CubeFromDeck(Deck cubeFromDeck) {
         super("Cube From Deck");
 
-        DeckCardLists cards = DeckImporterUtil.importDeck(chosenDckFile);
-
+        DeckCardLists cards = null;
+        if (cubeFromDeck != null) {
+            cards = cubeFromDeck.getDeckCardLists();
+        }
+        
         if (cards != null) {
             for (DeckCardInfo card : cards.getCards()) {
                 cubeCards.add(new CardIdentity(card.getCardName(), card.getSetCode()));

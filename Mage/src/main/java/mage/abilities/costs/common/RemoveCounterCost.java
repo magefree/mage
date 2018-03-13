@@ -93,47 +93,49 @@ public class RemoveCounterCost extends CostImpl {
                 for (UUID targetId : target.getTargets()) {
                     Permanent permanent = game.getPermanent(targetId);
                     if (permanent != null) {
-                        if (permanent.getCounters().size() > 0 && (counterTypeToRemove == null || permanent.getCounters().containsKey(counterTypeToRemove))) {
+                        if (!permanent.getCounters(game).isEmpty() && (counterTypeToRemove == null || permanent.getCounters(game).containsKey(counterTypeToRemove))) {
                             String counterName = null;
 
                             if (counterTypeToRemove != null) {
                                 counterName = counterTypeToRemove.getName();
-                            } else if (permanent.getCounters().size() > 1 && counterTypeToRemove == null) {
+                            } else if (permanent.getCounters(game).size() > 1 && counterTypeToRemove == null) {
                                 Choice choice = new ChoiceImpl(true);
                                 Set<String> choices = new HashSet<>();
-                                for (Counter counter : permanent.getCounters().values()) {
-                                    if (permanent.getCounters().getCount(counter.getName()) > 0) {
+                                for (Counter counter : permanent.getCounters(game).values()) {
+                                    if (permanent.getCounters(game).getCount(counter.getName()) > 0) {
                                         choices.add(counter.getName());
                                     }
                                 }
                                 choice.setChoices(choices);
                                 choice.setMessage("Choose a counter to remove from " + permanent.getLogName());
-                                controller.choose(Outcome.UnboostCreature, choice, game);
+                                if (!controller.choose(Outcome.UnboostCreature, choice, game)) {
+                                    return false;
+                                }
                                 counterName = choice.getChoice();
                             } else {
-                                for (Counter counter : permanent.getCounters().values()) {
+                                for (Counter counter : permanent.getCounters(game).values()) {
                                     if (counter.getCount() > 0) {
                                         counterName = counter.getName();
                                     }
                                 }
                             }
-                            if (counterName != null) {
+                            if (counterName != null && !counterName.isEmpty()) {
                                 int countersLeft = countersToRemove - countersRemoved;
-                                int countersOnPermanent = permanent.getCounters().getCount(counterName);
+                                int countersOnPermanent = permanent.getCounters(game).getCount(counterName);
                                 int numberOfCountersSelected = 1;
                                 if (countersLeft > 1 && countersOnPermanent > 1) {
                                     numberOfCountersSelected = controller.getAmount(1, Math.min(countersLeft, countersOnPermanent),
                                             new StringBuilder("Remove how many counters from ").append(permanent.getIdName()).toString(), game);
                                 }
                                 permanent.removeCounters(counterName, numberOfCountersSelected, game);
-                                if (permanent.getCounters().getCount(counterName) == 0) {
+                                if (permanent.getCounters(game).getCount(counterName) == 0) {
                                     // this removes only the item with number = 0 from the collection
-                                    permanent.getCounters().removeCounter(counterName);
+                                    permanent.getCounters(game).removeCounter(counterName);
                                 }
                                 countersRemoved += numberOfCountersSelected;
                                 if (!game.isSimulation()) {
                                     game.informPlayers(new StringBuilder(controller.getLogName())
-                                            .append(" removes ").append(numberOfCountersSelected == 1 ? "a" : numberOfCountersSelected).append(" ")
+                                            .append(" removes ").append(numberOfCountersSelected == 1 ? "a" : numberOfCountersSelected).append(' ')
                                             .append(counterName).append(numberOfCountersSelected == 1 ? " counter from " : " counters from ")
                                             .append(permanent.getName()).toString());
                                 }
@@ -158,7 +160,7 @@ public class RemoveCounterCost extends CostImpl {
 
     private String setText() {
         StringBuilder sb = new StringBuilder("Remove ");
-        sb.append(CardUtil.numberToText(countersToRemove, "a")).append(" ");
+        sb.append(CardUtil.numberToText(countersToRemove, "a")).append(' ');
         if (counterTypeToRemove != null) {
             sb.append(counterTypeToRemove.getName());
         }

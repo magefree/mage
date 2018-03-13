@@ -30,6 +30,7 @@ package org.mage.test.cards.abilities.keywords;
 import mage.cards.Card;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.game.permanent.Permanent;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
@@ -214,7 +215,6 @@ public class ManifestTest extends CardTestPlayerBase {
     /*
      I casted a Silence the Believers on a manifested card. It moved to the exile zone face-down.
      */
-
     @Test
     public void testCardGetsExiledFaceUp() {
         addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
@@ -273,7 +273,7 @@ public class ManifestTest extends CardTestPlayerBase {
 
         skipInitShuffling();
 
-        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{1}{B},{T}, Sacrifice another creature");
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{1}{B}, {T}, Sacrifice another creature");
         addTarget(playerB, "Silvercoat Lion");
 
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
@@ -309,7 +309,7 @@ public class ManifestTest extends CardTestPlayerBase {
 
         skipInitShuffling();
 
-        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{1}{B},{T}, Sacrifice another creature");
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{1}{B}, {T}, Sacrifice another creature");
         addTarget(playerB, "Silvercoat Lion");
 
         activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "{5}{G}: Turn");
@@ -326,6 +326,8 @@ public class ManifestTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "", 0);
         assertPermanentCount(playerB, "Aerie Bowmasters", 1);
         assertPowerToughness(playerB, "Aerie Bowmasters", 4, 5); // 3/4  and the +1/+1 counter from Megamorph
+        Permanent aerie = getPermanent("Aerie Bowmasters", playerB);
+        Assert.assertTrue("Aerie Bowmasters has to be green", aerie != null && aerie.getColor(currentGame).isGreen());
 
     }
 
@@ -351,7 +353,7 @@ public class ManifestTest extends CardTestPlayerBase {
 
         skipInitShuffling();
 
-        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{1}{B},{T}, Sacrifice another creature");
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{1}{B}, {T}, Sacrifice another creature");
         addTarget(playerB, "Silvercoat Lion");
 
         setStopAt(2, PhaseStep.END_TURN);
@@ -429,7 +431,7 @@ public class ManifestTest extends CardTestPlayerBase {
 
         skipInitShuffling();
 
-        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{1}{B},{T}, Sacrifice another creature");
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{1}{B}, {T}, Sacrifice another creature");
         setChoice(playerB, "Silvercoat Lion");
 
         activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Sacrifice a creature");

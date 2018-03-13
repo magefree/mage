@@ -27,12 +27,15 @@
 */
 package mage.client.dialog;
 
-import java.util.UUID;
-import javax.swing.JOptionPane;
 import mage.cards.decks.importer.DeckImporterUtil;
 import mage.client.MageFrame;
+import mage.client.SessionHandler;
+import mage.players.PlayerType;
 import mage.remote.Session;
 import org.apache.log4j.Logger;
+
+import javax.swing.*;
+import java.util.UUID;
 
 /**
  *
@@ -58,7 +61,7 @@ public class JoinTableDialog extends MageDialog {
         this.roomId = roomId;
         this.tableId = tableId;
         this.isTournament = isTournament;
-        this.newPlayerPanel.setPlayerName(MageFrame.getSession().getUserName());
+        this.newPlayerPanel.setPlayerName(SessionHandler.getUserName());
         this.newPlayerPanel.showDeckElements(!isLimited);
         this.setModal(true);
         this.setLocation(100, 100);
@@ -84,18 +87,10 @@ public class JoinTableDialog extends MageDialog {
         setTitle("Join Table");
 
         btnCancel.setText("Cancel");
-        btnCancel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelActionPerformed(evt);
-            }
-        });
+        btnCancel.addActionListener(evt -> btnCancelActionPerformed(evt));
 
         btnOK.setText("OK");
-        btnOK.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnOKActionPerformed(evt);
-            }
-        });
+        btnOK.addActionListener(evt -> btnOKActionPerformed(evt));
 
         lblPassword.setText("Password:");
 
@@ -146,13 +141,13 @@ public class JoinTableDialog extends MageDialog {
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
-        Session session = MageFrame.getSession();
+        Session session = SessionHandler.getSession();
         try {
             PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_PASSWORD_JOIN, txtPassword.getText());
             if (isTournament) {
-                joined = session.joinTournamentTable(roomId, tableId, this.newPlayerPanel.getPlayerName(), "Human", 1, DeckImporterUtil.importDeck(this.newPlayerPanel.getDeckFile()), this.txtPassword.getText());
+                joined = session.joinTournamentTable(roomId, tableId, this.newPlayerPanel.getPlayerName(), PlayerType.HUMAN, 1, DeckImporterUtil.importDeck(this.newPlayerPanel.getDeckFile()), this.txtPassword.getText());
             } else {
-                joined = session.joinTable(roomId, tableId, this.newPlayerPanel.getPlayerName(), "Human", 1, DeckImporterUtil.importDeck(this.newPlayerPanel.getDeckFile()), this.txtPassword.getText());
+                joined = session.joinTable(roomId, tableId, this.newPlayerPanel.getPlayerName(), PlayerType.HUMAN, 1, DeckImporterUtil.importDeck(this.newPlayerPanel.getDeckFile()), this.txtPassword.getText());
             }
             
         } catch (Exception ex) {

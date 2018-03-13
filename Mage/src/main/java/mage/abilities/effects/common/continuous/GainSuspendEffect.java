@@ -67,7 +67,7 @@ public class GainSuspendEffect extends ContinuousEffectImpl implements SourceEff
     @Override
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(mor.getSourceId());
-        if (card != null && mor.refersTo(card, game) && game.getState().getZone(card.getId()).equals(Zone.EXILED)) {
+        if (card != null && mor.refersTo(card, game) && game.getState().getZone(card.getId()) == Zone.EXILED) {
             SuspendAbility.addSuspendTemporaryToCard(card, source, game);
         } else {
             discard();

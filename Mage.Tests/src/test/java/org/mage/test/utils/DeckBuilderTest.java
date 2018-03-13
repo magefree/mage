@@ -1,6 +1,8 @@
 package org.mage.test.utils;
 
 import mage.MageInt;
+import mage.cards.CardSetInfo;
+import mage.cards.basiclands.Island;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -15,7 +17,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
-import mage.sets.unhinged.Island;
 
 
 /**
@@ -39,7 +40,7 @@ public class DeckBuilderTest {
             @Override
             public Card getBestBasicLand(ColoredManaSymbol color, List<String> setsToUse) {
                 Assert.assertNotNull(color);
-                return new Island(owner);
+                return new Island(owner, new CardSetInfo("Island", "MRD", "999", Rarity.LAND));
             }
         };
 
@@ -54,7 +55,7 @@ public class DeckBuilderTest {
     private static class RandomArtifactCreature extends CardImpl {
 
         public RandomArtifactCreature(UUID ownerId, int cardNumber, String name) {
-            super(ownerId, cardNumber, name, Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}");
+            super(ownerId, new CardSetInfo(name, "MRD", String.valueOf(cardNumber), Rarity.COMMON), new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}");
             this.expansionSetCode = "MRD";
             this.power = new MageInt(1);
             this.toughness = new MageInt(1);

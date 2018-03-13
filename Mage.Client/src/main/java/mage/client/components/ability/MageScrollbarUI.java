@@ -27,7 +27,7 @@ import javax.swing.plaf.metal.MetalScrollBarUI;
  */
 public class MageScrollbarUI extends MetalScrollBarUI {
 
-    private static int ANTI_WIDTH = -3;
+    private static final int ANTI_WIDTH = -3;
 
     @Override
     public void installUI(JComponent c) {

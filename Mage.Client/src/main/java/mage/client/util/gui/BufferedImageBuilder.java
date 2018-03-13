@@ -3,6 +3,7 @@ package mage.client.util.gui;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Utility class for creating BufferedImage object from Image instance.
@@ -49,36 +50,31 @@ public class BufferedImageBuilder {
 
     private void waitForImage(BufferedImage bufferedImage) {
         final ImageLoadStatus imageLoadStatus = new ImageLoadStatus();
-        bufferedImage.getHeight(new ImageObserver() {
-            @Override
-            public boolean imageUpdate(Image img, int infoflags, int x, int y, int width, int height) {
-                if (infoflags == ALLBITS) {
-                    imageLoadStatus.heightDone = true;
-                    return true;
-                }
-                return false;
+        bufferedImage.getHeight((img, infoflags, x, y, width, height) -> {
+            if (infoflags == ImageObserver.ALLBITS) {
+                imageLoadStatus.heightDone = true;
+                return true;
             }
+            return false;
         });
-        bufferedImage.getWidth(new ImageObserver() {
-            @Override
-            public boolean imageUpdate(Image img, int infoflags, int x, int y, int width, int height) {
-                if (infoflags == ALLBITS) {
-                    imageLoadStatus.widthDone = true;
-                    return true;
-                }
-                return false;
+        bufferedImage.getWidth((img, infoflags, x, y, width, height) -> {
+            if (infoflags == ImageObserver.ALLBITS) {
+                imageLoadStatus.widthDone = true;
+                return true;
             }
+            return false;
         });
         while (!imageLoadStatus.widthDone && !imageLoadStatus.heightDone) {
             try {
-                Thread.sleep(300);
+                TimeUnit.MILLISECONDS.sleep(300);
             } catch (InterruptedException e) {
 
             }
         }
     }
 
-    class ImageLoadStatus {
+    static class ImageLoadStatus {
+
         public boolean widthDone = false;
         public boolean heightDone = false;
     }

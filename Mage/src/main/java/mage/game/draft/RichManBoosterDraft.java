@@ -28,6 +28,7 @@
 package mage.game.draft;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 import mage.cards.Card;
 import mage.cards.ExpansionSet;
@@ -69,7 +70,7 @@ public class RichManBoosterDraft extends DraftImpl {
             while (true) {
                 List<Card> nextBooster = sets.get(cardNum % sets.size()).createBooster();
                 next.setBooster(nextBooster);
-                if (nextId == startId) {
+                if (Objects.equals(nextId, startId)) {
                     break;
                 }
                 nextId = table.getNext();

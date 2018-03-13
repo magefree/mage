@@ -35,6 +35,7 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
+import mage.util.CardUtil;
 
 /**
  *
@@ -42,12 +43,20 @@ import mage.target.Target;
  */
 public class UntapTargetEffect extends OneShotEffect {
 
+    protected boolean useOnlyTargetPointer;
+
     public UntapTargetEffect() {
+        this(true);
+    }
+
+    public UntapTargetEffect(boolean useOnlyTargetPointer) {
         super(Outcome.Untap);
+        this.useOnlyTargetPointer = useOnlyTargetPointer;
     }
 
     public UntapTargetEffect(final UntapTargetEffect effect) {
         super(effect);
+        this.useOnlyTargetPointer = effect.useOnlyTargetPointer;
     }
 
     @Override
@@ -57,10 +66,21 @@ public class UntapTargetEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (UUID target : targetPointer.getTargets(game, source)) {
-            Permanent permanent = game.getPermanent(target);
-            if (permanent != null) {
-                permanent.untap(game);
+        if (!useOnlyTargetPointer && source.getTargets().size() > 1) {
+            source.getTargets().forEach((target) -> {
+                for (UUID targetId : target.getTargets()) {
+                    Permanent permanent = game.getPermanent(targetId);
+                    if (permanent != null) {
+                        permanent.untap(game);
+                    }
+                }
+            });
+        } else {
+            for (UUID target : targetPointer.getTargets(game, source)) {
+                Permanent permanent = game.getPermanent(target);
+                if (permanent != null) {
+                    permanent.untap(game);
+                }
             }
         }
         return true;
@@ -74,13 +94,13 @@ public class UntapTargetEffect extends OneShotEffect {
         Target target = mode.getTargets().get(0);
 
         StringBuilder sb = new StringBuilder();
-        sb.append("Untap ");
+        sb.append("untap ");
         if (target.getNumberOfTargets() == 0) {
             sb.append("up to ");
         }
 
         if (target.getMaxNumberOfTargets() > 1 || target.getNumberOfTargets() == 0) {
-            sb.append(target.getMaxNumberOfTargets()).append(" target ").append(target.getTargetName()).append("s");
+            sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(" target ").append(target.getTargetName()).append('s');
         } else {
             if (!target.getTargetName().startsWith("another")) {
                 sb.append("target ");

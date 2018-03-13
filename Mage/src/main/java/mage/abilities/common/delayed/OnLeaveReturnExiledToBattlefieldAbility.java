@@ -106,15 +106,29 @@ class ReturnExiledPermanentsEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
         if (sourceObject != null && controller != null) {
-            UUID exileZone = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
-            if (exileZone != null) {
-                ExileZone exile = game.getExile().getExileZone(exileZone);
-                if (exile != null) {
-                    controller.moveCards(new LinkedHashSet<>(exile.getCards(game)), Zone.BATTLEFIELD, source, game, false, false, true, null);
-                }
-                return true;
+            ExileZone exile = getExileIfPossible(game, source);
+            if (exile != null) {
+                return controller.moveCards(new LinkedHashSet<>(exile.getCards(game)), Zone.BATTLEFIELD, source, game, false, false, true, null);
             }
         }
         return false;
+    }
+
+    private ExileZone getExileIfPossible(final Game game, final Ability source) {
+        UUID exileZone = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
+
+        if (exileZone != null) {
+            ExileZone exile = game.getExile().getExileZone(exileZone);
+            if (exile == null) {
+                // try without ZoneChangeCounter - that is useful for tokens
+                exileZone = CardUtil.getCardExileZoneId(game, source);
+                if (exileZone != null) {
+                    return game.getExile().getExileZone(exileZone);
+                }
+            }
+            return exile;
+        }
+
+        return null;
     }
 }

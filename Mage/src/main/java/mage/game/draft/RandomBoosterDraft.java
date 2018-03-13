@@ -63,7 +63,7 @@ public class RandomBoosterDraft extends BoosterDraft {
     }
 
     private ExpansionSet getNextBooster() {
-        if (0 == useBoosters.size()){
+        if (useBoosters.isEmpty()){
             resetBoosters();
         }
         ExpansionSet theBooster = useBoosters.get(0);

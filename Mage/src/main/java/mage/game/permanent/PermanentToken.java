@@ -28,11 +28,10 @@
 package mage.game.permanent;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
-import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.token.Token;
 
 /**
@@ -49,6 +48,8 @@ public class PermanentToken extends PermanentImpl {
         this.token = token.copy();
         this.token.getAbilities().newId(); // neccessary if token has ability like DevourAbility()
         this.token.getAbilities().setSourceId(objectId);
+        this.power.modifyBaseValue(token.getPower().getBaseValueModified());
+        this.toughness.modifyBaseValue(token.getToughness().getBaseValueModified());
         this.copyFromToken(this.token, game, false); // needed to have at this time (e.g. for subtypes for entersTheBattlefield replacement effects)
     }
 
@@ -62,6 +63,9 @@ public class PermanentToken extends PermanentImpl {
     public void reset(Game game) {
         copyFromToken(token, game, true);
         super.reset(game);
+        // Because the P/T objects have there own base value for reset we have to take it from there instead of from the basic token object
+        this.power.resetToBaseValue();
+        this.toughness.resetToBaseValue();
     }
 
     private void copyFromToken(Token token, Game game, boolean reset) {
@@ -82,35 +86,18 @@ public class PermanentToken extends PermanentImpl {
         }
         this.cardType = token.getCardType();
         this.color = token.getColor(game).copy();
-        this.power.initValue(token.getPower().getValue());
-        this.toughness.initValue(token.getToughness().getValue());
-        this.supertype = token.getSupertype();
-        this.subtype = token.getSubtype();
+        this.frameColor = token.getFrameColor(game);
+        this.frameStyle = token.getFrameStyle();
+        this.supertype.clear();
+        this.supertype.addAll(token.getSuperType());
+        this.subtype.clear();
+        this.subtype.addAll(token.getSubtype(game));
+        this.tokenDescriptor = token.getTokenDescriptor();
     }
 
     @Override
-    public boolean moveToZone(Zone zone, UUID sourceId, Game game, boolean flag) {
-        if (!game.replaceEvent(new ZoneChangeEvent(this, this.getControllerId(), Zone.BATTLEFIELD, zone))) {
-            game.rememberLKI(objectId, Zone.BATTLEFIELD, this);
-            if (game.getPlayer(controllerId).removeFromBattlefield(this, game)) {
-                game.setZone(objectId, zone); // needed for triggered dies abilities
-                game.addSimultaneousEvent(new ZoneChangeEvent(this, this.getControllerId(), Zone.BATTLEFIELD, zone));
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game) {
-        if (!game.replaceEvent(new ZoneChangeEvent(this, sourceId, this.getControllerId(), Zone.BATTLEFIELD, Zone.EXILED))) {
-            game.rememberLKI(objectId, Zone.BATTLEFIELD, this);
-            if (game.getPlayer(controllerId).removeFromBattlefield(this, game)) {
-                game.addSimultaneousEvent(new ZoneChangeEvent(this, sourceId, this.getControllerId(), Zone.BATTLEFIELD, Zone.EXILED));
-                return true;
-            }
-        }
-        return false;
+    public MageObject getBasicMageObject(Game game) {
+        return token;
     }
 
     public Token getToken() {

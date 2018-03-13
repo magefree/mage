@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Random;
 import java.util.Set;
 
 import mage.cards.Card;
@@ -25,7 +24,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class TournamentUtil {
+public final class TournamentUtil {
     
     /**
      * Tries to calculate the most appropiate sets to add basic lands for cards of a deck
@@ -61,10 +60,9 @@ public class TournamentUtil {
         if (landSetCodes.isEmpty()) {
             // if sets have no basic lands and also it has no parent or parent has no lands get last set with lands
             // select a set with basic lands by random
-            Random generator = new Random();
             List<ExpansionInfo> basicLandSets = ExpansionRepository.instance.getSetsWithBasicLandsByReleaseDate();
-            if (basicLandSets.size() > 0) {
-                landSetCodes.add(basicLandSets.get(generator.nextInt(basicLandSets.size())).getCode());
+            if (!basicLandSets.isEmpty()) {
+                landSetCodes.add(basicLandSets.get(RandomUtil.nextInt(basicLandSets.size())).getCode());
             }
         }
 
@@ -75,7 +73,6 @@ public class TournamentUtil {
     }
     
     public static List<Card> getLands(String landName, int number, Set<String> landSets) {
-        Random random = new Random();
         CardCriteria criteria = new CardCriteria();
         if (!landSets.isEmpty()) {
             criteria.setCodes(landSets.toArray(new String[landSets.size()]));
@@ -85,7 +82,7 @@ public class TournamentUtil {
         List<Card> cards = new ArrayList<>();
         if (!lands.isEmpty()) {
             for (int i = 0; i < number; i++) {
-                Card land = lands.get(random.nextInt(lands.size())).getCard();
+                Card land = lands.get(RandomUtil.nextInt(lands.size())).getCard();
                 cards.add(land);
             }            
         }        

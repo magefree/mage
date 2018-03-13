@@ -8,6 +8,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import mage.client.dialog.PreferencesDialog;
 import mage.components.ImagePanel;
+import mage.components.ImagePanelStyle;
 import mage.interfaces.plugin.ThemePlugin;
 import net.xeoh.plugins.base.annotations.PluginImplementation;
 import net.xeoh.plugins.base.annotations.events.Init;
@@ -22,8 +23,8 @@ public class ThemePluginImpl implements ThemePlugin {
 
     private static final Logger log = Logger.getLogger(ThemePluginImpl.class);
     private static BufferedImage background;
-    private List flist = new List();
-    private String BackgroundDir = "backgrounds" + File.separator;
+    private final List flist = new List();
+    private final String BackgroundDir = "backgrounds" + File.separator;
 
     @Init
     public void init() {
@@ -82,7 +83,7 @@ public class ThemePluginImpl implements ThemePlugin {
             }
 
             if (ui.containsKey("gamePanel") && ui.containsKey("jLayeredPane")) {
-                ImagePanel bgPanel = new ImagePanel(backgroundImage, ImagePanel.TILED);
+                ImagePanel bgPanel = new ImagePanel(backgroundImage, ImagePanelStyle.TILED);
 
                 unsetOpaque(ui.get("jSplitPane1"));
                 unsetOpaque(ui.get("pnlBattlefield"));
@@ -124,7 +125,7 @@ public class ThemePluginImpl implements ThemePlugin {
     private BufferedImage loadbuffer_selected() throws IOException {
         BufferedImage res;
         String path = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_BATTLEFIELD_IMAGE, "");
-        if (path != null && !path.equals("")) {
+        if (path != null && !path.isEmpty()) {
             try {
                 res = ImageIO.read(new File(path));
                 return res;
@@ -162,7 +163,7 @@ public class ThemePluginImpl implements ThemePlugin {
                             background = ImageIO.read(is);
                         } else {
                             String path = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_BACKGROUND_IMAGE, "");
-                            if (path != null && !path.equals("")) {
+                            if (path != null && !path.isEmpty()) {
                                 try {
                                     File f = new File(path);
                                     if (f != null) {
@@ -190,7 +191,7 @@ public class ThemePluginImpl implements ThemePlugin {
                 }
             }
         }
-        return new ImagePanel(background, ImagePanel.SCALED);
+        return new ImagePanel(background, ImagePanelStyle.SCALED);
     }
 
     private void unsetOpaque(JComponent c) {

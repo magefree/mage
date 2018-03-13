@@ -1,16 +1,14 @@
 package mage.util.trace;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.StaticAbility;
 import mage.abilities.effects.ContinuousEffectsList;
 import mage.abilities.effects.RestrictionEffect;
-import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.ReachAbility;
 import mage.abilities.keyword.CantBeBlockedSourceAbility;
+import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.IntimidateAbility;
+import mage.abilities.keyword.ReachAbility;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.combat.Combat;
@@ -18,14 +16,12 @@ import mage.game.combat.CombatGroup;
 import mage.game.permanent.Permanent;
 import org.apache.log4j.Logger;
 
-import java.util.UUID;
-import mage.abilities.keyword.IntimidateAbility;
-import mage.constants.CardType;
+import java.util.*;
 
 /**
  * @author magenoxx_at_gmail.com
  */
-public class TraceUtil {
+public final class TraceUtil {
     
     private static final Logger log = Logger.getLogger(TraceUtil.class);
 
@@ -58,7 +54,7 @@ public class TraceUtil {
                     if (hasIntimidate(attacker)) {
                         for (UUID blockerId : group.getBlockers()) {
                             Permanent blocker = game.getPermanent(blockerId);
-                            if (blocker != null && !blocker.getCardType().contains(CardType.ARTIFACT)
+                            if (blocker != null && !blocker.isArtifact()
                                     && !attacker.getColor(game).shares(blocker.getColor(game))) {
                                 log.warn("Found creature with intimidate blocked by non artifact not sharing color creature");
                                 traceCombat(game, attacker, blocker);                                
@@ -66,7 +62,7 @@ public class TraceUtil {
                         }
                     }
                     if (cantBeBlocked(attacker)) {
-                        if (group.getBlockers().size() > 0) {
+                        if (!group.getBlockers().isEmpty()) {
                             Permanent blocker = game.getPermanent(group.getBlockers().get(0));
                             if (blocker != null) {
                                 log.warn("Found creature that can't be blocked by some other creature");
@@ -146,8 +142,8 @@ public class TraceUtil {
 
         log.error(prefix+"Restriction effects:");
         log.error(prefix+"  Applied to ATTACKER:");
-        HashMap<RestrictionEffect, HashSet<Ability>> attackerResEffects = game.getContinuousEffects().getApplicableRestrictionEffects(attacker, game);
-        for (Map.Entry<RestrictionEffect, HashSet<Ability>> entry : attackerResEffects.entrySet()) {
+        Map<RestrictionEffect, Set<Ability>> attackerResEffects = game.getContinuousEffects().getApplicableRestrictionEffects(attacker, game);
+        for (Map.Entry<RestrictionEffect, Set<Ability>> entry : attackerResEffects.entrySet()) {
             log.error(prefix+"    " + entry.getKey());
             log.error(prefix+"        id=" + entry.getKey().getId());
             for (Ability ability: entry.getValue()) {
@@ -156,8 +152,8 @@ public class TraceUtil {
         }
         log.error(prefix+"  Applied to BLOCKER:");
         if (blocker != null) {
-            HashMap<RestrictionEffect, HashSet<Ability>> blockerResEffects = game.getContinuousEffects().getApplicableRestrictionEffects(blocker, game);
-            for (Map.Entry<RestrictionEffect, HashSet<Ability>> entry : blockerResEffects.entrySet()) {
+            Map<RestrictionEffect, Set<Ability>> blockerResEffects = game.getContinuousEffects().getApplicableRestrictionEffects(blocker, game);
+            for (Map.Entry<RestrictionEffect, Set<Ability>> entry : blockerResEffects.entrySet()) {
                 log.error(prefix+"    " + entry.getKey());
                 log.error(prefix+"        id=" + entry.getKey().getId());
                 for (Ability ability: entry.getValue()) {

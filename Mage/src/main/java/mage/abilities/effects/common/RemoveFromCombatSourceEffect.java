@@ -24,7 +24,7 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
+ */
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
@@ -37,11 +37,10 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-
 public class RemoveFromCombatSourceEffect extends OneShotEffect {
 
     public RemoveFromCombatSourceEffect() {
-        super(Outcome.Detriment);
+        super(Outcome.AIDontUseIt);
         staticText = setText();
     }
 
@@ -63,7 +62,6 @@ public class RemoveFromCombatSourceEffect extends OneShotEffect {
         return new RemoveFromCombatSourceEffect(this);
     }
 
-    
     private String setText() {
         return "Remove {this} from combat";
     }

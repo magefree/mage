@@ -30,9 +30,11 @@ package mage.game.permanent.token;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
+
 import mage.MageInt;
 import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.util.RandomUtil;
 
 /**
  *
@@ -43,7 +45,8 @@ public class ZombieToken extends Token {
     final static private List<String> tokenImageSets = new ArrayList<>();
 
     static {
-        tokenImageSets.addAll(Arrays.asList("10E", "M10", "M11", "M12", "M13", "M14", "M15", "MBS", "ALA", "ISD", "C14", "C15", "CNS", "MMA", "BNG", "KTK", "DTK", "ORI", "OGW", "SOI", "EMN"));
+        tokenImageSets.addAll(Arrays.asList("10E", "M10", "M11", "M12", "M13", "M14", "M15", "MBS", "ALA", "ISD", "C14", "C15", "C16", "C17", "CNS",
+                "MMA", "BNG", "KTK", "DTK", "ORI", "OGW", "SOI", "EMN", "EMA", "MM3", "AKH", "CMA", "E01"));
     }
 
     public ZombieToken() {
@@ -51,7 +54,7 @@ public class ZombieToken extends Token {
         availableImageSetCodes = tokenImageSets;
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
-        subtype.add("Zombie");
+        subtype.add(SubType.ZOMBIE);
         power = new MageInt(2);
         toughness = new MageInt(2);
     }
@@ -60,10 +63,13 @@ public class ZombieToken extends Token {
     public void setExpansionSetCodeForImage(String code) {
         super.setExpansionSetCodeForImage(code);
         if (getOriginalExpansionSetCode().equals("ISD")) {
-            this.setTokenType(new Random().nextInt(3) + 1);
+            this.setTokenType(RandomUtil.nextInt(3) + 1);
         }
         if (getOriginalExpansionSetCode().equals("C14")) {
             this.setTokenType(2);
+        }
+        if (getOriginalExpansionSetCode().equals("EMN")) {
+            this.setTokenType(RandomUtil.nextInt(4) + 1);
         }
     }
 

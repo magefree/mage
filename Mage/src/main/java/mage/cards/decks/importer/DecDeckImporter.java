@@ -40,7 +40,7 @@ public class DecDeckImporter extends DeckImporter {
 
     @Override
     protected void readLine(String line, DeckCardLists deckList) {
-        if (line.length() == 0 || line.startsWith("//")) {
+        if (line.isEmpty() || line.startsWith("//")) {
             return;
         }
 
@@ -57,7 +57,7 @@ public class DecDeckImporter extends DeckImporter {
             int num = Integer.parseInt(lineNum);
             CardInfo cardInfo = CardRepository.instance.findPreferedCoreExpansionCard(lineName, true);
             if (cardInfo == null) {
-                sbMessage.append("Could not find card: '").append(lineName).append("' at line ").append(lineCount).append("\n");
+                sbMessage.append("Could not find card: '").append(lineName).append("' at line ").append(lineCount).append('\n');
             } else {
                 for (int i = 0; i < num; i++) {
                     if (!sideboard) {
@@ -68,7 +68,7 @@ public class DecDeckImporter extends DeckImporter {
                 }
             }
         } catch (NumberFormatException nfe) {
-            sbMessage.append("Invalid number: ").append(lineNum).append(" at line ").append(lineCount).append("\n");
+            sbMessage.append("Invalid number: ").append(lineNum).append(" at line ").append(lineCount).append('\n');
         }
     }
 

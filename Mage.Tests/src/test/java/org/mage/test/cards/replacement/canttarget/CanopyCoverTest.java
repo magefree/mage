@@ -67,8 +67,8 @@ public class CanopyCoverTest extends CardTestPlayerBase {
 
     @Test
     public void testCantBeTargetedWithAbilities() {
-        // {U},Sacrifice AEther Spellbomb: Return target creature to its owner's hand.
-        addCard(Zone.BATTLEFIELD, playerB, "AEther Spellbomb");
+        // {U},Sacrifice Aether Spellbomb: Return target creature to its owner's hand.
+        addCard(Zone.BATTLEFIELD, playerB, "Aether Spellbomb");
         addCard(Zone.BATTLEFIELD, playerB, "Island", 1);
 
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion"); // 2/2    Creature - Lion
@@ -87,7 +87,7 @@ public class CanopyCoverTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Canopy Cover", 1);
         assertPermanentCount(playerA, "Silvercoat Lion", 1);
 
-        assertGraveyardCount(playerB, "AEther Spellbomb", 0);
-        assertPermanentCount(playerB, "AEther Spellbomb", 1);
+        assertGraveyardCount(playerB, "Aether Spellbomb", 0);
+        assertPermanentCount(playerB, "Aether Spellbomb", 1);
     }
 }

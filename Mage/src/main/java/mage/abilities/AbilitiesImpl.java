@@ -27,28 +27,24 @@
  */
 package mage.abilities;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 import mage.abilities.common.ZoneChangeTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.keyword.ProtectionAbility;
-import mage.abilities.mana.ManaAbility;
+import mage.abilities.mana.ActivatedManaAbilityImpl;
+import mage.constants.AbilityType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.util.ThreadLocalStringBuilder;
 import org.apache.log4j.Logger;
 
 /**
- *
- * @author BetaSteward_at_googlemail.com
  * @param <T>
+ * @author BetaSteward_at_googlemail.com
  */
 public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Abilities<T> {
-    
+
     private static final Logger logger = Logger.getLogger(AbilitiesImpl.class);
 
     private static final ThreadLocalStringBuilder threadLocalBuilder = new ThreadLocalStringBuilder(200);
@@ -73,6 +69,11 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
 
     @Override
     public List<String> getRules(String source) {
+        return getRules(source, true);
+    }
+
+    @Override
+    public List<String> getRules(String source, boolean capitalize) {
         List<String> rules = new ArrayList<>();
 
         for (T ability : this) {
@@ -82,7 +83,9 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
             if (!(ability instanceof SpellAbility || ability instanceof PlayLandAbility)) {
                 String rule = ability.getRule();
                 if (rule != null && rule.length() > 3) {
-                    rule = Character.toUpperCase(rule.charAt(0)) + rule.substring(1);
+                    if (capitalize) {
+                        rule = Character.toUpperCase(rule.charAt(0)) + rule.substring(1);
+                    }
                     if (ability.getRuleAtTheTop()) {
                         rules.add(0, rule);
                     } else {
@@ -92,7 +95,7 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
                 continue;
             }
             if (ability instanceof SpellAbility) {
-                if (ability.getAdditionalCostsRuleVisible() && ability.getCosts().size() > 0) {
+                if (ability.getAdditionalCostsRuleVisible() && !ability.getCosts().isEmpty()) {
                     StringBuilder sbRule = threadLocalBuilder.get();
                     for (Cost cost : ability.getCosts()) {
                         if (cost.getText() != null && !cost.getText().isEmpty()) {
@@ -106,7 +109,7 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
                 }
                 String rule = ability.getRule();
                 if (rule != null) {
-                    if (rule.length() > 0) {
+                    if (!rule.isEmpty()) {
                         rules.add(Character.toUpperCase(rule.charAt(0)) + rule.substring(1));
                     }
                 } else { // logging so we can still can be made aware of rule problems a card has
@@ -121,71 +124,71 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
 
     @Override
     public Abilities<ActivatedAbility> getActivatedAbilities(Zone zone) {
-        Abilities<ActivatedAbility> zonedAbilities = new AbilitiesImpl<>();
-        for (T ability : this) {
-            if (ability instanceof ActivatedAbility && ability.getZone().match(zone)) {
-                zonedAbilities.add((ActivatedAbility) ability);
-            }
-        }
-        return zonedAbilities;
+        return stream()
+                .filter(ability -> ability instanceof ActivatedAbility)
+                .filter(ability -> ability.getZone().match(zone))
+                .map(ability -> (ActivatedAbility) ability)
+                .collect(Collectors.toCollection(AbilitiesImpl::new));
+
     }
 
     @Override
     public Abilities<ActivatedAbility> getPlayableAbilities(Zone zone) {
-        Abilities<ActivatedAbility> zonedAbilities = new AbilitiesImpl<>();
-        for (T ability : this) {
-            if ((ability instanceof ActivatedAbility || (ability instanceof PlayLandAbility))
-                    && ability.getZone().match(zone)) {
-                zonedAbilities.add((ActivatedAbility) ability);
-            }
-        }
-        return zonedAbilities;
+        return stream()
+                .filter(ability -> (ability instanceof ActivatedAbility))
+                .filter(ability -> ability.getZone().match(zone))
+                .map(ability -> (ActivatedAbility) ability)
+                .collect(Collectors.toCollection(AbilitiesImpl::new));
+
     }
 
     @Override
-    public Abilities<ManaAbility> getManaAbilities(Zone zone) {
-        Abilities<ManaAbility> abilities = new AbilitiesImpl<>();
-        for (T ability : this) {
-            if (ability instanceof ManaAbility && ability.getZone().match(zone)) {
-                abilities.add((ManaAbility) ability);
-            }
-        }
-        return abilities;
+    public Abilities<ActivatedManaAbilityImpl> getActivatedManaAbilities(Zone zone) {
+        return stream()
+                .filter(ability -> ability instanceof ActivatedManaAbilityImpl)
+                .filter(ability -> ability.getZone().match(zone))
+                .map(ability -> (ActivatedManaAbilityImpl) ability)
+                .collect(Collectors.toCollection(AbilitiesImpl::new));
+
     }
 
     @Override
-    public Abilities<ManaAbility> getAvailableManaAbilities(Zone zone, Game game) {
-        Abilities<ManaAbility> abilities = new AbilitiesImpl<>();
-        for (T ability : this) {
-            if (ability instanceof ManaAbility && ability.getZone().match(zone)) {
-                if ((((ManaAbility) ability).canActivate(ability.getControllerId(), game))) {
-                    abilities.add((ManaAbility) ability);
-                }
-            }
-        }
-        return abilities;
+    public Abilities<ActivatedManaAbilityImpl> getAvailableActivatedManaAbilities(Zone zone, Game game) {
+        return stream()
+                .filter(ability -> ability instanceof ActivatedManaAbilityImpl)
+                .filter(ability -> ability.getZone().match(zone))
+                .filter(ability -> (((ActivatedManaAbilityImpl) ability).canActivate(ability.getControllerId(), game)))
+                .map(ability -> (ActivatedManaAbilityImpl) ability)
+                .collect(Collectors.toCollection(AbilitiesImpl::new));
+
+    }
+
+    @Override
+    public Abilities<Ability> getManaAbilities(Zone zone) {
+        return stream()
+                .filter(ability -> ability.getAbilityType() == AbilityType.MANA)
+                .filter(ability -> ability.getZone().match(zone))
+                .collect(Collectors.toCollection(AbilitiesImpl::new));
+
     }
 
     @Override
     public Abilities<EvasionAbility> getEvasionAbilities() {
-        Abilities<EvasionAbility> abilities = new AbilitiesImpl<>();
-        for (T ability : this) {
-            if (ability instanceof EvasionAbility) {
-                abilities.add((EvasionAbility) ability);
-            }
-        }
-        return abilities;
+        return stream()
+                .filter(ability -> ability instanceof EvasionAbility)
+                .map(ability -> (EvasionAbility) ability)
+                .collect(Collectors.toCollection(AbilitiesImpl::new));
+
     }
 
     @Override
     public Abilities<StaticAbility> getStaticAbilities(Zone zone) {
-        Abilities<StaticAbility> zonedAbilities = new AbilitiesImpl<>();
-        for (T ability : this) {
-            if (ability instanceof StaticAbility && ability.getZone().match(zone)) {
-                zonedAbilities.add((StaticAbility) ability);
-            }
-        }
-        return zonedAbilities;
+        return stream()
+                .filter(ability -> ability instanceof StaticAbility)
+                .filter(ability -> ability.getZone().match(zone))
+                .map(ability -> (StaticAbility) ability)
+                .collect(Collectors.toCollection(AbilitiesImpl::new));
+
     }
 
     @Override
@@ -206,13 +209,11 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
 
     @Override
     public Abilities<ProtectionAbility> getProtectionAbilities() {
-        Abilities<ProtectionAbility> abilities = new AbilitiesImpl<>();
-        for (T ability : this) {
-            if (ability instanceof ProtectionAbility) {
-                abilities.add((ProtectionAbility) ability);
-            }
-        }
-        return abilities;
+        return stream()
+                .filter(ability -> ability instanceof ProtectionAbility)
+                .map(ability -> (ProtectionAbility) ability)
+                .collect(Collectors.toCollection(AbilitiesImpl::new));
+
     }
 
     @Override
@@ -265,16 +266,12 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
 
     @Override
     public boolean containsRule(T ability) {
-        for (T test : this) {
-            if (ability.getRule().equals(test.getRule())) {
-                return true;
-            }
-        }
-        return false;
+        return stream().anyMatch(rule -> rule.getRule().equals(ability.getRule()));
     }
 
     @Override
     public boolean containsAll(Abilities<T> abilities) {
+
         if (this.size() < abilities.size()) {
             return false;
         }
@@ -288,41 +285,21 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
 
     @Override
     public boolean containsKey(UUID abilityId) {
-        for (T ability : this) {
-            if (ability.getId().equals(abilityId)) {
-                return true;
-            }
-        }
-        return false;
+        return stream().anyMatch(ability -> abilityId.equals(ability.getId()));
     }
 
     @Override
     public boolean containsClass(Class classObject) {
-        for (T ability : this) {
-            if (ability.getClass().equals(classObject)) {
-                return true;
-            }
-        }
-        return false;
+        return stream().anyMatch(ability -> ability.getClass().equals(classObject));
     }
 
-    @Override
-    public T get(UUID abilityId) {
-        for (T ability : this) {
-            if (ability.getId().equals(abilityId)) {
-                return ability;
-            }
-        }
-        return null;
+    public Optional<T> get(UUID abilityId) {
+        return stream().filter(ability -> ability.getId().equals(abilityId)).findFirst();
     }
 
     @Override
     public int getOutcomeTotal() {
-        int total = 0;
-        for (T ability : this) {
-            total += ability.getEffects().getOutcomeTotal();
-        }
-        return total;
+        return stream().mapToInt(ability -> ability.getEffects().getOutcomeTotal()).sum();
     }
 
     @Override

@@ -6,9 +6,12 @@ import mage.constants.ManaType;
 import mage.filter.FilterMana;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertNotSame;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
+import java.util.Objects;
 
 /**
  * Custom unit tests for {link Mana}.
@@ -494,7 +497,7 @@ public class ManaTest {
         String ret = mana.toString();
 
         // then
-        assertEquals("{6}{R}{G}{G}{U}{U}{U}{B}{B}{B}{Any}{Any}", ret);
+        assertEquals("{6}{U}{U}{U}{B}{B}{B}{R}{G}{G}{Any}{Any}", ret);
     }
 
     @Test
@@ -525,7 +528,7 @@ public class ManaTest {
 
         // then
         assertEquals(mana, copy); // are equal
-        assertFalse(mana == copy); // are not the same object
+        assertNotSame(mana, copy); // are not the same object
     }
 
     @Test
@@ -603,7 +606,7 @@ public class ManaTest {
 
         // then
         assertEquals(mana, newMana);
-        assertFalse(mana == newMana);
+        assertNotSame(mana, newMana);
     }
 
     @Test

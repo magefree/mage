@@ -32,6 +32,7 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -57,7 +58,7 @@ public class CopyPermanentEffect extends OneShotEffect {
     }
 
     public CopyPermanentEffect(ApplyToPermanent applier) {
-        this(new FilterCreaturePermanent(), applier);
+        this(StaticFilters.FILTER_PERMANENT_CREATURE, applier);
     }
 
     public CopyPermanentEffect(FilterPermanent filter) {

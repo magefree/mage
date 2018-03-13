@@ -45,7 +45,7 @@ public class BlockedThisTurnWatcher extends Watcher {
     private final Set<MageObjectReference> blockedThisTurnCreatures;
 
     public BlockedThisTurnWatcher() {
-        super("BlockedThisTurn", WatcherScope.GAME);
+        super(BlockedThisTurnWatcher.class.getSimpleName(), WatcherScope.GAME);
         blockedThisTurnCreatures = new HashSet<>();
     }
 

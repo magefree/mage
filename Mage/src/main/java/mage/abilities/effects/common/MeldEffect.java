@@ -27,6 +27,7 @@
  */
 package mage.abilities.effects.common;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -79,32 +80,40 @@ public class MeldEffect extends OneShotEffect {
             filter.add(new NamePredicate(meldWithName));
             TargetPermanent target = new TargetControlledCreaturePermanent(filter);
             Set<UUID> meldWithList = target.possibleTargets(sourceId, source.getControllerId(), game);
-            UUID meldWithId;
+            if (meldWithList.isEmpty()) {
+                return false; // possible permanent has left the battlefield meanwhile
+            }
+            UUID meldWithId = null;
             if (meldWithList.size() == 1) {
                 meldWithId = meldWithList.iterator().next();
-            }
-            else {
-                controller.choose(Outcome.BoostCreature, target, sourceId, game);
-                meldWithId = target.getFirstTarget();
+            } else {
+                if (controller.choose(Outcome.BoostCreature, target, sourceId, game)) {
+                    meldWithId = target.getFirstTarget();
+                }
             }
             // Exile the two permanents to meld.
             Permanent sourcePermanent = game.getPermanent(sourceId);
             Permanent meldWithPermanent = game.getPermanent(meldWithId);
-            sourcePermanent.moveToExile(null, "", sourceId, game);
-            meldWithPermanent.moveToExile(null, "", sourceId, game);
-            // Create the meld card and move it to the battlefield.
-            Card sourceCard = game.getExile().getCard(sourceId, game);
-            Card meldWithCard = game.getExile().getCard(meldWithId, game);
-            if (!sourceCard.isCopy() && !meldWithCard.isCopy()) {
-                meldCard.setOwnerId(controller.getId());
-                meldCard.setTopHalfCard(meldWithCard, game);
-                meldCard.setbottomHalfCard(sourceCard, game);
-                meldCard.setMelded(true);
-                game.addMeldCard(meldCard.getId(), meldCard);
-                game.getState().addCard(meldCard);
-                meldCard.moveToZone(Zone.BATTLEFIELD, sourceId, game, false);
+            if (sourcePermanent != null && meldWithPermanent != null) {
+                Set<Card> toExile = new HashSet<>();
+                toExile.add(sourcePermanent);
+                toExile.add(meldWithPermanent);
+                controller.moveCards(toExile, Zone.EXILED, source, game);
+                // Create the meld card and move it to the battlefield.
+                Card sourceCard = game.getExile().getCard(sourceId, game);
+                Card meldWithCard = game.getExile().getCard(meldWithId, game);
+                if (sourceCard != null && !sourceCard.isCopy() && meldWithCard != null && !meldWithCard.isCopy()) {
+                    meldCard.setOwnerId(controller.getId());
+                    meldCard.setTopHalfCard(meldWithCard, game);
+                    meldCard.setBottomHalfCard(sourceCard, game);
+                    meldCard.setMelded(true);
+                    game.addMeldCard(meldCard.getId(), meldCard);
+                    game.getState().addCard(meldCard);
+                    meldCard.setZone(Zone.EXILED, game);
+                    controller.moveCards(meldCard, Zone.BATTLEFIELD, source, game);
+                }
+                return true;
             }
-            return true;
         }
         return false;
     }

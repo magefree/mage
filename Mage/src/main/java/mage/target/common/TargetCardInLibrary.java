@@ -28,7 +28,6 @@
 package mage.target.common;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
@@ -69,6 +68,7 @@ public class TargetCardInLibrary extends TargetCard {
         // with a certain card type or color, that player isn’t required to find some or all of those cards
         // even if they’re present in that zone.
         this.setRequired(!filter.hasPredicates());
+        this.setNotTarget(true);
         this.librarySearchLimit = Integer.MAX_VALUE;
     }
 
@@ -91,7 +91,7 @@ public class TargetCardInLibrary extends TargetCard {
         } else {
             cards = new ArrayList<>(targetPlayer.getLibrary().getTopCards(game, librarySearchLimit));
         }
-        Collections.sort(cards, new CardNameComparator());
+        cards.sort(new CardNameComparator());
         Cards cardsId = new CardsImpl();
         for (Card card : cards) {
             cardsId.add(card);
@@ -110,10 +110,7 @@ public class TargetCardInLibrary extends TargetCard {
     @Override
     public boolean canTarget(UUID id, Ability source, Game game) {
         Card card = game.getPlayer(source.getControllerId()).getLibrary().getCard(id, game);
-        if (card != null) {
-            return filter.match(card, game);
-        }
-        return false;
+        return card != null && filter.match(card, game);
     }
 
     @Override

@@ -42,14 +42,14 @@ import java.io.ObjectStreamException;
  */
 public class BlocksThisTurnMarkerAbility extends StaticAbility implements MageSingleton {
 
-    private static final BlocksThisTurnMarkerAbility fINSTANCE =  new BlocksThisTurnMarkerAbility();
+    private static final BlocksThisTurnMarkerAbility instance =  new BlocksThisTurnMarkerAbility();
 
     private Object readResolve() throws ObjectStreamException {
-        return fINSTANCE;
+        return instance;
     }
 
     public static BlocksThisTurnMarkerAbility getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private BlocksThisTurnMarkerAbility() {
@@ -63,7 +63,7 @@ public class BlocksThisTurnMarkerAbility extends StaticAbility implements MageSi
 
     @Override
     public BlocksThisTurnMarkerAbility copy() {
-        return fINSTANCE;
+        return instance;
     }
 
 }

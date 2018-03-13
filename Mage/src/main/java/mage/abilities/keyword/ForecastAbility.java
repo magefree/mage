@@ -71,7 +71,7 @@ public class ForecastAbility extends LimitedTimesPerTurnActivatedAbility {
     public boolean canActivate(UUID playerId, Game game) {
         // May be activated only during the upkeep step of the card's owner
         // Because it can only be activated from a players hand it should be ok to check here with controllerId instead of card.getOwnerId().
-        if (!game.getActivePlayerId().equals(controllerId) || !PhaseStep.UPKEEP.equals(game.getStep().getType())) {
+        if (!game.getActivePlayerId().equals(controllerId) || PhaseStep.UPKEEP != game.getStep().getType()) {
             return false;
         }
         return super.canActivate(playerId, game);

@@ -1,4 +1,4 @@
- /*
+/*
  *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without modification, are
@@ -25,28 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.common;
 
 import mage.constants.Zone;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.game.Game;
+import mage.game.events.DamagedCreatureEvent;
 import mage.game.events.GameEvent;
 
 /**
  *
  * @author LevelX2
  */
-
 public class DealtDamageToSourceTriggeredAbility extends TriggeredAbilityImpl {
 
+    private final boolean enrage;
+    private final boolean useValue;
+    private boolean usedForCombatDamageStep;
+
     public DealtDamageToSourceTriggeredAbility(Zone zone, Effect effect, boolean optional) {
+        this(zone, effect, optional, false);
+    }
+
+    public DealtDamageToSourceTriggeredAbility(Zone zone, Effect effect, boolean optional, boolean enrage) {
+        this(zone, effect, optional, enrage, false);
+    }
+
+    public DealtDamageToSourceTriggeredAbility(Zone zone, Effect effect, boolean optional, boolean enrage, boolean useValue) {
         super(zone, effect, optional);
+        this.enrage = enrage;
+        this.useValue = useValue;
+        this.usedForCombatDamageStep = false;
     }
 
     public DealtDamageToSourceTriggeredAbility(final DealtDamageToSourceTriggeredAbility ability) {
         super(ability);
+        this.enrage = ability.enrage;
+        this.useValue = ability.useValue;
+        this.usedForCombatDamageStep = ability.usedForCombatDamageStep;
     }
 
     @Override
@@ -56,22 +73,38 @@ public class DealtDamageToSourceTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_CREATURE;
+        return event.getType() == GameEvent.EventType.DAMAGED_CREATURE || event.getType() == GameEvent.EventType.COMBAT_DAMAGE_STEP_POST;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getTargetId().equals(getSourceId())) {
-            for (Effect effect : this.getEffects()) {
+        if (event.getType() == GameEvent.EventType.DAMAGED_CREATURE && event.getTargetId().equals(getSourceId())) {
+            if (useValue) {
+//              TODO: this ability should only trigger once for multiple creatures dealing combat damage.  
+//              If the damaged creature uses the amount (e.g. Boros Reckoner), this will still trigger separately instead of all at once
+                for (Effect effect : this.getEffects()) {
                     effect.setValue("damage", event.getAmount());
+                }
+                return true;
+            } else {
+                if (((DamagedCreatureEvent) event).isCombatDamage()) {
+                    if (!usedForCombatDamageStep) {
+                        usedForCombatDamageStep = true;
+                        return true;
+                    }
+                } else {
+                    return true;
+                }
             }
-            return true;
+        }
+        if (event.getType() == GameEvent.EventType.COMBAT_DAMAGE_STEP_POST) {
+            usedForCombatDamageStep = false;
         }
         return false;
     }
 
     @Override
     public String getRule() {
-        return "Whenever {this} is dealt damage, " + super.getRule();
+        return (enrage ? "<i>Enrage</i> &mdash; " : "") + "Whenever {this} is dealt damage, " + super.getRule();
     }
 }

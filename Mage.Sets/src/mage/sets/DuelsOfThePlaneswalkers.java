@@ -24,27 +24,27 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
  *
  * @author Shootbot
  */
-
 public class DuelsOfThePlaneswalkers extends ExpansionSet {
-    private static final DuelsOfThePlaneswalkers fINSTANCE =  new DuelsOfThePlaneswalkers();
+
+    private static final DuelsOfThePlaneswalkers instance = new DuelsOfThePlaneswalkers();
 
     public static DuelsOfThePlaneswalkers getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private DuelsOfThePlaneswalkers() {
-        super("Duels of the Planeswalkers", "DPA", "mage.sets.duelsoftheplaneswalkers", new GregorianCalendar(2010, 6, 4).getTime(), SetType.SUPPLEMENTAL);
+        super("Duels of the Planeswalkers", "DPA", ExpansionSet.buildDate(2010, 6, 4), SetType.SUPPLEMENTAL);
+        cards.add(new SetCardInfo("The Rack", 95, Rarity.UNCOMMON, mage.cards.t.TheRack.class));
     }
 }

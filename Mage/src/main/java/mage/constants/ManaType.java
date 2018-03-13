@@ -24,4 +24,4 @@ public enum ManaType {
     public String toString() {
         return text;
     }
-};
+}

@@ -40,15 +40,18 @@ import java.awt.event.ActionEvent;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.Icon;
 import javax.swing.SwingWorker;
 import javax.swing.table.AbstractTableModel;
 import mage.client.MageFrame;
+import mage.client.SessionHandler;
 import mage.client.chat.ChatPanelBasic;
 import mage.client.dialog.PreferencesDialog;
 import static mage.client.dialog.PreferencesDialog.KEY_TOURNAMENT_MATCH_COLUMNS_ORDER;
@@ -61,7 +64,6 @@ import mage.client.util.GUISizeHelper;
 import mage.client.util.gui.TableUtil;
 import mage.client.util.gui.countryBox.CountryCellRenderer;
 import mage.constants.PlayerAction;
-import mage.remote.Session;
 import mage.view.RoundView;
 import mage.view.TournamentGameView;
 import mage.view.TournamentPlayerView;
@@ -82,9 +84,9 @@ public class TournamentPanel extends javax.swing.JPanel {
 
     private UUID tournamentId;
     private boolean firstInitDone = false;
-    private Session session;
+
     private final TournamentPlayersTableModel playersModel;
-    private TournamentMatchesTableModel matchesModel;
+    private final TournamentMatchesTableModel matchesModel;
     private UpdateTournamentTask updateTask;
     private final DateFormat df;
 
@@ -129,7 +131,7 @@ public class TournamentPanel extends javax.swing.JPanel {
 //                }
                 if (state.startsWith("Dueling") && actionText.equals("Watch")) {
                     LOGGER.info("Watching game " + gameId);
-                    session.watchTournamentTable(tableId);
+                    SessionHandler.watchTournamentTable(tableId);
                 }
             }
         };
@@ -174,7 +176,7 @@ public class TournamentPanel extends javax.swing.JPanel {
     private void saveDividerLocations() {
         // save panel sizes and divider locations.
         Rectangle rec = MageFrame.getDesktop().getBounds();
-        String sb = Double.toString(rec.getWidth()) + "x" + Double.toString(rec.getHeight());
+        String sb = Double.toString(rec.getWidth()) + 'x' + Double.toString(rec.getHeight());
         PreferencesDialog.saveValue(PreferencesDialog.KEY_MAGE_PANEL_LAST_SIZE, sb);
         PreferencesDialog.saveValue(PreferencesDialog.KEY_TOURNAMENT_DIVIDER_LOCATION_1, Integer.toString(this.jSplitPane1.getDividerLocation()));
         PreferencesDialog.saveValue(PreferencesDialog.KEY_TOURNAMENT_DIVIDER_LOCATION_2, Integer.toString(this.jSplitPane2.getDividerLocation()));
@@ -184,7 +186,7 @@ public class TournamentPanel extends javax.swing.JPanel {
         Rectangle rec = MageFrame.getDesktop().getBounds();
         if (rec != null) {
             String size = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_MAGE_PANEL_LAST_SIZE, null);
-            String sb = Double.toString(rec.getWidth()) + "x" + Double.toString(rec.getHeight());
+            String sb = Double.toString(rec.getWidth()) + 'x' + Double.toString(rec.getHeight());
             // use divider positions only if screen size is the same as it was the time the settings were saved
             if (size != null && size.equals(sb)) {
                 String location = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_TOURNAMENT_DIVIDER_LOCATION_1, null);
@@ -201,11 +203,10 @@ public class TournamentPanel extends javax.swing.JPanel {
 
     public synchronized void showTournament(UUID tournamentId) {
         this.tournamentId = tournamentId;
-        session = MageFrame.getSession();
         // MageFrame.addTournament(tournamentId, this);
-        UUID chatRoomId = session.getTournamentChatId(tournamentId);
-        if (session.joinTournament(tournamentId) && chatRoomId != null) {
-            this.chatPanel1.connect(chatRoomId);
+        Optional<UUID> chatRoomId = SessionHandler.getTournamentChatId(tournamentId);
+        if (SessionHandler.joinTournament(tournamentId) && chatRoomId.isPresent()) {
+            this.chatPanel1.connect(chatRoomId.get());
             startTasks();
             this.setVisible(true);
             this.repaint();
@@ -245,7 +246,7 @@ public class TournamentPanel extends javax.swing.JPanel {
                 c = c.getParent();
             }
             if (c != null) {
-                ((TournamentPane) c).setTitle("Tournament [" + tournament.getTournamentName() + "]");
+                ((TournamentPane) c).setTitle("Tournament [" + tournament.getTournamentName() + ']');
             }
             txtName.setText(tournament.getTournamentName());
             txtType.setText(tournament.getTournamentType());
@@ -261,7 +262,7 @@ public class TournamentPanel extends javax.swing.JPanel {
                 if (tournament.getStepStartTime() != null) {
                     timeLeft = Format.getDuration(tournament.getConstructionTime() - (tournament.getServerTime().getTime() - tournament.getStepStartTime().getTime()) / 1000);
                 }
-                txtTournamentState.setText(new StringBuilder(tournament.getTournamentState()).append(" (").append(timeLeft).append(")").toString());
+                txtTournamentState.setText(new StringBuilder(tournament.getTournamentState()).append(" (").append(timeLeft).append(')').toString());
                 break;
             case "Dueling":
             case "Drafting":
@@ -292,7 +293,7 @@ public class TournamentPanel extends javax.swing.JPanel {
         btnQuitTournament.setVisible(false);
         if (tournament.getEndTime() == null) {
             for (TournamentPlayerView player : tournament.getPlayers()) {
-                if (player.getName().equals(session.getUserName())) {
+                if (player.getName().equals(SessionHandler.getUserName())) {
                     if (!player.hasQuit()) {
                         btnQuitTournament.setVisible(true);
                     }
@@ -304,9 +305,9 @@ public class TournamentPanel extends javax.swing.JPanel {
     }
 
     public void startTasks() {
-        if (session != null) {
+        if (SessionHandler.getSession() != null) {
             if (updateTask == null || updateTask.isDone()) {
-                updateTask = new UpdateTournamentTask(session, tournamentId, this);
+                updateTask = new UpdateTournamentTask(tournamentId, this);
                 updateTask.execute();
             }
         }
@@ -359,11 +360,7 @@ public class TournamentPanel extends javax.swing.JPanel {
         txtName.setMaximumSize(new java.awt.Dimension(50, 22));
         txtName.setOpaque(false);
         txtName.setRequestFocusEnabled(false);
-        txtName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNameActionPerformed(evt);
-            }
-        });
+        txtName.addActionListener(evt -> txtNameActionPerformed(evt));
 
         txtType.setEditable(false);
         txtType.setHorizontalAlignment(javax.swing.JTextField.LEFT);
@@ -395,19 +392,11 @@ public class TournamentPanel extends javax.swing.JPanel {
 
         btnQuitTournament.setText("Quit Tournament");
         btnQuitTournament.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnQuitTournament.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnQuitTournamentActionPerformed(evt);
-            }
-        });
+        btnQuitTournament.addActionListener(evt -> btnQuitTournamentActionPerformed(evt));
 
         btnCloseWindow.setText("Close Window");
         btnCloseWindow.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnCloseWindow.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCloseWindowActionPerformed(evt);
-            }
-        });
+        btnCloseWindow.addActionListener(evt -> btnCloseWindowActionPerformed(evt));
 
         lblName.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         lblName.setText("Name:");
@@ -725,14 +714,13 @@ class TournamentMatchesTableModel extends AbstractTableModel {
 
 class UpdateTournamentTask extends SwingWorker<Void, TournamentView> {
 
-    private final Session session;
     private final UUID tournamentId;
     private final TournamentPanel panel;
 
     private static final Logger logger = Logger.getLogger(UpdateTournamentTask.class);
 
-    UpdateTournamentTask(Session session, UUID tournamentId, TournamentPanel panel) {
-        this.session = session;
+    UpdateTournamentTask(UUID tournamentId, TournamentPanel panel) {
+
         this.tournamentId = tournamentId;
         this.panel = panel;
     }
@@ -740,15 +728,15 @@ class UpdateTournamentTask extends SwingWorker<Void, TournamentView> {
     @Override
     protected Void doInBackground() throws Exception {
         while (!isCancelled()) {
-            this.publish(session.getTournament(tournamentId));
-            Thread.sleep(2000);
+            this.publish(SessionHandler.getTournament(tournamentId));
+            TimeUnit.SECONDS.sleep(2);
         }
         return null;
     }
 
     @Override
     protected void process(List<TournamentView> view) {
-        if (view != null && view.size() > 0) { // if user disconnects, view can be null for a short time
+        if (view != null && !view.isEmpty()) { // if user disconnects, view can be null for a short time
             panel.update(view.get(0));
         }
     }

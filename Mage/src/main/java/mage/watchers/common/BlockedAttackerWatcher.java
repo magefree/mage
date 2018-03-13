@@ -44,10 +44,10 @@ import mage.watchers.Watcher;
  */
 public class BlockedAttackerWatcher extends Watcher {
 
-    public HashMap<MageObjectReference, Set<MageObjectReference>> blockData = new HashMap<>();
+    public final HashMap<MageObjectReference, Set<MageObjectReference>> blockData = new HashMap<>();
 
     public BlockedAttackerWatcher() {
-        super("BlockedAttackerWatcher", WatcherScope.GAME);
+        super(BlockedAttackerWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public BlockedAttackerWatcher(final BlockedAttackerWatcher watcher) {
@@ -88,5 +88,10 @@ public class BlockedAttackerWatcher extends Watcher {
     public boolean creatureHasBlockedAttacker(Permanent attacker, Permanent blocker, Game game) {
         Set<MageObjectReference> blockedAttackers = blockData.get(new MageObjectReference(blocker, game));
         return blockedAttackers != null && blockedAttackers.contains(new MageObjectReference(attacker, game));
+    }
+
+    public boolean creatureHasBlockedAttacker(MageObjectReference attacker, MageObjectReference blocker, Game game) {
+        Set<MageObjectReference> blockedAttackers = blockData.get(blocker);
+        return blockedAttackers != null && blockedAttackers.contains(attacker);
     }
 }

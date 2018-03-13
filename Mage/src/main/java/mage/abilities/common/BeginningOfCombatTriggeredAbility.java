@@ -9,7 +9,7 @@ import mage.game.events.GameEvent;
 import mage.target.targetpointer.FixedTarget;
 
 public class BeginningOfCombatTriggeredAbility extends TriggeredAbilityImpl {
-    
+
     private TargetController targetController;
     private boolean setTargetPointer;
 
@@ -45,28 +45,28 @@ public class BeginningOfCombatTriggeredAbility extends TriggeredAbilityImpl {
             case YOU:
                 boolean yours = event.getPlayerId().equals(this.controllerId);
                 if (yours && setTargetPointer) {
-                    if (getTargets().size() == 0) {
-                        for (Effect effect : this.getEffects()) {
+                    if (getTargets().isEmpty()) {
+                        this.getEffects().forEach(effect -> {
                             effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
-                        }
+                        });
                     }
                 }
                 return yours;
             case OPPONENT:
                 if (game.getPlayer(this.controllerId).hasOpponent(event.getPlayerId(), game)) {
                     if (setTargetPointer) {
-                        for (Effect effect : this.getEffects()) {
+                        this.getEffects().forEach(effect -> {
                             effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
-                        }
+                        });
                     }
                     return true;
                 }
-        break;
+                break;
             case ANY:
                 if (setTargetPointer) {
-                    for (Effect effect : this.getEffects()) {
+                    this.getEffects().forEach(effect -> {
                         effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
-                    }
+                    });
                 }
                 return true;
         }

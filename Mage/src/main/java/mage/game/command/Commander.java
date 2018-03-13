@@ -27,6 +27,7 @@
  */
 package mage.game.command;
 
+import java.util.EnumSet;
 import java.util.List;
 import java.util.UUID;
 import mage.MageInt;
@@ -38,43 +39,50 @@ import mage.abilities.SpellAbility;
 import mage.abilities.common.CastCommanderAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
+import mage.abilities.text.TextPart;
 import mage.cards.Card;
+import mage.cards.FrameStyle;
 import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.game.Game;
+import mage.game.events.ZoneChangeEvent;
 import mage.util.GameLog;
+import mage.util.SubTypeList;
 
 public class Commander implements CommandObject {
 
-    private final Card card;
-    private final Abilities<Ability> abilites = new AbilitiesImpl<>();
+    private final Card sourceObject;
+    private final Abilities<Ability> abilities = new AbilitiesImpl<>();
 
     public Commander(Card card) {
-        this.card = card;
-        abilites.add(new CastCommanderAbility(card));
+        this.sourceObject = card;
+        abilities.add(new CastCommanderAbility(card));
         for (Ability ability : card.getAbilities()) {
             if (!(ability instanceof SpellAbility)) {
                 Ability newAbility = ability.copy();
-                abilites.add(newAbility);
+                abilities.add(newAbility);
             }
         }
     }
 
     private Commander(Commander copy) {
-        this.card = copy.card;
+        this.sourceObject = copy.sourceObject;
     }
 
-    public Card getCard() {
-        return card;
+    @Override
+    public Card getSourceObject() {
+        return sourceObject;
     }
 
     @Override
     public UUID getSourceId() {
-        return card.getId();
+        return sourceObject.getId();
     }
 
     @Override
     public UUID getControllerId() {
-        return card.getOwnerId();
+        return sourceObject.getOwnerId();
     }
 
     @Override
@@ -88,12 +96,12 @@ public class Commander implements CommandObject {
 
     @Override
     public String getName() {
-        return card.getName();
+        return sourceObject.getName();
     }
 
     @Override
     public String getIdName() {
-        return card.getName() + " [" + card.getId().toString().substring(0, 3) + "]";
+        return sourceObject.getName() + " [" + sourceObject.getId().toString().substring(0, 3) + ']';
     }
 
     @Override
@@ -107,28 +115,28 @@ public class Commander implements CommandObject {
     }
 
     @Override
-    public List<CardType> getCardType() {
-        return card.getCardType();
+    public EnumSet<CardType> getCardType() {
+        return sourceObject.getCardType();
     }
 
     @Override
-    public List<String> getSubtype() {
-        return card.getSubtype();
+    public SubTypeList getSubtype(Game game) {
+        return sourceObject.getSubtype(game);
     }
 
     @Override
-    public boolean hasSubtype(String subtype) {
-        return card.hasSubtype(subtype);
+    public boolean hasSubtype(SubType subtype, Game game) {
+        return sourceObject.hasSubtype(subtype, game);
     }
 
     @Override
-    public List<String> getSupertype() {
-        return card.getSubtype();
+    public EnumSet<SuperType> getSuperType() {
+        return sourceObject.getSuperType();
     }
 
     @Override
     public Abilities<Ability> getAbilities() {
-        return abilites;
+        return abilities;
     }
 
     @Override
@@ -142,27 +150,42 @@ public class Commander implements CommandObject {
 
     @Override
     public ObjectColor getColor(Game game) {
-        return card.getColor(game);
+        return sourceObject.getColor(game);
+    }
+
+    @Override
+    public ObjectColor getFrameColor(Game game) {
+        return sourceObject.getFrameColor(game);
+    }
+
+    @Override
+    public FrameStyle getFrameStyle() {
+        return sourceObject.getFrameStyle();
     }
 
     @Override
     public ManaCosts<ManaCost> getManaCost() {
-        return card.getManaCost();
+        return sourceObject.getManaCost();
     }
 
     @Override
     public int getConvertedManaCost() {
-        return card.getConvertedManaCost();
+        return sourceObject.getConvertedManaCost();
     }
 
     @Override
     public MageInt getPower() {
-        return card.getPower();
+        return sourceObject.getPower();
     }
 
     @Override
     public MageInt getToughness() {
-        return card.getToughness();
+        return sourceObject.getToughness();
+    }
+
+    @Override
+    public int getStartingLoyalty() {
+        return sourceObject.getStartingLoyalty();
     }
 
     @Override
@@ -184,27 +207,49 @@ public class Commander implements CommandObject {
 
     @Override
     public UUID getId() {
-        return card.getId();
+        return sourceObject.getId();
     }
 
     @Override
     public String getImageName() {
-        return card.getImageName();
+        return sourceObject.getImageName();
     }
 
     @Override
     public int getZoneChangeCounter(Game game) {
-        return card.getZoneChangeCounter(game);
+        return sourceObject.getZoneChangeCounter(game);
     }
 
     @Override
-    public void updateZoneChangeCounter(Game game) {
-        card.updateZoneChangeCounter(game);
+    public void updateZoneChangeCounter(Game game, ZoneChangeEvent event) {
+        sourceObject.updateZoneChangeCounter(game, event);
     }
 
     @Override
     public void setZoneChangeCounter(int value, Game game) {
-        card.setZoneChangeCounter(value, game);
+        sourceObject.setZoneChangeCounter(value, game);
     }
 
+    @Override
+    public boolean isAllCreatureTypes() {
+        return false;
+    }
+
+    @Override
+    public void setIsAllCreatureTypes(boolean value) {
+    }
+
+    @Override
+    public List<TextPart> getTextParts() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public TextPart addTextPart(TextPart textPart) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void removePTCDA() {
+    }
 }

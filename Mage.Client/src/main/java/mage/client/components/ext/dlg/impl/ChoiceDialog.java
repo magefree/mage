@@ -9,18 +9,18 @@ import mage.client.components.ext.dlg.DialogManager;
 import mage.client.components.ext.dlg.DlgParams;
 import mage.client.components.ext.dlg.IDialogPanel;
 import mage.client.plugins.impl.Plugins;
-import mage.client.util.audio.AudioManager;
 import mage.client.util.Command;
 import mage.client.util.SettingsManager;
+import mage.client.util.audio.AudioManager;
 import mage.view.CardView;
 import mage.view.CardsView;
+import org.mage.card.arcane.CardPanel;
 import org.mage.plugins.card.utils.impl.ImageManagerImpl;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.UUID;
-import org.mage.card.arcane.CardPanel;
 
 /**
  * @author mw, noxx
@@ -126,11 +126,11 @@ public class ChoiceDialog extends IDialogPanel {
     }
 
     private void displayCards(CardsView cards, UUID gameId, BigCard bigCard) {
-        if (cards.size() == 0) {
+        if (cards.isEmpty()) {
             return;
         }
 
-        java.util.List<Component> toRemove = new ArrayList<Component>();
+        ArrayList<Component> toRemove = new ArrayList<>();
         for (int i = getComponentCount() - 1; i > 0; i--) {
             Component o = getComponent(i);
             if (o instanceof MageCard) {
@@ -141,11 +141,10 @@ public class ChoiceDialog extends IDialogPanel {
             remove(toRemove.get(i));
         }
 
-        java.util.List<CardView> cardList = new ArrayList<CardView>();
-        cardList.addAll(cards.values());
+        ArrayList<CardView> cardList = new ArrayList<>(cards.values());
 
-        int width = SettingsManager.getInstance().getCardSize().width;
-        int height = SettingsManager.getInstance().getCardSize().height;
+        int width = SettingsManager.instance.getCardSize().width;
+        int height = SettingsManager.instance.getCardSize().height;
 
         int dx = 0;
         int dy = 30;
@@ -162,7 +161,7 @@ public class ChoiceDialog extends IDialogPanel {
             }
 
             CardView card = cardList.get(i);
-            MageCard cardImg = Plugins.getInstance().getMageCard(card, bigCard, getCardDimension(), gameId, true);
+            MageCard cardImg = Plugins.instance.getMageCard(card, bigCard, getCardDimension(), gameId, true, true);
 
             cardImg.setLocation(dx, dy + j*(height + 30));
             add(cardImg);
@@ -175,56 +174,49 @@ public class ChoiceDialog extends IDialogPanel {
 
     private HoverButton getJButtonOK() {
         if (jButtonOK == null) {
-            jButtonOK = new HoverButton("", ImageManagerImpl.getInstance().getDlgAcceptButtonImage(),
-                    ImageManagerImpl.getInstance().getDlgActiveAcceptButtonImage(),
-                    ImageManagerImpl.getInstance().getDlgAcceptButtonImage(),
+            jButtonOK = new HoverButton("", ImageManagerImpl.instance.getDlgAcceptButtonImage(),
+                    ImageManagerImpl.instance.getDlgActiveAcceptButtonImage(),
+                    ImageManagerImpl.instance.getDlgAcceptButtonImage(),
                     new Rectangle(60, 60));
             int w = getDlgParams().rect.width - 75;
             int h = getDlgParams().rect.height - 90;
             jButtonOK.setBounds(new Rectangle(w / 2 - 40, h - 50, 60, 60));
             jButtonOK.setToolTipText("Ok");
 
-            jButtonOK.setObserver(new Command() {
-                public void execute() {
-                    DialogManager.getManager(gameId).fadeOut((DialogContainer) getParent());
-                }
-            });
+            jButtonOK.setObserver(() -> DialogManager.getManager(gameId).fadeOut((DialogContainer) getParent()));
         }
         return jButtonOK;
     }
 
     private HoverButton getJButtonPrevPage() {
         if (jButtonPrevPage == null) {
-            jButtonPrevPage = new HoverButton("", ImageManagerImpl.getInstance().getDlgPrevButtonImage(),
-                    ImageManagerImpl.getInstance().getDlgActivePrevButtonImage(),
-                    ImageManagerImpl.getInstance().getDlgPrevButtonImage(),
+            jButtonPrevPage = new HoverButton("", ImageManagerImpl.instance.getDlgPrevButtonImage(),
+                    ImageManagerImpl.instance.getDlgActivePrevButtonImage(),
+                    ImageManagerImpl.instance.getDlgPrevButtonImage(),
                     new Rectangle(60, 60));
             int w = getDlgParams().rect.width - 75;
             int h = getDlgParams().rect.height - 90;
             jButtonPrevPage.setBounds(new Rectangle(w / 2 - 125, h - 50, 60, 60));
             jButtonPrevPage.setVisible(false);
 
-            jButtonPrevPage.setObserver(new Command() {
-
-                public void execute() {
-                    if (page == 1) {
-                        return;
-                    }
-
-                    AudioManager.playPrevPage();
-
-                    page--;
-                    getJButtonPrevPage().setVisible(false);
-                    getJButtonOK().setVisible(false);
-                    getJButtonNextPage().setVisible(false);
-                    revalidate();
-                    displayCards(params.getCards(), params.gameId, params.bigCard);
-                    if (page != 1) {
-                        getJButtonPrevPage().setVisible(true);
-                    }
-                    getJButtonOK().setVisible(true);
-                    getJButtonNextPage().setVisible(true);
+            jButtonPrevPage.setObserver(() -> {
+                if (page == 1) {
+                    return;
                 }
+
+                AudioManager.playPrevPage();
+
+                page--;
+                getJButtonPrevPage().setVisible(false);
+                getJButtonOK().setVisible(false);
+                getJButtonNextPage().setVisible(false);
+                revalidate();
+                displayCards(params.getCards(), params.gameId, params.bigCard);
+                if (page != 1) {
+                    getJButtonPrevPage().setVisible(true);
+                }
+                getJButtonOK().setVisible(true);
+                getJButtonNextPage().setVisible(true);
             });
         }
         return jButtonPrevPage;
@@ -237,9 +229,9 @@ public class ChoiceDialog extends IDialogPanel {
      */
     private HoverButton getJButtonNextPage() {
         if (jButtonNextPage == null) {
-            jButtonNextPage = new HoverButton("", ImageManagerImpl.getInstance().getDlgNextButtonImage(),
-                    ImageManagerImpl.getInstance().getDlgActiveNextButtonImage(),
-                    ImageManagerImpl.getInstance().getDlgNextButtonImage(),
+            jButtonNextPage = new HoverButton("", ImageManagerImpl.instance.getDlgNextButtonImage(),
+                    ImageManagerImpl.instance.getDlgActiveNextButtonImage(),
+                    ImageManagerImpl.instance.getDlgNextButtonImage(),
                     new Rectangle(60, 60));
             int w = getDlgParams().rect.width - 75;
             int h = getDlgParams().rect.height - 90;
@@ -325,9 +317,9 @@ public class ChoiceDialog extends IDialogPanel {
      */
     private HoverButton getJButtonCancel() {
         if (jButtonCancel == null) {
-            jButtonCancel = new HoverButton("", ImageManagerImpl.getInstance().getDlgCancelButtonImage(),
-                    ImageManagerImpl.getInstance().getDlgActiveCancelButtonImage(),
-                    ImageManagerImpl.getInstance().getDlgCancelButtonImage(),
+            jButtonCancel = new HoverButton("", ImageManagerImpl.instance.getDlgCancelButtonImage(),
+                    ImageManagerImpl.instance.getDlgActiveCancelButtonImage(),
+                    ImageManagerImpl.instance.getDlgCancelButtonImage(),
                     new Rectangle(60, 60));
             int w = getDlgParams().rect.width - 75;
             int h = getDlgParams().rect.height - 90;

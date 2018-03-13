@@ -42,7 +42,7 @@ public class MTGCube extends DraftCube {
         cubeCards.add(new CardIdentity("Academy Ruins", ""));
         cubeCards.add(new CardIdentity("Accorder Paladin", ""));
         cubeCards.add(new CardIdentity("Acidic Slime", ""));
-        cubeCards.add(new CardIdentity("AEtherling", ""));
+        cubeCards.add(new CardIdentity("Aetherling", ""));
         cubeCards.add(new CardIdentity("Ajani Goldmane", ""));
         cubeCards.add(new CardIdentity("Ajani Vengeant", ""));
         cubeCards.add(new CardIdentity("Ancestral Recall", ""));

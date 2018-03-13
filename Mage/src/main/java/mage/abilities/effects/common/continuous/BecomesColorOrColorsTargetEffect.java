@@ -73,27 +73,28 @@ public class BecomesColorOrColorsTargetEffect extends OneShotEffect {
 
         if (controller != null && target != null) {
             for (int i = 0; i < 5; i++) {
-                if (!controller.chooseUse(Outcome.Neutral, "Do you wish to choose another color?", source, game)) {
-                    break;
+                if (i > 0) {
+                    if (!controller.chooseUse(Outcome.Neutral, "Do you wish to choose another color?", source, game)) {
+                        break;
+                    }
                 }
                 ChoiceColor choiceColor = new ChoiceColor();
-                controller.choose(Outcome.Benefit, choiceColor, game);
-                if (!controller.canRespond()) {
+                if (!controller.choose(Outcome.Benefit, choiceColor, game)) {
                     return false;
                 }
                 if (!game.isSimulation()) {
                     game.informPlayers(target.getName() + ": " + controller.getLogName() + " has chosen " + choiceColor.getChoice());
                 }
                 if (choiceColor.getColor().isBlack()) {
-                    sb.append("B");
+                    sb.append('B');
                 } else if (choiceColor.getColor().isBlue()) {
-                    sb.append("U");
+                    sb.append('U');
                 } else if (choiceColor.getColor().isRed()) {
-                    sb.append("R");
+                    sb.append('R');
                 } else if (choiceColor.getColor().isGreen()) {
-                    sb.append("G");
+                    sb.append('G');
                 } else if (choiceColor.getColor().isWhite()) {
-                    sb.append("W");
+                    sb.append('W');
                 }
             }
             String colors = new String(sb);
@@ -118,12 +119,12 @@ public class BecomesColorOrColorsTargetEffect extends OneShotEffect {
             return staticText;
         }
         StringBuilder sb = new StringBuilder();
-        if (mode.getTargets().size() > 0) {
+        if (!mode.getTargets().isEmpty()) {
             sb.append("target ");
             sb.append(mode.getTargets().get(0).getFilter().getMessage());
             sb.append(" becomes the color or colors of your choice");
-            if (duration.toString().length() > 0) {
-                sb.append(" ").append(duration.toString());
+            if (!duration.toString().isEmpty()) {
+                sb.append(' ').append(duration.toString());
             }
         }
         return sb.toString();

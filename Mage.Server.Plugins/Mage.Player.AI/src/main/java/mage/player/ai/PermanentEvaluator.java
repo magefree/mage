@@ -52,7 +52,7 @@ public class PermanentEvaluator {
             if (permanent.getCardType().contains(CardType.CREATURE)) {
                 value += combat.evaluate(permanent, game);
             }
-            value += permanent.getAbilities().getManaAbilities(Zone.BATTLEFIELD).size();
+            value += permanent.getAbilities().getActivatedManaAbilities(Zone.BATTLEFIELD).size();
             value += permanent.getAbilities().getActivatedAbilities(Zone.BATTLEFIELD).size();
             values.put(permanent.getId(), value);
         }

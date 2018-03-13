@@ -34,18 +34,11 @@
 
 package mage.client.cards;
 
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Rectangle;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import mage.cards.CardDimensions;
 import mage.cards.MageCard;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.CardViewRarityComparator;
+import mage.client.util.ClientEventType;
 import mage.client.util.Event;
 import mage.client.util.Listener;
 import mage.client.util.audio.AudioManager;
@@ -53,6 +46,12 @@ import mage.constants.Constants;
 import mage.view.CardView;
 import mage.view.CardsView;
 import org.apache.log4j.Logger;
+
+import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -62,7 +61,7 @@ public class DraftGrid extends javax.swing.JPanel implements MouseListener {
 
     private static final Logger logger = Logger.getLogger(DraftGrid.class);
 
-    protected CardEventSource cardEventSource = new CardEventSource();
+    protected final CardEventSource cardEventSource = new CardEventSource();
     protected BigCard bigCard;
     protected MageCard markedCard;
     protected boolean emptyGrid;
@@ -85,7 +84,7 @@ public class DraftGrid extends javax.swing.JPanel implements MouseListener {
     }
 
     public void loadBooster(CardsView booster, BigCard bigCard) {
-        if (booster instanceof CardsView && booster.size() == 0) {
+        if (booster instanceof CardsView && booster.isEmpty()) {
             emptyGrid = true;
         } else {
             if (!emptyGrid) {
@@ -126,9 +125,9 @@ public class DraftGrid extends javax.swing.JPanel implements MouseListener {
             Dimension dimension = new Dimension(cardDimension.frameWidth, cardDimension.frameHeight);
 
             List<CardView> sortedCards = new ArrayList<>(booster.values());
-            Collections.sort(sortedCards, new CardViewRarityComparator());
+            sortedCards.sort(new CardViewRarityComparator());
             for (CardView card: sortedCards) {
-                MageCard cardImg = Plugins.getInstance().getMageCard(card, bigCard, dimension, null, true);
+                MageCard cardImg = Plugins.instance.getMageCard(card, bigCard, dimension, null, true, true);
                 cardImg.addMouseListener(this);
                 add(cardImg);
                 cardImg.update(card);
@@ -157,7 +156,7 @@ public class DraftGrid extends javax.swing.JPanel implements MouseListener {
     }
 
     private void hidePopup() {
-        Plugins.getInstance().getActionCallback().mouseExited(null, null);
+        Plugins.instance.getActionCallback().mouseExited(null, null);
     }
 
     /** This method is called from within the constructor to
@@ -187,7 +186,7 @@ public class DraftGrid extends javax.swing.JPanel implements MouseListener {
             if (e.getButton() == MouseEvent.BUTTON1) {
                 Object obj = e.getSource();
                 if (obj instanceof MageCard) {
-                    this.cardEventSource.doubleClick(((MageCard)obj).getOriginal(), "pick-a-card");
+                    this.cardEventSource.fireEvent(((MageCard)obj).getOriginal(), ClientEventType.PICK_A_CARD);
                     this.hidePopup();
                     AudioManager.playOnDraftSelect();
                 }
@@ -204,7 +203,7 @@ public class DraftGrid extends javax.swing.JPanel implements MouseListener {
                 if (this.markedCard != null) {
                     markedCard.setSelected(false);
                 }
-                this.cardEventSource.doubleClick(((MageCard)obj).getOriginal(), "mark-a-card");
+                this.cardEventSource.fireEvent(((MageCard)obj).getOriginal(), ClientEventType.MARK_A_CARD);
                 markedCard = ((MageCard)obj);
                 markedCard.setSelected(true);
                 repaint();

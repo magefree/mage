@@ -6,7 +6,9 @@
 package mage.abilities.effects.common.cost;
 
 import mage.abilities.Ability;
+import mage.abilities.effects.common.ChooseCreatureTypeEffect;
 import mage.cards.Card;
+import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.game.Game;
 
@@ -16,15 +18,12 @@ import mage.game.Game;
  */
 public class SpellsCostReductionAllOfChosenSubtypeEffect extends SpellsCostReductionAllEffect {
 
-    String subtype = null;
-
     public SpellsCostReductionAllOfChosenSubtypeEffect(FilterCard filter, int amount) {
         super(filter, amount);
     }
 
     public SpellsCostReductionAllOfChosenSubtypeEffect(final SpellsCostReductionAllOfChosenSubtypeEffect effect) {
         super(effect);
-        this.subtype = effect.subtype;
     }
 
     @Override
@@ -34,15 +33,11 @@ public class SpellsCostReductionAllOfChosenSubtypeEffect extends SpellsCostReduc
 
     @Override
     protected boolean selectedByRuntimeData(Card card, Ability source, Game game) {
-        if (subtype != null) {
-            return card.hasSubtype(subtype);
+        SubType subType = ChooseCreatureTypeEffect.getChoosenCreatureType(source.getSourceId(), game);
+        if (subType != null) {
+            return card.hasSubtype(subType, game);
         }
         return false;
-    }
-
-    @Override
-    protected void setRuntimeData(Ability source, Game game) {
-        subtype = (String) game.getState().getValue(source.getSourceId() + "_type");
     }
 
 }

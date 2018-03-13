@@ -29,21 +29,21 @@
 package mage.server.game;
 
 import java.util.UUID;
+
 import mage.game.Game;
 import mage.game.GameState;
 import mage.interfaces.callback.ClientCallback;
-import mage.server.User;
+import mage.interfaces.callback.ClientCallbackMethod;
 import mage.server.UserManager;
 import mage.view.GameView;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class ReplaySession implements GameCallback {
 
     private final GameReplay replay;
-    protected UUID userId;
+    protected final UUID userId;
 
     ReplaySession(UUID gameId, UUID userId) {
         this.replay = new GameReplay(gameId);
@@ -52,10 +52,9 @@ public class ReplaySession implements GameCallback {
 
     public void replay() {
         replay.start();
-        User user = UserManager.getInstance().getUser(userId);
-        if (user != null) {
-            user.fireCallback(new ClientCallback("replayInit", replay.getGame().getId(), new GameView(replay.next(), replay.getGame(), null, null)));
-        }
+        UserManager.instance.getUser(userId).ifPresent(user ->
+                user.fireCallback(new ClientCallback(ClientCallbackMethod.REPLAY_INIT, replay.getGame().getId(), new GameView(replay.next(), replay.getGame(), null, null))));
+
     }
 
     public void stop() {
@@ -79,22 +78,19 @@ public class ReplaySession implements GameCallback {
 
     @Override
     public void gameResult(final String result) {
-        User user = UserManager.getInstance().getUser(userId);
-        if (user != null) {
-            user.fireCallback(new ClientCallback("replayDone", replay.getGame().getId(), result));
-        }
-        ReplayManager.getInstance().endReplay(replay.getGame().getId(), userId);
+        UserManager.instance.getUser(userId).ifPresent(user ->
+                user.fireCallback(new ClientCallback(ClientCallbackMethod.REPLAY_DONE, replay.getGame().getId(), result)));
+
+        ReplayManager.instance.endReplay(replay.getGame().getId(), userId);
     }
 
     private void updateGame(final GameState state, Game game) {
         if (state == null) {
             gameResult("game ended");
-        }
-        else {
-            User user = UserManager.getInstance().getUser(userId);
-            if (user != null) {
-                user.fireCallback(new ClientCallback("replayUpdate", replay.getGame().getId(), new GameView(state, game, null, null)));
-            }
+        } else {
+            UserManager.instance.getUser(userId).ifPresent(user ->
+                    user.fireCallback(new ClientCallback(ClientCallbackMethod.REPLAY_UPDATE, replay.getGame().getId(), new GameView(state, game, null, null))));
+
         }
     }
 

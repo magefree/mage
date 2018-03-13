@@ -100,23 +100,23 @@ public class DiscardControllerEffect extends OneShotEffect {
     private void setText() {
         StringBuilder sb = new StringBuilder("discard ");
         if (amount.toString().equals("1")) {
-            sb.append("a");
+            sb.append('a');
         } else {
             sb.append(CardUtil.numberToText(amount.toString()));
         }
         sb.append(" card");
         try {
             if (Integer.parseInt(amount.toString()) > 1) {
-                sb.append("s");
+                sb.append('s');
             }
         } catch (Exception e) {
-            sb.append("s");
+            sb.append('s');
         }
         if (randomDiscard) {
             sb.append(" at random");
         }
         String message = amount.getMessage();
-        if (message.length() > 0) {
+        if (!message.isEmpty()) {
             sb.append(" for each ");
         }
         sb.append(message);

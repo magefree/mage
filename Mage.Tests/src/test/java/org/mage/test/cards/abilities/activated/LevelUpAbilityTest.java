@@ -27,7 +27,7 @@ public class LevelUpAbilityTest extends CardTestPlayerBase {
         execute();
 
         Permanent master = getPermanent("Transcendent Master", playerA.getId());
-        Assert.assertTrue(master.getCounters().isEmpty());
+        Assert.assertTrue(master.getCounters(currentGame).isEmpty());
 
         Assert.assertEquals(3, master.getPower().getValue());
         Assert.assertEquals(3, master.getToughness().getValue());
@@ -49,7 +49,7 @@ public class LevelUpAbilityTest extends CardTestPlayerBase {
         execute();
 
         Permanent master = getPermanent("Transcendent Master", playerA.getId());
-        Assert.assertEquals(1, master.getCounters().getCount(CounterType.LEVEL));
+        Assert.assertEquals(1, master.getCounters(currentGame).getCount(CounterType.LEVEL));
 
         Assert.assertEquals(3, master.getPower().getValue());
         Assert.assertEquals(3, master.getToughness().getValue());
@@ -73,7 +73,7 @@ public class LevelUpAbilityTest extends CardTestPlayerBase {
         execute();
 
         Permanent master = getPermanent("Transcendent Master", playerA.getId());
-        Assert.assertEquals(6, master.getCounters().getCount(CounterType.LEVEL));
+        Assert.assertEquals(6, master.getCounters(currentGame).getCount(CounterType.LEVEL));
 
         Assert.assertEquals(6, master.getPower().getValue());
         Assert.assertEquals(6, master.getToughness().getValue());
@@ -99,7 +99,7 @@ public class LevelUpAbilityTest extends CardTestPlayerBase {
         execute();
 
         Permanent master = getPermanent("Transcendent Master", playerA.getId());
-        Assert.assertEquals(12, master.getCounters().getCount(CounterType.LEVEL));
+        Assert.assertEquals(12, master.getCounters(currentGame).getCount(CounterType.LEVEL));
 
         Assert.assertEquals("Power different", 9, master.getPower().getValue());
         Assert.assertEquals("Toughness different", 9, master.getToughness().getValue());
@@ -123,7 +123,7 @@ public class LevelUpAbilityTest extends CardTestPlayerBase {
         execute();
 
         Permanent master = getPermanent("Transcendent Master", playerA.getId());
-        Assert.assertEquals(15, master.getCounters().getCount(CounterType.LEVEL));
+        Assert.assertEquals(15, master.getCounters(currentGame).getCount(CounterType.LEVEL));
 
         Assert.assertEquals("Power different", 9, master.getPower().getValue());
         Assert.assertEquals("Toughness different", 9, master.getToughness().getValue());

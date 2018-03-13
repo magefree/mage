@@ -24,20 +24,20 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.abilities.keyword;
 
-import mage.constants.Duration;
 import mage.abilities.Ability;
 import mage.abilities.EvasionAbility;
 import mage.abilities.MageSingleton;
 import mage.abilities.effects.RestrictionEffect;
+import mage.constants.AsThoughEffectType;
+import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 import java.io.ObjectStreamException;
-import mage.constants.AsThoughEffectType;
 
 /**
  *
@@ -45,14 +45,14 @@ import mage.constants.AsThoughEffectType;
  */
 public class FlyingAbility extends EvasionAbility implements MageSingleton {
 
-    private static final FlyingAbility fINSTANCE =  new FlyingAbility();
+    private static final FlyingAbility instance = new FlyingAbility();
 
     private Object readResolve() throws ObjectStreamException {
-        return fINSTANCE;
+        return instance;
     }
 
     public static FlyingAbility getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private FlyingAbility() {
@@ -61,12 +61,12 @@ public class FlyingAbility extends EvasionAbility implements MageSingleton {
 
     @Override
     public String getRule() {
-        return "Flying";
+        return "flying";
     }
 
     @Override
     public FlyingAbility copy() {
-        return fINSTANCE;
+        return instance;
     }
 
 }
@@ -90,7 +90,7 @@ class FlyingEffect extends RestrictionEffect implements MageSingleton {
     public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
         return blocker.getAbilities().containsKey(FlyingAbility.getInstance().getId())
                 || blocker.getAbilities().containsKey(ReachAbility.getInstance().getId())
-                || (game.getContinuousEffects().asThough(blocker.getId(), AsThoughEffectType.BLOCK_DRAGON, source, blocker.getControllerId(), game) && attacker.hasSubtype("Dragon")) ;
+                || (game.getContinuousEffects().asThough(blocker.getId(), AsThoughEffectType.BLOCK_DRAGON, source, blocker.getControllerId(), game) && attacker.hasSubtype(SubType.DRAGON, game));
     }
 
     @Override

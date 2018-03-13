@@ -1,21 +1,14 @@
 package org.mage.plugins.counter;
 
-import java.io.EOFException;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-
 import mage.interfaces.PluginException;
 import mage.interfaces.plugin.CounterPlugin;
 import net.xeoh.plugins.base.annotations.PluginImplementation;
 import net.xeoh.plugins.base.annotations.events.Init;
 import net.xeoh.plugins.base.annotations.events.PluginLoaded;
 import net.xeoh.plugins.base.annotations.meta.Author;
-
 import org.apache.log4j.Logger;
+
+import java.io.*;
 
 /**
  * Implementation of {@link CounterPlugin}.<br/>
@@ -72,12 +65,10 @@ public class CounterPluginImpl implements CounterPlugin {
     public void addGamePlayed() throws PluginException {
         if (!isLoaded) return;
         File data = new File(PLUGIN_DATA_FOLDER_PATH + File.separator + DATA_STORAGE_FILE);
-        ObjectInputStream ois = null;
-        ObjectOutputStream oos = null;
         if (data.exists()) {
             int prev = 0;
-            try {
-                ois = new ObjectInputStream(new FileInputStream(data));
+
+            try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(data))) {
                 Object o = ois.readObject();
                 CounterBean c;
                 if (o instanceof CounterBean) {
@@ -90,13 +81,10 @@ public class CounterPluginImpl implements CounterPlugin {
                 throw new PluginException(e);
             } catch (ClassNotFoundException e) {
                 throw new PluginException(e);
-            } finally {
-                if (ois != null) try { ois.close(); } catch (Exception e) {}
             }
 
-            try {
+            try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(data))) {
                 synchronized (this) {
-                    oos = new ObjectOutputStream(new FileOutputStream(data));
                     CounterBean c = new CounterBean();
                     c.setGamesPlayed(prev+1);
                     oos.writeObject(c);
@@ -104,8 +92,6 @@ public class CounterPluginImpl implements CounterPlugin {
                 }
             } catch (IOException e) {
                 throw new PluginException(e);
-            } finally {
-                if (oos != null) try { oos.close(); } catch (Exception e) {}
             }
         } else {
             log.error("Counter plugin: data file doesn't exist, please restart plugin.");
@@ -120,10 +106,8 @@ public class CounterPluginImpl implements CounterPlugin {
             return 0;
         }
         if (data.exists()) {
-            ObjectInputStream ois = null;
-            try {
+            try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(data))) {
                 synchronized (this) {
-                    ois = new ObjectInputStream(new FileInputStream(data));
                     Object o = ois.readObject();
                     CounterBean c = null;
                     if (o instanceof CounterBean) {
@@ -138,8 +122,6 @@ public class CounterPluginImpl implements CounterPlugin {
                 throw new PluginException(e);
             } catch (ClassNotFoundException e) {
                 throw new PluginException(e);
-            } finally {
-                if (ois != null) try { ois.close(); } catch (Exception e) {}
             }
         } else {
             log.error("Counter plugin: data file doesn't exist, please restart plugin.");

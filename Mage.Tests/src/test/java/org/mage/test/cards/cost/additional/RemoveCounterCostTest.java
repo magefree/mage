@@ -48,7 +48,7 @@ public class RemoveCounterCostTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Novijen Sages");
         
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1},Remove two +1/+1 counters");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}, Remove two +1/+1 counters");
         setChoice(playerA, "X=2");
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

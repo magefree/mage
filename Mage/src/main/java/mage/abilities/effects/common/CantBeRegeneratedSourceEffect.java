@@ -36,6 +36,8 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 
+import java.util.Objects;
+
 /**
  *
  * @author jeffwadsworth
@@ -67,7 +69,7 @@ public class CantBeRegeneratedSourceEffect extends ContinuousRuleModifyingEffect
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return source.getSourceId() == event.getTargetId();
+        return Objects.equals(source.getSourceId(), event.getTargetId());
     }
 
     @Override
@@ -76,13 +78,12 @@ public class CantBeRegeneratedSourceEffect extends ContinuousRuleModifyingEffect
             return staticText;
         }
         StringBuilder sb = new StringBuilder();
-        sb.append(" {this} can't be regenerated");
+        sb.append("{this} can't be regenerated");
         if (!duration.toString().isEmpty()) {
-            sb.append(" ");
-            if (duration.equals(Duration.EndOfTurn)) {
+            if (duration == Duration.EndOfTurn) {
                 sb.append(" this turn");
             } else {
-                sb.append(" ").append(duration.toString());
+                sb.append(' ').append(duration.toString());
             }
         }
         return sb.toString();

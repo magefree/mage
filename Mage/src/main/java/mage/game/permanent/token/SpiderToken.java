@@ -11,6 +11,7 @@ import java.util.List;
 import mage.MageInt;
 import mage.abilities.keyword.ReachAbility;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
@@ -21,14 +22,24 @@ public class SpiderToken extends Token {
     final static private List<String> tokenImageSets = new ArrayList<>();
 
     static {
-        tokenImageSets.addAll(Arrays.asList("INN", "EMN"));
+        tokenImageSets.addAll(Arrays.asList("ISD", "EMN", "C15", "SHM"));
     }
 
     public SpiderToken() {
+        this(null, 0);
+    }
+
+    public SpiderToken(String setCode) {
+        this(setCode, 0);
+    }
+
+    public SpiderToken(String setCode, int tokenType) {
         super("Spider", "1/2 green Spider creature token with reach");
+        availableImageSetCodes = tokenImageSets;
+        setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
-        subtype.add("Spider");
+        subtype.add(SubType.SPIDER);
         power = new MageInt(1);
         toughness = new MageInt(2);
         addAbility(ReachAbility.getInstance());

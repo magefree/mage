@@ -55,7 +55,7 @@ public class ApplyCountersEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         for (Permanent permanent: game.getBattlefield().getAllActivePermanents(CardType.CREATURE)) {
-            for (BoostCounter counter: permanent.getCounters().getBoostCounters()) {
+            for (BoostCounter counter: permanent.getCounters(game).getBoostCounters()) {
                 permanent.addPower(counter.getPower() * counter.getCount());
                 permanent.addToughness(counter.getToughness() * counter.getCount());
             }

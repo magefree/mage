@@ -37,7 +37,6 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author LevelX2
  */
 public class AtTheBeginOfMainPhaseDelayedTriggeredAbility extends DelayedTriggeredAbility {
@@ -93,8 +92,8 @@ public class AtTheBeginOfMainPhaseDelayedTriggeredAbility extends DelayedTrigger
             case ANY:
                 return true;
             case YOU:
-                boolean yours = event.getPlayerId().equals(this.controllerId);
-                return yours;
+                return event.getPlayerId().equals(this.controllerId);
+
             case OPPONENT:
                 if (game.getPlayer(this.getControllerId()).hasOpponent(event.getPlayerId(), game)) {
                     return true;
@@ -117,11 +116,11 @@ public class AtTheBeginOfMainPhaseDelayedTriggeredAbility extends DelayedTrigger
         switch (phaseSelection) {
             case NEXT_MAIN:
             case NEXT_MAIN_THIS_TURN:
-                return EventType.PRECOMBAT_MAIN_PHASE_PRE.equals(eventType) || EventType.POSTCOMBAT_MAIN_PHASE_PRE.equals(eventType);
+                return EventType.PRECOMBAT_MAIN_PHASE_PRE == eventType || EventType.POSTCOMBAT_MAIN_PHASE_PRE == eventType;
             case NEXT_POSTCOMAT_MAIN:
-                return EventType.POSTCOMBAT_MAIN_PHASE_PRE.equals(eventType);
+                return EventType.POSTCOMBAT_MAIN_PHASE_PRE == eventType;
             case NEXT_PRECOMBAT_MAIN:
-                return EventType.PRECOMBAT_MAIN_PHASE_PRE.equals(eventType);
+                return EventType.PRECOMBAT_MAIN_PHASE_PRE == eventType;
             default:
                 return false;
         }

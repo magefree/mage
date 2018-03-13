@@ -34,34 +34,21 @@ import mage.cards.Card;
 import mage.game.Game;
 
 /**
- *
  * @author LevelX2
  */
 
-public class DashedCondition implements Condition {
+public enum DashedCondition implements Condition {
 
-    private static DashedCondition fInstance = null;
-
-    private DashedCondition() {}
-
-    public static Condition getInstance() {
-        if (fInstance == null) {
-            fInstance = new DashedCondition();
-        }
-        return fInstance;
-    }
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(source.getSourceId());
         if (card != null) {
-            for (Ability ability: card.getAbilities()) {
-                if (ability instanceof DashAbility) {
-                    if(((DashAbility) ability).isActivated(source, game)) {
-                        return true;
-                    }
-                }
-            }
+            return card.getAbilities().stream()
+                    .filter(a -> a instanceof DashAbility)
+                    .anyMatch(d -> ((DashAbility)d).isActivated(source, game));
+
         }
         return false;
     }

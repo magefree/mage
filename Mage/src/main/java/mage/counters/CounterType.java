@@ -41,19 +41,25 @@ public enum CounterType {
     BLAZE("blaze"),
     BOUNTY("bounty"),
     BRIBERY("bribery"),
+    BRICK("brick"),
+    CAGE("cage"),
     CARRION("carrion"),
     CHARGE("charge"),
     CORPSE("corpse"),
     CREDIT("credit"),
     CRYSTAL("crystal"),
     CUBE("cube"),
+    CURRENCY("currency"),
     DELAY("delay"),
     DEPLETION("depletion"),
     DESPAIR("despair"),
     DEVOTION("devotion"),
     DIVINITY("divinity"),
     DOOM("doom"),
+    DREAM("dream"),
+    ECHO("echo"),
     ELIXIR("elixir"),
+    ENERGY("energy"),
     EON("eon"),
     EXPERIENCE("experience"),
     EYEBALL("eyeball"),
@@ -61,15 +67,24 @@ public enum CounterType {
     FATE("fate"),
     FEATHER("feather"),
     FLOOD("flood"),
+    FURY("fury"),
+    FUNGUS("fungus"),
     FUSE("fuse"),
+    GLOBE("globe"),
     GOLD("gold"),
+    GROWTH("growth"),
     HATCHLING("hatchling"),
     HEALING("healing"),
     HOOFPRINT("hoofprint"),
+    HOUR("hour"),
+    HOURGLASS("hourglass"),
+    HUNGER("hunger"),
     ICE("ice"),
+    INFECTION("infection"),
     INTERVENTION("intervention"),
     JAVELIN("javelin"),
     KI("ki"),
+    LANDMARK("landmark"),
     LEVEL("level"),
     LORE("lore"),
     LUCK("luck"),
@@ -78,8 +93,11 @@ public enum CounterType {
     M1M1(new BoostCounter(-1, -1).name),
     M2M1(new BoostCounter(-2, -1).name),
     M2M2(new BoostCounter(-2, -2).name),
+    MINE("mine"),
     MINING("mining"),
+    MIRE("mire"),
     MUSTER("muster"),
+    NET("net"),
     P0P1(new BoostCounter(0, 1).name),
     P1P0(new BoostCounter(1, 0).name),
     P1P1(new BoostCounter(1, 1).name),
@@ -87,17 +105,23 @@ public enum CounterType {
     P2P2(new BoostCounter(2, 2).name),
     PAGE("page"),
     PAIN("pain"),
+    PETAL("petal"),
     PETRIFICATION("petrification"),
     PLAGUE("plague"),
+    PLOT("plot"),
     POLYP("polyp"),
     POISON("poison"),
     PRESSURE("pressure"),
+    PREY("prey"),
+    REPAIR("repair"),
+    RUST("rust"),
     QUEST("quest"),
     SCREAM("scream"),
     SHELL("shell"),
     SHIELD("shield"),
     SHRED("shred"),
     SLIME("slime"),
+    SPITE("spite"),
     SPORE("spore"),
     STORAGE("storage"),
     STRIFE("strife"),
@@ -107,6 +131,8 @@ public enum CounterType {
     TIME("time"),
     TOWER("tower"),
     TRAP("trap"),
+    TREASURE("treasure"),
+    UNITY("unity"),
     VELOCITY("velocity"),
     VERSE("verse"),
     VITALITY("vitality"),
@@ -115,7 +141,7 @@ public enum CounterType {
 
     private final String name;
 
-    private CounterType(String name) {
+    CounterType(String name) {
         this.name = name;
     }
 
@@ -165,5 +191,14 @@ public enum CounterType {
             default:
                 return new Counter(name, amount);
         }
+    }
+
+    public static CounterType findByName(String name) {
+        for (CounterType counterType : values()) {
+            if (counterType.getName().equals(name)) {
+                return counterType;
+            }
+        }
+        return null;
     }
 }

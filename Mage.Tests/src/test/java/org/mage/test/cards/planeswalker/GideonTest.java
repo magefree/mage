@@ -31,6 +31,8 @@ import mage.abilities.keyword.IndestructibleAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.game.permanent.Permanent;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -115,4 +117,47 @@ public class GideonTest extends CardTestPlayerBase {
 
     }
 
+    /**
+     * When you use Gideon, Battle-Forged (flipped version of Kytheon from Magic
+     * Origins) and use his 0 ability to turn him into a creature and equip the
+     * Stitcher's Graft from EMN, he should have to be sacced at the end of
+     * turn.
+     */
+    @Test
+    public void testGideonBattleForgedSacrifice() {
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 2);
+        // At end of combat, if Kytheon, Hero of Akros and at least two other creatures attacked this combat, exile Kytheon,
+        // then return him to the battlefield transformed under his owner's control.
+        // {2}{W}: Kytheon gains indestructible until end of turn.
+        // Gideon, Battle-Forged
+        // +2: Up to one target creature an opponent controls attacks Gideon, Battle-Forged during its controller's next turn if able.
+        // +1: Until your next turn, target creature gains indestructible. Untap that creature.
+        // +0: Until end of turn, Gideon, Battle-Forged becomes a 4/4 Human Soldier creature with indestructible that's still a planeswalker. Prevent all damage that would be dealt to him this turn.
+        addCard(Zone.BATTLEFIELD, playerB, "Kytheon, Hero of Akros");
+        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion");
+        addCard(Zone.BATTLEFIELD, playerB, "Pillarfield Ox");
+        // Equipped creature gets +3/+3.
+        // Whenever equipped creature attacks, it doesn't untap during its controller's next untap step.
+        // Whenever Stitcher's Graft becomes unattached from a permanent, sacrifice that permanent.
+        // Equip {2}
+        addCard(Zone.BATTLEFIELD, playerB, "Stitcher's Graft", 1);
+
+        attack(2, playerB, "Kytheon, Hero of Akros");
+        attack(2, playerB, "Silvercoat Lion");
+        attack(2, playerB, "Pillarfield Ox");
+
+        activateAbility(4, PhaseStep.PRECOMBAT_MAIN, playerB, "+0: Until ");
+        activateAbility(4, PhaseStep.PRECOMBAT_MAIN, playerB, "Equip {2}", "Gideon, Battle-Forged");
+        attack(4, playerB, "Gideon, Battle-Forged"); // 7 damage
+
+        setStopAt(5, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerB, "Silvercoat Lion", 1);
+        assertLife(playerA, 7);
+        Permanent equipment = getPermanent("Stitcher's Graft", playerB);
+        Assert.assertTrue("Stitcher's Graft may no longer be equipped", equipment.getAttachedTo() == null);
+        assertPermanentCount(playerB, "Gideon, Battle-Forged", 0);
+        assertGraveyardCount(playerB, "Kytheon, Hero of Akros", 1);
+    }
 }

@@ -69,6 +69,11 @@ public class ControllerPredicate implements ObjectPlayerPredicate<ObjectPlayer<C
                     return true;
                 }
                 break;
+            case ACTIVE:
+                if (object.getControllerId().equals(game.getActivePlayerId())) {
+                    return true;
+                }
+                break;
             case ANY:
                 return true;
         }

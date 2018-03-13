@@ -39,7 +39,7 @@ import mage.view.*;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CardsViewUtil {
+public final class CardsViewUtil {
 
     public static CardsView convertSimple(SimpleCardsView view) {
         CardsView cards = new CardsView();
@@ -59,7 +59,7 @@ public class CardsViewUtil {
         CardsView cards = new CardsView();
 
         for (SimpleCardView simple: view.values()) {
-            String key = simple.getExpansionSetCode() + "_" + simple.getCardNumber();
+            String key = simple.getExpansionSetCode() + '_' + simple.getCardNumber();
             Card card = loadedCards.get(key);
             if(card == null)
             {

@@ -48,7 +48,7 @@ public class PayVariableLifeCost extends VariableCostImpl {
     public PayVariableLifeCost(boolean additionalCostText) {
         super("life to pay");
         this.text = new StringBuilder(additionalCostText ? "As an additional cost to cast {source}, pay ":"Pay ")
-                .append(xText).append(" ").append("life").toString();
+                .append(xText).append(' ').append("life").toString();
     }
 
     public PayVariableLifeCost(final PayVariableLifeCost cost) {

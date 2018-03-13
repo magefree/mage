@@ -27,15 +27,6 @@
  */
 package mage.player.ai;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-import java.util.concurrent.ConcurrentLinkedQueue;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
@@ -56,6 +47,9 @@ import mage.players.net.UserData;
 import mage.target.Target;
 import org.apache.log4j.Logger;
 
+import java.util.*;
+import java.util.concurrent.ConcurrentLinkedQueue;
+
 /**
  *
  * @author BetaSteward_at_googlemail.com
@@ -63,12 +57,11 @@ import org.apache.log4j.Logger;
 public class SimulatedPlayer2 extends ComputerPlayer {
 
     private static final Logger logger = Logger.getLogger(SimulatedPlayer2.class);
+    private static PassAbility pass = new PassAbility();
     private final boolean isSimulatedPlayer;
+    private final List<String> suggested;
     private transient ConcurrentLinkedQueue<Ability> allActions;
     private boolean forced;
-    private static PassAbility pass = new PassAbility();
-
-    private final List<String> suggested;
 
     public SimulatedPlayer2(UUID id, boolean isSimulatedPlayer, List<String> suggested) {
         super(id);
@@ -110,7 +103,7 @@ public class SimulatedPlayer2 extends ComputerPlayer {
         if (logger.isTraceEnabled()) {
             for (Ability a : allActions) {
                 logger.info("ability==" + a);
-                if (a.getTargets().size() > 0) {
+                if (!a.getTargets().isEmpty()) {
                     MageObject mageObject = game.getObject(a.getFirstTarget());
                     if (mageObject != null) {
                         logger.info("   target=" + mageObject.getName());
@@ -131,7 +124,7 @@ public class SimulatedPlayer2 extends ComputerPlayer {
         List<Ability> playables = game.getPlayer(playerId).getPlayable(game, isSimulatedPlayer);
         playables = filterAbilities(game, playables, suggested);
         for (Ability ability : playables) {
-            if (ability.getAbilityType().equals(AbilityType.MANA)) {
+            if (ability.getAbilityType() == AbilityType.MANA) {
                 continue;
             }
             List<Ability> options = game.getPlayer(playerId).getPlayableOptions(ability, game);
@@ -177,14 +170,14 @@ public class SimulatedPlayer2 extends ComputerPlayer {
                             }
                         }
                         // add the specific value for x
-                        newAbility.getManaCostsToPay().add(new ManaCostsImpl(new StringBuilder("{").append(xAmount).append("}").toString()));
+                        newAbility.getManaCostsToPay().add(new ManaCostsImpl(new StringBuilder("{").append(xAmount).append('}').toString()));
                         newAbility.getManaCostsToPay().setX(xAmount);
                         if (varCost != null) {
                             varCost.setPaid();
                         }
                         card.adjustTargets(newAbility, game);
                         // add the different possible target option for the specific X value
-                        if (newAbility.getTargets().getUnchosen().size() > 0) {
+                        if (!newAbility.getTargets().getUnchosen().isEmpty()) {
                             addTargetOptions(options, newAbility, targetNum, game);
                         }
                     }
@@ -247,7 +240,7 @@ public class SimulatedPlayer2 extends ComputerPlayer {
         }
         List<Ability> filtered = new ArrayList<>();
         for (Ability option : options) {
-            if (option.getTargets().size() > 0 && option.getTargets().get(0).getMaxNumberOfTargets() == 1) {
+            if (!option.getTargets().isEmpty() && option.getTargets().get(0).getMaxNumberOfTargets() == 1) {
                 Card card = game.getCard(ability.getSourceId());
                 for (String s : suggested) {
                     String[] groups = s.split(";");
@@ -345,7 +338,7 @@ public class SimulatedPlayer2 extends ComputerPlayer {
             binary.setLength(0);
             binary.append(Integer.toBinaryString(i));
             while (binary.length() < attackersList.size()) {
-                binary.insert(0, "0");
+                binary.insert(0, '0');
             }
             for (int j = 0; j < attackersList.size(); j++) {
                 if (binary.charAt(j) == '1') {
@@ -375,7 +368,7 @@ public class SimulatedPlayer2 extends ComputerPlayer {
         Map<Integer, Combat> engagements = new HashMap<>();
         int numGroups = game.getCombat().getGroups().size();
         if (numGroups == 0) {
-            return new ArrayList<>();
+            return Collections.emptyList();
         }
 
         //add a node with no blockers

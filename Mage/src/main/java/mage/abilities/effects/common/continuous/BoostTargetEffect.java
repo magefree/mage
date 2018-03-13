@@ -101,7 +101,7 @@ public class BoostTargetEffect extends ContinuousEffectImpl {
         int affectedTargets = 0;
         for (UUID permanentId : targetPointer.getTargets(game, source)) {
             Permanent target = game.getPermanent(permanentId);
-            if (target != null && target.getCardType().contains(CardType.CREATURE)) {
+            if (target != null && target.isCreature()) {
                 target.addPower(power.calculate(game, source, this));
                 target.addToughness(toughness.calculate(game, source, this));
                 affectedTargets++;
@@ -115,7 +115,7 @@ public class BoostTargetEffect extends ContinuousEffectImpl {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        if (mode == null || mode.getTargets().size() == 0) {
+        if (mode == null || mode.getTargets().isEmpty()) {
             return "no target";
         }
         Target target = mode.getTargets().get(0);
@@ -133,20 +133,20 @@ public class BoostTargetEffect extends ContinuousEffectImpl {
         }
         String p = power.toString();
         if (!p.startsWith("-")) {
-            sb.append("+");
+            sb.append('+');
         }
-        sb.append(p).append("/");
+        sb.append(p).append('/');
         String t = toughness.toString();
         if (!t.startsWith("-")) {
             if (t.equals("0") && p.startsWith("-")) {
-                sb.append("-");
+                sb.append('-');
             } else {
-                sb.append("+");
+                sb.append('+');
             }
         }
         sb.append(t);
         if (duration != Duration.WhileOnBattlefield) {
-            sb.append(" ").append(duration.toString());
+            sb.append(' ').append(duration.toString());
         }
         String message = null;
         String fixedPart = null;

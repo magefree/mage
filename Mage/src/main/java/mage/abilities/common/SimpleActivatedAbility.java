@@ -24,8 +24,7 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.abilities.common;
 
 import mage.constants.Zone;
@@ -40,6 +39,14 @@ import mage.abilities.effects.Effect;
  * @author BetaSteward_at_googlemail.com
  */
 public class SimpleActivatedAbility extends ActivatedAbilityImpl {
+
+    public SimpleActivatedAbility(Effect effect, ManaCosts cost) {
+        super(Zone.BATTLEFIELD, effect, cost);
+    }
+
+    public SimpleActivatedAbility(Effect effect, Cost cost) {
+        super(Zone.BATTLEFIELD, effect, cost);
+    }
 
     public SimpleActivatedAbility(Zone zone, Effect effect, ManaCosts cost) {
         super(zone, effect, cost);

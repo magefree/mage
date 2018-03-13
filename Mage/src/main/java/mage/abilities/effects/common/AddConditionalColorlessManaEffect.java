@@ -56,6 +56,6 @@ public class AddConditionalColorlessManaEffect extends ManaEffect {
     }
 
     public Mana getMana() {
-        return new Mana(0, 0, 0, 0, 0, 0, 0, amount);
+        return Mana.ColorlessMana(amount);
     }
 }

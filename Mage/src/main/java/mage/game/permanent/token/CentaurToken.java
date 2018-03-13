@@ -28,9 +28,13 @@
 
 package mage.game.permanent.token;
 
-import java.util.Random;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
+import mage.util.RandomUtil;
 
 /**
  *
@@ -38,15 +42,20 @@ import mage.MageInt;
  */
 public class CentaurToken extends Token {
 
+    final static private List<String> tokenImageSets = new ArrayList<>();
+
+    static {
+        tokenImageSets.addAll(Arrays.asList("RTR", "MM3"));
+    }
+
     public CentaurToken() {
         super("Centaur", "3/3 green Centaur creature token");
         cardType.add(CardType.CREATURE);
-        setTokenType(new Random().nextInt(2) +1); // randomly take image 1 or 2
+        setTokenType(RandomUtil.nextInt(2) +1); // randomly take image 1 or 2
         color.setGreen(true);
-        subtype.add("Centaur");
+        subtype.add(SubType.CENTAUR);
         power = new MageInt(3);
         toughness = new MageInt(3);
-        setOriginalExpansionSetCode("RTR");
     }
 
 }

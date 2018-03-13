@@ -28,8 +28,6 @@
 
 package mage.player.ai;
 
-import java.util.*;
-import java.util.concurrent.ConcurrentLinkedQueue;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.TriggeredAbility;
@@ -42,6 +40,9 @@ import mage.game.permanent.Permanent;
 import mage.game.stack.StackAbility;
 import mage.target.Target;
 import org.apache.log4j.Logger;
+
+import java.util.*;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
  *
@@ -73,12 +74,12 @@ public class SimulatedPlayer extends ComputerPlayer {
     }
 
     public List<Ability> simulatePriority(Game game) {
-        allActions = new ConcurrentLinkedQueue<Ability>();
+        allActions = new ConcurrentLinkedQueue<>();
         Game sim = game.copy();
 
         simulateOptions(sim, pass);
 
-        ArrayList<Ability> list = new ArrayList<Ability>(allActions);
+        ArrayList<Ability> list = new ArrayList<>(allActions);
         //Collections.shuffle(list);
         Collections.reverse(list);
         return list;
@@ -90,7 +91,7 @@ public class SimulatedPlayer extends ComputerPlayer {
         for (Ability ability: playables) {
             List<Ability> options = game.getPlayer(playerId).getPlayableOptions(ability, game);
             if (options.isEmpty()) {
-                if (ability.getManaCosts().getVariableCosts().size() > 0) {
+                if (!ability.getManaCosts().getVariableCosts().isEmpty()) {
                     simulateVariableCosts(ability, game);
                 }
                 else {
@@ -101,7 +102,7 @@ public class SimulatedPlayer extends ComputerPlayer {
             else {
 //                ExecutorService simulationExecutor = Executors.newFixedThreadPool(4);
                 for (Ability option: options) {
-                    if (ability.getManaCosts().getVariableCosts().size() > 0) {
+                    if (!ability.getManaCosts().getVariableCosts().isEmpty()) {
                         simulateVariableCosts(option, game);
                     }
                     else {
@@ -160,7 +161,7 @@ public class SimulatedPlayer extends ComputerPlayer {
     }*/
 
     public List<Combat> addAttackers(Game game) {
-        Map<Integer, Combat> engagements = new HashMap<Integer, Combat>();
+        Map<Integer, Combat> engagements = new HashMap<>();
         //useful only for two player games - will only attack first opponent
         UUID defenderId = game.getOpponents(playerId).iterator().next();
         List<Permanent> attackersList = super.getAvailableAttackers(defenderId, game);
@@ -172,7 +173,7 @@ public class SimulatedPlayer extends ComputerPlayer {
             binary.setLength(0);
             binary.append(Integer.toBinaryString(i));
             while (binary.length() < attackersList.size()) {
-                binary.insert(0, "0");
+                binary.insert(0, '0');
             }
             for (int j = 0; j < attackersList.size(); j++) {
                 if (binary.charAt(j) == '1') {
@@ -189,13 +190,13 @@ public class SimulatedPlayer extends ComputerPlayer {
                 logger.debug("simulating -- attack:" + sim.getCombat().getGroups().size());
             }
         }
-        return new ArrayList<Combat>(engagements.values());
+        return new ArrayList<>(engagements.values());
     }
 
     public List<Combat> addBlockers(Game game) {
-        Map<Integer, Combat> engagements = new HashMap<Integer, Combat>();
+        Map<Integer, Combat> engagements = new HashMap<>();
         int numGroups = game.getCombat().getGroups().size();
-        if (numGroups == 0) return new ArrayList<Combat>();
+        if (numGroups == 0) return new ArrayList<>();
 
         //add a node with no blockers
         Game sim = game.copy();
@@ -205,7 +206,7 @@ public class SimulatedPlayer extends ComputerPlayer {
         List<Permanent> blockers = getAvailableBlockers(game);
         addBlocker(game, blockers, engagements);
 
-        return new ArrayList<Combat>(engagements.values());
+        return new ArrayList<>(engagements.values());
     }
 
     protected void addBlocker(Game game, List<Permanent> blockers, Map<Integer, Combat> engagements) {

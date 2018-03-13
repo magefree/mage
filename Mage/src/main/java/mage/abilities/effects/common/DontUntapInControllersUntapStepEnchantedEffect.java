@@ -43,7 +43,7 @@ public class DontUntapInControllersUntapStepEnchantedEffect extends ContinuousRu
         if (enchantment != null && enchantment.getAttachedTo() != null) {
             Permanent enchanted = game.getPermanent(enchantment.getAttachedTo());
             if (enchanted != null) {
-                return enchanted.getLogName() + " doesn't untap during its controller's untap step (" + enchantment.getLogName() + ")";
+                return enchanted.getLogName() + " doesn't untap during its controller's untap step (" + enchantment.getLogName() + ')';
             }
         }
         return null;
@@ -56,7 +56,7 @@ public class DontUntapInControllersUntapStepEnchantedEffect extends ContinuousRu
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (PhaseStep.UNTAP.equals(game.getTurn().getStepType())) {
+        if (game.getTurn().getStepType() == PhaseStep.UNTAP) {
             Permanent enchantment = game.getPermanent(source.getSourceId());
             if (enchantment != null && enchantment.getAttachedTo() != null && event.getTargetId().equals(enchantment.getAttachedTo())) {
                 Permanent permanent = game.getPermanent(enchantment.getAttachedTo());
