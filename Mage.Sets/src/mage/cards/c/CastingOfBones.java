@@ -33,7 +33,7 @@ import mage.target.common.TargetCreaturePermanent;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.DrawDiscardControllerEffect;
+import mage.abilities.effects.common.DrawDiscardOneOfThemEffect;
 import mage.constants.Outcome;
 import mage.target.TargetPermanent;
 import mage.abilities.keyword.EnchantAbility;
@@ -61,7 +61,7 @@ public class CastingOfBones extends CardImpl {
         this.addAbility(ability);
 
         // When enchanted creature dies, draw three cards, then discard one of them.
-        this.addAbility(new DiesAttachedTriggeredAbility(new DrawDiscardControllerEffect(3, 1), "enchanted creature"));
+        this.addAbility(new DiesAttachedTriggeredAbility(new DrawDiscardOneOfThemEffect(3), "enchanted creature"));
     }
 
     public CastingOfBones(final CastingOfBones card) {
