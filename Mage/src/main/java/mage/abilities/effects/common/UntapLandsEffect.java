@@ -25,14 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.effects.common;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterLandPermanent;
+import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -42,6 +43,7 @@ import mage.target.common.TargetLandPermanent;
  * "Untap up to X lands" effect
  */
 public class UntapLandsEffect extends OneShotEffect {
+
     private final int amount;
 
     public UntapLandsEffect(int amount) {
@@ -61,6 +63,20 @@ public class UntapLandsEffect extends OneShotEffect {
         if (controller != null) {
             TargetLandPermanent target = new TargetLandPermanent(0, amount, new FilterLandPermanent(), true);
             if (target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
+
+                // UI Shortcut: Check if any lands are already tapped.  If there are equal/fewer than amount, give the option to untap those ones now.
+                FilterPermanent filter = new FilterLandPermanent();
+                filter.add(new TappedPredicate());
+                Player player = game.getPlayer(game.getActivePlayerId());
+                int tappedLands = game.getBattlefield().getAllActivePermanents(filter, game.getActivePlayerId(), game).size();
+
+                if (player != null && tappedLands <= amount) {
+                    if (player.chooseUse(outcome, "Include your tapped lands to untap?", source, game)) {
+                        for (Permanent land : game.getBattlefield().getAllActivePermanents(filter, player.getId(), game)) {
+                            target.addTarget(land.getId(), source, game);
+                        }
+                    }
+                }
                 if (target.choose(Outcome.Untap, source.getControllerId(), source.getSourceId(), game)) {
                     for (Object targetId : target.getTargets()) {
                         Permanent p = game.getPermanent((UUID) targetId);
