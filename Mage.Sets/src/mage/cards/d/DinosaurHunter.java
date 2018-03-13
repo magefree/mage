@@ -89,7 +89,7 @@ class DinosaurHunterAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getSourceId().equals(getSourceId())) {
-            Permanent targetPermanet = game.getPermanentOrLKIBattlefield(event.getTargetId());
+            Permanent targetPermanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
             if (targetPermanet.hasSubtype(SubType.DINOSAUR, game)) {
                 getEffects().setTargetPointer(new FixedTarget(targetPermanet, game));
                 return true;
