@@ -29,7 +29,7 @@ package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.OnEventTriggeredAbility;
+import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.game.events.GameEvent;
+import mage.constants.TargetController;
 
 /**
  *
@@ -46,7 +46,7 @@ import mage.game.events.GameEvent;
 public class ArchwingDragon extends CardImpl {
 
     public ArchwingDragon(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
         this.subtype.add(SubType.DRAGON);
 
         this.power = new MageInt(4);
@@ -54,8 +54,10 @@ public class ArchwingDragon extends CardImpl {
 
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(HasteAbility.getInstance());
+
         // At the beginning of the end step, return Archwing Dragon to its owner's hand.
-        this.addAbility(new OnEventTriggeredAbility(GameEvent.EventType.END_TURN_STEP_PRE, "beginning of the end step", new ReturnToHandSourceEffect(true), false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new ReturnToHandSourceEffect(true), TargetController.ANY, false));
+
     }
 
     public ArchwingDragon(final ArchwingDragon card) {

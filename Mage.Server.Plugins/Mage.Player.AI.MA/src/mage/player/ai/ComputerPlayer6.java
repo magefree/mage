@@ -522,7 +522,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
                     continue;
                 }
                 if (!sim.checkIfGameIsOver()
-                        && action.isUsesStack()) {
+                        && (action.isUsesStack() || action instanceof PassAbility)) {
                     // only pass if the last action uses the stack
                     UUID nextPlayerId = sim.getPlayerList().get();
                     do {
@@ -533,8 +533,8 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
                 SimulationNode2 newNode = new SimulationNode2(node, sim, action, depth, currentPlayer.getId());
                 sim.checkStateAndTriggered();
                 int val;
-                if (action instanceof PassAbility) {
-                    // Stop to simulate deeper if PassAbility
+                if (action instanceof PassAbility && sim.getStack().isEmpty()) {
+                    // Stop to simulate deeper if PassAbility and stack is empty
                     val = GameStateEvaluator2.evaluate(this.getId(), sim);
                 } else {
                     val = addActions(newNode, depth - 1, alpha, beta);

@@ -124,4 +124,35 @@ public class CastSplitCardsFromOtherZonesTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Icy Manipulator", 1);
 
     }
+
+    /**
+     * Cast a split card half from exile
+     */
+    @Test
+    public void testCastSpliHalfFromExile() {
+        // Fire Instant {1}{R}
+        // Fire deals 2 damage divided as you choose among one or two target creatures and/or players.
+        // Ice Instant {1}{U}
+        // Tap target permanent.
+        // Draw a card.
+        addCard(Zone.LIBRARY, playerA, "Fire // Ice", 1);
+        skipInitShuffling();
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion"); // Creature 2/2
+
+        // Whenever Etali, Primal Storm attacks, exile the top card of each player's library, then you may
+        // cast any number of nonland cards exiled this way without paying their mana costs.
+        addCard(Zone.BATTLEFIELD, playerB, "Etali, Primal Storm"); // Creature {4}{R} 6/6
+
+        attack(2, playerB, "Etali, Primal Storm");
+        setChoice(playerB, "Yes");
+        setChoice(playerB, "Cast Fire");
+        addTarget(playerB, "Silvercoat Lion");
+
+        setStopAt(2, PhaseStep.END_COMBAT);
+        execute();
+
+        assertLife(playerA, 14);
+        assertGraveyardCount(playerA, "Silvercoat Lion", 1);
+        assertGraveyardCount(playerA, "Fire // Ice", 1);
+    }
 }

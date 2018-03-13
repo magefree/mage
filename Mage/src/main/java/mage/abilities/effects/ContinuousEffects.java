@@ -111,7 +111,7 @@ public class ContinuousEffects implements Serializable {
 
         costModificationEffects = effect.costModificationEffects.copy();
         spliceCardEffects = effect.spliceCardEffects.copy();
-        for (Map.Entry<ContinuousEffect, Set<Ability>> entry: effect.temporaryEffects.entrySet()) {
+        for (Map.Entry<ContinuousEffect, Set<Ability>> entry : effect.temporaryEffects.entrySet()) {
             temporaryEffects.put(entry.getKey().copy(), entry.getValue());
         }
         collectAllEffects();
@@ -352,9 +352,11 @@ public class ContinuousEffects implements Serializable {
                 continue;
             }
             if (event.getAppliedEffects() != null && event.getAppliedEffects().contains(effect.getId())) {
-                // Effect already applied to this event, ignore it
-                // TODO: Handle also gained effect that are connected to different abilities.
-                continue;
+                if (!(effect instanceof CommanderReplacementEffect)) { // 903.9.
+                    // Effect already applied to this event, ignore it
+                    // TODO: Handle also gained effect that are connected to different abilities.
+                    continue;
+                }
             }
             Set<Ability> abilities = replacementEffects.getAbility(effect.getId());
             Set<Ability> applicableAbilities = new HashSet<>();
@@ -752,7 +754,7 @@ public class ContinuousEffects implements Serializable {
             // Remove all consumed effects (ability dependant)
             for (Iterator<ReplacementEffect> it1 = rEffects.keySet().iterator(); it1.hasNext();) {
                 ReplacementEffect entry = it1.next();
-                if (consumed.containsKey(entry.getId())) {
+                if (consumed.containsKey(entry.getId()) /*&& !(entry instanceof CommanderReplacementEffect) */) { // 903.9. 
                     Set<UUID> consumedAbilitiesIds = consumed.get(entry.getId());
                     if (rEffects.get(entry) == null || consumedAbilitiesIds.size() == rEffects.get(entry).size()) {
                         it1.remove();

@@ -63,7 +63,7 @@ public class AnimationModule extends CardImpl {
     public AnimationModule(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
 
-        // Whenever one or more +1/+1 counters are placed on a permanent you control, you may pay {1}. If you do, create a 1/1 colorless Servo artifact creature token.
+        // Whenever one or more +1/+1 counters are put on a permanent you control, you may pay {1}. If you do, create a 1/1 colorless Servo artifact creature token.
         this.addAbility(new AnimationModuleTriggeredAbility());
 
         // {3}, {T}: Choose a counter on target permanent or player. Give that permanent or player another counter of that kind.
@@ -117,7 +117,7 @@ class AnimationModuleTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever one or more +1/+1 counters are placed on a permanent you control, you may pay {1}. If you do, create a 1/1 colorless Servo artifact creature token.";
+        return "Whenever one or more +1/+1 counters are put on a permanent you control, you may pay {1}. If you do, create a 1/1 colorless Servo artifact creature token.";
     }
 }
 

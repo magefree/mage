@@ -25,16 +25,17 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace max="32767" attributes="0"/>
-              <Component id="saveButton" min="-2" pref="100" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="exitButton" min="-2" pref="100" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="tabsPanel" alignment="0" max="32767" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="saveButton" min="-2" pref="100" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="exitButton" min="-2" pref="100" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
               <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="tabsPanel" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -94,10 +95,10 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="main_game" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="main_gamelog" min="-2" max="-2" attributes="0"/>
+                      <Component id="main_gamelog" min="-2" pref="107" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="main_battlefield" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="154" max="32767" attributes="0"/>
+                      <EmptySpace pref="121" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -121,9 +122,10 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="cbDraftLogAutoSave" max="32767" attributes="0"/>
-                              <Component id="cbGameLogAutoSave" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="cbDraftLogAutoSave" min="-2" max="-2" attributes="0"/>
+                              <Component id="cbGameJsonLogAutoSave" min="-2" max="-2" attributes="0"/>
+                              <Component id="cbGameLogAutoSave" alignment="0" min="-2" pref="505" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
@@ -134,7 +136,10 @@
                       <Group type="102" attributes="0">
                           <Component id="cbGameLogAutoSave" alignment="1" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="cbDraftLogAutoSave" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="cbDraftLogAutoSave" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="cbGameJsonLogAutoSave" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -143,7 +148,7 @@
                 <Component class="javax.swing.JCheckBox" name="cbGameLogAutoSave">
                   <Properties>
                     <Property name="selected" type="boolean" value="true"/>
-                    <Property name="text" type="java.lang.String" value="Auto save game logs     (to &quot;../Mage.Client/gamelogs/&quot; directory)"/>
+                    <Property name="text" type="java.lang.String" value="Save game logs     (to &quot;../Mage.Client/gamelogs/&quot; directory)"/>
                     <Property name="toolTipText" type="java.lang.String" value="The logs of all your games will be saved to the mentioned folder if this option is switched on."/>
                   </Properties>
                   <Events>
@@ -153,11 +158,21 @@
                 <Component class="javax.swing.JCheckBox" name="cbDraftLogAutoSave">
                   <Properties>
                     <Property name="selected" type="boolean" value="true"/>
-                    <Property name="text" type="java.lang.String" value="Auto save draft logs     (to &quot;../Mage.Client/gamelogs/&quot; directory)"/>
+                    <Property name="text" type="java.lang.String" value="Save draft logs     (to &quot;../Mage.Client/gamelogs/&quot; directory)"/>
                     <Property name="toolTipText" type="java.lang.String" value="The logs of all your games will be saved to the mentioned folder if this option is switched on."/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbDraftLogAutoSaveActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JCheckBox" name="cbGameJsonLogAutoSave">
+                  <Properties>
+                    <Property name="selected" type="boolean" value="true"/>
+                    <Property name="text" type="java.lang.String" value="Save JSON game logs     (to &quot;../Mage.Client/gamelogsJson/&quot; directory)"/>
+                    <Property name="toolTipText" type="java.lang.String" value="The JSON logs of all your games will be saved to the mentioned folder if this option is switched on."/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbGameJsonLogAutoSaveActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>
@@ -221,7 +236,7 @@
                     <Property name="toolTipText" type="java.lang.String" value="Write the card&apos;s name on the card to make the card name more recognizable."/>
                     <Property name="actionCommand" type="java.lang.String" value=""/>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                      <Color id="Default Cursor"/>
+                      <Color id="Standardcursor"/>
                     </Property>
                   </Properties>
                   <Events>
@@ -252,7 +267,7 @@
                     <Property name="selected" type="boolean" value="true"/>
                     <Property name="toolTipText" type="java.lang.String" value="Show the path Xmage is expecting for this card&apos;s image (only displays if missing)"/>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                      <Color id="Default Cursor"/>
+                      <Color id="Standardcursor"/>
                     </Property>
                     <Property name="label" type="java.lang.String" value="Display image path for missing images"/>
                   </Properties>
@@ -289,7 +304,7 @@
                               <Component id="cbAskMoveToGraveOrder" alignment="0" max="32767" attributes="0"/>
                               <Component id="showAbilityPickerForced" alignment="0" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="255" max="32767" attributes="0"/>
+                          <EmptySpace pref="177" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -4318,7 +4333,7 @@
                                       </Group>
                                       <Component id="cbUseDefaultImageFolder" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="0" pref="270" max="32767" attributes="0"/>
+                                  <EmptySpace min="0" pref="308" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -5743,7 +5758,7 @@
                                   <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace pref="198" max="32767" attributes="0"/>
+                          <EmptySpace pref="201" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -6008,7 +6023,7 @@
                                   <Component id="keyToggleRecordMacro" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="controlsDescriptionLabel" pref="441" max="32767" attributes="0"/>
+                              <Component id="controlsDescriptionLabel" pref="478" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>

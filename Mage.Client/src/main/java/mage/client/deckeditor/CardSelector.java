@@ -51,6 +51,10 @@ import mage.client.MageFrame;
 import mage.client.cards.*;
 import mage.client.constants.Constants.SortBy;
 import mage.client.deckeditor.table.TableModel;
+import static mage.client.dialog.PreferencesDialog.KEY_DECK_EDITOR_SEARCH_NAMES;
+import static mage.client.dialog.PreferencesDialog.KEY_DECK_EDITOR_SEARCH_RULES;
+import static mage.client.dialog.PreferencesDialog.KEY_DECK_EDITOR_SEARCH_TYPES;
+import static mage.client.dialog.PreferencesDialog.KEY_DECK_EDITOR_SEARCH_UNIQUE;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.gui.FastSearchUtil;
 import mage.client.util.sets.ConstructedFormats;
@@ -144,9 +148,11 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         mainTable.setOpaque(false);
         cbSortBy.setEnabled(false);
         chkPiles.setEnabled(false);
-//        chkNames.setEnabled(true);
-//        chkTypes.setEnabled(true);
-//        chkRules.setEnabled(true);
+
+        chkNames.setSelected("true".equals(MageFrame.getPreferences().get(KEY_DECK_EDITOR_SEARCH_NAMES, "true")));
+        chkTypes.setSelected("true".equals(MageFrame.getPreferences().get(KEY_DECK_EDITOR_SEARCH_TYPES, "true")));
+        chkRules.setSelected("true".equals(MageFrame.getPreferences().get(KEY_DECK_EDITOR_SEARCH_RULES, "true")));
+        chkUnique.setSelected("true".equals(MageFrame.getPreferences().get(KEY_DECK_EDITOR_SEARCH_UNIQUE, "true")));
 
         mainTable.addMouseListener(new MouseAdapter() {
             @Override
@@ -172,6 +178,10 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
     public void cleanUp() {
         this.cardGrid.clear();
         this.mainModel.clear();
+        MageFrame.getPreferences().put(KEY_DECK_EDITOR_SEARCH_NAMES, Boolean.toString(chkNames.isSelected()));
+        MageFrame.getPreferences().put(KEY_DECK_EDITOR_SEARCH_RULES, Boolean.toString(chkRules.isSelected()));
+        MageFrame.getPreferences().put(KEY_DECK_EDITOR_SEARCH_TYPES, Boolean.toString(chkTypes.isSelected()));
+        MageFrame.getPreferences().put(KEY_DECK_EDITOR_SEARCH_UNIQUE, Boolean.toString(chkUnique.isSelected()));
     }
 
     public void changeGUISize() {
@@ -413,12 +423,12 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         try {
             java.util.List<Card> filteredCards = new ArrayList<>();
             setCursor(new Cursor(Cursor.WAIT_CURSOR));
-            
+
             boolean chkPD = chkPennyDreadful.isSelected();
             if (chkPD) {
                 generatePennyDreadfulHash();
             }
-            
+
             if (limited) {
                 for (Card card : cards) {
                     if (filter.match(card, null)) {
@@ -1063,10 +1073,10 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
                 chkRulesActionPerformed(evt);
             }
         });
-        
+
         chkUnique.setSelected(true);
         chkUnique.setText("Unique");
-        chkUnique.setToolTipText("Singleton results only.");
+        chkUnique.setToolTipText("Show only the first found card of every card name.");
         chkUnique.setFocusable(false);
         chkUnique.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         chkUnique.setMaximumSize(new java.awt.Dimension(69, 16));
@@ -1078,7 +1088,6 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
                 chkUniqueActionPerformed(evt);
             }
         });
-
 
         jButtonSearch.setText("Search");
         jButtonSearch.setToolTipText("Performs the search.");
@@ -1126,7 +1135,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
                 .addComponent(chkTypes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(chkRules, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(5, 5, 5)
                 .addComponent(chkUnique, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(5, 5, 5)
                 .addComponent(cardCountLabel)
@@ -1357,9 +1366,9 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         // TODO add your handling code here:
     }//GEN-LAST:event_chkTypesActionPerformed
 
-    private void chkRulesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkRulesActionPerformed
+    private void chkRulesActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-    }//GEN-LAST:event_chkRulesActionPerformed
+    }                                        
 
     private void chkUniqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkRulesActionPerformed
         // TODO add your handling code here:
@@ -1442,8 +1451,8 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
     private javax.swing.JCheckBox chkPennyDreadful;
     private javax.swing.JCheckBox chkPiles;
     private javax.swing.JCheckBox chkRules;
-    private javax.swing.JCheckBox chkUnique;
     private javax.swing.JCheckBox chkTypes;
+    private javax.swing.JCheckBox chkUnique;
     private javax.swing.JButton jButtonAddToMain;
     private javax.swing.JButton jButtonAddToSideboard;
     private javax.swing.JButton jButtonClean;

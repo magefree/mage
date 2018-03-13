@@ -53,7 +53,7 @@ public class Tatterkite extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // Tatterkite can't have counters placed on it.
+        // Tatterkite can't have counters put on it.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantHaveCountersSourceEffect()));
 
     }

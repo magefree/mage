@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
@@ -39,14 +38,14 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-
 public class GainLifeControllerTriggeredAbility extends TriggeredAbilityImpl {
+
     private boolean setTargetPointer;
 
     public GainLifeControllerTriggeredAbility(Effect effect, boolean optional) {
         this(effect, optional, false);
     }
-    
+
     public GainLifeControllerTriggeredAbility(Effect effect, boolean optional, boolean setTargetPointer) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.setTargetPointer = setTargetPointer;
@@ -72,8 +71,8 @@ public class GainLifeControllerTriggeredAbility extends TriggeredAbilityImpl {
         if (event.getPlayerId().equals(this.getControllerId())) {
             if (setTargetPointer) {
                 for (Effect effect : this.getEffects()) {
-                        effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
-                        effect.setValue("gainedLife", event.getAmount());
+                    effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
+                    effect.setValue("gainedLife", event.getAmount());
                 }
             }
             return true;
@@ -83,7 +82,7 @@ public class GainLifeControllerTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return new StringBuilder("Whenever you gain life, ").append(super.getRule()).toString() ;
+        return new StringBuilder("Whenever you gain life, ").append(super.getRule()).toString();
     }
 
 }

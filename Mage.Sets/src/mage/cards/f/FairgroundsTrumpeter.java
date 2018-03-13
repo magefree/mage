@@ -59,11 +59,11 @@ public class FairgroundsTrumpeter extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // At the beginning of each end step, if a +1/+1 counter was placed on a permanent under your control this turn, put a +1/+1 counter on Fairgrounds Trumpeter.
+        // At the beginning of each end step, if a +1/+1 counter was put on a permanent under your control this turn, put a +1/+1 counter on Fairgrounds Trumpeter.
         this.addAbility(new ConditionalTriggeredAbility(new BeginningOfEndStepTriggeredAbility(
                         new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
                         TargetController.ANY, false), FairgroundsTrumpeterCondition.instance,
-                        "At the beginning of each end step, if a +1/+1 counter was placed on a permanent under your control this turn, put a +1/+1 counter on {this}."),
+                        "At the beginning of each end step, if a +1/+1 counter was put on a permanent under your control this turn, put a +1/+1 counter on {this}."),
                 new FairgroundsTrumpeterWatcher());
     }
 
@@ -89,7 +89,7 @@ enum FairgroundsTrumpeterCondition implements Condition {
 
     @Override
     public String toString() {
-        return "if a +1/+1 counter was placed on a permanent under your control this turn";
+        return "if a +1/+1 counter was put on a permanent under your control this turn";
     }
 
 }

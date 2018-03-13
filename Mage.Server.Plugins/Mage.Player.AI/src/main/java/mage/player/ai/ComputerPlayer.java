@@ -1312,6 +1312,9 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         if (numAvailable < 0) {
             numAvailable = 0;
         }
+        if (numAvailable > max) {
+            numAvailable = max;
+        }
         return numAvailable;
     }
 

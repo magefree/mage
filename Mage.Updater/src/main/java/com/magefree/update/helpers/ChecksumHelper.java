@@ -7,7 +7,7 @@ import java.security.MessageDigest;
 /**
  * @author Loki
  */
-public final class ChechsumHelper {
+public final class ChecksumHelper {
 
     public static byte[] createChecksum(String filename) throws Exception {
         InputStream fis = null;

@@ -53,7 +53,7 @@ public class SimpleManaAbility extends ActivatedManaAbilityImpl {
      * @param zone
      * @param effect
      * @param cost
-     * @param predictable set to false if definig the mana type or amount needs
+     * @param predictable set to false if defining the mana type or amount needs
      * to reveal information and can't be predicted
      */
     public SimpleManaAbility(Zone zone, ManaEffect effect, Cost cost, boolean predictable) {

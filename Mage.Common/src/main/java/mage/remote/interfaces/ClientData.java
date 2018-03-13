@@ -37,4 +37,8 @@ public interface ClientData {
     String getUserName();
 
     boolean updatePreferencesForServer(UserData userData);
+
+    void setJsonLogActive(boolean active);
+
+    boolean isJsonLogActive();
 }

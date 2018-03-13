@@ -4,6 +4,7 @@ syntax: glob
 Mage.Client/*.dck
 Mage.Client/db
 Mage.Client/gamelogs
+Mage.Client/gamelogsJson
 Mage.Client/*.log
 Mage.Client/plugins/images
 Mage.Client/plugins/plugin.data
@@ -135,3 +136,4 @@ client_secrets.json
 
 dependency-reduced-pom.xml
 mage-bundle
+/Mage.Client/game-*.json

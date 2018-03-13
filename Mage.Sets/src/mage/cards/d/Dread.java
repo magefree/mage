@@ -31,7 +31,6 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.PutIntoGraveFromAnywhereSourceTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.ShuffleIntoLibrarySourceEffect;
 import mage.abilities.keyword.FearAbility;
@@ -105,11 +104,7 @@ class DreadTriggeredAbility extends TriggeredAbilityImpl {
         if (event.getPlayerId().equals(this.getControllerId())) {
             Permanent permanent = game.getPermanent(event.getSourceId());
             if (permanent != null && permanent.isCreature()) {
-                for (Effect effect : this.getEffects()) {
-                    if (effect instanceof DestroyTargetEffect) {
-                        effect.setTargetPointer(new FixedTarget(event.getSourceId()));
-                    }
-                }
+                this.getEffects().setTargetPointer(new FixedTarget(permanent, game));
                 return true;
             }
         }

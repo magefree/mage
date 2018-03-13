@@ -1111,11 +1111,13 @@ public class HumanPlayer extends PlayerImpl {
         if (object == null) {
             return;
         }
-        Spell spell = game.getStack().getSpell(abilityToCast.getSourceId());
-        if (spell != null && !spell.isResolving()
-                && spell.isDoneActivatingManaAbilities()) {
-            game.informPlayer(this, "You can no longer use activated mana abilities to pay for the current spell. Cancel and recast the spell and activate mana abilities first.");
-            return;
+        if (AbilityType.SPELL.equals(abilityToCast.getAbilityType())) {
+            Spell spell = game.getStack().getSpell(abilityToCast.getSourceId());
+            if (spell != null && !spell.isResolving()
+                    && spell.isDoneActivatingManaAbilities()) {
+                game.informPlayer(this, "You can no longer use activated mana abilities to pay for the current spell. Cancel and recast the spell and activate mana abilities first.");
+                return;
+            }
         }
         Zone zone = game.getState().getZone(object.getId());
         if (zone != null) {
