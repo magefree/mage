@@ -27,7 +27,6 @@
  */
 package mage.abilities.effects.common;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -47,15 +46,15 @@ import mage.util.CardUtil;
  */
 public class DrawDiscardOneOfThemEffect extends OneShotEffect {
 
-    private int cardsToDraw;
-    
+    private final int cardsToDraw;
+
     public DrawDiscardOneOfThemEffect(int cardsToDraw) {
         super(Outcome.DrawCard);
         this.cardsToDraw = cardsToDraw;
-        staticText = new StringBuilder("draw ")
-                .append(cardsToDraw == 1 ? "a" : CardUtil.numberToText(cardsToDraw))
-                .append(" card").append(cardsToDraw == 1 ? "" : "s")
-                .append(", then discard one of them").toString();
+        staticText = "draw "
+                + (cardsToDraw == 1 ? "a" : CardUtil.numberToText(cardsToDraw))
+                + " card" + (cardsToDraw == 1 ? "" : "s")
+                + ", then discard one of them";
     }
 
     public DrawDiscardOneOfThemEffect(final DrawDiscardOneOfThemEffect effect) {
@@ -70,28 +69,22 @@ public class DrawDiscardOneOfThemEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            Cards initialHand = player.getHand().copy();
-            player.drawCards(cardsToDraw, game);
-            Cards drawnCards = new CardsImpl();
-            for(UUID cardId : player.getHand()) {
-                if(!initialHand.contains(cardId)) {
-                    drawnCards.add(cardId);
-                }
-            }
-            
-            if(!drawnCards.isEmpty()) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Cards initialHand = controller.getHand().copy();
+            controller.drawCards(cardsToDraw, game);
+            Cards drawnCards = new CardsImpl(controller.getHand().copy());
+            drawnCards.removeAll(initialHand);
+            if (!drawnCards.isEmpty()) {
                 TargetCard cardToDiscard = new TargetCard(Zone.HAND, new FilterCard("card to discard"));
                 cardToDiscard.setNotTarget(true);
-                if(player.choose(Outcome.Discard, drawnCards, cardToDiscard, game)) {
-                    Card card = player.getHand().get(cardToDiscard.getFirstTarget(), game);
-                    if(card != null) {
-                        return player.discard(card, source, game);
+                if (controller.choose(Outcome.Discard, drawnCards, cardToDiscard, game)) {
+                    Card card = controller.getHand().get(cardToDiscard.getFirstTarget(), game);
+                    if (card != null) {
+                        return controller.discard(card, source, game);
                     }
                 }
             }
-            
             return true;
         }
         return false;
