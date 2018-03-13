@@ -25,64 +25,51 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.k;
+package mage.cards.c;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.ObjectColor;
+import mage.constants.SubType;
+import mage.target.common.TargetCreaturePermanent;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.DiscardTargetCost;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.common.DiesAttachedTriggeredAbility;
+import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.DrawDiscardOneOfThemEffect;
+import mage.constants.Outcome;
+import mage.target.TargetPermanent;
+import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.target.common.TargetCardInHand;
 
 /**
  *
- * @author emerald000
+ * @author AMWJ
  */
-public class KrovikanSorcerer extends CardImpl {
-    
-    private static final FilterCard filterNonBlack = new FilterCard("a nonblack card");
-    private static final FilterCard filterBlack = new FilterCard("a black card");
-    static {
-        filterNonBlack.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
-        filterBlack.add(new ColorPredicate(ObjectColor.BLACK));
-    }
+public class CastingOfBones extends CardImpl {
 
-    public KrovikanSorcerer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.WIZARD);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-
-        // {tap}, Discard a nonblack card: Draw a card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new TapSourceCost());
-        ability.addCost(new DiscardTargetCost(new TargetCardInHand(filterNonBlack)));
-        this.addAbility(ability);
+    public CastingOfBones(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
         
-        // {tap}, Discard a black card: Draw two cards, then discard one of them.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardOneOfThemEffect(2), new TapSourceCost());
-        ability.addCost(new DiscardTargetCost(new TargetCardInHand(filterBlack)));
+        this.subtype.add(SubType.AURA);
+
+        // Enchant creature
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.DrawCard));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Discard));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
+
+        // When enchanted creature dies, draw three cards, then discard one of them.
+        this.addAbility(new DiesAttachedTriggeredAbility(new DrawDiscardOneOfThemEffect(3), "enchanted creature"));
     }
 
-    public KrovikanSorcerer(final KrovikanSorcerer card) {
+    public CastingOfBones(final CastingOfBones card) {
         super(card);
     }
 
     @Override
-    public KrovikanSorcerer copy() {
-        return new KrovikanSorcerer(this);
+    public CastingOfBones copy() {
+        return new CastingOfBones(this);
     }
 }
