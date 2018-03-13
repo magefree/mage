@@ -36,6 +36,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JLayeredPane;
 import mage.Mana;
 import mage.cards.Card;
+import mage.cards.FrameStyle;
 import mage.cards.decks.Deck;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
@@ -134,7 +135,7 @@ public class AddLandDialog extends MageDialog {
         this.setVisible(true);
     }
 
-    private void addLands(String landName, int number) {
+    private void addLands(String landName, int number, boolean useFullArt) {
         String landSetName = (String) cbLandSet.getSelectedItem();
 
         CardCriteria criteria = new CardCriteria();
@@ -157,9 +158,28 @@ public class AddLandDialog extends MageDialog {
             cards = CardRepository.instance.findCards(criteria);
         }
 
-        for (int i = 0; i < number; i++) {
+        int foundLands = 0;
+        int foundNoneAfter = 0;
+        for (int i = 0; foundLands != number && foundNoneAfter < 1000; i++) {
             Card land = cards.get(RandomUtil.nextInt(cards.size())).getMockCard();
-            deck.getCards().add(land);
+            boolean useLand = !useFullArt;
+            if (useFullArt && (land.getFrameStyle() == FrameStyle.BFZ_FULL_ART_BASIC
+                    || land.getFrameStyle() == FrameStyle.UGL_FULL_ART_BASIC
+                    || land.getFrameStyle() == FrameStyle.UNH_FULL_ART_BASIC
+                    || land.getFrameStyle() == FrameStyle.ZEN_FULL_ART_BASIC)) {
+                useLand = true;
+            }
+            if (useLand) {
+                deck.getCards().add(land);
+                foundLands++;
+                foundNoneAfter = 0;
+            } else {
+                foundNoneAfter++;
+            }
+        }
+
+        if (foundNoneAfter >= 1000 && useFullArt) {
+            MageFrame.getInstance().showMessage("Unable to add enough " + landName + "s.  You encountered an error in adding chosen lands.  Unable to find enough full art lands in the set " + landSetName + ".");
         }
     }
 
@@ -190,6 +210,7 @@ public class AddLandDialog extends MageDialog {
         panelSet = new javax.swing.JPanel();
         cbLandSet = new javax.swing.JComboBox();
         btnSetFastSearch = new javax.swing.JButton();
+        ckbFullArtLands = new javax.swing.JCheckBox();
 
         jButton2.setText("jButton2");
 
@@ -255,12 +276,15 @@ public class AddLandDialog extends MageDialog {
         });
         panelSet.add(btnSetFastSearch);
 
+        ckbFullArtLands.setText("Only use full art lands");
+        ckbFullArtLands.setToolTipText("For example, lands from ZEN/UST/HOU");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblMountain)
                     .addComponent(lblForest, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -269,25 +293,24 @@ public class AddLandDialog extends MageDialog {
                     .addComponent(lblPains, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblSwamp, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(ckbFullArtLands)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnAutoAdd, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(btnAutoAdd, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(spnMountain, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
+                                    .addComponent(spnIsland, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
+                                    .addComponent(spnForest, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(spnSwamp, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
+                                    .addComponent(spnPlains, javax.swing.GroupLayout.Alignment.LEADING))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnAdd)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnCancel))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(spnMountain, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
-                                .addComponent(spnIsland, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
-                                .addComponent(spnForest, javax.swing.GroupLayout.Alignment.LEADING))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(spnSwamp, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
-                                .addComponent(spnPlains, javax.swing.GroupLayout.Alignment.LEADING)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(panelSet, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addComponent(panelSet, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -295,7 +318,7 @@ public class AddLandDialog extends MageDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblLandSet)
-                    .addComponent(panelSet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(panelSet, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblForest)
@@ -317,11 +340,12 @@ public class AddLandDialog extends MageDialog {
                     .addComponent(lblSwamp)
                     .addComponent(spnSwamp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(ckbFullArtLands)
+                .addGap(2, 2, 2)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAutoAdd)
                     .addComponent(btnAdd)
-                    .addComponent(btnCancel)
-                    .addComponent(btnAutoAdd))
-                .addContainerGap())
+                    .addComponent(btnCancel)))
         );
 
         pack();
@@ -337,12 +361,13 @@ public class AddLandDialog extends MageDialog {
         int nMountain = ((Number) spnMountain.getValue()).intValue();
         int nPlains = ((Number) spnPlains.getValue()).intValue();
         int nSwamp = ((Number) spnSwamp.getValue()).intValue();
+        boolean useFullArt = ckbFullArtLands.isSelected();
 
-        addLands("Forest", nForest);
-        addLands("Island", nIsland);
-        addLands("Mountain", nMountain);
-        addLands("Plains", nPlains);
-        addLands("Swamp", nSwamp);
+        addLands("Forest", nForest, useFullArt);
+        addLands("Island", nIsland, useFullArt);
+        addLands("Mountain", nMountain, useFullArt);
+        addLands("Plains", nPlains, useFullArt);
+        addLands("Swamp", nSwamp, useFullArt);
         this.removeDialog();
     }//GEN-LAST:event_btnAddActionPerformed
 
@@ -400,6 +425,7 @@ public class AddLandDialog extends MageDialog {
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnSetFastSearch;
     private javax.swing.JComboBox cbLandSet;
+    private javax.swing.JCheckBox ckbFullArtLands;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel lblForest;
     private javax.swing.JLabel lblIsland;

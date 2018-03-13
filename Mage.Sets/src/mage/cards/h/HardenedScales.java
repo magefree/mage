@@ -52,7 +52,7 @@ public class HardenedScales extends CardImpl {
     public HardenedScales(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}");
 
-        // If one or more +1/+1 counters would be placed on a creature you control, that many plus one +1/+1 counters are placed on it instead.
+        // If one or more +1/+1 counters would be put on a creature you control, that many plus one +1/+1 counters are put on it instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new HardenedScalesEffect()));
 
     }
@@ -71,7 +71,7 @@ class HardenedScalesEffect extends ReplacementEffectImpl {
 
     HardenedScalesEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature, false);
-        staticText = "If one or more +1/+1 counters would be placed on a creature you control, that many plus one +1/+1 counters are placed on it instead";
+        staticText = "If one or more +1/+1 counters would be put on a creature you control, that many plus one +1/+1 counters are put on it instead";
     }
 
     HardenedScalesEffect(final HardenedScalesEffect effect) {

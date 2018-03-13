@@ -61,7 +61,7 @@ public class FathomMage extends CardImpl {
         // has greater power or toughness than this creature, put a +1/+1 counter on this creature.)
         this.addAbility(new EvolveAbility());
 
-        //Whenever a +1/+1 counter is placed on Fathom Mage, you may draw a card.
+        //Whenever a +1/+1 counter is put on Fathom Mage, you may draw a card.
         this.addAbility(new FathomMageTriggeredAbility());
     }
 
@@ -102,6 +102,6 @@ class FathomMageTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a +1/+1 counter is placed on {this}, " + super.getRule();
+        return "Whenever a +1/+1 counter is put on {this}, " + super.getRule();
     }
 }
