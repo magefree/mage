@@ -30,7 +30,7 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUntapTriggeredAbility;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
@@ -57,7 +57,7 @@ import mage.target.targetpointer.FixedTarget;
 public class SokenzanRenegade extends CardImpl {
 
     public SokenzanRenegade(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
         this.subtype.add(SubType.OGRE);
         this.subtype.add(SubType.SAMURAI);
         this.subtype.add(SubType.MERCENARY);
@@ -69,7 +69,7 @@ public class SokenzanRenegade extends CardImpl {
         this.addAbility(new BushidoAbility(1));
         // At the beginning of your upkeep, if a player has more cards in hand than each other player, the player who has the most cards in hand gains control of Sokenzan Renegade.
         this.addAbility(new ConditionalTriggeredAbility(
-                new BeginningOfUntapTriggeredAbility(Zone.BATTLEFIELD, new SokenzanRenegadeEffect(), TargetController.YOU, false),
+                new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new SokenzanRenegadeEffect(), TargetController.YOU, false),
                 OnePlayerHasTheMostCards.instance,
                 "At the beginning of your upkeep, if a player has more cards in hand than each other player, the player who has the most cards in hand gains control of {this}"
         ));
@@ -106,24 +106,25 @@ class SokenzanRenegadeEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        if (controller != null && sourcePermanent != null) {
+        if (controller != null
+                && sourcePermanent != null) {
             int max = Integer.MIN_VALUE;
             Player newController = null;
-            for(UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    if (player.getLife() > max) {
-                        max = player.getLife();
+                    if (player.getHand().size() > max) {
+                        max = player.getHand().size();
                         newController = player;
                     }
                 }
             }
             if (newController != null) {
-                ContinuousEffect effect = new GainControlTargetEffect(Duration.Custom, true, newController.getId());
-                effect.setTargetPointer(new FixedTarget(newController.getId()));
+                ContinuousEffect effect = new GainControlTargetEffect(Duration.Custom, newController.getId());
+                effect.setTargetPointer(new FixedTarget(sourcePermanent.getId()));
                 game.addEffect(effect, source);
                 if (!source.getControllerId().equals(newController.getId())) {
-                    game.informPlayers(newController.getLogName() + " got controll of " + sourcePermanent.getLogName());
+                    game.informPlayers(newController.getLogName() + " got control of " + sourcePermanent.getLogName());
                 }
                 return true;
             }
@@ -142,13 +143,13 @@ enum OnePlayerHasTheMostCards implements Condition {
         if (controller != null) {
             int max = Integer.MIN_VALUE;
             boolean onlyOnePlayer = false;
-            for(UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    if (player.getLife() > max) {
-                        max = player.getLife();
+                    if (player.getHand().size() > max) {
+                        max = player.getHand().size();
                         onlyOnePlayer = true;
-                    } else if (player.getLife() == max) {
+                    } else if (player.getHand().size() == max) {
                         onlyOnePlayer = false;
                     }
                 }
