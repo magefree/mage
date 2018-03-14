@@ -35,6 +35,10 @@
 package mage.client.dialog;
 
 import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import javax.swing.*;
 
 import mage.client.MageFrame;
@@ -57,6 +61,7 @@ public class PickNumberDialog extends MageDialog {
 
     public void showDialog(int min, int max, String message) {
         this.spnAmount.setModel(new SpinnerNumberModel(min, min, max, 1));
+        this.lblMessage.setContentType("text/html");
         this.lblMessage.setText(message);
         this.btnOk.setVisible(true);
         this.btnCancel.setVisible(false);
@@ -68,11 +73,34 @@ public class PickNumberDialog extends MageDialog {
         }else{
             MageFrame.getDesktop().add(this, JLayeredPane.PALETTE_LAYER);
         }
+        this.getRootPane().setDefaultButton(this.btnOk); // restore default button after root panel change (no need actually)
+
+        // enable spinner's enter key like text (one enter press instead two)
+        // https://stackoverflow.com/questions/3873870/java-keylistener-not-firing-on-jspinner
+        ((JSpinner.DefaultEditor)this.spnAmount.getEditor()).getTextField().addKeyListener(new KeyListener(){
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    btnOk.doClick();
+                }
+            }
+
+            @Override
+            public void keyTyped(KeyEvent e) {
+            }
+
+        });
 
         Point centered = SettingsManager.instance.getComponentPosition(getWidth(), getHeight());
         this.setLocation(centered.x, centered.y);
         GuiDisplayUtil.keepComponentInsideScreen(centered.x, centered.y, this);
 
+        // TODO: need to fix focus restore on second popup (it's not focues, test on Manamorphose)
         this.setVisible(true);
     }
 
@@ -96,10 +124,12 @@ public class PickNumberDialog extends MageDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         lblMessage = new javax.swing.JTextPane();
         spnAmount = new javax.swing.JSpinner();
+        panelCommands = new javax.swing.JPanel();
         btnOk = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
 
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane1.setFocusable(false);
 
         lblMessage.setEditable(false);
         lblMessage.setText("long text long text long text long text long text long text long text long text");
@@ -124,6 +154,29 @@ public class PickNumberDialog extends MageDialog {
             }
         });
 
+        javax.swing.GroupLayout panelCommandsLayout = new javax.swing.GroupLayout(panelCommands);
+        panelCommands.setLayout(panelCommandsLayout);
+        panelCommandsLayout.setHorizontalGroup(
+            panelCommandsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelCommandsLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnOk)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnCancel)
+                .addContainerGap())
+        );
+        panelCommandsLayout.setVerticalGroup(
+            panelCommandsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelCommandsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelCommandsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnOk)
+                    .addComponent(btnCancel))
+                .addContainerGap())
+        );
+
+        getRootPane().setDefaultButton(btnOk);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -132,36 +185,30 @@ public class PickNumberDialog extends MageDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(spnAmount, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 43, Short.MAX_VALUE)
-                                .addComponent(btnOk)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCancel)))
+                    .addComponent(panelCommands, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(spnAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(spnAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCancel)
-                    .addComponent(btnOk))
+                .addComponent(panelCommands, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
-
-        getRootPane().setDefaultButton(btnOk);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
+        
+        System.out.println(this.getRootPane().getDefaultButton());
         this.cancel = false;
         this.hideDialog();
     }//GEN-LAST:event_btnOkActionPerformed
@@ -176,6 +223,7 @@ public class PickNumberDialog extends MageDialog {
     private javax.swing.JButton btnOk;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextPane lblMessage;
+    private javax.swing.JPanel panelCommands;
     private javax.swing.JSpinner spnAmount;
     // End of variables declaration//GEN-END:variables
 
