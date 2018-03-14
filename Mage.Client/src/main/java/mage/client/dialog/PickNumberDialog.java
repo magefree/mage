@@ -207,8 +207,6 @@ public class PickNumberDialog extends MageDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
-        
-        System.out.println(this.getRootPane().getDefaultButton());
         this.cancel = false;
         this.hideDialog();
     }//GEN-LAST:event_btnOkActionPerformed
