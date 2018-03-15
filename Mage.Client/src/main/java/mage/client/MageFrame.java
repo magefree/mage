@@ -613,7 +613,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         }
     }
 
-    private static MagePane getTopMost(MagePane exclude) {
+    public static MagePane getTopMost(MagePane exclude) {
         MagePane topmost = null;
         int best = Integer.MAX_VALUE;
         for (Component frame : desktopPane.getComponentsInLayer(JLayeredPane.DEFAULT_LAYER)) {
