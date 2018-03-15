@@ -27,16 +27,16 @@
  */
 package mage.cards.d;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BlocksTriggeredAbility;
+import mage.abilities.DelayedTriggeredAbility;
+import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
@@ -47,19 +47,19 @@ import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
-import mage.watchers.common.BlockedAttackerWatcher;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
- * @author TheElk801
+ * @author bunchOfDevs
  */
 public class DefiantVanguard extends CardImpl {
 
@@ -79,20 +79,16 @@ public class DefiantVanguard extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Defiant Vanguard blocks, at end of combat, destroy it and all creatures it blocked this turn.
-        this.addAbility(
-                new BlocksTriggeredAbility(
-                        new CreateDelayedTriggeredAbilityEffect(new AtTheEndOfCombatDelayedTriggeredAbility(new DefiantVanguardEffect())),
-                        false, false, true
-                ),
-                new BlockedAttackerWatcher()
-        );
+        DelayedTriggeredAbility ability = new AtTheEndOfCombatDelayedTriggeredAbility(new DefiantVanguardEffect());
+        Effect effect = new CreateDelayedTriggeredAbilityEffect(ability);
+        this.addAbility(new DefiantVanguardTriggeredAbility(effect));
 
         // {5}, {tap}: Search your library for a Rebel permanent card with converted mana cost 4 or less and put it onto the battlefield. Then shuffle your library.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        SimpleActivatedAbility ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), false),
                 new ManaCostsImpl("{5}"));
-        ability.addCost(new TapSourceCost());
-        this.addAbility(ability);
+        ability2.addCost(new TapSourceCost());
+        this.addAbility(ability2);
     }
 
     public DefiantVanguard(final DefiantVanguard card) {
@@ -105,11 +101,52 @@ public class DefiantVanguard extends CardImpl {
     }
 }
 
+class DefiantVanguardTriggeredAbility extends TriggeredAbilityImpl {
+
+    DefiantVanguardTriggeredAbility(Effect effect) {
+        super(Zone.BATTLEFIELD, effect);
+    }
+
+    DefiantVanguardTriggeredAbility(final DefiantVanguardTriggeredAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public DefiantVanguardTriggeredAbility copy() {
+        return new DefiantVanguardTriggeredAbility(this);
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.BLOCKER_DECLARED
+                && event.getSourceId().equals(getSourceId()); // Defiant Vanguard is the blocker
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        Permanent blocker = game.getPermanent(event.getSourceId());
+        Permanent blocked = game.getPermanent(event.getTargetId());
+        if (blocker != null
+                && blocked != null) {
+            game.getState().setValue(blocked.toString(), blocked.getZoneChangeCounter(game)); // in case the attacker changes zone
+            game.getState().setValue(blocker.toString(), blocker.getZoneChangeCounter(game)); // in case the blocker changes zone
+            getAllEffects().setTargetPointer(new FixedTarget(blocked.getId()));
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public String getRule() {
+        return "When {this} blocks, at end of combat, destroy it and all creatures it blocked this turn";
+    }
+}
+
 class DefiantVanguardEffect extends OneShotEffect {
 
     public DefiantVanguardEffect() {
         super(Outcome.DestroyPermanent);
-        this.staticText = "destroy it and all creatures it blocked this turn";
+        staticText = "destroy it and all creatures it blocked this turn";
     }
 
     public DefiantVanguardEffect(final DefiantVanguardEffect effect) {
@@ -117,32 +154,27 @@ class DefiantVanguardEffect extends OneShotEffect {
     }
 
     @Override
-    public DefiantVanguardEffect copy() {
-        return new DefiantVanguardEffect(this);
+    public boolean apply(Game game, Ability source) {
+        boolean result = false;
+        Permanent blockedCreature = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent defiantVanguard = game.getPermanent(source.getSourceId());
+        if (blockedCreature != null) {
+            if (game.getState().getValue(blockedCreature.toString()).equals(blockedCreature.getZoneChangeCounter(game))) { // true if it did not change zones
+                blockedCreature.destroy(source.getSourceId(), game, false);
+                result = true;
+            }
+        }
+        if (defiantVanguard != null) {
+            if (game.getState().getValue(defiantVanguard.toString()).equals(defiantVanguard.getZoneChangeCounter(game))) { // true if it did not change zones
+                defiantVanguard.destroy(source.getSourceId(), game, false);
+                result = true;
+            }
+        }
+        return result;
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        Permanent thisCreature = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (controller != null && thisCreature != null) {
-            BlockedAttackerWatcher watcher = (BlockedAttackerWatcher) game.getState().getWatchers().get(BlockedAttackerWatcher.class.getSimpleName());
-            if (watcher != null) {
-                List<Permanent> toDestroy = new ArrayList<>();
-                for (Permanent creature : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source.getSourceId(), game)) {
-                    if (!creature.getId().equals(thisCreature.getId())) {
-                        if (watcher.creatureHasBlockedAttacker(creature, thisCreature, game)) {
-                            toDestroy.add(creature);
-                        }
-                    }
-                }
-                thisCreature.destroy(source.getSourceId(), game, false);
-                for (Permanent creature : toDestroy) {
-                    creature.destroy(source.getSourceId(), game, false);
-                }
-                return true;
-            }
-        }
-        return false;
+    public DefiantVanguardEffect copy() {
+        return new DefiantVanguardEffect(this);
     }
 }
