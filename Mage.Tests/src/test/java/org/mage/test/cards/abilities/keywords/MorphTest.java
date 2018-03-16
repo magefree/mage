@@ -853,4 +853,45 @@ public class MorphTest extends CardTestPlayerBase {
         assertTappedCount("Island", true, 3);
 
     }
+
+    /**
+     * If you have Endless Whispers in play and a morph creature dies, it should
+     * be returned to play face up at end of turn under the control of an
+     * opponent.
+     */
+    @Test
+    public void testMorphEndlessWhispers() {
+        /*
+         Quicksilver Dragon {4}{U}{U}
+         Creature - Dragon
+         5/5
+         Flying
+         {U}: If target spell has only one target and that target is Quicksilver Dragon, change that spell's target to another creature.
+         Morph {4}{U}
+         */
+        addCard(Zone.HAND, playerA, "Quicksilver Dragon");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
+
+        // Each creature has "When this creature dies, choose target opponent. That player puts this card from its owner's graveyard
+        // onto the battlefield under his or her control at the beginning of the next end step."
+        addCard(Zone.BATTLEFIELD, playerA, "Endless Whispers", 1);
+
+        addCard(Zone.HAND, playerB, "Lightning Bolt");
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Quicksilver Dragon");
+        setChoice(playerA, "Yes"); // cast it face down as 2/2 creature
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", "");
+
+        setStopAt(2, PhaseStep.UPKEEP);
+        execute();
+
+        assertGraveyardCount(playerB, "Lightning Bolt", 1);
+        assertGraveyardCount(playerA, "Quicksilver Dragon", 0);
+
+        assertPermanentCount(playerA, "Quicksilver Dragon", 0);
+        assertPermanentCount(playerB, "Quicksilver Dragon", 1);
+
+    }
 }
