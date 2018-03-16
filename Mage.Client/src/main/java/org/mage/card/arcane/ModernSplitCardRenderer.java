@@ -272,7 +272,7 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
         // Draw the textbox rules
         drawRulesText(g, half.keywords, half.rules,
                 2, typeLineY + boxHeight + 2 - 4,
-                half.cw - 4, half.ch - typeLineY - boxHeight);
+                half.cw - 4, half.ch - typeLineY - boxHeight, false);
     }
 
     private Graphics2D getUnmodifiedHalfContext(Graphics2D g) {
