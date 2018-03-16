@@ -36,7 +36,6 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.ChooseOpponentEffect;
-import mage.constants.SubType;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -45,9 +44,9 @@ import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
+import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -107,9 +106,7 @@ class SkyshroudWarBeastEffect extends ContinuousEffectImpl {
             MageObject target = game.getObject(source.getSourceId());
             if (target != null) {
                 UUID playerId = (UUID) game.getState().getValue(source.getSourceId().toString() + ChooseOpponentEffect.VALUE_KEY);
-                FilterLandPermanent filter = new FilterLandPermanent();
-                filter.add(new ControllerIdPredicate(playerId));
-                int number = new PermanentsOnBattlefieldCount(filter).calculate(game, source, this);
+                int number = new PermanentsOnBattlefieldCount(StaticFilters.FILTER_LANDS_NONBASIC).calculate(game, source, this);
                 target.getPower().setValue(number);
                 target.getToughness().setValue(number);
                 return true;
