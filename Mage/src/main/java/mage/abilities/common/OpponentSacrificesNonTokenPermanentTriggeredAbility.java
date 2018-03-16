@@ -56,7 +56,7 @@ public class OpponentSacrificesNonTokenPermanentTriggeredAbility extends Trigger
         if (game.getPlayer(getControllerId()).hasOpponent(event.getPlayerId(), game)) {
             Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
             if (permanent != null && !(permanent instanceof PermanentToken)) {
-                getEffects().setTargetPointer(new FixedTarget(permanent, game));
+                getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game.getState().getZoneChangeCounter(event.getTargetId())));
                 return true;
             }
         }
