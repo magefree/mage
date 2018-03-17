@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -43,6 +42,7 @@ import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -59,11 +59,11 @@ public class CateranOverlord extends CardImpl {
 
     static {
         filter.add(new SubtypePredicate(SubType.MERCENARY));
-	filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 7));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, 7));
     }
 
     public CateranOverlord(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}{B}");
         this.subtype.add(SubType.HORROR);
         this.subtype.add(SubType.MERCENARY);
 
@@ -71,7 +71,8 @@ public class CateranOverlord extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Sacrifice a creature: Regenerate Cateran Overlord.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new SacrificeTargetCost(new TargetControlledCreaturePermanent())));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(),
+                new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT))));
 
         // {6}, {T}: Search your library for a Mercenary permanent card with converted mana cost 6 or less and put it onto the battlefield. Then shuffle your library.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)), new TapSourceCost());

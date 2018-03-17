@@ -42,6 +42,7 @@ import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -57,7 +58,7 @@ public class BurntOffering extends CardImpl {
         super(ownerID, setInfo, new CardType[]{CardType.INSTANT}, "{B}");
 
         //As an additional cost to cast Burnt Offering, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         //Add to your mana pool an amount of {B} and/or {R} equal to the sacrificed creature's converted mana cost.
         this.getSpellAbility().addEffect(new BurntOfferingEffect());
     }

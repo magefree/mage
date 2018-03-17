@@ -42,7 +42,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -54,7 +54,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public class MirenTheMoaningWell extends CardImpl {
 
     public MirenTheMoaningWell(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
         addSuperType(SuperType.LEGENDARY);
 
         // {tap}: Add {C} to your mana pool.
@@ -63,7 +63,7 @@ public class MirenTheMoaningWell extends CardImpl {
         // {3}, {tap}, Sacrifice a creature: You gain life equal to the sacrificed creature's toughness.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MirenTheMoaningWellEffect(), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1,new FilterControlledCreaturePermanent("a creature"), true)));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         this.addAbility(ability);
     }
 

@@ -35,7 +35,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -57,10 +57,10 @@ public class RitualOfTheMachine extends CardImpl {
     }
 
     public RitualOfTheMachine(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
 
         // As an additional cost to cast Ritual of the Machine, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(new FilterControlledCreaturePermanent("a creature"))));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         // Gain control of target nonartifact, nonblack creature.
         this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.EndOfGame));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));

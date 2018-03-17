@@ -40,6 +40,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -54,7 +55,7 @@ public class IchorExplosion extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{B}{B}");
 
         // As an additional cost to cast Ichor Explosion, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         // All creatures get -X/-X until end of turn, where X is the sacrificed creature's power.
         DynamicValue xValue = new IchorExplosionDynamicValue();
         this.getSpellAbility().addEffect(new BoostAllEffect(xValue, xValue, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE, false, null, true));

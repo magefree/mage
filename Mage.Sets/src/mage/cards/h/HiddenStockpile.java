@@ -42,7 +42,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.game.permanent.token.ServoToken;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.watchers.common.RevoltWatcher;
@@ -65,7 +65,7 @@ public class HiddenStockpile extends CardImpl {
 
         // {1}, Sacrifice a creature: Scry 1.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScryEffect(1), new GenericManaCost(1));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(new FilterControlledCreaturePermanent("a creature"))));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         this.addAbility(ability);
     }
 

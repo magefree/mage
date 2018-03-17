@@ -38,9 +38,10 @@ import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffec
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.PhaseStep;
+import mage.constants.SubType;
 import mage.constants.Zone;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -50,7 +51,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public class Necrosavant extends CardImpl {
 
     public Necrosavant(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}{B}");
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.GIANT);
 
@@ -58,13 +59,13 @@ public class Necrosavant extends CardImpl {
         this.toughness = new MageInt(5);
 
         // {3}{B}{B}, Sacrifice a creature: Return Necrosavant from your graveyard to the battlefield. Activate this ability only during your upkeep.
-        Ability ability = new ConditionalActivatedAbility(Zone.GRAVEYARD, 
-                new ReturnSourceFromGraveyardToBattlefieldEffect(), 
-                new ManaCostsImpl("{3}{B}{B}"), 
+        Ability ability = new ConditionalActivatedAbility(Zone.GRAVEYARD,
+                new ReturnSourceFromGraveyardToBattlefieldEffect(),
+                new ManaCostsImpl("{3}{B}{B}"),
                 new IsStepCondition(PhaseStep.UPKEEP),
                 null
         );
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         this.addAbility(ability);
     }
 

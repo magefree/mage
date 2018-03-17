@@ -35,6 +35,7 @@ import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -44,23 +45,24 @@ import mage.target.common.TargetControlledCreaturePermanent;
  * @author jeffwadsworth
  */
 public class MawOfTheObzedat extends CardImpl {
-    
+
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures you control");
-    
+
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
     public MawOfTheObzedat(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{B}");
         this.subtype.add(SubType.THRULL);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
         // Sacrifice a creature: Creatures you control get +1/+1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.EndOfTurn, filter, false), new SacrificeTargetCost(new TargetControlledCreaturePermanent())));
-        
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.EndOfTurn, filter, false),
+                new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT))));
+
     }
 
     public MawOfTheObzedat(final MawOfTheObzedat card) {
