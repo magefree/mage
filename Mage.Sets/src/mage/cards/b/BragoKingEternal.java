@@ -53,7 +53,7 @@ import mage.target.common.TargetControlledPermanent;
 public class BragoKingEternal extends CardImpl {
 
     public BragoKingEternal(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{U}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPIRIT);
 
@@ -65,7 +65,6 @@ public class BragoKingEternal extends CardImpl {
         // When Brago, King Eternal deals combat damage to a player, exile any number of target nonland permanents you control, then return those cards to the battlefield under their owner's control.
         Effect effect = new ExileTargetEffect(this.getId(), this.getName(), Zone.BATTLEFIELD);
         effect.setText("exile any number of target nonland permanents you control");
-        effect.setApplyEffectsAfter();
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(effect, false);
         FilterControlledPermanent filterControlledNonlandPermanent = new FilterControlledPermanent();
         filterControlledNonlandPermanent.add(Predicates.not(new CardTypePredicate(CardType.LAND)));

@@ -47,6 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author fireshoes
  */
 public class EpicConfrontation extends CardImpl {
+
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you don't control");
 
     static {
@@ -54,18 +55,17 @@ public class EpicConfrontation extends CardImpl {
     }
 
     public EpicConfrontation(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{G}");
 
         // Target creature you control gets +1/+2 until end of turn. It fights target creature you don't control.
-        Effect effect = new BoostTargetEffect(1,2,Duration.EndOfTurn);
-        effect.setApplyEffectsAfter();
+        Effect effect = new BoostTargetEffect(1, 2, Duration.EndOfTurn);
         this.getSpellAbility().addEffect(effect);
         effect = new FightTargetsEffect();
         effect.setText("It fights target creature you don't control");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         Target target = new TargetCreaturePermanent(filter);
-        this.getSpellAbility().addTarget(target); 
+        this.getSpellAbility().addTarget(target);
     }
 
     public EpicConfrontation(final EpicConfrontation card) {

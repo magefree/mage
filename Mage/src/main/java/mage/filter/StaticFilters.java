@@ -179,13 +179,13 @@ public final class StaticFilters {
 
     static {
         FILTER_CONTROLLED_CREATURE.setLockedFilter(true);
-    }    
+    }
     public static final FilterControlledCreaturePermanent FILTER_CONTROLLED_CREATURES = new FilterControlledCreaturePermanent("creatures you control");
 
     static {
         FILTER_CONTROLLED_CREATURES.setLockedFilter(true);
     }
-    
+
     public static final FilterControlledCreaturePermanent FILTER_CONTROLLED_A_CREATURE = new FilterControlledCreaturePermanent("a creature you control");
 
     static {
@@ -210,11 +210,15 @@ public final class StaticFilters {
     static {
         FILTER_LAND.setLockedFilter(true);
     }
+
     public static final FilterLandPermanent FILTER_LANDS = new FilterLandPermanent("lands");
 
     static {
         FILTER_LANDS.setLockedFilter(true);
     }
+
+    public static final FilterLandPermanent FILTER_LANDS_NONBASIC = FilterLandPermanent.nonbasicLands();
+
     public static final FilterBasicLandCard FILTER_BASIC_LAND_CARD = new FilterBasicLandCard();
 
     static {

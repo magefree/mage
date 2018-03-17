@@ -554,8 +554,8 @@ public final class ManaSymbols {
     public static void draw(Graphics g, String manaCost, int x, int y, int symbolWidth, Color symbolsTextColor, int symbolMarginX) {
         if (!manaImages.containsKey(symbolWidth)) {
             loadSymbolImages(symbolWidth);
-        }
-
+        }       
+        
         // TODO: replace with jlabel render (look at table rendere)?
 
         /*
@@ -605,12 +605,16 @@ public final class ManaSymbols {
             return;
         }
 
-        manaCost = manaCost.replace("\\", "");
+        manaCost = manaCost.replace("\\", ""); 
         manaCost = UI.getDisplayManaCost(manaCost);
         StringTokenizer tok = new StringTokenizer(manaCost, " ");
         while (tok.hasMoreTokens()) {
             String symbol = tok.nextToken();
             Image image = sizedSymbols.get(symbol);
+            if (image == null && symbol != null) {
+                String symbol2 = "" + symbol.charAt(1) + symbol.charAt(0);
+                image = sizedSymbols.get(symbol2);
+            }
 
             if (image == null) {
                 // TEXT draw

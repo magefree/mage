@@ -42,8 +42,8 @@ import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.cards.MeldCard;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -66,7 +66,7 @@ public class WispweaverAngel extends CardImpl {
     }
 
     public WispweaverAngel(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");
         this.subtype.add(SubType.ANGEL);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
@@ -76,7 +76,6 @@ public class WispweaverAngel extends CardImpl {
 
         // When Wispweaver Angel enters the battlefield, you may exile another target creature you control, then return that card to the battlefield under its owner's control.
         Effect effect = new ExileTargetForSourceEffect();
-        effect.setApplyEffectsAfter();
         Ability ability = new EntersBattlefieldTriggeredAbility(effect, true);
         ability.addTarget(new TargetControlledCreaturePermanent(1, 1, filter, false));
         ability.addEffect(new WispweaverAngelEffect());

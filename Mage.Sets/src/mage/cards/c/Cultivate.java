@@ -27,6 +27,7 @@
  */
 package mage.cards.c;
 
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -41,8 +42,6 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
 
-import java.util.UUID;
-
 /**
  *
  * @author BetaSteward_at_googlemail.com
@@ -50,7 +49,7 @@ import java.util.UUID;
 public class Cultivate extends CardImpl {
 
     public Cultivate(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{G}");
 
         // Search your library for up to two basic land cards, reveal those cards, and put one onto the battlefield tapped and the other into your hand. Then shuffle your library.
         this.getSpellAbility().addEffect(new CultivateEffect());
@@ -96,11 +95,7 @@ class CultivateEffect extends OneShotEffect {
         TargetCardInLibrary target = new TargetCardInLibrary(0, 2, StaticFilters.FILTER_BASIC_LAND_CARD);
         if (controller.searchLibrary(target, game)) {
             if (!target.getTargets().isEmpty()) {
-                Cards revealed = new CardsImpl();
-                for (UUID cardId : target.getTargets()) {
-                    Card card = controller.getLibrary().getCard(cardId, game);
-                    revealed.add(card);
-                }
+                Cards revealed = new CardsImpl(target.getTargets());
                 controller.revealCards(sourceObject.getIdName(), revealed, game);
                 if (target.getTargets().size() == 2) {
                     TargetCard target2 = new TargetCard(Zone.LIBRARY, filter);
@@ -120,13 +115,10 @@ class CultivateEffect extends OneShotEffect {
                         controller.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, false, null);
                     }
                 }
-
             }
-            controller.shuffleLibrary(source, game);
-            return true;
         }
         controller.shuffleLibrary(source, game);
-        return false;
+        return true;
 
     }
 

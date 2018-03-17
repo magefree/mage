@@ -49,7 +49,7 @@ import mage.target.TargetPermanent;
 public class ZealousConscripts extends CardImpl {
 
     public ZealousConscripts(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}");
         this.subtype.add(SubType.HUMAN, SubType.WARRIOR);
 
         this.power = new MageInt(3);
