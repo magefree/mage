@@ -58,7 +58,7 @@ public class MoxAmber extends CardImpl {
                 ),
             new CardTypePredicate(CardType.PLANESWALKER))
         );
-        this.addAbility(new AnyColorPermanentTypesManaAbility(TargetController.YOU, false, filter));
+        this.addAbility(new AnyColorPermanentTypesManaAbility(TargetController.YOU, filter));
     }
 
     public MoxAmber(final MoxAmber card) {

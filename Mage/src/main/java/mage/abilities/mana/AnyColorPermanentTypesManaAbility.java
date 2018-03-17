@@ -61,7 +61,7 @@ public class AnyColorPermanentTypesManaAbility extends ActivatedManaAbilityImpl 
 class AnyColorPermanentTypesManaEffect extends ManaEffect {
 
     private final FilterPermanent filter;
-    private final boolean onlyColors; // false if mana types can be produced (also Colorless mana), if false only colors can be produced (no Colorless mana).
+    private final boolean onlyColors; // false if mana types can be produced (also Colorless mana), if true only colors can be produced (no Colorless mana).
 
     private boolean inManaTypeCalculation = false;
 
@@ -168,13 +168,19 @@ class AnyColorPermanentTypesManaEffect extends ManaEffect {
         }
         inManaTypeCalculation = true;
         
-        List<ObjectColor> permanentColors;
-        // Logger.getLogger(this.getClass().getName()).log(Level.WARNING, "needed to identify endless loop causing cards: {0}", source.getSourceObject(game).getName());
+        ObjectColor permanentColor;
+        
         List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);
+        
         for (Permanent permanent : permanents) {
-            permanentColors = permanent.getColor(game).getColors();
-            for (ObjectColor color : permanentColors){
-                types.add(new Mana(color.getColoredManaSymbol()));
+            permanentColor = permanent.getColor(game);
+            if(permanentColor.isColorless())
+                types.add(Mana.ColorlessMana(1));
+            else{
+                List<ObjectColor> permanentColors = permanent.getColor(game).getColors();
+                for (ObjectColor color : permanentColors){
+                    types.add(new Mana(color.getColoredManaSymbol()));
+                }
             }
         }
         inManaTypeCalculation = false;
