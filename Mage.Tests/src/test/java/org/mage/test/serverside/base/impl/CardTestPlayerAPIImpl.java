@@ -1299,10 +1299,10 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         }
     }
 
-    public void assertDamageReceived(Player player, String cardName, int amount) {
+    public void assertDamageReceived(Player player, String cardName, int expected) {
         Permanent p = getPermanent(cardName, player.getId());
         if (p != null) {
-            Assert.assertEquals(p.getDamage(), amount);
+            Assert.assertEquals("Wrong damage received: ", expected, p.getDamage());
         }
     }
 }
