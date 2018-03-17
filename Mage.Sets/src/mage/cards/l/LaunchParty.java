@@ -34,6 +34,7 @@ import mage.abilities.effects.common.LoseLifeTargetControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -44,11 +45,10 @@ import mage.target.common.TargetCreaturePermanent;
 public class LaunchParty extends CardImpl {
 
     public LaunchParty(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{B}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{B}");
 
         // As an additional cost to cast Launch Party, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
 
         // Destroy target creature. Its controller loses 2 life.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

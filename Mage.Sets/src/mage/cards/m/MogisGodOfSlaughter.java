@@ -45,6 +45,7 @@ import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -57,7 +58,7 @@ import mage.util.CardUtil;
 public class MogisGodOfSlaughter extends CardImpl {
 
     public MogisGodOfSlaughter(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{2}{B}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{2}{B}{R}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOD);
 
@@ -72,7 +73,8 @@ public class MogisGodOfSlaughter extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
 
         // At the beginning of each opponent's upkeep, Mogis deals 2 damage to that player unless he or she sacrifices a creature.
-        effect = new DoUnlessTargetPaysCost(new DamageTargetEffect(2, true, "that player"), new SacrificeTargetCost(new TargetControlledCreaturePermanent()),
+        effect = new DoUnlessTargetPaysCost(new DamageTargetEffect(2, true, "that player"),
+                new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)),
                 "Sacrifice a creature? (otherwise you get 2 damage)");
         effect.setText("Mogis deals 2 damage to that player unless he or she sacrifices a creature");
         Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.OPPONENT, false, true);

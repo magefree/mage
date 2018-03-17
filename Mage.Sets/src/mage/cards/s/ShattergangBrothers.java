@@ -42,8 +42,8 @@ import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.Zone;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.filter.common.FilterControlledArtifactPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
@@ -59,7 +59,7 @@ import mage.target.common.TargetControlledPermanent;
 public class ShattergangBrothers extends CardImpl {
 
     public ShattergangBrothers(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{R}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{R}{G}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOBLIN);
         this.subtype.add(SubType.ARTIFICER);
@@ -68,20 +68,19 @@ public class ShattergangBrothers extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {2}{B}, Sacrifice a creature: Each other player sacrifices a creature.
-        FilterControlledCreaturePermanent filterCreature = new FilterControlledCreaturePermanent("a creature");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ShattergangBrothersEffect(filterCreature), new ManaCostsImpl("{2}{B}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1, filterCreature, true)));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ShattergangBrothersEffect(FILTER_CONTROLLED_CREATURE_SHORT_TEXT), new ManaCostsImpl("{2}{B}"));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         this.addAbility(ability);
         // {2}{R}, Sacrifice an artifact: Each other player sacrifices an artifact.
         FilterControlledPermanent filter = new FilterControlledArtifactPermanent("an artifact");
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ShattergangBrothersEffect(filter), new ManaCostsImpl("{2}{R}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(1,1, filter, true)));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(1, 1, filter, true)));
         this.addAbility(ability);
         // {2}{G}, Sacrifice an enchantment: Each other player sacrifices an enchantment.
         filter = new FilterControlledPermanent("an enchantment");
         filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ShattergangBrothersEffect(filter), new ManaCostsImpl("{2}{G}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(1,1, filter, true)));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(1, 1, filter, true)));
         this.addAbility(ability);
     }
 
@@ -119,14 +118,14 @@ class ShattergangBrothersEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            for(UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 if (!Objects.equals(playerId, source.getControllerId())) {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {
                         TargetControlledPermanent target = new TargetControlledPermanent(filter);
                         target.setNotTarget(true);
-                        if (target.canChoose(source.getSourceId(), playerId, game) &&
-                                player.chooseTarget(outcome, target, source, game)) {
+                        if (target.canChoose(source.getSourceId(), playerId, game)
+                                && player.chooseTarget(outcome, target, source, game)) {
                             Permanent permanent = game.getPermanent(target.getFirstTarget());
                             if (permanent != null) {
                                 permanent.sacrifice(source.getSourceId(), game);

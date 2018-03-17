@@ -48,6 +48,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
@@ -68,7 +69,7 @@ public class Marjhan extends CardImpl {
     }
 
     public Marjhan(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");
         this.subtype.add(SubType.SERPENT);
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);
@@ -79,7 +80,7 @@ public class Marjhan extends CardImpl {
         // {U}{U}, Sacrifice a creature: Untap Marjhan. Activate this ability only during your upkeep.
         Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD,
                 new UntapSourceEffect(), new ManaCostsImpl("{U}{U}"), new IsStepCondition(PhaseStep.UPKEEP), null);
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         this.addAbility(ability);
 
         // Marjhan can't attack unless defending player controls an Island.

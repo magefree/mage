@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -41,6 +40,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -50,8 +50,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public class ScarlandThrinax extends CardImpl {
 
     public ScarlandThrinax(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{R}{G}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{R}{G}");
 
         this.subtype.add(SubType.LIZARD);
         this.power = new MageInt(2);
@@ -59,7 +58,7 @@ public class ScarlandThrinax extends CardImpl {
 
         // Sacrifice a creature: Put a +1/+1 counter on Scarland Thrinax.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new ManaCostsImpl());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         this.addAbility(ability);
     }
 

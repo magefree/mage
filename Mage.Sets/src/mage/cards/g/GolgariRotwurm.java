@@ -37,9 +37,10 @@ import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.ColoredManaSymbol;
+import mage.constants.SubType;
 import mage.constants.Zone;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -50,7 +51,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public class GolgariRotwurm extends CardImpl {
 
     public GolgariRotwurm(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{G}");
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.WURM);
 
@@ -59,7 +60,7 @@ public class GolgariRotwurm extends CardImpl {
 
         // {B}, Sacrifice a creature: Target player loses 1 life.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), new ColoredManaCost(ColoredManaSymbol.B));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

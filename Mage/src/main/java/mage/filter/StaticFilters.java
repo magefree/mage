@@ -180,6 +180,14 @@ public final class StaticFilters {
     static {
         FILTER_CONTROLLED_CREATURE.setLockedFilter(true);
     }
+
+    // Used for sacrifice targets that don't need the "you control" text
+    public static final FilterControlledCreaturePermanent FILTER_CONTROLLED_CREATURE_SHORT_TEXT = new FilterControlledCreaturePermanent("a creature");
+
+    static {
+        FILTER_CONTROLLED_CREATURE_SHORT_TEXT.setLockedFilter(true);
+    }
+
     public static final FilterControlledCreaturePermanent FILTER_CONTROLLED_CREATURES = new FilterControlledCreaturePermanent("creatures you control");
 
     static {
@@ -218,6 +226,10 @@ public final class StaticFilters {
     }
 
     public static final FilterLandPermanent FILTER_LANDS_NONBASIC = FilterLandPermanent.nonbasicLands();
+
+    static {
+        FILTER_LANDS_NONBASIC.setLockedFilter(true);
+    }
 
     public static final FilterBasicLandCard FILTER_BASIC_LAND_CARD = new FilterBasicLandCard();
 

@@ -41,6 +41,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.players.Player;
@@ -53,7 +54,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public class BrainGorgers extends CardImpl {
 
     public BrainGorgers(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
         this.subtype.add(SubType.ZOMBIE);
         this.power = new MageInt(4);
         this.toughness = new MageInt(2);
@@ -95,7 +96,7 @@ class BrainGorgersCounterSourceEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         MageObject sourceObject = source.getSourceObject(game);
         if (sourceObject != null) {
-            SacrificeTargetCost cost = new SacrificeTargetCost(new TargetControlledCreaturePermanent());
+            SacrificeTargetCost cost = new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
             for (UUID playerId : game.getState().getPlayerList(source.getControllerId())) {
                 cost.clearPaid();
                 Player player = game.getPlayer(playerId);

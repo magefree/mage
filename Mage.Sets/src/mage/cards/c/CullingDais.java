@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -43,6 +42,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -54,17 +54,17 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class CullingDais extends CardImpl {
 
-    public CullingDais (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
+    public CullingDais(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         this.addAbility(ability);
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CullingDaisEffect(), new GenericManaCost(1));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }
 
-    public CullingDais (final CullingDais card) {
+    public CullingDais(final CullingDais card) {
         super(card);
     }
 
@@ -76,6 +76,7 @@ public class CullingDais extends CardImpl {
 }
 
 class CullingDaisEffect extends OneShotEffect {
+
     CullingDaisEffect() {
         super(Outcome.DrawCard);
         staticText = "Draw a card for each charge counter on {this}";
