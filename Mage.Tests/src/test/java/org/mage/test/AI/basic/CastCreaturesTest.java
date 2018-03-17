@@ -57,7 +57,7 @@ public class CastCreaturesTest extends CardTestPlayerBaseAI {
      * first creature
      */
     @Test
-    // TODO: find out why sometimes Produces error probably because of wrong mana usage of the AI - Not solved yet
+    // TODO: Find out why sometimes this produces an error - probably because of wrong mana usage of the AI - Not solved yet
     public void testSimpleCast2() {
         addCard(Zone.HAND, playerA, "Silvercoat Lion");
         addCard(Zone.HAND, playerA, "Silvercoat Lion");
@@ -67,6 +67,8 @@ public class CastCreaturesTest extends CardTestPlayerBaseAI {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
+        assertTappedCount("Plains", true, 2);
+        assertTappedCount("Mountain", true, 2);
         assertPermanentCount(playerA, "Silvercoat Lion", 2);
     }
 

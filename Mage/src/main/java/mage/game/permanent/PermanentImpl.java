@@ -1256,7 +1256,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             return false;
         }
         if (connectedCards.containsKey("imprint")) {
-            this.connectedCards.get("imprint").add(imprintedCard);
+            if (!this.connectedCards.get("imprint").contains(imprintedCard)) {
+                this.connectedCards.get("imprint").add(imprintedCard);
+            }
         } else {
             List<UUID> imprinted = new ArrayList<>();
             imprinted.add(imprintedCard);

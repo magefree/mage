@@ -96,18 +96,13 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
                 pass(game);
                 return false;
             case DECLARE_ATTACKERS:
-                if (!game.getActivePlayerId().equals(playerId)) {
-                    printOutState(game);
-                    if (actions.isEmpty()) {
-                        logger.info("Sim Calculate declare attackers actions ----------------------------------------------------- ");
-                        calculateActions(game);
-                    }
-                    act(game);
-                    return true;
-                } else {
-                    pass(game);
+                printOutState(game);
+                if (actions.isEmpty()) {
+                    logger.info("Sim Calculate declare attackers actions ----------------------------------------------------- ");
+                    calculateActions(game);
                 }
-                return false;
+                act(game);
+                return true;
             case DECLARE_BLOCKERS:
                 printOutState(game);
                 if (actions.isEmpty()) {
