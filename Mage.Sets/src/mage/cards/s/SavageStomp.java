@@ -75,7 +75,6 @@ public class SavageStomp extends CardImpl {
 
         // Put a +1/+1 counter on target creature you control. Then that creature fights target creature you don't control.
         Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance());
-        effect.setApplyEffectsAfter();
         this.getSpellAbility().addEffect(effect);
         effect = new FightTargetsEffect();
         effect.setText("Then that creature fights target creature you don't control");

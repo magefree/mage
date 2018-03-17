@@ -54,12 +54,11 @@ import mage.util.CardUtil;
 public class EssenceFlux extends CardImpl {
 
     public EssenceFlux(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}");
 
         // Exile target creature you control, then return that card to the battlefield under its owner's control. If it's a Spirit, put a +1/+1 counter on it.
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         Effect effect = new ExileTargetForSourceEffect();
-        effect.setApplyEffectsAfter();
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addEffect(new EssenceFluxEffect());
     }
@@ -102,8 +101,7 @@ class EssenceFluxEffect extends OneShotEffect {
                     for (UUID targetId : this.getTargetPointer().getTargets(game, source)) {
                         if (exileZone.contains(targetId)) {
                             cardsToBattlefield.add(targetId);
-                        }
-                        else {
+                        } else {
                             Card card = game.getCard(targetId);
                             if (card != null && card instanceof MeldCard) {
                                 MeldCard meldCard = (MeldCard) card;

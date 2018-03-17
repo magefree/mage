@@ -58,7 +58,6 @@ public class ClearShot extends CardImpl {
 
         // Target creature you control gets +1/+1 until end of turn.
         Effect effect = new BoostTargetEffect(1, 1, Duration.EndOfTurn);
-        effect.setApplyEffectsAfter(); // needed to count the boost for the second effect
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         this.getSpellAbility().addEffect(effect);
 

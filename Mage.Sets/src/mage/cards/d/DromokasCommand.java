@@ -78,7 +78,6 @@ public class DromokasCommand extends CardImpl {
         Mode mode = new Mode();
         Effect effect = new SacrificeEffect(filterEnchantment, 1, "target player");
         effect.setText("Target player sacrifices an enchantment");
-        effect.setApplyEffectsAfter(); // so P/T chnaging effects take place before the fighting effect is applied
         mode.getEffects().add(effect);
         mode.getTargets().add(new TargetPlayer());
         this.getSpellAbility().getModes().addMode(mode);
@@ -87,7 +86,6 @@ public class DromokasCommand extends CardImpl {
         mode = new Mode();
         effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance());
         effect.setText("Put a +1/+1 counter on target creature");
-        effect.setApplyEffectsAfter(); // so the counter is taken into account if the target is also used in mode 4
         mode.getEffects().add(effect);
         mode.getTargets().add(new TargetCreaturePermanent(filterCreature));
         this.getSpellAbility().getModes().addMode(mode);

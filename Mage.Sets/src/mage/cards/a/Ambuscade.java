@@ -52,14 +52,12 @@ public class Ambuscade extends CardImpl {
     static {
         filter.add(new ControllerPredicate(TargetController.NOT_YOU));
     }
-    
+
     public Ambuscade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{G}");
-        
 
         // Target creature you control gets +1/+0 until end of turn.
         Effect effect = new BoostTargetEffect(1, 0, Duration.EndOfTurn);
-        effect.setApplyEffectsAfter(); // needed to count the boost for the second effect
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         this.getSpellAbility().addEffect(effect);
 

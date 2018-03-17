@@ -44,12 +44,11 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public class AcrobaticManeuver extends CardImpl {
 
     public AcrobaticManeuver(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{W}");
 
         // Exile target creature you control, then return that card to the battlefield under its owner's control.
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         Effect effect = new ExileTargetForSourceEffect();
-        effect.setApplyEffectsAfter();
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect());
 

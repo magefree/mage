@@ -64,7 +64,6 @@ public class FelidarGuardian extends CardImpl {
 
         // When Felidar Guardian enters the battlefield, you may exile another target permanent you control, then return that card to the battlefield under its owner's control.
         Effect effect = new ExileTargetForSourceEffect();
-        effect.setApplyEffectsAfter();
         Ability ability = new EntersBattlefieldTriggeredAbility(effect, true);
         ability.addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect());
         ability.addTarget(new TargetControlledPermanent(filter));

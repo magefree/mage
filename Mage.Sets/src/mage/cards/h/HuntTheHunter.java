@@ -53,6 +53,7 @@ public class HuntTheHunter extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filterControlledGreen = new FilterControlledCreaturePermanent("green creature you control");
     private static final FilterCreaturePermanent filterOpponentGreen = new FilterCreaturePermanent("green creature an opponent controls");
+
     static {
         filterControlledGreen.add(new ColorPredicate(ObjectColor.GREEN));
         filterOpponentGreen.add(new ControllerPredicate(TargetController.OPPONENT));
@@ -60,14 +61,12 @@ public class HuntTheHunter extends CardImpl {
     }
 
     public HuntTheHunter(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{G}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{G}");
 
         // Target green creature you control gets +2/+2 until end of turn. It fights target green creature an opponent controls.
-        Effect effect = new BoostTargetEffect(2,2, Duration.EndOfTurn);
-        effect.setApplyEffectsAfter();
+        Effect effect = new BoostTargetEffect(2, 2, Duration.EndOfTurn);
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(1,1,filterControlledGreen, false));
+        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(1, 1, filterControlledGreen, false));
 
         effect = new FightTargetsEffect();
         effect.setText("It fights target green creature an opponent controls");
