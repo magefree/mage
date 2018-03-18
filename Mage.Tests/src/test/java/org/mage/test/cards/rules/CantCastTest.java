@@ -236,4 +236,32 @@ public class CantCastTest extends CardTestPlayerBase {
 
     }
 
+    /**
+     * Alhammarret, High Arbiter's ability doesn't work Despite naming the
+     * Damnation in my hand, I was able to cast it next turn without issue.
+     */
+    @Test
+    public void testAlhammarret() {
+        // Flying
+        // As Alhammarret, High Arbiter enters the battlefield, each opponent reveals his or her hand. You choose the name of a nonland card revealed this way.
+        // Your opponents can't cast spells with the chosen name.
+        addCard(Zone.HAND, playerA, "Alhammarret, High Arbiter", 4); // Creature - {5}{U}{U}
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 7);
+
+        // Destroy all creatures. They can't be regenerated.
+        addCard(Zone.HAND, playerB, "Damnation", 1); // SORCERY {2}{B}{B}
+        addCard(Zone.BATTLEFIELD, playerB, "Swamp", 4);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Alhammarret, High Arbiter");
+        setChoice(playerA, "Damnation");
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Damnation");
+        setStopAt(2, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Alhammarret, High Arbiter", 1);
+        assertHandCount(playerB, "Damnation", 1);
+
+    }
+
 }
