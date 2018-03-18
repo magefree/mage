@@ -30,6 +30,7 @@ package mage.client.deck.generator;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import mage.cards.Card;
@@ -86,7 +87,7 @@ public final class DeckGenerator {
 
         String selectedColors = genDialog.getSelectedColors();
         List<ColoredManaSymbol> allowedColors = new ArrayList<>();
-        selectedColors = selectedColors != null ? selectedColors.toUpperCase() : getRandomColors("X");
+        selectedColors = selectedColors != null ? selectedColors.toUpperCase(Locale.ENGLISH) : getRandomColors("X");
         String format = genDialog.getSelectedFormat();
 
         List<String> setsToUse = ConstructedFormats.getSetsByFormat(format);

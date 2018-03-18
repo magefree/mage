@@ -988,7 +988,7 @@ public class CardView extends SimpleCardView {
     public String getColorText() {
 
         String color = getColor().getDescription();
-        return color.substring(0, 1).toUpperCase() + color.substring(1);
+        return color.substring(0, 1).toUpperCase(Locale.ENGLISH) + color.substring(1);
     }
 
     public String getTypeText() {

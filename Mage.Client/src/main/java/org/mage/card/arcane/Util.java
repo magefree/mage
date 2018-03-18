@@ -7,6 +7,7 @@ import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.util.Collections;
 import java.util.Enumeration;
+import java.util.Locale;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -16,8 +17,8 @@ import javax.swing.SwingUtilities;
 @SuppressWarnings({"rawtypes", "unchecked"})
 public final class Util {
 
-    public static final boolean isMac = System.getProperty("os.name").toLowerCase().contains("mac");
-    public static final boolean isWindows = !System.getProperty("os.name").toLowerCase().contains("windows");
+    public static final boolean isMac = System.getProperty("os.name").toLowerCase(Locale.ENGLISH).contains("mac");
+    public static final boolean isWindows = !System.getProperty("os.name").toLowerCase(Locale.ENGLISH).contains("windows");
 
     public static final ThreadPoolExecutor threadPool;
     static private int threadCount;

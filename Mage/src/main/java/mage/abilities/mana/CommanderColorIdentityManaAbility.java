@@ -42,7 +42,6 @@ import mage.constants.Zone;
 import mage.filter.FilterMana;
 import mage.game.Game;
 import mage.players.Player;
-import mage.util.CardUtil;
 
 /**
  *

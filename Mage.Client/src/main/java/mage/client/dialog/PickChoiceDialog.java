@@ -210,11 +210,11 @@ public class PickChoiceDialog extends MageDialog {
         // load data to datamodel after filter or on startup
         String filter = choice.getSearchText();
         if (filter == null){ filter = ""; }
-        filter = filter.toLowerCase();
+        filter = filter.toLowerCase(Locale.ENGLISH);
         
         this.dataModel.clear();
         for(KeyValueItem item: this.allItems){
-            if(!choice.isSearchEnabled() || item.Value.toLowerCase().contains(filter)){
+            if(!choice.isSearchEnabled() || item.Value.toLowerCase(Locale.ENGLISH).contains(filter)){
                 this.dataModel.addElement(item);
             }
         }

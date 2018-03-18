@@ -3,6 +3,7 @@ package org.mage.plugins.theme;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.util.Locale;
 import java.util.Map;
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -49,7 +50,7 @@ public class ThemePluginImpl implements ThemePlugin {
             return false;
         }
         for (File f : filelist) {
-            String filename = f.getName().toLowerCase();
+            String filename = f.getName().toLowerCase(Locale.ENGLISH);
             if (filename != null && (filename.endsWith(".png") || filename.endsWith(".jpg")
                     || filename.endsWith(".bmp"))) {
                 flist.add(filename);

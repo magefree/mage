@@ -37,7 +37,6 @@ import java.awt.Dimension;
 import java.awt.Point;
 import java.beans.PropertyVetoException;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import javax.swing.ImageIcon;

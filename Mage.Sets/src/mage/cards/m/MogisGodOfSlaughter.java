@@ -27,6 +27,7 @@
  */
 package mage.cards.m;
 
+import java.util.Locale;
 import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
@@ -153,9 +154,9 @@ class DoUnlessTargetPaysCost extends OneShotEffect {
         StringBuilder sb = new StringBuilder();
         String costText = cost.getText();
         if (costText != null
-                && !costText.toLowerCase().startsWith("discard")
-                && !costText.toLowerCase().startsWith("sacrifice")
-                && !costText.toLowerCase().startsWith("remove")) {
+                && !costText.toLowerCase(Locale.ENGLISH).startsWith("discard")
+                && !costText.toLowerCase(Locale.ENGLISH).startsWith("sacrifice")
+                && !costText.toLowerCase(Locale.ENGLISH).startsWith("remove")) {
             sb.append("pay ");
         }
         return sb.append(costText).toString();

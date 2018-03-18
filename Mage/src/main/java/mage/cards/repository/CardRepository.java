@@ -397,7 +397,7 @@ public enum CardRepository {
 
     public List<CardInfo> findCardsCaseInsensitive(String name) {
         try {
-            String sqlName = name.toLowerCase().replaceAll("\'", "\'\'");
+            String sqlName = name.toLowerCase(Locale.ENGLISH).replaceAll("\'", "\'\'");
             GenericRawResults<CardInfo> rawResults = cardDao.queryRaw(
                     "select * from " + CardRepository.VERSION_ENTITY_NAME + " where lower(name) = '" + sqlName + '\'',
                     cardDao.getRawRowMapper());

@@ -3,6 +3,7 @@ package org.mage.plugins.card.dl.sources;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import mage.client.dialog.PreferencesDialog;
@@ -368,7 +369,7 @@ public enum MagicCardsImageSource implements CardImageSource {
         String preferedLanguage = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PREF_LANGUAGE, "en");
 
         StringBuilder url = new StringBuilder("http://magiccards.info/scans/").append(preferedLanguage).append('/');
-        url.append(set.toLowerCase()).append('/').append(collectorId);
+        url.append(set.toLowerCase(Locale.ENGLISH)).append('/').append(collectorId);
 
         if (card.isTwoFacedCard()) {
             url.append(card.isSecondSide() ? "b" : "a");
@@ -395,7 +396,7 @@ public enum MagicCardsImageSource implements CardImageSource {
         if (card.getType() > 0) {
             name = name + ' ' + card.getType();
         }
-        name = name.replaceAll(" ", "-").replace(",", "").toLowerCase();
+        name = name.replaceAll(" ", "-").replace(",", "").toLowerCase(Locale.ENGLISH);
         String set = "not-supported-set";
         if (setNameTokenReplacement.containsKey(card.getSet())) {
             set = setNameTokenReplacement.get(card.getSet());

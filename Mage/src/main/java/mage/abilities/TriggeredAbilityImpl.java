@@ -27,6 +27,7 @@
  */
 package mage.abilities;
 
+import java.util.Locale;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.effects.Effect;
@@ -124,7 +125,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
         String superRule = super.getRule(true);
         StringBuilder sb = new StringBuilder();
         if (!superRule.isEmpty()) {
-            String ruleLow = superRule.toLowerCase();
+            String ruleLow = superRule.toLowerCase(Locale.ENGLISH);
             if (isOptional()) {
                 if (ruleLow.startsWith("you ")) {
                     if (!ruleLow.startsWith("you may")) {

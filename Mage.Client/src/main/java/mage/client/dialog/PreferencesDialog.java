@@ -45,6 +45,7 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
@@ -3492,7 +3493,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     }
 
     private static void loadProxySettings(Preferences prefs) {
-        dialog.cbProxyType.setSelectedItem(Connection.ProxyType.valueOf(MageFrame.getPreferences().get(KEY_PROXY_TYPE, "NONE").toUpperCase()));
+        dialog.cbProxyType.setSelectedItem(Connection.ProxyType.valueOf(MageFrame.getPreferences().get(KEY_PROXY_TYPE, "NONE").toUpperCase(Locale.ENGLISH)));
 
         load(prefs, dialog.txtProxyServer, KEY_PROXY_ADDRESS, Config.serverName);
         load(prefs, dialog.txtProxyPort, KEY_PROXY_PORT, Integer.toString(Config.port));

@@ -608,7 +608,7 @@ class UpdateUsersTask extends SwingWorker<Void, List<UserView>> {
             if (!panel.getjUserName().getText().equals("")) {
                 List<UserView> users2 = new ArrayList<>();
                 for (UserView user : users) {
-                    if (user.getUserName().toUpperCase().matches(".*" + panel.getjUserName().getText().toUpperCase() + ".*")) {
+                    if (user.getUserName().toUpperCase(Locale.ENGLISH).matches(".*" + panel.getjUserName().getText().toUpperCase(Locale.ENGLISH) + ".*")) {
                         users2.add(user);
                     }
                 }
@@ -697,7 +697,7 @@ class UpdateTablesTask extends SwingWorker<Void, Collection<TableView>> {
             if (!panel.getjUserName().getText().equals("")) {
                 Collection<TableView> tableViews2 = new ArrayList<>();
                 for (TableView table : tableViews) {
-                    if (table.getControllerName().toUpperCase().matches(".*" + panel.getjUserName().getText().toUpperCase() + ".*")) {
+                    if (table.getControllerName().toUpperCase(Locale.ENGLISH).matches(".*" + panel.getjUserName().getText().toUpperCase(Locale.ENGLISH) + ".*")) {
                         tableViews2.add(table);
                     }
                 }

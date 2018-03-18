@@ -31,9 +31,6 @@ import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
-import mage.players.Player;
-
-import java.util.Map;
 import java.util.UUID;
 
 /**

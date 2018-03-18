@@ -2,6 +2,7 @@ package mage.client.util.gui;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Locale;
 import javax.swing.*;
 import mage.client.MageFrame;
 import mage.client.util.GUISizeHelper;
@@ -65,7 +66,7 @@ public final class GuiDisplayUtil {
                 out.append(c);
             }
         }
-        return out.toString().toLowerCase();
+        return out.toString().toLowerCase(Locale.ENGLISH);
     }
 
     public static void keepComponentInsideScreen(int centerX, int centerY, Component component) {
@@ -256,7 +257,7 @@ public final class GuiDisplayUtil {
             rarity = card.getRarity().getCode();
         }
         if (card.getExpansionSetCode() != null) {
-            buffer.append(ManaSymbols.replaceSetCodeWithHTML(card.getExpansionSetCode().toUpperCase(), rarity, GUISizeHelper.symbolTooltipSize));
+            buffer.append(ManaSymbols.replaceSetCodeWithHTML(card.getExpansionSetCode().toUpperCase(Locale.ENGLISH), rarity, GUISizeHelper.symbolTooltipSize));
         }
         buffer.append("</td></tr></table>");
 

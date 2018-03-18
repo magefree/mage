@@ -39,6 +39,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 import java.util.UUID;
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
@@ -1264,7 +1265,7 @@ class DeckFilter extends FileFilter {
         int i = s.lastIndexOf('.');
 
         if (i > 0 && i < s.length() - 1) {
-            ext = s.substring(i + 1).toLowerCase();
+            ext = s.substring(i + 1).toLowerCase(Locale.ENGLISH);
         }
         return (ext == null) ? false : ext.equals("dck");
     }

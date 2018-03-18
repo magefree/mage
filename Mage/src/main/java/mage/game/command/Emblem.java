@@ -27,7 +27,6 @@
  */
 package mage.game.command;
 
-import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.UUID;

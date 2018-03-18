@@ -27,6 +27,7 @@
  */
 package mage.cards.c;
 
+import java.util.Locale;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -38,8 +39,8 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -52,7 +53,7 @@ import mage.players.Player;
 public class CosmicHorror extends CardImpl {
 
     public CosmicHorror(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}{B}");
         this.subtype.add(SubType.HORROR);
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
@@ -95,7 +96,7 @@ class CosmicHorrorEffect extends OneShotEffect {
         Permanent cosmicHorror = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (controller != null && cosmicHorror != null) {
             StringBuilder sb = new StringBuilder(cost.getText()).append('?');
-            if (!sb.toString().toLowerCase().startsWith("exile ") && !sb.toString().toLowerCase().startsWith("return ")) {
+            if (!sb.toString().toLowerCase(Locale.ENGLISH).startsWith("exile ") && !sb.toString().toLowerCase(Locale.ENGLISH).startsWith("return ")) {
                 sb.insert(0, "Pay ");
             }
             if (controller.chooseUse(Outcome.Benefit, sb.toString(), source, game)) {

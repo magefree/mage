@@ -29,6 +29,7 @@ package mage.abilities.keyword;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.UUID;
 import mage.Mana;
 import mage.ObjectColor;
@@ -242,7 +243,7 @@ class ConvokeEffect extends OneShotEffect {
                             manaPool.addMana(Mana.ColorlessMana(1), game, source);
                             manaPool.unlockManaType(ManaType.COLORLESS);
                         }
-                        manaName = chooseManaType.getChoice().toLowerCase();
+                        manaName = chooseManaType.getChoice().toLowerCase(Locale.ENGLISH);
                     } else {
                         manaPool.addMana(Mana.ColorlessMana(1), game, source);
                         manaPool.unlockManaType(ManaType.COLORLESS);

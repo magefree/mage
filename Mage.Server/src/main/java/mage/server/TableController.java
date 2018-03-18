@@ -27,6 +27,7 @@
  */
 package mage.server;
 
+import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Optional;
@@ -297,7 +298,7 @@ public class TableController {
 
         // Check power level for table (currently only used for EDH/Commander table)
         int edhPowerLevel = table.getMatch().getOptions().getEdhPowerLevel();
-        if (edhPowerLevel > 0 && table.getValidator().getName().toLowerCase().equals("commander")) {
+        if (edhPowerLevel > 0 && table.getValidator().getName().toLowerCase(Locale.ENGLISH).equals("commander")) {
             int deckEdhPowerLevel = table.getValidator().getEdhPowerLevel(deck);
             if (deckEdhPowerLevel % 100 > edhPowerLevel) {
                 String message = new StringBuilder("Your deck appears to be too powerful for this table.\n\nReduce the number of extra turn cards, infect, counters, fogs, reconsider your commander. ")

@@ -4,6 +4,7 @@ import java.io.File;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.prefs.Preferences;
 import mage.client.MageFrame;
 import mage.client.constants.Constants;
@@ -116,7 +117,7 @@ public final class CardImageUtils {
     }
 
     public static String updateSet(String cardSet, boolean forUrl) {
-        String set = cardSet.toLowerCase();
+        String set = cardSet.toLowerCase(Locale.ENGLISH);
         if (set.equals("con")) {
             set = "cfx";
         }
@@ -172,7 +173,7 @@ public final class CardImageUtils {
             throw new IllegalArgumentException("Card " + card.getName() + " have empty set.");
         }
 
-        String set = updateSet(card.getSet(), false).toUpperCase(); // TODO: research auto-replace... old code?
+        String set = updateSet(card.getSet(), false).toUpperCase(Locale.ENGLISH); // TODO: research auto-replace... old code?
 
         if (card.isToken()) {
             return buildImagePathToSetAsToken(set);
@@ -236,7 +237,7 @@ public final class CardImageUtils {
             if (dirFile.exists() && !imageFile.exists()) {
                 // search like names
                 for (String fileName : dirFile.list()) {
-                    if (fileName.toLowerCase().equals(finalFileName.toLowerCase())) {
+                    if (fileName.toLowerCase(Locale.ENGLISH).equals(finalFileName.toLowerCase(Locale.ENGLISH))) {
                         finalFileName = fileName;
                         break;
                     }

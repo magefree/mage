@@ -170,7 +170,7 @@ public class GainAbilityTargetEffect extends ContinuousEffectImpl {
             }
             sb.append(target.getMaxNumberOfTargets()).append(" target ").append(target.getTargetName()).append(" gain ");
         } else {
-            if (!target.getTargetName().toUpperCase().startsWith("ANOTHER")) {
+            if (!target.getTargetName().toUpperCase(Locale.ENGLISH).startsWith("ANOTHER")) {
                 sb.append("target ");
             }
             sb.append(target.getTargetName()).append(" gains ");

@@ -28,6 +28,7 @@
 package mage.abilities.effects.common.counter;
 
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -110,7 +111,7 @@ public class AddCountersSourceEffect extends OneShotEffect {
                         if (informPlayers && !game.isSimulation()) {
                             Player player = game.getPlayer(source.getControllerId());
                             if (player != null) {
-                                game.informPlayers(player.getLogName() + " puts " + newCounter.getCount() + ' ' + newCounter.getName().toLowerCase() + " counter on " + card.getLogName());
+                                game.informPlayers(player.getLogName() + " puts " + newCounter.getCount() + ' ' + newCounter.getName().toLowerCase(Locale.ENGLISH) + " counter on " + card.getLogName());
                             }
                         }
                     }
@@ -137,7 +138,7 @@ public class AddCountersSourceEffect extends OneShotEffect {
                                 int amountAdded = permanent.getCounters(game).getCount(newCounter.getName()) - before;
                                 Player player = game.getPlayer(source.getControllerId());
                                 if (player != null) {
-                                    game.informPlayers(player.getLogName() + " puts " + amountAdded + ' ' + newCounter.getName().toLowerCase() + " counter on " + permanent.getLogName());
+                                    game.informPlayers(player.getLogName() + " puts " + amountAdded + ' ' + newCounter.getName().toLowerCase(Locale.ENGLISH) + " counter on " + permanent.getLogName());
                                 }
                             }
                         }
@@ -161,7 +162,7 @@ public class AddCountersSourceEffect extends OneShotEffect {
             sb.append("a ");
             plural = false;
         }
-        sb.append(counter.getName().toLowerCase()).append(" counter");
+        sb.append(counter.getName().toLowerCase(Locale.ENGLISH)).append(" counter");
         if (plural) {
             sb.append('s');
         }

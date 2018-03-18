@@ -28,7 +28,6 @@
 package mage.abilities.condition.common;
 
 import java.util.EnumSet;
-import java.util.HashSet;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.cards.Card;

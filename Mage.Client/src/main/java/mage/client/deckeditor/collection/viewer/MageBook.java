@@ -37,6 +37,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 import java.util.UUID;
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -500,10 +501,10 @@ public class MageBook extends JComponent {
                     className = className.replaceAll("[^a-zA-Z0-9]", "");
                     className = "mage.game.permanent.token." + className + "Token";
                     if (token.getTokenClassName() != null && token.getTokenClassName().length() > 0) {
-                        if (token.getTokenClassName().toLowerCase().matches(".*token.*")) {
+                        if (token.getTokenClassName().toLowerCase(Locale.ENGLISH).matches(".*token.*")) {
                             className = token.getTokenClassName();
                             className = "mage.game.permanent.token." + className;
-                        } else if (token.getTokenClassName().toLowerCase().matches(".*emblem.*")) {
+                        } else if (token.getTokenClassName().toLowerCase(Locale.ENGLISH).matches(".*emblem.*")) {
                             continue;
                         }
                     }
@@ -541,7 +542,7 @@ public class MageBook extends JComponent {
                 try {
                     String className = emblem.getName();
                     if (emblem.getTokenClassName() != null && emblem.getTokenClassName().length() > 0) {
-                        if (emblem.getTokenClassName().toLowerCase().matches(".*emblem.*")) {
+                        if (emblem.getTokenClassName().toLowerCase(Locale.ENGLISH).matches(".*emblem.*")) {
                             className = emblem.getTokenClassName();
                             className = "mage.game.command.emblems." + className;
                         }
