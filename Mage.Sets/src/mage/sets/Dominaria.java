@@ -55,5 +55,6 @@ public class Dominaria extends ExpansionSet {
         cards.add(new SetCardInfo("Benalish Marshal", 10, Rarity.UNCOMMON, mage.cards.b.BenalishMarshal.class));
         cards.add(new SetCardInfo("Charge", 11, Rarity.COMMON, mage.cards.c.Charge.class));
         cards.add(new SetCardInfo("Knight of Grace", 12, Rarity.UNCOMMON, mage.cards.k.KnightOfGrace.class));
+        cards.add(new SetCardInfo("Jhoira, Weatherlight Captain", 200, Rarity.MYTHIC, mage.cards.j.JhoiraWeatherlightCaptain.class));
     }
 }

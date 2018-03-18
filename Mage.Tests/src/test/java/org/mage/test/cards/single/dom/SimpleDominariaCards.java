@@ -5,6 +5,8 @@ import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
+import javax.ws.rs.POST;
+
 public class SimpleDominariaCards extends CardTestPlayerBase {
 
     @Test
@@ -83,5 +85,29 @@ public class SimpleDominariaCards extends CardTestPlayerBase {
         execute();
 
         assertPowerToughness(playerA, "Knight of Grace", 3, 2);
+    }
+
+    @Test
+    public void jhoiraCastHistoric(){
+        addCard(Zone.BATTLEFIELD, playerA, "Jhoira, Weatherlight Captain");
+        addCard(Zone.HAND, playerA, "Ornithopter");
+        addCard(Zone.LIBRARY, playerA, "Forest", 10);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ornithopter");
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+        assertHandCount(playerA, 1);
+
+    }
+
+    @Test
+    public void jhoiraCastNonHistoric(){
+        addCard(Zone.BATTLEFIELD, playerA, "Jhoira, Weatherlight Captain");
+        addCard(Zone.HAND, playerA, "Giant Growth");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Giant Growth", "Jhoira, Weatherlight Captain");
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+        assertHandCount(playerA, 0);
+
     }
 }
