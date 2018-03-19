@@ -461,12 +461,16 @@ public enum WizardCardsImageSource implements CardImageSource {
         setsAliases.put("ZEN", "Zendikar");
 
         languageAliases = new HashMap<>();
+        languageAliases.put("en", "English");
         languageAliases.put("es", "Spanish");
         languageAliases.put("jp", "Japanese");
         languageAliases.put("it", "Italian");
         languageAliases.put("fr", "French");
         languageAliases.put("cn", "Chinese Simplified");
         languageAliases.put("de", "German");
+        languageAliases.put("ko", "Korean");
+        languageAliases.put("pt", "Portuguese (Brazil)");
+        languageAliases.put("ru", "Russian");
     }
 
     @Override
