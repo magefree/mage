@@ -152,7 +152,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         chkNames.setSelected("true".equals(MageFrame.getPreferences().get(KEY_DECK_EDITOR_SEARCH_NAMES, "true")));
         chkTypes.setSelected("true".equals(MageFrame.getPreferences().get(KEY_DECK_EDITOR_SEARCH_TYPES, "true")));
         chkRules.setSelected("true".equals(MageFrame.getPreferences().get(KEY_DECK_EDITOR_SEARCH_RULES, "true")));
-        chkUnique.setSelected("true".equals(MageFrame.getPreferences().get(KEY_DECK_EDITOR_SEARCH_UNIQUE, "true")));
+        chkUnique.setSelected("true".equals(MageFrame.getPreferences().get(KEY_DECK_EDITOR_SEARCH_UNIQUE, "false")));
 
         mainTable.addMouseListener(new MouseAdapter() {
             @Override
@@ -1074,7 +1074,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
             }
         });
 
-        chkUnique.setSelected(true);
+        chkUnique.setSelected(false);
         chkUnique.setText("Unique");
         chkUnique.setToolTipText("Show only the first found card of every card name.");
         chkUnique.setFocusable(false);
