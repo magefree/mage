@@ -372,6 +372,7 @@ public class Odyssey extends ExpansionSet {
         cards.add(new SetCardInfo("Unifying Theory", 112, Rarity.RARE, mage.cards.u.UnifyingTheory.class));
         cards.add(new SetCardInfo("Upheaval", 113, Rarity.RARE, mage.cards.u.Upheaval.class));
         cards.add(new SetCardInfo("Vampiric Dragon", 296, Rarity.RARE, mage.cards.v.VampiricDragon.class));
+        cards.add(new SetCardInfo("Verdant Succession", 280, Rarity.RARE, mage.cards.v.VerdantSuccession.class));
         cards.add(new SetCardInfo("Vivify", 281, Rarity.UNCOMMON, mage.cards.v.Vivify.class));
         cards.add(new SetCardInfo("Volcanic Spray", 226, Rarity.UNCOMMON, mage.cards.v.VolcanicSpray.class));
         cards.add(new SetCardInfo("Volley of Boulders", 227, Rarity.RARE, mage.cards.v.VolleyOfBoulders.class));
