@@ -78,6 +78,7 @@ public class Odyssey extends ExpansionSet {
         cards.add(new SetCardInfo("Balancing Act", 10, Rarity.RARE, mage.cards.b.BalancingAct.class));
         cards.add(new SetCardInfo("Balshan Beguiler", 66, Rarity.UNCOMMON, mage.cards.b.BalshanBeguiler.class));
         cards.add(new SetCardInfo("Balshan Griffin", 67, Rarity.UNCOMMON, mage.cards.b.BalshanGriffin.class));
+        cards.add(new SetCardInfo("Bamboozle", 68, Rarity.UNCOMMON, mage.cards.b.Bamboozle.class));
         cards.add(new SetCardInfo("Barbarian Lunatic", 175, Rarity.COMMON, mage.cards.b.BarbarianLunatic.class));
         cards.add(new SetCardInfo("Barbarian Ring", 313, Rarity.UNCOMMON, mage.cards.b.BarbarianRing.class));
         cards.add(new SetCardInfo("Bash to Bits", 176, Rarity.UNCOMMON, mage.cards.b.BashToBits.class));
