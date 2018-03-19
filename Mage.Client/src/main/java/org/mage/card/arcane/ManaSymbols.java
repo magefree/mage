@@ -611,7 +611,7 @@ public final class ManaSymbols {
         while (tok.hasMoreTokens()) {
             String symbol = tok.nextToken();
             Image image = sizedSymbols.get(symbol);
-            if (image == null && symbol != null) {
+            if (image == null && symbol != null && symbol.length() == 2) {
                 String symbol2 = "" + symbol.charAt(1) + symbol.charAt(0);
                 image = sizedSymbols.get(symbol2);
             }
