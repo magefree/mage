@@ -72,6 +72,7 @@ public class Odyssey extends ExpansionSet {
         cards.add(new SetCardInfo("Aven Cloudchaser", 7, Rarity.COMMON, mage.cards.a.AvenCloudchaser.class));
         cards.add(new SetCardInfo("Aven Fisher", 63, Rarity.COMMON, mage.cards.a.AvenFisher.class));
         cards.add(new SetCardInfo("Aven Flock", 8, Rarity.COMMON, mage.cards.a.AvenFlock.class));
+        cards.add(new SetCardInfo("Aven Shrine", 9, Rarity.RARE, mage.cards.a.AvenShrine.class));
         cards.add(new SetCardInfo("Aven Smokeweaver", 64, Rarity.UNCOMMON, mage.cards.a.AvenSmokeweaver.class));
         cards.add(new SetCardInfo("Aven Windreader", 65, Rarity.COMMON, mage.cards.a.AvenWindreader.class));
         cards.add(new SetCardInfo("Balancing Act", 10, Rarity.RARE, mage.cards.b.BalancingAct.class));
