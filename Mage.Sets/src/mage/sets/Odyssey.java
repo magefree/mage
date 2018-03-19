@@ -352,6 +352,7 @@ public class Odyssey extends ExpansionSet {
         cards.add(new SetCardInfo("Syncopate", 103, Rarity.COMMON, mage.cards.s.Syncopate.class));
         cards.add(new SetCardInfo("Tainted Pact", 164, Rarity.RARE, mage.cards.t.TaintedPact.class));
         cards.add(new SetCardInfo("Tarnished Citadel", 329, Rarity.RARE, mage.cards.t.TarnishedCitadel.class));
+        cards.add(new SetCardInfo("Tattoo Ward", 54, Rarity.UNCOMMON, mage.cards.t.TattooWard.class));
         cards.add(new SetCardInfo("Terravore", 278, Rarity.RARE, mage.cards.t.Terravore.class));
         cards.add(new SetCardInfo("Testament of Faith", 55, Rarity.UNCOMMON, mage.cards.t.TestamentOfFaith.class));
         cards.add(new SetCardInfo("Thaumatog", 295, Rarity.UNCOMMON, mage.cards.t.Thaumatog.class));
