@@ -91,7 +91,7 @@ public class GameReplay {
         try{
             file = new FileInputStream("saved/" + gameId.toString() + ".game");
             buffer = new BufferedInputStream(file);
-            input = new CopierObjectInputStream(Main.classLoader, new GZIPInputStream(buffer))
+            input = new CopierObjectInputStream(Main.classLoader, new GZIPInputStream(buffer));
             Game loadGame = (Game) input.readObject();
             GameStates states = (GameStates) input.readObject();
             loadGame.loadGameStates(states);
