@@ -231,8 +231,8 @@ public enum UserManager {
             }
             logger.debug("Users to remove " + toRemove.size());
             final Lock w = lock.readLock();
-            w.lock();
             try {
+                w.lock();
                 for (User user : toRemove) {
                     users.remove(user.getId());
                 }
