@@ -957,10 +957,11 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
     }
 
     protected final void getSuggestedActions() {
+        Scanner scanner = null;
         try {
             File file = new File(FILE_WITH_INSTRUCTIONS);
             if (file.exists()) {
-                Scanner scanner = new Scanner(file);
+                scanner = new Scanner(file);
                 while (scanner.hasNextLine()) {
                     String line = scanner.nextLine();
                     if (line.startsWith("cast:")
@@ -976,6 +977,10 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
         } catch (Exception e) {
             // swallow
             e.printStackTrace();
+        } finally {
+            if(scanner != null) {
+                scanner.close();
+            }
         }
     }
 
