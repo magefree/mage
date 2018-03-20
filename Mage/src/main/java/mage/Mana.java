@@ -934,6 +934,8 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
             return true;
         } else if (mana.colorless > 0 && this.colorless > 0 && includeColorless) {
             return true;
+        } else if (mana.any > 0 && this.count() > 0){
+            return true;
         }
 
         return false;
