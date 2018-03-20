@@ -25,61 +25,62 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.s;
+package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.BoostControlledEffect;
+import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInHand;
+import mage.target.common.TargetCardInLibrary;
 
 /**
  *
- * @author cbt33
+ * @author LevelX2
  */
-public class SacredRites extends CardImpl {
+public class RitesOfSpring extends CardImpl {
 
-    public SacredRites(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{W}");
+    public RitesOfSpring(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{G}");
 
-        // Discard any number of cards. Creatures you control get +0/+1 until end of turn for each card discarded this way.
-        this.getSpellAbility().addEffect(new SacredRitesEffect());
+        // Discard any number of cards. Search your library for up to that many basic land cards, reveal those cards, and put them into your hand. Then shuffle your library.
+        getSpellAbility().addEffect(new RitesOfSpringEffect());
     }
 
-    public SacredRites(final SacredRites card) {
+    public RitesOfSpring(final RitesOfSpring card) {
         super(card);
     }
 
     @Override
-    public SacredRites copy() {
-        return new SacredRites(this);
+    public RitesOfSpring copy() {
+        return new RitesOfSpring(this);
     }
 }
 
-class SacredRitesEffect extends OneShotEffect {
+class RitesOfSpringEffect extends OneShotEffect {
 
-    SacredRitesEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "Discard any number of cards. Creatures you control get +0/+1 until end of turn for each card discarded this way.";
+    public RitesOfSpringEffect() {
+        super(Outcome.DrawCard);
+        this.staticText = "Discard any number of cards. Search your library for up to that many basic land cards, reveal those cards, and put them into your hand. Then shuffle your library.";
     }
 
-    SacredRitesEffect(final SacredRitesEffect effect) {
+    public RitesOfSpringEffect(final RitesOfSpringEffect effect) {
         super(effect);
     }
 
     @Override
-    public SacredRitesEffect copy() {
-        return new SacredRitesEffect(this);
+    public RitesOfSpringEffect copy() {
+        return new RitesOfSpringEffect(this);
     }
 
     @Override
@@ -97,8 +98,10 @@ class SacredRitesEffect extends OneShotEffect {
                     numDiscarded++;
                 }
             }
-            game.addEffect(new BoostControlledEffect(0, numDiscarded, Duration.EndOfTurn), source);
-            return true;
+            game.applyEffects();
+            return new SearchLibraryPutInHandEffect(
+                    new TargetCardInLibrary(0, numDiscarded, StaticFilters.FILTER_BASIC_LAND_CARD), true, true)
+                    .apply(game, source);
         }
         return false;
     }

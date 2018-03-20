@@ -250,6 +250,7 @@ public class Odyssey extends ExpansionSet {
         cards.add(new SetCardInfo("Nantuko Disciple", 253, Rarity.COMMON, mage.cards.n.NantukoDisciple.class));
         cards.add(new SetCardInfo("Nantuko Elder", 254, Rarity.UNCOMMON, mage.cards.n.NantukoElder.class));
         cards.add(new SetCardInfo("Nantuko Mentor", 255, Rarity.RARE, mage.cards.n.NantukoMentor.class));
+        cards.add(new SetCardInfo("Nantuko Shrine", 256, Rarity.RARE, mage.cards.n.NantukoShrine.class));
         cards.add(new SetCardInfo("Need for Speed", 209, Rarity.RARE, mage.cards.n.NeedForSpeed.class));
         cards.add(new SetCardInfo("Nefarious Lich", 153, Rarity.RARE, mage.cards.n.NefariousLich.class));
         cards.add(new SetCardInfo("New Frontiers", 257, Rarity.RARE, mage.cards.n.NewFrontiers.class));
@@ -301,6 +302,7 @@ public class Odyssey extends ExpansionSet {
         cards.add(new SetCardInfo("Resilient Wanderer", 43, Rarity.UNCOMMON, mage.cards.r.ResilientWanderer.class));
         cards.add(new SetCardInfo("Rites of Initiation", 217, Rarity.COMMON, mage.cards.r.RitesOfInitiation.class));
         cards.add(new SetCardInfo("Rites of Refusal", 99, Rarity.COMMON, mage.cards.r.RitesOfRefusal.class));
+        cards.add(new SetCardInfo("Rites of Spring", 265, Rarity.COMMON, mage.cards.r.RitesOfSpring.class));
         cards.add(new SetCardInfo("Roar of the Wurm", 266, Rarity.UNCOMMON, mage.cards.r.RoarOfTheWurm.class));
         cards.add(new SetCardInfo("Rotting Giant", 158, Rarity.UNCOMMON, mage.cards.r.RottingGiant.class));
         cards.add(new SetCardInfo("Sacred Rites", 44, Rarity.COMMON, mage.cards.s.SacredRites.class));

@@ -41,8 +41,7 @@ import mage.target.common.TargetCardInYourGraveyard;
 public class Recollect extends CardImpl {
 
     public Recollect(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{G}");
 
         // Return target card from your graveyard to your hand.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
