@@ -18,4 +18,13 @@ public final class StreamUtils {
         }
     }
 
+    public static void closeQuietly(AutoCloseable ac) {
+        if (ac != null) {
+            try {
+                ac.close();
+            }
+            catch (Exception e) {
+            }
+        }
+    }
 }
