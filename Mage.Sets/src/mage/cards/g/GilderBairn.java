@@ -95,12 +95,11 @@ class GilderBairnEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent target = game.getPermanent(source.getFirstTarget());
-        if (target == null) {
-            return false;
-        }
-        for (Counter counter : target.getCounters(game).values()) {
-            Counter newCounter = new Counter(counter.getName(), counter.getCount());
-            target.addCounters(newCounter, source, game);
+        if (target != null) {
+            for (Counter counter : target.getCounters(game).values()) {
+                Counter newCounter = new Counter(counter.getName(), counter.getCount());
+                target.addCounters(newCounter, source, game);
+            }
         }
         return false;
     }
