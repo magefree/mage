@@ -746,34 +746,6 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                     }
                 }
 
-                /*
-                if(!destFile.getParentFile().exists()){
-                    destFile.getParentFile().mkdirs();
-                }
-                 */
-
- /*
-                // WTF start?! TODO: wtf
-                File existingFile = new File(imagePath.replaceFirst("\\w{3}.zip", ""));
-                if (existingFile.exists()) {
-                    try {
-                        new TFile(existingFile).cp_rp(outputFile);
-                    } catch (IOException e) {
-                        logger.error("Error while copying file " + card.getName(), e);
-                    }
-                    synchronized (sync) {
-                        update(cardIndex + 1, count);
-                    }
-                    existingFile.delete();
-                    File parent = existingFile.getParentFile();
-                    if (parent != null && parent.isDirectory() && parent.list().length == 0) {
-                        parent.delete();
-                    }
-                    return;
-                }
-                // WTF end?!
-                 */
-                // START to download
                 cardImageSource.doPause(url.getPath());
                 URLConnection httpConn = url.openConnection(p);
                 httpConn.setRequestProperty("User-Agent", "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.4; en-US; rv:1.9.2.2) Gecko/20100316 Firefox/3.6.2");
@@ -847,81 +819,6 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                     }
                 }
 
-                /*
-                // Logger.getLogger(this.getClass()).info(url.toString());
-                boolean useTempFile = false;
-                int responseCode = 0;
-                URLConnection httpConn = null;
-
-                if (temporaryFile != null && temporaryFile.length() > 100) {
-                    useTempFile = true;
-                } else {
-                    cardImageSource.doPause(url.getPath());
-                    httpConn = url.openConnection(p);
-                    httpConn.connect();
-                    responseCode = ((HttpURLConnection) httpConn).getResponseCode();
-                }
-
-                if (responseCode == 200 || useTempFile) {
-                    if (!useTempFile) {
-                        BufferedOutputStream out;
-                        try (BufferedInputStream in = new BufferedInputStream(httpConn.getInputStream())) {
-                            //try (BufferedInputStream in = new BufferedInputStream(url.openConnection(p).getInputStream())) {
-                            out = new BufferedOutputStream(new TFileOutputStream(temporaryFile));
-                            byte[] buf = new byte[1024];
-                            int len;
-                            while ((len = in.read(buf)) != -1) {
-                                // user cancelled
-                                if (cancel) {
-                                    in.close();
-                                    out.flush();
-                                    out.close();
-                                    temporaryFile.delete();
-                                    return;
-                                }
-                                out.write(buf, 0, len);
-                            }
-
-                        }
-                        out.flush();
-                        out.close();
-                    }
-
-                    // TODO: WTF?! start
-                    if (card != null && card.isTwoFacedCard()) {
-                        BufferedImage image = ImageIO.read(temporaryFile);
-                        if (image.getHeight() == 470) {
-                            BufferedImage renderedImage = new BufferedImage(265, 370, BufferedImage.TYPE_INT_RGB);
-                            renderedImage.getGraphics();
-                            Graphics2D graphics2D = renderedImage.createGraphics();
-                            if (card.isTwoFacedCard() && card.isSecondSide()) {
-                                graphics2D.drawImage(image, 0, 0, 265, 370, 313, 62, 578, 432, null);
-                            } else {
-                                graphics2D.drawImage(image, 0, 0, 265, 370, 41, 62, 306, 432, null);
-                            }
-                            graphics2D.dispose();
-                            writeImageToFile(renderedImage, outputFile);
-                        } else {
-                            outputFile.getParentFile().mkdirs();
-                            new TFile(temporaryFile).cp_rp(outputFile);
-                        }
-                        //temporaryFile.delete();
-                    } else {
-                        outputFile.getParentFile().mkdirs();
-                        new TFile(temporaryFile).cp_rp(outputFile);
-                    }
-                    // WTF?! end
-                } else {
-                    if (card != null && !useSpecifiedPaths) {
-                        logger.warn("Image download for " + card.getName()
-                                + (!card.getDownloadName().equals(card.getName()) ? " downloadname: " + card.getDownloadName() : "")
-                                + '(' + card.getSet() + ") failed - responseCode: " + responseCode + " url: " + url.toString());
-                    }
-                    if (logger.isDebugEnabled()) { // Shows the returned html from the request to the web server
-                        logger.debug("Returned HTML ERROR:\n" + convertStreamToString(((HttpURLConnection) httpConn).getErrorStream()));
-                    }
-                }
-                 */
             } catch (AccessDeniedException e) {
                 logger.error("Can't access to files: " + card.getName() + "(" + card.getSet() + "). Try rebooting your system to remove the file lock.");
             } catch (Exception e) {
@@ -933,26 +830,6 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                 update(cardIndex + 1, count);
             }
         }
-
-//        private void writeImageToFile(BufferedImage image, TFile file) throws IOException {
-//            Iterator iter = ImageIO.getImageWritersByFormatName("jpg");
-//
-//            ImageWriter writer = (ImageWriter) iter.next();
-//            ImageWriteParam iwp = writer.getDefaultWriteParam();
-//            iwp.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
-//            iwp.setCompressionQuality(0.96f);
-//
-//            File tempFile = new File(getImagesDir() + File.separator + image.hashCode() + file.getName());
-//            FileImageOutputStream output = new FileImageOutputStream(tempFile);
-//            writer.setOutput(output);
-//            IIOImage image2 = new IIOImage(image, null, null);
-//            writer.write(null, image2, iwp);
-//            writer.dispose();
-//            output.close();
-//
-//            new TFile(tempFile).cp_rp(file);
-//            tempFile.delete();
-//        }
     }
 
     private void update(int card, int count) {
