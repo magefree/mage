@@ -67,6 +67,10 @@ public class ManaPieChart extends JComponent {
         for (int i = 0; i < slices.length; i++) {
             total += slices[i].value;
         }
+        
+        if (total == 0.0D) {
+            return; //there are no slices or no slices with a value > 0, stop here
+        }
 
         double curValue = 0.0D;
         int startAngle = 0;
