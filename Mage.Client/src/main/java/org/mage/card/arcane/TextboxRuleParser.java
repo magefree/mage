@@ -13,7 +13,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import mage.view.CardView;
 import org.apache.log4j.Logger;
-import org.apache.log4j.jmx.LoggerDynamicMBean;
 
 /**
  *

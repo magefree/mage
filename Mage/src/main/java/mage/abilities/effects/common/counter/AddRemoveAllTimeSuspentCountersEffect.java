@@ -29,6 +29,7 @@ package mage.abilities.effects.common.counter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -98,7 +99,7 @@ public class AddRemoveAllTimeSuspentCountersEffect extends OneShotEffect {
                 if (!game.isSimulation()) {
                     game.informPlayers(new StringBuilder(sourceObject.getName()).append(": ")
                             .append(controller.getLogName()).append(actionStr)
-                            .append(counter.getCount()).append(' ').append(counterName.toLowerCase())
+                            .append(counter.getCount()).append(' ').append(counterName.toLowerCase(Locale.ENGLISH))
                             .append(" counter on ").append(card.getName()).toString());
                 }
             }
@@ -110,9 +111,9 @@ public class AddRemoveAllTimeSuspentCountersEffect extends OneShotEffect {
         final String actionsStr2 = removeCounter ? "remove " : " put ";
         sb.append(actionsStr2);
         if (counter.getCount() > 1) {
-            sb.append(Integer.toString(counter.getCount())).append(' ').append(counter.getName().toLowerCase()).append(" counters on each ");
+            sb.append(Integer.toString(counter.getCount())).append(' ').append(counter.getName().toLowerCase(Locale.ENGLISH)).append(" counters on each ");
         } else {
-            sb.append("a ").append(counter.getName().toLowerCase()).append(" counter on each ");
+            sb.append("a ").append(counter.getName().toLowerCase(Locale.ENGLISH)).append(" counter on each ");
         }
         sb.append(filter.getMessage());
         staticText = sb.toString();

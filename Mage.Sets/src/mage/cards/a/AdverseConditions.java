@@ -28,7 +28,6 @@
 package mage.cards.a;
 
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
@@ -50,9 +49,7 @@ public class AdverseConditions extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{U}");
 
         // Devoid
-        Ability ability = new DevoidAbility(this.color);
-        ability.setRuleAtTheTop(true);
-        this.addAbility(ability);
+        this.addAbility(new DevoidAbility(this.color));
 
         // Tap up to two target creatures. Those creatures don't untap during their controller's next untap step.
         this.getSpellAbility().addEffect(new TapTargetEffect());

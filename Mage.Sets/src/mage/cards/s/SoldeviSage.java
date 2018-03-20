@@ -33,21 +33,13 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
+import mage.abilities.effects.common.DrawDiscardOneOfThemEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.TargetCard;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -65,7 +57,7 @@ public class SoldeviSage extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {tap}, Sacrifice two lands: Draw three cards, then discard one of them.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SoldeviSageEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardOneOfThemEffect(3), new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(2, 2, new FilterControlledLandPermanent("two lands"), true)));
         this.addAbility(ability);
     }
@@ -78,51 +70,4 @@ public class SoldeviSage extends CardImpl {
     public SoldeviSage copy() {
         return new SoldeviSage(this);
     }
-}
-
-class SoldeviSageEffect extends OneShotEffect {
-
-    public SoldeviSageEffect() {
-        super(Outcome.DrawCard);
-        this.staticText = "Draw three cards, then discard one of them";
-    }
-
-    public SoldeviSageEffect(final SoldeviSageEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public SoldeviSageEffect copy() {
-        return new SoldeviSageEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            Cards initialHand = player.getHand().copy();
-            player.drawCards(3, game);
-            Cards drawnCards = new CardsImpl();
-            for (UUID cardId : player.getHand()) {
-                if (!initialHand.contains(cardId)) {
-                    drawnCards.add(cardId);
-                }
-            }
-
-            if (!drawnCards.isEmpty()) {
-                TargetCard cardToDiscard = new TargetCard(Zone.HAND, new FilterCard("card to discard"));
-                cardToDiscard.setNotTarget(true);
-                if (player.choose(Outcome.Discard, drawnCards, cardToDiscard, game)) {
-                    Card card = player.getHand().get(cardToDiscard.getFirstTarget(), game);
-                    if (card != null) {
-                        return player.discard(card, source, game);
-                    }
-                }
-            }
-
-            return true;
-        }
-        return false;
-    }
-
 }

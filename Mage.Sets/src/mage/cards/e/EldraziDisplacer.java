@@ -58,7 +58,7 @@ public class EldraziDisplacer extends CardImpl {
     }
 
     public EldraziDisplacer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
         this.subtype.add(SubType.ELDRAZI);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
@@ -69,7 +69,6 @@ public class EldraziDisplacer extends CardImpl {
         // {2}{C}: Exile another target creature, then return it to the battlefield tapped under its owner's control.
         Effect effect = new ExileTargetForSourceEffect();
         effect.setText("Exile another target creature");
-        effect.setApplyEffectsAfter(); // Needed to let temporary continuous effects end if a permanent is blinked
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{2}{C}"));
         effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect(true);
         effect.setText(", then return it to the battlefield tapped under its owner's control");

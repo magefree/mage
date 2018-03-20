@@ -44,7 +44,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -56,7 +56,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public class EbonPraetor extends CardImpl {
 
     public EbonPraetor(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
         this.subtype.add(SubType.AVATAR);
         this.subtype.add(SubType.PRAETOR);
         this.power = new MageInt(5);
@@ -73,7 +73,7 @@ public class EbonPraetor extends CardImpl {
 
         // Sacrifice a creature: Remove a -2/-2 counter from Ebon Praetor. If the sacrificed creature was a Thrull, put a +1/+0 counter on Ebon Praetor. Activate this ability only during your upkeep and only once each turn.
         Ability ability = new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new RemoveCounterSourceEffect(CounterType.M2M2.createInstance()),
-                new SacrificeTargetCost(new TargetControlledCreaturePermanent(new FilterControlledCreaturePermanent("a creature"))), 1, new IsStepCondition(PhaseStep.UPKEEP, true));
+                new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)), 1, new IsStepCondition(PhaseStep.UPKEEP, true));
         ability.addEffect(new EbonPraetorEffect());
         this.addAbility(ability);
     }

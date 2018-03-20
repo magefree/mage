@@ -27,6 +27,7 @@
  */
 package mage.cards.b;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -39,13 +40,12 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
-
-import java.util.UUID;
 
 /**
  *
@@ -58,9 +58,9 @@ public class BlightedShaman extends CardImpl {
     static {
         filterSwamp.add(new SubtypePredicate(SubType.SWAMP));
     }
-    
+
     public BlightedShaman(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
         this.subtype.add(SubType.HUMAN, SubType.CLERIC, SubType.SHAMAN);
 
         this.power = new MageInt(1);
@@ -71,10 +71,10 @@ public class BlightedShaman extends CardImpl {
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filterSwamp)));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
-        
+
         // {tap}, Sacrifice a creature: Target creature gets +2/+2 until end of turn.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(2, 2, Duration.EndOfTurn), new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

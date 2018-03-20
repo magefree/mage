@@ -101,9 +101,13 @@ class BuildersBaneEffect extends OneShotEffect {
             Permanent permanent = game.getPermanent(targetID);
             if (permanent != null) {
                 if (permanent.destroy(source.getSourceId(), game, false)) {
-                    if (game.getState().getZone(permanent.getId()) == Zone.GRAVEYARD) {
-                        destroyedArtifactPerPlayer.merge(permanent.getControllerId(), 1, Integer::sum);
+                    game.applyEffects();
+                    if (permanent.getZoneChangeCounter(game) + 1 == game.getState().getZoneChangeCounter(permanent.getId())
+                            && !game.getState().getZone(permanent.getId()).equals(Zone.GRAVEYARD)) {
+                        // A replacement effect has moved the card to another zone as grvayard
+                        continue;
                     }
+                    destroyedArtifactPerPlayer.merge(permanent.getControllerId(), 1, Integer::sum);
                 }
             }
         }
@@ -111,7 +115,7 @@ class BuildersBaneEffect extends OneShotEffect {
         // Builder's Bane deals damage to each player equal to the number of artifacts he or she controlled put into a graveyard this way.
         for (Map.Entry<UUID, Integer> entry : destroyedArtifactPerPlayer.entrySet()) {
             Player player = game.getPlayer(entry.getKey());
-            if(player != null) {
+            if (player != null) {
                 player.damage(entry.getValue(), source.getSourceId(), game, false, true);
             }
         }

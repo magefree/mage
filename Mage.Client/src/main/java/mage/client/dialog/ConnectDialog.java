@@ -51,11 +51,9 @@ import java.net.URL;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
@@ -723,14 +721,14 @@ public class ConnectDialog extends MageDialog {
 
     }//GEN-LAST:event_btnFind2findPublicServerActionPerformed
 
-    private void connectXmageus(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_connecXmageusW
+    private void connectXmageus(java.awt.event.ActionEvent evt) {                                
         String serverAddress = "xmage.us";
         this.txtServer.setText(serverAddress);
         this.txtPort.setText("17171");
         // Update userName and password according to the chosen server.
         this.txtUserName.setText(MagePreferences.getUserName(serverAddress));
         this.txtPassword.setText(MagePreferences.getPassword(serverAddress));
-    }//GEN-LAST:event_connectXmageus
+    }                               
 
     private void btnFlagSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFlagSearchActionPerformed
         doFastFlagSearch();

@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.d;
 
 import java.util.UUID;
@@ -37,9 +36,10 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -48,8 +48,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class DrossHopper extends CardImpl {
 
-    public DrossHopper (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
+    public DrossHopper(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
         this.subtype.add(SubType.INSECT);
         this.subtype.add(SubType.HORROR);
 
@@ -57,10 +57,10 @@ public class DrossHopper extends CardImpl {
         this.toughness = new MageInt(1);
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn),
-                new SacrificeTargetCost(new TargetControlledCreaturePermanent())));
+                new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT))));
     }
 
-    public DrossHopper (final DrossHopper card) {
+    public DrossHopper(final DrossHopper card) {
         super(card);
     }
 

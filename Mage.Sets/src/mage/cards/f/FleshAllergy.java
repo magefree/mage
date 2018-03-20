@@ -39,6 +39,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -56,11 +57,11 @@ import mage.watchers.Watcher;
 public class FleshAllergy extends CardImpl {
 
     public FleshAllergy(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
 
         // As an additional cost to cast Flesh Allergy, sacrifice a creature.
         // Destroy target creature. Its controller loses life equal to the number of creatures that died this turn.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new FleshAllergyEffect());

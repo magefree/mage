@@ -37,9 +37,10 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.ColoredManaSymbol;
+import mage.constants.SubType;
 import mage.constants.Zone;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -50,13 +51,13 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public class ScorchedRusalka extends CardImpl {
 
     public ScorchedRusalka(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}");
         this.subtype.add(SubType.SPIRIT);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ColoredManaCost(ColoredManaSymbol.R));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

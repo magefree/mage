@@ -54,7 +54,7 @@ public class PulmonicSliver extends CardImpl {
     private static final FilterPermanent filterSlivers = new FilterPermanent(SubType.SLIVER, "All Slivers");
 
     public PulmonicSliver(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
         this.subtype.add(SubType.SLIVER);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
@@ -65,7 +65,7 @@ public class PulmonicSliver extends CardImpl {
                 filter, "All Sliver creatures have flying.")));
         // All Slivers have "If this permanent would be put into a graveyard, you may put it on top of its owner's library instead."
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(
-                new PutIntoGraveFromAnywhereSourceAbility(new ReturnToLibraryPermanentEffect(true)), Duration.WhileOnBattlefield,
+                new PutIntoGraveFromAnywhereSourceAbility(new ReturnToLibraryPermanentEffect(true), null, null, false, true), Duration.WhileOnBattlefield,
                 filterSlivers, "All Slivers have \"If this permanent would be put into a graveyard, you may put it on top of its owner's library instead.\"")));
     }
 

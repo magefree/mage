@@ -6,6 +6,7 @@ import java.awt.FlowLayout;
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
@@ -77,7 +78,7 @@ public class ColorsChooser extends JComboBox implements ListCellRenderer {
 
     private void drawOn(JPanel panel, String value) {
         List<Image> images = new ArrayList<>();
-        value = value.toUpperCase();
+        value = value.toUpperCase(Locale.ENGLISH);
         for (int i = 0; i < value.length(); i++) {
             char symbol = value.charAt(i);
             Image image = ManaSymbols.getSizedManaSymbol(String.valueOf(symbol));

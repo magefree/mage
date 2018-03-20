@@ -28,7 +28,6 @@
 package mage.cards.c;
 
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.keyword.DevoidAbility;
 import mage.cards.CardImpl;
@@ -52,12 +51,10 @@ public class CompleteDisregard extends CardImpl {
     }
 
     public CompleteDisregard(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{B}");
 
         // Devoid
-        Ability ability = new DevoidAbility(this.color);
-        ability.setRuleAtTheTop(true);
-        this.addAbility(ability);
+        this.addAbility(new DevoidAbility(this.color));
 
         // Exile target creature with power 3 or less.
         this.getSpellAbility().addEffect(new ExileTargetEffect());

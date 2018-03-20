@@ -41,6 +41,7 @@ import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -60,7 +61,7 @@ public class FieryBombardment extends CardImpl {
         // Chroma - {2}, Sacrifice a creature: Fiery Bombardment deals damage to target creature or player equal to the number of red mana symbols in the sacrificed creature's mana cost.
         Effect effect = new FieryBombardmentEffect();
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{2}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         ability.addTarget(new TargetCreatureOrPlayer());
         ability.setAbilityWord(AbilityWord.CHROMA);
         this.addAbility(ability);

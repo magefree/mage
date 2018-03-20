@@ -28,7 +28,6 @@
 package mage.cards.t;
 
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
@@ -47,12 +46,11 @@ import mage.target.common.TargetCreaturePermanent;
 public class TurnAgainst extends CardImpl {
 
     public TurnAgainst(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{4}{R}");
 
         // Devoid
-        Ability ability = new DevoidAbility(this.color);
-        ability.setRuleAtTheTop(true);
-        this.addAbility(ability);
+        this.addAbility(new DevoidAbility(this.color));
+
         // Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.EndOfTurn));

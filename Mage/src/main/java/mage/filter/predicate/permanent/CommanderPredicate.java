@@ -5,7 +5,6 @@
  */
 package mage.filter.predicate.permanent;
 
-import mage.constants.CardType;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;

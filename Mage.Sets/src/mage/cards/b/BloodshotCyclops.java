@@ -39,6 +39,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreatureOrPlayer;
 
@@ -49,7 +50,7 @@ import mage.target.common.TargetCreatureOrPlayer;
 public class BloodshotCyclops extends CardImpl {
 
     public BloodshotCyclops(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{R}");
         this.subtype.add(SubType.CYCLOPS, SubType.GIANT);
 
         this.power = new MageInt(4);
@@ -60,7 +61,7 @@ public class BloodshotCyclops extends CardImpl {
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new DamageTargetEffect(new SacrificeCostCreaturesPower()),
                 new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
     }

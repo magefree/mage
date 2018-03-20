@@ -1,7 +1,5 @@
 package mage.constants;
 
-import mage.game.turn.Phase;
-
 /**
  *
  * @author North

@@ -126,8 +126,8 @@ public class FlashbackAbility extends SpellAbility {
                 spellAbilityCopy.setId(this.getId());
                 spellAbilityCopy.getManaCosts().clear();
                 spellAbilityCopy.getManaCostsToPay().clear();
-                spellAbilityCopy.getCosts().addAll(this.getCosts());
-                spellAbilityCopy.addCost(this.getManaCosts());
+                spellAbilityCopy.getCosts().addAll(this.getCosts().copy());
+                spellAbilityCopy.addCost(this.getManaCosts().copy());
                 spellAbilityCopy.setSpellAbilityCastMode(this.getSpellAbilityCastMode());
                 spellAbilityToResolve = spellAbilityCopy;
                 ContinuousEffect effect = new FlashbackReplacementEffect();

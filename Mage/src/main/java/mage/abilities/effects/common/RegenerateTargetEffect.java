@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.effects.common;
 
-import mage.constants.Duration;
-import mage.constants.Outcome;
+import java.util.Locale;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ReplacementEffectImpl;
+import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -43,9 +43,9 @@ import mage.target.Target;
  *
  * @author maurer.it_at_gmail.com
  */
-public class RegenerateTargetEffect  extends ReplacementEffectImpl {
+public class RegenerateTargetEffect extends ReplacementEffectImpl {
 
-    public RegenerateTargetEffect ( ) {
+    public RegenerateTargetEffect() {
         super(Duration.EndOfTurn, Outcome.Regenerate);
     }
 
@@ -82,7 +82,7 @@ public class RegenerateTargetEffect  extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         //20110204 - 701.11c - event.getAmount() is used to signal if regeneration is allowed
-        
+
         return event.getAmount() == 0 && event.getTargetId().equals(targetPointer.getFirst(game, source)) && !this.used;
     }
 
@@ -95,7 +95,7 @@ public class RegenerateTargetEffect  extends ReplacementEffectImpl {
         sb.append("Regenerate ");
         Target target = mode.getTargets().get(0);
         if (target != null) {
-            if (!target.getTargetName().toLowerCase().startsWith("another")) {
+            if (!target.getTargetName().toLowerCase(Locale.ENGLISH).startsWith("another")) {
                 sb.append("target ");
             }
             sb.append(target.getTargetName());

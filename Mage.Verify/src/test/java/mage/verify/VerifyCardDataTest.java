@@ -277,8 +277,8 @@ public class VerifyCardDataTest {
             for (String token : tokens) {
                 if (!(token.equals(card.getName())
                         || containsInTypesOrText(ref, token)
-                        || containsInTypesOrText(ref, token.toLowerCase())
-                        || (ref2 != null && (containsInTypesOrText(ref2, token) || containsInTypesOrText(ref2, token.toLowerCase()))))) {
+                        || containsInTypesOrText(ref, token.toLowerCase(Locale.ENGLISH))
+                        || (ref2 != null && (containsInTypesOrText(ref2, token) || containsInTypesOrText(ref2, token.toLowerCase(Locale.ENGLISH)))))) {
                     System.out.println("unexpected token " + token + " in " + card);
                 }
             }

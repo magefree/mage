@@ -40,15 +40,14 @@ import mage.game.permanent.token.AngelToken;
 /**
  *
  * @author noxx
-
+ *
  */
 public class EntreatTheAngels extends CardImpl {
 
     public EntreatTheAngels(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{X}{W}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{X}{W}{W}{W}");
 
-
-        // create X 4/4 white Angel creature tokens with flying.
+        // Create X 4/4 white Angel creature tokens with flying.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new AngelToken(), new ManacostVariableValue()));
 
         // Miracle {X}{W}{W}

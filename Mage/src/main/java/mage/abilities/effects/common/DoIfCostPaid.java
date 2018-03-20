@@ -1,5 +1,6 @@
 package mage.abilities.effects.common;
 
+import java.util.Locale;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -88,8 +89,7 @@ public class DoIfCostPaid extends OneShotEffect {
                         }
                     }
                     player.resetStoredBookmark(game); // otherwise you can e.g. undo card drawn with Mentor of the Meek
-                }
-                else if (!otherwiseEffects.isEmpty()) {
+                } else if (!otherwiseEffects.isEmpty()) {
                     for (Effect effect : otherwiseEffects) {
                         effect.setTargetPointer(this.targetPointer);
                         if (effect instanceof OneShotEffect) {
@@ -99,8 +99,7 @@ public class DoIfCostPaid extends OneShotEffect {
                         }
                     }
                 }
-            }
-            else if (!otherwiseEffects.isEmpty()) {
+            } else if (!otherwiseEffects.isEmpty()) {
                 for (Effect effect : otherwiseEffects) {
                     effect.setTargetPointer(this.targetPointer);
                     if (effect instanceof OneShotEffect) {
@@ -135,12 +134,12 @@ public class DoIfCostPaid extends OneShotEffect {
         StringBuilder sb = new StringBuilder();
         String costText = cost.getText();
         if (costText != null
-                && !costText.toLowerCase().startsWith("put")
-                && !costText.toLowerCase().startsWith("exile")
-                && !costText.toLowerCase().startsWith("discard")
-                && !costText.toLowerCase().startsWith("sacrifice")
-                && !costText.toLowerCase().startsWith("remove")
-                && !costText.toLowerCase().startsWith("pay")) {
+                && !costText.toLowerCase(Locale.ENGLISH).startsWith("put")
+                && !costText.toLowerCase(Locale.ENGLISH).startsWith("exile")
+                && !costText.toLowerCase(Locale.ENGLISH).startsWith("discard")
+                && !costText.toLowerCase(Locale.ENGLISH).startsWith("sacrifice")
+                && !costText.toLowerCase(Locale.ENGLISH).startsWith("remove")
+                && !costText.toLowerCase(Locale.ENGLISH).startsWith("pay")) {
             sb.append("pay ");
         }
         return sb.append(costText).toString();

@@ -1098,10 +1098,10 @@ public abstract class PlayerImpl implements Player, Serializable {
             return false;
         }
 
-        game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PLAY_LAND, card.getId(), card.getId(), playerId));
         //20091005 - 305.1
         if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.PLAY_LAND, card.getId(), card.getId(), playerId))) {
             // int bookmark = game.bookmarkState();
+            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PLAY_LAND, card.getId(), card.getId(), playerId));
             if (moveCards(card, Zone.BATTLEFIELD, playLandAbility, game, false, false, false, null)) {
                 landsPlayed++;
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LAND_PLAYED, card.getId(), card.getId(), playerId));

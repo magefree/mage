@@ -27,10 +27,10 @@
  */
 package mage.cards.decks.importer;
 
-import mage.cards.decks.DeckCardLists;
-
 import java.io.File;
+import java.util.Locale;
 import java.util.Scanner;
+import mage.cards.decks.DeckCardLists;
 
 /**
  *
@@ -40,7 +40,7 @@ public final class DeckImporterUtil {
 
     public static final String[] SIDEBOARD_MARKS = new String[]{"//sideboard", "sb: "};
 
-    public static boolean haveSideboardSection(String file){
+    public static boolean haveSideboardSection(String file) {
         // search for sideboard section:
         // or //sideboard
         // or SB: 1 card name -- special deckstats.net
@@ -48,10 +48,10 @@ public final class DeckImporterUtil {
         File f = new File(file);
         try (Scanner scanner = new Scanner(f)) {
             while (scanner.hasNextLine()) {
-                String line = scanner.nextLine().trim().toLowerCase();
+                String line = scanner.nextLine().trim().toLowerCase(Locale.ENGLISH);
 
-                for(String mark: SIDEBOARD_MARKS){
-                    if (line.startsWith(mark)){
+                for (String mark : SIDEBOARD_MARKS) {
+                    if (line.startsWith(mark)) {
                         return true;
                     }
                 }
@@ -65,15 +65,15 @@ public final class DeckImporterUtil {
     }
 
     public static DeckImporter getDeckImporter(String file) {
-        if (file.toLowerCase().endsWith("dec")) {
+        if (file.toLowerCase(Locale.ENGLISH).endsWith("dec")) {
             return new DecDeckImporter();
-        } else if (file.toLowerCase().endsWith("mwdeck")) {
+        } else if (file.toLowerCase(Locale.ENGLISH).endsWith("mwdeck")) {
             return new MWSDeckImporter();
-        } else if (file.toLowerCase().endsWith("txt")) {
+        } else if (file.toLowerCase(Locale.ENGLISH).endsWith("txt")) {
             return new TxtDeckImporter(haveSideboardSection(file));
-        } else if (file.toLowerCase().endsWith("dck")) {
+        } else if (file.toLowerCase(Locale.ENGLISH).endsWith("dck")) {
             return new DckDeckImporter();
-        } else if (file.toLowerCase().endsWith("dek")) {
+        } else if (file.toLowerCase(Locale.ENGLISH).endsWith("dek")) {
             return new DekDeckImporter();
         } else {
             return null;

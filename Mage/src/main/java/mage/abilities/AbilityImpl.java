@@ -220,10 +220,8 @@ public abstract class AbilityImpl implements Ability {
                  * too late Example:
                  * {@link org.mage.test.cards.replacement.DryadMilitantTest#testDiesByDestroy testDiesByDestroy}
                  */
-                if (effect.applyEffectsAfter()) {
-                    game.applyEffects();
-                    game.getState().getTriggers().checkStateTriggers(game);
-                }
+                game.applyEffects();
+                game.getState().getTriggers().checkStateTriggers(game);
             }
         }
         return result;

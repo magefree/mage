@@ -27,6 +27,10 @@
  */
 package mage.game.permanent.token;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.UUID;
 import mage.MageObject;
 import mage.MageObjectImpl;
 import mage.ObjectColor;
@@ -44,10 +48,6 @@ import mage.game.permanent.PermanentToken;
 import mage.players.Player;
 import mage.util.RandomUtil;
 import mage.util.SubTypeList;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 public class Token extends MageObjectImpl {
 
@@ -134,7 +134,7 @@ public class Token extends MageObjectImpl {
         String cardType = this.cardType.toString().replaceAll("[^a-zA-Z0-9]", "");
         String originalset = this.getOriginalExpansionSetCode();
         String descriptor = name + '.' + color + '.' + subtype + '.' + cardType + '.' + this.power + '.' + this.toughness;
-        descriptor = descriptor.toUpperCase();
+        descriptor = descriptor.toUpperCase(Locale.ENGLISH);
         return descriptor;
     }
 

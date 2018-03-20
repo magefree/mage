@@ -44,7 +44,6 @@ import mage.view.CardsView;
 import org.apache.log4j.Logger;
 import org.jdesktop.swingx.JXPanel;
 import org.mage.card.arcane.ManaSymbols;
-import org.mage.card.arcane.UI;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;

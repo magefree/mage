@@ -51,7 +51,7 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -64,7 +64,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class VishKalBloodArbiter extends CardImpl {
 
     public VishKalBloodArbiter(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}{B}{B}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.VAMPIRE);
 
@@ -78,7 +78,7 @@ public class VishKalBloodArbiter extends CardImpl {
         // Sacrifice a creature: Put X +1/+1 counters on Vish Kal, Blood Arbiter, where X is the sacrificed creature's power.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance(0), new SacrificeCostCreaturesPower(), true),
-                new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1,new FilterControlledCreaturePermanent("a creature"), false))));
+                new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT))));
         // Remove all +1/+1 counters from Vish Kal: Target creature gets -1/-1 until end of turn for each +1/+1 counter removed this way.
         DynamicValue removedCounters = new SignInversionDynamicValue(new VishKalBloodArbiterDynamicValue());
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(removedCounters, removedCounters, Duration.EndOfTurn), new VishKalBloodArbiterCost(CounterType.P1P1.createInstance()));
@@ -126,9 +126,7 @@ class VishKalBloodArbiterCost extends CostImpl {
             this.amount = permanent.getCounters(game).getCount(name);
             permanent.removeCounters(name, amount, game);
             this.paid = true;
-        }
-        else
-        {
+        } else {
             this.amount = 0;
         }
         return paid;
@@ -143,11 +141,9 @@ class VishKalBloodArbiterCost extends CostImpl {
         return amount;
     }
 
-
 }
 
 class VishKalBloodArbiterDynamicValue implements DynamicValue {
-
 
     public VishKalBloodArbiterDynamicValue() {
 
@@ -159,9 +155,9 @@ class VishKalBloodArbiterDynamicValue implements DynamicValue {
     @Override
     public int calculate(Game game, Ability source, Effect effect) {
         int count = 0;
-        for(Cost cost : source.getCosts()){
-            if(cost instanceof VishKalBloodArbiterCost){
-                count += ((VishKalBloodArbiterCost)cost).getAmount();
+        for (Cost cost : source.getCosts()) {
+            if (cost instanceof VishKalBloodArbiterCost) {
+                count += ((VishKalBloodArbiterCost) cost).getAmount();
             }
         }
         return count;

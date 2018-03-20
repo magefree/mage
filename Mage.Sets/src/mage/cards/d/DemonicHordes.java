@@ -27,6 +27,7 @@
  */
 package mage.cards.d;
 
+import java.util.Locale;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -40,8 +41,8 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
@@ -61,7 +62,7 @@ import mage.target.common.TargetOpponent;
 public class DemonicHordes extends CardImpl {
 
     public DemonicHordes(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}{B}");
         this.subtype.add(SubType.DEMON);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
@@ -106,7 +107,7 @@ class DemonicHordesEffect extends OneShotEffect {
         Permanent demonicHordes = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (controller != null && demonicHordes != null) {
             StringBuilder sb = new StringBuilder(cost.getText()).append('?');
-            if (!sb.toString().toLowerCase().startsWith("exile ") && !sb.toString().toLowerCase().startsWith("return ")) {
+            if (!sb.toString().toLowerCase(Locale.ENGLISH).startsWith("exile ") && !sb.toString().toLowerCase(Locale.ENGLISH).startsWith("return ")) {
                 sb.insert(0, "Pay ");
             }
             if (controller.chooseUse(Outcome.Benefit, sb.toString(), source, game)) {

@@ -28,6 +28,7 @@
 package mage.filter.predicate.other;
 
 import java.util.HashMap;
+import java.util.Locale;
 import mage.cards.Card;
 import mage.cards.SplitCard;
 import mage.constants.SubType;
@@ -70,7 +71,7 @@ public class CardTextPredicate implements Predicate<Card> {
         }
 
         // first check in card name
-        if (inNames && input.getName().toLowerCase().contains(text.toLowerCase())) {
+        if (inNames && input.getName().toLowerCase(Locale.ENGLISH).contains(text.toLowerCase(Locale.ENGLISH))) {
             if (isUnique && seenCards.keySet().contains(input.getName())) {
                 return false;
             }
@@ -81,7 +82,7 @@ public class CardTextPredicate implements Predicate<Card> {
         }
 
         //separate by spaces
-        String[] tokens = text.toLowerCase().split(" ");
+        String[] tokens = text.toLowerCase(Locale.ENGLISH).split(" ");
         for (String token : tokens) {
             boolean found = false;
             if (!token.isEmpty()) {
@@ -89,20 +90,20 @@ public class CardTextPredicate implements Predicate<Card> {
                 if (inRules) {
                     if (input.isSplitCard()) {
                         for (String rule : ((SplitCard) input).getLeftHalfCard().getRules(game)) {
-                            if (rule.toLowerCase().contains(token)) {
+                            if (rule.toLowerCase(Locale.ENGLISH).contains(token)) {
                                 found = true;
                                 break;
                             }
                         }
                         for (String rule : ((SplitCard) input).getRightHalfCard().getRules(game)) {
-                            if (rule.toLowerCase().contains(token)) {
+                            if (rule.toLowerCase(Locale.ENGLISH).contains(token)) {
                                 found = true;
                                 break;
                             }
                         }
                     }
                     for (String rule : input.getRules(game)) {
-                        if (rule.toLowerCase().contains(token)) {
+                        if (rule.toLowerCase(Locale.ENGLISH).contains(token)) {
                             found = true;
                             break;
                         }

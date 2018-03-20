@@ -28,7 +28,6 @@
 package mage.cards.p;
 
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.costs.common.ExileOpponentsCardFromExileToGraveyardCost;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.DevoidAbility;
@@ -44,12 +43,10 @@ import mage.target.common.TargetCreaturePermanent;
 public class ProcessorAssault extends CardImpl {
 
     public ProcessorAssault(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{R}");
 
         // Devoid
-        Ability ability = new DevoidAbility(this.color);
-        ability.setRuleAtTheTop(true);
-        this.addAbility(ability);
+        this.addAbility(new DevoidAbility(this.color));
 
         // As an additional cost to cast Processor Assault, put a card an opponent owns from exile into its owner's graveyard.
         this.getSpellAbility().addCost(new ExileOpponentsCardFromExileToGraveyardCost(false));

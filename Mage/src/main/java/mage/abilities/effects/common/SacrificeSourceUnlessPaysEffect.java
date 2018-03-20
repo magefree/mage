@@ -1,5 +1,6 @@
 package mage.abilities.effects.common;
 
+import java.util.Locale;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.costs.Cost;
@@ -34,7 +35,7 @@ public class SacrificeSourceUnlessPaysEffect extends OneShotEffect {
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (controller != null && sourcePermanent != null) {
             StringBuilder sb = new StringBuilder(cost.getText()).append('?');
-            if (!sb.toString().toLowerCase().startsWith("exile ") && !sb.toString().toLowerCase().startsWith("return ")) {
+            if (!sb.toString().toLowerCase(Locale.ENGLISH).startsWith("exile ") && !sb.toString().toLowerCase(Locale.ENGLISH).startsWith("return ")) {
                 sb.insert(0, "Pay ");
             }
             String message = CardUtil.replaceSourceName(sb.toString(), sourcePermanent.getLogName());
@@ -69,13 +70,13 @@ public class SacrificeSourceUnlessPaysEffect extends OneShotEffect {
 
         StringBuilder sb = new StringBuilder("sacrifice {this} unless you ");
         String costText = cost.getText();
-        if (costText.toLowerCase().startsWith("discard")
-                || costText.toLowerCase().startsWith("remove")
-                || costText.toLowerCase().startsWith("return")
-                || costText.toLowerCase().startsWith("put")
-                || costText.toLowerCase().startsWith("exile")
-                || costText.toLowerCase().startsWith("sacrifice")) {
-            sb.append(costText.substring(0, 1).toLowerCase());
+        if (costText.toLowerCase(Locale.ENGLISH).startsWith("discard")
+                || costText.toLowerCase(Locale.ENGLISH).startsWith("remove")
+                || costText.toLowerCase(Locale.ENGLISH).startsWith("return")
+                || costText.toLowerCase(Locale.ENGLISH).startsWith("put")
+                || costText.toLowerCase(Locale.ENGLISH).startsWith("exile")
+                || costText.toLowerCase(Locale.ENGLISH).startsWith("sacrifice")) {
+            sb.append(costText.substring(0, 1).toLowerCase(Locale.ENGLISH));
             sb.append(costText.substring(1));
         } else {
             sb.append("pay ").append(costText);

@@ -36,7 +36,6 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.cards.Card;
 import mage.cards.CardsImpl;
-import mage.constants.CardType;
 import mage.game.Game;
 import mage.players.Player;
 

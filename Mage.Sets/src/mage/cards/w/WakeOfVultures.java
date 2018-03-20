@@ -40,6 +40,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -49,7 +50,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public class WakeOfVultures extends CardImpl {
 
     public WakeOfVultures(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
         this.subtype.add(SubType.BIRD);
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
@@ -58,7 +59,7 @@ public class WakeOfVultures extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // {1}{B}, Sacrifice a creature: Regenerate Wake of Vultures.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{B}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         this.addAbility(ability);
     }
 

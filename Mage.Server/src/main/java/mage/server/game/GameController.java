@@ -1157,8 +1157,6 @@ public class GameController implements GameCallback {
         sb.append(state.getStack());
         sb.append("<br>getStepNum: ");
         sb.append(state.getStepNum());
-        sb.append("<br>getTriggers: ");
-        sb.append(state.getTriggers());
         sb.append("<br>getTurn: ");
         sb.append(state.getTurn());
         sb.append("<br>getTurnId: ");

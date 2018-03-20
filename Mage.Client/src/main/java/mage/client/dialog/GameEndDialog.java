@@ -1,16 +1,16 @@
 /*
  *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- * 
+ *
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
- * 
+ *
  *     1. Redistributions of source code must retain the above copyright notice, this list of
  *        conditions and the following disclaimer.
- * 
+ *
  *     2. Redistributions in binary form must reproduce the above copyright notice, this list
  *        of conditions and the following disclaimer in the documentation and/or other materials
  *        provided with the distribution.
- * 
+ *
  *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
  *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
  *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
@@ -20,18 +20,17 @@
  *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  *  The views and conclusions contained in the software and documentation are those of the
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-/*
+ /*
  * GameEndDialog.java
  *
  * Created on Jul 31, 2013, 9:41:00 AM
  */
-
 package mage.client.dialog;
 
 import java.awt.Color;
@@ -63,19 +62,21 @@ public class GameEndDialog extends MageDialog {
 
     private final DateFormat df = DateFormat.getDateTimeInstance();
 
-
-    /** Creates new form GameEndDialog
-     * @param gameEndView */
+    /**
+     * Creates new form GameEndDialog
+     *
+     * @param gameEndView
+     */
     public GameEndDialog(GameEndView gameEndView) {
 
         initComponents();
         this.modal = true;
 
         pnlText.setOpaque(true);
-        pnlText.setBackground(new Color(240,240,240,140));
-        
+        pnlText.setBackground(new Color(240, 240, 240, 140));
+
         Rectangle r = new Rectangle(610, 250);
-        Image image = ImageHelper.getImageFromResources(gameEndView.hasWon() ?"/game_won.jpg":"/game_lost.jpg");
+        Image image = ImageHelper.getImageFromResources(gameEndView.hasWon() ? "/game_won.jpg" : "/game_lost.jpg");
         BufferedImage imageResult = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
         ImageIcon icon = new ImageIcon(imageResult);
         lblResultImage.setIcon(icon);
@@ -90,15 +91,15 @@ public class GameEndDialog extends MageDialog {
         }
 
         // game duration
-        txtDurationGame.setText(Format.getDuration(gameEndView.getStartTime(), gameEndView.getEndTime()));
-        txtDurationGame.setToolTipText(new StringBuilder(df.format(gameEndView.getStartTime())).append(" - ").append(df.format(gameEndView.getEndTime())).toString() );
+        txtDurationGame.setText(" " + Format.getDuration(gameEndView.getStartTime(), gameEndView.getEndTime()));
+        txtDurationGame.setToolTipText(new StringBuilder(df.format(gameEndView.getStartTime())).append(" - ").append(df.format(gameEndView.getEndTime())).toString());
 
         // match duration
         Calendar cal = Calendar.getInstance();
-        txtDurationMatch.setText(Format.getDuration(gameEndView.getMatchView().getStartTime(), cal.getTime()));
-        txtDurationMatch.setToolTipText(new StringBuilder(df.format(gameEndView.getMatchView().getStartTime())).append(" - ").append(df.format(cal.getTime())).toString() );
+        txtDurationMatch.setText(" " + Format.getDuration(gameEndView.getMatchView().getStartTime(), cal.getTime()));
+        txtDurationMatch.setToolTipText(new StringBuilder(df.format(gameEndView.getMatchView().getStartTime())).append(" - ").append(df.format(cal.getTime())).toString());
 
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder(" ");
         for (PlayerView player : gameEndView.getPlayers()) {
             sb.append(player.getName()).append(" Life: ").append(player.getLife()).append(' ');
         }
@@ -117,15 +118,15 @@ public class GameEndDialog extends MageDialog {
         String dir = "gamelogs";
         File saveDir = new File(dir);
         //Here comes the existence check
-        if(!saveDir.exists()) {
+        if (!saveDir.exists()) {
             saveDir.mkdirs();
         }
         // get game log
-        try {            
-            GamePanel gamePanel = MageFrame.getGame(gameEndView.getMatchView().getGames().get(gameEndView.getMatchView().getGames().size()-1));
+        try {
+            GamePanel gamePanel = MageFrame.getGame(gameEndView.getMatchView().getGames().get(gameEndView.getMatchView().getGames().size() - 1));
             if (gamePanel != null) {
                 SimpleDateFormat sdf = new SimpleDateFormat();
-                sdf.applyPattern( "yyyyMMdd_HHmmss" );
+                sdf.applyPattern("yyyyMMdd_HHmmss");
                 String fileName = new StringBuilder(dir).append(File.separator)
                         .append(sdf.format(gameEndView.getStartTime()))
                         .append('_').append(gameEndView.getMatchView().getGameType())
@@ -146,10 +147,10 @@ public class GameEndDialog extends MageDialog {
         this.setVisible(true);
     }
 
-    /** This method is called from within the constructor to
-     * initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is
-     * always regenerated by the Form Editor.
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -223,6 +224,7 @@ public class GameEndDialog extends MageDialog {
 
         lblDurationGame.setText("Duration game:");
 
+        txtDurationGame.setText("Duration Game");
         txtDurationGame.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         lblLife.setText("Life at end:");
@@ -290,7 +292,11 @@ public class GameEndDialog extends MageDialog {
         tabPane.addTab("Statistics", tabStatistics);
 
         btnOk.setText("OK");
-        btnOk.addActionListener(evt -> btnOkActionPerformed(evt));
+        btnOk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOkActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

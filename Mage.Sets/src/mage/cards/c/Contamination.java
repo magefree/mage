@@ -39,7 +39,7 @@ import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -53,10 +53,11 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public class Contamination extends CardImpl {
 
     public Contamination(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
 
         // At the beginning of your upkeep, sacrifice Contamination unless you sacrifice a creature.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new SacrificeTargetCost(new TargetControlledCreaturePermanent(new FilterControlledCreaturePermanent("a creature")))), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(
+                new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT))), TargetController.YOU, false));
 
         // If a land is tapped for mana, it produces {B} instead of any other type and amount.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ContaminationReplacementEffect()));
@@ -100,12 +101,11 @@ class ContaminationReplacementEffect extends ReplacementEffectImpl {
         mana.setToMana(Mana.BlackMana(1));
         return false;
     }
-    
-    @Override    
+
+    @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == EventType.TAPPED_FOR_MANA;
     }
-    
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {

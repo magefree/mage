@@ -39,6 +39,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -48,7 +49,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public class DimirHouseGuard extends CardImpl {
 
     public DimirHouseGuard(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
         this.subtype.add(SubType.SKELETON);
 
         this.power = new MageInt(2);
@@ -56,7 +57,8 @@ public class DimirHouseGuard extends CardImpl {
 
         this.addAbility(FearAbility.getInstance());
         // Sacrifice a creature: Regenerate Dimir House Guard.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new SacrificeTargetCost(new TargetControlledCreaturePermanent())));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(),
+                new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT))));
         // Transmute {1}{B}{B}
         this.addAbility(new TransmuteAbility("{1}{B}{B}"));
     }

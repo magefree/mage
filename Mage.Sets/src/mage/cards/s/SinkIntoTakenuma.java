@@ -45,13 +45,12 @@ import mage.target.TargetPlayer;
 public class SinkIntoTakenuma extends CardImpl {
 
     public SinkIntoTakenuma(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{B}");
         this.subtype.add(SubType.ARCANE);
-
 
         // Sweep - Return any number of Swamps you control to their owner's hand. Target player discards a card for each Swamp returned this way.
         this.getSpellAbility().addEffect(new SweepEffect(SubType.SWAMP));
-        DynamicValue sweepValue = new SweepNumber("Swamp", false);
+        DynamicValue sweepValue = new SweepNumber("Swamp");
         this.getSpellAbility().addEffect(new DiscardTargetEffect(sweepValue));
         this.getSpellAbility().addTarget(new TargetPlayer());
     }

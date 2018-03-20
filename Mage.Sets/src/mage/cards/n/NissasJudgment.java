@@ -60,11 +60,10 @@ public class NissasJudgment extends CardImpl {
     }
 
     public NissasJudgment(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{G}");
 
         // Support 2.
         Effect effect = new SupportEffect(this, 2, false);
-        effect.setApplyEffectsAfter();
         getSpellAbility().addEffect(effect);
 
         // Choose up to one target creature an opponent controls. Each creature you control with a +1/+1 counter on it deals damage equal to its power to that creature.

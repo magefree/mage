@@ -59,6 +59,8 @@ public class Alliances extends ExpansionSet {
         cards.add(new SetCardInfo("Burnout", 68, Rarity.UNCOMMON, mage.cards.b.Burnout.class));
         cards.add(new SetCardInfo("Carrier Pigeons", "1a", Rarity.COMMON, mage.cards.c.CarrierPigeons.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Carrier Pigeons", "1b", Rarity.COMMON, mage.cards.c.CarrierPigeons.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Casting of Bones", "44a", Rarity.COMMON, mage.cards.c.CastingOfBones.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Casting of Bones", "44b", Rarity.COMMON, mage.cards.c.CastingOfBones.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Chaos Harlequin", 69, Rarity.RARE, mage.cards.c.ChaosHarlequin.class));
         cards.add(new SetCardInfo("Contagion", 45, Rarity.UNCOMMON, mage.cards.c.Contagion.class));
         cards.add(new SetCardInfo("Deadly Insect", "86a", Rarity.COMMON, mage.cards.d.DeadlyInsect.class, NON_FULL_USE_VARIOUS));
