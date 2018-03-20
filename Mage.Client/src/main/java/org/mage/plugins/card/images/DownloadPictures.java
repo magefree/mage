@@ -24,6 +24,7 @@ import mage.client.MageFrame;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.util.sets.ConstructedFormats;
 import mage.remote.Connection;
+import mage.util.StreamUtils;
 import net.java.truevfs.access.TFile;
 import net.java.truevfs.access.TFileOutputStream;
 import net.java.truevfs.access.TVFS;
@@ -782,18 +783,16 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                 if (responseCode == 200) {
                     // download OK
                     // save data to temp
-                    BufferedOutputStream out;
-                    try (BufferedInputStream in = new BufferedInputStream(httpConn.getInputStream())) {
+                    BufferedOutputStream out = null;
+                    BufferedInputStream in = null;
+                    try {
+                        in = new BufferedInputStream(httpConn.getInputStream());
                         out = new BufferedOutputStream(new TFileOutputStream(fileTempImage));
                         byte[] buf = new byte[1024];
                         int len;
                         while ((len = in.read(buf)) != -1) {
                             // user cancelled
                             if (cancel) {
-                                in.close();
-                                out.flush();
-                                out.close();
-
                                 // stop download, save current state and exit
                                 TFile archive = destFile.getTopLevelArchive();
                                 ///* not need to unmout/close - it's auto action
@@ -804,8 +803,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                                     } catch (Exception e) {
                                         logger.error("Can't close archive file: " + e.getMessage(), e);
                                     }
-
-                                }//*/
+                                }
                                 try {
                                     TFile.rm(fileTempImage);
                                 } catch (Exception e) {
@@ -816,9 +814,11 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                             out.write(buf, 0, len);
                         }
                     }
-                    // TODO: remove to finnaly section?
-                    out.flush();
-                    out.close();
+                    finally {
+                        StreamUtils.closeQuietly(in);
+                        StreamUtils.closeQuietly(out);
+                    }
+
 
                     // TODO: add two faces card correction? (WTF)
                     // SAVE final data
