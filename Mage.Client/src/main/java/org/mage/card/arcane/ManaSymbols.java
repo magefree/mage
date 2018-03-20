@@ -41,6 +41,7 @@ import mage.client.constants.Constants.ResourceSymbolSize;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.ImageHelper;
 import mage.client.util.gui.BufferedImageBuilder;
+import mage.utils.StreamUtils;
 import org.apache.batik.dom.svg.SVGDOMImplementation;
 import org.apache.batik.transcoder.TranscoderException;
 import org.apache.batik.transcoder.TranscoderInput;
@@ -249,10 +250,15 @@ public final class ManaSymbols {
                 + "color-rendering: optimizeQuality;"
                 + "image-rendering: optimizeQuality;"
                 + "}";
+
         File cssFile = File.createTempFile("batik-default-override-", ".css");
-        FileWriter w = new FileWriter(cssFile);
-        w.write(css);
-        w.close();
+        FileWriter w = null;
+        try {
+            w = new FileWriter(cssFile);
+            w.write(css);
+        } finally {
+            StreamUtils.closeQuietly(w);
+        }
 
         TranscodingHints transcoderHints = new TranscodingHints();
 
@@ -284,7 +290,6 @@ public final class ManaSymbols {
 
         try {
             TranscoderInput input = new TranscoderInput(new FileInputStream(svgFile));
-
             ImageTranscoder t = new ImageTranscoder() {
 
                 @Override
