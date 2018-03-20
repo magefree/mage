@@ -105,6 +105,7 @@ public abstract class MageObjectImpl implements MageObject {
         abilities = object.abilities.copy();
         this.cardType.addAll(object.cardType);
         this.subtype.addAll(object.subtype);
+        isAllCreatureTypes = object.isAllCreatureTypes;
         supertype.addAll(object.supertype);
         this.copy = object.copy;
         textParts = new ArrayList<>();

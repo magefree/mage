@@ -124,6 +124,7 @@ public class PermanentCard extends PermanentImpl {
         }
         this.subtype.clear();
         this.subtype.addAll(card.getSubtype(game));
+        this.isAllCreatureTypes = card.isAllCreatureTypes();
         this.supertype.clear();
         supertype.addAll(card.getSuperType());
         this.expansionSetCode = card.getExpansionSetCode();
