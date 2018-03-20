@@ -144,6 +144,12 @@ public class ModernCardRenderer extends CardRenderer {
     public static final Color BOX_INVENTION = new Color(209, 97, 33);
     public static final Color BOX_VEHICLE = new Color(155, 105, 60);
 
+    public static final Color BOX_UST_WHITE = new Color(240, 240, 220);
+    public static final Color BOX_UST_BLUE = new Color(10, 100, 180);
+    public static final Color BOX_UST_BLACK = new Color(28, 30, 28);
+    public static final Color BOX_UST_RED = new Color(229, 74, 32);
+    public static final Color BOX_UST_GREEN = new Color(7, 130, 53);
+
     public static final Color BOX_WHITE_NIGHT = new Color(169, 160, 145);
     public static final Color BOX_BLUE_NIGHT = new Color(46, 133, 176);
     public static final Color BOX_BLACK_NIGHT = new Color(95, 90, 89);
@@ -303,6 +309,10 @@ public class ModernCardRenderer extends CardRenderer {
             // Just draw a brown rectangle
             drawCardBack(g);
         } else {
+            if (cardView.getFrameStyle() == FrameStyle.UST_FULL_ART_BASIC) {
+                return;
+            }
+
             boolean isExped = false;
             if (cardView.getExpansionSetCode().equals("EXP")) {
                 isExped = true;
@@ -345,6 +355,8 @@ public class ModernCardRenderer extends CardRenderer {
             rect = new Rectangle2D.Float(0, 0, 1, 1);
         } else if (isZendikarFullArtLand()) {
             rect = new Rectangle2D.Float(.079f, .11f, .84f, .84f);
+        } else if (isUnstableFullArtLand()) {
+            rect = new Rectangle2D.Float(.0f, .0f, 1.0f, 1.0f);
         } else if (cardView.getFrameStyle().isFullArt() || (cardView.isToken())) {
             rect = new Rectangle2D.Float(.079f, .11f, .84f, .63f);
         } else {
@@ -365,6 +377,10 @@ public class ModernCardRenderer extends CardRenderer {
 
     private boolean isZendikarFullArtLand() {
         return cardView.getFrameStyle() == FrameStyle.BFZ_FULL_ART_BASIC || cardView.getFrameStyle() == FrameStyle.ZEN_FULL_ART_BASIC;
+    }
+
+    private boolean isUnstableFullArtLand() {
+        return cardView.getFrameStyle() == FrameStyle.UST_FULL_ART_BASIC;
     }
 
     protected boolean isSourceArtFullArt() {
@@ -448,6 +464,7 @@ public class ModernCardRenderer extends CardRenderer {
 
         // Get the border paint
         Color boxColor = getBoxColor(frameColors, cardView.getCardTypes(), isTransformed);
+        Color additionalBoxColor = getAdditionalBoxColor(frameColors, cardView.getCardTypes(), isTransformed);
         Paint textboxPaint = getTextboxPaint(frameColors, cardView.getCardTypes(), cardWidth);
         Paint borderPaint = getBorderPaint(frameColors, cardView.getCardTypes(), cardWidth);
 
@@ -455,6 +472,9 @@ public class ModernCardRenderer extends CardRenderer {
         if (cardView.getFrameStyle() == FrameStyle.KLD_INVENTION) {
             boxColor = BOX_INVENTION;
         }
+
+        // Is this a Zendikar or Unstable land
+        boolean isZenUst = isZendikarFullArtLand() || isUnstableFullArtLand();
 
         // Draw the main card content border
         g.setPaint(borderPaint);
@@ -464,7 +484,7 @@ public class ModernCardRenderer extends CardRenderer {
             g.drawRect(
                     totalContentInset, typeLineY,
                     contentWidth - 1, cardHeight - borderWidth * 3 - typeLineY - 1);
-        } else if (!isZendikarFullArtLand()) {
+        } else if (!isZenUst) {
             g.drawRect(
                     totalContentInset, totalContentInset,
                     contentWidth - 1, cardHeight - borderWidth * 3 - totalContentInset - 1);
@@ -477,7 +497,7 @@ public class ModernCardRenderer extends CardRenderer {
             g.setPaint(textboxPaint);
         }
 
-        if (!isZendikarFullArtLand()) {
+        if (!isZenUst) {
             g.fillRect(
                     totalContentInset + 1, typeLineY,
                     contentWidth - 2, cardHeight - borderWidth * 3 - typeLineY - 1);
@@ -491,7 +511,7 @@ public class ModernCardRenderer extends CardRenderer {
                     cardWidth / 16, cardHeight - typeLineY - boxHeight - borderWidth * 3);
         }
 
-        if (cardView.getFrameStyle() != FrameStyle.KLD_INVENTION && !isZendikarFullArtLand()) {
+        if (cardView.getFrameStyle() != FrameStyle.KLD_INVENTION && !isZenUst) {
             // Draw a shadow highlight at the right edge of the content frame
             g.setColor(new Color(0, 0, 0, 100));
             g.fillRect(
@@ -511,7 +531,7 @@ public class ModernCardRenderer extends CardRenderer {
                 contentInset,
                 borderPaint, boxColor);
         // Draw the type line box
-        if (!isZendikarFullArtLand()) {
+        if (!isZenUst) {
             CardRendererUtils.drawRoundedBox(g,
                     borderWidth, typeLineY,
                     cardWidth - 2 * borderWidth, boxHeight,
@@ -548,11 +568,7 @@ public class ModernCardRenderer extends CardRenderer {
                 contentWidth - nameOffset, boxHeight);
 
         // Draw the textbox rules
-        if (!isZendikarFullArtLand()) {
-            drawRulesText(g, textboxKeywords, textboxRules,
-                    totalContentInset + 2, typeLineY + boxHeight + 2,
-                    contentWidth - 4, cardHeight - typeLineY - boxHeight - 4 - borderWidth * 3, false);
-        } else {
+        if (isZendikarFullArtLand()) {
             int x = totalContentInset;
             int y = typeLineY + boxHeight + (cardHeight - typeLineY - boxHeight - 4 - borderWidth * 3) / 2 - contentInset;
             int w = contentWidth;
@@ -622,6 +638,20 @@ public class ModernCardRenderer extends CardRenderer {
             drawRulesText(g, textboxKeywords, textboxRules,
                     x, y,
                     w, h, false);
+        } else if (isUnstableFullArtLand()) {
+            int x = 0;
+            int y = 0;
+            int w = cardWidth;
+            int h = cardHeight;
+
+            // Curve ends at 60 out of 265
+            drawUSTCurves(g, image, x, y, w, h,
+                    0, 0,
+                    additionalBoxColor, borderPaint);
+        } else if (!isZenUst) {
+            drawRulesText(g, textboxKeywords, textboxRules,
+                    totalContentInset + 2, typeLineY + boxHeight + 2,
+                    contentWidth - 4, cardHeight - typeLineY - boxHeight - 4 - borderWidth * 3, false);
         }
 
         // Draw the bottom right stuff
@@ -731,6 +761,82 @@ public class ModernCardRenderer extends CardRenderer {
 
         g2.setColor(Color.black);
         g2.draw(innercurve);
+    }
+
+    public void drawUSTCurves(Graphics2D g2, BufferedImage image, int x, int y, int x2, int y2,
+            int topxdelta, int endydelta,
+            Color boxColor, Paint paint) {
+        BufferedImage artToUse = artImage;
+        
+        int srcW = x2;
+        int srcH = y2;
+        if (artToUse != null) {
+            srcW = artToUse.getWidth();
+            srcH = artToUse.getHeight();
+        }
+
+        g2.setPaint(paint);
+
+        // Dimensions:  534 height, 384 width, 34 offset at top, 41 offset at bottom.  Curve at bottom right is from an ellipse: 245 high, 196 wide, with center offset from 
+        // right side by 36  (so top left is at: (width - 159, height - 41 -196)  center at: 41+127 = width - 36, height - 168)
+        int scan_width = 384;
+        int scan_height = 534;
+        int scan_ew = 196;
+        int scan_eh = 254;
+        int offset_ew = 159;
+        int offset_eh = 41;
+        int middle_ew = 52;
+        int middle_eh = 26;
+
+        // Bottom left side arc
+        int ex = (offset_ew - scan_ew) * x2 / scan_width;
+        int ey = y2 - (offset_eh + scan_eh) * y2 / scan_height;
+        int bot_ey = y2 - offset_eh * y2 / scan_height;
+        int ew = scan_ew * x2 / scan_width;
+        int eh = scan_eh * y2 / scan_height;
+        int end_curve_ex = ex + ew / 2;
+
+        Arc2D arc = new Arc2D.Double(ex, ey, ew, eh, 180, 90, Arc2D.OPEN);
+
+        // Bottom right side arc
+        ex = x2 - offset_ew * x2 / scan_width;
+        ey = y2 - (offset_eh + scan_eh) * y2 / scan_height;
+        bot_ey = y2 - offset_eh * y2 / scan_height;
+        Arc2D arc2 = new Arc2D.Double(ex, ey, ew, eh, 270, 90, Arc2D.OPEN);
+
+        // Middle bump.. 52x26
+        int mid_ex = x2 / 2 - middle_ew * x2 / (scan_width * 2);
+        int mid_ey = bot_ey - middle_eh * y2 / (scan_height * 2);
+        int end_mid_ex = x2 / 2 + middle_ew * x2 / (scan_width * 2);
+
+        Arc2D arc3 = new Arc2D.Double(mid_ex, mid_ey, middle_ew * x2 / scan_width, middle_eh * y2 / scan_height, 180, -180, Arc2D.OPEN);
+
+        Path2D.Double curve = new Path2D.Double();
+        curve.moveTo(0, 0);
+        curve.lineTo(0, bot_ey);
+        curve.append(arc, true);
+        curve.lineTo(mid_ex, bot_ey);
+        curve.append(arc3, true);
+        curve.lineTo(x2 - ew / 2, bot_ey);
+        curve.append(arc2, true);
+        curve.lineTo(x2, 0);
+        curve.lineTo(0, 0);
+
+        g2.setClip(curve);
+        if (artToUse != null) {
+            artToUse = artImage.getSubimage(0, 0, srcW, srcH);
+            g2.drawImage(artToUse, 0, 0, x2, y2, null);
+        }
+
+        g2.setClip(null);
+        g2.setStroke(new BasicStroke(3));
+        g2.draw(arc);
+        g2.draw(new Rectangle(end_curve_ex, bot_ey, mid_ex - end_curve_ex, 0));
+        g2.draw(arc3);
+        g2.draw(new Rectangle(end_mid_ex, bot_ey, mid_ex - end_curve_ex, 0));
+        g2.draw(arc2);
+        g2.setStroke(new BasicStroke(1));
+        g2.setColor(boxColor);
     }
 
     // Draw the name line
@@ -1008,14 +1114,17 @@ public class ModernCardRenderer extends CardRenderer {
             allRules.add(0, keywordsRule);
         }
 
+        if (isUnstableFullArtLand()) {
+            return;
+        }
+
         // Basic mana draw mana symbol in textbox (for basic lands)
         if (!forceRules && (allRules.size() == 1 && (allRules.get(0) instanceof TextboxBasicManaRule) && cardView.isLand() || isZendikarFullArtLand())) {
             if (!isZendikarFullArtLand()) {
                 drawBasicManaTextbox(g, x, y, w, h, ((TextboxBasicManaRule) allRules.get(0)).getBasicManaSymbol());
                 return;
             } else // Big circle in the middle for Zendikar lands
-            {
-                if (allRules.size() == 1) {
+             if (allRules.size() == 1) {
                     // Size of mana symbol = 9/4 * h, 3/4h above line
                     if (allRules.get(0) instanceof TextboxBasicManaRule) {
                         drawBasicManaSymbol(g, x + w / 2 - 9 * h / 8 + 1, y - 3 * h / 4, 9 * h / 4, 9 * h / 4, ((TextboxBasicManaRule) allRules.get(0)).getBasicManaSymbol());
@@ -1029,7 +1138,6 @@ public class ModernCardRenderer extends CardRenderer {
                     }
                     return;
                 }
-            }
         }
 
         // Go through possible font sizes in descending order to find the best fit
@@ -1382,6 +1490,23 @@ public class ModernCardRenderer extends CardRenderer {
         } else {
             return ERROR_COLOR;
         }
+    }
+
+    protected Color getAdditionalBoxColor(ObjectColor colors, Collection<CardType> types, boolean isNightCard) {
+        if (isUnstableFullArtLand()) {
+            if (colors.isWhite()) {
+                return BOX_UST_WHITE;
+            } else if (colors.isBlue()) {
+                return BOX_UST_BLUE;
+            } else if (colors.isBlack()) {
+                return BOX_UST_BLACK;
+            } else if (colors.isRed()) {
+                return BOX_UST_RED;
+            } else if (colors.isGreen()) {
+                return BOX_UST_GREEN;
+            }
+        }
+        return getBoxColor(colors, types, isNightCard);
     }
 
     // Get the border color for a single color
