@@ -186,6 +186,7 @@ public class AddLandDialog extends MageDialog {
             if (useFullArt && (land.getFrameStyle() == FrameStyle.BFZ_FULL_ART_BASIC
                     || land.getFrameStyle() == FrameStyle.UGL_FULL_ART_BASIC
                     || land.getFrameStyle() == FrameStyle.UNH_FULL_ART_BASIC
+                    || land.getFrameStyle() == FrameStyle.UST_FULL_ART_BASIC
                     || land.getFrameStyle() == FrameStyle.ZEN_FULL_ART_BASIC)) {
                 useLand = true;
             }
