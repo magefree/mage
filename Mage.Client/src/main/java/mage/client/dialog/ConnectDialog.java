@@ -43,6 +43,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.InputStreamReader;
 import java.io.Writer;
+import java.io.Closeable;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.SocketException;
@@ -75,6 +76,7 @@ import mage.client.util.Config;
 import mage.client.util.gui.countryBox.CountryItemEditor;
 import mage.client.util.sets.ConstructedFormats;
 import mage.remote.Connection;
+import mage.utils.StreamUtils;
 import org.apache.log4j.Logger;
 
 /**
@@ -567,6 +569,7 @@ public class ConnectDialog extends MageDialog {
 
     private void findPublicServerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         BufferedReader in = null;
+        Writer output = null;
         try {
             String serverUrl = PreferencesDialog.getCachedValue(KEY_CONNECTION_URL_SERVER_LIST, "http://xmage.de/files/server-list.txt");
             if (serverUrl.contains("xmage.info/files/")) {
@@ -620,7 +623,7 @@ public class ConnectDialog extends MageDialog {
             }
             List<String> servers = new ArrayList<>();
             if (in != null) {
-                Writer output = null;
+
                 if (!URLNotFound) {
                     // write serverlist to be able to read if URL is not available
                     File file = new File("serverlist.txt");
@@ -639,10 +642,6 @@ public class ConnectDialog extends MageDialog {
 
                     }
                 }
-                if (output != null) {
-                    output.close();
-                }
-                in.close();
             }
             if (servers.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Couldn't find any server.");
@@ -670,14 +669,11 @@ public class ConnectDialog extends MageDialog {
         } catch (Exception ex) {
             logger.error(ex, ex);
         } finally {
-            if (in != null) {
-                try {
-                    in.close();
-                } catch (Exception e) {
-                }
-            }
+            StreamUtils.closeQuietly(in);
+            StreamUtils.closeQuietly(output);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
 
     private void jProxySettingsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jProxySettingsButtonActionPerformed
         PreferencesDialog.main(new String[]{PreferencesDialog.OPEN_CONNECTION_TAB});
