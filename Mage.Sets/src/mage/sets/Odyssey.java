@@ -114,6 +114,7 @@ public class Odyssey extends ExpansionSet {
         cards.add(new SetCardInfo("Chainflinger", 181, Rarity.COMMON, mage.cards.c.Chainflinger.class));
         cards.add(new SetCardInfo("Chamber of Manipulation", 76, Rarity.UNCOMMON, mage.cards.c.ChamberOfManipulation.class));
         cards.add(new SetCardInfo("Chance Encounter", 182, Rarity.RARE, mage.cards.c.ChanceEncounter.class));
+        cards.add(new SetCardInfo("Charmed Pendant", 298, Rarity.RARE, mage.cards.c.CharmedPendant.class));
         cards.add(new SetCardInfo("Chatter of the Squirrel", 233, Rarity.COMMON, mage.cards.c.ChatterOfTheSquirrel.class));
         cards.add(new SetCardInfo("Childhood Horror", 123, Rarity.UNCOMMON, mage.cards.c.ChildhoodHorror.class));
         cards.add(new SetCardInfo("Chlorophant", 234, Rarity.RARE, mage.cards.c.Chlorophant.class));
