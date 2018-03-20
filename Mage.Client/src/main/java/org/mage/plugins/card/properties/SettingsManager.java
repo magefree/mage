@@ -12,13 +12,9 @@ public class SettingsManager {
 
     private static SettingsManager settingsManager = null;
 
-    public static SettingsManager getIntance() {
+    public static synchronized SettingsManager getIntance() {
         if (settingsManager == null) {
-            synchronized (SettingsManager.class) {
-                if (settingsManager == null) {
-                    settingsManager = new SettingsManager();
-                }
-            }
+            settingsManager = new SettingsManager();
         }
         return settingsManager;
     }
