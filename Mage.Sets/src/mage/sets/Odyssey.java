@@ -153,6 +153,7 @@ public class Odyssey extends ExpansionSet {
         cards.add(new SetCardInfo("Dusk Imp", 131, Rarity.COMMON, mage.cards.d.DuskImp.class));
         cards.add(new SetCardInfo("Dwarven Grunt", 185, Rarity.COMMON, mage.cards.d.DwarvenGrunt.class));
         cards.add(new SetCardInfo("Dwarven Recruiter", 186, Rarity.UNCOMMON, mage.cards.d.DwarvenRecruiter.class));
+        cards.add(new SetCardInfo("Dwarven Shrine", 187, Rarity.RARE, mage.cards.d.DwarvenShrine.class));
         cards.add(new SetCardInfo("Dwarven Strike Force", 188, Rarity.UNCOMMON, mage.cards.d.DwarvenStrikeForce.class));
         cards.add(new SetCardInfo("Earnest Fellowship", 21, Rarity.RARE, mage.cards.e.EarnestFellowship.class));
         cards.add(new SetCardInfo("Earth Rift", 189, Rarity.COMMON, mage.cards.e.EarthRift.class));
