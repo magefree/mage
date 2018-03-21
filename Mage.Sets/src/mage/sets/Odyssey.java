@@ -219,6 +219,7 @@ public class Odyssey extends ExpansionSet {
         cards.add(new SetCardInfo("Liquid Fire", 201, Rarity.UNCOMMON, mage.cards.l.LiquidFire.class));
         cards.add(new SetCardInfo("Lithatog", 289, Rarity.UNCOMMON, mage.cards.l.Lithatog.class));
         cards.add(new SetCardInfo("Luminous Guardian", 31, Rarity.UNCOMMON, mage.cards.l.LuminousGuardian.class));
+        cards.add(new SetCardInfo("Mad Dog", 202, Rarity.COMMON, mage.cards.m.MadDog.class));
         cards.add(new SetCardInfo("Magma Vein", 203, Rarity.UNCOMMON, mage.cards.m.MagmaVein.class));
         cards.add(new SetCardInfo("Magnivore", 204, Rarity.RARE, mage.cards.m.Magnivore.class));
         cards.add(new SetCardInfo("Malevolent Awakening", 147, Rarity.UNCOMMON, mage.cards.m.MalevolentAwakening.class));
