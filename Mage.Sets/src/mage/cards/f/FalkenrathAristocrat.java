@@ -105,7 +105,7 @@ class FalkenrathAristocratEffect extends OneShotEffect {
                 Permanent sourceCreature = game.getPermanent(source.getSourceId());
                 if (sacrificedCreature.hasSubtype(SubType.HUMAN, game) && sourceCreature != null) {
                     sourceCreature.addCounters(CounterType.P1P1.createInstance(), source, game);
-                    return true;
+                    break;
                 }
             }
         }

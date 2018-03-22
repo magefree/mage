@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.cards.Cards;
+import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
@@ -338,7 +339,10 @@ public final class SystemUtil {
                 String cardName = matchCommand.group(3);
                 Integer amount = Integer.parseInt(matchCommand.group(4));
 
-                List<CardInfo> cards = CardRepository.instance.findCards(cardName);
+                List<CardInfo> cards = CardRepository.instance.findCards(new CardCriteria().setCodes("UST").name(cardName));
+                if (cards.isEmpty()) {
+                    cards = CardRepository.instance.findCards(cardName);
+                }
                 if (cards.isEmpty()) {
                     if ("token".equalsIgnoreCase(zone)) {
                         // eg: token:Human:HippoToken:1
