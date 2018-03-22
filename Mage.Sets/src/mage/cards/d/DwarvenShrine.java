@@ -93,10 +93,7 @@ class DwarvenShrineTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Spell spell = game.getStack().getSpell(event.getTargetId());
         MageObject mageObject = game.getObject(sourceId);
-        if (spell != null
-                && !spell.isCopy()
-                && spell.getCard() != null
-                && !spell.getCard().isCopy()) {
+        if (spell != null) {
             game.getState().setValue("dwarvenShrine" + mageObject, spell);
             return true;
         }
