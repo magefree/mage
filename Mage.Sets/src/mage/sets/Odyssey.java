@@ -111,6 +111,7 @@ public class Odyssey extends ExpansionSet {
         cards.add(new SetCardInfo("Cephalid Looter", 72, Rarity.COMMON, mage.cards.c.CephalidLooter.class));
         cards.add(new SetCardInfo("Cephalid Retainer", 73, Rarity.RARE, mage.cards.c.CephalidRetainer.class));
         cards.add(new SetCardInfo("Cephalid Scout", 74, Rarity.COMMON, mage.cards.c.CephalidScout.class));
+        cards.add(new SetCardInfo("Cephalid Shrine", 75, Rarity.RARE, mage.cards.c.CephalidShrine.class));
         cards.add(new SetCardInfo("Chainflinger", 181, Rarity.COMMON, mage.cards.c.Chainflinger.class));
         cards.add(new SetCardInfo("Chamber of Manipulation", 76, Rarity.UNCOMMON, mage.cards.c.ChamberOfManipulation.class));
         cards.add(new SetCardInfo("Chance Encounter", 182, Rarity.RARE, mage.cards.c.ChanceEncounter.class));
