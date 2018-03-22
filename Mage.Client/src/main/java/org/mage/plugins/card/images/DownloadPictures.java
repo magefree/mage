@@ -755,11 +755,13 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                 if (responseCode == 200) {
                     // download OK
                     // save data to temp
-                    BufferedOutputStream out = null;
-                    BufferedInputStream in = null;
+                    OutputStream out = null;
+                    OutputStream tfileout = null;
+                    InputStream in = null;
                     try {
                         in = new BufferedInputStream(httpConn.getInputStream());
-                        out = new BufferedOutputStream(new TFileOutputStream(fileTempImage));
+                        tfileout = new TFileOutputStream(fileTempImage);
+                        out = new BufferedOutputStream(tfileout);
                         byte[] buf = new byte[1024];
                         int len;
                         while ((len = in.read(buf)) != -1) {
@@ -789,6 +791,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                     finally {
                         StreamUtils.closeQuietly(in);
                         StreamUtils.closeQuietly(out);
+                        StreamUtils.closeQuietly(tfileout);
                     }
 
 
