@@ -53,7 +53,7 @@ public class Addle extends CardImpl {
     public Addle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}");
 
-        // Choose a color. Target player reveals his or her hand and you choose a card of that color from it. That player discards that card.
+        // Choose a color. Target player reveals their hand and you choose a card of that color from it. That player discards that card.
         this.getSpellAbility().addEffect(new AddleEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
@@ -72,7 +72,7 @@ class AddleEffect extends OneShotEffect {
 
     AddleEffect() {
         super(Outcome.Discard);
-        staticText = "Choose a color. Target player reveals his or her hand and you choose a card of that color from it. That player discards that card.";
+        staticText = "Choose a color. Target player reveals their hand and you choose a card of that color from it. That player discards that card.";
     }
 
     AddleEffect(final AddleEffect effect) {

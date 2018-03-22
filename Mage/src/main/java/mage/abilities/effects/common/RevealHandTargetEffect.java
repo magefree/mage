@@ -86,7 +86,7 @@ public class RevealHandTargetEffect extends OneShotEffect {
             default:
                 break;
         }
-        sb.append(" reveals his or her hand");
+        sb.append(" reveals their hand");
         return sb.toString();
     }
 }

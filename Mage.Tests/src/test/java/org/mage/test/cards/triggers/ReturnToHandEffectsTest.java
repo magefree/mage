@@ -53,7 +53,7 @@ public class ReturnToHandEffectsTest extends CardTestPlayerBase {
         // Whenever a creature is put into your graveyard from the battlefield, return it to your hand.
         addCard(Zone.BATTLEFIELD, playerA, "Enduring Renewal");
 
-        // {T}, Sacrifice an artifact: Target player puts the top three cards of his or her library into his or her graveyard.
+        // {T}, Sacrifice an artifact: Target player puts the top three cards of their library into their graveyard.
         // Whenever an artifact enters the battlefield, you may untap Grinding Station.
         addCard(Zone.BATTLEFIELD, playerA, "Grinding Station", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Ornithopter", 1);

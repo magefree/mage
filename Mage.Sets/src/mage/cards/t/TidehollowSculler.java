@@ -64,7 +64,7 @@ public class TidehollowSculler extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // When Tidehollow Sculler enters the battlefield, target opponent reveals his or her hand and you choose a nonland card from it. Exile that card.
+        // When Tidehollow Sculler enters the battlefield, target opponent reveals their hand and you choose a nonland card from it. Exile that card.
         Ability ability = new EntersBattlefieldTriggeredAbility(new TidehollowScullerExileEffect(), false);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
@@ -87,7 +87,7 @@ class TidehollowScullerExileEffect extends OneShotEffect {
 
     public TidehollowScullerExileEffect() {
         super(Outcome.Exile);
-        this.staticText = "target opponent reveals his or her hand and you choose a nonland card from it. Exile that card";
+        this.staticText = "target opponent reveals their hand and you choose a nonland card from it. Exile that card";
     }
 
     public TidehollowScullerExileEffect(final TidehollowScullerExileEffect effect) {

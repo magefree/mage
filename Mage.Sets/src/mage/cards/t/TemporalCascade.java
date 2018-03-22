@@ -50,7 +50,7 @@ public class TemporalCascade extends CardImpl {
     public TemporalCascade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{U}{U}");
 
-        // Choose one - Each player shuffles his or her hand and graveyard into his or her library;
+        // Choose one - Each player shuffles their hand and graveyard into their library;
         this.getSpellAbility().addEffect(new TemporalCascadeShuffleEffect());
         
         // or each player draws seven cards.
@@ -76,7 +76,7 @@ class TemporalCascadeShuffleEffect extends OneShotEffect {
 
     public TemporalCascadeShuffleEffect() {
         super(Outcome.Neutral);
-        staticText = "Each player shuffles his or her hand and graveyard into his or her library";
+        staticText = "Each player shuffles their hand and graveyard into their library";
     }
 
     public TemporalCascadeShuffleEffect(final TemporalCascadeShuffleEffect effect) {

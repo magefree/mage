@@ -51,7 +51,7 @@ public class NoeticScales extends CardImpl {
     public NoeticScales(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
-        // At the beginning of each player's upkeep, return to its owner's hand each creature that player controls with power greater than the number of cards in his or her hand.
+        // At the beginning of each player's upkeep, return to its owner's hand each creature that player controls with power greater than the number of cards in their hand.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new NoeticScalesEffect(), TargetController.ANY, false, true));
     }
 
@@ -69,7 +69,7 @@ class NoeticScalesEffect extends OneShotEffect {
 
     public NoeticScalesEffect() {
         super(Outcome.ReturnToHand);
-        this.staticText = "return to its owner's hand each creature that player controls with power greater than the number of cards in his or her hand";
+        this.staticText = "return to its owner's hand each creature that player controls with power greater than the number of cards in their hand";
     }
 
     public NoeticScalesEffect(final NoeticScalesEffect effect) {

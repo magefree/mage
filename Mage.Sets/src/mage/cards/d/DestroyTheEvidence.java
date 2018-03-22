@@ -51,7 +51,7 @@ public class DestroyTheEvidence extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B}");
 
         // Destroy target land. Its controller reveals cards from the top of his
-        // or her library until he or she reveals a land card, then puts those cards into his or her graveyard.
+        // or her library until he or she reveals a land card, then puts those cards into their graveyard.
         TargetLandPermanent target = new TargetLandPermanent();
         this.getSpellAbility().addTarget(target);
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
@@ -72,7 +72,7 @@ class DestroyTheEvidenceEffect extends OneShotEffect {
 
     public DestroyTheEvidenceEffect() {
         super(Outcome.Discard);
-        this.staticText = "Its controller reveals cards from the top of his or her library until he or she reveals a land card, then puts those cards into his or her graveyard";
+        this.staticText = "Its controller reveals cards from the top of their library until he or she reveals a land card, then puts those cards into their graveyard";
     }
 
     public DestroyTheEvidenceEffect(final DestroyTheEvidenceEffect effect) {

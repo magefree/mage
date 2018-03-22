@@ -63,7 +63,7 @@ public class QuicksilverFountain extends CardImpl {
     public QuicksilverFountain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
-        // At the beginning of each player's upkeep, that player puts a flood counter on target non-Island land he or she controls of his or her choice. That land is an Island for as long as it has a flood counter on it.
+        // At the beginning of each player's upkeep, that player puts a flood counter on target non-Island land he or she controls of their choice. That land is an Island for as long as it has a flood counter on it.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new QuicksilverFountainEffect(), TargetController.ANY, false, true);
         ability.addTarget(new TargetLandPermanent());
         originalId = ability.getOriginalId();
@@ -106,7 +106,7 @@ class QuicksilverFountainEffect extends OneShotEffect {
 
     public QuicksilverFountainEffect() {
         super(Outcome.Neutral);
-        staticText = "that player puts a flood counter on target non-Island land he or she controls of his or her choice. That land is an Island for as long as it has a flood counter on it";
+        staticText = "that player puts a flood counter on target non-Island land he or she controls of their choice. That land is an Island for as long as it has a flood counter on it";
     }
 
     public QuicksilverFountainEffect(final QuicksilverFountainEffect effect) {

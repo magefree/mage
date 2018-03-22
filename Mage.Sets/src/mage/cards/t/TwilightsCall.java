@@ -58,7 +58,7 @@ public class TwilightsCall extends CardImpl {
         Ability ability = new PayMoreToCastAsThoughtItHadFlashAbility(this, new ManaCostsImpl("{2}"));
         ability.addEffect(effect);
         this.addAbility(ability);
-        // Each player returns all creature cards from his or her graveyard to the battlefield.
+        // Each player returns all creature cards from their graveyard to the battlefield.
         this.getSpellAbility().addEffect(effect);
     }
 
@@ -76,7 +76,7 @@ class TwilightsCallEffect extends OneShotEffect {
 
     public TwilightsCallEffect() {
         super(Outcome.Neutral);
-        staticText = "Each player returns all creature cards from his or her graveyard to the battlefield";
+        staticText = "Each player returns all creature cards from their graveyard to the battlefield";
     }
 
     public TwilightsCallEffect(TwilightsCallEffect copy) {

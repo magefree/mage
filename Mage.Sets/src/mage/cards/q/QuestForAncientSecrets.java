@@ -61,7 +61,7 @@ public class QuestForAncientSecrets extends CardImpl {
         this.addAbility(new PutCardIntoGraveFromAnywhereAllTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.QUEST.createInstance()), true, TargetController.YOU));
 
-        // Remove five quest counters from Quest for Ancient Secrets and sacrifice it: Target player shuffles his or her graveyard into his or her library.
+        // Remove five quest counters from Quest for Ancient Secrets and sacrifice it: Target player shuffles their graveyard into their library.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new QuestForAncientSecretsEffect(),
                 new RemoveCountersSourceCost(CounterType.QUEST.createInstance(5)));
@@ -84,7 +84,7 @@ class QuestForAncientSecretsEffect extends OneShotEffect {
 
     public QuestForAncientSecretsEffect() {
         super(Outcome.Neutral);
-        this.staticText = "Target player shuffles his or her graveyard into his or her library";
+        this.staticText = "Target player shuffles their graveyard into their library";
     }
 
     public QuestForAncientSecretsEffect(final QuestForAncientSecretsEffect effect) {

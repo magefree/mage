@@ -9,7 +9,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  *
  * @author noxx
  *
- *   When Rotcrown Ghoul dies, target player puts the top five cards of his or her library into his or her graveyard.
+ *   When Rotcrown Ghoul dies, target player puts the top five cards of their library into their graveyard.
  */
 public class RotcrownGhoulTest extends CardTestPlayerBase {
 

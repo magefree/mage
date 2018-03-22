@@ -64,7 +64,7 @@ public class MagusOfTheJar extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // {tap}, Sacrifice Magus of the Jar: Each player exiles all cards from his or her hand face down and draws seven cards. At the beginning of the next end step, each player discards his or her hand and returns to his or her hand each card he or she exiled this way.
+        // {tap}, Sacrifice Magus of the Jar: Each player exiles all cards from their hand face down and draws seven cards. At the beginning of the next end step, each player discards their hand and returns to their hand each card he or she exiled this way.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MagusoftheJarEffect(), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
@@ -85,7 +85,7 @@ class MagusoftheJarEffect extends OneShotEffect {
 
     public MagusoftheJarEffect() {
         super(Outcome.DrawCard);
-        staticText = "Each player exiles all cards from his or her hand face down and draws seven cards. At the beginning of the next end step, each player discards his or her hand and returns to his or her hand each card he or she exiled this way.";
+        staticText = "Each player exiles all cards from their hand face down and draws seven cards. At the beginning of the next end step, each player discards their hand and returns to their hand each card he or she exiled this way.";
     }
 
     public MagusoftheJarEffect(final MagusoftheJarEffect effect) {
@@ -134,7 +134,7 @@ class MagusoftheJarDelayedEffect extends OneShotEffect {
 
     public MagusoftheJarDelayedEffect() {
         super(Outcome.DrawCard);
-        staticText = "At the beginning of the next end step, each player discards his or her hand and returns to his or her hand each card he or she exiled this way";
+        staticText = "At the beginning of the next end step, each player discards their hand and returns to their hand each card he or she exiled this way";
     }
 
     public MagusoftheJarDelayedEffect(final MagusoftheJarDelayedEffect effect) {

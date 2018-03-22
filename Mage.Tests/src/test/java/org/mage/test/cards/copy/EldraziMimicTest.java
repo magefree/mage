@@ -47,7 +47,7 @@ public class EldraziMimicTest extends CardTestPlayerBase {
     public void testCopyIfPermanentIsGone() {
         // Devoid (This card has no color.)
         // Flying
-        // Whenever you cast a colorless spell, target opponent exiles the top card of his or her library.
+        // Whenever you cast a colorless spell, target opponent exiles the top card of their library.
         addCard(Zone.HAND, playerA, "Thought Harvester", 1); // {3}{U} 2/4
         addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
         // Whenever another colorless creature enters the battlefield under your control, you may have the base power and toughness of Eldrazi Mimic

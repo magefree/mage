@@ -57,7 +57,7 @@ public class ZamWesell extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // When you cast Zam Wessel, target opponent reveals his or her hand. You may choose a creature card from it and have Zam Wessel enter the battlefield as a copy of that creature card.
+        // When you cast Zam Wessel, target opponent reveals their hand. You may choose a creature card from it and have Zam Wessel enter the battlefield as a copy of that creature card.
         Ability ability = new CastSourceTriggeredAbility(new RevealHandTargetEffect());
         ability.addEffect(new ZamWesselEffect());
         ability.addTarget(new TargetOpponent());

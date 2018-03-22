@@ -59,7 +59,7 @@ public class DakraMystic extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // {U},{T}:Each player reveals the top card of his or her library. You may put the revealed cards into their owners graveyard. If you don't, each player draws a card.
+        // {U},{T}:Each player reveals the top card of their library. You may put the revealed cards into their owners graveyard. If you don't, each player draws a card.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DakraMysticEffect(), new ManaCostsImpl("{U}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
@@ -80,7 +80,7 @@ class DakraMysticEffect extends OneShotEffect {
 
     public DakraMysticEffect() {
         super(Outcome.Detriment);
-        this.staticText = "Each player reveals the top card of his or her library. You may put the revealed cards into their owners' graveyard. If you don't, each player draws a card";
+        this.staticText = "Each player reveals the top card of their library. You may put the revealed cards into their owners' graveyard. If you don't, each player draws a card";
     }
 
     public DakraMysticEffect(final DakraMysticEffect effect) {

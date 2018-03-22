@@ -51,7 +51,7 @@ public class RealityShift extends CardImpl {
     public RealityShift(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
 
-        // Exile target creature. Its controller manifests the top card of his or her library.
+        // Exile target creature. Its controller manifests the top card of their library.
         this.getSpellAbility().addEffect(new ExileTargetEffect());
         this.getSpellAbility().addEffect(new RealityShiftEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
@@ -72,7 +72,7 @@ class RealityShiftEffect extends OneShotEffect {
 
     public RealityShiftEffect() {
         super(Outcome.Exile);
-        this.staticText = "Its controller manifests the top card of his or her library. <i>(That player puts the top card of his or her library onto the battlefield face down as a 2/2 creature. If it's a creature card, it can be turned face up any time for its mana cost.)</i>";
+        this.staticText = "Its controller manifests the top card of their library. <i>(That player puts the top card of their library onto the battlefield face down as a 2/2 creature. If it's a creature card, it can be turned face up any time for its mana cost.)</i>";
     }
 
     public RealityShiftEffect(final RealityShiftEffect effect) {

@@ -54,7 +54,7 @@ public class StruggleForSanity extends CardImpl {
     public StruggleForSanity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}{B}");
 
-        // Target opponent reveals his or her hand. That player exiles a card from it, then you exile a card from it. Repeat this process until all cards in that hand have been exiled. That player returns the cards he or she exiled this way to his or her hand and puts the rest into his or her graveyard.
+        // Target opponent reveals their hand. That player exiles a card from it, then you exile a card from it. Repeat this process until all cards in that hand have been exiled. That player returns the cards he or she exiled this way to their hand and puts the rest into their graveyard.
         this.getSpellAbility().addEffect(new StruggleForSanityEffect());
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
@@ -73,7 +73,7 @@ class StruggleForSanityEffect extends OneShotEffect {
 
     public StruggleForSanityEffect() {
         super(Outcome.Discard); // kind of
-        this.staticText = "Target opponent reveals his or her hand. That player exiles a card from it, then you exile a card from it. Repeat this process until all cards in that hand have been exiled. That player returns the cards he or she exiled this way to his or her hand and puts the rest into his or her graveyard";
+        this.staticText = "Target opponent reveals their hand. That player exiles a card from it, then you exile a card from it. Repeat this process until all cards in that hand have been exiled. That player returns the cards he or she exiled this way to their hand and puts the rest into their graveyard";
     }
 
     public StruggleForSanityEffect(final StruggleForSanityEffect effect) {

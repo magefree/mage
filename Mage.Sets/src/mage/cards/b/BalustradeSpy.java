@@ -62,7 +62,7 @@ public class BalustradeSpy extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // When Balustrade Spy enters the battlefield, target player reveals cards from the top of his or her library until he or she reveals a land card, then puts those cards into his or her graveyard.
+        // When Balustrade Spy enters the battlefield, target player reveals cards from the top of their library until he or she reveals a land card, then puts those cards into their graveyard.
         Ability ability = new EntersBattlefieldTriggeredAbility(new BalustradeSpyEffect(), false);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
@@ -82,7 +82,7 @@ class BalustradeSpyEffect extends OneShotEffect {
 
     public BalustradeSpyEffect() {
         super(Outcome.Discard);
-        this.staticText = "target player reveals cards from the top of his or her library until he or she reveals a land card, then puts those cards into his or her graveyard";
+        this.staticText = "target player reveals cards from the top of their library until he or she reveals a land card, then puts those cards into their graveyard";
     }
 
     public BalustradeSpyEffect(final BalustradeSpyEffect effect) {

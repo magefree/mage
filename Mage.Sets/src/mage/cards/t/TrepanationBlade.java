@@ -60,8 +60,8 @@ public class TrepanationBlade extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
         this.subtype.add(SubType.EQUIPMENT);
 
-        // Whenever equipped creature attacks, defending player reveals cards from the top of his or her library until he or she reveals a land card.
-        // The creature gets +1/+0 until end of turn for each card revealed this way. That player puts the revealed cards into his or her graveyard.
+        // Whenever equipped creature attacks, defending player reveals cards from the top of their library until he or she reveals a land card.
+        // The creature gets +1/+0 until end of turn for each card revealed this way. That player puts the revealed cards into their graveyard.
         Ability ability = new AttacksAttachedTriggeredAbility(new TrepanationBladeDiscardEffect());
         ability.addEffect(new TrepanationBladeBoostEffect());
         this.addAbility(ability);
@@ -83,7 +83,7 @@ class TrepanationBladeDiscardEffect extends OneShotEffect {
 
     public TrepanationBladeDiscardEffect() {
         super(Outcome.Discard);
-        this.staticText = "defending player reveals cards from the top of his or her library until he or she reveals a land card. The creature gets +1/+0 until end of turn for each card revealed this way. That player puts the revealed cards into his or her graveyard";
+        this.staticText = "defending player reveals cards from the top of their library until he or she reveals a land card. The creature gets +1/+0 until end of turn for each card revealed this way. That player puts the revealed cards into their graveyard";
     }
 
     public TrepanationBladeDiscardEffect(final TrepanationBladeDiscardEffect effect) {

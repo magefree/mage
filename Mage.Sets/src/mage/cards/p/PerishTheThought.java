@@ -51,7 +51,7 @@ public class PerishTheThought extends CardImpl {
     public PerishTheThought(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}");
 
-        // Target opponent reveals his or her hand. You choose a card from it. That player shuffles that card into his or her library.
+        // Target opponent reveals their hand. You choose a card from it. That player shuffles that card into their library.
         this.getSpellAbility().addEffect(new PerishTheThoughtEffect());
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
@@ -72,7 +72,7 @@ class PerishTheThoughtEffect extends OneShotEffect {
 
     public PerishTheThoughtEffect() {
         super(Outcome.Neutral);
-        this.staticText = "Target opponent reveals his or her hand. You choose a card from it. That player shuffles that card into his or her library";
+        this.staticText = "Target opponent reveals their hand. You choose a card from it. That player shuffles that card into their library";
     }
 
     public PerishTheThoughtEffect(final PerishTheThoughtEffect effect) {

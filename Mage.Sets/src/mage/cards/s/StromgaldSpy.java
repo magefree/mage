@@ -58,7 +58,7 @@ public class StromgaldSpy extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 
-        // Whenever Stromgald Spy attacks and isn't blocked, you may have defending player play with his or her hand revealed for as long as Stromgald Spy remains on the battlefield. If you do, Stromgald Spy assigns no combat damage this turn.
+        // Whenever Stromgald Spy attacks and isn't blocked, you may have defending player play with their hand revealed for as long as Stromgald Spy remains on the battlefield. If you do, Stromgald Spy assigns no combat damage this turn.
         Ability ability = new AttacksAndIsNotBlockedTriggeredAbility(new StromgaldSpyEffect(), true, true);
         ability.addEffect(new AssignNoCombatDamageSourceEffect(Duration.EndOfTurn, true));
         this.addAbility(ability);
@@ -78,7 +78,7 @@ class StromgaldSpyEffect extends ContinuousEffectImpl {
 
     public StromgaldSpyEffect() {
         super(Duration.WhileOnBattlefield, Layer.PlayerEffects, SubLayer.NA, Outcome.Detriment);
-        this.staticText = "you may have defending player play with his or her hand revealed for as long as Stromgald Spy remains on the battlefield";
+        this.staticText = "you may have defending player play with their hand revealed for as long as Stromgald Spy remains on the battlefield";
     }
 
     public StromgaldSpyEffect(final StromgaldSpyEffect effect) {

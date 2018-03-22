@@ -55,7 +55,7 @@ public class SanityGrinding extends CardImpl {
     public SanityGrinding(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{U}{U}{U}");
 
-        // Chroma - Reveal the top ten cards of your library. For each blue mana symbol in the mana costs of the revealed cards, target opponent puts the top card of his or her library into his or her graveyard. Then put the cards you revealed this way on the bottom of your library in any order.
+        // Chroma - Reveal the top ten cards of your library. For each blue mana symbol in the mana costs of the revealed cards, target opponent puts the top card of their library into their graveyard. Then put the cards you revealed this way on the bottom of your library in any order.
         this.getSpellAbility().addEffect(new SanityGrindingEffect());
         this.getSpellAbility().addTarget(new TargetOpponent());
 
@@ -75,7 +75,7 @@ class SanityGrindingEffect extends OneShotEffect {
 
     public SanityGrindingEffect() {
         super(Outcome.Neutral);
-        staticText = "<i>Chroma</i> &mdash; Reveal the top ten cards of your library. For each blue mana symbol in the mana costs of the revealed cards, target opponent puts the top card of his or her library into his or her graveyard. Then put the cards you revealed this way on the bottom of your library in any order";
+        staticText = "<i>Chroma</i> &mdash; Reveal the top ten cards of your library. For each blue mana symbol in the mana costs of the revealed cards, target opponent puts the top card of their library into their graveyard. Then put the cards you revealed this way on the bottom of your library in any order";
     }
 
     public SanityGrindingEffect(final SanityGrindingEffect effect) {

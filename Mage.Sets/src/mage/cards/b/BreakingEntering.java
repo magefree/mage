@@ -56,7 +56,7 @@ public class BreakingEntering extends SplitCard {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{U}{B}", "{4}{B}{R}", SpellAbilityType.SPLIT_FUSED);
 
         // Breaking
-        // Target player puts the top eight cards of his or her library into his or her graveyard.
+        // Target player puts the top eight cards of their library into their graveyard.
         getLeftHalfCard().getSpellAbility().addEffect(new PutTopCardOfLibraryIntoGraveTargetEffect(8));
         getLeftHalfCard().getSpellAbility().addTarget(new TargetPlayer());
 

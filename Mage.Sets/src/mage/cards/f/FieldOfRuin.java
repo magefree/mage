@@ -73,7 +73,7 @@ public class FieldOfRuin extends CardImpl {
         // {T}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
 
-        // {2}, {T}, Sacrifice Field of Ruin: Destroy target nonbasic land an opponent controls. Each player searches his or her library for a basic land card, puts it onto the battlefield, then shuffles his or her library.
+        // {2}, {T}, Sacrifice Field of Ruin: Destroy target nonbasic land an opponent controls. Each player searches their library for a basic land card, puts it onto the battlefield, then shuffles their library.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new TapSourceCost());
         ability.addCost(new ManaCostsImpl("{2}"));
         ability.addCost(new SacrificeSourceCost());
@@ -96,7 +96,7 @@ class FieldOfRuinEffect extends OneShotEffect {
 
     FieldOfRuinEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Each player searches his or her library for a basic land card, puts it onto the battlefield, then shuffles his or her library";
+        this.staticText = "Each player searches their library for a basic land card, puts it onto the battlefield, then shuffles their library";
     }
 
     FieldOfRuinEffect(final FieldOfRuinEffect effect) {

@@ -44,7 +44,7 @@ public class MemorySluice extends CardImpl {
     public MemorySluice(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{U/B}");
 
-        // Target player puts the top four cards of his or her library into his or her graveyard.
+        // Target player puts the top four cards of their library into their graveyard.
         this.getSpellAbility().addEffect(new PutLibraryIntoGraveTargetEffect(4));
         this.getSpellAbility().addTarget(new TargetPlayer());
 

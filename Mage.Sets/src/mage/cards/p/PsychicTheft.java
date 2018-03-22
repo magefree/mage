@@ -65,7 +65,7 @@ public class PsychicTheft extends CardImpl {
     public PsychicTheft(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{U}");
 
-        // Target player reveals his or her hand. You choose an instant or sorcery card from it and exile that card. You may cast that card for as long as it remains exiled. At the beginning of the next end step, if you haven't cast the card, return it to its owner's hand.
+        // Target player reveals their hand. You choose an instant or sorcery card from it and exile that card. You may cast that card for as long as it remains exiled. At the beginning of the next end step, if you haven't cast the card, return it to its owner's hand.
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new PsychicTheftEffect());
 
@@ -87,7 +87,7 @@ class PsychicTheftEffect extends OneShotEffect {
 
     public PsychicTheftEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Target player reveals his or her hand. You choose an instant or sorcery card from it and exile that card. You may cast that card for as long as it remains exiled. At the beginning of the next end step, if you haven't cast the card, return it to its owner's hand.";
+        this.staticText = "Target player reveals their hand. You choose an instant or sorcery card from it and exile that card. You may cast that card for as long as it remains exiled. At the beginning of the next end step, if you haven't cast the card, return it to its owner's hand.";
     }
 
     public PsychicTheftEffect(final PsychicTheftEffect effect) {

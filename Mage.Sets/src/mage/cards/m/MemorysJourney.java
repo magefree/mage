@@ -55,7 +55,7 @@ public class MemorysJourney extends CardImpl {
     public MemorysJourney(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
 
-        // Target player shuffles up to three target cards from his or her graveyard into his or her library.
+        // Target player shuffles up to three target cards from their graveyard into their library.
         this.getSpellAbility().addEffect(new MemorysJourneyEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addTarget(new MemorysJourneyTarget());
@@ -77,7 +77,7 @@ class MemorysJourneyEffect extends OneShotEffect {
 
     public MemorysJourneyEffect() {
         super(Outcome.Neutral);
-        this.staticText = "Target player shuffles up to three target cards from his or her graveyard into his or her library";
+        this.staticText = "Target player shuffles up to three target cards from their graveyard into their library";
     }
 
     public MemorysJourneyEffect(final MemorysJourneyEffect effect) {

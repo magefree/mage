@@ -47,7 +47,7 @@ import mage.watchers.common.SpellsCastWatcher;
 public class JaceUnravelerOfSecretsEmblem extends Emblem {
 
     /**
-     * Emblem: "Whenever an opponent casts his or her first spell each turn,
+     * Emblem: "Whenever an opponent casts their first spell each turn,
      * counter that spell."
      */
     public JaceUnravelerOfSecretsEmblem() {
@@ -93,6 +93,6 @@ class JaceUnravelerOfSecretsTriggeredAbility extends SpellCastOpponentTriggeredA
 
     @Override
     public String getRule() {
-        return "Whenever an opponent casts his or her first spell each turn, counter that spell.";
+        return "Whenever an opponent casts their first spell each turn, counter that spell.";
     }
 }

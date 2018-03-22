@@ -51,7 +51,7 @@ public class Bribery extends CardImpl {
     public Bribery(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}{U}");
 
-        // Search target opponent's library for a creature card and put that card onto the battlefield under your control. Then that player shuffles his or her library.
+        // Search target opponent's library for a creature card and put that card onto the battlefield under your control. Then that player shuffles their library.
         this.getSpellAbility().addEffect(new BriberyEffect());
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
@@ -70,7 +70,7 @@ class BriberyEffect extends OneShotEffect {
 
     public BriberyEffect() {
         super(Outcome.PutCardInPlay);
-        this.staticText = "Search target opponent's library for a creature card and put that card onto the battlefield under your control. Then that player shuffles his or her library";
+        this.staticText = "Search target opponent's library for a creature card and put that card onto the battlefield under your control. Then that player shuffles their library";
     }
 
     public BriberyEffect(final BriberyEffect effect) {

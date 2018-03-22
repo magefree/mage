@@ -48,7 +48,7 @@ public class DarkDeal extends CardImpl {
     public DarkDeal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");
 
-        // Each player discards all the cards in his or her hand, then draws that many cards minus one.
+        // Each player discards all the cards in their hand, then draws that many cards minus one.
         this.getSpellAbility().addEffect(new DarkDealEffect());
     }
 
@@ -66,7 +66,7 @@ class DarkDealEffect extends OneShotEffect {
 
     DarkDealEffect() {
         super(Outcome.Detriment);
-        this.staticText = "Each player discards all the cards in his or her hand, then draws that many cards minus one";
+        this.staticText = "Each player discards all the cards in their hand, then draws that many cards minus one";
     }
 
     DarkDealEffect(final DarkDealEffect effect) {

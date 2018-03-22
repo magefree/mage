@@ -132,7 +132,7 @@ public class Turn implements Serializable {
         }
 
         if (game.getState().getTurnMods().skipTurn(activePlayer.getId())) {
-            game.informPlayers(activePlayer.getLogName() + " skips his or her turn.");
+            game.informPlayers(activePlayer.getLogName() + " skips their turn.");
             return true;
         }
         logStartOfTurn(game, activePlayer);

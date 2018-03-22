@@ -51,7 +51,7 @@ public class MerrowWitsniper extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // When Merrow Witsniper enters the battlefield, target player puts the top card of his or her library into his or her graveyard.
+        // When Merrow Witsniper enters the battlefield, target player puts the top card of their library into their graveyard.
         Ability ability = new EntersBattlefieldTriggeredAbility(new PutLibraryIntoGraveTargetEffect(1));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);

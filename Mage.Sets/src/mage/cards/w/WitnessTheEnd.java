@@ -50,7 +50,7 @@ public class WitnessTheEnd extends CardImpl {
 
         // Devoid
         this.addAbility(new DevoidAbility(this.color));
-        // Target opponent exiles two cards from his or her hand and loses 2 life.
+        // Target opponent exiles two cards from their hand and loses 2 life.
         getSpellAbility().addEffect(new ExileFromZoneTargetEffect(Zone.HAND, null, "", new FilterCard("cards"), 2));
         Effect effect = new LoseLifeTargetEffect(2);
         effect.setText("and loses 2 life");

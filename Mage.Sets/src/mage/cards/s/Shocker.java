@@ -53,7 +53,7 @@ public class Shocker extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // Whenever Shocker deals damage to a player, that player discards all the cards in his or her hand, then draws that many cards.
+        // Whenever Shocker deals damage to a player, that player discards all the cards in their hand, then draws that many cards.
         this.addAbility(new DealsDamageToAPlayerTriggeredAbility(new ShockerEffect(), false, true));
     }
 
@@ -70,7 +70,7 @@ class ShockerEffect extends OneShotEffect {
 
     public ShockerEffect() {
         super(Outcome.Discard);
-        this.staticText = " that player discards all the cards in his or her hand, then draws that many cards";
+        this.staticText = " that player discards all the cards in their hand, then draws that many cards";
     }
 
     public ShockerEffect(final ShockerEffect effect) {

@@ -75,7 +75,7 @@ public class AurraSingBaneOfJedi extends CardImpl {
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
 
-        // -6:Each player discards his or her hand and sacrificies all creatures he or she controls. Each player's life total becomes 1."
+        // -6:Each player discards their hand and sacrificies all creatures he or she controls. Each player's life total becomes 1."
         ability = new LoyaltyAbility(new DiscardHandAllEffect(), -6);
         ability.addEffect(new SacrificeAllEffect());
         Effect effect = new SetPlayerLifeAllEffect(1, TargetController.ANY);

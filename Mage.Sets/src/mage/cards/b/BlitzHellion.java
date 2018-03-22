@@ -59,9 +59,9 @@ public class BlitzHellion extends CardImpl {
         // Haste
         this.addAbility(HasteAbility.getInstance());
 
-        // At the beginning of the end step, Blitz Hellion's owner shuffles it into his or her library.
+        // At the beginning of the end step, Blitz Hellion's owner shuffles it into their library.
         Effect effect = new ShuffleIntoLibrarySourceEffect();
-        effect.setText("{this}'s owner shuffles it into his or her library.");
+        effect.setText("{this}'s owner shuffles it into their library.");
         this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.ANY, null, false));
     }
 

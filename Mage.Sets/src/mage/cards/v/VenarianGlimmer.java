@@ -54,7 +54,7 @@ public class VenarianGlimmer extends CardImpl {
     public VenarianGlimmer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{U}");
 
-        // Target player reveals his or her hand. You choose a nonland card with converted mana cost X or less from it. That player discards that card.
+        // Target player reveals their hand. You choose a nonland card with converted mana cost X or less from it. That player discards that card.
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new VenarianGlimmerEffect());
     }
@@ -73,7 +73,7 @@ class VenarianGlimmerEffect extends OneShotEffect {
 
     public VenarianGlimmerEffect() {
         super(Outcome.Discard);
-        this.staticText = "Target player reveals his or her hand. You choose a nonland card with converted mana cost X or less from it. That player discards that card";
+        this.staticText = "Target player reveals their hand. You choose a nonland card with converted mana cost X or less from it. That player discards that card";
     }
 
     public VenarianGlimmerEffect(final VenarianGlimmerEffect effect) {

@@ -49,7 +49,7 @@ public class SibsigHost extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(6);
 
-        // When Sibsig Host enters the battlefield, each player puts the top three cards of his or her library into his or her graveyard.
+        // When Sibsig Host enters the battlefield, each player puts the top three cards of their library into their graveyard.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new PutTopCardOfLibraryIntoGraveEachPlayerEffect(3, TargetController.ANY)));
     }
 

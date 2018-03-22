@@ -49,7 +49,7 @@ public class Timetwister extends CardImpl {
     public Timetwister(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}");
 
-        // Each player shuffles his or her hand and graveyard into his or her library, then draws seven cards.
+        // Each player shuffles their hand and graveyard into their library, then draws seven cards.
         this.getSpellAbility().addEffect(new TimetwisterEffect());
         Effect effect = new DrawCardAllEffect(7);
         effect.setText(", then draws seven cards");
@@ -71,7 +71,7 @@ class TimetwisterEffect extends OneShotEffect {
 
     public TimetwisterEffect() {
         super(Outcome.Neutral);
-        staticText = "Each player shuffles his or her hand and graveyard into his or her library";
+        staticText = "Each player shuffles their hand and graveyard into their library";
     }
 
     public TimetwisterEffect(final TimetwisterEffect effect) {

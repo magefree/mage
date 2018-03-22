@@ -61,7 +61,7 @@ public class CharmedGriffin extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // When Charmed Griffin enters the battlefield, each other player may put an artifact or enchantment card onto the battlefield from his or her hand.
+        // When Charmed Griffin enters the battlefield, each other player may put an artifact or enchantment card onto the battlefield from their hand.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CharmedGriffinEffect(), false));
     }
 
@@ -79,7 +79,7 @@ class CharmedGriffinEffect extends OneShotEffect {
 
     public CharmedGriffinEffect() {
         super(Outcome.Detriment);
-        this.staticText = "each other player may put an artifact or enchantment card onto the battlefield from his or her hand";
+        this.staticText = "each other player may put an artifact or enchantment card onto the battlefield from their hand";
     }
 
     public CharmedGriffinEffect(final CharmedGriffinEffect effect) {

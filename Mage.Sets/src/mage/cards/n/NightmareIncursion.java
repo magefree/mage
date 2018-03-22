@@ -56,7 +56,7 @@ public class NightmareIncursion extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{B}");
 
 
-        // Search target player's library for up to X cards, where X is the number of Swamps you control, and exile them. Then that player shuffles his or her library.
+        // Search target player's library for up to X cards, where X is the number of Swamps you control, and exile them. Then that player shuffles their library.
         Effect effect = new NightmareIncursionEffect();
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(effect);
@@ -86,7 +86,7 @@ class NightmareIncursionEffect extends OneShotEffect {
 
     public NightmareIncursionEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Search target player's library for up to X cards, where X is the number of Swamps you control, and exile them. Then that player shuffles his or her library";
+        this.staticText = "Search target player's library for up to X cards, where X is the number of Swamps you control, and exile them. Then that player shuffles their library";
     }
 
     public NightmareIncursionEffect(final NightmareIncursionEffect effect) {

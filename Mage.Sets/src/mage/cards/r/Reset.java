@@ -45,10 +45,10 @@ public class Reset extends CardImpl {
     public Reset(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}{U}");
 
-        // Cast Reset only during an opponent's turn after his or her upkeep step.
+        // Cast Reset only during an opponent's turn after their upkeep step.
         this.addAbility(new CastOnlyDuringPhaseStepSourceAbility(null, null,
                 new CompoundCondition(OnOpponentsTurnCondition.instance, AfterUpkeepStepCondtion.instance),
-                "Cast {this} only during an opponent's turn after his or her upkeep step"));
+                "Cast {this} only during an opponent's turn after their upkeep step"));
 
         // Untap all lands you control.
         this.getSpellAbility().addEffect(new UntapAllLandsControllerEffect());

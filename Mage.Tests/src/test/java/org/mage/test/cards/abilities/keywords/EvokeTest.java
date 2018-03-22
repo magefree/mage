@@ -50,7 +50,7 @@ public class EvokeTest extends CardTestPlayerBase {
 
     Exhume  {1}{B}
     Sorcery
-    Each player puts a creature card from his or her graveyard onto the battlefield.
+    Each player puts a creature card from their graveyard onto the battlefield.
 
     */
 

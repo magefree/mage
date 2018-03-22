@@ -59,7 +59,7 @@ public class PlaneswalkersScorn extends CardImpl {
     public PlaneswalkersScorn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}");
 
-        // {3}{B}: Target opponent reveals a card at random from his or her hand. Target creature gets -X/-X until end of turn, where X is the revealed card's converted mana cost. Activate this ability only any time you could cast a sorcery.
+        // {3}{B}: Target opponent reveals a card at random from their hand. Target creature gets -X/-X until end of turn, where X is the revealed card's converted mana cost. Activate this ability only any time you could cast a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new PlaneswalkersScornEffect(), new ManaCostsImpl("{3}{B}"));
         Target target = new TargetOpponent();
         ability.addTarget(target);
@@ -82,7 +82,7 @@ class PlaneswalkersScornEffect extends OneShotEffect {
 
     public PlaneswalkersScornEffect() {
         super(Outcome.Damage);
-        staticText = "Target opponent reveals a card at random from his or her hand. Target creature gets -X/-X until end of turn, where X is the revealed card's converted mana cost";
+        staticText = "Target opponent reveals a card at random from their hand. Target creature gets -X/-X until end of turn, where X is the revealed card's converted mana cost";
     }
 
     public PlaneswalkersScornEffect(final PlaneswalkersScornEffect effect) {

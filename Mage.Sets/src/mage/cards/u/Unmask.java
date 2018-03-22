@@ -64,7 +64,7 @@ public class Unmask extends CardImpl {
         // You may exile a black card from your hand rather than pay Unmask's mana cost.
         this.addAbility(new AlternativeCostSourceAbility(new ExileFromHandCost(new TargetCardInHand(filter))));     
         
-        // Target player reveals his or her hand. You choose a nonland card from it. That player discards that card.
+        // Target player reveals their hand. You choose a nonland card from it. That player discards that card.
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(filterNonLand, TargetController.ANY));
     }

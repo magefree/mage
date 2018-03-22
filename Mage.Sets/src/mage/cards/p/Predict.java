@@ -51,7 +51,7 @@ public class Predict extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
 
 
-        // Name a card, then target player puts the top card of his or her library into his or her graveyard. If that card is the named card, you draw two cards. Otherwise, you draw a card.
+        // Name a card, then target player puts the top card of their library into their graveyard. If that card is the named card, you draw two cards. Otherwise, you draw a card.
         this.getSpellAbility().addEffect(new NameACardEffect(NameACardEffect.TypeOfName.ALL));
         this.getSpellAbility().addEffect(new PredictEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
@@ -71,7 +71,7 @@ class PredictEffect extends OneShotEffect {
 
     public PredictEffect() {
         super(Outcome.DrawCard);
-        this.staticText = ", then target player puts the top card of his or her library into his or her graveyard. "
+        this.staticText = ", then target player puts the top card of their library into their graveyard. "
                 + "If that card is the named card, you draw two cards. Otherwise, you draw a card.";
     }
     

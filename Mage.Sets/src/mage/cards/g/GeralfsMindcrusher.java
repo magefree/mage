@@ -53,7 +53,7 @@ public class GeralfsMindcrusher extends CardImpl {
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 
-        // When Geralf's Mindcrusher enters the battlefield, target player puts the top five cards of his or her library into his or her graveyard.
+        // When Geralf's Mindcrusher enters the battlefield, target player puts the top five cards of their library into their graveyard.
         Ability ability = new EntersBattlefieldTriggeredAbility(new PutLibraryIntoGraveTargetEffect(5));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);

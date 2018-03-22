@@ -56,7 +56,7 @@ public class SinCollector extends CardImpl {
         this.toughness = new MageInt(1);
 
 
-        // When Sin Collector enters the battlefield, target opponent reveals his or her hand. You choose an instant or sorcery card from it and exile that card.
+        // When Sin Collector enters the battlefield, target opponent reveals their hand. You choose an instant or sorcery card from it and exile that card.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ExileCardYouChooseTargetOpponentEffect(new FilterInstantOrSorceryCard("an instant or sorcery card")));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);

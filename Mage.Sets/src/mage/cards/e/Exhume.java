@@ -51,7 +51,7 @@ public class Exhume extends CardImpl {
     public Exhume(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}");
 
-        // Each player puts a creature card from his or her graveyard onto the battlefield.
+        // Each player puts a creature card from their graveyard onto the battlefield.
         this.getSpellAbility().addEffect(new ExhumeEffect());
     }
 
@@ -69,7 +69,7 @@ class ExhumeEffect extends OneShotEffect {
 
     public ExhumeEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "Each player puts a creature card from his or her graveyard onto the battlefield";
+        this.staticText = "Each player puts a creature card from their graveyard onto the battlefield";
     }
 
     public ExhumeEffect(final ExhumeEffect effect) {

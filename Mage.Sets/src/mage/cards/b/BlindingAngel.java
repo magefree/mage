@@ -52,7 +52,7 @@ public class BlindingAngel extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        // Whenever Blinding Angel deals combat damage to a player, that player skips his or her next combat phase.
+        // Whenever Blinding Angel deals combat damage to a player, that player skips their next combat phase.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new SkipNextCombatEffect(), false, true));
     }
 

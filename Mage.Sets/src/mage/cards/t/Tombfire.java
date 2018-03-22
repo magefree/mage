@@ -52,7 +52,7 @@ public class Tombfire extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}");
 
 
-        // Target player exiles all cards with flashback from his or her graveyard.
+        // Target player exiles all cards with flashback from their graveyard.
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new TombfireEffect());
 
@@ -78,7 +78,7 @@ class TombfireEffect extends OneShotEffect {
 
     public TombfireEffect() {
         super(Outcome.Exile);
-        staticText = "Target player exiles all cards with flashback from his or her graveyard";
+        staticText = "Target player exiles all cards with flashback from their graveyard";
     }
 
     public TombfireEffect(final TombfireEffect effect) {

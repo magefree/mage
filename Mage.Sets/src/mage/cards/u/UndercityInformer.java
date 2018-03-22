@@ -65,7 +65,7 @@ public class UndercityInformer extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
-        //{1}, Sacrifice a creature: Target player reveals the top card of his or her library until he or she reveals a land card, then puts those cards into his or her graveyard.
+        //{1}, Sacrifice a creature: Target player reveals the top card of their library until he or she reveals a land card, then puts those cards into their graveyard.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UndercityInformerEffect(), new ManaCostsImpl("{1}"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         ability.addTarget(new TargetPlayer());
@@ -86,7 +86,7 @@ class UndercityInformerEffect extends OneShotEffect {
 
     public UndercityInformerEffect() {
         super(Outcome.PutCardInPlay);
-        this.staticText = "Target player reveals the top card of his or her library until he or she reveals a land card, then puts those cards into his or her graveyard";
+        this.staticText = "Target player reveals the top card of their library until he or she reveals a land card, then puts those cards into their graveyard";
     }
 
     public UndercityInformerEffect(final UndercityInformerEffect effect) {

@@ -52,7 +52,7 @@ public class Monomania extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}{B}");
 
 
-        // Target player chooses a card in his or her hand and discards the rest.
+        // Target player chooses a card in their hand and discards the rest.
         this.getSpellAbility().addEffect(new MonomaniaEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
@@ -73,7 +73,7 @@ class MonomaniaEffect extends OneShotEffect {
 
     public MonomaniaEffect() {
         super(Outcome.Discard);
-        staticText = "Target player chooses a card in his or her hand and discards the rest";
+        staticText = "Target player chooses a card in their hand and discards the rest";
     }
 
     public MonomaniaEffect(final MonomaniaEffect effect) {

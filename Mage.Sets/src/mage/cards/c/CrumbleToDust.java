@@ -47,7 +47,7 @@ public class CrumbleToDust extends CardImpl {
         // Devoid
         this.addAbility(new DevoidAbility(this.color));
 
-        // Exile target nonbasic land. Search its controller's graveyard, hand, and library for any number of cards with the same name as that land and exile them. Then that player shuffles his or her library.
+        // Exile target nonbasic land. Search its controller's graveyard, hand, and library for any number of cards with the same name as that land and exile them. Then that player shuffles their library.
         this.getSpellAbility().addTarget(new TargetNonBasicLandPermanent());
         this.getSpellAbility().addEffect(new ExileTargetAndSearchGraveyardHandLibraryEffect(false, "its controller's", "any number of cards with the same name as that land"));
     }

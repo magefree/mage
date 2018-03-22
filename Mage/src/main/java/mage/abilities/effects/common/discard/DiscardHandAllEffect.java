@@ -43,7 +43,7 @@ public class DiscardHandAllEffect extends OneShotEffect {
 
     public DiscardHandAllEffect() {
         super(Outcome.Discard);
-        this.staticText = "Each player discards his or her hand";
+        this.staticText = "Each player discards their hand";
     }
 
     public DiscardHandAllEffect(final DiscardHandAllEffect effect) {

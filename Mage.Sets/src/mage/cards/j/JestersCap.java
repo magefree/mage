@@ -55,7 +55,7 @@ public class JestersCap extends CardImpl {
     public JestersCap(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
-        // {2}, {tap}, Sacrifice Jester's Cap: Search target player's library for three cards and exile them. Then that player shuffles his or her library.
+        // {2}, {tap}, Sacrifice Jester's Cap: Search target player's library for three cards and exile them. Then that player shuffles their library.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new JestersCapEffect(), new ManaCostsImpl("{2}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
@@ -77,7 +77,7 @@ class JestersCapEffect extends OneShotEffect {
 
     public JestersCapEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Search target player's library for three cards and exile them. Then that player shuffles his or her library";
+        this.staticText = "Search target player's library for three cards and exile them. Then that player shuffles their library";
     }
 
     public JestersCapEffect(final JestersCapEffect effect) {

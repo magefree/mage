@@ -66,7 +66,7 @@ public class IsperiaTheInscrutable extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         
-        // Whenever Isperia the Inscrutable deals combat damage to a player, name a card. That player reveals his or her hand. If he or she reveals the named card, search your library for a creature card with flying, reveal it, put it into your hand, then shuffle your library.
+        // Whenever Isperia the Inscrutable deals combat damage to a player, name a card. That player reveals their hand. If he or she reveals the named card, search your library for a creature card with flying, reveal it, put it into your hand, then shuffle your library.
         Effect effect1 = new NameACardEffect(NameACardEffect.TypeOfName.ALL);
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(effect1, false, true);
         Effect effect2 = new IsperiaTheInscrutableEffect();
@@ -95,7 +95,7 @@ class IsperiaTheInscrutableEffect extends OneShotEffect {
 
     public IsperiaTheInscrutableEffect() {
         super(Outcome.Neutral);
-        staticText = "That player reveals his or her hand. If he or she reveals the named card, search your library for a creature card with flying, reveal it, put it into your hand, then shuffle your library";
+        staticText = "That player reveals their hand. If he or she reveals the named card, search your library for a creature card with flying, reveal it, put it into your hand, then shuffle your library";
     }
 
     public IsperiaTheInscrutableEffect(final IsperiaTheInscrutableEffect effect) {

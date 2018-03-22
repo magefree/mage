@@ -53,7 +53,7 @@ public class ThranFoundry extends CardImpl {
     public ThranFoundry(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
 
-        // {1}, {tap}, Exile Thran Foundry: Target player shuffles his or her graveyard into his or her library.
+        // {1}, {tap}, Exile Thran Foundry: Target player shuffles their graveyard into their library.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ThranFoundryEffect(), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         ability.addCost(new ExileSourceCost());
@@ -75,7 +75,7 @@ class ThranFoundryEffect extends OneShotEffect {
     
     ThranFoundryEffect() {
         super(Outcome.Neutral);
-        this.staticText = "Target player shuffles his or her graveyard into his or her library";
+        this.staticText = "Target player shuffles their graveyard into their library";
     }
     
     ThranFoundryEffect(final ThranFoundryEffect effect) {

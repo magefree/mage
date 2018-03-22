@@ -50,7 +50,7 @@ public class Amnesia extends CardImpl {
     public Amnesia(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}{U}{U}");
 
-        // Target player reveals his or her hand and discards all nonland cards.
+        // Target player reveals their hand and discards all nonland cards.
         this.getSpellAbility().addEffect(new AmnesiaEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
@@ -69,7 +69,7 @@ class AmnesiaEffect extends OneShotEffect {
 
     public AmnesiaEffect() {
         super(Outcome.Discard);
-        this.staticText = "Target player reveals his or her hand and discards all nonland cards";
+        this.staticText = "Target player reveals their hand and discards all nonland cards";
     }
 
     public AmnesiaEffect(final AmnesiaEffect effect) {

@@ -49,7 +49,7 @@ public class LaquatussCreativity extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{U}");
 
 
-        // Target player draws cards equal to the number of cards in his or her hand, then discards that many cards.
+        // Target player draws cards equal to the number of cards in their hand, then discards that many cards.
         this.getSpellAbility().addEffect(new LaquatussCreativityEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
@@ -68,7 +68,7 @@ class LaquatussCreativityEffect extends OneShotEffect {
     
     public LaquatussCreativityEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Target player draws cards equal to the number of cards in his or her hand, then discards that many cards.";
+        this.staticText = "Target player draws cards equal to the number of cards in their hand, then discards that many cards.";
     }
     
     public LaquatussCreativityEffect(final LaquatussCreativityEffect effect) {

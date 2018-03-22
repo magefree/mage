@@ -89,7 +89,7 @@ public class SearchLibraryPutInPlayTargetPlayerEffect extends SearchEffect {
 
     private void setText() {
         StringBuilder sb = new StringBuilder();
-        sb.append("target player searches his or her library for ");
+        sb.append("target player searches their library for ");
         if (target.getNumberOfTargets() == 0 && target.getMaxNumberOfTargets() > 0) {
             if (target.getMaxNumberOfTargets() == Integer.MAX_VALUE) {
                 sb.append("any number of ").append(' ');
@@ -104,9 +104,9 @@ public class SearchLibraryPutInPlayTargetPlayerEffect extends SearchEffect {
             sb.append(" tapped");
         }
         if (forceShuffle) {
-            sb.append(". Then that player shuffles his or her library");
+            sb.append(". Then that player shuffles their library");
         } else {
-            sb.append(". If that player does, he or she shuffles his or her library");
+            sb.append(". If that player does, he or she shuffles their library");
         }
         staticText = sb.toString();
     }

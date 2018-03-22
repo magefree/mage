@@ -56,7 +56,7 @@ public class PsychoticEpisode extends CardImpl {
     public PsychoticEpisode(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}{B}");
 
-        // Target player reveals his or her hand and the top card of his or her library. You choose a card revealed this way. That player puts the chosen card on the bottom of his or her library.
+        // Target player reveals their hand and the top card of their library. You choose a card revealed this way. That player puts the chosen card on the bottom of their library.
         this.getSpellAbility().addEffect(new PsychoticEpisodeEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
         // Madness {1}{B}
@@ -78,7 +78,7 @@ class PsychoticEpisodeEffect extends OneShotEffect {
 
     PsychoticEpisodeEffect() {
         super(Outcome.Discard);
-        staticText = "Target player reveals his or her hand and the top card of his or her library. You choose a card revealed this way. That player puts the chosen card on the bottom of his or her library.";
+        staticText = "Target player reveals their hand and the top card of their library. You choose a card revealed this way. That player puts the chosen card on the bottom of their library.";
     }
 
     PsychoticEpisodeEffect(final PsychoticEpisodeEffect effect) {

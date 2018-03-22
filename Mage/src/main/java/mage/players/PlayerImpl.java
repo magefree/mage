@@ -2313,7 +2313,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         Library searchedLibrary = null;
         String searchInfo = null;
         if (targetPlayerId.equals(playerId)) {
-            searchInfo = getLogName() + " searches his or her library";
+            searchInfo = getLogName() + " searches their library";
             searchedLibrary = library;
         } else {
             Player targetPlayer = game.getPlayer(targetPlayerId);
@@ -3460,7 +3460,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 game.informPlayers(getLogName() + " puts "
                         + (withName ? card.getLogName() : (card.isFaceDown(game) ? "a face down card" : "a card"))
                         + " from " + fromZone.toString().toLowerCase(Locale.ENGLISH) + ' '
-                        + (card.getOwnerId().equals(this.getId()) ? "into his or her hand" : "into its owner's hand")
+                        + (card.getOwnerId().equals(this.getId()) ? "into their hand" : "into its owner's hand")
                 );
             }
             result = true;
@@ -3555,7 +3555,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                         .append(" puts ").append(card.getLogName()).append(' ').append(card.isCopy() ? "(Copy) " : "")
                         .append(fromZone != null ? "from " + fromZone.toString().toLowerCase(Locale.ENGLISH) + ' ' : "");
                 if (card.getOwnerId().equals(getId())) {
-                    sb.append("into his or her graveyard");
+                    sb.append("into their graveyard");
                 } else {
                     sb.append("it into its owner's graveyard");
                 }
@@ -3587,7 +3587,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 }
                 sb.append("to the ").append(toTop ? "top" : "bottom");
                 if (card.getOwnerId().equals(getId())) {
-                    sb.append(" of his or her library");
+                    sb.append(" of their library");
                 } else {
                     Player player = game.getPlayer(card.getOwnerId());
                     if (player != null) {

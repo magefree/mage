@@ -79,7 +79,7 @@ public class CastBRGCommanderTest extends CardTestCommanderDuelBase {
      */
     @Test
     public void castCommanderAfterKarnUltimate() {
-        // +4: Target player exiles a card from his or her hand.
+        // +4: Target player exiles a card from their hand.
         // -3: Exile target permanent.
         // -14: Restart the game, leaving in exile all non-Aura permanent cards exiled with Karn Liberated. Then put those cards onto the battlefield under your control.
         addCard(Zone.BATTLEFIELD, playerA, "Karn Liberated", 1);

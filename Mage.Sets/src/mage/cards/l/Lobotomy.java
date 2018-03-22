@@ -56,7 +56,7 @@ public class Lobotomy extends CardImpl {
     public Lobotomy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{U}{B}");
 
-        // Target player reveals his or her hand, then you choose a card other than a basic land card from it. Search that player's graveyard, hand, and library for all cards with the same name as the chosen card and exile them. Then that player shuffles his or her library.
+        // Target player reveals their hand, then you choose a card other than a basic land card from it. Search that player's graveyard, hand, and library for all cards with the same name as the chosen card and exile them. Then that player shuffles their library.
         this.getSpellAbility().addEffect(new LobotomyEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
@@ -81,7 +81,7 @@ class LobotomyEffect extends OneShotEffect {
 
     public LobotomyEffect() {
         super(Outcome.Benefit);
-        staticText = "Target player reveals his or her hand, then you choose a card other than a basic land card from it. Search that player's graveyard, hand, and library for all cards with the same name as the chosen card and exile them. Then that player shuffles his or her library";
+        staticText = "Target player reveals their hand, then you choose a card other than a basic land card from it. Search that player's graveyard, hand, and library for all cards with the same name as the chosen card and exile them. Then that player shuffles their library";
     }
 
     public LobotomyEffect(final LobotomyEffect effect) {
@@ -137,7 +137,7 @@ class LobotomyEffect extends OneShotEffect {
             }
 
             // search cards in Library
-            // If the player has no nonland cards in his or her hand, you can still search that player's library and have him or her shuffle it.
+            // If the player has no nonland cards in their hand, you can still search that player's library and have him or her shuffle it.
             if (chosenCard != null || controller.chooseUse(outcome, "Search library anyway?", source, game)) {
                 TargetCardInLibrary targetCardsLibrary = new TargetCardInLibrary(0, Integer.MAX_VALUE, filterNamedCards);
                 controller.searchLibrary(targetCardsLibrary, game, targetPlayer.getId());

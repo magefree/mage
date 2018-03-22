@@ -66,7 +66,7 @@ public class ManaCache extends CardImpl {
         TriggeredAbility ability = new OnEventTriggeredAbility(GameEvent.EventType.END_TURN_STEP_PRE, "beginning of each player's end step", true, new ManaCacheEffect());
         this.addAbility(ability);
         
-        // Remove a charge counter from Mana Cache: Add {C} to your mana pool. Any player may activate this ability but only during his or her turn before the end step.
+        // Remove a charge counter from Mana Cache: Add {C} to your mana pool. Any player may activate this ability but only during their turn before the end step.
         this.addAbility(new ManaCacheManaAbility());
     }
 
@@ -143,6 +143,6 @@ class ManaCacheManaAbility extends ActivatedManaAbilityImpl {
 
     @Override
     public String getRule() {
-        return super.getRule() + " Any player may activate this ability but only during his or her turn before the end step.";
+        return super.getRule() + " Any player may activate this ability but only during their turn before the end step.";
     }
 }

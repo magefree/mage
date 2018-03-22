@@ -54,7 +54,7 @@ public class MindFuneral extends CardImpl {
 
         
 
-        // Target opponent reveals cards from the top of his or her library until four land cards are revealed. That player puts all cards revealed this way into his or her graveyard.
+        // Target opponent reveals cards from the top of their library until four land cards are revealed. That player puts all cards revealed this way into their graveyard.
         this.getSpellAbility().addEffect(new MindFuneralEffect());
         this.getSpellAbility().addTarget(new TargetOpponent());
         
@@ -74,7 +74,7 @@ class MindFuneralEffect extends OneShotEffect {
 
     public MindFuneralEffect() {
         super(Outcome.Detriment);
-        this.staticText = "Target opponent reveals cards from the top of his or her library until four land cards are revealed. That player puts all cards revealed this way into his or her graveyard";
+        this.staticText = "Target opponent reveals cards from the top of their library until four land cards are revealed. That player puts all cards revealed this way into their graveyard";
     }
 
     public MindFuneralEffect(final MindFuneralEffect effect) {

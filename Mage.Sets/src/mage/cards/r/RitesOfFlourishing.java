@@ -53,7 +53,7 @@ public class RitesOfFlourishing extends CardImpl {
         // At the beginning of each player's draw step, that player draws an additional card.
         this.addAbility(new RitesOfFlourishingAbility());
 
-        // Each player may play an additional land on each of his or her turns.
+        // Each player may play an additional land on each of their turns.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayAdditionalLandsAllEffect()));
     }
 

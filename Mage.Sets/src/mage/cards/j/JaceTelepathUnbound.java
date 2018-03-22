@@ -87,7 +87,7 @@ public class JaceTelepathUnbound extends CardImpl {
         ability.addTarget(new TargetCardInYourGraveyard(new FilterInstantOrSorceryCard()));
         this.addAbility(ability);
 
-        // -9: You get an emblem with "Whenever you cast a spell, target opponent puts the top five cards of his or her library into his or her graveyard".
+        // -9: You get an emblem with "Whenever you cast a spell, target opponent puts the top five cards of their library into their graveyard".
         this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new JaceTelepathUnboundEmblem()), -9));
     }
 

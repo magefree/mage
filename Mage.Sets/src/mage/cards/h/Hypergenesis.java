@@ -60,7 +60,7 @@ public class Hypergenesis extends CardImpl {
         // Suspend 3-{1}{G}{G}
         this.addAbility(new SuspendAbility(3, new ManaCostsImpl("{1}{G}{G}"), this));
 
-        // Starting with you, each player may put an artifact, creature, enchantment, or land card from his or her hand onto the battlefield. Repeat this process until no one puts a card onto the battlefield.
+        // Starting with you, each player may put an artifact, creature, enchantment, or land card from their hand onto the battlefield. Repeat this process until no one puts a card onto the battlefield.
         this.getSpellAbility().addEffect(new HypergenesisEffect());
     }
 
@@ -85,7 +85,7 @@ class HypergenesisEffect extends OneShotEffect {
 
     HypergenesisEffect() {
         super(Outcome.PutCardInPlay);
-        this.staticText = "Starting with you, each player may put an artifact, creature, enchantment, or land card from his or her hand onto the battlefield. Repeat this process until no one puts a card onto the battlefield.";
+        this.staticText = "Starting with you, each player may put an artifact, creature, enchantment, or land card from their hand onto the battlefield. Repeat this process until no one puts a card onto the battlefield.";
     }
 
     HypergenesisEffect(final HypergenesisEffect effect) {

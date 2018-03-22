@@ -63,7 +63,7 @@ public class AlhammarretHighArbiter extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        // As Alhammarret, High Arbiter enters the battlefield, each opponent reveals his or her hand. You choose the name of a nonland card revealed this way.
+        // As Alhammarret, High Arbiter enters the battlefield, each opponent reveals their hand. You choose the name of a nonland card revealed this way.
         // Your opponents can't cast spells with the chosen name.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EntersBattlefieldEffect(new AlhammarretHighArbiterEffect(), "")));
     }
@@ -82,7 +82,7 @@ class AlhammarretHighArbiterEffect extends OneShotEffect {
 
     public AlhammarretHighArbiterEffect() {
         super(Outcome.Benefit);
-        this.staticText = "As {this} enters the battlefield, each opponent reveals his or her hand. You choose the name of a nonland card revealed this way."
+        this.staticText = "As {this} enters the battlefield, each opponent reveals their hand. You choose the name of a nonland card revealed this way."
                 + "<br>Your opponents can't cast spells with the chosen name";
     }
 

@@ -54,7 +54,7 @@ public class StrongholdGambit extends CardImpl {
     public StrongholdGambit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}");
 
-        // Each player chooses a card in his or her hand. Then each player reveals his or her chosen card. The owner of each creature card revealed this way with the lowest converted mana cost puts it onto the battlefield.
+        // Each player chooses a card in their hand. Then each player reveals their chosen card. The owner of each creature card revealed this way with the lowest converted mana cost puts it onto the battlefield.
         getSpellAbility().addEffect(new StrongholdGambitEffect());
     }
 
@@ -72,7 +72,7 @@ class StrongholdGambitEffect extends OneShotEffect {
 
     public StrongholdGambitEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "Each player chooses a card in his or her hand. Then each player reveals his or her chosen card. The owner of each creature card revealed this way with the lowest converted mana cost puts it onto the battlefield";
+        this.staticText = "Each player chooses a card in their hand. Then each player reveals their chosen card. The owner of each creature card revealed this way with the lowest converted mana cost puts it onto the battlefield";
     }
 
     public StrongholdGambitEffect(final StrongholdGambitEffect effect) {

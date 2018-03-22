@@ -61,7 +61,7 @@ public class PsychicIntrusion extends CardImpl {
     public PsychicIntrusion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}{B}");
 
-        // Target opponent reveals his or her hand. You choose a nonland card from that player's graveyard or hand and exile it.
+        // Target opponent reveals their hand. You choose a nonland card from that player's graveyard or hand and exile it.
         // You may cast that card for as long as it remains exiled, and you may spend mana as though it were mana of any color
         // to cast that spell.
         this.getSpellAbility().addTarget(new TargetOpponent());
@@ -85,7 +85,7 @@ class PsychicIntrusionExileEffect extends OneShotEffect {
 
     public PsychicIntrusionExileEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Target opponent reveals his or her hand. You choose a nonland card from that player's graveyard or hand and exile it. You may cast that card for as long as it remains exiled, and you may spend mana as though it were mana of any color to cast that spell";
+        this.staticText = "Target opponent reveals their hand. You choose a nonland card from that player's graveyard or hand and exile it. You may cast that card for as long as it remains exiled, and you may spend mana as though it were mana of any color to cast that spell";
     }
 
     public PsychicIntrusionExileEffect(final PsychicIntrusionExileEffect effect) {

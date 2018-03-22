@@ -54,7 +54,7 @@ public class StorageMatrix extends CardImpl {
     public StorageMatrix(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
-        // As long as Storage Matrix is untapped, each player chooses artifact, creature, or land during his or her untap step. That player can untap only permanents of the chosen type this step.
+        // As long as Storage Matrix is untapped, each player chooses artifact, creature, or land during their untap step. That player can untap only permanents of the chosen type this step.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new StorageMatrixRestrictionEffect()));
     }
 
@@ -83,7 +83,7 @@ class StorageMatrixRestrictionEffect extends RestrictionEffect {
 
     public StorageMatrixRestrictionEffect() {
         super(Duration.WhileOnBattlefield);
-        staticText = "As long as Storage Matrix is untapped, each player chooses artifact, creature, or land during his or her untap step. That player can untap only permanents of the chosen type this step";
+        staticText = "As long as Storage Matrix is untapped, each player chooses artifact, creature, or land during their untap step. That player can untap only permanents of the chosen type this step";
     }
 
     public StorageMatrixRestrictionEffect(final StorageMatrixRestrictionEffect effect) {

@@ -68,7 +68,7 @@ public class OathOfGhouls extends CardImpl {
     public OathOfGhouls(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
 
-        // At the beginning of each player's upkeep, that player chooses target player whose graveyard has fewer creature cards in it than his or her graveyard does and is his or her opponent. The first player may return a creature card from his or her graveyard to his or her hand.
+        // At the beginning of each player's upkeep, that player chooses target player whose graveyard has fewer creature cards in it than their graveyard does and is their opponent. The first player may return a creature card from their graveyard to their hand.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new OathOfGhoulsEffect(), TargetController.ANY, false);
         ability.addTarget(new TargetPlayer(1, 1, false, filter));
         this.addAbility(ability);
@@ -125,7 +125,7 @@ class OathOfGhoulsPredicate implements ObjectSourcePlayerPredicate<ObjectSourceP
 
     @Override
     public String toString() {
-        return "player whose graveyard has fewer creature cards in it than his or her graveyard does and is his or her opponent";
+        return "player whose graveyard has fewer creature cards in it than their graveyard does and is their opponent";
     }
 }
 
@@ -140,7 +140,7 @@ class OathOfGhoulsEffect extends OneShotEffect {
 
     public OathOfGhoulsEffect() {
         super(Outcome.Benefit);
-        staticText = "that player chooses target player whose graveyard has fewer creature cards in it than his or her graveyard does and is his or her opponent. The first player may return a creature card from his or her graveyard to his or her hand";
+        staticText = "that player chooses target player whose graveyard has fewer creature cards in it than their graveyard does and is their opponent. The first player may return a creature card from their graveyard to their hand";
     }
 
     public OathOfGhoulsEffect(OathOfGhoulsEffect effect) {

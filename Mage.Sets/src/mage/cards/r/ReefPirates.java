@@ -50,9 +50,9 @@ public class ReefPirates extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Whenever Reef Pirates deals damage to an opponent, that player puts the top card of his or her library into his or her graveyard.
+        // Whenever Reef Pirates deals damage to an opponent, that player puts the top card of their library into their graveyard.
         Effect effect = new PutLibraryIntoGraveTargetEffect(1);
-        effect.setText("that player puts the top card of his or her library into his or her graveyard");
+        effect.setText("that player puts the top card of their library into their graveyard");
         this.addAbility(new DealsDamageToAPlayerTriggeredAbility(effect, false, true));
     }
 

@@ -136,7 +136,7 @@ class ResearchEffect extends OneShotEffect {
                 }
             }
 
-            game.informPlayers(player.getLogName() + " has chosen " + count + " card(s) to shuffle into his or her library.");
+            game.informPlayers(player.getLogName() + " has chosen " + count + " card(s) to shuffle into their library.");
 
             if (count > 0) {
                 player.shuffleLibrary(source, game);

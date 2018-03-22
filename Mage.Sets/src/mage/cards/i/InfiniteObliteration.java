@@ -53,7 +53,7 @@ public class InfiniteObliteration extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}{B}");
 
         // Name a creature card.  Search target opponent's graveyard, hand, and library
-        // for any number of cards with that name and exile them.  Then that player shuffles his or her library.
+        // for any number of cards with that name and exile them.  Then that player shuffles their library.
         this.getSpellAbility().addEffect(new InfiniteObliterationEffect());
         this.getSpellAbility().addTarget(new TargetOpponent());
     }

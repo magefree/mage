@@ -53,7 +53,7 @@ public class AltarOfTheBrood extends CardImpl {
     public AltarOfTheBrood(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
 
-        // Whenever another permanent enters the battlefield under your control, each opponent puts the top card of his or her library into his or her graveyard.
+        // Whenever another permanent enters the battlefield under your control, each opponent puts the top card of their library into their graveyard.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD,
                 new PutTopCardOfLibraryIntoGraveEachPlayerEffect(1, TargetController.OPPONENT), filter, false, null, true));
     }

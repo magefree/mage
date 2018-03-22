@@ -67,7 +67,7 @@ public class JacesMindseeker extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        // When Jace's Mindseeker enters the battlefield, target opponent puts the top five cards of his or her library into his or her graveyard.
+        // When Jace's Mindseeker enters the battlefield, target opponent puts the top five cards of their library into their graveyard.
         // You may cast an instant or sorcery card from among them without paying its mana cost.
         Ability ability = new EntersBattlefieldTriggeredAbility(new JaceMindseekerEffect());
         ability.addTarget(new TargetOpponent());
@@ -90,7 +90,7 @@ class JaceMindseekerEffect extends OneShotEffect {
 
     public JaceMindseekerEffect() {
         super(Outcome.PlayForFree);
-        this.staticText = "target opponent puts the top five cards of his or her library into his or her graveyard. You may cast an instant or sorcery card from among them without paying its mana cost";
+        this.staticText = "target opponent puts the top five cards of their library into their graveyard. You may cast an instant or sorcery card from among them without paying its mana cost";
     }
 
     public JaceMindseekerEffect(final JaceMindseekerEffect effect) {

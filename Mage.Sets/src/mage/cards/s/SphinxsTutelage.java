@@ -55,7 +55,7 @@ public class SphinxsTutelage extends CardImpl {
     public SphinxsTutelage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");
 
-        // Whenever you draw a card, target opponent puts the top two cards of his or her library into his or her graveyard. If they're both nonland cards that share a color, repeat this process.
+        // Whenever you draw a card, target opponent puts the top two cards of their library into their graveyard. If they're both nonland cards that share a color, repeat this process.
         Ability ability = new DrawCardControllerTriggeredAbility(new SphinxsTutelageEffect(), false);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
@@ -78,7 +78,7 @@ class SphinxsTutelageEffect extends OneShotEffect {
 
     public SphinxsTutelageEffect() {
         super(Outcome.Benefit);
-        this.staticText = "target opponent puts the top two cards of his or her library into his or her graveyard. If they're both nonland cards that share a color, repeat this process";
+        this.staticText = "target opponent puts the top two cards of their library into their graveyard. If they're both nonland cards that share a color, repeat this process";
     }
 
     public SphinxsTutelageEffect(final SphinxsTutelageEffect effect) {

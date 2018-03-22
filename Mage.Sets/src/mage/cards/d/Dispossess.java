@@ -46,7 +46,7 @@ public class Dispossess extends CardImpl {
     public Dispossess(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}");
 
-        // Name an artifact card. Search target player's graveyard, hand, and library for any number of cards with that name and exile them. Then that player shuffles his or her library.
+        // Name an artifact card. Search target player's graveyard, hand, and library for any number of cards with that name and exile them. Then that player shuffles their library.
         this.getSpellAbility().addEffect((new NameACardEffect(NameACardEffect.TypeOfName.ARTIFACT_NAME)));
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new DispossessEffect());

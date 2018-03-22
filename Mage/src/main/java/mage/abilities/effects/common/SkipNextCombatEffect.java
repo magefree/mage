@@ -21,7 +21,7 @@ public class SkipNextCombatEffect extends OneShotEffect {
     
     public SkipNextCombatEffect() {
         super(Outcome.Detriment);
-        staticText = "target opponent skips his or her next combat phase";
+        staticText = "target opponent skips their next combat phase";
     }
 
     public SkipNextCombatEffect(SkipNextCombatEffect effect) {

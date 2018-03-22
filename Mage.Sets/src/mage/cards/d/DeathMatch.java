@@ -53,7 +53,7 @@ public class DeathMatch extends CardImpl {
     public DeathMatch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}");
 
-        // Whenever a creature enters the battlefield, that creature's controller may have target creature of his or her choice get -3/-3 until end of turn.
+        // Whenever a creature enters the battlefield, that creature's controller may have target creature of their choice get -3/-3 until end of turn.
         // NOTE: The ability being optional is implemented in the subclass to give the choice to correct player.
         Ability ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new DeathMatchEffect(),
                 StaticFilters.FILTER_PERMANENT_CREATURE, false, SetTargetPointer.PLAYER, "");
@@ -88,7 +88,7 @@ class DeathMatchEffect extends OneShotEffect {
 
     public DeathMatchEffect() {
         super(Outcome.UnboostCreature);
-        staticText = "that creature's controller may have target creature of his or her choice get -3/-3 until end of turn.";
+        staticText = "that creature's controller may have target creature of their choice get -3/-3 until end of turn.";
     }
 
     public boolean apply(Game game, Ability source) {

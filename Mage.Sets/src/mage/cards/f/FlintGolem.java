@@ -54,7 +54,7 @@ public class FlintGolem extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
-        // Whenever Flint Golem becomes blocked, defending player puts the top three cards of his or her library into his or her graveyard.
+        // Whenever Flint Golem becomes blocked, defending player puts the top three cards of their library into their graveyard.
         this.addAbility(new BecomesBlockedByCreatureTriggeredAbility(new FlintGolemEffect(), false));
     }
 
@@ -72,7 +72,7 @@ class FlintGolemEffect extends OneShotEffect {
 
     public FlintGolemEffect() {
         super(Outcome.Detriment);
-        this.staticText = "defending player puts the top three cards of his or her library into his or her graveyard";
+        this.staticText = "defending player puts the top three cards of their library into their graveyard";
     }
 
     public FlintGolemEffect(final FlintGolemEffect effect) {

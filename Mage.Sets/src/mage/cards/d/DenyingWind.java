@@ -52,7 +52,7 @@ public class DenyingWind extends CardImpl {
     public DenyingWind(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{7}{U}{U}");
 
-        // Search target player's library for up to seven cards and exile them. Then that player shuffles his or her library.
+        // Search target player's library for up to seven cards and exile them. Then that player shuffles their library.
         getSpellAbility().addEffect(new DenyingWindEffect());
         getSpellAbility().addTarget(new TargetPlayer());
     }
@@ -71,7 +71,7 @@ class DenyingWindEffect extends OneShotEffect {
 
     public DenyingWindEffect() {
         super(Outcome.Neutral);
-        staticText = "search target player's library for up to seven cards and exile them. Then that player shuffles his or her library";
+        staticText = "search target player's library for up to seven cards and exile them. Then that player shuffles their library";
     }
 
     public DenyingWindEffect(final DenyingWindEffect effect) {

@@ -250,7 +250,7 @@ public abstract class AbilityImpl implements Ability {
 
         /* 20130201 - 601.2b
          * If the player wishes to splice any cards onto the spell (see rule 702.45), he
-         * or she reveals those cards in his or her hand.
+         * or she reveals those cards in their hand.
          */
         if (this.abilityType == AbilityType.SPELL) {
             game.getContinuousEffects().applySpliceEffects(this, game);
@@ -313,7 +313,7 @@ public abstract class AbilityImpl implements Ability {
         for (UUID modeId : this.getModes().getSelectedModes()) {
             this.getModes().setActiveMode(modeId);
             //20121001 - 601.2c
-            // 601.2c The player announces his or her choice of an appropriate player, object, or zone for
+            // 601.2c The player announces their choice of an appropriate player, object, or zone for
             // each target the spell requires. A spell may require some targets only if an alternative or
             // additional cost (such as a buyback or kicker cost), or a particular mode, was chosen for it;
             // otherwise, the spell is cast as though it did not require those targets. If the spell has a

@@ -49,7 +49,7 @@ public class VesselOfParamnesia extends CardImpl {
     public VesselOfParamnesia(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}");
 
-        // {U}, Sacrifice Vessel of Paramnesia: Target player puts the top three cards of his or her library into his or her graveyard. Draw a card.
+        // {U}, Sacrifice Vessel of Paramnesia: Target player puts the top three cards of their library into their graveyard. Draw a card.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutTopCardOfLibraryIntoGraveTargetEffect(3), new ManaCostsImpl("{U}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetPlayer());

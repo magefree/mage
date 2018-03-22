@@ -63,7 +63,7 @@ public class DireFleetRavager extends CardImpl {
         // Deathtouch
         this.addAbility(DeathtouchAbility.getInstance());
 
-        // When Dire Fleet Ravager enters the battlefield, each player loses a third of his or her life, rounded up.
+        // When Dire Fleet Ravager enters the battlefield, each player loses a third of their life, rounded up.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DireFleetRavagerEffect()));
     }
 
@@ -81,7 +81,7 @@ class DireFleetRavagerEffect extends OneShotEffect {
 
     DireFleetRavagerEffect() {
         super(Outcome.Detriment);
-        this.staticText = "each player loses a third of his or her life, rounded up";
+        this.staticText = "each player loses a third of their life, rounded up";
     }
 
     DireFleetRavagerEffect(final DireFleetRavagerEffect effect) {

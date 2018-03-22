@@ -60,7 +60,7 @@ public class ThoughtLash extends CardImpl {
         // Cumulative upkeep - Exile the top card of your library.
         this.addAbility(new CumulativeUpkeepAbility(new ExileFromTopOfLibraryCost(1)));
 
-        // When a player doesn't pay Thought Lash's cumulative upkeep, that player exiles all cards from his or her library.
+        // When a player doesn't pay Thought Lash's cumulative upkeep, that player exiles all cards from their library.
         this.addAbility(new ThoughtLashTriggeredAbility());
 
         // Exile the top card of your library: Prevent the next 1 damage that would be dealt to you this turn.
@@ -104,7 +104,7 @@ class ThoughtLashTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "When a player doesn't pay {this}'s cumulative upkeep, that player exiles all cards from his or her library.";
+        return "When a player doesn't pay {this}'s cumulative upkeep, that player exiles all cards from their library.";
     }
 }
 
@@ -112,7 +112,7 @@ class ThoughtLashExileLibraryEffect extends OneShotEffect {
 
     ThoughtLashExileLibraryEffect() {
         super(Outcome.Detriment);
-        this.staticText = "that player exiles all cards from his or her library";
+        this.staticText = "that player exiles all cards from their library";
     }
 
     ThoughtLashExileLibraryEffect(final ThoughtLashExileLibraryEffect effect) {

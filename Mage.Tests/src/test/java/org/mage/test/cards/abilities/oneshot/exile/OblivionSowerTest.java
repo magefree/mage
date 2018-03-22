@@ -47,7 +47,7 @@ public class OblivionSowerTest extends CardTestPlayerBase {
     @Test
     public void testPlayLandsFromExile() {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 6);
-        // When you cast Oblivion Sower, target opponent exiles the top four cards of his or her library, then you may put any number of land cards that player owns from exile onto the battlefield under your control.
+        // When you cast Oblivion Sower, target opponent exiles the top four cards of their library, then you may put any number of land cards that player owns from exile onto the battlefield under your control.
         addCard(Zone.HAND, playerA, "Oblivion Sower"); // Creature - 5/8
 
         // Canopy Vista enters the battlefield tapped unless you control two or more basic lands.

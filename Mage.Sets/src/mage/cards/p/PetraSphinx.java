@@ -59,7 +59,7 @@ public class PetraSphinx extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 
-        // {tap}: Target player chooses a card name, then reveals the top card of his or her library. If that card has the chosen name, that player puts it into his or her hand. If it doesn't, the player puts it into his or her graveyard.
+        // {tap}: Target player chooses a card name, then reveals the top card of their library. If that card has the chosen name, that player puts it into their hand. If it doesn't, the player puts it into their graveyard.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PetraSphinxEffect(), new TapSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
@@ -80,7 +80,7 @@ class PetraSphinxEffect extends OneShotEffect {
 
     public PetraSphinxEffect() {
         super(Outcome.DrawCard);
-        staticText = "Target player chooses a card name, then reveals the top card of his or her library. If that card has the chosen name, that player puts it into his or her hand. If it doesn't, the player puts it into his or her graveyard";
+        staticText = "Target player chooses a card name, then reveals the top card of their library. If that card has the chosen name, that player puts it into their hand. If it doesn't, the player puts it into their graveyard";
     }
 
     public PetraSphinxEffect(final PetraSphinxEffect effect) {

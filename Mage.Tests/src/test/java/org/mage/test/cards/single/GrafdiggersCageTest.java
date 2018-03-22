@@ -65,7 +65,7 @@ public class GrafdiggersCageTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Grafdigger's Cage");
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 2);
         
-        // Name a nonland card. Target player reveals his or her hand and discards all cards with that name.
+        // Name a nonland card. Target player reveals their hand and discards all cards with that name.
         // Flashback-Sacrifice a creature. (You may cast this card from your graveyard for its flashback cost. Then exile it.)       
         addCard(Zone.GRAVEYARD, playerA, "Cabal Therapy");
 

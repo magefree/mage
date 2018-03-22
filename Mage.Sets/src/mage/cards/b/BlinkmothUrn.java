@@ -31,7 +31,7 @@ public class BlinkmothUrn extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
 
         // At the beginning of each player's precombat main phase, if
-        // Blinkmoth Urn is untapped, that player adds {1} to his or her
+        // Blinkmoth Urn is untapped, that player adds {1} to their
         // mana pool for each artifact he or she controls.
         this.addAbility(new BeginningOfPreCombatMainTriggeredAbility(new BlinkmothUrnEffect(), TargetController.ANY, false));
     }
@@ -51,7 +51,7 @@ class BlinkmothUrnEffect extends OneShotEffect {
 
     public BlinkmothUrnEffect() {
         super(Outcome.PutManaInPool);
-        this.staticText = "if Blinkmoth Urn is untapped, that player adds {1} to his or her mana pool for each artifact he or she controls";
+        this.staticText = "if Blinkmoth Urn is untapped, that player adds {1} to their mana pool for each artifact he or she controls";
     }
 
     public BlinkmothUrnEffect(final BlinkmothUrnEffect effect) {

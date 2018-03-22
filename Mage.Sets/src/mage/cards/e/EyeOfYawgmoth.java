@@ -122,7 +122,7 @@ class EyeOfYawgmothEffect extends OneShotEffect {
                 if (card != null) {
                     cards.remove(card);
                     card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
-                    game.informPlayers(source.getSourceObject(game).getIdName() + ": " + controller.getLogName() + " puts " + card.getIdName() + " into his or her hand");
+                    game.informPlayers(source.getSourceObject(game).getIdName() + ": " + controller.getLogName() + " puts " + card.getIdName() + " into their hand");
                 }
             }
             for (UUID cardId : cards) {

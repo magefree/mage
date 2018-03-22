@@ -54,7 +54,7 @@ public class Gravestorm extends CardImpl {
     public Gravestorm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}{B}{B}");
 
-        // At the beginning of your upkeep, target opponent may exile a card from his or her graveyard. If that player doesn't, you may draw a card.
+        // At the beginning of your upkeep, target opponent may exile a card from their graveyard. If that player doesn't, you may draw a card.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new GravestormEffect(), TargetController.YOU, false);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
@@ -74,7 +74,7 @@ class GravestormEffect extends OneShotEffect {
 
     public GravestormEffect() {
         super(Outcome.Exile);
-        this.staticText = "At the beginning of your upkeep, target opponent may exile a card from his or her graveyard. If that player doesn't, you may draw a card.";
+        this.staticText = "At the beginning of your upkeep, target opponent may exile a card from their graveyard. If that player doesn't, you may draw a card.";
     }
 
     public GravestormEffect(final GravestormEffect effect) {

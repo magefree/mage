@@ -51,7 +51,7 @@ public class ThassasDevourer extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(6);
 
-        // Constellation — Whenever Thassa's Devourer or another enchantment enters the battlefield under your control, target player puts the top two cards of his or her library into his or her graveyard.
+        // Constellation — Whenever Thassa's Devourer or another enchantment enters the battlefield under your control, target player puts the top two cards of their library into their graveyard.
         Ability ability = new ConstellationAbility(new PutTopCardOfLibraryIntoGraveTargetEffect(2), false);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);

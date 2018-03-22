@@ -43,7 +43,7 @@ public class FalsePeace extends CardImpl {
     public FalsePeace(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{W}");
 
-        // Target player skips all combat phases of his or her next turn.
+        // Target player skips all combat phases of their next turn.
         this.getSpellAbility().addEffect(new SkipNextCombatEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
     }

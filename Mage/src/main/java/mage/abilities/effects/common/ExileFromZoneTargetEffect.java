@@ -107,6 +107,6 @@ public class ExileFromZoneTargetEffect extends OneShotEffect {
     }
 
     private void setText() {
-        staticText = "target player exiles " + CardUtil.numberToText(amount, "a") + ' ' + filter.getMessage() + " from his or her " + zone.toString().toLowerCase(Locale.ENGLISH);
+        staticText = "target player exiles " + CardUtil.numberToText(amount, "a") + ' ' + filter.getMessage() + " from their " + zone.toString().toLowerCase(Locale.ENGLISH);
     }
 }

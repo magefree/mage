@@ -52,7 +52,7 @@ public class RavenousTrap extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{B}{B}");
         this.subtype.add(SubType.TRAP);
 
-        // If an opponent had three or more cards put into his or her graveyard from anywhere this turn, you may pay {0} rather than pay Ravenous Trap's mana cost.
+        // If an opponent had three or more cards put into their graveyard from anywhere this turn, you may pay {0} rather than pay Ravenous Trap's mana cost.
         this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{0}"), RavenousTrapCondition.instance), new CardsPutIntoGraveyardWatcher());
 
         // Exile all cards from target player's graveyard.
@@ -89,6 +89,6 @@ enum RavenousTrapCondition implements Condition {
 
     @Override
     public String toString() {
-        return "If an opponent had three or more cards put into his or her graveyard from anywhere this turn";
+        return "If an opponent had three or more cards put into their graveyard from anywhere this turn";
     }
 }

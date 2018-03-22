@@ -71,7 +71,7 @@ public class EmbalmersTools extends CardImpl {
         // Activated abilities of creature cards in your graveyard cost {1} less to activate.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EmbalmersToolsEffect()));
 
-        // Tap an untapped Zombie you control: Target player puts the top card of his or her library into his or her graveyard.
+        // Tap an untapped Zombie you control: Target player puts the top card of their library into their graveyard.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(1), new TapTargetCost(new TargetControlledPermanent(filter)));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);

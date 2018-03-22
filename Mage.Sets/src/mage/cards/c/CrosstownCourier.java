@@ -57,7 +57,7 @@ public class CrosstownCourier extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        // Whenever Crosstown Courier deals combat damage to a player, that player puts that many cards from the top of his or her library into his or her graveyard.
+        // Whenever Crosstown Courier deals combat damage to a player, that player puts that many cards from the top of their library into their graveyard.
         this.addAbility(new CrosstownCourierTriggeredAbility());
     }
 
@@ -106,7 +106,7 @@ public class CrosstownCourier extends CardImpl {
 
         @Override
         public String getRule() {
-            return "Whenever {this} deals combat damage to a player, that player puts that many cards from the top of his or her library into his or her graveyard.";
+            return "Whenever {this} deals combat damage to a player, that player puts that many cards from the top of their library into their graveyard.";
         }
     }
 }

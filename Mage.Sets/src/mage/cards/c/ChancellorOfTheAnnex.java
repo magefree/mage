@@ -63,7 +63,7 @@ public class ChancellorOfTheAnnex extends CardImpl {
         this.power = new MageInt(5);
         this.toughness = new MageInt(6);
 
-        // You may reveal this card from your opening hand. If you do, when each opponent casts his or her first spell of the game, counter that spell unless that player pays {1}.
+        // You may reveal this card from your opening hand. If you do, when each opponent casts their first spell of the game, counter that spell unless that player pays {1}.
         this.addAbility(new ChancellorAbility(new ChancellorOfTheAnnexEffect()));
 
         this.addAbility(FlyingAbility.getInstance());
@@ -86,7 +86,7 @@ class ChancellorOfTheAnnexEffect extends OneShotEffect {
 
     public ChancellorOfTheAnnexEffect() {
         super(Outcome.Benefit);
-        staticText = "when each opponent casts his or her first spell of the game, counter that spell unless that player pays {1}";
+        staticText = "when each opponent casts their first spell of the game, counter that spell unless that player pays {1}";
     }
 
     public ChancellorOfTheAnnexEffect(ChancellorOfTheAnnexEffect effect) {

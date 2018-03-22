@@ -48,7 +48,7 @@ public class ReturnToHandFromGraveyardAllEffect extends OneShotEffect {
     public ReturnToHandFromGraveyardAllEffect(FilterCard filter) {
         super(Outcome.ReturnToHand);
         this.filter = filter;
-        staticText = "Each player returns all " + filter.getMessage() + " from his or her graveyard to his or her hand";
+        staticText = "Each player returns all " + filter.getMessage() + " from their graveyard to their hand";
     }
 
     public ReturnToHandFromGraveyardAllEffect(final ReturnToHandFromGraveyardAllEffect effect) {

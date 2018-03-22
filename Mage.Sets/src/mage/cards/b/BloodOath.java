@@ -54,7 +54,7 @@ public class BloodOath extends CardImpl {
     public BloodOath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{R}");
 
-        // Choose a card type. Target opponent reveals his or her hand. Blood Oath deals 3 damage to that player for each card of the chosen type revealed this way.
+        // Choose a card type. Target opponent reveals their hand. Blood Oath deals 3 damage to that player for each card of the chosen type revealed this way.
         this.getSpellAbility().addEffect(new BloodOathEffect());
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
@@ -86,7 +86,7 @@ class BloodOathEffect extends OneShotEffect {
 
     public BloodOathEffect() {
         super(Outcome.Benefit);
-        staticText = "Choose a card type. Target opponent reveals his or her hand. {this} deals 3 damage to that player for each card of the chosen type revealed this way";
+        staticText = "Choose a card type. Target opponent reveals their hand. {this} deals 3 damage to that player for each card of the chosen type revealed this way";
     }
 
     public BloodOathEffect(final BloodOathEffect effect) {

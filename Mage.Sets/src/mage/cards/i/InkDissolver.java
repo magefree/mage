@@ -52,7 +52,7 @@ public class InkDissolver extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Kinship - At the beginning of your upkeep, you may look at the top card of your library. If it shares a creature type with Ink Dissolver, you may reveal it. 
-        // If you do, each opponent puts the top three cards of his or her library into his or her graveyard.
+        // If you do, each opponent puts the top three cards of their library into their graveyard.
         this.addAbility(new KinshipAbility(new PutTopCardOfLibraryIntoGraveEachPlayerEffect(3, TargetController.OPPONENT)));
     }
 

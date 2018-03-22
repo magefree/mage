@@ -54,7 +54,7 @@ public class WildEvocation extends CardImpl {
     public WildEvocation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{5}{R}");
 
-        //At the beginning of each player's upkeep, that player reveals a card at random from his or her hand. If it's a land card, the player puts it onto the battlefield. Otherwise, the player casts it without paying its mana cost if able.
+        //At the beginning of each player's upkeep, that player reveals a card at random from their hand. If it's a land card, the player puts it onto the battlefield. Otherwise, the player casts it without paying its mana cost if able.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new WildEvocationEffect(), TargetController.ANY, false));
     }
 
@@ -73,7 +73,7 @@ class WildEvocationEffect extends OneShotEffect {
 
     public WildEvocationEffect() {
         super(Outcome.PutCardInPlay);
-        staticText = "that player reveals a card at random from his or her hand. "
+        staticText = "that player reveals a card at random from their hand. "
                 + "If it's a land card, that player puts it onto the battlefield. "
                 + "Otherwise, the player casts it without paying its mana cost if able";
     }

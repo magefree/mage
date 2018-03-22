@@ -54,7 +54,7 @@ public class LostHours extends CardImpl {
     public LostHours(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}");
 
-        // Target player reveals his or her hand. You choose a nonland card from it. That player puts that card into his or her library third from the top.
+        // Target player reveals their hand. You choose a nonland card from it. That player puts that card into their library third from the top.
         this.getSpellAbility().addEffect(new LostHoursEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
@@ -79,7 +79,7 @@ class LostHoursEffect extends OneShotEffect {
 
     public LostHoursEffect() {
         super(Outcome.Discard);
-        this.staticText = "Target player reveals his or her hand. You choose a nonland card from it. That player puts that card into his or her library third from the top.";
+        this.staticText = "Target player reveals their hand. You choose a nonland card from it. That player puts that card into their library third from the top.";
     }
     
     public LostHoursEffect(final LostHoursEffect effect) {

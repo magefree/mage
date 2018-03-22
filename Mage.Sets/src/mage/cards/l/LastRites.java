@@ -59,7 +59,7 @@ public class LastRites extends CardImpl {
     public LastRites(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");
 
-        // Discard any number of cards. Target player reveals his or her hand, then you choose a nonland card from it for each card discarded this way. That player discards those cards.
+        // Discard any number of cards. Target player reveals their hand, then you choose a nonland card from it for each card discarded this way. That player discards those cards.
         this.getSpellAbility().addEffect(new LastRitesEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
 
@@ -79,7 +79,7 @@ class LastRitesEffect extends OneShotEffect {
 
     LastRitesEffect() {
         super(Outcome.Discard);
-        this.staticText = "Discard any number of cards. Target player reveals his or her hand, then you choose a nonland card from it for each card discarded this way. That player discards those cards";
+        this.staticText = "Discard any number of cards. Target player reveals their hand, then you choose a nonland card from it for each card discarded this way. That player discards those cards";
     }
 
     LastRitesEffect(final LastRitesEffect effect) {

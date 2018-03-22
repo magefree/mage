@@ -50,7 +50,7 @@ public class MemoryErosion extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}{U}");
 
 
-        // Whenever an opponent casts a spell, that player puts the top two cards of his or her library into his or her graveyard.
+        // Whenever an opponent casts a spell, that player puts the top two cards of their library into their graveyard.
         this.addAbility(new SpellCastTriggeredAbility());
     }
 
@@ -94,7 +94,7 @@ class SpellCastTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever an opponent casts a spell, that player puts the top two cards of his or her library into his or her graveyard";
+        return "Whenever an opponent casts a spell, that player puts the top two cards of their library into their graveyard";
     }
 
     @Override

@@ -45,7 +45,7 @@ public class HarshScrutiny extends CardImpl {
     public HarshScrutiny(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}");
 
-        // Target opponent reveals his or her hand. You choose a creature card from it. That player discards that card. Scry 1.
+        // Target opponent reveals their hand. You choose a creature card from it. That player discards that card. Scry 1.
         this.getSpellAbility().addTarget(new TargetOpponent());
         this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(new FilterCreatureCard("a creature card")));
         this.getSpellAbility().addEffect(new ScryEffect(1));

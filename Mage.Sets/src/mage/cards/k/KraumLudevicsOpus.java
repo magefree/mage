@@ -65,7 +65,7 @@ public class KraumLudevicsOpus extends CardImpl {
         // Haste
         this.addAbility(HasteAbility.getInstance());
 
-        // Whenever an opponent casts his or her second spell each turn, draw a card.
+        // Whenever an opponent casts their second spell each turn, draw a card.
         this.addAbility(new KraumLudevicsOpusTriggeredAbility(), new CastSpellLastTurnWatcher());
 
         // Partner
@@ -116,6 +116,6 @@ class KraumLudevicsOpusTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever an opponent casts his or her second spell each turn, draw a card.";
+        return "Whenever an opponent casts their second spell each turn, draw a card.";
     }
 }

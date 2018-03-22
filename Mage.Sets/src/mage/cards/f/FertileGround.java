@@ -64,7 +64,7 @@ public class FertileGround extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        // Whenever enchanted land is tapped for mana, its controller adds one mana of any color to his or her mana pool.
+        // Whenever enchanted land is tapped for mana, its controller adds one mana of any color to their mana pool.
         this.addAbility(new FertileGroundTriggeredAbility());
     }
 
@@ -114,6 +114,6 @@ class FertileGroundTriggeredAbility extends TriggeredManaAbility {
 
     @Override
     public String getRule() {
-        return "Whenever enchanted land is tapped for mana, its controller adds one mana of any color to his or her mana pool";
+        return "Whenever enchanted land is tapped for mana, its controller adds one mana of any color to their mana pool";
     }
 }

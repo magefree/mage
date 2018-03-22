@@ -55,7 +55,7 @@ public class ResetTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerB, "Island", 2, true);
         addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
-        // Cast Reset only during an opponent's turn after his or her upkeep step.
+        // Cast Reset only during an opponent's turn after their upkeep step.
         // Untap all lands you control.
         addCard(Zone.HAND, playerB, "Reset");
         // Counter target spell.
@@ -85,7 +85,7 @@ public class ResetTest extends CardTestPlayerBase {
     public void testResetDoesNotWork() {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
-        // Cast Reset only during an opponent's turn after his or her upkeep step.
+        // Cast Reset only during an opponent's turn after their upkeep step.
         // Untap all lands you control.
         addCard(Zone.HAND, playerA, "Reset");
         // Counter target spell.

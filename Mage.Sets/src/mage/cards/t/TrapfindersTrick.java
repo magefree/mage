@@ -52,7 +52,7 @@ public class TrapfindersTrick extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{U}");
 
 
-        // Target player reveals his or her hand and discards all Trap cards.
+        // Target player reveals their hand and discards all Trap cards.
         this.getSpellAbility().addEffect(new TrapfindersTrickEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
@@ -71,7 +71,7 @@ class TrapfindersTrickEffect extends OneShotEffect {
 
     public TrapfindersTrickEffect() {
         super(Outcome.Discard);
-        this.staticText = "Target player reveals his or her hand and discards all Trap cards";
+        this.staticText = "Target player reveals their hand and discards all Trap cards";
     }
 
     public TrapfindersTrickEffect(final TrapfindersTrickEffect effect) {

@@ -69,7 +69,7 @@ public class VerdantHaven extends CardImpl {
         // When Verdant Haven enters the battlefield, you gain 2 life.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(2)));
 
-        // Whenever enchanted land is tapped for mana, its controller adds one mana of any color to his or her mana pool.
+        // Whenever enchanted land is tapped for mana, its controller adds one mana of any color to their mana pool.
         this.addAbility(new VerdantHavenTriggeredAbility());
     }
 
@@ -112,6 +112,6 @@ class VerdantHavenTriggeredAbility extends TriggeredManaAbility {
 
     @Override
     public String getRule() {
-        return "Whenever enchanted land is tapped for mana, its controller adds one mana of any color to his or her mana pool.";
+        return "Whenever enchanted land is tapped for mana, its controller adds one mana of any color to their mana pool.";
     }
 }

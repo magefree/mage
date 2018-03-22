@@ -52,7 +52,7 @@ public class TimeSpiral extends CardImpl {
     public TimeSpiral(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{U}{U}");
 
-        // Exile Time Spiral. Each player shuffles his or her graveyard and hand into his or her library, then draws seven cards. You untap up to six lands.
+        // Exile Time Spiral. Each player shuffles their graveyard and hand into their library, then draws seven cards. You untap up to six lands.
         this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
         this.getSpellAbility().addEffect(new TimeSpiralEffect());
         Effect effect = new DrawCardAllEffect(7);
@@ -75,7 +75,7 @@ class TimeSpiralEffect extends OneShotEffect {
 
     public TimeSpiralEffect() {
         super(Outcome.Neutral);
-        staticText = "Each player shuffles his or her hand and graveyard into his or her library";
+        staticText = "Each player shuffles their hand and graveyard into their library";
     }
 
     public TimeSpiralEffect(final TimeSpiralEffect effect) {

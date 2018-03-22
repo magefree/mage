@@ -40,7 +40,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  * opponent separates those cards into two piles. Put one pile into your hand
  * and the other on the bottom of your library in any order. -8: For each
  * player, search that player's library for a nonland card and exile it, then
- * that player shuffles his or her library. You may cast those cards without
+ * that player shuffles their library. You may cast those cards without
  * paying their mana costs.
  *
  * @author LevelX2

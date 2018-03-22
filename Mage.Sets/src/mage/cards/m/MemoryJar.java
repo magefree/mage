@@ -58,8 +58,8 @@ public class MemoryJar extends CardImpl {
     public MemoryJar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
 
-        // {T}, Sacrifice Memory Jar: Each player exiles all cards from his or her hand face down and draws seven cards.
-        // At the beginning of the next end step, each player discards his or her hand and returns to his or her hand each
+        // {T}, Sacrifice Memory Jar: Each player exiles all cards from their hand face down and draws seven cards.
+        // At the beginning of the next end step, each player discards their hand and returns to their hand each
         //card he or she exiled this way.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MemoryJarEffect(), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
@@ -81,7 +81,7 @@ class MemoryJarEffect extends OneShotEffect {
 
     public MemoryJarEffect() {
         super(Outcome.DrawCard);
-        staticText = "Each player exiles all cards from his or her hand face down and draws seven cards. At the beginning of the next end step, each player discards his or her hand and returns to his or her hand each card he or she exiled this way.";
+        staticText = "Each player exiles all cards from their hand face down and draws seven cards. At the beginning of the next end step, each player discards their hand and returns to their hand each card he or she exiled this way.";
     }
 
     public MemoryJarEffect(final MemoryJarEffect effect) {
@@ -130,7 +130,7 @@ class MemoryJarDelayedEffect extends OneShotEffect {
 
     public MemoryJarDelayedEffect() {
         super(Outcome.DrawCard);
-        staticText = "At the beginning of the next end step, each player discards his or her hand and returns to his or her hand each card he or she exiled this way";
+        staticText = "At the beginning of the next end step, each player discards their hand and returns to their hand each card he or she exiled this way";
     }
 
     public MemoryJarDelayedEffect(final MemoryJarDelayedEffect effect) {

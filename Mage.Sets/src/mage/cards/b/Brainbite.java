@@ -44,7 +44,7 @@ public class Brainbite extends CardImpl {
     public Brainbite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{U}{B}");
 
-        // Target opponent reveals his or her hand. You choose a card from it. That player discards that card.
+        // Target opponent reveals their hand. You choose a card from it. That player discards that card.
         this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect());
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));

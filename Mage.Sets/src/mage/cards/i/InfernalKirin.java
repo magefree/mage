@@ -65,7 +65,7 @@ public class InfernalKirin extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        // Whenever you cast a Spirit or Arcane spell, target player reveals his or her hand and discards all cards with that spell's converted mana cost.
+        // Whenever you cast a Spirit or Arcane spell, target player reveals their hand and discards all cards with that spell's converted mana cost.
         Ability ability = new SpellCastControllerTriggeredAbility(Zone.BATTLEFIELD, new InfernalKirinEffect(), StaticFilters.SPIRIT_OR_ARCANE_CARD, false, true);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
@@ -86,7 +86,7 @@ class InfernalKirinEffect extends OneShotEffect {
 
     public InfernalKirinEffect() {
         super(Outcome.Detriment);
-        this.staticText = "target player reveals his or her hand and discards all cards with that spell's converted mana cost";
+        this.staticText = "target player reveals their hand and discards all cards with that spell's converted mana cost";
     }
 
     public InfernalKirinEffect(final InfernalKirinEffect effect) {

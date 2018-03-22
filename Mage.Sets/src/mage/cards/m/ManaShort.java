@@ -47,7 +47,7 @@ public class ManaShort extends CardImpl {
     public ManaShort(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");
 
-        // Tap all lands target player controls and empty his or her mana pool.
+        // Tap all lands target player controls and empty their mana pool.
         this.getSpellAbility().addEffect(new ManaShortEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
@@ -66,7 +66,7 @@ class ManaShortEffect extends TapAllTargetPlayerControlsEffect {
 
     public ManaShortEffect() {
         super(StaticFilters.FILTER_LANDS);
-        staticText = "Tap all lands target player controls and empty his or her mana pool";
+        staticText = "Tap all lands target player controls and empty their mana pool";
     }
 
     public ManaShortEffect(final ManaShortEffect effect) {

@@ -55,9 +55,9 @@ public class TunnelVision extends CardImpl {
     public TunnelVision(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{U}");
 
-        // Name a card. Target player reveals cards from the top of his or her library until the named card is revealed.
-        // If it is, that player puts the rest of the revealed cards into his or her graveyard and puts the named card on top of his or her library.
-        // Otherwise, the player shuffles his or her library.
+        // Name a card. Target player reveals cards from the top of their library until the named card is revealed.
+        // If it is, that player puts the rest of the revealed cards into their graveyard and puts the named card on top of their library.
+        // Otherwise, the player shuffles their library.
         this.getSpellAbility().addEffect(new NameACardEffect(NameACardEffect.TypeOfName.ALL));
         this.getSpellAbility().addEffect(new TunnelVisionEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
@@ -77,7 +77,7 @@ class TunnelVisionEffect extends OneShotEffect {
 
     public TunnelVisionEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Target player reveals cards from the top of his or her library until the named card is revealed. If it is, that player puts the rest of the revealed cards into his or her graveyard and puts the named card on top of his or her library. Otherwise, the player shuffles his or her library.";
+        this.staticText = "Target player reveals cards from the top of their library until the named card is revealed. If it is, that player puts the rest of the revealed cards into their graveyard and puts the named card on top of their library. Otherwise, the player shuffles their library.";
     }
 
     public TunnelVisionEffect(final TunnelVisionEffect effect) {

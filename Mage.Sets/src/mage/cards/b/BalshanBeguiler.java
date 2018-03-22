@@ -58,7 +58,7 @@ public class BalshanBeguiler extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // Whenever Balshan Beguiler deals combat damage to a player, that player reveals the top two cards of his or her library. You choose one of those cards and put it into his or her graveyard.
+        // Whenever Balshan Beguiler deals combat damage to a player, that player reveals the top two cards of their library. You choose one of those cards and put it into their graveyard.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new BalshanBeguilerEffect(), false, true));
     }
 
@@ -76,7 +76,7 @@ class BalshanBeguilerEffect extends OneShotEffect {
     
     public BalshanBeguilerEffect() {
         super(Outcome.Benefit);
-        this.staticText = " that player reveals the top two cards of his or her library. You choose one of those cards and put it into his or her graveyard.";
+        this.staticText = " that player reveals the top two cards of their library. You choose one of those cards and put it into their graveyard.";
     }
     
     public BalshanBeguilerEffect(final BalshanBeguilerEffect effect) {

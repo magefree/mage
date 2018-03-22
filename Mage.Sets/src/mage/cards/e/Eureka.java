@@ -52,7 +52,7 @@ public class Eureka extends CardImpl {
     public Eureka(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}{G}");
 
-        // Starting with you, each player may put a permanent card from his or her hand onto the battlefield. Repeat this process until no one puts a card onto the battlefield.
+        // Starting with you, each player may put a permanent card from their hand onto the battlefield. Repeat this process until no one puts a card onto the battlefield.
         this.getSpellAbility().addEffect(new EurekaEffect());
     }
 
@@ -70,7 +70,7 @@ class EurekaEffect extends OneShotEffect {
 
     public EurekaEffect() {
         super(Outcome.PutCardInPlay);
-        this.staticText = "Starting with you, each player may put a permanent card from his or her hand onto the battlefield. Repeat this process until no one puts a card onto the battlefield";
+        this.staticText = "Starting with you, each player may put a permanent card from their hand onto the battlefield. Repeat this process until no one puts a card onto the battlefield";
     }
 
     public EurekaEffect(final EurekaEffect effect) {

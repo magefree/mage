@@ -58,7 +58,7 @@ public class Scytheclaw extends CardImpl {
         // Equipped creature gets +1/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 1)));
 
-        // Whenever equipped creature deals combat damage to a player, that player loses half of his or her life, round up.
+        // Whenever equipped creature deals combat damage to a player, that player loses half of their life, round up.
         this.addAbility(new DealsDamageToAPlayerAttachedTriggeredAbility(new LoseHalfLifeTargetEffect(), "equipped", false, true));
 
         // Equip {3}

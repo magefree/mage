@@ -52,7 +52,7 @@ public class ReturnedCentaur extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 
-        // When Returned Centaur enters the battlefield, target player puts the top four cards of his or her library into his or her graveyard.
+        // When Returned Centaur enters the battlefield, target player puts the top four cards of their library into their graveyard.
         Ability ability = new EntersBattlefieldTriggeredAbility(new PutLibraryIntoGraveTargetEffect(4));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);

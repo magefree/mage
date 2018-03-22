@@ -8,7 +8,7 @@ import mage.players.Player;
 import mage.util.CardUtil;
 
 /**
- * Condition for - Controller has X or more cards in his or her graveyard
+ * Condition for - Controller has X or more cards in their graveyard
  *
  * @author LevelX2
  */

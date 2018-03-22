@@ -55,16 +55,16 @@ public class ManicScribe extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(3);
 
-        // When Manic Scribe enters the battlefield, each opponent puts the top three cards of his or her library into his or her graveyard.
+        // When Manic Scribe enters the battlefield, each opponent puts the top three cards of their library into their graveyard.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new PutTopCardOfLibraryIntoGraveEachPlayerEffect(3, TargetController.OPPONENT), false));
 
         // <i>Delirium</i> &mdash; At the beginning of each opponent's upkeep, if there are four or more card types among cards in your graveyard,
-        // that player puts the top three cards of his or her library into his or her graveyard.
+        // that player puts the top three cards of their library into their graveyard.
         this.addAbility(new ConditionalTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new PutTopCardOfLibraryIntoGraveTargetEffect(3), TargetController.OPPONENT, false, true),
                 DeliriumCondition.instance,
                 "<i>Delirium</i> &mdash; At the beginning of each opponent's upkeep, if there are four or more card types among cards in your graveyard, "
-                        + "that player puts the top three cards of his or her library into his or her graveyard."));
+                        + "that player puts the top three cards of their library into their graveyard."));
     }
 
     public ManicScribe(final ManicScribe card) {

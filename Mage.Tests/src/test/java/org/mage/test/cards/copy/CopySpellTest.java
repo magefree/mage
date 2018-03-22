@@ -170,7 +170,7 @@ public class CopySpellTest extends CardTestPlayerBase {
      * additional costs in rules 601.2b and 601.2e–g. 601.2b If the spell is
      * modal the player announces the mode choice (see rule 700.2). If the
      * player wishes to splice any cards onto the spell (see rule 702.46), he or
-     * she reveals those cards in his or her hand. 706.10. To copy a spell,
+     * she reveals those cards in their hand. 706.10. To copy a spell,
      * activated ability, or triggered ability means to put a copy of it onto
      * the stack; a copy of a spell isn’t cast and a copy of an activated
      * ability isn’t activated. A copy of a spell or ability copies both the

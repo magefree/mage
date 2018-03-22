@@ -59,7 +59,7 @@ public class MinisterOfInquiries extends CardImpl {
         // When Minister of Inquiries enters the the battlefield, you get {E}{E}.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GetEnergyCountersControllerEffect(2)));
 
-        // {T}. Pay {E}: Target player puts the top three cards of his or her library into his or her graveyard.
+        // {T}. Pay {E}: Target player puts the top three cards of their library into their graveyard.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(3), new TapSourceCost());
         ability.addCost(new PayEnergyCost(1));
         ability.addTarget(new TargetPlayer());

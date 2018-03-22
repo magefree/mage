@@ -47,7 +47,7 @@ public class RayOfErasure extends CardImpl {
     public RayOfErasure(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
 
-        // Target player puts the top card of his or her library into his or her graveyard.
+        // Target player puts the top card of their library into their graveyard.
         this.getSpellAbility().addEffect(new PutLibraryIntoGraveTargetEffect(1));
         this.getSpellAbility().addTarget(new TargetPlayer());
 

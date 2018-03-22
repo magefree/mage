@@ -59,7 +59,7 @@ public class BalaGedThief extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Whenever Bala Ged Thief or another Ally enters the battlefield under your control, target player reveals a number of cards from his or her hand equal to the number of Allies you control. You choose one of them. That player discards that card.
+        // Whenever Bala Ged Thief or another Ally enters the battlefield under your control, target player reveals a number of cards from their hand equal to the number of Allies you control. You choose one of them. That player discards that card.
         Ability ability = new AllyEntersBattlefieldTriggeredAbility(new BalaGedThiefEffect(), false);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
@@ -79,7 +79,7 @@ class BalaGedThiefEffect extends OneShotEffect {
 
     public BalaGedThiefEffect() {
         super(Outcome.Discard);
-        this.staticText = "target player reveals a number of cards from his or her hand equal to the number of Allies you control. You choose one of them. That player discards that card";
+        this.staticText = "target player reveals a number of cards from their hand equal to the number of Allies you control. You choose one of them. That player discards that card";
     }
 
     public BalaGedThiefEffect(final BalaGedThiefEffect effect) {

@@ -95,7 +95,7 @@ class StabwhiskerTheOdious extends Token {
         power = new MageInt(3);
         toughness = new MageInt(3);
 
-        // At the beginning of each opponent's upkeep, that player loses 1 life for each card fewer than three in his or her hand.
+        // At the beginning of each opponent's upkeep, that player loses 1 life for each card fewer than three in their hand.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 Zone.BATTLEFIELD, new StabwhiskerLoseLifeEffect(), TargetController.OPPONENT, false, true));
     }
@@ -105,7 +105,7 @@ class StabwhiskerLoseLifeEffect extends OneShotEffect {
 
     public StabwhiskerLoseLifeEffect() {
         super(Outcome.LoseLife);
-        this.staticText = "that player loses 1 life for each card fewer than three in his or her hand";
+        this.staticText = "that player loses 1 life for each card fewer than three in their hand";
     }
 
     public StabwhiskerLoseLifeEffect(final StabwhiskerLoseLifeEffect effect) {

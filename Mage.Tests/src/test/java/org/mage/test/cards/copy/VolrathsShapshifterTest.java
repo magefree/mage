@@ -56,7 +56,7 @@ public class VolrathsShapshifterTest extends CardTestPlayerBase {
 	public void testLosingCopy() {
         addCard(Zone.BATTLEFIELD, playerA, "Volrath's Shapeshifter", 1);
         // Codex Shredder - Artifact
-        // {T}: Target player puts the top card of his or her library into his or her graveyard.
+        // {T}: Target player puts the top card of their library into their graveyard.
         // {5}, {T}, Sacrifice Codex Shredder: Return target card from your graveyard to your hand.
         addCard(Zone.BATTLEFIELD, playerA, "Codex Shredder", 1);
 
@@ -65,7 +65,7 @@ public class VolrathsShapshifterTest extends CardTestPlayerBase {
         addCard(Zone.LIBRARY, playerA, "Forest", 1);
         skipInitShuffling();
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Target player puts the top card of his or her library into his or her graveyard.", playerA);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Target player puts the top card of their library into their graveyard.", playerA);
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();

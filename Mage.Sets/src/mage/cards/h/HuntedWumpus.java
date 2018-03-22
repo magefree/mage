@@ -57,7 +57,7 @@ public class HuntedWumpus extends CardImpl {
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 
-        // When Hunted Wumpus enters the battlefield, each other player may put a creature card from his or her hand onto the battlefield.
+        // When Hunted Wumpus enters the battlefield, each other player may put a creature card from their hand onto the battlefield.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new HuntedWumpusEffect(), false));
 
     }
@@ -76,7 +76,7 @@ class HuntedWumpusEffect extends OneShotEffect {
 
     public HuntedWumpusEffect() {
         super(Outcome.Detriment);
-        this.staticText = "each other player may put a creature card from his or her hand onto the battlefield";
+        this.staticText = "each other player may put a creature card from their hand onto the battlefield";
     }
 
     public HuntedWumpusEffect(final HuntedWumpusEffect effect) {

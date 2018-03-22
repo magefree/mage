@@ -243,7 +243,7 @@ public class CantCastTest extends CardTestPlayerBase {
     @Test
     public void testAlhammarret() {
         // Flying
-        // As Alhammarret, High Arbiter enters the battlefield, each opponent reveals his or her hand. You choose the name of a nonland card revealed this way.
+        // As Alhammarret, High Arbiter enters the battlefield, each opponent reveals their hand. You choose the name of a nonland card revealed this way.
         // Your opponents can't cast spells with the chosen name.
         addCard(Zone.HAND, playerA, "Alhammarret, High Arbiter", 4); // Creature - {5}{U}{U}
         addCard(Zone.BATTLEFIELD, playerA, "Island", 7);

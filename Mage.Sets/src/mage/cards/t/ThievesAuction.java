@@ -59,7 +59,7 @@ public class ThievesAuction extends CardImpl {
     public ThievesAuction(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{R}{R}{R}");
 
-        // Exile all nontoken permanents. Starting with you, each player chooses one of the exiled cards and puts it onto the battlefield tapped under his or her control. Repeat this process until all cards exiled this way have been chosen.
+        // Exile all nontoken permanents. Starting with you, each player chooses one of the exiled cards and puts it onto the battlefield tapped under their control. Repeat this process until all cards exiled this way have been chosen.
         this.getSpellAbility().addEffect(new ThievesAuctionEffect());
     }
 
@@ -83,7 +83,7 @@ class ThievesAuctionEffect extends OneShotEffect {
 
     ThievesAuctionEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Exile all nontoken permanents. Starting with you, each player chooses one of the exiled cards and puts it onto the battlefield tapped under his or her control. Repeat this process until all cards exiled this way have been chosen";
+        this.staticText = "Exile all nontoken permanents. Starting with you, each player chooses one of the exiled cards and puts it onto the battlefield tapped under their control. Repeat this process until all cards exiled this way have been chosen";
     }
 
     ThievesAuctionEffect(final ThievesAuctionEffect effect) {
@@ -113,7 +113,7 @@ class ThievesAuctionEffect extends OneShotEffect {
                     // chooses one of the exiled cards
                     TargetCard target = new TargetCardInExile(new FilterCard());
                     if (player.choose(Outcome.PutCardInPlay, exiledCards, target, game)) {
-                        // and puts it onto the battlefield tapped under his or her control.
+                        // and puts it onto the battlefield tapped under their control.
                         Card chosenCard = exiledCards.get(target.getFirstTarget(), game);
                         player.moveCards(chosenCard, Zone.BATTLEFIELD, source, game, true, false, false, null);
                         exiledCards.remove(chosenCard);

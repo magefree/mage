@@ -65,7 +65,7 @@ public class CurseOfInertia extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
 
-        // Whenever a player attacks enchanted player with one or more creatures, that attacking player may tap or untap target permanent of his or her choice.
+        // Whenever a player attacks enchanted player with one or more creatures, that attacking player may tap or untap target permanent of their choice.
         this.addAbility(new CurseOfInertiaTriggeredAbility());
 
     }
@@ -111,7 +111,7 @@ class CurseOfInertiaTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a player attacks enchanted player with one or more creatures, that attacking player may tap or untap target permanent of his or her choice.";
+        return "Whenever a player attacks enchanted player with one or more creatures, that attacking player may tap or untap target permanent of their choice.";
     }
 
     @Override
@@ -124,7 +124,7 @@ class CurseOfInertiaTriggeredAbility extends TriggeredAbilityImpl {
 class CurseOfInertiaTapOrUntapTargetEffect extends OneShotEffect {
     public CurseOfInertiaTapOrUntapTargetEffect() {
         super(Outcome.Tap);
-        staticText = "tap or untap target permanent of his or her choice";
+        staticText = "tap or untap target permanent of their choice";
     }
 
     public CurseOfInertiaTapOrUntapTargetEffect(final CurseOfInertiaTapOrUntapTargetEffect effect) {

@@ -83,7 +83,7 @@ class SavageVentmawManaEffect extends ManaEffect {
         super();
         this.mana = mana;
         this.emptyOnlyOnTurnsEnd = emptyOnTurnsEnd;
-        this.staticText = (textManaPoolOwner.equals("his or her")?"that player adds ":"add ") + mana.toString() + " to " + textManaPoolOwner + " mana pool";
+        this.staticText = (textManaPoolOwner.equals("their")?"that player adds ":"add ") + mana.toString() + " to " + textManaPoolOwner + " mana pool";
     }
 
     public SavageVentmawManaEffect(final SavageVentmawManaEffect effect) {

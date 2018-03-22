@@ -68,7 +68,7 @@ public class HiredTorturer extends CardImpl {
         // Defender
         this.addAbility(DefenderAbility.getInstance());
 
-        // {3}{B}, {T}: Target opponent loses 2 life and reveals a card at random from his or her hand.
+        // {3}{B}, {T}: Target opponent loses 2 life and reveals a card at random from their hand.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(2),new ManaCostsImpl("{3}{B}"));
         ability.addCost(new TapSourceCost());
         ability.addEffect(new HiredTorturerEffect());
@@ -92,7 +92,7 @@ class HiredTorturerEffect extends OneShotEffect {
 
     public HiredTorturerEffect() {
         super(Outcome.Detriment);
-        staticText = "and reveals a card at random from his or her hand";
+        staticText = "and reveals a card at random from their hand";
     }
 
     public HiredTorturerEffect(final HiredTorturerEffect effect) {

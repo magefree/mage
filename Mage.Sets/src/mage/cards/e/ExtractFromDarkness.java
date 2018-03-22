@@ -50,7 +50,7 @@ public class ExtractFromDarkness extends CardImpl {
     public ExtractFromDarkness(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}{B}");
 
-        // Each player puts the top two cards of his or her library into his or her graveyard.
+        // Each player puts the top two cards of their library into their graveyard.
         this.getSpellAbility().addEffect(new ExtractFromDarknessMillEffect());
         // Then put a creature card from a graveyard onto the battlefield under your control.
         this.getSpellAbility().addEffect(new ExtractFromDarknessReturnFromGraveyardToBattlefieldEffect());
@@ -70,7 +70,7 @@ class ExtractFromDarknessMillEffect extends OneShotEffect {
 
     ExtractFromDarknessMillEffect() {
         super(Outcome.Detriment);
-        staticText = "Each player puts the top two cards of his or her library into his or her graveyard";
+        staticText = "Each player puts the top two cards of their library into their graveyard";
     }
 
     ExtractFromDarknessMillEffect(final ExtractFromDarknessMillEffect effect) {

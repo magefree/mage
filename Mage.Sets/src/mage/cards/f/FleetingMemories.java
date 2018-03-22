@@ -63,7 +63,7 @@ public class FleetingMemories extends CardImpl {
         // When Fleeting Memories enters the battlefield, investigate.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new InvestigateEffect(), false));
 
-        // Whenever you sacrifice a Clue, target player puts the top three cards of his or her graveyard into his or her graveyard.
+        // Whenever you sacrifice a Clue, target player puts the top three cards of their graveyard into their graveyard.
         Ability ability = new FleetingMemoriesTriggeredAbility();
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);

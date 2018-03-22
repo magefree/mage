@@ -69,7 +69,7 @@ public class ArcumDagsson extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // {tap}: Target artifact creature's controller sacrifices it. That player may search his or her library for a noncreature artifact card, put it onto the battlefield, then shuffle his or her library.
+        // {tap}: Target artifact creature's controller sacrifices it. That player may search their library for a noncreature artifact card, put it onto the battlefield, then shuffle their library.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ArcumDagssonEffect(), new TapSourceCost());
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
@@ -95,7 +95,7 @@ class ArcumDagssonEffect extends OneShotEffect {
 
     ArcumDagssonEffect() {
         super(Outcome.Removal);
-        this.staticText = "Target artifact creature's controller sacrifices it. That player may search his or her library for a noncreature artifact card, put it onto the battlefield, then shuffle his or her library";
+        this.staticText = "Target artifact creature's controller sacrifices it. That player may search their library for a noncreature artifact card, put it onto the battlefield, then shuffle their library";
     }
 
     ArcumDagssonEffect(final ArcumDagssonEffect effect) {

@@ -129,7 +129,7 @@ public class PutTopCardOfLibraryIntoGraveEachPlayerEffect extends OneShotEffect 
             sb.append(CardUtil.numberToText(numberCards.toString()));
             sb.append(" cards");
         }
-        sb.append(" of his or her library into his or her graveyard");
+        sb.append(" of their library into their graveyard");
         return sb.toString();
     }
 }

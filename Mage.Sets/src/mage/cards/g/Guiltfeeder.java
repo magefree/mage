@@ -53,9 +53,9 @@ public class Guiltfeeder extends CardImpl {
 
         // Fear
         this.addAbility(FearAbility.getInstance());
-        // Whenever Guiltfeeder attacks and isn't blocked, defending player loses 1 life for each card in his or her graveyard.
+        // Whenever Guiltfeeder attacks and isn't blocked, defending player loses 1 life for each card in their graveyard.
         Effect effect = new LoseLifeTargetEffect(new CardsInTargetPlayersGraveyardCount());
-        effect.setText("defending player loses 1 life for each card in his or her graveyard");
+        effect.setText("defending player loses 1 life for each card in their graveyard");
         this.addAbility(new AttacksAndIsNotBlockedTriggeredAbility(effect, false, true));
     }
 
