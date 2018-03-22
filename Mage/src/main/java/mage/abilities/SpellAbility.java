@@ -100,7 +100,7 @@ public class SpellAbility extends ActivatedAbilityImpl {
             // fix for Gitaxian Probe and casting opponent's spells
             if (!game.getContinuousEffects().asThough(getSourceId(), AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, playerId, game)) {
                 Card card = game.getCard(sourceId);
-                if (!(card != null && card.getOwnerId() == playerId)) {
+                if (!(card != null && card.getOwnerId().equals(playerId))) {
                     return false;
                 }
             }

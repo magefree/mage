@@ -127,7 +127,7 @@ class ManaCacheManaAbility extends ActivatedManaAbilityImpl {
             return false;
         }
         Player player = game.getPlayer(playerId);
-        if (player != null && playerId == game.getActivePlayerId() && game.getStep().getType().isBefore(PhaseStep.END_TURN)) {
+        if (player != null && playerId.equals(game.getActivePlayerId()) && game.getStep().getType().isBefore(PhaseStep.END_TURN)) {
             if (costs.canPay(this, sourceId, playerId, game)) {
                 this.setControllerId(playerId);
                 return true;
