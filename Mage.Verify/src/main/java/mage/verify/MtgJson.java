@@ -102,6 +102,7 @@ public final class MtgJson {
             return new ObjectMapper().readValue(zipInputStream, ref);
         } finally {
             StreamUtils.closeQuietly(zipInputStream);
+            StreamUtils.closeQuietly(stream);
         }
 
     }
