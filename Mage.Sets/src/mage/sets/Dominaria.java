@@ -59,5 +59,7 @@ public class Dominaria extends ExpansionSet {
         cards.add(new SetCardInfo("Jhoira, Weatherlight Captain", 200, Rarity.MYTHIC, mage.cards.j.JhoiraWeatherlightCaptain.class));
         cards.add(new SetCardInfo("Lyra Dawnbringer", 14, Rarity.MYTHIC, mage.cards.l.LyraDawnbringer.class));
         cards.add(new SetCardInfo("Serra Disciple", 34, Rarity.COMMON, mage.cards.s.SerraDisciple.class));
+        cards.add(new SetCardInfo("Knight of Malice", 52, Rarity.UNCOMMON, mage.cards.k.KnightOfMalice.class));
+        cards.add(new SetCardInfo("Academy Drake", 40, Rarity.UNCOMMON, mage.cards.a.AcademyDrake.class));
     }
 }
