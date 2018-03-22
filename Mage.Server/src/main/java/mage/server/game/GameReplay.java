@@ -87,11 +87,13 @@ public class GameReplay {
     private Game loadGame(UUID gameId) {
         InputStream file = null;
         InputStream buffer = null;
+        InputStream gzip = null;
         ObjectInput input = null;
         try{
             file = new FileInputStream("saved/" + gameId.toString() + ".game");
             buffer = new BufferedInputStream(file);
-            input = new CopierObjectInputStream(Main.classLoader, new GZIPInputStream(buffer));
+            gzip = new GZIPInputStream(buffer);
+            input = new CopierObjectInputStream(Main.classLoader, gzip);
             Game loadGame = (Game) input.readObject();
             GameStates states = (GameStates) input.readObject();
             loadGame.loadGameStates(states);
@@ -107,6 +109,7 @@ public class GameReplay {
             StreamUtils.closeQuietly(file);
             StreamUtils.closeQuietly(buffer);
             StreamUtils.closeQuietly(input);
+            StreamUtils.closeQuietly(gzip);
         }
         return null;
     }
