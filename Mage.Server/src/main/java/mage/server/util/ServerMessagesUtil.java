@@ -27,6 +27,7 @@
  */
 package mage.server.util;
 
+import mage.utils.StreamUtils;
 import org.apache.log4j.Logger;
 
 import java.io.File;
@@ -49,7 +50,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  * @author nantuko
  */
 public enum ServerMessagesUtil {
-instance;
+    instance;
     private static final Logger log = Logger.getLogger(ServerMessagesUtil.class);
     private static final String SERVER_MSG_TXT_FILE = "server.msg.txt";
     private ScheduledExecutorService updateExecutor;
@@ -147,13 +148,22 @@ instance;
             log.warn("Couldn't find server.msg");
             return null;
         }
-        Scanner scanner = new Scanner(is);
+
+        Scanner scanner = null;
         List<String> newMessages = new ArrayList<>();
-        while (scanner.hasNextLine()) {
-            String message = scanner.nextLine();
-            if (!message.trim().isEmpty()) {
-                newMessages.add(message.trim());
+        try {
+            scanner = new Scanner(is);
+            while (scanner.hasNextLine()) {
+                String message = scanner.nextLine();
+                if (!message.trim().isEmpty()) {
+                    newMessages.add(message.trim());
+                }
             }
+        } catch(Exception e) {
+            log.error(e,e);
+        } finally {
+            StreamUtils.closeQuietly(scanner);
+            StreamUtils.closeQuietly(is);
         }
         return newMessages;
     }

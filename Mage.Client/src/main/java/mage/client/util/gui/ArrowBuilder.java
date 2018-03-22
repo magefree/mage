@@ -45,16 +45,12 @@ public class ArrowBuilder {
      * Get the panel where all arrows are being drawn.
      * @return
      */
-    public JPanel getArrowsManagerPanel() {
+    public synchronized JPanel getArrowsManagerPanel() {
         if (arrowsManagerPanel == null) {
-            synchronized (ArrowBuilder.class) {
-                if (arrowsManagerPanel == null) {
-                    arrowsManagerPanel = new JPanel();
-                    arrowsManagerPanel.setVisible(true);
-                    arrowsManagerPanel.setOpaque(false);
-                    arrowsManagerPanel.setLayout(null);
-                }
-            }
+            arrowsManagerPanel = new JPanel();
+            arrowsManagerPanel.setVisible(true);
+            arrowsManagerPanel.setOpaque(false);
+            arrowsManagerPanel.setLayout(null);
         }
         return arrowsManagerPanel;
     }

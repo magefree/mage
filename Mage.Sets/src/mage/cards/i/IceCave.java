@@ -102,7 +102,7 @@ class IceCaveEffect extends OneShotEffect {
                             if (cost.pay(source, game, source.getSourceId(), playerId, false, null)) {
                                 game.informPlayers(player.getLogName() + " pays" + cost.getText() + " to counter " + spell.getIdName() + '.');
                                 game.getStack().counter(spell.getId(), source.getSourceId(), game);
-                                return true;
+                                break;
                             }
                         }
                     }

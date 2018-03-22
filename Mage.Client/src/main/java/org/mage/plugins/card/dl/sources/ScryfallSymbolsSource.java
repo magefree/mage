@@ -9,6 +9,7 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import mage.util.StreamUtils;
 import org.mage.plugins.card.dl.DownloadJob;
 
 import static org.mage.card.arcane.ManaSymbols.getSymbolFileNameAsSVG;
@@ -106,20 +107,21 @@ public class ScryfallSymbolsSource implements Iterable<DownloadJob> {
             if (destFile.exists() && (destFile.length() > 0)){
                 continue;
             }
-
+            FileOutputStream stream = null;
             try {
                 // base64 transform
                 String data64 = foundedData.get(searchCode);
                 Base64.Decoder dec = Base64.getDecoder();
                 byte[] fileData = dec.decode(data64);
 
-                FileOutputStream stream = new FileOutputStream(destFile);
+                stream = new FileOutputStream(destFile);
                 stream.write(fileData);
-                stream.close();
 
                 LOGGER.info("New svg symbol downloaded: " + needCode);
             } catch  (Exception e) {
                 LOGGER.error("Can't decode svg icon and save to file: " + destFile.getPath() + ", reason: " + e.getMessage());
+            } finally {
+                StreamUtils.closeQuietly(stream);
             }
         }
     }
