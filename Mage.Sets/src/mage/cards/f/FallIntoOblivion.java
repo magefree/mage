@@ -15,7 +15,6 @@ import java.util.UUID;
 public class FallIntoOblivion extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonlegendary creature");
-
     static {
         filter.add(Predicates.not(new SupertypePredicate(SuperType.LEGENDARY)));
     }
@@ -23,9 +22,9 @@ public class FallIntoOblivion extends CardImpl {
     public FallIntoOblivion(UUID ownerId, CardSetInfo cardSetInfo){
         super(ownerId, cardSetInfo, new CardType[] { CardType.INSTANT }, "{1}{B}");
 
-        //destroy target non legendary creature
-        spellAbility.addEffect(new DestroyTargetEffect());
-        spellAbility.addTarget(new TargetCreaturePermanent(filter));
+        // Destroy target nonlegendary creature.
+        this.getSpellAbility().addEffect(new DestroyTargetEffect());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
     public FallIntoOblivion(final FallIntoOblivion fallIntoOblivion){
