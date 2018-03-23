@@ -98,6 +98,7 @@ public class Odyssey extends ExpansionSet {
         cards.add(new SetCardInfo("Cabal Inquisitor", 119, Rarity.COMMON, mage.cards.c.CabalInquisitor.class));
         cards.add(new SetCardInfo("Cabal Patriarch", 120, Rarity.RARE, mage.cards.c.CabalPatriarch.class));
         cards.add(new SetCardInfo("Cabal Pit", 315, Rarity.UNCOMMON, mage.cards.c.CabalPit.class));
+        cards.add(new SetCardInfo("Cabal Shrine", 121, Rarity.RARE, mage.cards.c.CabalShrine.class));
         cards.add(new SetCardInfo("Call of the Herd", 231, Rarity.RARE, mage.cards.c.CallOfTheHerd.class));
         cards.add(new SetCardInfo("Cantivore", 13, Rarity.RARE, mage.cards.c.Cantivore.class));
         cards.add(new SetCardInfo("Careful Study", 70, Rarity.COMMON, mage.cards.c.CarefulStudy.class));
@@ -190,6 +191,7 @@ public class Odyssey extends ExpansionSet {
         cards.add(new SetCardInfo("Halberdier", 196, Rarity.COMMON, mage.cards.h.Halberdier.class));
         cards.add(new SetCardInfo("Hallowed Healer", 25, Rarity.COMMON, mage.cards.h.HallowedHealer.class));
         cards.add(new SetCardInfo("Haunting Echoes", 142, Rarity.RARE, mage.cards.h.HauntingEchoes.class));
+        cards.add(new SetCardInfo("Hint of Insanity", 143, Rarity.RARE, mage.cards.h.HintOfInsanity.class));
         cards.add(new SetCardInfo("Holistic Wisdom", 243, Rarity.RARE, mage.cards.h.HolisticWisdom.class));
         cards.add(new SetCardInfo("Howling Gale", 244, Rarity.UNCOMMON, mage.cards.h.HowlingGale.class));
         cards.add(new SetCardInfo("Immobilizing Ink", 87, Rarity.COMMON, mage.cards.i.ImmobilizingInk.class));
@@ -228,6 +230,7 @@ public class Odyssey extends ExpansionSet {
         cards.add(new SetCardInfo("Master Apothecary", 32, Rarity.RARE, mage.cards.m.MasterApothecary.class));
         cards.add(new SetCardInfo("Metamorphic Wurm", 250, Rarity.UNCOMMON, mage.cards.m.MetamorphicWurm.class));
         cards.add(new SetCardInfo("Millikin", 302, Rarity.UNCOMMON, mage.cards.m.Millikin.class));
+        cards.add(new SetCardInfo("Mind Burst", 148, Rarity.COMMON, mage.cards.m.MindBurst.class));
         cards.add(new SetCardInfo("Mindslicer", 149, Rarity.RARE, mage.cards.m.Mindslicer.class));
         cards.add(new SetCardInfo("Mine Layer", 205, Rarity.RARE, mage.cards.m.MineLayer.class));
         cards.add(new SetCardInfo("Minotaur Explorer", 206, Rarity.UNCOMMON, mage.cards.m.MinotaurExplorer.class));
@@ -376,6 +379,7 @@ public class Odyssey extends ExpansionSet {
         cards.add(new SetCardInfo("Tombfire", 165, Rarity.RARE, mage.cards.t.Tombfire.class));
         cards.add(new SetCardInfo("Touch of Invisibility", 109, Rarity.COMMON, mage.cards.t.TouchOfInvisibility.class));
         cards.add(new SetCardInfo("Traumatize", 110, Rarity.RARE, mage.cards.t.Traumatize.class));
+        cards.add(new SetCardInfo("Traveling Plague", 166, Rarity.RARE, mage.cards.t.TravelingPlague.class));
         cards.add(new SetCardInfo("Treetop Sentinel", 111, Rarity.UNCOMMON, mage.cards.t.TreetopSentinel.class));
         cards.add(new SetCardInfo("Tremble", 225, Rarity.COMMON, mage.cards.t.Tremble.class));
         cards.add(new SetCardInfo("Twigwalker", 279, Rarity.UNCOMMON, mage.cards.t.Twigwalker.class));
