@@ -1,4 +1,4 @@
-package mage.cards.f;
+package mage.cards.c;
 
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
@@ -12,14 +12,14 @@ import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 
-public class FallIntoOblivion extends CardImpl {
+public class CastDown extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonlegendary creature");
     static {
         filter.add(Predicates.not(new SupertypePredicate(SuperType.LEGENDARY)));
     }
 
-    public FallIntoOblivion(UUID ownerId, CardSetInfo cardSetInfo){
+    public CastDown(UUID ownerId, CardSetInfo cardSetInfo){
         super(ownerId, cardSetInfo, new CardType[] { CardType.INSTANT }, "{1}{B}");
 
         // Destroy target nonlegendary creature.
@@ -27,11 +27,11 @@ public class FallIntoOblivion extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
-    public FallIntoOblivion(final FallIntoOblivion fallIntoOblivion){
-        super(fallIntoOblivion);
+    public CastDown(final CastDown card){
+        super(card);
     }
 
-    public FallIntoOblivion copy(){
-        return new FallIntoOblivion(this);
+    public CastDown copy(){
+        return new CastDown(this);
     }
 }
