@@ -116,6 +116,7 @@ public enum CounterType {
     REPAIR("repair"),
     RUST("rust"),
     QUEST("quest"),
+    SILVER("silver"),
     SCREAM("scream"),
     SHELL("shell"),
     SHIELD("shield"),

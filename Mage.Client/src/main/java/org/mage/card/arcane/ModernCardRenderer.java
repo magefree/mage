@@ -402,7 +402,7 @@ public class ModernCardRenderer extends CardRenderer {
 
     @Override
     protected void drawArt(Graphics2D g) {
-        if (artImage != null && !cardView.isFaceDown()) {
+        if ((artImage != null || faceArtImage != null) && !cardView.isFaceDown()) {
 
             boolean useFaceArt = false;
             if (faceArtImage != null && !isZendikarFullArtLand()) {
