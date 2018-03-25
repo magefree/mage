@@ -27,6 +27,12 @@
  */
 package mage.client.dialog;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+import javax.swing.*;
 import mage.cards.decks.importer.DeckImporterUtil;
 import mage.client.MageFrame;
 import mage.client.SessionHandler;
@@ -44,13 +50,6 @@ import mage.players.PlayerType;
 import mage.view.GameTypeView;
 import mage.view.TableView;
 import org.apache.log4j.Logger;
-
-import javax.swing.*;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -143,7 +142,7 @@ public class NewTableDialog extends MageDialog {
         lbDeckType.setText("Deck Type:");
 
         lbTimeLimit.setText("Time Limit:");
-        lbTimeLimit.setToolTipText("The active time a player may use to finish the match. If his or her time runs out, the player looses the current game.");
+        lbTimeLimit.setToolTipText("The active time a player may use to finish the match. If their time runs out, the player looses the current game.");
 
         lblGameType.setText("Game Type:");
 
@@ -623,17 +622,22 @@ public class NewTableDialog extends MageDialog {
      * set the table settings from java prefs
      */
     int currentSettingVersion = 0;
+
     private void setGameSettingsFromPrefs(int version) {
         currentSettingVersion = version;
         String versionStr = "";
-        if (currentSettingVersion == 1) {
-            versionStr = "1";
-            btnPreviousConfiguration1.requestFocus();
-        } else if (currentSettingVersion == 2) {
-            versionStr = "2";
-            btnPreviousConfiguration2.requestFocus();
-        } else {
-            btnPreviousConfiguration2.getParent().requestFocus();
+        switch (currentSettingVersion) {
+            case 1:
+                versionStr = "1";
+                btnPreviousConfiguration1.requestFocus();
+                break;
+            case 2:
+                versionStr = "2";
+                btnPreviousConfiguration2.requestFocus();
+                break;
+            default:
+                btnPreviousConfiguration2.getParent().requestFocus();
+                break;
         }
         txtName.setText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_NAME + versionStr, "Game"));
         txtPassword.setText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_PASSWORD + versionStr, ""));
@@ -724,6 +728,7 @@ public class NewTableDialog extends MageDialog {
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_RANGE + versionStr, Integer.toString(options.getRange().getRange()));
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_ATTACK_OPTION + versionStr, options.getAttackOption().toString());
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_SKILL_LEVEL + versionStr, options.getSkillLevel().toString());
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_SPECTATORS_ALLOWED + versionStr, options.isSpectatorsAllowed() ? "Yes" : "No");
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_QUIT_RATIO + versionStr, Integer.toString(options.getQuitRatio()));
         StringBuilder playerTypesString = new StringBuilder();
         for (Object player : players) {

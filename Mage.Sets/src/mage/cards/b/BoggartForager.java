@@ -53,7 +53,7 @@ public class BoggartForager extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // {R}, Sacrifice Boggart Forager: Target player shuffles his or her library.
+        // {R}, Sacrifice Boggart Forager: Target player shuffles their library.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ShuffleLibraryTargetEffect(), new ManaCostsImpl("{R}"));
 	ability.addCost(new SacrificeSourceCost());
 	ability.addTarget(new TargetPlayer());

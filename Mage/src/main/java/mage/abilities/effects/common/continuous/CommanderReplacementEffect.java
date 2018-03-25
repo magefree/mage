@@ -49,6 +49,9 @@ import mage.players.Player;
 /*
  * 903.11. If a commander would be put into its owner’s graveyard from anywhere, that player may put it into the command zone instead.
  * 903.12. If a commander would be put into the exile zone from anywhere, its owner may put it into the command zone instead.
+ * 903.9. If a commander would be exiled from anywhere or put into its owner’s hand, graveyard, or
+library from anywhere, its owner may put it into the command zone instead. This replacement effect
+may apply more than once to the same event. This is an exception to rule 614.5.
  */
 public class CommanderReplacementEffect extends ReplacementEffectImpl {
 
@@ -138,11 +141,10 @@ public class CommanderReplacementEffect extends ReplacementEffectImpl {
             if (permanent != null) {
                 Player player = game.getPlayer(permanent.getOwnerId());
                 if (player != null && player.chooseUse(Outcome.Benefit, "Move commander to command zone?", source, game)) {
-                    boolean result = permanent.moveToZone(Zone.COMMAND, source.getSourceId(), game, false);
+                    ((ZoneChangeEvent) event).setToZone(Zone.COMMAND);
                     if (!game.isSimulation()) {
-                        game.informPlayers(player.getLogName() + " has moved his or her commander to the command zone");
+                        game.informPlayers(player.getLogName() + " has moved their commander to the command zone");
                     }
-                    return result;
                 }
             }
         } else {
@@ -159,11 +161,10 @@ public class CommanderReplacementEffect extends ReplacementEffectImpl {
             if (card != null) {
                 Player player = game.getPlayer(card.getOwnerId());
                 if (player != null && player.chooseUse(Outcome.Benefit, "Move commander to command zone?", source, game)) {
-                    boolean result = card.moveToZone(Zone.COMMAND, source.getSourceId(), game, false);
+                    ((ZoneChangeEvent) event).setToZone(Zone.COMMAND);
                     if (!game.isSimulation()) {
-                        game.informPlayers(player.getLogName() + " has moved his or her commander to the command zone");
+                        game.informPlayers(player.getLogName() + " has moved their commander to the command zone");
                     }
-                    return result;
                 }
             }
         }

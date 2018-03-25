@@ -132,7 +132,7 @@ class MartyrdomActivatedAbility extends ActivatedAbilityImpl {
 
     @Override
     public boolean canActivate(UUID playerId, Game game) {
-        if (playerId == caster) {
+        if (playerId.equals(caster)) {
             Permanent permanent = game.getBattlefield().getPermanent(this.getSourceId());
             if (permanent != null) {
                 if (filter.match(permanent, permanent.getId(), permanent.getControllerId(), game)) {

@@ -28,6 +28,7 @@
 package mage.cards.a;
 
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
@@ -121,7 +122,7 @@ class AngelicSkirmisherEffect extends OneShotEffect {
                 if (ability != null) {
                     GainAbilityControlledEffect effect = new GainAbilityControlledEffect(ability, Duration.EndOfTurn, new FilterControlledCreaturePermanent());
                     game.addEffect(effect, source);
-                    game.informPlayers(sourcePermanent.getName() + ": " + controller.getLogName() + " has chosen " + abilityChoice.getChoice().toLowerCase());
+                    game.informPlayers(sourcePermanent.getName() + ": " + controller.getLogName() + " has chosen " + abilityChoice.getChoice().toLowerCase(Locale.ENGLISH));
                     return true;
                 }
             }

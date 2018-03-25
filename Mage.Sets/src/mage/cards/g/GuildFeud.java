@@ -55,8 +55,8 @@ public class GuildFeud extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{5}{R}");
 
         // At the beginning of your upkeep, target opponent reveals the top three cards
-        // of his or her library, may put a creature card from among them onto the battlefield,
-        // then puts the rest into his or her graveyard. You do the same with the top three
+        // of their library, may put a creature card from among them onto the battlefield,
+        // then puts the rest into their graveyard. You do the same with the top three
         // cards of your library. If two creatures are put onto the battlefield this way,
         // those creatures fight each other.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new GuildFeudEffect(), TargetController.YOU, false);
@@ -78,7 +78,7 @@ class GuildFeudEffect extends OneShotEffect {
 
     public GuildFeudEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "target opponent reveals the top three cards of his or her library, may put a creature card from among them onto the battlefield, then puts the rest into his or her graveyard. You do the same with the top three cards of your library. If two creatures are put onto the battlefield this way, those creatures fight each other";
+        staticText = "target opponent reveals the top three cards of their library, may put a creature card from among them onto the battlefield, then puts the rest into their graveyard. You do the same with the top three cards of your library. If two creatures are put onto the battlefield this way, those creatures fight each other";
     }
 
     public GuildFeudEffect(final GuildFeudEffect effect) {

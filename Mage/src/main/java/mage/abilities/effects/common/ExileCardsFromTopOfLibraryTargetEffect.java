@@ -33,7 +33,7 @@ public class ExileCardsFromTopOfLibraryTargetEffect extends OneShotEffect {
         this.amount = amount;
         this.staticText = (targetName == null ? "that player" : targetName) + " exiles the top "
                 + CardUtil.numberToText(amount, "")
-                + (amount == 1 ? "card" : " cards") + " of his or her library";
+                + (amount == 1 ? "card" : " cards") + " of their library";
     }
 
     public ExileCardsFromTopOfLibraryTargetEffect(final ExileCardsFromTopOfLibraryTargetEffect effect) {

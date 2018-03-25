@@ -65,7 +65,7 @@ public class Overgrowth extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        // Whenever enchanted land is tapped for mana, its controller adds {G}{G} to his or her mana pool.        
+        // Whenever enchanted land is tapped for mana, its controller adds {G}{G} to their mana pool.
         this.addAbility(new OvergrowthTriggeredAbility());
     }
 
@@ -83,7 +83,7 @@ class OvergrowthTriggeredAbility extends TriggeredManaAbility {
 
 
     public OvergrowthTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new AddManaToManaPoolTargetControllerEffect(Mana.GreenMana(2), "his or her"));
+        super(Zone.BATTLEFIELD, new AddManaToManaPoolTargetControllerEffect(Mana.GreenMana(2), "their"));
     }
 
     public OvergrowthTriggeredAbility(final OvergrowthTriggeredAbility ability) {
@@ -116,6 +116,6 @@ class OvergrowthTriggeredAbility extends TriggeredManaAbility {
 
     @Override
     public String getRule() {
-        return "Whenever enchanted land is tapped for mana, its controller adds {G}{G} to his or her mana pool";
+        return "Whenever enchanted land is tapped for mana, its controller adds {G}{G} to their mana pool";
     }
 }

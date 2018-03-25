@@ -62,7 +62,7 @@ public class KynaiosAndTiroOfMeletis extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(8);
 
-        // At the beginning of your end step, draw a card. Each player may put a land card from his or her hand onto the battlefield, then each opponent who didn't draws a card.
+        // At the beginning of your end step, draw a card. Each player may put a land card from their hand onto the battlefield, then each opponent who didn't draws a card.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new KynaiosAndTirosEffect(), TargetController.YOU, false));
     }
 
@@ -86,7 +86,7 @@ class KynaiosAndTirosEffect extends OneShotEffect {
 
     public KynaiosAndTirosEffect() {
         super(Outcome.DrawCard);
-        staticText = "draw a card. Each player may put a land card from his or her hand onto the battlefield, then each opponent who didn't draws a card";
+        staticText = "draw a card. Each player may put a land card from their hand onto the battlefield, then each opponent who didn't draws a card";
     }
 
     public KynaiosAndTirosEffect(final KynaiosAndTirosEffect effect) {

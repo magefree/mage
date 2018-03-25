@@ -27,7 +27,7 @@ public class ThoughtKnotSeerTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
 
         // {3}{<>} 4/4
-        // When Thought-Knot Seer enters the battlefield, target opponent reveals his or her hand. You choose a nonland card from it and exile that card.
+        // When Thought-Knot Seer enters the battlefield, target opponent reveals their hand. You choose a nonland card from it and exile that card.
         // When Thought-Knot Seer leaves the battlefield, target opponent draws a card.
         addCard(Zone.BATTLEFIELD, playerB, "Thought-Knot Seer");
         addCard(Zone.BATTLEFIELD, playerB, "Wastes", 4);
@@ -55,7 +55,7 @@ public class ThoughtKnotSeerTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
 
         // {3}{<>} 4/4
-        // When Thought-Knot Seer enters the battlefield, target opponent reveals his or her hand. You choose a nonland card from it and exile that card.
+        // When Thought-Knot Seer enters the battlefield, target opponent reveals their hand. You choose a nonland card from it and exile that card.
         // When Thought-Knot Seer leaves the battlefield, target opponent draws a card.
         addCard(Zone.BATTLEFIELD, playerB, "Thought-Knot Seer");
         addCard(Zone.BATTLEFIELD, playerB, "Wastes", 4);
@@ -82,7 +82,7 @@ public class ThoughtKnotSeerTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
 
         // {3}{<>} 4/4
-        // When Thought-Knot Seer enters the battlefield, target opponent reveals his or her hand. You choose a nonland card from it and exile that card.
+        // When Thought-Knot Seer enters the battlefield, target opponent reveals their hand. You choose a nonland card from it and exile that card.
         // When Thought-Knot Seer leaves the battlefield, target opponent draws a card.
         addCard(Zone.BATTLEFIELD, playerB, "Thought-Knot Seer");
         addCard(Zone.BATTLEFIELD, playerB, "Wastes", 4);
@@ -103,12 +103,12 @@ public class ThoughtKnotSeerTest extends CardTestPlayerBase {
     @Test
     public void testThoughtKnotSeerExiled() {
 
-        // {W} Exile target creature. Its controller may search his or her library for a basic land card, put that card onto the battlefield tapped, then shuffle his or her library.
+        // {W} Exile target creature. Its controller may search their library for a basic land card, put that card onto the battlefield tapped, then shuffle their library.
         addCard(Zone.HAND, playerA, "Path to Exile");
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
 
         // {3}{<>} 4/4
-        // When Thought-Knot Seer enters the battlefield, target opponent reveals his or her hand. You choose a nonland card from it and exile that card.
+        // When Thought-Knot Seer enters the battlefield, target opponent reveals their hand. You choose a nonland card from it and exile that card.
         // When Thought-Knot Seer leaves the battlefield, target opponent draws a card.
         addCard(Zone.BATTLEFIELD, playerB, "Thought-Knot Seer");
         addCard(Zone.BATTLEFIELD, playerB, "Wastes", 4);

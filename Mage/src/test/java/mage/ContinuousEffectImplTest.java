@@ -1,6 +1,5 @@
 package mage;
 
-import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.constants.DependencyType;
 import mage.constants.Duration;

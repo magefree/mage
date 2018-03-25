@@ -54,7 +54,7 @@ public class InducedAmnesia extends CardImpl {
     public InducedAmnesia(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
 
-        // When Induced Amnesia enters the battlefield, target player exiles all the cards in his or her hand face down, then draws that many cards.
+        // When Induced Amnesia enters the battlefield, target player exiles all the cards in their hand face down, then draws that many cards.
         Ability ability = new EntersBattlefieldTriggeredAbility(new InducedAmnesiaExileEffect(), false);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
@@ -77,7 +77,7 @@ class InducedAmnesiaExileEffect extends OneShotEffect {
 
     public InducedAmnesiaExileEffect() {
         super(Outcome.Detriment);
-        this.staticText = "target player exiles all the cards in his or her hand face down, then draws that many cards";
+        this.staticText = "target player exiles all the cards in their hand face down, then draws that many cards";
     }
 
     public InducedAmnesiaExileEffect(final InducedAmnesiaExileEffect effect) {
@@ -101,7 +101,7 @@ class InducedAmnesiaExileEffect extends OneShotEffect {
                     card.moveToExile(exileId, sourcePermanent.getName(), source.getSourceId(), game);
                     card.setFaceDown(true, game);
                 }
-                game.informPlayers(sourcePermanent.getLogName() + ": " + targetPlayer.getLogName() + " exiles his or her hand face down (" + numberOfCards + "card" + (numberOfCards > 1 ? "s" : "") + ')');
+                game.informPlayers(sourcePermanent.getLogName() + ": " + targetPlayer.getLogName() + " exiles their hand face down (" + numberOfCards + "card" + (numberOfCards > 1 ? "s" : "") + ')');
                 game.applyEffects();
                 targetPlayer.drawCards(numberOfCards, game);
             }

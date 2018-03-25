@@ -92,7 +92,7 @@ public class BloodchiefAscensionTest extends CardTestMultiPlayerBase {
      * Bloodchief Ascension at my end step. I think he should, even though I had
      * left the game from dying, because of:
      *
-     * 800.4g. If a player leaves the game during his or her turn, that turn
+     * 800.4g. If a player leaves the game during their turn, that turn
      * continues to its completion without an active player. If the active
      * player would receive priority, instead the next player in turn order
      * receives priority, or the top object on the stack resolves, or the phase
@@ -163,7 +163,7 @@ public class BloodchiefAscensionTest extends CardTestMultiPlayerBase {
         addCard(Zone.BATTLEFIELD, playerD, "Bloodchief Ascension");
         addCounters(2, PhaseStep.UPKEEP, playerD, "Bloodchief Ascension", CounterType.QUEST, 3);
         addCard(Zone.BATTLEFIELD, playerD, "Island", 1);
-        // {U}, {T}: Each player discards his or her hand, then draws cards equal to the greatest number of cards a player discarded this way.
+        // {U}, {T}: Each player discards their hand, then draws cards equal to the greatest number of cards a player discarded this way.
         addCard(Zone.BATTLEFIELD, playerD, "Jace's Archivist", 1); // {1}{U}{U}
         addCard(Zone.LIBRARY, playerD, "Demolish");
         addCard(Zone.HAND, playerD, "Demolish", 1);

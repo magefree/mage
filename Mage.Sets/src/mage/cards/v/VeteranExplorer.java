@@ -61,7 +61,7 @@ public class VeteranExplorer extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // When Veteran Explorer dies, each player may search his or her library for up to two basic land cards and put them onto the battlefield. Then each player who searched his or her library this way shuffles it.
+        // When Veteran Explorer dies, each player may search their library for up to two basic land cards and put them onto the battlefield. Then each player who searched their library this way shuffles it.
         this.addAbility(new DiesTriggeredAbility(new VeteranExplorerEffect()));
     }
 
@@ -79,7 +79,7 @@ class VeteranExplorerEffect extends OneShotEffect {
 
     public VeteranExplorerEffect() {
         super(Outcome.Detriment);
-        this.staticText = "each player may search his or her library for up to two basic land cards and put them onto the battlefield. Then each player who searched his or her library this way shuffles it";
+        this.staticText = "each player may search their library for up to two basic land cards and put them onto the battlefield. Then each player who searched their library this way shuffles it";
     }
 
     public VeteranExplorerEffect(final VeteranExplorerEffect effect) {

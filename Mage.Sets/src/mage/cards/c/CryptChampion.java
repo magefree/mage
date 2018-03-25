@@ -70,7 +70,7 @@ public class CryptChampion extends CardImpl {
         // Double strike
         this.addAbility(DoubleStrikeAbility.getInstance());
 
-        // When Crypt Champion enters the battlefield, each player puts a creature card with converted mana cost 3 or less from his or her graveyard onto the battlefield.
+        // When Crypt Champion enters the battlefield, each player puts a creature card with converted mana cost 3 or less from their graveyard onto the battlefield.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CryptChampionEffect()));
 
         // When Crypt Champion enters the battlefield, sacrifice it unless {R} was spent to cast it.
@@ -91,7 +91,7 @@ class CryptChampionEffect extends OneShotEffect {
 
     CryptChampionEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "each player puts a creature card with converted mana cost 3 or less from his or her graveyard onto the battlefield";
+        this.staticText = "each player puts a creature card with converted mana cost 3 or less from their graveyard onto the battlefield";
     }
 
     CryptChampionEffect(final CryptChampionEffect effect) {

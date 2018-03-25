@@ -59,7 +59,7 @@ public class HairStrungKoto extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{6}");
 
         /* Tap an untapped creature you control: Target player puts the top 
-         * card of his or her library into his or her graveyard. 
+         * card of their library into their graveyard.
          */
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new PutLibraryIntoGraveTargetEffect(1),

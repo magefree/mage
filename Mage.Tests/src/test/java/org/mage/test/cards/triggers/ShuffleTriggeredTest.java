@@ -42,7 +42,7 @@ public class ShuffleTriggeredTest extends CardTestPlayerBase {
     public void testWidespreadPanicDoesTrigger() {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 5);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
-        // Whenever a spell or ability causes its controller to shuffle his or her library, that player puts a card from his or her hand on top of his or her library.
+        // Whenever a spell or ability causes its controller to shuffle their library, that player puts a card from their hand on top of their library.
         addCard(Zone.HAND, playerA, "Widespread Panic", 1); // Enchantment {2}{R}
         // Search your library for a basic land card and put that card onto the battlefield. Then shuffle your library.
         addCard(Zone.HAND, playerA, "Untamed Wilds"); // Sorcery - {2}{G}
@@ -72,10 +72,10 @@ public class ShuffleTriggeredTest extends CardTestPlayerBase {
     public void testWidespreadPanicDoesNotTriggerIfOpponentShufflesPlayersLibrary() {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 9);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
-        // Whenever a spell or ability causes its controller to shuffle his or her library, that player puts a card from his or her hand on top of his or her library.
+        // Whenever a spell or ability causes its controller to shuffle their library, that player puts a card from their hand on top of their library.
         addCard(Zone.HAND, playerA, "Widespread Panic", 1); // Enchantment {2}{R}
         // Prowl {3}{U}
-        // Search target opponent's library for an instant or sorcery card. You may cast that card without paying its mana cost. Then that player shuffles his or her library.
+        // Search target opponent's library for an instant or sorcery card. You may cast that card without paying its mana cost. Then that player shuffles their library.
         addCard(Zone.HAND, playerA, "Knowledge Exploitation"); // Sorcery - {5}{U}{U}
 
         addCard(Zone.HAND, playerB, "Silvercoat Lion");

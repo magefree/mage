@@ -58,10 +58,10 @@ public class WintersNight extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{R}{G}{W}");
         addSuperType(SuperType.WORLD);
 
-        // Whenever a player taps a snow land for mana, that player adds one mana to his or her mana pool of any type that land produced.
+        // Whenever a player taps a snow land for mana, that player adds one mana to their mana pool of any type that land produced.
         // That land doesn't untap during its controller's next untap step.
         ManaEffect effect = new AddManaOfAnyTypeProducedEffect();
-        effect.setText("that player adds one mana to his or her mana pool of any type that land produced");
+        effect.setText("that player adds one mana to their mana pool of any type that land produced");
         Ability ability = new TapForManaAllTriggeredManaAbility(effect, filter, SetTargetPointer.PERMANENT);
         Effect effect2 = new DontUntapInControllersNextUntapStepTargetEffect();
         effect2.setText("That land doesn't untap during its controller's next untap step");

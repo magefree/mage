@@ -311,6 +311,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Soul Burn", 49, Rarity.COMMON, mage.cards.s.SoulBurn.class));
         cards.add(new SetCardInfo("Soul Kiss", 50, Rarity.COMMON, mage.cards.s.SoulKiss.class));
         cards.add(new SetCardInfo("Spoils of Evil", 51, Rarity.RARE, mage.cards.s.SpoilsOfEvil.class));
+        cards.add(new SetCardInfo("Staff of the Ages", 315, Rarity.RARE, mage.cards.s.StaffOfTheAges.class));
         cards.add(new SetCardInfo("Stampede", 153, Rarity.RARE, mage.cards.s.Stampede.class));
         cards.add(new SetCardInfo("Stonehands", 219, Rarity.COMMON, mage.cards.s.Stonehands.class));
         cards.add(new SetCardInfo("Stone Rain", 217, Rarity.COMMON, mage.cards.s.StoneRain.class));

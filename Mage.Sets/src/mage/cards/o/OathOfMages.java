@@ -60,7 +60,7 @@ public class OathOfMages extends CardImpl {
     public OathOfMages(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
 
-        // At the beginning of each player's upkeep, that player chooses target player who has more life than he or she does and is his or her opponent. The first player may have Oath of Mages deal 1 damage to the second player.
+        // At the beginning of each player's upkeep, that player chooses target player who has more life than he or she does and is their opponent. The first player may have Oath of Mages deal 1 damage to the second player.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new OathOfMagesEffect(), TargetController.ANY, false);
         ability.addTarget(new TargetPlayer(1, 1, false, filter));
         this.addAbility(ability);
@@ -110,7 +110,7 @@ class OathOfMagesPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePl
 
     @Override
     public String toString() {
-        return "player who has more life than he or she does and is his or her opponent";
+        return "player who has more life than he or she does and is their opponent";
     }
 }
 
@@ -118,7 +118,7 @@ class OathOfMagesEffect extends OneShotEffect {
 
     public OathOfMagesEffect() {
         super(Outcome.Damage);
-        staticText = "that player chooses target player who has more life than he or she does and is his or her opponent. The first player may have Oath of Mages deal 1 damage to the second player";
+        staticText = "that player chooses target player who has more life than he or she does and is their opponent. The first player may have Oath of Mages deal 1 damage to the second player";
     }
 
     public OathOfMagesEffect(OathOfMagesEffect effect) {

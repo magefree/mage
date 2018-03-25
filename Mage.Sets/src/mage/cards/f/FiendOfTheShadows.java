@@ -71,7 +71,7 @@ public class FiendOfTheShadows extends CardImpl {
         this.toughness = new MageInt(3);
 
         this.addAbility(FlyingAbility.getInstance());
-        // Whenever Fiend of the Shadows deals combat damage to a player, that player exiles a card from his or her hand. You may play that card for as long as it remains exiled.
+        // Whenever Fiend of the Shadows deals combat damage to a player, that player exiles a card from their hand. You may play that card for as long as it remains exiled.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new ExileFromZoneTargetEffect(Zone.HAND, exileId, "Fiend of the Shadows", new FilterCard()), false, true));
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new FiendOfTheShadowsEffect(exileId)));
 

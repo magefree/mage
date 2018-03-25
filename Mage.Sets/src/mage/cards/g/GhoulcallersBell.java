@@ -51,7 +51,7 @@ public class GhoulcallersBell extends CardImpl {
     public GhoulcallersBell(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
 
-        // {tap}: Each player puts the top card of his or her library into his or her graveyard.
+        // {tap}: Each player puts the top card of their library into their graveyard.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GhoulcallersBellEffect(), new TapSourceCost()));
     }
 
@@ -69,7 +69,7 @@ class GhoulcallersBellEffect extends OneShotEffect {
 
     public GhoulcallersBellEffect() {
         super(Outcome.Discard);
-        this.staticText = "Each player puts the top card of his or her library into his or her graveyard";
+        this.staticText = "Each player puts the top card of their library into their graveyard";
     }
 
     public GhoulcallersBellEffect(final GhoulcallersBellEffect effect) {

@@ -50,7 +50,7 @@ public class HurkylsRecall extends CardImpl {
     public HurkylsRecall(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
 
-        // Return all artifacts target player owns to his or her hand.
+        // Return all artifacts target player owns to their hand.
         this.getSpellAbility().addEffect(new HurkylsRecallReturnToHandEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
@@ -69,7 +69,7 @@ class HurkylsRecallReturnToHandEffect extends OneShotEffect {
 
     public HurkylsRecallReturnToHandEffect() {
         super(Outcome.ReturnToHand);
-        staticText = "Return all artifacts target player owns to his or her hand";
+        staticText = "Return all artifacts target player owns to their hand";
     }
 
     public HurkylsRecallReturnToHandEffect(final HurkylsRecallReturnToHandEffect effect) {

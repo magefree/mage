@@ -47,6 +47,7 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -61,14 +62,14 @@ public class LyzoldaTheBloodWitch extends CardImpl {
 
     private static final FilterPermanent redFilter = new FilterPermanent();
     private static final FilterPermanent blackFilter = new FilterPermanent();
-    
+
     static {
         redFilter.add(new ColorPredicate(ObjectColor.RED));
         blackFilter.add(new ColorPredicate(ObjectColor.BLACK));
     }
-    
+
     public LyzoldaTheBloodWitch(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{R}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.CLERIC);
@@ -87,7 +88,7 @@ public class LyzoldaTheBloodWitch extends CardImpl {
                 new SacrificedWasCondition(blackFilter),
                 "Draw a card if the sacrificed creature was black");
         ability.addEffect(effect);
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
     }
@@ -105,11 +106,11 @@ public class LyzoldaTheBloodWitch extends CardImpl {
 class SacrificedWasCondition implements Condition {
 
     private final FilterPermanent filter;
-    
+
     public SacrificedWasCondition(final FilterPermanent filter) {
         this.filter = filter;
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         for (Cost cost : source.getCosts()) {
@@ -123,5 +124,5 @@ class SacrificedWasCondition implements Condition {
         }
         return false;
     }
-    
+
 }

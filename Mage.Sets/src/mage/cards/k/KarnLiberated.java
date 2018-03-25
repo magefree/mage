@@ -72,7 +72,7 @@ public class KarnLiberated extends CardImpl {
         this.subtype.add(SubType.KARN);
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(6));
 
-        // +4: Target player exiles a card from his or her hand.
+        // +4: Target player exiles a card from their hand.
         LoyaltyAbility ability1 = new LoyaltyAbility(new KarnPlayerExileEffect(), 4);
         ability1.addTarget(new TargetPlayer());
         this.addAbility(ability1);
@@ -251,7 +251,7 @@ class KarnPlayerExileEffect extends OneShotEffect {
 
     public KarnPlayerExileEffect() {
         super(Outcome.Exile);
-        staticText = "target player exiles a card from his or her hand.";
+        staticText = "target player exiles a card from their hand.";
     }
 
     public KarnPlayerExileEffect(final KarnPlayerExileEffect effect) {

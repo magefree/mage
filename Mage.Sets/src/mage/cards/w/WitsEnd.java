@@ -50,7 +50,7 @@ public class WitsEnd extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{B}{B}");
 
 
-        // Target player discards his or her hand.
+        // Target player discards their hand.
         this.getSpellAbility().addEffect(new WitsEndEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
@@ -69,7 +69,7 @@ class WitsEndEffect extends OneShotEffect {
 
     public WitsEndEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Target player discards his or her hand";
+        this.staticText = "Target player discards their hand";
     }
 
     public WitsEndEffect(final WitsEndEffect effect) {

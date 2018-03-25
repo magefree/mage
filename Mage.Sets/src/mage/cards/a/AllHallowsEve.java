@@ -60,7 +60,7 @@ public class AllHallowsEve extends CardImpl {
         effect.setText("with 2 scream counters on it");
         this.getSpellAbility().addEffect(effect);
 
-        // At the beginning of your upkeep, if All Hallow's Eve is exiled with a scream counter on it, remove a scream counter from it. If there are no more scream counters on it, put it into your graveyard and each player returns all creature cards from his or her graveyard to the battlefield.
+        // At the beginning of your upkeep, if All Hallow's Eve is exiled with a scream counter on it, remove a scream counter from it. If there are no more scream counters on it, put it into your graveyard and each player returns all creature cards from their graveyard to the battlefield.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.EXILED, new AllHallowsEveEffect(), TargetController.YOU, false));
 
     }
@@ -79,7 +79,7 @@ class AllHallowsEveEffect extends OneShotEffect {
 
     public AllHallowsEveEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "if {this} is exiled with a scream counter on it, remove a scream counter from it. If there are no more scream counters on it, put it into your graveyard and each player returns all creature cards from his or her graveyard to the battlefield";
+        this.staticText = "if {this} is exiled with a scream counter on it, remove a scream counter from it. If there are no more scream counters on it, put it into your graveyard and each player returns all creature cards from their graveyard to the battlefield";
     }
 
     public AllHallowsEveEffect(final AllHallowsEveEffect effect) {

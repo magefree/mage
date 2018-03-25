@@ -52,7 +52,7 @@ public class FoldIntoAether extends CardImpl {
     public FoldIntoAether(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}{U}");
 
-        // Counter target spell. If that spell is countered this way, its controller may put a creature card from his or her hand onto the battlefield.
+        // Counter target spell. If that spell is countered this way, its controller may put a creature card from their hand onto the battlefield.
         this.getSpellAbility().addEffect(new FoldIntoAetherEffect());
         this.getSpellAbility().addTarget(new TargetSpell());
     }
@@ -71,7 +71,7 @@ class FoldIntoAetherEffect extends OneShotEffect {
 
     public FoldIntoAetherEffect() {
         super(Outcome.Detriment);
-        this.staticText = "Counter target spell. If that spell is countered this way, its controller may put a creature card from his or her hand onto the battlefield";
+        this.staticText = "Counter target spell. If that spell is countered this way, its controller may put a creature card from their hand onto the battlefield";
     }
 
     public FoldIntoAetherEffect(final FoldIntoAetherEffect effect) {

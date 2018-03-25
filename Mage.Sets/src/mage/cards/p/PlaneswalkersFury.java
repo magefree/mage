@@ -53,7 +53,7 @@ public class PlaneswalkersFury extends CardImpl {
     public PlaneswalkersFury(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");
 
-        // {3}{R}: Target opponent reveals a card at random from his or her hand. Planeswalker's Fury deals damage equal to that card's converted mana cost to that player. Activate this ability only any time you could cast a sorcery.
+        // {3}{R}: Target opponent reveals a card at random from their hand. Planeswalker's Fury deals damage equal to that card's converted mana cost to that player. Activate this ability only any time you could cast a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new PlaneswalkersFuryEffect(), new ManaCostsImpl("{3}{R}"));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
@@ -73,7 +73,7 @@ class PlaneswalkersFuryEffect extends OneShotEffect {
 
     public PlaneswalkersFuryEffect() {
         super(Outcome.Damage);
-        staticText = "Target opponent reveals a card at random from his or her hand. Planeswalker's Fury deals damage equal to that card's converted mana cost to that player";
+        staticText = "Target opponent reveals a card at random from their hand. Planeswalker's Fury deals damage equal to that card's converted mana cost to that player";
     }
 
     public PlaneswalkersFuryEffect(final PlaneswalkersFuryEffect effect) {

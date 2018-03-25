@@ -138,18 +138,4 @@ public abstract class EffectImpl implements Effect {
         }
         return values.get(key);
     }
-
-    /**
-     * If set, the game.applyEffects() method will be called to apply the
-     * effects before the next effect (of the same ability) will resolve.
-     */
-    @Override
-    public void setApplyEffectsAfter() {
-        applyEffectsAfter = true;
-    }
-
-    @Override
-    public boolean applyEffectsAfter() {
-        return applyEffectsAfter;
-    }
 }

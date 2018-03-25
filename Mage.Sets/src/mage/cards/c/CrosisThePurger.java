@@ -66,7 +66,7 @@ public class CrosisThePurger extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        // Whenever Crosis, the Purger deals combat damage to a player, you may pay {2}{B}. If you do, choose a color, then that player reveals his or her hand and discards all cards of that color.
+        // Whenever Crosis, the Purger deals combat damage to a player, you may pay {2}{B}. If you do, choose a color, then that player reveals their hand and discards all cards of that color.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DoIfCostPaid(new CrosisThePurgerEffect(),
                 new ManaCostsImpl("{2}{B}")), false, true));
     }
@@ -85,7 +85,7 @@ class CrosisThePurgerEffect extends OneShotEffect {
 
     CrosisThePurgerEffect() {
         super(Outcome.Discard);
-        this.staticText = "choose a color, then that player reveals his or her hand and discards all cards of that color.";
+        this.staticText = "choose a color, then that player reveals their hand and discards all cards of that color.";
     }
 
     CrosisThePurgerEffect(final CrosisThePurgerEffect effect) {

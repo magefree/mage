@@ -57,10 +57,10 @@ public class Mindblaze extends CardImpl {
     public Mindblaze(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{R}");
 
-        // Name a nonland card and choose a number greater than 0. Target player reveals his or her library.
+        // Name a nonland card and choose a number greater than 0. Target player reveals their library.
         // If that library contains exactly the chosen number of the named card,
         // Mindblaze deals 8 damage to that player.
-        // Then that player shuffles his or her library.
+        // Then that player shuffles their library.
         this.getSpellAbility().addEffect(new MindblazeEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
@@ -80,7 +80,7 @@ class MindblazeEffect extends OneShotEffect {
 
     MindblazeEffect() {
         super(Outcome.Damage);
-        staticText = "Name a nonland card and choose a number greater than 0. Target player reveals his or her library. If that library contains exactly the chosen number of the named card, {this} deals 8 damage to that player. Then that player shuffles his or her library";
+        staticText = "Name a nonland card and choose a number greater than 0. Target player reveals their library. If that library contains exactly the chosen number of the named card, {this} deals 8 damage to that player. Then that player shuffles their library";
     }
 
     MindblazeEffect(final MindblazeEffect effect) {

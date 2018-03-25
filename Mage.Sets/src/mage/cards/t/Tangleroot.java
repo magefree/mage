@@ -46,9 +46,9 @@ public class Tangleroot extends CardImpl {
     public Tangleroot(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
-        // Whenever a player casts a creature spell, that player adds {G} to his or her mana pool.
+        // Whenever a player casts a creature spell, that player adds {G} to their mana pool.
         this.addAbility(new SpellCastAllTriggeredAbility(
-                new AddManaToManaPoolTargetControllerEffect(Mana.GreenMana(1), "his or her"), StaticFilters.FILTER_SPELL_A_CREATURE, false, SetTargetPointer.PLAYER));
+                new AddManaToManaPoolTargetControllerEffect(Mana.GreenMana(1), "their"), StaticFilters.FILTER_SPELL_A_CREATURE, false, SetTargetPointer.PLAYER));
     }
 
     public Tangleroot(final Tangleroot card) {

@@ -43,12 +43,11 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public class Cloudshift extends CardImpl {
 
     public Cloudshift(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{W}");
 
         // Exile target creature you control, then return that card to the battlefield under your control.
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         Effect effect = new ExileTargetForSourceEffect();
-        effect.setApplyEffectsAfter();
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addEffect(new ReturnToBattlefieldUnderYourControlTargetEffect(true));
     }

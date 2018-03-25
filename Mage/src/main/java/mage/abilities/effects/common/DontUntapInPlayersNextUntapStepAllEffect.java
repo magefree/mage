@@ -141,6 +141,6 @@ public class DontUntapInPlayersNextUntapStepAllEffect extends ContinuousRuleModi
         if (!staticText.isEmpty()) {
             return staticText;
         }
-        return filter.getMessage() + " target opponent controls don't untap during his or her next untap step.";
+        return filter.getMessage() + " target opponent controls don't untap during their next untap step.";
     }
 }

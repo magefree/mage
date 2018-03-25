@@ -38,8 +38,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
@@ -50,21 +49,15 @@ import mage.target.common.TargetControlledPermanent;
  * @author jeffwadsworth
  */
 public class AltarOfDementia extends CardImpl {
-    
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("creature");
-    
-    static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
-    }
 
     public AltarOfDementia(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
-        // Sacrifice a creature: Target player puts a number of cards equal to the sacrificed creature's power from the top of his or her library into his or her graveyard.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AltarOfDementiaEffect(), new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        // Sacrifice a creature: Target player puts a number of cards equal to the sacrificed creature's power from the top of their library into their graveyard.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AltarOfDementiaEffect(), new SacrificeTargetCost(new TargetControlledPermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
-        
+
     }
 
     public AltarOfDementia(final AltarOfDementia card) {
@@ -78,10 +71,10 @@ public class AltarOfDementia extends CardImpl {
 }
 
 class AltarOfDementiaEffect extends OneShotEffect {
-    
+
     public AltarOfDementiaEffect() {
         super(Outcome.Damage);
-        staticText = "Target player puts a number of cards equal to the sacrificed creature's power from the top of his or her library into his or her graveyard";
+        staticText = "Target player puts a number of cards equal to the sacrificed creature's power from the top of their library into their graveyard";
     }
 
     public AltarOfDementiaEffect(final AltarOfDementiaEffect effect) {
@@ -93,16 +86,16 @@ class AltarOfDementiaEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getFirstTarget());
         if (player != null) {
             int amount = 0;
-            for (Cost cost: source.getCosts()) {
+            for (Cost cost : source.getCosts()) {
                 if (cost instanceof SacrificeTargetCost && !((SacrificeTargetCost) cost).getPermanents().isEmpty()) {
-                    amount = ((SacrificeTargetCost)cost).getPermanents().get(0).getPower().getValue();
+                    amount = ((SacrificeTargetCost) cost).getPermanents().get(0).getPower().getValue();
                     break;
                 }
             }
             if (amount > 0) {
                 player.moveCards(player.getLibrary().getTopCards(game, amount), Zone.GRAVEYARD, source, game);
             }
-            return true;            
+            return true;
         }
         return false;
     }

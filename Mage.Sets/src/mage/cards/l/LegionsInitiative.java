@@ -129,7 +129,6 @@ class LegionsInitiativeExileEffect extends OneShotEffect {
             //create delayed triggered ability
             AtTheBeginOfCombatDelayedTriggeredAbility delayedAbility = new AtTheBeginOfCombatDelayedTriggeredAbility(new LegionsInitiativeReturnFromExileEffect());
             game.addDelayedTriggeredAbility(delayedAbility, source);
-            return true;
         }
         return true;
     }

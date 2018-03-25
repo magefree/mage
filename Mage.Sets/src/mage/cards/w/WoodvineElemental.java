@@ -53,7 +53,7 @@ import mage.players.Player;
  */
 public class WoodvineElemental extends CardImpl {
     
-    static final private String rule = "<i>Parley &mdash; </i> Whenever {this} attacks, each player reveals the top card of his or her library. "
+    static final private String rule = "<i>Parley &mdash; </i> Whenever {this} attacks, each player reveals the top card of their library. "
                         + "For each nonland card revealed this way, attacking creatures you control get +1/+1 until end of turn. Then each player draws a card.";
     
     public WoodvineElemental(UUID ownerId, CardSetInfo setInfo) {
@@ -65,7 +65,7 @@ public class WoodvineElemental extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         
-        // Parley - Whenever Woodvine Elemental attacks, each player reveals the top card of his or her library. 
+        // Parley - Whenever Woodvine Elemental attacks, each player reveals the top card of their library.
         // For each nonland card revealed this way, attacking creatures you control get +1/+1 until end of turn. Then each player draws a card.
         Ability ability = new AttacksTriggeredAbility(new WoodvineElementalEffect(), false, rule);
         Effect effect = new DrawCardAllEffect(1);

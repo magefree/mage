@@ -100,10 +100,10 @@ class DawnbreakReclaimerEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         /**
-         * 04.11.2015 If any opponent has a creature card in his or her
+         * 04.11.2015 If any opponent has a creature card in their
          * graveyard as Dawnbreak Reclaimer’s ability resolves, then you must
          * choose one of those cards. You can’t choose a different opponent with
-         * no creature cards in his or her graveyard to avoid returning one of
+         * no creature cards in their graveyard to avoid returning one of
          * those cards.
          *
          * 04.11.2015 If there are no creature cards in any opponent’s graveyard
@@ -132,7 +132,7 @@ class DawnbreakReclaimerEffect extends OneShotEffect {
                 controller.choose(outcome, targetOpponent, source.getSourceId(), game);
                 opponent = game.getPlayer(targetOpponent.getFirstTarget());
                 if (opponent != null) {
-                    game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " has chosen " + opponent.getLogName() + " to select a creature card from his or her graveyard");
+                    game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " has chosen " + opponent.getLogName() + " to select a creature card from their graveyard");
                 }
             }
             if (opponent != null) {

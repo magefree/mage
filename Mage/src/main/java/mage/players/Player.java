@@ -731,7 +731,8 @@ public interface Player extends MageItem, Copyable<Player> {
 
     /**
      * Uses card.moveToExile and posts a inform message about moving the card to
-     * exile into the game log
+     * exile into the game log. Don't use this in replacement effects, because
+     * list of applied effects is not saved
      *
      * @param card
      * @param exileId exile zone id (optional)

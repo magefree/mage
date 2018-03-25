@@ -63,7 +63,7 @@ public class MeliraSylvokOutcast extends CardImpl {
         // You can't get poison counters.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MeliraSylvokOutcastEffect()));
 
-        // Creatures you control can't have -1/-1 counters placed on them.
+        // Creatures you control can't have -1/-1 counters put on them.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MeliraSylvokOutcastEffect2()));
 
         // Creatures your opponents control lose infect.
@@ -118,7 +118,7 @@ class MeliraSylvokOutcastEffect2 extends ReplacementEffectImpl {
 
     public MeliraSylvokOutcastEffect2() {
         super(Duration.WhileOnBattlefield, Outcome.PreventDamage);
-        staticText = "Creatures you control can't have -1/-1 counters placed on them";
+        staticText = "Creatures you control can't have -1/-1 counters put on them";
     }
 
     public MeliraSylvokOutcastEffect2(final MeliraSylvokOutcastEffect2 effect) {

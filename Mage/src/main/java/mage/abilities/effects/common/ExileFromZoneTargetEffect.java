@@ -27,6 +27,7 @@
  */
 package mage.abilities.effects.common;
 
+import java.util.Locale;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -106,6 +107,6 @@ public class ExileFromZoneTargetEffect extends OneShotEffect {
     }
 
     private void setText() {
-        staticText = "target player exiles " + CardUtil.numberToText(amount, "a") + ' ' + filter.getMessage() + " from his or her " + zone.toString().toLowerCase();
+        staticText = "target player exiles " + CardUtil.numberToText(amount, "a") + ' ' + filter.getMessage() + " from their " + zone.toString().toLowerCase(Locale.ENGLISH);
     }
 }

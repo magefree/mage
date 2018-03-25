@@ -56,7 +56,7 @@ public class MagusOfTheWheel extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // {1}{R}, {T}, Sacrifice Magus of the Wheel: Each player discards his or her hand, then draws seven cards.
+        // {1}{R}, {T}, Sacrifice Magus of the Wheel: Each player discards their hand, then draws seven cards.
         Effect effect = new DrawCardAllEffect(7);
         effect.setText(", then draws seven cards");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DiscardHandAllEffect(), new ManaCostsImpl("{1}{R}"));

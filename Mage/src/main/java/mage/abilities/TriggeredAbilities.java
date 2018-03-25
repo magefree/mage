@@ -28,6 +28,8 @@
  */
 package mage.abilities;
 
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import mage.MageObject;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -36,15 +38,12 @@ import mage.game.events.NumberOfTriggersEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 
-import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
-
 /**
  * @author BetaSteward_at_googlemail.com
- *         <p>
- *         This class uses ConcurrentHashMap to avoid ConcurrentModificationExceptions.
- *         See ticket https://github.com/magefree/mage/issues/966 and
- *         https://github.com/magefree/mage/issues/473
+ * <p>
+ * This class uses ConcurrentHashMap to avoid ConcurrentModificationExceptions.
+ * See ticket https://github.com/magefree/mage/issues/966 and
+ * https://github.com/magefree/mage/issues/473
  */
 public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbility> {
 
@@ -63,7 +62,7 @@ public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbili
     }
 
     public void checkStateTriggers(Game game) {
-        for (Iterator<TriggeredAbility> it = this.values().iterator(); it.hasNext(); ) {
+        for (Iterator<TriggeredAbility> it = this.values().iterator(); it.hasNext();) {
             TriggeredAbility ability = it.next();
             if (ability instanceof StateTriggeredAbility && ((StateTriggeredAbility) ability).canTrigger(game)) {
                 checkTrigger(ability, null, game);
@@ -72,7 +71,7 @@ public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbili
     }
 
     public void checkTriggers(GameEvent event, Game game) {
-        for (Iterator<TriggeredAbility> it = this.values().iterator(); it.hasNext(); ) {
+        for (Iterator<TriggeredAbility> it = this.values().iterator(); it.hasNext();) {
             TriggeredAbility ability = it.next();
             if (ability.checkEventType(event, game)) {
                 checkTrigger(ability, event, game);
@@ -98,7 +97,10 @@ public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbili
                         // need to check if object was face down for dies and destroy events because the ability triggers in the new zone, zone counter -1 is used
                         Permanent permanent = (Permanent) game.getLastKnownInformation(ability.getSourceId(), Zone.BATTLEFIELD, ability.getSourceObjectZoneChangeCounter() - 1);
                         if (permanent != null) {
-                            if (!ability.getWorksFaceDown() && permanent.isFaceDown(game)) {
+                            if (permanent.isFaceDown(game)
+                                    && !isGainedAbility(ability, permanent) // the face down creature got the ability from an effect => so it should work
+                                    && !ability.getWorksFaceDown()) { // the ability is declared to work also face down
+                                // Not all triggered abilities of face down creatures work if they are faced down
                                 return;
                             }
                             controllerSet = true;
@@ -130,8 +132,8 @@ public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbili
     /**
      * Adds a by sourceId gained triggered ability
      *
-     * @param ability    - the gained ability
-     * @param sourceId   - the source that assigned the ability
+     * @param ability - the gained ability
+     * @param sourceId - the source that assigned the ability
      * @param attachedTo - the object that gained the ability
      */
     public void add(TriggeredAbility ability, UUID sourceId, MageObject attachedTo) {
@@ -161,7 +163,6 @@ public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbili
         return key;
     }
 
-
     public void removeAbilitiesOfSource(UUID sourceId) {
         keySet().removeIf(key -> key.endsWith(sourceId.toString()));
     }
@@ -169,6 +170,10 @@ public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbili
     public void removeAllGainedAbilities() {
         this.keySet().removeAll(sources.keySet());
         sources.clear();
+    }
+
+    public boolean isGainedAbility(TriggeredAbility abilityToCheck, MageObject attachedTo) {
+        return sources.containsKey(getKey(abilityToCheck, attachedTo));
     }
 
     public void removeAbilitiesOfNonExistingSources(Game game) {

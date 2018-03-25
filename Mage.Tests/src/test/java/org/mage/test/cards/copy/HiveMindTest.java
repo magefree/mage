@@ -46,7 +46,7 @@ public class HiveMindTest extends CardTestPlayerBase {
     public void testTransform() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
         // Whenever a player casts an instant or sorcery spell, each other player copies that spell.
-        // Each of those players may choose new targets for his or her copy.
+        // Each of those players may choose new targets for their copy.
         addCard(Zone.BATTLEFIELD, playerA, "Hive Mind", 1);
         addCard(Zone.HAND, playerA, "Lightning Bolt", 1);
         setChoice(playerB, "Yes");
@@ -72,7 +72,7 @@ public class HiveMindTest extends CardTestPlayerBase {
     @Test
     public void testChaliceOfTtheVoid() {
         // Whenever a player casts an instant or sorcery spell, each other player copies that spell.
-        // Each of those players may choose new targets for his or her copy.
+        // Each of those players may choose new targets for their copy.
         addCard(Zone.BATTLEFIELD, playerA, "Hive Mind", 1);
         // Create a 4/4 red Giant creature token onto the battlefield.
         // At the beginning of your next upkeep, pay {4}{R}. If you don't, you lose the game.

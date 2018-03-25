@@ -56,7 +56,7 @@ public class HighTide extends CardImpl {
     public HighTide(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
 
-        // Until end of turn, whenever a player taps an Island for mana, that player adds {U} to his or her mana pool.
+        // Until end of turn, whenever a player taps an Island for mana, that player adds {U} to their mana pool.
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new HighTideTriggeredAbility()));
 
     }
@@ -80,7 +80,7 @@ class HighTideTriggeredAbility extends DelayedTriggeredManaAbility {
     }
 
     public HighTideTriggeredAbility() {
-        super(new AddManaToManaPoolTargetControllerEffect(new Mana(ColoredManaSymbol.U), "his or her"), Duration.EndOfTurn, false);
+        super(new AddManaToManaPoolTargetControllerEffect(new Mana(ColoredManaSymbol.U), "their"), Duration.EndOfTurn, false);
         this.usesStack = false;
     }
 
@@ -112,6 +112,6 @@ class HighTideTriggeredAbility extends DelayedTriggeredManaAbility {
 
     @Override
     public String getRule() {
-        return "Until end of turn, whenever a player taps an Island for mana, that player adds {U} to his or her mana pool";
+        return "Until end of turn, whenever a player taps an Island for mana, that player adds {U} to their mana pool";
     }
 }

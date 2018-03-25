@@ -64,7 +64,7 @@ public class KeeperOfProgenitus extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 
-        // Whenever a player taps a Mountain, Forest, or Plains for mana, that player adds one mana to his or her mana pool of any type that land produced.
+        // Whenever a player taps a Mountain, Forest, or Plains for mana, that player adds one mana to their mana pool of any type that land produced.
         this.addAbility(new TapForManaAllTriggeredManaAbility(
                 new AddManaOfAnyTypeProducedEffect(),
                 filter, SetTargetPointer.PERMANENT));

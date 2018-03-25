@@ -55,7 +55,7 @@ public class PermafrostTrap extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}{U}");
         this.subtype.add(SubType.TRAP);
 
-        // If an opponent had a green creature enter the battlefield under his or her control this turn, you may pay {U} rather than pay Permafrost Trap's mana cost.
+        // If an opponent had a green creature enter the battlefield under their control this turn, you may pay {U} rather than pay Permafrost Trap's mana cost.
         this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{U}"), PermafrostTrapCondition.instance), new PermanentsEnteredBattlefieldWatcher());
 
         // Tap up to two target creatures. Those creatures don't untap during their controller's next untap step.
@@ -98,6 +98,6 @@ enum PermafrostTrapCondition implements Condition {
 
     @Override
     public String toString() {
-        return "If an opponent had a green creature enter the battlefield under his or her control this turn";
+        return "If an opponent had a green creature enter the battlefield under their control this turn";
     }
 }

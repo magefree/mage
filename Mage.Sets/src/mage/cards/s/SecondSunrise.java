@@ -55,7 +55,7 @@ public class SecondSunrise extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}{W}");
 
 
-        // Each player returns to the battlefield all artifact, creature, enchantment, and land cards in his or her graveyard that were put there from the battlefield this turn.
+        // Each player returns to the battlefield all artifact, creature, enchantment, and land cards in their graveyard that were put there from the battlefield this turn.
         this.getSpellAbility().addEffect(new SecondSunriseEffect());
         this.getSpellAbility().addWatcher(new SecondSunriseWatcher());
     }
@@ -74,7 +74,7 @@ class SecondSunriseEffect extends OneShotEffect {
 
     SecondSunriseEffect() {
         super(Outcome.PutCardInPlay);
-        staticText = "Each player returns to the battlefield all artifact, creature, enchantment, and land cards in his or her graveyard that were put there from the battlefield this turn";
+        staticText = "Each player returns to the battlefield all artifact, creature, enchantment, and land cards in their graveyard that were put there from the battlefield this turn";
     }
 
     SecondSunriseEffect(final SecondSunriseEffect effect) {

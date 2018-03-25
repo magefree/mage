@@ -39,9 +39,10 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.TargetController;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -54,7 +55,7 @@ import mage.target.common.TargetOpponent;
 public class IndulgentTormentor extends CardImpl {
 
     public IndulgentTormentor(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
         this.subtype.add(SubType.DEMON);
 
         this.power = new MageInt(5);
@@ -62,7 +63,7 @@ public class IndulgentTormentor extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        
+
         // At the beginning of your upkeep, draw a card unless target opponent sacrifices a creature or pays 3 life.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new IndulgentTormentorEffect(), TargetController.YOU, false);
         ability.addTarget(new TargetOpponent());
@@ -80,26 +81,26 @@ public class IndulgentTormentor extends CardImpl {
 }
 
 class IndulgentTormentorEffect extends OneShotEffect {
-    
+
     IndulgentTormentorEffect() {
         super(Outcome.DrawCard);
         this.staticText = "draw a card unless target opponent sacrifices a creature or pays 3 life";
     }
-    
+
     IndulgentTormentorEffect(final IndulgentTormentorEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public IndulgentTormentorEffect copy() {
         return new IndulgentTormentorEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player opponent = game.getPlayer(source.getFirstTarget());
         if (opponent != null) {
-            Cost cost = new SacrificeTargetCost(new TargetControlledCreaturePermanent());
+            Cost cost = new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
             if (cost.canPay(source, source.getSourceId(), opponent.getId(), game)
                     && opponent.chooseUse(outcome, "Sacrifice a creature to prevent the card draw?", source, game)) {
                 if (cost.pay(source, game, source.getSourceId(), opponent.getId(), false, null)) {

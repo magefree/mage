@@ -57,7 +57,7 @@ public class EnduringScalelord extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // Whenever one or more +1/+1 counters are place on another creature you control, you may put a +1/+1 counter on Enduring Scaleguard.
+        // Whenever one or more +1/+1 counters are put on another creature you control, you may put a +1/+1 counter on Enduring Scaleguard.
         this.addAbility(new EnduringScalelordTriggeredAbility());
 
     }
@@ -109,6 +109,6 @@ class EnduringScalelordTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever one or more +1/+1 counters are place on another creature you control, you may put a +1/+1 counter on {this}.";
+        return "Whenever one or more +1/+1 counters are put on another creature you control, you may put a +1/+1 counter on {this}.";
     }
 }

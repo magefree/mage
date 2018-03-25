@@ -3,6 +3,7 @@ package mage.client.components;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -40,6 +41,7 @@ public class HoverButton extends JPanel implements MouseListener {
     private String topText;
     private Image topTextImage;
     private Image topTextImageRight;
+    private String centerText;
 
     private boolean isHovered = false;
     private boolean isSelected = false;
@@ -49,12 +51,15 @@ public class HoverButton extends JPanel implements MouseListener {
     private Command observer = null;
     private Command onHover = null;
     private Color textColor = Color.white;
+    private final Rectangle centerTextArea = new Rectangle(5, 18, 75, 40);
+    private final Color centerTextColor = Color.YELLOW;
     private final Color textBGColor = Color.black;
 
     static final Font textFont = new Font("Arial", Font.PLAIN, 12);
     static final Font textFontMini = new Font("Arial", Font.PLAIN, 11);
     static final Font textSetFontBoldMini = new Font("Arial", Font.BOLD, 12);
     static final Font textSetFontBold = new Font("Arial", Font.BOLD, 14);
+
     private boolean useMiniFont = false;
 
     private boolean alignTextLeft = false;
@@ -134,6 +139,21 @@ public class HoverButton extends JPanel implements MouseListener {
         if (topTextImageRight != null) {
             g.drawImage(topTextImageRight, this.getWidth() - 20, 3, this);
         }
+
+        if (centerText != null) {
+            g2d.setColor(centerTextColor);
+            int fontSize = 40;
+            int val = Integer.parseInt(centerText);
+            if (val > 9999) {
+                fontSize = 24;
+            } else if (val > 999) {
+                fontSize = 28;
+            } else if (val > 99) {
+                fontSize = 34;
+            }
+            drawCenteredString(g2d, centerText, centerTextArea, new Font("Arial", Font.BOLD, fontSize));
+        }
+        g2d.setColor(textColor);
         if (overlayImage != null) {
             g.drawImage(overlayImage, (imageSize.width - overlayImageSize.width) / 2, 10, this);
         } else if (set != null) {
@@ -298,11 +318,15 @@ public class HoverButton extends JPanel implements MouseListener {
 
     public void setTopTextImage(Image topTextImage) {
         this.topTextImage = topTextImage;
-        this.textOffsetX = -1; // rest for new clculation
+        this.textOffsetX = -1; // rest for new calculation
     }
 
     public void setTopTextImageRight(Image topTextImage) {
         this.topTextImageRight = topTextImage;
+    }
+
+    public void setCenterText(String centerText) {
+        this.centerText = centerText;
     }
 
     public void setTextAlwaysVisible(boolean textAlwaysVisible) {
@@ -313,4 +337,24 @@ public class HoverButton extends JPanel implements MouseListener {
         this.alignTextLeft = alignTextLeft;
     }
 
+    /**
+     * Draw a String centered in the middle of a Rectangle.
+     *
+     * @param g The Graphics instance.
+     * @param text The String to draw.
+     * @param rect The Rectangle to center the text in.
+     * @param font
+     */
+    public void drawCenteredString(Graphics g, String text, Rectangle rect, Font font) {
+        // Get the FontMetrics
+        FontMetrics metrics = g.getFontMetrics(font);
+        // Determine the X coordinate for the text
+        int x = rect.x + (rect.width - metrics.stringWidth(text)) / 2;
+        // Determine the Y coordinate for the text (note we add the ascent, as in java 2d 0 is top of the screen)
+        int y = rect.y + ((rect.height - metrics.getHeight()) / 2) + metrics.getAscent();
+        // Set the font
+        g.setFont(font);
+        // Draw the String
+        g.drawString(text, x, y);
+    }
 }

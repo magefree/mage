@@ -7,7 +7,6 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.cards.CardImpl;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
-import mage.constants.CardType;
 import org.apache.log4j.Logger;
 
 /**

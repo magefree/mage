@@ -92,6 +92,7 @@ public class PermanentToken extends PermanentImpl {
         this.supertype.addAll(token.getSuperType());
         this.subtype.clear();
         this.subtype.addAll(token.getSubtype(game));
+        this.isAllCreatureTypes = token.isAllCreatureTypes();
         this.tokenDescriptor = token.getTokenDescriptor();
     }
 

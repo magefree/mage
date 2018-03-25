@@ -54,7 +54,7 @@ public class ScavengeTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 1);
 
         // Activated abilities of creature cards in your graveyard cost {1} less to activate.
-        // Tap an untapped Zombie you control: Target player puts the top card of his or her library into his or her graveyard.
+        // Tap an untapped Zombie you control: Target player puts the top card of their library into their graveyard.
         addCard(Zone.BATTLEFIELD, playerA, "Embalmer's Tools", 1);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Scavenge", "Silvercoat Lion");
@@ -105,7 +105,7 @@ public class ScavengeTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Varolz, the Scar-Striped", 1);
 
         // Activated abilities of creature cards in your graveyard cost {1} less to activate.
-        // Tap an untapped Zombie you control: Target player puts the top card of his or her library into his or her graveyard.
+        // Tap an untapped Zombie you control: Target player puts the top card of their library into their graveyard.
         addCard(Zone.BATTLEFIELD, playerA, "Embalmer's Tools", 1);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Scavenge", "Silvercoat Lion");

@@ -1097,11 +1097,11 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (!ignoreTiming && !playLandAbility.canActivate(this.playerId, game)) {
             return false;
         }
-        
-        game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PLAY_LAND, card.getId(), card.getId(), playerId));
+
         //20091005 - 305.1
         if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.PLAY_LAND, card.getId(), card.getId(), playerId))) {
             // int bookmark = game.bookmarkState();
+            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PLAY_LAND, card.getId(), card.getId(), playerId));
             if (moveCards(card, Zone.BATTLEFIELD, playLandAbility, game, false, false, false, null)) {
                 landsPlayed++;
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LAND_PLAYED, card.getId(), card.getId(), playerId));
@@ -2313,7 +2313,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         Library searchedLibrary = null;
         String searchInfo = null;
         if (targetPlayerId.equals(playerId)) {
-            searchInfo = getLogName() + " searches his or her library";
+            searchInfo = getLogName() + " searches their library";
             searchedLibrary = library;
         } else {
             Player targetPlayer = game.getPlayer(targetPlayerId);
@@ -3460,7 +3460,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 game.informPlayers(getLogName() + " puts "
                         + (withName ? card.getLogName() : (card.isFaceDown(game) ? "a face down card" : "a card"))
                         + " from " + fromZone.toString().toLowerCase(Locale.ENGLISH) + ' '
-                        + (card.getOwnerId().equals(this.getId()) ? "into his or her hand" : "into its owner's hand")
+                        + (card.getOwnerId().equals(this.getId()) ? "into their hand" : "into its owner's hand")
                 );
             }
             result = true;
@@ -3555,7 +3555,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                         .append(" puts ").append(card.getLogName()).append(' ').append(card.isCopy() ? "(Copy) " : "")
                         .append(fromZone != null ? "from " + fromZone.toString().toLowerCase(Locale.ENGLISH) + ' ' : "");
                 if (card.getOwnerId().equals(getId())) {
-                    sb.append("into his or her graveyard");
+                    sb.append("into their graveyard");
                 } else {
                     sb.append("it into its owner's graveyard");
                 }
@@ -3587,7 +3587,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 }
                 sb.append("to the ").append(toTop ? "top" : "bottom");
                 if (card.getOwnerId().equals(getId())) {
-                    sb.append(" of his or her library");
+                    sb.append(" of their library");
                 } else {
                     Player player = game.getPlayer(card.getOwnerId());
                     if (player != null) {
@@ -3602,11 +3602,8 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public boolean moveCardToExileWithInfo(Card card, UUID exileId,
-            String exileName, UUID sourceId,
-            Game game, Zone fromZone,
-            boolean withName
-    ) {
+    public boolean moveCardToExileWithInfo(Card card, UUID exileId, String exileName, UUID sourceId,
+            Game game, Zone fromZone, boolean withName) {
         if (card == null) {
             return false;
         }

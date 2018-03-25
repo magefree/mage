@@ -851,9 +851,9 @@
         </Component>
         <Component class="javax.swing.JCheckBox" name="chkUnique">
           <Properties>
-            <Property name="selected" type="boolean" value="true"/>
+            <Property name="selected" type="boolean" value="false"/>
             <Property name="text" type="java.lang.String" value="Unique"/>
-            <Property name="toolTipText" type="java.lang.String" value="Singleton rules."/>
+            <Property name="toolTipText" type="java.lang.String" value="Show only the first found card of every card name."/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="4"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -871,7 +871,6 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chkUniqueActionPerformed"/>
           </Events>
         </Component>
-
         <Component class="javax.swing.JButton" name="jButtonSearch">
           <Properties>
             <Property name="text" type="java.lang.String" value="Search"/>

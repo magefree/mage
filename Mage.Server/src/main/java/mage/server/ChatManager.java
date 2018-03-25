@@ -245,7 +245,7 @@ public enum ChatManager {
             return true;
         }
         if (command.startsWith("CARD ")) {
-            Matcher matchPattern = getCardTextPattern.matcher(message.toLowerCase());
+            Matcher matchPattern = getCardTextPattern.matcher(message.toLowerCase(Locale.ENGLISH));
             if (matchPattern.find()) {
                 String cardName = matchPattern.group(1);
                 CardInfo cardInfo = CardRepository.instance.findPreferedCoreExpansionCard(cardName, true);

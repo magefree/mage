@@ -74,7 +74,7 @@ public class InfernalDenizen extends CardImpl {
         this.power = new MageInt(5);
         this.toughness = new MageInt(7);
 
-        // At the beginning of your upkeep, sacrifice two Swamps. If you can't, tap Infernal Denizen, and an opponent may gain control of a creature you control of his or her choice for as long as Infernal Denizen remains on the battlefield.
+        // At the beginning of your upkeep, sacrifice two Swamps. If you can't, tap Infernal Denizen, and an opponent may gain control of a creature you control of their choice for as long as Infernal Denizen remains on the battlefield.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new InfernalDenizenEffect(), TargetController.YOU, false));
 
         // {tap}: Gain control of target creature for as long as Infernal Denizen remains on the battlefield.
@@ -109,7 +109,7 @@ class InfernalDenizenEffect extends OneShotEffect {
     InfernalDenizenEffect() {
         super(Outcome.Benefit);
         this.staticText = "sacrifice two Swamps. If you can't, tap {this}, "
-                + "and an opponent may gain control of a creature you control of his or her choice "
+                + "and an opponent may gain control of a creature you control of their choice "
                 + "for as long as {this} remains on the battlefield";
     }
 

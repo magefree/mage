@@ -57,7 +57,7 @@ public class MindsDilation extends CardImpl {
     public MindsDilation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{5}{U}{U}");
 
-        // Whenever an opponent casts his or her first spell each turn, that player exiles the top card of his or her library. If it's a nonland card,
+        // Whenever an opponent casts their first spell each turn, that player exiles the top card of their library. If it's a nonland card,
         // you may cast it without paying its mana cost.
         this.addAbility(new MindsDilationTriggeredAbility(new MindsDilationEffect(), false), new SpellsCastWatcher());
     }
@@ -106,7 +106,7 @@ class MindsDilationTriggeredAbility extends SpellCastOpponentTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "Whenever an opponent casts his or her first spell each turn, that player exiles the top card of his or her library."
+        return "Whenever an opponent casts their first spell each turn, that player exiles the top card of their library."
                 + " If it's a nonland card, you may cast it without paying its mana cost.";
     }
 }
@@ -115,7 +115,7 @@ class MindsDilationEffect extends OneShotEffect {
 
     MindsDilationEffect() {
         super(Outcome.Benefit);
-        this.staticText = "that player exiles the top card of his or her library. If it's a nonland card, you may cast it without paying its mana cost";
+        this.staticText = "that player exiles the top card of their library. If it's a nonland card, you may cast it without paying its mana cost";
     }
 
     MindsDilationEffect(final MindsDilationEffect effect) {

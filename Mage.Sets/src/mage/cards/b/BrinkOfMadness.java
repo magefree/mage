@@ -58,12 +58,12 @@ public class BrinkOfMadness extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}{B}");
 
 
-        // At the beginning of your upkeep, if you have no cards in hand, sacrifice Brink of Madness and target opponent discards his or her hand.
+        // At the beginning of your upkeep, if you have no cards in hand, sacrifice Brink of Madness and target opponent discards their hand.
         TriggeredAbility ability  = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new SacrificeSourceEffect(), TargetController.YOU, false);
         ability.addEffect(new BrinkOfMadnessEffect());
         ability.addTarget(new TargetOpponent());
         CardsInHandCondition contition = new CardsInHandCondition(ComparisonType.EQUAL_TO, 0);
-        this.addAbility(new ConditionalTriggeredAbility(ability, contition, "At the beginning of your upkeep, if you have no cards in hand, sacrifice {this} and target opponent discards his or her hand."));
+        this.addAbility(new ConditionalTriggeredAbility(ability, contition, "At the beginning of your upkeep, if you have no cards in hand, sacrifice {this} and target opponent discards their hand."));
         
     }
 
@@ -80,7 +80,7 @@ public class BrinkOfMadness extends CardImpl {
 
     public BrinkOfMadnessEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Target player discards his or her hand";
+        this.staticText = "Target player discards their hand";
     }
 
     public BrinkOfMadnessEffect(final BrinkOfMadnessEffect effect) {

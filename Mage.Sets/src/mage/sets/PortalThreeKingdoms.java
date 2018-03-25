@@ -111,7 +111,7 @@ public class PortalThreeKingdoms extends ExpansionSet {
         cards.add(new SetCardInfo("Island", 169, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 170, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 171, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Kongming, \"Sleeping Dragon\"", 9, Rarity.RARE, mage.cards.k.KongmingSleepingDragon.class));
+        cards.add(new SetCardInfo("Kongming, 'Sleeping Dragon'", 9, Rarity.RARE, mage.cards.k.KongmingSleepingDragon.class));
         cards.add(new SetCardInfo("Kongming's Contraptions", 10, Rarity.RARE, mage.cards.k.KongmingsContraptions.class));
         cards.add(new SetCardInfo("Lady Sun", 45, Rarity.RARE, mage.cards.l.LadySun.class));
         cards.add(new SetCardInfo("Lady Zhurong, Warrior Queen", 139, Rarity.RARE, mage.cards.l.LadyZhurongWarriorQueen.class));

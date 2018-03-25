@@ -9,7 +9,7 @@ import java.util.UUID;
 
 /**
  * Condition for -
- *  Any opponent has X or more cards in his or her graveyard
+ *  Any opponent has X or more cards in their graveyard
  *  @author Loki
  */
 public class CardsInOpponentGraveCondition implements Condition {

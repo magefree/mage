@@ -54,7 +54,7 @@ public class GaeasBlessing extends CardImpl {
     public GaeasBlessing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{G}");
 
-        // Target player shuffles up to three target cards from his or her graveyard into his or her library.
+        // Target player shuffles up to three target cards from their graveyard into their library.
         this.getSpellAbility().addEffect(new GaeasBlessingEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addTarget(new GaeasBlessingTarget());
@@ -80,7 +80,7 @@ class GaeasBlessingEffect extends OneShotEffect {
 
     public GaeasBlessingEffect() {
         super(Outcome.Neutral);
-        this.staticText = "Target player shuffles up to three target cards from his or her graveyard into his or her library";
+        this.staticText = "Target player shuffles up to three target cards from their graveyard into their library";
     }
 
     public GaeasBlessingEffect(final GaeasBlessingEffect effect) {
@@ -181,7 +181,7 @@ class GaeasBlessingGraveToLibraryEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            game.informPlayers(new StringBuilder(controller.getLogName()).append(" shuffle his or her graveyard into his or her library").toString());
+            game.informPlayers(new StringBuilder(controller.getLogName()).append(" shuffle their graveyard into their library").toString());
             for (Card card : controller.getGraveyard().getCards(game)) {
                 controller.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.GRAVEYARD, true, true);
             }

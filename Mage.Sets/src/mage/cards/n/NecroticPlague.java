@@ -80,7 +80,7 @@ public class NecroticPlague extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
         // Enchanted creature has "At the beginning of your upkeep, sacrifice this creature."
-        // When enchanted creature dies, its controller chooses target creature one of his or her opponents controls. Return Necrotic Plague from its owner's graveyard to the battlefield attached to that creature.
+        // When enchanted creature dies, its controller chooses target creature one of their opponents controls. Return Necrotic Plague from its owner's graveyard to the battlefield attached to that creature.
         Ability gainedAbility = new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceEffect(), TargetController.YOU, false);
         Effect effect = new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield);
         effect.setText("Enchanted creature has \"At the beginning of your upkeep, sacrifice this creature.\"");
@@ -123,7 +123,7 @@ class NecroticPlagueEffect extends OneShotEffect {
 
     public NecroticPlagueEffect() {
         super(Outcome.PutCardInPlay);
-        staticText = "its controller chooses target creature one of his or her opponents controls. Return {this} from its owner's graveyard to the battlefield attached to that creature";
+        staticText = "its controller chooses target creature one of their opponents controls. Return {this} from its owner's graveyard to the battlefield attached to that creature";
     }
 
     public NecroticPlagueEffect(final NecroticPlagueEffect effect) {

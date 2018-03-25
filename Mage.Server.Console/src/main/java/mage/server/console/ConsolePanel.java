@@ -107,6 +107,10 @@ public class ConsolePanel extends javax.swing.JPanel {
         }
     }
 
+    public JTextField getjUserName() {
+        return jUserName;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -280,7 +284,6 @@ public class ConsolePanel extends javax.swing.JPanel {
             }
         });
 
-        jUserName.setText("");
         jUserName.setName("Username"); // NOI18N
 
         jLabel1.setText("Username:");
@@ -346,27 +349,32 @@ public class ConsolePanel extends javax.swing.JPanel {
     private void btnEndSessionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEndSessionActionPerformed
         int row = this.tblUsers.convertRowIndexToModel(tblUsers.getSelectedRow());
         String userSessionId = (String) tableUserModel.getValueAt(row, TableUserModel.POS_GAME_INFO);
-        
+
         if (JOptionPane.showConfirmDialog(null, "Are you sure you mean to end userSessionId " + userSessionId + '?', "WARNING",
-                    JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
             ConsoleFrame.getSession().endUserSession(userSessionId);
         }
     }//GEN-LAST:event_btnEndSessionActionPerformed
 
     private void btnMuteUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMuteUserActionPerformed
-         int row = this.tblUsers.convertRowIndexToModel(tblUsers.getSelectedRow());
+        int row = this.tblUsers.convertRowIndexToModel(tblUsers.getSelectedRow());
         String userName = (String) tableUserModel.getValueAt(row, TableUserModel.POS_USER_NAME);
         long durationMinute = ((Number) spinnerMuteDurationMinutes.getValue()).longValue();
         if (JOptionPane.showConfirmDialog(null, "Are you sure you mean to mute user: " + userName + " for " + durationMinute + " minutes?", "WARNING",
-                    JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
             ConsoleFrame.getSession().muteUserChat(userName, durationMinute);
         }
     }//GEN-LAST:event_btnMuteUserActionPerformed
 
     private void btnDeActivateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeActivateActionPerformed
-        int row = this.tblUsers.convertRowIndexToModel(tblUsers.getSelectedRow());
-        String userName = (String) tableUserModel.getValueAt(row, TableUserModel.POS_USER_NAME);
-        
+        String userName;
+        if (!getjUserName().getText().isEmpty()) {
+            userName = getjUserName().getText();
+        } else {
+            int row = this.tblUsers.convertRowIndexToModel(tblUsers.getSelectedRow());
+            userName = (String) tableUserModel.getValueAt(row, TableUserModel.POS_USER_NAME);
+        }
+
         if (JOptionPane.showConfirmDialog(null, "Did you want to set user: " + userName + " to active?", "WARNING",
                 JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
             ConsoleFrame.getSession().setActivation(userName, true);
@@ -374,13 +382,13 @@ public class ConsolePanel extends javax.swing.JPanel {
         }
         if (JOptionPane.showConfirmDialog(null, "Did you want to set user: " + userName + " to inactive?", "WARNING",
                 JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-           ConsoleFrame.getSession().setActivation(userName, false);
-           return;
+            ConsoleFrame.getSession().setActivation(userName, false);
+            return;
         }
         if (JOptionPane.showConfirmDialog(null, "Are you sure you mean to toggle activation for user: " + userName + '?', "WARNING",
                 JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                ConsoleFrame.getSession().toggleActivation(userName);
-                return;
+            ConsoleFrame.getSession().toggleActivation(userName);
+            return;
         }
     }//GEN-LAST:event_btnDeActivateActionPerformed
 
@@ -389,7 +397,7 @@ public class ConsolePanel extends javax.swing.JPanel {
         String userName = (String) tableUserModel.getValueAt(row, TableUserModel.POS_USER_NAME);
         long durationMinute = ((Number) spinnerMuteDurationMinutes.getValue()).longValue();
         if (JOptionPane.showConfirmDialog(null, "Are you sure you mean to lock user: " + userName + " for " + durationMinute + " minutes?", "WARNING",
-                    JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
             ConsoleFrame.getSession().lockUser(userName, durationMinute);
         }
     }//GEN-LAST:event_btnLockUserActionPerformed
@@ -416,7 +424,7 @@ public class ConsolePanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSplitPane jSplitPane1;
-    public javax.swing.JTextField jUserName;
+    private javax.swing.JTextField jUserName;
     private javax.swing.JLabel lblMinutes;
     private javax.swing.JSpinner spinnerMuteDurationMinutes;
     private javax.swing.JTable tblTables;
@@ -597,10 +605,10 @@ class UpdateUsersTask extends SwingWorker<Void, List<UserView>> {
     protected Void doInBackground() throws Exception {
         while (!isCancelled()) {
             List<UserView> users = session.getUsers();
-            if (!panel.jUserName.getText().equals("")) {
+            if (!panel.getjUserName().getText().equals("")) {
                 List<UserView> users2 = new ArrayList<>();
                 for (UserView user : users) {
-                    if (user.getUserName().toUpperCase().matches(".*" + panel.jUserName.getText().toUpperCase() + ".*")) {
+                    if (user.getUserName().toUpperCase(Locale.ENGLISH).matches(".*" + panel.getjUserName().getText().toUpperCase(Locale.ENGLISH) + ".*")) {
                         users2.add(user);
                     }
                 }
@@ -651,6 +659,10 @@ class UpdateUsersTask extends SwingWorker<Void, List<UserView>> {
         panel.update(view.get(0));
     }
 
+    public ConsolePanel getPanel() {
+        return panel;
+    }
+
     @Override
     protected void done() {
         try {
@@ -682,16 +694,16 @@ class UpdateTablesTask extends SwingWorker<Void, Collection<TableView>> {
     protected Void doInBackground() throws Exception {
         while (!isCancelled()) {
             Collection<TableView> tableViews = session.getTables(roomId);
-            if (!panel.jUserName.getText().equals("")) {
+            if (!panel.getjUserName().getText().equals("")) {
                 Collection<TableView> tableViews2 = new ArrayList<>();
                 for (TableView table : tableViews) {
-                    if (table.getControllerName().toUpperCase().matches(".*" + panel.jUserName.getText().toUpperCase() + ".*")) {
+                    if (table.getControllerName().toUpperCase(Locale.ENGLISH).matches(".*" + panel.getjUserName().getText().toUpperCase(Locale.ENGLISH) + ".*")) {
                         tableViews2.add(table);
                     }
                 }
                 tableViews = tableViews2;
             }
-            
+
             this.publish(tableViews);
             Thread.sleep(3000);
         }

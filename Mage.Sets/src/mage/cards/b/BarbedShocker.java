@@ -59,7 +59,7 @@ public class BarbedShocker extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
         // Haste
         this.addAbility(HasteAbility.getInstance());
-        // Whenever Barbed Shocker deals damage to a player, that player discards all the cards in his or her hand, then draws that many cards.
+        // Whenever Barbed Shocker deals damage to a player, that player discards all the cards in their hand, then draws that many cards.
         this.addAbility(new DealsDamageToAPlayerTriggeredAbility(new BarbedShockerEffect(), false, true));
     }
 
@@ -76,7 +76,7 @@ class BarbedShockerEffect extends OneShotEffect {
 
     public BarbedShockerEffect() {
         super(Outcome.Discard);
-        this.staticText = " that player discards all the cards in his or her hand, then draws that many cards";
+        this.staticText = " that player discards all the cards in their hand, then draws that many cards";
     }
 
     public BarbedShockerEffect(final BarbedShockerEffect effect) {

@@ -62,8 +62,8 @@ public class GoblinGuide extends CardImpl {
 
         // Haste
         this.addAbility(HasteAbility.getInstance());
-        // Whenever Goblin Guide attacks, defending player reveals the top card of his or her library.
-        // If it's a land card, that player puts it into his or her hand.
+        // Whenever Goblin Guide attacks, defending player reveals the top card of their library.
+        // If it's a land card, that player puts it into their hand.
         this.addAbility(new GoblinGuideTriggeredAbility(new GoblinGuideEffect(), false));
     }
 
@@ -135,7 +135,7 @@ class GoblinGuideEffect extends OneShotEffect {
 
     public GoblinGuideEffect() {
         super(Outcome.DrawCard);
-        staticText = "defending player reveals the top card of his or her library. If it's a land card, that player puts it into his or her hand";
+        staticText = "defending player reveals the top card of their library. If it's a land card, that player puts it into their hand";
     }
 
     public GoblinGuideEffect(final GoblinGuideEffect effect) {

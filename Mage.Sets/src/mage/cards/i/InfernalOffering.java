@@ -63,7 +63,7 @@ public class InfernalOffering extends CardImpl {
         // Choose an opponent. You and that player each sacrifice a creature. Each player who sacrificed a creature this way draws two cards.
         this.getSpellAbility().addEffect(new InfernalOfferingSacrificeEffect());
 
-        // Choose an opponent. Return a creature card from your graveyard to the battlefield, then that player returns a creature card from his or her graveyard to the battlefield.
+        // Choose an opponent. Return a creature card from your graveyard to the battlefield, then that player returns a creature card from their graveyard to the battlefield.
         this.getSpellAbility().addEffect(new InfernalOfferingReturnEffect());
     }
 
@@ -139,7 +139,7 @@ class InfernalOfferingReturnEffect extends OneShotEffect {
 
     InfernalOfferingReturnEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "Choose an opponent. Return a creature card from your graveyard to the battlefield, then that player returns a creature card from his or her graveyard to the battlefield";
+        this.staticText = "Choose an opponent. Return a creature card from your graveyard to the battlefield, then that player returns a creature card from their graveyard to the battlefield";
     }
 
     InfernalOfferingReturnEffect(final InfernalOfferingReturnEffect effect) {

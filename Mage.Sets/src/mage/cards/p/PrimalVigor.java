@@ -52,7 +52,7 @@ public class PrimalVigor extends CardImpl {
 
         // If one or more tokens would be created, twice that many of those tokens are created instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PrimalVigorTokenEffect()));
-        // If one or more +1/+1 counters would be placed on a creature, twice that many +1/+1 counters are placed on that creature instead.
+        // If one or more +1/+1 counters would be put on a creature, twice that many +1/+1 counters are put on that creature instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PrimalVigorCounterEffect()));
 
     }
@@ -110,7 +110,7 @@ class PrimalVigorCounterEffect extends ReplacementEffectImpl {
 
     PrimalVigorCounterEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature, false);
-        staticText = "If one or more +1/+1 counters would be placed on a creature, twice that many +1/+1 counters are placed on that creature instead";
+        staticText = "If one or more +1/+1 counters would be put on a creature, twice that many +1/+1 counters are put on that creature instead";
     }
 
     PrimalVigorCounterEffect(final PrimalVigorCounterEffect effect) {

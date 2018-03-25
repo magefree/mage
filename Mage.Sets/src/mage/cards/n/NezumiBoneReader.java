@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.n;
 
 import java.util.UUID;
@@ -40,6 +39,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -49,21 +49,22 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class NezumiBoneReader extends CardImpl {
 
-    public NezumiBoneReader (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
+    public NezumiBoneReader(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
         this.subtype.add(SubType.RAT);
         this.subtype.add(SubType.SHAMAN);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         // {B}, Sacrifice a creature: Target player discards a card. Activate this ability only any time you could cast a sorcery.
-        Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new DiscardTargetEffect(1),new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
+        Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new DiscardTargetEffect(1),
+                new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         ability.addCost(new ManaCostsImpl("{B}"));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
 
-    public NezumiBoneReader (final NezumiBoneReader card) {
+    public NezumiBoneReader(final NezumiBoneReader card) {
         super(card);
     }
 

@@ -54,7 +54,7 @@ public class Pandemonium extends CardImpl {
     public Pandemonium(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");
 
-        // Whenever a creature enters the battlefield, that creature's controller may have it deal damage equal to its power to target creature or player of his or her choice.
+        // Whenever a creature enters the battlefield, that creature's controller may have it deal damage equal to its power to target creature or player of their choice.
         Ability ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new PandemoniumEffect(), StaticFilters.FILTER_PERMANENT_CREATURE, false, SetTargetPointer.PERMANENT, "");
         ability.addTarget(new TargetCreatureOrPlayer());
         originalId = ability.getOriginalId();
@@ -87,7 +87,7 @@ class PandemoniumEffect extends OneShotEffect {
 
     public PandemoniumEffect() {
         super(Outcome.Benefit);
-        this.staticText = "that creature's controller may have it deal damage equal to its power to target creature or player of his or her choice";
+        this.staticText = "that creature's controller may have it deal damage equal to its power to target creature or player of their choice";
     }
 
     public PandemoniumEffect(final PandemoniumEffect effect) {

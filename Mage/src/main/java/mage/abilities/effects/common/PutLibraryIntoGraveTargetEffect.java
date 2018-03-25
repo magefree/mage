@@ -99,7 +99,7 @@ public class PutLibraryIntoGraveTargetEffect extends OneShotEffect {
         } else {
             sb.append(" X cards ");
         }
-        sb.append("of his or her library into his or her graveyard");
+        sb.append("of their library into their graveyard");
 
         if (!message.isEmpty()) {
             sb.append(", where X is the number of ");

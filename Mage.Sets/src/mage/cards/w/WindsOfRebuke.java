@@ -45,7 +45,7 @@ public class WindsOfRebuke extends CardImpl {
     public WindsOfRebuke(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
 
-        // Return target nonland permanent to its owner's hand. Each player puts the top two cards of his or her library into his or her graveyard.
+        // Return target nonland permanent to its owner's hand. Each player puts the top two cards of their library into their graveyard.
         getSpellAbility().addTarget(new TargetNonlandPermanent());
         getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         getSpellAbility().addEffect(new PutTopCardOfLibraryIntoGraveEachPlayerEffect(2, TargetController.ANY));

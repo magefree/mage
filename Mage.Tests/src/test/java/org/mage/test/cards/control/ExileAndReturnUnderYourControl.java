@@ -39,7 +39,7 @@ public class ExileAndReturnUnderYourControl extends CardTestPlayerBase {
     @Test
     public void testVillainousWealthExilesCourser() {
         // Villainous Wealth {X}{B}{G}{U}
-        // Target opponent exiles the top X cards of his or her library. You may cast any number
+        // Target opponent exiles the top X cards of their library. You may cast any number
         // of nonland cards with converted mana cost X or less from among them without paying
         // their mana costs.
         addCard(Zone.HAND, playerA, "Villainous Wealth");
@@ -72,7 +72,7 @@ public class ExileAndReturnUnderYourControl extends CardTestPlayerBase {
     @Test
     public void testVillainousWealthExilesBoost() {
         // Villainous Wealth {X}{B}{G}{U}
-        // Target opponent exiles the top X cards of his or her library. You may cast any number
+        // Target opponent exiles the top X cards of their library. You may cast any number
         // of nonland cards with converted mana cost X or less from among them without paying
         // their mana costs.
         addCard(Zone.HAND, playerA, "Villainous Wealth");
@@ -115,7 +115,7 @@ public class ExileAndReturnUnderYourControl extends CardTestPlayerBase {
     @Test
     public void testVillainousWealthExilesSylvanLibrary() {
         // Villainous Wealth {X}{B}{G}{U}
-        // Target opponent exiles the top X cards of his or her library. You may cast any number
+        // Target opponent exiles the top X cards of their library. You may cast any number
         // of nonland cards with converted mana cost X or less from among them without paying
         // their mana costs.
         addCard(Zone.HAND, playerA, "Villainous Wealth");
@@ -159,7 +159,7 @@ public class ExileAndReturnUnderYourControl extends CardTestPlayerBase {
     @Test
     public void testVillainousWealthAndQuicken() {
         // Villainous Wealth {X}{B}{G}{U}
-        // Target opponent exiles the top X cards of his or her library. You may cast any number
+        // Target opponent exiles the top X cards of their library. You may cast any number
         // of nonland cards with converted mana cost X or less from among them without paying
         // their mana costs.
         addCard(Zone.HAND, playerA, "Villainous Wealth"); // {X}{B}{G}{U}

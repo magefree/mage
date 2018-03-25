@@ -89,7 +89,7 @@ public class DiscardHandTargetEffect extends OneShotEffect {
         } else {
             sb.append("target ").append(mode.getTargets().get(0).getTargetName());
         }
-        sb.append(" discards his or her hand");
+        sb.append(" discards their hand");
         return sb.toString();
     }    
 }

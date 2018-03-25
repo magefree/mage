@@ -3,6 +3,7 @@ package org.mage.plugins.theme;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.util.Locale;
 import java.util.Map;
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -49,7 +50,7 @@ public class ThemePluginImpl implements ThemePlugin {
             return false;
         }
         for (File f : filelist) {
-            String filename = f.getName().toLowerCase();
+            String filename = f.getName().toLowerCase(Locale.ENGLISH);
             if (filename != null && (filename.endsWith(".png") || filename.endsWith(".jpg")
                     || filename.endsWith(".bmp"))) {
                 flist.add(filename);
@@ -149,47 +150,43 @@ public class ThemePluginImpl implements ThemePlugin {
         return bgPanel;
     }
 
-    private ImagePanel createImagePanelInstance() {
+    private synchronized ImagePanel createImagePanelInstance() {
         if (background == null) {
-            synchronized (ThemePluginImpl.class) {
-                if (background == null) {
-                    String filename = "/background.png";
-                    try {
-                        if (PreferencesDialog.getCachedValue(PreferencesDialog.KEY_BACKGROUND_IMAGE_DEFAULT, "true").equals("true")) {
-                            InputStream is = this.getClass().getResourceAsStream(filename);
-                            if (is == null) {
-                                throw new FileNotFoundException("Couldn't find " + filename + " in resources.");
-                            }
-                            background = ImageIO.read(is);
-                        } else {
-                            String path = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_BACKGROUND_IMAGE, "");
-                            if (path != null && !path.isEmpty()) {
-                                try {
-                                    File f = new File(path);
-                                    if (f != null) {
-                                        background = ImageIO.read(f);
-                                    }
-                                } catch (Exception e) {
-                                    background = null;
-                                }
-                            }
-                        }
-                        if (background == null) {
-                            InputStream is = this.getClass().getResourceAsStream(filename);
-                            if (is == null) {
-                                throw new FileNotFoundException("Couldn't find " + filename + " in resources.");
-                            }
-                            background = ImageIO.read(is);
-                        }
-                        if (background == null) {
+                String filename = "/background.png";
+                try {
+                    if (PreferencesDialog.getCachedValue(PreferencesDialog.KEY_BACKGROUND_IMAGE_DEFAULT, "true").equals("true")) {
+                        InputStream is = this.getClass().getResourceAsStream(filename);
+                        if (is == null) {
                             throw new FileNotFoundException("Couldn't find " + filename + " in resources.");
                         }
-                    } catch (Exception e) {
-                        log.error(e.getMessage(), e);
-                        return null;
+                        background = ImageIO.read(is);
+                    } else {
+                        String path = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_BACKGROUND_IMAGE, "");
+                        if (path != null && !path.isEmpty()) {
+                            try {
+                                File f = new File(path);
+                                if (f != null) {
+                                    background = ImageIO.read(f);
+                                }
+                            } catch (Exception e) {
+                                background = null;
+                            }
+                        }
                     }
+                    if (background == null) {
+                        InputStream is = this.getClass().getResourceAsStream(filename);
+                        if (is == null) {
+                            throw new FileNotFoundException("Couldn't find " + filename + " in resources.");
+                        }
+                        background = ImageIO.read(is);
+                    }
+                    if (background == null) {
+                        throw new FileNotFoundException("Couldn't find " + filename + " in resources.");
+                    }
+                } catch (Exception e) {
+                    log.error(e.getMessage(), e);
+                    return null;
                 }
-            }
         }
         return new ImagePanel(background, ImagePanelStyle.SCALED);
     }

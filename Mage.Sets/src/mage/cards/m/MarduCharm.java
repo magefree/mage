@@ -80,7 +80,7 @@ public class MarduCharm extends CardImpl {
         mode.getEffects().add(new MarduCharmCreateTokenEffect());
         this.getSpellAbility().addMode(mode);
 
-        // <strong>*</strong> Target opponent reveals his or her hand. You choose a noncreature, nonland card from it.  That player discards that card.
+        // <strong>*</strong> Target opponent reveals their hand. You choose a noncreature, nonland card from it.  That player discards that card.
         mode = new Mode();
         mode.getEffects().add(new DiscardCardYouChooseTargetEffect(filter));
         mode.getTargets().add(new TargetOpponent());

@@ -77,7 +77,7 @@ class MerfolkSpyEffect extends OneShotEffect {
 
     public MerfolkSpyEffect() {
         super(Outcome.Detriment);
-        staticText = "that player reveals a card at random from his or her hand";
+        staticText = "that player reveals a card at random from their hand";
     }
 
     public MerfolkSpyEffect(final MerfolkSpyEffect effect) {

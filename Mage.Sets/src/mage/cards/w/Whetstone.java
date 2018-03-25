@@ -49,7 +49,7 @@ public class Whetstone extends CardImpl {
     public Whetstone(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
-        //{3}: Each player puts the top two cards of his or her library into his or her graveyard.
+        //{3}: Each player puts the top two cards of their library into their graveyard.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new WhetstoneEffect(), new ManaCostsImpl("{3}"));
         this.addAbility(ability);
     }
@@ -68,7 +68,7 @@ class WhetstoneEffect extends OneShotEffect {
 
     WhetstoneEffect() {
         super(Outcome.Detriment);
-        staticText = "Each player puts the top two cards of his or her library into his or her graveyard";
+        staticText = "Each player puts the top two cards of their library into their graveyard";
     }
 
     WhetstoneEffect(final WhetstoneEffect effect) {

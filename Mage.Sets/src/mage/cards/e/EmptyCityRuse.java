@@ -43,7 +43,7 @@ public class EmptyCityRuse extends CardImpl {
     public EmptyCityRuse(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{W}");
 
-        // Target opponent skips all combat phases of his or her next turn.
+        // Target opponent skips all combat phases of their next turn.
         this.getSpellAbility().addEffect(new SkipNextCombatEffect());
         this.getSpellAbility().addTarget(new TargetOpponent());
     }

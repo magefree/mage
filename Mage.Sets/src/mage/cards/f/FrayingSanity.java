@@ -67,7 +67,7 @@ public class FrayingSanity extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
-        // At the beginning of each end step, enchanted player puts the top X cards of his or her library into his or her graveyard, where X is the total number of cards put into his or her graveyard from anywhere this turn.
+        // At the beginning of each end step, enchanted player puts the top X cards of their library into their graveyard, where X is the total number of cards put into their graveyard from anywhere this turn.
         this.addAbility(new FrayingSanityTriggeredAbility(), new CardsPutIntoGraveyardWatcher());
 
     }
@@ -109,7 +109,7 @@ class FrayingSanityTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "At the beginning of each end step, enchanted player puts the top X cards of his or her library into his or her graveyard, where X is the total number of cards put into his or her graveyard from anywhere this turn.";
+        return "At the beginning of each end step, enchanted player puts the top X cards of their library into their graveyard, where X is the total number of cards put into their graveyard from anywhere this turn.";
     }
 }
 

@@ -66,7 +66,7 @@ public class BalthorTheDefiled extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield,
                 new FilterCreaturePermanent(SubType.MINION, "Minion creatures"), false)));
 
-        // {B}{B}{B}, Exile Balthor the Defiled: Each player returns all black and all red creature cards from his or her graveyard to the battlefield.
+        // {B}{B}{B}, Exile Balthor the Defiled: Each player returns all black and all red creature cards from their graveyard to the battlefield.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BalthorTheDefiledEffect(), new ManaCostsImpl("{B}{B}{B}"));
         ability.addCost(new ExileSourceCost());
         this.addAbility(ability);
@@ -95,7 +95,7 @@ class BalthorTheDefiledEffect extends OneShotEffect {
 
     public BalthorTheDefiledEffect() {
         super(Outcome.Detriment);
-        this.staticText = "Each player returns all black and all red creature cards from his or her graveyard to the battlefield";
+        this.staticText = "Each player returns all black and all red creature cards from their graveyard to the battlefield";
     }
 
     public BalthorTheDefiledEffect(final BalthorTheDefiledEffect effect) {

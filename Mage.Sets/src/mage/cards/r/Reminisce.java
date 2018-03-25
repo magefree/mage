@@ -49,7 +49,7 @@ public class Reminisce extends CardImpl {
     public Reminisce(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}");
 
-        // Target player shuffles his or her graveyard into his or her library.
+        // Target player shuffles their graveyard into their library.
         this.getSpellAbility().addEffect(new ReminisceEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
@@ -68,7 +68,7 @@ class ReminisceEffect extends OneShotEffect {
     
     ReminisceEffect() {
         super(Outcome.Neutral);
-        this.staticText = "Target player shuffles his or her graveyard into his or her library";
+        this.staticText = "Target player shuffles their graveyard into their library";
     }
     
     ReminisceEffect(final ReminisceEffect effect) {

@@ -58,7 +58,7 @@ public class Mimeofacture extends CardImpl {
         // Replicate {3}{U}
         this.addAbility(new ReplicateAbility(this, "{3}{U}"));
 
-        // Choose target permanent an opponent controls. Search that player's library for a card with the same name and put it onto the battlefield under your control. Then that player shuffles his or her library.
+        // Choose target permanent an opponent controls. Search that player's library for a card with the same name and put it onto the battlefield under your control. Then that player shuffles their library.
         this.getSpellAbility().addEffect(new MimeofactureEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT));
     }
@@ -79,7 +79,7 @@ class MimeofactureEffect extends OneShotEffect {
         super(Outcome.PutCardInPlay);
         this.staticText = "Choose target permanent an opponent controls. "
                 + "Search that player's library for a card with the same name and put it onto the battlefield under your control. "
-                + "Then that player shuffles his or her library.";
+                + "Then that player shuffles their library.";
     }
 
     MimeofactureEffect(final MimeofactureEffect effect) {

@@ -84,7 +84,7 @@ public class JaceArchitectOfThought extends CardImpl {
         // -2: Reveal the top three cards of your library. An opponent separates those cards into two piles. Put one pile into your hand and the other on the bottom of your library in any order.
         this.addAbility(new LoyaltyAbility(new JaceArchitectOfThoughtEffect2(), -2));
 
-        // -8: For each player, search that player's library for a nonland card and exile it, then that player shuffles his or her library. You may cast those cards without paying their mana costs.
+        // -8: For each player, search that player's library for a nonland card and exile it, then that player shuffles their library. You may cast those cards without paying their mana costs.
         this.addAbility(new LoyaltyAbility(new JaceArchitectOfThoughtEffect3(), -8));
 
     }
@@ -280,7 +280,7 @@ class JaceArchitectOfThoughtEffect3 extends OneShotEffect {
 
     public JaceArchitectOfThoughtEffect3() {
         super(Outcome.PlayForFree);
-        this.staticText = "For each player, search that player's library for a nonland card and exile it, then that player shuffles his or her library. You may cast those cards without paying their mana costs";
+        this.staticText = "For each player, search that player's library for a nonland card and exile it, then that player shuffles their library. You may cast those cards without paying their mana costs";
     }
 
     public JaceArchitectOfThoughtEffect3(final JaceArchitectOfThoughtEffect3 effect) {

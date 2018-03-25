@@ -36,7 +36,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -48,11 +48,10 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public class LifesLegacy extends CardImpl {
 
     public LifesLegacy(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{G}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{G}");
 
         // As an additional cost to cast Life's Legacy, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(new FilterControlledCreaturePermanent("a creature"))));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         // Draw cards equal to the sacrificed creature's power.
         this.getSpellAbility().addEffect(new LifesLegacyEffect());
 
@@ -86,9 +85,9 @@ class LifesLegacyEffect extends OneShotEffect {
             return false;
         }
         int power = 0;
-        for (Cost cost: source.getCosts()) {
+        for (Cost cost : source.getCosts()) {
             if (cost instanceof SacrificeTargetCost && !((SacrificeTargetCost) cost).getPermanents().isEmpty()) {
-                power = ((SacrificeTargetCost)cost).getPermanents().get(0).getPower().getValue();
+                power = ((SacrificeTargetCost) cost).getPermanents().get(0).getPower().getValue();
                 break;
             }
         }

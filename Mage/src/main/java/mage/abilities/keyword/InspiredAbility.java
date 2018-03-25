@@ -1,4 +1,4 @@
-   /*
+/*
     * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
     *
     * Redistribution and use in source and binary forms, with or without modification, are
@@ -24,8 +24,7 @@
     * The views and conclusions contained in the software and documentation are those of the
     * authors and should not be interpreted as representing official policies, either expressed
     * or implied, of BetaSteward_at_googlemail.com.
-    */
-
+ */
 package mage.abilities.keyword;
 
 import mage.abilities.TriggeredAbilityImpl;
@@ -41,7 +40,6 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author LevelX2
  */
-
 public class InspiredAbility extends TriggeredAbilityImpl {
 
     public InspiredAbility(Effect effect) {
@@ -73,6 +71,6 @@ public class InspiredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return new StringBuilder("<i>Inspired</i> - Whenever {this} becomes untapped, ").append(super.getRule()).toString();
+        return "<i>Inspired</i> - Whenever {this} becomes untapped, " + super.getRule();
     }
 }

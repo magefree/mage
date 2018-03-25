@@ -56,7 +56,7 @@ public class BubblingMuck extends CardImpl {
     public BubblingMuck(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}");
 
-        // Until end of turn, whenever a player taps a Swamp for mana, that player adds {B} to his or her mana pool.
+        // Until end of turn, whenever a player taps a Swamp for mana, that player adds {B} to their mana pool.
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new BubblingMuckTriggeredAbility()));
     }
 
@@ -79,7 +79,7 @@ class BubblingMuckTriggeredAbility extends DelayedTriggeredManaAbility {
     }
 
     public BubblingMuckTriggeredAbility() {
-        super(new AddManaToManaPoolTargetControllerEffect(new Mana(ColoredManaSymbol.B), "his or her"), Duration.EndOfTurn, false);
+        super(new AddManaToManaPoolTargetControllerEffect(new Mana(ColoredManaSymbol.B), "their"), Duration.EndOfTurn, false);
         this.usesStack = false;
     }
 
@@ -111,6 +111,6 @@ class BubblingMuckTriggeredAbility extends DelayedTriggeredManaAbility {
 
     @Override
     public String getRule() {
-        return "Until end of turn, whenever a player taps a Swamp for mana, that player adds {B} to his or her mana pool";
+        return "Until end of turn, whenever a player taps a Swamp for mana, that player adds {B} to their mana pool";
     }
 }

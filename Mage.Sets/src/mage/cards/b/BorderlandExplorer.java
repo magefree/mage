@@ -61,8 +61,8 @@ public class BorderlandExplorer extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
 
-        // When Borderland Explorer enters the battlefield, each player may discard a card. Each player who discarded a card this way may search his or her library
-        // for a basic land card, reveal it, put it into his or her hand, then shuffle his or her library.
+        // When Borderland Explorer enters the battlefield, each player may discard a card. Each player who discarded a card this way may search their library
+        // for a basic land card, reveal it, put it into their hand, then shuffle their library.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new BorderlandExplorerEffect()));
     }
 
@@ -80,8 +80,8 @@ class BorderlandExplorerEffect extends OneShotEffect {
 
     public BorderlandExplorerEffect() {
         super(Outcome.Neutral);
-        this.staticText = "each player may discard a card. Each player who discarded a card this way may search his or her library "
-                + "for a basic land card, reveal it, put it into his or her hand, then shuffle his or her library";
+        this.staticText = "each player may discard a card. Each player who discarded a card this way may search their library "
+                + "for a basic land card, reveal it, put it into their hand, then shuffle their library";
     }
 
     public BorderlandExplorerEffect(final BorderlandExplorerEffect effect) {

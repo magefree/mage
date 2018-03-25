@@ -46,7 +46,7 @@ public class HeartbeatOfSpring extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}");
 
         
-        // Whenever a player taps a land for mana, that player adds one mana to his or her mana pool of any type that land produced.
+        // Whenever a player taps a land for mana, that player adds one mana to their mana pool of any type that land produced.
         this.addAbility(new TapForManaAllTriggeredManaAbility(
                 new AddManaOfAnyTypeProducedEffect(),
                 new FilterLandPermanent("a player taps a land"),

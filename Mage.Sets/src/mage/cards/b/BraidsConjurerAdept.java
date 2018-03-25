@@ -63,7 +63,7 @@ public class BraidsConjurerAdept extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // At the beginning of each player's upkeep, that player may put an artifact, creature, or land card from his or her hand onto the battlefield.
+        // At the beginning of each player's upkeep, that player may put an artifact, creature, or land card from their hand onto the battlefield.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new PutPermanentOnBattlefieldEffect(filter, true), TargetController.ANY, false));
     }
 

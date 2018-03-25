@@ -54,7 +54,7 @@ public class NeverendingTorment extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B}{B}");
 
 
-        // Search target player's library for X cards, where X is the number of cards in your hand, and exile them. Then that player shuffles his or her library.
+        // Search target player's library for X cards, where X is the number of cards in your hand, and exile them. Then that player shuffles their library.
         this.getSpellAbility().addEffect(new NeverendingTormentEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
 
@@ -76,7 +76,7 @@ class NeverendingTormentEffect extends OneShotEffect {
 
     public NeverendingTormentEffect() {
         super(Outcome.Benefit);
-        staticText = "Search target player's library for X cards, where X is the number of cards in your hand, and exile them. Then that player shuffles his or her library";
+        staticText = "Search target player's library for X cards, where X is the number of cards in your hand, and exile them. Then that player shuffles their library";
     }
 
     public NeverendingTormentEffect(final NeverendingTormentEffect effect) {

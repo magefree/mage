@@ -51,7 +51,7 @@ public class KeeningStone extends CardImpl {
     public KeeningStone(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{6}");
 
-        // {5}, {tap}: Target player puts the top X cards of his or her library into his or her graveyard, where X is the number of cards in that player's graveyard.
+        // {5}, {tap}: Target player puts the top X cards of their library into their graveyard, where X is the number of cards in that player's graveyard.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new KeeningStoneEffect(), new GenericManaCost(5));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPlayer());
@@ -72,7 +72,7 @@ class KeeningStoneEffect extends OneShotEffect {
 
     public KeeningStoneEffect() {
         super(Outcome.Neutral);
-        this.staticText = "Target player puts the top X cards of his or her library into his or her graveyard, where X is the number of cards in that player's graveyard";
+        this.staticText = "Target player puts the top X cards of their library into their graveyard, where X is the number of cards in that player's graveyard";
     }
 
     public KeeningStoneEffect(final KeeningStoneEffect effect) {

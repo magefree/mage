@@ -39,6 +39,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
@@ -460,12 +461,16 @@ public enum WizardCardsImageSource implements CardImageSource {
         setsAliases.put("ZEN", "Zendikar");
 
         languageAliases = new HashMap<>();
+        languageAliases.put("en", "English");
         languageAliases.put("es", "Spanish");
         languageAliases.put("jp", "Japanese");
         languageAliases.put("it", "Italian");
         languageAliases.put("fr", "French");
         languageAliases.put("cn", "Chinese Simplified");
         languageAliases.put("de", "German");
+        languageAliases.put("ko", "Korean");
+        languageAliases.put("pt", "Portuguese (Brazil)");
+        languageAliases.put("ru", "Russian");
     }
 
     @Override
@@ -493,7 +498,7 @@ public enum WizardCardsImageSource implements CardImageSource {
         if (setLinks == null || setLinks.isEmpty()) {
             return null;
         }
-        String searchKey = card.getDownloadName().toLowerCase().replace(" ", "").replace("&", "//");
+        String searchKey = card.getDownloadName().toLowerCase(Locale.ENGLISH).replace(" ", "").replace("&", "//");
         String link = setLinks.get(searchKey);
         if (link == null) {
             int length = collectorId.length();
@@ -576,7 +581,7 @@ public enum WizardCardsImageSource implements CardImageSource {
                                     }
                                 }
                                 Integer preferedMultiverseId = getLocalizedMultiverseId(preferedLanguage, multiverseId);
-                                setLinks.put(cardName.toLowerCase() + numberChar, generateLink(preferedMultiverseId));
+                                setLinks.put(cardName.toLowerCase(Locale.ENGLISH) + numberChar, generateLink(preferedMultiverseId));
                             }
                         }
                     }
@@ -652,11 +657,11 @@ public enum WizardCardsImageSource implements CardImageSource {
                     }
                 }
                 Integer landMultiverseId = Integer.parseInt(variation.attr("href").replaceAll("[^\\d]", ""));
-                setLinks.put((cardName).toLowerCase() + colNumb, generateLink(landMultiverseId));
+                setLinks.put((cardName).toLowerCase(Locale.ENGLISH) + colNumb, generateLink(landMultiverseId));
                 iteration++;
             }
         } else {
-            setLinks.put(cardName.toLowerCase(), generateLink(multiverseId));
+            setLinks.put(cardName.toLowerCase(Locale.ENGLISH), generateLink(multiverseId));
         }
     }
 
@@ -697,7 +702,9 @@ public enum WizardCardsImageSource implements CardImageSource {
     private String normalizeName(String name) {
         //Split card
         if (name.contains("//")) {
-            name = name.substring(0, name.indexOf('(') - 1);
+            if (name.indexOf('(') > 0) {
+                name = name.substring(0, name.indexOf('(') - 1);
+            }
         }
         //Special timeshifted name
         if (name.startsWith("XX")) {
@@ -756,7 +763,7 @@ public enum WizardCardsImageSource implements CardImageSource {
 //                    setLinks.putAll(getLandVariations(multiverseId, cardName));
 //                } else {
 //                    Integer preferedMultiverseId = getLocalizedMultiverseId(preferedLanguage, multiverseId);
-//                    setLinks.put(cardName.toLowerCase(), generateLink(preferedMultiverseId));
+//                    setLinks.put(cardName.toLowerCase(Locale.ENGLISH), generateLink(preferedMultiverseId));
 //                }
 //            } catch (IOException | NumberFormatException ex) {
 //                logger.error("Exception when parsing the wizards page: " + ex.getMessage());

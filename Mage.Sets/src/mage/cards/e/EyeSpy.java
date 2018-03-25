@@ -43,7 +43,7 @@ public class EyeSpy extends CardImpl {
     public EyeSpy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{U}");
 
-        // Look at the top card of target player's library. You may put that card into his or her graveyard.
+        // Look at the top card of target player's library. You may put that card into their graveyard.
         this.getSpellAbility().addEffect(new LookLibraryTopCardTargetPlayerEffect(1, true));
         this.getSpellAbility().addTarget(new TargetPlayer());
     }

@@ -52,7 +52,7 @@ public class DaysUndoing extends CardImpl {
     public DaysUndoing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}");
 
-        // Each player shuffles his or her hand and graveyard into his or her library, then draws seven cards. If it's your turn, end the turn.
+        // Each player shuffles their hand and graveyard into their library, then draws seven cards. If it's your turn, end the turn.
         this.getSpellAbility().addEffect(new DaysUndoingEffect());
         Effect effect = new DrawCardAllEffect(7);
         effect.setText(", then draws seven cards");
@@ -74,7 +74,7 @@ class DaysUndoingEffect extends OneShotEffect {
 
     public DaysUndoingEffect() {
         super(Outcome.Neutral);
-        staticText = "Each player shuffles his or her hand and graveyard into his or her library";
+        staticText = "Each player shuffles their hand and graveyard into their library";
     }
 
     public DaysUndoingEffect(final DaysUndoingEffect effect) {

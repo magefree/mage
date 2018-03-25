@@ -49,7 +49,7 @@ public class DesertionTest extends CardTestPlayerBase {
     public void testCounterKozilek() {
         // When you cast Kozilek, Butcher of Truth, draw four cards.
         // Annihilator 4 (Whenever this creature attacks, defending player sacrifices four permanents.)
-        // When Kozilek is put into a graveyard from anywhere, its owner shuffles his or her graveyard into his or her library.
+        // When Kozilek is put into a graveyard from anywhere, its owner shuffles their graveyard into their library.
         addCard(Zone.HAND, playerA, "Kozilek, Butcher of Truth"); // {10}
         addCard(Zone.BATTLEFIELD, playerA, "Island", 10);
         addCard(Zone.GRAVEYARD, playerA, "Silvercoat Lion"); // {10}

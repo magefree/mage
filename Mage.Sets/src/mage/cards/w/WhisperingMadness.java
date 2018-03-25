@@ -49,7 +49,7 @@ public class WhisperingMadness extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}{B}");
 
 
-        // Each player discards his or her hand, then draws cards equal to the greatest number of cards a player discarded this way.
+        // Each player discards their hand, then draws cards equal to the greatest number of cards a player discarded this way.
         this.getSpellAbility().addEffect(new WhisperingMadnessEffect());
         // Cipher
         this.getSpellAbility().addEffect(new CipherEffect());
@@ -68,7 +68,7 @@ public class WhisperingMadness extends CardImpl {
 class WhisperingMadnessEffect extends OneShotEffect {
     WhisperingMadnessEffect() {
         super(Outcome.Discard);
-        staticText = "Each player discards his or her hand, then draws cards equal to the greatest number of cards a player discarded this way";
+        staticText = "Each player discards their hand, then draws cards equal to the greatest number of cards a player discarded this way";
     }
 
     WhisperingMadnessEffect(final WhisperingMadnessEffect effect) {

@@ -86,6 +86,12 @@ public interface MageObject extends MageItem, Serializable {
 
     void setZoneChangeCounter(int value, Game game);
 
+    default boolean isHistoric(){
+        return getCardType().contains(CardType.ARTIFACT)
+                || getSuperType().contains(SuperType.LEGENDARY)
+                || hasSubtype(SubType.SAGA, null );
+    }
+
     default boolean isCreature() {
         return getCardType().contains(CardType.CREATURE);
     }

@@ -62,7 +62,7 @@ public class NotionThief extends CardImpl {
 
         // Flash
         this.addAbility(FlashAbility.getInstance());
-        // If an opponent would draw a card except the first one he or she draws in each of his or her draw steps, instead that player skips that draw and you draw a card.
+        // If an opponent would draw a card except the first one he or she draws in each of their draw steps, instead that player skips that draw and you draw a card.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new NotionThiefReplacementEffect()), new CardsDrawnDuringDrawStepWatcher());
 
     }
@@ -81,7 +81,7 @@ class NotionThiefReplacementEffect extends ReplacementEffectImpl {
 
     public NotionThiefReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "If an opponent would draw a card except the first one he or she draws in each of his or her draw steps, instead that player skips that draw and you draw a card";
+        staticText = "If an opponent would draw a card except the first one he or she draws in each of their draw steps, instead that player skips that draw and you draw a card";
     }
 
     public NotionThiefReplacementEffect(final NotionThiefReplacementEffect effect) {

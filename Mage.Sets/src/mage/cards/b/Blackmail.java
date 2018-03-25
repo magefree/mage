@@ -45,7 +45,7 @@ public class Blackmail extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}");
 
 
-        // Target player reveals three cards from his or her hand and you choose one of them. That player discards that card.
+        // Target player reveals three cards from their hand and you choose one of them. That player discards that card.
         this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(TargetController.ANY, 3));
         this.getSpellAbility().addTarget(new TargetPlayer());
     }

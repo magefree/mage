@@ -64,6 +64,7 @@ import mage.server.util.ConfigSettings;
 import mage.server.util.Splitter;
 import mage.server.util.SystemUtil;
 import mage.server.util.ThreadExecutor;
+import mage.utils.StreamUtils;
 import mage.utils.timer.PriorityTimer;
 import mage.view.*;
 import mage.view.ChatMessage.MessageColor;
@@ -902,17 +903,23 @@ public class GameController implements GameCallback {
     }
 
     public boolean saveGame() {
+        OutputStream file = null;
+        ObjectOutput output = null;
+        OutputStream buffer = null;
         try {
-            OutputStream file = new FileOutputStream("saved/" + game.getId().toString() + ".game");
-            OutputStream buffer = new BufferedOutputStream(file);
-            try (ObjectOutput output = new ObjectOutputStream(new GZIPOutputStream(buffer))) {
-                output.writeObject(game);
-                output.writeObject(game.getGameStates());
-            }
+            file = new FileOutputStream("saved/" + game.getId().toString() + ".game");
+            buffer = new BufferedOutputStream(file);
+            output = new ObjectOutputStream(new GZIPOutputStream(buffer));
+            output.writeObject(game);
+            output.writeObject(game.getGameStates());
             logger.debug("Saved game:" + game.getId());
             return true;
         } catch (IOException ex) {
             logger.fatal("Cannot save game.", ex);
+        } finally {
+            StreamUtils.closeQuietly(file);
+            StreamUtils.closeQuietly(output);
+            StreamUtils.closeQuietly(buffer);
         }
         return false;
     }
@@ -1157,8 +1164,6 @@ public class GameController implements GameCallback {
         sb.append(state.getStack());
         sb.append("<br>getStepNum: ");
         sb.append(state.getStepNum());
-        sb.append("<br>getTriggers: ");
-        sb.append(state.getTriggers());
         sb.append("<br>getTurn: ");
         sb.append(state.getTurn());
         sb.append("<br>getTurnId: ");

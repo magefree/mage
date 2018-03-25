@@ -63,7 +63,7 @@ public class ElkinLair extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");
         addSuperType(SuperType.WORLD);
 
-        // At the beginning of each player's upkeep, that player exiles a card at random from his or her hand. The player may play that card this turn. At the beginning of the next end step, if the player hasn't played the card, he or she puts it into his or her graveyard.
+        // At the beginning of each player's upkeep, that player exiles a card at random from their hand. The player may play that card this turn. At the beginning of the next end step, if the player hasn't played the card, he or she puts it into their graveyard.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ElkinLairUpkeepEffect(), TargetController.ANY, false));
 
     }
@@ -83,7 +83,7 @@ class ElkinLairUpkeepEffect extends OneShotEffect {
 
     public ElkinLairUpkeepEffect() {
         super(Outcome.Benefit);
-        this.staticText = "that player exiles a card at random from his or her hand. The player may play that card this turn. At the beginning of the next end step, if the player hasn't played the card, he or she puts it into his or her graveyard";
+        this.staticText = "that player exiles a card at random from their hand. The player may play that card this turn. At the beginning of the next end step, if the player hasn't played the card, he or she puts it into their graveyard";
     }
 
     public ElkinLairUpkeepEffect(final ElkinLairUpkeepEffect effect) {
@@ -159,7 +159,7 @@ class ElkinLairPutIntoGraveyardEffect extends OneShotEffect {
 
     public ElkinLairPutIntoGraveyardEffect() {
         super(Outcome.Neutral);
-        staticText = "if the player hasn't played the card, he or she puts it into his or her graveyard";
+        staticText = "if the player hasn't played the card, he or she puts it into their graveyard";
     }
 
     public ElkinLairPutIntoGraveyardEffect(final ElkinLairPutIntoGraveyardEffect effect) {

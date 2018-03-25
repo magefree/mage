@@ -27,6 +27,7 @@
  */
 package mage.abilities.common;
 
+import java.util.Locale;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.AttachmentType;
@@ -88,7 +89,7 @@ public class AttacksAttachedTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         StringBuilder sb = new StringBuilder("Whenever ");
-        sb.append(attachmentType.verb().toLowerCase());
+        sb.append(attachmentType.verb().toLowerCase(Locale.ENGLISH));
         return sb.append(" creature attacks, ").append(super.getRule()).toString();
     }
 }

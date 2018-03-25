@@ -56,9 +56,9 @@ public class NemesisOfReason extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(7);
         
-        // Whenever Nemesis of Reason attacks, defending player puts the top ten cards of his or her library into his or her graveyard.
+        // Whenever Nemesis of Reason attacks, defending player puts the top ten cards of their library into their graveyard.
         Effect effect = new PutLibraryIntoGraveTargetEffect(10);
-        effect.setText("defending player puts the top ten cards of his or her library into his or her graveyard");
+        effect.setText("defending player puts the top ten cards of their library into their graveyard");
         this.addAbility(new NemesisOfReasonTriggeredAbility(effect));
     }
 
@@ -106,6 +106,6 @@ class NemesisOfReasonTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever {this} attacks, defending player puts the top ten cards of his or her library into his or her graveyard.";
+        return "Whenever {this} attacks, defending player puts the top ten cards of their library into their graveyard.";
     }
 }

@@ -28,6 +28,7 @@
 package mage.remote;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -89,6 +90,7 @@ public class SessionImpl implements Session {
     private static boolean debugMode = false;
 
     private boolean canceled = false;
+    private boolean jsonLogActive = false;
 
     static {
         debugMode = System.getProperty("debug.mage") != null;
@@ -892,12 +894,20 @@ public class SessionImpl implements Session {
 
     @Override
     public void appendJsonLog(ActionData actionData) {
-        actionData.sessionId = getSessionId();
-        String logFileName = "game-" + actionData.gameId + ".json";
-        try (PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(logFileName, true)))) {
-            out.println(actionData.toJson());
-        } catch (IOException e) {
-            System.err.println(e);
+        if (isJsonLogActive()) {
+            String dir = "gamelogsJson";
+            File saveDir = new File(dir);
+            //Existence check
+            if (!saveDir.exists()) {
+                saveDir.mkdirs();
+            }
+            actionData.sessionId = getSessionId();
+            String logFileName = dir + File.separator + "game-" + actionData.gameId + ".json";
+            try (PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(logFileName, true)))) {
+                out.println(actionData.toJson());
+            } catch (IOException e) {
+                logger.error("Cant write JSON game log file - " + logFileName, e);
+            }
         }
     }
 
@@ -1308,7 +1318,7 @@ public class SessionImpl implements Session {
             if (isConnected()) {
                 ActionData actionData = new ActionData("SEND_PLAYER_ACTION", gameId, getSessionId());
 
-                actionData.value = data;
+                actionData.value = passPriorityAction + (data != null ? " " + data.toString() : "");
                 appendJsonLog(actionData);
 
                 server.sendPlayerAction(passPriorityAction, gameId, sessionId, data);
@@ -1632,6 +1642,16 @@ public class SessionImpl implements Session {
         } else {
             return "<no server state>";
         }
+    }
+
+    @Override
+    public boolean isJsonLogActive() {
+        return jsonLogActive;
+    }
+
+    @Override
+    public void setJsonLogActive(boolean jsonLogActive) {
+        this.jsonLogActive = jsonLogActive;
     }
 
 }

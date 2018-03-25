@@ -56,7 +56,7 @@ public class Reweave extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{5}{U}");
         this.subtype.add(SubType.ARCANE);
 
-        // Target permanent's controller sacrifices it. If he or she does, that player reveals cards from the top of his or her library until he or she reveals a permanent card that shares a card type with the sacrificed permanent, puts that card onto the battlefield, then shuffles his or her library.
+        // Target permanent's controller sacrifices it. If he or she does, that player reveals cards from the top of their library until he or she reveals a permanent card that shares a card type with the sacrificed permanent, puts that card onto the battlefield, then shuffles their library.
         this.getSpellAbility().addEffect(new ReweaveEffect());
         Target target = new TargetPermanent();
         this.getSpellAbility().addTarget(target);
@@ -81,7 +81,7 @@ class ReweaveEffect extends OneShotEffect {
 
     public ReweaveEffect() {
         super(Outcome.Detriment);
-        this.staticText = "Target permanent's controller sacrifices it. If he or she does, that player reveals cards from the top of his or her library until he or she reveals a permanent card that shares a card type with the sacrificed permanent, puts that card onto the battlefield, then shuffles his or her library";
+        this.staticText = "Target permanent's controller sacrifices it. If he or she does, that player reveals cards from the top of their library until he or she reveals a permanent card that shares a card type with the sacrificed permanent, puts that card onto the battlefield, then shuffles their library";
     }
 
     public ReweaveEffect(final ReweaveEffect effect) {

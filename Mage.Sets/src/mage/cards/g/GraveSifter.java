@@ -63,7 +63,7 @@ public class GraveSifter extends CardImpl {
         this.power = new MageInt(5);
         this.toughness = new MageInt(7);
 
-        // When Grave Sifter enters the battlefield, each player chooses a creature type and returns any number of cards of that type from his or her graveyard to his or her hand.
+        // When Grave Sifter enters the battlefield, each player chooses a creature type and returns any number of cards of that type from their graveyard to their hand.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GraveSifterEffect(), false));
     }
 
@@ -81,7 +81,7 @@ class GraveSifterEffect extends OneShotEffect {
 
     public GraveSifterEffect() {
         super(Outcome.ReturnToHand);
-        this.staticText = "each player chooses a creature type and returns any number of cards of that type from his or her graveyard to his or her hand";
+        this.staticText = "each player chooses a creature type and returns any number of cards of that type from their graveyard to their hand";
     }
 
     public GraveSifterEffect(final GraveSifterEffect effect) {

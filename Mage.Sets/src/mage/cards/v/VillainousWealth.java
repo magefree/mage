@@ -54,7 +54,7 @@ public class VillainousWealth extends CardImpl {
     public VillainousWealth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{B}{G}{U}");
 
-        // Target opponent exiles the top X cards of his or her library. You may cast any number of nonland cards with converted mana cost X or less from among them without paying their mana cost.
+        // Target opponent exiles the top X cards of their library. You may cast any number of nonland cards with converted mana cost X or less from among them without paying their mana cost.
         this.getSpellAbility().addTarget(new TargetOpponent());
         this.getSpellAbility().addEffect(new VillainousWealthEffect());
 
@@ -74,7 +74,7 @@ class VillainousWealthEffect extends OneShotEffect {
 
     public VillainousWealthEffect() {
         super(Outcome.PlayForFree);
-        this.staticText = "Target opponent exiles the top X cards of his or her library. You may cast any number of nonland cards with converted mana cost X or less from among them without paying their mana cost";
+        this.staticText = "Target opponent exiles the top X cards of their library. You may cast any number of nonland cards with converted mana cost X or less from among them without paying their mana cost";
     }
 
     public VillainousWealthEffect(final VillainousWealthEffect effect) {

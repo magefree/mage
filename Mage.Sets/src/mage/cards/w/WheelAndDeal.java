@@ -55,9 +55,9 @@ public class WheelAndDeal extends CardImpl {
     public WheelAndDeal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}");
 
-        // Any number of target opponents each discards his or her hand and draws seven cards.
+        // Any number of target opponents each discards their hand and draws seven cards.
         Effect effect = new DiscardHandTargetEffect();
-        effect.setText("Any number of target opponents each discards his or her hand");
+        effect.setText("Any number of target opponents each discards their hand");
         this.getSpellAbility().addTarget(new TargetPlayer(0, Integer.MAX_VALUE, false, filter));
         this.getSpellAbility().addEffect(effect);
         effect = new DrawCardTargetEffect(7);

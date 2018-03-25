@@ -38,7 +38,7 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
- * Each player may play an additional land on each of his or her turns.
+ * Each player may play an additional land on each of their turns.
  *
  * @author nantuko
  */
@@ -46,7 +46,7 @@ public class PlayAdditionalLandsAllEffect extends ContinuousEffectImpl {
 
     public PlayAdditionalLandsAllEffect() {
         super(Duration.WhileOnBattlefield, Layer.PlayerEffects, SubLayer.NA, Outcome.Benefit);
-        staticText = "Each player may play an additional land on each of his or her turns";
+        staticText = "Each player may play an additional land on each of their turns";
     }
 
     public PlayAdditionalLandsAllEffect(final PlayAdditionalLandsAllEffect effect) {

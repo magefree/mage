@@ -69,7 +69,7 @@ public class VendilionClique extends CardImpl {
         this.addAbility(FlashAbility.getInstance());
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        // When Vendilion Clique enters the battlefield, look at target player's hand. You may choose a nonland card from it. If you do, that player reveals the chosen card, puts it on the bottom of his or her library, then draws a card.
+        // When Vendilion Clique enters the battlefield, look at target player's hand. You may choose a nonland card from it. If you do, that player reveals the chosen card, puts it on the bottom of their library, then draws a card.
         Ability ability = new EntersBattlefieldTriggeredAbility(new VendilionCliqueEffect());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
@@ -89,7 +89,7 @@ class VendilionCliqueEffect extends OneShotEffect {
 
     VendilionCliqueEffect() {
         super(Outcome.Discard);
-        staticText = "look at target player's hand. You may choose a nonland card from it. If you do, that player reveals the chosen card, puts it on the bottom of his or her library, then draws a card";
+        staticText = "look at target player's hand. You may choose a nonland card from it. If you do, that player reveals the chosen card, puts it on the bottom of their library, then draws a card";
     }
 
     VendilionCliqueEffect(final VendilionCliqueEffect effect) {

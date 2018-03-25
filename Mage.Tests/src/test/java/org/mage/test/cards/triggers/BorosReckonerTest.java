@@ -54,7 +54,7 @@ public class BorosReckonerTest extends CardTestPlayerBase {
      */
     @Test
     public void testDamageAmountLikeDamageDealt() {
-        // When Phytotitan dies, return it to the battlefield tapped under its owner's control at the beginning of his or her next upkeep.
+        // When Phytotitan dies, return it to the battlefield tapped under its owner's control at the beginning of their next upkeep.
         addCard(Zone.BATTLEFIELD, playerA, "Phytotitan");
         addCard(Zone.BATTLEFIELD, playerB, "Boros Reckoner");
 

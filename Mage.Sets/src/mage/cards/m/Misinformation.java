@@ -48,7 +48,7 @@ public class Misinformation extends CardImpl {
     public Misinformation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}");
 
-        // Put up to three target cards from an opponent's graveyard on top of his or her library in any order.
+        // Put up to three target cards from an opponent's graveyard on top of their library in any order.
         this.getSpellAbility().addTarget(new TargetCardInOpponentsGraveyard(0, 3, new FilterCard("cards from an opponent's graveyard"), true));
         this.getSpellAbility().addEffect(new MisinformationEffect());
     }
@@ -67,7 +67,7 @@ class MisinformationEffect extends OneShotEffect {
     
     MisinformationEffect() {
         super(Outcome.Detriment);
-        this.staticText = "Put up to three target cards from an opponent's graveyard on top of his or her library in any order";
+        this.staticText = "Put up to three target cards from an opponent's graveyard on top of their library in any order";
     }
     
     MisinformationEffect(final MisinformationEffect effect) {

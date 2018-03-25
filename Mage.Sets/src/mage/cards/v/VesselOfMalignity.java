@@ -49,7 +49,7 @@ public class VesselOfMalignity extends CardImpl {
     public VesselOfMalignity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}");
 
-        // {1}{B}, Sacrifice Vessel of Malignity: Target opponent exiles two cards from his or her hand. Activate this ability only any time you could cast a sorcery.
+        // {1}{B}, Sacrifice Vessel of Malignity: Target opponent exiles two cards from their hand. Activate this ability only any time you could cast a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD,
                 new ExileFromZoneTargetEffect(Zone.HAND, null, "", new FilterCard("cards"), 2),
                 new ManaCostsImpl("{1}{B}"));

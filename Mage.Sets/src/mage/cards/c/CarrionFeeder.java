@@ -39,6 +39,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -48,7 +49,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public class CarrionFeeder extends CardImpl {
 
     public CarrionFeeder(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}");
         this.subtype.add(SubType.ZOMBIE);
 
         this.power = new MageInt(1);
@@ -59,7 +60,7 @@ public class CarrionFeeder extends CardImpl {
         // Sacrifice a creature: Put a +1/+1 counter on Carrion Feeder.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
-                new SacrificeTargetCost(new TargetControlledCreaturePermanent())));
+                new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT))));
     }
 
     public CarrionFeeder(final CarrionFeeder card) {

@@ -52,7 +52,7 @@ public class ProbeDroid extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // When Probe Droid enters the battlefield, target player reveals his or her hand.
+        // When Probe Droid enters the battlefield, target player reveals their hand.
         Ability ability = new EntersBattlefieldTriggeredAbility(new LookAtTargetPlayerHandEffect());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);

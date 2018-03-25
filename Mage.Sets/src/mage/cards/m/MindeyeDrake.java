@@ -54,7 +54,7 @@ public class MindeyeDrake extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        // When Mindeye Drake dies, target player puts the top five cards of his or her library into his or her graveyard.
+        // When Mindeye Drake dies, target player puts the top five cards of their library into their graveyard.
         Ability ability = new DiesTriggeredAbility(new PutLibraryIntoGraveTargetEffect(5));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);

@@ -47,9 +47,9 @@ public class Perplex extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}{B}");
 
 
-        // Counter target spell unless its controller discards his or her hand.
+        // Counter target spell unless its controller discards their hand.
         Effect effect = new CounterUnlessPaysEffect(new DiscardHandCost());
-        effect.setText("Counter target spell unless its controller discards his or her hand");
+        effect.setText("Counter target spell unless its controller discards their hand");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetSpell());
         // Transmute {1}{U}{B}

@@ -122,7 +122,7 @@ class LensOfClarityLookLibraryEffect extends OneShotEffect {
             Cards cards = new CardsImpl();
             cards.add(card);
             controller.lookAtCards("top card of library - " + controller.getName(), cards, game);
-            game.informPlayers(controller.getLogName() + " looks at the top card of his or her library");
+            game.informPlayers(controller.getLogName() + " looks at the top card of their library");
         } else {
             return false;
         }

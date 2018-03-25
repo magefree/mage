@@ -396,7 +396,7 @@ public abstract class CardRenderer {
             /*
             // Just draw the as a code
             String code = cardView.getExpansionSetCode();
-            code = (code != null) ? code.toUpperCase() : "";
+            code = (code != null) ? code.toUpperCase(Locale.ENGLISH) : "";
             FontMetrics metrics = g.getFontMetrics();
             setSymbolWidth = metrics.stringWidth(code);
             if (cardView.getRarity() == Rarity.COMMON) {

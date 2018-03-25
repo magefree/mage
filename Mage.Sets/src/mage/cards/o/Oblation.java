@@ -49,7 +49,7 @@ public class Oblation extends CardImpl {
     public Oblation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");
 
-        // The owner of target nonland permanent shuffles it into his or her library, then draws two cards.
+        // The owner of target nonland permanent shuffles it into their library, then draws two cards.
         this.getSpellAbility().addEffect(new OblationEffect());
         this.getSpellAbility().addTarget(new TargetNonlandPermanent());
     }
@@ -68,7 +68,7 @@ class OblationEffect extends OneShotEffect {
 
     OblationEffect() {
         super(Outcome.Removal);
-        this.staticText = "The owner of target nonland permanent shuffles it into his or her library, then draws two cards";
+        this.staticText = "The owner of target nonland permanent shuffles it into their library, then draws two cards";
     }
 
     OblationEffect(final OblationEffect effect) {

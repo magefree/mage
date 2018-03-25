@@ -56,7 +56,7 @@ public class EternalDominion extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{7}{U}{U}{U}");
 
         // Search target opponent's library for an artifact, creature, enchantment, or land card.
-        // Put that card onto the battlefield under your control. Then that player shuffles his or her library.
+        // Put that card onto the battlefield under your control. Then that player shuffles their library.
         this.getSpellAbility().addEffect(new EternalDominionEffect());
         this.getSpellAbility().addTarget(new TargetOpponent());
 
@@ -89,7 +89,7 @@ class EternalDominionEffect extends OneShotEffect {
 
     public EternalDominionEffect() {
         super(Outcome.Benefit);
-        staticText = "Search target opponent's library for an artifact, creature, enchantment, or land card. Put that card onto the battlefield under your control. Then that player shuffles his or her library";
+        staticText = "Search target opponent's library for an artifact, creature, enchantment, or land card. Put that card onto the battlefield under your control. Then that player shuffles their library";
     }
 
     public EternalDominionEffect(final EternalDominionEffect effect) {

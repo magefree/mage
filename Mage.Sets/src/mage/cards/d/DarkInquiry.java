@@ -44,7 +44,7 @@ public class DarkInquiry extends CardImpl {
     public DarkInquiry(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}");
 
-        // Target opponent reveals his or her hand. You choose a non land card from it. That player discards that card.
+        // Target opponent reveals their hand. You choose a non land card from it. That player discards that card.
         this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(StaticFilters.FILTER_CARD_A_NON_LAND));
         this.getSpellAbility().addTarget(new TargetOpponent());
     }

@@ -28,6 +28,7 @@
 package mage.abilities.effects.common.continuous;
 
 import java.util.ArrayList;
+import java.util.Locale;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -104,7 +105,7 @@ public class AddCardTypeSourceEffect extends ContinuousEffectImpl {
                 }
                 article = true;
             }
-            sb.append(cardType.toString().toLowerCase()).append(" ");
+            sb.append(cardType.toString().toLowerCase(Locale.ENGLISH)).append(" ");
         }
         sb.append(" in addition to its other types ").append(this.getDuration().toString());
         return sb.toString();

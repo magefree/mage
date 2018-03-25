@@ -58,7 +58,7 @@ public class RelicOfProgenitus extends CardImpl {
     public RelicOfProgenitus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
 
-        // {tap}: Target player exiles a card from his or her graveyard.
+        // {tap}: Target player exiles a card from their graveyard.
         Ability firstAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RelicOfProgenitusEffect(), new TapSourceCost());
         firstAbility.addTarget(new TargetPlayer());
         this.addAbility(firstAbility);
@@ -83,7 +83,7 @@ class RelicOfProgenitusEffect extends OneShotEffect {
 
     public RelicOfProgenitusEffect() {
         super(Outcome.Exile);
-        this.staticText = "Target player exiles a card from his or her graveyard";
+        this.staticText = "Target player exiles a card from their graveyard";
     }
 
     public RelicOfProgenitusEffect(final RelicOfProgenitusEffect effect) {

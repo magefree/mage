@@ -65,7 +65,7 @@ public class SteamVines extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
-        // When enchanted land becomes tapped, destroy it and Steam Vines deals 1 damage to that land's controller. That player attaches Steam Vines to a land of his or her choice.
+        // When enchanted land becomes tapped, destroy it and Steam Vines deals 1 damage to that land's controller. That player attaches Steam Vines to a land of their choice.
         this.addAbility(new BecomesTappedAttachedTriggeredAbility(new SteamVinesEffect(), "enchanted land"));
 
     }
@@ -84,7 +84,7 @@ class SteamVinesEffect extends OneShotEffect {
 
     public SteamVinesEffect() {
         super(Outcome.Detriment);
-        staticText = "destroy it and {this} deals 1 damage to that land's controller. That player attaches {this} to a land of his or her choice";
+        staticText = "destroy it and {this} deals 1 damage to that land's controller. That player attaches {this} to a land of their choice";
     }
 
     public SteamVinesEffect(final SteamVinesEffect effect) {

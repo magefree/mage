@@ -62,7 +62,7 @@ public class MindclawShaman extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // When Mindclaw Shaman enters the battlefield, target opponent reveals his or her hand. You may cast an instant or sorcery card from it without paying its mana cost.
+        // When Mindclaw Shaman enters the battlefield, target opponent reveals their hand. You may cast an instant or sorcery card from it without paying its mana cost.
         Ability ability = new EntersBattlefieldTriggeredAbility(new MindclawShamanEffect(), false);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
@@ -90,7 +90,7 @@ class MindclawShamanEffect extends OneShotEffect {
     
     public MindclawShamanEffect() {
         super(Outcome.Discard);
-        this.staticText = "target opponent reveals his or her hand. You may cast an instant or sorcery card from it without paying its mana cost";
+        this.staticText = "target opponent reveals their hand. You may cast an instant or sorcery card from it without paying its mana cost";
     }
 
     public MindclawShamanEffect(final MindclawShamanEffect effect) {

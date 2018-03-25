@@ -61,7 +61,7 @@ public class TreacherousUrge extends CardImpl {
     public TreacherousUrge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{B}");
 
-        // Target opponent reveals his or her hand. You may put a creature card from it onto the battlefield under your control. That creature gains haste. Sacrifice it at the beginning of the next end step.
+        // Target opponent reveals their hand. You may put a creature card from it onto the battlefield under your control. That creature gains haste. Sacrifice it at the beginning of the next end step.
         this.getSpellAbility().addEffect(new TreacherousUrgeEffect());
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
@@ -82,7 +82,7 @@ class TreacherousUrgeEffect extends OneShotEffect {
 
     public TreacherousUrgeEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Target opponent reveals his or her hand. You may put a creature card from it onto the battlefield under your control. That creature gains haste. Sacrifice it at the beginning of the next end step";
+        this.staticText = "Target opponent reveals their hand. You may put a creature card from it onto the battlefield under your control. That creature gains haste. Sacrifice it at the beginning of the next end step";
     }
 
     public TreacherousUrgeEffect(final TreacherousUrgeEffect effect) {

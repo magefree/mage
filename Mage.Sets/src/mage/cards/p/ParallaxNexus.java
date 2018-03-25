@@ -58,14 +58,14 @@ public class ParallaxNexus extends CardImpl {
         // Fading 5
         this.addAbility(new FadingAbility(5, this));
 
-        // Remove a fade counter from Parallax Nexus: Target opponent exiles a card from his or her hand. Activate this ability only any time you could cast a sorcery.
+        // Remove a fade counter from Parallax Nexus: Target opponent exiles a card from their hand. Activate this ability only any time you could cast a sorcery.
         Effect effect = new ExileFromZoneTargetEffect(Zone.HAND, exileId, "Parallax Nexus", new FilterCard());
-        effect.setText("Target opponent exiles a card from his or her hand");
+        effect.setText("Target opponent exiles a card from their hand");
         Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, effect, new RemoveCountersSourceCost(CounterType.FADE.createInstance()));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
 
-        // When Parallax Nexus leaves the battlefield, each player returns to his or her hand all cards he or she owns exiled with Parallax Nexus.
+        // When Parallax Nexus leaves the battlefield, each player returns to their hand all cards he or she owns exiled with Parallax Nexus.
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new ReturnFromExileEffect(exileId, Zone.HAND), false));
     }
 

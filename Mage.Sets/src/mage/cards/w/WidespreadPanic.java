@@ -54,7 +54,7 @@ public class WidespreadPanic extends CardImpl {
     public WidespreadPanic(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");
 
-        // Whenever a spell or ability causes its controller to shuffle his or her library, that player puts a card from his or her hand on top of his or her library.
+        // Whenever a spell or ability causes its controller to shuffle their library, that player puts a card from their hand on top of their library.
         this.addAbility(new WidespreadPanicTriggeredAbility());
     }
 
@@ -101,7 +101,7 @@ class WidespreadPanicTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return new StringBuilder("Whenever a spell or ability causes its controller to shuffle his or her library, ").append(super.getRule()).toString();
+        return new StringBuilder("Whenever a spell or ability causes its controller to shuffle their library, ").append(super.getRule()).toString();
     }
 }
 
@@ -109,7 +109,7 @@ class WidespreadPanicEffect extends OneShotEffect {
 
     public WidespreadPanicEffect() {
         super(Outcome.Detriment);
-        this.staticText = "that player puts a card from his or her hand on top of his or her library";
+        this.staticText = "that player puts a card from their hand on top of their library";
     }
 
     public WidespreadPanicEffect(final WidespreadPanicEffect effect) {

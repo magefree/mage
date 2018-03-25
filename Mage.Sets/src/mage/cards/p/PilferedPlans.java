@@ -45,7 +45,7 @@ public class PilferedPlans extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{U}{B}");
 
 
-        // Target player puts the top two cards of his or her library into his or her graveyard. Draw two cards.
+        // Target player puts the top two cards of their library into their graveyard. Draw two cards.
         this.getSpellAbility().addEffect(new PutLibraryIntoGraveTargetEffect(2));
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));
         this.getSpellAbility().addTarget(new TargetPlayer());

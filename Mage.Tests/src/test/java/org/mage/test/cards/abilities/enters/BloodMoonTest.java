@@ -185,7 +185,7 @@ public class BloodMoonTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Pithing Needle"); // {1}
         addCard(Zone.HAND, playerB, "Ghost Quarter", 1);
         // {T}: Add {C} to your mana pool.
-        // {T}, Sacrifice Ghost Quarter: Destroy target land. Its controller may search his or her library for a basic land card, put it onto the battlefield, then shuffle his or her library.
+        // {T}, Sacrifice Ghost Quarter: Destroy target land. Its controller may search their library for a basic land card, put it onto the battlefield, then shuffle their library.
         addCard(Zone.BATTLEFIELD, playerB, "Ghost Quarter", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Blood Moon");

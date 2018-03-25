@@ -29,7 +29,6 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.LoseLifeDefendingPlayerEffect;
 import mage.abilities.keyword.DevoidAbility;
@@ -46,16 +45,15 @@ import mage.constants.SubType;
 public class SilentSkimmer extends CardImpl {
 
     public SilentSkimmer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
         this.subtype.add(SubType.ELDRAZI);
         this.subtype.add(SubType.DRONE);
         this.power = new MageInt(0);
         this.toughness = new MageInt(4);
 
         // Devoid
-        Ability ability = new DevoidAbility(this.color);
-        ability.setRuleAtTheTop(true);
-        this.addAbility(ability);
+        this.addAbility(new DevoidAbility(this.color));
+
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Whenever Silent Skimmer attacks, defending player loses 2 life.

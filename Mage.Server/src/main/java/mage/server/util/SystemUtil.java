@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.cards.Cards;
+import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
@@ -49,6 +50,10 @@ public final class SystemUtil {
         supportedCommands.put(COMMAND_SHOW_OPPONENT_HAND, "SHOW OPPONENT HAND");
         supportedCommands.put(COMMAND_SHOW_OPPONENT_LIBRARY, "SHOW OPPONENT LIBRARY");
     }
+
+    private static final Pattern patternGroup = Pattern.compile("\\[(.+)\\]"); // [test new card]
+    private static final Pattern patternCommand = Pattern.compile("([\\w]+):([\\S]+?):([\\S ]+):([\\d]+)"); // battlefield:Human:Island:10
+    private static final Pattern patternCardInfo = Pattern.compile("([\\S ]+):([\\S ]+)"); // Island:XLN
 
     // show ext info for special commands
     private static final String PARAM_COLOR = "color";
@@ -138,6 +143,68 @@ public final class SystemUtil {
         return res.stream().sorted().collect(Collectors.joining("\n"));
     }
 
+    private static class CardCommandData {
+        public String source;
+        public String zone;
+        public String player;
+        public String cardName;
+        public String cardSet;
+        public Integer Amount;
+
+        public Boolean OK;
+        public String Error;
+    }
+
+    public static CardCommandData parseCardCommand(String commandLine) {
+        CardCommandData com = new CardCommandData();
+        com.source = commandLine.trim();
+        com.OK = false;
+        com.Error = "unknown error";
+
+        Matcher matchCommand = patternCommand.matcher(com.source);
+        if (!matchCommand.matches()) {
+            com.Error = "Unknown command format";
+            return com;
+        }
+
+        com.zone = matchCommand.group(1);
+        com.player = matchCommand.group(2);
+        try {
+            com.Amount = Integer.parseInt(matchCommand.group(4));
+        } catch (Throwable e) {
+            com.Error = "Can't parse amount value [" + matchCommand.group(4) + "]";
+            return com;
+        }
+
+        // card name can be with set
+        String cardInfo = matchCommand.group(3);
+        Matcher matchInfo = patternCardInfo.matcher(cardInfo);
+        if (matchInfo.matches()) {
+            // name with set
+            com.cardName = matchInfo.group(1);
+            com.cardSet = matchInfo.group(2);
+        } else {
+            // name only
+            com.cardName = cardInfo;
+            com.cardSet = "";
+        }
+
+        if (com.cardName.isEmpty()) {
+            com.Error = "Card name is empty";
+            return com;
+        }
+
+        if (com.Amount <= 0) {
+            com.Error = "Amount [" + com.Amount + "] must be greater than 0";
+            return com;
+        }
+
+        // all ok
+        com.Error = "";
+        com.OK = true;
+        return com;
+    }
+
     public static void addCardsForTesting(Game game) {
         addCardsForTesting(game, null, null);
     }
@@ -182,8 +249,6 @@ public final class SystemUtil {
             // 4. run commands from selected group
 
             // 1. parse
-            Pattern patternGroup = Pattern.compile("\\[(.+)\\]"); // [test new card]
-            Pattern patternCard = Pattern.compile("([a-zA-Z]+):([\\w]+):([a-zA-Z ,\\/\\-.!'\\d:]+?):(\\d+)"); // battlefield:Human:Island:10
             ArrayList<CommandGroup> groups = new ArrayList<>();
 
             try (Scanner scanner = new Scanner(f)) {
@@ -301,71 +366,75 @@ public final class SystemUtil {
             // 4. run commands
             for (String line: runGroup.commands) {
 
-                Matcher matchCommand = patternCard.matcher(line);
-                if (!matchCommand.matches()) {
-                    logger.warn("Unknown command format: " + line);
+                CardCommandData command = parseCardCommand(line);
+                if (!command.OK) {
+                    logger.warn(command.Error + ": " + line);
                     continue;
                 }
 
-                String zone = matchCommand.group(1);
-                String nickname = matchCommand.group(2);
-
-                Optional<Player> playerOptional = findPlayer(game, nickname);
+                Optional<Player> playerOptional = findPlayer(game, command.player);
                 if (!playerOptional.isPresent()) {
                     logger.warn("Unknown player: " + line);
                     continue;
                 }
                 Player player = playerOptional.get();
 
+                // SPECIAL token/emblem call (without SET name)
+                if ("token".equalsIgnoreCase(command.zone)) {
+                    // eg: token:Human:HippoToken:1
+                    Class<?> c = Class.forName("mage.game.permanent.token." + command.cardName);
+                    Constructor<?> cons = c.getConstructor();
+                    Object token = cons.newInstance();
+                    if (token != null && token instanceof mage.game.permanent.token.Token) {
+                        ((mage.game.permanent.token.Token) token).putOntoBattlefield(command.Amount, game, null, player.getId(), false, false);
+                        continue;
+                    }
+                } else if ("emblem".equalsIgnoreCase(command.zone)) {
+                    // eg: emblem:Human:ElspethSunsChampionEmblem:1
+                    Class<?> c = Class.forName("mage.game.command.emblems." + command.cardName);
+                    Constructor<?> cons = c.getConstructor();
+                    Object emblem = cons.newInstance();
+                    if (emblem != null && emblem instanceof mage.game.command.Emblem) {
+                        ((mage.game.command.Emblem) emblem).setControllerId(player.getId());
+                        game.addEmblem((mage.game.command.Emblem) emblem, null, player.getId());
+                        continue;
+                    }
+                }
+
                 Zone gameZone;
-                if ("hand".equalsIgnoreCase(zone)) {
+                if ("hand".equalsIgnoreCase(command.zone)) {
                     gameZone = Zone.HAND;
-                } else if ("battlefield".equalsIgnoreCase(zone)) {
+                } else if ("battlefield".equalsIgnoreCase(command.zone)) {
                     gameZone = Zone.BATTLEFIELD;
-                } else if ("graveyard".equalsIgnoreCase(zone)) {
+                } else if ("graveyard".equalsIgnoreCase(command.zone)) {
                     gameZone = Zone.GRAVEYARD;
-                } else if ("library".equalsIgnoreCase(zone)) {
+                } else if ("library".equalsIgnoreCase(command.zone)) {
                     gameZone = Zone.LIBRARY;
-                } else if ("token".equalsIgnoreCase(zone)) {
+                } else if ("token".equalsIgnoreCase(command.zone)) {
                     gameZone = Zone.BATTLEFIELD;
-                } else if ("emblem".equalsIgnoreCase(zone)) {
+                } else if ("emblem".equalsIgnoreCase(command.zone)) {
                     gameZone = Zone.COMMAND;
                 } else {
-                    logger.warn("Unknown zone: " + line);
+                    logger.warn("Unknown zone [" + command.zone + "]: " + line);
                     continue;
                 }
 
-                String cardName = matchCommand.group(3);
-                Integer amount = Integer.parseInt(matchCommand.group(4));
+                List<CardInfo> cards = null;
+                if (command.cardSet.isEmpty()) {
+                    // by name
+                    cards = CardRepository.instance.findCards(command.cardName);
+                } else {
+                    // by name and set
+                    cards = CardRepository.instance.findCards(new CardCriteria().setCodes(command.cardSet).name(command.cardName));
+                }
 
-                List<CardInfo> cards = CardRepository.instance.findCards(cardName);
                 if (cards.isEmpty()) {
-                    if ("token".equalsIgnoreCase(zone)) {
-                        // eg: token:Human:HippoToken:1
-                        Class<?> c = Class.forName("mage.game.permanent.token." + cardName);
-                        Constructor<?> cons = c.getConstructor();
-                        Object token = cons.newInstance();
-                        if (token != null && token instanceof mage.game.permanent.token.Token) {
-                            ((mage.game.permanent.token.Token) token).putOntoBattlefield(amount, game, null, player.getId(), false, false);
-                            continue;
-                        }
-                    } else if ("emblem".equalsIgnoreCase(zone)) {
-                        // eg: emblem:Human:ElspethSunsChampionEmblem:1
-                        Class<?> c = Class.forName("mage.game.command.emblems." + cardName);
-                        Constructor<?> cons = c.getConstructor();
-                        Object emblem = cons.newInstance();
-                        if (emblem != null && emblem instanceof mage.game.command.Emblem) {
-                            ((mage.game.command.Emblem) emblem).setControllerId(player.getId());
-                            game.addEmblem((mage.game.command.Emblem) emblem, null, player.getId());
-                            continue;
-                        }
-                    }
-                    logger.warn("Unknown card [" + cardName + "]: " + line);
+                    logger.warn("Unknown card [" + command.cardName + "]: " + line);
                     continue;
                 }
 
                 Set<Card> cardsToLoad = new HashSet<>();
-                for (int i = 0; i < amount; i++) {
+                for (int i = 0; i < command.Amount; i++) {
                     CardInfo cardInfo = cards.get(RandomUtil.nextInt(cards.size()));
                     Card card = cardInfo != null ? cardInfo.getCard() : null;
                     if (card != null) {

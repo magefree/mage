@@ -61,7 +61,7 @@ public class CabalInterrogator extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // {X}{B}, {tap}: Target player reveals X cards from his or her hand and you choose one of them. That player discards that card.
+        // {X}{B}, {tap}: Target player reveals X cards from their hand and you choose one of them. That player discards that card.
         // Activate this ability only any time you could cast a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new CabalInterrogatorEffect(), new ManaCostsImpl("{X}{B}"));
         ability.addCost(new TapSourceCost());
@@ -83,7 +83,7 @@ class CabalInterrogatorEffect extends OneShotEffect {
 
     public CabalInterrogatorEffect() {
         super(Outcome.Discard);
-        this.staticText = "Target player reveals X cards from his or her hand and you choose one of them. That player discards that card";
+        this.staticText = "Target player reveals X cards from their hand and you choose one of them. That player discards that card";
     }
 
     public CabalInterrogatorEffect(final CabalInterrogatorEffect effect) {

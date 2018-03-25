@@ -70,7 +70,7 @@ public class IncendiaryCommand extends CardImpl {
         mode.getEffects().add(new DestroyTargetEffect());
         mode.getTargets().add(new TargetNonBasicLandPermanent());
         this.getSpellAbility().getModes().addMode(mode);
-        // or each player discards all the cards in his or her hand, then draws that many cards.
+        // or each player discards all the cards in their hand, then draws that many cards.
         mode = new Mode();
         mode.getEffects().add(new IncendiaryCommandDrawEffect());
         this.getSpellAbility().getModes().addMode(mode);
@@ -91,7 +91,7 @@ class IncendiaryCommandDrawEffect extends OneShotEffect {
 
     public IncendiaryCommandDrawEffect() {
         super(Outcome.Detriment);
-        this.staticText = "each player discards all the cards in his or her hand, then draws that many cards";
+        this.staticText = "each player discards all the cards in their hand, then draws that many cards";
     }
 
     public IncendiaryCommandDrawEffect(final IncendiaryCommandDrawEffect effect) {

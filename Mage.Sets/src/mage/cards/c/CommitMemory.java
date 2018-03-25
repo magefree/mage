@@ -71,7 +71,7 @@ public class CommitMemory extends SplitCard {
 
         // Memory
         // Aftermath
-        // Each player shuffles his or her hand and graveyard into his or her library, then draws seven cards.
+        // Each player shuffles their hand and graveyard into their library, then draws seven cards.
         ((CardImpl) (getRightHalfCard())).addAbility(new AftermathAbility().setRuleAtTheTop(true));
         getRightHalfCard().getSpellAbility().addEffect(new MemoryEffect());
         Effect effect = new DrawCardAllEffect(7);
@@ -153,7 +153,7 @@ class MemoryEffect extends OneShotEffect {
 
     public MemoryEffect() {
         super(Outcome.Neutral);
-        staticText = "Each player shuffles his or her hand and graveyard into his or her library";
+        staticText = "Each player shuffles their hand and graveyard into their library";
     }
 
     public MemoryEffect(final MemoryEffect effect) {

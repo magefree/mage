@@ -45,7 +45,6 @@ import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
-
 /**
  *
  * @author LevelX2
@@ -59,14 +58,13 @@ public class SavagePunch extends CardImpl {
     }
 
     public SavagePunch(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{G}");
 
         // <i>Ferocious</i> - The creature you control gets +2/+2 until end of turn before it fights if you control a creature with power 4 or greater.
         Effect effect = new ConditionalContinuousEffect(
-                new BoostTargetEffect(2,2,Duration.EndOfTurn),
+                new BoostTargetEffect(2, 2, Duration.EndOfTurn),
                 new LockedInCondition(FerociousCondition.instance),
                 "<i>Ferocious</i> &mdash; The creature you control gets +2/+2 until end of turn before it fights if you control a creature with power 4 or greater");
-        effect.setApplyEffectsAfter();
         this.getSpellAbility().addEffect(effect);
 
         // Target creature you control fights target creature you don't control.

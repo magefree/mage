@@ -73,7 +73,7 @@ public class EmrakulTheAeonsTorn extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(new ProtectionAbility(filter));
         this.addAbility(new AnnihilatorAbility(6));
-        // When Emrakul is put into a graveyard from anywhere, its owner shuffles his or her graveyard into his or her library.
+        // When Emrakul is put into a graveyard from anywhere, its owner shuffles their graveyard into their library.
         this.addAbility(new PutIntoGraveFromAnywhereSourceTriggeredAbility(new ShuffleIntoLibraryGraveOfSourceOwnerEffect(), false));
     }
 

@@ -59,11 +59,11 @@ public class MyrServitor extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // At the beginning of your upkeep, if Myr Servitor is on the battlefield, each player returns all cards named Myr Servitor from his or her graveyard to the battlefield.
+        // At the beginning of your upkeep, if Myr Servitor is on the battlefield, each player returns all cards named Myr Servitor from their graveyard to the battlefield.
         this.addAbility(new ConditionalTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(new MyrServitorReturnEffect(), TargetController.YOU, false),
                 SourceOnBattlefieldCondition.instance,
-                "At the beginning of your upkeep, if {this} is on the battlefield, each player returns all cards named Myr Servitor from his or her graveyard to the battlefield"
+                "At the beginning of your upkeep, if {this} is on the battlefield, each player returns all cards named Myr Servitor from their graveyard to the battlefield"
         ));
 
     }
@@ -88,7 +88,7 @@ class MyrServitorReturnEffect extends OneShotEffect {
 
     public MyrServitorReturnEffect() {
         super(Outcome.PutCardInPlay);
-        this.staticText = "if {this} is on the battlefield, each player returns all cards named Myr Servitor from his or her graveyard to the battlefield";
+        this.staticText = "if {this} is on the battlefield, each player returns all cards named Myr Servitor from their graveyard to the battlefield";
     }
 
     public MyrServitorReturnEffect(final MyrServitorReturnEffect effect) {

@@ -1,6 +1,5 @@
 package mage;
 
-import static junit.framework.TestCase.assertFalse;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.ManaType;
 import mage.filter.FilterMana;
@@ -11,7 +10,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import java.util.Objects;
 
 /**
  * Custom unit tests for {link Mana}.

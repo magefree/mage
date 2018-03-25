@@ -54,7 +54,7 @@ public class Viseling extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // At the beginning of each opponent's upkeep, Viseling deals X damage to that player, where X is the number of cards in his or her hand minus 4.
+        // At the beginning of each opponent's upkeep, Viseling deals X damage to that player, where X is the number of cards in their hand minus 4.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ViselingEffect(), TargetController.OPPONENT, false));
 
     }
@@ -73,7 +73,7 @@ class ViselingEffect extends OneShotEffect {
 
     public ViselingEffect() {
         super(Outcome.Damage);
-        this.staticText = "{source} deals X damage to that player, where X is the number of cards in his or her hand minus 4";
+        this.staticText = "{source} deals X damage to that player, where X is the number of cards in their hand minus 4";
     }
 
     public ViselingEffect(final ViselingEffect effect) {

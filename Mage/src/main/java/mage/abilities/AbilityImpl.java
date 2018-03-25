@@ -27,10 +27,6 @@
  */
 package mage.abilities;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.UUID;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.Mana;
@@ -63,6 +59,11 @@ import mage.util.ThreadLocalStringBuilder;
 import mage.watchers.Watcher;
 import org.apache.log4j.Logger;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.UUID;
+
 /**
  * @author BetaSteward_at_googlemail.com
  */
@@ -70,7 +71,6 @@ public abstract class AbilityImpl implements Ability {
 
     private static final Logger logger = Logger.getLogger(AbilityImpl.class);
     private static final ThreadLocalStringBuilder threadLocalBuilder = new ThreadLocalStringBuilder(100);
-    private static final List<Watcher> emptyWatchers = new ArrayList<>();
     private static final List<Ability> emptyAbilities = new ArrayList<>();
 
     protected UUID id;
@@ -95,7 +95,7 @@ public abstract class AbilityImpl implements Ability {
     protected boolean worksFaceDown = false;
     protected MageObject sourceObject;
     protected int sourceObjectZoneChangeCounter;
-    protected List<Watcher> watchers = null;
+    protected List<Watcher> watchers = new ArrayList<>();
     protected List<Ability> subAbilities = null;
     protected boolean canFizzle = true;
     protected TargetAdjustment targetAdjustment = TargetAdjustment.NONE;
@@ -125,12 +125,10 @@ public abstract class AbilityImpl implements Ability {
         this.manaCostsToPay = ability.manaCostsToPay.copy();
         this.costs = ability.costs.copy();
         this.optionalCosts = ability.optionalCosts.copy();
-        if (ability.watchers != null) {
-            this.watchers = new ArrayList<>();
-            for (Watcher watcher : ability.watchers) {
-                watchers.add(watcher.copy());
-            }
+        for (Watcher watcher : ability.watchers) {
+            watchers.add(watcher.copy());
         }
+
         if (ability.subAbilities != null) {
             this.subAbilities = new ArrayList<>();
             for (Ability subAbility : ability.subAbilities) {
@@ -220,10 +218,8 @@ public abstract class AbilityImpl implements Ability {
                  * too late Example:
                  * {@link org.mage.test.cards.replacement.DryadMilitantTest#testDiesByDestroy testDiesByDestroy}
                  */
-                if (effect.applyEffectsAfter()) {
-                    game.applyEffects();
-                    game.getState().getTriggers().checkStateTriggers(game);
-                }
+                game.applyEffects();
+                game.getState().getTriggers().checkStateTriggers(game);
             }
         }
         return result;
@@ -254,7 +250,7 @@ public abstract class AbilityImpl implements Ability {
 
         /* 20130201 - 601.2b
          * If the player wishes to splice any cards onto the spell (see rule 702.45), he
-         * or she reveals those cards in his or her hand.
+         * or she reveals those cards in their hand.
          */
         if (this.abilityType == AbilityType.SPELL) {
             game.getContinuousEffects().applySpliceEffects(this, game);
@@ -317,7 +313,7 @@ public abstract class AbilityImpl implements Ability {
         for (UUID modeId : this.getModes().getSelectedModes()) {
             this.getModes().setActiveMode(modeId);
             //20121001 - 601.2c
-            // 601.2c The player announces his or her choice of an appropriate player, object, or zone for
+            // 601.2c The player announces their choice of an appropriate player, object, or zone for
             // each target the spell requires. A spell may require some targets only if an alternative or
             // additional cost (such as a buyback or kicker cost), or a particular mode, was chosen for it;
             // otherwise, the spell is cast as though it did not require those targets. If the spell has a
@@ -625,11 +621,10 @@ public abstract class AbilityImpl implements Ability {
     @Override
     public void setControllerId(UUID controllerId) {
         this.controllerId = controllerId;
-        if (watchers != null) {
             for (Watcher watcher : watchers) {
                 watcher.setControllerId(controllerId);
             }
-        }
+
         if (subAbilities != null) {
             for (Ability subAbility : subAbilities) {
                 subAbility.setControllerId(controllerId);
@@ -654,11 +649,10 @@ public abstract class AbilityImpl implements Ability {
                 subAbility.setSourceId(sourceId);
             }
         }
-        if (watchers != null) {
             for (Watcher watcher : watchers) {
                 watcher.setSourceId(sourceId);
             }
-        }
+
     }
 
     @Override
@@ -720,18 +714,12 @@ public abstract class AbilityImpl implements Ability {
 
     @Override
     public List<Watcher> getWatchers() {
-        if (watchers != null) {
-            return watchers;
-        } else {
-            return emptyWatchers;
-        }
+        return watchers;
     }
 
     @Override
     public void addWatcher(Watcher watcher) {
-        if (watchers == null) {
-            watchers = new ArrayList<>();
-        }
+
         watcher.setSourceId(this.sourceId);
         watcher.setControllerId(this.controllerId);
         watchers.add(watcher);

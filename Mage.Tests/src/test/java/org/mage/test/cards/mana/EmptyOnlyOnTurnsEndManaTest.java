@@ -41,7 +41,7 @@ public class EmptyOnlyOnTurnsEndManaTest extends CardTestPlayerBase {
 
     @Test
     public void testDaxosOfMeletis() {
-        // At the beginning of each player's upkeep, that player adds {G}{G}{G} to his or her mana pool. Until end of turn, this mana doesn't empty from that player's mana pool as steps and phases end.
+        // At the beginning of each player's upkeep, that player adds {G}{G}{G} to their mana pool. Until end of turn, this mana doesn't empty from that player's mana pool as steps and phases end.
         addCard(Zone.BATTLEFIELD, playerA, "Shizuko, Caller of Autumn", 1);
         addCard(Zone.HAND, playerA, "Birds of Paradise", 1);
 

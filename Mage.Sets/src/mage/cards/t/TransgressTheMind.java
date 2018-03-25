@@ -28,7 +28,6 @@
 package mage.cards.t;
 
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ExileCardYouChooseTargetOpponentEffect;
 import mage.abilities.keyword.DevoidAbility;
@@ -53,16 +52,14 @@ public class TransgressTheMind extends CardImpl {
     }
 
     public TransgressTheMind(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}");
 
         // Devoid
-        Ability ability = new DevoidAbility(this.color);
-        ability.setRuleAtTheTop(true);
-        this.addAbility(ability);
+        this.addAbility(new DevoidAbility(this.color));
 
-        // Target player reveals his or her hand. You may choose a card from it with converted mana cost 3 or greater and exile that card.
+        // Target player reveals their hand. You may choose a card from it with converted mana cost 3 or greater and exile that card.
         Effect effect = new ExileCardYouChooseTargetOpponentEffect(filter);
-        effect.setText("Target player reveals his or her hand. You may choose a card from it with converted mana cost 3 or greater and exile that card");
+        effect.setText("Target player reveals their hand. You may choose a card from it with converted mana cost 3 or greater and exile that card");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetPlayer());
     }

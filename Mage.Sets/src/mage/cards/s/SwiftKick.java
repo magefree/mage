@@ -49,23 +49,22 @@ import mage.target.common.TargetCreaturePermanent;
 public class SwiftKick extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you don't control");
+
     static {
         filter.add(new ControllerPredicate(TargetController.NOT_YOU));
     }
 
     public SwiftKick(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{R}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{R}");
 
         // Target creature you control gets +1/+0 until end of turn. It fights target creature you don't control.
-        Effect effect = new BoostTargetEffect(1,0,Duration.EndOfTurn);
-        effect.setApplyEffectsAfter();
+        Effect effect = new BoostTargetEffect(1, 0, Duration.EndOfTurn);
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
-        
+
         effect = new FightTargetsEffect();
         effect.setText("It fights target creature you don't control");
-        this.getSpellAbility().addEffect(effect);        
+        this.getSpellAbility().addEffect(effect);
         Target target = new TargetCreaturePermanent(filter);
         this.getSpellAbility().addTarget(target);
 

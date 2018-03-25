@@ -57,7 +57,7 @@ import mage.target.common.TargetCardInYourGraveyard;
 public class MizzixsMastery extends CardImpl {
 
     public MizzixsMastery(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}");
 
         // Exile target card that's an instant or sorcery from your graveyard. For each card exiled this way, copy it, and you may cast the copy without paying its mana cost. Exile Mizzix's Mastery.
         this.getSpellAbility().addEffect(new MizzixsMasteryEffect());
@@ -144,7 +144,7 @@ class MizzixsMasteryOverloadEffect extends OneShotEffect {
                         copiedCards.add(game.copyCard(card, source, source.getControllerId()));
                     }
                     boolean continueCasting = true;
-                    while (continueCasting) {
+                    while (continueCasting && controller.isInGame()) {
                         TargetCard targetCard = new TargetCard(0, 1, Zone.EXILED, new FilterCard("copied card to cast without paying its mana cost?"));
                         targetCard.setNotTarget(true);
                         if (controller.choose(outcome, copiedCards, targetCard, game)) {

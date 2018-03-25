@@ -49,17 +49,16 @@ import mage.target.common.TargetCreaturePermanent;
 public class HuntTheWeak extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you don't control");
+
     static {
         filter.add(new ControllerPredicate(TargetController.NOT_YOU));
     }
 
     public HuntTheWeak(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{G}");
 
         // Put a +1/+1 counter on target creature you control. Then that creature fights target creature you don't control.
         Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance());
-        effect.setApplyEffectsAfter();
         this.getSpellAbility().addEffect(effect);
         effect = new FightTargetsEffect();
         effect.setText("Then that creature fights target creature you don't control");

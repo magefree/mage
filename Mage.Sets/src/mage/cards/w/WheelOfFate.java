@@ -49,7 +49,7 @@ public class WheelOfFate extends CardImpl {
 
         // Suspend 4-{1}{R}
         this.addAbility(new SuspendAbility(4, new ManaCostsImpl("{1}{R}"), this));
-        // Each player discards his or her hand, then draws seven cards.
+        // Each player discards their hand, then draws seven cards.
         this.getSpellAbility().addEffect(new DiscardHandAllEffect());
         this.getSpellAbility().addEffect(new DrawCardAllEffect(7).setText(", then draws seven cards"));
     }

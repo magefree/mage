@@ -27,6 +27,7 @@
  */
 package mage.cards.s;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effect;
@@ -37,8 +38,6 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
-import java.util.UUID;
-
 /**
  *
  * @author LevelX2
@@ -46,11 +45,10 @@ import java.util.UUID;
 public class StartYourEngines extends CardImpl {
 
     public StartYourEngines(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}");
 
         // Vehicles you control becomes artifact creatures until end of turn.
         Effect effect = new StartYourEnginesEffect();
-        effect.setApplyEffectsAfter(); // needed to recognize vehicle as creatures by the next effect
         this.getSpellAbility().addEffect(effect);
 
         // Creatures you control get +2/+0 until end of turn.

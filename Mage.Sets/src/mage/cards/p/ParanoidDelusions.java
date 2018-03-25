@@ -45,7 +45,7 @@ public class ParanoidDelusions extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{U}{B}");
 
 
-        // Target player puts the top three cards of his or her library into his or her graveyard.
+        // Target player puts the top three cards of their library into their graveyard.
         this.getSpellAbility().addEffect(new PutLibraryIntoGraveTargetEffect(3));
         this.getSpellAbility().addTarget(new TargetPlayer());
         // Cipher

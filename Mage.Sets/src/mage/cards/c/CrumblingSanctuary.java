@@ -50,7 +50,7 @@ public class CrumblingSanctuary extends CardImpl {
     public CrumblingSanctuary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
 
-        // If damage would be dealt to a player, that player exiles that many cards from the top of his or her library instead.
+        // If damage would be dealt to a player, that player exiles that many cards from the top of their library instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CrumblingSanctuaryEffect()));
     }
 
@@ -68,7 +68,7 @@ class CrumblingSanctuaryEffect extends PreventionEffectImpl {
 
     public CrumblingSanctuaryEffect() {
         super(Duration.WhileOnBattlefield, Integer.MAX_VALUE, false, false);
-        staticText = "If damage would be dealt to a player, that player exiles that many cards from the top of his or her library instead.";
+        staticText = "If damage would be dealt to a player, that player exiles that many cards from the top of their library instead.";
     }
 
     public CrumblingSanctuaryEffect(final CrumblingSanctuaryEffect effect) {

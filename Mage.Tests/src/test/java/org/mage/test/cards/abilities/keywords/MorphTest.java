@@ -28,9 +28,12 @@
 package org.mage.test.cards.abilities.keywords;
 
 import mage.cards.Card;
+import mage.constants.CardType;
 import mage.constants.PhaseStep;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.Filter;
+import mage.game.permanent.Permanent;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
@@ -600,7 +603,7 @@ public class MorphTest extends CardTestPlayerBase {
 
         // Flying, haste
         // Other creatures you control have haste.
-        // Whenever an opponent casts a creature or planeswalker spell with the same name as a card in his or her graveyard, that player loses 10 life.
+        // Whenever an opponent casts a creature or planeswalker spell with the same name as a card in their graveyard, that player loses 10 life.
         addCard(Zone.BATTLEFIELD, playerB, "Dragonlord Kolaghan", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akroma, Angel of Fury");
@@ -748,7 +751,7 @@ public class MorphTest extends CardTestPlayerBase {
     public void testVesuvanShapeshifter() {
 
         // Morph {5}{U}{U}
-        // When Brine Elemental is turned face up, each opponent skips his or her next untap step.
+        // When Brine Elemental is turned face up, each opponent skips their next untap step.
         addCard(Zone.HAND, playerA, "Brine Elemental"); // Creature {4}{U}{U} 5/4
         addCard(Zone.BATTLEFIELD, playerA, "Island", 6);
 
@@ -852,5 +855,85 @@ public class MorphTest extends CardTestPlayerBase {
 
         assertTappedCount("Island", true, 3);
 
+    }
+
+    /**
+     * If you have Endless Whispers in play and a morph creature dies, it should
+     * be returned to play face up at end of turn under the control of an
+     * opponent.
+     */
+    @Test
+    public void testMorphEndlessWhispers() {
+        /*
+         Quicksilver Dragon {4}{U}{U}
+         Creature - Dragon
+         5/5
+         Flying
+         {U}: If target spell has only one target and that target is Quicksilver Dragon, change that spell's target to another creature.
+         Morph {4}{U}
+         */
+        addCard(Zone.HAND, playerA, "Quicksilver Dragon");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
+
+        // Each creature has "When this creature dies, choose target opponent. That player puts this card from its owner's graveyard
+        // onto the battlefield under their control at the beginning of the next end step."
+        addCard(Zone.BATTLEFIELD, playerA, "Endless Whispers", 1);
+
+        addCard(Zone.HAND, playerB, "Lightning Bolt");
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Quicksilver Dragon");
+        setChoice(playerA, "Yes"); // cast it face down as 2/2 creature
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", "");
+
+        setStopAt(2, PhaseStep.UPKEEP);
+        execute();
+
+        assertGraveyardCount(playerB, "Lightning Bolt", 1);
+        assertGraveyardCount(playerA, "Quicksilver Dragon", 0);
+
+        assertPermanentCount(playerA, "Quicksilver Dragon", 0);
+        assertPermanentCount(playerB, "Quicksilver Dragon", 1);
+
+    }
+
+    /**
+     * A creature with Morph/Megamorph cast normally will properly include its
+     * printed creature subtypes: for example Akroma, Angel of Fury is a
+     * Legendary Creature - Angel. However, if Akroma is cast face down and then
+     * turned face up via its morph ability, it has no subtypes: it's just a
+     * Legendary Creature and creature type-specific effects (Radiant Destiny,
+     * etc) don't apply to it. Haven't tested whether this also applies to
+     * external effects turning the creature face up, like Skirk Alarmist.
+     */
+    @Test
+    public void testSubTypesAfterTurningFaceUp() {
+        /*
+         Akroma, Angel of Fury {5}{R}{R}{R}
+         Creature - Legendary Angel
+         6/6
+        // Akroma, Angel of Fury can't be countered.
+        // Flying
+        // Trample
+        // protection from white and from blue
+        // {R}: Akroma, Angel of Fury gets +1/+0 until end of turn.
+        // Morph {3}{R}{R}{R}
+         */
+        addCard(Zone.HAND, playerA, "Akroma, Angel of Fury");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 6);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akroma, Angel of Fury");
+        setChoice(playerA, "Yes"); // cast it face down as 2/2 creature
+
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}{R}{R}{R}: Turn this face-down permanent face up.");
+
+        setStopAt(3, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Akroma, Angel of Fury", 1);
+        assertType("Akroma, Angel of Fury", CardType.CREATURE, SubType.ANGEL);
+        Permanent akroma = getPermanent("Akroma, Angel of Fury");
+        Assert.assertTrue("Akroma has to be red", akroma.getColor(currentGame).isRed());
     }
 }

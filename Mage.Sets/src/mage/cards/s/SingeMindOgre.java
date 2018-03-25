@@ -58,7 +58,7 @@ public class SingeMindOgre extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
-        // When Singe-Mind Ogre enters the battlefield, target player reveals a card at random from his or her hand, then loses life equal to that card's converted mana cost.
+        // When Singe-Mind Ogre enters the battlefield, target player reveals a card at random from their hand, then loses life equal to that card's converted mana cost.
         Ability ability = new EntersBattlefieldTriggeredAbility(new SingeMindOgreEffect(), false);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
@@ -79,7 +79,7 @@ class SingeMindOgreEffect extends OneShotEffect {
 
     public SingeMindOgreEffect() {
         super(Outcome.LoseLife);
-        this.staticText = "target player reveals a card at random from his or her hand, then loses life equal to that card's converted mana cost";
+        this.staticText = "target player reveals a card at random from their hand, then loses life equal to that card's converted mana cost";
     }
 
     public SingeMindOgreEffect(final SingeMindOgreEffect effect) {

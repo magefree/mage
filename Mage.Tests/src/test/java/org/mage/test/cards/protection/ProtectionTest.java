@@ -48,7 +48,7 @@ public class ProtectionTest extends CardTestPlayerBase {
         // Emrakul, the Aeons Torn can't be countered.
         // When you cast Emrakul, take an extra turn after this one.
         // Flying, protection from colored spells, annihilator 6
-        // When Emrakul is put into a graveyard from anywhere, its owner shuffles his or her graveyard into his or her library.
+        // When Emrakul is put into a graveyard from anywhere, its owner shuffles their graveyard into their library.
         addCard(Zone.BATTLEFIELD, playerB, "Emrakul, the Aeons Torn");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Murderous Cut", "Emrakul, the Aeons Torn");

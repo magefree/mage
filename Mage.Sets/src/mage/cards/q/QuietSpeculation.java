@@ -60,7 +60,7 @@ public class QuietSpeculation extends CardImpl {
     public QuietSpeculation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{U}");
 
-        // Search target player's library for up to three cards with flashback and put them into that player's graveyard. Then the player shuffles his or her library.
+        // Search target player's library for up to three cards with flashback and put them into that player's graveyard. Then the player shuffles their library.
         TargetCardInLibrary target = new TargetCardInLibrary(0, 3, filterCard);
         this.getSpellAbility().addEffect(new SearchLibraryPutInGraveEffect(target));
         this.getSpellAbility().addTarget(new TargetPlayer());
@@ -80,7 +80,7 @@ class SearchLibraryPutInGraveEffect extends SearchEffect {
 
     public SearchLibraryPutInGraveEffect(TargetCardInLibrary target) {
         super(target, Outcome.Neutral);
-        staticText = "Search target player's library for up to three cards with flashback and put them into that player's graveyard. Then the player shuffles his or her library.";
+        staticText = "Search target player's library for up to three cards with flashback and put them into that player's graveyard. Then the player shuffles their library.";
     }
 
     public SearchLibraryPutInGraveEffect(final SearchLibraryPutInGraveEffect effect) {

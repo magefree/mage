@@ -30,6 +30,7 @@
 package mage.abilities.effects.common;
 
 import static java.lang.Integer.min;
+import java.util.Locale;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -291,7 +292,7 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
 
                 sb.append(" of them into your ");
             }
-            sb.append(targetPickedCards.toString().toLowerCase());
+            sb.append(targetPickedCards.toString().toLowerCase(Locale.ENGLISH));
 
             if (targetZoneLookedCards == Zone.LIBRARY) {
                 sb.append(". Put the rest ");

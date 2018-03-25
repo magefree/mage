@@ -165,6 +165,7 @@ public class Visions extends ExpansionSet {
         cards.add(new SetCardInfo("Sisay's Ring", 154, Rarity.COMMON, mage.cards.s.SisaysRing.class));
         cards.add(new SetCardInfo("Snake Basket", 155, Rarity.RARE, mage.cards.s.SnakeBasket.class));
         cards.add(new SetCardInfo("Solfatara", 93, Rarity.COMMON, mage.cards.s.Solfatara.class));
+        cards.add(new SetCardInfo("Song of Blood", 94, Rarity.COMMON, mage.cards.s.SongOfBlood.class));
         cards.add(new SetCardInfo("Spider Climb", 70, Rarity.COMMON, mage.cards.s.SpiderClimb.class));
         cards.add(new SetCardInfo("Spitting Drake", 95, Rarity.UNCOMMON, mage.cards.s.SpittingDrake.class));
         cards.add(new SetCardInfo("Squandered Resources", 137, Rarity.RARE, mage.cards.s.SquanderedResources.class));

@@ -61,7 +61,7 @@ public class IndomitableCreativity extends CardImpl {
     public IndomitableCreativity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{R}{R}{R}");
 
-        // Destroy X target artifacts and/or creatures. For each permanent destroyed this way, its controller reveals cards from the top of his or her library until an artifact or creature card is revealed and exiles that card. Those players put the exiled card onto the battlefield, then shuffle their libraries.
+        // Destroy X target artifacts and/or creatures. For each permanent destroyed this way, its controller reveals cards from the top of their library until an artifact or creature card is revealed and exiles that card. Those players put the exiled card onto the battlefield, then shuffle their libraries.
         getSpellAbility().addEffect(new IndomitableCreativityEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
@@ -89,7 +89,7 @@ class IndomitableCreativityEffect extends OneShotEffect {
 
     public IndomitableCreativityEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Destroy X target artifacts and/or creatures. For each permanent destroyed this way, its controller reveals cards from the top of his or her library until an artifact or creature card is revealed and exiles that card. Those players put the exiled card onto the battlefield, then shuffle their libraries";
+        this.staticText = "Destroy X target artifacts and/or creatures. For each permanent destroyed this way, its controller reveals cards from the top of their library until an artifact or creature card is revealed and exiles that card. Those players put the exiled card onto the battlefield, then shuffle their libraries";
     }
 
     public IndomitableCreativityEffect(final IndomitableCreativityEffect effect) {

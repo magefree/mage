@@ -53,7 +53,7 @@ public class Mindcrank extends CardImpl {
     public Mindcrank(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
-        // Whenever an opponent loses life, that player puts that many cards from the top of his or her library into his or her graveyard. 
+        // Whenever an opponent loses life, that player puts that many cards from the top of their library into their graveyard.
         // (Damage dealt by sources without infect causes loss of life.)
         this.addAbility(new MindcrankTriggeredAbility());
     }
@@ -103,7 +103,7 @@ class MindcrankTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever an opponent loses life, that player puts that many cards from the top of his or her library into his or her graveyard.";
+        return "Whenever an opponent loses life, that player puts that many cards from the top of their library into their graveyard.";
     }
 }
 

@@ -27,6 +27,7 @@
  */
 package mage.abilities.common;
 
+import java.util.Locale;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.TargetController;
@@ -141,9 +142,9 @@ public class BeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImpl {
         switch (targetController) {
             case YOU:
                 if (this.optional) {
-                    if (sb.substring(0, 6).toLowerCase().equals("target")) {
+                    if (sb.substring(0, 6).toLowerCase(Locale.ENGLISH).equals("target")) {
                         sb.insert(0, "you may have ");
-                    } else if (!sb.substring(0, 4).toLowerCase().equals("you ")) {
+                    } else if (!sb.substring(0, 4).toLowerCase(Locale.ENGLISH).equals("you ")) {
                         sb.insert(0, "you may ");
                     }
                 }

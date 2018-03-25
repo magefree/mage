@@ -71,7 +71,7 @@ public class LilianaOfTheVeil extends CardImpl {
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
 
-        // -6: Separate all permanents target player controls into two piles. That player sacrifices all permanents in the pile of his or her choice.
+        // -6: Separate all permanents target player controls into two piles. That player sacrifices all permanents in the pile of their choice.
         ability = new LoyaltyAbility(new LilianaOfTheVeilEffect(), -6);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
@@ -91,7 +91,7 @@ class LilianaOfTheVeilEffect extends OneShotEffect {
 
     public LilianaOfTheVeilEffect() {
         super(Outcome.Sacrifice);
-        this.staticText = "Separate all permanents target player controls into two piles. That player sacrifices all permanents in the pile of his or her choice";
+        this.staticText = "Separate all permanents target player controls into two piles. That player sacrifices all permanents in the pile of their choice";
     }
 
     public LilianaOfTheVeilEffect(final LilianaOfTheVeilEffect effect) {

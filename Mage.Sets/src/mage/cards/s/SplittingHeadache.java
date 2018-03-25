@@ -54,7 +54,7 @@ public class SplittingHeadache extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}");
 
 
-        // Choose one - Target player discards two cards; or target player reveals his or her hand, you choose a card from it, then that player discards that card.
+        // Choose one - Target player discards two cards; or target player reveals their hand, you choose a card from it, then that player discards that card.
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new DiscardTargetEffect(2));
         Mode mode = new Mode();
@@ -78,7 +78,7 @@ class SplittingHeadacheEffect extends OneShotEffect {
 
     public SplittingHeadacheEffect() {
         super(Outcome.Discard);
-        this.staticText = "Target player reveals his or her hand, you choose a card from it, then that player discards that card.";
+        this.staticText = "Target player reveals their hand, you choose a card from it, then that player discards that card.";
     }
 
     public SplittingHeadacheEffect(final SplittingHeadacheEffect effect) {

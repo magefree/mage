@@ -59,7 +59,7 @@ public class SenTriplets extends CardImpl {
         this.toughness = new MageInt(3);
 
         // At the beginning of your upkeep, choose target opponent. 
-        // This turn, that player can't cast spells or activate abilities and plays with his or her hand revealed. 
+        // This turn, that player can't cast spells or activate abilities and plays with their hand revealed.
         // You may play cards from that player's hand this turn.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new SenTripletsRuleModifyingEffect(), TargetController.YOU, false, false);
         ability.addEffect(new SenTripletsOpponentRevealsHandEffect());
@@ -125,7 +125,7 @@ class SenTripletsOpponentRevealsHandEffect extends ContinuousEffectImpl {
 
     public SenTripletsOpponentRevealsHandEffect() {
         super(Duration.EndOfTurn, Layer.PlayerEffects, SubLayer.NA, Outcome.Detriment);
-        staticText = "and plays with his or her hand revealed";
+        staticText = "and plays with their hand revealed";
     }
 
     public SenTripletsOpponentRevealsHandEffect(final SenTripletsOpponentRevealsHandEffect effect) {

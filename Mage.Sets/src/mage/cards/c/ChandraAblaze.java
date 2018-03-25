@@ -73,7 +73,7 @@ public class ChandraAblaze extends CardImpl {
         ability.addEffect(new ChandraAblazeEffect2());
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
-        // -2: Each player discards his or her hand, then draws three cards.
+        // -2: Each player discards their hand, then draws three cards.
         ability = new LoyaltyAbility(new DiscardHandAllEffect(), -2);
         Effect effect = new DrawCardAllEffect(3);
         effect.setText(", then draws three cards");

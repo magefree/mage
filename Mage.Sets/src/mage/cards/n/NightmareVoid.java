@@ -46,7 +46,7 @@ public class NightmareVoid extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}");
 
 
-        // Target player reveals his or her hand. You choose a card from it. That player discards that card.
+        // Target player reveals their hand. You choose a card from it. That player discards that card.
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(TargetController.ANY));
         // Dredge 2

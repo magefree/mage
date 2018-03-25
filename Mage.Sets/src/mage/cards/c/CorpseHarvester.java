@@ -41,8 +41,7 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
@@ -54,15 +53,9 @@ import mage.target.common.TargetControlledPermanent;
  * @author jeffwadsworth
  */
 public class CorpseHarvester extends CardImpl {
-    
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("creature");
-    
-    static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
-    }
 
     public CorpseHarvester(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.WIZARD);
 
@@ -72,7 +65,7 @@ public class CorpseHarvester extends CardImpl {
         // {1}{B}, {tap}, Sacrifice a creature: Search your library for a Zombie card and a Swamp card, reveal them, and put them into your hand. Then shuffle your library.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CorpseHarvesterEffect(), new ManaCostsImpl("{1}{B}"));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         this.addAbility(ability);
     }
 
@@ -87,7 +80,7 @@ public class CorpseHarvester extends CardImpl {
 }
 
 class CorpseHarvesterEffect extends OneShotEffect {
-    
+
     CorpseHarvesterEffect() {
         super(Outcome.DrawCard);
         staticText = "Search your library for a Zombie card and a Swamp card, reveal them, and put them into your hand. Then shuffle your library";

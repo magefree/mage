@@ -3,6 +3,7 @@ package org.mage.plugins.card.dl.sources;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import org.mage.plugins.card.images.CardDownloadData;
@@ -280,7 +281,7 @@ public enum ScryfallImageSource implements CardImageSource {
         if (setNameReplacement.containsKey(setName)) {
             setName = setNameReplacement.get(setName);
         }
-        return setName.toLowerCase();
+        return setName.toLowerCase(Locale.ENGLISH);
     }
 
     private static final Map<String, String> setNameReplacement = new HashMap<String, String>() {

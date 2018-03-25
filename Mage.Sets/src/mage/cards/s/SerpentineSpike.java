@@ -52,12 +52,11 @@ import mage.watchers.common.DamagedByWatcher;
 public class SerpentineSpike extends CardImpl {
 
     public SerpentineSpike(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{R}{R}");
 
         // Devoid
-        Ability ability = new DevoidAbility(this.color);
-        ability.setRuleAtTheTop(true);
-        this.addAbility(ability);
+        this.addAbility(new DevoidAbility(this.color));
+
         // Serpentine Spike deals 2 damage to target creature, 3 damage to another target creature, and 4 damage to a third target creature. If a creature dealt damage this way would die this turn, exile it instead.
         this.getSpellAbility().addEffect(new SerpentineSpikeEffect());
 

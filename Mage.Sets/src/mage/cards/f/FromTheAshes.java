@@ -56,7 +56,7 @@ public class FromTheAshes extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}");
 
 
-        // Destroy all nonbasic lands. For each land destroyed this way, its controller may search his or her library for a basic land card and put it onto the battlefield. Then each player who searched his or her library this way shuffles it.
+        // Destroy all nonbasic lands. For each land destroyed this way, its controller may search their library for a basic land card and put it onto the battlefield. Then each player who searched their library this way shuffles it.
         this.getSpellAbility().addEffect(new FromTheAshesEffect());
     }
 
@@ -76,7 +76,7 @@ class FromTheAshesEffect extends OneShotEffect {
 
     public FromTheAshesEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Destroy all nonbasic lands. For each land destroyed this way, its controller may search his or her library for a basic land card and put it onto the battlefield. Then each player who searched his or her library this way shuffles it";
+        this.staticText = "Destroy all nonbasic lands. For each land destroyed this way, its controller may search their library for a basic land card and put it onto the battlefield. Then each player who searched their library this way shuffles it";
     }
 
     public FromTheAshesEffect(final FromTheAshesEffect effect) {

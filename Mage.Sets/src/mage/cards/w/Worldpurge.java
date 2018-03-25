@@ -56,7 +56,7 @@ public class Worldpurge extends CardImpl {
     public Worldpurge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{W/U}{W/U}{W/U}{W/U}");
 
-        // Return all permanents to their owners' hands. Each player chooses up to seven cards in his or her hand, then shuffles the rest into his or her library. Empty all mana pools.
+        // Return all permanents to their owners' hands. Each player chooses up to seven cards in their hand, then shuffles the rest into their library. Empty all mana pools.
         this.getSpellAbility().addEffect(new WorldpurgeEffect());
 
     }
@@ -75,7 +75,7 @@ class WorldpurgeEffect extends OneShotEffect {
 
     public WorldpurgeEffect() {
         super(Outcome.Discard);
-        this.staticText = "Return all permanents to their owners' hands. Each player chooses up to seven cards in his or her hand, then shuffles the rest into his or her library. Empty all mana pools.";
+        this.staticText = "Return all permanents to their owners' hands. Each player chooses up to seven cards in their hand, then shuffles the rest into their library. Empty all mana pools.";
     }
 
     public WorldpurgeEffect(final WorldpurgeEffect effect) {

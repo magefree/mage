@@ -43,7 +43,7 @@ public class ShuffleIntoLibraryGraveOfSourceOwnerEffect extends OneShotEffect {
 
     public ShuffleIntoLibraryGraveOfSourceOwnerEffect() {
         super(Outcome.Benefit);
-        staticText = "its owner shuffles his or her graveyard into his or her library";
+        staticText = "its owner shuffles their graveyard into their library";
     }
 
     public ShuffleIntoLibraryGraveOfSourceOwnerEffect(final ShuffleIntoLibraryGraveOfSourceOwnerEffect effect) {

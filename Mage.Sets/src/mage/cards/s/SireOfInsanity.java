@@ -58,7 +58,7 @@ public class SireOfInsanity extends CardImpl {
         this.power = new MageInt(6);
         this.toughness = new MageInt(4);
 
-        // At the beginning of each end step, each player discards his or her hand.
+        // At the beginning of each end step, each player discards their hand.
         this.addAbility(new OnEventTriggeredAbility(GameEvent.EventType.END_TURN_STEP_PRE, "beginning of each end step", true, new SireOfInsanityEffect()));
 
     }
@@ -77,7 +77,7 @@ public class SireOfInsanity extends CardImpl {
 class SireOfInsanityEffect extends OneShotEffect {
     SireOfInsanityEffect() {
         super(Outcome.Discard);
-        staticText = "each player discards his or her hand";
+        staticText = "each player discards their hand";
     }
 
     SireOfInsanityEffect(final SireOfInsanityEffect effect) {

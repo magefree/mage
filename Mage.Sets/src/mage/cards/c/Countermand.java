@@ -51,7 +51,7 @@ public class Countermand extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}{U}");
 
 
-        // Counter target spell. Its controller puts the top four cards of his or her library into his or her graveyard.
+        // Counter target spell. Its controller puts the top four cards of their library into their graveyard.
         this.getSpellAbility().addTarget(new TargetSpell(StaticFilters.FILTER_SPELL));
         this.getSpellAbility().addEffect(new CountermandEffect());
     }
@@ -69,7 +69,7 @@ class CountermandEffect extends OneShotEffect {
 
     public CountermandEffect() {
         super(Outcome.Detriment);
-        staticText = "Counter target spell. Its controller puts the top four cards of his or her library into his or her graveyard";
+        staticText = "Counter target spell. Its controller puts the top four cards of their library into their graveyard";
     }
 
     public CountermandEffect(final CountermandEffect effect) {

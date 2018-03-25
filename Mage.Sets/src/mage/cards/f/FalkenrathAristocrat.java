@@ -42,6 +42,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -53,7 +54,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public class FalkenrathAristocrat extends CardImpl {
 
     public FalkenrathAristocrat(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{R}");
         this.subtype.add(SubType.VAMPIRE);
 
         this.power = new MageInt(4);
@@ -65,7 +66,7 @@ public class FalkenrathAristocrat extends CardImpl {
         // If the sacrificed creature was a Human, put a +1/+1 counter on Falkenrath Aristocrat.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn),
-                new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
+                new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         ability.addEffect(new FalkenrathAristocratEffect());
         this.addAbility(ability);
     }
@@ -104,7 +105,7 @@ class FalkenrathAristocratEffect extends OneShotEffect {
                 Permanent sourceCreature = game.getPermanent(source.getSourceId());
                 if (sacrificedCreature.hasSubtype(SubType.HUMAN, game) && sourceCreature != null) {
                     sourceCreature.addCounters(CounterType.P1P1.createInstance(), source, game);
-                    return true;
+                    break;
                 }
             }
         }
