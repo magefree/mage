@@ -34,7 +34,7 @@ import mage.abilities.keyword.BuybackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterControlledLandPermanent;
+import mage.filter.StaticFilters;
 import mage.game.permanent.token.PegasusToken;
 import mage.target.common.TargetControlledPermanent;
 
@@ -48,7 +48,7 @@ public class PegasusStampede extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{W}");
 
         // Buyback-Sacrifice a land.
-        this.addAbility(new BuybackAbility(new SacrificeTargetCost(new TargetControlledPermanent(1,1, new FilterControlledLandPermanent(), true))));
+        this.addAbility(new BuybackAbility(new SacrificeTargetCost(new TargetControlledPermanent(1, 1, StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT, true))));
 
         // Create a 1/1 white Pegasus creature token with flying.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new PegasusToken()));

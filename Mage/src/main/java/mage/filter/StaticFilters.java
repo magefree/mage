@@ -236,6 +236,13 @@ public final class StaticFilters {
     static {
         FILTER_BASIC_LAND_CARD.setLockedFilter(true);
     }
+      
+    // Used for sacrifice targets that don't need the "you control" text
+    public static final FilterControlledLandPermanent FILTER_CONTROLLED_LAND_SHORT_TEXT = new FilterControlledLandPermanent("a land");
+
+    static {
+        FILTER_CONTROLLED_LAND_SHORT_TEXT.setLockedFilter(true);
+    }
 
     public static final FilterCreaturePermanent FILTER_PERMANENT_CREATURE = new FilterCreaturePermanent();
 

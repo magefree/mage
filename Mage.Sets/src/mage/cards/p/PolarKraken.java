@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.common.FilterControlledLandPermanent;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -58,7 +58,7 @@ public class PolarKraken extends CardImpl {
         // Polar Kraken enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
         // Cumulative upkeep-Sacrifice a land.
-        this.addAbility(new CumulativeUpkeepAbility(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent()))));
+        this.addAbility(new CumulativeUpkeepAbility(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT))));
     }
 
     public PolarKraken(final PolarKraken card) {
