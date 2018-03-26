@@ -59,7 +59,7 @@ public class ShimmeringGlasskite extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // Whenever Shimmering Glasskite becomes the target of a spell or ability for the first time in a turn, counter that spell or ability.
+        // Whenever Shimmering Glasskite becomes the target of a spell or ability for the first time each turn, counter that spell or ability.
         this.addAbility(new ShimmeringGlasskiteAbility());
 
     }
@@ -112,7 +112,7 @@ class ShimmeringGlasskiteAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever {this} becomes the target of a spell or ability for the first time in a turn, counter that spell or ability.";
+        return "Whenever {this} becomes the target of a spell or ability for the first time each turn, counter that spell or ability.";
     }
 
 }
