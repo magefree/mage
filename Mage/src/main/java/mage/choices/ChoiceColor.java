@@ -32,8 +32,6 @@ import mage.Mana;
 import mage.ObjectColor;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  *

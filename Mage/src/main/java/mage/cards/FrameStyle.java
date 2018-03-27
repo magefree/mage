@@ -15,7 +15,7 @@ public enum FrameStyle {
      */
     M15_NORMAL(BorderType.M15, false),
     /**
-     * Battle for Zendkiar full art basic lands
+     * Battle for Zendikar full art basic lands
      */
     BFZ_FULL_ART_BASIC(BorderType.M15, true),
     /**
@@ -23,7 +23,7 @@ public enum FrameStyle {
      */
     KLD_INVENTION(BorderType.M15, false),
     /**
-     * Zenkikar full art lands
+     * Zendikar full art lands
      */
     ZEN_FULL_ART_BASIC(BorderType.MOD, true),
     /**
@@ -37,8 +37,14 @@ public enum FrameStyle {
     /**
      * Unglued full art lands
      */
-    UGL_FULL_ART_BASIC(BorderType.SPC, true);
+    UGL_FULL_ART_BASIC(BorderType.SPC, true),    
+    /**
+     * Unstable full art lands
+     */
+    UST_FULL_ART_BASIC(BorderType.SPC, true);
 
+    
+    
     /**
      * General type of card
      */

@@ -42,7 +42,7 @@ import mage.constants.CardType;
 import mage.constants.PhaseStep;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -65,7 +65,7 @@ public class BlackCarriage extends CardImpl {
 
         // Sacrifice a creature: Untap Black Carriage. Activate this ability only during your upkeep.
         this.addAbility(new ConditionalActivatedAbility(Zone.BATTLEFIELD,
-                new UntapSourceEffect(), new SacrificeTargetCost(new TargetControlledCreaturePermanent(new FilterControlledCreaturePermanent("a creature"))),
+                new UntapSourceEffect(), new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)),
                 new IsStepCondition(PhaseStep.UPKEEP), "Sacrifice a creature: Untap {this}. Activate this ability only during your upkeep."));
     }
 

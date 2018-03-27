@@ -28,7 +28,6 @@
 package mage.cards.g;
 
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.keyword.DevoidAbility;
@@ -46,12 +45,11 @@ import mage.target.targetpointer.SecondTargetPointer;
 public class GripOfDesolation extends CardImpl {
 
     public GripOfDesolation(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{4}{B}{B}");
 
         // Devoid
-        Ability ability = new DevoidAbility(this.color);
-        ability.setRuleAtTheTop(true);
-        this.addAbility(ability);
+        this.addAbility(new DevoidAbility(this.color));
+
         // Exile target creature and target land.
         this.getSpellAbility().addEffect(new ExileTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

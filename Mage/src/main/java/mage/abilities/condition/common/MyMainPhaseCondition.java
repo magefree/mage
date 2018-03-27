@@ -28,7 +28,6 @@
 package mage.abilities.condition.common;
 
 import java.util.EnumSet;
-import java.util.HashSet;
 import java.util.Set;
 
 import mage.constants.TurnPhase;

@@ -45,6 +45,7 @@ import mage.client.constants.Constants.ResourceSymbolSize;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.ImageHelper;
 import mage.client.util.gui.BufferedImageBuilder;
+import mage.utils.StreamUtils;
 import org.apache.batik.dom.svg.SVGDOMImplementation;
 import org.apache.batik.transcoder.TranscoderException;
 import org.apache.batik.transcoder.TranscoderInput;
@@ -253,10 +254,15 @@ public final class ManaSymbols {
                 + "color-rendering: optimizeQuality;"
                 + "image-rendering: optimizeQuality;"
                 + "}";
+
         File cssFile = File.createTempFile("batik-default-override-", ".css");
-        FileWriter w = new FileWriter(cssFile);
-        w.write(css);
-        w.close();
+        FileWriter w = null;
+        try {
+            w = new FileWriter(cssFile);
+            w.write(css);
+        } finally {
+            StreamUtils.closeQuietly(w);
+        }
 
         TranscodingHints transcoderHints = new TranscodingHints();
 
@@ -288,7 +294,6 @@ public final class ManaSymbols {
 
         try {
             TranscoderInput input = new TranscoderInput(new FileInputStream(svgFile));
-
             ImageTranscoder t = new ImageTranscoder() {
 
                 @Override
@@ -558,8 +563,8 @@ public final class ManaSymbols {
     public static void draw(Graphics g, String manaCost, int x, int y, int symbolWidth, Color symbolsTextColor, int symbolMarginX) {
         if (!manaImages.containsKey(symbolWidth)) {
             loadSymbolImages(symbolWidth);
-        }
-
+        }       
+        
         // TODO: replace with jlabel render (look at table rendere)?
 
         /*
@@ -609,12 +614,16 @@ public final class ManaSymbols {
             return;
         }
 
-        manaCost = manaCost.replace("\\", "");
+        manaCost = manaCost.replace("\\", ""); 
         manaCost = UI.getDisplayManaCost(manaCost);
         StringTokenizer tok = new StringTokenizer(manaCost, " ");
         while (tok.hasMoreTokens()) {
             String symbol = tok.nextToken();
             Image image = sizedSymbols.get(symbol);
+            if (image == null && symbol != null && symbol.length() == 2) {
+                String symbol2 = "" + symbol.charAt(1) + symbol.charAt(0);
+                image = sizedSymbols.get(symbol2);
+            }
 
             if (image == null) {
                 // TEXT draw

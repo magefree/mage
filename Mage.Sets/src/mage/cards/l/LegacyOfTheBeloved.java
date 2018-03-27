@@ -39,6 +39,7 @@ import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
@@ -54,10 +55,10 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public class LegacyOfTheBeloved extends CardImpl {
 
     public LegacyOfTheBeloved(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{G}{G}");
 
         // As an additional cost to cast Legacy of the Beloved, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
 
         // Search you library for up to two creatures cards that each have a lower converted mana cost that sacrificied creature's converted mana cost, reveal them and put them onto the battlefield, then shuffle you library.
         this.getSpellAbility().addEffect(new LegacyOfTheBelovedEffect());

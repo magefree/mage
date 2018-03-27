@@ -28,7 +28,6 @@
 package mage.cards.b;
 
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -58,12 +57,11 @@ public class BrutalExpulsion extends CardImpl {
     }
 
     public BrutalExpulsion(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}{R}");
 
         // Devoid
-        Ability ability = new DevoidAbility(this.color);
-        ability.setRuleAtTheTop(true);
-        this.addAbility(ability);
+        this.addAbility(new DevoidAbility(this.color));
+
         // Choose one or both
         this.getSpellAbility().getModes().setMinModes(1);
         this.getSpellAbility().getModes().setMaxModes(2);

@@ -1,12 +1,11 @@
 package mage.client.util;
 
 import com.google.common.collect.ImmutableSet;
+import java.util.Arrays;
+import java.util.Set;
 import mage.client.MageFrame;
 import mage.client.preference.MagePreferences;
 import mage.view.ChatMessage;
-
-import java.util.Arrays;
-import java.util.Set;
 
 public final class IgnoreList {
 
@@ -15,8 +14,8 @@ public final class IgnoreList {
             + "<br/>\\unignore [username] - remove a username from your ignore list on this server.</font>";
 
     public static final int MAX_IGNORE_LIST_SIZE = 50;
-    public static Set<ChatMessage.MessageType> IGNORED_MESSAGE_TYPES =
-            ImmutableSet.of(ChatMessage.MessageType.TALK,
+    public static Set<ChatMessage.MessageType> IGNORED_MESSAGE_TYPES
+            = ImmutableSet.of(ChatMessage.MessageType.TALK,
                     ChatMessage.MessageType.WHISPER_FROM);
 
     public static String usage() {
@@ -45,22 +44,13 @@ public final class IgnoreList {
         }
 
         if (userIsIgnored(serverAddress, user)) {
-            return new StringBuilder()
-                    .append(user)
-                    .append(" is already on your ignore list on ")
-                    .append(serverAddress)
-                    .toString();
+            return user + " is already on your ignore list on " + serverAddress;
         }
 
         MagePreferences.addIgnoredUser(serverAddress, user);
         updateTablesTable();
 
-        return new StringBuilder()
-                .append("Added ")
-                .append(user)
-                .append(" to your ignore list on ")
-                .append(serverAddress)
-                .toString();
+        return "Added " + user + " to your ignore list on " + serverAddress;
     }
 
     private static void updateTablesTable() {
@@ -76,19 +66,9 @@ public final class IgnoreList {
         }
         if (MagePreferences.removeIgnoredUser(serverAddress, user)) {
             updateTablesTable();
-            return new StringBuilder()
-                    .append("Removed ")
-                    .append(user)
-                    .append(" from your ignore list on ")
-                    .append(serverAddress)
-                    .toString();
+            return "Removed " + user + " from your ignore list on " + serverAddress;
         } else {
-            return new StringBuilder()
-                    .append("No such user \"")
-                    .append(user)
-                    .append("\" on your ignore list on ")
-                    .append(serverAddress)
-                    .toString();
+            return "No such user \"" + user + "\" on your ignore list on " + serverAddress;
         }
     }
 

@@ -57,39 +57,37 @@ public class TemurCharm extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you don't control");
     private static final FilterCreaturePermanent filterCantBlock = new FilterCreaturePermanent("Creatures with power 3 or less");
-    
+
     static {
         filter.add(new ControllerPredicate(TargetController.NOT_YOU));
         filterCantBlock.add(new PowerPredicate(ComparisonType.FEWER_THAN, 4));
     }
-    
-    public TemurCharm(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}{U}{R}");
 
+    public TemurCharm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{G}{U}{R}");
 
         // Choose one -
         // <strong>�</strong> Target creature you control gets +1/+1 until end of turn. That creature fights target creature you don't control.
-        Effect effect = new BoostTargetEffect(1,1,Duration.EndOfTurn);
-        effect.setApplyEffectsAfter();
+        Effect effect = new BoostTargetEffect(1, 1, Duration.EndOfTurn);
         this.getSpellAbility().addEffect(effect);
         effect = new FightTargetsEffect();
         effect.setText("That creature fights target creature you don't control");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         Target target = new TargetCreaturePermanent(filter);
-        this.getSpellAbility().addTarget(target);        
-        
+        this.getSpellAbility().addTarget(target);
+
         // <strong>�</strong> Counter target spell unless its controller pays {3}.
         Mode mode = new Mode();
         mode.getEffects().add(new CounterUnlessPaysEffect(new GenericManaCost(3)));
         mode.getTargets().add(new TargetSpell());
         this.getSpellAbility().addMode(mode);
-        
+
         // <strong>�</strong> Creatures with power 3 or less can't block this turn.
         mode = new Mode();
         mode.getEffects().add(new CantBlockAllEffect(filterCantBlock, Duration.EndOfTurn));
         this.getSpellAbility().addMode(mode);
-        
+
     }
 
     public TemurCharm(final TemurCharm card) {

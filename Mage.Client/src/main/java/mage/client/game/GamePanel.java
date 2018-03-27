@@ -52,7 +52,6 @@ import mage.client.util.gui.ArrowBuilder;
 import mage.client.util.gui.MageDialogState;
 import mage.constants.*;
 import mage.game.events.PlayerQueryEvent;
-import mage.game.turn.Phase;
 import mage.view.*;
 import org.apache.log4j.Logger;
 import org.mage.card.arcane.CardPanel;

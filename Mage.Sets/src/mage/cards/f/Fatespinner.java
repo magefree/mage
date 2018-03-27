@@ -28,6 +28,7 @@
 package mage.cards.f;
 
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
@@ -108,7 +109,7 @@ class FatespinnerChooseEffect extends OneShotEffect {
                 return false;
             }
             String chosenPhase = choice.getChoice();
-            game.informPlayers(player.getLogName() + " has chosen to skip " + chosenPhase.toLowerCase() + '.');
+            game.informPlayers(player.getLogName() + " has chosen to skip " + chosenPhase.toLowerCase(Locale.ENGLISH) + '.');
             game.addEffect(new FatespinnerSkipEffect(chosenPhase), source);
             return true;
         }

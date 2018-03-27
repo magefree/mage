@@ -27,7 +27,6 @@
  */
 package mage.view;
 
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -65,8 +64,8 @@ public class GameEndView implements Serializable {
         // set result message
         int winner = 0;
         Player you = null;
-        for (Player player: state.getPlayers().values()) {
-            PlayerView playerView  = new PlayerView(player, state, game, playerId, null);
+        for (Player player : state.getPlayers().values()) {
+            PlayerView playerView = new PlayerView(player, state, game, playerId, null);
             if (playerView.getPlayerId().equals(playerId)) {
                 clientPlayer = playerView;
                 you = player;
@@ -79,11 +78,11 @@ public class GameEndView implements Serializable {
         }
         if (you != null) {
             if (you.hasWon()) {
-                gameInfo = new StringBuilder("You won the game on turn ").append(game.getTurnNum()).append('.').toString();
+                gameInfo = "You won the game on turn " + game.getTurnNum() + ".";
             } else if (winner > 0) {
-                gameInfo = new StringBuilder("You lost the game on turn ").append(game.getTurnNum()).append('.').toString();
+                gameInfo = "You lost the game on turn " + game.getTurnNum() + ".";
             } else {
-                gameInfo = new StringBuilder("Game is a draw on Turn ").append(game.getTurnNum()).append('.').toString();
+                gameInfo = "Game is a draw on Turn " + game.getTurnNum() + ".";
             }
         }
         matchView = new MatchView(table);
@@ -92,7 +91,7 @@ public class GameEndView implements Serializable {
         MatchPlayer matchWinner = null;
         winsNeeded = match.getOptions().getWinsNeeded();
         StringBuilder additonalText = new StringBuilder();
-        for (MatchPlayer matchPlayer: match.getPlayers()) {
+        for (MatchPlayer matchPlayer : match.getPlayers()) {
             if (matchPlayer.getPlayer().equals(you)) {
                 wins = matchPlayer.getWins();
             }
@@ -127,7 +126,7 @@ public class GameEndView implements Serializable {
                 matchInfo = new StringBuilder(matchWinner.getName()).append(" won the match!").toString();
             }
         } else {
-            matchInfo = new StringBuilder("You need ").append(winsNeeded - wins == 1 ? "one more win ":winsNeeded - wins + " more wins ").append("to win the match.").toString();
+            matchInfo = new StringBuilder("You need ").append(winsNeeded - wins == 1 ? "one more win " : winsNeeded - wins + " more wins ").append("to win the match.").toString();
         }
         additionalInfo = additonalText.toString();
 

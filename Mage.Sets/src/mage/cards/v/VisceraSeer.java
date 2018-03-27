@@ -37,6 +37,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -53,7 +54,8 @@ public class VisceraSeer extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         // Sacrifice a creature: Scry 1. (To scry 1, look at the top card of your library, then you may put that card on the bottom of your library.)
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScryEffect(1), new SacrificeTargetCost(new TargetControlledCreaturePermanent())));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScryEffect(1),
+                new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT))));
     }
 
     public VisceraSeer(final VisceraSeer card) {

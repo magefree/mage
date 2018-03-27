@@ -38,7 +38,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public class NantukoHusk extends CardImpl {
 
     public NantukoHusk(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.INSECT);
 
@@ -57,7 +57,7 @@ public class NantukoHusk extends CardImpl {
 
         // Sacrifice a creature: Nantuko Husk gets +2/+2 until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.EndOfTurn),
-                new SacrificeTargetCost(new TargetControlledCreaturePermanent(new FilterControlledCreaturePermanent("a creature")))));
+                new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT))));
     }
 
     public NantukoHusk(final NantukoHusk card) {

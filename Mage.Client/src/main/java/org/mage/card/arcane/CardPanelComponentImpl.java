@@ -20,8 +20,6 @@ import org.mage.plugins.card.utils.impl.ImageManagerImpl;
 import mage.client.constants.Constants;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Map;

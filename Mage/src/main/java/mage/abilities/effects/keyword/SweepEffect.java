@@ -70,7 +70,7 @@ public class SweepEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            FilterPermanent filter = new FilterControlledLandPermanent(new StringBuilder("any number of ").append(sweepSubtype).append("s you control").toString());
+            FilterPermanent filter = new FilterControlledLandPermanent("any number of " + sweepSubtype + "s you control");
             filter.add(new SubtypePredicate(sweepSubtype));
             Target target = new TargetPermanent(0, Integer.MAX_VALUE, filter, true);
             if (controller.chooseTarget(outcome, target, source, game)) {

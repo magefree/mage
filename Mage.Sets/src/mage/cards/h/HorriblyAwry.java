@@ -28,7 +28,6 @@
 package mage.cards.h;
 
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.effects.common.CounterTargetWithReplacementEffect;
 import mage.abilities.keyword.DevoidAbility;
 import mage.cards.CardImpl;
@@ -53,12 +52,11 @@ public class HorriblyAwry extends CardImpl {
     }
 
     public HorriblyAwry(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
 
-        // Devoid
-        Ability ability = new DevoidAbility(this.color);
-        ability.setRuleAtTheTop(true);
-        this.addAbility(ability);
+        // Devoid (This card has no color.)
+        this.addAbility(new DevoidAbility(this.color));
+
         // Counter target creature spell with converted mana cost 4 or less. If that spell is countered this way, exile it instead of putting it into its owner's graveyard.
         this.getSpellAbility().addEffect(new CounterTargetWithReplacementEffect(Zone.EXILED));
         this.getSpellAbility().addTarget(new TargetSpell(filter));

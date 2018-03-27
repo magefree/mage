@@ -32,7 +32,6 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;

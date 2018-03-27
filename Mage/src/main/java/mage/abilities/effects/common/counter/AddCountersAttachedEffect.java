@@ -27,6 +27,7 @@
  */
 package mage.abilities.effects.common.counter;
 
+import java.util.Locale;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
@@ -41,7 +42,6 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-
 public class AddCountersAttachedEffect extends OneShotEffect {
 
     private Counter counter;
@@ -99,7 +99,7 @@ public class AddCountersAttachedEffect extends OneShotEffect {
         } else {
             sb.append("a ");
         }
-        sb.append(counter.getName().toLowerCase()).append(" counter on ");
+        sb.append(counter.getName().toLowerCase(Locale.ENGLISH)).append(" counter on ");
         sb.append(textEnchanted);
         if (!amount.getMessage().isEmpty()) {
             sb.append(" for each ").append(amount.getMessage());

@@ -29,6 +29,7 @@ package mage.abilities.effects.common.continuous;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Locale;
 import java.util.UUID;
 import mage.MageObject;
 import mage.MageObjectReference;
@@ -180,12 +181,12 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl {
         }
         sb.append(filter.getMessage());
         if (duration == Duration.WhileOnBattlefield) {
-            if (filter.getMessage().toLowerCase().startsWith("each")) {
+            if (filter.getMessage().toLowerCase(Locale.ENGLISH).startsWith("each")) {
                 sb.append(" has ");
             } else {
                 sb.append(" have ");
             }
-        } else if (filter.getMessage().toLowerCase().startsWith("each")) {
+        } else if (filter.getMessage().toLowerCase(Locale.ENGLISH).startsWith("each")) {
             sb.append(" gains ");
         } else {
             sb.append(" gain ");

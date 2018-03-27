@@ -54,12 +54,11 @@ import mage.target.common.TargetOpponent;
 public class GraveBirthing extends CardImpl {
 
     public GraveBirthing(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{B}");
 
         // Devoid
-        Ability ability = new DevoidAbility(this.color);
-        ability.setRuleAtTheTop(true);
-        this.addAbility(ability);
+        this.addAbility(new DevoidAbility(this.color));
+
         // Target opponent exiles a card from his or her graveyard. You create a 1/1 colorless Eldrazi Scion creature token. It has "Sacrifice this creature: Add {C} to your mana pool."
         this.getSpellAbility().addEffect(new GraveBirthingEffect());
         this.getSpellAbility().addTarget(new TargetOpponent());

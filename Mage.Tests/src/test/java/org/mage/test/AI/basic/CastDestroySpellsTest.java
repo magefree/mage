@@ -65,4 +65,26 @@ public class CastDestroySpellsTest extends CardTestPlayerBaseAI {
         assertGraveyardCount(playerB, "Silvercoat Lion", 1);
     }
 
+    /**
+     * Cast Divine Verdict if the opponent attacks
+     */
+    @Test
+    public void testCastSpellTargingAttacker() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
+
+        // Destroy target attacking or blocking creature.
+        addCard(Zone.HAND, playerA, "Divine Verdict"); // INSTANT {3}{W}
+
+        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion");
+
+        attack(2, playerB, "Silvercoat Lion");
+
+        setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertLife(playerA, 20);
+
+        assertGraveyardCount(playerA, "Divine Verdict", 1);
+        assertGraveyardCount(playerB, "Silvercoat Lion", 1);
+    }
 }

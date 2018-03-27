@@ -39,6 +39,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetOpponent;
 
@@ -48,7 +49,7 @@ import mage.target.common.TargetOpponent;
 public class CorpseTraders extends CardImpl {
 
     public CorpseTraders(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ROGUE);
 
@@ -58,7 +59,7 @@ public class CorpseTraders extends CardImpl {
         // {2}{B}, Sacrifice a creature: Target opponent reveals his or her hand. You choose a card from it. That player discards that card. Activate this ability only any time you could cast a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new DiscardCardYouChooseTargetEffect(), new ManaCostsImpl("{2}{B}"));
         ability.addTarget(new TargetOpponent());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         this.addAbility(ability);
     }
 

@@ -132,7 +132,7 @@ class SylvanLibraryEffect extends OneShotEffect {
                             }
                         }
                     }
-                    controller.putCardsOnTopOfLibrary(cardsPutBack, game, source, applyEffectsAfter);
+                    controller.putCardsOnTopOfLibrary(cardsPutBack, game, source, false);
                 }
             }
             return true;

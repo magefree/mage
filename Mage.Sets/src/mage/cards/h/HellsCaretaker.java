@@ -42,6 +42,7 @@ import mage.constants.PhaseStep;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -62,7 +63,7 @@ public class HellsCaretaker extends CardImpl {
                 new ReturnFromGraveyardToBattlefieldTargetEffect(),
                 new TapSourceCost(),
                 new IsStepCondition(PhaseStep.UPKEEP), null);
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.addAbility(ability);
     }

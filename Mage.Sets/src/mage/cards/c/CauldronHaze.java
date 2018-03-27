@@ -41,17 +41,16 @@ import mage.target.common.TargetCreaturePermanent;
  * @author jeffwadsworth
  */
 public class CauldronHaze extends CardImpl {
-    
-    private String rule = "Choose any number of target creatures. Each of those creatures gains persist until end of turn";
+
+    private final String rule = "Choose any number of target creatures. Each of those creatures gains persist until end of turn";
 
     public CauldronHaze(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W/B}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W/B}");
 
         // Choose any number of target creatures. Each of those creatures gains persist until end of turn.
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(new PersistAbility(), Duration.EndOfTurn, rule));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, Integer.MAX_VALUE));
-        
+
     }
 
     public CauldronHaze(final CauldronHaze card) {

@@ -30,6 +30,7 @@ public enum SubType {
     AURA("Aura", SubTypeSet.EnchantmentType),
     CARTOUCHE("Cartouche", SubTypeSet.EnchantmentType),
     CURSE("Curse", SubTypeSet.EnchantmentType),
+    SAGA("Saga", SubTypeSet.EnchantmentType),
     SHRINE("Shrine", SubTypeSet.EnchantmentType),
     // 205.3g: Artifacts have their own unique set of subtypes; these subtypes are called artifact types.
     CLUE("Clue", SubTypeSet.ArtifactType),

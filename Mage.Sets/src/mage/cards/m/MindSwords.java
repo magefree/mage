@@ -44,6 +44,7 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -69,7 +70,7 @@ public class MindSwords extends CardImpl {
 
         // If you control a Swamp, you may sacrifice a creature rather than pay Mind Swords's mana cost.
         this.addAbility(new AlternativeCostSourceAbility(
-                new SacrificeTargetCost(new TargetControlledCreaturePermanent()),
+                new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)),
                 new PermanentsOnTheBattlefieldCondition(filterSwamp), null
         ));
 

@@ -29,7 +29,6 @@ package mage.game.combat;
 
 import java.io.Serializable;
 import java.util.*;
-import java.util.stream.Collectors;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.RequirementEffect;

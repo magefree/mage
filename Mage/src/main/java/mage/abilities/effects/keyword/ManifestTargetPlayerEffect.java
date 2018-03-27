@@ -36,7 +36,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureEffect;
 import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureEffect.FaceDownType;
 import mage.cards.Card;
-import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;

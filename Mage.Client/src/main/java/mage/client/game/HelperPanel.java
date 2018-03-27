@@ -45,7 +45,6 @@ import javax.swing.SwingUtilities;
 import javax.swing.ToolTipManager;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
 
 import mage.client.SessionHandler;
 import mage.client.components.MageTextArea;

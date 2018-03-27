@@ -72,11 +72,13 @@ public class Odyssey extends ExpansionSet {
         cards.add(new SetCardInfo("Aven Cloudchaser", 7, Rarity.COMMON, mage.cards.a.AvenCloudchaser.class));
         cards.add(new SetCardInfo("Aven Fisher", 63, Rarity.COMMON, mage.cards.a.AvenFisher.class));
         cards.add(new SetCardInfo("Aven Flock", 8, Rarity.COMMON, mage.cards.a.AvenFlock.class));
+        cards.add(new SetCardInfo("Aven Shrine", 9, Rarity.RARE, mage.cards.a.AvenShrine.class));
         cards.add(new SetCardInfo("Aven Smokeweaver", 64, Rarity.UNCOMMON, mage.cards.a.AvenSmokeweaver.class));
         cards.add(new SetCardInfo("Aven Windreader", 65, Rarity.COMMON, mage.cards.a.AvenWindreader.class));
         cards.add(new SetCardInfo("Balancing Act", 10, Rarity.RARE, mage.cards.b.BalancingAct.class));
         cards.add(new SetCardInfo("Balshan Beguiler", 66, Rarity.UNCOMMON, mage.cards.b.BalshanBeguiler.class));
         cards.add(new SetCardInfo("Balshan Griffin", 67, Rarity.UNCOMMON, mage.cards.b.BalshanGriffin.class));
+        cards.add(new SetCardInfo("Bamboozle", 68, Rarity.UNCOMMON, mage.cards.b.Bamboozle.class));
         cards.add(new SetCardInfo("Barbarian Lunatic", 175, Rarity.COMMON, mage.cards.b.BarbarianLunatic.class));
         cards.add(new SetCardInfo("Barbarian Ring", 313, Rarity.UNCOMMON, mage.cards.b.BarbarianRing.class));
         cards.add(new SetCardInfo("Bash to Bits", 176, Rarity.UNCOMMON, mage.cards.b.BashToBits.class));
@@ -100,6 +102,7 @@ public class Odyssey extends ExpansionSet {
         cards.add(new SetCardInfo("Cantivore", 13, Rarity.RARE, mage.cards.c.Cantivore.class));
         cards.add(new SetCardInfo("Careful Study", 70, Rarity.COMMON, mage.cards.c.CarefulStudy.class));
         cards.add(new SetCardInfo("Cartographer", 232, Rarity.COMMON, mage.cards.c.Cartographer.class));
+        cards.add(new SetCardInfo("Catalyst Stone", 297, Rarity.RARE, mage.cards.c.CatalystStone.class));
         cards.add(new SetCardInfo("Caustic Tar", 122, Rarity.UNCOMMON, mage.cards.c.CausticTar.class));
         cards.add(new SetCardInfo("Cease-Fire", 14, Rarity.COMMON, mage.cards.c.CeaseFire.class));
         cards.add(new SetCardInfo("Centaur Garden", 316, Rarity.UNCOMMON, mage.cards.c.CentaurGarden.class));
@@ -351,6 +354,7 @@ public class Odyssey extends ExpansionSet {
         cards.add(new SetCardInfo("Syncopate", 103, Rarity.COMMON, mage.cards.s.Syncopate.class));
         cards.add(new SetCardInfo("Tainted Pact", 164, Rarity.RARE, mage.cards.t.TaintedPact.class));
         cards.add(new SetCardInfo("Tarnished Citadel", 329, Rarity.RARE, mage.cards.t.TarnishedCitadel.class));
+        cards.add(new SetCardInfo("Tattoo Ward", 54, Rarity.UNCOMMON, mage.cards.t.TattooWard.class));
         cards.add(new SetCardInfo("Terravore", 278, Rarity.RARE, mage.cards.t.Terravore.class));
         cards.add(new SetCardInfo("Testament of Faith", 55, Rarity.UNCOMMON, mage.cards.t.TestamentOfFaith.class));
         cards.add(new SetCardInfo("Thaumatog", 295, Rarity.UNCOMMON, mage.cards.t.Thaumatog.class));
@@ -371,6 +375,7 @@ public class Odyssey extends ExpansionSet {
         cards.add(new SetCardInfo("Unifying Theory", 112, Rarity.RARE, mage.cards.u.UnifyingTheory.class));
         cards.add(new SetCardInfo("Upheaval", 113, Rarity.RARE, mage.cards.u.Upheaval.class));
         cards.add(new SetCardInfo("Vampiric Dragon", 296, Rarity.RARE, mage.cards.v.VampiricDragon.class));
+        cards.add(new SetCardInfo("Verdant Succession", 280, Rarity.RARE, mage.cards.v.VerdantSuccession.class));
         cards.add(new SetCardInfo("Vivify", 281, Rarity.UNCOMMON, mage.cards.v.Vivify.class));
         cards.add(new SetCardInfo("Volcanic Spray", 226, Rarity.UNCOMMON, mage.cards.v.VolcanicSpray.class));
         cards.add(new SetCardInfo("Volley of Boulders", 227, Rarity.RARE, mage.cards.v.VolleyOfBoulders.class));

@@ -28,7 +28,6 @@
 package mage.cards.u;
 
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ExileTargetIfDiesEffect;
 import mage.abilities.effects.common.FightTargetsEffect;
@@ -59,9 +58,8 @@ public class UnnaturalAggression extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{G}");
 
         // Devoid
-        Ability ability = new DevoidAbility(this.color);
-        ability.setRuleAtTheTop(true);
-        this.addAbility(ability);
+        this.addAbility(new DevoidAbility(this.color));
+
         // Target creature you control fights target creature an opponent controls.
         this.getSpellAbility().addEffect(new FightTargetsEffect());
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());

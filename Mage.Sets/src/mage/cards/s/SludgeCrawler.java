@@ -29,7 +29,6 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
@@ -38,8 +37,8 @@ import mage.abilities.keyword.IngestAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 
 /**
@@ -49,16 +48,15 @@ import mage.constants.Zone;
 public class SludgeCrawler extends CardImpl {
 
     public SludgeCrawler(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}");
         this.subtype.add(SubType.ELDRAZI);
         this.subtype.add(SubType.DRONE);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
         // Devoid
-        Ability ability = new DevoidAbility(this.color);
-        ability.setRuleAtTheTop(true);
-        this.addAbility(ability);
+        this.addAbility(new DevoidAbility(this.color));
+
         // Ingest
         this.addAbility(new IngestAbility());
         // {2}: Sludge Crawler gets +1/+1 until end of turn.

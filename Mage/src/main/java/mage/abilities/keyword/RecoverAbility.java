@@ -35,7 +35,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSourceEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.cards.Card;
-import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;

@@ -4,7 +4,6 @@ import mage.abilities.Ability;
 import mage.abilities.EvasionAbility;
 import mage.abilities.MageSingleton;
 import mage.abilities.effects.RestrictionEffect;
-import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.permanent.Permanent;

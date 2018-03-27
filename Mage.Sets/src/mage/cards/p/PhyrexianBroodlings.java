@@ -40,6 +40,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -49,7 +50,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public class PhyrexianBroodlings extends CardImpl {
 
     public PhyrexianBroodlings(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
         this.subtype.add(SubType.MINION);
 
         this.power = new MageInt(2);
@@ -57,7 +58,7 @@ public class PhyrexianBroodlings extends CardImpl {
 
         // {1}, Sacrifice a creature: Put a +1/+1 counter on Phyrexian Broodlings.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)), new GenericManaCost(1));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         this.addAbility(ability);
     }
 

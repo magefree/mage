@@ -39,6 +39,7 @@ import mage.abilities.effects.common.continuous.BecomesCreatureAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.Token;
@@ -57,7 +58,7 @@ public class TheloniteDruid extends CardImpl {
     }
 
     public TheloniteDruid(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.CLERIC);
         this.subtype.add(SubType.DRUID);
@@ -71,7 +72,7 @@ public class TheloniteDruid extends CardImpl {
                 effect,
                 new ManaCostsImpl("{1}{G}"));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         this.addAbility(ability);
     }
 

@@ -33,6 +33,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -43,10 +44,10 @@ import mage.target.common.TargetCreaturePermanent;
 public class FieryConclusion extends CardImpl {
 
     public FieryConclusion(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R}");
 
         // As an additional cost to cast Fiery Conclusion, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         // Fiery Conclusion deals 5 damage to target creature.
         this.getSpellAbility().addEffect(new DamageTargetEffect(5));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

@@ -28,6 +28,7 @@
 package mage.client.util;
 
 import java.util.Comparator;
+import java.util.Locale;
 import mage.view.CardView;
 
 /**
@@ -99,7 +100,7 @@ public class CardViewEDHPowerLevelComparator implements Comparator<CardView> {
         boolean whenYouCast = false;
 
         for (String str : card.getRules()) {
-            String s = str.toLowerCase();
+            String s = str.toLowerCase(Locale.ENGLISH);
             annihilator |= s.contains("annihilator");
             anyNumberOfTarget |= s.contains("any number");
             buyback |= s.contains("buyback");
@@ -332,16 +333,16 @@ public class CardViewEDHPowerLevelComparator implements Comparator<CardView> {
         }
 
         if (card.getCardTypes().contains("Plainswalker")) {
-            if (card.getName().toLowerCase().equals("jace, the mind sculptor")) {
+            if (card.getName().toLowerCase(Locale.ENGLISH).equals("jace, the mind sculptor")) {
                 thisMaxPower = Math.max(thisMaxPower, 6);
             }
-            if (card.getName().toLowerCase().equals("ugin, the spirit dragon")) {
+            if (card.getName().toLowerCase(Locale.ENGLISH).equals("ugin, the spirit dragon")) {
                 thisMaxPower = Math.max(thisMaxPower, 5);
             }
             thisMaxPower = Math.max(thisMaxPower, 4);
         }
 
-        String cn = card.getName().toLowerCase();
+        String cn = card.getName().toLowerCase(Locale.ENGLISH);
         if (cn.equals("ancient tomb")
                 || cn.equals("anafenza, the foremost")
                 || cn.equals("arcum dagsson")

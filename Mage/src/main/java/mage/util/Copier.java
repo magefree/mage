@@ -50,36 +50,44 @@ public class Copier<T> {
 
     public T copy(T obj) {
         T copy = null;
+
+        FastByteArrayOutputStream fbos = null;
+        ObjectOutputStream out = null;
+        ObjectInputStream in = null;
         try {
-            FastByteArrayOutputStream fbos = new FastByteArrayOutputStream();
-            ObjectOutputStream out= new ObjectOutputStream(fbos);
+            fbos = new FastByteArrayOutputStream();
+            out = new ObjectOutputStream(fbos);
 
             // Write the object out to a byte array
             out.writeObject(obj);
             out.flush();
-            out.close();
 
             // Retrieve an input stream from the byte array and read
             // a copy of the object back in.
-            ObjectInputStream in = new CopierObjectInputStream(loader, fbos.getInputStream());
+            in = new CopierObjectInputStream(loader, fbos.getInputStream());
             copy = (T) in.readObject();
         }
         catch(IOException | ClassNotFoundException e) {
             e.printStackTrace();
+        } finally {
+            StreamUtils.closeQuietly(fbos);
+            StreamUtils.closeQuietly(out);
+            StreamUtils.closeQuietly(in);
         }
         return copy;
 
     }
 
     public byte[] copyCompressed(T obj) {
+        FastByteArrayOutputStream fbos = null;
+        ObjectOutputStream out = null;
         try {
-            FastByteArrayOutputStream fbos = new FastByteArrayOutputStream();
-            ObjectOutputStream out= new ObjectOutputStream(new GZIPOutputStream(fbos));
+            fbos = new FastByteArrayOutputStream();
+            out = new ObjectOutputStream(new GZIPOutputStream(fbos));
 
             // Write the object out to a byte array
             out.writeObject(obj);
             out.flush();
-            out.close();
 
             byte[] copy = new byte[fbos.getSize()];
             System.arraycopy(fbos.getByteArray(), 0, copy, 0, fbos.getSize());
@@ -87,6 +95,9 @@ public class Copier<T> {
         }
         catch(IOException e) {
             e.printStackTrace();
+        } finally {
+            StreamUtils.closeQuietly(fbos);
+            StreamUtils.closeQuietly(out);
         }
         return null;
     }

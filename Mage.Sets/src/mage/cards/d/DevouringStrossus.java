@@ -43,6 +43,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -53,7 +54,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public class DevouringStrossus extends CardImpl {
 
     public DevouringStrossus(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}{B}{B}");
         this.subtype.add(SubType.HORROR);
         this.power = new MageInt(9);
         this.toughness = new MageInt(9);
@@ -64,11 +65,11 @@ public class DevouringStrossus extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
         // At the beginning of your upkeep, sacrifice a creature.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new SacrificeEffect(new FilterControlledCreaturePermanent("creature"), 1, null),
-            TargetController.YOU, false);
+                TargetController.YOU, false);
         this.addAbility(ability);
         // Sacrifice a creature: Regenerate Devouring Strossus.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(),
-             new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, new FilterControlledCreaturePermanent("a creature"), true))));
+                new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT))));
     }
 
     public DevouringStrossus(final DevouringStrossus card) {

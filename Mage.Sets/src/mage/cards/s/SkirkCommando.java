@@ -41,6 +41,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -50,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class SkirkCommando extends CardImpl {
 
     public SkirkCommando(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
         this.subtype.add(SubType.GOBLIN);
 
         this.power = new MageInt(2);
@@ -87,9 +88,14 @@ class SkirkCommandoTriggeredAbility extends DealsCombatDamageToAPlayerTriggeredA
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (super.checkTrigger(event, game)) {
-            FilterCreaturePermanent filter = new FilterCreaturePermanent("creature that player controls");
-            filter.add(new ControllerIdPredicate(event.getPlayerId()));
-            addTarget(new TargetCreaturePermanent(filter));
+            Player player = game.getPlayer(event.getPlayerId());
+            if (player != null) {
+                getTargets().clear();
+                FilterCreaturePermanent filter = new FilterCreaturePermanent("creature that player " + player.getName() + " controls");
+                filter.add(new ControllerIdPredicate(event.getPlayerId()));
+                addTarget(new TargetCreaturePermanent(filter));
+                return true;
+            }
         }
         return false;
     }

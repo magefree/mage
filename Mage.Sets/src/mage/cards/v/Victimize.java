@@ -37,7 +37,7 @@ import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -88,7 +88,7 @@ class VictimizeEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            SacrificeTargetCost cost = new SacrificeTargetCost(new TargetControlledCreaturePermanent(new FilterControlledCreaturePermanent("a creature")));
+            SacrificeTargetCost cost = new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
             if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false, null)) {
                 game.applyEffects(); // To end effects of the sacrificed creature
                 controller.moveCards(new CardsImpl(getTargetPointer().getTargets(game, source)).getCards(game),

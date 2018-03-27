@@ -438,7 +438,7 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
                 return choice;
             }
             choice = Jsoup.parse(choice).text(); // decode HTML entities and strip tags
-            return choice.substring(0, 1).toUpperCase() + choice.substring(1);
+            return choice.substring(0, 1).toUpperCase(Locale.ENGLISH) + choice.substring(1);
         }
 
         @Override

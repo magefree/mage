@@ -28,6 +28,7 @@
 package mage.cards.d;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -145,7 +146,7 @@ public class DustOfMoments extends CardImpl {
                     if (!game.isSimulation()) {
                         game.informPlayers(new StringBuilder(sourceObject.getName()).append(": ")
                                 .append(controller.getLogName()).append(getActionStr()).append('s')
-                                .append(counter.getCount()).append(' ').append(counterName.toLowerCase())
+                                .append(counter.getCount()).append(' ').append(counterName.toLowerCase(Locale.ENGLISH))
                                 .append(" counter on ").append(card.getName()).toString());
                     }
                 }
@@ -170,7 +171,7 @@ public class DustOfMoments extends CardImpl {
                     if (!game.isSimulation()) {
                         game.informPlayers(new StringBuilder(sourceObject.getName()).append(": ")
                                 .append(controller.getLogName()).append(getActionStr()).append("s ")
-                                .append(counter.getCount()).append(' ').append(counterName.toLowerCase())
+                                .append(counter.getCount()).append(' ').append(counterName.toLowerCase(Locale.ENGLISH))
                                 .append(" counter on ").append(card.getName()).toString());
                     }
                 }
@@ -185,9 +186,9 @@ public class DustOfMoments extends CardImpl {
             StringBuilder sb = new StringBuilder();
             sb.append(getActionStr());
             if (counter.getCount() > 1) {
-                sb.append(Integer.toString(counter.getCount())).append(' ').append(counter.getName().toLowerCase()).append(" counters on each ");
+                sb.append(Integer.toString(counter.getCount())).append(' ').append(counter.getName().toLowerCase(Locale.ENGLISH)).append(" counters on each ");
             } else {
-                sb.append("a ").append(counter.getName().toLowerCase()).append(" counter on each ");
+                sb.append("a ").append(counter.getName().toLowerCase(Locale.ENGLISH)).append(" counter on each ");
             }
             sb.append(permFilter.getMessage());
             staticText = sb.toString();

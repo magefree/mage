@@ -58,7 +58,7 @@ public enum CardRepository {
     // raise this if db structure was changed
     private static final long CARD_DB_VERSION = 51;
     // raise this if new cards were added to the server
-    private static final long CARD_CONTENT_VERSION = 105;
+    private static final long CARD_CONTENT_VERSION = 106;
     private Dao<CardInfo, Object> cardDao;
     private Set<String> classNames;
 
@@ -397,7 +397,7 @@ public enum CardRepository {
 
     public List<CardInfo> findCardsCaseInsensitive(String name) {
         try {
-            String sqlName = name.toLowerCase().replaceAll("\'", "\'\'");
+            String sqlName = name.toLowerCase(Locale.ENGLISH).replaceAll("\'", "\'\'");
             GenericRawResults<CardInfo> rawResults = cardDao.queryRaw(
                     "select * from " + CardRepository.VERSION_ENTITY_NAME + " where lower(name) = '" + sqlName + '\'',
                     cardDao.getRawRowMapper());

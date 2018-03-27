@@ -1,5 +1,7 @@
 package mage.client.deckeditor;
 
+import mage.util.StreamUtils;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.io.BufferedWriter;
@@ -39,15 +41,16 @@ public class DeckImportFromClipboardDialog extends JDialog {
     }
 
     private void onOK() {
+        BufferedWriter bw = null;
         try {
             File temp = File.createTempFile("cbimportdeck", ".txt");
-            BufferedWriter bw = new BufferedWriter(new FileWriter(temp));
+            bw = new BufferedWriter(new FileWriter(temp));
             bw.write(txtDeckList.getText());
-            bw.close();
-
             tmpPath = temp.getPath();
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            StreamUtils.closeQuietly(bw);
         }
 
         dispose();

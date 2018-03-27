@@ -56,7 +56,7 @@ import mage.target.common.TargetOpponent;
 public class EndlessWhispers extends CardImpl {
 
     public EndlessWhispers(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");
 
         // Each creature has "When this creature dies, choose target opponent. That player puts this card from its owner's graveyard onto the battlefield under his or her control at the beginning of the next end step."
         DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnSourceToBattlefieldEffect());

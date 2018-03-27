@@ -37,9 +37,10 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.ColoredManaSymbol;
+import mage.constants.SubType;
 import mage.constants.Zone;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -49,13 +50,13 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public class StarvedRusalka extends CardImpl {
 
     public StarvedRusalka(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}");
         this.subtype.add(SubType.SPIRIT);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(1), new ColoredManaCost(ColoredManaSymbol.G));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         this.addAbility(ability);
     }
 

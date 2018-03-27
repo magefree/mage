@@ -28,6 +28,7 @@
 package mage.cards.c;
 
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -113,7 +114,7 @@ public class ConfusionInTheRanks extends CardImpl {
                 if (!message.isEmpty()) {
                     message += "or ";
                 }
-                message += cardTypeEntering.toString().toLowerCase() + ' ';
+                message += cardTypeEntering.toString().toLowerCase(Locale.ENGLISH) + ' ';
             }
             filterTarget.add(Predicates.or(cardTypesPredicates));
             message += "you don't control";

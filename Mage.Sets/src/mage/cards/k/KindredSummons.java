@@ -43,8 +43,8 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreatureCard;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
@@ -102,7 +102,7 @@ class KindredSummonsEffect extends OneShotEffect {
             if (subType == null) {
                 return false;
             }
-            FilterControlledCreaturePermanent filterPermanent = new FilterControlledCreaturePermanent("creature you control of the chosen type");
+            FilterCreaturePermanent filterPermanent = new FilterCreaturePermanent("creature you control of the chosen type");
             filterPermanent.add(new SubtypePredicate(subType));
             int numberOfCards = game.getBattlefield().countAll(filterPermanent, source.getControllerId(), game);
             Cards revealed = new CardsImpl();
@@ -120,7 +120,7 @@ class KindredSummonsEffect extends OneShotEffect {
                 }
             }
             controller.revealCards(sourceObject.getIdName(), revealed, game);
-            controller.moveCards(chosenSubtypeCreatureCards, Zone.BATTLEFIELD, source, game, false, false, false, null);
+            controller.moveCards(chosenSubtypeCreatureCards, Zone.BATTLEFIELD, source, game);
             controller.putCardsOnTopOfLibrary(otherCards, game, source, false);
             controller.shuffleLibrary(source, game);
             return true;

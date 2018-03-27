@@ -35,11 +35,14 @@ package mage.client.dialog;
 
 import java.awt.*;
 import java.io.File;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
+import java.util.UUID;
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
-
 import mage.cards.decks.Deck;
 import mage.cards.decks.importer.DeckImporterUtil;
 import mage.cards.repository.ExpansionInfo;
@@ -589,9 +592,9 @@ public class NewTournamentDialog extends MageDialog {
             } else {
                 for (JPanel panel : packPanels) {
                     JComboBox combo = findComboInComponent(panel);
-                    if(combo != null) {
+                    if (combo != null) {
                         tOptions.getLimitedOptions().getSetCodes().add(((ExpansionInfo) combo.getSelectedItem()).getCode());
-                    }else{
+                    } else {
                         logger.error("Can't find combo component in " + panel.toString());
                     }
                 }
@@ -764,7 +767,6 @@ public class NewTournamentDialog extends MageDialog {
         this.spnNumPlayers.setModel(new SpinnerNumberModel(numPlayers, tournamentType.getMinPlayers(), tournamentType.getMaxPlayers(), 1));
         this.spnNumPlayers.setEnabled(tournamentType.getMinPlayers() != tournamentType.getMaxPlayers());
         createPlayers((Integer) spnNumPlayers.getValue() - 1);
-
         this.spnNumSeats.setModel(new SpinnerNumberModel(2, 2, tournamentType.getMaxPlayers(), 1));
 
         if (tournamentType.isLimited()) {
@@ -926,7 +928,7 @@ public class NewTournamentDialog extends MageDialog {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
 
                     // search combo box near button (must be only one combo in panel)
-                    JButton button =  (JButton)evt.getSource();
+                    JButton button = (JButton) evt.getSource();
                     JComboBox combo = findComboInComponent(button.getParent());
 
                     if (combo != null) {
@@ -941,12 +943,12 @@ public class NewTournamentDialog extends MageDialog {
         this.repaint();
     }
 
-    private JComboBox findComboInComponent(Container panel){
+    private JComboBox findComboInComponent(Container panel) {
         // search combo box near button (must be only one combo in panel)
         JComboBox combo = null;
-        for(Component comp: panel.getComponents()){
-            if (comp instanceof JComboBox){
-                combo = (JComboBox)comp;
+        for (Component comp : panel.getComponents()) {
+            if (comp instanceof JComboBox) {
+                combo = (JComboBox) comp;
                 break;
             }
         }
@@ -955,21 +957,21 @@ public class NewTournamentDialog extends MageDialog {
 
     private void packActionPerformed(java.awt.event.ActionEvent evt) {
         // fill all bottom combobox with same value
-        JComboBox curentCombo = (JComboBox)evt.getSource();
+        JComboBox curentCombo = (JComboBox) evt.getSource();
         int newValue = curentCombo.getSelectedIndex();
 
         // search start index
         int startIndex = 0;
-        for(int i = 0; i < packPanels.size(); i++){
+        for (int i = 0; i < packPanels.size(); i++) {
             JComboBox pack = findComboInComponent(packPanels.get(i));
-            if (pack.equals(curentCombo)){
+            if (pack.equals(curentCombo)) {
                 startIndex = i + 1;
                 break;
             }
         }
 
         // change all from start index
-        for(int i = startIndex; i < packPanels.size(); i++){
+        for (int i = startIndex; i < packPanels.size(); i++) {
             JComboBox pack = findComboInComponent(packPanels.get(i));
             pack.setSelectedIndex(newValue);
         }
@@ -1128,7 +1130,7 @@ public class NewTournamentDialog extends MageDialog {
                                 break;
                             }
                         }
-                    }else{
+                    } else {
                         logger.error("Can't find combo component in " + panel.toString());
                     }
                 }
@@ -1263,7 +1265,7 @@ class DeckFilter extends FileFilter {
         int i = s.lastIndexOf('.');
 
         if (i > 0 && i < s.length() - 1) {
-            ext = s.substring(i + 1).toLowerCase();
+            ext = s.substring(i + 1).toLowerCase(Locale.ENGLISH);
         }
         return (ext == null) ? false : ext.equals("dck");
     }
