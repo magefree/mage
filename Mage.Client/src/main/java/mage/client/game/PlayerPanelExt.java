@@ -38,6 +38,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
@@ -53,6 +55,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
+import javax.swing.Timer;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import mage.cards.decks.importer.DckDeckImporter;
@@ -113,6 +116,13 @@ public class PlayerPanelExt extends javax.swing.JPanel {
     private int avatarId = -1;
     private String flagName;
     private String basicTooltipText;
+    private static final Map<UUID, Integer> playerLives = new HashMap<>();
+    private int loseX;
+    private boolean doLoseFade = true;
+    private int gainX;
+    private boolean doGainFade = true;
+    Timer faderGainLife = null;
+    Timer faderLoseLife = null;
 
     private PriorityTimer timer;
 
@@ -175,9 +185,85 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 
     public void update(PlayerView player) {
         this.player = player;
+        int pastLife = player.getLife();
+        if (playerLives != null) {
+            if (playerLives.containsKey(player.getPlayerId())) {
+                pastLife = playerLives.get(player.getPlayerId());
+            }
+            playerLives.put(player.getPlayerId(), player.getLife());
+        }
         int playerLife = player.getLife();
-        avatar.setCenterText("true".equals(MageFrame.getPreferences().get(PreferencesDialog.KEY_DISPLAY_LIVE_ON_AVATAR, "true"))
-                ? String.valueOf(playerLife) : null);
+
+        boolean displayLife = "true".equals(MageFrame.getPreferences().get(PreferencesDialog.KEY_DISPLAY_LIVE_ON_AVATAR, "true"));
+        avatar.setCenterText(displayLife ? String.valueOf(playerLife) : null);
+
+        if (displayLife) {
+            if (playerLife != pastLife) {
+                if (playerLife > pastLife) {
+                    if (faderGainLife == null && doGainFade) {
+                        doGainFade = false;
+                        faderGainLife = new Timer(25, new ActionListener() {
+                            public void actionPerformed(ActionEvent ae) {
+                                gainX++;
+                                avatar.setCenterColor(new Color(2 * gainX, 190, 255, 250 - gainX));
+                                avatar.repaint();
+                                if (gainX >= 100) {
+                                    avatar.setCenterColor(new Color(200, 190, 0, 180));
+                                    gainX = 100;
+
+                                    if (faderGainLife != null) {
+                                        faderGainLife.stop();
+                                        faderGainLife.setRepeats(false);
+                                        faderGainLife.setDelay(50000);
+                                    }
+                                }
+                            }
+                        });
+                        gainX = 0;
+                        faderGainLife.setInitialDelay(25);
+                        faderGainLife.setRepeats(true);
+                        faderGainLife.start();
+                    }
+                } else if (playerLife < pastLife) {
+                    if (faderLoseLife == null && doLoseFade) {
+                        doLoseFade = false;
+                        faderLoseLife = new Timer(25, new ActionListener() {
+                            public void actionPerformed(ActionEvent ae) {
+                                loseX++;
+                                avatar.setCenterColor(new Color(250 - loseX / 2, 140 + loseX / 2, 0, 250 - loseX));
+                                avatar.repaint();
+                                if (loseX >= 100) {
+                                    avatar.setCenterColor(new Color(200, 190, 0, 180));
+                                    loseX = 100;
+
+                                    if (faderLoseLife != null) {
+                                        faderLoseLife.stop();
+                                        faderLoseLife.setRepeats(false);
+                                        faderLoseLife.setDelay(50000);
+                                    }
+                                }
+                            }
+                        });
+                        loseX = 0;
+                        faderLoseLife.setInitialDelay(25);
+                        faderLoseLife.setRepeats(true);
+                        faderLoseLife.start();
+                    }
+                }
+            } else if (playerLife == pastLife) {
+                if (faderGainLife != null && gainX >= 100) {
+                    faderGainLife.stop();
+                    faderGainLife = null;
+                }
+                doGainFade = true;
+                if (faderLoseLife != null && loseX >= 100) {
+                    faderLoseLife.stop();
+                    faderLoseLife = null;
+                }
+                doLoseFade = true;
+            }
+        }
+
         updateAvatar();
 
         if (playerLife > 99) {
