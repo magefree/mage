@@ -62,7 +62,7 @@ public class GlyphKeeper extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // Whenever Glyph Keeper becomes the target of a spell or ability for the first time in a turn, counter that spell or ability.
+        // Whenever Glyph Keeper becomes the target of a spell or ability for the first time each turn, counter that spell or ability.
         this.addAbility(new GlyphKeeperAbility(), new NumberOfTimesPermanentTargetedATurnWatcher());
 
         // Embalm {5}{U}{U}
@@ -120,7 +120,7 @@ class GlyphKeeperAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever {this} becomes the target of a spell or ability for the first time in a turn, counter that spell or ability.";
+        return "Whenever {this} becomes the target of a spell or ability for the first time each turn, counter that spell or ability.";
     }
 
 }

@@ -101,7 +101,9 @@ class DroughtAdditionalCostEffect extends CostModificationEffectImpl {
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
         int blackSymbols = abilityToModify.getManaCosts().getMana().getBlack();
-        abilityToModify.addCost(new SacrificeTargetCost(new TargetControlledPermanent(blackSymbols, blackSymbols, filter, true)));
+        TargetControlledPermanent target = new TargetControlledPermanent(blackSymbols, blackSymbols, filter, true);
+        target.setRequired(false);
+        abilityToModify.addCost(new SacrificeTargetCost(target));
         return true;
     }
 

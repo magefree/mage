@@ -221,7 +221,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Legions of Lim-Dul", 30, Rarity.COMMON, mage.cards.l.LegionsOfLimDul.class));
         cards.add(new SetCardInfo("Leshrac's Rite", 31, Rarity.UNCOMMON, mage.cards.l.LeshracsRite.class));
         cards.add(new SetCardInfo("Leshrac's Sigil", 32, Rarity.UNCOMMON, mage.cards.l.LeshracsSigil.class));
-        cards.add(new SetCardInfo("Lim-Dûl's Hex", 34, Rarity.UNCOMMON, mage.cards.l.LimDulsHex.class));
+        cards.add(new SetCardInfo("Lim-Dul's Hex", 34, Rarity.UNCOMMON, mage.cards.l.LimDulsHex.class));
         cards.add(new SetCardInfo("Lhurgoyf", 140, Rarity.RARE, mage.cards.l.Lhurgoyf.class));
         cards.add(new SetCardInfo("Lightning Blow", 266, Rarity.RARE, mage.cards.l.LightningBlow.class));
         cards.add(new SetCardInfo("Lure", 141, Rarity.UNCOMMON, mage.cards.l.Lure.class));

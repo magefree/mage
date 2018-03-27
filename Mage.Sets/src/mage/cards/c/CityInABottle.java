@@ -141,7 +141,7 @@ public class CityInABottle extends CardImpl {
         namePredicatesArabianNights.add(new NamePredicate("Piety"));
         namePredicatesArabianNights.add(new NamePredicate("Pyramids"));
         namePredicatesArabianNights.add(new NamePredicate("Repentant Blacksmith"));
-        namePredicatesArabianNights.add(new NamePredicate("Ring of Ma'rûf"));
+        namePredicatesArabianNights.add(new NamePredicate("Ring of Ma'ruf"));
         namePredicatesArabianNights.add(new NamePredicate("Rukh Egg"));
         namePredicatesArabianNights.add(new NamePredicate("Sandals of Abdallah"));
         namePredicatesArabianNights.add(new NamePredicate("Sandstorm"));
