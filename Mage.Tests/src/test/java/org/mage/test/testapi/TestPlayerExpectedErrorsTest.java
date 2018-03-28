@@ -244,7 +244,7 @@ public class TestPlayerExpectedErrorsTest extends CardTestPlayerBase {
     	/* Underworld Cerberus {3}{B}{3} 6/6
     	*  Underworld Cerberus can't be blocked except by three or more creatures.
     	*  Cards in graveyards can't be the targets of spells or abilities.
-    	*  When Underworld Cerberus dies, exile it and each player returns all creature cards from his or her graveyard to his or her hand.
+    	*  When Underworld Cerberus dies, exile it and each player returns all creature cards from their graveyard to their hand.
     	*/
         addCard(Zone.BATTLEFIELD, playerA, "Underworld Cerberus");
         addCard(Zone.BATTLEFIELD, playerB, "Memnite", 2); // 1/1

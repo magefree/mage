@@ -70,7 +70,7 @@ public class EscalateTest extends CardTestPlayerBase {
 
         // Escalate {1} (Pay this cost for each mode chosen beyond the first.)
         // Choose one or more —
-        // * Target player discards all the cards in his or her hand, then draws that many cards.
+        // * Target player discards all the cards in their hand, then draws that many cards.
         // * Collective Defiance deals 4 damage to target creature.
         // * Collective Defiance deals 3 damage to target opponent.
         addCard(Zone.HAND, playerA, "Collective Defiance"); // {1}{R}{R} sorcery
@@ -98,7 +98,7 @@ public class EscalateTest extends CardTestPlayerBase {
 
         // Escalate {1} (Pay this cost for each mode chosen beyond the first.)
         // Choose one or more —
-        // * Target player discards all the cards in his or her hand, then draws that many cards.
+        // * Target player discards all the cards in their hand, then draws that many cards.
         // * Collective Defiance deals 4 damage to target creature.
         // * Collective Defiance deals 3 damage to target opponent.
         addCard(Zone.HAND, playerA, "Collective Defiance"); // {1}{R}{R} sorcery
@@ -129,7 +129,7 @@ public class EscalateTest extends CardTestPlayerBase {
         
         // Escalate {1} (Pay this cost for each mode chosen beyond the first.)
         // Choose one or more —
-        // * Target player discards all the cards in his or her hand, then draws that many cards.
+        // * Target player discards all the cards in their hand, then draws that many cards.
         // * Collective Defiance deals 4 damage to target creature.
         // * Collective Defiance deals 3 damage to target opponent.
         addCard(Zone.HAND, playerA, "Collective Defiance"); // {1}{R}{R} sorcery

@@ -67,7 +67,7 @@ public class VizkopaConfessor extends CardImpl {
         // Extort (Whenever you cast a spell, you may pay {WB}. If you do, each opponent loses 1 life and you gain that much life.)
         this.addAbility(new ExtortAbility());
 
-        // When Vizkopa Confessor enters the battlefield, pay any amount of life. Target opponent reveals that many cards from his or her hand. You choose one of them and exile it.
+        // When Vizkopa Confessor enters the battlefield, pay any amount of life. Target opponent reveals that many cards from their hand. You choose one of them and exile it.
         Ability ability = new EntersBattlefieldTriggeredAbility(new VizkopaConfessorEffect());
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
@@ -87,7 +87,7 @@ class VizkopaConfessorEffect extends OneShotEffect {
 
     public VizkopaConfessorEffect() {
         super(Outcome.Benefit);
-        this.staticText = "pay any amount of life. Target opponent reveals that many cards from his or her hand. You choose one of them and exile it";
+        this.staticText = "pay any amount of life. Target opponent reveals that many cards from their hand. You choose one of them and exile it";
     }
 
     public VizkopaConfessorEffect(final VizkopaConfessorEffect effect) {

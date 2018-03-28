@@ -52,7 +52,7 @@ public class NightTerrors extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");
 
 
-        // Target player reveals his or her hand. You choose a nonland card from it. Exile that card.
+        // Target player reveals their hand. You choose a nonland card from it. Exile that card.
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new NightTerrorsEffect());
     }
@@ -71,7 +71,7 @@ class NightTerrorsEffect extends OneShotEffect {
 
     public NightTerrorsEffect() {
         super(Outcome.Exile);
-        this.staticText = "Target player reveals his or her hand. You choose a nonland card from it. Exile that card";
+        this.staticText = "Target player reveals their hand. You choose a nonland card from it. Exile that card";
     }
 
     public NightTerrorsEffect(final NightTerrorsEffect effect) {

@@ -62,7 +62,7 @@ public class UnderworldCerberus extends CardImpl {
         // Cards in graveyards can't be the targets of spells or abilities.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeTargetedCardsGraveyardsEffect()));
 
-        // When Underworld Cerberus dies, exile it and each player returns all creature cards from his or her graveyard to his or her hand.
+        // When Underworld Cerberus dies, exile it and each player returns all creature cards from their graveyard to their hand.
         Ability ability = new DiesTriggeredAbility(new ExileSourceEffect());
         ability.addEffect(new ReturnToHandFromGraveyardAllEffect(new FilterCreatureCard("creature cards")));
         this.addAbility(ability);

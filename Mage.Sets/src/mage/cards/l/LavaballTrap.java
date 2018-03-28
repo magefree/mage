@@ -57,7 +57,7 @@ public class LavaballTrap extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{6}{R}{R}");
         this.subtype.add(SubType.TRAP);
 
-        // If an opponent had two or more lands enter the battlefield under his or her control this turn, you may pay {3}{R}{R} rather than pay Lavaball Trap's mana cost.
+        // If an opponent had two or more lands enter the battlefield under their control this turn, you may pay {3}{R}{R} rather than pay Lavaball Trap's mana cost.
         this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{3}{R}{R}"), LavaballTrapCondition.instance), new PermanentsEnteredBattlefieldWatcher());
 
         // Destroy two target lands. Lavaball Trap deals 4 damage to each creature.
@@ -105,6 +105,6 @@ enum LavaballTrapCondition implements Condition {
 
     @Override
     public String toString() {
-        return "If an opponent had two or more lands enter the battlefield under his or her control this turn";
+        return "If an opponent had two or more lands enter the battlefield under their control this turn";
     }
 }

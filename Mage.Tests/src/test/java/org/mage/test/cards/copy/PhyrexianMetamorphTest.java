@@ -233,7 +233,7 @@ public class PhyrexianMetamorphTest extends CardTestPlayerBase {
     public void testShowAndTell() {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
 
-        // Each player may put an artifact, creature, enchantment, or land card from his or her hand onto the battlefield.
+        // Each player may put an artifact, creature, enchantment, or land card from their hand onto the battlefield.
         addCard(Zone.HAND, playerA, "Show and Tell"); // SORCERY {2}{U}
 
         // Swampwalk

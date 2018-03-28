@@ -48,7 +48,7 @@ public class MnemonicNexus extends CardImpl {
     public MnemonicNexus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}");
 
-        // Each player shuffles his or her graveyard into his or her library.
+        // Each player shuffles their graveyard into their library.
         this.getSpellAbility().addEffect(new MnemonicNexusEffect());
     }
 
@@ -66,7 +66,7 @@ class MnemonicNexusEffect extends OneShotEffect {
 
     public MnemonicNexusEffect() {
         super(Outcome.Neutral);
-        staticText = "Each player shuffles his or her graveyard into his or her library";
+        staticText = "Each player shuffles their graveyard into their library";
     }
 
     public MnemonicNexusEffect(final MnemonicNexusEffect effect) {

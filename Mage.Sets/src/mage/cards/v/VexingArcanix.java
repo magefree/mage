@@ -54,7 +54,7 @@ public class VexingArcanix extends CardImpl {
     public VexingArcanix(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
-        // {3}, {tap}: Target player chooses a card name, then reveals the top card of his or her library. If that card has the chosen name, the player puts it into his or her hand. Otherwise, the player puts it into his or her graveyard and Vexing Arcanix deals 2 damage to him or her.
+        // {3}, {tap}: Target player chooses a card name, then reveals the top card of their library. If that card has the chosen name, the player puts it into their hand. Otherwise, the player puts it into their graveyard and Vexing Arcanix deals 2 damage to him or her.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new VexingArcanixEffect(), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPlayer());
@@ -76,7 +76,7 @@ class VexingArcanixEffect extends OneShotEffect {
 
     public VexingArcanixEffect() {
         super(Outcome.DrawCard);
-        staticText = "Target player chooses a card name, then reveals the top card of his or her library. If that card has the chosen name, the player puts it into his or her hand. Otherwise, the player puts it into his or her graveyard and {this} deals 2 damage to him or her";
+        staticText = "Target player chooses a card name, then reveals the top card of their library. If that card has the chosen name, the player puts it into their hand. Otherwise, the player puts it into their graveyard and {this} deals 2 damage to him or her";
     }
 
     public VexingArcanixEffect(final VexingArcanixEffect effect) {

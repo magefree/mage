@@ -53,14 +53,14 @@ public class SabertoothCobra extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Whenever Sabertooth Cobra deals damage to a player, he or she gets a poison counter. That player gets another poison counter at the beginning of his or her next upkeep unless he or she pays {2} before that turn.
+        // Whenever Sabertooth Cobra deals damage to a player, he or she gets a poison counter. That player gets another poison counter at the beginning of their next upkeep unless he or she pays {2} before that turn.
         Effect effect = new AddPoisonCounterTargetEffect(1);
         effect.setText("that player gets a poison counter");
         Ability ability = new DealsDamageToAPlayerTriggeredAbility(effect, false, true);
         effect = new AddPoisonCounterTargetEffect(1);
         effect.setText("That player gets another poison counter.");
         ability.addEffect(new UnlessPaysDelayedEffect(new ManaCostsImpl("{2}"), effect, PhaseStep.UPKEEP, true,
-            "That player gets another poison counter at the beginning of his or her next upkeep unless he or she pays {2} before that turn."));
+            "That player gets another poison counter at the beginning of their next upkeep unless he or she pays {2} before that turn."));
         this.addAbility(ability);
     }
 

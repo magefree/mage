@@ -69,7 +69,7 @@ public class UtopiaSprawl extends CardImpl {
         this.addAbility(ability);
         // As Utopia Sprawl enters the battlefield, choose a color.
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseColorEffect(Outcome.Detriment)));
-        // Whenever enchanted Forest is tapped for mana, its controller adds one mana of the chosen color to his or her mana pool.
+        // Whenever enchanted Forest is tapped for mana, its controller adds one mana of the chosen color to their mana pool.
         this.addAbility(new UtopiaSprawlTriggeredAbility());
     }
 
@@ -111,7 +111,7 @@ class UtopiaSprawlTriggeredAbility extends TriggeredManaAbility {
 
     @Override
     public String getRule() {
-        return "Whenever enchanted Forest is tapped for mana, its controller adds one mana of the chosen color to his or her mana pool.";
+        return "Whenever enchanted Forest is tapped for mana, its controller adds one mana of the chosen color to their mana pool.";
     }
 }
 
@@ -119,7 +119,7 @@ class UtopiaSprawlEffect extends ManaEffect {
 
     public UtopiaSprawlEffect() {
         super();
-        staticText = "its controller adds one mana of the chosen color to his or her mana pool";
+        staticText = "its controller adds one mana of the chosen color to their mana pool";
     }
 
     public UtopiaSprawlEffect(final UtopiaSprawlEffect effect) {

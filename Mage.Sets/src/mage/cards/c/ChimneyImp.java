@@ -60,7 +60,7 @@ public class ChimneyImp extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         
-        // When Chimney Imp dies, target opponent puts a card from his or her hand on top of his or her library.
+        // When Chimney Imp dies, target opponent puts a card from their hand on top of their library.
         Ability ability = new DiesTriggeredAbility(new ChimneyImpEffect(), false);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
@@ -81,7 +81,7 @@ class ChimneyImpEffect extends OneShotEffect {
 
     public ChimneyImpEffect() {
         super(Outcome.Detriment);
-        this.staticText = "target opponent puts a card from his or her hand on top of his or her library.";
+        this.staticText = "target opponent puts a card from their hand on top of their library.";
     }
 
     public ChimneyImpEffect(final ChimneyImpEffect effect) {

@@ -51,7 +51,7 @@ public class GateToTheAether extends CardImpl {
     public GateToTheAether(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{6}");
 
-        // At the beginning of each player's upkeep, that player reveals the top card of his or her library. If it's an artifact, creature, enchantment, or land card, the player may put it onto the battlefield.
+        // At the beginning of each player's upkeep, that player reveals the top card of their library. If it's an artifact, creature, enchantment, or land card, the player may put it onto the battlefield.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new GateToTheAetherEffect(), TargetController.ANY, false, true));
     }
 
@@ -69,7 +69,7 @@ class GateToTheAetherEffect extends OneShotEffect {
 
     GateToTheAetherEffect() {
         super(Outcome.PutCardInPlay);
-        this.staticText = "that player reveals the top card of his or her library. If it's an artifact, creature, enchantment, or land card, the player may put it onto the battlefield";
+        this.staticText = "that player reveals the top card of their library. If it's an artifact, creature, enchantment, or land card, the player may put it onto the battlefield";
     }
 
     GateToTheAetherEffect(final GateToTheAetherEffect effect) {

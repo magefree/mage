@@ -55,7 +55,7 @@ public class Dreadwaters extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}");
 
 
-        // Target player puts the top X cards of his or her library into his or her graveyard, where X is the number of lands you control.
+        // Target player puts the top X cards of their library into their graveyard, where X is the number of lands you control.
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new PutLibraryIntoGraveTargetEffect(new PermanentsOnBattlefieldCount(filter)));
     }

@@ -51,10 +51,10 @@ public class ChaosWarp extends CardImpl {
     public ChaosWarp(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");
 
-        // The owner of target permanent shuffles it into his or her library,
+        // The owner of target permanent shuffles it into their library,
         this.getSpellAbility().addEffect(new ChaosWarpShuffleIntoLibraryEffect());
         this.getSpellAbility().addTarget(new TargetPermanent());
-        //then reveals the top card of his or her library.
+        //then reveals the top card of their library.
         //If it's a permanent card, he or she puts it onto the battlefield.
         this.getSpellAbility().addEffect(new ChaosWarpRevealEffect());
 
@@ -74,7 +74,7 @@ class ChaosWarpShuffleIntoLibraryEffect extends OneShotEffect {
 
     public ChaosWarpShuffleIntoLibraryEffect() {
         super(Outcome.Detriment);
-        this.staticText = "The owner of target permanent shuffles it into his or her library";
+        this.staticText = "The owner of target permanent shuffles it into their library";
     }
 
     public ChaosWarpShuffleIntoLibraryEffect(final ChaosWarpShuffleIntoLibraryEffect effect) {
@@ -105,7 +105,7 @@ class ChaosWarpRevealEffect extends OneShotEffect {
 
     public ChaosWarpRevealEffect() {
         super(Outcome.PutCardInPlay);
-        this.staticText = "then reveals the top card of his or her library. If it's a permanent card, he or she puts it onto the battlefield";
+        this.staticText = "then reveals the top card of their library. If it's a permanent card, he or she puts it onto the battlefield";
     }
 
     public ChaosWarpRevealEffect(final ChaosWarpRevealEffect effect) {

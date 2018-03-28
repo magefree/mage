@@ -61,7 +61,7 @@ public class OrnateKanzashi extends CardImpl {
     public OrnateKanzashi(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
 
-        // {2}, {T}: Target opponent exiles the top card of his or her library. You may play that card this turn.
+        // {2}, {T}: Target opponent exiles the top card of their library. You may play that card this turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new OrnateKanzashiEffect(), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetOpponent());
@@ -83,7 +83,7 @@ class OrnateKanzashiEffect extends OneShotEffect {
 
     public OrnateKanzashiEffect() {
         super(Outcome.Detriment);
-        this.staticText = "Target opponent exiles the top card of his or her library. You may play that card this turn";
+        this.staticText = "Target opponent exiles the top card of their library. You may play that card this turn";
     }
 
     public OrnateKanzashiEffect(final OrnateKanzashiEffect effect) {

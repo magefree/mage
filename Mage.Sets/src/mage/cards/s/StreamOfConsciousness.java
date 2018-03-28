@@ -55,7 +55,7 @@ public class StreamOfConsciousness extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
         this.subtype.add(SubType.ARCANE);
 
-        // Target player shuffles up to four target cards from his or her graveyard into his or her library.
+        // Target player shuffles up to four target cards from their graveyard into their library.
         this.getSpellAbility().addEffect(new StreamOfConsciousnessEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addTarget(new StreamOfConsciousnessTarget());
@@ -76,7 +76,7 @@ class StreamOfConsciousnessEffect extends OneShotEffect {
 
     public StreamOfConsciousnessEffect() {
         super(Outcome.Neutral);
-        this.staticText = "Target player shuffles up to four target cards from his or her graveyard into his or her library";
+        this.staticText = "Target player shuffles up to four target cards from their graveyard into their library";
     }
 
     public StreamOfConsciousnessEffect(final StreamOfConsciousnessEffect effect) {

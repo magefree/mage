@@ -55,7 +55,7 @@ public class PyxisOfPandemonium extends CardImpl {
     public PyxisOfPandemonium(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
 
-        // {T}: Each player exiles the top card of his or her library face down.
+        // {T}: Each player exiles the top card of their library face down.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PyxisOfPandemoniumExileEffect(), new TapSourceCost()));
         // {7}, {T}, Sacrifice Pyxis of Pandemonium: Each player turns face up all cards he or she owns exiled with Pyxis of Pandemonium, then puts all permanent cards among them onto the battlefield.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PyxisOfPandemoniumPutOntoBattlefieldEffect(), new GenericManaCost(7));
@@ -79,7 +79,7 @@ class PyxisOfPandemoniumExileEffect extends OneShotEffect {
 
     public PyxisOfPandemoniumExileEffect() {
         super(Outcome.Detriment);
-        this.staticText = "Each player exiles the top card of his or her library face down";
+        this.staticText = "Each player exiles the top card of their library face down";
     }
 
     public PyxisOfPandemoniumExileEffect(final PyxisOfPandemoniumExileEffect effect) {

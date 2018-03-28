@@ -32,7 +32,7 @@ public class LazavDimirMastermindTest extends CardTestPlayerBase {
     public void testCopySimpleCreature() {
         addCard(Zone.BATTLEFIELD, playerA, "Lazav, Dimir Mastermind", 1);
         // Codex Shredder - Artifact
-        // {T}: Target player puts the top card of his or her library into his or her graveyard.
+        // {T}: Target player puts the top card of their library into their graveyard.
         // {5}, {T}, Sacrifice Codex Shredder: Return target card from your graveyard to your hand.
         addCard(Zone.BATTLEFIELD, playerA, "Codex Shredder", 1);
 
@@ -40,7 +40,7 @@ public class LazavDimirMastermindTest extends CardTestPlayerBase {
         addCard(Zone.LIBRARY, playerB, "Assault Griffin",5);
         skipInitShuffling();
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Target player puts the top card of his or her library into his or her graveyard.", playerB);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Target player puts the top card of their library into their graveyard.", playerB);
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -67,7 +67,7 @@ public class LazavDimirMastermindTest extends CardTestPlayerBase {
         addCard(Zone.LIBRARY, playerB, "Ogre Slumlord",5);
         skipInitShuffling();
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Target player puts the top card of his or her library into his or her graveyard.", playerB);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Target player puts the top card of their library into their graveyard.", playerB);
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -89,7 +89,7 @@ public class LazavDimirMastermindTest extends CardTestPlayerBase {
      * Nightveil Specter
      * Creature — Specter 2/3, {U/B}{U/B}{U/B}
      * Flying
-     * Whenever Nightveil Specter deals combat damage to a player, that player exiles the top card of his or her library.
+     * Whenever Nightveil Specter deals combat damage to a player, that player exiles the top card of their library.
      * You may play cards exiled with Nightveil Specter.
      *
      */
@@ -103,7 +103,7 @@ public class LazavDimirMastermindTest extends CardTestPlayerBase {
         addCard(Zone.LIBRARY, playerB, "Nightveil Specter",1);
         skipInitShuffling();
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Target player puts the top card of his or her library into his or her graveyard.", playerB);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Target player puts the top card of their library into their graveyard.", playerB);
 
         attack(3, playerA, "Lazav, Dimir Mastermind");
 
@@ -135,10 +135,10 @@ public class LazavDimirMastermindTest extends CardTestPlayerBase {
         skipInitShuffling();
 
         // Lazav becomes a Nightveil Specter
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Target player puts the top card of his or her library into his or her graveyard.", playerB);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Target player puts the top card of their library into their graveyard.", playerB);
 
         // Lazav becomes a Silvercoat Lion
-        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Target player puts the top card of his or her library into his or her graveyard.", playerB);
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Target player puts the top card of their library into their graveyard.", playerB);
 
         setStopAt(3, PhaseStep.END_TURN);
         execute();
@@ -161,7 +161,7 @@ public class LazavDimirMastermindTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA ,"Reanimate");        
         addCard(Zone.BATTLEFIELD, playerA, "Lazav, Dimir Mastermind", 1);
         // Codex Shredder - Artifact
-        // {T}: Target player puts the top card of his or her library into his or her graveyard.
+        // {T}: Target player puts the top card of their library into their graveyard.
         // {5}, {T}, Sacrifice Codex Shredder: Return target card from your graveyard to your hand.
         addCard(Zone.BATTLEFIELD, playerA, "Codex Shredder", 1);
 
@@ -173,7 +173,7 @@ public class LazavDimirMastermindTest extends CardTestPlayerBase {
         
         skipInitShuffling();
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Target player puts the top card of his or her library into his or her graveyard.", playerB);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Target player puts the top card of their library into their graveyard.", playerB);
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Tribute to Hunger");
         
@@ -204,7 +204,7 @@ public class LazavDimirMastermindTest extends CardTestPlayerBase {
     public void testCopyCreatureExiled() {
         addCard(Zone.BATTLEFIELD, playerA, "Lazav, Dimir Mastermind", 1);
         // Codex Shredder - Artifact
-        // {T}: Target player puts the top card of his or her library into his or her graveyard.
+        // {T}: Target player puts the top card of their library into their graveyard.
         // {5}, {T}, Sacrifice Codex Shredder: Return target card from your graveyard to your hand.
         addCard(Zone.BATTLEFIELD, playerA, "Codex Shredder", 1);
         
@@ -216,7 +216,7 @@ public class LazavDimirMastermindTest extends CardTestPlayerBase {
         addCard(Zone.LIBRARY, playerB, "Assault Griffin",5);
         skipInitShuffling();
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Target player puts the top card of his or her library into his or her graveyard.", playerB);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Target player puts the top card of their library into their graveyard.", playerB);
         
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Rest in Peace");
 

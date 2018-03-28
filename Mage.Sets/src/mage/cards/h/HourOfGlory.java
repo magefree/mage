@@ -55,7 +55,7 @@ public class HourOfGlory extends CardImpl {
     public HourOfGlory(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{B}");
 
-        // Exile target creature. If that creature was a God, its controller reveals his or her hand and exiles all cards with the same name as that creature.
+        // Exile target creature. If that creature was a God, its controller reveals their hand and exiles all cards with the same name as that creature.
         this.getSpellAbility().addEffect(new HourOfGloryEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
@@ -74,7 +74,7 @@ class HourOfGloryEffect extends OneShotEffect {
 
     public HourOfGloryEffect() {
         super(Outcome.Exile);
-        this.staticText = "Exile target creature. If that creature was a God, its controller reveals his or her hand and exiles all cards with the same name as that creature";
+        this.staticText = "Exile target creature. If that creature was a God, its controller reveals their hand and exiles all cards with the same name as that creature";
     }
 
     public HourOfGloryEffect(final HourOfGloryEffect effect) {

@@ -89,7 +89,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     protected boolean usesVariousArt = false;
     protected boolean splitCard;
     protected boolean morphCard;
-    protected boolean allCreatureTypes;
 
     protected List<UUID> attachments = new ArrayList<>();
 
@@ -855,16 +854,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             }
         }
         return super.getSubtype(game);
-    }
-
-    @Override
-    public boolean isAllCreatureTypes() {
-        return allCreatureTypes;
-    }
-
-    @Override
-    public void setIsAllCreatureTypes(boolean value) {
-        allCreatureTypes = value;
     }
 
     @Override

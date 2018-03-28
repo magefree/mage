@@ -166,7 +166,7 @@ public class PlayerLeftGameRangeAllTest extends CardTestMultiPlayerBase {
     public void TestOtherPlayerPlaneswalkerCreatedEmblem() {
         // +1: Scry 1, then draw a card.
         // -2: Return target creature to its owner's hand.
-        // -8: You get an emblem with "Whenever an opponent casts his or her first spell each turn, counter that spell."
+        // -8: You get an emblem with "Whenever an opponent casts their first spell each turn, counter that spell."
         addCard(Zone.BATTLEFIELD, playerC, "Jace, Unraveler of Secrets");
         addCounters(1, PhaseStep.DRAW, playerC, "Jace, Unraveler of Secrets", CounterType.LOYALTY, 8);
 

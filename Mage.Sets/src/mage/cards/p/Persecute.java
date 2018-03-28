@@ -52,7 +52,7 @@ public class Persecute extends CardImpl {
     public Persecute(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
 
-        // Choose a color. Target player reveals his or her hand and discards all cards of that color.
+        // Choose a color. Target player reveals their hand and discards all cards of that color.
         this.getSpellAbility().addEffect(new PersecuteEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
 
@@ -72,7 +72,7 @@ class PersecuteEffect extends OneShotEffect {
 
     public PersecuteEffect() {
         super(Outcome.Discard);
-        this.staticText = "Choose a color. Target player reveals his or her hand and discards all cards of that color";
+        this.staticText = "Choose a color. Target player reveals their hand and discards all cards of that color";
     }
 
     public PersecuteEffect(final PersecuteEffect effect) {

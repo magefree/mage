@@ -167,7 +167,7 @@ public class PlayerLeftGameRange1Test extends CardTestMultiPlayerBase {
     public void TestOtherPlayerPlaneswalkerCreatedEmblem() {
         // +1: Scry 1, then draw a card.
         // -2: Return target creature to its owner's hand.
-        // -8: You get an emblem with "Whenever an opponent casts his or her first spell each turn, counter that spell."
+        // -8: You get an emblem with "Whenever an opponent casts their first spell each turn, counter that spell."
         addCard(Zone.BATTLEFIELD, playerB, "Jace, Unraveler of Secrets");
         addCounters(1, PhaseStep.DRAW, playerB, "Jace, Unraveler of Secrets", CounterType.LOYALTY, 8);
 
@@ -319,8 +319,8 @@ public class PlayerLeftGameRange1Test extends CardTestMultiPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerD, "Island", 3);
         // {2}{U}, {T}: Put target creature on the bottom of its owner's library. That creature's controller reveals cards from the
-        // top of his or her library until he or she reveals a creature card. The player puts that card onto the battlefield and the
-        // rest on the bottom of his or her library in any order. Activate this ability only any time you could cast a sorcery.
+        // top of their library until he or she reveals a creature card. The player puts that card onto the battlefield and the
+        // rest on the bottom of their library in any order. Activate this ability only any time you could cast a sorcery.
         addCard(Zone.BATTLEFIELD, playerD, "Proteus Staff", 1);
 
         addCard(Zone.BATTLEFIELD, playerD, "Eager Cadet", 1);

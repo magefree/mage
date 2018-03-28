@@ -58,7 +58,7 @@ public class MistOfStagnation extends CardImpl {
         // Permanents don't untap during their controllers' untap steps.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, new FilterPermanent("permanents"))));
 
-        // At the beginning of each player's upkeep, that player chooses a permanent for each card in his or her graveyard, then untaps those permanents.
+        // At the beginning of each player's upkeep, that player chooses a permanent for each card in their graveyard, then untaps those permanents.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new MistOfStagnationEffect(), TargetController.ANY, false));
     }
 
@@ -76,7 +76,7 @@ class MistOfStagnationEffect extends OneShotEffect {
 
     MistOfStagnationEffect() {
         super(Outcome.Benefit);
-        this.staticText = "that player chooses a permanent for each card in his or her graveyard, then untaps those permanents";
+        this.staticText = "that player chooses a permanent for each card in their graveyard, then untaps those permanents";
     }
 
     MistOfStagnationEffect(final MistOfStagnationEffect effect) {

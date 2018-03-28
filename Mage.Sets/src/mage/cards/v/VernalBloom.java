@@ -55,9 +55,9 @@ public class VernalBloom extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{G}");
 
 
-        // Whenever a Forest is tapped for mana, its controller adds {G} to his or her mana pool.
+        // Whenever a Forest is tapped for mana, its controller adds {G} to their mana pool.
         this.addAbility(new TapForManaAllTriggeredManaAbility(
-                new AddManaToManaPoolTargetControllerEffect(new Mana(ColoredManaSymbol.G), "his or her"),
+                new AddManaToManaPoolTargetControllerEffect(new Mana(ColoredManaSymbol.G), "their"),
                 filter, SetTargetPointer.PLAYER));
     }
 

@@ -53,7 +53,7 @@ public class SalvageDrone extends CardImpl {
 
         // Devoid
         this.addAbility(new DevoidAbility(this.color));
-        // Ingest (Whenever this creature deals combat damage to a player, that player exiles the top card of his or her library.)
+        // Ingest (Whenever this creature deals combat damage to a player, that player exiles the top card of their library.)
         this.addAbility(new IngestAbility());
         // When Salvage Drone dies, you may draw a card. If you do, discard a card.
         this.addAbility(new DiesTriggeredAbility(new DrawDiscardControllerEffect(1, 1, true), false));

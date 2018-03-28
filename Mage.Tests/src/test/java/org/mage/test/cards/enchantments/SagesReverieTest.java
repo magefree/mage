@@ -44,7 +44,7 @@ public class SagesReverieTest extends CardTestPlayerBase {
      21:11: mbvash casts Crackling Doom [b78]
      21:11: MarioPineda loses 2 life
      21:11: MarioPineda sacrificed face down creature
-     21:11: mbvash puts Crackling Doom [b78] from stack into his or her graveyard
+     21:11: mbvash puts Crackling Doom [b78] from stack into their graveyard
      21:11: Cloudform [9cd] is put into graveyard from battlefield
      21:11: Sage's Reverie [26d] is put into graveyard from battlefield
      21:11: MarioPineda draws two cards

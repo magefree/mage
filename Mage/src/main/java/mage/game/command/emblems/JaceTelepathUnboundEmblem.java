@@ -41,12 +41,12 @@ import mage.target.common.TargetOpponent;
  * @author spjspj
  */
 public class JaceTelepathUnboundEmblem extends Emblem {
-    // You get an emblem with "Whenever you cast a spell, target opponent puts the top five cards of his or her library into his or her graveyard".
+    // You get an emblem with "Whenever you cast a spell, target opponent puts the top five cards of their library into their graveyard".
 
     public JaceTelepathUnboundEmblem() {
         this.setName("Emblem Jace");
         Effect effect = new PutTopCardOfLibraryIntoGraveTargetEffect(5);
-        effect.setText("target opponent puts the top five cards of his or her library into his or her graveyard");
+        effect.setText("target opponent puts the top five cards of their library into their graveyard");
         Ability ability = new SpellCastControllerTriggeredAbility(Zone.COMMAND, effect, new FilterSpell("a spell"), false, false);
         ability.addTarget(new TargetOpponent());
         getAbilities().add(ability);

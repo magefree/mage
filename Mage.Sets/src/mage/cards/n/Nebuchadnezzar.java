@@ -63,7 +63,7 @@ public class Nebuchadnezzar extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // {X}, {T}: Choose a card name. Target opponent reveals X cards at random from his or her hand. Then that player discards all cards with that name revealed this way. Activate this ability only during your turn.
+        // {X}, {T}: Choose a card name. Target opponent reveals X cards at random from their hand. Then that player discards all cards with that name revealed this way. Activate this ability only during your turn.
         Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new NameACardEffect(NameACardEffect.TypeOfName.ALL), new ManaCostsImpl("{X}"), MyTurnCondition.instance);
         ability.addCost(new TapSourceCost());
         ability.addEffect(new NebuchadnezzarEffect());
@@ -85,7 +85,7 @@ class NebuchadnezzarEffect extends OneShotEffect {
 
     public NebuchadnezzarEffect() {
         super(Outcome.Detriment);
-        staticText = "Target opponent reveals X cards at random from his or her hand. Then that player discards all cards with that name revealed this way";
+        staticText = "Target opponent reveals X cards at random from their hand. Then that player discards all cards with that name revealed this way";
     }
 
     public NebuchadnezzarEffect(final NebuchadnezzarEffect effect) {

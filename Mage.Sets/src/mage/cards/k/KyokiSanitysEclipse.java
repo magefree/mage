@@ -57,7 +57,7 @@ public class KyokiSanitysEclipse extends CardImpl {
         this.power = new MageInt(6);
         this.toughness = new MageInt(4);
 
-        // Whenever you cast a Spirit or Arcane spell, target opponent exiles a card from his or her hand.
+        // Whenever you cast a Spirit or Arcane spell, target opponent exiles a card from their hand.
         Ability ability = new SpellCastControllerTriggeredAbility(new ExileFromZoneTargetEffect(Zone.HAND, null, "", new FilterCard()), StaticFilters.SPIRIT_OR_ARCANE_CARD, false);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);

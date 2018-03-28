@@ -39,7 +39,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledLandPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.target.common.TargetControlledPermanent;
@@ -64,7 +64,7 @@ public class SpittingSpider extends CardImpl {
         // Reach
         this.addAbility(ReachAbility.getInstance());
         // Sacrifice a land: Spitting Spider deals 1 damage to each creature with flying.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageAllEffect(1, filter), new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent()))));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageAllEffect(1, filter), new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT))));
     }
 
     public SpittingSpider(final SpittingSpider card) {

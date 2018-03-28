@@ -53,7 +53,7 @@ public class DrafnasRestoration extends CardImpl {
     public DrafnasRestoration(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{U}");
 
-        // Put any number of target artifact cards from target player's graveyard on top of his or her library in any order.
+        // Put any number of target artifact cards from target player's graveyard on top of their library in any order.
         this.getSpellAbility().addEffect(new DrafnasRestorationEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addTarget(new DrafnasRestorationTarget());
@@ -112,7 +112,7 @@ class DrafnasRestorationEffect extends OneShotEffect {
 
     DrafnasRestorationEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Put any number of target artifact cards from target player's graveyard on top of his or her library in any order.";
+        this.staticText = "Put any number of target artifact cards from target player's graveyard on top of their library in any order.";
     }
 
     DrafnasRestorationEffect(final DrafnasRestorationEffect effect) {

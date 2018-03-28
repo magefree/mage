@@ -66,13 +66,13 @@ public class PhenaxGodOfDeception extends CardImpl {
         Effect effect = new LoseCreatureTypeSourceEffect(new DevotionCount(ColoredManaSymbol.U, ColoredManaSymbol.B), 7);
         effect.setText("As long as your devotion to blue and black is less than seven, Phenax isn't a creature");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));           
-        // Creatures you control have "{T}: Target player puts the top X cards of his or her library into his or her graveyard, where X is this creature's toughness."        
+        // Creatures you control have "{T}: Target player puts the top X cards of their library into their graveyard, where X is this creature's toughness."
         effect = new PutTopCardOfLibraryIntoGraveTargetEffect(SourcePermanentToughnessValue.getInstance());
-        effect.setText("Target player puts the top X cards of his or her library into his or her graveyard, where X is this creature's toughness");
+        effect.setText("Target player puts the top X cards of their library into their graveyard, where X is this creature's toughness");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
         ability.addTarget(new TargetPlayer());
         effect = new GainAbilityControlledEffect(ability, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURES,false);
-        effect.setText("Creatures you control have \"{T}: Target player puts the top X cards of his or her library into his or her graveyard, where X is this creature's toughness.\"");
+        effect.setText("Creatures you control have \"{T}: Target player puts the top X cards of their library into their graveyard, where X is this creature's toughness.\"");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 

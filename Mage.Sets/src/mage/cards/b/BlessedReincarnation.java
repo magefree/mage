@@ -65,8 +65,8 @@ public class BlessedReincarnation extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addEffect(new ExileTargetEffect());
         
-        // That player reveals cards from the top of his or her library until a creature card is revealed. 
-        // The player puts that card onto the battlefield, then shuffles the rest into his or her library.
+        // That player reveals cards from the top of their library until a creature card is revealed.
+        // The player puts that card onto the battlefield, then shuffles the rest into their library.
         this.getSpellAbility().addEffect(new BlessedReincarnationEffect());
         
         // Rebound
@@ -87,7 +87,7 @@ class BlessedReincarnationEffect extends OneShotEffect {
 
     public BlessedReincarnationEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "That player reveals cards from the top of his or her library until a creature card is revealed. The player puts that card onto the battlefield, then shuffles the rest into his or her library";
+        this.staticText = "That player reveals cards from the top of their library until a creature card is revealed. The player puts that card onto the battlefield, then shuffles the rest into their library";
     }
 
     public BlessedReincarnationEffect(final BlessedReincarnationEffect effect) {

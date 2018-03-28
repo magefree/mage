@@ -15,7 +15,7 @@ public class AddManaOfAnyColorToManaPoolTargetPlayerEffect extends ManaEffect {
 
     public AddManaOfAnyColorToManaPoolTargetPlayerEffect(String textManaPoolOwner) {
         super();
-        this.staticText = (textManaPoolOwner.equals("his or her") ? "that player adds " : "add ") + "one mana of any color" + " to " + textManaPoolOwner + " mana pool";
+        this.staticText = (textManaPoolOwner.equals("their") ? "that player adds " : "add ") + "one mana of any color" + " to " + textManaPoolOwner + " mana pool";
     }
 
     public AddManaOfAnyColorToManaPoolTargetPlayerEffect(final AddManaOfAnyColorToManaPoolTargetPlayerEffect effect) {

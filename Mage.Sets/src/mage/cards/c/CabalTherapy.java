@@ -54,7 +54,7 @@ public class CabalTherapy extends CardImpl {
     public CabalTherapy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}");
 
-        // Name a nonland card. Target player reveals his or her hand and discards all cards with that name.
+        // Name a nonland card. Target player reveals their hand and discards all cards with that name.
         this.getSpellAbility().addEffect((new NameACardEffect(NameACardEffect.TypeOfName.NON_LAND_NAME)));
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new CabalTherapyEffect());
@@ -79,7 +79,7 @@ class CabalTherapyEffect extends OneShotEffect {
 
     public CabalTherapyEffect() {
         super(Outcome.Discard);
-        staticText = "Name a nonland card. Target player reveals his or her hand and discards all cards with that name";
+        staticText = "Name a nonland card. Target player reveals their hand and discards all cards with that name";
     }
 
     public CabalTherapyEffect(final CabalTherapyEffect effect) {

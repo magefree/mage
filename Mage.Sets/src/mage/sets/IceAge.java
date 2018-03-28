@@ -112,6 +112,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Dire Wolves", 118, Rarity.COMMON, mage.cards.d.DireWolves.class));
         cards.add(new SetCardInfo("Disenchant", 244, Rarity.COMMON, mage.cards.d.Disenchant.class));
         cards.add(new SetCardInfo("Drift of the Dead", 11, Rarity.UNCOMMON, mage.cards.d.DriftOfTheDead.class));
+        cards.add(new SetCardInfo("Drought", 245, Rarity.UNCOMMON, mage.cards.d.Drought.class));
         cards.add(new SetCardInfo("Dwarven Armory", 182, Rarity.RARE, mage.cards.d.DwarvenArmory.class));
         cards.add(new SetCardInfo("Earthlore", 119, Rarity.COMMON, mage.cards.e.Earthlore.class));
         cards.add(new SetCardInfo("Earthlink", 363, Rarity.RARE, mage.cards.e.Earthlink.class));
@@ -219,6 +220,8 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Lava Tubes", 339, Rarity.RARE, mage.cards.l.LavaTubes.class));
         cards.add(new SetCardInfo("Legions of Lim-Dul", 30, Rarity.COMMON, mage.cards.l.LegionsOfLimDul.class));
         cards.add(new SetCardInfo("Leshrac's Rite", 31, Rarity.UNCOMMON, mage.cards.l.LeshracsRite.class));
+        cards.add(new SetCardInfo("Leshrac's Sigil", 32, Rarity.UNCOMMON, mage.cards.l.LeshracsSigil.class));
+        cards.add(new SetCardInfo("Lim-Dul's Hex", 34, Rarity.UNCOMMON, mage.cards.l.LimDulsHex.class));
         cards.add(new SetCardInfo("Lhurgoyf", 140, Rarity.RARE, mage.cards.l.Lhurgoyf.class));
         cards.add(new SetCardInfo("Lightning Blow", 266, Rarity.RARE, mage.cards.l.LightningBlow.class));
         cards.add(new SetCardInfo("Lure", 141, Rarity.UNCOMMON, mage.cards.l.Lure.class));
@@ -235,6 +238,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Minion of Leshrac", 38, Rarity.RARE, mage.cards.m.MinionOfLeshrac.class));
         cards.add(new SetCardInfo("Minion of Tevesh Szat", 39, Rarity.RARE, mage.cards.m.MinionOfTeveshSzat.class));
         cards.add(new SetCardInfo("Mole Worms", 40, Rarity.UNCOMMON, mage.cards.m.MoleWorms.class));
+        cards.add(new SetCardInfo("Monsoon", 376, Rarity.RARE, mage.cards.m.Monsoon.class));
         cards.add(new SetCardInfo("Moor Fiend", 41, Rarity.COMMON, mage.cards.m.MoorFiend.class));
         cards.add(new SetCardInfo("Mountain", 340, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 341, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));

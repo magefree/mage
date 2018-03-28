@@ -64,7 +64,7 @@ public class Metamorphose extends CardImpl {
     public Metamorphose(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
 
-        // Put target permanent an opponent controls on top of its owner's library. That opponent may put an artifact, creature, enchantment, or land card from his or her hand onto the battlefield.
+        // Put target permanent an opponent controls on top of its owner's library. That opponent may put an artifact, creature, enchantment, or land card from their hand onto the battlefield.
         this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(true));
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addEffect(new MetamorphoseEffect());
@@ -95,7 +95,7 @@ class MetamorphoseEffect extends OneShotEffect {
 
     public MetamorphoseEffect() {
         super(Outcome.PutCardInPlay);
-        this.staticText = "That opponent may put an artifact, creature, enchantment, or land card from his or her hand onto the battlefield.";
+        this.staticText = "That opponent may put an artifact, creature, enchantment, or land card from their hand onto the battlefield.";
     }
 
     public MetamorphoseEffect (final MetamorphoseEffect effect) { super(effect); }

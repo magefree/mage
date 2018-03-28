@@ -37,8 +37,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.common.FilterControlledPermanent;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -46,8 +45,6 @@ import mage.target.common.TargetControlledPermanent;
  * @author Rafbill
  */
 public class ScytheTiger extends CardImpl {
-
-    private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
 
     public ScytheTiger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");
@@ -60,7 +57,7 @@ public class ScytheTiger extends CardImpl {
         this.addAbility(ShroudAbility.getInstance());
 
         // When Scythe Tiger enters the battlefield, sacrifice it unless you sacrifice a land.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new SacrificeTargetCost(new TargetControlledPermanent(filter)))));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT)))));
     }
 
     public ScytheTiger(final ScytheTiger card) {

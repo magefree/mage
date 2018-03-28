@@ -64,7 +64,7 @@ public class LodestoneBauble extends CardImpl {
     public LodestoneBauble(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{0}");
 
-        // {1}, {T}, Sacrifice Lodestone Bauble: Put up to four target basic land cards from a player's graveyard on top of his or her library in any order. That player draws a card at the beginning of the next turn's upkeep.
+        // {1}, {T}, Sacrifice Lodestone Bauble: Put up to four target basic land cards from a player's graveyard on top of their library in any order. That player draws a card at the beginning of the next turn's upkeep.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LodestoneBaubleEffect(), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
@@ -116,7 +116,7 @@ class LodestoneBaubleEffect extends OneShotEffect {
     
     LodestoneBaubleEffect() {
         super(Outcome.Detriment);
-        this.staticText = "Put up to four target basic land cards from a player's graveyard on top of his or her library in any order";
+        this.staticText = "Put up to four target basic land cards from a player's graveyard on top of their library in any order";
     }
 
     LodestoneBaubleEffect(final LodestoneBaubleEffect effect) {

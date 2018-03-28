@@ -57,7 +57,7 @@ public class Phytotitan extends CardImpl {
         this.power = new MageInt(7);
         this.toughness = new MageInt(2);
 
-        // When Phytotitan dies, return it to the battlefield tapped under its owner's control at the beginning of his or her next upkeep.
+        // When Phytotitan dies, return it to the battlefield tapped under its owner's control at the beginning of their next upkeep.
         this.addAbility(new DiesTriggeredAbility(new PhytotitanEffect()));
     }
 
@@ -73,7 +73,7 @@ public class Phytotitan extends CardImpl {
 
 class PhytotitanEffect extends OneShotEffect {
 
-    private static final String effectText = "return it to the battlefield tapped under its owner's control at the beginning of his or her next upkeep";
+    private static final String effectText = "return it to the battlefield tapped under its owner's control at the beginning of their next upkeep";
 
     PhytotitanEffect() {
         super(Outcome.Benefit);

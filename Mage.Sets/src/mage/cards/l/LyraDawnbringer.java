@@ -31,13 +31,13 @@ public class LyraDawnbringer extends CardImpl {
         addAbility(FirstStrikeAbility.getInstance());
         addAbility(LifelinkAbility.getInstance());
 
-        // Other Goblin creatures get +1/+1 and have mountainwalk.
+        // Other Angels you control get +1/+1 and have lifelink.
         Effect effect = new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, AngelFilter, true);
         effect.setText("Other Angels you control get +1/+1");
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
-        effect = new GainAbilityAllEffect(LifelinkAbility.getInstance(), Duration.WhileOnBattlefield, AngelFilter, true);
-        effect.setText("and have lifelink");
-        ability.addEffect(effect);
+        Effect effect2 = new GainAbilityAllEffect(LifelinkAbility.getInstance(), Duration.WhileOnBattlefield, AngelFilter, true);
+        effect2.setText("and have lifelink");
+        ability.addEffect(effect2);
         this.addAbility(ability);
     }
 

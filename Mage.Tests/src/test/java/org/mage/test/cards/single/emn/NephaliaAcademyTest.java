@@ -14,7 +14,7 @@ public class NephaliaAcademyTest extends CardTestPlayerBase {
     @Test
     public void testReplacementEffectBySpell() {
         // Sorcery {B}
-        // Target opponent reveals his or her hand. You choose a noncreature, nonland card from it. That player discards that card.
+        // Target opponent reveals their hand. You choose a noncreature, nonland card from it. That player discards that card.
         addCard(Zone.HAND, playerA, "Duress", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
         
@@ -39,7 +39,7 @@ public class NephaliaAcademyTest extends CardTestPlayerBase {
     @Test
     public void testDeclineReplacementEffectBySpell() {
         // Sorcery {B}
-        // Target opponent reveals his or her hand. You choose a noncreature, nonland card from it. That player discards that card.
+        // Target opponent reveals their hand. You choose a noncreature, nonland card from it. That player discards that card.
         addCard(Zone.HAND, playerA, "Duress", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
         

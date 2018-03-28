@@ -50,7 +50,7 @@ public class SewerNemesisTest extends CardTestPlayerBase {
 
         // As Sewer Nemesis enters the battlefield, choose a player.
         // Sewer Nemesis's power and toughness are each equal to the number of cards in the chosen player's graveyard.
-        // Whenever the chosen player casts a spell, that player puts the top card of his or her library into his or her graveyard.
+        // Whenever the chosen player casts a spell, that player puts the top card of their library into their graveyard.
         addCard(Zone.HAND, playerA, "Sewer Nemesis");
 
         addCard(Zone.GRAVEYARD, playerA, "Raging Goblin",4);

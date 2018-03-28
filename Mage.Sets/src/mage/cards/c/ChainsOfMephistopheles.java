@@ -51,7 +51,7 @@ public class ChainsOfMephistopheles extends CardImpl {
     public ChainsOfMephistopheles(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}");
 
-        // If a player would draw a card except the first one he or she draws in his or her draw step each turn, that player discards a card instead. If the player discards a card this way, he or she draws a card. If the player doesn't discard a card this way, he or she puts the top card of his or her library into his or her graveyard.
+        // If a player would draw a card except the first one he or she draws in their draw step each turn, that player discards a card instead. If the player discards a card this way, he or she draws a card. If the player doesn't discard a card this way, he or she puts the top card of their library into their graveyard.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ChainsOfMephistophelesReplacementEffect()), new CardsDrawnDuringDrawStepWatcher());
     }
 
@@ -69,7 +69,7 @@ class ChainsOfMephistophelesReplacementEffect extends ReplacementEffectImpl {
 
     public ChainsOfMephistophelesReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "If a player would draw a card except the first one he or she draws in his or her draw step each turn, that player discards a card instead. If the player discards a card this way, he or she draws a card. If the player doesn't discard a card this way, he or she puts the top card of his or her library into his or her graveyard";
+        staticText = "If a player would draw a card except the first one he or she draws in their draw step each turn, that player discards a card instead. If the player discards a card this way, he or she draws a card. If the player doesn't discard a card this way, he or she puts the top card of their library into their graveyard";
     }
 
     public ChainsOfMephistophelesReplacementEffect(final ChainsOfMephistophelesReplacementEffect effect) {
@@ -91,7 +91,7 @@ class ChainsOfMephistophelesReplacementEffect extends ReplacementEffectImpl {
         Player player = game.getPlayer(event.getPlayerId());
         if (player != null) {
             if (player.getHand().isEmpty()) {
-                // he or she puts the top card of his or her library into his or her graveyard
+                // he or she puts the top card of their library into their graveyard
                 Effect effect = new PutTopCardOfLibraryIntoGraveTargetEffect(1);
                 effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
                 effect.apply(game, source);

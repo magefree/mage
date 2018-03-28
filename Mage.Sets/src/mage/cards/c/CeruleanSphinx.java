@@ -55,9 +55,9 @@ public class CeruleanSphinx extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        // {U}: Cerulean Sphinx's owner shuffles it into his or her library.
+        // {U}: Cerulean Sphinx's owner shuffles it into their library.
         Effect effect = new ShuffleIntoLibrarySourceEffect();
-        effect.setText("{this}'s owner shuffles it into his or her library.");
+        effect.setText("{this}'s owner shuffles it into their library.");
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{U}")));
     }
 

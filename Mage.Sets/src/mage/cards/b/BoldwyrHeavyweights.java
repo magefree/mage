@@ -62,7 +62,7 @@ public class BoldwyrHeavyweights extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
 
-        // When Boldwyr Heavyweights enters the battlefield, each opponent may search his or her library for a creature card and put it onto the battlefield. Then each player who searched his or her library this way shuffles it.
+        // When Boldwyr Heavyweights enters the battlefield, each opponent may search their library for a creature card and put it onto the battlefield. Then each player who searched their library this way shuffles it.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new BoldwyrHeavyweightsEffect()));
     }
 
@@ -80,7 +80,7 @@ class BoldwyrHeavyweightsEffect extends OneShotEffect {
 
     BoldwyrHeavyweightsEffect() {
         super(Outcome.Detriment);
-        this.staticText = "each opponent may search his or her library for a creature card and put it onto the battlefield. Then each player who searched his or her library this way shuffles it";
+        this.staticText = "each opponent may search their library for a creature card and put it onto the battlefield. Then each player who searched their library this way shuffles it";
     }
 
     BoldwyrHeavyweightsEffect(final BoldwyrHeavyweightsEffect effect) {

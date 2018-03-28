@@ -53,11 +53,11 @@ public class InduceParanoia extends CardImpl {
     public InduceParanoia(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}{U}");
         
-        // Counter target spell. If {B} was spent to cast Induce Paranoia, that spell's controller puts the top X cards of his or her library into his or her graveyard, where X is the spell's converted mana cost.
+        // Counter target spell. If {B} was spent to cast Induce Paranoia, that spell's controller puts the top X cards of their library into their graveyard, where X is the spell's converted mana cost.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new InduceParanoiaEffect(), 
                 new CounterTargetEffect(),
-                new ManaWasSpentCondition(ColoredManaSymbol.B), "Counter target spell. If {B} was spent to cast {this}, that spell's controller puts the top X cards of his or her library into his or her graveyard, where X is the spell's converted mana cost."));
+                new ManaWasSpentCondition(ColoredManaSymbol.B), "Counter target spell. If {B} was spent to cast {this}, that spell's controller puts the top X cards of their library into their graveyard, where X is the spell's converted mana cost."));
                 
         // Counter target spell. 
         this.getSpellAbility().addTarget(new TargetSpell());
@@ -77,7 +77,7 @@ class InduceParanoiaEffect extends OneShotEffect {
 
     InduceParanoiaEffect() {
         super(Outcome.Detriment);
-        this.staticText = "Counter target spell. If {B} was spent to cast {this}, that spell's controller puts the top X cards of his or her library into his or her graveyard, where X is the spell's converted mana cost.";
+        this.staticText = "Counter target spell. If {B} was spent to cast {this}, that spell's controller puts the top X cards of their library into their graveyard, where X is the spell's converted mana cost.";
     }
 
     InduceParanoiaEffect(final InduceParanoiaEffect effect) {

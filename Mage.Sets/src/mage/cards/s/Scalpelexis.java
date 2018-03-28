@@ -60,7 +60,7 @@ public class Scalpelexis extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // Whenever Scalpelexis deals combat damage to a player, that player exiles the top four cards of his or her library. If two or more of those cards have the same name, repeat this process.
+        // Whenever Scalpelexis deals combat damage to a player, that player exiles the top four cards of their library. If two or more of those cards have the same name, repeat this process.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new ScalpelexisEffect(), false, true));
     }
 
@@ -78,7 +78,7 @@ class ScalpelexisEffect extends OneShotEffect {
 
     public ScalpelexisEffect() {
         super(Outcome.Exile);
-        this.staticText = "that player exiles the top four cards of his or her library. If two or more of those cards have the same name, repeat this process";
+        this.staticText = "that player exiles the top four cards of their library. If two or more of those cards have the same name, repeat this process";
     }
 
     public ScalpelexisEffect(final ScalpelexisEffect effect) {

@@ -64,7 +64,7 @@ public class IwamoriOfTheOpenFist extends CardImpl {
 
         // Trample
         this.addAbility(TrampleAbility.getInstance());
-        // When Iwamori of the Open Fist enters the battlefield, each opponent may put a legendary creature card from his or her hand onto the battlefield.
+        // When Iwamori of the Open Fist enters the battlefield, each opponent may put a legendary creature card from their hand onto the battlefield.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new IwamoriOfTheOpenFistEffect(), false));
     }
 
@@ -89,7 +89,7 @@ class IwamoriOfTheOpenFistEffect extends OneShotEffect {
 
     public IwamoriOfTheOpenFistEffect() {
         super(Outcome.Detriment);
-        this.staticText = "each opponent may put a legendary creature card from his or her hand onto the battlefield";
+        this.staticText = "each opponent may put a legendary creature card from their hand onto the battlefield";
     }
 
     public IwamoriOfTheOpenFistEffect(final IwamoriOfTheOpenFistEffect effect) {

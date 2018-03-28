@@ -45,7 +45,7 @@ public class Scour extends CardImpl {
 
 
         // Exile target enchantment.
-        // Search its controller's graveyard, hand, and library for all cards with the same name as that enchantment and exile them. Then that player shuffles his or her library.
+        // Search its controller's graveyard, hand, and library for all cards with the same name as that enchantment and exile them. Then that player shuffles their library.
         this.getSpellAbility().addTarget(new TargetEnchantmentPermanent());
         this.getSpellAbility().addEffect(new ExileTargetAndSearchGraveyardHandLibraryEffect(false, "its controller's","all cards with the same name as that enchantment"));
     }

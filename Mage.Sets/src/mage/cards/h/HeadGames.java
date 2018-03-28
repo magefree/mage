@@ -43,7 +43,7 @@ public class HeadGames extends CardImpl {
     public HeadGames(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}{B}");
 
-        // Target opponent puts the cards from his or her hand on top of his or her library. Search that player's library for that many cards. The player puts those cards into his or her hand, then shuffles his or her library.
+        // Target opponent puts the cards from their hand on top of their library. Search that player's library for that many cards. The player puts those cards into their hand, then shuffles their library.
         this.getSpellAbility().addEffect(new ReplaceOpponentCardsInHandWithSelectedEffect());
         this.getSpellAbility().addTarget(new TargetOpponent());
     }

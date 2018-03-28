@@ -48,7 +48,7 @@ public class Millstone extends CardImpl {
     public Millstone(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
-        // {2}, {tap}: Target player puts the top two cards of his or her library into his or her graveyard.
+        // {2}, {tap}: Target player puts the top two cards of their library into their graveyard.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(2), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPlayer());

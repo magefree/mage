@@ -61,9 +61,9 @@ public class ForcemageAdvocate extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        // {tap}: Return target card from an opponent's graveyard to his or her hand. Put a +1/+1 counter on target creature.
+        // {tap}: Return target card from an opponent's graveyard to their hand. Put a +1/+1 counter on target creature.
         Effect effect = new ReturnFromGraveyardToHandTargetEffect();
-        effect.setText("Return target card from an opponent's graveyard to his or her hand");
+        effect.setText("Return target card from an opponent's graveyard to their hand");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
 
         effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance());

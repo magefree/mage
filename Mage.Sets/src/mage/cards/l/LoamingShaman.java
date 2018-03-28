@@ -61,7 +61,7 @@ public class LoamingShaman extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
-        // When Loaming Shaman enters the battlefield, target player shuffles any number of target cards from his or her graveyard into his or her library.
+        // When Loaming Shaman enters the battlefield, target player shuffles any number of target cards from their graveyard into their library.
         Ability ability = new EntersBattlefieldTriggeredAbility(new LoamingShamanEffect(), false);
         ability.addTarget(new TargetPlayer());
         ability.addTarget(new LoamingShamanTargetCardsInGraveyard(0, Integer.MAX_VALUE, new FilterCard("cards in target player's graveyard")));
@@ -82,7 +82,7 @@ class LoamingShamanEffect extends OneShotEffect {
 
     public LoamingShamanEffect() {
         super(Outcome.Benefit);
-        this.staticText = "target player shuffles any number of target cards from his or her graveyard into his or her library";
+        this.staticText = "target player shuffles any number of target cards from their graveyard into their library";
     }
 
     public LoamingShamanEffect(final LoamingShamanEffect effect) {

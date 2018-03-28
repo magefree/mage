@@ -63,7 +63,7 @@ public class Skullwinder extends CardImpl {
         // Deathtouch
         this.addAbility(DeathtouchAbility.getInstance());
 
-        // When Skullwinder enters the battlefield, return target card from your graveyard to your hand, then choose an opponent. That player returns a card from his or her graveyard to his or her hand.
+        // When Skullwinder enters the battlefield, return target card from your graveyard to your hand, then choose an opponent. That player returns a card from their graveyard to their hand.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect());
         ability.addTarget(new TargetCardInYourGraveyard());
         ability.addEffect(new SkullwinderEffect());
@@ -84,7 +84,7 @@ class SkullwinderEffect extends OneShotEffect {
 
     public SkullwinderEffect() {
         super(Outcome.Benefit);
-        this.staticText = ", then choose an opponent. That player returns a card from his or her graveyard to his or her hand";
+        this.staticText = ", then choose an opponent. That player returns a card from their graveyard to their hand";
     }
 
     public SkullwinderEffect(final SkullwinderEffect effect) {
@@ -106,7 +106,7 @@ class SkullwinderEffect extends OneShotEffect {
                 Player opponent = game.getPlayer(targetOpponent.getFirstTarget());
                 if (opponent != null) {
                     game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " has chosen " + opponent.getLogName());
-                    // That player returns a card from his or her graveyard to his or her hand
+                    // That player returns a card from their graveyard to their hand
                     TargetCardInYourGraveyard targetCard = new TargetCardInYourGraveyard(new FilterCard("a card from your graveyard to return to your hand"));
                     targetCard.setNotTarget(true);
                     if (opponent.choose(outcome, targetCard, source.getSourceId(), game)) {

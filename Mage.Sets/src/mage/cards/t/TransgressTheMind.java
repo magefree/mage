@@ -57,9 +57,9 @@ public class TransgressTheMind extends CardImpl {
         // Devoid
         this.addAbility(new DevoidAbility(this.color));
 
-        // Target player reveals his or her hand. You may choose a card from it with converted mana cost 3 or greater and exile that card.
+        // Target player reveals their hand. You may choose a card from it with converted mana cost 3 or greater and exile that card.
         Effect effect = new ExileCardYouChooseTargetOpponentEffect(filter);
-        effect.setText("Target player reveals his or her hand. You may choose a card from it with converted mana cost 3 or greater and exile that card");
+        effect.setText("Target player reveals their hand. You may choose a card from it with converted mana cost 3 or greater and exile that card");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetPlayer());
     }

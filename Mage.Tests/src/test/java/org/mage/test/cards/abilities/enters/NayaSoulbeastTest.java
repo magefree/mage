@@ -28,7 +28,7 @@ public class NayaSoulbeastTest extends CardTestPlayerBase {
         
         // Naya Soulbeast - {6}{G}{G}
         // Creature Beast - 0/0 - Trample
-        // When you cast Naya Soulbeast, each player reveals the top card of his or her library. 
+        // When you cast Naya Soulbeast, each player reveals the top card of their library.
         // Naya Soulbeast enters the battlefield with X +1/+1 counters on it, where X is the total converted mana cost of all cards revealed this way.
         addCard(Zone.HAND, playerA, "Naya Soulbeast", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 8);

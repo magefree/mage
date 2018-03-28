@@ -59,7 +59,7 @@ public class MagusOfTheAbyss extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 
-        // At the beginning of each player's upkeep, destroy target nonartifact creature that player controls of his or her choice. It can't be regenerated.
+        // At the beginning of each player's upkeep, destroy target nonartifact creature that player controls of their choice. It can't be regenerated.
         this.addAbility(new MagusOfTheAbyssTriggeredAbility());
     }
 
@@ -112,6 +112,6 @@ class MagusOfTheAbyssTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "At the beginning of each player's upkeep, destroy target nonartifact creature that player controls of his or her choice. It can't be regenerated.";
+        return "At the beginning of each player's upkeep, destroy target nonartifact creature that player controls of their choice. It can't be regenerated.";
     }
 }

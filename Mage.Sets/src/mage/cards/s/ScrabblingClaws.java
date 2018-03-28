@@ -58,7 +58,7 @@ public class ScrabblingClaws extends CardImpl {
     public ScrabblingClaws(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
 
-        // {tap}: Target player exiles a card from his or her graveyard.
+        // {tap}: Target player exiles a card from their graveyard.
         Ability firstAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScrabblingClawsEffect(), new TapSourceCost());
         firstAbility.addTarget(new TargetPlayer());
         this.addAbility(firstAbility);
@@ -84,7 +84,7 @@ class ScrabblingClawsEffect extends OneShotEffect {
 
     public ScrabblingClawsEffect() {
         super(Outcome.Exile);
-        this.staticText = "Target player exiles a card from his or her graveyard";
+        this.staticText = "Target player exiles a card from their graveyard";
     }
 
     public ScrabblingClawsEffect(final ScrabblingClawsEffect effect) {

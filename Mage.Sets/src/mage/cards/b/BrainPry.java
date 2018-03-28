@@ -50,7 +50,7 @@ public class BrainPry extends CardImpl {
     public BrainPry(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}");
 
-        //Name a nonland card. Target player reveals his or her hand. That player discards a card with that name. If he or she can't, you draw a card.
+        //Name a nonland card. Target player reveals their hand. That player discards a card with that name. If he or she can't, you draw a card.
         this.getSpellAbility().addEffect((new NameACardEffect(NameACardEffect.TypeOfName.NON_LAND_NAME)));
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new BrainPryEffect());
@@ -70,7 +70,7 @@ class BrainPryEffect extends OneShotEffect {
 
     public BrainPryEffect() {
         super(Outcome.Discard);
-        staticText = "Target player reveals his or her hand. That player discards a card with that name. If he or she can't, you draw a card";
+        staticText = "Target player reveals their hand. That player discards a card with that name. If he or she can't, you draw a card";
     }
 
     public BrainPryEffect(final BrainPryEffect effect) {

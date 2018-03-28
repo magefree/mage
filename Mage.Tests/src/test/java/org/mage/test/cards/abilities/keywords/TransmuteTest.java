@@ -97,7 +97,7 @@ public class TransmuteTest extends CardTestPlayerBase {
     public void searchSplittedCardThreeManaCmcSpell() {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
-        // Counter target spell unless its controller discards his or her hand.
+        // Counter target spell unless its controller discards their hand.
         // Transmute {1}{U}{B}
         addCard(Zone.HAND, playerA, "Perplex"); // Instant {1}{U}{B}
 

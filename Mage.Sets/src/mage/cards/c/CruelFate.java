@@ -53,7 +53,7 @@ public class CruelFate extends CardImpl {
     public CruelFate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{U}");
 
-        // Look at the top five cards of target opponent's library. Put one of those cards into that player's graveyard and the rest on top of his or her library in any order.
+        // Look at the top five cards of target opponent's library. Put one of those cards into that player's graveyard and the rest on top of their library in any order.
         this.getSpellAbility().addEffect(new CruelFateEffect());
         this.getSpellAbility().addTarget(new TargetOpponent());
 
@@ -73,7 +73,7 @@ class CruelFateEffect extends OneShotEffect {
 
     public CruelFateEffect() {
         super(Outcome.DrawCard);
-        this.staticText = "Look at the top five cards of target opponent's library. Put one of those cards into that player's graveyard and the rest on top of his or her library in any order";
+        this.staticText = "Look at the top five cards of target opponent's library. Put one of those cards into that player's graveyard and the rest on top of their library in any order";
     }
 
     public CruelFateEffect(final CruelFateEffect effect) {

@@ -58,7 +58,7 @@ public class Shriekgeist extends CardImpl {
         this.toughness = new MageInt(1);
 
         this.addAbility(FlyingAbility.getInstance());
-        // Whenever Shriekgeist deals combat damage to a player, that player puts the top two cards of his or her library into his or her graveyard.
+        // Whenever Shriekgeist deals combat damage to a player, that player puts the top two cards of their library into their graveyard.
         this.addAbility(new ShriekgeistTriggeredAbility());
     }
 
@@ -106,6 +106,6 @@ class ShriekgeistTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever {this} deals combat damage to a player, that player puts the top two cards of his or her library into his or her graveyard.";
+        return "Whenever {this} deals combat damage to a player, that player puts the top two cards of their library into their graveyard.";
     }
 }

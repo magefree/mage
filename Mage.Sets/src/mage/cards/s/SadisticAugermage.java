@@ -56,7 +56,7 @@ public class SadisticAugermage extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
 
-        // When Sadistic Augermage dies, each player puts a card from his or her hand on top of his or her library.
+        // When Sadistic Augermage dies, each player puts a card from their hand on top of their library.
         this.getSpellAbility().addEffect(null);
     }
 
@@ -74,7 +74,7 @@ class WidespreadPanicEffect extends OneShotEffect {
 
     public WidespreadPanicEffect() {
         super(Outcome.Detriment);
-        this.staticText = "each player puts a card from his or her hand on top of his or her library";
+        this.staticText = "each player puts a card from their hand on top of their library";
     }
 
     public WidespreadPanicEffect(final WidespreadPanicEffect effect) {

@@ -53,8 +53,8 @@ public class PickTheBrain extends CardImpl {
     public PickTheBrain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}");
 
-        // Target opponent reveals his or her hand. You choose a nonland card from it and exile that card.
-        // <i>Delirium</i> &mdash; If there are four or more card types among cards in your graveyard, search that player's graveyard, hand, and library for any number of cards with the same name as the exiled card, exile those cards, then that player shuffles his or her library.
+        // Target opponent reveals their hand. You choose a nonland card from it and exile that card.
+        // <i>Delirium</i> &mdash; If there are four or more card types among cards in your graveyard, search that player's graveyard, hand, and library for any number of cards with the same name as the exiled card, exile those cards, then that player shuffles their library.
         this.getSpellAbility().addEffect(new PickTheBrainEffect());
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
@@ -111,9 +111,9 @@ class PickTheBrainEffect extends SearchTargetGraveyardHandLibraryForCardNameAndE
 
     @Override
     public String getText(Mode mode) {
-        return "Target opponent reveals his or her hand. You choose a nonland card from it and exile that card.<br><br>"
+        return "Target opponent reveals their hand. You choose a nonland card from it and exile that card.<br><br>"
                 + "<i>Delirium</i> &mdash; If there are four or more card types among cards in your graveyard, "
                 + "search that player's graveyard, hand, and library for any number of cards "
-                + "with the same name as the exiled card, exile those cards, then that player shuffles his or her library";
+                + "with the same name as the exiled card, exile those cards, then that player shuffles their library";
     }
 }

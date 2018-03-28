@@ -69,7 +69,7 @@ public class Extirpate extends CardImpl {
 
         // Split second
         this.addAbility(new SplitSecondAbility());
-        // Choose target card in a graveyard other than a basic land card. Search its owner's graveyard, hand, and library for all cards with the same name as that card and exile them. Then that player shuffles his or her library.
+        // Choose target card in a graveyard other than a basic land card. Search its owner's graveyard, hand, and library for all cards with the same name as that card and exile them. Then that player shuffles their library.
         this.getSpellAbility().addEffect(new ExtirpateEffect());
         this.getSpellAbility().addTarget(new TargetCardInGraveyard(filter));
     }
@@ -88,7 +88,7 @@ class ExtirpateEffect extends OneShotEffect {
 
     public ExtirpateEffect() {
         super(Outcome.Exile);
-        this.staticText = "Choose target card in a graveyard other than a basic land card. Search its owner's graveyard, hand, and library for any number of cards with the same name as that card and exile them. Then that player shuffles his or her library";
+        this.staticText = "Choose target card in a graveyard other than a basic land card. Search its owner's graveyard, hand, and library for any number of cards with the same name as that card and exile them. Then that player shuffles their library";
     }
 
     public ExtirpateEffect(final ExtirpateEffect effect) {

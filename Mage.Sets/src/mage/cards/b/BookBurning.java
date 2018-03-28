@@ -49,7 +49,7 @@ public class BookBurning extends CardImpl {
     public BookBurning(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}");
 
-        // Any player may have Book Burning deal 6 damage to him or her. If no one does, target player puts the top six cards of his or her library into his or her graveyard.
+        // Any player may have Book Burning deal 6 damage to him or her. If no one does, target player puts the top six cards of their library into their graveyard.
         this.getSpellAbility().addEffect(new BookBurningMillEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
@@ -68,7 +68,7 @@ class BookBurningMillEffect extends OneShotEffect {
 
     public BookBurningMillEffect() {
         super(Outcome.Detriment);
-        staticText = "Any player may have {source} deal 6 damage to him or her. If no one does, target player puts the top six cards of his or her library into his or her graveyard";
+        staticText = "Any player may have {source} deal 6 damage to him or her. If no one does, target player puts the top six cards of their library into their graveyard";
     }
 
     public BookBurningMillEffect(final BookBurningMillEffect effect) {

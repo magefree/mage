@@ -65,7 +65,7 @@ public class GhastlordOfFugue extends CardImpl {
         // Ghastlord of Fugue can't be blocked.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedSourceEffect(Duration.WhileOnBattlefield)));
 
-        // Whenever Ghastlord of Fugue deals combat damage to a player, that player reveals his or her hand. You choose a card from it. That player exiles that card.
+        // Whenever Ghastlord of Fugue deals combat damage to a player, that player reveals their hand. You choose a card from it. That player exiles that card.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new GhastlordOfFugueEffect(), false, true));
 
     }
@@ -84,7 +84,7 @@ class GhastlordOfFugueEffect extends OneShotEffect {
 
     public GhastlordOfFugueEffect() {
         super(Outcome.Benefit);
-        staticText = "that player reveals his or her hand. You choose a card from it. That player exiles that card";
+        staticText = "that player reveals their hand. You choose a card from it. That player exiles that card";
     }
 
     public GhastlordOfFugueEffect(final GhastlordOfFugueEffect effect) {

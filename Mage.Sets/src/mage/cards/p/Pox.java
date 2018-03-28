@@ -53,7 +53,7 @@ public class Pox extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}{B}{B}");
 
 
-        // Each player loses a third of his or her life, then discards a third of the cards in his or her hand, then sacrifices a third of the creatures he or she controls, then sacrifices a third of the lands he or she controls. Round up each time.
+        // Each player loses a third of their life, then discards a third of the cards in their hand, then sacrifices a third of the creatures he or she controls, then sacrifices a third of the lands he or she controls. Round up each time.
         this.getSpellAbility().addEffect(new PoxEffect());
     }
 
@@ -71,7 +71,7 @@ class PoxEffect extends OneShotEffect {
     
     PoxEffect() {
         super(Outcome.Detriment);
-        this.staticText = "Each player loses a third of his or her life, then discards a third of the cards in his or her hand, then sacrifices a third of the creatures he or she controls, then sacrifices a third of the lands he or she controls. Round up each time.";
+        this.staticText = "Each player loses a third of their life, then discards a third of the cards in their hand, then sacrifices a third of the creatures he or she controls, then sacrifices a third of the lands he or she controls. Round up each time.";
     }
     
     PoxEffect(final PoxEffect effect) {
@@ -87,7 +87,7 @@ class PoxEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            // Each player loses a third of his or her life,
+            // Each player loses a third of their life,
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
@@ -95,7 +95,7 @@ class PoxEffect extends OneShotEffect {
                     player.loseLife(lifeToLose, game, false);
                 }
             }
-            // then discards a third of the cards in his or her hand,
+            // then discards a third of the cards in their hand,
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {

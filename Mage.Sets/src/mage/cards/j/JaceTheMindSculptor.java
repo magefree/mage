@@ -75,7 +75,7 @@ public class JaceTheMindSculptor extends CardImpl {
         ability3.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability3);
 
-        // −12: Exile all cards from target player's library, then that player shuffles his or her hand into his or her library.
+        // −12: Exile all cards from target player's library, then that player shuffles their hand into their library.
         LoyaltyAbility ability4 = new LoyaltyAbility(new JaceTheMindSculptorEffect2(), -12);
         ability4.addTarget(new TargetPlayer());
         this.addAbility(ability4);
@@ -136,7 +136,7 @@ class JaceTheMindSculptorEffect2 extends OneShotEffect {
 
     public JaceTheMindSculptorEffect2() {
         super(Outcome.DrawCard);
-        staticText = "Exile all cards from target player's library, then that player shuffles his or her hand into his or her library";
+        staticText = "Exile all cards from target player's library, then that player shuffles their hand into their library";
     }
 
     public JaceTheMindSculptorEffect2(final JaceTheMindSculptorEffect2 effect) {

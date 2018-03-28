@@ -62,17 +62,17 @@ public class AnyaMercilessAngel extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         
-        // Anya, Merciless Angel gets +3/+3 for each opponent whose life total is less than half his or her starting life total.
+        // Anya, Merciless Angel gets +3/+3 for each opponent whose life total is less than half their starting life total.
         DynamicValue dValue = new MultipliedValue(new AnyaMercilessAngelDynamicValue(), 3);
         Effect effect = new BoostSourceEffect(dValue, dValue, Duration.WhileOnBattlefield);
-        effect.setText("{this} gets +3/+3 for each opponent whose life total is less than half his or her starting life total");
+        effect.setText("{this} gets +3/+3 for each opponent whose life total is less than half their starting life total");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(dValue, dValue, Duration.WhileOnBattlefield)));
         
-        // As long as an opponent's life total is less than half his or her starting life total, Anya has indestructible.
+        // As long as an opponent's life total is less than half their starting life total, Anya has indestructible.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Duration.WhileOnBattlefield),
                         AnyaMercilessAngelCondition.instance,
-                        "As long as an opponent's life total is less than half his or her starting life total, {this} has indestructible")));
+                        "As long as an opponent's life total is less than half their starting life total, {this} has indestructible")));
     }
 
     public AnyaMercilessAngel(final AnyaMercilessAngel card) {
@@ -110,7 +110,7 @@ class AnyaMercilessAngelDynamicValue implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "number of opponents whose life total is less than half his or her starting life total";
+        return "number of opponents whose life total is less than half their starting life total";
     }
 
     @Override
@@ -129,6 +129,6 @@ enum AnyaMercilessAngelCondition implements Condition {
 
     @Override
     public String toString() {
-        return "an opponent's life total is less than half his or her starting life total";
+        return "an opponent's life total is less than half their starting life total";
     }
 }

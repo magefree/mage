@@ -70,7 +70,7 @@ public class FathomFeeder extends CardImpl {
         // Ingest
         this.addAbility(new IngestAbility());
 
-        // {3}{U}{B}: Draw a card. Each opponent exiles the top card of his or her library.
+        // {3}{U}{B}: Draw a card. Each opponent exiles the top card of their library.
         Effect effect = new FathomFeederEffect();
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{3}{U}{B}"));
         ability.addEffect(effect);
@@ -90,7 +90,7 @@ public class FathomFeeder extends CardImpl {
 class FathomFeederEffect extends OneShotEffect {
     public FathomFeederEffect() {
         super(Outcome.Exile);
-        this.staticText = "Each opponent exiles the top card of his or her library";
+        this.staticText = "Each opponent exiles the top card of their library";
     }
 
     public FathomFeederEffect(final FathomFeederEffect effect) {

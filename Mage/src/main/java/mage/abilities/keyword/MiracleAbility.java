@@ -52,7 +52,7 @@ import mage.watchers.common.MiracleWatcher;
  * cost."
  *
  * 702.92b If a player chooses to reveal a card using its miracle ability, he or
- * she plays with that card revealed until that card leaves his or her hand,
+ * she plays with that card revealed until that card leaves their hand,
  * that ability resolves, or that ability otherwise leaves the stack.
  *
  * You can cast a card for its miracle cost only as the miracle triggered

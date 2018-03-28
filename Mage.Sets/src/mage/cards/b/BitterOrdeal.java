@@ -52,7 +52,7 @@ public class BitterOrdeal extends CardImpl {
     public BitterOrdeal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");
 
-        // Search target player's library for a card and exile it. Then that player shuffles his or her library.
+        // Search target player's library for a card and exile it. Then that player shuffles their library.
         this.getSpellAbility().addEffect(new BitterOrdealEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
         
@@ -74,7 +74,7 @@ class BitterOrdealEffect extends OneShotEffect {
 
     BitterOrdealEffect() {
         super(Outcome.Exile);
-        staticText = "Search target player's library for a card and exile it. Then that player shuffles his or her library.";
+        staticText = "Search target player's library for a card and exile it. Then that player shuffles their library.";
     }
 
     BitterOrdealEffect(final BitterOrdealEffect effect) {

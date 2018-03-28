@@ -120,7 +120,7 @@ import java.util.UUID;
  * card involves an additional cost, the card's owner must pay that cost if
  * able. If he or she can't, the card remains removed from the game. If the
  * additional cost includes mana, the situation is more complex. If the player
- * has enough mana in his or her mana pool to pay the cost, that player must do
+ * has enough mana in their mana pool to pay the cost, that player must do
  * so. If the player can't possibly pay the cost, the card remains removed from
  * the game. However, if the player has the means to produce enough mana to pay
  * the cost, then he or she has a choice: The player may play the spell, produce

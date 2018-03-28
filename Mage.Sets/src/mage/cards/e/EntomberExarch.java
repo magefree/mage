@@ -64,7 +64,7 @@ public class EntomberExarch extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // When Entomber Exarch enters the battlefield, choose one - Return target creature card from your graveyard to your hand; or target opponent reveals his or her hand, you choose a noncreature card from it, then that player discards that card.
+        // When Entomber Exarch enters the battlefield, choose one - Return target creature card from your graveyard to your hand; or target opponent reveals their hand, you choose a noncreature card from it, then that player discards that card.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), false);
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         Mode mode = new Mode();
@@ -94,7 +94,7 @@ class EntomberExarchEffect extends OneShotEffect {
 
     EntomberExarchEffect() {
         super(Outcome.Discard);
-        staticText = "target opponent reveals his or her hand, you choose a noncreature card from it, then that player discards that card";
+        staticText = "target opponent reveals their hand, you choose a noncreature card from it, then that player discards that card";
     }
 
     EntomberExarchEffect(final EntomberExarchEffect effect) {

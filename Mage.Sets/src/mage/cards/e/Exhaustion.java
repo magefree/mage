@@ -53,7 +53,7 @@ public class Exhaustion extends CardImpl {
     public Exhaustion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}");
 
-        // Creatures and lands target opponent controls don't untap during his or her next untap step.
+        // Creatures and lands target opponent controls don't untap during their next untap step.
         this.getSpellAbility().addEffect(new ExhaustionEffect());
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
@@ -78,7 +78,7 @@ class ExhaustionEffect extends OneShotEffect {
 
     ExhaustionEffect() {
         super(Outcome.Detriment);
-        this.staticText = "Creatures and lands target opponent controls don't untap during his or her next untap step.";
+        this.staticText = "Creatures and lands target opponent controls don't untap during their next untap step.";
     }
 
     ExhaustionEffect(final ExhaustionEffect effect) {

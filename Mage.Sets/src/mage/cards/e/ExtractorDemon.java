@@ -66,7 +66,7 @@ public class ExtractorDemon extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // Whenever another creature leaves the battlefield, you may have target player put the top two cards of his or her library into his or her graveyard.
+        // Whenever another creature leaves the battlefield, you may have target player put the top two cards of their library into their graveyard.
         Ability ability = new LeavesBattlefieldAllTriggeredAbility(new PutLibraryIntoGraveTargetEffect(2), filter, true);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);

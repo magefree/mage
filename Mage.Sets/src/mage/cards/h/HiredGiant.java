@@ -58,7 +58,7 @@ public class HiredGiant extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        // When Hired Giant enters the battlefield, each other player may search his or her library for a land card and put that card onto the battlefield. Then each player who searched his or her library this way shuffles it.
+        // When Hired Giant enters the battlefield, each other player may search their library for a land card and put that card onto the battlefield. Then each player who searched their library this way shuffles it.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new HiredGiantEffect()));
     }
 
@@ -76,7 +76,7 @@ class HiredGiantEffect extends OneShotEffect {
 
     HiredGiantEffect() {
         super(Outcome.Detriment);
-        this.staticText = "each other player may search his or her library for a land card and put that card onto the battlefield. Then each player who searched his or her library this way shuffles it";
+        this.staticText = "each other player may search their library for a land card and put that card onto the battlefield. Then each player who searched their library this way shuffles it";
     }
 
     HiredGiantEffect(final HiredGiantEffect effect) {

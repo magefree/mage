@@ -66,7 +66,7 @@ public class OathOfLieges extends CardImpl {
     public OathOfLieges(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
 
-        // At the beginning of each player's upkeep, that player chooses target player who controls more lands than he or she does and is his or her opponent. The first player may search his or her library for a basic land card, put that card onto the battlefield, then shuffle his or her library.
+        // At the beginning of each player's upkeep, that player chooses target player who controls more lands than he or she does and is their opponent. The first player may search their library for a basic land card, put that card onto the battlefield, then shuffle their library.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new OathOfLiegesEffect(), TargetController.ANY, false);
         ability.addTarget(new TargetPlayer(1, 1, false, FILTER));
         originalId = ability.getOriginalId();
@@ -101,8 +101,8 @@ class OathOfLiegesEffect extends OneShotEffect {
 
     public OathOfLiegesEffect() {
         super(Outcome.Benefit);
-        this.staticText = "that player chooses target player who controls more lands than he or she does and is his or her opponent. "
-                + "The first player may search his or her library for a basic land card, put that card onto the battlefield, then shuffle his or her library";
+        this.staticText = "that player chooses target player who controls more lands than he or she does and is their opponent. "
+                + "The first player may search their library for a basic land card, put that card onto the battlefield, then shuffle their library";
     }
 
     public OathOfLiegesEffect(final OathOfLiegesEffect effect) {
@@ -153,6 +153,6 @@ class OathOfLiegesPredicate implements ObjectSourcePlayerPredicate<ObjectSourceP
 
     @Override
     public String toString() {
-        return "player who controls more lands than he or she does and is his or her opponent";
+        return "player who controls more lands than he or she does and is their opponent";
     }
 }

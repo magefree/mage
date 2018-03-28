@@ -63,7 +63,7 @@ public class DarigaazTheIgniter extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // Whenever Darigaaz, the Igniter deals combat damage to a player, you may pay {2}{R}. If you do, choose a color, then that player reveals his or her hand and Darigaaz deals damage to the player equal to the number of cards of that color revealed this way.
+        // Whenever Darigaaz, the Igniter deals combat damage to a player, you may pay {2}{R}. If you do, choose a color, then that player reveals their hand and Darigaaz deals damage to the player equal to the number of cards of that color revealed this way.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DoIfCostPaid(
                 new DarigaazTheIgniterEffect(), new ManaCostsImpl("{2}{R}")), false, true));
     }
@@ -82,7 +82,7 @@ class DarigaazTheIgniterEffect extends OneShotEffect {
 
     public DarigaazTheIgniterEffect() {
         super(Outcome.Damage);
-        staticText = "choose a color, then that player reveals his or her hand and {this} deals damage"
+        staticText = "choose a color, then that player reveals their hand and {this} deals damage"
                 + " to the player equal to the number of cards of that color revealed this way";
     }
 

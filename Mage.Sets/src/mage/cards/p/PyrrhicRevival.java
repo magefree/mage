@@ -53,7 +53,7 @@ public class PyrrhicRevival extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{W/B}{W/B}{W/B}");
 
 
-        // Each player returns each creature card from his or her graveyard to the battlefield with an additional -1/-1 counter on it.
+        // Each player returns each creature card from their graveyard to the battlefield with an additional -1/-1 counter on it.
         this.getSpellAbility().addEffect(new PyrrhicRevivalEffect());
 
     }
@@ -72,7 +72,7 @@ class PyrrhicRevivalEffect extends OneShotEffect {
 
     public PyrrhicRevivalEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "Each player returns each creature card from his or her graveyard to the battlefield with an additional -1/-1 counter on it";
+        staticText = "Each player returns each creature card from their graveyard to the battlefield with an additional -1/-1 counter on it";
     }
 
     public PyrrhicRevivalEffect(final PyrrhicRevivalEffect effect) {

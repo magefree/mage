@@ -50,7 +50,7 @@ public class TimeReversal extends CardImpl {
     public TimeReversal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}{U}");
 
-        // Each player shuffles his or her hand and graveyard into his or her library, then draws seven cards
+        // Each player shuffles their hand and graveyard into their library, then draws seven cards
         this.getSpellAbility().addEffect(new TimeReversalEffect());
         Effect effect = new DrawCardAllEffect(7);
         effect.setText(", then draws seven cards");
@@ -72,7 +72,7 @@ class TimeReversalEffect extends OneShotEffect {
 
     public TimeReversalEffect() {
         super(Outcome.Neutral);
-        staticText = "Each player shuffles his or her hand and graveyard into his or her library, then draws seven cards";
+        staticText = "Each player shuffles their hand and graveyard into their library, then draws seven cards";
     }
 
     public TimeReversalEffect(final TimeReversalEffect effect) {

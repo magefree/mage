@@ -52,7 +52,7 @@ public class Inquisition extends CardImpl {
     public Inquisition(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}");
 
-        // Target player reveals his or her hand. Inquisition deals damage to that player equal to the number of white cards in his or her hand.
+        // Target player reveals their hand. Inquisition deals damage to that player equal to the number of white cards in their hand.
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new InquisitionEffect());
     }
@@ -76,7 +76,7 @@ class InquisitionEffect extends OneShotEffect {
 
     public InquisitionEffect() {
         super(Outcome.Exile);
-        staticText = "Target player reveals his or her hand. Inquisition deals damage to that player equal to the number of white cards in his or her hand";
+        staticText = "Target player reveals their hand. Inquisition deals damage to that player equal to the number of white cards in their hand";
     }
 
     public InquisitionEffect(final InquisitionEffect effect) {

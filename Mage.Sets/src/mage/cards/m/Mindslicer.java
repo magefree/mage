@@ -49,7 +49,7 @@ public class Mindslicer extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 
-        // When Mindslicer dies, each player discards his or her hand.
+        // When Mindslicer dies, each player discards their hand.
         this.addAbility(new DiesTriggeredAbility(new DiscardHandAllEffect(),false));
     }
 

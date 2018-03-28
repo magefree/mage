@@ -51,7 +51,7 @@ public class ShatteredDreams extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}");
 
 
-        // Target opponent reveals his or her hand. You choose an artifact card from it. That player discards that card.
+        // Target opponent reveals their hand. You choose an artifact card from it. That player discards that card.
         this.getSpellAbility().addTarget(new TargetOpponent());
         this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(filter));
     }

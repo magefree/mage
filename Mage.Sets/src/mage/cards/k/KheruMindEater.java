@@ -69,7 +69,7 @@ public class KheruMindEater extends CardImpl {
         // Menace
         this.addAbility(new MenaceAbility());
 
-        // Whenever Kheru Mind-Eater deals combat damage to a player, that player exiles a card from his or her hand face down.
+        // Whenever Kheru Mind-Eater deals combat damage to a player, that player exiles a card from their hand face down.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new KheruMindEaterExileEffect(), false, true));
 
         // You may look at and play cards exiled with Kheru Mind-Eater.
@@ -91,7 +91,7 @@ class KheruMindEaterExileEffect extends OneShotEffect {
 
     public KheruMindEaterExileEffect() {
         super(Outcome.Discard);
-        staticText = "that player exiles a card of his or her hand face down";
+        staticText = "that player exiles a card of their hand face down";
     }
 
     public KheruMindEaterExileEffect(final KheruMindEaterExileEffect effect) {

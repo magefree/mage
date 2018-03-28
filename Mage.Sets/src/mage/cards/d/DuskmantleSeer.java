@@ -59,7 +59,7 @@ public class DuskmantleSeer extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        // At the beginning of your upkeep, each player reveals the top card of his or her library, loses life equal to that card's converted mana cost, then puts it into his or her hand.
+        // At the beginning of your upkeep, each player reveals the top card of their library, loses life equal to that card's converted mana cost, then puts it into their hand.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new DuskmantleSeerEffect(), TargetController.YOU, false, false));
 
     }
@@ -78,7 +78,7 @@ class DuskmantleSeerEffect extends OneShotEffect {
 
     public DuskmantleSeerEffect() {
         super(Outcome.Detriment);
-        this.staticText = "each player reveals the top card of his or her library, loses life equal to that card's converted mana cost, then puts it into his or her hand";
+        this.staticText = "each player reveals the top card of their library, loses life equal to that card's converted mana cost, then puts it into their hand";
     }
 
     public DuskmantleSeerEffect(final DuskmantleSeerEffect effect) {

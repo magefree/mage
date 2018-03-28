@@ -66,7 +66,7 @@ public class BloodTribute extends CardImpl {
         filter.add(Predicates.not(new TappedPredicate()));
         this.addAbility(new KickerAbility(new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, true))));
 
-        // Target opponent loses half his or her life, rounded up.
+        // Target opponent loses half their life, rounded up.
         this.getSpellAbility().addTarget(new TargetOpponent());
         this.getSpellAbility().addEffect(new BloodTributeLoseLifeEffect());
 
@@ -92,7 +92,7 @@ class BloodTributeLoseLifeEffect extends OneShotEffect {
 
     public BloodTributeLoseLifeEffect() {
         super(Outcome.Damage);
-        this.staticText = "Target opponent loses half his or her life, rounded up";
+        this.staticText = "Target opponent loses half their life, rounded up";
     }
 
     public BloodTributeLoseLifeEffect(final BloodTributeLoseLifeEffect effect) {

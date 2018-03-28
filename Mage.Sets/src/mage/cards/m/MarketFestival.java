@@ -67,7 +67,7 @@ public class MarketFestival extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
-        // Whenever enchanted land is tapped for mana, its controller adds two mana in any combination of colors to his or her mana pool (in addition to the mana the land produces).
+        // Whenever enchanted land is tapped for mana, its controller adds two mana in any combination of colors to their mana pool (in addition to the mana the land produces).
         this.addAbility(new MarketFestivalTriggeredAbility());
     }
 
@@ -109,7 +109,7 @@ class MarketFestivalTriggeredAbility extends TriggeredManaAbility {
 
     @Override
     public String getRule() {
-        return "Whenever enchanted land is tapped for mana, its controller adds two mana in any combination of colors to his or her mana pool <i>(in addition to the mana the land produces)</i>.";
+        return "Whenever enchanted land is tapped for mana, its controller adds two mana in any combination of colors to their mana pool <i>(in addition to the mana the land produces)</i>.";
     }
 }
 
@@ -117,7 +117,7 @@ class MarketFestivalManaEffect extends ManaEffect {
 
     public MarketFestivalManaEffect() {
         super();
-        this.staticText = "its controller adds two mana in any combination of colors to his or her mana pool";
+        this.staticText = "its controller adds two mana in any combination of colors to their mana pool";
     }
 
     public MarketFestivalManaEffect(final MarketFestivalManaEffect effect) {

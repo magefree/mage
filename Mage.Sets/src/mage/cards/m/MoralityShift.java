@@ -27,6 +27,7 @@
  */
 package mage.cards.m;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -37,6 +38,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -85,12 +87,16 @@ class MoralityShiftEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            List<Card> copyLibrary = controller.getLibrary().getCards(game);
+            Set<Card> copyLibrary = new HashSet<>();
+            List<Card> listCopyLibrary = controller.getLibrary().getCards(game);
+            listCopyLibrary.forEach((card) -> {
+                copyLibrary.add(card);
+            });
             Set<Card> copyGraveyard = controller.getGraveyard().getCards(game);
             controller.getLibrary().clear();
             controller.getGraveyard().clear();
-            controller.getGraveyard().addAll(copyLibrary);
-            controller.getLibrary().addAll(copyGraveyard, game);
+            controller.moveCards(copyLibrary, Zone.GRAVEYARD, source, game);
+            controller.moveCards(copyGraveyard, Zone.LIBRARY, source, game);
             controller.shuffleLibrary(source, game);
             return true;
         }

@@ -52,7 +52,7 @@ public class Extract extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{U}");
 
 
-        // Search target player's library for a card and exile it. Then that player shuffles his or her library.
+        // Search target player's library for a card and exile it. Then that player shuffles their library.
         this.getSpellAbility().addEffect(new ExtractEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
    
@@ -74,7 +74,7 @@ class ExtractEffect extends OneShotEffect {
 
     public ExtractEffect() {
         super(Outcome.Exile);
-        staticText = "Search target player's library for a card and exile it. Then that player shuffles his or her library.";
+        staticText = "Search target player's library for a card and exile it. Then that player shuffles their library.";
     }
 
     public ExtractEffect(final ExtractEffect effect) {

@@ -53,7 +53,7 @@ public class AltarOfDementia extends CardImpl {
     public AltarOfDementia(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
-        // Sacrifice a creature: Target player puts a number of cards equal to the sacrificed creature's power from the top of his or her library into his or her graveyard.
+        // Sacrifice a creature: Target player puts a number of cards equal to the sacrificed creature's power from the top of their library into their graveyard.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AltarOfDementiaEffect(), new SacrificeTargetCost(new TargetControlledPermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
@@ -74,7 +74,7 @@ class AltarOfDementiaEffect extends OneShotEffect {
 
     public AltarOfDementiaEffect() {
         super(Outcome.Damage);
-        staticText = "Target player puts a number of cards equal to the sacrificed creature's power from the top of his or her library into his or her graveyard";
+        staticText = "Target player puts a number of cards equal to the sacrificed creature's power from the top of their library into their graveyard";
     }
 
     public AltarOfDementiaEffect(final AltarOfDementiaEffect effect) {

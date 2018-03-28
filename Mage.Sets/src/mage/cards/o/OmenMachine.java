@@ -58,7 +58,7 @@ public class OmenMachine extends CardImpl {
         // Players can't draw cards.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OmenMachineEffect()));
 
-        // At the beginning of each player's draw step, that player exiles the top card of his or her library. If it's a land card, the player puts it onto the battlefield. Otherwise, the player casts it without paying its mana cost if able.
+        // At the beginning of each player's draw step, that player exiles the top card of their library. If it's a land card, the player puts it onto the battlefield. Otherwise, the player casts it without paying its mana cost if able.
         this.addAbility(new BeginningOfDrawTriggeredAbility(new OmenMachineEffect2(), TargetController.ANY, false));
     }
 
@@ -109,7 +109,7 @@ class OmenMachineEffect2 extends OneShotEffect {
 
     public OmenMachineEffect2() {
         super(Outcome.PlayForFree);
-        staticText = "that player exiles the top card of his or her library. If it's a land card, the player puts it onto the battlefield. Otherwise, the player casts it without paying its mana cost if able";
+        staticText = "that player exiles the top card of their library. If it's a land card, the player puts it onto the battlefield. Otherwise, the player casts it without paying its mana cost if able";
     }
 
     public OmenMachineEffect2(final OmenMachineEffect2 effect) {

@@ -75,7 +75,7 @@ public class OKagachiVengefulKami extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
 
-        // Whenever O-Kagachi, Vengeful Kami deals combat damage to a player, if that player attacked you during his or her last turn, exile target nonland permanent that player controls
+        // Whenever O-Kagachi, Vengeful Kami deals combat damage to a player, if that player attacked you during their last turn, exile target nonland permanent that player controls
         OKagachiVengefulKamiTriggeredAbility ability = new OKagachiVengefulKamiTriggeredAbility();
         ability.addWatcher(new PlayersAttackedLastTurnWatcher());
         this.addAbility(ability);
@@ -142,7 +142,7 @@ class OKagachiVengefulKamiTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever {this} deals combat damage to a player, if that player attacked you during his or her last turn, exile target nonland permanent that player controls";
+        return "Whenever {this} deals combat damage to a player, if that player attacked you during their last turn, exile target nonland permanent that player controls";
     }
 }
 
@@ -150,7 +150,7 @@ class OKagachiVengefulKamiEffect extends OneShotEffect {
 
     public OKagachiVengefulKamiEffect() {
         super(Outcome.Benefit);
-        this.staticText = "if that player attacked you during his or her last turn, exile target nonland permanent that player controls";
+        this.staticText = "if that player attacked you during their last turn, exile target nonland permanent that player controls";
     }
 
     public OKagachiVengefulKamiEffect(final OKagachiVengefulKamiEffect effect) {

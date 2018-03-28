@@ -57,7 +57,7 @@ public class ProteusStaff extends CardImpl {
     public ProteusStaff(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
-        // {2}{U}, {T}: Put target creature on the bottom of its owner's library. That creature's controller reveals cards from the top of his or her library until he or she reveals a creature card. The player puts that card onto the battlefield and the rest on the bottom of his or her library in any order. Activate this ability only any time you could cast a sorcery.
+        // {2}{U}, {T}: Put target creature on the bottom of its owner's library. That creature's controller reveals cards from the top of their library until he or she reveals a creature card. The player puts that card onto the battlefield and the rest on the bottom of their library in any order. Activate this ability only any time you could cast a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new ProteusStaffEffect(), new ManaCostsImpl<>("{2}{U}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
@@ -78,7 +78,7 @@ class ProteusStaffEffect extends OneShotEffect {
 
     ProteusStaffEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "Put target creature on the bottom of its owner's library. That creature's controller reveals cards from the top of his or her library until he or she reveals a creature card. The player puts that card onto the battlefield and the rest on the bottom of his or her library in any order.";
+        this.staticText = "Put target creature on the bottom of its owner's library. That creature's controller reveals cards from the top of their library until he or she reveals a creature card. The player puts that card onto the battlefield and the rest on the bottom of their library in any order.";
     }
 
     ProteusStaffEffect(final ProteusStaffEffect effect) {
@@ -100,7 +100,7 @@ class ProteusStaffEffect extends OneShotEffect {
                 // Put target creature on the bottom of its owner's library.
                 owner.moveCardToLibraryWithInfo(permanent, source.getSourceId(), game, Zone.BATTLEFIELD, false, true);
 
-                // That creature's controller reveals cards from the top of his or her library until he or she reveals a creature card.
+                // That creature's controller reveals cards from the top of their library until he or she reveals a creature card.
                 Cards cards = new CardsImpl();
                 while (controller.getLibrary().hasCards()) {
                     Card card = controller.getLibrary().removeFromTop(game);
@@ -116,7 +116,7 @@ class ProteusStaffEffect extends OneShotEffect {
                 }
                 controller.revealCards("Proteus Staff", cards, game);
 
-                // and the rest on the bottom of his or her library in any order.
+                // and the rest on the bottom of their library in any order.
                 while (!cards.isEmpty() && controller.canRespond()) {
                     if (cards.size() == 1) {
                         Card card = cards.get(cards.iterator().next(), game);

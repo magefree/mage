@@ -56,8 +56,8 @@ public class JacesPhantasm extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        // Jace's Phantasm gets +4/+4 as long as an opponent has ten or more cards in his or her graveyard.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new BoostSourceEffect(4, 4, Duration.WhileOnBattlefield), new CardsInOpponentGraveCondition(10), "{this} gets +4/+4 as long as an opponent has ten or more cards in his or her graveyard")));
+        // Jace's Phantasm gets +4/+4 as long as an opponent has ten or more cards in their graveyard.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new BoostSourceEffect(4, 4, Duration.WhileOnBattlefield), new CardsInOpponentGraveCondition(10), "{this} gets +4/+4 as long as an opponent has ten or more cards in their graveyard")));
     }
 
     public JacesPhantasm(final JacesPhantasm card) {

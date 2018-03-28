@@ -53,7 +53,7 @@ public class BloodbondMarch extends CardImpl {
 
     public BloodbondMarch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{G}");
-        // Whenever a player casts a creature spell, each player returns all cards with the same name as that spell from his or her graveyard to the battlefield.
+        // Whenever a player casts a creature spell, each player returns all cards with the same name as that spell from their graveyard to the battlefield.
         this.addAbility(new SpellCastAllTriggeredAbility(new BloodbondMarchEffect(), new FilterCreatureSpell(), false, SetTargetPointer.SPELL));
     }
 
@@ -70,7 +70,7 @@ public class BloodbondMarch extends CardImpl {
 
         public BloodbondMarchEffect() {
             super(Outcome.Benefit);
-            staticText = "each player returns all cards with the same name as that spell from his or her graveyard to the battlefield";
+            staticText = "each player returns all cards with the same name as that spell from their graveyard to the battlefield";
         }
 
         public BloodbondMarchEffect(BloodbondMarchEffect effect) {

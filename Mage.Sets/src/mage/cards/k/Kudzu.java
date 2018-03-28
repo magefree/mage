@@ -66,7 +66,7 @@ public class Kudzu extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
-        // When enchanted land becomes tapped, destroy it. That land's controller attaches Kudzu to a land of his or her choice.
+        // When enchanted land becomes tapped, destroy it. That land's controller attaches Kudzu to a land of their choice.
         this.addAbility(new BecomesTappedAttachedTriggeredAbility(new KudzuEffect(), "enchanted land"));
 
     }
@@ -85,7 +85,7 @@ class KudzuEffect extends OneShotEffect {
 
     public KudzuEffect() {
         super(Outcome.Detriment);
-        staticText = "destroy it. That land's controller attaches {this} to a land of his or her choice";
+        staticText = "destroy it. That land's controller attaches {this} to a land of their choice";
     }
 
     public KudzuEffect(final KudzuEffect effect) {

@@ -49,7 +49,7 @@ public class WindsOfChange extends CardImpl {
     public WindsOfChange(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}");
 
-        // Each player shuffles the cards from his or her hand into his or her library, then draws that many cards.
+        // Each player shuffles the cards from their hand into their library, then draws that many cards.
         this.getSpellAbility().addEffect(new WindsOfChangeEffect());
     }
 
@@ -67,7 +67,7 @@ class WindsOfChangeEffect extends OneShotEffect {
 
     public WindsOfChangeEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Each player shuffles the cards from his or her hand into his or her library, then draws that many cards";
+        this.staticText = "Each player shuffles the cards from their hand into their library, then draws that many cards";
     }
 
     public WindsOfChangeEffect(final WindsOfChangeEffect effect) {

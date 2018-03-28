@@ -83,7 +83,7 @@ public class SkipNextPlayerUntapStepEffect extends OneShotEffect {
     public String getText(Mode mode) {
         StringBuilder sb = new StringBuilder();
         if (!staticText.isEmpty()) {
-            sb.append(staticText).append(" player skips his or her next untap step");
+            sb.append(staticText).append(" player skips their next untap step");
         } else {
             sb.append("You skip your next untap step");
         }

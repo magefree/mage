@@ -53,7 +53,7 @@ public class MinamosMeddling extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}{U}");
 
 
-        // Counter target spell. That spell's controller reveals his or her hand, then discards each card with the same name as a card spliced onto that spell.
+        // Counter target spell. That spell's controller reveals their hand, then discards each card with the same name as a card spliced onto that spell.
         this.getSpellAbility().addTarget(new TargetSpell(StaticFilters.FILTER_SPELL));
         this.getSpellAbility().addEffect(new MinamosMeddlingCounterTargetEffect());
     }
@@ -72,7 +72,7 @@ class MinamosMeddlingCounterTargetEffect extends OneShotEffect {
 
     public MinamosMeddlingCounterTargetEffect() {
         super(Outcome.Benefit);
-        staticText = "Counter target spell. That spell's controller reveals his or her hand, then discards each card with the same name as a card spliced onto that spell";
+        staticText = "Counter target spell. That spell's controller reveals their hand, then discards each card with the same name as a card spliced onto that spell";
     }
 
     public MinamosMeddlingCounterTargetEffect(final MinamosMeddlingCounterTargetEffect effect) {

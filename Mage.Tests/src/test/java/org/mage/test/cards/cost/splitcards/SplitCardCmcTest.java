@@ -29,7 +29,7 @@ public class SplitCardCmcTest extends CardTestPlayerBase {
         // Total CMC of Failure // Comply is 3, so should be exiled by Transgress the Mind.
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
         // Devoid
-        // Target player reveals his or her hand. You may choose a card from it with converted mana cost 3 or greater and exile that card.
+        // Target player reveals their hand. You may choose a card from it with converted mana cost 3 or greater and exile that card.
         addCard(Zone.HAND, playerA, "Transgress the Mind");
         addCard(Zone.HAND, playerB, "Failure // Comply");
 

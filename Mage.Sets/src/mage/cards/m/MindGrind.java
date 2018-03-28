@@ -53,7 +53,7 @@ public class MindGrind extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{U}{B}");
 
 
-        // Each opponent reveals cards from the top of his or her library until he or she reveals X land cards, then puts all cards revealed this way into his or her graveyard. X can't be 0.
+        // Each opponent reveals cards from the top of their library until he or she reveals X land cards, then puts all cards revealed this way into their graveyard. X can't be 0.
         this.getSpellAbility().addEffect(new MindGrindEffect());
         for (VariableCost cost: this.getSpellAbility().getManaCosts().getVariableCosts()) {
             if (cost instanceof VariableManaCost) {
@@ -77,7 +77,7 @@ class MindGrindEffect extends OneShotEffect {
 
     public MindGrindEffect() {
         super(Outcome.Discard);
-        this.staticText = "Each opponent reveals cards from the top of his or her library until he or she reveals X land cards, then puts all cards revealed this way into his or her graveyard. X can't be 0";
+        this.staticText = "Each opponent reveals cards from the top of their library until he or she reveals X land cards, then puts all cards revealed this way into their graveyard. X can't be 0";
     }
 
     public MindGrindEffect(final MindGrindEffect effect) {

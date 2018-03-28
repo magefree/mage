@@ -50,7 +50,7 @@ public class JacesMindseekerTest extends CardTestPlayerBase {
     public void testJacesMindseeker() {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 6);
         // Flying
-        // When Jace's Mindseeker enters the battlefield, target opponent puts the top five cards of his or her library into his or her graveyard.
+        // When Jace's Mindseeker enters the battlefield, target opponent puts the top five cards of their library into their graveyard.
         // You may cast an instant or sorcery card from among them without paying its mana cost.
         addCard(Zone.HAND, playerA, "Jace's Mindseeker", 1); // Creature 4/4 {4}{U}{U}
 

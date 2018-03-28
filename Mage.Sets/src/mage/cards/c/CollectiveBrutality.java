@@ -81,9 +81,9 @@ public class CollectiveBrutality extends CardImpl {
         this.getSpellAbility().getModes().setMinModes(1);
         this.getSpellAbility().getModes().setMaxModes(3);
 
-        // Target opponent reveals his or her hand. You choose an instant or sorcery card from it. That player discards that card.;
+        // Target opponent reveals their hand. You choose an instant or sorcery card from it. That player discards that card.;
         Effect effect = new DiscardCardYouChooseTargetEffect(filter, TargetController.ANY);
-        effect.setText("Target opponent reveals his or her hand. You choose an instant or sorcery card from it. That player discards that card");
+        effect.setText("Target opponent reveals their hand. You choose an instant or sorcery card from it. That player discards that card");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetPlayer(1, 1, false, filterDiscard));
 

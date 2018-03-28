@@ -89,7 +89,7 @@ public class HideawayTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Mosswort Bridge");
         // When you cast Ulamog, the Ceaseless Hunger, exile two target permanents.
         // Indestructible
-        // Whenever Ulamog attacks, defending player exiles the top twenty cards of his or her library.
+        // Whenever Ulamog attacks, defending player exiles the top twenty cards of their library.
         addCard(Zone.LIBRARY, playerA, "Ulamog, the Ceaseless Hunger");
         skipInitShuffling();
 

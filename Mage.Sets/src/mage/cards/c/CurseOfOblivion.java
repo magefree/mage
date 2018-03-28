@@ -66,7 +66,7 @@ public class CurseOfOblivion extends CardImpl {
         Ability ability = new EnchantAbility(target.getTargetName());
         this.addAbility(ability);
 
-        // At the beginning of enchanted player's upkeep, that player exiles two cards from his or her graveyard.
+        // At the beginning of enchanted player's upkeep, that player exiles two cards from their graveyard.
         this.addAbility(new CurseOfOblivionAbility());
     }
 
@@ -115,7 +115,7 @@ class CurseOfOblivionAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "At the beginning of enchanted player's upkeep, that player exiles two cards from his or her graveyard.";
+        return "At the beginning of enchanted player's upkeep, that player exiles two cards from their graveyard.";
     }
 
 }

@@ -59,7 +59,7 @@ public class RunehornHellkite extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // {5}{R}, Exile Runehorn Hellkite from your graveyard: Each player discards his or her hand, then draws seven cards.
+        // {5}{R}, Exile Runehorn Hellkite from your graveyard: Each player discards their hand, then draws seven cards.
         Effect effect = new DrawCardAllEffect(7);
         effect.setText(", then draws seven cards");
         Ability ability = new SimpleActivatedAbility(Zone.GRAVEYARD, new DiscardHandAllEffect(), new ManaCostsImpl("{5}{R}"));

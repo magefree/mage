@@ -65,7 +65,7 @@ public class DawnsReflection extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        // Whenever enchanted land is tapped for mana, its controller adds two mana in any combination of colors to his or her mana pool.
+        // Whenever enchanted land is tapped for mana, its controller adds two mana in any combination of colors to their mana pool.
         this.addAbility(new DawnsReflectionTriggeredAbility());
     }
 
@@ -107,7 +107,7 @@ class DawnsReflectionTriggeredAbility extends TriggeredManaAbility {
 
     @Override
     public String getRule() {
-        return "Whenever enchanted land is tapped for mana, its controller adds two mana in any combination of colors to his or her mana pool <i>(in addition to the mana the land produces)</i>.";
+        return "Whenever enchanted land is tapped for mana, its controller adds two mana in any combination of colors to their mana pool <i>(in addition to the mana the land produces)</i>.";
     }
 }
 
@@ -115,7 +115,7 @@ class DawnsReflectionManaEffect extends ManaEffect {
 
     public DawnsReflectionManaEffect() {
         super();
-        this.staticText = "its controller adds two mana in any combination of colors to his or her mana pool";
+        this.staticText = "its controller adds two mana in any combination of colors to their mana pool";
     }
 
     public DawnsReflectionManaEffect(final DawnsReflectionManaEffect effect) {

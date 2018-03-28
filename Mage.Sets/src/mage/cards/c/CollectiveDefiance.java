@@ -73,7 +73,7 @@ public class CollectiveDefiance extends CardImpl {
         this.getSpellAbility().getModes().setMinModes(1);
         this.getSpellAbility().getModes().setMaxModes(3);
 
-        // Target player discards all cards in his or her hand, then draws that many cards.;
+        // Target player discards all cards in their hand, then draws that many cards.;
         this.getSpellAbility().addEffect(new CollectiveDefianceEffect());
         this.getSpellAbility().addTarget(new TargetPlayer(1, 1, false, filterDiscard));
 
@@ -108,7 +108,7 @@ class CollectiveDefianceEffect extends OneShotEffect {
 
     public CollectiveDefianceEffect() {
         super(Outcome.Discard);
-        this.staticText = "Target player discards all the cards in his or her hand, then draws that many cards";
+        this.staticText = "Target player discards all the cards in their hand, then draws that many cards";
     }
 
     public CollectiveDefianceEffect(final CollectiveDefianceEffect effect) {

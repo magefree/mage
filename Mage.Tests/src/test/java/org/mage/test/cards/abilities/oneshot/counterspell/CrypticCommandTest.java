@@ -86,7 +86,7 @@ public class CrypticCommandTest extends CardTestPlayerBase {
      */
     @Test
     public void testCommandChangeTarget() {
-        // Target player reveals his or her hand. You choose a nonland card from it. That player discards that card. You lose 2 life.
+        // Target player reveals their hand. You choose a nonland card from it. That player discards that card. You lose 2 life.
         addCard(Zone.HAND, playerA, "Thoughtseize");
         // Counter target spell. If that spell is countered this way, put it into its owner's hand instead of into that player's graveyard.
         // Draw a card.

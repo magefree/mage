@@ -249,7 +249,7 @@ public class StormTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 10);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
-        // Each player discards his or her hand,
+        // Each player discards their hand,
         // then draws seven cards.
         addCard(Zone.HAND, playerA, "Wheel of Fortune", 1); // {2}{R}
         addCard(Zone.LIBRARY, playerA, "Mox Emerald", 1);

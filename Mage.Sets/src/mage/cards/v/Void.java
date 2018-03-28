@@ -57,7 +57,7 @@ public class Void extends CardImpl {
     public Void(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{B}{R}");
 
-        // Choose a number. Destroy all artifacts and creatures with converted mana cost equal to that number. Then target player reveals his or her hand and discards all nonland cards with converted mana cost equal to the number.
+        // Choose a number. Destroy all artifacts and creatures with converted mana cost equal to that number. Then target player reveals their hand and discards all nonland cards with converted mana cost equal to the number.
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new VoidEffect());
 
@@ -77,7 +77,7 @@ class VoidEffect extends OneShotEffect {
 
     public VoidEffect() {
         super(Outcome.DestroyPermanent);
-        this.staticText = "Choose a number. Destroy all artifacts and creatures with converted mana cost equal to that number. Then target player reveals his or her hand and discards all nonland cards with converted mana cost equal to the number";
+        this.staticText = "Choose a number. Destroy all artifacts and creatures with converted mana cost equal to that number. Then target player reveals their hand and discards all nonland cards with converted mana cost equal to the number";
     }
 
     public VoidEffect(final VoidEffect effect) {

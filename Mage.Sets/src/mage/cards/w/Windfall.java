@@ -47,7 +47,7 @@ public class Windfall extends CardImpl {
     public Windfall(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}");
 
-        // Each player discards his or her hand, then draws cards equal to the greatest number of cards a player discarded this way.
+        // Each player discards their hand, then draws cards equal to the greatest number of cards a player discarded this way.
         this.getSpellAbility().addEffect(new WindfallEffect());
     }
 
@@ -65,7 +65,7 @@ class WindfallEffect extends OneShotEffect {
 
     WindfallEffect() {
         super(Outcome.Discard);
-        staticText = "Each player discards his or her hand, then draws cards equal to the greatest number of cards a player discarded this way.";
+        staticText = "Each player discards their hand, then draws cards equal to the greatest number of cards a player discarded this way.";
     }
 
     WindfallEffect(final WindfallEffect effect) {

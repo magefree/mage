@@ -58,7 +58,7 @@ public class SharedFate extends CardImpl {
     public SharedFate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{U}");
 
-        // If a player would draw a card, that player exiles the top card of one of his or her opponents' libraries face down instead.
+        // If a player would draw a card, that player exiles the top card of one of their opponents' libraries face down instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SharedFateReplacementEffect()));
 
         // Each player may look at and play cards he or she exiled with Shared Fate.
@@ -80,7 +80,7 @@ class SharedFateReplacementEffect extends ReplacementEffectImpl {
 
     SharedFateReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral);
-        this.staticText = "If a player would draw a card, that player exiles the top card of one of his or her opponents' libraries face down instead";
+        this.staticText = "If a player would draw a card, that player exiles the top card of one of their opponents' libraries face down instead";
     }
 
     SharedFateReplacementEffect(final SharedFateReplacementEffect effect) {

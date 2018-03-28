@@ -53,7 +53,7 @@ public class SensationGorger extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Kinship - At the beginning of your upkeep, you may look at the top card of your library. If it shares a creature type with Sensation Gorger, you may reveal it. 
-        // If you do, each player discards his or her hand, then draws four cards.
+        // If you do, each player discards their hand, then draws four cards.
         KinshipAbility ability = new KinshipAbility(new DiscardHandAllEffect());
         Effect effect = new DrawCardAllEffect(4);
         effect.setText(", then draws four cards");

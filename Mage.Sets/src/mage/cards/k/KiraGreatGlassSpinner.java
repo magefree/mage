@@ -63,7 +63,7 @@ public class KiraGreatGlassSpinner extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // Creatures you control have "Whenever this creature becomes the target of a spell or ability for the first time in a turn, counter that spell or ability."
+        // Creatures you control have "Whenever this creature becomes the target of a spell or ability for the first time each turn, counter that spell or ability."
         Effect effect = new CounterTargetEffect();
         effect.setText("counter that spell or ability");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
@@ -122,7 +122,7 @@ class KiraGreatGlassSpinnerAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever this creature becomes the target of a spell or ability for the first time in a turn, counter that spell or ability.";
+        return "Whenever this creature becomes the target of a spell or ability for the first time each turn, counter that spell or ability.";
     }
 
 }

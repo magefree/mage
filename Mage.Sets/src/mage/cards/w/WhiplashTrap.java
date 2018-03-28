@@ -53,7 +53,7 @@ public class WhiplashTrap extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{U}{U}");
         this.subtype.add(SubType.TRAP);
 
-        // If an opponent had two or more creatures enter the battlefield under his or her control this turn, you may pay {U} rather than pay Whiplash Trap's mana cost.
+        // If an opponent had two or more creatures enter the battlefield under their control this turn, you may pay {U} rather than pay Whiplash Trap's mana cost.
         this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl("{U}"), WhiplashTrapCondition.instance), new PermanentsEnteredBattlefieldWatcher());
 
         // Return two target creatures to their owners' hands.
@@ -100,6 +100,6 @@ enum WhiplashTrapCondition implements Condition {
 
     @Override
     public String toString() {
-        return "If an opponent had two or more creatures enter the battlefield under his or her control this turn";
+        return "If an opponent had two or more creatures enter the battlefield under their control this turn";
     }
 }

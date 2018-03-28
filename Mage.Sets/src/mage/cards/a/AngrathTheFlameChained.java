@@ -82,7 +82,7 @@ public class AngrathTheFlameChained extends CardImpl {
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 
-        // -8: Each opponent loses life equal to the number of cards in his or her graveyard.
+        // -8: Each opponent loses life equal to the number of cards in their graveyard.
         this.addAbility(new LoyaltyAbility(new AngrathTheFlameUltimateEffect(), -8));
 
     }
@@ -101,7 +101,7 @@ class AngrathTheFlameUltimateEffect extends OneShotEffect {
 
     public AngrathTheFlameUltimateEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Each opponent loses life equal to the number of cards in his or her graveyard";
+        this.staticText = "Each opponent loses life equal to the number of cards in their graveyard";
     }
 
     public AngrathTheFlameUltimateEffect(final AngrathTheFlameUltimateEffect effect) {

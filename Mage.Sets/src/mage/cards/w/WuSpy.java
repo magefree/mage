@@ -62,7 +62,7 @@ public class WuSpy extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // When Wu Spy enters the battlefield, look at the top two cards of target player's library. Put one of them into his or her graveyard.
+        // When Wu Spy enters the battlefield, look at the top two cards of target player's library. Put one of them into their graveyard.
         Ability ability = new EntersBattlefieldTriggeredAbility(new WuSpyEffect(), false);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
@@ -83,7 +83,7 @@ class WuSpyEffect extends OneShotEffect {
 
     WuSpyEffect() {
         super(Outcome.Exile);
-        this.staticText = "look at the top two cards of target player's library. Put one of them into his or her graveyard";
+        this.staticText = "look at the top two cards of target player's library. Put one of them into their graveyard";
     }
 
     WuSpyEffect(final WuSpyEffect effect) {

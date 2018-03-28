@@ -54,7 +54,7 @@ public class WhimsOfTheFates extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{R}");
 
 
-        // Starting with you, each player separates all permanents he or she controls into three piles. Then each player chooses one of his or her piles at random and sacrifices those permanents.
+        // Starting with you, each player separates all permanents he or she controls into three piles. Then each player chooses one of their piles at random and sacrifices those permanents.
         this.getSpellAbility().addEffect(new WhimsOfTheFateEffect());
     }
 
@@ -73,7 +73,7 @@ class WhimsOfTheFateEffect extends OneShotEffect {
 
     public WhimsOfTheFateEffect() {
         super(Outcome.Detriment);
-        this.staticText = "Starting with you, each player separates all permanents he or she controls into three piles. Then each player chooses one of his or her piles at random and sacrifices those permanents.";
+        this.staticText = "Starting with you, each player separates all permanents he or she controls into three piles. Then each player chooses one of their piles at random and sacrifices those permanents.";
     }
 
     public WhimsOfTheFateEffect(final WhimsOfTheFateEffect effect) {

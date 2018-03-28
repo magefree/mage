@@ -51,7 +51,7 @@ public class Mudhole extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");
 
 
-        // Target player exiles all land cards from his or her graveyard.
+        // Target player exiles all land cards from their graveyard.
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new MudholeEffect());
     }
@@ -72,7 +72,7 @@ class MudholeEffect extends OneShotEffect {
 
     public MudholeEffect() {
         super(Outcome.Exile);
-        staticText = "Target player exiles all land cards from his or her graveyard";
+        staticText = "Target player exiles all land cards from their graveyard";
     }
 
     public MudholeEffect(final MudholeEffect effect) {

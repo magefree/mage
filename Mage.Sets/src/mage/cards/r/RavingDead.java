@@ -61,7 +61,7 @@ public class RavingDead extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
         // At the beginning of combat on your turn, choose an opponent at random. Raving Dead attacks that player this combat if able.
         this.addAbility(new BeginningOfCombatTriggeredAbility(new AttackIfAbleTargetRandomOpponentSourceEffect(), TargetController.YOU, false));
-        // Whenever Raving Dead deals combat damage to a player, that player loses half his or her life, rounded down.
+        // Whenever Raving Dead deals combat damage to a player, that player loses half their life, rounded down.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new RavingDeadDamageEffect(), false, true));
     }
 
@@ -79,7 +79,7 @@ class RavingDeadDamageEffect extends OneShotEffect {
 
     public RavingDeadDamageEffect() {
         super(Outcome.Damage);
-        this.staticText = "that player loses half his or her life, rounded down";
+        this.staticText = "that player loses half their life, rounded down";
     }
 
     public RavingDeadDamageEffect(final RavingDeadDamageEffect effect) {

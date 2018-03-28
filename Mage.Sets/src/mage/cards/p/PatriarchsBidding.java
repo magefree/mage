@@ -54,7 +54,7 @@ public class PatriarchsBidding extends CardImpl {
     public PatriarchsBidding(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");
 
-        // Each player chooses a creature type. Each player returns all creature cards of a type chosen this way from his or her graveyard to the battlefield.
+        // Each player chooses a creature type. Each player returns all creature cards of a type chosen this way from their graveyard to the battlefield.
         this.getSpellAbility().addEffect(new PatriarchsBiddingEffect());
     }
 
@@ -72,7 +72,7 @@ class PatriarchsBiddingEffect extends OneShotEffect {
 
     public PatriarchsBiddingEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "each player chooses a creature type. Each player returns all creature cards of a type chosen this way from his or her graveyard to the battlefield";
+        this.staticText = "each player chooses a creature type. Each player returns all creature cards of a type chosen this way from their graveyard to the battlefield";
     }
 
     public PatriarchsBiddingEffect(final PatriarchsBiddingEffect effect) {

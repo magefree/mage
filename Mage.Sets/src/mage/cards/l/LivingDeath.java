@@ -55,7 +55,7 @@ public class LivingDeath extends CardImpl {
     public LivingDeath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");
 
-        // Each player exiles all creature cards from his or her graveyard, then sacrifices all creatures he or she controls, then puts all cards he or she exiled this way onto the battlefield.
+        // Each player exiles all creature cards from their graveyard, then sacrifices all creatures he or she controls, then puts all cards he or she exiled this way onto the battlefield.
         this.getSpellAbility().addEffect(new LivingDeathEffect());
     }
 
@@ -73,7 +73,7 @@ class LivingDeathEffect extends OneShotEffect {
 
     public LivingDeathEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Each player exiles all creature cards from his or her graveyard, then sacrifices all creatures he or she controls, then puts all cards he or she exiled this way onto the battlefield";
+        this.staticText = "Each player exiles all creature cards from their graveyard, then sacrifices all creatures he or she controls, then puts all cards he or she exiled this way onto the battlefield";
     }
 
     public LivingDeathEffect(final LivingDeathEffect effect) {

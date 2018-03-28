@@ -55,7 +55,7 @@ public class TalarasBane extends CardImpl {
     public TalarasBane(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}");
 
-        // Target opponent reveals his or her hand. You choose a green or white creature card from it. You gain life equal that creature card's toughness, then that player discards that card.
+        // Target opponent reveals their hand. You choose a green or white creature card from it. You gain life equal that creature card's toughness, then that player discards that card.
         this.getSpellAbility().addEffect(new TalarasBaneEffect());
         this.getSpellAbility().addTarget(new TargetOpponent());
 
@@ -84,7 +84,7 @@ class TalarasBaneEffect extends OneShotEffect {
 
     public TalarasBaneEffect() {
         super(Outcome.Detriment);
-        this.staticText = "Target opponent reveals his or her hand. You choose a green or white creature card from it. You gain life equal to that creature card's toughness, then that player discards that card";
+        this.staticText = "Target opponent reveals their hand. You choose a green or white creature card from it. You gain life equal to that creature card's toughness, then that player discards that card";
     }
 
     public TalarasBaneEffect(final TalarasBaneEffect effect) {

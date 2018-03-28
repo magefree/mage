@@ -55,7 +55,7 @@ public class PsychicSpear extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}");
 
 
-        // Target player reveals his or her hand. You choose a Spirit or Arcane card from it. That player discards that card.
+        // Target player reveals their hand. You choose a Spirit or Arcane card from it. That player discards that card.
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(filter, TargetController.ANY));
     }

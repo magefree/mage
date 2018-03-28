@@ -53,7 +53,7 @@ public class DivergentTransformations extends CardImpl {
 
         // Undaunted
         this.addAbility(new UndauntedAbility());
-        // Exile two target creatures. For each of those creatures, its controller reveals cards from the top of his or her library until he or she reveals a creature card, puts that card onto the battlefield, then shuffles the rest into his or her library.
+        // Exile two target creatures. For each of those creatures, its controller reveals cards from the top of their library until he or she reveals a creature card, puts that card onto the battlefield, then shuffles the rest into their library.
         this.getSpellAbility().addEffect(new DivergentTransformationsEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(2, 2, FILTER_PERMANENT_CREATURES, false));
 
@@ -73,8 +73,8 @@ class DivergentTransformationsEffect extends OneShotEffect {
 
     public DivergentTransformationsEffect() {
         super(Outcome.Detriment);
-        this.staticText = "Exile two target creatures. For each of those creatures, its controller reveals cards from the top of his or her library "
-                + "until he or she reveals a creature card, puts that card onto the battlefield, then shuffles the rest into his or her library";
+        this.staticText = "Exile two target creatures. For each of those creatures, its controller reveals cards from the top of their library "
+                + "until he or she reveals a creature card, puts that card onto the battlefield, then shuffles the rest into their library";
     }
 
     public DivergentTransformationsEffect(final DivergentTransformationsEffect effect) {

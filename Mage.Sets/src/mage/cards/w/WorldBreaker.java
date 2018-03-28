@@ -44,7 +44,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledLandPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPermanent;
@@ -84,7 +84,7 @@ public class WorldBreaker extends CardImpl {
         
         // {2}{C}, Sacrifice a land: Return World Breaker from your graveyard to your hand.
         ability = new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), new ManaCostsImpl("{2}{C}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent())));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT)));
         this.addAbility(ability);
     }
 

@@ -61,7 +61,7 @@ public class VerdantSuccession extends CardImpl {
     public VerdantSuccession(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{G}");
 
-        // Whenever a green nontoken creature dies, that creature's controller may search his or her library for a card with the same name as that creature and put it onto the battlefield. If that player does, he or she shuffles his or her library.
+        // Whenever a green nontoken creature dies, that creature's controller may search their library for a card with the same name as that creature and put it onto the battlefield. If that player does, he or she shuffles their library.
         this.addAbility(new VerdantSuccessionTriggeredAbility());
 
     }
@@ -121,7 +121,7 @@ class VerdantSuccessionTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a green nontoken creature dies, that creature's controller may search his or her library for a card with the same name as that creature and put it onto the battlefield. If that player does, he or she shuffles his or her library.";
+        return "Whenever a green nontoken creature dies, that creature's controller may search their library for a card with the same name as that creature and put it onto the battlefield. If that player does, he or she shuffles their library.";
     }
 }
 

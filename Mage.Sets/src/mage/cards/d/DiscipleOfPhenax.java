@@ -62,7 +62,7 @@ public class DiscipleOfPhenax extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Disciple of Phenax enters the battlefield, target player reveals a number of cards
-        // from his or her hand equal to your devotion to black. You choose one of them. That player discards that card.
+        // from their hand equal to your devotion to black. You choose one of them. That player discards that card.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DiscipleOfPhenaxEffect(), false);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
@@ -83,7 +83,7 @@ class DiscipleOfPhenaxEffect extends OneShotEffect {
 
     public DiscipleOfPhenaxEffect() {
         super(Outcome.Discard);
-        staticText = "target player reveals a number of cards from his or her hand equal to your devotion to black. You choose one of them. That player discards that card";
+        staticText = "target player reveals a number of cards from their hand equal to your devotion to black. You choose one of them. That player discards that card";
     }
 
     public DiscipleOfPhenaxEffect(final DiscipleOfPhenaxEffect effect) {

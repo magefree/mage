@@ -54,7 +54,7 @@ public class WeirdHarvest extends CardImpl {
     public WeirdHarvest(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{G}{G}");
 
-        // Each player may search his or her library for up to X creature cards, reveal those cards, and put them into his or her hand. Then each player who searched his or her library this way shuffles it.
+        // Each player may search their library for up to X creature cards, reveal those cards, and put them into their hand. Then each player who searched their library this way shuffles it.
         getSpellAbility().addEffect(new WeirdHarvestEffect());
     }
 
@@ -72,7 +72,7 @@ class WeirdHarvestEffect extends OneShotEffect {
 
     public WeirdHarvestEffect() {
         super(Outcome.Detriment);
-        this.staticText = "Each player may search his or her library for up to X creature cards, reveal those cards, and put them into his or her hand. Then each player who searched his or her library this way shuffles it";
+        this.staticText = "Each player may search their library for up to X creature cards, reveal those cards, and put them into their hand. Then each player who searched their library this way shuffles it";
     }
 
     public WeirdHarvestEffect(final WeirdHarvestEffect effect) {

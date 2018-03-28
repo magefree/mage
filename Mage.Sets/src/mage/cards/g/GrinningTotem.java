@@ -62,7 +62,7 @@ public class GrinningTotem extends CardImpl {
     public GrinningTotem(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
-        // {2}, {tap}, Sacrifice Grinning Totem: Search target opponent's library for a card and exile it. Then that player shuffles his or her library.
+        // {2}, {tap}, Sacrifice Grinning Totem: Search target opponent's library for a card and exile it. Then that player shuffles their library.
         // Until the beginning of your next upkeep, you may play that card.
         // At the beginning of your next upkeep, if you haven't played it, put it into its owner's graveyard.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GrinningTotemSearchAndExileEffect(), new ManaCostsImpl("{2}"));
@@ -86,7 +86,7 @@ class GrinningTotemSearchAndExileEffect extends OneShotEffect {
 
     public GrinningTotemSearchAndExileEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Search target opponent's library for a card and exile it. Then that player shuffles his or her library. " +
+        this.staticText = "Search target opponent's library for a card and exile it. Then that player shuffles their library. " +
                 "Until the beginning of your next upkeep, you may play that card. " +
                 "At the beginning of your next upkeep, if you haven't played it, put it into its owner's graveyard";
     }

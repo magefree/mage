@@ -210,7 +210,7 @@ public class CascadeTest extends CardTestPlayerBase {
     public void testWithSplitSpell() {
 
         playerA.getLibrary().clear();
-        // Breaking - Target player puts the top eight cards of his or her library into his or her graveyard.
+        // Breaking - Target player puts the top eight cards of their library into their graveyard.
         // Entering - Put a creature card from a graveyard onto the battlefield under your control. It gains haste until end of turn.
         // Fuse (You may cast one or both halves of this card from your hand.)
         addCard(Zone.LIBRARY, playerA, "Breaking // Entering", 1); // Sorcery {U}{B} // {4}{U}{B}

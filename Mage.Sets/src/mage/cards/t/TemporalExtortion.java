@@ -50,7 +50,7 @@ public class TemporalExtortion extends CardImpl {
     public TemporalExtortion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}{B}{B}{B}");
 
-        // When you cast Temporal Extortion, any player may pay half his or her life, rounded up. If a player does, counter Temporal Extortion.
+        // When you cast Temporal Extortion, any player may pay half their life, rounded up. If a player does, counter Temporal Extortion.
         this.addAbility(new CastSourceTriggeredAbility(new TemporalExtortionCounterSourceEffect()));
 
         // Take an extra turn after this one.
@@ -71,7 +71,7 @@ class TemporalExtortionCounterSourceEffect extends OneShotEffect {
 
     public TemporalExtortionCounterSourceEffect() {
         super(Outcome.AIDontUseIt);
-        staticText = "any player may pay half his or her life, rounded up. If a player does, counter {source}";
+        staticText = "any player may pay half their life, rounded up. If a player does, counter {source}";
     }
 
     public TemporalExtortionCounterSourceEffect(final TemporalExtortionCounterSourceEffect effect) {
@@ -92,7 +92,7 @@ class TemporalExtortionCounterSourceEffect extends OneShotEffect {
                 if (player.chooseUse(outcome, "Pay half your life, rounded up to counter " + sourceObject.getIdName() + '?', source, game)) {
                     Integer amount = (int) Math.ceil(player.getLife() / 2f);
                     player.loseLife(amount, game, false);
-                    game.informPlayers(player.getLogName() + " pays half his or her life, rounded up to counter " + sourceObject.getIdName() + '.');
+                    game.informPlayers(player.getLogName() + " pays half their life, rounded up to counter " + sourceObject.getIdName() + '.');
                     Spell spell = game.getStack().getSpell(source.getSourceId());
                     if (spell != null) {
                         game.getStack().counter(spell.getId(), source.getSourceId(), game);

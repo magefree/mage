@@ -73,7 +73,7 @@ class MisstepEffect extends OneShotEffect {
     
     MisstepEffect() {
         super(Outcome.Detriment);
-        this.staticText = "Creatures target player controls don't untap during his or her next untap step";
+        this.staticText = "Creatures target player controls don't untap during their next untap step";
     }
     
     MisstepEffect(final MisstepEffect effect) {

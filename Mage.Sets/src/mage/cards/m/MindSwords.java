@@ -74,7 +74,7 @@ public class MindSwords extends CardImpl {
                 new PermanentsOnTheBattlefieldCondition(filterSwamp), null
         ));
 
-        // Each player exiles two cards from his or her hand.
+        // Each player exiles two cards from their hand.
         this.getSpellAbility().addEffect(new MindSwordsEffect());
     }
 
@@ -92,7 +92,7 @@ class MindSwordsEffect extends OneShotEffect {
 
     MindSwordsEffect() {
         super(Outcome.Exile);
-        this.staticText = "Each player exiles two cards from his or her hand.";
+        this.staticText = "Each player exiles two cards from their hand.";
     }
 
     MindSwordsEffect(final MindSwordsEffect effect) {

@@ -52,7 +52,7 @@ public class HoverButton extends JPanel implements MouseListener {
     private Command onHover = null;
     private Color textColor = Color.white;
     private final Rectangle centerTextArea = new Rectangle(5, 18, 75, 40);
-    private final Color centerTextColor = Color.YELLOW;
+    private Color centerTextColor = Color.YELLOW;
     private final Color textBGColor = Color.black;
 
     static final Font textFont = new Font("Arial", Font.PLAIN, 12);
@@ -173,6 +173,10 @@ public class HoverButton extends JPanel implements MouseListener {
             g2d.rotate(-Math.PI / 2.0);
             g2d.drawString(set, 0, 0);
         }
+    }
+    
+    public void setCenterColor(Color c) {
+        centerTextColor = c;
     }
 
     private int calculateOffset(Graphics2D g2d) {

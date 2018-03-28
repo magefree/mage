@@ -54,7 +54,7 @@ public class Bamboozle extends CardImpl {
     public Bamboozle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{U}");
 
-        // Target player reveals the top four cards of his or her library. You choose two of those cards and put them into his or her graveyard. Put the rest on top of his or her library in any order.
+        // Target player reveals the top four cards of their library. You choose two of those cards and put them into their graveyard. Put the rest on top of their library in any order.
         this.getSpellAbility().addEffect(new BamboozleEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
 
@@ -74,7 +74,7 @@ class BamboozleEffect extends OneShotEffect {
 
     BamboozleEffect() {
         super(Outcome.Discard);
-        staticText = "Target player reveals the top four cards of his or her library. You choose two of those cards and put them into his or her graveyard. Put the rest on top of his or her library in any order";
+        staticText = "Target player reveals the top four cards of their library. You choose two of those cards and put them into their graveyard. Put the rest on top of their library in any order";
     }
 
     BamboozleEffect(final BamboozleEffect effect) {
@@ -94,7 +94,7 @@ class BamboozleEffect extends OneShotEffect {
                 putOnTopLibrary.add(card);
             }
             targetPlayer.revealCards("Bamboozle Reveal", putOnTopLibrary, game);
-            TargetCard target = new TargetCard(2, Zone.LIBRARY, new FilterCard("2 cards out of this stack to put into his or her graveyard"));
+            TargetCard target = new TargetCard(2, Zone.LIBRARY, new FilterCard("2 cards out of this stack to put into their graveyard"));
             if (controller.choose(Outcome.Discard, putOnTopLibrary, target, game)) {
                 for (UUID cardId : target.getTargets()) {
                     putInGraveyard.add(game.getCard(cardId));

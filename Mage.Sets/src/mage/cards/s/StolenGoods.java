@@ -56,7 +56,7 @@ public class StolenGoods extends CardImpl {
     public StolenGoods(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}");
 
-        // Target opponent exiles cards from the top of his or her library until he or she exiles a nonland card. Until end of turn, you may cast that card without paying its mana cost.
+        // Target opponent exiles cards from the top of their library until he or she exiles a nonland card. Until end of turn, you may cast that card without paying its mana cost.
         this.getSpellAbility().addEffect(new StolenGoodsEffect());
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
@@ -75,7 +75,7 @@ class StolenGoodsEffect extends OneShotEffect {
 
     public StolenGoodsEffect() {
         super(Outcome.Detriment);
-        this.staticText = "Target opponent exiles cards from the top of his or her library until he or she exiles a nonland card. Until end of turn, you may cast that card without paying its mana cost";
+        this.staticText = "Target opponent exiles cards from the top of their library until he or she exiles a nonland card. Until end of turn, you may cast that card without paying its mana cost";
     }
 
     public StolenGoodsEffect(final StolenGoodsEffect effect) {

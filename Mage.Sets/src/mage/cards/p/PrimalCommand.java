@@ -78,7 +78,7 @@ public class PrimalCommand extends CardImpl {
         Target target = new TargetPermanent(filterNonCreature);
         mode.getTargets().add(target);
         this.getSpellAbility().getModes().addMode(mode);
-        // or target player shuffles his or her graveyard into his or her library;
+        // or target player shuffles their graveyard into their library;
         mode = new Mode();
         mode.getEffects().add(new PrimalCommandShuffleGraveyardEffect());
         mode.getTargets().add(new TargetPlayer());
@@ -104,7 +104,7 @@ class PrimalCommandShuffleGraveyardEffect extends OneShotEffect {
 
     public PrimalCommandShuffleGraveyardEffect() {
         super(Outcome.Neutral);
-        this.staticText = "target player shuffles his or her graveyard into his or her library";
+        this.staticText = "target player shuffles their graveyard into their library";
     }
 
     public PrimalCommandShuffleGraveyardEffect(final PrimalCommandShuffleGraveyardEffect effect) {

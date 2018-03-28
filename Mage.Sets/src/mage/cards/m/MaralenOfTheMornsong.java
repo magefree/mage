@@ -60,7 +60,7 @@ public class MaralenOfTheMornsong extends CardImpl {
         // Players can't draw cards.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MaralenOfTheMornsongEffect()));
 
-        // At the beginning of each player's draw step, that player loses 3 life, searches his or her library for a card, puts it into his or her hand, then shuffles his or her library.
+        // At the beginning of each player's draw step, that player loses 3 life, searches their library for a card, puts it into their hand, then shuffles their library.
         this.addAbility(new BeginningOfDrawTriggeredAbility(new MaralenOfTheMornsongEffect2(), TargetController.ANY, false));
 
     }
@@ -112,7 +112,7 @@ class MaralenOfTheMornsongEffect2 extends OneShotEffect {
 
     public MaralenOfTheMornsongEffect2() {
         super(Outcome.LoseLife);
-        staticText = "that player loses 3 life, searches his or her library for a card, puts it into his or her hand, then shuffles his or her library";
+        staticText = "that player loses 3 life, searches their library for a card, puts it into their hand, then shuffles their library";
     }
 
     public MaralenOfTheMornsongEffect2(final MaralenOfTheMornsongEffect2 effect) {

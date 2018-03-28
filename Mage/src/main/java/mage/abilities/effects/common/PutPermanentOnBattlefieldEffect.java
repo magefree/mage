@@ -75,7 +75,7 @@ public class PutPermanentOnBattlefieldEffect extends OneShotEffect {
         }
 
         if (useTargetController) {
-            return "that player may put " + filter.getMessage() + " from his or her hand onto the battlefield";
+            return "that player may put " + filter.getMessage() + " from their hand onto the battlefield";
         } else {
             return "you may put " + filter.getMessage() + " from your hand onto the battlefield";
         }

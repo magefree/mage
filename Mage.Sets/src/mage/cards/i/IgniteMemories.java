@@ -52,7 +52,7 @@ public class IgniteMemories extends CardImpl {
     public IgniteMemories(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{R}");
 
-        // Target player reveals a card at random from his or her hand. Ignite Memories deals damage to that player equal to that card's converted mana cost.
+        // Target player reveals a card at random from their hand. Ignite Memories deals damage to that player equal to that card's converted mana cost.
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new IgniteMemoriesEffect());
         // Storm
@@ -73,7 +73,7 @@ class IgniteMemoriesEffect extends OneShotEffect {
 
     public IgniteMemoriesEffect() {
         super(Outcome.Damage);
-        staticText = "Target player reveals a card at random from his or her hand. {this} deals damage to that player equal to that card's converted mana cost";
+        staticText = "Target player reveals a card at random from their hand. {this} deals damage to that player equal to that card's converted mana cost";
     }
 
     public IgniteMemoriesEffect(final IgniteMemoriesEffect effect) {

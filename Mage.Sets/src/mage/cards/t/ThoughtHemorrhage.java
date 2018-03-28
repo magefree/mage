@@ -58,7 +58,7 @@ public class ThoughtHemorrhage extends CardImpl {
     public ThoughtHemorrhage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}{R}");
 
-        // Name a nonland card. Target player reveals his or her hand. Thought Hemorrhage deals 3 damage to that player for each card with that name revealed this way. Search that player's graveyard, hand, and library for all cards with that name and exile them. Then that player shuffles his or her library.
+        // Name a nonland card. Target player reveals their hand. Thought Hemorrhage deals 3 damage to that player for each card with that name revealed this way. Search that player's graveyard, hand, and library for all cards with that name and exile them. Then that player shuffles their library.
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new NameACardEffect(NameACardEffect.TypeOfName.NON_LAND_NAME));
         this.getSpellAbility().addEffect(new ThoughtHemorrhageEffect());
@@ -76,7 +76,7 @@ public class ThoughtHemorrhage extends CardImpl {
 
 class ThoughtHemorrhageEffect extends OneShotEffect {
 
-    static final String rule = "Target player reveals his or her hand. {this} deals 3 damage to that player for each card with that name revealed this way. Search that player's graveyard, hand, and library for all cards with that name and exile them. Then that player shuffles his or her library";
+    static final String rule = "Target player reveals their hand. {this} deals 3 damage to that player for each card with that name revealed this way. Search that player's graveyard, hand, and library for all cards with that name and exile them. Then that player shuffles their library";
 
     public ThoughtHemorrhageEffect() {
         super(Outcome.Exile);
@@ -133,7 +133,7 @@ class ThoughtHemorrhageEffect extends OneShotEffect {
                 }
 
                 // search cards in Library
-                // If the player has no nonland cards in his or her hand, you can still search that player's library and have him or her shuffle it.
+                // If the player has no nonland cards in their hand, you can still search that player's library and have him or her shuffle it.
                 TargetCardInLibrary targetCardsLibrary = new TargetCardInLibrary(0, Integer.MAX_VALUE, filterNamedCards);
                 controller.searchLibrary(targetCardsLibrary, game, targetPlayer.getId());
                 for (UUID cardId : targetCardsLibrary.getTargets()) {

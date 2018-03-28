@@ -64,7 +64,7 @@ public class BrainMaggot extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // When Brain Maggot enters the battlefield, target opponent reveals his or her hand and you choose a nonland card from it. Exile that card until Brain Maggot leaves the battlefield.
+        // When Brain Maggot enters the battlefield, target opponent reveals their hand and you choose a nonland card from it. Exile that card until Brain Maggot leaves the battlefield.
         Ability ability = new EntersBattlefieldTriggeredAbility(new BrainMaggotExileEffect());
         ability.addTarget(new TargetOpponent());
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new BrainMaggotReturnExiledCardAbility()));
@@ -85,7 +85,7 @@ class BrainMaggotExileEffect extends OneShotEffect {
 
     public BrainMaggotExileEffect() {
         super(Outcome.Benefit);
-        this.staticText = "target opponent reveals his or her hand and you choose a nonland card from it. Exile that card until {this} leaves the battlefield";
+        this.staticText = "target opponent reveals their hand and you choose a nonland card from it. Exile that card until {this} leaves the battlefield";
     }
 
     public BrainMaggotExileEffect(final BrainMaggotExileEffect effect) {

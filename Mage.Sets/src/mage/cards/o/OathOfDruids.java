@@ -65,7 +65,7 @@ public class OathOfDruids extends CardImpl {
     public OathOfDruids(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
 
-        // At the beginning of each player's upkeep, that player chooses target player who controls more creatures than he or she does and is his or her opponent. The first player may reveal cards from the top of his or her library until he or she reveals a creature card. If he or she does, that player puts that card onto the battlefield and all other cards revealed this way into his or her graveyard.
+        // At the beginning of each player's upkeep, that player chooses target player who controls more creatures than he or she does and is their opponent. The first player may reveal cards from the top of their library until he or she reveals a creature card. If he or she does, that player puts that card onto the battlefield and all other cards revealed this way into their graveyard.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new OathOfDruidsEffect(), TargetController.ANY, false);
         ability.addTarget(new TargetPlayer(1, 1, false, filter));
         originalId = ability.getOriginalId();
@@ -121,7 +121,7 @@ class OathOfDruidsPredicate implements ObjectSourcePlayerPredicate<ObjectSourceP
 
     @Override
     public String toString() {
-        return "player who controls more creatures than he or she does and is his or her opponent";
+        return "player who controls more creatures than he or she does and is their opponent";
     }
 }
 
@@ -129,9 +129,9 @@ class OathOfDruidsEffect extends OneShotEffect {
 
     public OathOfDruidsEffect() {
         super(Outcome.PutCardInPlay);
-        staticText = "that player chooses target player who controls more creatures than he or she does and is his or her opponent. "
-                + "The first player may reveal cards from the top of his or her library until he or she reveals a creature card. "
-                + "If he or she does, that player puts that card onto the battlefield and all other cards revealed this way into his or her graveyard";
+        staticText = "that player chooses target player who controls more creatures than he or she does and is their opponent. "
+                + "The first player may reveal cards from the top of their library until he or she reveals a creature card. "
+                + "If he or she does, that player puts that card onto the battlefield and all other cards revealed this way into their graveyard";
     }
 
     public OathOfDruidsEffect(OathOfDruidsEffect effect) {
@@ -151,7 +151,7 @@ class OathOfDruidsEffect extends OneShotEffect {
         if (!player.chooseUse(Outcome.Benefit, "Use this ability?", source, game)) {
             return true;
         }
-        //The first player may reveal cards from the top of his or her library
+        //The first player may reveal cards from the top of their library
         while (creatureCard == null && player.getLibrary().hasCards()) {
             Card card = player.getLibrary().removeFromTop(game);
             revealed.add(card);
@@ -168,7 +168,7 @@ class OathOfDruidsEffect extends OneShotEffect {
         if (creatureCard != null) {
             player.moveCards(creatureCard, Zone.BATTLEFIELD, source, game);
         }
-        // and all other cards revealed this way into his or her graveyard
+        // and all other cards revealed this way into their graveyard
         player.moveCards(nonCreatureCards, Zone.GRAVEYARD, source, game);
         return true;
     }

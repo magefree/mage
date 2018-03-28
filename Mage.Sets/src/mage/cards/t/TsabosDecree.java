@@ -58,7 +58,7 @@ public class TsabosDecree extends CardImpl {
     public TsabosDecree(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{5}{B}");
 
-        // Choose a creature type. Target player reveals his or her hand and discards all creature cards of that type. Then destroy all creatures of that type that player controls. They can't be regenerated.
+        // Choose a creature type. Target player reveals their hand and discards all creature cards of that type. Then destroy all creatures of that type that player controls. They can't be regenerated.
         this.getSpellAbility().addEffect(new TsabosDecreeEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
@@ -77,7 +77,7 @@ class TsabosDecreeEffect extends OneShotEffect {
 
     public TsabosDecreeEffect() {
         super(Outcome.UnboostCreature);
-        staticText = "Choose a creature type. Target player reveals his or her hand and discards all creature cards of that type. Then destroy all creatures of that type that player controls. They can't be regenerated";
+        staticText = "Choose a creature type. Target player reveals their hand and discards all creature cards of that type. Then destroy all creatures of that type that player controls. They can't be regenerated";
     }
 
     public TsabosDecreeEffect(final TsabosDecreeEffect effect) {

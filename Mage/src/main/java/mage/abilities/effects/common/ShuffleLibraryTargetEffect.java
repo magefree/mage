@@ -42,7 +42,7 @@ public class ShuffleLibraryTargetEffect extends OneShotEffect {
 
     public ShuffleLibraryTargetEffect() {
         super(Outcome.Neutral);
-        this.staticText = "Target player shuffles his or her library";
+        this.staticText = "Target player shuffles their library";
     }
 
     public ShuffleLibraryTargetEffect(final ShuffleLibraryTargetEffect effect) {

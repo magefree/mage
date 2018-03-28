@@ -66,7 +66,7 @@ public class StruggleSurvive extends SplitCard {
         // Survive
         // Aftermath
         ((CardImpl) (getRightHalfCard())).addAbility(new AftermathAbility().setRuleAtTheTop(true));
-        // Each player shuffles his or graveyard into his or her library.
+        // Each player shuffles his or graveyard into their library.
         getRightHalfCard().getSpellAbility().addEffect(new SurviveEffect());
 
     }
@@ -85,7 +85,7 @@ class SurviveEffect extends OneShotEffect {
 
     public SurviveEffect() {
         super(Outcome.Neutral);
-        staticText = "Each player shuffles his or her graveyard into his or her library";
+        staticText = "Each player shuffles their graveyard into their library";
     }
 
     public SurviveEffect(final SurviveEffect effect) {

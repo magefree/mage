@@ -32,6 +32,7 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
+ *
  * @author fireshoes
  */
 public class Dominaria extends ExpansionSet {
@@ -55,8 +56,16 @@ public class Dominaria extends ExpansionSet {
         cards.add(new SetCardInfo("Benalish Marshal", 10, Rarity.UNCOMMON, mage.cards.b.BenalishMarshal.class));
         cards.add(new SetCardInfo("Charge", 11, Rarity.COMMON, mage.cards.c.Charge.class));
         cards.add(new SetCardInfo("Invoke the Divine", 13, Rarity.COMMON, mage.cards.i.InvokeTheDivine.class));
-        cards.add(new SetCardInfo("Knight of Grace", 12, Rarity.UNCOMMON, mage.cards.k.KnightOfGrace.class));
         cards.add(new SetCardInfo("Jhoira, Weatherlight Captain", 200, Rarity.MYTHIC, mage.cards.j.JhoiraWeatherlightCaptain.class));
-   cards.add(new SetCardInfo("Lyra Dawnbringer", 14, Rarity.MYTHIC, mage.cards.l.LyraDawnbringer.class));
+        cards.add(new SetCardInfo("Karn, Scion of Urza", 554, Rarity.MYTHIC, mage.cards.k.KarnScionOfUrza.class));
+        cards.add(new SetCardInfo("Knight of Grace", 23, Rarity.UNCOMMON, mage.cards.k.KnightOfGrace.class));
+        cards.add(new SetCardInfo("Lyra Dawnbringer", 14, Rarity.MYTHIC, mage.cards.l.LyraDawnbringer.class));
+        cards.add(new SetCardInfo("Serra Disciple", 34, Rarity.COMMON, mage.cards.s.SerraDisciple.class));
+        cards.add(new SetCardInfo("Knight of Malice", 52, Rarity.UNCOMMON, mage.cards.k.KnightOfMalice.class));
+        cards.add(new SetCardInfo("Homarid Explorer", 53, Rarity.UNCOMMON, mage.cards.h.HomaridExplorer.class));
+        cards.add(new SetCardInfo("Opt", 60, Rarity.COMMON, mage.cards.o.Opt.class));
+        cards.add(new SetCardInfo("Academy Drake", 40, Rarity.UNCOMMON, mage.cards.a.AcademyDrake.class));
+        cards.add(new SetCardInfo("Cast Down", 81, Rarity.UNCOMMON, mage.cards.c.CastDown.class));
+        cards.add(new SetCardInfo("Llanowar Elves", 168, Rarity.COMMON, mage.cards.l.LlanowarElves.class));
     }
 }

@@ -52,7 +52,7 @@ public class Regression extends CardImpl {
     public Regression(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{G}");
 
-        // Choose target artifact or enchantment. Its owner shuffles it into his or her library.
+        // Choose target artifact or enchantment. Its owner shuffles it into their library.
         this.getSpellAbility().addEffect(new ShuffleIntoLibraryTargetEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }

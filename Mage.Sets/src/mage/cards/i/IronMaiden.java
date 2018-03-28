@@ -49,7 +49,7 @@ public class IronMaiden extends CardImpl {
     public IronMaiden(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
-        // At the beginning of each opponent's upkeep, Iron Maiden deals X damage to that player, where X is the number of cards in his or her hand minus 4.
+        // At the beginning of each opponent's upkeep, Iron Maiden deals X damage to that player, where X is the number of cards in their hand minus 4.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new IronMaidenEffect(), TargetController.OPPONENT, false);
         this.addAbility(ability);
     }
@@ -102,7 +102,7 @@ class IronMaidenEffect extends OneShotEffect {
     
     @Override
     public String getText(Mode mode) {
-        return "Iron Maiden deals X damage to that player, where X is the number of cards in his or her hand minus 4";
+        return "Iron Maiden deals X damage to that player, where X is the number of cards in their hand minus 4";
     }
 
 }

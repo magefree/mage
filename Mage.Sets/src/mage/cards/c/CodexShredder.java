@@ -49,7 +49,7 @@ public class CodexShredder extends CardImpl {
     public CodexShredder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
 
-        // {T}: Target player puts the top card of his or her library into his or her graveyard.
+        // {T}: Target player puts the top card of their library into their graveyard.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(1), new TapSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);

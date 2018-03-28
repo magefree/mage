@@ -56,7 +56,7 @@ public class LayBareTheHeart extends CardImpl {
     public LayBareTheHeart(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}");
 
-        // Target opponent reveals his or her hand. You choose a nonlegendary, nonland card from it. That player discards that card.
+        // Target opponent reveals their hand. You choose a nonlegendary, nonland card from it. That player discards that card.
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(filter, TargetController.ANY));
     }

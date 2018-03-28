@@ -61,7 +61,7 @@ public class JaceBeleren extends CardImpl {
         ability1.addTarget(new TargetPlayer());
         this.addAbility(ability1);
 
-        // -10: Target player puts the top twenty cards of his or her library into his or her graveyard.
+        // -10: Target player puts the top twenty cards of their library into their graveyard.
         LoyaltyAbility ability2 = new LoyaltyAbility(new PutLibraryIntoGraveTargetEffect(20), -10);
         ability2.addTarget(new TargetPlayer());
         this.addAbility(ability2);

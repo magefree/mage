@@ -64,7 +64,7 @@ public class RiseFall extends SplitCard {
         getLeftHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // Fall
-        // Target player reveals two cards at random from his or her hand, then discards each nonland card revealed this way.
+        // Target player reveals two cards at random from their hand, then discards each nonland card revealed this way.
         getRightHalfCard().getSpellAbility().addEffect(new FallEffect());
         getRightHalfCard().getSpellAbility().addTarget(new TargetPlayer());
     }
@@ -119,7 +119,7 @@ class FallEffect extends OneShotEffect {
 
     public FallEffect() {
         super(Outcome.Discard);
-        this.staticText = "Target player reveals two cards at random from his or her hand, then discards each nonland card revealed this way";
+        this.staticText = "Target player reveals two cards at random from their hand, then discards each nonland card revealed this way";
     }
 
     public FallEffect(final FallEffect effect) {

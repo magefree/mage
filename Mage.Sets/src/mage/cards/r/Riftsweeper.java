@@ -64,7 +64,7 @@ public class Riftsweeper extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // When Riftsweeper enters the battlefield, choose target face-up exiled card. Its owner shuffles it into his or her library.
+        // When Riftsweeper enters the battlefield, choose target face-up exiled card. Its owner shuffles it into their library.
         Ability ability = new EntersBattlefieldTriggeredAbility(new RiftsweeperEffect(), false);
         ability.addTarget(new TargetCardInExile(1, 1, filter, null, true));
         this.addAbility(ability);
@@ -84,7 +84,7 @@ class RiftsweeperEffect extends OneShotEffect {
 
     public RiftsweeperEffect() {
         super(Outcome.Benefit);
-        this.staticText = "choose target face-up exiled card. Its owner shuffles it into his or her library";
+        this.staticText = "choose target face-up exiled card. Its owner shuffles it into their library";
     }
 
     public RiftsweeperEffect(final RiftsweeperEffect effect) {

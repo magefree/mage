@@ -44,7 +44,7 @@ public class WheelOfFortune extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");
 
 
-        // Each player discards his or her hand,
+        // Each player discards their hand,
         this.getSpellAbility().addEffect(new DiscardHandAllEffect());
         // then draws seven cards.
         Effect effect = new DrawCardAllEffect(7);

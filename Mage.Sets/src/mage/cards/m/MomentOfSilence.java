@@ -43,7 +43,7 @@ public class MomentOfSilence extends CardImpl {
     public MomentOfSilence(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");
 
-        // Target player skips his or her next combat phase this turn.
+        // Target player skips their next combat phase this turn.
         this.getSpellAbility().addEffect(new SkipNextCombatEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
     }

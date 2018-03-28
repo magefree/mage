@@ -156,9 +156,9 @@ public class HumanPlayer extends PlayerImpl {
             numTimesWaiting++;
             if (numTimesWaiting >= 300) {
                 // game freezed -- need to report about error and continue to execute
-                String s = "Game freezed in waitResponseOpen for user " + getName();
-                Throwable th = new IllegalStateException(s);
-                logger.error(s, th);
+                String s = "ERROR - game freezed in waitResponseOpen for user " + getName() + " (connection problem)";
+                //Throwable th = new IllegalStateException(s); stack info
+                logger.error(s);
                 break;
             }
 

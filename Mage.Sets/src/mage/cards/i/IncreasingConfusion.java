@@ -50,7 +50,7 @@ public class IncreasingConfusion extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{U}");
 
 
-        // Target player puts the top X cards of his or her library into his or her graveyard. If Increasing Confusion was cast from a graveyard, that player puts twice that many cards into his or her graveyard instead.
+        // Target player puts the top X cards of their library into their graveyard. If Increasing Confusion was cast from a graveyard, that player puts twice that many cards into their graveyard instead.
         this.getSpellAbility().addEffect(new IncreasingConfusionEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
 
@@ -72,7 +72,7 @@ class IncreasingConfusionEffect extends OneShotEffect {
 
     public IncreasingConfusionEffect() {
         super(Outcome.Detriment);
-        staticText = "Target player puts the top X cards of his or her library into his or her graveyard. If {this} was cast from a graveyard, that player puts twice that many cards into his or her graveyard instead";
+        staticText = "Target player puts the top X cards of their library into their graveyard. If {this} was cast from a graveyard, that player puts twice that many cards into their graveyard instead";
     }
 
     public IncreasingConfusionEffect(final IncreasingConfusionEffect effect) {

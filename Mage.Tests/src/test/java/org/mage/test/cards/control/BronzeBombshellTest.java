@@ -46,7 +46,7 @@ public class BronzeBombshellTest extends CardTestPlayerBase {
 
         // Each creature has "When this creature dies, choose target opponent.
         // That player puts this card from its owner's graveyard onto the battlefield
-        // under his or her control at the beginning of the next end step."
+        // under their control at the beginning of the next end step."
         addCard(Zone.BATTLEFIELD, playerA, "Endless Whispers", 1);
 
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);

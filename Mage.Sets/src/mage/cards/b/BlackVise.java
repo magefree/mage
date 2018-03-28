@@ -54,7 +54,7 @@ public class BlackVise extends CardImpl {
 
         // As Black Vise enters the battlefield, choose an opponent.
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseOpponentEffect(Outcome.Detriment)));
-        // At the beginning of the chosen player's upkeep, Black Vise deals X damage to that player, where X is the number of cards in his or her hand minus 4.
+        // At the beginning of the chosen player's upkeep, Black Vise deals X damage to that player, where X is the number of cards in their hand minus 4.
         this.addAbility(new BlackViseTriggeredAbility());
     }
 
@@ -103,7 +103,7 @@ class BlackViseEffect extends OneShotEffect {
 
     public BlackViseEffect() {
         super(Outcome.Detriment);
-        this.staticText = "{this} deals X damage to that player, where X is the number of cards in his or her hand minus 4";
+        this.staticText = "{this} deals X damage to that player, where X is the number of cards in their hand minus 4";
     }
 
     public BlackViseEffect(final BlackViseEffect effect) {

@@ -60,7 +60,7 @@ public class OldGrowthDryads extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // When Old-Growth Dryads enters the battlefield, each opponent may search his or her library for a basic land card, put it onto the battlefield tapped, then shuffle his or her library.
+        // When Old-Growth Dryads enters the battlefield, each opponent may search their library for a basic land card, put it onto the battlefield tapped, then shuffle their library.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new OldGrowthDryadsEffect()));
     }
 
@@ -78,7 +78,7 @@ class OldGrowthDryadsEffect extends OneShotEffect {
 
     OldGrowthDryadsEffect() {
         super(Outcome.Detriment);
-        this.staticText = "each opponent may search his or her library for a basic land card, put it onto the battlefield tapped, then shuffle his or her library";
+        this.staticText = "each opponent may search their library for a basic land card, put it onto the battlefield tapped, then shuffle their library";
     }
 
     OldGrowthDryadsEffect(final OldGrowthDryadsEffect effect) {

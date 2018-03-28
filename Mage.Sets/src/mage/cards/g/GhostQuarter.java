@@ -60,7 +60,7 @@ public class GhostQuarter extends CardImpl {
 
         // {T}: Add {C} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
-        // {T}, Sacrifice Ghost Quarter: Destroy target land. Its controller may search his or her library for a basic land card, put it onto the battlefield, then shuffle his or her library.
+        // {T}, Sacrifice Ghost Quarter: Destroy target land. Its controller may search their library for a basic land card, put it onto the battlefield, then shuffle their library.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetLandPermanent());
@@ -82,7 +82,7 @@ class GhostQuarterEffect extends OneShotEffect {
 
     public GhostQuarterEffect() {
         super(Outcome.PutLandInPlay);
-        this.staticText = "Its controller may search his or her library for a basic land card, put it onto the battlefield, then shuffle his or her library";
+        this.staticText = "Its controller may search their library for a basic land card, put it onto the battlefield, then shuffle their library";
     }
 
     public GhostQuarterEffect(final GhostQuarterEffect effect) {
