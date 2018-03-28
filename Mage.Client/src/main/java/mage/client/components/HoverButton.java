@@ -52,7 +52,7 @@ public class HoverButton extends JPanel implements MouseListener {
     private Command onHover = null;
     private Color textColor = Color.white;
     private final Rectangle centerTextArea = new Rectangle(5, 18, 75, 40);
-    private Color centerTextColor = Color.YELLOW;
+    private Color centerTextColor = new Color(200, 190, 0, 180);
     private final Color textBGColor = Color.black;
 
     static final Font textFont = new Font("Arial", Font.PLAIN, 12);
