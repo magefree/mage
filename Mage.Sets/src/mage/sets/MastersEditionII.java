@@ -215,6 +215,7 @@ public class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Red Cliffs Armada", 62, Rarity.COMMON, mage.cards.r.RedCliffsArmada.class));
         cards.add(new SetCardInfo("Reinforcements", 28, Rarity.COMMON, mage.cards.r.Reinforcements.class));
         cards.add(new SetCardInfo("Reprisal", 29, Rarity.COMMON, mage.cards.r.Reprisal.class));
+        cards.add(new SetCardInfo("Retribution", 148, Rarity.UNCOMMON, mage.cards.r.Retribution.class));
         cards.add(new SetCardInfo("Righteous Fury", 30, Rarity.RARE, mage.cards.r.RighteousFury.class));
         cards.add(new SetCardInfo("Ritual of Subdual", 174, Rarity.RARE, mage.cards.r.RitualOfSubdual.class));
         cards.add(new SetCardInfo("Ritual of the Machine", 109, Rarity.RARE, mage.cards.r.RitualOfTheMachine.class));
