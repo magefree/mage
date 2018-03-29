@@ -90,8 +90,8 @@ public class ChatSession {
                 String userName = clients.get(userId);
                 if (reason != DisconnectReason.LostConnection) { // for lost connection the user will be reconnected or session expire so no removeUserFromAllTablesAndChat of chat yet
                     final Lock w = lock.writeLock();
+                    w.lock();
                     try {
-                        w.lock();
                         clients.remove(userId);
                     } finally {
                         w.unlock();
