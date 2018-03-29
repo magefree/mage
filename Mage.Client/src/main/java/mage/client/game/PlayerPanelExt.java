@@ -202,10 +202,11 @@ public class PlayerPanelExt extends javax.swing.JPanel {
                 if (playerLife > pastLife) {
                     if (faderGainLife == null && doGainFade) {
                         doGainFade = false;
-                        faderGainLife = new Timer(25, new ActionListener() {
+                        faderGainLife = new Timer(50, new ActionListener() {
                             public void actionPerformed(ActionEvent ae) {
                                 gainX++;
-                                avatar.setCenterColor(new Color(2 * gainX, 190, 255, 250 - gainX));
+                                int alpha = Math.max(250 - gainX, 180);
+                                avatar.setCenterColor(new Color(2 * gainX, 190, 255, alpha));
                                 avatar.repaint();
                                 if (gainX >= 100) {
                                     avatar.setCenterColor(new Color(200, 190, 0, 180));
@@ -227,10 +228,11 @@ public class PlayerPanelExt extends javax.swing.JPanel {
                 } else if (playerLife < pastLife) {
                     if (faderLoseLife == null && doLoseFade) {
                         doLoseFade = false;
-                        faderLoseLife = new Timer(25, new ActionListener() {
+                        faderLoseLife = new Timer(50, new ActionListener() {
                             public void actionPerformed(ActionEvent ae) {
                                 loseX++;
-                                avatar.setCenterColor(new Color(250 - loseX / 2, 140 + loseX / 2, 0, 250 - loseX));
+                                int alpha = Math.max(250 - loseX, 180);
+                                avatar.setCenterColor(new Color(250 - loseX / 2, 140 + loseX / 2, 0, alpha));
                                 avatar.repaint();
                                 if (loseX >= 100) {
                                     avatar.setCenterColor(new Color(200, 190, 0, 180));
