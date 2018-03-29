@@ -57,9 +57,7 @@ public class URLHandler {
                         } catch (IOException | URISyntaxException ex) {
                             // do nothing
                         }
-                    } else {
-                        //do nothing
-                    }
+                    } 
                 }
             }
         };
@@ -76,11 +74,11 @@ public class URLHandler {
         for (String item : parts) {
             try {
                 URL url = new URL(item);
-                // The item is a valid URL
+                // The item is already a valid URL
                 output = output + "<a href=\"" + url + "\">" + url + "</a> ";
 
             } catch (MalformedURLException e) {
-                //The item might still be an URL
+                //The item might still be a URL
                 if (item.startsWith("www.")) {
                     output = output + "<a href=\"" + item + "\">" + item + "</a> ";
                 } else {
@@ -103,10 +101,10 @@ public class URLHandler {
         for (String item : parts) {
             try {
                 URL url = new URL(item);
-                // The item is a valid URL
+                // The item is already a valid URL
                 output = url.toString();
             } catch (MalformedURLException e) {
-                //The item might still be an URL
+                //The item might still be a URL
                 if (item.startsWith("www.")) {
                     output = "http://" + item;
                 }
