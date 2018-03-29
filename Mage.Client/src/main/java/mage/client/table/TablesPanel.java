@@ -60,6 +60,7 @@ import mage.client.util.ButtonColumn;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.IgnoreList;
 import mage.client.util.MageTableRowSorter;
+import mage.client.util.URLHandler;
 import mage.client.util.gui.GuiDisplayUtil;
 import mage.client.util.gui.TableUtil;
 import mage.constants.*;
@@ -579,7 +580,7 @@ public class TablesPanel extends javax.swing.JPanel {
             this.jPanelBottom.setVisible(false);
         } else {
             this.jPanelBottom.setVisible(true);
-            this.jLabelFooterText.setText(serverMessages.get(0));
+            URLHandler.handleMessage(serverMessages.get(0), this.jLabelFooterText);
             this.jButtonFooterNext.setVisible(serverMessages.size() > 1);
         }
     }
@@ -1283,7 +1284,9 @@ public class TablesPanel extends javax.swing.JPanel {
                 if (currentMessage >= messages.size()) {
                     currentMessage = 0;
                 }
-                this.jLabelFooterText.setText(messages.get(currentMessage));
+                
+                URLHandler.RemoveMouseAdapter(jLabelFooterText);
+                URLHandler.handleMessage(messages.get(currentMessage), this.jLabelFooterText);
             }
         }
     }//GEN-LAST:event_jButtonFooterNextActionPerformed
