@@ -1,5 +1,7 @@
 package org.mage.card.arcane;
 
+import mage.util.StreamUtils;
+
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -42,7 +44,7 @@ public final class Util {
             socket = new DatagramSocket();
             broadcast(socket, data, port, NetworkInterface.getNetworkInterfaces());
         } finally {
-            socket.close();
+            StreamUtils.closeQuietly(socket);
         }
     }
 
