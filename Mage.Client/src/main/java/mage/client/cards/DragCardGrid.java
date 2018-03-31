@@ -1083,6 +1083,22 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         }
         repaint();
     }
+    
+    private void chooseMatching() {
+        Collection<CardView> toMatch = dragCardList();
+        
+        for (DragCardGridListener l : listeners) {
+            for (CardView card : allCards) {
+                for (CardView aMatch : toMatch) {
+                    if (card.getName().equals(aMatch.getName())) {
+                        card.setSelected(true);
+                        cardViews.get(card.getId()).update(card);
+                    }
+                }
+            }
+        }
+        repaint();
+    }
 
     private void showAll() {
         for (DragCardGridListener l : listeners) {
@@ -1704,6 +1720,10 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         JMenuItem invertSelection = new JMenuItem("Invert Selection");
         invertSelection.addActionListener(e2 -> invertSelection());
         menu.add(invertSelection);
+        
+        JMenuItem chooseMatching = new JMenuItem("Choose Matching");
+        chooseMatching.addActionListener(e2 -> chooseMatching());
+        menu.add(chooseMatching);
 
         // Show 'Duplicate Selection' for FREE_BUILDING
         if (this.mode == Constants.DeckEditorMode.FREE_BUILDING) {
