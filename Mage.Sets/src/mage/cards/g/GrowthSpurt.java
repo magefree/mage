@@ -71,7 +71,7 @@ public class GrowthSpurt extends CardImpl {
 class GrowthSpurtEffect extends OneShotEffect {
     GrowthSpurtEffect() {
         super(Outcome.BoostCreature);
-        this.staticText = "todo"; //TODO
+        this.staticText = "Roll a six-sided die. Target creature gets +X/+X until end of turn, where X is the result";
     }
 
     GrowthSpurtEffect(final GrowthSpurtEffect effect) {
