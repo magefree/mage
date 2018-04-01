@@ -8,10 +8,13 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.font.FontRenderContext;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 import mage.client.util.Command;
 
 /**
@@ -43,6 +46,7 @@ public class HoverButton extends JPanel implements MouseListener {
     private Image topTextImageRight;
     private String centerText;
 
+    private boolean wasHovered = false;
     private boolean isHovered = false;
     private boolean isSelected = false;
     private boolean drawSet = false;
@@ -52,7 +56,8 @@ public class HoverButton extends JPanel implements MouseListener {
     private Command onHover = null;
     private Color textColor = Color.white;
     private final Rectangle centerTextArea = new Rectangle(5, 18, 75, 40);
-    private Color centerTextColor = new Color(200, 190, 0, 180);
+    private Color centerTextColor = new Color(200, 210, 0, 180);
+    private Color origCenterTextColor = new Color(200, 210, 0, 180);
     private final Color textBGColor = Color.black;
 
     static final Font textFont = new Font("Arial", Font.PLAIN, 12);
@@ -63,6 +68,13 @@ public class HoverButton extends JPanel implements MouseListener {
     private boolean useMiniFont = false;
 
     private boolean alignTextLeft = false;
+
+    Timer faderGainLife = null;
+    Timer faderLoseLife = null;
+    private int loseX = 0;
+    private int gainX = 0;
+    private boolean doLoseFade = true;
+    private boolean doGainFade = true;
 
     public HoverButton(String text, Image image, Rectangle size) {
         this(text, image, image, null, image, size);
@@ -95,6 +107,10 @@ public class HoverButton extends JPanel implements MouseListener {
         Graphics2D g2d = (Graphics2D) g;
         if (isEnabled()) {
             if (isHovered || textAlwaysVisible) {
+                if (isHovered) {
+                    wasHovered = true;
+                    setCenterColor(Color.YELLOW);
+                }
                 g.drawImage(hoverImage, 0, 0, imageSize.width, imageSize.height, this);
                 if (text != null) {
                     if (textColor != null) {
@@ -109,6 +125,10 @@ public class HoverButton extends JPanel implements MouseListener {
                     g2d.drawString(text, textOffsetX, textOffsetY);
                 }
             } else {
+                if (wasHovered) {
+                    wasHovered = false;
+                    setCenterColor(origCenterTextColor);
+                }
                 g.drawImage(image, 0, 0, imageSize.width, imageSize.height, this);
             }
             if (isSelected) {
@@ -174,7 +194,7 @@ public class HoverButton extends JPanel implements MouseListener {
             g2d.drawString(set, 0, 0);
         }
     }
-    
+
     public void setCenterColor(Color c) {
         centerTextColor = c;
     }
@@ -360,5 +380,76 @@ public class HoverButton extends JPanel implements MouseListener {
         g.setFont(font);
         // Draw the String
         g.drawString(text, x, y);
+    }
+
+    public void gainLifeDisplay() {
+        if (faderGainLife == null && doGainFade) {
+            doGainFade = false;
+            faderGainLife = new Timer(50, new ActionListener() {
+                public void actionPerformed(ActionEvent ae) {
+                    gainX++;
+                    int alpha = Math.max(250 - gainX, 180);
+                    setCenterColor(new Color(2 * gainX, 210, 255, alpha));
+                    repaint();
+                    if (gainX >= 100) {
+                        setCenterColor(new Color(200, 210, 0, 180));
+                        gainX = 100;
+
+                        if (faderGainLife != null) {
+                            faderGainLife.stop();
+                            faderGainLife.setRepeats(false);
+                            faderGainLife.setDelay(50000);
+                        }
+                    }
+                }
+            });
+            gainX = 0;
+            faderGainLife.setInitialDelay(25);
+            faderGainLife.setRepeats(true);
+            faderGainLife.start();
+        }
+    }
+
+    public void loseLifeDisplay() {
+        if (faderLoseLife == null && doLoseFade) {
+            doLoseFade = false;
+            faderLoseLife = new Timer(50, new ActionListener() {
+                public void actionPerformed(ActionEvent ae) {
+                    loseX++;
+                    int alpha = Math.max(250 - loseX, 180);
+                    setCenterColor(new Color(250 - loseX / 2, 130 + loseX, 0, alpha));
+                    repaint();
+                    if (loseX >= 100) {
+                        setCenterColor(new Color(200, 210, 0, 180));
+                        loseX = 100;
+                        stopLifeDisplay();
+
+                        if (faderLoseLife != null) {
+                            faderLoseLife.stop();
+                            faderLoseLife.setRepeats(false);
+                            faderLoseLife.setDelay(50000);
+                        }
+                    }
+                }
+            });
+            loseX = 0;
+            faderLoseLife.setInitialDelay(25);
+            faderLoseLife.setRepeats(true);
+            faderLoseLife.start();
+        }
+    }
+
+    public void stopLifeDisplay() {
+
+        if (faderGainLife != null && gainX >= 100) {
+            faderGainLife.stop();
+            faderGainLife = null;
+        }
+        doGainFade = true;
+        if (faderLoseLife != null && loseX >= 100) {
+            faderLoseLife.stop();
+            faderLoseLife = null;
+        }
+        doLoseFade = true;
     }
 }
