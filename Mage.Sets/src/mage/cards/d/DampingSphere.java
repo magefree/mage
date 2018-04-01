@@ -104,18 +104,15 @@ class DampingSphereReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        if (event.getType() == EventType.TAPPED_FOR_MANA) {
-            ManaEvent manaEvent = (ManaEvent) event;
-            Mana mana = manaEvent.getMana();
-            return mana.count() > 1;
-        }
-        return false;
+        return event.getType() == EventType.TAPPED_FOR_MANA;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         MageObject mageObject = game.getObject(event.getSourceId());
-        return mageObject != null && mageObject.isLand();
+        ManaEvent manaEvent = (ManaEvent) event;
+        Mana mana = manaEvent.getMana();
+        return mageObject != null && mageObject.isLand() && mana.count() > 1;
     }
 }
 
