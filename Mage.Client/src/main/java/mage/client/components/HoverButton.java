@@ -8,11 +8,13 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Rectangle;
+import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.font.FontRenderContext;
+import java.awt.font.GlyphVector;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 import mage.client.util.Command;
@@ -56,8 +58,8 @@ public class HoverButton extends JPanel implements MouseListener {
     private Command onHover = null;
     private Color textColor = Color.white;
     private final Rectangle centerTextArea = new Rectangle(5, 18, 75, 40);
-    private Color centerTextColor = new Color(200, 210, 0, 180);
-    private Color origCenterTextColor = new Color(200, 210, 0, 180);
+    private Color centerTextColor = new Color(200, 210, 0, 200);
+    private Color origCenterTextColor = new Color(200, 210, 0, 200);
     private final Color textBGColor = Color.black;
 
     static final Font textFont = new Font("Arial", Font.PLAIN, 12);
@@ -171,7 +173,7 @@ public class HoverButton extends JPanel implements MouseListener {
             } else if (val > 99) {
                 fontSize = 34;
             }
-            drawCenteredString(g2d, centerText, centerTextArea, new Font("Arial", Font.BOLD, fontSize));
+            drawCenteredStringWOutline(g2d, centerText, centerTextArea, new Font("Arial", Font.BOLD, fontSize));
         }
         g2d.setColor(textColor);
         if (overlayImage != null) {
@@ -369,7 +371,7 @@ public class HoverButton extends JPanel implements MouseListener {
      * @param rect The Rectangle to center the text in.
      * @param font
      */
-    public void drawCenteredString(Graphics g, String text, Rectangle rect, Font font) {
+    public void drawCenteredStringWOutline(Graphics2D g, String text, Rectangle rect, Font font) {
         // Get the FontMetrics
         FontMetrics metrics = g.getFontMetrics(font);
         // Determine the X coordinate for the text
@@ -378,8 +380,21 @@ public class HoverButton extends JPanel implements MouseListener {
         int y = rect.y + ((rect.height - metrics.getHeight()) / 2) + metrics.getAscent();
         // Set the font
         g.setFont(font);
-        // Draw the String
-        g.drawString(text, x, y);
+
+        GlyphVector gv = font.createGlyphVector(g.getFontRenderContext(), text);
+        g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
+                RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+        g.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS,
+                RenderingHints.VALUE_FRACTIONALMETRICS_ON);
+        g.drawGlyphVector(gv, x, y);
+
+        g.translate(x - 1, y - 1);
+        for (int i = 0; i < text.length(); i++) {
+            g.setColor(Color.BLACK);
+            g.draw(gv.getGlyphOutline(i));
+        }
+        g.translate(-x + 1, -y + 1);
+
     }
 
     public void gainLifeDisplay() {
@@ -388,11 +403,11 @@ public class HoverButton extends JPanel implements MouseListener {
             faderGainLife = new Timer(50, new ActionListener() {
                 public void actionPerformed(ActionEvent ae) {
                     gainX++;
-                    int alpha = Math.max(250 - gainX, 180);
+                    int alpha = Math.max(250 - gainX, 200);
                     setCenterColor(new Color(2 * gainX, 210, 255, alpha));
                     repaint();
                     if (gainX >= 100) {
-                        setCenterColor(new Color(200, 210, 0, 180));
+                        setCenterColor(new Color(200, 210, 0, 200));
                         gainX = 100;
 
                         if (faderGainLife != null) {
@@ -416,11 +431,11 @@ public class HoverButton extends JPanel implements MouseListener {
             faderLoseLife = new Timer(50, new ActionListener() {
                 public void actionPerformed(ActionEvent ae) {
                     loseX++;
-                    int alpha = Math.max(250 - loseX, 180);
+                    int alpha = Math.max(250 - loseX, 200);
                     setCenterColor(new Color(250 - loseX / 2, 130 + loseX, 0, alpha));
                     repaint();
                     if (loseX >= 100) {
-                        setCenterColor(new Color(200, 210, 0, 180));
+                        setCenterColor(new Color(200, 210, 0, 200));
                         loseX = 100;
                         stopLifeDisplay();
 
