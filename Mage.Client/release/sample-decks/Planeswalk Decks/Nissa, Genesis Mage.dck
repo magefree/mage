@@ -1,0 +1,23 @@
+4 [HOU:193] Island
+4 [HOU:192] Island
+2 [AKH:41] Angler Drake
+2 [HOU:29] Aerial Guide
+2 [AKH:209] Weaver of Currents
+2 [HOU:30] Aven Reedstalker
+2 [AKH:219] Spring // Mind
+4 [HOU:204] Woodland Stream
+3 [HOU:54] Unsummon
+3 [HOU:201] Avid Reclaimer
+3 [AKH:179] Pouncing Cheetah
+1 [HOU:200] Nissa, Genesis Mage
+2 [HOU:203] Nissa's Encouragement
+2 [HOU:115] Feral Prowler
+4 [HOU:202] Brambleweft Behemoth
+1 [AKH:196] Bounty of the Luxa
+7 [HOU:199] Forest
+1 [HOU:154] Reason // Believe
+2 [HOU:143] River Hoopoe
+2 [HOU:110] Ambuscade
+7 [HOU:198] Forest
+LAYOUT MAIN:(1,7)(CARD_TYPE,false,50)|([HOU:115],[HOU:115],[HOU:143],[HOU:143],[HOU:201],[HOU:201],[HOU:201],[AKH:179],[AKH:179],[AKH:179],[HOU:29],[HOU:29],[AKH:209],[AKH:209],[HOU:30],[HOU:30],[HOU:202],[HOU:202],[HOU:202],[HOU:202],[AKH:41],[AKH:41])([AKH:196])([AKH:219],[AKH:219])([HOU:54],[HOU:54],[HOU:54],[HOU:110],[HOU:110])([HOU:204],[HOU:204],[HOU:204],[HOU:204],[HOU:192],[HOU:192],[HOU:192],[HOU:192],[HOU:193],[HOU:193],[HOU:193],[HOU:193],[HOU:198],[HOU:198],[HOU:198],[HOU:198],[HOU:198],[HOU:198],[HOU:198],[HOU:199],[HOU:199],[HOU:199],[HOU:199],[HOU:199],[HOU:199],[HOU:199])([HOU:200])([HOU:154],[HOU:203],[HOU:203])
+LAYOUT SIDEBOARD:(0,0)(NONE,false,50)|

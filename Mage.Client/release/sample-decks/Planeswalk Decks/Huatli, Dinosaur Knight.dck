@@ -1,0 +1,28 @@
+2 [XLN:31] Raptor Companion
+1 [XLN:135] Burning Sun's Avatar
+2 [XLN:38] Slash of Talons
+2 [XLN:36] Shining Aerosaur
+1 [XLN:13] Goring Ceratops
+3 [XLN:274] Mountain
+3 [XLN:273] Mountain
+2 [XLN:133] Bonded Horncrest
+2 [XLN:275] Mountain
+2 [XLN:30] Rallying Roar
+3 [XLN:272] Mountain
+2 [XLN:28] Pterodon Knight
+2 [XLN:149] Lightning Strike
+2 [XLN:146] Frenzied Raptor
+4 [XLN:289] Stone Quarry
+2 [XLN:288] Sun-Blessed Mount
+2 [XLN:169] Tilonalli's Knight
+1 [XLN:285] Huatli, Dinosaur Knight
+2 [XLN:263] Plains
+3 [XLN:262] Plains
+3 [XLN:287] Huatli's Spurring
+4 [XLN:286] Huatli's Snubhorn
+2 [XLN:41] Territorial Hammerskull
+3 [XLN:261] Plains
+3 [XLN:260] Plains
+2 [XLN:18] Kinjalli's Caller
+LAYOUT MAIN:(1,4)(CARD_TYPE,false,50)|([XLN:13],[XLN:288],[XLN:288],[XLN:135],[XLN:18],[XLN:18],[XLN:286],[XLN:286],[XLN:286],[XLN:286],[XLN:31],[XLN:31],[XLN:169],[XLN:169],[XLN:146],[XLN:146],[XLN:41],[XLN:41],[XLN:133],[XLN:133],[XLN:28],[XLN:28],[XLN:36],[XLN:36])([XLN:287],[XLN:287],[XLN:287],[XLN:38],[XLN:38],[XLN:149],[XLN:149],[XLN:30],[XLN:30])([XLN:289],[XLN:289],[XLN:289],[XLN:289],[XLN:260],[XLN:260],[XLN:260],[XLN:261],[XLN:261],[XLN:261],[XLN:262],[XLN:262],[XLN:262],[XLN:263],[XLN:263],[XLN:272],[XLN:272],[XLN:272],[XLN:273],[XLN:273],[XLN:273],[XLN:274],[XLN:274],[XLN:274],[XLN:275],[XLN:275])([XLN:285])
+LAYOUT SIDEBOARD:(0,0)(NONE,false,50)|
