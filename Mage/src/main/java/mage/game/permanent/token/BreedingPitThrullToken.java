@@ -45,4 +45,12 @@ public class BreedingPitThrullToken extends Token {
         power = new MageInt(0);
         toughness = new MageInt(1);
     }
+
+    public BreedingPitThrullToken(final BreedingPitThrullToken token) {
+        super(token);
+    }
+
+    public BreedingPitThrullToken copy() {
+        return new BreedingPitThrullToken(this);
+    }
 }

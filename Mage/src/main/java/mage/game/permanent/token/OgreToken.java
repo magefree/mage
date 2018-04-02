@@ -45,4 +45,12 @@ public class OgreToken extends Token {
         power = new MageInt(3);
         toughness = new MageInt(3);
     }
+
+    public OgreToken(final OgreToken token) {
+        super(token);
+    }
+
+    public OgreToken copy() {
+        return new OgreToken(this);
+    }
 }

@@ -47,4 +47,12 @@ public class MasterOfWavesElementalToken extends Token {
         this.power = new MageInt(1);
         this.toughness = new MageInt(0);
     }
+
+    public MasterOfWavesElementalToken(final MasterOfWavesElementalToken token) {
+        super(token);
+    }
+
+    public MasterOfWavesElementalToken copy() {
+        return new MasterOfWavesElementalToken(this);
+    }
 }

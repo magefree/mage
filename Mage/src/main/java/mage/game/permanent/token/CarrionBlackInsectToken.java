@@ -45,4 +45,12 @@ public class CarrionBlackInsectToken extends Token {
         power = new MageInt(0);
         toughness = new MageInt(1);
     }
+    public CarrionBlackInsectToken(final CarrionBlackInsectToken token) {
+        super(token);
+    }
+
+    public CarrionBlackInsectToken copy() {
+        return new CarrionBlackInsectToken(this);
+    }
+    
 }

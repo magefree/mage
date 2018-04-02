@@ -61,4 +61,12 @@ public class FaerieRogueToken extends Token {
 
         availableImageSetCodes = tokenImageSets;
     }
+
+    public FaerieRogueToken(final FaerieRogueToken token) {
+        super(token);
+    }
+
+    public FaerieRogueToken copy() {
+        return new FaerieRogueToken(this);
+    }
 }

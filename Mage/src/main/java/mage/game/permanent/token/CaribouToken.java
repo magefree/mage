@@ -45,4 +45,12 @@ public class CaribouToken extends Token {
         power = new MageInt(0);
         toughness = new MageInt(1);
     }
+
+    public CaribouToken(final CaribouToken token) {
+        super(token);
+    }
+
+    public CaribouToken copy() {
+        return new CaribouToken(this);
+    }
 }

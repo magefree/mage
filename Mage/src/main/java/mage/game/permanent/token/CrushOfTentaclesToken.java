@@ -46,4 +46,12 @@ public class CrushOfTentaclesToken extends Token {
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);
     }
+    public CrushOfTentaclesToken(final CrushOfTentaclesToken token) {
+        super(token);
+    }
+
+    public CrushOfTentaclesToken copy() {
+        return new CrushOfTentaclesToken(this);
+    }
+    
 }

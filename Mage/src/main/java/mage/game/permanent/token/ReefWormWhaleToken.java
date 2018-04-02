@@ -50,4 +50,12 @@ public class ReefWormWhaleToken extends Token {
 
         addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new ReefWormKrakenToken())));
     }
+
+    public ReefWormWhaleToken(final ReefWormWhaleToken token) {
+        super(token);
+    }
+
+    public ReefWormWhaleToken copy() {
+        return new ReefWormWhaleToken(this);
+    }
 }

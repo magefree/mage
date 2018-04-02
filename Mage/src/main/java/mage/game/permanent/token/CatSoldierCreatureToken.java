@@ -52,4 +52,12 @@ public class CatSoldierCreatureToken extends Token {
         this.addAbility(VigilanceAbility.getInstance());
         this.setOriginalExpansionSetCode("BNG");
     }
+
+    public CatSoldierCreatureToken(final CatSoldierCreatureToken token) {
+        super(token);
+    }
+
+    public CatSoldierCreatureToken copy() {
+        return new CatSoldierCreatureToken(this);
+    }
 }

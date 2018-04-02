@@ -47,4 +47,12 @@ public class RebelStarshipToken extends Token {
         subtype.add(SubType.REBEL);
         subtype.add(SubType.STARSHIP);
     }
+
+    public RebelStarshipToken(final RebelStarshipToken token) {
+        super(token);
+    }
+
+    public RebelStarshipToken copy() {
+        return new RebelStarshipToken(this);
+    }
 }

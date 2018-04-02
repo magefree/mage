@@ -46,4 +46,12 @@ public class WandOfTheElementsSecondToken extends Token {
         power = new MageInt(3);
         toughness = new MageInt(3);
     }
+
+    public WandOfTheElementsSecondToken(final WandOfTheElementsSecondToken token) {
+        super(token);
+    }
+
+    public WandOfTheElementsSecondToken copy() {
+        return new WandOfTheElementsSecondToken(this);
+    }
 }

@@ -70,4 +70,12 @@ public class TreasureToken extends Token {
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }
+
+    public TreasureToken(final TreasureToken token) {
+        super(token);
+    }
+
+    public TreasureToken copy() {
+        return new TreasureToken(this);
+    }
 }

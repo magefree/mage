@@ -50,4 +50,12 @@ public class TrooperToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
     }
+
+    public TrooperToken(final TrooperToken token) {
+        super(token);
+    }
+
+    public TrooperToken copy() {
+        return new TrooperToken(this);
+    }
 }

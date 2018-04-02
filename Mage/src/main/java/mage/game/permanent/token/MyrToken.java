@@ -17,7 +17,7 @@ public class MyrToken extends Token {
     }
 
     public MyrToken() {
-        this(null);
+        this((String)null);
     }
 
     public MyrToken(String expansionSetCode) {
@@ -30,5 +30,13 @@ public class MyrToken extends Token {
         toughness = new MageInt(1);
 
         availableImageSetCodes = tokenImageSets;
+    }
+
+    public MyrToken(final MyrToken token) {
+        super(token);
+    }
+
+    public MyrToken copy() {
+        return new MyrToken(this);
     }
 }

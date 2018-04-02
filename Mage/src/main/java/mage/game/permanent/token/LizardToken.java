@@ -45,4 +45,12 @@ public class LizardToken extends Token {
         power = new MageInt(2);
         toughness = new MageInt(2);
     }
+
+    public LizardToken(final LizardToken token) {
+        super(token);
+    }
+
+    public LizardToken copy() {
+        return new LizardToken(this);
+    }
 }

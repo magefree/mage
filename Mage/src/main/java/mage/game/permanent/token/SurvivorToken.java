@@ -45,4 +45,12 @@ public class SurvivorToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
     }
+
+    public SurvivorToken(final SurvivorToken token) {
+        super(token);
+    }
+
+    public SurvivorToken copy() {
+        return new SurvivorToken(this);
+    }
 }

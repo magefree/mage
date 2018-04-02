@@ -47,4 +47,12 @@ public class UtvaraHellkiteDragonToken extends Token {
         toughness = new MageInt(6);
         addAbility(FlyingAbility.getInstance());
     }
+    public UtvaraHellkiteDragonToken(final UtvaraHellkiteDragonToken token) {
+        super(token);
+    }
+
+    public UtvaraHellkiteDragonToken copy() {
+        return new UtvaraHellkiteDragonToken(this);
+    }
+    
 }

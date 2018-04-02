@@ -48,4 +48,12 @@ public class TatsumaDragonToken extends Token {
         toughness = new MageInt(5);
         addAbility(FlyingAbility.getInstance());
     }
+
+    public TatsumaDragonToken(final TatsumaDragonToken token) {
+        super(token);
+    }
+
+    public TatsumaDragonToken copy() {
+        return new TatsumaDragonToken(this);
+    }
 }

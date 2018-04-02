@@ -45,4 +45,12 @@ public class TitanForgeGolemToken extends Token {
         power = new MageInt(9);
         toughness = new MageInt(9);
     }
+
+    public TitanForgeGolemToken(final TitanForgeGolemToken token) {
+        super(token);
+    }
+
+    public TitanForgeGolemToken copy() {
+        return new TitanForgeGolemToken(this);
+    }
 }

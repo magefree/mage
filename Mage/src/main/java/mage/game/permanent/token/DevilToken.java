@@ -58,4 +58,12 @@ public class DevilToken extends Token {
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
     }
+
+    public DevilToken(final DevilToken token) {
+        super(token);
+    }
+
+    public DevilToken copy() {
+        return new DevilToken(this);
+    }
 }

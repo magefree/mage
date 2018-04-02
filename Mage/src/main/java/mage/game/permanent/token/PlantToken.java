@@ -53,4 +53,12 @@ public class PlantToken extends Token {
 
         availableImageSetCodes = tokenImageSets;
     }
+
+    public PlantToken(final PlantToken token) {
+        super(token);
+    }
+
+    public PlantToken copy() {
+        return new PlantToken(this);
+    }
 }

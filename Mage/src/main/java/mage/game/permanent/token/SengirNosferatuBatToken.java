@@ -67,6 +67,14 @@ public class SengirNosferatuBatToken extends Token {
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }
+
+    public SengirNosferatuBatToken(final SengirNosferatuBatToken token) {
+        super(token);
+    }
+
+    public SengirNosferatuBatToken copy() {
+        return new SengirNosferatuBatToken(this);
+    }
 }
 
 class ReturnSengirNosferatuEffect extends OneShotEffect {

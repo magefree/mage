@@ -47,5 +47,11 @@ public class AnotherSpiritToken extends Token {
         toughness = new MageInt(3);
         this.addAbility(FlyingAbility.getInstance());
     }
+    public AnotherSpiritToken(final AnotherSpiritToken token) {
+        super(token);
+    }
 
+    public AnotherSpiritToken copy() {
+        return new AnotherSpiritToken(this);
+    }
 }

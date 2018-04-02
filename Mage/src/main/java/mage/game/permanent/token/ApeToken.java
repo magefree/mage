@@ -45,4 +45,12 @@ public class ApeToken extends Token {
         power = new MageInt(2);
         toughness = new MageInt(2);
     }
+
+    public ApeToken(final ApeToken token) {
+        super(token);
+    }
+
+    public ApeToken copy() {
+        return new ApeToken(this);
+    }
 }

@@ -45,4 +45,12 @@ public class CrestedSunmareToken extends Token {
         subtype.add(SubType.HORSE);
         cardType.add(CardType.CREATURE);
     }
+
+    public CrestedSunmareToken(final CrestedSunmareToken token) {
+        super(token);
+    }
+
+    public CrestedSunmareToken copy() {
+        return new CrestedSunmareToken(this);
+    }
 }

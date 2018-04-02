@@ -45,4 +45,12 @@ public class PongifyApeToken extends Token {
         power = new MageInt(3);
         toughness = new MageInt(3);
     }
+
+    public PongifyApeToken(final PongifyApeToken token) {
+        super(token);
+    }
+
+    public PongifyApeToken copy() {
+        return new PongifyApeToken(this);
+    }
 }

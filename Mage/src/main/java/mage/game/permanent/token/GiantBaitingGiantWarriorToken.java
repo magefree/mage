@@ -49,4 +49,12 @@ public class GiantBaitingGiantWarriorToken extends Token {
         toughness = new MageInt(4);
         this.addAbility(HasteAbility.getInstance());
     }
+
+    public GiantBaitingGiantWarriorToken(final GiantBaitingGiantWarriorToken token) {
+        super(token);
+    }
+
+    public GiantBaitingGiantWarriorToken copy() {
+        return new GiantBaitingGiantWarriorToken(this);
+    }
 }

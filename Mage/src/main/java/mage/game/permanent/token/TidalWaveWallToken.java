@@ -47,4 +47,12 @@ public class TidalWaveWallToken extends Token {
         toughness = new MageInt(5);
         this.addAbility(DefenderAbility.getInstance());
     }
+
+    public TidalWaveWallToken(final TidalWaveWallToken token) {
+        super(token);
+    }
+
+    public TidalWaveWallToken copy() {
+        return new TidalWaveWallToken(this);
+    }
 }

@@ -48,4 +48,12 @@ public class TeysaEnvoyOfGhostsToken extends Token {
         toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());
     }
+
+    public TeysaEnvoyOfGhostsToken(final TeysaEnvoyOfGhostsToken token) {
+        super(token);
+    }
+
+    public TeysaEnvoyOfGhostsToken copy() {
+        return new TeysaEnvoyOfGhostsToken(this);
+    }
 }

@@ -49,4 +49,12 @@ public class SpoilsOfBloodHorrorToken extends Token {
         power = new MageInt(xValue);
         toughness = new MageInt(xValue);
     }
+
+    public SpoilsOfBloodHorrorToken(final SpoilsOfBloodHorrorToken token) {
+        super(token);
+    }
+
+    public SpoilsOfBloodHorrorToken copy() {
+        return new SpoilsOfBloodHorrorToken(this);
+    }
 }

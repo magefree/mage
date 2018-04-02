@@ -46,5 +46,12 @@ public class AnthousaWarriorToken extends Token {
         toughness = new MageInt(2);
     }
 
+    public AnthousaWarriorToken(final AnthousaWarriorToken token) {
+        super(token);
+    }
+
+    public AnthousaWarriorToken copy() {
+        return new AnthousaWarriorToken(this);
+    }
 }
 

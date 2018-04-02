@@ -48,4 +48,12 @@ public class WhiteElementalToken extends Token {
         setTokenType(2);
         this.addAbility(FlyingAbility.getInstance());
     }
+
+    public WhiteElementalToken(final WhiteElementalToken token) {
+        super(token);
+    }
+
+    public WhiteElementalToken copy() {
+        return new WhiteElementalToken(this);
+    }
 }

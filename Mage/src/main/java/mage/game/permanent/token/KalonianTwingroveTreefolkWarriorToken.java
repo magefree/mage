@@ -62,4 +62,12 @@ public class KalonianTwingroveTreefolkWarriorToken extends Token {
 
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filterLands), Duration.WhileOnBattlefield)));
     }
+
+    public KalonianTwingroveTreefolkWarriorToken(final KalonianTwingroveTreefolkWarriorToken token) {
+        super(token);
+    }
+
+    public KalonianTwingroveTreefolkWarriorToken copy() {
+        return new KalonianTwingroveTreefolkWarriorToken(this);
+    }
 }

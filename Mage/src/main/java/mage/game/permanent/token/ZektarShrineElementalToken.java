@@ -49,4 +49,12 @@ public class ZektarShrineElementalToken extends Token {
         addAbility(TrampleAbility.getInstance());
         addAbility(HasteAbility.getInstance());
     }
+
+    public ZektarShrineElementalToken(final ZektarShrineElementalToken token) {
+        super(token);
+    }
+
+    public ZektarShrineElementalToken copy() {
+        return new ZektarShrineElementalToken(this);
+    }
 }

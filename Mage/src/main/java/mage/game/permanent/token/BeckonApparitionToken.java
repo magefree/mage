@@ -49,4 +49,12 @@ public class BeckonApparitionToken extends Token {
         toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());
     }
+    public BeckonApparitionToken(final BeckonApparitionToken token) {
+        super(token);
+    }
+
+    public BeckonApparitionToken copy() {
+        return new BeckonApparitionToken(this);
+    }
+    
 }

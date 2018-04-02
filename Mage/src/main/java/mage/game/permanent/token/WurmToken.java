@@ -44,4 +44,12 @@ public class WurmToken extends Token {
         power = new MageInt(6);
         toughness = new MageInt(6);
     }
+
+    public WurmToken(final WurmToken token) {
+        super(token);
+    }
+
+    public WurmToken copy() {
+        return new WurmToken(this);
+    }
 }

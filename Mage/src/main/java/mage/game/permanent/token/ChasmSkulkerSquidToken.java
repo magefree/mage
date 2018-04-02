@@ -50,4 +50,11 @@ public class ChasmSkulkerSquidToken extends Token {
         this.addAbility(new IslandwalkAbility());
     }
 
+    public ChasmSkulkerSquidToken(final ChasmSkulkerSquidToken token) {
+        super(token);
+    }
+
+    public ChasmSkulkerSquidToken copy() {
+        return new ChasmSkulkerSquidToken(this);
+    }
 }

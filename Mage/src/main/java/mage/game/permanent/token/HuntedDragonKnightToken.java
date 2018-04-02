@@ -30,4 +30,12 @@ public class HuntedDragonKnightToken extends Token {
         toughness = new MageInt(2);
         this.addAbility(FirstStrikeAbility.getInstance());
     }
+
+    public HuntedDragonKnightToken(final HuntedDragonKnightToken token) {
+        super(token);
+    }
+
+    public HuntedDragonKnightToken copy() {
+        return new HuntedDragonKnightToken(this);
+    }
 }

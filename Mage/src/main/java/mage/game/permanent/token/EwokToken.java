@@ -46,4 +46,12 @@ public class EwokToken extends Token {
         subtype.add(SubType.EWOK);
         color.setGreen(true);
     }
+
+    public EwokToken(final EwokToken token) {
+        super(token);
+    }
+
+    public EwokToken copy() {
+        return new EwokToken(this);
+    }
 }

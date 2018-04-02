@@ -50,4 +50,12 @@ public class ZombieToken2 extends Token {
         toughness = new MageInt(zToughness);
         setOriginalExpansionSetCode("EMN");
     }
+
+    public ZombieToken2(final ZombieToken2 token) {
+        super(token);
+    }
+
+    public ZombieToken2 copy() {
+        return new ZombieToken2(this);
+    }
 }

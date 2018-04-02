@@ -47,4 +47,12 @@ public class DeadlyGrubToken extends Token {
         toughness = new MageInt(1);
         this.addAbility(ShroudAbility.getInstance());
     }
+
+    public DeadlyGrubToken(final DeadlyGrubToken token) {
+        super(token);
+    }
+
+    public DeadlyGrubToken copy() {
+        return new DeadlyGrubToken(this);
+    }
 }

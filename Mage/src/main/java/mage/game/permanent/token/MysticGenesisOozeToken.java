@@ -49,4 +49,12 @@ public class MysticGenesisOozeToken extends Token {
         toughness = new MageInt(xValue);
         setOriginalExpansionSetCode("RTR");
     }
+
+    public MysticGenesisOozeToken(final MysticGenesisOozeToken token) {
+        super(token);
+    }
+
+    public MysticGenesisOozeToken copy() {
+        return new MysticGenesisOozeToken(this);
+    }
 }

@@ -55,4 +55,12 @@ public class EldraziHorrorToken extends Token {
         toughness = new MageInt(2);
         availableImageSetCodes = tokenImageSets;
     }
+
+    public EldraziHorrorToken(final EldraziHorrorToken token) {
+        super(token);
+    }
+
+    public EldraziHorrorToken copy() {
+        return new EldraziHorrorToken(this);
+    }
 }

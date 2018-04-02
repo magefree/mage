@@ -51,4 +51,12 @@ public class CloudSpriteToken extends Token {
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(new CanBlockOnlyFlyingAbility());
     }
+
+    public CloudSpriteToken(final CloudSpriteToken token) {
+        super(token);
+    }
+
+    public CloudSpriteToken copy() {
+        return new CloudSpriteToken(this);
+    }
 }

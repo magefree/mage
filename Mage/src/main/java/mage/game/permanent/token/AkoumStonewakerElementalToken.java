@@ -52,5 +52,13 @@ public class AkoumStonewakerElementalToken extends Token {
         this.setOriginalExpansionSetCode("BFZ");
         this.setTokenType(1);
     }
+
+    public AkoumStonewakerElementalToken(final AkoumStonewakerElementalToken token) {
+        super(token);
+    }
+
+    public AkoumStonewakerElementalToken copy() {
+        return new AkoumStonewakerElementalToken(this);
+    }
 }
 

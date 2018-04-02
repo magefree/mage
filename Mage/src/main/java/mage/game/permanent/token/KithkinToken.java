@@ -21,4 +21,12 @@ public class KithkinToken extends Token {
         toughness = new MageInt(1);
         availableImageSetCodes.addAll(Arrays.asList("LRW", "SHM", "MMA"));
     }
+
+    public KithkinToken(final KithkinToken token) {
+        super(token);
+    }
+
+    public KithkinToken copy() {
+        return new KithkinToken(this);
+    }
 }

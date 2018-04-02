@@ -51,5 +51,11 @@ public class RatToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
     }
+    public RatToken(final RatToken token) {
+        super(token);
+    }
 
+    public RatToken copy() {
+        return new RatToken(this);
+    }
 }

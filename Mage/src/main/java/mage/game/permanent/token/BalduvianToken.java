@@ -48,4 +48,12 @@ public class BalduvianToken extends Token {
         subtype.add(SubType.GRAVEBORN);
         addAbility(HasteAbility.getInstance());
     }
+
+    public BalduvianToken(final BalduvianToken token) {
+        super(token);
+    }
+
+    public BalduvianToken copy() {
+        return new BalduvianToken(this);
+    }
 }

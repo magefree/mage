@@ -53,4 +53,12 @@ public class ConstructToken extends Token {
 
         addAbility(DefenderAbility.getInstance());
     }
+
+    public ConstructToken(final ConstructToken token) {
+        super(token);
+    }
+
+    public ConstructToken copy() {
+        return new ConstructToken(this);
+    }
 }

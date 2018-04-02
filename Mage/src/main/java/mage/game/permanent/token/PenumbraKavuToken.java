@@ -45,4 +45,12 @@ public class PenumbraKavuToken extends Token {
         power = new MageInt(3);
         toughness = new MageInt(3);
     }
+
+    public PenumbraKavuToken(final PenumbraKavuToken token) {
+        super(token);
+    }
+
+    public PenumbraKavuToken copy() {
+        return new PenumbraKavuToken(this);
+    }
 }

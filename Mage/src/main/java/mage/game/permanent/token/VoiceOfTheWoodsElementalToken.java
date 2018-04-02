@@ -50,4 +50,12 @@ public class VoiceOfTheWoodsElementalToken extends Token {
 
         addAbility(TrampleAbility.getInstance());
     }
+
+    public VoiceOfTheWoodsElementalToken(final VoiceOfTheWoodsElementalToken token) {
+        super(token);
+    }
+
+    public VoiceOfTheWoodsElementalToken copy() {
+        return new VoiceOfTheWoodsElementalToken(this);
+    }
 }

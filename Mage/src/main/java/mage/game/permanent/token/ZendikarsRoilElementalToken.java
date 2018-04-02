@@ -47,4 +47,11 @@ public class ZendikarsRoilElementalToken extends Token {
         toughness = new MageInt(2);
     }
 
+    public ZendikarsRoilElementalToken(final ZendikarsRoilElementalToken token) {
+        super(token);
+    }
+
+    public ZendikarsRoilElementalToken copy() {
+        return new ZendikarsRoilElementalToken(this);
+    }
 }

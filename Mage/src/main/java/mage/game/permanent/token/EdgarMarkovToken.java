@@ -45,4 +45,12 @@ public class EdgarMarkovToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
     }
+
+    public EdgarMarkovToken(final EdgarMarkovToken token) {
+        super(token);
+    }
+
+    public EdgarMarkovToken copy() {
+        return new EdgarMarkovToken(this);
+    }
 }

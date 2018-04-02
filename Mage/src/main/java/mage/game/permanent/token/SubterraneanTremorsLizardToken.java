@@ -45,4 +45,12 @@ public class SubterraneanTremorsLizardToken extends Token {
         power = new MageInt(8);
         toughness = new MageInt(8);
     }
+
+    public SubterraneanTremorsLizardToken(final SubterraneanTremorsLizardToken token) {
+        super(token);
+    }
+
+    public SubterraneanTremorsLizardToken copy() {
+        return new SubterraneanTremorsLizardToken(this);
+    }
 }

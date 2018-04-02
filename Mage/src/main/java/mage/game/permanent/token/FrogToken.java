@@ -46,5 +46,11 @@ public class FrogToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
     }
+    public FrogToken(final FrogToken token) {
+        super(token);
+    }
 
+    public FrogToken copy() {
+        return new FrogToken(this);
+    }
 }

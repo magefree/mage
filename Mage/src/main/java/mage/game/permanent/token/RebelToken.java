@@ -43,4 +43,12 @@ public class RebelToken extends Token {
         color.setWhite(true);
         subtype.add(SubType.REBEL);
     }
+
+    public RebelToken(final RebelToken token) {
+        super(token);
+    }
+
+    public RebelToken copy() {
+        return new RebelToken(this);
+    }
 }

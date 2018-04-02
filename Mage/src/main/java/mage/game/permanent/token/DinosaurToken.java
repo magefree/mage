@@ -47,4 +47,12 @@ public class DinosaurToken extends Token {
         toughness = new MageInt(3);
         addAbility(TrampleAbility.getInstance());
     }
+
+    public DinosaurToken(final DinosaurToken token) {
+        super(token);
+    }
+
+    public DinosaurToken copy() {
+        return new DinosaurToken(this);
+    }
 }

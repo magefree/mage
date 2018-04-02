@@ -48,4 +48,12 @@ public class QuestForTheGravelordZombieToken extends Token {
         power = new MageInt(5);
         toughness = new MageInt(5);
     }
+
+    public QuestForTheGravelordZombieToken(final QuestForTheGravelordZombieToken token) {
+        super(token);
+    }
+
+    public QuestForTheGravelordZombieToken copy() {
+        return new QuestForTheGravelordZombieToken(this);
+    }
 }

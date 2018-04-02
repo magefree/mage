@@ -46,4 +46,12 @@ public class GremlinToken extends Token {
         power = new MageInt(2);
         toughness = new MageInt(2);
     }
+
+    public GremlinToken(final GremlinToken token) {
+        super(token);
+    }
+
+    public GremlinToken copy() {
+        return new GremlinToken(this);
+    }
 }

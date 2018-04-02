@@ -45,4 +45,12 @@ public class SerfToken extends Token {
         power = new MageInt(0);
         toughness = new MageInt(1);
     }
+
+    public SerfToken(final SerfToken token) {
+        super(token);
+    }
+
+    public SerfToken copy() {
+        return new SerfToken(this);
+    }
 }

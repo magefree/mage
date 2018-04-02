@@ -46,5 +46,11 @@ public class BearsCompanionBearToken extends Token {
         power = new MageInt(4);
         toughness = new MageInt(4);
     }
+    public BearsCompanionBearToken(final BearsCompanionBearToken token) {
+        super(token);
+    }
 
+    public BearsCompanionBearToken copy() {
+        return new BearsCompanionBearToken(this);
+    }
 }

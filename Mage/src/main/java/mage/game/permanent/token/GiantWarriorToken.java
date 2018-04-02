@@ -46,4 +46,12 @@ public class GiantWarriorToken extends Token {
         power = new MageInt(5);
         toughness = new MageInt(5);
     }
+
+    public GiantWarriorToken(final GiantWarriorToken token) {
+        super(token);
+    }
+
+    public GiantWarriorToken copy() {
+        return new GiantWarriorToken(this);
+    }
 }

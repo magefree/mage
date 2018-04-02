@@ -48,4 +48,12 @@ public class HeliodGodOfTheSunToken extends Token {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
     }
+
+    public HeliodGodOfTheSunToken(final HeliodGodOfTheSunToken token) {
+        super(token);
+    }
+
+    public HeliodGodOfTheSunToken copy() {
+        return new HeliodGodOfTheSunToken(this);
+    }
 }

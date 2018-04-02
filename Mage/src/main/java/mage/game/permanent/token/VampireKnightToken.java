@@ -17,4 +17,12 @@ public class VampireKnightToken extends Token {
         toughness = new MageInt(1);
         addAbility(LifelinkAbility.getInstance());
     }
+
+    public VampireKnightToken(final VampireKnightToken token) {
+        super(token);
+    }
+
+    public VampireKnightToken copy() {
+        return new VampireKnightToken(this);
+    }
 }

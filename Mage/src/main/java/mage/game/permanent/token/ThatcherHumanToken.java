@@ -49,4 +49,12 @@ public class ThatcherHumanToken extends Token {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
     }
+
+    public ThatcherHumanToken(final ThatcherHumanToken token) {
+        super(token);
+    }
+
+    public ThatcherHumanToken copy() {
+        return new ThatcherHumanToken(this);
+    }
 }

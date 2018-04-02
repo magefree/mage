@@ -50,4 +50,12 @@ public class SwanSongBirdToken extends Token {
         toughness = new MageInt(2);
         this.addAbility(FlyingAbility.getInstance());
     }
+
+    public SwanSongBirdToken(final SwanSongBirdToken token) {
+        super(token);
+    }
+
+    public SwanSongBirdToken copy() {
+        return new SwanSongBirdToken(this);
+    }
 }

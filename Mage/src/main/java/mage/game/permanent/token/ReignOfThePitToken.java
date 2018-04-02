@@ -50,4 +50,12 @@ public class ReignOfThePitToken extends Token {
         cardType.add(CardType.CREATURE);
         this.addAbility(FlyingAbility.getInstance());
     }
+    public ReignOfThePitToken(final ReignOfThePitToken token) {
+        super(token);
+    }
+
+    public ReignOfThePitToken copy() {
+        return new ReignOfThePitToken(this);
+    }
+    
 }

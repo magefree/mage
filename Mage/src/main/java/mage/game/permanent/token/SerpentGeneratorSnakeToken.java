@@ -53,4 +53,12 @@ public class SerpentGeneratorSnakeToken extends Token {
         this.addAbility(new DealsDamageToAPlayerTriggeredAbility(effect, false, true));
     }
 
+    public SerpentGeneratorSnakeToken(final SerpentGeneratorSnakeToken token) {
+        super(token);
+    }
+
+    public SerpentGeneratorSnakeToken copy() {
+        return new SerpentGeneratorSnakeToken(this);
+    }
+
 }

@@ -55,4 +55,12 @@ public class LightningRagerToken extends Token {
         addAbility(HasteAbility.getInstance());
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new SacrificeSourceEffect(), TargetController.NEXT, false));
     }
+
+    public LightningRagerToken(final LightningRagerToken token) {
+        super(token);
+    }
+
+    public LightningRagerToken copy() {
+        return new LightningRagerToken(this);
+    }
 }

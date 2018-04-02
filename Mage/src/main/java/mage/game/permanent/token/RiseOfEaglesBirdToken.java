@@ -51,4 +51,12 @@ public class RiseOfEaglesBirdToken extends Token {
         toughness = new MageInt(2);
         addAbility(FlyingAbility.getInstance());
     }
+
+    public RiseOfEaglesBirdToken(final RiseOfEaglesBirdToken token) {
+        super(token);
+    }
+
+    public RiseOfEaglesBirdToken copy() {
+        return new RiseOfEaglesBirdToken(this);
+    }
 }

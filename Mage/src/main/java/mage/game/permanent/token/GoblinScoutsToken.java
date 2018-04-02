@@ -49,4 +49,12 @@ public class GoblinScoutsToken extends Token {
 
         this.addAbility(new MountainwalkAbility());
     }
+
+    public GoblinScoutsToken(final GoblinScoutsToken token) {
+        super(token);
+    }
+
+    public GoblinScoutsToken copy() {
+        return new GoblinScoutsToken(this);
+    }
 }

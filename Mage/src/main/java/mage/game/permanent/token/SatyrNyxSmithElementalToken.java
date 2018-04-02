@@ -49,4 +49,12 @@ public class SatyrNyxSmithElementalToken extends Token {
         this.addAbility(HasteAbility.getInstance());
         this.setOriginalExpansionSetCode("BNG");
     }
+
+    public SatyrNyxSmithElementalToken(final SatyrNyxSmithElementalToken token) {
+        super(token);
+    }
+
+    public SatyrNyxSmithElementalToken copy() {
+        return new SatyrNyxSmithElementalToken(this);
+    }
 }

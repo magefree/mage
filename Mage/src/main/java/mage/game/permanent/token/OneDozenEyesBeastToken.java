@@ -46,4 +46,12 @@ public class OneDozenEyesBeastToken extends Token {
         toughness = new MageInt(5);
     }
 
+    public OneDozenEyesBeastToken(final OneDozenEyesBeastToken token) {
+        super(token);
+    }
+
+    public OneDozenEyesBeastToken copy() {
+        return new OneDozenEyesBeastToken(this);
+    }
+
 }

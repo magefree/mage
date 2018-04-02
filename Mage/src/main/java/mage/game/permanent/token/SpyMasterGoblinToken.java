@@ -62,4 +62,12 @@ public class SpyMasterGoblinToken extends Token {
         Effect effect = new AttacksIfAbleAllEffect(filter, Duration.WhileOnBattlefield, true);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
+
+    public SpyMasterGoblinToken(final SpyMasterGoblinToken token) {
+        super(token);
+    }
+
+    public SpyMasterGoblinToken copy() {
+        return new SpyMasterGoblinToken(this);
+    }
 }

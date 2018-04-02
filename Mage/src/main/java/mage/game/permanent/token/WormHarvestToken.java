@@ -46,4 +46,12 @@ public class WormHarvestToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
     }
+
+    public WormHarvestToken(final WormHarvestToken token) {
+        super(token);
+    }
+
+    public WormHarvestToken copy() {
+        return new WormHarvestToken(this);
+    }
 }

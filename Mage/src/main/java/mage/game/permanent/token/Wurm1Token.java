@@ -51,4 +51,12 @@ public class Wurm1Token extends Token {
         toughness = new MageInt(3);
         this.addAbility(DeathtouchAbility.getInstance());
     }
+
+    public Wurm1Token(final Wurm1Token token) {
+        super(token);
+    }
+
+    public Wurm1Token copy() {
+        return new Wurm1Token(this);
+    }
 }

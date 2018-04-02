@@ -55,4 +55,12 @@ public class MaritLageToken extends Token {
         this.addAbility(IndestructibleAbility.getInstance());
 
     }
+
+    public MaritLageToken(final MaritLageToken token) {
+        super(token);
+    }
+
+    public MaritLageToken copy() {
+        return new MaritLageToken(this);
+    }
 }

@@ -45,4 +45,12 @@ public class IllusionToken extends Token {
         power = new MageInt(2);
         toughness = new MageInt(2);
     }
+
+    public IllusionToken(final IllusionToken token) {
+        super(token);
+    }
+
+    public IllusionToken copy() {
+        return new IllusionToken(this);
+    }
 }

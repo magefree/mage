@@ -16,4 +16,12 @@ public class KorAllyToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
     }
+
+    public KorAllyToken(final KorAllyToken token) {
+        super(token);
+    }
+
+    public KorAllyToken copy() {
+        return new KorAllyToken(this);
+    }
 }

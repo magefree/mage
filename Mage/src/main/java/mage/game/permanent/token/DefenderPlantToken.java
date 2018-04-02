@@ -56,4 +56,12 @@ public class DefenderPlantToken extends Token {
 
         this.addAbility(DefenderAbility.getInstance());
     }
+
+    public DefenderPlantToken(final DefenderPlantToken token) {
+        super(token);
+    }
+
+    public DefenderPlantToken copy() {
+        return new DefenderPlantToken(this);
+    }
 }

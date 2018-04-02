@@ -47,4 +47,12 @@ public class DeathtouchSnakeToken extends Token {
         toughness = new MageInt(1);
         addAbility(DeathtouchAbility.getInstance());
     }
+
+    public DeathtouchSnakeToken(final DeathtouchSnakeToken token) {
+        super(token);
+    }
+
+    public DeathtouchSnakeToken copy() {
+        return new DeathtouchSnakeToken(this);
+    }
 }

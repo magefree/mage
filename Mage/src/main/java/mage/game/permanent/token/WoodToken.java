@@ -49,4 +49,12 @@ public class WoodToken extends Token {
 
         this.addAbility(DefenderAbility.getInstance());
     }
+
+    public WoodToken(final WoodToken token) {
+        super(token);
+    }
+
+    public WoodToken copy() {
+        return new WoodToken(this);
+    }
 }

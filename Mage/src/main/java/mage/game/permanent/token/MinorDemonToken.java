@@ -46,4 +46,12 @@ public class MinorDemonToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
     }
+
+    public MinorDemonToken(final MinorDemonToken token) {
+        super(token);
+    }
+
+    public MinorDemonToken copy() {
+        return new MinorDemonToken(this);
+    }
 }

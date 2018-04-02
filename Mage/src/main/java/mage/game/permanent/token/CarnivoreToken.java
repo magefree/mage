@@ -45,4 +45,12 @@ public class CarnivoreToken extends Token {
         power = new MageInt(3);
         toughness = new MageInt(1);
     }
+
+    public CarnivoreToken(final CarnivoreToken token) {
+        super(token);
+    }
+
+    public CarnivoreToken copy() {
+        return new CarnivoreToken(this);
+    }
 }

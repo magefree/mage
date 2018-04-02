@@ -47,4 +47,11 @@ public class HellionHasteToken extends Token {
         toughness = new MageInt(4);
         addAbility(HasteAbility.getInstance());
     }
+    public HellionHasteToken(final HellionHasteToken token) {
+        super(token);
+    }
+
+    public HellionHasteToken copy() {
+        return new HellionHasteToken(this);
+    }
 }

@@ -57,4 +57,12 @@ public class ThrullToken extends Token {
 
         availableImageSetCodes = tokenImageSets;
     }
+
+    public ThrullToken(final ThrullToken token) {
+        super(token);
+    }
+
+    public ThrullToken copy() {
+        return new ThrullToken(this);
+    }
 }

@@ -50,4 +50,12 @@ public class LlanowarElvesToken extends Token {
 
         this.addAbility(new GreenManaAbility());
     }
+
+    public LlanowarElvesToken(final LlanowarElvesToken token) {
+        super(token);
+    }
+
+    public LlanowarElvesToken copy() {
+        return new LlanowarElvesToken(this);
+    }
 }

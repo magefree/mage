@@ -48,4 +48,12 @@ public class AkroanSoldierToken extends Token {
         toughness = new MageInt(1);
         this.addAbility(HasteAbility.getInstance());
     }
+
+    public AkroanSoldierToken(final AkroanSoldierToken token) {
+        super(token);
+    }
+
+    public AkroanSoldierToken copy() {
+        return new AkroanSoldierToken(this);
+    }
 }

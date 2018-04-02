@@ -55,4 +55,12 @@ public class OviyaPashiriSageLifecrafterToken extends Token {
         power = new MageInt(number);
         toughness = new MageInt(number);
     }
+
+    public OviyaPashiriSageLifecrafterToken(final OviyaPashiriSageLifecrafterToken token) {
+        super(token);
+    }
+
+    public OviyaPashiriSageLifecrafterToken copy() {
+        return new OviyaPashiriSageLifecrafterToken(this);
+    }
 }

@@ -48,4 +48,12 @@ public class ThopterToken extends Token {
         toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());
     }
+
+    public ThopterToken(final ThopterToken token) {
+        super(token);
+    }
+
+    public ThopterToken copy() {
+        return new ThopterToken(this);
+    }
 }

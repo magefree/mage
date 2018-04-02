@@ -45,4 +45,12 @@ public class RoyalGuardToken extends Token {
         addAbility(FirstStrikeAbility.getInstance());
         subtype.add(SubType.SOLDIER);
     }
+
+    public RoyalGuardToken(final RoyalGuardToken token) {
+        super(token);
+    }
+
+    public RoyalGuardToken copy() {
+        return new RoyalGuardToken(this);
+    }
 }

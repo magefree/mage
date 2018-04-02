@@ -46,4 +46,12 @@ public class KaldraToken extends Token {
         power = new MageInt(4);
         toughness = new MageInt(4);
     }
+
+    public KaldraToken(final KaldraToken token) {
+        super(token);
+    }
+
+    public KaldraToken copy() {
+        return new KaldraToken(this);
+    }
 }

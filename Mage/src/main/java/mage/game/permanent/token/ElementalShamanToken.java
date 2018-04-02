@@ -62,4 +62,11 @@ public class ElementalShamanToken extends Token {
         toughness = new MageInt(1);
     }
 
+    public ElementalShamanToken(final ElementalShamanToken token) {
+        super(token);
+    }
+
+    public ElementalShamanToken copy() {
+        return new ElementalShamanToken(this);
+    }
 }

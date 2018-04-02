@@ -58,4 +58,11 @@ public class CentaurToken extends Token {
         toughness = new MageInt(3);
     }
 
+    public CentaurToken(final CentaurToken token) {
+        super(token);
+    }
+
+    public CentaurToken copy() {
+        return new CentaurToken(this);
+    }
 }

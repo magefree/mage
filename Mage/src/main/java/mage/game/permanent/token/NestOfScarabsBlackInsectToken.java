@@ -45,4 +45,12 @@ public class NestOfScarabsBlackInsectToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
     }
+
+    public NestOfScarabsBlackInsectToken(final NestOfScarabsBlackInsectToken token) {
+        super(token);
+    }
+
+    public NestOfScarabsBlackInsectToken copy() {
+        return new NestOfScarabsBlackInsectToken(this);
+    }
 }

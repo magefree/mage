@@ -47,4 +47,12 @@ public class OrderedMigrationBirdToken extends Token {
         toughness = new MageInt(1);
         addAbility(FlyingAbility.getInstance());
     }
+
+    public OrderedMigrationBirdToken(final OrderedMigrationBirdToken token) {
+        super(token);
+    }
+
+    public OrderedMigrationBirdToken copy() {
+        return new OrderedMigrationBirdToken(this);
+    }
 }

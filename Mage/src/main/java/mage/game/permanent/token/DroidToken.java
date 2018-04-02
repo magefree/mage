@@ -50,4 +50,12 @@ public class DroidToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
     }
+
+    public DroidToken(final DroidToken token) {
+        super(token);
+    }
+
+    public DroidToken copy() {
+        return new DroidToken(this);
+    }
 }

@@ -55,4 +55,12 @@ public class WurmToken3 extends Token {
         power = new MageInt(5);
         toughness = new MageInt(5);
     }
+
+    public WurmToken3(final WurmToken3 token) {
+        super(token);
+    }
+
+    public WurmToken3 copy() {
+        return new WurmToken3(this);
+    }
 }

@@ -53,6 +53,14 @@ public class TetraviteToken extends Token {
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(new CantBeEnchantedAbility());
     }
+
+    public TetraviteToken(final TetraviteToken token) {
+        super(token);
+    }
+
+    public TetraviteToken copy() {
+        return new TetraviteToken(this);
+    }
 }
 
 class CantBeEnchantedAbility extends StaticAbility {

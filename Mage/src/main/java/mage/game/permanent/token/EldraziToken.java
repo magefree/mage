@@ -44,4 +44,12 @@ public class EldraziToken extends Token {
         power = new MageInt(10);
         toughness = new MageInt(10);
     }
+
+    public EldraziToken(final EldraziToken token) {
+        super(token);
+    }
+
+    public EldraziToken copy() {
+        return new EldraziToken(this);
+    }
 }

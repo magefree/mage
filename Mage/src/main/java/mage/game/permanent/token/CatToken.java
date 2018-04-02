@@ -65,4 +65,13 @@ public class CatToken extends Token {
         power = new MageInt(2);
         toughness = new MageInt(2);
     }
+
+    public CatToken(final CatToken token) {
+        super(token);
+    }
+
+    public CatToken copy() {
+        return new CatToken(this);
+    }
+    
 }

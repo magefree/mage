@@ -46,4 +46,12 @@ public class SliversmithToken extends Token {
         toughness = new MageInt(1);
         this.setOriginalExpansionSetCode("FUT");
     }
+
+    public SliversmithToken(final SliversmithToken token) {
+        super(token);
+    }
+
+    public SliversmithToken copy() {
+        return new SliversmithToken(this);
+    }
 }

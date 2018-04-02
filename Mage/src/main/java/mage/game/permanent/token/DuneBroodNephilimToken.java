@@ -44,4 +44,11 @@ public class DuneBroodNephilimToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
     }
+    public DuneBroodNephilimToken(final DuneBroodNephilimToken token) {
+        super(token);
+    }
+
+    public DuneBroodNephilimToken copy() {
+        return new DuneBroodNephilimToken(this);
+    }
 }

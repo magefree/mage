@@ -45,4 +45,12 @@ public class GnomeToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
     }
+
+    public GnomeToken(final GnomeToken token) {
+        super(token);
+    }
+
+    public GnomeToken copy() {
+        return new GnomeToken(this);
+    }
 }

@@ -48,4 +48,12 @@ public class SorinSolemnVisitorVampireToken extends Token {
         toughness = new MageInt(2);
         addAbility(FlyingAbility.getInstance());
     }
+
+    public SorinSolemnVisitorVampireToken(final SorinSolemnVisitorVampireToken token) {
+        super(token);
+    }
+
+    public SorinSolemnVisitorVampireToken copy() {
+        return new SorinSolemnVisitorVampireToken(this);
+    }
 }

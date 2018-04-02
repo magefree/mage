@@ -49,5 +49,11 @@ public class XenagosSatyrToken extends Token {
 
         this.addAbility(HasteAbility.getInstance());
     }
+    public XenagosSatyrToken(final XenagosSatyrToken token) {
+        super(token);
+    }
 
+    public XenagosSatyrToken copy() {
+        return new XenagosSatyrToken(this);
+    }
 }

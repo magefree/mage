@@ -52,4 +52,12 @@ public class RiftmarkedKnightToken extends Token {
         this.addAbility(new FlankingAbility());
         this.addAbility(HasteAbility.getInstance());
     }
+
+    public RiftmarkedKnightToken(final RiftmarkedKnightToken token) {
+        super(token);
+    }
+
+    public RiftmarkedKnightToken copy() {
+        return new RiftmarkedKnightToken(this);
+    }
 }

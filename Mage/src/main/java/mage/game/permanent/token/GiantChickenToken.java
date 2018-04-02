@@ -47,4 +47,12 @@ public class GiantChickenToken extends Token {
         power = new MageInt(4);
         toughness = new MageInt(4);
     }
+
+    public GiantChickenToken(final GiantChickenToken token) {
+        super(token);
+    }
+
+    public GiantChickenToken copy() {
+        return new GiantChickenToken(this);
+    }
 }

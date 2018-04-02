@@ -48,4 +48,12 @@ public class Ooze2Token extends Token {
         toughness = new MageInt(2);
         this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new OozeToken(1, 1), 2), false));
     }
+
+    public Ooze2Token(final Ooze2Token token) {
+        super(token);
+    }
+
+    public Ooze2Token copy() {
+        return new Ooze2Token(this);
+    }
 }

@@ -49,4 +49,12 @@ public class QueenMarchesaAssassinToken extends Token {
         addAbility(DeathtouchAbility.getInstance());
         addAbility(HasteAbility.getInstance());
     }
+
+    public QueenMarchesaAssassinToken(final QueenMarchesaAssassinToken token) {
+        super(token);
+    }
+
+    public QueenMarchesaAssassinToken copy() {
+        return new QueenMarchesaAssassinToken(this);
+    }
 }

@@ -47,4 +47,11 @@ public class ElementalMasteryElementalToken extends Token {
         toughness = new MageInt(1);
         addAbility(HasteAbility.getInstance());
     }
+    public ElementalMasteryElementalToken(final ElementalMasteryElementalToken token) {
+        super(token);
+    }
+
+    public ElementalMasteryElementalToken copy() {
+        return new ElementalMasteryElementalToken(this);
+    }
 }

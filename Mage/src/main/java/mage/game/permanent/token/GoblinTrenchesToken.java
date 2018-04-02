@@ -47,4 +47,12 @@ public class GoblinTrenchesToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
     }
+
+    public GoblinTrenchesToken(final GoblinTrenchesToken token) {
+        super(token);
+    }
+
+    public GoblinTrenchesToken copy() {
+        return new GoblinTrenchesToken(this);
+    }
 }

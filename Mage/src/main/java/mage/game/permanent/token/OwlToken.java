@@ -47,4 +47,12 @@ public class OwlToken extends Token {
         toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());
     }
+
+    public OwlToken(final OwlToken token) {
+        super(token);
+    }
+
+    public OwlToken copy() {
+        return new OwlToken(this);
+    }
 }

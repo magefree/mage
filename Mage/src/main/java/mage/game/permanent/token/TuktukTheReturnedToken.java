@@ -52,4 +52,12 @@ public class TuktukTheReturnedToken extends Token {
         power = new MageInt(5);
         toughness = new MageInt(5);
     }
+
+    public TuktukTheReturnedToken(final TuktukTheReturnedToken token) {
+        super(token);
+    }
+
+    public TuktukTheReturnedToken copy() {
+        return new TuktukTheReturnedToken(this);
+    }
 }

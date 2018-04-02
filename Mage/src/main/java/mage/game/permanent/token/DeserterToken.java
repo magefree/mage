@@ -45,4 +45,12 @@ public class DeserterToken extends Token {
         power = new MageInt(0);
         toughness = new MageInt(1);
     }
+
+    public DeserterToken(final DeserterToken token) {
+        super(token);
+    }
+
+    public DeserterToken copy() {
+        return new DeserterToken(this);
+    }
 }

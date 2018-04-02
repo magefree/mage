@@ -50,4 +50,12 @@ public class ReflectionPureToken extends Token {
         power = new MageInt(xValue);
         toughness = new MageInt(xValue);
     }
+
+    public ReflectionPureToken(final ReflectionPureToken token) {
+        super(token);
+    }
+
+    public ReflectionPureToken copy() {
+        return new ReflectionPureToken(this);
+    }
 }

@@ -67,4 +67,12 @@ public class SoundTheCallToken extends Token {
         ));
     }
 
+    public SoundTheCallToken(final SoundTheCallToken token) {
+        super(token);
+    }
+
+    public SoundTheCallToken copy() {
+        return new SoundTheCallToken(this);
+    }
+
 }

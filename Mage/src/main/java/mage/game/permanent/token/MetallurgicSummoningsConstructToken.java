@@ -51,4 +51,11 @@ public class MetallurgicSummoningsConstructToken extends Token {
         power = new MageInt(xValue);
         toughness = new MageInt(xValue);
     }
+    public MetallurgicSummoningsConstructToken(final MetallurgicSummoningsConstructToken token) {
+        super(token);
+    }
+
+    public MetallurgicSummoningsConstructToken copy() {
+        return new MetallurgicSummoningsConstructToken(this);
+    }
 }

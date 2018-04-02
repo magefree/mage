@@ -46,4 +46,12 @@ public class ReflectionToken extends Token {
         power = new MageInt(2);
         toughness = new MageInt(2);
     }
+
+    public ReflectionToken(final ReflectionToken token) {
+        super(token);
+    }
+
+    public ReflectionToken copy() {
+        return new ReflectionToken(this);
+    }
 }

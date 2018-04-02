@@ -48,4 +48,11 @@ public class GargoyleToken extends Token {
         addAbility(FlyingAbility.getInstance());
     }
 
+    public GargoyleToken(final GargoyleToken token) {
+        super(token);
+    }
+
+    public GargoyleToken copy() {
+        return new GargoyleToken(this);
+    }
 }

@@ -51,4 +51,12 @@ public class SeedGuardianToken extends Token {
         toughness = new MageInt(xValue);
 
     }
+
+    public SeedGuardianToken(final SeedGuardianToken token) {
+        super(token);
+    }
+
+    public SeedGuardianToken copy() {
+        return new SeedGuardianToken(this);
+    }
 }

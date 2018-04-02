@@ -52,5 +52,12 @@ public class HydraBroodmasterToken extends Token {
         this.toughness = new MageInt(toughness);
     }
 
+    public HydraBroodmasterToken(final HydraBroodmasterToken token) {
+        super(token);
+    }
+
+    public HydraBroodmasterToken copy() {
+        return new HydraBroodmasterToken(this);
+    }
 }
 

@@ -50,4 +50,12 @@ public class HornetQueenInsectToken extends Token {
         addAbility(FlyingAbility.getInstance());
         addAbility(DeathtouchAbility.getInstance());
     }
+
+    public HornetQueenInsectToken(final HornetQueenInsectToken token) {
+        super(token);
+    }
+
+    public HornetQueenInsectToken copy() {
+        return new HornetQueenInsectToken(this);
+    }
 }

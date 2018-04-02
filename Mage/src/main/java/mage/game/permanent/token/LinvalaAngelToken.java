@@ -48,4 +48,12 @@ public class LinvalaAngelToken extends Token {
         toughness = new MageInt(3);
         addAbility(FlyingAbility.getInstance());
     }
+
+    public LinvalaAngelToken(final LinvalaAngelToken token) {
+        super(token);
+    }
+
+    public LinvalaAngelToken copy() {
+        return new LinvalaAngelToken(this);
+    }
 }

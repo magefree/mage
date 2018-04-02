@@ -49,5 +49,13 @@ public class AssassinToken extends Token {
         toughness = new MageInt(1);
         addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new LoseGameTargetPlayerEffect(), false, true));
     }
+
+    public AssassinToken(final AssassinToken token) {
+        super(token);
+    }
+
+    public AssassinToken copy() {
+        return new AssassinToken(this);
+    }
 }
 

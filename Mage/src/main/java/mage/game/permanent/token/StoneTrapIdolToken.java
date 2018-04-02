@@ -47,4 +47,12 @@ public class StoneTrapIdolToken extends Token {
         toughness = new MageInt(12);
         addAbility(TrampleAbility.getInstance());
     }
+
+    public StoneTrapIdolToken(final StoneTrapIdolToken token) {
+        super(token);
+    }
+
+    public StoneTrapIdolToken copy() {
+        return new StoneTrapIdolToken(this);
+    }
 }

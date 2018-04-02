@@ -56,4 +56,12 @@ public class FesteringGoblinToken extends Token {
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
+
+    public FesteringGoblinToken(final FesteringGoblinToken token) {
+        super(token);
+    }
+
+    public FesteringGoblinToken copy() {
+        return new FesteringGoblinToken(this);
+    }
 }

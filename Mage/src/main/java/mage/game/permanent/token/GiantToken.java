@@ -45,4 +45,12 @@ public class GiantToken extends Token {
         power = new MageInt(4);
         toughness = new MageInt(4);
     }
+
+    public GiantToken(final GiantToken token) {
+        super(token);
+    }
+
+    public GiantToken copy() {
+        return new GiantToken(this);
+    }
 }

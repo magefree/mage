@@ -23,4 +23,12 @@ public class OozeToken extends Token {
         power = new MageInt(0);
         toughness = new MageInt(0);
     }
+
+    public OozeToken(final OozeToken token) {
+        super(token);
+    }
+
+    public OozeToken copy() {
+        return new OozeToken(this);
+    }
 }

@@ -47,4 +47,12 @@ public class StormCrowToken extends Token {
         toughness = new MageInt(2);
         this.addAbility(FlyingAbility.getInstance());
     }
+
+    public StormCrowToken(final StormCrowToken token) {
+        super(token);
+    }
+
+    public StormCrowToken copy() {
+        return new StormCrowToken(this);
+    }
 }

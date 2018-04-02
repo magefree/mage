@@ -45,5 +45,11 @@ public class CorruptedZendikonOozeToken extends Token {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
     }
+    public CorruptedZendikonOozeToken(final CorruptedZendikonOozeToken token) {
+        super(token);
+    }
 
+    public CorruptedZendikonOozeToken copy() {
+        return new CorruptedZendikonOozeToken(this);
+    }
 }

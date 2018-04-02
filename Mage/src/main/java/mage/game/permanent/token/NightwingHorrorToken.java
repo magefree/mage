@@ -50,4 +50,12 @@ public class NightwingHorrorToken extends Token {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
     }
+
+    public NightwingHorrorToken(final NightwingHorrorToken token) {
+        super(token);
+    }
+
+    public NightwingHorrorToken copy() {
+        return new NightwingHorrorToken(this);
+    }
 }

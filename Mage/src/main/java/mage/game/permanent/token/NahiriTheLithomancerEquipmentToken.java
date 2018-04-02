@@ -61,4 +61,12 @@ public class NahiriTheLithomancerEquipmentToken extends Token {
 
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(0)));
     }
+
+    public NahiriTheLithomancerEquipmentToken(final NahiriTheLithomancerEquipmentToken token) {
+        super(token);
+    }
+
+    public NahiriTheLithomancerEquipmentToken copy() {
+        return new NahiriTheLithomancerEquipmentToken(this);
+    }
 }

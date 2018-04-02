@@ -51,4 +51,12 @@ public class MinionToken extends Token {
         power = new MageInt(0);
         toughness = new MageInt(0);
     }
+
+    public MinionToken(final MinionToken token) {
+        super(token);
+    }
+
+    public MinionToken copy() {
+        return new MinionToken(this);
+    }
 }

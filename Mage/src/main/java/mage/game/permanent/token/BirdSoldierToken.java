@@ -49,4 +49,12 @@ public class BirdSoldierToken extends Token {
 
         addAbility(FlyingAbility.getInstance());
     }
+
+    public BirdSoldierToken(final BirdSoldierToken token) {
+        super(token);
+    }
+
+    public BirdSoldierToken copy() {
+        return new BirdSoldierToken(this);
+    }
 }

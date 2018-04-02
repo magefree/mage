@@ -44,4 +44,12 @@ public class TuskenRaiderToken extends Token {
         subtype.add(SubType.TUSKEN);
         subtype.add(SubType.RAIDER);
     }
+
+    public TuskenRaiderToken(final TuskenRaiderToken token) {
+        super(token);
+    }
+
+    public TuskenRaiderToken copy() {
+        return new TuskenRaiderToken(this);
+    }
 }

@@ -50,4 +50,11 @@ public class WolfTokenWithDeathtouch extends Token {
         addAbility(DeathtouchAbility.getInstance());
     }
 
+    public WolfTokenWithDeathtouch(final WolfTokenWithDeathtouch token) {
+        super(token);
+    }
+
+    public WolfTokenWithDeathtouch copy() {
+        return new WolfTokenWithDeathtouch(this);
+    }
 }

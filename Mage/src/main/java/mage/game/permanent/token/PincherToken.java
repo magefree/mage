@@ -46,5 +46,11 @@ public class PincherToken extends Token {
         toughness = new MageInt(2);
 
     }
+    public PincherToken(final PincherToken token) {
+        super(token);
+    }
 
+    public PincherToken copy() {
+        return new PincherToken(this);
+    }
 }

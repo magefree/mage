@@ -51,4 +51,12 @@ public class WasitoraCatDragonToken extends Token {
         toughness = new MageInt(3);
         this.addAbility(FlyingAbility.getInstance());
     }
+
+    public WasitoraCatDragonToken(final WasitoraCatDragonToken token) {
+        super(token);
+    }
+
+    public WasitoraCatDragonToken copy() {
+        return new WasitoraCatDragonToken(this);
+    }
 }

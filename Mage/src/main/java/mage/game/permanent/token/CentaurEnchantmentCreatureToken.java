@@ -48,4 +48,12 @@ public class CentaurEnchantmentCreatureToken extends Token {
         toughness = new MageInt(3);
         this.setOriginalExpansionSetCode("BNG");
     }
+
+    public CentaurEnchantmentCreatureToken(final CentaurEnchantmentCreatureToken token) {
+        super(token);
+    }
+
+    public CentaurEnchantmentCreatureToken copy() {
+        return new CentaurEnchantmentCreatureToken(this);
+    }
 }

@@ -14,4 +14,12 @@ public class GeminiEngineTwinToken extends Token {
         this.power = new MageInt(power);
         this.toughness = new MageInt(toughness);
     }
+
+    public GeminiEngineTwinToken(final GeminiEngineTwinToken token) {
+        super(token);
+    }
+
+    public GeminiEngineTwinToken copy() {
+        return new GeminiEngineTwinToken(this);
+    }
 }

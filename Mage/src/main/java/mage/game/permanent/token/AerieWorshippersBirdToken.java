@@ -52,5 +52,13 @@ public class AerieWorshippersBirdToken extends Token {
         this.setOriginalExpansionSetCode("BNG");
         this.setTokenType(2);
     }
+
+    public AerieWorshippersBirdToken(final AerieWorshippersBirdToken token) {
+        super(token);
+    }
+
+    public AerieWorshippersBirdToken copy() {
+        return new AerieWorshippersBirdToken(this);
+    }
 }
 

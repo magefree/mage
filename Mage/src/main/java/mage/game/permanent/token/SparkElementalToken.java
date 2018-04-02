@@ -55,4 +55,12 @@ public class SparkElementalToken extends Token {
         this.addAbility(HasteAbility.getInstance());
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new SacrificeSourceEffect(), TargetController.ANY, false));
     }
+
+    public SparkElementalToken(final SparkElementalToken token) {
+        super(token);
+    }
+
+    public SparkElementalToken copy() {
+        return new SparkElementalToken(this);
+    }
 }

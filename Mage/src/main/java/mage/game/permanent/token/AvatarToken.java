@@ -55,6 +55,14 @@ public class AvatarToken extends Token {
         color.setWhite(true);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AvatarTokenEffect()));
     }
+
+    public AvatarToken(final AvatarToken token) {
+        super(token);
+    }
+
+    public AvatarToken copy() {
+        return new AvatarToken(this);
+    }
 }
 
 class AvatarTokenEffect extends ContinuousEffectImpl {

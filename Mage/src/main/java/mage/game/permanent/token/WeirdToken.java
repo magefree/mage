@@ -49,4 +49,12 @@ public class WeirdToken extends Token {
         this.addAbility(DefenderAbility.getInstance());
         this.addAbility(FlyingAbility.getInstance());
     }
+
+    public WeirdToken(final WeirdToken token) {
+        super(token);
+    }
+
+    public WeirdToken copy() {
+        return new WeirdToken(this);
+    }
 }

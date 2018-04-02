@@ -50,4 +50,12 @@ public class StanggTwinToken extends Token {
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
     }
+
+    public StanggTwinToken(final StanggTwinToken token) {
+        super(token);
+    }
+
+    public StanggTwinToken copy() {
+        return new StanggTwinToken(this);
+    }
 }

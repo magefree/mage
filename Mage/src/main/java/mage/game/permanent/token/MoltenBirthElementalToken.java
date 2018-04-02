@@ -48,4 +48,12 @@ public class MoltenBirthElementalToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
     }
+
+    public MoltenBirthElementalToken(final MoltenBirthElementalToken token) {
+        super(token);
+    }
+
+    public MoltenBirthElementalToken copy() {
+        return new MoltenBirthElementalToken(this);
+    }
 }

@@ -48,4 +48,11 @@ public class SpawningGroundsBeastToken extends Token {
         this.addAbility(TrampleAbility.getInstance());
     }
 
+    public SpawningGroundsBeastToken(final SpawningGroundsBeastToken token) {
+        super(token);
+    }
+
+    public SpawningGroundsBeastToken copy() {
+        return new SpawningGroundsBeastToken(this);
+    }
 }

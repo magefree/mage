@@ -15,4 +15,12 @@ public class HumanWizardToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
     }
+
+    public HumanWizardToken(final HumanWizardToken token) {
+        super(token);
+    }
+
+    public HumanWizardToken copy() {
+        return new HumanWizardToken(this);
+    }
 }

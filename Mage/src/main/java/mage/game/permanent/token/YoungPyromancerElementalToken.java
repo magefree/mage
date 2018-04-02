@@ -52,4 +52,12 @@ public class YoungPyromancerElementalToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
     }
+
+    public YoungPyromancerElementalToken(final YoungPyromancerElementalToken token) {
+        super(token);
+    }
+
+    public YoungPyromancerElementalToken copy() {
+        return new YoungPyromancerElementalToken(this);
+    }
 }

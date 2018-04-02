@@ -65,4 +65,12 @@ public class EldraziSpawnToken extends Token {
         // Get one of the three possible token images
         this.setTokenType(RandomUtil.nextInt(3) + 1);
     }
+
+    public EldraziSpawnToken(final EldraziSpawnToken token) {
+        super(token);
+    }
+
+    public EldraziSpawnToken copy() {
+        return new EldraziSpawnToken(this);
+    }
 }

@@ -56,6 +56,14 @@ public class JaceCunningCastawayIllusionToken extends Token {
 
         this.addAbility(new IllusionTokenTriggeredAbility());
     }
+
+    public JaceCunningCastawayIllusionToken(final JaceCunningCastawayIllusionToken token) {
+        super(token);
+    }
+
+    public JaceCunningCastawayIllusionToken copy() {
+        return new JaceCunningCastawayIllusionToken(this);
+    }
 }
 
 class IllusionTokenTriggeredAbility extends TriggeredAbilityImpl {

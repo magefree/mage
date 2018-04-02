@@ -49,5 +49,11 @@ public class CoralBarrierSquidToken extends Token {
 
         this.addAbility(new IslandwalkAbility());
     }
+    public CoralBarrierSquidToken(final CoralBarrierSquidToken token) {
+        super(token);
+    }
 
+    public CoralBarrierSquidToken copy() {
+        return new CoralBarrierSquidToken(this);
+    }
 }

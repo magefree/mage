@@ -47,4 +47,12 @@ public class MonasteryMentorToken extends Token {
         toughness = new MageInt(1);
         this.addAbility(new ProwessAbility());
     }
+
+    public MonasteryMentorToken(final MonasteryMentorToken token) {
+        super(token);
+    }
+
+    public MonasteryMentorToken copy() {
+        return new MonasteryMentorToken(this);
+    }
 }

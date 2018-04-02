@@ -47,4 +47,12 @@ public class TilonallisSummonerElementalToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
     }
+
+    public TilonallisSummonerElementalToken(final TilonallisSummonerElementalToken token) {
+        super(token);
+    }
+
+    public TilonallisSummonerElementalToken copy() {
+        return new TilonallisSummonerElementalToken(this);
+    }
 }

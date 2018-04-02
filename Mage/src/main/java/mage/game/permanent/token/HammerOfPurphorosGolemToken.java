@@ -47,4 +47,12 @@ public class HammerOfPurphorosGolemToken extends Token {
         power = new MageInt(3);
         toughness = new MageInt(3);
     }
+
+    public HammerOfPurphorosGolemToken(final HammerOfPurphorosGolemToken token) {
+        super(token);
+    }
+
+    public HammerOfPurphorosGolemToken copy() {
+        return new HammerOfPurphorosGolemToken(this);
+    }
 }

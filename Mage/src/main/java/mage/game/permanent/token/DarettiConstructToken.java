@@ -53,4 +53,12 @@ public class DarettiConstructToken extends Token {
 
         addAbility(DefenderAbility.getInstance());
     }
+
+    public DarettiConstructToken(final DarettiConstructToken token) {
+        super(token);
+    }
+
+    public DarettiConstructToken copy() {
+        return new DarettiConstructToken(this);
+    }
 }

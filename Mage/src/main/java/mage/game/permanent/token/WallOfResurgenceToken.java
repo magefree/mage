@@ -17,4 +17,12 @@ public class WallOfResurgenceToken extends Token {
 
         this.addAbility(HasteAbility.getInstance());
     }
+
+    public WallOfResurgenceToken(final WallOfResurgenceToken token) {
+        super(token);
+    }
+
+    public WallOfResurgenceToken copy() {
+        return new WallOfResurgenceToken(this);
+    }
 }

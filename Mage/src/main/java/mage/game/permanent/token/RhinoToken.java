@@ -47,4 +47,12 @@ public class RhinoToken extends Token {
         toughness = new MageInt(4);
         addAbility(TrampleAbility.getInstance());
     }
+
+    public RhinoToken(final RhinoToken token) {
+        super(token);
+    }
+
+    public RhinoToken copy() {
+        return new RhinoToken(this);
+    }
 }

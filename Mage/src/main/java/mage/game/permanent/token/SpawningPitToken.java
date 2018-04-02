@@ -45,4 +45,12 @@ public class SpawningPitToken extends Token {
         power = new MageInt(2);
         toughness = new MageInt(2);
     }
+
+    public SpawningPitToken(final SpawningPitToken token) {
+        super(token);
+    }
+
+    public SpawningPitToken copy() {
+        return new SpawningPitToken(this);
+    }
 }

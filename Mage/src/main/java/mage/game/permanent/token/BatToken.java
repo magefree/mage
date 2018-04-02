@@ -18,4 +18,11 @@ public class BatToken extends Token {
 
         this.setOriginalExpansionSetCode("MMA");
     }
+    public BatToken(final BatToken token) {
+        super(token);
+    }
+
+    public BatToken copy() {
+        return new BatToken(this);
+    }
 }

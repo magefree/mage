@@ -57,4 +57,12 @@ public class VoiceOfResurgenceToken extends Token {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetPowerToughnessSourceEffect(
                 new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent()), Duration.EndOfGame)));
     }
+
+    public VoiceOfResurgenceToken(final VoiceOfResurgenceToken token) {
+        super(token);
+    }
+
+    public VoiceOfResurgenceToken copy() {
+        return new VoiceOfResurgenceToken(this);
+    }
 }

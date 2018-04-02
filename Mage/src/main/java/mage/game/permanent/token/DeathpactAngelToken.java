@@ -72,4 +72,11 @@ public class DeathpactAngelToken extends Token {
         this.addAbility(ability);
     }
 
+    public DeathpactAngelToken(final DeathpactAngelToken token) {
+        super(token);
+    }
+
+    public DeathpactAngelToken copy() {
+        return new DeathpactAngelToken(this);
+    }
 }

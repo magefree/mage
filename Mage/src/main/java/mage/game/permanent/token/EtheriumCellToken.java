@@ -51,4 +51,12 @@ public class EtheriumCellToken extends Token {
 
         this.addAbility(ability);
     }
+
+    public EtheriumCellToken(final EtheriumCellToken token) {
+        super(token);
+    }
+
+    public EtheriumCellToken copy() {
+        return new EtheriumCellToken(this);
+    }
 }

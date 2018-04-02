@@ -45,4 +45,12 @@ public class MarathWillOfTheWildElementalToken extends Token {
         power = new MageInt(0);
         toughness = new MageInt(0);
     }
+
+    public MarathWillOfTheWildElementalToken(final MarathWillOfTheWildElementalToken token) {
+        super(token);
+    }
+
+    public MarathWillOfTheWildElementalToken copy() {
+        return new MarathWillOfTheWildElementalToken(this);
+    }
 }

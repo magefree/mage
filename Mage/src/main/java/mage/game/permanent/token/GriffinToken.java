@@ -49,4 +49,12 @@ public class GriffinToken extends Token {
         this.addAbility(FlyingAbility.getInstance());
     }
 
+    public GriffinToken(final GriffinToken token) {
+        super(token);
+    }
+
+    public GriffinToken copy() {
+        return new GriffinToken(this);
+    }
+
 }

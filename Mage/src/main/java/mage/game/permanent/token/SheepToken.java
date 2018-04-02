@@ -45,4 +45,12 @@ public class SheepToken extends Token {
         power = new MageInt(0);
         toughness = new MageInt(1);
     }
+
+    public SheepToken(final SheepToken token) {
+        super(token);
+    }
+
+    public SheepToken copy() {
+        return new SheepToken(this);
+    }
 }

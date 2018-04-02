@@ -45,4 +45,12 @@ public class PenumbraBobcatToken extends Token {
         power = new MageInt(2);
         toughness = new MageInt(1);
     }
+
+    public PenumbraBobcatToken(final PenumbraBobcatToken token) {
+        super(token);
+    }
+
+    public PenumbraBobcatToken copy() {
+        return new PenumbraBobcatToken(this);
+    }
 }

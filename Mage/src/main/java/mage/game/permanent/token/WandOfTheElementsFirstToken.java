@@ -48,4 +48,12 @@ public class WandOfTheElementsFirstToken extends Token {
         toughness = new MageInt(2);
         this.addAbility(FlyingAbility.getInstance());
     }
+
+    public WandOfTheElementsFirstToken(final WandOfTheElementsFirstToken token) {
+        super(token);
+    }
+
+    public WandOfTheElementsFirstToken copy() {
+        return new WandOfTheElementsFirstToken(this);
+    }
 }

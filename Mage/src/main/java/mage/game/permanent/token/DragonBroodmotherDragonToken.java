@@ -51,4 +51,12 @@ public class DragonBroodmotherDragonToken extends Token {
         addAbility(FlyingAbility.getInstance());
         addAbility(new DevourAbility(DevourEffect.DevourFactor.Devour2));
     }
+
+    public DragonBroodmotherDragonToken(final DragonBroodmotherDragonToken token) {
+        super(token);
+    }
+
+    public DragonBroodmotherDragonToken copy() {
+        return new DragonBroodmotherDragonToken(this);
+    }
 }

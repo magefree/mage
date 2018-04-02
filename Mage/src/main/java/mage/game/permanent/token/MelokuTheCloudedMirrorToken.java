@@ -47,4 +47,12 @@ public class MelokuTheCloudedMirrorToken extends Token {
         toughness = new MageInt(1);
         addAbility(FlyingAbility.getInstance());
     }
+
+    public MelokuTheCloudedMirrorToken(final MelokuTheCloudedMirrorToken token) {
+        super(token);
+    }
+
+    public MelokuTheCloudedMirrorToken copy() {
+        return new MelokuTheCloudedMirrorToken(this);
+    }
 }

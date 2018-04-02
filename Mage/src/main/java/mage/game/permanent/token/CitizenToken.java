@@ -47,5 +47,12 @@ public class CitizenToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
     }
-    
+
+    public CitizenToken(final CitizenToken token) {
+        super(token);
+    }
+
+    public CitizenToken copy() {
+        return new CitizenToken(this);
+    }
 }

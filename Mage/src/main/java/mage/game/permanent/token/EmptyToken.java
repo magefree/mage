@@ -35,4 +35,12 @@ public class EmptyToken extends Token {
     public EmptyToken() {
         super("", "");
     }
+
+    public EmptyToken(final EmptyToken token) {
+        super(token);
+    }
+
+    public EmptyToken copy() {
+        return new EmptyToken(this);
+    }
 }

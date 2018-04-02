@@ -49,4 +49,13 @@ public class VojaToken extends Token {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
     }
+
+    public VojaToken(final VojaToken token) {
+        super(token);
+    }
+
+    public VojaToken copy() {
+        return new VojaToken(this);
+    }
+
 }

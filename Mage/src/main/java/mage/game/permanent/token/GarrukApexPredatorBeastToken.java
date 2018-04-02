@@ -52,4 +52,11 @@ public class GarrukApexPredatorBeastToken extends Token {
 
     }
 
+    public GarrukApexPredatorBeastToken(final GarrukApexPredatorBeastToken token) {
+        super(token);
+    }
+
+    public GarrukApexPredatorBeastToken copy() {
+        return new GarrukApexPredatorBeastToken(this);
+    }
 }

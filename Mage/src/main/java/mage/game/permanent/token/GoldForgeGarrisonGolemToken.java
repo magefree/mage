@@ -25,4 +25,12 @@ public class GoldForgeGarrisonGolemToken extends Token {
         toughness = new MageInt(4);
 
     }
+
+    public GoldForgeGarrisonGolemToken(final GoldForgeGarrisonGolemToken token) {
+        super(token);
+    }
+
+    public GoldForgeGarrisonGolemToken copy() {
+        return new GoldForgeGarrisonGolemToken(this);
+    }
 }

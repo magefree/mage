@@ -46,4 +46,12 @@ public class CreakwoodLiegeToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
     }
+
+    public CreakwoodLiegeToken(final CreakwoodLiegeToken token) {
+        super(token);
+    }
+
+    public CreakwoodLiegeToken copy() {
+        return new CreakwoodLiegeToken(this);
+    }
 }

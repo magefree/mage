@@ -47,4 +47,12 @@ public class TombspawnZombieToken extends Token {
         toughness = new MageInt(2);
         this.addAbility(HasteAbility.getInstance());
     }
+
+    public TombspawnZombieToken(final TombspawnZombieToken token) {
+        super(token);
+    }
+
+    public TombspawnZombieToken copy() {
+        return new TombspawnZombieToken(this);
+    }
 }

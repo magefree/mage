@@ -48,4 +48,12 @@ public class SkywiseTeachingsToken extends Token {
         toughness = new MageInt(2);
         this.addAbility(FlyingAbility.getInstance());
     }
+
+    public SkywiseTeachingsToken(final SkywiseTeachingsToken token) {
+        super(token);
+    }
+
+    public SkywiseTeachingsToken copy() {
+        return new SkywiseTeachingsToken(this);
+    }
 }

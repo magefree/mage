@@ -48,4 +48,12 @@ public class HazezonTamarSandWarriorToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
     }
+
+    public HazezonTamarSandWarriorToken(final HazezonTamarSandWarriorToken token) {
+        super(token);
+    }
+
+    public HazezonTamarSandWarriorToken copy() {
+        return new HazezonTamarSandWarriorToken(this);
+    }
 }

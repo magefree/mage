@@ -58,4 +58,12 @@ public class ElephantResurgenceToken extends Token {
                         .setText("This creature's power and toughness are each equal to the number of creature cards in its controller's graveyard.")
         ));
     }
+
+    public ElephantResurgenceToken(final ElephantResurgenceToken token) {
+        super(token);
+    }
+
+    public ElephantResurgenceToken copy() {
+        return new ElephantResurgenceToken(this);
+    }
 }

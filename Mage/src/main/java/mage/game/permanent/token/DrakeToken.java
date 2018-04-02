@@ -50,4 +50,12 @@ public class DrakeToken extends Token {
 
         this.addAbility(FlyingAbility.getInstance());
     }
+
+    public DrakeToken(final DrakeToken token) {
+        super(token);
+    }
+
+    public DrakeToken copy() {
+        return new DrakeToken(this);
+    }
 }

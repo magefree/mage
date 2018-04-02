@@ -45,5 +45,11 @@ public class HippoToken2 extends Token {
         power = new MageInt(3);
         toughness = new MageInt(3);
     }
+    public HippoToken2(final HippoToken2 token) {
+        super(token);
+    }
 
+    public HippoToken2 copy() {
+        return new HippoToken2(this);
+    }
 }

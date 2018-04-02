@@ -47,4 +47,11 @@ public class PharikaSnakeToken extends Token {
         color.setGreen(true);
         this.addAbility(DeathtouchAbility.getInstance());
     }
+    public PharikaSnakeToken(final PharikaSnakeToken token) {
+        super(token);
+    }
+
+    public PharikaSnakeToken copy() {
+        return new PharikaSnakeToken(this);
+    }
 }

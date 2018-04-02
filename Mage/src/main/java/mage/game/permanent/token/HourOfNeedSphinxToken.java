@@ -48,4 +48,12 @@ public class HourOfNeedSphinxToken extends Token {
         toughness = new MageInt(4);
         addAbility(FlyingAbility.getInstance());
     }
+
+    public HourOfNeedSphinxToken(final HourOfNeedSphinxToken token) {
+        super(token);
+    }
+
+    public HourOfNeedSphinxToken copy() {
+        return new HourOfNeedSphinxToken(this);
+    }
 }

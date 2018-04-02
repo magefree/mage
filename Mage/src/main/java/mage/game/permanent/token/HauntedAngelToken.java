@@ -47,4 +47,12 @@ public class HauntedAngelToken extends Token {
         toughness = new MageInt(3);
         this.addAbility(FlyingAbility.getInstance());
     }
+
+    public HauntedAngelToken(final HauntedAngelToken token) {
+        super(token);
+    }
+
+    public HauntedAngelToken copy() {
+        return new HauntedAngelToken(this);
+    }
 }

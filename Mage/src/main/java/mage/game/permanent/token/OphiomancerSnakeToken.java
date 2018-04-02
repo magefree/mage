@@ -48,4 +48,11 @@ public class OphiomancerSnakeToken extends Token {
         this.addAbility(DeathtouchAbility.getInstance());
     }
 
+    public OphiomancerSnakeToken(final OphiomancerSnakeToken token) {
+        super(token);
+    }
+
+    public OphiomancerSnakeToken copy() {
+        return new OphiomancerSnakeToken(this);
+    }
 }

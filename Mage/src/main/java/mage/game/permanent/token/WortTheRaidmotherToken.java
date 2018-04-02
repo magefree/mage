@@ -47,4 +47,12 @@ public class WortTheRaidmotherToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
     }
+
+    public WortTheRaidmotherToken(final WortTheRaidmotherToken token) {
+        super(token);
+    }
+
+    public WortTheRaidmotherToken copy() {
+        return new WortTheRaidmotherToken(this);
+    }
 }

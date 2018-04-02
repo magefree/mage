@@ -50,4 +50,12 @@ public class RevelOfTheFallenGodSatyrToken extends Token {
         toughness = new MageInt(2);
         addAbility(HasteAbility.getInstance());
     }
+
+    public RevelOfTheFallenGodSatyrToken(final RevelOfTheFallenGodSatyrToken token) {
+        super(token);
+    }
+
+    public RevelOfTheFallenGodSatyrToken copy() {
+        return new RevelOfTheFallenGodSatyrToken(this);
+    }
 }

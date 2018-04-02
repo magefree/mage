@@ -49,4 +49,12 @@ public class GoblinRogueToken extends Token {
         toughness = new MageInt(1);
         availableImageSetCodes.addAll(Arrays.asList("LRW", "MMA"));
     }
+
+    public GoblinRogueToken(final GoblinRogueToken token) {
+        super(token);
+    }
+
+    public GoblinRogueToken copy() {
+        return new GoblinRogueToken(this);
+    }
 }

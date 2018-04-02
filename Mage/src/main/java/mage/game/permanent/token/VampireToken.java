@@ -47,4 +47,12 @@ public class VampireToken extends Token {
         toughness = new MageInt(2);
         addAbility(FlyingAbility.getInstance());
     }
+
+    public VampireToken(final VampireToken token) {
+        super(token);
+    }
+
+    public VampireToken copy() {
+        return new VampireToken(this);
+    }
 }

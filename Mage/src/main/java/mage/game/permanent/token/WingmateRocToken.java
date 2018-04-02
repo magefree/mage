@@ -47,4 +47,12 @@ public class WingmateRocToken extends Token {
         toughness = new MageInt(4);
         addAbility(FlyingAbility.getInstance());
     }
+
+    public WingmateRocToken(final WingmateRocToken token) {
+        super(token);
+    }
+
+    public WingmateRocToken copy() {
+        return new WingmateRocToken(this);
+    }
 }

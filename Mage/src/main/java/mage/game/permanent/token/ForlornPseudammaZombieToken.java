@@ -48,5 +48,13 @@ public class ForlornPseudammaZombieToken extends Token {
         toughness = new MageInt(2);
         this.setOriginalExpansionSetCode("BNG");
     }
+
+    public ForlornPseudammaZombieToken(final ForlornPseudammaZombieToken token) {
+        super(token);
+    }
+
+    public ForlornPseudammaZombieToken copy() {
+        return new ForlornPseudammaZombieToken(this);
+    }
 }
 

@@ -48,14 +48,10 @@ public class ElephantToken extends Token {
     }
 
     public ElephantToken() {
-        this(null, 0);
+        this((String)null);
     }
 
     public ElephantToken(String setCode) {
-        this(setCode, 0);
-    }
-
-    public ElephantToken(String setCode, int tokenType) {
         super("Elephant", "3/3 green Elephant creature token");
         availableImageSetCodes = tokenImageSets;
         setOriginalExpansionSetCode(setCode);
@@ -64,6 +60,14 @@ public class ElephantToken extends Token {
         subtype.add(SubType.ELEPHANT);
         power = new MageInt(3);
         toughness = new MageInt(3);
+    }
+
+    public ElephantToken(final ElephantToken token) {
+        super(token);
+    }
+
+    public ElephantToken copy() {
+        return new ElephantToken(this);
     }
 
 }

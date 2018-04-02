@@ -49,4 +49,12 @@ public class InsectInfectToken extends Token {
         addAbility(InfectAbility.getInstance());
         setOriginalExpansionSetCode("SOM");
     }
+
+    public InsectInfectToken(final InsectInfectToken token) {
+        super(token);
+    }
+
+    public InsectInfectToken copy() {
+        return new InsectInfectToken(this);
+    }
 }

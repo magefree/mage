@@ -40,14 +40,10 @@ import mage.constants.SubType;
 public class CatToken2 extends Token {
 
     public CatToken2() {
-        this(null, 0);
+        this((String)null);
     }
-
+    
     public CatToken2(String setCode) {
-        this(setCode, 0);
-    }
-
-    public CatToken2(String setCode, int tokenType) {
         super("Cat", "1/1 white Cat creature token with lifelink");
         setOriginalExpansionSetCode("AKH");
         cardType.add(CardType.CREATURE);
@@ -57,4 +53,12 @@ public class CatToken2 extends Token {
         toughness = new MageInt(1);
         addAbility(LifelinkAbility.getInstance());
     }
+    public CatToken2(final CatToken2 token) {
+        super(token);
+    }
+
+    public CatToken2 copy() {
+        return new CatToken2(this);
+    }
+    
 }

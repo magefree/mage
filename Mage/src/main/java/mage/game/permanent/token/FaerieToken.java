@@ -47,4 +47,12 @@ public class FaerieToken extends Token {
         toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());
     }
+
+    public FaerieToken(final FaerieToken token) {
+        super(token);
+    }
+
+    public FaerieToken copy() {
+        return new FaerieToken(this);
+    }
 }

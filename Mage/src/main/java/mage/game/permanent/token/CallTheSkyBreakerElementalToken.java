@@ -51,4 +51,12 @@ public class CallTheSkyBreakerElementalToken extends Token {
         toughness = new MageInt(5);
         this.addAbility(FlyingAbility.getInstance());
     }
+
+    public CallTheSkyBreakerElementalToken(final CallTheSkyBreakerElementalToken token) {
+        super(token);
+    }
+
+    public CallTheSkyBreakerElementalToken copy() {
+        return new CallTheSkyBreakerElementalToken(this);
+    }
 }

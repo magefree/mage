@@ -34,4 +34,12 @@ public class KnightToken extends Token {
 
         availableImageSetCodes = tokenImageSets;
     }
+
+    public KnightToken(final KnightToken token) {
+        super(token);
+    }
+
+    public KnightToken copy() {
+        return new KnightToken(this);
+    }
 }

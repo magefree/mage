@@ -48,4 +48,12 @@ public class TemptWithVengeanceElementalToken extends Token {
         toughness = new MageInt(1);
         this.addAbility(HasteAbility.getInstance());
     }
+
+    public TemptWithVengeanceElementalToken(final TemptWithVengeanceElementalToken token) {
+        super(token);
+    }
+
+    public TemptWithVengeanceElementalToken copy() {
+        return new TemptWithVengeanceElementalToken(this);
+    }
 }

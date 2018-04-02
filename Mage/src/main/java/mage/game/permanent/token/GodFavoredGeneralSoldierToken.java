@@ -48,4 +48,12 @@ public class GodFavoredGeneralSoldierToken extends Token {
         toughness = new MageInt(1);
         this.setOriginalExpansionSetCode("BNG");
     }
+
+    public GodFavoredGeneralSoldierToken(final GodFavoredGeneralSoldierToken token) {
+        super(token);
+    }
+
+    public GodFavoredGeneralSoldierToken copy() {
+        return new GodFavoredGeneralSoldierToken(this);
+    }
 }

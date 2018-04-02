@@ -45,4 +45,12 @@ public class RallyTheHordeWarriorToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
     }
+
+    public RallyTheHordeWarriorToken(final RallyTheHordeWarriorToken token) {
+        super(token);
+    }
+
+    public RallyTheHordeWarriorToken copy() {
+        return new RallyTheHordeWarriorToken(this);
+    }
 }

@@ -48,5 +48,13 @@ public class ATATToken extends Token {
         addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new TrooperToken(), 2)));
         subtype.add(SubType.ATAT);
     }
+
+    public ATATToken(final ATATToken token) {
+        super(token);
+    }
+
+    public ATATToken copy() {
+        return new ATATToken(this);
+    }
 }
 

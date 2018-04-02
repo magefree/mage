@@ -54,4 +54,12 @@ public class Wurm2Token extends Token {
 
         setTokenType(2); // for image
     }
+
+    public Wurm2Token(final Wurm2Token token) {
+        super(token);
+    }
+
+    public Wurm2Token copy() {
+        return new Wurm2Token(this);
+    }
 }

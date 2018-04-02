@@ -49,4 +49,11 @@ public class OonaQueenFaerieToken extends Token {
         toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());
     }
+    public OonaQueenFaerieToken(final OonaQueenFaerieToken token) {
+        super(token);
+    }
+
+    public OonaQueenFaerieToken copy() {
+        return new OonaQueenFaerieToken(this);
+    }
 }

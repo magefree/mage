@@ -49,4 +49,12 @@ public class FlurryOfHornsMinotaurToken extends Token {
         toughness = new MageInt(3);
         addAbility(HasteAbility.getInstance());
     }
+
+    public FlurryOfHornsMinotaurToken(final FlurryOfHornsMinotaurToken token) {
+        super(token);
+    }
+
+    public FlurryOfHornsMinotaurToken copy() {
+        return new FlurryOfHornsMinotaurToken(this);
+    }
 }

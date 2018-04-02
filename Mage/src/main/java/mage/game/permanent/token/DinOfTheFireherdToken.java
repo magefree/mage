@@ -46,4 +46,12 @@ public class DinOfTheFireherdToken extends Token {
         power = new MageInt(5);
         toughness = new MageInt(5);
     }
+
+    public DinOfTheFireherdToken(final DinOfTheFireherdToken token) {
+        super(token);
+    }
+
+    public DinOfTheFireherdToken copy() {
+        return new DinOfTheFireherdToken(this);
+    }
 }

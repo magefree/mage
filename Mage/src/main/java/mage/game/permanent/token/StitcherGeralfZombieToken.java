@@ -50,4 +50,12 @@ public class StitcherGeralfZombieToken extends Token {
         power = new MageInt(xValue);
         toughness = new MageInt(xValue);
     }
+
+    public StitcherGeralfZombieToken(final StitcherGeralfZombieToken token) {
+        super(token);
+    }
+
+    public StitcherGeralfZombieToken copy() {
+        return new StitcherGeralfZombieToken(this);
+    }
 }

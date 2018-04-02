@@ -47,4 +47,11 @@ public class HumanClericToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
     }
+    public HumanClericToken(final HumanClericToken token) {
+        super(token);
+    }
+
+    public HumanClericToken copy() {
+        return new HumanClericToken(this);
+    }
 }

@@ -45,4 +45,12 @@ public class BrainiacToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
     }
+
+    public BrainiacToken(final BrainiacToken token) {
+        super(token);
+    }
+
+    public BrainiacToken copy() {
+        return new BrainiacToken(this);
+    }
 }

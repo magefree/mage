@@ -67,4 +67,12 @@ public class DragonTokenGold extends Token {
         toughness = new MageInt(4);
         addAbility(FlyingAbility.getInstance());
     }
+
+    public DragonTokenGold(final DragonTokenGold token) {
+        super(token);
+    }
+
+    public DragonTokenGold copy() {
+        return new DragonTokenGold(this);
+    }
 }

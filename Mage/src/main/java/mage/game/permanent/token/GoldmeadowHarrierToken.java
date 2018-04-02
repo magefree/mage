@@ -59,4 +59,12 @@ public class GoldmeadowHarrierToken extends Token {
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
+
+    public GoldmeadowHarrierToken(final GoldmeadowHarrierToken token) {
+        super(token);
+    }
+
+    public GoldmeadowHarrierToken copy() {
+        return new GoldmeadowHarrierToken(this);
+    }
 }

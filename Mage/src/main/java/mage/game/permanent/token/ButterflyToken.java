@@ -47,4 +47,12 @@ public class ButterflyToken extends Token {
         toughness = new MageInt(1);
         addAbility(FlyingAbility.getInstance());
     }
+
+    public ButterflyToken(final ButterflyToken token) {
+        super(token);
+    }
+
+    public ButterflyToken copy() {
+        return new ButterflyToken(this);
+    }
 }

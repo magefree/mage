@@ -48,4 +48,12 @@ public class ElementalCatToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
     }
+
+    public ElementalCatToken(final ElementalCatToken token) {
+        super(token);
+    }
+
+    public ElementalCatToken copy() {
+        return new ElementalCatToken(this);
+    }
 }

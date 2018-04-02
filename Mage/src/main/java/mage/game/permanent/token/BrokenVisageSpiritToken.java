@@ -49,4 +49,12 @@ public class BrokenVisageSpiritToken extends Token {
         power = new MageInt(tokenPower);
         toughness = new MageInt(tokenToughness);
     }
+
+    public BrokenVisageSpiritToken(final BrokenVisageSpiritToken token) {
+        super(token);
+    }
+
+    public BrokenVisageSpiritToken copy() {
+        return new BrokenVisageSpiritToken(this);
+    }
 }

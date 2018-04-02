@@ -50,4 +50,12 @@ public class PegasusToken extends Token {
         addAbility(FlyingAbility.getInstance());
         setOriginalExpansionSetCode("C14");
     }
+
+    public PegasusToken(final PegasusToken token) {
+        super(token);
+    }
+
+    public PegasusToken copy() {
+        return new PegasusToken(this);
+    }
 }

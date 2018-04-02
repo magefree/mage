@@ -47,4 +47,12 @@ public class MercyKillingToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
     }
+
+    public MercyKillingToken(final MercyKillingToken token) {
+        super(token);
+    }
+
+    public MercyKillingToken copy() {
+        return new MercyKillingToken(this);
+    }
 }

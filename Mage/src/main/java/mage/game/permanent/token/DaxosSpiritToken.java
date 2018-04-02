@@ -63,6 +63,14 @@ public class DaxosSpiritToken extends Token {
         toughness = new MageInt(0);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DaxosSpiritSetPTEffect()));
     }
+
+    public DaxosSpiritToken(final DaxosSpiritToken token) {
+        super(token);
+    }
+
+    public DaxosSpiritToken copy() {
+        return new DaxosSpiritToken(this);
+    }
 }
 
 class DaxosSpiritSetPTEffect extends ContinuousEffectImpl {

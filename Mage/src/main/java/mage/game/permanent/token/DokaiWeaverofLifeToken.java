@@ -57,4 +57,12 @@ public class DokaiWeaverofLifeToken extends Token {
         DynamicValue controlledLands = new PermanentsOnBattlefieldCount(filterLands);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(controlledLands, controlledLands, Duration.WhileOnBattlefield)));
     }
+
+    public DokaiWeaverofLifeToken(final DokaiWeaverofLifeToken token) {
+        super(token);
+    }
+
+    public DokaiWeaverofLifeToken copy() {
+        return new DokaiWeaverofLifeToken(this);
+    }
 }

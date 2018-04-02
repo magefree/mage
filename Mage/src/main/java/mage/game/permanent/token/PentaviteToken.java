@@ -48,4 +48,11 @@ public class PentaviteToken extends Token {
         this.addAbility(FlyingAbility.getInstance());
     }
 
+    public PentaviteToken(final PentaviteToken token) {
+        super(token);
+    }
+
+    public PentaviteToken copy() {
+        return new PentaviteToken(this);
+    }
 }

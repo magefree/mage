@@ -72,4 +72,12 @@ public class KarnConstructToken extends Token {
                 .setText("This creature gets +1/+1 for each artifact you control")
         ));
     }
+
+    public KarnConstructToken(final KarnConstructToken token) {
+        super(token);
+    }
+
+    public KarnConstructToken copy() {
+        return new KarnConstructToken(this);
+    }
 }

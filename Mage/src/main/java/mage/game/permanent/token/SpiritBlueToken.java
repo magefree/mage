@@ -49,4 +49,11 @@ public class SpiritBlueToken extends Token {
         addAbility(FlyingAbility.getInstance());
     }
 
+    public SpiritBlueToken(final SpiritBlueToken token) {
+        super(token);
+    }
+
+    public SpiritBlueToken copy() {
+        return new SpiritBlueToken(this);
+    }
 }

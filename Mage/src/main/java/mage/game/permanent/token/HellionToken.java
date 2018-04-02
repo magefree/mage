@@ -45,4 +45,12 @@ public class HellionToken extends Token {
         power = new MageInt(4);
         toughness = new MageInt(4);
     }
+
+    public HellionToken(final HellionToken token) {
+        super(token);
+    }
+
+    public HellionToken copy() {
+        return new HellionToken(this);
+    }
 }

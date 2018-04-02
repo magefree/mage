@@ -45,4 +45,12 @@ public class RhonassLastStandToken extends Token {
         power = new MageInt(5);
         toughness = new MageInt(4);
     }
+
+    public RhonassLastStandToken(final RhonassLastStandToken token) {
+        super(token);
+    }
+
+    public RhonassLastStandToken copy() {
+        return new RhonassLastStandToken(this);
+    }
 }

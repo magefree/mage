@@ -48,4 +48,12 @@ public class DeathtouchRatToken extends Token {
         this.toughness = new MageInt(1);
         this.addAbility(DeathtouchAbility.getInstance());
     }
+
+    public DeathtouchRatToken(final DeathtouchRatToken token) {
+        super(token);
+    }
+
+    public DeathtouchRatToken copy() {
+        return new DeathtouchRatToken(this);
+    }
 }

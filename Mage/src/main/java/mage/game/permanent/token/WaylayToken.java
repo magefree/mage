@@ -45,4 +45,12 @@ public class WaylayToken extends Token {
         power = new MageInt(2);
         toughness = new MageInt(2);
     }
+
+    public WaylayToken(final WaylayToken token) {
+        super(token);
+    }
+
+    public WaylayToken copy() {
+        return new WaylayToken(this);
+    }
 }

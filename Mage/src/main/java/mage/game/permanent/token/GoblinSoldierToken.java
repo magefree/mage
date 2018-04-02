@@ -47,4 +47,12 @@ public class GoblinSoldierToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
     }
+    public GoblinSoldierToken(final GoblinSoldierToken token) {
+        super(token);
+    }
+
+    public GoblinSoldierToken copy() {
+        return new GoblinSoldierToken(this);
+    }
+    
 }

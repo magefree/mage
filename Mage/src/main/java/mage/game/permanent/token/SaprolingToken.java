@@ -88,4 +88,12 @@ public class SaprolingToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
     }
+
+    public SaprolingToken(final SaprolingToken token) {
+        super(token);
+    }
+
+    public SaprolingToken copy() {
+        return new SaprolingToken(this);
+    }
 }

@@ -53,4 +53,12 @@ public class RiptideReplicatorToken extends Token {
         power = new MageInt(x);
         toughness = new MageInt(x);
     }
+
+    public RiptideReplicatorToken(final RiptideReplicatorToken token) {
+        super(token);
+    }
+
+    public RiptideReplicatorToken copy() {
+        return new RiptideReplicatorToken(this);
+    }
 }

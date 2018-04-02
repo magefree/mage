@@ -66,4 +66,12 @@ public class RekindlingPhoenixToken extends Token {
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
     }
+
+    public RekindlingPhoenixToken(final RekindlingPhoenixToken token) {
+        super(token);
+    }
+
+    public RekindlingPhoenixToken copy() {
+        return new RekindlingPhoenixToken(this);
+    }
 }

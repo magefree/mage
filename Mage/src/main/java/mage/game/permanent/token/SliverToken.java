@@ -47,4 +47,12 @@ public class SliverToken extends Token {
         toughness = new MageInt(1);
         availableImageSetCodes.addAll(Arrays.asList("M14", "M15"));
     }
+
+    public SliverToken(final SliverToken token) {
+        super(token);
+    }
+
+    public SliverToken copy() {
+        return new SliverToken(this);
+    }
 }

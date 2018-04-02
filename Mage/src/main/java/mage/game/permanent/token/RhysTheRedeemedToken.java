@@ -47,4 +47,12 @@ public class RhysTheRedeemedToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
     }
+
+    public RhysTheRedeemedToken(final RhysTheRedeemedToken token) {
+        super(token);
+    }
+
+    public RhysTheRedeemedToken copy() {
+        return new RhysTheRedeemedToken(this);
+    }
 }

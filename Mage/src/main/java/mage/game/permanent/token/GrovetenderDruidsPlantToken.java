@@ -46,4 +46,12 @@ public class GrovetenderDruidsPlantToken extends Token {
         toughness = new MageInt(1);
         this.setOriginalExpansionSetCode("BFZ");
     }
+
+    public GrovetenderDruidsPlantToken(final GrovetenderDruidsPlantToken token) {
+        super(token);
+    }
+
+    public GrovetenderDruidsPlantToken copy() {
+        return new GrovetenderDruidsPlantToken(this);
+    }
 }

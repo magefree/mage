@@ -53,5 +53,11 @@ public class RukhEggBirdToken extends Token {
         toughness = new MageInt(4);
         addAbility(FlyingAbility.getInstance());
     }
+    public RukhEggBirdToken(final RukhEggBirdToken token) {
+        super(token);
+    }
 
+    public RukhEggBirdToken copy() {
+        return new RukhEggBirdToken(this);
+    }
 }

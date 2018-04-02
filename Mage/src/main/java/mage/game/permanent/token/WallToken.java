@@ -47,4 +47,12 @@ public class WallToken extends Token {
         toughness = new MageInt(6);
         this.addAbility(DefenderAbility.getInstance());
     }
+
+    public WallToken(final WallToken token) {
+        super(token);
+    }
+
+    public WallToken copy() {
+        return new WallToken(this);
+    }
 }

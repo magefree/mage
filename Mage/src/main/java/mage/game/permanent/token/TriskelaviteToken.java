@@ -59,4 +59,12 @@ public class TriskelaviteToken extends Token {
 
         addAbility(FlyingAbility.getInstance());
     }
+
+    public TriskelaviteToken(final TriskelaviteToken token) {
+        super(token);
+    }
+
+    public TriskelaviteToken copy() {
+        return new TriskelaviteToken(this);
+    }
 }

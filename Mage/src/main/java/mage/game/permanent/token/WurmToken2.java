@@ -57,4 +57,12 @@ public class WurmToken2 extends Token {
         toughness = new MageInt(5);
         addAbility(TrampleAbility.getInstance());
     }
+
+    public WurmToken2(final WurmToken2 token) {
+        super(token);
+    }
+
+    public WurmToken2 copy() {
+        return new WurmToken2(this);
+    }
 }

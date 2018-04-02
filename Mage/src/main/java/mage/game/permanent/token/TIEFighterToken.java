@@ -24,4 +24,12 @@ public class TIEFighterToken extends Token {
         addAbility(SpaceflightAbility.getInstance());
         subtype.add(SubType.STARSHIP);
     }
+
+    public TIEFighterToken(final TIEFighterToken token) {
+        super(token);
+    }
+
+    public TIEFighterToken copy() {
+        return new TIEFighterToken(this);
+    }
 }

@@ -46,4 +46,11 @@ public class MarduStrikeLeaderWarriorToken extends Token {
         toughness = new MageInt(1);
     }
 
+    public MarduStrikeLeaderWarriorToken(final MarduStrikeLeaderWarriorToken token) {
+        super(token);
+    }
+
+    public MarduStrikeLeaderWarriorToken copy() {
+        return new MarduStrikeLeaderWarriorToken(this);
+    }
 }

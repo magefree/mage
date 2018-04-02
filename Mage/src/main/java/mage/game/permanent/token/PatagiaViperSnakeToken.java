@@ -47,4 +47,12 @@ public class PatagiaViperSnakeToken extends Token {
         toughness = new MageInt(1);
     }
 
+    public PatagiaViperSnakeToken(final PatagiaViperSnakeToken token) {
+        super(token);
+    }
+
+    public PatagiaViperSnakeToken copy() {
+        return new PatagiaViperSnakeToken(this);
+    }
+
 }

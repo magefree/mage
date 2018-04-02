@@ -47,4 +47,12 @@ public class WaspToken extends Token {
         toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());
     }
+
+    public WaspToken(final WaspToken token) {
+        super(token);
+    }
+
+    public WaspToken copy() {
+        return new WaspToken(this);
+    }
 }

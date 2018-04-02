@@ -48,4 +48,12 @@ public class PenumbraSpiderToken extends Token {
         toughness = new MageInt(4);
         addAbility(ReachAbility.getInstance());
     }
+
+    public PenumbraSpiderToken(final PenumbraSpiderToken token) {
+        super(token);
+    }
+
+    public PenumbraSpiderToken copy() {
+        return new PenumbraSpiderToken(this);
+    }
 }

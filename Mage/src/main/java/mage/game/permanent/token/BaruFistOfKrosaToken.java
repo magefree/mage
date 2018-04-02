@@ -50,5 +50,13 @@ public class BaruFistOfKrosaToken extends Token {
         power = new MageInt(xValue);
         toughness = new MageInt(xValue);
     }
+
+    public BaruFistOfKrosaToken(final BaruFistOfKrosaToken token) {
+        super(token);
+    }
+
+    public BaruFistOfKrosaToken copy() {
+        return new BaruFistOfKrosaToken(this);
+    }
 }
 

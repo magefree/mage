@@ -49,4 +49,12 @@ public class ElementalAppealElementalToken extends Token {
         addAbility(TrampleAbility.getInstance());
         addAbility(HasteAbility.getInstance());
     }
+
+    public ElementalAppealElementalToken(final ElementalAppealElementalToken token) {
+        super(token);
+    }
+
+    public ElementalAppealElementalToken copy() {
+        return new ElementalAppealElementalToken(this);
+    }
 }

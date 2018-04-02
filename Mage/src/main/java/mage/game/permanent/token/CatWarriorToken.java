@@ -48,4 +48,12 @@ public class CatWarriorToken extends Token {
         this.addCardType(CardType.CREATURE);
         this.addAbility(new ForestwalkAbility());
     }
+
+    public CatWarriorToken(final CatWarriorToken token) {
+        super(token);
+    }
+
+    public CatWarriorToken copy() {
+        return new CatWarriorToken(this);
+    }
 }

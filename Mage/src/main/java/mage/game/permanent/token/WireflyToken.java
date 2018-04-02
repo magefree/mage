@@ -47,4 +47,12 @@ public class WireflyToken extends Token {
         this.addCardType(CardType.CREATURE);
         this.addAbility(FlyingAbility.getInstance());
     }
+
+    public WireflyToken(final WireflyToken token) {
+        super(token);
+    }
+
+    public WireflyToken copy() {
+        return new WireflyToken(this);
+    }
 }

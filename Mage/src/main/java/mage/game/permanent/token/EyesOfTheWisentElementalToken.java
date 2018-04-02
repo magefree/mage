@@ -48,4 +48,11 @@ public class EyesOfTheWisentElementalToken extends Token {
         setTokenType(1);
     }
 
+    public EyesOfTheWisentElementalToken(final EyesOfTheWisentElementalToken token) {
+        super(token);
+    }
+
+    public EyesOfTheWisentElementalToken copy() {
+        return new EyesOfTheWisentElementalToken(this);
+    }
 }

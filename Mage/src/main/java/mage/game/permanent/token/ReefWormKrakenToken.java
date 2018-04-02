@@ -46,4 +46,12 @@ public class ReefWormKrakenToken extends Token {
         power = new MageInt(9);
         toughness = new MageInt(9);
     }
+
+    public ReefWormKrakenToken(final ReefWormKrakenToken token) {
+        super(token);
+    }
+
+    public ReefWormKrakenToken copy() {
+        return new ReefWormKrakenToken(this);
+    }
 }

@@ -52,4 +52,12 @@ public class UramiToken extends Token {
 
         this.addAbility(FlyingAbility.getInstance());
     }
+
+    public UramiToken(final UramiToken token) {
+        super(token);
+    }
+
+    public UramiToken copy() {
+        return new UramiToken(this);
+    }
 }

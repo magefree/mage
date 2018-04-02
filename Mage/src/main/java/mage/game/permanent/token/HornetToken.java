@@ -54,5 +54,13 @@ public class HornetToken extends Token {
         toughness = new MageInt(1);
         addAbility(FlyingAbility.getInstance());
         addAbility(HasteAbility.getInstance());
-    }    
+    }
+
+    public HornetToken(final HornetToken token) {
+        super(token);
+    }
+
+    public HornetToken copy() {
+        return new HornetToken(this);
+    }
 }

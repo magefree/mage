@@ -46,4 +46,11 @@ public class StitchersApprenticeHomunculusToken extends Token {
         toughness = new MageInt(2);
     }
 
+    public StitchersApprenticeHomunculusToken(final StitchersApprenticeHomunculusToken token) {
+        super(token);
+    }
+
+    public StitchersApprenticeHomunculusToken copy() {
+        return new StitchersApprenticeHomunculusToken(this);
+    }
 }

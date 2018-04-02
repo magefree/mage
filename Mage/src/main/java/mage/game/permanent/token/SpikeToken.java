@@ -45,4 +45,12 @@ public class SpikeToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
     }
+
+    public SpikeToken(final SpikeToken token) {
+        super(token);
+    }
+
+    public SpikeToken copy() {
+        return new SpikeToken(this);
+    }
 }

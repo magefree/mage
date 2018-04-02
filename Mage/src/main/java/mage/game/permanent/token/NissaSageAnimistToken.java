@@ -47,4 +47,12 @@ public class NissaSageAnimistToken extends Token {
         this.getSubtype(null).add(SubType.ELEMENTAL);
         this.addCardType(CardType.CREATURE);
     }
+
+    public NissaSageAnimistToken(final NissaSageAnimistToken token) {
+        super(token);
+    }
+
+    public NissaSageAnimistToken copy() {
+        return new NissaSageAnimistToken(this);
+    }
 }

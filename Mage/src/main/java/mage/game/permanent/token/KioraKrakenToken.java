@@ -46,4 +46,12 @@ public class KioraKrakenToken extends Token {
         toughness = new MageInt(9);
         this.setOriginalExpansionSetCode("BNG");
     }
+
+    public KioraKrakenToken(final KioraKrakenToken token) {
+        super(token);
+    }
+
+    public KioraKrakenToken copy() {
+        return new KioraKrakenToken(this);
+    }
 }

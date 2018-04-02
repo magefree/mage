@@ -45,4 +45,12 @@ public class AssemblyWorkerToken extends Token {
         power = new MageInt(2);
         toughness = new MageInt(2);
     }
+
+    public AssemblyWorkerToken(final AssemblyWorkerToken token) {
+        super(token);
+    }
+
+    public AssemblyWorkerToken copy() {
+        return new AssemblyWorkerToken(this);
+    }
 }

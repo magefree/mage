@@ -46,4 +46,12 @@ public class OctopusToken extends Token {
         toughness = new MageInt(8);
         this.setOriginalExpansionSetCode("BFZ");
     }
+
+    public OctopusToken(final OctopusToken token) {
+        super(token);
+    }
+
+    public OctopusToken copy() {
+        return new OctopusToken(this);
+    }
 }

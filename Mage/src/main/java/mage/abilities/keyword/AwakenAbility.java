@@ -170,4 +170,12 @@ class AwakenElementalToken extends Token {
 
         this.addAbility(HasteAbility.getInstance());
     }
+
+    public AwakenElementalToken(final AwakenElementalToken token) {
+        super(token);
+    }
+
+    public AwakenElementalToken copy() {
+        return new AwakenElementalToken(this);
+    }
 }

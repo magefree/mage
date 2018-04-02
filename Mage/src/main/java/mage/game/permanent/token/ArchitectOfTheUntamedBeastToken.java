@@ -46,5 +46,13 @@ public class ArchitectOfTheUntamedBeastToken extends Token {
         power = new MageInt(6);
         toughness = new MageInt(6);
     }
+
+    public ArchitectOfTheUntamedBeastToken(final ArchitectOfTheUntamedBeastToken token) {
+        super(token);
+    }
+
+    public ArchitectOfTheUntamedBeastToken copy() {
+        return new ArchitectOfTheUntamedBeastToken(this);
+    }
 }
 

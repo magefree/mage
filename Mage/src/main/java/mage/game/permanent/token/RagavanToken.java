@@ -47,4 +47,12 @@ public class RagavanToken extends Token {
         this.getSubtype(null).add(SubType.MONKEY);
         this.addCardType(CardType.CREATURE);
     }
+
+    public RagavanToken(final RagavanToken token) {
+        super(token);
+    }
+
+    public RagavanToken copy() {
+        return new RagavanToken(this);
+    }
 }

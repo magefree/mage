@@ -47,4 +47,12 @@ public class RakdosGuildmageGoblinToken extends Token {
         toughness = new MageInt(1);
         this.addAbility(HasteAbility.getInstance());
     }
+
+    public RakdosGuildmageGoblinToken(final RakdosGuildmageGoblinToken token) {
+        super(token);
+    }
+
+    public RakdosGuildmageGoblinToken copy() {
+        return new RakdosGuildmageGoblinToken(this);
+    }
 }

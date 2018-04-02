@@ -48,4 +48,12 @@ public class SekKuarDeathkeeperGravebornToken extends Token {
         toughness = new MageInt(1);
         this.addAbility(HasteAbility.getInstance());
     }
+
+    public SekKuarDeathkeeperGravebornToken(final SekKuarDeathkeeperGravebornToken token) {
+        super(token);
+    }
+
+    public SekKuarDeathkeeperGravebornToken copy() {
+        return new SekKuarDeathkeeperGravebornToken(this);
+    }
 }

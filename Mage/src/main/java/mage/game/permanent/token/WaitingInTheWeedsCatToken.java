@@ -45,5 +45,12 @@ public class WaitingInTheWeedsCatToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
     }
+    
+    public WaitingInTheWeedsCatToken(final WaitingInTheWeedsCatToken token) {
+        super(token);
+    }
 
+    public WaitingInTheWeedsCatToken copy() {
+        return new WaitingInTheWeedsCatToken(this);
+    }
 }

@@ -58,4 +58,11 @@ public class HuntedCentaurToken extends Token {
         this.addAbility(ProtectionAbility.from(ObjectColor.BLACK));
     }
 
+    public HuntedCentaurToken(final HuntedCentaurToken token) {
+        super(token);
+    }
+
+    public HuntedCentaurToken copy() {
+        return new HuntedCentaurToken(this);
+    }
 }

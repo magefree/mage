@@ -47,4 +47,12 @@ public class GodSireBeastToken extends Token {
         power = new MageInt(8);
         toughness = new MageInt(8);
     }
+
+    public GodSireBeastToken(final GodSireBeastToken token) {
+        super(token);
+    }
+
+    public GodSireBeastToken copy() {
+        return new GodSireBeastToken(this);
+    }
 }

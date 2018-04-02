@@ -47,4 +47,12 @@ public class ErrandOfDutyKnightToken extends Token {
         toughness = new MageInt(1);
         this.addAbility(BandingAbility.getInstance());
     }
+
+    public ErrandOfDutyKnightToken(final ErrandOfDutyKnightToken token) {
+        super(token);
+    }
+
+    public ErrandOfDutyKnightToken copy() {
+        return new ErrandOfDutyKnightToken(this);
+    }
 }

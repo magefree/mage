@@ -50,4 +50,12 @@ public class RenownedWeaverSpiderToken extends Token {
         toughness = new MageInt(3);
         this.addAbility(ReachAbility.getInstance());
     }
+
+    public RenownedWeaverSpiderToken(final RenownedWeaverSpiderToken token) {
+        super(token);
+    }
+
+    public RenownedWeaverSpiderToken copy() {
+        return new RenownedWeaverSpiderToken(this);
+    }
 }

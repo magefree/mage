@@ -42,4 +42,12 @@ public class DevastatingSummonsElementalToken extends Token {
         color.setRed(true);
         subtype.add(SubType.ELEMENTAL);
     }
+
+    public DevastatingSummonsElementalToken(final DevastatingSummonsElementalToken token) {
+        super(token);
+    }
+
+    public DevastatingSummonsElementalToken copy() {
+        return new DevastatingSummonsElementalToken(this);
+    }
 }

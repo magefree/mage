@@ -15,4 +15,12 @@ public class HumanSoldierToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
     }
+
+    public HumanSoldierToken(final HumanSoldierToken token) {
+        super(token);
+    }
+
+    public HumanSoldierToken copy() {
+        return new HumanSoldierToken(this);
+    }
 }

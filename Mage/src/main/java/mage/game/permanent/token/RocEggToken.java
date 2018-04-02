@@ -47,4 +47,12 @@ public class RocEggToken extends Token {
         toughness = new MageInt(3);
         addAbility(FlyingAbility.getInstance());
     }
+
+    public RocEggToken(final RocEggToken token) {
+        super(token);
+    }
+
+    public RocEggToken copy() {
+        return new RocEggToken(this);
+    }
 }

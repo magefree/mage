@@ -48,4 +48,12 @@ public class ZombieWizardToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
     }
+
+    public ZombieWizardToken(final ZombieWizardToken token) {
+        super(token);
+    }
+
+    public ZombieWizardToken copy() {
+        return new ZombieWizardToken(this);
+    }
 }

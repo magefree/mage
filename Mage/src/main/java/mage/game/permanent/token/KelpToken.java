@@ -50,4 +50,12 @@ public class KelpToken extends Token {
 
         this.addAbility(DefenderAbility.getInstance());
     }
+
+    public KelpToken(final KelpToken token) {
+        super(token);
+    }
+
+    public KelpToken copy() {
+        return new KelpToken(this);
+    }
 }

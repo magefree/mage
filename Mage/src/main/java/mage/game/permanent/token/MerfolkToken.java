@@ -45,4 +45,12 @@ public class MerfolkToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
     }
+
+    public MerfolkToken(final MerfolkToken token) {
+        super(token);
+    }
+
+    public MerfolkToken copy() {
+        return new MerfolkToken(this);
+    }
 }

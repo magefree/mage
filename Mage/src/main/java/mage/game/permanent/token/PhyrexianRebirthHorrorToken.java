@@ -45,4 +45,12 @@ public class PhyrexianRebirthHorrorToken extends Token {
         power = new MageInt(0);
         toughness = new MageInt(0);
     }
+
+    public PhyrexianRebirthHorrorToken(final PhyrexianRebirthHorrorToken token) {
+        super(token);
+    }
+
+    public PhyrexianRebirthHorrorToken copy() {
+        return new PhyrexianRebirthHorrorToken(this);
+    }
 }

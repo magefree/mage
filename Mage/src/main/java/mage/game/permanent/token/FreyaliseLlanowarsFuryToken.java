@@ -71,4 +71,12 @@ public class FreyaliseLlanowarsFuryToken extends Token {
         // {T}: Add {G} to your mana pool.
         this.addAbility(new GreenManaAbility());
     }
+
+    public FreyaliseLlanowarsFuryToken(final FreyaliseLlanowarsFuryToken token) {
+        super(token);
+    }
+
+    public FreyaliseLlanowarsFuryToken copy() {
+        return new FreyaliseLlanowarsFuryToken(this);
+    }
 }

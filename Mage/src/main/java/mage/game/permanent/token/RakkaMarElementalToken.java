@@ -47,4 +47,12 @@ public class RakkaMarElementalToken extends Token {
         toughness = new MageInt(1);
         addAbility(HasteAbility.getInstance());
     }
+
+    public RakkaMarElementalToken(final RakkaMarElementalToken token) {
+        super(token);
+    }
+
+    public RakkaMarElementalToken copy() {
+        return new RakkaMarElementalToken(this);
+    }
 }

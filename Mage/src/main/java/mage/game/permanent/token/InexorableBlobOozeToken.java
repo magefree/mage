@@ -45,4 +45,12 @@ public class InexorableBlobOozeToken extends Token {
         power = new MageInt(3);
         toughness = new MageInt(3);
     }
+
+    public InexorableBlobOozeToken(final InexorableBlobOozeToken token) {
+        super(token);
+    }
+
+    public InexorableBlobOozeToken copy() {
+        return new InexorableBlobOozeToken(this);
+    }
 }

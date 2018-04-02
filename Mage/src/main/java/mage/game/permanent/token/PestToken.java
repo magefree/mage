@@ -46,4 +46,11 @@ public class PestToken extends Token {
         toughness = new MageInt(1);
     }
 
+    public PestToken(final PestToken token) {
+        super(token);
+    }
+
+    public PestToken copy() {
+        return new PestToken(this);
+    }
 }

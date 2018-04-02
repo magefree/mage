@@ -56,4 +56,12 @@ public class SquirrelToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
     }
+
+    public SquirrelToken(final SquirrelToken token) {
+        super(token);
+    }
+
+    public SquirrelToken copy() {
+        return new SquirrelToken(this);
+    }
 }

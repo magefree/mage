@@ -48,4 +48,12 @@ public class PenumbraWurmToken extends Token {
 
         this.addAbility(TrampleAbility.getInstance());
     }
+
+    public PenumbraWurmToken(final PenumbraWurmToken token) {
+        super(token);
+    }
+
+    public PenumbraWurmToken copy() {
+        return new PenumbraWurmToken(this);
+    }
 }

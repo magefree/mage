@@ -45,4 +45,12 @@ public class CamaridToken extends Token {
         this.getSubtype(null).add(SubType.CAMARID);
         this.addCardType(CardType.CREATURE);
     }
+
+    public CamaridToken(final CamaridToken token) {
+        super(token);
+    }
+
+    public CamaridToken copy() {
+        return new CamaridToken(this);
+    }
 }

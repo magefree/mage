@@ -45,4 +45,12 @@ public class BoarToken extends Token {
         power = new MageInt(3);
         toughness = new MageInt(3);
     }
+
+    public BoarToken(final BoarToken token) {
+        super(token);
+    }
+
+    public BoarToken copy() {
+        return new BoarToken(this);
+    }
 }

@@ -51,4 +51,12 @@ public class TheLocustGodInsectToken extends Token {
         addAbility(FlyingAbility.getInstance());
         addAbility(HasteAbility.getInstance());
     }
+
+    public TheLocustGodInsectToken(final TheLocustGodInsectToken token) {
+        super(token);
+    }
+
+    public TheLocustGodInsectToken copy() {
+        return new TheLocustGodInsectToken(this);
+    }
 }

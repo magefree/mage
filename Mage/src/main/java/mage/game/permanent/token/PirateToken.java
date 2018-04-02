@@ -47,4 +47,12 @@ public class PirateToken extends Token {
         toughness = new MageInt(2);
         addAbility(new MenaceAbility());
     }
+
+    public PirateToken(final PirateToken token) {
+        super(token);
+    }
+
+    public PirateToken copy() {
+        return new PirateToken(this);
+    }
 }

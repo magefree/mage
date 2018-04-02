@@ -49,4 +49,12 @@ public class KalitasVampireToken extends Token {
         power = new MageInt(tokenPower);
         toughness = new MageInt(tokenToughness);
     }
+
+    public KalitasVampireToken(final KalitasVampireToken token) {
+        super(token);
+    }
+
+    public KalitasVampireToken copy() {
+        return new KalitasVampireToken(this);
+    }
 }

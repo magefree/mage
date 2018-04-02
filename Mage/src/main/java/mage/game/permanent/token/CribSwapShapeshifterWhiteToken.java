@@ -47,4 +47,12 @@ public class CribSwapShapeshifterWhiteToken extends Token {
         toughness = new MageInt(1);
         addAbility(ChangelingAbility.getInstance());
     }
+
+    public CribSwapShapeshifterWhiteToken(final CribSwapShapeshifterWhiteToken token) {
+        super(token);
+    }
+
+    public CribSwapShapeshifterWhiteToken copy() {
+        return new CribSwapShapeshifterWhiteToken(this);
+    }
 }

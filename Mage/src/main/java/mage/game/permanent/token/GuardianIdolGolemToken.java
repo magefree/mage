@@ -45,4 +45,12 @@ public class GuardianIdolGolemToken extends Token {
         power = new MageInt(2);
         toughness = new MageInt(2);
     }
+
+    public GuardianIdolGolemToken(final GuardianIdolGolemToken token) {
+        super(token);
+    }
+
+    public GuardianIdolGolemToken copy() {
+        return new GuardianIdolGolemToken(this);
+    }
 }

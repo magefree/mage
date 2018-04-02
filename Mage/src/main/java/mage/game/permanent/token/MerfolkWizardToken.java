@@ -19,4 +19,12 @@ public class MerfolkWizardToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
     }
+
+    public MerfolkWizardToken(final MerfolkWizardToken token) {
+        super(token);
+    }
+
+    public MerfolkWizardToken copy() {
+        return new MerfolkWizardToken(this);
+    }
 }

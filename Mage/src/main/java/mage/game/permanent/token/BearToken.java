@@ -47,4 +47,11 @@ public class BearToken extends Token {
         toughness = new MageInt(2);
     }
 
+    public BearToken(final BearToken token) {
+        super(token);
+    }
+
+    public BearToken copy() {
+        return new BearToken(this);
+    }
 }

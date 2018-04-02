@@ -47,4 +47,12 @@ public class IxalanVampireToken extends Token {
         toughness = new MageInt(1);
         addAbility(LifelinkAbility.getInstance());
     }
+
+    public IxalanVampireToken(final IxalanVampireToken token) {
+        super(token);
+    }
+
+    public IxalanVampireToken copy() {
+        return new IxalanVampireToken(this);
+    }
 }

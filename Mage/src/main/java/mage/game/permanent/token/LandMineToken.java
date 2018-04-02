@@ -62,4 +62,12 @@ public class LandMineToken extends Token {
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }
+
+    public LandMineToken(final LandMineToken token) {
+        super(token);
+    }
+
+    public LandMineToken copy() {
+        return new LandMineToken(this);
+    }
 }

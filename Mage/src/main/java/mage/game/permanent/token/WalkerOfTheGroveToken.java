@@ -45,4 +45,12 @@ public class WalkerOfTheGroveToken extends Token {
         power = new MageInt(4);
         toughness = new MageInt(4);
     }
+
+    public WalkerOfTheGroveToken(final WalkerOfTheGroveToken token) {
+        super(token);
+    }
+
+    public WalkerOfTheGroveToken copy() {
+        return new WalkerOfTheGroveToken(this);
+    }
 }

@@ -49,4 +49,12 @@ public class OmnathElementalToken extends Token {
         power = new MageInt(5);
         toughness = new MageInt(5);
     }
+    public OmnathElementalToken(final OmnathElementalToken token) {
+        super(token);
+    }
+
+    public OmnathElementalToken copy() {
+        return new OmnathElementalToken(this);
+    }
+    
 }

@@ -44,5 +44,13 @@ public class HunterToken extends Token {
         color.setRed(true);
         subtype.add(SubType.HUNTER);
     }
+
+    public HunterToken(final HunterToken token) {
+        super(token);
+    }
+
+    public HunterToken copy() {
+        return new HunterToken(this);
+    }
 }
 

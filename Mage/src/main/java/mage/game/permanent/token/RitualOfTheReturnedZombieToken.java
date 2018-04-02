@@ -50,4 +50,11 @@ public class RitualOfTheReturnedZombieToken extends Token {
         this.toughness = new MageInt(toughness);
     }
 
+    public RitualOfTheReturnedZombieToken(final RitualOfTheReturnedZombieToken token) {
+        super(token);
+    }
+
+    public RitualOfTheReturnedZombieToken copy() {
+        return new RitualOfTheReturnedZombieToken(this);
+    }
 }

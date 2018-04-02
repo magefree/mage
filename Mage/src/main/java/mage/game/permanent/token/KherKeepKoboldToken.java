@@ -45,5 +45,11 @@ public class KherKeepKoboldToken extends Token {
         power = new MageInt(0);
         toughness = new MageInt(1);
     }
+    public KherKeepKoboldToken(final KherKeepKoboldToken token) {
+        super(token);
+    }
 
+    public KherKeepKoboldToken copy() {
+        return new KherKeepKoboldToken(this);
+    }
 }

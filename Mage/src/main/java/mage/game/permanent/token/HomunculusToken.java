@@ -47,4 +47,12 @@ public class HomunculusToken extends Token {
         toughness = new MageInt(1);
     }
 
+    public HomunculusToken(final HomunculusToken token) {
+        super(token);
+    }
+
+    public HomunculusToken copy() {
+        return new HomunculusToken(this);
+    }
+
 }

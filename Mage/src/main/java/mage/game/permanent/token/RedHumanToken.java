@@ -47,4 +47,12 @@ public class RedHumanToken extends Token {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
     }
+
+    public RedHumanToken(final RedHumanToken token) {
+        super(token);
+    }
+
+    public RedHumanToken copy() {
+        return new RedHumanToken(this);
+    }
 }

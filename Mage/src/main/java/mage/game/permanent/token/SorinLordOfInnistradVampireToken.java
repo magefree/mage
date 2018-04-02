@@ -48,4 +48,11 @@ public class SorinLordOfInnistradVampireToken extends Token {
         addAbility(LifelinkAbility.getInstance());
     }
 
+    public SorinLordOfInnistradVampireToken(final SorinLordOfInnistradVampireToken token) {
+        super(token);
+    }
+
+    public SorinLordOfInnistradVampireToken copy() {
+        return new SorinLordOfInnistradVampireToken(this);
+    }
 }

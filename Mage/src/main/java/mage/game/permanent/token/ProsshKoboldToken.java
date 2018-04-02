@@ -45,4 +45,12 @@ public class ProsshKoboldToken extends Token {
         power = new MageInt(0);
         toughness = new MageInt(1);
     }
+
+    public ProsshKoboldToken(final ProsshKoboldToken token) {
+        super(token);
+    }
+
+    public ProsshKoboldToken copy() {
+        return new ProsshKoboldToken(this);
+    }
 }

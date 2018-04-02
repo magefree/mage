@@ -48,4 +48,12 @@ public class DjinnMonkToken extends Token {
         toughness = new MageInt(2);
         addAbility(FlyingAbility.getInstance());
     }
+
+    public DjinnMonkToken(final DjinnMonkToken token) {
+        super(token);
+    }
+
+    public DjinnMonkToken copy() {
+        return new DjinnMonkToken(this);
+    }
 }

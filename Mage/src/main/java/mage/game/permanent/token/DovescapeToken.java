@@ -48,4 +48,11 @@ public class DovescapeToken extends Token {
         toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());
     }
+    public DovescapeToken(final DovescapeToken token) {
+        super(token);
+    }
+
+    public DovescapeToken copy() {
+        return new DovescapeToken(this);
+    }
 }

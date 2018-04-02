@@ -44,4 +44,12 @@ public class SpiderToken extends Token {
         toughness = new MageInt(2);
         addAbility(ReachAbility.getInstance());
     }
+
+    public SpiderToken(final SpiderToken token) {
+        super(token);
+    }
+
+    public SpiderToken copy() {
+        return new SpiderToken(this);
+    }
 }
