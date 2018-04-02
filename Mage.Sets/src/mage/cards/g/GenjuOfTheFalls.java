@@ -94,5 +94,13 @@ public class GenjuOfTheFalls extends CardImpl {
             toughness = new MageInt(2);
             addAbility(FlyingAbility.getInstance());
         }
+
+        public SpiritToken(final SpiritToken token) {
+            super(token);
+        }
+
+        public SpiritToken copy() {
+            return new SpiritToken(this);
+        }
     }
 }

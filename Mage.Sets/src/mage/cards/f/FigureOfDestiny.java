@@ -114,6 +114,14 @@ public class FigureOfDestiny extends CardImpl {
             this.power = new MageInt(2);
             this.toughness = new MageInt(2);
         }
+
+        public FigureOfDestinyToken1(final FigureOfDestinyToken1 token) {
+            super(token);
+        }
+
+        public FigureOfDestinyToken1 copy() {
+            return new FigureOfDestinyToken1(this);
+        }
     }
 
     private class FigureOfDestinyToken2 extends Token {
@@ -130,6 +138,14 @@ public class FigureOfDestiny extends CardImpl {
             this.power = new MageInt(4);
             this.toughness = new MageInt(4);
         }
+        public FigureOfDestinyToken2(final FigureOfDestinyToken2 token) {
+            super(token);
+        }
+
+        public FigureOfDestinyToken2 copy() {
+            return new FigureOfDestinyToken2(this);
+        }
+
     }
 
     private class FigureOfDestinyToken3 extends Token {
@@ -148,6 +164,14 @@ public class FigureOfDestiny extends CardImpl {
             this.toughness = new MageInt(8);
             this.addAbility(FlyingAbility.getInstance());
             this.addAbility(FirstStrikeAbility.getInstance());
+        }
+
+        public FigureOfDestinyToken3(final FigureOfDestinyToken3 token) {
+            super(token);
+        }
+
+        public FigureOfDestinyToken3 copy() {
+            return new FigureOfDestinyToken3(this);
         }
     }
 }

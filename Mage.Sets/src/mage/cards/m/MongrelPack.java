@@ -105,4 +105,12 @@ class HoundToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
     }
+
+    public HoundToken(final HoundToken token) {
+        super(token);
+    }
+
+    public HoundToken copy() {
+        return new HoundToken(this);
+    }
 }

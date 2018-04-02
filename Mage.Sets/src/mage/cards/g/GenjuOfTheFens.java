@@ -95,5 +95,13 @@ public class GenjuOfTheFens extends CardImpl {
             toughness = new MageInt(2);
             addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{B}")));
         }
+
+        public SpiritToken(final SpiritToken token) {
+            super(token);
+        }
+
+        public SpiritToken copy() {
+            return new SpiritToken(this);
+        }
     }
 }

@@ -89,5 +89,13 @@ public class AwakenTheAncient extends CardImpl {
             toughness = new MageInt(7);
             this.addAbility(HasteAbility.getInstance());
         }
+
+        public GiantToken(final GiantToken token) {
+            super(token);
+        }
+
+        public GiantToken copy() {
+            return new GiantToken(this);
+        }
     }
 }
