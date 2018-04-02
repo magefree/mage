@@ -49,7 +49,7 @@ import mage.players.Player;
 import mage.util.RandomUtil;
 import mage.util.SubTypeList;
 
-public class Token extends MageObjectImpl {
+public abstract class Token extends MageObjectImpl {
 
     protected String description;
     private final ArrayList<UUID> lastAddedTokenIds = new ArrayList<>();
@@ -157,10 +157,22 @@ public class Token extends MageObjectImpl {
         abilities.add(ability);
     }
 
-    @Override
-    public Token copy() {
+    //@Override
+    //public abstract Token copy();
+    /*{
         return new Token(this);
-    }
+    }*/
+
+    @Override
+    public abstract Token copy();
+
+//    public Token copy() {
+//        try{
+//            return this.getClass().getConstructor(this.getClass()).newInstance(this);
+//        } catch( Exception e) {
+//
+//        }
+//    }
 
     public boolean putOntoBattlefield(int amount, Game game, UUID sourceId, UUID controllerId) {
         return this.putOntoBattlefield(amount, game, sourceId, controllerId, false, false);
