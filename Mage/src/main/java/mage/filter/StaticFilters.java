@@ -74,6 +74,12 @@ public final class StaticFilters {
         FILTER_CARD_A_NON_LAND.setLockedFilter(true);
     }
 
+    public static final FilterInstantOrSorceryCard FILTER_CARD_INSTANT_OR_SORCERY = new FilterInstantOrSorceryCard();
+
+    static {
+        FILTER_CARD_INSTANT_OR_SORCERY.setLockedFilter(true);
+    }
+
     public static final FilterPermanent FILTER_PERMANENT = new FilterPermanent();
 
     static {
@@ -236,7 +242,7 @@ public final class StaticFilters {
     static {
         FILTER_BASIC_LAND_CARD.setLockedFilter(true);
     }
-      
+
     // Used for sacrifice targets that don't need the "you control" text
     public static final FilterControlledLandPermanent FILTER_CONTROLLED_LAND_SHORT_TEXT = new FilterControlledLandPermanent("a land");
 

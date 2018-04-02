@@ -30,6 +30,7 @@ package org.mage.test.cards.abilities.keywords;
 import mage.abilities.keyword.TrampleAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.counters.CounterType;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -578,6 +579,37 @@ public class FlashbackTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Lightning Bolt", 1);
 
         assertLife(playerA, 20);
+
+    }
+
+    /**
+     * Test cost reduction with mixed flashback costs
+     */
+    @Test
+    public void testReduceMixedFlashbackCosts() {
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
+
+        // Whenever you cast an instant or sorcery spell with converted mana cost greater than the number of experience counters you have, you get an experience counter.
+        // Instant and sorcery spells you cast cost {1} less to cast for each experience counter you have.
+        addCard(Zone.BATTLEFIELD, playerA, "Mizzix of the Izmagnus");// 2/2
+
+        // Target player draws two cards.
+        // Flashback-{1}{U}, Pay 3 life.
+        addCard(Zone.HAND, playerA, "Deep Analysis"); // {3}{U}
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Deep Analysis");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Flashback");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, "Deep Analysis", 0);
+        assertExileCount(playerA, "Deep Analysis", 1);
+        assertHandCount(playerA, 4);
+
+        assertCounterCount(playerA, CounterType.EXPERIENCE, 2);
+
+        assertLife(playerA, 17);
 
     }
 }
