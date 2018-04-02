@@ -37,6 +37,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.zip.GZIPOutputStream;
 import mage.MageException;
 import mage.abilities.Ability;
+import mage.abilities.common.PassAbility;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.decks.Deck;
@@ -57,6 +58,7 @@ import mage.game.events.PlayerQueryEvent;
 import mage.game.events.TableEvent;
 import mage.game.match.MatchPlayer;
 import mage.game.permanent.Permanent;
+import mage.game.turn.Phase;
 import mage.interfaces.Action;
 import mage.players.Player;
 import mage.server.*;
@@ -1150,13 +1152,13 @@ public class GameController implements GameCallback {
         sb.append(state.getPlayerList());
         sb.append("<br>getPlayers: ");
         sb.append(state.getPlayers());
-        sb.append("<br>Player with Priority is: ");
+        sb.append("<br><font color=orange>Player with Priority is: ");
         if (state.getPriorityPlayerId() != null) {
             sb.append(game.getPlayer(state.getPriorityPlayerId()).getName());
         } else {
             sb.append("noone!");
         }
-        sb.append("<br>getRevealed: ");
+        sb.append("</font><br>getRevealed: ");
         sb.append(state.getRevealed());
         sb.append("<br>getSpecialActions: ");
         sb.append(state.getSpecialActions());
@@ -1180,6 +1182,82 @@ public class GameController implements GameCallback {
             sb.append(futureTimeout.isDone());
             sb.append(",,,GetDelay?=");
             sb.append((int) futureTimeout.getDelay(TimeUnit.SECONDS));
+        } else {
+            sb.append("Not using future Timeout!");
+        }
+        sb.append("</font>");
+        return sb.toString();
+    }
+
+    public String attemptToFixGame() {
+        if (game == null) {
+            return "";
+        }
+        GameState state = game.getState();
+        if (state == null) {
+            return "";
+        }
+        StringBuilder sb = new StringBuilder();
+        sb.append("<br/>Game State:<br/><font size=-2>");
+        sb.append(state);
+        boolean fixedAlready = false;
+
+        sb.append("<br>Active player is: ");
+        sb.append(game.getPlayer(state.getActivePlayerId()).getName());
+        PassAbility pass = new PassAbility();
+        if (game.getPlayer(state.getActivePlayerId()).hasLeft()) {
+            Phase currentPhase = game.getPhase();
+            if (currentPhase != null) {
+                currentPhase.getStep().skipStep(game, state.getActivePlayerId());
+                sb.append("<br>Forcibly passing the phase!");
+                fixedAlready = true;
+            } else {
+                sb.append("<br>Current phase null");
+            }
+            sb.append("<br>Active player has left");
+        }
+
+        sb.append("<br>getChoosingPlayerId: ");
+        if (state.getChoosingPlayerId() != null) {
+            if (game.getPlayer(state.getChoosingPlayerId()).hasLeft()) {
+                Phase currentPhase = game.getPhase();
+                if (currentPhase != null && !fixedAlready) {
+                    currentPhase.getStep().endStep(game, state.getActivePlayerId());
+                    fixedAlready = true;
+                    sb.append("<br>Forcibly passing the phase!");
+                } else if (currentPhase == null) {
+                    sb.append("<br>Current phase null");
+                }
+                sb.append("<br>Choosing player has left");
+            }
+        }
+
+        sb.append("<br><font color=orange>Player with Priority is: ");
+        if (state.getPriorityPlayerId() != null) {
+            if (game.getPlayer(state.getPriorityPlayerId()).hasLeft()) {
+                Phase currentPhase = game.getPhase();
+                if (currentPhase != null && !fixedAlready) {
+                    currentPhase.getStep().skipStep(game, state.getActivePlayerId());
+                    fixedAlready = true;
+                    sb.append("<br>Forcibly passing the phase!");
+                }
+            }
+            sb.append(game.getPlayer(state.getPriorityPlayerId()).getName());
+            sb.append("</font>");
+        }
+
+        sb.append("<br>Future Timeout:");
+        if (futureTimeout != null) {
+            sb.append("Cancelled?=");
+            sb.append(futureTimeout.isCancelled());
+            sb.append(",,,Done?=");
+            sb.append(futureTimeout.isDone());
+            sb.append(",,,GetDelay?=");
+            sb.append((int) futureTimeout.getDelay(TimeUnit.SECONDS));
+            if ((int) futureTimeout.getDelay(TimeUnit.SECONDS) < 25) {
+                game.endTurn(pass);
+                sb.append("<br>Forcibly passing the turn!");
+            }
         } else {
             sb.append("Not using future Timeout!");
         }
