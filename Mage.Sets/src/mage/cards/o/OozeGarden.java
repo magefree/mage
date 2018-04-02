@@ -28,6 +28,8 @@
 package mage.cards.o;
 
 import java.util.UUID;
+
+import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
@@ -105,17 +107,33 @@ class OozeGardenCreateTokenEffect extends OneShotEffect {
                 value = ((SacrificeTargetCost)cost).getPermanents().get(0).getPower().getValue();
             }
         }
-        SubTypeList list = new SubTypeList();
-        list.add(SubType.OOZE);
-        Token token = new Token("Ooze", "X/X green Ooze creature token, where X is the sacrificed creature's power", ObjectColor.GREEN, list, value, value, new AbilitiesImpl<>()) {
-           
-      
-        };
+        Token token = new OozeToken(value);
         token.getAbilities().newId(); // neccessary if token has ability like DevourAbility()
         token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
         return true;
     }
-
-
 }
 
+class OozeToken extends Token {
+
+    public OozeToken() {
+        this(1);
+    }
+
+    public OozeToken(int x) {
+        super("Ooze", "X/X green Ooze creature token, where X is the sacrificed creature's power");
+        this.color.addColor(ObjectColor.GREEN);
+        this.subtype.add(SubType.OOZE);
+
+        this.toughness = new MageInt(x);
+        this.power = new MageInt(x);
+    }
+
+    public OozeToken(final OozeToken token) {
+        super(token);
+    }
+
+    public OozeToken copy() {
+        return new OozeToken(this);
+    }
+}
