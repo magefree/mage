@@ -31,10 +31,14 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.regex.Pattern;
+import java.util.stream.IntStream;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import mage.cards.repository.ExpansionRepository;
+import mage.client.MageFrame;
 import mage.client.constants.Constants;
 import mage.client.constants.Constants.ResourceSetSize;
 import mage.client.constants.Constants.ResourceSymbolSize;
@@ -57,7 +61,7 @@ public final class ManaSymbols {
     private static final Logger LOGGER = Logger.getLogger(ManaSymbols.class);
     private static final Map<Integer, Map<String, BufferedImage>> manaImages = new HashMap<>();
 
-    private static final Map<String, Map<String, Image>> setImages = new HashMap<>();
+    private static final Map<String, Map<String, Image>> setImages = new ConcurrentHashMap<>();
 
     private static final HashSet<String> onlyMythics = new HashSet<>();
     private static final HashSet<String> withoutSymbols = new HashSet<>();
@@ -77,7 +81,7 @@ public final class ManaSymbols {
     }
     private static final Map<String, Dimension> setImagesExist = new HashMap<>();
     private static final Pattern REPLACE_SYMBOLS_PATTERN = Pattern.compile("\\{([^}/]*)/?([^}]*)\\}");
-    private static String cachedPath;
+    
     private static final String[] symbols = new String[]{"0", "1", "10", "11", "12", "15", "16", "2", "3", "4", "5", "6", "7", "8", "9",
         "B", "BG", "BR", "BP", "2B",
         "G", "GU", "GW", "GP", "2G",
@@ -167,37 +171,39 @@ public final class ManaSymbols {
                 } catch (Exception e) {
                 }
             }
-
+            
             // generate small size
             try {
                 File file = new File(getResourceSetsPath(ResourceSetSize.MEDIUM));
                 if (!file.exists()) {
                     file.mkdirs();
                 }
-
+                String pathRoot = getResourceSetsPath(ResourceSetSize.SMALL) + set;
                 for (String code : codes) {
-                    file = new File(getResourceSetsPath(ResourceSetSize.MEDIUM) + set + '-' + code + ".png");
-                    if (file.exists()) {
-                        continue;
-                    }
-                    file = new File(getResourceSetsPath(ResourceSetSize.MEDIUM) + set + '-' + code + ".jpg");
-                    Image image = UI.getImageIcon(file.getAbsolutePath()).getImage();
-                    try {
-                        int width = image.getWidth(null);
-                        int height = image.getHeight(null);
-                        if (height > 0) {
-                            int dx = 0;
-                            if (set.equals("M10") || set.equals("M11") || set.equals("M12")) {
-                                dx = 6;
-                            }
-                            Rectangle r = new Rectangle(15 + dx, (int) (height * (15.0f + dx) / width));
-                            BufferedImage resized = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
-                            File newFile = new File(getResourceSetsPath(ResourceSetSize.SMALL) + set + '-' + code + ".png");
-                            ImageIO.write(resized, "png", newFile);
-                        }
-                    } catch (Exception e) {
+                    File newFile = new File(pathRoot + '-' + code + ".png");
+                    if(!(MageFrame.isSkipSmallSymbolGenerationForExisting() && newFile.exists())){// skip if option enabled and file already exists
+                        file = new File(getResourceSetsPath(ResourceSetSize.MEDIUM) + set + '-' + code + ".png");
                         if (file.exists()) {
-                            file.delete();
+                            continue;
+                        }
+                        file = new File(getResourceSetsPath(ResourceSetSize.MEDIUM) + set + '-' + code + ".jpg");
+                        Image image = UI.getImageIcon(file.getAbsolutePath()).getImage();
+                        try {
+                            int width = image.getWidth(null);
+                            int height = image.getHeight(null);
+                            if (height > 0) {
+                                int dx = 0;
+                                if (set.equals("M10") || set.equals("M11") || set.equals("M12")) {
+                                    dx = 6;
+                                }
+                                Rectangle r = new Rectangle(15 + dx, (int) (height * (15.0f + dx) / width));
+                                BufferedImage resized = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
+                                ImageIO.write(resized, "png", newFile);
+                            }
+                        } catch (Exception e) {
+                            if (file.exists()) {
+                                file.delete();
+                            }
                         }
                     }
                 }
@@ -205,7 +211,6 @@ public final class ManaSymbols {
             } catch (Exception e) {
             }
         }
-
         // mark loaded images
         // TODO: delete that code, images draw-show must dynamicly
         File file;
@@ -226,7 +231,6 @@ public final class ManaSymbols {
     }
 
     public static BufferedImage loadSVG(File svgFile, int resizeToWidth, int resizeToHeight, boolean useShadow) throws IOException {
-
         // debug: disable shadow gen, need to test it
         useShadow = false;
 
@@ -424,17 +428,17 @@ public final class ManaSymbols {
     }
 
     private static boolean loadSymbolImages(int size) {
-        // load all symbols to cash
+        // load all symbols to cache
         // priority: SVG -> GIF
         // gif remain for backward compatibility
 
-        boolean fileErrors = false;
-
-        HashMap<String, BufferedImage> sizedSymbols = new HashMap<>();
-        for (String symbol : symbols) {
-
+        //boolean fileErrors = false;
+        AtomicBoolean fileErrors = new AtomicBoolean(false);
+        Map<String, BufferedImage> sizedSymbols = new ConcurrentHashMap<>();
+        IntStream.range(0, symbols.length).parallel().forEach(i-> {
+            String symbol = symbols[i];
             BufferedImage image = null;
-            File file = null;
+            File file;
 
             // svg
             file = getSymbolFileNameAsSVG(symbol);
@@ -456,13 +460,13 @@ public final class ManaSymbols {
             if (image != null) {
                 sizedSymbols.put(symbol, image);
             } else {
-                fileErrors = true;
+                fileErrors.set(true);
                 LOGGER.warn("SVG or GIF symbol can't be load: " + symbol);
             }
-        }
+        });
 
         manaImages.put(size, sizedSymbols);
-        return !fileErrors;
+        return !fileErrors.get();
     }
 
     private static void renameSymbols(String path) {

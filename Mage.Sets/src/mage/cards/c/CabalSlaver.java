@@ -59,7 +59,7 @@ public class CabalSlaver extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever a Goblin deals combat damage to a player, that player discards a card.
-        this.addAbility(new DealsDamageToAPlayerAllTriggeredAbility(new DiscardTargetEffect(1), filter, false, SetTargetPointer.PLAYER, true));
+        this.addAbility(new DealsDamageToAPlayerAllTriggeredAbility(new DiscardTargetEffect(1), filter, false, SetTargetPointer.NONE, true, true));
     }
 
     public CabalSlaver(final CabalSlaver card) {

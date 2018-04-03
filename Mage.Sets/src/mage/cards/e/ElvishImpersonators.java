@@ -25,75 +25,75 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.cards.e;
 
-package mage.cards.g;
-
+import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubLayer;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetpointer.FixedTarget;
-
-import java.util.UUID;
 
 /**
  *
- * @author  ciaccona007
+ * @author L_J
  */
-public class GrowthSpurt extends CardImpl {
+public class ElvishImpersonators extends CardImpl {
 
-    public GrowthSpurt(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{G}");
+    public ElvishImpersonators(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
+        this.subtype.add(SubType.ELVES);
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(0);
 
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new GrowthSpurtEffect());
+        // As Elvish Impersonators enters the battlefield, roll a six-sided die twice. Its base power becomes the first result and its base toughness becomes the second result.
+        this.addAbility(new AsEntersBattlefieldAbility(new ElvishImpersonatorsEffect()));
     }
 
-    public GrowthSpurt(final GrowthSpurt card) {
+    public ElvishImpersonators(final ElvishImpersonators card) {
         super(card);
     }
 
     @Override
-    public GrowthSpurt copy() {
-        return new GrowthSpurt(this);
+    public ElvishImpersonators copy() {
+        return new ElvishImpersonators(this);
     }
 }
 
-class GrowthSpurtEffect extends OneShotEffect {
-    GrowthSpurtEffect() {
-        super(Outcome.BoostCreature);
-        this.staticText = "Roll a six-sided die. Target creature gets +X/+X until end of turn, where X is the result";
+class ElvishImpersonatorsEffect extends OneShotEffect {
+
+    public ElvishImpersonatorsEffect() {
+        super(Outcome.Neutral);
+        staticText = "roll a six-sided die twice. Its base power becomes the first result and its base toughness becomes the second result";
     }
 
-    GrowthSpurtEffect(final GrowthSpurtEffect effect) {
+    public ElvishImpersonatorsEffect(final ElvishImpersonatorsEffect effect) {
         super(effect);
+    }
+
+    @Override
+    public ElvishImpersonatorsEffect copy() {
+        return new ElvishImpersonatorsEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            int result = controller.rollDice(game, 6);
-            Permanent permanent = game.getPermanent(source.getFirstTarget());
-            if (permanent != null) {
-                ContinuousEffect effect = new BoostTargetEffect(result, result, Duration.EndOfTurn);
-                effect.setTargetPointer(new FixedTarget(permanent, game));
-                game.addEffect(effect, source);
-            }
+            int firstRoll = controller.rollDice(game, 6);
+            int secondRoll = controller.rollDice(game, 6);
+            game.addEffect(new SetPowerToughnessSourceEffect(firstRoll, secondRoll, Duration.WhileOnBattlefield, SubLayer.SetPT_7b), source);
+            return true;
         }
         return false;
-    }
-
-    public GrowthSpurtEffect copy() {
-        return new GrowthSpurtEffect(this);
     }
 }

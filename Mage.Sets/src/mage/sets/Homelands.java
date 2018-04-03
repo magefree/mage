@@ -156,6 +156,7 @@ public class Homelands extends ExpansionSet {
         cards.add(new SetCardInfo("Reef Pirates", 45, Rarity.COMMON, ReefPirates.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Reef Pirates", 46, Rarity.COMMON, ReefPirates.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Renewal", 66, Rarity.COMMON, mage.cards.r.Renewal.class));
+        cards.add(new SetCardInfo("Retribution", 99, Rarity.UNCOMMON, mage.cards.r.Retribution.class));
         cards.add(new SetCardInfo("Reveka, Wizard Savant", 47, Rarity.RARE, mage.cards.r.RevekaWizardSavant.class));
         cards.add(new SetCardInfo("Roots", 68, Rarity.UNCOMMON, mage.cards.r.Roots.class));
         cards.add(new SetCardInfo("Root Spider", 67, Rarity.UNCOMMON, mage.cards.r.RootSpider.class));

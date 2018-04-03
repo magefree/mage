@@ -113,6 +113,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
     private int avatarId = -1;
     private String flagName;
     private String basicTooltipText;
+    private static final Map<UUID, Integer> playerLives = new HashMap<>();
 
     private PriorityTimer timer;
 
@@ -175,9 +176,30 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 
     public void update(PlayerView player) {
         this.player = player;
+        int pastLife = player.getLife();
+        if (playerLives != null) {
+            if (playerLives.containsKey(player.getPlayerId())) {
+                pastLife = playerLives.get(player.getPlayerId());
+            }
+            playerLives.put(player.getPlayerId(), player.getLife());
+        }
         int playerLife = player.getLife();
-        avatar.setCenterText("true".equals(MageFrame.getPreferences().get(PreferencesDialog.KEY_DISPLAY_LIVE_ON_AVATAR, "true"))
-                ? String.valueOf(playerLife) : null);
+
+        boolean displayLife = "true".equals(MageFrame.getPreferences().get(PreferencesDialog.KEY_DISPLAY_LIVE_ON_AVATAR, "true"));
+        avatar.setCenterText(displayLife ? String.valueOf(playerLife) : null);
+
+        if (displayLife) {
+            if (playerLife != pastLife) {
+                if (playerLife > pastLife) {
+                    avatar.gainLifeDisplay();
+                } else if (playerLife < pastLife) {
+                    avatar.loseLifeDisplay();
+                }
+            } else if (playerLife == pastLife) {
+                avatar.stopLifeDisplay();
+            }
+        }
+
         updateAvatar();
 
         if (playerLife > 99) {
