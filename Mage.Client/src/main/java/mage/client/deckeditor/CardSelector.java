@@ -58,7 +58,6 @@ import static mage.client.dialog.PreferencesDialog.KEY_DECK_EDITOR_SEARCH_UNIQUE
 import mage.client.util.GUISizeHelper;
 import mage.client.util.gui.FastSearchUtil;
 import mage.client.dialog.CheckBoxList;
-import mage.client.dialog.PickChoiceDialog_1;
 import mage.client.util.gui.FastSearchUtil_1;
 
 import mage.client.util.sets.ConstructedFormats;
@@ -74,7 +73,7 @@ import mage.filter.predicate.other.CardTextPredicate;
 import mage.filter.predicate.other.ExpansionSetPredicate;
 import mage.view.CardView;
 import mage.view.CardsView;
-import org.apache.log4j.helpers.LogLog;
+//import org.apache.log4j.helpers.LogLog;
 import org.mage.card.arcane.ManaSymbolsCellRenderer;
 
 /**
@@ -372,11 +371,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
             }
         }
          if(cbSetTag!=null)
-        {
-            /*if(setCodes==null)
-            {
-                setCodes= new String[0];
-            }*/
+        {            
             if(listCodeSelected != null)
             {
                 boolean isAtLeastOneSelected=false;
@@ -388,26 +383,13 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
                 for(int itemIndex: choiseValue){
                     isAtLeastOneSelected=true;
                     setCodes.add(x.getElementAt(itemIndex).toString());
-                    LogLog.warn(x.getElementAt(itemIndex).toString());
+                    //LogLog.warn(x.getElementAt(itemIndex).toString());
                 }
                 if(isAtLeastOneSelected)
                 {
                     criteria.setCodes(setCodes.toArray(new String[0]));                   
                 }
-            }
-            
-            
-            //cbSetTag.
-         /*   for(int itemIndex: choiseValue){
-           
-            LogLog.warn(String.format("%d",itemIndex));
-        }
-            String expansionSelection = this.cbSetTag.getSelectedItem().toString();
-            if (!expansionSelection.equals("- All Sets")) {
-                java.util.List<String> setCodes = ConstructedFormats.getSetsByFormat(expansionSelection);
-                criteria.setCodes(setCodes.toArray(new String[0]));
-            }
-           */
+            }            
         }
 
         return criteria;
@@ -1468,47 +1450,11 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
     }//GEN-LAST:event_tbSpecialActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        //javax.swing.JComboBox<String> cbSetTag;        
-        //CheckBoxListEntry itemA_box = new CheckBoxListEntry("test",false);
-        //DefaultListModel<JCheckBox> modeldefault = new DefaultListModel<JCheckBox>();
-        // langList = new CheckBoxList();
         
-        /*String myList[]={"Afghanistan", "af"},
-        /{"Åland Islands", "ax"},
-        {"Albania", "al"},
-        {"Algeria", "dz"},
-        {"American Samoa", "as"},
-        {"Andorra", "ad"},
-        {"Angola", "an"},
-        {"Anguilla", "ai"},
-        {"Antarctica", "ao"},};
-        langList = new CheckBoxList();*/
-        /*DefaultListModel<JCheckBox> model= new DefaultListModel();
-        JCheckBox check1 = new JCheckBox("One");
-        JCheckBox check2 = new JCheckBox("two");
-        model.addElement(check1);
-        model.addElement(check2);
-        JCheckBox[] myList = { check1, check2};
-        JList list = new JList(model);*/
-       
-        // langList.setListData(myList);
-        //langList.add(list);
-        /*langList.addElement(new JCheckBox("Checkbox1"));
-        langList.addElement(new JCheckBox("Checkbox2"));
-        langList.addElement(new JCheckBox("Checkbox3"));
-        //checkBoxList1.getCheckedItems();*/
         CheckBoxList testList;
         listCodeSelected = FastSearchUtil_1.showFastSearchForStringComboBox(cbSetTag, FastSearchUtil_1.DEFAULT_EXPANSION_SEARCH_MESSAGE);
         filterCards();
-        /*int[] choiseValue=testList.getCheckedIndices();
-        ListModel x= testList.getModel();
-        LogLog.warn("selected:"); 
-        for(int itemIndex: choiseValue){
-           
-            LogLog.warn(x.getElementAt(itemIndex).toString());
-            LogLog.warn(String.format("%d",itemIndex));
-        }*/
-        //CheckTable.main(null);
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void toggleViewMode() {

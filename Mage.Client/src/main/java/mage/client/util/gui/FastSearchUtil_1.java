@@ -8,7 +8,7 @@ import javax.swing.*;
 import java.util.HashMap;
 import java.util.Map;
 import mage.client.dialog.CheckBoxList;
-import org.apache.log4j.helpers.LogLog;
+//import org.apache.log4j.helpers.LogLog;
 
 /**
  *
@@ -23,6 +23,7 @@ public class FastSearchUtil_1 {
      * Show fast choice modal dialog with incremental searching for any string combobox components
      * @param combo combobox control with default data model
      * @param chooseMessage caption message for dialog
+     * @return The list of all item
      */
     public static CheckBoxList showFastSearchForStringComboBox(JComboBox combo, String chooseMessage){
         // fast search/choice dialog for string combobox
@@ -64,12 +65,12 @@ public class FastSearchUtil_1 {
         dlg.setWindowSize(300, 500);
         //dlg.set(langList.);
         dlg.showDialog(choice, needSelectValue);
-        int[] choiseValue=langList.getCheckedIndices();
+        /*int[] choiseValue=langList.getCheckedIndices();
         LogLog.warn("selected:"); 
         for(int itemIndex: choiseValue){
            
             LogLog.warn(String.format("%d",itemIndex));
-        }
+        }*/
         if(choice.isChosen()){
             item = choice.getChoiceKey();
 
