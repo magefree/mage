@@ -306,7 +306,6 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
                 }
             }
         }
-       
 
         return filter;
     }
@@ -1495,7 +1494,6 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
     private JTable mainTable;
     private ICardGrid currentView;
     
-    //private CheckBoxList langList = null;
     private CheckBoxList listCodeSelected;
     private javax.swing.JComboBox<String> cbSetTag;  
     // Variables declaration - do not modify//GEN-BEGIN:variables
