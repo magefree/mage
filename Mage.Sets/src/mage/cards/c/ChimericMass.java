@@ -83,4 +83,11 @@ class ChimericMassToken extends Token {
         toughness = new MageInt(0);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetPowerToughnessSourceEffect(new CountersSourceCount(CounterType.CHARGE), Duration.WhileOnBattlefield)));
     }
+    public ChimericMassToken(final ChimericMassToken token) {
+        super(token);
+    }
+
+    public ChimericMassToken copy() {
+        return new ChimericMassToken(this);
+    }
 }

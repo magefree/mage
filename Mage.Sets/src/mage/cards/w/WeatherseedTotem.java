@@ -110,4 +110,11 @@ class WeatherseedTotemToken extends Token {
         toughness = new MageInt(3);
         this.addAbility(TrampleAbility.getInstance());
     }
+    public WeatherseedTotemToken(final WeatherseedTotemToken token) {
+        super(token);
+    }
+
+    public WeatherseedTotemToken copy() {
+        return new WeatherseedTotemToken(this);
+    }
 }

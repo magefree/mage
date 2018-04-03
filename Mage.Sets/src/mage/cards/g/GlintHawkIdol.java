@@ -88,4 +88,11 @@ class GlintHawkIdolToken extends Token {
         toughness = new MageInt(2);
         addAbility(FlyingAbility.getInstance());
     }
+    public GlintHawkIdolToken(final GlintHawkIdolToken token) {
+        super(token);
+    }
+
+    public GlintHawkIdolToken copy() {
+        return new GlintHawkIdolToken(this);
+    }
 }

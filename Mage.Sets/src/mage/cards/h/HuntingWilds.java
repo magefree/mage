@@ -136,4 +136,11 @@ class HuntingWildsToken extends Token {
 
         this.addAbility(HasteAbility.getInstance());
     }
+    public HuntingWildsToken(final HuntingWildsToken token) {
+        super(token);
+    }
+
+    public HuntingWildsToken copy() {
+        return new HuntingWildsToken(this);
+    }
 }

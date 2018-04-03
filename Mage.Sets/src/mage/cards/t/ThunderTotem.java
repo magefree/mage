@@ -71,7 +71,7 @@ public class ThunderTotem extends CardImpl {
         return new ThunderTotem(this);
     }
 
-private static class ThunderTotemToken extends Token {
+    private static class ThunderTotemToken extends Token {
         ThunderTotemToken() {
             super("", "2/2 white Spirit artifact creature with flying and first strike");
             cardType.add(CardType.ARTIFACT);
@@ -82,6 +82,13 @@ private static class ThunderTotemToken extends Token {
             toughness = new MageInt(2);
             this.addAbility(FlyingAbility.getInstance());
             this.addAbility(FirstStrikeAbility.getInstance());
+        }
+        public ThunderTotemToken(final ThunderTotemToken token) {
+            super(token);
+        }
+    
+        public ThunderTotemToken copy() {
+            return new ThunderTotemToken(this);
         }
     }
 }

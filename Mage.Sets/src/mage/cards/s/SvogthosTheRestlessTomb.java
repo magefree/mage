@@ -87,4 +87,11 @@ class SvogthosToken extends Token {
         CardsInControllerGraveyardCount count = new CardsInControllerGraveyardCount(new FilterCreatureCard("creature cards"));
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(count, Duration.EndOfGame)));
     }
+    public SvogthosToken(final SvogthosToken token) {
+        super(token);
+    }
+
+    public SvogthosToken copy() {
+        return new SvogthosToken(this);
+    }
 }

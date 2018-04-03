@@ -75,4 +75,11 @@ class AngelTombToken extends Token {
         toughness = new MageInt(3);
         addAbility(FlyingAbility.getInstance());
     }
+    public AngelTombToken(final AngelTombToken token) {
+        super(token);
+    }
+
+    public AngelTombToken copy() {
+        return new AngelTombToken(this);
+    }
 }

@@ -118,4 +118,11 @@ class JolraelLandsToken extends Token {
         power = new MageInt(3);
         toughness = new MageInt(3);
     }
+    public JolraelLandsToken(final JolraelLandsToken token) {
+        super(token);
+    }
+
+    public JolraelLandsToken copy() {
+        return new JolraelLandsToken(this);
+    }
 }

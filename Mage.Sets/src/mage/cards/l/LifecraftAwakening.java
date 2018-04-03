@@ -120,4 +120,11 @@ class LifecraftAwakeningToken extends Token {
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
     }
+    public LifecraftAwakeningToken(final LifecraftAwakeningToken token) {
+        super(token);
+    }
+
+    public LifecraftAwakeningToken copy() {
+        return new LifecraftAwakeningToken(this);
+    }
 }

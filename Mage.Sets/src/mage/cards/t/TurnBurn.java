@@ -86,6 +86,13 @@ public class TurnBurn extends SplitCard {
             power = new MageInt(0);
             toughness = new MageInt(1);
         }
+        public WeirdToken(final WeirdToken token) {
+            super(token);
+        }
+
+        public WeirdToken copy() {
+            return new WeirdToken(this);
+        }
 
     }
 

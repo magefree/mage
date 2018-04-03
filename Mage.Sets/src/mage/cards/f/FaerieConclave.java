@@ -76,4 +76,11 @@ class FaerieConclaveToken extends Token {
         toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());
     }
+    public FaerieConclaveToken(final FaerieConclaveToken token) {
+        super(token);
+    }
+
+    public FaerieConclaveToken copy() {
+        return new FaerieConclaveToken(this);
+    }
 }

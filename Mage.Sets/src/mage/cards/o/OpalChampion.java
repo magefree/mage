@@ -82,4 +82,11 @@ class OpalChampionKnight extends Token {
         toughness = new MageInt(3);
         this.addAbility(FirstStrikeAbility.getInstance());
     }
+    public OpalChampionKnight(final OpalChampionKnight token) {
+        super(token);
+    }
+
+    public OpalChampionKnight copy() {
+        return new OpalChampionKnight(this);
+    }
 }

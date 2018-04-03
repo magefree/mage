@@ -82,5 +82,12 @@ class StirringWildwoodToken extends Token {
         toughness = new MageInt(4);
         addAbility(ReachAbility.getInstance());
     }
+    public StirringWildwoodToken(final StirringWildwoodToken token) {
+        super(token);
+    }
+
+    public StirringWildwoodToken copy() {
+        return new StirringWildwoodToken(this);
+    }
 
 }

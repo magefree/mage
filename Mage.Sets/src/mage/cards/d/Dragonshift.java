@@ -97,6 +97,13 @@ public class Dragonshift extends CardImpl {
             toughness = new MageInt(4);
             this.addAbility(FlyingAbility.getInstance());
         }
+        public DragonToken(final DragonToken token) {
+            super(token);
+        }
+
+        public DragonToken copy() {
+            return new DragonToken(this);
+        }
 
     }
 }

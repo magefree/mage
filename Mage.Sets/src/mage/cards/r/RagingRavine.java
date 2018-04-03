@@ -96,4 +96,11 @@ class RagingRavineToken extends Token {
         power = new MageInt(3);
         toughness = new MageInt(3);        
     }
+    public RagingRavineToken(final RagingRavineToken token) {
+        super(token);
+    }
+
+    public RagingRavineToken copy() {
+        return new RagingRavineToken(this);
+    }
 }

@@ -101,4 +101,11 @@ class GideonOfTheTrialsToken extends Token {
         toughness = new MageInt(4);
         this.addAbility(IndestructibleAbility.getInstance());
     }
+    public GideonOfTheTrialsToken(final GideonOfTheTrialsToken token) {
+        super(token);
+    }
+
+    public GideonOfTheTrialsToken copy() {
+        return new GideonOfTheTrialsToken(this);
+    }
 }

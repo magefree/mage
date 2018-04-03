@@ -107,4 +107,11 @@ class KothOfTheHammerToken extends Token {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
     }
+    public KothOfTheHammerToken(final KothOfTheHammerToken token) {
+        super(token);
+    }
+
+    public KothOfTheHammerToken copy() {
+        return new KothOfTheHammerToken(this);
+    }
 }

@@ -93,5 +93,12 @@ class DarksteelMutationInsectToken extends Token {
 
         this.addAbility(IndestructibleAbility.getInstance());
     }
+    public DarksteelMutationInsectToken(final DarksteelMutationInsectToken token) {
+        super(token);
+    }
+
+    public DarksteelMutationInsectToken copy() {
+        return new DarksteelMutationInsectToken(this);
+    }
 
 }

@@ -85,4 +85,11 @@ class SiegeOfTowersToken extends Token {
         power = new MageInt(3);
         toughness = new MageInt(1);
     }
+    public SiegeOfTowersToken(final SiegeOfTowersToken token) {
+        super(token);
+    }
+
+    public SiegeOfTowersToken copy() {
+        return new SiegeOfTowersToken(this);
+    }
 }

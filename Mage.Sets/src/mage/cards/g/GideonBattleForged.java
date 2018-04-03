@@ -124,7 +124,13 @@ class GideonBattleForgedToken extends Token {
         toughness = new MageInt(4);
         this.addAbility(IndestructibleAbility.getInstance());
     }
+    public GideonBattleForgedToken(final GideonBattleForgedToken token) {
+        super(token);
+    }
 
+    public GideonBattleForgedToken copy() {
+        return new GideonBattleForgedToken(this);
+    }
 }
 
 class GideonBattleForgedAttacksIfAbleTargetEffect extends RequirementEffect {

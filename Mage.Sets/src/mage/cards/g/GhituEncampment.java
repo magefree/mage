@@ -82,4 +82,11 @@ class GhituEncampmentToken extends Token {
 
         this.addAbility(FirstStrikeAbility.getInstance());
     }
+    public GhituEncampmentToken(final GhituEncampmentToken token) {
+        super(token);
+    }
+
+    public GhituEncampmentToken copy() {
+        return new GhituEncampmentToken(this);
+    }
 }

@@ -70,4 +70,11 @@ class JadeIdolToken extends Token {
         power = new MageInt(4);
         toughness = new MageInt(4);
     }
+    public JadeIdolToken(final JadeIdolToken token) {
+        super(token);
+    }
+
+    public JadeIdolToken copy() {
+        return new JadeIdolToken(this);
+    }
 }

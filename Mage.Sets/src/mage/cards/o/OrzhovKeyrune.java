@@ -81,5 +81,12 @@ public class OrzhovKeyrune extends CardImpl {
             toughness = new MageInt(4);
             this.addAbility(LifelinkAbility.getInstance());
         }
+        public OrzhovKeyruneToken(final OrzhovKeyruneToken token) {
+            super(token);
+        }
+
+        public OrzhovKeyruneToken copy() {
+            return new OrzhovKeyruneToken(this);
+        }
     }
 }

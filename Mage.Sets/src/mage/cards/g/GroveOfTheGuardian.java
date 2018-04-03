@@ -97,5 +97,12 @@ public class GroveOfTheGuardian extends CardImpl {
             toughness = new MageInt(8);
             this.addAbility(VigilanceAbility.getInstance());
         }
+        public ElementalToken(final ElementalToken token) {
+            super(token);
+        }
+
+        public ElementalToken copy() {
+            return new ElementalToken(this);
+        }
     }
 }

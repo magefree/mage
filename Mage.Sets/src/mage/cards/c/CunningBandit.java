@@ -107,4 +107,11 @@ class AzamukiTreacheryIncarnate extends Token {
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
+    public AzamukiTreacheryIncarnate(final AzamukiTreacheryIncarnate token) {
+        super(token);
+    }
+
+    public AzamukiTreacheryIncarnate copy() {
+        return new AzamukiTreacheryIncarnate(this);
+    }
 }

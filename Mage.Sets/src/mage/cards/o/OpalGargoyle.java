@@ -82,4 +82,11 @@ class OpalGargoyleToken extends Token {
         toughness = new MageInt(2);
         this.addAbility(FlyingAbility.getInstance());
     }
+    public OpalGargoyleToken(final OpalGargoyleToken token) {
+        super(token);
+    }
+
+    public OpalGargoyleToken copy() {
+        return new OpalGargoyleToken(this);
+    }
 }

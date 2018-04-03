@@ -99,6 +99,13 @@ class StabwhiskerTheOdious extends Token {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 Zone.BATTLEFIELD, new StabwhiskerLoseLifeEffect(), TargetController.OPPONENT, false, true));
     }
+    public StabwhiskerTheOdious(final StabwhiskerTheOdious token) {
+        super(token);
+    }
+
+    public StabwhiskerTheOdious copy() {
+        return new StabwhiskerTheOdious(this);
+    }
 }
 
 class StabwhiskerLoseLifeEffect extends OneShotEffect {

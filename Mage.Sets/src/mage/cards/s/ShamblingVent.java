@@ -87,4 +87,11 @@ class ShamblingVentToken extends Token {
         toughness = new MageInt(3);
         addAbility(LifelinkAbility.getInstance());
     }
+    public ShamblingVentToken(final ShamblingVentToken token) {
+        super(token);
+    }
+
+    public ShamblingVentToken copy() {
+        return new ShamblingVentToken(this);
+    }
 }

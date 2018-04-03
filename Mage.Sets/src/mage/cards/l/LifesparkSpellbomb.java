@@ -86,4 +86,11 @@ class LifesparkSpellbombToken extends Token {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
     }
+    public LifesparkSpellbombToken(final LifesparkSpellbombToken token) {
+        super(token);
+    }
+
+    public LifesparkSpellbombToken copy() {
+        return new LifesparkSpellbombToken(this);
+    }
 }

@@ -88,6 +88,13 @@ class LifeLandToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
     }
+    public LifeLandToken(final LifeLandToken token) {
+        super(token);
+    }
+
+    public LifeLandToken copy() {
+        return new LifeLandToken(this);
+    }
 
 }
 

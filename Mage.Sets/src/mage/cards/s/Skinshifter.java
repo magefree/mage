@@ -94,6 +94,13 @@ public class Skinshifter extends CardImpl {
             this.toughness = new MageInt(4);
             this.addAbility(TrampleAbility.getInstance());
         }
+        public RhinoToken(final RhinoToken token) {
+            super(token);
+        }
+
+        public RhinoToken copy() {
+            return new RhinoToken(this);
+        }
     }
 
     private class BirdToken extends Token {
@@ -108,6 +115,13 @@ public class Skinshifter extends CardImpl {
             this.toughness = new MageInt(2);
             this.addAbility(FlyingAbility.getInstance());
         }
+        public BirdToken(final BirdToken token) {
+            super(token);
+        }
+
+        public BirdToken copy() {
+            return new BirdToken(this);
+        }
     }
 
     private class PlantToken extends Token {
@@ -120,6 +134,13 @@ public class Skinshifter extends CardImpl {
             this.color.setGreen(true);
             this.power = new MageInt(0);
             this.toughness = new MageInt(8);
+        }
+        public PlantToken(final PlantToken token) {
+            super(token);
+        }
+
+        public PlantToken copy() {
+            return new PlantToken(this);
         }
     }
 }

@@ -111,7 +111,13 @@ class GideonJuraToken extends Token {
         power = new MageInt(6);
         toughness = new MageInt(6);
     }
+    public GideonJuraToken(final GideonJuraToken token) {
+        super(token);
+    }
 
+    public GideonJuraToken copy() {
+        return new GideonJuraToken(this);
+    }
 }
 
 class GideonJuraEffect extends RequirementEffect {

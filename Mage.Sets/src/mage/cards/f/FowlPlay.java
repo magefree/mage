@@ -89,4 +89,11 @@ class FowlPlayToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
     }
+    public FowlPlayToken(final FowlPlayToken token) {
+        super(token);
+    }
+
+    public FowlPlayToken copy() {
+        return new FowlPlayToken(this);
+    }
 }

@@ -90,4 +90,11 @@ class HiddenSpiderToken extends Token {
         toughness = new MageInt(5);
         this.addAbility(ReachAbility.getInstance());
     }
+    public HiddenSpiderToken(final HiddenSpiderToken token) {
+        super(token);
+    }
+
+    public HiddenSpiderToken copy() {
+        return new HiddenSpiderToken(this);
+    }
 }

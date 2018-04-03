@@ -98,4 +98,11 @@ class KenzoTheHardhearted extends Token {
         this.addAbility(DoubleStrikeAbility.getInstance());
         this.addAbility(new BushidoAbility(2));
     }
+    public KenzoTheHardhearted(final KenzoTheHardhearted token) {
+        super(token);
+    }
+
+    public KenzoTheHardhearted copy() {
+        return new KenzoTheHardhearted(this);
+    }
 }

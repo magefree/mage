@@ -82,5 +82,13 @@ public class OjutaiMonument extends CardImpl {
             toughness = new MageInt(4);
             this.addAbility(FlyingAbility.getInstance());
         }
+
+        public OjutaiMonumentToken(final OjutaiMonumentToken token) {
+            super(token);
+        }
+
+        public OjutaiMonumentToken copy() {
+            return new OjutaiMonumentToken(this);
+        }
     }    
 }

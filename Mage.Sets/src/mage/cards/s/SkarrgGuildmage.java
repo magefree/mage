@@ -91,4 +91,11 @@ class SkarrgGuildmageToken extends Token {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
     }
+    public SkarrgGuildmageToken(final SkarrgGuildmageToken token) {
+        super(token);
+    }
+
+    public SkarrgGuildmageToken copy() {
+        return new SkarrgGuildmageToken(this);
+    }
 }

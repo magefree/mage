@@ -81,5 +81,13 @@ public class GruulKeyrune extends CardImpl {
             toughness = new MageInt(2);
             this.addAbility(TrampleAbility.getInstance());
         }
+        public GruulKeyruneToken(final GruulKeyruneToken token) {
+            super(token);
+        }
+
+        public GruulKeyruneToken copy() {
+            return new GruulKeyruneToken(this);
+        }
+        
     }
 }

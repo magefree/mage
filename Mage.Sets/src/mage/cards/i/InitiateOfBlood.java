@@ -112,4 +112,11 @@ class GokaTheUnjust extends Token {
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }
+    public GokaTheUnjust(final GokaTheUnjust token) {
+        super(token);
+    }
+
+    public GokaTheUnjust copy() {
+        return new GokaTheUnjust(this);
+    }
 }

@@ -81,4 +81,11 @@ class ForbiddingWatchtowerToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(5);
     }
+    public ForbiddingWatchtowerToken(final ForbiddingWatchtowerToken token) {
+        super(token);
+    }
+
+    public ForbiddingWatchtowerToken copy() {
+        return new ForbiddingWatchtowerToken(this);
+    }
 }

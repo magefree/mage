@@ -91,5 +91,12 @@ public class WindZendikon extends CardImpl {
             toughness = new MageInt(2);
             addAbility(FlyingAbility.getInstance());
         }
+        public ElementalToken(final ElementalToken token) {
+            super(token);
+        }
+
+        public ElementalToken copy() {
+            return new ElementalToken(this);
+        }
     }
 }

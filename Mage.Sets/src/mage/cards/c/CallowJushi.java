@@ -107,4 +107,11 @@ class JarakuTheInterloper extends Token {
         ability.addTarget(new TargetSpell());
         this.addAbility(ability);
     }
+    public JarakuTheInterloper(final JarakuTheInterloper token) {
+        super(token);
+    }
+
+    public JarakuTheInterloper copy() {
+        return new JarakuTheInterloper(this);
+    }
 }

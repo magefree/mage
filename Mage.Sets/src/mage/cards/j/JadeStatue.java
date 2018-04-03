@@ -73,6 +73,13 @@ public class JadeStatue extends CardImpl {
             this.subtype.add(SubType.GOLEM);
             power = new MageInt(3);
             toughness = new MageInt(6);
-	}
+	    }
+        public JadeStatueToken(final JadeStatueToken token) {
+            super(token);
+        }
+
+        public JadeStatueToken copy() {
+            return new JadeStatueToken(this);
+        }
     }
 }

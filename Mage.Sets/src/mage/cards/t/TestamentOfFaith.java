@@ -183,4 +183,11 @@ class TestamentOfFaithToken extends Token {
         color.setWhite(true);
         this.addAbility(DefenderAbility.getInstance());
     }
+    public TestamentOfFaithToken(final TestamentOfFaithToken token) {
+        super(token);
+    }
+
+    public TestamentOfFaithToken copy() {
+        return new TestamentOfFaithToken(this);
+    }
 }

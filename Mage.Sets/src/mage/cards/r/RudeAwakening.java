@@ -81,5 +81,12 @@ class RudeAwakeningToken extends Token {
         power = new MageInt(2);
         toughness = new MageInt(2);
     }
+    public RudeAwakeningToken(final RudeAwakeningToken token) {
+        super(token);
+    }
+
+    public RudeAwakeningToken copy() {
+        return new RudeAwakeningToken(this);
+    }
 
 }

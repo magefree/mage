@@ -81,4 +81,11 @@ class ElementalUprisingToken extends Token {
 
         this.addAbility(HasteAbility.getInstance());
     }
+    public ElementalUprisingToken(final ElementalUprisingToken token) {
+        super(token);
+    }
+
+    public ElementalUprisingToken copy() {
+        return new ElementalUprisingToken(this);
+    }
 }

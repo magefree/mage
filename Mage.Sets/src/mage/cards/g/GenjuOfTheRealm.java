@@ -97,5 +97,13 @@ public class GenjuOfTheRealm extends CardImpl {
             toughness = new MageInt(12);
             this.addAbility(TrampleAbility.getInstance());
         }
+
+        public SpiritToken(final SpiritToken token) {
+            super(token);
+        }
+
+        public SpiritToken copy() {
+            return new SpiritToken(this);
+        }
     }
 }

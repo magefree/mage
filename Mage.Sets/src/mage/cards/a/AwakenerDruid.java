@@ -117,5 +117,11 @@ class AwakenerDruidToken extends Token {
         power = new MageInt(4);
         toughness = new MageInt(5);
     }
+    public AwakenerDruidToken(final AwakenerDruidToken token) {
+        super(token);
+    }
 
+    public AwakenerDruidToken copy() {
+        return new AwakenerDruidToken(this);
+    }
 }

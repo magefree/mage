@@ -96,4 +96,11 @@ class KamahlFistOfKrosaLandToken extends Token {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
     }
+    public KamahlFistOfKrosaLandToken(final KamahlFistOfKrosaLandToken token) {
+        super(token);
+    }
+
+    public KamahlFistOfKrosaLandToken copy() {
+        return new KamahlFistOfKrosaLandToken(this);
+    }
 }

@@ -90,4 +90,11 @@ class AbhorrentOverlordHarpyToken extends Token {
 
         this.addAbility(FlyingAbility.getInstance());
     }
+    public AbhorrentOverlordHarpyToken(final AbhorrentOverlordHarpyToken token) {
+        super(token);
+    }
+
+    public AbhorrentOverlordHarpyToken copy() {
+        return new AbhorrentOverlordHarpyToken(this);
+    }
 }

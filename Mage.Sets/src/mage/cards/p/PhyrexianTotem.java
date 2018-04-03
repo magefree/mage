@@ -88,6 +88,13 @@ public class PhyrexianTotem extends CardImpl {
             toughness = new MageInt(5);
             this.addAbility(TrampleAbility.getInstance());
         }
+        public PhyrexianTotemToken(final PhyrexianTotemToken token) {
+            super(token);
+        }
+
+        public PhyrexianTotemToken copy() {
+            return new PhyrexianTotemToken(this);
+        }
     }
 }
 

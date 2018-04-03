@@ -107,6 +107,13 @@ class AutumnTailKitsuneSage extends Token {
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
+    public AutumnTailKitsuneSage(final AutumnTailKitsuneSage token) {
+        super(token);
+    }
+
+    public AutumnTailKitsuneSage copy() {
+        return new AutumnTailKitsuneSage(this);
+    }
 }
 
 class AutumnTailEffect extends OneShotEffect {

@@ -116,6 +116,14 @@ public class IzzetKeyrune extends CardImpl {
             power = new MageInt(2);
             toughness = new MageInt(1);
         }
+
+        public IzzetKeyruneToken(final IzzetKeyruneToken token) {
+            super(token);
+        }
+
+        public IzzetKeyruneToken copy() {
+            return new IzzetKeyruneToken(this);
+        }
     }
 }
 

@@ -81,5 +81,13 @@ public class SimicKeyrune extends CardImpl {
             toughness = new MageInt(3);
             this.addAbility(HexproofAbility.getInstance());
         }
+
+        public SimicKeyruneToken(final SimicKeyruneToken token) {
+            super(token);
+        }
+
+        public SimicKeyruneToken copy() {
+            return new SimicKeyruneToken(this);
+        }
     }
 }

@@ -118,4 +118,11 @@ class VastwoodAnimistElementalToken extends Token {
         power = new MageInt(amount);
         toughness = new MageInt(amount);
     }
+    public VastwoodAnimistElementalToken(final VastwoodAnimistElementalToken token) {
+        super(token);
+    }
+
+    public VastwoodAnimistElementalToken copy() {
+        return new VastwoodAnimistElementalToken(this);
+    }
 }

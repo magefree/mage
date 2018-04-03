@@ -94,4 +94,11 @@ class TheloniteDruidLandToken extends Token {
         power = new MageInt(2);
         toughness = new MageInt(3);
     }
+    public TheloniteDruidLandToken(final TheloniteDruidLandToken token) {
+        super(token);
+    }
+
+    public TheloniteDruidLandToken copy() {
+        return new TheloniteDruidLandToken(this);
+    }
 }

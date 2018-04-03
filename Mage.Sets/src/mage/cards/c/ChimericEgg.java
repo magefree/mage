@@ -92,5 +92,12 @@ public class ChimericEgg extends CardImpl {
             toughness = new MageInt(6);
             this.addAbility(TrampleAbility.getInstance());
         }
+        public ChimericEggToken(final ChimericEggToken token) {
+            super(token);
+        }
+
+        public ChimericEggToken copy() {
+            return new ChimericEggToken(this);
+        }
     }
 }

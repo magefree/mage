@@ -152,4 +152,11 @@ class NissaStewardOfElementsToken extends Token {
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(HasteAbility.getInstance());
     }
+    public NissaStewardOfElementsToken(final NissaStewardOfElementsToken token) {
+        super(token);
+    }
+
+    public NissaStewardOfElementsToken copy() {
+        return new NissaStewardOfElementsToken(this);
+    }
 }

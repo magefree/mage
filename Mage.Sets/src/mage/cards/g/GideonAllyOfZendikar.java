@@ -97,4 +97,11 @@ class GideonAllyOfZendikarToken extends Token {
 
         addAbility(IndestructibleAbility.getInstance());
     }
+    public GideonAllyOfZendikarToken(final GideonAllyOfZendikarToken token) {
+        super(token);
+    }
+
+    public GideonAllyOfZendikarToken copy() {
+        return new GideonAllyOfZendikarToken(this);
+    }
 }

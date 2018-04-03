@@ -106,4 +106,11 @@ class NissaVitalForceToken extends Token {
         this.toughness = new MageInt(5);
         this.addAbility(HasteAbility.getInstance());
     }
+    public NissaVitalForceToken(final NissaVitalForceToken token) {
+        super(token);
+    }
+
+    public NissaVitalForceToken copy() {
+        return new NissaVitalForceToken(this);
+    }
 }

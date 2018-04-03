@@ -119,4 +119,11 @@ class LurkingEvilToken extends Token {
         cardType.add(CardType.CREATURE);
         this.addAbility(FlyingAbility.getInstance());
     }
+    public LurkingEvilToken(final LurkingEvilToken token) {
+        super(token);
+    }
+
+    public LurkingEvilToken copy() {
+        return new LurkingEvilToken(this);
+    }
 }

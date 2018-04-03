@@ -101,4 +101,11 @@ class TomoyaTheRevealer extends Token {
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
+    public TomoyaTheRevealer(final TomoyaTheRevealer token) {
+        super(token);
+    }
+
+    public TomoyaTheRevealer copy() {
+        return new TomoyaTheRevealer(this);
+    }
 }

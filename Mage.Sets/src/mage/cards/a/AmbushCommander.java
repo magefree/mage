@@ -99,5 +99,12 @@ class AmbushCommanderToken extends Token {
         toughness = new MageInt(1);
         color.setGreen(true);
     }
+    public AmbushCommanderToken(final AmbushCommanderToken token) {
+        super(token);
+    }
+
+    public AmbushCommanderToken copy() {
+        return new AmbushCommanderToken(this);
+    }
 
 }

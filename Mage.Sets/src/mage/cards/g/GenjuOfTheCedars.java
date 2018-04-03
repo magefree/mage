@@ -95,5 +95,13 @@ public class GenjuOfTheCedars extends CardImpl {
             power = new MageInt(4);
             toughness = new MageInt(4);
         }
+
+        public SpiritToken(final SpiritToken token) {
+            super(token);
+        }
+
+        public SpiritToken copy() {
+            return new SpiritToken(this);
+        }
     }
 }

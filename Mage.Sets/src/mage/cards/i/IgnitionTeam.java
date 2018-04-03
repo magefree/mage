@@ -127,4 +127,11 @@ class IgnitionTeamToken extends Token {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
     }
+    public IgnitionTeamToken(final IgnitionTeamToken token) {
+        super(token);
+    }
+
+    public IgnitionTeamToken copy() {
+        return new IgnitionTeamToken(this);
+    }
 }

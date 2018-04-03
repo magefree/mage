@@ -81,5 +81,12 @@ public class BorosKeyrune extends CardImpl {
             toughness = new MageInt(1);
             this.addAbility(DoubleStrikeAbility.getInstance());
         }
+        public BorosKeyruneToken(final BorosKeyruneToken token) {
+            super(token);
+        }
+
+        public BorosKeyruneToken copy() {
+            return new BorosKeyruneToken(this);
+        }
     }
 }

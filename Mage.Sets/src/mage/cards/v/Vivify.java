@@ -72,4 +72,11 @@ class AnimatedLand extends Token {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
     }
+    public AnimatedLand(final AnimatedLand token) {
+        super(token);
+    }
+
+    public AnimatedLand copy() {
+        return new AnimatedLand(this);
+    }
 }

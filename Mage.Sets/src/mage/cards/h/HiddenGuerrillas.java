@@ -82,4 +82,11 @@ class HiddenGuerrillasSoldier extends Token {
         toughness = new MageInt(3);
         this.addAbility(TrampleAbility.getInstance());
     }
+    public HiddenGuerrillasSoldier(final HiddenGuerrillasSoldier token) {
+        super(token);
+    }
+
+    public HiddenGuerrillasSoldier copy() {
+        return new HiddenGuerrillasSoldier(this);
+    }
 }

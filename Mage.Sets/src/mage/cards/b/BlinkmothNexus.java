@@ -98,4 +98,11 @@ class BlinkmothNexusToken extends Token {
         toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());
     }
+    public BlinkmothNexusToken(final BlinkmothNexusToken token) {
+        super(token);
+    }
+
+    public BlinkmothNexusToken copy() {
+        return new BlinkmothNexusToken(this);
+    }
 }

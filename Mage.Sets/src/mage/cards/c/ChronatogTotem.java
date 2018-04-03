@@ -133,6 +133,13 @@ class ChronatogTotemToken extends Token {
         toughness = new MageInt(2);
         color.setBlue(true);
     }
+    public ChronatogTotemToken(final ChronatogTotemToken token) {
+        super(token);
+    }
+
+    public ChronatogTotemToken copy() {
+        return new ChronatogTotemToken(this);
+    }
 }
 
 class ChronatogTotemCondition implements Condition {

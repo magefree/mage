@@ -84,4 +84,11 @@ class OpalArchangelToken extends Token {
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(VigilanceAbility.getInstance());
     }
+    public OpalArchangelToken(final OpalArchangelToken token) {
+        super(token);
+    }
+
+    public OpalArchangelToken copy() {
+        return new OpalArchangelToken(this);
+    }
 }

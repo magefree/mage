@@ -121,4 +121,11 @@ class ElvishBranchbenderToken extends Token {
         power = new MageInt(xValue);
         toughness = new MageInt(xValue);
     }
+    public ElvishBranchbenderToken(final ElvishBranchbenderToken token) {
+        super(token);
+    }
+
+    public ElvishBranchbenderToken copy() {
+        return new ElvishBranchbenderToken(this);
+    }
 }

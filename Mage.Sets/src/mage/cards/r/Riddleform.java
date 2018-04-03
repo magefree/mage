@@ -94,4 +94,11 @@ class RiddleformToken extends Token {
         toughness = new MageInt(3);
         addAbility(FlyingAbility.getInstance());
     }
+    public RiddleformToken(final RiddleformToken token) {
+        super(token);
+    }
+
+    public RiddleformToken copy() {
+        return new RiddleformToken(this);
+    }
 }

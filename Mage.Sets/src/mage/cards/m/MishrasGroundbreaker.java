@@ -79,4 +79,11 @@ class MishrasGroundbreakerToken extends Token {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
     }
+    public MishrasGroundbreakerToken(final MishrasGroundbreakerToken token) {
+        super(token);
+    }
+
+    public MishrasGroundbreakerToken copy() {
+        return new MishrasGroundbreakerToken(this);
+    }
 }

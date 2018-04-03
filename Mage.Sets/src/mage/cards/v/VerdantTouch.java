@@ -74,4 +74,11 @@ class VerdantTouchLandToken extends Token {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
     }
+    public VerdantTouchLandToken(final VerdantTouchLandToken token) {
+        super(token);
+    }
+
+    public VerdantTouchLandToken copy() {
+        return new VerdantTouchLandToken(this);
+    }
 }

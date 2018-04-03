@@ -82,5 +82,12 @@ public class AtarkaMonument extends CardImpl {
             toughness = new MageInt(4);
             this.addAbility(FlyingAbility.getInstance());
         }
+        public AtarkaMonumentToken(final AtarkaMonumentToken token) {
+            super(token);
+        }
+
+        public AtarkaMonumentToken copy() {
+            return new AtarkaMonumentToken(this);
+        }
     }
 }

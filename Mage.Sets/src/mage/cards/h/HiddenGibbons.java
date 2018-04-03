@@ -87,4 +87,11 @@ class HiddenGibbonsApe extends Token {
         power = new MageInt(4);
         toughness = new MageInt(4);
     }
+    public HiddenGibbonsApe(final HiddenGibbonsApe token) {
+        super(token);
+    }
+
+    public HiddenGibbonsApe copy() {
+        return new HiddenGibbonsApe(this);
+    }
 }

@@ -80,4 +80,11 @@ class OpalCaryatidSoldier extends Token {
         power = new MageInt(2);
         toughness = new MageInt(2);
     }
+    public OpalCaryatidSoldier(final OpalCaryatidSoldier token) {
+        super(token);
+    }
+
+    public OpalCaryatidSoldier copy() {
+        return new OpalCaryatidSoldier(this);
+    }
 }

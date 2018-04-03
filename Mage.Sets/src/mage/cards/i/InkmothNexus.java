@@ -84,4 +84,11 @@ class InkmothNexusToken extends Token {
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(InfectAbility.getInstance());
     }
+    public InkmothNexusToken(final InkmothNexusToken token) {
+        super(token);
+    }
+
+    public InkmothNexusToken copy() {
+        return new InkmothNexusToken(this);
+    }
 }

@@ -101,4 +101,11 @@ class EmbodimentOfFuryToken extends Token {
         this.toughness = new MageInt(3);
         this.addAbility(HasteAbility.getInstance());
     }
+    public EmbodimentOfFuryToken(final EmbodimentOfFuryToken token) {
+        super(token);
+    }
+
+    public EmbodimentOfFuryToken copy() {
+        return new EmbodimentOfFuryToken(this);
+    }
 }

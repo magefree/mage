@@ -135,5 +135,11 @@ class GideonChampionOfJusticeToken extends Token {
         this.addAbility(IndestructibleAbility.getInstance());
 
     }
+    public GideonChampionOfJusticeToken(final GideonChampionOfJusticeToken token) {
+        super(token);
+    }
 
+    public GideonChampionOfJusticeToken copy() {
+        return new GideonChampionOfJusticeToken(this);
+    }
 }

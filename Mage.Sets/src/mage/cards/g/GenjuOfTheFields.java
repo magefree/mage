@@ -100,5 +100,12 @@ public class GenjuOfTheFields extends CardImpl {
             power = new MageInt(2);
             toughness = new MageInt(5);
         }
+        public SpiritToken(final SpiritToken token) {
+            super(token);
+        }
+
+        public SpiritToken copy() {
+            return new SpiritToken(this);
+        }
     }
 }

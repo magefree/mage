@@ -81,5 +81,12 @@ public class DimirKeyrune extends CardImpl {
             toughness = new MageInt(2);
             this.addAbility(new CantBeBlockedSourceAbility());
         }
+        public DimirKeyruneToken(final DimirKeyruneToken token) {
+            super(token);
+        }
+
+        public DimirKeyruneToken copy() {
+            return new DimirKeyruneToken(this);
+        }
     }
 }

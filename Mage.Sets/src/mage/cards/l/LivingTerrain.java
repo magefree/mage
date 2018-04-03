@@ -82,4 +82,11 @@ class TreefolkToken extends Token {
             power = new MageInt(5);
             toughness = new MageInt(6);
         }
+    public TreefolkToken(final TreefolkToken token) {
+        super(token);
+    }
+
+    public TreefolkToken copy() {
+        return new TreefolkToken(this);
+    }
     }

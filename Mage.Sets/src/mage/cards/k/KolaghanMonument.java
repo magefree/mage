@@ -82,5 +82,12 @@ public class KolaghanMonument extends CardImpl {
             toughness = new MageInt(4);
             this.addAbility(FlyingAbility.getInstance());
         }
+        public KolaghanMonumentToken(final KolaghanMonumentToken token) {
+            super(token);
+        }
+
+        public KolaghanMonumentToken copy() {
+            return new KolaghanMonumentToken(this);
+        }
     }      
 }

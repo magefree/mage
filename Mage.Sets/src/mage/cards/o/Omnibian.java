@@ -79,4 +79,11 @@ class OmnibianFrogToken extends Token {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
     }
+    public OmnibianFrogToken(final OmnibianFrogToken token) {
+        super(token);
+    }
+
+    public OmnibianFrogToken copy() {
+        return new OmnibianFrogToken(this);
+    }
 }

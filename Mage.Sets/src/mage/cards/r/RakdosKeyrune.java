@@ -80,5 +80,12 @@ public class RakdosKeyrune extends CardImpl {
             toughness = new MageInt(1);
             this.addAbility(FirstStrikeAbility.getInstance());
         }
+        public RakdosKeyruneToken(final RakdosKeyruneToken token) {
+            super(token);
+        }
+
+        public RakdosKeyruneToken copy() {
+            return new RakdosKeyruneToken(this);
+        }
     }
 }

@@ -76,4 +76,11 @@ class ApeToken extends Token {
         toughness = new MageInt(3);
         this.addAbility(TrampleAbility.getInstance());
     }
+    public ApeToken(final ApeToken token) {
+        super(token);
+    }
+
+    public ApeToken copy() {
+        return new ApeToken(this);
+    }
 }

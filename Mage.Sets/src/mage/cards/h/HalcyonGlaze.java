@@ -76,4 +76,11 @@ class HalcyonGlazeToken extends Token {
         toughness = new MageInt(4);
         this.addAbility(FlyingAbility.getInstance());
     }
+    public HalcyonGlazeToken(final HalcyonGlazeToken token) {
+        super(token);
+    }
+
+    public HalcyonGlazeToken copy() {
+        return new HalcyonGlazeToken(this);
+    }
 }

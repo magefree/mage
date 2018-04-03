@@ -99,6 +99,12 @@ public class PrideOfTheClouds extends CardImpl {
             toughness = new MageInt(1);
             addAbility(FlyingAbility.getInstance());
         }
-        
+        public BirdToken(final BirdToken token) {
+            super(token);
+        }
+
+        public BirdToken copy() {
+            return new BirdToken(this);
+        }
     }
 }

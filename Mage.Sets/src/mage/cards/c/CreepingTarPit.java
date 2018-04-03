@@ -87,4 +87,11 @@ class CreepingTarPitToken extends Token {
         toughness = new MageInt(2);
         this.addAbility(new CantBeBlockedSourceAbility());
     }
+    public CreepingTarPitToken(final CreepingTarPitToken token) {
+        super(token);
+    }
+
+    public CreepingTarPitToken copy() {
+        return new CreepingTarPitToken(this);
+    }
 }

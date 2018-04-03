@@ -80,5 +80,12 @@ public class AzoriusKeyrune extends CardImpl {
             toughness = new MageInt(2);
             this.addAbility(FlyingAbility.getInstance());
         }
+        public AzoriusKeyruneToken(final AzoriusKeyruneToken token) {
+            super(token);
+        }
+
+        public AzoriusKeyruneToken copy() {
+            return new AzoriusKeyruneToken(this);
+        }
     }
 }

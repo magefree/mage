@@ -95,4 +95,11 @@ class WoodwraithCorrupterToken extends Token {
         power = new MageInt(4);
         toughness = new MageInt(4);
     }
+    public WoodwraithCorrupterToken(final WoodwraithCorrupterToken token) {
+        super(token);
+    }
+
+    public WoodwraithCorrupterToken copy() {
+        return new WoodwraithCorrupterToken(this);
+    }
 }

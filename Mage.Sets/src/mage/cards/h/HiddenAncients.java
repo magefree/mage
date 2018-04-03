@@ -87,4 +87,11 @@ class HiddenAncientsTreefolk extends Token {
         power = new MageInt(5);
         toughness = new MageInt(5);
     }
+    public HiddenAncientsTreefolk(final HiddenAncientsTreefolk token) {
+        super(token);
+    }
+
+    public HiddenAncientsTreefolk copy() {
+        return new HiddenAncientsTreefolk(this);
+    }
 }

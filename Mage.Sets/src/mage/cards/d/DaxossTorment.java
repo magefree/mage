@@ -75,4 +75,11 @@ class DaxossTormentToken extends Token {
         addAbility(FlyingAbility.getInstance());
         addAbility(HasteAbility.getInstance());
     }
+    public DaxossTormentToken(final DaxossTormentToken token) {
+        super(token);
+    }
+
+    public DaxossTormentToken copy() {
+        return new DaxossTormentToken(this);
+    }
 }

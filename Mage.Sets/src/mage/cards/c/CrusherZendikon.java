@@ -94,4 +94,11 @@ class BeastToken extends Token {
         toughness = new MageInt(2);
         this.addAbility(TrampleAbility.getInstance());
     }
+    public BeastToken(final BeastToken token) {
+        super(token);
+    }
+
+    public BeastToken copy() {
+        return new BeastToken(this);
+    }
 }

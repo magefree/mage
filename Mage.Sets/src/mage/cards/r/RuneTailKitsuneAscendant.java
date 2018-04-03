@@ -121,4 +121,11 @@ class RuneTailEssence extends Token {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new PreventAllDamageToAllEffect(Duration.WhileOnBattlefield, new FilterControlledCreatureInPlay("creatures you control"))));
     }
+    public RuneTailEssence(final RuneTailEssence token) {
+        super(token);
+    }
+
+    public RuneTailEssence copy() {
+        return new RuneTailEssence(this);
+    }
 }

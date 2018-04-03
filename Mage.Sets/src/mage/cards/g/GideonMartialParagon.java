@@ -107,4 +107,11 @@ class GideonMartialParagonToken extends Token {
 
         addAbility(IndestructibleAbility.getInstance());
     }
+    public GideonMartialParagonToken(final GideonMartialParagonToken token) {
+        super(token);
+    }
+
+    public GideonMartialParagonToken copy() {
+        return new GideonMartialParagonToken(this);
+    }
 }

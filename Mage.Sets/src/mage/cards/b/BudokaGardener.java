@@ -127,4 +127,11 @@ class DokaiWeaverofLife extends Token {
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
+    public DokaiWeaverofLife(final DokaiWeaverofLife token) {
+        super(token);
+    }
+
+    public DokaiWeaverofLife copy() {
+        return new DokaiWeaverofLife(this);
+    }
 }
