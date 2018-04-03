@@ -79,4 +79,11 @@ class LivingLandsToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
     }
+    public LivingLandsToken(final LivingLandsToken token) {
+        super(token);
+    }
+
+    public LivingLandsToken copy() {
+        return new LivingLandsToken(this);
+    }
 }

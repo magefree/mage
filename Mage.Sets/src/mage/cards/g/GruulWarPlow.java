@@ -79,4 +79,11 @@ class GruulWarPlowToken extends Token {
         power = new MageInt(4);
         toughness = new MageInt(4);
     }
+    public GruulWarPlowToken(final GruulWarPlowToken token) {
+        super(token);
+    }
+
+    public GruulWarPlowToken copy() {
+        return new GruulWarPlowToken(this);
+    }
 }

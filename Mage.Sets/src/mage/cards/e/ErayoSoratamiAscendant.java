@@ -133,6 +133,13 @@ class ErayosEssence extends Token {
         effect.setText("counter that spell");
         this.addAbility(new ErayosEssenceTriggeredAbility(effect));
     }
+    public ErayosEssence(final ErayosEssence token) {
+        super(token);
+    }
+
+    public ErayosEssence copy() {
+        return new ErayosEssence(this);
+    }
 }
 
 class ErayosEssenceTriggeredAbility extends TriggeredAbilityImpl {

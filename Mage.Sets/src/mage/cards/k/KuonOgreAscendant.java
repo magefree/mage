@@ -99,6 +99,13 @@ class KuonsEssenceToken extends Token {
                 new SacrificeEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, "that player"),
                 TargetController.ANY, false, true));
     }
+    public KuonsEssenceToken(final KuonsEssenceToken token) {
+        super(token);
+    }
+
+    public KuonsEssenceToken copy() {
+        return new KuonsEssenceToken(this);
+    }
 }
 
 enum KuonOgreAscendantCondition implements Condition {

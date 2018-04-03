@@ -75,5 +75,11 @@ class DreadStatuaryToken extends Token {
         power = new MageInt(4);
         toughness = new MageInt(2);
     }
+    public DreadStatuaryToken(final DreadStatuaryToken token) {
+        super(token);
+    }
 
+    public DreadStatuaryToken copy() {
+        return new DreadStatuaryToken(this);
+    }
 }

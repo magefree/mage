@@ -101,4 +101,11 @@ class EmbodimentOfInsightToken extends Token {
         this.toughness = new MageInt(3);
         this.addAbility(HasteAbility.getInstance());
     }
+    public EmbodimentOfInsightToken(final EmbodimentOfInsightToken token) {
+        super(token);
+    }
+
+    public EmbodimentOfInsightToken copy() {
+        return new EmbodimentOfInsightToken(this);
+    }
 }

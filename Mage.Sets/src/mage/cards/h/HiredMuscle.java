@@ -108,4 +108,11 @@ class Scarmaker extends Token {
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
+    public Scarmaker(final Scarmaker token) {
+        super(token);
+    }
+
+    public Scarmaker copy() {
+        return new Scarmaker(this);
+    }
 }

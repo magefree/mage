@@ -86,4 +86,11 @@ class EnsouledScimitarToken extends Token {
         
     }
 
+    public EnsouledScimitarToken(final EnsouledScimitarToken token) {
+        super(token);
+    }
+
+    public EnsouledScimitarToken copy() {
+        return new EnsouledScimitarToken(this);
+    }
 }

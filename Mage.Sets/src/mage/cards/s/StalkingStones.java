@@ -72,4 +72,11 @@ class StalkingStonesToken extends Token {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
     }
+    public StalkingStonesToken(final StalkingStonesToken token) {
+        super(token);
+    }
+
+    public StalkingStonesToken copy() {
+        return new StalkingStonesToken(this);
+    }
 }

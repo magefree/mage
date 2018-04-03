@@ -75,5 +75,11 @@ class KormusBellToken extends Token {
         toughness = new MageInt(1);
         color.setBlack(true); // black creatures
     }
+    public KormusBellToken(final KormusBellToken token) {
+        super(token);
+    }
 
+    public KormusBellToken copy() {
+        return new KormusBellToken(this);
+    }
 }

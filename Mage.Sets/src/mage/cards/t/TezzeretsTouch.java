@@ -92,4 +92,11 @@ class TezzeretsTouchToken extends Token {
         power = new MageInt(5);
         toughness = new MageInt(5);
     }
+    public TezzeretsTouchToken(final TezzeretsTouchToken token) {
+        super(token);
+    }
+
+    public TezzeretsTouchToken copy() {
+        return new TezzeretsTouchToken(this);
+    }
 }

@@ -124,4 +124,11 @@ class TobitaMasterOfWinds extends Token {
         this.addAbility(new SimpleStaticAbility(
                 Zone.BATTLEFIELD, new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield, new FilterCreaturePermanent())));
     }
+    public TobitaMasterOfWinds(final TobitaMasterOfWinds token) {
+        super(token);
+    }
+
+    public TobitaMasterOfWinds copy() {
+        return new TobitaMasterOfWinds(this);
+    }
 }

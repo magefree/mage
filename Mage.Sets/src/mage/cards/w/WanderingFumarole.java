@@ -90,4 +90,11 @@ class WanderingFumaroleToken extends Token {
         toughness = new MageInt(4);
         addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SwitchPowerToughnessSourceEffect(Duration.EndOfTurn), new ManaCostsImpl("{0}")));
     }
+    public WanderingFumaroleToken(final WanderingFumaroleToken token) {
+        super(token);
+    }
+
+    public WanderingFumaroleToken copy() {
+        return new WanderingFumaroleToken(this);
+    }
 }

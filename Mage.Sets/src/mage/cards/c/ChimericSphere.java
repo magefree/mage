@@ -78,6 +78,13 @@ class ChimericSphereCreature1 extends Token {
 
         this.addAbility(FlyingAbility.getInstance());
     }
+    public ChimericSphereCreature1(final ChimericSphereCreature1 token) {
+        super(token);
+    }
+
+    public ChimericSphereCreature1 copy() {
+        return new ChimericSphereCreature1(this);
+    }
 }
 
 class ChimericSphereCreature2 extends Token {
@@ -88,6 +95,13 @@ class ChimericSphereCreature2 extends Token {
         cardType.add(CardType.CREATURE);
         power = new MageInt(3);
         toughness = new MageInt(2);
+    }
+    public ChimericSphereCreature2(final ChimericSphereCreature2 token) {
+        super(token);
+    }
+
+    public ChimericSphereCreature2 copy() {
+        return new ChimericSphereCreature2(this);
     }
 }
 

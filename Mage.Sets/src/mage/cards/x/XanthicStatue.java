@@ -75,4 +75,11 @@ class XanthicStatueCreature extends Token {
 
         this.addAbility(TrampleAbility.getInstance());
     }
+    public XanthicStatueCreature(final XanthicStatueCreature token) {
+        super(token);
+    }
+
+    public XanthicStatueCreature copy() {
+        return new XanthicStatueCreature(this);
+    }
 }

@@ -76,4 +76,11 @@ class MutavaultToken extends Token {
         power = new MageInt(2);
         toughness = new MageInt(2);
     }
+    public MutavaultToken(final MutavaultToken token) {
+        super(token);
+    }
+
+    public MutavaultToken copy() {
+        return new MutavaultToken(this);
+    }
 }

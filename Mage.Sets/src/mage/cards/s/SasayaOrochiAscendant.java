@@ -129,6 +129,13 @@ class SasayasEssence extends Token {
                 new SasayasEssenceManaEffectEffect(),
                 new FilterControlledLandPermanent(), SetTargetPointer.PERMANENT));
     }
+    public SasayasEssence(final SasayasEssence token) {
+        super(token);
+    }
+
+    public SasayasEssence copy() {
+        return new SasayasEssence(this);
+    }
 }
 
 class SasayasEssenceManaEffectEffect extends ManaEffect {

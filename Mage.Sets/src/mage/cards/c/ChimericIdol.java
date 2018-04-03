@@ -79,4 +79,11 @@ class ChimericIdolToken extends Token {
         power = new MageInt(3);
         toughness = new MageInt(3);
     }
+    public ChimericIdolToken(final ChimericIdolToken token) {
+        super(token);
+    }
+
+    public ChimericIdolToken copy() {
+        return new ChimericIdolToken(this);
+    }
 }

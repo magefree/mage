@@ -146,4 +146,11 @@ class HomurasEssence2 extends Token {
         ability.addEffect(effect);
         this.addAbility(ability);
     }
+    public HomurasEssence2(final HomurasEssence2 token) {
+        super(token);
+    }
+
+    public HomurasEssence2 copy() {
+        return new HomurasEssence2(this);
+    }
 }

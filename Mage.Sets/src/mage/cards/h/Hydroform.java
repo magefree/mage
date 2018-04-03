@@ -76,4 +76,11 @@ class HydroformToken extends Token {
 
         this.addAbility(FlyingAbility.getInstance());
     }
+    public HydroformToken(final HydroformToken token) {
+        super(token);
+    }
+
+    public HydroformToken copy() {
+        return new HydroformToken(this);
+    }
 }

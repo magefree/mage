@@ -111,4 +111,11 @@ class ShidakoBroodmistress extends Token {
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
+    public ShidakoBroodmistress(final ShidakoBroodmistress token) {
+        super(token);
+    }
+
+    public ShidakoBroodmistress copy() {
+        return new ShidakoBroodmistress(this);
+    }
 }

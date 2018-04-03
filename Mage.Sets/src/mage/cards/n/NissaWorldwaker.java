@@ -149,4 +149,11 @@ class NissaWorldwakerToken extends Token {
         this.toughness = new MageInt(4);
         this.addAbility(TrampleAbility.getInstance());
     }
+    public NissaWorldwakerToken(final NissaWorldwakerToken token) {
+        super(token);
+    }
+
+    public NissaWorldwakerToken copy() {
+        return new NissaWorldwakerToken(this);
+    }
 }

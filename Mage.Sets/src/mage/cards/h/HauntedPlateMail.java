@@ -92,4 +92,11 @@ class HauntedPlateMailToken extends Token {
         power = new MageInt(4);
         toughness = new MageInt(4);
     }
+    public HauntedPlateMailToken(final HauntedPlateMailToken token) {
+        super(token);
+    }
+
+    public HauntedPlateMailToken copy() {
+        return new HauntedPlateMailToken(this);
+    }
 }

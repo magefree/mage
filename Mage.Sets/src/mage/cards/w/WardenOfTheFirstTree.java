@@ -118,6 +118,13 @@ class WardenOfTheFirstTree1 extends Token {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
     }
+    public WardenOfTheFirstTree1(final WardenOfTheFirstTree1 token) {
+        super(token);
+    }
+
+    public WardenOfTheFirstTree1 copy() {
+        return new WardenOfTheFirstTree1(this);
+    }
 }
 
 class WardenOfTheFirstTree2 extends Token {
@@ -134,5 +141,12 @@ class WardenOfTheFirstTree2 extends Token {
 
         this.addAbility(TrampleAbility.getInstance());
         this.addAbility(LifelinkAbility.getInstance());
+    }
+    public WardenOfTheFirstTree2(final WardenOfTheFirstTree2 token) {
+        super(token);
+    }
+
+    public WardenOfTheFirstTree2 copy() {
+        return new WardenOfTheFirstTree2(this);
     }
 }

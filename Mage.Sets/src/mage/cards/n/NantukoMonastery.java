@@ -87,4 +87,11 @@ class NantukoMonasteryToken extends Token {
         toughness = new MageInt(4);
         this.addAbility(FirstStrikeAbility.getInstance());
     }
+    public NantukoMonasteryToken(final NantukoMonasteryToken token) {
+        super(token);
+    }
+
+    public NantukoMonasteryToken copy() {
+        return new NantukoMonasteryToken(this);
+    }
 }

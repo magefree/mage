@@ -90,4 +90,11 @@ class BalduvianFrostwakerToken extends Token {
         this.toughness = new MageInt(2);
         this.addAbility(FlyingAbility.getInstance());
     }
+    public BalduvianFrostwakerToken(final BalduvianFrostwakerToken token) {
+        super(token);
+    }
+
+    public BalduvianFrostwakerToken copy() {
+        return new BalduvianFrostwakerToken(this);
+    }
 }

@@ -84,5 +84,12 @@ class CelestialColonnadeToken extends Token {
         addAbility(FlyingAbility.getInstance());
         addAbility(VigilanceAbility.getInstance());
     }
+    public CelestialColonnadeToken(final CelestialColonnadeToken token) {
+        super(token);
+    }
+
+    public CelestialColonnadeToken copy() {
+        return new CelestialColonnadeToken(this);
+    }
 
 }

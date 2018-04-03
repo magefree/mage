@@ -84,5 +84,12 @@ class GargoyleToken extends Token {
         toughness = new MageInt(3);
         addAbility(FlyingAbility.getInstance());
     }
+    public GargoyleToken(final GargoyleToken token) {
+        super(token);
+    }
+
+    public GargoyleToken copy() {
+        return new GargoyleToken(this);
+    }
 
 }

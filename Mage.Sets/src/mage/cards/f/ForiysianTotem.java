@@ -91,4 +91,11 @@ class ForiysianTotemToken extends Token {
         toughness = new MageInt(4);
         this.addAbility(TrampleAbility.getInstance());
     }
+    public ForiysianTotemToken(final ForiysianTotemToken token) {
+        super(token);
+    }
+
+    public ForiysianTotemToken copy() {
+        return new ForiysianTotemToken(this);
+    }
 }

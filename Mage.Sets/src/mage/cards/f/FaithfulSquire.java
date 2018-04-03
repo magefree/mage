@@ -113,4 +113,11 @@ class KaisoMemoryOfLoyalty extends Token {
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
+    public KaisoMemoryOfLoyalty(final KaisoMemoryOfLoyalty token) {
+        super(token);
+    }
+
+    public KaisoMemoryOfLoyalty copy() {
+        return new KaisoMemoryOfLoyalty(this);
+    }
 }

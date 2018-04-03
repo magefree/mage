@@ -194,6 +194,13 @@ class AwakeningLandToken extends Token {
         power = new MageInt(8);
         toughness = new MageInt(8);
     }
+    public AwakeningLandToken(final AwakeningLandToken token) {
+        super(token);
+    }
+
+    public AwakeningLandToken copy() {
+        return new AwakeningLandToken(this);
+    }
 }
 
 

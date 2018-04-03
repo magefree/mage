@@ -114,4 +114,11 @@ class HiddenHerdBeast extends Token {
         power = new MageInt(3);
         toughness = new MageInt(3);
     }
+    public HiddenHerdBeast(final HiddenHerdBeast token) {
+        super(token);
+    }
+
+    public HiddenHerdBeast copy() {
+        return new HiddenHerdBeast(this);
+    }
 }

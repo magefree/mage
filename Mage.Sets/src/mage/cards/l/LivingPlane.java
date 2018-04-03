@@ -72,4 +72,11 @@ class LivingPlaneToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
     }
+    public LivingPlaneToken(final LivingPlaneToken token) {
+        super(token);
+    }
+
+    public LivingPlaneToken copy() {
+        return new LivingPlaneToken(this);
+    }
 }

@@ -107,4 +107,11 @@ class IchigaWhoTopplesOaks extends Token {
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
+    public IchigaWhoTopplesOaks(final IchigaWhoTopplesOaks token) {
+        super(token);
+    }
+
+    public IchigaWhoTopplesOaks copy() {
+        return new IchigaWhoTopplesOaks(this);
+    }
 }

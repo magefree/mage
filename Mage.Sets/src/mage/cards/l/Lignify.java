@@ -89,7 +89,13 @@ class LignifyTreefolkToken extends Token {
         subtype.add(SubType.TREEFOLK);
         power = new MageInt(0);
         toughness = new MageInt(4);
+    }
+    public LignifyTreefolkToken(final LignifyTreefolkToken token) {
+        super(token);
+    }
 
+    public LignifyTreefolkToken copy() {
+        return new LignifyTreefolkToken(this);
     }
 
 }

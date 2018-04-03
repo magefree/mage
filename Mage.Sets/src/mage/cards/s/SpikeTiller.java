@@ -96,4 +96,11 @@ class SpikeTillerToken extends Token {
         power = new MageInt(2);
         toughness = new MageInt(2);
     }
+    public SpikeTillerToken(final SpikeTillerToken token) {
+        super(token);
+    }
+
+    public SpikeTillerToken copy() {
+        return new SpikeTillerToken(this);
+    }
 }

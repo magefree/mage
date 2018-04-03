@@ -81,4 +81,11 @@ class SoilshaperToken extends Token {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
     }
+    public SoilshaperToken(final SoilshaperToken token) {
+        super(token);
+    }
+
+    public SoilshaperToken copy() {
+        return new SoilshaperToken(this);
+    }
 }

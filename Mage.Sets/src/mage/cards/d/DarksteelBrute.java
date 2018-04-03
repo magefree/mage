@@ -72,4 +72,11 @@ class DarksteelBruteToken extends Token {
         power = new MageInt(2);
         toughness = new MageInt(2);
     }
+    public DarksteelBruteToken(final DarksteelBruteToken token) {
+        super(token);
+    }
+
+    public DarksteelBruteToken copy() {
+        return new DarksteelBruteToken(this);
+    }
 }

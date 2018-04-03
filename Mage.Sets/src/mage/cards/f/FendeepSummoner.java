@@ -89,4 +89,11 @@ class FendeepSummonerToken extends Token {
         this.power = new MageInt(3);
         this.toughness = new MageInt(5);
     }
+    public FendeepSummonerToken(final FendeepSummonerToken token) {
+        super(token);
+    }
+
+    public FendeepSummonerToken copy() {
+        return new FendeepSummonerToken(this);
+    }
 }

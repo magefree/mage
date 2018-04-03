@@ -91,4 +91,11 @@ class NaturalEmergenceToken extends Token {
         toughness = new MageInt(2);
         this.addAbility(FirstStrikeAbility.getInstance());
     }
+    public NaturalEmergenceToken(final NaturalEmergenceToken token) {
+        super(token);
+    }
+
+    public NaturalEmergenceToken copy() {
+        return new NaturalEmergenceToken(this);
+    }
 }

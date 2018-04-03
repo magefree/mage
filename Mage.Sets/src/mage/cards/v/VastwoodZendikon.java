@@ -90,4 +90,11 @@ class VastwoodElementalToken extends Token {
         power = new MageInt(6);
         toughness = new MageInt(4);
     }
+    public VastwoodElementalToken(final VastwoodElementalToken token) {
+        super(token);
+    }
+
+    public VastwoodElementalToken copy() {
+        return new VastwoodElementalToken(this);
+    }
 }

@@ -84,4 +84,11 @@ class OpalGuardianGargoyle extends Token {
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(ProtectionAbility.from(ObjectColor.RED));
     }
+    public OpalGuardianGargoyle(final OpalGuardianGargoyle token) {
+        super(token);
+    }
+
+    public OpalGuardianGargoyle copy() {
+        return new OpalGuardianGargoyle(this);
+    }
 }

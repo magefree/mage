@@ -76,4 +76,11 @@ class RustedRelicToken extends Token {
         power = new MageInt(5);
         toughness = new MageInt(5);
     }
+    public RustedRelicToken(final RustedRelicToken token) {
+        super(token);
+    }
+
+    public RustedRelicToken copy() {
+        return new RustedRelicToken(this);
+    }
 }

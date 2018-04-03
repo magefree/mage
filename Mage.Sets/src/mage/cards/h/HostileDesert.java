@@ -83,4 +83,11 @@ class HostileDesertToken extends Token {
         power = new MageInt(3);
         toughness = new MageInt(4);
     }
+    public HostileDesertToken(final HostileDesertToken token) {
+        super(token);
+    }
+
+    public HostileDesertToken copy() {
+        return new HostileDesertToken(this);
+    }
 }

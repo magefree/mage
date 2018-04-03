@@ -88,4 +88,11 @@ class EnsoulArtifactToken extends Token {
         power = new MageInt(5);
         toughness = new MageInt(5);
     }
+    public EnsoulArtifactToken(final EnsoulArtifactToken token) {
+        super(token);
+    }
+
+    public EnsoulArtifactToken copy() {
+        return new EnsoulArtifactToken(this);
+    }
 }

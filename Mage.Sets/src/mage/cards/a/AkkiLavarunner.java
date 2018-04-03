@@ -97,6 +97,13 @@ class TokTokVolcanoBorn extends Token {
         this.addAbility(ProtectionAbility.from(ObjectColor.RED));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TokTokVolcanoBornEffect()));
     }
+    public TokTokVolcanoBorn(final TokTokVolcanoBorn token) {
+        super(token);
+    }
+
+    public TokTokVolcanoBorn copy() {
+        return new TokTokVolcanoBorn(this);
+    }
 }
 
 class TokTokVolcanoBornEffect extends ReplacementEffectImpl {

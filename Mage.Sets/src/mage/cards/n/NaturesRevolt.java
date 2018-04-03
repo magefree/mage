@@ -72,4 +72,11 @@ class NaturesRevoltToken extends Token {
         power = new MageInt(2);
         toughness = new MageInt(2);
     }
+    public NaturesRevoltToken(final NaturesRevoltToken token) {
+        super(token);
+    }
+
+    public NaturesRevoltToken copy() {
+        return new NaturesRevoltToken(this);
+    }
 }
