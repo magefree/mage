@@ -45,7 +45,8 @@ import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
 
 /**

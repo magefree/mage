@@ -48,7 +48,8 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.Token;
 
 /**
  *

@@ -46,7 +46,8 @@ import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
-import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.Token;
 import mage.target.TargetPlayer;
 
 /**

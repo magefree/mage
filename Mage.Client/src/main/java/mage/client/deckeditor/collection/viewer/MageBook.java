@@ -58,7 +58,7 @@ import mage.components.ImagePanelStyle;
 import mage.constants.Rarity;
 import mage.game.command.Emblem;
 import mage.game.permanent.PermanentToken;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.Token;;
 import mage.view.CardView;
 import mage.view.EmblemView;
 import mage.view.PermanentView;

@@ -50,7 +50,8 @@ import mage.constants.SubType;
 import mage.filter.common.FilterLandCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
-import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.Token;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.targetpointer.FixedTargets;
 

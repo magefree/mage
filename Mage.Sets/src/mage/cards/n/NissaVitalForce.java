@@ -47,7 +47,8 @@ import mage.filter.common.FilterLandPermanent;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.command.emblems.NissaVitalForceEmblem;
-import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.Token;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetLandPermanent;
 

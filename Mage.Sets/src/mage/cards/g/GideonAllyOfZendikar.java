@@ -45,7 +45,8 @@ import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.game.command.emblems.GideonAllyOfZendikarEmblem;
 import mage.game.permanent.token.KnightAllyToken;
-import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.Token;
 
 /**
  *
