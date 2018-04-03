@@ -38,8 +38,6 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
@@ -55,7 +53,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
-import javax.swing.Timer;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import mage.cards.decks.importer.DckDeckImporter;
@@ -117,12 +114,6 @@ public class PlayerPanelExt extends javax.swing.JPanel {
     private String flagName;
     private String basicTooltipText;
     private static final Map<UUID, Integer> playerLives = new HashMap<>();
-    private int loseX;
-    private boolean doLoseFade = true;
-    private int gainX;
-    private boolean doGainFade = true;
-    Timer faderGainLife = null;
-    Timer faderLoseLife = null;
 
     private PriorityTimer timer;
 
@@ -200,69 +191,12 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         if (displayLife) {
             if (playerLife != pastLife) {
                 if (playerLife > pastLife) {
-                    if (faderGainLife == null && doGainFade) {
-                        doGainFade = false;
-                        faderGainLife = new Timer(50, new ActionListener() {
-                            public void actionPerformed(ActionEvent ae) {
-                                gainX++;
-                                int alpha = Math.max(250 - gainX, 180);
-                                avatar.setCenterColor(new Color(2 * gainX, 190, 255, alpha));
-                                avatar.repaint();
-                                if (gainX >= 100) {
-                                    avatar.setCenterColor(new Color(200, 190, 0, 180));
-                                    gainX = 100;
-
-                                    if (faderGainLife != null) {
-                                        faderGainLife.stop();
-                                        faderGainLife.setRepeats(false);
-                                        faderGainLife.setDelay(50000);
-                                    }
-                                }
-                            }
-                        });
-                        gainX = 0;
-                        faderGainLife.setInitialDelay(25);
-                        faderGainLife.setRepeats(true);
-                        faderGainLife.start();
-                    }
+                    avatar.gainLifeDisplay();
                 } else if (playerLife < pastLife) {
-                    if (faderLoseLife == null && doLoseFade) {
-                        doLoseFade = false;
-                        faderLoseLife = new Timer(50, new ActionListener() {
-                            public void actionPerformed(ActionEvent ae) {
-                                loseX++;
-                                int alpha = Math.max(250 - loseX, 180);
-                                avatar.setCenterColor(new Color(250 - loseX / 2, 140 + loseX / 2, 0, alpha));
-                                avatar.repaint();
-                                if (loseX >= 100) {
-                                    avatar.setCenterColor(new Color(200, 190, 0, 180));
-                                    loseX = 100;
-
-                                    if (faderLoseLife != null) {
-                                        faderLoseLife.stop();
-                                        faderLoseLife.setRepeats(false);
-                                        faderLoseLife.setDelay(50000);
-                                    }
-                                }
-                            }
-                        });
-                        loseX = 0;
-                        faderLoseLife.setInitialDelay(25);
-                        faderLoseLife.setRepeats(true);
-                        faderLoseLife.start();
-                    }
+                    avatar.loseLifeDisplay();
                 }
             } else if (playerLife == pastLife) {
-                if (faderGainLife != null && gainX >= 100) {
-                    faderGainLife.stop();
-                    faderGainLife = null;
-                }
-                doGainFade = true;
-                if (faderLoseLife != null && loseX >= 100) {
-                    faderLoseLife.stop();
-                    faderLoseLife = null;
-                }
-                doLoseFade = true;
+                avatar.stopLifeDisplay();
             }
         }
 

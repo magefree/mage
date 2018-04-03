@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
-import mage.filter.common.FilterInstantOrSorceryCard;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterInstantOrSorcerySpell;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
@@ -62,7 +62,7 @@ public class MizzixOfTheIzmagnus extends CardImpl {
     }
 
     public MizzixOfTheIzmagnus(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{R}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOBLIN);
         this.subtype.add(SubType.WIZARD);
@@ -136,11 +136,11 @@ class MizzixOfTheIzmagnusCostReductionEffect extends CostModificationEffectImpl 
         if (abilityToModify instanceof SpellAbility && abilityToModify.getControllerId().equals(source.getControllerId())) {
             Spell spell = (Spell) game.getStack().getStackObject(abilityToModify.getId());
             if (spell != null) {
-                return new FilterInstantOrSorceryCard().match(spell, source.getSourceId(), source.getControllerId(), game);
-            } else {
-                // used at least for flashback ability because Flashback ability doesn't use stack or for getPlayables where spell is not cast yet
+                return StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY.match(spell, source.getSourceId(), source.getControllerId(), game);
+            } else if (((SpellAbility) abilityToModify).isCheckPlayableMode()) {
+                // Spell is not on the stack yet, but possible playable spells are determined
                 Card sourceCard = game.getCard(abilityToModify.getSourceId());
-                return sourceCard != null && new FilterInstantOrSorceryCard().match(sourceCard, source.getSourceId(), source.getControllerId(), game);
+                return sourceCard != null && StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY.match(sourceCard, source.getSourceId(), source.getControllerId(), game);
             }
         }
         return false;

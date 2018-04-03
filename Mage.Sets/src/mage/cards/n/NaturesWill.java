@@ -93,6 +93,7 @@ class NaturesWillEffect extends OneShotEffect {
                     land.untap(game);
                 }
             }
+            return true;
         }
         return false;
     }

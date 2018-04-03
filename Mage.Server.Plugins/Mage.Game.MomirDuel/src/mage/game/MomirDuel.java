@@ -28,38 +28,21 @@
 package mage.game;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.common.DiscardCardCost;
-import mage.abilities.costs.mana.VariableManaCost;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.InfoEffect;
-import mage.cards.Card;
-import mage.cards.ExpansionSet;
-import mage.cards.Sets;
-import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
-import mage.constants.CardType;
 import mage.constants.MultiplayerAttackOption;
-import mage.constants.Outcome;
 import mage.constants.PhaseStep;
 import mage.constants.RangeOfInfluence;
-import mage.constants.SetType;
-import mage.constants.TimingRule;
 import mage.constants.Zone;
-import mage.game.command.Emblem;
 import mage.game.command.emblems.MomirEmblem;
 import mage.game.match.MatchType;
-import mage.game.permanent.token.EmptyToken;
 import mage.game.turn.TurnMod;
 import mage.players.Player;
-import mage.util.CardUtil;
-import mage.util.RandomUtil;
 
 /**
  *
