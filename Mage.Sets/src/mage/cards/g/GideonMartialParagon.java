@@ -46,7 +46,7 @@ import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterOpponentsCreaturePermanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 
 /**
  *
@@ -95,7 +95,7 @@ public class GideonMartialParagon extends CardImpl {
     }
 }
 
-class GideonMartialParagonToken extends Token {
+class GideonMartialParagonToken extends TokenImpl {
 
     public GideonMartialParagonToken() {
         super("", "5/5 Human Soldier creature with indestructible");

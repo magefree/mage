@@ -43,7 +43,7 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetArtifactPermanent;
 
@@ -84,7 +84,7 @@ public class TezzeretsTouch extends CardImpl {
     }
 }
 
-class TezzeretsTouchToken extends Token {
+class TezzeretsTouchToken extends TokenImpl {
 
     TezzeretsTouchToken() {
         super("", "5/5");

@@ -36,7 +36,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class BaruFistOfKrosaToken extends Token {
+public class BaruFistOfKrosaToken extends TokenImpl {
 
     public BaruFistOfKrosaToken() {
        this(1);

@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class GiantToken extends Token {
+public class GiantToken extends TokenImpl {
 
     public GiantToken() {
         super("Giant", "4/4 red Giant creature token");

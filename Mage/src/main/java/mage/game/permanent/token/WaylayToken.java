@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class WaylayToken extends Token {
+public class WaylayToken extends TokenImpl {
 
     public WaylayToken() {
         super("Knight", "2/2 white Knight creature token");

@@ -32,7 +32,7 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
 import mage.game.Game;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;import mage.game.permanent.token.Token;
 
 /**
  *

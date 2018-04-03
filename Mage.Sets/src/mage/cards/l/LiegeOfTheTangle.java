@@ -47,7 +47,7 @@ import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 import mage.target.Target;
 import mage.target.common.TargetLandPermanent;
 
@@ -184,7 +184,7 @@ class LiegeOfTheTangleEffect extends ContinuousEffectImpl {
 
 }
 
-class AwakeningLandToken extends Token {
+class AwakeningLandToken extends TokenImpl {
 
     public AwakeningLandToken() {
         super("", "8/8 green Elemental creature");

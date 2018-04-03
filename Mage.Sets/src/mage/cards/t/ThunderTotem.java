@@ -41,7 +41,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 
 /**
  *
@@ -71,7 +71,7 @@ public class ThunderTotem extends CardImpl {
         return new ThunderTotem(this);
     }
 
-    private static class ThunderTotemToken extends Token {
+    private static class ThunderTotemToken extends TokenImpl {
         ThunderTotemToken() {
             super("", "2/2 white Spirit artifact creature with flying and first strike");
             cardType.add(CardType.ARTIFACT);

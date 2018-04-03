@@ -41,7 +41,7 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -81,7 +81,7 @@ public class Lignify extends CardImpl {
     }
 }
 
-class LignifyTreefolkToken extends Token {
+class LignifyTreefolkToken extends TokenImpl {
 
     public LignifyTreefolkToken() {
         super("Treefolk", "a Treefolk with base power and toughness 0/4 with no abilities");

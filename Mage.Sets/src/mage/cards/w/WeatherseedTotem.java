@@ -47,7 +47,7 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 
 /**
  *
@@ -98,7 +98,7 @@ class WeatherseedTotemCondition implements Condition {
     }
 }
 
-class WeatherseedTotemToken extends Token {
+class WeatherseedTotemToken extends TokenImpl {
 
     public WeatherseedTotemToken() {
         super("", "5/3 green Treefolk artifact creature with trample");

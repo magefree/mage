@@ -40,7 +40,7 @@ import mage.abilities.mana.GreenManaAbility;
  *
  * @author spjspj
  */
-public class FreyaliseLlanowarsFuryToken extends Token {
+public class FreyaliseLlanowarsFuryToken extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 

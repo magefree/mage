@@ -50,7 +50,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.KorSoldierToken;
 import mage.game.permanent.token.NahiriTheLithomancerEquipmentToken;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInHand;

@@ -43,7 +43,7 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
 
 /**
@@ -85,7 +85,7 @@ public class WoodwraithCorrupter extends CardImpl {
     }
 }
 
-class WoodwraithCorrupterToken extends Token {
+class WoodwraithCorrupterToken extends TokenImpl {
 
     public WoodwraithCorrupterToken() {
         super("", "4/4 black and green Elemental Horror creature");

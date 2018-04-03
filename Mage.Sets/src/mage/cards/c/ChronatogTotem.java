@@ -50,7 +50,7 @@ import mage.constants.EffectType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 
 /**
  *
@@ -122,7 +122,7 @@ class ChronatogTotemAbility extends LimitedTimesPerTurnActivatedAbility {
     }
 }
 
-class ChronatogTotemToken extends Token {
+class ChronatogTotemToken extends TokenImpl {
 
     ChronatogTotemToken() {
         super("Atog", "1/2 blue Atog artifact creature");

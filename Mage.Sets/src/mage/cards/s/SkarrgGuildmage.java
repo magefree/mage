@@ -43,7 +43,7 @@ import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
 
 /**
@@ -81,7 +81,7 @@ public class SkarrgGuildmage extends CardImpl {
     }
 }
 
-class SkarrgGuildmageToken extends Token {
+class SkarrgGuildmageToken extends TokenImpl {
 
     public SkarrgGuildmageToken() {
         super("", "4/4 Elemental creature");

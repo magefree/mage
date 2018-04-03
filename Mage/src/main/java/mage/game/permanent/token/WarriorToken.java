@@ -39,7 +39,7 @@ import mage.util.RandomUtil;
  *
  * @author LoneFox
  */
-public class WarriorToken extends Token {
+public class WarriorToken extends TokenImpl {
 
     public WarriorToken() {
         super("Warrior", "1/1 white Warrior creature token");

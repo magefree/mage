@@ -42,7 +42,7 @@ import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 import mage.util.SubTypeList;
 
 /**
@@ -101,7 +101,7 @@ class KinTreeInvocationCreateTokenEffect extends OneShotEffect {
 
 }
 
-class SpiritWarriorToken extends Token {
+class SpiritWarriorToken extends TokenImpl {
 
     public SpiritWarriorToken() {
         this(1);

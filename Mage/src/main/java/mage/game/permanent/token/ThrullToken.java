@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author Quercitron
  */
-public class ThrullToken extends Token {
+public class ThrullToken extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 

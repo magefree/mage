@@ -40,7 +40,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 
 /**
  * @author LevelX2
@@ -67,7 +67,7 @@ public class SelesnyaKeyrune extends CardImpl {
         return new SelesnyaKeyrune(this);
     }
 
-    private static class SelesnyaKeyruneToken extends Token {
+    private static class SelesnyaKeyruneToken extends TokenImpl {
         SelesnyaKeyruneToken() {
             super("", "3/3 green and white Wolf artifact creature");
             cardType.add(CardType.ARTIFACT);

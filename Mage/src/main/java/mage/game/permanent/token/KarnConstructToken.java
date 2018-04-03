@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author spjspj
  */
-public class KarnConstructToken extends Token {
+public class KarnConstructToken extends TokenImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifacts you control");
 

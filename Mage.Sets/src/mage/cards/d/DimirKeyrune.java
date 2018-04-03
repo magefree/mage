@@ -41,7 +41,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 
 /**
  *
@@ -69,7 +69,7 @@ public class DimirKeyrune extends CardImpl {
         return new DimirKeyrune(this);
     }
 
-    private static class DimirKeyruneToken extends Token {
+    private static class DimirKeyruneToken extends TokenImpl {
         DimirKeyruneToken() {
             super("Horror", "2/2 blue and black Horror until end of turn and can't be blocked this turn");
             cardType.add(CardType.ARTIFACT);

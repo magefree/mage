@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class OmnathElementalToken extends Token {
+public class OmnathElementalToken extends TokenImpl {
 
     public OmnathElementalToken() {
         super("Elemental", "5/5 red and green Elemental creature token");

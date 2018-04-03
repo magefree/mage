@@ -36,7 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
  *
  * @author spjspj
  */
-public class UtvaraHellkiteDragonToken extends Token {
+public class UtvaraHellkiteDragonToken extends TokenImpl {
 
     public UtvaraHellkiteDragonToken() {
         super("Dragon", "6/6 red Dragon creature token with flying");

@@ -48,7 +48,7 @@ import mage.counters.CounterType;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 import mage.target.common.TargetLandPermanent;
 
 /**
@@ -116,7 +116,7 @@ class TappedLandsCount implements DynamicValue {
     }
 }
 
-class IgnitionTeamToken extends Token {
+class IgnitionTeamToken extends TokenImpl {
 
     public IgnitionTeamToken() {
         super("", "4/4 red Elemental creature");

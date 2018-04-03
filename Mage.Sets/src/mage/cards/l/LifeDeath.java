@@ -43,7 +43,7 @@ import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -80,7 +80,7 @@ public class LifeDeath extends SplitCard {
     }
 }
 
-class LifeLandToken extends Token {
+class LifeLandToken extends TokenImpl {
 
     public LifeLandToken() {
         super("", "1/1 creatures");

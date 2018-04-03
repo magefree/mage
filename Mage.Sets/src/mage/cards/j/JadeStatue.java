@@ -40,7 +40,7 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.TurnPhase;
 import mage.constants.Zone;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 
 /**
  *
@@ -65,7 +65,7 @@ public class JadeStatue extends CardImpl {
         return new JadeStatue(this);
     }
     
-    private static class JadeStatueToken extends Token {
+    private static class JadeStatueToken extends TokenImpl {
         JadeStatueToken() {
             super("", "3/6 Golem artifact creature");
             cardType.add(CardType.ARTIFACT);

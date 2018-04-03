@@ -51,7 +51,7 @@ import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 import mage.target.common.TargetOpponent;
 
 /**
@@ -122,7 +122,7 @@ class GideonExileAllOtherPermanentsEffect extends OneShotEffect {
     }
 }
 
-class GideonChampionOfJusticeToken extends Token {
+class GideonChampionOfJusticeToken extends TokenImpl {
 
     public GideonChampionOfJusticeToken() {
         super("", "indestructible Human Soldier creature with power and toughness each equal to the number of loyalty counters on him");

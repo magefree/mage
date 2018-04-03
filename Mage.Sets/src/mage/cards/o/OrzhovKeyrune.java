@@ -41,7 +41,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 
 /**
  *
@@ -69,7 +69,7 @@ public class OrzhovKeyrune extends CardImpl {
         return new OrzhovKeyrune(this);
     }
 
-    private static class OrzhovKeyruneToken extends Token {
+    private static class OrzhovKeyruneToken extends TokenImpl {
         OrzhovKeyruneToken() {
             super("Thrull", "1/4 white and black Thrull artifact creature with lifelink");
             cardType.add(CardType.ARTIFACT);

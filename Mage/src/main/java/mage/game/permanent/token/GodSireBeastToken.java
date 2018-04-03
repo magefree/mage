@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class GodSireBeastToken extends Token {
+public class GodSireBeastToken extends TokenImpl {
 
     public GodSireBeastToken() {
         super("Beast", "8/8 Beast creature token that's red, green, and white");

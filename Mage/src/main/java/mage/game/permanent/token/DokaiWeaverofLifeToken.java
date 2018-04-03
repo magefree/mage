@@ -43,7 +43,7 @@ import mage.filter.common.FilterControlledPermanent;
  *
  * @author spjspj
  */
-public class DokaiWeaverofLifeToken extends Token {
+public class DokaiWeaverofLifeToken extends TokenImpl {
 
     final static FilterControlledPermanent filterLands = new FilterControlledLandPermanent("lands you control");
 

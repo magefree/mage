@@ -46,7 +46,7 @@ import mage.constants.TargetController;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -85,7 +85,7 @@ public class Dragonshift extends CardImpl {
         return new Dragonshift(this);
     }
 
-    private class DragonToken extends Token {
+    private class DragonToken extends TokenImpl {
 
         public DragonToken() {
             super("Dragon", "blue and red Dragon with base power and toughness 4/4 and with flying");

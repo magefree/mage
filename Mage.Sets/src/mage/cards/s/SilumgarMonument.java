@@ -41,7 +41,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 
 /**
  *
@@ -70,7 +70,7 @@ public class SilumgarMonument extends CardImpl {
         return new SilumgarMonument(this);
     }
     
-    private static class OjutaiMonumentToken extends Token {
+    private static class OjutaiMonumentToken extends TokenImpl {
         OjutaiMonumentToken() {
             super("", "4/4 blue and black Dragon artifact creature with flying");
             cardType.add(CardType.ARTIFACT);

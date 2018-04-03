@@ -43,7 +43,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 
 /**
  *
@@ -71,7 +71,7 @@ public class CelestialColonnade extends CardImpl {
 
 }
 
-class CelestialColonnadeToken extends Token {
+class CelestialColonnadeToken extends TokenImpl {
 
     public CelestialColonnadeToken() {
         super("", "4/4 white and blue Elemental creature with flying and vigilance");

@@ -36,7 +36,7 @@ import mage.abilities.keyword.DefenderAbility;
  *
  * @author spjspj
  */
-public class ConstructToken extends Token {
+public class ConstructToken extends TokenImpl {
 
     public ConstructToken() {
         this("CNS");

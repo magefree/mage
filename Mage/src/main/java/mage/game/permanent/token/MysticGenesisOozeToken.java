@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class MysticGenesisOozeToken extends Token {
+public class MysticGenesisOozeToken extends TokenImpl {
 
     public MysticGenesisOozeToken() {
         this(0);

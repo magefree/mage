@@ -38,7 +38,7 @@ import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 
 /**
  *
@@ -64,7 +64,7 @@ public class LivingPlane extends CardImpl {
     }
 }
 
-class LivingPlaneToken extends Token {
+class LivingPlaneToken extends TokenImpl {
 
     public LivingPlaneToken() {
         super("Land", "1/1 creatures");

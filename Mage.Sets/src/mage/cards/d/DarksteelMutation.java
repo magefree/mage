@@ -42,7 +42,7 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -81,7 +81,7 @@ public class DarksteelMutation extends CardImpl {
     }
 }
 
-class DarksteelMutationInsectToken extends Token {
+class DarksteelMutationInsectToken extends TokenImpl {
 
     public DarksteelMutationInsectToken() {
         super("Insect", "Insect artifact creature with base power and toughness 0/1");

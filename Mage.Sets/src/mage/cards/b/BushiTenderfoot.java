@@ -43,7 +43,7 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.WasDealtDamageThisTurnPredicate;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 
 import java.util.UUID;
 
@@ -83,7 +83,7 @@ public class BushiTenderfoot extends CardImpl {
     }
 }
 
-class KenzoTheHardhearted extends Token {
+class KenzoTheHardhearted extends TokenImpl {
 
     KenzoTheHardhearted() {
         super("Kenzo the Hardhearted", "");

@@ -51,7 +51,7 @@ import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 import mage.players.Player;
 
 /**
@@ -115,7 +115,7 @@ class SasayaOrochiAscendantFlipEffect extends OneShotEffect {
     }
 }
 
-class SasayasEssence extends Token {
+class SasayasEssence extends TokenImpl {
 
     SasayasEssence() {
         super("Sasaya's Essence", "");

@@ -40,7 +40,7 @@ import mage.abilities.keyword.HasteAbility;
  *
  * @author LoneFox
  */
-public class SoldierTokenWithHaste extends Token {
+public class SoldierTokenWithHaste extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 

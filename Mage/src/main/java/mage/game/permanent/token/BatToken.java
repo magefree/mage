@@ -5,7 +5,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-public class BatToken extends Token {
+public class BatToken extends TokenImpl {
 
     public BatToken() {
         super("Bat", "1/1 black Bat creature token with flying");

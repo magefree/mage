@@ -43,7 +43,7 @@ import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -109,7 +109,7 @@ class VastwoodAnimistEffect extends OneShotEffect {
     }
 }
 
-class VastwoodAnimistElementalToken extends Token {
+class VastwoodAnimistElementalToken extends TokenImpl {
 
     VastwoodAnimistElementalToken(int amount) {
         super("", "X/X Elemental creature, where X is the number of Allies you control");

@@ -46,7 +46,7 @@ import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 /**
  *
  * @author fireshoes
@@ -87,7 +87,7 @@ public class PrideOfTheClouds extends CardImpl {
         return new PrideOfTheClouds(this);
     }
 
-    private static class BirdToken extends Token {
+    private static class BirdToken extends TokenImpl {
 
         public BirdToken() {
             super("Bird", "1/1 white and blue Bird creature token with flying");

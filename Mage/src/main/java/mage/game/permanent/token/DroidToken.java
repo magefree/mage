@@ -37,7 +37,7 @@ import mage.constants.SubType;
  *
  * @author Styxo
  */
-public class DroidToken extends Token {
+public class DroidToken extends TokenImpl {
 
     public DroidToken() {
         super("Droid", "1/1 colorless Droid creature token");

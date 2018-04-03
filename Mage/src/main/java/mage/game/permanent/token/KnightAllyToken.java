@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class KnightAllyToken extends Token {
+public class KnightAllyToken extends TokenImpl {
 
     public KnightAllyToken() {
         super("Knight Ally", "2/2 white Knight Ally creature token");

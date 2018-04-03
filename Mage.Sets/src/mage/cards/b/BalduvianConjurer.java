@@ -37,7 +37,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SupertypePredicate;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -77,7 +77,7 @@ public class BalduvianConjurer extends CardImpl {
     }
 }
 
-class AnimatedLand extends Token {
+class AnimatedLand extends TokenImpl {
 
     public AnimatedLand() {
         super("", "2/2 creature");

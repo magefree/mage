@@ -36,7 +36,7 @@ import mage.constants.SubType;
  *
  * @author TheElk801
  */
-public class PirateToken extends Token {
+public class PirateToken extends TokenImpl {
 
     public PirateToken() {
         super("Pirate", "2/2 black Pirate creature token with menace");

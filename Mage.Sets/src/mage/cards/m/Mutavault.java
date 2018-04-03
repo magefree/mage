@@ -38,7 +38,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 
 /**
  *
@@ -67,7 +67,7 @@ public class Mutavault extends CardImpl {
     }
 }
 
-class MutavaultToken extends Token {
+class MutavaultToken extends TokenImpl {
 
     public MutavaultToken() {
         super("", "2/2 creature with all creature types");

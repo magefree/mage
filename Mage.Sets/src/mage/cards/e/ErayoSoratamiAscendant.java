@@ -43,7 +43,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.common.CastSpellLastTurnWatcher;
 
@@ -119,7 +119,7 @@ class ErayoSoratamiAscendantTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class ErayosEssence extends Token {
+class ErayosEssence extends TokenImpl {
 
     ErayosEssence() {
         super("Erayo's Essence", "");

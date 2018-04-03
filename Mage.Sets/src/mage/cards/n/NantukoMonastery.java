@@ -43,7 +43,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 
 /**
  *
@@ -74,7 +74,7 @@ public class NantukoMonastery extends CardImpl {
     }
 }
 
-class NantukoMonasteryToken extends Token {
+class NantukoMonasteryToken extends TokenImpl {
 
     public NantukoMonasteryToken() {
         super("", "4/4 green and white Insect Monk creature with first strike");

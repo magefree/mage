@@ -36,7 +36,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 
 import java.util.UUID;
 
@@ -71,7 +71,7 @@ public class LivingLands extends CardImpl {
     }
 }
 
-class LivingLandsToken extends Token {
+class LivingLandsToken extends TokenImpl {
 
     public LivingLandsToken() {
         super("", "1/1 creatures");

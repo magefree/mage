@@ -42,7 +42,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 
 /**
  *
@@ -82,7 +82,7 @@ public class Skinshifter extends CardImpl {
         return new Skinshifter(this);
     }
 
-    private class RhinoToken extends Token {
+    private class RhinoToken extends TokenImpl {
 
         public RhinoToken() {
             super("Rhino", "Rhino with base power and toughness 4/4 and gains trample");
@@ -103,7 +103,7 @@ public class Skinshifter extends CardImpl {
         }
     }
 
-    private class BirdToken extends Token {
+    private class BirdToken extends TokenImpl {
 
         public BirdToken() {
             super("Bird", "Bird with base power and toughness 2/2 and gains flying");
@@ -124,7 +124,7 @@ public class Skinshifter extends CardImpl {
         }
     }
 
-    private class PlantToken extends Token {
+    private class PlantToken extends TokenImpl {
 
         public PlantToken() {
             super("Plant", "Plant with base power and toughness 0/8");

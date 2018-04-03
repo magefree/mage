@@ -40,7 +40,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 
 /**
  *
@@ -69,7 +69,7 @@ public class GuardianIdol extends CardImpl {
     }
 }
 
-class GuardianIdolGolemToken extends Token {
+class GuardianIdolGolemToken extends TokenImpl {
 
     public GuardianIdolGolemToken() {
         super("Golem", "2/2 Golem artifact creature token");

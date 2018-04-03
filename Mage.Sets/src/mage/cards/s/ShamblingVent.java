@@ -42,7 +42,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 
 /**
  *
@@ -75,7 +75,7 @@ public class ShamblingVent extends CardImpl {
     }
 }
 
-class ShamblingVentToken extends Token {
+class ShamblingVentToken extends TokenImpl {
 
     public ShamblingVentToken() {
         super("", "2/3 white and black Elemental creature with lifelink");

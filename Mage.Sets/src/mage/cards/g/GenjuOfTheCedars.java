@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterLandPermanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
 
@@ -85,7 +85,7 @@ public class GenjuOfTheCedars extends CardImpl {
         return new GenjuOfTheCedars(this);
     }
 
-    private static class SpiritToken extends Token {
+    private static class SpiritToken extends TokenImpl {
 
         SpiritToken() {
             super("", "4/4 green Spirit creature");

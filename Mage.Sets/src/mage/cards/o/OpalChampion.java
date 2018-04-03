@@ -41,7 +41,7 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureSpell;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 
 import java.util.UUID;
 
@@ -72,7 +72,7 @@ public class OpalChampion extends CardImpl {
     }
 }
 
-class OpalChampionKnight extends Token {
+class OpalChampionKnight extends TokenImpl {
 
     public OpalChampionKnight() {
         super("Knight", "3/3 Knight creature with first strike");

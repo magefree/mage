@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author TheElk801
  */
-public class TreasureToken extends Token {
+public class TreasureToken extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 

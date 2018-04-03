@@ -36,7 +36,7 @@ import mage.abilities.keyword.DefenderAbility;
  *
  * @author spjspj
  */
-public class DarettiConstructToken extends Token {
+public class DarettiConstructToken extends TokenImpl {
 
     public DarettiConstructToken() {
         this("CNS");

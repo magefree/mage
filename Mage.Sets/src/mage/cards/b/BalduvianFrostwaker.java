@@ -40,7 +40,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SupertypePredicate;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
 
 /**
@@ -79,7 +79,7 @@ public class BalduvianFrostwaker extends CardImpl {
     }
 }
 
-class BalduvianFrostwakerToken extends Token {
+class BalduvianFrostwakerToken extends TokenImpl {
 
     public BalduvianFrostwakerToken() {
         super("Elemental", "2/2 blue Elemental creature with flying");

@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-public class GeminiEngineTwinToken extends Token {
+public class GeminiEngineTwinToken extends TokenImpl {
 
     public GeminiEngineTwinToken(int power, int toughness) {
         super("Twin", "colorless Construct artifact creature token named Twin that's attacking. Its power is equal to Gemini Engine's power and its toughness is equal to Gemini Engine's toughness.");

@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class TreefolkShamanToken extends Token {
+public class TreefolkShamanToken extends TokenImpl {
 
     public TreefolkShamanToken() {
         super("Treefolk Shaman", "2/5 green Treefolk Shaman creature token");

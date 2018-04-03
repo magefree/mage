@@ -35,7 +35,7 @@ import mage.constants.SubType;
  *
  * @author spjspj
  */
-public class CatWarriorToken extends Token {
+public class CatWarriorToken extends TokenImpl {
 
     public CatWarriorToken() {
         super("Cat Warrior", "2/2 green Cat Warrior creature token with forestwalk");

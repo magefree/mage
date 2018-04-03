@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class EldraziHorrorToken extends Token {
+public class EldraziHorrorToken extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 

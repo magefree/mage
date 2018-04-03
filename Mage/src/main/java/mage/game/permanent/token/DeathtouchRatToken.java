@@ -36,7 +36,7 @@ import mage.constants.SubType;
  *
  * @author Saga
  */
-public class DeathtouchRatToken extends Token {
+public class DeathtouchRatToken extends TokenImpl {
 
     public DeathtouchRatToken() {
         super("Rat", "1/1 black Rat creature token with deathtouch");

@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class LizardToken extends Token {
+public class LizardToken extends TokenImpl {
 
     public LizardToken() {
         super("Lizard", "2/2 green Lizard creature token");

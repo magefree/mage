@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Saga
  */
-public class DragonTokenGold extends Token {
+public class DragonTokenGold extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 

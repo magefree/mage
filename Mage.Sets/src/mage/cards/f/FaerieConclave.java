@@ -41,7 +41,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 
 /**
  *
@@ -66,7 +66,7 @@ public class FaerieConclave extends CardImpl {
     }
 }
 
-class FaerieConclaveToken extends Token {
+class FaerieConclaveToken extends TokenImpl {
     FaerieConclaveToken() {
         super("Faerie", "2/1 blue Faerie creature with flying");
         cardType.add(CardType.CREATURE);

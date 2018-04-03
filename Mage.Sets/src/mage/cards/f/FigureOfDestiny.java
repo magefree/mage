@@ -45,7 +45,7 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 
 /**
  *
@@ -101,7 +101,7 @@ public class FigureOfDestiny extends CardImpl {
         return new FigureOfDestiny(this);
     }
 
-    private class FigureOfDestinyToken1 extends Token {
+    private class FigureOfDestinyToken1 extends TokenImpl {
 
         public FigureOfDestinyToken1() {
             super("Figure of Destiny", "Kithkin Spirit with base power and toughness 2/2");
@@ -124,7 +124,7 @@ public class FigureOfDestiny extends CardImpl {
         }
     }
 
-    private class FigureOfDestinyToken2 extends Token {
+    private class FigureOfDestinyToken2 extends TokenImpl {
 
         public FigureOfDestinyToken2() {
             super("Figure of Destiny", "Kithkin Spirit Warrior with base power and toughness 4/4");
@@ -148,7 +148,7 @@ public class FigureOfDestiny extends CardImpl {
 
     }
 
-    private class FigureOfDestinyToken3 extends Token {
+    private class FigureOfDestinyToken3 extends TokenImpl {
 
         public FigureOfDestinyToken3() {
             super("Figure of Destiny", "Kithkin Spirit Warrior Avatar with base power and toughness 8/8, flying, and first strike");

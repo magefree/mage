@@ -39,7 +39,7 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -73,7 +73,7 @@ public class AnthousaSetessanHero extends CardImpl {
     }
 }
 
-class AnthousaWarriorToken extends Token {
+class AnthousaWarriorToken extends TokenImpl {
 
     public AnthousaWarriorToken() {
         super("", "2/2 Warrior creatures");

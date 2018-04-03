@@ -34,7 +34,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class IllusionToken extends Token {
+public class IllusionToken extends TokenImpl {
 
     public IllusionToken() {
         super("Illusion", "2/2 blue Illusion creature token");

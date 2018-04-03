@@ -41,7 +41,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 
 /**
  * @author LevelX2
@@ -68,7 +68,7 @@ public class GolgariKeyrune extends CardImpl {
         return new GolgariKeyrune(this);
     }
 
-    private static class GolgariKeyruneToken extends Token {
+    private static class GolgariKeyruneToken extends TokenImpl {
         GolgariKeyruneToken() {
             super("", "2/2 black and green Insect artifact creature with deathtouch");
             cardType.add(CardType.ARTIFACT);

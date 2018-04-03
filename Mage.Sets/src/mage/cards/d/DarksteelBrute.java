@@ -39,7 +39,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 
 /**
  *
@@ -64,7 +64,7 @@ public class DarksteelBrute extends CardImpl {
 
 }
 
-class DarksteelBruteToken extends Token {
+class DarksteelBruteToken extends TokenImpl {
     public DarksteelBruteToken() {
         super("", "2/2 Beast artifact creature");
         cardType.add(CardType.ARTIFACT);

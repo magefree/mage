@@ -9,7 +9,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class KithkinToken extends Token {
+public class KithkinToken extends TokenImpl {
 
     public KithkinToken() {
         super("Kithkin Soldier", "1/1 white Kithkin Soldier creature token");

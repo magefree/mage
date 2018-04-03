@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class ElfToken extends Token {
+public class ElfToken extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 

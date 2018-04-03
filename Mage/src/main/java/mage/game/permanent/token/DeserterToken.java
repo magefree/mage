@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class DeserterToken extends Token {
+public class DeserterToken extends TokenImpl {
 
     public DeserterToken() {
         super("Deserter", "0/1 white Deserter creature token");

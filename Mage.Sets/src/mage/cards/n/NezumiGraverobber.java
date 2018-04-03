@@ -47,7 +47,7 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInGraveyard;
@@ -118,7 +118,7 @@ class NezumiGraverobberFlipEffect extends OneShotEffect {
 
 }
 
-class NighteyesTheDesecratorToken extends Token {
+class NighteyesTheDesecratorToken extends TokenImpl {
     
     NighteyesTheDesecratorToken() {            
         super("Nighteyes the Desecrator", "");

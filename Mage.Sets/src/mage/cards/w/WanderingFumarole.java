@@ -43,7 +43,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 
 /**
  *
@@ -78,7 +78,7 @@ public class WanderingFumarole extends CardImpl {
     }
 }
 
-class WanderingFumaroleToken extends Token {
+class WanderingFumaroleToken extends TokenImpl {
 
     public WanderingFumaroleToken() {
         super("", "1/4 blue and red Elemental creature with \"0: Switch this creature's power and toughness until end of turn.\"");

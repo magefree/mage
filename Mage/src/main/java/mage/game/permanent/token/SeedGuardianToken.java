@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class SeedGuardianToken extends Token {
+public class SeedGuardianToken extends TokenImpl {
 
     public SeedGuardianToken() {
         this(1);

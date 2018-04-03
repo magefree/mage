@@ -41,7 +41,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 
 /**
  *
@@ -70,7 +70,7 @@ public class KolaghanMonument extends CardImpl {
         return new KolaghanMonument(this);
     }
     
-    private class KolaghanMonumentToken extends Token {
+    private class KolaghanMonumentToken extends TokenImpl {
         KolaghanMonumentToken() {
             super("", "4/4 black and red Dragon artifact creature with flying");
             cardType.add(CardType.ARTIFACT);

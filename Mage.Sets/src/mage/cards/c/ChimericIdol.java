@@ -41,7 +41,7 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 
 /**
  *
@@ -69,7 +69,7 @@ public class ChimericIdol extends CardImpl {
     }
 }
 
-class ChimericIdolToken extends Token {
+class ChimericIdolToken extends TokenImpl {
 
     public ChimericIdolToken() {
         super("Turtle", "3/3 Turtle artifact creature token");

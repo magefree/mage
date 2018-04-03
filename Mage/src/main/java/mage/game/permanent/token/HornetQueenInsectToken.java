@@ -37,7 +37,7 @@ import mage.abilities.keyword.FlyingAbility;
  *
  * @author spjspj
  */
-public class HornetQueenInsectToken extends Token {
+public class HornetQueenInsectToken extends TokenImpl {
 
     public HornetQueenInsectToken() {
         super("Insect", "1/1 green Insect creature token with flying and deathtouch");

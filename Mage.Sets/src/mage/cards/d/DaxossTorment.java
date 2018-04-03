@@ -38,7 +38,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 
 /**
  *
@@ -63,7 +63,7 @@ public class DaxossTorment extends CardImpl {
     }
 }
 
-class DaxossTormentToken extends Token {
+class DaxossTormentToken extends TokenImpl {
 
     public DaxossTormentToken() {
         super("", "5/5 Demon creature with flying and haste");

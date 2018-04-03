@@ -41,7 +41,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 
 /**
  * @author LevelX2
@@ -68,7 +68,7 @@ public class RakdosKeyrune extends CardImpl {
         return new RakdosKeyrune(this);
     }
 
-    private static class RakdosKeyruneToken extends Token {
+    private static class RakdosKeyruneToken extends TokenImpl {
         RakdosKeyruneToken() {
             super("", "3/1 black and red Devil artifact creature with first strike");
             cardType.add(CardType.ARTIFACT);

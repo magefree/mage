@@ -37,7 +37,7 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
 
@@ -73,7 +73,7 @@ public class LivingTerrain extends CardImpl {
     }
 }
 
-class TreefolkToken extends Token {
+class TreefolkToken extends TokenImpl {
         TreefolkToken() {
             super("Treefolk", "5/6 green Treefolk creature");
             cardType.add(CardType.CREATURE);

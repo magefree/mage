@@ -42,7 +42,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 
 /**
  *
@@ -78,7 +78,7 @@ public class GlintHawkIdol extends CardImpl {
 
 }
 
-class GlintHawkIdolToken extends Token {
+class GlintHawkIdolToken extends TokenImpl {
     GlintHawkIdolToken() {
         super("", "2/2 Bird artifact creature with flying");
         cardType.add(CardType.ARTIFACT);

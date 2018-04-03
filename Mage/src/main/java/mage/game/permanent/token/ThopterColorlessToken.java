@@ -40,7 +40,7 @@ import mage.util.RandomUtil;
  *
  * @author fireshoes
  */
-public class ThopterColorlessToken extends Token {
+public class ThopterColorlessToken extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 

@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author Styxo
  */
-public class ElementalShamanToken extends Token {
+public class ElementalShamanToken extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 

@@ -41,7 +41,7 @@ import mage.constants.Duration;
 import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 
 import java.util.UUID;
 
@@ -78,7 +78,7 @@ public class HiddenAncients extends CardImpl {
     }
 }
 
-class HiddenAncientsTreefolk extends Token {
+class HiddenAncientsTreefolk extends TokenImpl {
 
     public HiddenAncientsTreefolk() {
         super("Treefolk", "5/5 Treefolk creature");

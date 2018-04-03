@@ -42,7 +42,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author spjspj
  */
-public class TriskelaviteToken extends Token {
+public class TriskelaviteToken extends TokenImpl {
 
     public TriskelaviteToken() {
         super("Triskelavite", "1/1 colorless Triskelavite artifact creature token with flying. It has \"Sacrifice this creature: This creature deals 1 damage to target creature or player.\"");

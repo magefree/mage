@@ -39,7 +39,7 @@ import mage.constants.TurnPhase;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 
 /**
  *
@@ -94,7 +94,7 @@ class MongrelPackAbility extends ZoneChangeTriggeredAbility {
     }
 }
 
-class HoundToken extends Token {
+class HoundToken extends TokenImpl {
 
     public HoundToken() {
         super("Hound", "1/1 green Hound creature token");

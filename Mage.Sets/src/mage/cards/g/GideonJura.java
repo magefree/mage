@@ -49,7 +49,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetOpponent;
 
@@ -101,7 +101,7 @@ public class GideonJura extends CardImpl {
 
 }
 
-class GideonJuraToken extends Token {
+class GideonJuraToken extends TokenImpl {
 
     public GideonJuraToken() {
         super("", "6/6 Human Soldier creature");

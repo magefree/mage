@@ -36,7 +36,7 @@ import mage.abilities.keyword.ReachAbility;
  *
  * @author spjspj
  */
-public class PenumbraSpiderToken extends Token {
+public class PenumbraSpiderToken extends TokenImpl {
 
     public PenumbraSpiderToken() {
 

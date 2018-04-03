@@ -36,7 +36,7 @@ import mage.constants.SuperType;
  *
  * @author spjspj
  */
-public class TuktukTheReturnedToken extends Token {
+public class TuktukTheReturnedToken extends TokenImpl {
 
     public TuktukTheReturnedToken() {
         this("ROE");

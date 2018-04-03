@@ -38,7 +38,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 
 /**
  *
@@ -62,7 +62,7 @@ public class StalkingStones extends CardImpl {
     }
 }
 
-class StalkingStonesToken extends Token {
+class StalkingStonesToken extends TokenImpl {
 
     public StalkingStonesToken() {
         super("Elemental", "3/3 Elemental artifact");

@@ -39,7 +39,7 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
 
 /**
@@ -78,7 +78,7 @@ public class SiegeOfTowers extends CardImpl {
     }
 }
 
-class SiegeOfTowersToken extends Token {
+class SiegeOfTowersToken extends TokenImpl {
     public SiegeOfTowersToken() {
         super("", "3/1 creature");
         cardType.add(CardType.CREATURE);

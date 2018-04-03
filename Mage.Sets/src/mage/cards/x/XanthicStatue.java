@@ -38,7 +38,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 
 /**
  *
@@ -64,7 +64,7 @@ public class XanthicStatue extends CardImpl {
     }
 }
 
-class XanthicStatueCreature extends Token {
+class XanthicStatueCreature extends TokenImpl {
 
     public XanthicStatueCreature() {
         super("Xanthic Statue", "8/8 Golem artifact creature with trample");

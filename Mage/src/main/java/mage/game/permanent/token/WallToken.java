@@ -36,7 +36,7 @@ import mage.abilities.keyword.DefenderAbility;
  *
  * @author spjspj
  */
-public class WallToken extends Token {
+public class WallToken extends TokenImpl {
 
     public WallToken() {
         super("", "2/6 white wall creature with defender");

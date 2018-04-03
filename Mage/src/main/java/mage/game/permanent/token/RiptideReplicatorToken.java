@@ -36,7 +36,7 @@ import mage.constants.SubType;
  *
  * @author spjspj
  */
-public class RiptideReplicatorToken extends Token {
+public class RiptideReplicatorToken extends TokenImpl {
 
     public RiptideReplicatorToken() {
         this(null, null, 1);

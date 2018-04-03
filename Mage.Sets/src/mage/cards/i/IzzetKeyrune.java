@@ -45,7 +45,7 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 import mage.players.Player;
 
 /**
@@ -105,7 +105,7 @@ public class IzzetKeyrune extends CardImpl {
         }
     }
 
-    private static class IzzetKeyruneToken extends Token {
+    private static class IzzetKeyruneToken extends TokenImpl {
         IzzetKeyruneToken() {
             super("", "2/1 blue and red Elemental artifact creature");
             cardType.add(CardType.ARTIFACT);

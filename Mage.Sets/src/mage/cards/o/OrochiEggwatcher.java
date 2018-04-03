@@ -52,7 +52,7 @@ import mage.constants.Zone;
 import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.permanent.token.SnakeToken;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -90,7 +90,7 @@ public class OrochiEggwatcher extends CardImpl {
     }
 }
 
-class ShidakoBroodmistress extends Token {
+class ShidakoBroodmistress extends TokenImpl {
 
     ShidakoBroodmistress() {
         super("Shidako, Broodmistress", "");

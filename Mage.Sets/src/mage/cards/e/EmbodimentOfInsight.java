@@ -45,7 +45,7 @@ import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
 
 /**
@@ -90,7 +90,7 @@ public class EmbodimentOfInsight extends CardImpl {
     }
 }
 
-class EmbodimentOfInsightToken extends Token {
+class EmbodimentOfInsightToken extends TokenImpl {
 
     public EmbodimentOfInsightToken() {
         super("", "3/3 Elemental creature with haste");

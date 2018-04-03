@@ -38,7 +38,7 @@ import mage.abilities.keyword.FlyingAbility;
  *
  * @author LoneFox
  */
-public class PegasusToken extends Token {
+public class PegasusToken extends TokenImpl {
 
     public PegasusToken() {
         super("Pegasus", "1/1 white Pegasus creature token with flying");

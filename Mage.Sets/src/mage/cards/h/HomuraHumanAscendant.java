@@ -52,7 +52,7 @@ import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 import mage.players.Player;
 
 /**
@@ -127,7 +127,7 @@ class HomuraReturnFlippedSourceEffect extends OneShotEffect {
 
 }
 
-class HomurasEssence2 extends Token {
+class HomurasEssence2 extends TokenImpl {
 
     HomurasEssence2() {
         super("Homura's Essence", "");

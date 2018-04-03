@@ -41,7 +41,7 @@ import mage.constants.Duration;
 import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 
 import java.util.UUID;
 
@@ -78,7 +78,7 @@ public class HiddenGibbons extends CardImpl {
     }
 }
 
-class HiddenGibbonsApe extends Token {
+class HiddenGibbonsApe extends TokenImpl {
 
     public HiddenGibbonsApe() {
         super("Ape", "4/4 Ape creature");

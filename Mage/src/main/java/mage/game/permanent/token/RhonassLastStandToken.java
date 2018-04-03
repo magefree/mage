@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class RhonassLastStandToken extends Token {
+public class RhonassLastStandToken extends TokenImpl {
 
     public RhonassLastStandToken() {
         super("Snake", "5/4 green Snake creature token");

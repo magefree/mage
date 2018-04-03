@@ -41,7 +41,7 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterArtifactSpell;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 
 import java.util.UUID;
 
@@ -72,7 +72,7 @@ public class HiddenGuerrillas extends CardImpl {
     }
 }
 
-class HiddenGuerrillasSoldier extends Token {
+class HiddenGuerrillasSoldier extends TokenImpl {
 
     public HiddenGuerrillasSoldier() {
         super("Soldier", "5/3 Soldier creature with trample");

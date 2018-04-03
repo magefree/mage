@@ -48,7 +48,7 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 import mage.target.Target;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.targetpointer.FixedTarget;
@@ -158,7 +158,7 @@ public class AwakenAbility extends SpellAbility {
 
 }
 
-class AwakenElementalToken extends Token {
+class AwakenElementalToken extends TokenImpl {
 
     public AwakenElementalToken() {
         super("", "0/0 Elemental creature with haste");

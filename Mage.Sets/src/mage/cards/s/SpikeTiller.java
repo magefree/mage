@@ -44,7 +44,7 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetLandPermanent;
 
@@ -88,7 +88,7 @@ public class SpikeTiller extends CardImpl {
     }
 }
 
-class SpikeTillerToken extends Token {
+class SpikeTillerToken extends TokenImpl {
 
     public SpikeTillerToken() {
         super("", "2/2 creature");

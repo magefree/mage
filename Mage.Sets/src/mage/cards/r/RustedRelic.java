@@ -40,7 +40,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 
 /**
  *
@@ -67,7 +67,7 @@ public class RustedRelic extends CardImpl {
     }
 }
 
-class RustedRelicToken extends Token {
+class RustedRelicToken extends TokenImpl {
 
     public RustedRelicToken() {
         super("Rusted Relic", "5/5 Golem artifact creature");

@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class HoundToken extends Token {
+public class HoundToken extends TokenImpl {
 
     public HoundToken() {
         super("Hound", "1/1 green Hound creature token");

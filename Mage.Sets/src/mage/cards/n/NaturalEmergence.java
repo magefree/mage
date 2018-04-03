@@ -45,7 +45,7 @@ import mage.filter.common.FilterControlledEnchantmentPermanent;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 
 /**
  *
@@ -82,7 +82,7 @@ public class NaturalEmergence extends CardImpl {
     }
 }
 
-class NaturalEmergenceToken extends Token {
+class NaturalEmergenceToken extends TokenImpl {
 
     public NaturalEmergenceToken() {
         super("Land", "2/2 creatures with first strike");

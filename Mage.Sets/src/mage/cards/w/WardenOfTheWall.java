@@ -42,7 +42,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 
 /**
  *
@@ -73,7 +73,7 @@ public class WardenOfTheWall extends CardImpl {
     }
 }
 
-class GargoyleToken extends Token {
+class GargoyleToken extends TokenImpl {
 
     public GargoyleToken() {
         super("", "2/3 Gargoyle artifact creature with flying");

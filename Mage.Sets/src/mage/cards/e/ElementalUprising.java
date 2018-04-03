@@ -39,7 +39,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
 
 /**
@@ -69,7 +69,7 @@ public class ElementalUprising extends CardImpl {
     }
 }
 
-class ElementalUprisingToken extends Token {
+class ElementalUprisingToken extends TokenImpl {
 
     public ElementalUprisingToken() {
         super("", "4/4 Elemental creature with haste");

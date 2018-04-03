@@ -38,7 +38,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  *
  * @author LevelX2
  */
-public class TokenActivatedAbilityTest extends CardTestPlayerBase {
+public class TokenImplActivatedAbilityTest extends CardTestPlayerBase {
 
     /**
      * Check that activated ability of created token works

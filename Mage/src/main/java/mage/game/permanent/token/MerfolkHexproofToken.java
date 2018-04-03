@@ -16,7 +16,7 @@ import mage.constants.SubType;
  * @author TacomenX
  */
 
-public class MerfolkHexproofToken extends Token {
+public class MerfolkHexproofToken extends TokenImpl {
     
     public MerfolkHexproofToken() {
         super("Merfolk", "1/1 blue Merfolk creature token with hexproof");

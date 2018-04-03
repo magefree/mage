@@ -34,7 +34,7 @@ import mage.constants.SubType;
  *
  * @author spjspj
  */
-public class TuskenRaiderToken extends Token {
+public class TuskenRaiderToken extends TokenImpl {
 
     public TuskenRaiderToken() {
         super("Tusken Raider", "white Tusken Raider creature token", 1, 1);

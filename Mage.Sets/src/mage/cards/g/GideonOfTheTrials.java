@@ -44,7 +44,7 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.game.command.emblems.GideonOfTheTrialsEmblem;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
 
 /**
@@ -90,7 +90,7 @@ public class GideonOfTheTrials extends CardImpl {
     }
 }
 
-class GideonOfTheTrialsToken extends Token {
+class GideonOfTheTrialsToken extends TokenImpl {
 
     public GideonOfTheTrialsToken() {
         super("", "a 4/4 Human Soldier creature with indestructible");

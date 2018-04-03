@@ -43,7 +43,7 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreatureInPlay;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 import mage.players.Player;
 
 /**
@@ -108,7 +108,7 @@ class RuneTailKitsuneAscendantFlipAbility extends StateTriggeredAbility {
 
 }
 
-class RuneTailEssence extends Token {
+class RuneTailEssence extends TokenImpl {
 
     RuneTailEssence() {
         super("Rune-Tail's Essence", "");

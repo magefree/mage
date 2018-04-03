@@ -49,7 +49,7 @@ import mage.players.Player;
 import mage.util.RandomUtil;
 import mage.util.SubTypeList;
 
-public abstract class Token extends MageObjectImpl {
+public abstract class TokenImpl extends MageObjectImpl implements Token {
 
     protected String description;
     private final ArrayList<UUID> lastAddedTokenIds = new ArrayList<>();
@@ -80,18 +80,18 @@ public abstract class Token extends MageObjectImpl {
         }
     }
 
-    public Token(String name, String description) {
+    public TokenImpl(String name, String description) {
         this.name = name;
         this.description = description;
     }
 
-    public Token(String name, String description, int power, int toughness) {
+    public TokenImpl(String name, String description, int power, int toughness) {
         this(name, description);
         this.power.modifyBaseValue(power);
         this.toughness.modifyBaseValue(toughness);
     }
 
-    public Token(final Token token) {
+    public TokenImpl(final TokenImpl token) {
         super(token);
         this.description = token.description;
         this.tokenType = token.tokenType;

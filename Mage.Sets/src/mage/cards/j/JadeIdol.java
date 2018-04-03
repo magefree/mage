@@ -38,7 +38,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.filter.StaticFilters;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 
 /**
  * @author Loki
@@ -61,7 +61,7 @@ public class JadeIdol extends CardImpl {
 
 }
 
-class JadeIdolToken extends Token {
+class JadeIdolToken extends TokenImpl {
     JadeIdolToken() {
         super("", "4/4 Spirit artifact creature");
         cardType.add(CardType.ARTIFACT);

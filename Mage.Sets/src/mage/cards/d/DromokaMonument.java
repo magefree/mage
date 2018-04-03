@@ -41,7 +41,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 
 /**
  *
@@ -70,7 +70,7 @@ public class DromokaMonument extends CardImpl {
         return new DromokaMonument(this);
     }
     
-    private class DromokaMonumentToken extends Token {
+    private class DromokaMonumentToken extends TokenImpl {
         DromokaMonumentToken() {
             super("", "4/4 green and white Dragon artifact creature with flying");
             cardType.add(CardType.ARTIFACT);

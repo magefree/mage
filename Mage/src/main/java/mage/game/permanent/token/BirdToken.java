@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author LoneFox
  */
-public class BirdToken extends Token {
+public class BirdToken extends TokenImpl {
 
     public BirdToken() {
         super("Bird", "1/1 white Bird creature token with flying");

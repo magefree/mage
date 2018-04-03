@@ -41,7 +41,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 
 /**
  *
@@ -69,7 +69,7 @@ public class BorosKeyrune extends CardImpl {
         return new BorosKeyrune(this);
     }
 
-    private static class BorosKeyruneToken extends Token {
+    private static class BorosKeyruneToken extends TokenImpl {
         BorosKeyruneToken() {
             super("Soldier", "1/1 red and white Soldier artifact creature with double strike");
             cardType.add(CardType.ARTIFACT);

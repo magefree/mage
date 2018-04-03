@@ -43,7 +43,7 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 
 /**
  *
@@ -73,7 +73,7 @@ public class EnsouledScimitar extends CardImpl {
     }
 }
 
-class EnsouledScimitarToken extends Token {
+class EnsouledScimitarToken extends TokenImpl {
 
     public EnsouledScimitarToken() {
         super("Pincher", "1/5 Spirit artifact creature with flying");

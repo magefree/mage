@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author TheElk801
  */
-public class CarrionBlackInsectToken extends Token {
+public class CarrionBlackInsectToken extends TokenImpl {
 
     public CarrionBlackInsectToken() {
         super("Insect", "0/1 black Insect creature token");

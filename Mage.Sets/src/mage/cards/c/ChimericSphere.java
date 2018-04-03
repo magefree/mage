@@ -38,7 +38,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 
 /**
  *
@@ -67,7 +67,7 @@ public class ChimericSphere extends CardImpl {
     }
 }
 
-class ChimericSphereCreature1 extends Token {
+class ChimericSphereCreature1 extends TokenImpl {
 
     public ChimericSphereCreature1() {
         super("Chimeric Sphere", "2/1 Construct artifact creature with flying");
@@ -87,7 +87,7 @@ class ChimericSphereCreature1 extends Token {
     }
 }
 
-class ChimericSphereCreature2 extends Token {
+class ChimericSphereCreature2 extends TokenImpl {
 
     public ChimericSphereCreature2() {
         super("Chimeric Sphere", "3/2 Construct artifact creature without flying");

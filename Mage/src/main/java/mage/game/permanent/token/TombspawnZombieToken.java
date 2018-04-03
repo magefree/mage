@@ -36,7 +36,7 @@ import mage.abilities.keyword.HasteAbility;
  *
  * @author L_J
  */
-public class TombspawnZombieToken extends Token {
+public class TombspawnZombieToken extends TokenImpl {
 
     public TombspawnZombieToken() {
         super("Tombspawn", "2/2 black Zombie creature token with haste named Tombspawn");

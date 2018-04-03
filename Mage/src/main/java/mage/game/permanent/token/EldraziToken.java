@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class EldraziToken extends Token {
+public class EldraziToken extends TokenImpl {
 
     public EldraziToken() {
         super("Eldrazi", "10/10 colorless Eldrazi creature token");

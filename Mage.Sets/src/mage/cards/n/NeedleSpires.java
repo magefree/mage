@@ -43,7 +43,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 
 /**
  *
@@ -77,7 +77,7 @@ public class NeedleSpires extends CardImpl {
     }
 }
 
-class NeedleSpiresToken extends Token {
+class NeedleSpiresToken extends TokenImpl {
 
     public NeedleSpiresToken() {
         super("", "2/1 red and white Elemental creature with double strike");

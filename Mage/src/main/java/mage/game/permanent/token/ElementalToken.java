@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author magenoxx
  */
-public class ElementalToken extends Token {
+public class ElementalToken extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 

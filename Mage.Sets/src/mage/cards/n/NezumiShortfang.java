@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
 
@@ -83,7 +83,7 @@ public class NezumiShortfang extends CardImpl {
     }
 }
 
-class StabwhiskerTheOdious extends Token {
+class StabwhiskerTheOdious extends TokenImpl {
 
     StabwhiskerTheOdious() {
         super("Stabwhisker the Odious", "");

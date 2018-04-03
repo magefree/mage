@@ -41,7 +41,7 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetArtifactPermanent;
 
@@ -80,7 +80,7 @@ public class EnsoulArtifact extends CardImpl {
     }
 }
 
-class EnsoulArtifactToken extends Token {
+class EnsoulArtifactToken extends TokenImpl {
 
     EnsoulArtifactToken() {
         super("", "5/5");

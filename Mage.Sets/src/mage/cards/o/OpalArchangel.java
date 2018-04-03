@@ -42,7 +42,7 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureSpell;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 
 import java.util.UUID;
 
@@ -73,7 +73,7 @@ public class OpalArchangel extends CardImpl {
     }
 }
 
-class OpalArchangelToken extends Token {
+class OpalArchangelToken extends TokenImpl {
 
     public OpalArchangelToken() {
         super("Angel", "5/5 Angel creature with flying and vigilance");

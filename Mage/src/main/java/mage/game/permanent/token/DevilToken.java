@@ -42,7 +42,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author fireshoes
  */
-public class DevilToken extends Token {
+public class DevilToken extends TokenImpl {
 
     public DevilToken() {
         super("Devil", "1/1 red Devil creature with \"When this creature dies, it deals 1 damage to target creature or player.\"");

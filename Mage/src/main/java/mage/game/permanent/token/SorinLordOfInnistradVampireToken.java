@@ -36,7 +36,7 @@ import mage.abilities.keyword.LifelinkAbility;
  *
  * @author spjspj
  */
-public class SorinLordOfInnistradVampireToken extends Token {
+public class SorinLordOfInnistradVampireToken extends TokenImpl {
 
     public SorinLordOfInnistradVampireToken() {
         super("Vampire", "1/1 black Vampire creature token with lifelink");

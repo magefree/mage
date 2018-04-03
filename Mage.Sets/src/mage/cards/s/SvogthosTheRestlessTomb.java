@@ -44,7 +44,7 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 
 /**
  *
@@ -73,7 +73,7 @@ public class SvogthosTheRestlessTomb extends CardImpl {
     }
 }
 
-class SvogthosToken extends Token {
+class SvogthosToken extends TokenImpl {
 
     public SvogthosToken() {
         super("", "black and green Plant Zombie creature with \"This creature's power and toughness are each equal to the number of creature cards in your graveyard.\"");

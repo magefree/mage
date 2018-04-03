@@ -37,7 +37,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 
 /**
  *
@@ -64,7 +64,7 @@ public class NaturesRevolt extends CardImpl {
     }
 }
 
-class NaturesRevoltToken extends Token {
+class NaturesRevoltToken extends TokenImpl {
 
     public NaturesRevoltToken() {
         super("Land", "2/2 creatures");

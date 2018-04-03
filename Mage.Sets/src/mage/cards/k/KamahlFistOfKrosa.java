@@ -43,7 +43,7 @@ import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 import mage.target.common.TargetLandPermanent;
 
 /**
@@ -87,7 +87,7 @@ public class KamahlFistOfKrosa extends CardImpl {
     }
 }
 
-class KamahlFistOfKrosaLandToken extends Token {
+class KamahlFistOfKrosaLandToken extends TokenImpl {
 
     public KamahlFistOfKrosaLandToken() {
         super("", "1/1 creature");

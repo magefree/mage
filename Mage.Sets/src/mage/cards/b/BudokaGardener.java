@@ -43,7 +43,7 @@ import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.permanent.token.DokaiWeaverofLifeToken;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;import mage.game.permanent.token.Token;
 import mage.players.Player;
 
 import java.util.UUID;
@@ -111,7 +111,7 @@ class BudokaGardenerEffect extends OneShotEffect {
 
 }
 
-class DokaiWeaverofLife extends Token {
+class DokaiWeaverofLife extends TokenImpl {
 
     DokaiWeaverofLife() {
         super("Dokai, Weaver of Life", "");
