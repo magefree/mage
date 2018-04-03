@@ -91,19 +91,6 @@ public abstract class Token extends MageObjectImpl {
         this.toughness.modifyBaseValue(toughness);
     }
 
-    public Token(String name, String description, ObjectColor color, SubTypeList subtype, int power, int toughness, Abilities<Ability> abilities) {
-        this(name, description);
-        this.cardType.add(CardType.CREATURE);
-        this.color = color.copy();
-        this.subtype = subtype;
-        this.power.modifyBaseValue(power);
-        this.toughness.modifyBaseValue(toughness);
-        if (abilities != null) {
-            this.abilities = abilities.copy();
-        }
-        this.expansionSetCodeChecked = false;
-    }
-
     public Token(final Token token) {
         super(token);
         this.description = token.description;
@@ -117,6 +104,9 @@ public abstract class Token extends MageObjectImpl {
         this.availableImageSetCodes = token.availableImageSetCodes;
         this.isAllCreatureTypes = token.isAllCreatureTypes;
     }
+
+    @Override
+    public abstract Token copy();
 
     private void setTokenDescriptor() {
         this.tokenDescriptor = tokenDescriptor();
@@ -156,23 +146,6 @@ public abstract class Token extends MageObjectImpl {
         ability.setSourceId(this.getId());
         abilities.add(ability);
     }
-
-    //@Override
-    //public abstract Token copy();
-    /*{
-        return new Token(this);
-    }*/
-
-    @Override
-    public abstract Token copy();
-
-//    public Token copy() {
-//        try{
-//            return this.getClass().getConstructor(this.getClass()).newInstance(this);
-//        } catch( Exception e) {
-//
-//        }
-//    }
 
     public boolean putOntoBattlefield(int amount, Game game, UUID sourceId, UUID controllerId) {
         return this.putOntoBattlefield(amount, game, sourceId, controllerId, false, false);

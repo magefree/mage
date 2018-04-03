@@ -122,9 +122,9 @@ class OozeToken extends Token {
 
     public OozeToken(int x) {
         super("Ooze", "X/X green Ooze creature token, where X is the sacrificed creature's power");
+        this.cardType.add(CardType.CREATURE);
         this.color.addColor(ObjectColor.GREEN);
         this.subtype.add(SubType.OOZE);
-
         this.toughness = new MageInt(x);
         this.power = new MageInt(x);
     }

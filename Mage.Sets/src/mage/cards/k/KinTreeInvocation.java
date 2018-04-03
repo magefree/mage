@@ -109,11 +109,11 @@ class SpiritWarriorToken extends Token {
 
     public SpiritWarriorToken(int x) {
         super("Spirit Warrior", "X/X black and green Spirit Warrior creature token, where X is the greatest toughness among creatures you control");
+        this.cardType.add(CardType.CREATURE);
         this.subtype.add(SubType.SPIRIT);
         this.subtype.add(SubType.WARRIOR);
-        ObjectColor objectColor = new ObjectColor();
-        objectColor.setBlack(true);
-        objectColor.setGreen(true);
+        this.color.setBlack(true);
+        this.color.setGreen(true);
         this.power = new MageInt(x);
         this.toughness = new MageInt(x);
     }
