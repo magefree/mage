@@ -37,6 +37,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
+import mage.abilities.effects.common.discard.DiscardUpToNDrawThatManySourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -46,7 +47,6 @@ import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
 import mage.filter.common.FilterArtifactCard;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.game.Game;
@@ -56,7 +56,6 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetControlledPermanent;
-import mage.target.common.TargetDiscard;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -73,7 +72,7 @@ public class DarettiScrapSavant extends CardImpl {
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
 
         // +2: Discard up to two cards, then draw that many cards.
-        this.addAbility(new LoyaltyAbility(new DarettiDiscardDrawEffect(), 2));
+        this.addAbility(new LoyaltyAbility(new DiscardUpToNDrawThatManySourceEffect(2), 2));
 
         // -2: Sacrifice an artifact. If you do, return target artifact card from your graveyard to the battlefield.
         LoyaltyAbility loyaltyAbility = new LoyaltyAbility(new DarettiSacrificeEffect(), -2);
@@ -94,43 +93,6 @@ public class DarettiScrapSavant extends CardImpl {
     @Override
     public DarettiScrapSavant copy() {
         return new DarettiScrapSavant(this);
-    }
-}
-
-class DarettiDiscardDrawEffect extends OneShotEffect {
-
-    public DarettiDiscardDrawEffect() {
-        super(Outcome.Detriment);
-        this.staticText = "Discard up to two cards, then draw that many cards";
-    }
-
-    public DarettiDiscardDrawEffect(final DarettiDiscardDrawEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public DarettiDiscardDrawEffect copy() {
-        return new DarettiDiscardDrawEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            TargetDiscard target = new TargetDiscard(0, 2, new FilterCard(), controller.getId());
-            target.choose(outcome, controller.getId(), source.getSourceId(), game);
-            int count = 0;
-            for (UUID cardId : target.getTargets()) {
-                Card card = game.getCard(cardId);
-                if (card != null) {
-                    controller.discard(card, source, game);
-                    count++;
-                }
-            }
-            controller.drawCards(count, game);
-            return true;
-        }
-        return false;
     }
 }
 
