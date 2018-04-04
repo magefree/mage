@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.n;
+package mage.cards.z;
 
 import java.util.UUID;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -41,7 +41,7 @@ import mage.constants.CardType;
  */
 public class ZhalfirinVoid extends CardImpl {
 
-    public NewBenalia(UUID ownerId, CardSetInfo setInfo) {
+    public ZhalfirinVoid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
         // When Zhalfirin Void enters the battlefield, scry 1.
