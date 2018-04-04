@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class StitcherGeralfZombieToken extends Token {
+public class StitcherGeralfZombieToken extends TokenImpl {
 
     public StitcherGeralfZombieToken() {
         this(1);
@@ -49,5 +49,13 @@ public class StitcherGeralfZombieToken extends Token {
         subtype.add(SubType.ZOMBIE);
         power = new MageInt(xValue);
         toughness = new MageInt(xValue);
+    }
+
+    public StitcherGeralfZombieToken(final StitcherGeralfZombieToken token) {
+        super(token);
+    }
+
+    public StitcherGeralfZombieToken copy() {
+        return new StitcherGeralfZombieToken(this);
     }
 }

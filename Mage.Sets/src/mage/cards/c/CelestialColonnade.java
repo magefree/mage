@@ -43,6 +43,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 
 /**
@@ -71,7 +72,7 @@ public class CelestialColonnade extends CardImpl {
 
 }
 
-class CelestialColonnadeToken extends Token {
+class CelestialColonnadeToken extends TokenImpl {
 
     public CelestialColonnadeToken() {
         super("", "4/4 white and blue Elemental creature with flying and vigilance");
@@ -83,6 +84,13 @@ class CelestialColonnadeToken extends Token {
         toughness = new MageInt(4);
         addAbility(FlyingAbility.getInstance());
         addAbility(VigilanceAbility.getInstance());
+    }
+    public CelestialColonnadeToken(final CelestialColonnadeToken token) {
+        super(token);
+    }
+
+    public CelestialColonnadeToken copy() {
+        return new CelestialColonnadeToken(this);
     }
 
 }

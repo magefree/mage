@@ -46,6 +46,7 @@ import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterOpponentsCreaturePermanent;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 
 /**
@@ -95,7 +96,7 @@ public class GideonMartialParagon extends CardImpl {
     }
 }
 
-class GideonMartialParagonToken extends Token {
+class GideonMartialParagonToken extends TokenImpl {
 
     public GideonMartialParagonToken() {
         super("", "5/5 Human Soldier creature with indestructible");
@@ -106,5 +107,12 @@ class GideonMartialParagonToken extends Token {
         toughness = new MageInt(5);
 
         addAbility(IndestructibleAbility.getInstance());
+    }
+    public GideonMartialParagonToken(final GideonMartialParagonToken token) {
+        super(token);
+    }
+
+    public GideonMartialParagonToken copy() {
+        return new GideonMartialParagonToken(this);
     }
 }

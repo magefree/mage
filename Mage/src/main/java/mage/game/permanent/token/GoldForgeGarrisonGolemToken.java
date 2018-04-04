@@ -13,7 +13,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class GoldForgeGarrisonGolemToken extends Token {
+public class GoldForgeGarrisonGolemToken extends TokenImpl {
 
     public GoldForgeGarrisonGolemToken() {
         super("Golem", "4/4 colorless Golem artifact creature token");
@@ -24,5 +24,13 @@ public class GoldForgeGarrisonGolemToken extends Token {
         power = new MageInt(4);
         toughness = new MageInt(4);
 
+    }
+
+    public GoldForgeGarrisonGolemToken(final GoldForgeGarrisonGolemToken token) {
+        super(token);
+    }
+
+    public GoldForgeGarrisonGolemToken copy() {
+        return new GoldForgeGarrisonGolemToken(this);
     }
 }

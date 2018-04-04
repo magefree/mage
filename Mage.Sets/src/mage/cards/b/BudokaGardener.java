@@ -43,6 +43,7 @@ import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.permanent.token.DokaiWeaverofLifeToken;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 
@@ -111,7 +112,7 @@ class BudokaGardenerEffect extends OneShotEffect {
 
 }
 
-class DokaiWeaverofLife extends Token {
+class DokaiWeaverofLife extends TokenImpl {
 
     DokaiWeaverofLife() {
         super("Dokai, Weaver of Life", "");
@@ -126,5 +127,12 @@ class DokaiWeaverofLife extends Token {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new DokaiWeaverofLifeToken()), new ManaCostsImpl("{4}{G}{G}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
+    }
+    public DokaiWeaverofLife(final DokaiWeaverofLife token) {
+        super(token);
+    }
+
+    public DokaiWeaverofLife copy() {
+        return new DokaiWeaverofLife(this);
     }
 }

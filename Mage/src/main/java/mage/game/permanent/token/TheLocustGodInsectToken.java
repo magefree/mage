@@ -37,7 +37,7 @@ import mage.abilities.keyword.FlyingAbility;
  *
  * @author spjspj
  */
-public class TheLocustGodInsectToken extends Token {
+public class TheLocustGodInsectToken extends TokenImpl {
 
     public TheLocustGodInsectToken() {
         super("Insect", "1/1 blue and red Insect creature token with flying and haste");
@@ -50,5 +50,13 @@ public class TheLocustGodInsectToken extends Token {
         toughness = new MageInt(1);
         addAbility(FlyingAbility.getInstance());
         addAbility(HasteAbility.getInstance());
+    }
+
+    public TheLocustGodInsectToken(final TheLocustGodInsectToken token) {
+        super(token);
+    }
+
+    public TheLocustGodInsectToken copy() {
+        return new TheLocustGodInsectToken(this);
     }
 }

@@ -36,7 +36,7 @@ import mage.abilities.keyword.HasteAbility;
  *
  * @author spjspj
  */
-public class SekKuarDeathkeeperGravebornToken extends Token {
+public class SekKuarDeathkeeperGravebornToken extends TokenImpl {
 
     public SekKuarDeathkeeperGravebornToken() {
         super("Graveborn", "3/1 black and red Graveborn creature token with haste");
@@ -47,5 +47,13 @@ public class SekKuarDeathkeeperGravebornToken extends Token {
         power = new MageInt(3);
         toughness = new MageInt(1);
         this.addAbility(HasteAbility.getInstance());
+    }
+
+    public SekKuarDeathkeeperGravebornToken(final SekKuarDeathkeeperGravebornToken token) {
+        super(token);
+    }
+
+    public SekKuarDeathkeeperGravebornToken copy() {
+        return new SekKuarDeathkeeperGravebornToken(this);
     }
 }

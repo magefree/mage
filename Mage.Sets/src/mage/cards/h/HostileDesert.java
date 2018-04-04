@@ -42,6 +42,7 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandCard;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -74,7 +75,7 @@ public class HostileDesert extends CardImpl {
     }
 }
 
-class HostileDesertToken extends Token {
+class HostileDesertToken extends TokenImpl {
 
     public HostileDesertToken() {
         super("", "3/4 elemental creature");
@@ -82,5 +83,12 @@ class HostileDesertToken extends Token {
         subtype.add(SubType.ELEMENTAL);
         power = new MageInt(3);
         toughness = new MageInt(4);
+    }
+    public HostileDesertToken(final HostileDesertToken token) {
+        super(token);
+    }
+
+    public HostileDesertToken copy() {
+        return new HostileDesertToken(this);
     }
 }

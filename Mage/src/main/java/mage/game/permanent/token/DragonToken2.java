@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author LoneFox
  */
-public class DragonToken2 extends Token {
+public class DragonToken2 extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 
@@ -48,14 +48,10 @@ public class DragonToken2 extends Token {
     }
 
     public DragonToken2() {
-        this(null, 0);
+        this((String)null);
     }
 
     public DragonToken2(String setCode) {
-        this(setCode, 0);
-    }
-
-    public DragonToken2(String setCode, int tokenType) {
         super("Dragon", "5/5 red Dragon creature token with flying");
         availableImageSetCodes = tokenImageSets;
         setOriginalExpansionSetCode(setCode);
@@ -65,5 +61,13 @@ public class DragonToken2 extends Token {
         power = new MageInt(5);
         toughness = new MageInt(5);
         addAbility(FlyingAbility.getInstance());
+    }
+
+    public DragonToken2(final DragonToken2 token) {
+        super(token);
+    }
+
+    public DragonToken2 copy() {
+        return new DragonToken2(this);
     }
 }

@@ -44,6 +44,7 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.token.AngelToken;
 import mage.game.permanent.token.SoldierToken;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 

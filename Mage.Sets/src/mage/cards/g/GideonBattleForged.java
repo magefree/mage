@@ -52,6 +52,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -113,7 +114,7 @@ public class GideonBattleForged extends CardImpl {
     }
 }
 
-class GideonBattleForgedToken extends Token {
+class GideonBattleForgedToken extends TokenImpl {
 
     public GideonBattleForgedToken() {
         super("", "4/4 Human Soldier creature with indestructible");
@@ -124,7 +125,13 @@ class GideonBattleForgedToken extends Token {
         toughness = new MageInt(4);
         this.addAbility(IndestructibleAbility.getInstance());
     }
+    public GideonBattleForgedToken(final GideonBattleForgedToken token) {
+        super(token);
+    }
 
+    public GideonBattleForgedToken copy() {
+        return new GideonBattleForgedToken(this);
+    }
 }
 
 class GideonBattleForgedAttacksIfAbleTargetEffect extends RequirementEffect {

@@ -42,6 +42,7 @@ import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
 import mage.constants.Zone;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetLandPermanent;
 
@@ -77,7 +78,7 @@ public class LifesparkSpellbomb extends CardImpl {
 
 }
 
-class LifesparkSpellbombToken extends Token {
+class LifesparkSpellbombToken extends TokenImpl {
 
     public LifesparkSpellbombToken() {
         super("", "3/3 creature");
@@ -85,5 +86,12 @@ class LifesparkSpellbombToken extends Token {
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
+    }
+    public LifesparkSpellbombToken(final LifesparkSpellbombToken token) {
+        super(token);
+    }
+
+    public LifesparkSpellbombToken copy() {
+        return new LifesparkSpellbombToken(this);
     }
 }

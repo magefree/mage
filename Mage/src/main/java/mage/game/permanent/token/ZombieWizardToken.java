@@ -36,7 +36,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class ZombieWizardToken extends Token {
+public class ZombieWizardToken extends TokenImpl {
 
     public ZombieWizardToken() {
         super("Zombie Wizard", "1/1 blue and black Zombie Wizard creature token");
@@ -47,5 +47,13 @@ public class ZombieWizardToken extends Token {
         subtype.add(SubType.WIZARD);
         power = new MageInt(1);
         toughness = new MageInt(1);
+    }
+
+    public ZombieWizardToken(final ZombieWizardToken token) {
+        super(token);
+    }
+
+    public ZombieWizardToken copy() {
+        return new ZombieWizardToken(this);
     }
 }

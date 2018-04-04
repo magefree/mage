@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class CarnivoreToken extends Token {
+public class CarnivoreToken extends TokenImpl {
 
     public CarnivoreToken() {
         super("Carnivore", "3/1 red Beast creature token");
@@ -44,5 +44,13 @@ public class CarnivoreToken extends Token {
         subtype.add(SubType.BEAST);
         power = new MageInt(3);
         toughness = new MageInt(1);
+    }
+
+    public CarnivoreToken(final CarnivoreToken token) {
+        super(token);
+    }
+
+    public CarnivoreToken copy() {
+        return new CarnivoreToken(this);
     }
 }

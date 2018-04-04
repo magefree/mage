@@ -36,7 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
  *
  * @author spjspj
  */
-public class SwanSongBirdToken extends Token {
+public class SwanSongBirdToken extends TokenImpl {
 
     public SwanSongBirdToken() {
         super("Bird", "2/2 blue Bird creature token with flying");
@@ -49,5 +49,13 @@ public class SwanSongBirdToken extends Token {
         power = new MageInt(2);
         toughness = new MageInt(2);
         this.addAbility(FlyingAbility.getInstance());
+    }
+
+    public SwanSongBirdToken(final SwanSongBirdToken token) {
+        super(token);
+    }
+
+    public SwanSongBirdToken copy() {
+        return new SwanSongBirdToken(this);
     }
 }

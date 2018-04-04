@@ -41,6 +41,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 
 /**
@@ -68,7 +69,7 @@ public class GolgariKeyrune extends CardImpl {
         return new GolgariKeyrune(this);
     }
 
-    private static class GolgariKeyruneToken extends Token {
+    private static class GolgariKeyruneToken extends TokenImpl {
         GolgariKeyruneToken() {
             super("", "2/2 black and green Insect artifact creature with deathtouch");
             cardType.add(CardType.ARTIFACT);
@@ -79,6 +80,13 @@ public class GolgariKeyrune extends CardImpl {
             power = new MageInt(2);
             toughness = new MageInt(2);
             this.addAbility(DeathtouchAbility.getInstance());
+        }
+        public GolgariKeyruneToken(final GolgariKeyruneToken token) {
+            super(token);
+        }
+
+        public GolgariKeyruneToken copy() {
+            return new GolgariKeyruneToken(this);
         }
     }
 }

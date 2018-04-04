@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class CrushOfTentaclesToken extends Token {
+public class CrushOfTentaclesToken extends TokenImpl {
 
     public CrushOfTentaclesToken() {
         super("Octopus", "8/8 blue Octopus creature");
@@ -46,4 +46,12 @@ public class CrushOfTentaclesToken extends Token {
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);
     }
+    public CrushOfTentaclesToken(final CrushOfTentaclesToken token) {
+        super(token);
+    }
+
+    public CrushOfTentaclesToken copy() {
+        return new CrushOfTentaclesToken(this);
+    }
+    
 }

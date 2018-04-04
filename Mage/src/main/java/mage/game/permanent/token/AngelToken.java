@@ -8,7 +8,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-public class AngelToken extends Token {
+public class AngelToken extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 
@@ -17,7 +17,7 @@ public class AngelToken extends Token {
     }
 
     public AngelToken() {
-        this(null);
+        this((String)null);
     }
 
     public AngelToken(String setCode) {
@@ -31,5 +31,13 @@ public class AngelToken extends Token {
         power = new MageInt(4);
         toughness = new MageInt(4);
         addAbility(FlyingAbility.getInstance());
+    }
+
+    public AngelToken(final AngelToken token) {
+        super(token);
+    }
+
+    public AngelToken copy() {
+        return new AngelToken(this);
     }
 }

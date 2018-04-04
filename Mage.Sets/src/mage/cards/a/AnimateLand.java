@@ -34,6 +34,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetLandPermanent;
 
@@ -61,12 +62,19 @@ public class AnimateLand extends CardImpl {
     }
 }
 
-class AnimatedLand extends Token {
+class AnimatedLand extends TokenImpl {
 
     public AnimatedLand() {
         super("", "3/3 creature");
         this.cardType.add(CardType.CREATURE);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
+    }
+    public AnimatedLand(final AnimatedLand token) {
+        super(token);
+    }
+
+    public AnimatedLand copy() {
+        return new AnimatedLand(this);
     }
 }

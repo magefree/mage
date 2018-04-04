@@ -45,6 +45,7 @@ import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.game.command.emblems.GideonAllyOfZendikarEmblem;
 import mage.game.permanent.token.KnightAllyToken;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 
 /**
@@ -84,7 +85,7 @@ public class GideonAllyOfZendikar extends CardImpl {
     }
 }
 
-class GideonAllyOfZendikarToken extends Token {
+class GideonAllyOfZendikarToken extends TokenImpl {
 
     public GideonAllyOfZendikarToken() {
         super("", "5/5 Human Soldier Ally creature with indestructible");
@@ -96,5 +97,12 @@ class GideonAllyOfZendikarToken extends Token {
         toughness = new MageInt(5);
 
         addAbility(IndestructibleAbility.getInstance());
+    }
+    public GideonAllyOfZendikarToken(final GideonAllyOfZendikarToken token) {
+        super(token);
+    }
+
+    public GideonAllyOfZendikarToken copy() {
+        return new GideonAllyOfZendikarToken(this);
     }
 }

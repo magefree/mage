@@ -34,7 +34,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class IllusionToken extends Token {
+public class IllusionToken extends TokenImpl {
 
     public IllusionToken() {
         super("Illusion", "2/2 blue Illusion creature token");
@@ -44,5 +44,13 @@ public class IllusionToken extends Token {
         subtype.add(SubType.ILLUSION);
         power = new MageInt(2);
         toughness = new MageInt(2);
+    }
+
+    public IllusionToken(final IllusionToken token) {
+        super(token);
+    }
+
+    public IllusionToken copy() {
+        return new IllusionToken(this);
     }
 }

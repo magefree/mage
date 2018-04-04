@@ -30,13 +30,12 @@ package mage.game.permanent.token;
 import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.game.permanent.token.Token;
 
 /**
  *
  * @author LevelX2
  */
-public class CentaurEnchantmentCreatureToken extends Token {
+public class CentaurEnchantmentCreatureToken extends TokenImpl {
 
     public CentaurEnchantmentCreatureToken() {
         super("Centaur", "3/3 green Centaur enchantment creature token");
@@ -47,5 +46,13 @@ public class CentaurEnchantmentCreatureToken extends Token {
         power = new MageInt(3);
         toughness = new MageInt(3);
         this.setOriginalExpansionSetCode("BNG");
+    }
+
+    public CentaurEnchantmentCreatureToken(final CentaurEnchantmentCreatureToken token) {
+        super(token);
+    }
+
+    public CentaurEnchantmentCreatureToken copy() {
+        return new CentaurEnchantmentCreatureToken(this);
     }
 }

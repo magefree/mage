@@ -36,7 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
  *
  * @author spjspj
  */
-public class HauntedAngelToken extends Token {
+public class HauntedAngelToken extends TokenImpl {
 
     public HauntedAngelToken() {
         super("Angel", "3/3 black Angel creature token with flying");
@@ -46,5 +46,13 @@ public class HauntedAngelToken extends Token {
         power = new MageInt(3);
         toughness = new MageInt(3);
         this.addAbility(FlyingAbility.getInstance());
+    }
+
+    public HauntedAngelToken(final HauntedAngelToken token) {
+        super(token);
+    }
+
+    public HauntedAngelToken copy() {
+        return new HauntedAngelToken(this);
     }
 }

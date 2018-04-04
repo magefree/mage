@@ -39,6 +39,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -71,12 +72,19 @@ public class Omnibian extends CardImpl {
     }
 }
 
-class OmnibianFrogToken extends Token {
+class OmnibianFrogToken extends TokenImpl {
 
     public OmnibianFrogToken() {
         super("", "3/3 Frog");
         this.subtype.add(SubType.FROG);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
+    }
+    public OmnibianFrogToken(final OmnibianFrogToken token) {
+        super(token);
+    }
+
+    public OmnibianFrogToken copy() {
+        return new OmnibianFrogToken(this);
     }
 }

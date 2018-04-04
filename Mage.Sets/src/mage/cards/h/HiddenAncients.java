@@ -41,6 +41,7 @@ import mage.constants.Duration;
 import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 
 import java.util.UUID;
@@ -78,7 +79,7 @@ public class HiddenAncients extends CardImpl {
     }
 }
 
-class HiddenAncientsTreefolk extends Token {
+class HiddenAncientsTreefolk extends TokenImpl {
 
     public HiddenAncientsTreefolk() {
         super("Treefolk", "5/5 Treefolk creature");
@@ -86,5 +87,12 @@ class HiddenAncientsTreefolk extends Token {
         subtype.add(SubType.TREEFOLK);
         power = new MageInt(5);
         toughness = new MageInt(5);
+    }
+    public HiddenAncientsTreefolk(final HiddenAncientsTreefolk token) {
+        super(token);
+    }
+
+    public HiddenAncientsTreefolk copy() {
+        return new HiddenAncientsTreefolk(this);
     }
 }

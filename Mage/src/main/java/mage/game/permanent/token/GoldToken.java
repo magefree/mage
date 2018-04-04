@@ -41,7 +41,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class GoldToken extends Token {
+public class GoldToken extends TokenImpl {
     
     final static private List<String> tokenImageSets = new ArrayList<>();
     static {
@@ -49,19 +49,23 @@ public class GoldToken extends Token {
     }
 
     public GoldToken() {
-        this(null, 0);
+        this((String)null);
     }
 
     public GoldToken(String setCode) {
-        this(setCode, 0);
-    }
-
-    public GoldToken(String setCode, int tokenType) {
         super("Gold", "colorless artifact token named Gold with \"Sacrifice this artifact: Add one mana of any color to your mana pool.\"");
         availableImageSetCodes = tokenImageSets;
         setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.ARTIFACT);
 
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(), new SacrificeSourceCost()));
+    }
+
+    public GoldToken(final GoldToken token) {
+        super(token);
+    }
+
+    public GoldToken copy() {
+        return new GoldToken(this);
     }
 }

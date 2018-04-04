@@ -36,7 +36,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class ForlornPseudammaZombieToken extends Token {
+public class ForlornPseudammaZombieToken extends TokenImpl {
 
     public ForlornPseudammaZombieToken() {
         super("Zombie", "2/2 black Zombie enchantment creature token");
@@ -47,6 +47,14 @@ public class ForlornPseudammaZombieToken extends Token {
         power = new MageInt(2);
         toughness = new MageInt(2);
         this.setOriginalExpansionSetCode("BNG");
+    }
+
+    public ForlornPseudammaZombieToken(final ForlornPseudammaZombieToken token) {
+        super(token);
+    }
+
+    public ForlornPseudammaZombieToken copy() {
+        return new ForlornPseudammaZombieToken(this);
     }
 }
 

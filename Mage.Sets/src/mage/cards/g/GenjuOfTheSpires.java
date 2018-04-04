@@ -41,6 +41,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterLandPermanent;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
@@ -82,7 +83,7 @@ public class GenjuOfTheSpires extends CardImpl {
         return new GenjuOfTheSpires(this);
     }
 
-    private static class SpiritToken extends Token {
+    private static class SpiritToken extends TokenImpl {
 
         SpiritToken() {
             super("Spirit", "6/1 red Spirit creature");
@@ -91,6 +92,13 @@ public class GenjuOfTheSpires extends CardImpl {
             subtype.add(SubType.SPIRIT);
             power = new MageInt(6);
             toughness = new MageInt(1);
+        }
+        public SpiritToken(final SpiritToken token) {
+            super(token);
+        }
+
+        public SpiritToken copy() {
+            return new SpiritToken(this);
         }
     }
 }

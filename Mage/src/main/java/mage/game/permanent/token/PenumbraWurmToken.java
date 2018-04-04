@@ -36,7 +36,7 @@ import mage.abilities.keyword.TrampleAbility;
  *
  * @author spjspj
  */
-public class PenumbraWurmToken extends Token {
+public class PenumbraWurmToken extends TokenImpl {
 
     public PenumbraWurmToken() {
         super("Wurm", "6/6 black Wurm creature token with trample");
@@ -47,5 +47,13 @@ public class PenumbraWurmToken extends Token {
         toughness = new MageInt(6);
 
         this.addAbility(TrampleAbility.getInstance());
+    }
+
+    public PenumbraWurmToken(final PenumbraWurmToken token) {
+        super(token);
+    }
+
+    public PenumbraWurmToken copy() {
+        return new PenumbraWurmToken(this);
     }
 }

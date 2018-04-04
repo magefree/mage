@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author LoneFox
  */
-public class CatToken extends Token {
+public class CatToken extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 
@@ -65,4 +65,13 @@ public class CatToken extends Token {
         power = new MageInt(2);
         toughness = new MageInt(2);
     }
+
+    public CatToken(final CatToken token) {
+        super(token);
+    }
+
+    public CatToken copy() {
+        return new CatToken(this);
+    }
+    
 }

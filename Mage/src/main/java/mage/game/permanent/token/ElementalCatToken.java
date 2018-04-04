@@ -36,7 +36,7 @@ import mage.abilities.keyword.HasteAbility;
  *
  * @author spjspj
  */
-public class ElementalCatToken extends Token {
+public class ElementalCatToken extends TokenImpl {
 
     public ElementalCatToken() {
         super("Elemental Cat", "1/1 red Elemental Cat creature token");
@@ -47,5 +47,13 @@ public class ElementalCatToken extends Token {
         addAbility(HasteAbility.getInstance());
         power = new MageInt(1);
         toughness = new MageInt(1);
+    }
+
+    public ElementalCatToken(final ElementalCatToken token) {
+        super(token);
+    }
+
+    public ElementalCatToken copy() {
+        return new ElementalCatToken(this);
     }
 }

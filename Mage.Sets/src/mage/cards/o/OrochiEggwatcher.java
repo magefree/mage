@@ -52,6 +52,7 @@ import mage.constants.Zone;
 import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.permanent.token.SnakeToken;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -90,7 +91,7 @@ public class OrochiEggwatcher extends CardImpl {
     }
 }
 
-class ShidakoBroodmistress extends Token {
+class ShidakoBroodmistress extends TokenImpl {
 
     ShidakoBroodmistress() {
         super("Shidako, Broodmistress", "");
@@ -110,5 +111,12 @@ class ShidakoBroodmistress extends Token {
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
+    }
+    public ShidakoBroodmistress(final ShidakoBroodmistress token) {
+        super(token);
+    }
+
+    public ShidakoBroodmistress copy() {
+        return new ShidakoBroodmistress(this);
     }
 }

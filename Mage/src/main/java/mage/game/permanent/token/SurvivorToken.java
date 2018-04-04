@@ -35,7 +35,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class SurvivorToken extends Token {
+public class SurvivorToken extends TokenImpl {
 
     public SurvivorToken() {
         super("Survivor", "1/1 red Survivor creature token");
@@ -44,5 +44,13 @@ public class SurvivorToken extends Token {
         color.setRed(true);
         power = new MageInt(1);
         toughness = new MageInt(1);
+    }
+
+    public SurvivorToken(final SurvivorToken token) {
+        super(token);
+    }
+
+    public SurvivorToken copy() {
+        return new SurvivorToken(this);
     }
 }

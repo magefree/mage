@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class KherKeepKoboldToken extends Token {
+public class KherKeepKoboldToken extends TokenImpl {
 
     public KherKeepKoboldToken() {
         super("Kobolds of Kher Keep", "0/1 red Kobold creature token named Kobolds of Kher Keep");
@@ -45,5 +45,11 @@ public class KherKeepKoboldToken extends Token {
         power = new MageInt(0);
         toughness = new MageInt(1);
     }
+    public KherKeepKoboldToken(final KherKeepKoboldToken token) {
+        super(token);
+    }
 
+    public KherKeepKoboldToken copy() {
+        return new KherKeepKoboldToken(this);
+    }
 }

@@ -40,6 +40,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SupertypePredicate;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
 
@@ -79,7 +80,7 @@ public class BalduvianFrostwaker extends CardImpl {
     }
 }
 
-class BalduvianFrostwakerToken extends Token {
+class BalduvianFrostwakerToken extends TokenImpl {
 
     public BalduvianFrostwakerToken() {
         super("Elemental", "2/2 blue Elemental creature with flying");
@@ -89,5 +90,12 @@ class BalduvianFrostwakerToken extends Token {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         this.addAbility(FlyingAbility.getInstance());
+    }
+    public BalduvianFrostwakerToken(final BalduvianFrostwakerToken token) {
+        super(token);
+    }
+
+    public BalduvianFrostwakerToken copy() {
+        return new BalduvianFrostwakerToken(this);
     }
 }

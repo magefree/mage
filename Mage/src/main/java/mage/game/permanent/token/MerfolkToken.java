@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class MerfolkToken extends Token {
+public class MerfolkToken extends TokenImpl {
 
     public MerfolkToken() {
         super("Merfolk", "1/1 blue Merfolk creature token");
@@ -44,5 +44,13 @@ public class MerfolkToken extends Token {
         subtype.add(SubType.MERFOLK);
         power = new MageInt(1);
         toughness = new MageInt(1);
+    }
+
+    public MerfolkToken(final MerfolkToken token) {
+        super(token);
+    }
+
+    public MerfolkToken copy() {
+        return new MerfolkToken(this);
     }
 }

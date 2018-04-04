@@ -8,7 +8,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class MerfolkWizardToken extends Token {
+public class MerfolkWizardToken extends TokenImpl {
 
     public MerfolkWizardToken() {
         super("Merfolk Wizard", "1/1 blue Merfolk Wizard creature token");
@@ -18,5 +18,13 @@ public class MerfolkWizardToken extends Token {
         subtype.add(SubType.WIZARD);
         power = new MageInt(1);
         toughness = new MageInt(1);
+    }
+
+    public MerfolkWizardToken(final MerfolkWizardToken token) {
+        super(token);
+    }
+
+    public MerfolkWizardToken copy() {
+        return new MerfolkWizardToken(this);
     }
 }

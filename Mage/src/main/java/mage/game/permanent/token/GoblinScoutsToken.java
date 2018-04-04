@@ -36,7 +36,7 @@ import mage.abilities.keyword.MountainwalkAbility;
  *
  * @author spjspj
  */
-public class GoblinScoutsToken extends Token {
+public class GoblinScoutsToken extends TokenImpl {
 
     public GoblinScoutsToken() {
         super("Goblin Scout", "1/1 red Goblin Scout creature tokens with mountainwalk");
@@ -48,5 +48,13 @@ public class GoblinScoutsToken extends Token {
         toughness = new MageInt(1);
 
         this.addAbility(new MountainwalkAbility());
+    }
+
+    public GoblinScoutsToken(final GoblinScoutsToken token) {
+        super(token);
+    }
+
+    public GoblinScoutsToken copy() {
+        return new GoblinScoutsToken(this);
     }
 }

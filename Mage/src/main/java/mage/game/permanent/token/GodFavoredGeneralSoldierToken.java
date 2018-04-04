@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class GodFavoredGeneralSoldierToken extends Token {
+public class GodFavoredGeneralSoldierToken extends TokenImpl {
 
     public GodFavoredGeneralSoldierToken() {
         super("Soldier", "1/1 white Soldier enchantment creature token");
@@ -47,5 +47,13 @@ public class GodFavoredGeneralSoldierToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
         this.setOriginalExpansionSetCode("BNG");
+    }
+
+    public GodFavoredGeneralSoldierToken(final GodFavoredGeneralSoldierToken token) {
+        super(token);
+    }
+
+    public GodFavoredGeneralSoldierToken copy() {
+        return new GodFavoredGeneralSoldierToken(this);
     }
 }

@@ -36,7 +36,7 @@ import mage.abilities.keyword.DefenderAbility;
  *
  * @author spjspj
  */
-public class KelpToken extends Token {
+public class KelpToken extends TokenImpl {
 
     public KelpToken() {
         super("Kelp", "0/1 blue Plant Wall creature token with defender named Kelp");
@@ -49,5 +49,13 @@ public class KelpToken extends Token {
         toughness = new MageInt(1);
 
         this.addAbility(DefenderAbility.getInstance());
+    }
+
+    public KelpToken(final KelpToken token) {
+        super(token);
+    }
+
+    public KelpToken copy() {
+        return new KelpToken(this);
     }
 }

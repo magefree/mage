@@ -46,10 +46,10 @@ import mage.game.permanent.Permanent;
  *
  * @author spjspj
  */
-public class SaprolingBurstToken extends Token {
+public class SaprolingBurstToken extends TokenImpl {
 
     public SaprolingBurstToken() {
-        this(null);
+        this((MageObjectReference)null);
         power = new MageInt(1);
         toughness = new MageInt(1);
     }
@@ -60,6 +60,14 @@ public class SaprolingBurstToken extends Token {
         this.subtype.add(SubType.SAPROLING);
         this.cardType.add(CardType.CREATURE);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetPowerToughnessSourceEffect(new SaprolingBurstTokenDynamicValue(saprolingBurstMOR), Duration.WhileOnBattlefield)));
+    }
+
+    public SaprolingBurstToken(final SaprolingBurstToken token) {
+        super(token);
+    }
+
+    public SaprolingBurstToken copy() {
+        return new SaprolingBurstToken(this);
     }
 }
 

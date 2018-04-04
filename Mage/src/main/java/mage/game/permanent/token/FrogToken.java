@@ -36,7 +36,7 @@ import mage.MageInt;
  *
  * @author nantuko
  */
-public class FrogToken extends Token {
+public class FrogToken extends TokenImpl {
 
     public FrogToken() {
         super("Frog", "1/1 blue Frog creature token");
@@ -46,5 +46,11 @@ public class FrogToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
     }
+    public FrogToken(final FrogToken token) {
+        super(token);
+    }
 
+    public FrogToken copy() {
+        return new FrogToken(this);
+    }
 }

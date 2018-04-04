@@ -36,7 +36,7 @@ import mage.abilities.keyword.HasteAbility;
  *
  * @author spjspj
  */
-public class AkroanSoldierToken extends Token {
+public class AkroanSoldierToken extends TokenImpl {
 
     public AkroanSoldierToken() {
         super("Soldier", "1/1 red Soldier creature token with haste");
@@ -47,5 +47,13 @@ public class AkroanSoldierToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
         this.addAbility(HasteAbility.getInstance());
+    }
+
+    public AkroanSoldierToken(final AkroanSoldierToken token) {
+        super(token);
+    }
+
+    public AkroanSoldierToken copy() {
+        return new AkroanSoldierToken(this);
     }
 }

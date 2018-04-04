@@ -36,7 +36,7 @@ import mage.abilities.keyword.DeathtouchAbility;
  *
  * @author spjspj
  */
-public class DeathtouchSnakeToken extends Token {
+public class DeathtouchSnakeToken extends TokenImpl {
 
     public DeathtouchSnakeToken() {
         super("Snake", "1/1 green Snake creature token with deathtouch");
@@ -46,5 +46,13 @@ public class DeathtouchSnakeToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
         addAbility(DeathtouchAbility.getInstance());
+    }
+
+    public DeathtouchSnakeToken(final DeathtouchSnakeToken token) {
+        super(token);
+    }
+
+    public DeathtouchSnakeToken copy() {
+        return new DeathtouchSnakeToken(this);
     }
 }

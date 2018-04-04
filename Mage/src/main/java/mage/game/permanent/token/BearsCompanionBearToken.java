@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class BearsCompanionBearToken extends Token {
+public class BearsCompanionBearToken extends TokenImpl {
 
     public BearsCompanionBearToken() {
         super("Bear", "4/4 green Bear creature token");
@@ -46,5 +46,11 @@ public class BearsCompanionBearToken extends Token {
         power = new MageInt(4);
         toughness = new MageInt(4);
     }
+    public BearsCompanionBearToken(final BearsCompanionBearToken token) {
+        super(token);
+    }
 
+    public BearsCompanionBearToken copy() {
+        return new BearsCompanionBearToken(this);
+    }
 }

@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class LizardToken extends Token {
+public class LizardToken extends TokenImpl {
 
     public LizardToken() {
         super("Lizard", "2/2 green Lizard creature token");
@@ -44,5 +44,13 @@ public class LizardToken extends Token {
         subtype.add(SubType.LIZARD);
         power = new MageInt(2);
         toughness = new MageInt(2);
+    }
+
+    public LizardToken(final LizardToken token) {
+        super(token);
+    }
+
+    public LizardToken copy() {
+        return new LizardToken(this);
     }
 }

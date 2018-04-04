@@ -43,6 +43,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 
 /**
@@ -73,7 +74,7 @@ public class InkmothNexus extends CardImpl {
     }
 }
 
-class InkmothNexusToken extends Token {
+class InkmothNexusToken extends TokenImpl {
     public InkmothNexusToken() {
         super("Blinkmoth", "1/1 Blinkmoth artifact creature with flying and infect");
         cardType.add(CardType.ARTIFACT);
@@ -83,5 +84,12 @@ class InkmothNexusToken extends Token {
         toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(InfectAbility.getInstance());
+    }
+    public InkmothNexusToken(final InkmothNexusToken token) {
+        super(token);
+    }
+
+    public InkmothNexusToken copy() {
+        return new InkmothNexusToken(this);
     }
 }

@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class CorpseweftZombieToken extends Token {
+public class CorpseweftZombieToken extends TokenImpl {
 
     public CorpseweftZombieToken() {
         this(2,2);
@@ -49,5 +49,13 @@ public class CorpseweftZombieToken extends Token {
         color.setBlack(true);
         this.power = new MageInt(power);
         this.toughness = new MageInt(toughness);
+    }
+
+    public CorpseweftZombieToken(final CorpseweftZombieToken token) {
+        super(token);
+    }
+
+    public CorpseweftZombieToken copy() {
+        return new CorpseweftZombieToken(this);
     }
 }

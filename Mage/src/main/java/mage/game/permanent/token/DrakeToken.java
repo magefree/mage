@@ -37,7 +37,7 @@ import mage.abilities.keyword.FlyingAbility;
  *
  * @author North
  */
-public class DrakeToken extends Token {
+public class DrakeToken extends TokenImpl {
 
     public DrakeToken() {
         super("Drake", "2/2 blue Drake creature token with flying");
@@ -49,5 +49,13 @@ public class DrakeToken extends Token {
         this.toughness = new MageInt(2);
 
         this.addAbility(FlyingAbility.getInstance());
+    }
+
+    public DrakeToken(final DrakeToken token) {
+        super(token);
+    }
+
+    public DrakeToken copy() {
+        return new DrakeToken(this);
     }
 }

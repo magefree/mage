@@ -36,7 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
  *
  * @author spjspj
  */
-public class SkywiseTeachingsToken extends Token {
+public class SkywiseTeachingsToken extends TokenImpl {
 
     public SkywiseTeachingsToken() {
         super("Djinn Monk", "2/2 blue Djinn Monk creature token with flying");
@@ -47,5 +47,13 @@ public class SkywiseTeachingsToken extends Token {
         power = new MageInt(2);
         toughness = new MageInt(2);
         this.addAbility(FlyingAbility.getInstance());
+    }
+
+    public SkywiseTeachingsToken(final SkywiseTeachingsToken token) {
+        super(token);
+    }
+
+    public SkywiseTeachingsToken copy() {
+        return new SkywiseTeachingsToken(this);
     }
 }

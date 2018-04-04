@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.NamePredicate;
  *
  * @author TheElk801
  */
-public class SoundTheCallToken extends Token {
+public class SoundTheCallToken extends TokenImpl {
 
     private static final FilterCard filter = new FilterCard("card named Sound the Call");
 
@@ -65,6 +65,14 @@ public class SoundTheCallToken extends Token {
                 new BoostSourceEffect(value, value, Duration.WhileOnBattlefield)
                         .setText("This creature gets +1/+1 for each card named Sound the Call in each graveyard.")
         ));
+    }
+
+    public SoundTheCallToken(final SoundTheCallToken token) {
+        super(token);
+    }
+
+    public SoundTheCallToken copy() {
+        return new SoundTheCallToken(this);
     }
 
 }

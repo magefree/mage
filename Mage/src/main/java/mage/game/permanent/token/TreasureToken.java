@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author TheElk801
  */
-public class TreasureToken extends Token {
+public class TreasureToken extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 
@@ -69,5 +69,13 @@ public class TreasureToken extends Token {
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
+    }
+
+    public TreasureToken(final TreasureToken token) {
+        super(token);
+    }
+
+    public TreasureToken copy() {
+        return new TreasureToken(this);
     }
 }

@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class SquirrelToken extends Token {
+public class SquirrelToken extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 
@@ -55,5 +55,13 @@ public class SquirrelToken extends Token {
         color.setGreen(true);
         power = new MageInt(1);
         toughness = new MageInt(1);
+    }
+
+    public SquirrelToken(final SquirrelToken token) {
+        super(token);
+    }
+
+    public SquirrelToken copy() {
+        return new SquirrelToken(this);
     }
 }

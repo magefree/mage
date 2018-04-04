@@ -35,7 +35,7 @@ import mage.constants.SubType;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class ZombieToken2 extends Token {
+public class ZombieToken2 extends TokenImpl {
 
     public ZombieToken2() {
         this(0, 0);
@@ -49,5 +49,13 @@ public class ZombieToken2 extends Token {
         power = new MageInt(zPower);
         toughness = new MageInt(zToughness);
         setOriginalExpansionSetCode("EMN");
+    }
+
+    public ZombieToken2(final ZombieToken2 token) {
+        super(token);
+    }
+
+    public ZombieToken2 copy() {
+        return new ZombieToken2(this);
     }
 }

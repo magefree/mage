@@ -39,7 +39,7 @@ import mage.abilities.keyword.FlyingAbility;
  *
  * @author spjspj
  */
-public class LeafdrakeRoostDrakeToken extends Token {
+public class LeafdrakeRoostDrakeToken extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 
@@ -67,5 +67,12 @@ public class LeafdrakeRoostDrakeToken extends Token {
         toughness = new MageInt(2);
         this.addAbility(FlyingAbility.getInstance());
     }
+    
+    public LeafdrakeRoostDrakeToken(final LeafdrakeRoostDrakeToken token) {
+        super(token);
+    }
 
+    public LeafdrakeRoostDrakeToken copy() {
+        return new LeafdrakeRoostDrakeToken(this);
+    }
 }

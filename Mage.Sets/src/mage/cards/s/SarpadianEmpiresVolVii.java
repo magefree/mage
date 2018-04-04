@@ -47,6 +47,7 @@ import mage.game.permanent.token.CitizenToken;
 import mage.game.permanent.token.GoblinToken;
 import mage.game.permanent.token.SaprolingToken;
 import mage.game.permanent.token.ThrullToken;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 

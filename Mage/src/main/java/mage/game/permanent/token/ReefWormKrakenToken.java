@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class ReefWormKrakenToken extends Token {
+public class ReefWormKrakenToken extends TokenImpl {
 
     public ReefWormKrakenToken() {
         super("Kraken", "9/9 blue Kraken creature token");
@@ -45,5 +45,13 @@ public class ReefWormKrakenToken extends Token {
         subtype.add(SubType.KRAKEN);
         power = new MageInt(9);
         toughness = new MageInt(9);
+    }
+
+    public ReefWormKrakenToken(final ReefWormKrakenToken token) {
+        super(token);
+    }
+
+    public ReefWormKrakenToken copy() {
+        return new ReefWormKrakenToken(this);
     }
 }

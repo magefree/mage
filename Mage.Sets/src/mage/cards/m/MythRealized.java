@@ -53,6 +53,7 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 
@@ -96,7 +97,7 @@ public class MythRealized extends CardImpl {
     }
 }
 
-class MythRealizedToken extends Token {
+class MythRealizedToken extends TokenImpl {
 
     public MythRealizedToken() {
         super("", "Monk Avatar creature in addition to its other types and gains \"This creature's power and toughness are each equal to the number of lore counters on it.\"");
@@ -106,7 +107,13 @@ class MythRealizedToken extends Token {
         power = new MageInt(0);
         toughness = new MageInt(0);
     }
+    public MythRealizedToken(final MythRealizedToken token) {
+        super(token);
+    }
 
+    public MythRealizedToken copy() {
+        return new MythRealizedToken(this);
+    }
 }
 
 class MythRealizedSetPTEffect extends ContinuousEffectImpl {

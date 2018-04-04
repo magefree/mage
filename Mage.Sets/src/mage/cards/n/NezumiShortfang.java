@@ -43,6 +43,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
@@ -83,7 +84,7 @@ public class NezumiShortfang extends CardImpl {
     }
 }
 
-class StabwhiskerTheOdious extends Token {
+class StabwhiskerTheOdious extends TokenImpl {
 
     StabwhiskerTheOdious() {
         super("Stabwhisker the Odious", "");
@@ -98,6 +99,13 @@ class StabwhiskerTheOdious extends Token {
         // At the beginning of each opponent's upkeep, that player loses 1 life for each card fewer than three in their hand.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 Zone.BATTLEFIELD, new StabwhiskerLoseLifeEffect(), TargetController.OPPONENT, false, true));
+    }
+    public StabwhiskerTheOdious(final StabwhiskerTheOdious token) {
+        super(token);
+    }
+
+    public StabwhiskerTheOdious copy() {
+        return new StabwhiskerTheOdious(this);
     }
 }
 

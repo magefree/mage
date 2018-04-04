@@ -40,6 +40,7 @@ import mage.constants.*;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetLandPermanent;
 
@@ -107,7 +108,7 @@ class AwakenerDruidBecomesCreatureEffect extends BecomesCreatureTargetEffect {
     }
 }
 
-class AwakenerDruidToken extends Token {
+class AwakenerDruidToken extends TokenImpl {
 
     public AwakenerDruidToken() {
         super("", "4/5 green Treefolk creature as long as {this} is on the battlefield");
@@ -117,5 +118,11 @@ class AwakenerDruidToken extends Token {
         power = new MageInt(4);
         toughness = new MageInt(5);
     }
+    public AwakenerDruidToken(final AwakenerDruidToken token) {
+        super(token);
+    }
 
+    public AwakenerDruidToken copy() {
+        return new AwakenerDruidToken(this);
+    }
 }

@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class GiantToken extends Token {
+public class GiantToken extends TokenImpl {
 
     public GiantToken() {
         super("Giant", "4/4 red Giant creature token");
@@ -44,5 +44,13 @@ public class GiantToken extends Token {
         color.setRed(true);
         power = new MageInt(4);
         toughness = new MageInt(4);
+    }
+
+    public GiantToken(final GiantToken token) {
+        super(token);
+    }
+
+    public GiantToken copy() {
+        return new GiantToken(this);
     }
 }

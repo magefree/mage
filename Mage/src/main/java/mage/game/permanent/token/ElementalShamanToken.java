@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author Styxo
  */
-public class ElementalShamanToken extends Token {
+public class ElementalShamanToken extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 
@@ -62,4 +62,11 @@ public class ElementalShamanToken extends Token {
         toughness = new MageInt(1);
     }
 
+    public ElementalShamanToken(final ElementalShamanToken token) {
+        super(token);
+    }
+
+    public ElementalShamanToken copy() {
+        return new ElementalShamanToken(this);
+    }
 }

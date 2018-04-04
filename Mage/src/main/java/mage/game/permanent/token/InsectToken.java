@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class InsectToken extends Token {
+public class InsectToken extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 
@@ -48,7 +48,7 @@ public class InsectToken extends Token {
     }
 
     public InsectToken() {
-        this(null);
+        this((String)null);
     }
 
     public InsectToken(String setCode) {
@@ -61,5 +61,13 @@ public class InsectToken extends Token {
         toughness = new MageInt(1);
 
         availableImageSetCodes = tokenImageSets;
+    }
+
+    public InsectToken(final InsectToken token) {
+        super(token);
+    }
+
+    public InsectToken copy() {
+        return new InsectToken(this);
     }
 }

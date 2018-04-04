@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class MercyKillingToken extends Token {
+public class MercyKillingToken extends TokenImpl {
 
     public MercyKillingToken() {
         super("Elf Warrior", "1/1 green and white Elf Warrior creature token");
@@ -46,5 +46,13 @@ public class MercyKillingToken extends Token {
         subtype.add(SubType.WARRIOR);
         power = new MageInt(1);
         toughness = new MageInt(1);
+    }
+
+    public MercyKillingToken(final MercyKillingToken token) {
+        super(token);
+    }
+
+    public MercyKillingToken copy() {
+        return new MercyKillingToken(this);
     }
 }

@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class HammerOfPurphorosGolemToken extends Token {
+public class HammerOfPurphorosGolemToken extends TokenImpl {
 
     public HammerOfPurphorosGolemToken() {
         super("Golem", "3/3 colorless Golem enchantment artifact creature token");
@@ -46,5 +46,13 @@ public class HammerOfPurphorosGolemToken extends Token {
         subtype.add(SubType.GOLEM);
         power = new MageInt(3);
         toughness = new MageInt(3);
+    }
+
+    public HammerOfPurphorosGolemToken(final HammerOfPurphorosGolemToken token) {
+        super(token);
+    }
+
+    public HammerOfPurphorosGolemToken copy() {
+        return new HammerOfPurphorosGolemToken(this);
     }
 }

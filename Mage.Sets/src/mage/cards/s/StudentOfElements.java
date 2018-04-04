@@ -45,6 +45,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 
 /**
@@ -108,7 +109,7 @@ class StudentOfElementsHasFlyingAbility extends StateTriggeredAbility {
 
 }
 
-class TobitaMasterOfWinds extends Token {
+class TobitaMasterOfWinds extends TokenImpl {
 
     TobitaMasterOfWinds() {
         super("Tobita, Master of Winds", "");
@@ -123,5 +124,12 @@ class TobitaMasterOfWinds extends Token {
         // Creatures you control have flying.
         this.addAbility(new SimpleStaticAbility(
                 Zone.BATTLEFIELD, new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield, new FilterCreaturePermanent())));
+    }
+    public TobitaMasterOfWinds(final TobitaMasterOfWinds token) {
+        super(token);
+    }
+
+    public TobitaMasterOfWinds copy() {
+        return new TobitaMasterOfWinds(this);
     }
 }

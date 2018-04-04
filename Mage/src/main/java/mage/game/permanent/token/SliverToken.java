@@ -37,7 +37,7 @@ import mage.MageInt;
  *
  * @author LoneFox
  */
-public class SliverToken extends Token {
+public class SliverToken extends TokenImpl {
 
     public SliverToken() {
         super("Sliver", "1/1 colorless Sliver creature token");
@@ -46,5 +46,13 @@ public class SliverToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
         availableImageSetCodes.addAll(Arrays.asList("M14", "M15"));
+    }
+
+    public SliverToken(final SliverToken token) {
+        super(token);
+    }
+
+    public SliverToken copy() {
+        return new SliverToken(this);
     }
 }

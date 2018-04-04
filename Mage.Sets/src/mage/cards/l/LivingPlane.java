@@ -38,6 +38,7 @@ import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 
 /**
@@ -64,12 +65,19 @@ public class LivingPlane extends CardImpl {
     }
 }
 
-class LivingPlaneToken extends Token {
+class LivingPlaneToken extends TokenImpl {
 
     public LivingPlaneToken() {
         super("Land", "1/1 creatures");
         cardType.add(CardType.CREATURE);
         power = new MageInt(1);
         toughness = new MageInt(1);
+    }
+    public LivingPlaneToken(final LivingPlaneToken token) {
+        super(token);
+    }
+
+    public LivingPlaneToken copy() {
+        return new LivingPlaneToken(this);
     }
 }

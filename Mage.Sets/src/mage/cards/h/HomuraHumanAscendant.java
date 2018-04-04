@@ -52,6 +52,7 @@ import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 
@@ -127,7 +128,7 @@ class HomuraReturnFlippedSourceEffect extends OneShotEffect {
 
 }
 
-class HomurasEssence2 extends Token {
+class HomurasEssence2 extends TokenImpl {
 
     HomurasEssence2() {
         super("Homura's Essence", "");
@@ -145,5 +146,12 @@ class HomurasEssence2 extends Token {
         effect.setText("and \"{R}: This creature gets +1/+0 until end of turn.\"");
         ability.addEffect(effect);
         this.addAbility(ability);
+    }
+    public HomurasEssence2(final HomurasEssence2 token) {
+        super(token);
+    }
+
+    public HomurasEssence2 copy() {
+        return new HomurasEssence2(this);
     }
 }

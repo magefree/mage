@@ -36,7 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
  *
  * @author spjspj
  */
-public class HourOfNeedSphinxToken extends Token {
+public class HourOfNeedSphinxToken extends TokenImpl {
 
     public HourOfNeedSphinxToken() {
         super("Sphinx", "4/4 blue Sphinx creature token with flying");
@@ -47,5 +47,13 @@ public class HourOfNeedSphinxToken extends Token {
         power = new MageInt(4);
         toughness = new MageInt(4);
         addAbility(FlyingAbility.getInstance());
+    }
+
+    public HourOfNeedSphinxToken(final HourOfNeedSphinxToken token) {
+        super(token);
+    }
+
+    public HourOfNeedSphinxToken copy() {
+        return new HourOfNeedSphinxToken(this);
     }
 }

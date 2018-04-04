@@ -41,7 +41,7 @@ import mage.constants.Zone;
  *
  * @author spjspj
  */
-public class DragonEggDragonToken extends Token {
+public class DragonEggDragonToken extends TokenImpl {
 
     public DragonEggDragonToken() {
         super("Dragon", "2/2 red Dragon creature token with flying that has \"{R}: This creature gets +1/+0 until end of turn");
@@ -54,5 +54,13 @@ public class DragonEggDragonToken extends Token {
         addAbility(FlyingAbility.getInstance());
         addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
 
+    }
+
+    public DragonEggDragonToken(final DragonEggDragonToken token) {
+        super(token);
+    }
+
+    public DragonEggDragonToken copy() {
+        return new DragonEggDragonToken(this);
     }
 }

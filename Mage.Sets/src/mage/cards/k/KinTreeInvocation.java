@@ -28,6 +28,8 @@
 package mage.cards.k;
 
 import java.util.UUID;
+
+import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
@@ -40,6 +42,7 @@ import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.util.SubTypeList;
 
@@ -91,18 +94,36 @@ class KinTreeInvocationCreateTokenEffect extends OneShotEffect {
                 value = permanent.getToughness().getValue();
             }
         }
-
-        SubTypeList list = new SubTypeList();
-        list.add(SubType.SPIRIT);
-        list.add(SubType.WARRIOR);
-        ObjectColor objectColor = new ObjectColor();
-        objectColor.setBlack(true);
-        objectColor.setGreen(true);
-        Token token = new Token("Spirit Warrior", "X/X black and green Spirit Warrior creature token, where X is the greatest toughness among creatures you control",
-                objectColor, list, value, value, new AbilitiesImpl<>());
+        Token token = new SpiritWarriorToken(value);
         token.getAbilities().newId(); // neccessary if token has ability like DevourAbility()
         token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
         return true;
     }
 
+}
+
+class SpiritWarriorToken extends TokenImpl {
+
+    public SpiritWarriorToken() {
+        this(1);
+    }
+
+    public SpiritWarriorToken(int x) {
+        super("Spirit Warrior", "X/X black and green Spirit Warrior creature token, where X is the greatest toughness among creatures you control");
+        this.cardType.add(CardType.CREATURE);
+        this.subtype.add(SubType.SPIRIT);
+        this.subtype.add(SubType.WARRIOR);
+        this.color.setBlack(true);
+        this.color.setGreen(true);
+        this.power = new MageInt(x);
+        this.toughness = new MageInt(x);
+    }
+
+    public SpiritWarriorToken(final SpiritWarriorToken token) {
+        super(token);
+    }
+
+    public SpiritWarriorToken copy() {
+        return new SpiritWarriorToken(this);
+    }
 }

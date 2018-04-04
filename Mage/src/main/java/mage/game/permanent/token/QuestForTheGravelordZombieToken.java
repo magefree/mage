@@ -36,7 +36,7 @@ import mage.constants.SubType;
  *
  * spjspj
  */
-public class QuestForTheGravelordZombieToken extends Token {
+public class QuestForTheGravelordZombieToken extends TokenImpl {
 
     public QuestForTheGravelordZombieToken() {
         super("Zombie Giant", "5/5 black Zombie Giant creature token");
@@ -47,5 +47,13 @@ public class QuestForTheGravelordZombieToken extends Token {
         color.setBlack(true);
         power = new MageInt(5);
         toughness = new MageInt(5);
+    }
+
+    public QuestForTheGravelordZombieToken(final QuestForTheGravelordZombieToken token) {
+        super(token);
+    }
+
+    public QuestForTheGravelordZombieToken copy() {
+        return new QuestForTheGravelordZombieToken(this);
     }
 }

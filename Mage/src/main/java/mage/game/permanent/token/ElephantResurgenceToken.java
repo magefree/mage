@@ -41,7 +41,7 @@ import mage.filter.common.FilterCreatureCard;
  *
  * @author TheElk801
  */
-public class ElephantResurgenceToken extends Token {
+public class ElephantResurgenceToken extends TokenImpl {
 
     public ElephantResurgenceToken() {
         super("Elephant", "green Elephant creature token. Those creatures have \"This creature's power and toughness are each equal to the number of creature cards in its controller's graveyard.\"");
@@ -57,5 +57,13 @@ public class ElephantResurgenceToken extends Token {
                 new SetPowerToughnessSourceEffect(new CardsInControllerGraveyardCount(new FilterCreatureCard()), Duration.EndOfGame)
                         .setText("This creature's power and toughness are each equal to the number of creature cards in its controller's graveyard.")
         ));
+    }
+
+    public ElephantResurgenceToken(final ElephantResurgenceToken token) {
+        super(token);
+    }
+
+    public ElephantResurgenceToken copy() {
+        return new ElephantResurgenceToken(this);
     }
 }

@@ -35,7 +35,7 @@ import mage.constants.SuperType;
  *
  * @author spjspj
  */
-public class NissaSageAnimistToken extends Token {
+public class NissaSageAnimistToken extends TokenImpl {
 
     public NissaSageAnimistToken() {
         super("Ashaya, the Awoken World", "legendary 4/4 green Elemental creature token named Ashaya, the Awoken World");
@@ -46,5 +46,13 @@ public class NissaSageAnimistToken extends Token {
         this.color.setGreen(true);
         this.getSubtype(null).add(SubType.ELEMENTAL);
         this.addCardType(CardType.CREATURE);
+    }
+
+    public NissaSageAnimistToken(final NissaSageAnimistToken token) {
+        super(token);
+    }
+
+    public NissaSageAnimistToken copy() {
+        return new NissaSageAnimistToken(this);
     }
 }

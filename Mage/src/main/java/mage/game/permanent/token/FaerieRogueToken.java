@@ -41,7 +41,7 @@ import mage.abilities.keyword.FlyingAbility;
  *
  * @author LoneFox
  */
-public class FaerieRogueToken extends Token {
+public class FaerieRogueToken extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 
@@ -60,5 +60,13 @@ public class FaerieRogueToken extends Token {
         addAbility(FlyingAbility.getInstance());
 
         availableImageSetCodes = tokenImageSets;
+    }
+
+    public FaerieRogueToken(final FaerieRogueToken token) {
+        super(token);
+    }
+
+    public FaerieRogueToken copy() {
+        return new FaerieRogueToken(this);
     }
 }

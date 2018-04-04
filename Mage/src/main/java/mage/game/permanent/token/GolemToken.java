@@ -39,7 +39,7 @@ import mage.MageInt;
  *
  * @author North
  */
-public class GolemToken extends Token {
+public class GolemToken extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 
@@ -48,7 +48,7 @@ public class GolemToken extends Token {
     }
 
     public GolemToken() {
-        this(null);
+        this((String)null);
     }
 
     public GolemToken(String setCode) {
@@ -61,5 +61,13 @@ public class GolemToken extends Token {
         toughness = new MageInt(3);
 
         availableImageSetCodes = tokenImageSets;
+    }
+
+    public GolemToken(final GolemToken token) {
+        super(token);
+    }
+
+    public GolemToken copy() {
+        return new GolemToken(this);
     }
 }

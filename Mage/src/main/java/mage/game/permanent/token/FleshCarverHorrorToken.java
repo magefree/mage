@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class FleshCarverHorrorToken extends Token {
+public class FleshCarverHorrorToken extends TokenImpl {
 
     public FleshCarverHorrorToken() {
         this(1);
@@ -49,6 +49,13 @@ public class FleshCarverHorrorToken extends Token {
         subtype.add(SubType.HORROR);
         power = new MageInt(xValue);
         toughness = new MageInt(xValue);
+    }
 
+    public FleshCarverHorrorToken(final FleshCarverHorrorToken token) {
+        super(token);
+    }
+
+    public FleshCarverHorrorToken copy() {
+        return new FleshCarverHorrorToken(this);
     }
 }

@@ -46,6 +46,7 @@ import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.target.TargetPlayer;
 
@@ -83,7 +84,7 @@ public class JushiApprentice extends CardImpl {
     }
 }
 
-class TomoyaTheRevealer extends Token {
+class TomoyaTheRevealer extends TokenImpl {
 
     TomoyaTheRevealer() {
         super("Tomoya the Revealer", "");
@@ -100,5 +101,12 @@ class TomoyaTheRevealer extends Token {
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
+    }
+    public TomoyaTheRevealer(final TomoyaTheRevealer token) {
+        super(token);
+    }
+
+    public TomoyaTheRevealer copy() {
+        return new TomoyaTheRevealer(this);
     }
 }

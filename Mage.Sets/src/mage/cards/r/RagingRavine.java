@@ -48,6 +48,7 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 
 /**
@@ -85,7 +86,7 @@ public class RagingRavine extends CardImpl {
 
 }
 
-class RagingRavineToken extends Token {
+class RagingRavineToken extends TokenImpl {
 
     public RagingRavineToken() {
         super("", "3/3 red and green Elemental creature");
@@ -95,5 +96,12 @@ class RagingRavineToken extends Token {
         color.setGreen(true);
         power = new MageInt(3);
         toughness = new MageInt(3);        
+    }
+    public RagingRavineToken(final RagingRavineToken token) {
+        super(token);
+    }
+
+    public RagingRavineToken copy() {
+        return new RagingRavineToken(this);
     }
 }

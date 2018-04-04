@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class RapidHybridizationToken extends Token {
+public class RapidHybridizationToken extends TokenImpl {
 
     public RapidHybridizationToken() {
         super("Frog Lizard", "3/3 green Frog Lizard creature token");
@@ -51,4 +51,11 @@ public class RapidHybridizationToken extends Token {
         toughness = new MageInt(3);
     }
 
+    public RapidHybridizationToken(final RapidHybridizationToken token) {
+        super(token);
+    }
+
+    public RapidHybridizationToken copy() {
+        return new RapidHybridizationToken(this);
+    }
 }

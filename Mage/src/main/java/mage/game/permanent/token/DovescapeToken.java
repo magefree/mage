@@ -36,7 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
  *
  * @author spjspj
  */
-public class DovescapeToken extends Token {
+public class DovescapeToken extends TokenImpl {
 
     public DovescapeToken() {
         super("Bird", "1/1 white and blue Bird creature token with flying");
@@ -47,5 +47,12 @@ public class DovescapeToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());
+    }
+    public DovescapeToken(final DovescapeToken token) {
+        super(token);
+    }
+
+    public DovescapeToken copy() {
+        return new DovescapeToken(this);
     }
 }

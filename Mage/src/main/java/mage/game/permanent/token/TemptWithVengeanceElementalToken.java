@@ -36,7 +36,7 @@ import mage.abilities.keyword.HasteAbility;
  *
  * @author spjspj
  */
-public class TemptWithVengeanceElementalToken extends Token {
+public class TemptWithVengeanceElementalToken extends TokenImpl {
 
     public TemptWithVengeanceElementalToken() {
         super("Elemental", "1/1 red Elemental creature tokens with haste");
@@ -47,5 +47,13 @@ public class TemptWithVengeanceElementalToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
         this.addAbility(HasteAbility.getInstance());
+    }
+
+    public TemptWithVengeanceElementalToken(final TemptWithVengeanceElementalToken token) {
+        super(token);
+    }
+
+    public TemptWithVengeanceElementalToken copy() {
+        return new TemptWithVengeanceElementalToken(this);
     }
 }

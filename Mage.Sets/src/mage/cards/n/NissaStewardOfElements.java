@@ -50,6 +50,7 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.target.TargetPermanent;
@@ -141,7 +142,7 @@ class NissaStewardOfElementsEffect extends OneShotEffect {
     }
 }
 
-class NissaStewardOfElementsToken extends Token {
+class NissaStewardOfElementsToken extends TokenImpl {
 
     public NissaStewardOfElementsToken() {
         super("", "5/5 Elemental creature with flying and haste");
@@ -151,5 +152,12 @@ class NissaStewardOfElementsToken extends Token {
         this.toughness = new MageInt(5);
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(HasteAbility.getInstance());
+    }
+    public NissaStewardOfElementsToken(final NissaStewardOfElementsToken token) {
+        super(token);
+    }
+
+    public NissaStewardOfElementsToken copy() {
+        return new NissaStewardOfElementsToken(this);
     }
 }

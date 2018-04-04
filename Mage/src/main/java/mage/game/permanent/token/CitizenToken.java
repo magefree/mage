@@ -36,7 +36,7 @@ import mage.constants.SubType;
  *
  * @author Quercitron
  */
-public class CitizenToken extends Token {
+public class CitizenToken extends TokenImpl {
     
     public CitizenToken() {
         super("Citizen", "1/1 white Citizen creature token");
@@ -47,5 +47,12 @@ public class CitizenToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
     }
-    
+
+    public CitizenToken(final CitizenToken token) {
+        super(token);
+    }
+
+    public CitizenToken copy() {
+        return new CitizenToken(this);
+    }
 }

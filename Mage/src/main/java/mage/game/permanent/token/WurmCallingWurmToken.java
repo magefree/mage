@@ -34,7 +34,7 @@ import mage.constants.SubType;
 /**
  * @author spjspj
  */
-public class WurmCallingWurmToken extends Token {
+public class WurmCallingWurmToken extends TokenImpl {
 
     public WurmCallingWurmToken() {
         super("Wurm", "X/X green Wurm creature token");
@@ -43,5 +43,13 @@ public class WurmCallingWurmToken extends Token {
         subtype.add(SubType.WURM);
         power = new MageInt(0);
         toughness = new MageInt(0);
+    }
+
+    public WurmCallingWurmToken(final WurmCallingWurmToken token) {
+        super(token);
+    }
+
+    public WurmCallingWurmToken copy() {
+        return new WurmCallingWurmToken(this);
     }
 }

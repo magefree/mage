@@ -36,7 +36,7 @@ import mage.abilities.keyword.DefenderAbility;
  *
  * @author spjspj
  */
-public class WallToken extends Token {
+public class WallToken extends TokenImpl {
 
     public WallToken() {
         super("", "2/6 white wall creature with defender");
@@ -46,5 +46,13 @@ public class WallToken extends Token {
         power = new MageInt(2);
         toughness = new MageInt(6);
         this.addAbility(DefenderAbility.getInstance());
+    }
+
+    public WallToken(final WallToken token) {
+        super(token);
+    }
+
+    public WallToken copy() {
+        return new WallToken(this);
     }
 }

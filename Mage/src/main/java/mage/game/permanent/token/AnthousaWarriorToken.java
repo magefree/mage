@@ -36,7 +36,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class AnthousaWarriorToken extends Token {
+public class AnthousaWarriorToken extends TokenImpl {
 
     public AnthousaWarriorToken() {
         super("", "2/2 Warrior creatures");
@@ -46,5 +46,12 @@ public class AnthousaWarriorToken extends Token {
         toughness = new MageInt(2);
     }
 
+    public AnthousaWarriorToken(final AnthousaWarriorToken token) {
+        super(token);
+    }
+
+    public AnthousaWarriorToken copy() {
+        return new AnthousaWarriorToken(this);
+    }
 }
 

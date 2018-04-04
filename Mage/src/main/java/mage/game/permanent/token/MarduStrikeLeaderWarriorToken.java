@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class MarduStrikeLeaderWarriorToken extends Token {
+public class MarduStrikeLeaderWarriorToken extends TokenImpl {
 
     public MarduStrikeLeaderWarriorToken() {
         super("Warrior", "2/1 black Warrior creature token");
@@ -46,4 +46,11 @@ public class MarduStrikeLeaderWarriorToken extends Token {
         toughness = new MageInt(1);
     }
 
+    public MarduStrikeLeaderWarriorToken(final MarduStrikeLeaderWarriorToken token) {
+        super(token);
+    }
+
+    public MarduStrikeLeaderWarriorToken copy() {
+        return new MarduStrikeLeaderWarriorToken(this);
+    }
 }

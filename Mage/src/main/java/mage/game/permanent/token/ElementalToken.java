@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author magenoxx
  */
-public class ElementalToken extends Token {
+public class ElementalToken extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 
@@ -77,5 +77,13 @@ public class ElementalToken extends Token {
         toughness = new MageInt(1);
         
         if (hasHaste) this.addAbility(HasteAbility.getInstance());
+    }
+
+    public ElementalToken(final ElementalToken token) {
+        super(token);
+    }
+
+    public ElementalToken copy() {
+        return new ElementalToken(this);
     }
 }

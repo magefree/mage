@@ -40,7 +40,7 @@ import mage.abilities.mana.GreenManaAbility;
  *
  * @author spjspj
  */
-public class FreyaliseLlanowarsFuryToken extends Token {
+public class FreyaliseLlanowarsFuryToken extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 
@@ -70,5 +70,13 @@ public class FreyaliseLlanowarsFuryToken extends Token {
 
         // {T}: Add {G} to your mana pool.
         this.addAbility(new GreenManaAbility());
+    }
+
+    public FreyaliseLlanowarsFuryToken(final FreyaliseLlanowarsFuryToken token) {
+        super(token);
+    }
+
+    public FreyaliseLlanowarsFuryToken copy() {
+        return new FreyaliseLlanowarsFuryToken(this);
     }
 }

@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj & L_J
  */
-public class BrokenVisageSpiritToken extends Token {
+public class BrokenVisageSpiritToken extends TokenImpl {
 
     public BrokenVisageSpiritToken() {
         this(0,0);
@@ -48,5 +48,13 @@ public class BrokenVisageSpiritToken extends Token {
         subtype.add(SubType.SPIRIT);
         power = new MageInt(tokenPower);
         toughness = new MageInt(tokenToughness);
+    }
+
+    public BrokenVisageSpiritToken(final BrokenVisageSpiritToken token) {
+        super(token);
+    }
+
+    public BrokenVisageSpiritToken copy() {
+        return new BrokenVisageSpiritToken(this);
     }
 }

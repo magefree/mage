@@ -49,6 +49,7 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.events.GameEvent;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.target.TargetSpell;
 
@@ -88,7 +89,7 @@ public class CallowJushi extends CardImpl {
     }
 }
 
-class JarakuTheInterloper extends Token {
+class JarakuTheInterloper extends TokenImpl {
 
     JarakuTheInterloper() {
         super("Jaraku the Interloper", "");
@@ -106,5 +107,12 @@ class JarakuTheInterloper extends Token {
                 new RemoveCountersSourceCost(CounterType.KI.createInstance()));
         ability.addTarget(new TargetSpell());
         this.addAbility(ability);
+    }
+    public JarakuTheInterloper(final JarakuTheInterloper token) {
+        super(token);
+    }
+
+    public JarakuTheInterloper copy() {
+        return new JarakuTheInterloper(this);
     }
 }

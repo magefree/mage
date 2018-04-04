@@ -36,7 +36,7 @@ import mage.abilities.keyword.DefenderAbility;
  *
  * @author spjspj
  */
-public class WoodToken extends Token {
+public class WoodToken extends TokenImpl {
 
     public WoodToken() {
         super("Wood", "0/1 green Wall creature token with defender named Wood");
@@ -48,5 +48,13 @@ public class WoodToken extends Token {
         toughness = new MageInt(1);
 
         this.addAbility(DefenderAbility.getInstance());
+    }
+
+    public WoodToken(final WoodToken token) {
+        super(token);
+    }
+
+    public WoodToken copy() {
+        return new WoodToken(this);
     }
 }

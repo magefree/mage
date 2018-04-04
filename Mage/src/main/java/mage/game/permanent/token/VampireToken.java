@@ -36,7 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
  *
  * @author spjspj
  */
-public class VampireToken extends Token {
+public class VampireToken extends TokenImpl {
 
     public VampireToken() {
         super("Vampire", "2/2 black Vampire creature token with flying");
@@ -46,5 +46,13 @@ public class VampireToken extends Token {
         power = new MageInt(2);
         toughness = new MageInt(2);
         addAbility(FlyingAbility.getInstance());
+    }
+
+    public VampireToken(final VampireToken token) {
+        super(token);
+    }
+
+    public VampireToken copy() {
+        return new VampireToken(this);
     }
 }

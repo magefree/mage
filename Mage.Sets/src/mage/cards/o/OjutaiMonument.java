@@ -41,6 +41,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 
 /**
@@ -70,7 +71,7 @@ public class OjutaiMonument extends CardImpl {
         return new OjutaiMonument(this);
     }
     
-    private static class OjutaiMonumentToken extends Token {
+    private static class OjutaiMonumentToken extends TokenImpl {
         OjutaiMonumentToken() {
             super("", "4/4 white and blue Dragon artifact creature with flying");
             cardType.add(CardType.ARTIFACT);
@@ -81,6 +82,14 @@ public class OjutaiMonument extends CardImpl {
             power = new MageInt(4);
             toughness = new MageInt(4);
             this.addAbility(FlyingAbility.getInstance());
+        }
+
+        public OjutaiMonumentToken(final OjutaiMonumentToken token) {
+            super(token);
+        }
+
+        public OjutaiMonumentToken copy() {
+            return new OjutaiMonumentToken(this);
         }
     }    
 }

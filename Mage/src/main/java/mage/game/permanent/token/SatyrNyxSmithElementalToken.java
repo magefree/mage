@@ -36,7 +36,7 @@ import mage.abilities.keyword.HasteAbility;
  *
  * @author spjspj
  */
-public class SatyrNyxSmithElementalToken extends Token {
+public class SatyrNyxSmithElementalToken extends TokenImpl {
 
     public SatyrNyxSmithElementalToken() {
         super("Elemental", "3/1 red Elemental enchantment creature token with haste");
@@ -48,5 +48,13 @@ public class SatyrNyxSmithElementalToken extends Token {
         toughness = new MageInt(1);
         this.addAbility(HasteAbility.getInstance());
         this.setOriginalExpansionSetCode("BNG");
+    }
+
+    public SatyrNyxSmithElementalToken(final SatyrNyxSmithElementalToken token) {
+        super(token);
+    }
+
+    public SatyrNyxSmithElementalToken copy() {
+        return new SatyrNyxSmithElementalToken(this);
     }
 }

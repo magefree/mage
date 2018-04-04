@@ -36,7 +36,7 @@ import mage.constants.SubType;
  *
  * @author spjspj
  */
-public class RukhEggBirdToken extends Token {
+public class RukhEggBirdToken extends TokenImpl {
 
     public RukhEggBirdToken() {
         this("ARN"); //there is no such token in either ARN, 8ED or 9ED
@@ -53,5 +53,11 @@ public class RukhEggBirdToken extends Token {
         toughness = new MageInt(4);
         addAbility(FlyingAbility.getInstance());
     }
+    public RukhEggBirdToken(final RukhEggBirdToken token) {
+        super(token);
+    }
 
+    public RukhEggBirdToken copy() {
+        return new RukhEggBirdToken(this);
+    }
 }

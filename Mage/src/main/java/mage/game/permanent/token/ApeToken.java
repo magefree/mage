@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class ApeToken extends Token {
+public class ApeToken extends TokenImpl {
 
     public ApeToken() {
         super("Ape", "2/2 green Ape creature token");
@@ -44,5 +44,13 @@ public class ApeToken extends Token {
         subtype.add(SubType.APE);
         power = new MageInt(2);
         toughness = new MageInt(2);
+    }
+
+    public ApeToken(final ApeToken token) {
+        super(token);
+    }
+
+    public ApeToken copy() {
+        return new ApeToken(this);
     }
 }

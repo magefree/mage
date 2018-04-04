@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class OgreToken extends Token {
+public class OgreToken extends TokenImpl {
 
     public OgreToken() {
         super("Ogre", "3/3 red Ogre creature");
@@ -44,5 +44,13 @@ public class OgreToken extends Token {
         subtype.add(SubType.OGRE);
         power = new MageInt(3);
         toughness = new MageInt(3);
+    }
+
+    public OgreToken(final OgreToken token) {
+        super(token);
+    }
+
+    public OgreToken copy() {
+        return new OgreToken(this);
     }
 }

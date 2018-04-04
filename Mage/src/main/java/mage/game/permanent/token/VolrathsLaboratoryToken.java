@@ -36,7 +36,7 @@ import mage.constants.SubType;
  *
  * @author spjspj
  */
-public class VolrathsLaboratoryToken extends Token {
+public class VolrathsLaboratoryToken extends TokenImpl {
 
     public VolrathsLaboratoryToken() {
         this(null, null);
@@ -52,5 +52,13 @@ public class VolrathsLaboratoryToken extends Token {
         }
         power = new MageInt(2);
         toughness = new MageInt(2);
+    }
+
+    public VolrathsLaboratoryToken(final VolrathsLaboratoryToken token) {
+        super(token);
+    }
+
+    public VolrathsLaboratoryToken copy() {
+        return new VolrathsLaboratoryToken(this);
     }
 }

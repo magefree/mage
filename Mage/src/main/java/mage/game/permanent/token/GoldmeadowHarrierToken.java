@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author spjspj
  */
-public class GoldmeadowHarrierToken extends Token {
+public class GoldmeadowHarrierToken extends TokenImpl {
 
     public GoldmeadowHarrierToken() {
         super("Goldmeadow Harrier", "1/1 white Kithkin Soldier creature token named Goldmeadow Harrier with \"{W}, {T}: Tap target creature.\"");
@@ -58,5 +58,13 @@ public class GoldmeadowHarrierToken extends Token {
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
+    }
+
+    public GoldmeadowHarrierToken(final GoldmeadowHarrierToken token) {
+        super(token);
+    }
+
+    public GoldmeadowHarrierToken copy() {
+        return new GoldmeadowHarrierToken(this);
     }
 }

@@ -36,7 +36,7 @@ import mage.constants.SubType;
  *
  * @author Styxo
  */
-public class EwokToken extends Token {
+public class EwokToken extends TokenImpl {
 
     public EwokToken() {
         super("Ewok", "1/1 green Ewok creature tokens", 1, 1);
@@ -45,5 +45,13 @@ public class EwokToken extends Token {
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.EWOK);
         color.setGreen(true);
+    }
+
+    public EwokToken(final EwokToken token) {
+        super(token);
+    }
+
+    public EwokToken copy() {
+        return new EwokToken(this);
     }
 }
