@@ -25,51 +25,60 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.j;
+package mage.abilities.effects.common.continuous;
 
-import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.SourceIsSpellCondition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.common.continuous.WUBRGInsteadEffect;
-import mage.abilities.keyword.FlyingAbility;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
- * @author CountAndromalius
+ * @author JRHerlehy
+ *         Created on 4/4/18.
  */
-public class JodahArchmageEternal extends CardImpl {
+public class WUBRGInsteadEffect extends ContinuousEffectImpl {
 
-    public JodahArchmageEternal(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{R}{W}");
-        this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add(SubType.WIZARD);
+    static AlternativeCostSourceAbility alternativeCastingCostAbility = new AlternativeCostSourceAbility(new ManaCostsImpl("{W}{U}{B}{R}{G}"), SourceIsSpellCondition.instance);
 
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(3);
-
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-        
-        // You may pay WUBRG rather than pay the mana cost for spells that you cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new WUBRGInsteadEffect()));
+    public WUBRGInsteadEffect() {
+        super(Duration.WhileOnBattlefield, Outcome.Detriment);
+        staticText = "You may pay {W}{U}{B}{R}{G} rather than pay the mana cost for spells that you cast";
     }
 
-    public JodahArchmageEternal(final JodahArchmageEternal card) {
-        super(card);
+    public WUBRGInsteadEffect(final WUBRGInsteadEffect effect) {
+        super(effect);
     }
 
     @Override
-    public JodahArchmageEternal copy() {
-        return new JodahArchmageEternal(this);
+    public WUBRGInsteadEffect copy() {
+        return new WUBRGInsteadEffect(this);
     }
+
+    @Override
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            controller.getAlternativeSourceCosts().add(alternativeCastingCostAbility);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return false;
+    }
+
+    @Override
+    public boolean hasLayer(Layer layer) {
+        return layer == Layer.RulesEffects;
+    }
+
 }

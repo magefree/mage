@@ -34,6 +34,7 @@ import mage.abilities.condition.common.SourceIsSpellCondition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.common.continuous.WUBRGInsteadEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -50,7 +51,7 @@ public class FistOfSuns extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // You may pay {W}{U}{B}{R}{G} rather than pay the mana cost for spells that you cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new FistOfSunsRuleEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new WUBRGInsteadEffect()));
     }
 
     public FistOfSuns(final FistOfSuns card) {
@@ -62,43 +63,4 @@ public class FistOfSuns extends CardImpl {
         return new FistOfSuns(this);
     }
         
-}
-
-class FistOfSunsRuleEffect extends ContinuousEffectImpl {
-
-    static AlternativeCostSourceAbility alternativeCastingCostAbility = new AlternativeCostSourceAbility(new ManaCostsImpl("{W}{U}{B}{R}{G}"), SourceIsSpellCondition.instance);
-    
-    public FistOfSunsRuleEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "You may pay {W}{U}{B}{R}{G} rather than pay the mana cost for spells that you cast";
-    }
-
-    public FistOfSunsRuleEffect(final FistOfSunsRuleEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public FistOfSunsRuleEffect copy() {
-        return new FistOfSunsRuleEffect(this);
-    }
-
-    @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            controller.getAlternativeSourceCosts().add(alternativeCastingCostAbility);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.RulesEffects;
-    }
 }
