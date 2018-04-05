@@ -1,0 +1,3 @@
+04-05 13:48:31 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "EXPANSION" not found; SQL statement:
+DROP TABLE `expansion`  [42102-187]
