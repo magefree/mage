@@ -25,50 +25,58 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.b;
+package mage.cards.s;
 
 import java.util.UUID;
 
-import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.combat.CantAttackYouUnlessPayManaAllEffect;
-import mage.abilities.keyword.VigilanceAbility;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.delayed.OnLeaveReturnExiledToBattlefieldAbility;
+import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
+import mage.abilities.effects.common.ExileUntilSourceLeavesEffect;
+import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.c.CastOut;
 import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.TargetController;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.filter.predicate.permanent.TappedPredicate;
+import mage.target.TargetPermanent;
 
 /**
  * @author JRHerlehy
  *         Created on 4/4/18.
  */
-public class BairdStewardOfArgive extends CardImpl {
+public class SealAway extends CardImpl {
 
-    public BairdStewardOfArgive(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
+    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
-        this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add(SubType.HUMAN, SubType.SOLDIER);
-
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(4);
-
-        //Vigilance
-        this.addAbility(VigilanceAbility.getInstance());
-
-        //Creatures can’t attack you or a planeswalker you control unless their controller pays {1} for each of those creatures.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackYouUnlessPayManaAllEffect(new ManaCostsImpl("{1}"), true)));
+    static {
+        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+        filter.add(new TappedPredicate());
     }
 
-    public BairdStewardOfArgive(final BairdStewardOfArgive card) {
+    public SealAway(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
+
+        //Flash
+        this.addAbility(FlashAbility.getInstance());
+
+        //When Seal Away enters the battlefield, exile target tapped creature an opponent controls until Seal Away leaves the battlefield.
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ExileUntilSourceLeavesEffect(filter.getMessage()));
+        ability.addTarget(new TargetPermanent(filter));
+        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
+        this.addAbility(ability);
+    }
+
+    public SealAway(final SealAway card) {
         super(card);
     }
 
     @Override
-    public BairdStewardOfArgive copy() {
-        return new BairdStewardOfArgive(this);
+    public SealAway copy() {
+        return new SealAway(this);
     }
 }
