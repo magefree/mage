@@ -668,7 +668,7 @@ public class MageBook extends JComponent {
         setPreferredSize(new Dimension(conf.WIDTH, conf.HEIGHT));
         setMinimumSize(new Dimension(conf.WIDTH, conf.HEIGHT));
         addSetTabs();
-        showCards();
+        showCardsOrTokens();
     }
 
     /**
