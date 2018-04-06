@@ -25,58 +25,78 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.s;
+package mage.cards.n;
 
 import java.util.UUID;
 
+import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.delayed.OnLeaveReturnExiledToBattlefieldAbility;
-import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
-import mage.abilities.effects.common.ExileUntilSourceLeavesEffect;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.c.CastOut;
 import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.constants.TargetController;
+import mage.constants.Zone;
+import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
-import mage.filter.predicate.permanent.TappedPredicate;
-import mage.target.TargetPermanent;
+import mage.target.TargetSpell;
 
 /**
  * @author JRHerlehy
- *         Created on 4/4/18.
+ *         Created on 4/5/18.
  */
-public class SealAway extends CardImpl {
+public class NaruMehaMasterWizard extends CardImpl {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creature");
+    private static final FilterSpell spellFilter = new FilterSpell("instant or sorcery you control");
+    private static final FilterCreaturePermanent wizardFilter = new FilterCreaturePermanent(SubType.WIZARD, "Wizards");
 
     static {
-        filter.add(new ControllerPredicate(TargetController.OPPONENT));
-        filter.add(new TappedPredicate());
+        wizardFilter.add(new ControllerPredicate(TargetController.YOU));
+        spellFilter.add(new ControllerPredicate(TargetController.YOU));
+        spellFilter.add(Predicates.or(
+                new CardTypePredicate(CardType.INSTANT),
+                new CardTypePredicate(CardType.SORCERY)
+        ));
     }
 
-    public SealAway(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
+    public NaruMehaMasterWizard(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
+
+        this.addSuperType(SuperType.LEGENDARY);
+        this.subtype.add(SubType.HUMAN, SubType.WIZARD);
+
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
 
         //Flash
         this.addAbility(FlashAbility.getInstance());
 
-        //When Seal Away enters the battlefield, exile target tapped creature an opponent controls until Seal Away leaves the battlefield.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ExileUntilSourceLeavesEffect(filter.getMessage()));
-        ability.addTarget(new TargetPermanent(filter));
-        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
+        //When Naru Meha, Master Wizard enters the battlefield, copy target instant or sorcery spell you control. You may choose new targets for the copy.
+        Ability ability = new EntersBattlefieldTriggeredAbility(new CopyTargetSpellEffect());
+        ability.addTarget(new TargetSpell(spellFilter));
         this.addAbility(ability);
+
+        //Other Wizards you control get +1/+1.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, wizardFilter, true)));
     }
 
-    public SealAway(final SealAway card) {
+    public NaruMehaMasterWizard(final NaruMehaMasterWizard card) {
         super(card);
     }
 
     @Override
-    public SealAway copy() {
-        return new SealAway(this);
+    public NaruMehaMasterWizard copy() {
+        return new NaruMehaMasterWizard(this);
     }
+
 }
