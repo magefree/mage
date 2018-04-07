@@ -36,7 +36,7 @@ import mage.abilities.keyword.HasteAbility;
  *
  * @author spjspj
  */
-public class GiantBaitingGiantWarriorToken extends Token {
+public class GiantBaitingGiantWarriorToken extends TokenImpl {
 
     public GiantBaitingGiantWarriorToken() {
         super("Giant Warrior", "4/4 red and green Giant Warrior creature token with haste");
@@ -48,5 +48,13 @@ public class GiantBaitingGiantWarriorToken extends Token {
         power = new MageInt(4);
         toughness = new MageInt(4);
         this.addAbility(HasteAbility.getInstance());
+    }
+
+    public GiantBaitingGiantWarriorToken(final GiantBaitingGiantWarriorToken token) {
+        super(token);
+    }
+
+    public GiantBaitingGiantWarriorToken copy() {
+        return new GiantBaitingGiantWarriorToken(this);
     }
 }

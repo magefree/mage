@@ -43,6 +43,7 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureSpell;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 
 import java.util.UUID;
@@ -74,7 +75,7 @@ public class OpalGuardian extends CardImpl {
     }
 }
 
-class OpalGuardianGargoyle extends Token {
+class OpalGuardianGargoyle extends TokenImpl {
     public OpalGuardianGargoyle() {
         super("Gargoyle", "3/4 Gargoyle creature with flying and protection from red");
         cardType.add(CardType.CREATURE);
@@ -83,5 +84,12 @@ class OpalGuardianGargoyle extends Token {
         toughness = new MageInt(4);
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(ProtectionAbility.from(ObjectColor.RED));
+    }
+    public OpalGuardianGargoyle(final OpalGuardianGargoyle token) {
+        super(token);
+    }
+
+    public OpalGuardianGargoyle copy() {
+        return new OpalGuardianGargoyle(this);
     }
 }

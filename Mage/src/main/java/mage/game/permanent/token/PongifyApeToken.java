@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class PongifyApeToken extends Token {
+public class PongifyApeToken extends TokenImpl {
 
     public PongifyApeToken() {
         super("Ape", "3/3 green Ape creature token");
@@ -44,5 +44,13 @@ public class PongifyApeToken extends Token {
         subtype.add(SubType.APE);
         power = new MageInt(3);
         toughness = new MageInt(3);
+    }
+
+    public PongifyApeToken(final PongifyApeToken token) {
+        super(token);
+    }
+
+    public PongifyApeToken copy() {
+        return new PongifyApeToken(this);
     }
 }

@@ -1,0 +1,60 @@
+package mage.cards.g;
+
+import java.util.UUID;
+
+import mage.MageInt;
+import mage.abilities.common.AttacksAloneTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.condition.common.KickedCondition;
+import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentToughnessValue;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.keyword.KickerAbility;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.counters.CounterType;
+
+/**
+ * @author JRHerlehy
+ *         Created on 4/5/18.
+ */
+public class GrunnTheLonelyKing extends CardImpl {
+
+    public GrunnTheLonelyKing(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
+        this.addSuperType(SuperType.LEGENDARY);
+        this.subtype.add(SubType.APE, SubType.WARRIOR);
+
+        this.power = new MageInt(5);
+        this.toughness = new MageInt(5);
+
+        //Kicker {3} (You may pay an additional {3} as you cast this spell.)
+        this.addAbility(new KickerAbility("{3}"));
+
+        //If Grunn, the Lonely King was kicked, it enters the battlefield with five +1/+1 counters on it.
+        this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance(5)), KickedCondition.instance)));
+
+        //Whenever Grunn attacks alone, double its power and toughness until end of turn.
+        SourcePermanentPowerCount power = new SourcePermanentPowerCount();
+        SourcePermanentToughnessValue toughness = new SourcePermanentToughnessValue();
+        Effect effect = new BoostSourceEffect(power, toughness, Duration.EndOfTurn, true);
+        effect.setText("double its power and toughness until end of turn");
+        this.addAbility(new AttacksAloneTriggeredAbility(effect));
+    }
+
+    public GrunnTheLonelyKing(final GrunnTheLonelyKing card) {
+        super(card);
+    }
+
+    @Override
+    public GrunnTheLonelyKing copy() {
+        return new GrunnTheLonelyKing(this);
+    }
+}

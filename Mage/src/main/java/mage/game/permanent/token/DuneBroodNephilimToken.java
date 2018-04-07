@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class DuneBroodNephilimToken extends Token {
+public class DuneBroodNephilimToken extends TokenImpl {
 
     public DuneBroodNephilimToken() {
         super("Sand", "1/1 colorless Sand creature token");
@@ -43,5 +43,12 @@ public class DuneBroodNephilimToken extends Token {
         subtype.add(SubType.SAND);
         power = new MageInt(1);
         toughness = new MageInt(1);
+    }
+    public DuneBroodNephilimToken(final DuneBroodNephilimToken token) {
+        super(token);
+    }
+
+    public DuneBroodNephilimToken copy() {
+        return new DuneBroodNephilimToken(this);
     }
 }

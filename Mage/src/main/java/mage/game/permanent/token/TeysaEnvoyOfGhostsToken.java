@@ -36,7 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
  *
  * @author spjspj
  */
-public class TeysaEnvoyOfGhostsToken extends Token {
+public class TeysaEnvoyOfGhostsToken extends TokenImpl {
 
     public TeysaEnvoyOfGhostsToken() {
         super("Spirit", "1/1 white and black Spirit creature token with flying");
@@ -47,5 +47,13 @@ public class TeysaEnvoyOfGhostsToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());
+    }
+
+    public TeysaEnvoyOfGhostsToken(final TeysaEnvoyOfGhostsToken token) {
+        super(token);
+    }
+
+    public TeysaEnvoyOfGhostsToken copy() {
+        return new TeysaEnvoyOfGhostsToken(this);
     }
 }

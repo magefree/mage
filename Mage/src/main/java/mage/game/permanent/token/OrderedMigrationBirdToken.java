@@ -36,7 +36,7 @@ import mage.constants.SubType;
  *
  * @author LoneFox
  */
-public class OrderedMigrationBirdToken extends Token {
+public class OrderedMigrationBirdToken extends TokenImpl {
 
     public OrderedMigrationBirdToken() {
         super("Bird", "1/1 blue Bird creature token with flying");
@@ -46,5 +46,13 @@ public class OrderedMigrationBirdToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
         addAbility(FlyingAbility.getInstance());
+    }
+
+    public OrderedMigrationBirdToken(final OrderedMigrationBirdToken token) {
+        super(token);
+    }
+
+    public OrderedMigrationBirdToken copy() {
+        return new OrderedMigrationBirdToken(this);
     }
 }

@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class CaribouToken extends Token {
+public class CaribouToken extends TokenImpl {
 
     public CaribouToken() {
         super("Caribou", "0/1 white Caribou creature token");
@@ -44,5 +44,13 @@ public class CaribouToken extends Token {
         subtype.add(SubType.CARIBOU);
         power = new MageInt(0);
         toughness = new MageInt(1);
+    }
+
+    public CaribouToken(final CaribouToken token) {
+        super(token);
+    }
+
+    public CaribouToken copy() {
+        return new CaribouToken(this);
     }
 }

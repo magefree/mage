@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class OneDozenEyesBeastToken extends Token {
+public class OneDozenEyesBeastToken extends TokenImpl {
 
     public OneDozenEyesBeastToken() {
         super("Beast", "5/5 green Beast creature token");
@@ -44,6 +44,14 @@ public class OneDozenEyesBeastToken extends Token {
         subtype.add(SubType.BEAST);
         power = new MageInt(5);
         toughness = new MageInt(5);
+    }
+
+    public OneDozenEyesBeastToken(final OneDozenEyesBeastToken token) {
+        super(token);
+    }
+
+    public OneDozenEyesBeastToken copy() {
+        return new OneDozenEyesBeastToken(this);
     }
 
 }

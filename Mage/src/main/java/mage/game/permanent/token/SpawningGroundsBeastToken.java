@@ -36,7 +36,7 @@ import mage.abilities.keyword.TrampleAbility;
  *
  * @author spjspj
  */
-public class SpawningGroundsBeastToken extends Token {
+public class SpawningGroundsBeastToken extends TokenImpl {
 
     public SpawningGroundsBeastToken() {
         super("Beast", "5/5 green Beast creature token with trample");
@@ -48,4 +48,11 @@ public class SpawningGroundsBeastToken extends Token {
         this.addAbility(TrampleAbility.getInstance());
     }
 
+    public SpawningGroundsBeastToken(final SpawningGroundsBeastToken token) {
+        super(token);
+    }
+
+    public SpawningGroundsBeastToken copy() {
+        return new SpawningGroundsBeastToken(this);
+    }
 }

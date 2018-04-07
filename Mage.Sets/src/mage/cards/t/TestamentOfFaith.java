@@ -47,6 +47,7 @@ import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 
 /**
@@ -175,12 +176,19 @@ class TestamentOfFaithBecomesCreatureSourceEffect extends ContinuousEffectImpl i
 }
 
 
-class TestamentOfFaithToken extends Token {
+class TestamentOfFaithToken extends TokenImpl {
     TestamentOfFaithToken() {
         super("Wall", "X/X Wall creature with defender");
         cardType.add(CardType.CREATURE);
         this.subtype.add(SubType.WALL);
         color.setWhite(true);
         this.addAbility(DefenderAbility.getInstance());
+    }
+    public TestamentOfFaithToken(final TestamentOfFaithToken token) {
+        super(token);
+    }
+
+    public TestamentOfFaithToken copy() {
+        return new TestamentOfFaithToken(this);
     }
 }

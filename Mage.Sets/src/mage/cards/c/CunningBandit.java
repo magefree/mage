@@ -49,6 +49,7 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.events.GameEvent;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -88,7 +89,7 @@ public class CunningBandit extends CardImpl {
     }
 }
 
-class AzamukiTreacheryIncarnate extends Token {
+class AzamukiTreacheryIncarnate extends TokenImpl {
 
     AzamukiTreacheryIncarnate() {
         super("Azamuki, Treachery Incarnate", "");
@@ -106,5 +107,12 @@ class AzamukiTreacheryIncarnate extends Token {
                 new RemoveCountersSourceCost(CounterType.KI.createInstance()));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
+    }
+    public AzamukiTreacheryIncarnate(final AzamukiTreacheryIncarnate token) {
+        super(token);
+    }
+
+    public AzamukiTreacheryIncarnate copy() {
+        return new AzamukiTreacheryIncarnate(this);
     }
 }

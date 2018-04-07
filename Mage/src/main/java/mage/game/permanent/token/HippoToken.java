@@ -35,7 +35,7 @@ import mage.constants.SubType;
  *
  * @author Styxo
  */
-public class HippoToken extends Token {
+public class HippoToken extends TokenImpl {
 
     public HippoToken() {
         super("Hippo", "1/1 green Hippo creature token");
@@ -46,5 +46,13 @@ public class HippoToken extends Token {
         
         power = new MageInt(1);
         toughness = new MageInt(1);
+    }
+
+    public HippoToken(final HippoToken token) {
+        super(token);
+    }
+
+    public HippoToken copy() {
+        return new HippoToken(this);
     }
 }

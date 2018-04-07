@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class SpawningPitToken extends Token {
+public class SpawningPitToken extends TokenImpl {
 
     public SpawningPitToken() {
         super("Spawn", "2/2 colorless Spawn artifact creature token");
@@ -44,5 +44,13 @@ public class SpawningPitToken extends Token {
         this.subtype.add(SubType.SPAWN);
         power = new MageInt(2);
         toughness = new MageInt(2);
+    }
+
+    public SpawningPitToken(final SpawningPitToken token) {
+        super(token);
+    }
+
+    public SpawningPitToken copy() {
+        return new SpawningPitToken(this);
     }
 }

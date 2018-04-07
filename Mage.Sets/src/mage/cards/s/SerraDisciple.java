@@ -24,15 +24,15 @@ public class SerraDisciple extends CardImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
 
+        // Flying, first strike
         addAbility(FlyingAbility.getInstance());
-
         addAbility(FirstStrikeAbility.getInstance());
 
+        // Whenever you cast a historic spell, Serra Disciple gets +1/+1 until end of turn
         Ability ability = new SpellCastControllerTriggeredAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn), new FilterHistoricSpell(), false,
         "Whenever you cast a historic spell, {this} gets +1/+1 until end of turn");
 
         addAbility(ability);
-
     }
 
     public SerraDisciple(final SerraDisciple serraDisciple){

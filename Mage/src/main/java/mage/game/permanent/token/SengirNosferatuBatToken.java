@@ -51,7 +51,7 @@ import mage.target.common.TargetCardInExile;
  *
  * @author spjspj
  */
-public class SengirNosferatuBatToken extends Token {
+public class SengirNosferatuBatToken extends TokenImpl {
 
     public SengirNosferatuBatToken() {
         super("Bat", "1/2 black Bat creature token with flying");
@@ -66,6 +66,14 @@ public class SengirNosferatuBatToken extends Token {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{1}{B}"));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
+    }
+
+    public SengirNosferatuBatToken(final SengirNosferatuBatToken token) {
+        super(token);
+    }
+
+    public SengirNosferatuBatToken copy() {
+        return new SengirNosferatuBatToken(this);
     }
 }
 

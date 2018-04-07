@@ -44,6 +44,7 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.game.command.emblems.GideonOfTheTrialsEmblem;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
 
@@ -90,7 +91,7 @@ public class GideonOfTheTrials extends CardImpl {
     }
 }
 
-class GideonOfTheTrialsToken extends Token {
+class GideonOfTheTrialsToken extends TokenImpl {
 
     public GideonOfTheTrialsToken() {
         super("", "a 4/4 Human Soldier creature with indestructible");
@@ -100,5 +101,12 @@ class GideonOfTheTrialsToken extends Token {
         power = new MageInt(4);
         toughness = new MageInt(4);
         this.addAbility(IndestructibleAbility.getInstance());
+    }
+    public GideonOfTheTrialsToken(final GideonOfTheTrialsToken token) {
+        super(token);
+    }
+
+    public GideonOfTheTrialsToken copy() {
+        return new GideonOfTheTrialsToken(this);
     }
 }

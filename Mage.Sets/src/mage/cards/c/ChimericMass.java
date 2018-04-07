@@ -44,6 +44,7 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 
 /**
@@ -73,7 +74,7 @@ public class ChimericMass extends CardImpl {
 
 }
 
-class ChimericMassToken extends Token {
+class ChimericMassToken extends TokenImpl {
 
     public ChimericMassToken() {
         super("", "Construct artifact creature with \"This creature's power and toughness are each equal to the number of charge counters on it.\"");
@@ -82,5 +83,12 @@ class ChimericMassToken extends Token {
         power = new MageInt(0);
         toughness = new MageInt(0);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetPowerToughnessSourceEffect(new CountersSourceCount(CounterType.CHARGE), Duration.WhileOnBattlefield)));
+    }
+    public ChimericMassToken(final ChimericMassToken token) {
+        super(token);
+    }
+
+    public ChimericMassToken copy() {
+        return new ChimericMassToken(this);
     }
 }

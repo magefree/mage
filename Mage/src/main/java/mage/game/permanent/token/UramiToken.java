@@ -37,7 +37,7 @@ import mage.constants.SuperType;
  *
  * @author spjspj
  */
-public class UramiToken extends Token {
+public class UramiToken extends TokenImpl {
 
     public UramiToken() {
         super("Urami", "legendary 5/5 black Demon Spirit creature token with flying named Urami");
@@ -51,5 +51,13 @@ public class UramiToken extends Token {
         toughness = new MageInt(5);
 
         this.addAbility(FlyingAbility.getInstance());
+    }
+
+    public UramiToken(final UramiToken token) {
+        super(token);
+    }
+
+    public UramiToken copy() {
+        return new UramiToken(this);
     }
 }

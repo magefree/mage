@@ -45,6 +45,7 @@ import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.target.TargetPermanent;
@@ -138,7 +139,7 @@ class NissaWorldwakerSearchEffect extends OneShotEffect {
     }
 }
 
-class NissaWorldwakerToken extends Token {
+class NissaWorldwakerToken extends TokenImpl {
 
     public NissaWorldwakerToken() {
         super("", "4/4 Elemental creature with trample");
@@ -148,5 +149,12 @@ class NissaWorldwakerToken extends Token {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
         this.addAbility(TrampleAbility.getInstance());
+    }
+    public NissaWorldwakerToken(final NissaWorldwakerToken token) {
+        super(token);
+    }
+
+    public NissaWorldwakerToken copy() {
+        return new NissaWorldwakerToken(this);
     }
 }

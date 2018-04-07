@@ -37,7 +37,7 @@ import mage.abilities.keyword.FlyingAbility;
  *
  * @author spjspj
  */
-public class AbhorrentOverlordHarpyToken extends Token {
+public class AbhorrentOverlordHarpyToken extends TokenImpl {
 
     public AbhorrentOverlordHarpyToken() {
         super("Harpy", "1/1 black Harpy creature tokens with flying");
@@ -48,5 +48,13 @@ public class AbhorrentOverlordHarpyToken extends Token {
         toughness = new MageInt(1);
 
         this.addAbility(FlyingAbility.getInstance());
+    }
+
+    public AbhorrentOverlordHarpyToken(final AbhorrentOverlordHarpyToken token) {
+        super(token);
+    }
+
+    public AbhorrentOverlordHarpyToken copy() {
+        return new AbhorrentOverlordHarpyToken(this);
     }
 }

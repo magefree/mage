@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class RhonassLastStandToken extends Token {
+public class RhonassLastStandToken extends TokenImpl {
 
     public RhonassLastStandToken() {
         super("Snake", "5/4 green Snake creature token");
@@ -44,5 +44,13 @@ public class RhonassLastStandToken extends Token {
         subtype.add(SubType.SNAKE);
         power = new MageInt(5);
         toughness = new MageInt(4);
+    }
+
+    public RhonassLastStandToken(final RhonassLastStandToken token) {
+        super(token);
+    }
+
+    public RhonassLastStandToken copy() {
+        return new RhonassLastStandToken(this);
     }
 }

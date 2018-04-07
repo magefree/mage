@@ -41,6 +41,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 
 /**
@@ -69,7 +70,7 @@ public class GhituEncampment extends CardImpl {
     }
 }
 
-class GhituEncampmentToken extends Token {
+class GhituEncampmentToken extends TokenImpl {
 
     public GhituEncampmentToken() {
         super("Warrior", "2/1 red Warrior creature with first strike");
@@ -81,5 +82,12 @@ class GhituEncampmentToken extends Token {
         toughness = new MageInt(1);
 
         this.addAbility(FirstStrikeAbility.getInstance());
+    }
+    public GhituEncampmentToken(final GhituEncampmentToken token) {
+        super(token);
+    }
+
+    public GhituEncampmentToken copy() {
+        return new GhituEncampmentToken(this);
     }
 }

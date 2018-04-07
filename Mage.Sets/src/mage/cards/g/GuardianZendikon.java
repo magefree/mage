@@ -44,6 +44,7 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
@@ -86,7 +87,7 @@ public class GuardianZendikon extends CardImpl {
     }
 }
 
-class WallToken extends Token {
+class WallToken extends TokenImpl {
 
     WallToken() {
         super("", "2/6 white wall creature with defender");
@@ -96,5 +97,12 @@ class WallToken extends Token {
         power = new MageInt(2);
         toughness = new MageInt(6);
         this.addAbility(DefenderAbility.getInstance());
+    }
+    public WallToken(final WallToken token) {
+        super(token);
+    }
+
+    public WallToken copy() {
+        return new WallToken(this);
     }
 }

@@ -43,6 +43,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
 
@@ -112,7 +113,7 @@ class ElvishBranchbenderEffect extends OneShotEffect {
     }
 }
 
-class ElvishBranchbenderToken extends Token {
+class ElvishBranchbenderToken extends TokenImpl {
 
     ElvishBranchbenderToken(int xValue) {
         super("Treefolk", "X/X Treefolk creature in addition to its other types, where X is the number of Elves you control");
@@ -120,5 +121,12 @@ class ElvishBranchbenderToken extends Token {
         subtype.add(SubType.TREEFOLK);
         power = new MageInt(xValue);
         toughness = new MageInt(xValue);
+    }
+    public ElvishBranchbenderToken(final ElvishBranchbenderToken token) {
+        super(token);
+    }
+
+    public ElvishBranchbenderToken copy() {
+        return new ElvishBranchbenderToken(this);
     }
 }

@@ -36,7 +36,7 @@ import mage.constants.SubType;
  *
  * @author spjspj
  */
-public class HellionHasteToken extends Token {
+public class HellionHasteToken extends TokenImpl {
 
     public HellionHasteToken() {
         super("Hellion", "4/4 red Hellion creature token with haste");
@@ -46,5 +46,12 @@ public class HellionHasteToken extends Token {
         power = new MageInt(4);
         toughness = new MageInt(4);
         addAbility(HasteAbility.getInstance());
+    }
+    public HellionHasteToken(final HellionHasteToken token) {
+        super(token);
+    }
+
+    public HellionHasteToken copy() {
+        return new HellionHasteToken(this);
     }
 }

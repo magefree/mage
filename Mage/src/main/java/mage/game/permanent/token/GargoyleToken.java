@@ -36,7 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
  *
  * @author spjspj
  */
-public class GargoyleToken extends Token {
+public class GargoyleToken extends TokenImpl {
 
     public GargoyleToken() {
         super("Gargoyle", "3/4 colorless Gargoyle artifact creature token with flying");
@@ -48,4 +48,11 @@ public class GargoyleToken extends Token {
         addAbility(FlyingAbility.getInstance());
     }
 
+    public GargoyleToken(final GargoyleToken token) {
+        super(token);
+    }
+
+    public GargoyleToken copy() {
+        return new GargoyleToken(this);
+    }
 }

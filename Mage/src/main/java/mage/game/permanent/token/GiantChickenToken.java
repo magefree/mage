@@ -36,7 +36,7 @@ import mage.constants.SubType;
  * @author ciaccona007
  */
 
-public class GiantChickenToken extends Token {
+public class GiantChickenToken extends TokenImpl {
 
     public GiantChickenToken() {
         super("Giant Chicken", "4/4 red Giant Chicken creature token");
@@ -46,5 +46,13 @@ public class GiantChickenToken extends Token {
         subtype.add(SubType.CHICKEN);
         power = new MageInt(4);
         toughness = new MageInt(4);
+    }
+
+    public GiantChickenToken(final GiantChickenToken token) {
+        super(token);
+    }
+
+    public GiantChickenToken copy() {
+        return new GiantChickenToken(this);
     }
 }

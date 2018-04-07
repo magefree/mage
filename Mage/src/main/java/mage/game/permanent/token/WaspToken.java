@@ -36,7 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
  *
  * @author spjspj
  */
-public class WaspToken extends Token {
+public class WaspToken extends TokenImpl {
 
     public WaspToken() {
         super("Wasp", "1/1 colorless Insect artifact creature token with flying");
@@ -46,5 +46,13 @@ public class WaspToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());
+    }
+
+    public WaspToken(final WaspToken token) {
+        super(token);
+    }
+
+    public WaspToken copy() {
+        return new WaspToken(this);
     }
 }

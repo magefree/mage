@@ -40,7 +40,7 @@ import mage.abilities.keyword.ProtectionAbility;
  *
  * @author LevelX2
  */
-public class HuntedCentaurToken extends Token {
+public class HuntedCentaurToken extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 
@@ -58,4 +58,11 @@ public class HuntedCentaurToken extends Token {
         this.addAbility(ProtectionAbility.from(ObjectColor.BLACK));
     }
 
+    public HuntedCentaurToken(final HuntedCentaurToken token) {
+        super(token);
+    }
+
+    public HuntedCentaurToken copy() {
+        return new HuntedCentaurToken(this);
+    }
 }

@@ -36,7 +36,7 @@ import mage.abilities.keyword.DeathtouchAbility;
  *
  * @author spjspj
  */
-public class Wurm1Token extends Token {
+public class Wurm1Token extends TokenImpl {
 
     public Wurm1Token() {
         this("MBS");
@@ -50,5 +50,13 @@ public class Wurm1Token extends Token {
         power = new MageInt(3);
         toughness = new MageInt(3);
         this.addAbility(DeathtouchAbility.getInstance());
+    }
+
+    public Wurm1Token(final Wurm1Token token) {
+        super(token);
+    }
+
+    public Wurm1Token copy() {
+        return new Wurm1Token(this);
     }
 }

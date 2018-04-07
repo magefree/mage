@@ -43,6 +43,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 
 /**
@@ -76,7 +77,7 @@ public class CreepingTarPit extends CardImpl {
 
 }
 
-class CreepingTarPitToken extends Token {
+class CreepingTarPitToken extends TokenImpl {
     public CreepingTarPitToken() {
         super("", "3/2 blue and black Elemental creature and can't be blocked");
         cardType.add(CardType.CREATURE);
@@ -86,5 +87,12 @@ class CreepingTarPitToken extends Token {
         power = new MageInt(3);
         toughness = new MageInt(2);
         this.addAbility(new CantBeBlockedSourceAbility());
+    }
+    public CreepingTarPitToken(final CreepingTarPitToken token) {
+        super(token);
+    }
+
+    public CreepingTarPitToken copy() {
+        return new CreepingTarPitToken(this);
     }
 }

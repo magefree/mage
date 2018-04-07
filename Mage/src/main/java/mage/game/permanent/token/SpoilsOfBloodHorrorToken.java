@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class SpoilsOfBloodHorrorToken extends Token {
+public class SpoilsOfBloodHorrorToken extends TokenImpl {
 
     public SpoilsOfBloodHorrorToken() {
         this(1);
@@ -48,5 +48,13 @@ public class SpoilsOfBloodHorrorToken extends Token {
         subtype.add(SubType.HORROR);
         power = new MageInt(xValue);
         toughness = new MageInt(xValue);
+    }
+
+    public SpoilsOfBloodHorrorToken(final SpoilsOfBloodHorrorToken token) {
+        super(token);
+    }
+
+    public SpoilsOfBloodHorrorToken copy() {
+        return new SpoilsOfBloodHorrorToken(this);
     }
 }

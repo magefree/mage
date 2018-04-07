@@ -30,9 +30,8 @@ package mage.abilities.costs;
 /**
  *
  * @author LevelX2
- * @param <T>
  */
-public class OptionalAdditionalCostImpl<T extends OptionalAdditionalCostImpl> extends CostsImpl<Cost> implements OptionalAdditionalCost {
+public class OptionalAdditionalCostImpl extends CostsImpl<Cost> implements OptionalAdditionalCost {
 
     protected String name;
     protected String reminderText;

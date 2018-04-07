@@ -25,39 +25,38 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package org.mage.test.cards.abilities.activated;
+package mage.cards.z;
 
-import mage.constants.ManaType;
-import mage.constants.PhaseStep;
-import mage.constants.Zone;
-import org.junit.Assert;
-import org.junit.Test;
-import org.mage.test.serverside.base.CardTestPlayerBase;
+import java.util.UUID;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.keyword.ScryEffect;
+import mage.abilities.mana.ColorlessManaAbility;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
 
 /**
  *
- * @author LevelX2
+ * @author Rystan
  */
-public class TokenActivatedAbilityTest extends CardTestPlayerBase {
+public class ZhalfirinVoid extends CardImpl {
 
-    /**
-     * Check that activated ability of created token works
-     */
-    @Test
-    public void testActivatedManaAbility() {
-        // Green mana doesn't empty from your mana pool as steps and phases end.
-        // Omnath, Locus of Mana gets +1/+1 for each green mana in your mana pool.
-        addCard(Zone.BATTLEFIELD, playerA, "Omnath, Locus of Mana", 1);
+    public ZhalfirinVoid(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        addCard(Zone.BATTLEFIELD, playerA, "Freyalise, Llanowar's Fury");
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+2: Create a 1/1 green Elf Druid creature token with \"{T}: Add {G} to your mana pool.\"");
-        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "+2: Create a 1/1 green Elf Druid creature token with \"{T}: Add {G} to your mana pool.\"");
-        activateManaAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {G} to your mana pool.");
-        setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
-        execute();
+        // When Zhalfirin Void enters the battlefield, scry 1.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new ScryEffect(1)));
 
-        assertPermanentCount(playerA, "Elf Druid", 2);
-        assertPermanentCount(playerA, "Freyalise, Llanowar's Fury", 1);
-        Assert.assertEquals("one green mana has to be in the mana pool", 1, playerA.getManaPool().get(ManaType.GREEN));
+        // {T}: Add {C} to you mana pool.
+        this.addAbility(new ColorlessManaAbility());
+    }
+
+    public ZhalfirinVoid(final ZhalfirinVoid card) {
+        super(card);
+    }
+
+    @Override
+    public ZhalfirinVoid copy() {
+        return new ZhalfirinVoid(this);
     }
 }

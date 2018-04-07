@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class BoarToken extends Token {
+public class BoarToken extends TokenImpl {
 
     public BoarToken() {
         super("Boar", "3/3 green Boar creature token");
@@ -44,5 +44,13 @@ public class BoarToken extends Token {
         subtype.add(SubType.BOAR);
         power = new MageInt(3);
         toughness = new MageInt(3);
+    }
+
+    public BoarToken(final BoarToken token) {
+        super(token);
+    }
+
+    public BoarToken copy() {
+        return new BoarToken(this);
     }
 }

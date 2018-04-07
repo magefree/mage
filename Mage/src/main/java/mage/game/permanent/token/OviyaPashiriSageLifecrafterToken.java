@@ -37,7 +37,7 @@ import mage.util.RandomUtil;
  *
  * @author spjspj
  */
-public class OviyaPashiriSageLifecrafterToken extends Token {
+public class OviyaPashiriSageLifecrafterToken extends TokenImpl {
 
     final static FilterControlledCreaturePermanent filterCreature = new FilterControlledCreaturePermanent("creatures you control");
 
@@ -54,5 +54,13 @@ public class OviyaPashiriSageLifecrafterToken extends Token {
         setTokenType(RandomUtil.nextInt(2) + 1);
         power = new MageInt(number);
         toughness = new MageInt(number);
+    }
+
+    public OviyaPashiriSageLifecrafterToken(final OviyaPashiriSageLifecrafterToken token) {
+        super(token);
+    }
+
+    public OviyaPashiriSageLifecrafterToken copy() {
+        return new OviyaPashiriSageLifecrafterToken(this);
     }
 }

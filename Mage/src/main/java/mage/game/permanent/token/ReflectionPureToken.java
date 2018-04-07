@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author SpikesCafe-google
  */
-public class ReflectionPureToken extends Token {
+public class ReflectionPureToken extends TokenImpl {
     
     public ReflectionPureToken() {
        this(1);
@@ -49,5 +49,13 @@ public class ReflectionPureToken extends Token {
         subtype.add(SubType.REFLECTION);
         power = new MageInt(xValue);
         toughness = new MageInt(xValue);
+    }
+
+    public ReflectionPureToken(final ReflectionPureToken token) {
+        super(token);
+    }
+
+    public ReflectionPureToken copy() {
+        return new ReflectionPureToken(this);
     }
 }

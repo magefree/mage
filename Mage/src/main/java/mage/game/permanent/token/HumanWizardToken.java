@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-public class HumanWizardToken extends Token {
+public class HumanWizardToken extends TokenImpl {
 
     public HumanWizardToken() {
         super("Human Wizard", "1/1 blue Human Wizard creature token");
@@ -14,5 +14,13 @@ public class HumanWizardToken extends Token {
         color.setBlue(true);
         power = new MageInt(1);
         toughness = new MageInt(1);
+    }
+
+    public HumanWizardToken(final HumanWizardToken token) {
+        super(token);
+    }
+
+    public HumanWizardToken copy() {
+        return new HumanWizardToken(this);
     }
 }

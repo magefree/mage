@@ -41,7 +41,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author spjspj
  */
-public class VoiceOfResurgenceToken extends Token {
+public class VoiceOfResurgenceToken extends TokenImpl {
 
     public VoiceOfResurgenceToken() {
         super("Elemental", "X/X green and white Elemental creature with with \"This creature's power and toughness are each equal to the number of creatures you control.");
@@ -56,5 +56,13 @@ public class VoiceOfResurgenceToken extends Token {
 
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetPowerToughnessSourceEffect(
                 new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent()), Duration.EndOfGame)));
+    }
+
+    public VoiceOfResurgenceToken(final VoiceOfResurgenceToken token) {
+        super(token);
+    }
+
+    public VoiceOfResurgenceToken copy() {
+        return new VoiceOfResurgenceToken(this);
     }
 }

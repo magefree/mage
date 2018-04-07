@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class RhysTheRedeemedToken extends Token {
+public class RhysTheRedeemedToken extends TokenImpl {
 
     public RhysTheRedeemedToken() {
         super("Elf Warrior", "1/1 green and white Elf Warrior creature token");
@@ -46,5 +46,13 @@ public class RhysTheRedeemedToken extends Token {
         subtype.add(SubType.WARRIOR);
         power = new MageInt(1);
         toughness = new MageInt(1);
+    }
+
+    public RhysTheRedeemedToken(final RhysTheRedeemedToken token) {
+        super(token);
+    }
+
+    public RhysTheRedeemedToken copy() {
+        return new RhysTheRedeemedToken(this);
     }
 }

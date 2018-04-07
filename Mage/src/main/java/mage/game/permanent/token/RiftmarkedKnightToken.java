@@ -39,7 +39,7 @@ import mage.abilities.keyword.ProtectionAbility;
  *
  * @author spjspj
  */
-public class RiftmarkedKnightToken extends Token {
+public class RiftmarkedKnightToken extends TokenImpl {
 
     public RiftmarkedKnightToken() {
         super("Knight", "2/2 black Knight creature token with flanking, protection from white, and haste");
@@ -51,5 +51,13 @@ public class RiftmarkedKnightToken extends Token {
         this.addAbility(ProtectionAbility.from(ObjectColor.WHITE));
         this.addAbility(new FlankingAbility());
         this.addAbility(HasteAbility.getInstance());
+    }
+
+    public RiftmarkedKnightToken(final RiftmarkedKnightToken token) {
+        super(token);
+    }
+
+    public RiftmarkedKnightToken copy() {
+        return new RiftmarkedKnightToken(this);
     }
 }

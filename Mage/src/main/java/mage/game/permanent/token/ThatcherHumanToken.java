@@ -37,7 +37,7 @@ import mage.constants.SubType;
  *
  * @author spjspj
  */
-public class ThatcherHumanToken extends Token {
+public class ThatcherHumanToken extends TokenImpl {
 
     public ThatcherHumanToken() {
         super("Human", "1/1 red Human creature token with haste");
@@ -48,5 +48,13 @@ public class ThatcherHumanToken extends Token {
         this.color = ObjectColor.RED;
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
+    }
+
+    public ThatcherHumanToken(final ThatcherHumanToken token) {
+        super(token);
+    }
+
+    public ThatcherHumanToken copy() {
+        return new ThatcherHumanToken(this);
     }
 }

@@ -34,7 +34,7 @@ import mage.constants.SubType;
  *
  * @author spjspj
  */
-public class CamaridToken extends Token {
+public class CamaridToken extends TokenImpl {
 
     public CamaridToken() {
         super("Camarid", "1/1 blue Camarid creature tokens");
@@ -44,5 +44,13 @@ public class CamaridToken extends Token {
         this.color.setBlue(true);
         this.getSubtype(null).add(SubType.CAMARID);
         this.addCardType(CardType.CREATURE);
+    }
+
+    public CamaridToken(final CamaridToken token) {
+        super(token);
+    }
+
+    public CamaridToken copy() {
+        return new CamaridToken(this);
     }
 }

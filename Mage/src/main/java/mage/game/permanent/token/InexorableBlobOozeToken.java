@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class InexorableBlobOozeToken extends Token {
+public class InexorableBlobOozeToken extends TokenImpl {
 
     public InexorableBlobOozeToken() {
         super("Ooze", "3/3 green Ooze creature token");
@@ -44,5 +44,13 @@ public class InexorableBlobOozeToken extends Token {
         color.setGreen(true);
         power = new MageInt(3);
         toughness = new MageInt(3);
+    }
+
+    public InexorableBlobOozeToken(final InexorableBlobOozeToken token) {
+        super(token);
+    }
+
+    public InexorableBlobOozeToken copy() {
+        return new InexorableBlobOozeToken(this);
     }
 }

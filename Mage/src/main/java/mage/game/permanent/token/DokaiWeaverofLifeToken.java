@@ -43,7 +43,7 @@ import mage.filter.common.FilterControlledPermanent;
  *
  * @author spjspj
  */
-public class DokaiWeaverofLifeToken extends Token {
+public class DokaiWeaverofLifeToken extends TokenImpl {
 
     final static FilterControlledPermanent filterLands = new FilterControlledLandPermanent("lands you control");
 
@@ -56,5 +56,13 @@ public class DokaiWeaverofLifeToken extends Token {
         toughness = new MageInt(0);
         DynamicValue controlledLands = new PermanentsOnBattlefieldCount(filterLands);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(controlledLands, controlledLands, Duration.WhileOnBattlefield)));
+    }
+
+    public DokaiWeaverofLifeToken(final DokaiWeaverofLifeToken token) {
+        super(token);
+    }
+
+    public DokaiWeaverofLifeToken copy() {
+        return new DokaiWeaverofLifeToken(this);
     }
 }

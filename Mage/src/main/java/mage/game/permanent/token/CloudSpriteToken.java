@@ -37,7 +37,7 @@ import mage.abilities.keyword.FlyingAbility;
  *
  * @author spjspj
  */
-public class CloudSpriteToken extends Token {
+public class CloudSpriteToken extends TokenImpl {
 
     public CloudSpriteToken() {
         super("Cloud Sprite", "1/1 blue faerie creature token named Cloud Sprite with flying and \"Cloud Sprite can block only creatures with flying.\"");
@@ -50,5 +50,13 @@ public class CloudSpriteToken extends Token {
 
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(new CanBlockOnlyFlyingAbility());
+    }
+
+    public CloudSpriteToken(final CloudSpriteToken token) {
+        super(token);
+    }
+
+    public CloudSpriteToken copy() {
+        return new CloudSpriteToken(this);
     }
 }

@@ -43,7 +43,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author TheElk801
  */
-public class JaceCunningCastawayIllusionToken extends Token {
+public class JaceCunningCastawayIllusionToken extends TokenImpl {
 
     public JaceCunningCastawayIllusionToken() {
         super("Illusion", "2/2 blue Illusion creature token with \"When this creature becomes the target of a spell, sacrifice it.\"");
@@ -55,6 +55,14 @@ public class JaceCunningCastawayIllusionToken extends Token {
         toughness = new MageInt(2);
 
         this.addAbility(new IllusionTokenTriggeredAbility());
+    }
+
+    public JaceCunningCastawayIllusionToken(final JaceCunningCastawayIllusionToken token) {
+        super(token);
+    }
+
+    public JaceCunningCastawayIllusionToken copy() {
+        return new JaceCunningCastawayIllusionToken(this);
     }
 }
 

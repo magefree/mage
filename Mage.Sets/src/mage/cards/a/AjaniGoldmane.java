@@ -47,6 +47,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 
@@ -88,7 +89,7 @@ public class AjaniGoldmane extends CardImpl {
 
 }
 
-class AvatarToken extends Token {
+class AvatarToken extends TokenImpl {
 
     public AvatarToken() {
         super("Avatar", "white Avatar creature token with \"This creature's power and toughness are each equal to your life total.\"");
@@ -97,7 +98,13 @@ class AvatarToken extends Token {
         color.setWhite(true);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AvatarTokenEffect()));
     }
+    public AvatarToken(final AvatarToken token) {
+        super(token);
+    }
 
+    public AvatarToken copy() {
+        return new AvatarToken(this);
+    }
 }
 
 class AvatarTokenEffect extends ContinuousEffectImpl {

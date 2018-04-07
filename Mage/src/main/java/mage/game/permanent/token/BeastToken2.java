@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author LoneFox
  */
-public class BeastToken2 extends Token {
+public class BeastToken2 extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 

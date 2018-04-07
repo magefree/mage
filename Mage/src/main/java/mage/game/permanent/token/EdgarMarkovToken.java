@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class EdgarMarkovToken extends Token {
+public class EdgarMarkovToken extends TokenImpl {
 
     public EdgarMarkovToken() {
         super("Vampire", "1/1 black Vampire creature token");
@@ -44,5 +44,13 @@ public class EdgarMarkovToken extends Token {
         subtype.add(SubType.VAMPIRE);
         power = new MageInt(1);
         toughness = new MageInt(1);
+    }
+
+    public EdgarMarkovToken(final EdgarMarkovToken token) {
+        super(token);
+    }
+
+    public EdgarMarkovToken copy() {
+        return new EdgarMarkovToken(this);
     }
 }

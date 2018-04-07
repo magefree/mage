@@ -36,7 +36,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class BaruFistOfKrosaToken extends Token {
+public class BaruFistOfKrosaToken extends TokenImpl {
 
     public BaruFistOfKrosaToken() {
        this(1);
@@ -49,6 +49,14 @@ public class BaruFistOfKrosaToken extends Token {
         subtype.add(SubType.WURM);
         power = new MageInt(xValue);
         toughness = new MageInt(xValue);
+    }
+
+    public BaruFistOfKrosaToken(final BaruFistOfKrosaToken token) {
+        super(token);
+    }
+
+    public BaruFistOfKrosaToken copy() {
+        return new BaruFistOfKrosaToken(this);
     }
 }
 

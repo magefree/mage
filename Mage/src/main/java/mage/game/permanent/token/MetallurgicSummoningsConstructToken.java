@@ -36,7 +36,7 @@ import mage.util.RandomUtil;
  *
  * @author spjspj
  */
-public class MetallurgicSummoningsConstructToken extends Token {
+public class MetallurgicSummoningsConstructToken extends TokenImpl {
 
     public MetallurgicSummoningsConstructToken() {
         this (1);
@@ -50,5 +50,12 @@ public class MetallurgicSummoningsConstructToken extends Token {
         subtype.add(SubType.CONSTRUCT);
         power = new MageInt(xValue);
         toughness = new MageInt(xValue);
+    }
+    public MetallurgicSummoningsConstructToken(final MetallurgicSummoningsConstructToken token) {
+        super(token);
+    }
+
+    public MetallurgicSummoningsConstructToken copy() {
+        return new MetallurgicSummoningsConstructToken(this);
     }
 }

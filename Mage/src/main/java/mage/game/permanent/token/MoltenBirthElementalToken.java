@@ -36,7 +36,7 @@ import mage.util.RandomUtil;
  *
  * @author spjspj
  */
-public class MoltenBirthElementalToken extends Token {
+public class MoltenBirthElementalToken extends TokenImpl {
 
     public MoltenBirthElementalToken() {
         super("Elemental", "1/1 red Elemental creature");
@@ -47,5 +47,13 @@ public class MoltenBirthElementalToken extends Token {
         subtype.add(SubType.ELEMENTAL);
         power = new MageInt(1);
         toughness = new MageInt(1);
+    }
+
+    public MoltenBirthElementalToken(final MoltenBirthElementalToken token) {
+        super(token);
+    }
+
+    public MoltenBirthElementalToken copy() {
+        return new MoltenBirthElementalToken(this);
     }
 }

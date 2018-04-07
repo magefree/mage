@@ -36,7 +36,7 @@ import mage.util.RandomUtil;
  *
  * @author spjspj
  */
-public class YoungPyromancerElementalToken extends Token {
+public class YoungPyromancerElementalToken extends TokenImpl {
 
     public YoungPyromancerElementalToken() {
         super("Elemental", "1/1 red Elemental creature");
@@ -51,5 +51,13 @@ public class YoungPyromancerElementalToken extends Token {
         subtype.add(SubType.ELEMENTAL);
         power = new MageInt(1);
         toughness = new MageInt(1);
+    }
+
+    public YoungPyromancerElementalToken(final YoungPyromancerElementalToken token) {
+        super(token);
+    }
+
+    public YoungPyromancerElementalToken copy() {
+        return new YoungPyromancerElementalToken(this);
     }
 }

@@ -36,7 +36,7 @@ import mage.constants.SubType;
  *
  * @author L_J
  */
-public class ErrandOfDutyKnightToken extends Token {
+public class ErrandOfDutyKnightToken extends TokenImpl {
 
     public ErrandOfDutyKnightToken() {
         super("Knight", "1/1 white Knight creature token with banding");
@@ -46,5 +46,13 @@ public class ErrandOfDutyKnightToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
         this.addAbility(BandingAbility.getInstance());
+    }
+
+    public ErrandOfDutyKnightToken(final ErrandOfDutyKnightToken token) {
+        super(token);
+    }
+
+    public ErrandOfDutyKnightToken copy() {
+        return new ErrandOfDutyKnightToken(this);
     }
 }

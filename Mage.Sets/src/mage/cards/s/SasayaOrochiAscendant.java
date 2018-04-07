@@ -51,6 +51,7 @@ import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 
@@ -115,7 +116,7 @@ class SasayaOrochiAscendantFlipEffect extends OneShotEffect {
     }
 }
 
-class SasayasEssence extends Token {
+class SasayasEssence extends TokenImpl {
 
     SasayasEssence() {
         super("Sasaya's Essence", "");
@@ -128,6 +129,13 @@ class SasayasEssence extends Token {
         this.addAbility(new TapForManaAllTriggeredManaAbility(
                 new SasayasEssenceManaEffectEffect(),
                 new FilterControlledLandPermanent(), SetTargetPointer.PERMANENT));
+    }
+    public SasayasEssence(final SasayasEssence token) {
+        super(token);
+    }
+
+    public SasayasEssence copy() {
+        return new SasayasEssence(this);
     }
 }
 

@@ -35,6 +35,7 @@ import mage.abilities.condition.common.SourceIsSpellCondition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.common.continuous.WUBRGInsteadEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -60,7 +61,7 @@ public class JodahArchmageEternal extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         
         // You may pay WUBRG rather than pay the mana cost for spells that you cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new JodahArchmageEternalRuleEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new WUBRGInsteadEffect()));
     }
 
     public JodahArchmageEternal(final JodahArchmageEternal card) {
@@ -70,44 +71,5 @@ public class JodahArchmageEternal extends CardImpl {
     @Override
     public JodahArchmageEternal copy() {
         return new JodahArchmageEternal(this);
-    }
-}
-
-class JodahArchmageEternalRuleEffect extends ContinuousEffectImpl {
-
-    static AlternativeCostSourceAbility alternativeCastingCostAbility = new AlternativeCostSourceAbility(new ManaCostsImpl("{W}{U}{B}{R}{G}"), SourceIsSpellCondition.instance);
-    
-    public JodahArchmageEternalRuleEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "You may pay {W}{U}{B}{R}{G} rather than pay the mana cost for spells that you cast";
-    }
-
-    public JodahArchmageEternalRuleEffect(final JodahArchmageEternalRuleEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public JodahArchmageEternalRuleEffect copy() {
-        return new JodahArchmageEternalRuleEffect(this);
-    }
-
-    @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            controller.getAlternativeSourceCosts().add(alternativeCastingCostAbility);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.RulesEffects;
     }
 }

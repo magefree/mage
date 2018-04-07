@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class SeedGuardianToken extends Token {
+public class SeedGuardianToken extends TokenImpl {
 
     public SeedGuardianToken() {
         this(1);
@@ -50,5 +50,13 @@ public class SeedGuardianToken extends Token {
         power = new MageInt(xValue);
         toughness = new MageInt(xValue);
 
+    }
+
+    public SeedGuardianToken(final SeedGuardianToken token) {
+        super(token);
+    }
+
+    public SeedGuardianToken copy() {
+        return new SeedGuardianToken(this);
     }
 }

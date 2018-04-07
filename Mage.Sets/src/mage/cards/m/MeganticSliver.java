@@ -53,8 +53,7 @@ public class MeganticSliver extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Sliver creatures you control get +3/+3.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new BoostControlledEffect(3, 3, Duration.WhileInGraveyard, StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(3, 3, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS)));
     }
 
     public MeganticSliver(final MeganticSliver card) {

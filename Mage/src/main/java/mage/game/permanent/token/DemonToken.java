@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author LoneFox
  */
-public class DemonToken extends Token {
+public class DemonToken extends TokenImpl {
 
     public DemonToken() {
         super("Demon", "5/5 black Demon creature token with flying");

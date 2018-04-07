@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class SubterraneanTremorsLizardToken extends Token {
+public class SubterraneanTremorsLizardToken extends TokenImpl {
 
     public SubterraneanTremorsLizardToken() {
         super("Lizard", "an 8/8 red Lizard creature token");
@@ -44,5 +44,13 @@ public class SubterraneanTremorsLizardToken extends Token {
         subtype.add(SubType.LIZARD);
         power = new MageInt(8);
         toughness = new MageInt(8);
+    }
+
+    public SubterraneanTremorsLizardToken(final SubterraneanTremorsLizardToken token) {
+        super(token);
+    }
+
+    public SubterraneanTremorsLizardToken copy() {
+        return new SubterraneanTremorsLizardToken(this);
     }
 }

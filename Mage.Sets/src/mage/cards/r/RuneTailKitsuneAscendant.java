@@ -43,6 +43,7 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreatureInPlay;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 
@@ -108,7 +109,7 @@ class RuneTailKitsuneAscendantFlipAbility extends StateTriggeredAbility {
 
 }
 
-class RuneTailEssence extends Token {
+class RuneTailEssence extends TokenImpl {
 
     RuneTailEssence() {
         super("Rune-Tail's Essence", "");
@@ -120,5 +121,12 @@ class RuneTailEssence extends Token {
         // Prevent all damage that would be dealt to creatures you control.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new PreventAllDamageToAllEffect(Duration.WhileOnBattlefield, new FilterControlledCreatureInPlay("creatures you control"))));
+    }
+    public RuneTailEssence(final RuneTailEssence token) {
+        super(token);
+    }
+
+    public RuneTailEssence copy() {
+        return new RuneTailEssence(this);
     }
 }

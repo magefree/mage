@@ -52,6 +52,7 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.events.GameEvent;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -91,7 +92,7 @@ public class FaithfulSquire extends CardImpl {
     }
 }
 
-class KaisoMemoryOfLoyalty extends Token {
+class KaisoMemoryOfLoyalty extends TokenImpl {
 
     KaisoMemoryOfLoyalty() {
         super("Kaiso, Memory of Loyalty", "");
@@ -112,5 +113,12 @@ class KaisoMemoryOfLoyalty extends Token {
                 new RemoveCountersSourceCost(CounterType.KI.createInstance()));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
+    }
+    public KaisoMemoryOfLoyalty(final KaisoMemoryOfLoyalty token) {
+        super(token);
+    }
+
+    public KaisoMemoryOfLoyalty copy() {
+        return new KaisoMemoryOfLoyalty(this);
     }
 }

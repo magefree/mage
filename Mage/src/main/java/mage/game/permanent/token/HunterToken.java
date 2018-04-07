@@ -35,7 +35,7 @@ import mage.constants.SubType;
  *
  * @author spjspj
  */
-public class HunterToken extends Token {
+public class HunterToken extends TokenImpl {
 
     public HunterToken() {
         super("Hunter", "4/4 red Hunter creature token", 4, 4);
@@ -43,6 +43,14 @@ public class HunterToken extends Token {
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         subtype.add(SubType.HUNTER);
+    }
+
+    public HunterToken(final HunterToken token) {
+        super(token);
+    }
+
+    public HunterToken copy() {
+        return new HunterToken(this);
     }
 }
 

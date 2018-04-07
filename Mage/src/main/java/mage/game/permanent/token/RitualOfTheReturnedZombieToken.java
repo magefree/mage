@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class RitualOfTheReturnedZombieToken extends Token {
+public class RitualOfTheReturnedZombieToken extends TokenImpl {
 
     public RitualOfTheReturnedZombieToken() {
         this(1,1);
@@ -50,4 +50,11 @@ public class RitualOfTheReturnedZombieToken extends Token {
         this.toughness = new MageInt(toughness);
     }
 
+    public RitualOfTheReturnedZombieToken(final RitualOfTheReturnedZombieToken token) {
+        super(token);
+    }
+
+    public RitualOfTheReturnedZombieToken copy() {
+        return new RitualOfTheReturnedZombieToken(this);
+    }
 }

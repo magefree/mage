@@ -35,7 +35,7 @@ import mage.constants.SubType;
  *
  * @author spjspj
  */
-public class WandOfTheElementsSecondToken extends Token {
+public class WandOfTheElementsSecondToken extends TokenImpl {
 
     public WandOfTheElementsSecondToken() {
         super("Elemental", "3/3 red Elemental creature token");
@@ -45,5 +45,13 @@ public class WandOfTheElementsSecondToken extends Token {
         this.color.setRed(true);
         power = new MageInt(3);
         toughness = new MageInt(3);
+    }
+
+    public WandOfTheElementsSecondToken(final WandOfTheElementsSecondToken token) {
+        super(token);
+    }
+
+    public WandOfTheElementsSecondToken copy() {
+        return new WandOfTheElementsSecondToken(this);
     }
 }

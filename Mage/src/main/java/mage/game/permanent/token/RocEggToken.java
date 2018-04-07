@@ -36,7 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
  *
  * @author spjspj
  */
-public class RocEggToken extends Token {
+public class RocEggToken extends TokenImpl {
 
     public RocEggToken() {
         super("Bird", "3/3 white Bird creature token with flying");
@@ -46,5 +46,13 @@ public class RocEggToken extends Token {
         power = new MageInt(3);
         toughness = new MageInt(3);
         addAbility(FlyingAbility.getInstance());
+    }
+
+    public RocEggToken(final RocEggToken token) {
+        super(token);
+    }
+
+    public RocEggToken copy() {
+        return new RocEggToken(this);
     }
 }

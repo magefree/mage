@@ -49,6 +49,7 @@ import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.command.emblems.KothOfTheHammerEmblem;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetLandPermanent;
 
@@ -96,7 +97,7 @@ public class KothOfTheHammer extends CardImpl {
     }
 }
 
-class KothOfTheHammerToken extends Token {
+class KothOfTheHammerToken extends TokenImpl {
 
     public KothOfTheHammerToken() {
         super("Elemental", "4/4 red Elemental");
@@ -106,5 +107,12 @@ class KothOfTheHammerToken extends Token {
         this.color.setRed(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
+    }
+    public KothOfTheHammerToken(final KothOfTheHammerToken token) {
+        super(token);
+    }
+
+    public KothOfTheHammerToken copy() {
+        return new KothOfTheHammerToken(this);
     }
 }

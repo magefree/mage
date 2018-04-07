@@ -45,6 +45,7 @@ import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.events.GameEvent;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -85,7 +86,7 @@ public class BudokaPupil extends CardImpl {
     }
 }
 
-class IchigaWhoTopplesOaks extends Token {
+class IchigaWhoTopplesOaks extends TokenImpl {
 
     IchigaWhoTopplesOaks() {
         super("Ichiga, Who Topples Oaks", "");
@@ -106,5 +107,12 @@ class IchigaWhoTopplesOaks extends Token {
                 new RemoveCountersSourceCost(CounterType.KI.createInstance()));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
+    }
+    public IchigaWhoTopplesOaks(final IchigaWhoTopplesOaks token) {
+        super(token);
+    }
+
+    public IchigaWhoTopplesOaks copy() {
+        return new IchigaWhoTopplesOaks(this);
     }
 }

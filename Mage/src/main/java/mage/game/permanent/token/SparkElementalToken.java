@@ -40,7 +40,7 @@ import mage.constants.TargetController;
  *
  * @author spjspj
  */
-public class SparkElementalToken extends Token {
+public class SparkElementalToken extends TokenImpl {
 
     public SparkElementalToken() {
         super("Spark Elemental", "3/1 red Elemental creature token named Spark Elemental with trample, haste, and \"At the beginning of the end step, sacrifice Spark Elemental.\"");
@@ -54,5 +54,13 @@ public class SparkElementalToken extends Token {
         this.addAbility(TrampleAbility.getInstance());
         this.addAbility(HasteAbility.getInstance());
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new SacrificeSourceEffect(), TargetController.ANY, false));
+    }
+
+    public SparkElementalToken(final SparkElementalToken token) {
+        super(token);
+    }
+
+    public SparkElementalToken copy() {
+        return new SparkElementalToken(this);
     }
 }

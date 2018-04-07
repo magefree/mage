@@ -36,7 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
  *
  * @author spjspj
  */
-public class GriffinToken extends Token {
+public class GriffinToken extends TokenImpl {
 
     public GriffinToken() {
         super("Griffin", "2/2 white Griffin creature token with flying");
@@ -47,6 +47,14 @@ public class GriffinToken extends Token {
         power = new MageInt(2);
         toughness = new MageInt(2);
         this.addAbility(FlyingAbility.getInstance());
+    }
+
+    public GriffinToken(final GriffinToken token) {
+        super(token);
+    }
+
+    public GriffinToken copy() {
+        return new GriffinToken(this);
     }
 
 }

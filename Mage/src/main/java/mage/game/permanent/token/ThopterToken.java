@@ -36,7 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
  *
  * @author spjspj
  */
-public class ThopterToken extends Token {
+public class ThopterToken extends TokenImpl {
 
     public ThopterToken() {
         super("Thopter", "1/1 blue Thopter artifact creature tokens with flying");
@@ -47,5 +47,13 @@ public class ThopterToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());
+    }
+
+    public ThopterToken(final ThopterToken token) {
+        super(token);
+    }
+
+    public ThopterToken copy() {
+        return new ThopterToken(this);
     }
 }

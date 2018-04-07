@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class OctopusToken extends Token {
+public class OctopusToken extends TokenImpl {
 
     public OctopusToken() {
         super("Octopus", "8/8 blue Octopus creature token");
@@ -45,5 +45,13 @@ public class OctopusToken extends Token {
         power = new MageInt(8);
         toughness = new MageInt(8);
         this.setOriginalExpansionSetCode("BFZ");
+    }
+
+    public OctopusToken(final OctopusToken token) {
+        super(token);
+    }
+
+    public OctopusToken copy() {
+        return new OctopusToken(this);
     }
 }

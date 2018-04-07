@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class WarriorVigilantToken extends Token {
+public class WarriorVigilantToken extends TokenImpl {
 
     public WarriorVigilantToken() {
         super("Warrior", "1/1 white Warrior creature token with vigilance");

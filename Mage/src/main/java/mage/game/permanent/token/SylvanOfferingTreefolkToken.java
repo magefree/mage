@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class SylvanOfferingTreefolkToken extends Token {
+public class SylvanOfferingTreefolkToken extends TokenImpl {
 
     public SylvanOfferingTreefolkToken() {
         this(1);
@@ -48,6 +48,13 @@ public class SylvanOfferingTreefolkToken extends Token {
         color.setGreen(true);
         power = new MageInt(xValue);
         toughness = new MageInt(xValue);
+    }
 
+    public SylvanOfferingTreefolkToken(final SylvanOfferingTreefolkToken token) {
+        super(token);
+    }
+
+    public SylvanOfferingTreefolkToken copy() {
+        return new SylvanOfferingTreefolkToken(this);
     }
 }

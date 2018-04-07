@@ -40,6 +40,7 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureSpell;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 
 import java.util.UUID;
@@ -71,7 +72,7 @@ public class OpalCaryatid extends CardImpl {
     }
 }
 
-class OpalCaryatidSoldier extends Token {
+class OpalCaryatidSoldier extends TokenImpl {
 
     public OpalCaryatidSoldier() {
         super("Soldier", "2/2 Soldier creature");
@@ -79,5 +80,12 @@ class OpalCaryatidSoldier extends Token {
         subtype.add(SubType.SOLDIER);
         power = new MageInt(2);
         toughness = new MageInt(2);
+    }
+    public OpalCaryatidSoldier(final OpalCaryatidSoldier token) {
+        super(token);
+    }
+
+    public OpalCaryatidSoldier copy() {
+        return new OpalCaryatidSoldier(this);
     }
 }

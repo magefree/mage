@@ -36,7 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
  *
  * @author spjspj
  */
-public class AnotherSpiritToken extends Token {
+public class AnotherSpiritToken extends TokenImpl {
 
     public AnotherSpiritToken() {
         super("Spirit", "3/3 white Spirit creature token with flying");
@@ -47,5 +47,11 @@ public class AnotherSpiritToken extends Token {
         toughness = new MageInt(3);
         this.addAbility(FlyingAbility.getInstance());
     }
+    public AnotherSpiritToken(final AnotherSpiritToken token) {
+        super(token);
+    }
 
+    public AnotherSpiritToken copy() {
+        return new AnotherSpiritToken(this);
+    }
 }

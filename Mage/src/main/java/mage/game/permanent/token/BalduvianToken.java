@@ -36,7 +36,7 @@ import mage.abilities.keyword.HasteAbility;
  *
  * @author spjspj
  */
-public class BalduvianToken extends Token {
+public class BalduvianToken extends TokenImpl {
 
     public BalduvianToken() {
         super("Graveborn", "3/1 black and red Graveborn creature token with haste");
@@ -47,5 +47,13 @@ public class BalduvianToken extends Token {
         toughness = new MageInt(1);
         subtype.add(SubType.GRAVEBORN);
         addAbility(HasteAbility.getInstance());
+    }
+
+    public BalduvianToken(final BalduvianToken token) {
+        super(token);
+    }
+
+    public BalduvianToken copy() {
+        return new BalduvianToken(this);
     }
 }

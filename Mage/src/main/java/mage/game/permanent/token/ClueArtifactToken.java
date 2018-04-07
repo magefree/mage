@@ -44,7 +44,7 @@ import java.util.List;
 /**
  *
  */
-public class ClueArtifactToken extends Token {
+public class ClueArtifactToken extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 

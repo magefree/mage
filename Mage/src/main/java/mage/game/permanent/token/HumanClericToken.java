@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class HumanClericToken extends Token {
+public class HumanClericToken extends TokenImpl {
 
     public HumanClericToken() {
         super("Human Cleric", "1/1 white and black Human Cleric creature token");
@@ -46,5 +46,12 @@ public class HumanClericToken extends Token {
         color.setBlack(true);
         power = new MageInt(1);
         toughness = new MageInt(1);
+    }
+    public HumanClericToken(final HumanClericToken token) {
+        super(token);
+    }
+
+    public HumanClericToken copy() {
+        return new HumanClericToken(this);
     }
 }

@@ -36,7 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
  *
  * @author spjspj
  */
-public class SorinSolemnVisitorVampireToken extends Token {
+public class SorinSolemnVisitorVampireToken extends TokenImpl {
 
     public SorinSolemnVisitorVampireToken() {
         super("Vampire", "2/2 black Vampire creature token with flying");
@@ -47,5 +47,13 @@ public class SorinSolemnVisitorVampireToken extends Token {
         power = new MageInt(2);
         toughness = new MageInt(2);
         addAbility(FlyingAbility.getInstance());
+    }
+
+    public SorinSolemnVisitorVampireToken(final SorinSolemnVisitorVampireToken token) {
+        super(token);
+    }
+
+    public SorinSolemnVisitorVampireToken copy() {
+        return new SorinSolemnVisitorVampireToken(this);
     }
 }

@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author spjspj
  */
-public class KarnConstructToken extends Token {
+public class KarnConstructToken extends TokenImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifacts you control");
 
@@ -71,5 +71,13 @@ public class KarnConstructToken extends Token {
                 new BoostSourceEffect(value, value, Duration.WhileOnBattlefield)
                 .setText("This creature gets +1/+1 for each artifact you control")
         ));
+    }
+
+    public KarnConstructToken(final KarnConstructToken token) {
+        super(token);
+    }
+
+    public KarnConstructToken copy() {
+        return new KarnConstructToken(this);
     }
 }

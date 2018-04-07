@@ -36,7 +36,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class RatToken extends Token {
+public class RatToken extends TokenImpl {
 
     public RatToken() {
         this("GTC");
@@ -51,5 +51,11 @@ public class RatToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
     }
+    public RatToken(final RatToken token) {
+        super(token);
+    }
 
+    public RatToken copy() {
+        return new RatToken(this);
+    }
 }

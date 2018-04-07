@@ -43,6 +43,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterLandPermanent;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
@@ -84,7 +85,7 @@ public class GenjuOfTheFens extends CardImpl {
         return new GenjuOfTheFens(this);
     }
 
-    private static class SpiritToken extends Token {
+    private static class SpiritToken extends TokenImpl {
 
         SpiritToken() {
             super("Spirit", "2/2 black Spirit creature with \"{B}: This creature gets +1/+1 until end of turn.\"");
@@ -94,6 +95,14 @@ public class GenjuOfTheFens extends CardImpl {
             power = new MageInt(2);
             toughness = new MageInt(2);
             addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{B}")));
+        }
+
+        public SpiritToken(final SpiritToken token) {
+            super(token);
+        }
+
+        public SpiritToken copy() {
+            return new SpiritToken(this);
         }
     }
 }

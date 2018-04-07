@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class PenumbraBobcatToken extends Token {
+public class PenumbraBobcatToken extends TokenImpl {
 
     public PenumbraBobcatToken() {
         super("Cat", "2/1 black Cat creature token");
@@ -44,5 +44,13 @@ public class PenumbraBobcatToken extends Token {
         subtype.add(SubType.CAT);
         power = new MageInt(2);
         toughness = new MageInt(1);
+    }
+
+    public PenumbraBobcatToken(final PenumbraBobcatToken token) {
+        super(token);
+    }
+
+    public PenumbraBobcatToken copy() {
+        return new PenumbraBobcatToken(this);
     }
 }

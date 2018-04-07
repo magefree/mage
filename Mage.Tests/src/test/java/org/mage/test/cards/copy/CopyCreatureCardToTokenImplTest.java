@@ -14,7 +14,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  *
  * @author LevelX2
  */
-public class CopyCreatureCardToTokenTest extends CardTestPlayerBase {
+public class CopyCreatureCardToTokenImplTest extends CardTestPlayerBase {
 
     /**
      * Unesh, Criosphinx Sovereign did not have his ETB effect trigger when he

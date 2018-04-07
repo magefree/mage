@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class PrismToken extends Token {
+public class PrismToken extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 

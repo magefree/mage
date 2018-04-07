@@ -42,6 +42,7 @@ import mage.constants.*;
 import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -86,12 +87,19 @@ public class TheloniteDruid extends CardImpl {
     }
 }
 
-class TheloniteDruidLandToken extends Token {
+class TheloniteDruidLandToken extends TokenImpl {
 
     public TheloniteDruidLandToken() {
         super("", "2/3 creatures");
         cardType.add(CardType.CREATURE);
         power = new MageInt(2);
         toughness = new MageInt(3);
+    }
+    public TheloniteDruidLandToken(final TheloniteDruidLandToken token) {
+        super(token);
+    }
+
+    public TheloniteDruidLandToken copy() {
+        return new TheloniteDruidLandToken(this);
     }
 }

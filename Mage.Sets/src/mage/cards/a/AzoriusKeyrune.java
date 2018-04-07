@@ -41,6 +41,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 
 /**
@@ -68,7 +69,7 @@ public class AzoriusKeyrune extends CardImpl {
         return new AzoriusKeyrune(this);
     }
 
-    private static class AzoriusKeyruneToken extends Token {
+    private static class AzoriusKeyruneToken extends TokenImpl {
         AzoriusKeyruneToken() {
             super("", "2/2 white and blue Bird artifact creature with flying");
             cardType.add(CardType.ARTIFACT);
@@ -79,6 +80,13 @@ public class AzoriusKeyrune extends CardImpl {
             power = new MageInt(2);
             toughness = new MageInt(2);
             this.addAbility(FlyingAbility.getInstance());
+        }
+        public AzoriusKeyruneToken(final AzoriusKeyruneToken token) {
+            super(token);
+        }
+
+        public AzoriusKeyruneToken copy() {
+            return new AzoriusKeyruneToken(this);
         }
     }
 }

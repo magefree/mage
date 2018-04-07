@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author LevelX2
  */
-public class RekindlingPhoenixToken extends Token {
+public class RekindlingPhoenixToken extends TokenImpl {
 
     public RekindlingPhoenixToken() {
         super("Elemental", "0/1 red Elemental creature token with \"At the beginning of your upkeep, sacrifice this creature and return target card named Rekindling Phoenix from your graveyard to the battlefield. It gains haste until end of turn.\"");
@@ -65,5 +65,13 @@ public class RekindlingPhoenixToken extends Token {
         filter.add(new NamePredicate("Rekindling Phoenix"));
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
+    }
+
+    public RekindlingPhoenixToken(final RekindlingPhoenixToken token) {
+        super(token);
+    }
+
+    public RekindlingPhoenixToken copy() {
+        return new RekindlingPhoenixToken(this);
     }
 }

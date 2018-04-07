@@ -47,6 +47,7 @@ import mage.filter.common.FilterLandPermanent;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.command.emblems.NissaVitalForceEmblem;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetLandPermanent;
@@ -95,7 +96,7 @@ public class NissaVitalForce extends CardImpl {
     }
 }
 
-class NissaVitalForceToken extends Token {
+class NissaVitalForceToken extends TokenImpl {
 
     public NissaVitalForceToken() {
         super("", "5/5 Elemental creature with haste");
@@ -105,5 +106,12 @@ class NissaVitalForceToken extends Token {
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
         this.addAbility(HasteAbility.getInstance());
+    }
+    public NissaVitalForceToken(final NissaVitalForceToken token) {
+        super(token);
+    }
+
+    public NissaVitalForceToken copy() {
+        return new NissaVitalForceToken(this);
     }
 }

@@ -36,6 +36,7 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.game.permanent.PermanentCard;
 import mage.game.permanent.PermanentToken;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 
 /**

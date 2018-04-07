@@ -41,6 +41,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 
 /**
@@ -66,7 +67,7 @@ public class TreetopVillage extends CardImpl {
     }
 }
 
-class ApeToken extends Token {
+class ApeToken extends TokenImpl {
     ApeToken() {
         super("Ape", "3/3 green Ape creature with trample");
         cardType.add(CardType.CREATURE);
@@ -75,5 +76,12 @@ class ApeToken extends Token {
         power = new MageInt(3);
         toughness = new MageInt(3);
         this.addAbility(TrampleAbility.getInstance());
+    }
+    public ApeToken(final ApeToken token) {
+        super(token);
+    }
+
+    public ApeToken copy() {
+        return new ApeToken(this);
     }
 }

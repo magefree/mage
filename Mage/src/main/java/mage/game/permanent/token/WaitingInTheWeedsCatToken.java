@@ -35,7 +35,7 @@ import mage.constants.SubType;
  *
  * @author spjspj
  */
-public class WaitingInTheWeedsCatToken extends Token {
+public class WaitingInTheWeedsCatToken extends TokenImpl {
 
     public WaitingInTheWeedsCatToken() {
         super("Cat", "1/1 green Cat creature token");
@@ -45,5 +45,12 @@ public class WaitingInTheWeedsCatToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
     }
+    
+    public WaitingInTheWeedsCatToken(final WaitingInTheWeedsCatToken token) {
+        super(token);
+    }
 
+    public WaitingInTheWeedsCatToken copy() {
+        return new WaitingInTheWeedsCatToken(this);
+    }
 }

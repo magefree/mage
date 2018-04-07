@@ -39,6 +39,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.filter.StaticFilters;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetLandPermanent;
 
@@ -72,7 +73,7 @@ public class Soilshaper extends CardImpl {
 
 }
 
-class SoilshaperToken extends Token {
+class SoilshaperToken extends TokenImpl {
 
     public SoilshaperToken() {
         super("", "3/3 creature");
@@ -80,5 +81,12 @@ class SoilshaperToken extends Token {
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
+    }
+    public SoilshaperToken(final SoilshaperToken token) {
+        super(token);
+    }
+
+    public SoilshaperToken copy() {
+        return new SoilshaperToken(this);
     }
 }

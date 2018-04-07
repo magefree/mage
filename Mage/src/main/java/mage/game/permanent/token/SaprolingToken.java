@@ -40,7 +40,7 @@ import mage.util.RandomUtil;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SaprolingToken extends Token {
+public class SaprolingToken extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 
@@ -87,5 +87,13 @@ public class SaprolingToken extends Token {
         subtype.add(SubType.SAPROLING);
         power = new MageInt(1);
         toughness = new MageInt(1);
+    }
+
+    public SaprolingToken(final SaprolingToken token) {
+        super(token);
+    }
+
+    public SaprolingToken copy() {
+        return new SaprolingToken(this);
     }
 }

@@ -41,6 +41,7 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetLandPermanent;
 
@@ -79,7 +80,7 @@ public class FendeepSummoner extends CardImpl {
     }
 }
 
-class FendeepSummonerToken extends Token {
+class FendeepSummonerToken extends TokenImpl {
 
     public FendeepSummonerToken() {
         super("", "3/5 Treefolk Warrior");
@@ -88,5 +89,12 @@ class FendeepSummonerToken extends Token {
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(3);
         this.toughness = new MageInt(5);
+    }
+    public FendeepSummonerToken(final FendeepSummonerToken token) {
+        super(token);
+    }
+
+    public FendeepSummonerToken copy() {
+        return new FendeepSummonerToken(this);
     }
 }

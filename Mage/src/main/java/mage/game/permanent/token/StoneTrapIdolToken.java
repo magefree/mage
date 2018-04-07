@@ -36,7 +36,7 @@ import mage.abilities.keyword.TrampleAbility;
  *
  * @author spjspj
  */
-public class StoneTrapIdolToken extends Token {
+public class StoneTrapIdolToken extends TokenImpl {
 
     public StoneTrapIdolToken() {
         super("Construct", "6/12  colorless Construct artifact creature token with trample");
@@ -46,5 +46,13 @@ public class StoneTrapIdolToken extends Token {
         power = new MageInt(6);
         toughness = new MageInt(12);
         addAbility(TrampleAbility.getInstance());
+    }
+
+    public StoneTrapIdolToken(final StoneTrapIdolToken token) {
+        super(token);
+    }
+
+    public StoneTrapIdolToken copy() {
+        return new StoneTrapIdolToken(this);
     }
 }

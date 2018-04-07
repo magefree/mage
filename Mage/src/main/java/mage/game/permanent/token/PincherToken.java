@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class PincherToken extends Token {
+public class PincherToken extends TokenImpl {
 
     public PincherToken() {
         super("Pincher", "2/2 colorless Pincher creature token");
@@ -46,5 +46,11 @@ public class PincherToken extends Token {
         toughness = new MageInt(2);
 
     }
+    public PincherToken(final PincherToken token) {
+        super(token);
+    }
 
+    public PincherToken copy() {
+        return new PincherToken(this);
+    }
 }

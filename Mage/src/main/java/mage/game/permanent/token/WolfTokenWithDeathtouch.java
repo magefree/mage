@@ -37,7 +37,7 @@ import mage.abilities.keyword.DeathtouchAbility;
  *
  * @author nantuko
  */
-public class WolfTokenWithDeathtouch extends Token {
+public class WolfTokenWithDeathtouch extends TokenImpl {
 
     public WolfTokenWithDeathtouch() {
         super("Wolf", "1/1 black Wolf creature token with deathtouch");
@@ -50,4 +50,11 @@ public class WolfTokenWithDeathtouch extends Token {
         addAbility(DeathtouchAbility.getInstance());
     }
 
+    public WolfTokenWithDeathtouch(final WolfTokenWithDeathtouch token) {
+        super(token);
+    }
+
+    public WolfTokenWithDeathtouch copy() {
+        return new WolfTokenWithDeathtouch(this);
+    }
 }

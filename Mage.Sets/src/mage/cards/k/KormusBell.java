@@ -36,6 +36,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 
 /**
@@ -66,7 +67,7 @@ public class KormusBell extends CardImpl {
     }
 }
 
-class KormusBellToken extends Token {
+class KormusBellToken extends TokenImpl {
 
     public KormusBellToken() {
         super("", "1/1 black creatures");
@@ -75,5 +76,11 @@ class KormusBellToken extends Token {
         toughness = new MageInt(1);
         color.setBlack(true); // black creatures
     }
+    public KormusBellToken(final KormusBellToken token) {
+        super(token);
+    }
 
+    public KormusBellToken copy() {
+        return new KormusBellToken(this);
+    }
 }

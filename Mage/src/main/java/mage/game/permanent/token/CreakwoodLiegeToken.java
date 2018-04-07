@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class CreakwoodLiegeToken extends Token {
+public class CreakwoodLiegeToken extends TokenImpl {
 
     public CreakwoodLiegeToken() {
         super("Worm", "1/1 black and green Worm creature token");
@@ -45,5 +45,13 @@ public class CreakwoodLiegeToken extends Token {
         subtype.add(SubType.WORM);
         power = new MageInt(1);
         toughness = new MageInt(1);
+    }
+
+    public CreakwoodLiegeToken(final CreakwoodLiegeToken token) {
+        super(token);
+    }
+
+    public CreakwoodLiegeToken copy() {
+        return new CreakwoodLiegeToken(this);
     }
 }

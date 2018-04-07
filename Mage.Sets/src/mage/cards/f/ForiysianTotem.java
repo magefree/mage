@@ -45,6 +45,7 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 
 /**
@@ -79,7 +80,7 @@ public class ForiysianTotem extends CardImpl {
 
 }
 
-class ForiysianTotemToken extends Token {
+class ForiysianTotemToken extends TokenImpl {
 
     public ForiysianTotemToken() {
         super("", "4/4 red Giant artifact creature with trample");
@@ -90,5 +91,12 @@ class ForiysianTotemToken extends Token {
         power = new MageInt(4);
         toughness = new MageInt(4);
         this.addAbility(TrampleAbility.getInstance());
+    }
+    public ForiysianTotemToken(final ForiysianTotemToken token) {
+        super(token);
+    }
+
+    public ForiysianTotemToken copy() {
+        return new ForiysianTotemToken(this);
     }
 }

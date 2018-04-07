@@ -43,7 +43,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author spjspj
  */
-public class SpyMasterGoblinToken extends Token {
+public class SpyMasterGoblinToken extends TokenImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures you control");
 
@@ -61,5 +61,13 @@ public class SpyMasterGoblinToken extends Token {
 
         Effect effect = new AttacksIfAbleAllEffect(filter, Duration.WhileOnBattlefield, true);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+    }
+
+    public SpyMasterGoblinToken(final SpyMasterGoblinToken token) {
+        super(token);
+    }
+
+    public SpyMasterGoblinToken copy() {
+        return new SpyMasterGoblinToken(this);
     }
 }

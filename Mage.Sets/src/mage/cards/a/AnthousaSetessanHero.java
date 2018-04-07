@@ -39,6 +39,7 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.common.FilterControlledLandPermanent;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetControlledPermanent;
 
@@ -73,7 +74,7 @@ public class AnthousaSetessanHero extends CardImpl {
     }
 }
 
-class AnthousaWarriorToken extends Token {
+class AnthousaWarriorToken extends TokenImpl {
 
     public AnthousaWarriorToken() {
         super("", "2/2 Warrior creatures");
@@ -81,6 +82,13 @@ class AnthousaWarriorToken extends Token {
         subtype.add(SubType.WARRIOR);
         power = new MageInt(2);
         toughness = new MageInt(2);
+    }
+    public AnthousaWarriorToken(final AnthousaWarriorToken token) {
+        super(token);
+    }
+
+    public AnthousaWarriorToken copy() {
+        return new AnthousaWarriorToken(this);
     }
 
 }

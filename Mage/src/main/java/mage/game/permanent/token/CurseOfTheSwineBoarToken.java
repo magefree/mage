@@ -36,7 +36,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class CurseOfTheSwineBoarToken extends Token {
+public class CurseOfTheSwineBoarToken extends TokenImpl {
 
     public CurseOfTheSwineBoarToken() {
         super("Boar", "2/2 green Boar creature token");
@@ -45,6 +45,14 @@ public class CurseOfTheSwineBoarToken extends Token {
         subtype.add(SubType.BOAR);
         power = new MageInt(2);
         toughness = new MageInt(2);
+    }
+
+    public CurseOfTheSwineBoarToken(final CurseOfTheSwineBoarToken token) {
+        super(token);
+    }
+
+    public CurseOfTheSwineBoarToken copy() {
+        return new CurseOfTheSwineBoarToken(this);
     }
 }
 

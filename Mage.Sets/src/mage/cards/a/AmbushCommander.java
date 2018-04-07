@@ -43,6 +43,7 @@ import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -89,7 +90,7 @@ public class AmbushCommander extends CardImpl {
     }
 }
 
-class AmbushCommanderToken extends Token {
+class AmbushCommanderToken extends TokenImpl {
 
     public AmbushCommanderToken() {
         super("Elf", "1/1 green Elf creatures");
@@ -98,6 +99,13 @@ class AmbushCommanderToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
         color.setGreen(true);
+    }
+    public AmbushCommanderToken(final AmbushCommanderToken token) {
+        super(token);
+    }
+
+    public AmbushCommanderToken copy() {
+        return new AmbushCommanderToken(this);
     }
 
 }

@@ -37,7 +37,7 @@ import mage.MageInt;
  *
  * @author LoneFox
  */
-public class GoblinRogueToken extends Token {
+public class GoblinRogueToken extends TokenImpl {
 
     public GoblinRogueToken() {
         super("Goblin Rogue", "1/1 black Goblin Rogue creature token");
@@ -48,5 +48,13 @@ public class GoblinRogueToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
         availableImageSetCodes.addAll(Arrays.asList("LRW", "MMA"));
+    }
+
+    public GoblinRogueToken(final GoblinRogueToken token) {
+        super(token);
+    }
+
+    public GoblinRogueToken copy() {
+        return new GoblinRogueToken(this);
     }
 }

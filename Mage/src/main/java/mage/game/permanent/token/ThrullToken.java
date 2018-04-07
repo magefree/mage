@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author Quercitron
  */
-public class ThrullToken extends Token {
+public class ThrullToken extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 
@@ -56,5 +56,13 @@ public class ThrullToken extends Token {
         toughness = new MageInt(1);
 
         availableImageSetCodes = tokenImageSets;
+    }
+
+    public ThrullToken(final ThrullToken token) {
+        super(token);
+    }
+
+    public ThrullToken copy() {
+        return new ThrullToken(this);
     }
 }

@@ -35,7 +35,7 @@ import mage.constants.SubType;
  *
  * @author spjspj
  */
-public class HazezonTamarSandWarriorToken extends Token {
+public class HazezonTamarSandWarriorToken extends TokenImpl {
 
     public HazezonTamarSandWarriorToken() {
         super("Sand Warrior", "1/1 Sand Warrior creature tokens that are red, green, and white");
@@ -47,5 +47,13 @@ public class HazezonTamarSandWarriorToken extends Token {
         subtype.add(SubType.WARRIOR);
         power = new MageInt(1);
         toughness = new MageInt(1);
+    }
+
+    public HazezonTamarSandWarriorToken(final HazezonTamarSandWarriorToken token) {
+        super(token);
+    }
+
+    public HazezonTamarSandWarriorToken copy() {
+        return new HazezonTamarSandWarriorToken(this);
     }
 }

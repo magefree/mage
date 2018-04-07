@@ -37,7 +37,7 @@ import mage.abilities.keyword.HasteAbility;
  *
  * @author spjspj
  */
-public class FlurryOfHornsMinotaurToken extends Token {
+public class FlurryOfHornsMinotaurToken extends TokenImpl {
 
     public FlurryOfHornsMinotaurToken() {
         super("Minotaur", "2/3 red Minotaur creature tokens with haste");
@@ -48,5 +48,13 @@ public class FlurryOfHornsMinotaurToken extends Token {
         power = new MageInt(2);
         toughness = new MageInt(3);
         addAbility(HasteAbility.getInstance());
+    }
+
+    public FlurryOfHornsMinotaurToken(final FlurryOfHornsMinotaurToken token) {
+        super(token);
+    }
+
+    public FlurryOfHornsMinotaurToken copy() {
+        return new FlurryOfHornsMinotaurToken(this);
     }
 }

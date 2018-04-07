@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class GiantWarriorToken extends Token {
+public class GiantWarriorToken extends TokenImpl {
 
     public GiantWarriorToken() {
         super("Giant Warrior", "5/5 white Giant Warrior creature token");
@@ -45,5 +45,13 @@ public class GiantWarriorToken extends Token {
         subtype.add(SubType.WARRIOR);
         power = new MageInt(5);
         toughness = new MageInt(5);
+    }
+
+    public GiantWarriorToken(final GiantWarriorToken token) {
+        super(token);
+    }
+
+    public GiantWarriorToken copy() {
+        return new GiantWarriorToken(this);
     }
 }

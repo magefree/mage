@@ -36,7 +36,7 @@ import mage.constants.SubType;
  *
  * @author TheElk801
  */
-public class DefenderPlantToken extends Token {
+public class DefenderPlantToken extends TokenImpl {
 
     public DefenderPlantToken() {
         this(null, 0);
@@ -55,5 +55,13 @@ public class DefenderPlantToken extends Token {
         toughness = new MageInt(2);
 
         this.addAbility(DefenderAbility.getInstance());
+    }
+
+    public DefenderPlantToken(final DefenderPlantToken token) {
+        super(token);
+    }
+
+    public DefenderPlantToken copy() {
+        return new DefenderPlantToken(this);
     }
 }

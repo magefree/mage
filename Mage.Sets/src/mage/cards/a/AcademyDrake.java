@@ -22,11 +22,12 @@ public class AcademyDrake extends CardImpl {
         power = new MageInt(2);
         toughness = new MageInt(2);
 
-
         // Kicker {4}
         this.addAbility(new KickerAbility("{4}"));
+
         // Flying
         addAbility(FlyingAbility.getInstance());
+
         // If Academy Drake was kicked, it enters the battlefield with two +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)),
                 KickedCondition.instance, "If {this} was kicked, it enters the battlefield with two +1/+1 counters on it.", ""));

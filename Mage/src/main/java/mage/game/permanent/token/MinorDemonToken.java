@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class MinorDemonToken extends Token {
+public class MinorDemonToken extends TokenImpl {
 
     public MinorDemonToken() {
         super("Minor Demon", "1/1 black and red Demon creature token named Minor Demon");
@@ -45,5 +45,13 @@ public class MinorDemonToken extends Token {
         subtype.add(SubType.DEMON);
         power = new MageInt(1);
         toughness = new MageInt(1);
+    }
+
+    public MinorDemonToken(final MinorDemonToken token) {
+        super(token);
+    }
+
+    public MinorDemonToken copy() {
+        return new MinorDemonToken(this);
     }
 }

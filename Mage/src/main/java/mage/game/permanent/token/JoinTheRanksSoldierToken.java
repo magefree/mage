@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class JoinTheRanksSoldierToken extends Token {
+public class JoinTheRanksSoldierToken extends TokenImpl {
 
     public JoinTheRanksSoldierToken() {
         super("Soldier Ally", "1/1 white Soldier Ally creature token");
@@ -46,6 +46,13 @@ public class JoinTheRanksSoldierToken extends Token {
         subtype.add(SubType.ALLY);
         power = new MageInt(1);
         toughness = new MageInt(1);
+    }
 
+    public JoinTheRanksSoldierToken(final JoinTheRanksSoldierToken token) {
+        super(token);
+    }
+
+    public JoinTheRanksSoldierToken copy() {
+        return new JoinTheRanksSoldierToken(this);
     }
 }

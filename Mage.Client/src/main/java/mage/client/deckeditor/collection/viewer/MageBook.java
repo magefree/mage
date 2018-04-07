@@ -401,6 +401,7 @@ public class MageBook extends JComponent {
             cardDimension = new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
         }
         PermanentToken newToken = new PermanentToken(token, null, token.getOriginalExpansionSetCode(), null);
+        newToken.removeSummoningSickness();
         PermanentView theToken = new PermanentView(newToken, null, null, null);
         theToken.setInViewerOnly(true);
         final MageCard cardImg = Plugins.instance.getMagePermanent(theToken, bigCard, cardDimension, gameId, true);
@@ -650,7 +651,7 @@ public class MageBook extends JComponent {
         }
     }
 
-    public void updateSize(String size) {
+    public void updateSize(String size){
         switch (size) {
             case LAYOUT_3x3:
                 this.conf = new _3x3Configuration();

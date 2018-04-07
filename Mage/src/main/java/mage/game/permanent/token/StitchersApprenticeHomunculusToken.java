@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class StitchersApprenticeHomunculusToken extends Token {
+public class StitchersApprenticeHomunculusToken extends TokenImpl {
 
     public StitchersApprenticeHomunculusToken() {
         super("Homunculus", "2/2 blue Homunculus creature");
@@ -46,4 +46,11 @@ public class StitchersApprenticeHomunculusToken extends Token {
         toughness = new MageInt(2);
     }
 
+    public StitchersApprenticeHomunculusToken(final StitchersApprenticeHomunculusToken token) {
+        super(token);
+    }
+
+    public StitchersApprenticeHomunculusToken copy() {
+        return new StitchersApprenticeHomunculusToken(this);
+    }
 }

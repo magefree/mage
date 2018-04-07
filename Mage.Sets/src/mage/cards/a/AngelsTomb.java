@@ -37,6 +37,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 
 /**
@@ -62,7 +63,7 @@ public class AngelsTomb extends CardImpl {
     }
 }
 
-class AngelTombToken extends Token {
+class AngelTombToken extends TokenImpl {
 
     public AngelTombToken() {
         super("", "3/3 white Angel artifact creature with flying");
@@ -74,5 +75,12 @@ class AngelTombToken extends Token {
         power = new MageInt(3);
         toughness = new MageInt(3);
         addAbility(FlyingAbility.getInstance());
+    }
+    public AngelTombToken(final AngelTombToken token) {
+        super(token);
+    }
+
+    public AngelTombToken copy() {
+        return new AngelTombToken(this);
     }
 }

@@ -35,7 +35,7 @@ import mage.constants.SubType;
  *
  * @author spjspj
  */
-public class CatWarriorToken extends Token {
+public class CatWarriorToken extends TokenImpl {
 
     public CatWarriorToken() {
         super("Cat Warrior", "2/2 green Cat Warrior creature token with forestwalk");
@@ -47,5 +47,13 @@ public class CatWarriorToken extends Token {
         this.getSubtype(null).add(SubType.WARRIOR);
         this.addCardType(CardType.CREATURE);
         this.addAbility(new ForestwalkAbility());
+    }
+
+    public CatWarriorToken(final CatWarriorToken token) {
+        super(token);
+    }
+
+    public CatWarriorToken copy() {
+        return new CatWarriorToken(this);
     }
 }

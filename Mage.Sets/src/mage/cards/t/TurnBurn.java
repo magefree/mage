@@ -38,6 +38,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.SpellAbilityType;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.common.TargetCreaturePermanent;
@@ -76,7 +77,7 @@ public class TurnBurn extends SplitCard {
         return new TurnBurn(this);
     }
 
-    private static class WeirdToken extends Token {
+    private static class WeirdToken extends TokenImpl {
 
         private WeirdToken() {
             super("Weird", "a red Weird with base power and toughness 0/1");
@@ -85,6 +86,13 @@ public class TurnBurn extends SplitCard {
             subtype.add(SubType.WEIRD);
             power = new MageInt(0);
             toughness = new MageInt(1);
+        }
+        public WeirdToken(final WeirdToken token) {
+            super(token);
+        }
+
+        public WeirdToken copy() {
+            return new WeirdToken(this);
         }
 
     }

@@ -12,7 +12,7 @@ import mage.constants.SubType;
  *
  * @author spjspj
  */
-public class HuntedDragonKnightToken extends Token {
+public class HuntedDragonKnightToken extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 
@@ -29,5 +29,13 @@ public class HuntedDragonKnightToken extends Token {
         power = new MageInt(2);
         toughness = new MageInt(2);
         this.addAbility(FirstStrikeAbility.getInstance());
+    }
+
+    public HuntedDragonKnightToken(final HuntedDragonKnightToken token) {
+        super(token);
+    }
+
+    public HuntedDragonKnightToken copy() {
+        return new HuntedDragonKnightToken(this);
     }
 }

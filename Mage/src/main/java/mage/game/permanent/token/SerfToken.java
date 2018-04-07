@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class SerfToken extends Token {
+public class SerfToken extends TokenImpl {
 
     public SerfToken() {
         super("Serf", "0/1 black Serf creature token");
@@ -44,5 +44,13 @@ public class SerfToken extends Token {
         subtype.add(SubType.SERF);
         power = new MageInt(0);
         toughness = new MageInt(1);
+    }
+
+    public SerfToken(final SerfToken token) {
+        super(token);
+    }
+
+    public SerfToken copy() {
+        return new SerfToken(this);
     }
 }

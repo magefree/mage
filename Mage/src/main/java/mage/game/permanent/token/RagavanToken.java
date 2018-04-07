@@ -35,7 +35,7 @@ import mage.constants.SuperType;
  *
  * @author spjspj
  */
-public class RagavanToken extends Token {
+public class RagavanToken extends TokenImpl {
 
     public RagavanToken() {
         super("Ragavan", "legendary 2/1 red Monkey creature token named Ragavan");
@@ -46,5 +46,13 @@ public class RagavanToken extends Token {
         this.color.setRed(true);
         this.getSubtype(null).add(SubType.MONKEY);
         this.addCardType(CardType.CREATURE);
+    }
+
+    public RagavanToken(final RagavanToken token) {
+        super(token);
+    }
+
+    public RagavanToken copy() {
+        return new RagavanToken(this);
     }
 }

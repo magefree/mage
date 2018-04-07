@@ -37,7 +37,7 @@ import mage.constants.SubType;
  *
  * @author spjspj
  */
-public class ZektarShrineElementalToken extends Token {
+public class ZektarShrineElementalToken extends TokenImpl {
 
     public ZektarShrineElementalToken() {
         super("Elemental", "7/1 red Elemental creature token with trample and haste");
@@ -48,5 +48,13 @@ public class ZektarShrineElementalToken extends Token {
         toughness = new MageInt(1);
         addAbility(TrampleAbility.getInstance());
         addAbility(HasteAbility.getInstance());
+    }
+
+    public ZektarShrineElementalToken(final ZektarShrineElementalToken token) {
+        super(token);
+    }
+
+    public ZektarShrineElementalToken copy() {
+        return new ZektarShrineElementalToken(this);
     }
 }

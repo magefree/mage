@@ -42,6 +42,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 
 /**
@@ -78,7 +79,7 @@ public class GlintHawkIdol extends CardImpl {
 
 }
 
-class GlintHawkIdolToken extends Token {
+class GlintHawkIdolToken extends TokenImpl {
     GlintHawkIdolToken() {
         super("", "2/2 Bird artifact creature with flying");
         cardType.add(CardType.ARTIFACT);
@@ -87,5 +88,12 @@ class GlintHawkIdolToken extends Token {
         power = new MageInt(2);
         toughness = new MageInt(2);
         addAbility(FlyingAbility.getInstance());
+    }
+    public GlintHawkIdolToken(final GlintHawkIdolToken token) {
+        super(token);
+    }
+
+    public GlintHawkIdolToken copy() {
+        return new GlintHawkIdolToken(this);
     }
 }

@@ -36,7 +36,7 @@ import mage.constants.SubType;
  *
  * @author spjspj
  */
-public class RakkaMarElementalToken extends Token {
+public class RakkaMarElementalToken extends TokenImpl {
 
     public RakkaMarElementalToken () {
         super("Elemental", "3/1 red Elemental creature with Haste");
@@ -46,5 +46,13 @@ public class RakkaMarElementalToken extends Token {
         power = new MageInt(3);
         toughness = new MageInt(1);
         addAbility(HasteAbility.getInstance());
+    }
+
+    public RakkaMarElementalToken(final RakkaMarElementalToken token) {
+        super(token);
+    }
+
+    public RakkaMarElementalToken copy() {
+        return new RakkaMarElementalToken(this);
     }
 }

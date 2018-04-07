@@ -36,7 +36,7 @@ import mage.abilities.keyword.ProwessAbility;
  *
  * @author spjspj
  */
-public class MonasteryMentorToken extends Token {
+public class MonasteryMentorToken extends TokenImpl {
 
     public MonasteryMentorToken() {
         super("Monk", "1/1 white Monk creature token with prowess");
@@ -46,5 +46,13 @@ public class MonasteryMentorToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
         this.addAbility(new ProwessAbility());
+    }
+
+    public MonasteryMentorToken(final MonasteryMentorToken token) {
+        super(token);
+    }
+
+    public MonasteryMentorToken copy() {
+        return new MonasteryMentorToken(this);
     }
 }

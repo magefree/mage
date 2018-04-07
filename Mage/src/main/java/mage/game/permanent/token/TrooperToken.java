@@ -37,7 +37,7 @@ import mage.constants.SubType;
  *
  * @author Styxo
  */
-public class TrooperToken extends Token {
+public class TrooperToken extends TokenImpl {
 
     public TrooperToken() {
         super("Trooper", "1/1 white Trooper creature token");
@@ -49,5 +49,13 @@ public class TrooperToken extends Token {
         color.setWhite(true);
         power = new MageInt(1);
         toughness = new MageInt(1);
+    }
+
+    public TrooperToken(final TrooperToken token) {
+        super(token);
+    }
+
+    public TrooperToken copy() {
+        return new TrooperToken(this);
     }
 }

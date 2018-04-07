@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class WalkerOfTheGroveToken extends Token {
+public class WalkerOfTheGroveToken extends TokenImpl {
 
     public WalkerOfTheGroveToken() {
         super("Elemental", "4/4 green Elemental creature token");
@@ -44,5 +44,13 @@ public class WalkerOfTheGroveToken extends Token {
         this.color.setGreen(true);
         power = new MageInt(4);
         toughness = new MageInt(4);
+    }
+
+    public WalkerOfTheGroveToken(final WalkerOfTheGroveToken token) {
+        super(token);
+    }
+
+    public WalkerOfTheGroveToken copy() {
+        return new WalkerOfTheGroveToken(this);
     }
 }

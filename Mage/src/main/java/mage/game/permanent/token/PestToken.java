@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class PestToken extends Token {
+public class PestToken extends TokenImpl {
 
     public PestToken() {
         super("Pest", "0/1 colorless Pest artifact creature token");
@@ -46,4 +46,11 @@ public class PestToken extends Token {
         toughness = new MageInt(1);
     }
 
+    public PestToken(final PestToken token) {
+        super(token);
+    }
+
+    public PestToken copy() {
+        return new PestToken(this);
+    }
 }
