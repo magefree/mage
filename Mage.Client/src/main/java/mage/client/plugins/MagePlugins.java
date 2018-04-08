@@ -2,7 +2,6 @@ package mage.client.plugins;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.Collection;
 import java.util.Map;
 import java.util.UUID;
 import javax.swing.*;
@@ -33,7 +32,7 @@ public interface MagePlugins {
 
     boolean isCounterPluginLoaded();
 
-    int sortPermanents(Map<String, JComponent> ui, Collection<MagePermanent> permanents, boolean topRow);
+    int sortPermanents(Map<String, JComponent> ui, Map<UUID, MagePermanent> permanents, boolean topRow);
 
     void downloadSymbols();
 
