@@ -26,11 +26,12 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.cards.n;
+package mage.cards.u;
 
 import java.util.UUID;
 
 import mage.abilities.effects.common.CounterTargetEffect;
+import mage.abilities.effects.common.UntapLandsEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -38,24 +39,26 @@ import mage.filter.StaticFilters;
 import mage.target.TargetSpell;
 
 /**
- * @author BetaSteward_at_googlemail.com
+ * @author JRHerlehy
+ *         Created on 4/7/18.
  */
-public class Negate extends CardImpl {
+public class Unwind extends CardImpl {
 
-    public Negate(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
+    public Unwind(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}");
 
+        // Counter target noncreature spell. Untap up to three lands.
         this.getSpellAbility().addTarget(new TargetSpell(StaticFilters.FILTER_SPELL_NON_CREATURE));
         this.getSpellAbility().addEffect(new CounterTargetEffect());
+        this.getSpellAbility().addEffect(new UntapLandsEffect(3));
     }
 
-    public Negate(final Negate card) {
+    public Unwind(final Unwind card) {
         super(card);
     }
 
     @Override
-    public Negate copy() {
-        return new Negate(this);
+    public Unwind copy() {
+        return new Unwind(this);
     }
-
 }
