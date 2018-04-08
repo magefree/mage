@@ -25,57 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.h;
+package mage.cards.b;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.effects.common.continuous.BoostControlledEffect;
-import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
-import mage.abilities.keyword.VigilanceAbility;
+import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.target.TargetPermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class HoldTheGates extends CardImpl {
+public class BlessedLight extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledPermanent();
-
+    private static final FilterPermanent filter = new FilterPermanent("creature or enchantment");
     static {
-        filter.add(new SubtypePredicate(SubType.GATE));
+        filter.add(Predicates.or(new CardTypePredicate(CardType.CREATURE), new CardTypePredicate(CardType.ENCHANTMENT)));
     }
 
-    public HoldTheGates(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}");
+    public BlessedLight(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{W}");
 
 
-        // Creatures you control get +0/+1 for each Gate you control and have vigilance.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new BoostControlledEffect(new StaticValue(0),new PermanentsOnBattlefieldCount(filter), Duration.WhileOnBattlefield));
-        ability.addEffect(new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.WhileOnBattlefield, new FilterControlledCreaturePermanent("Creatures"))
-                .setText("Creatures you control get +0/+1 for each Gate you control and have vigilance"));
-        this.addAbility(ability);
+        // Exile target creature or enchantment.
+        getSpellAbility().addEffect(new ExileTargetEffect());
+        getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
-    public HoldTheGates(final HoldTheGates card) {
+    public BlessedLight(final BlessedLight card) {
         super(card);
     }
 
     @Override
-    public HoldTheGates copy() {
-        return new HoldTheGates(this);
+    public BlessedLight copy() {
+        return new BlessedLight(this);
     }
 }

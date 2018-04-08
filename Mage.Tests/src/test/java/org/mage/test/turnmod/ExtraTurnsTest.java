@@ -66,8 +66,8 @@ public class ExtraTurnsTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Emrakul, the Promised End", 1);
         Assert.assertTrue("Turn 3 is no extra turn ", !currentGame.getState().isExtraTurn());
-        Assert.assertTrue("For turn " + currentGame.getTurnNum() + ", playerA has to be the active player but active player is: "
-                + currentGame.getPlayer(currentGame.getActivePlayerId()).getName(), currentGame.getActivePlayerId().equals(playerA.getId()));
+        Assert.assertEquals("For turn " + currentGame.getTurnNum() + ", playerA has to be the active player but active player is: "
+                + currentGame.getPlayer(currentGame.getActivePlayerId()).getName(), currentGame.getActivePlayerId(), playerA.getId());
     }
 
     @Test
@@ -93,8 +93,8 @@ public class ExtraTurnsTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Emrakul, the Promised End", 1);
         Assert.assertTrue("Turn 4 is a controlled turn ", !playerB.isGameUnderControl());
-        Assert.assertTrue("For turn " + currentGame.getTurnNum() + ", playerB has to be the active player but active player is: "
-                + currentGame.getPlayer(currentGame.getActivePlayerId()).getName(), currentGame.getActivePlayerId().equals(playerB.getId()));
+        Assert.assertEquals("For turn " + currentGame.getTurnNum() + ", playerB has to be the active player but active player is: "
+                + currentGame.getPlayer(currentGame.getActivePlayerId()).getName(), currentGame.getActivePlayerId(), playerB.getId());
     }
 
     @Test
@@ -120,7 +120,7 @@ public class ExtraTurnsTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Emrakul, the Promised End", 1);
         Assert.assertTrue("Turn 5 is an extra turn ", currentGame.getState().isExtraTurn());
-        Assert.assertTrue("For turn " + currentGame.getTurnNum() + ", playerB has to be the active player but active player is: "
-                + currentGame.getPlayer(currentGame.getActivePlayerId()).getName(), currentGame.getActivePlayerId().equals(playerB.getId()));
+        Assert.assertEquals("For turn " + currentGame.getTurnNum() + ", playerB has to be the active player but active player is: "
+                + currentGame.getPlayer(currentGame.getActivePlayerId()).getName(), currentGame.getActivePlayerId(), playerB.getId());
     }
 }
