@@ -48,6 +48,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.game.permanent.Permanent;
 
 /**
 *
@@ -118,7 +119,7 @@ class AureliaAttacksTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
        if (event.getSourceId().equals(this.getSourceId()) ) {
-           Card sourceCard = game.getCard(getSourceId());
+           Permanent sourceCard = game.getPermanent(getSourceId());
            Integer amountAttacks = (Integer) game.getState().getValue(getValueKey(sourceCard, game));
            if (amountAttacks == null || amountAttacks < 1) {
                if (amountAttacks == null) {
