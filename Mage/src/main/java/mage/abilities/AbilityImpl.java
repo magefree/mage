@@ -63,6 +63,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
+import mage.game.command.Plane;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -621,9 +622,9 @@ public abstract class AbilityImpl implements Ability {
     @Override
     public void setControllerId(UUID controllerId) {
         this.controllerId = controllerId;
-            for (Watcher watcher : watchers) {
-                watcher.setControllerId(controllerId);
-            }
+        for (Watcher watcher : watchers) {
+            watcher.setControllerId(controllerId);
+        }
 
         if (subAbilities != null) {
             for (Ability subAbility : subAbilities) {
@@ -649,9 +650,9 @@ public abstract class AbilityImpl implements Ability {
                 subAbility.setSourceId(sourceId);
             }
         }
-            for (Watcher watcher : watchers) {
-                watcher.setSourceId(sourceId);
-            }
+        for (Watcher watcher : watchers) {
+            watcher.setSourceId(sourceId);
+        }
 
     }
 
@@ -923,8 +924,8 @@ public abstract class AbilityImpl implements Ability {
                 return true;
             }
             MageObject object = game.getObject(this.getSourceId());
-            // emblem are always actual
-            if (object != null && object instanceof Emblem) {
+            // emblem/planes are always actual
+            if (object != null && (object instanceof Emblem || object instanceof Plane)) {
                 return true;
             }
         }

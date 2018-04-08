@@ -45,6 +45,7 @@ import mage.constants.TimingRule;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.command.Emblem;
+import mage.game.command.Plane;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
 
@@ -240,10 +241,10 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
             MageObject mageObject = game.getObject(this.sourceId);
             if (mageObject instanceof Emblem) {
                 return ((Emblem) mageObject).getControllerId().equals(playerId);
-            } else {
-                if (game.getState().getZone(this.sourceId) != Zone.BATTLEFIELD) {
-                    return ((Card) mageObject).getOwnerId().equals(playerId);
-                }
+            } else if (mageObject instanceof Plane) {
+                return ((Plane) mageObject).getControllerId().equals(playerId);
+            } else if (game.getState().getZone(this.sourceId) != Zone.BATTLEFIELD) {
+                return ((Card) mageObject).getOwnerId().equals(playerId);
             }
         }
         return false;

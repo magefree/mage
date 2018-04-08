@@ -2483,6 +2483,50 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
+    public PlanarDieRoll rollPlanarDie(Game game) {
+        return this.rollPlanarDie(game, null);
+    }
+
+    @Override
+    public PlanarDieRoll rollPlanarDie(Game game, ArrayList<UUID> appliedEffects) {
+        return rollPlanarDie(game, appliedEffects, 1, 1);
+    }
+    /**
+     * @param game
+     * @param appliedEffects
+     * @param numberChaosSides The number of chaos sides the planar die currently has (normally 1 but can be 5)
+     * @param numberPlanarSides The number of chaos sides the planar die currently has (normally 1)
+     * @return the outcome that the player rolled.  Either ChaosRoll, PlanarRoll or NilRoll
+     */
+    @Override
+    public PlanarDieRoll rollPlanarDie(Game game, ArrayList<UUID> appliedEffects, int numberChaosSides, int numberPlanarSides) {
+        int result = RandomUtil.nextInt(6) + 1;
+        PlanarDieRoll roll = PlanarDieRoll.NIL_ROLL;
+        if (numberChaosSides + numberPlanarSides > 6) {
+            numberChaosSides = 1;
+            numberPlanarSides = 1;
+        }
+        if (result <= numberChaosSides) {
+            roll = PlanarDieRoll.CHAOS_ROLL;
+        }
+        else if (result > 6 - numberPlanarSides) {
+            roll = PlanarDieRoll.PLANAR_ROLL;
+        }
+        if (!game.isSimulation()) {
+            game.informPlayers("[Roll the planar die] " + getLogName() + " rolled a " + roll + " on the planar die");
+        }
+        GameEvent event = new GameEvent(GameEvent.EventType.ROLL_PLANAR_DIE, playerId, null, playerId, result, true);
+        event.setAppliedEffects(appliedEffects);
+        event.setData(roll + "");
+        if (!game.replaceEvent(event)) {
+            GameEvent ge = new GameEvent(GameEvent.EventType.PLANAR_DIE_ROLLED, playerId, null, playerId, event.getAmount(), event.getFlag());
+            ge.setData(roll + "");
+            game.fireEvent(ge);
+        }
+        return roll;
+    }
+
+    @Override
     public List<Permanent> getAvailableAttackers(Game game) {
         // TODO: get available opponents and their planeswalkers, check for each if permanent can attack one
         return getAvailableAttackers(null, game);
