@@ -99,17 +99,11 @@ public class Conversion extends CardImpl {
         @Override
         public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
             for (Permanent land : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
-                switch (layer) {
-                    case AbilityAddingRemovingEffects_6:
-                        land.removeAllAbilities(source.getSourceId(), game);
-                        land.addAbility(new WhiteManaAbility(), source.getSourceId(), game);
-                        break;
-                    case TypeChangingEffects_4:
-                        land.getSubtype(game).clear();
-                        land.getSubtype(game).add(SubType.PLAINS);
-                        break;
+                land.removeAllAbilities(source.getSourceId(), game);
+                land.addAbility(new WhiteManaAbility(), source.getSourceId(), game);
+                land.getSubtype(game).clear();
+                land.getSubtype(game).add(SubType.PLAINS);
                 }
-            }
             return true;
         }
 
