@@ -37,7 +37,11 @@ import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
@@ -45,7 +49,7 @@ import mage.target.targetpointer.FixedTarget;
 
 /**
  *
- * @author Quercitron
+ * @author Will
  */
 public class HelmOfTheHost extends CardImpl {
 
