@@ -25,11 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+
 package mage.cards.g;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
+
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -39,21 +41,19 @@ import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class GenesisWave extends CardImpl {
 
     public GenesisWave(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{G}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{G}{G}{G}");
 
         // Reveal the top X cards of your library. You may put any number of permanent cards with converted mana
         // cost X or less from among them onto the battlefield. Then put all cards revealed this way that weren't
@@ -99,15 +99,9 @@ class GenesisWaveEffect extends OneShotEffect {
         }
         if (!cards.isEmpty()) {
             controller.revealCards(sourceObject.getIdName(), cards, game);
-            FilterCard filter = new FilterCard("cards with converted mana cost " + xValue + " or less to put onto the battlefield");
+            FilterCard filter = new FilterPermanentCard("cards with converted mana cost " + xValue + " or less to put onto the battlefield");
             filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, xValue + 1));
-            filter.add(
-                    Predicates.or(new CardTypePredicate(CardType.ARTIFACT),
-                            new CardTypePredicate(CardType.CREATURE),
-                            new CardTypePredicate(CardType.ENCHANTMENT),
-                            new CardTypePredicate(CardType.LAND),
-                            new CardTypePredicate(CardType.PLANESWALKER)
-                    ));
+
             TargetCard target1 = new TargetCard(0, Integer.MAX_VALUE, Zone.LIBRARY, filter);
             target1.setRequired(false);
 
