@@ -35,6 +35,7 @@ public enum Planes {
     PLANE_ACADEMY_AT_TOLARIA_WEST("AcademyAtTolariaWestPlane"),
     PLANE_AGYREM("AgyremPlane"),
     PLANE_BANT("BantPlane"),
+    PLANE_EDGE_OF_MALACOL("EdgeOfMalacolPlane"),
     PLANE_FEEDING_GROUNDS("FeedingGroundsPlane"),
     PLANE_FIELDS_OF_SUMMER("FieldsOfSummerPlane"),
     PLANE_LETHE_LAKE("LetheLakePlane"),

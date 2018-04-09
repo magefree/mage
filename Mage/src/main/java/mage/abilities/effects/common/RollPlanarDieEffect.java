@@ -114,7 +114,10 @@ public class RollPlanarDieEffect extends OneShotEffect {
                         if (target != null) {
                             effect.setTargetPointer(new FixedTarget(target.getFirstTarget()));
                         }
-                        effect.apply(game, source);
+                        try {
+                            effect.apply(game, source);
+                        } catch (UnsupportedOperationException exception) {                            
+                        }
                         if (effect instanceof ContinuousEffect) {
                             game.addEffect((ContinuousEffect) effect, source);
                         }
@@ -122,10 +125,20 @@ public class RollPlanarDieEffect extends OneShotEffect {
                     }
                 }
             } else if (planarRoll == PlanarDieRoll.PLANAR_ROLL) {
-                // Steps: 1) Remove the last plane
+                // Steps: 1) Remove the last plane and set its effects to discarded
                 for (CommandObject cobject : game.getState().getCommand()) {
                     if (cobject instanceof Plane) {
                         game.getState().addSeenPlane((Plane) cobject, game, id);
+                        if (((Plane) cobject).getAbilities() != null) {
+                            for (Ability ability : ((Plane) cobject).getAbilities()) {
+                                for (Effect effect : ability.getEffects()) {
+                                    if (effect instanceof ContinuousEffect) {
+                                        ((ContinuousEffect) effect).discard();
+                                    }
+                                }
+                            }
+                        }
+                        game.getState().removeTriggersOfSourceId(((Plane) cobject).getId());
                         game.getState().getCommand().remove(cobject);
                         break;
                     }
