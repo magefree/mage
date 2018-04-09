@@ -44,7 +44,7 @@ import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
- * @author Loki
+ * @author Rystan
  */
 public class MemorialToFolly extends CardImpl {
 
