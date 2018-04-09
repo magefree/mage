@@ -33,7 +33,7 @@ package mage.constants;
  */
 public enum Planes {
     PLANE_ACADEMY_AT_TOLARIA_WEST("AcademyAtTolariaWestPlane"),
-    PLANE_AGYREM("Agyrem"),
+    PLANE_AGYREM("AgyremPlane"),
     PLANE_BANT("BantPlane"),
     PLANE_FEEDING_GROUNDS("FeedingGroundsPlane"),
     PLANE_FIELDS_OF_SUMMER("FieldsOfSummerPlane"),
