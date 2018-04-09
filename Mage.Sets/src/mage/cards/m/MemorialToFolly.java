@@ -51,6 +51,11 @@ public class MemorialToFolly extends CardImpl {
     public MemorialToFolly(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
         
+        // Memorial to Folly enters the battlefield tapped.
+        this.addAbility(new EntersBattlefieldTappedAbility());
+        
+
+        
         this.addAbility(new BlackManaAbility());
         
         // {2}{B}, {T}, Sacrifice Memorial to Folly: Return target creature card from your graveyard to your hand.
