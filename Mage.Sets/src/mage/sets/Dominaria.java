@@ -91,6 +91,11 @@ public class Dominaria extends ExpansionSet {
         cards.add(new SetCardInfo("Lyra Dawnbringer", 14, Rarity.MYTHIC, mage.cards.l.LyraDawnbringer.class));
         cards.add(new SetCardInfo("Marwyn, the Nurturer", 172, Rarity.RARE, mage.cards.m.MarwynTheNurturer.class));
         cards.add(new SetCardInfo("Meandering River", 274, Rarity.COMMON, mage.cards.m.MeanderingRiver.class));
+        cards.add(new SetCardInfo("Memorial To Folly", 242, Rarity.UNCOMMON, mage.cards.m.MemorialToFolly.class));
+        cards.add(new SetCardInfo("Memorial To Genius", 243, Rarity.UNCOMMON, mage.cards.m.MemorialToGenius.class));
+        cards.add(new SetCardInfo("Memorial To Glory", 244, Rarity.UNCOMMON, mage.cards.m.MemorialToGlory.class));
+        cards.add(new SetCardInfo("Memorial To Unity", 245, Rarity.UNCOMMON, mage.cards.m.MemorialToUnity.class));
+        cards.add(new SetCardInfo("Memorial To War", 246, Rarity.UNCOMMON, mage.cards.m.MemorialToWar.class));
         cards.add(new SetCardInfo("Naru Meha, Master Wizard", 59, Rarity.MYTHIC, mage.cards.n.NaruMehaMasterWizard.class));
         cards.add(new SetCardInfo("Opt", 60, Rarity.COMMON, mage.cards.o.Opt.class));
         cards.add(new SetCardInfo("Primevals' Glorious Rebirth", 201, Rarity.RARE, mage.cards.p.PrimevalsGloriousRebirth.class));
