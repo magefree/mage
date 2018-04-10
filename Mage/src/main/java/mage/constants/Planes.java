@@ -38,12 +38,13 @@ public enum Planes {
     PLANE_EDGE_OF_MALACOL("EdgeOfMalacolPlane"),
     PLANE_FEEDING_GROUNDS("FeedingGroundsPlane"),
     PLANE_FIELDS_OF_SUMMER("FieldsOfSummerPlane"),
+    PLANE_HEDRON_FIELDS_OF_AGADEEM("HedronFieldsOfAgadeemPlane"),
     PLANE_LETHE_LAKE("LetheLakePlane"),
     PLANE_NAYA("NayaPlane"),
     PLANE_THE_DARK_BARONY("TheDarkBaronyPlane"),
     PLANE_THE_EON_FOG("TheEonFogPlane"),
     PLANE_TURRI_ISLAND("TurriIslandPlane");
-
+    
     private final String text;
 
     Planes(String text) {
