@@ -99,17 +99,16 @@ class HelmOfTheHostEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent equipment = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (equipment == null) {
-            return false;
+            return true;
         }
-        Permanent creature = game.getPermanent(equipment.getAttachedTo());
+        Permanent creature = game.getPermanentOrLKIBattlefield(equipment.getAttachedTo());
         if (creature == null) {
-            return false;
+            return true;
         }
         CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(source.getControllerId(), null, true);
         effect.setTargetPointer(new FixedTarget(creature, game));
         effect.setIsntLegendary(true);
-        effect.apply(game, source);
-        return true;
+        return effect.apply(game, source);
     }
 
 }
