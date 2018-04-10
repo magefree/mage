@@ -138,7 +138,7 @@ class PlanarGuideReturnFromExileEffect extends OneShotEffect {
         if (controller != null) {
             ExileZone exile = game.getExile().getExileZone(source.getSourceId());
             if (exile != null) {
-                controller.moveCards(exile.copy(), Zone.BATTLEFIELD, source, game);
+                controller.moveCards(exile.getCards(game), Zone.BATTLEFIELD, source, game, false, false, true, null);
             }
             return true;
         }
