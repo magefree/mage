@@ -104,6 +104,9 @@ public class ConditionalContinuousEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        if (condition == null && baseCondition != null) {
+            condition = baseCondition;
+        }
         boolean conditionState = condition.apply(game, source);
         if (conditionState) {
             effect.setTargetPointer(this.targetPointer);

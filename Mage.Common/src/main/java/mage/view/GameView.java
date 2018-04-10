@@ -47,6 +47,7 @@ import mage.game.Game;
 import mage.game.GameState;
 import mage.game.combat.CombatGroup;
 import mage.game.command.Emblem;
+import mage.game.command.Plane;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.game.permanent.PermanentToken;
@@ -136,6 +137,12 @@ public class GameView implements Serializable {
                         // Card sourceCard = (Card) ((Emblem) object).getSourceObject();
                         ((StackAbility) stackObject).setName(((Emblem) object).getName());
                         // ((StackAbility) stackObject).setExpansionSetCode(sourceCard.getExpansionSetCode());
+                        stack.put(stackObject.getId(),
+                                new StackAbilityView(game, (StackAbility) stackObject, object.getName(), cardView));
+                        checkPaid(stackObject.getId(), ((StackAbility) stackObject));
+                    } else if (object instanceof Plane) {
+                        CardView cardView = new CardView(new PlaneView((Plane) object));
+                        ((StackAbility) stackObject).setName(((Plane) object).getName());
                         stack.put(stackObject.getId(),
                                 new StackAbilityView(game, (StackAbility) stackObject, object.getName(), cardView));
                         checkPaid(stackObject.getId(), ((StackAbility) stackObject));

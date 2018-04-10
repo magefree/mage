@@ -67,6 +67,7 @@ import mage.game.combat.Combat;
 import mage.game.command.CommandObject;
 import mage.game.command.Commander;
 import mage.game.command.Emblem;
+import mage.game.command.Plane;
 import mage.game.events.*;
 import mage.game.events.TableEvent.EventType;
 import mage.game.permanent.Battlefield;
@@ -1032,7 +1033,8 @@ public abstract class GameImpl implements Game, Serializable {
         watchers.add(new PlayerLostLifeWatcher());
         watchers.add(new BlockedAttackerWatcher());
         watchers.add(new DamageDoneWatcher());
-
+        watchers.add(new PlanarRollWatcher());
+        
         //20100716 - 103.5
         for (UUID playerId : state.getPlayerList(startingPlayerId)) {
             Player player = getPlayer(playerId);
@@ -1070,7 +1072,11 @@ public abstract class GameImpl implements Game, Serializable {
                 cardsWithOpeningAction.remove(card);
             }
         }
-
+        
+        // 20180408 - 901.5
+        if (state.isPlaneChase()) {
+            addPlane(Plane.getRandomPlane(), null, getActivePlayerId());
+        }
     }
 
     protected void sendStartMessage(Player choosingPlayer, Player startingPlayer) {
@@ -1524,6 +1530,37 @@ public abstract class GameImpl implements Game, Serializable {
             ability.setSourceId(newEmblem.getId());
         }
         state.addCommandObject(newEmblem);
+    }
+
+    /**
+     *
+     * @param plane
+     * @param sourceObject
+     * @param toPlayerId controller and owner of the plane (may only be one per
+     * game..)
+     * @return boolean - whether the plane was added successfully or not
+     */
+    @Override
+    public boolean addPlane(Plane plane, MageObject sourceObject, UUID toPlayerId) {
+        // Implementing planechase as if it were 901.15. Single Planar Deck Option
+        // Here, can enforce the world plane restriction (the Grand Melee format may have some impact on this implementation)
+        
+        // Enforce 'world' rule for planes
+        for (CommandObject cobject : state.getCommand()) {
+            if (cobject instanceof Plane) {
+                return false;
+            }
+        }
+        Plane newPlane = plane.copy();
+        newPlane.setSourceObject(sourceObject);
+        newPlane.setControllerId(toPlayerId);
+        newPlane.assignNewId();
+        newPlane.getAbilities().newId();
+        for (Ability ability : newPlane.getAbilities()) {
+            ability.setSourceId(newPlane.getId());
+        }
+        state.addCommandObject(newPlane);
+        return true;
     }
 
     @Override
@@ -2466,7 +2503,7 @@ public abstract class GameImpl implements Game, Serializable {
         //Remove all emblems the player controls
         for (Iterator<CommandObject> it = this.getState().getCommand().iterator(); it.hasNext();) {
             CommandObject obj = it.next();
-            if (obj instanceof Emblem && obj.getControllerId().equals(playerId)) {
+            if ((obj instanceof Emblem || obj instanceof Plane) && obj.getControllerId().equals(playerId)) {
                 ((Emblem) obj).discardEffects();// This may not be the best fix but it works
                 it.remove();
             }

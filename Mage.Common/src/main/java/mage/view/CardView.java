@@ -46,7 +46,6 @@ import mage.game.Game;
 import mage.game.command.Emblem;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
-import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.game.stack.Spell;
 import mage.game.stack.StackAbility;
@@ -55,6 +54,7 @@ import mage.target.Targets;
 import mage.util.SubTypeList;
 
 import com.google.gson.annotations.Expose;
+import mage.game.command.Plane;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -521,6 +521,13 @@ public class CardView extends SimpleCardView {
             Emblem emblem = (Emblem) object;
             this.rarity = Rarity.SPECIAL;
             this.rules = emblem.getAbilities().getRules(emblem.getName());
+        } else if (object instanceof Plane) {
+            this.mageObjectType = MageObjectType.PLANE;
+            Plane plane = (Plane) object;
+            this.rarity = Rarity.SPECIAL;
+            // Display in landscape/rotated/on its side
+            this.rotate = true;
+            this.rules = plane.getAbilities().getRules(plane.getName());
         }
         if (this.rarity == null && object instanceof StackAbility) {
             StackAbility stackAbility = (StackAbility) object;
@@ -554,6 +561,21 @@ public class CardView extends SimpleCardView {
         // emblem images are always with common (black) symbol
         this.frameStyle = FrameStyle.M15_NORMAL;
         this.expansionSetCode = emblem.getExpansionSetCode();
+        this.rarity = Rarity.COMMON;
+    }
+
+    public CardView(PlaneView plane) {
+        this(true);
+        this.gameObject = true;
+        this.id = plane.getId();
+        this.mageObjectType = MageObjectType.EMBLEM;
+        this.name = plane.getName();
+        this.displayName = name;
+        this.rules = plane.getRules();
+        // Display the plane in landscape (similar to Fused cards)
+        this.rotate = true;
+        this.frameStyle = FrameStyle.MPRP_FULL_ART_BASIC;
+        this.expansionSetCode = plane.getExpansionSetCode();
         this.rarity = Rarity.COMMON;
     }
 

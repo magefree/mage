@@ -33,6 +33,7 @@ public enum MageObjectType {
     PERMANENT ("Permanent", true, true),
     EMBLEM ("Emblem", false, false),
     COMMANDER ("Commander", false, false),
+    PLANE ("Plane", false, false),
     NULL("NullObject", false, false);
 
     private final String text;
