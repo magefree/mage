@@ -76,7 +76,7 @@ public class YodaJediMaster extends CardImpl {
 
         // +1: Look at the top two cards of your library. Put one on the bottom of your library.
         Effect effect = new LookLibraryAndPickControllerEffect(new StaticValue(2), false, new StaticValue(1),
-                new FilterCard(), Zone.LIBRARY, true, false, false, Zone.LIBRARY, false, false);
+                new FilterCard(), Zone.LIBRARY, true, false, false, Zone.LIBRARY, false, false, true);
         effect.setText("Look at the top two cards of your library. Put one on the bottom of your library");
         this.addAbility(new LoyaltyAbility(effect, 1));
 
