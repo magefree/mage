@@ -24,8 +24,7 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.client.util;
 
 import java.util.List;
@@ -44,7 +43,7 @@ public final class CardsViewUtil {
     public static CardsView convertSimple(SimpleCardsView view) {
         CardsView cards = new CardsView();
 
-        for (SimpleCardView simple: view.values()) {
+        for (SimpleCardView simple : view.values()) {
             CardInfo cardInfo = CardRepository.instance.findCard(simple.getExpansionSetCode(), simple.getCardNumber());
             Card card = cardInfo != null ? cardInfo.getMockCard() : null;
             if (card != null) {
@@ -54,15 +53,14 @@ public final class CardsViewUtil {
 
         return cards;
     }
-    
+
     public static CardsView convertSimple(SimpleCardsView view, Map<String, Card> loadedCards) {
         CardsView cards = new CardsView();
 
-        for (SimpleCardView simple: view.values()) {
+        for (SimpleCardView simple : view.values()) {
             String key = simple.getExpansionSetCode() + '_' + simple.getCardNumber();
             Card card = loadedCards.get(key);
-            if(card == null)
-            {
+            if (card == null) {
                 CardInfo cardInfo = CardRepository.instance.findCard(simple.getExpansionSetCode(), simple.getCardNumber());
                 card = cardInfo != null ? cardInfo.getMockCard() : null;
                 loadedCards.put(key, card);
@@ -79,12 +77,15 @@ public final class CardsViewUtil {
         CardsView cards = new CardsView();
 
         for (CommandObjectView commandObject : view) {
-            if(commandObject instanceof EmblemView ){
-                CardView cardView = new CardView((EmblemView)commandObject);
+            if (commandObject instanceof EmblemView) {
+                CardView cardView = new CardView((EmblemView) commandObject);
                 cards.put(commandObject.getId(), cardView);
-            }
-            else if(commandObject instanceof CommanderView ){
-                cards.put(commandObject.getId(),(CommanderView)commandObject);
+            } else if (commandObject instanceof PlaneView) {
+                CardView cardView = null;
+                cardView = new CardView((PlaneView) commandObject);
+                cards.put(commandObject.getId(), cardView);                
+            } else if (commandObject instanceof CommanderView) {
+                cards.put(commandObject.getId(), (CommanderView) commandObject);
             }
         }
 
