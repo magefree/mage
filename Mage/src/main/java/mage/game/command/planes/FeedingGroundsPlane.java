@@ -59,13 +59,12 @@ import mage.watchers.common.PlanarRollWatcher;
 public class FeedingGroundsPlane extends Plane {
 
     private static final FilterCard filter = new FilterCard("Red spells or Green spells");
-    private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("Red or Green creature");
+    private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("a creature");
 
     static {
         filter.add(Predicates.or(
                 new ColorPredicate(ObjectColor.RED),
                 new ColorPredicate(ObjectColor.GREEN)));
-        filter2.add(Predicates.or(new ColorPredicate(ObjectColor.RED), new ColorPredicate(ObjectColor.GREEN)));
     }
 
     private static final String rule = "put X +1/+1 counters on target creature, where X is that creature's converted mana cost";

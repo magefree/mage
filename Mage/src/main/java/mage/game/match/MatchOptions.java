@@ -61,6 +61,7 @@ public class MatchOptions implements Serializable {
     protected SkillLevel skillLevel;
     protected boolean rollbackTurnsAllowed;
     protected boolean spectatorsAllowed;
+    protected boolean planeChase;
     protected int quitRatio;
     protected int edhPowerLevel;
     protected boolean rated;
@@ -212,6 +213,14 @@ public class MatchOptions implements Serializable {
 
     public void setSpectatorsAllowed(boolean spectatorsAllowed) {
         this.spectatorsAllowed = spectatorsAllowed;
+    }
+    
+    public boolean isPlaneChase() {
+        return planeChase;
+    }
+    
+    public void setPlaneChase(boolean planeChase) {
+        this.planeChase = planeChase;
     }
 
     public int getQuitRatio() {

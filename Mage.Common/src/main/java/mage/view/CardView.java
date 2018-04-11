@@ -768,6 +768,9 @@ public class CardView extends SimpleCardView {
 
     @Override
     public String getExpansionSetCode() {
+        if (expansionSetCode == null) { 
+            expansionSetCode = "";
+        }
         return expansionSetCode;
     }
 

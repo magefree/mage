@@ -44,6 +44,8 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="chkSpectatorsAllowed" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+                              <Component id="chkPlaneChase" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Component id="txtName" min="-2" pref="178" max="-2" attributes="0"/>
@@ -156,6 +158,7 @@
                       <Component id="lblFreeMulligans" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="chkRollbackTurnsAllowed" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="chkSpectatorsAllowed" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="chkPlaneChase" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="cbGameType" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -282,6 +285,12 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Spectators allowed"/>
         <Property name="toolTipText" type="java.lang.String" value="Allow spectators to view your game."/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="chkPlaneChase">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Use PlaneChase"/>
+        <Property name="toolTipText" type="java.lang.String" value="Use the PlaneChase variant for your game."/>
       </Properties>
     </Component>
 
