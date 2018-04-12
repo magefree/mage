@@ -25,60 +25,41 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.a;
+package mage.cards.b;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continuous.BoostControlledEffect;
-import mage.abilities.keyword.DeathtouchAbility;
-import mage.abilities.keyword.LifelinkAbility;
+
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.SuperType;
-import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SupertypePredicate;
-
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Rystan
+ * @author JRHerlehy
  */
-public class ArvadTheCursed extends CardImpl {
+public class Befuddle extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("legendary creatures you control");
+    public Befuddle(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}");
 
-    static {
-        filter.add(new SupertypePredicate(SuperType.LEGENDARY));
+        // Target creature gets -4/-0 until end of turn.
+        this.getSpellAbility().addEffect(new BoostTargetEffect(-4, 0, Duration.EndOfTurn));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+
+        // Draw a card.
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public ArvadTheCursed(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{B}");
-
-        this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add(SubType.VAMPIRE, SubType.KNIGHT);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
-
-        // Deathtouch
-        this.addAbility(DeathtouchAbility.getInstance());
-        // Lifelink
-        this.addAbility(LifelinkAbility.getInstance());
-
-        // Other legendary creatures you control get +2/+2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(2, 2, Duration.WhileOnBattlefield, filter, true)));
-    }
-
-    public ArvadTheCursed(final ArvadTheCursed card) {
+    public Befuddle(final Befuddle card) {
         super(card);
     }
 
     @Override
-    public ArvadTheCursed copy() {
-        return new ArvadTheCursed(this);
+    public Befuddle copy() {
+        return new Befuddle(this);
     }
 }

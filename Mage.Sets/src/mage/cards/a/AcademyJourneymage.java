@@ -29,56 +29,58 @@ package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continuous.BoostControlledEffect;
-import mage.abilities.keyword.DeathtouchAbility;
-import mage.abilities.keyword.LifelinkAbility;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
+import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.effects.common.cost.SpellCostReductionSourceEffect;
+import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SuperType;
-import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SupertypePredicate;
-
+import mage.filter.StaticFilters;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Rystan
+ * @author JRHerlehy
  */
-public class ArvadTheCursed extends CardImpl {
+public class AcademyJourneymage extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("legendary creatures you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("you control a Wizard");
 
     static {
-        filter.add(new SupertypePredicate(SuperType.LEGENDARY));
+        filter.add(new SubtypePredicate(SubType.WIZARD));
     }
 
-    public ArvadTheCursed(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{B}");
-
-        this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add(SubType.VAMPIRE, SubType.KNIGHT);
+    public AcademyJourneymage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}");
+        
+        this.subtype.add(SubType.HUMAN, SubType.WIZARD);
         this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
+        this.toughness = new MageInt(2);
 
-        // Deathtouch
-        this.addAbility(DeathtouchAbility.getInstance());
-        // Lifelink
-        this.addAbility(LifelinkAbility.getInstance());
+        // This spell costs {1} less to cast if you control a Wizard.
+        Ability ability = new SimpleStaticAbility(Zone.STACK, new SpellCostReductionSourceEffect(1, new PermanentsOnTheBattlefieldCondition(filter)));
+        ability.setRuleAtTheTop(true);
+        this.addAbility(ability);
 
-        // Other legendary creatures you control get +2/+2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(2, 2, Duration.WhileOnBattlefield, filter, true)));
+        // When Academy Journeymage enters the battlefield, return target creature an opponent controls to its owner's hand.
+        ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect());
+        ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
+        this.addAbility(ability);
     }
 
-    public ArvadTheCursed(final ArvadTheCursed card) {
+    public AcademyJourneymage(final AcademyJourneymage card) {
         super(card);
     }
 
     @Override
-    public ArvadTheCursed copy() {
-        return new ArvadTheCursed(this);
+    public AcademyJourneymage copy() {
+        return new AcademyJourneymage(this);
     }
 }

@@ -29,56 +29,61 @@ package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.Ability;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
-import mage.abilities.keyword.DeathtouchAbility;
-import mage.abilities.keyword.LifelinkAbility;
+import mage.constants.*;
+import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SuperType;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.filter.StaticFilters;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SupertypePredicate;
-
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
- * @author Rystan
+ * @author JRHerlehy
  */
-public class ArvadTheCursed extends CardImpl {
+public class AdelizTheCinderWind extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("legendary creatures you control");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Wizards");
 
     static {
-        filter.add(new SupertypePredicate(SuperType.LEGENDARY));
+        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(new SubtypePredicate(SubType.WIZARD));
     }
 
-    public ArvadTheCursed(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{B}");
-
+    public AdelizTheCinderWind(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{R}");
+        
         this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add(SubType.VAMPIRE, SubType.KNIGHT);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
+        this.subtype.add(SubType.HUMAN, SubType.WIZARD);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-        // Deathtouch
-        this.addAbility(DeathtouchAbility.getInstance());
-        // Lifelink
-        this.addAbility(LifelinkAbility.getInstance());
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
 
-        // Other legendary creatures you control get +2/+2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(2, 2, Duration.WhileOnBattlefield, filter, true)));
+        // Haste
+        this.addAbility(HasteAbility.getInstance());
+
+        // Whenever you cast an instant or sorcery spell, Wizards you control get +1/+1 until end of turn.
+        Effect effect = new BoostControlledEffect(1, 1, Duration.EndOfTurn, filter);
+        Ability ability = new SpellCastControllerTriggeredAbility(effect, StaticFilters.FILTER_INSTANT_OR_SORCERY_SPELL, false);
+        this.addAbility(ability);
     }
 
-    public ArvadTheCursed(final ArvadTheCursed card) {
+    public AdelizTheCinderWind(final AdelizTheCinderWind card) {
         super(card);
     }
 
     @Override
-    public ArvadTheCursed copy() {
-        return new ArvadTheCursed(this);
+    public AdelizTheCinderWind copy() {
+        return new AdelizTheCinderWind(this);
     }
 }
