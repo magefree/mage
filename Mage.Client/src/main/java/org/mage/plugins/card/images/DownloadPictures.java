@@ -527,6 +527,11 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                             CardDownloadData card = new CardDownloadData(params[3], set, "0", false, type, "", "", true, fileName);
                             card.setTokenClassName(tokenClassName);
                             list.add(card);
+                        } else if (params[1].toLowerCase(Locale.ENGLISH).equals("generate") && params[2].startsWith("PLANE:")) {
+                            String set = params[2].substring(6);
+                            CardDownloadData card = new CardDownloadData(params[3], set, "0", false, type, "", "", true, fileName);
+                            card.setTokenClassName(tokenClassName);
+                            list.add(card);
                         }
                     } else {
                         logger.error("wrong format for image urls: " + line);

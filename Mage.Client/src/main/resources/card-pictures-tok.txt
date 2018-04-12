@@ -88,6 +88,7 @@
 |Generate|PLANE:PCA|Plane - Academy At Tolaria West|||AcademyAtTolariaWestPlane|
 |Generate|PLANE:PCA|Plane - Agyrem|||AgyremPlane|
 |Generate|PLANE:PCA|Plane - Akoum|||AkoumPlane|
+|Generate|PLANE:PCA|Plane - Astral Arena|||AstralArenaPlane|
 |Generate|PLANE:PCA|Plane - Bant|||BantPlane|
 |Generate|PLANE:PCA|Plane - Edge Of Malacol|||EdgeOfMalacolPlane|
 |Generate|PLANE:PCA|Plane - Feeding Grounds|||FeedingGroundsPlane|
