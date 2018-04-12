@@ -75,6 +75,7 @@ public class Plane implements CommandObject {
 
     public Plane() {
         this.id = UUID.randomUUID();
+        this.frameStyle = FrameStyle.M15_NORMAL;
     }
 
     public Plane(final Plane plane) {

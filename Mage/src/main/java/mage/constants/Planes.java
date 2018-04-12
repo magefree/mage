@@ -35,6 +35,7 @@ public enum Planes {
     PLANE_ACADEMY_AT_TOLARIA_WEST("AcademyAtTolariaWestPlane"),
     PLANE_AGYREM("AgyremPlane"),
     PLANE_AKOUM("AkoumPlane"),
+    PLANE_ASTRAL_ARENA("AstralArenaPlane"),
     PLANE_BANT("BantPlane"),
     PLANE_EDGE_OF_MALACOL("EdgeOfMalacolPlane"),
     PLANE_FEEDING_GROUNDS("FeedingGroundsPlane"),
@@ -42,10 +43,11 @@ public enum Planes {
     PLANE_HEDRON_FIELDS_OF_AGADEEM("HedronFieldsOfAgadeemPlane"),
     PLANE_LETHE_LAKE("LetheLakePlane"),
     PLANE_NAYA("NayaPlane"),
-    PLANE_THE_DARK_BARONY("TheDarkBaronyPlane"),
     PLANE_TAZEEM("TazeemPlane"),
+    PLANE_THE_DARK_BARONY("TheDarkBaronyPlane"),
     PLANE_THE_EON_FOG("TheEonFogPlane"),
-    PLANE_TURRI_ISLAND("TurriIslandPlane");
+    PLANE_TURRI_ISLAND("TurriIslandPlane"),
+    PLANE_UNDERCITY_REACHES("UndercityReachesPlane");
     
     private final String text;
 
