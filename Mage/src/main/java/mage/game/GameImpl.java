@@ -1034,7 +1034,7 @@ public abstract class GameImpl implements Game, Serializable {
         watchers.add(new BlockedAttackerWatcher());
         watchers.add(new DamageDoneWatcher());
         watchers.add(new PlanarRollWatcher());
-        
+
         //20100716 - 103.5
         for (UUID playerId : state.getPlayerList(startingPlayerId)) {
             Player player = getPlayer(playerId);
@@ -1072,10 +1072,12 @@ public abstract class GameImpl implements Game, Serializable {
                 cardsWithOpeningAction.remove(card);
             }
         }
-        
+
         // 20180408 - 901.5
         if (gameOptions.planeChase) {
-            addPlane(Plane.getRandomPlane(), null, getActivePlayerId());
+            Plane plane = Plane.getRandomPlane();
+            plane.setControllerId(getActivePlayerId());
+            addPlane(plane, null, getActivePlayerId());
         }
     }
 
@@ -1544,7 +1546,7 @@ public abstract class GameImpl implements Game, Serializable {
     public boolean addPlane(Plane plane, MageObject sourceObject, UUID toPlayerId) {
         // Implementing planechase as if it were 901.15. Single Planar Deck Option
         // Here, can enforce the world plane restriction (the Grand Melee format may have some impact on this implementation)
-        
+
         // Enforce 'world' rule for planes
         for (CommandObject cobject : state.getCommand()) {
             if (cobject instanceof Plane) {
@@ -1560,6 +1562,7 @@ public abstract class GameImpl implements Game, Serializable {
             ability.setSourceId(newPlane.getId());
         }
         state.addCommandObject(newPlane);
+        informPlayers("You have planeswalked to " + newPlane.getLogName());
         return true;
     }
 

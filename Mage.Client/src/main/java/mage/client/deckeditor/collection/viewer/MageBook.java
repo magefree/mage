@@ -57,11 +57,13 @@ import mage.components.ImagePanel;
 import mage.components.ImagePanelStyle;
 import mage.constants.Rarity;
 import mage.game.command.Emblem;
+import mage.game.command.Plane;
 import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.Token;
 import mage.view.CardView;
 import mage.view.EmblemView;
 import mage.view.PermanentView;
+import mage.view.PlaneView;
 import org.apache.log4j.Logger;
 import org.mage.card.arcane.ManaSymbols;
 import org.mage.plugins.card.images.CardDownloadData;
@@ -251,7 +253,8 @@ public class MageBook extends JComponent {
         } else {
             updateCardStats(currentSet, false);
             int numTokens = showTokens();
-            showEmblems(numTokens);
+            int numTokensEmblems = numTokens + showEmblems(numTokens);
+            showPlanes(numTokensEmblems);
         }
     }
 
@@ -317,11 +320,13 @@ public class MageBook extends JComponent {
         return tokens.size();
     }
 
-    public void showEmblems(int numTokens) {
+    public int showEmblems(int numTokens) {
         List<Emblem> emblems = getEmblems(currentPage, currentSet, numTokens);
         // System.out.println ("Size of origins in " + currentSet + " = " + emblems.size());
+        int numEmblems = 0;
         if (emblems != null && emblems.size() > 0) {
             int size = emblems.size();
+            numEmblems = size;
             Rectangle rectangle = new Rectangle();
             rectangle.translate(OFFSET_X, OFFSET_Y);
             // calculate the x offset of the second (right) page
@@ -354,6 +359,49 @@ public class MageBook extends JComponent {
                     Emblem emblem = emblems.get(i);
                     addEmblem(emblem, bigCard, null, rectangle);
                     rectangle = CardPosition.translatePosition(i + numTokens - conf.CARDS_PER_PAGE / 2, rectangle, conf);
+                }
+            }
+
+            jLayeredPane.repaint();
+        }
+        return numEmblems;
+    }
+
+    public void showPlanes(int numTokensEmblems) {
+        List<Plane> planes = getPlanes(currentPage, currentSet, numTokensEmblems);
+        if (planes != null && planes.size() > 0) {
+            int size = planes.size();
+            Rectangle rectangle = new Rectangle();
+            rectangle.translate(OFFSET_X, OFFSET_Y);
+
+            int second_page_x = (conf.WIDTH - 2 * LEFT_RIGHT_PAGES_WIDTH)
+                    - (cardDimensions.frameWidth + CardPosition.GAP_X) * conf.CARD_COLUMNS + CardPosition.GAP_X - OFFSET_X;
+
+            numTokensEmblems = numTokensEmblems % conf.CARDS_PER_PAGE;
+            if (numTokensEmblems < conf.CARDS_PER_PAGE / 2) {
+                for (int z = 0; z < numTokensEmblems && z < conf.CARDS_PER_PAGE / 2; z++) {
+                    rectangle = CardPosition.translatePosition(z, rectangle, conf);
+                }
+            } else {
+                rectangle.setLocation(second_page_x, OFFSET_Y);
+                for (int z = 0; z < numTokensEmblems - conf.CARDS_PER_PAGE / 2; z++) {
+                    rectangle = CardPosition.translatePosition(z, rectangle, conf);
+                }
+            }
+
+            int lastI = 0;
+            for (int i = 0; i < size && i + numTokensEmblems < conf.CARDS_PER_PAGE / 2; i++) {
+                Plane plane = planes.get(i);
+                addPlane(plane, bigCard, null, rectangle);
+                rectangle = CardPosition.translatePosition(i + numTokensEmblems, rectangle, conf);
+                lastI++;
+            }
+
+            if (size + numTokensEmblems > conf.CARDS_PER_PAGE / 2) {
+                for (int i = lastI; i < size && i + numTokensEmblems < conf.CARDS_PER_PAGE; i++) {
+                    Plane plane = planes.get(i);
+                    addPlane(plane, bigCard, null, rectangle);
+                    rectangle = CardPosition.translatePosition(i + numTokensEmblems - conf.CARDS_PER_PAGE / 2, rectangle, conf);
                 }
             }
 
@@ -413,6 +461,11 @@ public class MageBook extends JComponent {
 
     private void addEmblem(Emblem emblem, BigCard bigCard, UUID gameId, Rectangle rectangle) {
         CardView cardView = new CardView(new EmblemView(emblem));
+        addCard(cardView, bigCard, gameId, rectangle);
+    }
+
+    private void addPlane(Plane plane, BigCard bigCard, UUID gameId, Rectangle rectangle) {
+        CardView cardView = new CardView(new PlaneView(plane));
         addCard(cardView, bigCard, gameId, rectangle);
     }
 
@@ -590,6 +643,62 @@ public class MageBook extends JComponent {
         return emblems.subList(start, end);
     }
 
+    private List<Plane> getPlanes(int page, String set, int numTokens) {
+        ArrayList<CardDownloadData> allPlanes = getTokenCardUrls();
+        ArrayList<Plane> planes = new ArrayList<>();
+
+        for (CardDownloadData plane : allPlanes) {
+            if (plane.getSet().equals(set)) {
+                try {
+                    String className = plane.getName();
+                    if (plane.getTokenClassName() != null && plane.getTokenClassName().length() > 0) {
+                        if (plane.getTokenClassName().toLowerCase(Locale.ENGLISH).matches(".*plane.*")) {
+                            className = plane.getTokenClassName();
+                            className = "mage.game.command.planes." + className;
+                        }
+                    } else {
+                        continue;
+                    }
+                    Class<?> c = Class.forName(className);
+                    Constructor<?> cons = c.getConstructor();
+                    Object newPlane = cons.newInstance();
+                    if (newPlane != null && newPlane instanceof mage.game.command.Plane) {
+                        ((Plane) newPlane).setExpansionSetCodeForImage(set);
+
+                        planes.add((Plane) newPlane);
+                    }
+                } catch (ClassNotFoundException ex) {
+                    // Swallow exception
+                } catch (NoSuchMethodException ex) {
+                    // Swallow exception
+                } catch (SecurityException ex) {
+                    // Swallow exception
+                } catch (InstantiationException ex) {
+                    // Swallow exception
+                } catch (IllegalAccessException ex) {
+                    // Swallow exception
+                } catch (IllegalArgumentException ex) {
+                    // Swallow exception
+                } catch (InvocationTargetException ex) {
+                    // Swallow exception
+                }
+            }
+        }
+        int start = 0;
+        int end = planes.size();
+
+        if ((page + 1) * conf.CARDS_PER_PAGE < numTokens + planes.size()) {
+            end = (page + 1) * conf.CARDS_PER_PAGE - numTokens;
+            pageRight.setVisible(true);
+        }
+
+        if (planes.size() > conf.CARDS_PER_PAGE) {
+            pageLeft.setVisible(true);
+            pageRight.setVisible(true);
+        }
+        return planes.subList(start, end);
+    }
+
     private ImagePanel getImagePanel(String filename, ImagePanelStyle type) {
         try {
             InputStream is = this.getClass().getResourceAsStream(filename);
@@ -651,7 +760,7 @@ public class MageBook extends JComponent {
         }
     }
 
-    public void updateSize(String size){
+    public void updateSize(String size) {
         switch (size) {
             case LAYOUT_3x3:
                 this.conf = new _3x3Configuration();

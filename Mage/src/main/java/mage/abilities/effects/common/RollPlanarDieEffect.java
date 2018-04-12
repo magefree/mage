@@ -116,7 +116,7 @@ public class RollPlanarDieEffect extends OneShotEffect {
                         }
                         try {
                             effect.apply(game, source);
-                        } catch (UnsupportedOperationException exception) {                            
+                        } catch (UnsupportedOperationException exception) {
                         }
                         if (effect instanceof ContinuousEffect) {
                             game.addEffect((ContinuousEffect) effect, source);
@@ -160,7 +160,6 @@ public class RollPlanarDieEffect extends OneShotEffect {
                             foundNextPlane = true;
                             plane.setControllerId(controller.getId());
                             game.addPlane(plane, null, controller.getId());
-                            game.informPlayers("You have planeswalked to " + plane.getLogName());
                         }
                     } catch (Exception ex) {
                     }
@@ -176,7 +175,16 @@ public class RollPlanarDieEffect extends OneShotEffect {
         if (!staticText.isEmpty()) {
             return staticText;
         }
-        StringBuilder sb = new StringBuilder("Roll the planar die");
+        StringBuilder sb = new StringBuilder("Roll the planar die. If you roll CHAOS, ");
+        for (int i = 0; i < chaosEffects.size(); i++) {
+            Effect effect = chaosEffects.get(i);
+            if (effect != null) {
+                String emode = effect.getText(mode);
+                emode = emode.substring(0, 1).toLowerCase() + emode.substring(1);
+                sb.append(emode);
+            }
+        }
+        sb.append(".  If you roll PW, planeswalk to a new plane");
         return sb.toString();
     }
 
