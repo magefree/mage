@@ -177,7 +177,7 @@ public final class CollectionViewerPanel extends JPanel {
         JCheckBox cardsOrTokens = new JCheckBox("Display Cards");
         cardsOrTokens.setSelected(true);
         cardsOrTokens.setForeground(Color.white);
-        cardsOrTokens.setToolTipText("Select to show Cards or Tokens(and emblems) for the chosen set");
+        cardsOrTokens.setToolTipText("Select to show Cards for the chosen set.  When unselected, will show Tokens, Emblems and Planes for the set instead");
         cardsOrTokens.addActionListener(e -> mageBook.cardsOrTokens(cardsOrTokens.isSelected()));
         buttonsPanel.add(cardsOrTokens);
 

@@ -29,51 +29,53 @@ package mage.game.command.planes;
 
 import java.util.ArrayList;
 import java.util.List;
-import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MainPhaseStackEmptyCondition;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.RollPlanarDieEffect;
-import mage.abilities.effects.common.UntapAllControllerEffect;
-import mage.abilities.effects.common.counter.AddCountersTargetEffect;
+import mage.abilities.effects.common.continuous.CastAsThoughItHadFlashAllEffect;
+import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.PhaseStep;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.counters.CounterType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.game.Game;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.permanent.EnchantedPredicate;
 import mage.game.command.Plane;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.Permanent;
 import mage.target.Target;
-import mage.target.targetpointer.FixedTarget;
+import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.common.PlanarRollWatcher;
 
 /**
  *
  * @author spjspj
  */
-public class EdgeOfMalacolPlane extends Plane {
+public class AkoumPlane extends Plane {
 
-    public EdgeOfMalacolPlane() {
-        this.setName("Plane - Edge Of Malacol");
+    private static final FilterCard filterCard = new FilterCard("enchantment spells");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature that isn't enchanted");
+
+    static {
+        filter.add(Predicates.not(new EnchantedPredicate()));
+        filterCard.add(new CardTypePredicate(CardType.ENCHANTMENT));
+    }
+
+    public AkoumPlane() {
+        this.setName("Plane - Akoum");
         this.setExpansionSetCodeForImage("PCA");
 
-        // If a creature you control would untap during your untap step, put two +1/+1 counters on it instead.
-        SimpleStaticAbility ability = new SimpleStaticAbility(Zone.COMMAND, new EdgeOfMalacolEffect());
+        // Players may cast enchantment spells as if they had flash
+        SimpleStaticAbility ability = new SimpleStaticAbility(Zone.COMMAND, new CastAsThoughItHadFlashAllEffect(Duration.Custom, filterCard, false));
         this.getAbilities().add(ability);
 
-        // Active player can roll the planar die: Whenever you roll {CHAOS}, untap each creature you control
-        Effect chaosEffect = new UntapAllControllerEffect(new FilterControlledCreaturePermanent(), "untap each creature you control");
-        Target chaosTarget = null;
+        // Active player can roll the planar die: Whenever you roll {CHAOS}, destroy target creature that isn't enchanted
+        Effect chaosEffect = new DestroyTargetEffect(true);
+        Target chaosTarget = new TargetCreaturePermanent(filter);
 
         List<Effect> chaosEffects = new ArrayList<Effect>();
         chaosEffects.add(chaosEffect);
@@ -85,49 +87,5 @@ public class EdgeOfMalacolPlane extends Plane {
         this.getAbilities().add(chaosAbility);
         chaosAbility.setMayActivate(TargetController.ANY);
         this.getAbilities().add(new SimpleStaticAbility(Zone.ALL, new PlanarDieRollCostIncreasingEffect(chaosAbility.getOriginalId())));
-    }
-}
-
-class EdgeOfMalacolEffect extends ContinuousRuleModifyingEffectImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
-
-    public EdgeOfMalacolEffect() {
-        super(Duration.Custom, Outcome.Detriment);
-        this.staticText = "If a creature you control would untap during your untap step, put two +1/+1 counters on it instead";
-    }
-
-    public EdgeOfMalacolEffect(final EdgeOfMalacolEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public EdgeOfMalacolEffect copy() {
-        return new EdgeOfMalacolEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.UNTAP;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        // Prevent untap event of creatures of target player
-        if (game.getTurn().getStepType() == PhaseStep.UNTAP) {
-            Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && filter.match(permanent, game)) {
-                Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance(2));
-                effect.setTargetPointer(new FixedTarget(permanent, game));
-                effect.apply(game, source);
-                return true;
-            }
-        }
-        return false;
     }
 }
