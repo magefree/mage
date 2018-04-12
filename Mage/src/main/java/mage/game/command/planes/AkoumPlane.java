@@ -74,7 +74,7 @@ public class AkoumPlane extends Plane {
         this.getAbilities().add(ability);
 
         // Active player can roll the planar die: Whenever you roll {CHAOS}, destroy target creature that isn't enchanted
-        Effect chaosEffect = new DestroyTargetEffect(true);
+        Effect chaosEffect = new DestroyTargetEffect("destroy target creature that isn't enchanted");
         Target chaosTarget = new TargetCreaturePermanent(filter);
 
         List<Effect> chaosEffects = new ArrayList<Effect>();

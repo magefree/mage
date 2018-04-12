@@ -62,7 +62,7 @@ public class HedronFieldsOfAgadeemPlane extends Plane {
         this.setExpansionSetCodeForImage("PCA");
 
         // Creatures with power 7 or greater can't attack or block 
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new HedronFieldsOfAgadeemRestrictionEffect());
+        Ability ability = new SimpleStaticAbility(Zone.COMMAND, new HedronFieldsOfAgadeemRestrictionEffect());
         this.getAbilities().add(ability);
 
         // Active player can roll the planar die: Whenever you roll {CHAOS}, create a 7/7 colorless Eldrazi creature with annhilator 1
@@ -92,7 +92,7 @@ class HedronFieldsOfAgadeemRestrictionEffect extends RestrictionEffect {
     }
 
     public HedronFieldsOfAgadeemRestrictionEffect() {
-        super(Duration.WhileOnBattlefield);
+        super(Duration.Custom);
         staticText = "Creatures with power 7 or greater can't attack or block";
     }
 
