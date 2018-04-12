@@ -47,10 +47,11 @@ import mage.filter.common.FilterLandPermanent;
 public class TatyovaBenthicDruid extends CardImpl {
 
     public TatyovaBenthicDruid(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{3}{G}{U}");
-        addSuperType(SuperType.LEGENDARY);
-        this.subtype.add(SubType.MERFOLK);
-        this.subtype.add(SubType.DRUID);
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{U}");
+
+        this.addSuperType(SuperType.LEGENDARY);
+        this.subtype.add(SubType.MERFOLK, SubType.DRUID);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

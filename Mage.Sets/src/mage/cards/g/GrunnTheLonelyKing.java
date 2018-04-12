@@ -39,7 +39,8 @@ public class GrunnTheLonelyKing extends CardImpl {
         this.addAbility(new KickerAbility("{3}"));
 
         //If Grunn, the Lonely King was kicked, it enters the battlefield with five +1/+1 counters on it.
-        this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance(5)), KickedCondition.instance)));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(5)),
+                                                     KickedCondition.instance, "If {this} was kicked, it enters the battlefield with five +1/+1 counters on it", ""));
 
         //Whenever Grunn attacks alone, double its power and toughness until end of turn.
         SourcePermanentPowerCount power = new SourcePermanentPowerCount();
