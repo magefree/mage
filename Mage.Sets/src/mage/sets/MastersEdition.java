@@ -83,6 +83,7 @@ public class MastersEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Basal Thrull", 59, Rarity.COMMON, BasalThrull.class));
         cards.add(new SetCardInfo("Benalish Hero", 5, Rarity.COMMON, mage.cards.b.BenalishHero.class));
         cards.add(new SetCardInfo("Berserk", 114, Rarity.RARE, mage.cards.b.Berserk.class));
+        cards.add(new SetCardInfo("Bestial Fury", 88, Rarity.COMMON, mage.cards.b.BestialFury.class));
         cards.add(new SetCardInfo("Black Knight", 60, Rarity.UNCOMMON, mage.cards.b.BlackKnight.class));
         cards.add(new SetCardInfo("Blight", 61, Rarity.UNCOMMON, mage.cards.b.Blight.class));
         cards.add(new SetCardInfo("Breeding Pit", 62, Rarity.UNCOMMON, mage.cards.b.BreedingPit.class));
