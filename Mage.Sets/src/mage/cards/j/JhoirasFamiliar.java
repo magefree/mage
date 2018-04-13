@@ -25,32 +25,46 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.filter.common;
+package mage.cards.j;
 
-import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.HistoricPredicate;
+import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
+import mage.abilities.keyword.FlyingAbility;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.Zone;
+import mage.filter.common.FilterHistoricCard;
 
 /**
  *
- * @author igoudt
+ * @author LevelX2
  */
-public class FilterHistoricSpell extends FilterSpell {
+public class JhoirasFamiliar extends CardImpl {
 
-    public FilterHistoricSpell() {
-        this("historic spell");
+    public JhoirasFamiliar(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");
+
+        this.subtype.add(SubType.BIRD);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+
+        // Historic spells you cast cost {1} less to cast.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(new FilterHistoricCard(), 1)));
     }
 
-    public FilterHistoricSpell(String name) {
-        super(name);
-        this.add(new HistoricPredicate());
-    }
-
-    public FilterHistoricSpell(final FilterHistoricSpell filter) {
-        super(filter);
+    public JhoirasFamiliar(final JhoirasFamiliar card) {
+        super(card);
     }
 
     @Override
-    public FilterHistoricSpell copy() {
-        return new FilterHistoricSpell(this);
+    public JhoirasFamiliar copy() {
+        return new JhoirasFamiliar(this);
     }
 }

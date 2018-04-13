@@ -25,32 +25,49 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.filter.common;
+package mage.cards.k;
 
-import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.HistoricPredicate;
+import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.AttacksTriggeredAbility;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.effects.common.DamageEverythingEffect;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.filter.common.FilterPlaneswalkerPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
- * @author igoudt
+ * @author LevelX2
  */
-public class FilterHistoricSpell extends FilterSpell {
+public class KarplusanHound extends CardImpl {
 
-    public FilterHistoricSpell() {
-        this("historic spell");
+    public KarplusanHound(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
+
+        this.subtype.add(SubType.HOUND);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
+        FilterPlaneswalkerPermanent filter = new FilterPlaneswalkerPermanent("a Chandra planeswalker");
+        filter.add(new SubtypePredicate(SubType.CHANDRA));
+        // Whenever Karplusan Hound attacks, if you control a Chandra planeswalker, this creature deals 2 damage to any target.
+        Ability ability = new ConditionalTriggeredAbility(new AttacksTriggeredAbility(new DamageEverythingEffect(2), false), new PermanentsOnTheBattlefieldCondition(filter),
+                "if you control a Chandra planeswalker, this creature deals 2 damage to any target");
+
+        this.addAbility(ability);
     }
 
-    public FilterHistoricSpell(String name) {
-        super(name);
-        this.add(new HistoricPredicate());
-    }
-
-    public FilterHistoricSpell(final FilterHistoricSpell filter) {
-        super(filter);
+    public KarplusanHound(final KarplusanHound card) {
+        super(card);
     }
 
     @Override
-    public FilterHistoricSpell copy() {
-        return new FilterHistoricSpell(this);
+    public KarplusanHound copy() {
+        return new KarplusanHound(this);
     }
 }

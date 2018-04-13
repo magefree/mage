@@ -24,8 +24,7 @@
  * The views and conclusions contained in the software and documentation are those of the
  * authors and should not be interpreted as representing official policies, either expressed
  * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
@@ -40,7 +39,6 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author L_J
  */
-
 public class EnchantedCreatureBlockedTriggeredAbility extends TriggeredAbilityImpl {
 
     public EnchantedCreatureBlockedTriggeredAbility(Effect effect, boolean optional) {
@@ -62,7 +60,7 @@ public class EnchantedCreatureBlockedTriggeredAbility extends TriggeredAbilityIm
         if (equipment != null && equipment.getAttachedTo() != null) {
             Permanent equipped = game.getPermanent(equipment.getAttachedTo());
             if (equipped.getId().equals(event.getTargetId())) {
-                getEffects().get(1).setTargetPointer(new FixedTarget(equipped.getId()));
+                getEffects().get(1).setTargetPointer(new FixedTarget(equipped, game));
                 return true;
             }
         }
