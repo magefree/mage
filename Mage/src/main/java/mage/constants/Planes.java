@@ -46,6 +46,7 @@ public enum Planes {
     PLANE_TAZEEM("TazeemPlane"),
     PLANE_THE_DARK_BARONY("TheDarkBaronyPlane"),
     PLANE_THE_EON_FOG("TheEonFogPlane"),
+    PLANE_TRUGA_JUNGLE("TrugaJunglePlane"),
     PLANE_TURRI_ISLAND("TurriIslandPlane"),
     PLANE_UNDERCITY_REACHES("UndercityReachesPlane");
     
