@@ -198,6 +198,7 @@ public class Dominaria extends ExpansionSet {
         cards.add(new SetCardInfo("The Mirari Conjecture", 57, Rarity.RARE, mage.cards.t.TheMirariConjecture.class));
         cards.add(new SetCardInfo("Thorn Elemental", 185, Rarity.UNCOMMON, mage.cards.t.ThornElemental.class));
         cards.add(new SetCardInfo("Timber Gorge", 279, Rarity.COMMON, mage.cards.t.TimberGorge.class));
+        cards.add(new SetCardInfo("Tolarian Scholar", 71, Rarity.COMMON, mage.cards.t.TolarianScholar.class));
         cards.add(new SetCardInfo("Tragic Poet", 37, Rarity.COMMON, mage.cards.t.TragicPoet.class));
         cards.add(new SetCardInfo("Triumph of Gerrard", 38, Rarity.UNCOMMON, mage.cards.t.TriumphOfGerrard.class));
         cards.add(new SetCardInfo("Untamed Kavu", 186, Rarity.UNCOMMON, mage.cards.u.UntamedKavu.class));
