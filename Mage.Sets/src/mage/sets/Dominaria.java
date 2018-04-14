@@ -94,6 +94,7 @@ public class Dominaria extends ExpansionSet {
         cards.add(new SetCardInfo("Dub", 15, Rarity.SPECIAL, mage.cards.d.Dub.class));
         cards.add(new SetCardInfo("Eviscerate", 91, Rarity.COMMON, mage.cards.e.Eviscerate.class));
         cards.add(new SetCardInfo("Fall of the Thran", 18, Rarity.RARE, mage.cards.f.FallOfTheThran.class));
+        cards.add(new SetCardInfo("Feral Abomination", 92, Rarity.COMMON, mage.cards.f.FeralAbomination.class));
         cards.add(new SetCardInfo("Fire Elemental", 120, Rarity.COMMON, mage.cards.f.FireElemental.class));
         cards.add(new SetCardInfo("Forebear's Blade", 214, Rarity.RARE, mage.cards.f.ForebearsBlade.class));
         cards.add(new SetCardInfo("Forest", 266, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
