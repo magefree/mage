@@ -147,11 +147,11 @@ public class Dominaria extends ExpansionSet {
         cards.add(new SetCardInfo("Mammoth Spider", 171, Rarity.COMMON, mage.cards.m.MammothSpider.class));
         cards.add(new SetCardInfo("Marwyn, the Nurturer", 172, Rarity.RARE, mage.cards.m.MarwynTheNurturer.class));
         cards.add(new SetCardInfo("Meandering River", 274, Rarity.COMMON, mage.cards.m.MeanderingRiver.class));
-        cards.add(new SetCardInfo("Memorial To Folly", 242, Rarity.UNCOMMON, mage.cards.m.MemorialToFolly.class));
-        cards.add(new SetCardInfo("Memorial To Genius", 243, Rarity.UNCOMMON, mage.cards.m.MemorialToGenius.class));
-        cards.add(new SetCardInfo("Memorial To Glory", 244, Rarity.UNCOMMON, mage.cards.m.MemorialToGlory.class));
-        cards.add(new SetCardInfo("Memorial To Unity", 245, Rarity.UNCOMMON, mage.cards.m.MemorialToUnity.class));
-        cards.add(new SetCardInfo("Memorial To War", 246, Rarity.UNCOMMON, mage.cards.m.MemorialToWar.class));
+        cards.add(new SetCardInfo("Memorial to Folly", 242, Rarity.UNCOMMON, mage.cards.m.MemorialToFolly.class));
+        cards.add(new SetCardInfo("Memorial to Genius", 243, Rarity.UNCOMMON, mage.cards.m.MemorialToGenius.class));
+        cards.add(new SetCardInfo("Memorial to Glory", 244, Rarity.UNCOMMON, mage.cards.m.MemorialToGlory.class));
+        cards.add(new SetCardInfo("Memorial to Unity", 245, Rarity.UNCOMMON, mage.cards.m.MemorialToUnity.class));
+        cards.add(new SetCardInfo("Memorial to War", 246, Rarity.UNCOMMON, mage.cards.m.MemorialToWar.class));
         cards.add(new SetCardInfo("Mountain", 262, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 263, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 264, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
