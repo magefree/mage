@@ -365,7 +365,9 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 Card card = pickTarget(cards, outcome, target, null, game);
                 if (card != null && alreadyTargetted != null && !alreadyTargetted.contains(card.getId())) {
                     target.add(card.getId(), game);
-                    return true;
+                    if (target.isChosen()) {
+                        return true;
+                    }
                 }
             }
             return false;
@@ -757,17 +759,20 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     protected Card pickTarget(List<Card> cards, Outcome outcome, Target target, Ability source, Game game) {
         Card card;
         while (!cards.isEmpty()) {
+
             if (outcome.isGood()) {
                 card = pickBestCard(cards, null, target, source, game);
             } else {
                 card = pickWorstCard(cards, null, target, source, game);
             }
-            if (source != null) {
-                if (target.canTarget(getId(), card.getId(), source, game)) {
+            if (!target.getTargets().contains(card.getId())) {
+                if (source != null) {
+                    if (target.canTarget(getId(), card.getId(), source, game)) {
+                        return card;
+                    }
+                } else {
                     return card;
                 }
-            } else {
-                return card;
             }
             cards.remove(card);
         }

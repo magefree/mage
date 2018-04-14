@@ -36,6 +36,7 @@ import mage.MageObject;
 import mage.abilities.*;
 import mage.abilities.common.AttachableToRestrictedAbility;
 import mage.abilities.common.CantHaveMoreThanAmountCountersSourceAbility;
+import mage.abilities.common.SagaAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffects;
 import mage.abilities.effects.Effect;
@@ -1914,7 +1915,7 @@ public abstract class GameImpl implements Game, Serializable {
             if (perm.isWorld()) {
                 worldEnchantment.add(perm);
             }
-            if (StaticFilters.FILTER_PERMANENT_AURA.match(perm, this)) {
+            if (perm.hasSubtype(SubType.AURA, this)) {
                 //20091005 - 704.5n, 702.14c
                 if (perm.getAttachedTo() == null) {
                     Card card = this.getCard(perm.getId());
@@ -2001,6 +2002,30 @@ public abstract class GameImpl implements Game, Serializable {
                                 }
                             }
                         }
+                    }
+                }
+            }
+            // Remove Saga enchantment if last chapter is reached and chapter ability has left the stack
+            if (perm.hasSubtype(SubType.SAGA, this)) {
+                for (Ability sagaAbility : perm.getAbilities()) {
+                    if (sagaAbility instanceof SagaAbility) {
+                        int maxChapter = ((SagaAbility) sagaAbility).getMaxChapter().getNumber();
+                        if (maxChapter <= perm.getCounters(this).getCount(CounterType.LORE)) {
+                            boolean noChapterAbilityOnStack = true;
+                            // Check chapter abilities on stack
+                            for (StackObject stackObject : getStack()) {
+                                if (stackObject.getSourceId().equals(perm.getId()) && SagaAbility.isChapterAbility(stackObject)) {
+                                    noChapterAbilityOnStack = false;
+                                    break;
+                                }
+                            }
+                            if (noChapterAbilityOnStack) {
+                                // After the last chapter ability has left the stack, you'll sacrifice the Saga
+                                perm.sacrifice(perm.getId(), this);
+                                somethingHappened = true;
+                            }
+                        }
+
                     }
                 }
             }
