@@ -25,31 +25,26 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+
 package mage.cards.o;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
+
+import mage.abilities.effects.common.discard.DiscardHandControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.game.Game;
-import mage.players.Player;
 
 /**
- *
  * @author LevelX2
  */
 public class OneWithNothing extends CardImpl {
 
     public OneWithNothing(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{B}");
 
         // Discard your hand.
-        this.getSpellAbility().addEffect(new OneWithNothingEffect());
+        this.getSpellAbility().addEffect(new DiscardHandControllerEffect());
     }
 
     public OneWithNothing(final OneWithNothing card) {
@@ -59,34 +54,5 @@ public class OneWithNothing extends CardImpl {
     @Override
     public OneWithNothing copy() {
         return new OneWithNothing(this);
-    }
-}
-
-class OneWithNothingEffect extends OneShotEffect {
-
-    public OneWithNothingEffect() {
-        super(Outcome.Detriment);
-        this.staticText = "Discard your hand";
-    }
-
-    public OneWithNothingEffect(final OneWithNothingEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public OneWithNothingEffect copy() {
-        return new OneWithNothingEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            for(Card card: controller.getHand().copy().getCards(game)) {
-                controller.discard(card, source, game);
-            }
-            return true;
-        }
-        return false;
     }
 }
