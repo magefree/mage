@@ -60,6 +60,7 @@ public class Dominaria extends ExpansionSet {
         cards.add(new SetCardInfo("Adventurous Impulse", 153, Rarity.COMMON, mage.cards.a.AdventurousImpulse.class));
         cards.add(new SetCardInfo("Aesthir Glider", 209, Rarity.COMMON, mage.cards.a.AesthirGlider.class));
         cards.add(new SetCardInfo("Amaranthine Wall", 210, Rarity.UNCOMMON, mage.cards.a.AmaranthineWall.class));
+        cards.add(new SetCardInfo("Arbor Armament", 155, Rarity.COMMON, mage.cards.a.ArborArmament.class));
         cards.add(new SetCardInfo("Arcane Flight", 43, Rarity.COMMON, mage.cards.a.ArcaneFlight.class));
         cards.add(new SetCardInfo("Arvad the Cursed", 191, Rarity.UNCOMMON, mage.cards.a.ArvadTheCursed.class));
         cards.add(new SetCardInfo("Aven Sentry", 3, Rarity.COMMON, mage.cards.a.AvenSentry.class));
@@ -69,6 +70,7 @@ public class Dominaria extends ExpansionSet {
         cards.add(new SetCardInfo("Benalish Marshal", 6, Rarity.RARE, mage.cards.b.BenalishMarshal.class));
         cards.add(new SetCardInfo("Blackblade Reforged", 211, Rarity.RARE, mage.cards.b.BlackbladeReforged.class));
         cards.add(new SetCardInfo("Blessed Light", 7, Rarity.UNCOMMON, mage.cards.b.BlessedLight.class));
+        cards.add(new SetCardInfo("Blink of an Eye", 46, Rarity.COMMON, mage.cards.b.BlinkOfAnEye.class));
         cards.add(new SetCardInfo("Bloodtallow Candle", 212, Rarity.COMMON, mage.cards.b.BloodtallowCandle.class));
         cards.add(new SetCardInfo("Cabal Evangel", 78, Rarity.COMMON, mage.cards.c.CabalEvangel.class));
         cards.add(new SetCardInfo("Cabal Stronghold", 238, Rarity.RARE, mage.cards.c.CabalStronghold.class));
