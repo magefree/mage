@@ -198,6 +198,7 @@ public class Dominaria extends ExpansionSet {
         cards.add(new SetCardInfo("Sparring Construct", 232, Rarity.COMMON, mage.cards.s.SparringConstruct.class));
         cards.add(new SetCardInfo("Spore Swarm", 180, Rarity.UNCOMMON, mage.cards.s.SporeSwarm.class));
         cards.add(new SetCardInfo("Sporecrown Thallid", 181, Rarity.UNCOMMON, mage.cards.s.SporecrownThallid.class));
+        cards.add(new SetCardInfo("Squee, the Immortal", 146, Rarity.RARE, mage.cards.s.SqueeTheImmortal.class));
         cards.add(new SetCardInfo("Steel Leaf Champion", 182, Rarity.RARE, mage.cards.s.SteelLeafChampion.class));
         cards.add(new SetCardInfo("Sulfur Falls", 247, Rarity.RARE, mage.cards.s.SulfurFalls.class));
         cards.add(new SetCardInfo("Swamp", 258, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
