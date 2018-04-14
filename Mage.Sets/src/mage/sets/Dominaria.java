@@ -62,6 +62,7 @@ public class Dominaria extends ExpansionSet {
         cards.add(new SetCardInfo("Amaranthine Wall", 210, Rarity.UNCOMMON, mage.cards.a.AmaranthineWall.class));
         cards.add(new SetCardInfo("Arbor Armament", 155, Rarity.COMMON, mage.cards.a.ArborArmament.class));
         cards.add(new SetCardInfo("Arcane Flight", 43, Rarity.COMMON, mage.cards.a.ArcaneFlight.class));
+        cards.add(new SetCardInfo("Artificer's Assistant", 44, Rarity.COMMON, mage.cards.a.ArtificersAssistant.class));
         cards.add(new SetCardInfo("Arvad the Cursed", 191, Rarity.UNCOMMON, mage.cards.a.ArvadTheCursed.class));
         cards.add(new SetCardInfo("Aven Sentry", 3, Rarity.COMMON, mage.cards.a.AvenSentry.class));
         cards.add(new SetCardInfo("Baird, Steward of Argive", 4, Rarity.UNCOMMON, mage.cards.b.BairdStewardOfArgive.class));
