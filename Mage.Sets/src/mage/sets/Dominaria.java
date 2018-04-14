@@ -82,7 +82,7 @@ public class Dominaria extends ExpansionSet {
         cards.add(new SetCardInfo("Caligo Skin-Witch", 80, Rarity.COMMON, mage.cards.c.CaligoSkinWitch.class));
         cards.add(new SetCardInfo("Call the Cavalry", 9, Rarity.COMMON, mage.cards.c.CallTheCavalry.class));
         cards.add(new SetCardInfo("Cast Down", 81, Rarity.UNCOMMON, mage.cards.c.CastDown.class));
-        cards.add(new SetCardInfo("Charge", 11, Rarity.COMMON, mage.cards.c.Charge.class));
+        cards.add(new SetCardInfo("Charge", 10, Rarity.COMMON, mage.cards.c.Charge.class));
         cards.add(new SetCardInfo("Clifftop Retreat", 239, Rarity.RARE, mage.cards.c.ClifftopRetreat.class));
         cards.add(new SetCardInfo("Cloudreader Sphinx", 47, Rarity.COMMON, mage.cards.c.CloudreaderSphinx.class));
         cards.add(new SetCardInfo("Cold-Water Snapper", 48, Rarity.COMMON, mage.cards.c.ColdWaterSnapper.class));
@@ -114,7 +114,7 @@ public class Dominaria extends ExpansionSet {
         cards.add(new SetCardInfo("Gaea's Blessing", 161, Rarity.UNCOMMON, mage.cards.g.GaeasBlessing.class));
         cards.add(new SetCardInfo("Gaea's Protector", 162, Rarity.COMMON, mage.cards.g.GaeasProtector.class));
         cards.add(new SetCardInfo("Ghitu Lavarunner", 127, Rarity.COMMON, mage.cards.g.GhituLavarunner.class));
-        cards.add(new SetCardInfo("Gideon's Reproach", 29, Rarity.COMMON, mage.cards.g.GideonsReproach.class));
+        cards.add(new SetCardInfo("Gideon's Reproach", 19, Rarity.COMMON, mage.cards.g.GideonsReproach.class));
         cards.add(new SetCardInfo("Gilded Lotus", 215, Rarity.RARE, mage.cards.g.GildedLotus.class));
         cards.add(new SetCardInfo("Goblin Chainwhirler", 129, Rarity.RARE, mage.cards.g.GoblinChainwhirler.class));
         cards.add(new SetCardInfo("Goblin Warchief", 130, Rarity.UNCOMMON, mage.cards.g.GoblinWarchief.class));

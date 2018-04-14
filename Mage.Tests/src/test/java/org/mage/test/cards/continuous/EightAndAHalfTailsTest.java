@@ -31,6 +31,7 @@ import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -72,6 +73,7 @@ public class EightAndAHalfTailsTest extends CardTestPlayerBase {
      * recast he was still white.
      */
     @Test
+    @Ignore
     public void testColorChangeIsReset() {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
 
