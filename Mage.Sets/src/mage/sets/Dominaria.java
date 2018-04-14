@@ -67,6 +67,7 @@ public class Dominaria extends ExpansionSet {
         cards.add(new SetCardInfo("Baird, Steward of Argive", 4, Rarity.UNCOMMON, mage.cards.b.BairdStewardOfArgive.class));
         cards.add(new SetCardInfo("Baloth Gorger", 156, Rarity.COMMON, mage.cards.b.BalothGorger.class));
         cards.add(new SetCardInfo("Befuddle", 45, Rarity.COMMON, mage.cards.b.Befuddle.class));
+        cards.add(new SetCardInfo("Benalish Honor Guard", 5, Rarity.COMMON, mage.cards.b.BenalishHonorGuard.class));
         cards.add(new SetCardInfo("Benalish Marshal", 6, Rarity.RARE, mage.cards.b.BenalishMarshal.class));
         cards.add(new SetCardInfo("Blackblade Reforged", 211, Rarity.RARE, mage.cards.b.BlackbladeReforged.class));
         cards.add(new SetCardInfo("Blessed Light", 7, Rarity.UNCOMMON, mage.cards.b.BlessedLight.class));
