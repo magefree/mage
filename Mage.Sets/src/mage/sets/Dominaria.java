@@ -77,6 +77,7 @@ public class Dominaria extends ExpansionSet {
         cards.add(new SetCardInfo("Board the Weatherlight", 8, Rarity.UNCOMMON, mage.cards.b.BoardTheWeatherlight.class));
         cards.add(new SetCardInfo("Broken Bond", 157, Rarity.COMMON, mage.cards.b.BrokenBond.class));
         cards.add(new SetCardInfo("Cabal Evangel", 78, Rarity.COMMON, mage.cards.c.CabalEvangel.class));
+        cards.add(new SetCardInfo("Cabal Paladin", 79, Rarity.COMMON, mage.cards.c.CabalPaladin.class));
         cards.add(new SetCardInfo("Cabal Stronghold", 238, Rarity.RARE, mage.cards.c.CabalStronghold.class));
         cards.add(new SetCardInfo("Caligo Skin-Witch", 80, Rarity.COMMON, mage.cards.c.CaligoSkinWitch.class));
         cards.add(new SetCardInfo("Call the Cavalry", 9, Rarity.COMMON, mage.cards.c.CallTheCavalry.class));
