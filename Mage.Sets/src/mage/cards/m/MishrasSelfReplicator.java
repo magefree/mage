@@ -25,48 +25,51 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.effects.common;
+package mage.cards.m;
 
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.players.Player;
+import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.CreateTokenCopySourceEffect;
+import mage.abilities.effects.common.DoIfCostPaid;
+import mage.constants.SubType;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.HistoricPredicate;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author TheElk801
  */
-public class ReturnSourceFromGraveyardToHandEffect extends OneShotEffect {
+public class MishrasSelfReplicator extends CardImpl {
 
-    public ReturnSourceFromGraveyardToHandEffect() {
-        super(Outcome.PutCreatureInPlay);
-        staticText = "return {this} from your graveyard to your hand";
+    private static final FilterSpell filter = new FilterSpell("a historic spell");
+
+    static {
+        filter.add(new HistoricPredicate());
     }
 
-    public ReturnSourceFromGraveyardToHandEffect(final ReturnSourceFromGraveyardToHandEffect effect) {
-        super(effect);
+    public MishrasSelfReplicator(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");
+
+        this.subtype.add(SubType.ASSEMBLY_WORKER);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+
+        // Whenever you cast a historic spell, you may pay {1}. If you do, create a token that's a copy of Mishra's Self-Replicator.
+        this.addAbility(new SpellCastControllerTriggeredAbility(new DoIfCostPaid(new CreateTokenCopySourceEffect(), new ManaCostsImpl("{1}")), filter, true));
+
     }
 
-    public ReturnSourceFromGraveyardToHandEffect() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public MishrasSelfReplicator(final MishrasSelfReplicator card) {
+        super(card);
     }
 
     @Override
-    public ReturnSourceFromGraveyardToHandEffect copy() {
-        return new ReturnSourceFromGraveyardToHandEffect(this);
+    public MishrasSelfReplicator copy() {
+        return new MishrasSelfReplicator(this);
     }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        Card card = controller.getGraveyard().get(source.getSourceId(), game);
-        if (card != null) {
-            return controller.moveCards(card, Zone.HAND, source, game);
-        }
-        return false;
-    }
-
 }
