@@ -525,6 +525,7 @@ public class CardView extends SimpleCardView {
             this.mageObjectType = MageObjectType.PLANE;
             Plane plane = (Plane) object;
             this.rarity = Rarity.SPECIAL;
+            this.frameStyle = FrameStyle.M15_NORMAL;
             // Display in landscape/rotated/on its side
             this.rotate = true;
             this.rules = plane.getAbilities().getRules(plane.getName());
@@ -568,13 +569,13 @@ public class CardView extends SimpleCardView {
         this(true);
         this.gameObject = true;
         this.id = plane.getId();
-        this.mageObjectType = MageObjectType.EMBLEM;
+        this.mageObjectType = MageObjectType.PLANE;
         this.name = plane.getName();
         this.displayName = name;
         this.rules = plane.getRules();
         // Display the plane in landscape (similar to Fused cards)
         this.rotate = true;
-        this.frameStyle = FrameStyle.MPRP_FULL_ART_BASIC;
+        this.frameStyle = FrameStyle.M15_NORMAL;
         this.expansionSetCode = plane.getExpansionSetCode();
         this.rarity = Rarity.COMMON;
     }

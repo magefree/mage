@@ -99,7 +99,9 @@
 |Generate|PLANE:PCA|Plane - The Dark Barony|||TheDarkBaronyPlane|
 |Generate|PLANE:PCA|Plane - Tazeem|||TazeemPlane|
 |Generate|PLANE:PCA|Plane - The Eon Fog|||TheEonFogPlane|
+|Generate|PLANE:PCA|Plane - Truga Jungle|||TrugaJunglePlane|
 |Generate|PLANE:PCA|Plane - Turri Island|||TurriIslandPlane|
+|Generate|PLANE:PCA|Plane - Undercity Reaches|||UndercityReachesPlane|
 |Generate|TOK:PCA|Eldrazi|||EldraziAnnihilatorToken|
 |Generate|TOK:10E|Ape|||PongifyApeToken|
 |Generate|TOK:10E|Dragon|||DragonToken2|

@@ -123,7 +123,7 @@ class AgyremEffect extends OneShotEffect {
             Effect effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect();
             effect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game)));
             effect.setText("return that card to the battlefield under its owner's control at the beginning of the next end step");
-            game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.ANY), source);
+            game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect, TargetController.ANY), source);
             return true;
         }
         return false;
@@ -153,7 +153,7 @@ class AgyremEffect2 extends OneShotEffect {
             Effect effect = new ReturnFromGraveyardToHandTargetEffect();
             effect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game)));
             effect.setText("return it to its owner's hand at the beginning of the next end step");
-            game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(Zone.HAND, effect, TargetController.ANY), source);
+            game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect, TargetController.ANY), source);
             return true;
         }
         return false;
