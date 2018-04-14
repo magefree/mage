@@ -934,7 +934,7 @@ public class GameController implements GameCallback {
     }
 
     /**
-     * Performas a request to a player
+     * Performs a request to a player
      *
      * @param playerId
      * @param command

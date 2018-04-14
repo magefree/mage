@@ -457,6 +457,17 @@ public class GameState implements Serializable, Copyable<GameState> {
         return designations;
     }
 
+    public Plane getCurrentPlane() {
+        if (command != null && command.size() > 0) {
+            for (CommandObject cobject : command) {
+                if (cobject instanceof Plane) {
+                    return (Plane) cobject;
+                }
+            }
+        }
+        return null;
+    }    
+    
     public List<String> getSeenPlanes() {
         return seenPlanes;
     }
