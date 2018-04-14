@@ -50,10 +50,6 @@ public class ReturnSourceFromGraveyardToHandEffect extends OneShotEffect {
         super(effect);
     }
 
-    public ReturnSourceFromGraveyardToHandEffect() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     @Override
     public ReturnSourceFromGraveyardToHandEffect copy() {
         return new ReturnSourceFromGraveyardToHandEffect(this);
