@@ -144,6 +144,7 @@ public class Dominaria extends ExpansionSet {
         cards.add(new SetCardInfo("Llanowar Envoy", 169, Rarity.COMMON, mage.cards.l.LlanowarEnvoy.class));
         cards.add(new SetCardInfo("Llanowar Scout", 170, Rarity.COMMON, mage.cards.l.LlanowarScout.class));
         cards.add(new SetCardInfo("Lyra Dawnbringer", 14, Rarity.MYTHIC, mage.cards.l.LyraDawnbringer.class));
+        cards.add(new SetCardInfo("Mammoth Spider", 171, Rarity.COMMON, mage.cards.m.MammothSpider.class));
         cards.add(new SetCardInfo("Marwyn, the Nurturer", 172, Rarity.RARE, mage.cards.m.MarwynTheNurturer.class));
         cards.add(new SetCardInfo("Meandering River", 274, Rarity.COMMON, mage.cards.m.MeanderingRiver.class));
         cards.add(new SetCardInfo("Memorial To Folly", 242, Rarity.UNCOMMON, mage.cards.m.MemorialToFolly.class));
