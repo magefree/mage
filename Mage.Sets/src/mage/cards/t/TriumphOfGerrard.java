@@ -33,48 +33,67 @@ import java.util.Set;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.effects.common.ExileTargetEffect;
+import mage.abilities.common.SagaAbility;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.effects.common.counter.AddCountersTargetEffect;
+import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.constants.Duration;
+import mage.constants.SagaChapter;
+import mage.constants.SubType;
+import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
- * @author L_J
+ * @author LevelX2
  */
-public class Topple extends CardImpl {
+public class TriumphOfGerrard extends CardImpl {
 
-    public Topple(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{W}");
+    public TriumphOfGerrard(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
 
-        // Exile target creature with the greatest power among creatures on the battlefield.
-        this.getSpellAbility().addEffect(new ExileTargetEffect());
-        this.getSpellAbility().addTarget(new ToppleTargetCreature());
+        this.subtype.add(SubType.SAGA);
+
+        // <i>(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)</i>
+        SagaAbility sagaAbility = new SagaAbility(this, SagaChapter.CHAPTER_III);
+        // I, II — Put a +1/+1 counter on target creature you control with the greatest power.
+        Ability ability = sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_I, SagaChapter.CHAPTER_II, new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
+        ability.addTarget(new TriumphOfGerrardTargetCreature());
+        // III — Target creature you control with the greatest power gains flying, first strike, and lifelink until end of turn.
+        ability = sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_III,
+                new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn).setText("Target creature you control with the greatest power gains flying"));
+        ability.addEffect(new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn).setText(", first strike"));
+        ability.addEffect(new GainAbilityTargetEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn).setText(", and lifelink until end of turn"));
+        ability.addTarget(new TriumphOfGerrardTargetCreature());
+        this.addAbility(sagaAbility);
+
     }
 
-    public Topple(final Topple card) {
+    public TriumphOfGerrard(final TriumphOfGerrard card) {
         super(card);
     }
 
     @Override
-    public Topple copy() {
-        return new Topple(this);
+    public TriumphOfGerrard copy() {
+        return new TriumphOfGerrard(this);
     }
 }
 
-class ToppleTargetCreature extends TargetPermanent {
+class TriumphOfGerrardTargetCreature extends TargetControlledCreaturePermanent {
 
-    public ToppleTargetCreature() {
+    public TriumphOfGerrardTargetCreature() {
         super();
-        filter.add(new CardTypePredicate(CardType.CREATURE));
-        setTargetName("creature with the greatest power among creatures on the battlefield");
+        setTargetName("creature you control with the greatest power");
     }
 
-    public ToppleTargetCreature(final ToppleTargetCreature target) {
+    public TriumphOfGerrardTargetCreature(final TriumphOfGerrardTargetCreature target) {
         super(target);
     }
 
@@ -122,7 +141,7 @@ class ToppleTargetCreature extends TargetPermanent {
     }
 
     @Override
-    public ToppleTargetCreature copy() {
-        return new ToppleTargetCreature(this);
+    public TriumphOfGerrardTargetCreature copy() {
+        return new TriumphOfGerrardTargetCreature(this);
     }
 }

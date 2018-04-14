@@ -25,45 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.i;
+package mage.cards.h;
 
 import java.util.UUID;
+import mage.abilities.common.SagaAbility;
+import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SagaChapter;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.game.permanent.token.KnightToken;
 
 /**
  *
- * @author fireshoes
+ * @author LevelX2
  */
-public class InOketrasName extends CardImpl {
+public class HistoryOfBenalia extends CardImpl {
 
-    private static final FilterCreaturePermanent filterNotZombies = new FilterCreaturePermanent("Other creatures");
+    public HistoryOfBenalia(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}{W}");
 
-    static {
-        filterNotZombies.add(Predicates.not(new SubtypePredicate(SubType.ZOMBIE)));
+        this.subtype.add(SubType.SAGA);
+
+        // <i>(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)</i>
+        SagaAbility sagaAbility = new SagaAbility(this, SagaChapter.CHAPTER_III);
+        // I, II — Create a 2/2 white Knight creature token with vigilance.
+        sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_I, SagaChapter.CHAPTER_II, new CreateTokenEffect(new KnightToken()));
+        // III — Knights you control get +2/+1 until end of turn.
+        sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_III,
+                new BoostControlledEffect(2, 1, Duration.EndOfTurn, new FilterCreaturePermanent(SubType.KNIGHT, "Knights")));
+        this.addAbility(sagaAbility);
     }
 
-    public InOketrasName(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}");
-
-        // Zombies you control get +2/+1 until end of turn. Other creatures you control get +1/+1 until end of turn.
-        getSpellAbility().addEffect(new BoostControlledEffect(2, 1, Duration.EndOfTurn, new FilterCreaturePermanent(SubType.ZOMBIE, "Zombies")));
-        getSpellAbility().addEffect(new BoostControlledEffect(1, 1, Duration.EndOfTurn, filterNotZombies));
-    }
-
-    public InOketrasName(final InOketrasName card) {
+    public HistoryOfBenalia(final HistoryOfBenalia card) {
         super(card);
     }
 
     @Override
-    public InOketrasName copy() {
-        return new InOketrasName(this);
+    public HistoryOfBenalia copy() {
+        return new HistoryOfBenalia(this);
     }
 }
