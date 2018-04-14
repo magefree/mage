@@ -25,48 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.c;
+package mage.cards.p;
 
 import java.util.UUID;
 import mage.Mana;
-import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.mageobject.NamePredicate;
 
 /**
  *
- * @author jonubuu
+ * @author TheElk801
  */
-public class Cloudpost extends CardImpl {
+public class PowerstoneShard extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("Locus on the battlefield");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifact you control named Powerstone Shard");
 
     static {
-        filter.add(new SubtypePredicate(SubType.LOCUS));
+        filter.add(new NamePredicate("Powerstone Shard"));
+        filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
-    public Cloudpost(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
-        this.subtype.add(SubType.LOCUS);
+    public PowerstoneShard(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
-        // Cloudpost enters the battlefield tapped.
-        this.addAbility(new EntersBattlefieldTappedAbility());
-        // {tap}: Add {C} to your mana pool for each Locus on the battlefield.
+        // {T}: Add {C} for each artifact you control named Powerstone Shard.
         this.addAbility(new DynamicManaAbility(Mana.ColorlessMana(1), new PermanentsOnBattlefieldCount(filter)));
     }
 
-    public Cloudpost(final Cloudpost card) {
+    public PowerstoneShard(final PowerstoneShard card) {
         super(card);
     }
 
     @Override
-    public Cloudpost copy() {
-        return new Cloudpost(this);
+    public PowerstoneShard copy() {
+        return new PowerstoneShard(this);
     }
 }
