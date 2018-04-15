@@ -27,27 +27,21 @@
  */
 package mage.cards.w;
 
-import java.util.LinkedList;
+import java.util.LinkedHashSet;
+import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -93,18 +87,19 @@ class WordOfUndoingReturnToHandEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        Set<Card> attachments = new LinkedHashSet<>();
+        Player player = game.getPlayer(source.getControllerId());
         Permanent target = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (target != null) {
-            LinkedList<UUID> attachments = new LinkedList<>();
-            attachments.addAll(target.getAttachments());
-            for (UUID attachmentId : attachments) {
+            for (UUID attachmentId : target.getAttachments()) {
                 Permanent attachment = game.getPermanent(attachmentId);
                 if (attachment != null && attachment.getControllerId().equals(source.getControllerId())
                         && attachment.hasSubtype(SubType.AURA, game) && attachment.getColor(game).isWhite()) {
-                    attachment.moveToZone(Zone.HAND, source.getSourceId(), game, false);
+                    attachments.add(attachment);
                 }
             }
-            target.moveToZone(Zone.HAND, source.getSourceId(), game, false);
+            attachments.add(target);
+            player.moveCards(attachments, Zone.HAND, source, game);
             return true;
         }
         return false;
