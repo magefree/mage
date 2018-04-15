@@ -137,7 +137,7 @@ public class GameIsADrawTest extends CardTestPlayerBase {
 
         Assert.assertTrue("Game has ended.", currentGame.hasEnded());
 
-        Assert.assertTrue("Inifinite loop detected, game has be de a draw.", currentGame.isADraw());
+        Assert.assertTrue("Infinite loop detected, game has be de a draw.", currentGame.isADraw());
 
     }
 

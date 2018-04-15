@@ -48,13 +48,12 @@ import java.util.UUID;
 public class DarkBargain extends CardImpl {
 
     public DarkBargain(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{B}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{B}");
 
         // Look at the top three cards of your library. Put two of them into your hand and the rest into your graveyard.
         // Dark Bargain deals 2 damage to you.
         this.getSpellAbility().addEffect(new DarkBargainEffect());
-        this.getSpellAbility().addEffect(new DamageControllerEffect(2)());
+        this.getSpellAbility().addEffect(new DamageControllerEffect(2));
     }
 
     public DarkBargain(final DarkBargain card) {
