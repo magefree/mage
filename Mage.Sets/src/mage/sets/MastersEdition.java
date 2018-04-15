@@ -251,6 +251,7 @@ public class MastersEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Winds of Change", 111, Rarity.UNCOMMON, mage.cards.w.WindsOfChange.class));
         cards.add(new SetCardInfo("Winter Blast", 138, Rarity.UNCOMMON, mage.cards.w.WinterBlast.class));
         cards.add(new SetCardInfo("Winter Orb", 173, Rarity.RARE, mage.cards.w.WinterOrb.class));
+        cards.add(new SetCardInfo("Word of Undoing", 56, Rarity.COMMON, mage.cards.w.WordOfUndoing.class));
         cards.add(new SetCardInfo("Wyluli Wolf", 139, Rarity.COMMON, mage.cards.w.WyluliWolf.class));
         cards.add(new SetCardInfo("Yavimaya Ants", 140, Rarity.UNCOMMON, mage.cards.y.YavimayaAnts.class));
         cards.add(new SetCardInfo("Ydwen Efreet", 112, Rarity.RARE, mage.cards.y.YdwenEfreet.class));

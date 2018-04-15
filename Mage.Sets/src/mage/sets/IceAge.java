@@ -361,7 +361,9 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Wings of Aesthir", 383, Rarity.UNCOMMON, mage.cards.w.WingsOfAesthir.class));
         cards.add(new SetCardInfo("Withering Wisps", 56, Rarity.UNCOMMON, mage.cards.w.WitheringWisps.class));
         cards.add(new SetCardInfo("Woolly Mammoths", 166, Rarity.COMMON, mage.cards.w.WoollyMammoths.class));
+        cards.add(new SetCardInfo("Woolly Spider", 279, Rarity.COMMON, mage.cards.w.WoollySpider.class));
         cards.add(new SetCardInfo("Word of Blasting", 224, Rarity.UNCOMMON, mage.cards.w.WordOfBlasting.class));
+        cards.add(new SetCardInfo("Word of Undoing", 108, Rarity.COMMON, mage.cards.w.WordOfUndoing.class));
         cards.add(new SetCardInfo("Wrath of Marit Lage", 109, Rarity.RARE, mage.cards.w.WrathOfMaritLage.class));
         cards.add(new SetCardInfo("Yavimaya Gnats", 168, Rarity.UNCOMMON, mage.cards.y.YavimayaGnats.class));
         cards.add(new SetCardInfo("Zuran Enchanter", 110, Rarity.COMMON, mage.cards.z.ZuranEnchanter.class));
