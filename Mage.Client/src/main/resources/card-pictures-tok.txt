@@ -96,8 +96,8 @@
 |Generate|PLANE:PCA|Plane - Hedron Fields of Agadeem|||HedronFieldsOfAgadeemPlane|
 |Generate|PLANE:PCA|Plane - Lethe Lake|||LetheLakePlane|
 |Generate|PLANE:PCA|Plane - Naya|||NayaPlane|
-|Generate|PLANE:PCA|Plane - The Dark Barony|||TheDarkBaronyPlane|
 |Generate|PLANE:PCA|Plane - Tazeem|||TazeemPlane|
+|Generate|PLANE:PCA|Plane - The Dark Barony|||TheDarkBaronyPlane|
 |Generate|PLANE:PCA|Plane - The Eon Fog|||TheEonFogPlane|
 |Generate|PLANE:PCA|Plane - Truga Jungle|||TrugaJunglePlane|
 |Generate|PLANE:PCA|Plane - Turri Island|||TurriIslandPlane|
