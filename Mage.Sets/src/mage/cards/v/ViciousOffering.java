@@ -25,48 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.p;
+package mage.cards.v;
 
 import java.util.UUID;
+import mage.abilities.condition.LockedInCondition;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
+import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.StaticFilters;
+import mage.constants.Duration;
 import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
-import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
- * @author fireshoes
+ * @author TheElk801
  */
-public class PrimalGrowth extends CardImpl {
+public class ViciousOffering extends CardImpl {
 
-    public PrimalGrowth(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{G}");
+    public ViciousOffering(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{B}");
+        
 
-        // Kicker-Sacrifice a creature.
-        this.addAbility(new KickerAbility(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT))));
+        // Kicker—Sacrifice a creature.
+                this.addAbility(new KickerAbility(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT))));
 
-        // Search your library for a basic land card, put that card onto the battlefield, then shuffle your library. If Primal Growth was kicked, instead search your library for up to two basic land cards, put them onto the battlefield, then shuffle your library.
-        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 2, StaticFilters.FILTER_BASIC_LAND_CARD), false, true),
-                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 1, StaticFilters.FILTER_BASIC_LAND_CARD), false, true),
-                KickedCondition.instance,
-                "Search your library for a basic land card, put that card onto the battlefield, then shuffle your library. If this spell was kicked, instead search your library for up to two basic land cards, put them onto the battlefield, then shuffle your library"));
+        
+        // Target creature gets -2/-2 until end of turn. If this spell was kicked, that creature gets -5/-5 until end of turn instead.
+                this.getSpellAbility().addEffect(new ConditionalContinuousEffect(new BoostTargetEffect(-5, -5, Duration.EndOfTurn),
+                new BoostTargetEffect(-2, -2, Duration.EndOfTurn), new LockedInCondition(KickedCondition.instance),
+                "Target creature gets -2/-2 until end of turn. If this spell was kicked, that creature gets -5/-5 until end of turn instead."));
     }
 
-    public PrimalGrowth(final PrimalGrowth card) {
+    public ViciousOffering(final ViciousOffering card) {
         super(card);
     }
 
     @Override
-    public PrimalGrowth copy() {
-        return new PrimalGrowth(this);
+    public ViciousOffering copy() {
+        return new ViciousOffering(this);
     }
 }
