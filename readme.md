@@ -39,5 +39,5 @@ If you are interested in developing XMage, here are some useful resources:
 * [Developer Notes](http://github.com/magefree/mage/wiki/Developer-Notes)
 * [Developer Testing Tools](http://github.com/magefree/mage/wiki/Developer-Testing-Tools)
 * [Double Faced Cards](http://github.com/magefree/mage/wiki/Double-Faced-Cards)
-* [Card Requests](http://www.slightlymagic.net/forum/viewtopic.php?f=70&t=4554)
+* [Card Requests](https://www.slightlymagic.net/forum/viewtopic.php?f=70&t=20685)
 * [Tournament Relevant Card Requests](http://www.slightlymagic.net/forum/viewtopic.php?f=70&t=14062)
