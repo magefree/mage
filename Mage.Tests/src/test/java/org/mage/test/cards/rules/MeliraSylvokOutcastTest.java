@@ -59,7 +59,7 @@ public class MeliraSylvokOutcastTest extends CardTestPlayerBase {
         // Put a -1/-1 counter on Devoted Druid: Untap Devoted Druid.
         addCard(Zone.BATTLEFIELD, playerA, "Devoted Druid", 1); // 0/2
 
-        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {G} to your mana pool");
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {G}");
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Put a -1/-1 counter on ");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

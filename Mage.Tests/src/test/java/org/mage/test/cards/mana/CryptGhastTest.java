@@ -49,8 +49,8 @@ public class CryptGhastTest extends CardTestPlayerBase {
         // Swamp Mountain
         addCard(Zone.BATTLEFIELD, playerA, "Badlands", 1);
 
-        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R} to your mana pool");
-        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {B} to your mana pool");
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {B}");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Erebos's Titan");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -88,8 +88,8 @@ public class CryptGhastTest extends CardTestPlayerBase {
         setChoice(playerB, "X=2");
 
         // Crypt Ghast may no longer give additional mana
-        activateManaAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R} to your mana pool");
-        activateManaAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {B} to your mana pool");
+        activateManaAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
+        activateManaAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {B}");
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Erebos's Titan");
 
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
