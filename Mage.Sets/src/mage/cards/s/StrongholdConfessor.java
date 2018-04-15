@@ -30,7 +30,6 @@ package mage.cards.s;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.abilities.keyword.MenaceAbility;
