@@ -49,7 +49,7 @@ public class EncroachingWastes extends CardImpl {
     public EncroachingWastes(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         // {4}, {T}, Sacrifice Encroaching Wastes: Destroy target nonbasic land.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new GenericManaCost(4));

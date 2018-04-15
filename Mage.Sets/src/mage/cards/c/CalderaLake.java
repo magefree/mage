@@ -49,9 +49,9 @@ public class CalderaLake extends CardImpl {
 
         // Caldera Lake enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
-        // {tap}: Add {C} to your mana pool.
+        // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
-        // {tap}: Add {U} or {R} to your mana pool. Caldera Lake deals 1 damage to you.
+        // {tap}: Add {U} or {R}. Caldera Lake deals 1 damage to you.
         Ability ability = new BlueManaAbility();
         ability.addEffect(new DamageControllerEffect(1));
         this.addAbility(ability);

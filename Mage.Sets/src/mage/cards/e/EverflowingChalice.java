@@ -62,7 +62,7 @@ public class EverflowingChalice extends CardImpl {
                 new AddCountersSourceEffect(CounterType.CHARGE.createInstance(0), new MultikickerCount(), true),
                 "with a charge counter on it for each time it was kicked"));
 
-        // {T}: Add {C} to your mana pool for each charge counter on Everflowing Chalice.
+        // {T}: Add {C} for each charge counter on Everflowing Chalice.
         this.addAbility(new DynamicManaAbility(Mana.ColorlessMana(1), new CountersSourceCount(CounterType.CHARGE)));
     }
 

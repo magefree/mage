@@ -47,9 +47,9 @@ public class MysticGate extends CardImpl {
     public MysticGate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {tap}: Add {C} to your mana pool.
+        // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
-        // {WU}, {tap}: Add {W}{W}, {W}{U}, or {U}{U} to your mana pool.
+        // {WU}, {tap}: Add {W}{W}, {W}{U}, or {U}{U}.
         SimpleManaAbility ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.WhiteMana(2), new ManaCostsImpl("{W/U}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

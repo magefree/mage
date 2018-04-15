@@ -62,7 +62,7 @@ public class GameTrail extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new RevealTargetFromHandCost(new TargetCardInHand(filter))),
                 "you may reveal a Mountain or Forest card from your hand. If you don't, {this} enters the battlefield tapped"));
 
-        // {T}: Add {R} or {G} to your mana pool.
+        // {T}: Add {R} or {G}.
         this.addAbility(new RedManaAbility());
         this.addAbility(new GreenManaAbility());
     }

@@ -58,7 +58,7 @@ public class CreepingTarPit extends CardImpl {
         // Creeping Tar Pit enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
 
-        // {T}: Add {U} or {B} to your mana pool.
+        // {T}: Add {U} or {B}.
         this.addAbility(new BlueManaAbility());
         this.addAbility(new BlackManaAbility());
         

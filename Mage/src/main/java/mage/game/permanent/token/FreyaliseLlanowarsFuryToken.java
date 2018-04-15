@@ -25,8 +25,8 @@
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.game.permanent.token;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -57,7 +57,7 @@ public class FreyaliseLlanowarsFuryToken extends TokenImpl {
     }
 
     public FreyaliseLlanowarsFuryToken(String setCode, int tokenType) {
-        super("Elf Druid", "1/1 green Elf Druid creature token with \"{T}: Add {G} to your mana pool.\"");
+        super("Elf Druid", "1/1 green Elf Druid creature token with \"{T}: Add {G}.\"");
         availableImageSetCodes = tokenImageSets;
         setOriginalExpansionSetCode(setCode);
         this.cardType.add(CardType.CREATURE);
@@ -68,7 +68,7 @@ public class FreyaliseLlanowarsFuryToken extends TokenImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // {T}: Add {G} to your mana pool.
+        // {T}: Add {G}.
         this.addAbility(new GreenManaAbility());
     }
 

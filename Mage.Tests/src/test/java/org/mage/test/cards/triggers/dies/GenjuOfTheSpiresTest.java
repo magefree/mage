@@ -54,7 +54,7 @@ public class GenjuOfTheSpiresTest extends CardTestPlayerBase {
         // When enchanted Mountain is put into a graveyard, you may return Genju of the Spires from your graveyard to your hand.
         addCard(Zone.HAND, playerA, "Genju of the Spires", 1); // {R}
 
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         // {T}, Sacrifice Strip Mine: Destroy target land.
         addCard(Zone.BATTLEFIELD, playerB, "Strip Mine", 1);
 

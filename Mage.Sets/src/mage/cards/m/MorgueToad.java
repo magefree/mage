@@ -50,7 +50,7 @@ public class MorgueToad extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Sacrifice Morgue Toad: Add {U}{R} to your mana pool.
+        // Sacrifice Morgue Toad: Add {U}{R}.
         SimpleManaAbility ability = new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(1, 0, 1, 0, 0, 0, 0, 0), new SacrificeSourceCost());
         this.addAbility(ability);
     }

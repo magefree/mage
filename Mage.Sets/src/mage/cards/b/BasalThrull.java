@@ -52,7 +52,7 @@ public class BasalThrull extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 
-        // {T}, Sacrifice Basal Thrull: Add {B}{B} to your mana pool.
+        // {T}, Sacrifice Basal Thrull: Add {B}{B}.
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana(2), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

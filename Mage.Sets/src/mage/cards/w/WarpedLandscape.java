@@ -52,7 +52,7 @@ public class WarpedLandscape extends CardImpl {
     public WarpedLandscape(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
 
         // {2}, {T}, Sacrifice Warped Landscape: Search your library for a basic land card and put it onto the battlefield tapped. Then shuffle your library.

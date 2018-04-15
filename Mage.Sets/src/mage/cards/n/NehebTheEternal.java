@@ -63,7 +63,7 @@ public class NehebTheEternal extends CardImpl {
         // Afflict 3
         addAbility(new AfflictAbility(3));
 
-        // At the beginning of your postcombat main phase, add {R} to your mana pool for each 1 life your opponents have lost this turn.
+        // At the beginning of your postcombat main phase, add {R} for each 1 life your opponents have lost this turn.
         this.addAbility(new BeginningOfPostCombatMainTriggeredAbility(new NehebTheEternalManaEffect(), TargetController.YOU, false));
     }
 
@@ -81,7 +81,7 @@ class NehebTheEternalManaEffect extends ManaEffect {
 
     NehebTheEternalManaEffect() {
         super();
-        this.staticText = "add {R} to your mana pool for each 1 life your opponents have lost this turn";
+        this.staticText = "add {R} for each 1 life your opponents have lost this turn";
     }
 
     NehebTheEternalManaEffect(final NehebTheEternalManaEffect effect) {

@@ -54,7 +54,7 @@ public class HowltoothHollow extends CardImpl {
 
         // Hideaway
         this.addAbility(new HideawayAbility());
-        // {tap}: Add {B} to your mana pool.
+        // {tap}: Add {B}.
         this.addAbility(new BlackManaAbility());
         
         // {B}, {tap}: You may play the exiled card without paying its mana cost if each player has no cards in hand.

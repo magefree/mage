@@ -48,7 +48,7 @@ public class SistersOfTheFlame extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // {tap}: Add {R} to your mana pool.
+        // {tap}: Add {R}.
         this.addAbility(new RedManaAbility());
     }
 

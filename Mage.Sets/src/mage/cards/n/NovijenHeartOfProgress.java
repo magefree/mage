@@ -55,7 +55,7 @@ public class NovijenHeartOfProgress extends CardImpl {
     public NovijenHeartOfProgress(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
 
         // {G}{U}, {T}: Put a +1/+1 counter on each creature that entered the battlefield this turn.

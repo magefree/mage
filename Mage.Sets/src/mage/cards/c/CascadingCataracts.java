@@ -52,7 +52,7 @@ public class CascadingCataracts extends CardImpl {
         // Indestructibles
         this.addAbility(IndestructibleAbility.getInstance());
 
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
 
         // {5}, {T}: Add five mana in any combination of colors to your mana pool.

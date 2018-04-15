@@ -50,7 +50,7 @@ public class WindScarredCrag extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
         // When Wind-Scarred Crag enters the battlefield, you gain 1 life.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(1)));
-        // {T}: Add {R} or {W} to your mana pool.
+        // {T}: Add {R} or {W}.
         this.addAbility(new RedManaAbility());
         this.addAbility(new WhiteManaAbility());                
         

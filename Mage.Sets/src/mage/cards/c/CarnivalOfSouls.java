@@ -51,11 +51,11 @@ public class CarnivalOfSouls extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
         
 
-        // Whenever a creature enters the battlefield, you lose 1 life and add {B} to your mana pool.
+        // Whenever a creature enters the battlefield, you lose 1 life and add {B}.
         Ability ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new LoseLifeSourceControllerEffect(1),
                 new FilterCreaturePermanent("a creature"), false, SetTargetPointer.PERMANENT, null, false);
         Effect effect = new AddManaToManaPoolSourceControllerEffect(Mana.BlackMana(1));
-        effect.setText("and add {B} to your mana pool.");
+        effect.setText("and add {B}.");
         ability.addEffect(effect);
         this.addAbility(ability);
     }

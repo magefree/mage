@@ -62,7 +62,7 @@ public class NirkanaRevenant extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        // Whenever you tap a Swamp for mana, add {B} to your mana pool.
+        // Whenever you tap a Swamp for mana, add {B}.
         this.addAbility(new NirkanaRevenantTriggeredAbility());
 
         // {B}: Nirkana Revenant gets +1/+1 until end of turn.
@@ -113,6 +113,6 @@ class NirkanaRevenantTriggeredAbility extends TriggeredManaAbility {
 
     @Override
     public String getRule() {
-        return "Whenever you tap a Swamp for mana, add {B} to your mana pool.";
+        return "Whenever you tap a Swamp for mana, add {B}.";
     }
 }

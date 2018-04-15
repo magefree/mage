@@ -50,9 +50,9 @@ public class TokenImplActivatedAbilityTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Omnath, Locus of Mana", 1);
 
         addCard(Zone.BATTLEFIELD, playerA, "Freyalise, Llanowar's Fury");
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+2: Create a 1/1 green Elf Druid creature token with \"{T}: Add {G} to your mana pool.\"");
-        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "+2: Create a 1/1 green Elf Druid creature token with \"{T}: Add {G} to your mana pool.\"");
-        activateManaAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {G} to your mana pool.");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+2: Create a 1/1 green Elf Druid creature token with \"{T}: Add {G}.\"");
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "+2: Create a 1/1 green Elf Druid creature token with \"{T}: Add {G}.\"");
+        activateManaAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {G}.");
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
         execute();
 

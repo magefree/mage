@@ -53,7 +53,7 @@ public class SpitfireBastion extends CardImpl {
         this.addSuperType(SuperType.LEGENDARY);
         this.nightCard = true;
 
-        // {T}: Add {R} to your mana pool.
+        // {T}: Add {R}.
         this.addAbility(new RedManaAbility());
 
         // {2}{R}, {T}: Spitfire Bastion deals 3 damage to target creature or player.

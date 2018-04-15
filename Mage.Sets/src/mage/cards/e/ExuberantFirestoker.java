@@ -61,7 +61,7 @@ public class ExuberantFirestoker extends CardImpl {
 
         // At the beginning of your end step, if you control a creature with power 5 or greater, you may have Exuberant Firestoker deal 2 damage to target player.
         this.addAbility(new ExuberantFirestokerTriggeredAbility());
-        // {tap}: Add {C} to your mana pool.
+        // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
     }
 

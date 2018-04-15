@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class ExplosiveGrowth extends CardImpl {
 
     public ExplosiveGrowth(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{G}");
 
         // Kicker {5}
         this.addAbility(new KickerAbility("{5}"));
@@ -55,7 +55,7 @@ public class ExplosiveGrowth extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new ConditionalContinuousEffect(new BoostTargetEffect(5, 5, Duration.EndOfTurn),
                 new BoostTargetEffect(2, 2, Duration.EndOfTurn), new LockedInCondition(KickedCondition.instance),
-                "Target creature gets +2/+2 until end of turn. If {this} was kicked, that creature gets +5/+5 until end of turn instead."));
+                "Target creature gets +2/+2 until end of turn. If this spell was kicked, that creature gets +5/+5 until end of turn instead."));
     }
 
     public ExplosiveGrowth(final ExplosiveGrowth card) {

@@ -49,7 +49,7 @@ public class StripMine extends CardImpl {
     public StripMine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
 
         // {T}, Sacrifice Strip Mine: Destroy target land.

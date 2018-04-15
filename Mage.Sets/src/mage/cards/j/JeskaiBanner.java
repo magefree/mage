@@ -51,7 +51,7 @@ public class JeskaiBanner extends CardImpl {
     public JeskaiBanner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
-        // {T}: Add {U}, {R}, or {W} to your mana pool.
+        // {T}: Add {U}, {R}, or {W}.
         this.addAbility(new BlueManaAbility());
         this.addAbility(new RedManaAbility());
         this.addAbility(new WhiteManaAbility());

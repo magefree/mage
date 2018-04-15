@@ -57,7 +57,7 @@ public class SpoilsOfEvil extends CardImpl {
     public SpoilsOfEvil(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{B}");
 
-        // For each artifact or creature card in target opponent's graveyard, add {C} to your mana pool and you gain 1 life.
+        // For each artifact or creature card in target opponent's graveyard, add {C} and you gain 1 life.
         this.getSpellAbility().addEffect(new SpoilsOfEvilEffect());
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
@@ -75,7 +75,7 @@ public class SpoilsOfEvil extends CardImpl {
 
         public SpoilsOfEvilEffect() {
             super(Outcome.GainLife);
-            this.staticText = "For each artifact or creature card in target opponent's graveyard, add {C} to your mana pool and you gain 1 life.";
+            this.staticText = "For each artifact or creature card in target opponent's graveyard, add {C} and you gain 1 life.";
         }
         
         public SpoilsOfEvilEffect(final SpoilsOfEvilEffect effect) {

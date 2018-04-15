@@ -53,7 +53,7 @@ public class SelesnyaCluestone extends CardImpl {
     public SelesnyaCluestone(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
-        // {T}: Add {G} or {W} to your mana pool.
+        // {T}: Add {G} or {W}.
         this.addAbility(new GreenManaAbility());
         this.addAbility(new WhiteManaAbility());
 

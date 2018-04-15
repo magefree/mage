@@ -48,7 +48,7 @@ public class RiteOfFlame extends CardImpl {
     public RiteOfFlame(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{R}");
 
-        // Add {R}{R} to your mana pool, then add {R} to your mana pool for each card named Rite of Flame in each graveyard.
+        // Add {R}{R}, then add {R} for each card named Rite of Flame in each graveyard.
         this.getSpellAbility().addEffect(new RiteOfFlameManaEffect());
     }
 
@@ -72,7 +72,7 @@ class RiteOfFlameManaEffect extends ManaEffect {
 
     RiteOfFlameManaEffect() {
         super();
-        staticText = "Add {R}{R} to your mana pool, then add {R} to your mana pool for each card named Rite of Flame in each graveyard";
+        staticText = "Add {R}{R}, then add {R} for each card named Rite of Flame in each graveyard";
     }
 
     RiteOfFlameManaEffect(final RiteOfFlameManaEffect effect) {

@@ -63,7 +63,7 @@ public class HeritageDruid extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // Tap three untapped Elves you control: Add {G}{G}{G} to your mana pool.
+        // Tap three untapped Elves you control: Add {G}{G}{G}.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.GreenMana(3), new TapTargetCost(new TargetControlledPermanent(3, 3, filter, true))));
     }
 

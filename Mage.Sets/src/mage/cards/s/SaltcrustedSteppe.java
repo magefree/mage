@@ -54,13 +54,13 @@ public class SaltcrustedSteppe extends CardImpl {
     public SaltcrustedSteppe(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {tap}: Add {C} to your mana pool.
+        // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         // {1}, {tap}: Put a storage counter on Saltcrusted Steppe.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.STORAGE.createInstance()), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
-        // {1}, Remove X storage counters from Saltcrusted Steppe: Add X mana in any combination of {G} and/or {W} to your mana pool.
+        // {1}, Remove X storage counters from Saltcrusted Steppe: Add X mana in any combination of {G} and/or {W}.
         ability = new SimpleManaAbility(Zone.BATTLEFIELD,
                 new AddManaInAnyCombinationEffect(new RemovedCountersForCostValue(), ColoredManaSymbol.G, ColoredManaSymbol.W),
                 new GenericManaCost(1));

@@ -50,7 +50,7 @@ public class ScouredBarrens extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
         // When Scoured Barrens enters the battlefield, you gain 1 life.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(1)));
-        // {T}: Add {W} or {B} to your mana pool.
+        // {T}: Add {W} or {B}.
         this.addAbility(new WhiteManaAbility());
         this.addAbility(new BlackManaAbility());        
                 

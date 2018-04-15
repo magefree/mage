@@ -48,7 +48,7 @@ public class GrandColiseum extends CardImpl {
 
         // Grand Coliseum enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
-        // {tap}: Add {C} to your mana pool.
+        // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         // {tap}: Add one mana of any color to your mana pool. Grand Coliseum deals 1 damage to you.
         Ability ability = new AnyColorManaAbility();

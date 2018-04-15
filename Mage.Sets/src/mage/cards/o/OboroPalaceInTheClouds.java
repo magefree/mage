@@ -47,7 +47,7 @@ public class OboroPalaceInTheClouds extends CardImpl {
     public OboroPalaceInTheClouds(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
         addSuperType(SuperType.LEGENDARY);
-        // {tap}: Add {U} to your mana pool.
+        // {tap}: Add {U}.
         this.addAbility(new BlueManaAbility());
         // {1}: Return Oboro, Palace in the Clouds to its owner's hand.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new GenericManaCost(1)));

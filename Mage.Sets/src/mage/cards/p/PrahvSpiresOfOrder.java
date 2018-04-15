@@ -48,7 +48,7 @@ public class PrahvSpiresOfOrder extends CardImpl {
     public PrahvSpiresOfOrder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
 
         // {4}{W}{U}, {T}: Prevent all damage a source of your choice would deal this turn.

@@ -61,7 +61,7 @@ public class CryptGhast extends CardImpl {
 
         //Extort (Whenever you cast a spell, you may pay {WB}. If you do, each opponent loses 1 life and you gain that much life.)
         this.addAbility(new ExtortAbility());
-        // Whenever you tap a Swamp for mana, add {B} to your mana pool (in addition to the mana the land produces).
+        // Whenever you tap a Swamp for mana, add {B} (in addition to the mana the land produces).
         this.addAbility(new CryptGhastTriggeredAbility());
     }
 
@@ -109,6 +109,6 @@ class CryptGhastTriggeredAbility extends TriggeredManaAbility {
 
     @Override
     public String getRule() {
-        return "Whenever you tap a Swamp for mana, add {B} to your mana pool <i>(in addition to the mana the land produces)</i>.";
+        return "Whenever you tap a Swamp for mana, add {B} <i>(in addition to the mana the land produces)</i>.";
     }
 }

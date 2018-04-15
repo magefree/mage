@@ -51,9 +51,9 @@ public class HavenwoodBattleground extends CardImpl {
 
         // Havenwood Battleground enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
-        // {tap}: Add {G} to your mana pool.
+        // {tap}: Add {G}.
         this.addAbility(new GreenManaAbility());
-        // {tap}, Sacrifice Havenwood Battleground: Add {G}{G} to your mana pool.
+        // {tap}, Sacrifice Havenwood Battleground: Add {G}{G}.
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.GreenMana(2), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

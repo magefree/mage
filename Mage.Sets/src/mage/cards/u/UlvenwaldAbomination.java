@@ -54,7 +54,7 @@ public class UlvenwaldAbomination extends CardImpl {
         // this card is the second face of double-faced card
         this.nightCard = true;
 
-        // {T}: Add {C}{C} to your mana pool.
+        // {T}: Add {C}{C}.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(2), new TapSourceCost()));
     }
 

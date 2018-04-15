@@ -50,7 +50,7 @@ public class ThornwoodFalls extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
         // When Thornwood Falls enters the battlefield, you gain 1 life.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(1)));
-        // {T}: Add {G} or {U} to your mana pool.
+        // {T}: Add {G} or {U}.
         this.addAbility(new GreenManaAbility());
         this.addAbility(new BlueManaAbility());                
         

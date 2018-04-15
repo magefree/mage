@@ -60,7 +60,7 @@ public class TreasureCove extends CardImpl {
 
         this.nightCard = true;
 
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
 
         // {T}, Sacrifice a Treasure: Draw a card.

@@ -47,7 +47,7 @@ public class LonelySandbar extends CardImpl {
 
         // Lonely Sandbar enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
-        // {tap}: Add {U} to your mana pool.
+        // {tap}: Add {U}.
         this.addAbility(new BlueManaAbility());
         // Cycling {U}
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{U}")));

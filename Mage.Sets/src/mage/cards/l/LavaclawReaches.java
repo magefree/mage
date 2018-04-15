@@ -58,7 +58,7 @@ public class LavaclawReaches extends CardImpl {
 
         // Lavaclaw Reaches enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
-        // {T}: Add {B} or {R} to your mana pool.
+        // {T}: Add {B} or {R}.
         this.addAbility(new BlackManaAbility());
         this.addAbility(new RedManaAbility());
         // {1}{B}{R}: Until end of turn, Lavaclaw Reaches becomes a 2/2 black and red Elemental creature with ": This creature gets +X/+0 until end of turn." It's still a land.

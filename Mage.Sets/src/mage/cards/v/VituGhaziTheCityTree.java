@@ -49,7 +49,7 @@ public class VituGhaziTheCityTree extends CardImpl {
     public VituGhaziTheCityTree(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {tap}: Add {C} to your mana pool.
+        // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         // {2}{G}{W}, {tap}: Create a 1/1 green Saproling creature token.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SaprolingToken()), new ManaCostsImpl("{2}{G}{W}"));

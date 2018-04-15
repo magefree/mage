@@ -58,7 +58,7 @@ public class AltarOfShadows extends CardImpl {
     public AltarOfShadows(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{7}");
 
-        // At the beginning of your precombat main phase, add {B} to your mana pool for each charge counter on Altar of Shadows.
+        // At the beginning of your precombat main phase, add {B} for each charge counter on Altar of Shadows.
         this.addAbility(new BeginningOfPreCombatMainTriggeredAbility(new AltarOfShadowsEffect(), TargetController.YOU, false));
         
         // {7}, {tap}: Destroy target creature. Then put a charge counter on Altar of Shadows.
@@ -83,7 +83,7 @@ class AltarOfShadowsEffect extends OneShotEffect {
 
     public AltarOfShadowsEffect() {
         super(Outcome.PutManaInPool);
-        this.staticText = "add {B} to your mana pool for each charge counter on Altar of Shadows";
+        this.staticText = "add {B} for each charge counter on Altar of Shadows";
     }
 
     public AltarOfShadowsEffect(final AltarOfShadowsEffect effect) {

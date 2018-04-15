@@ -47,9 +47,9 @@ public class UrzasMine extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
         this.subtype.add(SubType.URZAS, SubType.MINE);
 
-        // {T}: Add {C} to your mana pool. If you control an Urza's Power-Plant and an Urza's Tower, add {C}{C} to your mana pool instead.
+        // {T}: Add {C}. If you control an Urza's Power-Plant and an Urza's Tower, add {C}{C} instead.
         Ability urzaManaAbility = new DynamicManaAbility(Mana.ColorlessMana(1), new UrzaTerrainValue(2),
-                "Add {C} to your mana pool. If you control an Urza's Power-Plant and an Urza's Tower, add {C}{C} to your mana pool instead");
+                "Add {C}. If you control an Urza's Power-Plant and an Urza's Tower, add {C}{C} instead");
         this.addAbility(urzaManaAbility);
     }
 

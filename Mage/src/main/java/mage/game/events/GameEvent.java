@@ -232,6 +232,7 @@ public class GameEvent implements Serializable {
         FLIP_COIN, COIN_FLIPPED, SCRY, FATESEAL,
         ROLL_DICE, DICE_ROLLED,
         ROLL_PLANAR_DIE, PLANAR_DIE_ROLLED,
+        PLANESWALK, PLANESWALKED, 
         PAID_CUMULATIVE_UPKEEP,
         DIDNT_PAY_CUMULATIVE_UPKEEP,
         //permanent events

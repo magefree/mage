@@ -58,7 +58,7 @@ public class SurvivorsEncampment extends CardImpl {
 
         this.subtype.add(SubType.DESERT);
 
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
 
         // {T}, Tap an untapped creature you control: Add one mana of any color to your mana pool.

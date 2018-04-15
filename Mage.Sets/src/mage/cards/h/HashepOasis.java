@@ -64,10 +64,10 @@ public class HashepOasis extends CardImpl {
         
         this.subtype.add(SubType.DESERT);
 
-        // {t}: Add {C} to your mana pool.
+        // {t}: Add {C}.
         addAbility(new ColorlessManaAbility());
         
-        // {t}, Pay 1 life: Add {G} to your mana pool.
+        // {t}, Pay 1 life: Add {G}.
         Ability ability = new GreenManaAbility();
         ability.addCost(new PayLifeCost(1));
         addAbility(ability);

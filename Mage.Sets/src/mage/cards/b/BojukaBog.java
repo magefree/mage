@@ -52,7 +52,7 @@ public class BojukaBog extends CardImpl {
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new ExileGraveyardAllTargetPlayerEffect());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
-        // {T}: Add {B} to your mana pool.
+        // {T}: Add {B}.
         this.addAbility(new BlackManaAbility());
     }
 

@@ -60,7 +60,7 @@ public class ScornedVillager extends CardImpl {
         this.transformable = true;
         this.secondSideCardClazz = MoonscarredWerewolf.class;
 
-        // {tap}: Add {G} to your mana pool.
+        // {tap}: Add {G}.
         this.addAbility(new GreenManaAbility());
         // At the beginning of each upkeep, if no spells were cast last turn, transform Scorned Villager.
         this.addAbility(new TransformAbility());

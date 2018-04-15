@@ -63,7 +63,7 @@ public class Swarmyard extends CardImpl {
     public Swarmyard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {tap}: Add {C} to your mana pool.
+        // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         
         // {tap}: Regenerate target Insect, Rat, Spider, or Squirrel.

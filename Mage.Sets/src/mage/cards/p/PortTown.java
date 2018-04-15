@@ -62,7 +62,7 @@ public class PortTown extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new RevealTargetFromHandCost(new TargetCardInHand(filter))),
                 "you may reveal a Plains or Island card from your hand. If you don't, {this} enters the battlefield tapped"));
 
-        // {T}: Add {W} or {U} to your mana pool.
+        // {T}: Add {W} or {U}.
         this.addAbility(new WhiteManaAbility());
         this.addAbility(new BlueManaAbility());
     }

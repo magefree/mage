@@ -50,7 +50,7 @@ public class EwokVillage extends CardImpl {
         // Ewok Village enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
 
-        // When Ewok Village enters the battlefield , add {G} to your mana pool.
+        // When Ewok Village enters the battlefield , add {G}.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new AddManaToManaPoolSourceControllerEffect(Mana.GreenMana(1))));
 
         // {T}: Add {R} or {W} to you mana pool.

@@ -51,7 +51,7 @@ public class AbzanBanner extends CardImpl {
     public AbzanBanner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
-        // {T}: Add {W}, {B}, or {G} to your mana pool.
+        // {T}: Add {W}, {B}, or {G}.
         this.addAbility(new WhiteManaAbility());
         this.addAbility(new BlackManaAbility());
         this.addAbility(new GreenManaAbility());

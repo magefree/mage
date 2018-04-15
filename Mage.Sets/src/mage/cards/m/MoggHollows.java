@@ -46,9 +46,9 @@ public class MoggHollows extends CardImpl {
     public MoggHollows(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
 
-        // {tap}: Add {C} to your mana pool.
+        // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
-        // {tap}: Add {R} or {G} to your mana pool. Mogg Hollows doesn't untap during your next untap step.
+        // {tap}: Add {R} or {G}. Mogg Hollows doesn't untap during your next untap step.
         Ability ability = new RedManaAbility();
         ability.addEffect(new DontUntapInControllersNextUntapStepSourceEffect());
         this.addAbility(ability);

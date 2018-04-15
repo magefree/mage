@@ -47,9 +47,9 @@ public class CrystalVein extends CardImpl {
     public CrystalVein(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
-        // {T}, Sacrifice Crystal Vein: Add {C}{C} to your mana pool.
+        // {T}, Sacrifice Crystal Vein: Add {C}{C}.
         SimpleManaAbility ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(2), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

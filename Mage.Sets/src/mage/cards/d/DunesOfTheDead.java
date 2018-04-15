@@ -48,7 +48,7 @@ public class DunesOfTheDead extends CardImpl {
         
         this.subtype.add(SubType.DESERT);
 
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         addAbility(new ColorlessManaAbility());
         // When Dunes of the Dead is put into a graveyard from the battlefield, create a 2/2 black Zombie creature token.
         this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new CreateTokenEffect(new ZombieToken(), 1), false));

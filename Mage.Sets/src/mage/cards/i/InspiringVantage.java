@@ -55,7 +55,7 @@ public class InspiringVantage extends CardImpl {
         String abilityText = " tapped unless you control two or fewer other lands";
         this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
 
-        // {T}: Add {R} or {W} to your mana pool.
+        // {T}: Add {R} or {W}.
         this.addAbility(new RedManaAbility());
         this.addAbility(new WhiteManaAbility());
     }

@@ -53,7 +53,7 @@ public class OrzhovCluestone extends CardImpl {
     public OrzhovCluestone(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
-        // {T}: Add {W} or {B} to your mana pool.
+        // {T}: Add {W} or {B}.
         this.addAbility(new WhiteManaAbility());
         this.addAbility(new BlackManaAbility());
 

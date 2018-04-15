@@ -50,7 +50,7 @@ public class SuChi extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        // When Su-Chi dies, add {C}{C}{C}{C} to your mana pool.
+        // When Su-Chi dies, add {C}{C}{C}{C}.
         this.addAbility(new DiesTriggeredAbility(new BasicManaEffect(Mana.ColorlessMana(4)), false));
     }
 

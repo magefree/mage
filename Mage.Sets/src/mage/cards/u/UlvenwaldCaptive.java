@@ -60,7 +60,7 @@ public class UlvenwaldCaptive extends CardImpl {
         // Defender
         this.addAbility(DefenderAbility.getInstance());
 
-        // {T}: Add {G} to your mana pool.
+        // {T}: Add {G}.
         this.addAbility(new GreenManaAbility());
 
         // {5}{G}{G}: Transform Ulvenwald Captive.

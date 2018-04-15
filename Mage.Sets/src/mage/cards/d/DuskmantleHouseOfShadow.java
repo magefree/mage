@@ -49,7 +49,7 @@ public class DuskmantleHouseOfShadow extends CardImpl {
     public DuskmantleHouseOfShadow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
 
-        // {tap}: Add {C} to your mana pool.
+        // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         // {U}{B}, {tap}: Target player puts the top card of their library into their graveyard.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(1), new ManaCostsImpl("{U}{B}"));

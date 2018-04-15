@@ -51,7 +51,7 @@ public class DesertOfTheFervent extends CardImpl {
         // Desert of the Fervent enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
 
-        // {T}: Add {R} to your mana pool.
+        // {T}: Add {R}.
         this.addAbility(new RedManaAbility());
 
         // Cycling {1}{R}

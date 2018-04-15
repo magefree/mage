@@ -51,9 +51,9 @@ public class SvyeluniteTemple extends CardImpl {
 
         // Svyelunite Temple enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
-        // {tap}: Add {U} to your mana pool.
+        // {tap}: Add {U}.
         this.addAbility(new BlueManaAbility());
-        // {tap}, Sacrifice Svyelunite Temple: Add {U}{U} to your mana pool.
+        // {tap}, Sacrifice Svyelunite Temple: Add {U}{U}.
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlueMana(2), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

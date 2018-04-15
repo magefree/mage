@@ -52,7 +52,7 @@ public class MarchOfTheMachinesTest extends CardTestPlayerBase {
     /**
      * Abzan Banner
      * Artifact, 3 (3)
-     * {T}: Add {W}, {B}, or {G} to your mana pool.
+     * {T}: Add {W}, {B}, or {G}.
      * {W}{B}{G}, {T}, Sacrifice Abzan Banner: Draw a card.
      */
 

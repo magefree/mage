@@ -60,10 +60,10 @@ public class ItlimocCradleOfTheSun extends CardImpl {
         // (Transforms from Growing Rites of Itlimoc.)/
         this.nightCard = true;
 
-        // {T}: Add {G} to your mana pool.
+        // {T}: Add {G}.
         this.addAbility(new GreenManaAbility());
 
-        // {T}: Add {G} to your mana pool for each creature you control.
+        // {T}: Add {G} for each creature you control.
         this.addAbility(new DynamicManaAbility(Mana.GreenMana(1), new PermanentsOnBattlefieldCount(filter)));
     }
 

@@ -56,7 +56,7 @@ public class FlagstonesOfTrokair extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
         addSuperType(SuperType.LEGENDARY);
 
-        // {tap}: Add {W} to your mana pool.
+        // {tap}: Add {W}.
         this.addAbility(new WhiteManaAbility());
 
         // When Flagstones of Trokair is put into a graveyard from the battlefield, you may search your library for a Plains card and put it onto the battlefield tapped. If you do, shuffle your library.

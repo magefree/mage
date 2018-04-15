@@ -64,7 +64,7 @@ public class AvidReclaimer extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // {T}: Add {G} or {U} to your mana pool. If you control a Nissa planeswalker, you gain 2 life.
+        // {T}: Add {G} or {U}. If you control a Nissa planeswalker, you gain 2 life.
         Ability GreenManaAbility = new GreenManaAbility();
         GreenManaAbility.addEffect(new ConditionalOneShotEffect(new GainLifeEffect(2), new PermanentsOnTheBattlefieldCondition(filter), "If you control a Nissa planeswalker, you gain 2 life."));
         this.addAbility(GreenManaAbility);

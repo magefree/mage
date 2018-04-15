@@ -54,7 +54,7 @@ public class ScatteringStroke extends CardImpl {
     public ScatteringStroke(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}{U}");
 
-        // Counter target spell. Clash with an opponent. If you win, at the beginning of your next main phase, you may add {X} to your mana pool, where X is that spell's converted mana cost.
+        // Counter target spell. Clash with an opponent. If you win, at the beginning of your next main phase, you may add {X}, where X is that spell's converted mana cost.
         this.getSpellAbility().addEffect(new ScatteringStrokeEffect());
         this.getSpellAbility().addTarget(new TargetSpell());
     }
@@ -73,7 +73,7 @@ class ScatteringStrokeEffect extends OneShotEffect {
 
     public ScatteringStrokeEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Counter target spell. Clash with an opponent. If you win, at the beginning of your next main phase, you may add {X} to your mana pool, where X is that spell's converted mana cost";
+        this.staticText = "Counter target spell. Clash with an opponent. If you win, at the beginning of your next main phase, you may add {X}, where X is that spell's converted mana cost";
     }
 
     public ScatteringStrokeEffect(final ScatteringStrokeEffect effect) {

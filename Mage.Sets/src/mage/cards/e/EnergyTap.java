@@ -58,7 +58,7 @@ public class EnergyTap extends CardImpl {
     public EnergyTap(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{U}");
 
-        // Tap target untapped creature you control. If you do, add an amount of {C} to your mana pool equal to that creature's converted mana cost.
+        // Tap target untapped creature you control. If you do, add an amount of {C} equal to that creature's converted mana cost.
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(filter));
         this.getSpellAbility().addEffect(new EnergyTapEffect());
     }
@@ -77,7 +77,7 @@ class EnergyTapEffect extends OneShotEffect {
 
     EnergyTapEffect() {
         super(Outcome.PutManaInPool);
-        this.staticText = "Tap target untapped creature you control. If you do, add an amount of {C} to your mana pool equal to that creature's converted mana cost";
+        this.staticText = "Tap target untapped creature you control. If you do, add an amount of {C} equal to that creature's converted mana cost";
     }
 
     EnergyTapEffect(final EnergyTapEffect effect) {

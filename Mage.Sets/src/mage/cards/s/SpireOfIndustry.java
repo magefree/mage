@@ -50,7 +50,7 @@ public class SpireOfIndustry extends CardImpl {
     public SpireOfIndustry(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
 
         // {T}, Pay 1 life: Add one mana of any color to your mana pool. Activate this ability only if you control an artifact.

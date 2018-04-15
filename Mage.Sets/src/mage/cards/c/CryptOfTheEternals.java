@@ -24,10 +24,10 @@ public class CryptOfTheEternals extends CardImpl {
         // When Crypt of the Eternals enters the battlefield, you gain 1 life.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(1)));
         
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
 
-        // {1}, {T}: Add {U}, {B}, or {R} to your mana pool.
+        // {1}, {T}: Add {U}, {B}, or {R}.
         List<Mana> list = new ArrayList<Mana>() {{
             add(Mana.BlueMana(1));
             add(Mana.BlackMana(1));

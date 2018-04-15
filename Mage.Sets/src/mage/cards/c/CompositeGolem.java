@@ -50,7 +50,7 @@ public class CompositeGolem extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        // Sacrifice Composite Golem: Add {W}{U}{B}{R}{G} to your mana pool.
+        // Sacrifice Composite Golem: Add {W}{U}{B}{R}{G}.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(1, 1, 1, 1, 1, 0, 0, 0), new SacrificeSourceCost()));
     }
 

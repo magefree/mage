@@ -52,7 +52,7 @@ public class BasaltMonolith extends CardImpl {
 
         // Basalt Monolith doesn't untap during your untap step.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepSourceEffect()));
-        // {tap}: Add {C}{C}{C} to your mana pool.
+        // {tap}: Add {C}{C}{C}.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(3), new TapSourceCost()));
         // {3}: Untap Basalt Monolith.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new GenericManaCost(3)));

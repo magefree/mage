@@ -65,7 +65,7 @@ public class HeartOfYavimaya extends CardImpl {
         // If Heart of Yavimaya would enter the battlefield, sacrifice a Forest instead. If you do, put Heart of Yavimaya onto the battlefield. If you don't, put it into its owner's graveyard.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new EnterBattlefieldPayCostOrPutGraveyardEffect(new SacrificeTargetCost(new TargetControlledPermanent(filter)))));
 
-        // {tap}: Add {G} to your mana pool.
+        // {tap}: Add {G}.
         this.addAbility(new GreenManaAbility());
         
         // {tap}: Target creature gets +1/+1 until end of turn.

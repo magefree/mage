@@ -55,7 +55,7 @@ public class NantukoMonastery extends CardImpl {
     public NantukoMonastery(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {tap}: Add {C} to your mana pool.
+        // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         // Threshold - {G}{W}: Nantuko Monastery becomes a 4/4 green and white Insect Monk creature with first strike until end of turn. It's still a land. Activate this ability only if seven or more cards are in your graveyard.
         Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(

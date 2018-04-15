@@ -57,7 +57,7 @@ public class SelesnyaSanctuary extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
         // When Selesnya Sanctuary enters the battlefield, return a land you control to its owner's hand.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(filter), false));
-        // {tap}: Add {G}{W} to your mana pool.
+        // {tap}: Add {G}{W}.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 1, 0, 1, 0, 0, 0, 0), new TapSourceCost()));
     }
 

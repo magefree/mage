@@ -59,7 +59,7 @@ public class Urborg extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
         addSuperType(SuperType.LEGENDARY);
 
-        // {tap}: Add {B} to your mana pool.
+        // {tap}: Add {B}.
         this.addAbility(new BlackManaAbility());
 
         // {tap}: Target creature loses first strike or swampwalk until end of turn.

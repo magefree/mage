@@ -46,10 +46,10 @@ public class EyeOfRamos extends CardImpl {
     public EyeOfRamos(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
-        // {tap}: Add {U} to your mana pool.
+        // {tap}: Add {U}.
         this.addAbility(new BlueManaAbility());
         
-        // Sacrifice Eye of Ramos: Add {U} to your mana pool.
+        // Sacrifice Eye of Ramos: Add {U}.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlueMana(1), new SacrificeSourceCost()));
     }
 

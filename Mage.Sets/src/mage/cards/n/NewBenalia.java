@@ -49,7 +49,7 @@ public class NewBenalia extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
         // When New Benalia enters the battlefield, scry 1.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ScryEffect(1)));
-        // {tap}: Add {W} to your mana pool.
+        // {tap}: Add {W}.
         this.addAbility(new WhiteManaAbility());
     }
 

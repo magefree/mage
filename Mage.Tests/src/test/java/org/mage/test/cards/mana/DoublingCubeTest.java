@@ -10,7 +10,7 @@ public class DoublingCubeTest extends CardTestPlayerBase {
 
     // {3}, {T}: Double the amount of each type of mana in your mana pool.
     String cube = "Doubling Cube";
-    // {T}: Add {C}{C} to your mana pool. Spend this mana only to cast colorless Eldrazi spells or activate abilities of colorless Eldrazi.
+    // {T}: Add {C}{C}. Spend this mana only to cast colorless Eldrazi spells or activate abilities of colorless Eldrazi.
     String temple = "Eldrazi Temple";
     // Mana pools don't empty as steps and phases end.
     String upwelling = "Upwelling";
@@ -24,9 +24,9 @@ public class DoublingCubeTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, cube);
         addCard(Zone.BATTLEFIELD, playerA, upwelling);
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {G} to your mana pool");
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {G} to your mana pool");
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {G} to your mana pool");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {G}");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {G}");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {G}");
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {C}{C}");
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}, {T}:");

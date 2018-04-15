@@ -45,7 +45,7 @@ public class ShimmeringGrotto extends CardImpl {
 
     public ShimmeringGrotto(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
-        // {tap}: Add {C} to your mana pool.
+        // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         // {1}, {tap}: Add one mana of any color to your mana pool.
         Ability ability = new AnyColorManaAbility(new GenericManaCost(1));

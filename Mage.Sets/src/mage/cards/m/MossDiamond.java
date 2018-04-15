@@ -45,7 +45,7 @@ public class MossDiamond extends CardImpl {
 
         // Moss Diamond enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
-        // {tap}: Add {G} to your mana pool.
+        // {tap}: Add {G}.
         this.addAbility(new GreenManaAbility());
     }
 

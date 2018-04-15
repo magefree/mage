@@ -61,7 +61,7 @@ public class Dragonrage extends CardImpl {
     public Dragonrage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");
 
-        // Add {R} to your mana pool for each attacking creature you control. 
+        // Add {R} for each attacking creature you control. 
         this.getSpellAbility().addEffect(new DynamicManaEffect(Mana.RedMana(1),
                 new PermanentsOnBattlefieldCount(filter)));
         

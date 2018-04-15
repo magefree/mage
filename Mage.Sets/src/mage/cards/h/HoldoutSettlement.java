@@ -55,7 +55,7 @@ public class HoldoutSettlement extends CardImpl {
     public HoldoutSettlement(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         
         // {T}, Tap an untapped creature you control: Add one mana of any color to your mana pool.

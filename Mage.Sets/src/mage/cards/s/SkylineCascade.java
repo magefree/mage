@@ -64,7 +64,7 @@ public class SkylineCascade extends CardImpl {
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
 
-        // {T}: Add {U} to your mana pool.
+        // {T}: Add {U}.
         this.addAbility(new BlueManaAbility());
     }
 

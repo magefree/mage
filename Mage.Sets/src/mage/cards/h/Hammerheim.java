@@ -60,7 +60,7 @@ public class Hammerheim extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
 
-        // {tap}: Add {R} to your mana pool.
+        // {tap}: Add {R}.
         this.addAbility(new RedManaAbility());
 
         // {tap}: Target creature loses all landwalk abilities until end of turn.

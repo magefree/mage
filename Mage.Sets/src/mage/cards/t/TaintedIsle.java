@@ -57,10 +57,10 @@ public class TaintedIsle extends CardImpl {
     public TaintedIsle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {tap}: Add {C} to your mana pool.
+        // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
 
-        // {tap}: Add {U} or {B} to your mana pool. Activate this ability only if you control a Swamp.
+        // {tap}: Add {U} or {B}. Activate this ability only if you control a Swamp.
         this.addAbility(new ActivateIfConditionManaAbility(
                 Zone.BATTLEFIELD,
                 new BasicManaEffect(Mana.BlueMana(1)),

@@ -55,7 +55,7 @@ public class ZhurTaaDruid extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // {tap}: Add {G} to your mana pool.
+        // {tap}: Add {G}.
         this.addAbility(new GreenManaAbility());
         // Whenever you tap Zhur-Taa Druid for mana, it deals 1 damage to each opponent.
         this.addAbility(new ZhurTaaDruidAbility());

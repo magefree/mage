@@ -57,7 +57,7 @@ public class TombOfUrami extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
         this.addSuperType(SuperType.LEGENDARY);
 
-        // {tap}: Add {B} to your mana pool. Tomb of Urami deals 1 damage to you if you don't control an Ogre.
+        // {tap}: Add {B}. Tomb of Urami deals 1 damage to you if you don't control an Ogre.
         Ability ability = new BlackManaAbility();
         ability.addEffect(new DamageControllerEffect(1));
         this.addAbility(ability);

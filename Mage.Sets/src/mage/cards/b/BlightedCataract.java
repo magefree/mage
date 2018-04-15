@@ -49,7 +49,7 @@ public class BlightedCataract extends CardImpl {
     public BlightedCataract(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
 
         // {5}{U}, {T}, Sacrifice Blighted Cataract: Draw two cards.

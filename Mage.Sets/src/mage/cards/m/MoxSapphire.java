@@ -42,7 +42,7 @@ public class MoxSapphire extends CardImpl {
     public MoxSapphire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{0}");
 
-        // {tap}: Add {U} to your mana pool.
+        // {tap}: Add {U}.
         this.addAbility(new BlueManaAbility());
     }
 

@@ -201,7 +201,7 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Angelic Wall");
         // Air Elemental: Creature — Elemental 4/4, 3UU - Flying
         addCard(Zone.BATTLEFIELD, playerA, "Air Elemental");
-        // Llanowar Elves: Creature — Elf Druid 1/1, G - {T}: Add {G} to your mana pool.
+        // Llanowar Elves: Creature — Elf Druid 1/1, G - {T}: Add {G}.
         addCard(Zone.BATTLEFIELD, playerA, "Llanowar Elves");
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Baneslayer Angel");

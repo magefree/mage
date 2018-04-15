@@ -57,7 +57,7 @@ public class NykthosShrineToNyx extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
         addSuperType(SuperType.LEGENDARY);
 
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         // {2}, {T}: Choose a color. Add to your mana pool an amount of mana of that color equal to your devotion to that color.
         Ability ability = new NykthosShrineToNyxManaAbility();

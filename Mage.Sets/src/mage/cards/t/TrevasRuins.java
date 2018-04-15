@@ -61,7 +61,7 @@ public class TrevasRuins extends CardImpl {
 
         // When Treva's Ruins enters the battlefield, sacrifice it unless you return a non-Lair land you control to its owner's hand.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(filter)))));
-        // {tap}: Add {G}, {W}, or {U} to your mana pool.
+        // {tap}: Add {G}, {W}, or {U}.
         this.addAbility(new GreenManaAbility());
         this.addAbility(new WhiteManaAbility());
         this.addAbility(new BlueManaAbility());

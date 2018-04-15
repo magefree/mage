@@ -48,13 +48,13 @@ public class AnHavvaTownship extends CardImpl {
     public AnHavvaTownship(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {tap}: Add {C} to your mana pool.
+        // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
-        // {1}, {tap}: Add {G} to your mana pool.
+        // {1}, {tap}: Add {G}.
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.GreenMana(1), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
-        // {2}, {tap}: Add {R} or {W} to your mana pool.
+        // {2}, {tap}: Add {R} or {W}.
         ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.RedMana(1), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

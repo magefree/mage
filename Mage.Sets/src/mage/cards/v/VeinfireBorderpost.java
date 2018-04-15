@@ -70,7 +70,7 @@ public class VeinfireBorderpost extends CardImpl {
         // Veinfire Borderpost enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
 
-        // Tap: Add {B} or {R} to your mana pool.
+        // Tap: Add {B} or {R}.
         this.addAbility(new BlackManaAbility());
         this.addAbility(new RedManaAbility());
     }

@@ -56,7 +56,7 @@ public class SvogthosTheRestlessTomb extends CardImpl {
     public SvogthosTheRestlessTomb(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {tap}: Add {C} to your mana pool.
+        // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         // {3}{B}{G}: Until end of turn, Svogthos, the Restless Tomb becomes a black and green Plant Zombie creature with "This creature's power and toughness are each equal to the number of creature cards in your graveyard." It's still a land.
         // set to character defining to prevent setting P/T again to 0 becuase already set by CDA of the token

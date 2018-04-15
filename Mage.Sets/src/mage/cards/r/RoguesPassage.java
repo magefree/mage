@@ -49,7 +49,7 @@ public class RoguesPassage extends CardImpl {
     public RoguesPassage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(1), new TapSourceCost()));
 
         // {4}, {T}: Target creature can't be blocked this turn.

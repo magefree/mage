@@ -50,7 +50,7 @@ public class RivenTurnbull extends CardImpl {
         this.power = new MageInt(5);
         this.toughness = new MageInt(7);
 
-        // {tap}: Add {B} to your mana pool.
+        // {tap}: Add {B}.
         this.addAbility(new BlackManaAbility());
     }
 

@@ -54,7 +54,7 @@ public class GraspingDunes extends CardImpl {
         
         this.subtype.add(SubType.DESERT);
 
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         
         // {1}, {T}, Sacrifice Grasping Dunes: Put a -1/-1 counter on target creature. Activate this ability only any time you could cast a sorcery.

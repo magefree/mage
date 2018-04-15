@@ -58,7 +58,7 @@ public class OrzhovBasilica extends CardImpl {
         // When Orzhov Basilica enters the battlefield, return a land you control to its owner's hand.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(filter), false));
 
-        // {T}: Add {W}{B} to your mana pool.
+        // {T}: Add {W}{B}.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 0, 0, 1, 1, 0, 0, 0), new TapSourceCost()));
     }
 

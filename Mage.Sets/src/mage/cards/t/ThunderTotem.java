@@ -53,7 +53,7 @@ public class ThunderTotem extends CardImpl {
     public ThunderTotem(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
-        // {tap}: Add {W} to your mana pool.
+        // {tap}: Add {W}.
         this.addAbility(new WhiteManaAbility());
         
         // {1}{W}{W}: Thunder Totem becomes a 2/2 white Spirit artifact creature with flying and first strike until end of turn.

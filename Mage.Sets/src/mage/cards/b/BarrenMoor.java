@@ -47,7 +47,7 @@ public class BarrenMoor extends CardImpl {
 
         // Barren Moor enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
-        // {tap}: Add {B} to your mana pool.
+        // {tap}: Add {B}.
         this.addAbility(new BlackManaAbility());
         // Cycling {B}
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{B}")));

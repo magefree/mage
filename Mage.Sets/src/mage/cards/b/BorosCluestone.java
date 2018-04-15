@@ -53,7 +53,7 @@ public class BorosCluestone extends CardImpl {
     public BorosCluestone(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
-        // {T}: Add {R} or {W} to your mana pool.
+        // {T}: Add {R} or {W}.
         this.addAbility(new RedManaAbility());
         this.addAbility(new WhiteManaAbility());
 

@@ -56,7 +56,7 @@ public class GolgariRotFarm extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
         // When Golgari Rot Farm enters the battlefield, return a land you control to its owner's hand.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(filter)));
-        // {tap}: Add {B}{G} to your mana pool.
+        // {tap}: Add {B}{G}.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 1, 0, 0, 1, 0, 0, 0), new TapSourceCost()));
     }
 

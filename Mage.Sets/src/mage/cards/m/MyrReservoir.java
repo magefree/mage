@@ -63,7 +63,7 @@ public class MyrReservoir extends CardImpl {
     public MyrReservoir(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
-        // {tap}: Add {C}{C} to your mana pool. Spend this mana only to cast Myr spells or activate abilities of Myr.
+        // {tap}: Add {C}{C}. Spend this mana only to cast Myr spells or activate abilities of Myr.
         this.addAbility(new MyrReservoirManaAbility());
 
         // {3}, {tap}: Return target Myr card from your graveyard to your hand.
