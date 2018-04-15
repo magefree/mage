@@ -172,6 +172,7 @@ public class Dominaria extends ExpansionSet {
         cards.add(new SetCardInfo("Memorial to Glory", 244, Rarity.UNCOMMON, mage.cards.m.MemorialToGlory.class));
         cards.add(new SetCardInfo("Memorial to Unity", 245, Rarity.UNCOMMON, mage.cards.m.MemorialToUnity.class));
         cards.add(new SetCardInfo("Memorial to War", 246, Rarity.UNCOMMON, mage.cards.m.MemorialToWar.class));
+        cards.add(new SetCardInfo("Merfolk Trickster", 56, Rarity.UNCOMMON, mage.cards.m.MerfolkTrickster.class));
         cards.add(new SetCardInfo("Mesa Unicorn", 27, Rarity.COMMON, mage.cards.m.MesaUnicorn.class));
         cards.add(new SetCardInfo("Mishra's Self-Replicator", 223, Rarity.RARE, mage.cards.m.MishrasSelfReplicator.class));
         cards.add(new SetCardInfo("Mountain", 262, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
