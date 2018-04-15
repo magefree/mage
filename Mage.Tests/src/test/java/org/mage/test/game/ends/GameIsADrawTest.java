@@ -124,7 +124,7 @@ public class GameIsADrawTest extends CardTestPlayerBase {
         setChoice(playerA, "PlayerA");
 
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip", "Stuffy Doll");
-        activateAbility(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "{T}");
+        activateAbility(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "{T}: {source} deals");
         setStopAt(3, PhaseStep.END_TURN);
         execute();
 
