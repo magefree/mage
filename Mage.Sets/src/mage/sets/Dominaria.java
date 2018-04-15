@@ -178,6 +178,7 @@ public class Dominaria extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 265, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Multani, Yavimaya's Avatar", 174, Rarity.MYTHIC, mage.cards.m.MultaniYavimayasAvatar.class));
         cards.add(new SetCardInfo("Mox Amber", 224, Rarity.MYTHIC, mage.cards.m.MoxAmber.class));
+        cards.add(new SetCardInfo("Naban, Dean of Iteration", 58, Rarity.RARE, mage.cards.n.NabanDeanOfIteration.class));
         cards.add(new SetCardInfo("Naru Meha, Master Wizard", 59, Rarity.MYTHIC, mage.cards.n.NaruMehaMasterWizard.class));
         cards.add(new SetCardInfo("Nature's Spiral", 175, Rarity.UNCOMMON, mage.cards.n.NaturesSpiral.class));
         cards.add(new SetCardInfo("Opt", 60, Rarity.COMMON, mage.cards.o.Opt.class));
