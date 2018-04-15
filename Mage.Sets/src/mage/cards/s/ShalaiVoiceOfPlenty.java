@@ -37,14 +37,14 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
-import mage.constants.SubType;
-import mage.constants.SuperType;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -87,6 +87,7 @@ public class ShalaiVoiceOfPlenty extends CardImpl {
         ability.addEffect(effect);
         effect = new GainAbilityControlledEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield, filter2);
         effect.setText("and other creatures you control have hexproof");
+        ability.addEffect(effect);
         this.addAbility(ability);
 
         // {4}{G}{G}: Put a +1/+1 counter on each creature you control.

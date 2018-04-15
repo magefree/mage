@@ -34,10 +34,10 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterArtifactCard;
@@ -65,12 +65,16 @@ public class DaringArchaeologist extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Daring Archaeologist enters the battlefield, you may return target artifact card from your graveyard to your hand.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), true);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect()
+                .setText("you may return target artifact card from your graveyard to your hand. "), true);
         ability.addTarget(new TargetCardInYourGraveyard(new FilterArtifactCard("artifact card from your graveyard")));
         this.addAbility(ability);
 
         // Whenever you cast a historic spell, put a +1/+1 counter on Daring Archaeologist.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)), filter, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance(1))
+                        .setText("put a +1/+1 counter on {this}. <i>(Artifacts, legendaries, and Sagas are historic.)</i>"),
+                filter, true));
     }
 
     public DaringArchaeologist(final DaringArchaeologist card) {

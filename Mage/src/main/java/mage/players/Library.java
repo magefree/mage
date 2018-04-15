@@ -27,15 +27,14 @@
  */
 package mage.players;
 
+import java.io.Serializable;
+import java.util.*;
+import java.util.stream.Collectors;
 import mage.cards.Card;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.util.RandomUtil;
-
-import java.io.Serializable;
-import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -133,6 +132,28 @@ public class Library implements Serializable {
             library.addFirst(card.getId());
         } else {
             game.getPlayer(card.getOwnerId()).getLibrary().putOnTop(card, game);
+        }
+    }
+
+    public void putCardThirdFromTheTop(Card card, Game game) {
+        if (card != null && card.getOwnerId().equals(playerId)) {
+            Card cardTop = null;
+            Card cardSecond = null;
+            if (hasCards()) {
+                cardTop = removeFromTop(game);
+            }
+            if (hasCards()) {
+                cardSecond = removeFromTop(game);
+            }
+            putOnTop(card, game);
+            if (cardSecond != null) {
+                putOnTop(cardSecond, game);
+            }
+            if (cardTop != null) {
+                putOnTop(cardTop, game);
+            }
+        } else {
+            game.getPlayer(card.getOwnerId()).getLibrary().putCardThirdFromTheTop(card, game);
         }
     }
 

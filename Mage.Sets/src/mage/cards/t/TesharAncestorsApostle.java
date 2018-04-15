@@ -59,7 +59,7 @@ public class TesharAncestorsApostle extends CardImpl {
         filter.add(new CardTypePredicate(CardType.CREATURE));
     }
 
-    public TesharAncestorsApostle(UUID ownerId, CardSetInfo cardSetInfo){
+    public TesharAncestorsApostle(UUID ownerId, CardSetInfo cardSetInfo) {
         super(ownerId, cardSetInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.BIRD);
@@ -72,17 +72,18 @@ public class TesharAncestorsApostle extends CardImpl {
 
         // Whenever you cast a historic spell, return target creature card with converted mana cost 3 or less from your graveyard to the battlefield.
         Ability ability = new SpellCastControllerTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect()
-                .setText("return target creature card with converted mana cost 3 or less from your graveyard to the battlefield"), new FilterHistoricSpell(), false);
+                .setText("return target creature card with converted mana cost 3 or less from your graveyard to the battlefield. "
+                        + "<i>(Artifacts, legendaries, and Sagas are historic.)</i>"), new FilterHistoricSpell("a historic spell"), false);
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
 
     }
 
-    public TesharAncestorsApostle(final TesharAncestorsApostle TesharAncestorsApostle){
+    public TesharAncestorsApostle(final TesharAncestorsApostle TesharAncestorsApostle) {
         super(TesharAncestorsApostle);
     }
 
-    public TesharAncestorsApostle copy(){
+    public TesharAncestorsApostle copy() {
         return new TesharAncestorsApostle(this);
     }
 }

@@ -12,13 +12,13 @@ public class BasicManaEffect extends ManaEffect {
     public BasicManaEffect(Mana mana) {
         super();
         this.mana = mana;
-        staticText = "add " + mana.toString() + " to your mana pool";
+        staticText = "add " + mana.toString();
     }
 
     public BasicManaEffect(ConditionalMana conditionalMana) {
         super();
         this.mana = conditionalMana;
-        staticText = "add " + mana.toString() + " to your mana pool. " + conditionalMana.getDescription();
+        staticText = "add " + mana.toString() + " " + conditionalMana.getDescription();
     }
 
     public BasicManaEffect(final BasicManaEffect effect) {

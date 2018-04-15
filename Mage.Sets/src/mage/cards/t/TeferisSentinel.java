@@ -25,49 +25,54 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.b;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.combat.CantAttackYouUnlessPayManaAllEffect;
-import mage.abilities.keyword.VigilanceAbility;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
+import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.SuperType;
 import mage.constants.Zone;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
- * @author JRHerlehy Created on 4/4/18.
+ *
+ * @author LevelX2
  */
-public class BairdStewardOfArgive extends CardImpl {
+public class TeferisSentinel extends CardImpl {
 
-    public BairdStewardOfArgive(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
+    public TeferisSentinel(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");
 
-        this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add(SubType.HUMAN, SubType.SOLDIER);
-
+        this.subtype.add(SubType.GOLEM);
         this.power = new MageInt(2);
-        this.toughness = new MageInt(4);
+        this.toughness = new MageInt(6);
 
-        //Vigilance
-        this.addAbility(VigilanceAbility.getInstance());
-
-        // Creatures can’t attack you or a planeswalker you control unless their controller pays {1} for each of those creatures.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackYouUnlessPayManaAllEffect(new ManaCostsImpl("{1}"), true)
-                .setText("Creatures can’t attack you or a planeswalker you control unless their controller pays {1} for each of those creatures")));
+        // As long as you control a Teferi planeswalker, Teferi's Sentinel gets +4/+0.
+        FilterControlledPermanent filter = new FilterControlledPermanent();
+        filter.add(new CardTypePredicate(CardType.PLANESWALKER));
+        filter.add(new SubtypePredicate(SubType.TEFERI));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new ConditionalContinuousEffect(
+                        new BoostSourceEffect(4, 0, Duration.WhileOnBattlefield),
+                        new PermanentsOnTheBattlefieldCondition(filter),
+                        "As long as you control a Teferi planeswalker, {this} gets +4/+0")));
     }
 
-    public BairdStewardOfArgive(final BairdStewardOfArgive card) {
+    public TeferisSentinel(final TeferisSentinel card) {
         super(card);
     }
 
     @Override
-    public BairdStewardOfArgive copy() {
-        return new BairdStewardOfArgive(this);
+    public TeferisSentinel copy() {
+        return new TeferisSentinel(this);
     }
 }

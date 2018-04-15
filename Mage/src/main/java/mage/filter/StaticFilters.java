@@ -225,6 +225,12 @@ public final class StaticFilters {
         FILTER_LAND.setLockedFilter(true);
     }
 
+    public static final FilterLandPermanent FILTER_LAND_A = new FilterLandPermanent("a land");
+
+    static {
+        FILTER_LAND_A.setLockedFilter(true);
+    }
+
     public static final FilterLandPermanent FILTER_LANDS = new FilterLandPermanent("lands");
 
     static {

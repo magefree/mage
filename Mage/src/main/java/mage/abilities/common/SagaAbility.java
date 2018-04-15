@@ -173,7 +173,7 @@ class ChapterTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         String text = super.getRule();
-        sb.append(": ").append(Character.toUpperCase(text.charAt(0)) + text.substring(1));
+        sb.append(": ").append(Character.toUpperCase(text.charAt(0))).append(text.substring(1));
         return sb.toString();
     }
 }

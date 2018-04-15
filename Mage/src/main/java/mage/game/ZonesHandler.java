@@ -108,7 +108,7 @@ public final class ZonesHandler {
                                 "order to put on top of library (last chosen will be topmost)", cards, owner, game)) {
                             game.getPlayer(card.getOwnerId()).getLibrary().putOnTop(card, game);
                         }
-                    } else {
+                    } else { // buttom
                         for (Card card : chooseOrder(
                                 "order to put on bottom of library (last chosen will be bottommost)", cards, owner, game)) {
                             game.getPlayer(card.getOwnerId()).getLibrary().putOnBottom(card, game);
