@@ -25,49 +25,57 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.g;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.condition.common.KickedCondition;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.effects.common.FightTargetSourceEffect;
+import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.filter.StaticFilters;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author fireshoes
+ * @author LevelX2
  */
-public class GlintNestCrane extends CardImpl {
+public class TerritorialAllosaurus extends CardImpl {
 
-    public GlintNestCrane(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
-        this.subtype.add(SubType.BIRD);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(3);
+    public TerritorialAllosaurus(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
 
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
+        this.subtype.add(SubType.DINOSAUR);
+        this.power = new MageInt(5);
+        this.toughness = new MageInt(5);
 
-        // When Glint-Nest Crane enters the battlefield, look at the top four cards of your library. You may reveal an artifact card from among them and
-        // put it into your hand. Put the rest on the bottom of your library in any order.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new LookLibraryAndPickControllerEffect(new StaticValue(4), false, new StaticValue(1),
-                        StaticFilters.FILTER_CARD_ARTIFACT_AN, Zone.LIBRARY, false, true, false, Zone.HAND, true)));
+        // Kicker {2}{G}
+        this.addAbility(new KickerAbility("{2}{G}"));
+
+        // When Territorial Allosaurus enters the battlefield, if it was kicked, it fights another target creature.
+        EntersBattlefieldTriggeredAbility ability
+                = new EntersBattlefieldTriggeredAbility(new FightTargetSourceEffect());
+        Ability conditionalAbility = new ConditionalTriggeredAbility(ability, KickedCondition.instance,
+                "When {this} enters the battlefield, if it was kicked, it fights another target creature.");
+        FilterCreaturePermanent filter = new FilterCreaturePermanent();
+        filter.add(new AnotherPredicate());
+        conditionalAbility.addTarget(new TargetCreaturePermanent(filter));
+        this.addAbility(conditionalAbility);
     }
 
-    public GlintNestCrane(final GlintNestCrane card) {
+    public TerritorialAllosaurus(final TerritorialAllosaurus card) {
         super(card);
     }
 
     @Override
-    public GlintNestCrane copy() {
-        return new GlintNestCrane(this);
+    public TerritorialAllosaurus copy() {
+        return new TerritorialAllosaurus(this);
     }
 }

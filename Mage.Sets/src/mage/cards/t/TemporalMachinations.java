@@ -25,49 +25,42 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.g;
+package mage.cards.t;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
+import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author fireshoes
+ * @author LevelX2
  */
-public class GlintNestCrane extends CardImpl {
+public class TemporalMachinations extends CardImpl {
 
-    public GlintNestCrane(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
-        this.subtype.add(SubType.BIRD);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(3);
+    public TemporalMachinations(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{U}");
 
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-
-        // When Glint-Nest Crane enters the battlefield, look at the top four cards of your library. You may reveal an artifact card from among them and
-        // put it into your hand. Put the rest on the bottom of your library in any order.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new LookLibraryAndPickControllerEffect(new StaticValue(4), false, new StaticValue(1),
-                        StaticFilters.FILTER_CARD_ARTIFACT_AN, Zone.LIBRARY, false, true, false, Zone.HAND, true)));
+        // Return target creature to its owner's hand. If you control an artifact, draw a card.
+        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new DrawCardSourceControllerEffect(1),
+                new PermanentsOnTheBattlefieldCondition(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT),
+                "If you control an artifact, draw a card"));
     }
 
-    public GlintNestCrane(final GlintNestCrane card) {
+    public TemporalMachinations(final TemporalMachinations card) {
         super(card);
     }
 
     @Override
-    public GlintNestCrane copy() {
-        return new GlintNestCrane(this);
+    public TemporalMachinations copy() {
+        return new TemporalMachinations(this);
     }
 }

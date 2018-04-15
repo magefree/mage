@@ -224,9 +224,14 @@ public class Dominaria extends ExpansionSet {
         cards.add(new SetCardInfo("Teferi, Hero of Dominaria", 207, Rarity.MYTHIC, mage.cards.t.TeferiHeroOfDominaria.class));
         cards.add(new SetCardInfo("Teferi, Timebender", 270, Rarity.MYTHIC, mage.cards.t.TeferiTimebender.class));
         cards.add(new SetCardInfo("Tempest Djinn", 68, Rarity.RARE, mage.cards.t.TempestDjinn.class));
+        cards.add(new SetCardInfo("Temporal Machinations", 271, Rarity.UNCOMMON, mage.cards.t.TemporalMachinations.class));
+        cards.add(new SetCardInfo("Territorial Allosaurus", 184, Rarity.RARE, mage.cards.t.TerritorialAllosaurus.class));
         cards.add(new SetCardInfo("Teshar, Ancestor's Apostle", 36, Rarity.RARE, mage.cards.t.TesharAncestorsApostle.class));
         cards.add(new SetCardInfo("Tetsuko Umezawa, Fugitive", 69, Rarity.UNCOMMON, mage.cards.t.TetsukoUmezawaFugitive.class));
+        cards.add(new SetCardInfo("Thallid Omnivore", 106, Rarity.COMMON, mage.cards.t.ThallidOmnivore.class));
         cards.add(new SetCardInfo("Thallid Soothsayer", 107, Rarity.UNCOMMON, mage.cards.t.ThallidSoothsayer.class));
+        cards.add(new SetCardInfo("The Antiquities War", 42, Rarity.RARE, mage.cards.t.TheAntiquitiesWar.class));
+        cards.add(new SetCardInfo("The Eldest Reborn", 90, Rarity.UNCOMMON, mage.cards.t.TheEldestReborn.class));
         cards.add(new SetCardInfo("The Flame of Keld", 123, Rarity.UNCOMMON, mage.cards.t.TheFlameOfKeld.class));
         cards.add(new SetCardInfo("The Mirari Conjecture", 57, Rarity.RARE, mage.cards.t.TheMirariConjecture.class));
         cards.add(new SetCardInfo("Thorn Elemental", 185, Rarity.UNCOMMON, mage.cards.t.ThornElemental.class));

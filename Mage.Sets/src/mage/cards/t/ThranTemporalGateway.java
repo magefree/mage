@@ -32,10 +32,10 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.PutPermanentOnBattlefieldEffect;
-import mage.constants.SuperType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.mageobject.HistoricPredicate;
@@ -57,9 +57,11 @@ public class ThranTemporalGateway extends CardImpl {
 
         this.addSuperType(SuperType.LEGENDARY);
 
-        // {4}, {t}: You may put a historic permanent card from your hand onto the battlefield.
+        // {4}, {t}: You may put a historic permanent card from your hand onto the battlefield. (Artifacts, legendaries, and Sagas are historic.)
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new PutPermanentOnBattlefieldEffect(filter),
+                new PutPermanentOnBattlefieldEffect(filter)
+                        .setText("You may put a historic permanent card from your hand onto the battlefield. "
+                                + "<i>(Artifacts, legendaries, and Sagas are historic.)</i>"),
                 new ManaCostsImpl("{4}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
