@@ -180,5 +180,7 @@ public class Judgment extends ExpansionSet {
         cards.add(new SetCardInfo("Worldgorger Dragon", 103, Rarity.RARE, mage.cards.w.WorldgorgerDragon.class));
         cards.add(new SetCardInfo("Wormfang Drake", 57, Rarity.COMMON, mage.cards.w.WormfangDrake.class));
         cards.add(new SetCardInfo("Wormfang Manta", 58, Rarity.RARE, mage.cards.w.WormfangManta.class));
+        cards.add(new SetCardInfo("Wormfang Newt", 59, Rarity.COMMON, mage.cards.w.WormfangNewt.class));
+        cards.add(new SetCardInfo("Wormfang Turtle", 60, Rarity.UNCOMMON, mage.cards.w.WormfangTurtle.class));
     }
 }

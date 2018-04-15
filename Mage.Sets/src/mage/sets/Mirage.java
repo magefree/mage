@@ -340,6 +340,7 @@ public class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Zhalfirin Commander", 253, Rarity.UNCOMMON, mage.cards.z.ZhalfirinCommander.class));
         cards.add(new SetCardInfo("Zhalfirin Knight", 254, Rarity.COMMON, mage.cards.z.ZhalfirinKnight.class));
         cards.add(new SetCardInfo("Zirilan of the Claw", 204, Rarity.RARE, mage.cards.z.ZirilanOfTheClaw.class));
+        cards.add(new SetCardInfo("Zombie Mob", 51, Rarity.UNCOMMON, mage.cards.z.ZombieMob.class));
         cards.add(new SetCardInfo("Zuberi, Golden Feather", 255, Rarity.RARE, mage.cards.z.ZuberiGoldenFeather.class));
     }
 }
