@@ -50,7 +50,7 @@ public class CanyonSlough extends CardImpl {
         this.subtype.add(SubType.SWAMP);
         this.subtype.add(SubType.MOUNTAIN);
 
-        // <i>({T}: Add {B} or {R} to your mana pool.)</i>
+        // <i>({T}: Add {B} or {R}.)</i>
         this.addAbility(new BlackManaAbility());
         this.addAbility(new RedManaAbility());
 

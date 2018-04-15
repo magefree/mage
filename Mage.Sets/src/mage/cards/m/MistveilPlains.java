@@ -65,7 +65,7 @@ public class MistveilPlains extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
         this.subtype.add(SubType.PLAINS);
 
-        // <i>({tap}: Add {W} to your mana pool.)</i>
+        // <i>({tap}: Add {W}.)</i>
         this.addAbility(new WhiteManaAbility());
 
         // Mistveil Plains enters the battlefield tapped.

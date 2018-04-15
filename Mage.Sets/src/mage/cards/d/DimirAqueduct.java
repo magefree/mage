@@ -55,7 +55,7 @@ public class DimirAqueduct extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
         // When Dimir Aqueduct enters the battlefield, return a land you control to its owner's hand.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(filter)));
-        // {tap}: Add {U}{B} to your mana pool.
+        // {tap}: Add {U}{B}.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 0, 1, 0, 1, 0, 0, 0), new TapSourceCost()));
     }
 

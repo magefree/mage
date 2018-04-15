@@ -46,8 +46,8 @@ public class CastDestroySpellsTest extends CardTestPlayerBaseAI {
         // - Return target creature card with converted mana cost 1 or less from your graveyard to the battlefield.
         addCard(Zone.HAND, playerA, "Orzhov Charm"); // {W}{B}
 
-        // {T}: Add {C} to your mana pool.
-        // {T}  {W/B}, {T}: Add {W}{W}, {W}{B}, or {B}{B} to your mana pool.
+        // {T}: Add {C}.
+        // {T}  {W/B}, {T}: Add {W}{W}, {W}{B}, or {B}{B}.
         addCard(Zone.BATTLEFIELD, playerA, "Fetid Heath", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
 

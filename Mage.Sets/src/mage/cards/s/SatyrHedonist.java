@@ -52,7 +52,7 @@ public class SatyrHedonist extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        // {R}, Sacrifice Satyr Hedonist: Add {R}{R}{R} to your mana pool.
+        // {R}, Sacrifice Satyr Hedonist: Add {R}{R}{R}.
         SimpleManaAbility ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.RedMana(3), new ManaCostsImpl("{R}"));
         ability .addCost(new SacrificeSourceCost());
         this.addAbility(ability);

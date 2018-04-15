@@ -49,7 +49,7 @@ public class SeaGateWreckage extends CardImpl {
     public SeaGateWreckage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         
         // {2}{C}, {T}: Draw a card. Activate this ability only if you have no cards in hand.

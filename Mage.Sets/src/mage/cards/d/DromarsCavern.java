@@ -60,7 +60,7 @@ public class DromarsCavern extends CardImpl {
 
         // When Dromar's Cavern enters the battlefield, sacrifice it unless you return a non-Lair land you control to its owner's hand.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(filter)))));
-        // {tap}: Add {W}, {U}, or {B} to your mana pool.
+        // {tap}: Add {W}, {U}, or {B}.
         this.addAbility(new WhiteManaAbility()); 
         this.addAbility(new BlueManaAbility());
         this.addAbility(new BlackManaAbility());

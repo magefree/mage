@@ -48,10 +48,10 @@ public class TwilightMire extends CardImpl {
     public TwilightMire (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
         
-        // {R/W}, {tap}: Add {R}{R}, {R}{W}, or {W}{W} to your mana pool.
+        // {R/W}, {tap}: Add {R}{R}, {R}{W}, or {W}{W}.
         this.addAbility(new ColorlessManaAbility());
         
-        // {B/G}, {tap}: Add {B}{B}, {B}{G}, or {G}{G} to your mana pool.
+        // {B/G}, {tap}: Add {B}{B}, {B}{G}, or {G}{G}.
         SimpleManaAbility ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana(2), new ManaCostsImpl("{B/G}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

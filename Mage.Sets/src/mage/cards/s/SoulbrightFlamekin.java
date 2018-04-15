@@ -61,7 +61,7 @@ public class SoulbrightFlamekin extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        // {2}: Target creature gains trample until end of turn. If this is the third time this ability has resolved this turn, you may add {R}{R}{R}{R}{R}{R}{R}{R} to your mana pool.
+        // {2}: Target creature gains trample until end of turn. If this is the third time this ability has resolved this turn, you may add {R}{R}{R}{R}{R}{R}{R}{R}.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{2}"));
         ability.addEffect(new SoulbrightFlamekinEffect());
         ability.addTarget(new TargetCreaturePermanent());
@@ -88,7 +88,7 @@ class SoulbrightFlamekinEffect extends OneShotEffect {
 
     public SoulbrightFlamekinEffect() {
         super(Outcome.Damage);
-        this.staticText = "If this is the third time this ability has resolved this turn, you may add {R}{R}{R}{R}{R}{R}{R}{R} to your mana pool";
+        this.staticText = "If this is the third time this ability has resolved this turn, you may add {R}{R}{R}{R}{R}{R}{R}{R}";
     }
 
     public SoulbrightFlamekinEffect(final SoulbrightFlamekinEffect effect) {

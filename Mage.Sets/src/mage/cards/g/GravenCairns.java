@@ -47,10 +47,10 @@ public class GravenCairns extends CardImpl {
     public GravenCairns(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         
-        // {B/R}, {tap}: Add {B}{B}, {B}{R}, or {R}{R} to your mana pool.
+        // {B/R}, {tap}: Add {B}{B}, {B}{R}, or {R}{R}.
         SimpleManaAbility ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana(2), new ManaCostsImpl("{B/R}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

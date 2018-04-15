@@ -62,7 +62,7 @@ public class FertileThicket extends CardImpl {
         // When Fertile Thicket enters the battlefield, you may look at the top five cards of your library. If you do, reveal up to one basic land card from among them, then put that card on top of your library and the rest on the bottom in any order.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new FertileThicketEffect(), true));
 
-        // {T}: Add {G} to your mana pool.
+        // {T}: Add {G}.
         this.addAbility(new GreenManaAbility());
     }
 

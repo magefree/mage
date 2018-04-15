@@ -62,11 +62,11 @@ public class BasalSliver extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // All Slivers have "Sacrifice this permanent: Add {B}{B} to your mana pool."
+        // All Slivers have "Sacrifice this permanent: Add {B}{B}."
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana(2), new SacrificeSourceCost());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(
                 ability, Duration.WhileOnBattlefield,
-                filter, "All Slivers have \"Sacrifice this permanent: Add {B}{B} to your mana pool.\"")));
+                filter, "All Slivers have \"Sacrifice this permanent: Add {B}{B}.\"")));
     }
 
     public BasalSliver(final BasalSliver card) {

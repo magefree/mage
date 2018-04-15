@@ -46,7 +46,7 @@ public class SeismicSpike extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}{R}");
 
 
-        // Destroy target land. Add {R}{R} to your mana pool.
+        // Destroy target land. Add {R}{R}.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetLandPermanent());
         this.getSpellAbility().addEffect(new BasicManaEffect(Mana.RedMana(2)));

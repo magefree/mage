@@ -50,7 +50,7 @@ public class TempleOfDeceit extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
         // When Temple of Deceit enters the battlefield, scry 1.</i>
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ScryEffect(1)));
-        // {T}: Add {U} or {B} to your mana pool.
+        // {T}: Add {U} or {B}.
         this.addAbility(new BlueManaAbility());
         this.addAbility(new BlackManaAbility());
     }

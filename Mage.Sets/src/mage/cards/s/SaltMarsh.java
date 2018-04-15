@@ -46,7 +46,7 @@ public class SaltMarsh extends CardImpl {
 
         // Salt Marsh enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
-        // {tap}: Add {U} or {B} to your mana pool.
+        // {tap}: Add {U} or {B}.
         this.addAbility(new BlueManaAbility());
         this.addAbility(new BlackManaAbility());
     }

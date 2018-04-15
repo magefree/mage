@@ -49,7 +49,7 @@ public class TerrainGenerator extends CardImpl {
     public TerrainGenerator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {tap}: Add {C} to your mana pool.
+        // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         
         // {2}, {tap}: You may put a basic land card from your hand onto the battlefield tapped.

@@ -50,7 +50,7 @@ public class FetidPools extends CardImpl {
         this.subtype.add(SubType.ISLAND);
         this.subtype.add(SubType.SWAMP);
 
-        // <i>({T}: Add {U} or {B} to your mana pool.)</i>
+        // <i>({T}: Add {U} or {B}.)</i>
         this.addAbility(new BlueManaAbility());
         this.addAbility(new BlackManaAbility());
 

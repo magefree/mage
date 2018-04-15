@@ -48,7 +48,7 @@ public class RixMaadiDungeonPalace extends CardImpl {
     public RixMaadiDungeonPalace(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {tap}: Add {C} to your mana pool.
+        // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
 
         // {1}{B}{R}, {tap}: Each player discards a card. Activate this ability only any time you could cast a sorcery.

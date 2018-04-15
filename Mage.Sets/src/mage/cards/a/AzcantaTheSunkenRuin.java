@@ -67,7 +67,7 @@ public class AzcantaTheSunkenRuin extends CardImpl {
         this.transformable = true;
 
         // (Transforms from Search for Azcanta)/
-        // {T} : Add {U} to your mana pool.
+        // {T} : Add {U}.
         this.addAbility(new BlueManaAbility());
 
         // {2}{U} , {T} : Look at the top four cards of your library. You may reveal a noncreature, nonland card from among them and put it into your hand. Put the rest on the bottom of your library in any order.

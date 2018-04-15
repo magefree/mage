@@ -53,7 +53,7 @@ public class KorHaven extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
         addSuperType(SuperType.LEGENDARY);
 
-        // {tap}: Add {C} to your mana pool.
+        // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         
         // {1}{W}, {tap}: Prevent all combat damage that would be dealt by target attacking creature this turn.

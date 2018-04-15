@@ -75,7 +75,7 @@ public class GnarlrootTrapper extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // {T}, Pay 1 life: Add {G} to your mana pool. Spend this mana only to cast an Elf creature spell.
+        // {T}, Pay 1 life: Add {G}. Spend this mana only to cast an Elf creature spell.
         Ability ability = new ConditionalColoredManaAbility(new TapSourceCost(), Mana.GreenMana(1), new GnarlrootTrapperManaBuilder());
         ability.addCost(new PayLifeCost(1));
         this.addAbility(ability);

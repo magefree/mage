@@ -46,7 +46,7 @@ public class DakmorSalvage extends CardImpl {
 
         // Dakmor Salvage enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
-        // {tap}: Add {B} to your mana pool.
+        // {tap}: Add {B}.
         this.addAbility(new BlackManaAbility());
         // Dredge 2
         this.addAbility(new DredgeAbility(2));

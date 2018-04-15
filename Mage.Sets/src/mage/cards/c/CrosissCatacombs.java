@@ -61,7 +61,7 @@ public class CrosissCatacombs extends CardImpl {
 
         // When Crosis's Catacombs enters the battlefield, sacrifice it unless you return a non-Lair land you control to its owner's hand.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(filter)))));
-        // {tap}: Add {U}, {B}, or {R} to your mana pool.
+        // {tap}: Add {U}, {B}, or {R}.
         this.addAbility(new BlueManaAbility());
         this.addAbility(new BlackManaAbility());
         this.addAbility(new RedManaAbility());

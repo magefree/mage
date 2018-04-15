@@ -52,7 +52,7 @@ public class BlossomingSands extends CardImpl {
         // When Blossoming Sands enters the battlefield, you gain 1 life.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(1)));
 
-        // {T}: Add {G} or {W} to your mana pool.
+        // {T}: Add {G} or {W}.
         this.addAbility(new GreenManaAbility());
         this.addAbility(new WhiteManaAbility());           
     }

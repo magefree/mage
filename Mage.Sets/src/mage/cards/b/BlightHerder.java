@@ -58,7 +58,7 @@ public class BlightHerder extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
 
-        // When you cast Blight Herder, you may put two cards your opponents own from exile into their owners' graveyards. If you do, create three 1/1 colorless Eldrazi Scion creature tokens. They have "Sacrifice this creature: Add {C} to your mana pool."
+        // When you cast Blight Herder, you may put two cards your opponents own from exile into their owners' graveyards. If you do, create three 1/1 colorless Eldrazi Scion creature tokens. They have "Sacrifice this creature: Add {C}."
         this.addAbility(new CastSourceTriggeredAbility(new BlightHerderEffect(), true));
     }
 
@@ -82,7 +82,7 @@ class BlightHerderEffect extends OneShotEffect {
 
     public BlightHerderEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "you may put two cards your opponents own from exile into their owners' graveyards. If you do, create three 1/1 colorless Eldrazi Scion creature tokens. They have \"Sacrifice this creature: Add {C} to your mana pool.";
+        this.staticText = "you may put two cards your opponents own from exile into their owners' graveyards. If you do, create three 1/1 colorless Eldrazi Scion creature tokens. They have \"Sacrifice this creature: Add {C}.";
     }
 
     public BlightHerderEffect(final BlightHerderEffect effect) {

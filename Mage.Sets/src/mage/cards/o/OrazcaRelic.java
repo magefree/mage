@@ -54,7 +54,7 @@ public class OrazcaRelic extends CardImpl {
         // Ascend
         this.addAbility(new AscendAbility());
 
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
 
         // {T}, Sacrifice Orazca Relic: You gain 3 life and draw a card. Activate this ability only if you have the city's blessing.

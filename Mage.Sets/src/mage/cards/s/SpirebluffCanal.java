@@ -56,7 +56,7 @@ public class SpirebluffCanal extends CardImpl {
         String abilityText = " tapped unless you control two or fewer other lands";
         this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
 
-        // {T}: Add {U} or {R} to your mana pool.
+        // {T}: Add {U} or {R}.
         this.addAbility(new BlueManaAbility());
         this.addAbility(new RedManaAbility());
     }

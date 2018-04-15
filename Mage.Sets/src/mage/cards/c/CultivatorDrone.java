@@ -65,7 +65,7 @@ public class CultivatorDrone extends CardImpl {
 
         // Devoid
         this.addAbility(new DevoidAbility(this.color));
-        // {T}: Add {C} to your mana pool. Spend this mana only to cast a colorless spell, activate an ability of a colorless permanent, or pay a cost that contains {C}.
+        // {T}: Add {C}. Spend this mana only to cast a colorless spell, activate an ability of a colorless permanent, or pay a cost that contains {C}.
         this.addAbility(new ConditionalColorlessManaAbility(new TapSourceCost(), 1, new CultivatorDroneManaBuilder()));
     }
 

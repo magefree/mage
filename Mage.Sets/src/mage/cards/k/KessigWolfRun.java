@@ -53,7 +53,7 @@ public class KessigWolfRun extends CardImpl {
     public KessigWolfRun(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
 
         // {X}{R}{G}, {T}: Target creature gets +X/+0 and gains trample until end of turn.

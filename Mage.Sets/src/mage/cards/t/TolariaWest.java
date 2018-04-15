@@ -46,7 +46,7 @@ public class TolariaWest extends CardImpl {
 
         // Tolaria West enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
-        // {T}: Add {U} to your mana pool.
+        // {T}: Add {U}.
         this.addAbility(new BlueManaAbility());
         // Transmute {1}{U}{U}
         this.addAbility(new TransmuteAbility("{1}{U}{U}"));

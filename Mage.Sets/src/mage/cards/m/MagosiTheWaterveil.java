@@ -57,7 +57,7 @@ public class MagosiTheWaterveil extends CardImpl {
         // Magosi, the Waterveil enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
 
-        // {T}: Add {U} to your mana pool.
+        // {T}: Add {U}.
         this.addAbility(new BlueManaAbility());
 
         // {U}, {T}: Put an eon counter on Magosi, the Waterveil. Skip your next turn.

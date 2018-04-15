@@ -59,7 +59,7 @@ public class HomewardPath extends CardImpl {
     public HomewardPath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {tap}: Add {C} to your mana pool.
+        // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         // {tap}: Each player gains control of all creatures he or she owns.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new HomewardPathControlEffect(), new TapSourceCost()));

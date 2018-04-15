@@ -53,7 +53,7 @@ public class TrevasAttendant extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // {1}, Sacrifice Treva's Attendant: Add {G}{W}{U} to your mana pool.
+        // {1}, Sacrifice Treva's Attendant: Add {G}{W}{U}.
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 1, 1, 1, 0, 0, 0, 0), new ManaCostsImpl("{1}"));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

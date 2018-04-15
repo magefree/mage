@@ -57,7 +57,7 @@ public class HostileDesert extends CardImpl {
 
         this.subtype.add(SubType.DESERT);
 
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         addAbility(new ColorlessManaAbility());
         // {2}, Exile a land card from your graveyard: Hostile Desert becomes a 3/4 Elemental creature until end of turn. It's still a land.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new HostileDesertToken(), "land", Duration.EndOfTurn), new GenericManaCost(2));

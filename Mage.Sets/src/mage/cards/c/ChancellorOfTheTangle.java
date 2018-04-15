@@ -49,7 +49,7 @@ import mage.game.events.GameEvent.EventType;
  */
 public class ChancellorOfTheTangle extends CardImpl {
 
-    private static String abilityText = "at the beginning of your first main phase, add {G} to your mana pool";
+    private static String abilityText = "at the beginning of your first main phase, add {G}";
 
     public ChancellorOfTheTangle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}{G}");
@@ -59,7 +59,7 @@ public class ChancellorOfTheTangle extends CardImpl {
         this.power = new MageInt(6);
         this.toughness = new MageInt(7);
 
-        // You may reveal this card from your opening hand. If you do, at the beginning of your first main phase, add {G} to your mana pool.
+        // You may reveal this card from your opening hand. If you do, at the beginning of your first main phase, add {G}.
         this.addAbility(new ChancellorAbility(new ChancellorOfTheTangleDelayedTriggeredAbility(), abilityText));
 
         this.addAbility(VigilanceAbility.getInstance());

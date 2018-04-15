@@ -46,7 +46,7 @@ public class LiturgyOfBlood extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}{B}");
 
 
-        // Destroy target creature. Add {B}{B}{B} to your mana pool.
+        // Destroy target creature. Add {B}{B}{B}.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new BasicManaEffect(Mana.BlackMana(3)));

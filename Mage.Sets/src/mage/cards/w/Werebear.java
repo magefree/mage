@@ -58,7 +58,7 @@ public class Werebear extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // {tap}: Add {G} to your mana pool.
+        // {tap}: Add {G}.
         this.addAbility(new GreenManaAbility());
         // Threshold - Werebear gets +3/+3 as long as seven or more cards are in your graveyard.
         Ability thresholdAbility = new SimpleStaticAbility(

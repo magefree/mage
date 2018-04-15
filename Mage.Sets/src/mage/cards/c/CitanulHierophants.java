@@ -61,7 +61,7 @@ public class CitanulHierophants extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
-        //Creatures you control have "{T}: Add {G} to your mana pool."
+        //Creatures you control have "{T}: Add {G}."
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(new GreenManaAbility(), Duration.WhileOnBattlefield, filter, false)));
     }
 

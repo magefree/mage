@@ -57,7 +57,7 @@ public class SecludedGlen extends CardImpl {
 
         // As Secluded Glen enters the battlefield, you may reveal a Faerie card from your hand. If you don't, Secluded Glen enters the battlefield tapped.
         this.addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new RevealTargetFromHandCost(new TargetCardInHand(filter))), "you may reveal a Faerie card from your hand. If you don't, {this} enters the battlefield tapped"));
-        // {tap}: Add {U} or {B} to your mana pool.
+        // {tap}: Add {U} or {B}.
         this.addAbility(new BlueManaAbility());
         this.addAbility(new BlackManaAbility());
     }

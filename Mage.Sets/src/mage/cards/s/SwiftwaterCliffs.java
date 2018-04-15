@@ -50,7 +50,7 @@ public class SwiftwaterCliffs extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
         // When Swiftwater Cliffs enters the battlefield, you gain 1 life.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(1)));
-        // {T}: Add {U} or {R} to your mana pool.
+        // {T}: Add {U} or {R}.
         this.addAbility(new BlueManaAbility());
         this.addAbility(new RedManaAbility());        
               

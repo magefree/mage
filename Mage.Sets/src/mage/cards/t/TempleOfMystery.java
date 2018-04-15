@@ -50,7 +50,7 @@ public class TempleOfMystery extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
         // When Temple of Mystery enters the battlefield, scry 1.</i>
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ScryEffect(1)));
-        // {T}: Add {G} or {U} to your mana pool.
+        // {T}: Add {G} or {U}.
         this.addAbility(new GreenManaAbility());
         this.addAbility(new BlueManaAbility());
 

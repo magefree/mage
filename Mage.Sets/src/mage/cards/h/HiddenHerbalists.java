@@ -54,12 +54,12 @@ public class HiddenHerbalists extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // <i>Revolt</i> &mdash When Hidden Herbalists enters the battlefield, if a permanent you controlled left the battlefield this turn, add {G}{G} to your mana pool;
+        // <i>Revolt</i> &mdash When Hidden Herbalists enters the battlefield, if a permanent you controlled left the battlefield this turn, add {G}{G};
         this.addAbility(
                 new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(
                         new BasicManaEffect(Mana.GreenMana(2)), false), RevoltCondition.instance,
                         "<i>Revolt</i> &mdash; When {this} enters the battlefield, if a permanent you controlled left"
-                        + " the battlefield this turn, add {G}{G} to your mana pool."),
+                        + " the battlefield this turn, add {G}{G}."),
                 new RevoltWatcher()
         );
     }

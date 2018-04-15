@@ -57,7 +57,7 @@ public class MirenTheMoaningWell extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
         addSuperType(SuperType.LEGENDARY);
 
-        // {tap}: Add {C} to your mana pool.
+        // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
 
         // {3}, {tap}, Sacrifice a creature: You gain life equal to the sacrificed creature's toughness.

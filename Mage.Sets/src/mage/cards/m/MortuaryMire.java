@@ -56,7 +56,7 @@ public class MortuaryMire extends CardImpl {
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.addAbility(ability);
 
-        // {T}: Add {B} to your mana pool.
+        // {T}: Add {B}.
         this.addAbility(new BlackManaAbility());
     }
 

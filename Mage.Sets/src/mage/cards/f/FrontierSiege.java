@@ -64,7 +64,7 @@ public class FrontierSiege extends CardImpl {
         filter.add(new AbilityPredicate(FlyingAbility.class));
         filter2.add(new ControllerPredicate(TargetController.NOT_YOU));
     }
-    private final static String ruleTrigger1 = "&bull Khans &mdash; At the beginning of each of your main phases, add {G}{G} to your mana pool.";
+    private final static String ruleTrigger1 = "&bull Khans &mdash; At the beginning of each of your main phases, add {G}{G}.";
     private final static String ruleTrigger2 = "&bull Dragons &mdash; Whenever a creature with flying enters the battlefield under your control, you may have it fight target creature you don't control.";
 
     public FrontierSiege(UUID ownerId, CardSetInfo setInfo) {
@@ -74,7 +74,7 @@ public class FrontierSiege extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new ChooseModeEffect("Khans or Dragons?", "Khans", "Dragons"), null,
                 "As {this} enters the battlefield, choose Khans or Dragons.", ""));
 
-        // * Khans - At the beginning of each of your main phases, add {G}{G} to your mana pool.
+        // * Khans - At the beginning of each of your main phases, add {G}{G}.
         this.addAbility(new ConditionalTriggeredAbility(
                 new FrontierSiegeKhansTriggeredAbility(),
                 new ModeChoiceSourceCondition("Khans"),

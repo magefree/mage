@@ -67,12 +67,12 @@ public class SandSilos extends CardImpl {
         OneShotEffect addStorageCounter = new AddCountersSourceEffect(CounterType.STORAGE.createInstance());
         Effect effect = new ConditionalOneShotEffect(addStorageCounter, SourceTappedCondition.instance, "if {this} is tapped, put a storage counter on it");
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.YOU, false));
-        // {tap}, Remove any number of storage counters from Sand Silos: Add {U} to your mana pool for each storage counter removed this way.
+        // {tap}, Remove any number of storage counters from Sand Silos: Add {U} for each storage counter removed this way.
         Ability ability = new DynamicManaAbility(
                 Mana.BlueMana(1),
                 new RemovedCountersForCostValue(),
                 new TapSourceCost(),
-                "Add {U} to your mana pool for each storage counter removed this way",
+                "Add {U} for each storage counter removed this way",
                 true, new CountersSourceCount(CounterType.STORAGE));
         ability.addCost(new RemoveVariableCountersSourceCost(CounterType.STORAGE.createInstance(),
                 "Remove any number of storage counters from {this}"));

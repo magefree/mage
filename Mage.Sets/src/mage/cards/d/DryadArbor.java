@@ -51,7 +51,7 @@ public class DryadArbor extends CardImpl {
 
         this.color.setGreen(true);
 
-        // <i>(Dryad Arbor isn't a spell, it's affected by summoning sickness, and it has "{tap}: Add {G} to your mana pool.")</i>
+        // <i>(Dryad Arbor isn't a spell, it's affected by summoning sickness, and it has "{tap}: Add {G}.")</i>
         this.addAbility(new GreenManaAbility());
     }
 

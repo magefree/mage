@@ -50,7 +50,7 @@ public class TempleOfTriumph extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
         // When Temple of Triumph enters the battlefield, scry 1.</i>
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ScryEffect(1)));
-        // {T}: Add {R} or {W} to your mana pool.
+        // {T}: Add {R} or {W}.
         this.addAbility(new RedManaAbility());
         this.addAbility(new WhiteManaAbility());
 

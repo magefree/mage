@@ -57,7 +57,7 @@ public class VisageOfBolas extends CardImpl {
         // When Visage of Bolas enters the battlefield, you may search your library and/or graveyard for a card named Nicol Bolas, the Deceiver, reveal it, and put it into your hand.  If you search your library this way, shuffle it.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryGraveyardPutInHandEffect(filter), true));
 
-        // {t}: Add {U}, {B}, or {R} to your mana pool.
+        // {t}: Add {U}, {B}, or {R}.
         this.addAbility(new BlueManaAbility());
         this.addAbility(new BlackManaAbility());
         this.addAbility(new RedManaAbility());

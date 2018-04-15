@@ -68,7 +68,7 @@ public class TinderWall extends CardImpl {
 
         // Defender
         this.addAbility(DefenderAbility.getInstance());
-        // Sacrifice Tinder Wall: Add {R}{R} to your mana pool.
+        // Sacrifice Tinder Wall: Add {R}{R}.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.RedMana(2), new SacrificeSourceCost()));
         // {R}, Sacrifice Tinder Wall: Tinder Wall deals 2 damage to target creature it's blocking.
         FilterAttackingCreature filter = new FilterAttackingCreature("creature it's blocking");

@@ -48,9 +48,9 @@ public class CallTheScions extends CardImpl {
         // Devoid
         this.addAbility(new DevoidAbility(this.color));
 
-        // Create two 1/1 colorless Eldrazi Scion creature tokens. They have "Sacrifice this creature: add {C} to your mana pool."
+        // Create two 1/1 colorless Eldrazi Scion creature tokens. They have "Sacrifice this creature: add {C}."
         Effect effect = new CreateTokenEffect(new EldraziScionToken(), 2);
-        effect.setText("create two 1/1 colorless Eldrazi Scion creature tokens. They have \"Sacrifice this creature: Add {C} to your mana pool.\"");
+        effect.setText("create two 1/1 colorless Eldrazi Scion creature tokens. They have \"Sacrifice this creature: Add {C}.\"");
         this.getSpellAbility().addEffect(effect);
 
     }

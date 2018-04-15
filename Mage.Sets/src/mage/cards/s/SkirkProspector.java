@@ -60,7 +60,7 @@ public class SkirkProspector extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // Sacrifice a Goblin: Add {R} to your mana pool.
+        // Sacrifice a Goblin: Add {R}.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.RedMana(1), new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1,filter,true))));
     }
 

@@ -54,7 +54,7 @@ public class ElvishAberration extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
 
-        // {tap}: Add {G}{G}{G} to your mana pool.
+        // {tap}: Add {G}{G}{G}.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.GreenMana(3), new TapSourceCost()));
         // Forestcycling {2}
         this.addAbility(new ForestcyclingAbility(new ManaCostsImpl("{2}")));

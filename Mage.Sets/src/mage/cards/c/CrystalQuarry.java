@@ -48,9 +48,9 @@ public class CrystalQuarry extends CardImpl {
     public CrystalQuarry(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {tap}: Add {C} to your mana pool.
+        // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
-        // {5}, {tap}: Add {W}{U}{B}{R}{G} to your mana pool.
+        // {5}, {tap}: Add {W}{U}{B}{R}{G}.
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(1, 1, 1, 1, 1, 0, 0, 0), new ManaCostsImpl("{5}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

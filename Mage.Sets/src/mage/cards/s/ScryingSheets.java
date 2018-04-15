@@ -56,7 +56,7 @@ public class ScryingSheets extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
         addSuperType(SuperType.SNOW);
 
-        // {tap}: Add {C} to your mana pool.
+        // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
 
         // {1}{S}, {T}: Look at the top card of your library. If that card is snow, you may reveal it and put it into your hand.

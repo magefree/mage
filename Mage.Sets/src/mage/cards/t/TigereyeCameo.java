@@ -43,7 +43,7 @@ public class TigereyeCameo extends CardImpl {
     public TigereyeCameo(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
-        // {tap}: Add {G} or {W} to your mana pool.
+        // {tap}: Add {G} or {W}.
         this.addAbility(new GreenManaAbility());
         this.addAbility(new WhiteManaAbility());
     }

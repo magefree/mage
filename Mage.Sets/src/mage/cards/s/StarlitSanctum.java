@@ -58,7 +58,7 @@ public class StarlitSanctum extends CardImpl {
     public StarlitSanctum(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {tap}: Add {C} to your mana pool.
+        // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         // {W}, {tap}, Sacrifice a Cleric creature: You gain life equal to the sacrificed creature's toughness.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new StarlitSanctumWhiteEffect(), new ManaCostsImpl<>("{W}"));

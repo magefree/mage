@@ -50,7 +50,7 @@ public class AetherHub extends CardImpl {
         // When Aether Hub enters the battlefield, you get {E}.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GetEnergyCountersControllerEffect(1)));
 
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
 
         // {T}, Pay {E}: Add one mana of any color to your mana pool.

@@ -46,7 +46,7 @@ public class ElfhamePalace extends CardImpl {
 
         // Elfhame Palace enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
-        // {tap}: Add {G} or {W} to your mana pool.
+        // {tap}: Add {G} or {W}.
         this.addAbility(new GreenManaAbility());
         this.addAbility(new WhiteManaAbility());
     }

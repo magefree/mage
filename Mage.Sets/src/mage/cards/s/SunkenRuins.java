@@ -47,9 +47,9 @@ public class SunkenRuins extends CardImpl {
     public SunkenRuins(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {tap}: Add {C} to your mana pool.
+        // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
-        // {UB}, {tap}: Add {U}{U}, {U}{B}, or {B}{B} to your mana pool.
+        // {UB}, {tap}: Add {U}{U}, {U}{B}, or {B}{B}.
         SimpleManaAbility ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlueMana(2), new ManaCostsImpl("{U/B}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

@@ -53,7 +53,7 @@ public class AzoriusCluestone extends CardImpl {
     public AzoriusCluestone(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
-        // {T}: Add {W} or {U} to your mana pool.
+        // {T}: Add {W} or {U}.
         this.addAbility(new WhiteManaAbility());
         this.addAbility(new BlueManaAbility());
 

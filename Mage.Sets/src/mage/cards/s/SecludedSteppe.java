@@ -47,7 +47,7 @@ public class SecludedSteppe extends CardImpl {
 
         // Secluded Steppe enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
-        // {tap}: Add {W} to your mana pool.
+        // {tap}: Add {W}.
         this.addAbility(new WhiteManaAbility());
         // Cycling {W}
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{W}")));

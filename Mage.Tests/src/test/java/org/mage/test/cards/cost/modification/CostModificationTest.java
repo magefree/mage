@@ -85,7 +85,7 @@ public class CostModificationTest extends CardTestPlayerBase {
         // Spend only mana produced by creatures to cast Myr Superion.
         addCard(Zone.HAND, playerA, "Myr Superion");
 
-        activateManaAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Add {G} to your mana pool.");
+        activateManaAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Add {G}.");
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Myr Superion");
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -123,7 +123,7 @@ public class CostModificationTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Goblin Electromancer");
         addCard(Zone.BATTLEFIELD, playerA, "Mountain");
 
-        // Add {R}{R}{R} to your mana pool.
+        // Add {R}{R}{R}.
         addCard(Zone.HAND, playerA, "Pyretic Ritual");
         // Fated Conflagration deals 5 damage to target creature or planeswalker.
         // If it's your turn, scry 2. (Look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)

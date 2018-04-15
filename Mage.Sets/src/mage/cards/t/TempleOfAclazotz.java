@@ -58,7 +58,7 @@ public class TempleOfAclazotz extends CardImpl {
         addSuperType(SuperType.LEGENDARY);
         this.nightCard = true;
 
-        // {T}: Add {B} to your mana pool
+        // {T}: Add {B}
         this.addAbility(new BlackManaAbility());
 
         // {T}, Sacrifice a creature: You gain life equal to the sacrificed creature’s toughness.

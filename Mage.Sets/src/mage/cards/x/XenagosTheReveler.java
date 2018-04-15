@@ -69,7 +69,7 @@ public class XenagosTheReveler extends CardImpl {
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
 
-        // +1: Add X mana in any combination of {R} and/or {G} to your mana pool, where X is the number of creatures you control.
+        // +1: Add X mana in any combination of {R} and/or {G}, where X is the number of creatures you control.
         this.addAbility(new LoyaltyAbility(new XenagosManaEffect(), +1));
 
         // 0: Create a 2/2 red and green Satyr creature token with haste.
@@ -94,7 +94,7 @@ class XenagosManaEffect extends OneShotEffect {
 
     public XenagosManaEffect() {
         super(Outcome.PutManaInPool);
-        this.staticText = "Add X mana in any combination of {R} and/or {G} to your mana pool, where X is the number of creatures you control";
+        this.staticText = "Add X mana in any combination of {R} and/or {G}, where X is the number of creatures you control";
     }
 
     public XenagosManaEffect(final XenagosManaEffect effect) {

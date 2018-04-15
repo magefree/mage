@@ -51,7 +51,7 @@ public class BogInitiate extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // {1}: Add {B} to your mana pool.
+        // {1}: Add {B}.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana(1), new ManaCostsImpl("{1}")));
     }
 

@@ -46,9 +46,9 @@ public class TalismanOfImpulse extends CardImpl {
     public TalismanOfImpulse(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
-        // {tap}: Add {C} to your mana pool.
+        // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
-        // {tap}: Add {R} or {G} to your mana pool. Talisman of Impulse deals 1 damage to you.
+        // {tap}: Add {R} or {G}. Talisman of Impulse deals 1 damage to you.
         Ability redManaAbility = new RedManaAbility();
         redManaAbility.addEffect(new DamageControllerEffect(1));
         this.addAbility(redManaAbility);

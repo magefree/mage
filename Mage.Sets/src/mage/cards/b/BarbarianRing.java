@@ -53,7 +53,7 @@ public class BarbarianRing extends CardImpl {
     public BarbarianRing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {T}: Add {R} to your mana pool. Barbarian Ring deals 1 damage to you.
+        // {T}: Add {R}. Barbarian Ring deals 1 damage to you.
         Ability redManaAbility = new RedManaAbility();
         redManaAbility.addEffect(new DamageControllerEffect(1));
         this.addAbility(redManaAbility);

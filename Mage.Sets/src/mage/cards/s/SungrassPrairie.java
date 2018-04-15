@@ -47,7 +47,7 @@ public class SungrassPrairie extends CardImpl {
     public SungrassPrairie(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {1}, {tap}: Add {G}{W} to your mana pool.
+        // {1}, {tap}: Add {G}{W}.
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 1, 0, 1, 0, 0, 0, 0), new ManaCostsImpl("{1}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

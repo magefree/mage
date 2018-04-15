@@ -46,10 +46,10 @@ public class ToothOfRamos extends CardImpl {
     public ToothOfRamos(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
-        // {tap}: Add {W} to your mana pool.
+        // {tap}: Add {W}.
         this.addAbility(new WhiteManaAbility());
         
-        // Sacrifice Tooth of Ramos: Add {W} to your mana pool.
+        // Sacrifice Tooth of Ramos: Add {W}.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.WhiteMana(1), new SacrificeSourceCost()));
     }
 

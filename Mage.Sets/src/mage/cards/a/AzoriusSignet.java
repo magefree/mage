@@ -47,7 +47,7 @@ public class AzoriusSignet extends CardImpl {
     public AzoriusSignet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
-        // {1}, {tap}: Add {W}{U} to your mana pool.
+        // {1}, {tap}: Add {W}{U}.
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 0, 1, 1, 0, 0, 0, 0), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

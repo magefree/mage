@@ -290,7 +290,7 @@ public class ZoneChangeReplacementTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Legacy Weapon");
 
         addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
-        // Counter target spell. At the beginning of your next main phase, add {X} to your mana pool, where X is that spell's converted mana cost.
+        // Counter target spell. At the beginning of your next main phase, add {X}, where X is that spell's converted mana cost.
         addCard(Zone.HAND, playerB, "Mana Drain");
         addCard(Zone.HAND, playerB, "Legacy Weapon");
 

@@ -62,7 +62,7 @@ public class SandstoneBridge extends CardImpl {
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 
-        // {T}: Add {W} to your mana pool.
+        // {T}: Add {W}.
         this.addAbility(new WhiteManaAbility());
     }
 

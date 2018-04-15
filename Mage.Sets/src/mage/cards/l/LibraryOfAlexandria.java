@@ -47,7 +47,7 @@ public class LibraryOfAlexandria extends CardImpl {
     public LibraryOfAlexandria(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        // {tap}: Add {C} to your mana pool.
+        // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         // {tap}: Draw a card. Activate this ability only if you have exactly seven cards in hand.
         this.addAbility(new ConditionalActivatedAbility(

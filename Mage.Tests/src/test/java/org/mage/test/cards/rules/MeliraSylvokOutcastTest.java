@@ -55,7 +55,7 @@ public class MeliraSylvokOutcastTest extends CardTestPlayerBase {
         // Creatures you control can't have -1/-1 counters placed on them.
         // Creatures your opponents control lose infect.
         addCard(Zone.BATTLEFIELD, playerA, "Melira, Sylvok Outcast", 2); // 2/2
-        // {T}: Add {G} to your mana pool.
+        // {T}: Add {G}.
         // Put a -1/-1 counter on Devoted Druid: Untap Devoted Druid.
         addCard(Zone.BATTLEFIELD, playerA, "Devoted Druid", 1); // 0/2
 

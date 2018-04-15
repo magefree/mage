@@ -51,9 +51,9 @@ public class AncientSpring extends CardImpl {
 
         // Ancient Spring enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
-        // {tap}: Add {U} to your mana pool.
+        // {tap}: Add {U}.
         this.addAbility(new BlueManaAbility());
-        // {tap}, Sacrifice Ancient Spring: Add {W}{B} to your mana pool.
+        // {tap}, Sacrifice Ancient Spring: Add {W}{B}.
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 0, 0, 1, 1, 0, 0, 0), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

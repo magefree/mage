@@ -58,7 +58,7 @@ public class GyreSage extends CardImpl {
         // has greater power or toughness than this creature, put a +1/+1 counter on this creature.)
         this.addAbility(new EvolveAbility());
         
-        //{T} : Add {G} to your mana pool for each +1/+1 counter on Gyre Sage.
+        //{T} : Add {G} for each +1/+1 counter on Gyre Sage.
         this.addAbility(new DynamicManaAbility(Mana.GreenMana(1), new CountersSourceCount(CounterType.P1P1)));
     }
 

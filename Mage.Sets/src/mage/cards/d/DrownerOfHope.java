@@ -72,9 +72,9 @@ public class DrownerOfHope extends CardImpl {
         // Devoid
         this.addAbility(new DevoidAbility(this.color));
 
-        // When Drowner of Hope enters the battlefield, create two 1/1 colorless Eldrazi Scion creature tokens. They have "Sacrifice this creature: Add {C} to your mana pool."
+        // When Drowner of Hope enters the battlefield, create two 1/1 colorless Eldrazi Scion creature tokens. They have "Sacrifice this creature: Add {C}."
         Effect effect = new CreateTokenEffect(new EldraziScionToken(), 2);
-        effect.setText("create two 1/1 colorless Eldrazi Scion creature tokens. They have \"Sacrifice this creature: Add {C} to your mana pool");
+        effect.setText("create two 1/1 colorless Eldrazi Scion creature tokens. They have \"Sacrifice this creature: Add {C}");
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect, false));
 
         // Sacrifice an Eldrazi Scion: Tap target creature.

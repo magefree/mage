@@ -47,7 +47,7 @@ public class OrzhovSignet extends CardImpl {
     public OrzhovSignet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
-        // {1}, {T}: Add {W}{B} to your mana pool.
+        // {1}, {T}: Add {W}{B}.
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 0, 0, 1, 1, 0, 0, 0), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

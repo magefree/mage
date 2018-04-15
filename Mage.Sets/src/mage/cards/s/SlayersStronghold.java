@@ -53,7 +53,7 @@ public class SlayersStronghold extends CardImpl {
     public SlayersStronghold(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {tap}: Add {C} to your mana pool.
+        // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         // {R}{W}, {tap}: Target creature gets +2/+0 and gains vigilance and haste until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(2, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}{W}"));

@@ -47,7 +47,7 @@ public class FrontierBivouac extends CardImpl {
 
         // Frontier Bivouac enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
-        // {T}: Add {G}, {U}, or {R} to your mana pool.
+        // {T}: Add {G}, {U}, or {R}.
         this.addAbility(new GreenManaAbility());
         this.addAbility(new BlueManaAbility());
         this.addAbility(new RedManaAbility());

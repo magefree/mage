@@ -50,7 +50,7 @@ public class RuggedHighlands extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
         // When Rugged Highlands enters the battlefield, you gain 1 life.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(1)));
-        // {T}: Add {R} or {G} to your mana pool.
+        // {T}: Add {R} or {G}.
         this.addAbility(new RedManaAbility());
         this.addAbility(new GreenManaAbility());
                 

@@ -51,9 +51,9 @@ public class GeothermalCrevice extends CardImpl {
 
         // Geothermal Crevice enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
-        // {tap}: Add {R} to your mana pool.
+        // {tap}: Add {R}.
         this.addAbility(new RedManaAbility());
-        // {tap}, Sacrifice Geothermal Crevice: Add {B}{G} to your mana pool.
+        // {tap}, Sacrifice Geothermal Crevice: Add {B}{G}.
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 1, 0, 0, 1, 0, 0, 0), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

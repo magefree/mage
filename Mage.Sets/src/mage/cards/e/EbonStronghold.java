@@ -51,9 +51,9 @@ public class EbonStronghold extends CardImpl {
 
         // Ebon Stronghold enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
-        // {tap}: Add {B} to your mana pool.
+        // {tap}: Add {B}.
         this.addAbility(new BlackManaAbility());
-        // {tap}, Sacrifice Ebon Stronghold: Add {B}{B} to your mana pool.
+        // {tap}, Sacrifice Ebon Stronghold: Add {B}{B}.
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana(2), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

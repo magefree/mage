@@ -70,7 +70,7 @@ public class ChandraTorchOfDefiance extends CardImpl {
         LoyaltyAbility ability = new LoyaltyAbility(new ChandraTorchOfDefianceEffect(), 1);
         this.addAbility(ability);
 
-        // +1: Add {R}{R} to your mana pool.
+        // +1: Add {R}{R}.
         this.addAbility(new LoyaltyAbility(new BasicManaEffect(Mana.RedMana(2)), +1));
 
         // -3: Chandra, Torch of Defiance deals 4 damage to target creature.

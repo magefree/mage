@@ -129,7 +129,7 @@ public class SpreadingSeasTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Spreading Seas", 1); // ENCHANTMENT {1}{U}
         addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
 
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         // {1}{R}, {T}: Create a 0/1 red Kobold creature token named Kobolds of Kher Keep.
         addCard(Zone.BATTLEFIELD, playerB, "Kher Keep", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 2);

@@ -63,7 +63,7 @@ public class MoonringIsland extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
         this.subtype.add(SubType.ISLAND);
 
-        // <i>({tap}: Add {U} to your mana pool.)</i>
+        // <i>({tap}: Add {U}.)</i>
         this.addAbility(new BlueManaAbility());
 
         // Moonring Island enters the battlefield tapped.

@@ -39,7 +39,7 @@ import mage.abilities.mana.GreenManaAbility;
 public class LlanowarElvesToken extends TokenImpl {
 
     public LlanowarElvesToken() {
-        super("Llanowar Elves", "1/1 green Elf Druid creature token named Llanowar Elves with \"{T}: Add {G} to your mana pool.\"");
+        super("Llanowar Elves", "1/1 green Elf Druid creature token named Llanowar Elves with \"{T}: Add {G}.\"");
         this.setOriginalExpansionSetCode("FUT");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);

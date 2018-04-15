@@ -51,7 +51,7 @@ public class AbandonedOutpost extends CardImpl {
         // This enters the battlefield tapped
         this.addAbility(new EntersBattlefieldTappedAbility());
 
-        // Tap to add {W} to your mana pool
+        // Tap to add {W}
         this.addAbility(new WhiteManaAbility());
 
         // Tap to add any color mana to your mana pool. Sacrifice Abandoned Outpost.

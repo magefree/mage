@@ -50,7 +50,7 @@ public class ScatteredGroves extends CardImpl {
         this.subtype.add(SubType.FOREST);
         this.subtype.add(SubType.PLAINS);
 
-        // <i>({T}: Add {G} or {W} to your mana pool.)</i>
+        // <i>({T}: Add {G} or {W}.)</i>
         this.addAbility(new GreenManaAbility());
         this.addAbility(new WhiteManaAbility());
 

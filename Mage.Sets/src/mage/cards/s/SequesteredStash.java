@@ -56,7 +56,7 @@ public class SequesteredStash extends CardImpl {
     public SequesteredStash(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {R}: Add {C} to your mana pool.
+        // {R}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
 
         // {4},{T}, Sacrifice Sequestered Stash: Put the top five cards of your library into your graveyard. Then you may put an artifact card from your graveyard on top of your library.

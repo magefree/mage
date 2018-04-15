@@ -46,10 +46,10 @@ public class SkullOfRamos extends CardImpl {
     public SkullOfRamos(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
-        // {tap}: Add {B} to your mana pool.
+        // {tap}: Add {B}.
         this.addAbility(new BlackManaAbility());
         
-        // Sacrifice Skull of Ramos: Add {B} to your mana pool.
+        // Sacrifice Skull of Ramos: Add {B}.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana(1), new SacrificeSourceCost()));
     }
 

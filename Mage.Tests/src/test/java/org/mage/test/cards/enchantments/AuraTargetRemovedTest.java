@@ -36,7 +36,7 @@ public class AuraTargetRemovedTest extends CardTestPlayerBase {
         // Enchanted land is an Island.
         addCard(Zone.HAND, playerA, "Spreading Seas", 1); //Enchantment {1}{U}
 
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         // {2}, {T}, Sacrifice Field of Ruin: Destroy target nonbasic land an opponent controls. Each player searches their library for a basic land card, puts it onto the battlefield, then shuffles their library.
         addCard(Zone.BATTLEFIELD, playerB, "Field of Ruin", 1); //
         addCard(Zone.BATTLEFIELD, playerB, "Island", 2);

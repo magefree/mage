@@ -46,7 +46,7 @@ public class SwarmSurgeTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 9);
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
         // Devoid
-        // When Birthing Hulk enters the battlefield, put two 1/1 colorless Eldrazi Scion creature tokens onto the battlefield. They have "Sacrifice this creature: Add {C} to your mana pool."
+        // When Birthing Hulk enters the battlefield, put two 1/1 colorless Eldrazi Scion creature tokens onto the battlefield. They have "Sacrifice this creature: Add {C}."
         // {1}{C}: Regenerate Birthing Hulk.
         addCard(Zone.HAND, playerA, "Birthing Hulk"); // {6}{G}  5/4
         // Devoid

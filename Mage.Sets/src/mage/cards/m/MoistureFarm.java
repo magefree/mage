@@ -51,7 +51,7 @@ public class MoistureFarm extends CardImpl {
     public MoistureFarm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
 
         // {T}: Put a storage counter on Moisture Farm.

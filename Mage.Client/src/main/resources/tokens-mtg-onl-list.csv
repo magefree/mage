@@ -218,9 +218,9 @@ Saproling, T3, G, 1|1, -, Creature - Saproling, Warren Mahy, -
 
 ROE - Rise of the Eldrazi (2010-04-23)
 
-Eldrazi Spawn, 1a, -, -, -, Creature - Eldrazi Spawn, Aleksi Briclot, Sacrifice this creature: Add {1} to your mana pool.
-Eldrazi Spawn, 1b, -, -, -, Creature - Eldrazi Spawn, Mark Tedin, Sacrifice this creature: Add {1} to your mana pool.
-Eldrazi Spawn, 1c, -, -, -, Creature - Eldrazi Spawn, Veronique Meignaud, Sacrifice this creature: Add {1} to your mana pool.
+Eldrazi Spawn, 1a, -, -, -, Creature - Eldrazi Spawn, Aleksi Briclot, Sacrifice this creature: Add {1}.
+Eldrazi Spawn, 1b, -, -, -, Creature - Eldrazi Spawn, Mark Tedin, Sacrifice this creature: Add {1}.
+Eldrazi Spawn, 1c, -, -, -, Creature - Eldrazi Spawn, Veronique Meignaud, Sacrifice this creature: Add {1}.
 Elemental, 2, R, *|*, -, Creature - Elemental, Jung Park, -
 Hellion, 1, R, 4|4, -, Creature - Hellion, Anthony Francisco, -
 Ooze, 4, G, *|*, -, Creature - Ooze, Daniel Ljunggren, -
@@ -348,7 +348,7 @@ Hellion, 1, R, 4|4, -, Creature - Hellion, Anthony Francisco, -
 Beast, 8, G, 3|3, -, Creature - Beast, John Donahue, -
 Saproling, 9, G, 1|1, -, Creature - Saproling, Brad Rigney, -
 Wurm, 10, G, 6|6, -, Creature - Wurm, Anthony Francisco, -
-Liliana Emblem, 11, -, -, -, Emblem - Liliana, D. Alexander Gregory, Swamps you control have Tap: Add {B}{B}{B}{B} to your mana pool.'
+Liliana Emblem, 11, -, -, -, Emblem - Liliana, D. Alexander Gregory, Swamps you control have Tap: Add {B}{B}{B}{B}.'
 
 DDJ - Duel Decks: Izzet vs. Golgari (2012-09-07)
 
@@ -424,7 +424,7 @@ Elemental, 8, R, 1|1, -, Creature - Elemental, Winona Nelson, -
 Beast, 9, G, 3|3, -, Creature - Beast, John Donahue, -
 Saproling, 10, G, 1|1, -, Creature - Saproling, Brad Rigney, -
 Wolf, 11, G, 2|2, -, Creature - Wolf, Lars Grant-West, -
-Liliana Emblem, 12, -, -, -, Emblem - Liliana, D. Alexander Gregory, Swamps you control have Tap: Add {B}{B}{B}{B} to your mana pool.'
+Liliana Emblem, 12, -, -, -, Emblem - Liliana, D. Alexander Gregory, Swamps you control have Tap: Add {B}{B}{B}{B}.'
 Garruk Emblem, 13, -, -, -, Emblem - Garruk, Karl Kopinski, Whenever you cast a creature spell� you may search your library for a creature card� put it onto the battlefield� then shuffle your library.
 Sliver, T1, -, 1|1, League, Creature - Sliver, Vincent Proce, -
 
@@ -561,7 +561,7 @@ Beast, 019, G, 3|3, -, Creature - Beast, Dave Allsop, -
 Beast, 020, G, 4|4, -, Creature - Beast, Steve Prescott, -
 Elemental, 021, G, 5|3, -, Creature - Elemental, Nils Hamm, -
 Elephant, 022, G, 3|3, -, Creature - Elephant, Lars Grant-West, -
-Elf Druid, 023, G, 1|1, -, Creature - Elf Druid, Raymond Swanland, {T}: Add {G} to your mana pool.
+Elf Druid, 023, G, 1|1, -, Creature - Elf Druid, Raymond Swanland, {T}: Add {G}.
 Elf Warrior, 024, G, 1|1, -, Creature - Elf Warrior, William O'Connor, -
 Treefolk, 025, G, *|*, -, Creature - Treefolk, Filip Burburan, -
 Wolf, 026, G, 2|2, -, Creature - Wolf, Daren Bader, -
@@ -625,9 +625,9 @@ Narset Emblem, 008, -, -, -, Emblem - Narset, Magali Villeneuve, Your opponents 
 
 MM2 - Modern Masters 2015 Edition (2015-05-22)
 
-Eldrazi Spawn, 001, -, -, -, Creature - Eldrazi Spawn, Aleksi Briclot, Sacrifice this creature: Add {1} to your mana pool.
-Eldrazi Spawn, 002, -, -, -, Creature - Eldrazi Spawn, Mark Tedin, Sacrifice this creature: Add {1} to your mana pool.
-Eldrazi Spawn, 003, -, -, -, Creature - Eldrazi Spawn, Veronique Meignaud, Sacrifice this creature: Add {1} to your mana pool.
+Eldrazi Spawn, 001, -, -, -, Creature - Eldrazi Spawn, Aleksi Briclot, Sacrifice this creature: Add {1}.
+Eldrazi Spawn, 002, -, -, -, Creature - Eldrazi Spawn, Mark Tedin, Sacrifice this creature: Add {1}.
+Eldrazi Spawn, 003, -, -, -, Creature - Eldrazi Spawn, Veronique Meignaud, Sacrifice this creature: Add {1}.
 Soldier, 004, W, 1|1, -, Creature - Soldier, Greg Staples, -
 Spirit, 005, W, 1|1, -, Creature - Spirit, Mike Sass, Flying
 Faerie Rogue, 006, B, 1|1, -, Creature - Faerie Rogue, Dave Allsop, Flying
@@ -661,18 +661,18 @@ Chandra Emblem, 014, -, -, -, Emblem - Chandra, Eric Deschamps, At the beginning
 
 DDP - Duel Decks: Zendikar vs. Eldrazi (2015-08-28)
 
-Eldrazi Spawn, 076, -, -, -, Creature - Eldrazi Spawn, Aleksi Briclot, Sacrifice this creature: Add {1} to your mana pool.
-Eldrazi Spawn, 077, -, -, -, Creature - Eldrazi Spawn, Veronique Meignaud, Sacrifice this creature: Add {1} to your mana pool.
-Eldrazi Spawn, 078, -, -, -, Creature - Eldrazi Spawn, Mark Tedin, Sacrifice this creature: Add {1} to your mana pool.
+Eldrazi Spawn, 076, -, -, -, Creature - Eldrazi Spawn, Aleksi Briclot, Sacrifice this creature: Add {1}.
+Eldrazi Spawn, 077, -, -, -, Creature - Eldrazi Spawn, Veronique Meignaud, Sacrifice this creature: Add {1}.
+Eldrazi Spawn, 078, -, -, -, Creature - Eldrazi Spawn, Mark Tedin, Sacrifice this creature: Add {1}.
 Hellion, 1, R, 4|4, -, Creature - Hellion, Anthony Francisco, -
 Plant, 080, G, -, -, Creature - Plant, Daren Bader, -
 
 BFZ - Battle for Zendikar (2015-10-09)
 
 Eldrazi, 001, -, 10|10, -, Creature - Eldrazi, Jack Wang, -
-Eldrazi Scion, 002, -, 1|1, -, Creature - Eldrazi Scion, Izzy, Sacrifice this creature: Add {1} to your mana pool.
-Eldrazi Scion, 003, -, 1|1, -, Creature - Eldrazi Scion, Winona Nelson, Sacrifice this creature: Add {1} to your mana pool.
-Eldrazi Scion, 004, -, 1|1, -, Creature - Eldrazi Scion, Svetlin Velinov, Sacrifice this creature: Add {1} to your mana pool.
+Eldrazi Scion, 002, -, 1|1, -, Creature - Eldrazi Scion, Izzy, Sacrifice this creature: Add {1}.
+Eldrazi Scion, 003, -, 1|1, -, Creature - Eldrazi Scion, Winona Nelson, Sacrifice this creature: Add {1}.
+Eldrazi Scion, 004, -, 1|1, -, Creature - Eldrazi Scion, Svetlin Velinov, Sacrifice this creature: Add {1}.
 Knight Ally, 005, W, 2|2, -, Creature - Knight Ally, Josu Hernaiz, -
 Kor Ally, 006, W, 1|1, -, Creature - Kor Ally, Jeremy Wilson, -
 Octopus, 007, U, 8|8, -, Creature - Octopus, Craig J Spearing, -
@@ -713,12 +713,12 @@ Gold, 024, -, -, -, Artifact, Richard Wright, Sacrifice this artifact: Add one m
 
 OGW - Oath of the Gatewatch (2016-01-22)
 
-Eldrazi Scion, 001, -, 1|1, -, Creature - Eldrazi Scion, Izzy, Sacrifice this creature: Add {1} to your mana pool.
-Eldrazi Scion, 002, -, 1|1, -, Creature - Eldrazi Scion, Craig J Spearing, Sacrifice this creature: Add {1} to your mana pool.
-Eldrazi Scion, 003, -, 1|1, -, Creature - Eldrazi Scion, Svetlin Velinov, Sacrifice this creature: Add {1} to your mana pool.
-Eldrazi Scion, 004, -, 1|1, -, Creature - Eldrazi Scion, Izzy, Sacrifice this creature: Add {1} to your mana pool.
-Eldrazi Scion, 005, -, 1|1, -, Creature - Eldrazi Scion, Winona Nelson, Sacrifice this creature: Add {1} to your mana pool.
-Eldrazi Scion, 006, -, 1|1, -, Creature - Eldrazi Scion, Svetlin Velinov, Sacrifice this creature: Add {1} to your mana pool.
+Eldrazi Scion, 001, -, 1|1, -, Creature - Eldrazi Scion, Izzy, Sacrifice this creature: Add {1}.
+Eldrazi Scion, 002, -, 1|1, -, Creature - Eldrazi Scion, Craig J Spearing, Sacrifice this creature: Add {1}.
+Eldrazi Scion, 003, -, 1|1, -, Creature - Eldrazi Scion, Svetlin Velinov, Sacrifice this creature: Add {1}.
+Eldrazi Scion, 004, -, 1|1, -, Creature - Eldrazi Scion, Izzy, Sacrifice this creature: Add {1}.
+Eldrazi Scion, 005, -, 1|1, -, Creature - Eldrazi Scion, Winona Nelson, Sacrifice this creature: Add {1}.
+Eldrazi Scion, 006, -, 1|1, -, Creature - Eldrazi Scion, Svetlin Velinov, Sacrifice this creature: Add {1}.
 Angel, 007, W, 3|3, -, Creature - Angel, Anastasia Ovchinnikova, Flying
 Zombie, 008, B, 2|2, -, Creature - Zombie, Kev Walker, -
 Elemental, 009, R, 3|1, -, Creature - Elemental, Raymond Swanland, -

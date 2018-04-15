@@ -46,7 +46,7 @@ public class LlanowarReborn extends CardImpl {
 
         // Llanowar Reborn enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
-        // {tap}: Add {G} to your mana pool.
+        // {tap}: Add {G}.
         this.addAbility(new GreenManaAbility());
         // Graft 1 (This land enters the battlefield with a +1/+1 counter on it. Whenever a creature enters the battlefield, you may move a +1/+1 counter from this land onto it.)
         this.addAbility(new GraftAbility(this, 1));

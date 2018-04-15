@@ -48,7 +48,7 @@ public class SeersLantern extends CardImpl {
     public SeersLantern(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
 
         // {2}, {T}: Scry 1.

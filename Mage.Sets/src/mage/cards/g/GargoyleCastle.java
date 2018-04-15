@@ -49,7 +49,7 @@ public class GargoyleCastle extends CardImpl {
 
     public GargoyleCastle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, null);
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
 
         this.addAbility(new ColorlessManaAbility());
         // {T}, {5}, Sacrifice Gargoyle Castle: Put a 3/4 colorless Gargoyle artifact creature token with flying onto the battlefield.

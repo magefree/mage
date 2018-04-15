@@ -61,7 +61,7 @@ public class DarigaazsCaldera extends CardImpl {
 
         // When Darigaaz's Caldera enters the battlefield, sacrifice it unless you return a non-Lair land you control to its owner's hand.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(filter)))));
-        // {tap}: Add {B}, {R}, or {G} to your mana pool.
+        // {tap}: Add {B}, {R}, or {G}.
         this.addAbility(new BlackManaAbility());
         this.addAbility(new RedManaAbility());
         this.addAbility(new GreenManaAbility());

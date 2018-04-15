@@ -51,7 +51,7 @@ public class WardenOfGeometries extends CardImpl {
 
         // Vigilance
         this.addAbility(VigilanceAbility.getInstance());
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
     }
 

@@ -61,7 +61,7 @@ public class NephaliaAcademy extends CardImpl {
         // If a spell or ability an opponent controls causes you to discard a card, you may reveal that card and put it on top of your library instead of putting it anywhere else.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new NephaliaAcademyEffect()));
 
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
     }
 

@@ -54,7 +54,7 @@ public class OvereagerApprentice extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 
-        // Discard a card, Sacrifice Overeager Apprentice: Add {B}{B}{B} to your mana pool.
+        // Discard a card, Sacrifice Overeager Apprentice: Add {B}{B}{B}.
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana(3), new DiscardCardCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

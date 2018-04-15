@@ -43,7 +43,7 @@ public class TrollHornCameo extends CardImpl {
     public TrollHornCameo(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
-        // {tap}: Add {R} or {G} to your mana pool.
+        // {tap}: Add {R} or {G}.
         this.addAbility(new RedManaAbility());
         this.addAbility(new GreenManaAbility());
     }

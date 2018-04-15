@@ -50,7 +50,7 @@ public class DroidFoundry extends CardImpl {
         // Droid Foundry enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
 
-        // When Droid Foundry enters the battlefield , add {U} to your mana pool.
+        // When Droid Foundry enters the battlefield , add {U}.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new AddManaToManaPoolSourceControllerEffect(Mana.BlueMana(1))));
 
         // {T}: Add {W} or {B} to you mana pool.

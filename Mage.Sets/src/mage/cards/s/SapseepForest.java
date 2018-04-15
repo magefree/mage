@@ -62,7 +62,7 @@ public class SapseepForest extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
         this.subtype.add(SubType.FOREST);
 
-        // <i>({tap}: Add {G} to your mana pool.)</i>
+        // <i>({tap}: Add {G}.)</i>
         this.addAbility(new GreenManaAbility());
 
         // Sapseep Forest enters the battlefield tapped.

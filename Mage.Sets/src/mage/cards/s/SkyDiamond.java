@@ -45,7 +45,7 @@ public class SkyDiamond extends CardImpl {
 
         // Sky Diamond enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
-        // {tap}: Add {U} to your mana pool.
+        // {tap}: Add {U}.
         this.addAbility(new BlueManaAbility());
     }
 

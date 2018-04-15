@@ -50,7 +50,7 @@ public class CathedralOfWar extends CardImpl {
         // Exalted
         this.addAbility(new ExaltedAbility());
         
-        // {tap}: Add {C} to your mana pool.
+        // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
     }
 
