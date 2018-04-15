@@ -42,6 +42,7 @@ public final class SystemUtil {
     private static final String COMMAND_SHOW_OPPONENT_HAND = "@show opponent hand";
     private static final String COMMAND_SHOW_OPPONENT_LIBRARY = "@show opponent library";
     private static final Map<String, String> supportedCommands = new HashMap<>();
+
     static {
         supportedCommands.put(COMMAND_MANA_ADD, "MANA ADD");
         supportedCommands.put(COMMAND_LANDS_ADD, "LANDS ADD");
@@ -61,31 +62,32 @@ public final class SystemUtil {
     private static final String PARAM_ABILITIES_COUNT = "abilities count";
     private static final String PARAM_ABILITIES_LIST = "abilities list";
 
-    private static class CommandGroup{
+    private static class CommandGroup {
+
         String name;
         boolean isSpecialCommand;
         ArrayList<String> commands = new ArrayList<>();
 
-        public CommandGroup(String name){
+        public CommandGroup(String name) {
             this(name, false);
         }
 
-        public CommandGroup(String name, boolean isSpecialCommand){
+        public CommandGroup(String name, boolean isSpecialCommand) {
             this.name = name;
             this.isSpecialCommand = isSpecialCommand;
         }
 
-        public String getPrintName(){
-            if(this.isSpecialCommand && supportedCommands.containsKey(this.name)){
+        public String getPrintName() {
+            if (this.isSpecialCommand && supportedCommands.containsKey(this.name)) {
                 return supportedCommands.get(this.name);
             } else {
                 return this.name;
             }
         }
 
-        public String getPrintNameWithStats(){
+        public String getPrintNameWithStats() {
             String res = this.getPrintName();
-            if(!this.isSpecialCommand){
+            if (!this.isSpecialCommand) {
                 res = res + " (" + this.commands.size() + " commands)";
             }
 
@@ -144,6 +146,7 @@ public final class SystemUtil {
     }
 
     private static class CardCommandData {
+
         public String source;
         public String zone;
         public String player;
@@ -214,7 +217,7 @@ public final class SystemUtil {
      * <br/>
      * <b>Implementation note:</b><br/>
      * 1. Read init.txt line by line<br/>
-     * 2. Parse line using for searching groups like: [group 1]
+     * 2. Parse line using for searching groups like: [group 1] 
      * 3. Parse line using the following format: line ::=
      * <zone>:<nickname>:<card name>:<amount><br/>
      * 4. If zone equals to 'hand', add card to player's library<br/>
@@ -230,7 +233,7 @@ public final class SystemUtil {
 
         try {
             String fileName = fileSource;
-            if(fileName == null){
+            if (fileName == null) {
                 fileName = INIT_FILE_PATH;
             }
 
@@ -247,7 +250,6 @@ public final class SystemUtil {
             // 2. ask user if many groups
             // 3. process system commands
             // 4. run commands from selected group
-
             // 1. parse
             ArrayList<CommandGroup> groups = new ArrayList<>();
 
@@ -267,12 +269,12 @@ public final class SystemUtil {
                     Matcher matchGroup = patternGroup.matcher(line);
                     if (matchGroup.matches()) {
                         String groupName = matchGroup.group(1);
-                        if(groupName.startsWith("@")){
+                        if (groupName.startsWith("@")) {
                             // special command group
-                            if(supportedCommands.containsKey(groupName)){
+                            if (supportedCommands.containsKey(groupName)) {
                                 currentGroup = new CommandGroup(groupName, true);
                                 groups.add(currentGroup);
-                            }else {
+                            } else {
                                 logger.warn("Special group [" + groupName + "] is not supported.");
                             }
                             continue;
@@ -295,18 +297,18 @@ public final class SystemUtil {
 
             // 2. ask user
             CommandGroup runGroup = null;
-            if(groups.size() == 1) {
+            if (groups.size() == 1) {
                 // not need to ask
                 runGroup = groups.get(0);
-            }else if(groups.size() > 1) {
+            } else if (groups.size() > 1) {
                 // need to ask
-                logger.info("Founded " + groups.size() + " groups. Need to select.");
+                logger.info("Found " + groups.size() + " groups. Need to select.");
 
-                if(feedbackPlayer != null){
+                if (feedbackPlayer != null) {
                     // choice dialog
                     Map<String, String> list = new LinkedHashMap<>();
                     Map<String, Integer> sort = new LinkedHashMap<>();
-                    for(Integer i = 0; i < groups.size(); i++){
+                    for (Integer i = 0; i < groups.size(); i++) {
                         list.put(Integer.toString(i + 1), groups.get(i).getPrintNameWithStats());
                         sort.put(Integer.toString(i + 1), i);
                     }
@@ -318,19 +320,18 @@ public final class SystemUtil {
 
                     if (feedbackPlayer.choose(Outcome.Benefit, groupChoice, game)) {
                         String need = groupChoice.getChoiceKey();
-                        if ((need != null) && list.containsKey(need))
-                        {
+                        if ((need != null) && list.containsKey(need)) {
                             runGroup = groups.get(Integer.parseInt(need) - 1);
                         }
                     }
-                }else{
+                } else {
                     // select default
                     runGroup = groups.get(0);
                 }
 
             }
 
-            if(runGroup == null) {
+            if (runGroup == null) {
                 // was canceled
                 logger.info("Command file was empty or canceled");
                 return;
@@ -364,7 +365,7 @@ public final class SystemUtil {
             }
 
             // 4. run commands
-            for (String line: runGroup.commands) {
+            for (String line : runGroup.commands) {
 
                 CardCommandData command = parseCardCommand(line);
                 if (!command.OK) {
@@ -399,6 +400,16 @@ public final class SystemUtil {
                         game.addEmblem((mage.game.command.Emblem) emblem, null, player.getId());
                         continue;
                     }
+                } else if ("plane".equalsIgnoreCase(command.zone)) {
+                    // eg: plane:Human:BantPlane:1
+                    Class<?> c = Class.forName("mage.game.command.planes." + command.cardName);
+                    Constructor<?> cons = c.getConstructor();
+                    Object plane = cons.newInstance();
+                    if (plane != null && plane instanceof mage.game.command.Plane) {
+                        ((mage.game.command.Plane) plane).setControllerId(player.getId());
+                        game.addPlane((mage.game.command.Plane) plane, null, player.getId());
+                        continue;
+                    }
                 }
 
                 Zone gameZone;
@@ -413,6 +424,8 @@ public final class SystemUtil {
                 } else if ("token".equalsIgnoreCase(command.zone)) {
                     gameZone = Zone.BATTLEFIELD;
                 } else if ("emblem".equalsIgnoreCase(command.zone)) {
+                    gameZone = Zone.COMMAND;
+                } else if ("plane".equalsIgnoreCase(command.zone)) {
                     gameZone = Zone.COMMAND;
                 } else {
                     logger.warn("Unknown zone [" + command.zone + "]: " + line);

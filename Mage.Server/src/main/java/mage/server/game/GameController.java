@@ -53,6 +53,7 @@ import mage.game.GameException;
 import mage.game.GameOptions;
 import mage.game.GameState;
 import mage.game.Table;
+import mage.game.command.Plane;
 import mage.game.events.Listener;
 import mage.game.events.PlayerQueryEvent;
 import mage.game.events.TableEvent;
@@ -1174,6 +1175,15 @@ public class GameController implements GameCallback {
         sb.append(state.getTurnMods());
         sb.append("<br>getTurnNum: ");
         sb.append(state.getTurnNum());
+        
+        sb.append("<br>Using plane chase?:" + state.isPlaneChase());
+        if (state.isPlaneChase()) {
+            Plane currentPlane = state.getCurrentPlane();
+            if (currentPlane != null) {
+                sb.append("<br>Current plane:" + currentPlane.getName());
+            }
+        }
+        
         sb.append("<br>Future Timeout:");
         if (futureTimeout != null) {
             sb.append("Cancelled?=");
@@ -1244,7 +1254,7 @@ public class GameController implements GameCallback {
             }
             sb.append(game.getPlayer(state.getPriorityPlayerId()).getName());
             sb.append("</font>");
-        }
+        }        
 
         sb.append("<br>Future Timeout:");
         if (futureTimeout != null) {
