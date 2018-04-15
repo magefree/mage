@@ -204,8 +204,6 @@ public class MageBook extends JComponent {
             Image setImage = ManaSymbols.getSetSymbolImage(set);
             if (setImage != null) {
                 tab.setOverlayImage(setImage);
-            } else {
-                System.out.println("Couldn't find symbol image: " + set + "-C.jpg");
             }
             tab.setSet(set);
             tab.setBounds(0, y, 39, 120);
@@ -254,7 +252,7 @@ public class MageBook extends JComponent {
             updateCardStats(currentSet, false);
             int numTokens = showTokens();
             int numTokensEmblems = numTokens + showEmblems(numTokens);
-            showPlanes(numTokensEmblems);
+            int numTokensEmblemsPlanes = numTokens + showPlanes(numTokensEmblems);
         }
     }
 
@@ -315,14 +313,13 @@ public class MageBook extends JComponent {
             }
 
             jLayeredPane.repaint();
+            return tokens.size();
         }
-
-        return tokens.size();
+        return 0;
     }
 
     public int showEmblems(int numTokens) {
         List<Emblem> emblems = getEmblems(currentPage, currentSet, numTokens);
-        // System.out.println ("Size of origins in " + currentSet + " = " + emblems.size());
         int numEmblems = 0;
         if (emblems != null && emblems.size() > 0) {
             int size = emblems.size();
@@ -354,6 +351,7 @@ public class MageBook extends JComponent {
                 lastI++;
             }
 
+            rectangle.setLocation(second_page_x, OFFSET_Y);
             if (size + numTokens > conf.CARDS_PER_PAGE / 2) {
                 for (int i = lastI; i < size && i + numTokens < conf.CARDS_PER_PAGE; i++) {
                     Emblem emblem = emblems.get(i);
@@ -367,10 +365,13 @@ public class MageBook extends JComponent {
         return numEmblems;
     }
 
-    public void showPlanes(int numTokensEmblems) {
+    public int showPlanes(int numTokensEmblems) {
         List<Plane> planes = getPlanes(currentPage, currentSet, numTokensEmblems);
+        int numPlanes = 0;
+
         if (planes != null && planes.size() > 0) {
             int size = planes.size();
+            numPlanes = size;
             Rectangle rectangle = new Rectangle();
             rectangle.translate(OFFSET_X, OFFSET_Y);
 
@@ -397,6 +398,7 @@ public class MageBook extends JComponent {
                 lastI++;
             }
 
+            rectangle.setLocation(second_page_x, OFFSET_Y);
             if (size + numTokensEmblems > conf.CARDS_PER_PAGE / 2) {
                 for (int i = lastI; i < size && i + numTokensEmblems < conf.CARDS_PER_PAGE; i++) {
                     Plane plane = planes.get(i);
@@ -407,6 +409,7 @@ public class MageBook extends JComponent {
 
             jLayeredPane.repaint();
         }
+        return numPlanes;
     }
 
     private void addCard(CardView card, BigCard bigCard, UUID gameId, Rectangle rectangle) {
@@ -578,16 +581,25 @@ public class MageBook extends JComponent {
         }
         int start = page * conf.CARDS_PER_PAGE;
         int end = page * conf.CARDS_PER_PAGE + conf.CARDS_PER_PAGE;
-        if (end > tokens.size()) {
-            end = tokens.size();
+        int ttokens = getTotalNumTokens(set);
+        int temblems = getTotalNumEmblems(set);
+        int tplanes = getTotalNumPlanes(set);
+        int numTokensEmblemsPlanes = ttokens + temblems + tplanes;
+        if (end > numTokensEmblemsPlanes) {
+            end = numTokensEmblemsPlanes;
         }
-        if (tokens.size() > end) {
+        if (numTokensEmblemsPlanes > end) {
             pageRight.setVisible(true);
         }
-        return tokens.subList(start, end);
+
+        end = Math.min(end, ttokens);
+        if (start < ttokens) {
+            return tokens.subList(start, end);
+        }
+        return null;
     }
 
-    private List<Emblem> getEmblems(int page, String set, int numTokens) {
+    private List<Emblem> getEmblems(int page, String set, int numTokensEmblems) {
         ArrayList<CardDownloadData> allEmblems = getTokenCardUrls();
         ArrayList<Emblem> emblems = new ArrayList<>();
 
@@ -628,22 +640,23 @@ public class MageBook extends JComponent {
                 }
             }
         }
+        
+        int totalTokens = getTotalNumTokens(set);
         int start = 0;
+        if (!(page * conf.CARDS_PER_PAGE <= totalTokens && (page + 1) * conf.CARDS_PER_PAGE >= totalTokens)) {
+            start = page * conf.CARDS_PER_PAGE - totalTokens;
+        }
+        
         int end = emblems.size();
-
-        if ((page + 1) * conf.CARDS_PER_PAGE < numTokens + emblems.size()) {
-            end = (page + 1) * conf.CARDS_PER_PAGE - numTokens;
-            pageRight.setVisible(true);
+        if ((page + 1) * conf.CARDS_PER_PAGE < totalTokens + emblems.size()) {
+            end = (page + 1) * conf.CARDS_PER_PAGE - totalTokens;
         }
 
-        if (emblems.size() > conf.CARDS_PER_PAGE) {
-            pageLeft.setVisible(true);
-            pageRight.setVisible(true);
-        }
+        start = Math.min(start, end);
         return emblems.subList(start, end);
     }
 
-    private List<Plane> getPlanes(int page, String set, int numTokens) {
+    private List<Plane> getPlanes(int page, String set, int numTokensEmblems) {
         ArrayList<CardDownloadData> allPlanes = getTokenCardUrls();
         ArrayList<Plane> planes = new ArrayList<>();
 
@@ -684,19 +697,79 @@ public class MageBook extends JComponent {
                 }
             }
         }
+        
+        int totalTokens = getTotalNumTokens(set);
+        int totalTokensEmblems = totalTokens + getTotalNumEmblems(set);
         int start = 0;
+        if (!(page * conf.CARDS_PER_PAGE <= totalTokensEmblems && (page + 1) * conf.CARDS_PER_PAGE >= totalTokensEmblems)) {
+            start = page * conf.CARDS_PER_PAGE - totalTokensEmblems;
+            pageRight.setVisible(true);
+        }
+        
         int end = planes.size();
-
-        if ((page + 1) * conf.CARDS_PER_PAGE < numTokens + planes.size()) {
-            end = (page + 1) * conf.CARDS_PER_PAGE - numTokens;
+        if ((page + 1) * conf.CARDS_PER_PAGE < totalTokensEmblems + planes.size()) {
+            end = (page + 1) * conf.CARDS_PER_PAGE - totalTokensEmblems;
             pageRight.setVisible(true);
+        } else {
+            pageRight.setVisible(false);
         }
 
-        if (planes.size() > conf.CARDS_PER_PAGE) {
+        if (numTokensEmblems + planes.size() > conf.CARDS_PER_PAGE && page > 0) {
             pageLeft.setVisible(true);
-            pageRight.setVisible(true);
         }
+        start = Math.min(start, end);
         return planes.subList(start, end);
+    }
+
+    private int getTotalNumTokens(String set) {
+        ArrayList<CardDownloadData> allTokens = getTokenCardUrls();
+        int numTokens = 0;
+
+        for (CardDownloadData token : allTokens) {
+            if (token.getSet().equals(set)) {
+                String className = token.getName();
+                if (token.getTokenClassName() != null && token.getTokenClassName().length() > 0) {
+                    if (token.getTokenClassName().toLowerCase(Locale.ENGLISH).matches(".*token.*")) {
+                        numTokens++;
+                    }
+                }
+            }
+        }
+        return numTokens;
+    }
+
+    private int getTotalNumEmblems(String set) {
+        ArrayList<CardDownloadData> allEmblems = getTokenCardUrls();
+        int numEmblems = 0;
+
+        for (CardDownloadData emblem : allEmblems) {
+            if (emblem.getSet().equals(set)) {
+                String className = emblem.getName();
+                if (emblem.getTokenClassName() != null && emblem.getTokenClassName().length() > 0) {
+                    if (emblem.getTokenClassName().toLowerCase(Locale.ENGLISH).matches(".*emblem.*")) {
+                        numEmblems++;
+                    }
+                }
+            }
+        }
+        return numEmblems;
+    }
+
+    private int getTotalNumPlanes(String set) {
+        ArrayList<CardDownloadData> allPlanes = getTokenCardUrls();
+        int numPlanes = 0;
+
+        for (CardDownloadData plane : allPlanes) {
+            if (plane.getSet().equals(set)) {
+                String className = plane.getName();
+                if (plane.getTokenClassName() != null && plane.getTokenClassName().length() > 0) {
+                    if (plane.getTokenClassName().toLowerCase(Locale.ENGLISH).matches(".*plane.*")) {
+                        numPlanes++;
+                    }
+                }
+            }
+        }
+        return numPlanes;
     }
 
     private ImagePanel getImagePanel(String filename, ImagePanelStyle type) {

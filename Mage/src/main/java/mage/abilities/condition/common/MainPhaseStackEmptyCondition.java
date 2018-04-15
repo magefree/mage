@@ -51,6 +51,6 @@ public enum MainPhaseStackEmptyCondition implements Condition {
 
     @Override
     public String toString() {
-        return "during the main phase when the stack is empty";
+        return "during your main phase when the stack is empty";
     }
 }
