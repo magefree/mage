@@ -63,7 +63,8 @@ public class ExcavationElephant extends CardImpl {
         ability.addTarget(new TargetCardInYourGraveyard(new FilterArtifactCard("artifact card from your graveyard")));
         this.addAbility(new ConditionalTriggeredAbility(
                 ability, KickedCondition.instance,
-                "When {this} enters the battlefield, if it was kicked, return target artifact card from your graveyard to your hand."
+                "When {this} enters the battlefield, if it was kicked, "
+                + "return target artifact card from your graveyard to your hand."
         ));
     }
 
