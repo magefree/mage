@@ -129,6 +129,7 @@ public class Dominaria extends ExpansionSet {
         cards.add(new SetCardInfo("Gilded Lotus", 215, Rarity.RARE, mage.cards.g.GildedLotus.class));
         cards.add(new SetCardInfo("Goblin Chainwhirler", 129, Rarity.RARE, mage.cards.g.GoblinChainwhirler.class));
         cards.add(new SetCardInfo("Goblin Warchief", 130, Rarity.UNCOMMON, mage.cards.g.GoblinWarchief.class));
+        cards.add(new SetCardInfo("Grow from the Ashes", 164, Rarity.COMMON, mage.cards.g.GrowFromTheAshes.class));
         cards.add(new SetCardInfo("Grunn, the Lonely King", 165, Rarity.UNCOMMON, mage.cards.g.GrunnTheLonelyKing.class));
         cards.add(new SetCardInfo("Guardians of Koilos", 216, Rarity.COMMON, mage.cards.g.GuardiansOfKoilos.class));
         cards.add(new SetCardInfo("Helm of the Host", 217, Rarity.RARE, mage.cards.h.HelmOfTheHost.class));
