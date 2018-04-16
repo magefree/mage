@@ -50,7 +50,7 @@ public class TargetActivatedAbility extends TargetObject {
     protected final FilterAbility filter;
 
     public TargetActivatedAbility() {
-        this(new FilterAbility());
+        this(new FilterAbility("activated ability"));
     }
 
     public TargetActivatedAbility(FilterAbility filter) {

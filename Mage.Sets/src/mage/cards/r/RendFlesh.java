@@ -46,7 +46,7 @@ import java.util.UUID;
  */
 public class RendFlesh extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Non-Spirit");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Non-Spirit creature");
 
     static {
         filter.add(Predicates.not(new SubtypePredicate(SubType.SPIRIT)));
@@ -56,6 +56,7 @@ public class RendFlesh extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{B}");
         this.subtype.add(SubType.ARCANE);
 
+        // Destroy target non-Spirit creature.
         Target target = new TargetCreaturePermanent(filter);
         this.getSpellAbility().addTarget(target);
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

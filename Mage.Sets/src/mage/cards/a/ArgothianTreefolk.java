@@ -77,6 +77,7 @@ class PreventDamageToSourceByCardTypeEffect extends PreventAllDamageToSourceEffe
 
     public PreventDamageToSourceByCardTypeEffect(CardType cardT){
         super(Duration.WhileOnBattlefield);
+        staticText = "Prevent all damage that would be dealt to {this} by artifact sources";
         cardType = cardT;
     }
     

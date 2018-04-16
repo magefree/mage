@@ -51,7 +51,7 @@ import mage.target.TargetPermanent;
  * @author Plopman
  */
 public class DevoutHarpist extends CardImpl {
-    private static final FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent("Auras attached to a creature");
+    private static final FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent("Aura attached to a creature");
     static
     {
         filter.add(new SubtypePredicate(SubType.AURA));

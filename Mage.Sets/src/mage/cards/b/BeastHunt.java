@@ -44,7 +44,7 @@ public class BeastHunt extends CardImpl {
     public BeastHunt(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{G}");
 
-        this.getSpellAbility().addEffect(new RevealLibraryPutIntoHandEffect(3, new FilterCreatureCard(), Zone.GRAVEYARD));
+        this.getSpellAbility().addEffect(new RevealLibraryPutIntoHandEffect(3, new FilterCreatureCard("creature cards"), Zone.GRAVEYARD));
     }
 
     public BeastHunt(final BeastHunt card) {

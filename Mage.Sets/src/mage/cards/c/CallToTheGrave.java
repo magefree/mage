@@ -54,7 +54,7 @@ import java.util.UUID;
 public class CallToTheGrave extends CardImpl {
 
     private static final String ruleText = "At the beginning of the end step, if no creatures are on the battlefield, sacrifice {this}.";
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a non-Zombie creature");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Zombie creature");
 
     static {
         filter.add(Predicates.not(new SubtypePredicate(SubType.ZOMBIE)));

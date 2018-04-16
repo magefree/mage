@@ -54,7 +54,7 @@ public class GhostlyVisit extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");
 
         // Destroy target nonblack creature.
-        this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
+        this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 

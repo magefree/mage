@@ -31,7 +31,7 @@ package mage.cards.a;
 import java.util.UUID;
 import mage.abilities.common.LandfallAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -39,10 +39,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
@@ -53,8 +49,12 @@ public class AdventuringGear extends CardImpl {
     public AdventuringGear(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
         this.subtype.add(SubType.EQUIPMENT);
+        
+        // Landfall — Whenever a land enters the battlefield under your control, equipped creature gets +2/+2 until end of turn.
+        this.addAbility(new LandfallAbility(new BoostEquippedEffect(2, 2, Duration.EndOfTurn), false));
+        
+        // Equip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1)));
-        this.addAbility(new AdventuringGearAbility());
     }
 
     public AdventuringGear(final AdventuringGear card) {
@@ -65,40 +65,4 @@ public class AdventuringGear extends CardImpl {
     public AdventuringGear copy() {
         return new AdventuringGear(this);
     }
-
-}
-
-class AdventuringGearAbility extends LandfallAbility {
-
-    public AdventuringGearAbility() {
-        super(null, false);
-        this.addEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn));
-        this.addTarget(new TargetCreaturePermanent());
-    }
-
-    public AdventuringGearAbility(final AdventuringGearAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (super.checkTrigger(event, game)) {
-            Permanent equipment = game.getPermanent(this.sourceId);
-            if (equipment != null && equipment.getAttachedTo() != null) {
-                Permanent creature = game.getPermanent(equipment.getAttachedTo());
-                if (creature != null) {
-                    this.getTargets().get(0).clearChosen();
-                    this.getTargets().get(0).add(creature.getId(), game);
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public AdventuringGearAbility copy() {
-        return new AdventuringGearAbility(this);
-    }
-
 }

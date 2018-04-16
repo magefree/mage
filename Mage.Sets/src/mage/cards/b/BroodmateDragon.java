@@ -55,8 +55,9 @@ public class BroodmateDragon extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(dragonToken), false));
         this.addAbility(FlyingAbility.getInstance());
+        
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(dragonToken), false));
     }
 
     public BroodmateDragon(final BroodmateDragon card) {

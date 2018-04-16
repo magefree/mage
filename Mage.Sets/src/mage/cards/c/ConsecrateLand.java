@@ -64,7 +64,7 @@ public class ConsecrateLand extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted land is indestructible and can't be enchanted by other Auras.
-        Ability ability2 = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(IndestructibleAbility.getInstance(), AttachmentType.AURA));
+        Ability ability2 = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(IndestructibleAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield, "Enchanted land is indestructible"));
         ability2.addEffect(new ConsecrateLandRuleEffect());
         this.addAbility(ability2);
     }

@@ -91,7 +91,7 @@ class AllSunsDawnEffect extends OneShotEffect {
 
     public AllSunsDawnEffect() {
         super(Outcome.ReturnToHand);
-        this.staticText = "For each color, return up to one target card of that color from your graveyard to your hand. Exile {this}";
+        this.staticText = "For each color, return up to one target card of that color from your graveyard to your hand";
     }
 
     public AllSunsDawnEffect(final AllSunsDawnEffect effect) {
