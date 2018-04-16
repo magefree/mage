@@ -29,14 +29,16 @@ package mage.game.command.planes;
 
 import java.util.ArrayList;
 import java.util.List;
+import static jdk.nashorn.internal.objects.NativeRegExp.source;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MainPhaseStackEmptyCondition;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.effects.common.RollPlanarDieEffect;
 import mage.abilities.effects.common.continuous.MaximumHandSizeControllerEffect;
 import mage.abilities.effects.common.continuous.MaximumHandSizeControllerEffect.HandSizeModification;
@@ -53,6 +55,7 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
+import mage.target.targetpointer.FixedTarget;
 import mage.watchers.common.PlanarRollWatcher;
 
 /**
@@ -96,7 +99,7 @@ public class UndercityReachesPlane extends Plane {
 class UndercityReachesTriggeredAbility extends TriggeredAbilityImpl {
 
     public UndercityReachesTriggeredAbility() {
-        super(Zone.COMMAND, new DrawCardSourceControllerEffect(1), true);
+        super(Zone.COMMAND, null, true);
     }
 
     public UndercityReachesTriggeredAbility(final UndercityReachesTriggeredAbility ability) {
@@ -118,6 +121,9 @@ class UndercityReachesTriggeredAbility extends TriggeredAbilityImpl {
         if (((DamagedPlayerEvent) event).isCombatDamage()) {
             Permanent creature = game.getPermanent(event.getSourceId());
             if (creature != null) {
+                Effect effect = new DrawCardTargetEffect(new StaticValue(1), false, true);
+                effect.setTargetPointer(new FixedTarget(creature.getControllerId()));
+                effect.apply(game, null);
                 return true;
             }
         }

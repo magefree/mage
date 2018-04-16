@@ -29,15 +29,17 @@ package mage.game.command.planes;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MainPhaseStackEmptyCondition;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.RollPlanarDieEffect;
+import mage.abilities.effects.common.SkipUntapStepEffect;
 import mage.abilities.effects.common.UntapAllControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.constants.Duration;
@@ -120,11 +122,19 @@ class EdgeOfMalacolEffect extends ContinuousRuleModifyingEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         // Prevent untap event of creatures of target player
         if (game.getTurn().getStepType() == PhaseStep.UNTAP) {
+            if (game.getState().getCurrentPlane() != null) {
+                if (!game.getState().getCurrentPlane().getName().equalsIgnoreCase("Plane - Edge of Malacol")) {
+                    return false;
+                }
+            }
             Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && filter.match(permanent, game)) {
+            if (permanent != null && filter.match(permanent, game) && permanent.getControllerId() == game.getActivePlayerId()) {
+                UUID oldController = source.getControllerId();
+                source.setControllerId(game.getActivePlayerId());
                 Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance(2));
                 effect.setTargetPointer(new FixedTarget(permanent, game));
                 effect.apply(game, source);
+                source.setControllerId(oldController);
                 return true;
             }
         }

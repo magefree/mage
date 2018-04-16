@@ -1077,7 +1077,7 @@ public abstract class GameImpl implements Game, Serializable {
         // 20180408 - 901.5
         if (gameOptions.planeChase) {
             Plane plane = Plane.getRandomPlane();
-            plane.setControllerId(getActivePlayerId());
+            plane.setControllerId(startingPlayerId);
             addPlane(plane, null, getActivePlayerId());
             state.setPlaneChase(this, gameOptions.planeChase);
         }
