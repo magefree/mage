@@ -59,7 +59,7 @@ public class BorosGarrison extends CardImpl {
         // When Boros Garrison enters the battlefield, return a land you control to its owner's hand.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(filter), false));
         
-        // {T}: Add {R}{W} to your mana pool.
+        // {T}: Add {R}{W}.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(1, 0, 0, 1, 0, 0, 0, 0), new TapSourceCost()));
     }
 

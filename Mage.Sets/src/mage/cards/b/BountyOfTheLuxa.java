@@ -52,7 +52,7 @@ public class BountyOfTheLuxa extends CardImpl {
     public BountyOfTheLuxa(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{U}");
 
-        //At the beginning of your precombat main phase, remove all flood counters from Bounty of the Luxa. If no counters were removed this way, put a flood counter on Bounty of the Luxa and draw a card. Otherwise, add {C}{G}{U} to your mana pool.
+        //At the beginning of your precombat main phase, remove all flood counters from Bounty of the Luxa. If no counters were removed this way, put a flood counter on Bounty of the Luxa and draw a card. Otherwise, add {C}{G}{U}.
         this.addAbility(new BeginningOfPreCombatMainTriggeredAbility(new BountyOfTheLuxaEffect(), TargetController.YOU, false));
 
     }
@@ -72,7 +72,7 @@ class BountyOfTheLuxaEffect extends OneShotEffect {
 
     public BountyOfTheLuxaEffect() {
         super(Outcome.Benefit);
-        staticText = "remove all flood counters from {this}. If no counters were removed this way, put a flood counter on {this} and draw a card. Otherwise, add {C}{G}{U} to your mana pool";
+        staticText = "remove all flood counters from {this}. If no counters were removed this way, put a flood counter on {this} and draw a card. Otherwise, add {C}{G}{U}";
     }
 
     public BountyOfTheLuxaEffect(final BountyOfTheLuxaEffect effect) {

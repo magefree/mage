@@ -36,6 +36,7 @@ import mage.MageObject;
 import mage.abilities.*;
 import mage.abilities.common.AttachableToRestrictedAbility;
 import mage.abilities.common.CantHaveMoreThanAmountCountersSourceAbility;
+import mage.abilities.common.SagaAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffects;
 import mage.abilities.effects.Effect;
@@ -67,6 +68,7 @@ import mage.game.combat.Combat;
 import mage.game.command.CommandObject;
 import mage.game.command.Commander;
 import mage.game.command.Emblem;
+import mage.game.command.Plane;
 import mage.game.events.*;
 import mage.game.events.TableEvent.EventType;
 import mage.game.permanent.Battlefield;
@@ -1032,6 +1034,7 @@ public abstract class GameImpl implements Game, Serializable {
         watchers.add(new PlayerLostLifeWatcher());
         watchers.add(new BlockedAttackerWatcher());
         watchers.add(new DamageDoneWatcher());
+        watchers.add(new PlanarRollWatcher());
 
         //20100716 - 103.5
         for (UUID playerId : state.getPlayerList(startingPlayerId)) {
@@ -1071,6 +1074,13 @@ public abstract class GameImpl implements Game, Serializable {
             }
         }
 
+        // 20180408 - 901.5
+        if (gameOptions.planeChase) {
+            Plane plane = Plane.getRandomPlane();
+            plane.setControllerId(getActivePlayerId());
+            addPlane(plane, null, getActivePlayerId());
+            state.setPlaneChase(this, gameOptions.planeChase);
+        }
     }
 
     protected void sendStartMessage(Player choosingPlayer, Player startingPlayer) {
@@ -1526,6 +1536,46 @@ public abstract class GameImpl implements Game, Serializable {
         state.addCommandObject(newEmblem);
     }
 
+    /**
+     *
+     * @param plane
+     * @param sourceObject
+     * @param toPlayerId controller and owner of the plane (may only be one per
+     * game..)
+     * @return boolean - whether the plane was added successfully or not
+     */
+    @Override
+    public boolean addPlane(Plane plane, MageObject sourceObject, UUID toPlayerId) {
+        // Implementing planechase as if it were 901.15. Single Planar Deck Option
+        // Here, can enforce the world plane restriction (the Grand Melee format may have some impact on this implementation)
+
+        // Enforce 'world' rule for planes
+        for (CommandObject cobject : state.getCommand()) {
+            if (cobject instanceof Plane) {
+                return false;
+            }
+        }
+        Plane newPlane = plane.copy();
+        newPlane.setSourceObject(sourceObject);
+        newPlane.setControllerId(toPlayerId);
+        newPlane.assignNewId();
+        newPlane.getAbilities().newId();
+        for (Ability ability : newPlane.getAbilities()) {
+            ability.setSourceId(newPlane.getId());
+        }
+        state.addCommandObject(newPlane);
+        informPlayers("You have planeswalked to " + newPlane.getLogName());
+        
+        // Fire off the planeswalked event
+        GameEvent event = new GameEvent(GameEvent.EventType.PLANESWALK, newPlane.getId(), null, newPlane.getId(), 0, true);
+        if (!replaceEvent(event)) {
+            GameEvent ge = new GameEvent(GameEvent.EventType.PLANESWALKED, newPlane.getId(), null, newPlane.getId(), 0, true);
+            fireEvent(ge);
+        }
+        
+        return true;
+    }
+
     @Override
     public void addCommander(Commander commander) {
         state.addCommandObject(commander);
@@ -1874,7 +1924,7 @@ public abstract class GameImpl implements Game, Serializable {
             if (perm.isWorld()) {
                 worldEnchantment.add(perm);
             }
-            if (StaticFilters.FILTER_PERMANENT_AURA.match(perm, this)) {
+            if (perm.hasSubtype(SubType.AURA, this)) {
                 //20091005 - 704.5n, 702.14c
                 if (perm.getAttachedTo() == null) {
                     Card card = this.getCard(perm.getId());
@@ -1961,6 +2011,30 @@ public abstract class GameImpl implements Game, Serializable {
                                 }
                             }
                         }
+                    }
+                }
+            }
+            // Remove Saga enchantment if last chapter is reached and chapter ability has left the stack
+            if (perm.hasSubtype(SubType.SAGA, this)) {
+                for (Ability sagaAbility : perm.getAbilities()) {
+                    if (sagaAbility instanceof SagaAbility) {
+                        int maxChapter = ((SagaAbility) sagaAbility).getMaxChapter().getNumber();
+                        if (maxChapter <= perm.getCounters(this).getCount(CounterType.LORE)) {
+                            boolean noChapterAbilityOnStack = true;
+                            // Check chapter abilities on stack
+                            for (StackObject stackObject : getStack()) {
+                                if (stackObject.getSourceId().equals(perm.getId()) && SagaAbility.isChapterAbility(stackObject)) {
+                                    noChapterAbilityOnStack = false;
+                                    break;
+                                }
+                            }
+                            if (noChapterAbilityOnStack) {
+                                // After the last chapter ability has left the stack, you'll sacrifice the Saga
+                                perm.sacrifice(perm.getId(), this);
+                                somethingHappened = true;
+                            }
+                        }
+
                     }
                 }
             }
@@ -2466,7 +2540,7 @@ public abstract class GameImpl implements Game, Serializable {
         //Remove all emblems the player controls
         for (Iterator<CommandObject> it = this.getState().getCommand().iterator(); it.hasNext();) {
             CommandObject obj = it.next();
-            if (obj instanceof Emblem && obj.getControllerId().equals(playerId)) {
+            if ((obj instanceof Emblem || obj instanceof Plane) && obj.getControllerId().equals(playerId)) {
                 ((Emblem) obj).discardEffects();// This may not be the best fix but it works
                 it.remove();
             }

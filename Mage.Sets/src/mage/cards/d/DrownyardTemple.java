@@ -46,7 +46,7 @@ public class DrownyardTemple extends CardImpl {
     public DrownyardTemple(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
 
         // {3}: Return Drownyard Temple from your graveyard to the battlefield tapped.

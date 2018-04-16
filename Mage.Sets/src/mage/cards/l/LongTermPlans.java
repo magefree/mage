@@ -46,8 +46,7 @@ import mage.target.common.TargetCardInLibrary;
 public class LongTermPlans extends CardImpl {
 
     public LongTermPlans(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}");
 
         // Search your library for a card, shuffle your library, then put that card third from the top.
         this.getSpellAbility().addEffect(new LongTermPlansEffect());
@@ -64,21 +63,21 @@ public class LongTermPlans extends CardImpl {
 }
 
 class LongTermPlansEffect extends OneShotEffect {
-    
+
     LongTermPlansEffect() {
         super(Outcome.Benefit);
         this.staticText = "Search your library for a card, shuffle your library, then put that card third from the top";
     }
-    
+
     LongTermPlansEffect(final LongTermPlansEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public LongTermPlansEffect copy() {
         return new LongTermPlansEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
@@ -88,21 +87,7 @@ class LongTermPlansEffect extends OneShotEffect {
                 Card card = player.getLibrary().remove(target.getFirstTarget(), game);
                 if (card != null) {
                     player.shuffleLibrary(source, game);
-                    Card cardTop = null;
-                    Card cardSecond = null;
-                    if (player.getLibrary().hasCards()) {
-                        cardTop = player.getLibrary().removeFromTop(game);
-                    }
-                    if (player.getLibrary().hasCards()) {
-                        cardSecond = player.getLibrary().removeFromTop(game);
-                    }
-                    player.getLibrary().putOnTop(card, game);
-                    if (cardSecond != null) {
-                        player.getLibrary().putOnTop(cardSecond, game);
-                    }
-                    if (cardTop != null) {
-                        player.getLibrary().putOnTop(cardTop, game);
-                    }
+                    player.getLibrary().putCardThirdFromTheTop(card, game);
                 }
             }
             return true;

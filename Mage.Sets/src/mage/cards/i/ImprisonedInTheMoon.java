@@ -75,7 +75,7 @@ public class ImprisonedInTheMoon extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
-        // Enchanted permanent is a colorless land with "{T}: Add {C} to your mana pool" and loses all other card types and abilities.
+        // Enchanted permanent is a colorless land with "{T}: Add {C}" and loses all other card types and abilities.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesColorlessLandEffect()));
     }
 
@@ -93,7 +93,7 @@ class BecomesColorlessLandEffect extends ContinuousEffectImpl {
 
     public BecomesColorlessLandEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        this.staticText = "Enchanted permanent is a colorless land with \"{T}: Add {C} to your mana pool\" and loses all other card types and abilities";
+        this.staticText = "Enchanted permanent is a colorless land with \"{T}: Add {C}\" and loses all other card types and abilities";
     }
 
     public BecomesColorlessLandEffect(final BecomesColorlessLandEffect effect) {

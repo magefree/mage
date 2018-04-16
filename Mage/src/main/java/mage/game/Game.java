@@ -49,6 +49,7 @@ import mage.counters.Counters;
 import mage.game.combat.Combat;
 import mage.game.command.Commander;
 import mage.game.command.Emblem;
+import mage.game.command.Plane;
 import mage.game.events.GameEvent;
 import mage.game.events.Listener;
 import mage.game.events.PlayerQueryEvent;
@@ -364,6 +365,8 @@ public interface Game extends MageItem, Serializable {
     void addEmblem(Emblem emblem, MageObject sourceObject, Ability source);
 
     void addEmblem(Emblem emblem, MageObject sourceObject, UUID toPlayerId);
+
+    boolean addPlane(Plane plane, MageObject sourceObject, UUID toPlayerId);
 
     void addCommander(Commander commander);
 

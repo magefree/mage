@@ -160,7 +160,7 @@ public class NykthosShrineToNyxTest extends CardTestPlayerBase {
         /*
             Nykthos, Shrine to Nyx
             Legendary Land
-            {T}: Add {1} to your mana pool.
+            {T}: Add {1}.
             {2}, {T}: Choose a color. Add to your mana pool an amount of mana of that color equal to your devotion to that color.
          */
         String nykthos = "Nykthos, Shrine to Nyx";

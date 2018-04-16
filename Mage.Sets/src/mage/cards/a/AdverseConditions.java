@@ -55,9 +55,9 @@ public class AdverseConditions extends CardImpl {
         this.getSpellAbility().addEffect(new TapTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2));
         this.getSpellAbility().addEffect(new DontUntapInControllersNextUntapStepTargetEffect("Those creatures"));
-        // Create a 1/1 colorless Eldrazi Scion creature token. It has "Sacrifice this creature: Add {C} to your mana pool."
+        // Create a 1/1 colorless Eldrazi Scion creature token. It has "Sacrifice this creature: Add {C}."
         Effect effect = new CreateTokenEffect(new EldraziScionToken());
-        effect.setText("create a 1/1 colorless Eldrazi Scion creature token. It has \"Sacrifice this creature: Add {C} to your mana pool.\"");
+        effect.setText("create a 1/1 colorless Eldrazi Scion creature token. It has \"Sacrifice this creature: Add {C}.\"");
         this.getSpellAbility().addEffect(effect);
 
     }

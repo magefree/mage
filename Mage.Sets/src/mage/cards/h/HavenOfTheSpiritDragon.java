@@ -71,7 +71,7 @@ public class HavenOfTheSpiritDragon extends CardImpl {
     public HavenOfTheSpiritDragon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
 
         // {T}: add one mana of any color to your mana pool. Spend this mana only to cast a Dragon creature spell.

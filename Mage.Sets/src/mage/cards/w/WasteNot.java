@@ -55,7 +55,7 @@ public class WasteNot extends CardImpl {
         // Whenever an opponent discards a creature card, create a 2/2 black Zombie creature token.
         this.addAbility(new WasteNotCreatureTriggeredAbility());
 
-        // Whenever an opponent discards a land card, add {B}{B} to your mana pool.
+        // Whenever an opponent discards a land card, add {B}{B}.
         this.addAbility(new WasteNotLandTriggeredAbility());
 
         // Whenever an opponent discards a noncreature, nonland card, draw a card.
@@ -142,7 +142,7 @@ class WasteNotLandTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever an opponent discards a land card, add {B}{B} to your mana pool.";
+        return "Whenever an opponent discards a land card, add {B}{B}.";
     }
 }
 

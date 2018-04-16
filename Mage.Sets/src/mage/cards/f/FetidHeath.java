@@ -48,10 +48,10 @@ public class FetidHeath extends CardImpl {
     public FetidHeath (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
         
-        // {tap}: Add {C} to your mana pool.
+        // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         
-        // {W/B}, {tap}: Add {W}{W}, {W}{B}, or {B}{B} to your mana pool.
+        // {W/B}, {tap}: Add {W}{W}, {W}{B}, or {B}{B}.
         SimpleManaAbility ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.WhiteMana(2), new ManaCostsImpl("{W/B}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

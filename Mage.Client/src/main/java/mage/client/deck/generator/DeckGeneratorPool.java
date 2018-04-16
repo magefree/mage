@@ -444,7 +444,7 @@ public class DeckGeneratorPool
      * @return if the ability is tapping to produce the mana the symbol represents.
      */
     private boolean landTapsForAllowedColor(String ability, String symbol)  {
-        return ability.matches(".*Add \\{" + symbol + "\\} to your mana pool.");
+        return ability.matches(".*Add \\{" + symbol + "\\}.");
     }
 
     /**

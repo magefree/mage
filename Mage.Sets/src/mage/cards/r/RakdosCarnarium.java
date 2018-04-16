@@ -55,7 +55,7 @@ public class RakdosCarnarium extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
         // When Rakdos Carnarium enters the battlefield, return a land you control to its owner's hand.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(filter), false));
-        // {tap}: Add {B}{R} to your mana pool.
+        // {tap}: Add {B}{R}.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(1, 0, 0, 0, 1, 0, 0, 0), new TapSourceCost()));
     }
 

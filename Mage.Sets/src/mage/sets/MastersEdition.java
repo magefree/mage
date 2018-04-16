@@ -83,6 +83,7 @@ public class MastersEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Basal Thrull", 59, Rarity.COMMON, BasalThrull.class));
         cards.add(new SetCardInfo("Benalish Hero", 5, Rarity.COMMON, mage.cards.b.BenalishHero.class));
         cards.add(new SetCardInfo("Berserk", 114, Rarity.RARE, mage.cards.b.Berserk.class));
+        cards.add(new SetCardInfo("Bestial Fury", 88, Rarity.COMMON, mage.cards.b.BestialFury.class));
         cards.add(new SetCardInfo("Black Knight", 60, Rarity.UNCOMMON, mage.cards.b.BlackKnight.class));
         cards.add(new SetCardInfo("Blight", 61, Rarity.UNCOMMON, mage.cards.b.Blight.class));
         cards.add(new SetCardInfo("Breeding Pit", 62, Rarity.UNCOMMON, mage.cards.b.BreedingPit.class));
@@ -250,6 +251,7 @@ public class MastersEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Winds of Change", 111, Rarity.UNCOMMON, mage.cards.w.WindsOfChange.class));
         cards.add(new SetCardInfo("Winter Blast", 138, Rarity.UNCOMMON, mage.cards.w.WinterBlast.class));
         cards.add(new SetCardInfo("Winter Orb", 173, Rarity.RARE, mage.cards.w.WinterOrb.class));
+        cards.add(new SetCardInfo("Word of Undoing", 56, Rarity.COMMON, mage.cards.w.WordOfUndoing.class));
         cards.add(new SetCardInfo("Wyluli Wolf", 139, Rarity.COMMON, mage.cards.w.WyluliWolf.class));
         cards.add(new SetCardInfo("Yavimaya Ants", 140, Rarity.UNCOMMON, mage.cards.y.YavimayaAnts.class));
         cards.add(new SetCardInfo("Ydwen Efreet", 112, Rarity.RARE, mage.cards.y.YdwenEfreet.class));

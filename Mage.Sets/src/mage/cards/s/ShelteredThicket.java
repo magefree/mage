@@ -50,7 +50,7 @@ public class ShelteredThicket extends CardImpl {
         this.subtype.add(SubType.MOUNTAIN);
         this.subtype.add(SubType.FOREST);
 
-        // <i>({T}: Add {R} or {G} to your mana pool.)</i>
+        // <i>({T}: Add {R} or {G}.)</i>
         this.addAbility(new RedManaAbility());
         this.addAbility(new GreenManaAbility());
 

@@ -57,7 +57,7 @@ public class SithHolocron extends CardImpl {
         // {T}: Put a charge counter on Sith Holocron.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance(1)), new TapSourceCost()));
 
-        // {T}, Remove a charge counter from Sith Holocron: Add {U}, {B} or {R} to your mana pool.
+        // {T}, Remove a charge counter from Sith Holocron: Add {U}, {B} or {R}.
         Cost cost = new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(1));
         Ability ability = new BlueManaAbility();
         ability.addCost(cost);

@@ -62,7 +62,7 @@ public class GaeasTouch extends CardImpl {
         ability.setTiming(TimingRule.SORCERY);
         addAbility(ability);
 
-        // Sacrifice Gaea's Touch: Add {G}{G} to your mana pool.
+        // Sacrifice Gaea's Touch: Add {G}{G}.
         addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.GreenMana(2), new SacrificeSourceCost()));
     }
 

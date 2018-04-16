@@ -48,6 +48,12 @@ public final class StaticFilters {
         FILTER_CARD_ARTIFACT.setLockedFilter(true);
     }
 
+    public static final FilterArtifactCard FILTER_CARD_ARTIFACT_AN = new FilterArtifactCard("an artifact card");
+
+    static {
+        FILTER_CARD_ARTIFACT_AN.setLockedFilter(true);
+    }
+
     public static final FilterCreatureCard FILTER_CARD_CREATURE = new FilterCreatureCard();
 
     static {
@@ -157,7 +163,7 @@ public final class StaticFilters {
         FILTER_OPPONENTS_PERMANENT.add(new ControllerPredicate(TargetController.OPPONENT));
         FILTER_OPPONENTS_PERMANENT.setLockedFilter(true);
     }
-    public static final FilterPermanent FILTER_OPPONENTS_PERMANENT_CREATURE = new FilterCreaturePermanent("creature an opponent controls");
+    public static final FilterCreaturePermanent FILTER_OPPONENTS_PERMANENT_CREATURE = new FilterCreaturePermanent("creature an opponent controls");
 
     static {
         FILTER_OPPONENTS_PERMANENT_CREATURE.add(new ControllerPredicate(TargetController.OPPONENT));
@@ -225,6 +231,12 @@ public final class StaticFilters {
         FILTER_LAND.setLockedFilter(true);
     }
 
+    public static final FilterLandPermanent FILTER_LAND_A = new FilterLandPermanent("a land");
+
+    static {
+        FILTER_LAND_A.setLockedFilter(true);
+    }
+
     public static final FilterLandPermanent FILTER_LANDS = new FilterLandPermanent("lands");
 
     static {
@@ -255,6 +267,15 @@ public final class StaticFilters {
     static {
         FILTER_PERMANENT_CREATURE.setLockedFilter(true);
     }
+
+    public static final FilterPermanent FILTER_PERMANENT_CREATURE_OR_PLANESWALKER_A = new FilterPermanent("a creature or planeswalker");
+
+    static {
+        FILTER_PERMANENT_CREATURE_OR_PLANESWALKER_A.add(
+                Predicates.or(new CardTypePredicate(CardType.CREATURE), new CardTypePredicate(CardType.PLANESWALKER)));
+        FILTER_PERMANENT_CREATURE_OR_PLANESWALKER_A.setLockedFilter(true);
+    }
+
     public static final FilterCreaturePermanent FILTER_PERMANENT_A_CREATURE = new FilterCreaturePermanent("a creature");
 
     static {

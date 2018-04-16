@@ -50,7 +50,7 @@ public class BlightedGorge extends CardImpl {
     public BlightedGorge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
 
         // {4}{R}, {T}, Sacrifice Blighted Gorge: Blighted Gorge deals 2 damage to target creature or player.

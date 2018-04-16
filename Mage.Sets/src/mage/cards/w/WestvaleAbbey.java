@@ -60,7 +60,7 @@ public class WestvaleAbbey extends CardImpl {
         this.transformable = true;
         this.secondSideCardClazz = OrmendahlProfanePrince.class;
 
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
 
         // {5}, {T}, Pay 1 life: Create a 1/1 white and black Human Cleric creature token.

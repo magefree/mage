@@ -53,7 +53,7 @@ public class CradleOfTheAccursed extends CardImpl {
 
         this.subtype.add(SubType.DESERT);
 
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
 
         // {3}, {T}, Sacrifice Cradle of the Accursed: Create a 2/2 black Zombie creature token. Activate this ability only any time you could cast a sorcery.

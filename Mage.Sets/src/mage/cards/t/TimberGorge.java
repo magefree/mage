@@ -47,7 +47,7 @@ public class TimberGorge extends CardImpl {
         // Timber Gorge enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
         
-        // {T}: Add {R} or {G} to your mana pool.
+        // {T}: Add {R} or {G}.
         this.addAbility(new RedManaAbility());
         this.addAbility(new GreenManaAbility());
     }

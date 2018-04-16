@@ -53,7 +53,7 @@ public class EldraziScionToken extends TokenImpl {
     }
 
     public EldraziScionToken() {
-        super("Eldrazi Scion", "1/1 colorless Eldrazi Scion creature token with \"Sacrifice this creature: Add {C} to your mana pool.\"");
+        super("Eldrazi Scion", "1/1 colorless Eldrazi Scion creature token with \"Sacrifice this creature: Add {C}.\"");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.ELDRAZI);
         subtype.add(SubType.SCION);

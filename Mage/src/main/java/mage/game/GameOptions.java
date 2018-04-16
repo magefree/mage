@@ -50,5 +50,10 @@ public class GameOptions implements Serializable {
      * Names of users banned from participating in the game
      */
     public Set<String> bannedUsers = Collections.emptySet();
+    
+    /**
+     * Use planechase variant
+     */
+    public boolean planeChase = false;
 
 }

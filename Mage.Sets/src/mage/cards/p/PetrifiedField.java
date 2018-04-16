@@ -51,7 +51,7 @@ public class PetrifiedField extends CardImpl {
     public PetrifiedField(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {tap}: Add {C} to your mana pool.
+        // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         
         // {tap}, Sacrifice Petrified Field: Return target land card from your graveyard to your hand.

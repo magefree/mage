@@ -182,7 +182,7 @@ public class MeldTest extends CardTestPlayerBase {
         // <i>(Melds with Hanweir Battlements.)</i>
         addCard(Zone.BATTLEFIELD, playerA, "Hanweir Garrison"); // Creature 2/3 {2}{R}
 
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         // {R},{T}: Target creature gains haste until end of turn.
         // {3}{R}{R},{T}: If you both own and control Hanweir Battlements and a creature named Hanweir Garrison, exile them, then meld them into Hanweir, the Writhing Township.
         addCard(Zone.BATTLEFIELD, playerA, "Hanweir Battlements"); // Land

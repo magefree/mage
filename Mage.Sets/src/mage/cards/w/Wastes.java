@@ -44,7 +44,7 @@ public class Wastes extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
         addSuperType(SuperType.BASIC);
 
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
     }
 

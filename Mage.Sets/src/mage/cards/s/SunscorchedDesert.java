@@ -54,7 +54,7 @@ public class SunscorchedDesert extends CardImpl {
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
 
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
     }
 

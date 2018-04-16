@@ -58,7 +58,7 @@ public class NivixAerieOfTheFiremind extends CardImpl {
     public NivixAerieOfTheFiremind(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {tap}: Add {C} to your mana pool.
+        // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         
         // {2}{U}{R}, {tap}: Exile the top card of your library. Until your next turn, you may cast that card if it's an instant or sorcery card.

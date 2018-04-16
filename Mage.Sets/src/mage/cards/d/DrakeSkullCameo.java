@@ -43,7 +43,7 @@ public class DrakeSkullCameo extends CardImpl {
     public DrakeSkullCameo(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
-        // {tap}: Add {U} or {B} to your mana pool.
+        // {tap}: Add {U} or {B}.
         this.addAbility(new BlueManaAbility());
         this.addAbility(new BlackManaAbility());
     }

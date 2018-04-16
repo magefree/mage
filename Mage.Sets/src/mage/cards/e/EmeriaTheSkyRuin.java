@@ -59,7 +59,7 @@ public class EmeriaTheSkyRuin extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
         // At the beginning of your upkeep, if you control seven or more Plains, you may return target creature card from your graveyard to the battlefield.
         this.addAbility(new EmeriaTheSkyRuinTriggeredAbility());
-        // {tap}: Add {W} to your mana pool.
+        // {tap}: Add {W}.
         this.addAbility(new WhiteManaAbility());
     }
 

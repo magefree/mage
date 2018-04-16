@@ -50,7 +50,7 @@ public class IrrigatedFarmland extends CardImpl {
         this.subtype.add(SubType.PLAINS);
         this.subtype.add(SubType.ISLAND);
 
-        // <i>({T}: Add {W} or {U} to your mana pool.)</i>
+        // <i>({T}: Add {W} or {U}.)</i>
         this.addAbility(new WhiteManaAbility());
         this.addAbility(new BlueManaAbility());
 

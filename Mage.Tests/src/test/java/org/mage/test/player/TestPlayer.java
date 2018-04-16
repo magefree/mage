@@ -2379,4 +2379,19 @@ public class TestPlayer implements Player {
         return computerPlayer.getHistory();
     }
 
+    @Override
+    public PlanarDieRoll rollPlanarDie(Game game) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public PlanarDieRoll rollPlanarDie(Game game, ArrayList<UUID> appliedEffects) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public PlanarDieRoll rollPlanarDie(Game game, ArrayList<UUID> appliedEffects, int numberChaosSides, int numberPlanarSides) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

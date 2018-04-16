@@ -62,7 +62,7 @@ public class LoomingSpires extends CardImpl {
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
         
-        // {T}: Add {R} to your mana pool.
+        // {T}: Add {R}.
         this.addAbility(new RedManaAbility());
     }
 

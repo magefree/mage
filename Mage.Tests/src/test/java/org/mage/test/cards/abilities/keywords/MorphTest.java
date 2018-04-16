@@ -671,9 +671,9 @@ public class MorphTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
 
-        //Tap: Add {G}, {U}, or {R} to your mana pool.
+        //Tap: Add {G}, {U}, or {R}.
         // Morph 2 (You may cast this card face down as a 2/2 creature for 3. Turn it face up any time for its morph cost.)
-        // When Rattleclaw Mystic is turned face up, add {G}{U}{R} to your mana pool.
+        // When Rattleclaw Mystic is turned face up, add {G}{U}{R}.
         addCard(Zone.BATTLEFIELD, playerB, "Rattleclaw Mystic"); // 2/1
         addCard(Zone.BATTLEFIELD, playerB, "Forest");
         addCard(Zone.BATTLEFIELD, playerB, "Island");
@@ -709,9 +709,9 @@ public class MorphTest extends CardTestPlayerBase {
     @Test
     public void testReflectorMageBouncesMorphCreatureReplayAsFaceup() {
 
-        //Tap: Add {G}, {U}, or {R} to your mana pool.
+        //Tap: Add {G}, {U}, or {R}.
         // Morph 2 (You may cast this card face down as a 2/2 creature for 3. Turn it face up any time for its morph cost.)
-        // When Rattleclaw Mystic is turned face up, add {G}{U}{R} to your mana pool.
+        // When Rattleclaw Mystic is turned face up, add {G}{U}{R}.
         addCard(Zone.HAND, playerA, "Rattleclaw Mystic"); // 2/1
         addCard(Zone.BATTLEFIELD, playerA, "Forest");
         addCard(Zone.BATTLEFIELD, playerA, "Island");

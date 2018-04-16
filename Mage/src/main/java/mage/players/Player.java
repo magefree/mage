@@ -57,6 +57,7 @@ import mage.choices.Choice;
 import mage.constants.AbilityType;
 import mage.constants.ManaType;
 import mage.constants.Outcome;
+import mage.constants.PlanarDieRoll;
 import mage.constants.PlayerAction;
 import mage.constants.RangeOfInfluence;
 import mage.constants.Zone;
@@ -422,6 +423,11 @@ public interface Player extends MageItem, Copyable<Player> {
     int rollDice(Game game, int numSides);
 
     int rollDice(Game game, ArrayList<UUID> appliedEffects, int numSides);
+
+    PlanarDieRoll rollPlanarDie(Game game);
+
+    PlanarDieRoll rollPlanarDie(Game game, ArrayList<UUID> appliedEffects);
+    PlanarDieRoll rollPlanarDie(Game game, ArrayList<UUID> appliedEffects, int numberChaosSides, int numberPlanarSides);
 
     @Deprecated
     void discard(int amount, Ability source, Game game);

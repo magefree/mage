@@ -56,7 +56,7 @@ public class RattleclawMystic extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        // {T}: Add {G}, {U}, or {R} to your mana pool.
+        // {T}: Add {G}, {U}, or {R}.
         this.addAbility(new GreenManaAbility());
         this.addAbility(new BlueManaAbility());
         this.addAbility(new RedManaAbility());
@@ -64,7 +64,7 @@ public class RattleclawMystic extends CardImpl {
         // Morph {2}
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{2}")));
         
-        // When Rattleclaw Mystic is turned face up, add {G}{U}{R} to your mana pool.
+        // When Rattleclaw Mystic is turned face up, add {G}{U}{R}.
         this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new AddManaToManaPoolSourceControllerEffect(new Mana(1,1,1,0,0,0,0, 0))));
 
     }

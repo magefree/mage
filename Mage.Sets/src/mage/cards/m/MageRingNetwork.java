@@ -55,19 +55,19 @@ public class MageRingNetwork extends CardImpl {
     public MageRingNetwork(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         // {1}, {T}: Put a storage counter on Mage-Ring Network.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.STORAGE.createInstance()),
                 new ManaCostsImpl("{1}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
-        // {T}, Remove any number of storage counters from Mage-Ring Network: Add {C} to your mana pool for each storage counter removed this way.
+        // {T}, Remove any number of storage counters from Mage-Ring Network: Add {C} for each storage counter removed this way.
         ability = new DynamicManaAbility(
                 Mana.ColorlessMana(1),
                 new RemovedCountersForCostValue(),
                 new TapSourceCost(),
-                "Add {C} to your mana pool for each storage counter removed this way",
+                "Add {C} for each storage counter removed this way",
                 true, new CountersSourceCount(CounterType.STORAGE));
         ability.addCost(new RemoveVariableCountersSourceCost(CounterType.STORAGE.createInstance(),
                 "Remove X storage counters from {this}"));

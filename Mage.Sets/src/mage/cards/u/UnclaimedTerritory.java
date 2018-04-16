@@ -60,7 +60,7 @@ public class UnclaimedTerritory extends CardImpl {
         // As Unclaimed Territory enters the battlefield, choose a creature type.
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.Benefit)));
 
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
 
         // {T}: Add one mana of any color to your mana pool. Spend this mana only to cast a creature spell of the chosen type.

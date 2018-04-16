@@ -37,7 +37,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -58,11 +58,10 @@ public class AbzanAscendancy extends CardImpl {
     }
 
     public AbzanAscendancy(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}{B}{G}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{W}{B}{G}");
 
         // When Abzan Ascendancy enters the battlefield, put a +1/+1 counter on each creature you control.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), new FilterControlledCreaturePermanent()), false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), StaticFilters.FILTER_CONTROLLED_CREATURE), false));
 
         // Whenever a nontoken creature you control dies, create a 1/1 white Spirit creature token with flying.
         this.addAbility(new DiesCreatureTriggeredAbility(new CreateTokenEffect(new SpiritWhiteToken("KTK")), false, filter));

@@ -65,7 +65,7 @@ public class MoonscarredWerewolf extends CardImpl {
         this.transformable = true;
 
         this.addAbility(VigilanceAbility.getInstance());
-        // {tap}: Add {G}{G} to your mana pool.
+        // {tap}: Add {G}{G}.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.GreenMana(2), new TapSourceCost()));
         // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Moonscarred Werewolf.
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(false), TargetController.ANY, false);

@@ -56,7 +56,7 @@ public class TreasonousOgre extends CardImpl {
 
         // Dethrone
         this.addAbility(new DethroneAbility());
-        // Pay 3 life: Add {R} to your mana pool.
+        // Pay 3 life: Add {R}.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(ColoredManaSymbol.R), new PayLifeCost(3)));
     }
 

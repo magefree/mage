@@ -51,7 +51,7 @@ public class ManaSeism extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}");
 
 
-        // Sacrifice any number of lands. Add {C} to your mana pool for each land sacrificed this way.
+        // Sacrifice any number of lands. Add {C} for each land sacrificed this way.
         this.getSpellAbility().addEffect(new ManaSeismEffect());
         
     }
@@ -70,7 +70,7 @@ class ManaSeismEffect extends OneShotEffect {
 
     public ManaSeismEffect() {
         super(Outcome.Neutral);
-        staticText  = "Sacrifice any number of lands. Add {C} to your mana pool for each land sacrificed this way";
+        staticText  = "Sacrifice any number of lands. Add {C} for each land sacrificed this way";
     }
 
     public ManaSeismEffect(final ManaSeismEffect effect) {

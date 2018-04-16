@@ -56,7 +56,7 @@ public class DeathcapCultivator extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        // {T}: Add {B} or {G} to your mana pool.
+        // {T}: Add {B} or {G}.
         this.addAbility(new BlackManaAbility());
         this.addAbility(new GreenManaAbility());
         

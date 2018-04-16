@@ -53,7 +53,7 @@ public class ArchOfOrazca extends CardImpl {
         // Ascend
         this.addAbility(new AscendAbility());
 
-        // {t}: Add {C} to your mana pool.
+        // {t}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
 
         // {5}, {T}: Draw a card. Activate this ability only if you have the city's blessing.

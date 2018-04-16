@@ -42,7 +42,7 @@ public class MoxRuby extends CardImpl {
     public MoxRuby(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{0}");
 
-        // {tap}: Add {R} to your mana pool.
+        // {tap}: Add {R}.
         this.addAbility(new RedManaAbility());
     }
 

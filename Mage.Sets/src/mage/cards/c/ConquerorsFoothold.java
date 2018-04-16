@@ -52,7 +52,7 @@ public class ConquerorsFoothold extends CardImpl {
 
         this.nightCard = true;
 
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
 
         // {2}, {T}: Draw a card, then discard a card.

@@ -64,7 +64,7 @@ public class SpringjackPasture extends CardImpl {
     public SpringjackPasture(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {tap}: Add {C} to your mana pool.
+        // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
 
         // {4}, {tap}: Create a 0/1 white Goat creature token.

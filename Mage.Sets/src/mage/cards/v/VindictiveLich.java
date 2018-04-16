@@ -63,6 +63,7 @@ public class VindictiveLich extends CardImpl {
         Ability ability = new DiesTriggeredAbility(new SacrificeEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, "target opponent"));
         ability.getModes().setMinModes(1);
         ability.getModes().setMaxModes(3);
+        ability.getModes().setEachModeOnlyOnce(true);
         ability.getModes().setMaxModesFilter(new FilterOpponent("a different player"));
 
         FilterOpponent filter = new FilterOpponent("opponent (sacrifice)");

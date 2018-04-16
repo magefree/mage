@@ -47,7 +47,7 @@ public class SkycloudExpanse extends CardImpl {
     public SkycloudExpanse(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {1}, {tap}: Add {W}{U} to your mana pool.
+        // {1}, {tap}: Add {W}{U}.
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 0, 1, 1, 0, 0, 0, 0), new ManaCostsImpl("{1}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

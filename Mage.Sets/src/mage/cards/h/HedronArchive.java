@@ -50,7 +50,7 @@ public class HedronArchive extends CardImpl {
     public HedronArchive(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
-        // {T}: Add {C}{C} to your mana pool.
+        // {T}: Add {C}{C}.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(2), new TapSourceCost()));
         
         // {2}, {T}, Sacrifice Hedron Archive: Draw two cards.

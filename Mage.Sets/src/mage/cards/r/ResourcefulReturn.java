@@ -36,7 +36,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -52,7 +51,7 @@ public class ResourcefulReturn extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new DrawCardSourceControllerEffect(1),
-                new PermanentsOnTheBattlefieldCondition(new FilterControlledArtifactPermanent()),
+                new PermanentsOnTheBattlefieldCondition(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT),
                 "If you control an artifact, draw a card"));
 
     }

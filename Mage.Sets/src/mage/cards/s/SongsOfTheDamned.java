@@ -45,7 +45,7 @@ public class SongsOfTheDamned extends CardImpl {
     public SongsOfTheDamned(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}");
 
-        // Add {B} to your mana pool for each creature card in your graveyard.
+        // Add {B} for each creature card in your graveyard.
         DynamicManaEffect effect = new DynamicManaEffect(Mana.BlackMana(1), new CardsInControllerGraveyardCount(new FilterCreatureCard()));
         this.getSpellAbility().addEffect(effect);
     }

@@ -49,7 +49,7 @@ public class MikokoroCenterOfTheSea extends CardImpl {
     public MikokoroCenterOfTheSea(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
         addSuperType(SuperType.LEGENDARY);
-        // {tap}: Add {C} to your mana pool.
+        // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         // {2}, {tap}: Each player draws a card.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardAllEffect(1), new GenericManaCost(2));

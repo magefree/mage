@@ -50,7 +50,6 @@ public class Cowardice extends CardImpl {
     public Cowardice(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{U}{U}");
 
-
         // Whenever a creature becomes the target of a spell or ability, return that creature to its owner's hand.
         this.addAbility(new CowardiceTriggeredAbility());
     }
@@ -68,7 +67,7 @@ public class Cowardice extends CardImpl {
 class CowardiceTriggeredAbility extends TriggeredAbilityImpl {
 
     public CowardiceTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new ReturnToHandTargetEffect());
+        super(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), false);
     }
 
     public CowardiceTriggeredAbility(CowardiceTriggeredAbility ability) {
@@ -83,8 +82,7 @@ class CowardiceTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent != null && permanent.isCreature() &&
-                StackObject.class.isInstance(game.getObject(event.getSourceId()))) {
+        if (permanent != null && permanent.isCreature()) {
             getEffects().get(0).setTargetPointer(new FixedTarget(event.getTargetId()));
             return true;
         }

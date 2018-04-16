@@ -52,7 +52,7 @@ public class GreenweaverDruid extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // {T}: Add {G}{G} to your mana pool.
+        // {T}: Add {G}{G}.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.GreenMana(2), new TapSourceCost()));
     }
 

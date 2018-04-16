@@ -61,7 +61,7 @@ public class KydeleChosenOfKruphix extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
-        // {T}: Add {C} to your mana pool for each card you've drawn this turn.
+        // {T}: Add {C} for each card you've drawn this turn.
         DynamicManaAbility ability = new DynamicManaAbility(Mana.ColorlessMana(1), new CardsDrawnThisTurnDynamicValue(), new TapSourceCost());
         this.addAbility(ability, new KydeleCardsDrawnThisTurnWatcher());
 

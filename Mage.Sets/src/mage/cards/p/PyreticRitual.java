@@ -43,7 +43,7 @@ public class PyreticRitual extends CardImpl {
     public PyreticRitual(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");
 
-        // Add {R}{R}{R} to your mana pool.
+        // Add {R}{R}{R}.
         this.getSpellAbility().addEffect(new BasicManaEffect(Mana.RedMana(3)));
     }
 

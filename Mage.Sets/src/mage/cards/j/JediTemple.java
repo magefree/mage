@@ -50,7 +50,7 @@ public class JediTemple extends CardImpl {
         // Jedi Temple enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
 
-        // When Jedi Temple enters the battlefield , add {W} to your mana pool.
+        // When Jedi Temple enters the battlefield , add {W}.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new AddManaToManaPoolSourceControllerEffect(Mana.WhiteMana(1))));
 
         // {T}: Add {G} or {U} to you mana pool.

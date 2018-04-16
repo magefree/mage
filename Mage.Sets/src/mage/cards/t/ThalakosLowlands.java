@@ -46,9 +46,9 @@ public class ThalakosLowlands extends CardImpl {
     public ThalakosLowlands(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
 
-        // {tap}: Add {C} to your mana pool.
+        // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
-        // {tap}: Add {W} or {U} to your mana pool. Thalakos Lowlands doesn't untap during your next untap step.
+        // {tap}: Add {W} or {U}. Thalakos Lowlands doesn't untap during your next untap step.
         Ability ability = new WhiteManaAbility();
         ability.addEffect(new DontUntapInControllersNextUntapStepSourceEffect());
         this.addAbility(ability);

@@ -52,7 +52,7 @@ public class BlightedWoodland extends CardImpl {
     public BlightedWoodland(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
 
         // {3}{G}, {T}, Sacrifice Blighted Woodland: Search your library for up to two basic land cards and put them onto the battlefield tapped. Then shuffle your library.

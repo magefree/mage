@@ -50,7 +50,7 @@ public class UrborgElf extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // {tap}: Add {G}, {U}, or {B} to your mana pool.
+        // {tap}: Add {G}, {U}, or {B}.
         this.addAbility(new GreenManaAbility());
         this.addAbility(new BlueManaAbility());
         this.addAbility(new BlackManaAbility());

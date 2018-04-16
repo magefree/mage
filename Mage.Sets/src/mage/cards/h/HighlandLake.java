@@ -47,7 +47,7 @@ public class HighlandLake extends CardImpl {
         // Highland Lake enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
 
-        // {T}: Add {U} or {R} to your mana pool.
+        // {T}: Add {U} or {R}.
         this.addAbility(new BlueManaAbility());
         this.addAbility(new RedManaAbility());
     }

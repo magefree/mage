@@ -47,7 +47,7 @@ public class MysticMonastery extends CardImpl {
 
         // Mystic Monastery enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
-        // {T}: Add {U}, {R}, or {W} to your mana pool.
+        // {T}: Add {U}, {R}, or {W}.
         this.addAbility(new BlueManaAbility());
         this.addAbility(new RedManaAbility());
         this.addAbility(new WhiteManaAbility());

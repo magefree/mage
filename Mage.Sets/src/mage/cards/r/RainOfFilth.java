@@ -50,7 +50,7 @@ public class RainOfFilth extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}");
 
 
-        // Until end of turn, lands you control gain "Sacrifice this land: Add {B} to your mana pool."
+        // Until end of turn, lands you control gain "Sacrifice this land: Add {B}."
         ActivatedManaAbilityImpl ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana(1), new SacrificeSourceCost());
         this.getSpellAbility().addEffect(new GainAbilityAllEffect(ability, Duration.EndOfTurn, new FilterControlledLandPermanent()));
     }

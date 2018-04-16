@@ -52,7 +52,7 @@ public class TerminalMoraine extends CardImpl {
     public TerminalMoraine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {tap}: Add {C} to your mana pool.
+        // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         // {2}, {tap}, Sacrifice Terminal Moraine: Search your library for a basic land card and put that card onto the battlefield tapped. Then shuffle your library.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_BASIC_LAND_CARD), true, true), new ManaCostsImpl<>("{2}"));

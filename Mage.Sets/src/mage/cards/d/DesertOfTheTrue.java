@@ -51,7 +51,7 @@ public class DesertOfTheTrue extends CardImpl {
         // Desert of the True enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
 
-        // {T}: Add {W} to your mana pool.
+        // {T}: Add {W}.
         this.addAbility(new WhiteManaAbility());
 
         // Cycling {1}{W}

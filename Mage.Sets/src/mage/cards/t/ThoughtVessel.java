@@ -51,7 +51,7 @@ public class ThoughtVessel extends CardImpl {
         Effect effect = new MaximumHandSizeControllerEffect(Integer.MAX_VALUE, Duration.WhileOnBattlefield, MaximumHandSizeControllerEffect.HandSizeModification.SET);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
         
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
     }
 

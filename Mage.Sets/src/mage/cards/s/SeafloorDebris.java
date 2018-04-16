@@ -48,7 +48,7 @@ public class SeafloorDebris extends CardImpl {
 
         // Seafloor Debris enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
-        // {tap}: Add {U} to your mana pool.
+        // {tap}: Add {U}.
         this.addAbility(new BlueManaAbility());
         // {tap}, Sacrifice Seafloor Debris: Add one mana of any color to your mana pool.
         Ability ability = new AnyColorManaAbility();

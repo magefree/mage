@@ -69,7 +69,7 @@ public class CuriousHomunculus extends CardImpl {
         this.transformable = true;
         this.secondSideCardClazz = VoraciousReader.class;
 
-        // {T}: Add {C} to your mana pool. Spend this mana only to cast an instant or sorcery spell.
+        // {T}: Add {C}. Spend this mana only to cast an instant or sorcery spell.
         this.addAbility(new ConditionalColorlessManaAbility(new TapSourceCost(), 1, new InstantOrSorcerySpellManaBuilder()));
 
         // At the beginning of your upkeep, if there are three or more instant and/or sorcery cards in your graveyard, transform Curious Homunculus.

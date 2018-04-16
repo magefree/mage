@@ -60,7 +60,7 @@ public class Pendelhaven extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, null);
         addSuperType(SuperType.LEGENDARY);
 
-        // {tap}: Add {G} to your mana pool.
+        // {tap}: Add {G}.
         this.addAbility(new GreenManaAbility());
         // {tap}: Target 1/1 creature gets +1/+2 until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(1, 2, Duration.EndOfTurn), new TapSourceCost());

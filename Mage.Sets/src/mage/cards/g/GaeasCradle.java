@@ -47,7 +47,7 @@ public class GaeasCradle extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
         addSuperType(SuperType.LEGENDARY);
 
-        // {T}: Add {G} to your mana pool for each creature you control.
+        // {T}: Add {G} for each creature you control.
         DynamicManaAbility ability = new DynamicManaAbility(
                 Mana.GreenMana(1),
                 new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent("creature you control"))

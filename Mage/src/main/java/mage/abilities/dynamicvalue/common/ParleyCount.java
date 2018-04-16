@@ -62,7 +62,7 @@ public class ParleyCount implements DynamicValue, MageSingleton {
         int parleyValue = 0;
         MageObject sourceObject = game.getObject(sourceAbility.getSourceId());
         if (sourceObject != null) {
-            for (UUID playerId : game.getState().getPlayerList(sourceAbility.getControllerId())) {
+            for (UUID playerId : game.getState().getPlayersInRange(sourceAbility.getControllerId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     Card card = player.getLibrary().getFromTop(game);

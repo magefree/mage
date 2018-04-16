@@ -27,6 +27,10 @@
  */
 package mage.abilities;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.UUID;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.Mana;
@@ -46,6 +50,7 @@ import mage.cards.SplitCard;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.command.Emblem;
+import mage.game.command.Plane;
 import mage.game.events.GameEvent;
 import mage.game.events.ManaEvent;
 import mage.game.permanent.Permanent;
@@ -58,11 +63,6 @@ import mage.util.GameLog;
 import mage.util.ThreadLocalStringBuilder;
 import mage.watchers.Watcher;
 import org.apache.log4j.Logger;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -178,49 +178,59 @@ public abstract class AbilityImpl implements Ability {
         boolean result = true;
         //20100716 - 117.12
         if (checkIfClause(game)) {
+            if (this instanceof TriggeredAbility) {
+                for (UUID modeId : this.getModes().getSelectedModes()) {
+                    this.getModes().setActiveMode(modeId);
+                    result = resolveMode(game);
+                }
+            } else {
+                result = resolveMode(game);
+            }
+        }
+        return result;
+    }
 
-            for (Effect effect : getEffects()) {
-                if (effect instanceof OneShotEffect) {
-                    boolean effectResult = effect.apply(game, this);
-                    result &= effectResult;
-                    if (logger.isDebugEnabled()) {
-                        if (this.getAbilityType() != AbilityType.MANA) {
-                            if (!effectResult) {
-                                if (this.getSourceId() != null) {
-                                    MageObject mageObject = game.getObject(this.getSourceId());
-                                    if (mageObject != null) {
-                                        logger.debug("AbilityImpl.resolve: object: " + mageObject.getName());
-                                    }
+    private boolean resolveMode(Game game) {
+        boolean result = true;
+        for (Effect effect : getEffects()) {
+            if (effect instanceof OneShotEffect) {
+                boolean effectResult = effect.apply(game, this);
+                result &= effectResult;
+                if (logger.isDebugEnabled()) {
+                    if (this.getAbilityType() != AbilityType.MANA) {
+                        if (!effectResult) {
+                            if (this.getSourceId() != null) {
+                                MageObject mageObject = game.getObject(this.getSourceId());
+                                if (mageObject != null) {
+                                    logger.debug("AbilityImpl.resolve: object: " + mageObject.getName());
                                 }
-                                logger.debug("AbilityImpl.resolve: effect returned false -" + effect.getText(this.getModes().getMode()));
                             }
+                            logger.debug("AbilityImpl.resolve: effect returned false -" + effect.getText(this.getModes().getMode()));
                         }
                     }
-                } else {
-                    game.addEffect((ContinuousEffect) effect, this);
                 }
-                /**
-                 * All restrained trigger events are fired now. To restrain the
-                 * events is mainly neccessary because of the movement of
-                 * multiple object at once. If the event is fired directly as
-                 * one object moved, other objects are not already in the
-                 * correct zone to check for their effects. (e.g. Valakut, the
-                 * Molten Pinnacle)
-                 */
-                game.getState().handleSimultaneousEvent(game);
-                game.resetShortLivingLKI();
-                /**
-                 * game.applyEffects() has to be done at least for every effect
-                 * that moves cards/permanent between zones, or changes control
-                 * of objects so Static effects work as intened if dependant
-                 * from the moved objects zone it is in Otherwise for example
-                 * were static abilities with replacement effects deactivated
-                 * too late Example:
-                 * {@link org.mage.test.cards.replacement.DryadMilitantTest#testDiesByDestroy testDiesByDestroy}
-                 */
-                game.applyEffects();
-                game.getState().getTriggers().checkStateTriggers(game);
+            } else {
+                game.addEffect((ContinuousEffect) effect, this);
             }
+            /**
+             * All restrained trigger events are fired now. To restrain the
+             * events is mainly neccessary because of the movement of multiple
+             * object at once. If the event is fired directly as one object
+             * moved, other objects are not already in the correct zone to check
+             * for their effects. (e.g. Valakut, the Molten Pinnacle)
+             */
+            game.getState().handleSimultaneousEvent(game);
+            game.resetShortLivingLKI();
+            /**
+             * game.applyEffects() has to be done at least for every effect that
+             * moves cards/permanent between zones, or changes control of
+             * objects so Static effects work as intened if dependant from the
+             * moved objects zone it is in Otherwise for example were static
+             * abilities with replacement effects deactivated too late Example:
+             * {@link org.mage.test.cards.replacement.DryadMilitantTest#testDiesByDestroy testDiesByDestroy}
+             */
+            game.applyEffects();
+            game.getState().getTriggers().checkStateTriggers(game);
         }
         return result;
     }
@@ -621,9 +631,9 @@ public abstract class AbilityImpl implements Ability {
     @Override
     public void setControllerId(UUID controllerId) {
         this.controllerId = controllerId;
-            for (Watcher watcher : watchers) {
-                watcher.setControllerId(controllerId);
-            }
+        for (Watcher watcher : watchers) {
+            watcher.setControllerId(controllerId);
+        }
 
         if (subAbilities != null) {
             for (Ability subAbility : subAbilities) {
@@ -649,9 +659,9 @@ public abstract class AbilityImpl implements Ability {
                 subAbility.setSourceId(sourceId);
             }
         }
-            for (Watcher watcher : watchers) {
-                watcher.setSourceId(sourceId);
-            }
+        for (Watcher watcher : watchers) {
+            watcher.setSourceId(sourceId);
+        }
 
     }
 
@@ -923,8 +933,8 @@ public abstract class AbilityImpl implements Ability {
                 return true;
             }
             MageObject object = game.getObject(this.getSourceId());
-            // emblem are always actual
-            if (object != null && object instanceof Emblem) {
+            // emblem/planes are always actual
+            if (object != null && (object instanceof Emblem || object instanceof Plane)) {
                 return true;
             }
         }

@@ -58,15 +58,15 @@ public class NimbusMaze extends CardImpl {
     public NimbusMaze(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        // {tap}: Add {C} to your mana pool.
+        // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
-        // {tap}: Add {W} to your mana pool. Activate this ability only if you control an Island.
+        // {tap}: Add {W}. Activate this ability only if you control an Island.
         this.addAbility(new ActivateIfConditionManaAbility(
                 Zone.BATTLEFIELD,
                 new BasicManaEffect(Mana.WhiteMana(1)),
                 new TapSourceCost(),
                 new PermanentsOnTheBattlefieldCondition(controlIsland)));
-        // {tap}: Add {U} to your mana pool. Activate this ability only if you control a Plains.
+        // {tap}: Add {U}. Activate this ability only if you control a Plains.
         this.addAbility(new ActivateIfConditionManaAbility(
                 Zone.BATTLEFIELD,
                 new BasicManaEffect(Mana.BlueMana(1)),

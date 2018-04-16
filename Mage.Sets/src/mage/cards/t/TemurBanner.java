@@ -51,7 +51,7 @@ public class TemurBanner extends CardImpl {
     public TemurBanner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
-        // {T}: Add {G}, {U}, or {R} to your mana pool.
+        // {T}: Add {G}, {U}, or {R}.
         this.addAbility(new GreenManaAbility());
         this.addAbility(new BlueManaAbility());
         this.addAbility(new RedManaAbility());

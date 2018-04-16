@@ -51,7 +51,7 @@ public class DesertOfTheIndomitable extends CardImpl {
         // Desert of the Indomitable enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
 
-        // {T}: Add {G} to your mana pool.
+        // {T}: Add {G}.
         this.addAbility(new GreenManaAbility());
 
         // Cycling {1}{G}

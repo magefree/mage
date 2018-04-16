@@ -55,9 +55,9 @@ public class AbstruseInterference extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell());
         this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(new GenericManaCost(1)));
 
-        // You create a 1/1 colorless Eldrazi Scion creature token. It has "Sacrifice this creature: Add {C} to your mana pool."
+        // You create a 1/1 colorless Eldrazi Scion creature token. It has "Sacrifice this creature: Add {C}."
         Effect effect = new CreateTokenEffect(new EldraziScionToken());
-        effect.setText("You create a 1/1 colorless Eldrazi Scion creature token. It has \"Sacrifice this creature: Add {C} to your mana pool.\"");
+        effect.setText("You create a 1/1 colorless Eldrazi Scion creature token. It has \"Sacrifice this creature: Add {C}.\"");
         this.getSpellAbility().addEffect(effect);
     }
 

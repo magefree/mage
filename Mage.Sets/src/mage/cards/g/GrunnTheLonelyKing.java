@@ -6,7 +6,6 @@ import mage.MageInt;
 import mage.abilities.common.AttacksAloneTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
 import mage.abilities.dynamicvalue.common.SourcePermanentToughnessValue;
 import mage.abilities.effects.Effect;
@@ -15,10 +14,7 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SubType;
-import mage.constants.SuperType;
+import mage.constants.*;
 import mage.counters.CounterType;
 
 /**
@@ -39,7 +35,8 @@ public class GrunnTheLonelyKing extends CardImpl {
         this.addAbility(new KickerAbility("{3}"));
 
         //If Grunn, the Lonely King was kicked, it enters the battlefield with five +1/+1 counters on it.
-        this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance(5)), KickedCondition.instance)));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(5)),
+                                                     KickedCondition.instance, "If {this} was kicked, it enters the battlefield with five +1/+1 counters on it", ""));
 
         //Whenever Grunn attacks alone, double its power and toughness until end of turn.
         SourcePermanentPowerCount power = new SourcePermanentPowerCount();

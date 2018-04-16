@@ -60,7 +60,8 @@ public class LayerTests extends CardTestPlayerBase {
         assertType("Plains", CardType.LAND, SubType.PLAINS);
 
     }
-    
+
+    @Test
     @Ignore //Works fine in the game.  Test fails, though.
     public void complexExampleFromLayersArticle() {
         /*In play there is a Grizzly Bears which has already been Giant Growthed, 
@@ -116,7 +117,8 @@ public class LayerTests extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Urborg, Tomb of Yawgmoth", 0, 1); // Urborg is a 0/1 creature
 
     }
-    
+
+    @Test
     @Ignore //This works fine in the game.  Test fails.
     public void testFromAnArticle() {
         /*

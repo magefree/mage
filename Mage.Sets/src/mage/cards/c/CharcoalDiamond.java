@@ -46,7 +46,7 @@ public class CharcoalDiamond extends CardImpl {
         // Charcoal Diamond enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
         
-        // {tap}: Add {B} to your mana pool.
+        // {tap}: Add {B}.
         this.addAbility(new BlackManaAbility());
     }
 

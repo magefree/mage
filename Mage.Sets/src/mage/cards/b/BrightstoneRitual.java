@@ -53,7 +53,7 @@ public class BrightstoneRitual extends CardImpl {
     public BrightstoneRitual(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");
 
-        // Add {R} to your mana pool for each Goblin on the battlefield.
+        // Add {R} for each Goblin on the battlefield.
         this.getSpellAbility().addEffect(new DynamicManaEffect(Mana.RedMana(1), new PermanentsOnBattlefieldCount(filter)));
     }
 

@@ -1,14 +1,13 @@
 package mage.abilities.keyword;
 
+import java.io.ObjectStreamException;
 import mage.abilities.MageSingleton;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.constants.Zone;
 
-import java.io.ObjectStreamException;
-
 /**
- * Hexproof from black (This creature or player can't be the target of black spells or abilities
- * your opponents control.)
+ * Hexproof from black (This creature or player can't be the target of black
+ * spells or abilities your opponents control.)
  *
  * @author igoudt
  */
@@ -39,6 +38,6 @@ public class HexproofFromBlackAbility extends SimpleStaticAbility implements Mag
 
     @Override
     public String getRule() {
-        return "hexproof from black";
+        return "hexproof from black <i>(This creature can't be the target of black spells or abilities your opponents control.)</i>";
     }
 }

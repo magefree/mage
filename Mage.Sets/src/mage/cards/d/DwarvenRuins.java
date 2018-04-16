@@ -51,9 +51,9 @@ public class DwarvenRuins extends CardImpl {
 
         // Dwarven Ruins enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
-        // {tap}: Add {R} to your mana pool.
+        // {tap}: Add {R}.
         this.addAbility(new RedManaAbility());
-        // {tap}, Sacrifice Dwarven Ruins: Add {R}{R} to your mana pool.
+        // {tap}, Sacrifice Dwarven Ruins: Add {R}{R}.
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.RedMana(2), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

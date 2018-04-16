@@ -52,11 +52,11 @@ public class JackInTheMox extends CardImpl {
 
         // {T}: Roll a six-sided die. This ability has the indicated effect.
         // 1 - Sacrifice Jack-in-the-Mox and you lose 5 life.
-        // 2 - Add {W} to your mana pool.
-        // 3 - Add {U} to your mana pool.
-        // 4 - Add {B} to your mana pool.
-        // 5 - Add {R} to your mana pool.
-        // 6 - Add {G} to your mana pool.
+        // 2 - Add {W}.
+        // 3 - Add {U}.
+        // 4 - Add {B}.
+        // 5 - Add {R}.
+        // 6 - Add {G}.
         SimpleManaAbility ability = new SimpleManaAbility(Zone.BATTLEFIELD, new JackInTheMoxManaEffect(), new TapSourceCost());
         ability.setUndoPossible(false);
         this.addAbility(ability);
@@ -77,11 +77,11 @@ class JackInTheMoxManaEffect extends ManaEffect {
     JackInTheMoxManaEffect() {
         super();
         staticText = "Roll a six-sided die for {this}. On a 1, sacrifice {this} and lose 5 life. Otherwise, {this} has one of the following effects. Treat this ability as a mana source."
-                + "<br/>2 Add {W} to your mana pool.\n"
-                + "<br/>3 Add {U} to your mana pool.\n"
-                + "<br/>4 Add {B} to your mana pool.\n"
-                + "<br/>5 Add {R} to your mana pool.\n"
-                + "<br/>6 Add {G} to your mana pool.";
+                + "<br/>2 Add {W}.\n"
+                + "<br/>3 Add {U}.\n"
+                + "<br/>4 Add {B}.\n"
+                + "<br/>5 Add {R}.\n"
+                + "<br/>6 Add {G}.";
     }
 
     JackInTheMoxManaEffect(final JackInTheMoxManaEffect effect) {

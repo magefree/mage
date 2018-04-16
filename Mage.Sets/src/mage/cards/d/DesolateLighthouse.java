@@ -47,7 +47,7 @@ public class DesolateLighthouse extends CardImpl {
     public DesolateLighthouse(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {tap}: Add {C} to your mana pool.
+        // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         // {1}{U}{R}, {tap}: Draw a card, then discard a card.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,

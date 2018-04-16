@@ -1,17 +1,17 @@
 package mage.game;
 
-import mage.cards.MeldCard;
-import mage.game.events.ZoneChangeEvent;
-import mage.game.stack.Spell;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import mage.cards.MeldCard;
+import mage.game.events.ZoneChangeEvent;
+import mage.game.stack.Spell;
 
 /**
  * Created by Dilnu on 9/4/16.
  */
 public class ZoneChangeInfo {
+
     public boolean faceDown;
     public ZoneChangeEvent event;
 
@@ -35,6 +35,7 @@ public class ZoneChangeInfo {
     }
 
     public static class Library extends ZoneChangeInfo {
+
         public boolean top;
 
         public Library(ZoneChangeEvent event, boolean top) {
@@ -47,7 +48,7 @@ public class ZoneChangeInfo {
             this.top = top;
         }
 
-        public Library(Library info) {
+        public Library(final Library info) {
             super(info);
             this.top = info.top;
         }
@@ -59,6 +60,7 @@ public class ZoneChangeInfo {
     }
 
     public static class Exile extends ZoneChangeInfo {
+
         public UUID id;
         public String name;
 
@@ -74,7 +76,7 @@ public class ZoneChangeInfo {
             this.name = name;
         }
 
-        public Exile(Exile info) {
+        public Exile(final Exile info) {
             super(info);
             this.id = info.id;
             this.name = info.name;
@@ -87,19 +89,20 @@ public class ZoneChangeInfo {
     }
 
     public static class Battlefield extends ZoneChangeInfo {
+
         public boolean tapped;
 
-        public Battlefield (ZoneChangeEvent event, boolean tapped) {
+        public Battlefield(ZoneChangeEvent event, boolean tapped) {
             super(event);
             this.tapped = tapped;
         }
 
-        public Battlefield (ZoneChangeEvent event, boolean faceDown, boolean tapped) {
+        public Battlefield(ZoneChangeEvent event, boolean faceDown, boolean tapped) {
             super(event, faceDown);
             this.tapped = tapped;
         }
 
-        public Battlefield(Battlefield info) {
+        public Battlefield(final Battlefield info) {
             super(info);
             this.tapped = info.tapped;
         }
@@ -111,6 +114,7 @@ public class ZoneChangeInfo {
     }
 
     public static class Stack extends ZoneChangeInfo {
+
         public Spell spell;
 
         public Stack(ZoneChangeEvent event, Spell spell) {
@@ -123,7 +127,7 @@ public class ZoneChangeInfo {
             this.spell = spell;
         }
 
-        public Stack(Stack info) {
+        public Stack(final Stack info) {
             super(info);
             this.spell = info.spell;
         }
@@ -135,7 +139,9 @@ public class ZoneChangeInfo {
     }
 
     public static class Unmelded extends ZoneChangeInfo {
+
         List<ZoneChangeInfo> subInfo = new ArrayList<>();
+
         public Unmelded(ZoneChangeInfo info, Game game) {
             super(info.event);
             MeldCard meld = game.getMeldCard(info.event.getTargetId());

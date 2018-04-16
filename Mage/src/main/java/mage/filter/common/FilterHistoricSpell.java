@@ -28,16 +28,12 @@
 package mage.filter.common;
 
 import mage.filter.FilterSpell;
-import mage.game.Game;
-import mage.game.stack.StackObject;
-
-import java.util.UUID;
+import mage.filter.predicate.mageobject.HistoricPredicate;
 
 /**
  *
  * @author igoudt
  */
-
 public class FilterHistoricSpell extends FilterSpell {
 
     public FilterHistoricSpell() {
@@ -46,6 +42,7 @@ public class FilterHistoricSpell extends FilterSpell {
 
     public FilterHistoricSpell(String name) {
         super(name);
+        this.add(new HistoricPredicate());
     }
 
     public FilterHistoricSpell(final FilterHistoricSpell filter) {
@@ -56,10 +53,4 @@ public class FilterHistoricSpell extends FilterSpell {
     public FilterHistoricSpell copy() {
         return new FilterHistoricSpell(this);
     }
-
-    @Override
-    public boolean match(StackObject stackObject, UUID sourceId, UUID playerId, Game game){
-        return stackObject.isHistoric();
-    }
-
 }

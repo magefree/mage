@@ -60,7 +60,7 @@ public class KyrenToy extends CardImpl {
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 
-        // {T}, Remove X charge counters from Kyren Toy: Add X mana of {C} to your mana pool, and then add {C} to your mana pool.
+        // {T}, Remove X charge counters from Kyren Toy: Add X mana of {C}, and then add {C}.
         ability = new KyrenToyManaAbility();
         ability.addCost(new RemoveVariableCountersSourceCost(CounterType.CHARGE.createInstance(1)));
         this.addAbility(ability);
@@ -95,7 +95,7 @@ public class KyrenToy extends CardImpl {
 
         KyrenToyManaEffect() {
             super();
-            staticText = "Add an amount of {C} to your mana pool equal to X plus one";
+            staticText = "Add an amount of {C} equal to X plus one";
         }
 
         KyrenToyManaEffect(final KyrenToyManaEffect effect) {

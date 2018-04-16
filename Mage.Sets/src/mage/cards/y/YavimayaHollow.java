@@ -51,7 +51,7 @@ public class YavimayaHollow extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
         addSuperType(SuperType.LEGENDARY);
 
-        // {tap}: Add {C} to your mana pool.
+        // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         
         // {G}, {tap}: Regenerate target creature.

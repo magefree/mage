@@ -42,7 +42,7 @@ public class MoxJet extends CardImpl {
     public MoxJet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{0}");
 
-        // {tap}: Add {B} to your mana pool.
+        // {tap}: Add {B}.
         this.addAbility(new BlackManaAbility());
     }
 

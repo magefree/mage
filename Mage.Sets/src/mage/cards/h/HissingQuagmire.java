@@ -58,7 +58,7 @@ public class HissingQuagmire extends CardImpl {
         // Hissing Quagmire enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
 
-        // {T}: Add {B} or {G} to your mana pool.
+        // {T}: Add {B} or {G}.
         this.addAbility(new BlackManaAbility());
         this.addAbility(new GreenManaAbility());
 

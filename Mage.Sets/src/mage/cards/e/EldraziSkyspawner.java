@@ -57,9 +57,9 @@ public class EldraziSkyspawner extends CardImpl {
         this.addAbility(new DevoidAbility(this.color));
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        // When Eldrazi Skyspawner enters the battlefield, create a 1/1 colorless Eldrazi Scion creature token. It has "Sacrifice this creature: Add {C} to your mana pool."
+        // When Eldrazi Skyspawner enters the battlefield, create a 1/1 colorless Eldrazi Scion creature token. It has "Sacrifice this creature: Add {C}."
         Effect effect = new CreateTokenEffect(new EldraziScionToken());
-        effect.setText("create a 1/1 colorless Eldrazi Scion creature token. It has \"Sacrifice this creature: Add {C} to your mana pool.\"");
+        effect.setText("create a 1/1 colorless Eldrazi Scion creature token. It has \"Sacrifice this creature: Add {C}.\"");
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect, false));
     }
 

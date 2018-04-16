@@ -60,7 +60,7 @@ public class AlchemistsRefuge extends CardImpl {
     public AlchemistsRefuge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        // {tap}: Add {C} to your mana pool.
+        // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
 
         // {G}{U}, {tap}: You may cast spells this turn as though they had flash.

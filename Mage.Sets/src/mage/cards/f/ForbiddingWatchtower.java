@@ -55,7 +55,7 @@ public class ForbiddingWatchtower extends CardImpl {
         // Forbidding Watchtower enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
 
-        // {T}: Add {W} to your mana pool.
+        // {T}: Add {W}.
         this.addAbility(new WhiteManaAbility());
 
         // {1}{W}: Forbidding Watchtower becomes a 1/5 white Soldier creature until end of turn. It's still a land.

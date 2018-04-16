@@ -52,7 +52,7 @@ public class GeierReachSanitarium extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
         addSuperType(SuperType.LEGENDARY);
 
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
 
         // {2}, {T}: Each player draws a card, then discards a card.

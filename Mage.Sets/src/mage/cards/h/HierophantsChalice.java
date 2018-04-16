@@ -55,7 +55,7 @@ public class HierophantsChalice extends CardImpl {
         ability.addTarget(target);
         this.addAbility(ability);
 
-        // {t}: Add {c} to your mana pool.
+        // {t}: Add {c}.
         this.addAbility(new ColorlessManaAbility());
     }
 

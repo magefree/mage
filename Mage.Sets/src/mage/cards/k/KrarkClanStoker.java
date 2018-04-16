@@ -56,7 +56,7 @@ public class KrarkClanStoker extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // {T}, Sacrifice an artifact: Add {R}{R} to your mana pool.
+        // {T}, Sacrifice an artifact: Add {R}{R}.
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.RedMana(2), new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledArtifactPermanent("an artifact"))));
         this.addAbility(ability);

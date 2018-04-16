@@ -48,7 +48,7 @@ public class TresserhornSinks extends CardImpl {
 
         // Tresserhorn Sinks enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
-        // {tap}: Add {B} or {R} to your mana pool.
+        // {tap}: Add {B} or {R}.
         this.addAbility(new BlackManaAbility());
         this.addAbility(new RedManaAbility());
     }

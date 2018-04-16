@@ -44,11 +44,9 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class InOketrasName extends CardImpl {
 
-    private static final FilterCreaturePermanent filterZombies = new FilterCreaturePermanent("Zombies");
     private static final FilterCreaturePermanent filterNotZombies = new FilterCreaturePermanent("Other creatures");
 
     static {
-        filterZombies.add(new SubtypePredicate(SubType.ZOMBIE));
         filterNotZombies.add(Predicates.not(new SubtypePredicate(SubType.ZOMBIE)));
     }
 
@@ -56,7 +54,7 @@ public class InOketrasName extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}");
 
         // Zombies you control get +2/+1 until end of turn. Other creatures you control get +1/+1 until end of turn.
-        getSpellAbility().addEffect(new BoostControlledEffect(2, 1, Duration.EndOfTurn, filterZombies));
+        getSpellAbility().addEffect(new BoostControlledEffect(2, 1, Duration.EndOfTurn, new FilterCreaturePermanent(SubType.ZOMBIE, "Zombies")));
         getSpellAbility().addEffect(new BoostControlledEffect(1, 1, Duration.EndOfTurn, filterNotZombies));
     }
 

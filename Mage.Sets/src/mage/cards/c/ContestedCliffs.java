@@ -64,7 +64,7 @@ public class ContestedCliffs extends CardImpl {
     public ContestedCliffs(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {tap}: Add {C} to your mana pool.
+        // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         // {R}{G}, {tap}: Choose target Beast creature you control and target creature an opponent controls. Those creatures fight each other.
         Effect effect = new FightTargetsEffect();

@@ -54,7 +54,7 @@ public class ManaGeyser extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}{R}");
 
 
-        // Add {R} to your mana pool for each tapped land your opponents control.
+        // Add {R} for each tapped land your opponents control.
         this.getSpellAbility().addEffect(new DynamicManaEffect(Mana.RedMana(1), new PermanentsOnBattlefieldCount(filter)));
     }
 

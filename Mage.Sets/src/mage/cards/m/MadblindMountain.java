@@ -62,7 +62,7 @@ public class MadblindMountain extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
         this.subtype.add(SubType.MOUNTAIN);
 
-        // <i>({tap}: Add {R} to your mana pool.)</i>
+        // <i>({tap}: Add {R}.)</i>
         this.addAbility(new RedManaAbility());
 
         // Madblind Mountain enters the battlefield tapped.

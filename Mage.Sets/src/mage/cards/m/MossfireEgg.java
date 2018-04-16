@@ -49,7 +49,7 @@ public class MossfireEgg extends CardImpl {
     public MossfireEgg(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
 
-        // {2}, {tap}, Sacrifice Mossfire Egg: Add {R}{G} to your mana pool. Draw a card.
+        // {2}, {tap}, Sacrifice Mossfire Egg: Add {R}{G}. Draw a card.
         ActivatedManaAbilityImpl ability = new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(1, 1, 0, 0, 0, 0, 0, 0), new ManaCostsImpl("{2}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());

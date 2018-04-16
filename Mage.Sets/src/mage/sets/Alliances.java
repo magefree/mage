@@ -54,6 +54,8 @@ public class Alliances extends ExpansionSet {
         cards.add(new SetCardInfo("Balduvian Trading Post", 137, Rarity.RARE, mage.cards.b.BalduvianTradingPost.class));
         cards.add(new SetCardInfo("Balduvian War-Makers", "66a", Rarity.COMMON, mage.cards.b.BalduvianWarMakers.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Balduvian War-Makers", "66b", Rarity.COMMON, mage.cards.b.BalduvianWarMakers.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Bestial Fury", "67a", Rarity.COMMON, mage.cards.b.BestialFury.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Bestial Fury", "67b", Rarity.COMMON, mage.cards.b.BestialFury.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bounty of the Hunt", 85, Rarity.UNCOMMON, mage.cards.b.BountyOfTheHunt.class));
         cards.add(new SetCardInfo("Browse", 25, Rarity.UNCOMMON, mage.cards.b.Browse.class));
         cards.add(new SetCardInfo("Burnout", 68, Rarity.UNCOMMON, mage.cards.b.Burnout.class));

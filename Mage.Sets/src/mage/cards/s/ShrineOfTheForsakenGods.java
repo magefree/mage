@@ -57,10 +57,10 @@ public class ShrineOfTheForsakenGods extends CardImpl {
     public ShrineOfTheForsakenGods(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
 
-        // {T}: Add {C}{C} to your mana pool. Spend this mana only to cast colorless spells. Activate this ability only if you control seven or more lands.
+        // {T}: Add {C}{C}. Spend this mana only to cast colorless spells. Activate this ability only if you control seven or more lands.
         this.addAbility(new ActivateIfConditionManaAbility(
                 Zone.BATTLEFIELD,
                 new AddConditionalColorlessManaEffect(2, new ConditionalSpellManaBuilder(filter)),

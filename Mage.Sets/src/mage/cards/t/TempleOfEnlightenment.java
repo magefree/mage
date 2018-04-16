@@ -50,7 +50,7 @@ public class TempleOfEnlightenment extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
         // When Temple of Enlightenment enters the battlefield, scry 1.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ScryEffect(1)));
-        // {T}: Add {W} or {U} to your mana pool.
+        // {T}: Add {W} or {U}.
         this.addAbility(new WhiteManaAbility());
         this.addAbility(new BlueManaAbility());        
     }

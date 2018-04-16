@@ -57,7 +57,7 @@ public class DroneHolocron extends CardImpl {
         // {T}: Put a charge counter on Drone Holocron.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance(1)), new TapSourceCost()));
 
-        // {T}, Remove a charge counter from Drone Holocron: Add {W}, {U} or {B} to your mana pool.
+        // {T}, Remove a charge counter from Drone Holocron: Add {W}, {U} or {B}.
         Cost cost = new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(1));
         Ability ability = new WhiteManaAbility();
         ability.addCost(cost);

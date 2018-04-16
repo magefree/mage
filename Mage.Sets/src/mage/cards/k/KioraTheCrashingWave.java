@@ -38,8 +38,8 @@ import mage.abilities.effects.common.continuous.PlayAdditionalLandsControllerEff
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
@@ -58,7 +58,7 @@ import mage.util.CardUtil;
  */
 public class KioraTheCrashingWave extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("permanent an opponent control");
+    private static final FilterPermanent filter = new FilterPermanent("permanent an opponent controls");
 
     static {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));

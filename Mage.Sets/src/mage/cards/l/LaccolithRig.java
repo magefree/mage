@@ -29,11 +29,10 @@ package mage.cards.l;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.BecomesBlockedTriggeredAbility;
+import mage.abilities.common.EnchantedCreatureBlockedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.AssignNoCombatDamageSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
@@ -46,13 +45,9 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -72,7 +67,7 @@ public class LaccolithRig extends CardImpl {
         this.addAbility(ability);
 
         // Whenever enchanted creature becomes blocked, you may have it deal damage equal to its power to target creature. If you do, the first creature assigns no combat damage this turn.
-        Ability ability2 = new LaccolithRigTriggeredAbility(new LaccolithRigEffect(), true);
+        Ability ability2 = new EnchantedCreatureBlockedTriggeredAbility(new LaccolithRigEffect(), true);
         ability2.addTarget(new TargetCreaturePermanent());
         Effect effect = new GainAbilityTargetEffect(new SimpleStaticAbility(Zone.BATTLEFIELD, new AssignNoCombatDamageSourceEffect(Duration.Custom, true).setText("")), Duration.EndOfTurn, "If you do, the first creature assigns no combat damage this turn");
         ability2.addEffect(effect);
@@ -86,45 +81,6 @@ public class LaccolithRig extends CardImpl {
     @Override
     public LaccolithRig copy() {
         return new LaccolithRig(this);
-    }
-}
-
-class LaccolithRigTriggeredAbility extends TriggeredAbilityImpl {
-
-    public LaccolithRigTriggeredAbility(Effect effect, boolean optional) {
-        super(Zone.BATTLEFIELD, effect, optional);
-    }
-
-    public LaccolithRigTriggeredAbility(final LaccolithRigTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.CREATURE_BLOCKED;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent equipment = game.getPermanent(sourceId);
-        if (equipment != null && equipment.getAttachedTo() != null) {
-            Permanent equipped = game.getPermanent(equipment.getAttachedTo());
-            if (equipped.getId().equals(event.getTargetId())) {
-                getEffects().get(1).setTargetPointer(new FixedTarget(equipped.getId()));
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever enchanted creature becomes blocked by a creature, " + super.getRule();
-    }
-
-    @Override
-    public LaccolithRigTriggeredAbility copy() {
-        return new LaccolithRigTriggeredAbility(this);
     }
 }
 

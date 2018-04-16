@@ -48,7 +48,7 @@ public class HighlandWeald extends CardImpl {
 
         // Highland Weald enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
-        // {tap}: Add {R} or {G} to your mana pool.
+        // {tap}: Add {R} or {G}.
         this.addAbility(new RedManaAbility());
         this.addAbility(new GreenManaAbility());
     }

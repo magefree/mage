@@ -65,7 +65,7 @@ public class LandCap extends CardImpl {
         // At the beginning of your upkeep, remove a depletion counter from Land Cap.
         Ability ability2 = new BeginningOfUpkeepTriggeredAbility(new RemoveCounterSourceEffect(CounterType.DEPLETION.createInstance()), TargetController.YOU, false);
         this.addAbility(ability2);
-        // {T}: Add {W} or {U} to your mana pool. Put a depletion counter on Land Cap.
+        // {T}: Add {W} or {U}. Put a depletion counter on Land Cap.
         Ability ability3 = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.WhiteMana(1), new TapSourceCost());
         ability3.addEffect(new AddCountersSourceEffect(CounterType.DEPLETION.createInstance()));
         this.addAbility(ability3);

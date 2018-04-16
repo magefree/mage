@@ -47,10 +47,10 @@ public class CascadeBluffs extends CardImpl {
     public CascadeBluffs(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
         
-        // {tap}: Add {C} to your mana pool.
+        // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
 
-        // {U/R}, {tap}: Add {U}{U}, {U}{R}, or {R}{R} to your mana pool.
+        // {U/R}, {tap}: Add {U}{U}, {U}{R}, or {R}{R}.
         SimpleManaAbility ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlueMana(2), new ManaCostsImpl("{U/R}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

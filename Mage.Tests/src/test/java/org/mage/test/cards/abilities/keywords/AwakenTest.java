@@ -69,7 +69,7 @@ public class AwakenTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
         addCard(Zone.BATTLEFIELD, playerA, "Chromatic Lantern", 1);
         // Shambling Vent enters the battlefield tapped.
-        // {T}: Add {W} or {B} to your mana pool.
+        // {T}: Add {W} or {B}.
         // {1}{W}{B}: Shambling Vent becomes a 2/3 white and black Elemental creature with lifelink until end of turn. It's still a land.
         addCard(Zone.BATTLEFIELD, playerA, "Shambling Vent", 1);
         // Counter target spell.
@@ -99,7 +99,7 @@ public class AwakenTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
         addCard(Zone.BATTLEFIELD, playerA, "Chromatic Lantern", 1);
         // Shambling Vent enters the battlefield tapped.
-        // {T}: Add {W} or {B} to your mana pool.
+        // {T}: Add {W} or {B}.
         // {1}{W}{B}: Shambling Vent becomes a 2/3 white and black Elemental creature with lifelink until end of turn. It's still a land.
         addCard(Zone.BATTLEFIELD, playerA, "Shambling Vent", 1);
         // Counter target spell.

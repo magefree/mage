@@ -46,9 +46,9 @@ public class TalismanOfUnity extends CardImpl {
     public TalismanOfUnity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
-        // {tap}: Add {C} to your mana pool.
+        // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
-        // {tap}: Add {G} or {W} to your mana pool. Talisman of Unity deals 1 damage to you.
+        // {tap}: Add {G} or {W}. Talisman of Unity deals 1 damage to you.
         Ability greenManaAbility = new GreenManaAbility();
         greenManaAbility.addEffect(new DamageControllerEffect(1));
         this.addAbility(greenManaAbility);

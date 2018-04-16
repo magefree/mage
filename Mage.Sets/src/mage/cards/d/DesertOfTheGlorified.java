@@ -51,7 +51,7 @@ public class DesertOfTheGlorified extends CardImpl {
         // Desert of the Glorified enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
 
-        // {T}: Add {B} to your mana pool.
+        // {T}: Add {B}.
         this.addAbility(new BlackManaAbility());
 
         // Cycling {1}{B}

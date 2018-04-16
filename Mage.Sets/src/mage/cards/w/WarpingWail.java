@@ -78,10 +78,10 @@ public class WarpingWail extends CardImpl {
         mode.getTargets().add(new TargetSpell(filterSorcery));
         this.getSpellAbility().addMode(mode);
 
-        // Create a 1/1 colorless Eldrazi Scion creature token. It has "Sacrifice this creature: Add {C} to your mana pool."
+        // Create a 1/1 colorless Eldrazi Scion creature token. It has "Sacrifice this creature: Add {C}."
         mode = new Mode();
         effect = new CreateTokenEffect(new EldraziScionToken());
-        effect.setText("Create a 1/1 colorless Eldrazi Scion creature token. It has \"Sacrifice this creature: Add {C} to your mana pool.\"");
+        effect.setText("Create a 1/1 colorless Eldrazi Scion creature token. It has \"Sacrifice this creature: Add {C}.\"");
         mode.getEffects().add(effect);
         this.getSpellAbility().addMode(mode);
     }

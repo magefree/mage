@@ -339,7 +339,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Tinder Wall", 158, Rarity.COMMON, mage.cards.t.TinderWall.class));
         cards.add(new SetCardInfo("Tor Giant", 220, Rarity.COMMON, mage.cards.t.TorGiant.class));
         cards.add(new SetCardInfo("Total War", 221, Rarity.RARE, mage.cards.t.TotalWar.class));
-        cards.add(new SetCardInfo("Touch of Death", 55, Rarity.COMMON, mage.cards.t.TouchOfDeath.class));
+        cards.add(new SetCardInfo("Touch of Death", 167, Rarity.COMMON, mage.cards.t.TouchOfDeath.class));
         cards.add(new SetCardInfo("Trailblazer", 160, Rarity.RARE, mage.cards.t.Trailblazer.class));
         cards.add(new SetCardInfo("Underground River", 357, Rarity.RARE, mage.cards.u.UndergroundRiver.class));
         cards.add(new SetCardInfo("Updraft", 105, Rarity.UNCOMMON, mage.cards.u.Updraft.class));
@@ -353,7 +353,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Wall of Pine Needles", 162, Rarity.UNCOMMON, mage.cards.w.WallOfPineNeedles.class));
         cards.add(new SetCardInfo("Wall of Shields", 322, Rarity.UNCOMMON, mage.cards.w.WallOfShields.class));
         cards.add(new SetCardInfo("War Chariot", 323, Rarity.UNCOMMON, mage.cards.w.WarChariot.class));
-        cards.add(new SetCardInfo("Warning", 279, Rarity.COMMON, mage.cards.w.Warning.class));
+        cards.add(new SetCardInfo("Warning", 55, Rarity.COMMON, mage.cards.w.Warning.class));
         cards.add(new SetCardInfo("Whiteout", 163, Rarity.UNCOMMON, mage.cards.w.Whiteout.class));
         cards.add(new SetCardInfo("White Scarab", 280, Rarity.UNCOMMON, mage.cards.w.WhiteScarab.class));
         cards.add(new SetCardInfo("Wild Growth", 165, Rarity.COMMON, mage.cards.w.WildGrowth.class));
@@ -361,7 +361,9 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Wings of Aesthir", 383, Rarity.UNCOMMON, mage.cards.w.WingsOfAesthir.class));
         cards.add(new SetCardInfo("Withering Wisps", 56, Rarity.UNCOMMON, mage.cards.w.WitheringWisps.class));
         cards.add(new SetCardInfo("Woolly Mammoths", 166, Rarity.COMMON, mage.cards.w.WoollyMammoths.class));
+        cards.add(new SetCardInfo("Woolly Spider", 279, Rarity.COMMON, mage.cards.w.WoollySpider.class));
         cards.add(new SetCardInfo("Word of Blasting", 224, Rarity.UNCOMMON, mage.cards.w.WordOfBlasting.class));
+        cards.add(new SetCardInfo("Word of Undoing", 108, Rarity.COMMON, mage.cards.w.WordOfUndoing.class));
         cards.add(new SetCardInfo("Wrath of Marit Lage", 109, Rarity.RARE, mage.cards.w.WrathOfMaritLage.class));
         cards.add(new SetCardInfo("Yavimaya Gnats", 168, Rarity.UNCOMMON, mage.cards.y.YavimayaGnats.class));
         cards.add(new SetCardInfo("Zuran Enchanter", 110, Rarity.COMMON, mage.cards.z.ZuranEnchanter.class));

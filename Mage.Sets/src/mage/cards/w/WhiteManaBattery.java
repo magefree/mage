@@ -59,12 +59,12 @@ public class WhiteManaBattery extends CardImpl {
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 
-        // {tap}, Remove any number of charge counters from White Mana Battery: Add {W} to your mana pool, then add an additional {W} to your mana pool for each charge counter removed this way.
+        // {tap}, Remove any number of charge counters from White Mana Battery: Add {W}, then add an additional {W} for each charge counter removed this way.
         ability = new DynamicManaAbility(
                 Mana.WhiteMana(1),
                 new IntPlusDynamicValue(1, new RemovedCountersForCostValue()),
                 new TapSourceCost(),
-                "Add {W} to your mana pool, then add {W} to your mana pool for each charge counter removed this way",
+                "Add {W}, then add {W} for each charge counter removed this way",
                 true, new CountersSourceCount(CounterType.CHARGE));
         ability.addCost(new RemoveVariableCountersSourceCost(CounterType.CHARGE.createInstance(),
                 "Remove any number of charge counters from {this}"));

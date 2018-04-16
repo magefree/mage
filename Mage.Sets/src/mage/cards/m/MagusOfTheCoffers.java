@@ -62,7 +62,7 @@ public class MagusOfTheCoffers extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        // {2}, {T}: Add {B} to your mana pool for each Swamp you control.
+        // {2}, {T}: Add {B} for each Swamp you control.
         Ability ability = new DynamicManaAbility(Mana.BlackMana(1), new PermanentsOnBattlefieldCount(filter), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

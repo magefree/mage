@@ -69,7 +69,7 @@ public class GoblinClearcutter extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // {T}, Sacrifice a Forest: Add three mana in any combination of {R} and/or {G} to your mana pool.
+        // {T}, Sacrifice a Forest: Add three mana in any combination of {R} and/or {G}.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GoblinClearCutterEffect(), new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
         this.addAbility(ability);
@@ -89,7 +89,7 @@ class GoblinClearCutterEffect extends OneShotEffect {
 
     public GoblinClearCutterEffect() {
         super(Outcome.PutManaInPool);
-        this.staticText = "Add 3 mana in any combination of {R} and/or {G} to your mana pool";
+        this.staticText = "Add 3 mana in any combination of {R} and/or {G}";
     }
 
     public GoblinClearCutterEffect(final GoblinClearCutterEffect effect) {

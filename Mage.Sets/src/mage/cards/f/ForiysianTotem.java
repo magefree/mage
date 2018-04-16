@@ -59,7 +59,7 @@ public class ForiysianTotem extends CardImpl {
     public ForiysianTotem(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
-        // {tap}: Add {R} to your mana pool.
+        // {tap}: Add {R}.
         this.addAbility(new RedManaAbility());
 
         // {4}{R}: Foriysian Totem becomes a 4/4 red Giant artifact creature with trample until end of turn.

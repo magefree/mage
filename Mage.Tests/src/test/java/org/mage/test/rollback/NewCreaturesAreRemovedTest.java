@@ -58,7 +58,7 @@ public class NewCreaturesAreRemovedTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tamiyo's Journal");
 
         // As Port Town enters the battlefield, you may reveal a Plains or Island card from your hand. If you don't, Port Town enters the battlefield tapped.
-        // {T}: Add {W} or {U} to your mana pool.
+        // {T}: Add {W} or {U}.
         addCard(Zone.HAND, playerA, "Port Town"); // Land
         addCard(Zone.HAND, playerA, "Island"); // Land
 
@@ -94,7 +94,7 @@ public class NewCreaturesAreRemovedTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Tamiyo's Journal"); // Artifact {5}
 
         // As Port Town enters the battlefield, you may reveal a Plains or Island card from your hand. If you don't, Port Town enters the battlefield tapped.
-        // {T}: Add {W} or {U} to your mana pool.
+        // {T}: Add {W} or {U}.
         addCard(Zone.HAND, playerA, "Port Town"); // Land
         addCard(Zone.HAND, playerA, "Island"); // Land
 

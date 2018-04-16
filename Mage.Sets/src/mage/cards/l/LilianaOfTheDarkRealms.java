@@ -73,7 +73,7 @@ public class LilianaOfTheDarkRealms extends CardImpl {
         LoyaltyAbility ability = new LoyaltyAbility(new LilianaOfTheDarkRealmsEffect(), -3);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
-        // -6: You get an emblem with "Swamps you control have '{tap}: Add {B}{B}{B}{B} to your mana pool.'"
+        // -6: You get an emblem with "Swamps you control have '{tap}: Add {B}{B}{B}{B}.'"
         this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new LilianaOfTheDarkRealmsEmblem()), -6));
     }
 

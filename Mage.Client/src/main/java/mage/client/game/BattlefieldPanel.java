@@ -33,6 +33,25 @@
  */
 package mage.client.game;
 
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+import java.util.UUID;
+import javax.swing.JComponent;
+import javax.swing.JLayeredPane;
+import javax.swing.JScrollPane;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
 import mage.cards.MagePermanent;
 import mage.client.cards.BigCard;
 import mage.client.cards.Permanent;
@@ -44,16 +63,6 @@ import mage.client.util.layout.CardLayoutStrategy;
 import mage.client.util.layout.impl.OldCardLayoutStrategy;
 import mage.view.CounterView;
 import mage.view.PermanentView;
-
-import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
-import java.awt.*;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.util.*;
-import java.util.List;
-import java.util.Map.Entry;
 
 /**
  *
@@ -155,12 +164,13 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
             } else {
                 if (!changed) {
                     changed = oldMagePermanent.getOriginalPermanent().isCreature() != permanent.isCreature();
+                    // Check if there was a chnage in the permanets that are the permanent attached to
                     if (!changed) {
-                        int s1 = permanent.getAttachments() == null ? 0 : permanent.getAttachments().size();
-                        int s2 = oldMagePermanent.getLinks().size();
-                        if (s1 != s2) {
+                        int attachments = permanent.getAttachments() == null ? 0 : permanent.getAttachments().size();
+                        int attachmentsBefore = oldMagePermanent.getLinks().size();
+                        if (attachments != attachmentsBefore) {
                             changed = true;
-                        } else if (s1 > 0) {
+                        } else if (attachments > 0) {
                             Set<UUID> attachmentIds = new HashSet<>(permanent.getAttachments());
                             for (MagePermanent magePermanent : oldMagePermanent.getLinks()) {
                                 if (!attachmentIds.contains(magePermanent.getOriginalPermanent().getId())) {
@@ -174,14 +184,16 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
                             }
                         }
                     }
+                    // Check if permanents it now attached to another or no permanent
                     if (!changed) {
-                        UUID u1 = oldMagePermanent.getOriginalPermanent().getAttachedTo();
-                        UUID u2 = permanent.getAttachedTo();
-                        if (u1 == null && u2 != null || u2 == null && u1 != null
-                                || (u1 != null && !u1.equals(u2))) {
+                        UUID attachedToIdBefore = oldMagePermanent.getOriginalPermanent().getAttachedTo();
+                        UUID attachedToId = permanent.getAttachedTo();
+                        if (attachedToIdBefore == null && attachedToId != null || attachedToId == null && attachedToIdBefore != null
+                                || (attachedToIdBefore != null && !attachedToIdBefore.equals(attachedToId))) {
                             changed = true;
                         }
                     }
+                    // Check for changes in the counters of the permanent
                     if (!changed) {
                         List<CounterView> counters1 = oldMagePermanent.getOriginalPermanent().getCounters();
                         List<CounterView> counters2 = permanent.getCounters();

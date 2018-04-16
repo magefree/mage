@@ -57,7 +57,7 @@ public class LumberingFalls extends CardImpl {
         // Lumbering Falls enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
 
-        // {T}: Add {G} or {U} to your mana pool.
+        // {T}: Add {G} or {U}.
         this.addAbility(new BlueManaAbility());
         this.addAbility(new GreenManaAbility());
 

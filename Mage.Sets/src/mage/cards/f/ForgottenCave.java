@@ -47,7 +47,7 @@ public class ForgottenCave extends CardImpl {
 
         // Forgotten Cave enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
-        // {tap}: Add {R} to your mana pool.
+        // {tap}: Add {R}.
         this.addAbility(new RedManaAbility());
         // Cycling {R}
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{R}")));

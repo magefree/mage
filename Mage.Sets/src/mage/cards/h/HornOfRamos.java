@@ -46,10 +46,10 @@ public class HornOfRamos extends CardImpl {
     public HornOfRamos(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
-        // {tap}: Add {G} to your mana pool.
+        // {tap}: Add {G}.
         this.addAbility(new GreenManaAbility());
         
-        // Sacrifice Horn of Ramos: Add {G} to your mana pool.
+        // Sacrifice Horn of Ramos: Add {G}.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.GreenMana(1), new SacrificeSourceCost()));
     }
 

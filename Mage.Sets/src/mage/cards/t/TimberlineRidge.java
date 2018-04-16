@@ -65,7 +65,7 @@ public class TimberlineRidge extends CardImpl {
         // At the beginning of your upkeep, remove a depletion counter from Timberline Ridge.
         Ability ability2 = new BeginningOfUpkeepTriggeredAbility(new RemoveCounterSourceEffect(CounterType.DEPLETION.createInstance()), TargetController.YOU, false);
         this.addAbility(ability2);
-        // {tap}: Add {R} or {G} to your mana pool. Put a depletion counter on Timberline Ridge.
+        // {tap}: Add {R} or {G}. Put a depletion counter on Timberline Ridge.
         Ability ability3 = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.RedMana(1), new TapSourceCost());
         ability3.addEffect(new AddCountersSourceEffect(CounterType.DEPLETION.createInstance()));
         this.addAbility(ability3);

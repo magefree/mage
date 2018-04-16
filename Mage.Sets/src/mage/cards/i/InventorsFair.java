@@ -70,7 +70,7 @@ public class InventorsFair extends CardImpl {
         // At the beginning of your upkeep, if you control three or more artifacts, you gain 1 life.
         this.addAbility(new InventorsFairAbility());
 
-        // {t}: Add {C} to your mana pool.
+        // {t}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
 
         // {4}, {T}, Sacrifice Inventors' Fair: Search your library for an artifact card, reveal it, put it into your hand, then shuffle your library.

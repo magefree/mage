@@ -60,7 +60,7 @@ public class ManaforgeCinder extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // {1}: Add {B} or {R} to your mana pool. Activate this ability no more than three times each turn.
+        // {1}: Add {B} or {R}. Activate this ability no more than three times each turn.
         this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new ManaforgeCinderManaEffect(), new ManaCostsImpl("{1}"), 3));
 
     }
@@ -79,7 +79,7 @@ class ManaforgeCinderManaEffect extends OneShotEffect {
 
     public ManaforgeCinderManaEffect() {
         super(Outcome.PutManaInPool);
-        this.staticText = "Add {B} or {R} to your mana pool";
+        this.staticText = "Add {B} or {R}";
     }
 
     public ManaforgeCinderManaEffect(final ManaforgeCinderManaEffect effect) {

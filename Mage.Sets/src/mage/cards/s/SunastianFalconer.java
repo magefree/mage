@@ -53,7 +53,7 @@ public class SunastianFalconer extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        // {tap}: Add {C}{C} to your mana pool.
+        // {tap}: Add {C}{C}.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(2), new TapSourceCost()));
     }
 

@@ -49,12 +49,12 @@ public class RiverOfTears extends CardImpl {
     public RiverOfTears(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        // {T}: Add {U} to your mana pool. If you played a land this turn, add {B} to your mana pool instead.
+        // {T}: Add {U}. If you played a land this turn, add {B} instead.
         this.addAbility(new ConditionalManaAbility(Zone.BATTLEFIELD, new ConditionalManaEffect(
                 new BasicManaEffect(Mana.BlackMana(1)),
                 new BasicManaEffect(Mana.BlueMana(1)),
                 PlayLandCondition.instance,
-                "Add {U} to your mana pool. If you played a land this turn, add {B} to your mana pool instead"),
+                "Add {U}. If you played a land this turn, add {B} instead"),
                 new TapSourceCost()),
                 new PlayLandWatcher());
     }

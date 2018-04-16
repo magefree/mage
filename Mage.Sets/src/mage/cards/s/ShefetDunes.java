@@ -64,10 +64,10 @@ public class ShefetDunes extends CardImpl {
 
         this.subtype.add(SubType.DESERT);
 
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
 
-        // {T}, Pay 1 life: Add {W} to your mana pool.
+        // {T}, Pay 1 life: Add {W}.
         Ability ability = new WhiteManaAbility();
         ability.addCost(new PayLifeCost(1));
         this.addAbility(ability);

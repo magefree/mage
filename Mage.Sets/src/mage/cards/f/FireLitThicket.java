@@ -47,9 +47,9 @@ public class FireLitThicket extends CardImpl {
     public FireLitThicket(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {tap}: Add {C} to your mana pool.
+        // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
-        // {RG}, {tap}: Add {R}{R}, {R}{G}, or {G}{G} to your mana pool.
+        // {RG}, {tap}: Add {R}{R}, {R}{G}, or {G}{G}.
         SimpleManaAbility ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.RedMana(2), new ManaCostsImpl("{R/G}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

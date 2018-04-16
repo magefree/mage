@@ -49,7 +49,7 @@ public class PaintedBluffs extends CardImpl {
 
         this.subtype.add(SubType.DESERT);
 
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
 
         // {1}, {T}: Add one mana of any color to your mana pool.

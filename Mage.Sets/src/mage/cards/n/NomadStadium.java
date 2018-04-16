@@ -52,7 +52,7 @@ public class NomadStadium extends CardImpl {
     public NomadStadium(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {tap}: Add {W} to your mana pool. Nomad Stadium deals 1 damage to you.
+        // {tap}: Add {W}. Nomad Stadium deals 1 damage to you.
         Ability manaAbility = new WhiteManaAbility();
         manaAbility.addEffect(new DamageControllerEffect(1));
         this.addAbility(manaAbility);

@@ -51,9 +51,9 @@ public class RuinsOfTrokair extends CardImpl {
 
         // Ruins of Trokair enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
-        // {tap}: Add {W} to your mana pool.
+        // {tap}: Add {W}.
         this.addAbility(new WhiteManaAbility());
-        // {tap}, Sacrifice Ruins of Trokair: Add {W}{W} to your mana pool.
+        // {tap}, Sacrifice Ruins of Trokair: Add {W}{W}.
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.WhiteMana(2), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

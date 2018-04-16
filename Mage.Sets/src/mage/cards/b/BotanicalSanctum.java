@@ -56,7 +56,7 @@ public class BotanicalSanctum extends CardImpl {
         String abilityText = " tapped unless you control two or fewer other lands";
         this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
 
-        // {T}: Add {G} or {U} to your mana pool.
+        // {T}: Add {G} or {U}.
         this.addAbility(new GreenManaAbility());
         this.addAbility(new BlueManaAbility());
     }

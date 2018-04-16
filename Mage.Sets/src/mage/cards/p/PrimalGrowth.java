@@ -58,7 +58,7 @@ public class PrimalGrowth extends CardImpl {
                 new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 2, StaticFilters.FILTER_BASIC_LAND_CARD), false, true),
                 new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 1, StaticFilters.FILTER_BASIC_LAND_CARD), false, true),
                 KickedCondition.instance,
-                "Search your library for a basic land card, put that card onto the battlefield, then shuffle your library. If Primal Growth was kicked, instead search your library for up to two basic land cards, put them onto the battlefield, then shuffle your library"));
+                "Search your library for a basic land card, put that card onto the battlefield, then shuffle your library. If this spell was kicked, instead search your library for up to two basic land cards, put them onto the battlefield, then shuffle your library"));
     }
 
     public PrimalGrowth(final PrimalGrowth card) {

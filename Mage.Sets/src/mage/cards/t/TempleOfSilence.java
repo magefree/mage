@@ -50,7 +50,7 @@ public class TempleOfSilence extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
         // When Temple of Silence enters the battlefield, scry 1.</i>
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ScryEffect(1)));
-        // {T}: Add {W} or {B} to your mana pool.
+        // {T}: Add {W} or {B}.
         this.addAbility(new WhiteManaAbility());
         this.addAbility(new BlackManaAbility());
 

@@ -41,7 +41,7 @@ public class CryptGhastTest extends CardTestPlayerBase {
     @Test
     public void TestNormal() {
         //Extort (Whenever you cast a spell, you may pay {WB}. If you do, each opponent loses 1 life and you gain that much life.)
-        // Whenever you tap a Swamp for mana, add {B} to your mana pool (in addition to the mana the land produces).
+        // Whenever you tap a Swamp for mana, add {B} (in addition to the mana the land produces).
         addCard(Zone.BATTLEFIELD, playerA, "Crypt Ghast", 1);
         addCard(Zone.HAND, playerA, "Erebos's Titan", 1);
 
@@ -49,8 +49,8 @@ public class CryptGhastTest extends CardTestPlayerBase {
         // Swamp Mountain
         addCard(Zone.BATTLEFIELD, playerA, "Badlands", 1);
 
-        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R} to your mana pool");
-        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {B} to your mana pool");
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {B}");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Erebos's Titan");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -69,7 +69,7 @@ public class CryptGhastTest extends CardTestPlayerBase {
     @Test
     public void TestExiled() {
         //Extort (Whenever you cast a spell, you may pay {WB}. If you do, each opponent loses 1 life and you gain that much life.)
-        // Whenever you tap a Swamp for mana, add {B} to your mana pool (in addition to the mana the land produces).
+        // Whenever you tap a Swamp for mana, add {B} (in addition to the mana the land produces).
         addCard(Zone.BATTLEFIELD, playerA, "Crypt Ghast", 1);
         // Imprint - Whenever a nontoken creature dies, you may exile that card. If you do, return each other card exiled with Mimic Vat to its owner's graveyard.
         // {3},{T}: Create a tokenonto the battlefield that's a copy of the exiled card. It gains haste. Exile it at the beginning of the next end step.
@@ -88,8 +88,8 @@ public class CryptGhastTest extends CardTestPlayerBase {
         setChoice(playerB, "X=2");
 
         // Crypt Ghast may no longer give additional mana
-        activateManaAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R} to your mana pool");
-        activateManaAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {B} to your mana pool");
+        activateManaAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
+        activateManaAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {B}");
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Erebos's Titan");
 
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);

@@ -62,7 +62,7 @@ public class SpiresOfOrazca extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
         this.nightCard = true;
 
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
 
         // {T}: Untap target attacking creature an opponent controls and remove it from combat.

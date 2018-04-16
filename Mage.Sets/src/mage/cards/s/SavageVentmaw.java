@@ -57,9 +57,9 @@ public class SavageVentmaw extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // Whenever Savage Ventmaw attacks, add {R}{R}{R}{G}{G}{G} to your mana pool. Until end of turn, this mana doesn't empty from your mana pool as steps and phases end.
+        // Whenever Savage Ventmaw attacks, add {R}{R}{R}{G}{G}{G}. Until end of turn, this mana doesn't empty from your mana pool as steps and phases end.
         Effect effect = new SavageVentmawManaEffect(new Mana(3, 3, 0, 0, 0, 0, 0, 0), "your", true);
-        effect.setText("add {R}{R}{R}{G}{G}{G} to your mana pool. Until end of turn, this mana doesn't empty from your mana pool as steps and phases end");
+        effect.setText("add {R}{R}{R}{G}{G}{G}. Until end of turn, this mana doesn't empty from your mana pool as steps and phases end");
         this.addAbility(new AttacksTriggeredAbility(effect, false));
 
     }

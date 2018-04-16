@@ -56,7 +56,7 @@ public class KozileksTranslator extends CardImpl {
         // Devoid
         this.addAbility(new DevoidAbility(this.color));
 
-        // Pay 1 life: Add {C} to your mana pool. Activate this ability only once each turn.
+        // Pay 1 life: Add {C}. Activate this ability only once each turn.
         this.addAbility(new ActivateOncePerTurnManaAbility(Zone.BATTLEFIELD, new BasicManaEffect(Mana.ColorlessMana(1)), new PayLifeCost(1)));
     }
 

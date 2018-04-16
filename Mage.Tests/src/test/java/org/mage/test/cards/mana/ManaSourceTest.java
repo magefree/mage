@@ -44,7 +44,7 @@ public class ManaSourceTest extends CardTestPlayerBase {
      */
     @Test
     public void testCantCastWithCreatureCard() {
-        // Exile Simian Spirit Guide from your hand: Add {R} to your mana pool.
+        // Exile Simian Spirit Guide from your hand: Add {R}.
         addCard(Zone.HAND, playerB, "Simian Spirit Guide", 1);
         // Spend only mana produced by creatures to cast Myr Superion.
         addCard(Zone.HAND, playerB, "Myr Superion", 1); // {2}

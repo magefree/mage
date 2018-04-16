@@ -65,7 +65,7 @@ public class RiverDelta extends CardImpl {
         // At the beginning of your upkeep, remove a depletion counter from River Delta.
         Ability ability2 = new BeginningOfUpkeepTriggeredAbility(new RemoveCounterSourceEffect(CounterType.DEPLETION.createInstance()), TargetController.YOU, false);
         this.addAbility(ability2);
-        // {tap}: Add {U} or {B} to your mana pool. Put a depletion counter on River Delta.
+        // {tap}: Add {U} or {B}. Put a depletion counter on River Delta.
         Ability ability3 = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlueMana(1), new TapSourceCost());
         ability3.addEffect(new AddCountersSourceEffect(CounterType.DEPLETION.createInstance()));
         this.addAbility(ability3);

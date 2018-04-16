@@ -62,7 +62,7 @@ public class ChronatogTotem extends CardImpl {
     public ChronatogTotem(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
-        // {tap}: Add {U} to your mana pool.
+        // {tap}: Add {U}.
         this.addAbility(new BlueManaAbility());
 
         // {1}{U}: Chronatog Totem becomes a 1/2 blue Atog artifact creature until end of turn.

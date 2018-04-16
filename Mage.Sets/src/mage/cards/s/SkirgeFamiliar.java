@@ -54,7 +54,7 @@ public class SkirgeFamiliar extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         
-        // Discard a card: Add {B} to your mana pool.
+        // Discard a card: Add {B}.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana(1), new DiscardCardCost(false)));
     }
 

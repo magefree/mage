@@ -46,9 +46,9 @@ public class TalismanOfProgress extends CardImpl {
     public TalismanOfProgress(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
-        // {tap}: Add {C} to your mana pool.
+        // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
-        // {tap}: Add {W} or {U} to your mana pool. Talisman of Progress deals 1 damage to you.
+        // {tap}: Add {W} or {U}. Talisman of Progress deals 1 damage to you.
         Ability whiteManaAbility = new WhiteManaAbility();
         whiteManaAbility.addEffect(new DamageControllerEffect(1));
         this.addAbility(whiteManaAbility);

@@ -60,7 +60,7 @@ public class KaminoCloningFacility extends CardImpl {
     public KaminoCloningFacility(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
 
         // {T} Add one mana of any color to your mana pool. Spend this mana only to cast a Trooper spell.

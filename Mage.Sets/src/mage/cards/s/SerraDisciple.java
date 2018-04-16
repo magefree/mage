@@ -1,9 +1,9 @@
 package mage.cards.s;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.FlyingAbility;
@@ -13,8 +13,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.common.FilterHistoricSpell;
-
-import java.util.UUID;
 
 public class SerraDisciple extends CardImpl {
 
@@ -30,16 +28,16 @@ public class SerraDisciple extends CardImpl {
 
         // Whenever you cast a historic spell, Serra Disciple gets +1/+1 until end of turn
         Ability ability = new SpellCastControllerTriggeredAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn), new FilterHistoricSpell(), false,
-        "Whenever you cast a historic spell, {this} gets +1/+1 until end of turn");
+                "Whenever you cast a historic spell, {this} gets +1/+1 until end of turn. <i>(Artifacts, legendaries, and Sagas are historic.)</i>");
 
         addAbility(ability);
     }
 
-    public SerraDisciple(final SerraDisciple serraDisciple){
+    public SerraDisciple(final SerraDisciple serraDisciple) {
         super(serraDisciple);
     }
 
-    public SerraDisciple copy(){
+    public SerraDisciple copy() {
         return new SerraDisciple(this);
     }
 }

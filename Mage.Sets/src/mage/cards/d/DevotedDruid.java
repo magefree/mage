@@ -54,7 +54,7 @@ public class DevotedDruid extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(2);
 
-        // {tap}: Add {G} to your mana pool.
+        // {tap}: Add {G}.
         this.addAbility(new GreenManaAbility());
         // Put a -1/-1 counter on Devoted Druid: Untap Devoted Druid.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new PutCountersSourceCost(CounterType.M1M1.createInstance())));

@@ -56,7 +56,7 @@ public class MosswortBridge extends CardImpl {
         // Hideaway (This land enters the battlefield tapped. When it does, look at the top four cards of your library, exile one face down, then put the rest on the bottom of your library.)
         this.addAbility(new HideawayAbility());
 
-        // {T}: Add {G} to your mana pool.
+        // {T}: Add {G}.
         this.addAbility(new GreenManaAbility());
 
         // {G}, {T}: You may play the exiled card without paying its mana cost if creatures you control have total power 10 or greater.

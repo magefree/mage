@@ -47,7 +47,7 @@ public class MossfireValley extends CardImpl {
     public MossfireValley(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {1}, {tap}: Add {R}{G} to your mana pool.
+        // {1}, {tap}: Add {R}{G}.
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(1, 1, 0, 0, 0, 0, 0, 0), new ManaCostsImpl("{1}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

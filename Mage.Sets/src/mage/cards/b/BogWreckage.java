@@ -48,7 +48,7 @@ public class BogWreckage extends CardImpl {
 
         // Bog Wreckage enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
-        // {tap}: Add {B} to your mana pool.
+        // {tap}: Add {B}.
         this.addAbility(new BlackManaAbility());
         // {tap}, Sacrifice Bog Wreckage: Add one mana of any color to your mana pool.
         Ability ability = new AnyColorManaAbility();

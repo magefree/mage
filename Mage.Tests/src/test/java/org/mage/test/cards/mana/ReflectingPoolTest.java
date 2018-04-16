@@ -143,7 +143,7 @@ public class ReflectingPoolTest extends CardTestPlayerBase {
 
         // {T}: Add to your mana pool one mana of any type that a land you control could produce.
         addCard(Zone.BATTLEFIELD, playerA, "Reflecting Pool", 1);
-        // {T}: Add {G} to your mana pool for each creature you control.
+        // {T}: Add {G} for each creature you control.
         addCard(Zone.BATTLEFIELD, playerA, "Gaea's Cradle", 1);
 
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);

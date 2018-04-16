@@ -54,7 +54,7 @@ public class FungalReaches extends CardImpl {
     public FungalReaches(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {tap}: Add {C} to your mana pool.
+        // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
 
         // {1}, {tap}: Put a storage counter on Fungal Reaches.
@@ -62,7 +62,7 @@ public class FungalReaches extends CardImpl {
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 
-        // {1}, Remove X storage counters from Fungal Reaches: Add X mana in any combination of {R} and/or {G} to your mana pool.
+        // {1}, Remove X storage counters from Fungal Reaches: Add X mana in any combination of {R} and/or {G}.
         ability = new SimpleManaAbility(Zone.BATTLEFIELD,
                 new AddManaInAnyCombinationEffect(new RemovedCountersForCostValue(), ColoredManaSymbol.R, ColoredManaSymbol.G),
                 new GenericManaCost(1));

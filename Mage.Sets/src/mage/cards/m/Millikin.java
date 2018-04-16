@@ -48,7 +48,7 @@ public class Millikin extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
 
-        // {tap}, Put the top card of your library into your graveyard: Add {C} to your mana pool.
+        // {tap}, Put the top card of your library into your graveyard: Add {C}.
         ColorlessManaAbility ability = new ColorlessManaAbility();
         ability.addCost(new PutTopCardOfYourLibraryToGraveyardCost());
         ability.setUndoPossible(false);

@@ -72,7 +72,7 @@ public class RasputinDreamweaver extends CardImpl {
         // Rasputin Dreamweaver enters the battlefield with seven dream counters on it.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.DREAM.createInstance(7)), "seven dream counters on it"));
 
-        // Remove a dream counter from Rasputin: Add {C} to your mana pool.
+        // Remove a dream counter from Rasputin: Add {C}.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(1), new RemoveCountersSourceCost(CounterType.DREAM.createInstance())));
 
         // Remove a dream counter from Rasputin: Prevent the next 1 damage that would be dealt to Rasputin this turn.
