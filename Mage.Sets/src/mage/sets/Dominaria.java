@@ -164,6 +164,7 @@ public class Dominaria extends ExpansionSet {
         cards.add(new SetCardInfo("Knight of Malice", 97, Rarity.UNCOMMON, mage.cards.k.KnightOfMalice.class));
         cards.add(new SetCardInfo("Knight of New Benalia", 24, Rarity.COMMON, mage.cards.k.KnightOfNewBenalia.class));
         cards.add(new SetCardInfo("Kwende, Pride of Femeref", 25, Rarity.UNCOMMON, mage.cards.k.KwendePrideOfFemeref.class));
+        cards.add(new SetCardInfo("Lich's Mastery", 98, Rarity.RARE, mage.cards.l.LichsMastery.class));
         cards.add(new SetCardInfo("Lingering Phantom", 99, Rarity.UNCOMMON, mage.cards.l.LingeringPhantom.class));
         cards.add(new SetCardInfo("Llanowar Elves", 168, Rarity.COMMON, mage.cards.l.LlanowarElves.class));
         cards.add(new SetCardInfo("Llanowar Envoy", 169, Rarity.COMMON, mage.cards.l.LlanowarEnvoy.class));
