@@ -270,6 +270,7 @@ public class Dominaria extends ExpansionSet {
         cards.add(new SetCardInfo("Yargle, Glutton of Urborg", 113, Rarity.UNCOMMON, mage.cards.y.YargleGluttonOfUrborg.class));
         cards.add(new SetCardInfo("Yavimaya Sapherd", 189, Rarity.COMMON, mage.cards.y.YavimayaSapherd.class));
         cards.add(new SetCardInfo("Yawgmoth's Vile Offering", 114, Rarity.RARE, mage.cards.y.YawgmothsVileOffering.class));
+        cards.add(new SetCardInfo("Zahid, Djinn of the Lamp", 76, Rarity.RARE, mage.cards.z.ZahidDjinnOfTheLamp.class));
         cards.add(new SetCardInfo("Zhalfirin Void", 249, Rarity.UNCOMMON, mage.cards.z.ZhalfirinVoid.class));
     }
 }
