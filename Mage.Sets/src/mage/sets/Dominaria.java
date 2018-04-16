@@ -206,6 +206,7 @@ public class Dominaria extends ExpansionSet {
         cards.add(new SetCardInfo("Serra Angel", 33, Rarity.UNCOMMON, mage.cards.s.SerraAngel.class));
         cards.add(new SetCardInfo("Serra Disciple", 34, Rarity.COMMON, mage.cards.s.SerraDisciple.class));
         cards.add(new SetCardInfo("Shalai, Voice of Plenty", 35, Rarity.RARE, mage.cards.s.ShalaiVoiceOfPlenty.class));
+        cards.add(new SetCardInfo("Shivan Fire", 142, Rarity.COMMON, mage.cards.s.ShivanFire.class));
         cards.add(new SetCardInfo("Short Sword", 229, Rarity.COMMON, mage.cards.s.ShortSword.class));
         cards.add(new SetCardInfo("Siege-Gang Commander", 143, Rarity.RARE, mage.cards.s.SiegeGangCommander.class));
         cards.add(new SetCardInfo("Skirk Prospector", 144, Rarity.COMMON, mage.cards.s.SkirkProspector.class));
