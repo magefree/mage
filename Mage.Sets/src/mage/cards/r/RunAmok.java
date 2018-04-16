@@ -25,54 +25,40 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.w;
+package mage.cards.r;
 
-import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
-import mage.filter.StaticFilters;
-import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
-import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.constants.Duration;
+import mage.target.common.TargetAttackingCreature;
+
+import java.util.UUID;
 
 /**
  *
- * @author LevelX2
+ * @author rscoates
  */
-public class WhisperBloodLiturgist extends CardImpl {
+public class RunAmok extends CardImpl {
 
-    public WhisperBloodLiturgist(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
+    public RunAmok(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");
 
-        this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.CLERIC);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-
-        // {T}, Sacrifice two creatures: Return target creature card from your graveyard to the battlefield.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToBattlefieldTargetEffect(), new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(2, 2, FILTER_CONTROLLED_CREATURE_SHORT_TEXT, true)));
-        ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
-        this.addAbility(ability);
+        // Target attacking creature gets +3/+3 and gains trample until end of turn.
+        this.getSpellAbility().addEffect(new BoostTargetEffect(3, 3, Duration.EndOfTurn).setText("Target attacking creature gets +3/+3"));
+        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn).setText("and gains trample until end of turn"));
+        this.getSpellAbility().addTarget(new TargetAttackingCreature());
     }
 
-    public WhisperBloodLiturgist(final WhisperBloodLiturgist card) {
+    public RunAmok(final RunAmok card) {
         super(card);
     }
 
     @Override
-    public WhisperBloodLiturgist copy() {
-        return new WhisperBloodLiturgist(this);
+    public RunAmok copy() {
+        return new RunAmok(this);
     }
 }

@@ -25,54 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.w;
+package mage.cards.g;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
+import mage.abilities.condition.common.KickedCondition;
+import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
+import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
-import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetCardInLibrary;
 
 /**
  *
- * @author LevelX2
+ * @author TheElk801
  */
-public class WhisperBloodLiturgist extends CardImpl {
+public class GrowFromTheAshes extends CardImpl {
 
-    public WhisperBloodLiturgist(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
+    public GrowFromTheAshes(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{G}");
 
-        this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.CLERIC);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
+        // Kicker {2} (You may pay an additional {2} as you cast this spell.)
+        this.addAbility(new KickerAbility("{2}"));
 
-        // {T}, Sacrifice two creatures: Return target creature card from your graveyard to the battlefield.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToBattlefieldTargetEffect(), new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(2, 2, FILTER_CONTROLLED_CREATURE_SHORT_TEXT, true)));
-        ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
-        this.addAbility(ability);
+        // Search you library for a basic land card, put it onto the battlefield, then shuffle your library. If this spell was kicked, instead search your library for two basic land cards, put them onto the battlefield, then shuffle your library.
+        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
+                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 2, StaticFilters.FILTER_BASIC_LAND_CARD), false, true),
+                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 1, StaticFilters.FILTER_BASIC_LAND_CARD), false, true),
+                KickedCondition.instance,
+                "Search you library for a basic land card, put it onto the battlefield, then shuffle your library. If this spell was kicked, instead search your library for two basic land cards, put them onto the battlefield, then shuffle your library."));
     }
 
-    public WhisperBloodLiturgist(final WhisperBloodLiturgist card) {
+    public GrowFromTheAshes(final GrowFromTheAshes card) {
         super(card);
     }
 
     @Override
-    public WhisperBloodLiturgist copy() {
-        return new WhisperBloodLiturgist(this);
+    public GrowFromTheAshes copy() {
+        return new GrowFromTheAshes(this);
     }
 }

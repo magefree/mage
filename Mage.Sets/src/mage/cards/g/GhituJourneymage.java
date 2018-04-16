@@ -25,54 +25,60 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.w;
+package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
+import mage.abilities.TriggeredAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.effects.common.DamagePlayersEffect;
+import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
-import mage.filter.StaticFilters;
-import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
-import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.constants.TargetController;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
  *
- * @author LevelX2
+ * @author TheElk801
  */
-public class WhisperBloodLiturgist extends CardImpl {
+public class GhituJourneymage extends CardImpl {
 
-    public WhisperBloodLiturgist(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("another Wizard");
 
-        this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add(SubType.HUMAN);
-        this.subtype.add(SubType.CLERIC);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-
-        // {T}, Sacrifice two creatures: Return target creature card from your graveyard to the battlefield.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToBattlefieldTargetEffect(), new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(2, 2, FILTER_CONTROLLED_CREATURE_SHORT_TEXT, true)));
-        ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
-        this.addAbility(ability);
+    static {
+        filter.add(new AnotherPredicate());
+        filter.add(new SubtypePredicate(SubType.WIZARD));
     }
 
-    public WhisperBloodLiturgist(final WhisperBloodLiturgist card) {
+    public GhituJourneymage(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
+
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.WIZARD);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(2);
+
+        // When Ghitu Journeymage enters the battlefield, if you control another Wizard, Ghitu Journeymage deals 2 damage to each opponent.
+        TriggeredAbility triggeredAbility = new EntersBattlefieldTriggeredAbility(new DamagePlayersEffect(2, TargetController.OPPONENT));
+        this.addAbility(new ConditionalTriggeredAbility(
+                triggeredAbility,
+                new PermanentsOnTheBattlefieldCondition(filter),
+                "When {this} enters the battlefield, if you control another Wizard, {this} deals 2 damage to each opponent."
+        ));
+    }
+
+    public GhituJourneymage(final GhituJourneymage card) {
         super(card);
     }
 
     @Override
-    public WhisperBloodLiturgist copy() {
-        return new WhisperBloodLiturgist(this);
+    public GhituJourneymage copy() {
+        return new GhituJourneymage(this);
     }
 }

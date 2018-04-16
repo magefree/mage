@@ -25,54 +25,50 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.w;
+package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
+import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.condition.common.KickedCondition;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.keyword.KickerAbility;
+import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
-import mage.filter.StaticFilters;
-import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
-import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.counters.CounterType;
+
+import java.util.UUID;
 
 /**
  *
- * @author LevelX2
+ * @author Styxo
  */
-public class WhisperBloodLiturgist extends CardImpl {
+public class StrongholdConfessor extends CardImpl {
 
-    public WhisperBloodLiturgist(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
+    public StrongholdConfessor(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}");
 
-        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.CLERIC);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-        // {T}, Sacrifice two creatures: Return target creature card from your graveyard to the battlefield.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToBattlefieldTargetEffect(), new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(2, 2, FILTER_CONTROLLED_CREATURE_SHORT_TEXT, true)));
-        ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
-        this.addAbility(ability);
+        // Menace
+        this.addAbility(new MenaceAbility());
+        // Kicker {3} (You may pay an additional {3} as you cast this spell.)
+        this.addAbility(new KickerAbility("{3}"));
+        // If Stronghold Confessor was kicked, it enters the battlefield with two +1/+1 counters on it.
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), KickedCondition.instance, "If {this} was kicked, it enters the battlefield with two +1/+1 counters on it.", ""));
     }
 
-    public WhisperBloodLiturgist(final WhisperBloodLiturgist card) {
+    public StrongholdConfessor(final StrongholdConfessor card) {
         super(card);
     }
 
     @Override
-    public WhisperBloodLiturgist copy() {
-        return new WhisperBloodLiturgist(this);
+    public StrongholdConfessor copy() {
+        return new StrongholdConfessor(this);
     }
 }
