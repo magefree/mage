@@ -60,7 +60,7 @@ public class StrongholdConfessor extends CardImpl {
         // Kicker {3} (You may pay an additional {3} as you cast this spell.)
         this.addAbility(new KickerAbility("{3}"));
         // If Stronghold Confessor was kicked, it enters the battlefield with two +1/+1 counters on it.
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), KickedCondition.instance, "If Stronghold Confessor was kicked, it enters the battlefield with two +1/+1 counters on it.", ""));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), KickedCondition.instance, "If {this} was kicked, it enters the battlefield with two +1/+1 counters on it.", ""));
     }
 
     public StrongholdConfessor(final StrongholdConfessor card) {
