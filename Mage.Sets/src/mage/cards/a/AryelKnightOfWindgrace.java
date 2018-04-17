@@ -31,25 +31,32 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.VariableCost;
+import mage.abilities.costs.VariableCostImpl;
 import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.common.TapTargetCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.constants.SubType;
-import mage.constants.SuperType;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.constants.Zone;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.cards.CardImpl;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.filter.predicate.permanent.TappedPredicate;
+import mage.game.Game;
 import mage.game.permanent.token.KnightToken;
-import mage.target.Target;
-import mage.target.TargetPermanent;
-import mage.target.TargetAdjustment;
+import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
@@ -58,7 +65,9 @@ import mage.target.TargetAdjustment;
 public class AryelKnightOfWindgrace extends CardImpl {
 
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creature with power X or less");
-       
+
+    private UUID adjustTargetAbilityId;
+
     public AryelKnightOfWindgrace(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{B}");
 
@@ -73,31 +82,38 @@ public class AryelKnightOfWindgrace extends CardImpl {
 
         // {2}{W}, {T}: Create a 2/2 white Knight creature token with vigilance.
         Ability tokenAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new KnightToken()), new ManaCostsImpl("{2}{W}"));
-        tokenAbility.addCost(new TapSourceCost());        
+        tokenAbility.addCost(new TapSourceCost());
         this.addAbility(tokenAbility);
-        
-        // {B}, {T}, Tap X untapped Knights you control: Destroy target creature with power X or less.
-            
-            //Simple costs
-            Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{B}"));
-            ability.addCost(new TapSourceCost());
-        
-            // Variable cost: Tapping X Knights
-            TapXTargetCost cost = new TapXTargetCost();
-            int xValue = cost.getFixedCostsFromAnnouncedValue();
-            ability.addCost(xValue);
 
-            //Setting Legal Target to destroy
-            filter2.add(new PowerPredicate(new StringBuilder("creature with power ").append(xValue).append(" or less").toString());
-            ability.addTarget(new TargetPermanent(filter2));
-            ability.setTargetAdjustment(TargetAdjustment.ARYEL);
-            ability.addTarget(target);
-            this.getSpellAbility().addEffect(new DestroyTargetEffect());
-            this.addAbility(ability);        
+        // {B}, {T}, Tap X untapped Knights you control: Destroy target creature with power X or less.
+        //Simple costs
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect()
+                .setText("Destroy target creature with power X or less"), new ManaCostsImpl("{B}"));
+        ability.addCost(new TapSourceCost());
+        ability.addCost(new AryelTapXTargetCost());
+        this.addAbility(ability);
+        this.adjustTargetAbilityId = ability.getOriginalId();
+        ability.getOriginalId();
+    }
+
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        if (adjustTargetAbilityId.equals(ability.getOriginalId())) {
+            for (VariableCost cost : ability.getCosts().getVariableCosts()) {
+                if (cost instanceof AryelKnightOfWindgrace) {
+                    int value = ((AryelTapXTargetCost) cost).getAmount();
+                    FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power " + value + " or less");
+                    filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, value + 1));
+                    ability.getTargets().clear();
+                    ability.addTarget(new TargetCreaturePermanent(filter));
+                }
+            }
+        }
     }
 
     public AryelKnightOfWindgrace(final AryelKnightOfWindgrace card) {
         super(card);
+        this.adjustTargetAbilityId = card.adjustTargetAbilityId;
     }
 
     @Override
@@ -106,26 +122,27 @@ public class AryelKnightOfWindgrace extends CardImpl {
     }
 }
 
-class TapXTargetCost extends VariableCostImpl {
+class AryelTapXTargetCost extends VariableCostImpl {
 
-   static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Knights you control");
-   static {
+    static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Knights you control");
+
+    static {
         filter.add(Predicates.not(new TappedPredicate()));
         filter.add(new SubtypePredicate(SubType.KNIGHT));
-   }
-   
-   public TapXTargetCost() {
+    }
+
+    public AryelTapXTargetCost() {
         super("controlled untapped Knights you would like to tap");
         this.text = "Tap X untapped Knights you control";
     }
 
-    public TapXTargetCost(final TapXTargetCost cost) {
+    public AryelTapXTargetCost(final AryelTapXTargetCost cost) {
         super(cost);
     }
 
     @Override
-    public TapXTargetCost copy() {
-        return new TapXTargetCost(this);
+    public AryelTapXTargetCost copy() {
+        return new AryelTapXTargetCost(this);
     }
 
     @Override
@@ -138,4 +155,4 @@ class TapXTargetCost extends VariableCostImpl {
         TargetControlledPermanent target = new TargetControlledPermanent(xValue, xValue, filter, true);
         return new TapTargetCost(target);
     }
-}    
+}
