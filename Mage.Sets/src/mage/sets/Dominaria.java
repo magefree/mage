@@ -195,6 +195,7 @@ public class Dominaria extends ExpansionSet {
         cards.add(new SetCardInfo("Naban, Dean of Iteration", 58, Rarity.RARE, mage.cards.n.NabanDeanOfIteration.class));
         cards.add(new SetCardInfo("Naru Meha, Master Wizard", 59, Rarity.MYTHIC, mage.cards.n.NaruMehaMasterWizard.class));
         cards.add(new SetCardInfo("Nature's Spiral", 175, Rarity.UNCOMMON, mage.cards.n.NaturesSpiral.class));
+        cards.add(new SetCardInfo("Navigator's Compass", 175, Rarity.COMMON, mage.cards.n.NavigatorsCompass.class));
         cards.add(new SetCardInfo("Niambi, Faithful Healer", 272, Rarity.RARE, mage.cards.n.NiambiFaithfulHealer.class));
         cards.add(new SetCardInfo("On Serra's Wings", 28, Rarity.UNCOMMON, mage.cards.o.OnSerrasWings.class));
         cards.add(new SetCardInfo("Opt", 60, Rarity.COMMON, mage.cards.o.Opt.class));
