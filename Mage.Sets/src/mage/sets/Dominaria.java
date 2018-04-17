@@ -212,6 +212,7 @@ public class Dominaria extends ExpansionSet {
         cards.add(new SetCardInfo("Radiating Lightning", 138, Rarity.COMMON, mage.cards.r.RadiatingLightning.class));
         cards.add(new SetCardInfo("Raff Capashen, Ship's Mage", 202, Rarity.UNCOMMON, mage.cards.r.RaffCapashenShipsMage.class));
         cards.add(new SetCardInfo("Rampaging Cyclops", 139, Rarity.COMMON, mage.cards.r.RampagingCyclops.class));
+        cards.add(new SetCardInfo("Relic Runner", 62, Rarity.COMMON, mage.cards.r.RelicRunner.class));
         cards.add(new SetCardInfo("Rescue", 63, Rarity.COMMON, mage.cards.r.Rescue.class));
         cards.add(new SetCardInfo("Rite of Belzenlok", 102, Rarity.RARE, mage.cards.r.RiteOfBelzenlok.class));
         cards.add(new SetCardInfo("Run Amok", 140, Rarity.COMMON, mage.cards.r.RunAmok.class));
