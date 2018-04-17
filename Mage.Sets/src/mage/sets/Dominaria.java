@@ -239,6 +239,7 @@ public class Dominaria extends ExpansionSet {
         cards.add(new SetCardInfo("Skirk Prospector", 144, Rarity.COMMON, mage.cards.s.SkirkProspector.class));
         cards.add(new SetCardInfo("Skittering Surveyor", 230, Rarity.COMMON, mage.cards.s.SkitteringSurveyor.class));
         cards.add(new SetCardInfo("Skizzik", 145, Rarity.UNCOMMON, mage.cards.s.Skizzik.class));
+        cards.add(new SetCardInfo("Slimefoot, the Stowaway", 205, Rarity.UNCOMMON, mage.cards.s.SlimefootTheStowaway.class));
         cards.add(new SetCardInfo("Slinn Voda, the Rising Deep", 66, Rarity.UNCOMMON, mage.cards.s.SlinnVodaTheRisingDeep.class));
         cards.add(new SetCardInfo("Song of Freyalise", 179, Rarity.UNCOMMON, mage.cards.s.SongOfFreyalise.class));
         cards.add(new SetCardInfo("Soul Salvage", 104, Rarity.COMMON, mage.cards.s.SoulSalvage.class));
