@@ -389,6 +389,16 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                 ability.getTargets().clear();
                 ability.getTargets().add(new TargetPermanent(minTargets, maxTargets, permanentFilter, false));
                 break;
+            case ARYEL:// Aryel, Knight of Windgrace only
+                xValue = ability.cost.getFixedCostsFromAnnouncedValue();
+                oldTargetPermanent = (TargetPermanent) ability.getTargets().get(0);
+                minTargets = oldTargetPermanent.getMinNumberOfTargets();
+                maxTargets = oldTargetPermanent.getMaxNumberOfTargets();
+                permanentFilter = oldTargetPermanent.getFilter().copy();
+                permanentFilter.add(new PowerPredicate(ComparisonType.FEWER_THAN, xValue + 1));
+                ability.getTargets().clear();
+                ability.getTargets().add(new TargetPermanent(minTargets, maxTargets, permanentFilter, false));
+                break;    
             case VERSE_COUNTER_TARGETS:
                 Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(ability.getSourceId());
                 if (sourcePermanent != null) {
