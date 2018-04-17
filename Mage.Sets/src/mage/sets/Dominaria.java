@@ -280,6 +280,7 @@ public class Dominaria extends ExpansionSet {
         cards.add(new SetCardInfo("Two-Headed Giant", 147, Rarity.RARE, mage.cards.t.TwoHeadedGiant.class));
         cards.add(new SetCardInfo("Untamed Kavu", 186, Rarity.UNCOMMON, mage.cards.u.UntamedKavu.class));
         cards.add(new SetCardInfo("Unwind", 72, Rarity.COMMON, mage.cards.u.Unwind.class));
+        cards.add(new SetCardInfo("Urgoros, the Empty One", 109, Rarity.UNCOMMON, mage.cards.u.UrgorosTheEmptyOne.class));
         cards.add(new SetCardInfo("Urza's Ruinous Blast", 39, Rarity.RARE, mage.cards.u.UrzasRuinousBlast.class));
         cards.add(new SetCardInfo("Urza's Tome", 235, Rarity.UNCOMMON, mage.cards.u.UrzasTome.class));
         cards.add(new SetCardInfo("Valduk, Keeper of the Flame", 148, Rarity.UNCOMMON, mage.cards.v.ValdukKeeperOfTheFlame.class));
