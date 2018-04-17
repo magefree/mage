@@ -275,6 +275,7 @@ public class Dominaria extends ExpansionSet {
         cards.add(new SetCardInfo("Voltaic Servant", 236, Rarity.COMMON, mage.cards.v.VoltaicServant.class));
         cards.add(new SetCardInfo("Warlord's Fury", 151, Rarity.COMMON, mage.cards.w.WarlordsFury.class));
         cards.add(new SetCardInfo("Weatherlight", 237, Rarity.MYTHIC, mage.cards.w.Weatherlight.class));
+        cards.add(new SetCardInfo("Weight of Memory", 74, Rarity.UNCOMMON, mage.cards.w.WeightOfMemory.class));
         cards.add(new SetCardInfo("Whisper, Blood Liturgist", 111, Rarity.UNCOMMON, mage.cards.w.WhisperBloodLiturgist.class));
         cards.add(new SetCardInfo("Wild Onslaught", 188, Rarity.UNCOMMON, mage.cards.w.WildOnslaught.class));
         cards.add(new SetCardInfo("Windgrace Acolyte", 112, Rarity.COMMON, mage.cards.w.WindgraceAcolyte.class));
