@@ -52,7 +52,6 @@ public class Dominaria extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
-        this.needsLegends = true;
 
         cards.add(new SetCardInfo("Academy Drake", 40, Rarity.UNCOMMON, mage.cards.a.AcademyDrake.class));
         cards.add(new SetCardInfo("Academy Journeymage", 41, Rarity.COMMON, mage.cards.a.AcademyJourneymage.class));
@@ -66,6 +65,7 @@ public class Dominaria extends ExpansionSet {
         cards.add(new SetCardInfo("Arcane Flight", 43, Rarity.COMMON, mage.cards.a.ArcaneFlight.class));
         cards.add(new SetCardInfo("Artificer's Assistant", 44, Rarity.COMMON, mage.cards.a.ArtificersAssistant.class));
         cards.add(new SetCardInfo("Arvad the Cursed", 191, Rarity.UNCOMMON, mage.cards.a.ArvadTheCursed.class));
+        cards.add(new SetCardInfo("Aryel, Knight of Windgrace", 192, Rarity.RARE, mage.cards.a.AryelKnightOfWindgrace.class));
         cards.add(new SetCardInfo("Aven Sentry", 3, Rarity.COMMON, mage.cards.a.AvenSentry.class));
         cards.add(new SetCardInfo("Baird, Steward of Argive", 4, Rarity.UNCOMMON, mage.cards.b.BairdStewardOfArgive.class));
         cards.add(new SetCardInfo("Baloth Gorger", 156, Rarity.COMMON, mage.cards.b.BalothGorger.class));
