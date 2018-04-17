@@ -158,6 +158,7 @@ public class Dominaria extends ExpansionSet {
         cards.add(new SetCardInfo("Karn, Scion of Urza", 1, Rarity.MYTHIC, mage.cards.k.KarnScionOfUrza.class));
         cards.add(new SetCardInfo("Karn's Temporal Sundering", 55, Rarity.RARE, mage.cards.k.KarnsTemporalSundering.class));
         cards.add(new SetCardInfo("Karplusan Hound", 277, Rarity.UNCOMMON, mage.cards.k.KarplusanHound.class));
+        cards.add(new SetCardInfo("Kazarov, Sengir Pureblood", 96, Rarity.RARE, mage.cards.k.KazarovSengirPureblood.class));
         cards.add(new SetCardInfo("Keldon Overseer", 134, Rarity.COMMON, mage.cards.k.KeldonOverseer.class));
         cards.add(new SetCardInfo("Keldon Raider", 135, Rarity.COMMON, mage.cards.k.KeldonRaider.class));
         cards.add(new SetCardInfo("Keldon Warcaller", 136, Rarity.COMMON, mage.cards.k.KeldonWarcaller.class));
