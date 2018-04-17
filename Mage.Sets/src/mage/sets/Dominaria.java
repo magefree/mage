@@ -255,6 +255,7 @@ public class Dominaria extends ExpansionSet {
         cards.add(new SetCardInfo("The Antiquities War", 42, Rarity.RARE, mage.cards.t.TheAntiquitiesWar.class));
         cards.add(new SetCardInfo("The Eldest Reborn", 90, Rarity.UNCOMMON, mage.cards.t.TheEldestReborn.class));
         cards.add(new SetCardInfo("The Flame of Keld", 123, Rarity.UNCOMMON, mage.cards.t.TheFlameOfKeld.class));
+        cards.add(new SetCardInfo("The Mending of Dominaria", 173, Rarity.RARE, mage.cards.t.TheMendingOfDominaria.class));
         cards.add(new SetCardInfo("The Mirari Conjecture", 57, Rarity.RARE, mage.cards.t.TheMirariConjecture.class));
         cards.add(new SetCardInfo("Thorn Elemental", 185, Rarity.UNCOMMON, mage.cards.t.ThornElemental.class));
         cards.add(new SetCardInfo("Thran Temporal Gateway", 233, Rarity.RARE, mage.cards.t.ThranTemporalGateway.class));
