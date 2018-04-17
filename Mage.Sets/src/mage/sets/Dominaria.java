@@ -89,6 +89,7 @@ public class Dominaria extends ExpansionSet {
         cards.add(new SetCardInfo("Clifftop Retreat", 239, Rarity.RARE, mage.cards.c.ClifftopRetreat.class));
         cards.add(new SetCardInfo("Cloudreader Sphinx", 47, Rarity.COMMON, mage.cards.c.CloudreaderSphinx.class));
         cards.add(new SetCardInfo("Cold-Water Snapper", 48, Rarity.COMMON, mage.cards.c.ColdWaterSnapper.class));
+        cards.add(new SetCardInfo("Curator's Ward", 49, Rarity.UNCOMMON, mage.cards.c.CuratorsWard.class));
         cards.add(new SetCardInfo("D'Avenant Trapper", 11, Rarity.COMMON, mage.cards.d.DAvenantTrapper.class));
         cards.add(new SetCardInfo("Damping Sphere", 213, Rarity.UNCOMMON, mage.cards.d.DampingSphere.class));
         cards.add(new SetCardInfo("Danitha Capashen, Paragon", 12, Rarity.UNCOMMON, mage.cards.d.DanithaCapashenParagon.class));
