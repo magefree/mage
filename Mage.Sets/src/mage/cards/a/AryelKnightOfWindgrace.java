@@ -64,8 +64,6 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class AryelKnightOfWindgrace extends CardImpl {
 
-    private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creature with power X or less");
-
     private UUID adjustTargetAbilityId;
 
     public AryelKnightOfWindgrace(UUID ownerId, CardSetInfo setInfo) {
@@ -100,12 +98,13 @@ public class AryelKnightOfWindgrace extends CardImpl {
     public void adjustTargets(Ability ability, Game game) {
         if (adjustTargetAbilityId.equals(ability.getOriginalId())) {
             for (VariableCost cost : ability.getCosts().getVariableCosts()) {
-                if (cost instanceof AryelKnightOfWindgrace) {
+                if (cost instanceof AryelTapXTargetCost) {
                     int value = ((AryelTapXTargetCost) cost).getAmount();
                     FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power " + value + " or less");
                     filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, value + 1));
                     ability.getTargets().clear();
                     ability.addTarget(new TargetCreaturePermanent(filter));
+                    break;
                 }
             }
         }
