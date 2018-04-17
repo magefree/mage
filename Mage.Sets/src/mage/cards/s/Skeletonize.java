@@ -77,7 +77,7 @@ class SkeletonizeEffect extends OneShotEffect {
 
     public SkeletonizeEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "When a creature dealt damage this way dies this turn, create a 1/1 black Skeleton creature token with \"{B}: Regenerate this creature\"";
+        this.staticText = "When a creature dealt damage this way dies this turn, create a 1/1 black Skeleton creature token with \"{B}: Regenerate this creature.\"";
     }
 
     public SkeletonizeEffect(final SkeletonizeEffect effect) {

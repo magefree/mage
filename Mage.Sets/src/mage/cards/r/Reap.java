@@ -78,7 +78,7 @@ public class Reap extends CardImpl {
                     opponentId = target.getFirstTarget();
                 }
                 int numbTargets = game.getBattlefield().getAllActivePermanents(filter, opponentId, game).size();
-                ability.addTarget(new TargetCardInYourGraveyard(0, numbTargets, new FilterCard("cards from your graveyard")));
+                ability.addTarget(new TargetCardInYourGraveyard(0, numbTargets, new FilterCard("card" + (numbTargets == 1 ? "" : "s") + " from your graveyard")));
             }
         }
     }

@@ -34,6 +34,7 @@ import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 
 /**
@@ -51,7 +52,7 @@ public class SupremeVerdict extends CardImpl {
         this.addAbility(ability);
 
         // Destroy all creatures. 
-        this.getSpellAbility().addEffect(new DestroyAllEffect(new FilterCreaturePermanent()));
+        this.getSpellAbility().addEffect(new DestroyAllEffect(StaticFilters.FILTER_PERMANENT_CREATURES));
     }
 
     public SupremeVerdict(final SupremeVerdict card) {

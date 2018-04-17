@@ -58,11 +58,11 @@ public class BoostAllEffect extends ContinuousEffectImpl {
     }
 
     public BoostAllEffect(DynamicValue power, DynamicValue toughness, Duration duration) {
-        this(power, toughness, duration, new FilterCreaturePermanent("All creatures"), false);
+        this(power, toughness, duration, new FilterCreaturePermanent("all creatures"), false);
     }
 
     public BoostAllEffect(int power, int toughness, Duration duration, boolean excludeSource) {
-        this(power, toughness, duration, new FilterCreaturePermanent("All creatures"), excludeSource);
+        this(power, toughness, duration, new FilterCreaturePermanent("all creatures"), excludeSource);
     }
 
     public BoostAllEffect(int power, int toughness, Duration duration, FilterCreaturePermanent filter, boolean excludeSource) {

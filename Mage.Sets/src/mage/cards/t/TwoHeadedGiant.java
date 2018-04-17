@@ -25,84 +25,84 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.n;
+package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.keyword.TransmuteAbility;
+import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.abilities.keyword.DoubleStrikeAbility;
+import mage.abilities.keyword.MenaceAbility;
+import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 
 /**
  *
- * @author fireshoes
+ * @author TheElk801
  */
-public class NetherbornPhalanx extends CardImpl {
+public class TwoHeadedGiant extends CardImpl {
 
-    public NetherbornPhalanx(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}");
-        this.subtype.add(SubType.HORROR);
-        this.power = new MageInt(2);
+    public TwoHeadedGiant(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
+
+        this.subtype.add(SubType.GIANT);
+        this.subtype.add(SubType.WARRIOR);
+        this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        // When Netherborn Phalanx enters the battlefield, each opponent loses 1 life for each creature he or she controls.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new NetherbornPhalanxEffect());
-        this.addAbility(ability);
-
-        // Transmute {1}{B}{B}
-        this.addAbility(new TransmuteAbility("{1}{B}{B}"));
+        // Whenever Two-Headed Giant attacks, flip two coins.  If both coins come up heads, Two-Headed Giant gains double strike until end of turn.  If both coins come up tails, Two-Headed Giant gains menace until end of turn.
+        this.addAbility(new AttacksTriggeredAbility(new TwoHeadedGiantEffect(), false));
     }
 
-    public NetherbornPhalanx(final NetherbornPhalanx card) {
+    public TwoHeadedGiant(final TwoHeadedGiant card) {
         super(card);
     }
 
     @Override
-    public NetherbornPhalanx copy() {
-        return new NetherbornPhalanx(this);
+    public TwoHeadedGiant copy() {
+        return new TwoHeadedGiant(this);
     }
 }
 
-class NetherbornPhalanxEffect extends OneShotEffect {
+class TwoHeadedGiantEffect extends OneShotEffect {
 
-    NetherbornPhalanxEffect() {
-        super(Outcome.Sacrifice);
-        this.staticText = "each opponent loses 1 life for each creature he or she controls";
+    public TwoHeadedGiantEffect() {
+        super(Outcome.Benefit);
+        this.staticText = "flip two coins.  If both coins come up heads, {this} gains double strike until end of turn."
+                + " If both coins come up tails, {this} gains menace until end of turn";
     }
 
-    NetherbornPhalanxEffect(final NetherbornPhalanxEffect effect) {
+    public TwoHeadedGiantEffect(final TwoHeadedGiantEffect effect) {
         super(effect);
     }
 
     @Override
-    public NetherbornPhalanxEffect copy() {
-        return new NetherbornPhalanxEffect(this);
+    public TwoHeadedGiantEffect copy() {
+        return new TwoHeadedGiantEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            for (UUID playerId : game.getOpponents(source.getControllerId())) {
-                final int count = game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, playerId, game).size();
-                if (count > 0) {
-                    Player opponent = game.getPlayer(playerId);
-                    if (opponent != null) {
-                        opponent.loseLife(count, game, false);
-                        return true;
-                    }
-                }
+        if (player == null) {
+            return false;
+        }
+        boolean head1 = player.flipCoin(game);
+        boolean head2 = player.flipCoin(game);
+        if (head1 == head2) {
+            if (head1) {
+                new GainAbilitySourceEffect(DoubleStrikeAbility.getInstance()).apply(game, source);
+            } else {
+                new GainAbilitySourceEffect(new MenaceAbility()).apply(game, source);
             }
         }
-        return false;
+        return true;
     }
 }

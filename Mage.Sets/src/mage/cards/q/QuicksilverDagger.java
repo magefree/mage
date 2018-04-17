@@ -72,7 +72,7 @@ public class QuicksilverDagger extends CardImpl {
         gainAbility.addEffect(new DrawCardSourceControllerEffect(1));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new GainAbilityAttachedEffect(gainAbility, AttachmentType.AURA, Duration.WhileOnBattlefield,
-                        "Enchanted creature has \"{tap}: This creature deals 1 damage to target player. You draw a card.\"")
+                        "Enchanted creature has \"{T}: This creature deals 1 damage to target player. You draw a card.\"")
         ));
     }
 

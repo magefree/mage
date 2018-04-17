@@ -53,7 +53,7 @@ import java.util.UUID;
  */
 public class LeadBellyChimera extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Chimera creature you control");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Chimera creature");
 
     static {
         filter.add(new SubtypePredicate(SubType.CHIMERA));

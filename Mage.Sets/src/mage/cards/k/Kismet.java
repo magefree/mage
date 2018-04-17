@@ -52,7 +52,7 @@ public class Kismet extends CardImpl {
     public Kismet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}");
 
-        // Artifacts, creatures, and lands played by your opponents enter the battlefield tapped.
+        // Artifacts, creatures, and lands your opponents control enter the battlefield tapped.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new KismetEffect()));
     }
 
@@ -70,7 +70,7 @@ class KismetEffect extends ReplacementEffectImpl {
 
     KismetEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Tap);
-        staticText = "Artifacts, creatures, and lands played by your opponents enter the battlefield tapped";
+        staticText = "Artifacts, creatures, and lands your opponents control enter the battlefield tapped";
     }
 
     KismetEffect(final KismetEffect effect) {

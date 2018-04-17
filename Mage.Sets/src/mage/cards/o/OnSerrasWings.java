@@ -25,59 +25,76 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.p;
+package mage.cards.o;
 
 import java.util.UUID;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.target.common.TargetCreaturePermanent;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.continuous.AddCardSuperTypeAttachedEffect;
+import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
+import mage.constants.Outcome;
+import mage.target.TargetPermanent;
 import mage.abilities.keyword.EnchantAbility;
+import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.LifelinkAbility;
+import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.game.permanent.token.ElfToken;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author LevelX2
+ * @author TheElk801
  */
-public class PresenceOfGond extends CardImpl {
+public class OnSerrasWings extends CardImpl {
 
-    public PresenceOfGond(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}");
+    public OnSerrasWings(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
+
+        this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.AURA);
-
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.PutCreatureInPlay));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
-        // Enchanted creature has "{tap}: Create a 1/1 green Elf Warrior creature token."
-        Ability abilityToGain = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new ElfToken()), new TapSourceCost());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(abilityToGain, AttachmentType.AURA, Duration.WhileOnBattlefield,
-                "Enchanted creature has \"{T}: Create a 1/1 green Elf Warrior creature token.\"")));
+        // Enchanted creature is legendary, gets +1/+1, and has flying, vigilance, and lifelink.
+        Effect effect = new AddCardSuperTypeAttachedEffect(SuperType.LEGENDARY, Duration.WhileOnBattlefield, AttachmentType.AURA);
+        effect.setText("Enchanted creature is legendary,");
+        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        effect = new BoostEnchantedEffect(4, 4, Duration.WhileOnBattlefield);
+        effect.setText("gets +1/+1,");
+        ability.addEffect(effect);
+        effect = new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA);
+        effect.setText("and has flying");
+        ability.addEffect(effect);
+        effect = new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), AttachmentType.AURA);
+        effect.setText("vigilance,");
+        ability.addEffect(effect);
+        effect = new GainAbilityAttachedEffect(LifelinkAbility.getInstance(), AttachmentType.AURA);
+        effect.setText("and lifelink");
+        ability.addEffect(effect);
+        this.addAbility(ability);
     }
 
-    public PresenceOfGond(final PresenceOfGond card) {
+    public OnSerrasWings(final OnSerrasWings card) {
         super(card);
     }
 
     @Override
-    public PresenceOfGond copy() {
-        return new PresenceOfGond(this);
+    public OnSerrasWings copy() {
+        return new OnSerrasWings(this);
     }
 }

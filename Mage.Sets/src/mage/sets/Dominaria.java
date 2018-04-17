@@ -104,6 +104,7 @@ public class Dominaria extends ExpansionSet {
         cards.add(new SetCardInfo("Drudge Sentinel", 89, Rarity.COMMON, mage.cards.d.DrudgeSentinel.class));
         cards.add(new SetCardInfo("Dub", 15, Rarity.SPECIAL, mage.cards.d.Dub.class));
         cards.add(new SetCardInfo("Eviscerate", 91, Rarity.COMMON, mage.cards.e.Eviscerate.class));
+        cards.add(new SetCardInfo("Evra, Halcyon Witness", 16, Rarity.RARE, mage.cards.e.EvraHalcyonWitness.class));
         cards.add(new SetCardInfo("Excavation Elephant", 17, Rarity.COMMON, mage.cards.e.ExcavationElephant.class));
         cards.add(new SetCardInfo("Fall of the Thran", 18, Rarity.RARE, mage.cards.f.FallOfTheThran.class));
         cards.add(new SetCardInfo("Feral Abomination", 92, Rarity.COMMON, mage.cards.f.FeralAbomination.class));
@@ -139,6 +140,7 @@ public class Dominaria extends ExpansionSet {
         cards.add(new SetCardInfo("Homarid Explorer", 53, Rarity.UNCOMMON, mage.cards.h.HomaridExplorer.class));
         cards.add(new SetCardInfo("Howling Golem", 218, Rarity.UNCOMMON, mage.cards.h.HowlingGolem.class));
         cards.add(new SetCardInfo("Icy Manipulator", 219, Rarity.UNCOMMON, mage.cards.i.IcyManipulator.class));
+        cards.add(new SetCardInfo("In Bolas's Clutches", 54, Rarity.UNCOMMON, mage.cards.i.InBolassClutches.class));
         cards.add(new SetCardInfo("Invoke the Divine", 22, Rarity.COMMON, mage.cards.i.InvokeTheDivine.class));
         cards.add(new SetCardInfo("Island", 254, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 255, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
@@ -156,6 +158,7 @@ public class Dominaria extends ExpansionSet {
         cards.add(new SetCardInfo("Karn, Scion of Urza", 1, Rarity.MYTHIC, mage.cards.k.KarnScionOfUrza.class));
         cards.add(new SetCardInfo("Karn's Temporal Sundering", 55, Rarity.RARE, mage.cards.k.KarnsTemporalSundering.class));
         cards.add(new SetCardInfo("Karplusan Hound", 277, Rarity.UNCOMMON, mage.cards.k.KarplusanHound.class));
+        cards.add(new SetCardInfo("Kazarov, Sengir Pureblood", 96, Rarity.RARE, mage.cards.k.KazarovSengirPureblood.class));
         cards.add(new SetCardInfo("Keldon Overseer", 134, Rarity.COMMON, mage.cards.k.KeldonOverseer.class));
         cards.add(new SetCardInfo("Keldon Raider", 135, Rarity.COMMON, mage.cards.k.KeldonRaider.class));
         cards.add(new SetCardInfo("Keldon Warcaller", 136, Rarity.COMMON, mage.cards.k.KeldonWarcaller.class));
@@ -163,6 +166,7 @@ public class Dominaria extends ExpansionSet {
         cards.add(new SetCardInfo("Knight of Malice", 97, Rarity.UNCOMMON, mage.cards.k.KnightOfMalice.class));
         cards.add(new SetCardInfo("Knight of New Benalia", 24, Rarity.COMMON, mage.cards.k.KnightOfNewBenalia.class));
         cards.add(new SetCardInfo("Kwende, Pride of Femeref", 25, Rarity.UNCOMMON, mage.cards.k.KwendePrideOfFemeref.class));
+        cards.add(new SetCardInfo("Lich's Mastery", 98, Rarity.RARE, mage.cards.l.LichsMastery.class));
         cards.add(new SetCardInfo("Lingering Phantom", 99, Rarity.UNCOMMON, mage.cards.l.LingeringPhantom.class));
         cards.add(new SetCardInfo("Llanowar Elves", 168, Rarity.COMMON, mage.cards.l.LlanowarElves.class));
         cards.add(new SetCardInfo("Llanowar Envoy", 169, Rarity.COMMON, mage.cards.l.LlanowarEnvoy.class));
@@ -189,7 +193,9 @@ public class Dominaria extends ExpansionSet {
         cards.add(new SetCardInfo("Naru Meha, Master Wizard", 59, Rarity.MYTHIC, mage.cards.n.NaruMehaMasterWizard.class));
         cards.add(new SetCardInfo("Nature's Spiral", 175, Rarity.UNCOMMON, mage.cards.n.NaturesSpiral.class));
         cards.add(new SetCardInfo("Niambi, Faithful Healer", 272, Rarity.RARE, mage.cards.n.NiambiFaithfulHealer.class));
+        cards.add(new SetCardInfo("On Serra's Wings", 28, Rarity.UNCOMMON, mage.cards.o.OnSerrasWings.class));
         cards.add(new SetCardInfo("Opt", 60, Rarity.COMMON, mage.cards.o.Opt.class));
+        cards.add(new SetCardInfo("Orcish Vandal", 137, Rarity.COMMON, mage.cards.o.OrcishVandal.class));
         cards.add(new SetCardInfo("Pardic Wanderer", 226, Rarity.COMMON, mage.cards.p.PardicWanderer.class));
         cards.add(new SetCardInfo("Pegasus Courser", 29, Rarity.COMMON, mage.cards.p.PegasusCourser.class));
         cards.add(new SetCardInfo("Pierce the Sky", 176, Rarity.COMMON, mage.cards.p.PierceTheSky.class));
@@ -252,9 +258,11 @@ public class Dominaria extends ExpansionSet {
         cards.add(new SetCardInfo("Tragic Poet", 37, Rarity.COMMON, mage.cards.t.TragicPoet.class));
         cards.add(new SetCardInfo("Traxos, Scourge of Kroog", 234, Rarity.RARE, mage.cards.t.TraxosScourgeOfKroog.class));
         cards.add(new SetCardInfo("Triumph of Gerrard", 38, Rarity.UNCOMMON, mage.cards.t.TriumphOfGerrard.class));
+        cards.add(new SetCardInfo("Two-Headed Giant", 147, Rarity.RARE, mage.cards.t.TwoHeadedGiant.class));
         cards.add(new SetCardInfo("Untamed Kavu", 186, Rarity.UNCOMMON, mage.cards.u.UntamedKavu.class));
         cards.add(new SetCardInfo("Unwind", 72, Rarity.COMMON, mage.cards.u.Unwind.class));
         cards.add(new SetCardInfo("Urza's Ruinous Blast", 39, Rarity.RARE, mage.cards.u.UrzasRuinousBlast.class));
+        cards.add(new SetCardInfo("Urza's Tome", 235, Rarity.UNCOMMON, mage.cards.u.UrzasTome.class));
         cards.add(new SetCardInfo("Verdant Force", 187, Rarity.RARE, mage.cards.v.VerdantForce.class));
         cards.add(new SetCardInfo("Verix Bladewing", 149, Rarity.MYTHIC, mage.cards.v.VerixBladewing.class));
         cards.add(new SetCardInfo("Vicious Offering", 110, Rarity.COMMON, mage.cards.v.ViciousOffering.class));

@@ -51,7 +51,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  */
 public class LoxodonHierarch extends CardImpl {
 
-    private static FilterCreaturePermanent filter = new FilterCreaturePermanent("each creature you control");
+    private static FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you control");
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));

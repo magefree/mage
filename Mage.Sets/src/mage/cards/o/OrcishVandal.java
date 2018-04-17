@@ -1,16 +1,16 @@
 /*
  *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- * 
+ *
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
- * 
+ *
  *     1. Redistributions of source code must retain the above copyright notice, this list of
  *        conditions and the following disclaimer.
- * 
+ *
  *     2. Redistributions in binary form must reproduce the above copyright notice, this list
  *        of conditions and the following disclaimer in the documentation and/or other materials
  *        provided with the distribution.
- * 
+ *
  *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
  *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
  *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
@@ -20,49 +20,62 @@
  *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  *  The views and conclusions contained in the software and documentation are those of the
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.cards.o;
 
-package mage.cards.a;
-
-import java.util.UUID;
-import mage.abilities.common.LandfallAbility;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.continuous.BoostEquippedEffect;
-import mage.abilities.keyword.EquipAbility;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.SubType;
+import mage.constants.Zone;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetCreatureOrPlayer;
 
+import java.util.UUID;
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author themattfiles
  */
-public class AdventuringGear extends CardImpl {
+public class OrcishVandal extends CardImpl {
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("an artifact");
 
-    public AdventuringGear(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
-        this.subtype.add(SubType.EQUIPMENT);
+    static {
+        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+    }
+    
+    public OrcishVandal(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
         
-        // Landfall — Whenever a land enters the battlefield under your control, equipped creature gets +2/+2 until end of turn.
-        this.addAbility(new LandfallAbility(new BoostEquippedEffect(2, 2, Duration.EndOfTurn), false));
-        
-        // Equip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1)));
+        this.subtype.add(SubType.ORC);
+        this.subtype.add(SubType.WARRIOR);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+
+        // {t}, Sacrifice an artifact: Orcish Vandal deals 2 damage to any target.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new TapSourceCost());
+        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        this.addAbility(ability);
     }
 
-    public AdventuringGear(final AdventuringGear card) {
+    public OrcishVandal(final OrcishVandal card) {
         super(card);
     }
 
     @Override
-    public AdventuringGear copy() {
-        return new AdventuringGear(this);
+    public OrcishVandal copy() {
+        return new OrcishVandal(this);
     }
 }

@@ -66,7 +66,7 @@ public class Farmstead extends CardImpl {
                 new DoIfCostPaid(new GainLifeEffect(1), new ManaCostsImpl("{W}{W}")),
                 TargetController.YOU, true);
         Effect effect = new GainAbilityAttachedEffect(ability, AttachmentType.AURA);
-        effect.setText("Enchanted artifact has \"At the beginning of your upkeep, you may pay {W}{W}. If you do, you gain 1 life.\"");
+        effect.setText("Enchanted land has \"At the beginning of your upkeep, you may pay {W}{W}. If you do, you gain 1 life.\"");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 

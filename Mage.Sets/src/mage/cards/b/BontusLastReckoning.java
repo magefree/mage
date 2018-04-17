@@ -35,6 +35,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 
@@ -48,10 +49,10 @@ public class BontusLastReckoning extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}{B}");
 
         // Destroy all creatures. Lands you control don't untap during your next untap step.
-        this.getSpellAbility().addEffect(new DestroyAllEffect(new FilterCreaturePermanent()));
+        this.getSpellAbility().addEffect(new DestroyAllEffect(StaticFilters.FILTER_PERMANENT_CREATURES));
         this.getSpellAbility().addEffect(new DontUntapInControllersUntapStepAllEffect(
                 Duration.UntilYourNextTurn, TargetController.YOU, new FilterControlledLandPermanent("Lands you control"))
-                .setText("Lands you control don't untap during your next untap phase"));
+                .setText("Lands you control don't untap during your next untap step"));
     }
 
     public BontusLastReckoning(final BontusLastReckoning card) {

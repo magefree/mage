@@ -39,7 +39,7 @@ import mage.abilities.keyword.FlyingAbility;
 public class WaspToken extends TokenImpl {
 
     public WaspToken() {
-        super("Wasp", "1/1 colorless Insect artifact creature token with flying");
+        super("Wasp", "1/1 colorless Insect artifact creature token with flying named Wasp");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
         this.subtype.add(SubType.INSECT);

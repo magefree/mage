@@ -51,7 +51,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class GathererOfGraces extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("an aura");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("an Aura");
 
     static {
         filter.add(new SubtypePredicate(SubType.AURA));

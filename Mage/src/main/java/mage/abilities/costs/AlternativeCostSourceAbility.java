@@ -121,7 +121,7 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
 
     private AlternativeCost2 convertToAlternativeCost(Cost cost) {
         //return cost != null ? new AlternativeCost2Impl(null, cost.getText(), cost) : null;
-        return cost != null ? new AlternativeCost2Impl(null, "", cost) : null;
+        return cost != null ? new AlternativeCost2Impl(null, "", "", cost) : null;
     }
 
     @Override

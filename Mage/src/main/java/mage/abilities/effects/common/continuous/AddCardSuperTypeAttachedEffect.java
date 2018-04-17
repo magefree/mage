@@ -25,51 +25,56 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.s;
+package mage.abilities.effects.common.continuous;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
-import mage.abilities.effects.common.continuous.BoostEquippedEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
-import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.keyword.FirstStrikeAbility;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.*;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 /**
- *
- * @author Loki
+ * @author nantuko
  */
-public class ShadowLance extends CardImpl {
+public class AddCardSuperTypeAttachedEffect extends ContinuousEffectImpl {
 
-    public ShadowLance(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}");
-        this.subtype.add(SubType.AURA);
+    private final SuperType addedSuperType;
+    private final AttachmentType attachmentType;
 
-
-        TargetPermanent auraTarget = new TargetCreaturePermanent();
-        this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
-        this.addAbility(ability);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.AURA)));
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2, Duration.EndOfTurn), new ManaCostsImpl("{1}{B}")));
+    public AddCardSuperTypeAttachedEffect(SuperType addedSuperType, Duration duration, AttachmentType attachmentType) {
+        super(duration, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
+        this.addedSuperType = addedSuperType;
+        this.attachmentType = attachmentType;
+        setText();
     }
 
-    public ShadowLance(final ShadowLance card) {
-        super(card);
+    public AddCardSuperTypeAttachedEffect(final AddCardSuperTypeAttachedEffect effect) {
+        super(effect);
+        this.addedSuperType = effect.addedSuperType;
+        this.attachmentType = effect.attachmentType;
     }
 
     @Override
-    public ShadowLance copy() {
-        return new ShadowLance(this);
+    public boolean apply(Game game, Ability source) {
+        Permanent equipment = game.getPermanent(source.getSourceId());
+        if (equipment != null && equipment.getAttachedTo() != null) {
+            Permanent target = game.getPermanent(equipment.getAttachedTo());
+            if (target != null && !target.getSuperType().contains(addedSuperType)) {
+                target.addSuperType(addedSuperType);
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public AddCardSuperTypeAttachedEffect copy() {
+        return new AddCardSuperTypeAttachedEffect(this);
+    }
+
+    private void setText() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(attachmentType.verb());
+        sb.append(" permanent is ").append(addedSuperType.toString()); //TODO add attacked card type detection
+        staticText = sb.toString();
     }
 }

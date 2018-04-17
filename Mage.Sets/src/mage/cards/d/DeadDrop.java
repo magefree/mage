@@ -48,7 +48,7 @@ public class DeadDrop extends CardImpl {
         // Delve
         this.addAbility(new DelveAbility());
         // Target player sacrifices two creatures
-        this.getSpellAbility().addEffect(new SacrificeEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 2, "Target player"));
+        this.getSpellAbility().addEffect(new SacrificeEffect(StaticFilters.FILTER_PERMANENT_CREATURES, 2, "Target player"));
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 

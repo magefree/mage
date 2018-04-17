@@ -66,7 +66,7 @@ public class Subversion extends CardImpl {
 
         public SubversionEffect() {
             super(Outcome.Damage);
-            staticText = "Each opponent loses 1 life. You gain life equal to the life lost this way";
+            staticText = "each opponent loses 1 life. You gain life equal to the life lost this way";
         }
 
         public SubversionEffect(final SubversionEffect effect) {

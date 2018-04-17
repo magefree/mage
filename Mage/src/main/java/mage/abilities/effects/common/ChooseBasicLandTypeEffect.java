@@ -26,7 +26,7 @@ public class ChooseBasicLandTypeEffect extends OneShotEffect {
 
     public ChooseBasicLandTypeEffect(Outcome outcome) {
         super(outcome);
-        this.staticText = "Choose a basic land type";
+        this.staticText = "choose a basic land type";
     }
 
     public ChooseBasicLandTypeEffect(final ChooseBasicLandTypeEffect effect) {

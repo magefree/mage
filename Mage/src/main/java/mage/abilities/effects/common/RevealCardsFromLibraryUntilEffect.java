@@ -158,7 +158,7 @@ public class RevealCardsFromLibraryUntilEffect extends OneShotEffect {
                     if (anyOrder) {
                         sb.append("any");
                     } else {
-                        sb.append("random");
+                        sb.append("a random");
 
                     }
                     sb.append(" order.");
