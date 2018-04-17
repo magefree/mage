@@ -207,6 +207,7 @@ public class Dominaria extends ExpansionSet {
         cards.add(new SetCardInfo("Primevals' Glorious Rebirth", 201, Rarity.RARE, mage.cards.p.PrimevalsGloriousRebirth.class));
         cards.add(new SetCardInfo("Primordial Wurm", 177, Rarity.COMMON, mage.cards.p.PrimordialWurm.class));
         cards.add(new SetCardInfo("Pyromantic Pilgrim", 278, Rarity.COMMON, mage.cards.p.PyromanticPilgrim.class));
+        cards.add(new SetCardInfo("Rat Colony", 101, Rarity.COMMON, mage.cards.r.RatColony.class));
         cards.add(new SetCardInfo("Raff Capashen, Ship's Mage", 202, Rarity.UNCOMMON, mage.cards.r.RaffCapashenShipsMage.class));
         cards.add(new SetCardInfo("Rescue", 63, Rarity.COMMON, mage.cards.r.Rescue.class));
         cards.add(new SetCardInfo("Run Amok", 140, Rarity.COMMON, mage.cards.r.RunAmok.class));
