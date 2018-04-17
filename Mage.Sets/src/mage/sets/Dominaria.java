@@ -86,6 +86,7 @@ public class Dominaria extends ExpansionSet {
         cards.add(new SetCardInfo("Caligo Skin-Witch", 80, Rarity.COMMON, mage.cards.c.CaligoSkinWitch.class));
         cards.add(new SetCardInfo("Call the Cavalry", 9, Rarity.COMMON, mage.cards.c.CallTheCavalry.class));
         cards.add(new SetCardInfo("Cast Down", 81, Rarity.UNCOMMON, mage.cards.c.CastDown.class));
+        cards.add(new SetCardInfo("Chainer's Torment", 82, Rarity.UNCOMMON, mage.cards.c.ChainersTorment.class));
         cards.add(new SetCardInfo("Champion of the Flame", 116, Rarity.UNCOMMON, mage.cards.c.ChampionOfTheFlame.class));
         cards.add(new SetCardInfo("Charge", 10, Rarity.COMMON, mage.cards.c.Charge.class));
         cards.add(new SetCardInfo("Clifftop Retreat", 239, Rarity.RARE, mage.cards.c.ClifftopRetreat.class));
