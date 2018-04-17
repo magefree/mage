@@ -49,7 +49,7 @@ public class RadiatingLightning extends CardImpl {
 
         // Radiating Lightning deals 3 damage to target player and 1 damage to each creature that player controls.
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
-        this.getSpellAbility().addEffect(new DamageAllControlledTargetEffect(1, new FilterCreaturePermanent()));
+        this.getSpellAbility().addEffect(new DamageAllControlledTargetEffect(1, new FilterCreaturePermanent()).setText("and 1 damage to each creature that player controls"));
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
