@@ -209,6 +209,7 @@ public class Dominaria extends ExpansionSet {
         cards.add(new SetCardInfo("Pyromantic Pilgrim", 278, Rarity.COMMON, mage.cards.p.PyromanticPilgrim.class));
         cards.add(new SetCardInfo("Raff Capashen, Ship's Mage", 202, Rarity.UNCOMMON, mage.cards.r.RaffCapashenShipsMage.class));
         cards.add(new SetCardInfo("Rescue", 63, Rarity.COMMON, mage.cards.r.Rescue.class));
+        cards.add(new SetCardInfo("Rite of Belzenlok", 102, Rarity.RARE, mage.cards.r.RiteOfBelzenlok.class));
         cards.add(new SetCardInfo("Run Amok", 140, Rarity.COMMON, mage.cards.r.RunAmok.class));
         cards.add(new SetCardInfo("Sage of Lat-Nam", 64, Rarity.UNCOMMON, mage.cards.s.SageOfLatNam.class));
         cards.add(new SetCardInfo("Sanctum Spirit", 30, Rarity.UNCOMMON, mage.cards.s.SanctumSpirit.class));
