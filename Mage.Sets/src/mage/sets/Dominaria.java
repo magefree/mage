@@ -89,6 +89,7 @@ public class Dominaria extends ExpansionSet {
         cards.add(new SetCardInfo("Chainer's Torment", 82, Rarity.UNCOMMON, mage.cards.c.ChainersTorment.class));
         cards.add(new SetCardInfo("Champion of the Flame", 116, Rarity.UNCOMMON, mage.cards.c.ChampionOfTheFlame.class));
         cards.add(new SetCardInfo("Chandra's Outburst", 276, Rarity.RARE, mage.cards.c.ChandrasOutburst.class));
+        cards.add(new SetCardInfo("Chandra, Bold Pyromancer", 275, Rarity.MYTHIC, mage.cards.c.ChandraBoldPyromancer.class));
         cards.add(new SetCardInfo("Charge", 10, Rarity.COMMON, mage.cards.c.Charge.class));
         cards.add(new SetCardInfo("Clifftop Retreat", 239, Rarity.RARE, mage.cards.c.ClifftopRetreat.class));
         cards.add(new SetCardInfo("Cloudreader Sphinx", 47, Rarity.COMMON, mage.cards.c.CloudreaderSphinx.class));
