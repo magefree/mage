@@ -199,6 +199,7 @@ public class Dominaria extends ExpansionSet {
         cards.add(new SetCardInfo("Orcish Vandal", 137, Rarity.COMMON, mage.cards.o.OrcishVandal.class));
         cards.add(new SetCardInfo("Pardic Wanderer", 226, Rarity.COMMON, mage.cards.p.PardicWanderer.class));
         cards.add(new SetCardInfo("Pegasus Courser", 29, Rarity.COMMON, mage.cards.p.PegasusCourser.class));
+        cards.add(new SetCardInfo("Phyrexian Scriptures", 100, Rarity.MYTHIC, mage.cards.p.PhyrexianScriptures.class));
         cards.add(new SetCardInfo("Pierce the Sky", 176, Rarity.COMMON, mage.cards.p.PierceTheSky.class));
         cards.add(new SetCardInfo("Plains", 250, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 251, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
