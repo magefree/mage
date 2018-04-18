@@ -104,6 +104,7 @@ public class Dominaria extends ExpansionSet {
         cards.add(new SetCardInfo("Dark Bargain", 83, Rarity.COMMON, mage.cards.d.DarkBargain.class));
         cards.add(new SetCardInfo("Dauntless Bodyguard", 14, Rarity.UNCOMMON, mage.cards.d.DauntlessBodyguard.class));
         cards.add(new SetCardInfo("Deathbloom Thallid", 84, Rarity.COMMON, mage.cards.d.DeathbloomThallid.class));
+        cards.add(new SetCardInfo("Deep Freeze", 50, Rarity.COMMON, mage.cards.d.DeepFreeze.class));
         cards.add(new SetCardInfo("Demonic Vigor", 85, Rarity.COMMON, mage.cards.d.DemonicVigor.class));
         cards.add(new SetCardInfo("Diligent Excavator", 51, Rarity.UNCOMMON, mage.cards.d.DiligentExcavator.class));
         cards.add(new SetCardInfo("Divest", 87, Rarity.COMMON, mage.cards.d.Divest.class));
