@@ -51,7 +51,7 @@ public class WindgraceAcolyte extends CardImpl {
         this.subtype.add(SubType.CAT);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
+        this.toughness = new MageInt(2);
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
