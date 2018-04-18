@@ -230,6 +230,7 @@ public class Dominaria extends ExpansionSet {
         cards.add(new SetCardInfo("Relic Runner", 62, Rarity.COMMON, mage.cards.r.RelicRunner.class));
         cards.add(new SetCardInfo("Rescue", 63, Rarity.COMMON, mage.cards.r.Rescue.class));
         cards.add(new SetCardInfo("Rite of Belzenlok", 102, Rarity.RARE, mage.cards.r.RiteOfBelzenlok.class));
+        cards.add(new SetCardInfo("Rona, Disciple of Gix", 203, Rarity.UNCOMMON, mage.cards.r.RonaDiscipleOfGix.class));
         cards.add(new SetCardInfo("Run Amok", 140, Rarity.COMMON, mage.cards.r.RunAmok.class));
         cards.add(new SetCardInfo("Sage of Lat-Nam", 64, Rarity.UNCOMMON, mage.cards.s.SageOfLatNam.class));
         cards.add(new SetCardInfo("Sanctum Spirit", 30, Rarity.UNCOMMON, mage.cards.s.SanctumSpirit.class));

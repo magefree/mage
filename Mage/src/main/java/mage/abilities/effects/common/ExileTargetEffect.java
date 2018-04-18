@@ -30,6 +30,7 @@ package mage.abilities.effects.common;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
@@ -56,6 +57,7 @@ public class ExileTargetEffect extends OneShotEffect {
     private String exileZone = null;
     private UUID exileId = null;
     protected boolean multitargetHandling;
+    private boolean toSourceExileZone = false; // exile the targets to a source object specific exile zone (takes care of zone change counter)
 
     public ExileTargetEffect(String effectText) {
         this(effectText, false);
@@ -93,11 +95,17 @@ public class ExileTargetEffect extends OneShotEffect {
         this.exileId = effect.exileId;
         this.onlyFromZone = effect.onlyFromZone;
         this.multitargetHandling = effect.multitargetHandling;
+        this.toSourceExileZone = effect.toSourceExileZone;
     }
 
     @Override
     public ExileTargetEffect copy() {
         return new ExileTargetEffect(this);
+    }
+
+    public ExileTargetEffect setToSourceExileZone(boolean toSourceExileZone) {
+        this.toSourceExileZone = toSourceExileZone;
+        return this;
     }
 
     @Override
@@ -154,6 +162,13 @@ public class ExileTargetEffect extends OneShotEffect {
                             }
                         }
                     }
+                }
+            }
+            if (toSourceExileZone) {
+                MageObject sourceObject = source.getSourceObject(game);
+                exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
+                if (sourceObject != null) {
+                    exileZone = sourceObject.getIdName();
                 }
             }
             controller.moveCardsToExile(toExile, source, game, true, exileId, exileZone);
