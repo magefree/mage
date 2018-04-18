@@ -57,7 +57,8 @@ public class ZombieMob extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(0);
 
-        //Zombie Mob enters the battlefield with a +1/+1 counter on it for each creature card in your graveyard.
+        // Zombie Mob enters the battlefield with a +1/+1 counter on it for each creature card in your graveyard.
+        // When Zombie Mob enters the battlefield, exile all creature cards from your graveyard.
         this.addAbility(new EntersBattlefieldAbility(new ZombieMobEffect(), "with a +1/+1 counter on it for each creature card in your graveyard. When {this} enters the battlefield, exile all creature cards from your graveyard."));
 
     }
@@ -75,7 +76,6 @@ public class ZombieMob extends CardImpl {
 class ZombieMobEffect extends OneShotEffect {
 
     private static final FilterCard filter = new FilterCard();
-
     static {
         filter.add(new CardTypePredicate(CardType.CREATURE));
     }
@@ -100,7 +100,7 @@ class ZombieMobEffect extends OneShotEffect {
                 permanent.addCounters(CounterType.P1P1.createInstance(amount), source, game);
             }
             Cards cards = new CardsImpl();
-            cards.addAll(controller.getGraveyard().getCards(game));
+            cards.addAll(controller.getGraveyard().getCards(filter, game));
             controller.moveCards(cards, Zone.EXILED, source, game);
             return true;
         }
