@@ -28,6 +28,7 @@
 package mage.cards;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 import mage.MageObject;
 import mage.MageObjectImpl;
@@ -205,22 +206,30 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     }
 
     public static Card createCard(Class<?> clazz, CardSetInfo setInfo, List<String> errorList) {
+        String setCode = null;
         try {
             Card card;
             if (setInfo == null) {
                 Constructor<?> con = clazz.getConstructor(UUID.class);
                 card = (Card) con.newInstance(new Object[]{null});
             } else {
+                setCode = setInfo.getExpansionSetCode();
                 Constructor<?> con = clazz.getConstructor(UUID.class, CardSetInfo.class);
                 card = (Card) con.newInstance(null, setInfo);
             }
             return card;
         } catch (Exception e) {
-            String err = "Error loading card: " + clazz.getCanonicalName();
+            String err = "Error loading card: " + clazz.getCanonicalName() + " (" + setCode + ")";
             if (errorList != null) {
                 errorList.add(err);
             }
-            logger.fatal(err, e);
+
+            if (e instanceof InvocationTargetException) {
+                logger.fatal(err, ((InvocationTargetException) e).getTargetException());
+            } else {
+                logger.fatal(err, e);
+            }
+
             return null;
         }
     }
