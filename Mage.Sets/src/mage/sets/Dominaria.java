@@ -100,6 +100,7 @@ public class Dominaria extends ExpansionSet {
         cards.add(new SetCardInfo("D'Avenant Trapper", 11, Rarity.COMMON, mage.cards.d.DAvenantTrapper.class));
         cards.add(new SetCardInfo("Damping Sphere", 213, Rarity.UNCOMMON, mage.cards.d.DampingSphere.class));
         cards.add(new SetCardInfo("Danitha Capashen, Paragon", 12, Rarity.UNCOMMON, mage.cards.d.DanithaCapashenParagon.class));
+        cards.add(new SetCardInfo("Darigaaz Reincarnated", 193, Rarity.MYTHIC, mage.cards.d.DarigaazReincarnated.class));
         cards.add(new SetCardInfo("Daring Archaeologist", 13, Rarity.RARE, mage.cards.d.DaringArchaeologist.class));
         cards.add(new SetCardInfo("Dark Bargain", 83, Rarity.COMMON, mage.cards.d.DarkBargain.class));
         cards.add(new SetCardInfo("Dauntless Bodyguard", 14, Rarity.UNCOMMON, mage.cards.d.DauntlessBodyguard.class));
