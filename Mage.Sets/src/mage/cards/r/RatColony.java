@@ -24,8 +24,7 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.cards.r;
 
 import java.util.UUID;
@@ -59,17 +58,19 @@ public class RatColony extends CardImpl {
     }
 
     public RatColony(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
         this.subtype.add(SubType.RAT);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
         // Rat Colony gets +1/+0 for each other Rat you control.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(new PermanentsOnBattlefieldCount(filter), new StaticValue(0), Duration.WhileOnBattlefield, false)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new BoostSourceEffect(new PermanentsOnBattlefieldCount(filter),
+                        new StaticValue(0), Duration.WhileOnBattlefield, false)));
 
         // A deck can have any number of cards named Rat Colony.
-        this.getSpellAbility().addEffect(new InfoEffect("A deck can have any number of cards named {this}."));
+        this.getSpellAbility().addEffect(new InfoEffect("A deck can have any number of cards named Rat Colony."));
     }
 
     public RatColony(final RatColony card) {
