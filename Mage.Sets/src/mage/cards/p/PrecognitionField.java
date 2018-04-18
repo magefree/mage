@@ -142,8 +142,8 @@ class PrecognitionFieldTopCardCastEffect extends AsThoughEffectImpl {
                 Player controller = game.getPlayer(affectedControllerId);
                 if (controller != null) {
                     Card topCard = controller.getLibrary().getFromTop(game);
-                    MageObject vizierOfTheMenagerie = game.getObject(source.getSourceId());
-                    if (vizierOfTheMenagerie != null
+                    MageObject precognitionField = game.getObject(source.getSourceId());
+                    if (precognitionField != null
                             && topCard != null) {
                         return topCard == card
                                 && (topCard.isInstant() || topCard.isSorcery())
