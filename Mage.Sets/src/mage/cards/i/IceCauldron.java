@@ -30,6 +30,7 @@ package mage.cards.i;
 import java.util.UUID;
 import mage.ConditionalMana;
 import mage.Mana;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.condition.Condition;
@@ -137,7 +138,7 @@ class IceCauldronExileEffect extends OneShotEffect {
                 AsThoughEffect effect = new IceCauldronCastFromExileEffect();
                 effect.setTargetPointer(new FixedTarget(chosenCard.getId()));
                 game.addEffect(effect, source);
-                game.getState().setValue("IceCauldronCard" + source.getSourceId().toString(), chosenCard.getId()); //store the exiled card
+                game.getState().setValue("IceCauldronCard" + source.getSourceId().toString(), new MageObjectReference(chosenCard.getId(), game)); //store the exiled card
                 return true;
             }
         }
@@ -216,7 +217,7 @@ class IceCauldronNoteManaEffect extends OneShotEffect {
 class IceCauldronAddManaEffect extends ManaEffect {
     
     private static Mana storedMana;
-    private static UUID exiledCardId;
+    private static MageObjectReference exiledCardMor;
 
     IceCauldronAddManaEffect() {
         super();
@@ -238,10 +239,10 @@ class IceCauldronAddManaEffect extends ManaEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (iceCauldron != null && controller != null) {
             storedMana = (Mana) game.getState().getValue("IceCauldronMana" + source.getSourceId().toString());
-            exiledCardId = (UUID) game.getState().getValue("IceCauldronCard" + source.getSourceId().toString());
+            exiledCardMor = (MageObjectReference) game.getState().getValue("IceCauldronCard" + source.getSourceId().toString());
             if (storedMana != null) { // should be adding the mana even if exiled card is null
                 checkToFirePossibleEvents(storedMana, game, source);
-                IceCauldronConditionalMana iceCauldronMana = new IceCauldronConditionalMana(storedMana, game.getCard(exiledCardId));
+                IceCauldronConditionalMana iceCauldronMana = new IceCauldronConditionalMana(storedMana, exiledCardMor.getCard(game));
                 if (iceCauldronMana != null) {
                     controller.getManaPool().addMana(iceCauldronMana, game, source);
                     return true;
