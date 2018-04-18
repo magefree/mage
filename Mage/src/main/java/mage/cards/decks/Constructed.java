@@ -76,12 +76,13 @@ public class Constructed extends DeckValidator {
 
         List<String> basicLandNames = new ArrayList<>(Arrays.asList("Forest", "Island", "Mountain", "Swamp", "Plains", "Wastes",
                 "Snow-Covered Forest", "Snow-Covered Island", "Snow-Covered Mountain", "Snow-Covered Swamp", "Snow-Covered Plains"));
+        List<String> anyNumberCardsAllowed = new ArrayList<>(Arrays.asList("Relentless Rats", "Shadowborn Apostle", "Rat Colony"));
         Map<String, Integer> counts = new HashMap<>();
         countCards(counts, deck.getCards());
         countCards(counts, deck.getSideboard());
         for (Entry<String, Integer> entry : counts.entrySet()) {
             if (entry.getValue() > 4) {
-                if (!basicLandNames.contains(entry.getKey()) && !entry.getKey().equals("Relentless Rats") && !entry.getKey().equals("Shadowborn Apostle")) {
+                if (!basicLandNames.contains(entry.getKey()) && !anyNumberCardsAllowed.contains(entry.getKey())) {
                     invalid.put(entry.getKey(), "Too many: " + entry.getValue());
                     valid = false;
                 }
