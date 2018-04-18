@@ -235,6 +235,7 @@ public class Dominaria extends ExpansionSet {
         cards.add(new SetCardInfo("Sanctum Spirit", 30, Rarity.UNCOMMON, mage.cards.s.SanctumSpirit.class));
         cards.add(new SetCardInfo("Saproling Migration", 178, Rarity.COMMON, mage.cards.s.SaprolingMigration.class));
         cards.add(new SetCardInfo("Seal Away", 31, Rarity.UNCOMMON, mage.cards.s.SealAway.class));
+        cards.add(new SetCardInfo("Seismic Shift", 141, Rarity.COMMON, mage.cards.s.SeismicShift.class));
         cards.add(new SetCardInfo("Sentinel of the Pearl Trident", 65, Rarity.UNCOMMON, mage.cards.s.SentinelOfThePearlTrident.class));
         cards.add(new SetCardInfo("Sergeant-at-Arms", 32, Rarity.COMMON, mage.cards.s.SergeantAtArms.class));
         cards.add(new SetCardInfo("Serra Angel", 33, Rarity.UNCOMMON, mage.cards.s.SerraAngel.class));
