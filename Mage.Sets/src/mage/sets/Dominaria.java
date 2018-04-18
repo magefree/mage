@@ -150,6 +150,7 @@ public class Dominaria extends ExpansionSet {
         cards.add(new SetCardInfo("Grunn, the Lonely King", 165, Rarity.UNCOMMON, mage.cards.g.GrunnTheLonelyKing.class));
         cards.add(new SetCardInfo("Guardians of Koilos", 216, Rarity.COMMON, mage.cards.g.GuardiansOfKoilos.class));
         cards.add(new SetCardInfo("Hallar, the Firefletcher", 196, Rarity.UNCOMMON, mage.cards.h.HallarTheFirefletcher.class));
+        cards.add(new SetCardInfo("Haphazard Bombardment", 131, Rarity.RARE, mage.cards.h.HaphazardBombardment.class));
         cards.add(new SetCardInfo("Healing Grace", 20, Rarity.COMMON, mage.cards.h.HealingGrace.class));
         cards.add(new SetCardInfo("Helm of the Host", 217, Rarity.RARE, mage.cards.h.HelmOfTheHost.class));
         cards.add(new SetCardInfo("Hinterland Harbor", 240, Rarity.RARE, mage.cards.h.HinterlandHarbor.class));
@@ -164,6 +165,7 @@ public class Dominaria extends ExpansionSet {
         cards.add(new SetCardInfo("Island", 256, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 257, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Isolated Chapel", 241, Rarity.RARE, mage.cards.i.IsolatedChapel.class));
+        cards.add(new SetCardInfo("Jaya Ballard", 132, Rarity.MYTHIC, mage.cards.j.JayaBallard.class));
         cards.add(new SetCardInfo("Jaya's Immolating Inferno", 133, Rarity.RARE, mage.cards.j.JayasImmolatingInferno.class));
         cards.add(new SetCardInfo("Jhoira, Weatherlight Captain", 197, Rarity.MYTHIC, mage.cards.j.JhoiraWeatherlightCaptain.class));
         cards.add(new SetCardInfo("Jhoira's Familiar", 220, Rarity.UNCOMMON, mage.cards.j.JhoirasFamiliar.class));

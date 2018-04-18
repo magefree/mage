@@ -43,11 +43,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
@@ -58,7 +58,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.stack.Spell;
-import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.Watcher;
@@ -127,7 +126,7 @@ class KessDissidentMageContinuousEffect extends ContinuousEffectImpl {
             if (!game.getActivePlayerId().equals(player.getId())) {
                 return false;
             }
-            for (Card card : player.getGraveyard().getCards(filter, game)) {              
+            for (Card card : player.getGraveyard().getCards(filter, game)) {
                 ContinuousEffect effect = new KessDissidentMageCastFromGraveyardEffect();
                 effect.setTargetPointer(new FixedTarget(card.getId()));
                 game.addEffect(effect, source);
@@ -167,8 +166,6 @@ class KessDissidentMageCastFromGraveyardEffect extends AsThoughEffectImpl {
             if (affectedControllerId.equals(source.getControllerId())) {
                 if (game.getActivePlayerId().equals(source.getControllerId())) {
                     KessDissidentMageWatcher watcher = (KessDissidentMageWatcher) game.getState().getWatchers().get(KessDissidentMageWatcher.class.getSimpleName(), source.getSourceId());
-
-                    StackObject stackObject = game.getStack().getStackObject(source.getId());
                     if (!(source instanceof FlashbackAbility)) {
                         return !watcher.isAbilityUsed();
                     }
@@ -228,7 +225,7 @@ class KessDissidentMageWatcher extends Watcher {
     boolean abilityUsed = false;
 
     KessDissidentMageWatcher() {
-        super("KessDissidentMageWatcher", WatcherScope.CARD);
+        super(KessDissidentMageWatcher.class.getSimpleName(), WatcherScope.CARD);
     }
 
     KessDissidentMageWatcher(final KessDissidentMageWatcher watcher) {
