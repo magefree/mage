@@ -111,6 +111,7 @@ public class Dominaria extends ExpansionSet {
         cards.add(new SetCardInfo("Dread Shade", 88, Rarity.RARE, mage.cards.d.DreadShade.class));
         cards.add(new SetCardInfo("Drudge Sentinel", 89, Rarity.COMMON, mage.cards.d.DrudgeSentinel.class));
         cards.add(new SetCardInfo("Dub", 15, Rarity.SPECIAL, mage.cards.d.Dub.class));
+        cards.add(new SetCardInfo("Elfhame Druid", 159, Rarity.UNCOMMON, mage.cards.e.ElfhameDruid.class));
         cards.add(new SetCardInfo("Eviscerate", 91, Rarity.COMMON, mage.cards.e.Eviscerate.class));
         cards.add(new SetCardInfo("Evra, Halcyon Witness", 16, Rarity.RARE, mage.cards.e.EvraHalcyonWitness.class));
         cards.add(new SetCardInfo("Excavation Elephant", 17, Rarity.COMMON, mage.cards.e.ExcavationElephant.class));
