@@ -8,20 +8,22 @@ import java.util.EnumSet;
  * @author North
  */
 public enum CardType {
-    ARTIFACT("Artifact"),
-    CONSPIRACY("Conspiracy"),
-    CREATURE("Creature"),
-    ENCHANTMENT("Enchantment"),
-    INSTANT("Instant"),
-    LAND("Land"),
-    PLANESWALKER("Planeswalker"),
-    SORCERY("Sorcery"),
-    TRIBAL("Tribal");
+    ARTIFACT("Artifact", true),
+    CONSPIRACY("Conspiracy", false),
+    CREATURE("Creature", true),
+    ENCHANTMENT("Enchantment", true),
+    INSTANT("Instant", false),
+    LAND("Land", true),
+    PLANESWALKER("Planeswalker", true),
+    SORCERY("Sorcery", false),
+    TRIBAL("Tribal", false);
 
     private final String text;
+    private final boolean permanentType;
 
-    CardType(String text) {
+    CardType(String text, boolean permanentType) {
         this.text = text;
+        this.permanentType = permanentType;
     }
 
     @Override
@@ -29,9 +31,17 @@ public enum CardType {
         return text;
     }
 
+    public boolean isPermanentType() {
+        return permanentType;
+    }
+
     /**
      * Returns all of the card types from two lists of card types. Duplicates
      * are eliminated.
+     *
+     * @param a
+     * @param b
+     * @return
      */
     public static CardType[] mergeTypes(CardType[] a, CardType[] b) {
         EnumSet<CardType> cardTypes = EnumSet.noneOf(CardType.class);
