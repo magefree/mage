@@ -202,7 +202,7 @@ public class Dominaria extends ExpansionSet {
         cards.add(new SetCardInfo("Naban, Dean of Iteration", 58, Rarity.RARE, mage.cards.n.NabanDeanOfIteration.class));
         cards.add(new SetCardInfo("Naru Meha, Master Wizard", 59, Rarity.MYTHIC, mage.cards.n.NaruMehaMasterWizard.class));
         cards.add(new SetCardInfo("Nature's Spiral", 175, Rarity.UNCOMMON, mage.cards.n.NaturesSpiral.class));
-        cards.add(new SetCardInfo("Navigator's Compass", 175, Rarity.COMMON, mage.cards.n.NavigatorsCompass.class));
+        cards.add(new SetCardInfo("Navigator's Compass", 225, Rarity.COMMON, mage.cards.n.NavigatorsCompass.class));
         cards.add(new SetCardInfo("Niambi, Faithful Healer", 272, Rarity.RARE, mage.cards.n.NiambiFaithfulHealer.class));
         cards.add(new SetCardInfo("Oath of Teferi", 200, Rarity.RARE, mage.cards.o.OathOfTeferi.class));
         cards.add(new SetCardInfo("On Serra's Wings", 28, Rarity.UNCOMMON, mage.cards.o.OnSerrasWings.class));
@@ -301,6 +301,7 @@ public class Dominaria extends ExpansionSet {
         cards.add(new SetCardInfo("Vicious Offering", 110, Rarity.COMMON, mage.cards.v.ViciousOffering.class));
         cards.add(new SetCardInfo("Vodalian Arcanist", 73, Rarity.COMMON, mage.cards.v.VodalianArcanist.class));
         cards.add(new SetCardInfo("Voltaic Servant", 236, Rarity.COMMON, mage.cards.v.VoltaicServant.class));
+        cards.add(new SetCardInfo("Warcry Phoenix", 150, Rarity.UNCOMMON, mage.cards.w.WarcryPhoenix.class));
         cards.add(new SetCardInfo("Warlord's Fury", 151, Rarity.COMMON, mage.cards.w.WarlordsFury.class));
         cards.add(new SetCardInfo("Weatherlight", 237, Rarity.MYTHIC, mage.cards.w.Weatherlight.class));
         cards.add(new SetCardInfo("Weight of Memory", 74, Rarity.UNCOMMON, mage.cards.w.WeightOfMemory.class));

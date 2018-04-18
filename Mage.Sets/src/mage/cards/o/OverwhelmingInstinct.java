@@ -29,6 +29,7 @@ package mage.cards.o;
 
 import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.AttacksWithCreaturesTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
@@ -45,10 +46,10 @@ import mage.game.events.GameEvent;
 public class OverwhelmingInstinct extends CardImpl {
 
     public OverwhelmingInstinct(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
 
         // Whenever you attack with three or more creatures, draw a card.
-        this.addAbility(new OverwhelmingInstinctTriggeredAbility(new DrawCardSourceControllerEffect(1)));
+        this.addAbility(new AttacksWithCreaturesTriggeredAbility(new DrawCardSourceControllerEffect(1), 3));
     }
 
     public OverwhelmingInstinct(final OverwhelmingInstinct card) {
@@ -88,6 +89,6 @@ class OverwhelmingInstinctTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return new StringBuilder("Whenever you attack with three or more creatures, ").append(super.getRule()).toString() ;
+        return new StringBuilder("Whenever you attack with three or more creatures, ").append(super.getRule()).toString();
     }
 }
