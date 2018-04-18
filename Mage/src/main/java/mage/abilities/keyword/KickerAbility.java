@@ -74,6 +74,8 @@ import java.util.*;
  */
 public class KickerAbility extends StaticAbility implements OptionalAdditionalSourceCosts {
 
+    private static final KickerAbility instance = new KickerAbility("");
+
     protected static final String KICKER_KEYWORD = "Kicker";
     protected static final String KICKER_REMINDER_MANA = "You may pay an additional {cost} as you cast this spell.";
     protected static final String KICKER_REMINDER_COST = "You may {cost} in addition to any other costs as you cast this spell.";
@@ -111,6 +113,10 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
         this.xManaValue = ability.xManaValue;
         this.activations.putAll(ability.activations);
 
+    }
+
+    public static KickerAbility getInstance() {
+        return instance;
     }
 
     @Override
