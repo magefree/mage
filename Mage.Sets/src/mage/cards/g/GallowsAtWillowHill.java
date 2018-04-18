@@ -34,7 +34,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.CreateTokenTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -51,6 +51,7 @@ import mage.game.permanent.token.SpiritWhiteToken;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  * @author noxx
@@ -103,20 +104,17 @@ class GallowsAtWillowHillEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int affectedTargets = 0;
-        if (!targetPointer.getTargets(game, source).isEmpty()) {
-            for (UUID permanentId : targetPointer.getTargets(game, source)) {
-                Permanent permanent = game.getPermanent(permanentId);
-                if (permanent != null) {
-                    Player controller = game.getPlayer(permanent.getControllerId());
-                    permanent.destroy(source.getSourceId(), game, false);
-                    if (controller != null) {
-                        new CreateTokenEffect(new SpiritWhiteToken()).apply(game, source);
-                    }
-                    affectedTargets++;
-                }
+        Permanent permanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
+        if (permanent != null) {
+            Player controller = game.getPlayer(permanent.getControllerId());
+            permanent.destroy(source.getSourceId(), game, false);
+            if (controller != null) {
+                CreateTokenTargetEffect effect = new CreateTokenTargetEffect(new SpiritWhiteToken());
+                effect.setTargetPointer(new FixedTarget(controller.getId()));
+                effect.apply(game, source);
             }
+            return true;
         }
-        return affectedTargets > 0;
+        return false;
     }
 }

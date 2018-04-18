@@ -25,70 +25,39 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.o;
+package mage.cards.w;
 
-import java.util.UUID;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.AttacksWithCreaturesTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
+import mage.target.TargetPlayer;
+
+import java.util.UUID;
 
 /**
  *
- * @author Wehk
+ * @author rscoates
  */
-public class OverwhelmingInstinct extends CardImpl {
+public class WeightOfMemory extends CardImpl {
 
-    public OverwhelmingInstinct(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
+    public WeightOfMemory(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}{U}");
 
-        // Whenever you attack with three or more creatures, draw a card.
-        this.addAbility(new AttacksWithCreaturesTriggeredAbility(new DrawCardSourceControllerEffect(1), 3));
+        // Draw three cards.
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(3));
+        // Target player puts the top three cards of their library into their graveyard.
+        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addEffect(new PutLibraryIntoGraveTargetEffect(3));
     }
 
-    public OverwhelmingInstinct(final OverwhelmingInstinct card) {
+    public WeightOfMemory(final WeightOfMemory card) {
         super(card);
     }
 
     @Override
-    public OverwhelmingInstinct copy() {
-        return new OverwhelmingInstinct(this);
-    }
-}
-
-class OverwhelmingInstinctTriggeredAbility extends TriggeredAbilityImpl {
-
-    public OverwhelmingInstinctTriggeredAbility(Effect effect) {
-        super(Zone.BATTLEFIELD, effect);
-    }
-
-    public OverwhelmingInstinctTriggeredAbility(final OverwhelmingInstinctTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public OverwhelmingInstinctTriggeredAbility copy() {
-        return new OverwhelmingInstinctTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DECLARED_ATTACKERS;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return game.getCombat().getAttackers().size() >= 3 && game.getCombat().getAttackingPlayerId().equals(getControllerId());
-    }
-
-    @Override
-    public String getRule() {
-        return new StringBuilder("Whenever you attack with three or more creatures, ").append(super.getRule()).toString();
+    public WeightOfMemory copy() {
+        return new WeightOfMemory(this);
     }
 }
