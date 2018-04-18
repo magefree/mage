@@ -32,7 +32,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continuous.BoostControlledEffect;
+import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.MountainwalkAbility;
 import mage.cards.CardImpl;
@@ -56,8 +56,8 @@ public class GoblinKing extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Other Goblin creatures get +1/+1 and have mountainwalk.
-        Effect effect = new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_GOBLINS, true);
-        effect.setText("Other Goblin creatures you control get +1/+1");
+        Effect effect = new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_GOBLINS, true);
+        effect.setText("Other Goblin creatures get +1/+1");
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
         effect = new GainAbilityAllEffect(new MountainwalkAbility(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_GOBLINS, true);
         effect.setText("and have mountainwalk");
