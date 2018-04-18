@@ -24,10 +24,10 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.target.common;
 
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterLandPermanent;
 import mage.target.TargetPermanent;
 
@@ -38,7 +38,7 @@ import mage.target.TargetPermanent;
 public class TargetLandPermanent extends TargetPermanent {
 
     public TargetLandPermanent() {
-        this(1, 1, new FilterLandPermanent(), false);
+        this(1, 1, StaticFilters.FILTER_LAND, false);
     }
 
     public TargetLandPermanent(FilterLandPermanent filter) {
@@ -46,7 +46,7 @@ public class TargetLandPermanent extends TargetPermanent {
     }
 
     public TargetLandPermanent(int numTargets) {
-        this(numTargets, numTargets, new FilterLandPermanent(), false);
+        this(numTargets, numTargets, StaticFilters.FILTER_LAND, false);
     }
 
     public TargetLandPermanent(int minNumTargets, int maxNumTargets, FilterLandPermanent filter, boolean notTarget) {
