@@ -25,51 +25,51 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.c;
+package mage.cards.k;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.KickerAbility;
+import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 
 /**
  *
- * @author LevelX2
+ * @author TheElk801
  */
-public class CitanulWoodreaders extends CardImpl {
+public class KrosanDruid extends CardImpl {
 
-    public CitanulWoodreaders(UUID ownerId, CardSetInfo setInfo) {
+    public KrosanDruid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
-        this.subtype.add(SubType.HUMAN);
+
+        this.subtype.add(SubType.CENTAUR);
         this.subtype.add(SubType.DRUID);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(3);
 
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(4);
+        // Kicker {4}{G} (You may pay an additional {4}{G} as you cast this spell.)
+        this.addAbility(new KickerAbility("{4}{G}"));
 
-        // Kicker {2}{G}
-        this.addAbility(new KickerAbility("{2}{G}"));
-
-        // When Citanul Woodreaders enters the battlefield, if it was kicked, draw two cards.
+        // When Krosan Druid enters the battlefield, if it was kicked, you gain 10 life.
         this.addAbility(new ConditionalTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(2)),
+                new EntersBattlefieldTriggeredAbility(new GainLifeEffect(10)),
                 KickedCondition.instance,
-                "When {this} enters the battlefield, if it was kicked, draw two cards."
+                "When {this} enters the battlefield, if it was kicked, you gain 10 life"
         ));
     }
 
-    public CitanulWoodreaders(final CitanulWoodreaders card) {
+    public KrosanDruid(final KrosanDruid card) {
         super(card);
     }
 
     @Override
-    public CitanulWoodreaders copy() {
-        return new CitanulWoodreaders(this);
+    public KrosanDruid copy() {
+        return new KrosanDruid(this);
     }
 }
