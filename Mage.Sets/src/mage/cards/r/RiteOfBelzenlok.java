@@ -1,16 +1,16 @@
 /*
  *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- * 
+ *
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
- * 
+ *
  *     1. Redistributions of source code must retain the above copyright notice, this list of
  *        conditions and the following disclaimer.
- * 
+ *
  *     2. Redistributions in binary form must reproduce the above copyright notice, this list
  *        of conditions and the following disclaimer in the documentation and/or other materials
  *        provided with the distribution.
- * 
+ *
  *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
  *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
  *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
@@ -20,58 +20,50 @@
  *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  *  The views and conclusions contained in the software and documentation are those of the
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.effects.common;
+package mage.cards.r;
 
-import mage.constants.Outcome;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.filter.FilterPermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import java.util.UUID;
+import mage.abilities.common.SagaAbility;
+import mage.abilities.effects.common.CreateTokenEffect;
+import mage.constants.SubType;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.SagaChapter;
+import mage.game.permanent.token.BelzenlokClericToken;
+import mage.game.permanent.token.BelzenlokDemonToken;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author TheElk801
  */
-public class DamageAllControlledTargetEffect extends OneShotEffect {
+public class RiteOfBelzenlok extends CardImpl {
 
-    private FilterPermanent filter;
-    private int amount;
+    public RiteOfBelzenlok(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");
 
-    public DamageAllControlledTargetEffect(int amount, FilterPermanent filter) {
-        super(Outcome.Damage);
-        this.amount = amount;
-        this.filter = filter;
-        getText();
+        this.subtype.add(SubType.SAGA);
+
+        // <i>(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)</i>
+        SagaAbility sagaAbility = new SagaAbility(this, SagaChapter.CHAPTER_III);
+        // I, II — Create two 0/1 black Cleric creature tokens.
+        sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_I, SagaChapter.CHAPTER_II, new CreateTokenEffect(new BelzenlokClericToken(), 2));
+        // III — Create a 6/6 black Demon creature token with flying, trample, and "At the beginning of your upkeep, sacrifice another creature.  If you can't, this creature deals 6 damage to you."
+        sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_III, new CreateTokenEffect(new BelzenlokDemonToken()));
+        this.addAbility(sagaAbility);
     }
 
-    public DamageAllControlledTargetEffect(final DamageAllControlledTargetEffect effect) {
-        super(effect);
-        this.amount = effect.amount;
-        this.filter = effect.filter.copy();
-    }
-
-    @Override
-    public DamageAllControlledTargetEffect copy() {
-        return new DamageAllControlledTargetEffect(this);
+    public RiteOfBelzenlok(final RiteOfBelzenlok card) {
+        super(card);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, source.getFirstTarget(), game)) {
-            permanent.damage(amount, source.getSourceId(), game, false, true);
-        }
-        return true;
-    }
-
-    private void getText() {
-        StringBuilder sb = new StringBuilder("{this} deals ");
-        sb.append(amount).append(" damage to each ").append(filter.getMessage()).append(" controlled by target player");
-        staticText = sb.toString();
+    public RiteOfBelzenlok copy() {
+        return new RiteOfBelzenlok(this);
     }
 }
