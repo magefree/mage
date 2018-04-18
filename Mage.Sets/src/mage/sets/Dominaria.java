@@ -122,6 +122,7 @@ public class Dominaria extends ExpansionSet {
         cards.add(new SetCardInfo("Final Parting", 93, Rarity.UNCOMMON, mage.cards.f.FinalParting.class));
         cards.add(new SetCardInfo("Fire Elemental", 120, Rarity.COMMON, mage.cards.f.FireElemental.class));
         cards.add(new SetCardInfo("Firefist Adept", 121, Rarity.UNCOMMON, mage.cards.f.FirefistAdept.class));
+        cards.add(new SetCardInfo("Firesong and Sunspeaker", 280, Rarity.RARE, mage.cards.f.FiresongAndSunspeaker.class));
         cards.add(new SetCardInfo("Forebear's Blade", 214, Rarity.RARE, mage.cards.f.ForebearsBlade.class));
         cards.add(new SetCardInfo("Forest", 266, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 267, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
