@@ -90,7 +90,7 @@ public class AryelKnightOfWindgrace extends CardImpl {
             //Setting Legal Target to destroy
             filter2.add(new PowerPredicate(new StringBuilder("creature with power ").append(xValue).append(" or less").toString());
             ability.addTarget(new TargetPermanent(filter2));
-            ability.setTargetAdjustment(TargetAdjustment.ARYEL);
+            ability.setTargetAdjustment(TargetAdjustment.ARYEL_LEQ());
             ability.addTarget(target);
             this.getSpellAbility().addEffect(new DestroyTargetEffect());
             this.addAbility(ability);        
