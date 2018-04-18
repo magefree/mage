@@ -27,6 +27,8 @@
  */
 package mage.cards.c;
 
+import java.util.LinkedList;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -35,7 +37,6 @@ import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
-import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -45,8 +46,6 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.EquippedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-
-import java.util.UUID;
 
 /**
  *
@@ -68,7 +67,7 @@ public class CorrosiveOoze extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Whenever Corrosive Ooze blocks or becomes blocked by an equipped creature, destroy all Equipment attached to that creature at end of combat..
+        // Whenever Corrosive Ooze blocks or becomes blocked by an equipped creature, destroy all Equipment attached to that creature at end of combat.
         Effect effect = new CreateDelayedTriggeredAbilityEffect(new AtTheEndOfCombatDelayedTriggeredAbility(new CorrosiveOozeEffect()), true);
         this.addAbility(new BlocksOrBecomesBlockedTriggeredAbility(effect, filter, false));
     }
@@ -100,23 +99,24 @@ class CorrosiveOozeEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getFirstTarget());
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (permanent != null) {
             LinkedList<UUID> attachments = new LinkedList();
             attachments.addAll(permanent.getAttachments());
             for (UUID uuid : attachments) {
-                Permanent aura = game.getPermanent(uuid);
-                if (aura != null && aura.hasSubtype(SubType.EQUIPMENT, game)) {
-                    aura.destroy(source.getSourceId(), game, false);
+                Permanent attachment = game.getPermanent(uuid);
+                if (attachment != null && attachment.hasSubtype(SubType.EQUIPMENT, game)) {
+                    attachment.destroy(source.getSourceId(), game, false);
                 }
             }
+            return true;
         }
         return false;
     }
 
     @Override
     public String getText(Mode mode) {
-        return "destroy all Equipment attached to that creature";
+        return "destroy all Equipment attached to that creature at end of combat";
     }
 
 }
