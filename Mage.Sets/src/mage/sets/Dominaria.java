@@ -274,6 +274,7 @@ public class Dominaria extends ExpansionSet {
         cards.add(new SetCardInfo("Timber Gorge", 279, Rarity.COMMON, mage.cards.t.TimberGorge.class));
         cards.add(new SetCardInfo("Time of Ice", 70, Rarity.UNCOMMON, mage.cards.t.TimeOfIce.class));
         cards.add(new SetCardInfo("Tolarian Scholar", 71, Rarity.COMMON, mage.cards.t.TolarianScholar.class));
+        cards.add(new SetCardInfo("Torgaar, Famine Incarnate", 108, Rarity.RARE, mage.cards.t.TorgaarFamineIncarnate.class));
         cards.add(new SetCardInfo("Tragic Poet", 37, Rarity.COMMON, mage.cards.t.TragicPoet.class));
         cards.add(new SetCardInfo("Traxos, Scourge of Kroog", 234, Rarity.RARE, mage.cards.t.TraxosScourgeOfKroog.class));
         cards.add(new SetCardInfo("Triumph of Gerrard", 38, Rarity.UNCOMMON, mage.cards.t.TriumphOfGerrard.class));
