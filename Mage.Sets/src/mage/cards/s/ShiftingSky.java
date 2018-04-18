@@ -30,7 +30,7 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.ChooseColorEffect;
@@ -59,7 +59,7 @@ public class ShiftingSky extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");
 
         // As Shifting Sky enters the battlefield, choose a color.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ChooseColorEffect(Outcome.Detriment)));
+        this.addAbility(new AsEntersBattlefieldAbility(new ChooseColorEffect(Outcome.Detriment)));
 
         // All nonland permanents are the chosen color.        
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ShiftingSkyEffect()));

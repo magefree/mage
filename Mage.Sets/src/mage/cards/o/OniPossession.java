@@ -42,6 +42,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -65,7 +66,7 @@ public class OniPossession extends CardImpl {
 
         // At the beginning of your upkeep, sacrifice a creature.
         Ability ability2 = new BeginningOfUpkeepTriggeredAbility(
-                new SacrificeControllerEffect(new FilterControlledCreaturePermanent(), 1, ""), TargetController.YOU, false);
+                new SacrificeControllerEffect(new FilterControlledCreaturePermanent(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT), 1, ""), TargetController.YOU, false);
         this.addAbility(ability2);
         // Enchanted creature gets +3/+3 and has trample.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3, 3, Duration.WhileOnBattlefield)));

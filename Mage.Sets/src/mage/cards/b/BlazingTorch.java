@@ -35,7 +35,6 @@ import mage.abilities.costs.CostImpl;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
@@ -48,6 +47,10 @@ import mage.target.common.TargetCreatureOrPlayer;
 
 import java.util.List;
 import java.util.UUID;
+import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesAttachedEffect;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -55,17 +58,27 @@ import java.util.UUID;
  */
 public class BlazingTorch extends CardImpl {
 
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Vampires or Zombies");
+    static {
+        filter.add(Predicates.or(new SubtypePredicate(SubType.VAMPIRE), 
+                                 new SubtypePredicate(SubType.ZOMBIE)));
+    }
+    
     public BlazingTorch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature can't be blocked by Vampires or Zombies. (!this is a static ability of the equipment)
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BlazingTorchEvasionEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new CantBeBlockedByCreaturesAttachedEffect(Duration.WhileOnBattlefield, filter, AttachmentType.EQUIPMENT)));
+
+        
         // Equipped creature has "{tap}, Sacrifice Blazing Torch: Blazing Torch deals 2 damage to target creature or player.")
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BlazingTorchDamageEffect(), new TapSourceCost());
         ability.addCost(new BlazingTorchCost());
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability, AttachmentType.EQUIPMENT)));
+        
         // Equip {1}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1)));
     }
@@ -77,40 +90,6 @@ public class BlazingTorch extends CardImpl {
     @Override
     public BlazingTorch copy() {
         return new BlazingTorch(this);
-    }
-}
-
-class BlazingTorchEvasionEffect extends RestrictionEffect {
-
-    public BlazingTorchEvasionEffect() {
-        super(Duration.WhileOnBattlefield);
-        staticText = "Equipped creature can't be blocked by Vampires or Zombies";
-    }
-
-    public BlazingTorchEvasionEffect(final BlazingTorchEvasionEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        Permanent equipment = game.getPermanent(source.getSourceId());
-        if (equipment != null && equipment.getAttachedTo() != null) {
-            Permanent equipped = game.getPermanent(equipment.getAttachedTo());
-            if (equipped != null && permanent.getId().equals(equipped.getId())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        return !blocker.hasSubtype(SubType.VAMPIRE, game) && !blocker.hasSubtype(SubType.ZOMBIE, game);
-    }
-
-    @Override
-    public BlazingTorchEvasionEffect copy() {
-        return new BlazingTorchEvasionEffect(this);
     }
 }
 
