@@ -40,6 +40,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.constants.Zone;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 
@@ -49,8 +50,7 @@ import mage.filter.predicate.mageobject.SupertypePredicate;
  */
 public class BenalishHonorGuard extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("legendary creature you control");
-
+    private static final FilterControlledPermanent filter = new FilterControlledCreaturePermanent("legendary creature you control");
     static {
         filter.add(new SupertypePredicate(SuperType.LEGENDARY));
     }
