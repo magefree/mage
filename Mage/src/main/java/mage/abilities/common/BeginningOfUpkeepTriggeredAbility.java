@@ -152,7 +152,7 @@ public class BeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImpl {
             case OPPONENT:
                 return sb.insert(0, generateZoneString()).insert(0, "At the beginning of each opponent's upkeep, ").toString();
             case ANY:
-                return sb.insert(0, generateZoneString()).insert(0, "At the beginning of each player's upkeep, ").toString();
+                return sb.insert(0, generateZoneString()).insert(0, "At the beginning of each upkeep, ").toString();
             case CONTROLLER_ATTACHED_TO:
                 return sb.insert(0, generateZoneString()).insert(0, "At the beginning of the upkeep of enchanted creature's controller, ").toString();
         }

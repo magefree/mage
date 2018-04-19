@@ -36,22 +36,20 @@ import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.abilities.mana.AnyColorManaAbility;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SagaChapter;
+import mage.constants.SubType;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURES;
 
 /**
  *
  * @author TheElk801
  */
 public class SongOfFreyalise extends CardImpl {
-
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creatures you control");
 
     public SongOfFreyalise(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
@@ -63,16 +61,17 @@ public class SongOfFreyalise extends CardImpl {
 
         // I, II — Until your next turn, creatures you control gain "T: Add one mana of any color."
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_I, SagaChapter.CHAPTER_II,
-                new GainAbilityControlledEffect(new AnyColorManaAbility(), Duration.UntilYourNextTurn, filter)
+                new GainAbilityControlledEffect(new AnyColorManaAbility(), Duration.UntilYourNextTurn, FILTER_CONTROLLED_CREATURES)
+                        .setText("Until your next turn, creatures you control gain \"{T}: Add one mana of any color.\"")
         );
 
         // III — Put a +1/+1 counter on each creature you control. Those creatures gain vigilance, trample, and indestructible until end of turn.
-        Ability ability = sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_III, new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter));
-        ability.addEffect(new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn, filter)
-                .setText("Those creatures gain vigilance,"));
-        ability.addEffect(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, filter)
-                .setText("trample,"));
-        ability.addEffect(new GainAbilityControlledEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn, filter)
+        Ability ability = sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_III, new AddCountersAllEffect(CounterType.P1P1.createInstance(), FILTER_CONTROLLED_CREATURES));
+        ability.addEffect(new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn, FILTER_CONTROLLED_CREATURES)
+                .setText("Those creatures gain vigilance"));
+        ability.addEffect(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, FILTER_CONTROLLED_CREATURES)
+                .setText(", trample"));
+        ability.addEffect(new GainAbilityControlledEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn, FILTER_CONTROLLED_CREATURES)
                 .setText("and indestructible until end of turn"));
         this.addAbility(sagaAbility);
     }

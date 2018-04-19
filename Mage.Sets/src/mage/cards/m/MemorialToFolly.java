@@ -25,13 +25,12 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
+import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -50,15 +49,17 @@ import mage.target.common.TargetCardInYourGraveyard;
 public class MemorialToFolly extends CardImpl {
 
     public MemorialToFolly(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
-        
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
+
         // Memorial to Folly enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
-        
+
         this.addAbility(new BlackManaAbility());
-        
+
         // {2}{B}, {T}, Sacrifice Memorial to Folly: Return target creature card from your graveyard to your hand.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl("{2}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect()
+                .setText("Return target creature card from your graveyard to your hand"),
+                new ManaCostsImpl("{2}{B}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));

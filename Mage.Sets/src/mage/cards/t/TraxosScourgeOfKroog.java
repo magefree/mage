@@ -34,26 +34,19 @@ import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.DontUntapInControllersUntapStepSourceEffect;
 import mage.abilities.effects.common.UntapSourceEffect;
-import mage.constants.SubType;
-import mage.constants.SuperType;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.HistoricPredicate;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.filter.common.FilterHistoricSpell;
 
 /**
  *
  * @author TheElk801
  */
 public class TraxosScourgeOfKroog extends CardImpl {
-
-    private static final FilterSpell filter = new FilterSpell("a historic spell");
-
-    static {
-        filter.add(new HistoricPredicate());
-    }
 
     public TraxosScourgeOfKroog(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");
@@ -72,7 +65,7 @@ public class TraxosScourgeOfKroog extends CardImpl {
         ability.addEffect(new DontUntapInControllersUntapStepSourceEffect());
         this.addAbility(ability);
         // Whenever you cast a historic spell untap Traxos.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new UntapSourceEffect(), filter, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new UntapSourceEffect(), new FilterHistoricSpell(), false));
     }
 
     public TraxosScourgeOfKroog(final TraxosScourgeOfKroog card) {

@@ -31,14 +31,14 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.CastAsThoughItHadFlashAllEffect;
-import mage.constants.SubType;
-import mage.constants.SuperType;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.HistoricPredicate;
@@ -71,7 +71,9 @@ public class RaffCapashenShipsMage extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // You may cast historic spells as though they had flash.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CastAsThoughItHadFlashAllEffect(Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new CastAsThoughItHadFlashAllEffect(Duration.WhileOnBattlefield, filter, false)
+                        .setText("You may cast historic spells as though they had flash. <i>(Artifacts, legendaries, and Sagas are historic.)</i>")));
     }
 
     public RaffCapashenShipsMage(final RaffCapashenShipsMage card) {
