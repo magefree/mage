@@ -104,7 +104,7 @@ class ExquisiteArchangelEffect extends ReplacementEffectImpl {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (player != null && sourcePermanent != null) {
             new ExileSourceEffect().apply(game, source);
-            player.setLife(game.getLife(), game);
+            player.setLife(game.getLife(), game, source);
             return true;
         }
         return false;

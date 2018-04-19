@@ -147,7 +147,7 @@ class ShamanOfForgottenWaysEffect extends OneShotEffect {
                 Player player = game.getPlayer(playerId);
                 if (player != null){
                     int numberCreatures = game.getBattlefield().getAllActivePermanents(filter, playerId, game).size();
-                    player.setLife(numberCreatures, game);
+                    player.setLife(numberCreatures, game, source);
                 }
             }
             return true;

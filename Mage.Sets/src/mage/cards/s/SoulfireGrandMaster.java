@@ -73,7 +73,7 @@ public class SoulfireGrandMaster extends CardImpl {
     }
 
     public SoulfireGrandMaster(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.MONK);
         this.power = new MageInt(2);
@@ -130,26 +130,6 @@ class GainAbilitySpellsEffect extends ContinuousEffectImpl {
         Player player = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (player != null && permanent != null) {
-            for (Card card : game.getExile().getAllCards(game)) {
-                if (card.getOwnerId().equals(source.getControllerId()) && filter.match(card, game)) {
-                    game.getState().addOtherAbility(card, ability);
-                }
-            }
-            for (Card card : player.getLibrary().getCards(game)) {
-                if (filter.match(card, game)) {
-                    game.getState().addOtherAbility(card, ability);
-                }
-            }
-            for (Card card : player.getHand().getCards(game)) {
-                if (filter.match(card, game)) {
-                    game.getState().addOtherAbility(card, ability);
-                }
-            }
-            for (Card card : player.getGraveyard().getCards(game)) {
-                if (filter.match(card, game)) {
-                    game.getState().addOtherAbility(card, ability);
-                }
-            }
             for (StackObject stackObject : game.getStack()) {
                 if (stackObject.getControllerId().equals(source.getControllerId())) {
                     Card card = game.getCard(stackObject.getSourceId());
@@ -225,7 +205,8 @@ class SoulfireGrandMasterCastFromHandReplacementEffect extends ReplacementEffect
     public boolean applies(GameEvent event, Ability source, Game game) {
         //Something hit the stack from the hand, see if its a spell with this ability.
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (spellId == null && // because this effect works only once, spellId has to be null here
+        if (spellId == null
+                && // because this effect works only once, spellId has to be null here
                 zEvent.getFromZone() == Zone.HAND
                 && zEvent.getToZone() == Zone.STACK
                 && event.getPlayerId().equals(source.getControllerId())) {

@@ -1547,8 +1547,13 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public void setLife(int life, Game game) {
-        computerPlayer.setLife(life, game);
+    public void setLife(int life, Game game, UUID sourceId) {
+        computerPlayer.setLife(life, game, sourceId);
+    }
+
+    @Override
+    public void setLife(int life, Game game, Ability source) {
+        computerPlayer.setLife(life, game, source);
     }
 
     @Override
@@ -1593,7 +1598,12 @@ public class TestPlayer implements Player {
 
     @Override
     public int gainLife(int amount, Game game, Ability source) {
-        return computerPlayer.gainLife(amount, game);
+        return computerPlayer.gainLife(amount, game, source);
+    }
+
+    @Override
+    public int gainLife(int amount, Game game, UUID sourceId) {
+        return computerPlayer.gainLife(amount, game, sourceId);
     }
 
     @Override

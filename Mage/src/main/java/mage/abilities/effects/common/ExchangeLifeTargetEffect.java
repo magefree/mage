@@ -77,8 +77,8 @@ public class ExchangeLifeTargetEffect extends OneShotEffect {
                 return false;
             }
 
-            controller.setLife(lifePlayer, game);
-            player.setLife(lifeController, game);
+            controller.setLife(lifePlayer, game, source);
+            player.setLife(lifeController, game, source);
             return true;
         }
         return false;

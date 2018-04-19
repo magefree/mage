@@ -107,8 +107,8 @@ class DarthTyranusEffect extends OneShotEffect {
         Player player1 = game.getPlayer(targetPointer.getTargets(game, source).get(0));
         Player player2 = game.getPlayer(targetPointer.getTargets(game, source).get(1));
         if (player1 != null && player2 != null) {
-            player1.setLife(5, game);
-            player1.setLife(30, game);
+            player1.setLife(5, game, source);
+            player1.setLife(30, game, source);
             return true;
         }
         return false;

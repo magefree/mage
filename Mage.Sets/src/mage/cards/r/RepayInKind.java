@@ -84,7 +84,7 @@ class RepayInKindEffect extends OneShotEffect {
         }
         for (Player playerId : game.getPlayers().values()) {
             if (playerId != null) {
-                playerId.setLife(lowestLife, game);
+                playerId.setLife(lowestLife, game, source);
             }
         }
         return true;

@@ -84,7 +84,7 @@ class TouchOfTheEternalEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         int permanentsInPlay = game.getBattlefield().countAll(filter, source.getControllerId(), game);
         if (player != null) {
-            player.setLife(permanentsInPlay, game);
+            player.setLife(permanentsInPlay, game, source);
             return true;
         }
         return false;

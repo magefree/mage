@@ -31,6 +31,7 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.Map.Entry;
+import static jdk.nashorn.internal.objects.NativeRegExp.source;
 import mage.ConditionalMana;
 import mage.MageObject;
 import mage.Mana;
@@ -439,7 +440,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.canLoseLife = true;
         this.topCardRevealed = false;
         this.payManaMode = false;
-        this.setLife(game.getLife(), game);
+        this.setLife(game.getLife(), game, UUID.randomUUID());
         this.setReachedNextTurnAfterLeaving(false);
 
         this.castSourceIdWithAlternateMana = null;
@@ -1741,10 +1742,15 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public void setLife(int life, Game game) {
+    public void setLife(int life, Game game, Ability source) {
+        setLife(life, game, source.getSourceId());
+    }
+
+    @Override
+    public void setLife(int life, Game game, UUID sourceId) {
         // rule 118.5
         if (life > this.life) {
-            gainLife(life - this.life, game, source);
+            gainLife(life - this.life, game, sourceId);
         } else if (life < this.life) {
             loseLife(this.life - life, game, false);
         }
@@ -1808,6 +1814,10 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public int gainLife(int amount, Game game, Ability source) {
+        return gainLife(amount, game, source.getSourceId());
+    }
+
+    public int gainLife(int amount, Game game, UUID sourceId) {
         if (!canGainLife || amount == 0) {
             return 0;
         }
@@ -1820,7 +1830,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             if (!game.isSimulation()) {
                 game.informPlayers(this.getLogName() + " gains " + event.getAmount() + " life");
             }
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.GAINED_LIFE, playerId, source.getSourceId(), playerId, event.getAmount()));
+            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.GAINED_LIFE, playerId, sourceId, playerId, event.getAmount()));
             return event.getAmount();
         }
         return 0;
@@ -1879,7 +1889,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                         }
                         if (sourceAbilities != null && sourceAbilities.containsKey(LifelinkAbility.getInstance().getId())) {
                             Player player = game.getPlayer(sourceControllerId);
-                            player.gainLife(actualDamage, game, source);
+                            player.gainLife(actualDamage, game, sourceId);
                         }
                         // Unstable ability - Earl of Squirrel
                         if (sourceAbilities != null && sourceAbilities.containsKey(SquirrellinkAbility.getInstance().getId())) {

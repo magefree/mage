@@ -67,7 +67,7 @@ public class SetPlayerLifeTargetEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
         if (player != null) {
-            player.setLife(amount.calculate(game, source, this), game);
+            player.setLife(amount.calculate(game, source, this), game, source);
             return true;
         }
         return false;

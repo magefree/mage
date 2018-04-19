@@ -160,7 +160,7 @@ class TorgaarFamineIncarnateEffect extends OneShotEffect {
         Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (targetPlayer != null) {
             int startingLifeTotal = game.getLife();
-            targetPlayer.setLife(startingLifeTotal / 2, game);
+            targetPlayer.setLife(startingLifeTotal / 2, game, source);
         }
         return true;
     }

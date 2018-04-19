@@ -785,7 +785,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 if (source != null && sourceAbilities != null) {
                     if (sourceAbilities.containsKey(LifelinkAbility.getInstance().getId())) {
                         Player player = game.getPlayer(sourceControllerId);
-                        player.gainLife(damageDone, game, source);
+                        player.gainLife(damageDone, game, sourceId);
                     }
                     if (sourceAbilities.containsKey(DeathtouchAbility.getInstance().getId())) {
                         deathtouched = true;
@@ -946,8 +946,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 }
             }
 
-
-            if (abilities.containsKey(HexproofFromBlackAbility.getInstance().getId()) ) {
+            if (abilities.containsKey(HexproofFromBlackAbility.getInstance().getId())) {
                 if (game.getPlayer(this.getControllerId()).hasOpponent(sourceControllerId, game)
                         && !game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.HEXPROOF, sourceControllerId, game)
                         && source.getColor(game).isBlack()) {
@@ -955,7 +954,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 }
             }
 
-            if (abilities.containsKey(HexproofFromWhiteAbility.getInstance().getId()) ) {
+            if (abilities.containsKey(HexproofFromWhiteAbility.getInstance().getId())) {
                 if (game.getPlayer(this.getControllerId()).hasOpponent(sourceControllerId, game)
                         && !game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.HEXPROOF, sourceControllerId, game)
                         && source.getColor(game).isWhite()) {

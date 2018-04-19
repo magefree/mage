@@ -109,8 +109,8 @@ class SoulConduitEffect extends OneShotEffect {
                 return false;
             }
 
-            player1.setLife(lifePlayer2, game);
-            player2.setLife(lifePlayer1, game);
+            player1.setLife(lifePlayer2, game, source);
+            player2.setLife(lifePlayer1, game, source);
             return true;
         }
         return false;

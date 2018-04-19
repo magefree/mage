@@ -34,25 +34,16 @@ import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.GainLifeControllerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.common.SimpleTriggeredAbility;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.DoIfCostPaid;
-import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.Card;
-import mage.cards.GainAbilitySpellsEffect;
-import mage.cards.a.AgelessEntityEffect;
-import mage.cards.s.SpiritualFocusDrawCardEffect;
 import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.filter.FilterObject;
-import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -107,6 +98,7 @@ class FiresongAndSunspeakerTriggeredAbility extends TriggeredAbilityImpl {
 
     public FiresongAndSunspeakerTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(3), false);
+        this.addTarget(new TargetCreatureOrPlayer());
     }
 
     public FiresongAndSunspeakerTriggeredAbility(final FiresongAndSunspeakerTriggeredAbility ability) {
@@ -124,7 +116,7 @@ class FiresongAndSunspeakerTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public boolean applies(GameEvent event, Game game) {
+    public boolean checkTrigger(GameEvent event, Game game) {
         MageObject object = game.getObject(event.getSourceId());
         if (object != null && object instanceof Spell) {
             if (object.getColor(game).equals(ObjectColor.WHITE)
@@ -170,26 +162,6 @@ class GainAbilitySpellsEffect extends ContinuousEffectImpl {
         Player player = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (player != null && permanent != null) {
-            for (Card card : game.getExile().getAllCards(game)) {
-                if (card.getOwnerId().equals(source.getControllerId()) && filter.match(card, game)) {
-                    game.getState().addOtherAbility(card, ability);
-                }
-            }
-            for (Card card : player.getLibrary().getCards(game)) {
-                if (filter.match(card, game)) {
-                    game.getState().addOtherAbility(card, ability);
-                }
-            }
-            for (Card card : player.getHand().getCards(game)) {
-                if (filter.match(card, game)) {
-                    game.getState().addOtherAbility(card, ability);
-                }
-            }
-            for (Card card : player.getGraveyard().getCards(game)) {
-                if (filter.match(card, game)) {
-                    game.getState().addOtherAbility(card, ability);
-                }
-            }
             for (StackObject stackObject : game.getStack()) {
                 if (stackObject.getControllerId().equals(source.getControllerId())) {
                     Card card = game.getCard(stackObject.getSourceId());

@@ -93,7 +93,7 @@ class ResoluteArchangelEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            controller.setLife(game.getLife(), game);
+            controller.setLife(game.getLife(), game, source);
             return true;
         }
         return false;

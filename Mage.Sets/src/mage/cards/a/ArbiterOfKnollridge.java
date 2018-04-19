@@ -97,7 +97,7 @@ class ArbiterOfKnollridgeEffect extends OneShotEffect {
         for (UUID pid : playerList) {
             Player p = game.getPlayer(pid);
             if (p != null) {
-                p.setLife(maxLife, game);
+                p.setLife(maxLife, game, source);
             }
         }
         return true;

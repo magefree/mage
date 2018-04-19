@@ -1565,14 +1565,14 @@ public abstract class GameImpl implements Game, Serializable {
         }
         state.addCommandObject(newPlane);
         informPlayers("You have planeswalked to " + newPlane.getLogName());
-        
+
         // Fire off the planeswalked event
         GameEvent event = new GameEvent(GameEvent.EventType.PLANESWALK, newPlane.getId(), null, newPlane.getId(), 0, true);
         if (!replaceEvent(event)) {
             GameEvent ge = new GameEvent(GameEvent.EventType.PLANESWALKED, newPlane.getId(), null, newPlane.getId(), 0, true);
             fireEvent(ge);
         }
-        
+
         return true;
     }
 
@@ -2821,7 +2821,7 @@ public abstract class GameImpl implements Game, Serializable {
                                 if (s.length == 2) {
                                     try {
                                         Integer amount = Integer.parseInt(s[1]);
-                                        player.setLife(amount, this);
+                                        player.setLife(amount, this, ownerId);
                                         logger.info("Setting player's life: ");
                                     } catch (NumberFormatException e) {
                                         logger.fatal("error setting life", e);
