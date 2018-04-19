@@ -132,6 +132,8 @@ public interface Game extends MageItem, Serializable {
 
     Player getPlayer(UUID playerId);
 
+    Player getPlayerOrPlaneswalkerController(UUID playerId);
+
     Players getPlayers();
 
     PlayerList getPlayerList();
