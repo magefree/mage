@@ -36,8 +36,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.NamePredicate;
-import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetPlayerOrPlaneswalker;
 import mage.target.targetpointer.SecondTargetPointer;
 
 /**
@@ -61,8 +61,8 @@ public class AngrathsFury extends CardImpl {
 
         // Angrath's Fury deals 3 damage to target player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(3).setTargetPointer(new SecondTargetPointer())
-                .setText("{this} deals 3 damage to target player"));
-        this.getSpellAbility().addTarget(new TargetPlayer());
+                .setText("{this} deals 3 damage to target player or planeswalker"));
+        this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
 
         // You may search your library and/or graveyard for a card named Angrath, Minotaur Pirate, reveal it, and put it into your hand.  If you search your library this way, shuffle it.
         this.getSpellAbility().addEffect(new SearchLibraryGraveyardPutInHandEffect(filter)

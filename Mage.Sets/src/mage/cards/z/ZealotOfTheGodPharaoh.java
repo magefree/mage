@@ -38,7 +38,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.target.common.TargetOpponent;
+import mage.target.common.TargetOpponentOrPlaneswalker;
 
 /**
  *
@@ -55,7 +55,7 @@ public class ZealotOfTheGodPharaoh extends CardImpl {
 
         // {4}{R}: Zealot of the God-Pharaoh deals 2 damage to target opponent.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl("{4}{R}"));
-        ability.addTarget(new TargetOpponent());
+        ability.addTarget(new TargetOpponentOrPlaneswalker());
         this.addAbility(ability);
     }
 

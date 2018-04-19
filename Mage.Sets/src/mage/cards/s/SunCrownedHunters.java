@@ -37,7 +37,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.target.common.TargetOpponent;
+import mage.target.common.TargetOpponentOrPlaneswalker;
 
 /**
  *
@@ -56,7 +56,7 @@ public class SunCrownedHunters extends CardImpl {
         Ability ability = new DealtDamageToSourceTriggeredAbility(
                 Zone.BATTLEFIELD, new DamageTargetEffect(3).setText("it deals 3 damage to target opponent"), false, true
         );
-        ability.addTarget(new TargetOpponent());
+        ability.addTarget(new TargetOpponentOrPlaneswalker());
         this.addAbility(ability);
     }
 

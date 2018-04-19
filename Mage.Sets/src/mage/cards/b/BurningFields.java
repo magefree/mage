@@ -32,7 +32,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.target.common.TargetOpponent;
+import mage.target.common.TargetOpponentOrPlaneswalker;
 
 /**
  *
@@ -41,10 +41,10 @@ import mage.target.common.TargetOpponent;
 public class BurningFields extends CardImpl {
 
     public BurningFields(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{R}");
 
         // Burning Fields deals 5 damage to target opponent.
-        this.getSpellAbility().addTarget(new TargetOpponent());
+        this.getSpellAbility().addTarget(new TargetOpponentOrPlaneswalker());
         this.getSpellAbility().addEffect(new DamageTargetEffect(5));
     }
 

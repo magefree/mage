@@ -39,7 +39,7 @@ import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
-import mage.target.TargetPlayer;
+import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
  *
@@ -55,13 +55,12 @@ public class BoggartShenanigans extends CardImpl {
     }
 
     public BoggartShenanigans(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.ENCHANTMENT},"{2}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.TRIBAL, CardType.ENCHANTMENT}, "{2}{R}");
         this.subtype.add(SubType.GOBLIN);
-
 
         // Whenever another Goblin you control dies, you may have Boggart Shenanigans deal 1 damage to target player.
         Ability ability = new DiesCreatureTriggeredAbility(new DamageTargetEffect(1), true, filter, false);
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayerOrPlaneswalker());
         this.addAbility(ability);
     }
 

@@ -38,14 +38,14 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.target.TargetPlayer;
+import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
  *
  * @author fireshoes
  */
 public class GiantsIre extends CardImpl {
-    
+
     private static final FilterPermanent filter = new FilterPermanent("Giant");
 
     static {
@@ -53,16 +53,16 @@ public class GiantsIre extends CardImpl {
     }
 
     public GiantsIre(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.SORCERY},"{3}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.TRIBAL, CardType.SORCERY}, "{3}{R}");
         this.subtype.add(SubType.GIANT);
 
         // Giant's Ire deals 4 damage to target player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));
-        this.getSpellAbility().addTarget(new TargetPlayer());
-        
+        this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
+
         // If you control a Giant, draw a card.
-        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new DrawCardSourceControllerEffect(1), 
-                new PermanentsOnTheBattlefieldCondition(filter),"If you control a Giant, draw a card"));
+        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new DrawCardSourceControllerEffect(1),
+                new PermanentsOnTheBattlefieldCondition(filter), "If you control a Giant, draw a card"));
     }
 
     public GiantsIre(final GiantsIre card) {

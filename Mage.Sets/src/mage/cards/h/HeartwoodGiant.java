@@ -41,8 +41,8 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.target.TargetPlayer;
 import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
  *
@@ -57,14 +57,14 @@ public class HeartwoodGiant extends CardImpl {
     }
 
     public HeartwoodGiant(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
         this.subtype.add(SubType.GIANT);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayerOrPlaneswalker());
         this.addAbility(ability);
     }
 

@@ -38,7 +38,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.target.TargetPlayer;
+import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
  *
@@ -47,14 +47,14 @@ import mage.target.TargetPlayer;
 public class FlamewaveInvoker extends CardImpl {
 
     public FlamewaveInvoker(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
         this.subtype.add(SubType.GOBLIN);
         this.subtype.add(SubType.MUTANT);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(5), new ManaCostsImpl("{7}{R}"));
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayerOrPlaneswalker());
         this.addAbility(ability);
     }
 

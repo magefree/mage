@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -37,7 +36,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.target.TargetPlayer;
+import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
  *
@@ -45,18 +44,18 @@ import mage.target.TargetPlayer;
  */
 public class CosisRavager extends CardImpl {
 
-    public CosisRavager (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
+    public CosisRavager(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
         this.subtype.add(SubType.ELEMENTAL);
-        this.color.setRed(true);        
+        this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         Ability ability = new LandfallAbility(new DamageTargetEffect(1), false);
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayerOrPlaneswalker());
         this.addAbility(ability);
     }
 
-    public CosisRavager (final CosisRavager card) {
+    public CosisRavager(final CosisRavager card) {
         super(card);
     }
 

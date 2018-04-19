@@ -33,8 +33,8 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetPlayerOrPlaneswalker;
 import mage.target.targetpointer.SecondTargetPointer;
 
 /**
@@ -54,7 +54,7 @@ public class Lunge extends CardImpl {
         effect.setTargetPointer(new SecondTargetPointer());
         effect.setText("and 2 damage to target player");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
     }
 
     public Lunge(final Lunge card) {
