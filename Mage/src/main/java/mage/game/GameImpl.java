@@ -1078,7 +1078,7 @@ public abstract class GameImpl implements Game, Serializable {
         if (gameOptions.planeChase) {
             Plane plane = Plane.getRandomPlane();
             plane.setControllerId(startingPlayerId);
-            addPlane(plane, null, getActivePlayerId());
+            addPlane(plane, null, startingPlayerId);
             state.setPlaneChase(this, gameOptions.planeChase);
         }
     }
@@ -1565,14 +1565,14 @@ public abstract class GameImpl implements Game, Serializable {
         }
         state.addCommandObject(newPlane);
         informPlayers("You have planeswalked to " + newPlane.getLogName());
-
+        
         // Fire off the planeswalked event
         GameEvent event = new GameEvent(GameEvent.EventType.PLANESWALK, newPlane.getId(), null, newPlane.getId(), 0, true);
         if (!replaceEvent(event)) {
             GameEvent ge = new GameEvent(GameEvent.EventType.PLANESWALKED, newPlane.getId(), null, newPlane.getId(), 0, true);
             fireEvent(ge);
         }
-
+        
         return true;
     }
 
