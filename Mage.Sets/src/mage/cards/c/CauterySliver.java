@@ -44,8 +44,8 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreatureOrPlayer;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterCreaturePlayerOrPlaneswalker;
 import mage.target.common.TargetAnyTarget;
 
 /**
@@ -57,7 +57,7 @@ public class CauterySliver extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent(SubType.SLIVER, "All Slivers");
 
     public CauterySliver(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{W}");
         this.subtype.add(SubType.SLIVER);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
@@ -88,16 +88,17 @@ public class CauterySliver extends CardImpl {
     }
 }
 
-
 class TargetSliverCreatureOrPlayer extends TargetAnyTarget {
-    public TargetSliverCreatureOrPlayer(){
+
+    public TargetSliverCreatureOrPlayer() {
         super();
         filter = new FilterCreatureOrPlayerByType("Sliver", "Sliver creature or player");
     }
 }
 
-class FilterCreatureOrPlayerByType extends FilterCreatureOrPlayer {
-    public FilterCreatureOrPlayerByType (String type, String name) {
+class FilterCreatureOrPlayerByType extends FilterCreaturePlayerOrPlaneswalker {
+
+    public FilterCreatureOrPlayerByType(String type, String name) {
         super(name);
         creatureFilter = new FilterCreaturePermanent(type);
     }

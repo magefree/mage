@@ -39,7 +39,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureOrPlayer;
+import mage.filter.common.FilterCreaturePlayerOrPlaneswalker;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetAnyTarget;
 
@@ -49,14 +49,14 @@ import mage.target.common.TargetAnyTarget;
  */
 public class ImperialGunner extends CardImpl {
 
-    private static final FilterCreatureOrPlayer filter = new FilterCreatureOrPlayer("target player or Starship creature");
+    private static final FilterCreaturePlayerOrPlaneswalker filter = new FilterCreaturePlayerOrPlaneswalker("target player, planeswalker or Starship creature");
 
     static {
         filter.getCreatureFilter().add(new SubtypePredicate(SubType.STARSHIP));
     }
 
     public ImperialGunner(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SOLDIER);
         this.power = new MageInt(1);
