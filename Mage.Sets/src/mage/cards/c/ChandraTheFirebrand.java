@@ -55,7 +55,7 @@ import mage.target.targetpointer.FixedTarget;
 public class ChandraTheFirebrand extends CardImpl {
 
     public ChandraTheFirebrand(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{3}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{R}");
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.CHANDRA);
 
@@ -72,7 +72,7 @@ public class ChandraTheFirebrand extends CardImpl {
         this.addAbility(new LoyaltyAbility(effect, -2));
 
         // -6: Chandra, the Firebrand deals 6 damage to each of up to six target creatures and/or players
-        LoyaltyAbility ability2 = new LoyaltyAbility(new DamageTargetEffect(6, true, "each of up to six target creatures and/or players"), -6);
+        LoyaltyAbility ability2 = new LoyaltyAbility(new DamageTargetEffect(6, true, "each of up to six targets"), -6);
         ability2.addTarget(new TargetAnyTarget(0, 6));
         this.addAbility(ability2);
     }
