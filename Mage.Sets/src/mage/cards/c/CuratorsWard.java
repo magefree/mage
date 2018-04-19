@@ -30,6 +30,7 @@ package mage.cards.c;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
@@ -67,7 +68,9 @@ public class CuratorsWard extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted permanent has hexproof.
-        ability.addEffect(new GainAbilityAttachedEffect(HexproofAbility.getInstance(), AttachmentType.AURA).setText("Enchanted permanent has hexproof"));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new GainAbilityAttachedEffect(HexproofAbility.getInstance(), AttachmentType.AURA)
+                        .setText("Enchanted permanent has hexproof")));
 
         // When enchanted permanent leaves the battlefield, if it was historic, draw two cards.
         this.addAbility(new CuratorsWardTriggeredAbility());
@@ -112,7 +115,8 @@ class CuratorsWardTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "When enchanted permanent leaves the battlefield, if it was historic," + super.getRule();
+        return "When enchanted permanent leaves the battlefield, if it was historic, " + super.getRule()
+                + " <i>(Artifacts, legendaries, and Sagas are historic.)</i>";
     }
 
     @Override

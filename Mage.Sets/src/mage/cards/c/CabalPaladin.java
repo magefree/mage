@@ -38,20 +38,13 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.HistoricPredicate;
+import mage.filter.common.FilterHistoricSpell;
 
 /**
  *
  * @author TheElk801
  */
 public class CabalPaladin extends CardImpl {
-
-    private static final FilterSpell filter = new FilterSpell("a historic spell");
-
-    static {
-        filter.add(new HistoricPredicate());
-    }
 
     public CabalPaladin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
@@ -63,8 +56,9 @@ public class CabalPaladin extends CardImpl {
 
         // Whenever you cast a historic spell, Cabal Paladin deals 2 damage to each opponent.
         this.addAbility(new SpellCastControllerTriggeredAbility(
-                new DamagePlayersEffect(Outcome.Damage, new StaticValue(2), TargetController.OPPONENT),
-                filter, true
+                new DamagePlayersEffect(Outcome.Damage, new StaticValue(2), TargetController.OPPONENT)
+                        .setText("{this} deals 2 damage to each opponent. <i>(Artifacts, legendaries, and Sagas are historic.)</i>"),
+                new FilterHistoricSpell(), true
         ));
     }
 

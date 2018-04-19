@@ -142,6 +142,11 @@ public final class StaticFilters {
     static {
         FILTER_CONTROLLED_PERMANENT_ARTIFACT.setLockedFilter(true);
     }
+    public static final FilterControlledPermanent FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN = new FilterControlledArtifactPermanent("an artifact");
+
+    static {
+        FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN.setLockedFilter(true);
+    }
     public static final FilterControlledPermanent FILTER_CONTROLLED_PERMANENT_ARTIFACT_OR_CREATURE = new FilterControlledPermanent("artifact or creature you control");
 
     static {
