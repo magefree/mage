@@ -40,7 +40,7 @@ import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -53,7 +53,7 @@ public class HonorablePassage extends CardImpl {
 
         // The next time a source of your choice would deal damage to target creature or player this turn, prevent that damage. If damage from a red source is prevented this way, Honorable Passage deals that much damage to the source's controller.
         this.getSpellAbility().addEffect(new HonorablePassageEffect());
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
     public HonorablePassage(final HonorablePassage card) {

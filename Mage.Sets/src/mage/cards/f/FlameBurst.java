@@ -43,7 +43,7 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -65,7 +65,7 @@ public class FlameBurst extends CardImpl {
         Effect effect = new DamageTargetEffect(new FlameBurstCount(filter));
         effect.setText("{this} deals X damage to target creature or player, where X is 2 plus the number of cards named Flame Burst in all graveyards.");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
     public FlameBurst(final FlameBurst card) {

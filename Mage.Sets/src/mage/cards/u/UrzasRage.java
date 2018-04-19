@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -65,7 +65,7 @@ public class UrzasRage extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new DamageTargetEffect(10, false),
                 new DamageTargetEffect(3), KickedCondition.instance,
                 "{this} deals 3 damage to target creature or player. If {this} was kicked, instead it deals 10 damage to that creature or player and the damage can't be prevented."));
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
     public UrzasRage(final UrzasRage card) {

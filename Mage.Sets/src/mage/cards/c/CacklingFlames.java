@@ -35,7 +35,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -59,7 +59,7 @@ public class CacklingFlames extends CardImpl {
                 HellbentCondition.instance,
                 "<br/><br/><i>Hellbent</i> - {this} deals 5 damage to that creature or player instead if you have no cards in hand."));
         
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
     public CacklingFlames(final CacklingFlames card) {

@@ -41,25 +41,23 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetControlledPermanent;
-
-import java.util.UUID;
 import mage.target.common.TargetAnyTarget;
 
+import java.util.UUID;
 /**
  *
  * @author themattfiles
  */
 public class OrcishVandal extends CardImpl {
-
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("an artifact");
 
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
-
+    
     public OrcishVandal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
-
+        
         this.subtype.add(SubType.ORC);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(1);

@@ -37,7 +37,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.target.Target;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -54,7 +54,7 @@ public class AkoumBoulderfoot extends CardImpl {
         this.toughness = new MageInt(5);
 
         Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(1), false);
-        Target target = new TargetCreatureOrPlayer();
+        Target target = new TargetAnyTarget();
         ability.addTarget(target);
         this.addAbility(ability);
     }

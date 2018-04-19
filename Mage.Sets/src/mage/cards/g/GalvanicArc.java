@@ -44,7 +44,7 @@ import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -66,7 +66,7 @@ public class GalvanicArc extends CardImpl {
         this.addAbility(ability);
         // When Galvanic Arc enters the battlefield, it deals 3 damage to target creature or player.
         Ability triggeredAbility = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(3, "it"));
-        triggeredAbility.addTarget(new TargetCreatureOrPlayer());
+        triggeredAbility.addTarget(new TargetAnyTarget());
         this.addAbility(triggeredAbility);
         // Enchanted creature has first strike.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.AURA)));

@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterPermanent;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -54,7 +54,7 @@ public class BonethornValesk extends CardImpl {
 
         // Whenever a permanent is turned face up, Bonethorn Valesk deals 1 damage to target creature or player.
         Ability ability = new TurnedFaceUpAllTriggeredAbility(new DamageTargetEffect(1), new FilterPermanent("a permanent"));
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }
 

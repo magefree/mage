@@ -54,7 +54,7 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -116,7 +116,7 @@ class MartyrdomActivatedAbility extends ActivatedAbilityImpl {
     
     public MartyrdomActivatedAbility(UUID caster) {
         super(Zone.BATTLEFIELD, new MartyrdomRedirectDamageTargetEffect(Duration.EndOfTurn, 1), new GenericManaCost(0));
-        this.addTarget(new TargetCreatureOrPlayer());
+        this.addTarget(new TargetAnyTarget());
         this.caster = caster;
     }
 
@@ -179,7 +179,7 @@ class MartyrdomRedirectDamageTargetEffect extends RedirectionEffect {
             if (filter.match(permanent, permanent.getId(), permanent.getControllerId(), game)) {
                 if (event.getTargetId().equals(getTargetPointer().getFirst(game, source))) {
                     if (event.getTargetId() != null) {
-                        TargetCreatureOrPlayer target = new TargetCreatureOrPlayer();
+                        TargetAnyTarget target = new TargetAnyTarget();
                         target.add(source.getSourceId(), game);
                         redirectTarget = target;
                         return true;

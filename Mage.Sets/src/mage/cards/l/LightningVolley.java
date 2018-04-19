@@ -40,7 +40,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -54,7 +54,7 @@ public class LightningVolley extends CardImpl {
 
         // Until end of turn, creatures you control gain "{T}: This creature deals 1 damage to target creature or player."        
         Ability grantedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
-        grantedAbility.addTarget(new TargetCreatureOrPlayer());
+        grantedAbility.addTarget(new TargetAnyTarget());
         Effect effect = new GainAbilityControlledEffect(grantedAbility, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES);
         effect.setText("Until end of turn, creatures you control gain \"{T}: This creature deals 1 damage to target creature or player.\"");
         this.getSpellAbility().addEffect(effect);

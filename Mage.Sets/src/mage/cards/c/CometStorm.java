@@ -40,7 +40,7 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -56,7 +56,7 @@ public class CometStorm extends CardImpl {
 
         // Choose target creature or player, then choose another target creature or player for each time Comet Storm was kicked. Comet Storm deals X damage to each of them.
         this.getSpellAbility().addEffect(new CometStormEffect());
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer(1));
+        this.getSpellAbility().addTarget(new TargetAnyTarget(1));
     }
 
     public CometStorm(final CometStorm card) {
@@ -68,7 +68,7 @@ public class CometStorm extends CardImpl {
         if (ability instanceof SpellAbility) {
             ability.getTargets().clear();
             int numbTargets = new MultikickerCount().calculate(game, ability, null) + 1;
-            ability.addTarget(new TargetCreatureOrPlayer(numbTargets));
+            ability.addTarget(new TargetAnyTarget(numbTargets));
         }
     }
 

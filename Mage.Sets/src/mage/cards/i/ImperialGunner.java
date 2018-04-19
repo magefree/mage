@@ -41,7 +41,7 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureOrPlayer;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -64,7 +64,7 @@ public class ImperialGunner extends CardImpl {
 
         // {1},{T}:Imperial Gunner deals 1 damage to target player or Starship creature.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl("{1}"));
-        ability.addTarget(new TargetCreatureOrPlayer(filter));
+        ability.addTarget(new TargetAnyTarget(filter));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

@@ -37,7 +37,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -52,7 +52,7 @@ public class PsionicBlast extends CardImpl {
         // Psionic Blast deals 4 damage to target creature or player and 2 damage to you.
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));
         this.getSpellAbility().addEffect(new PsionicBlastEffect());
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
     public PsionicBlast(final PsionicBlast card) {

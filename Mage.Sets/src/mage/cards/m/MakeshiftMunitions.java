@@ -38,7 +38,7 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetControlledPermanent;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 import java.util.UUID;
 
@@ -59,7 +59,7 @@ public class MakeshiftMunitions extends CardImpl {
                 new DamageTargetEffect(1),
                 new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_OR_CREATURE))
         );
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         ability.addCost(new GenericManaCost(1));
         this.addAbility(ability);
     }

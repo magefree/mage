@@ -36,7 +36,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -55,7 +55,7 @@ public class CratersClaws extends CardImpl {
                 FerociousCondition.instance,
                 "{this} deals X damage to target creature or player." +
                 "<br><i>Ferocious</i> &mdash; {this} deals X plus 2 damage to that creature or player instead if you control a creature with power 4 or greater"));
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
     public CratersClaws(final CratersClaws card) {

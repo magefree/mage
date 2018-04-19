@@ -44,7 +44,7 @@ import mage.constants.SuperType;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetOpponent;
 
 /**
@@ -63,7 +63,7 @@ public class SorinMarkov extends CardImpl {
         // +2: Sorin Markov deals 2 damage to target creature or player and you gain 2 life.
         LoyaltyAbility ability1 = new LoyaltyAbility(new DamageTargetEffect(2), 2);
         ability1.addEffect(new GainLifeEffect(2));
-        ability1.addTarget(new TargetCreatureOrPlayer());
+        ability1.addTarget(new TargetAnyTarget());
         this.addAbility(ability1);
 
         // -3: Target opponent's life total becomes 10.

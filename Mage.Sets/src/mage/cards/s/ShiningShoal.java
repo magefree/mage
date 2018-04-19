@@ -51,7 +51,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetSource;
 import mage.target.common.TargetCardInHand;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -72,7 +72,7 @@ public class ShiningShoal extends CardImpl {
         // The next X damage that a source of your choice would deal to you and/or creatures you control this turn is dealt to target creature or player instead.
         this.getSpellAbility().addEffect(new ShiningShoalRedirectDamageTargetEffect(Duration.EndOfTurn, new ExileFromHandCostCardConvertedMana()));
         this.getSpellAbility().addTarget(new TargetSource());
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
     public ShiningShoal(final ShiningShoal card) {

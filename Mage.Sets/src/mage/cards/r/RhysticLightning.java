@@ -35,7 +35,7 @@ import mage.abilities.effects.common.DoUnlessTargetPlayerOrTargetsControllerPays
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -51,7 +51,7 @@ public class RhysticLightning extends CardImpl {
             "Pay {2} to have {this} deal 2 damage instead of 4 damage?");
         effect.setText("{this} deals 4 damage to target creature or player unless that creature's controller or that player pays {2}. If he or she does, {this} deals 2 damage to the creature or player");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
     public RhysticLightning(final RhysticLightning card) {

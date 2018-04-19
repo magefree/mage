@@ -52,7 +52,7 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 import mage.watchers.common.CardsAmountDrawnThisTurnWatcher;
 
 /**
@@ -135,7 +135,7 @@ class KeranosGodOfStormsTriggeredAbility extends TriggeredAbilityImpl {
                         this.addEffect(new DrawCardSourceControllerEffect(1));
                     } else {
                         this.addEffect(new DamageTargetEffect(3));
-                        this.addTarget(new TargetCreatureOrPlayer());
+                        this.addTarget(new TargetAnyTarget());
                     }
                     return true;
                 }

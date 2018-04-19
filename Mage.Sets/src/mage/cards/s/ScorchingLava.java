@@ -47,7 +47,7 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -68,7 +68,7 @@ public class ScorchingLava extends CardImpl {
                 new ExileTargetIfDiesEffect(),
                 new LockedInCondition(KickedCondition.instance)
         ).setText("and if it would die this turn, exile it instead"));
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
     public ScorchingLava(final ScorchingLava card) {

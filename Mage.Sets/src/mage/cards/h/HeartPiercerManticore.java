@@ -52,7 +52,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -72,7 +72,7 @@ public class HeartPiercerManticore extends CardImpl {
         this.addAbility(firstAbility);
         // When you do, Heart-Piercer Manticore deals damage equal to that creature's power to target creature or player.
         Ability secondAbility = new HeartPiercerManticoreSacrificeTriggeredAbility(firstAbility.getOriginalId());
-        secondAbility.addTarget(new TargetCreatureOrPlayer());
+        secondAbility.addTarget(new TargetAnyTarget());
         this.addAbility(secondAbility);
         // Embalm {5}{R}
         this.addAbility(new EmbalmAbility(new ManaCostsImpl("{5}{R}"), this));

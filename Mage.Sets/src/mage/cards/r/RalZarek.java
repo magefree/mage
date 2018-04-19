@@ -48,7 +48,7 @@ import mage.game.Game;
 import mage.game.turn.TurnMod;
 import mage.players.Player;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 import mage.target.targetpointer.SecondTargetPointer;
 
 /**
@@ -86,7 +86,7 @@ public class RalZarek extends CardImpl {
 
         // -2: Ral Zarek deals 3 damage to target creature or player.
         LoyaltyAbility ability2 = new LoyaltyAbility(new DamageTargetEffect(3), -2);
-        ability2.addTarget(new TargetCreatureOrPlayer());
+        ability2.addTarget(new TargetAnyTarget());
         this.addAbility(ability2);
 
         // -7: Flip five coins. Take an extra turn after this one for each coin that comes up heads.

@@ -43,7 +43,7 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -60,7 +60,7 @@ public class FurystokeGiant extends CardImpl {
 
         // When Furystoke Giant enters the battlefield, other creatures you control gain "{tap}: This creature deals 2 damage to target creature or player" until end of turn.
         SimpleActivatedAbility FurystokeGiantAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new TapSourceCost());
-        FurystokeGiantAbility.addTarget(new TargetCreatureOrPlayer());
+        FurystokeGiantAbility.addTarget(new TargetAnyTarget());
         Effect effect = new GainAbilityAllEffect(FurystokeGiantAbility, Duration.EndOfTurn, new FilterControlledCreaturePermanent("other creatures"), true);
         effect.setText("other creatures you control gain \"{T}: This creature deals 2 damage to target creature or player.\" until end of turn.");
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect));

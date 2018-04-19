@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -53,7 +53,7 @@ public class HarshSustenance extends CardImpl {
         Effect effect = new DamageTargetEffect(xValue);
         effect.setText("{this} deals X damage to target creature or player");
         getSpellAbility().addEffect(effect);
-        getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        getSpellAbility().addTarget(new TargetAnyTarget());
         effect = new GainLifeEffect(xValue);
         effect.setText("and you gain X life, where X is the number of creatures you control");
         getSpellAbility().addEffect(effect);

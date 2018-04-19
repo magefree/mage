@@ -49,7 +49,7 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -71,7 +71,7 @@ public class Hankyu extends CardImpl {
          * aim counters removed this way." */
         SimpleActivatedAbility ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new HankyuDealsDamageEffect(), new TapSourceCost());
         ability2.addCost(new HankyuCountersSourceCost(this.getId()));
-        ability2.addTarget(new TargetCreatureOrPlayer());
+        ability2.addTarget(new TargetAnyTarget());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability2, AttachmentType.EQUIPMENT)));
 
         // Equip {4} ({4}: Attach to target creature you control. Equip only as a sorcery.)

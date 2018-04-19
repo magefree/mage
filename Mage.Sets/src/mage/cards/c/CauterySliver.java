@@ -46,7 +46,7 @@ import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreatureOrPlayer;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -65,7 +65,7 @@ public class CauterySliver extends CardImpl {
         // All Slivers have "{1}, Sacrifice this permanent: This permanent deals 1 damage to target creature or player."
         Ability ability1 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl("1"));
         ability1.addCost(new SacrificeSourceCost());
-        ability1.addTarget(new TargetCreatureOrPlayer());
+        ability1.addTarget(new TargetAnyTarget());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new GainAbilityAllEffect(ability1, Duration.WhileOnBattlefield, filter,
                         "All Slivers have \"{1}, Sacrifice this permanent: This permanent deals 1 damage to target creature or player.\"")));
@@ -89,7 +89,7 @@ public class CauterySliver extends CardImpl {
 }
 
 
-class TargetSliverCreatureOrPlayer extends TargetCreatureOrPlayer {
+class TargetSliverCreatureOrPlayer extends TargetAnyTarget {
     public TargetSliverCreatureOrPlayer(){
         super();
         filter = new FilterCreatureOrPlayerByType("Sliver", "Sliver creature or player");

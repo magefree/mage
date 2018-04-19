@@ -45,7 +45,7 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetCreaturePermanent;
 
 public class FleshBlood extends SplitCard {
@@ -63,7 +63,7 @@ public class FleshBlood extends SplitCard {
         // Blood
         // Target creature you control deals damage equal to its power to target creature or player.
         getRightHalfCard().getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
-        getRightHalfCard().getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        getRightHalfCard().getSpellAbility().addTarget(new TargetAnyTarget());
         getRightHalfCard().getSpellAbility().addEffect(new BloodEffect());
 
     }

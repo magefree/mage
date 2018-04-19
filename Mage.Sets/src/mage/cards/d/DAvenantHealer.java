@@ -50,7 +50,7 @@ import mage.target.common.TargetCreatureOrPlayer;
 public class DAvenantHealer extends CardImpl {
 
     public DAvenantHealer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.CLERIC);
         this.subtype.add(SubType.ARCHER);

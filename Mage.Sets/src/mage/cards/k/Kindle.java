@@ -40,7 +40,7 @@ import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.players.PlayerList;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -62,7 +62,7 @@ public class Kindle extends CardImpl {
         Effect effect = new DamageTargetEffect(new KindleCardsInAllGraveyardsCount(filter));
         effect.setText("{this} deals X damage to target creature or player, where X is 2 plus the number of cards named {source} in all graveyards");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
     public Kindle(final Kindle card) {

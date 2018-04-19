@@ -36,7 +36,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -53,7 +53,7 @@ public class MudbuttonTorchrunner extends CardImpl {
         this.toughness = new MageInt(1);
         // When Mudbutton Torchrunner dies, it deals 3 damage to target creature or player.
         Ability ability = new DiesTriggeredAbility(new DamageTargetEffect(3, "it"), false);
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }
 

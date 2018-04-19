@@ -35,7 +35,7 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -50,7 +50,7 @@ public class WarleadersHelix extends CardImpl {
         // Warleader's Helix deals 4 damage to target creature or player and you gain 4 life.
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));
         this.getSpellAbility().addEffect(new GainLifeEffect(4));
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
     public WarleadersHelix(final WarleadersHelix card) {

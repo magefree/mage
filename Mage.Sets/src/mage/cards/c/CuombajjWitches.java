@@ -43,7 +43,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetOpponent;
 
 /**
@@ -67,8 +67,8 @@ public class CuombajjWitches extends CardImpl {
         Effect effect = new DamageTargetEffect(1);
         effect.setText("{this} deals 1 damage to target creature or player and 1 damage to target creature or player of an opponent's choice");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
-        ability.addTarget(new TargetCreatureOrPlayer());
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
+        ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
         originalId = ability.getOriginalId();
     }

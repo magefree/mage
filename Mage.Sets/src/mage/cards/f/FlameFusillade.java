@@ -38,7 +38,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -52,7 +52,7 @@ public class FlameFusillade extends CardImpl {
 
         // Until end of turn, permanents you control gain "{tap}: This permanent deals 1 damage to target creature or player."
         Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
-        gainedAbility.addTarget(new TargetCreatureOrPlayer());
+        gainedAbility.addTarget(new TargetAnyTarget());
         this.getSpellAbility().addEffect(new GainAbilityControlledEffect(gainedAbility, Duration.EndOfTurn));
     }
 

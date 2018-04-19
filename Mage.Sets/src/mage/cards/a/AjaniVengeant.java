@@ -44,7 +44,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -75,7 +75,7 @@ public class AjaniVengeant extends CardImpl {
         effects1.add(new DamageTargetEffect(3));
         effects1.add(new GainLifeEffect(3));
         LoyaltyAbility ability2 = new LoyaltyAbility(effects1, -2);
-        ability2.addTarget(new TargetCreatureOrPlayer());
+        ability2.addTarget(new TargetAnyTarget());
         this.addAbility(ability2);
 
         // −7: Destroy all lands target player controls.

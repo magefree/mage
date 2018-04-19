@@ -34,7 +34,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -51,7 +51,7 @@ public class GalvanicBlast extends CardImpl {
         // Galvanic Blast deals 2 damage to target creature or player.
         // Metalcraft - Galvanic Blast deals 4 damage to that creature or player instead if you control three or more artifacts.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new DamageTargetEffect(4), new DamageTargetEffect(2), MetalcraftCondition.instance, effectText));
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
     public GalvanicBlast(final GalvanicBlast card) {

@@ -32,7 +32,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -45,7 +45,7 @@ public class OpenFire extends CardImpl {
 
         // Open Fire deals 3 damage to target creature or player.
         getSpellAbility().addEffect(new DamageTargetEffect(3));
-        getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
     public OpenFire(final OpenFire card) {

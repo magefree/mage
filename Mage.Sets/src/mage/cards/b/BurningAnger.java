@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -67,7 +67,7 @@ public class BurningAnger extends CardImpl {
         Effect effect = new DamageTargetEffect(new SourcePermanentPowerCount());
         effect.setText("{this} deals damage equal to its power to target creature or player");
         Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
-        gainedAbility.addTarget(new TargetCreatureOrPlayer());
+        gainedAbility.addTarget(new TargetAnyTarget());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield,
                 "Enchanted creature has \"{T}: This creature deals damage equal to its power to target creature or player.\"")));
     }

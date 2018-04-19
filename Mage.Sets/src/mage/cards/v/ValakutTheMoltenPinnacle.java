@@ -45,7 +45,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -86,7 +86,7 @@ class ValakutTheMoltenPinnacleTriggeredAbility extends TriggeredAbilityImpl {
 
     ValakutTheMoltenPinnacleTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(3), true);
-        this.addTarget(new TargetCreatureOrPlayer());
+        this.addTarget(new TargetAnyTarget());
     }
 
     ValakutTheMoltenPinnacleTriggeredAbility(ValakutTheMoltenPinnacleTriggeredAbility ability) {

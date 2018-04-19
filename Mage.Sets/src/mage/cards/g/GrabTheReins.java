@@ -45,7 +45,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -74,7 +74,7 @@ public class GrabTheReins extends CardImpl {
         // or sacrifice a creature, then Grab the Reins deals damage equal to that creature's power to target creature or player.
         Mode mode = new Mode();
         mode.getEffects().add(new GrabTheReinsEffect());
-        TargetCreatureOrPlayer target2 = new TargetCreatureOrPlayer();
+        TargetAnyTarget target2 = new TargetAnyTarget();
         target2.setTargetName("a creature or player to damage");
         mode.getTargets().add(target2);
         this.getSpellAbility().getModes().addMode(mode);

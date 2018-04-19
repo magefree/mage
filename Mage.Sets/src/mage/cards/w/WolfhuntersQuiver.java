@@ -42,7 +42,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -63,7 +63,7 @@ public class WolfhuntersQuiver extends CardImpl {
 
         // Equipped creature has "{T}: This creature deals 1 damage to target creature or player"
         Ability abilityToGain = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
-        abilityToGain.addTarget(new TargetCreatureOrPlayer());
+        abilityToGain.addTarget(new TargetAnyTarget());
         Effect effect = new GainAbilityAttachedEffect(abilityToGain, AttachmentType.EQUIPMENT);
         effect.setText("Equipped creature has \"{T}: This creature deals 1 damage to target creature or player\"");
         SimpleStaticAbility ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);

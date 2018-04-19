@@ -40,7 +40,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -54,7 +54,7 @@ public class ConeOfFlame extends CardImpl {
 
         // Cone of Flame deals 1 damage to target creature or player, 2 damage to another target creature or player, and 3 damage to a third target creature or player.
         FilterCreatureOrPlayer filter1 = new FilterCreatureOrPlayer("creature or player to deal 1 damage");
-        TargetCreatureOrPlayer target1 = new TargetCreatureOrPlayer(1, 1, filter1);
+        TargetAnyTarget target1 = new TargetAnyTarget(1, 1, filter1);
         target1.setTargetTag(1);
         this.getSpellAbility().addTarget(target1);
         
@@ -62,7 +62,7 @@ public class ConeOfFlame extends CardImpl {
         AnotherTargetPredicate predicate2 = new AnotherTargetPredicate(2);
         filter2.getCreatureFilter().add(predicate2);
         filter2.getPlayerFilter().add(predicate2);
-        TargetCreatureOrPlayer target2 = new TargetCreatureOrPlayer(1, 1, filter2);
+        TargetAnyTarget target2 = new TargetAnyTarget(1, 1, filter2);
         target2.setTargetTag(2);
         this.getSpellAbility().addTarget(target2);
         
@@ -70,7 +70,7 @@ public class ConeOfFlame extends CardImpl {
         AnotherTargetPredicate predicate3 = new AnotherTargetPredicate(3);
         filter3.getCreatureFilter().add(predicate3);
         filter3.getPlayerFilter().add(predicate3);
-        TargetCreatureOrPlayer target3 = new TargetCreatureOrPlayer(1, 1, filter3);
+        TargetAnyTarget target3 = new TargetAnyTarget(1, 1, filter3);
         target3.setTargetTag(3);
         this.getSpellAbility().addTarget(target3);
         

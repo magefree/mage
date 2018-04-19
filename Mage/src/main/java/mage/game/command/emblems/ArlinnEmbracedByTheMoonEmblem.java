@@ -41,7 +41,7 @@ import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.command.Emblem;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -59,7 +59,7 @@ public class ArlinnEmbracedByTheMoonEmblem extends Emblem {
         Effect effect2 = new DamageTargetEffect(new SourcePermanentPowerCount());
         effect2.setText("This creature deals damage equal to its power to target creature or player");
         Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect2, new TapSourceCost());
-        ability2.addTarget(new TargetCreatureOrPlayer());
+        ability2.addTarget(new TargetAnyTarget());
         effect = new GainAbilityControlledEffect(ability2, Duration.EndOfGame, filter);
         effect.setText("and '{T}: This creature deals damage equal to its power to target creature or player");
         ability.addEffect(effect);

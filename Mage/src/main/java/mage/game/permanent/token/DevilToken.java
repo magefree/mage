@@ -36,7 +36,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -55,7 +55,7 @@ public class DevilToken extends TokenImpl {
         Effect effect = new DamageTargetEffect(1);
         effect.setText("it deals 1 damage to target creature or player");
         Ability ability = new DiesTriggeredAbility(effect);
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }
 

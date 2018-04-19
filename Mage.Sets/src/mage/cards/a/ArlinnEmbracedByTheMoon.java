@@ -45,7 +45,7 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.StaticFilters;
 import mage.game.command.emblems.ArlinnEmbracedByTheMoonEmblem;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -75,7 +75,7 @@ public class ArlinnEmbracedByTheMoon extends CardImpl {
         // -1: Arlinn, Embraced by the Moon deals 3 damage to target creature or player. Transform Arlinn, Embraced by the Moon.
         this.addAbility(new TransformAbility());
         ability = new LoyaltyAbility(new DamageTargetEffect(3), -1);
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         ability.addEffect(new TransformSourceEffect(false));
         this.addAbility(ability);
 

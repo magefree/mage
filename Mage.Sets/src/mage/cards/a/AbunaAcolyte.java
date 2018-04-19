@@ -57,7 +57,7 @@ public class AbunaAcolyte extends CardImpl {
     }
 
     public AbunaAcolyte(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
         this.subtype.add(SubType.CAT);
         this.subtype.add(SubType.CLERIC);
 

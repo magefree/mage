@@ -42,7 +42,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -64,7 +64,7 @@ public class NivMizzetTheFiremind extends CardImpl {
 
         // Whenever you draw a card, Niv-Mizzet, the Firemind deals 1 damage to target creature or player.
         Ability ability = new DrawCardControllerTriggeredAbility(new DamageTargetEffect(1), false);
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
 
         // {T}: Draw a card.

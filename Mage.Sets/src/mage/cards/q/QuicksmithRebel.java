@@ -45,7 +45,7 @@ import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -63,7 +63,7 @@ public class QuicksmithRebel extends CardImpl {
 
         // When Quicksmith Rebel enters the battlefield, target artifact you control gains "{T}: This artifact deals 2 damage to target creature or player" for as long as you control Quicksmith Rebel.
         Ability artifactAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new TapSourceCost());
-        artifactAbility.addTarget(new TargetCreatureOrPlayer());
+        artifactAbility.addTarget(new TargetAnyTarget());
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(
                 new GainAbilityTargetEffect(artifactAbility, Duration.Custom),
                 new SourceOnBattlefieldControlUnchangedCondition(),

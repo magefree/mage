@@ -49,7 +49,7 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -63,7 +63,7 @@ public class HealersHeaddress extends CardImpl {
 
         // Equipped creature gets +0/+2 and has "{tap}: Prevent the next 1 damage that would be dealt to target creature or player this turn."
         Ability gainAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToTargetEffect(Duration.EndOfTurn, 1), new TapSourceCost());
-        gainAbility.addTarget(new TargetCreatureOrPlayer());
+        gainAbility.addTarget(new TargetAnyTarget());
         Effect effect = new BoostEquippedEffect(0, 2);
         effect.setText("Equipped creature gets +0/+2");
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);

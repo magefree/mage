@@ -37,7 +37,7 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 import mage.watchers.Watcher;
 import mage.watchers.common.MorbidWatcher;
 
@@ -53,7 +53,7 @@ public class BrimstoneVolley extends CardImpl {
         // Brimstone Volley deals 3 damage to target creature or player.
         // Morbid - Brimstone Volley deals 5 damage to that creature or player instead if a creature died this turn.
         this.getSpellAbility().addEffect(new BrimstoneVolleyEffect());
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
     public BrimstoneVolley(final BrimstoneVolley card) {

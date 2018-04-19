@@ -35,7 +35,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -52,7 +52,7 @@ public class SpiralingEmbers extends CardImpl {
         Effect effect = new DamageTargetEffect(new CardsInControllerHandCount());
         effect.setText("{this} deals damage to target creature or player equal to the number of cards in your hand.");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
     public SpiralingEmbers(final SpiralingEmbers card) {

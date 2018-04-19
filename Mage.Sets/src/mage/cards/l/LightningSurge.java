@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TimingRule;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -55,7 +55,7 @@ public class LightningSurge extends CardImpl {
                                                      new DamageTargetEffect(4), 
                                                      new CardsInControllerGraveCondition(7),
                                                      "{this} deals 4 damage to target creature or player.<br/><br/><i>Threshold</i> - {this} deals 6 damage to that creature or player and the damage can't be prevented instead if seven or more cards are in your graveyard.");
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
         this.getSpellAbility().addEffect(effect);
         
         // Flashback {5}{R}{R}

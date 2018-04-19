@@ -40,7 +40,7 @@ import mage.filter.common.FilterCreatureOrPlayer;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 import mage.watchers.common.DamageDoneWatcher;
 
 /**
@@ -63,7 +63,7 @@ public class NeedleDrop extends CardImpl {
         Effect effect = new DamageTargetEffect(1);
         effect.setText("{this} deals 1 damage to target creature or player that was dealt damage this turn");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer(1, 1, FILTER));
+        this.getSpellAbility().addTarget(new TargetAnyTarget(1, 1, FILTER));
 
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));

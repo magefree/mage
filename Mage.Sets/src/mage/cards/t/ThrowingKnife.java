@@ -43,7 +43,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -63,7 +63,7 @@ public class ThrowingKnife extends CardImpl {
         effect.setText("you may sacrifice {this}. If you do, ");
         Ability ability = new AttacksAttachedTriggeredAbility(new SacrificeSourceEffect(), true);
         ability.addEffect(new DamageTargetEffect(2));
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));

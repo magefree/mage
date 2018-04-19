@@ -46,7 +46,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -66,7 +66,7 @@ public class Mortarpod extends CardImpl {
         SimpleActivatedAbility abilityToGain = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new DamageTargetEffect(1),
                 new SacrificeSourceCost());
-        abilityToGain.addTarget(new TargetCreatureOrPlayer());
+        abilityToGain.addTarget(new TargetAnyTarget());
         Effect effect = new GainAbilityAttachedEffect(abilityToGain, AttachmentType.EQUIPMENT);
         effect.setText("and has \"Sacrifice this creature: This creature deals 1 damage to target creature or player.\"");
         ability.addEffect(effect);

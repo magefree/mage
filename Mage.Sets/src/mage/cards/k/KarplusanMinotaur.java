@@ -45,7 +45,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetOpponent;
 
 /**
@@ -66,13 +66,13 @@ public class KarplusanMinotaur extends CardImpl {
 
         // Whenever you win a coin flip, Karplusan Minotaur deals 1 damage to target creature or player.
         Ability abilityWin = new KarplusanMinotaurFlipWinTriggeredAbility();
-        abilityWin.addTarget(new TargetCreatureOrPlayer());
+        abilityWin.addTarget(new TargetAnyTarget());
         this.addAbility(abilityWin);
 
         //TODO: Make ability properly copiable
         // Whenever you lose a coin flip, Karplusan Minotaur deals 1 damage to target creature or player of an opponent's choice.
         Ability abilityLose = new KarplusanMinotaurFlipLoseTriggeredAbility();
-        abilityLose.addTarget(new TargetCreatureOrPlayer());
+        abilityLose.addTarget(new TargetAnyTarget());
         this.addAbility(abilityLose);
     }
 

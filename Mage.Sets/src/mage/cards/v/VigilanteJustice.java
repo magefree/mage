@@ -38,7 +38,7 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -58,7 +58,7 @@ public class VigilanteJustice extends CardImpl {
 
         // Whenever a Human enters the battlefield under your control, Vigilante Justice deals 1 damage to target creature or player.
         Ability ability = new CreatureEntersBattlefieldTriggeredAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), filter, false, false);
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }
 

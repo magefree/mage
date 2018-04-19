@@ -33,7 +33,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -47,7 +47,7 @@ public class TribalFlames extends CardImpl {
 
         // Domain - Tribal Flames deals X damage to target creature or player, where X is the number of basic land types among lands you control.
         this.getSpellAbility().addEffect(new DamageTargetEffect(new DomainValue()));
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
     public TribalFlames(final TribalFlames card) {

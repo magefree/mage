@@ -34,7 +34,7 @@ import mage.abilities.keyword.MiracleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -48,7 +48,7 @@ public class ThunderousWrath extends CardImpl {
 
         // Thunderous Wrath deals 5 damage to target creature or player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(5));
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
 
         // Miracle {R}
         this.addAbility(new MiracleAbility(this, new ManaCostsImpl("{R}")));

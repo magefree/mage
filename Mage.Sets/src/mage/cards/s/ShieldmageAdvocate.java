@@ -49,7 +49,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.TargetSource;
 import mage.target.common.TargetCardInOpponentsGraveyard;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 import mage.target.targetpointer.SecondTargetPointer;
 
 /**
@@ -74,7 +74,7 @@ public class ShieldmageAdvocate extends CardImpl {
         effect.setTargetPointer(new SecondTargetPointer());
         ability.addEffect(effect);
         ability.addTarget(new TargetCardInOpponentsGraveyard(1, 1, new FilterCard(), true));
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }
 

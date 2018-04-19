@@ -43,7 +43,7 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -58,7 +58,7 @@ public class BurnFromWithin extends CardImpl {
         // Burn from Within deals X damage to target creature or player. If a creature is dealt damage this way, it loses indestructible until end of turn.
         // If that creature would die this turn, exile it instead.
         this.getSpellAbility().addEffect(new BurnFromWithinEffect());
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
 
     }
 

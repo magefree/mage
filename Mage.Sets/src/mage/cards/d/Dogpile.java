@@ -36,7 +36,7 @@ import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.predicate.permanent.ControllerPredicate;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -56,7 +56,7 @@ public class Dogpile extends CardImpl {
         // Dogpile deals damage to target creature or player equal to the number of attacking creatures you control.
         this.getSpellAbility().addEffect(new DamageTargetEffect(new PermanentsOnBattlefieldCount(filter)).
                 setText("{this} deals damage to target creature or player equal to the number of attacking creatures you control"));
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
 
     }
 

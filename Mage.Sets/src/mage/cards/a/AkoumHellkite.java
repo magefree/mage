@@ -43,7 +43,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
@@ -66,7 +66,7 @@ public class AkoumHellkite extends CardImpl {
         // <i>Landfall</i>-Whenever a land enters the battlefield under you control, Akoum Hellkite deals 1 damage to target creature or player.
         // If that land is a Mountain, Akoum Hellkite deals 2 damage to that creature or player instead.
         Ability ability = new AkoumHellkiteTriggeredAbility();
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }
 

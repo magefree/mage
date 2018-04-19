@@ -43,7 +43,7 @@ import mage.filter.common.FilterArtifactSpell;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  * @author Loki, North
@@ -59,7 +59,7 @@ public class Embersmith extends CardImpl {
 
         FilterArtifactSpell filter = new FilterArtifactSpell("an artifact spell");
         SpellCastControllerTriggeredAbility ability = new SpellCastControllerTriggeredAbility(new EmbersmithEffect(), filter, false);
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }
 

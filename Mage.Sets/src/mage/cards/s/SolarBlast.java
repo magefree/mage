@@ -36,7 +36,7 @@ import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -50,12 +50,12 @@ public class SolarBlast extends CardImpl {
 
         // Solar Blast deals 3 damage to target creature or player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
         // Cycling {1}{R}{R}
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{1}{R}{R}")));
         // When you cycle Solar Blast, you may have it deal 1 damage to target creature or player.
         Ability ability = new CycleTriggeredAbility(new DamageTargetEffect(1), true);
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }
 

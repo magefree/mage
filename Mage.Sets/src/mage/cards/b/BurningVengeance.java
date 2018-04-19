@@ -37,7 +37,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  * @author nantuko
@@ -68,7 +68,7 @@ class BurningVengeanceOnCastAbility extends TriggeredAbilityImpl {
 
     BurningVengeanceOnCastAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(2), false);
-        TargetCreatureOrPlayer target = new TargetCreatureOrPlayer();
+        TargetAnyTarget target = new TargetAnyTarget();
         this.addTarget(target);
     }
 

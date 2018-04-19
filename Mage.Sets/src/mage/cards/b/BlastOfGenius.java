@@ -39,7 +39,7 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetDiscard;
 
 /**
@@ -56,7 +56,7 @@ public class BlastOfGenius extends CardImpl {
 
         // Choose target creature or player. Draw three cards and discard a card. Blast of Genius deals damage equal to the converted mana cost of the discard card to that creature or player.
         this.getSpellAbility().addEffect(new BlastOfGeniusEffect());
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
     public BlastOfGenius(final BlastOfGenius card) {

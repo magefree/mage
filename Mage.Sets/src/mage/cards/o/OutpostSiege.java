@@ -52,7 +52,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -83,7 +83,7 @@ public class OutpostSiege extends CardImpl {
                         new FilterControlledCreaturePermanent(), "", false),
                 new ModeChoiceSourceCondition("Dragons"),
                 ruleTrigger2);
-        ability2.addTarget(new TargetCreatureOrPlayer());
+        ability2.addTarget(new TargetAnyTarget());
         this.addAbility(ability2);
 
     }

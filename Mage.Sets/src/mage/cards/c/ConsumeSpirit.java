@@ -40,7 +40,7 @@ import mage.filter.FilterMana;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 
 
@@ -61,7 +61,7 @@ public class ConsumeSpirit extends CardImpl {
 
         // Spend only black mana on X.
         // Consume Spirit deals X damage to target creature or player and you gain X life.
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
         this.getSpellAbility().addEffect(new ConsumeSpiritEffect());
         VariableCost variableCost = this.getSpellAbility().getManaCostsToPay().getVariableCosts().get(0);
         if (variableCost instanceof VariableManaCost) {

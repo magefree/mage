@@ -44,7 +44,7 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.TargetSpell;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -66,7 +66,7 @@ public class Geistblast extends CardImpl {
 
         // Geistblast deals 2 damage to target creature or player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
 
         // {2}{U}, Exile Geistblast from your graveyard: Copy target instant or sorcery you control. You may choose new targets for the copy.
         Ability ability = new SimpleActivatedAbility(Zone.GRAVEYARD, new CopyTargetSpellEffect(), new ManaCostsImpl<>("{2}{U}"));

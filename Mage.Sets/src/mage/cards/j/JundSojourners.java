@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -61,8 +61,8 @@ public class JundSojourners extends CardImpl {
         // When you cycle Jund Sojourners or it dies, you may have it deal 1 damage to target creature or player.
         Ability ability1 = new CycleTriggeredAbility(new DamageTargetEffect(1));
         Ability ability2 = new DiesTriggeredAbility(new DamageTargetEffect(1));
-        ability1.addTarget(new TargetCreatureOrPlayer());
-        ability2.addTarget(new TargetCreatureOrPlayer());
+        ability1.addTarget(new TargetAnyTarget());
+        ability2.addTarget(new TargetAnyTarget());
         this.addAbility(ability1);
         this.addAbility(ability2);
         

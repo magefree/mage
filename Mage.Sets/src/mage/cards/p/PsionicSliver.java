@@ -43,7 +43,7 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -67,7 +67,7 @@ public class PsionicSliver extends CardImpl {
                 new TapSourceCost()
         );
         ability.addEffect(new DamageSelfEffect(3).setText("3 damage to itself."));
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         this.addAbility(
                 new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(ability, Duration.WhileOnBattlefield, filter,
                         "All Sliver creatures have \"{T}: This creature deals 2 damage to target creature or player and 3 damage to itself.\"")

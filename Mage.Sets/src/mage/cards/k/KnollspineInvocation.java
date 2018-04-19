@@ -44,7 +44,7 @@ import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.target.common.TargetCardInHand;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -60,7 +60,7 @@ public class KnollspineInvocation extends CardImpl {
         // {X}, Discard a card with converted mana cost X: Knollspine Invocation deals X damage to target creature or player.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(new ManacostVariableValue(), true), new ManaCostsImpl<>("{X}"));
         ability.addCost(new DiscardTargetCost(new TargetCardInHand(filter)));
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }
 

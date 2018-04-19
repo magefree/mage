@@ -39,7 +39,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -58,7 +58,7 @@ public class TrialOfZeal extends CardImpl {
 
         // When Trial of Zeal enters the battlefield, it deals 3 damage to target creature or player.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(3, "it"));
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
 
         // When a Cartouche enters the battlefield under your control, return Trial of Zeal to its owner's hand.

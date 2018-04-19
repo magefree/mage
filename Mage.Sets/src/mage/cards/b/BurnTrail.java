@@ -33,7 +33,7 @@ import mage.abilities.keyword.ConspireAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -46,7 +46,7 @@ public class BurnTrail extends CardImpl {
 
         // Burn Trail deals 3 damage to target creature or player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
 
         // Conspire
         this.addAbility(new ConspireAbility(getId(), ConspireAbility.ConspireTargets.ONE));

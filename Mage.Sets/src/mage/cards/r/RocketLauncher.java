@@ -44,7 +44,7 @@ import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 import mage.watchers.Watcher;
 
 /**
@@ -60,7 +60,7 @@ public class RocketLauncher extends CardImpl {
         // {2}: Rocket Launcher deals 1 damage to target creature or player. Destroy Rocket Launcher at the beginning of the next end step. Activate this ability only if you've controlled Rocket Launcher continuously since the beginning of your most recent turn.
         Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD,
                                 new DamageTargetEffect(1), new GenericManaCost(2), ControlledTurnCondition.instance);
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new DestroySourceEffect(true))));
 
         this.addAbility(ability, watcher);

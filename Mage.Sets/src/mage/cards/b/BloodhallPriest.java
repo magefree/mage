@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -56,7 +56,7 @@ public class BloodhallPriest extends CardImpl {
 
         // Whenever Bloodhall Priest enters the battlefield or attacks, if you have no cards in hand, Bloodhall Priest deals 2 damage to target creature or player.
         TriggeredAbility triggeredAbility = new EntersBattlefieldOrAttacksSourceTriggeredAbility(new DamageTargetEffect(2));
-        triggeredAbility.addTarget(new TargetCreatureOrPlayer());
+        triggeredAbility.addTarget(new TargetAnyTarget());
         this.addAbility(new ConditionalTriggeredAbility(
                 triggeredAbility,
                 HellbentCondition.instance,

@@ -44,7 +44,7 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -71,7 +71,7 @@ public class MasterApothecary extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, 
                                                         new PreventDamageToTargetEffect(Duration.EndOfTurn, 2), 
                                                         new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, true)));
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }
 

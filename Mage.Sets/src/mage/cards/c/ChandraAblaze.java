@@ -52,7 +52,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInGraveyard;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetDiscard;
 
 /**
@@ -71,7 +71,7 @@ public class ChandraAblaze extends CardImpl {
         // +1: Discard a card. If a red card is discarded this way, Chandra Ablaze deals 4 damage to target creature or player.
         LoyaltyAbility ability = new LoyaltyAbility(new ChandraAblazeEffect1(), 1);
         ability.addEffect(new ChandraAblazeEffect2());
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
         // -2: Each player discards their hand, then draws three cards.
         ability = new LoyaltyAbility(new DiscardHandAllEffect(), -2);

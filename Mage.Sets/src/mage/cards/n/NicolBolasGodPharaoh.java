@@ -47,7 +47,7 @@ import mage.players.Library;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInHand;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetOpponent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -84,7 +84,7 @@ public class NicolBolasGodPharaoh extends CardImpl {
 
         // -4: Nicol Bolas, God-Pharaoh deals 7 damage to target creature or player.
         ability = new LoyaltyAbility(new DamageTargetEffect(7), -4);
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
 
         // -12: Exile each nonland permanent your opponents control.

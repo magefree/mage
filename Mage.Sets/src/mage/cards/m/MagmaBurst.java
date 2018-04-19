@@ -40,7 +40,7 @@ import mage.constants.CardType;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
 import mage.target.common.TargetControlledPermanent;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -66,7 +66,7 @@ public class MagmaBurst extends CardImpl {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         if(ability.getOriginalId().equals(originalId)) {
-             ability.addTarget(new TargetCreatureOrPlayer(KickedCondition.instance.apply(game, ability) ? 2 : 1));
+             ability.addTarget(new TargetAnyTarget(KickedCondition.instance.apply(game, ability) ? 2 : 1));
         }
     }
 

@@ -49,7 +49,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -106,7 +106,7 @@ class ClockworkHydraEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && permanent != null && permanent.getCounters(game).getCount(CounterType.P1P1) > 0) {
             permanent.removeCounters(CounterType.P1P1.createInstance(), game);
-            Target target = new TargetCreatureOrPlayer();
+            Target target = new TargetAnyTarget();
             if (controller.chooseTarget(outcome, target, source, game)) {
                 Effect effect = new DamageTargetEffect(1);
                 effect.setTargetPointer(new FixedTarget(target.getFirstTarget()));

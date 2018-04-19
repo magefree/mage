@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -57,7 +57,7 @@ public class KeldonMegaliths extends CardImpl {
         // Hellbent - {1}{R}, {tap}: Keldon Megaliths deals 1 damage to target creature or player. Activate this ability only if you have no cards in hand.
         Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl<>("{1}{R}"), HellbentCondition.instance,
                 "<i>Hellbent</i> &mdash; {1}{R}, {T}: {this} deals 1 damage to target creature or player. Activate this ability only if you have no cards in hand.");
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }
 

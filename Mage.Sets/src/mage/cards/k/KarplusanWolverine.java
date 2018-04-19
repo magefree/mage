@@ -37,7 +37,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -55,7 +55,7 @@ public class KarplusanWolverine extends CardImpl {
 
         // Whenever Karplusan Wolverine becomes blocked, you may have it deal 1 damage to target creature or player.
         Ability ability = new BecomesBlockedTriggeredAbility(new DamageTargetEffect(1), true);
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }
 

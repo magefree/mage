@@ -41,7 +41,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  * @author Loki
@@ -68,7 +68,7 @@ public class RageExtractor extends CardImpl {
 class RageExtractorTriggeredAbility extends TriggeredAbilityImpl {
     RageExtractorTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(0));
-        this.addTarget(new TargetCreatureOrPlayer());
+        this.addTarget(new TargetAnyTarget());
     }
 
     RageExtractorTriggeredAbility(final RageExtractorTriggeredAbility ability) {

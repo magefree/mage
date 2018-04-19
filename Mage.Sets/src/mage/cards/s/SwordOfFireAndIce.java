@@ -51,7 +51,7 @@ import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  * @author Loki
@@ -87,7 +87,7 @@ class SwordOfFireAndIceAbility extends TriggeredAbilityImpl {
     public SwordOfFireAndIceAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(2));
         this.addEffect(new DrawCardSourceControllerEffect(1));
-        this.addTarget(new TargetCreatureOrPlayer());
+        this.addTarget(new TargetAnyTarget());
     }
 
     public SwordOfFireAndIceAbility(final SwordOfFireAndIceAbility ability) {

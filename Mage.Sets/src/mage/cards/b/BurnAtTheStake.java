@@ -42,7 +42,7 @@ import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -64,7 +64,7 @@ public class BurnAtTheStake extends CardImpl {
         this.getSpellAbility().addCost(new TapVariableTargetCost(filter, true, "any number of"));
         // Burn at the Stake deals damage to target creature or player equal to three times the number of creatures tapped this way.
         this.getSpellAbility().addEffect(new BurnAtTheStakeEffect());
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
     public BurnAtTheStake(final BurnAtTheStake card) {

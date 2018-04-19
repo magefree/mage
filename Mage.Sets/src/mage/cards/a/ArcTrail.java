@@ -43,7 +43,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -56,7 +56,7 @@ public class ArcTrail extends CardImpl {
 
         // Arc Trail deals 2 damage to target creature or player and 1 damage to another target creature or player
         FilterCreatureOrPlayer filter1 = new FilterCreatureOrPlayer("creature or player to deal 2 damage");
-        TargetCreatureOrPlayer target1 = new TargetCreatureOrPlayer(1, 1, filter1);
+        TargetAnyTarget target1 = new TargetAnyTarget(1, 1, filter1);
         target1.setTargetTag(1);
         this.getSpellAbility().addTarget(target1);
         
@@ -64,7 +64,7 @@ public class ArcTrail extends CardImpl {
         AnotherTargetPredicate predicate = new AnotherTargetPredicate(2);
         filter2.getCreatureFilter().add(predicate);
         filter2.getPlayerFilter().add(predicate);
-        TargetCreatureOrPlayer target2 = new TargetCreatureOrPlayer(1, 1, filter2);
+        TargetAnyTarget target2 = new TargetAnyTarget(1, 1, filter2);
         target2.setTargetTag(2);
         this.getSpellAbility().addTarget(target2);
         

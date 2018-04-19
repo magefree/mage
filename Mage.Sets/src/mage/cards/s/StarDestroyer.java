@@ -47,7 +47,7 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.TIEFighterToken;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -83,7 +83,7 @@ public class StarDestroyer extends CardImpl {
 
         // {2}{R}: Star Destroyer deals 2 damge to target non-Starship creature or player.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl("{2}{R}"));
-        ability.addTarget(new TargetCreatureOrPlayer(filter3));
+        ability.addTarget(new TargetAnyTarget(filter3));
         this.addAbility(ability);
     }
 

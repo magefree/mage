@@ -40,7 +40,7 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -56,7 +56,7 @@ public class Soulblast extends CardImpl {
 
         // Soulblast deals damage to target creature or player equal to the total power of the sacrificed creatures.
         this.getSpellAbility().addEffect(new SoulblastEffect());
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
     public Soulblast(final Soulblast card) {

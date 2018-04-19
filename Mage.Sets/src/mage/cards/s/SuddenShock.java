@@ -33,7 +33,7 @@ import mage.abilities.keyword.SplitSecondAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -49,7 +49,7 @@ public class SuddenShock extends CardImpl {
         this.addAbility(new SplitSecondAbility());
         // Sudden Shock deals 2 damage to target creature or player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(2, true));
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
     public SuddenShock(final SuddenShock card) {
