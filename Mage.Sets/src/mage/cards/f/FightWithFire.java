@@ -40,6 +40,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.game.Game;
 import mage.target.common.TargetAnyTargetAmount;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
@@ -62,6 +63,7 @@ public class FightWithFire extends CardImpl {
                 + "it deals 10 damage divided as you choose among any number of targets instead."
                 + "<i> (Those targets can include players and planeswalkers.)</i>"
         ));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     public FightWithFire(final FightWithFire card) {
@@ -73,7 +75,7 @@ public class FightWithFire extends CardImpl {
         if (ability instanceof SpellAbility) {
             if (KickedCondition.instance.apply(game, ability)) {
                 ability.getTargets().clear();
-                getSpellAbility().addTarget(new TargetAnyTargetAmount(10));
+                ability.addTarget(new TargetAnyTargetAmount(10));
             }
         }
     }
