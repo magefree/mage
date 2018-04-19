@@ -37,7 +37,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetOpponent;
+import mage.target.common.TargetOpponentOrPlaneswalker;
 
 /**
  *
@@ -53,9 +53,9 @@ public class FinalStrike extends CardImpl {
 
         // Final Strike deals damage to target opponent equal to the sacrificed creature's power.
         Effect effect = new DamageTargetEffect(new SacrificeCostCreaturesPower());
-        effect.setText("{this} deals damage to target opponent equal to the sacrificed creature's power");
+        effect.setText("{this} deals damage to target opponent or planeswalker equal to the sacrificed creature's power");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetOpponent());
+        this.getSpellAbility().addTarget(new TargetOpponentOrPlaneswalker());
     }
 
     public FinalStrike(final FinalStrike card) {

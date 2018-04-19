@@ -35,7 +35,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterControlledArtifactPermanent;
-import mage.target.TargetPlayer;
+import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
  *
@@ -44,14 +44,13 @@ import mage.target.TargetPlayer;
 public class FeedbackBolt extends CardImpl {
 
     public FeedbackBolt(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{R}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{4}{R}");
 
         // Feedback Bolt deals damage to target player equal to the number of artifacts you control.
         Effect effect = new DamageTargetEffect(new PermanentsOnBattlefieldCount(new FilterControlledArtifactPermanent()));
-        effect.setText("{this} deals damage to target player equal to the number of artifacts you control");
+        effect.setText("{this} deals damage to target player or planeswalker equal to the number of artifacts you control");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
     }
 
     public FeedbackBolt(final FeedbackBolt card) {
