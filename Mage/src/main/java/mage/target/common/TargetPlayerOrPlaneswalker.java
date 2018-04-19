@@ -12,6 +12,7 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.constants.Zone;
 import mage.filter.Filter;
+import mage.filter.common.FilterPlaneswalkerPermanent;
 import mage.filter.common.FilterPlayerOrPlaneswalker;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -211,6 +212,10 @@ public class TargetPlayerOrPlaneswalker extends TargetImpl {
             }
         }
         return sb.toString();
+    }
+
+    public FilterPlaneswalkerPermanent getPlaneswalkerFilter() {
+        return filter.getPlaneswalkerFilter();
     }
 
     @Override
