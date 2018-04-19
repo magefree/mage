@@ -70,7 +70,7 @@ public class AkoumPlane extends Plane {
         this.setExpansionSetCodeForImage("PCA");
 
         // Players may cast enchantment spells as if they had flash
-        SimpleStaticAbility ability = new SimpleStaticAbility(Zone.COMMAND, new CastAsThoughItHadFlashAllEffect(Duration.Custom, filterCard, false));
+        SimpleStaticAbility ability = new SimpleStaticAbility(Zone.COMMAND, new CastAsThoughItHadFlashAllEffect(Duration.Custom, filterCard, true));
         this.getAbilities().add(ability);
 
         // Active player can roll the planar die: Whenever you roll {CHAOS}, destroy target creature that isn't enchanted
