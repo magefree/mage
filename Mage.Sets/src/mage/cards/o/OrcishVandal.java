@@ -41,23 +41,25 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetControlledPermanent;
-import mage.target.common.TargetCreatureOrPlayer;
 
 import java.util.UUID;
+import mage.target.common.TargetAnyTarget;
+
 /**
  *
  * @author themattfiles
  */
 public class OrcishVandal extends CardImpl {
+
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("an artifact");
 
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
-    
+
     public OrcishVandal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
-        
+
         this.subtype.add(SubType.ORC);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(1);
@@ -65,7 +67,7 @@ public class OrcishVandal extends CardImpl {
 
         // {t}, Sacrifice an artifact: Orcish Vandal deals 2 damage to any target.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new TapSourceCost());
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
         this.addAbility(ability);
     }

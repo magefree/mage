@@ -36,7 +36,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -45,8 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class AbunasChant extends CardImpl {
 
     public AbunasChant(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{W}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{W}");
 
         // Choose one - 
         this.getSpellAbility().getModes().setMinModes(1);
@@ -56,7 +55,7 @@ public class AbunasChant extends CardImpl {
         //or prevent the next 5 damage that would be dealt to target creature this turn.
         Mode mode = new Mode();
         mode.getEffects().add(new PreventDamageToTargetEffect(Duration.EndOfTurn, 5));
-        mode.getTargets().add(new TargetCreaturePermanent());
+        mode.getTargets().add(new TargetAnyTarget());
         this.getSpellAbility().getModes().addMode(mode);
         // Entwine {2}
         this.addAbility(new EntwineAbility("{2}"));
