@@ -51,13 +51,13 @@ public class ArrowStorm extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DamageTargetEffect(4),
                 new InvertCondition(RaidCondition.instance),
-                "{this} deals 4 damage to target creature or player"));
+                "{this} deals 4 damage to any target"));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
         // Raid - If you attacked with a creature this turn, instead Arrow Storm deals 5 damage to that creature or player and the damage can't be prevented.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DamageTargetEffect(5, false),
                 RaidCondition.instance,
-                "<br/><br/><i>Raid</i> &mdash; If you attacked with a creature this turn, instead {this} deals 5 damage to that creature or player and the damage can't be prevented"));
+                "<br/><br/><i>Raid</i> &mdash; If you attacked with a creature this turn, instead {this} deals 5 damage to that permanent or player and the damage can't be prevented"));
         this.getSpellAbility().addWatcher(new PlayerAttackedWatcher());
     }
 

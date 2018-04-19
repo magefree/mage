@@ -47,7 +47,7 @@ import mage.target.common.TargetAnyTarget;
 public class OrimsTouch extends CardImpl {
 
     public OrimsTouch(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{W}");
 
         // Kicker {1}
         this.addAbility(new KickerAbility("{1}"));
@@ -57,11 +57,11 @@ public class OrimsTouch extends CardImpl {
                 new PreventDamageToTargetEffect(Duration.EndOfTurn, 4),
                 new LockedInCondition(KickedCondition.instance),
                 new PreventDamageToTargetEffect(Duration.EndOfTurn, 2));
-        effect.setText("Prevent the next 2 damage that would be dealt to target creature or player this turn. If Orim's Touch was kicked, prevent the next 4 damage that would be dealt to that creature or player this turn instead");
+        effect.setText("Prevent the next 2 damage that would be dealt to any target this turn. If Orim's Touch was kicked, prevent the next 4 damage that would be dealt to that permanent or player this turn instead");
         this.getSpellAbility().addTarget(new TargetAnyTarget());
         this.getSpellAbility().addEffect(effect);
     }
-    
+
     public OrimsTouch(final OrimsTouch card) {
         super(card);
     }

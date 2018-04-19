@@ -78,7 +78,7 @@ class GuardianAngelEffect extends OneShotEffect {
 
     public GuardianAngelEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Prevent the next X damage that would be dealt to target creature or player this turn. Until end of turn, you may pay {1} any time you could cast an instant. If you do, prevent the next 1 damage that would be dealt to that creature or player this turn";
+        this.staticText = "Prevent the next X damage that would be dealt to any target this turn. Until end of turn, you may pay {1} any time you could cast an instant. If you do, prevent the next 1 damage that would be dealt to that permanent or player this turn";
     }
 
     public GuardianAngelEffect(final GuardianAngelEffect effect) {

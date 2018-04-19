@@ -50,15 +50,14 @@ import mage.target.common.TargetAnyTarget;
 public class RiddleOfLightning extends CardImpl {
 
     public RiddleOfLightning(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{R}{R}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{R}{R}");
 
         // Choose target creature or player. Scry 3, then reveal the top card of your library. Riddle of Lightning deals damage equal to that card's converted mana cost to that creature or player.
         this.getSpellAbility().addTarget(new TargetAnyTarget());
         Effect effect = new ScryEffect(3);
-        effect.setText("Choose target creature or player. Scry 3");
+        effect.setText("Choose any target. Scry 3");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addEffect(new RiddleOfLightningEffect());                
+        this.getSpellAbility().addEffect(new RiddleOfLightningEffect());
     }
 
     public RiddleOfLightning(final RiddleOfLightning card) {
@@ -72,21 +71,21 @@ public class RiddleOfLightning extends CardImpl {
 }
 
 class RiddleOfLightningEffect extends OneShotEffect {
-    
+
     public RiddleOfLightningEffect() {
         super(Outcome.Damage);
-        this.staticText = ", then reveal the top card of your library. {this} deals damage equal to that card's converted mana cost to that creature or player";
+        this.staticText = ", then reveal the top card of your library. {this} deals damage equal to that card's converted mana cost to that permanent or player";
     }
-    
+
     public RiddleOfLightningEffect(final RiddleOfLightningEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public RiddleOfLightningEffect copy() {
         return new RiddleOfLightningEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
@@ -104,8 +103,8 @@ class RiddleOfLightningEffect extends OneShotEffect {
                 if (targetPlayer != null) {
                     targetPlayer.damage(card.getConvertedManaCost(), source.getSourceId(), game, false, true);
                     return true;
-                }                
-             }
+                }
+            }
             return true;
         }
         return false;
