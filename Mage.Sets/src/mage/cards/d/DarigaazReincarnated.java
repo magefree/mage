@@ -118,8 +118,12 @@ class DarigaazReincarnatedDiesEffect extends ReplacementEffectImpl {
         Permanent permanent = ((ZoneChangeEvent) event).getTarget();
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && permanent != null) {
+            Card permCard = game.getCard(permanent.getId());
+            if (permCard == null) {
+                return false;
+            }
             return controller.moveCardToExileWithInfo(permanent, null, null, source.getSourceId(), game, Zone.BATTLEFIELD, true)
-                    && permanent.addCounters(CounterType.EGG.createInstance(), source, game);
+                    && permCard.addCounters(CounterType.EGG.createInstance(3), source, game);
         }
         return false;
     }
