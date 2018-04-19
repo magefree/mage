@@ -1,13 +1,12 @@
 package mage.cards.k;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.AnyPlayerControlsCondition;
-import mage.abilities.condition.common.DefendingPlayerControlsCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.effects.common.continuous.BoostControlledEffect;
-import mage.abilities.effects.common.continuous.BoostSourceWhileControlsEffect;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.HexproofFromBlackAbility;
 import mage.cards.CardImpl;
@@ -19,7 +18,7 @@ import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
-import java.util.UUID;
+
 
 public class KnightOfGrace extends CardImpl {
 
@@ -41,7 +40,7 @@ public class KnightOfGrace extends CardImpl {
 
         //Knight of Grace gets +1/+0 as long as any player controls a black permanent.
         addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
-                new BoostControlledEffect(1, 0, Duration.WhileOnBattlefield),
+                new BoostSourceEffect(1, 0, Duration.WhileOnBattlefield),
                 new AnyPlayerControlsCondition(filter),
                 "{this} gets +1/+0 as long as any player controls a black permanent.")));
 
