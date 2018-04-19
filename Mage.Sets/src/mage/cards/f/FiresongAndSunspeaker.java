@@ -162,6 +162,26 @@ class GainAbilitySpellsEffect extends ContinuousEffectImpl {
         Player player = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (player != null && permanent != null) {
+            for (Card card : game.getExile().getAllCards(game)) {
+                if (card.getOwnerId().equals(source.getControllerId()) && filter.match(card, game)) {
+                    game.getState().addOtherAbility(card, ability);
+                }
+            }
+            for (Card card : player.getLibrary().getCards(game)) {
+                if (filter.match(card, game)) {
+                    game.getState().addOtherAbility(card, ability);
+                }
+            }
+            for (Card card : player.getHand().getCards(game)) {
+                if (filter.match(card, game)) {
+                    game.getState().addOtherAbility(card, ability);
+                }
+            }
+            for (Card card : player.getGraveyard().getCards(game)) {
+                if (filter.match(card, game)) {
+                    game.getState().addOtherAbility(card, ability);
+                }
+            }
             for (StackObject stackObject : game.getStack()) {
                 if (stackObject.getControllerId().equals(source.getControllerId())) {
                     Card card = game.getCard(stackObject.getSourceId());
