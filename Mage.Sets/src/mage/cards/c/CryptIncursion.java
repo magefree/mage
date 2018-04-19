@@ -97,7 +97,7 @@ class CryptIncursionEffect extends OneShotEffect {
                     }
                 }
             }
-            player.gainLife(exiledCards * 3, game);
+            player.gainLife(exiledCards * 3, game, source);
             return true;
         }
         return false;

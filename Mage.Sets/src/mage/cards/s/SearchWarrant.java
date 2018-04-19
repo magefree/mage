@@ -87,7 +87,7 @@ class SearchWarrantEffect extends OneShotEffect {
         if (player != null && targetPlayer != null) {
             targetPlayer.revealCards("Search Warrant", targetPlayer.getHand(), game);
             int ctd = targetPlayer.getHand().size();
-            player.gainLife(ctd, game);
+            player.gainLife(ctd, game, source);
             return true;
         }
         return false;

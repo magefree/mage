@@ -123,7 +123,7 @@ public interface Player extends MageItem, Copyable<Player> {
      */
     int loseLife(int amount, Game game, boolean atCombat);
 
-    int gainLife(int amount, Game game);
+    int gainLife(int amount, Game game, Ability source);
 
     int damage(int damage, UUID sourceId, Game game, boolean combatDamage, boolean preventable);
 

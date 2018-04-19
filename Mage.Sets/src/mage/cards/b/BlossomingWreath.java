@@ -80,7 +80,7 @@ public class BlossomingWreath extends CardImpl {
         public boolean apply(Game game, Ability source) {
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null) {
-                controller.gainLife(controller.getGraveyard().count(new FilterCreatureCard(), game), game);
+                controller.gainLife(controller.getGraveyard().count(new FilterCreatureCard(), game), game, source);
                 return true;
             }
             return false;

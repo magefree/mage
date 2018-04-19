@@ -88,7 +88,7 @@ class DebtToTheDeathlessEffect extends OneShotEffect {
                     lifeLost += opponent.loseLife(xValue * 2, game, false);
                 }
             }
-            controller.gainLife(lifeLost, game);
+            controller.gainLife(lifeLost, game, source);
             return true;
         }
         return false;

@@ -101,7 +101,7 @@ class LifeChiselEffect extends OneShotEffect {
                 if (cost instanceof SacrificeTargetCost) {
                     int amount = ((SacrificeTargetCost) cost).getPermanents().get(0).getToughness().getValue();
                     if (amount > 0) {
-                        controller.gainLife(amount, game);
+                        controller.gainLife(amount, game, source);
                     }
                 }
             }

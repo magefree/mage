@@ -100,7 +100,7 @@ class DiscipleOfGriselbrandEffect extends OneShotEffect {
                 amount = ((SacrificeTargetCost) cost).getPermanents().get(0).getToughness().getValue();
                 Player player = game.getPlayer(source.getControllerId());
                 if (amount > 0 && player != null) {
-                    player.gainLife(amount, game);
+                    player.gainLife(amount, game, source);
                     return true;
                 }
             }

@@ -108,7 +108,7 @@ class ThallidOmnivoreEffect extends OneShotEffect {
                     SacrificeTargetCost sacrificeCost = (SacrificeTargetCost) cost;
                     List<Permanent> permanents = sacrificeCost.getPermanents();
                     if (!permanents.isEmpty() && permanents.get(0).hasSubtype(SubType.SAPROLING, game)) {
-                        controller.gainLife(2, game);
+                        controller.gainLife(2, game, source);
                     }
 
                 }

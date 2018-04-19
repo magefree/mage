@@ -100,7 +100,7 @@ class DevourFleshSacrificeEffect extends OneShotEffect {
                 int gainLife = permanent.getToughness().getValue();
                 permanent.sacrifice(source.getSourceId(), game);
                 game.applyEffects();
-                player.gainLife(gainLife, game);
+                player.gainLife(gainLife, game, source);
             } else {
                 return false;
             }

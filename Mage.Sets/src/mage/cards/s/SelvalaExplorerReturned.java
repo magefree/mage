@@ -104,7 +104,7 @@ class SelvalaExplorerReturnedEffect extends ManaEffect {
             Mana parley = getMana(game, source);
             if (parley.getGreen() > 0) {
                 controller.getManaPool().addMana(parley, game, source);
-                controller.gainLife(parley.getGreen(), game);
+                controller.gainLife(parley.getGreen(), game, source);
             }
             return true;
         }

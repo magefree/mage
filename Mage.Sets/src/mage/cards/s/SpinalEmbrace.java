@@ -143,7 +143,7 @@ class SpinalEmbraceSacrificeEffect extends OneShotEffect {
                 affectedTargets++;
                 Player controller = game.getPlayer(source.getControllerId());
                 if (controller != null) {
-                    controller.gainLife(permanent.getPower().getValue(), game);
+                    controller.gainLife(permanent.getPower().getValue(), game, source);
                 }
             }
         }

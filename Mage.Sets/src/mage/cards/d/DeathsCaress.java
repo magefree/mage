@@ -91,7 +91,7 @@ class DeathsCaressEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         Permanent creature = (Permanent) game.getLastKnownInformation(source.getFirstTarget(), Zone.BATTLEFIELD);
         if (player != null && creature != null && creature.hasSubtype(SubType.HUMAN, game)) {
-            player.gainLife(creature.getToughness().getValue(), game);
+            player.gainLife(creature.getToughness().getValue(), game, source);
             return true;
         }
         return false;

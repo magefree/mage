@@ -107,7 +107,7 @@ class ObNixilisOfTheBlackOathEffect1 extends OneShotEffect {
                     loseLife += opponent.loseLife(1, game, false);
                 }
             }
-            controller.gainLife(loseLife, game);
+            controller.gainLife(loseLife, game, source);
             return true;
 
         }

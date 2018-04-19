@@ -123,7 +123,7 @@ class GameOfChaosEffect extends OneShotEffect {
     }
         
     private void handleLifeChangesFromFlip(Game game, Player playerGainingLife, Player playerLosingLife, int lifeAmount) {        
-        playerGainingLife.gainLife(lifeAmount, game);
+        playerGainingLife.gainLife(lifeAmount, game, source);
         playerLosingLife.loseLife(lifeAmount, game, false);
     }
     

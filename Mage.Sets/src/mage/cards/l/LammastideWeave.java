@@ -98,7 +98,7 @@ class LammastideWeaveEffect extends OneShotEffect {
             if (card != null) {
                 controller.moveCards(card, Zone.GRAVEYARD, source, game);
                 if (card.getName().equals(cardName)) {
-                    controller.gainLife(card.getConvertedManaCost(), game);
+                    controller.gainLife(card.getConvertedManaCost(), game, source);
                 }
             }
             return true;

@@ -133,7 +133,7 @@ class CelestialMantleEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            player.gainLife(player.getLife(), game);
+            player.gainLife(player.getLife(), game, source);
             return true;
         }
         return false;

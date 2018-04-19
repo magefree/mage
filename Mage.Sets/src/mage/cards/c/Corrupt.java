@@ -107,7 +107,7 @@ class CorruptEffect extends OneShotEffect {
             }
             Player you = game.getPlayer(source.getControllerId());
             if (you != null) {
-                you.gainLife(damageDealt, game);
+                you.gainLife(damageDealt, game, source);
                 return true;
             }
         }

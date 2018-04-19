@@ -109,7 +109,7 @@ class TalarasBaneEffect extends OneShotEffect {
             }
             if (card != null) {
                 int lifeGain = card.getToughness().getValue();
-                you.gainLife(lifeGain, game);
+                you.gainLife(lifeGain, game, source);
                 return targetPlayer.discard(card, source, game);
             }
         }

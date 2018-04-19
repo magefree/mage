@@ -101,7 +101,7 @@ class OustEffect extends OneShotEffect {
             if (card != null) {
                 owner.getLibrary().putOnTop(card, game);
             }
-            controller.gainLife(3, game);
+            controller.gainLife(3, game, source);
 
             return true;
         }

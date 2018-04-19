@@ -118,7 +118,7 @@ class PathOfBraveryEffect extends OneShotEffect {
         Player you = game.getPlayer(source.getControllerId());
         attackers = game.getCombat().getAttackers().size();
         if (you != null) {
-            you.gainLife(attackers, game);
+            you.gainLife(attackers, game, source);
             attackers = 0;
             return true;
         }

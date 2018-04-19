@@ -90,7 +90,7 @@ class PlaneswalkersMirthEffect extends OneShotEffect {
             if (card != null) {
                 revealed.add(card);
                 opponent.revealCards("Planeswalker's Mirth", revealed, game);
-                player.gainLife(card.getConvertedManaCost(), game);
+                player.gainLife(card.getConvertedManaCost(), game, source);
             }
             return true;
         }

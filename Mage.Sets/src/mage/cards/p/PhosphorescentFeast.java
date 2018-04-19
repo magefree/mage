@@ -104,7 +104,7 @@ class PhosphorescentFeastEffect extends OneShotEffect {
                 for (Card card : cards.getCards(game)) {
                     chroma += card.getManaCost().getMana().getGreen();
                 }
-                player.gainLife(chroma * 2, game);
+                player.gainLife(chroma * 2, game, source);
             }
         }
         return true;

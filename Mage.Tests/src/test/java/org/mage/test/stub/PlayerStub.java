@@ -150,7 +150,7 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public int gainLife(int amount, Game game) {
+    public int gainLife(int amount, Game game, Ability source) {
         return 0;
     }
 

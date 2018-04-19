@@ -91,7 +91,7 @@ class ShelteringWordEffect extends OneShotEffect {
         if (player != null && permanent != null) {
             int amount = permanent.getToughness().getValue();
             if (amount > 0) {
-                player.gainLife(amount, game);
+                player.gainLife(amount, game, source);
                 return true;
             }
         }

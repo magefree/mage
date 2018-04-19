@@ -117,7 +117,7 @@ class FoulTongueInvocationEffect extends OneShotEffect {
         if (controller != null) {
             DragonOnTheBattlefieldWhileSpellWasCastWatcher watcher = (DragonOnTheBattlefieldWhileSpellWasCastWatcher) game.getState().getWatchers().get(DragonOnTheBattlefieldWhileSpellWasCastWatcher.class.getSimpleName());
             if (watcher != null && watcher.castWithConditionTrue(source.getId())) {
-                controller.gainLife(4, game);
+                controller.gainLife(4, game, source);
             }
             return true;
         }

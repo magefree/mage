@@ -90,7 +90,7 @@ class ServantOfTymaretEffect extends OneShotEffect {
         for (UUID opponentId: game.getOpponents(source.getControllerId())) {
             lostAmount += game.getPlayer(opponentId).loseLife(1, game, false);
         }
-        game.getPlayer(source.getControllerId()).gainLife(lostAmount, game);
+        game.getPlayer(source.getControllerId()).gainLife(lostAmount, game, source);
         return true;
     }
 

@@ -141,7 +141,7 @@ class BloodTributeGainLifeEffect extends OneShotEffect {
         if (player != null) {
             Integer amount = (Integer) game.getState().getValue(source.getSourceId().toString() + "_BloodTribute");
             if (amount != null && amount > 0) {
-                player.gainLife(amount, game);
+                player.gainLife(amount, game, source);
                 return true;
             }
         }

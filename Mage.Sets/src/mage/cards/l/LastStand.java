@@ -124,7 +124,7 @@ class LastStandEffect extends OneShotEffect {
             }
             // You gain 2 life for each Plains you control.
             int plains = game.getBattlefield().count(filterPlains, source.getSourceId(), source.getControllerId(), game);
-            controller.gainLife(plains * 2, game);
+            controller.gainLife(plains * 2, game, source);
             // Draw a card for each Island you control, then discard that many cards
             int islands = game.getBattlefield().count(filterIsland, source.getSourceId(), source.getControllerId(), game);
             if (islands > 0) {

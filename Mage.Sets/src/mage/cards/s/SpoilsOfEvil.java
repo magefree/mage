@@ -94,7 +94,7 @@ public class SpoilsOfEvil extends CardImpl {
             
             if(targetOpponent != null && controller != null) {
                 int cardCount = targetOpponent.getGraveyard().count(filter, game);
-                controller.gainLife(cardCount, game);
+                controller.gainLife(cardCount, game, source);
                 controller.getManaPool().addMana(Mana.ColorlessMana(cardCount), game, source);
                 return true;
             }

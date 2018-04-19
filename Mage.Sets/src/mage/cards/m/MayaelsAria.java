@@ -107,7 +107,7 @@ class MayaelsAriaEffect extends OneShotEffect {
         filter = new FilterCreaturePermanent();
         filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 9));
         if (game.getState().getBattlefield().countAll(filter, controller.getId(), game) > 0) {
-            controller.gainLife(10, game);
+            controller.gainLife(10, game, source);
         }
 
         // Then you win the game if you control a creature with power 20 or greater.

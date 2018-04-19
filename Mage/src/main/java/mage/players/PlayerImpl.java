@@ -1744,7 +1744,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     public void setLife(int life, Game game) {
         // rule 118.5
         if (life > this.life) {
-            gainLife(life - this.life, game);
+            gainLife(life - this.life, game, source);
         } else if (life < this.life) {
             loseLife(this.life - life, game, false);
         }
@@ -1807,7 +1807,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public int gainLife(int amount, Game game) {
+    public int gainLife(int amount, Game game, Ability source) {
         if (!canGainLife || amount == 0) {
             return 0;
         }
@@ -1820,7 +1820,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             if (!game.isSimulation()) {
                 game.informPlayers(this.getLogName() + " gains " + event.getAmount() + " life");
             }
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.GAINED_LIFE, playerId, playerId, playerId, event.getAmount()));
+            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.GAINED_LIFE, playerId, source.getSourceId(), playerId, event.getAmount()));
             return event.getAmount();
         }
         return 0;
@@ -1879,7 +1879,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                         }
                         if (sourceAbilities != null && sourceAbilities.containsKey(LifelinkAbility.getInstance().getId())) {
                             Player player = game.getPlayer(sourceControllerId);
-                            player.gainLife(actualDamage, game);
+                            player.gainLife(actualDamage, game, source);
                         }
                         // Unstable ability - Earl of Squirrel
                         if (sourceAbilities != null && sourceAbilities.containsKey(SquirrellinkAbility.getInstance().getId())) {
@@ -2491,12 +2491,16 @@ public abstract class PlayerImpl implements Player, Serializable {
     public PlanarDieRoll rollPlanarDie(Game game, ArrayList<UUID> appliedEffects) {
         return rollPlanarDie(game, appliedEffects, 1, 1);
     }
+
     /**
      * @param game
      * @param appliedEffects
-     * @param numberChaosSides The number of chaos sides the planar die currently has (normally 1 but can be 5)
-     * @param numberPlanarSides The number of chaos sides the planar die currently has (normally 1)
-     * @return the outcome that the player rolled.  Either ChaosRoll, PlanarRoll or NilRoll
+     * @param numberChaosSides The number of chaos sides the planar die
+     * currently has (normally 1 but can be 5)
+     * @param numberPlanarSides The number of chaos sides the planar die
+     * currently has (normally 1)
+     * @return the outcome that the player rolled. Either ChaosRoll, PlanarRoll
+     * or NilRoll
      */
     @Override
     public PlanarDieRoll rollPlanarDie(Game game, ArrayList<UUID> appliedEffects, int numberChaosSides, int numberPlanarSides) {
@@ -2508,8 +2512,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
         if (result <= numberChaosSides) {
             roll = PlanarDieRoll.CHAOS_ROLL;
-        }
-        else if (result > 6 - numberPlanarSides) {
+        } else if (result > 6 - numberPlanarSides) {
             roll = PlanarDieRoll.PLANAR_ROLL;
         }
         if (!game.isSimulation()) {

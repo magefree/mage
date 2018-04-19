@@ -108,7 +108,7 @@ class AnimalBoneyardEffect extends OneShotEffect {
                 }
             }
             if (toughness > 0) {
-                controller.gainLife(toughness, game);
+                controller.gainLife(toughness, game, source);
             }
             return true;
         }

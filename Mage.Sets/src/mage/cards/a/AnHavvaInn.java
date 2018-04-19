@@ -86,7 +86,7 @@ class AnHavvaInnEffect extends OneShotEffect {
             FilterCreaturePermanent filter = new FilterCreaturePermanent("green creatures");
             filter.add(new ColorPredicate(ObjectColor.GREEN));
             int greenCreatures = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
-            player.gainLife(greenCreatures+1, game);
+            player.gainLife(greenCreatures+1, game, source);
         }
         return true;
     }

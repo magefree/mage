@@ -90,7 +90,7 @@ class FumigateEffect extends OneShotEffect {
             }
             game.applyEffects();
             if (destroyedCreature > 0) {
-                controller.gainLife(destroyedCreature, game);
+                controller.gainLife(destroyedCreature, game, source);
             }
             return true;
         }

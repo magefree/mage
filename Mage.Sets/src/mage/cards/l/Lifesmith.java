@@ -87,7 +87,7 @@ class LifesmithEffect extends OneShotEffect {
         if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false, null)) {
             Player player = game.getPlayer(source.getControllerId());
             if (player != null) {
-                player.gainLife(3, game);
+                player.gainLife(3, game, source);
                 return true;
             }
         }

@@ -1592,7 +1592,7 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public int gainLife(int amount, Game game) {
+    public int gainLife(int amount, Game game, Ability source) {
         return computerPlayer.gainLife(amount, game);
     }
 

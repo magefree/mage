@@ -89,7 +89,7 @@ class DazzlingReflectionEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Permanent targetCreature = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
-            controller.gainLife(targetCreature.getPower().getValue(), game);
+            controller.gainLife(targetCreature.getPower().getValue(), game, source);
             ContinuousEffect effect = new DazzlingReflectionPreventEffect();
             effect.setTargetPointer(new FixedTarget(targetCreature, game));
             game.addEffect(effect, source);

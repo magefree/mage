@@ -86,7 +86,7 @@ class GerrardsVerdictEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (controller != null && targetPlayer != null) {
-            controller.gainLife(targetPlayer.discard(2, false, source, game).count(new FilterLandCard(), game) * 3, game);
+            controller.gainLife(targetPlayer.discard(2, false, source, game).count(new FilterLandCard(), game) * 3, game, source);
             return true;
         }
         return false;

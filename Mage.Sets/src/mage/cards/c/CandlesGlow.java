@@ -117,7 +117,7 @@ class CandlesGlowPreventDamageTargetEffect extends PreventionEffectImpl {
             if (prevented > 0) {
                 Player controller = game.getPlayer(source.getControllerId());
                 if (controller != null) {
-                    controller.gainLife(prevented, game);
+                    controller.gainLife(prevented, game, source);
                     game.informPlayers(new StringBuilder("Candles' Glow: Prevented ").append(prevented).append(" damage ").toString());
                     game.informPlayers(new StringBuilder("Candles' Glow: ").append(controller.getLogName()).append(" gained ").append(prevented).append("life").toString());
                 }

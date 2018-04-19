@@ -86,7 +86,7 @@ class LivingDestinyEffect extends OneShotEffect {
             Player player = game.getPlayer(source.getControllerId());
             int CMC = cost.convertedManaCosts;
             if (player != null) {
-                player.gainLife(CMC, game);
+                player.gainLife(CMC, game, source);
             }
         }
         return true;

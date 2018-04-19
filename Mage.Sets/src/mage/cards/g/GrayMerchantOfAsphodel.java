@@ -99,7 +99,7 @@ class GrayMerchantOfAsphodelEffect extends OneShotEffect {
                     }
                 }
             }
-            controller.gainLife(lifeLost, game);
+            controller.gainLife(lifeLost, game, source);
             return true;
         }
         return false;

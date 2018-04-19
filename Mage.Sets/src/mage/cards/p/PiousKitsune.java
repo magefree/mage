@@ -116,7 +116,7 @@ class PiousKitsuneEffect extends OneShotEffect {
                 if (life > 0) {
                     Player controller = game.getPlayer(source.getControllerId());
                     if (controller != null) {
-                        controller.gainLife(life, game);
+                        controller.gainLife(life, game, source);
                     }
                 }
             }

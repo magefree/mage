@@ -84,7 +84,7 @@ class NaturesClaimEffect extends OneShotEffect {
         if (target != null) {
             Player player = game.getPlayer(target.getControllerId());
             if (player != null) {
-                player.gainLife(4, game);
+                player.gainLife(4, game, source);
                 return true;
             }
         }

@@ -96,7 +96,7 @@ class ForceDrainEffect extends OneShotEffect {
             Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
             if (player != null) {
                 if (player.damage(2, source.getId(), game, false, true) > 0) {
-                    controller.gainLife(2, game);
+                    controller.gainLife(2, game, source);
                 }
                 return true;
             }

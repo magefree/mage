@@ -154,7 +154,7 @@ class UginTheSpiritDragonEffect3 extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            controller.gainLife(7, game);
+            controller.gainLife(7, game, source);
             controller.drawCards(7, game);
             TargetCardInHand target = new TargetCardInHand(0, 7, new FilterPermanentCard("permanent cards"));
             if (controller.choose(Outcome.PutCardInPlay, target, source.getSourceId(), game)) {

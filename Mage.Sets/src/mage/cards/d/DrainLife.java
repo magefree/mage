@@ -113,7 +113,7 @@ class DrainLifeEffect extends OneShotEffect {
             }
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null) {
-                controller.gainLife(lifetogain, game);
+                controller.gainLife(lifetogain, game, source);
             } else {
                 return false;
             }

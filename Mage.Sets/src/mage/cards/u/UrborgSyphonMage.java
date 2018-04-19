@@ -100,7 +100,7 @@ class UrborgSyphonMageEffect extends OneShotEffect {
                     }
                 }
             }
-            game.getPlayer(source.getControllerId()).gainLife(damage, game);
+            game.getPlayer(source.getControllerId()).gainLife(damage, game, source);
             return true;
         }
         return false;

@@ -106,7 +106,7 @@ class RiteOfConsumptionEffect extends OneShotEffect {
                 if (damage > 0) {
                     int damageDealt = targetPlayer.damage(damage, source.getSourceId(), game, false, true);
                     if (damageDealt > 0) {
-                        controller.gainLife(damage, game);
+                        controller.gainLife(damage, game, source);
                     }
 
                 }

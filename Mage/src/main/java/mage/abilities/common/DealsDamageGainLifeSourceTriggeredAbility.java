@@ -103,7 +103,7 @@ class GainThatMuchLifeEffect extends OneShotEffect {
         if (controller != null) {
             int amount = (Integer) getValue("damage");
             if (amount > 0) {
-                controller.gainLife(amount, game);
+                controller.gainLife(amount, game, source);
 
             }
             return true;
