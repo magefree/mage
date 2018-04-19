@@ -118,6 +118,16 @@ class UndercityReachesTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
+        Plane cPlane = game.getState().getCurrentPlane();
+        if (cPlane == null) {
+            return false;
+        }
+        if (cPlane != null) {
+            if (!cPlane.getName().equalsIgnoreCase("Plane - Undercity Reaches")) {
+                return false;
+            }
+        }
+
         if (((DamagedPlayerEvent) event).isCombatDamage()) {
             Permanent creature = game.getPermanent(event.getSourceId());
             if (creature != null) {
