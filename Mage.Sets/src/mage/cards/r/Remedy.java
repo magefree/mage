@@ -33,7 +33,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.target.common.TargetCreatureOrPlayerAmount;
+import mage.target.common.TargetAnyTargetAmount;
 
 /**
  *
@@ -47,7 +47,7 @@ public class Remedy extends CardImpl {
 
         // Prevent the next 5 damage that would be dealt this turn to any number of target creatures and/or players, divided as you choose.
         this.getSpellAbility().addEffect(new PreventDamageToTargetMultiAmountEffect(Duration.EndOfTurn, 5));
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayerAmount(5));
+        this.getSpellAbility().addTarget(new TargetAnyTargetAmount(5));
     }
 
     public Remedy(final Remedy card) {

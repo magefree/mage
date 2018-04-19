@@ -33,7 +33,7 @@ import mage.abilities.effects.common.DamageMultiEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.target.common.TargetCreatureOrPlayerAmount;
+import mage.target.common.TargetAnyTargetAmount;
 
 /**
  *
@@ -48,7 +48,7 @@ public class TwinBolt extends CardImpl {
         Effect effect = new DamageMultiEffect(2);
         effect.setText("{this} deals 2 damage divided as you choose among one or two target creatures and/or players");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayerAmount(2));
+        this.getSpellAbility().addTarget(new TargetAnyTargetAmount(2));
 
     }
 

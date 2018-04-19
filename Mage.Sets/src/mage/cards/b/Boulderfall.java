@@ -32,7 +32,7 @@ import mage.abilities.effects.common.DamageMultiEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.target.common.TargetCreatureOrPlayerAmount;
+import mage.target.common.TargetAnyTargetAmount;
 
 /**
  *
@@ -46,7 +46,7 @@ public class Boulderfall extends CardImpl {
 
         // Boulderfall deals 5 damage divided as you choose among any number of target creatures and/or players.
         this.getSpellAbility().addEffect(new DamageMultiEffect(5));
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayerAmount(5));
+        this.getSpellAbility().addTarget(new TargetAnyTargetAmount(5));
     }
 
     public Boulderfall(final Boulderfall card) {
