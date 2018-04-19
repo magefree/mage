@@ -47,7 +47,7 @@ public class WarlordsFury extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{R}");
 
         // Creatures you control gain first strike until end of turn.
-        getSpellAbility().addEffect(new GainAbilityAllEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent(), "Creatures you control gain trample until end of turn"));
+        getSpellAbility().addEffect(new GainAbilityAllEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent(), "Creatures you control gain first strike until end of turn"));
 
         // Draw a card.
         getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
