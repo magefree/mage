@@ -34,15 +34,13 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.effects.common.combat.CantBeBlockedAllEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.CantBeBlockedSourceAbility;
-import mage.abilities.keyword.LifelinkAbility;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.stack.Spell;
@@ -65,9 +63,9 @@ public class RelicRunner extends CardImpl {
         // Relic Runner can't be blocked if you've cast an historic spell this turn.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(
-                        new GainAbilitySourceEffect(new CantBeBlockedSourceAbility(), Duration.EndOfTurn),
+                        new GainAbilitySourceEffect(new CantBeBlockedSourceAbility(), Duration.WhileOnBattlefield),
                         new CastHistoricSpellThisTurnCondition(),
-                        "{this} can't be blocked if you've cast an historic spell this turn"
+                        "{this} can't be blocked if you've cast an historic spell this turn. <i>(Artifacts, legendaries, and Sagas are historic.)</i>"
                 )
         ), new SpellsCastWatcher());
     }

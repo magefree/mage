@@ -59,7 +59,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
 public class ShalaiVoiceOfPlenty extends CardImpl {
 
     private static final FilterControlledPermanent filter1 = new FilterControlledPermanent("planeswalkers you control");
-    private static final FilterControlledPermanent filter2 = new FilterControlledPermanent("Humans you control");
+    private static final FilterControlledPermanent filter2 = new FilterControlledPermanent();
 
     static {
         filter1.add(new CardTypePredicate(CardType.PLANESWALKER));
