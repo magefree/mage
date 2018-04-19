@@ -103,6 +103,15 @@ class FieldsOfSummerEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        Plane cPlane = game.getState().getCurrentPlane();
+        if (cPlane == null) {
+            return false;
+        }
+        if (cPlane != null) {
+            if (!cPlane.getName().equalsIgnoreCase("Plane - Fields of Summer")) {
+                return false;
+            }
+        }
         Player controller = game.getPlayer(source.getControllerId());
         Player owner = game.getPlayer(this.getTargetPointer().getFirst(game, source));
         if (owner != null && owner.canRespond() && owner.chooseUse(Outcome.Benefit, "Gain 2 life?", source, game)) {

@@ -117,8 +117,12 @@ class HedronFieldsOfAgadeemRestrictionEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (game.getState().getCurrentPlane() != null) {
-            if (!game.getState().getCurrentPlane().getName().equalsIgnoreCase("Plane - Hedron Fields of Agadeem")) {
+        Plane cPlane = game.getState().getCurrentPlane();
+        if (cPlane == null) {
+            return false;
+        }
+        if (cPlane != null) {
+            if (!cPlane.getName().equalsIgnoreCase("Plane - Hedron Fields of Agadeem")) {
                 return false;
             }
         }
