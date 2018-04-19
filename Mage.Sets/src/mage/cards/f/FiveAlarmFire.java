@@ -63,7 +63,7 @@ public class FiveAlarmFire extends CardImpl {
 
         //Whenever a creature you control deals combat damage, put a blaze counter on Five-Alarm Fire.
         this.addAbility(new FiveAlarmFireTriggeredAbility());
-        //Remove five blaze counters from Five-Alarm Fire: Five-Alarm Fire deals 5 damage to target creature or player.
+        //Remove five blaze counters from Five-Alarm Fire: Five-Alarm Fire deals 5 damage to any target.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(5), new RemoveCountersSourceCost(CounterType.BLAZE.createInstance(5)));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);

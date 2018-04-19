@@ -52,7 +52,7 @@ public class BonethornValesk extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(2);
 
-        // Whenever a permanent is turned face up, Bonethorn Valesk deals 1 damage to target creature or player.
+        // Whenever a permanent is turned face up, Bonethorn Valesk deals 1 damage to any target.
         Ability ability = new TurnedFaceUpAllTriggeredAbility(new DamageTargetEffect(1), new FilterPermanent("a permanent"));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);

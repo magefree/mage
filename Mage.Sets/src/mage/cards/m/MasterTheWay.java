@@ -47,10 +47,10 @@ public class MasterTheWay extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}{R}");
 
 
-        // Draw a card. Master the Way deals damage to target creature or player equal to the number of cards in your hand.
+        // Draw a card. Master the Way deals damage to any target equal to the number of cards in your hand.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
         Effect effect = new DamageTargetEffect(new CardsInControllerHandCount());
-        effect.setText("{this} deals damage to target creature or player equal to the number of cards in your hand");
+        effect.setText("{this} deals damage to any target equal to the number of cards in your hand");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }

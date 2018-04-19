@@ -54,7 +54,7 @@ public class CapriciousSorcerer extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // {tap}: Capricious Sorcerer deals 1 damage to target creature or player. Activate this ability only during your turn, before attackers are declared.
+        // {tap}: Capricious Sorcerer deals 1 damage to any target. Activate this ability only during your turn, before attackers are declared.
         Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, 
                 new DamageTargetEffect(1), new TapSourceCost(), MyTurnBeforeAttackersDeclaredCondition.instance);
         ability.addTarget(new TargetAnyTarget());

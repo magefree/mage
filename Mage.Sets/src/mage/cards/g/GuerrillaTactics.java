@@ -45,11 +45,11 @@ public class GuerrillaTactics extends CardImpl {
     public GuerrillaTactics(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R}");
 
-        // Guerrilla Tactics deals 2 damage to target creature or player.
+        // Guerrilla Tactics deals 2 damage to any target.
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
 
-        // When a spell or ability an opponent controls causes you to discard Guerrilla Tactics, Guerrilla Tactics deals 4 damage to target creature or player.
+        // When a spell or ability an opponent controls causes you to discard Guerrilla Tactics, Guerrilla Tactics deals 4 damage to any target.
         Ability ability = new DiscardedByOpponentTriggerAbility(new DamageTargetEffect(4));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);

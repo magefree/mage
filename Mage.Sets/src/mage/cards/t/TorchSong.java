@@ -57,7 +57,7 @@ public class TorchSong extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
                 new AddCountersSourceEffect(CounterType.VERSE.createInstance(), true), TargetController.YOU, true));
 
-        // {2}{R}, Sacrifice Torch Song: Torch Song deals X damage to target creature or player, where X is the number of verse counters on Torch Song.
+        // {2}{R}, Sacrifice Torch Song: Torch Song deals X damage to any target, where X is the number of verse counters on Torch Song.
         Ability ability = new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new DamageTargetEffect(new CountersSourceCount(CounterType.VERSE)),

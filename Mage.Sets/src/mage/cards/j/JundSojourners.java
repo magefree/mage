@@ -58,7 +58,7 @@ public class JundSojourners extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
-        // When you cycle Jund Sojourners or it dies, you may have it deal 1 damage to target creature or player.
+        // When you cycle Jund Sojourners or it dies, you may have it deal 1 damage to any target.
         Ability ability1 = new CycleTriggeredAbility(new DamageTargetEffect(1));
         Ability ability2 = new DiesTriggeredAbility(new DamageTargetEffect(1));
         ability1.addTarget(new TargetAnyTarget());

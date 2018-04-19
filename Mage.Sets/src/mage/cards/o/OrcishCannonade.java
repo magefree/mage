@@ -46,7 +46,7 @@ public class OrcishCannonade extends CardImpl {
     public OrcishCannonade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}{R}");
 
-        // Orcish Cannonade deals 2 damage to target creature or player and 3 damage to you.
+        // Orcish Cannonade deals 2 damage to any target and 3 damage to you.
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
         Effect effect = new DamageControllerEffect(3);

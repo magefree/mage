@@ -49,7 +49,7 @@ public class CollateralDamage extends CardImpl {
         // As an additional cost to cast Collateral Damge, sacrifice a creature.
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
 
-        // Collateral Damage deals 3 damage to target creature or player.
+        // Collateral Damage deals 3 damage to any target.
         this.getSpellAbility().addTarget(new TargetAnyTarget());
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
     }

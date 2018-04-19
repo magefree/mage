@@ -63,7 +63,7 @@ public class MagusOfTheScroll extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // {3}, {tap}: Name a card. Reveal a card at random from your hand. If it's the named card, Magus of the Scroll deals 2 damage to target creature or player.
+        // {3}, {tap}: Name a card. Reveal a card at random from your hand. If it's the named card, Magus of the Scroll deals 2 damage to any target.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new NameACardEffect(NameACardEffect.TypeOfName.ALL), new ManaCostsImpl("{3}"));
         ability.addEffect(new MagusOfTheScrollEffect());
         ability.addCost(new TapSourceCost());
@@ -85,7 +85,7 @@ class MagusOfTheScrollEffect extends OneShotEffect {
 
     public MagusOfTheScrollEffect() {
         super(Outcome.Neutral);
-        staticText = ", then reveal a card at random from your hand. If it's the named card, {this} deals 2 damage to target creature or player";
+        staticText = ", then reveal a card at random from your hand. If it's the named card, {this} deals 2 damage to any target";
     }
 
     public MagusOfTheScrollEffect(final MagusOfTheScrollEffect effect) {

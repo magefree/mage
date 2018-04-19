@@ -55,7 +55,7 @@ public class OrcishMechanics extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // {tap}, Sacrifice an artifact: Orcish Mechanics deals 2 damage to target creature or player.
+        // {tap}, Sacrifice an artifact: Orcish Mechanics deals 2 damage to any target.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledArtifactPermanent("an artifact"))));
         ability.addTarget(new TargetAnyTarget());

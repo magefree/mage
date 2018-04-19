@@ -54,7 +54,7 @@ public class CursedScroll extends CardImpl {
     public CursedScroll(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
 
-        // {3}, {T}: Name a card. Reveal a card at random from your hand. If it's the named card, Cursed Scroll deals 2 damage to target creature or player.
+        // {3}, {T}: Name a card. Reveal a card at random from your hand. If it's the named card, Cursed Scroll deals 2 damage to any target.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new NameACardEffect(NameACardEffect.TypeOfName.ALL), new ManaCostsImpl("{3}"));
         ability.addEffect(new CursedScrollEffect());
         ability.addCost(new TapSourceCost());
@@ -76,7 +76,7 @@ class CursedScrollEffect extends OneShotEffect {
 
     public CursedScrollEffect() {
         super(Outcome.Neutral);
-        staticText = "Reveal a card at random from your hand. If it's the named card, {this} deals 2 damage to target creature or player";
+        staticText = "Reveal a card at random from your hand. If it's the named card, {this} deals 2 damage to any target";
     }
 
     public CursedScrollEffect(final CursedScrollEffect effect) {

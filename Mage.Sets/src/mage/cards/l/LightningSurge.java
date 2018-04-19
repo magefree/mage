@@ -49,7 +49,7 @@ public class LightningSurge extends CardImpl {
     public LightningSurge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
 
-        // Lightning Surge deals 4 damage to target creature or player.
+        // Lightning Surge deals 4 damage to any target.
         // Threshold - If seven or more cards are in your graveyard, instead Lightning Surge deals 6 damage to that creature or player and the damage can't be prevented.
         Effect effect = new ConditionalOneShotEffect(new DamageTargetEffect(6, false),
                 new DamageTargetEffect(4),

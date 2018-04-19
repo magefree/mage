@@ -67,7 +67,7 @@ public class AirdropCondor extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // {1}{R}, Sacrifice a Goblin creature: Airdrop Condor deals damage equal to the sacrificed creature's power to target creature or player.
+        // {1}{R}, Sacrifice a Goblin creature: Airdrop Condor deals damage equal to the sacrificed creature's power to any target.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(new SacrificeCostCreaturesPower()), new ManaCostsImpl("{1}{R}"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(filter)));
         ability.addTarget(new TargetAnyTarget());

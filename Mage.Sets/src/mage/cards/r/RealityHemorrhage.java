@@ -47,7 +47,7 @@ public class RealityHemorrhage extends CardImpl {
         // Devoid
         this.addAbility(new DevoidAbility(this.color));
 
-        // Reality Hemorrhage deals 2 damage to target creature or player.
+        // Reality Hemorrhage deals 2 damage to any target.
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }

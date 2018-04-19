@@ -52,7 +52,7 @@ public class HarmsWay extends CardImpl {
     public HarmsWay(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");
 
-        // The next 2 damage that a source of your choice would deal to you and/or permanents you control this turn is dealt to target creature or player instead.
+        // The next 2 damage that a source of your choice would deal to you and/or permanents you control this turn is dealt to any target instead.
         this.getSpellAbility().addEffect(new HarmsWayPreventDamageTargetEffect());
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
@@ -73,7 +73,7 @@ class HarmsWayPreventDamageTargetEffect extends RedirectionEffect {
 
     public HarmsWayPreventDamageTargetEffect() {
         super(Duration.EndOfTurn, 2, true);
-        staticText = "The next 2 damage that a source of your choice would deal to you and/or permanents you control this turn is dealt to target creature or player instead";
+        staticText = "The next 2 damage that a source of your choice would deal to you and/or permanents you control this turn is dealt to any target instead";
         this.damageSource = new TargetSource();
     }
 

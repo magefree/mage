@@ -57,7 +57,7 @@ public class MoltenNursery extends CardImpl {
         // Devoid
         this.addAbility(new DevoidAbility(this.color));
 
-        // Whenever you cast a colorless spell, Molten Nursery deals 1 damage to target creature or player.
+        // Whenever you cast a colorless spell, Molten Nursery deals 1 damage to any target.
         Ability ability = new SpellCastControllerTriggeredAbility(new DamageTargetEffect(1), filter, false);
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);

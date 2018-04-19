@@ -67,7 +67,7 @@ public class Hankyu extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability1, AttachmentType.EQUIPMENT)));
 
         /* "{T}, Remove all aim counters from Hankyu: This creature deals 
-         * damage to target creature or player equal to the number of 
+         * damage to any target equal to the number of 
          * aim counters removed this way." */
         SimpleActivatedAbility ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new HankyuDealsDamageEffect(), new TapSourceCost());
         ability2.addCost(new HankyuCountersSourceCost(this.getId()));
@@ -125,7 +125,7 @@ class HankyuDealsDamageEffect extends OneShotEffect {
 
     public HankyuDealsDamageEffect() {
         super(Outcome.Damage);
-        staticText = "This creature deals damage to target creature or player equal to the number of aim counters removed this way";
+        staticText = "This creature deals damage to any target equal to the number of aim counters removed this way";
     }
 
     public HankyuDealsDamageEffect(final HankyuDealsDamageEffect effect) {

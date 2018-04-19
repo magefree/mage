@@ -43,7 +43,7 @@ public class CinderStorm extends CardImpl {
     public CinderStorm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{6}{R}");
 
-        // Cinder Storm deals 7 damage to target creature or player.
+        // Cinder Storm deals 7 damage to any target.
         this.getSpellAbility().addTarget(new TargetAnyTarget());
         this.getSpellAbility().addEffect(new DamageTargetEffect(7));
     }

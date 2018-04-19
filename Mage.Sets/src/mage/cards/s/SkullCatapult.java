@@ -51,7 +51,7 @@ public class SkullCatapult extends CardImpl {
     public SkullCatapult(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
-        // {1}, {tap}, Sacrifice a creature: Skull Catapult deals 2 damage to target creature or player.
+        // {1}, {tap}, Sacrifice a creature: Skull Catapult deals 2 damage to any target.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));

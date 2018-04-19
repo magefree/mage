@@ -60,7 +60,7 @@ public class LatullaKeldonOverseer extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // {X}{R}, {tap}, Discard two cards: Latulla, Keldon Overseer deals X damage to target creature or player.
+        // {X}{R}, {tap}, Discard two cards: Latulla, Keldon Overseer deals X damage to any target.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(new ManacostVariableValue()), new ManaCostsImpl("{X}{R}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardTargetCost(new TargetCardInHand(2, 2, new FilterCard("two cards"))));

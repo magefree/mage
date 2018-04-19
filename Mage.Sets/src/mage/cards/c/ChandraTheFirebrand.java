@@ -61,7 +61,7 @@ public class ChandraTheFirebrand extends CardImpl {
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(3));
 
-        // +1: Chandra, the Firebrand deals 1 damage to target creature or player.
+        // +1: Chandra, the Firebrand deals 1 damage to any target.
         LoyaltyAbility ability1 = new LoyaltyAbility(new DamageTargetEffect(1), 1);
         ability1.addTarget(new TargetAnyTarget());
         this.addAbility(ability1);

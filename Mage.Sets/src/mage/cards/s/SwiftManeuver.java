@@ -47,7 +47,7 @@ public class SwiftManeuver extends CardImpl {
     public SwiftManeuver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");
 
-        // Prevent the next 2 damage that would be dealt to target creature or player this turn.
+        // Prevent the next 2 damage that would be dealt to any target this turn.
         this.getSpellAbility().addEffect(new PreventDamageToTargetEffect(Duration.EndOfTurn, 2));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
         

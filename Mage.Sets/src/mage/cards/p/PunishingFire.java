@@ -52,7 +52,7 @@ public class PunishingFire extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");
 
 
-        // Punishing Fire deals 2 damage to target creature or player.
+        // Punishing Fire deals 2 damage to any target.
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
         // Whenever an opponent gains life, you may pay {R}. If you do, return Punishing Fire from your graveyard to your hand.

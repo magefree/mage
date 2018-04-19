@@ -49,7 +49,7 @@ public class Panacea extends CardImpl {
     public Panacea(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
-        // {X}{X}, {tap}: Prevent the next X damage that would be dealt to target creature or player this turn.
+        // {X}{X}, {tap}: Prevent the next X damage that would be dealt to any target this turn.
         Ability ability = new SimpleActivatedAbility(
                 new PreventDamageToTargetEffect(Duration.EndOfTurn, false, true, new ManacostVariableValue()),
                 new ManaCostsImpl("{X}{X}")

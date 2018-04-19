@@ -46,7 +46,7 @@ public class FieryTemper extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}{R}");
 
 
-        // Fiery Temper deals 3 damage to target creature or player.
+        // Fiery Temper deals 3 damage to any target.
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
 

@@ -53,7 +53,7 @@ public class MakeshiftMunitions extends CardImpl {
     public MakeshiftMunitions(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
 
-        // {1}, Sacrifice an artifact or creature: Makeshift Munitions deals 1 damage to target creature or player.
+        // {1}, Sacrifice an artifact or creature: Makeshift Munitions deals 1 damage to any target.
         Ability ability = new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new DamageTargetEffect(1),

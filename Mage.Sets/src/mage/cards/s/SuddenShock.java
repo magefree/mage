@@ -47,7 +47,7 @@ public class SuddenShock extends CardImpl {
 
         // Split second
         this.addAbility(new SplitSecondAbility());
-        // Sudden Shock deals 2 damage to target creature or player.
+        // Sudden Shock deals 2 damage to any target.
         this.getSpellAbility().addEffect(new DamageTargetEffect(2, true));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }

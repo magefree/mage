@@ -49,7 +49,7 @@ public class ForceLightning extends CardImpl {
     public ForceLightning(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{R}{R}");
 
-        // Force Lightning deals X damage to target creature or player.
+        // Force Lightning deals X damage to any target.
         this.getSpellAbility().addEffect(new DamageTargetEffect(new ManacostVariableValue()));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
 

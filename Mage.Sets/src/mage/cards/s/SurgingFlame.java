@@ -47,7 +47,7 @@ public class SurgingFlame extends CardImpl {
         // Ripple 4
         this.addAbility(new RippleAbility(4).setRuleAtTheTop(true));
 
-        // Surging Flame deals 2 damage to target creature or player.
+        // Surging Flame deals 2 damage to any target.
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }

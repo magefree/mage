@@ -57,7 +57,7 @@ public class BloodshotCyclops extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {T}, Sacrifice a creature: Bloodshot Cyclops deals damage equal to the sacrificed
-        // creature's power to target creature or player.
+        // creature's power to any target.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new DamageTargetEffect(new SacrificeCostCreaturesPower()),
                 new TapSourceCost());

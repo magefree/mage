@@ -62,7 +62,7 @@ public class NivMizzetTheFiremind extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // Whenever you draw a card, Niv-Mizzet, the Firemind deals 1 damage to target creature or player.
+        // Whenever you draw a card, Niv-Mizzet, the Firemind deals 1 damage to any target.
         Ability ability = new DrawCardControllerTriggeredAbility(new DamageTargetEffect(1), false);
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);

@@ -65,7 +65,7 @@ public class ShieldmageAdvocate extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 
-        // {tap}: Return target card from an opponent's graveyard to their hand. Prevent all damage that would be dealt to target creature or player this turn by a source of your choice.
+        // {tap}: Return target card from an opponent's graveyard to their hand. Prevent all damage that would be dealt to any target this turn by a source of your choice.
         Effect effect = new ReturnFromGraveyardToHandTargetEffect();
         effect.setText("Return target card from an opponent's graveyard to their hand");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
@@ -94,7 +94,7 @@ class ShieldmageAdvocateEffect extends PreventionEffectImpl {
 
     public ShieldmageAdvocateEffect() {
         super(Duration.EndOfTurn, Integer.MAX_VALUE, false);
-        staticText = "Prevent all damage that would be dealt to target creature or player this turn by a source of your choice";
+        staticText = "Prevent all damage that would be dealt to any target this turn by a source of your choice";
         this.targetSource = new TargetSource();
     }
     

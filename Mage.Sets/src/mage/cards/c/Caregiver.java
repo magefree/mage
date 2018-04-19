@@ -59,7 +59,7 @@ public class Caregiver extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // {W}, Sacrifice a creature: Prevent the next 1 damage that would be dealt to target creature or player this turn.
+        // {W}, Sacrifice a creature: Prevent the next 1 damage that would be dealt to any target this turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToTargetEffect(Duration.EndOfTurn, 1), new ColoredManaCost(ColoredManaSymbol.W));
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         ability.addTarget(new TargetAnyTarget());

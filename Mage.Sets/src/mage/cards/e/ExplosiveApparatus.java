@@ -49,7 +49,7 @@ public class ExplosiveApparatus extends CardImpl {
     public ExplosiveApparatus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
 
-        // {3}, {T}, Sacrifice Explosive Apparatus: Explosive Apparatus deals 2 damage to target creature or player.
+        // {3}, {T}, Sacrifice Explosive Apparatus: Explosive Apparatus deals 2 damage to any target.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());

@@ -58,7 +58,7 @@ public class Spitemare extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // Whenever Spitemare is dealt damage, it deals that much damage to target creature or player.
+        // Whenever Spitemare is dealt damage, it deals that much damage to any target.
         Ability ability = new SpitemareTriggeredAbility();
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
@@ -114,7 +114,7 @@ class SpitemareEffect extends OneShotEffect {
 
     public SpitemareEffect() {
         super(Outcome.Damage);
-        staticText = "it deals that much damage to target creature or player";
+        staticText = "it deals that much damage to any target";
     }
 
     public SpitemareEffect(final SpitemareEffect effect) {

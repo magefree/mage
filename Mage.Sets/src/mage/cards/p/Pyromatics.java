@@ -47,7 +47,7 @@ public class Pyromatics extends CardImpl {
 
         // Replicate {1}{R}
         this.addAbility(new ReplicateAbility(this, "{1}{R}"));
-        // Pyromatics deals 1 damage to target creature or player.
+        // Pyromatics deals 1 damage to any target.
         this.getSpellAbility().addEffect(new DamageTargetEffect(1));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
 

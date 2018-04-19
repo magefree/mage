@@ -55,7 +55,7 @@ public class IvoryCharm extends CardImpl {
         mode.getEffects().add(new TapTargetEffect());
         mode.getTargets().add(new TargetCreaturePermanent());
         this.getSpellAbility().addMode(mode);
-        // or prevent the next 1 damage that would be dealt to target creature or player this turn.
+        // or prevent the next 1 damage that would be dealt to any target this turn.
         mode = new Mode();
         mode.getEffects().add(new PreventDamageToTargetEffect(Duration.EndOfTurn, 1));
         mode.getTargets().add(new TargetAnyTarget());

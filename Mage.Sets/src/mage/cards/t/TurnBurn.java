@@ -60,9 +60,9 @@ public class TurnBurn extends SplitCard {
         getLeftHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // Burn
-        // Burn deals 2 damage to target creature or player.
+        // Burn deals 2 damage to any target.
         effect = new DamageTargetEffect(2);
-        effect.setText("Burn deals 2 damage to target creature or player");
+        effect.setText("Burn deals 2 damage to any target");
         getRightHalfCard().getSpellAbility().addEffect(effect);
         getRightHalfCard().getSpellAbility().addTarget(new TargetAnyTarget());
 

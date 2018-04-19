@@ -48,7 +48,7 @@ public class FanningTheFlames extends CardImpl {
         // Buyback {3}
         this.addAbility(new BuybackAbility("{3}"));
         
-        // Fanning the Flames deals X damage to target creature or player.
+        // Fanning the Flames deals X damage to any target.
         this.getSpellAbility().addEffect(new DamageTargetEffect(new ManacostVariableValue()));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }

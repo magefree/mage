@@ -52,7 +52,7 @@ public class OrimsTouch extends CardImpl {
         // Kicker {1}
         this.addAbility(new KickerAbility("{1}"));
 
-        // Prevent the next 2 damage that would be dealt to target creature or player this turn. If Orim's Touch was kicked, prevent the next 4 damage that would be dealt to that creature or player this turn instead.
+        // Prevent the next 2 damage that would be dealt to any target this turn. If Orim's Touch was kicked, prevent the next 4 damage that would be dealt to that creature or player this turn instead.
         Effect effect = new ConditionalReplacementEffect(
                 new PreventDamageToTargetEffect(Duration.EndOfTurn, 4),
                 new LockedInCondition(KickedCondition.instance),

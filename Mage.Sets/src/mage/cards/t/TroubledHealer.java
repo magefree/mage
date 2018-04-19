@@ -56,7 +56,7 @@ public class TroubledHealer extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 
-        // Sacrifice a land: Prevent the next 2 damage that would be dealt to target creature or player this turn.
+        // Sacrifice a land: Prevent the next 2 damage that would be dealt to any target this turn.
         Ability ability = new SimpleActivatedAbility(
                 Zone.BATTLEFIELD, 
                 new PreventDamageToTargetEffect(Duration.EndOfTurn, 2),

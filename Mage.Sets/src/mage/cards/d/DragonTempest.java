@@ -67,7 +67,7 @@ public class DragonTempest extends CardImpl {
         effect.setText("it gains haste until the end of turn");
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, effect, filterFlying, false, SetTargetPointer.PERMANENT, ""));
 
-        // Whenever a Dragon enters the battlefield under your control, it deals X damage to target creature or player, where X is the number of Dragons you control.
+        // Whenever a Dragon enters the battlefield under your control, it deals X damage to any target, where X is the number of Dragons you control.
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD,
                 new DragonTempestDamageEffect(),
@@ -101,7 +101,7 @@ class DragonTempestDamageEffect extends OneShotEffect {
 
     public DragonTempestDamageEffect() {
         super(Outcome.Damage);
-        staticText = "it deals X damage to target creature or player, where X is the number of Dragons you control";
+        staticText = "it deals X damage to any target, where X is the number of Dragons you control";
     }
 
     public DragonTempestDamageEffect(final DragonTempestDamageEffect effect) {

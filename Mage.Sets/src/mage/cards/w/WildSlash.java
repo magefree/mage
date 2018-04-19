@@ -55,7 +55,7 @@ public class WildSlash extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalContinuousRuleModifyingEffect(effect,
                 new LockedInCondition(FerociousCondition.instance)));
 
-        // Wild Slash deals 2 damage to target creature or player.
+        // Wild Slash deals 2 damage to any target.
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
 

@@ -82,7 +82,7 @@ public class NicolBolasGodPharaoh extends CardImpl {
         // +1: Each opponent exiles two cards from their hand.
         this.addAbility(new LoyaltyAbility(new NicolBolasGodPharaohPlusOneEffect(), 1));
 
-        // -4: Nicol Bolas, God-Pharaoh deals 7 damage to target creature or player.
+        // -4: Nicol Bolas, God-Pharaoh deals 7 damage to any target.
         ability = new LoyaltyAbility(new DamageTargetEffect(7), -4);
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);

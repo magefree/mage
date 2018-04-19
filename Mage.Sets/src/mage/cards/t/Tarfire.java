@@ -45,7 +45,7 @@ public class Tarfire extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.INSTANT},"{R}");
         this.subtype.add(SubType.GOBLIN);
 
-        // Tarfire deals 2 damage to target creature or player.
+        // Tarfire deals 2 damage to any target.
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }

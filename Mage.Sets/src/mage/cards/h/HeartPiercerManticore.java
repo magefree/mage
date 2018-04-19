@@ -70,7 +70,7 @@ public class HeartPiercerManticore extends CardImpl {
         // When Heart-Piercer Manticore enters the battlefield, you may sacrifice another creature.
         Ability firstAbility = new EntersBattlefieldTriggeredAbility(new HeartPiercerManticoreSacrificeEffect(), true);
         this.addAbility(firstAbility);
-        // When you do, Heart-Piercer Manticore deals damage equal to that creature's power to target creature or player.
+        // When you do, Heart-Piercer Manticore deals damage equal to that creature's power to any target.
         Ability secondAbility = new HeartPiercerManticoreSacrificeTriggeredAbility(firstAbility.getOriginalId());
         secondAbility.addTarget(new TargetAnyTarget());
         this.addAbility(secondAbility);
@@ -128,7 +128,7 @@ class HeartPiercerManticoreSacrificeTriggeredAbility extends TriggeredAbilityImp
     private final UUID relatedTriggerdAbilityOriginalId;
 
     public HeartPiercerManticoreSacrificeTriggeredAbility(UUID relatedTriggerdAbilityOriginalId) {
-        super(Zone.BATTLEFIELD, new InfoEffect("{this} deals damage equal to that creature's power to target creature or player"));
+        super(Zone.BATTLEFIELD, new InfoEffect("{this} deals damage equal to that creature's power to any target"));
         this.relatedTriggerdAbilityOriginalId = relatedTriggerdAbilityOriginalId;
     }
 
@@ -161,6 +161,6 @@ class HeartPiercerManticoreSacrificeTriggeredAbility extends TriggeredAbilityImp
 
     @Override
     public String getRule() {
-        return "When you do, {this} deals damage equal to that creature's power to target creature or player.";
+        return "When you do, {this} deals damage equal to that creature's power to any target.";
     }
 }

@@ -58,9 +58,9 @@ public class Kindle extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");
 
 
-        // Kindle deals X damage to target creature or player, where X is 2 plus the number of cards named Kindle in all graveyards.
+        // Kindle deals X damage to any target, where X is 2 plus the number of cards named Kindle in all graveyards.
         Effect effect = new DamageTargetEffect(new KindleCardsInAllGraveyardsCount(filter));
-        effect.setText("{this} deals X damage to target creature or player, where X is 2 plus the number of cards named {source} in all graveyards");
+        effect.setText("{this} deals X damage to any target, where X is 2 plus the number of cards named {source} in all graveyards");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }

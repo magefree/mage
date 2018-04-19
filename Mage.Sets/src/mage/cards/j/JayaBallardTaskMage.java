@@ -79,7 +79,7 @@ public class JayaBallardTaskMage extends CardImpl {
         ability.addCost(new DiscardCardCost());        
         this.addAbility(ability);
         
-        // {1}{R}, {tap}, Discard a card: Jaya Ballard, Task Mage deals 3 damage to target creature or player. A creature dealt damage this way can't be regenerated this turn.
+        // {1}{R}, {tap}, Discard a card: Jaya Ballard, Task Mage deals 3 damage to any target. A creature dealt damage this way can't be regenerated this turn.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(3), new ManaCostsImpl("{1}{R}"));
         ability.addTarget(new TargetAnyTarget());
         ability.addCost(new TapSourceCost());

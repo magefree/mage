@@ -53,7 +53,7 @@ public class MorgueBurst extends CardImpl {
     public MorgueBurst(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{B}{R}");
 
-        // Return target creature card from your graveyard to your hand. Morgue Burst deals damage to target creature or player equal to the power of the card returned this way.
+        // Return target creature card from your graveyard to your hand. Morgue Burst deals damage to any target equal to the power of the card returned this way.
         this.getSpellAbility().addEffect(new MorgueBurstEffect());
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
@@ -110,7 +110,7 @@ class MorgueBurstEffect extends OneShotEffect {
     @Override
     public String getText(Mode mode) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Return target creature card from your graveyard to your hand. Morgue Burst deals damage to target creature or player equal to the power of the card returned this way");
+        sb.append("Return target creature card from your graveyard to your hand. Morgue Burst deals damage to any target equal to the power of the card returned this way");
         return sb.toString();
     }
 }

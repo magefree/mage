@@ -62,7 +62,7 @@ public class Endbringer extends CardImpl {
         // Untap Endbringer during each other player's untap step.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new UntapSourceDuringEachOtherPlayersUntapStepEffect()));
         
-        // {T}: Endbringer deals 1 damage to target creature or player.
+        // {T}: Endbringer deals 1 damage to any target.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);

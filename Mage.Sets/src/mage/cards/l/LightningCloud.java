@@ -56,7 +56,7 @@ public class LightningCloud extends CardImpl {
     public LightningCloud(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{R}");
 
-        // Whenever a player casts a red spell, you may pay {R}. If you do, Lightning Cloud deals 1 damage to target creature or player.
+        // Whenever a player casts a red spell, you may pay {R}. If you do, Lightning Cloud deals 1 damage to any target.
         Ability ability = new SpellCastAllTriggeredAbility(new DoIfCostPaid(new DamageTargetEffect(1), new ManaCostsImpl("{R}")), filter, false);
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);

@@ -53,7 +53,7 @@ public class MoggFanatic extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         
-        // Sacrifice Mogg Fanatic: Mogg Fanatic deals 1 damage to target creature or player.
+        // Sacrifice Mogg Fanatic: Mogg Fanatic deals 1 damage to any target.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new SacrificeSourceCost());
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);

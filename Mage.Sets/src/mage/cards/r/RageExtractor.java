@@ -103,6 +103,6 @@ class RageExtractorTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever you cast a spell with p in its mana cost, {this} deals damage equal to that spell's converted mana cost to target creature or player.";
+        return "Whenever you cast a spell with p in its mana cost, {this} deals damage equal to that spell's converted mana cost to any target.";
     }
 }

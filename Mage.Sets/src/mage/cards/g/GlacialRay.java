@@ -48,7 +48,7 @@ public class GlacialRay extends CardImpl {
         this.subtype.add(SubType.ARCANE);
 
 
-        // Glacial Ray deals 2 damage to target creature or player.
+        // Glacial Ray deals 2 damage to any target.
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
         // Splice onto Arcane {1}{R}

@@ -58,7 +58,7 @@ public class GhirapurAetherGrid extends CardImpl {
     public GhirapurAetherGrid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");
 
-        // Tap two untaped artifacts you control: Ghirapur Aether Grid deals 1 damage to target creature or player
+        // Tap two untaped artifacts you control: Ghirapur Aether Grid deals 1 damage to any target
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new DamageTargetEffect(1),
                 new TapTargetCost(new TargetControlledPermanent(2, 2, filter, true)));

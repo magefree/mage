@@ -56,9 +56,9 @@ public class BurningEyeZubera extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // When Burning-Eye Zubera dies, if 4 or more damage was dealt to it this turn, Burning-Eye Zubera deals 3 damage to target creature or player.
+        // When Burning-Eye Zubera dies, if 4 or more damage was dealt to it this turn, Burning-Eye Zubera deals 3 damage to any target.
         Ability ability = new ConditionalTriggeredAbility(new DiesTriggeredAbility(new DamageTargetEffect(3)),new SourceGotFourDamage(),
-                "When {this} dies, if 4 or more damage was dealt to it this turn, Burning-Eye Zubera deals 3 damage to target creature or player");
+                "When {this} dies, if 4 or more damage was dealt to it this turn, Burning-Eye Zubera deals 3 damage to any target");
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

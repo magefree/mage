@@ -76,7 +76,7 @@ public class SpikeshotElder extends CardImpl {
 class SpikeshotElderEffect extends OneShotEffect {
     public SpikeshotElderEffect() {
         super(Outcome.Damage);
-        staticText = "{this} deals damage equal to its power to target creature or player";
+        staticText = "{this} deals damage equal to its power to any target";
     }
 
     public SpikeshotElderEffect(final SpikeshotElderEffect effect) {

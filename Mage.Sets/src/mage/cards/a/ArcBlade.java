@@ -50,7 +50,7 @@ public class ArcBlade extends CardImpl {
     public ArcBlade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}{R}");
 
-        // Arc Blade deals 2 damage to target creature or player.
+        // Arc Blade deals 2 damage to any target.
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));
         // Exile Arc Blade
         this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());

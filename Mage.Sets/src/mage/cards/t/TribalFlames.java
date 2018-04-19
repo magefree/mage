@@ -45,7 +45,7 @@ public class TribalFlames extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}");
 
 
-        // Domain - Tribal Flames deals X damage to target creature or player, where X is the number of basic land types among lands you control.
+        // Domain - Tribal Flames deals X damage to any target, where X is the number of basic land types among lands you control.
         this.getSpellAbility().addEffect(new DamageTargetEffect(new DomainValue()));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }

@@ -53,7 +53,7 @@ public class BlastingStation extends CardImpl {
     public BlastingStation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
-        // {tap}, Sacrifice a creature: Blasting Station deals 1 damage to target creature or player.
+        // {tap}, Sacrifice a creature: Blasting Station deals 1 damage to any target.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         ability.addTarget(new TargetAnyTarget());

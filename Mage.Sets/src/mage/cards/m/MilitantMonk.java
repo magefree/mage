@@ -58,7 +58,7 @@ public class MilitantMonk extends CardImpl {
 
         // Vigilance
         this.addAbility(VigilanceAbility.getInstance());
-        // {T}: Prevent the next 1 damage that would be dealt to target creature or player this turn.
+        // {T}: Prevent the next 1 damage that would be dealt to any target this turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToTargetEffect(Duration.EndOfTurn, 1), new TapSourceCost());
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);

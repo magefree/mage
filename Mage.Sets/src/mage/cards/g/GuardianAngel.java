@@ -59,7 +59,7 @@ public class GuardianAngel extends CardImpl {
     public GuardianAngel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{W}");
 
-        // Prevent the next X damage that would be dealt to target creature or player this turn. Until end of turn, you may pay {1} any time you could cast an instant. If you do, prevent the next 1 damage that would be dealt to that creature or player this turn.
+        // Prevent the next X damage that would be dealt to any target this turn. Until end of turn, you may pay {1} any time you could cast an instant. If you do, prevent the next 1 damage that would be dealt to that creature or player this turn.
         this.getSpellAbility().addEffect(new GuardianAngelEffect());
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
@@ -110,7 +110,7 @@ class GuardianAngelEffect extends OneShotEffect {
             game.addEffect(effect, source);
             SpecialAction specialAction = new GuardianAngelAction();
             specialAction.getEffects().get(0).setTargetPointer(getTargetPointer());
-            specialAction.getEffects().get(0).setText("Prevent the next 1 damage that would be dealt to target creature or player this turn (" + targetName + ").");
+            specialAction.getEffects().get(0).setText("Prevent the next 1 damage that would be dealt to any target this turn (" + targetName + ").");
             new CreateSpecialActionEffect(specialAction).apply(game, source);
             // Create a hidden delayed triggered ability to remove the special action at end of turn.
             new CreateDelayedTriggeredAbilityEffect(new GuardianAngelDelayedTriggeredAbility(specialAction.getId()), false).apply(game, source);

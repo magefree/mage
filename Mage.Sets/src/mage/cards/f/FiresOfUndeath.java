@@ -47,7 +47,7 @@ public class FiresOfUndeath extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");
 
 
-        // Fires of Undeath deals 2 damage to target creature or player.
+        // Fires of Undeath deals 2 damage to any target.
         this.getSpellAbility().addTarget(new TargetAnyTarget());
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));
         // Flashback {5}{B}

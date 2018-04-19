@@ -46,7 +46,7 @@ public class MassiveRaid extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}{R}");
 
 
-        // Massive Raid deals damage to target creature or player equal to the number of creatures you control.
+        // Massive Raid deals damage to any target equal to the number of creatures you control.
         this.getSpellAbility().addEffect(new DamageTargetEffect(new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent())));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }

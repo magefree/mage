@@ -44,7 +44,7 @@ public class FireAmbush extends CardImpl {
     public FireAmbush(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}");
 
-        // Fire Ambush deals 3 damage to target creature or player.
+        // Fire Ambush deals 3 damage to any target.
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }

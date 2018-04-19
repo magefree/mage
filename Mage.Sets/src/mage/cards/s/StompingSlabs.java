@@ -53,7 +53,7 @@ public class StompingSlabs extends CardImpl {
     public StompingSlabs(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");
 
-        // Reveal the top seven cards of your library, then put those cards on the bottom of your library in any order. If a card named Stomping Slabs was revealed this way, Stomping Slabs deals 7 damage to target creature or player.
+        // Reveal the top seven cards of your library, then put those cards on the bottom of your library in any order. If a card named Stomping Slabs was revealed this way, Stomping Slabs deals 7 damage to any target.
         this.getSpellAbility().addEffect(new StompingSlabsEffect());
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
@@ -72,7 +72,7 @@ class StompingSlabsEffect extends OneShotEffect {
     
     StompingSlabsEffect() {
         super(Outcome.Damage);
-        this.staticText = "Reveal the top seven cards of your library, then put those cards on the bottom of your library in any order. If a card named Stomping Slabs was revealed this way, {this} deals 7 damage to target creature or player";
+        this.staticText = "Reveal the top seven cards of your library, then put those cards on the bottom of your library in any order. If a card named Stomping Slabs was revealed this way, {this} deals 7 damage to any target";
     }
     
     StompingSlabsEffect(final StompingSlabsEffect effect) {

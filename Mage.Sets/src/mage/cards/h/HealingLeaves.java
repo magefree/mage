@@ -47,7 +47,7 @@ public class HealingLeaves extends CardImpl {
     public HealingLeaves(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");
 
-        // Choose one - Target player gains 3 life; or prevent the next 3 damage that would be dealt to target creature or player this turn.
+        // Choose one - Target player gains 3 life; or prevent the next 3 damage that would be dealt to any target this turn.
         this.getSpellAbility().addEffect(new GainLifeTargetEffect(3));
         this.getSpellAbility().addTarget(new TargetPlayer());
         Mode mode = new Mode();

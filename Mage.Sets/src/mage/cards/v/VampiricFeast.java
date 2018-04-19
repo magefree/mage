@@ -45,9 +45,9 @@ public class VampiricFeast extends CardImpl {
     public VampiricFeast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{B}{B}");
 
-        // Vampiric Feast deals 4 damage to target creature or player and you gain 4 life.
+        // Vampiric Feast deals 4 damage to any target and you gain 4 life.
         Effect effect = new DamageTargetEffect(4);
-        effect.setText("{this} deals 4 damage to target creature or player");
+        effect.setText("{this} deals 4 damage to any target");
         this.getSpellAbility().addEffect(effect);
         // and you gain 4 life.
         effect = new GainLifeEffect(4);

@@ -51,7 +51,7 @@ public class KnowledgeAndPower extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{R}");
 
 
-        // Whenever you scry, you may pay 2. If you do. Knowledge and Power deals 2 damage to target creature or player.
+        // Whenever you scry, you may pay 2. If you do. Knowledge and Power deals 2 damage to any target.
         this.addAbility(new ScryTriggeredAbility() );
 
     }

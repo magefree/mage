@@ -52,7 +52,7 @@ public class StaffOfNin extends CardImpl {
 
         // At the beginning of your upkeep, draw a card.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DrawCardSourceControllerEffect(1), TargetController.YOU, false));
-        // {tap}: Staff of Nin deals 1 damage to target creature or player.
+        // {tap}: Staff of Nin deals 1 damage to any target.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);

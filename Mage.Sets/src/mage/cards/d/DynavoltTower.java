@@ -54,7 +54,7 @@ public class DynavoltTower extends CardImpl {
         // Whenever you cast an instant or sorcery spell, you get {E}{E}.
         this.addAbility(new SpellCastControllerTriggeredAbility(new GetEnergyCountersControllerEffect(2), new FilterInstantOrSorcerySpell(), false));
 
-        // {T}, Pay {E}{E}{E}{E}{E}: Dynavolt Tower deals 3 damage to target creature or player.
+        // {T}, Pay {E}{E}{E}{E}{E}: Dynavolt Tower deals 3 damage to any target.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(3), new TapSourceCost());
         ability.addCost(new PayEnergyCost(5));
         ability.addTarget(new TargetAnyTarget());

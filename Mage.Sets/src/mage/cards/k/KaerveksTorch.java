@@ -59,7 +59,7 @@ public class KaerveksTorch extends CardImpl {
 
         // As long as Kaervek's Torch is on the stack, spells that target it cost {2} more to cast.
         this.addAbility(new SimpleStaticAbility(Zone.STACK, new KaerveksTorchCostIncreaseEffect()));
-        // Kaervek's Torch deals X damage to target creature or player.
+        // Kaervek's Torch deals X damage to any target.
         this.getSpellAbility().addEffect(new DamageTargetEffect(new ManacostVariableValue()));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }

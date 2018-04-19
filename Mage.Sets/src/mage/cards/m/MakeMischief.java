@@ -45,8 +45,8 @@ public class MakeMischief extends CardImpl {
     public MakeMischief(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");
 
-        // Make Mischief deals 1 damage to target creature or player. Create a 1/1 red Devil creature token.
-        // It has "When this creature dies, it deals 1 damage to target creature or player."
+        // Make Mischief deals 1 damage to any target. Create a 1/1 red Devil creature token.
+        // It has "When this creature dies, it deals 1 damage to any target."
         this.getSpellAbility().addEffect(new DamageTargetEffect(1));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
         this.getSpellAbility().addEffect(new CreateTokenEffect(new DevilToken()));

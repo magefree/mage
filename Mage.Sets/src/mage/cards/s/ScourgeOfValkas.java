@@ -63,7 +63,7 @@ public class ScourgeOfValkas extends CardImpl {
         filter2.add(new SubtypePredicate(SubType.DRAGON));
     }
     
-    private static final String rule = "Whenever {this} or another Dragon enters the battlefield under your control, it deals X damage to target creature or player, where X is the number of Dragons you control.";
+    private static final String rule = "Whenever {this} or another Dragon enters the battlefield under your control, it deals X damage to any target, where X is the number of Dragons you control.";
 
     public ScourgeOfValkas(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}{R}");
@@ -76,7 +76,7 @@ public class ScourgeOfValkas extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // Whenever Scourge of Valkas or another Dragon enters the battlefield under your control, it deals X damage to target creature or player, where X is the number of Dragons you control.
+        // Whenever Scourge of Valkas or another Dragon enters the battlefield under your control, it deals X damage to any target, where X is the number of Dragons you control.
         DynamicValue dragons = new PermanentsOnBattlefieldCount(filter2);
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new DamageTargetEffect(dragons), filter, false, rule);
         ability.addTarget(new TargetAnyTarget());

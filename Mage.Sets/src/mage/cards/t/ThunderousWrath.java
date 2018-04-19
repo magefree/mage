@@ -46,7 +46,7 @@ public class ThunderousWrath extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{R}{R}");
 
 
-        // Thunderous Wrath deals 5 damage to target creature or player.
+        // Thunderous Wrath deals 5 damage to any target.
         this.getSpellAbility().addEffect(new DamageTargetEffect(5));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
 

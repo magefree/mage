@@ -55,7 +55,7 @@ import mage.target.common.TargetAnyTarget;
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{R}");
 
 
-        // Whenever a creature with power 5 or greater enters the battlefield under your control, you may have Where Ancients Tread deal 5 damage to target creature or player.
+        // Whenever a creature with power 5 or greater enters the battlefield under your control, you may have Where Ancients Tread deal 5 damage to any target.
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new DamageTargetEffect(5), filter, true);
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);

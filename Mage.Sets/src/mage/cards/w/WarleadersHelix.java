@@ -47,7 +47,7 @@ public class WarleadersHelix extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}{W}");
 
 
-        // Warleader's Helix deals 4 damage to target creature or player and you gain 4 life.
+        // Warleader's Helix deals 4 damage to any target and you gain 4 life.
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));
         this.getSpellAbility().addEffect(new GainLifeEffect(4));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
@@ -65,7 +65,7 @@ public class WarleadersHelix extends CardImpl {
     @Override
     public List<String> getRules() {
         List<String> rules = new ArrayList<>();
-        rules.add("Warleader's Helix deals 4 damage to target creature or player and you gain 4 life.");
+        rules.add("Warleader's Helix deals 4 damage to any target and you gain 4 life.");
         return rules;
     }
 }

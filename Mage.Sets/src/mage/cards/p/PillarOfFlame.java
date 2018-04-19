@@ -46,7 +46,7 @@ public class PillarOfFlame extends CardImpl {
     public PillarOfFlame(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}");
 
-        // Pillar of Flame deals 2 damage to target creature or player.
+        // Pillar of Flame deals 2 damage to any target.
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
         // If a creature dealt damage this way would die this turn, exile it instead.

@@ -49,7 +49,7 @@ public class RecklessAssault extends CardImpl {
     public RecklessAssault(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}{R}");
 
-        // {1}, Pay 2 life: Reckless Assault deals 1 damage to target creature or player.
+        // {1}, Pay 2 life: Reckless Assault deals 1 damage to any target.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl("{1}"));
         ability.addCost(new PayLifeCost(2));
         ability.addTarget(new TargetAnyTarget());

@@ -53,7 +53,7 @@ public class PsychicPurge extends CardImpl {
     public PsychicPurge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{U}");
 
-        // Psychic Purge deals 1 damage to target creature or player.
+        // Psychic Purge deals 1 damage to any target.
         this.getSpellAbility().addEffect(new DamageTargetEffect(1));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
 

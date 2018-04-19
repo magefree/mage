@@ -61,14 +61,14 @@ public class HealersHeaddress extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
         this.subtype.add(SubType.EQUIPMENT);
 
-        // Equipped creature gets +0/+2 and has "{tap}: Prevent the next 1 damage that would be dealt to target creature or player this turn."
+        // Equipped creature gets +0/+2 and has "{tap}: Prevent the next 1 damage that would be dealt to any target this turn."
         Ability gainAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToTargetEffect(Duration.EndOfTurn, 1), new TapSourceCost());
         gainAbility.addTarget(new TargetAnyTarget());
         Effect effect = new BoostEquippedEffect(0, 2);
         effect.setText("Equipped creature gets +0/+2");
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
         effect = new GainAbilityAttachedEffect(gainAbility, AttachmentType.EQUIPMENT);
-        effect.setText("and has \"{T}: Prevent the next 1 damage that would be dealt to target creature or player this turn.\"");
+        effect.setText("and has \"{T}: Prevent the next 1 damage that would be dealt to any target this turn.\"");
         ability.addEffect(effect);
         this.addAbility(ability);
         // {W}{W}: Attach Healer's Headdress to target creature you control.

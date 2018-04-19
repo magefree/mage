@@ -43,7 +43,7 @@ public class OpenFire extends CardImpl {
     public OpenFire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{R}");
 
-        // Open Fire deals 3 damage to target creature or player.
+        // Open Fire deals 3 damage to any target.
         getSpellAbility().addEffect(new DamageTargetEffect(3));
         getSpellAbility().addTarget(new TargetAnyTarget());
     }

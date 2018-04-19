@@ -50,7 +50,7 @@ public class MoltenVortex extends CardImpl {
     public MoltenVortex(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{R}");
 
-        // {R}, Discard a land card: Molten Vortex deals 2 damage to target creature or player.
+        // {R}, Discard a land card: Molten Vortex deals 2 damage to any target.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new DiscardTargetCost(new TargetCardInHand(new FilterLandCard())));
         ability.addCost(new ManaCostsImpl("{R}"));
         ability.addTarget(new TargetAnyTarget());

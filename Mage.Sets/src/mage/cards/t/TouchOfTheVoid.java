@@ -51,7 +51,7 @@ public class TouchOfTheVoid extends CardImpl {
         // Devoid
         this.addAbility(new DevoidAbility(this.color));
 
-        // Touch of the Void deals 3 damage to target creature or player. If a creature dealt damage this way would die this turn, exile it instead.
+        // Touch of the Void deals 3 damage to any target. If a creature dealt damage this way would die this turn, exile it instead.
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
         Effect effect = new DealtDamageToCreatureBySourceDies(this, Duration.EndOfTurn);

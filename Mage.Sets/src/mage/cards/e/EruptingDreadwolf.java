@@ -55,7 +55,7 @@ public class EruptingDreadwolf extends CardImpl {
         // this card is the second face of double-faced card
         this.nightCard = true;
 
-        // Whenever Erupting Dreadwolf attacks, it deals 2 damage to target creature or player.
+        // Whenever Erupting Dreadwolf attacks, it deals 2 damage to any target.
         Ability ability = new AttacksTriggeredAbility(new DamageTargetEffect(2, "it"), false);
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);

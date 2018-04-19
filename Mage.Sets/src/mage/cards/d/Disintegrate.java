@@ -48,7 +48,7 @@ public class Disintegrate extends CardImpl {
     public Disintegrate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{R}");
 
-        // Disintegrate deals X damage to target creature or player. That creature can't be regenerated this turn. If the creature would die this turn, exile it instead.
+        // Disintegrate deals X damage to any target. That creature can't be regenerated this turn. If the creature would die this turn, exile it instead.
         this.getSpellAbility().addEffect(new DamageTargetEffect(new ManacostVariableValue()));
         this.getSpellAbility().addEffect(new CantRegenerateTargetEffect(Duration.EndOfTurn, "That creature"));
         Effect effect = new ExileTargetIfDiesEffect();

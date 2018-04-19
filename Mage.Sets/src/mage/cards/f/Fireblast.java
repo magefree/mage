@@ -59,7 +59,7 @@ public class Fireblast extends CardImpl {
         // You may sacrifice two Mountains rather than pay Fireblast's mana cost.
         this.addAbility(new AlternativeCostSourceAbility(new SacrificeTargetCost(new TargetControlledPermanent(2, 2, filter, true))));
 
-        // Fireblast deals 4 damage to target creature or player.
+        // Fireblast deals 4 damage to any target.
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
 

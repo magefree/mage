@@ -48,7 +48,7 @@ public class SearingTouch extends CardImpl {
         // Buyback {4} (You may pay an additional {4} as you cast this spell. If you do, put this card into your hand as it resolves.)
         this.addAbility(new BuybackAbility("{4}"));
 
-        // Searing Touch deals 1 damage to target creature or player.
+        // Searing Touch deals 1 damage to any target.
         this.getSpellAbility().addEffect(new DamageTargetEffect(1));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }

@@ -63,7 +63,7 @@ public class AkoumHellkite extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // <i>Landfall</i>-Whenever a land enters the battlefield under you control, Akoum Hellkite deals 1 damage to target creature or player.
+        // <i>Landfall</i>-Whenever a land enters the battlefield under you control, Akoum Hellkite deals 1 damage to any target.
         // If that land is a Mountain, Akoum Hellkite deals 2 damage to that creature or player instead.
         Ability ability = new AkoumHellkiteTriggeredAbility();
         ability.addTarget(new TargetAnyTarget());

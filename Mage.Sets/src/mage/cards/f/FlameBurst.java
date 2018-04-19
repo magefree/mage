@@ -61,9 +61,9 @@ public class FlameBurst extends CardImpl {
     public FlameBurst(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");
 
-        // Flame Burst deals X damage to target creature or player, where X is 2 plus the number of cards named Flame Burst in all graveyards.
+        // Flame Burst deals X damage to any target, where X is 2 plus the number of cards named Flame Burst in all graveyards.
         Effect effect = new DamageTargetEffect(new FlameBurstCount(filter));
-        effect.setText("{this} deals X damage to target creature or player, where X is 2 plus the number of cards named Flame Burst in all graveyards.");
+        effect.setText("{this} deals X damage to any target, where X is 2 plus the number of cards named Flame Burst in all graveyards.");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }

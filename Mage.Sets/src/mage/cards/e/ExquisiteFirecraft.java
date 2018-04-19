@@ -50,7 +50,7 @@ public class ExquisiteFirecraft extends CardImpl {
     public ExquisiteFirecraft(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}{R}");
 
-        // Exquisite Firecraft deals 4 damage to target creature or player.        
+        // Exquisite Firecraft deals 4 damage to any target.        
         this.getSpellAbility().addTarget(new TargetAnyTarget());
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));
         

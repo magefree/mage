@@ -59,7 +59,7 @@ public class GrangerGuildmage extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // {R}, {tap}: Granger Guildmage deals 1 damage to target creature or player and 1 damage to you.
+        // {R}, {tap}: Granger Guildmage deals 1 damage to any target and 1 damage to you.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl("{R}"));
         ability.addCost(new TapSourceCost());
         ability.addEffect(new DamageControllerEffect(1));

@@ -57,13 +57,13 @@ public class PardicArsonist extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // Threshold - As long as seven or more cards are in your graveyard, Pardic Arsonist has "When Pardic Arsonist enters the battlefield, it deals 3 damage to target creature or player."
+        // Threshold - As long as seven or more cards are in your graveyard, Pardic Arsonist has "When Pardic Arsonist enters the battlefield, it deals 3 damage to any target."
         Ability gainedAbility = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(3, "it"));
         gainedAbility.addTarget(new TargetAnyTarget());
 
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
             new GainAbilitySourceEffect(gainedAbility), new CardsInControllerGraveCondition(7),
-            "As long as seven or more cards are in your graveyard, {this} has \"When {this} enters the battlefield, it deals 3 damage to target creature or player.\""));
+            "As long as seven or more cards are in your graveyard, {this} has \"When {this} enters the battlefield, it deals 3 damage to any target.\""));
         ability.setAbilityWord(AbilityWord.THRESHOLD);
         this.addAbility(ability);
     }

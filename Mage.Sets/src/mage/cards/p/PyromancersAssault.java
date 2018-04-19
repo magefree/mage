@@ -50,7 +50,7 @@ public class PyromancersAssault extends CardImpl {
     public PyromancersAssault(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{R}");
 
-        // Whenever you cast your second spell each turn, Pyromancer's Assault deals 2 damage to target creature or player.
+        // Whenever you cast your second spell each turn, Pyromancer's Assault deals 2 damage to any target.
        Ability ability = new PyromancersAssaultTriggeredAbility();
        ability.addTarget(new TargetAnyTarget());
        this.addAbility(ability, new CastSpellLastTurnWatcher());
@@ -99,6 +99,6 @@ class PyromancersAssaultTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever you cast your second spell each turn, {this} deals 2 damage to target creature or player.";
+        return "Whenever you cast your second spell each turn, {this} deals 2 damage to any target.";
     }
 }

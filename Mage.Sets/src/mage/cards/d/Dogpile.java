@@ -53,9 +53,9 @@ public class Dogpile extends CardImpl {
     public Dogpile(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{R}");
 
-        // Dogpile deals damage to target creature or player equal to the number of attacking creatures you control.
+        // Dogpile deals damage to any target equal to the number of attacking creatures you control.
         this.getSpellAbility().addEffect(new DamageTargetEffect(new PermanentsOnBattlefieldCount(filter)).
-                setText("{this} deals damage to target creature or player equal to the number of attacking creatures you control"));
+                setText("{this} deals damage to any target equal to the number of attacking creatures you control"));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
 
     }

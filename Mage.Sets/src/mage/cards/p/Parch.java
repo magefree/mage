@@ -55,7 +55,7 @@ public class Parch extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");
 
 
-        // Choose one - Parch deals 2 damage to target creature or player; or Parch deals 4 damage to target blue creature.
+        // Choose one - Parch deals 2 damage to any target; or Parch deals 4 damage to target blue creature.
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
         Mode mode = new Mode();

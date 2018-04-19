@@ -61,7 +61,7 @@ public class LightningProwess extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        // Enchanted creature has haste and "{tap}: This creature deals 1 damage to target creature or player."
+        // Enchanted creature has haste and "{tap}: This creature deals 1 damage to any target."
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(HasteAbility.getInstance(), AttachmentType.AURA)));
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
         ability.addTarget(new TargetAnyTarget());

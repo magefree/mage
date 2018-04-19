@@ -66,7 +66,7 @@ public class WardOfPiety extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
-        // {1}{W}: The next 1 damage that would be dealt to enchanted creature this turn is dealt to target creature or player instead.
+        // {1}{W}: The next 1 damage that would be dealt to enchanted creature this turn is dealt to any target instead.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new WardOfPietyPreventDamageTargetEffect(), new ManaCostsImpl("{1}{W}"));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
@@ -88,7 +88,7 @@ class WardOfPietyPreventDamageTargetEffect extends RedirectionEffect {
 
     public WardOfPietyPreventDamageTargetEffect() {
         super(Duration.EndOfTurn, 1, true);
-        staticText = "The next 1 damage that would be dealt to enchanted creature this turn is dealt to target creature or player instead";
+        staticText = "The next 1 damage that would be dealt to enchanted creature this turn is dealt to any target instead";
     }
 
     public WardOfPietyPreventDamageTargetEffect(final WardOfPietyPreventDamageTargetEffect effect) {

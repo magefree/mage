@@ -63,7 +63,7 @@ public class FlayerOfTheHatebound extends CardImpl {
 
         this.addAbility(new UndyingAbility());
 
-        // Whenever Flayer of the Hatebound or another creature enters the battlefield from your graveyard, that creature deals damage equal to its power to target creature or player.
+        // Whenever Flayer of the Hatebound or another creature enters the battlefield from your graveyard, that creature deals damage equal to its power to any target.
         Ability ability = new FlayerTriggeredAbility();
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
@@ -109,7 +109,7 @@ class FlayerTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever Flayer of the Hatebound or another creature enters the battlefield from your graveyard, that creature deals damage equal to its power to target creature or player.";
+        return "Whenever Flayer of the Hatebound or another creature enters the battlefield from your graveyard, that creature deals damage equal to its power to any target.";
     }
 
     @Override
@@ -122,7 +122,7 @@ class FlayerEffect extends OneShotEffect {
 
     public FlayerEffect() {
         super(Outcome.Damage);
-        staticText = "that creature deals damage equal to its power to target creature or player";
+        staticText = "that creature deals damage equal to its power to any target";
     }
 
     public FlayerEffect(final FlayerEffect effect) {

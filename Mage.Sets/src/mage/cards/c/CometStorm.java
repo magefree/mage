@@ -49,12 +49,12 @@ import mage.target.common.TargetAnyTarget;
 public class CometStorm extends CardImpl {
 
     public CometStorm(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{R}{R}");
 
         // Multikicker {1}
         this.addAbility(new MultikickerAbility("{1}"));
 
-        // Choose target creature or player, then choose another target creature or player for each time Comet Storm was kicked. Comet Storm deals X damage to each of them.
+        // Choose any target, then choose another any target for each time Comet Storm was kicked. Comet Storm deals X damage to each of them.
         this.getSpellAbility().addEffect(new CometStormEffect());
         this.getSpellAbility().addTarget(new TargetAnyTarget(1));
     }
@@ -82,7 +82,7 @@ class CometStormEffect extends OneShotEffect {
 
     public CometStormEffect() {
         super(Outcome.Damage);
-        staticText = "Choose target creature or player, then choose another target creature or player for each time Comet Storm was kicked. Comet Storm deals X damage to each of them";
+        staticText = "Choose any target, then choose another target for each time Comet Storm was kicked. Comet Storm deals X damage to each of them";
     }
 
     public CometStormEffect(final CometStormEffect effect) {

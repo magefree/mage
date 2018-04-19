@@ -49,7 +49,7 @@ public class PsionicBlast extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");
 
 
-        // Psionic Blast deals 4 damage to target creature or player and 2 damage to you.
+        // Psionic Blast deals 4 damage to any target and 2 damage to you.
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));
         this.getSpellAbility().addEffect(new PsionicBlastEffect());
         this.getSpellAbility().addTarget(new TargetAnyTarget());

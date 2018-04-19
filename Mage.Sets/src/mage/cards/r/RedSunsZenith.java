@@ -48,7 +48,7 @@ public class RedSunsZenith extends CardImpl {
     public RedSunsZenith(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{R}");
 
-        // Red Sun's Zenith deals X damage to target creature or player.
+        // Red Sun's Zenith deals X damage to any target.
         // If a creature dealt damage this way would die this turn, exile it instead.
         // Shuffle Red Sun's Zenith into its owner's library.
         this.getSpellAbility().addTarget(new TargetAnyTarget());

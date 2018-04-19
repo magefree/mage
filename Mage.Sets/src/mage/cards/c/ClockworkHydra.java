@@ -66,7 +66,7 @@ public class ClockworkHydra extends CardImpl {
 
         // Clockwork Hydra enters the battlefield with four +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(4)), "with four +1/+1 counters on it"));
-        // Whenever Clockwork Hydra attacks or blocks, remove a +1/+1 counter from it. If you do, Clockwork Hydra deals 1 damage to target creature or player.
+        // Whenever Clockwork Hydra attacks or blocks, remove a +1/+1 counter from it. If you do, Clockwork Hydra deals 1 damage to any target.
         this.addAbility(new AttacksOrBlocksTriggeredAbility(new ClockworkHydraEffect(), false));
 
         // {tap}: Put a +1/+1 counter on Clockwork Hydra.
@@ -88,7 +88,7 @@ class ClockworkHydraEffect extends OneShotEffect {
 
     public ClockworkHydraEffect() {
         super(Outcome.Damage);
-        this.staticText = "remove a +1/+1 counter from it. If you do, {this} deals 1 damage to target creature or player";
+        this.staticText = "remove a +1/+1 counter from it. If you do, {this} deals 1 damage to any target";
     }
 
     public ClockworkHydraEffect(final ClockworkHydraEffect effect) {

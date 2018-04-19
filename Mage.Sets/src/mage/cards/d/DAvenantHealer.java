@@ -61,7 +61,7 @@ public class DAvenantHealer extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
         ability.addTarget(new TargetAttackingOrBlockingCreature());
         this.addAbility(ability);
-        // {T}: Prevent the next 1 damage that would be dealt to target creature or player this turn.
+        // {T}: Prevent the next 1 damage that would be dealt to any target this turn.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToTargetEffect(Duration.EndOfTurn, 1), new TapSourceCost());
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);

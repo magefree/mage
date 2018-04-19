@@ -51,7 +51,7 @@ public class ConeOfFlame extends CardImpl {
     public ConeOfFlame(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
 
-        // Cone of Flame deals 1 damage to target creature or player, 2 damage to another target creature or player, and 3 damage to a third target creature or player.
+        // Cone of Flame deals 1 damage to any target, 2 damage to another any target, and 3 damage to a third any target.
         FilterCreaturePlayerOrPlaneswalker filter1 = new FilterCreaturePlayerOrPlaneswalker("creature, player or planeswalker to deal 1 damage");
         TargetAnyTarget target1 = new TargetAnyTarget(1, 1, filter1);
         target1.setTargetTag(1);

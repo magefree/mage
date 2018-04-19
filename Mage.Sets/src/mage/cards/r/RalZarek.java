@@ -84,7 +84,7 @@ public class RalZarek extends CardImpl {
         ability1.addTarget(secondTarget);
         this.addAbility(ability1);
 
-        // -2: Ral Zarek deals 3 damage to target creature or player.
+        // -2: Ral Zarek deals 3 damage to any target.
         LoyaltyAbility ability2 = new LoyaltyAbility(new DamageTargetEffect(3), -2);
         ability2.addTarget(new TargetAnyTarget());
         this.addAbility(ability2);

@@ -62,7 +62,7 @@ public class FanaticalFirebrand extends CardImpl {
         // Haste
         this.addAbility(HasteAbility.getInstance());
 
-        // {T}, Sacrifice Fanatical Firebrand: It deals 1 damage to target creature or player.
+        // {T}, Sacrifice Fanatical Firebrand: It deals 1 damage to any target.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1, "It"), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetAnyTarget());

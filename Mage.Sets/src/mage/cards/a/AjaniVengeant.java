@@ -70,7 +70,7 @@ public class AjaniVengeant extends CardImpl {
         ability1.addTarget(new TargetPermanent());
         this.addAbility(ability1);
 
-        // −2: Ajani Vengeant deals 3 damage to target creature or player and you gain 3 life.
+        // −2: Ajani Vengeant deals 3 damage to any target and you gain 3 life.
         Effects effects1 = new Effects();
         effects1.add(new DamageTargetEffect(3));
         effects1.add(new GainLifeEffect(3));

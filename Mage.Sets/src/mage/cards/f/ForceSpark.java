@@ -44,7 +44,7 @@ public class ForceSpark extends CardImpl {
     public ForceSpark(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");
 
-        // Force Spark deals 1 damage to target creature or player.
+        // Force Spark deals 1 damage to any target.
         this.getSpellAbility().addEffect(new DamageTargetEffect(1));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
 

@@ -46,9 +46,9 @@ public class FatefulShowdown extends CardImpl {
     public FatefulShowdown(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}{R}");
 
-        // Fateful Showdown deals damage to target creature or player equal to the number of cards in your hand. Discard all the cards in your hand, then draw that many cards.
+        // Fateful Showdown deals damage to any target equal to the number of cards in your hand. Discard all the cards in your hand, then draw that many cards.
         Effect effect = new DamageTargetEffect(new CardsInControllerHandCount());
-        effect.setText("{this} deals damage to target creature or player equal to the number of cards in your hand");
+        effect.setText("{this} deals damage to any target equal to the number of cards in your hand");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetAnyTarget());
         this.getSpellAbility().addEffect(new DiscardHandDrawSameNumberSourceEffect());

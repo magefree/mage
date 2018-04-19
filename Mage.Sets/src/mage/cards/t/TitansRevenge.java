@@ -46,7 +46,7 @@ public class TitansRevenge extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{R}{R}");
 
 
-        // Titan's Revenge deals X damage to target creature or player. Clash with an opponent. If you win, return Titan's Revenge to its owner's hand.
+        // Titan's Revenge deals X damage to any target. Clash with an opponent. If you win, return Titan's Revenge to its owner's hand.
         this.getSpellAbility().addEffect(new DamageTargetEffect(new ManacostVariableValue()));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
         this.getSpellAbility().addEffect(ClashWinReturnToHandSpellEffect.getInstance());

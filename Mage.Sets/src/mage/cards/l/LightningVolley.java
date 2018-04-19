@@ -52,11 +52,11 @@ public class LightningVolley extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{R}");
 
 
-        // Until end of turn, creatures you control gain "{T}: This creature deals 1 damage to target creature or player."        
+        // Until end of turn, creatures you control gain "{T}: This creature deals 1 damage to any target."        
         Ability grantedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
         grantedAbility.addTarget(new TargetAnyTarget());
         Effect effect = new GainAbilityControlledEffect(grantedAbility, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES);
-        effect.setText("Until end of turn, creatures you control gain \"{T}: This creature deals 1 damage to target creature or player.\"");
+        effect.setText("Until end of turn, creatures you control gain \"{T}: This creature deals 1 damage to any target.\"");
         this.getSpellAbility().addEffect(effect);
     }
 

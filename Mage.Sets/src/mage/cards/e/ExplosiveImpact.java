@@ -45,7 +45,7 @@ public class ExplosiveImpact extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{5}{R}");
 
 
-        // Explosive Impact deals 5 damage to target creature or player.
+        // Explosive Impact deals 5 damage to any target.
         this.getSpellAbility().addTarget(new TargetAnyTarget());
         this.getSpellAbility().addEffect(new DamageTargetEffect(5));
     }

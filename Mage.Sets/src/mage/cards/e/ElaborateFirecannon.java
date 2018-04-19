@@ -58,7 +58,7 @@ public class ElaborateFirecannon extends CardImpl {
         // Elaborate Firecannon doesn't untap during your untap step.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepSourceEffect()));
 
-        // {4}, {T}: Elaborate Firecannon deals 2 damage to target creature or player.
+        // {4}, {T}: Elaborate Firecannon deals 2 damage to any target.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl<>("{4}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetAnyTarget());

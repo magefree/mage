@@ -46,7 +46,7 @@ public class Flare extends CardImpl {
     public Flare(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");
 
-        // Flare deals 1 damage to target creature or player.
+        // Flare deals 1 damage to any target.
         this.getSpellAbility().addEffect(new DamageTargetEffect(1));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
 

@@ -79,7 +79,7 @@ public class KeranosGodOfStorms extends CardImpl {
         
         // Reveal the first card you draw on each of your turns. 
         // Whenever you reveal a land card this way, draw a card. 
-        // Whenever you reveal a nonland card this way, Keranos deals 3 damage to target creature or player.
+        // Whenever you reveal a nonland card this way, Keranos deals 3 damage to any target.
         this.addAbility(new KeranosGodOfStormsTriggeredAbility(), new CardsAmountDrawnThisTurnWatcher());
         
         
@@ -147,6 +147,6 @@ class KeranosGodOfStormsTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return "Reveal the first card you draw on each of your turns. Whenever you reveal a land card this way, draw a card. " +
-                "Whenever you reveal a nonland card this way, Keranos deals 3 damage to target creature or player.";
+                "Whenever you reveal a nonland card this way, Keranos deals 3 damage to any target.";
     }
 }

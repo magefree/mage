@@ -49,7 +49,7 @@ public class Aeolipile extends CardImpl {
     public Aeolipile(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
-        // {1}, {tap}, Sacrifice Aeolipile: Aeolipile deals 2 damage to target creature or player.
+        // {1}, {tap}, Sacrifice Aeolipile: Aeolipile deals 2 damage to any target.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl("{1}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());

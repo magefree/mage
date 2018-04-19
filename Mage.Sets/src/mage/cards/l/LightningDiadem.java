@@ -64,7 +64,7 @@ public class LightningDiadem extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
-        // When Lightning Diadem enters the battlefield, it deals 2 damage to target creature or player.
+        // When Lightning Diadem enters the battlefield, it deals 2 damage to any target.
         ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(2, "it"));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);

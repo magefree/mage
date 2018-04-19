@@ -77,7 +77,7 @@ public class Crackleburr extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // {UR}{UR}, {tap}, Tap two untapped red creatures you control: Crackleburr deals 3 damage to target creature or player.
+        // {UR}{UR}, {tap}, Tap two untapped red creatures you control: Crackleburr deals 3 damage to any target.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(3), new ManaCostsImpl("{U/R}{U/R}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new TapTargetCost(new TargetControlledCreaturePermanent(2, 2, filter, true)));

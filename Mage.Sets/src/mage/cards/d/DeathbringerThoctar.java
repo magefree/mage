@@ -62,7 +62,7 @@ public class DeathbringerThoctar extends CardImpl {
         // Whenever another creature dies, you may put a +1/+1 counter on Deathbringer Thoctar.
         this.addAbility(new DiesCreatureTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), true, true));
 
-        // Remove a +1/+1 counter from Deathbringer Thoctar: Deathbringer Thoctar deals 1 damage to target creature or player.
+        // Remove a +1/+1 counter from Deathbringer Thoctar: Deathbringer Thoctar deals 1 damage to any target.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new RemoveCountersSourceCost(CounterType.P1P1.createInstance()));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);

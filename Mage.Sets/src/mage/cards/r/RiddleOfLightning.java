@@ -52,7 +52,7 @@ public class RiddleOfLightning extends CardImpl {
     public RiddleOfLightning(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{R}{R}");
 
-        // Choose target creature or player. Scry 3, then reveal the top card of your library. Riddle of Lightning deals damage equal to that card's converted mana cost to that creature or player.
+        // Choose any target. Scry 3, then reveal the top card of your library. Riddle of Lightning deals damage equal to that card's converted mana cost to that creature or player.
         this.getSpellAbility().addTarget(new TargetAnyTarget());
         Effect effect = new ScryEffect(3);
         effect.setText("Choose any target. Scry 3");

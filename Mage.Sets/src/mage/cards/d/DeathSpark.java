@@ -56,7 +56,7 @@ public class DeathSpark extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}");
 
 
-        // Death Spark deals 1 damage to target creature or player.
+        // Death Spark deals 1 damage to any target.
         this.getSpellAbility().addEffect(new DamageTargetEffect(1));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
 

@@ -57,7 +57,7 @@ public class DarigaazsCharm extends CardImpl {
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard()));
 
-        // or Darigaaz's Charm deals 3 damage to target creature or player;
+        // or Darigaaz's Charm deals 3 damage to any target;
         Mode mode = new Mode();
         mode.getEffects().add(new DamageTargetEffect(3));
         mode.getTargets().add(new TargetAnyTarget());

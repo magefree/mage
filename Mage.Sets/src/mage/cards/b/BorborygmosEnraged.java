@@ -67,7 +67,7 @@ public class BorborygmosEnraged extends CardImpl {
         //Whenever Borborygmous Enraged deals combat damage to a player, reveal the top three cards of your library. Put all land cards revealed this way into your hand and the rest into your graveyard.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new RevealLibraryPutIntoHandEffect(3, new FilterLandCard(), Zone.GRAVEYARD), false, false));
 
-        //Discard a land card: Borborygmos Enraged deals 3 damage to target creature or player
+        //Discard a land card: Borborygmos Enraged deals 3 damage to any target
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(3), new DiscardTargetCost(new TargetCardInHand(new FilterLandCard())));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);

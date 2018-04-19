@@ -68,7 +68,7 @@ public class InfernoFist extends CardImpl {
         // Enchanted creature gets +2/+0.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 0)));
         
-        // {R}, Sacrifice Inferno Fist: Inferno Fist deals 2 damage to target creature or player.
+        // {R}, Sacrifice Inferno Fist: Inferno Fist deals 2 damage to any target.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl("{R}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetAnyTarget());

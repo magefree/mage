@@ -60,7 +60,7 @@ public class NeedleDrop extends CardImpl {
     public NeedleDrop(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}");
 
-        // Needle Drop deals 1 damage to target creature or player that was dealt damage this turn.
+        // Needle Drop deals 1 damage to any target that was dealt damage this turn.
         Effect effect = new DamageTargetEffect(1);
         effect.setText("{this} deals 1 damage to any target that was dealt damage this turn");
         this.getSpellAbility().addEffect(effect);

@@ -47,7 +47,7 @@ public class CratersClaws extends CardImpl {
     public CratersClaws(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{R}");
 
-        // Crater's Claws deals X damage to target creature or player.
+        // Crater's Claws deals X damage to any target.
         // <i>Ferocious</i> - Crater's Claws deals X plus 2 damage to that creature or player instead if you control a creature with power 4 or greater.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DamageTargetEffect(new IntPlusDynamicValue(2, new ManacostVariableValue())),

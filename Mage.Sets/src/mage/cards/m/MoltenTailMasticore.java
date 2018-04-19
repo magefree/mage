@@ -66,7 +66,7 @@ public class MoltenTailMasticore extends CardImpl {
 
         // At the beginning of your upkeep, sacrifice Molten-Tail Masticore unless you discard a card.
         this.addAbility(new MoltenTailMasticoreAbility());
-        // {4}, Exile a creature card from your graveyard: Molten-Tail Masticore deals 4 damage to target creature or player.
+        // {4}, Exile a creature card from your graveyard: Molten-Tail Masticore deals 4 damage to any target.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(4), new GenericManaCost(4));
         ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(new FilterCreatureCard("a creature card from your graveyard"))));
         ability.addTarget(new TargetAnyTarget());

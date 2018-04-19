@@ -44,7 +44,7 @@ public class SearingWind extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{8}{R}");
 
 
-        // Searing Wind deals 10 damage to target creature or player.
+        // Searing Wind deals 10 damage to any target.
         this.getSpellAbility().addTarget(new TargetAnyTarget());
         this.getSpellAbility().addEffect(new DamageTargetEffect(10));
     }

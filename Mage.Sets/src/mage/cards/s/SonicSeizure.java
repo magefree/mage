@@ -46,7 +46,7 @@ public class SonicSeizure extends CardImpl {
 
         // As an additional cost to cast Sonic Seizure, discard a card at random.
         this.getSpellAbility().addCost(new DiscardCardCost(true));
-        // Sonic Seizure deals 3 damage to target creature or player.
+        // Sonic Seizure deals 3 damage to any target.
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }

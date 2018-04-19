@@ -64,7 +64,7 @@ public class HatchetBully extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // {2}{R}, {tap}, Put a -1/-1 counter on a creature you control: Hatchet Bully deals 2 damage to target creature or player.
+        // {2}{R}, {tap}, Put a -1/-1 counter on a creature you control: Hatchet Bully deals 2 damage to any target.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new HatchetBullyEffect(), new ManaCostsImpl("{2}{R}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new HatchetBullyCost());
@@ -121,7 +121,7 @@ class HatchetBullyEffect extends OneShotEffect {
 
     public HatchetBullyEffect() {
         super(Outcome.Damage);
-        staticText = "{this} deals 2 damage to target creature or player";
+        staticText = "{this} deals 2 damage to any target";
     }
 
     public HatchetBullyEffect(final HatchetBullyEffect effect) {

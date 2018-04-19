@@ -44,7 +44,7 @@ public class FlameJavelin extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2/R}{2/R}{2/R}");
 
 
-        // Flame Javelin deals 4 damage to target creature or player.
+        // Flame Javelin deals 4 damage to any target.
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }

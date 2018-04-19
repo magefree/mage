@@ -53,7 +53,7 @@ public class ArcTrail extends CardImpl {
     public ArcTrail(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{R}");
 
-        // Arc Trail deals 2 damage to target creature or player and 1 damage to another target creature or player
+        // Arc Trail deals 2 damage to any target and 1 damage to another any target
         FilterCreaturePlayerOrPlaneswalker filter1 = new FilterCreaturePlayerOrPlaneswalker("creature, player or planeswalker to deal 2 damage");
         TargetAnyTarget target1 = new TargetAnyTarget(1, 1, filter1);
         target1.setTargetTag(1);

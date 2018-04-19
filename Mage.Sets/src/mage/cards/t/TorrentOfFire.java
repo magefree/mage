@@ -44,9 +44,9 @@ public class TorrentOfFire extends CardImpl {
     public TorrentOfFire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
 
-        // Torrent of Fire deals damage equal to the highest converted mana cost among permanents you control to target creature or player.
+        // Torrent of Fire deals damage equal to the highest converted mana cost among permanents you control to any target.
         this.getSpellAbility().addEffect(new DamageTargetEffect(new HighestConvertedManaCostValue())
-                .setText("{this} deals damage to target creature or player equal to the highest converted mana cost among permanents you control.")
+                .setText("{this} deals damage to any target equal to the highest converted mana cost among permanents you control.")
         );
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }

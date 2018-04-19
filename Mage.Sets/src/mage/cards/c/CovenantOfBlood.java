@@ -50,9 +50,9 @@ public class CovenantOfBlood extends CardImpl {
         // Convoke
         this.addAbility(new ConvokeAbility());
         
-        // Covenant of Blood deals 4 damage to target creature or player
+        // Covenant of Blood deals 4 damage to any target
         Effect effect = new DamageTargetEffect(4);
-        effect.setText("{this} deals 4 damage to target creature or player");
+        effect.setText("{this} deals 4 damage to any target");
         this.getSpellAbility().addEffect(effect);
         // and you gain 4 life.
         effect = new GainLifeEffect(4);

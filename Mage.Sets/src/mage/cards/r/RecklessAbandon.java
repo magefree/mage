@@ -49,7 +49,7 @@ public class RecklessAbandon extends CardImpl {
         // As an additional cost to cast Reckless Abandon, sacrifice a creature.
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
 
-        // Reckless Abandon deals 4 damage to target creature or player.
+        // Reckless Abandon deals 4 damage to any target.
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }

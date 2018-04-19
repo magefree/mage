@@ -64,7 +64,7 @@ public class RumblingAftershocks extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{R}");
 
 
-        // Whenever you cast a kicked spell, you may have Rumbling Aftershocks deal damage to target creature or player equal to the number of times that spell was kicked.
+        // Whenever you cast a kicked spell, you may have Rumbling Aftershocks deal damage to any target equal to the number of times that spell was kicked.
         Ability ability = new RumblingAftershocksTriggeredAbility();
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
@@ -129,7 +129,7 @@ class RumblingAftershocksDealDamageEffect extends OneShotEffect {
 
     public RumblingAftershocksDealDamageEffect() {
         super(Outcome.Damage);
-        this.staticText = "you may have {this} deal damage to target creature or player equal to the number of times that spell was kicked";
+        this.staticText = "you may have {this} deal damage to any target equal to the number of times that spell was kicked";
     }
 
     public RumblingAftershocksDealDamageEffect(final RumblingAftershocksDealDamageEffect effect) {

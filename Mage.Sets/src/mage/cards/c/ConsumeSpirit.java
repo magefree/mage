@@ -60,7 +60,7 @@ public class ConsumeSpirit extends CardImpl {
 
 
         // Spend only black mana on X.
-        // Consume Spirit deals X damage to target creature or player and you gain X life.
+        // Consume Spirit deals X damage to any target and you gain X life.
         this.getSpellAbility().addTarget(new TargetAnyTarget());
         this.getSpellAbility().addEffect(new ConsumeSpiritEffect());
         VariableCost variableCost = this.getSpellAbility().getManaCostsToPay().getVariableCosts().get(0);
@@ -83,7 +83,7 @@ class ConsumeSpiritEffect extends OneShotEffect {
 
     public ConsumeSpiritEffect() {
         super(Outcome.Damage);
-        staticText = "Consume Spirit deals X damage to target creature or player and you gain X life. Spend only black mana on X";
+        staticText = "Consume Spirit deals X damage to any target and you gain X life. Spend only black mana on X";
     }
 
     public ConsumeSpiritEffect(final ConsumeSpiritEffect effect) {

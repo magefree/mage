@@ -54,7 +54,7 @@ public class ArcSlogger extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
 
-        // {R}, Exile the top ten cards of your library: Arc-Slogger deals 2 damage to target creature or player.
+        // {R}, Exile the top ten cards of your library: Arc-Slogger deals 2 damage to any target.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl("{R}"));
         ability.addCost(new ExileFromTopOfLibraryCost(10));
         ability.addTarget(new TargetAnyTarget());

@@ -58,7 +58,7 @@ public class AvenRedeemer extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         
-        // {tap}: Prevent the next 2 damage that would be dealt to target creature or player this turn.
+        // {tap}: Prevent the next 2 damage that would be dealt to any target this turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToTargetEffect(Duration.EndOfTurn, 2), new TapSourceCost());
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);

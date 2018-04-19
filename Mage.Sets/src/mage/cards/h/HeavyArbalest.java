@@ -65,7 +65,7 @@ public class HeavyArbalest extends CardImpl {
         // Equipped creature doesn't untap during its controller's untap step.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new HeavyArbalestEffect()));
 
-        // Equipped creature has "{T}: This creature deals 2 damage to target creature or player."
+        // Equipped creature has "{T}: This creature deals 2 damage to any target."
         SimpleActivatedAbility ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new TapSourceCost());
         ability2.addTarget(new TargetAnyTarget());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability2, AttachmentType.EQUIPMENT)));

@@ -45,7 +45,7 @@ public class MagmaJet extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");
 
 
-        // Magma Jet deals 2 damage to target creature or player.
+        // Magma Jet deals 2 damage to any target.
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
         // Scry 2.

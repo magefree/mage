@@ -43,7 +43,7 @@ public class UnyaroBeeSting extends CardImpl {
     public UnyaroBeeSting(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}");
 
-        // Unyaro Bee Sting deals 2 damage to target creature or player.
+        // Unyaro Bee Sting deals 2 damage to any target.
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }

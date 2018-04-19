@@ -46,7 +46,7 @@ public class Geistflame extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");
 
 
-        // Geistflame deals 1 damage to target creature or player.
+        // Geistflame deals 1 damage to any target.
         this.getSpellAbility().addEffect(new DamageTargetEffect(1));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
 

@@ -54,7 +54,7 @@ public class BrothersOfFire extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // {1}{R}{R}: Brothers of Fire deals 1 damage to target creature or player and 1 damage to you.
+        // {1}{R}{R}: Brothers of Fire deals 1 damage to any target and 1 damage to you.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl("{1}{R}{R}"));
         Effect effect = new DamageControllerEffect(1);
         effect.setText("and 1 damage to you");

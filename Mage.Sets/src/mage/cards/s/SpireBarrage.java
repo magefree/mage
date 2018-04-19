@@ -56,7 +56,7 @@ public class SpireBarrage extends CardImpl {
     public SpireBarrage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{R}");
 
-        // Spire Barrage deals damage to target creature or player equal to the number of Mountains you control.
+        // Spire Barrage deals damage to any target equal to the number of Mountains you control.
         this.getSpellAbility().addEffect(new DamageTargetEffect(new PermanentsOnBattlefieldCount(filter)));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }

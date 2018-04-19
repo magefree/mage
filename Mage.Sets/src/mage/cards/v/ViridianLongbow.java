@@ -55,9 +55,9 @@ public class ViridianLongbow extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
         this.subtype.add(SubType.EQUIPMENT);
 
-        // Equipped creature has "{tap}: This creature deals 1 damage to target creature or player."
+        // Equipped creature has "{tap}: This creature deals 1 damage to any target."
         Effect effect = new DamageTargetEffect(1);
-        effect.setText("This creature deals 1 damage to target creature or player");
+        effect.setText("This creature deals 1 damage to any target");
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability, AttachmentType.EQUIPMENT)));

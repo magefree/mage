@@ -74,7 +74,7 @@ public class Flamewright extends CardImpl {
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 
-        // {tap}, Sacrifice a creature with defender: Flamewright deals 1 damage to target creature or player.
+        // {tap}, Sacrifice a creature with defender: Flamewright deals 1 damage to any target.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
         ability.addTarget(new TargetAnyTarget());

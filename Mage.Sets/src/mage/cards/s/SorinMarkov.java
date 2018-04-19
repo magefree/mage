@@ -60,7 +60,7 @@ public class SorinMarkov extends CardImpl {
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));
 
-        // +2: Sorin Markov deals 2 damage to target creature or player and you gain 2 life.
+        // +2: Sorin Markov deals 2 damage to any target and you gain 2 life.
         LoyaltyAbility ability1 = new LoyaltyAbility(new DamageTargetEffect(2), 2);
         ability1.addEffect(new GainLifeEffect(2));
         ability1.addTarget(new TargetAnyTarget());

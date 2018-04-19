@@ -48,7 +48,7 @@ public class StokeTheFlames extends CardImpl {
         // Convoke
         this.addAbility(new ConvokeAbility());
         
-        // Stoke the Flames deals 4 damage to target creature or player.
+        // Stoke the Flames deals 4 damage to any target.
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }

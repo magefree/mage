@@ -48,7 +48,7 @@ public class BurningVengeance extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");
 
 
-        // Whenever you cast a spell from your graveyard, Burning Vengeance deals 2 damage to target creature or player.
+        // Whenever you cast a spell from your graveyard, Burning Vengeance deals 2 damage to any target.
         this.addAbility(new BurningVengeanceOnCastAbility());
     }
 
@@ -64,7 +64,7 @@ public class BurningVengeance extends CardImpl {
 
 class BurningVengeanceOnCastAbility extends TriggeredAbilityImpl {
 
-    private static final String abilityText = "Whenever you cast a spell from your graveyard, Burning Vengeance deals 2 damage to target creature or player";
+    private static final String abilityText = "Whenever you cast a spell from your graveyard, Burning Vengeance deals 2 damage to any target";
 
     BurningVengeanceOnCastAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(2), false);

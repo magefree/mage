@@ -66,7 +66,7 @@ public class NivMizzetDracogenius extends CardImpl {
         // Whenever Niv-Mizzet, Dracogenius deals damage to a player, you may draw a card.
         this.addAbility(new DealsDamageToAPlayerTriggeredAbility(new DrawCardSourceControllerEffect(1), true));
         
-        // {U}{R}: Niv-Mizzet, Dracogenius deals 1 damage to target creature or player.
+        // {U}{R}: Niv-Mizzet, Dracogenius deals 1 damage to any target.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1),new ManaCostsImpl("{U}{R}"));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);

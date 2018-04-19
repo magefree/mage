@@ -52,7 +52,7 @@ public class BallistaCharger extends CardImpl {
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 
-        // Whenever Ballista Charger attacks, it deals 1 damage to target creature or player.
+        // Whenever Ballista Charger attacks, it deals 1 damage to any target.
         Ability ability = new AttacksTriggeredAbility(new DamageTargetEffect(1, "it"), false);
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);

@@ -43,7 +43,7 @@ public class ScorchingSpear extends CardImpl {
     public ScorchingSpear(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}");
 
-        // Scorching Spear deals 1 damage to target creature or player.
+        // Scorching Spear deals 1 damage to any target.
         this.getSpellAbility().addEffect(new DamageTargetEffect(1));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }

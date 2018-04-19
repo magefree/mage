@@ -67,7 +67,7 @@ public class TalonOfPain extends CardImpl {
          */
         this.addAbility(new TalonOfPainTriggeredAbility());
 
-        // {X}, {T}, Remove X charge counters from Talon of Pain: Talon of Pain deals X damage to target creature or player.
+        // {X}, {T}, Remove X charge counters from Talon of Pain: Talon of Pain deals X damage to any target.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(new ManacostVariableValue()), new ManaCostsImpl("{X}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new TalonOfPainRemoveVariableCountersSourceCost(CounterType.CHARGE.createInstance()));

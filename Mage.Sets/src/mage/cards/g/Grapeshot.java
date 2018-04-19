@@ -45,7 +45,7 @@ public class Grapeshot extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}");
 
 
-        // Grapeshot deals 1 damage to target creature or player.
+        // Grapeshot deals 1 damage to any target.
         this.getSpellAbility().addTarget(new TargetAnyTarget());
         this.getSpellAbility().addEffect(new DamageTargetEffect(1));
         // Storm

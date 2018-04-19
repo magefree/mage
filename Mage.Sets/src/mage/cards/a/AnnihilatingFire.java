@@ -48,7 +48,7 @@ public class AnnihilatingFire extends CardImpl {
     public AnnihilatingFire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}{R}");
 
-        // Annihilating Fire deals 3 damage to target creature or player.
+        // Annihilating Fire deals 3 damage to any target.
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
 

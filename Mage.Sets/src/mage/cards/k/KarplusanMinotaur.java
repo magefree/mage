@@ -64,13 +64,13 @@ public class KarplusanMinotaur extends CardImpl {
         // Cumulative upkeep-Flip a coin.
         this.addAbility(new CumulativeUpkeepAbility(new KarplusanMinotaurCost()));
 
-        // Whenever you win a coin flip, Karplusan Minotaur deals 1 damage to target creature or player.
+        // Whenever you win a coin flip, Karplusan Minotaur deals 1 damage to any target.
         Ability abilityWin = new KarplusanMinotaurFlipWinTriggeredAbility();
         abilityWin.addTarget(new TargetAnyTarget());
         this.addAbility(abilityWin);
 
         //TODO: Make ability properly copiable
-        // Whenever you lose a coin flip, Karplusan Minotaur deals 1 damage to target creature or player of an opponent's choice.
+        // Whenever you lose a coin flip, Karplusan Minotaur deals 1 damage to any target of an opponent's choice.
         Ability abilityLose = new KarplusanMinotaurFlipLoseTriggeredAbility();
         abilityLose.addTarget(new TargetAnyTarget());
         this.addAbility(abilityLose);
@@ -134,7 +134,7 @@ class KarplusanMinotaurFlipWinTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever you win a coin flip, {this} deals 1 damage to target creature or player";
+        return "Whenever you win a coin flip, {this} deals 1 damage to any target";
     }
 }
 
@@ -165,7 +165,7 @@ class KarplusanMinotaurFlipLoseTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever you lose a coin flip, {this} deals 1 damage to target creature or player of an opponent's choice.";
+        return "Whenever you lose a coin flip, {this} deals 1 damage to any target of an opponent's choice.";
     }
 }
 

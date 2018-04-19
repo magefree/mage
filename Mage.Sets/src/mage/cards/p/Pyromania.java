@@ -49,12 +49,12 @@ public class Pyromania extends CardImpl {
     public Pyromania(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");
 
-        // {1}{R}, Discard a card at random: Pyromania deals 1 damage to target creature or player.
+        // {1}{R}, Discard a card at random: Pyromania deals 1 damage to any target.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl("{1}{R}"));
         ability.addCost(new DiscardCardCost(true));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
-        // {1}{R}, Sacrifice Pyromania: Pyromania deals 1 damage to target creature or player.
+        // {1}{R}, Sacrifice Pyromania: Pyromania deals 1 damage to any target.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl("{1}{R}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetAnyTarget());

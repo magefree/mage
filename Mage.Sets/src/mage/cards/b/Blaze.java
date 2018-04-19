@@ -45,7 +45,7 @@ public class Blaze extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{R}");
 
 
-        // Blaze deals X damage to target creature or player.
+        // Blaze deals X damage to any target.
         this.getSpellAbility().addEffect(new DamageTargetEffect(new ManacostVariableValue()));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }

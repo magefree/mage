@@ -53,7 +53,7 @@ public class RoarOfTheCrowd extends CardImpl {
     public RoarOfTheCrowd(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}");
 
-        // Choose a creature type. Roar of the Crowd deals damage to target creature or player equal to the number of permanents you control of the chosen type.
+        // Choose a creature type. Roar of the Crowd deals damage to any target equal to the number of permanents you control of the chosen type.
         TargetAnyTarget target = new TargetAnyTarget();
         this.getSpellAbility().addTarget(target);
         this.getSpellAbility().addEffect(new RoarOfTheCrowdEffect());
@@ -73,7 +73,7 @@ class RoarOfTheCrowdEffect extends OneShotEffect {
 
     RoarOfTheCrowdEffect() {
         super(Outcome.LoseLife);
-        this.staticText = "Choose a creature type. {this} deals damage to target creature or player equal to the number of permanents you control of the chosen type.";
+        this.staticText = "Choose a creature type. {this} deals damage to any target equal to the number of permanents you control of the chosen type.";
     }
 
     RoarOfTheCrowdEffect(final RoarOfTheCrowdEffect effect) {

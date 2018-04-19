@@ -62,11 +62,11 @@ public class FireWhip extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
         
-        // Enchanted creature has "{t}: This creature deals 1 damage to target creature or player."
+        // Enchanted creature has "{t}: This creature deals 1 damage to any target."
         Ability ability1 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
         ability1.addTarget(new TargetAnyTarget());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability1, AttachmentType.AURA, Duration.WhileOnBattlefield, "Enchanted creature has \"{t}: This creature deals 1 damage to target creature or player.\"")));
-        // Sacrifice Fire Whip: Fire Whip deals 1 damage to target creature or player.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability1, AttachmentType.AURA, Duration.WhileOnBattlefield, "Enchanted creature has \"{t}: This creature deals 1 damage to any target.\"")));
+        // Sacrifice Fire Whip: Fire Whip deals 1 damage to any target.
         Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new SacrificeSourceCost());
         ability2.addTarget(new TargetAnyTarget());
         this.addAbility(ability2);

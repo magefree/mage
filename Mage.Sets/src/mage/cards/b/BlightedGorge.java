@@ -53,7 +53,7 @@ public class BlightedGorge extends CardImpl {
         // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
 
-        // {4}{R}, {T}, Sacrifice Blighted Gorge: Blighted Gorge deals 2 damage to target creature or player.
+        // {4}{R}, {T}, Sacrifice Blighted Gorge: Blighted Gorge deals 2 damage to any target.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new DamageTargetEffect(2),
                 new ManaCostsImpl<>("{4}{R}"));

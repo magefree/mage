@@ -56,7 +56,7 @@ public class SpikeshotGoblin extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 
-        // {R}, {tap}: Spikeshot Goblin deals damage equal to its power to target creature or player.
+        // {R}, {tap}: Spikeshot Goblin deals damage equal to its power to any target.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SpikeshotGoblinEffect(), new ColoredManaCost(ColoredManaSymbol.R));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetAnyTarget());
@@ -76,7 +76,7 @@ public class SpikeshotGoblin extends CardImpl {
 class SpikeshotGoblinEffect extends OneShotEffect {
     public SpikeshotGoblinEffect() {
         super(Outcome.Damage);
-        staticText = "{this} deals damage equal to its power to target creature or player";
+        staticText = "{this} deals damage equal to its power to any target";
     }
 
     public SpikeshotGoblinEffect(final SpikeshotGoblinEffect effect) {

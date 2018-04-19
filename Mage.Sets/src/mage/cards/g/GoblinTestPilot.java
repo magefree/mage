@@ -59,7 +59,7 @@ public class GoblinTestPilot extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        // {tap}: Goblin Test Pilot deals 2 damage to target creature or player chosen at random.
+        // {tap}: Goblin Test Pilot deals 2 damage to any target chosen at random.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new TapSourceCost());
         Target target = new TargetAnyTarget();
         target.setRandom(true);

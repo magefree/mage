@@ -47,7 +47,7 @@ public class ArrowStorm extends CardImpl {
     public ArrowStorm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
 
-        // Arrow Storm deals 4 damage to target creature or player.
+        // Arrow Storm deals 4 damage to any target.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DamageTargetEffect(4),
                 new InvertCondition(RaidCondition.instance),

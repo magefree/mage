@@ -107,6 +107,6 @@ class LivewireLashAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever this creature becomes the target of a spell, this creature deals 2 damage to target creature or player.";
+        return "Whenever this creature becomes the target of a spell, this creature deals 2 damage to any target.";
     }
 }

@@ -59,7 +59,7 @@ public class Banefire extends CardImpl {
     public Banefire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{R}");
 
-        // Banefire deals X damage to target creature or player.       
+        // Banefire deals X damage to any target.       
         this.getSpellAbility().addEffect(new BaneFireEffect());
         this.getSpellAbility().addTarget(new TargetAnyTarget());
         // If X is 5 or more, Banefire can't be countered by spells or abilities and the damage can't be prevented.
@@ -101,7 +101,7 @@ class BaneFireEffect extends OneShotEffect {
 
     public BaneFireEffect() {
         super(Outcome.Damage);
-        staticText = "{this} deals X damage to target creature or player";
+        staticText = "{this} deals X damage to any target";
     }
 
     public BaneFireEffect(final BaneFireEffect effect) {

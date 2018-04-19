@@ -44,7 +44,7 @@ public class Zap extends CardImpl {
     public Zap(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");
 
-        // Zap deals 1 damage to target creature or player.
+        // Zap deals 1 damage to any target.
         this.getSpellAbility().addEffect(new DamageTargetEffect(1));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
         // Draw a card.

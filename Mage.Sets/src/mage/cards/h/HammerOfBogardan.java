@@ -51,7 +51,7 @@ public class HammerOfBogardan extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}{R}");
 
 
-        // Hammer of Bogardan deals 3 damage to target creature or player.
+        // Hammer of Bogardan deals 3 damage to any target.
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
 

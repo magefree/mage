@@ -57,7 +57,7 @@ public class RocketLauncher extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         Watcher watcher = new RocketLauncherWatcher(this.getId());        
-        // {2}: Rocket Launcher deals 1 damage to target creature or player. Destroy Rocket Launcher at the beginning of the next end step. Activate this ability only if you've controlled Rocket Launcher continuously since the beginning of your most recent turn.
+        // {2}: Rocket Launcher deals 1 damage to any target. Destroy Rocket Launcher at the beginning of the next end step. Activate this ability only if you've controlled Rocket Launcher continuously since the beginning of your most recent turn.
         Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD,
                                 new DamageTargetEffect(1), new GenericManaCost(2), ControlledTurnCondition.instance);
         ability.addTarget(new TargetAnyTarget());

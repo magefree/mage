@@ -43,7 +43,7 @@ public class UnfriendlyFire extends CardImpl {
     public UnfriendlyFire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{4}{R}");
 
-        // Unfriendly Fire deals 4 damage to target creature or player.
+        // Unfriendly Fire deals 4 damage to any target.
         this.getSpellAbility().addTarget(new TargetAnyTarget());
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));
     }

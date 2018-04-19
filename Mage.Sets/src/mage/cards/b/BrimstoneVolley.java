@@ -49,7 +49,7 @@ public class BrimstoneVolley extends CardImpl {
     public BrimstoneVolley(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{R}");
 
-        // Brimstone Volley deals 3 damage to target creature or player.
+        // Brimstone Volley deals 3 damage to any target.
         // Morbid - Brimstone Volley deals 5 damage to that creature or player instead if a creature died this turn.
         this.getSpellAbility().addEffect(new BrimstoneVolleyEffect());
         this.getSpellAbility().addTarget(new TargetAnyTarget());

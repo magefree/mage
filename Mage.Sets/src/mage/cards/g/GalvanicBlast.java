@@ -48,7 +48,7 @@ public class GalvanicBlast extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}");
         this.color.setRed(true);
 
-        // Galvanic Blast deals 2 damage to target creature or player.
+        // Galvanic Blast deals 2 damage to any target.
         // Metalcraft - Galvanic Blast deals 4 damage to that creature or player instead if you control three or more artifacts.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new DamageTargetEffect(4), new DamageTargetEffect(2), MetalcraftCondition.instance, effectText));
         this.getSpellAbility().addTarget(new TargetAnyTarget());

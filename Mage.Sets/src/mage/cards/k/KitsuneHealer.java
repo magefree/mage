@@ -65,7 +65,7 @@ public class KitsuneHealer extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         
-        // {T}: Prevent the next 1 damage that would be dealt to target creature or player this turn.        
+        // {T}: Prevent the next 1 damage that would be dealt to any target this turn.        
         Ability firstAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToTargetEffect(Duration.EndOfTurn, 1), new TapSourceCost());
         firstAbility.addTarget(new TargetAnyTarget());
         this.addAbility(firstAbility);

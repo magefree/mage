@@ -50,7 +50,7 @@ public class BlastOfGenius extends CardImpl {
     public BlastOfGenius(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{U}{R}");
 
-        // Choose target creature or player. Draw three cards and discard a card. Blast of Genius deals damage equal to the converted mana cost of the discard card to that creature or player.
+        // Choose any target. Draw three cards and discard a card. Blast of Genius deals damage equal to the converted mana cost of the discard card to that creature or player.
         this.getSpellAbility().addEffect(new BlastOfGeniusEffect());
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }

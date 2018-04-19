@@ -54,7 +54,7 @@ public class RekindledFlame extends CardImpl {
     public RekindledFlame(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{R}{R}");
 
-        // Rekindled Flame deals 4 damage to target creature or player.
+        // Rekindled Flame deals 4 damage to any target.
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
 

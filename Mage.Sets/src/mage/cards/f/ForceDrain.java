@@ -49,7 +49,7 @@ public class ForceDrain extends CardImpl {
     public ForceDrain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}");
 
-        // ForceDrain deals 2 damage to target creature or player. If player was dealt damage this way, you gain 2 life.
+        // ForceDrain deals 2 damage to any target. If player was dealt damage this way, you gain 2 life.
         this.getSpellAbility().addTarget(new TargetAnyTarget());
         this.getSpellAbility().addEffect(new ForceDrainEffect());
 
@@ -71,7 +71,7 @@ class ForceDrainEffect extends OneShotEffect {
 
     public ForceDrainEffect() {
         super(Outcome.Damage);
-        this.staticText = "ForceDrain deals 2 damage to target creature or player. If player was dealt damage this way, you gain 2 life";
+        this.staticText = "ForceDrain deals 2 damage to any target. If player was dealt damage this way, you gain 2 life";
     }
 
     public ForceDrainEffect(final ForceDrainEffect effect) {

@@ -61,7 +61,7 @@ public class FleshBlood extends SplitCard {
         getLeftHalfCard().getSpellAbility().addEffect(new FleshEffect());
 
         // Blood
-        // Target creature you control deals damage equal to its power to target creature or player.
+        // Target creature you control deals damage equal to its power to any target.
         getRightHalfCard().getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         getRightHalfCard().getSpellAbility().addTarget(new TargetAnyTarget());
         getRightHalfCard().getSpellAbility().addEffect(new BloodEffect());
@@ -117,7 +117,7 @@ class BloodEffect extends OneShotEffect {
 
     public BloodEffect() {
         super(Outcome.Damage);
-        staticText = "Target creature you control deals damage equal to its power to target creature or player";
+        staticText = "Target creature you control deals damage equal to its power to any target";
     }
 
     public BloodEffect(final BloodEffect effect) {

@@ -62,7 +62,7 @@ public class HondenOfInfiniteRage extends CardImpl {
         this.subtype.add(SubType.SHRINE);
 
 
-        // At the beginning of your upkeep, Honden of Infinite Rage deals damage to target creature or player equal to the number of Shrines you control.                 
+        // At the beginning of your upkeep, Honden of Infinite Rage deals damage to any target equal to the number of Shrines you control.                 
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new DamageTargetEffect(new PermanentsOnBattlefieldCount(filter)), TargetController.YOU, false);
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);

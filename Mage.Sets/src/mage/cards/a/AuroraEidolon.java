@@ -64,7 +64,7 @@ public class AuroraEidolon extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // {W}, Sacrifice Aurora Eidolon: Prevent the next 3 damage that would be dealt to target creature or player this turn.
+        // {W}, Sacrifice Aurora Eidolon: Prevent the next 3 damage that would be dealt to any target this turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToTargetEffect(Duration.EndOfTurn, 3), new ManaCostsImpl("{W}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetAnyTarget());

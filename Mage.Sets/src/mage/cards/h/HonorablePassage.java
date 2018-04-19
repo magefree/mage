@@ -51,7 +51,7 @@ public class HonorablePassage extends CardImpl {
     public HonorablePassage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");
 
-        // The next time a source of your choice would deal damage to target creature or player this turn, prevent that damage. If damage from a red source is prevented this way, Honorable Passage deals that much damage to the source's controller.
+        // The next time a source of your choice would deal damage to any target this turn, prevent that damage. If damage from a red source is prevented this way, Honorable Passage deals that much damage to the source's controller.
         this.getSpellAbility().addEffect(new HonorablePassageEffect());
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
@@ -103,6 +103,6 @@ class HonorablePassageEffect extends PreventNextDamageFromChosenSourceToTargetEf
 
     @Override
     public String getText(Mode mode) {
-        return "The next time a source of your choice would deal damage to target creature or player this turn, prevent that damage. If damage from a red source is prevented this way, {this} deals that much damage to the source's controller";
+        return "The next time a source of your choice would deal damage to any target this turn, prevent that damage. If damage from a red source is prevented this way, {this} deals that much damage to the source's controller";
     }
 }

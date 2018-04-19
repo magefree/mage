@@ -54,7 +54,7 @@ public class SanctumGuardian extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);
 
-        // Sacrifice Sanctum Guardian: The next time a source of your choice would deal damage to target creature or player this turn, prevent that damage.
+        // Sacrifice Sanctum Guardian: The next time a source of your choice would deal damage to any target this turn, prevent that damage.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventNextDamageFromChosenSourceToTargetEffect(Duration.EndOfTurn),
             new SacrificeSourceCost());
         ability.addTarget(new TargetAnyTarget());

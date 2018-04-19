@@ -46,7 +46,7 @@ public class Meteorite extends CardImpl {
     public Meteorite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
 
-        // When Meteorite enters the battlefield, it deals 2 damage to target creature or player.
+        // When Meteorite enters the battlefield, it deals 2 damage to any target.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(2, "it"), false);
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);

@@ -54,7 +54,7 @@ public class ProfanePrayers extends CardImpl {
     public ProfanePrayers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}{B}");
 
-        // Profane Prayers deals X damage to target creature or player and you gain X life, where X is the number of Clerics on the battlefield.
+        // Profane Prayers deals X damage to any target and you gain X life, where X is the number of Clerics on the battlefield.
         this.getSpellAbility().addEffect(new DamageTargetEffect(new PermanentsOnBattlefieldCount(filter)));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
         this.getSpellAbility().addEffect(new GainLifeEffect(new PermanentsOnBattlefieldCount(filter)));

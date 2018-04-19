@@ -56,7 +56,7 @@ public class GhituFire extends CardImpl {
         ability.addTarget(new TargetAnyTarget());
         ability.setRuleAtTheTop(true);
         this.addAbility(ability);
-        // Ghitu Fire deals X damage to target creature or player.
+        // Ghitu Fire deals X damage to any target.
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }

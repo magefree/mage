@@ -62,7 +62,7 @@ public class PreyseizerDragon extends CardImpl {
         // Devour 2 (As this enters the battlefield, you may sacrifice any number of creatures. This creature enters the battlefield with twice that many +1/+1 counters on it.)
         this.addAbility(new DevourAbility(DevourFactor.Devour2));
 
-        // Whenever Preyseizer Dragon attacks, it deals damage to target creature or player equal to the number of +1/+1 counters on Preyseizer Dragon.
+        // Whenever Preyseizer Dragon attacks, it deals damage to any target equal to the number of +1/+1 counters on Preyseizer Dragon.
         Ability ability = new AttacksTriggeredAbility(new DamageTargetEffect(new CountersSourceCount(CounterType.P1P1)), false);
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
