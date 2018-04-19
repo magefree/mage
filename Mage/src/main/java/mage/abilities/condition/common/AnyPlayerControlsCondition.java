@@ -27,11 +27,11 @@
  */
 package mage.abilities.condition.common;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
-import java.util.UUID;
 
 /**
  * @author North
@@ -47,12 +47,12 @@ public class AnyPlayerControlsCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
 
-        for (UUID player : game.getPlayers().keySet()) {
-            if(player != null && game.getBattlefield().countAll(filter, player, game)> 0){
-                return true;
+        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
+            if (game.getBattlefield().countAll(filter, playerId, game) == 0) {
+                return false;
             }
 
         }
-        return false;
+        return true;
     }
 }
