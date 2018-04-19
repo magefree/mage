@@ -34,11 +34,11 @@ import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandFromBattlefieldAllEffect;
 import mage.abilities.keyword.KickerAbility;
-import mage.constants.SubType;
-import mage.constants.SuperType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -79,7 +79,7 @@ public class SlinnVodaTheRisingDeep extends CardImpl {
                 KickedCondition.instance,
                 "when {this} enters the battlefield, if it was kicked, "
                 + "return all creatures to their owners' hands except for "
-                + "Merfolk, Krakens, Leviathans, Octopuses, and Serpents"
+                + "Merfolk, Krakens, Leviathans, Octopuses, and Serpents."
         ));
     }
 

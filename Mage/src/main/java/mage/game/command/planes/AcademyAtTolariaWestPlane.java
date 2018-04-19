@@ -110,12 +110,15 @@ class DrawCardsActivePlayerEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (game.getState().getCurrentPlane() != null) {
-            if (!game.getState().getCurrentPlane().getName().equalsIgnoreCase("Plane - Academy at Tolaria West")) {
+        Plane cPlane = game.getState().getCurrentPlane();
+        if (cPlane == null) {
+            return false;
+        }
+        if (cPlane != null) {
+            if (!cPlane.getName().equalsIgnoreCase("Plane - Academy at Tolaria West")) {
                 return false;
             }
         }
-
         Player player = game.getPlayer(game.getActivePlayerId());
         if (player != null) {
             player.drawCards(amount.calculate(game, source, this), game);
@@ -129,7 +132,6 @@ class DrawCardsActivePlayerEffect extends OneShotEffect {
         sb.append("draw ").append(CardUtil.numberToText(amount.toString())).append(" cards");
         staticText = sb.toString();
     }
-
 }
 
 enum HellbentAPCondition implements Condition {

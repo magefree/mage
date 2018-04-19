@@ -66,9 +66,9 @@ public class TheDarkBaronyPlane extends Plane {
         this.setName("Plane - The Dark Barony");
         this.setExpansionSetCodeForImage("PCA");
 
-        // Whenever a nonblack card is put into a player's graveyard from anywhere, that player loses 2 life
+        // Whenever a nonblack card is put into a player's graveyard from anywhere, that player loses 1 life
         Ability ability = new PutCardIntoGraveFromAnywhereAllTriggeredAbility(Zone.COMMAND,
-                new LoseLifeTargetEffect(2), false, filter, TargetController.ANY, SetTargetPointer.PLAYER);
+                new LoseLifeTargetEffect(1), false, filter, TargetController.ANY, SetTargetPointer.PLAYER);
         this.getAbilities().add(ability);
 
         // Active player can roll the planar die: Whenever you roll {CHAOS}, each player dicards a card

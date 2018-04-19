@@ -154,7 +154,8 @@ public class AddCountersTargetEffect extends OneShotEffect {
             }
 
             if (target.getMaxNumberOfTargets() > 1 || target.getNumberOfTargets() == 0) {
-                sb.append(target.getMaxNumberOfTargets()).append(" target ").append(target.getTargetName());
+                sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets()))
+                        .append(" target ").append(target.getTargetName());
             } else {
                 if (!target.getTargetName().startsWith("another")) {
                     sb.append("target ");

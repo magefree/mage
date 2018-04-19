@@ -41,13 +41,14 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreatureOrPlayer;
+
 /**
  *
  * @author Will
  */
 public class WizardsLightning extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Wizard");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("you control a Wizard");
 
     static {
         filter.add(new SubtypePredicate(SubType.WIZARD));

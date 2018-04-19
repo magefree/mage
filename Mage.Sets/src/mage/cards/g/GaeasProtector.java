@@ -31,10 +31,11 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.combat.MustBeBlockedByAtLeastOneSourceEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 
 /**
@@ -52,7 +53,7 @@ public class GaeasProtector extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Gaea's Protector must be blocked if able.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MustBeBlockedByAtLeastOneSourceEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MustBeBlockedByAtLeastOneSourceEffect(Duration.WhileOnBattlefield)));
     }
 
     public GaeasProtector(final GaeasProtector card) {

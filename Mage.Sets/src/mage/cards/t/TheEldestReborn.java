@@ -68,7 +68,8 @@ public class TheEldestReborn extends CardImpl {
 
         // III — Put target creature or planeswalker card from a graveyard onto the battlefield under your control.
         Ability ability = sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_III,
-                new ReturnFromGraveyardToBattlefieldTargetEffect());
+                new ReturnFromGraveyardToBattlefieldTargetEffect()
+                        .setText("Put target creature or planeswalker card from a graveyard onto the battlefield under your control"));
         FilterCard filter = new FilterCard("creature or planeswalker card from a graveyard");
         filter.add(Predicates.or(new CardTypePredicate(CardType.CREATURE), new CardTypePredicate(CardType.PLANESWALKER)));
         ability.addTarget(new TargetCardInGraveyard(filter));

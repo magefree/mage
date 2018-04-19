@@ -28,7 +28,6 @@
 package mage.cards.p;
 
 import java.util.UUID;
-
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -36,14 +35,12 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
-import mage.players.Library;
 import mage.players.Player;
 
 /**
@@ -54,15 +51,15 @@ public class PrecognitionField extends CardImpl {
     public PrecognitionField(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");
 
-
         // You may look at the top card of your library.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PrecognitionFieldTopCardRevealedEffect()));
+
         // You may cast the top card of your library if it's an instant or sorcery card.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PrecognitionFieldTopCardCastEffect()));
+
         // {3}: Exile the top card of your library.
-        Effect effect = new PrecognitionFieldExileEffect();
-        effect.setText("Exile the top card of your library.");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new GenericManaCost(3));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new PrecognitionFieldExileEffect(), new GenericManaCost(3)));
     }
 
     public PrecognitionField(final PrecognitionField card) {
@@ -155,6 +152,7 @@ class PrecognitionFieldExileEffect extends OneShotEffect {
 
     public PrecognitionFieldExileEffect() {
         super(Outcome.Benefit);
+        staticText = "exile the top card of your library";
     }
 
     public PrecognitionFieldExileEffect(final PrecognitionFieldExileEffect effect) {
@@ -169,12 +167,10 @@ class PrecognitionFieldExileEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = source.getSourceObject(game);
-        if (controller != null && sourceObject != null && controller.getLibrary().hasCards()) {
-            Library library = controller.getLibrary();
-            Card card = library.removeFromTop(game);
+        if (controller != null) {
+            Card card = controller.getLibrary().getFromTop(game);
             if (card != null) {
-                card.moveToExile(id, "Precognition Field Exile", source.getSourceId(), game);
+                controller.moveCards(card, Zone.EXILED, source, game);
             }
             return true;
         }

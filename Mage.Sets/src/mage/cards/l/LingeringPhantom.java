@@ -33,10 +33,10 @@ import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.HistoricPredicate;
@@ -62,7 +62,9 @@ public class LingeringPhantom extends CardImpl {
 
         // Whenever you cast a historic spell, you may pay {B}. If you do, return Lingering Phantom from your graveyard to your hand.
         this.addAbility(new SpellCastControllerTriggeredAbility(
-                Zone.GRAVEYARD, new DoIfCostPaid(new ReturnSourceFromGraveyardToHandEffect(), new ManaCostsImpl("{B}")),
+                Zone.GRAVEYARD, new DoIfCostPaid(new ReturnSourceFromGraveyardToHandEffect()
+                        .setText("return {this} from your graveyard to your hand. <i>(Artifacts, legendaries, and Sagas are historic.)</i>"),
+                        new ManaCostsImpl("{B}")),
                 filter, true, false
         ));
     }

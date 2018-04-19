@@ -28,9 +28,6 @@
 package mage.cards.o;
 
 import java.util.UUID;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.target.common.TargetCreaturePermanent;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
@@ -38,8 +35,6 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.AddCardSuperTypeAttachedEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
-import mage.constants.Outcome;
-import mage.target.TargetPermanent;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.LifelinkAbility;
@@ -49,7 +44,12 @@ import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.constants.Zone;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
@@ -72,16 +72,16 @@ public class OnSerrasWings extends CardImpl {
 
         // Enchanted creature is legendary, gets +1/+1, and has flying, vigilance, and lifelink.
         Effect effect = new AddCardSuperTypeAttachedEffect(SuperType.LEGENDARY, Duration.WhileOnBattlefield, AttachmentType.AURA);
-        effect.setText("Enchanted creature is legendary,");
+        effect.setText("Enchanted creature is legendary");
         ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
         effect = new BoostEnchantedEffect(4, 4, Duration.WhileOnBattlefield);
-        effect.setText("gets +1/+1,");
+        effect.setText(", gets +1/+1");
         ability.addEffect(effect);
         effect = new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA);
-        effect.setText("and has flying");
+        effect.setText(", and has flying");
         ability.addEffect(effect);
         effect = new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), AttachmentType.AURA);
-        effect.setText("vigilance,");
+        effect.setText(", vigilance,");
         ability.addEffect(effect);
         effect = new GainAbilityAttachedEffect(LifelinkAbility.getInstance(), AttachmentType.AURA);
         effect.setText("and lifelink");

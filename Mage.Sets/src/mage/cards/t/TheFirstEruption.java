@@ -33,7 +33,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.SagaAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.BasicManaEffect;
-import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.constants.SubType;
@@ -50,7 +49,6 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.BelzenlokDemonToken;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetControlledPermanent;
@@ -82,7 +80,7 @@ public class TheFirstEruption extends CardImpl {
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_II, new BasicManaEffect(Mana.RedMana(2)));
 
         // III — Sacrifice a Mountain. If you do, The First Eruption deals 3 damage to each creature.
-        sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_III, new CreateTokenEffect(new BelzenlokDemonToken()));
+        sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_III, new TheFirstEruptionEffect());
         this.addAbility(sagaAbility);
     }
 

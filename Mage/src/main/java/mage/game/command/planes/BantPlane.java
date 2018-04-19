@@ -34,6 +34,7 @@ import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.common.IsStillOnPlaneCondition;
 import mage.abilities.condition.common.MainPhaseStackEmptyCondition;
 import mage.abilities.condition.common.TargetHasCounterCondition;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -78,13 +79,19 @@ public class BantPlane extends Plane {
     }
 
     private static final String rule = "{this} has indestructible as long as it has a divinity counter on it";
+    private static final String exaltedRule = "All creatures have exalted";
 
     public BantPlane() {
         this.setName("Plane - Bant");
         this.setExpansionSetCodeForImage("PCA");
 
-        // All creatures have exalted    
-        Ability ability = new SimpleStaticAbility(Zone.COMMAND, new GainAbilityAllEffect(new ExaltedAbility(), Duration.Custom, StaticFilters.FILTER_PERMANENT_CREATURE));
+        // All creatures have exalted
+        SimpleStaticAbility ability
+                = new SimpleStaticAbility(Zone.COMMAND, new ConditionalContinuousEffect(
+                        new GainAbilityAllEffect(new ExaltedAbility(), Duration.Custom, StaticFilters.FILTER_PERMANENT_CREATURE),
+                        new IsStillOnPlaneCondition(this.getName()),
+                        exaltedRule));
+
         this.getAbilities().add(ability);
 
         // Active player can roll the planar die: Whenever you roll {CHAOS}, put a divinity counter on target green, white, or blue creature.  That creature gains indestructible for as long as it has a divinity counter on it.

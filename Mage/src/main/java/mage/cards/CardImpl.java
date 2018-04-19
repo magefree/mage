@@ -36,6 +36,7 @@ import mage.Mana;
 import mage.ObjectColor;
 import mage.abilities.*;
 import mage.abilities.costs.Cost;
+import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.common.RemoveVariableCountersTargetCost;
 import mage.abilities.effects.common.NameACardEffect;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
@@ -456,6 +457,16 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                 FilterCreaturePermanent newFilter = new FilterCreaturePermanent("creature with power less than or equal to " + xValue);
                 newFilter.add(new PowerPredicate(ComparisonType.FEWER_THAN, xValue + 1));
                 ability.addTarget(new TargetCreaturePermanent(newFilter));
+                break;
+            case CREATURE_POWER_X_OR_LESS: // Aryel, Knight of Windgrace
+                int value = 0;
+                for (VariableCost cost : ability.getCosts().getVariableCosts()) {
+                    value = cost.getAmount();
+                }
+                FilterCreaturePermanent filterCreaturePermanent = new FilterCreaturePermanent("creature with power " + value + " or less");
+                filterCreaturePermanent.add(new PowerPredicate(ComparisonType.FEWER_THAN, value + 1));
+                ability.getTargets().clear();
+                ability.addTarget(new TargetCreaturePermanent(filterCreaturePermanent));
                 break;
         }
     }

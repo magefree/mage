@@ -70,7 +70,7 @@ public class RatColony extends CardImpl {
                         new StaticValue(0), Duration.WhileOnBattlefield, false)));
 
         // A deck can have any number of cards named Rat Colony.
-        this.getSpellAbility().addEffect(new InfoEffect("A deck can have any number of cards named Rat Colony."));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("A deck can have any number of cards named Rat Colony.")));
     }
 
     public RatColony(final RatColony card) {

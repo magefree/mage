@@ -39,6 +39,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetLandPermanent;
+import mage.util.CardUtil;
 
 /**
  * "Untap (up to) X lands" effect
@@ -56,7 +57,7 @@ public class UntapLandsEffect extends OneShotEffect {
         super(Outcome.Untap);
         this.amount = amount;
         this.upTo = upTo;
-        staticText = "Untap " + (upTo ? "up to " : "") + amount + " lands";
+        staticText = "untap " + (upTo ? "up to " : "") + CardUtil.numberToText(amount, staticText) + " lands";
     }
 
     public UntapLandsEffect(final UntapLandsEffect effect) {

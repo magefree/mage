@@ -34,10 +34,10 @@ import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.KickerAbility;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.game.permanent.token.SoldierToken;
 
 /**
@@ -60,7 +60,7 @@ public class SergeantAtArms extends CardImpl {
         // When Sergeant-at-Arms enters the battlefield, if it was kicked, create two 1/1 white soldier creature tokens.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ConditionalOneShotEffect(
                 new CreateTokenEffect(new SoldierToken(), 2), KickedCondition.instance,
-                "create two 1/1 white soldier creature tokens.")));
+                "create two 1/1 white Soldier creature tokens.")));
     }
 
     public SergeantAtArms(final SergeantAtArms card) {

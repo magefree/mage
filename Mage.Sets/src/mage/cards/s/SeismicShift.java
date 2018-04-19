@@ -51,7 +51,9 @@ public class SeismicShift extends CardImpl {
         // Destroy target land. Up to two target creatures can't block this turn.
         this.getSpellAbility().addEffect(new DestroyTargetEffect(false, false));
         this.getSpellAbility().addTarget(new TargetLandPermanent());
-        this.getSpellAbility().addEffect(new CantBlockTargetEffect(Duration.EndOfTurn).setTargetPointer(new SecondTargetPointer()));
+        this.getSpellAbility().addEffect(new CantBlockTargetEffect(Duration.EndOfTurn)
+                .setText("Up to two target creatures can't block this turn")
+                .setTargetPointer(new SecondTargetPointer()));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2, StaticFilters.FILTER_PERMANENT_CREATURES, false));
     }
 

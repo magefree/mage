@@ -35,11 +35,12 @@ import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbil
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
-import mage.constants.SubType;
+import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.HistoricPredicate;
@@ -69,6 +70,9 @@ public class SentinelOfThePearlTrident extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
+        // Flash
+        this.addAbility(FlashAbility.getInstance());
+
         // When Sentinel of the Pearl Trident enters the battlefield, you may exile target historic permanent you control. If you do, return that card to the battlefield under its owner's control at the beginning of the next end step.
         Ability etbAbility = new EntersBattlefieldTriggeredAbility(new SentinelOfThePearlTridentEffect(), true);
         etbAbility.addTarget(new TargetPermanent(filter));
@@ -87,7 +91,9 @@ public class SentinelOfThePearlTrident extends CardImpl {
 
 class SentinelOfThePearlTridentEffect extends OneShotEffect {
 
-    private static final String effectText = "exile target historic permanent you control. If you do, return that card to the battlefield under its owner's control at the beginning of the next end step";
+    private static final String effectText = "exile target historic permanent you control. "
+            + "If you do, return that card to the battlefield under its owner's control"
+            + " at the beginning of the next end step.  <i>(Artifacts, legendaries, and Sagas are historic.)</i>";
 
     SentinelOfThePearlTridentEffect() {
         super(Outcome.Detriment);

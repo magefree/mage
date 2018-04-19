@@ -32,7 +32,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
-import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.VariableCostImpl;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.common.TapTargetCost;
@@ -43,28 +42,23 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
+import mage.constants.TargetAdjustment;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.token.KnightToken;
 import mage.target.common.TargetControlledPermanent;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author jack-the-BOSS
  */
 public class AryelKnightOfWindgrace extends CardImpl {
-
-    private UUID adjustTargetAbilityId;
 
     public AryelKnightOfWindgrace(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{B}");
@@ -89,30 +83,13 @@ public class AryelKnightOfWindgrace extends CardImpl {
                 .setText("Destroy target creature with power X or less"), new ManaCostsImpl("{B}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new AryelTapXTargetCost());
+        ability.setTargetAdjustment(TargetAdjustment.CREATURE_POWER_X_OR_LESS);
         this.addAbility(ability);
-        this.adjustTargetAbilityId = ability.getOriginalId();
         ability.getOriginalId();
-    }
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (adjustTargetAbilityId.equals(ability.getOriginalId())) {
-            for (VariableCost cost : ability.getCosts().getVariableCosts()) {
-                if (cost instanceof AryelTapXTargetCost) {
-                    int value = ((AryelTapXTargetCost) cost).getAmount();
-                    FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power " + value + " or less");
-                    filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, value + 1));
-                    ability.getTargets().clear();
-                    ability.addTarget(new TargetCreaturePermanent(filter));
-                    break;
-                }
-            }
-        }
     }
 
     public AryelKnightOfWindgrace(final AryelKnightOfWindgrace card) {
         super(card);
-        this.adjustTargetAbilityId = card.adjustTargetAbilityId;
     }
 
     @Override

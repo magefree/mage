@@ -9,13 +9,13 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandChosenControlledPermanentEffect;
-import mage.cards.CardSetInfo;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.mageobject.HistoricPredicate;
+import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
  *
@@ -29,7 +29,7 @@ public class GuardiansOfKoilos extends CardImpl {
         filter.add(new AnotherPredicate());
         filter.add(new HistoricPredicate());
     }
-    
+
     public GuardiansOfKoilos(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");
         this.subtype.add(SubType.CONSTRUCT);
@@ -37,7 +37,8 @@ public class GuardiansOfKoilos extends CardImpl {
         this.toughness = new MageInt(4);
 
         // When Guardians of Koilos enters the battlefield, you may return another target historic permanent you control to its owner’s hand.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(filter), true));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(filter)
+                .setText("you may return another target historic permanent you control to its owner’s hand. <i>(Artifacts, legendaries, and Sagas are historic.)</i>"), true));
     }
 
     public GuardiansOfKoilos(final GuardiansOfKoilos card) {
@@ -47,5 +48,5 @@ public class GuardiansOfKoilos extends CardImpl {
     @Override
     public GuardiansOfKoilos copy() {
         return new GuardiansOfKoilos(this);
-    }    
+    }
 }
