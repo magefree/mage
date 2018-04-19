@@ -74,7 +74,7 @@ public class OnSerrasWings extends CardImpl {
         Effect effect = new AddCardSuperTypeAttachedEffect(SuperType.LEGENDARY, Duration.WhileOnBattlefield, AttachmentType.AURA);
         effect.setText("Enchanted creature is legendary");
         ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
-        effect = new BoostEnchantedEffect(4, 4, Duration.WhileOnBattlefield);
+        effect = new BoostEnchantedEffect(1, 1, Duration.WhileOnBattlefield);
         effect.setText(", gets +1/+1");
         ability.addEffect(effect);
         effect = new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA);
