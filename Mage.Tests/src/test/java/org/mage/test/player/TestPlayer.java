@@ -913,7 +913,7 @@ public class TestPlayer implements Player {
             if (target.getTargetController() != null && target.getAbilityController() != null) {
                 abilityControllerId = target.getAbilityController();
             }
-            if (target instanceof TargetPlayer || target instanceof TargetAnyTarget) {
+            if (target instanceof TargetPlayer || target instanceof TargetAnyTarget || target instanceof TargetCreatureOrPlayer) {
                 for (String targetDefinition : targets) {
                     if (targetDefinition.startsWith("targetPlayer=")) {
                         String playerName = targetDefinition.substring(targetDefinition.indexOf("targetPlayer=") + 13);
@@ -929,7 +929,7 @@ public class TestPlayer implements Player {
                 }
 
             }
-            if ((target instanceof TargetPermanent) || (target instanceof TargetPermanentOrPlayer) || (target instanceof TargetAnyTarget)) {
+            if ((target instanceof TargetPermanent) || (target instanceof TargetPermanentOrPlayer) || (target instanceof TargetAnyTarget) || (target instanceof TargetCreatureOrPlayer)) {
                 for (String targetDefinition : targets) {
                     String[] targetList = targetDefinition.split("\\^");
                     boolean targetFound = false;
@@ -947,7 +947,7 @@ public class TestPlayer implements Player {
                             }
                         }
                         Filter filter = target.getFilter();
-                        if (filter instanceof FilterCreatureOrPlayer) {
+                        if (filter instanceof FilterCreatureOrPlayer || filter instanceof FilterCreaturePlayerOrPlaneswalker) {
                             filter = ((FilterCreatureOrPlayer) filter).getCreatureFilter();
                         }
                         for (Permanent permanent : game.getBattlefield().getAllActivePermanents((FilterPermanent) filter, game)) {
