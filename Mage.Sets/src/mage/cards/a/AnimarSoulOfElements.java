@@ -56,7 +56,7 @@ import mage.util.CardUtil;
 public class AnimarSoulOfElements extends CardImpl {
 
     public AnimarSoulOfElements(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}{R}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{U}{R}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELEMENTAL);
 

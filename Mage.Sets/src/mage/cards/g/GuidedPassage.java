@@ -58,7 +58,7 @@ import mage.target.common.TargetOpponent;
 public class GuidedPassage extends CardImpl {
 
     public GuidedPassage(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{U}{R}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{G}{U}{R}");
 
         // Reveal the cards in your library. An opponent chooses from among them a creature card, a land card, and a noncreature, nonland card. You put the chosen cards into your hand. Then shuffle your library.
         this.getSpellAbility().addEffect(new GuidedPassageEffect());

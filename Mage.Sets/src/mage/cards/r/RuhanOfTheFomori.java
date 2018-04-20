@@ -45,7 +45,7 @@ import mage.constants.TargetController;
 public class RuhanOfTheFomori extends CardImpl {
 
     public RuhanOfTheFomori(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{W}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{R}{W}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.GIANT);
         this.subtype.add(SubType.WARRIOR);
@@ -66,4 +66,3 @@ public class RuhanOfTheFomori extends CardImpl {
         return new RuhanOfTheFomori(this);
     }
 }
-
