@@ -110,10 +110,7 @@ class SoulOfShandalarEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getTargets().get(0).getFirstTarget());
-        if (player != null) {
-            player.damage(3, source.getSourceId(), game, false, true);
-        }
+        game.damagePlayerOrPlaneswalker(source.getTargets().get(0).getFirstTarget(), 3, source.getSourceId(), game, false, true);
         Permanent creature = game.getPermanent(source.getTargets().get(1).getFirstTarget());
         if (creature != null) {
             creature.damage(3, source.getSourceId(), game, false, true);
