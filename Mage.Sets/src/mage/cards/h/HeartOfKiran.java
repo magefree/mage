@@ -73,7 +73,7 @@ public class HeartOfKiran extends CardImpl {
 
         // You may remove a loyalty counter from a planeswalker you control rather than pay Heart of Kiran's crew cost.
         Cost cost = new HeartOfKiranAlternateCrewCost(CounterType.LOYALTY, 1);
-        Effect effect = new AddCardTypeSourceEffect(Duration.EndOfTurn, CardType.CREATURE, CardType.CREATURE);
+        Effect effect = new AddCardTypeSourceEffect(Duration.EndOfTurn, CardType.CREATURE);
         effect.setText("You may remove a loyalty counter from a planeswalker you control rather than pay {this}'s crew cost");
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, cost));
     }
