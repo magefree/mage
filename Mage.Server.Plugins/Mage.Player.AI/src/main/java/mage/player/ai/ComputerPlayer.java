@@ -257,6 +257,36 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             List<Permanent> targets;
             TargetAnyTarget t = ((TargetAnyTarget) target);
             if (outcome.isGood()) {
+                targets = threats(abilityControllerId, sourceId, ((FilterCreaturePlayerOrPlaneswalker) t.getFilter()).getCreatureFilter(), game, target.getTargets());
+            } else {
+                targets = threats(randomOpponentId, sourceId, ((FilterCreaturePlayerOrPlaneswalker) t.getFilter()).getCreatureFilter(), game, target.getTargets());
+            }
+            for (Permanent permanent : targets) {
+                List<UUID> alreadyTargetted = target.getTargets();
+                if (t.canTarget(abilityControllerId, permanent.getId(), null, game)) {
+                    if (alreadyTargetted != null && !alreadyTargetted.contains(permanent.getId())) {
+                        target.add(permanent.getId(), game);
+                        return true;
+                    }
+                }
+            }
+            if (outcome.isGood()) {
+                if (target.canTarget(abilityControllerId, null, game)) {
+                    target.add(abilityControllerId, game);
+                    return true;
+                }
+            } else if (target.canTarget(randomOpponentId, null, game)) {
+                target.add(randomOpponentId, game);
+                return true;
+            }
+            if (!target.isRequired(sourceId, game)) {
+                return false;
+            }
+        }
+        if (target.getOriginalTarget() instanceof TargetCreatureOrPlayer) {
+            List<Permanent> targets;
+            TargetCreatureOrPlayer t = ((TargetCreatureOrPlayer) target);
+            if (outcome.isGood()) {
                 targets = threats(abilityControllerId, sourceId, ((FilterCreatureOrPlayer) t.getFilter()).getCreatureFilter(), game, target.getTargets());
             } else {
                 targets = threats(randomOpponentId, sourceId, ((FilterCreatureOrPlayer) t.getFilter()).getCreatureFilter(), game, target.getTargets());
@@ -496,9 +526,9 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             }
             return target.isChosen();
         }
-        if (target.getOriginalTarget() instanceof TargetAnyTarget) {
+        if (target.getOriginalTarget() instanceof TargetCreatureOrPlayer) {
             List<Permanent> targets;
-            TargetAnyTarget t = ((TargetAnyTarget) target);
+            TargetCreatureOrPlayer t = ((TargetCreatureOrPlayer) target);
             if (outcome.isGood()) {
                 targets = threats(abilityControllerId, source.getSourceId(), ((FilterCreatureOrPlayer) t.getFilter()).getCreatureFilter(), game, target.getTargets());
             } else {
@@ -519,6 +549,53 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
             if (targets.isEmpty() && target.isRequired(source)) {
                 targets = game.getBattlefield().getActivePermanents(((FilterCreatureOrPlayer) t.getFilter()).getCreatureFilter(), playerId, game);
+            }
+            for (Permanent permanent : targets) {
+                List<UUID> alreadyTargetted = target.getTargets();
+                if (t.canTarget(abilityControllerId, permanent.getId(), source, game)) {
+                    if (alreadyTargetted != null && !alreadyTargetted.contains(permanent.getId())) {
+                        target.addTarget(permanent.getId(), source, game);
+                        return true;
+                    }
+                }
+            }
+
+            if (outcome.isGood()) {
+                if (target.canTarget(getId(), abilityControllerId, source, game)) {
+                    target.addTarget(abilityControllerId, source, game);
+                    return true;
+                }
+            } else if (target.canTarget(getId(), randomOpponentId, source, game)) {
+                target.addTarget(randomOpponentId, source, game);
+                return true;
+            }
+
+            //if (!target.isRequired())
+            return false;
+        }
+        if (target.getOriginalTarget() instanceof TargetAnyTarget) {
+            List<Permanent> targets;
+            TargetAnyTarget t = ((TargetAnyTarget) target);
+            if (outcome.isGood()) {
+                targets = threats(abilityControllerId, source.getSourceId(), ((FilterCreaturePlayerOrPlaneswalker) t.getFilter()).getCreatureFilter(), game, target.getTargets());
+            } else {
+                targets = threats(randomOpponentId, source.getSourceId(), ((FilterCreaturePlayerOrPlaneswalker) t.getFilter()).getCreatureFilter(), game, target.getTargets());
+            }
+
+            if (targets.isEmpty()) {
+                if (outcome.isGood()) {
+                    if (target.canTarget(getId(), abilityControllerId, source, game)) {
+                        target.addTarget(abilityControllerId, source, game);
+                        return true;
+                    }
+                } else if (target.canTarget(getId(), randomOpponentId, source, game)) {
+                    target.addTarget(randomOpponentId, source, game);
+                    return true;
+                }
+            }
+
+            if (targets.isEmpty() && target.isRequired(source)) {
+                targets = game.getBattlefield().getActivePermanents(((FilterCreaturePlayerOrPlaneswalker) t.getFilter()).getCreatureFilter(), playerId, game);
             }
             for (Permanent permanent : targets) {
                 List<UUID> alreadyTargetted = target.getTargets();
