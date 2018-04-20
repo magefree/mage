@@ -39,8 +39,7 @@ import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.players.Player;
-import mage.target.common.TargetOpponent;
+import mage.target.common.TargetOpponentOrPlaneswalker;
 
 /**
  *
@@ -56,7 +55,7 @@ public class MoggManiac extends CardImpl {
 
         // Whenever Mogg Maniac is dealt damage, it deals that much damage to target opponent.
         Ability ability = new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new MoggManiacDealDamageEffect(), false, false, true);
-        ability.addTarget(new TargetOpponent());
+        ability.addTarget(new TargetOpponentOrPlaneswalker());
         this.addAbility(ability);
     }
 
@@ -74,7 +73,7 @@ class MoggManiacDealDamageEffect extends OneShotEffect {
 
     public MoggManiacDealDamageEffect() {
         super(Outcome.Damage);
-        this.staticText = "it deals that much damage to target opponent";
+        this.staticText = "it deals that much damage to target opponent or planeswalker";
     }
 
     public MoggManiacDealDamageEffect(final MoggManiacDealDamageEffect effect) {
@@ -90,11 +89,8 @@ class MoggManiacDealDamageEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         int amount = (Integer) getValue("damage");
         if (amount > 0) {
-            Player opponent = game.getPlayer(targetPointer.getFirst(game, source));
-            if (opponent != null) {
-                opponent.damage(amount, source.getSourceId(), game, false, true);
-                return true;
-            }
+            game.damagePlayerOrPlaneswalker(targetPointer.getFirst(game, source), amount, source.getSourceId(), game, false, true);
+            return true;
         }
         return false;
     }
