@@ -31,7 +31,6 @@ import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
-import java.util.UUID;
 
 /**
  * @author North
@@ -46,13 +45,6 @@ public class AnyPlayerControlsCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-
-        for (UUID player : game.getPlayers().keySet()) {
-            if(player != null && game.getBattlefield().countAll(filter, player, game)> 0){
-                return true;
-            }
-
-        }
-        return false;
+        return game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game) > 0;
     }
 }

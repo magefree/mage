@@ -30,15 +30,17 @@ package mage.cards.k;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
-import mage.constants.SubType;
-import mage.constants.SuperType;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.DependencyType;
 import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
@@ -68,10 +70,10 @@ public class KwendePrideOfFemeref extends CardImpl {
         this.addAbility(DoubleStrikeAbility.getInstance());
 
         // Creatures you control with first strike have double strike.
-        this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD, new GainAbilityAllEffect(DoubleStrikeAbility.getInstance(), Duration.WhileOnBattlefield, filter, false)
-                        .setText("Creatures you control with first strike have double strike")
-        ));
+        ContinuousEffect effect = new GainAbilityAllEffect(DoubleStrikeAbility.getInstance(), Duration.WhileOnBattlefield, filter, false);
+        effect.setText("Creatures you control with first strike have double strike");
+        effect.setDependedToType(DependencyType.AddingAbility); // effects that add first strike need to be executed first
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
     public KwendePrideOfFemeref(final KwendePrideOfFemeref card) {

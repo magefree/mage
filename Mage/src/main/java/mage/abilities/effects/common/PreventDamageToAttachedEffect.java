@@ -49,7 +49,7 @@ public class PreventDamageToAttachedEffect extends PreventionEffectImpl {
     }
 
     public PreventDamageToAttachedEffect(Duration duration, AttachmentType attachmentType, int amountToPrevent, boolean combatOnly) {
-        super(duration, Integer.MAX_VALUE, false, false);
+        super(duration, amountToPrevent, combatOnly, false);
         this.attachmentType = attachmentType;
         staticText = setText();
     }
@@ -88,14 +88,14 @@ public class PreventDamageToAttachedEffect extends PreventionEffectImpl {
                 sb.append("combat ");
             }
             sb.append("damage that would be dealt to ");
-            sb.append(attachmentType.toString()).append(" creature");
+            sb.append(attachmentType.verb()).append(" creature");
         } else {
             sb.append("If a source would deal ");
             if (onlyCombat) {
                 sb.append("combat ");
             }
             sb.append("damage to ");
-            sb.append(attachmentType.toString());
+            sb.append(attachmentType.verb());
             sb.append("creature, prevent ").append(amountToPrevent);;
             sb.append("of that damage");
         }

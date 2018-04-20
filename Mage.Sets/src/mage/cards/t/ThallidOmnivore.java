@@ -87,7 +87,7 @@ class ThallidOmnivoreEffect extends OneShotEffect {
 
     public ThallidOmnivoreEffect() {
         super(Outcome.GainLife);
-        this.staticText = "If a saproling was sacrificed in this way you gain 2 life";
+        this.staticText = "If a Saproling was sacrificed this way, you gain 2 life";
     }
 
     public ThallidOmnivoreEffect(final ThallidOmnivoreEffect effect) {

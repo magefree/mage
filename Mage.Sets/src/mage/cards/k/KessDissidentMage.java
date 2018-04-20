@@ -107,7 +107,7 @@ class KessDissidentMageContinuousEffect extends ContinuousEffectImpl {
 
     KessDissidentMageContinuousEffect() {
         super(Duration.WhileOnBattlefield, Layer.PlayerEffects, SubLayer.NA, Outcome.Benefit);
-        staticText = "During each of your turns, you may cast an instant or sorcery card from your graveyard. If a card cast this way would be put into your graveyard this turn, exile it instead";
+        staticText = "During each of your turns, you may cast an instant or sorcery card from your graveyard. If a card cast this way would be put into your graveyard, exile it instead";
     }
 
     KessDissidentMageContinuousEffect(final KessDissidentMageContinuousEffect effect) {
@@ -183,7 +183,7 @@ class KessDissidentMageReplacementEffect extends ReplacementEffectImpl {
     KessDissidentMageReplacementEffect(UUID cardId) {
         super(Duration.EndOfTurn, Outcome.Exile);
         this.cardId = cardId;
-        staticText = "If a card cast this way would be put into your graveyard this turn, exile it instead";
+        staticText = "If a card cast this way would be put into your graveyard, exile it instead";
     }
 
     KessDissidentMageReplacementEffect(final KessDissidentMageReplacementEffect effect) {

@@ -53,8 +53,9 @@ public class Dominaria extends ExpansionSet {
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
         this.needsLegends = true;
+        this.maxCardNumberInBooster = 269;
 
-        cards.add(new SetCardInfo("Academy Drake", 40, Rarity.UNCOMMON, mage.cards.a.AcademyDrake.class));
+        cards.add(new SetCardInfo("Academy Drake", 40, Rarity.COMMON, mage.cards.a.AcademyDrake.class));
         cards.add(new SetCardInfo("Academy Journeymage", 41, Rarity.COMMON, mage.cards.a.AcademyJourneymage.class));
         cards.add(new SetCardInfo("Adamant Will", 2, Rarity.COMMON, mage.cards.a.AdamantWill.class));
         cards.add(new SetCardInfo("Adeliz, the Cinder Wind", 190, Rarity.UNCOMMON, mage.cards.a.AdelizTheCinderWind.class));
@@ -74,7 +75,7 @@ public class Dominaria extends ExpansionSet {
         cards.add(new SetCardInfo("Benalish Honor Guard", 5, Rarity.COMMON, mage.cards.b.BenalishHonorGuard.class));
         cards.add(new SetCardInfo("Benalish Marshal", 6, Rarity.RARE, mage.cards.b.BenalishMarshal.class));
         cards.add(new SetCardInfo("Blackblade Reforged", 211, Rarity.RARE, mage.cards.b.BlackbladeReforged.class));
-        cards.add(new SetCardInfo("Blessed Light", 7, Rarity.UNCOMMON, mage.cards.b.BlessedLight.class));
+        cards.add(new SetCardInfo("Blessed Light", 7, Rarity.COMMON, mage.cards.b.BlessedLight.class));
         cards.add(new SetCardInfo("Blessing of Belzenlok", 77, Rarity.COMMON, mage.cards.b.BlessingOfBelzenlok.class));
         cards.add(new SetCardInfo("Blink of an Eye", 46, Rarity.COMMON, mage.cards.b.BlinkOfAnEye.class));
         cards.add(new SetCardInfo("Bloodstone Goblin", 115, Rarity.COMMON, mage.cards.b.BloodstoneGoblin.class));
@@ -113,7 +114,7 @@ public class Dominaria extends ExpansionSet {
         cards.add(new SetCardInfo("Divination", 52, Rarity.COMMON, mage.cards.d.Divination.class));
         cards.add(new SetCardInfo("Dread Shade", 88, Rarity.RARE, mage.cards.d.DreadShade.class));
         cards.add(new SetCardInfo("Drudge Sentinel", 89, Rarity.COMMON, mage.cards.d.DrudgeSentinel.class));
-        cards.add(new SetCardInfo("Dub", 15, Rarity.SPECIAL, mage.cards.d.Dub.class));
+        cards.add(new SetCardInfo("Dub", 15, Rarity.COMMON, mage.cards.d.Dub.class));
         cards.add(new SetCardInfo("Elfhame Druid", 159, Rarity.UNCOMMON, mage.cards.e.ElfhameDruid.class));
         cards.add(new SetCardInfo("Eviscerate", 91, Rarity.COMMON, mage.cards.e.Eviscerate.class));
         cards.add(new SetCardInfo("Evra, Halcyon Witness", 16, Rarity.RARE, mage.cards.e.EvraHalcyonWitness.class));
@@ -220,7 +221,7 @@ public class Dominaria extends ExpansionSet {
         cards.add(new SetCardInfo("Oath of Teferi", 200, Rarity.RARE, mage.cards.o.OathOfTeferi.class));
         cards.add(new SetCardInfo("On Serra's Wings", 28, Rarity.UNCOMMON, mage.cards.o.OnSerrasWings.class));
         cards.add(new SetCardInfo("Opt", 60, Rarity.COMMON, mage.cards.o.Opt.class));
-        cards.add(new SetCardInfo("Orcish Vandal", 137, Rarity.COMMON, mage.cards.o.OrcishVandal.class));
+        cards.add(new SetCardInfo("Orcish Vandal", 137, Rarity.UNCOMMON, mage.cards.o.OrcishVandal.class));
         cards.add(new SetCardInfo("Pardic Wanderer", 226, Rarity.COMMON, mage.cards.p.PardicWanderer.class));
         cards.add(new SetCardInfo("Pegasus Courser", 29, Rarity.COMMON, mage.cards.p.PegasusCourser.class));
         cards.add(new SetCardInfo("Phyrexian Scriptures", 100, Rarity.MYTHIC, mage.cards.p.PhyrexianScriptures.class));
@@ -279,13 +280,13 @@ public class Dominaria extends ExpansionSet {
         cards.add(new SetCardInfo("Swamp", 260, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 261, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sylvan Awakening", 183, Rarity.RARE, mage.cards.s.SylvanAwakening.class));
-        cards.add(new SetCardInfo("Syncopate", 67, Rarity.UNCOMMON, mage.cards.s.Syncopate.class));
+        cards.add(new SetCardInfo("Syncopate", 67, Rarity.COMMON, mage.cards.s.Syncopate.class));
         cards.add(new SetCardInfo("Tatyova, Benthic Druid", 206, Rarity.UNCOMMON, mage.cards.t.TatyovaBenthicDruid.class));
         cards.add(new SetCardInfo("Teferi's Sentinel", 273, Rarity.UNCOMMON, mage.cards.t.TeferisSentinel.class));
         cards.add(new SetCardInfo("Teferi, Hero of Dominaria", 207, Rarity.MYTHIC, mage.cards.t.TeferiHeroOfDominaria.class));
         cards.add(new SetCardInfo("Teferi, Timebender", 270, Rarity.MYTHIC, mage.cards.t.TeferiTimebender.class));
         cards.add(new SetCardInfo("Tempest Djinn", 68, Rarity.RARE, mage.cards.t.TempestDjinn.class));
-        cards.add(new SetCardInfo("Temporal Machinations", 271, Rarity.UNCOMMON, mage.cards.t.TemporalMachinations.class));
+        cards.add(new SetCardInfo("Temporal Machinations", 271, Rarity.COMMON, mage.cards.t.TemporalMachinations.class));
         cards.add(new SetCardInfo("Territorial Allosaurus", 184, Rarity.RARE, mage.cards.t.TerritorialAllosaurus.class));
         cards.add(new SetCardInfo("Teshar, Ancestor's Apostle", 36, Rarity.RARE, mage.cards.t.TesharAncestorsApostle.class));
         cards.add(new SetCardInfo("Tetsuko Umezawa, Fugitive", 69, Rarity.UNCOMMON, mage.cards.t.TetsukoUmezawaFugitive.class));

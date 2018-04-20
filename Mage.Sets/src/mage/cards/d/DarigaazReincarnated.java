@@ -37,17 +37,17 @@ import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
-import mage.constants.SubType;
-import mage.constants.SuperType;
 import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.keyword.HasteAbility;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -151,8 +151,6 @@ class DarigaazReincarnatedTriggeredAbility extends ConditionalTriggeredAbility {
                 DarigaazReincarnatedCondition.instance,
                 "At the beginning of your upkeep, if {this} is exiled with an egg counter on it, "
                 + "remove an egg counter from it. Then if {this} has no egg counters on it, return it to the battlefield");
-        this.setRuleVisible(false);
-
     }
 
     public DarigaazReincarnatedTriggeredAbility(final DarigaazReincarnatedTriggeredAbility effect) {

@@ -28,7 +28,6 @@
 package mage.cards.m;
 
 import java.util.UUID;
-
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -36,24 +35,17 @@ import mage.abilities.costs.common.ReturnToHandChosenControlledPermanentCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.AdditiveDynamicValue;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.CardsInAllHandsCount;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.abilities.keyword.ReachAbility;
-import mage.abilities.keyword.ShroudAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterLandCard;
-import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -73,7 +65,6 @@ public class MultaniYavimayasAvatar extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 
-
         this.addAbility(ReachAbility.getInstance());
         this.addAbility(TrampleAbility.getInstance());
 
@@ -82,9 +73,12 @@ public class MultaniYavimayasAvatar extends CardImpl {
         PermanentsOnBattlefieldCount permanentsOnBattlefieldCount = new PermanentsOnBattlefieldCount(LANDS_YOU_CONTROL_FILTER);
 
         DynamicValue powerToughnessValue = new AdditiveDynamicValue(graveyardCount, permanentsOnBattlefieldCount);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(powerToughnessValue, powerToughnessValue, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new BoostSourceEffect(powerToughnessValue, powerToughnessValue, Duration.WhileOnBattlefield)
+                        .setText("{this} gets +1/+1 for each land you control and each land in your graveyard")
+        ));
 
-        //1G, Return two lands you control to their owner's hand: Return Multani from your graveyard to your hand.
+        //{1}{G}, Return two lands you control to their owner's hand: Return Multani from your graveyard to your hand.
         SimpleActivatedAbility returnToHand = new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), new ManaCostsImpl<>("{1}{G}"));
         returnToHand.addCost(new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(2, 2, LANDS_YOU_CONTROL_FILTER, true)));
         this.addAbility(returnToHand);

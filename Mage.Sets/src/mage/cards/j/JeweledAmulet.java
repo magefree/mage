@@ -56,13 +56,13 @@ import mage.util.CardUtil;
  */
 public class JeweledAmulet extends CardImpl {
     
-    private static final String rule = "Put a charge counter on {this}. Note the type of mana spent to pay this activation cost. Activate this ability only if there are no charge counters on {this}";
+    private static final String rule = "{1}, {T}: Put a charge counter on {this}. Note the type of mana spent to pay this activation cost. Activate this ability only if there are no charge counters on {this}";
 
     public JeweledAmulet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{0}");
 
         // {1}, {tap}: Put a charge counter on Jeweled Amulet. Note the type of mana spent to pay this activation cost. Activate this ability only if there are no charge counters on Jeweled Amulet.
-        ConditionalActivatedAbility ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new JeweledAmuletAddCounterEffect(), new ManaCostsImpl("{1}"), new SourceHasCounterCondition(CounterType.CHARGE, 0), rule);
+        ConditionalActivatedAbility ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new JeweledAmuletAddCounterEffect(), new ManaCostsImpl("{1}"), new SourceHasCounterCondition(CounterType.CHARGE, 0, 0), rule);
         ability.addEffect(new AddCountersSourceEffect(CounterType.CHARGE.createInstance(), true));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

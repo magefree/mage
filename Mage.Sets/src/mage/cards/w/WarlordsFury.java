@@ -35,7 +35,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -47,7 +47,8 @@ public class WarlordsFury extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{R}");
 
         // Creatures you control gain first strike until end of turn.
-        getSpellAbility().addEffect(new GainAbilityAllEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent(), "Creatures you control gain trample until end of turn"));
+        getSpellAbility().addEffect(new GainAbilityAllEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn,
+                StaticFilters.FILTER_CONTROLLED_CREATURES, "Creatures you control gain first strike until end of turn.<br>"));
 
         // Draw a card.
         getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));

@@ -52,7 +52,7 @@ public class SaprolingMigration extends CardImpl {
         // Create two 1/1 green saproling creature tokens. If this spell was kicked, create four of those tokens instead.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new CreateTokenEffect(new SaprolingToken(), 4),
                 new CreateTokenEffect(new SaprolingToken(), 2), KickedCondition.instance,
-                "Create twp 1/1 green Saproling creature tokens. If this spell was kicked, create four of those tokens instead"));
+                "Create two 1/1 green Saproling creature tokens. If this spell was kicked, create four of those tokens instead"));
     }
 
     public SaprolingMigration(final SaprolingMigration card) {

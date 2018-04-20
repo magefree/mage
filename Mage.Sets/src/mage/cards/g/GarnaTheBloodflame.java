@@ -75,8 +75,6 @@ public class GarnaTheBloodflame extends CardImpl {
 
         // When Garna, the Bloodflame enters the battlefield, return to your hand all creature cards in your graveyard that were put there from anywhere this turn.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GarnaTheBloodflameEffect(), false), new GarnaTheBloodflameWatcher());
-        this.getSpellAbility().addEffect(new GarnaTheBloodflameEffect());
-        this.getSpellAbility().addWatcher(new GarnaTheBloodflameWatcher());
 
         // Other creatures you control have haste.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,

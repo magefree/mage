@@ -47,7 +47,7 @@ import mage.target.common.TargetAnyTarget;
  */
 public class WizardsLightning extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Wizard");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("you control a Wizard");
 
     static {
         filter.add(new SubtypePredicate(SubType.WIZARD));

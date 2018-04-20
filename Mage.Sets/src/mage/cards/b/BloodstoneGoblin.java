@@ -35,11 +35,11 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.abilities.keyword.MenaceAbility;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -109,6 +109,6 @@ class BloodstoneGoblinTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever you cast a spell, if it was kicked," + super.getRule();
+        return "Whenever you cast a spell, if that spell was kicked, " + super.getRule();
     }
 }
