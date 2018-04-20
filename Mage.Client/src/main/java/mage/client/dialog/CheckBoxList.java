@@ -552,7 +552,7 @@ public class CheckBoxList extends JList {
         int index = locationToIndex(e.getPoint());
 
         if (index != -1) {
-          setChecked(index, !getChecked(index));
+          setChecked(index, !getChecked(index));            
           repaint();
         }
       }
@@ -664,5 +664,17 @@ public class CheckBoxList extends JList {
     }
 
     return result;
+  }
+  
+  public void checkAll() {
+      for (int i = 0; i < getModel().getSize(); i++) {
+          this.setChecked(i,true);
+      }
+  }
+  public void uncheckAll() {
+      int[] choiceToUncheck = this.getCheckedIndices();
+      for(int itemIndex: choiceToUncheck){                    
+          this.setChecked(itemIndex,false);
+      }
   }
 }
