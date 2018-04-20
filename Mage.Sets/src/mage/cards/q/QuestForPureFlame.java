@@ -54,7 +54,7 @@ import mage.util.CardUtil;
 public class QuestForPureFlame extends CardImpl {
 
     public QuestForPureFlame(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{R}");
 
         // Whenever a source you control deals damage to an opponent, you may put a quest counter on Quest for Pure Flame.
         this.addAbility(new QuestForPureFlameTriggeredAbility());
@@ -113,7 +113,7 @@ class QuestForPureFlameEffect extends ReplacementEffectImpl {
 
     public QuestForPureFlameEffect() {
         super(Duration.EndOfTurn, Outcome.Damage);
-        staticText = "If any source you control would deal damage to a creature or player this turn, it deals double that damage to that creature or player instead";
+        staticText = "If any source you control would deal damage to a permanent or player this turn, it deals double that damage to that permanent or player instead";
     }
 
     public QuestForPureFlameEffect(final QuestForPureFlameEffect effect) {
@@ -127,8 +127,9 @@ class QuestForPureFlameEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DAMAGE_CREATURE ||
-                event.getType() == EventType.DAMAGE_PLAYER;
+        return event.getType() == EventType.DAMAGE_CREATURE
+                || event.getType() == EventType.DAMAGE_PLAYER
+                || event.getType() == EventType.DAMAGE_PLANESWALKER;
     }
 
     @Override

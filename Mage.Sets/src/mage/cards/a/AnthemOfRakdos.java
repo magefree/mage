@@ -81,7 +81,7 @@ class AnthemOfRakdosHellbentEffect extends ReplacementEffectImpl {
 
     public AnthemOfRakdosHellbentEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Damage);
-        staticText = "<i>Hellbent</i> - As long as you have no cards in hand, if a source you control would deal damage to a creature or player, it deals double that damage to that creature or player instead.";
+        staticText = "<i>Hellbent</i> - As long as you have no cards in hand, if a source you control would deal damage to a permanent or player, it deals double that damage to that permanent or player instead.";
     }
 
     public AnthemOfRakdosHellbentEffect(final AnthemOfRakdosHellbentEffect effect) {
@@ -96,7 +96,8 @@ class AnthemOfRakdosHellbentEffect extends ReplacementEffectImpl {
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.DAMAGE_CREATURE
-                || event.getType() == GameEvent.EventType.DAMAGE_PLAYER;
+                || event.getType() == GameEvent.EventType.DAMAGE_PLAYER
+                || event.getType() == GameEvent.EventType.DAMAGE_PLANESWALKER;
     }
 
     @Override
