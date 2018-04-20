@@ -43,7 +43,7 @@ import mage.constants.Duration;
 public class FerventCharge extends CardImpl {
 
     public FerventCharge(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}{B}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}{W}{B}");
 
         // Whenever a creature you control attacks, it gets +2/+2 until end of turn.
         Effect effect = new BoostTargetEffect(2, 2, Duration.EndOfTurn);
