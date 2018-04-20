@@ -3159,4 +3159,22 @@ public abstract class GameImpl implements Game, Serializable {
             fireEvent(new GameEvent(GameEvent.EventType.BECOMES_MONARCH, monarchId, source == null ? null : source.getSourceId(), monarchId));
         }
     }
+
+    @Override
+    public int damagePlayerOrPlaneswalker(UUID playerOrWalker, int damage, UUID sourceId, Game game, boolean combatDamage, boolean preventable) {
+        return damagePlayerOrPlaneswalker(playerOrWalker, damage, sourceId, game, combatDamage, preventable, null);
+    }
+
+    @Override
+    public int damagePlayerOrPlaneswalker(UUID playerOrWalker, int damage, UUID sourceId, Game game, boolean combatDamage, boolean preventable, List<UUID> appliedEffects) {
+        Player player = getPlayer(playerOrWalker);
+        if (player != null) {
+            return player.damage(damage, sourceId, game, combatDamage, preventable, appliedEffects);
+        }
+        Permanent permanent = getPermanent(playerOrWalker);
+        if (permanent != null) {
+            return permanent.damage(damage, sourceId, game, combatDamage, preventable, appliedEffects);
+        }
+        return 0;
+    }
 }
