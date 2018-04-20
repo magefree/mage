@@ -763,6 +763,10 @@ public class Spell extends StackObjImpl implements Card {
 
     @Override
     public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game, List<UUID> appliedEffects) {
+        if (this.isCopiedSpell()) {
+            game.getStack().remove(this);
+            return true;
+        }
         return this.card.moveToExile(exileId, name, sourceId, game, appliedEffects);
     }
 
