@@ -36,7 +36,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
@@ -51,9 +51,9 @@ public class BomberCorps extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 
-        // Battalion - Whenever Bomber Corps and at least two other creatures attack, Bomber Corps deals 1 damage to any target.
+        // Battalion - Whenever Bomber Corps and at least two other creatures attack, Bomber Corps deals 1 damage to target creature or player.
         Ability ability = new BattalionAbility(new DamageTargetEffect(1));
-        ability.addTarget(new TargetAnyTarget());
+        ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
     }
 

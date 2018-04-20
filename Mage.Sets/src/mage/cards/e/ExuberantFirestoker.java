@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.target.common.TargetPlayerOrPlaneswalker;
+import mage.target.TargetPlayer;
 
 /**
  * @author North
@@ -85,7 +85,7 @@ class ExuberantFirestokerTriggeredAbility extends TriggeredAbilityImpl {
 
     public ExuberantFirestokerTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(2), true);
-        this.addTarget(new TargetPlayerOrPlaneswalker());
+        this.addTarget(new TargetPlayer());
     }
 
     public ExuberantFirestokerTriggeredAbility(final ExuberantFirestokerTriggeredAbility ability) {
@@ -114,6 +114,6 @@ class ExuberantFirestokerTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "At the beginning of your end step, if you control a creature with power 5 or greater, you may have {this} deal 2 damage to target player or planeswalker.";
+        return "At the beginning of your end step, if you control a creature with power 5 or greater, you may have {this} deal 2 damage to target player.";
     }
 }

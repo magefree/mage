@@ -39,7 +39,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
@@ -51,10 +51,10 @@ public class SoulsFire extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");
 
 
-        // Target creature you control on the battlefield deals damage equal to its power to any target.
+        // Target creature you control on the battlefield deals damage equal to its power to target creature or player.
         this.getSpellAbility().addEffect(new SoulsFireEffect());
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
-        this.getSpellAbility().addTarget(new TargetAnyTarget());
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
     }
 
     public SoulsFire(final SoulsFire card) {
@@ -71,7 +71,7 @@ class SoulsFireEffect extends OneShotEffect {
 
     public SoulsFireEffect() {
         super(Outcome.Damage);
-        this.staticText = "Target creature you control on the battlefield deals damage equal to its power to any target";
+        this.staticText = "Target creature you control on the battlefield deals damage equal to its power to target creature or player";
     }
 
     public SoulsFireEffect(final SoulsFireEffect effect) {

@@ -44,7 +44,7 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.target.common.TargetCardInHand;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
@@ -60,11 +60,11 @@ public class LatullaKeldonOverseer extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // {X}{R}, {tap}, Discard two cards: Latulla, Keldon Overseer deals X damage to any target.
+        // {X}{R}, {tap}, Discard two cards: Latulla, Keldon Overseer deals X damage to target creature or player.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(new ManacostVariableValue()), new ManaCostsImpl("{X}{R}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardTargetCost(new TargetCardInHand(2, 2, new FilterCard("two cards"))));
-        ability.addTarget(new TargetAnyTarget());
+        ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
     }
 

@@ -28,12 +28,16 @@
 package mage.cards.m;
 
 import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.abilities.effects.RedirectionEffect;
+import mage.abilities.effects.common.RedirectDamageFromSourceToTargetEffect;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -48,8 +52,9 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
@@ -58,9 +63,9 @@ import mage.target.common.TargetAnyTarget;
 public class Martyrdom extends CardImpl {
 
     public Martyrdom(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}{W}");
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}{W}");
 
-        // Until end of turn, target creature you control gains "{0}: The next 1 damage that would be dealt to any target this turn is dealt to this creature instead." Only you may activate this ability.
+        // Until end of turn, target creature you control gains "{0}: The next 1 damage that would be dealt to target creature or player this turn is dealt to this creature instead." Only you may activate this ability.
         this.getSpellAbility().addEffect(new MartyrdomGainAbilityTargetEffect());
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
     }
@@ -79,9 +84,9 @@ class MartyrdomGainAbilityTargetEffect extends ContinuousEffectImpl {
 
     public MartyrdomGainAbilityTargetEffect() {
         super(Duration.EndOfTurn, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
-        this.staticText = "Until end of turn, target creature you control gains \"{0}: The next 1 damage that would be dealt to target creature, planeswalker, or player this turn is dealt to this creature instead.\" Only you may activate this ability";
+        this.staticText = "Until end of turn, target creature you control gains \"{0}: The next 1 damage that would be dealt to target creature or player this turn is dealt to this creature instead.\" Only you may activate this ability";
     }
-
+    
     public MartyrdomGainAbilityTargetEffect(final MartyrdomGainAbilityTargetEffect effect) {
         super(effect);
     }
@@ -105,13 +110,13 @@ class MartyrdomGainAbilityTargetEffect extends ContinuousEffectImpl {
 }
 
 class MartyrdomActivatedAbility extends ActivatedAbilityImpl {
-
+    
     private static FilterCreaturePermanent filter = new FilterCreaturePermanent();
     private UUID caster;
-
+    
     public MartyrdomActivatedAbility(UUID caster) {
         super(Zone.BATTLEFIELD, new MartyrdomRedirectDamageTargetEffect(Duration.EndOfTurn, 1), new GenericManaCost(0));
-        this.addTarget(new TargetAnyTarget());
+        this.addTarget(new TargetCreatureOrPlayer());
         this.caster = caster;
     }
 
@@ -145,7 +150,7 @@ class MartyrdomActivatedAbility extends ActivatedAbilityImpl {
 
     @Override
     public String getRule() {
-        return "{0}: The next 1 damage that would be dealt to target creature, planeswalker, or player this turn is dealt to {this} instead.";
+        return "{0}: The next 1 damage that would be dealt to target creature or player this turn is dealt to {this} instead.";
     }
 }
 
@@ -155,7 +160,7 @@ class MartyrdomRedirectDamageTargetEffect extends RedirectionEffect {
 
     public MartyrdomRedirectDamageTargetEffect(Duration duration, int amount) {
         super(duration, amount, true);
-        staticText = "The next " + amount + " damage that would be dealt to target creature, planeswalker, or player this turn is dealt to {this} instead";
+        staticText = "The next " + amount + " damage that would be dealt to target creature or player this turn is dealt to {this} instead";
     }
 
     public MartyrdomRedirectDamageTargetEffect(final MartyrdomRedirectDamageTargetEffect effect) {
@@ -174,7 +179,7 @@ class MartyrdomRedirectDamageTargetEffect extends RedirectionEffect {
             if (filter.match(permanent, permanent.getId(), permanent.getControllerId(), game)) {
                 if (event.getTargetId().equals(getTargetPointer().getFirst(game, source))) {
                     if (event.getTargetId() != null) {
-                        TargetAnyTarget target = new TargetAnyTarget();
+                        TargetCreatureOrPlayer target = new TargetCreatureOrPlayer();
                         target.add(source.getSourceId(), game);
                         redirectTarget = target;
                         return true;

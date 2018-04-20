@@ -36,7 +36,7 @@ import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.SpellAbilityType;
 import mage.game.permanent.token.ElephantToken;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 public class AssaultBattery extends SplitCard {
 
@@ -44,11 +44,11 @@ public class AssaultBattery extends SplitCard {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{R}", "{3}{G}", SpellAbilityType.SPLIT);
 
         // Assault
-        // Assault deals 2 damage to any target.
+        // Assault deals 2 damage to target creature or player.
         Effect effect = new DamageTargetEffect(2);
-        effect.setText("Assault deals 2 damage to any target");
+        effect.setText("Assault deals 2 damage to target creature or player");
         getLeftHalfCard().getSpellAbility().addEffect(effect);
-        getLeftHalfCard().getSpellAbility().addTarget(new TargetAnyTarget());
+        getLeftHalfCard().getSpellAbility().addTarget(new TargetCreatureOrPlayer());
 
         // Battery
         // Create a 3/3 green Elephant creature token.

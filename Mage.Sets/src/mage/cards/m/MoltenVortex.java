@@ -39,7 +39,7 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandCard;
 import mage.target.common.TargetCardInHand;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
@@ -50,10 +50,10 @@ public class MoltenVortex extends CardImpl {
     public MoltenVortex(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{R}");
 
-        // {R}, Discard a land card: Molten Vortex deals 2 damage to any target.
+        // {R}, Discard a land card: Molten Vortex deals 2 damage to target creature or player.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new DiscardTargetCost(new TargetCardInHand(new FilterLandCard())));
         ability.addCost(new ManaCostsImpl("{R}"));
-        ability.addTarget(new TargetAnyTarget());
+        ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
     }
 

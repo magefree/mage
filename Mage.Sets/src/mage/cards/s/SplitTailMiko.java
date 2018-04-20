@@ -37,7 +37,7 @@ import mage.abilities.effects.common.PreventDamageToTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
@@ -52,10 +52,10 @@ public class SplitTailMiko extends CardImpl {
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        // {W}, {tap}: Prevent the next 2 damage that would be dealt to any target this turn.
+        // {W}, {tap}: Prevent the next 2 damage that would be dealt to target creature or player this turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToTargetEffect(Duration.EndOfTurn, 2), new ColoredManaCost(ColoredManaSymbol.W));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetAnyTarget());
+        ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
     }
 

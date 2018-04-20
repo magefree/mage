@@ -44,7 +44,7 @@ import mage.cards.LevelerCard;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
@@ -62,12 +62,12 @@ public class BrimstoneMage extends LevelerCard {
         this.addAbility(new LevelUpAbility(new ManaCostsImpl("{3}{R}")));
         Abilities<Ability> abilities1 = new AbilitiesImpl<>();
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
-        ability.addTarget(new TargetAnyTarget());
+        ability.addTarget(new TargetCreatureOrPlayer());
         abilities1.add(ability);
 
         Abilities<Ability> abilities2 = new AbilitiesImpl<>();
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(3), new TapSourceCost());
-        ability.addTarget(new TargetAnyTarget());
+        ability.addTarget(new TargetCreatureOrPlayer());
         abilities2.add(ability);
 
         this.addAbilities(LevelerCardBuilder.construct(

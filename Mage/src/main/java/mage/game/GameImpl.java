@@ -307,20 +307,6 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     @Override
-    public Player getPlayerOrPlaneswalkerController(UUID playerId) {
-        Player player = getPlayer(playerId);
-        if (player != null) {
-            return player;
-        }
-        Permanent permanent = getPermanent(playerId);
-        if (permanent == null) {
-            return null;
-        }
-        player = getPlayer(permanent.getControllerId());
-        return player;
-    }
-
-    @Override
     public MageObject getObject(UUID objectId) {
         if (objectId == null) {
             return null;
@@ -1579,14 +1565,14 @@ public abstract class GameImpl implements Game, Serializable {
         }
         state.addCommandObject(newPlane);
         informPlayers("You have planeswalked to " + newPlane.getLogName());
-
+        
         // Fire off the planeswalked event
         GameEvent event = new GameEvent(GameEvent.EventType.PLANESWALK, newPlane.getId(), null, newPlane.getId(), 0, true);
         if (!replaceEvent(event)) {
             GameEvent ge = new GameEvent(GameEvent.EventType.PLANESWALKED, newPlane.getId(), null, newPlane.getId(), 0, true);
             fireEvent(ge);
         }
-
+        
         return true;
     }
 
@@ -3158,23 +3144,5 @@ public abstract class GameImpl implements Game, Serializable {
             informPlayers(newMonarch.getLogName() + " is the monarch");
             fireEvent(new GameEvent(GameEvent.EventType.BECOMES_MONARCH, monarchId, source == null ? null : source.getSourceId(), monarchId));
         }
-    }
-
-    @Override
-    public int damagePlayerOrPlaneswalker(UUID playerOrWalker, int damage, UUID sourceId, Game game, boolean combatDamage, boolean preventable) {
-        return damagePlayerOrPlaneswalker(playerOrWalker, damage, sourceId, game, combatDamage, preventable, null);
-    }
-
-    @Override
-    public int damagePlayerOrPlaneswalker(UUID playerOrWalker, int damage, UUID sourceId, Game game, boolean combatDamage, boolean preventable, List<UUID> appliedEffects) {
-        Player player = getPlayer(playerOrWalker);
-        if (player != null) {
-            return player.damage(damage, sourceId, game, combatDamage, preventable, appliedEffects);
-        }
-        Permanent permanent = getPermanent(playerOrWalker);
-        if (permanent != null) {
-            return permanent.damage(damage, sourceId, game, combatDamage, preventable, appliedEffects);
-        }
-        return 0;
     }
 }

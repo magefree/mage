@@ -36,7 +36,7 @@ import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
@@ -48,14 +48,14 @@ public class ResoundingThunder extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");
 
 
-        // Resounding Thunder deals 3 damage to any target.
+        // Resounding Thunder deals 3 damage to target creature or player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
-        this.getSpellAbility().addTarget(new TargetAnyTarget());
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
         // Cycling {5}{B}{R}{G}
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{5}{B}{R}{G}")));
-        // When you cycle Resounding Thunder, it deals 6 damage to any target.
+        // When you cycle Resounding Thunder, it deals 6 damage to target creature or player.
         Ability ability = new CycleTriggeredAbility(new DamageTargetEffect(6, "it"));
-        ability.addTarget(new TargetAnyTarget());
+        ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
     }
 

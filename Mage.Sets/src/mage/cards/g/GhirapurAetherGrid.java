@@ -40,7 +40,7 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetControlledPermanent;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
@@ -58,11 +58,11 @@ public class GhirapurAetherGrid extends CardImpl {
     public GhirapurAetherGrid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");
 
-        // Tap two untaped artifacts you control: Ghirapur Aether Grid deals 1 damage to any target
+        // Tap two untaped artifacts you control: Ghirapur Aether Grid deals 1 damage to target creature or player
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new DamageTargetEffect(1),
                 new TapTargetCost(new TargetControlledPermanent(2, 2, filter, true)));
-        ability.addTarget(new TargetAnyTarget());
+        ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
     }
 

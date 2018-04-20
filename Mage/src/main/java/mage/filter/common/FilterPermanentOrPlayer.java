@@ -50,13 +50,9 @@ public class FilterPermanentOrPlayer extends FilterImpl<MageItem> implements Fil
     }
 
     public FilterPermanentOrPlayer(String name) {
-        this(name, new FilterPermanent(), new FilterPlayer());
-    }
-
-    public FilterPermanentOrPlayer(String name, FilterPermanent permanentFilter, FilterPlayer playerFilter) {
         super(name);
-        this.permanentFilter = permanentFilter;
-        this.playerFilter = playerFilter;
+        permanentFilter = new FilterPermanent();
+        playerFilter = new FilterPlayer();
     }
 
     public FilterPermanentOrPlayer(final FilterPermanentOrPlayer filter) {

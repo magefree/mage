@@ -43,7 +43,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
@@ -55,11 +55,11 @@ public class ViridianLongbow extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
         this.subtype.add(SubType.EQUIPMENT);
 
-        // Equipped creature has "{tap}: This creature deals 1 damage to any target."
+        // Equipped creature has "{tap}: This creature deals 1 damage to target creature or player."
         Effect effect = new DamageTargetEffect(1);
-        effect.setText("This creature deals 1 damage to any target");
+        effect.setText("This creature deals 1 damage to target creature or player");
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
-        ability.addTarget(new TargetAnyTarget());
+        ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability, AttachmentType.EQUIPMENT)));
         
         // Equip {3}

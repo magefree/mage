@@ -24,7 +24,8 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
- */
+*/
+
 package mage.cards.l;
 
 import java.util.UUID;
@@ -32,7 +33,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
@@ -41,9 +42,9 @@ import mage.target.common.TargetAnyTarget;
 public class LightningBolt extends CardImpl {
 
     public LightningBolt(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}");
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");
 
-        this.getSpellAbility().addTarget(new TargetAnyTarget());
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
     }
 

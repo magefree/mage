@@ -40,8 +40,7 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.common.TargetPlayerOrPlaneswalker;
+import mage.target.TargetPlayer;
 
 /**
  *
@@ -50,10 +49,11 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
 public class ConcussiveBolt extends CardImpl {
 
     public ConcussiveBolt(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}{R}");
+
 
         // Concussive Bolt deals 4 damage to target player.
-        this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
+        this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));
         // Metalcraft - If you control three or more artifacts, creatures that player controls can't block this turn.
         this.getSpellAbility().addEffect(new ConcussiveBoltEffect());
@@ -74,7 +74,7 @@ class ConcussiveBoltEffect extends OneShotEffect {
 
     public ConcussiveBoltEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Metalcraft - If you control three or more artifacts, creatures controlled by that player or by that planeswalker’s controller can’t block this turn.";
+        this.staticText = "Metalcraft - If you control three or more artifacts, creatures that player controls can't block this turn";
     }
 
     public ConcussiveBoltEffect(final ConcussiveBoltEffect effect) {
@@ -111,11 +111,7 @@ class ConcussiveBoltRestrictionEffect extends RestrictionEffect {
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
         boolean metalcraft = (Boolean) this.getValue("MetalcraftConcussiveBolt");
-        Player player = game.getPlayerOrPlaneswalkerController(source.getFirstTarget());
-        if (player == null) {
-            return false;
-        }
-        if (metalcraft && permanent.getControllerId().equals(player.getId())) {
+        if (metalcraft && permanent.getControllerId().equals(source.getFirstTarget())) {
             return true;
         }
         return false;

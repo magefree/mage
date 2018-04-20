@@ -47,7 +47,6 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
  *
@@ -56,7 +55,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
 public class ChandraNalaar extends CardImpl {
 
     public ChandraNalaar(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{R}{R}");
+        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{3}{R}{R}");
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.CHANDRA);
 
@@ -75,11 +74,9 @@ public class ChandraNalaar extends CardImpl {
         // -8: Chandra Nalaar deals 10 damage to target player and each creature he or she controls.
         Effects effects1 = new Effects();
         effects1.add(new DamageTargetEffect(10));
-        effects1.add(new DamageAllControlledTargetEffect(10, new FilterCreaturePermanent())
-                .setText("and each creature that player or that planeswalker’s controller controls")
-        );
+        effects1.add(new DamageAllControlledTargetEffect(10, new FilterCreaturePermanent()));
         LoyaltyAbility ability3 = new LoyaltyAbility(effects1, -8);
-        ability3.addTarget(new TargetPlayerOrPlaneswalker());
+        ability3.addTarget(new TargetPlayer());
         this.addAbility(ability3);
     }
 

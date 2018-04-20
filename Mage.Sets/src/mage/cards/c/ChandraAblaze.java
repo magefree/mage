@@ -52,7 +52,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInGraveyard;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.common.TargetDiscard;
 
 /**
@@ -68,10 +68,10 @@ public class ChandraAblaze extends CardImpl {
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(5));
 
-        // +1: Discard a card. If a red card is discarded this way, Chandra Ablaze deals 4 damage to any target.
+        // +1: Discard a card. If a red card is discarded this way, Chandra Ablaze deals 4 damage to target creature or player.
         LoyaltyAbility ability = new LoyaltyAbility(new ChandraAblazeEffect1(), 1);
         ability.addEffect(new ChandraAblazeEffect2());
-        ability.addTarget(new TargetAnyTarget());
+        ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
         // -2: Each player discards their hand, then draws three cards.
         ability = new LoyaltyAbility(new DiscardHandAllEffect(), -2);
@@ -132,7 +132,7 @@ class ChandraAblazeEffect2 extends OneShotEffect {
 
     public ChandraAblazeEffect2() {
         super(Outcome.Damage);
-        this.staticText = "If a red card is discarded this way, {this} deals 4 damage to any target";
+        this.staticText = "If a red card is discarded this way, {this} deals 4 damage to target creature or player";
     }
 
     public ChandraAblazeEffect2(final ChandraAblazeEffect2 effect) {

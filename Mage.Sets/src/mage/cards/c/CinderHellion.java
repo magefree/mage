@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.target.common.TargetOpponentOrPlaneswalker;
+import mage.target.common.TargetOpponent;
 
 /**
  *
@@ -46,7 +46,7 @@ import mage.target.common.TargetOpponentOrPlaneswalker;
 public class CinderHellion extends CardImpl {
 
     public CinderHellion(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}");
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");
         this.subtype.add(SubType.HELLION);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
@@ -56,7 +56,7 @@ public class CinderHellion extends CardImpl {
 
         // When Cinder Hellion enters the battlefield, it deals 2 damage to target opponent.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(2, "it"), false);
-        ability.addTarget(new TargetOpponentOrPlaneswalker());
+        ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }
 

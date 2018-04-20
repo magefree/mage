@@ -33,7 +33,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
@@ -45,9 +45,9 @@ public class Blaze extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{R}");
 
 
-        // Blaze deals X damage to any target.
+        // Blaze deals X damage to target creature or player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(new ManacostVariableValue()));
-        this.getSpellAbility().addTarget(new TargetAnyTarget());
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
     }
 
     public Blaze(final Blaze card) {

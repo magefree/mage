@@ -35,7 +35,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TimingRule;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
@@ -47,9 +47,9 @@ public class Firebolt extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}");
 
 
-        // Firebolt deals 2 damage to any target.
+        // Firebolt deals 2 damage to target creature or player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));
-        this.getSpellAbility().addTarget(new TargetAnyTarget());
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
         // Flashback {4}{R}
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{4}{R}"), TimingRule.SORCERY));
     }

@@ -34,7 +34,7 @@ import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
@@ -46,9 +46,9 @@ public class SparkSpray extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");
 
 
-        // Spark Spray deals 1 damage to any target.
+        // Spark Spray deals 1 damage to target creature or player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(1));
-        this.getSpellAbility().addTarget(new TargetAnyTarget());
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
 
         // Cycling {R}
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{R}")));

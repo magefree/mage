@@ -33,7 +33,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
@@ -45,9 +45,9 @@ public class Tarfire extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.INSTANT},"{R}");
         this.subtype.add(SubType.GOBLIN);
 
-        // Tarfire deals 2 damage to any target.
+        // Tarfire deals 2 damage to target creature or player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));
-        this.getSpellAbility().addTarget(new TargetAnyTarget());
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
     }
 
     public Tarfire(final Tarfire card) {

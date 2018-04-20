@@ -36,7 +36,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
@@ -52,9 +52,9 @@ public class LabyrinthChampion extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Heroic - Whenever you cast a spell that targets Labyrinth Champion, Labyrinth Champion deals 2 damage to any target.
+        // Heroic - Whenever you cast a spell that targets Labyrinth Champion, Labyrinth Champion deals 2 damage to target creature or player.
         Ability ability = new HeroicAbility(new DamageTargetEffect(2), false);
-        ability.addTarget(new TargetAnyTarget());
+        ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
     }
 

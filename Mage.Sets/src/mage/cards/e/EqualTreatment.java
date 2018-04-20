@@ -25,6 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+
 package mage.cards.e;
 
 import java.util.UUID;
@@ -46,7 +47,7 @@ import mage.game.events.GameEvent;
 public class EqualTreatment extends CardImpl {
 
     public EqualTreatment(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}");
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");
 
         // If any source would deal 1 or more damage to a creature or player this turn, it deals 2 damage to that creature or player instead.
         this.getSpellAbility().addEffect(new EqualTreatmentEffect());
@@ -69,7 +70,7 @@ class EqualTreatmentEffect extends ReplacementEffectImpl {
 
     public EqualTreatmentEffect() {
         super(Duration.EndOfTurn, Outcome.PreventDamage);
-        staticText = "If any source would deal 1 or more damage to a permanent or player this turn, it deals 2 damage to that permanent or player instead";
+        staticText = "If any source would deal 1 or more damage to a creature or player this turn, it deals 2 damage to that creature or player instead";
     }
 
     public EqualTreatmentEffect(final EqualTreatmentEffect effect) {
@@ -84,8 +85,7 @@ class EqualTreatmentEffect extends ReplacementEffectImpl {
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.DAMAGE_CREATURE
-                || event.getType() == GameEvent.EventType.DAMAGE_PLAYER
-                || event.getType() == GameEvent.EventType.DAMAGED_PLANESWALKER;
+                || event.getType() == GameEvent.EventType.DAMAGE_PLAYER;
     }
 
     @Override

@@ -41,7 +41,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
-import mage.target.common.TargetPlayerOrPlaneswalker;
+import mage.target.TargetPlayer;
 
 /**
  *
@@ -50,7 +50,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
 public class KeldonMarauders extends CardImpl {
 
     public KeldonMarauders(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WARRIOR);
 
@@ -66,7 +66,7 @@ public class KeldonMarauders extends CardImpl {
 
         // When Keldon Marauders enters the battlefield or leaves the battlefield, it deals 1 damage to target player.
         ability = new EntersBattlefieldOrLeavesSourceTriggeredAbility(new DamageTargetEffect(1, "it"), false);
-        ability.addTarget(new TargetPlayerOrPlaneswalker());
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
 

@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
@@ -52,9 +52,9 @@ public class BallistaCharger extends CardImpl {
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 
-        // Whenever Ballista Charger attacks, it deals 1 damage to any target.
+        // Whenever Ballista Charger attacks, it deals 1 damage to target creature or player.
         Ability ability = new AttacksTriggeredAbility(new DamageTargetEffect(1, "it"), false);
-        ability.addTarget(new TargetAnyTarget());
+        ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
 
         // Crew 3

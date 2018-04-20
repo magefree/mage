@@ -42,7 +42,7 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.target.common.TargetControlledPermanent;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
@@ -58,11 +58,11 @@ public class RathsEdge extends CardImpl {
 
         // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
-        // {4}, {tap}, Sacrifice a land: Rath's Edge deals 1 damage to any target.
+        // {4}, {tap}, Sacrifice a land: Rath's Edge deals 1 damage to target creature or player.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl<>("{4}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
-        ability.addTarget(new TargetAnyTarget());
+        ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
     }
 

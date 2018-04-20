@@ -32,7 +32,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
@@ -44,9 +44,9 @@ public class FlameJavelin extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2/R}{2/R}{2/R}");
 
 
-        // Flame Javelin deals 4 damage to any target.
+        // Flame Javelin deals 4 damage to target creature or player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));
-        this.getSpellAbility().addTarget(new TargetAnyTarget());
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
     }
 
     public FlameJavelin(final FlameJavelin card) {

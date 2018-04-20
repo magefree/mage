@@ -49,7 +49,8 @@ import mage.util.CardUtil;
 public class FurnaceOfRath extends CardImpl {
 
     public FurnaceOfRath(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}{R}{R}");
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{R}{R}{R}");
+
 
         // If a source would deal damage to a creature or player, it deals double that damage to that creature or player instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new FurnaceOfRathEffect()));
@@ -69,7 +70,7 @@ class FurnaceOfRathEffect extends ReplacementEffectImpl {
 
     public FurnaceOfRathEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Damage);
-        staticText = "If a source would deal damage to a permanent or player, that source deals double that damage to that permanent or player instead";
+        staticText = "If a source would deal damage to a creature or player, that source deals double that damage to that creature or player instead";
     }
 
     public FurnaceOfRathEffect(final FurnaceOfRathEffect effect) {
@@ -88,12 +89,10 @@ class FurnaceOfRathEffect extends ReplacementEffectImpl {
                 return true;
             case DAMAGE_CREATURE:
                 return true;
-            case DAMAGE_PLANESWALKER:
-                return true;
         }
         return false;
-    }
-
+    } 
+    
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         return true;

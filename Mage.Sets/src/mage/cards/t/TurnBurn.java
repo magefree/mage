@@ -40,7 +40,7 @@ import mage.constants.Duration;
 import mage.constants.SpellAbilityType;
 import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -60,11 +60,11 @@ public class TurnBurn extends SplitCard {
         getLeftHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // Burn
-        // Burn deals 2 damage to any target.
+        // Burn deals 2 damage to target creature or player.
         effect = new DamageTargetEffect(2);
-        effect.setText("Burn deals 2 damage to any target");
+        effect.setText("Burn deals 2 damage to target creature or player");
         getRightHalfCard().getSpellAbility().addEffect(effect);
-        getRightHalfCard().getSpellAbility().addTarget(new TargetAnyTarget());
+        getRightHalfCard().getSpellAbility().addTarget(new TargetCreatureOrPlayer());
 
     }
 

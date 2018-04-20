@@ -34,7 +34,7 @@ import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.target.common.TargetPlayerOrPlaneswalker;
+import mage.target.TargetPlayer;
 
 /**
  *
@@ -43,11 +43,11 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
 public class FlameJet extends CardImpl {
 
     public FlameJet(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{R}");
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}");
 
         // Flame Jet deals 3 damage to target player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
-        this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
+        this.getSpellAbility().addTarget(new TargetPlayer());
         // Cycling {2}
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }

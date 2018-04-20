@@ -42,7 +42,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
@@ -79,10 +79,10 @@ public class KolaghansCommand extends CardImpl {
         mode.getTargets().add(new TargetPermanent(filter));
         this.getSpellAbility().getModes().addMode(mode);
 
-        // or Kolaghan's Command deals 2 damage to any target.
+        // or Kolaghan's Command deals 2 damage to target creature or player.
         mode = new Mode();
         mode.getEffects().add(new DamageTargetEffect(2));
-        mode.getTargets().add(new TargetAnyTarget());
+        mode.getTargets().add(new TargetCreatureOrPlayer());
         this.getSpellAbility().getModes().addMode(mode);
     }
 

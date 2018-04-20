@@ -49,11 +49,12 @@ import mage.util.CardUtil;
 public class Overblaze extends CardImpl {
 
     public Overblaze(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{R}");
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{R}");
         this.subtype.add(SubType.ARCANE);
 
+
         // Each time target permanent would deal damage to a creature or player this turn, it deals double that damage to that creature or player instead.
-        this.getSpellAbility().addEffect(new OverblazeEffect());
+        this.getSpellAbility().addEffect(new FireServantEffect());
         this.getSpellAbility().addTarget(new TargetPermanent());
         // Splice onto Arcane {2}{R}{R}
         this.addAbility(new SpliceOntoArcaneAbility("{2}{R}{R}"));
@@ -69,27 +70,26 @@ public class Overblaze extends CardImpl {
     }
 }
 
-class OverblazeEffect extends ReplacementEffectImpl {
+class FireServantEffect extends ReplacementEffectImpl {
 
-    public OverblazeEffect() {
+    public FireServantEffect() {
         super(Duration.EndOfTurn, Outcome.Damage);
-        staticText = "Each time target permanent would deal damage to a permanent or player this turn, it deals double that damage to that permanent or player instead.";
+        staticText = "Each time target permanent would deal damage to a creature or player this turn, it deals double that damage to that creature or player instead.";
     }
 
-    public OverblazeEffect(final OverblazeEffect effect) {
+    public FireServantEffect(final FireServantEffect effect) {
         super(effect);
     }
 
     @Override
-    public OverblazeEffect copy() {
-        return new OverblazeEffect(this);
+    public FireServantEffect copy() {
+        return new FireServantEffect(this);
     }
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGE_CREATURE
-                || event.getType() == GameEvent.EventType.DAMAGE_PLAYER
-                || event.getType() == GameEvent.EventType.DAMAGE_PLANESWALKER;
+        return event.getType() == GameEvent.EventType.DAMAGE_CREATURE ||
+                event.getType() == GameEvent.EventType.DAMAGE_PLAYER;
     }
 
     @Override

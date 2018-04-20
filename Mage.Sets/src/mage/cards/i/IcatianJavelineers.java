@@ -42,7 +42,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
@@ -60,10 +60,10 @@ public class IcatianJavelineers extends CardImpl {
         // Icatian Javelineers enters the battlefield with a javelin counter on it.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.JAVELIN.createInstance()), "with a javelin counter on it"));
 
-        // {tap}, Remove a javelin counter from Icatian Javelineers: Icatian Javelineers deals 1 damage to any target.
+        // {tap}, Remove a javelin counter from Icatian Javelineers: Icatian Javelineers deals 1 damage to target creature or player.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
         ability.addCost(new RemoveCountersSourceCost(CounterType.JAVELIN.createInstance()));
-        ability.addTarget(new TargetAnyTarget());
+        ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
     }
 

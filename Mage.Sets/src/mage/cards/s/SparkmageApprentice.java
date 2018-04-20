@@ -36,7 +36,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
@@ -52,7 +52,7 @@ public class SparkmageApprentice extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(1), false);
-        ability.addTarget(new TargetAnyTarget());
+        ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
     }
 

@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.permanent.token.ConstructToken;
 import mage.target.common.TargetControlledPermanent;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
@@ -74,10 +74,10 @@ public class Flamewright extends CardImpl {
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 
-        // {tap}, Sacrifice a creature with defender: Flamewright deals 1 damage to any target.
+        // {tap}, Sacrifice a creature with defender: Flamewright deals 1 damage to target creature or player.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
-        ability.addTarget(new TargetAnyTarget());
+        ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
     }
 

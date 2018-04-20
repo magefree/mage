@@ -41,7 +41,7 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
@@ -56,10 +56,10 @@ public class OrcishBloodpainter extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        // {tap}, Sacrifice a creature: Orcish Bloodpainter deals 1 damage to any target.
+        // {tap}, Sacrifice a creature: Orcish Bloodpainter deals 1 damage to target creature or player.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
-        ability.addTarget(new TargetAnyTarget());
+        ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
     }
 

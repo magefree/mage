@@ -47,7 +47,8 @@ import mage.target.targetpointer.FixedTarget;
 public class RaidBombardment extends CardImpl {
 
     public RaidBombardment(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");
+
 
         // Whenever a creature you control with power 2 or less attacks, Raid Bombardment deals 1 damage to defending player.
         this.addAbility(new RaidBombardmentTriggeredAbility());
@@ -85,11 +86,11 @@ class RaidBombardmentTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (game.getActivePlayerId().equals(this.controllerId)) {
+        if (game.getActivePlayerId().equals(this.controllerId) ) {
             Permanent attacker = game.getPermanent(event.getSourceId());
             if (attacker != null) {
                 if (attacker.getPower().getValue() <= 2) {
-                    UUID defendingPlayerId = game.getCombat().getDefenderId(attacker.getId());
+                    UUID defendingPlayerId = game.getCombat().getDefendingPlayerId(attacker.getId(), game);
                     this.getEffects().get(0).setTargetPointer(new FixedTarget(defendingPlayerId));
                     return true;
                 }
@@ -100,7 +101,8 @@ class RaidBombardmentTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a creature you control with power 2 or less attacks, {this} deals 1 damage to the player or planeswalker that creature is attacking.";
+        return "Whenever a creature you control with power 2 or less attacks, {this} deals 1 damage to defending player.";
     }
 
 }
+

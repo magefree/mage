@@ -33,7 +33,7 @@ import mage.abilities.keyword.ReplicateAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
@@ -47,9 +47,9 @@ public class Pyromatics extends CardImpl {
 
         // Replicate {1}{R}
         this.addAbility(new ReplicateAbility(this, "{1}{R}"));
-        // Pyromatics deals 1 damage to any target.
+        // Pyromatics deals 1 damage to target creature or player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(1));
-        this.getSpellAbility().addTarget(new TargetAnyTarget());
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
 
     }
 

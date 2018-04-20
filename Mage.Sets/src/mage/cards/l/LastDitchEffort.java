@@ -40,7 +40,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
@@ -51,9 +51,9 @@ public class LastDitchEffort extends CardImpl {
     public LastDitchEffort(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");
 
-        // Sacrifice any number of creatures. Last-Ditch Effort deals that much damage to any target.
+        // Sacrifice any number of creatures. Last-Ditch Effort deals that much damage to target creature or player.
         this.getSpellAbility().addEffect(new LastDitchEffortEffect());
-        this.getSpellAbility().addTarget(new TargetAnyTarget());
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
     }
 
     public LastDitchEffort(final LastDitchEffort card) {
@@ -70,7 +70,7 @@ class LastDitchEffortEffect extends OneShotEffect {
 
     LastDitchEffortEffect() {
         super(Outcome.Damage);
-        this.staticText = "Sacrifice any number of creatures. {this} deals that much damage to any target";
+        this.staticText = "Sacrifice any number of creatures. {this} deals that much damage to target creature or player";
     }
 
     LastDitchEffortEffect(final LastDitchEffortEffect effect) {

@@ -40,7 +40,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
@@ -58,9 +58,9 @@ public class MilitantMonk extends CardImpl {
 
         // Vigilance
         this.addAbility(VigilanceAbility.getInstance());
-        // {T}: Prevent the next 1 damage that would be dealt to any target this turn.
+        // {T}: Prevent the next 1 damage that would be dealt to target creature or player this turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToTargetEffect(Duration.EndOfTurn, 1), new TapSourceCost());
-        ability.addTarget(new TargetAnyTarget());
+        ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
     }
 

@@ -40,7 +40,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.target.Target;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
@@ -57,9 +57,9 @@ public class Dawnfluke extends CardImpl {
 
         // Flash
         this.addAbility(FlashAbility.getInstance());
-        // When Dawnfluke enters the battlefield, prevent the next 3 damage that would be dealt to any target this turn.
+        // When Dawnfluke enters the battlefield, prevent the next 3 damage that would be dealt to target creature or player this turn.
         Ability ability = new EntersBattlefieldTriggeredAbility(new PreventDamageToTargetEffect(Duration.EndOfTurn, 3));
-        Target target = new TargetAnyTarget();
+        Target target = new TargetCreatureOrPlayer();
         ability.addTarget(target);
         this.addAbility(ability);
         // Evoke {W}

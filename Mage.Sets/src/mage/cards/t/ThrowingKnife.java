@@ -43,7 +43,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
@@ -58,12 +58,12 @@ public class ThrowingKnife extends CardImpl {
 
         // Equipped creature gets +2/+0.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 0)));
-        // Whenever equipped creature attacks, you may sacrifice Throwing Knife. If you do, Throwing Knife deals 2 damage to any target.
+        // Whenever equipped creature attacks, you may sacrifice Throwing Knife. If you do, Throwing Knife deals 2 damage to target creature or player.
         Effect effect = new SacrificeSourceEffect();
         effect.setText("you may sacrifice {this}. If you do, ");
         Ability ability = new AttacksAttachedTriggeredAbility(new SacrificeSourceEffect(), true);
         ability.addEffect(new DamageTargetEffect(2));
-        ability.addTarget(new TargetAnyTarget());
+        ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));

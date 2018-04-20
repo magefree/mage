@@ -34,7 +34,7 @@ import mage.abilities.effects.common.InfoEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
@@ -49,9 +49,9 @@ public class Ghostfire extends CardImpl {
         this.color = new ObjectColor();
         this.getSpellAbility().addEffect(new InfoEffect("{this} is colorless"));
 
-        // Ghostfire deals 3 damage to any target.
+        // Ghostfire deals 3 damage to target creature or player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
-        this.getSpellAbility().addTarget(new TargetAnyTarget());
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
     }
 
     public Ghostfire(final Ghostfire card) {

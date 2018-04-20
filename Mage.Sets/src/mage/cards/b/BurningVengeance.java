@@ -37,7 +37,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  * @author nantuko
@@ -48,7 +48,7 @@ public class BurningVengeance extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");
 
 
-        // Whenever you cast a spell from your graveyard, Burning Vengeance deals 2 damage to any target.
+        // Whenever you cast a spell from your graveyard, Burning Vengeance deals 2 damage to target creature or player.
         this.addAbility(new BurningVengeanceOnCastAbility());
     }
 
@@ -64,11 +64,11 @@ public class BurningVengeance extends CardImpl {
 
 class BurningVengeanceOnCastAbility extends TriggeredAbilityImpl {
 
-    private static final String abilityText = "Whenever you cast a spell from your graveyard, Burning Vengeance deals 2 damage to any target";
+    private static final String abilityText = "Whenever you cast a spell from your graveyard, Burning Vengeance deals 2 damage to target creature or player";
 
     BurningVengeanceOnCastAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(2), false);
-        TargetAnyTarget target = new TargetAnyTarget();
+        TargetCreatureOrPlayer target = new TargetCreatureOrPlayer();
         this.addTarget(target);
     }
 

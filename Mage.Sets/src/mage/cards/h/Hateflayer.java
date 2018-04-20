@@ -41,7 +41,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
@@ -59,10 +59,10 @@ public class Hateflayer extends CardImpl {
         // Wither
         this.addAbility(WitherAbility.getInstance());
         
-        // {2}{R}, {untap}: Hateflayer deals damage equal to its power to any target.
+        // {2}{R}, {untap}: Hateflayer deals damage equal to its power to target creature or player.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(new SourcePermanentPowerCount()), new ManaCostsImpl("{2}{R}"));
         ability.addCost(new UntapSourceCost());
-        ability.addTarget(new TargetAnyTarget());
+        ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
         
     }

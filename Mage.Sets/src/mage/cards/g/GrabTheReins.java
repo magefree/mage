@@ -45,7 +45,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -71,10 +71,10 @@ public class GrabTheReins extends CardImpl {
         TargetCreaturePermanent target = new TargetCreaturePermanent();
         target.setTargetName("a creature to take control of");
         this.getSpellAbility().addTarget(target);
-        // or sacrifice a creature, then Grab the Reins deals damage equal to that creature's power to any target.
+        // or sacrifice a creature, then Grab the Reins deals damage equal to that creature's power to target creature or player.
         Mode mode = new Mode();
         mode.getEffects().add(new GrabTheReinsEffect());
-        TargetAnyTarget target2 = new TargetAnyTarget();
+        TargetCreatureOrPlayer target2 = new TargetCreatureOrPlayer();
         target2.setTargetName("a creature or player to damage");
         mode.getTargets().add(target2);
         this.getSpellAbility().getModes().addMode(mode);
@@ -97,7 +97,7 @@ class GrabTheReinsEffect extends OneShotEffect {
 
     public GrabTheReinsEffect() {
         super(Outcome.Damage);
-        staticText = "sacrifice a creature. {this} deals damage equal to the sacrificed creature's power to any target";
+        staticText = "sacrifice a creature. {this} deals damage equal to the sacrificed creature's power to target creature or player";
     }
 
     public GrabTheReinsEffect(final GrabTheReinsEffect effect) {

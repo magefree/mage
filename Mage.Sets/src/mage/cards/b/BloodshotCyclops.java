@@ -41,7 +41,7 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
@@ -57,12 +57,12 @@ public class BloodshotCyclops extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {T}, Sacrifice a creature: Bloodshot Cyclops deals damage equal to the sacrificed
-        // creature's power to any target.
+        // creature's power to target creature or player.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new DamageTargetEffect(new SacrificeCostCreaturesPower()),
                 new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
-        ability.addTarget(new TargetAnyTarget());
+        ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
     }
 

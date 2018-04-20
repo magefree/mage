@@ -75,7 +75,7 @@ public class FiresongAndSunspeaker extends CardImpl {
         Effect effect = new GainAbilitySpellsEffect(LifelinkAbility.getInstance(), filter);
         effect.setText("Instant and sorcery spells you control have lifelink");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
-        // Whenever a white instant or sorcery spell causes you to gain life, Firesong and Sunspeaker deals 3 damage to any target.
+        // Whenever a white instant or sorcery spell causes you to gain life, Firesong and Sunspeaker deals 3 damage to target creature or player.
         this.addAbility(new FiresongAndSunspeakerTriggeredAbility());
     }
 
@@ -125,6 +125,6 @@ class FiresongAndSunspeakerTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a white instant or sorcery spell causes you to gain life, Firesong and Sunspeaker deals 3 damage to any target.";
+        return "Whenever a white instant or sorcery spell causes you to gain life, Firesong and Sunspeaker deals 3 damage to target creature or player.";
     }
 }

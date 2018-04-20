@@ -42,22 +42,20 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.target.common.TargetPlayerOrPlaneswalker;
+import mage.target.TargetPlayer;
 
 /**
  *
  * @author North
  */
 public class VentSentinel extends CardImpl {
-
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creatures with defender you control");
-
-    static {
+    static{
         filter.add(new AbilityPredicate(DefenderAbility.class));
     }
 
     public VentSentinel(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
         this.subtype.add(SubType.ELEMENTAL);
 
         this.power = new MageInt(2);
@@ -66,7 +64,7 @@ public class VentSentinel extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(new PermanentsOnBattlefieldCount(filter)), new ManaCostsImpl("{1}{R}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetPlayerOrPlaneswalker());
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
 

@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
@@ -55,9 +55,9 @@ public class SkirkMarauder extends CardImpl {
         // Morph {2}{R}
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{2}{R}")));
         
-        // When Skirk Marauder is turned face up, it deals 2 damage to any target.
+        // When Skirk Marauder is turned face up, it deals 2 damage to target creature or player.
         Ability ability = new TurnedFaceUpSourceTriggeredAbility(new DamageTargetEffect(2, "it"));
-        ability.addTarget(new TargetAnyTarget());
+        ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
     }
 

@@ -40,7 +40,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
@@ -57,10 +57,10 @@ public class Scaldkin extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        // {2}{R}, Sacrifice Scaldkin: Scaldkin deals 2 damage to any target.
+        // {2}{R}, Sacrifice Scaldkin: Scaldkin deals 2 damage to target creature or player.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl("{2}{R}"));
         ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetAnyTarget());
+        ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
     }
 

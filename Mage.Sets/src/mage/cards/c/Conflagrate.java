@@ -42,7 +42,7 @@ import mage.constants.CardType;
 import mage.constants.TimingRule;
 import mage.filter.FilterCard;
 import mage.game.Game;
-import mage.target.common.TargetAnyTargetAmount;
+import mage.target.common.TargetCreatureOrPlayerAmount;
 
 /**
  *
@@ -56,7 +56,7 @@ public class Conflagrate extends CardImpl {
         // Conflagrate deals X damage divided as you choose among any number of target creatures and/or players.
         DynamicValue xValue = new ConflagrateVariableValue();
         this.getSpellAbility().addEffect(new DamageMultiEffect(xValue));
-        this.getSpellAbility().addTarget(new TargetAnyTargetAmount(xValue));
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayerAmount(xValue));
 
         // Flashback-{R}{R}, Discard X cards.
         Ability ability = new FlashbackAbility(new ManaCostsImpl("{R}{R}"), TimingRule.SORCERY);

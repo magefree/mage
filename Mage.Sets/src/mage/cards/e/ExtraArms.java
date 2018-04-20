@@ -40,7 +40,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -60,9 +60,9 @@ public class ExtraArms extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        // Whenever enchanted creature attacks, it deals 2 damage to any target.
+        // Whenever enchanted creature attacks, it deals 2 damage to target creature or player.
         ability = new AttacksAttachedTriggeredAbility(new DamageTargetEffect(2, "it"), AttachmentType.AURA, false);
-        ability.addTarget(new TargetAnyTarget());
+        ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
     }
 

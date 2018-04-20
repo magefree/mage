@@ -43,7 +43,7 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.target.common.TargetPlayerOrPlaneswalker;
+import mage.target.TargetPlayer;
 
 /**
  *
@@ -52,7 +52,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
 public class UnstableFooting extends CardImpl {
 
     public UnstableFooting(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}");
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");
 
         // Kicker {3}{R} (You may pay an additional {3}{R} as you cast this spell.)
         this.addAbility(new KickerAbility("{3}{R}"));
@@ -62,7 +62,7 @@ public class UnstableFooting extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DamageTargetEffect(5),
                 KickedCondition.instance,
-                "If this spell was kicked, it deals 5 damage to target player or planeswalker"));
+                "If {this} was kicked, it deals 5 damage to target player"));
 
     }
 
@@ -71,7 +71,7 @@ public class UnstableFooting extends CardImpl {
         if (ability instanceof SpellAbility) {
             ability.getTargets().clear();
             if (KickedCondition.instance.apply(game, ability)) {
-                ability.addTarget(new TargetPlayerOrPlaneswalker());
+                ability.addTarget(new TargetPlayer());
             }
         }
     }
@@ -106,12 +106,12 @@ class UnstableFootingEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         return true;
     }
-
+    
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == EventType.PREVENT_DAMAGE;
     }
-
+    
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         return true;

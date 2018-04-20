@@ -34,13 +34,13 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.common.FilterCreaturePlayerOrPlaneswalker;
+import mage.filter.common.FilterCreatureOrPlayer;
 import mage.filter.predicate.mageobject.AnotherTargetPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
@@ -49,30 +49,31 @@ import mage.target.common.TargetAnyTarget;
 public class ConeOfFlame extends CardImpl {
 
     public ConeOfFlame(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}{R}");
 
-        // Cone of Flame deals 1 damage to any target, 2 damage to another any target, and 3 damage to a third any target.
-        FilterCreaturePlayerOrPlaneswalker filter1 = new FilterCreaturePlayerOrPlaneswalker("creature, player or planeswalker to deal 1 damage");
-        TargetAnyTarget target1 = new TargetAnyTarget(1, 1, filter1);
+
+        // Cone of Flame deals 1 damage to target creature or player, 2 damage to another target creature or player, and 3 damage to a third target creature or player.
+        FilterCreatureOrPlayer filter1 = new FilterCreatureOrPlayer("creature or player to deal 1 damage");
+        TargetCreatureOrPlayer target1 = new TargetCreatureOrPlayer(1, 1, filter1);
         target1.setTargetTag(1);
         this.getSpellAbility().addTarget(target1);
-
-        FilterCreaturePlayerOrPlaneswalker filter2 = new FilterCreaturePlayerOrPlaneswalker("another creature, player or planeswalker to deal 2 damage");
+        
+        FilterCreatureOrPlayer filter2 = new FilterCreatureOrPlayer("another creature or player to deal 2 damage");
         AnotherTargetPredicate predicate2 = new AnotherTargetPredicate(2);
         filter2.getCreatureFilter().add(predicate2);
         filter2.getPlayerFilter().add(predicate2);
-        TargetAnyTarget target2 = new TargetAnyTarget(1, 1, filter2);
+        TargetCreatureOrPlayer target2 = new TargetCreatureOrPlayer(1, 1, filter2);
         target2.setTargetTag(2);
         this.getSpellAbility().addTarget(target2);
-
-        FilterCreaturePlayerOrPlaneswalker filter3 = new FilterCreaturePlayerOrPlaneswalker("another creature, player or planeswalker to deal 3 damage");
+        
+        FilterCreatureOrPlayer filter3 = new FilterCreatureOrPlayer("another creature or player to deal 3 damage");
         AnotherTargetPredicate predicate3 = new AnotherTargetPredicate(3);
         filter3.getCreatureFilter().add(predicate3);
         filter3.getPlayerFilter().add(predicate3);
-        TargetAnyTarget target3 = new TargetAnyTarget(1, 1, filter3);
+        TargetCreatureOrPlayer target3 = new TargetCreatureOrPlayer(1, 1, filter3);
         target3.setTargetTag(3);
         this.getSpellAbility().addTarget(target3);
-
+        
         this.getSpellAbility().addEffect(new ConeOfFlameEffect());
     }
 
@@ -90,11 +91,9 @@ class ConeOfFlameEffect extends OneShotEffect {
 
     public ConeOfFlameEffect() {
         super(Outcome.Damage);
-        this.staticText = "{source} deals 1 damage to any target, "
-                + "2 damage to another target, "
-                + "and 3 damage to a third target";
+        this.staticText = "{source} deals 1 damage to target creature or player, 2 damage to another target creature or player, and 3 damage to a third target creature or player";
     }
-
+    
     public ConeOfFlameEffect(final ConeOfFlameEffect effect) {
         super(effect);
     }
@@ -103,7 +102,7 @@ class ConeOfFlameEffect extends OneShotEffect {
     public ConeOfFlameEffect copy() {
         return new ConeOfFlameEffect(this);
     }
-
+    
     @Override
     public boolean apply(Game game, Ability source) {
         boolean applied = false;
@@ -121,5 +120,5 @@ class ConeOfFlameEffect extends OneShotEffect {
         }
         return applied;
     }
-
+    
 }

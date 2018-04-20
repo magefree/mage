@@ -37,7 +37,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
-import mage.target.common.TargetPlayerOrPlaneswalker;
+import mage.target.TargetPlayer;
 
 /**
  * @author BursegSardaukar
@@ -45,7 +45,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
 public class KyrenSniper extends CardImpl {
 
     public KyrenSniper(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
         this.subtype.add(SubType.GOBLIN);
 
         this.power = new MageInt(1);
@@ -53,7 +53,7 @@ public class KyrenSniper extends CardImpl {
 
         // At the beginning of your upkeep, you may have Kyren Sniper deal 1 damage to target player.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new DamageTargetEffect(1), TargetController.YOU, true);
-        ability.addTarget(new TargetPlayerOrPlaneswalker());
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
 

@@ -35,7 +35,7 @@ import mage.abilities.keyword.ConvokeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
@@ -50,15 +50,15 @@ public class CovenantOfBlood extends CardImpl {
         // Convoke
         this.addAbility(new ConvokeAbility());
         
-        // Covenant of Blood deals 4 damage to any target
+        // Covenant of Blood deals 4 damage to target creature or player
         Effect effect = new DamageTargetEffect(4);
-        effect.setText("{this} deals 4 damage to any target");
+        effect.setText("{this} deals 4 damage to target creature or player");
         this.getSpellAbility().addEffect(effect);
         // and you gain 4 life.
         effect = new GainLifeEffect(4);
         effect.setText("and you gain 4 life");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetAnyTarget());
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
     }
 
     public CovenantOfBlood(final CovenantOfBlood card) {

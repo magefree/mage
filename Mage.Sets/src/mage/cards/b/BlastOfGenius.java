@@ -25,6 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+
 package mage.cards.b;
 
 import java.util.UUID;
@@ -38,21 +39,24 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.common.TargetDiscard;
 
 /**
  *
  * @author LevelX2
  */
+
+
 public class BlastOfGenius extends CardImpl {
 
     public BlastOfGenius(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{U}{R}");
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{U}{R}");
 
-        // Choose any target. Draw three cards and discard a card. Blast of Genius deals damage equal to the converted mana cost of the discard card to that creature or player.
+
+        // Choose target creature or player. Draw three cards and discard a card. Blast of Genius deals damage equal to the converted mana cost of the discard card to that creature or player.
         this.getSpellAbility().addEffect(new BlastOfGeniusEffect());
-        this.getSpellAbility().addTarget(new TargetAnyTarget());
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
     }
 
     public BlastOfGenius(final BlastOfGenius card) {
@@ -70,7 +74,7 @@ class BlastOfGeniusEffect extends OneShotEffect {
 
     public BlastOfGeniusEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Choose any target. Draw three cards and discard a card. Blast of Genius deals damage equal to the converted mana cost of the discard card to that permanent or player";
+        this.staticText = "Choose target creature or player. Draw three cards and discard a card. Blast of Genius deals damage equal to the converted mana cost of the discard card to that creature or player";
     }
 
     public BlastOfGeniusEffect(final BlastOfGeniusEffect effect) {

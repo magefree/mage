@@ -35,7 +35,7 @@ import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
@@ -46,9 +46,9 @@ public class Meteorite extends CardImpl {
     public Meteorite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
 
-        // When Meteorite enters the battlefield, it deals 2 damage to any target.
+        // When Meteorite enters the battlefield, it deals 2 damage to target creature or player.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(2, "it"), false);
-        ability.addTarget(new TargetAnyTarget());
+        ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
         
         // {T}: Add one mana of any color to your mana pool.

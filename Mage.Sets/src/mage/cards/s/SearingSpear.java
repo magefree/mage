@@ -32,7 +32,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
@@ -44,9 +44,9 @@ public class SearingSpear extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");
 
 
-        // Searing Spear deals 3 damage to any target.
+        // Searing Spear deals 3 damage to target creature or player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
-        this.getSpellAbility().addTarget(new TargetAnyTarget());
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
     }
 
     public SearingSpear(final SearingSpear card) {

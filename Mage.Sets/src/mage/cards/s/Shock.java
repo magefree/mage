@@ -33,7 +33,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
@@ -45,7 +45,7 @@ public class Shock extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");
 
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));
-        this.getSpellAbility().addTarget(new TargetAnyTarget());
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
     }
 
     public Shock (final Shock card) {

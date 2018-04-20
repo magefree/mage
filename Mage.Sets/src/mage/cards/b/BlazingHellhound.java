@@ -41,7 +41,7 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetControlledPermanent;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
@@ -55,10 +55,10 @@ public class BlazingHellhound extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 
-        // {1}, Sacrifice another creature: Blazing Hellhound deals 1 damage to any target.
+        // {1}, Sacrifice another creature: Blazing Hellhound deals 1 damage to target creature or player.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl("{1}"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)));
-        ability.addTarget(new TargetAnyTarget());
+        ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
     }
 

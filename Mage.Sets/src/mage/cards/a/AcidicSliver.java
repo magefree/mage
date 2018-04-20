@@ -43,7 +43,7 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
@@ -58,14 +58,14 @@ public class AcidicSliver extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // All Slivers have "{2}, Sacrifice this permanent: This permanent deals 2 damage to any target."
+        // All Slivers have "{2}, Sacrifice this permanent: This permanent deals 2 damage to target creature or player."
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new SacrificeSourceCost());
         ability.addCost(new GenericManaCost(2));
-        ability.addTarget(new TargetAnyTarget());
+        ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new GainAbilityAllEffect(ability,
                         Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS,
-                        "All Slivers have \"{2}, Sacrifice this permanent: This permanent deals 2 damage to any target.\"")));
+                        "All Slivers have \"{2}, Sacrifice this permanent: This permanent deals 2 damage to target creature or player.\"")));
     }
 
     public AcidicSliver(final AcidicSliver card) {

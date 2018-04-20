@@ -43,7 +43,7 @@ import mage.filter.common.FilterArtifactSpell;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  * @author Loki, North
@@ -59,7 +59,7 @@ public class Embersmith extends CardImpl {
 
         FilterArtifactSpell filter = new FilterArtifactSpell("an artifact spell");
         SpellCastControllerTriggeredAbility ability = new SpellCastControllerTriggeredAbility(new EmbersmithEffect(), filter, false);
-        ability.addTarget(new TargetAnyTarget());
+        ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
     }
 
@@ -76,7 +76,7 @@ public class Embersmith extends CardImpl {
 class EmbersmithEffect extends OneShotEffect {
     EmbersmithEffect() {
         super(Outcome.Damage);
-        staticText =  "you may pay {1}. If you do, {this} deals 1 damage to any target";
+        staticText =  "you may pay {1}. If you do, {this} deals 1 damage to target creature or player";
     }
 
     EmbersmithEffect(final EmbersmithEffect effect) {

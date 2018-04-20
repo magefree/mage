@@ -36,7 +36,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
@@ -52,9 +52,9 @@ public class GoblinArsonist extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // When Goblin Arsonist dies, you may have it deal 1 damage to any target.
+        // When Goblin Arsonist dies, you may have it deal 1 damage to target creature or player.
         Ability ability = new DiesTriggeredAbility(new DamageTargetEffect(1), true);
-        ability.addTarget(new TargetAnyTarget());
+        ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
     }
 

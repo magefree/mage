@@ -40,7 +40,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  * @author BursegSardaukar
@@ -55,15 +55,15 @@ public class GoblinDynamo extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        // {T}: Goblin Dynamo deals 1 damage to any target.
+        // {T}: Goblin Dynamo deals 1 damage to target creature or player.
         Ability  ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
-        ability.addTarget(new TargetAnyTarget());
+        ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
         
-        //{X}{R}, {T}, Sacrifice Goblin Dynamo: Goblin Dynamo deals X damage to any target.
+        //{X}{R}, {T}, Sacrifice Goblin Dynamo: Goblin Dynamo deals X damage to target creature or player.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,new DamageTargetEffect(new ManacostVariableValue()), new ManaCostsImpl("{X}{R}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetAnyTarget());
+        ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
     }
 

@@ -38,8 +38,8 @@ import mage.constants.CardType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
+import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
  *
@@ -56,7 +56,8 @@ public class ClanDefiance extends CardImpl {
     }
 
     public ClanDefiance(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{R}{G}");
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{R}{G}");
+
 
         // Choose one or more - 
         this.getSpellAbility().getModes().setMinModes(1);
@@ -72,9 +73,9 @@ public class ClanDefiance extends CardImpl {
         // and/or Clan Defiance deals X damage to target player.
         Mode mode2 = new Mode();
         mode2.getEffects().add(new DamageTargetEffect(new ManacostVariableValue()));
-        mode2.getTargets().add(new TargetPlayerOrPlaneswalker());
+        mode2.getTargets().add(new TargetPlayer());
         this.getSpellAbility().addMode(mode2);
-
+        
     }
 
     public ClanDefiance(final ClanDefiance card) {
@@ -85,5 +86,5 @@ public class ClanDefiance extends CardImpl {
     public ClanDefiance copy() {
         return new ClanDefiance(this);
     }
-
+    
 }

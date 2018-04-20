@@ -35,7 +35,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetControlledPermanent;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
@@ -50,9 +50,9 @@ public class ShardVolley extends CardImpl {
         // As an additional cost to cast Shard Volley, sacrifice a land.
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT)));
 
-        // Shard Volley deals 3 damage to any target.
+        // Shard Volley deals 3 damage to target creature or player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
-        this.getSpellAbility().addTarget(new TargetAnyTarget());
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
     }
 
     public ShardVolley(final ShardVolley card) {

@@ -34,7 +34,7 @@ import mage.abilities.keyword.MadnessAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
@@ -46,9 +46,9 @@ public class FieryTemper extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}{R}");
 
 
-        // Fiery Temper deals 3 damage to any target.
+        // Fiery Temper deals 3 damage to target creature or player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
-        this.getSpellAbility().addTarget(new TargetAnyTarget());
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
 
         // Madness {R}
         this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{R}")));

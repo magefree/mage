@@ -46,7 +46,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
@@ -61,14 +61,14 @@ public class Mortarpod extends CardImpl {
         // Living weapon (When this Equipment enters the battlefield, create a 0/0 black Germ creature token, then attach this to it.)
         this.addAbility(new LivingWeaponAbility());
         
-        // Equipped creature gets +0/+1 and has "Sacrifice this creature: This creature deals 1 damage to any target."
+        // Equipped creature gets +0/+1 and has "Sacrifice this creature: This creature deals 1 damage to target creature or player."
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(0, 1));
         SimpleActivatedAbility abilityToGain = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new DamageTargetEffect(1),
                 new SacrificeSourceCost());
-        abilityToGain.addTarget(new TargetAnyTarget());
+        abilityToGain.addTarget(new TargetCreatureOrPlayer());
         Effect effect = new GainAbilityAttachedEffect(abilityToGain, AttachmentType.EQUIPMENT);
-        effect.setText("and has \"Sacrifice this creature: This creature deals 1 damage to any target.\"");
+        effect.setText("and has \"Sacrifice this creature: This creature deals 1 damage to target creature or player.\"");
         ability.addEffect(effect);
         this.addAbility(ability);
         

@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
@@ -44,7 +43,10 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetOpponentOrPlaneswalker;
+import mage.players.Player;
+import mage.target.common.TargetOpponent;
+
+import java.util.UUID;
 
 /**
  *
@@ -59,11 +61,11 @@ public class AetherCharge extends CardImpl {
     }
 
     public AetherCharge(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{R}");
+        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{R}");
 
         // Whenever a Beast enters the battlefield under your control, you may have it deal 4 damage to target opponent.
         Ability ability = new AetherChargeTriggeredAbility();
-        ability.addTarget(new TargetOpponentOrPlaneswalker());
+        ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }
 
@@ -106,7 +108,7 @@ class AetherChargeTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a Beast enters the battlefield under your control, you may have it deal 4 damage to target opponent or planeswalker.";
+        return "Whenever a Beast enters the battlefield under your control, you may have it deal 4 damage to target opponent.";
     }
 
     @Override
@@ -119,7 +121,7 @@ class AetherChargeEffect extends OneShotEffect {
 
     public AetherChargeEffect() {
         super(Outcome.Damage);
-        staticText = "you may have it deal 4 damage to target opponent or planeswalker";
+        staticText = "you may have it deal 4 damage to target opponent";
     }
 
     public AetherChargeEffect(final AetherChargeEffect effect) {
@@ -139,7 +141,12 @@ class AetherChargeEffect extends OneShotEffect {
             creature = (Permanent) game.getLastKnownInformation(creatureId, Zone.BATTLEFIELD);
         }
         if (creature != null) {
-            return game.damagePlayerOrPlaneswalker(source.getFirstTarget(), 4, creature.getId(), game, false, true) > 0;
+            UUID target = source.getTargets().getFirstTarget();
+            Player opponent = game.getPlayer(target);
+            if (opponent != null) {
+                opponent.damage(4, creature.getId(), game, false, true);
+                return true;
+            }
         }
         return false;
     }

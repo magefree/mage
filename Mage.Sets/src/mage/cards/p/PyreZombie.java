@@ -43,7 +43,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
@@ -61,10 +61,10 @@ public class PyreZombie extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.GRAVEYARD,
                 new DoIfCostPaid(new ReturnToHandSourceEffect().setText("return {this} to your hand"), new ManaCostsImpl("{1}{B}{B}")),
                 TargetController.YOU, false));
-        // {1}{R}{R}, Sacrifice Pyre Zombie: Pyre Zombie deals 2 damage to any target.
+        // {1}{R}{R}, Sacrifice Pyre Zombie: Pyre Zombie deals 2 damage to target creature or player.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl("{1}{R}{R}"));
         ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetAnyTarget());
+        ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
     }
 

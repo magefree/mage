@@ -35,7 +35,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
@@ -50,9 +50,9 @@ public class PitchburnDevils extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // When Pitchburn Devils dies, it deals 3 damage to any target.
+        // When Pitchburn Devils dies, it deals 3 damage to target creature or player.
         DiesTriggeredAbility ability = new DiesTriggeredAbility(new DamageTargetEffect(3, "it"));
-        ability.addTarget(new TargetAnyTarget());
+        ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
     }
 

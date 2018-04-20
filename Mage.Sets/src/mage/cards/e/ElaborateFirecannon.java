@@ -44,7 +44,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
@@ -58,10 +58,10 @@ public class ElaborateFirecannon extends CardImpl {
         // Elaborate Firecannon doesn't untap during your untap step.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepSourceEffect()));
 
-        // {4}, {T}: Elaborate Firecannon deals 2 damage to any target.
+        // {4}, {T}: Elaborate Firecannon deals 2 damage to target creature or player.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl<>("{4}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetAnyTarget());
+        ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
 
         // At the beginning of your upkeep, you may discard a card. If you do, untap Elaborate Firecannon.

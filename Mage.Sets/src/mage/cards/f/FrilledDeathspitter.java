@@ -37,7 +37,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.target.common.TargetOpponentOrPlaneswalker;
+import mage.target.common.TargetOpponent;
 
 /**
  *
@@ -54,9 +54,9 @@ public class FrilledDeathspitter extends CardImpl {
 
         // <i>Enrage</i> &mdash; Whenever Frilled Deathspitter is dealt damage, it deals 2 damage to target opponent.
         Ability ability = new DealtDamageToSourceTriggeredAbility(
-                Zone.BATTLEFIELD, new DamageTargetEffect(2).setText("it deals 2 damage to target opponent or planeswalker"), false, true
+                Zone.BATTLEFIELD, new DamageTargetEffect(2).setText("it deals 2 damage to target opponent"), false, true
         );
-        ability.addTarget(new TargetOpponentOrPlaneswalker());
+        ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }
 

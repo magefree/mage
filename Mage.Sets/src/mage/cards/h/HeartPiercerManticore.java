@@ -52,7 +52,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
@@ -70,9 +70,9 @@ public class HeartPiercerManticore extends CardImpl {
         // When Heart-Piercer Manticore enters the battlefield, you may sacrifice another creature.
         Ability firstAbility = new EntersBattlefieldTriggeredAbility(new HeartPiercerManticoreSacrificeEffect(), true);
         this.addAbility(firstAbility);
-        // When you do, Heart-Piercer Manticore deals damage equal to that creature's power to any target.
+        // When you do, Heart-Piercer Manticore deals damage equal to that creature's power to target creature or player.
         Ability secondAbility = new HeartPiercerManticoreSacrificeTriggeredAbility(firstAbility.getOriginalId());
-        secondAbility.addTarget(new TargetAnyTarget());
+        secondAbility.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(secondAbility);
         // Embalm {5}{R}
         this.addAbility(new EmbalmAbility(new ManaCostsImpl("{5}{R}"), this));
@@ -128,7 +128,7 @@ class HeartPiercerManticoreSacrificeTriggeredAbility extends TriggeredAbilityImp
     private final UUID relatedTriggerdAbilityOriginalId;
 
     public HeartPiercerManticoreSacrificeTriggeredAbility(UUID relatedTriggerdAbilityOriginalId) {
-        super(Zone.BATTLEFIELD, new InfoEffect("{this} deals damage equal to that creature's power to any target"));
+        super(Zone.BATTLEFIELD, new InfoEffect("{this} deals damage equal to that creature's power to target creature or player"));
         this.relatedTriggerdAbilityOriginalId = relatedTriggerdAbilityOriginalId;
     }
 
@@ -161,6 +161,6 @@ class HeartPiercerManticoreSacrificeTriggeredAbility extends TriggeredAbilityImp
 
     @Override
     public String getRule() {
-        return "When you do, {this} deals damage equal to that creature's power to any target.";
+        return "When you do, {this} deals damage equal to that creature's power to target creature or player.";
     }
 }

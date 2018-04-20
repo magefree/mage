@@ -33,7 +33,7 @@ import mage.abilities.keyword.RetraceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
@@ -44,9 +44,9 @@ public class FlameJab extends CardImpl {
     public FlameJab(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}");
 
-        // Flame Jab deals 1 damage to any target.
+        // Flame Jab deals 1 damage to target creature or player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(1));
-        this.getSpellAbility().addTarget(new TargetAnyTarget());
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
         // Retrace
         this.addAbility(new RetraceAbility(this));
     }

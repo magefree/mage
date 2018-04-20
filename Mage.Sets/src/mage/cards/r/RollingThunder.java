@@ -34,7 +34,7 @@ import mage.abilities.effects.common.DamageMultiEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.target.common.TargetAnyTargetAmount;
+import mage.target.common.TargetCreatureOrPlayerAmount;
 
 /**
  *
@@ -48,7 +48,7 @@ public class RollingThunder extends CardImpl {
         // Rolling Thunder deals X damage divided as you choose among any number of target creatures and/or players.
         DynamicValue xValue = new ManacostVariableValue();
         this.getSpellAbility().addEffect(new DamageMultiEffect(xValue));
-        this.getSpellAbility().addTarget(new TargetAnyTargetAmount(xValue));  
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayerAmount(xValue));  
     }
 
     public RollingThunder(final RollingThunder card) {

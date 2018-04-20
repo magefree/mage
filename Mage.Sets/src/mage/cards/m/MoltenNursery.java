@@ -37,7 +37,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ColorlessPredicate;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
@@ -57,9 +57,9 @@ public class MoltenNursery extends CardImpl {
         // Devoid
         this.addAbility(new DevoidAbility(this.color));
 
-        // Whenever you cast a colorless spell, Molten Nursery deals 1 damage to any target.
+        // Whenever you cast a colorless spell, Molten Nursery deals 1 damage to target creature or player.
         Ability ability = new SpellCastControllerTriggeredAbility(new DamageTargetEffect(1), filter, false);
-        ability.addTarget(new TargetAnyTarget());
+        ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
 
     }

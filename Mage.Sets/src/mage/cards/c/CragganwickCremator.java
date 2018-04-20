@@ -32,7 +32,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -50,7 +49,7 @@ import mage.target.TargetPlayer;
 public class CragganwickCremator extends CardImpl {
 
     public CragganwickCremator(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
         this.subtype.add(SubType.GIANT);
         this.subtype.add(SubType.SHAMAN);
 
@@ -93,12 +92,16 @@ class CragganwickCrematorEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
+
         if (controller != null) {
             Card discardedCard = controller.discardOne(true, source, game);
             if (discardedCard != null
                     && discardedCard.isCreature()) {
-                int damage = discardedCard.getPower().getValue();
-                return new DamageTargetEffect(damage).apply(game, source);
+                Player targetedPlayer = game.getPlayer(source.getFirstTarget());
+                if (targetedPlayer != null) {
+                    int damage = discardedCard.getPower().getValue();
+                    targetedPlayer.damage(damage, source.getSourceId(), game, false, true);
+                }
             }
             return true;
         }

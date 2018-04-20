@@ -42,7 +42,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
@@ -53,9 +53,9 @@ public class ThunderbladeCharge extends CardImpl {
     public ThunderbladeCharge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{R}{R}");
 
-        // Thunderblade Charge deals 3 damage to any target.
+        // Thunderblade Charge deals 3 damage to target creature or player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
-        this.getSpellAbility().addTarget(new TargetAnyTarget());
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
 
         // Whenever one or more creatures you control deal combat damage to a player, if Thunderblade Charge is in your graveyard, you may pay {2}{R}{R}{R}. If you do, you may cast it without paying its mana cost.
         this.addAbility(new ControlledCreaturesDealCombatDamagePlayerTriggeredAbility(Zone.GRAVEYARD,

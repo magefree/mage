@@ -34,7 +34,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.game.command.Emblem;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
@@ -48,7 +48,7 @@ public class ChandraTorchOfDefianceEmblem extends Emblem {
         Effect effect = new DamageTargetEffect(5);
         effect.setText("this emblem deals 5 damage to target creature or player");
         Ability ability = new SpellCastControllerTriggeredAbility(Zone.COMMAND, effect, new FilterSpell("a spell"), false, false);
-        ability.addTarget(new TargetAnyTarget());
+        ability.addTarget(new TargetCreatureOrPlayer());
         getAbilities().add(ability);
     }
 }

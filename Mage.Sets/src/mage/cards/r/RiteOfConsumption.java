@@ -40,8 +40,8 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.TargetPlayer;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
  *
@@ -50,13 +50,14 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
 public class RiteOfConsumption extends CardImpl {
 
     public RiteOfConsumption(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}");
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}");
+
 
         // As an additional cost to cast Rite of Consumption, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, new FilterControlledCreaturePermanent("a creature"), false)));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1,new FilterControlledCreaturePermanent("a creature"), false)));
         // Rite of Consumption deals damage equal to the sacrificed creature's power to target player. You gain life equal to the damage dealt this way.
         this.getSpellAbility().addEffect(new RiteOfConsumptionEffect());
-        this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
+        this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
     public RiteOfConsumption(final RiteOfConsumption card) {
@@ -73,7 +74,7 @@ class RiteOfConsumptionEffect extends OneShotEffect {
 
     public RiteOfConsumptionEffect() {
         super(Outcome.Benefit);
-        this.staticText = "{this} deals damage equal to the sacrificed creature's power to target player or planeswalker. You gain life equal to the damage dealt this way";
+        this.staticText = "{this} deals damage equal to the sacrificed creature's power to target player. You gain life equal to the damage dealt this way";
     }
 
     public RiteOfConsumptionEffect(final RiteOfConsumptionEffect effect) {
@@ -87,13 +88,14 @@ class RiteOfConsumptionEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        Player targetPlayer = game.getPlayer(this.getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
+        if (targetPlayer != null && controller != null) {
             Permanent sacrificedCreature = null;
-            for (Cost cost : source.getCosts()) {
+            for (Cost cost :source.getCosts()) {
                 if (cost instanceof SacrificeTargetCost) {
                     SacrificeTargetCost sacCost = (SacrificeTargetCost) cost;
-                    for (Permanent permanent : sacCost.getPermanents()) {
+                    for(Permanent permanent : sacCost.getPermanents()) {
                         sacrificedCreature = permanent;
                         break;
                     }
@@ -102,7 +104,7 @@ class RiteOfConsumptionEffect extends OneShotEffect {
             if (sacrificedCreature != null) {
                 int damage = sacrificedCreature.getPower().getValue();
                 if (damage > 0) {
-                    int damageDealt = game.damagePlayerOrPlaneswalker(source.getFirstTarget(), damage, source.getSourceId(), game, false, true);
+                    int damageDealt = targetPlayer.damage(damage, source.getSourceId(), game, false, true);
                     if (damageDealt > 0) {
                         controller.gainLife(damage, game, source);
                     }

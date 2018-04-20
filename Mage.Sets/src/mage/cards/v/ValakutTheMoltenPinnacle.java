@@ -45,7 +45,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
@@ -65,7 +65,7 @@ public class ValakutTheMoltenPinnacle extends CardImpl {
 
         // Valakut, the Molten Pinnacle enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
-        // Whenever a Mountain enters the battlefield under your control, if you control at least five other Mountains, you may have Valakut, the Molten Pinnacle deal 3 damage to any target.
+        // Whenever a Mountain enters the battlefield under your control, if you control at least five other Mountains, you may have Valakut, the Molten Pinnacle deal 3 damage to target creature or player.
         this.addAbility(new ValakutTheMoltenPinnacleTriggeredAbility());
         // {T}: Add {R}.
         this.addAbility(new RedManaAbility());
@@ -86,7 +86,7 @@ class ValakutTheMoltenPinnacleTriggeredAbility extends TriggeredAbilityImpl {
 
     ValakutTheMoltenPinnacleTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(3), true);
-        this.addTarget(new TargetAnyTarget());
+        this.addTarget(new TargetCreatureOrPlayer());
     }
 
     ValakutTheMoltenPinnacleTriggeredAbility(ValakutTheMoltenPinnacleTriggeredAbility ability) {
@@ -121,6 +121,6 @@ class ValakutTheMoltenPinnacleTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a Mountain enters the battlefield under your control, if you control at least five other Mountains, you may have {this} deal 3 damage to any target.";
+        return "Whenever a Mountain enters the battlefield under your control, if you control at least five other Mountains, you may have {this} deal 3 damage to target creature or player.";
     }
 }

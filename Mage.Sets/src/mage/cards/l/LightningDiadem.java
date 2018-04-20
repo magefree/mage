@@ -43,7 +43,7 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -64,9 +64,9 @@ public class LightningDiadem extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
-        // When Lightning Diadem enters the battlefield, it deals 2 damage to any target.
+        // When Lightning Diadem enters the battlefield, it deals 2 damage to target creature or player.
         ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(2, "it"));
-        ability.addTarget(new TargetAnyTarget());
+        ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
 
         // Enchanted creature gets +2/+2.

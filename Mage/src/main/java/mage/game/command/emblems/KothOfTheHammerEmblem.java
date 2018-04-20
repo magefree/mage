@@ -43,7 +43,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.command.Emblem;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
@@ -83,7 +83,7 @@ class KothOfTheHammerThirdEffect extends ContinuousEffectImpl {
                 if (sublayer == SubLayer.NA) {
                     for (Permanent permanent : game.getBattlefield().getActivePermanents(mountains, source.getControllerId(), source.getSourceId(), game)) {
                         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
-                        ability.addTarget(new TargetAnyTarget());
+                        ability.addTarget(new TargetCreatureOrPlayer());
                         permanent.addAbility(ability, source.getSourceId(), game);
                     }
                 }

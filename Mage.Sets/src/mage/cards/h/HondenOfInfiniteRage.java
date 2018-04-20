@@ -40,7 +40,7 @@ import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 import java.util.UUID;
 
@@ -62,9 +62,9 @@ public class HondenOfInfiniteRage extends CardImpl {
         this.subtype.add(SubType.SHRINE);
 
 
-        // At the beginning of your upkeep, Honden of Infinite Rage deals damage to any target equal to the number of Shrines you control.                 
+        // At the beginning of your upkeep, Honden of Infinite Rage deals damage to target creature or player equal to the number of Shrines you control.                 
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new DamageTargetEffect(new PermanentsOnBattlefieldCount(filter)), TargetController.YOU, false);
-        ability.addTarget(new TargetAnyTarget());
+        ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
     }
 

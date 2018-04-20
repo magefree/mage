@@ -43,7 +43,7 @@ import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetPlayerOrPlaneswalker;
+import mage.target.TargetPlayer;
 
 /**
  *
@@ -52,12 +52,16 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
 public class Lavalanche extends CardImpl {
 
     public Lavalanche(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{B}{R}{G}");
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{B}{R}{G}");
+
+
+
+        
 
         // Lavalanche deals X damage to target player and each creature he or she controls.
         this.getSpellAbility().addEffect(new LavalancheEffect(new ManacostVariableValue()));
-        this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
-
+        this.getSpellAbility().addTarget(new TargetPlayer());
+        
     }
 
     public Lavalanche(final Lavalanche card) {
@@ -77,7 +81,7 @@ class LavalancheEffect extends OneShotEffect {
     public LavalancheEffect(DynamicValue amount) {
         super(Outcome.Damage);
         this.amount = amount;
-        staticText = "{this} deals X damage to target player or planeswalker and each creature that player or that planeswalker’s controller controls";
+        staticText = "Lavalanche deals X damage to target player and each creature he or she controls";
     }
 
     public LavalancheEffect(final LavalancheEffect effect) {
@@ -92,16 +96,16 @@ class LavalancheEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player targetPlayer = game.getPlayerOrPlaneswalkerController(source.getFirstTarget());
+        Player targetPlayer = game.getPlayer(source.getFirstTarget());
         if (targetPlayer == null) {
             return false;
         }
         targetPlayer.damage(amount.calculate(game, source, this), source.getSourceId(), game, false, true);
-        FilterPermanent filter = new FilterPermanent("and each creature that player or that planeswalker’s controller controls");
+        FilterPermanent filter = new FilterPermanent("and each creature he or she controls");
         filter.add(new CardTypePredicate(CardType.CREATURE));
         filter.add(new ControllerIdPredicate(targetPlayer.getId()));
         List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);
-        for (Permanent permanent : permanents) {
+        for (Permanent permanent: permanents) {
             permanent.damage(amount.calculate(game, source, this), source.getSourceId(), game, false, true);
         }
         return true;

@@ -40,6 +40,7 @@ import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -57,6 +58,7 @@ public class MageSlayer extends CardImpl {
 
         // Equip {3}
         this.addAbility(new EquipAbility(Outcome.Benefit, new GenericManaCost(3), new TargetControlledCreaturePermanent()));
+
     }
 
     public MageSlayer(final MageSlayer card) {
@@ -73,7 +75,7 @@ class MageSlayerEffect extends OneShotEffect {
 
     public MageSlayerEffect() {
         super(Outcome.Damage);
-        staticText = "it deals damage equal to the player or planeswalker it’s attacking";
+        staticText = "it deals damage equal to its power to defending player";
     }
 
     public MageSlayerEffect(final MageSlayerEffect effect) {
@@ -90,11 +92,13 @@ class MageSlayerEffect extends OneShotEffect {
         Permanent equipment = game.getPermanent(source.getSourceId());
         if (equipment != null && equipment.getAttachedTo() != null) {
             int power = game.getPermanent(equipment.getAttachedTo()).getPower().getValue();
-            UUID defenderId = game.getCombat().getDefenderId(equipment.getAttachedTo());
-            if (power > 0 && defenderId != null) {
+            UUID defendingPlayerId = game.getCombat().getDefendingPlayerId(equipment.getAttachedTo(), game);
+            if (power > 0 && defendingPlayerId != null) {
+                Player defendingPlayer = game.getPlayer(defendingPlayerId);
+
                 UUID sourceId = (UUID) this.getValue("sourceId");
-                if (sourceId != null) {
-                    game.damagePlayerOrPlaneswalker(defenderId, power, source.getSourceId(), game, false, true);
+                if (sourceId != null && defendingPlayer != null) {
+                    defendingPlayer.damage(power, source.getSourceId(), game, false, true);
                 }
             }
             return true;

@@ -33,7 +33,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 
 /**
  *
@@ -64,11 +63,7 @@ public class DamageAllControlledTargetEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayerOrPlaneswalkerController(source.getFirstTarget());
-        if (player == null) {
-            return false;
-        }
-        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, player.getId(), game)) {
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, source.getFirstTarget(), game)) {
             permanent.damage(amount, source.getSourceId(), game, false, true);
         }
         return true;

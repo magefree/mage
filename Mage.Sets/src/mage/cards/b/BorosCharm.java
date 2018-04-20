@@ -40,8 +40,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.filter.common.FilterControlledPermanent;
+import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
  *
@@ -49,12 +49,13 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  */
 public class BorosCharm extends CardImpl {
 
-    public BorosCharm(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}{W}");
+    public BorosCharm (UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}{W}");
+
 
         //Choose one - Boros Charm deals 4 damage to target player
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));
-        this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
+        this.getSpellAbility().addTarget(new TargetPlayer());
         //or permanents you control are indestructible this turn
         Mode mode = new Mode();
         Effect effect = new GainAbilityAllEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn, new FilterControlledPermanent(), false);
@@ -73,7 +74,7 @@ public class BorosCharm extends CardImpl {
     }
 
     @Override
-    public BorosCharm copy() {
+    public BorosCharm  copy() {
         return new BorosCharm(this);
     }
 }

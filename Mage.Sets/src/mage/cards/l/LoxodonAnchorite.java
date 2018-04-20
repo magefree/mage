@@ -39,7 +39,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
@@ -55,9 +55,9 @@ public class LoxodonAnchorite extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
-        // {tap}: Prevent the next 2 damage that would be dealt to any target this turn.
+        // {tap}: Prevent the next 2 damage that would be dealt to target creature or player this turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToTargetEffect(Duration.EndOfTurn, 2), new TapSourceCost());
-        ability.addTarget(new TargetAnyTarget());
+        ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
     }
 

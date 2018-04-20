@@ -46,7 +46,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -66,9 +66,9 @@ public class WardOfPiety extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
-        // {1}{W}: The next 1 damage that would be dealt to enchanted creature this turn is dealt to any target instead.
+        // {1}{W}: The next 1 damage that would be dealt to enchanted creature this turn is dealt to target creature or player instead.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new WardOfPietyPreventDamageTargetEffect(), new ManaCostsImpl("{1}{W}"));
-        ability.addTarget(new TargetAnyTarget());
+        ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
     }
 
@@ -88,7 +88,7 @@ class WardOfPietyPreventDamageTargetEffect extends RedirectionEffect {
 
     public WardOfPietyPreventDamageTargetEffect() {
         super(Duration.EndOfTurn, 1, true);
-        staticText = "The next 1 damage that would be dealt to enchanted creature this turn is dealt to any target instead";
+        staticText = "The next 1 damage that would be dealt to enchanted creature this turn is dealt to target creature or player instead";
     }
 
     public WardOfPietyPreventDamageTargetEffect(final WardOfPietyPreventDamageTargetEffect effect) {

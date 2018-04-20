@@ -44,7 +44,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetPlayerOrPlaneswalker;
+import mage.target.TargetPlayer;
 
 /**
  *
@@ -53,11 +53,11 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
 public class Landslide extends CardImpl {
 
     public Landslide(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{R}");
+        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}");
 
         // Sacrifice any number of Mountains. Landslide deals that much damage to target player.
         this.getSpellAbility().addEffect(new LandslideEffect());
-        this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
+        this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
     public Landslide(final Landslide card) {
@@ -81,7 +81,7 @@ class LandslideEffect extends OneShotEffect {
 
     public LandslideEffect() {
         super(Outcome.Benefit);
-        staticText = "Sacrifice any number of Mountains. {this} deals that much damage to target player or planeswalker";
+        staticText = "Sacrifice any number of Mountains. {this} deals that much damage to target player";
     }
 
     public LandslideEffect(final LandslideEffect effect) {

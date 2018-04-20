@@ -35,7 +35,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.target.common.TargetPlayerOrPlaneswalker;
+import mage.target.TargetPlayer;
 
 /**
  *
@@ -44,7 +44,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
 public class RageThrower extends CardImpl {
 
     public RageThrower(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{R}");
+        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SHAMAN);
 
@@ -53,7 +53,7 @@ public class RageThrower extends CardImpl {
 
         // Whenever another creature dies, Rage Thrower deals 2 damage to target player.
         DiesCreatureTriggeredAbility ability = new DiesCreatureTriggeredAbility(new DamageTargetEffect(2), false, true);
-        ability.addTarget(new TargetPlayerOrPlaneswalker());
+        ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
 

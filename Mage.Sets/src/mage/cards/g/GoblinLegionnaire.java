@@ -42,7 +42,7 @@ import mage.constants.SubType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
@@ -60,11 +60,11 @@ public class GoblinLegionnaire extends CardImpl {
         this.toughness = new MageInt(2);
         Ability firstAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ColoredManaCost(ColoredManaSymbol.R));
         firstAbility.addCost(new SacrificeSourceCost());
-        firstAbility.addTarget(new TargetAnyTarget());
+        firstAbility.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(firstAbility);
         Ability secondAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToTargetEffect(Duration.EndOfTurn, 2), new ColoredManaCost(ColoredManaSymbol.W));
         secondAbility.addCost(new SacrificeSourceCost());
-        secondAbility.addTarget(new TargetAnyTarget());
+        secondAbility.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(secondAbility);
     }
 

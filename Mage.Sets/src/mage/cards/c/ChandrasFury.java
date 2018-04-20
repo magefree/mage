@@ -34,7 +34,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.target.common.TargetPlayerOrPlaneswalker;
+import mage.target.TargetPlayer;
 
 /**
  *
@@ -43,14 +43,13 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
 public class ChandrasFury extends CardImpl {
 
     public ChandrasFury(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{4}{R}");
+        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{R}");
+
 
         // Chandra's Fury deals 4 damage to target player and 1 damage to each creature that player controls.
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));
-        this.getSpellAbility().addEffect(new DamageAllControlledTargetEffect(1, new FilterCreaturePermanent())
-                .setText("and each creature that player or that planeswalker’s controller controls")
-        );
-        this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
+        this.getSpellAbility().addEffect(new DamageAllControlledTargetEffect(1, new FilterCreaturePermanent()));
+        this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
     public ChandrasFury(final ChandrasFury card) {

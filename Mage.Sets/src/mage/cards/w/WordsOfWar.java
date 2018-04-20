@@ -42,7 +42,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
@@ -54,9 +54,9 @@ public class WordsOfWar extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");
 
 
-        // {1}: The next time you would draw a card this turn, Words of War deals 2 damage to any target instead.
+        // {1}: The next time you would draw a card this turn, Words of War deals 2 damage to target creature or player instead.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new WordsOfWarEffect(), new GenericManaCost(1));
-        ability.addTarget(new TargetAnyTarget());
+        ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
     }
 
@@ -74,7 +74,7 @@ class WordsOfWarEffect extends ReplacementEffectImpl {
     
     WordsOfWarEffect() {
         super(Duration.EndOfTurn, Outcome.Damage);
-        staticText = "The next time you would draw a card this turn, {this} deals 2 damage to any target instead.";
+        staticText = "The next time you would draw a card this turn, {this} deals 2 damage to target creature or player instead.";
     }
     
     WordsOfWarEffect(final WordsOfWarEffect effect) {

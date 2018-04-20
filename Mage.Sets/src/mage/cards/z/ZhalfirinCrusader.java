@@ -40,7 +40,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
@@ -57,9 +57,9 @@ public class ZhalfirinCrusader extends CardImpl {
         // Flanking
         this.addAbility(new FlankingAbility());
         
-        // {1}{W}: The next 1 damage that would be dealt to Zhalfirin Crusader this turn is dealt to any target instead.
+        // {1}{W}: The next 1 damage that would be dealt to Zhalfirin Crusader this turn is dealt to target creature or player instead.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RedirectDamageFromSourceToTargetEffect(Duration.EndOfTurn, 1, true), new ManaCostsImpl("{1}{W}"));
-        ability.addTarget(new TargetAnyTarget());
+        ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
     }
 

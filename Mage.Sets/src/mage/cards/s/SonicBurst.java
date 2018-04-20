@@ -33,7 +33,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
@@ -46,9 +46,9 @@ public class SonicBurst extends CardImpl {
 
         // As an additional cost to cast Sonic Burst, discard a card at random.
         this.getSpellAbility().addCost(new DiscardCardCost(true));
-        // Sonic Burst deals 4 damage to any target.
+        // Sonic Burst deals 4 damage to target creature or player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));
-        this.getSpellAbility().addTarget(new TargetAnyTarget());
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
     }
 
     public SonicBurst(final SonicBurst card) {

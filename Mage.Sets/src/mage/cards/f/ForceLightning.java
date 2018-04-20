@@ -38,7 +38,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
@@ -49,9 +49,9 @@ public class ForceLightning extends CardImpl {
     public ForceLightning(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{R}{R}");
 
-        // Force Lightning deals X damage to any target.
+        // Force Lightning deals X damage to target creature or player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(new ManacostVariableValue()));
-        this.getSpellAbility().addTarget(new TargetAnyTarget());
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
 
         // Scry X.
         this.getSpellAbility().addEffect(new ForceLightningEffect());

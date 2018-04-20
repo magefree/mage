@@ -33,7 +33,7 @@ import mage.abilities.keyword.DevoidAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
@@ -47,9 +47,9 @@ public class RealityHemorrhage extends CardImpl {
         // Devoid
         this.addAbility(new DevoidAbility(this.color));
 
-        // Reality Hemorrhage deals 2 damage to any target.
+        // Reality Hemorrhage deals 2 damage to target creature or player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));
-        this.getSpellAbility().addTarget(new TargetAnyTarget());
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
     }
 
     public RealityHemorrhage(final RealityHemorrhage card) {

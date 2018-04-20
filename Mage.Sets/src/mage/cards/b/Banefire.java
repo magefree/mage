@@ -48,7 +48,7 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
@@ -59,9 +59,9 @@ public class Banefire extends CardImpl {
     public Banefire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{R}");
 
-        // Banefire deals X damage to any target.       
+        // Banefire deals X damage to target creature or player.       
         this.getSpellAbility().addEffect(new BaneFireEffect());
-        this.getSpellAbility().addTarget(new TargetAnyTarget());
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
         // If X is 5 or more, Banefire can't be countered by spells or abilities and the damage can't be prevented.
         this.addAbility(new SimpleStaticAbility(Zone.STACK, new BanefireCantCounterEffect()));
     }
@@ -101,7 +101,7 @@ class BaneFireEffect extends OneShotEffect {
 
     public BaneFireEffect() {
         super(Outcome.Damage);
-        staticText = "{this} deals X damage to any target";
+        staticText = "{this} deals X damage to target creature or player";
     }
 
     public BaneFireEffect(final BaneFireEffect effect) {

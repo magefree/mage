@@ -43,7 +43,7 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
@@ -60,17 +60,17 @@ public class PsionicSliver extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // All Sliver creatures have "{T}: This creature deals 2 damage to any target and 3 damage to itself."
+        // All Sliver creatures have "{T}: This creature deals 2 damage to target creature or player and 3 damage to itself."
         Ability ability = new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
-                new DamageTargetEffect(2).setText("This creature deals 2 damage to any target"),
+                new DamageTargetEffect(2).setText("This creature deals 2 damage to target creature or player"),
                 new TapSourceCost()
         );
         ability.addEffect(new DamageSelfEffect(3).setText("3 damage to itself."));
-        ability.addTarget(new TargetAnyTarget());
+        ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(
                 new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(ability, Duration.WhileOnBattlefield, filter,
-                        "All Sliver creatures have \"{T}: This creature deals 2 damage to any target and 3 damage to itself.\"")
+                        "All Sliver creatures have \"{T}: This creature deals 2 damage to target creature or player and 3 damage to itself.\"")
                 )
         );
     }
