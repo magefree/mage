@@ -89,7 +89,7 @@ class FoodChainManaBuilder extends ConditionalManaBuilder {
 class FoodChainManaEffect extends ManaEffect {
 
     FoodChainManaEffect() {
-        this.staticText = "Add X mana of any one color to your mana pool, where X is the exiled creature's converted mana cost plus one. Spend this mana only to cast creature spells.";
+        this.staticText = "Add X mana of any one color, where X is 1 plus the exiled creature's converted mana cost. Spend this mana only to cast creature spells";
     }
 
     FoodChainManaEffect(final FoodChainManaEffect effect) {

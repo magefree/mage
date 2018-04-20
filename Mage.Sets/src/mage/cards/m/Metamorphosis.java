@@ -73,7 +73,7 @@ class MetamorphosisEffect extends OneShotEffect {
 
     public MetamorphosisEffect() {
         super(Outcome.PutManaInPool);
-        staticText = "Add X mana of any one color to your mana pool, for creatures.";
+        staticText = "Add X mana of any one color, where X is 1 plus the sacrificed creature's converted mana cost. Spend this mana only to cast creature spells.";
     }
 
     public MetamorphosisEffect(final MetamorphosisEffect effect) {
