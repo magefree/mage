@@ -38,7 +38,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -53,9 +53,9 @@ public class MagmaticForce extends CardImpl {
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
 
-        // At the beginning of each upkeep, Magmatic Force deals 3 damage to target creature or player.
+        // At the beginning of each upkeep, Magmatic Force deals 3 damage to any target.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new DamageTargetEffect(3), TargetController.ANY, false);
-        ability.addTarget(new TargetCreatureOrPlayer());        
+        ability.addTarget(new TargetAnyTarget());        
         this.addAbility(ability);
     }
 

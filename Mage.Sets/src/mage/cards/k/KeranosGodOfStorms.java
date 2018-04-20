@@ -52,7 +52,7 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 import mage.watchers.common.CardsAmountDrawnThisTurnWatcher;
 
 /**
@@ -79,7 +79,7 @@ public class KeranosGodOfStorms extends CardImpl {
         
         // Reveal the first card you draw on each of your turns. 
         // Whenever you reveal a land card this way, draw a card. 
-        // Whenever you reveal a nonland card this way, Keranos deals 3 damage to target creature or player.
+        // Whenever you reveal a nonland card this way, Keranos deals 3 damage to any target.
         this.addAbility(new KeranosGodOfStormsTriggeredAbility(), new CardsAmountDrawnThisTurnWatcher());
         
         
@@ -135,7 +135,7 @@ class KeranosGodOfStormsTriggeredAbility extends TriggeredAbilityImpl {
                         this.addEffect(new DrawCardSourceControllerEffect(1));
                     } else {
                         this.addEffect(new DamageTargetEffect(3));
-                        this.addTarget(new TargetCreatureOrPlayer());
+                        this.addTarget(new TargetAnyTarget());
                     }
                     return true;
                 }
@@ -147,6 +147,6 @@ class KeranosGodOfStormsTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return "Reveal the first card you draw on each of your turns. Whenever you reveal a land card this way, draw a card. " +
-                "Whenever you reveal a nonland card this way, Keranos deals 3 damage to target creature or player.";
+                "Whenever you reveal a nonland card this way, Keranos deals 3 damage to any target.";
     }
 }

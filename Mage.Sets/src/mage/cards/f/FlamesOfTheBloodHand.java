@@ -38,7 +38,7 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.target.TargetPlayer;
+import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
  *
@@ -47,14 +47,13 @@ import mage.target.TargetPlayer;
 public class FlamesOfTheBloodHand extends CardImpl {
 
     public FlamesOfTheBloodHand(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{R}");
 
         // Flames of the Blood Hand deals 4 damage to target player. The damage can't be prevented.
         this.getSpellAbility().addEffect(new DamageTargetEffect(4, false));
         // If that player would gain life this turn, that player gains no life instead.
         this.getSpellAbility().addEffect(new FlamesOfTheBloodHandReplacementEffect());
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
     }
 
     public FlamesOfTheBloodHand(final FlamesOfTheBloodHand card) {
@@ -86,8 +85,8 @@ class FlamesOfTheBloodHandReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.GAIN_LIFE;
-    }    
-    
+    }
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         return event.getPlayerId().equals(getTargetPointer().getFirst(game, source));

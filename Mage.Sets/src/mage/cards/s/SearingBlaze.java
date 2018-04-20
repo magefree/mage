@@ -43,7 +43,7 @@ import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.TargetPermanent;
-import mage.target.TargetPlayer;
+import mage.target.common.TargetPlayerOrPlaneswalker;
 import mage.watchers.common.LandfallWatcher;
 
 /**
@@ -54,11 +54,11 @@ import mage.watchers.common.LandfallWatcher;
 public class SearingBlaze extends CardImpl {
 
     public SearingBlaze(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}{R}");
 
         // Searing Blaze deals 1 damage to target player and 1 damage to target creature that player controls.
         // Landfall - If you had a land enter the battlefield under your control this turn, Searing Blaze deals 3 damage to that player and 3 damage to that creature instead.
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
         this.getSpellAbility().addTarget(new SearingBlazeTarget());
         this.getSpellAbility().addEffect(new SearingBlazeEffect());
         this.getSpellAbility().addWatcher(new LandfallWatcher());
@@ -79,7 +79,7 @@ class SearingBlazeEffect extends OneShotEffect {
 
     public SearingBlazeEffect() {
         super(Outcome.Damage);
-        staticText = "{this} deals 1 damage to target player and 1 damage to target creature that player controls.  \nLandfall - If you had a land enter the battlefield under your control this turn, {this} deals 3 damage to that player and 3 damage to that creature instead";
+        staticText = "{this} deals 1 damage to target player or planeswalker and 1 damage to target creature that player or that planeswalker’s controller controls.  \nLandfall - If you had a land enter the battlefield under your control this turn, {this} deals 3 damage to that player or planeswalker and 3 damage to that creature instead.";
     }
 
     public SearingBlazeEffect(final SearingBlazeEffect effect) {
@@ -94,15 +94,12 @@ class SearingBlazeEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         LandfallWatcher watcher = (LandfallWatcher) game.getState().getWatchers().get(LandfallWatcher.class.getSimpleName());
-        Player player = game.getPlayer(source.getTargets().get(0).getFirstTarget());
         Permanent creature = game.getPermanent(source.getTargets().get(1).getFirstTarget());
         int damage = 1;
         if (watcher != null && watcher.landPlayed(source.getControllerId())) {
             damage = 3;
         }
-        if (player != null) {
-            player.damage(damage, source.getSourceId(), game, false, true);
-        }
+        game.damagePlayerOrPlaneswalker(source.getTargets().get(0).getFirstTarget(), damage, source.getSourceId(), game, false, true);
         if (creature != null) {
             creature.damage(damage, source.getSourceId(), game, false, true);
         }
@@ -123,7 +120,11 @@ class SearingBlazeTarget extends TargetPermanent {
 
     @Override
     public boolean canTarget(UUID id, Ability source, Game game) {
-        UUID firstTarget = source.getFirstTarget();
+        Player player = game.getPlayerOrPlaneswalkerController(source.getFirstTarget());
+        if (player == null) {
+            return false;
+        }
+        UUID firstTarget = player.getId();
         Permanent permanent = game.getPermanent(id);
         if (firstTarget != null && permanent != null && permanent.getControllerId().equals(firstTarget)) {
             return super.canTarget(id, source, game);
@@ -138,10 +139,13 @@ class SearingBlazeTarget extends TargetPermanent {
         MageObject object = game.getObject(sourceId);
         if (object instanceof StackObject) {
             UUID playerId = ((StackObject) object).getStackAbility().getFirstTarget();
-            for (UUID targetId : availablePossibleTargets) {
-                Permanent permanent = game.getPermanent(targetId);
-                if (permanent != null && permanent.getControllerId().equals(playerId)) {
-                    possibleTargets.add(targetId);
+            Player player = game.getPlayerOrPlaneswalkerController(playerId);
+            if (player != null) {
+                for (UUID targetId : availablePossibleTargets) {
+                    Permanent permanent = game.getPermanent(targetId);
+                    if (permanent != null && permanent.getControllerId().equals(player.getId())) {
+                        possibleTargets.add(targetId);
+                    }
                 }
             }
         }

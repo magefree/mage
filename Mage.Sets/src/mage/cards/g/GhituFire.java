@@ -37,7 +37,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -53,12 +53,12 @@ public class GhituFire extends CardImpl {
         // You may cast Ghitu Fire as though it had flash if you pay {2} more to cast it.
         Ability ability = new PayMoreToCastAsThoughtItHadFlashAbility(this, new ManaCostsImpl("{2}"));
         ability.addEffect(effect);
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         ability.setRuleAtTheTop(true);
         this.addAbility(ability);
-        // Ghitu Fire deals X damage to target creature or player.
+        // Ghitu Fire deals X damage to any target.
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
     public GhituFire(final GhituFire card) {

@@ -42,7 +42,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -58,9 +58,9 @@ public class MurderousRedcap extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // When Murderous Redcap enters the battlefield, it deals damage equal to its power to target creature or player.
+        // When Murderous Redcap enters the battlefield, it deals damage equal to its power to any target.
         Ability ability = new EntersBattlefieldTriggeredAbility(new MurderousRedcapEffect());
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
         // Persist
         this.addAbility(new PersistAbility());
@@ -80,7 +80,7 @@ class MurderousRedcapEffect extends OneShotEffect {
 
     public MurderousRedcapEffect() {
         super(Outcome.Damage);
-        staticText = "it deals damage equal to its power to target creature or player";
+        staticText = "it deals damage equal to its power to any target";
     }
 
     public MurderousRedcapEffect(final MurderousRedcapEffect effect) {

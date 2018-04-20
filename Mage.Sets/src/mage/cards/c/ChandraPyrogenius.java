@@ -43,8 +43,8 @@ import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
  *
@@ -53,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class ChandraPyrogenius extends CardImpl {
 
     public ChandraPyrogenius(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{4}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{R}{R}");
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.CHANDRA);
 
@@ -70,9 +70,11 @@ public class ChandraPyrogenius extends CardImpl {
         // -10: Chandra, Pyrogenius deals 6 damage to target player and each creature he or she controls.
         Effects effects = new Effects();
         effects.add(new DamageTargetEffect(6));
-        effects.add(new DamageAllControlledTargetEffect(6, new FilterCreaturePermanent()));
+        effects.add(new DamageAllControlledTargetEffect(6, new FilterCreaturePermanent())
+                .setText("and each creature that player or that planeswalker’s controller controls")
+        );
         ability = new LoyaltyAbility(effects, -10);
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayerOrPlaneswalker());
         this.addAbility(ability);
     }
 

@@ -34,8 +34,8 @@ import mage.abilities.keyword.EntwineAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
  *
@@ -44,18 +44,18 @@ import mage.target.common.TargetCreaturePermanent;
 public class BarbedLightning extends CardImpl {
 
     public BarbedLightning(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{R}");
 
         // Choose one - Barbed Lightning deals 3 damage to target creature;
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        
+
         // or Barbed Lightning deals 3 damage to target player.
         Mode mode = new Mode();
         mode.getEffects().add(new DamageTargetEffect(3));
-        mode.getTargets().add(new TargetPlayer());
+        mode.getTargets().add(new TargetPlayerOrPlaneswalker());
         this.getSpellAbility().getModes().addMode(mode);
-        
+
         // Entwine {2}
         this.addAbility(new EntwineAbility("{2}"));
     }

@@ -42,7 +42,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SetTargetPointer;
 import mage.filter.StaticFilters;
-import mage.target.TargetPlayer;
+import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
  *
@@ -66,7 +66,7 @@ public class AxelrodGunnarson extends CardImpl {
         Effect effect = new DamageTargetEffect(1);
         effect.setText("and {this} deals 1 damage to target player");
         ability.addEffect(effect);
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayerOrPlaneswalker());
         this.addAbility(ability);
     }
 

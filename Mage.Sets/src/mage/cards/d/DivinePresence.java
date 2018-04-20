@@ -47,7 +47,7 @@ import mage.game.events.GameEvent;
 public class DivinePresence extends CardImpl {
 
     public DivinePresence(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
 
         // If a source would deal 4 or more damage to a creature or player, that source deals 3 damage to that creature or player instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DivinePresenceEffect()));
@@ -67,7 +67,7 @@ class DivinePresenceEffect extends ReplacementEffectImpl {
 
     public DivinePresenceEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral);
-        staticText = "If a source would deal 4 or more damage to a creature or player, that source deals 3 damage to that creature or player instead.";
+        staticText = "If a source would deal 4 or more damage to a permanent or player, that source deals 3 damage to that permanent or player instead.";
     }
 
     public DivinePresenceEffect(final DivinePresenceEffect effect) {
@@ -81,9 +81,10 @@ class DivinePresenceEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        switch(event.getType()) {
+        switch (event.getType()) {
             case DAMAGE_CREATURE:
             case DAMAGE_PLAYER:
+            case DAMAGE_PLANESWALKER:
                 return true;
             default:
                 return false;

@@ -43,7 +43,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.SquirrelToken;
 import mage.players.Player;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -54,11 +54,11 @@ public class AcornCatapult extends CardImpl {
     public AcornCatapult(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
-        // {1}, {tap}: Acorn Catapult deals 1 damage to target creature or player. That creature's controller or that player creates a 1/1 green Squirrel creature token.
+        // {1}, {tap}: Acorn Catapult deals 1 damage to any target. That creature's controller or that player creates a 1/1 green Squirrel creature token.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl("{1}"));
         ability.addCost(new TapSourceCost());
         ability.addEffect(new AcornCatapultEffect());
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }
 

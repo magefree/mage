@@ -34,7 +34,7 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -46,7 +46,7 @@ public class LightningHelix extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}{W}");
 
 
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
         this.getSpellAbility().addEffect(new GainLifeEffect(3));
     }

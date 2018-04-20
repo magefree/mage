@@ -39,7 +39,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.target.TargetPlayer;
+import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
  * @author noxx
@@ -53,7 +53,7 @@ public class KessigMalcontents extends CardImpl {
     }
 
     public KessigMalcontents(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WARRIOR);
 
@@ -62,7 +62,7 @@ public class KessigMalcontents extends CardImpl {
 
         // When Kessig Malcontents enters the battlefield, it deals damage to target player equal to the number of Humans you control.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(new PermanentsOnBattlefieldCount(filter), "it"));
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayerOrPlaneswalker());
         this.addAbility(ability);
     }
 

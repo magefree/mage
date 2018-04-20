@@ -40,7 +40,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -51,9 +51,9 @@ public class ChainOfPlasma extends CardImpl {
     public ChainOfPlasma(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R}");
 
-        // Chain of Plasma deals 3 damage to target creature or player. Then that player or that creature's controller may discard a card. If the player does, he or she may copy this spell and may choose a new target for that copy.
+        // Chain of Plasma deals 3 damage to any target. Then that player or that creature's controller may discard a card. If the player does, he or she may copy this spell and may choose a new target for that copy.
         this.getSpellAbility().addEffect(new ChainOfPlasmaEffect());
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
     public ChainOfPlasma(final ChainOfPlasma card) {
@@ -70,7 +70,7 @@ class ChainOfPlasmaEffect extends OneShotEffect {
 
     ChainOfPlasmaEffect() {
         super(Outcome.Damage);
-        this.staticText = "{this} deals 3 damage to target creature or player. Then that player or that creature's controller may discard a card. If the player does, he or she may copy this spell and may choose a new target for that copy.";
+        this.staticText = "{this} deals 3 damage to any target. Then that player or that creature's controller may discard a card. If the player does, he or she may copy this spell and may choose a new target for that copy.";
     }
 
     ChainOfPlasmaEffect(final ChainOfPlasmaEffect effect) {

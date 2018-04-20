@@ -43,7 +43,7 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -55,9 +55,9 @@ public class Electropotence extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");
 
 
-        // Whenever a creature enters the battlefield under your control, you may pay {2}{R}. If you do, that creature deals damage equal to its power to target creature or player.
+        // Whenever a creature enters the battlefield under your control, you may pay {2}{R}. If you do, that creature deals damage equal to its power to any target.
         Ability ability = new ElectropotenceTriggeredAbility();
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }
 
@@ -99,7 +99,7 @@ class ElectropotenceTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a creature enters the battlefield under your control, you may pay {2}{R}. If you do, that creature deals damage equal to its power to target creature or player.";
+        return "Whenever a creature enters the battlefield under your control, you may pay {2}{R}. If you do, that creature deals damage equal to its power to any target.";
     }
 
     @Override
@@ -130,7 +130,7 @@ class ElectropotenceEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (creature != null && controller != null) {
             if (controller.chooseUse(Outcome.Damage, "Pay {2}{R} to do the damage?", source, game)) {
-         // if (controller.chooseUse(Outcome.Damage, "Pay {2}{R}? If you do, " + creature.getName() + " deals damage equal to its power to target creature or player.", game)) {
+         // if (controller.chooseUse(Outcome.Damage, "Pay {2}{R}? If you do, " + creature.getName() + " deals damage equal to its power to any target.", game)) {
                 ManaCosts manaCosts = new ManaCostsImpl("{2}{R}");
                 if (manaCosts.pay(source, game, source.getSourceId(), controller.getId(), false, null)) {
                     int amount = creature.getPower().getValue();

@@ -36,6 +36,7 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -43,9 +44,8 @@ import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
-import mage.players.Player;
-import mage.target.TargetPlayer;
 import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
  *
@@ -60,7 +60,7 @@ public class BrionStoutarm extends CardImpl {
     }
 
     public BrionStoutarm(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{W}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.GIANT, SubType.WARRIOR);
 
@@ -73,7 +73,7 @@ public class BrionStoutarm extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BrionStoutarmEffect(), new ManaCostsImpl("{R}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, true)));
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayerOrPlaneswalker());
         this.addAbility(ability);
     }
 
@@ -91,7 +91,7 @@ class BrionStoutarmEffect extends OneShotEffect {
 
     public BrionStoutarmEffect() {
         super(Outcome.Benefit);
-        this.staticText = "{this} deals damage equal to the sacrificed creature's power to target player";
+        this.staticText = "{this} deals damage equal to the sacrificed creature's power to target player or planeswalker";
     }
 
     public BrionStoutarmEffect(final BrionStoutarmEffect effect) {
@@ -113,10 +113,7 @@ class BrionStoutarmEffect extends OneShotEffect {
             }
         }
         if (amount > 0) {
-            Player player = game.getPlayer(source.getFirstTarget());
-            if (player != null) {
-                player.damage(amount, source.getSourceId(), game, false, true);
-            }
+            return new DamageTargetEffect(amount).apply(game, source);
         }
         return true;
     }

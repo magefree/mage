@@ -35,7 +35,7 @@ import mage.abilities.effects.common.DamageMultiEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.target.common.TargetCreatureOrPlayerAmount;
+import mage.target.common.TargetAnyTargetAmount;
 
 /**
  *
@@ -49,7 +49,7 @@ public class MeteorShower extends CardImpl {
         // Meteor Shower deals X plus 1 damage divided as you choose among any number of target creatures and/or players.
         DynamicValue xValue = new IntPlusDynamicValue(1, new ManacostVariableValue());
         this.getSpellAbility().addEffect(new DamageMultiEffect(xValue));
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayerAmount(xValue));
+        this.getSpellAbility().addTarget(new TargetAnyTargetAmount(xValue));
     }
 
     public MeteorShower(final MeteorShower card) {

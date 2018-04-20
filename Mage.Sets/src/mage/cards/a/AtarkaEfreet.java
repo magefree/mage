@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -57,11 +57,11 @@ public class AtarkaEfreet extends CardImpl {
         // Megamorph {2}{R}
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{2}{R}"), true));
 
-        // When Atarka Efreet is turned face up, it deals 1 damage to target creature or player.
+        // When Atarka Efreet is turned face up, it deals 1 damage to any target.
         Effect effect = new DamageTargetEffect(1, "it");
-        effect.setText("it deals 1 damage to target creature or player");
+        effect.setText("it deals 1 damage to any target");
         Ability ability = new TurnedFaceUpSourceTriggeredAbility(effect, false, false);
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
 
     }

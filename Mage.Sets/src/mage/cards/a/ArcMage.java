@@ -41,7 +41,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.target.common.TargetCreatureOrPlayerAmount;
+import mage.target.common.TargetAnyTargetAmount;
 
 /**
  *
@@ -62,7 +62,7 @@ public class ArcMage extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{2}{R}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());
-        ability.addTarget(new TargetCreatureOrPlayerAmount(2));
+        ability.addTarget(new TargetAnyTargetAmount(2));
         this.addAbility(ability);
     }
 

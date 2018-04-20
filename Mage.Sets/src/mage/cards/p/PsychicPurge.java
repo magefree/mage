@@ -41,7 +41,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.stack.StackObject;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -53,9 +53,9 @@ public class PsychicPurge extends CardImpl {
     public PsychicPurge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{U}");
 
-        // Psychic Purge deals 1 damage to target creature or player.
+        // Psychic Purge deals 1 damage to any target.
         this.getSpellAbility().addEffect(new DamageTargetEffect(1));
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
 
         // When a spell or ability an opponent controls causes you to discard Psychic Purge, that player loses 5 life.
         Ability ability = new PsychicPurgeTriggeredAbility();

@@ -38,7 +38,7 @@ import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
-import mage.target.TargetPlayer;
+import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
  *
@@ -47,19 +47,18 @@ import mage.target.TargetPlayer;
 public class GoblinWarStrike extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Goblins you control");
-    
+
     static {
         filter.add(new SubtypePredicate(SubType.GOBLIN));
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
-    
-    public GoblinWarStrike(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}");
 
+    public GoblinWarStrike(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{R}");
 
         // Goblin War Strike deals damage equal to the number of Goblins you control to target player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(new PermanentsOnBattlefieldCount(filter)));
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
     }
 
     public GoblinWarStrike(final GoblinWarStrike card) {

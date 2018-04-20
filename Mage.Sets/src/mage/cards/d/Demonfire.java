@@ -43,7 +43,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 import mage.watchers.common.DamagedByWatcher;
 
 /**
@@ -55,11 +55,11 @@ public class Demonfire extends CardImpl {
     public Demonfire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{R}");
 
-        // Demonfire deals X damage to target creature or player.
+        // Demonfire deals X damage to any target.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DamageTargetEffect(new ManacostVariableValue()),
                 new InvertCondition(HellbentCondition.instance),
-                "{this} deals X damage to target creature or player"));
+                "{this} deals X damage to any target"));
 
         // If a creature dealt damage this way would die this turn, exile it instead.
         this.getSpellAbility().addEffect(new DealtDamageToCreatureBySourceDies(this, Duration.EndOfTurn));
@@ -77,7 +77,7 @@ public class Demonfire extends CardImpl {
                 (CantBeCounteredSourceEffect) effect,
                 HellbentCondition.instance)));
 
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
     public Demonfire(final Demonfire card) {

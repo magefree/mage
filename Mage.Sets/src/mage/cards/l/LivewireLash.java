@@ -46,7 +46,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -60,7 +60,7 @@ public class LivewireLash extends CardImpl {
 
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 0)));
         LivewireLashAbility ability = new LivewireLashAbility();
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability, AttachmentType.EQUIPMENT)));
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2)));
     }
@@ -107,6 +107,6 @@ class LivewireLashAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever this creature becomes the target of a spell, this creature deals 2 damage to target creature or player.";
+        return "Whenever this creature becomes the target of a spell, this creature deals 2 damage to any target.";
     }
 }

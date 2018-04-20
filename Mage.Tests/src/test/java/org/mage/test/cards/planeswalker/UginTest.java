@@ -58,7 +58,7 @@ public class UginTest extends CardTestPlayerBase {
         // -7: Untap up to six target lands. They become 6/6 Elemental creatures. They're still lands.
         addCard(Zone.HAND, playerB, "Nissa, Vastwood Seer");
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+2: {source} deals 3 damage to target creature or player.", playerB);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+2: {source} deals 3 damage", playerB);
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Nissa, Vastwood Seer");
         playLand(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Forest");

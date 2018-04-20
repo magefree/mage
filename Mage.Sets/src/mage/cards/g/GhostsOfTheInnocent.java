@@ -75,7 +75,7 @@ class GhostsOfTheInnocentPreventDamageEffect extends ReplacementEffectImpl imple
 
     public GhostsOfTheInnocentPreventDamageEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Damage);
-        staticText = "If a source would deal damage to a creature or player, it deals half that damage, rounded down, to that creature or player instead";
+        staticText = "If a source would deal damage to a permanent or player, it deals half that damage, rounded down, to that permanent or player instead";
     }
 
     public GhostsOfTheInnocentPreventDamageEffect(final GhostsOfTheInnocentPreventDamageEffect effect) {
@@ -90,7 +90,8 @@ class GhostsOfTheInnocentPreventDamageEffect extends ReplacementEffectImpl imple
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == EventType.DAMAGE_CREATURE
-                || event.getType() == EventType.DAMAGE_PLAYER;
+                || event.getType() == EventType.DAMAGE_PLAYER
+                || event.getType() == EventType.DAMAGE_PLANESWALKER;
     }
 
     @Override

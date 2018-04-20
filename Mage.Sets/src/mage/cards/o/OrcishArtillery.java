@@ -39,7 +39,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -55,9 +55,9 @@ public class OrcishArtillery extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 
-        // {tap}: Orcish Artillery deals 2 damage to target creature or player and 3 damage to you.
+        // {tap}: Orcish Artillery deals 2 damage to any target and 3 damage to you.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new TapSourceCost());
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         ability.addEffect(new DamageControllerEffect(3));
         this.addAbility(ability);
     }

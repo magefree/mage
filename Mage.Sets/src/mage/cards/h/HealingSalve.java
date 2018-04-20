@@ -36,7 +36,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.target.TargetPlayer;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -48,13 +48,13 @@ public class HealingSalve extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");
 
 
-        // Choose one - Target player gains 3 life; or prevent the next 3 damage that would be dealt to target creature or player this turn.
+        // Choose one - Target player gains 3 life; or prevent the next 3 damage that would be dealt to any target this turn.
         this.getSpellAbility().addEffect(new GainLifeTargetEffect(3));
         this.getSpellAbility().addTarget(new TargetPlayer());
         
         Mode mode = new Mode();
         mode.getEffects().add(new PreventDamageToTargetEffect(Duration.EndOfTurn, 3));
-        mode.getTargets().add(new TargetCreatureOrPlayer());
+        mode.getTargets().add(new TargetAnyTarget());
         
         this.getSpellAbility().addMode(mode);
     }

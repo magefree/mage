@@ -30,6 +30,7 @@ package org.mage.test.cards.planeswalker;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -39,6 +40,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  */
 public class RedirectDamageToPlaneswalkerTest extends CardTestPlayerBase {
 
+    @Ignore
     @Test
     public void testDirectDamage() {
         // +2: Look at the top card of target player's library. You may put that card on the bottom of that player's library.

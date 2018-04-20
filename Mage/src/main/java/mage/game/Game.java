@@ -132,6 +132,8 @@ public interface Game extends MageItem, Serializable {
 
     Player getPlayer(UUID playerId);
 
+    Player getPlayerOrPlaneswalkerController(UUID playerId);
+
     Players getPlayers();
 
     PlayerList getPlayerList();
@@ -469,4 +471,8 @@ public interface Game extends MageItem, Serializable {
     UUID getMonarchId();
 
     void setMonarchId(Ability source, UUID monarchId);
+
+    int damagePlayerOrPlaneswalker(UUID playerOrWalker, int damage, UUID sourceId, Game game, boolean combatDamage, boolean preventable);
+
+    int damagePlayerOrPlaneswalker(UUID playerOrWalker, int damage, UUID sourceId, Game game, boolean combatDamage, boolean preventable, List<UUID> appliedEffects);
 }

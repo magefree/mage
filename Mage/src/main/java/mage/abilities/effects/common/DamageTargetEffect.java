@@ -187,7 +187,12 @@ public class DamageTargetEffect extends OneShotEffect {
         if (!targetDescription.isEmpty()) {
             sb.append(targetDescription);
         } else {
-            sb.append("target ").append(mode.getTargets().get(0).getTargetName());
+            String targetName = mode.getTargets().get(0).getTargetName();
+            if (targetName.contains("any")) {
+                sb.append(targetName);
+            } else {
+                sb.append("target ").append(targetName);
+            }
         }
         if (!message.isEmpty()) {
             if (message.equals("1")) {

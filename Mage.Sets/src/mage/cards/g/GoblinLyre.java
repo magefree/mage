@@ -32,7 +32,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.dynamicvalue.common.PermanentsTargetOpponentControlsCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -43,7 +42,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.common.TargetOpponent;
+import mage.target.common.TargetOpponentOrPlaneswalker;
 
 /**
  *
@@ -52,11 +51,11 @@ import mage.target.common.TargetOpponent;
 public class GoblinLyre extends CardImpl {
 
     public GoblinLyre(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // Sacrifice Goblin Lyre: Flip a coin. If you win the flip, Goblin Lyre deals damage to target opponent equal to the number of creatures you control. If you lose the flip, Goblin Lyre deals damage to you equal to the number of creatures that opponent controls.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GoblinLyreEffect(), new SacrificeSourceCost());
-        ability.addTarget(new TargetOpponent());
+        ability.addTarget(new TargetOpponentOrPlaneswalker());
         this.addAbility(ability);
     }
 
@@ -74,7 +73,8 @@ class GoblinLyreEffect extends OneShotEffect {
 
     public GoblinLyreEffect() {
         super(Outcome.Damage);
-        this.staticText = "Flip a coin. If you win the flip, {this} deals damage to target opponent equal to the number of creatures you control. If you lose the flip, {this} deals damage to you equal to the number of creatures that opponent controls";
+        this.staticText = "Flip a coin. If you win the flip, {this} deals damage to target opponent or planeswalker equal to the number of creatures you control. "
+                + "If you lose the flip, Goblin Lyre deals damage to you equal to the number of creatures that opponent or that planeswalker’s controller controls";
     }
 
     public GoblinLyreEffect(final GoblinLyreEffect effect) {
@@ -89,16 +89,16 @@ class GoblinLyreEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
+        Player opponent = game.getPlayerOrPlaneswalkerController(getTargetPointer().getFirst(game, source));
         if (controller != null) {
             if (controller.flipCoin(game)) {
+                int damage = new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent()).calculate(game, source, this);
                 if (opponent != null) {
-                    opponent.damage(new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent()).calculate(game, source, this), source.getSourceId(), game, false, true);
-                    return true;
+                    return game.damagePlayerOrPlaneswalker(source.getFirstTarget(), damage, source.getSourceId(), game, false, true) > 0;
                 }
             } else {
-                controller.damage(new PermanentsTargetOpponentControlsCount(new FilterCreaturePermanent()).calculate(game, source, this), source.getSourceId(), game, false, true);
-                return true;
+                int damage = game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), opponent.getId(), game).size();
+                return controller.damage(damage, source.getSourceId(), game, false, true) > 0;
             }
         }
         return false;

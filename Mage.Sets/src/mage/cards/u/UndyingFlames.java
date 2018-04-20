@@ -40,7 +40,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -53,9 +53,9 @@ public class UndyingFlames extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{R}{R}");
 
 
-        // Exile cards from the top of your library until you exile a nonland card. Undying Flames deals damage to target creature or player equal to that card's converted mana cost.
+        // Exile cards from the top of your library until you exile a nonland card. Undying Flames deals damage to any target equal to that card's converted mana cost.
         this.getSpellAbility().addEffect(new UndyingFlamesEffect());
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
 
         // Epic
         this.getSpellAbility().addEffect(new EpicEffect());
@@ -76,7 +76,7 @@ class UndyingFlamesEffect extends OneShotEffect {
 
     public UndyingFlamesEffect() {
         super(Outcome.Benefit);
-        staticText = "Exile cards from the top of your library until you exile a nonland card. {this} deals damage to target creature or player equal to that card's converted mana cost";
+        staticText = "Exile cards from the top of your library until you exile a nonland card. {this} deals damage to any target equal to that card's converted mana cost";
     }
 
     public UndyingFlamesEffect(final UndyingFlamesEffect effect) {

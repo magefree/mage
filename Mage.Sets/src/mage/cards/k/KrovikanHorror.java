@@ -48,7 +48,7 @@ import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -70,10 +70,10 @@ public class KrovikanHorror extends CardImpl {
                 TargetController.ANY, KrovikanHorrorCondition.instance, true
         ));
 
-        // {1}, Sacrifice a creature: Krovikan Horror deals 1 damage to target creature or player.
+        // {1}, Sacrifice a creature: Krovikan Horror deals 1 damage to any target.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new GenericManaCost(1));
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }
 

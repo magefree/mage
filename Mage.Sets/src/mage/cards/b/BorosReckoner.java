@@ -42,7 +42,7 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -57,9 +57,9 @@ public class BorosReckoner extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // Whenever Boros Reckoner is dealt damage, it deals that much damage to target creature or player.
+        // Whenever Boros Reckoner is dealt damage, it deals that much damage to any target.
         Ability ability = new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new BorosReckonerDealDamageEffect(), false, false, true);
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
 
         // {R/W}: Boros Reckoner gains first strike until end of turn.
@@ -81,7 +81,7 @@ class BorosReckonerDealDamageEffect extends OneShotEffect {
 
     public BorosReckonerDealDamageEffect() {
         super(Outcome.Damage);
-        this.staticText = "it deals that much damage to target creature or player";
+        this.staticText = "it deals that much damage to any target";
     }
 
     public BorosReckonerDealDamageEffect(final BorosReckonerDealDamageEffect effect) {

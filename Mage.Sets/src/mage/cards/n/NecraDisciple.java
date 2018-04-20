@@ -38,7 +38,7 @@ import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -58,7 +58,7 @@ public class NecraDisciple extends CardImpl {
         this.addAbility(firstAbility);
         Ability secondAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToTargetEffect(Duration.EndOfTurn, 1), new ColoredManaCost(ColoredManaSymbol.W));
         secondAbility.addCost(new TapSourceCost());
-        secondAbility.addTarget(new TargetCreatureOrPlayer());
+        secondAbility.addTarget(new TargetAnyTarget());
         this.addAbility(secondAbility);
     }
 

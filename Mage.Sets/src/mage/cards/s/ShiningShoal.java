@@ -51,7 +51,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetSource;
 import mage.target.common.TargetCardInHand;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -69,10 +69,10 @@ public class ShiningShoal extends CardImpl {
         filter.add(Predicates.not(new CardIdPredicate(this.getId()))); // the exile cost can never be paid with the card itself
         this.addAbility(new AlternativeCostSourceAbility(new ExileFromHandCost(new TargetCardInHand(filter), true)));
 
-        // The next X damage that a source of your choice would deal to you and/or creatures you control this turn is dealt to target creature or player instead.
+        // The next X damage that a source of your choice would deal to you and/or creatures you control this turn is dealt to any target instead.
         this.getSpellAbility().addEffect(new ShiningShoalRedirectDamageTargetEffect(Duration.EndOfTurn, new ExileFromHandCostCardConvertedMana()));
         this.getSpellAbility().addTarget(new TargetSource());
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
     public ShiningShoal(final ShiningShoal card) {
@@ -92,7 +92,7 @@ class ShiningShoalRedirectDamageTargetEffect extends RedirectDamageFromSourceToT
     public ShiningShoalRedirectDamageTargetEffect(Duration duration, DynamicValue dynamicAmount) {
         super(duration, 0, true);
         this.dynamicAmount = dynamicAmount;
-        staticText = "The next X damage that a source of your choice would deal to you and/or creatures you control this turn is dealt to target creature or player instead";
+        staticText = "The next X damage that a source of your choice would deal to you and/or creatures you control this turn is dealt to any target instead";
     }
 
     public ShiningShoalRedirectDamageTargetEffect(final ShiningShoalRedirectDamageTargetEffect effect) {

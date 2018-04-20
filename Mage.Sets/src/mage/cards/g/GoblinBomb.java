@@ -47,7 +47,7 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.TargetPlayer;
+import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
  *
@@ -56,15 +56,19 @@ import mage.target.TargetPlayer;
 public class GoblinBomb extends CardImpl {
 
     public GoblinBomb(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
 
         // At the beginning of your upkeep, you may flip a coin. If you win the flip, put a fuse counter on Goblin Bomb. If you lose the flip, remove a fuse counter from Goblin Bomb.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new GoblinBombEffect(), TargetController.YOU, true));
-        
+
         // Remove five fuse counters from Goblin Bomb, Sacrifice Goblin Bomb: Goblin Bomb deals 20 damage to target player.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(20), new RemoveCountersSourceCost(CounterType.FUSE.createInstance(5)));
+        Ability ability = new SimpleActivatedAbility(
+                Zone.BATTLEFIELD,
+                new DamageTargetEffect(20),
+                new RemoveCountersSourceCost(CounterType.FUSE.createInstance(5))
+        );
         ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayerOrPlaneswalker());
         this.addAbility(ability);
     }
 

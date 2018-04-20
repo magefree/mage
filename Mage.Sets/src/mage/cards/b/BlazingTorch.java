@@ -43,7 +43,7 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 import java.util.List;
 import java.util.UUID;
@@ -73,10 +73,10 @@ public class BlazingTorch extends CardImpl {
                 new CantBeBlockedByCreaturesAttachedEffect(Duration.WhileOnBattlefield, filter, AttachmentType.EQUIPMENT)));
 
         
-        // Equipped creature has "{tap}, Sacrifice Blazing Torch: Blazing Torch deals 2 damage to target creature or player.")
+        // Equipped creature has "{tap}, Sacrifice Blazing Torch: Blazing Torch deals 2 damage to any target.")
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BlazingTorchDamageEffect(), new TapSourceCost());
         ability.addCost(new BlazingTorchCost());
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability, AttachmentType.EQUIPMENT)));
         
         // Equip {1}
@@ -135,7 +135,7 @@ class BlazingTorchDamageEffect extends OneShotEffect {
 
     public BlazingTorchDamageEffect() {
         super(Outcome.Damage);
-        this.staticText = "Blazing Torch deals 2 damage to target creature or player";
+        this.staticText = "Blazing Torch deals 2 damage to any target";
     }
 
     public BlazingTorchDamageEffect(final BlazingTorchDamageEffect effect) {

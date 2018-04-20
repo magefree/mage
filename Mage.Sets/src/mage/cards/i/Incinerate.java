@@ -39,7 +39,7 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 import mage.watchers.common.DamagedByWatcher;
 
 /**
@@ -53,7 +53,7 @@ public class Incinerate extends CardImpl {
 
 
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
         this.getSpellAbility().addEffect(new IncinerateEffect());
         this.getSpellAbility().addWatcher(new DamagedByWatcher());
     }

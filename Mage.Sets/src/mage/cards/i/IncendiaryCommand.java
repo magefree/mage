@@ -43,8 +43,8 @@ import mage.constants.Outcome;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.TargetPlayer;
 import mage.target.common.TargetNonBasicLandPermanent;
+import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
  *
@@ -53,14 +53,14 @@ import mage.target.common.TargetNonBasicLandPermanent;
 public class IncendiaryCommand extends CardImpl {
 
     public IncendiaryCommand(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
 
         // Choose two -
         this.getSpellAbility().getModes().setMinModes(2);
         this.getSpellAbility().getModes().setMaxModes(2);
         // Incendiary Command deals 4 damage to target player;
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
         // or Incendiary Command deals 2 damage to each creature;
         Mode mode = new Mode();
         mode.getEffects().add(new DamageAllEffect(2, new FilterCreaturePermanent()));

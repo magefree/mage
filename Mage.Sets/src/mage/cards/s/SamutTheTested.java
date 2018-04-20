@@ -45,7 +45,7 @@ import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCardInLibrary;
-import mage.target.common.TargetCreatureOrPlayerAmount;
+import mage.target.common.TargetAnyTargetAmount;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -69,7 +69,7 @@ public class SamutTheTested extends CardImpl {
         // -2: Samut, the Tested deals 2 damage divided as you choose among one or two target creatures and/or players.
         effect = new DamageMultiEffect(2);
         ability = new LoyaltyAbility(effect, -2);
-        ability.addTarget(new TargetCreatureOrPlayerAmount(2));
+        ability.addTarget(new TargetAnyTargetAmount(2));
         this.addAbility(ability);
 
         // -7: Search your library or up to two creature and/or planeswalkercards, put them onto the battlefield, then shuffle your library.

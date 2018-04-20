@@ -38,7 +38,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.game.events.GameEvent;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -50,9 +50,9 @@ public class SearingMeditation extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{R}{W}");
 
 
-        // Whenever you gain life, you may pay {2}. If you do, Searing Meditation deals 2 damage to target creature or player.
+        // Whenever you gain life, you may pay {2}. If you do, Searing Meditation deals 2 damage to any target.
         Ability ability = new SimpleTriggeredAbility(Zone.BATTLEFIELD, GameEvent.EventType.GAINED_LIFE, new DoIfCostPaid(new DamageTargetEffect(2), new GenericManaCost(2)), "Whenever you gain life, ", true);
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }
 

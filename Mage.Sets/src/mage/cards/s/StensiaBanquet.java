@@ -38,7 +38,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.target.common.TargetOpponent;
+import mage.target.common.TargetOpponentOrPlaneswalker;
 
 /**
  *
@@ -53,13 +53,13 @@ public class StensiaBanquet extends CardImpl {
     }
 
     public StensiaBanquet(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{R}");
 
         // Stensia Banquet deals damage to target opponent equal to the number of Vampires you control.
         Effect effect = new DamageTargetEffect(new PermanentsOnBattlefieldCount(filter));
-        effect.setText("{this} deals damage to target opponent equal to the number of Vampires you control");
+        effect.setText("{this} deals damage to target opponent or planeswalker equal to the number of Vampires you control");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetOpponent());
+        this.getSpellAbility().addTarget(new TargetOpponentOrPlaneswalker());
 
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));

@@ -42,7 +42,7 @@ import mage.constants.ComparisonType;
 import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
-import mage.target.common.TargetOpponent;
+import mage.target.common.TargetOpponentOrPlaneswalker;
 
 /**
  *
@@ -58,7 +58,7 @@ public class ScuttlingDoomEngine extends CardImpl {
 
     public ScuttlingDoomEngine(UUID ownerId, CardSetInfo setInfo) {
 
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{6}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");
         this.subtype.add(SubType.CONSTRUCT);
 
         this.power = new MageInt(6);
@@ -68,7 +68,7 @@ public class ScuttlingDoomEngine extends CardImpl {
         this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
         // When Scuttling Doom Engine dies, it deals 6 damage to target opponnent
         Ability ability = new DiesTriggeredAbility(new DamageTargetEffect(6, "it"), false);
-        ability.addTarget(new TargetOpponent());
+        ability.addTarget(new TargetOpponentOrPlaneswalker());
         this.addAbility(ability);
     }
 

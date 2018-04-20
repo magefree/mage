@@ -45,7 +45,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -59,9 +59,9 @@ public class ImminentDoom extends CardImpl {
         // Imminent Doom enters the battlefield with a doom counter on it.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.DOOM.createInstance(1))));
 
-        // Whenever you cast a spell with converted mana cost equal to the number of doom counters on Imminent Doom, Imminent Doom deals that much damage to target creature or player. Then put a doom counter on Imminent Doom.
+        // Whenever you cast a spell with converted mana cost equal to the number of doom counters on Imminent Doom, Imminent Doom deals that much damage to any target. Then put a doom counter on Imminent Doom.
         Ability ability = new ImminentDoomTriggeredAbility();
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
 
     }
@@ -78,7 +78,7 @@ public class ImminentDoom extends CardImpl {
 
 class ImminentDoomTriggeredAbility extends TriggeredAbilityImpl {
 
-    private String rule = "Whenever you cast a spell with converted mana cost equal to the number of doom counters on {this}, {this} deals that much damage to target creature or player. Then put a doom counter on {this}.";
+    private String rule = "Whenever you cast a spell with converted mana cost equal to the number of doom counters on {this}, {this} deals that much damage to any target. Then put a doom counter on {this}.";
 
     public ImminentDoomTriggeredAbility() {
         super(Zone.BATTLEFIELD, new ImminentDoomEffect());

@@ -15,8 +15,7 @@ import mage.players.Player;
 import mage.target.TargetImpl;
 
 /**
- * @author JRHerlehy
- *         Created on 4/8/18.
+ * @author JRHerlehy Created on 4/8/18.
  */
 public class TargetAnyTarget extends TargetImpl {
 
@@ -165,14 +164,14 @@ public class TargetAnyTarget extends TargetImpl {
         for (UUID playerId : game.getState().getPlayersInRange(sourceControllerId, game)) {
             Player player = game.getPlayer(playerId);
             if (player != null
-                        && player.canBeTargetedBy(targetSource, sourceControllerId, game)
-                        && filter.getPlayerFilter().match(player, sourceId, sourceControllerId, game)) {
+                    && player.canBeTargetedBy(targetSource, sourceControllerId, game)
+                    && filter.getPlayerFilter().match(player, sourceId, sourceControllerId, game)) {
                 possibleTargets.add(playerId);
             }
         }
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filter.getCreatureFilter(), sourceControllerId, game)) {
             if (permanent.canBeTargetedBy(targetSource, sourceControllerId, game)
-                        && filter.getCreatureFilter().match(permanent, sourceId, sourceControllerId, game)) {
+                    && filter.getCreatureFilter().match(permanent, sourceId, sourceControllerId, game)) {
                 possibleTargets.add(permanent.getId());
             }
         }

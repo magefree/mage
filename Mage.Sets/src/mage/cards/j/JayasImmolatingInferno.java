@@ -6,7 +6,6 @@ import mage.abilities.common.LegendarySpellAbility;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -14,8 +13,7 @@ import mage.constants.SuperType;
 import mage.target.common.TargetAnyTarget;
 
 /**
- * @author JRHerlehy
- *         Created on 4/8/18.
+ * @author JRHerlehy Created on 4/8/18.
  */
 public class JayasImmolatingInferno extends CardImpl {
 

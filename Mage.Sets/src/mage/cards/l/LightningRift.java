@@ -36,7 +36,7 @@ import mage.abilities.effects.common.DoIfCostPaid;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -48,9 +48,9 @@ public class LightningRift extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{R}");
 
 
-        // Whenever a player cycles a card, you may pay {1}. If you do, Lightning Rift deals 2 damage to target creature or player.
+        // Whenever a player cycles a card, you may pay {1}. If you do, Lightning Rift deals 2 damage to any target.
         Ability ability = new CycleAllTriggeredAbility(new DoIfCostPaid(new DamageTargetEffect(2), new GenericManaCost(1)), false);
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }
 

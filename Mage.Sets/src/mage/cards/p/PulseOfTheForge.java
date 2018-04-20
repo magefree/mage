@@ -39,7 +39,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.TargetPlayer;
+import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
  *
@@ -48,11 +48,11 @@ import mage.target.TargetPlayer;
 public class PulseOfTheForge extends CardImpl {
 
     public PulseOfTheForge(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R}{R}");
 
         // Pulse of the Forge deals 4 damage to target player. Then if that player has more life than you, return Pulse of the Forge to its owner's hand.
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
         this.getSpellAbility().addEffect(new PulseOfTheForgeReturnToHandEffect());
     }
 
@@ -84,7 +84,7 @@ class PulseOfTheForgeReturnToHandEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
+        Player controller = game.getPlayerOrPlaneswalkerController(source.getControllerId());
         if (controller != null) {
             Player player = game.getPlayer(source.getFirstTarget());
             if (player != null && player.getLife() > controller.getLife()) {

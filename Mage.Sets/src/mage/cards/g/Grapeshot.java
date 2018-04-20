@@ -33,7 +33,7 @@ import mage.abilities.keyword.StormAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -45,8 +45,8 @@ public class Grapeshot extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}");
 
 
-        // Grapeshot deals 1 damage to target creature or player.
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        // Grapeshot deals 1 damage to any target.
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
         this.getSpellAbility().addEffect(new DamageTargetEffect(1));
         // Storm
         this.addAbility(new StormAbility());

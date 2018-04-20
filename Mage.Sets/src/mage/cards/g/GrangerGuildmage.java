@@ -43,7 +43,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -59,11 +59,11 @@ public class GrangerGuildmage extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // {R}, {tap}: Granger Guildmage deals 1 damage to target creature or player and 1 damage to you.
+        // {R}, {tap}: Granger Guildmage deals 1 damage to any target and 1 damage to you.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl("{R}"));
         ability.addCost(new TapSourceCost());
         ability.addEffect(new DamageControllerEffect(1));
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
         
         // {W}, {tap}: Target creature gains first strike until end of turn.

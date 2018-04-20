@@ -40,7 +40,7 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 import java.util.UUID;
 
@@ -56,13 +56,13 @@ public class ThorncasterSliver extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Sliver creatures you control have "Whenever this creature attacks, it deals 1 damage to target creature or player."
+        // Sliver creatures you control have "Whenever this creature attacks, it deals 1 damage to any target."
         Ability ability = new AttacksTriggeredAbility(new DamageTargetEffect(1, "it"), false);
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new GainAbilityControlledEffect(ability,
                         Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS)
-                        .setText("Sliver creatures you control have \"Whenever this creature attacks, it deals 1 damage to target creature or player.\"")));
+                        .setText("Sliver creatures you control have \"Whenever this creature attacks, it deals 1 damage to any target.\"")));
     }
 
     public ThorncasterSliver(final ThorncasterSliver card) {

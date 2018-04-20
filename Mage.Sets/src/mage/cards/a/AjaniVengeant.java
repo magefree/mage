@@ -44,7 +44,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -70,12 +70,12 @@ public class AjaniVengeant extends CardImpl {
         ability1.addTarget(new TargetPermanent());
         this.addAbility(ability1);
 
-        // −2: Ajani Vengeant deals 3 damage to target creature or player and you gain 3 life.
+        // −2: Ajani Vengeant deals 3 damage to any target and you gain 3 life.
         Effects effects1 = new Effects();
         effects1.add(new DamageTargetEffect(3));
         effects1.add(new GainLifeEffect(3));
         LoyaltyAbility ability2 = new LoyaltyAbility(effects1, -2);
-        ability2.addTarget(new TargetCreatureOrPlayer());
+        ability2.addTarget(new TargetAnyTarget());
         this.addAbility(ability2);
 
         // −7: Destroy all lands target player controls.

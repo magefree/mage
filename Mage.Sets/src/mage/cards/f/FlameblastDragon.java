@@ -44,7 +44,7 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  * @author Loki
@@ -60,9 +60,9 @@ public class FlameblastDragon extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        // Whenever Flameblast Dragon attacks, you may pay {X}{R}. If you do, Flameblast Dragon deals X damage to target creature or player.
+        // Whenever Flameblast Dragon attacks, you may pay {X}{R}. If you do, Flameblast Dragon deals X damage to any target.
         Ability ability = new AttacksTriggeredAbility(new FlameblastDragonEffect(), false);
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }
 
@@ -80,7 +80,7 @@ class FlameblastDragonEffect extends OneShotEffect {
 
     FlameblastDragonEffect() {
         super(Outcome.Benefit);
-        staticText = "you may pay {X}{R}. If you do, {this} deals X damage to target creature or player";
+        staticText = "you may pay {X}{R}. If you do, {this} deals X damage to any target";
     }
 
     FlameblastDragonEffect(final FlameblastDragonEffect effect) {
@@ -92,7 +92,7 @@ class FlameblastDragonEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         ManaCosts cost = new ManaCostsImpl("{X}{R}");
         if (player != null) {
-            if (player.chooseUse(Outcome.Damage, "Pay " + cost.getText() + "? If you do, Flameblast Dragon deals X damage to target creature or player", source, game)) {
+            if (player.chooseUse(Outcome.Damage, "Pay " + cost.getText() + "? If you do, Flameblast Dragon deals X damage to any target", source, game)) {
                 int costX = player.announceXMana(0, Integer.MAX_VALUE, "Announce the value for {X}", game, source);
                 cost.add(new GenericManaCost(costX));
                 if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false, null)) {

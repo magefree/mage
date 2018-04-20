@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.l;
 
 import java.util.UUID;
@@ -34,7 +33,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.target.TargetPlayer;
+import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
  *
@@ -42,16 +41,16 @@ import mage.target.TargetPlayer;
  */
 public class LavaSpike extends CardImpl {
 
-    public LavaSpike (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}");
+    public LavaSpike(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{R}");
         this.subtype.add(SubType.ARCANE);
 
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
 
     }
 
-    public LavaSpike (final LavaSpike card) {
+    public LavaSpike(final LavaSpike card) {
         super(card);
     }
 

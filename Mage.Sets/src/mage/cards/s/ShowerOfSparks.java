@@ -33,8 +33,8 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetPlayerOrPlaneswalker;
 import mage.target.targetpointer.SecondTargetPointer;
 
 /**
@@ -44,8 +44,7 @@ import mage.target.targetpointer.SecondTargetPointer;
 public class ShowerOfSparks extends CardImpl {
 
     public ShowerOfSparks(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}");
 
         // Shower of Sparks deals 1 damage to target creature and 1 damage to target player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(1));
@@ -55,7 +54,7 @@ public class ShowerOfSparks extends CardImpl {
         effect.setTargetPointer(new SecondTargetPointer());
         effect.setText("and 1 damage to target player");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
     }
 
     public ShowerOfSparks(final ShowerOfSparks card) {

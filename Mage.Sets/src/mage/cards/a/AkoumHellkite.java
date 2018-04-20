@@ -43,7 +43,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
@@ -55,7 +55,7 @@ import java.util.UUID;
 public class AkoumHellkite extends CardImpl {
 
     public AkoumHellkite(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");
         this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
@@ -63,10 +63,10 @@ public class AkoumHellkite extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // <i>Landfall</i>-Whenever a land enters the battlefield under you control, Akoum Hellkite deals 1 damage to target creature or player.
+        // <i>Landfall</i>-Whenever a land enters the battlefield under you control, Akoum Hellkite deals 1 damage to any target.
         // If that land is a Mountain, Akoum Hellkite deals 2 damage to that creature or player instead.
         Ability ability = new AkoumHellkiteTriggeredAbility();
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }
 
@@ -82,8 +82,8 @@ public class AkoumHellkite extends CardImpl {
 
 class AkoumHellkiteTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String text = "<i>Landfall</i> - Whenever a land enters the battlefield under your control, {this} deals 1 damage to target creature or player. "
-            + "If that land is a Mountain, Akoum Hellkite deals 2 damage to that creature or player instead.";
+    private static final String text = "<i>Landfall</i> - Whenever a land enters the battlefield under your control, {this} deals 1 damage to any target. "
+            + "If that land is a Mountain, Akoum Hellkite deals 2 damage to that permanent or player instead.";
 
     public AkoumHellkiteTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AkoumHellkiteDamageEffect());
@@ -110,12 +110,13 @@ class AkoumHellkiteTriggeredAbility extends TriggeredAbilityImpl {
                 && permanent.isLand()
                 && permanent.getControllerId().equals(getControllerId())) {
             Permanent sourcePermanent = game.getPermanent(getSourceId());
-            if (sourcePermanent != null)
+            if (sourcePermanent != null) {
                 for (Effect effect : getEffects()) {
-                if (effect instanceof AkoumHellkiteDamageEffect) {
-                    effect.setTargetPointer(new FixedTarget(permanent, game));
+                    if (effect instanceof AkoumHellkiteDamageEffect) {
+                        effect.setTargetPointer(new FixedTarget(permanent, game));
+                    }
+                    return true;
                 }
-                return true;
             }
         }
         return false;
