@@ -65,12 +65,17 @@ public class TargetPermanentOrPlayer extends TargetImpl {
         this.zone = Zone.ALL;
         this.filter = new FilterPermanentOrPlayer();
         this.targetName = filter.getMessage();
-        this.filterPermanent = new FilterPermanent();
+        this.filterPermanent = this.filter.getPermanentFilter();
     }
 
     public TargetPermanentOrPlayer(int minNumTargets, int maxNumTargets, boolean notTarget) {
         this(minNumTargets, maxNumTargets);
         this.notTarget = notTarget;
+    }
+
+    public TargetPermanentOrPlayer(int minNumTargets, int maxNumTargets, FilterPermanentOrPlayer filter, boolean notTarget) {
+        this(minNumTargets, maxNumTargets, notTarget);
+        this.filter = filter;
     }
 
     public TargetPermanentOrPlayer(final TargetPermanentOrPlayer target) {
