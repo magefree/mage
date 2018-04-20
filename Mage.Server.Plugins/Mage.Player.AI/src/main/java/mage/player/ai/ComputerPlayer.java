@@ -785,7 +785,8 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             log.debug("chooseTarget: " + outcome.toString() + ':' + target.toString());
         }
         UUID opponentId = game.getOpponents(playerId).iterator().next();
-        if (target.getOriginalTarget() instanceof TargetCreatureOrPlayerAmount) {
+        if (target.getOriginalTarget() instanceof TargetCreatureOrPlayerAmount
+                || target.getOriginalTarget() instanceof TargetAnyTargetAmount) {
             if (outcome == Outcome.Damage && game.getPlayer(opponentId).getLife() <= target.getAmountRemaining()) {
                 target.addTarget(opponentId, target.getAmountRemaining(), source, game);
                 return true;
