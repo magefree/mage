@@ -32,4 +32,9 @@ public class TargetOpponentOrPlaneswalker extends TargetPermanentOrPlayer {
     public TargetOpponentOrPlaneswalker(final TargetOpponentOrPlaneswalker target) {
         super(target);
     }
+
+    @Override
+    public TargetOpponentOrPlaneswalker copy() {
+        return new TargetOpponentOrPlaneswalker(this);
+    }
 }
