@@ -63,7 +63,7 @@ public class RushingRiver extends CardImpl {
         Effect effect = new ConditionalOneShotEffect(
                 new ReturnToHandTargetEffect(),
                 KickedCondition.instance,
-                "If {this} was kicked, return another target nonland permanent to its owner's hand");
+                "if this spell was kicked, return another target nonland permanent to its owner's hand");
         effect.setTargetPointer(new SecondTargetPointer());
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetNonlandPermanent());

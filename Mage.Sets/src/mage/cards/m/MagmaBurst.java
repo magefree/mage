@@ -58,7 +58,7 @@ public class MagmaBurst extends CardImpl {
         this.addAbility(new KickerAbility(new SacrificeTargetCost(new TargetControlledPermanent(2, 2, new FilterControlledLandPermanent("two lands"), true))));
         // Magma Burst deals 3 damage to any target. If Magma Burst was kicked, it deals 3 damage to another any target.
         Effect effect = new DamageTargetEffect(3);
-        effect.setText("{this} deals 3 damage to any target. If {this} was kicked, it deals 3 damage to another target.");
+        effect.setText("{this} deals 3 damage to any target. if this spell was kicked, it deals 3 damage to another target.");
         this.getSpellAbility().addEffect(effect);
         originalId = this.getSpellAbility().getOriginalId();
     }

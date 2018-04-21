@@ -58,7 +58,7 @@ public class DismantlingBlow extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DrawCardSourceControllerEffect(2),
                 KickedCondition.instance,
-                "If {this} was kicked, draw two cards"));
+                "if this spell was kicked, draw two cards"));
     }
 
     public DismantlingBlow(final DismantlingBlow card) {

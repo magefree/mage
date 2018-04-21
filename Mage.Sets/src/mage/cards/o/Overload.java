@@ -73,7 +73,7 @@ class OverloadEffect extends OneShotEffect {
 
     OverloadEffect() {
         super(Outcome.DestroyPermanent);
-        this.staticText = "Destroy target artifact if its converted mana cost is 2 or less. If {this} was kicked, destroy that artifact if its converted mana cost is 5 or less instead.";
+        this.staticText = "Destroy target artifact if its converted mana cost is 2 or less. if this spell was kicked, destroy that artifact if its converted mana cost is 5 or less instead.";
     }
 
     OverloadEffect(final OverloadEffect effect) {
