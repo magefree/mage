@@ -170,7 +170,7 @@ public interface Card extends MageObject {
 
     /**
      *
-     * @return The main card of a split half card, otherwise thae card itself is
+     * @return The main card of a split half card, otherwise the card itself is
      * returned
      */
     Card getMainCard();
@@ -181,7 +181,7 @@ public interface Card extends MageObject {
      *
      * @return
      */
-    default FilterMana getColorIdentity();
+    FilterMana getColorIdentity();
 
     List<UUID> getAttachments();
 
