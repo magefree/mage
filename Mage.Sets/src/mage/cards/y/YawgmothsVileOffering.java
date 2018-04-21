@@ -10,6 +10,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.common.FilterCreatureOrPlaneswalkerPermanent;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -20,8 +21,7 @@ import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetCreatureOrPlaneswalker;
 
 /**
- * @author JRHerlehy
- *         Created on 4/8/18.
+ * @author JRHerlehy Created on 4/8/18.
  */
 public class YawgmothsVileOffering extends CardImpl {
 
@@ -45,7 +45,7 @@ public class YawgmothsVileOffering extends CardImpl {
         // Destroy up to one target creature or planeswalker. Exile Yawgmoth’s Vile Offering.
         this.getSpellAbility().addEffect(new YawgmothsVireOfferingEffect());
         this.getSpellAbility().addTarget(new TargetCardInGraveyard(0, 1, cardFilter));
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlaneswalker());
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlaneswalker(0, 1, new FilterCreatureOrPlaneswalkerPermanent(), false));
         this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
     }
 
