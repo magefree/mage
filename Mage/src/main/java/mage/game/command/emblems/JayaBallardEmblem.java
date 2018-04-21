@@ -20,6 +20,7 @@ import mage.game.Game;
 import mage.game.command.Emblem;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
 import mage.watchers.common.CastFromGraveyardWatcher;
 
@@ -113,13 +114,14 @@ class JayaBallardReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-
-        Card card = game.getCard(event.getSourceId());
-        if (card.isInstant() || card.isSorcery()) {
-            // TODO: Find a way to check, that the spell from graveyard was really cast by the ability of the emblem.
-            // currently every spell cast from graveyard will be exiled.
-            CastFromGraveyardWatcher watcher = (CastFromGraveyardWatcher) game.getState().getWatchers().get(CastFromGraveyardWatcher.class.getSimpleName());
-            return watcher != null && watcher.spellWasCastFromGraveyard(event.getTargetId(), game.getState().getZoneChangeCounter(event.getTargetId()));
+        if (Zone.GRAVEYARD == ((ZoneChangeEvent) event).getToZone()) {
+            Card card = game.getCard(event.getSourceId());
+            if (card != null && (card.isInstant() || card.isSorcery())) {
+                // TODO: Find a way to check, that the spell from graveyard was really cast by the ability of the emblem.
+                // currently every spell cast from graveyard will be exiled.
+                CastFromGraveyardWatcher watcher = (CastFromGraveyardWatcher) game.getState().getWatchers().get(CastFromGraveyardWatcher.class.getSimpleName());
+                return watcher != null && watcher.spellWasCastFromGraveyard(event.getTargetId(), game.getState().getZoneChangeCounter(event.getTargetId()));
+            }
         }
         return false;
     }
