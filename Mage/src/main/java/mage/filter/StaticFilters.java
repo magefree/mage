@@ -42,6 +42,12 @@ public final class StaticFilters {
         FILTER_ENCHANTMENT_PERMANENT.setLockedFilter(true);
     }
 
+    public static final FilterCard FILTER_CARD_CARDS = new FilterCard("cards");
+
+    static {
+        FILTER_CARD_CARDS.setLockedFilter(true);
+    }
+
     public static final FilterArtifactCard FILTER_CARD_ARTIFACT = new FilterArtifactCard();
 
     static {

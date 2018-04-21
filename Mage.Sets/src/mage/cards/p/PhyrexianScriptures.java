@@ -35,15 +35,16 @@ import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.effects.common.ExileGraveyardAllPlayersEffect;
 import mage.abilities.effects.common.continuous.AddCardTypeTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SagaChapter;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -83,7 +84,9 @@ public class PhyrexianScriptures extends CardImpl {
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_II, new DestroyAllEffect(filter));
 
         // III — Exile all cards from all opponents' graveyards.
-        sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_III, new ExileGraveyardAllPlayersEffect().setText("exile all cards from all opponents' graveyards"));
+        sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_III,
+                new ExileGraveyardAllPlayersEffect(StaticFilters.FILTER_CARD_CARDS, TargetController.OPPONENT)
+                        .setText("exile all cards from all opponents' graveyards"));
         this.addAbility(sagaAbility);
     }
 
