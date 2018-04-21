@@ -30,6 +30,7 @@ package org.mage.test.cards.abilities.keywords;
 import mage.abilities.keyword.IntimidateAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -119,6 +120,7 @@ public class LandfallTest extends CardTestPlayerBase {
      * Fang. It only dealt 1 damage to me, where it should've dealt 3, because
      * my opponent had played a land.
      */
+    @Ignore
     @Test
     public void testSearingBlaze() {
         // Searing Blaze deals 1 damage to target player and 1 damage to target creature that player controls.

@@ -82,7 +82,7 @@ public class CollectiveDefiance extends CardImpl {
         // Collective Defiance deals 3 damage to target opponent.
         mode = new Mode();
         effect = new DamageTargetEffect(3);
-        effect.setText("{this} deals 3 damage to target opponent");
+        effect.setText("{this} deals 3 damage to target opponent or planeswalker");
         mode.getEffects().add(effect);
         mode.getTargets().add(new TargetOpponentOrPlaneswalker());
         this.getSpellAbility().addMode(mode);

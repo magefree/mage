@@ -88,7 +88,7 @@ public class ChampionTest extends CardTestPlayerBase {
 
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Crafter");
-        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {source} deals 3 damage to target creature or player.", "Lightning Crafter");
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {source} deals 3 damage to ", "Lightning Crafter");
 
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();

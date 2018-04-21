@@ -5,14 +5,6 @@
  */
 package mage.target.common;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
-import mage.MageObject;
-import mage.abilities.Ability;
-import mage.constants.Zone;
-import mage.filter.Filter;
-import mage.filter.common.FilterPlaneswalkerPermanent;
 import mage.filter.common.FilterPlayerOrPlaneswalker;
 
 /**
@@ -22,7 +14,7 @@ import mage.filter.common.FilterPlayerOrPlaneswalker;
 public class TargetPlayerOrPlaneswalker extends TargetPermanentOrPlayer {
 
     public TargetPlayerOrPlaneswalker() {
-        this(1, 1, new FilterPlayerOrPlaneswalker(), false);
+        this(1, 1, new FilterPlayerOrPlaneswalker("player or planeswalker"), false);
     }
 
     public TargetPlayerOrPlaneswalker(int numTargets) {
@@ -39,10 +31,6 @@ public class TargetPlayerOrPlaneswalker extends TargetPermanentOrPlayer {
 
     public TargetPlayerOrPlaneswalker(final TargetPlayerOrPlaneswalker target) {
         super(target);
-    }
-
-    public FilterPlaneswalkerPermanent getPlaneswalkerFilter() {
-        return filter.getPlaneswalkerFilter();
     }
 
     @Override

@@ -25,4 +25,9 @@ public class FilterPlayerOrPlaneswalker extends FilterPermanentOrPlayer {
     public FilterPlayerOrPlaneswalker(final FilterPlayerOrPlaneswalker filter) {
         super(filter);
     }
+
+    @Override
+    public FilterPlayerOrPlaneswalker copy() {
+        return new FilterPlayerOrPlaneswalker(this);
+    }
 }
