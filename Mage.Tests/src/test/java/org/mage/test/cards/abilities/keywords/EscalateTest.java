@@ -29,6 +29,7 @@ package org.mage.test.cards.abilities.keywords;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -61,6 +62,7 @@ public class EscalateTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Savage Alliance", 1);
     }
 
+    @Ignore
     @Test
     public void testGaddockTeegInteraction_ThreeCMC_OneMode() {
 
@@ -115,10 +117,10 @@ public class EscalateTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Gaddock Teeg", 1);
         assertLife(playerB, 17);
     }
-    
+
     @Test
     public void testSpellQuellerInteraction_ThreeCMC_ThreeModes() {
-        
+
         // {1}{W}{U} Flash Flying 2/3 Spirit
         // When Spell Queller enters the battlefield, exile target spell with converted mana cost 4 or less.
         // When Spell Queller leaves the battlefield, the exiled card's owner may cast that card without paying its mana cost.
@@ -126,7 +128,7 @@ public class EscalateTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Wall of Omens"); // {1}{W} 0/4
         addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
         addCard(Zone.BATTLEFIELD, playerB, "Plains", 1);
-        
+
         // Escalate {1} (Pay this cost for each mode chosen beyond the first.)
         // Choose one or more —
         // * Target player discards all the cards in their hand, then draws that many cards.
@@ -134,24 +136,24 @@ public class EscalateTest extends CardTestPlayerBase {
         // * Collective Defiance deals 3 damage to target opponent.
         addCard(Zone.HAND, playerA, "Collective Defiance"); // {1}{R}{R} sorcery
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
-        
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Collective Defiance", "mode=2Wall of Omens");
         setModeChoice(playerA, "1"); // opponent discards hand and draws that many
         setModeChoice(playerA, "2"); // deal 4 dmg to target creature (Wall of Omens)
         setModeChoice(playerA, "3"); // deal 3 dmg to opponent        
         addTarget(playerA, playerB); // mode 1
         addTarget(playerA, playerB); // mode 3
-        
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Spell Queller");
         addTarget(playerB, "Collective Defiance");
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        
+
         assertPermanentCount(playerB, "Spell Queller", 1);
         assertHandCount(playerA, "Collective Defiance", 0);
         assertExileCount("Collective Defiance", 1);
         assertGraveyardCount(playerA, "Collective Defiance", 0);
-        assertPermanentCount(playerB, "Wall of Omens", 1);        
+        assertPermanentCount(playerB, "Wall of Omens", 1);
         assertLife(playerA, 20);
         assertLife(playerB, 20);
     }

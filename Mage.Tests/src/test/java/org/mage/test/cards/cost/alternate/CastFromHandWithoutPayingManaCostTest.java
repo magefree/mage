@@ -146,7 +146,7 @@ public class CastFromHandWithoutPayingManaCostTest extends CardTestPlayerBase {
 
         addCard(Zone.HAND, playerA, "Shrapnel Blast", 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Shrapnel Blast", "Ornithopter");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Shrapnel Blast");
         setChoice(playerA, "Yes");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

@@ -14,7 +14,7 @@ import mage.filter.common.FilterOpponentOrPlaneswalker;
 public class TargetOpponentOrPlaneswalker extends TargetPermanentOrPlayer {
 
     public TargetOpponentOrPlaneswalker() {
-        this(1, 1, new FilterOpponentOrPlaneswalker(), false);
+        this(1, 1, new FilterOpponentOrPlaneswalker("opponent or planeswalker"), false);
     }
 
     public TargetOpponentOrPlaneswalker(int numTargets) {
