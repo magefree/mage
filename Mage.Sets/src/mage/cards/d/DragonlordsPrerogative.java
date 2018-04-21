@@ -67,7 +67,7 @@ public class DragonlordsPrerogative extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{U}{U}");
 
         // As an additional cost to cast Dragonlord's Prerogative, you may reveal a Dragon card from your hand.
-        this.getSpellAbility().addEffect(new InfoEffect("As an additional cost to cast {this}, you may reveal a Dragon card from your hand"));
+        this.getSpellAbility().addEffect(new InfoEffect("as an additional cost to cast this spell, you may reveal a Dragon card from your hand"));
         
         // If you revealed a Dragon card or controlled a Dragon as you cast Dragonlord's Prerogative, Dragonlord's Prerogative can't be countered.        
         Condition condition = new DragonlordsPrerogativeCondition();

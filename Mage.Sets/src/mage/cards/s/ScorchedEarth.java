@@ -98,7 +98,7 @@ class ScorchedEarthRuleEffect extends OneShotEffect {
 
     public ScorchedEarthRuleEffect() {
         super(Outcome.Benefit);
-        this.staticText = "As an additional cost to cast {this}, discard X land cards";
+        this.staticText = "as an additional cost to cast this spell, discard X land cards";
     }
 
     public ScorchedEarthRuleEffect(final ScorchedEarthRuleEffect effect) {

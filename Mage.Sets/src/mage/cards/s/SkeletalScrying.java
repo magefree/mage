@@ -86,7 +86,7 @@ class SkeletalScryingRuleEffect extends OneShotEffect {
 
     public SkeletalScryingRuleEffect() {
         super(Outcome.Benefit);
-        this.staticText = "As an additional cost to cast {this}, exile X cards from your graveyard";
+        this.staticText = "as an additional cost to cast this spell, exile X cards from your graveyard";
     }
 
     public SkeletalScryingRuleEffect(final SkeletalScryingRuleEffect effect) {

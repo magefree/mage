@@ -65,7 +65,7 @@ public class SilumgarsScorn extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}{U}");
 
         // As an additional cost to cast Silumgar's Scorn, you may reveal a Dragon card from your hand.
-        this.getSpellAbility().addEffect(new InfoEffect("As an additional cost to cast {this}, you may reveal a Dragon card from your hand"));
+        this.getSpellAbility().addEffect(new InfoEffect("as an additional cost to cast this spell, you may reveal a Dragon card from your hand"));
         
         // Counter target spell unless its controller pays {1}. If you revealed a Dragon card or controlled a Dragon as you cast Silumgar's Scorn, counter that spell instead.
         this.getSpellAbility().addEffect(new SilumgarsScornCounterEffect());
