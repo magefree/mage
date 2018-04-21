@@ -179,9 +179,13 @@ public class RollPlanarDieEffect extends OneShotEffect {
         for (int i = 0; i < chaosEffects.size(); i++) {
             Effect effect = chaosEffects.get(i);
             if (effect != null) {
-                String emode = effect.getText(mode);
-                emode = emode.substring(0, 1).toLowerCase() + emode.substring(1);
-                sb.append(emode);
+                try { 
+                    String emode = effect.getText(mode);
+                    emode = emode.substring(0, 1).toLowerCase() + emode.substring(1);
+                    sb.append(emode);
+                } catch (Exception e) {
+                    sb.append("perform the CHAOS action");
+                }
             }
         }
         sb.append(".  If you roll PW, planeswalk to a new plane");
