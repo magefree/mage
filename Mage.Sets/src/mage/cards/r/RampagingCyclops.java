@@ -34,11 +34,11 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
@@ -83,24 +83,11 @@ enum RampagingCyclopsCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getBattlefield().getPermanent(source.getSourceId());
-        if (permanent == null) {
+        if (permanent == null || !permanent.isAttacking()) {
             return false;
         }
-        for (CombatGroup group : game.getCombat().getBlockingGroups()) {
-            if (group.getAttackers().contains(permanent.getId())) {
-                int blockerCount = 0;
-                for (UUID blockerId : group.getBlockers()) {
-                    Permanent blocker = game.getPermanent(blockerId);
-                    if (blocker != null) {
-                        blockerCount++;
-                    }
-                    if (blockerCount > 1) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
+        CombatGroup combatGroup = game.getCombat().findGroup(permanent.getId());
+        return combatGroup != null && combatGroup.getBlockers().size() > 1;
     }
 
     @Override
