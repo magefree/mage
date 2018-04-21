@@ -60,7 +60,7 @@ public class CorruptedGrafstone extends CardImpl {
         // Corrupted Grafstone enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
 
-        // {T}: Choose a color of a card in your graveyard. Add one mana of that color to your mana pool.
+        // {T}: Choose a color of a card in your graveyard. Add one mana of that color.
         this.addAbility(new CorruptedGrafstoneManaAbility());
     }
 
@@ -102,7 +102,7 @@ class CorruptedGrafstoneManaEffect extends ManaEffect {
     public CorruptedGrafstoneManaEffect() {
         super();
         computedMana = new Mana();
-        this.staticText = "Choose a color of a card in your graveyard. Add one mana of that color to your mana pool";
+        this.staticText = "Choose a color of a card in your graveyard. Add one mana of that color";
     }
 
     public CorruptedGrafstoneManaEffect(final CorruptedGrafstoneManaEffect effect) {

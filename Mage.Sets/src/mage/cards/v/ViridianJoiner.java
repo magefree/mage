@@ -51,7 +51,7 @@ public class ViridianJoiner extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 
-        // {tap}: Add to your mana pool an amount of {G} equal to Viridian Joiner's power.
+        // {tap}: Add an amount of {G} equal to Viridian Joiner's power.
         this.addAbility(new DynamicManaAbility(Mana.GreenMana(1), new SourcePermanentPowerCount()));
     }
 

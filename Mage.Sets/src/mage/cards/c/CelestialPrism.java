@@ -45,7 +45,7 @@ public class CelestialPrism extends CardImpl {
     public CelestialPrism(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
-        // {2}, {tap}: Add one mana of any color to your mana pool.
+        // {2}, {tap}: Add one mana of any color.
         Ability ability = new AnyColorManaAbility(new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

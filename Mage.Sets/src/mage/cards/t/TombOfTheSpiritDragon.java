@@ -57,7 +57,7 @@ public class TombOfTheSpiritDragon extends CardImpl {
     public TombOfTheSpiritDragon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // T: Add 1 to your mana pool
+        // T: Add 1
         this.addAbility(new ColorlessManaAbility());
         // 2, T: You gain 1 life for each colorless creature you control
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(new PermanentsOnBattlefieldCount(filter)), new GenericManaCost(2));

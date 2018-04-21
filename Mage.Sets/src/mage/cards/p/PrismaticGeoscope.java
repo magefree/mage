@@ -51,10 +51,10 @@ public class PrismaticGeoscope extends CardImpl {
         // Prismatic Geoscope enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
 
-        // <i>Domain</i> &mdash; {T}: Add X mana in any combination of colors to your mana pool, where X is the number of basic land types among lands you control.
+        // <i>Domain</i> &mdash; {T}: Add X mana in any combination of colors, where X is the number of basic land types among lands you control.
         Ability ability = new DynamicManaAbility(
                 new Mana(0, 0, 0, 0, 0, 0, 1, 0), new DomainValue(), new TapSourceCost(),
-                "Add X mana in any combination of colors to your mana pool,"
+                "Add X mana in any combination of colors,"
                 + " where X is the number of basic land types among lands you control."
         );
         ability.setAbilityWord(AbilityWord.DOMAIN);

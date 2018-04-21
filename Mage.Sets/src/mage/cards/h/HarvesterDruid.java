@@ -49,7 +49,7 @@ public class HarvesterDruid extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // {tap}: Add to your mana pool one mana of any color that a land you control could produce.
+        // {tap}: Add one mana of any color that a land you control could produce.
         this.addAbility(new AnyColorLandsProduceManaAbility(TargetController.YOU));
     }
 

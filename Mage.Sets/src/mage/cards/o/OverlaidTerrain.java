@@ -60,7 +60,7 @@ public class OverlaidTerrain extends CardImpl {
         // As Overlaid Terrain enters the battlefield, sacrifice all lands you control.
         this.addAbility(new AsEntersBattlefieldAbility(new SacrificeAllLandEffect()));
         
-        // Lands you control have "{tap}: Add two mana of any one color to your mana pool."
+        // Lands you control have "{tap}: Add two mana of any one color."
         SimpleManaAbility manaAbility = new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(2), new TapSourceCost());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(manaAbility, Duration.WhileOnBattlefield, new FilterLandPermanent(), false)));
     }

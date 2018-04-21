@@ -56,7 +56,7 @@ public class Metamorphosis extends CardImpl {
         // As an additional cost to cast Metamorphosis, sacrifice a creature.
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         this.getSpellAbility().addEffect(new MetamorphosisEffect());
-        // Add X mana of any one color to your mana pool, where X is one plus the sacrificed creature's converted mana cost. Spend this mana only to cast creature spells.
+        // Add X mana of any one color, where X is one plus the sacrificed creature's converted mana cost. Spend this mana only to cast creature spells.
     }
 
     public Metamorphosis(final Metamorphosis card) {

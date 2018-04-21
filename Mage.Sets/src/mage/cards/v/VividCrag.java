@@ -54,7 +54,7 @@ public class VividCrag extends CardImpl {
         this.addAbility(ability);
         // {tap}: Add {R}.
         this.addAbility(new RedManaAbility());
-        // {tap}, Remove a charge counter from Vivid Crag: Add one mana of any color to your mana pool.
+        // {tap}, Remove a charge counter from Vivid Crag: Add one mana of any color.
         ability = new AnyColorManaAbility();
         ability.addCost(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(1)));
         this.addAbility(ability);

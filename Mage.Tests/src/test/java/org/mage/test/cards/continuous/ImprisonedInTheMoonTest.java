@@ -28,7 +28,7 @@ public class ImprisonedInTheMoonTest extends CardTestPlayerBase {
         
         // Imprisoned in the Moon - Enchantment - Aura - {2}{U}
         // Enchant creature, land, or planeswalker
-        // Enchanted permanent is a colorless land with "Tap: Add Colorless to your mana pool" and loses all other card types and abilities.
+        // Enchanted permanent is a colorless land with "Tap: Add Colorless" and loses all other card types and abilities.
         addCard(Zone.HAND, playerA, "Imprisoned in the Moon", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
         addCard(Zone.BATTLEFIELD, playerB, "Urza's Mine", 1);

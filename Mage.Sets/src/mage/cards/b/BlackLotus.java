@@ -47,7 +47,7 @@ public class BlackLotus extends CardImpl {
     public BlackLotus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{0}");
 
-        // {tap}, Sacrifice Black Lotus: Add three mana of any one color to your mana pool.
+        // {tap}, Sacrifice Black Lotus: Add three mana of any one color.
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(3), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

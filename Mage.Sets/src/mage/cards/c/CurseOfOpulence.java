@@ -66,7 +66,7 @@ public class CurseOfOpulence extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
 
         // Whenever enchanted player is attacked, create a colorless artifact token named Gold.
-        // It has "sacrifice this artifact: Add one mana of any color to your mana pool." Each opponent attacking that player does the same.
+        // It has "sacrifice this artifact: Add one mana of any color." Each opponent attacking that player does the same.
         this.addAbility(new EnchantedPlayerAttackedTriggeredAbility(new CurseOfOpulenceEffect()));
     }
 
@@ -85,7 +85,7 @@ class CurseOfOpulenceEffect extends OneShotEffect {
     CurseOfOpulenceEffect() {
         super(Outcome.Benefit);
         this.staticText = "create a colorless artifact token named Gold. It has "
-                + "\"sacrifice this artifact: Add one mana of any color to your mana pool.\" "
+                + "\"sacrifice this artifact: Add one mana of any color.\" "
                 + "Each opponent attacking that player does the same.";
     }
 

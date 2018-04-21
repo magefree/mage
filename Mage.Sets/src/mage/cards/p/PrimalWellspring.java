@@ -54,7 +54,7 @@ public class PrimalWellspring extends CardImpl {
 
         this.nightCard = true;
 
-        // Add one mana of any color to your mana pool.
+        // Add one mana of any color.
         Ability ability = new AnyColorManaAbility();
         this.addAbility(ability);
 

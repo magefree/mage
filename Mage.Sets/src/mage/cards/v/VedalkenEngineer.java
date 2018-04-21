@@ -63,7 +63,7 @@ public class VedalkenEngineer extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // {tap}: Add two mana of any one color to your mana pool. Spend this mana only to cast artifact spells or activate abilities of artifacts.
+        // {tap}: Add two mana of any one color. Spend this mana only to cast artifact spells or activate abilities of artifacts.
         this.addAbility(new VedalkenEngineerAbility(new TapSourceCost(), 2, new VedalkenEngineerManaBuilder()));
     }
 
@@ -136,7 +136,7 @@ class VedalkenEngineerEffect extends ManaEffect {
         super();
         this.amount = amount;
         this.manaBuilder = manaBuilder;
-        staticText = "Add " + amount + " mana of any one color to your mana pool. " + manaBuilder.getRule();
+        staticText = "Add " + amount + " mana of any one color. " + manaBuilder.getRule();
     }
 
     public VedalkenEngineerEffect(final VedalkenEngineerEffect effect) {

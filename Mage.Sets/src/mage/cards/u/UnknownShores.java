@@ -48,7 +48,7 @@ public class UnknownShores extends CardImpl {
 
         // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
-        // {1}, {T}: Add one mana of any color to your mana pool.
+        // {1}, {T}: Add one mana of any color.
         Ability ability = new AnyColorManaAbility(new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

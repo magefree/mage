@@ -46,10 +46,10 @@ public class WaterveilCavern extends CardImpl {
     public WaterveilCavern(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // Tap: Add 1 to your mana pool.
+        // Tap: Add 1.
         this.addAbility(new ColorlessManaAbility());
 
-        // Tap: Add Blue or Black to your mana pool. Waterveil Cavern doesn't untap during your next untap step.
+        // Tap: Add Blue or Black. Waterveil Cavern doesn't untap during your next untap step.
         Ability blueManaAbility = new BlueManaAbility();
         blueManaAbility.addEffect(new DontUntapInControllersNextUntapStepSourceEffect());
         this.addAbility(blueManaAbility);

@@ -40,7 +40,7 @@ import mage.game.Game;
 
 /**
  * For cards like:
- *   {tap}: Add three mana of any one color to your mana pool. Spend this mana only to cast creature spells.
+ *   {tap}: Add three mana of any one color. Spend this mana only to cast creature spells.
  *
  * @author noxx
  */

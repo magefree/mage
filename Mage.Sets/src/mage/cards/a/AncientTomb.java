@@ -46,7 +46,7 @@ public class AncientTomb extends CardImpl {
     public AncientTomb(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {tap}: Add  to your mana pool. Ancient Tomb deals 2 damage to you.
+        // {tap}: Add . Ancient Tomb deals 2 damage to you.
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(2), new TapSourceCost());
         ability.addEffect(new DamageControllerEffect(2));
         this.addAbility(ability);

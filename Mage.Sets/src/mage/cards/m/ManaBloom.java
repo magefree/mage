@@ -60,7 +60,7 @@ public class ManaBloom extends CardImpl {
         // Mana Bloom enters the battlefield with X charge counters on it.
         this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.CHARGE.createInstance())));
 
-        // Remove a charge counter from Mana Bloom: Add one mana of any color to your mana pool. Activate this ability only once each turn.
+        // Remove a charge counter from Mana Bloom: Add one mana of any color. Activate this ability only once each turn.
         Ability ability = new ActivateOncePerTurnManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(), new RemoveCountersSourceCost(CounterType.CHARGE.createInstance()));
         this.addAbility(ability);
 

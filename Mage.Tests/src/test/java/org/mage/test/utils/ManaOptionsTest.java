@@ -108,7 +108,7 @@ public class ManaOptionsTest extends CardTestPlayerBase {
     }
 
     // Chromatic Sphere
-    // {1}, {T}, Sacrifice Chromatic Sphere: Add one mana of any color to your mana pool. Draw a card.
+    // {1}, {T}, Sacrifice Chromatic Sphere: Add one mana of any color. Draw a card.
     @Test
     public void testChromaticSphere() {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
@@ -125,7 +125,7 @@ public class ManaOptionsTest extends CardTestPlayerBase {
     }
 
     // Orochi Leafcaller
-    // {G}: Add one mana of any color to your mana pool.
+    // {G}: Add one mana of any color.
     @Test
     public void testOrochiLeafcaller() {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
@@ -143,7 +143,7 @@ public class ManaOptionsTest extends CardTestPlayerBase {
     }
 
     // Crystal Quarry
-    // {T}: {1} Add  to your mana pool.
+    // {T}: {1} Add .
     // {5}, {T}: Add {W}{U}{B}{R}{G}.
     @Test
     public void testCrystalQuarry() {
@@ -162,7 +162,7 @@ public class ManaOptionsTest extends CardTestPlayerBase {
     }
 
     // Crystal Quarry
-    // {T}: {1} Add  to your mana pool.
+    // {T}: {1} Add .
     // {5}, {T}: Add {W}{U}{B}{R}{G}.
     @Test
     public void testCrystalQuarry2() {
@@ -183,7 +183,7 @@ public class ManaOptionsTest extends CardTestPlayerBase {
 
     // Nykthos, Shrine to Nyx
     // {T}: Add {C}.
-    // {2}, {T}: Choose a color. Add to your mana pool an amount of mana of that color equal to your devotion to that color. (Your devotion to a color is the number of mana symbols of that color in the mana costs of permanents you control.)
+    // {2}, {T}: Choose a color. Add an amount of mana of that color equal to your devotion to that color. (Your devotion to a color is the number of mana symbols of that color in the mana costs of permanents you control.)
     @Test
     public void testNykthos1() {
         addCard(Zone.BATTLEFIELD, playerA, "Sedge Scorpion", 4);
@@ -266,14 +266,14 @@ public class ManaOptionsTest extends CardTestPlayerBase {
         // if mana ability cost another mana then if replaced in mana cost
         // example:
         // 1x forest
-        // 1x Chromatic Star ({1}, {T}, Sacrifice Chromatic Star: Add one mana of any color to your mana pool.)
+        // 1x Chromatic Star ({1}, {T}, Sacrifice Chromatic Star: Add one mana of any color.)
         // give {G}{Any}, but after pay it transform to {Any} (1 green will be pay)
         // That's why there are can be duplicated records in getManaAvailable
 
-        // {1}, {T}, Sacrifice Chromatic Star: Add one mana of any color to your mana pool.
+        // {1}, {T}, Sacrifice Chromatic Star: Add one mana of any color.
         // When Chromatic Star is put into a graveyard from the battlefield, draw a card.
         addCard(Zone.BATTLEFIELD, playerA, "Chromatic Star", 1);
-        // {1}, {T}, Sacrifice Chromatic Sphere: Add one mana of any color to your mana pool. Draw a card.
+        // {1}, {T}, Sacrifice Chromatic Sphere: Add one mana of any color. Draw a card.
         addCard(Zone.BATTLEFIELD, playerA, "Chromatic Sphere", 1);
         // {T}: Add {C}. If you control an Urza's Mine and an Urza's Power-Plant, add {C}{C}{C} instead.
         addCard(Zone.BATTLEFIELD, playerA, "Urza's Tower", 1);

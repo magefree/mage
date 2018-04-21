@@ -49,7 +49,7 @@ public class SupernaturalStaminaTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
 
         // When Channeler Initiate enters the battlefield, put three -1/-1 counters on target creature you control.
-        // {T}, Remove a -1/-1 counter from Channeler Initiate: Add one mana of any color to your mana pool.
+        // {T}, Remove a -1/-1 counter from Channeler Initiate: Add one mana of any color.
         addCard(Zone.HAND, playerA, "Channeler Initiate"); // Creature 3/4 {1}{G}
 
         // Until end of turn, target creature gets +2/+0 and gains "When this creature dies, return it to the battlefield tapped under its owner's control."

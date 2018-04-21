@@ -72,12 +72,12 @@ public class SpringjackPasture extends CardImpl {
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 
-        // {tap}, Sacrifice X Goats: Add X mana of any one color to your mana pool. You gain X life.
+        // {tap}, Sacrifice X Goats: Add X mana of any one color. You gain X life.
         ability = new DynamicManaAbility(
                 new Mana(0,0,0,0,0,0,1,0), 
                 new GetXValue(), 
                 new TapSourceCost(), 
-                "Add X mana of any one color to your mana pool",
+                "Add X mana of any one color",
                 true);
         ability.addCost(new SacrificeXTargetCost(filter));
         ability.addEffect(new GainLifeEffect(new GetXValue()));

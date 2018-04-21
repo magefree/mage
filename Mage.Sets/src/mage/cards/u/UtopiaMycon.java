@@ -74,7 +74,7 @@ public class UtopiaMycon extends CardImpl {
         // Remove three spore counters from Utopia Mycon: Create a 1/1 green Saproling creature token.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SaprolingToken()), new RemoveCountersSourceCost(CounterType.SPORE.createInstance(3))));
         
-        // Sacrifice a Saproling: Add one mana of any color to your mana pool.
+        // Sacrifice a Saproling: Add one mana of any color.
         Ability ability = new AnyColorManaAbility(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1, filter, false)));
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);

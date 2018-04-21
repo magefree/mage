@@ -51,7 +51,7 @@ public class LotusGuardian extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        // {tap}: Add one mana of any color to your mana pool.
+        // {tap}: Add one mana of any color.
         this.addAbility(new AnyColorManaAbility());
     }
 

@@ -53,7 +53,7 @@ public class VesperGhoul extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // {tap}, Pay 1 life: Add one mana of any color to your mana pool.
+        // {tap}, Pay 1 life: Add one mana of any color.
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(), new TapSourceCost());
         ability.addCost(new PayLifeCost(1));
         this.addAbility(ability);

@@ -62,7 +62,7 @@ public class CagedSun extends CardImpl {
         // Creatures you control of the chosen color get +1/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CagedSunEffect2()));
 
-        // Whenever a land's ability adds one or more mana of the chosen color to your mana pool, add one additional mana of that color to your mana pool.
+        // Whenever a land's ability adds one or more mana of the chosen color, add one additional mana of that color.
         this.addAbility(new CagedSunTriggeredAbility());
     }
 
@@ -115,7 +115,7 @@ class CagedSunEffect2 extends ContinuousEffectImpl {
 
 class CagedSunTriggeredAbility extends TriggeredManaAbility {
 
-    private static final String staticText = "Whenever a land's ability adds one or more mana of the chosen color to your mana pool, add one additional mana of that color to your mana pool.";
+    private static final String staticText = "Whenever a land's ability adds one or more mana of the chosen color, add one additional mana of that color.";
 
     public CagedSunTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CagedSunEffect());
@@ -159,7 +159,7 @@ class CagedSunEffect extends ManaEffect {
 
     public CagedSunEffect() {
         super();
-        staticText = "add one additional mana of that color to your mana pool";
+        staticText = "add one additional mana of that color";
     }
 
     public CagedSunEffect(final CagedSunEffect effect) {

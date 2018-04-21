@@ -54,7 +54,7 @@ public class VividGrove extends CardImpl {
         this.addAbility(ability);
         // {tap}: Add {G}.
         this.addAbility(new GreenManaAbility());
-        // {tap}, Remove a charge counter from Vivid Grove: Add one mana of any color to your mana pool.
+        // {tap}, Remove a charge counter from Vivid Grove: Add one mana of any color.
         ability = new AnyColorManaAbility();
         ability.addCost(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(1)));
         this.addAbility(ability);

@@ -46,7 +46,7 @@ public class VorinclexVoiceOfHungerTest extends CardTestPlayerBase {
     @Test
     public void testRiverOfTears() {
         // Trample
-        // Whenever you tap a land for mana, add one mana to your mana pool of any type that land produced.
+        // Whenever you tap a land for mana, add one mana of any type that land produced.
         // Whenever an opponent taps a land for mana, that land doesn't untap during its controller's next untap step.
         addCard(Zone.BATTLEFIELD, playerA, "Vorinclex, Voice of Hunger", 1);
         // {T}: Add {U}. If you played a land this turn, add {B} instead.
@@ -72,7 +72,7 @@ public class VorinclexVoiceOfHungerTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Upwelling", 1);
         addCard(Zone.HAND, playerA, "River of Tears", 1);
         // Trample
-        // Whenever you tap a land for mana, add one mana to your mana pool of any type that land produced.
+        // Whenever you tap a land for mana, add one mana of any type that land produced.
         // Whenever an opponent taps a land for mana, that land doesn't untap during its controller's next untap step.
         addCard(Zone.BATTLEFIELD, playerA, "Vorinclex, Voice of Hunger", 1);
         // {T}: Add {U}. If you played a land this turn, add {B} instead.
@@ -92,12 +92,12 @@ public class VorinclexVoiceOfHungerTest extends CardTestPlayerBase {
     @Test
     public void testGemstoneCavern() {
         // Trample
-        // Whenever you tap a land for mana, add one mana to your mana pool of any type that land produced.
+        // Whenever you tap a land for mana, add one mana of any type that land produced.
         // Whenever an opponent taps a land for mana, that land doesn't untap during its controller's next untap step.
         addCard(Zone.BATTLEFIELD, playerB, "Vorinclex, Voice of Hunger", 1); // {6}{G}{G}
 
         // If Gemstone Caverns is in your opening hand and you're not playing first, you may begin the game with Gemstone Caverns on the battlefield with a luck counter on it. If you do, exile a card from your hand.
-        // {T}: Add {C}. If Gemstone Caverns has a luck counter on it, instead add one mana of any color to your mana pool.
+        // {T}: Add {C}. If Gemstone Caverns has a luck counter on it, instead add one mana of any color.
         addCard(Zone.HAND, playerB, "Gemstone Caverns", 1);
 
         addCard(Zone.HAND, playerB, "Silvercoat Lion", 2);
@@ -118,13 +118,13 @@ public class VorinclexVoiceOfHungerTest extends CardTestPlayerBase {
     @Test
     public void testCastWithGemstoneCavern() {
         // Trample
-        // Whenever you tap a land for mana, add one mana to your mana pool of any type that land produced.
+        // Whenever you tap a land for mana, add one mana of any type that land produced.
         // Whenever an opponent taps a land for mana, that land doesn't untap during its controller's next untap step.
         addCard(Zone.HAND, playerB, "Vorinclex, Voice of Hunger", 1); // {6}{G}{G}
         addCard(Zone.BATTLEFIELD, playerB, "Forest", 7);
 
         // If Gemstone Caverns is in your opening hand and you're not playing first, you may begin the game with Gemstone Caverns on the battlefield with a luck counter on it. If you do, exile a card from your hand.
-        // {T}: Add {C}. If Gemstone Caverns has a luck counter on it, instead add one mana of any color to your mana pool.
+        // {T}: Add {C}. If Gemstone Caverns has a luck counter on it, instead add one mana of any color.
         addCard(Zone.HAND, playerB, "Gemstone Caverns", 1);
 
         addCard(Zone.HAND, playerB, "Silvercoat Lion", 2);

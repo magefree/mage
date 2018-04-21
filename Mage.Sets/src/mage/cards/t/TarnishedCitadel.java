@@ -50,7 +50,7 @@ public class TarnishedCitadel extends CardImpl {
 
         // {tap}: Add {C}.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(1), new TapSourceCost()));
-        // {tap}: Add one mana of any color to your mana pool. Tarnished Citadel deals 3 damage to you.
+        // {tap}: Add one mana of any color. Tarnished Citadel deals 3 damage to you.
         ActivatedManaAbilityImpl ability = new AnyColorManaAbility(new TapSourceCost());
         ability.addEffect(new DamageControllerEffect(3));
         this.addAbility(ability);

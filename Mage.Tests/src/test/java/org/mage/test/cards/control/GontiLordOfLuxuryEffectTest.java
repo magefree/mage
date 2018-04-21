@@ -95,7 +95,7 @@ public class GontiLordOfLuxuryEffectTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Gonti, Lord of Luxury", 1); // Creature 2/3 {2}{B}{B}
 
         // Creatures you control get +1/+1.
-        // Whenever you tap a land for mana, add one mana to your mana pool of any type that land produced.
+        // Whenever you tap a land for mana, add one mana of any type that land produced.
         addCard(Zone.LIBRARY, playerB, "Mirari's Wake"); // Enchantment {3}{G}{W}
         skipInitShuffling();
 

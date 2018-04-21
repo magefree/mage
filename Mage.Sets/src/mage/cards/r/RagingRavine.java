@@ -62,7 +62,7 @@ public class RagingRavine extends CardImpl {
 
         // Raging Ravine enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
-        // Tap: Add Red or Green to your mana pool.
+        // Tap: Add Red or Green.
         this.addAbility(new GreenManaAbility());
         this.addAbility(new RedManaAbility());
         Effect effect = new BecomesCreatureSourceEffect(new RagingRavineToken(), "land", Duration.EndOfTurn);

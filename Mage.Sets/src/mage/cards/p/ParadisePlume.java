@@ -66,7 +66,7 @@ public class ParadisePlume extends CardImpl {
         // Whenever a player casts a spell of the chosen color, you may gain 1 life.
         this.addAbility(new ParadisePlumeSpellCastTriggeredAbility());
 
-        // {tap}: Add one mana of the chosen color to your mana pool.
+        // {tap}: Add one mana of the chosen color.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new ParadisePlumeManaEffect(), new TapSourceCost()));
 
     }
@@ -85,7 +85,7 @@ class ParadisePlumeManaEffect extends ManaEffect {
 
     public ParadisePlumeManaEffect() {
         super();
-        staticText = "Add one mana of the chosen color to your mana pool";
+        staticText = "Add one mana of the chosen color";
     }
 
     public ParadisePlumeManaEffect(final ParadisePlumeManaEffect effect) {

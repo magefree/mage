@@ -49,7 +49,7 @@ public class TransguildPromenade extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
         // When Transguild Promenade enters the battlefield, sacrifice it unless you pay {1}.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new GenericManaCost(1))));
-        // {T}: Add one mana of any color to your mana pool.
+        // {T}: Add one mana of any color.
         this.addAbility(new AnyColorManaAbility());
     }
 

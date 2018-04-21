@@ -64,7 +64,7 @@ public class RevelInRiches extends CardImpl {
     public RevelInRiches(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{B}");
 
-        // Whenever a creature an opponent controls dies, create a colorless Treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color to your mana pool."
+        // Whenever a creature an opponent controls dies, create a colorless Treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color."
         this.addAbility(new DiesCreatureTriggeredAbility(new CreateTokenEffect(new TreasureToken("XLN")), false, filter));
         // At the beginning of your upkeep, if you control ten or more Treasures, you win the game.
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new WinGameSourceControllerEffect(), TargetController.YOU, false);

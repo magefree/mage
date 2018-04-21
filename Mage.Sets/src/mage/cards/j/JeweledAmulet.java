@@ -67,7 +67,7 @@ public class JeweledAmulet extends CardImpl {
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 
-        // {tap}, Remove a charge counter from Jeweled Amulet: Add one mana of Jeweled Amulet's last noted type to your mana pool.
+        // {tap}, Remove a charge counter from Jeweled Amulet: Add one mana of Jeweled Amulet's last noted type.
         Ability ability2 = new SimpleManaAbility(Zone.BATTLEFIELD, new JeweledAmuletAddManaEffect(), new TapSourceCost());
         ability2.addCost(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance()));
         this.addAbility(ability2);
@@ -123,7 +123,7 @@ class JeweledAmuletAddManaEffect extends ManaEffect {
 
     JeweledAmuletAddManaEffect() {
         super();
-        staticText = "Add one mana of {this}'s last noted type to your mana pool";
+        staticText = "Add one mana of {this}'s last noted type";
     }
 
     JeweledAmuletAddManaEffect(JeweledAmuletAddManaEffect effect) {

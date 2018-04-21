@@ -46,10 +46,10 @@ public class ChromaticLantern extends CardImpl {
     public ChromaticLantern(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
-        // Lands you control have "{T}: Add one mana of any color to your mana pool."
+        // Lands you control have "{T}: Add one mana of any color."
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(new AnyColorManaAbility(), Duration.WhileOnBattlefield, StaticFilters.FILTER_LANDS, false)));
 
-        // {T}: Add one mana of any color to your mana pool.
+        // {T}: Add one mana of any color.
         this.addAbility(new AnyColorManaAbility());
 
     }

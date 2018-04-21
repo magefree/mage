@@ -48,7 +48,7 @@ public class ReturnToHandTest extends CardTestPlayerBase {
         // {W}: Honor Guard gets +0/+1 until end of turn.
         addCard(Zone.HAND, playerA, "Honor Guard"); // Creature 1/1
 
-        // {T}: Add one mana of any color to your mana pool. During your next untap step, as you untap your permanents, return Undiscovered Paradise to its owner's hand.
+        // {T}: Add one mana of any color. During your next untap step, as you untap your permanents, return Undiscovered Paradise to its owner's hand.
         addCard(Zone.BATTLEFIELD, playerA, "Undiscovered Paradise", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Honor Guard");

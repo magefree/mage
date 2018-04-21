@@ -72,7 +72,7 @@ public class MazesEnd extends CardImpl {
         // Maze's End enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
 
-        // {T}: Add 1 to your mana pool.
+        // {T}: Add 1.
         this.addAbility(new ColorlessManaAbility());
 
         // 3, {T}, Return Maze's End  to its owner’s hand: Search your library for a Gate card, put it onto the battlefield, then shuffle your library. If you control ten or more Gates with different names, you win the game.

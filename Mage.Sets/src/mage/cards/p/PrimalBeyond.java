@@ -68,7 +68,7 @@ public class PrimalBeyond extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new RevealTargetFromHandCost(new TargetCardInHand(filter))), "you may reveal a Elemental card from your hand. If you don't, {this} enters the battlefield tapped"));
         // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
-        // {tap}: Add one mana of any color to your mana pool. Spend this mana only to cast an Elemental spell or activate an ability of an Elemental.
+        // {tap}: Add one mana of any color. Spend this mana only to cast an Elemental spell or activate an ability of an Elemental.
         Ability ability = new ConditionalAnyColorManaAbility(new TapSourceCost(), 1, new PrimalBeyondManaBuilder(), true);
         this.addAbility(ability);
     }

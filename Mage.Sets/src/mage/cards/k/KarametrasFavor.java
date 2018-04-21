@@ -69,9 +69,9 @@ public class KarametrasFavor extends CardImpl {
         // When Karametra's Favor enters the battlefield, draw a card.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1), false));
 
-        // Enchanted creature has "{T}: Add one mana of any color to your mana pool."
+        // Enchanted creature has "{T}: Add one mana of any color."
         Effect effect = new GainAbilityAttachedEffect(new AnyColorManaAbility(), AttachmentType.AURA, Duration.WhileOnBattlefield);
-        effect.setText("Enchanted creature has \"{T}: Add one mana of any color to your mana pool.\"");
+        effect.setText("Enchanted creature has \"{T}: Add one mana of any color.\"");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
 
     }

@@ -46,7 +46,7 @@ public class CommandersSphere extends CardImpl {
     public CommandersSphere(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
-        // {tap}: Add to your mana pool one mana of any color in your commander's color identity.
+        // {tap}: Add one mana of any color in your commander's color identity.
         this.addAbility(new CommanderColorIdentityManaAbility());
 
         // Sacrifice Commander's Sphere: Draw a card.

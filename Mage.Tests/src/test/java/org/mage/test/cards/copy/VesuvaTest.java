@@ -53,7 +53,7 @@ public class VesuvaTest extends CardTestPlayerBase {
     @Test
     public void testGlimmerpost() {
         // When Glimmerpost enters the battlefield, you gain 1 life for each Locus on the battlefield.
-        // {T}: {1} Add to your mana pool.
+        // {T}: {1} Add.
         addCard(Zone.HAND, playerA, "Glimmerpost", 1);
         // You may have Vesuva enter the battlefield tapped as a copy of any land on the battlefield.
         addCard(Zone.HAND, playerA, "Vesuva", 1);

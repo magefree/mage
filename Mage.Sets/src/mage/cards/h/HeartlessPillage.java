@@ -52,11 +52,11 @@ public class HeartlessPillage extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
         this.getSpellAbility().addEffect(new DiscardTargetEffect(2));
 
-        // Raid — If you attacked with a creature this turn, create a colorless Treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color to your mana pool."
+        // Raid — If you attacked with a creature this turn, create a colorless Treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color."
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new CreateTokenEffect(new TreasureToken()),
                 RaidCondition.instance,
-                "<br/><br/><i>Raid</i> &mdash; If you attacked with a creature this turn, create a colorless Treasure artifact token with \"{T}, Sacrifice this artifact: Add one mana of any color to your mana pool.\""));
+                "<br/><br/><i>Raid</i> &mdash; If you attacked with a creature this turn, create a colorless Treasure artifact token with \"{T}, Sacrifice this artifact: Add one mana of any color.\""));
         this.getSpellAbility().addWatcher(new PlayerAttackedWatcher());
     }
 

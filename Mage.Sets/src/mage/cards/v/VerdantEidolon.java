@@ -62,7 +62,7 @@ public class VerdantEidolon extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // {G}, Sacrifice Verdant Eidolon: Add three mana of any one color to your mana pool.
+        // {G}, Sacrifice Verdant Eidolon: Add three mana of any one color.
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(3), new ManaCostsImpl("{G}"));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

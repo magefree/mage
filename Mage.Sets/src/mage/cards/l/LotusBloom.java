@@ -52,7 +52,7 @@ public class LotusBloom extends CardImpl {
         // Suspend 3-{0}
         this.addAbility(new SuspendAbility(3, new GenericManaCost(0), this));
 
-        // {tap}, Sacrifice Lotus Bloom: Add three mana of any one color to your mana pool.
+        // {tap}, Sacrifice Lotus Bloom: Add three mana of any one color.
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(3), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

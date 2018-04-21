@@ -58,7 +58,7 @@ public class HoldoutSettlement extends CardImpl {
         // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         
-        // {T}, Tap an untapped creature you control: Add one mana of any color to your mana pool.
+        // {T}, Tap an untapped creature you control: Add one mana of any color.
         Ability ability = new AnyColorManaAbility();
         ability.addCost(new TapTargetCost(new TargetControlledPermanent(filter)));
         this.addAbility(ability);

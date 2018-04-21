@@ -76,7 +76,7 @@ public class RishkarPeemaRenegade extends CardImpl {
         ability.addTarget(new TargetCreaturePermanent(0, 2));
         this.addAbility(ability);
 
-        // Each creature you control with a counter on it has "T: Add G to your mana pool."
+        // Each creature you control with a counter on it has "T: Add G."
         this.addAbility(new SimpleStaticAbility(
                 Zone.BATTLEFIELD,
                 new GainAbilityControlledEffect(

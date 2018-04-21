@@ -100,7 +100,7 @@ class ManaforgeCinderManaEffect extends OneShotEffect {
             choices.add("Black");
             choices.add("Red");
             manaChoice.setChoices(choices);
-            manaChoice.setMessage("Select black or red mana to add to your mana pool");
+            manaChoice.setMessage("Select black or red mana to add");
             Mana mana = new Mana();
             if (!controller.choose(Outcome.Benefit, manaChoice, game)) {
                 return false;

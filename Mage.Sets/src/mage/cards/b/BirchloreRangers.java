@@ -63,7 +63,7 @@ public class BirchloreRangers extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // Tap two untapped Elves you control: Add one mana of any color to your mana pool.
+        // Tap two untapped Elves you control: Add one mana of any color.
         this.addAbility(new AnyColorManaAbility(new TapTargetCost(new TargetControlledCreaturePermanent(2, 2, filter, false))));
         // Morph {G}
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{G}")));

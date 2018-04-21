@@ -56,7 +56,7 @@ public class AltarOfTheLost extends CardImpl {
         // Altar of the Lost enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
 
-        // {tap}: Add two mana in any combination of colors to your mana pool. Spend this mana only to cast spells with flashback from a graveyard.
+        // {tap}: Add two mana in any combination of colors. Spend this mana only to cast spells with flashback from a graveyard.
         this.addAbility(new ConditionalAnyColorManaAbility(2, new AltarOfTheLostManaBuilder()));
     }
 

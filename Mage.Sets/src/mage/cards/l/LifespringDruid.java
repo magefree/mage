@@ -48,7 +48,7 @@ public class LifespringDruid extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        // {T}: Add one mana of any color to your mana pool.
+        // {T}: Add one mana of any color.
         this.addAbility(new AnyColorManaAbility());
     }
 

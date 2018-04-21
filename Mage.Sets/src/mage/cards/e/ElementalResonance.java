@@ -67,7 +67,7 @@ public class ElementalResonance extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
-        // At the beginning of your precombat main phase, add mana equal to enchanted permanent's mana cost to your mana pool.
+        // At the beginning of your precombat main phase, add mana equal to enchanted permanent's mana cost.
         this.addAbility(new BeginningOfPreCombatMainTriggeredAbility(new ElementalResonanceEffect(), TargetController.YOU, false));
     }
 
@@ -85,7 +85,7 @@ class ElementalResonanceEffect extends OneShotEffect {
 
     ElementalResonanceEffect() {
         super(Outcome.PutManaInPool);
-        this.staticText = "add mana equal to enchanted permanent's mana cost to your mana pool.";
+        this.staticText = "add mana equal to enchanted permanent's mana cost.";
     }
 
     ElementalResonanceEffect(final ElementalResonanceEffect effect) {

@@ -67,7 +67,7 @@ public class QuirionElves extends CardImpl {
         // {tap}: Add {G}.
         this.addAbility(new GreenManaAbility());
         
-        // {tap}: Add one mana of the chosen color to your mana pool.
+        // {tap}: Add one mana of the chosen color.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new QuirionElvesManaEffect(), new TapSourceCost()));
 
     }
@@ -86,7 +86,7 @@ class QuirionElvesManaEffect extends ManaEffect {
 
     public QuirionElvesManaEffect() {
         super();
-        staticText = "Add one mana of the chosen color to your mana pool";
+        staticText = "Add one mana of the chosen color";
     }
 
     public QuirionElvesManaEffect(final QuirionElvesManaEffect effect) {

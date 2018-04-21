@@ -44,7 +44,7 @@ public class PhyrexianLens extends CardImpl {
     public PhyrexianLens(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
-        // {tap}, Pay 1 life: Add one mana of any color to your mana pool.
+        // {tap}, Pay 1 life: Add one mana of any color.
         Ability ability = new AnyColorManaAbility();
         ability.addCost(new PayLifeCost(1));
         this.addAbility(ability);

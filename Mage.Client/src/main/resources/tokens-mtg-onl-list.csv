@@ -461,7 +461,7 @@ Zombie, 6, B, 2|2, -, Enchantment Creature - Zombie, Winona Nelson, -
 Elemental, 7, R, 3|1, -, Enchantment Creature - Elemental, Greg Staples, -
 Centaur, 8, G, 3|3, -, Enchantment Creature - Centaur, Ryan Barger, -
 Wolf, 9, G, 2|2, -, Creature - Wolf, Raoul Vitale, -
-Gold, 10, -, -, -, Artifact, Richard Wright, Sacrifice this artifact: Add one mana of any color to your mana pool.
+Gold, 10, -, -, -, Artifact, Richard Wright, Sacrifice this artifact: Add one mana of any color.
 Kiora Emblem, 11, -, -, -, Emblem - Kiora, Scott M. Fischer, At the beginning of your end step� put a 9/9 blue Kraken creature token onto the battlefield.
 
 DDM - Duel Decks: Jace vs. Vraska (2014-03-14)
@@ -709,7 +709,7 @@ Elemental, 020, U R, 5|5, -, Creature - Elemental, Randy Gallegos, Flying
 Snake, 021, G U, 1|1, -, Creature - Snake, Christopher Moeller, -
 Spirit, 022, W B, 1|1, -, Creature - Spirit, Cliff Childs, Flying
 Spirit, 023, W B, *|*, -, Enchantment Creature - Spirit, Adam Paquette, This creature's power and toughness are each equal to the number of experience counters you have.
-Gold, 024, -, -, -, Artifact, Richard Wright, Sacrifice this artifact: Add one mana of any color to your mana pool.
+Gold, 024, -, -, -, Artifact, Richard Wright, Sacrifice this artifact: Add one mana of any color.
 
 OGW - Oath of the Gatewatch (2016-01-22)
 
