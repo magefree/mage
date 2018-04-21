@@ -49,6 +49,7 @@ public class HuntmasterOfTheFellsTest extends CardTestPlayerBase {
      * Tests first trigger happens both on enter battlefield and transform
      * events
      */
+    @Ignore
     @Test
     public void testCard2() {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
