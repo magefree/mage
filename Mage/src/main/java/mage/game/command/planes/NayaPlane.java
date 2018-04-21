@@ -76,7 +76,7 @@ public class NayaPlane extends Plane {
         Ability ability = new SimpleStaticAbility(Zone.COMMAND, new PlayAdditionalLandsAllEffect(Integer.MAX_VALUE));
         this.getAbilities().add(ability);
 
-        // Active player can roll the planar die: Whenever you roll {CHAOS}, target red, green or white creature gets +1/+1 until end of turn for each land you control        
+        // Active player can roll the planar die: Whenever you roll {CHAOS}, target red, green or white creature you control gets +1/+1 until end of turn for each land you control        
         Effect chaosEffect = new BoostTargetEffect(new PermanentsOnBattlefieldCount(filter2), new PermanentsOnBattlefieldCount(filter2), Duration.EndOfTurn);
         Target chaosTarget = new TargetControlledCreaturePermanent(1, 1, filter, false);
 
