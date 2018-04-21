@@ -108,16 +108,16 @@ public class DeckGeneratorDialog {
         mainPanel.add(formatSetText, c);
 
         // Format/set dropdown with search button
-        JPanel setPanel = new JPanel();        
+        JPanel setPanel = new JPanel();
         setPanel.setLayout(new javax.swing.BoxLayout(setPanel, javax.swing.BoxLayout.LINE_AXIS));
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 1;
         c.gridy = 1;
         c.ipadx = 30;
         c.insets = new Insets(5, 10, 0, 10);
-        c.weightx = 0.80;        
+        c.weightx = 0.80;
         mainPanel.add(setPanel, c);
-        
+
         cbSets = new JComboBox<>(ConstructedFormats.getTypes());
         cbSets.setSelectedIndex(0);
         cbSets.setAlignmentX(0.0F);
@@ -127,13 +127,14 @@ public class DeckGeneratorDialog {
         if (prefSet != null) {
             cbSets.setSelectedItem(prefSet);
         }
-        
+
         JButton btn = new JButton();
         btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/search_32.png")));
         btn.setToolTipText(FastSearchUtil.DEFAULT_EXPANSION_TOOLTIP_MESSAGE);
-        btn.setAlignmentX(1.0F);                
-        btn.setPreferredSize(new java.awt.Dimension(32, 32));        
+        btn.setAlignmentX(1.0F);
+        btn.setPreferredSize(new java.awt.Dimension(32, 32));
         btn.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 FastSearchUtil.showFastSearchForStringComboBox(cbSets, FastSearchUtil.DEFAULT_EXPANSION_SEARCH_MESSAGE);
             }

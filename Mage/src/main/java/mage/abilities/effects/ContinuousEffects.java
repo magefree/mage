@@ -500,25 +500,44 @@ public class ContinuousEffects implements Serializable {
         return spliceEffects;
     }
 
-    public boolean asThough(UUID objectId, AsThoughEffectType type, UUID controllerId, Game game) {
+    /**
+     *
+     * @param objectId
+     * @param type
+     * @param controllerId
+     * @param game
+     * @return sourceId of the permitting effect if any exists otherwise returns
+     * null
+     */
+    public UUID asThough(UUID objectId, AsThoughEffectType type, UUID controllerId, Game game) {
         return asThough(objectId, type, null, controllerId, game);
     }
 
-    public boolean asThough(UUID objectId, AsThoughEffectType type, Ability affectedAbility, UUID controllerId, Game game) {
+    /**
+     *
+     * @param objectId
+     * @param type
+     * @param affectedAbility
+     * @param controllerId
+     * @param game
+     * @return sourceId of the permitting effect if any exists otherwise returns
+     * null
+     */
+    public UUID asThough(UUID objectId, AsThoughEffectType type, Ability affectedAbility, UUID controllerId, Game game) {
         List<AsThoughEffect> asThoughEffectsList = getApplicableAsThoughEffects(type, game);
         for (AsThoughEffect effect : asThoughEffectsList) {
             Set<Ability> abilities = asThoughEffectsMap.get(type).getAbility(effect.getId());
             for (Ability ability : abilities) {
                 if (affectedAbility == null) {
                     if (effect.applies(objectId, ability, controllerId, game)) {
-                        return true;
+                        return ability.getSourceId();
                     }
                 } else if (effect.applies(objectId, affectedAbility, ability, game)) {
-                    return true;
+                    return ability.getSourceId();
                 }
             }
         }
-        return false;
+        return null;
 
     }
 
@@ -754,7 +773,7 @@ public class ContinuousEffects implements Serializable {
             // Remove all consumed effects (ability dependant)
             for (Iterator<ReplacementEffect> it1 = rEffects.keySet().iterator(); it1.hasNext();) {
                 ReplacementEffect entry = it1.next();
-                if (consumed.containsKey(entry.getId()) /*&& !(entry instanceof CommanderReplacementEffect) */) { // 903.9. 
+                if (consumed.containsKey(entry.getId()) /*&& !(entry instanceof CommanderReplacementEffect) */) { // 903.9.
                     Set<UUID> consumedAbilitiesIds = consumed.get(entry.getId());
                     if (rEffects.get(entry) == null || consumedAbilitiesIds.size() == rEffects.get(entry).size()) {
                         it1.remove();

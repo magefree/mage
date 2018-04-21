@@ -109,7 +109,9 @@ class MuldrothaTheGravetideCastFromGraveyardEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (source.getControllerId().equals(affectedControllerId) && Zone.GRAVEYARD.equals(game.getState().getZone(objectId))) {
+        if (source.getControllerId().equals(affectedControllerId)
+                && affectedControllerId.equals(game.getActivePlayerId()) // only during your turns (e.g. prevent flash creatures)
+                && Zone.GRAVEYARD.equals(game.getState().getZone(objectId))) {
             MuldrothaTheGravetideWatcher watcher = (MuldrothaTheGravetideWatcher) game.getState().getWatchers().get(MuldrothaTheGravetideWatcher.class.getSimpleName());
             MageObject mageObject = game.getObject(objectId);
             if (mageObject != null && watcher != null) {
@@ -126,9 +128,17 @@ class MuldrothaTheGravetideCastFromGraveyardEffect extends AsThoughEffectImpl {
     }
 }
 
+/**
+ * Holds track of the consumed types of each permission giving source
+ *
+ * @author LevelX2
+ */
 class MuldrothaTheGravetideWatcher extends Watcher {
 
+    // final HashMap<MageObjectReference, Set<CardType>> playerPlayedPermanentTypes = new HashMap<>(); // source that played permanent types from graveyard
     final HashMap<UUID, Set<CardType>> playerPlayedPermanentTypes = new HashMap<>(); // player that played permanent types from graveyard
+    // 4/27/2018 If multiple effects allow you to play a card from your graveyard, such as those of Gisa and Geralf and Karador,
+    // Ghost Chieftain, you must announce which permission you’re using as you begin to play the card.
     private Zone fromZone;
 
     public MuldrothaTheGravetideWatcher() {
@@ -151,18 +161,18 @@ class MuldrothaTheGravetideWatcher extends Watcher {
             fromZone = game.getState().getZone(event.getTargetId()); // Remember the Zone the land came from
         }
         if (event.getType() == GameEvent.EventType.LAND_PLAYED && fromZone.equals(Zone.GRAVEYARD)) {
-            addPermanentTypes(game.getPermanentOrLKIBattlefield(event.getTargetId()), game);
+            addPermanentTypes(event, game.getPermanentOrLKIBattlefield(event.getTargetId()), game);
         }
 
         if (event.getType() == GameEvent.EventType.SPELL_CAST) {
             Spell spell = (Spell) game.getObject(event.getTargetId());
             if (spell.getFromZone().equals(Zone.GRAVEYARD)) {
-                addPermanentTypes(spell, game);
+                addPermanentTypes(event, spell, game);
             }
         }
     }
 
-    private void addPermanentTypes(Card mageObject, Game game) {
+    private void addPermanentTypes(GameEvent event, Card mageObject, Game game) {
         if (mageObject != null) {
             UUID playerId = null;
             if (mageObject instanceof Spell) {

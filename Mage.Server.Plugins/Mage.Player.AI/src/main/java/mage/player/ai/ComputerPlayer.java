@@ -1243,7 +1243,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
     protected boolean playManaHandling(Ability ability, ManaCost unpaid, Game game) {
 //        log.info("paying for " + unpaid.getText());
-        boolean spendAnyMana = game.getContinuousEffects().asThough(ability.getSourceId(), AsThoughEffectType.SPEND_OTHER_MANA, ability, ability.getControllerId(), game);
+        UUID spendAnyManaId = game.getContinuousEffects().asThough(ability.getSourceId(), AsThoughEffectType.SPEND_OTHER_MANA, ability, ability.getControllerId(), game);
         ManaCost cost;
         List<MageObject> producers;
         if (unpaid instanceof ManaCosts) {
@@ -1285,7 +1285,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             for (ActivatedManaAbilityImpl manaAbility : mageObject.getAbilities().getAvailableActivatedManaAbilities(Zone.BATTLEFIELD, game)) {
                 if (cost instanceof ColoredManaCost) {
                     for (Mana netMana : manaAbility.getNetMana(game)) {
-                        if (cost.testPay(netMana) || spendAnyMana) {
+                        if (cost.testPay(netMana) || spendAnyManaId != null) {
                             if (activateAbility(manaAbility, game)) {
                                 return true;
                             }
@@ -1297,7 +1297,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             for (ActivatedManaAbilityImpl manaAbility : mageObject.getAbilities().getAvailableActivatedManaAbilities(Zone.BATTLEFIELD, game)) {
                 if (cost instanceof SnowManaCost) {
                     for (Mana netMana : manaAbility.getNetMana(game)) {
-                        if (cost.testPay(netMana) || spendAnyMana) {
+                        if (cost.testPay(netMana) || spendAnyManaId != null) {
                             if (activateAbility(manaAbility, game)) {
                                 return true;
                             }
@@ -1309,7 +1309,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             for (ActivatedManaAbilityImpl manaAbility : mageObject.getAbilities().getAvailableActivatedManaAbilities(Zone.BATTLEFIELD, game)) {
                 if (cost instanceof HybridManaCost) {
                     for (Mana netMana : manaAbility.getNetMana(game)) {
-                        if (cost.testPay(netMana) || spendAnyMana) {
+                        if (cost.testPay(netMana) || spendAnyManaId != null) {
                             if (activateAbility(manaAbility, game)) {
                                 return true;
                             }
@@ -1321,7 +1321,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             for (ActivatedManaAbilityImpl manaAbility : mageObject.getAbilities().getAvailableActivatedManaAbilities(Zone.BATTLEFIELD, game)) {
                 if (cost instanceof MonoHybridManaCost) {
                     for (Mana netMana : manaAbility.getNetMana(game)) {
-                        if (cost.testPay(netMana) || spendAnyMana) {
+                        if (cost.testPay(netMana) || spendAnyManaId != null) {
                             if (activateAbility(manaAbility, game)) {
                                 return true;
                             }
@@ -1333,7 +1333,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             for (ActivatedManaAbilityImpl manaAbility : mageObject.getAbilities().getAvailableActivatedManaAbilities(Zone.BATTLEFIELD, game)) {
                 if (cost instanceof ColorlessManaCost) {
                     for (Mana netMana : manaAbility.getNetMana(game)) {
-                        if (cost.testPay(netMana) || spendAnyMana) {
+                        if (cost.testPay(netMana) || spendAnyManaId != null) {
                             if (activateAbility(manaAbility, game)) {
                                 return true;
                             }
@@ -1345,7 +1345,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             for (ActivatedManaAbilityImpl manaAbility : mageObject.getAbilities().getAvailableActivatedManaAbilities(Zone.BATTLEFIELD, game)) {
                 if (cost instanceof GenericManaCost) {
                     for (Mana netMana : manaAbility.getNetMana(game)) {
-                        if (cost.testPay(netMana) || spendAnyMana) {
+                        if (cost.testPay(netMana) || spendAnyManaId != null) {
                             if (activateAbility(manaAbility, game)) {
                                 return true;
                             }
@@ -1356,7 +1356,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         }
         // pay phyrexian life costs
         if (cost instanceof PhyrexianManaCost) {
-            if (cost.pay(null, game, null, playerId, false, null) || spendAnyMana) {
+            if (cost.pay(null, game, null, playerId, false, null) || spendAnyManaId != null) {
                 return true;
             }
         }
