@@ -38,7 +38,7 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -115,7 +115,7 @@ class FireballEffect extends OneShotEffect {
 
 }
 
-class FireballTargetCreatureOrPlayer extends TargetCreatureOrPlayer {
+class FireballTargetCreatureOrPlayer extends TargetAnyTarget {
 
     public FireballTargetCreatureOrPlayer(int minNumTargets, int maxNumTargets) {
         super(minNumTargets, maxNumTargets);
@@ -133,9 +133,9 @@ class FireballTargetCreatureOrPlayer extends TargetCreatureOrPlayer {
      * @return
      */
     @Override
-    public List<TargetCreatureOrPlayer> getTargetOptions(Ability source, Game game) {
+    public List<TargetAnyTarget> getTargetOptions(Ability source, Game game) {
 
-        List<TargetCreatureOrPlayer> options = new ArrayList<>();
+        List<TargetAnyTarget> options = new ArrayList<>();
         int xVal = source.getManaCostsToPay().getX();
 
         if (xVal < 1) {
@@ -155,7 +155,7 @@ class FireballTargetCreatureOrPlayer extends TargetCreatureOrPlayer {
 
             possibleTargets.removeAll(getTargets());
             for (UUID targetId : possibleTargets) {
-                TargetCreatureOrPlayer target = this.copy();
+                TargetAnyTarget target = this.copy();
                 target.clearChosen();
                 target.addTarget(targetId, source, game, true);
 

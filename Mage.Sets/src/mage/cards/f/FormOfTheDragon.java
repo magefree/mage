@@ -45,7 +45,7 @@ import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -62,9 +62,9 @@ public class FormOfTheDragon extends CardImpl {
     public FormOfTheDragon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{R}{R}{R}");
 
-        // At the beginning of your upkeep, Form of the Dragon deals 5 damage to target creature or player.
+        // At the beginning of your upkeep, Form of the Dragon deals 5 damage to any target.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new DamageTargetEffect(5), TargetController.YOU, false);
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
 
         // At the beginning of each end step, your life total becomes 5.

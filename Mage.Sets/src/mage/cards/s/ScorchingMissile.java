@@ -35,7 +35,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TimingRule;
-import mage.target.TargetPlayer;
+import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
  *
@@ -48,7 +48,7 @@ public class ScorchingMissile extends CardImpl {
 
         // Scorching Missile deals 4 damage to target player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
 
         // Flashback {9}{R}
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{9}{R}"), TimingRule.SORCERY));

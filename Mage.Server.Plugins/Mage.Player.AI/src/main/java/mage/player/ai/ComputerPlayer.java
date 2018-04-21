@@ -253,9 +253,9 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             }
             return target.isChosen();
         }
-        if (target.getOriginalTarget() instanceof TargetCreatureOrPlayer) {
+        if (target.getOriginalTarget() instanceof TargetAnyTarget) {
             List<Permanent> targets;
-            TargetCreatureOrPlayer t = ((TargetCreatureOrPlayer) target);
+            TargetAnyTarget t = ((TargetAnyTarget) target);
             if (outcome.isGood()) {
                 targets = threats(abilityControllerId, sourceId, ((FilterCreatureOrPlayer) t.getFilter()).getCreatureFilter(), game, target.getTargets());
             } else {
@@ -496,9 +496,9 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             }
             return target.isChosen();
         }
-        if (target.getOriginalTarget() instanceof TargetCreatureOrPlayer) {
+        if (target.getOriginalTarget() instanceof TargetAnyTarget) {
             List<Permanent> targets;
-            TargetCreatureOrPlayer t = ((TargetCreatureOrPlayer) target);
+            TargetAnyTarget t = ((TargetAnyTarget) target);
             if (outcome.isGood()) {
                 targets = threats(abilityControllerId, source.getSourceId(), ((FilterCreatureOrPlayer) t.getFilter()).getCreatureFilter(), game, target.getTargets());
             } else {
@@ -821,7 +821,8 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             log.debug("chooseTarget: " + outcome.toString() + ':' + target.toString());
         }
         UUID opponentId = game.getOpponents(playerId).iterator().next();
-        if (target.getOriginalTarget() instanceof TargetCreatureOrPlayerAmount) {
+        if (target.getOriginalTarget() instanceof TargetCreatureOrPlayerAmount
+                || target.getOriginalTarget() instanceof TargetAnyTargetAmount) {
             if (outcome == Outcome.Damage && game.getPlayer(opponentId).getLife() <= target.getAmountRemaining()) {
                 target.addTarget(opponentId, target.getAmountRemaining(), source, game);
                 return true;

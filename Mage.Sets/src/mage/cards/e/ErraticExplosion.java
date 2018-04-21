@@ -40,7 +40,7 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -49,10 +49,10 @@ import mage.target.common.TargetCreatureOrPlayer;
 public class ErraticExplosion extends CardImpl {
 
     public ErraticExplosion(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{R}");
 
-        // Choose target creature or player. Reveal cards from the top of your library until you reveal a nonland card. Erratic Explosion deals damage equal to that card's converted mana cost to that creature or player. Put the revealed cards on the bottom of your library in any order.
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        // Choose any target. Reveal cards from the top of your library until you reveal a nonland card. Erratic Explosion deals damage equal to that card's converted mana cost to that creature or player. Put the revealed cards on the bottom of your library in any order.
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
         this.getSpellAbility().addEffect(new ErraticExplosionEffect());
     }
 
@@ -70,7 +70,7 @@ class ErraticExplosionEffect extends OneShotEffect {
 
     public ErraticExplosionEffect() {
         super(Outcome.Damage);
-        this.staticText = "Choose target creature or player. Reveal cards from the top of your library until you reveal a nonland card. {this} deals damage equal to that card's converted mana cost to that creature or player. Put the revealed cards on the bottom of your library in any order";
+        this.staticText = "Choose any target. Reveal cards from the top of your library until you reveal a nonland card. {this} deals damage equal to that card's converted mana cost to that permanent or player. Put the revealed cards on the bottom of your library in any order";
     }
 
     public ErraticExplosionEffect(ErraticExplosionEffect effect) {

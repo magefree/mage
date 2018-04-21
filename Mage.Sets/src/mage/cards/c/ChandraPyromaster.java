@@ -51,7 +51,7 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetCard;
 import mage.target.TargetPermanent;
-import mage.target.TargetPlayer;
+import mage.target.common.TargetPlayerOrPlaneswalker;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -68,7 +68,7 @@ public class ChandraPyromaster extends CardImpl {
 
         // +1: Chandra, Pyromaster deals 1 damage to target player and 1 damage to up to one target creature that player controls. That creature can't block this turn.
         LoyaltyAbility ability1 = new LoyaltyAbility(new ChandraPyromasterEffect1(), 1);
-        Target target1 = new TargetPlayer();
+        Target target1 = new TargetPlayerOrPlaneswalker();
         ability1.addTarget(target1);
         ability1.addTarget(new ChandraPyromasterTarget());
         this.addAbility(ability1);
@@ -97,7 +97,7 @@ class ChandraPyromasterEffect1 extends OneShotEffect {
 
     public ChandraPyromasterEffect1() {
         super(Outcome.Damage);
-        staticText = "{this} deals 1 damage to target player and 1 damage to up to one target creature that player controls. That creature can't block this turn";
+        staticText = "{this} deals 1 damage to target player or planeswalker and 1 damage to up to one target creature that player or that planeswalker’s controller controls. That creature can’t block this turn.";
     }
 
     public ChandraPyromasterEffect1(final ChandraPyromasterEffect1 effect) {
@@ -111,10 +111,7 @@ class ChandraPyromasterEffect1 extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getTargets().get(0).getFirstTarget());
-        if (player != null) {
-            player.damage(1, source.getSourceId(), game, false, true);
-        }
+        game.damagePlayerOrPlaneswalker(source.getTargets().get(0).getFirstTarget(), 1, source.getSourceId(), game, false, true);
         Permanent creature = game.getPermanent(source.getTargets().get(1).getFirstTarget());
         if (creature != null) {
             creature.damage(1, source.getSourceId(), game, false, true);
@@ -129,7 +126,7 @@ class ChandraPyromasterEffect1 extends OneShotEffect {
 class ChandraPyromasterTarget extends TargetPermanent {
 
     public ChandraPyromasterTarget() {
-        super(0, 1, new FilterCreaturePermanent("creature that the targeted player controls"), false);
+        super(0, 1, new FilterCreaturePermanent("creature that the targeted player or planeswalker's controller controls"), false);
     }
 
     public ChandraPyromasterTarget(final ChandraPyromasterTarget target) {
@@ -138,7 +135,11 @@ class ChandraPyromasterTarget extends TargetPermanent {
 
     @Override
     public boolean canTarget(UUID id, Ability source, Game game) {
-        UUID firstTarget = source.getFirstTarget();
+        Player player = game.getPlayerOrPlaneswalkerController(source.getFirstTarget());
+        if (player == null) {
+            return false;
+        }
+        UUID firstTarget = player.getId();
         Permanent permanent = game.getPermanent(id);
         if (firstTarget != null && permanent != null && permanent.getControllerId().equals(firstTarget)) {
             return super.canTarget(id, source, game);
@@ -163,10 +164,13 @@ class ChandraPyromasterTarget extends TargetPermanent {
 
         if (object instanceof StackObject) {
             UUID playerId = ((StackObject) object).getStackAbility().getFirstTarget();
-            for (UUID targetId : availablePossibleTargets) {
-                Permanent permanent = game.getPermanent(targetId);
-                if (permanent != null && permanent.getControllerId().equals(playerId)) {
-                    possibleTargets.add(targetId);
+            Player player = game.getPlayerOrPlaneswalkerController(playerId);
+            if (player != null) {
+                for (UUID targetId : availablePossibleTargets) {
+                    Permanent permanent = game.getPermanent(targetId);
+                    if (permanent != null && permanent.getControllerId().equals(player.getId())) {
+                        possibleTargets.add(targetId);
+                    }
                 }
             }
         }

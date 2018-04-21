@@ -36,7 +36,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TimingRule;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -48,9 +48,9 @@ public class MorbidHunger extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B}{B}");
 
 
-        // Morbid Hunger deals 3 damage to target creature or player. You gain 3 life.
+        // Morbid Hunger deals 3 damage to any target. You gain 3 life.
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
         this.getSpellAbility().addEffect(new GainLifeEffect(3));
         // Flashback {7}{B}{B}
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{7}{B}{B}"), TimingRule.SORCERY));

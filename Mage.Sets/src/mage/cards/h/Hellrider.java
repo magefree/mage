@@ -50,7 +50,7 @@ import mage.target.targetpointer.FixedTarget;
 public class Hellrider extends CardImpl {
 
     public Hellrider(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
         this.subtype.add(SubType.DEVIL);
 
         this.power = new MageInt(3);
@@ -95,7 +95,7 @@ class HellriderTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent source = game.getPermanent(event.getSourceId());
         if (source != null && source.getControllerId().equals(controllerId)) {
-            UUID defendingPlayerId = game.getCombat().getDefendingPlayerId(event.getSourceId(), game);
+            UUID defendingPlayerId = game.getCombat().getDefenderId(event.getSourceId());
             this.getEffects().get(0).setTargetPointer(new FixedTarget(defendingPlayerId));
             return true;
         }
@@ -104,6 +104,6 @@ class HellriderTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a creature you control attacks, {this} deals 1 damage to defending player.";
+        return "Whenever a creature you control attacks, {this} deals 1 damage to the player or planeswalker it’s attacking.";
     }
 }

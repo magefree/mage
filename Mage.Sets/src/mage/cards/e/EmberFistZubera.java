@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 import mage.watchers.common.ZuberasDiedWatcher;
 
 /**
@@ -55,7 +55,7 @@ public class EmberFistZubera extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
         Ability ability = new DiesTriggeredAbility(new DamageTargetEffect(new ZuberasDiedDynamicValue()));
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability, new ZuberasDiedWatcher());
     }
 

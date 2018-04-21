@@ -38,7 +38,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.common.TargetOpponent;
+import mage.target.common.TargetOpponentOrPlaneswalker;
 
 /**
  *
@@ -56,9 +56,9 @@ public class BurningSunsAvatar extends CardImpl {
 
         // When Burning Sun's Avatar enters the battlefield, it deals 3 damage to target opponent and 3 damage to up to one target creature.
         Effect effect = new DamageTargetEffect(3);
-        effect.setText("it deals 3 damage to target opponent and 3 damage to up to one target creature");
+        effect.setText("it deals 3 damage to target opponent or planeswalker and 3 damage to up to one target creature");
         Ability ability = new EntersBattlefieldTriggeredAbility(effect, false);
-        ability.addTarget(new TargetOpponent());
+        ability.addTarget(new TargetOpponentOrPlaneswalker());
         ability.addTarget(new TargetCreaturePermanent(0, 1));
         this.addAbility(ability);
     }

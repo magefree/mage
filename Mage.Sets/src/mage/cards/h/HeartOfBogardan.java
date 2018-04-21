@@ -45,7 +45,7 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.TargetPlayer;
+import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
  *
@@ -77,7 +77,7 @@ class HeartOfBogardanTriggeredAbility extends TriggeredAbilityImpl {
 
     HeartOfBogardanTriggeredAbility() {
         super(Zone.BATTLEFIELD, new HeartOfBogardanEffect(), false);
-        this.addTarget(new TargetPlayer());
+        this.addTarget(new TargetPlayerOrPlaneswalker());
     }
 
     HeartOfBogardanTriggeredAbility(final HeartOfBogardanTriggeredAbility ability) {
@@ -101,7 +101,10 @@ class HeartOfBogardanTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "When a player doesn't pay {this}'s cumulative upkeep, {this} deals X damage to target player and each creature he or she controls, where X is twice the number of age counters on {this} minus 2.";
+        return "When a player doesn't pay {this}'s cumulative upkeep, "
+                + "{this} deals X damage to target player or planeswalker "
+                + "and each creature that player or that planeswalker’s controller controls,"
+                + " where X is twice the number of age counters on {this} minus 2.";
     }
 }
 
@@ -109,7 +112,9 @@ class HeartOfBogardanEffect extends OneShotEffect {
 
     public HeartOfBogardanEffect() {
         super(Outcome.Damage);
-        staticText = "{this} deals X damage to target player and each creature he or she controls, where X is twice the number of age counters on {this} minus 2";
+        staticText = "{this} deals X damage to target player or planeswalker "
+                + "and each creature that player or that planeswalker’s controller controls, "
+                + "where X is twice the number of age counters on {this} minus 2";
     }
 
     public HeartOfBogardanEffect(final HeartOfBogardanEffect effect) {
@@ -118,13 +123,13 @@ class HeartOfBogardanEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getFirstTarget());
+        Player player = game.getPlayerOrPlaneswalkerController(source.getFirstTarget());
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (player != null && sourcePermanent != null) {
-           int damage = sourcePermanent.getCounters(game).getCount(CounterType.AGE) * 2 - 2;
-            if (damage > 0)  {
+            int damage = sourcePermanent.getCounters(game).getCount(CounterType.AGE) * 2 - 2;
+            if (damage > 0) {
                 player.damage(damage, source.getSourceId(), game, false, true);
-                for (Permanent perm: game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), player.getId(), game)) {
+                for (Permanent perm : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), player.getId(), game)) {
                     perm.damage(damage, source.getSourceId(), game, false, true);
                 }
             }

@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetOpponent;
 
 /**
@@ -54,10 +54,10 @@ public class DemonicPact extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}{B}");
 
         // At the beginning of your upkeep, choose one that hasn't been chosen
-        // - Demonic Pact deals 4 damage to target creature or player and you gain 4 life;
+        // - Demonic Pact deals 4 damage to any target and you gain 4 life;
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new DamageTargetEffect(4), TargetController.YOU, false);
         ability.getModes().setEachModeOnlyOnce(true);
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         Effect effect = new GainLifeEffect(4);
         effect.setText("and you gain 4 life");
         ability.addEffect(effect);

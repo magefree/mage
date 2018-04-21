@@ -33,7 +33,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -46,9 +46,9 @@ public class SonicSeizure extends CardImpl {
 
         // As an additional cost to cast Sonic Seizure, discard a card at random.
         this.getSpellAbility().addCost(new DiscardCardCost(true));
-        // Sonic Seizure deals 3 damage to target creature or player.
+        // Sonic Seizure deals 3 damage to any target.
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
     public SonicSeizure(final SonicSeizure card) {

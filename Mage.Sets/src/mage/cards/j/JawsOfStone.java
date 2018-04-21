@@ -37,7 +37,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.target.common.TargetCreatureOrPlayerAmount;
+import mage.target.common.TargetAnyTargetAmount;
 
 /**
  *
@@ -61,7 +61,7 @@ public class JawsOfStone extends CardImpl {
         Effect effect = new DamageMultiEffect(mountains);
         effect.setText(rule);
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayerAmount(mountains));
+        this.getSpellAbility().addTarget(new TargetAnyTargetAmount(mountains));
         
     }
 

@@ -46,7 +46,7 @@ import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -71,10 +71,10 @@ public class OrdealOfPurphoros extends CardImpl {
         ability.addEffect(new ConditionalOneShotEffect(new SacrificeSourceEffect(), new AttachedToCounterCondition(CounterType.P1P1, 3),
                 "Then if it has three or more +1/+1 counters on it, sacrifice {this}"));
         this.addAbility(ability);
-        // When you sacrifice Ordeal of Purphoros, it deals 3 damage to target creature or player.
+        // When you sacrifice Ordeal of Purphoros, it deals 3 damage to any target.
         ability = new SacrificeSourceTriggeredAbility(
                 new DamageTargetEffect(3, "it"),false);
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }
 

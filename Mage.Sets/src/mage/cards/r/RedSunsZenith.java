@@ -36,7 +36,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 import mage.watchers.common.DamagedByWatcher;
 
 /**
@@ -48,10 +48,10 @@ public class RedSunsZenith extends CardImpl {
     public RedSunsZenith(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{R}");
 
-        // Red Sun's Zenith deals X damage to target creature or player.
+        // Red Sun's Zenith deals X damage to any target.
         // If a creature dealt damage this way would die this turn, exile it instead.
         // Shuffle Red Sun's Zenith into its owner's library.
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
         this.getSpellAbility().addEffect(new DamageTargetEffect(new ManacostVariableValue()));
         this.getSpellAbility().addEffect(new DealtDamageToCreatureBySourceDies(this, Duration.EndOfTurn));
         this.getSpellAbility().addEffect(ShuffleSpellEffect.getInstance());

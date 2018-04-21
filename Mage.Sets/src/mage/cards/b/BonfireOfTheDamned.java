@@ -50,8 +50,7 @@ import mage.target.TargetPlayer;
 public class BonfireOfTheDamned extends CardImpl {
 
     public BonfireOfTheDamned(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{X}{R}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{X}{R}");
 
         // Bonfire of the Damned deals X damage to target player and each creature he or she controls.
         this.getSpellAbility().addEffect(new BonfireOfTheDamnedEffect());
@@ -77,7 +76,7 @@ class BonfireOfTheDamnedEffect extends OneShotEffect {
 
     public BonfireOfTheDamnedEffect() {
         super(Outcome.Damage);
-        staticText = "{this} deals X damage to target player and each creature he or she controls";
+        staticText = "{this} deals X damage to target player or planeswalker and each creature that player or that planeswalker’s controller controls";
     }
 
     public BonfireOfTheDamnedEffect(final BonfireOfTheDamnedEffect effect) {
@@ -86,12 +85,12 @@ class BonfireOfTheDamnedEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getFirstTarget());
+        Player player = game.getPlayerOrPlaneswalkerController(source.getFirstTarget());
         if (player != null) {
-           int damage = source.getManaCostsToPay().getX();
-            if (damage > 0)  {
+            int damage = source.getManaCostsToPay().getX();
+            if (damage > 0) {
                 player.damage(damage, source.getSourceId(), game, false, true);
-                for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, player.getId(), game)) {
+                for (Permanent perm : game.getBattlefield().getAllActivePermanents(filter, player.getId(), game)) {
                     perm.damage(damage, source.getSourceId(), game, false, true);
                 }
             }

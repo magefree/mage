@@ -52,7 +52,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -77,11 +77,11 @@ public class LyzoldaTheBloodWitch extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
 
-        // {2}, Sacrifice a creature: Lyzolda, the Blood Witch deals 2 damage to target creature or player if the sacrificed creature was red. Draw a card if the sacrificed creature was black.
+        // {2}, Sacrifice a creature: Lyzolda, the Blood Witch deals 2 damage to any target if the sacrificed creature was red. Draw a card if the sacrificed creature was black.
         Effect effect = new ConditionalOneShotEffect(
                 new DamageTargetEffect(2),
                 new SacrificedWasCondition(redFilter),
-                "{source} deals 2 damage to target creature or player if the sacrificed creature was red");
+                "{source} deals 2 damage to any target if the sacrificed creature was red");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{2}"));
         effect = new ConditionalOneShotEffect(
                 new DrawCardSourceControllerEffect(1),
@@ -89,7 +89,7 @@ public class LyzoldaTheBloodWitch extends CardImpl {
                 "Draw a card if the sacrificed creature was black");
         ability.addEffect(effect);
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }
 

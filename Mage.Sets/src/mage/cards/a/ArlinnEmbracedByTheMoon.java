@@ -45,7 +45,7 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.StaticFilters;
 import mage.game.command.emblems.ArlinnEmbracedByTheMoonEmblem;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -72,14 +72,14 @@ public class ArlinnEmbracedByTheMoon extends CardImpl {
         ability.addEffect(effect);
         this.addAbility(ability);
 
-        // -1: Arlinn, Embraced by the Moon deals 3 damage to target creature or player. Transform Arlinn, Embraced by the Moon.
+        // -1: Arlinn, Embraced by the Moon deals 3 damage to any target. Transform Arlinn, Embraced by the Moon.
         this.addAbility(new TransformAbility());
         ability = new LoyaltyAbility(new DamageTargetEffect(3), -1);
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         ability.addEffect(new TransformSourceEffect(false));
         this.addAbility(ability);
 
-        // -6: You get an emblem with "Creatures you control have haste and '{T}: This creature deals damage equal to its power to target creature or player.'"
+        // -6: You get an emblem with "Creatures you control have haste and '{T}: This creature deals damage equal to its power to any target.'"
         this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new ArlinnEmbracedByTheMoonEmblem()), -6));
     }
 

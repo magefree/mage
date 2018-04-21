@@ -38,8 +38,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
  *
@@ -54,7 +54,7 @@ public class ConsumingSinkhole extends CardImpl {
     }
 
     public ConsumingSinkhole(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{R}");
 
         // Devoid
         this.addAbility(new DevoidAbility(this.color));
@@ -68,7 +68,7 @@ public class ConsumingSinkhole extends CardImpl {
         // Consuming Sinkhole deals 4 damage to target player.
         Mode mode = new Mode();
         mode.getEffects().add(new DamageTargetEffect(4));
-        mode.getTargets().add(new TargetPlayer());
+        mode.getTargets().add(new TargetPlayerOrPlaneswalker());
         this.getSpellAbility().addMode(mode);
     }
 

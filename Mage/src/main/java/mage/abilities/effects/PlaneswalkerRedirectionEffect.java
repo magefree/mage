@@ -43,9 +43,12 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 
 /**
+ * NOTE: This is no longer used, but I'm leaving it in because why not
+ * -TheElk801
  *
  * @author BetaSteward_at_googlemail.com
  */
+@Deprecated
 public class PlaneswalkerRedirectionEffect extends RedirectionEffect {
 
     public PlaneswalkerRedirectionEffect() {

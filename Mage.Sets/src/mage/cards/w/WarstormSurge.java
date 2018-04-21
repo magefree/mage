@@ -42,7 +42,7 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -53,9 +53,9 @@ public class WarstormSurge extends CardImpl {
     public WarstormSurge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{5}{R}");
 
-        // Whenever a creature enters the battlefield under your control, it deals damage equal to its power to target creature or player.
+        // Whenever a creature enters the battlefield under your control, it deals damage equal to its power to any target.
         Ability ability = new WarstormSurgeTriggeredAbility();
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }
 
@@ -98,7 +98,7 @@ class WarstormSurgeTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a creature enters the battlefield under your control, it deals damage equal to its power to target creature or player.";
+        return "Whenever a creature enters the battlefield under your control, it deals damage equal to its power to any target.";
     }
 
     @Override
@@ -111,7 +111,7 @@ class WarstormSurgeEffect extends OneShotEffect {
 
     public WarstormSurgeEffect() {
         super(Outcome.Damage);
-        staticText = "it deals damage equal to its power to target creature or player";
+        staticText = "it deals damage equal to its power to any target";
     }
 
     public WarstormSurgeEffect(final WarstormSurgeEffect effect) {

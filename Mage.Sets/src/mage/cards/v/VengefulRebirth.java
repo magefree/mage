@@ -42,7 +42,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -53,9 +53,9 @@ public class VengefulRebirth extends CardImpl {
     public VengefulRebirth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{R}{G}");
 
-        // Return target card from your graveyard to your hand. If you return a nonland card to your hand this way, {this} deals damage equal to that card's converted mana cost to target creature or player
+        // Return target card from your graveyard to your hand. If you return a nonland card to your hand this way, {this} deals damage equal to that card's converted mana cost to any target
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard());
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
         this.getSpellAbility().addEffect(new VengefulRebirthEffect());
         
         // Exile Vengeful Rebirth.
@@ -76,7 +76,7 @@ class VengefulRebirthEffect extends OneShotEffect {
 
     public VengefulRebirthEffect() {
         super(Outcome.DrawCard);
-        staticText = "Return target card from your graveyard to your hand. If you return a nonland card to your hand this way, {this} deals damage equal to that card's converted mana cost to target creature or player";
+        staticText = "Return target card from your graveyard to your hand. If you return a nonland card to your hand this way, {this} deals damage equal to that card's converted mana cost to any target";
     }
 
     public VengefulRebirthEffect(final VengefulRebirthEffect effect) {

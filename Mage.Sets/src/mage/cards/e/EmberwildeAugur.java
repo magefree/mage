@@ -40,7 +40,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import mage.target.TargetPlayer;
+import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
  *
@@ -49,7 +49,7 @@ import mage.target.TargetPlayer;
 public class EmberwildeAugur extends CardImpl {
 
     public EmberwildeAugur(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
         this.subtype.add(SubType.GOBLIN);
         this.subtype.add(SubType.SHAMAN);
 
@@ -59,10 +59,10 @@ public class EmberwildeAugur extends CardImpl {
         // Sacrifice Emberwilde Augur: Emberwilde Augur deals 3 damage to target player. Activate this ability only during your upkeep.
         Ability ability = new ActivateIfConditionActivatedAbility(
                 Zone.BATTLEFIELD,
-                new DamageTargetEffect(3), 
+                new DamageTargetEffect(3),
                 new SacrificeSourceCost(),
                 new IsStepCondition(PhaseStep.UPKEEP));
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayerOrPlaneswalker());
         this.addAbility(ability);
     }
 

@@ -32,7 +32,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -43,8 +43,8 @@ public class UnfriendlyFire extends CardImpl {
     public UnfriendlyFire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{4}{R}");
 
-        // Unfriendly Fire deals 4 damage to target creature or player.
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        // Unfriendly Fire deals 4 damage to any target.
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));
     }
 

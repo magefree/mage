@@ -42,7 +42,7 @@ import mage.constants.Duration;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
 import mage.target.common.TargetControlledPermanent;
-import mage.target.common.TargetCreatureOrPlayerAmount;
+import mage.target.common.TargetAnyTargetAmount;
 
 /**
  *
@@ -69,7 +69,7 @@ public class PollenRemedy extends CardImpl {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         if(ability.getOriginalId().equals(originalId)) {
-             ability.addTarget(new TargetCreatureOrPlayerAmount(KickedCondition.instance.apply(game, ability) ? 6 : 3));
+             ability.addTarget(new TargetAnyTargetAmount(KickedCondition.instance.apply(game, ability) ? 6 : 3));
         }
     }
 

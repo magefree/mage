@@ -41,7 +41,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetOpponent;
+import mage.target.common.TargetOpponentOrPlaneswalker;
 import mage.target.targetpointer.FirstTargetPointer;
 import mage.target.targetpointer.SecondTargetPointer;
 
@@ -64,14 +64,14 @@ public class ManticoreOfTheGauntlet extends CardImpl {
         counters.setTargetPointer(new FirstTargetPointer());
 
         Effect damage = new DamageTargetEffect(new StaticValue(3), true, "", true);
-        damage.setText("{this} deals 3 damage to target opponent.");
+        damage.setText("{this} deals 3 damage to target opponent or planeswalker.");
         damage.setTargetPointer(new SecondTargetPointer());
 
         Ability ability = new EntersBattlefieldTriggeredAbility(counters);
         ability.addEffect(damage);
 
         ability.addTarget(new TargetControlledCreaturePermanent());
-        ability.addTarget(new TargetOpponent());
+        ability.addTarget(new TargetOpponentOrPlaneswalker());
 
         this.addAbility(ability);
     }

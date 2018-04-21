@@ -48,7 +48,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.target.TargetPlayer;
+import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
  *
@@ -57,16 +57,16 @@ import mage.target.TargetPlayer;
 public class SurestrikeTrident extends CardImpl {
 
     public SurestrikeTrident(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature has first strike and "{T}, Unattach Surestrike Trident: This creature deals damage equal to its power to target player."
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.EQUIPMENT));
         DynamicValue xValue = new SourcePermanentPowerCount();
         Effect effect = new DamageTargetEffect(xValue);
-        effect.setText("This creature deals damage equal to its power to target player");
+        effect.setText("This creature deals damage equal to its power to target player or planeswalker");
         Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
-        gainedAbility.addTarget(new TargetPlayer());
+        gainedAbility.addTarget(new TargetPlayerOrPlaneswalker());
         gainedAbility.addCost(new UnattachCost(this.getName(), this.getId()));
         effect = new GainAbilityAttachedEffect(gainedAbility, AttachmentType.EQUIPMENT);
         effect.setText("and \"{T}, Unattach {this}: This creature deals damage equal to its power to target player.\"");

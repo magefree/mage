@@ -49,9 +49,9 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
-import mage.target.TargetPlayer;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
  *
@@ -92,7 +92,7 @@ public class WanderingMage extends CardImpl {
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new PreventDamageToTargetEffect(Duration.EndOfTurn, 2), new ManaCostsImpl("{B}"));
         ability.addCost(new WanderingMageCost());
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayerOrPlaneswalker());
         Target target = new TargetControlledCreaturePermanent();
         target.setNotTarget(true);
         ability.addTarget(target);

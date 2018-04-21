@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -56,10 +56,10 @@ public class SpitfireBastion extends CardImpl {
         // {T}: Add {R}.
         this.addAbility(new RedManaAbility());
 
-        // {2}{R}, {T}: Spitfire Bastion deals 3 damage to target creature or player.
+        // {2}{R}, {T}: Spitfire Bastion deals 3 damage to any target.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(3), new TapSourceCost());
         ability.addCost(new ManaCostsImpl("{2}{R}"));
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }
 

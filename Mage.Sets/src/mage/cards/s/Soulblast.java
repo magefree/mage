@@ -40,7 +40,7 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -54,9 +54,9 @@ public class Soulblast extends CardImpl {
         // As an additional cost to cast Soulblast, sacrifice all creatures you control.
         this.getSpellAbility().addCost(new SacrificeAllCost(StaticFilters.FILTER_PERMANENT_CREATURES_CONTROLLED));
 
-        // Soulblast deals damage to target creature or player equal to the total power of the sacrificed creatures.
+        // Soulblast deals damage to any target equal to the total power of the sacrificed creatures.
         this.getSpellAbility().addEffect(new SoulblastEffect());
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
     public Soulblast(final Soulblast card) {
@@ -73,7 +73,7 @@ class SoulblastEffect extends OneShotEffect {
 
     public SoulblastEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Soulblast deals damage to target creature or player equal to the total power of the sacrificed creatures";
+        this.staticText = "Soulblast deals damage to any target equal to the total power of the sacrificed creatures";
     }
 
     public SoulblastEffect(final SoulblastEffect effect) {

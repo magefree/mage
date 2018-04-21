@@ -37,7 +37,7 @@ import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.SpellAbilityType;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreatureOrPlayerAmount;
+import mage.target.common.TargetAnyTargetAmount;
 
 public class FireIce extends SplitCard {
 
@@ -49,7 +49,7 @@ public class FireIce extends SplitCard {
         Effect effect = new DamageMultiEffect(2);
         effect.setText("Fire deals 2 damage divided as you choose among one or two target creatures and/or players");
         getLeftHalfCard().getSpellAbility().addEffect(effect);
-        getLeftHalfCard().getSpellAbility().addTarget(new TargetCreatureOrPlayerAmount(2));
+        getLeftHalfCard().getSpellAbility().addTarget(new TargetAnyTargetAmount(2));
 
         // Ice
         // Tap target permanent.

@@ -49,7 +49,7 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
-import mage.target.common.TargetCreatureOrPlayerAmount;
+import mage.target.common.TargetAnyTargetAmount;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.Watcher;
 
@@ -88,7 +88,7 @@ public class AureliasFury extends CardImpl {
         DynamicValue xValue = new ManacostVariableValue();
         this.getSpellAbility().addEffect(new DamageMultiEffect(xValue));
         this.getSpellAbility().addEffect(new AureliasFuryEffect());
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayerAmount(xValue));
+        this.getSpellAbility().addTarget(new TargetAnyTargetAmount(xValue));
         this.getSpellAbility().addWatcher(new AureliasFuryDamagedByWatcher());
 
     }

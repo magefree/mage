@@ -35,7 +35,7 @@ import mage.abilities.effects.common.DoUnlessTargetPlayerOrTargetsControllerPays
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -46,12 +46,12 @@ public class RhysticLightning extends CardImpl {
     public RhysticLightning(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");
 
-        // Rhystic Lightning deals 4 damage to target creature or player unless that creature's controller or that player pays {2}. If he or she does, Rhystic Lightning deals 2 damage to the creature or player.
+        // Rhystic Lightning deals 4 damage to any target unless that creature's controller or that player pays {2}. If he or she does, Rhystic Lightning deals 2 damage to the creature or player.
         Effect effect = new DoUnlessTargetPlayerOrTargetsControllerPaysEffect(new DamageTargetEffect(4), new DamageTargetEffect(2), new ManaCostsImpl("{2}"), 
             "Pay {2} to have {this} deal 2 damage instead of 4 damage?");
-        effect.setText("{this} deals 4 damage to target creature or player unless that creature's controller or that player pays {2}. If he or she does, {this} deals 2 damage to the creature or player");
+        effect.setText("{this} deals 4 damage to any target unless that creature's controller or that player pays {2}. If he or she does, {this} deals 2 damage to the creature or player");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
     public RhysticLightning(final RhysticLightning card) {

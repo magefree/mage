@@ -42,7 +42,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -51,11 +51,11 @@ import mage.target.common.TargetCreatureOrPlayer;
 public class HereticsPunishment extends CardImpl {
 
     public HereticsPunishment(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{R}");
 
-        // {3}{R}: Choose target creature or player, then put the top three cards of your library into your graveyard. Heretic's Punishment deals damage to that creature or player equal to the highest converted mana cost among those cards.
+        // {3}{R}: Choose any target, then put the top three cards of your library into your graveyard. Heretic's Punishment deals damage to that creature or player equal to the highest converted mana cost among those cards.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new HereticsPunishmentEffect(), new ManaCostsImpl("{3}{R}"));
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }
 
@@ -73,7 +73,7 @@ class HereticsPunishmentEffect extends OneShotEffect {
 
     public HereticsPunishmentEffect() {
         super(Outcome.Damage);
-        staticText = "Choose target creature or player, then put the top three cards of your library into your graveyard. {this} deals damage to that creature or player equal to the highest converted mana cost among those cards";
+        staticText = "Choose any target, then put the top three cards of your library into your graveyard. {this} deals damage to that permanent or player equal to the highest converted mana cost among those cards";
     }
 
     public HereticsPunishmentEffect(final HereticsPunishmentEffect effect) {
