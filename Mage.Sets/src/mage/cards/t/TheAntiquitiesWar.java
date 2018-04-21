@@ -27,8 +27,8 @@
  */
 package mage.cards.t;
 
-import java.util.List;
 import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SagaAbility;
 import mage.abilities.dynamicvalue.common.StaticValue;
@@ -47,7 +47,6 @@ import mage.constants.SubLayer;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterArtifactPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -104,9 +103,17 @@ class TheAntiquitiesWarEffect extends ContinuousEffectImpl {
     }
 
     @Override
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+        for (Permanent perm : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT, source.getControllerId(), source.getSourceId(), game)) {
+            affectedObjectList.add(new MageObjectReference(perm, game));
+        }
+    }
+
+    @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(new FilterArtifactPermanent(), source.getControllerId(), game);
-        for (Permanent permanent : permanents) {
+        for (MageObjectReference mor : affectedObjectList) {
+            Permanent permanent = mor.getPermanent(game);
             if (permanent != null) {
                 switch (layer) {
                     case TypeChangingEffects_4:
