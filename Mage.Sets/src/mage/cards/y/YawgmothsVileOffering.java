@@ -25,7 +25,7 @@ import mage.target.common.TargetCreatureOrPlaneswalker;
  */
 public class YawgmothsVileOffering extends CardImpl {
 
-    private static final FilterPermanentCard cardFilter = new FilterPermanentCard();
+    private static final FilterPermanentCard cardFilter = new FilterPermanentCard("creature or planeswalker card");
 
     static {
         cardFilter.add(Predicates.or(
@@ -43,7 +43,7 @@ public class YawgmothsVileOffering extends CardImpl {
 
         // Put up to one target creature or planeswalker from a graveyard onto the battlefield under your control.
         // Destroy up to one target creature or planeswalker. Exile Yawgmoth’s Vile Offering.
-        this.getSpellAbility().addEffect(new YawgmothsVireOfferingEffect());
+        this.getSpellAbility().addEffect(new YawgmothsVileOfferingEffect());
         this.getSpellAbility().addTarget(new TargetCardInGraveyard(0, 1, cardFilter));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlaneswalker(0, 1, new FilterCreatureOrPlaneswalkerPermanent(), false));
         this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
@@ -59,14 +59,14 @@ public class YawgmothsVileOffering extends CardImpl {
     }
 }
 
-class YawgmothsVireOfferingEffect extends OneShotEffect {
+class YawgmothsVileOfferingEffect extends OneShotEffect {
 
-    public YawgmothsVireOfferingEffect() {
+    public YawgmothsVileOfferingEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Put up to one target creature or planeswalker from a graveyard onto the battlefield under your control. Destroy up to one target creature or planeswalker";
+        this.staticText = "Put up to one target creature or planeswalker card from a graveyard onto the battlefield under your control. Destroy up to one target creature or planeswalker";
     }
 
-    public YawgmothsVireOfferingEffect(final YawgmothsVireOfferingEffect effect) {
+    public YawgmothsVileOfferingEffect(final YawgmothsVileOfferingEffect effect) {
         super(effect);
     }
 
@@ -93,7 +93,7 @@ class YawgmothsVireOfferingEffect extends OneShotEffect {
     }
 
     @Override
-    public YawgmothsVireOfferingEffect copy() {
-        return new YawgmothsVireOfferingEffect(this);
+    public YawgmothsVileOfferingEffect copy() {
+        return new YawgmothsVileOfferingEffect(this);
     }
 }
