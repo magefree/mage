@@ -5,6 +5,7 @@
  */
 package mage.client.dialog;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
@@ -32,6 +33,7 @@ import mage.client.util.gui.MageDialogState;
 /**
  *
  * @author JayDi85
+ * @author Salco
  */
 
 public class PickChoiceDialog extends MageDialog {
@@ -39,9 +41,29 @@ public class PickChoiceDialog extends MageDialog {
     Choice choice;
     ArrayList<KeyValueItem> allItems = new ArrayList<>();
     DefaultListModel<KeyValueItem> dataModel = new DefaultListModel();
+    CheckBoxList.CheckBoxListModel m_dataModel;
+    
+    CheckBoxList tList;
     
     final private static String HTML_TEMPLATE = "<html><div style='text-align: center;'>%s</div></html>";
 
+    private void setFocus(CheckBoxList obj){
+        
+        if (!(obj instanceof java.awt.Component)) {
+            throw new IllegalArgumentException("Must be a java.awt.Component!");
+        }
+        this.scrollList.setViewportView((java.awt.Component)obj);
+    }
+    private javax.swing.JList get_a_Jlist_from_ScrollListView(){
+        return ((javax.swing.JList)this.scrollList.getViewport().getView());
+    }
+
+    private void restoreData(Object dataFrom){
+        this.allItems.forEach((item) -> {
+            ((CheckBoxList.CheckBoxListModel)dataFrom).addElement(item.getObjectValue());
+        });
+    }
+    
     public void showDialog(Choice choice) {
         showDialog(choice, null, null, null);
     }
@@ -56,7 +78,9 @@ public class PickChoiceDialog extends MageDialog {
     
     public void showDialog(Choice choice, UUID objectId, MageDialogState mageDialogState, String startSelectionValue) {
         this.choice = choice;
-        
+        KeyValueItem tempKeyValue;
+        int indexInTList;
+                
         setLabelText(this.labelMessage, choice.getMessage());
         setLabelText(this.labelSubMessage, choice.getSubMessage());
         
@@ -68,11 +92,25 @@ public class PickChoiceDialog extends MageDialog {
         this.allItems.clear();
         if (choice.isKeyChoice()){            
             for (Map.Entry<String, String> entry: choice.getKeyChoices().entrySet()) {
-                this.allItems.add(new KeyValueItem(entry.getKey(), entry.getValue()));                
+                if(tList != null){
+                    indexInTList = m_dataModel.indexOf(entry.getKey());
+                    tempKeyValue=new KeyValueItem(entry.getKey(), entry.getValue(),(CheckBoxList.CheckBoxListItem) this.tList.getModel().getElementAt(indexInTList));
+                }
+                else{
+                    tempKeyValue=new KeyValueItem(entry.getKey(), entry.getValue());                
+                }
+                this.allItems.add(tempKeyValue);
             }
         } else {
             for (String value: choice.getChoices()){
-                this.allItems.add(new KeyValueItem(value, value));                
+                if(tList != null){
+                    indexInTList = m_dataModel.indexOf(value);
+                    tempKeyValue=new KeyValueItem(value, value,(CheckBoxList.CheckBoxListItem) tList.getModel().getElementAt(indexInTList));
+                }
+                else{
+                    tempKeyValue=new KeyValueItem(value, value);                
+                }
+                this.allItems.add(tempKeyValue);
             }
         }
 
@@ -81,8 +119,8 @@ public class PickChoiceDialog extends MageDialog {
             Collections.sort(this.allItems, new Comparator<KeyValueItem>() {
                 @Override
                 public int compare(KeyValueItem o1, KeyValueItem o2) {
-                    Integer n1 = choice.getSortData().get(o1.Key);
-                    Integer n2 = choice.getSortData().get(o2.Key);
+                    Integer n1 = choice.getSortData().get(o1.getKey());
+                    Integer n2 = choice.getSortData().get(o2.getKey());
                     return n1.compareTo(n2);
                 }
             });
@@ -184,18 +222,24 @@ public class PickChoiceDialog extends MageDialog {
 
         // start selection
         if((startSelectionValue != null)){
+            javax.swing.JList currentlistChoices;// = new javax.swing.JList();
+            currentlistChoices=this.get_a_Jlist_from_ScrollListView();
+            /*currentlistChoices = this.listChoices;*/
             int selectIndex = -1;
             for(int i = 0; i < this.listChoices.getModel().getSize(); i++){
-                KeyValueItem listItem = (KeyValueItem)this.listChoices.getModel().getElementAt(i);
-                if (listItem.Key.equals(startSelectionValue)){
+                //KeyValueItem listItem = (KeyValueItem)currentlistChoices.getModel().getElementAt(i);
+                String elementOfList = currentlistChoices.getModel().getElementAt(i).toString();
+                if (elementOfList.equals(startSelectionValue)){
                     selectIndex = i;
                     break;
                 }
             }
 
             if(selectIndex >= 0){
-                this.listChoices.setSelectedIndex(selectIndex);
-                this.listChoices.ensureIndexIsVisible(selectIndex);
+               // currentlistChoices=this.get_a_Jlist_from_ScrollListView();
+                /*currentlistChoices = this.listChoices;*/
+                currentlistChoices.setSelectedIndex(selectIndex);                
+                currentlistChoices.ensureIndexIsVisible(selectIndex);                
             }
         }
 
@@ -208,14 +252,16 @@ public class PickChoiceDialog extends MageDialog {
     
     private void loadData(){
         // load data to datamodel after filter or on startup
-        String filter = choice.getSearchText();
+        String filter = choice.getSearchText();        
         if (filter == null){ filter = ""; }
         filter = filter.toLowerCase(Locale.ENGLISH);
         
         this.dataModel.clear();
+        this.m_dataModel.clear();
         for(KeyValueItem item: this.allItems){
             if(!choice.isSearchEnabled() || item.Value.toLowerCase(Locale.ENGLISH).contains(filter)){
                 this.dataModel.addElement(item);
+                this.m_dataModel.addElement(item.getObjectValue());
             }
         }
     }
@@ -248,7 +294,9 @@ public class PickChoiceDialog extends MageDialog {
     }
 
     private void doChoose(){
-        if(setChoice()){
+        if((tList != null)||(setChoice())){
+            this.m_dataModel.clear();
+            restoreData(this.m_dataModel);
             this.hideDialog();
         }
     }
@@ -261,11 +309,33 @@ public class PickChoiceDialog extends MageDialog {
 
     /**
      * Creates new form PickChoiceDialog
+     * @param list 
      */
-    public PickChoiceDialog() {
+    public PickChoiceDialog(CheckBoxList list) {
         initComponents();
+        tList=list;
+        
         this.listChoices.setModel(dataModel);
         this.setModal(true);
+
+        if(tList != null)
+        {            
+            this.listChoices.setVisible(false);
+            
+            m_dataModel= ( CheckBoxList.CheckBoxListModel )tList.getModel();
+            tList.setSelectionForeground(Color.BLUE);
+            
+            if(this.tList instanceof javax.swing.JList){
+                setFocus(tList);                       
+             }
+             
+        }
+    }
+    /**
+     * Creates new form PickChoiceDialog
+     */
+    public PickChoiceDialog() {
+        this(null);
     }
     
     public boolean setChoice() {
@@ -294,18 +364,30 @@ public class PickChoiceDialog extends MageDialog {
     {
         private final String Key;
         private final String Value;
-        
-        public KeyValueItem(String value, String label) {
+        private final CheckBoxList.CheckBoxListItem objectValue;
+               
+        public KeyValueItem(String value) {            
+            this(value,null,null);
+        }        
+        public KeyValueItem(String value, String label) {            
+            this(value,label,null);
+        }
+        public KeyValueItem(String value, String label,CheckBoxList.CheckBoxListItem object) {
             this.Key = value;
             this.Value = label;
+            this.objectValue = object;            
         }
 
         public String getKey() {
             return this.Key;
-        }
+        }       
 
         public String getValue() {
             return this.Value;
+        }
+        
+        public  Object getObjectValue(){
+            return (CheckBoxList.CheckBoxListItem)this.objectValue;
         }
 
         @Override
@@ -334,6 +416,7 @@ public class PickChoiceDialog extends MageDialog {
         panelCommands = new javax.swing.JPanel();
         btOK = new javax.swing.JButton();
         btCancel = new javax.swing.JButton();
+        btClear = new javax.swing.JButton();
 
         labelMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelMessage.setText("<html><div style='text-align: center;'>example long message example long message example long message example long message example long message</div></html>");
@@ -348,17 +431,17 @@ public class PickChoiceDialog extends MageDialog {
             panelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelHeaderLayout.createSequentialGroup()
                 .addGroup(panelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelMessage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
-                    .addComponent(labelSubMessage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE))
+                    .addComponent(labelMessage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(labelSubMessage, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(0, 0, 0))
         );
         panelHeaderLayout.setVerticalGroup(
             panelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelHeaderLayout.createSequentialGroup()
-                .addGap(0, 0, 0)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(labelMessage)
-                .addGap(0, 0, 0)
-                .addComponent(labelSubMessage))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(labelSubMessage, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
         );
 
         labelSearch.setText("Search:");
@@ -407,30 +490,39 @@ public class PickChoiceDialog extends MageDialog {
             }
         });
 
+        btClear.setText("Clear");
+        btClear.setMinimumSize(new java.awt.Dimension(30, 25));
+        btClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btClearActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelCommandsLayout = new javax.swing.GroupLayout(panelCommands);
         panelCommands.setLayout(panelCommandsLayout);
         panelCommandsLayout.setHorizontalGroup(
             panelCommandsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelCommandsLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btClear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btOK)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(btCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        panelCommandsLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btCancel, btOK});
-
         panelCommandsLayout.setVerticalGroup(
             panelCommandsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelCommandsLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panelCommandsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btCancel)
-                    .addComponent(btOK))
+                    .addComponent(btOK)
+                    .addComponent(btClear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
+        getRootPane().setDefaultButton(btOK);
         getRootPane().setDefaultButton(btOK);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -454,7 +546,7 @@ public class PickChoiceDialog extends MageDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrollList, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
+                .addComponent(scrollList, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelCommands, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -478,8 +570,16 @@ public class PickChoiceDialog extends MageDialog {
         doCancel();
     }//GEN-LAST:event_closeDialog
 
+    private void btClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btClearActionPerformed
+        // TODO add your handling code here:
+        this.tList.uncheckAll();
+        //this.tList.repaint();
+        scrollList.repaint();
+    }//GEN-LAST:event_btClearActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCancel;
+    private javax.swing.JButton btClear;
     private javax.swing.JButton btOK;
     private javax.swing.JTextField editSearch;
     private javax.swing.JLabel labelMessage;
