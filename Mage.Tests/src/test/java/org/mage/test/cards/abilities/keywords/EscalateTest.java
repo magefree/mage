@@ -62,7 +62,6 @@ public class EscalateTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Savage Alliance", 1);
     }
 
-    @Ignore
     @Test
     public void testGaddockTeegInteraction_ThreeCMC_OneMode() {
 
@@ -91,7 +90,6 @@ public class EscalateTest extends CardTestPlayerBase {
 
     // Reported bug: Escalate CMC is not calculated correctly when more than 1 mode chosen
     // With 1 extra mode, the casting cost is {2}{R}{R} but the CMC should still be 3
-    @Ignore
     @Test
     public void testGaddockTeegInteraction_ThreeCMC_TwoModes() {
 
@@ -119,7 +117,6 @@ public class EscalateTest extends CardTestPlayerBase {
         assertLife(playerB, 17);
     }
 
-    @Ignore
     @Test
     public void testSpellQuellerInteraction_ThreeCMC_ThreeModes() {
 
