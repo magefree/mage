@@ -72,7 +72,7 @@ public abstract class StackObjImpl implements StackObject {
      * the change is legal.
      *
      * Example: Arc Trail is a sorcery that reads "Arc Trail deals 2 damage to
-     * target creature or player and 1 damage to another target creature or
+     * any target and 1 damage to another target creature or
      * player." The current targets of Arc Trail are Runeclaw Bear and Llanowar
      * Elves, in that order. You cast Redirect, an instant that reads "You may
      * choose new targets for target spell," targeting Arc Trail. You can change
