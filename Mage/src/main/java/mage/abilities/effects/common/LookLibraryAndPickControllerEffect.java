@@ -338,7 +338,7 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
                 } else {
                     sb.append("on the bottom");
                 }
-                sb.append(" of your libary in ");
+                sb.append(" of your library in ");
                 if (anyOrder) {
                     sb.append("any");
                 } else {

@@ -62,7 +62,7 @@ public class ArtificersAssistant extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever you cast a Historic spell scry 1.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new ScryEffect(1), filter, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new ScryEffect(1), filter, false));
     }
 
     public ArtificersAssistant(final ArtificersAssistant card) {

@@ -55,7 +55,7 @@ public class BlessingOfBelzenlok extends CardImpl {
         Effect effect = new ConditionalContinuousEffect(
                 new GainAbilityTargetEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn),
                 new TargetHasSuperTypeCondition(SuperType.LEGENDARY),
-                "If it’s legendary, it also gains lifelink until end of turn."
+                "If it's legendary, it also gains lifelink until end of turn."
         );
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

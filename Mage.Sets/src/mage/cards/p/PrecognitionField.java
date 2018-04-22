@@ -108,7 +108,7 @@ class PrecognitionFieldTopCardCastEffect extends AsThoughEffectImpl {
 
     public PrecognitionFieldTopCardCastEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "You may cast the top card of your library if it’s an instant or sorcery card.";
+        staticText = "You may cast the top card of your library if it's an instant or sorcery card.";
     }
 
     public PrecognitionFieldTopCardCastEffect(final PrecognitionFieldTopCardCastEffect effect) {
