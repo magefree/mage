@@ -105,7 +105,7 @@ public class MistcutterHydraTest extends CardTestPlayerBase {
         // Apocalypse {X}{R}{G}
         // Apocalypse Hydra enters the battlefield with X +1/+1 counters on it. 
         // If X is 5 or more, it enters the battlefield with an additional X +1/+1 counters on it.
-        // {1}{R}, Remove a +1/+1 counter from Apocalypse Hydra: Apocalypse Hydra deals 1 damage to target creature or player.
+        // {1}{R}, Remove a +1/+1 counter from Apocalypse Hydra: Apocalypse Hydra deals 1 damage to any target.
         // Mistcutter Hydra enters the battlefield with X +1/+1 counters on it.
         addCard(Zone.HAND, playerA, "Apocalypse Hydra");
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
@@ -129,7 +129,7 @@ public class MistcutterHydraTest extends CardTestPlayerBase {
         // Apocalypse {X}{R}{G}
         // Apocalypse Hydra enters the battlefield with X +1/+1 counters on it. 
         // If X is 5 or more, it enters the battlefield with an additional X +1/+1 counters on it.
-        // {1}{R}, Remove a +1/+1 counter from Apocalypse Hydra: Apocalypse Hydra deals 1 damage to target creature or player.
+        // {1}{R}, Remove a +1/+1 counter from Apocalypse Hydra: Apocalypse Hydra deals 1 damage to any target.
         // Mistcutter Hydra enters the battlefield with X +1/+1 counters on it.
         addCard(Zone.HAND, playerA, "Apocalypse Hydra");
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);

@@ -43,7 +43,7 @@ public class ValakutTheMoltenPinnacleTest extends CardTestPlayerBase {
      * Valakut, the Molten Pinnacle Land Valakut, the Molten Pinnacle enters the
      * battlefield tapped. Whenever a Mountain enters the battlefield under your
      * control, if you control at least five other Mountains, you may have
-     * Valakut, the Molten Pinnacle deal 3 damage to target creature or player.
+     * Valakut, the Molten Pinnacle deal 3 damage to any target.
      * {T}: Add {R}.
      */
     @Test
@@ -169,7 +169,7 @@ public class ValakutTheMoltenPinnacleTest extends CardTestPlayerBase {
     public void withPrismaticOmen() {
         // Valakut, the Molten Pinnacle enters the battlefield tapped.
         // Whenever a Mountain enters the battlefield under your control, if you control at least five other Mountains,
-        // you may have Valakut, the Molten Pinnacle deal 3 damage to target creature or player.
+        // you may have Valakut, the Molten Pinnacle deal 3 damage to any target.
         // {T}: Add {R}.
         addCard(Zone.BATTLEFIELD, playerA, "Valakut, the Molten Pinnacle");
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);

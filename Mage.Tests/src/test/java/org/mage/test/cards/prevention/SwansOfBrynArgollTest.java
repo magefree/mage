@@ -73,7 +73,7 @@ public class SwansOfBrynArgollTest extends CardTestPlayerBase{
         // If a source would deal damage to Swans of Bryn Argoll, prevent that damage. The source's controller draws cards equal to the damage prevented this way.
         addCard(Zone.BATTLEFIELD, playerA, "Swans of Bryn Argoll");
         
-        // Banefire deals X damage to target creature or player.
+        // Banefire deals X damage to any target.
         // If X is 5 or more, Banefire can't be countered by spells or abilities and the damage can't be prevented.
         addCard(Zone.HAND, playerB, "Banefire", 1);        
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 8);

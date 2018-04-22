@@ -50,10 +50,10 @@ public class BrutalExpulsionTest extends CardTestPlayerBase {
     @Test
     public void testPlaneswalkerExile() {
         // Choose one or both
-        // - Return target spell or creature to its owner's hand;
-        // or Brutal Expulsion deals 2 damage to target creature or planeswalker. If that permanent would be put into a graveyard this turn, exile it instead.
+        // - Return target spell or creature to its owner's hand.
+        // - Brutal Expulsion deals 2 damage to target creature or planeswalker. If that permanent would be put into a graveyard this turn, exile it instead.
         addCard(Zone.HAND, playerA, "Brutal Expulsion"); // {2}{U}{R}
-        // Shock deals 2 damage to target creature or player.
+        // Shock deals 2 damage to any target.
         addCard(Zone.HAND, playerA, "Shock"); // {R}
         addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);

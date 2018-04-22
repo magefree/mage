@@ -7,7 +7,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  * Harm's Way: The next 2 damage that a source of your choice would deal to you
- * and/or permanents you control this turn is dealt to target creature or player
+ * and/or permanents you control this turn is dealt to any target
  * instead.
  *
  * @author noxx
@@ -71,7 +71,7 @@ public class HarmsWayRedirectDamageTest extends CardTestPlayerBase {
     public void testRedirectTriggeredAbilityDamage() {
         addCard(Zone.HAND, playerA, "Lightning Bolt");
         // The next 2 damage that a source of your choice would deal to you and/or permanents
-        // you control this turn is dealt to target creature or player instead.
+        // you control this turn is dealt to any target instead.
         addCard(Zone.HAND, playerA, "Harm's Way");
         addCard(Zone.BATTLEFIELD, playerA, "Mountain");
         addCard(Zone.BATTLEFIELD, playerA, "Plains");
@@ -103,13 +103,13 @@ public class HarmsWayRedirectDamageTest extends CardTestPlayerBase {
     public void testRedirectNotPreventableDamage() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain");
         // <i>Ferocious</i> If you control a creature with power 4 or greater, damage can't be prevented this turn.
-        // Wild Slash deals 2 damage to target creature or player.
+        // Wild Slash deals 2 damage to any target.
         addCard(Zone.HAND, playerA, "Wild Slash"); // {R}
         addCard(Zone.BATTLEFIELD, playerA, "Serra Angel");
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
 
         // The next 2 damage that a source of your choice would deal to you and/or permanents
-        // you control this turn is dealt to target creature or player instead.
+        // you control this turn is dealt to any target instead.
         addCard(Zone.HAND, playerB, "Harm's Way"); // {W}
         addCard(Zone.BATTLEFIELD, playerB, "Plains");
         addCard(Zone.BATTLEFIELD, playerB, "Birds of Paradise");

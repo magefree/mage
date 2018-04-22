@@ -202,7 +202,7 @@ public class ConditionalManaTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Cultivator Drone", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Wastes", 1);
         // Untap Endbringer during each other player's untap step.
-        // {T}: Endbringer deals 1 damage to target creature or player.
+        // {T}: Endbringer deals 1 damage to any target.
         // {C}, {T}: Target creature can't attack or block this turn.
         // {C}{C}, {T}: Draw a card.
         addCard(Zone.BATTLEFIELD, playerA, "Endbringer", 1); // {1}{C}

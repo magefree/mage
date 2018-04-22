@@ -58,7 +58,7 @@ public class AlmsBeastTest extends CardTestPlayerBase {
 
     @Test
     public void testNoLifelinkAfterCombat() {
-        // {T}: Rootwater Hunter deals 1 damage to target creature or player.
+        // {T}: Rootwater Hunter deals 1 damage to any target.
         addCard(Zone.BATTLEFIELD, playerA, "Rootwater Hunter");
         addCard(Zone.BATTLEFIELD, playerA, "Plains");
         // Prevent all damage that would be dealt to target creature this turn.

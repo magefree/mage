@@ -14,7 +14,7 @@ public class DoIfCostPaidTest extends CardTestPlayerBase {
     @Test
     public void testPayIsNotOptional() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
-        // Shock deals 2 damage to target creature or player.
+        // Shock deals 2 damage to any target.
         addCard(Zone.HAND, playerA, "Shock", 1);
 
         // When a source an opponent controls deals damage to you, sacrifice Awaken the Sky Tyrant.

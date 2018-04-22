@@ -50,7 +50,7 @@ public class LightningStormTest extends CardTestPlayerBase {
     @Test
     public void ActivateByBothPlayersTest() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
-        // Lightning Storm deals X damage to target creature or player, where X is 3 plus the number of charge counters on it.
+        // Lightning Storm deals X damage to any target, where X is 3 plus the number of charge counters on it.
         // Discard a land card: Put two charge counters on Lightning Storm. You may choose a new target for it. Any player may activate this ability but only if Lightning Storm is on the stack.
         addCard(Zone.HAND, playerA, "Lightning Storm"); // {1}{R}{R}
 

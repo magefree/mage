@@ -50,7 +50,7 @@ import mage.target.common.TargetAnyTarget;
  * @author spjspj
  */
 public class KothOfTheHammerEmblem extends Emblem {
-    // "Mountains you control have '{T}: This land deals 1 damage to target creature or player.'"
+    // "Mountains you control have '{T}: This land deals 1 damage to any target.'"
 
     public KothOfTheHammerEmblem() {
         this.setName("Emblem Koth");
@@ -69,7 +69,7 @@ class KothOfTheHammerThirdEffect extends ContinuousEffectImpl {
 
     public KothOfTheHammerThirdEffect() {
         super(Duration.EndOfGame, Outcome.AddAbility);
-        staticText = "You get an emblem with \"Mountains you control have '{T}: This land deals 1 damage to target creature or player.'\"";
+        staticText = "You get an emblem with \"Mountains you control have '{T}: This land deals 1 damage to any target.'\"";
     }
 
     public KothOfTheHammerThirdEffect(final KothOfTheHammerThirdEffect effect) {

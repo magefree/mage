@@ -40,7 +40,7 @@ public class TragicSlipTest extends CardTestPlayerBase {
         // Tragic Slip - Instant, B - Target creature gets -1/-1 until end of turn.
         // Morbid — That creature gets -13/-13 until end of turn instead if a creature died this turn.
         addCard(Zone.HAND, playerA, "Tragic Slip");
-        // Searing Spear - Instant, 1R - Searing Spear deals 3 damage to target creature or player.
+        // Searing Spear - Instant, 1R - Searing Spear deals 3 damage to any target.
         addCard(Zone.HAND, playerA, "Searing Spear");
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
         addCard(Zone.BATTLEFIELD, playerA, "Pillarfield Ox");
@@ -63,7 +63,7 @@ public class TragicSlipTest extends CardTestPlayerBase {
         // Tragic Slip - Instant, B - Target creature gets -1/-1 until end of turn.
         // Morbid — That creature gets -13/-13 until end of turn instead if a creature died this turn.
         addCard(Zone.HAND, playerA, "Tragic Slip");
-        // Searing Spear - Instant, 1R - Searing Spear deals 3 damage to target creature or player.
+        // Searing Spear - Instant, 1R - Searing Spear deals 3 damage to any target.
         addCard(Zone.HAND, playerA, "Searing Spear");
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
         addCard(Zone.BATTLEFIELD, playerA, "Pillarfield Ox");

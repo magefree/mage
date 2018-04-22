@@ -54,7 +54,7 @@ public class SupernaturalStaminaTest extends CardTestPlayerBase {
 
         // Until end of turn, target creature gets +2/+0 and gains "When this creature dies, return it to the battlefield tapped under its owner's control."
         addCard(Zone.HAND, playerA, "Supernatural Stamina"); // Instant {B}
-        // Shock deals 2 damage to target creature or player.
+        // Shock deals 2 damage to any target.
         addCard(Zone.HAND, playerA, "Shock"); // Instant {R}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Channeler Initiate");

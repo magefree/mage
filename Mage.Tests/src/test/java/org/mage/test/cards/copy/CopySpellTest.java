@@ -257,7 +257,7 @@ public class CopySpellTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Atraxa, Praetors' Voice", 4);
         // Walking Ballista enters the battlefield with X +1/+1 counters on it.
         // {4}: Put a +1/+1 counter on Walking Ballista.
-        // Remove a +1/+1 counter from Walking Ballista: It deals 1 damage to target creature or player.
+        // Remove a +1/+1 counter from Walking Ballista: It deals 1 damage to any target.
         addCard(Zone.HAND, playerA, "Walking Ballista"); // {X}{X}
 
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1);

@@ -76,7 +76,7 @@ public class CantCastTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
 
-        // Blaze deals X damage to target creature or player.
+        // Blaze deals X damage to any target.
         addCard(Zone.HAND, playerA, "Blaze", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Blaze", playerA);
@@ -102,7 +102,7 @@ public class CantCastTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
 
-        // Blaze deals X damage to target creature or player.
+        // Blaze deals X damage to any target.
         addCard(Zone.HAND, playerA, "Blaze", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Blaze", playerB);

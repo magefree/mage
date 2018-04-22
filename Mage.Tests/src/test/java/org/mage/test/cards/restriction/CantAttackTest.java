@@ -230,7 +230,7 @@ public class CantAttackTest extends CardTestPlayerBase {
         /*
          Exquisite Firecraft {1}{R}{R}
             Sorcery
-            Exquisite Firecraft deals 4 damage to target creature or player.
+            Exquisite Firecraft deals 4 damage to any target.
         */
         String eFirecraft = "Exquisite Firecraft";
         

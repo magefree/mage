@@ -41,7 +41,7 @@ public class JayaBallardTaskMageTest extends CardTestPlayerBase {
     @Test
     public void testDamageNormal() {
         // {R}, {tap}, Discard a card: Destroy target blue permanent.
-        // {1}{R}, {tap}, Discard a card: Jaya Ballard, Task Mage deals 3 damage to target creature or player. A creature dealt damage this way can't be regenerated this turn.
+        // {1}{R}, {tap}, Discard a card: Jaya Ballard, Task Mage deals 3 damage to any target. A creature dealt damage this way can't be regenerated this turn.
         // {5}{R}{R}, {tap}, Discard a card: Jaya Ballard deals 6 damage to each creature and each player.
         addCard(Zone.BATTLEFIELD, playerA, "Jaya Ballard, Task Mage");
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 7);
@@ -66,7 +66,7 @@ public class JayaBallardTaskMageTest extends CardTestPlayerBase {
     @Test
     public void testDamageWithDeathPitsOfRath() {
         // {R}, {tap}, Discard a card: Destroy target blue permanent.
-        // {1}{R}, {tap}, Discard a card: Jaya Ballard, Task Mage deals 3 damage to target creature or player. A creature dealt damage this way can't be regenerated this turn.
+        // {1}{R}, {tap}, Discard a card: Jaya Ballard, Task Mage deals 3 damage to any target. A creature dealt damage this way can't be regenerated this turn.
         // {5}{R}{R}, {tap}, Discard a card: Jaya Ballard deals 6 damage to each creature and each player.
         addCard(Zone.BATTLEFIELD, playerA, "Jaya Ballard, Task Mage");
         // Whenever a creature is dealt damage, destroy it. It can't be regenerated.
@@ -94,7 +94,7 @@ public class JayaBallardTaskMageTest extends CardTestPlayerBase {
     @Test
     public void testDamageWithRepercussion() {
         // {R}, {tap}, Discard a card: Destroy target blue permanent.
-        // {1}{R}, {tap}, Discard a card: Jaya Ballard, Task Mage deals 3 damage to target creature or player. A creature dealt damage this way can't be regenerated this turn.
+        // {1}{R}, {tap}, Discard a card: Jaya Ballard, Task Mage deals 3 damage to any target. A creature dealt damage this way can't be regenerated this turn.
         // {5}{R}{R}, {tap}, Discard a card: Jaya Ballard deals 6 damage to each creature and each player.
         addCard(Zone.BATTLEFIELD, playerA, "Jaya Ballard, Task Mage");
         // Whenever a creature is dealt damage, Repercussion deals that much damage to that creature's controller.
