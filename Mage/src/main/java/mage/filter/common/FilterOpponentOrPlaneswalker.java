@@ -5,6 +5,7 @@
  */
 package mage.filter.common;
 
+import mage.constants.SubType;
 import mage.filter.FilterOpponent;
 import mage.filter.FilterPermanent;
 
@@ -19,7 +20,7 @@ public class FilterOpponentOrPlaneswalker extends FilterPermanentOrPlayer {
     }
 
     public FilterOpponentOrPlaneswalker(String name) {
-        super(name, new FilterPermanent(), new FilterOpponent());
+        super(name, new FilterPermanent(SubType.getPlaneswalkerTypes(true), "planeswalker"), new FilterOpponent());
     }
 
     public FilterOpponentOrPlaneswalker(final FilterOpponentOrPlaneswalker filter) {

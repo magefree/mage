@@ -27,48 +27,95 @@ public class HuntmasterOfTheFellsTest extends CardTestPlayerBase {
      * controls. At the beginning of each upkeep, if a player cast two or more
      * spells last turn, transform Ravager of the Fells.
      */
-    @Ignore
+
     @Test
-    public void testCard() {
+    public void test_CantTransformOnSecondTurn() {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain");
         addCard(Zone.HAND, playerA, "Huntmaster of the Fells");
 
+        // need one turn to transform, but create token and gain 2 life
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Huntmaster of the Fells");
-        setStopAt(3, PhaseStep.DRAW);
+        setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
         execute();
 
-        assertLife(playerA, 22);
-        assertLife(playerB, 18);
+        assertLife(playerA, 20 + 2);
+        assertLife(playerB, 20);
+        assertPermanentCount(playerA, "Huntmaster of the Fells", 1);
         assertPermanentCount(playerA, "Wolf", 1);
+        assertPermanentCount(playerA, "Ravager of the Fells", 0);
+    }
+
+    @Test
+    public void test_TransformOneTime() {
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain");
+        addCard(Zone.HAND, playerA, "Huntmaster of the Fells");
+
+        // transform, create token and gain 2 life, make 2 damage to other player
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Huntmaster of the Fells");
+        setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertLife(playerA, 20 + 2);
+        assertLife(playerB, 20 - 2);
         assertPermanentCount(playerA, "Huntmaster of the Fells", 0);
+        assertPermanentCount(playerA, "Wolf", 1);
         assertPermanentCount(playerA, "Ravager of the Fells", 1);
     }
 
-    /**
-     * Tests first trigger happens both on enter battlefield and transform
-     * events
-     */
-    @Ignore
     @Test
-    public void testCard2() {
+    public void test_TransformTwoTimes() {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain");
         addCard(Zone.HAND, playerA, "Huntmaster of the Fells");
 
-        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 2);
-        addCard(Zone.HAND, playerB, "Lightning Bolt", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+        addCard(Zone.HAND, playerA, "Lightning Bolt", 2);
 
+        // etb: new token, gain 2 life
+        // first transform: make 2 damage to player
+        // second transform: new token, gain 2 life
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Huntmaster of the Fells");
-        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", playerA);
-        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", playerA);
-        setStopAt(4, PhaseStep.DRAW);
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        setStopAt(4, PhaseStep.PRECOMBAT_MAIN);
         execute();
 
-        assertLife(playerA, 18); // -6 damage, +4 life
-        assertLife(playerB, 18);
-        assertPermanentCount(playerA, "Wolf", 2);
-        assertPermanentCount(playerA, "Ravager of the Fells", 0); // transformed back
+        assertLife(playerA, 20 + 2 + 2);
+        assertLife(playerB, 20 - 2 - 3 * 2);
         assertPermanentCount(playerA, "Huntmaster of the Fells", 1);
+        assertPermanentCount(playerA, "Wolf", 2);
+        assertPermanentCount(playerA, "Ravager of the Fells", 0);
+        assertPermanentCount(playerA, "Lightning Bolt", 0);
+    }
+
+    @Test
+    public void test_TransformTwoTimesWithCreatureDamage() {
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain");
+        addCard(Zone.HAND, playerA, "Huntmaster of the Fells");
+
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+        addCard(Zone.HAND, playerA, "Lightning Bolt", 2);
+
+        addCard(Zone.BATTLEFIELD, playerB, "Balduvian Bears", 1);
+
+        // etb: new token, gain 2 life
+        // first transform: make 2 damage to player and 2 damage to bear
+        // second transform: new token, gain 2 life
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Huntmaster of the Fells");
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        setStopAt(4, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertLife(playerA, 20 + 2 + 2);
+        assertLife(playerB, 20 - 2 - 3 * 2);
+        assertPermanentCount(playerA, "Huntmaster of the Fells", 1);
+        assertPermanentCount(playerA, "Wolf", 2);
+        assertPermanentCount(playerA, "Ravager of the Fells", 0);
+        assertPermanentCount(playerA, "Lightning Bolt", 0);
+        assertPermanentCount(playerB, "Balduvian Bears", 0);
     }
 }
