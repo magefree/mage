@@ -45,6 +45,7 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
@@ -96,6 +97,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_SHOW_FULL_IMAGE_PATH = "showFullImagePath";
     public static final String KEY_PERMANENTS_IN_ONE_PILE = "nonLandPermanentsInOnePile";
     public static final String KEY_SHOW_PLAYER_NAMES_PERMANENTLY = "showPlayerNamesPermanently";
+    public static final String KEY_DISPLAY_LIVE_ON_AVATAR = "displayLiveOnAvatar";
     public static final String KEY_SHOW_ABILITY_PICKER_FORCED = "showAbilityPicker";
     public static final String KEY_GAME_ALLOW_REQUEST_SHOW_HAND_CARDS = "gameAllowRequestShowHandCards";
     public static final String KEY_GAME_SHOW_STORM_COUNTER = "gameShowStormCounter";
@@ -236,6 +238,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_NEW_TABLE_NUMBER_OF_WINS = "newTableNumberOfWins";
     public static final String KEY_NEW_TABLE_ROLLBACK_TURNS_ALLOWED = "newTableRollbackTurnsAllowed";
     public static final String KEY_NEW_TABLE_SPECTATORS_ALLOWED = "newTableSpectatorsAllowed";
+    public static final String KEY_NEW_TABLE_PLANECHASE = "newTablePlaneChase";
     public static final String KEY_NEW_TABLE_NUMBER_OF_FREE_MULLIGANS = "newTableNumberOfFreeMulligans";
     public static final String KEY_NEW_TABLE_DECK_FILE = "newTableDeckFile";
     public static final String KEY_NEW_TABLE_RANGE = "newTableRange";
@@ -421,6 +424,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         main_game = new javax.swing.JPanel();
         nonLandPermanentsInOnePile = new javax.swing.JCheckBox();
         showPlayerNamesPermanently = new javax.swing.JCheckBox();
+        displayLifeOnAvatar = new javax.swing.JCheckBox();
         showAbilityPickerForced = new javax.swing.JCheckBox();
         cbAllowRequestToShowHandCards = new javax.swing.JCheckBox();
         cbShowStormCounter = new javax.swing.JCheckBox();
@@ -700,7 +704,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .add(6, 6, 6)
                 .add(main_cardLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(main_cardLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
-                        .add(tooltipDelayLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 308, Short.MAX_VALUE)
+                        .add(tooltipDelayLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .add(tooltipDelay, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .add(main_cardLayout.createSequentialGroup()
                         .add(showCardName)
@@ -738,6 +742,16 @@ public class PreferencesDialog extends javax.swing.JDialog {
         showPlayerNamesPermanently.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 showPlayerNamesPermanentlyActionPerformed(evt);
+            }
+        });
+
+        displayLifeOnAvatar.setSelected(true);
+        displayLifeOnAvatar.setText("Display life on avatar image");
+        displayLifeOnAvatar.setToolTipText("Display the player's life over its avatar image.");
+        displayLifeOnAvatar.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        displayLifeOnAvatar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                displayLifeOnAvatarActionPerformed(evt);
             }
         });
 
@@ -797,15 +811,19 @@ public class PreferencesDialog extends javax.swing.JDialog {
             main_gameLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(main_gameLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(main_gameLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                    .add(showPlayerNamesPermanently, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(nonLandPermanentsInOnePile, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(cbConfirmEmptyManaPool, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(cbAllowRequestToShowHandCards, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(cbShowStormCounter, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(cbAskMoveToGraveOrder, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(showAbilityPickerForced, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(177, Short.MAX_VALUE))
+                .add(main_gameLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(main_gameLayout.createSequentialGroup()
+                        .add(main_gameLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                            .add(showPlayerNamesPermanently, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .add(nonLandPermanentsInOnePile, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .add(cbConfirmEmptyManaPool, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .add(cbAllowRequestToShowHandCards, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .add(cbShowStormCounter, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .add(cbAskMoveToGraveOrder, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .add(showAbilityPickerForced, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .add(0, 0, Short.MAX_VALUE))
+                    .add(displayLifeOnAvatar, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         main_gameLayout.setVerticalGroup(
             main_gameLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -813,6 +831,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .add(nonLandPermanentsInOnePile)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(showPlayerNamesPermanently)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(displayLifeOnAvatar)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(showAbilityPickerForced)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
@@ -822,8 +842,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(cbConfirmEmptyManaPool)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(cbAskMoveToGraveOrder)
-                .addContainerGap())
+                .add(cbAskMoveToGraveOrder))
         );
 
         nonLandPermanentsInOnePile.getAccessibleContext().setAccessibleName("nonLandPermanentsInOnePile");
@@ -880,10 +899,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(main_game, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(main_gamelog, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 107, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(main_gamelog, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(main_battlefield, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(121, Short.MAX_VALUE))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         main_card.getAccessibleContext().setAccessibleName("Game panel");
@@ -1797,7 +1816,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .add(panelCardImages, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(panelBackgroundImages, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(125, Short.MAX_VALUE))
+                .addContainerGap(133, Short.MAX_VALUE))
         );
 
         tabsPanel.addTab("Images", tabImages);
@@ -2372,7 +2391,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         tabAvatarsLayout.setVerticalGroup(
             tabAvatarsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(tabAvatarsLayout.createSequentialGroup()
-                .add(avatarPane, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 584, Short.MAX_VALUE)
+                .add(avatarPane, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 620, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -2762,6 +2781,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         save(prefs, dialog.showFullImagePath, KEY_SHOW_FULL_IMAGE_PATH, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.nonLandPermanentsInOnePile, KEY_PERMANENTS_IN_ONE_PILE, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.showPlayerNamesPermanently, KEY_SHOW_PLAYER_NAMES_PERMANENTLY, "true", "false", UPDATE_CACHE_POLICY);
+        save(prefs, dialog.displayLifeOnAvatar, KEY_DISPLAY_LIVE_ON_AVATAR, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.showAbilityPickerForced, KEY_SHOW_ABILITY_PICKER_FORCED, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.cbAllowRequestToShowHandCards, KEY_GAME_ALLOW_REQUEST_SHOW_HAND_CARDS, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.cbShowStormCounter, KEY_GAME_SHOW_STORM_COUNTER, "true", "false", UPDATE_CACHE_POLICY);
@@ -3225,6 +3245,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_cbGameJsonLogAutoSaveActionPerformed
 
+    private void displayLifeOnAvatarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_displayLifeOnAvatarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_displayLifeOnAvatarActionPerformed
+
     private void showProxySettings() {
         Connection.ProxyType proxyType = (Connection.ProxyType) cbProxyType.getSelectedItem();
         switch (proxyType) {
@@ -3331,6 +3355,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         load(prefs, dialog.showFullImagePath, KEY_SHOW_FULL_IMAGE_PATH, "true");
         load(prefs, dialog.nonLandPermanentsInOnePile, KEY_PERMANENTS_IN_ONE_PILE, "true");
         load(prefs, dialog.showPlayerNamesPermanently, KEY_SHOW_PLAYER_NAMES_PERMANENTLY, "true");
+        load(prefs, dialog.displayLifeOnAvatar, KEY_DISPLAY_LIVE_ON_AVATAR, "true");
         load(prefs, dialog.showAbilityPickerForced, KEY_SHOW_ABILITY_PICKER_FORCED, "true");
         load(prefs, dialog.cbAllowRequestToShowHandCards, KEY_GAME_ALLOW_REQUEST_SHOW_HAND_CARDS, "true");
         load(prefs, dialog.cbShowStormCounter, KEY_GAME_SHOW_STORM_COUNTER, "true");
@@ -3469,7 +3494,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     }
 
     private static void loadProxySettings(Preferences prefs) {
-        dialog.cbProxyType.setSelectedItem(Connection.ProxyType.valueOf(MageFrame.getPreferences().get(KEY_PROXY_TYPE, "NONE").toUpperCase()));
+        dialog.cbProxyType.setSelectedItem(Connection.ProxyType.valueOf(MageFrame.getPreferences().get(KEY_PROXY_TYPE, "NONE").toUpperCase(Locale.ENGLISH)));
 
         load(prefs, dialog.txtProxyServer, KEY_PROXY_ADDRESS, Config.serverName);
         load(prefs, dialog.txtProxyPort, KEY_PROXY_PORT, Integer.toString(Config.port));
@@ -3928,6 +3953,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JCheckBox checkBoxUpkeepYou;
     private javax.swing.JPanel connection_servers;
     private javax.swing.JLabel controlsDescriptionLabel;
+    private javax.swing.JCheckBox displayLifeOnAvatar;
     private javax.swing.JButton exitButton;
     private javax.swing.JLabel fontSizeLabel;
     private javax.swing.JPanel guiSizeBasic;

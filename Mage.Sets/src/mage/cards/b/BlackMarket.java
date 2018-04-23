@@ -55,7 +55,7 @@ public class BlackMarket extends CardImpl {
 
         // Whenever a creature dies, put a charge counter on Black Market.
         this.addAbility(new DiesCreatureTriggeredAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), false));
-        // At the beginning of your precombat main phase, add {B} to your mana pool for each charge counter on Black Market.
+        // At the beginning of your precombat main phase, add {B} for each charge counter on Black Market.
         this.addAbility(new BeginningOfPreCombatMainTriggeredAbility(new BlackMarketEffect(), TargetController.YOU, false));
 
     }
@@ -74,7 +74,7 @@ class BlackMarketEffect extends OneShotEffect {
 
     public BlackMarketEffect() {
         super(Outcome.PutManaInPool);
-        this.staticText = "add {B} to your mana pool for each charge counter on Black Market";
+        this.staticText = "add {B} for each charge counter on Black Market";
     }
 
     public BlackMarketEffect(final BlackMarketEffect effect) {

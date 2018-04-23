@@ -24,8 +24,7 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.abilities.costs.common;
 
 import java.util.UUID;
@@ -63,8 +62,8 @@ public class TapSourceCost extends CostImpl {
     public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
         Permanent permanent = game.getPermanent(sourceId);
         if (permanent != null) {
-            return !permanent.isTapped() && 
-                    (permanent.canTap() || game.getContinuousEffects().asThough(sourceId, AsThoughEffectType.ACTIVATE_HASTE, controllerId, game));
+            return !permanent.isTapped()
+                    && (permanent.canTap() || null != game.getContinuousEffects().asThough(sourceId, AsThoughEffectType.ACTIVATE_HASTE, controllerId, game));
         }
         return false;
     }

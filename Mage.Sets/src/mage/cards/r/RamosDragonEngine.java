@@ -70,7 +70,7 @@ public class RamosDragonEngine extends CardImpl {
         // Whenever you cast a spell, put a +1/+1 counter on Ramos, Dragon Engine for each of that spell's colors.
         this.addAbility(new SpellCastControllerTriggeredAbility(new RamosDragonEngineAddCountersEffect(), new FilterSpell("a spell"), false, true));
 
-        // Remove five +1/+1 counters from Ramos: Add {W}{W}{U}{U}{B}{B}{R}{R}{G}{G} to your mana pool. Activate this ability only once each turn.        
+        // Remove five +1/+1 counters from Ramos: Add {W}{W}{U}{U}{B}{B}{R}{R}{G}{G}. Activate this ability only once each turn.        
         Ability ability = new ActivateOncePerTurnManaAbility(Zone.BATTLEFIELD, new BasicManaEffect(new Mana(2, 2, 2, 2, 2, 0, 0, 0)), new RemoveCountersSourceCost(CounterType.P1P1.createInstance(5)));
         this.addAbility(ability);
     }

@@ -42,7 +42,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author spjspj
  */
-public class KalonianTwingroveTreefolkWarriorToken extends Token {
+public class KalonianTwingroveTreefolkWarriorToken extends TokenImpl {
     
     final static FilterControlledPermanent filterLands = new FilterControlledPermanent("Forests you control");
 
@@ -61,5 +61,13 @@ public class KalonianTwingroveTreefolkWarriorToken extends Token {
         toughness = new MageInt(0);
 
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filterLands), Duration.WhileOnBattlefield)));
+    }
+
+    public KalonianTwingroveTreefolkWarriorToken(final KalonianTwingroveTreefolkWarriorToken token) {
+        super(token);
+    }
+
+    public KalonianTwingroveTreefolkWarriorToken copy() {
+        return new KalonianTwingroveTreefolkWarriorToken(this);
     }
 }

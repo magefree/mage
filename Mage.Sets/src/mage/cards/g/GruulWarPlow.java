@@ -42,6 +42,7 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 
 /**
@@ -69,7 +70,7 @@ public class GruulWarPlow extends CardImpl {
     }
 }
 
-class GruulWarPlowToken extends Token {
+class GruulWarPlowToken extends TokenImpl {
 
     GruulWarPlowToken() {
         super("Juggernaut", "4/4 Juggernaut artifact creature");
@@ -78,5 +79,12 @@ class GruulWarPlowToken extends Token {
         subtype.add(SubType.JUGGERNAUT);
         power = new MageInt(4);
         toughness = new MageInt(4);
+    }
+    public GruulWarPlowToken(final GruulWarPlowToken token) {
+        super(token);
+    }
+
+    public GruulWarPlowToken copy() {
+        return new GruulWarPlowToken(this);
     }
 }

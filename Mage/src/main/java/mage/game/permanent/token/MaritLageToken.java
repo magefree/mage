@@ -38,7 +38,7 @@ import mage.constants.SuperType;
  *
  * @author spjspj
  */
-public class MaritLageToken extends Token {
+public class MaritLageToken extends TokenImpl {
 
     public MaritLageToken() {
         super("Marit Lage", "legendary 20/20 black Avatar creature token with flying and indestructible named Marit Lage");
@@ -54,5 +54,13 @@ public class MaritLageToken extends Token {
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(IndestructibleAbility.getInstance());
 
+    }
+
+    public MaritLageToken(final MaritLageToken token) {
+        super(token);
+    }
+
+    public MaritLageToken copy() {
+        return new MaritLageToken(this);
     }
 }

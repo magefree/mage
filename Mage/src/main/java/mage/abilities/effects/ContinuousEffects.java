@@ -79,7 +79,7 @@ public class ContinuousEffects implements Serializable {
     private final Map<AsThoughEffectType, ContinuousEffectsList<AsThoughEffect>> asThoughEffectsMap = new EnumMap<>(AsThoughEffectType.class);
     public final List<ContinuousEffectsList<?>> allEffectsLists = new ArrayList<>();
     private final ApplyCountersEffect applyCounters;
-    private final PlaneswalkerRedirectionEffect planeswalkerRedirectionEffect;
+//    private final PlaneswalkerRedirectionEffect planeswalkerRedirectionEffect;
     private final AuraReplacementEffect auraReplacementEffect;
 
     private final List<ContinuousEffect> previous = new ArrayList<>();
@@ -89,14 +89,14 @@ public class ContinuousEffects implements Serializable {
 
     public ContinuousEffects() {
         applyCounters = new ApplyCountersEffect();
-        planeswalkerRedirectionEffect = new PlaneswalkerRedirectionEffect();
+//        planeswalkerRedirectionEffect = new PlaneswalkerRedirectionEffect();
         auraReplacementEffect = new AuraReplacementEffect();
         collectAllEffects();
     }
 
     public ContinuousEffects(final ContinuousEffects effect) {
         this.applyCounters = effect.applyCounters.copy();
-        this.planeswalkerRedirectionEffect = effect.planeswalkerRedirectionEffect.copy();
+//        this.planeswalkerRedirectionEffect = effect.planeswalkerRedirectionEffect.copy();
         this.auraReplacementEffect = effect.auraReplacementEffect.copy();
         layeredEffects = effect.layeredEffects.copy();
         continuousRuleModifyingEffects = effect.continuousRuleModifyingEffects.copy();
@@ -339,9 +339,9 @@ public class ContinuousEffects implements Serializable {
      */
     private Map<ReplacementEffect, Set<Ability>> getApplicableReplacementEffects(GameEvent event, Game game) {
         Map<ReplacementEffect, Set<Ability>> replaceEffects = new HashMap<>();
-        if (planeswalkerRedirectionEffect.checksEventType(event, game) && planeswalkerRedirectionEffect.applies(event, null, game)) {
-            replaceEffects.put(planeswalkerRedirectionEffect, null);
-        }
+//        if (planeswalkerRedirectionEffect.checksEventType(event, game) && planeswalkerRedirectionEffect.applies(event, null, game)) {
+//            replaceEffects.put(planeswalkerRedirectionEffect, null);
+//        }
         if (auraReplacementEffect.checksEventType(event, game) && auraReplacementEffect.applies(event, null, game)) {
             replaceEffects.put(auraReplacementEffect, null);
         }
@@ -500,25 +500,44 @@ public class ContinuousEffects implements Serializable {
         return spliceEffects;
     }
 
-    public boolean asThough(UUID objectId, AsThoughEffectType type, UUID controllerId, Game game) {
+    /**
+     *
+     * @param objectId
+     * @param type
+     * @param controllerId
+     * @param game
+     * @return sourceId of the permitting effect if any exists otherwise returns
+     * null
+     */
+    public UUID asThough(UUID objectId, AsThoughEffectType type, UUID controllerId, Game game) {
         return asThough(objectId, type, null, controllerId, game);
     }
 
-    public boolean asThough(UUID objectId, AsThoughEffectType type, Ability affectedAbility, UUID controllerId, Game game) {
+    /**
+     *
+     * @param objectId
+     * @param type
+     * @param affectedAbility
+     * @param controllerId
+     * @param game
+     * @return sourceId of the permitting effect if any exists otherwise returns
+     * null
+     */
+    public UUID asThough(UUID objectId, AsThoughEffectType type, Ability affectedAbility, UUID controllerId, Game game) {
         List<AsThoughEffect> asThoughEffectsList = getApplicableAsThoughEffects(type, game);
         for (AsThoughEffect effect : asThoughEffectsList) {
             Set<Ability> abilities = asThoughEffectsMap.get(type).getAbility(effect.getId());
             for (Ability ability : abilities) {
                 if (affectedAbility == null) {
                     if (effect.applies(objectId, ability, controllerId, game)) {
-                        return true;
+                        return ability.getSourceId();
                     }
                 } else if (effect.applies(objectId, affectedAbility, ability, game)) {
-                    return true;
+                    return ability.getSourceId();
                 }
             }
         }
-        return false;
+        return null;
 
     }
 
@@ -754,7 +773,7 @@ public class ContinuousEffects implements Serializable {
             // Remove all consumed effects (ability dependant)
             for (Iterator<ReplacementEffect> it1 = rEffects.keySet().iterator(); it1.hasNext();) {
                 ReplacementEffect entry = it1.next();
-                if (consumed.containsKey(entry.getId()) /*&& !(entry instanceof CommanderReplacementEffect) */) { // 903.9. 
+                if (consumed.containsKey(entry.getId()) /*&& !(entry instanceof CommanderReplacementEffect) */) { // 903.9.
                     Set<UUID> consumedAbilitiesIds = consumed.get(entry.getId());
                     if (rEffects.get(entry) == null || consumedAbilitiesIds.size() == rEffects.get(entry).size()) {
                         it1.remove();
@@ -1235,8 +1254,8 @@ public class ContinuousEffects implements Serializable {
                     }
                 }
             } else {
-                if (!(entry.getKey() instanceof AuraReplacementEffect)
-                        && !(entry.getKey() instanceof PlaneswalkerRedirectionEffect)) {
+                if (!(entry.getKey() instanceof AuraReplacementEffect)) {
+//                        && !(entry.getKey() instanceof PlaneswalkerRedirectionEffect)) {
                     logger.error("Replacement effect without ability: " + entry.getKey().toString());
                 }
             }

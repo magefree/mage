@@ -60,12 +60,12 @@ public class PetalmaneBaku extends CardImpl {
         // Whenever you cast a Spirit or Arcane spell, you may put a ki counter on Skullmane Baku.
         this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.KI.createInstance()), StaticFilters.SPIRIT_OR_ARCANE_CARD, true));
 
-        // {1}, Remove X ki counters from Petalmane Baku: Add X mana of any one color to your mana pool.
+        // {1}, Remove X ki counters from Petalmane Baku: Add X mana of any one color.
         Ability ability = new DynamicManaAbility(
                 new Mana(0, 0, 0, 0, 0, 0, 1, 0),
                 new RemovedCountersForCostValue(),
                 new ManaCostsImpl<>("{1}"),
-                "Add X mana of any one color to your mana pool",
+                "Add X mana of any one color",
                 true, new CountersSourceCount(CounterType.KI));
         ability.addCost(new RemoveVariableCountersSourceCost(CounterType.KI.createInstance(),
                 "Remove X ki counters from {this}"));

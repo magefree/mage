@@ -44,7 +44,7 @@ public class Castigate extends CardImpl {
     public Castigate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{W}{B}");
 
-        // Target opponent reveals his or her hand. You choose a nonland card from it and exile that card.
+        // Target opponent reveals their hand. You choose a nonland card from it and exile that card.
         this.getSpellAbility().addEffect(new ExileCardYouChooseTargetOpponentEffect(StaticFilters.FILTER_CARD_A_NON_LAND));
         this.getSpellAbility().addTarget(new TargetOpponent());
     }

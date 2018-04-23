@@ -70,7 +70,7 @@ public class FieldmistBorderpost extends CardImpl {
         // Fieldmist Borderpost enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
 
-        // Tap: Add {W} or {U} to your mana pool.
+        // Tap: Add {W} or {U}.
         this.addAbility(new WhiteManaAbility());
         this.addAbility(new BlueManaAbility());
     }

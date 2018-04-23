@@ -70,7 +70,7 @@ public class OrcishLumberjack extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // {tap}, Sacrifice a Forest: Add three mana in any combination of {R} and/or {G} to your mana pool.
+        // {tap}, Sacrifice a Forest: Add three mana in any combination of {R} and/or {G}.
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new OrcishLumberjackManaEffect(), new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
         this.addAbility(ability);
@@ -91,7 +91,7 @@ class OrcishLumberjackManaEffect extends ManaEffect {
 
     public OrcishLumberjackManaEffect() {
         super();
-        this.staticText = "Add three mana in any combination of {R} and/or {G} to your mana pool";
+        this.staticText = "Add three mana in any combination of {R} and/or {G}";
     }
 
     public OrcishLumberjackManaEffect(final OrcishLumberjackManaEffect effect) {

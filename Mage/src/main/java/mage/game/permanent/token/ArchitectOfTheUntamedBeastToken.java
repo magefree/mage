@@ -28,9 +28,6 @@
 
 package mage.game.permanent.token;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.MageInt;
@@ -39,7 +36,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class ArchitectOfTheUntamedBeastToken extends Token {
+public class ArchitectOfTheUntamedBeastToken extends TokenImpl {
 
     public ArchitectOfTheUntamedBeastToken() {
         super("Beast", "6/6 colorless Beast artifact creature token");
@@ -48,6 +45,14 @@ public class ArchitectOfTheUntamedBeastToken extends Token {
         subtype.add(SubType.BEAST);
         power = new MageInt(6);
         toughness = new MageInt(6);
+    }
+
+    public ArchitectOfTheUntamedBeastToken(final ArchitectOfTheUntamedBeastToken token) {
+        super(token);
+    }
+
+    public ArchitectOfTheUntamedBeastToken copy() {
+        return new ArchitectOfTheUntamedBeastToken(this);
     }
 }
 

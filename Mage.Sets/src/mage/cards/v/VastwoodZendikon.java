@@ -39,6 +39,7 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
@@ -81,7 +82,7 @@ public class VastwoodZendikon extends CardImpl {
     }
 }
 
-class VastwoodElementalToken extends Token {
+class VastwoodElementalToken extends TokenImpl {
     VastwoodElementalToken() {
         super("", "6/4 green Elemental creature");
         cardType.add(CardType.CREATURE);
@@ -89,5 +90,12 @@ class VastwoodElementalToken extends Token {
         subtype.add(SubType.ELEMENTAL);
         power = new MageInt(6);
         toughness = new MageInt(4);
+    }
+    public VastwoodElementalToken(final VastwoodElementalToken token) {
+        super(token);
+    }
+
+    public VastwoodElementalToken copy() {
+        return new VastwoodElementalToken(this);
     }
 }

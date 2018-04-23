@@ -53,7 +53,7 @@ public class GruulCluestone extends CardImpl {
     public GruulCluestone(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
-        // {T}: Add {R} or {G} to your mana pool.
+        // {T}: Add {R} or {G}.
         this.addAbility(new RedManaAbility());
         this.addAbility(new GreenManaAbility());
 

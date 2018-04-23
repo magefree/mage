@@ -32,7 +32,7 @@ import mage.abilities.effects.common.DamageMultiEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.target.common.TargetCreatureOrPlayerAmount;
+import mage.target.common.TargetAnyTargetAmount;
 
 /**
  *
@@ -46,7 +46,7 @@ public class Pyrotechnics extends CardImpl {
 
         // Pyrotechnics deals 4 damage divided as you choose among any number of target creatures and/or players.
         this.getSpellAbility().addEffect(new DamageMultiEffect(4));
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayerAmount(4));
+        this.getSpellAbility().addTarget(new TargetAnyTargetAmount(4));
     }
 
     public Pyrotechnics(final Pyrotechnics card) {

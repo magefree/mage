@@ -49,9 +49,9 @@ import mage.target.common.TargetOpponent;
 /**
  * 1. The controller of the spell or ability chooses an opponent. (This doesn't
  * target the opponent.) 2. Each player involved in the clash reveals the top
- * card of his or her library. 3. The converted mana costs of the revealed cards
+ * card of their library. 3. The converted mana costs of the revealed cards
  * are noted. 4. In turn order, each player involved in the clash chooses to put
- * his or her revealed card on either the top or bottom of his or her library.
+ * their revealed card on either the top or bottom of their library.
  * (Note that the player whose turn it is does this first, not necessarily the
  * controller of the clash spell or ability.) When the second player makes this
  * decision, he or she will know what the first player chose. Then all cards are

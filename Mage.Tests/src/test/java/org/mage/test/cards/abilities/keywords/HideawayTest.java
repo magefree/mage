@@ -84,12 +84,12 @@ public class HideawayTest extends CardTestPlayerBase {
     @Test
     public void testMosswortBridge() {
         // Hideaway (This land enters the battlefield tapped. When it does, look at the top four cards of your library, exile one face down, then put the rest on the bottom of your library.)
-        // {T}: Add {G} to your mana pool.
+        // {T}: Add {G}.
         // {G}, {T}: You may play the exiled card without paying its mana cost if creatures you control have total power 10 or greater.
         addCard(Zone.HAND, playerA, "Mosswort Bridge");
         // When you cast Ulamog, the Ceaseless Hunger, exile two target permanents.
         // Indestructible
-        // Whenever Ulamog attacks, defending player exiles the top twenty cards of his or her library.
+        // Whenever Ulamog attacks, defending player exiles the top twenty cards of their library.
         addCard(Zone.LIBRARY, playerA, "Ulamog, the Ceaseless Hunger");
         skipInitShuffling();
 
@@ -234,7 +234,7 @@ public class HideawayTest extends CardTestPlayerBase {
          /*
          Shelldock Isle
          Land Hideaway
-         {T}: Add {U} to your mana pool.
+         {T}: Add {U}.
          {U}, {T}: You may play the exiled card without paying its mana cost if a library has twenty or fewer cards in it.
         */
         String sIsle = "Shelldock Isle";
@@ -271,7 +271,7 @@ public class HideawayTest extends CardTestPlayerBase {
          /*
          Shelldock Isle
          Land Hideaway
-         {T}: Add {U} to your mana pool.
+         {T}: Add {U}.
          {U}, {T}: You may play the exiled card without paying its mana cost if a library has twenty or fewer cards in it.
         */
         String sIsle = "Shelldock Isle";

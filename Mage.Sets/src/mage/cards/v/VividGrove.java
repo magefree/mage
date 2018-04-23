@@ -52,9 +52,9 @@ public class VividGrove extends CardImpl {
         Ability ability = new EntersBattlefieldAbility(new TapSourceEffect(true), false, null, "{this} enters the battlefield tapped with two charge counters on it", null);
         ability.addEffect(new AddCountersSourceEffect(CounterType.CHARGE.createInstance(2)));
         this.addAbility(ability);
-        // {tap}: Add {G} to your mana pool.
+        // {tap}: Add {G}.
         this.addAbility(new GreenManaAbility());
-        // {tap}, Remove a charge counter from Vivid Grove: Add one mana of any color to your mana pool.
+        // {tap}, Remove a charge counter from Vivid Grove: Add one mana of any color.
         ability = new AnyColorManaAbility();
         ability.addCost(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(1)));
         this.addAbility(ability);

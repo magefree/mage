@@ -62,7 +62,7 @@ public class Mindshrieker extends CardImpl {
         this.toughness = new MageInt(1);
 
         this.addAbility(FlyingAbility.getInstance());
-        // {2}: Target player puts the top card of his or her library into his or her graveyard. Mindshrieker gets +X/+X until end of turn, where X is that card's converted mana cost.
+        // {2}: Target player puts the top card of their library into their graveyard. Mindshrieker gets +X/+X until end of turn, where X is that card's converted mana cost.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MindshriekerEffect(), new ManaCostsImpl("{2}"));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
@@ -83,7 +83,7 @@ class MindshriekerEffect extends OneShotEffect {
 
     public MindshriekerEffect() {
         super(Outcome.BoostCreature);
-        staticText = "Target player puts the top card of his or her library into his or her graveyard. {this} gets +X/+X until end of turn, where X is that card's converted mana cost";
+        staticText = "Target player puts the top card of their library into their graveyard. {this} gets +X/+X until end of turn, where X is that card's converted mana cost";
     }
 
     public MindshriekerEffect(final MindshriekerEffect effect) {

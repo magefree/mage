@@ -67,7 +67,7 @@ public class ChronicFlooding extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
        
-        // Whenever enchanted land becomes tapped, its controller puts the top three cards of his or her library into his or her graveyard.
+        // Whenever enchanted land becomes tapped, its controller puts the top three cards of their library into their graveyard.
         this.addAbility(new ChronicFloodingAbility());
     }
  
@@ -118,6 +118,6 @@ class ChronicFloodingAbility extends TriggeredAbilityImpl {
  
     @Override
     public String getRule() {
-        return "Whenever enchanted land becomes tapped, its controller puts the top three cards of his or her library into his or her graveyard.";
+        return "Whenever enchanted land becomes tapped, its controller puts the top three cards of their library into their graveyard.";
     }
 }

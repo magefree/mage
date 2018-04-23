@@ -64,8 +64,8 @@ public class LandTypeChangingEffectsTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerB, "Canopy Vista", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Plains", 2);
-        // Lands you control have "{T}: Add one mana of any color to your mana pool."
-        // {T}: Add one mana of any color to your mana pool.
+        // Lands you control have "{T}: Add one mana of any color."
+        // {T}: Add one mana of any color.
         addCard(Zone.HAND, playerB, "Chromatic Lantern");
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Chromatic Lantern");
@@ -87,8 +87,8 @@ public class LandTypeChangingEffectsTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerB, "Canopy Vista", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Plains", 2);
-        // Lands you control have "{T}: Add one mana of any color to your mana pool."
-        // {T}: Add one mana of any color to your mana pool.
+        // Lands you control have "{T}: Add one mana of any color."
+        // {T}: Add one mana of any color.
         addCard(Zone.HAND, playerB, "Chromatic Lantern");
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Chromatic Lantern");
@@ -117,7 +117,7 @@ public class LandTypeChangingEffectsTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Aquitect's Will");// Tribal Sorcery{U}
         addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
         // Forbidding Watchtower enters the battlefield tapped.
-        // {T}: Add {W} to your mana pool.
+        // {T}: Add {W}.
         // {1}{W}: Forbidding Watchtower becomes a 1/5 white Soldier creature until end of turn. It's still a land.
         addCard(Zone.BATTLEFIELD, playerB, "Forbidding Watchtower", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Plains", 2);
@@ -223,7 +223,7 @@ public class LandTypeChangingEffectsTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
 
-        // At the beginning of each player's upkeep, that player puts a flood counter on target non-Island land he or she controls of his or her choice.
+        // At the beginning of each player's upkeep, that player puts a flood counter on target non-Island land he or she controls of their choice.
         //  That land is an Island for as long as it has a flood counter on it.
         // At the beginning of each end step, if all lands on the battlefield are Islands, remove all flood counters from them.
         addCard(Zone.HAND, playerB, "Quicksilver Fountain", 1); // Artifact {3}

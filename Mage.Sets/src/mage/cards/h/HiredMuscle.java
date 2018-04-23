@@ -50,6 +50,7 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.events.GameEvent;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -89,7 +90,7 @@ public class HiredMuscle extends CardImpl {
     }
 }
 
-class Scarmaker extends Token {
+class Scarmaker extends TokenImpl {
 
     Scarmaker() {
         super("Scarmaker", "");
@@ -107,5 +108,12 @@ class Scarmaker extends Token {
                 new RemoveCountersSourceCost(CounterType.KI.createInstance()));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
+    }
+    public Scarmaker(final Scarmaker token) {
+        super(token);
+    }
+
+    public Scarmaker copy() {
+        return new Scarmaker(this);
     }
 }

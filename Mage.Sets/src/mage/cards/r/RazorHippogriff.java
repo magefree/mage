@@ -105,7 +105,7 @@ public class RazorHippogriff extends CardImpl {
                     card = (Card)game.getLastKnownInformation(source.getFirstTarget(), Zone.GRAVEYARD);
                 }
                 if (card != null) {
-                    player.gainLife(card.getConvertedManaCost(), game);
+                    player.gainLife(card.getConvertedManaCost(), game, source);
                 }
             }
             return true;

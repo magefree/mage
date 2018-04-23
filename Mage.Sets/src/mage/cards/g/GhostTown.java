@@ -48,7 +48,7 @@ public class GhostTown extends CardImpl {
     public GhostTown(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {tap}: Add {C} to your mana pool.
+        // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         
         // {0}: Return Ghost Town to its owner's hand. Activate this ability only if it's not your turn.

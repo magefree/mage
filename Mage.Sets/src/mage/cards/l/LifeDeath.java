@@ -43,6 +43,7 @@ import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.target.Target;
@@ -80,13 +81,20 @@ public class LifeDeath extends SplitCard {
     }
 }
 
-class LifeLandToken extends Token {
+class LifeLandToken extends TokenImpl {
 
     public LifeLandToken() {
         super("", "1/1 creatures");
         cardType.add(CardType.CREATURE);
         power = new MageInt(1);
         toughness = new MageInt(1);
+    }
+    public LifeLandToken(final LifeLandToken token) {
+        super(token);
+    }
+
+    public LifeLandToken copy() {
+        return new LifeLandToken(this);
     }
 
 }

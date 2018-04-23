@@ -34,7 +34,7 @@ import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.target.common.TargetOpponent;
+import mage.target.common.TargetOpponentOrPlaneswalker;
 
 /**
  *
@@ -47,7 +47,7 @@ public class InfernoJet extends CardImpl {
 
         // Inferno Jet deals 6 damage to target opponent.
         getSpellAbility().addEffect(new DamageTargetEffect(6));
-        getSpellAbility().addTarget(new TargetOpponent());
+        getSpellAbility().addTarget(new TargetOpponentOrPlaneswalker());
 
         // Cycling {2}
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));

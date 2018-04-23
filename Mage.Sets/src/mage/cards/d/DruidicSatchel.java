@@ -39,6 +39,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.token.SaprolingToken;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 
@@ -91,7 +92,7 @@ class DruidicSatchelEffect extends OneShotEffect {
                 card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), source.getControllerId());
             }
             if (!card.isCreature() && !card.isLand()) {
-                player.gainLife(2, game);
+                player.gainLife(2, game, source);
             }
 
             Cards cards = new CardsImpl();

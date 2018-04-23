@@ -38,6 +38,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.filter.common.FilterControlledLandPermanent;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 
 /**
@@ -73,13 +74,20 @@ public class RudeAwakening extends CardImpl {
     }
 }
 
-class RudeAwakeningToken extends Token {
+class RudeAwakeningToken extends TokenImpl {
 
     public RudeAwakeningToken() {
         super("", "2/2 creatures");
         cardType.add(CardType.CREATURE);
         power = new MageInt(2);
         toughness = new MageInt(2);
+    }
+    public RudeAwakeningToken(final RudeAwakeningToken token) {
+        super(token);
+    }
+
+    public RudeAwakeningToken copy() {
+        return new RudeAwakeningToken(this);
     }
 
 }

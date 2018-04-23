@@ -54,7 +54,7 @@ public class StuntedGrowth extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}{G}");
 
 
-        // Target player chooses three cards from his or her hand and puts them on top of his or her library in any order.
+        // Target player chooses three cards from their hand and puts them on top of their library in any order.
         this.getSpellAbility().addEffect(new StuntedGrowthEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
@@ -73,7 +73,7 @@ class StuntedGrowthEffect extends OneShotEffect {
 
     public StuntedGrowthEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Target player chooses three cards from his or her hand and puts them on top of his or her library in any order";
+        this.staticText = "Target player chooses three cards from their hand and puts them on top of their library in any order";
     }
 
     public StuntedGrowthEffect(final StuntedGrowthEffect effect) {

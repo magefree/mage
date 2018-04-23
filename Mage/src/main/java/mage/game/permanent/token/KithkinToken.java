@@ -9,7 +9,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class KithkinToken extends Token {
+public class KithkinToken extends TokenImpl {
 
     public KithkinToken() {
         super("Kithkin Soldier", "1/1 white Kithkin Soldier creature token");
@@ -20,5 +20,13 @@ public class KithkinToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
         availableImageSetCodes.addAll(Arrays.asList("LRW", "SHM", "MMA"));
+    }
+
+    public KithkinToken(final KithkinToken token) {
+        super(token);
+    }
+
+    public KithkinToken copy() {
+        return new KithkinToken(this);
     }
 }

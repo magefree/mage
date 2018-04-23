@@ -60,7 +60,7 @@ public class PriestOfTitania extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // {T}: Add {G} to your mana pool for each Elf on the battlefield.
+        // {T}: Add {G} for each Elf on the battlefield.
         this.addAbility(new DynamicManaAbility(Mana.GreenMana(1), new PermanentsOnBattlefieldCount(filter)));
     }
 

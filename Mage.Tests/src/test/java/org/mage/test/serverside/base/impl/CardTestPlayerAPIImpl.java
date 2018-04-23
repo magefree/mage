@@ -1248,6 +1248,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      *               are copies. For modal spells use a prefix with the mode number:
      *               mode=1Lightning Bolt^mode=2Silvercoat Lion
      */
+    // TODO: mode options doesn't work here (see BrutalExpulsionTest)
     public void addTarget(TestPlayer player, String target) {
         player.addTarget(target);
     }
@@ -1299,10 +1300,10 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         }
     }
 
-    public void assertDamageReceived(Player player, String cardName, int amount) {
+    public void assertDamageReceived(Player player, String cardName, int expected) {
         Permanent p = getPermanent(cardName, player.getId());
         if (p != null) {
-            Assert.assertEquals(p.getDamage(), amount);
+            Assert.assertEquals("Wrong damage received: ", expected, p.getDamage());
         }
     }
 }

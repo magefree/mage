@@ -42,6 +42,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 
 /**
@@ -56,7 +57,7 @@ public class ShamblingVent extends CardImpl {
         // Shambling Vent enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
 
-        // {T}: Add {W} or {B} to your mana pool.
+        // {T}: Add {W} or {B}.
         this.addAbility(new WhiteManaAbility());
         this.addAbility(new BlackManaAbility());
 
@@ -75,7 +76,7 @@ public class ShamblingVent extends CardImpl {
     }
 }
 
-class ShamblingVentToken extends Token {
+class ShamblingVentToken extends TokenImpl {
 
     public ShamblingVentToken() {
         super("", "2/3 white and black Elemental creature with lifelink");
@@ -86,5 +87,12 @@ class ShamblingVentToken extends Token {
         power = new MageInt(2);
         toughness = new MageInt(3);
         addAbility(LifelinkAbility.getInstance());
+    }
+    public ShamblingVentToken(final ShamblingVentToken token) {
+        super(token);
+    }
+
+    public ShamblingVentToken copy() {
+        return new ShamblingVentToken(this);
     }
 }

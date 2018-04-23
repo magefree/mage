@@ -43,7 +43,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.game.permanent.token.EldraziScionToken;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -53,11 +53,9 @@ import mage.target.common.TargetCreaturePermanent;
  * @author fireshoes
  */
 public class BroodButcher extends CardImpl {
-    
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a creature");
 
     public BroodButcher(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{G}");
         this.subtype.add(SubType.ELDRAZI, SubType.DRONE);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
@@ -65,12 +63,12 @@ public class BroodButcher extends CardImpl {
         // Devoid
         this.addAbility(new DevoidAbility(this.color));
 
-        // When Brood Butcher enters the battlefield, create a 1/1 colorless Eldrazi Scion creature token. It has "Sacrifice this creature: Add {C} to your mana pool."
+        // When Brood Butcher enters the battlefield, create a 1/1 colorless Eldrazi Scion creature token. It has "Sacrifice this creature: Add {C}."
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new EldraziScionToken()), false));
 
         // {B}{G}, Sacrifice a creature: Target creature gets -2/-2 until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(-2, -2, Duration.EndOfTurn), new ManaCostsImpl("{B}{G}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(filter)));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

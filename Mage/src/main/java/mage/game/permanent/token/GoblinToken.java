@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class GoblinToken extends Token {
+public class GoblinToken extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 
@@ -64,5 +64,13 @@ public class GoblinToken extends Token {
         color.setRed(true);
         power = new MageInt(1);
         toughness = new MageInt(1);
+    }
+
+    public GoblinToken(final GoblinToken token) {
+        super(token);
+    }
+
+    public GoblinToken copy() {
+        return new GoblinToken(this);
     }
 }

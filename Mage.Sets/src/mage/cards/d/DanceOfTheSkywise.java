@@ -37,6 +37,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -65,7 +66,7 @@ public class DanceOfTheSkywise extends CardImpl {
         return new DanceOfTheSkywise(this);
     }
     
-        private static class DragonIllusionToken extends Token {
+        private static class DragonIllusionToken extends TokenImpl {
 
         public DragonIllusionToken() {
             super("Dragon", "blue Dragon Illusion with base power and toughness 4/4 and with flying");
@@ -76,6 +77,13 @@ public class DanceOfTheSkywise extends CardImpl {
             power = new MageInt(4);
             toughness = new MageInt(4);
             this.addAbility(FlyingAbility.getInstance());
+        }
+        public DragonIllusionToken(final DragonIllusionToken token) {
+            super(token);
+        }
+
+        public DragonIllusionToken copy() {
+            return new DragonIllusionToken(this);
         }
 
     }

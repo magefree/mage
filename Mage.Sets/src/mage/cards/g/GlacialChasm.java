@@ -41,7 +41,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledLandPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 
@@ -57,7 +57,7 @@ public class GlacialChasm extends CardImpl {
         // Cumulative upkeep-Pay 2 life.
         this.addAbility(new CumulativeUpkeepAbility(new PayLifeCost(2)));
         // When Glacial Chasm enters the battlefield, sacrifice a land.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeControllerEffect(new FilterControlledLandPermanent(), 1, "")));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeControllerEffect(StaticFilters.FILTER_LAND, 1, "")));
         // Creatures you control can't attack.
         FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures you control");
         filter.add(new ControllerPredicate(TargetController.YOU));

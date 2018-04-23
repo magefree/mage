@@ -55,7 +55,7 @@ public class Encroach extends CardImpl {
     public Encroach(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}");
 
-        // Target player reveals his or her hand. You choose a nonbasic land card from it. That player discards that card.
+        // Target player reveals their hand. You choose a nonbasic land card from it. That player discards that card.
         this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(filter));
         this.getSpellAbility().addTarget(new TargetOpponent());
    }

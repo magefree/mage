@@ -53,8 +53,8 @@ public class PathToExile extends CardImpl {
     public PathToExile(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");
 
-        // Exile target creature. Its controller may search his or her library for a basic land card,
-        // put that card onto the battlefield tapped, then shuffle his or her library.
+        // Exile target creature. Its controller may search their library for a basic land card,
+        // put that card onto the battlefield tapped, then shuffle their library.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new PathToExileEffect());
     }
@@ -73,7 +73,7 @@ class PathToExileEffect extends OneShotEffect {
 
     public PathToExileEffect() {
         super(Outcome.Exile);
-        staticText = "Exile target creature. Its controller may search his or her library for a basic land card, put that card onto the battlefield tapped, then shuffle his or her library";
+        staticText = "Exile target creature. Its controller may search their library for a basic land card, put that card onto the battlefield tapped, then shuffle their library";
     }
 
     public PathToExileEffect(final PathToExileEffect effect) {

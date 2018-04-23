@@ -71,7 +71,7 @@ public class CaptainLanneryStorm extends CardImpl {
         // Haste
         this.addAbility(HasteAbility.getInstance());
 
-        // Whenever Captain lannery Storm attacks, create a colorless Treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color to your mana pool."
+        // Whenever Captain lannery Storm attacks, create a colorless Treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color."
         this.addAbility(new AttacksTriggeredAbility(new CreateTokenEffect(new TreasureToken()), false));
 
         // Whenever you sacrifice a Treasure, Captain Lannery Storm gets +1/+0 until end of turn.

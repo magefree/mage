@@ -45,7 +45,7 @@ public class Counterbore extends CardImpl {
 
 
         // Counter target spell. 
-        // Search its controller's graveyard, hand, and library for all cards with the same name as that spell and exile them. Then that player shuffles his or her library.
+        // Search its controller's graveyard, hand, and library for all cards with the same name as that spell and exile them. Then that player shuffles their library.
         this.getSpellAbility().addTarget(new TargetSpell());
         this.getSpellAbility().addEffect(new CounterTargetAndSearchGraveyardHandLibraryEffect());
     }

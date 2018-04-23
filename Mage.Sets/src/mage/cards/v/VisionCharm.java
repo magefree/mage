@@ -64,7 +64,7 @@ public class VisionCharm extends CardImpl {
     public VisionCharm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}");
 
-        // Choose one - Target player puts the top four cards of his or her library into his or her graveyard;
+        // Choose one - Target player puts the top four cards of their library into their graveyard;
         this.getSpellAbility().addEffect(new PutLibraryIntoGraveTargetEffect(4));
         this.getSpellAbility().addTarget(new TargetPlayer());
 

@@ -9,7 +9,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  *
  * @author noxx
  *
- *   Whenever Selhoff Occultist or another creature dies, target player puts the top card of his or her library into his or her graveyard.
+ *   Whenever Selhoff Occultist or another creature dies, target player puts the top card of their library into their graveyard.
  */
 public class SelhoffOccultistTest extends CardTestPlayerBase {
 

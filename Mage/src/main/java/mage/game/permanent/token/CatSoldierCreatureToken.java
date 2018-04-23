@@ -31,13 +31,12 @@ import mage.MageInt;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.game.permanent.token.Token;
 
 /**
  *
  * @author LevelX2
  */
-public class CatSoldierCreatureToken extends Token {
+public class CatSoldierCreatureToken extends TokenImpl {
 
     public CatSoldierCreatureToken() {
         super("Cat Soldier", "1/1 white Cat Soldier creature token with vigilance");
@@ -51,5 +50,13 @@ public class CatSoldierCreatureToken extends Token {
         
         this.addAbility(VigilanceAbility.getInstance());
         this.setOriginalExpansionSetCode("BNG");
+    }
+
+    public CatSoldierCreatureToken(final CatSoldierCreatureToken token) {
+        super(token);
+    }
+
+    public CatSoldierCreatureToken copy() {
+        return new CatSoldierCreatureToken(this);
     }
 }

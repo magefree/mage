@@ -47,7 +47,7 @@ import mage.players.Library;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInHand;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetOpponent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -74,17 +74,17 @@ public class NicolBolasGodPharaoh extends CardImpl {
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(7));
 
-        // +2: Target opponent exiles cards from the top of his or her library until he or she exiles a nonland card. Until end of turn, you may cast that card without paying its mana cost.
+        // +2: Target opponent exiles cards from the top of their library until he or she exiles a nonland card. Until end of turn, you may cast that card without paying its mana cost.
         LoyaltyAbility ability = new LoyaltyAbility(new NicolBolasGodPharaohPlusTwoEffect(), 2);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
 
-        // +1: Each opponent exiles two cards from his or her hand.
+        // +1: Each opponent exiles two cards from their hand.
         this.addAbility(new LoyaltyAbility(new NicolBolasGodPharaohPlusOneEffect(), 1));
 
-        // -4: Nicol Bolas, God-Pharaoh deals 7 damage to target creature or player.
+        // -4: Nicol Bolas, God-Pharaoh deals 7 damage to any target.
         ability = new LoyaltyAbility(new DamageTargetEffect(7), -4);
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
 
         // -12: Exile each nonland permanent your opponents control.
@@ -105,7 +105,7 @@ class NicolBolasGodPharaohPlusOneEffect extends OneShotEffect {
 
     NicolBolasGodPharaohPlusOneEffect() {
         super(Outcome.Exile);
-        this.staticText = "Each opponent exiles two cards from his or her hand.";
+        this.staticText = "Each opponent exiles two cards from their hand.";
     }
 
     NicolBolasGodPharaohPlusOneEffect(final NicolBolasGodPharaohPlusOneEffect effect) {
@@ -157,7 +157,7 @@ class NicolBolasGodPharaohPlusTwoEffect extends OneShotEffect {
 
     public NicolBolasGodPharaohPlusTwoEffect() {
         super(Outcome.Detriment);
-        this.staticText = "Target opponent exiles cards from the top of his or her library until he or she exiles a nonland card. Until end of turn, you may cast that card without paying its mana cost";
+        this.staticText = "Target opponent exiles cards from the top of their library until he or she exiles a nonland card. Until end of turn, you may cast that card without paying its mana cost";
     }
 
     public NicolBolasGodPharaohPlusTwoEffect(final NicolBolasGodPharaohPlusTwoEffect effect) {

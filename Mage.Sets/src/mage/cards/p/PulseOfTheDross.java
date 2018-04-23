@@ -51,7 +51,7 @@ public class PulseOfTheDross extends CardImpl {
     public PulseOfTheDross(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}{B}");
 
-        // Target player reveals three cards from his or her hand and you choose one of them. That player discards that card.
+        // Target player reveals three cards from their hand and you choose one of them. That player discards that card.
         this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(TargetController.ANY, 3));
         this.getSpellAbility().addEffect(new PulseOfTheDrossReturnToHandEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());

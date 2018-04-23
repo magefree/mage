@@ -51,13 +51,13 @@ import mage.target.common.TargetOpponent;
 public class Modes extends LinkedHashMap<UUID, Mode> {
 
     private Mode currentMode; // the current mode of the selected modes
-    private final ArrayList<UUID> selectedModes = new ArrayList<>();
+    private final List<UUID> selectedModes = new ArrayList<>();
     private int minModes;
     private int maxModes;
     private TargetController modeChooser;
     private boolean eachModeMoreThanOnce; // each mode can be selected multiple times during one choice
     private boolean eachModeOnlyOnce; // state if each mode can be chosen only once as long as the source object exists
-    private final LinkedHashMap<UUID, Mode> duplicateModes = new LinkedHashMap<>();
+    private final Map<UUID, Mode> duplicateModes = new LinkedHashMap<>();
     private OptionalAdditionalModeSourceCosts optionalAdditionalModeSourceCosts = null; // only set if costs have to be paid
     private Filter maxModesFilter = null; // calculates the max number of available modes
 
@@ -139,7 +139,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
         return null;
     }
 
-    public ArrayList<UUID> getSelectedModes() {
+    public List<UUID> getSelectedModes() {
         return selectedModes;
     }
 
@@ -292,7 +292,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
      * @param source
      * @param game
      */
-    private void setAlreadySelectedModes(ArrayList<UUID> selectedModes, Ability source, Game game) {
+    private void setAlreadySelectedModes(List<UUID> selectedModes, Ability source, Game game) {
         for (UUID modeId : selectedModes) {
             String key = getKey(source, game, modeId);
             game.getState().setValue(key, true);

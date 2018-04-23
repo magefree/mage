@@ -46,6 +46,7 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 
 /**
@@ -82,7 +83,7 @@ public class HauntedPlateMail extends CardImpl {
     }
 }
 
-class HauntedPlateMailToken extends Token {
+class HauntedPlateMailToken extends TokenImpl {
 
     public HauntedPlateMailToken() {
         super("Spirit", "4/4 Spirit artifact creature that's no longer an Equipment");
@@ -91,5 +92,12 @@ class HauntedPlateMailToken extends Token {
         subtype.add(SubType.SPIRIT);
         power = new MageInt(4);
         toughness = new MageInt(4);
+    }
+    public HauntedPlateMailToken(final HauntedPlateMailToken token) {
+        super(token);
+    }
+
+    public HauntedPlateMailToken copy() {
+        return new HauntedPlateMailToken(this);
     }
 }

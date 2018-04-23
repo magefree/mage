@@ -62,7 +62,7 @@ public class AtzalCaveOfEternity extends CardImpl {
         ability.setRuleAtTheTop(true);
         this.addAbility(ability);
 
-        // {t}: Add one mana of any color to your mana pool.
+        // {t}: Add one mana of any color.
         this.addAbility(new AnyColorManaAbility());
 
         // {3}{B}{G}, {T}: Return target creature card from your graveyard to the battlefield.

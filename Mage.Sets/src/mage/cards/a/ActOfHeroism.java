@@ -54,7 +54,7 @@ public class ActOfHeroism extends CardImpl {
 
         // It gets +2/+2 until end of turn
         effect = new BoostTargetEffect(2, 2, Duration.EndOfTurn);
-        effect.setText("It gets +2/+2");
+        effect.setText("It gets +2/+2 until end of turn");
         this.getSpellAbility().addEffect(effect);
 
         // and can block an additional creature this turn

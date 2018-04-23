@@ -32,36 +32,45 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetLandPermanent;
+import mage.util.CardUtil;
 
 /**
- * "Untap up to X lands" effect
+ * "Untap (up to) X lands" effect
  */
 public class UntapLandsEffect extends OneShotEffect {
 
     private final int amount;
+    private final boolean upTo;
 
     public UntapLandsEffect(int amount) {
+        this(amount, true);
+    }
+
+    public UntapLandsEffect(int amount, boolean upTo) {
         super(Outcome.Untap);
         this.amount = amount;
-        staticText = "Untap up to " + amount + " lands";
+        this.upTo = upTo;
+        staticText = "untap " + (upTo ? "up to " : "") + CardUtil.numberToText(amount, staticText) + " lands";
     }
 
     public UntapLandsEffect(final UntapLandsEffect effect) {
         super(effect);
         this.amount = effect.amount;
+        this.upTo = effect.upTo;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            TargetLandPermanent target = new TargetLandPermanent(0, amount, new FilterLandPermanent(), true);
+            TargetLandPermanent target = new TargetLandPermanent(upTo ? 0 : amount, amount, StaticFilters.FILTER_LAND, true);
             if (target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
 
                 // UI Shortcut: Check if any lands are already tapped.  If there are equal/fewer than amount, give the option to add those in to be untapped now.

@@ -54,7 +54,7 @@ public class CabalPit extends CardImpl {
     public CabalPit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {tap}: Add {B} to your mana pool. Cabal Pit deals 1 damage to you.
+        // {tap}: Add {B}. Cabal Pit deals 1 damage to you.
         Ability manaAbility = new BlackManaAbility();
         manaAbility.addEffect(new DamageControllerEffect(1));
         this.addAbility(manaAbility);

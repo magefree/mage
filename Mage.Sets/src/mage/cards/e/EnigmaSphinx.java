@@ -39,8 +39,8 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -57,7 +57,7 @@ import mage.players.Player;
 public class EnigmaSphinx extends CardImpl {
 
     public EnigmaSphinx(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}{W}{U}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}{W}{U}{B}");
         this.subtype.add(SubType.SPHINX);
 
         this.power = new MageInt(5);
@@ -66,7 +66,7 @@ public class EnigmaSphinx extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // When Enigma Sphinx is put into your graveyard from the battlefield, put it into your library third from the top.        
+        // When Enigma Sphinx is put into your graveyard from the battlefield, put it into your library third from the top.
         this.addAbility(new EnigmaSphinxTriggeredAbility(new EnigmaSphinxEffect()));
 
         // Cascade
@@ -111,12 +111,12 @@ class EnigmaSphinxTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         Permanent permanent = zEvent.getTarget();
-        if (permanent != null &&
-                zEvent.getToZone() == Zone.GRAVEYARD &&
-                zEvent.getFromZone() == Zone.BATTLEFIELD &&
-                permanent.getId().equals(this.getSourceId()) &&
-                // 5/1/2009 If you control an Enigma Sphinx that's owned by another player, it's put into that player's 
-                //          graveyard from the battlefield, so Enigma Sphinx's middle ability won't trigger.                    
+        if (permanent != null
+                && zEvent.getToZone() == Zone.GRAVEYARD
+                && zEvent.getFromZone() == Zone.BATTLEFIELD
+                && permanent.getId().equals(this.getSourceId())
+                && // 5/1/2009 If you control an Enigma Sphinx that's owned by another player, it's put into that player's
+                //          graveyard from the battlefield, so Enigma Sphinx's middle ability won't trigger.
                 permanent.getOwnerId().equals(permanent.getControllerId())) {
             return true;
         }
@@ -152,20 +152,12 @@ class EnigmaSphinxEffect extends OneShotEffect {
             Player owner = game.getPlayer(card.getOwnerId());
             if (owner != null && card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true)) {
                 // Move Sphinx to third position
-                game.informPlayers(card.getLogName() + " is put into " + owner.getLogName() +"'s library third from the top");
+                game.informPlayers(card.getLogName() + " is put into " + owner.getLogName() + "'s library third from the top");
                 Library lib = owner.getLibrary();
                 if (lib != null) {
                     Card card1 = lib.removeFromTop(game);
                     if (card1 != null && card1.getId().equals(source.getSourceId())) {
-                        Card card2 = lib.removeFromTop(game);
-                        Card card3 = lib.removeFromTop(game);
-                        lib.putOnTop(card1, game);
-                        if (card3 != null) {
-                            lib.putOnTop(card3, game);
-                        }
-                        if (card2 != null) {
-                            lib.putOnTop(card2, game);
-                        }
+                        lib.putCardThirdFromTheTop(card1, game);
                         return true;
                     }
                 }

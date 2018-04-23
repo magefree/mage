@@ -40,7 +40,7 @@ import mage.abilities.keyword.TrampleAbility;
  *
  * @author LoneFox
  */
-public class WurmToken2 extends Token {
+public class WurmToken2 extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 
@@ -56,5 +56,13 @@ public class WurmToken2 extends Token {
         power = new MageInt(5);
         toughness = new MageInt(5);
         addAbility(TrampleAbility.getInstance());
+    }
+
+    public WurmToken2(final WurmToken2 token) {
+        super(token);
+    }
+
+    public WurmToken2 copy() {
+        return new WurmToken2(this);
     }
 }

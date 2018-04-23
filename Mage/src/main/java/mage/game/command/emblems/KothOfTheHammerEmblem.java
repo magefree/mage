@@ -43,14 +43,14 @@ import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.command.Emblem;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
  * @author spjspj
  */
 public class KothOfTheHammerEmblem extends Emblem {
-    // "Mountains you control have '{T}: This land deals 1 damage to target creature or player.'"
+    // "Mountains you control have '{T}: This land deals 1 damage to any target.'"
 
     public KothOfTheHammerEmblem() {
         this.setName("Emblem Koth");
@@ -69,7 +69,7 @@ class KothOfTheHammerThirdEffect extends ContinuousEffectImpl {
 
     public KothOfTheHammerThirdEffect() {
         super(Duration.EndOfGame, Outcome.AddAbility);
-        staticText = "You get an emblem with \"Mountains you control have '{T}: This land deals 1 damage to target creature or player.'\"";
+        staticText = "You get an emblem with \"Mountains you control have '{T}: This land deals 1 damage to any target.'\"";
     }
 
     public KothOfTheHammerThirdEffect(final KothOfTheHammerThirdEffect effect) {
@@ -83,7 +83,7 @@ class KothOfTheHammerThirdEffect extends ContinuousEffectImpl {
                 if (sublayer == SubLayer.NA) {
                     for (Permanent permanent : game.getBattlefield().getActivePermanents(mountains, source.getControllerId(), source.getSourceId(), game)) {
                         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
-                        ability.addTarget(new TargetCreatureOrPlayer());
+                        ability.addTarget(new TargetAnyTarget());
                         permanent.addAbility(ability, source.getSourceId(), game);
                     }
                 }

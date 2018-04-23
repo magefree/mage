@@ -60,7 +60,7 @@ public class NogginWhack extends CardImpl {
 
         // Prowl {1}{B}
         this.addAbility(new ProwlAbility(this, "{1}{B}"));
-        // Target player reveals three cards from his or her hand. You choose two of them. That player discards those cards.
+        // Target player reveals three cards from their hand. You choose two of them. That player discards those cards.
         this.getSpellAbility().addEffect(new NogginWhackEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
 
@@ -80,7 +80,7 @@ class NogginWhackEffect extends OneShotEffect {
 
     public NogginWhackEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Target player reveals three cards from his or her hand. You choose two of them. That player discards those cards";
+        this.staticText = "Target player reveals three cards from their hand. You choose two of them. That player discards those cards";
     }
 
     public NogginWhackEffect(final NogginWhackEffect effect) {

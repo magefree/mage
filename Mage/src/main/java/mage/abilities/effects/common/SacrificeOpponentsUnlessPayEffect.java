@@ -182,7 +182,7 @@ public class SacrificeOpponentsUnlessPayEffect extends OneShotEffect{
     
     private void setText() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Each opponent sacrifices ");
+        sb.append("each opponent sacrifices ");
         
         if (amount.toString().equals("X")) {
             sb.append(amount.toString());

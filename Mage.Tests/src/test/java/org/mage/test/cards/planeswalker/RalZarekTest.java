@@ -42,7 +42,7 @@ public class RalZarekTest extends CardTestPlayerBase {
     @Test
     public void testFirstAbility() {
         // +1: Tap target permanent, then untap another target permanent.
-        // -2: Ral Zarek deals 3 damage to target creature or player.
+        // -2: Ral Zarek deals 3 damage to any target.
         // -7: Flip five coins. Take an extra turn after this one for each coin that comes up heads.
         String ralZarek = "Ral Zarek"; // {2}{U}{R}
         addCard(Zone.HAND, playerA, ralZarek);

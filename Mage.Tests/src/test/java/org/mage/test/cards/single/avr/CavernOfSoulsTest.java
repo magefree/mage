@@ -89,8 +89,8 @@ public class CavernOfSoulsTest extends CardTestPlayerBase {
     public void testDrakeCantBeCountered() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
         // As Cavern of Souls enters the battlefield, choose a creature type.
-        // {T}: Add {C} to your mana pool.
-        // {T}: Add one mana of any color to your mana pool. Spend this mana only to cast a creature spell of the chosen type, and that spell can't be countered.
+        // {T}: Add {C}.
+        // {T}: Add one mana of any color. Spend this mana only to cast a creature spell of the chosen type, and that spell can't be countered.
         addCard(Zone.HAND, playerA, "Cavern of Souls");
         addCard(Zone.HAND, playerA, "Azure Drake");
 
@@ -160,7 +160,7 @@ public class CavernOfSoulsTest extends CardTestPlayerBase {
         setChoice(playerA, "Elf");
 
         // getting green mana for Elf into pool
-        activateManaAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add 1 mana of any one color to your mana pool. Spend this mana only to cast a creature spell of the chosen type, and that spell can't be countered.");
+        activateManaAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add 1 mana of any one color. Spend this mana only to cast a creature spell of the chosen type, and that spell can't be countered.");
         setChoice(playerA, "Green");
 
         // return cavern to hand
@@ -173,7 +173,7 @@ public class CavernOfSoulsTest extends CardTestPlayerBase {
         // the green mana usable for Elf should be in the mana pool
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Gladecover Scout");
 
-        activateManaAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add 1 mana of any one color to your mana pool. Spend this mana only to cast a creature spell of the chosen type, and that spell can't be countered.");
+        activateManaAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add 1 mana of any one color. Spend this mana only to cast a creature spell of the chosen type, and that spell can't be countered.");
         setChoice(playerA, "Black");
 
         // the black mana usable for Horror should be in the mana pool

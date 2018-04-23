@@ -36,7 +36,7 @@ import mage.constants.SubType;
  *
  * @author Saga
  */
-public class DeathtouchRatToken extends Token {
+public class DeathtouchRatToken extends TokenImpl {
 
     public DeathtouchRatToken() {
         super("Rat", "1/1 black Rat creature token with deathtouch");
@@ -47,5 +47,13 @@ public class DeathtouchRatToken extends Token {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.addAbility(DeathtouchAbility.getInstance());
+    }
+
+    public DeathtouchRatToken(final DeathtouchRatToken token) {
+        super(token);
+    }
+
+    public DeathtouchRatToken copy() {
+        return new DeathtouchRatToken(this);
     }
 }

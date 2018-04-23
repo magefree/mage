@@ -40,7 +40,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -50,7 +50,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public class DrownedRusalka extends CardImpl {
 
     public DrownedRusalka(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}");
         this.subtype.add(SubType.SPIRIT);
 
         this.power = new MageInt(1);
@@ -58,7 +58,7 @@ public class DrownedRusalka extends CardImpl {
 
         // {U}, Sacrifice a creature: Discard a card, then draw a card.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DiscardControllerEffect(1), new ManaCostsImpl("{U}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1, new FilterControlledCreaturePermanent("a creature"), true)));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         ability.addEffect(new DrawCardSourceControllerEffect(1));
         this.addAbility(ability);
     }

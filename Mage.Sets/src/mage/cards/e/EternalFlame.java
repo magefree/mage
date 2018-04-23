@@ -46,14 +46,14 @@ import mage.target.common.TargetOpponent;
  */
 public class EternalFlame extends CardImpl {
 
-     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Mountains you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Mountains you control");
 
-     static {
+    static {
         filter.add(new SubtypePredicate(SubType.MOUNTAIN));
     }
 
     public EternalFlame(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{R}{R}");
 
         // Eternal Flame deals X damage to target opponent, where X is the number of Mountains you control. It deals half X damage, rounded up, to you.);
         this.getSpellAbility().addEffect(new DamageTargetEffect(new PermanentsOnBattlefieldCount(filter)).setText("{this} deals X damage to target opponent, where X is the number of Mountains you control"));

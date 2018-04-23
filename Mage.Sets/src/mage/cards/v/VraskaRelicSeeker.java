@@ -65,7 +65,7 @@ public class VraskaRelicSeeker extends CardImpl {
         //+2: Create a 2/2 black Pirate creature token with menace.
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new PirateToken()), 2));
 
-        //-3: Destroy target artifact, creature, or enchantment. Create a colorless Treasure artifact token with "T, Sacrfice this artifact. Add one mana of any color to your mana pool."
+        //-3: Destroy target artifact, creature, or enchantment. Create a colorless Treasure artifact token with "T, Sacrfice this artifact. Add one mana of any color."
         Ability ability = new LoyaltyAbility(new VraskaRelicSeekerDestroyEffect(), -3);
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_CREATURE_OR_ENCHANTMENT));
         this.addAbility(ability);
@@ -90,7 +90,7 @@ class VraskaRelicSeekerDestroyEffect extends OneShotEffect {
 
     VraskaRelicSeekerDestroyEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Destroy target artifact, creature, or enchantment. Create a colorless Treasure artifact token with \"{T}, Sacrifice this artifact. Add one mana of any color to your mana pool.\"";
+        this.staticText = "Destroy target artifact, creature, or enchantment. Create a colorless Treasure artifact token with \"{T}, Sacrifice this artifact. Add one mana of any color.\"";
     }
 
     VraskaRelicSeekerDestroyEffect(final VraskaRelicSeekerDestroyEffect effect) {
@@ -129,7 +129,7 @@ class VraskaRelicSeekerLifeTotalEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
         if (player != null) {
-            player.setLife(1, game);
+            player.setLife(1, game, source);
             return true;
         }
         return false;

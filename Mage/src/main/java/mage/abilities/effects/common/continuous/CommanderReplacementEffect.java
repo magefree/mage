@@ -143,7 +143,7 @@ public class CommanderReplacementEffect extends ReplacementEffectImpl {
                 if (player != null && player.chooseUse(Outcome.Benefit, "Move commander to command zone?", source, game)) {
                     ((ZoneChangeEvent) event).setToZone(Zone.COMMAND);
                     if (!game.isSimulation()) {
-                        game.informPlayers(player.getLogName() + " has moved his or her commander to the command zone");
+                        game.informPlayers(player.getLogName() + " has moved their commander to the command zone");
                     }
                 }
             }
@@ -163,7 +163,7 @@ public class CommanderReplacementEffect extends ReplacementEffectImpl {
                 if (player != null && player.chooseUse(Outcome.Benefit, "Move commander to command zone?", source, game)) {
                     ((ZoneChangeEvent) event).setToZone(Zone.COMMAND);
                     if (!game.isSimulation()) {
-                        game.informPlayers(player.getLogName() + " has moved his or her commander to the command zone");
+                        game.informPlayers(player.getLogName() + " has moved their commander to the command zone");
                     }
                 }
             }

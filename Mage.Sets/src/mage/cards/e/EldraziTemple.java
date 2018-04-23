@@ -52,10 +52,10 @@ public class EldraziTemple extends CardImpl {
     public EldraziTemple(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
 
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
 
-        // {T}: Add {C}{C} to your mana pool. Spend this mana only to cast colorless Eldrazi spells or activate abilities of colorless Eldrazi.  
+        // {T}: Add {C}{C}. Spend this mana only to cast colorless Eldrazi spells or activate abilities of colorless Eldrazi.  
         this.addAbility(new ConditionalColorlessManaAbility(new TapSourceCost(), 2, new EldraziTempleManaBuilder()));
     }
 

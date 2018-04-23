@@ -56,17 +56,17 @@ import mage.target.common.TargetOpponent;
 public class EndlessWhispers extends CardImpl {
 
     public EndlessWhispers(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");
 
-        // Each creature has "When this creature dies, choose target opponent. That player puts this card from its owner's graveyard onto the battlefield under his or her control at the beginning of the next end step."
+        // Each creature has "When this creature dies, choose target opponent. That player puts this card from its owner's graveyard onto the battlefield under their control at the beginning of the next end step."
         DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnSourceToBattlefieldEffect());
         Effect effect = new CreateDelayedTriggeredAbilityEffect(delayedAbility, true);
-        effect.setText("choose target opponent. That player puts this card from its owner's graveyard onto the battlefield under his or her control at the beginning of the next end step");
+        effect.setText("choose target opponent. That player puts this card from its owner's graveyard onto the battlefield under their control at the beginning of the next end step");
         Ability gainAbility = new DiesTriggeredAbility(effect);
         gainAbility.addTarget(new TargetOpponent());
 
         effect = new GainAbilityAllEffect(gainAbility, Duration.WhileOnBattlefield, new FilterCreaturePermanent("Each creature"));
-        effect.setText("Each creature has \"When this creature dies, choose target opponent. That player puts this card from its owner's graveyard onto the battlefield under his or her control at the beginning of the next end step.\"");
+        effect.setText("Each creature has \"When this creature dies, choose target opponent. That player puts this card from its owner's graveyard onto the battlefield under their control at the beginning of the next end step.\"");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
 
     }
@@ -85,7 +85,7 @@ class ReturnSourceToBattlefieldEffect extends OneShotEffect {
 
     public ReturnSourceToBattlefieldEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "That player puts this card from its owner's graveyard onto the battlefield under his or her control";
+        staticText = "That player puts this card from its owner's graveyard onto the battlefield under their control";
     }
 
     public ReturnSourceToBattlefieldEffect(final ReturnSourceToBattlefieldEffect effect) {

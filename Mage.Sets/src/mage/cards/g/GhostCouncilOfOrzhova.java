@@ -39,10 +39,11 @@ import mage.abilities.effects.common.ExileReturnBattlefieldOwnerNextEndStepSourc
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -55,7 +56,7 @@ import mage.target.common.TargetOpponent;
 public class GhostCouncilOfOrzhova extends CardImpl {
 
     public GhostCouncilOfOrzhova(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{W}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{W}{B}{B}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPIRIT);
 
@@ -69,7 +70,7 @@ public class GhostCouncilOfOrzhova extends CardImpl {
 
         // {1}, Sacrifice a creature: Exile Ghost Council of Orzhova. Return it to the battlefield under its owner's control at the beginning of the next end step.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileReturnBattlefieldOwnerNextEndStepSourceEffect(true), new GenericManaCost(1));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         this.addAbility(ability);
     }
 
@@ -101,7 +102,7 @@ class GhostCouncilOfOrzhovaEffect extends OneShotEffect {
         Player controllerPlayer = game.getPlayer(source.getControllerId());
         if (targetPlayer != null && controllerPlayer != null) {
             targetPlayer.loseLife(1, game, false);
-            controllerPlayer.gainLife(1, game);
+            controllerPlayer.gainLife(1, game, source);
         }
         return false;
     }

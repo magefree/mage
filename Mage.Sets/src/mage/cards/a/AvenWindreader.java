@@ -59,7 +59,7 @@ public class AvenWindreader extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // {1}{U}: Target player reveals the top card of his or her library.
+        // {1}{U}: Target player reveals the top card of their library.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RevealTargetPlayerLibraryEffect(1), new ManaCostsImpl("{1}{U}"));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);

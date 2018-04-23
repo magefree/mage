@@ -49,7 +49,7 @@ public class NaturesResurgence extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}{G}");
 
 
-        // Each player draws a card for each creature card in his or her graveyard.
+        // Each player draws a card for each creature card in their graveyard.
         this.getSpellAbility().addEffect(new NaturesResurgenceEffect());
     }
 
@@ -69,7 +69,7 @@ class NaturesResurgenceEffect extends OneShotEffect {
     
     public NaturesResurgenceEffect() {
         super(Outcome.DrawCard);
-        staticText = "Each player draws a card for each creature card in his or her graveyard";
+        staticText = "Each player draws a card for each creature card in their graveyard";
     }
 
     public NaturesResurgenceEffect(final NaturesResurgenceEffect effect) {

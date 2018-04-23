@@ -40,7 +40,7 @@ import mage.constants.TargetController;
  *
  * @author spjspj
  */
-public class LightningRagerToken extends Token {
+public class LightningRagerToken extends TokenImpl {
 
     public LightningRagerToken() {
         super("Lightning Rager", "5/1 red Elemental creature token named Lightning Rager."
@@ -54,5 +54,13 @@ public class LightningRagerToken extends Token {
         addAbility(TrampleAbility.getInstance());
         addAbility(HasteAbility.getInstance());
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new SacrificeSourceEffect(), TargetController.NEXT, false));
+    }
+
+    public LightningRagerToken(final LightningRagerToken token) {
+        super(token);
+    }
+
+    public LightningRagerToken copy() {
+        return new LightningRagerToken(this);
     }
 }

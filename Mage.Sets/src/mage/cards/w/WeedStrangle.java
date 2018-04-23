@@ -89,7 +89,7 @@ class WeedStrangleEffect extends OneShotEffect {
         if (controller != null && creature != null) {
             creature.destroy(source.getSourceId(), game, false);
             if (ClashEffect.getInstance().apply(game, source)) {
-                controller.gainLife(creature.getToughness().getValue(), game);
+                controller.gainLife(creature.getToughness().getValue(), game, source);
             }
             return true;
         }

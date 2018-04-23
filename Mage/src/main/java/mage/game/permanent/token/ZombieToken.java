@@ -40,7 +40,7 @@ import mage.util.RandomUtil;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ZombieToken extends Token {
+public class ZombieToken extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 

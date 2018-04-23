@@ -41,7 +41,7 @@ public class DestroyTheEvidanceTest extends CardTestPlayerBase {
 
     // Destroy the Evidence - Sorcery {4}{B}
     // Destroy target land. Its controller reveals cards from the top of his
-    // or her library until he or she reveals a land card, then puts those cards into his or her graveyard.
+    // or her library until he or she reveals a land card, then puts those cards into their graveyard.
     
     /**
      * The target land is destroyed

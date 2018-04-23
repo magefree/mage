@@ -27,14 +27,14 @@
  */
 package mage.cards.decks.importer;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Locale;
+import java.util.Set;
 import mage.cards.decks.DeckCardInfo;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
-
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  *
@@ -50,8 +50,8 @@ public class TxtDeckImporter extends DeckImporter {
     private boolean switchSideboardByEmptyLine = true; // all cards after first empty line will be sideboard (like mtgo format)
     private int nonEmptyLinesTotal = 0;
 
-    public TxtDeckImporter(boolean haveSideboardSection){
-        if(haveSideboardSection){
+    public TxtDeckImporter(boolean haveSideboardSection) {
+        if (haveSideboardSection) {
             switchSideboardByEmptyLine = false;
         }
     }
@@ -63,8 +63,8 @@ public class TxtDeckImporter extends DeckImporter {
 
         // process comment:
         // skip or force to sideboard
-        String commentString = line.toLowerCase();
-        if (commentString.startsWith("//")){
+        String commentString = line.toLowerCase(Locale.ENGLISH);
+        if (commentString.startsWith("//")) {
             // use start, not contains (card names may contain commands like "Legerdemain")
 
             if (commentString.startsWith("//sideboard")) {
@@ -77,15 +77,15 @@ public class TxtDeckImporter extends DeckImporter {
 
         // remove inner card comments from text line: 2 Blinding Fog #some text (like deckstats format)
         int commentDelim = line.indexOf('#');
-        if(commentDelim >= 0){
+        if (commentDelim >= 0) {
             line = line.substring(0, commentDelim).trim();
         }
 
         // switch sideboard by empty line
         if (switchSideboardByEmptyLine && line.isEmpty() && nonEmptyLinesTotal > 0) {
-            if(!sideboard){
+            if (!sideboard) {
                 sideboard = true;
-            }else{
+            } else {
                 sbMessage.append("Found empty line at ").append(lineCount).append(", but sideboard already used. Use //sideboard switcher OR one empty line to devide your cards.").append('\n');
             }
 
@@ -98,9 +98,9 @@ public class TxtDeckImporter extends DeckImporter {
         // single line sideboard card from deckstats.net
         // SB: 3 Carnage Tyrant
         boolean singleLineSideBoard = false;
-        if (line.startsWith("SB:")){
-           line = line.replace("SB:", "").trim();
-           singleLineSideBoard = true;
+        if (line.startsWith("SB:")) {
+            line = line.replace("SB:", "").trim();
+            singleLineSideBoard = true;
         }
 
         line = line.replace("\t", " "); // changing tabs to blanks as delimiter
@@ -122,7 +122,7 @@ public class TxtDeckImporter extends DeckImporter {
         }
         try {
             int num = Integer.parseInt(lineNum.replaceAll("\\D+", ""));
-            if ((num < 0) || (num > 100)){
+            if ((num < 0) || (num > 100)) {
                 sbMessage.append("Invalid number (too small or too big): ").append(lineNum).append(" at line ").append(lineCount).append('\n');
                 return;
             }

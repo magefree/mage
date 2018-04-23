@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -50,16 +50,16 @@ public class BlightedGorge extends CardImpl {
     public BlightedGorge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
 
-        // {4}{R}, {T}, Sacrifice Blighted Gorge: Blighted Gorge deals 2 damage to target creature or player.
+        // {4}{R}, {T}, Sacrifice Blighted Gorge: Blighted Gorge deals 2 damage to any target.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new DamageTargetEffect(2),
                 new ManaCostsImpl<>("{4}{R}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }
 

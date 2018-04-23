@@ -50,10 +50,10 @@ public class LanternOfInsight extends CardImpl {
     public LanternOfInsight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
 
-        // Each player plays with the top card of his or her library revealed.
+        // Each player plays with the top card of their library revealed.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayWithTheTopCardRevealedEffect(true)));
         
-        // {tap}, Sacrifice Lantern of Insight: Target player shuffles his or her library.
+        // {tap}, Sacrifice Lantern of Insight: Target player shuffles their library.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ShuffleLibraryTargetEffect(), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetPlayer());

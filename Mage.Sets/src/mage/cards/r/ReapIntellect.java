@@ -58,7 +58,7 @@ public class ReapIntellect extends CardImpl {
     public ReapIntellect(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{2}{U}{B}");
 
-        // Target opponent reveals his or her hand. You choose up to X nonland cards from it and exile them. For each card exiled this way, search that player's graveyard, hand, and library for any number of cards with the same name as that card and exile them. Then that player shuffles his or her library.
+        // Target opponent reveals their hand. You choose up to X nonland cards from it and exile them. For each card exiled this way, search that player's graveyard, hand, and library for any number of cards with the same name as that card and exile them. Then that player shuffles their library.
         this.getSpellAbility().addEffect(new ReapIntellectEffect());
         this.getSpellAbility().addTarget(new TargetOpponent());
 
@@ -84,7 +84,7 @@ class ReapIntellectEffect extends OneShotEffect {
 
     public ReapIntellectEffect() {
         super(Outcome.Benefit);
-        staticText = "Target opponent reveals his or her hand. You choose up to X nonland cards from it and exile them. For each card exiled this way, search that player's graveyard, hand, and library for any number of cards with the same name as that card and exile them. Then that player shuffles his or her library";
+        staticText = "Target opponent reveals their hand. You choose up to X nonland cards from it and exile them. For each card exiled this way, search that player's graveyard, hand, and library for any number of cards with the same name as that card and exile them. Then that player shuffles their library";
     }
 
     public ReapIntellectEffect(final ReapIntellectEffect effect) {

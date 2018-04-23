@@ -104,6 +104,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private static final String LITE_MODE_ARG = "-lite";
     private static final String GRAY_MODE_ARG = "-gray";
     private static final String FILL_SCREEN_ARG = "-fullscreen";
+    private static final String SKIP_DONE_SYMBOLS = "-skipDoneSymbols";
 
     private static final String NOT_CONNECTED_TEXT = "<not connected>";
     private static MageFrame instance;
@@ -121,6 +122,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     //TODO: make gray theme, implement theme selector in preferences dialog
     private static boolean grayMode = false;
     private static boolean fullscreenMode = false;
+    private static boolean skipSmallSymbolGenerationForExisting = false;
 
     private static final Map<UUID, ChatPanelBasic> CHATS = new HashMap<>();
     private static final Map<UUID, GamePanel> GAMES = new HashMap<>();
@@ -151,6 +153,10 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     public static boolean isGray() {
         return grayMode;
+    }
+    
+    public static boolean isSkipSmallSymbolGenerationForExisting() {
+        return skipSmallSymbolGenerationForExisting;
     }
 
     @Override
@@ -613,7 +619,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         }
     }
 
-    private static MagePane getTopMost(MagePane exclude) {
+    public static MagePane getTopMost(MagePane exclude) {
         MagePane topmost = null;
         int best = Integer.MAX_VALUE;
         for (Component frame : desktopPane.getComponentsInLayer(JLayeredPane.DEFAULT_LAYER)) {
@@ -1190,6 +1196,9 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 }
                 if (arg.startsWith(FILL_SCREEN_ARG)) {
                     fullscreenMode = true;
+                }
+                if (arg.startsWith(SKIP_DONE_SYMBOLS)) {
+                    skipSmallSymbolGenerationForExisting = true;
                 }
             }
             if (!liteMode) {

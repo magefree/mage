@@ -71,7 +71,7 @@ public class JaceUnravelerOfSecrets extends CardImpl {
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 
-        // -8: You get an emblem with "Whenever an opponent casts his or her first spell each turn, counter that spell."
+        // -8: You get an emblem with "Whenever an opponent casts their first spell each turn, counter that spell."
         LoyaltyAbility ability2 = new LoyaltyAbility(new GetEmblemEffect(new JaceUnravelerOfSecretsEmblem()), -8);
         this.addAbility(ability2, new SpellsCastWatcher());
 

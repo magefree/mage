@@ -36,7 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
  *
  * @author spjspj
  */
-public class LinvalaAngelToken extends Token {
+public class LinvalaAngelToken extends TokenImpl {
 
     public LinvalaAngelToken() {
         super("Angel", "3/3 white Angel creature token with flying");
@@ -47,5 +47,13 @@ public class LinvalaAngelToken extends Token {
         power = new MageInt(3);
         toughness = new MageInt(3);
         addAbility(FlyingAbility.getInstance());
+    }
+
+    public LinvalaAngelToken(final LinvalaAngelToken token) {
+        super(token);
+    }
+
+    public LinvalaAngelToken copy() {
+        return new LinvalaAngelToken(this);
     }
 }

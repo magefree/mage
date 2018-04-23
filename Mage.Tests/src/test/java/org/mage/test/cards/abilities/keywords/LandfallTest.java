@@ -30,6 +30,7 @@ package org.mage.test.cards.abilities.keywords;
 import mage.abilities.keyword.IntimidateAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -74,7 +75,7 @@ public class LandfallTest extends CardTestPlayerBase {
     public void testHiveMind() {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
 
-        // Whenever a player casts an instant or sorcery spell, each other player copies that spell. Each of those players may choose new targets for his or her copy.
+        // Whenever a player casts an instant or sorcery spell, each other player copies that spell. Each of those players may choose new targets for their copy.
         addCard(Zone.BATTLEFIELD, playerB, "Hive Mind");
 
         // Instant - {1}{W}
@@ -119,6 +120,7 @@ public class LandfallTest extends CardTestPlayerBase {
      * Fang. It only dealt 1 damage to me, where it should've dealt 3, because
      * my opponent had played a land.
      */
+    @Ignore
     @Test
     public void testSearingBlaze() {
         // Searing Blaze deals 1 damage to target player and 1 damage to target creature that player controls.
@@ -183,7 +185,7 @@ public class LandfallTest extends CardTestPlayerBase {
      21:10: arucki activates: Inkmoth Nexus [1b5] becomes a 1/1 Blinkmoth artifact creature with flying and infect until end of turn. It's still a land. (It deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.). from Inkmoth Nexus [1b5]
      21:10: arucki casts Groundswell [b28] targeting Inkmoth Nexus [1b5]
      21:10: Ability triggers: Wild Defiance [990] - Whenever a creature you control becomes the target of an instant or sorcery spell, that creature gets +3/+3 until end of turn
-     21:10: arucki puts Groundswell [b28] from stack into his or her graveyard
+     21:10: arucki puts Groundswell [b28] from stack into their graveyard
      21:10: arucki attacks with 1 creature
      21:10: Attacker: Inkmoth Nexus 1b5 unblocked
      */

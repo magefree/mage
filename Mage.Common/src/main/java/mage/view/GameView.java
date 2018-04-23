@@ -27,18 +27,14 @@
  */
 package mage.view;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import java.io.Serializable;
-import java.io.BufferedWriter;
-import java.io.PrintWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
-
 import mage.MageObject;
 import mage.abilities.costs.Cost;
 import mage.cards.Card;
@@ -51,6 +47,7 @@ import mage.game.Game;
 import mage.game.GameState;
 import mage.game.combat.CombatGroup;
 import mage.game.command.Emblem;
+import mage.game.command.Plane;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.game.permanent.PermanentToken;
@@ -60,8 +57,6 @@ import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.watchers.common.CastSpellLastTurnWatcher;
 import org.apache.log4j.Logger;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 /**
  *
@@ -105,7 +100,12 @@ public class GameView implements Serializable {
             }
         }
         for (StackObject stackObject : state.getStack()) {
-            if (stackObject instanceof StackAbility) {
+            if (stackObject instanceof Spell) {
+                // Spell
+                CardView spellView = new CardView((Spell) stackObject, game, stackObject.getControllerId().equals(createdForPlayerId));
+                spellView.paid = ((Spell) stackObject).getSpellAbility().getManaCostsToPay().isPaid();
+                stack.put(stackObject.getId(), spellView);
+            } else if (stackObject instanceof StackAbility) {
                 // Stack Ability
                 MageObject object = game.getObject(stackObject.getSourceId());
                 Card card = game.getCard(stackObject.getSourceId());
@@ -140,6 +140,12 @@ public class GameView implements Serializable {
                         stack.put(stackObject.getId(),
                                 new StackAbilityView(game, (StackAbility) stackObject, object.getName(), cardView));
                         checkPaid(stackObject.getId(), ((StackAbility) stackObject));
+                    } else if (object instanceof Plane) {
+                        CardView cardView = new CardView(new PlaneView((Plane) object));
+                        ((StackAbility) stackObject).setName(((Plane) object).getName());
+                        stack.put(stackObject.getId(),
+                                new StackAbilityView(game, (StackAbility) stackObject, object.getName(), cardView));
+                        checkPaid(stackObject.getId(), ((StackAbility) stackObject));
                     } else if (object instanceof Designation) {
                         Designation designation = (Designation) game.getObject(object.getId());
                         if (designation != null) {
@@ -161,9 +167,7 @@ public class GameView implements Serializable {
                     LOGGER.debug("Stack Object for stack ability not found: " + stackObject.getStackAbility().getRule());
                 }
             } else {
-                // Spell
-                stack.put(stackObject.getId(), new CardView((Spell) stackObject, game, stackObject.getControllerId().equals(createdForPlayerId)));
-                checkPaid(stackObject.getId(), (Spell) stackObject);
+                LOGGER.fatal("Unknown type of StackObject: " + stackObject.getName() + ' ' + stackObject.toString() + ' ' + stackObject.getClass().toString());
             }
             //stackOrder.add(stackObject.getId());
         }
@@ -219,21 +223,6 @@ public class GameView implements Serializable {
                 return;
             }
         }
-        CardView cardView = stack.get(uuid);
-        cardView.paid = true;
-    }
-
-    private void checkPaid(UUID uuid, Spell spell) {
-        for (Cost cost : spell.getSpellAbility().getManaCostsToPay()) {
-            if (!cost.isPaid()) {
-                return;
-            }
-        }
-        CardView cardView = stack.get(uuid);
-        cardView.paid = true;
-    }
-
-    private void setPaid(UUID uuid) {
         CardView cardView = stack.get(uuid);
         cardView.paid = true;
     }

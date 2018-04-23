@@ -52,9 +52,9 @@ public class VividMeadow extends CardImpl {
         Ability ability = new EntersBattlefieldAbility(new TapSourceEffect(true), false, null, "{this} enters the battlefield tapped with two charge counters on it", null);
         ability.addEffect(new AddCountersSourceEffect(CounterType.CHARGE.createInstance(2)));
         this.addAbility(ability);
-        // {tap}: Add {W} to your mana pool.
+        // {tap}: Add {W}.
         this.addAbility(new WhiteManaAbility());
-        // {tap}, Remove a charge counter from Vivid Meadow: Add one mana of any color to your mana pool.
+        // {tap}, Remove a charge counter from Vivid Meadow: Add one mana of any color.
         ability = new AnyColorManaAbility();
         ability.addCost(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(1)));
         this.addAbility(ability);

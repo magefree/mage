@@ -152,13 +152,13 @@ public class RevealCardsFromLibraryUntilEffect extends OneShotEffect {
             }
             case LIBRARY: {
                 if (shuffleRestInto) {
-                    sb.append(", then shuffles the rest into his or her library.");
+                    sb.append(", then shuffles the rest into their library.");
                 } else {
                     sb.append(" and the rest on the bottom of your library in ");
                     if (anyOrder) {
                         sb.append("any");
                     } else {
-                        sb.append("random");
+                        sb.append("a random");
 
                     }
                     sb.append(" order.");

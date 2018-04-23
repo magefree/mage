@@ -41,7 +41,7 @@ public class KjeldoranOutpostTest extends CardTestPlayerBase {
     @Test
     public void testNoPlainsAvailable() {
         // If Kjeldoran Outpost would enter the battlefield, sacrifice a Plains instead. If you do, put Kjeldoran Outpost onto the battlefield. If you don't, put it into its owner's graveyard.
-        // {T}: Add {W} to your mana pool.
+        // {T}: Add {W}.
         // {1}{W}, {tap}: Put a 1/1 white Soldier creature token onto the battlefield.
         addCard(Zone.HAND, playerA, "Kjeldoran Outpost");
 
@@ -57,7 +57,7 @@ public class KjeldoranOutpostTest extends CardTestPlayerBase {
     public void testPlainsAvailable() {
         addCard(Zone.BATTLEFIELD, playerA, "Plains");
         // If Kjeldoran Outpost would enter the battlefield, sacrifice a Plains instead. If you do, put Kjeldoran Outpost onto the battlefield. If you don't, put it into its owner's graveyard.
-        // {T}: Add {W} to your mana pool.
+        // {T}: Add {W}.
         // {1}{W}, {tap}: Put a 1/1 white Soldier creature token onto the battlefield.
         addCard(Zone.HAND, playerA, "Kjeldoran Outpost");
 
@@ -74,7 +74,7 @@ public class KjeldoranOutpostTest extends CardTestPlayerBase {
     public void testOnlySnowcoveredPlainsAvailable() {
         addCard(Zone.BATTLEFIELD, playerA, "Snow-Covered Plains");
         // If Kjeldoran Outpost would enter the battlefield, sacrifice a Plains instead. If you do, put Kjeldoran Outpost onto the battlefield. If you don't, put it into its owner's graveyard.
-        // {T}: Add {W} to your mana pool.
+        // {T}: Add {W}.
         // {1}{W}, {tap}: Put a 1/1 white Soldier creature token onto the battlefield.
         addCard(Zone.HAND, playerA, "Kjeldoran Outpost");
 

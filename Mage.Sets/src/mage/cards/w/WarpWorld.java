@@ -56,7 +56,7 @@ public class WarpWorld extends CardImpl {
     public WarpWorld(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{R}{R}{R}");
 
-        // Each player shuffles all permanents he or she owns into his or her library, then reveals that many cards from the top of his or her library. Each player puts all artifact, creature, and land cards revealed this way onto the battlefield, then does the same for enchantment cards, then puts all cards revealed this way that weren't put onto the battlefield on the bottom of his or her library.
+        // Each player shuffles all permanents he or she owns into their library, then reveals that many cards from the top of their library. Each player puts all artifact, creature, and land cards revealed this way onto the battlefield, then does the same for enchantment cards, then puts all cards revealed this way that weren't put onto the battlefield on the bottom of their library.
         this.getSpellAbility().addEffect(new WarpWorldEffect());
     }
 
@@ -74,7 +74,7 @@ class WarpWorldEffect extends OneShotEffect {
 
     public WarpWorldEffect() {
         super(Outcome.Neutral);
-        this.staticText = "Each player shuffles all permanents he or she owns into his or her library, then reveals that many cards from the top of his or her library. Each player puts all artifact, creature, and land cards revealed this way onto the battlefield, then does the same for enchantment cards, then puts all cards revealed this way that weren't put onto the battlefield on the bottom of his or her library";
+        this.staticText = "Each player shuffles all permanents he or she owns into their library, then reveals that many cards from the top of their library. Each player puts all artifact, creature, and land cards revealed this way onto the battlefield, then does the same for enchantment cards, then puts all cards revealed this way that weren't put onto the battlefield on the bottom of their library";
     }
 
     public WarpWorldEffect(final WarpWorldEffect effect) {

@@ -52,8 +52,8 @@ import mage.game.permanent.token.DragonToken2;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
  *
@@ -62,7 +62,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class SarkhanTheMad extends CardImpl {
 
     public SarkhanTheMad(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{3}{B}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{B}{R}");
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.SARKHAN);
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(7));
@@ -75,7 +75,7 @@ public class SarkhanTheMad extends CardImpl {
         this.addAbility(sacAbility);
 
         Ability damageAbility = new LoyaltyAbility(new SarkhanTheMadDragonDamageEffect(), -4);
-        damageAbility.addTarget(new TargetPlayer());
+        damageAbility.addTarget(new TargetPlayerOrPlaneswalker());
         this.addAbility(damageAbility);
     }
 
@@ -161,7 +161,7 @@ class SarkhanTheMadSacEffect extends OneShotEffect {
 
 class SarkhanTheMadDragonDamageEffect extends OneShotEffect {
 
-    private static final String effectText = "Each Dragon creature you control deals damage equal to its power to target player";
+    private static final String effectText = "Each Dragon creature you control deals damage equal to its power to target player or planeswalker";
     private static final FilterControlledPermanent filter;
 
     static {
@@ -182,10 +182,9 @@ class SarkhanTheMadDragonDamageEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         List<Permanent> dragons = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);
-        Player player = game.getPlayer(source.getTargets().getFirstTarget());
-        if (player != null && dragons != null && !dragons.isEmpty()) {
+        if (dragons != null && !dragons.isEmpty()) {
             for (Permanent dragon : dragons) {
-                player.damage(dragon.getPower().getValue(), dragon.getId(), game, false, true);
+                game.damagePlayerOrPlaneswalker(source.getFirstTarget(), dragon.getPower().getValue(), dragon.getId(), game, false, true);
             }
             return true;
         }

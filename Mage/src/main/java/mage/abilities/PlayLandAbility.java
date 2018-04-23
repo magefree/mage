@@ -52,7 +52,7 @@ public class PlayLandAbility extends ActivatedAbilityImpl {
     @Override
     public boolean canActivate(UUID playerId, Game game) {
         if (!controlsAbility(playerId, game)
-                && !game.getContinuousEffects().asThough(getSourceId(), AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, playerId, game)) {
+                && null == game.getContinuousEffects().asThough(getSourceId(), AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, playerId, game)) {
             return false;
         }
         //20091005 - 114.2a

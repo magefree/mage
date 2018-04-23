@@ -51,7 +51,7 @@ import mage.target.common.TargetLandPermanent;
 public class NumotTheDevastator extends CardImpl {
 
     public NumotTheDevastator(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{W}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{R}{W}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRAGON);
 
@@ -65,8 +65,8 @@ public class NumotTheDevastator extends CardImpl {
         effect.setText("destroy up to two target lands");
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(
                 new DoIfCostPaid(effect, new ManaCostsImpl("{2}{R}")), false);
-        ability.addTarget(new TargetLandPermanent(0,2, StaticFilters.FILTER_LANDS, false));
-        this.addAbility(ability);        
+        ability.addTarget(new TargetLandPermanent(0, 2, StaticFilters.FILTER_LANDS, false));
+        this.addAbility(ability);
     }
 
     public NumotTheDevastator(final NumotTheDevastator card) {

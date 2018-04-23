@@ -65,7 +65,7 @@ public class SelvalaHeartOfTheWilds extends CardImpl {
     }
 
     private static final String rule = "Whenever another creature enters the battlefield, its controller may draw a card if its power is greater than each other creature's power.";
-    private static final String rule2 = "Add X mana in any combination of colors to your mana pool, where X is the greatest power among creatures you control.";
+    private static final String rule2 = "Add X mana in any combination of colors, where X is the greatest power among creatures you control.";
 
     public SelvalaHeartOfTheWilds(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
@@ -78,7 +78,7 @@ public class SelvalaHeartOfTheWilds extends CardImpl {
         // Whenever another creature enters the battlefield, its controller may draw a card if its power is greater than each other creature's power.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new SelvalaHeartOfTheWildsEffect(), filter, false, SetTargetPointer.PERMANENT, rule));
 
-        // {G}, {T}: Add X mana in any combination of colors to your mana pool, where X is the greatest power among creatures you control.
+        // {G}, {T}: Add X mana in any combination of colors, where X is the greatest power among creatures you control.
         ManaEffect manaEffect = new AddManaInAnyCombinationEffect(new GreatestPowerAmongControlledCreaturesValue(), rule2, ColoredManaSymbol.B, ColoredManaSymbol.U, ColoredManaSymbol.R, ColoredManaSymbol.W, ColoredManaSymbol.G);
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, manaEffect, new ManaCostsImpl("{G}"));
         ability.addCost(new TapSourceCost());
@@ -182,6 +182,6 @@ class GreatestPowerYouControlValue implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "Add X mana in any combination of colors to your mana pool, where X is the greatest power among creatures you control.";
+        return "Add X mana in any combination of colors, where X is the greatest power among creatures you control.";
     }
 }

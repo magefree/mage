@@ -53,7 +53,7 @@ public class GamePreserve extends CardImpl {
     public GamePreserve(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
 
-        // At the beginning of your upkeep, each player reveals the top card of his or her library. If all cards revealed this way are creature cards, put those cards onto the battlefield under their owners' control.
+        // At the beginning of your upkeep, each player reveals the top card of their library. If all cards revealed this way are creature cards, put those cards onto the battlefield under their owners' control.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DuskmarEffect(), TargetController.YOU, false));
     }
 
@@ -71,7 +71,7 @@ class DuskmarEffect extends OneShotEffect {
 
     public DuskmarEffect() {
         super(Outcome.Detriment);
-        this.staticText = "each player reveals the top card of his or her library. If all cards revealed this way are creature cards, put those cards onto the battlefield under their owners' control";
+        this.staticText = "each player reveals the top card of their library. If all cards revealed this way are creature cards, put those cards onto the battlefield under their owners' control";
     }
 
     public DuskmarEffect(final DuskmarEffect effect) {

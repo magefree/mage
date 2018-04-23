@@ -44,11 +44,9 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.Target;
 import mage.target.TargetCard;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -59,12 +57,12 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public class EyeOfYawgmoth extends CardImpl {
 
     public EyeOfYawgmoth(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // {3}, {T}, Sacrifice a creature: Reveal a number of cards from the top of your library equal to the sacrificed creature's power. Put one into your hand and exile the rest.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new EyeOfYawgmothEffect(), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, new FilterControlledCreaturePermanent("a creature"), true)));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         this.addAbility(ability);
     }
 
@@ -79,21 +77,21 @@ public class EyeOfYawgmoth extends CardImpl {
 }
 
 class EyeOfYawgmothEffect extends OneShotEffect {
-    
+
     EyeOfYawgmothEffect() {
         super(Outcome.Benefit);
         this.staticText = "Reveal a number of cards from the top of your library equal to the sacrificed creature's power. Put one into your hand and exile the rest";
     }
-    
+
     EyeOfYawgmothEffect(final EyeOfYawgmothEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public EyeOfYawgmothEffect copy() {
         return new EyeOfYawgmothEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
@@ -101,9 +99,9 @@ class EyeOfYawgmothEffect extends OneShotEffect {
             return false;
         }
         int power = 0;
-        for (Cost cost: source.getCosts()) {
+        for (Cost cost : source.getCosts()) {
             if (cost instanceof SacrificeTargetCost && !((SacrificeTargetCost) cost).getPermanents().isEmpty()) {
-                power = ((SacrificeTargetCost)cost).getPermanents().get(0).getPower().getValue();
+                power = ((SacrificeTargetCost) cost).getPermanents().get(0).getPower().getValue();
                 break;
             }
         }
@@ -124,7 +122,7 @@ class EyeOfYawgmothEffect extends OneShotEffect {
                 if (card != null) {
                     cards.remove(card);
                     card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
-                    game.informPlayers(source.getSourceObject(game).getIdName() + ": " + controller.getLogName() + " puts " + card.getIdName() + " into his or her hand");
+                    game.informPlayers(source.getSourceObject(game).getIdName() + ": " + controller.getLogName() + " puts " + card.getIdName() + " into their hand");
                 }
             }
             for (UUID cardId : cards) {

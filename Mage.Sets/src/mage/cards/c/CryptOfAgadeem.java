@@ -59,9 +59,9 @@ public class CryptOfAgadeem extends CardImpl {
 
         // Crypt of Agadeem enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
-        // {T}: Add {B} to your mana pool.
+        // {T}: Add {B}.
         this.addAbility(new BlackManaAbility());
-        // {2}, {T}: Add {B} to your mana pool for each black creature card in your graveyard.
+        // {2}, {T}: Add {B} for each black creature card in your graveyard.
         DynamicManaAbility ability = new DynamicManaAbility(Mana.BlackMana(1), new CardsInControllerGraveyardCount(filter), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

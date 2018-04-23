@@ -51,7 +51,7 @@ public class MarduBanner extends CardImpl {
     public MarduBanner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
-        // {T}: Add {R}, {W}, or {B} to your mana pool.
+        // {T}: Add {R}, {W}, or {B}.
         this.addAbility(new RedManaAbility());
         this.addAbility(new WhiteManaAbility());
         this.addAbility(new BlackManaAbility());

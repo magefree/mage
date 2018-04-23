@@ -48,10 +48,10 @@ public class FloodedGrove extends CardImpl {
     public FloodedGrove (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
         
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         
-        // {(G/U)}, {T}: Add {G}{G}, {G}{U}, or {U}{U} to your mana pool. 
+        // {(G/U)}, {T}: Add {G}{G}, {G}{U}, or {U}{U}. 
         SimpleManaAbility ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.GreenMana(2), new ManaCostsImpl("{G/U}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

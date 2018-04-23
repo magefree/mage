@@ -71,7 +71,7 @@ public class MasterOfThePearlTridentTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
         addCard(Zone.BATTLEFIELD, playerB, "Llanowar Elves");
         // Creature — Elf Druid 1/1, G
-        // {T}: Add {G} to your mana pool.
+        // {T}: Add {G}.
         addCard(Zone.HAND, playerB, "Turn to Frog");
         // Target creature loses all abilities and becomes a 1/1 blue Frog until end of turn.
 

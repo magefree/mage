@@ -46,7 +46,7 @@ public class NotOfThisWorldTest extends CardTestPlayerBase {
      */
     @Test
     public void testCounterFirstSpell() {
-        // At the beginning of each player's upkeep, destroy target nonartifact creature that player controls of his or her choice. It can't be regenerated.
+        // At the beginning of each player's upkeep, destroy target nonartifact creature that player controls of their choice. It can't be regenerated.
         addCard(Zone.BATTLEFIELD, playerA, "The Abyss", 1);
 
         addCard(Zone.BATTLEFIELD, playerB, "Island", 7);

@@ -171,7 +171,7 @@ public class SuspendTest extends CardTestPlayerBase {
      */
     @Test
     public void testCostManipulation() {
-        // Rift Bolt deals 3 damage to target creature or player.
+        // Rift Bolt deals 3 damage to any target.
         // Suspend 1-{R}
         addCard(Zone.HAND, playerA, "Rift Bolt", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);

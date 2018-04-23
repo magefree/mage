@@ -49,7 +49,7 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -77,11 +77,11 @@ public class Crackleburr extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // {UR}{UR}, {tap}, Tap two untapped red creatures you control: Crackleburr deals 3 damage to target creature or player.
+        // {UR}{UR}, {tap}, Tap two untapped red creatures you control: Crackleburr deals 3 damage to any target.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(3), new ManaCostsImpl("{U/R}{U/R}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new TapTargetCost(new TargetControlledCreaturePermanent(2, 2, filter, true)));
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
         
         // {UR}{UR}, {untap}, Untap two tapped blue creatures you control: Return target creature to its owner's hand.

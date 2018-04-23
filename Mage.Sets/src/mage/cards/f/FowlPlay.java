@@ -42,6 +42,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -80,7 +81,7 @@ public class FowlPlay extends CardImpl {
     }
 }
 
-class FowlPlayToken extends Token {
+class FowlPlayToken extends TokenImpl {
 
     public FowlPlayToken() {
         super("Chicken", "a Chicken with base power and toughness 1/1 with no abilities");
@@ -88,5 +89,12 @@ class FowlPlayToken extends Token {
         subtype.add(SubType.CHICKEN);
         power = new MageInt(1);
         toughness = new MageInt(1);
+    }
+    public FowlPlayToken(final FowlPlayToken token) {
+        super(token);
+    }
+
+    public FowlPlayToken copy() {
+        return new FowlPlayToken(this);
     }
 }

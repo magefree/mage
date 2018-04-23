@@ -44,7 +44,7 @@ public class ZoeticCavern extends CardImpl {
     public ZoeticCavern(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());        
         // Morph {2}
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{2}")));

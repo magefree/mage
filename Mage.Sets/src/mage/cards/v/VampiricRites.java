@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -49,11 +49,11 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public class VampiricRites extends CardImpl {
 
     public VampiricRites(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{B}");
 
         // {1}{B}, Sacrifice a creature: You gain 1 life and draw a card.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(1), new ManaCostsImpl<>("{1}{B}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(new FilterControlledCreaturePermanent("a creature"))));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         Effect effect = new DrawCardSourceControllerEffect(1);
         effect.setText("and draw a card");
         ability.addEffect(effect);

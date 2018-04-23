@@ -49,7 +49,7 @@ public class EmptyTheCatacombs extends CardImpl {
     public EmptyTheCatacombs(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}");
 
-        // Each player returns all creature cards from his or her graveyard to his or her hand.
+        // Each player returns all creature cards from their graveyard to their hand.
         this.getSpellAbility().addEffect(new EmptyTheCatacombsEffect());
     }
 
@@ -69,7 +69,7 @@ class EmptyTheCatacombsEffect extends OneShotEffect {
 
     public EmptyTheCatacombsEffect() {
         super(Outcome.ReturnToHand);
-        staticText = "Each player returns all creature cards from his or her graveyard to his or her hand";
+        staticText = "Each player returns all creature cards from their graveyard to their hand";
     }
 
     public EmptyTheCatacombsEffect(final EmptyTheCatacombsEffect effect) {

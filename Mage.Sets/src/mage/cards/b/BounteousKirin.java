@@ -94,7 +94,7 @@ class BounteousKirinEffect extends OneShotEffect {
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null) {
                 int life = spell.getConvertedManaCost();
-                controller.gainLife(life, game);
+                controller.gainLife(life, game, source);
                 return true;
             }
         }

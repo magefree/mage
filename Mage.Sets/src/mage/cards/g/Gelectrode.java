@@ -41,7 +41,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterInstantOrSorcerySpell;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -56,7 +56,7 @@ public class Gelectrode extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
         this.addAbility(new SpellCastControllerTriggeredAbility(new UntapSourceEffect(), new FilterInstantOrSorcerySpell("an instant or sorcery spell"), true));
     }

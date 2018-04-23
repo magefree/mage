@@ -47,6 +47,7 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -64,7 +65,7 @@ public class GroveOfTheGuardian extends CardImpl {
     public GroveOfTheGuardian(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(1), new TapSourceCost()));
 
         // {3}{G}{W}, {T}, Tap two untapped creatures you control, Sacrifice Grove of the Guardian: Create an 8/8 green and white Elemental creature token with vigilance.
@@ -84,7 +85,7 @@ public class GroveOfTheGuardian extends CardImpl {
         return new GroveOfTheGuardian(this);
     }
 
-    private static class ElementalToken extends Token {
+    private static class ElementalToken extends TokenImpl {
 
         ElementalToken() {
             super("Elemental", "8/8 green and white Elemental creature token with vigilance");
@@ -96,6 +97,13 @@ public class GroveOfTheGuardian extends CardImpl {
             power = new MageInt(8);
             toughness = new MageInt(8);
             this.addAbility(VigilanceAbility.getInstance());
+        }
+        public ElementalToken(final ElementalToken token) {
+            super(token);
+        }
+
+        public ElementalToken copy() {
+            return new ElementalToken(this);
         }
     }
 }

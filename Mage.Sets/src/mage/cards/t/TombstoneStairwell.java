@@ -51,6 +51,7 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.TombspawnZombieToken;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
@@ -69,7 +70,7 @@ public class TombstoneStairwell extends CardImpl {
         // Cumulative upkeep-Pay {1}{B}.
         this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{1}{B}")));
 
-        // At the beginning of each upkeep, if Tombstone Stairwell is on the battlefield, each player creates a 2/2 black Zombie creature token with haste named Tombspawn for each creature card in his or her graveyard.
+        // At the beginning of each upkeep, if Tombstone Stairwell is on the battlefield, each player creates a 2/2 black Zombie creature token with haste named Tombspawn for each creature card in their graveyard.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TombstoneStairwellCreateTokenEffect(), TargetController.ANY, false));
 
         // At the beginning of each end step or when Tombstone Stairwell leaves the battlefield, destroy all tokens created with Tombstone Stairwell. They can't be regenerated.
@@ -90,7 +91,7 @@ class TombstoneStairwellCreateTokenEffect extends OneShotEffect {
 
     TombstoneStairwellCreateTokenEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "if {this} is on the battlefield, each player creates a 2/2 black Zombie creature token with haste named Tombspawn for each creature card in his or her graveyard";
+        this.staticText = "if {this} is on the battlefield, each player creates a 2/2 black Zombie creature token with haste named Tombspawn for each creature card in their graveyard";
     }
 
     TombstoneStairwellCreateTokenEffect(final TombstoneStairwellCreateTokenEffect effect) {

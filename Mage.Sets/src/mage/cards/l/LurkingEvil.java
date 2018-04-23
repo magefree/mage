@@ -43,6 +43,7 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 
@@ -109,7 +110,7 @@ class LurkingEvilCost extends CostImpl {
     }
 }
 
-class LurkingEvilToken extends Token {
+class LurkingEvilToken extends TokenImpl {
 
     LurkingEvilToken() {
         super("Horror", "4/4 Horror creature with flying");
@@ -118,5 +119,12 @@ class LurkingEvilToken extends Token {
         subtype.add(SubType.HORROR);
         cardType.add(CardType.CREATURE);
         this.addAbility(FlyingAbility.getInstance());
+    }
+    public LurkingEvilToken(final LurkingEvilToken token) {
+        super(token);
+    }
+
+    public LurkingEvilToken copy() {
+        return new LurkingEvilToken(this);
     }
 }

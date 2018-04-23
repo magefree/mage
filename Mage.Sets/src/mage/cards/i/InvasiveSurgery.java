@@ -60,7 +60,7 @@ public class InvasiveSurgery extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
 
         // Counter target sorcery spell.
-        // <i>Delirium</i> &mdash; If there are four or more card types among cards in your graveyard, search the graveyard, hand, and library of that spell's controller for any number of cards with the same name as that spell, exile those cards, then that player shuffles his or her library.
+        // <i>Delirium</i> &mdash; If there are four or more card types among cards in your graveyard, search the graveyard, hand, and library of that spell's controller for any number of cards with the same name as that spell, exile those cards, then that player shuffles their library.
         this.getSpellAbility().addEffect(new InvasiveSurgeryEffect());
         this.getSpellAbility().addTarget(new TargetSpell(filter));
 
@@ -124,6 +124,6 @@ class InvasiveSurgeryEffect extends SearchTargetGraveyardHandLibraryForCardNameA
         return "Counter target sorcery spell.<br><br>"
                 + "<i>Delirium</i> &mdash; If there are four or more card types among cards in your graveyard, "
                 + "search the graveyard, hand, and library of that spell's controller for any number of cards "
-                + "with the same name as that spell, exile those cards, then that player shuffles his or her library";
+                + "with the same name as that spell, exile those cards, then that player shuffles their library";
     }
 }

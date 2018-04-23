@@ -57,10 +57,10 @@ public class TaintedWood extends CardImpl {
     public TaintedWood(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {tap}: Add {C} to your mana pool.
+        // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
 
-        // {tap}: Add {B} or {G} to your mana pool. Activate this ability only if you control a Swamp.
+        // {tap}: Add {B} or {G}. Activate this ability only if you control a Swamp.
         this.addAbility(new ActivateIfConditionManaAbility(
                 Zone.BATTLEFIELD,
                 new BasicManaEffect(Mana.BlackMana(1)),

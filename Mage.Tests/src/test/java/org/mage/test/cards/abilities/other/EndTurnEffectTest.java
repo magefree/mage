@@ -50,11 +50,11 @@ public class EndTurnEffectTest extends CardTestPlayerBase {
     public void testSpellsAffinity() {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
 
-        // Whenever you draw a card, target opponent puts the top two cards of his or her library into his or her graveyard. If they're both nonland cards that share a color, repeat this process.
+        // Whenever you draw a card, target opponent puts the top two cards of their library into their graveyard. If they're both nonland cards that share a color, repeat this process.
         // {5}{U}: Draw a card, then discard a card.
         addCard(Zone.BATTLEFIELD, playerA, "Sphinx's Tutelage");
 
-        // Each player shuffles his or her hand and graveyard into his or her library, then draws seven cards. If it's your turn, end the turn.
+        // Each player shuffles their hand and graveyard into their library, then draws seven cards. If it's your turn, end the turn.
         //  (Exile all spells and abilities on the stack, including this card.
         //   Discard down to your maximum hand size. Damage wears off, and
         //   "this turn" and "until end of turn" effects end.)

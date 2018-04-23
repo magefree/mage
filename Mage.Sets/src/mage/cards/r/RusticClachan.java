@@ -60,7 +60,7 @@ public class RusticClachan extends CardImpl {
         // As Rustic Clachan enters the battlefield, you may reveal a Kithkin card from your hand. If you don't, Rustic Clachan enters the battlefield tapped.
         this.addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new RevealTargetFromHandCost(new TargetCardInHand(filter))), "you may reveal a Kithkin card from your hand. If you don't, {this} enters the battlefield tapped"));
 
-        // {tap}: Add {W} to your mana pool.
+        // {tap}: Add {W}.
         this.addAbility(new WhiteManaAbility());
         // Reinforce 1-{1}{W}
         this.addAbility(new ReinforceAbility(1, new ManaCostsImpl("{1}{W}")));

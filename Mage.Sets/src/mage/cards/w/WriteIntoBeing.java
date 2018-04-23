@@ -115,7 +115,7 @@ class WriteIntoBeingEffect extends OneShotEffect {
                     cardToPutBack.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
                     position = "on bottom";
                 }
-                game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " puts the other card " + position + " of his or her library");
+                game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " puts the other card " + position + " of their library");
             }
             return true;
         }

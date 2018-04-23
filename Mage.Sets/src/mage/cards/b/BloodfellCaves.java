@@ -52,7 +52,7 @@ public class BloodfellCaves extends CardImpl {
         // When Bloodfell Caves enters the battlefield, you gain 1 life.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(1)));
         
-        // {T}: Add {B} or {R} to your mana pool.
+        // {T}: Add {B} or {R}.
         this.addAbility(new BlackManaAbility());
         this.addAbility(new RedManaAbility());           
     }

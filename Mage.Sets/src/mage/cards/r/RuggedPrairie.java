@@ -47,10 +47,10 @@ public class RuggedPrairie extends CardImpl {
 
     public RuggedPrairie (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         
-        // {R/W}, {tap}: Add {R}{R}, {R}{W}, or {W}{W} to your mana pool.
+        // {R/W}, {tap}: Add {R}{R}, {R}{W}, or {W}{W}.
         SimpleManaAbility ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.RedMana(2), new ManaCostsImpl("{R/W}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

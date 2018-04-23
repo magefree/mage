@@ -92,15 +92,15 @@ public class SpellAbility extends ActivatedAbilityImpl {
 
     @Override
     public boolean canActivate(UUID playerId, Game game) {
-        if (game.getContinuousEffects().asThough(sourceId, AsThoughEffectType.CAST_AS_INSTANT, this, playerId, game) // check this first to allow Offering in main phase
+        if (null != game.getContinuousEffects().asThough(sourceId, AsThoughEffectType.CAST_AS_INSTANT, this, playerId, game) // check this first to allow Offering in main phase
                 || this.spellCanBeActivatedRegularlyNow(playerId, game)) {
             if (spellAbilityType == SpellAbilityType.SPLIT || spellAbilityType == SpellAbilityType.SPLIT_AFTERMATH) {
                 return false;
             }
             // fix for Gitaxian Probe and casting opponent's spells
-            if (!game.getContinuousEffects().asThough(getSourceId(), AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, playerId, game)) {
+            if (null == game.getContinuousEffects().asThough(getSourceId(), AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, playerId, game)) {
                 Card card = game.getCard(sourceId);
-                if (!(card != null && card.getOwnerId() == playerId)) {
+                if (!(card != null && card.getOwnerId().equals(playerId))) {
                     return false;
                 }
             }

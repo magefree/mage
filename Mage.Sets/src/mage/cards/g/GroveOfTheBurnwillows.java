@@ -49,9 +49,9 @@ public class GroveOfTheBurnwillows extends CardImpl {
     public GroveOfTheBurnwillows(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {tap}: Add {C} to your mana pool.
+        // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
-        // {tap}: Add {R} or {G} to your mana pool. Each opponent gains 1 life.
+        // {tap}: Add {R} or {G}. Each opponent gains 1 life.
         Ability RedManaAbility = new RedManaAbility();
         RedManaAbility.addEffect(new GroveOfTheBurnwillowsEffect());
         this.addAbility(RedManaAbility);
@@ -85,7 +85,7 @@ class GroveOfTheBurnwillowsEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         for (UUID playerId : game.getOpponents(source.getControllerId())) {
             Player player = game.getPlayer(playerId);
-            player.gainLife(1, game);
+            player.gainLife(1, game, source);
         }
         return true;
     }

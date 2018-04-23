@@ -47,7 +47,7 @@ public class CadaverousBloom extends CardImpl {
     public CadaverousBloom(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{B}{G}");
 
-        // Exile a card from your hand: Add {B}{B} or {G}{G} to your mana pool.
+        // Exile a card from your hand: Add {B}{B} or {G}{G}.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana(2), new ExileFromHandCost(new TargetCardInHand(new FilterOwnedCard("a card from your hand")))));
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.GreenMana(2), new ExileFromHandCost(new TargetCardInHand(new FilterOwnedCard("a card from your hand")))));
     }

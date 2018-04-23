@@ -51,7 +51,7 @@ public class ParleyTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Forest");
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
 
-        // Parley - {T}: Each player reveals the top card of his or her library. For each nonland card revealed this way, add {G} to your mana pool and you gain 1 life. Then each player draws a card.
+        // Parley - {T}: Each player reveals the top card of their library. For each nonland card revealed this way, add {G} and you gain 1 life. Then each player draws a card.
         addCard(Zone.HAND, playerA, "Selvala, Explorer Returned");// Creature {1}{G}{W}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Selvala, Explorer Returned");
@@ -68,7 +68,7 @@ public class ParleyTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Forest");
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
 
-        // Parley - {T}: Each player reveals the top card of his or her library. For each nonland card revealed this way, add {G} to your mana pool and you gain 1 life. Then each player draws a card.
+        // Parley - {T}: Each player reveals the top card of their library. For each nonland card revealed this way, add {G} and you gain 1 life. Then each player draws a card.
         addCard(Zone.HAND, playerA, "Selvala, Explorer Returned");// Creature {1}{G}{W}
 
         addCard(Zone.LIBRARY, playerA, "Silvercoat Lion", 2);

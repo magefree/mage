@@ -38,7 +38,7 @@ import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 import java.util.UUID;
 
@@ -53,9 +53,9 @@ public class CandlesGlow extends CardImpl {
         this.subtype.add(SubType.ARCANE);
 
 
-        // Prevent the next 3 damage that would be dealt to target creature or player this turn. You gain life equal to the damage prevented this way.
+        // Prevent the next 3 damage that would be dealt to any target this turn. You gain life equal to the damage prevented this way.
         this.getSpellAbility().addEffect(new CandlesGlowPreventDamageTargetEffect(Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
         // Splice onto Arcane {1}{W}
         this.addAbility(new SpliceOntoArcaneAbility("{1}{W}"));
     }
@@ -76,7 +76,7 @@ class CandlesGlowPreventDamageTargetEffect extends PreventionEffectImpl {
 
     public CandlesGlowPreventDamageTargetEffect(Duration duration) {
         super(duration);
-        staticText = "Prevent the next 3 damage that would be dealt to target creature or player this turn. You gain life equal to the damage prevented this way";
+        staticText = "Prevent the next 3 damage that would be dealt to any target this turn. You gain life equal to the damage prevented this way";
     }
 
     public CandlesGlowPreventDamageTargetEffect(final CandlesGlowPreventDamageTargetEffect effect) {
@@ -117,7 +117,7 @@ class CandlesGlowPreventDamageTargetEffect extends PreventionEffectImpl {
             if (prevented > 0) {
                 Player controller = game.getPlayer(source.getControllerId());
                 if (controller != null) {
-                    controller.gainLife(prevented, game);
+                    controller.gainLife(prevented, game, source);
                     game.informPlayers(new StringBuilder("Candles' Glow: Prevented ").append(prevented).append(" damage ").toString());
                     game.informPlayers(new StringBuilder("Candles' Glow: ").append(controller.getLogName()).append(" gained ").append(prevented).append("life").toString());
                 }

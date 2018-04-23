@@ -140,7 +140,7 @@ class GlyphOfLifeGainLifeEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            player.gainLife((Integer) this.getValue("damageAmount"), game);
+            player.gainLife((Integer) this.getValue("damageAmount"), game, source);
         }
         return true;
     }

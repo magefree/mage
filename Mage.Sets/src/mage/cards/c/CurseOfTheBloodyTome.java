@@ -65,7 +65,7 @@ public class CurseOfTheBloodyTome extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         Ability ability = new EnchantAbility(target.getTargetName());
         this.addAbility(ability);
-        // At the beginning of enchanted player's upkeep, that player puts the top two cards of his or her library into his or her graveyard.
+        // At the beginning of enchanted player's upkeep, that player puts the top two cards of their library into their graveyard.
         this.addAbility(new CurseOfTheBloodyTomeAbility());
 
     }
@@ -115,6 +115,6 @@ class CurseOfTheBloodyTomeAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "At the beginning of enchanted player's upkeep, that player puts the top two cards of his or her library into his or her graveyard.";
+        return "At the beginning of enchanted player's upkeep, that player puts the top two cards of their library into their graveyard.";
     }
 }

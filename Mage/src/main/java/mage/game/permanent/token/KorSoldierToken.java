@@ -38,7 +38,7 @@ import mage.MageInt;
  *
  * @author LoneFox
  */
-public class KorSoldierToken extends Token {
+public class KorSoldierToken extends TokenImpl {
 
     public KorSoldierToken() {
         super("Kor Soldier", "1/1 white Kor Soldier creature token");
@@ -48,5 +48,13 @@ public class KorSoldierToken extends Token {
         subtype.add(SubType.SOLDIER);
         power = new MageInt(1);
         toughness = new MageInt(1);
-        availableImageSetCodes.addAll(Arrays.asList("C14", "ZEN"));                                                                                               }
+        availableImageSetCodes.addAll(Arrays.asList("C14", "ZEN"));                                                                                               
+    }
+    public KorSoldierToken(final KorSoldierToken token) {
+        super(token);
+    }
+
+    public KorSoldierToken copy() {
+        return new KorSoldierToken(this);
+    }
 }

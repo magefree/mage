@@ -41,6 +41,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 
 /**
@@ -52,7 +53,7 @@ public class SilumgarMonument extends CardImpl {
     public SilumgarMonument(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
-        // {T}: Add {U} or {B} to your mana pool.
+        // {T}: Add {U} or {B}.
         this.addAbility(new BlueManaAbility());
         this.addAbility(new BlackManaAbility());
         
@@ -70,7 +71,7 @@ public class SilumgarMonument extends CardImpl {
         return new SilumgarMonument(this);
     }
     
-private static class OjutaiMonumentToken extends Token {
+    private static class OjutaiMonumentToken extends TokenImpl {
         OjutaiMonumentToken() {
             super("", "4/4 blue and black Dragon artifact creature with flying");
             cardType.add(CardType.ARTIFACT);
@@ -81,6 +82,13 @@ private static class OjutaiMonumentToken extends Token {
             power = new MageInt(4);
             toughness = new MageInt(4);
             this.addAbility(FlyingAbility.getInstance());
+        }
+        public OjutaiMonumentToken(final OjutaiMonumentToken token) {
+            super(token);
+        }
+    
+        public OjutaiMonumentToken copy() {
+            return new OjutaiMonumentToken(this);
         }
     }      
 }

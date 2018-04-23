@@ -67,7 +67,7 @@ class TraumatizeEffect extends OneShotEffect {
 
     public TraumatizeEffect() {
         super(Outcome.Detriment);
-        staticText = "Target player puts the top half of his or her library, rounded down, into his or her graveyard";
+        staticText = "Target player puts the top half of their library, rounded down, into their graveyard";
     }
 
     public TraumatizeEffect(final TraumatizeEffect effect) {

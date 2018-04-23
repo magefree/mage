@@ -37,7 +37,7 @@ import mage.MageInt;
  *
  * @author LoneFox
  */
-public class HumanToken extends Token {
+public class HumanToken extends TokenImpl {
 
     public HumanToken() {
         super("Human", "1/1 white Human creature token");

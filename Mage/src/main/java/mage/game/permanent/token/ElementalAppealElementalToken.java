@@ -37,7 +37,7 @@ import mage.constants.SubType;
  *
  * @author spjspj
  */
-public class ElementalAppealElementalToken extends Token {
+public class ElementalAppealElementalToken extends TokenImpl {
 
     public ElementalAppealElementalToken() {
         super("Elemental", "7/1 red Elemental creature token with trample and haste");
@@ -48,5 +48,13 @@ public class ElementalAppealElementalToken extends Token {
         toughness = new MageInt(1);
         addAbility(TrampleAbility.getInstance());
         addAbility(HasteAbility.getInstance());
+    }
+
+    public ElementalAppealElementalToken(final ElementalAppealElementalToken token) {
+        super(token);
+    }
+
+    public ElementalAppealElementalToken copy() {
+        return new ElementalAppealElementalToken(this);
     }
 }

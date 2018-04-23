@@ -48,7 +48,7 @@ import mage.constants.TargetController;
 public class Skizzik extends CardImpl {
 
     public Skizzik(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
         this.subtype.add(SubType.ELEMENTAL);
 
         this.power = new MageInt(5);
@@ -61,7 +61,8 @@ public class Skizzik extends CardImpl {
         // Haste
         this.addAbility(HasteAbility.getInstance());
         // At the beginning of the end step, sacrifice Skizzik unless it was kicked.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new SacrificeSourceUnlessConditionEffect(KickedCondition.instance), TargetController.ANY, false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(
+                new SacrificeSourceUnlessConditionEffect(KickedCondition.instance), TargetController.NEXT, false));
     }
 
     public Skizzik(final Skizzik card) {

@@ -53,7 +53,7 @@ public class HiveMind extends CardImpl {
     public HiveMind(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{5}{U}");
 
-        // Whenever a player casts an instant or sorcery spell, each other player copies that spell. Each of those players may choose new targets for his or her copy.
+        // Whenever a player casts an instant or sorcery spell, each other player copies that spell. Each of those players may choose new targets for their copy.
         this.addAbility(new HiveMindTriggeredAbility());
     }
 
@@ -112,7 +112,7 @@ class HiveMindEffect extends OneShotEffect {
 
     public HiveMindEffect() {
         super(Outcome.Benefit);
-        this.staticText = "each other player copies that spell. Each of those players may choose new targets for his or her copy";
+        this.staticText = "each other player copies that spell. Each of those players may choose new targets for their copy";
     }
 
     public HiveMindEffect(final HiveMindEffect effect) {

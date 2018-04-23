@@ -84,19 +84,17 @@ class NaturesWillEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Set<UUID> damagedPlayers = (HashSet<UUID>) this.getValue("damagedPlayers");
-        if (damagedPlayers == null) {
-            return false;
-        }
-
-        List<Permanent> lands = game.getBattlefield().getActivePermanents(StaticFilters.FILTER_LAND, source.getControllerId(), source.getSourceId(), game);
-        for (Permanent land : lands) {
-            if (damagedPlayers.contains(land.getControllerId())) {
-                land.tap(game);
-            } else if (land.getControllerId().equals(source.getControllerId())) {
-                land.untap(game);
+        if (damagedPlayers != null) {
+            List<Permanent> lands = game.getBattlefield().getActivePermanents(StaticFilters.FILTER_LAND, source.getControllerId(), source.getSourceId(), game);
+            for (Permanent land : lands) {
+                if (damagedPlayers.contains(land.getControllerId())) {
+                   land.tap(game);
+                } else if (land.getControllerId().equals(source.getControllerId())) {
+                    land.untap(game);
+                }
             }
+            return true;
         }
-
         return false;
     }
 }

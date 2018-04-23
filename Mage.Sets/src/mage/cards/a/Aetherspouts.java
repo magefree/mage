@@ -56,7 +56,7 @@ public class Aetherspouts extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}{U}");
 
 
-        // For each attacking creature, its owner puts it on the top or bottom of his or her library.
+        // For each attacking creature, its owner puts it on the top or bottom of their library.
         this.getSpellAbility().addEffect(new AetherspoutsEffect());
     }
 
@@ -72,17 +72,17 @@ public class Aetherspouts extends CardImpl {
 
 /*
 7/18/2014 	The owner of each attacking creature chooses whether to put it on the top or bottom
-            of his or her library. The active player (the player whose turn it is) makes all of
-            his or her choices first, followed by each other player in turn order.
+            of their library. The active player (the player whose turn it is) makes all of
+            their choices first, followed by each other player in turn order.
 7/18/2014 	If an effect puts two or more cards on the top or bottom of a library at the same time,
             the owner of those cards may arrange them in any order. That library’s owner doesn’t reveal
-            the order in which the cards go into his or her library.
+            the order in which the cards go into their library.
 */
 class AetherspoutsEffect extends OneShotEffect {
 
     public AetherspoutsEffect() {
         super(Outcome.Benefit);
-        this.staticText = "For each attacking creature, its owner puts it on the top or bottom of his or her library";
+        this.staticText = "For each attacking creature, its owner puts it on the top or bottom of their library";
     }
 
     public AetherspoutsEffect(final AetherspoutsEffect effect) {

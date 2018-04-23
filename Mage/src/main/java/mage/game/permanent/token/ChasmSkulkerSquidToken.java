@@ -36,7 +36,7 @@ import mage.abilities.keyword.IslandwalkAbility;
  *
  * @author spjspj
  */
-public class ChasmSkulkerSquidToken extends Token {
+public class ChasmSkulkerSquidToken extends TokenImpl {
 
     public ChasmSkulkerSquidToken() {
         super("Squid", "1/1 blue Squid creature token with islandwalk");
@@ -50,4 +50,11 @@ public class ChasmSkulkerSquidToken extends Token {
         this.addAbility(new IslandwalkAbility());
     }
 
+    public ChasmSkulkerSquidToken(final ChasmSkulkerSquidToken token) {
+        super(token);
+    }
+
+    public ChasmSkulkerSquidToken copy() {
+        return new ChasmSkulkerSquidToken(this);
+    }
 }

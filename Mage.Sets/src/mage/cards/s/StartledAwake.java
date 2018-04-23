@@ -57,7 +57,7 @@ public class StartledAwake extends CardImpl {
         this.transformable = true;
         this.secondSideCardClazz = PersistentNightmare.class;
 
-        // Target opponent puts the top thirteen cards of his or her library into his or her graveyard.
+        // Target opponent puts the top thirteen cards of their library into their graveyard.
         this.getSpellAbility().addTarget(new TargetOpponent());
         this.getSpellAbility().addEffect(new PutLibraryIntoGraveTargetEffect(13));
 

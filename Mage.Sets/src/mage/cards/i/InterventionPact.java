@@ -137,7 +137,7 @@ class InterventionPactPreventDamageEffect extends PreventionEffectImpl {
             used = true;
             Player player = game .getPlayer(source.getControllerId());
             if(player != null){
-                player.gainLife(preventEffectData.getPreventedDamage(), game);
+                player.gainLife(preventEffectData.getPreventedDamage(), game, source);
             }
         }
         return false;

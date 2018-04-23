@@ -42,6 +42,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterLandPermanent;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
@@ -66,7 +67,7 @@ public class GenjuOfTheFalls extends CardImpl {
         this.addAbility(ability);
 
         // {2}: Enchanted Island becomes a 3/2 blue Spirit creature with flying until end of turn. It's still a land.
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureAttachedWithActivatedAbilityOrSpellEffect(new SpiritToken(), "Enchanted Island becomes a 3/2 blue Spirit creature with flying until end of turn.  It's still a land", Duration.EndOfTurn), new GenericManaCost(2));
+        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureAttachedWithActivatedAbilityOrSpellEffect(new SpiritToken(), "Enchanted Island becomes a 3/2 blue Spirit creature with flying until end of turn. It's still a land", Duration.EndOfTurn), new GenericManaCost(2));
         this.addAbility(ability2);
 
         // When enchanted Island is put into a graveyard, you may return Genju of the Falls from your graveyard to your hand.        TargetPermanent auraTarget = new TargetLandPermanent(filter);
@@ -83,7 +84,7 @@ public class GenjuOfTheFalls extends CardImpl {
         return new GenjuOfTheFalls(this);
     }
 
-    private static class SpiritToken extends Token {
+    private static class SpiritToken extends TokenImpl {
 
         SpiritToken() {
             super("Spirit", "3/2 blue Spirit creature with flying");
@@ -93,6 +94,14 @@ public class GenjuOfTheFalls extends CardImpl {
             power = new MageInt(3);
             toughness = new MageInt(2);
             addAbility(FlyingAbility.getInstance());
+        }
+
+        public SpiritToken(final SpiritToken token) {
+            super(token);
+        }
+
+        public SpiritToken copy() {
+            return new SpiritToken(this);
         }
     }
 }

@@ -49,7 +49,7 @@ public class DrawTriggeredTest extends CardTestPlayerBase {
      */
     @Test
     public void DaysUndoingTriggeredDrewEventAreRemovedTest() {
-        // Each player shuffles his or her hand and graveyard into his or her library, then draws seven cards. If it's your turn, end the turn.
+        // Each player shuffles their hand and graveyard into their library, then draws seven cards. If it's your turn, end the turn.
         addCard(Zone.HAND, playerA, "Day's Undoing");
         addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
 

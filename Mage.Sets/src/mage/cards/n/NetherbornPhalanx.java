@@ -76,7 +76,7 @@ class NetherbornPhalanxEffect extends OneShotEffect {
 
     NetherbornPhalanxEffect() {
         super(Outcome.Sacrifice);
-        this.staticText = "Each opponent loses 1 life for each creature he or she controls";
+        this.staticText = "each opponent loses 1 life for each creature he or she controls";
     }
 
     NetherbornPhalanxEffect(final NetherbornPhalanxEffect effect) {

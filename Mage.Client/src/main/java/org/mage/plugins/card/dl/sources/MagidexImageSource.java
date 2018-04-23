@@ -31,6 +31,7 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import org.mage.plugins.card.images.CardDownloadData;
@@ -257,7 +258,7 @@ public enum MagidexImageSource implements CardImageSource {
 
     @Override
     public String generateURL(CardDownloadData card) throws Exception {
-        String cardDownloadName = card.getDownloadName().toLowerCase();
+        String cardDownloadName = card.getDownloadName().toLowerCase(Locale.ENGLISH);
         String cardSet = card.getSet();
 
         if (cardDownloadName == null || cardSet == null) {

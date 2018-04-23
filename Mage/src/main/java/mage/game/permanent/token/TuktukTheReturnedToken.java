@@ -36,7 +36,7 @@ import mage.constants.SuperType;
  *
  * @author spjspj
  */
-public class TuktukTheReturnedToken extends Token {
+public class TuktukTheReturnedToken extends TokenImpl {
 
     public TuktukTheReturnedToken() {
         this("ROE");
@@ -51,5 +51,13 @@ public class TuktukTheReturnedToken extends Token {
         subtype.add(SubType.GOBLIN);
         power = new MageInt(5);
         toughness = new MageInt(5);
+    }
+
+    public TuktukTheReturnedToken(final TuktukTheReturnedToken token) {
+        super(token);
+    }
+
+    public TuktukTheReturnedToken copy() {
+        return new TuktukTheReturnedToken(this);
     }
 }

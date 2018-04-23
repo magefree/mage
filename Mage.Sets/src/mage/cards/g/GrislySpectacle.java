@@ -61,7 +61,7 @@ public class GrislySpectacle extends CardImpl {
     public GrislySpectacle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{B}{B}");
 
-        // Destroy target nonartifact creature. Its controller puts a number of cards equal to that creature's power from the top of his or her library into his or her graveyard.
+        // Destroy target nonartifact creature. Its controller puts a number of cards equal to that creature's power from the top of their library into their graveyard.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addEffect(new GrislySpectacleEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
@@ -81,7 +81,7 @@ class GrislySpectacleEffect extends OneShotEffect {
 
     public GrislySpectacleEffect() {
         super(Outcome.DestroyPermanent);
-        this.staticText = "Its controller puts a number of cards equal to that creature's power from the top of his or her library into his or her graveyard";
+        this.staticText = "Its controller puts a number of cards equal to that creature's power from the top of their library into their graveyard";
     }
 
     public GrislySpectacleEffect(final GrislySpectacleEffect effect) {

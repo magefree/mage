@@ -43,7 +43,7 @@ public class BloodstoneCameo extends CardImpl {
     public BloodstoneCameo(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
-        // {tap}: Add {B} or {R} to your mana pool.
+        // {tap}: Add {B} or {R}.
         this.addAbility(new BlackManaAbility());
         this.addAbility(new RedManaAbility());
     }

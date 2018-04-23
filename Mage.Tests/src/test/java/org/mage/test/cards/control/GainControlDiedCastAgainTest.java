@@ -20,7 +20,7 @@ public class GainControlDiedCastAgainTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Plains", 4);
         addCard(Zone.BATTLEFIELD, playerB, "Swamp", 3);
         /**
-         * Volrath's Stronghold Legendary Land {t}: Add {C} to your mana pool.
+         * Volrath's Stronghold Legendary Land {t}: Add {C}.
          * {1}{B}, {tap}: Put target creature card from your graveyard on top of
          * your library.
          */
@@ -66,7 +66,7 @@ public class GainControlDiedCastAgainTest extends CardTestPlayerBase {
          */
         addCard(Zone.HAND, playerB, "Akroma's Vengeance");
         /**
-         * Volrath's Stronghold Legendary Land {t}: Add {C} to your mana pool.
+         * Volrath's Stronghold Legendary Land {t}: Add {C}.
          * {1}{B}, {tap}: Put target creature card from your graveyard on top of
          * your library.
          */

@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author LoneFox
  */
-public class GoatToken extends Token {
+public class GoatToken extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 
@@ -65,4 +65,12 @@ public class GoatToken extends Token {
         power = new MageInt(0);
         toughness = new MageInt(1);
     }
+
+    public GoatToken(final GoatToken token) {
+        super(token);
+    }
+
+    public GoatToken copy() {
+        return new GoatToken(this);
+    }   
 }

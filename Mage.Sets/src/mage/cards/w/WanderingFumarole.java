@@ -43,6 +43,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 
 /**
@@ -57,7 +58,7 @@ public class WanderingFumarole extends CardImpl {
         // Wandering Fumarole enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
         
-        // {T}: Add {U} or {R} to your mana pool.
+        // {T}: Add {U} or {R}.
         this.addAbility(new BlueManaAbility());
         this.addAbility(new RedManaAbility());
         
@@ -78,7 +79,7 @@ public class WanderingFumarole extends CardImpl {
     }
 }
 
-class WanderingFumaroleToken extends Token {
+class WanderingFumaroleToken extends TokenImpl {
 
     public WanderingFumaroleToken() {
         super("", "1/4 blue and red Elemental creature with \"0: Switch this creature's power and toughness until end of turn.\"");
@@ -89,5 +90,12 @@ class WanderingFumaroleToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(4);
         addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SwitchPowerToughnessSourceEffect(Duration.EndOfTurn), new ManaCostsImpl("{0}")));
+    }
+    public WanderingFumaroleToken(final WanderingFumaroleToken token) {
+        super(token);
+    }
+
+    public WanderingFumaroleToken copy() {
+        return new WanderingFumaroleToken(this);
     }
 }

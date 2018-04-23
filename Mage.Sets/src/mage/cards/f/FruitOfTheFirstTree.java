@@ -96,7 +96,7 @@ class FruitOfTheFirstTreeEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent creature = (Permanent) getValue("attachedTo");
         if (controller != null && creature != null) {
-            controller.gainLife(creature.getToughness().getValue(), game);
+            controller.gainLife(creature.getToughness().getValue(), game, source);
             controller.drawCards(creature.getToughness().getValue(), game);
             return true;            
         }

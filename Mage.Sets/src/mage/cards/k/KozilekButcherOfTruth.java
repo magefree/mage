@@ -59,7 +59,7 @@ public class KozilekButcherOfTruth extends CardImpl {
         // Annihilator 4 (Whenever this creature attacks, defending player sacrifices four permanents.)
         this.addAbility(new AnnihilatorAbility(4));
 
-        // When Kozilek is put into a graveyard from anywhere, its owner shuffles his or her graveyard into his or her library.
+        // When Kozilek is put into a graveyard from anywhere, its owner shuffles their graveyard into their library.
         this.addAbility(new PutIntoGraveFromAnywhereSourceTriggeredAbility(new ShuffleIntoLibraryGraveOfSourceOwnerEffect(), false));
     }
 

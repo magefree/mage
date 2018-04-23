@@ -57,7 +57,7 @@ import mage.target.common.TargetCardInOpponentsGraveyard;
  */
 public class ChancellorOfTheSpires extends CardImpl {
 
-    private static final String abilityText = "at the beginning of the first upkeep, each opponent puts the top seven cards of his or her library into his or her graveyard";
+    private static final String abilityText = "at the beginning of the first upkeep, each opponent puts the top seven cards of their library into their graveyard";
 
     private static final FilterCard filter = new FilterCard("instant or sorcery card from an opponent's graveyard");
 
@@ -74,7 +74,7 @@ public class ChancellorOfTheSpires extends CardImpl {
         this.power = new MageInt(5);
         this.toughness = new MageInt(7);
 
-        // You may reveal this card from your opening hand. If you do, at the beginning of the first upkeep, each opponent puts the top seven cards of his or her library into his or her graveyard.
+        // You may reveal this card from your opening hand. If you do, at the beginning of the first upkeep, each opponent puts the top seven cards of their library into their graveyard.
         this.addAbility(new ChancellorAbility(new ChancellorOfTheSpiresDelayedTriggeredAbility(), abilityText));
 
         this.addAbility(FlyingAbility.getInstance());
@@ -124,7 +124,7 @@ class ChancellorOfTheSpiresEffect extends OneShotEffect {
 
     ChancellorOfTheSpiresEffect () {
         super(Outcome.Benefit);
-        staticText = "each opponent puts the top seven cards of his or her library into his or her graveyard";
+        staticText = "each opponent puts the top seven cards of their library into their graveyard";
     }
 
     ChancellorOfTheSpiresEffect(ChancellorOfTheSpiresEffect effect) {

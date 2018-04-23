@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class ReflectionToken extends Token {
+public class ReflectionToken extends TokenImpl {
 
     public ReflectionToken() {
         super("Reflection", "2/2 white Reflection creature token");
@@ -45,5 +45,13 @@ public class ReflectionToken extends Token {
         subtype.add(SubType.REFLECTION);
         power = new MageInt(2);
         toughness = new MageInt(2);
+    }
+
+    public ReflectionToken(final ReflectionToken token) {
+        super(token);
+    }
+
+    public ReflectionToken copy() {
+        return new ReflectionToken(this);
     }
 }

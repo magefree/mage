@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.h;
 
 import java.util.UUID;
@@ -38,8 +37,8 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
  * @author JRHerlehy
@@ -51,7 +50,7 @@ public class HungryFlames extends CardImpl {
 
         // Hungry Flames deals 3 damage to target creature and 2 damage to target player.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
         this.getSpellAbility().addEffect(new HungryFlamesEffect());
     }
 
@@ -65,9 +64,10 @@ public class HungryFlames extends CardImpl {
     }
 
     private static class HungryFlamesEffect extends OneShotEffect {
+
         HungryFlamesEffect() {
             super(Outcome.Damage);
-            this.staticText = "{this} deals 3 damage to target creature and 2 damage to target player";
+            this.staticText = "{this} deals 3 damage to target creature and 2 damage to target player or planeswalker";
         }
 
         HungryFlamesEffect(final HungryFlamesEffect effect) {

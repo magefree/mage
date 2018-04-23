@@ -35,7 +35,7 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -50,7 +50,7 @@ public class InvokeTheFiremind extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(new ManacostVariableValue()));
         Mode mode = new Mode();
         mode.getEffects().add(new DamageTargetEffect(new ManacostVariableValue()));
-        mode.getTargets().add(new TargetCreatureOrPlayer());
+        mode.getTargets().add(new TargetAnyTarget());
         this.getSpellAbility().addMode(mode);
     }
 

@@ -12,12 +12,12 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class KnightToken extends Token {
+public class KnightToken extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 
     static {
-        tokenImageSets.addAll(Arrays.asList("ORI", "RTR", "C15", "CMA"));
+        tokenImageSets.addAll(Arrays.asList("ORI", "RTR", "C15", "CMA", "DOM"));
     }
 
     public KnightToken() {
@@ -33,5 +33,13 @@ public class KnightToken extends Token {
         this.addAbility(VigilanceAbility.getInstance());
 
         availableImageSetCodes = tokenImageSets;
+    }
+
+    public KnightToken(final KnightToken token) {
+        super(token);
+    }
+
+    public KnightToken copy() {
+        return new KnightToken(this);
     }
 }

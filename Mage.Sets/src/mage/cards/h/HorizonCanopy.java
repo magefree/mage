@@ -51,7 +51,7 @@ public class HorizonCanopy extends CardImpl {
     public HorizonCanopy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {tap}, Pay 1 life: Add {G} or {W} to your mana pool.
+        // {tap}, Pay 1 life: Add {G} or {W}.
         Ability ability1 = new GreenManaAbility();
         ability1.addCost(new PayLifeCost(1));
         this.addAbility(ability1);

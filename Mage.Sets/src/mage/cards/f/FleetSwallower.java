@@ -55,7 +55,7 @@ public class FleetSwallower extends CardImpl {
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 
-        // Whenever Fleet Swallower attacks, target player puts the top half of his or her library, rounded up, into his or her graveyard.
+        // Whenever Fleet Swallower attacks, target player puts the top half of their library, rounded up, into their graveyard.
         Ability ability = new AttacksTriggeredAbility(new FleetSwallowerEffect(), false);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
@@ -75,7 +75,7 @@ class FleetSwallowerEffect extends OneShotEffect {
 
     public FleetSwallowerEffect() {
         super(Outcome.Detriment);
-        staticText = "target player puts the top half of his or her library, rounded up, into his or her graveyard";
+        staticText = "target player puts the top half of their library, rounded up, into their graveyard";
     }
 
     public FleetSwallowerEffect(final FleetSwallowerEffect effect) {

@@ -34,7 +34,7 @@ import mage.abilities.keyword.SuspendAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -46,9 +46,9 @@ public class RiftBolt extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");
 
 
-        // Rift Bolt deals 3 damage to target creature or player.
+        // Rift Bolt deals 3 damage to any target.
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
 
         // Suspend 1-{R}
         this.addAbility(new SuspendAbility(1, new ManaCostsImpl("{R}"), this));

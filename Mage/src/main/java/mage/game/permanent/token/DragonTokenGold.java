@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Saga
  */
-public class DragonTokenGold extends Token {
+public class DragonTokenGold extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 
@@ -66,5 +66,13 @@ public class DragonTokenGold extends Token {
         power = new MageInt(4);
         toughness = new MageInt(4);
         addAbility(FlyingAbility.getInstance());
+    }
+
+    public DragonTokenGold(final DragonTokenGold token) {
+        super(token);
+    }
+
+    public DragonTokenGold copy() {
+        return new DragonTokenGold(this);
     }
 }

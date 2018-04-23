@@ -49,7 +49,7 @@ public class StainTheMind extends CardImpl {
 
         // Convoke
         this.addAbility(new ConvokeAbility());
-        // Name a nonland card. Search target player's graveyard, hand, and library for any number of card's with that name and exile them. Then that player shuffles his or her library.
+        // Name a nonland card. Search target player's graveyard, hand, and library for any number of card's with that name and exile them. Then that player shuffles their library.
         this.getSpellAbility().addEffect((new NameACardEffect(NameACardEffect.TypeOfName.NON_LAND_NAME)));
         this.getSpellAbility().addEffect(new StainTheMindEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());

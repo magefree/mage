@@ -45,6 +45,7 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 
 /**
@@ -101,7 +102,7 @@ public class FigureOfDestiny extends CardImpl {
         return new FigureOfDestiny(this);
     }
 
-    private class FigureOfDestinyToken1 extends Token {
+    private class FigureOfDestinyToken1 extends TokenImpl {
 
         public FigureOfDestinyToken1() {
             super("Figure of Destiny", "Kithkin Spirit with base power and toughness 2/2");
@@ -114,9 +115,17 @@ public class FigureOfDestiny extends CardImpl {
             this.power = new MageInt(2);
             this.toughness = new MageInt(2);
         }
+
+        public FigureOfDestinyToken1(final FigureOfDestinyToken1 token) {
+            super(token);
+        }
+
+        public FigureOfDestinyToken1 copy() {
+            return new FigureOfDestinyToken1(this);
+        }
     }
 
-    private class FigureOfDestinyToken2 extends Token {
+    private class FigureOfDestinyToken2 extends TokenImpl {
 
         public FigureOfDestinyToken2() {
             super("Figure of Destiny", "Kithkin Spirit Warrior with base power and toughness 4/4");
@@ -130,9 +139,17 @@ public class FigureOfDestiny extends CardImpl {
             this.power = new MageInt(4);
             this.toughness = new MageInt(4);
         }
+        public FigureOfDestinyToken2(final FigureOfDestinyToken2 token) {
+            super(token);
+        }
+
+        public FigureOfDestinyToken2 copy() {
+            return new FigureOfDestinyToken2(this);
+        }
+
     }
 
-    private class FigureOfDestinyToken3 extends Token {
+    private class FigureOfDestinyToken3 extends TokenImpl {
 
         public FigureOfDestinyToken3() {
             super("Figure of Destiny", "Kithkin Spirit Warrior Avatar with base power and toughness 8/8, flying, and first strike");
@@ -148,6 +165,14 @@ public class FigureOfDestiny extends CardImpl {
             this.toughness = new MageInt(8);
             this.addAbility(FlyingAbility.getInstance());
             this.addAbility(FirstStrikeAbility.getInstance());
+        }
+
+        public FigureOfDestinyToken3(final FigureOfDestinyToken3 token) {
+            super(token);
+        }
+
+        public FigureOfDestinyToken3 copy() {
+            return new FigureOfDestinyToken3(this);
         }
     }
 }

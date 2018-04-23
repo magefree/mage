@@ -46,7 +46,7 @@ public class ZoneChangeReplacementTest extends CardTestPlayerBase {
     public void testFromLibraryZoneChange() {
         addCard(Zone.LIBRARY, playerA, "Darksteel Colossus");
         // Tome Scour - Sorcery - {U}
-        // Target player puts the top five cards of his or her library into his or her graveyard.
+        // Target player puts the top five cards of their library into their graveyard.
         addCard(Zone.HAND, playerA, "Tome Scour");
         addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
         skipInitShuffling();
@@ -65,7 +65,7 @@ public class ZoneChangeReplacementTest extends CardTestPlayerBase {
     public void testFromHandZoneChange() {
         addCard(Zone.HAND, playerA, "Progenitus");
         // Distress - Sorcery - {B}{B}
-        // Target player reveals his or her hand. You choose a nonland card from it. That player discards that card.
+        // Target player reveals their hand. You choose a nonland card from it. That player discards that card.
         addCard(Zone.HAND, playerA, "Distress");
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
 
@@ -290,7 +290,7 @@ public class ZoneChangeReplacementTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Legacy Weapon");
 
         addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
-        // Counter target spell. At the beginning of your next main phase, add {X} to your mana pool, where X is that spell's converted mana cost.
+        // Counter target spell. At the beginning of your next main phase, add {X}, where X is that spell's converted mana cost.
         addCard(Zone.HAND, playerB, "Mana Drain");
         addCard(Zone.HAND, playerB, "Legacy Weapon");
 

@@ -52,7 +52,7 @@ public class Incoming extends CardImpl {
     public Incoming(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{G}{G}{G}{G}");
 
-        // Each player searches his or her library for any number of artifact, creature, enchantment, and/or land cards, puts them onto the battlefield, then shuffles his or her library.
+        // Each player searches their library for any number of artifact, creature, enchantment, and/or land cards, puts them onto the battlefield, then shuffles their library.
         this.getSpellAbility().addEffect(new IncomingEffect());
     }
 
@@ -80,7 +80,7 @@ class IncomingEffect extends OneShotEffect {
 
     public IncomingEffect() {
         super(Outcome.Detriment);
-        this.staticText = "Each player searches his or her library for any number of artifact, creature, enchantment, and/or land cards, puts them onto the battlefield, then shuffles his or her library";
+        this.staticText = "Each player searches their library for any number of artifact, creature, enchantment, and/or land cards, puts them onto the battlefield, then shuffles their library";
     }
 
     public IncomingEffect(final IncomingEffect effect) {

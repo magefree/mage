@@ -38,6 +38,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 
 /**
@@ -63,7 +64,7 @@ public class DaxossTorment extends CardImpl {
     }
 }
 
-class DaxossTormentToken extends Token {
+class DaxossTormentToken extends TokenImpl {
 
     public DaxossTormentToken() {
         super("", "5/5 Demon creature with flying and haste");
@@ -74,5 +75,12 @@ class DaxossTormentToken extends Token {
         toughness = new MageInt(5);
         addAbility(FlyingAbility.getInstance());
         addAbility(HasteAbility.getInstance());
+    }
+    public DaxossTormentToken(final DaxossTormentToken token) {
+        super(token);
+    }
+
+    public DaxossTormentToken copy() {
+        return new DaxossTormentToken(this);
     }
 }

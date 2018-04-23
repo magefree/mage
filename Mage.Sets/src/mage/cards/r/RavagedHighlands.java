@@ -48,9 +48,9 @@ public class RavagedHighlands extends CardImpl {
 
         // Ravaged Highlands enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
-        // {tap}: Add {R} to your mana pool.
+        // {tap}: Add {R}.
         this.addAbility(new RedManaAbility());
-        // {tap}, Sacrifice Ravaged Highlands: Add one mana of any color to your mana pool.
+        // {tap}, Sacrifice Ravaged Highlands: Add one mana of any color.
         Ability ability = new AnyColorManaAbility();
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

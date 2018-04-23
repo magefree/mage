@@ -42,7 +42,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class Boil extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("islands");
+    private static final FilterPermanent filter = new FilterPermanent("Islands");
 
     static {
         filter.add(new SubtypePredicate(SubType.ISLAND));

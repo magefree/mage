@@ -71,7 +71,7 @@ public class SarkhanUnbroken extends CardImpl {
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));
 
-        // +1: Draw a card, then add one mana of any color to your mana pool.
+        // +1: Draw a card, then add one mana of any color.
         this.addAbility(new LoyaltyAbility(new SarkhanUnbrokenAbility1(), 1));
         // -2: Create a 4/4 red Dragon creature token with flying.
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new DragonToken(), 1), -2));
@@ -93,7 +93,7 @@ class SarkhanUnbrokenAbility1 extends OneShotEffect {
 
     public SarkhanUnbrokenAbility1() {
         super(Outcome.Benefit);
-        this.staticText = "Draw a card, then add one mana of any color to your mana pool.";
+        this.staticText = "Draw a card, then add one mana of any color.";
     }
 
     public SarkhanUnbrokenAbility1(final SarkhanUnbrokenAbility1 effect) {

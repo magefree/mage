@@ -86,7 +86,6 @@ public class LookLibraryControllerEffect extends OneShotEffect {
         this.mayShuffleAfter = mayShuffleAfter;
         this.targetZoneLookedCards = targetZoneLookedCards;
         this.putOnTop = putOnTop;
-
     }
 
     public LookLibraryControllerEffect(final LookLibraryControllerEffect effect) {

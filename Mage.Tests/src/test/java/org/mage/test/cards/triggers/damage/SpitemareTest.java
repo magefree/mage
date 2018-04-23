@@ -28,7 +28,7 @@ public class SpitemareTest extends CardTestPlayerBase {
         /**
          * {2}{R/W}{R/W}
          * Creature - Elemental (3/3)
-         * Whenever Spitemare is dealt damage, it deals that much damage to target creature or player.
+         * Whenever Spitemare is dealt damage, it deals that much damage to any target.
          */        
         addCard(Zone.BATTLEFIELD, playerB, "Spitemare", 1);
         
@@ -56,7 +56,7 @@ public class SpitemareTest extends CardTestPlayerBase {
         /**
          * {2}{R/W}{R/W}
          * Creature - Elemental (3/3)
-         * Whenever Spitemare is dealt damage, it deals that much damage to target creature or player.
+         * Whenever Spitemare is dealt damage, it deals that much damage to any target.
          */        
         addCard(Zone.BATTLEFIELD, playerB, "Spitemare", 1);
         
@@ -78,7 +78,7 @@ public class SpitemareTest extends CardTestPlayerBase {
         /**
          * {2}{R/W}{R/W}
          * Creature - Elemental (3/3)
-         * Whenever Spitemare is dealt damage, it deals that much damage to target creature or player.
+         * Whenever Spitemare is dealt damage, it deals that much damage to any target.
          */        
         addCard(Zone.BATTLEFIELD, playerB, "Spitemare", 1);
         
@@ -103,7 +103,7 @@ public class SpitemareTest extends CardTestPlayerBase {
         /**
          * {2}{R/W}{R/W}
          * Creature - Elemental (3/3)
-         * Whenever Spitemare is dealt damage, it deals that much damage to target creature or player.
+         * Whenever Spitemare is dealt damage, it deals that much damage to any target.
          */        
         addCard(Zone.BATTLEFIELD, playerB, "Spitemare", 1);
         

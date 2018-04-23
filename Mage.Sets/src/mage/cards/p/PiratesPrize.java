@@ -44,7 +44,7 @@ public class PiratesPrize extends CardImpl {
     public PiratesPrize(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{U}");
 
-        // Draw two cards. Create a colorless Treasure artifact token with "{t}, Sacrifice this artifact: Add one mana of any color to your mana pool."
+        // Draw two cards. Create a colorless Treasure artifact token with "{t}, Sacrifice this artifact: Add one mana of any color."
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));
         this.getSpellAbility().addEffect(new CreateTokenEffect(new TreasureToken()));
     }

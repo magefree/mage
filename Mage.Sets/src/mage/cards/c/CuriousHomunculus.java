@@ -28,22 +28,16 @@
 package mage.cards.c;
 
 import java.util.UUID;
-import mage.ConditionalMana;
 import mage.MageInt;
-import mage.MageObject;
-import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.abilities.mana.ConditionalColorlessManaAbility;
-import mage.abilities.mana.builder.ConditionalManaBuilder;
-import mage.abilities.mana.conditional.ManaCondition;
+import mage.abilities.mana.builder.common.InstantOrSorcerySpellManaBuilder;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.v.VoraciousReader;
@@ -61,7 +55,7 @@ import mage.players.Player;
 public class CuriousHomunculus extends CardImpl {
 
     public CuriousHomunculus(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.subtype.add(SubType.HOMUNCULUS);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
@@ -69,7 +63,7 @@ public class CuriousHomunculus extends CardImpl {
         this.transformable = true;
         this.secondSideCardClazz = VoraciousReader.class;
 
-        // {T}: Add {C} to your mana pool. Spend this mana only to cast an instant or sorcery spell.
+        // {T}: Add {C}. Spend this mana only to cast an instant or sorcery spell.
         this.addAbility(new ConditionalColorlessManaAbility(new TapSourceCost(), 1, new InstantOrSorcerySpellManaBuilder()));
 
         // At the beginning of your upkeep, if there are three or more instant and/or sorcery cards in your graveyard, transform Curious Homunculus.
@@ -87,47 +81,6 @@ public class CuriousHomunculus extends CardImpl {
     @Override
     public CuriousHomunculus copy() {
         return new CuriousHomunculus(this);
-    }
-}
-
-class InstantOrSorcerySpellManaBuilder extends ConditionalManaBuilder {
-
-    @Override
-    public ConditionalMana build(Object... options) {
-        return new InstantOrSorceryCastConditionalMana(this.mana);
-    }
-
-    @Override
-    public String getRule() {
-        return "Spend this mana only to cast an instant or sorcery spell";
-    }
-}
-
-class InstantOrSorceryCastConditionalMana extends ConditionalMana {
-
-    public InstantOrSorceryCastConditionalMana(Mana mana) {
-        super(mana);
-        staticText = "Spend this mana only to cast an instant or sorcery spell";
-        addCondition(new InstantOrSorceryCastManaCondition());
-    }
-}
-
-class InstantOrSorceryCastManaCondition extends ManaCondition implements Condition {
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        if (source instanceof SpellAbility) {
-            MageObject object = game.getObject(source.getSourceId());
-            if (object != null && (object.isInstant() || object.isSorcery())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source, UUID originalId, Cost costsToPay) {
-        return apply(game, source);
     }
 }
 

@@ -59,7 +59,7 @@ public class TreasureMap extends CardImpl {
         this.transformable = true;
         this.secondSideCardClazz = TreasureCove.class;
 
-        // {1}, {T}: Scry 1. Put a landmark counter on Treasure Map. Then if there are three or more landmark counters on it, remove those counters, transform Treasure Map, and create three colorless Treasure artifact tokens with "{T}, Sacrifice this artifact: Add one mana of any color to your mana pool."
+        // {1}, {T}: Scry 1. Put a landmark counter on Treasure Map. Then if there are three or more landmark counters on it, remove those counters, transform Treasure Map, and create three colorless Treasure artifact tokens with "{T}, Sacrifice this artifact: Add one mana of any color."
         this.addAbility(new TransformAbility());
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TreasureMapEffect(), new ManaCostsImpl("{1}"));
         ability.addCost(new TapSourceCost());
@@ -83,7 +83,7 @@ class TreasureMapEffect extends OneShotEffect {
         this.staticText = "Scry 1. Put a landmark counter on {this}. "
                 + "Then if there are three or more landmark counters on it, "
                 + "remove those counters, transform {this}, and create "
-                + "three colorless Treasure artifact tokens with \"{T}, Sacrifice this artifact: Add one mana of any color to your mana pool.";
+                + "three colorless Treasure artifact tokens with \"{T}, Sacrifice this artifact: Add one mana of any color.\"";
     }
 
     TreasureMapEffect(final TreasureMapEffect effect) {

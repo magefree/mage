@@ -41,6 +41,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
@@ -81,7 +82,7 @@ public class GenjuOfTheRealm extends CardImpl {
         return new GenjuOfTheRealm(this);
     }
 
-    private static class SpiritToken extends Token {
+    private static class SpiritToken extends TokenImpl {
 
         SpiritToken() {
             super("Spirit", "legendary 8/12 Spirit creature with trample");
@@ -96,6 +97,14 @@ public class GenjuOfTheRealm extends CardImpl {
             power = new MageInt(8);
             toughness = new MageInt(12);
             this.addAbility(TrampleAbility.getInstance());
+        }
+
+        public SpiritToken(final SpiritToken token) {
+            super(token);
+        }
+
+        public SpiritToken copy() {
+            return new SpiritToken(this);
         }
     }
 }

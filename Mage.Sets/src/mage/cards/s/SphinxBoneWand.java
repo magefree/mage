@@ -42,7 +42,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -61,9 +61,9 @@ public class SphinxBoneWand extends CardImpl {
     public SphinxBoneWand(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{7}");
 
-        // Whenever you cast an instant or sorcery spell, you may put a charge counter on Sphinx-Bone Wand. If you do, Sphinx-Bone Wand deals damage equal to the number of charge counters on it to target creature or player.
+        // Whenever you cast an instant or sorcery spell, you may put a charge counter on Sphinx-Bone Wand. If you do, Sphinx-Bone Wand deals damage equal to the number of charge counters on it to any target.
         SpellCastControllerTriggeredAbility ability = new SpellCastControllerTriggeredAbility(new SphinxBoneWandEffect(), filter, true);
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }
 
@@ -81,7 +81,7 @@ class SphinxBoneWandEffect extends OneShotEffect {
 
     public SphinxBoneWandEffect() {
         super(Outcome.Damage);
-        this.staticText = "put a charge counter on Sphinx-Bone Wand. If you do, Sphinx-Bone Wand deals damage equal to the number of charge counters on it to target creature or player";
+        this.staticText = "put a charge counter on Sphinx-Bone Wand. If you do, Sphinx-Bone Wand deals damage equal to the number of charge counters on it to any target";
     }
 
     public SphinxBoneWandEffect(final SphinxBoneWandEffect effect) {

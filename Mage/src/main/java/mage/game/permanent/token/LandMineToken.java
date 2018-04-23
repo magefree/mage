@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author spjspj
  */
-public class LandMineToken extends Token {
+public class LandMineToken extends TokenImpl {
 
     private static final FilterAttackingCreature filter = new FilterAttackingCreature("attacking creature without flying");
 
@@ -61,5 +61,13 @@ public class LandMineToken extends Token {
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
+    }
+
+    public LandMineToken(final LandMineToken token) {
+        super(token);
+    }
+
+    public LandMineToken copy() {
+        return new LandMineToken(this);
     }
 }

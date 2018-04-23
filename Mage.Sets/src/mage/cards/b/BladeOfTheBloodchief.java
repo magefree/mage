@@ -30,6 +30,7 @@ package mage.cards.b;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.EquipAbility;
@@ -56,8 +57,11 @@ public class BladeOfTheBloodchief extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
         this.subtype.add(SubType.EQUIPMENT);
 
+        // Whenever a creature dies, put a +1/+1 counter on equipped creature. If equipped creature is a Vampire, put two +1/+1 counters on it instead.
+        this.addAbility(new DiesCreatureTriggeredAbility(new BladeOfTheBloodchiefEffect(), false));
+        
+        //Equip {1}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
-        this.addAbility(new BladeOfTheBloodChiefTriggeredAbility());
     }
 
     public BladeOfTheBloodchief(final BladeOfTheBloodchief card) {
@@ -67,50 +71,6 @@ public class BladeOfTheBloodchief extends CardImpl {
     @Override
     public BladeOfTheBloodchief copy() {
         return new BladeOfTheBloodchief(this);
-    }
-}
-
-class BladeOfTheBloodChiefTriggeredAbility extends TriggeredAbilityImpl {
-
-    private static final String text = "Whenever a creature dies, put a +1/+1 counter on equipped "
-            + "creature. If equipped creature is a Vampire, put two +1/+1 counters on it instead.";
-
-    BladeOfTheBloodChiefTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new BladeOfTheBloodchiefEffect());
-    }
-
-    BladeOfTheBloodChiefTriggeredAbility(final BladeOfTheBloodChiefTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.ZONE_CHANGE;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.GRAVEYARD) {
-            Permanent p = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            if (p != null && p.isCreature()) {
-                Permanent enchantment = game.getPermanent(getSourceId());
-                if (enchantment != null && enchantment.getAttachedTo() != null) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public BladeOfTheBloodChiefTriggeredAbility copy() {
-        return new BladeOfTheBloodChiefTriggeredAbility(this);
-    }
-
-    @Override
-    public String getRule() {
-        return text;
     }
 }
 

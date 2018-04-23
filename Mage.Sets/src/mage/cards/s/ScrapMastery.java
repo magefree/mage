@@ -54,7 +54,7 @@ public class ScrapMastery extends CardImpl {
     public ScrapMastery(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}{R}");
 
-        // Each player exiles all artifact cards from his or her graveyard, then sacrifices all artifacts he or she controls, then puts all cards he or she exiled this way onto the battlefield.
+        // Each player exiles all artifact cards from their graveyard, then sacrifices all artifacts he or she controls, then puts all cards he or she exiled this way onto the battlefield.
         this.getSpellAbility().addEffect(new ScrapMasteryEffect());
     }
 
@@ -72,7 +72,7 @@ class ScrapMasteryEffect extends OneShotEffect {
 
     public ScrapMasteryEffect() {
         super(Outcome.PutCardInPlay);
-        this.staticText = "Each player exiles all artifact cards from his or her graveyard, then sacrifices all artifacts he or she controls, then puts all cards he or she exiled this way onto the battlefield";
+        this.staticText = "Each player exiles all artifact cards from their graveyard, then sacrifices all artifacts he or she controls, then puts all cards he or she exiled this way onto the battlefield";
     }
 
     public ScrapMasteryEffect(final ScrapMasteryEffect effect) {

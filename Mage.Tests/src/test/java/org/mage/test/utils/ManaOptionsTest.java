@@ -61,8 +61,8 @@ public class ManaOptionsTest extends CardTestPlayerBase {
     }
 
     // Tinder Farm enters the battlefield tapped.
-    // {T}: Add {G} to your mana pool.
-    // {T}, Sacrifice Tinder Farm: Add {R}{W} to your mana pool.
+    // {T}: Add {G}.
+    // {T}, Sacrifice Tinder Farm: Add {R}{W}.
     @Test
     public void testTinderFarm() {
         addCard(Zone.BATTLEFIELD, playerA, "Tinder Farm", 3);
@@ -82,8 +82,8 @@ public class ManaOptionsTest extends CardTestPlayerBase {
     }
 
     // Adarkar Wastes
-    // {T}: Add {C} to your mana pool.
-    // {T}: Add {W} or {U} to your mana pool. Adarkar Wastes deals 1 damage to you.
+    // {T}: Add {C}.
+    // {T}: Add {W} or {U}. Adarkar Wastes deals 1 damage to you.
     @Test
     public void testAdarkarWastes() {
         addCard(Zone.BATTLEFIELD, playerA, "Adarkar Wastes", 3);
@@ -108,7 +108,7 @@ public class ManaOptionsTest extends CardTestPlayerBase {
     }
 
     // Chromatic Sphere
-    // {1}, {T}, Sacrifice Chromatic Sphere: Add one mana of any color to your mana pool. Draw a card.
+    // {1}, {T}, Sacrifice Chromatic Sphere: Add one mana of any color. Draw a card.
     @Test
     public void testChromaticSphere() {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
@@ -125,7 +125,7 @@ public class ManaOptionsTest extends CardTestPlayerBase {
     }
 
     // Orochi Leafcaller
-    // {G}: Add one mana of any color to your mana pool.
+    // {G}: Add one mana of any color.
     @Test
     public void testOrochiLeafcaller() {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
@@ -143,8 +143,8 @@ public class ManaOptionsTest extends CardTestPlayerBase {
     }
 
     // Crystal Quarry
-    // {T}: {1} Add  to your mana pool.
-    // {5}, {T}: Add {W}{U}{B}{R}{G} to your mana pool.
+    // {T}: {1} Add .
+    // {5}, {T}: Add {W}{U}{B}{R}{G}.
     @Test
     public void testCrystalQuarry() {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
@@ -162,8 +162,8 @@ public class ManaOptionsTest extends CardTestPlayerBase {
     }
 
     // Crystal Quarry
-    // {T}: {1} Add  to your mana pool.
-    // {5}, {T}: Add {W}{U}{B}{R}{G} to your mana pool.
+    // {T}: {1} Add .
+    // {5}, {T}: Add {W}{U}{B}{R}{G}.
     @Test
     public void testCrystalQuarry2() {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
@@ -182,8 +182,8 @@ public class ManaOptionsTest extends CardTestPlayerBase {
     }
 
     // Nykthos, Shrine to Nyx
-    // {T}: Add {C} to your mana pool.
-    // {2}, {T}: Choose a color. Add to your mana pool an amount of mana of that color equal to your devotion to that color. (Your devotion to a color is the number of mana symbols of that color in the mana costs of permanents you control.)
+    // {T}: Add {C}.
+    // {2}, {T}: Choose a color. Add an amount of mana of that color equal to your devotion to that color. (Your devotion to a color is the number of mana symbols of that color in the mana costs of permanents you control.)
     @Test
     public void testNykthos1() {
         addCard(Zone.BATTLEFIELD, playerA, "Sedge Scorpion", 4);
@@ -266,19 +266,19 @@ public class ManaOptionsTest extends CardTestPlayerBase {
         // if mana ability cost another mana then if replaced in mana cost
         // example:
         // 1x forest
-        // 1x Chromatic Star ({1}, {T}, Sacrifice Chromatic Star: Add one mana of any color to your mana pool.)
+        // 1x Chromatic Star ({1}, {T}, Sacrifice Chromatic Star: Add one mana of any color.)
         // give {G}{Any}, but after pay it transform to {Any} (1 green will be pay)
         // That's why there are can be duplicated records in getManaAvailable
 
-        // {1}, {T}, Sacrifice Chromatic Star: Add one mana of any color to your mana pool.
+        // {1}, {T}, Sacrifice Chromatic Star: Add one mana of any color.
         // When Chromatic Star is put into a graveyard from the battlefield, draw a card.
         addCard(Zone.BATTLEFIELD, playerA, "Chromatic Star", 1);
-        // {1}, {T}, Sacrifice Chromatic Sphere: Add one mana of any color to your mana pool. Draw a card.
+        // {1}, {T}, Sacrifice Chromatic Sphere: Add one mana of any color. Draw a card.
         addCard(Zone.BATTLEFIELD, playerA, "Chromatic Sphere", 1);
-        // {T}: Add {C} to your mana pool. If you control an Urza's Mine and an Urza's Power-Plant, add {C}{C}{C} to your mana pool instead.
+        // {T}: Add {C}. If you control an Urza's Mine and an Urza's Power-Plant, add {C}{C}{C} instead.
         addCard(Zone.BATTLEFIELD, playerA, "Urza's Tower", 1);
-        // {T}: Add {C} to your mana pool.
-        // {T}: Add {R} or {G} to your mana pool. Each opponent gains 1 life.
+        // {T}: Add {C}.
+        // {T}: Add {R} or {G}. Each opponent gains 1 life.
         addCard(Zone.BATTLEFIELD, playerA, "Grove of the Burnwillows", 1);
 
         setStopAt(1, PhaseStep.UPKEEP);
@@ -346,9 +346,9 @@ public class ManaOptionsTest extends CardTestPlayerBase {
 
     @Test
     public void testMageRingNetwork() {
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         // {T}, {1} : Put a storage counter on Mage-Ring Network.
-        // {T}, Remove X storage counters from Mage-Ring Network: Add {X} to your mana pool.
+        // {T}, Remove X storage counters from Mage-Ring Network: Add {X}.
         addCard(Zone.BATTLEFIELD, playerA, "Mage-Ring Network", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
@@ -365,9 +365,9 @@ public class ManaOptionsTest extends CardTestPlayerBase {
 
     @Test
     public void testMageRingNetwork2() {
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         // {T}, {1} : Put a storage counter on Mage-Ring Network.
-        // {T}, Remove any number of storage counters from Mage-Ring Network: Add {C} to your mana pool for each storage counter removed this way.
+        // {T}, Remove any number of storage counters from Mage-Ring Network: Add {C} for each storage counter removed this way.
         addCard(Zone.BATTLEFIELD, playerA, "Mage-Ring Network", 1);
         addCounters(1, PhaseStep.UPKEEP, playerA, "Mage-Ring Network", CounterType.STORAGE, 4);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
@@ -387,7 +387,7 @@ public class ManaOptionsTest extends CardTestPlayerBase {
     @Ignore  // TriggeredManaAbilities not supported yet for getAvailableMana
     public void testCryptGhast() {
         //Extort (Whenever you cast a spell, you may pay {WB}. If you do, each opponent loses 1 life and you gain that much life.)
-        // Whenever you tap a Swamp for mana, add {B} to your mana pool (in addition to the mana the land produces).
+        // Whenever you tap a Swamp for mana, add {B} (in addition to the mana the land produces).
         addCard(Zone.BATTLEFIELD, playerA, "Crypt Ghast", 1);
 
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);

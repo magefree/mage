@@ -46,8 +46,8 @@ public class CastDestroySpellsTest extends CardTestPlayerBaseAI {
         // - Return target creature card with converted mana cost 1 or less from your graveyard to the battlefield.
         addCard(Zone.HAND, playerA, "Orzhov Charm"); // {W}{B}
 
-        // {T}: Add {C} to your mana pool.
-        // {T}  {W/B}, {T}: Add {W}{W}, {W}{B}, or {B}{B} to your mana pool.
+        // {T}: Add {C}.
+        // {T}  {W/B}, {T}: Add {W}{W}, {W}{B}, or {B}{B}.
         addCard(Zone.BATTLEFIELD, playerA, "Fetid Heath", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
 
@@ -65,4 +65,26 @@ public class CastDestroySpellsTest extends CardTestPlayerBaseAI {
         assertGraveyardCount(playerB, "Silvercoat Lion", 1);
     }
 
+    /**
+     * Cast Divine Verdict if the opponent attacks
+     */
+    @Test
+    public void testCastSpellTargingAttacker() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
+
+        // Destroy target attacking or blocking creature.
+        addCard(Zone.HAND, playerA, "Divine Verdict"); // INSTANT {3}{W}
+
+        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion");
+
+        attack(2, playerB, "Silvercoat Lion");
+
+        setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertLife(playerA, 20);
+
+        assertGraveyardCount(playerA, "Divine Verdict", 1);
+        assertGraveyardCount(playerB, "Silvercoat Lion", 1);
+    }
 }

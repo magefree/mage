@@ -56,7 +56,7 @@ public class ServantOfTheConduit extends CardImpl {
         // When Servant of the Conduit enters teh battlefield, you get {E}{E}.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GetEnergyCountersControllerEffect(2)));
 
-        // {T}, Pay {E}: Add one mana of any color to your mana pool.
+        // {T}, Pay {E}: Add one mana of any color.
         Ability ability = new AnyColorManaAbility(new TapSourceCost());
         ability.addCost(new PayEnergyCost(1));
         this.addAbility(ability);

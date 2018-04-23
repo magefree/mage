@@ -32,7 +32,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.target.common.TargetOpponent;
+import mage.target.common.TargetOpponentOrPlaneswalker;
 
 /**
  *
@@ -41,10 +41,10 @@ import mage.target.common.TargetOpponent;
 public class SearingFlesh extends CardImpl {
 
     public SearingFlesh(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{6}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{6}{R}");
 
         // Searing Flesh deals 7 damage to target opponent.
-        this.getSpellAbility().addTarget(new TargetOpponent());
+        this.getSpellAbility().addTarget(new TargetOpponentOrPlaneswalker());
         this.getSpellAbility().addEffect(new DamageTargetEffect(7));
     }
 

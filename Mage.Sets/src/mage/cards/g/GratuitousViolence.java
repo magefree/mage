@@ -49,7 +49,7 @@ import mage.util.CardUtil;
 public class GratuitousViolence extends CardImpl {
 
     public GratuitousViolence(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{R}{R}");
 
         // If a creature you control would deal damage to a creature or player, it deals double that damage to that creature or player instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GratuitousViolenceReplacementEffect()));
@@ -69,7 +69,7 @@ class GratuitousViolenceReplacementEffect extends ReplacementEffectImpl {
 
     GratuitousViolenceReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Damage);
-        staticText = "If a creature you control would deal damage to a creature or player, it deals double that damage to that creature or player instead";
+        staticText = "If a creature you control would deal damage to a permanent or player, it deals double that permanent to that creature or player instead";
     }
 
     GratuitousViolenceReplacementEffect(final GratuitousViolenceReplacementEffect effect) {
@@ -81,17 +81,18 @@ class GratuitousViolenceReplacementEffect extends ReplacementEffectImpl {
         return new GratuitousViolenceReplacementEffect(this);
     }
 
-    @Override    
+    @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        switch(event.getType()) {
+        switch (event.getType()) {
             case DAMAGE_CREATURE:
             case DAMAGE_PLAYER:
+            case DAMAGE_PLANESWALKER:
                 return true;
             default:
                 return false;
         }
     }
-    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());

@@ -913,7 +913,10 @@ public class TestPlayer implements Player {
             if (target.getTargetController() != null && target.getAbilityController() != null) {
                 abilityControllerId = target.getAbilityController();
             }
-            if (target instanceof TargetPlayer || target instanceof TargetCreatureOrPlayer) {
+            if (target instanceof TargetPlayer
+                    || target instanceof TargetAnyTarget
+                    || target instanceof TargetCreatureOrPlayer
+                    || target instanceof TargetPermanentOrPlayer) {
                 for (String targetDefinition : targets) {
                     if (targetDefinition.startsWith("targetPlayer=")) {
                         String playerName = targetDefinition.substring(targetDefinition.indexOf("targetPlayer=") + 13);
@@ -929,7 +932,10 @@ public class TestPlayer implements Player {
                 }
 
             }
-            if ((target instanceof TargetPermanent) || (target instanceof TargetPermanentOrPlayer) || (target instanceof TargetCreatureOrPlayer)) {
+            if ((target instanceof TargetPermanent)
+                    || (target instanceof TargetPermanentOrPlayer)
+                    || (target instanceof TargetAnyTarget)
+                    || (target instanceof TargetCreatureOrPlayer)) {
                 for (String targetDefinition : targets) {
                     String[] targetList = targetDefinition.split("\\^");
                     boolean targetFound = false;
@@ -949,6 +955,12 @@ public class TestPlayer implements Player {
                         Filter filter = target.getFilter();
                         if (filter instanceof FilterCreatureOrPlayer) {
                             filter = ((FilterCreatureOrPlayer) filter).getCreatureFilter();
+                        }
+                        if (filter instanceof FilterCreaturePlayerOrPlaneswalker) {
+                            filter = ((FilterCreaturePlayerOrPlaneswalker) filter).getCreatureFilter();
+                        }
+                        if (filter instanceof TargetPermanentOrPlayer) {
+                            filter = ((TargetPermanentOrPlayer) filter).getFilterPermanent();
                         }
                         for (Permanent permanent : game.getBattlefield().getAllActivePermanents((FilterPermanent) filter, game)) {
                             if (permanent.getName().equals(targetName) || (permanent.getName() + '-' + permanent.getExpansionSetCode()).equals(targetName)) {
@@ -1547,8 +1559,13 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public void setLife(int life, Game game) {
-        computerPlayer.setLife(life, game);
+    public void setLife(int life, Game game, UUID sourceId) {
+        computerPlayer.setLife(life, game, sourceId);
+    }
+
+    @Override
+    public void setLife(int life, Game game, Ability source) {
+        computerPlayer.setLife(life, game, source);
     }
 
     @Override
@@ -1592,8 +1609,13 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public int gainLife(int amount, Game game) {
-        return computerPlayer.gainLife(amount, game);
+    public int gainLife(int amount, Game game, Ability source) {
+        return computerPlayer.gainLife(amount, game, source);
+    }
+
+    @Override
+    public int gainLife(int amount, Game game, UUID sourceId) {
+        return computerPlayer.gainLife(amount, game, sourceId);
     }
 
     @Override
@@ -2377,6 +2399,21 @@ public class TestPlayer implements Player {
 
     public String getHistory() {
         return computerPlayer.getHistory();
+    }
+
+    @Override
+    public PlanarDieRoll rollPlanarDie(Game game) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public PlanarDieRoll rollPlanarDie(Game game, ArrayList<UUID> appliedEffects) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public PlanarDieRoll rollPlanarDie(Game game, ArrayList<UUID> appliedEffects, int numberChaosSides, int numberPlanarSides) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

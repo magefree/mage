@@ -191,7 +191,7 @@ public class CleverImpersonatorTest extends CardTestPlayerBase {
         /*
         {3}{G} Dawn's Reflection
         Enchantment - Aura, Enchant Land
-        Whenever enchanted land is tapped for mana, its controller adds two mana in any combination of colors to his or her mana pool (in addition to the mana the land produces).
+        Whenever enchanted land is tapped for mana, its controller adds two mana in any combination of colors to their mana pool (in addition to the mana the land produces).
          */
         addCard(Zone.HAND, playerA, dReflection);
 

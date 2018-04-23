@@ -54,11 +54,10 @@ public class WildInstincts extends CardImpl {
     }
 
     public WildInstincts(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{G}");
 
         // Target creature you control gets +2/+2 until end of turn. It fights target creature an opponent controls.
         Effect effect = new BoostTargetEffect(2, 2, Duration.EndOfTurn);
-        effect.setApplyEffectsAfter();
         getSpellAbility().addEffect(effect);
         getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         effect = new FightTargetsEffect();

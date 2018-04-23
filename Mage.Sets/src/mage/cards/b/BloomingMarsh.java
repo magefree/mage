@@ -56,7 +56,7 @@ public class BloomingMarsh extends CardImpl {
         String abilityText = " tapped unless you control two or fewer other lands";
         this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
 
-        // {T}: Add {B} or {G} to your mana pool.
+        // {T}: Add {B} or {G}.
         this.addAbility(new BlackManaAbility());
         this.addAbility(new GreenManaAbility());
     }

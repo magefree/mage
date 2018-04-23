@@ -35,7 +35,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class TilonallisSummonerElementalToken extends Token {
+public class TilonallisSummonerElementalToken extends TokenImpl {
 
     public TilonallisSummonerElementalToken() {
         super("Elemental", "1/1 red Elemental creature tokens");
@@ -46,5 +46,13 @@ public class TilonallisSummonerElementalToken extends Token {
         color.setRed(true);
         power = new MageInt(1);
         toughness = new MageInt(1);
+    }
+
+    public TilonallisSummonerElementalToken(final TilonallisSummonerElementalToken token) {
+        super(token);
+    }
+
+    public TilonallisSummonerElementalToken copy() {
+        return new TilonallisSummonerElementalToken(this);
     }
 }

@@ -121,7 +121,7 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
 
     private AlternativeCost2 convertToAlternativeCost(Cost cost) {
         //return cost != null ? new AlternativeCost2Impl(null, cost.getText(), cost) : null;
-        return cost != null ? new AlternativeCost2Impl(null, "", cost) : null;
+        return cost != null ? new AlternativeCost2Impl(null, "", "", cost) : null;
     }
 
     @Override
@@ -228,7 +228,7 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
         if (condition != null) {
             sb.append(condition.toString());
             if (alternateCosts.size() > 1) {
-                sb.append(", rather than pay {source}'s mana cost, ");
+                sb.append(", rather than pay this spell's mana cost, ");
             } else {
                 sb.append(", you may ");
             }
@@ -254,7 +254,7 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
             ++numberCosts;
         }
         if (condition == null || alternateCosts.size() == 1) {
-            sb.append(" rather than pay {source}'s mana cost");
+            sb.append(" rather than pay this spell's mana cost");
         } else if (alternateCosts.isEmpty()) {
             sb.append("cast {this} without paying its mana cost");
         }

@@ -36,7 +36,7 @@ import mage.abilities.keyword.LifelinkAbility;
  *
  * @author spjspj
  */
-public class Wurm2Token extends Token {
+public class Wurm2Token extends TokenImpl {
 
     public Wurm2Token() {
         this("MBS");
@@ -53,5 +53,13 @@ public class Wurm2Token extends Token {
         this.addAbility(LifelinkAbility.getInstance());
 
         setTokenType(2); // for image
+    }
+
+    public Wurm2Token(final Wurm2Token token) {
+        super(token);
+    }
+
+    public Wurm2Token copy() {
+        return new Wurm2Token(this);
     }
 }

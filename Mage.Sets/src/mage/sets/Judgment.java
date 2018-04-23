@@ -168,6 +168,7 @@ public class Judgment extends ExpansionSet {
         cards.add(new SetCardInfo("Test of Endurance", 29, Rarity.RARE, mage.cards.t.TestOfEndurance.class));
         cards.add(new SetCardInfo("Thriss, Nantuko Primus", 134, Rarity.RARE, mage.cards.t.ThrissNantukoPrimus.class));
         cards.add(new SetCardInfo("Toxic Stench", 74, Rarity.COMMON, mage.cards.t.ToxicStench.class));
+        cards.add(new SetCardInfo("Trained Pronghorn", 30, Rarity.COMMON, mage.cards.t.TrainedPronghorn.class));
         cards.add(new SetCardInfo("Treacherous Vampire", 75, Rarity.UNCOMMON, mage.cards.t.TreacherousVampire.class));
         cards.add(new SetCardInfo("Treacherous Werewolf", 76, Rarity.COMMON, mage.cards.t.TreacherousWerewolf.class));
         cards.add(new SetCardInfo("Tunneler Wurm", 135, Rarity.UNCOMMON, mage.cards.t.TunnelerWurm.class));
@@ -180,5 +181,7 @@ public class Judgment extends ExpansionSet {
         cards.add(new SetCardInfo("Worldgorger Dragon", 103, Rarity.RARE, mage.cards.w.WorldgorgerDragon.class));
         cards.add(new SetCardInfo("Wormfang Drake", 57, Rarity.COMMON, mage.cards.w.WormfangDrake.class));
         cards.add(new SetCardInfo("Wormfang Manta", 58, Rarity.RARE, mage.cards.w.WormfangManta.class));
+        cards.add(new SetCardInfo("Wormfang Newt", 59, Rarity.COMMON, mage.cards.w.WormfangNewt.class));
+        cards.add(new SetCardInfo("Wormfang Turtle", 60, Rarity.UNCOMMON, mage.cards.w.WormfangTurtle.class));
     }
 }

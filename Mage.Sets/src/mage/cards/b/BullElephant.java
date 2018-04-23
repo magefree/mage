@@ -16,7 +16,7 @@ import java.util.UUID;
 
 public class BullElephant extends CardImpl {
 
-    private static FilterControlledLandPermanent controlledForest = new FilterControlledLandPermanent("Forests you control");
+    private static FilterControlledLandPermanent controlledForest = new FilterControlledLandPermanent("Forests");
 
     static {
         controlledForest.add(new SubtypePredicate(SubType.FOREST));

@@ -60,7 +60,7 @@ public class ForsakenCity extends CardImpl {
         // At the beginning of your upkeep, you may exile a card from your hand. If you do, untap Forsaken City.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DoIfCostPaid(new UntapSourceEffect(), new ExileFromHandCost(new TargetCardInHand(filter))), TargetController.YOU, true));
         
-        // {T}: Add one mana of any color to your mana pool.
+        // {T}: Add one mana of any color.
         this.addAbility(new AnyColorManaAbility());
     }
 

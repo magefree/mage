@@ -27,6 +27,9 @@
  */
 package mage.abilities.keyword;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.SpecialAction;
@@ -49,10 +52,6 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 /**
  *
@@ -120,10 +119,10 @@ import java.util.UUID;
  * card involves an additional cost, the card's owner must pay that cost if
  * able. If he or she can't, the card remains removed from the game. If the
  * additional cost includes mana, the situation is more complex. If the player
- * has enough mana in his or her mana pool to pay the cost, that player must do
- * so. If the player can't possibly pay the cost, the card remains removed from
- * the game. However, if the player has the means to produce enough mana to pay
- * the cost, then he or she has a choice: The player may play the spell, produce
+ * has enough mana in their mana pool to pay the cost, that player must do so.
+ * If the player can't possibly pay the cost, the card remains removed from the
+ * game. However, if the player has the means to produce enough mana to pay the
+ * cost, then he or she has a choice: The player may play the spell, produce
  * mana, and pay the cost. Or the player may choose to play no mana abilities,
  * thus making the card impossible to play because the additional mana can't be
  * paid.
@@ -237,7 +236,7 @@ public class SuspendAbility extends SpecialAction {
         MageObject object = game.getObject(sourceId);
         return (object.isInstant()
                 || object.hasAbility(FlashAbility.getInstance().getId(), game)
-                || game.getContinuousEffects().asThough(sourceId, AsThoughEffectType.CAST_AS_INSTANT, this, playerId, game)
+                || null != game.getContinuousEffects().asThough(sourceId, AsThoughEffectType.CAST_AS_INSTANT, this, playerId, game)
                 || game.canPlaySorcery(playerId));
     }
 

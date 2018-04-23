@@ -46,9 +46,9 @@ public class TalismanOfIndulgence extends CardImpl {
     public TalismanOfIndulgence(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
-        // {tap}: Add {C} to your mana pool.
+        // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
-        // {tap}: Add {B} or {R} to your mana pool. Talisman of Indulgence deals 1 damage to you.
+        // {tap}: Add {B} or {R}. Talisman of Indulgence deals 1 damage to you.
         Ability blackManaAbility = new BlackManaAbility();
         blackManaAbility.addEffect(new DamageControllerEffect(1));
         this.addAbility(blackManaAbility);

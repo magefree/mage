@@ -38,7 +38,7 @@ import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledPermanent;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -59,9 +59,9 @@ public class Fireblast extends CardImpl {
         // You may sacrifice two Mountains rather than pay Fireblast's mana cost.
         this.addAbility(new AlternativeCostSourceAbility(new SacrificeTargetCost(new TargetControlledPermanent(2, 2, filter, true))));
 
-        // Fireblast deals 4 damage to target creature or player.
+        // Fireblast deals 4 damage to any target.
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
 
     }
 

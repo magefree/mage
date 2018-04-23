@@ -50,6 +50,7 @@ import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.target.Target;
 import mage.target.common.TargetControlledPermanent;
@@ -130,7 +131,7 @@ class NoyanDarEffect extends OneShotEffect {
 }
 
 
-class AwakenElementalToken extends Token {
+class AwakenElementalToken extends TokenImpl {
 
     public AwakenElementalToken() {
         super("", "0/0 Elemental creature with haste");
@@ -141,5 +142,12 @@ class AwakenElementalToken extends Token {
         this.toughness = new MageInt(0);
 
         this.addAbility(HasteAbility.getInstance());
+    }
+    public AwakenElementalToken(final AwakenElementalToken token) {
+        super(token);
+    }
+
+    public AwakenElementalToken copy() {
+        return new AwakenElementalToken(this);
     }
 }

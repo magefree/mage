@@ -36,7 +36,6 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.cards.Card;
 import mage.cards.CardsImpl;
-import mage.constants.CardType;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -59,11 +58,11 @@ public class ParleyCount implements DynamicValue, MageSingleton {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        // Each player reveals the top card of his or her library. For each nonland card revealed this way
+        // Each player reveals the top card of their library. For each nonland card revealed this way
         int parleyValue = 0;
         MageObject sourceObject = game.getObject(sourceAbility.getSourceId());
         if (sourceObject != null) {
-            for (UUID playerId : game.getState().getPlayerList(sourceAbility.getControllerId())) {
+            for (UUID playerId : game.getState().getPlayersInRange(sourceAbility.getControllerId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     Card card = player.getLibrary().getFromTop(game);

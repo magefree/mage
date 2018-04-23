@@ -43,7 +43,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author spjspj
  */
-public class NighteyesTheDesecratorToken extends Token {
+public class NighteyesTheDesecratorToken extends TokenImpl {
 
     public NighteyesTheDesecratorToken() {
         super("Nighteyes the Desecrator", "");
@@ -58,5 +58,13 @@ public class NighteyesTheDesecratorToken extends Token {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToBattlefieldTargetEffect(), new ManaCostsImpl("{4}{B}"));
         ability.addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card from a graveyard")));
         this.addAbility(ability);
+    }
+
+    public NighteyesTheDesecratorToken(final NighteyesTheDesecratorToken token) {
+        super(token);
+    }
+
+    public NighteyesTheDesecratorToken copy() {
+        return new NighteyesTheDesecratorToken(this);
     }
 }

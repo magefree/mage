@@ -36,7 +36,7 @@ import mage.abilities.keyword.LifelinkAbility;
  *
  * @author TheElk801
  */
-public class IxalanVampireToken extends Token {
+public class IxalanVampireToken extends TokenImpl {
 
     public IxalanVampireToken() {
         super("Vampire", "1/1 white Vampire creature token with lifelink");
@@ -46,5 +46,13 @@ public class IxalanVampireToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
         addAbility(LifelinkAbility.getInstance());
+    }
+
+    public IxalanVampireToken(final IxalanVampireToken token) {
+        super(token);
+    }
+
+    public IxalanVampireToken copy() {
+        return new IxalanVampireToken(this);
     }
 }

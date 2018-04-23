@@ -28,6 +28,7 @@
 package mage.cards;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 import mage.MageObject;
 import mage.MageObjectImpl;
@@ -35,6 +36,7 @@ import mage.Mana;
 import mage.ObjectColor;
 import mage.abilities.*;
 import mage.abilities.costs.Cost;
+import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.common.RemoveVariableCountersTargetCost;
 import mage.abilities.effects.common.NameACardEffect;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
@@ -44,6 +46,7 @@ import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.counters.Counters;
 import mage.filter.FilterCard;
+import mage.filter.FilterMana;
 import mage.filter.FilterPermanent;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreaturePermanent;
@@ -73,6 +76,12 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
     private static final Logger logger = Logger.getLogger(CardImpl.class);
 
+    private static final String regexBlack = ".*\\x7b.{0,2}B.{0,2}\\x7d.*";
+    private static final String regexBlue = ".*\\x7b.{0,2}U.{0,2}\\x7d.*";
+    private static final String regexRed = ".*\\x7b.{0,2}R.{0,2}\\x7d.*";
+    private static final String regexGreen = ".*\\x7b.{0,2}G.{0,2}\\x7d.*";
+    private static final String regexWhite = ".*\\x7b.{0,2}W.{0,2}\\x7d.*";
+
     protected UUID ownerId;
     protected String cardNumber;
     public String expansionSetCode;
@@ -89,7 +98,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     protected boolean usesVariousArt = false;
     protected boolean splitCard;
     protected boolean morphCard;
-    protected boolean allCreatureTypes;
 
     protected List<UUID> attachments = new ArrayList<>();
 
@@ -206,22 +214,30 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     }
 
     public static Card createCard(Class<?> clazz, CardSetInfo setInfo, List<String> errorList) {
+        String setCode = null;
         try {
             Card card;
             if (setInfo == null) {
                 Constructor<?> con = clazz.getConstructor(UUID.class);
                 card = (Card) con.newInstance(new Object[]{null});
             } else {
+                setCode = setInfo.getExpansionSetCode();
                 Constructor<?> con = clazz.getConstructor(UUID.class, CardSetInfo.class);
                 card = (Card) con.newInstance(null, setInfo);
             }
             return card;
         } catch (Exception e) {
-            String err = "Error loading card: " + clazz.getCanonicalName();
+            String err = "Error loading card: " + clazz.getCanonicalName() + " (" + setCode + ")";
             if (errorList != null) {
                 errorList.add(err);
             }
-            logger.fatal(err, e);
+
+            if (e instanceof InvocationTargetException) {
+                logger.fatal(err, ((InvocationTargetException) e).getTargetException());
+            } else {
+                logger.fatal(err, e);
+            }
+
             return null;
         }
     }
@@ -448,6 +464,16 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                 FilterCreaturePermanent newFilter = new FilterCreaturePermanent("creature with power less than or equal to " + xValue);
                 newFilter.add(new PowerPredicate(ComparisonType.FEWER_THAN, xValue + 1));
                 ability.addTarget(new TargetCreaturePermanent(newFilter));
+                break;
+            case CREATURE_POWER_X_OR_LESS: // Aryel, Knight of Windgrace
+                int value = 0;
+                for (VariableCost cost : ability.getCosts().getVariableCosts()) {
+                    value = cost.getAmount();
+                }
+                FilterCreaturePermanent filterCreaturePermanent = new FilterCreaturePermanent("creature with power " + value + " or less");
+                filterCreaturePermanent.add(new PowerPredicate(ComparisonType.FEWER_THAN, value + 1));
+                ability.getTargets().clear();
+                ability.addTarget(new TargetCreaturePermanent(filterCreaturePermanent));
                 break;
         }
     }
@@ -826,6 +852,64 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     }
 
     @Override
+    public FilterMana getColorIdentity() {
+        FilterMana mana = new FilterMana();
+        mana.setBlack(getManaCost().getText().matches(regexBlack));
+        mana.setBlue(getManaCost().getText().matches(regexBlue));
+        mana.setGreen(getManaCost().getText().matches(regexGreen));
+        mana.setRed(getManaCost().getText().matches(regexRed));
+        mana.setWhite(getManaCost().getText().matches(regexWhite));
+
+        for (String rule : getRules()) {
+            rule = rule.replaceAll("(?i)<i.*?</i>", ""); // Ignoring reminder text in italic
+            if (!mana.isBlack() && (rule.matches(regexBlack) || this.color.isBlack())) {
+                mana.setBlack(true);
+            }
+            if (!mana.isBlue() && (rule.matches(regexBlue) || this.color.isBlue())) {
+                mana.setBlue(true);
+            }
+            if (!mana.isGreen() && (rule.matches(regexGreen) || this.color.isGreen())) {
+                mana.setGreen(true);
+            }
+            if (!mana.isRed() && (rule.matches(regexRed) || this.color.isRed())) {
+                mana.setRed(true);
+            }
+            if (!mana.isWhite() && (rule.matches(regexWhite) || this.color.isWhite())) {
+                mana.setWhite(true);
+            }
+        }
+        if (isTransformable()) {
+            Card secondCard = getSecondCardFace();
+            ObjectColor color = secondCard.getColor(null);
+            mana.setBlack(mana.isBlack() || color.isBlack());
+            mana.setGreen(mana.isGreen() || color.isGreen());
+            mana.setRed(mana.isRed() || color.isRed());
+            mana.setBlue(mana.isBlue() || color.isBlue());
+            mana.setWhite(mana.isWhite() || color.isWhite());
+            for (String rule : secondCard.getRules()) {
+                rule = rule.replaceAll("(?i)<i.*?</i>", ""); // Ignoring reminder text in italic
+                if (!mana.isBlack() && rule.matches(regexBlack)) {
+                    mana.setBlack(true);
+                }
+                if (!mana.isBlue() && rule.matches(regexBlue)) {
+                    mana.setBlue(true);
+                }
+                if (!mana.isGreen() && rule.matches(regexGreen)) {
+                    mana.setGreen(true);
+                }
+                if (!mana.isRed() && rule.matches(regexRed)) {
+                    mana.setRed(true);
+                }
+                if (!mana.isWhite() && rule.matches(regexWhite)) {
+                    mana.setWhite(true);
+                }
+            }
+        }
+
+        return mana;
+    }
+
+    @Override
     public void setZone(Zone zone, Game game) {
         game.setZone(getId(), zone);
     }
@@ -855,16 +939,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             }
         }
         return super.getSubtype(game);
-    }
-
-    @Override
-    public boolean isAllCreatureTypes() {
-        return allCreatureTypes;
-    }
-
-    @Override
-    public void setIsAllCreatureTypes(boolean value) {
-        allCreatureTypes = value;
     }
 
     @Override

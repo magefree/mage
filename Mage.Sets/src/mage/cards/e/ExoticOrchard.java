@@ -43,7 +43,7 @@ public class ExoticOrchard extends CardImpl {
     public ExoticOrchard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {T}: Add to your mana pool one mana of any color that a land an opponent controls could produce.
+        // {T}: Add one mana of any color that a land an opponent controls could produce.
         this.addAbility(new AnyColorLandsProduceManaAbility(TargetController.OPPONENT));
     }
 

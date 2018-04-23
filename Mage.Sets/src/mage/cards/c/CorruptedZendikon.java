@@ -43,6 +43,7 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
@@ -85,7 +86,7 @@ public class CorruptedZendikon extends CardImpl {
     }
 }
 
-class CorruptedZendikonOozeToken extends Token {
+class CorruptedZendikonOozeToken extends TokenImpl {
 
     public CorruptedZendikonOozeToken() {
         super("Ooze", "3/3 black Ooze creature");
@@ -94,6 +95,13 @@ class CorruptedZendikonOozeToken extends Token {
         subtype.add(SubType.OOZE);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
+    }
+    public CorruptedZendikonOozeToken(final CorruptedZendikonOozeToken token) {
+        super(token);
+    }
+
+    public CorruptedZendikonOozeToken copy() {
+        return new CorruptedZendikonOozeToken(this);
     }
 
 }

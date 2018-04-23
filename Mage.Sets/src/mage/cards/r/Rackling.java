@@ -55,7 +55,7 @@ public class Rackling extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // At the beginning of each opponent's upkeep, Rackling deals X damage to that player, where X is 3 minus the number of cards in his or her hand.
+        // At the beginning of each opponent's upkeep, Rackling deals X damage to that player, where X is 3 minus the number of cards in their hand.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new RacklingEffect(), TargetController.OPPONENT, false, true));
     }
 
@@ -73,7 +73,7 @@ class RacklingEffect extends OneShotEffect {
 
     public RacklingEffect() {
         super(Outcome.Benefit);
-        this.staticText = "{this} deals X damage to that player, where X is 3 minus the number of cards in his or her hand";
+        this.staticText = "{this} deals X damage to that player, where X is 3 minus the number of cards in their hand";
     }
 
     public RacklingEffect(final RacklingEffect effect) {

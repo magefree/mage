@@ -58,8 +58,8 @@ public class ShapeAnew extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}");
 
         // The controller of target artifact sacrifices it, then reveals cards from the top
-        // of his or her library until he or she reveals an artifact card. That player puts
-        // that card onto the battlefield, then shuffles all other cards revealed this way into his or her library.
+        // of their library until he or she reveals an artifact card. That player puts
+        // that card onto the battlefield, then shuffles all other cards revealed this way into their library.
         this.getSpellAbility().addEffect(new SacrificeTargetEffect("The controller of target artifact sacrifices it"));
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addEffect(new ShapeAnewEffect());
@@ -78,7 +78,7 @@ public class ShapeAnew extends CardImpl {
 
         public ShapeAnewEffect() {
             super(Outcome.PutCardInPlay);
-            staticText = ", then reveals cards from the top of his or her library until he or she reveals an artifact card. That player puts that card onto the battlefield, then shuffles all other cards revealed this way into his or her library";
+            staticText = ", then reveals cards from the top of their library until he or she reveals an artifact card. That player puts that card onto the battlefield, then shuffles all other cards revealed this way into their library";
         }
 
         public ShapeAnewEffect(ShapeAnewEffect effect) {

@@ -150,7 +150,7 @@ class MasterOfCrueltiesEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player defendingPlayer = game.getPlayer(game.getCombat().getDefenderId(source.getSourceId()));
         if (defendingPlayer != null) {
-            defendingPlayer.setLife(1, game);
+            defendingPlayer.setLife(1, game, source);
             return true;
         }
         return false;

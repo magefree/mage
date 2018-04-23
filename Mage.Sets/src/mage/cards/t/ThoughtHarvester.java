@@ -67,7 +67,7 @@ public class ThoughtHarvester extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // Whenever you cast a colorless spell, target opponent exiles the top card of his or her library.
+        // Whenever you cast a colorless spell, target opponent exiles the top card of their library.
         Ability ability = new SpellCastControllerTriggeredAbility(new ExileCardsFromTopOfLibraryTargetEffect(1, "target opponent"), filter, false);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);

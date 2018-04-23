@@ -37,7 +37,7 @@ import mage.abilities.keyword.HasteAbility;
  *
  * @author spjspj
  */
-public class QueenMarchesaAssassinToken extends Token {
+public class QueenMarchesaAssassinToken extends TokenImpl {
 
     public QueenMarchesaAssassinToken() {
         super("Assassin", "1/1 black Assassin creature tokens with deathtouch and haste");
@@ -48,5 +48,13 @@ public class QueenMarchesaAssassinToken extends Token {
         toughness = new MageInt(1);
         addAbility(DeathtouchAbility.getInstance());
         addAbility(HasteAbility.getInstance());
+    }
+
+    public QueenMarchesaAssassinToken(final QueenMarchesaAssassinToken token) {
+        super(token);
+    }
+
+    public QueenMarchesaAssassinToken copy() {
+        return new QueenMarchesaAssassinToken(this);
     }
 }

@@ -59,7 +59,7 @@ public class ChampionTest extends CardTestPlayerBase {
      * Champion a Goblin or Shaman (When this enters the battlefield, sacrifice 
      * it unless you exile another Goblin or Shaman you control. When this 
      * leaves the battlefield, that card returns to the battlefield.)
-     * {T}: Lightning Crafter deals 3 damage to target creature or player.
+     * {T}: Lightning Crafter deals 3 damage to any target.
      *
      */
 
@@ -88,7 +88,7 @@ public class ChampionTest extends CardTestPlayerBase {
 
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Crafter");
-        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {source} deals 3 damage to target creature or player.", "Lightning Crafter");
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {source} deals 3 damage to ", "Lightning Crafter");
 
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();

@@ -48,10 +48,10 @@ public class ManaPrism extends CardImpl {
     public ManaPrism(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
-        // {tap}: Add {C} to your mana pool.
+        // {tap}: Add {C}.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(1), new TapSourceCost()));
         
-        // {1}, {tap}: Add one mana of any color to your mana pool.
+        // {1}, {tap}: Add one mana of any color.
         Ability ability = new AnyColorManaAbility(new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

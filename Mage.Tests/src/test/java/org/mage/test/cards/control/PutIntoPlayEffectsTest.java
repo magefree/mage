@@ -112,7 +112,7 @@ public class PutIntoPlayEffectsTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
         // Bribery - Sorcery {3}{U}{U}
         // Search target opponent's library for a creature card and put that card onto the battlefield
-        // under your control. Then that player shuffles his or her library.
+        // under your control. Then that player shuffles their library.
         addCard(Zone.HAND, playerA, "Bribery");
 
         addCard(Zone.BATTLEFIELD, playerB, "Island", 2);

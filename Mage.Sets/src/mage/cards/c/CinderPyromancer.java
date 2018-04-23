@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -44,33 +43,34 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.target.TargetPlayer;
+import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
  *
  * @author Loki
  */
 public class CinderPyromancer extends CardImpl {
+
     private static final FilterSpell filter = new FilterSpell("a red spell");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.RED));
     }
 
-    public CinderPyromancer (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
+    public CinderPyromancer(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
         this.subtype.add(SubType.ELEMENTAL);
         this.subtype.add(SubType.SHAMAN);
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayerOrPlaneswalker());
         this.addAbility(ability);
         this.addAbility(new SpellCastControllerTriggeredAbility(new UntapSourceEffect(), filter, true));
     }
 
-    public CinderPyromancer (final CinderPyromancer card) {
+    public CinderPyromancer(final CinderPyromancer card) {
         super(card);
     }
 

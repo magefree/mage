@@ -3,7 +3,9 @@ package mage.abilities.common;
 import mage.MageObjectReference;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -13,23 +15,30 @@ import mage.target.targetpointer.FixedTarget;
 public class DealtDamageAndDiedTriggeredAbility extends TriggeredAbilityImpl {
 
     private final FilterCreaturePermanent filter;
+    protected SetTargetPointer setTargetPointer;
 
     public DealtDamageAndDiedTriggeredAbility(Effect effect) {
         this(effect, false);
     }
 
     public DealtDamageAndDiedTriggeredAbility(Effect effect, boolean optional) {
-        this(effect, optional, new FilterCreaturePermanent());
+        this(effect, optional, StaticFilters.FILTER_PERMANENT_CREATURE);
     }
 
     public DealtDamageAndDiedTriggeredAbility(Effect effect, boolean optional, FilterCreaturePermanent filter) {
+        this(effect, optional, filter, SetTargetPointer.PERMANENT);
+    }
+
+    public DealtDamageAndDiedTriggeredAbility(Effect effect, boolean optional, FilterCreaturePermanent filter, SetTargetPointer setTargetPointer) {
         super(Zone.ALL, effect, optional);
         this.filter = filter;
+        this.setTargetPointer = setTargetPointer;
     }
 
     public DealtDamageAndDiedTriggeredAbility(final DealtDamageAndDiedTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter;
+        this.setTargetPointer = ability.setTargetPointer;
     }
 
     @Override
@@ -55,8 +64,10 @@ public class DealtDamageAndDiedTriggeredAbility extends TriggeredAbilityImpl {
                     }
                 }
                 if (damageDealt) {
-                    for (Effect effect : getEffects()) {
-                        effect.setTargetPointer(new FixedTarget(event.getTargetId()));
+                    if(this.setTargetPointer == SetTargetPointer.PERMANENT) {
+                        for (Effect effect : getEffects()) {
+                            effect.setTargetPointer(new FixedTarget(event.getTargetId()));
+                        }
                     }
                     return true;
                 }

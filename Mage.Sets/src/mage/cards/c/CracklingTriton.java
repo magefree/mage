@@ -39,7 +39,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -55,10 +55,10 @@ public class CracklingTriton extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
-        // {2}{R}, Sacrifice Crackling Triton: Crackling Triton deals 2 damage to target creature or player.
+        // {2}{R}, Sacrifice Crackling Triton: Crackling Triton deals 2 damage to any target.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl("{2}{R}"));
         ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }
 

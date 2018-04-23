@@ -43,7 +43,7 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -53,7 +53,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public class Thermopod extends CardImpl {
 
     public Thermopod(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}");
         addSuperType(SuperType.SNOW);
         this.subtype.add(SubType.SLUG);
         this.power = new MageInt(4);
@@ -61,10 +61,10 @@ public class Thermopod extends CardImpl {
 
         // {S}: Thermopod gains haste until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(
-            HasteAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{S}")));
-        // Sacrifice a creature: Add {R} to your mana pool.
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.RedMana(1), new SacrificeTargetCost(
-            new TargetControlledCreaturePermanent(new FilterControlledCreaturePermanent("a creature")))));
+                HasteAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{S}")));
+        // Sacrifice a creature: Add {R}.
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.RedMana(1),
+                new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT))));
     }
 
     public Thermopod(final Thermopod card) {

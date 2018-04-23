@@ -41,11 +41,12 @@ import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -57,11 +58,11 @@ public class FieryBombardment extends CardImpl {
     public FieryBombardment(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
 
-        // Chroma - {2}, Sacrifice a creature: Fiery Bombardment deals damage to target creature or player equal to the number of red mana symbols in the sacrificed creature's mana cost.
+        // Chroma - {2}, Sacrifice a creature: Fiery Bombardment deals damage to any target equal to the number of red mana symbols in the sacrificed creature's mana cost.
         Effect effect = new FieryBombardmentEffect();
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{2}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+        ability.addTarget(new TargetAnyTarget());
         ability.setAbilityWord(AbilityWord.CHROMA);
         this.addAbility(ability);
 
@@ -81,7 +82,7 @@ class FieryBombardmentEffect extends OneShotEffect {
 
     public FieryBombardmentEffect() {
         super(Outcome.Benefit);
-        staticText = "{this} deals damage to target creature or player equal to the number of red mana symbols in the sacrificed creature's mana cost.";
+        staticText = "{this} deals damage to any target equal to the number of red mana symbols in the sacrificed creature's mana cost.";
     }
 
     public FieryBombardmentEffect(final FieryBombardmentEffect effect) {

@@ -28,9 +28,6 @@
 
 package mage.game.permanent.token;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.MageInt;
@@ -39,7 +36,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class HydraBroodmasterToken extends Token {
+public class HydraBroodmasterToken extends TokenImpl {
 
     public HydraBroodmasterToken() {
         this(1,1);
@@ -55,5 +52,12 @@ public class HydraBroodmasterToken extends Token {
         this.toughness = new MageInt(toughness);
     }
 
+    public HydraBroodmasterToken(final HydraBroodmasterToken token) {
+        super(token);
+    }
+
+    public HydraBroodmasterToken copy() {
+        return new HydraBroodmasterToken(this);
+    }
 }
 

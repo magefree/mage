@@ -36,7 +36,7 @@ import mage.constants.SubType;
  *
  * @author FenrisulfrX
  */
-public class MinionToken extends Token {
+public class MinionToken extends TokenImpl {
     
     public MinionToken() {
         this("DDE");
@@ -50,5 +50,13 @@ public class MinionToken extends Token {
         color.setBlack(true);
         power = new MageInt(0);
         toughness = new MageInt(0);
+    }
+
+    public MinionToken(final MinionToken token) {
+        super(token);
+    }
+
+    public MinionToken copy() {
+        return new MinionToken(this);
     }
 }

@@ -57,7 +57,7 @@ public class ChitteringRats extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // When Chittering Rats enters the battlefield, target opponent puts a card from his or her hand on top of his or her library.
+        // When Chittering Rats enters the battlefield, target opponent puts a card from their hand on top of their library.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ChitteringRatsEffect(), false);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
@@ -78,7 +78,7 @@ class ChitteringRatsEffect extends OneShotEffect {
 
     public ChitteringRatsEffect() {
         super(Outcome.Detriment);
-        this.staticText = "target opponent puts a card from his or her hand on top of his or her library";
+        this.staticText = "target opponent puts a card from their hand on top of their library";
     }
 
     public ChitteringRatsEffect(final ChitteringRatsEffect effect) {

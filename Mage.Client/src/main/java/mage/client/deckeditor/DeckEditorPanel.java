@@ -1125,7 +1125,7 @@ class DeckFilter extends FileFilter {
         int i = s.lastIndexOf('.');
 
         if (i > 0 && i < s.length() - 1) {
-            ext = s.substring(i + 1).toLowerCase();
+            ext = s.substring(i + 1).toLowerCase(Locale.ENGLISH);
         }
         return (ext == null) ? false : ext.equals("dck");
     }
@@ -1149,10 +1149,10 @@ class ImportFilter extends FileFilter {
         int i = s.lastIndexOf('.');
 
         if (i > 0 && i < s.length() - 1) {
-            ext = s.substring(i + 1).toLowerCase();
+            ext = s.substring(i + 1).toLowerCase(Locale.ENGLISH);
         }
         if (ext != null) {
-            if (ext.toLowerCase().equals("dec") || ext.toLowerCase().equals("mwdeck") || ext.toLowerCase().equals("txt") || ext.toLowerCase().equals("dek")) {
+            if (ext.toLowerCase(Locale.ENGLISH).equals("dec") || ext.toLowerCase(Locale.ENGLISH).equals("mwdeck") || ext.toLowerCase(Locale.ENGLISH).equals("txt") || ext.toLowerCase(Locale.ENGLISH).equals("dek")) {
                 return true;
             }
         }

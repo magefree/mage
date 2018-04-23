@@ -42,6 +42,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 
 /**
@@ -56,7 +57,7 @@ public class WardenOfTheWall extends CardImpl {
         // Warden of the Wall enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
 
-        // {tap}: Add {C} to your mana pool.
+        // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
 
         // As long as it's not your turn, Warden of the Wall is a 2/3 Gargoyle artifact creature with flying.
@@ -73,7 +74,7 @@ public class WardenOfTheWall extends CardImpl {
     }
 }
 
-class GargoyleToken extends Token {
+class GargoyleToken extends TokenImpl {
 
     public GargoyleToken() {
         super("", "2/3 Gargoyle artifact creature with flying");
@@ -83,6 +84,13 @@ class GargoyleToken extends Token {
         power = new MageInt(2);
         toughness = new MageInt(3);
         addAbility(FlyingAbility.getInstance());
+    }
+    public GargoyleToken(final GargoyleToken token) {
+        super(token);
+    }
+
+    public GargoyleToken copy() {
+        return new GargoyleToken(this);
     }
 
 }

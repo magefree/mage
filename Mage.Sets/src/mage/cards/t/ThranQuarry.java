@@ -54,7 +54,7 @@ public class ThranQuarry extends CardImpl {
         this.addAbility(new ConditionalTriggeredAbility(triggered, new CreatureCountCondition(0, TargetController.YOU),
                 "At the beginning of the end step, if you control no creatures, sacrifice {this}."));
 
-        // {tap}: Add one mana of any color to your mana pool.
+        // {tap}: Add one mana of any color.
         this.addAbility(new AnyColorManaAbility());
 
     }

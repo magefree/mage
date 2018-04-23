@@ -38,6 +38,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.filter.StaticFilters;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 
 /**
@@ -61,7 +62,7 @@ public class JadeIdol extends CardImpl {
 
 }
 
-class JadeIdolToken extends Token {
+class JadeIdolToken extends TokenImpl {
     JadeIdolToken() {
         super("", "4/4 Spirit artifact creature");
         cardType.add(CardType.ARTIFACT);
@@ -69,5 +70,12 @@ class JadeIdolToken extends Token {
         subtype.add(SubType.SPIRIT);
         power = new MageInt(4);
         toughness = new MageInt(4);
+    }
+    public JadeIdolToken(final JadeIdolToken token) {
+        super(token);
+    }
+
+    public JadeIdolToken copy() {
+        return new JadeIdolToken(this);
     }
 }

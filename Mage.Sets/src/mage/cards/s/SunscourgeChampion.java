@@ -97,7 +97,7 @@ class SunscourgeChampionEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (controller != null && permanent != null && sourceObject != null) {
-            controller.gainLife(permanent.getPower().getValue(), game);
+            controller.gainLife(permanent.getPower().getValue(), game, source);
             return true;
         }
         return false;

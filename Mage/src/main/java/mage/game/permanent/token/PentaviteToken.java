@@ -36,7 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
  *
  * @author spjspj
  */
-public class PentaviteToken extends Token {
+public class PentaviteToken extends TokenImpl {
 
     public PentaviteToken() {
         super("Pentavite", "1/1 colorless Pentavite artifact creature token with flying");
@@ -48,4 +48,11 @@ public class PentaviteToken extends Token {
         this.addAbility(FlyingAbility.getInstance());
     }
 
+    public PentaviteToken(final PentaviteToken token) {
+        super(token);
+    }
+
+    public PentaviteToken copy() {
+        return new PentaviteToken(this);
+    }
 }

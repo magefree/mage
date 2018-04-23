@@ -47,7 +47,7 @@ public class ChromaticSphere extends CardImpl {
     public ChromaticSphere(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
         
-        // {1}, {T}, Sacrifice Chromatic Sphere: Add one mana of any color to your mana pool. Draw a card.
+        // {1}, {T}, Sacrifice Chromatic Sphere: Add one mana of any color. Draw a card.
         ActivatedManaAbilityImpl ability = new AnyColorManaAbility(new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());

@@ -37,9 +37,10 @@ import mage.abilities.effects.common.combat.CantAttackTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -50,17 +51,17 @@ import mage.target.common.TargetCreaturePermanent;
 public class MartyredRusalka extends CardImpl {
 
     public MartyredRusalka(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}");
         this.subtype.add(SubType.SPIRIT);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
         // {W}, Sacrifice a creature: Target creature can't attack this turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantAttackTargetEffect(Duration.EndOfTurn), new ManaCostsImpl("{W}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
-        
+
     }
 
     public MartyredRusalka(final MartyredRusalka card) {

@@ -56,7 +56,7 @@ public class CabalCoffers extends CardImpl {
     public CabalCoffers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {2}, {tap}: Add {B} to your mana pool for each Swamp you control.
+        // {2}, {tap}: Add {B} for each Swamp you control.
         Ability ability = new DynamicManaAbility(Mana.BlackMana(1), new PermanentsOnBattlefieldCount(filter), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

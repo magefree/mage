@@ -51,7 +51,7 @@ import java.util.UUID;
  */
 public class SeshiroTheAnointed extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Snakes");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Snake creatures");
 
     static {
         filter.add(new SubtypePredicate(SubType.SNAKE));
@@ -65,7 +65,10 @@ public class SeshiroTheAnointed extends CardImpl {
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
+        
+        // Other Snake creatures you control get +2/+2.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(2, 2, Duration.WhileOnBattlefield, filter, true)));
+        // Whenever a Snake you control deals combat damage to a player, you may draw a card.
         this.addAbility(new SeshiroTheAnointedAbility());
     }
 

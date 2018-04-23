@@ -40,6 +40,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 
 /**
@@ -53,7 +54,7 @@ public class GuardianIdol extends CardImpl {
 
         // Guardian Idol enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
-        // {tap}: Add {C} to your mana pool.
+        // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         // {2}: Guardian Idol becomes a 2/2 Golem artifact creature until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new GuardianIdolGolemToken(), "", Duration.EndOfTurn), new ManaCostsImpl("{2}")));
@@ -69,7 +70,7 @@ public class GuardianIdol extends CardImpl {
     }
 }
 
-class GuardianIdolGolemToken extends Token {
+class GuardianIdolGolemToken extends TokenImpl {
 
     public GuardianIdolGolemToken() {
         super("Golem", "2/2 Golem artifact creature token");
@@ -78,5 +79,12 @@ class GuardianIdolGolemToken extends Token {
         subtype.add(SubType.GOLEM);
         power = new MageInt(2);
         toughness = new MageInt(2);
+    }
+    public GuardianIdolGolemToken(final GuardianIdolGolemToken token) {
+        super(token);
+    }
+
+    public GuardianIdolGolemToken copy() {
+        return new GuardianIdolGolemToken(this);
     }
 }

@@ -70,7 +70,7 @@ class DoomsdayEffect extends OneShotEffect {
 
     public DoomsdayEffect() {
         super(Outcome.LoseLife);
-        staticText = "Search your library and graveyard for five cards and exile the rest. Put the chosen cards on top of your library in any order. You lose half your life, rounded up";
+        staticText = "Search your library and graveyard for five cards and exile the rest. Put the chosen cards on top of your library in any order";
     }
 
     public DoomsdayEffect(final DoomsdayEffect effect) {

@@ -43,6 +43,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 
 /**
@@ -57,7 +58,7 @@ public class NeedleSpires extends CardImpl {
         // Needle Spires enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
         
-        // {T}: Add {R} or {W} to your mana pool.
+        // {T}: Add {R} or {W}.
         this.addAbility(new RedManaAbility());
         this.addAbility(new WhiteManaAbility());
         
@@ -77,7 +78,7 @@ public class NeedleSpires extends CardImpl {
     }
 }
 
-class NeedleSpiresToken extends Token {
+class NeedleSpiresToken extends TokenImpl {
 
     public NeedleSpiresToken() {
         super("", "2/1 red and white Elemental creature with double strike");
@@ -88,5 +89,12 @@ class NeedleSpiresToken extends Token {
         power = new MageInt(2);
         toughness = new MageInt(1);
         addAbility(DoubleStrikeAbility.getInstance());
+    }
+    public NeedleSpiresToken(final NeedleSpiresToken token) {
+        super(token);
+    }
+
+    public NeedleSpiresToken copy() {
+        return new NeedleSpiresToken(this);
     }
 }

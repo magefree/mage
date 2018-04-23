@@ -62,7 +62,7 @@ public class SelvalaExplorerReturned extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 
-        // Parley - {T}: Each player reveals the top card of his or her library. For each nonland card revealed this way, add {G} to your mana pool and you gain 1 life. Then each player draws a card.
+        // Parley - {T}: Each player reveals the top card of their library. For each nonland card revealed this way, add {G} and you gain 1 life. Then each player draws a card.
         ActivatedManaAbilityImpl manaAbility = new SimpleManaAbility(Zone.BATTLEFIELD, new SelvalaExplorerReturnedEffect(), new TapSourceCost(), false);
         manaAbility.setUndoPossible(false);
         manaAbility.setAbilityWord(AbilityWord.PARLEY);
@@ -85,7 +85,7 @@ public class SelvalaExplorerReturned extends CardImpl {
 class SelvalaExplorerReturnedEffect extends ManaEffect {
 
     public SelvalaExplorerReturnedEffect() {
-        this.staticText = "Each player reveals the top card of his or her library. For each nonland card revealed this way, add {G} to your mana pool and you gain 1 life";
+        this.staticText = "Each player reveals the top card of their library. For each nonland card revealed this way, add {G} and you gain 1 life";
     }
 
     public SelvalaExplorerReturnedEffect(final SelvalaExplorerReturnedEffect effect) {
@@ -104,7 +104,7 @@ class SelvalaExplorerReturnedEffect extends ManaEffect {
             Mana parley = getMana(game, source);
             if (parley.getGreen() > 0) {
                 controller.getManaPool().addMana(parley, game, source);
-                controller.gainLife(parley.getGreen(), game);
+                controller.gainLife(parley.getGreen(), game, source);
             }
             return true;
         }

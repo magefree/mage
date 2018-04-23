@@ -35,7 +35,7 @@ import mage.constants.SubType;
  *
  * @author L_J
  */
-public class SheepToken extends Token {
+public class SheepToken extends TokenImpl {
 
     public SheepToken() {
         super("Sheep", "0/1 green Sheep creature token");
@@ -44,5 +44,13 @@ public class SheepToken extends Token {
         subtype.add(SubType.SHEEP);
         power = new MageInt(0);
         toughness = new MageInt(1);
+    }
+
+    public SheepToken(final SheepToken token) {
+        super(token);
+    }
+
+    public SheepToken copy() {
+        return new SheepToken(this);
     }
 }

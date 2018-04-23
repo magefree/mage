@@ -62,7 +62,7 @@ public class Capture extends CardImpl {
         // It gains haste until end of turn.
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
 
-        // If it has a bounty counter on it, add {R}{R}{R} to your mana pool
+        // If it has a bounty counter on it, add {R}{R}{R}
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new BasicManaEffect(Mana.RedMana(3)), new TargetHasCounterCondition(CounterType.BOUNTY)));
     }
 

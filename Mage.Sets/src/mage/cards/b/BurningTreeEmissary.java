@@ -50,7 +50,7 @@ public class BurningTreeEmissary extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // When Burning-Tree Emissary enters the battlefield, add {R}{G} to your mana pool.
+        // When Burning-Tree Emissary enters the battlefield, add {R}{G}.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new BasicManaEffect(new Mana(1,1,0,0,0,0,0, 0))));
     }
 

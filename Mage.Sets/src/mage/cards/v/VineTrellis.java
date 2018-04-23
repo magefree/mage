@@ -52,7 +52,7 @@ public class VineTrellis extends CardImpl {
 
         // Defender
         this.addAbility(DefenderAbility.getInstance());
-        // {tap}: Add {G} to your mana pool.
+        // {tap}: Add {G}.
         this.addAbility(new GreenManaAbility());
     }
 

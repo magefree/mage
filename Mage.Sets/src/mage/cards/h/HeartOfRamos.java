@@ -46,10 +46,10 @@ public class HeartOfRamos extends CardImpl {
     public HeartOfRamos(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
-        // {tap}: Add {R} to your mana pool.
+        // {tap}: Add {R}.
         this.addAbility(new RedManaAbility());
         
-        // Sacrifice Heart of Ramos: Add {R} to your mana pool.
+        // Sacrifice Heart of Ramos: Add {R}.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.RedMana(1), new SacrificeSourceCost()));
     }
 

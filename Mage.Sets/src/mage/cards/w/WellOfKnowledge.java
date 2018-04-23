@@ -53,7 +53,7 @@ public class WellOfKnowledge extends CardImpl {
     public WellOfKnowledge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
-        // {2}: Draw a card. Any player may activate this ability but only during his or her draw step.
+        // {2}: Draw a card. Any player may activate this ability but only during their draw step.
         this.addAbility(new WellOfKnowledgeConditionalActivatedAbility());
 
     }
@@ -107,7 +107,7 @@ class WellOfKnowledgeConditionalActivatedAbility extends ActivatedAbilityImpl {
 
     @Override
     public String getRule() {
-        return "{2}: Draw a card. Any player may activate this ability but only during his or her draw step.";
+        return "{2}: Draw a card. Any player may activate this ability but only during their draw step.";
     }
 }
 

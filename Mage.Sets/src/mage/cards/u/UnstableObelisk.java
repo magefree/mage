@@ -50,7 +50,7 @@ public class UnstableObelisk extends CardImpl {
     public UnstableObelisk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
-        // {tap}: Add {C} to your mana pool.
+        // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
 
         // {7}, {tap}, Sacrifice Unstable Obelisk: Destroy target permanent.

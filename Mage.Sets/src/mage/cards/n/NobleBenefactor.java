@@ -58,7 +58,7 @@ public class NobleBenefactor extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // When Noble Benefactor dies, each player may search his or her library for a card and put that card into his or her hand. Then each player who searched his or her library this way shuffles it.
+        // When Noble Benefactor dies, each player may search their library for a card and put that card into their hand. Then each player who searched their library this way shuffles it.
         this.addAbility(new DiesTriggeredAbility(new NobleBenefactorEffect()));
     }
 
@@ -76,7 +76,7 @@ class NobleBenefactorEffect extends OneShotEffect {
 
     public NobleBenefactorEffect() {
         super(Outcome.Benefit);
-        this.staticText = "each player may search his or her library for a card and put that card into his or her hand. Then each player who searched his or her library this way shuffles it";
+        this.staticText = "each player may search their library for a card and put that card into their hand. Then each player who searched their library this way shuffles it";
     }
 
     public NobleBenefactorEffect(final NobleBenefactorEffect effect) {

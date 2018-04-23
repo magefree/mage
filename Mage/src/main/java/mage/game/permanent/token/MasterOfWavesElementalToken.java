@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class MasterOfWavesElementalToken extends Token {
+public class MasterOfWavesElementalToken extends TokenImpl {
 
     public MasterOfWavesElementalToken() {
         super("Elemental", "1/0 blue Elemental creature");
@@ -46,5 +46,13 @@ public class MasterOfWavesElementalToken extends Token {
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(0);
+    }
+
+    public MasterOfWavesElementalToken(final MasterOfWavesElementalToken token) {
+        super(token);
+    }
+
+    public MasterOfWavesElementalToken copy() {
+        return new MasterOfWavesElementalToken(this);
     }
 }

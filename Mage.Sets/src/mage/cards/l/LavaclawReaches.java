@@ -44,6 +44,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 
 /**
@@ -57,7 +58,7 @@ public class LavaclawReaches extends CardImpl {
 
         // Lavaclaw Reaches enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
-        // {T}: Add {B} or {R} to your mana pool.
+        // {T}: Add {B} or {R}.
         this.addAbility(new BlackManaAbility());
         this.addAbility(new RedManaAbility());
         // {1}{B}{R}: Until end of turn, Lavaclaw Reaches becomes a 2/2 black and red Elemental creature with ": This creature gets +X/+0 until end of turn." It's still a land.
@@ -75,7 +76,7 @@ public class LavaclawReaches extends CardImpl {
 
 }
 
-class LavaclawReachesToken extends Token {
+class LavaclawReachesToken extends TokenImpl {
 
     public LavaclawReachesToken() {
         super("", "2/2 black and red Elemental creature with \"{X}: This creature gets +X/+0 until end of turn.\"");
@@ -87,5 +88,11 @@ class LavaclawReachesToken extends Token {
         toughness = new MageInt(2);
         addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(new ManacostVariableValue(), new StaticValue(0), Duration.EndOfTurn), new ManaCostsImpl("{X}")));
     }
+    public LavaclawReachesToken(final LavaclawReachesToken token) {
+        super(token);
+    }
 
+    public LavaclawReachesToken copy() {
+        return new LavaclawReachesToken(this);
+    }
 }

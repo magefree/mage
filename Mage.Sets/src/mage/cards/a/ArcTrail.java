@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.a;
 
 import java.io.ObjectStreamException;
@@ -37,13 +36,13 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.common.FilterCreatureOrPlayer;
+import mage.filter.common.FilterCreaturePlayerOrPlaneswalker;
 import mage.filter.predicate.mageobject.AnotherTargetPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -51,27 +50,27 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class ArcTrail extends CardImpl {
 
-    public ArcTrail (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}");
+    public ArcTrail(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{R}");
 
-        // Arc Trail deals 2 damage to target creature or player and 1 damage to another target creature or player
-        FilterCreatureOrPlayer filter1 = new FilterCreatureOrPlayer("creature or player to deal 2 damage");
-        TargetCreatureOrPlayer target1 = new TargetCreatureOrPlayer(1, 1, filter1);
+        // Arc Trail deals 2 damage to any target and 1 damage to another any target
+        FilterCreaturePlayerOrPlaneswalker filter1 = new FilterCreaturePlayerOrPlaneswalker("creature, player or planeswalker to deal 2 damage");
+        TargetAnyTarget target1 = new TargetAnyTarget(1, 1, filter1);
         target1.setTargetTag(1);
         this.getSpellAbility().addTarget(target1);
-        
-        FilterCreatureOrPlayer filter2 = new FilterCreatureOrPlayer("another creature or player to deal 1 damage");
+
+        FilterCreaturePlayerOrPlaneswalker filter2 = new FilterCreaturePlayerOrPlaneswalker("another creature, player or planeswalker to deal 1 damage");
         AnotherTargetPredicate predicate = new AnotherTargetPredicate(2);
         filter2.getCreatureFilter().add(predicate);
         filter2.getPlayerFilter().add(predicate);
-        TargetCreatureOrPlayer target2 = new TargetCreatureOrPlayer(1, 1, filter2);
+        TargetAnyTarget target2 = new TargetAnyTarget(1, 1, filter2);
         target2.setTargetTag(2);
         this.getSpellAbility().addTarget(target2);
-        
+
         this.getSpellAbility().addEffect(ArcTrailEffect.getInstance());
     }
 
-    public ArcTrail (final ArcTrail card) {
+    public ArcTrail(final ArcTrail card) {
         super(card);
     }
 
@@ -84,7 +83,7 @@ public class ArcTrail extends CardImpl {
 
 class ArcTrailEffect extends OneShotEffect {
 
-    private static final ArcTrailEffect instance =  new ArcTrailEffect();
+    private static final ArcTrailEffect instance = new ArcTrailEffect();
 
     private Object readResolve() throws ObjectStreamException {
         return instance;
@@ -94,9 +93,9 @@ class ArcTrailEffect extends OneShotEffect {
         return instance;
     }
 
-    private ArcTrailEffect ( ) {
+    private ArcTrailEffect() {
         super(Outcome.Damage);
-        staticText = "{source} deals 2 damage to target creature or player and 1 damage to another target creature or player";
+        staticText = "{source} deals 2 damage to any target and 1 damage to another target";
     }
 
     @Override
@@ -106,19 +105,19 @@ class ArcTrailEffect extends OneShotEffect {
         boolean twoDamageDone = false;
         int damage = 2;
 
-        for ( Target target : source.getTargets() ) {
+        for (Target target : source.getTargets()) {
             Permanent permanent = game.getPermanent(target.getFirstTarget());
 
-            if ( twoDamageDone ) {
+            if (twoDamageDone) {
                 damage = 1;
             }
 
             if (permanent != null) {
-                applied |= (permanent.damage( damage, source.getSourceId(), game, false, true ) > 0);
+                applied |= (permanent.damage(damage, source.getSourceId(), game, false, true) > 0);
             }
             Player player = game.getPlayer(target.getFirstTarget());
             if (player != null) {
-                applied |= (player.damage( damage, source.getSourceId(), game, false, true ) > 0);
+                applied |= (player.damage(damage, source.getSourceId(), game, false, true) > 0);
             }
 
             twoDamageDone = true;

@@ -86,7 +86,7 @@ class ForceMasteryEffect extends OneShotEffect {
                     Cards cards = new CardsImpl(card);
                     controller.revealCards(sourcePermanent.getIdName(), cards, game);
                     controller.moveCards(card, Zone.HAND, source, game);
-                    controller.gainLife(card.getConvertedManaCost(), game);
+                    controller.gainLife(card.getConvertedManaCost(), game, source);
                 }
                 return true;
             }

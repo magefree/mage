@@ -48,10 +48,10 @@ public class BattlefieldForge extends CardImpl {
     public BattlefieldForge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
         
-        // Tap: Add 1 to your mana pool.
+        // Tap: Add 1.
         this.addAbility(new ColorlessManaAbility());
 
-        // Tap: Add Red or White to your mana pool. Battlefield Forge deals 1 damage to you.
+        // Tap: Add Red or White. Battlefield Forge deals 1 damage to you.
         Ability redManaAbility = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.RedMana(1), new TapSourceCost());
         redManaAbility.addEffect(new DamageControllerEffect(1));
         this.addAbility(redManaAbility);

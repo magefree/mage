@@ -41,7 +41,7 @@ public class LoseHalfLifeTargetEffect extends OneShotEffect {
 
     public LoseHalfLifeTargetEffect() {
         super(Outcome.Damage);
-        staticText = "that player loses half his or her life, rounded up";
+        staticText = "that player loses half their life, rounded up";
     }
 
     public LoseHalfLifeTargetEffect(final LoseHalfLifeTargetEffect effect) {

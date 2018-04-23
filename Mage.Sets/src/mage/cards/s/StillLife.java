@@ -38,6 +38,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 
 /**
@@ -64,7 +65,7 @@ public class StillLife extends CardImpl {
     }
 }
 
-class StillLifeCentaur extends Token {
+class StillLifeCentaur extends TokenImpl {
 
     public StillLifeCentaur() {
         super("Centaur", "4/3 Centaur creature token");
@@ -72,5 +73,12 @@ class StillLifeCentaur extends Token {
         subtype.add(SubType.CENTAUR);
         power = new MageInt(4);
         toughness = new MageInt(3);
+    }
+    public StillLifeCentaur(final StillLifeCentaur token) {
+        super(token);
+    }
+
+    public StillLifeCentaur copy() {
+        return new StillLifeCentaur(this);
     }
 }

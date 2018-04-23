@@ -25,11 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.t;
 
-import java.util.List;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import mage.MageObject;
@@ -49,15 +48,15 @@ import mage.target.TargetPermanent;
  */
 public class Topple extends CardImpl {
 
-    public Topple (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{W}");
+    public Topple(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{W}");
 
         // Exile target creature with the greatest power among creatures on the battlefield.
         this.getSpellAbility().addEffect(new ExileTargetEffect());
         this.getSpellAbility().addTarget(new ToppleTargetCreature());
     }
 
-    public Topple (final Topple card) {
+    public Topple(final Topple card) {
         super(card);
     }
 
@@ -83,7 +82,7 @@ class ToppleTargetCreature extends TargetPermanent {
     public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
         if (super.canTarget(controllerId, id, source, game)) {
             int maxPower = 0;
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
                 if (permanent.getPower().getValue() > maxPower) {
                     maxPower = permanent.getPower().getValue();
                 }

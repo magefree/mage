@@ -54,7 +54,7 @@ public class CentaurGarden extends CardImpl {
     public CentaurGarden(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {tap}: Add {G} to your mana pool. Centaur Garden deals 1 damage to you.
+        // {tap}: Add {G}. Centaur Garden deals 1 damage to you.
         Ability manaAbility = new GreenManaAbility();
         manaAbility.addEffect(new DamageControllerEffect(1));
         this.addAbility(manaAbility);

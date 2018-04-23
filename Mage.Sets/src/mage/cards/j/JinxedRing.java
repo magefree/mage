@@ -43,6 +43,7 @@ import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
@@ -55,21 +56,22 @@ import mage.target.common.TargetOpponent;
  * @author fireshoes
  */
 public class JinxedRing extends CardImpl {
-    
+
     private static final FilterPermanent filter = new FilterPermanent("a nontoken permanent");
-    
+
     static {
         filter.add(Predicates.not(new TokenPredicate()));
     }
 
     public JinxedRing(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // Whenever a nontoken permanent is put into your graveyard from the battlefield, Jinxed Ring deals 1 damage to you.
         this.addAbility(new PutIntoGraveFromBattlefieldAllTriggeredAbility(new DamageControllerEffect(1), false, filter, false, true));
-        
+
         // Sacrifice a creature: Target opponent gains control of Jinxed Ring.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new JinxedRingEffect(), new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new JinxedRingEffect(),
+                new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }

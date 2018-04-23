@@ -46,9 +46,9 @@ public class ArchaeologicalDig extends CardImpl {
     public ArchaeologicalDig(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {tap}: Add {C} to your mana pool.
+        // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
-        // {tap}, Sacrifice Archaeological Dig: Add one mana of any color to your mana pool.
+        // {tap}, Sacrifice Archaeological Dig: Add one mana of any color.
         Ability ability = new AnyColorManaAbility(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

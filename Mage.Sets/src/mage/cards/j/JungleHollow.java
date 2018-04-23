@@ -50,7 +50,7 @@ public class JungleHollow extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
         // When Jungle Hollow enters the battlefield, you gain 1 life.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(1)));
-        // {T}: Add {B} or {G} to your mana pool.
+        // {T}: Add {B} or {G}.
         this.addAbility(new BlackManaAbility());
         this.addAbility(new GreenManaAbility());
         

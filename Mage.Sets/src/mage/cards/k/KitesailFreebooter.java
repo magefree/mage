@@ -75,7 +75,7 @@ public class KitesailFreebooter extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // When Kitesail Freebooter enters the battlefield, target opponent reveals his or her hand. You choose a noncreature, nonland card from it. Exile that card until Kitesail Freebooter leaves the battlefield.
+        // When Kitesail Freebooter enters the battlefield, target opponent reveals their hand. You choose a noncreature, nonland card from it. Exile that card until Kitesail Freebooter leaves the battlefield.
         Ability ability = new EntersBattlefieldTriggeredAbility(new KitesailFreebooterExileEffect());
         ability.addTarget(new TargetOpponent());
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new KitesailFreebooterReturnExiledCardAbility()));
@@ -96,7 +96,7 @@ class KitesailFreebooterExileEffect extends OneShotEffect {
 
     public KitesailFreebooterExileEffect() {
         super(Outcome.Benefit);
-        this.staticText = "target opponent reveals his or her hand. You choose a noncreature, nonland card from it. Exile that card until {this} leaves the battlefield";
+        this.staticText = "target opponent reveals their hand. You choose a noncreature, nonland card from it. Exile that card until {this} leaves the battlefield";
     }
 
     public KitesailFreebooterExileEffect(final KitesailFreebooterExileEffect effect) {

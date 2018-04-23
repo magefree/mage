@@ -68,7 +68,7 @@ public class ThievingSprite extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         
-        // When Thieving Sprite enters the battlefield, target player reveals X cards from his or her hand, where X is the number of Faeries you control.
+        // When Thieving Sprite enters the battlefield, target player reveals X cards from their hand, where X is the number of Faeries you control.
         // You choose one of those cards. That player discards that card.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ThievingSpriteEffect(), false);
         TargetPlayer target = new TargetPlayer();
@@ -91,7 +91,7 @@ class ThievingSpriteEffect extends OneShotEffect {
 
     public ThievingSpriteEffect() {
         super(Outcome.Discard);
-        this.staticText = "target player reveals X cards from his or her hand, where X is the number of Faeries you control. You choose one of those cards. "
+        this.staticText = "target player reveals X cards from their hand, where X is the number of Faeries you control. You choose one of those cards. "
                 + "That player discards that card";
     }
 

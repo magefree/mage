@@ -39,6 +39,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterLandPermanent;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
@@ -78,7 +79,7 @@ public class AwakenTheAncient extends CardImpl {
         return new AwakenTheAncient(this);
     }
 
-    private static class GiantToken extends Token {
+    private static class GiantToken extends TokenImpl {
 
         GiantToken() {
             super("Giant", "7/7 red Giant creature with haste");
@@ -88,6 +89,14 @@ public class AwakenTheAncient extends CardImpl {
             power = new MageInt(7);
             toughness = new MageInt(7);
             this.addAbility(HasteAbility.getInstance());
+        }
+
+        public GiantToken(final GiantToken token) {
+            super(token);
+        }
+
+        public GiantToken copy() {
+            return new GiantToken(this);
         }
     }
 }

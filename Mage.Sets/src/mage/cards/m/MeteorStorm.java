@@ -39,7 +39,7 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.target.common.TargetCardInHand;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -51,10 +51,10 @@ public class MeteorStorm extends CardImpl {
     public MeteorStorm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{R}{G}");
 
-        // {2}{R}{G}, Discard two cards at random: Meteor Storm deals 4 damage to target creature or player.
+        // {2}{R}{G}, Discard two cards at random: Meteor Storm deals 4 damage to any target.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(4), new ManaCostsImpl("{2}{R}{G}"));
         ability.addCost(new DiscardTargetCost(new TargetCardInHand(2, new FilterCard("two cards at random")), true));
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }
 

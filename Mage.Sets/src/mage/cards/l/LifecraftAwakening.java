@@ -42,6 +42,7 @@ import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetArtifactPermanent;
 import mage.target.targetpointer.FixedTarget;
@@ -109,7 +110,7 @@ class LifecraftAwakeningEffect extends OneShotEffect {
     }
 }
 
-class LifecraftAwakeningToken extends Token {
+class LifecraftAwakeningToken extends TokenImpl {
 
     LifecraftAwakeningToken() {
         super("", "0/0 Construct artifact creature");
@@ -119,5 +120,12 @@ class LifecraftAwakeningToken extends Token {
         this.subtype.add(SubType.CONSTRUCT);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
+    }
+    public LifecraftAwakeningToken(final LifecraftAwakeningToken token) {
+        super(token);
+    }
+
+    public LifecraftAwakeningToken copy() {
+        return new LifecraftAwakeningToken(this);
     }
 }

@@ -59,7 +59,7 @@ public class StormTheVault extends CardImpl {
         this.transformable = true;
         this.secondSideCardClazz = VaultOfCatlacan.class;
 
-        // Whenever one or more creatures you control deal combat damage to a player, create a colorless Treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color to your mana pool."
+        // Whenever one or more creatures you control deal combat damage to a player, create a colorless Treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color."
         this.addAbility(new ControlledCreaturesDealCombatDamagePlayerTriggeredAbility(new CreateTokenEffect(new TreasureToken())));
 
         // At the beginning of your end step, if you control five or more artifacts, transform Storm the Vault.

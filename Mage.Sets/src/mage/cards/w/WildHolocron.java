@@ -57,7 +57,7 @@ public class WildHolocron extends CardImpl {
         // {T}: Put a charge counter on Wild Holocron.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance(1)), new TapSourceCost()));
 
-        // {T}, Remove a charge counter from Wild Holocron: Add {R}, {G} or {W} to your mana pool.
+        // {T}, Remove a charge counter from Wild Holocron: Add {R}, {G} or {W}.
         Cost cost = new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(1));
         Ability ability = new RedManaAbility();
         ability.addCost(cost);
@@ -71,7 +71,7 @@ public class WildHolocron extends CardImpl {
         ability.addCost(cost);
         this.addAbility(ability);
 
-        // {T}, Remove two charge counters from Wild Holocron: Add RG or GW to your mana pool.
+        // {T}, Remove two charge counters from Wild Holocron: Add RG or GW.
         cost = new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(2));
 
         ability = new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(1, 1, 0, 0, 0, 0, 0, 0), new TapSourceCost());

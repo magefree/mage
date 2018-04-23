@@ -35,7 +35,7 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-public class PlantToken extends Token {
+public class PlantToken extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 
@@ -52,5 +52,13 @@ public class PlantToken extends Token {
         toughness = new MageInt(1);
 
         availableImageSetCodes = tokenImageSets;
+    }
+
+    public PlantToken(final PlantToken token) {
+        super(token);
+    }
+
+    public PlantToken copy() {
+        return new PlantToken(this);
     }
 }

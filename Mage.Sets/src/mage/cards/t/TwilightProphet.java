@@ -119,7 +119,7 @@ class TwilightProphetEffect extends OneShotEffect {
                 int amount = card.getConvertedManaCost();
                 if (amount > 0) {
                     new LoseLifeOpponentsEffect(amount).apply(game, source);
-                    controller.gainLife(amount, game);
+                    controller.gainLife(amount, game, source);
                 }
             }
             return true;

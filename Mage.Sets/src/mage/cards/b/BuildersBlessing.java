@@ -47,7 +47,7 @@ public class BuildersBlessing extends CardImpl {
 
 
         // Untapped creatures you control get +0/+2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(0, 2, Duration.WhileOnBattlefield, new FilterUntappedCreature())));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(0, 2, Duration.WhileOnBattlefield, new FilterUntappedCreature("untapped creatures"))));
     }
 
     public BuildersBlessing(final BuildersBlessing card) {

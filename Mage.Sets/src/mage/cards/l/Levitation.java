@@ -38,6 +38,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
@@ -46,16 +47,10 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  */
 public class Levitation extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("creatures ");
-
-        static {
-            filter.add(new CardTypePredicate(CardType.CREATURE));
-        }
-
     public Levitation (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}{U}");
 
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURES, false)));
     }
 
     public Levitation (final Levitation card) {

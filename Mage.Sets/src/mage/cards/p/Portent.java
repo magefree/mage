@@ -56,7 +56,7 @@ public class Portent extends CardImpl {
     public Portent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{U}");
 
-        // Look at the top three cards of target player's library, then put them back in any order. You may have that player shuffle his or her library.
+        // Look at the top three cards of target player's library, then put them back in any order. You may have that player shuffle their library.
         this.getSpellAbility().addEffect(new PortentEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
         // Draw a card at the beginning of the next turn's upkeep.
@@ -77,7 +77,7 @@ class  PortentEffect extends OneShotEffect {
 
     public  PortentEffect() {
         super(Outcome.DrawCard);
-        this.staticText = "look at the top three cards of target player's library, then put them back in any order. You may have that player shuffle his or her library.";
+        this.staticText = "look at the top three cards of target player's library, then put them back in any order. You may have that player shuffle their library.";
     }
 
     public  PortentEffect(final  PortentEffect effect) {
@@ -121,7 +121,7 @@ class  PortentEffect extends OneShotEffect {
             Card card = cards.get(cards.iterator().next(), game);
             card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
         }
-        if (you.chooseUse(Outcome.Neutral, "You may have that player shuffle his or her library", source, game)){
+        if (you.chooseUse(Outcome.Neutral, "You may have that player shuffle their library", source, game)){
             player.shuffleLibrary(source, game);
         }
         return true;

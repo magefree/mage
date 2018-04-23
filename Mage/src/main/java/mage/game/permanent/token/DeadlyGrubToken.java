@@ -36,7 +36,7 @@ import mage.abilities.keyword.ShroudAbility;
  *
  * @author spjspj
  */
-public class DeadlyGrubToken extends Token {
+public class DeadlyGrubToken extends TokenImpl {
 
     public DeadlyGrubToken() {
         super("Insect", "6/1 green Insect creature token with shroud");
@@ -46,5 +46,13 @@ public class DeadlyGrubToken extends Token {
         power = new MageInt(6);
         toughness = new MageInt(1);
         this.addAbility(ShroudAbility.getInstance());
+    }
+
+    public DeadlyGrubToken(final DeadlyGrubToken token) {
+        super(token);
+    }
+
+    public DeadlyGrubToken copy() {
+        return new DeadlyGrubToken(this);
     }
 }

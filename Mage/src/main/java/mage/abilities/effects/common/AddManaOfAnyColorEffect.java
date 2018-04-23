@@ -52,7 +52,7 @@ public class AddManaOfAnyColorEffect extends BasicManaEffect {
                 .append(CardUtil.numberToText(amount))
                 .append(" mana of any ")
                 .append(amount > 1 ? "one " : "")
-                .append("color to your mana pool").toString();
+                .append("color").toString();
     }
 
     public AddManaOfAnyColorEffect(final AddManaOfAnyColorEffect effect) {
@@ -69,7 +69,7 @@ public class AddManaOfAnyColorEffect extends BasicManaEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            String mes = String.format("Select color of %d mana to add it to your mana pool", this.amount);
+            String mes = String.format("Select color of %d mana to add it", this.amount);
             ChoiceColor choice = new ChoiceColor(true, mes, game.getObject(source.getSourceId()));
             if (controller.choose(outcome, choice, game)) {
                 if (choice.getColor() == null) {

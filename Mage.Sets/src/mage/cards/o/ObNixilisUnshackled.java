@@ -71,7 +71,7 @@ public class ObNixilisUnshackled extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         
-        // Whenever an opponent searches his or her library, that player sacrifices a creature and loses 10 life.
+        // Whenever an opponent searches their library, that player sacrifices a creature and loses 10 life.
         this.addAbility(new ObNixilisUnshackledTriggeredAbility());
         
         // Whenever another creature dies, put at +1/+1 counter on Ob Nixilis, Unshackled.
@@ -120,7 +120,7 @@ class ObNixilisUnshackledTriggeredAbility extends TriggeredAbilityImpl {
     
     @Override
     public String getRule() {
-        return "Whenever an opponent searches his or her library, that player sacrifices a creature and loses 10 life.";
+        return "Whenever an opponent searches their library, that player sacrifices a creature and loses 10 life.";
     }
 }
 

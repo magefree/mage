@@ -37,7 +37,7 @@ import mage.abilities.keyword.InfectAbility;
  *
  * @author nantuko
  */
-public class InsectInfectToken extends Token {
+public class InsectInfectToken extends TokenImpl {
 
     public InsectInfectToken() {
         super("Insect", "1/1 green Insect creature token with infect");
@@ -48,5 +48,13 @@ public class InsectInfectToken extends Token {
         toughness = new MageInt(1);
         addAbility(InfectAbility.getInstance());
         setOriginalExpansionSetCode("SOM");
+    }
+
+    public InsectInfectToken(final InsectInfectToken token) {
+        super(token);
+    }
+
+    public InsectInfectToken copy() {
+        return new InsectInfectToken(this);
     }
 }

@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class HoundToken extends Token {
+public class HoundToken extends TokenImpl {
 
     public HoundToken() {
         super("Hound", "1/1 green Hound creature token");
@@ -45,5 +45,13 @@ public class HoundToken extends Token {
         color.setGreen(true);
         power = new MageInt(1);
         toughness = new MageInt(1);
+    }
+
+    public HoundToken(final HoundToken token) {
+        super(token);
+    }
+
+    public HoundToken copy() {
+        return new HoundToken(this);
     }
 }

@@ -308,7 +308,6 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="jUserName">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value=""/>
                     <Property name="name" type="java.lang.String" value="Username" noResource="true"/>
                   </Properties>
                 </Component>

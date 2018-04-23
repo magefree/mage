@@ -65,7 +65,7 @@ public class ElvishGuidance extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
-        // Whenever enchanted land is tapped for mana, its controller adds {G} to his or her mana pool for each Elf on the battlefield.
+        // Whenever enchanted land is tapped for mana, its controller adds {G} to their mana pool for each Elf on the battlefield.
         this.addAbility(new ElvishGuidanceTriggeredAbility());
     }
 
@@ -107,6 +107,6 @@ class ElvishGuidanceTriggeredAbility extends TriggeredManaAbility {
 
     @Override
     public String getRule() {
-        return "Whenever enchanted land is tapped for mana, its controller adds {G} to his or her mana pool for each Elf on the battlefield.";
+        return "Whenever enchanted land is tapped for mana, its controller adds {G} to their mana pool for each Elf on the battlefield.";
     }
 }

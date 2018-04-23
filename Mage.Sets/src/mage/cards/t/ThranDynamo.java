@@ -45,7 +45,7 @@ public class ThranDynamo extends CardImpl {
     public ThranDynamo(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
-        // {tap}: Add {C}{C}{C} to your mana pool.
+        // {tap}: Add {C}{C}{C}.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(3), new TapSourceCost()));
         
     }

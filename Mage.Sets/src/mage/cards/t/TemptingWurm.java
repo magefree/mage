@@ -62,7 +62,7 @@ public class TemptingWurm extends CardImpl {
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 
-        // When Tempting Wurm enters the battlefield, each opponent may put any number of artifact, creature, enchantment, and/or land cards from his or her hand onto the battlefield.
+        // When Tempting Wurm enters the battlefield, each opponent may put any number of artifact, creature, enchantment, and/or land cards from their hand onto the battlefield.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new TemptingWurmEffect()));
     }
 
@@ -91,7 +91,7 @@ class TemptingWurmEffect extends OneShotEffect {
     
     public TemptingWurmEffect() {
         super(Outcome.Detriment);
-        this.staticText = "each opponent may put any number of artifact, creature, enchantment, and/or land cards from his or her hand onto the battlefield.";
+        this.staticText = "each opponent may put any number of artifact, creature, enchantment, and/or land cards from their hand onto the battlefield.";
     }
     
     @Override

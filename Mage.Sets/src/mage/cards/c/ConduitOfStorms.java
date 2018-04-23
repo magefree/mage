@@ -62,11 +62,11 @@ public class ConduitOfStorms extends CardImpl {
         this.transformable = true;
         this.secondSideCardClazz = ConduitOfEmrakul.class;
 
-        // Whenever Conduit of Storms attacks, add {R} to your mana pool at the beginning of your next main phase this turn.
+        // Whenever Conduit of Storms attacks, add {R} at the beginning of your next main phase this turn.
         Effect effect = new CreateDelayedTriggeredAbilityEffect(
                 new AtTheBeginOfMainPhaseDelayedTriggeredAbility(
                         new AddManaToManaPoolSourceControllerEffect(Mana.RedMana(1)), false, TargetController.YOU, AtTheBeginOfMainPhaseDelayedTriggeredAbility.PhaseSelection.NEXT_MAIN_THIS_TURN));
-        effect.setText("add {R} to your mana pool at the beginning of your next main phase this turn");
+        effect.setText("add {R} at the beginning of your next main phase this turn");
         this.addAbility(new AttacksTriggeredAbility(effect, false));
         // {3}{R}{R}: Transform Conduit of Storms.
         this.addAbility(new TransformAbility());

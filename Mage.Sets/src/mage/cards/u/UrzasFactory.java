@@ -52,7 +52,7 @@ public class UrzasFactory extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
         this.subtype.add(SubType.URZAS);
 
-        // {tap}: Add {C} to your mana pool.
+        // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         // {7}, {tap}: Create a 2/2 colorless Assembly-Worker artifact creature token.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new AssemblyWorkerToken()), new GenericManaCost(7));

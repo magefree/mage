@@ -50,7 +50,7 @@ public class PrincessLucrezia extends CardImpl {
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
 
-        // {tap}: Add {U} to your mana pool.
+        // {tap}: Add {U}.
         this.addAbility(new BlueManaAbility());
     }
 

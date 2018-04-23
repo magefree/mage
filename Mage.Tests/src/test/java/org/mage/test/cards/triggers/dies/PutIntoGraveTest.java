@@ -48,7 +48,7 @@ public class PutIntoGraveTest extends CardTestPlayerBase {
         // Destroy target artifact or enchantment. Its controller gains 4 life.
         addCard(Zone.HAND, playerA, "Nature's Claim", 1);
 
-        // {1}, {T}, Sacrifice Chromatic Star: Add one mana of any color to your mana pool.
+        // {1}, {T}, Sacrifice Chromatic Star: Add one mana of any color.
         // When Chromatic Star is put into a graveyard from the battlefield, draw a card.
         addCard(Zone.BATTLEFIELD, playerA, "Chromatic Star", 1);
 

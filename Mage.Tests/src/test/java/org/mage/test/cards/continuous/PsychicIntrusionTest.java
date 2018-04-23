@@ -46,7 +46,7 @@ public class PsychicIntrusionTest extends CardTestPlayerBase {
     public void testCastFromExile() {
         // Psychic Intrusion  {3}{U}{B}
         // Sorcery
-        // Target opponent reveals his or her hand. You choose a nonland card from that player's 
+        // Target opponent reveals their hand. You choose a nonland card from that player's
         // graveyard or hand and exile it. You may cast that card for as long as it remains exiled,
         // and you may spend mana as though it were mana of any color to cast that spell.
         addCard(Zone.HAND, playerA, "Psychic Intrusion", 1);        

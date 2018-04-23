@@ -86,7 +86,7 @@ class PlanarVoidTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.getToZone() == Zone.GRAVEYARD) {
+        if (zEvent.getToZone() == Zone.GRAVEYARD && !event.getTargetId().equals(getSourceId())) {
             Card card = game.getCard(event.getTargetId());
             if (card != null) {
                 this.getEffects().get(0).setTargetPointer(new FixedTarget(card.getId()));

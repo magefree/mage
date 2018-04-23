@@ -48,6 +48,7 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 
 /**
@@ -107,7 +108,7 @@ public class WardenOfTheFirstTree extends CardImpl {
     }
 }
 
-class WardenOfTheFirstTree1 extends Token {
+class WardenOfTheFirstTree1 extends TokenImpl {
 
     public WardenOfTheFirstTree1() {
         super("Warden of the First Tree", "Human Warrior with base power and toughness 3/3");
@@ -118,9 +119,16 @@ class WardenOfTheFirstTree1 extends Token {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
     }
+    public WardenOfTheFirstTree1(final WardenOfTheFirstTree1 token) {
+        super(token);
+    }
+
+    public WardenOfTheFirstTree1 copy() {
+        return new WardenOfTheFirstTree1(this);
+    }
 }
 
-class WardenOfTheFirstTree2 extends Token {
+class WardenOfTheFirstTree2 extends TokenImpl {
 
     public WardenOfTheFirstTree2() {
         super("Warden of the First Tree", "Human Spirit Warrior with trample and lifelink");
@@ -134,5 +142,12 @@ class WardenOfTheFirstTree2 extends Token {
 
         this.addAbility(TrampleAbility.getInstance());
         this.addAbility(LifelinkAbility.getInstance());
+    }
+    public WardenOfTheFirstTree2(final WardenOfTheFirstTree2 token) {
+        super(token);
+    }
+
+    public WardenOfTheFirstTree2 copy() {
+        return new WardenOfTheFirstTree2(this);
     }
 }

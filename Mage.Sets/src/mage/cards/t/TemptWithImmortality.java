@@ -54,7 +54,7 @@ public class TemptWithImmortality extends CardImpl {
     public TemptWithImmortality(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B}");
 
-        // Tempting offer - Return a creature card from your graveyard to the battlefield. Each opponent may return a creature card from his or her graveyard to the battlefield. For each player who does, return a creature card from your graveyard to the battlefield.
+        // Tempting offer - Return a creature card from your graveyard to the battlefield. Each opponent may return a creature card from their graveyard to the battlefield. For each player who does, return a creature card from your graveyard to the battlefield.
         this.getSpellAbility().addEffect(new TemptWithImmortalityEffect());
     }
 
@@ -72,7 +72,7 @@ class TemptWithImmortalityEffect extends OneShotEffect {
 
     public TemptWithImmortalityEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "<i>Tempting offer</i> - Return a creature card from your graveyard to the battlefield. Each opponent may return a creature card from his or her graveyard to the battlefield. For each player who does, return a creature card from your graveyard to the battlefield";
+        this.staticText = "<i>Tempting offer</i> - Return a creature card from your graveyard to the battlefield. Each opponent may return a creature card from their graveyard to the battlefield. For each player who does, return a creature card from your graveyard to the battlefield";
 
     }
 

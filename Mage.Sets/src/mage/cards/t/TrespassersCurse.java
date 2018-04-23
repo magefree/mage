@@ -144,7 +144,7 @@ class TrespassersCurseEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controllerOfCreature != null) {
             controllerOfCreature.loseLife(1, game, false);
-            controller.gainLife(1, game);
+            controller.gainLife(1, game, source);
             return true;
         }
         return false;

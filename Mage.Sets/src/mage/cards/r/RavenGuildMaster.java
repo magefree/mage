@@ -52,7 +52,7 @@ public class RavenGuildMaster extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // Whenever Raven Guild Master deals combat damage to a player, that player exiles the top ten cards of his or her library.
+        // Whenever Raven Guild Master deals combat damage to a player, that player exiles the top ten cards of their library.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new ExileCardsFromTopOfLibraryTargetEffect(10, "that player"), false, true));
 
         // Morph {2}{U}{U}

@@ -50,7 +50,7 @@ public class TranquilCove extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
         // When Tranquil Cove enters the battlefield, you gain 1 life.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(1)));
-        // {T}: Add {W} or {U} to your mana pool.
+        // {T}: Add {W} or {U}.
         this.addAbility(new WhiteManaAbility());
         this.addAbility(new BlueManaAbility());                
         

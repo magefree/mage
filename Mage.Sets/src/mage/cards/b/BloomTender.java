@@ -56,7 +56,7 @@ public class BloomTender extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // {T}: For each color among permanents you control, add one mana of that color to your mana pool.
+        // {T}: For each color among permanents you control, add one mana of that color.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new BloomTenderEffect(), new TapSourceCost()));
 
     }
@@ -75,7 +75,7 @@ class BloomTenderEffect extends ManaEffect {
 
     public BloomTenderEffect() {
         super();
-        staticText = "For each color among permanents you control, add one mana of that color to your mana pool";
+        staticText = "For each color among permanents you control, add one mana of that color";
     }
 
     public BloomTenderEffect(final BloomTenderEffect effect) {

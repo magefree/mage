@@ -30,7 +30,6 @@ package mage.abilities.keyword;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.counters.CounterType;

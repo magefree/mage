@@ -54,11 +54,11 @@ public class RadhaHeirToKeld extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Whenever Radha, Heir to Keld attacks, you may add {R}{R} to your mana pool.
+        // Whenever Radha, Heir to Keld attacks, you may add {R}{R}.
         Ability ability = new AttacksTriggeredAbility(new BasicManaEffect(Mana.RedMana(2)), true);
         this.addAbility(ability);
         
-        // {tap}: Add {G} to your mana pool.
+        // {tap}: Add {G}.
         this.addAbility(new GreenManaAbility());
     }
 

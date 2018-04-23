@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class MysticGenesisOozeToken extends Token {
+public class MysticGenesisOozeToken extends TokenImpl {
 
     public MysticGenesisOozeToken() {
         this(0);
@@ -48,5 +48,13 @@ public class MysticGenesisOozeToken extends Token {
         power = new MageInt(xValue);
         toughness = new MageInt(xValue);
         setOriginalExpansionSetCode("RTR");
+    }
+
+    public MysticGenesisOozeToken(final MysticGenesisOozeToken token) {
+        super(token);
+    }
+
+    public MysticGenesisOozeToken copy() {
+        return new MysticGenesisOozeToken(this);
     }
 }

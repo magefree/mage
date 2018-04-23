@@ -49,7 +49,7 @@ public class TidehollowScullerTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
         // Tidehollow Sculler {W}{B}
-        // When Tidehollow Sculler enters the battlefield, target opponent reveals his or her hand and you choose a nonland card from it. Exile that card.
+        // When Tidehollow Sculler enters the battlefield, target opponent reveals their hand and you choose a nonland card from it. Exile that card.
         // When Tidehollow Sculler leaves the battlefield, return the exiled card to its owner's hand.
         addCard(Zone.HAND, playerA, "Tidehollow Sculler", 1);
         // Boomerang {U}{U}

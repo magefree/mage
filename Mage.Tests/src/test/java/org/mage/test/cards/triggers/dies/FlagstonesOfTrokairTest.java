@@ -49,12 +49,12 @@ public class FlagstonesOfTrokairTest extends CardTestPlayerBase {
         // When Spreading Seas enters the battlefield, draw a card.
         // Enchanted land is an Island.
         addCard(Zone.HAND, playerA, "Spreading Seas", 1); // Enchantment Aura - {1}{U}
-        // {tap}: Add {W} to your mana pool.
+        // {tap}: Add {W}.
         // When Flagstones of Trokair is put into a graveyard from the battlefield, you may search your library for a Plains card and put it onto the battlefield tapped. If you do, shuffle your library.
         addCard(Zone.BATTLEFIELD, playerA, "Flagstones of Trokair", 1);
         addCard(Zone.LIBRARY, playerA, "Plains", 5);
-        // {T}: Add {C} to your mana pool.
-        // {T}, Sacrifice Ghost Quarter: Destroy target land. Its controller may search his or her library for a basic land card, put it onto the battlefield, then shuffle his or her library.
+        // {T}: Add {C}.
+        // {T}, Sacrifice Ghost Quarter: Destroy target land. Its controller may search their library for a basic land card, put it onto the battlefield, then shuffle their library.
         addCard(Zone.BATTLEFIELD, playerB, "Ghost Quarter", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Spreading Seas", "Flagstones of Trokair");

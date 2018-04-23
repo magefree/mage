@@ -52,7 +52,7 @@ public class VaultOfTheArchangel extends CardImpl {
     public VaultOfTheArchangel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {tap}: Add {C} to your mana pool.
+        // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         // {2}{W}{B}, {tap}: Creatures you control gain deathtouch and lifelink until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,

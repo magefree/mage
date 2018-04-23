@@ -61,7 +61,7 @@ public class HideSeek extends SplitCard {
         getLeftHalfCard().getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
 
         // Seek
-        // Search target opponent's library for a card and exile it. You gain life equal to its converted mana cost. Then that player shuffles his or her library..
+        // Search target opponent's library for a card and exile it. You gain life equal to its converted mana cost. Then that player shuffles their library..
         getRightHalfCard().getSpellAbility().addEffect(new SeekEffect());
         getRightHalfCard().getSpellAbility().addTarget(new TargetOpponent());
 
@@ -81,7 +81,7 @@ class SeekEffect extends OneShotEffect {
 
     public SeekEffect() {
         super(Outcome.GainLife);
-        staticText = "Search target opponent's library for a card and exile it. You gain life equal to its converted mana cost. Then that player shuffles his or her library";
+        staticText = "Search target opponent's library for a card and exile it. You gain life equal to its converted mana cost. Then that player shuffles their library";
     }
 
     public SeekEffect(final SeekEffect effect) {
@@ -107,7 +107,7 @@ class SeekEffect extends OneShotEffect {
                         player.moveCardToExileWithInfo(card, null, null, source.getSourceId(), game, Zone.LIBRARY, true);
                         int cmc = card.getConvertedManaCost();
                         if (cmc > 0) {
-                            player.gainLife(cmc, game);
+                            player.gainLife(cmc, game, source);
                         }
                     }
                 }

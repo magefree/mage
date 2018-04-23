@@ -27,6 +27,7 @@
  */
 package mage.cards.t;
 
+import java.util.Locale;
 import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -93,14 +94,14 @@ class TabletOfTheGuildsEntersBattlefieldEffect extends OneShotEffect {
                 return false;
             }
             game.getState().setValue(permanent.getId() + "_color1", colorChoice.getColor().toString());
-            colors = colorChoice.getChoice().toLowerCase() + " and ";
+            colors = colorChoice.getChoice().toLowerCase(Locale.ENGLISH) + " and ";
             colorChoice.getChoices().remove(colorChoice.getChoice());
             colorChoice.setMessage("Choose the second color");
             if (!player.choose(Outcome.GainLife, colorChoice, game) && player.canRespond()) {
                 return false;
             }
             game.getState().setValue(permanent.getId() + "_color2", colorChoice.getColor().toString());
-            colors = colors + colorChoice.getChoice().toLowerCase();
+            colors = colors + colorChoice.getChoice().toLowerCase(Locale.ENGLISH);
             game.informPlayers(permanent.getName() + ": " + player.getLogName() + " has chosen " + colors);
             return true;
         }
@@ -141,7 +142,7 @@ class TabletOfTheGuildsGainLifeEffect extends OneShotEffect {
                     ++amount;
                 }
                 if (amount > 0) {
-                    you.gainLife(amount, game);
+                    you.gainLife(amount, game, source);
                     return true;
                 }
             }

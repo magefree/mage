@@ -90,7 +90,7 @@ class CrumbleEffect extends OneShotEffect {
             int cost = permanent.getConvertedManaCost();
             Player player = game.getPlayer(permanent.getControllerId());
             if (player != null) {
-                player.gainLife(cost, game);
+                player.gainLife(cost, game, source);
             }
             return true;
         }

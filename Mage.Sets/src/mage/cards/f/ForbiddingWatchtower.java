@@ -40,6 +40,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 
 /**
@@ -54,7 +55,7 @@ public class ForbiddingWatchtower extends CardImpl {
         // Forbidding Watchtower enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
 
-        // {T}: Add {W} to your mana pool.
+        // {T}: Add {W}.
         this.addAbility(new WhiteManaAbility());
 
         // {1}{W}: Forbidding Watchtower becomes a 1/5 white Soldier creature until end of turn. It's still a land.
@@ -71,7 +72,7 @@ public class ForbiddingWatchtower extends CardImpl {
     }
 }
 
-class ForbiddingWatchtowerToken extends Token {
+class ForbiddingWatchtowerToken extends TokenImpl {
     ForbiddingWatchtowerToken() {
         super("Soldier", "1/5 white Soldier creature");
         cardType.add(CardType.CREATURE);
@@ -80,5 +81,12 @@ class ForbiddingWatchtowerToken extends Token {
         
         power = new MageInt(1);
         toughness = new MageInt(5);
+    }
+    public ForbiddingWatchtowerToken(final ForbiddingWatchtowerToken token) {
+        super(token);
+    }
+
+    public ForbiddingWatchtowerToken copy() {
+        return new ForbiddingWatchtowerToken(this);
     }
 }

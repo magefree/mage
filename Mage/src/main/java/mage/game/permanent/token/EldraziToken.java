@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class EldraziToken extends Token {
+public class EldraziToken extends TokenImpl {
 
     public EldraziToken() {
         super("Eldrazi", "10/10 colorless Eldrazi creature token");
@@ -43,5 +43,13 @@ public class EldraziToken extends Token {
         subtype.add(SubType.ELDRAZI);
         power = new MageInt(10);
         toughness = new MageInt(10);
+    }
+
+    public EldraziToken(final EldraziToken token) {
+        super(token);
+    }
+
+    public EldraziToken copy() {
+        return new EldraziToken(this);
     }
 }

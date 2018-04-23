@@ -48,7 +48,7 @@ import mage.filter.common.FilterLandCard;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.target.common.TargetCardInHand;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -59,11 +59,11 @@ public class LightningStorm extends CardImpl {
     public LightningStorm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R}{R}");
 
-        // Lightning Storm deals X damage to target creature or player, where X is 3 plus the number of charge counters on it.
+        // Lightning Storm deals X damage to any target, where X is 3 plus the number of charge counters on it.
         Effect effect = new DamageTargetEffect(new LightningStormCountCondition(CounterType.CHARGE));
-        effect.setText("{this} deals X damage to target creature or player, where X is 3 plus the number of charge counters on it");
+        effect.setText("{this} deals X damage to any target, where X is 3 plus the number of charge counters on it");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
         // Discard a land card: Put two charge counters on Lightning Storm. You may choose a new target for it. Any player may activate this ability but only if Lightning Storm is on the stack.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.STACK,
                 new LightningStormAddCounterEffect(),

@@ -57,7 +57,7 @@ public class OutlawHolocron extends CardImpl {
         // {T}: Put a charge counter on Outlaw Holocron.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance(1)), new TapSourceCost()));
 
-        // {T}, Remove a charge counter from Outlaw Holocron: Add {B}, {R} or {G} to your mana pool.
+        // {T}, Remove a charge counter from Outlaw Holocron: Add {B}, {R} or {G}.
         Cost cost = new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(1));
         Ability ability = new BlackManaAbility();
         ability.addCost(cost);
@@ -71,7 +71,7 @@ public class OutlawHolocron extends CardImpl {
         ability.addCost(cost);
         this.addAbility(ability);
 
-        // {T}, Remove two charge counters from Outlaw Holocron: Add BR or RG to your mana pool.cost = new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(2));
+        // {T}, Remove two charge counters from Outlaw Holocron: Add BR or RG.cost = new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(2));
         cost = new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(2));
 
         ability = new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(1, 0, 0, 0, 1, 0, 0, 0), new TapSourceCost());

@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class TitanForgeGolemToken extends Token {
+public class TitanForgeGolemToken extends TokenImpl {
 
     public TitanForgeGolemToken() {
         super("Golem", "9/9 colorless Golem artifact creature token");
@@ -44,5 +44,13 @@ public class TitanForgeGolemToken extends Token {
         subtype.add(SubType.GOLEM);
         power = new MageInt(9);
         toughness = new MageInt(9);
+    }
+
+    public TitanForgeGolemToken(final TitanForgeGolemToken token) {
+        super(token);
+    }
+
+    public TitanForgeGolemToken copy() {
+        return new TitanForgeGolemToken(this);
     }
 }

@@ -40,7 +40,9 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.target.TargetPlayer;
+import mage.constants.SetTargetPointer;
+import mage.filter.StaticFilters;
+import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
  *
@@ -60,11 +62,12 @@ public class AxelrodGunnarson extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Whenever a creature dealt damage by Axelrod Gunnarson this turn dies, you gain 1 life and Axelrod deals 1 damage to target player.
-        Ability ability = new DealtDamageAndDiedTriggeredAbility(new GainLifeEffect(1), false);
+        Ability ability = new DealtDamageAndDiedTriggeredAbility(new GainLifeEffect(1), false, StaticFilters.FILTER_PERMANENT_CREATURE, SetTargetPointer.NONE);
         Effect effect = new DamageTargetEffect(1);
         effect.setText("and {this} deals 1 damage to target player");
         ability.addEffect(effect);
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayerOrPlaneswalker());
+        this.addAbility(ability);
     }
 
     public AxelrodGunnarson(final AxelrodGunnarson card) {

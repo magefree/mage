@@ -71,7 +71,7 @@ class ApproachOfTheSecondSunEffect extends OneShotEffect {
                 controller.won(game);
             } else {
                 // Gain 7 life and put this back into library.
-                controller.gainLife(7, game);
+                controller.gainLife(7, game, source);
 
                 // Put this into the library as the 7th from the top
                 if (spell.isCopiedSpell()) {
@@ -98,9 +98,9 @@ class ApproachOfTheSecondSunEffect extends OneShotEffect {
 
                     // Inform the players
                     if (isOnBottom) {
-                        game.informPlayers(controller.getLogName() + " puts " + spell.getLogName() + " on the bottom of his or her library.");
+                        game.informPlayers(controller.getLogName() + " puts " + spell.getLogName() + " on the bottom of their library.");
                     } else {
-                        game.informPlayers(controller.getLogName() + " puts " + spell.getLogName() + " into his or her library 7th from the top.");
+                        game.informPlayers(controller.getLogName() + " puts " + spell.getLogName() + " into their library 7th from the top.");
                     }
                 }
             }

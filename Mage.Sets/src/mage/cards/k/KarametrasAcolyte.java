@@ -52,9 +52,9 @@ public class KarametrasAcolyte extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);
 
-        // {T}: Add an amount of {G} to your mana pool equal to your devotion to green.
+        // {T}: Add an amount of {G} equal to your devotion to green.
         this.addAbility(new DynamicManaAbility(Mana.GreenMana(1), new DevotionCount(ColoredManaSymbol.G),
-                "Add an amount of {G} to your mana pool equal to your devotion to green. (Each {G} in the mana costs of permanents you control counts towards your devotion to green.)"));
+                "Add an amount of {G} equal to your devotion to green. (Each {G} in the mana costs of permanents you control counts towards your devotion to green.)"));
     }
 
     public KarametrasAcolyte(final KarametrasAcolyte card) {

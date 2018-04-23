@@ -46,7 +46,7 @@ import mage.constants.SubType;
 public class CitanulWoodreaders extends CardImpl {
 
     public CitanulWoodreaders(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.DRUID);
 
@@ -55,10 +55,13 @@ public class CitanulWoodreaders extends CardImpl {
 
         // Kicker {2}{G}
         this.addAbility(new KickerAbility("{2}{G}"));
+
         // When Citanul Woodreaders enters the battlefield, if it was kicked, draw two cards.
         this.addAbility(new ConditionalTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(2)),
-                KickedCondition.instance,"When Citanul Woodreaders enters the battlefield, if it was kicked, draw two cards."));
+                KickedCondition.instance,
+                "When {this} enters the battlefield, if it was kicked, draw two cards."
+        ));
     }
 
     public CitanulWoodreaders(final CitanulWoodreaders card) {

@@ -95,6 +95,6 @@ class CosisTricksterTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever an opponent shuffles his or her library, you may put a +1/+1 counter on {this}.";
+        return "Whenever an opponent shuffles their library, you may put a +1/+1 counter on {this}.";
     }
 }

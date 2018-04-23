@@ -785,7 +785,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 if (source != null && sourceAbilities != null) {
                     if (sourceAbilities.containsKey(LifelinkAbility.getInstance().getId())) {
                         Player player = game.getPlayer(sourceControllerId);
-                        player.gainLife(damageDone, game);
+                        player.gainLife(damageDone, game, sourceId);
                     }
                     if (sourceAbilities.containsKey(DeathtouchAbility.getInstance().getId())) {
                         deathtouched = true;
@@ -935,16 +935,33 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     public boolean canBeTargetedBy(MageObject source, UUID sourceControllerId, Game game) {
         if (source != null) {
             if (abilities.containsKey(ShroudAbility.getInstance().getId())) {
-                if (!game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.SHROUD, sourceControllerId, game)) {
+                if (null == game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.SHROUD, sourceControllerId, game)) {
                     return false;
                 }
             }
             if (abilities.containsKey(HexproofAbility.getInstance().getId())) {
                 if (game.getPlayer(this.getControllerId()).hasOpponent(sourceControllerId, game)
-                        && !game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.HEXPROOF, sourceControllerId, game)) {
+                        && null == game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.HEXPROOF, sourceControllerId, game)) {
                     return false;
                 }
             }
+
+            if (abilities.containsKey(HexproofFromBlackAbility.getInstance().getId())) {
+                if (game.getPlayer(this.getControllerId()).hasOpponent(sourceControllerId, game)
+                        && null == game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.HEXPROOF, sourceControllerId, game)
+                        && source.getColor(game).isBlack()) {
+                    return false;
+                }
+            }
+
+            if (abilities.containsKey(HexproofFromWhiteAbility.getInstance().getId())) {
+                if (game.getPlayer(this.getControllerId()).hasOpponent(sourceControllerId, game)
+                        && null == game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.HEXPROOF, sourceControllerId, game)
+                        && source.getColor(game).isWhite()) {
+                    return false;
+                }
+            }
+
             if (hasProtectionFrom(source, game)) {
                 return false;
             }
@@ -1078,7 +1095,8 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public boolean canAttackInPrinciple(UUID defenderId, Game game) {
-        if (hasSummoningSickness() && !game.getContinuousEffects().asThough(this.objectId, AsThoughEffectType.ATTACK_AS_HASTE, this.getControllerId(), game)) {
+        if (hasSummoningSickness()
+                && null == game.getContinuousEffects().asThough(this.objectId, AsThoughEffectType.ATTACK_AS_HASTE, this.getControllerId(), game)) {
             return false;
         }
         //20101001 - 508.1c
@@ -1098,7 +1116,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         }
 
         return !abilities.containsKey(DefenderAbility.getInstance().getId())
-                || game.getContinuousEffects().asThough(this.objectId, AsThoughEffectType.ATTACK, this.getControllerId(), game);
+                || null != game.getContinuousEffects().asThough(this.objectId, AsThoughEffectType.ATTACK, this.getControllerId(), game);
     }
 
     private boolean canAttackCheckRestrictionEffects(UUID defenderId, Game game) {
@@ -1118,7 +1136,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public boolean canBlock(UUID attackerId, Game game) {
-        if (tapped && !game.getState().getContinuousEffects().asThough(this.getId(), AsThoughEffectType.BLOCK_TAPPED, this.getControllerId(), game)) {
+        if (tapped && null == game.getState().getContinuousEffects().asThough(this.getId(), AsThoughEffectType.BLOCK_TAPPED, this.getControllerId(), game)) {
             return false;
         }
         Permanent attacker = game.getPermanent(attackerId);
@@ -1151,7 +1169,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public boolean canBlockAny(Game game) {
-        if (tapped && !game.getState().getContinuousEffects().asThough(this.getId(), AsThoughEffectType.BLOCK_TAPPED, this.getControllerId(), game)) {
+        if (tapped && null == game.getState().getContinuousEffects().asThough(this.getId(), AsThoughEffectType.BLOCK_TAPPED, this.getControllerId(), game)) {
             return false;
         }
 
@@ -1256,7 +1274,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             return false;
         }
         if (connectedCards.containsKey("imprint")) {
-            this.connectedCards.get("imprint").add(imprintedCard);
+            if (!this.connectedCards.get("imprint").contains(imprintedCard)) {
+                this.connectedCards.get("imprint").add(imprintedCard);
+            }
         } else {
             List<UUID> imprinted = new ArrayList<>();
             imprinted.add(imprintedCard);

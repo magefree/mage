@@ -57,7 +57,7 @@ public class JacesArchivist extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // {U}, {T}: Each player discards his or her hand, then draws cards equal to the greatest number of cards a player discarded this way.
+        // {U}, {T}: Each player discards their hand, then draws cards equal to the greatest number of cards a player discarded this way.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new JacesArchivistEffect(), new ColoredManaCost(ColoredManaSymbol.U));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
@@ -77,7 +77,7 @@ class JacesArchivistEffect extends OneShotEffect {
 
     JacesArchivistEffect() {
         super(Outcome.Discard);
-        staticText = "Each player discards his or her hand, then draws cards equal to the greatest number of cards a player discarded this way";
+        staticText = "Each player discards their hand, then draws cards equal to the greatest number of cards a player discarded this way";
     }
 
     JacesArchivistEffect(final JacesArchivistEffect effect) {

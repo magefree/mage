@@ -82,7 +82,7 @@ public class JaceTheLivingGuildpact extends CardImpl {
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 
-        // -8: Each player shuffles his or her hand and graveyard into his or her library. You draw seven cards.
+        // -8: Each player shuffles their hand and graveyard into their library. You draw seven cards.
         this.addAbility(new LoyaltyAbility(new JaceTheLivingGuildpactEffect(), -8));
 
     }
@@ -101,7 +101,7 @@ class JaceTheLivingGuildpactEffect extends OneShotEffect {
 
     public JaceTheLivingGuildpactEffect() {
         super(Outcome.Neutral);
-        staticText = "Each player shuffles his or her hand and graveyard into his or her library. You draw seven cards";
+        staticText = "Each player shuffles their hand and graveyard into their library. You draw seven cards";
     }
 
     public JaceTheLivingGuildpactEffect(final JaceTheLivingGuildpactEffect effect) {

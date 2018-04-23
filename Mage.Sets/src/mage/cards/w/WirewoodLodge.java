@@ -58,7 +58,7 @@ public class WirewoodLodge extends CardImpl {
     public WirewoodLodge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
 
         // {G}, {T}: Untap target Elf.

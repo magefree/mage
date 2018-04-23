@@ -85,7 +85,7 @@ class ParaseleneEffect extends OneShotEffect {
         if (count > 0) {
             Player player = game.getPlayer(source.getControllerId());
             if (player != null) {
-                player.gainLife(count, game);
+                player.gainLife(count, game, source);
             }
         }
         return true;

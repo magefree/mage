@@ -58,7 +58,7 @@ public class CryptolithFragment extends CardImpl {
         // Cryptolith Fragment enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
 
-        // {T}: Add one mana of any color to your mana pool. Each player loses 1 life.
+        // {T}: Add one mana of any color. Each player loses 1 life.
         Ability AnyColorManaAbility = new AnyColorManaAbility();
         AnyColorManaAbility.addEffect(new LoseLifeAllPlayersEffect(1));
         this.addAbility(AnyColorManaAbility);

@@ -54,7 +54,7 @@ public class Timesifter extends CardImpl {
     public Timesifter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
 
-        // At the beginning of each upkeep, each player exiles the top card of his or her library. The player who exiled the card with the highest converted mana cost takes an extra turn after this one. If two or more players' cards are tied for highest cost, the tied players repeat this process until the tie is broken.
+        // At the beginning of each upkeep, each player exiles the top card of their library. The player who exiled the card with the highest converted mana cost takes an extra turn after this one. If two or more players' cards are tied for highest cost, the tied players repeat this process until the tie is broken.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TimesifterEffect(), TargetController.ANY, false));
     }
 
@@ -72,7 +72,7 @@ class TimesifterEffect extends OneShotEffect {
 
     TimesifterEffect() {
         super(Outcome.ExtraTurn);
-        this.staticText = "each player exiles the top card of his or her library. The player who exiled the card with the highest converted mana cost takes an extra turn after this one. If two or more players' cards are tied for highest cost, the tied players repeat this process until the tie is broken";
+        this.staticText = "each player exiles the top card of their library. The player who exiled the card with the highest converted mana cost takes an extra turn after this one. If two or more players' cards are tied for highest cost, the tied players repeat this process until the tie is broken";
     }
 
     TimesifterEffect(final TimesifterEffect effect) {

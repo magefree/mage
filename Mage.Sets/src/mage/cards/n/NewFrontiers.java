@@ -51,7 +51,7 @@ public class NewFrontiers extends CardImpl {
     public NewFrontiers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{G}");
 
-        // Each player may search his or her library for up to X basic land cards and put them onto the battlefield tapped. Then each player who searched his or her library this way shuffles it.
+        // Each player may search their library for up to X basic land cards and put them onto the battlefield tapped. Then each player who searched their library this way shuffles it.
         this.getSpellAbility().addEffect(new NewFrontiersEffect());
     }
 
@@ -69,7 +69,7 @@ class NewFrontiersEffect extends OneShotEffect {
 
     public NewFrontiersEffect() {
         super(Outcome.Detriment);
-        this.staticText = "Each player may search his or her library for up to X basic land cards and put them onto the battlefield tapped. Then each player who searched his or her library this way shuffles it";
+        this.staticText = "Each player may search their library for up to X basic land cards and put them onto the battlefield tapped. Then each player who searched their library this way shuffles it";
     }
 
     public NewFrontiersEffect(final NewFrontiersEffect effect) {

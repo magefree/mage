@@ -56,7 +56,7 @@ public class MelekIzzetParagonTest extends CardTestPlayerBase {
         // Whenever you cast an instant or sorcery spell from your library, copy it. You may choose new targets for the copy.
         addCard(Zone.BATTLEFIELD, playerA, "Melek, Izzet Paragon");
 
-        // Red Sun's Zenith deals X damage to target creature or player.
+        // Red Sun's Zenith deals X damage to any target.
         // If a creature dealt damage this way would die this turn, exile it instead.
         // Shuffle Red Sun's Zenith into its owner's library.
         addCard(Zone.LIBRARY, playerA, "Red Sun's Zenith"); // {X}{R}

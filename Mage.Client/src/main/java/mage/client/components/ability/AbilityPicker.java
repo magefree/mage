@@ -399,23 +399,23 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
         JFrame jframe = new JFrame("Test");
 
         List<Object> objectList = new ArrayList<>();
-        objectList.add("T: add {R} to your mana pool. 111111111111111111111111111");
-        objectList.add("T: add {B} to your mana pool. {source} deals 1 damage to you.");
-        objectList.add("{T}: add {B} to your mana pool");
-        objectList.add("T: add {B} to your mana pool");
-        objectList.add("T: add {B} to your mana pool");
-        objectList.add("T: add {B} to your mana pool");
-        objectList.add("T: add {B} to your mana pool");
-        objectList.add("T: add {B} to your mana pool");
-        objectList.add("T: add {B} to your mana pool");
-        objectList.add("T: add {B} to your mana pool");
-        objectList.add("T: add {B} to your mana pool");
-        objectList.add("T: add {B} to your mana pool");
-        objectList.add("T: add {B} to your mana pool");
-        objectList.add("T: add {B} to your mana pool");
-        objectList.add("T: add {B} to your mana pool");
-        objectList.add("T: add {B} to your mana pool");
-        objectList.add("T: add {B} to your mana pool");
+        objectList.add("T: add {R}. 111111111111111111111111111");
+        objectList.add("T: add {B}. {source} deals 1 damage to you.");
+        objectList.add("{T}: add {B}");
+        objectList.add("T: add {B}");
+        objectList.add("T: add {B}");
+        objectList.add("T: add {B}");
+        objectList.add("T: add {B}");
+        objectList.add("T: add {B}");
+        objectList.add("T: add {B}");
+        objectList.add("T: add {B}");
+        objectList.add("T: add {B}");
+        objectList.add("T: add {B}");
+        objectList.add("T: add {B}");
+        objectList.add("T: add {B}");
+        objectList.add("T: add {B}");
+        objectList.add("T: add {B}");
+        objectList.add("T: add {B}");
         objectList.add("Cancel");
         AbilityPicker panel = new AbilityPicker(objectList, "Choose ability");
         jframe.add(panel);
@@ -438,7 +438,7 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
                 return choice;
             }
             choice = Jsoup.parse(choice).text(); // decode HTML entities and strip tags
-            return choice.substring(0, 1).toUpperCase() + choice.substring(1);
+            return choice.substring(0, 1).toUpperCase(Locale.ENGLISH) + choice.substring(1);
         }
 
         @Override

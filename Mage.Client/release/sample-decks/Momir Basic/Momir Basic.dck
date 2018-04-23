@@ -1,23 +1,8 @@
 NAME:Mormir Basic
-3 [BFZ:259] Island
-3 [BFZ:261] Swamp
-3 [BFZ:250] Plains
-3 [BFZ:272] Forest
-3 [BFZ:260] Swamp
-3 [BFZ:271] Forest
-3 [BFZ:270] Forest
-3 [BFZ:265] Mountain
-2 [BFZ:254] Plains
-3 [BFZ:264] Swamp
-3 [BFZ:274] Forest
-1 [BFZ:252] Plains
-3 [BFZ:262] Swamp
-3 [BFZ:251] Plains
-2 [BFZ:273] Forest
-3 [BFZ:258] Island
-2 [BFZ:269] Mountain
-3 [BFZ:268] Mountain
-3 [BFZ:257] Island
-3 [BFZ:267] Mountain
-3 [BFZ:266] Mountain
-2 [BFZ:255] Island
+12 [BFZ:250a] Plains
+12 [BFZ:260a] Swamp
+12 [BFZ:270a] Forest
+12 [BFZ:265a] Mountain
+12 [BFZ:255a] Island
+LAYOUT MAIN:(1,5)(COLOR_IDENTITY,true,5)|([BFZ:270a],[BFZ:270a],[BFZ:270a],[BFZ:270a],[BFZ:270a],[BFZ:270a],[BFZ:270a],[BFZ:270a],[BFZ:270a],[BFZ:270a],[BFZ:270a],[BFZ:270a])([BFZ:265a],[BFZ:265a],[BFZ:265a],[BFZ:265a],[BFZ:265a],[BFZ:265a],[BFZ:265a],[BFZ:265a],[BFZ:265a],[BFZ:265a],[BFZ:265a],[BFZ:265a])([BFZ:260a],[BFZ:260a],[BFZ:260a],[BFZ:260a],[BFZ:260a],[BFZ:260a],[BFZ:260a],[BFZ:260a],[BFZ:260a],[BFZ:260a],[BFZ:260a],[BFZ:260a])([BFZ:255a],[BFZ:255a],[BFZ:255a],[BFZ:255a],[BFZ:255a],[BFZ:255a],[BFZ:255a],[BFZ:255a],[BFZ:255a],[BFZ:255a],[BFZ:255a],[BFZ:255a])([BFZ:250a],[BFZ:250a],[BFZ:250a],[BFZ:250a],[BFZ:250a],[BFZ:250a],[BFZ:250a],[BFZ:250a],[BFZ:250a],[BFZ:250a],[BFZ:250a],[BFZ:250a])
+LAYOUT SIDEBOARD:(0,0)(COLOR,true,5)|

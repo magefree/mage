@@ -43,8 +43,8 @@ import mage.constants.Outcome;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.TargetPlayer;
 import mage.target.common.TargetNonBasicLandPermanent;
+import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
  *
@@ -53,14 +53,14 @@ import mage.target.common.TargetNonBasicLandPermanent;
 public class IncendiaryCommand extends CardImpl {
 
     public IncendiaryCommand(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
 
         // Choose two -
         this.getSpellAbility().getModes().setMinModes(2);
         this.getSpellAbility().getModes().setMaxModes(2);
         // Incendiary Command deals 4 damage to target player;
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
         // or Incendiary Command deals 2 damage to each creature;
         Mode mode = new Mode();
         mode.getEffects().add(new DamageAllEffect(2, new FilterCreaturePermanent()));
@@ -70,7 +70,7 @@ public class IncendiaryCommand extends CardImpl {
         mode.getEffects().add(new DestroyTargetEffect());
         mode.getTargets().add(new TargetNonBasicLandPermanent());
         this.getSpellAbility().getModes().addMode(mode);
-        // or each player discards all the cards in his or her hand, then draws that many cards.
+        // or each player discards all the cards in their hand, then draws that many cards.
         mode = new Mode();
         mode.getEffects().add(new IncendiaryCommandDrawEffect());
         this.getSpellAbility().getModes().addMode(mode);
@@ -91,7 +91,7 @@ class IncendiaryCommandDrawEffect extends OneShotEffect {
 
     public IncendiaryCommandDrawEffect() {
         super(Outcome.Detriment);
-        this.staticText = "each player discards all the cards in his or her hand, then draws that many cards";
+        this.staticText = "each player discards all the cards in their hand, then draws that many cards";
     }
 
     public IncendiaryCommandDrawEffect(final IncendiaryCommandDrawEffect effect) {

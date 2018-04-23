@@ -46,6 +46,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -82,7 +83,7 @@ public class KitsuneMystic extends CardImpl {
     }
 }
 
-class AutumnTailKitsuneSage extends Token {
+class AutumnTailKitsuneSage extends TokenImpl {
 
     private static final FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent("Aura attached to a creature");
 
@@ -106,6 +107,13 @@ class AutumnTailKitsuneSage extends Token {
         ability.addTarget(new TargetPermanent(filter));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
+    }
+    public AutumnTailKitsuneSage(final AutumnTailKitsuneSage token) {
+        super(token);
+    }
+
+    public AutumnTailKitsuneSage copy() {
+        return new AutumnTailKitsuneSage(this);
     }
 }
 

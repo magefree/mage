@@ -49,6 +49,7 @@ import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.command.emblems.KothOfTheHammerEmblem;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetLandPermanent;
 
@@ -79,10 +80,10 @@ public class KothOfTheHammer extends CardImpl {
         ability.addTarget(new TargetLandPermanent(filter));
         this.addAbility(ability);
 
-        // -2: Add {R} to your mana pool for each Mountain you control.
+        // -2: Add {R} for each Mountain you control.
         this.addAbility(new LoyaltyAbility(new DynamicManaEffect(Mana.RedMana(1), new PermanentsOnBattlefieldCount(filterCount)), -2));
 
-        // -5: You get an emblem with "Mountains you control have '{T}: This land deals 1 damage to target creature or player.'
+        // -5: You get an emblem with "Mountains you control have '{T}: This land deals 1 damage to any target.'
         this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new KothOfTheHammerEmblem()), -5));
     }
 
@@ -96,7 +97,7 @@ public class KothOfTheHammer extends CardImpl {
     }
 }
 
-class KothOfTheHammerToken extends Token {
+class KothOfTheHammerToken extends TokenImpl {
 
     public KothOfTheHammerToken() {
         super("Elemental", "4/4 red Elemental");
@@ -106,5 +107,12 @@ class KothOfTheHammerToken extends Token {
         this.color.setRed(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
+    }
+    public KothOfTheHammerToken(final KothOfTheHammerToken token) {
+        super(token);
+    }
+
+    public KothOfTheHammerToken copy() {
+        return new KothOfTheHammerToken(this);
     }
 }

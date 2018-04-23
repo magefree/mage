@@ -113,7 +113,7 @@ class LichsMirrorEffect extends ReplacementEffectImpl {
             
             player.drawCards(7, game);
             
-            player.setLife(20, game);
+            player.setLife(20, game, source);
         }
         return true;
     }

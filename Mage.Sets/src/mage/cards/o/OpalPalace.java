@@ -64,9 +64,9 @@ public class OpalPalace extends CardImpl {
     public OpalPalace(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
-        // {1}, {tap}: Add to your mana pool one mana of any color in your commander's color identity. If you spend this mana to cast your commander, it enters the battlefield with a number of +1/+1 counters on it equal to the number of times it's been cast from the command zone this game.
+        // {1}, {tap}: Add one mana of any color in your commander's color identity. If you spend this mana to cast your commander, it enters the battlefield with a number of +1/+1 counters on it equal to the number of times it's been cast from the command zone this game.
         Ability ability = new CommanderColorIdentityManaAbility(new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability, new OpalPalaceWatcher(ability.getOriginalId().toString()));

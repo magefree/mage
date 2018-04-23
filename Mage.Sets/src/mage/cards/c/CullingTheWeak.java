@@ -34,7 +34,7 @@ import mage.abilities.effects.common.BasicManaEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -44,13 +44,12 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public class CullingTheWeak extends CardImpl {
 
     public CullingTheWeak(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{B}");
 
         // As an additional cost to cast Culling the Weak, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(new FilterControlledCreaturePermanent("a creature"))));
-        
-        // Add {B}{B}{B}{B} to your mana pool.
+        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+
+        // Add {B}{B}{B}{B}.
         this.getSpellAbility().addEffect(new BasicManaEffect(Mana.BlackMana(4)));
     }
 

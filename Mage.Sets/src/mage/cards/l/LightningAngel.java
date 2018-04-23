@@ -44,7 +44,7 @@ import mage.constants.SubType;
 public class LightningAngel extends CardImpl {
 
     public LightningAngel(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{W}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{R}{W}");
         this.subtype.add(SubType.ANGEL);
 
         this.power = new MageInt(3);

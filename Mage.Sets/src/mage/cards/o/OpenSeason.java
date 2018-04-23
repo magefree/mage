@@ -151,7 +151,7 @@ class OpenSeasonEffect extends OneShotEffect {
             for (UUID playerId : game.getOpponents(controller)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    player.gainLife(2, game);
+                    player.gainLife(2, game, source);
                 }
             }
             return true;

@@ -125,7 +125,7 @@ class GarrukApexPredatorEffect3 extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         Permanent creature = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
         if (player != null && creature != null) {
-            player.gainLife(creature.getToughness().getValue(), game);
+            player.gainLife(creature.getToughness().getValue(), game, source);
             return true;
         }
         return false;

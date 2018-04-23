@@ -59,7 +59,7 @@ public class GrindingStation extends CardImpl {
     public GrindingStation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
-        // {T}, Sacrifice an artifact: Target player puts the top three cards of his or her library into his or her graveyard.
+        // {T}, Sacrifice an artifact: Target player puts the top three cards of their library into their graveyard.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutTopCardOfLibraryIntoGraveTargetEffect(3), new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
         ability.addTarget(new TargetPlayer());

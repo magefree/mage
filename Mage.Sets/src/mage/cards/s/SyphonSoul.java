@@ -79,7 +79,7 @@ class SyphonSoulEffect extends OneShotEffect {
             }
         }
         if (damageDealt > 0) {
-            game.getPlayer(source.getControllerId()).gainLife(damageDealt, game);
+            game.getPlayer(source.getControllerId()).gainLife(damageDealt, game, source);
         }
         return true;
     }

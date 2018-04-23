@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class GnomeToken extends Token {
+public class GnomeToken extends TokenImpl {
 
     public GnomeToken() {
         super("Gnome", "1/1 colorless Gnome artifact creature token");
@@ -44,5 +44,13 @@ public class GnomeToken extends Token {
         subtype.add(SubType.GNOME);
         power = new MageInt(1);
         toughness = new MageInt(1);
+    }
+
+    public GnomeToken(final GnomeToken token) {
+        super(token);
+    }
+
+    public GnomeToken copy() {
+        return new GnomeToken(this);
     }
 }

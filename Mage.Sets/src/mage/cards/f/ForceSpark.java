@@ -33,7 +33,7 @@ import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -44,9 +44,9 @@ public class ForceSpark extends CardImpl {
     public ForceSpark(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");
 
-        // Force Spark deals 1 damage to target creature or player.
+        // Force Spark deals 1 damage to any target.
         this.getSpellAbility().addEffect(new DamageTargetEffect(1));
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
 
         // Scry 1.
         this.getSpellAbility().addEffect(new ScryEffect(1));

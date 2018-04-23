@@ -62,7 +62,7 @@ public class ArcaneLighthouse extends CardImpl {
     public ArcaneLighthouse(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {tap}: Add {C} to your mana pool.
+        // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
 
         // {1}, {tap}: Until end of turn, creatures your opponents control lose hexproof and shroud and can't have hexproof or shroud.

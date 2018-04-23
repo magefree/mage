@@ -43,6 +43,7 @@ import mage.constants.ColoredManaSymbol;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.StaticFilters;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 
 /**
@@ -78,7 +79,7 @@ public class AbhorrentOverlord extends CardImpl {
     }
 }
 
-class AbhorrentOverlordHarpyToken extends Token {
+class AbhorrentOverlordHarpyToken extends TokenImpl {
 
     public AbhorrentOverlordHarpyToken() {
         super("Harpy", "1/1 black Harpy creature tokens with flying");
@@ -89,5 +90,12 @@ class AbhorrentOverlordHarpyToken extends Token {
         toughness = new MageInt(1);
 
         this.addAbility(FlyingAbility.getInstance());
+    }
+    public AbhorrentOverlordHarpyToken(final AbhorrentOverlordHarpyToken token) {
+        super(token);
+    }
+
+    public AbhorrentOverlordHarpyToken copy() {
+        return new AbhorrentOverlordHarpyToken(this);
     }
 }

@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -49,13 +49,13 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public class GreaterGood extends CardImpl {
 
     public GreaterGood(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}{G}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{G}");
 
         // Sacrifice a creature: Draw cards equal to the sacrificed creature's power, then discard three cards.
         Effect effect = new DrawCardSourceControllerEffect(new SacrificeCostCreaturesPower());
         effect.setText("Draw cards equal to the sacrificed creature's power");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new SacrificeTargetCost(new TargetControlledCreaturePermanent(new FilterControlledCreaturePermanent("a creature"))));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect,
+                new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         effect = new DiscardControllerEffect(3);
         effect.setText(", then discard three cards");
         ability.addEffect(effect);

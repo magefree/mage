@@ -65,7 +65,7 @@ public class SpreadingSeasTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
 
         addCard(Zone.BATTLEFIELD, playerB, "Island", 1);
-        // Tap: Add 1 to your mana pool.
+        // Tap: Add 1.
         // {1}: Blinkmoth Nexus becomes a 1/1 Blinkmoth artifact creature with flying until end of turn. It's still a land.
         // {1}, {T}: Target Blinkmoth gets +1/+1 until end of turn.
         addCard(Zone.BATTLEFIELD, playerB, "Blinkmoth Nexus");
@@ -129,7 +129,7 @@ public class SpreadingSeasTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Spreading Seas", 1); // ENCHANTMENT {1}{U}
         addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
 
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         // {1}{R}, {T}: Create a 0/1 red Kobold creature token named Kobolds of Kher Keep.
         addCard(Zone.BATTLEFIELD, playerB, "Kher Keep", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 2);

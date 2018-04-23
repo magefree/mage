@@ -80,7 +80,7 @@ public class HapatraVizierOfPoisonsTest extends CardTestPlayerBase {
         /*
       Devoted Druid {1}{G}
         Creature - Elf Druid 0/2
-        {T}: Add Green to your mana pool.
+        {T}: Add Green.
         Put a -1/-1 counter on Devoted Druid: Untap Devoted Druid.
          */
         String dDruid = "Devoted Druid";

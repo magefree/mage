@@ -53,7 +53,7 @@ public class Nightsnare extends CardImpl {
     public Nightsnare(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}");
 
-        // Target opponent reveals his or her hand. You may choose a nonland card from it. If you do, that player discards that card. If you don't, that player discards two cards.
+        // Target opponent reveals their hand. You may choose a nonland card from it. If you do, that player discards that card. If you don't, that player discards two cards.
         this.getSpellAbility().addTarget(new TargetOpponent());
         this.getSpellAbility().addEffect(new NightsnareDiscardEffect());
     }
@@ -72,7 +72,7 @@ class NightsnareDiscardEffect extends OneShotEffect {
 
     public NightsnareDiscardEffect() {
         super(Outcome.Discard);
-        staticText = "Target opponent reveals his or her hand. You may choose a nonland card from it. If you do, that player discards that card. If you don't, that player discards two cards";
+        staticText = "Target opponent reveals their hand. You may choose a nonland card from it. If you do, that player discards that card. If you don't, that player discards two cards";
     }
 
     public NightsnareDiscardEffect(final NightsnareDiscardEffect effect) {

@@ -58,7 +58,7 @@ public class CastOtherPlayersCardFromExileTest extends CardTestPlayerBase {
     public void testCastWithThadaAdelAcquisitor() {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
         // Islandwalk
-        // Whenever Thada Adel, Acquisitor deals combat damage to a player, search that player's library for an artifact card and exile it. Then that player shuffles his or her library.
+        // Whenever Thada Adel, Acquisitor deals combat damage to a player, search that player's library for an artifact card and exile it. Then that player shuffles their library.
         // Until end of turn, you may play that card.
         addCard(Zone.BATTLEFIELD, playerA, "Thada Adel, Acquisitor", 1); // Creature {1}{U}{U} 2/2
 
@@ -91,7 +91,7 @@ public class CastOtherPlayersCardFromExileTest extends CardTestPlayerBase {
     public void testCastWithThadaAdelAcquisitorReturnedFromBattlefield() {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
         // Islandwalk
-        // Whenever Thada Adel, Acquisitor deals combat damage to a player, search that player's library for an artifact card and exile it. Then that player shuffles his or her library.
+        // Whenever Thada Adel, Acquisitor deals combat damage to a player, search that player's library for an artifact card and exile it. Then that player shuffles their library.
         // Until end of turn, you may play that card.
         addCard(Zone.BATTLEFIELD, playerA, "Thada Adel, Acquisitor", 1); // Creature {1}{U}{U} 2/2
 

@@ -50,7 +50,7 @@ public class DubiousChallenge extends CardImpl {
     public DubiousChallenge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}");
 
-        // Look at the top ten cards of your library, exile up to two creature cards from among them, then shuffle your library. Target opponent may choose one of the exiled cards and put it onto the battlefield under his or her control. Put the rest onto the battlefield under your control.
+        // Look at the top ten cards of your library, exile up to two creature cards from among them, then shuffle your library. Target opponent may choose one of the exiled cards and put it onto the battlefield under their control. Put the rest onto the battlefield under your control.
         getSpellAbility().addEffect(new DubiousChallengeEffect());
         getSpellAbility().addTarget(new TargetOpponent());
         getSpellAbility().addEffect(new DubiousChallengeMoveToBattlefieldEffect());
@@ -71,7 +71,7 @@ class DubiousChallengeEffect extends OneShotEffect {
 
     public DubiousChallengeEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Look at the top ten cards of your library, exile up to two creature cards from among them, then shuffle your library. Target opponent may choose one of the exiled cards and put it onto the battlefield under his or her control. Put the rest onto the battlefield under your control.";
+        this.staticText = "Look at the top ten cards of your library, exile up to two creature cards from among them, then shuffle your library. Target opponent may choose one of the exiled cards and put it onto the battlefield under their control. Put the rest onto the battlefield under your control.";
     }
 
     public DubiousChallengeEffect(final DubiousChallengeEffect effect) {

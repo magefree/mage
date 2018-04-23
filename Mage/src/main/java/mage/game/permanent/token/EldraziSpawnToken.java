@@ -44,7 +44,7 @@ import mage.util.RandomUtil;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class EldraziSpawnToken extends Token {
+public class EldraziSpawnToken extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 
@@ -53,7 +53,7 @@ public class EldraziSpawnToken extends Token {
     }
 
     public EldraziSpawnToken() {
-        super("Eldrazi Spawn", "0/1 colorless Eldrazi Spawn creature with \"Sacrifice this creature: Add {C} to your mana pool.\"");
+        super("Eldrazi Spawn", "0/1 colorless Eldrazi Spawn creature with \"Sacrifice this creature: Add {C}.\"");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.ELDRAZI);
         subtype.add(SubType.SPAWN);
@@ -64,5 +64,13 @@ public class EldraziSpawnToken extends Token {
         availableImageSetCodes = tokenImageSets;
         // Get one of the three possible token images
         this.setTokenType(RandomUtil.nextInt(3) + 1);
+    }
+
+    public EldraziSpawnToken(final EldraziSpawnToken token) {
+        super(token);
+    }
+
+    public EldraziSpawnToken copy() {
+        return new EldraziSpawnToken(this);
     }
 }

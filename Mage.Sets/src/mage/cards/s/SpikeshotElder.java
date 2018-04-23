@@ -43,7 +43,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -59,7 +59,7 @@ public class SpikeshotElder extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SpikeshotElderEffect(), new ManaCostsImpl("{1}{R}{R}"));
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }
 
@@ -76,7 +76,7 @@ public class SpikeshotElder extends CardImpl {
 class SpikeshotElderEffect extends OneShotEffect {
     public SpikeshotElderEffect() {
         super(Outcome.Damage);
-        staticText = "{this} deals damage equal to its power to target creature or player";
+        staticText = "{this} deals damage equal to its power to any target";
     }
 
     public SpikeshotElderEffect(final SpikeshotElderEffect effect) {

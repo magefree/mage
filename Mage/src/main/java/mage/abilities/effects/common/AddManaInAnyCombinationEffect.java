@@ -94,10 +94,12 @@ public class AddManaInAnyCombinationEffect extends ManaEffect {
         if (player != null) {
             Mana mana = new Mana();
             int amountOfManaLeft = amount.calculate(game, source, this);
+            int maxAmount = amountOfManaLeft;
 
             while (amountOfManaLeft > 0 && player.canRespond()) {
                 for (ColoredManaSymbol coloredManaSymbol : manaSymbols) {
-                    int number = player.getAmount(0, amountOfManaLeft, "How many " + coloredManaSymbol.getColorName() + " mana?", game);
+                    int number = player.getAmount(0, amountOfManaLeft, "Distribute mana by color (done " + mana.count()
+                            + " of " + maxAmount + "). How many mana add to <b>" + coloredManaSymbol.getColorHtmlName() + "</b> (enter 0 for pass to next color)?", game);
                     if (number > 0) {
                         for (int i = 0; i < number; i++) {
                             mana.add(new Mana(coloredManaSymbol));
@@ -137,7 +139,7 @@ public class AddManaInAnyCombinationEffect extends ManaEffect {
                 sb.append('{').append(coloredManaSymbol.toString()).append('}');
             }
         }
-        sb.append(" to your mana pool");
+        sb.append("");
         return sb.toString();
     }
 }

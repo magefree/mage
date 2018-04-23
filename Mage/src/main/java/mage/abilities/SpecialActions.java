@@ -28,7 +28,6 @@
 
 package mage.abilities;
 
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.UUID;
 

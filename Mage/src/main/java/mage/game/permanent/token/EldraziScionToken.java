@@ -44,7 +44,7 @@ import mage.util.RandomUtil;
  *
  * @author fireshoes
  */
-public class EldraziScionToken extends Token {
+public class EldraziScionToken extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 
@@ -53,7 +53,7 @@ public class EldraziScionToken extends Token {
     }
 
     public EldraziScionToken() {
-        super("Eldrazi Scion", "1/1 colorless Eldrazi Scion creature token with \"Sacrifice this creature: Add {C} to your mana pool.\"");
+        super("Eldrazi Scion", "1/1 colorless Eldrazi Scion creature token with \"Sacrifice this creature: Add {C}.\"");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.ELDRAZI);
         subtype.add(SubType.SCION);

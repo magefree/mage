@@ -36,7 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
  *
  * @author spjspj
  */
-public class StormCrowToken extends Token {
+public class StormCrowToken extends TokenImpl {
 
     public StormCrowToken() {
         super("Storm Crow", "1/2 blue Bird creature token with flying named Storm Crow");
@@ -46,5 +46,13 @@ public class StormCrowToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(2);
         this.addAbility(FlyingAbility.getInstance());
+    }
+
+    public StormCrowToken(final StormCrowToken token) {
+        super(token);
+    }
+
+    public StormCrowToken copy() {
+        return new StormCrowToken(this);
     }
 }

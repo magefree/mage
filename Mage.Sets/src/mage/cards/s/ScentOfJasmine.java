@@ -104,7 +104,7 @@ class ScentOfJasmineEffect extends OneShotEffect {
                     cards.add(player.getHand().get(uuid, game));
                 }
                 player.revealCards("cards", cards, game);
-                player.gainLife(cards.getCards(game).size() * 2, game);
+                player.gainLife(cards.getCards(game).size() * 2, game, source);
             }
         }
         return true;

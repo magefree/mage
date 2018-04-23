@@ -84,7 +84,7 @@ class FeudkillersVerdictEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            controller.gainLife(10, game);
+            controller.gainLife(10, game, source);
             boolean moreLife = false;
             for (UUID opponentId : game.getOpponents(source.getControllerId())) {
                 Player opponent = game.getPlayer(opponentId);

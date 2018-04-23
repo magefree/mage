@@ -1,5 +1,7 @@
 package org.mage.card.arcane;
 
+import mage.util.StreamUtils;
+
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -7,6 +9,7 @@ import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.util.Collections;
 import java.util.Enumeration;
+import java.util.Locale;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -16,8 +19,8 @@ import javax.swing.SwingUtilities;
 @SuppressWarnings({"rawtypes", "unchecked"})
 public final class Util {
 
-    public static final boolean isMac = System.getProperty("os.name").toLowerCase().contains("mac");
-    public static final boolean isWindows = !System.getProperty("os.name").toLowerCase().contains("windows");
+    public static final boolean isMac = System.getProperty("os.name").toLowerCase(Locale.ENGLISH).contains("mac");
+    public static final boolean isWindows = !System.getProperty("os.name").toLowerCase(Locale.ENGLISH).contains("windows");
 
     public static final ThreadPoolExecutor threadPool;
     static private int threadCount;
@@ -36,9 +39,13 @@ public final class Util {
     }
 
     public static void broadcast(byte[] data, int port) throws IOException {
-        DatagramSocket socket = new DatagramSocket();
-        broadcast(socket, data, port, NetworkInterface.getNetworkInterfaces());
-        socket.close();
+        DatagramSocket socket = null;
+        try {
+            socket = new DatagramSocket();
+            broadcast(socket, data, port, NetworkInterface.getNetworkInterfaces());
+        } finally {
+            StreamUtils.closeQuietly(socket);
+        }
     }
 
     private static void broadcast(DatagramSocket socket, byte[] data, int port, Enumeration<NetworkInterface> ifaces)

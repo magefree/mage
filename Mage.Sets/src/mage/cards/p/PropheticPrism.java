@@ -50,7 +50,7 @@ public class PropheticPrism extends CardImpl {
         // When Prophetic Prism enters the battlefield, draw a card.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)));
 
-        // {1}, {T}: Add one mana of any color to your mana pool.
+        // {1}, {T}: Add one mana of any color.
         Ability ability = new AnyColorManaAbility(new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

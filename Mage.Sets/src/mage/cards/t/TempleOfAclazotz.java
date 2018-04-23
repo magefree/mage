@@ -41,7 +41,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -58,12 +58,12 @@ public class TempleOfAclazotz extends CardImpl {
         addSuperType(SuperType.LEGENDARY);
         this.nightCard = true;
 
-        // {T}: Add {B} to your mana pool
+        // {T}: Add {B}
         this.addAbility(new BlackManaAbility());
 
         // {T}, Sacrifice a creature: You gain life equal to the sacrificed creature’s toughness.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TempleOfAclazotzEffect(), new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, new FilterControlledCreaturePermanent("a creature"), true)));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         this.addAbility(ability);
     }
 
@@ -101,7 +101,7 @@ class TempleOfAclazotzEffect extends OneShotEffect {
                 if (cost instanceof SacrificeTargetCost) {
                     int amount = ((SacrificeTargetCost) cost).getPermanents().get(0).getToughness().getValue();
                     if (amount > 0) {
-                        controller.gainLife(amount, game);
+                        controller.gainLife(amount, game, source);
                     }
                 }
             }

@@ -57,7 +57,7 @@ public class ColdsteelHeart extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
         // As Coldsteel Heart enters the battlefield, choose a color.
         this.addAbility(new EntersBattlefieldAbility(new ChooseColorEffect(Outcome.Neutral), null, "As {this} enters the battlefield, choose a color.", null));
-        // {T}: Add one mana of the chosen color to your mana pool.
+        // {T}: Add one mana of the chosen color.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new ColdsteelHeartManaEffect(), new TapSourceCost()));
     }
 
@@ -75,7 +75,7 @@ class ColdsteelHeartManaEffect extends ManaEffect {
 
     public ColdsteelHeartManaEffect() {
         super();
-        staticText = "Add one mana of the chosen color to your mana pool";
+        staticText = "Add one mana of the chosen color";
     }
 
     public ColdsteelHeartManaEffect(final ColdsteelHeartManaEffect effect) {

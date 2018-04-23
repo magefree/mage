@@ -53,7 +53,7 @@ public class AppetiteForBrains extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}");
 
 
-        // Target opponent reveals his or her hand. You choose a card from it with converted mana cost 4 or greater and exile that card.
+        // Target opponent reveals their hand. You choose a card from it with converted mana cost 4 or greater and exile that card.
         this.getSpellAbility().addEffect(new ExileCardYouChooseTargetOpponentEffect(filter));
         this.getSpellAbility().addTarget(new TargetOpponent());
     }

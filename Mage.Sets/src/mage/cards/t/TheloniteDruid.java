@@ -39,8 +39,10 @@ import mage.abilities.effects.common.continuous.BecomesCreatureAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -57,7 +59,7 @@ public class TheloniteDruid extends CardImpl {
     }
 
     public TheloniteDruid(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.CLERIC);
         this.subtype.add(SubType.DRUID);
@@ -71,7 +73,7 @@ public class TheloniteDruid extends CardImpl {
                 effect,
                 new ManaCostsImpl("{1}{G}"));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         this.addAbility(ability);
     }
 
@@ -85,12 +87,19 @@ public class TheloniteDruid extends CardImpl {
     }
 }
 
-class TheloniteDruidLandToken extends Token {
+class TheloniteDruidLandToken extends TokenImpl {
 
     public TheloniteDruidLandToken() {
         super("", "2/3 creatures");
         cardType.add(CardType.CREATURE);
         power = new MageInt(2);
         toughness = new MageInt(3);
+    }
+    public TheloniteDruidLandToken(final TheloniteDruidLandToken token) {
+        super(token);
+    }
+
+    public TheloniteDruidLandToken copy() {
+        return new TheloniteDruidLandToken(this);
     }
 }

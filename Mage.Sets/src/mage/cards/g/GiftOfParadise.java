@@ -70,10 +70,10 @@ public class GiftOfParadise extends CardImpl {
         // When Gift of Paradise enters the battlefield, you gain 3 life.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(3)));
 
-        // Enchanted land has "{T}: Add two mana of any one color to your mana pool."
+        // Enchanted land has "{T}: Add two mana of any one color."
         Ability gainedAbility = new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(2), new TapSourceCost());
         Effect effect = new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA);
-        effect.setText("Enchanted land has \"{T}: Add two mana of any one color to your mana pool.\"");
+        effect.setText("Enchanted land has \"{T}: Add two mana of any one color.\"");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 

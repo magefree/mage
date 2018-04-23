@@ -66,7 +66,7 @@ public class SetonKrosanProtector extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Tap an untapped Druid you control: Add {G} to your mana pool.
+        // Tap an untapped Druid you control: Add {G}.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.GreenMana(1),
                 new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, true))));
     }

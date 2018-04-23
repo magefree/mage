@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  */
 public class Dredge extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("a creature or land");
+    private static final FilterPermanent filter = new FilterPermanent("creature or land");
 
     static {
         filter.add(Predicates.or(new CardTypePredicate(CardType.CREATURE), new CardTypePredicate(CardType.LAND)));

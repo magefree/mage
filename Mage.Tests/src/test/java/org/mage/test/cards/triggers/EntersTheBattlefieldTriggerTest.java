@@ -359,4 +359,51 @@ public class EntersTheBattlefieldTriggerTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Elemental Shaman", 3, 1);
     }
 
+    /**
+     * Just had a game with Harmonic Sliver being reanimated or blinked, but
+     * never triggered. Only when cast from hand.
+     */
+    @Test
+    public void testReanimateHarmonicSliver() {
+        // All Slivers have "When this permanent enters the battlefield, destroy target artifact or enchantment."
+        addCard(Zone.GRAVEYARD, playerA, "Harmonic Sliver");
+        // Put target creature card from a graveyard onto the battlefield under your control. You lose life equal to its converted mana cost.
+        addCard(Zone.HAND, playerA, "Reanimate"); // Sorcery {B}
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
+
+        addCard(Zone.BATTLEFIELD, playerB, "Juggernaut", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Reanimate", "Harmonic Sliver");
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Harmonic Sliver", 1);
+        assertGraveyardCount(playerA, "Reanimate", 1);
+        assertGraveyardCount(playerB, "Juggernaut", 1);
+        assertLife(playerA, 17);
+    }
+
+    @Test
+    public void testReanimateHarmonicSliverOther() {
+        // All Slivers have "When this permanent enters the battlefield, destroy target artifact or enchantment."
+        addCard(Zone.BATTLEFIELD, playerA, "Harmonic Sliver");
+        // Sliver creatures you control get +2/+0.
+        addCard(Zone.GRAVEYARD, playerA, "Battle Sliver");
+        // Put target creature card from a graveyard onto the battlefield under your control. You lose life equal to its converted mana cost.
+        addCard(Zone.HAND, playerA, "Reanimate"); // Sorcery {B}
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
+
+        addCard(Zone.BATTLEFIELD, playerB, "Juggernaut", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Reanimate", "Battle Sliver");
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPowerToughness(playerA, "Harmonic Sliver", 3, 1);
+        assertPowerToughness(playerA, "Battle Sliver", 5, 3);
+        assertGraveyardCount(playerA, "Reanimate", 1);
+        assertGraveyardCount(playerB, "Juggernaut", 1);
+
+        assertLife(playerA, 15);
+    }
 }

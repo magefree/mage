@@ -36,7 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
  *
  * @author spjspj
  */
-public class SpiritBlueToken extends Token {
+public class SpiritBlueToken extends TokenImpl {
 
     public SpiritBlueToken() {
         super("Spirit", "1/1 blue Spirit creature token with flying");
@@ -49,4 +49,11 @@ public class SpiritBlueToken extends Token {
         addAbility(FlyingAbility.getInstance());
     }
 
+    public SpiritBlueToken(final SpiritBlueToken token) {
+        super(token);
+    }
+
+    public SpiritBlueToken copy() {
+        return new SpiritBlueToken(this);
+    }
 }

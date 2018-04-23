@@ -10,7 +10,6 @@ import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
 import mage.game.Game;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 

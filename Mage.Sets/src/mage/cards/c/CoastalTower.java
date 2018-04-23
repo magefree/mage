@@ -46,7 +46,7 @@ public class CoastalTower extends CardImpl {
 
         // Coastal Tower enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
-        // {tap}: Add {W} or {U} to your mana pool.
+        // {tap}: Add {W} or {U}.
         this.addAbility(new WhiteManaAbility());
         this.addAbility(new BlueManaAbility());
     }

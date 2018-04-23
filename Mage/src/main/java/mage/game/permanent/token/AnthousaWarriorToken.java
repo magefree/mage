@@ -28,9 +28,6 @@
 
 package mage.game.permanent.token;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.MageInt;
@@ -39,7 +36,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class AnthousaWarriorToken extends Token {
+public class AnthousaWarriorToken extends TokenImpl {
 
     public AnthousaWarriorToken() {
         super("", "2/2 Warrior creatures");
@@ -49,5 +46,12 @@ public class AnthousaWarriorToken extends Token {
         toughness = new MageInt(2);
     }
 
+    public AnthousaWarriorToken(final AnthousaWarriorToken token) {
+        super(token);
+    }
+
+    public AnthousaWarriorToken copy() {
+        return new AnthousaWarriorToken(this);
+    }
 }
 

@@ -24,7 +24,7 @@ public class AddManaToManaPoolSourceControllerEffect extends OneShotEffect {
     public AddManaToManaPoolSourceControllerEffect(Mana mana) {
         super(Outcome.PutManaInPool);
         this.mana = mana;
-        this.staticText = "Add " + mana.toString() + " to your mana pool";
+        this.staticText = "Add " + mana.toString() + "";
     }
 
     public AddManaToManaPoolSourceControllerEffect(final AddManaToManaPoolSourceControllerEffect effect) {

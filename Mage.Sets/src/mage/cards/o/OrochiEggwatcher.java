@@ -1,5 +1,5 @@
 /*
- *  
+ *
  * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are
@@ -25,9 +25,8 @@
  *  The views and conclusions contained in the software and documentation are those of the
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
- * 
+ *
  */
-
 package mage.cards.o;
 
 import java.util.UUID;
@@ -45,13 +44,15 @@ import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.permanent.token.SnakeToken;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -90,7 +91,7 @@ public class OrochiEggwatcher extends CardImpl {
     }
 }
 
-class ShidakoBroodmistress extends Token {
+class ShidakoBroodmistress extends TokenImpl {
 
     ShidakoBroodmistress() {
         super("Shidako, Broodmistress", "");
@@ -107,9 +108,15 @@ class ShidakoBroodmistress extends Token {
                 Zone.BATTLEFIELD,
                 new BoostTargetEffect(3, 3, Duration.EndOfTurn),
                 new ManaCostsImpl("{G}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
-}
+    public ShidakoBroodmistress(final ShidakoBroodmistress token) {
+        super(token);
+    }
 
+    public ShidakoBroodmistress copy() {
+        return new ShidakoBroodmistress(this);
+    }
+}

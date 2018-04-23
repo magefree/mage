@@ -22,7 +22,7 @@ public class SigardaHostOfHeronsTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Sigarda, Host of Herons");
         // {T}, Tap two untapped Humans you control: Exile target artifact or enchantment.
         addCard(Zone.BATTLEFIELD, playerA, "Devout Chaplain");
-        // {2}{B}, Sacrifice a creature: Target opponent reveals his or her hand. You choose a card from it. That player discards that card. Activate this ability only any time you could cast a sorcery.
+        // {2}{B}, Sacrifice a creature: Target opponent reveals their hand. You choose a card from it. That player discards that card. Activate this ability only any time you could cast a sorcery.
         addCard(Zone.BATTLEFIELD, playerA, "Corpse Traders");
         // Target player sacrifices a creature.
         addCard(Zone.HAND, playerA, "Diabolic Edict");
@@ -94,7 +94,7 @@ public class SigardaHostOfHeronsTest extends CardTestPlayerBase {
         addCard(Zone.GRAVEYARD, playerB, "Merciless Executioner");
         
         // Tempting offer — Return a creature card from your graveyard to the battlefield. 
-        // Each opponent may return a creature card from his or her graveyard to the battlefield. 
+        // Each opponent may return a creature card from their graveyard to the battlefield.
         // For each player who does, return a creature card from your graveyard to the battlefield.
         addCard(Zone.HAND, playerB, "Tempt with Immortality"); // sorcery {4}{B}
         

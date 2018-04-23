@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class WaylayToken extends Token {
+public class WaylayToken extends TokenImpl {
 
     public WaylayToken() {
         super("Knight", "2/2 white Knight creature token");
@@ -44,5 +44,13 @@ public class WaylayToken extends Token {
         subtype.add(SubType.KNIGHT);
         power = new MageInt(2);
         toughness = new MageInt(2);
+    }
+
+    public WaylayToken(final WaylayToken token) {
+        super(token);
+    }
+
+    public WaylayToken copy() {
+        return new WaylayToken(this);
     }
 }

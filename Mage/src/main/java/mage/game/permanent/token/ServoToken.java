@@ -39,7 +39,7 @@ import mage.util.RandomUtil;
  *
  * @author fireshoes
  */
-public class ServoToken extends Token {
+public class ServoToken extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 

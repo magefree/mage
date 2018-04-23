@@ -44,6 +44,7 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
@@ -83,7 +84,7 @@ public class CrusherZendikon extends CardImpl {
     }
 }
 
-class BeastToken extends Token {
+class BeastToken extends TokenImpl {
 
     BeastToken() {
         super("", "4/2 red Beast creature with trample");
@@ -93,5 +94,12 @@ class BeastToken extends Token {
         power = new MageInt(4);
         toughness = new MageInt(2);
         this.addAbility(TrampleAbility.getInstance());
+    }
+    public BeastToken(final BeastToken token) {
+        super(token);
+    }
+
+    public BeastToken copy() {
+        return new BeastToken(this);
     }
 }

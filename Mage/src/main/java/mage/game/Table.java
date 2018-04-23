@@ -61,6 +61,7 @@ public class Table implements Serializable {
     private Tournament tournament;
     private TableRecorder recorder;
     private Set<String> bannedUsernames;
+    private boolean isPlaneChase;
 
     @FunctionalInterface
     public interface TableRecorder {
@@ -70,21 +71,21 @@ public class Table implements Serializable {
 
     protected TableEventSource tableEventSource = new TableEventSource();
 
-    public Table(UUID roomId, String gameType, String name, String controllerName, DeckValidator validator, List<PlayerType> playerTypes, TableRecorder recorder, Tournament tournament, Set<String> bannedUsernames) {
-        this(roomId, gameType, name, controllerName, validator, playerTypes, recorder, bannedUsernames);
+    public Table(UUID roomId, String gameType, String name, String controllerName, DeckValidator validator, List<PlayerType> playerTypes, TableRecorder recorder, Tournament tournament, Set<String> bannedUsernames, boolean isPlaneChase) {
+        this(roomId, gameType, name, controllerName, validator, playerTypes, recorder, bannedUsernames, isPlaneChase);
         this.tournament = tournament;
         this.isTournament = true;
         setState(TableState.WAITING);
     }
 
-    public Table(UUID roomId, String gameType, String name, String controllerName, DeckValidator validator, List<PlayerType> playerTypes, TableRecorder recorder, Match match, Set<String> bannedUsernames) {
-        this(roomId, gameType, name, controllerName, validator, playerTypes, recorder, bannedUsernames);
+    public Table(UUID roomId, String gameType, String name, String controllerName, DeckValidator validator, List<PlayerType> playerTypes, TableRecorder recorder, Match match, Set<String> bannedUsernames, boolean isPlaneChase) {
+        this(roomId, gameType, name, controllerName, validator, playerTypes, recorder, bannedUsernames, isPlaneChase);
         this.match = match;
         this.isTournament = false;
         setState(TableState.WAITING);
     }
 
-    protected Table(UUID roomId, String gameType, String name, String controllerName, DeckValidator validator, List<PlayerType> playerTypes, TableRecorder recorder, Set<String> bannedUsernames) {
+    protected Table(UUID roomId, String gameType, String name, String controllerName, DeckValidator validator, List<PlayerType> playerTypes, TableRecorder recorder, Set<String> bannedUsernames, boolean isPlaneChase) {
         tableId = UUID.randomUUID();
         this.roomId = roomId;
         this.numSeats = playerTypes.size();
@@ -96,6 +97,7 @@ public class Table implements Serializable {
         this.validator = validator;
         this.recorder = recorder;
         this.bannedUsernames = new HashSet<>(bannedUsernames);
+        this.isPlaneChase = isPlaneChase;
     }
 
     private void createSeats(List<PlayerType> playerTypes) {

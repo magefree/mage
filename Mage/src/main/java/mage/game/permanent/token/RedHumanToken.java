@@ -36,7 +36,7 @@ import mage.ObjectColor;
  *
  * @author spjspj
  */
-public class RedHumanToken extends Token {
+public class RedHumanToken extends TokenImpl {
 
     public RedHumanToken() {
         super("Human", "1/1 red Human creature token");
@@ -46,5 +46,13 @@ public class RedHumanToken extends Token {
         this.color = ObjectColor.RED;
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
+    }
+
+    public RedHumanToken(final RedHumanToken token) {
+        super(token);
+    }
+
+    public RedHumanToken copy() {
+        return new RedHumanToken(this);
     }
 }

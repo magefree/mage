@@ -53,7 +53,7 @@ public class SomberwaldSage extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
 
-        // {tap}: Add three mana of any one color to your mana pool. Spend this mana only to cast creature spells.
+        // {tap}: Add three mana of any one color. Spend this mana only to cast creature spells.
         this.addAbility(new ConditionalAnyColorManaAbility(new TapSourceCost(), 3, new SomberwaldSageManaBuilder(), true));
     }
 

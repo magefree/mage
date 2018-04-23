@@ -66,7 +66,7 @@ public class Subversion extends CardImpl {
 
         public SubversionEffect() {
             super(Outcome.Damage);
-            staticText = "Each opponent loses 1 life. You gain life equal to the life lost this way";
+            staticText = "each opponent loses 1 life. You gain life equal to the life lost this way";
         }
 
         public SubversionEffect(final SubversionEffect effect) {
@@ -79,7 +79,7 @@ public class Subversion extends CardImpl {
             for (UUID opponentId : game.getOpponents(source.getControllerId())) {
                 damage += game.getPlayer(opponentId).damage(1, source.getSourceId(), game, false, true);
             }
-            game.getPlayer(source.getControllerId()).gainLife(damage, game);
+            game.getPlayer(source.getControllerId()).gainLife(damage, game, source);
             return true;
         }
 

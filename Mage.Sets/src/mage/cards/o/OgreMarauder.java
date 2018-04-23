@@ -40,9 +40,10 @@ import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -54,7 +55,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public class OgreMarauder extends CardImpl {
 
     public OgreMarauder(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
         this.subtype.add(SubType.OGRE);
         this.subtype.add(SubType.WARRIOR);
 
@@ -97,9 +98,9 @@ class OgreMarauderEffect extends OneShotEffect {
         MageObject sourceObject = game.getObject(source.getSourceId());
         Player defender = game.getPlayer(defendingPlayerId);
         if (defender != null && sourceObject != null) {
-            Cost cost = new SacrificeTargetCost(new TargetControlledCreaturePermanent());
-            if (cost.canPay(source, source.getSourceId(), defendingPlayerId, game) &&
-                    defender.chooseUse(Outcome.LoseAbility, "Sacrifice a creature to prevent that " + sourceObject.getLogName() + " can't be blocked?", source, game)) {
+            Cost cost = new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+            if (cost.canPay(source, source.getSourceId(), defendingPlayerId, game)
+                    && defender.chooseUse(Outcome.LoseAbility, "Sacrifice a creature to prevent that " + sourceObject.getLogName() + " can't be blocked?", source, game)) {
                 if (!cost.pay(source, game, source.getSourceId(), defendingPlayerId, false, null)) {
                     // cost was not payed - so source can't be blocked
                     ContinuousEffect effect = new CantBeBlockedSourceEffect(Duration.EndOfTurn);

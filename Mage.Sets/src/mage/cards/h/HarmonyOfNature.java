@@ -113,7 +113,7 @@ class HarmonyOfNatureEffect extends OneShotEffect {
                 }
             }
             if (tappedAmount > 0) {
-                controller.gainLife(tappedAmount * 4, game);
+                controller.gainLife(tappedAmount * 4, game, source);
             }
             return true;
         }

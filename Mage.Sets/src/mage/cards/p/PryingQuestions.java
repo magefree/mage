@@ -51,7 +51,7 @@ public class PryingQuestions extends CardImpl {
     public PryingQuestions(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");
 
-        // Target opponent loses 3 life and puts a card from his or her hand on top of his or her library.
+        // Target opponent loses 3 life and puts a card from their hand on top of their library.
         this.getSpellAbility().addTarget(new TargetOpponent());
         this.getSpellAbility().addEffect(new LoseLifeTargetEffect(3));
         this.getSpellAbility().addEffect(new PryingQuestionsEffect());
@@ -72,7 +72,7 @@ class PryingQuestionsEffect extends OneShotEffect {
 
     public PryingQuestionsEffect() {
         super(Outcome.Detriment);
-        this.staticText = "and puts a card from his or her hand on top of his or her library";
+        this.staticText = "and puts a card from their hand on top of their library";
     }
 
     public PryingQuestionsEffect(final PryingQuestionsEffect effect) {

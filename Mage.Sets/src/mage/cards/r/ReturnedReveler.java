@@ -51,7 +51,7 @@ public class ReturnedReveler extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 
-        // When Returned Reveler dies, each player puts the top three cards of his or her library into his or her graveyard.
+        // When Returned Reveler dies, each player puts the top three cards of their library into their graveyard.
         this.addAbility(new DiesTriggeredAbility(new PutTopCardOfLibraryIntoGraveEachPlayerEffect(3, TargetController.ANY)));
     }
 

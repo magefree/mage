@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class NestOfScarabsBlackInsectToken extends Token {
+public class NestOfScarabsBlackInsectToken extends TokenImpl {
 
     public NestOfScarabsBlackInsectToken() {
         super("Insect", "1/1 black Insect creature token");
@@ -44,5 +44,13 @@ public class NestOfScarabsBlackInsectToken extends Token {
         subtype.add(SubType.INSECT);
         power = new MageInt(1);
         toughness = new MageInt(1);
+    }
+
+    public NestOfScarabsBlackInsectToken(final NestOfScarabsBlackInsectToken token) {
+        super(token);
+    }
+
+    public NestOfScarabsBlackInsectToken copy() {
+        return new NestOfScarabsBlackInsectToken(this);
     }
 }

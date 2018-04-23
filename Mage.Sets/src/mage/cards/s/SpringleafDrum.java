@@ -52,7 +52,7 @@ public class SpringleafDrum extends CardImpl {
 
     public SpringleafDrum(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
-        // {T}, Tap an untapped creature you control: Add one mana of any color to your mana pool.
+        // {T}, Tap an untapped creature you control: Add one mana of any color.
         Ability ability = new AnyColorManaAbility();
         ability.addCost(new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, false)));
         this.addAbility(ability);

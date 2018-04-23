@@ -40,7 +40,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -51,9 +51,9 @@ public class ChainLightning extends CardImpl {
     public ChainLightning(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}");
 
-        // Chain Lightning deals 3 damage to target creature or player. Then that player or that creature's controller may pay {R}{R}. If the player does, he or she may copy this spell and may choose a new target for that copy.
+        // Chain Lightning deals 3 damage to any target. Then that player or that creature's controller may pay {R}{R}. If the player does, he or she may copy this spell and may choose a new target for that copy.
         this.getSpellAbility().addEffect(new ChainLightningEffect());
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
     public ChainLightning(final ChainLightning card) {
@@ -70,7 +70,7 @@ class ChainLightningEffect extends OneShotEffect {
 
     ChainLightningEffect() {
         super(Outcome.Damage);
-        this.staticText = "Chain Lightning deals 3 damage to target creature or player. Then that player or that creature's controller may pay {R}{R}. If the player does, he or she may copy this spell and may choose a new target for that copy.";
+        this.staticText = "Chain Lightning deals 3 damage to any target. Then that player or that creature's controller may pay {R}{R}. If the player does, he or she may copy this spell and may choose a new target for that copy.";
     }
 
     ChainLightningEffect(final ChainLightningEffect effect) {

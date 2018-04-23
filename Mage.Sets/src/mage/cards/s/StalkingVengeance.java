@@ -45,8 +45,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.TargetPlayer;
+import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
  *
@@ -55,13 +54,14 @@ import mage.target.TargetPlayer;
 public class StalkingVengeance extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature you control");
+
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
         filter.add(new AnotherPredicate());
     }
 
     public StalkingVengeance(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{R}{R}");
         this.subtype.add(SubType.AVATAR);
 
         this.power = new MageInt(5);
@@ -71,7 +71,7 @@ public class StalkingVengeance extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
         // Whenever another creature you control dies, it deals damage equal to its power to target player.
         Ability ability = new DiesCreatureTriggeredAbility(new StalkingVengeanceDamageEffect(), false, filter, true);
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayerOrPlaneswalker());
         this.addAbility(ability);
     }
 
@@ -89,7 +89,7 @@ class StalkingVengeanceDamageEffect extends OneShotEffect {
 
     public StalkingVengeanceDamageEffect() {
         super(Outcome.Damage);
-        this.staticText = "it deals damage equal to its power to target player";
+        this.staticText = "it deals damage equal to its power to target player or planeswalker";
     }
 
     public StalkingVengeanceDamageEffect(final StalkingVengeanceDamageEffect effect) {
@@ -103,13 +103,10 @@ class StalkingVengeanceDamageEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player targetPlayer = game.getPlayer(source.getTargets().getFirstTarget());
-        if (targetPlayer != null) {
-            Permanent creature = (Permanent) game.getLastKnownInformation(this.getTargetPointer().getFirst(game, source), Zone.BATTLEFIELD);
-            if (creature != null) {
-                targetPlayer.damage(creature.getPower().getValue(), creature.getId(), game, false, true);
-                return true;
-            }
+        Permanent creature = (Permanent) game.getLastKnownInformation(this.getTargetPointer().getFirst(game, source), Zone.BATTLEFIELD);
+        if (creature != null) {
+            game.damagePlayerOrPlaneswalker(source.getFirstTarget(), creature.getPower().getValue(), creature.getId(), game, false, true);
+            return true;
         }
         return false;
     }

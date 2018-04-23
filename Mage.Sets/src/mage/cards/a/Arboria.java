@@ -54,7 +54,7 @@ public class Arboria extends CardImpl {
 
         addSuperType(SuperType.WORLD);
 
-        // Creatures can't attack a player unless that player cast a spell or put a nontoken permanent onto the battlefield during his or her last turn.
+        // Creatures can't attack a player unless that player cast a spell or put a nontoken permanent onto the battlefield during their last turn.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ArboriaEffect()), new PermanentsEnteredBattlefieldYourLastTurnWatcher());
     }
 
@@ -72,7 +72,7 @@ class ArboriaEffect extends RestrictionEffect {
 
     public ArboriaEffect() {
         super(Duration.WhileOnBattlefield);
-        staticText = "Creatures can't attack a player unless that player cast a spell or put a nontoken permanent onto the battlefield during his or her last turn";
+        staticText = "Creatures can't attack a player unless that player cast a spell or put a nontoken permanent onto the battlefield during their last turn";
     }
 
     public ArboriaEffect(final ArboriaEffect effect) {

@@ -41,6 +41,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 
 /**
@@ -52,7 +53,7 @@ public class BorosKeyrune extends CardImpl {
     public BorosKeyrune(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
-        // {T}: Add {R} or {W} to your mana pool.
+        // {T}: Add {R} or {W}.
         this.addAbility(new RedManaAbility());
         this.addAbility(new WhiteManaAbility());
 
@@ -69,7 +70,7 @@ public class BorosKeyrune extends CardImpl {
         return new BorosKeyrune(this);
     }
 
-    private static class BorosKeyruneToken extends Token {
+    private static class BorosKeyruneToken extends TokenImpl {
         BorosKeyruneToken() {
             super("Soldier", "1/1 red and white Soldier artifact creature with double strike");
             cardType.add(CardType.ARTIFACT);
@@ -80,6 +81,13 @@ public class BorosKeyrune extends CardImpl {
             power = new MageInt(1);
             toughness = new MageInt(1);
             this.addAbility(DoubleStrikeAbility.getInstance());
+        }
+        public BorosKeyruneToken(final BorosKeyruneToken token) {
+            super(token);
+        }
+
+        public BorosKeyruneToken copy() {
+            return new BorosKeyruneToken(this);
         }
     }
 }

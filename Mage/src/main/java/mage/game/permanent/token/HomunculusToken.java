@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class HomunculusToken extends Token {
+public class HomunculusToken extends TokenImpl {
 
     public HomunculusToken() {
         super("Homunculus", "0/1 blue Homunculus artifact creature token");
@@ -45,6 +45,14 @@ public class HomunculusToken extends Token {
         subtype.add(SubType.HOMUNCULUS);
         power = new MageInt(0);
         toughness = new MageInt(1);
+    }
+
+    public HomunculusToken(final HomunculusToken token) {
+        super(token);
+    }
+
+    public HomunculusToken copy() {
+        return new HomunculusToken(this);
     }
 
 }

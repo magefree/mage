@@ -51,7 +51,7 @@ public class ExileCardYouChooseTargetOpponentEffect extends OneShotEffect {
 
     public ExileCardYouChooseTargetOpponentEffect(FilterCard filter) {
         super(Outcome.Discard);
-        staticText = new StringBuilder("Target opponent reveals his or her hand. You choose ")
+        staticText = new StringBuilder("Target opponent reveals their hand. You choose ")
                 .append(filter.getMessage()).append(" from it and exile that card").toString();
         this.filter = filter;
     }

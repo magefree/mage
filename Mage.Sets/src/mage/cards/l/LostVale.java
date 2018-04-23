@@ -47,7 +47,7 @@ public class LostVale extends CardImpl {
 
         this.nightCard = true;
 
-        // T: Add three mana of any one color to your mana pool.
+        // T: Add three mana of any one color.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(3), new TapSourceCost()));
     }
 

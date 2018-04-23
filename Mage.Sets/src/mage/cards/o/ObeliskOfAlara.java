@@ -41,8 +41,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
  *
@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class ObeliskOfAlara extends CardImpl {
 
     public ObeliskOfAlara(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{6}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{6}");
 
         // {1}{W}, {tap}: You gain 5 life.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(5), new ManaCostsImpl("{1}{W}"));
@@ -69,7 +69,7 @@ public class ObeliskOfAlara extends CardImpl {
         // {1}{R}, {tap}: Obelisk of Alara deals 3 damage to target player.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(3), new ManaCostsImpl("{1}{R}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayerOrPlaneswalker());
         this.addAbility(ability);
         // {1}{G}, {tap}: Target creature gets +4/+4 until end of turn.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(4, 4, Duration.EndOfTurn), new ManaCostsImpl("{1}{G}"));

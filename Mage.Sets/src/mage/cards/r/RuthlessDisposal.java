@@ -38,6 +38,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.filter.FilterCard;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -49,12 +50,12 @@ import mage.target.common.TargetCreaturePermanent;
 public class RuthlessDisposal extends CardImpl {
 
     public RuthlessDisposal(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{B}");
 
         // As an additional cost to cast Ruthless Disposal, discard a card and sacrifice a creature.
         this.getSpellAbility().addCost(new DiscardTargetCost(new TargetCardInHand(new FilterCard("a card"))));
-        Cost cost = new SacrificeTargetCost(new TargetControlledCreaturePermanent());
-        cost.setText("As an additional cost to cast {this}, sacrifice a creature");
+        Cost cost = new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        cost.setText("as an additional cost to cast this spell, sacrifice a creature");
         this.getSpellAbility().addCost(cost);
 
         // Two target creatures each get -13/-13 until end of turn.

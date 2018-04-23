@@ -135,7 +135,7 @@ class SpiritualizeEffect extends OneShotEffect {
         if (amount > 0) {
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null) {
-                controller.gainLife(amount, game);
+                controller.gainLife(amount, game, source);
                 return true;
             }
         }

@@ -178,6 +178,7 @@ public class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Krovikan Fetish", 100, Rarity.COMMON, mage.cards.k.KrovikanFetish.class));
         cards.add(new SetCardInfo("Krovikan Horror", 101, Rarity.RARE, mage.cards.k.KrovikanHorror.class));
         cards.add(new SetCardInfo("Krovikan Sorcerer", 51, Rarity.COMMON, mage.cards.k.KrovikanSorcerer.class));
+        cards.add(new SetCardInfo("Lat-Nam's Legacy", 52, Rarity.COMMON, mage.cards.l.LatNamsLegacy.class));
         cards.add(new SetCardInfo("Leaping Lizard", 171, Rarity.COMMON, mage.cards.l.LeapingLizard.class));
         cards.add(new SetCardInfo("Lim-Dul's High Guard", 103, Rarity.UNCOMMON, LimDulsHighGuard.class));
         cards.add(new SetCardInfo("Lodestone Bauble", 213, Rarity.RARE, mage.cards.l.LodestoneBauble.class));
@@ -215,6 +216,7 @@ public class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Red Cliffs Armada", 62, Rarity.COMMON, mage.cards.r.RedCliffsArmada.class));
         cards.add(new SetCardInfo("Reinforcements", 28, Rarity.COMMON, mage.cards.r.Reinforcements.class));
         cards.add(new SetCardInfo("Reprisal", 29, Rarity.COMMON, mage.cards.r.Reprisal.class));
+        cards.add(new SetCardInfo("Retribution", 148, Rarity.UNCOMMON, mage.cards.r.Retribution.class));
         cards.add(new SetCardInfo("Righteous Fury", 30, Rarity.RARE, mage.cards.r.RighteousFury.class));
         cards.add(new SetCardInfo("Ritual of Subdual", 174, Rarity.RARE, mage.cards.r.RitualOfSubdual.class));
         cards.add(new SetCardInfo("Ritual of the Machine", 109, Rarity.RARE, mage.cards.r.RitualOfTheMachine.class));
@@ -276,6 +278,7 @@ public class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Withering Wisps", 114, Rarity.UNCOMMON, mage.cards.w.WitheringWisps.class));
         cards.add(new SetCardInfo("Wolf Pack", 187, Rarity.RARE, mage.cards.w.WolfPack.class));
         cards.add(new SetCardInfo("Woolly Mammoths", 188, Rarity.COMMON, mage.cards.w.WoollyMammoths.class));
+        cards.add(new SetCardInfo("Woolly Spider", 189, Rarity.UNCOMMON, mage.cards.w.WoollySpider.class));
         cards.add(new SetCardInfo("Yavimaya Ancients", 190, Rarity.UNCOMMON, mage.cards.y.YavimayaAncients.class));
         cards.add(new SetCardInfo("Zuran Spellcaster", 76, Rarity.COMMON, mage.cards.z.ZuranSpellcaster.class));
     }

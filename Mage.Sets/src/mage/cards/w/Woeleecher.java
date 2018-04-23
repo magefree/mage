@@ -106,7 +106,7 @@ class WoeleecherEffect extends OneShotEffect {
             target.removeCounters(CounterType.M1M1.createInstance(), game);
             numberCountersAfter = target.getCounters(game).getCount(CounterType.M1M1);
             if (numberCountersAfter < numberCountersOriginal && you != null) {
-                you.gainLife(2, game);
+                you.gainLife(2, game, source);
                 return true;
             }
         }

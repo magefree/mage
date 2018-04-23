@@ -55,7 +55,7 @@ public class KrosanReclamation extends CardImpl {
     public KrosanReclamation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}");
 
-        // Target player shuffles up to two target cards from his or her graveyard into his or her library.
+        // Target player shuffles up to two target cards from their graveyard into their library.
         this.getSpellAbility().addEffect(new KrosanReclamationEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addTarget(new KrosanReclamationTarget());
@@ -78,7 +78,7 @@ class KrosanReclamationEffect extends OneShotEffect {
 
     public KrosanReclamationEffect() {
         super(Outcome.Neutral);
-        this.staticText = "Target player shuffles up to two target cards from his or her graveyard into his or her library";
+        this.staticText = "Target player shuffles up to two target cards from their graveyard into their library";
     }
 
     public KrosanReclamationEffect(final KrosanReclamationEffect effect) {

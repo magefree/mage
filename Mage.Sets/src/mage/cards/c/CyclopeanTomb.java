@@ -131,7 +131,7 @@ class CyclopeanTombCreateTriggeredEffect extends OneShotEffect {
 
     public CyclopeanTombCreateTriggeredEffect() {
         super(Outcome.Benefit);
-        this.staticText = "At the beginning of each of your upkeeps for the rest of the game, remove all mire counters from a land that a mire counter was put onto with {this} but that a mire counter has not been removed from with {this}";
+        this.staticText = "at the beginning of each of your upkeeps for the rest of the game, remove all mire counters from a land that a mire counter was put onto with {this} but that a mire counter has not been removed from with {this}";
     }
 
     public CyclopeanTombCreateTriggeredEffect(final CyclopeanTombCreateTriggeredEffect effect) {

@@ -75,7 +75,7 @@ public class InstillFuror extends CardImpl {
                 new ConditionalOneShotEffect(new SacrificeSourceEffect(), new InvertCondition(AttackedThisTurnSourceCondition.instance),
                         "sacrifice this creature unless it attacked this turn"), TargetController.YOU, false);
         Effect effect = new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield);
-        effect.setText("Enchanted creature has \"At the beginning of your upkeep, sacrifice this creature unless it attacked this turn.\"");
+        effect.setText("Enchanted creature has \"At the beginning of your end step, sacrifice this creature unless it attacked this turn.\"");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect), new AttackedThisTurnWatcher());
 
     }

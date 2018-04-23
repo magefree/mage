@@ -96,7 +96,7 @@ class NissasRevelationEffect extends OneShotEffect {
                 controller.revealCards(sourceObject.getIdName(), cards, game);
                 if (card.isCreature()) {
                     controller.drawCards(card.getPower().getValue(), game);
-                    controller.gainLife(card.getToughness().getValue(), game);
+                    controller.gainLife(card.getToughness().getValue(), game, source);
                 }
             }
             return true;

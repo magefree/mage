@@ -194,14 +194,14 @@ public class DiscardCardYouChooseTargetEffect extends OneShotEffect {
                 throw new UnsupportedOperationException("target controller not supported");
         }
         if (revealAllCards) {
-            sb.append(" reveals his or her hand");
+            sb.append(" reveals their hand");
         } else {
             if (numberCardsToReveal instanceof StaticValue) {
                 sb.append(" reveals ");
                 sb.append(numberCardsToReveal.getMessage());
-                sb.append(" from his or her hand");
+                sb.append(" from their hand");
             } else {
-                sb.append(" reveals a number of cards from his or her hand equal to ");
+                sb.append(" reveals a number of cards from their hand equal to ");
                 sb.append(numberCardsToReveal.getMessage());
             }
         }

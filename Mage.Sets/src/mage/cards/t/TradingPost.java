@@ -43,9 +43,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.filter.common.FilterArtifactCard;
 import mage.filter.common.FilterControlledArtifactPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.permanent.token.GoatToken;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetCardInHand;
@@ -76,7 +76,7 @@ public class TradingPost extends CardImpl {
         Ability ability3 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToHandTargetEffect(), new GenericManaCost(1));
         ability3.addTarget(new TargetCardInGraveyard(new FilterArtifactCard("an artifact card in your graveyard")));
         ability3.addCost(new TapSourceCost());
-        ability3.addCost(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledCreaturePermanent("a creature"))));
+        ability3.addCost(new SacrificeTargetCost(new TargetControlledPermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         this.addAbility(ability3);
 
         // {1}, {T}, Sacrifice an artifact: Draw a card.

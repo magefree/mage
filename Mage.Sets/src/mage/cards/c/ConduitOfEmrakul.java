@@ -57,11 +57,11 @@ public class ConduitOfEmrakul extends CardImpl {
         // this card is the second face of double-faced card
         this.nightCard = true;
 
-        // Whenever Conduit of Emrakul attacks, add {C}{C} to your mana pool at the beginning of your next main phase this turn.
+        // Whenever Conduit of Emrakul attacks, add {C}{C} at the beginning of your next main phase this turn.
         Effect effect = new CreateDelayedTriggeredAbilityEffect(
                 new AtTheBeginOfMainPhaseDelayedTriggeredAbility(
                         new AddManaToManaPoolSourceControllerEffect(Mana.GenericMana(2)), false, TargetController.YOU, AtTheBeginOfMainPhaseDelayedTriggeredAbility.PhaseSelection.NEXT_MAIN_THIS_TURN));
-        effect.setText("add {C}{C} to your mana pool at the beginning of your next main phase this turn");
+        effect.setText("add {C}{C} at the beginning of your next main phase this turn");
         this.addAbility(new AttacksTriggeredAbility(effect, false));
     }
 

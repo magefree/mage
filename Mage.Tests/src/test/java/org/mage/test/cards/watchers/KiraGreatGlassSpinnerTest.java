@@ -10,12 +10,13 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  * Created by IGOUDT on 30-3-2017.
  */
 public class KiraGreatGlassSpinnerTest extends CardTestPlayerBase {
+
     /*
        Kira, Great Glass-Spinner  {1}{U}{U}
        Legendary Creature - Spirit 2/2
        Flying
        Creatures you control have "Whenever this creature becomes the target of a spell or ability for the first time each turn, counter that spell or ability."
-       */
+     */
     private final String kira = "Kira, Great Glass-Spinner";
     private final String ugin = "Ugin, the Spirit Dragon";
 
@@ -24,9 +25,8 @@ public class KiraGreatGlassSpinnerTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerA, ugin); // starts with 7 Loyality counters
 
-
         addCard(Zone.BATTLEFIELD, playerA, kira);
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+2: {source} deals 3 damage to target creature or player.", kira); // Ugin ability
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+2: {source} deals 3 damage", kira); // Ugin ability
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -43,9 +43,8 @@ public class KiraGreatGlassSpinnerTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
         addCard(Zone.HAND, playerA, "Unsummon", 1);
 
-
         addCard(Zone.BATTLEFIELD, playerA, kira);
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+2: {source} deals 3 damage to target creature or player.", kira); // Ugin ability
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+2: {source} deals 3 damage", kira); // Ugin ability
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Unsummon", kira);
 
@@ -63,9 +62,8 @@ public class KiraGreatGlassSpinnerTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, ugin); // starts with 7 Loyality counters
 
         addCard(Zone.BATTLEFIELD, playerA, kira);
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+2: {source} deals 3 damage to target creature or player.", kira); // Ugin ability
-        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "+2: {source} deals 3 damage to target creature or player.", kira); // Ugin ability
-
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+2: {source} deals 3 damage to", kira); // Ugin ability
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "+2: {source} deals 3 damage to", kira); // Ugin ability
 
         setStopAt(3, PhaseStep.END_TURN);
         execute();
@@ -73,6 +71,5 @@ public class KiraGreatGlassSpinnerTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, kira, 1);
         assertCounterCount(playerA, ugin, CounterType.LOYALTY, 11);
     }
-
 
 }

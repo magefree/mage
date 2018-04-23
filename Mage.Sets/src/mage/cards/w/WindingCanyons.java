@@ -52,7 +52,7 @@ public class WindingCanyons extends CardImpl {
     public WindingCanyons(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        // {tap}: Add {C} to your mana pool.
+        // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
 
         // {2}, {tap}: Until end of turn, you may cast creature spells as though they had flash.

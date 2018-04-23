@@ -30,7 +30,6 @@ package mage.abilities.condition.common;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
-import mage.constants.CardType;
 import mage.game.Game;
 
 /**

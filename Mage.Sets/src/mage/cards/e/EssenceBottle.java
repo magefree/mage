@@ -145,7 +145,7 @@ class EssenceBottleEffect extends OneShotEffect {
         }
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            player.gainLife(countersRemoved * 2, game);
+            player.gainLife(countersRemoved * 2, game, source);
             return true;
         }
         return false;

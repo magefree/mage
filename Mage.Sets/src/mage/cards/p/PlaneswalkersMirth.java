@@ -53,7 +53,7 @@ public class PlaneswalkersMirth extends CardImpl {
     public PlaneswalkersMirth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}");
 
-        // {3}{W}: Target opponent reveals a card at random from his or her hand. You gain life equal to that card's converted mana cost.
+        // {3}{W}: Target opponent reveals a card at random from their hand. You gain life equal to that card's converted mana cost.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PlaneswalkersMirthEffect(), new ManaCostsImpl("{3}{W}"));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
@@ -73,7 +73,7 @@ class PlaneswalkersMirthEffect extends OneShotEffect {
 
     public PlaneswalkersMirthEffect() {
         super(Outcome.Damage);
-        staticText = "Target opponent reveals a card at random from his or her hand. You gain life equal to that card's converted mana cost";
+        staticText = "Target opponent reveals a card at random from their hand. You gain life equal to that card's converted mana cost";
     }
 
     public PlaneswalkersMirthEffect(final PlaneswalkersMirthEffect effect) {
@@ -90,7 +90,7 @@ class PlaneswalkersMirthEffect extends OneShotEffect {
             if (card != null) {
                 revealed.add(card);
                 opponent.revealCards("Planeswalker's Mirth", revealed, game);
-                player.gainLife(card.getConvertedManaCost(), game);
+                player.gainLife(card.getConvertedManaCost(), game, source);
             }
             return true;
         }

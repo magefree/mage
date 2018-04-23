@@ -105,7 +105,7 @@ class SifterWurmEffect extends OneShotEffect {
             if (card != null) {
                 cards.add(card);
                 controller.revealCards(sourceObject.getIdName(), cards, game);
-                controller.gainLife(card.getConvertedManaCost(), game);
+                controller.gainLife(card.getConvertedManaCost(), game, source);
             }
             return true;
         }

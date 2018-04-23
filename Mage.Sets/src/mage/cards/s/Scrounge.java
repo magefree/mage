@@ -50,7 +50,7 @@ public class Scrounge extends CardImpl {
     public Scrounge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");
 
-        // Target opponent chooses an artifact card in his or her graveyard. Put that card onto the battlefield under your control.
+        // Target opponent chooses an artifact card in their graveyard. Put that card onto the battlefield under your control.
         this.getSpellAbility().addEffect(new ScroungeEffect());
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
@@ -69,7 +69,7 @@ class ScroungeEffect extends OneShotEffect {
 
     public ScroungeEffect() {
         super(Outcome.Benefit);
-        staticText = "Target opponent chooses an artifact card in his or her graveyard. Put that card onto the battlefield under your control";
+        staticText = "Target opponent chooses an artifact card in their graveyard. Put that card onto the battlefield under your control";
     }
 
     public ScroungeEffect(final ScroungeEffect effect) {

@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class CrestedSunmareToken extends Token {
+public class CrestedSunmareToken extends TokenImpl {
 
     public CrestedSunmareToken() {
         super("Horse", "5/5 white Horse creature token");
@@ -44,5 +44,13 @@ public class CrestedSunmareToken extends Token {
         color.setWhite(true);
         subtype.add(SubType.HORSE);
         cardType.add(CardType.CREATURE);
+    }
+
+    public CrestedSunmareToken(final CrestedSunmareToken token) {
+        super(token);
+    }
+
+    public CrestedSunmareToken copy() {
+        return new CrestedSunmareToken(this);
     }
 }

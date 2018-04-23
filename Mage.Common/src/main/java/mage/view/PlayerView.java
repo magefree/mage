@@ -43,6 +43,7 @@ import mage.game.GameState;
 import mage.game.command.CommandObject;
 import mage.game.command.Commander;
 import mage.game.command.Emblem;
+import mage.game.command.Plane;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.players.net.UserData;
@@ -141,6 +142,10 @@ public class PlayerView implements Serializable {
                 if (emblem.getControllerId().equals(this.playerId)) {
                     commandList.add(new EmblemView(emblem));
                 }
+            } else if (commandObject instanceof Plane) {
+                Plane plane = (Plane) commandObject;
+                // Planes are universal and all players can see them.
+                commandList.add(new PlaneView(plane));
             } else if (commandObject instanceof Commander) {
                 Commander commander = (Commander) commandObject;
                 if (commander.getControllerId().equals(this.playerId)) {

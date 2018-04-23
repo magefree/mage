@@ -121,7 +121,7 @@ public class BurrentonForgeTenderTest extends CardTestPlayerBase {
     public void testPreventDamageFromToken() {
         addCard(Zone.BATTLEFIELD, playerA, "Burrenton Forge-Tender");
         addCard(Zone.BATTLEFIELD, playerA, "Soldier of the Pantheon");
-        // Sacrifice Mogg Fanatic: Mogg Fanatic deals 1 damage to target creature or player.
+        // Sacrifice Mogg Fanatic: Mogg Fanatic deals 1 damage to any target.
         addCard(Zone.BATTLEFIELD, playerA, "Mogg Fanatic");
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
@@ -144,7 +144,7 @@ public class BurrentonForgeTenderTest extends CardTestPlayerBase {
         activateAbility(2, PhaseStep.END_COMBAT, playerA, "Sacrifice {this}: Prevent all damage a red source of your choice would deal this turn.");
         playerA.addChoice("Mogg Fanatic");
 
-        activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Sacrifice {this}: {source} deals 1 damage to target creature or player.","Soldier of the Pantheon");
+        activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Sacrifice {this}: {source} deals 1 damage to ","Soldier of the Pantheon");
         
         setStopAt(2, PhaseStep.END_TURN);
         execute();

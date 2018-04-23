@@ -65,7 +65,7 @@ public class RootwaterThief extends CardImpl {
 
         // {U}: Rootwater Thief gains flying until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{U}")));
-        // Whenever Rootwater Thief deals combat damage to a player, you may pay {2}. If you do, search that player's library for a card and exile it, then the player shuffles his or her library.
+        // Whenever Rootwater Thief deals combat damage to a player, you may pay {2}. If you do, search that player's library for a card and exile it, then the player shuffles their library.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new RootwaterThiefEffect(), false, true));
     }
 
@@ -83,7 +83,7 @@ class RootwaterThiefEffect extends OneShotEffect {
 
     RootwaterThiefEffect() {
         super(Outcome.Exile);
-        staticText = "you may pay {2}. If you do, search that player's library for a card and exile it, then the player shuffles his or her library.";
+        staticText = "you may pay {2}. If you do, search that player's library for a card and exile it, then the player shuffles their library.";
     }
 
     RootwaterThiefEffect(final RootwaterThiefEffect effect) {

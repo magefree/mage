@@ -42,7 +42,6 @@ import mage.constants.Zone;
 import mage.filter.FilterMana;
 import mage.game.Game;
 import mage.players.Player;
-import mage.util.CardUtil;
 
 /**
  *
@@ -109,7 +108,7 @@ class CommanderIdentityManaEffect extends ManaEffect {
 
     public CommanderIdentityManaEffect() {
         super();
-        this.staticText = "Add to your mana pool one mana of any color in your commander's color identity";
+        this.staticText = "Add one mana of any color in your commander's color identity";
     }
 
     public CommanderIdentityManaEffect(final CommanderIdentityManaEffect effect) {

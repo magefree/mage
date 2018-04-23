@@ -73,7 +73,7 @@ public class RealitySmasherTest extends CardTestPlayerBase {
         // Whenever Reality Smasher becomes the target of a spell an opponent controls, counter that spell unless its controller discards a card. 
         addCard(Zone.BATTLEFIELD, playerB, "Reality Smasher"); 
         
-        // {T}: Add Red to your mana pool. When that mana is spent to cast a red instant or sorcery spell, copy that spell and you may choose new targets for the copy.
+        // {T}: Add Red. When that mana is spent to cast a red instant or sorcery spell, copy that spell and you may choose new targets for the copy.
         addCard(Zone.BATTLEFIELD, playerA, "Pyromancer's Goggles"); // {5} Legendary artifact
         addCard(Zone.HAND, playerA, "Lightning Bolt");
         addCard(Zone.HAND, playerA, "Swamp", 2); // discard fodder

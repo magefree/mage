@@ -73,7 +73,7 @@ public class SupremeInquisitor extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 
-        // Tap five untapped Wizards you control: Search target player's library for up to five cards and exile them. Then that player shuffles his or her library.
+        // Tap five untapped Wizards you control: Search target player's library for up to five cards and exile them. Then that player shuffles their library.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SupremeInquisitorEffect(), new TapTargetCost(new TargetControlledPermanent(5, 5, filter, true)));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
@@ -95,7 +95,7 @@ class SupremeInquisitorEffect extends OneShotEffect {
 
     public SupremeInquisitorEffect() {
         super(Outcome.Exile);
-        staticText = "Search target player's library for up to five cards and exile them. Then that player shuffles his or her library";
+        staticText = "Search target player's library for up to five cards and exile them. Then that player shuffles their library";
     }
 
     public SupremeInquisitorEffect(final SupremeInquisitorEffect effect) {

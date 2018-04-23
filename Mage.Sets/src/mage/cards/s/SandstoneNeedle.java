@@ -57,7 +57,7 @@ public class SandstoneNeedle extends CardImpl {
         // Sandstone Needle enters the battlefield tapped with two depletion counters on it.
         this.addAbility(new EntersBattlefieldTappedAbility());
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.DEPLETION.createInstance(2))));
-        // {tap}, Remove a depletion counter from Sandstone Needle: Add {R}{R} to your mana pool. If there are no depletion counters on Sandstone Needle, sacrifice it.
+        // {tap}, Remove a depletion counter from Sandstone Needle: Add {R}{R}. If there are no depletion counters on Sandstone Needle, sacrifice it.
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.RedMana(2), new TapSourceCost());
         ability.addCost(new RemoveCountersSourceCost(CounterType.DEPLETION.createInstance(1)));
         ability.addEffect(new ConditionalOneShotEffect(new SacrificeSourceEffect(), new SourceHasCounterCondition(CounterType.DEPLETION, 0,0), "If there are no depletion counters on {this}, sacrifice it"));

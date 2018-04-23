@@ -48,7 +48,7 @@ public class CastSplitCardsFromOtherZonesTest extends CardTestPlayerBase {
     @Test
     public void testCastTearFromOpponentsHand() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
-        // When Mindclaw Shaman enters the battlefield, target opponent reveals his or her hand.
+        // When Mindclaw Shaman enters the battlefield, target opponent reveals their hand.
         // You may cast an instant or sorcery card from it without paying its mana cost.
         addCard(Zone.HAND, playerA, "Mindclaw Shaman"); // Creature {4}{R}
 
@@ -74,7 +74,7 @@ public class CastSplitCardsFromOtherZonesTest extends CardTestPlayerBase {
     @Test
     public void testCastFearFromOpponentsHand() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
-        // When Mindclaw Shaman enters the battlefield, target opponent reveals his or her hand.
+        // When Mindclaw Shaman enters the battlefield, target opponent reveals their hand.
         // You may cast an instant or sorcery card from it without paying its mana cost.
         addCard(Zone.HAND, playerA, "Mindclaw Shaman"); // Creature {4}{R}
 
@@ -100,7 +100,7 @@ public class CastSplitCardsFromOtherZonesTest extends CardTestPlayerBase {
     @Test
     public void testCastFusedFromOpponentsHand() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
-        // When Mindclaw Shaman enters the battlefield, target opponent reveals his or her hand.
+        // When Mindclaw Shaman enters the battlefield, target opponent reveals their hand.
         // You may cast an instant or sorcery card from it without paying its mana cost.
         addCard(Zone.HAND, playerA, "Mindclaw Shaman"); // Creature {4}{R}
 

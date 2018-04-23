@@ -33,6 +33,7 @@ import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -42,10 +43,11 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public class PhyrexianAltar extends CardImpl {
 
     public PhyrexianAltar(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
-        // Sacrifice a creature: Add one mana of any color to your mana pool.
-        this.addAbility(new AnyColorManaAbility(new SacrificeTargetCost(new TargetControlledCreaturePermanent())));
+        // Sacrifice a creature: Add one mana of any color.
+        this.addAbility(new AnyColorManaAbility(
+                new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT))));
     }
 
     public PhyrexianAltar(final PhyrexianAltar card) {

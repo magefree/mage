@@ -40,6 +40,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
@@ -81,7 +82,7 @@ public class WindZendikon extends CardImpl {
         return new WindZendikon(this);
     }
 
-    class ElementalToken extends Token {
+    class ElementalToken extends TokenImpl {
         ElementalToken() {
             super("", "2/2 blue Elemental creature with flying");
             cardType.add(CardType.CREATURE);
@@ -90,6 +91,13 @@ public class WindZendikon extends CardImpl {
             power = new MageInt(2);
             toughness = new MageInt(2);
             addAbility(FlyingAbility.getInstance());
+        }
+        public ElementalToken(final ElementalToken token) {
+            super(token);
+        }
+
+        public ElementalToken copy() {
+            return new ElementalToken(this);
         }
     }
 }

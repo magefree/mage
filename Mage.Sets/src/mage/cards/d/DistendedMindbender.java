@@ -68,7 +68,7 @@ public class DistendedMindbender extends CardImpl {
         // Emerge {5}{B}{B}
         this.addAbility(new EmergeAbility(this, new ManaCostsImpl<>("{5}{B}{B}")));
 
-        // When controller cast Distended Mindbender, target opponent reveals his or her hand. You choose from it a nonland card with converted mana cost 3 or less
+        // When controller cast Distended Mindbender, target opponent reveals their hand. You choose from it a nonland card with converted mana cost 3 or less
         // and a card with converted mana cost 4 or greater. That player discards those cards.
         Ability ability = new CastSourceTriggeredAbility(new DistendedMindbenderEffect());
         ability.addTarget(new TargetOpponent());
@@ -98,7 +98,7 @@ class DistendedMindbenderEffect extends OneShotEffect {
 
     public DistendedMindbenderEffect() {
         super(Outcome.Discard);
-        this.staticText = "target opponent reveals his or her hand. You choose from it a nonland card with converted mana cost 3 or less and a card with "
+        this.staticText = "target opponent reveals their hand. You choose from it a nonland card with converted mana cost 3 or less and a card with "
                 + "converted mana cost 4 or greater. That player discards those cards.";
     }
 

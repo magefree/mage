@@ -61,7 +61,7 @@ public class HonoredHierarch extends CardImpl {
         // Renown 1 <i>(When this creature deals combat damage to a player, if it isn't renowned put a +1/+1 counter on it and it becomes renowned.)<i>
         this.addAbility(new RenownAbility(1));
 
-        // As long as Honored Hierarch is renowned, it has vigilance and "{T}: Add one mana of any color to your mana pool."
+        // As long as Honored Hierarch is renowned, it has vigilance and "{T}: Add one mana of any color."
         Effect effect = new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(VigilanceAbility.getInstance(), Duration.WhileOnBattlefield),
                 RenownedSourceCondition.instance,
@@ -70,7 +70,7 @@ public class HonoredHierarch extends CardImpl {
         effect = new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(new AnyColorManaAbility(), Duration.WhileOnBattlefield),
                 RenownedSourceCondition.instance,
-                "and \"{T}: Add one mana of any color to your mana pool.\"");
+                "and \"{T}: Add one mana of any color.\"");
         ability.addEffect(effect);
         this.addAbility(ability);        
         

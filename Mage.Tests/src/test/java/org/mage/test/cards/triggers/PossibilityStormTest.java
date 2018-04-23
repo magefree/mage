@@ -55,13 +55,13 @@ public class PossibilityStormTest extends CardTestPlayerBase {
     @Test
     public void TestWithZoeticCavern() {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
-        // Whenever a player casts a spell from his or her hand, that player exiles it, then exiles cards from
-        // the top of his or her library until he or she exiles a card that shares a card type with it. That
+        // Whenever a player casts a spell from their hand, that player exiles it, then exiles cards from
+        // the top of their library until he or she exiles a card that shares a card type with it. That
         // player may cast that card without paying its mana cost. Then he or she puts all cards exiled with
-        // Possibility Storm on the bottom of his or her library in a random order.
+        // Possibility Storm on the bottom of their library in a random order.
         addCard(Zone.BATTLEFIELD, playerA, "Possibility Storm", 1);
 
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         // Morph {2}
         addCard(Zone.HAND, playerA, "Zoetic Cavern");
 
@@ -99,10 +99,10 @@ public class PossibilityStormTest extends CardTestPlayerBase {
     public void TestWithCrypticCommand() {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
-        // Whenever a player casts a spell from his or her hand, that player exiles it, then exiles cards from
-        // the top of his or her library until he or she exiles a card that shares a card type with it. That
+        // Whenever a player casts a spell from their hand, that player exiles it, then exiles cards from
+        // the top of their library until he or she exiles a card that shares a card type with it. That
         // player may cast that card without paying its mana cost. Then he or she puts all cards exiled with
-        // Possibility Storm on the bottom of his or her library in a random order.
+        // Possibility Storm on the bottom of their library in a random order.
         addCard(Zone.BATTLEFIELD, playerA, "Possibility Storm", 1);
 
         // Choose one — Counter target noncreature spell unless its controller pays {2};

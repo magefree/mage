@@ -38,6 +38,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
@@ -97,7 +98,7 @@ public enum TokensMtgImageSource implements CardImageSource {
     private String getEmblemName(String originalName) {
 
         for (SubType subType : SubType.getPlaneswalkerTypes(true)) {
-            if (originalName.toLowerCase().contains(subType.toString().toLowerCase())) {
+            if (originalName.toLowerCase(Locale.ENGLISH).contains(subType.toString().toLowerCase(Locale.ENGLISH))) {
                 return subType.getDescription() + " Emblem";
             }
         }
@@ -111,13 +112,13 @@ public enum TokensMtgImageSource implements CardImageSource {
         int type = card.getType();
 
         // handle emblems
-        if (name.toLowerCase().contains("emblem")) {
+        if (name.toLowerCase(Locale.ENGLISH).contains("emblem")) {
             name = getEmblemName(name);
         }
 
         // we should replace some set names
-        if (SET_NAMES_REPLACEMENT.containsKey(set.toLowerCase())) {
-            set = SET_NAMES_REPLACEMENT.get(set.toLowerCase());
+        if (SET_NAMES_REPLACEMENT.containsKey(set.toLowerCase(Locale.ENGLISH))) {
+            set = SET_NAMES_REPLACEMENT.get(set.toLowerCase(Locale.ENGLISH));
         }
 
         // Image URL contains token number
@@ -187,7 +188,7 @@ public enum TokensMtgImageSource implements CardImageSource {
     @Override
     public boolean isImageProvided(String setCode, String cardName) {
         String searchName = cardName;
-        if (cardName.toLowerCase().contains("emblem")) {
+        if (cardName.toLowerCase(Locale.ENGLISH).contains("emblem")) {
             searchName = getEmblemName(cardName);
         }
         try {

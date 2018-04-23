@@ -54,13 +54,13 @@ public class CalciformPools extends CardImpl {
     public CalciformPools(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {tap}: Add {C} to your mana pool.
+        // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         // {1}, {tap}: Put a storage counter on Calciform Pools.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.STORAGE.createInstance()), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
-        // {1}, Remove X storage counters from Calciform Pools: Add X mana in any combination of {W} and/or {U} to your mana pool.
+        // {1}, Remove X storage counters from Calciform Pools: Add X mana in any combination of {W} and/or {U}.
         ability = new SimpleManaAbility(Zone.BATTLEFIELD,
                 new AddManaInAnyCombinationEffect(new RemovedCountersForCostValue(), ColoredManaSymbol.W, ColoredManaSymbol.U),
                 new GenericManaCost(1));

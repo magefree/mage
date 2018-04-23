@@ -36,7 +36,7 @@ import mage.abilities.keyword.DefenderAbility;
  *
  * @author spjspj
  */
-public class DarettiConstructToken extends Token {
+public class DarettiConstructToken extends TokenImpl {
 
     public DarettiConstructToken() {
         this("CNS");
@@ -52,5 +52,13 @@ public class DarettiConstructToken extends Token {
         toughness = new MageInt(1);
 
         addAbility(DefenderAbility.getInstance());
+    }
+
+    public DarettiConstructToken(final DarettiConstructToken token) {
+        super(token);
+    }
+
+    public DarettiConstructToken copy() {
+        return new DarettiConstructToken(this);
     }
 }

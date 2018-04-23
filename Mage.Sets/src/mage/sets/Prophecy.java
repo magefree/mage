@@ -69,6 +69,7 @@ public class Prophecy extends ExpansionSet {
         cards.add(new SetCardInfo("Bog Elemental", 57, Rarity.RARE, mage.cards.b.BogElemental.class));
         cards.add(new SetCardInfo("Bog Glider", 58, Rarity.COMMON, mage.cards.b.BogGlider.class));
         cards.add(new SetCardInfo("Branded Brawlers", 84, Rarity.COMMON, mage.cards.b.BrandedBrawlers.class));
+        cards.add(new SetCardInfo("Brutal Suppression", 85, Rarity.UNCOMMON, mage.cards.b.BrutalSuppression.class));
         cards.add(new SetCardInfo("Calming Verse", 110, Rarity.COMMON, mage.cards.c.CalmingVerse.class));
         cards.add(new SetCardInfo("Celestial Convergence", 5, Rarity.RARE, mage.cards.c.CelestialConvergence.class));
         cards.add(new SetCardInfo("Chilling Apparition", 59, Rarity.UNCOMMON, mage.cards.c.ChillingApparition.class));

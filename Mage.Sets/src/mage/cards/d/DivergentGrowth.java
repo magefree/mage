@@ -48,10 +48,10 @@ public class DivergentGrowth extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{G}");
         
 
-        // Until end of turn, lands you control gain "{tap}: Add one mana of any color to your mana pool."
+        // Until end of turn, lands you control gain "{tap}: Add one mana of any color."
         ActivatedManaAbilityImpl ability = new AnyColorManaAbility();
         Effect effect = new GainAbilityAllEffect(ability, Duration.EndOfTurn, new FilterControlledLandPermanent());
-        effect.setText("Until end of turn, lands you control gain \"{T}: Add one mana of any color to your mana pool.\"");
+        effect.setText("Until end of turn, lands you control gain \"{T}: Add one mana of any color.\"");
         this.getSpellAbility().addEffect(effect);
     }
 

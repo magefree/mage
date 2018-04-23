@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class HeliodGodOfTheSunToken extends Token {
+public class HeliodGodOfTheSunToken extends TokenImpl {
 
     public HeliodGodOfTheSunToken() {
         super("Cleric", "2/1 white Cleric enchantment creature token");
@@ -47,5 +47,13 @@ public class HeliodGodOfTheSunToken extends Token {
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
+    }
+
+    public HeliodGodOfTheSunToken(final HeliodGodOfTheSunToken token) {
+        super(token);
+    }
+
+    public HeliodGodOfTheSunToken copy() {
+        return new HeliodGodOfTheSunToken(this);
     }
 }

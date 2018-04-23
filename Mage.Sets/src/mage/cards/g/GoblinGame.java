@@ -49,8 +49,8 @@ public class GoblinGame extends CardImpl {
     public GoblinGame(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{R}{R}");
 
-        // Each player hides at least one item, then all players reveal them simultaneously. Each player loses life equal to the number of items he or she revealed. The player who revealed the fewest items then loses half his or her life, rounded up. If two or more players are tied for fewest, each loses half his or her life, rounded up.
-        // Reinterpreted as: Each player secretly chooses a number greater than 0. Then those numbers are revealed. Each player loses life equal to his or her chosen number. The player who revealed the lowest number then loses half his or her life, rounded up. If two or more players are tied for lowest, each loses half his or her life, rounded up.
+        // Each player hides at least one item, then all players reveal them simultaneously. Each player loses life equal to the number of items he or she revealed. The player who revealed the fewest items then loses half their life, rounded up. If two or more players are tied for fewest, each loses half their life, rounded up.
+        // Reinterpreted as: Each player secretly chooses a number greater than 0. Then those numbers are revealed. Each player loses life equal to their chosen number. The player who revealed the lowest number then loses half their life, rounded up. If two or more players are tied for lowest, each loses half their life, rounded up.
         this.getSpellAbility().addEffect(new GoblinGameEffect());
 
     }
@@ -69,7 +69,7 @@ class GoblinGameEffect extends OneShotEffect {
 
     public GoblinGameEffect() {
         super(Outcome.Detriment);
-        this.staticText = "Each player hides at least one item, then all players reveal them simultaneously. Each player loses life equal to the number of items he or she revealed. The player who revealed the fewest items then loses half his or her life, rounded up. If two or more players are tied for fewest, each loses half his or her life, rounded up.";
+        this.staticText = "Each player hides at least one item, then all players reveal them simultaneously. Each player loses life equal to the number of items he or she revealed. The player who revealed the fewest items then loses half their life, rounded up. If two or more players are tied for fewest, each loses half their life, rounded up.";
     }
 
     public GoblinGameEffect(final GoblinGameEffect effect) {

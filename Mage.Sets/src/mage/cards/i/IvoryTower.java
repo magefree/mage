@@ -79,7 +79,7 @@ class IvoryTowerEffect extends OneShotEffect {
         if(player != null) {
             int amount = player.getHand().size() - 4;
             if(amount > 0) {
-                player.gainLife(amount, game);
+                player.gainLife(amount, game, source);
             }
             return true;
         }

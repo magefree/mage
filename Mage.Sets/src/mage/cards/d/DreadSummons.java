@@ -51,7 +51,7 @@ public class DreadSummons extends CardImpl {
     public DreadSummons(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{B}{B}");
 
-        // Each player puts the top X cards of his or her library into his or her graveyard. For each creature card put into a graveyard this way, you create a tapped 2/2 black Zombie creature token.
+        // Each player puts the top X cards of their library into their graveyard. For each creature card put into a graveyard this way, you create a tapped 2/2 black Zombie creature token.
         getSpellAbility().addEffect(new DreadSummonsEffect());
     }
 
@@ -69,7 +69,7 @@ class DreadSummonsEffect extends OneShotEffect {
 
     public DreadSummonsEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "Each player puts the top X cards of his or her library into his or her graveyard. For each creature card put into a graveyard this way, you create a tapped 2/2 black Zombie creature token";
+        this.staticText = "Each player puts the top X cards of their library into their graveyard. For each creature card put into a graveyard this way, you create a tapped 2/2 black Zombie creature token";
     }
 
     public DreadSummonsEffect(final DreadSummonsEffect effect) {

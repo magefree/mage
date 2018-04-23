@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class PatagiaViperSnakeToken extends Token {
+public class PatagiaViperSnakeToken extends TokenImpl {
 
     public PatagiaViperSnakeToken() {
         super("Snake", "1/1 green and blue Snake creature token");
@@ -45,6 +45,14 @@ public class PatagiaViperSnakeToken extends Token {
         subtype.add(SubType.SNAKE);
         power = new MageInt(1);
         toughness = new MageInt(1);
+    }
+
+    public PatagiaViperSnakeToken(final PatagiaViperSnakeToken token) {
+        super(token);
+    }
+
+    public PatagiaViperSnakeToken copy() {
+        return new PatagiaViperSnakeToken(this);
     }
 
 }

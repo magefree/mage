@@ -51,7 +51,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
 public class SireOfStagnation extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent();
-    private static final String rule = "Whenever a land enters the battlefield under an opponent's control, that player exiles the top two cards of his or her library and you draw two cards.";
+    private static final String rule = "Whenever a land enters the battlefield under an opponent's control, that player exiles the top two cards of their library and you draw two cards.";
 
     static {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
@@ -66,7 +66,7 @@ public class SireOfStagnation extends CardImpl {
         // Devoid <i>(This card has no color.)</i>
         this.addAbility(new DevoidAbility(this.color));
 
-        // Whenever a land enters the battlefield under an opponent's control, that player exiles the top two cards of his or her library and you draw two cards.
+        // Whenever a land enters the battlefield under an opponent's control, that player exiles the top two cards of their library and you draw two cards.
         Ability ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD,
                 new ExileCardsFromTopOfLibraryTargetEffect(2, "that player"), filter, false, SetTargetPointer.PLAYER, rule, false);
         ability.addEffect(new DrawCardSourceControllerEffect(2));

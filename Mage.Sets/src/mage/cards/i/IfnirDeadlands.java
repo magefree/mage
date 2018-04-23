@@ -65,10 +65,10 @@ public class IfnirDeadlands extends CardImpl {
         
         this.subtype.add(SubType.DESERT);
 
-        // {t}: Add {C} to your mana pool.
+        // {t}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         
-        // {t}, Pay 1 life: Add {B} to your mana pool.
+        // {t}, Pay 1 life: Add {B}.
         Ability manaAbility = new BlackManaAbility();
         manaAbility.addCost(new PayLifeCost(1));
         this.addAbility(manaAbility);

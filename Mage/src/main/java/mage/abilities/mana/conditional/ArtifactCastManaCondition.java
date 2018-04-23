@@ -33,7 +33,6 @@ import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
-import mage.constants.CardType;
 import mage.game.Game;
 
 /**

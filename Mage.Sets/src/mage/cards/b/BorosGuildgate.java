@@ -49,7 +49,7 @@ public class BorosGuildgate extends CardImpl {
         // Boros Guildgate enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
 
-        // {T}: Add {W} or {R} to your mana pool.
+        // {T}: Add {W} or {R}.
         this.addAbility(new WhiteManaAbility());
         this.addAbility(new RedManaAbility());
     }

@@ -52,7 +52,7 @@ public class ManifestTest extends CardTestPlayerBase {
 
         // Tranquil Cove enters the battlefield tapped.
         // When Tranquil Cove enters the battlefield, you gain 1 life.
-        // {T}: Add {W} or {U} to your mana pool.
+        // {T}: Add {W} or {U}.
         addCard(Zone.LIBRARY, playerA, "Tranquil Cove");
         skipInitShuffling();
 
@@ -111,7 +111,7 @@ public class ManifestTest extends CardTestPlayerBase {
     @Test
     public void testETBTriggeredAbilities3() {
         addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
-        // Exile target creature. Its controller manifests the top card of his or her library {1}{U}
+        // Exile target creature. Its controller manifests the top card of their library {1}{U}
         addCard(Zone.HAND, playerB, "Reality Shift");
 
         // Constellation - When Doomwake Giant or another enchantment enters the battlefield
@@ -148,7 +148,7 @@ public class ManifestTest extends CardTestPlayerBase {
     @Test
     public void testNylea() {
         addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
-        // Exile target creature. Its controller manifests the top card of his or her library {1}{U}
+        // Exile target creature. Its controller manifests the top card of their library {1}{U}
         addCard(Zone.HAND, playerB, "Reality Shift");
 
         // As long as your devotion to white is less than five, Nylea isn't a creature.
@@ -182,7 +182,7 @@ public class ManifestTest extends CardTestPlayerBase {
     @Test
     public void testColorOfManifestedCardDoesNotCount() {
         addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
-        // Exile target creature. Its controller manifests the top card of his or her library {1}{U}
+        // Exile target creature. Its controller manifests the top card of their library {1}{U}
         addCard(Zone.HAND, playerB, "Reality Shift");
 
         // Gore Swine {2}{R}
@@ -219,7 +219,7 @@ public class ManifestTest extends CardTestPlayerBase {
     public void testCardGetsExiledFaceUp() {
         addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
         addCard(Zone.BATTLEFIELD, playerB, "Swamp", 4);
-        // Exile target creature. Its controller manifests the top card of his or her library {1}{U}
+        // Exile target creature. Its controller manifests the top card of their library {1}{U}
         addCard(Zone.HAND, playerB, "Reality Shift");
         // Silence the Believers - Instant {2}{B}{B}
         // Strive — Silence the Believers costs more to cast for each target beyond the first.

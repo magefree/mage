@@ -244,8 +244,29 @@ public enum ChatManager {
             }
             return true;
         }
+        if (command.startsWith("FIX")) {
+            message += "<br/>" + GameManager.instance.getChatId(chatId);
+            ChatSession session = chatSessions.get(chatId);
+            if (session != null && session.getInfo() != null) {
+                String gameId = session.getInfo();
+                if (gameId.startsWith("Game ")) {
+                    UUID id = java.util.UUID.fromString(gameId.substring(5, gameId.length()));
+                    for (Entry<UUID, GameController> entry : GameManager.instance.getGameController().entrySet()) {
+                        if (entry.getKey().equals(id)) {
+                            GameController controller = entry.getValue();
+                            if (controller != null) {
+                                message += controller.attemptToFixGame();
+                                chatSessions.get(chatId).broadcastInfoToUser(user, message);
+                            }
+                        }
+                    }
+
+                }
+            }
+            return true;
+        }        
         if (command.startsWith("CARD ")) {
-            Matcher matchPattern = getCardTextPattern.matcher(message.toLowerCase());
+            Matcher matchPattern = getCardTextPattern.matcher(message.toLowerCase(Locale.ENGLISH));
             if (matchPattern.find()) {
                 String cardName = matchPattern.group(1);
                 CardInfo cardInfo = CardRepository.instance.findPreferedCoreExpansionCard(cardName, true);

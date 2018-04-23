@@ -40,9 +40,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.game.Game;
 import mage.target.common.TargetControlledCreaturePermanent;
-
 
 /**
  *
@@ -51,12 +51,12 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public class Metamorphosis extends CardImpl {
 
     public Metamorphosis(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{G}");
 
         // As an additional cost to cast Metamorphosis, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         this.getSpellAbility().addEffect(new MetamorphosisEffect());
-        // Add X mana of any one color to your mana pool, where X is one plus the sacrificed creature's converted mana cost. Spend this mana only to cast creature spells.
+        // Add X mana of any one color, where X is one plus the sacrificed creature's converted mana cost. Spend this mana only to cast creature spells.
     }
 
     public Metamorphosis(final Metamorphosis card) {
@@ -73,7 +73,7 @@ class MetamorphosisEffect extends OneShotEffect {
 
     public MetamorphosisEffect() {
         super(Outcome.PutManaInPool);
-        staticText = "Add X mana of any one color to your mana pool, for creatures.";
+        staticText = "Add X mana of any one color, where X is 1 plus the sacrificed creature's converted mana cost. Spend this mana only to cast creature spells.";
     }
 
     public MetamorphosisEffect(final MetamorphosisEffect effect) {
@@ -83,15 +83,15 @@ class MetamorphosisEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int amount = 0;
-        for (Cost cost: source.getCosts()) {
+        for (Cost cost : source.getCosts()) {
             if (cost instanceof SacrificeTargetCost && !((SacrificeTargetCost) cost).getPermanents().isEmpty()) {
-                amount = ((SacrificeTargetCost)cost).getPermanents().get(0).getConvertedManaCost()+1;
+                amount = ((SacrificeTargetCost) cost).getPermanents().get(0).getConvertedManaCost() + 1;
                 break;
             }
         }
         if (amount > 0) {
-           AddConditionalManaOfAnyColorEffect anyMana = new AddConditionalManaOfAnyColorEffect(amount, new MetamorphosisManaBuilder());
-           anyMana.apply(game, source); //There probably is a more elegant way of doing this but.. I'm still learning :p
+            AddConditionalManaOfAnyColorEffect anyMana = new AddConditionalManaOfAnyColorEffect(amount, new MetamorphosisManaBuilder());
+            anyMana.apply(game, source); //There probably is a more elegant way of doing this but.. I'm still learning :p
         }
         return false;
     }
@@ -104,6 +104,7 @@ class MetamorphosisEffect extends OneShotEffect {
 }
 
 class MetamorphosisManaBuilder extends ConditionalManaBuilder {
+
     @Override
     public ConditionalMana build(Object... options) {
         return new CreatureCastConditionalMana(this.mana);

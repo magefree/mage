@@ -4,12 +4,6 @@
   <NonVisualComponents>
     <Component class="javax.swing.ButtonGroup" name="bgView">
     </Component>
-    <Component class="javax.swing.JCheckBoxMenuItem" name="jCheckBoxMenuItem1">
-      <Properties>
-        <Property name="selected" type="boolean" value="true"/>
-        <Property name="text" type="java.lang.String" value="jCheckBoxMenuItem1"/>
-      </Properties>
-    </Component>
   </NonVisualComponents>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -27,9 +21,9 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="tbColor" alignment="0" max="32767" attributes="0"/>
-          <Component id="tbTypes" alignment="0" pref="1061" max="32767" attributes="0"/>
-          <Component id="cardSelectorBottomPanel" alignment="0" pref="1061" max="32767" attributes="0"/>
+          <Component id="tbTypes" alignment="0" pref="1057" max="32767" attributes="0"/>
           <Component id="cardSelectorScrollPane" alignment="0" max="32767" attributes="0"/>
+          <Component id="cardSelectorBottomPanel" alignment="0" pref="1057" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -857,7 +851,7 @@
         </Component>
         <Component class="javax.swing.JCheckBox" name="chkUnique">
           <Properties>
-            <Property name="selected" type="boolean" value="true"/>
+            <Property name="selected" type="boolean" value="false"/>
             <Property name="text" type="java.lang.String" value="Unique"/>
             <Property name="toolTipText" type="java.lang.String" value="Show only the first found card of every card name."/>
             <Property name="focusable" type="boolean" value="false"/>

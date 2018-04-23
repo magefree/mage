@@ -36,7 +36,7 @@ import mage.abilities.keyword.ReachAbility;
  *
  * @author spjspj
  */
-public class PenumbraSpiderToken extends Token {
+public class PenumbraSpiderToken extends TokenImpl {
 
     public PenumbraSpiderToken() {
 
@@ -47,5 +47,13 @@ public class PenumbraSpiderToken extends Token {
         power = new MageInt(2);
         toughness = new MageInt(4);
         addAbility(ReachAbility.getInstance());
+    }
+
+    public PenumbraSpiderToken(final PenumbraSpiderToken token) {
+        super(token);
+    }
+
+    public PenumbraSpiderToken copy() {
+        return new PenumbraSpiderToken(this);
     }
 }

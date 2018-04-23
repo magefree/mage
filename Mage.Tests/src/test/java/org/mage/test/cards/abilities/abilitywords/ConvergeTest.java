@@ -94,9 +94,9 @@ public class ConvergeTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
 
-        // {1}, {T}: Add {U}{R} to your mana pool.
+        // {1}, {T}: Add {U}{R}.
         addCard(Zone.BATTLEFIELD, playerA, "Izzet Signet", 1);
-        // {1}, {T}: Add {W}{B} to your mana pool.
+        // {1}, {T}: Add {W}{B}.
         addCard(Zone.BATTLEFIELD, playerA, "Orzhov Signet", 1);
 
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}, {T}: Add {U}{R}");

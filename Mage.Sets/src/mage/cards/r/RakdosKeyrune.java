@@ -41,6 +41,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 
 /**
@@ -51,7 +52,7 @@ public class RakdosKeyrune extends CardImpl {
     public RakdosKeyrune(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
-        // {T}: Add {B} or {R} to your mana pool.
+        // {T}: Add {B} or {R}.
         this.addAbility(new BlackManaAbility());
         this.addAbility(new RedManaAbility());
 
@@ -68,7 +69,7 @@ public class RakdosKeyrune extends CardImpl {
         return new RakdosKeyrune(this);
     }
 
-    private static class RakdosKeyruneToken extends Token {
+    private static class RakdosKeyruneToken extends TokenImpl {
         RakdosKeyruneToken() {
             super("", "3/1 black and red Devil artifact creature with first strike");
             cardType.add(CardType.ARTIFACT);
@@ -79,6 +80,13 @@ public class RakdosKeyrune extends CardImpl {
             power = new MageInt(3);
             toughness = new MageInt(1);
             this.addAbility(FirstStrikeAbility.getInstance());
+        }
+        public RakdosKeyruneToken(final RakdosKeyruneToken token) {
+            super(token);
+        }
+
+        public RakdosKeyruneToken copy() {
+            return new RakdosKeyruneToken(this);
         }
     }
 }

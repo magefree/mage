@@ -36,7 +36,7 @@ import mage.constants.SubType;
  *
  * @author TheElk801
  */
-public class DinosaurToken extends Token {
+public class DinosaurToken extends TokenImpl {
 
     public DinosaurToken() {
         super("Dinosaur", "3/3 green Dinosaur creature token with trample");
@@ -46,5 +46,13 @@ public class DinosaurToken extends Token {
         power = new MageInt(3);
         toughness = new MageInt(3);
         addAbility(TrampleAbility.getInstance());
+    }
+
+    public DinosaurToken(final DinosaurToken token) {
+        super(token);
+    }
+
+    public DinosaurToken copy() {
+        return new DinosaurToken(this);
     }
 }

@@ -87,7 +87,7 @@ class ChaliceOfLifeEffect extends OneShotEffect {
         if (permanent != null) {
             Player player = game.getPlayer(source.getControllerId());
             //gain 1 life
-            player.gainLife(1, game);
+            player.gainLife(1, game, source);
 
             // if you have at least 10 life more than your starting life total, transform Chalice of Life.
             if (player.getLife() >= game.getLife() + 10) {

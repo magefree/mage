@@ -48,7 +48,7 @@ public class BraidOfFire extends CardImpl {
     public BraidOfFire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{R}");
 
-        // Cumulative upkeep-Add {R} to your mana pool.
+        // Cumulative upkeep-Add {R}.
         this.addAbility(new CumulativeUpkeepAbility(new BraidOfFireCost()));
     }
 
@@ -65,7 +65,7 @@ public class BraidOfFire extends CardImpl {
 class BraidOfFireCost extends CostImpl {
 
     public BraidOfFireCost() {
-        this.text = "Add {R} to your mana pool";
+        this.text = "Add {R}";
     }
 
     public BraidOfFireCost(BraidOfFireCost cost) {

@@ -49,7 +49,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -63,7 +63,7 @@ public class SwordOfTheAges extends CardImpl {
         // Sword of the Ages enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
         
-        // {T}, Sacrifice Sword of the Ages and any number of creatures you control: Sword of the Ages deals X damage to target creature or player, where X is the total power of the creatures sacrificed this way, then exile Sword of the Ages and those creature cards.
+        // {T}, Sacrifice Sword of the Ages and any number of creatures you control: Sword of the Ages deals X damage to any target, where X is the total power of the creatures sacrificed this way, then exile Sword of the Ages and those creature cards.
         Cost cost = new SacrificeSourceCost();
         cost.setText("Sacrifice {this} and any number of creatures you control");
         Cost cost2 = new SacrificeTargetCost(new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE, new FilterControlledCreaturePermanent(), true));
@@ -71,7 +71,7 @@ public class SwordOfTheAges extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SwordOfTheAgesEffect(), new TapSourceCost());
         ability.addCost(cost);
         ability.addCost(cost2);
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }
 
@@ -89,7 +89,7 @@ class SwordOfTheAgesEffect extends OneShotEffect {
 
     public SwordOfTheAgesEffect() {
         super(Outcome.Damage);
-        this.staticText = "{this} deals X damage to target creature or player, where X is the total power of the creatures sacrificed this way, then exile {this} and those creature cards";
+        this.staticText = "{this} deals X damage to any target, where X is the total power of the creatures sacrificed this way, then exile {this} and those creature cards";
     }
 
     public SwordOfTheAgesEffect(final SwordOfTheAgesEffect effect) {

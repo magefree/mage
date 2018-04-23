@@ -1,23 +1,6 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
-import mage.cards.a.AesthirGlider;
-import mage.cards.a.AgentOfStromgald;
-import mage.cards.b.BalduvianWarMakers;
-import mage.cards.c.CarrierPigeons;
-import mage.cards.e.EnslavedScout;
-import mage.cards.f.FeveredStrength;
-import mage.cards.g.GorillaBerserkers;
-import mage.cards.g.GorillaShaman;
-import mage.cards.i.InsidiousBookworms;
-import mage.cards.l.LimDulsHighGuard;
-import mage.cards.p.PhyrexianWarBeast;
-import mage.cards.r.RoyalHerbalist;
-import mage.cards.s.SoldeviAdnate;
-import mage.cards.s.SoldeviSage;
-import mage.cards.s.StormShaman;
-import mage.cards.s.SwampMosquito;
-import mage.cards.w.WhipVine;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
@@ -54,6 +37,8 @@ public class Alliances extends ExpansionSet {
         cards.add(new SetCardInfo("Balduvian Trading Post", 137, Rarity.RARE, mage.cards.b.BalduvianTradingPost.class));
         cards.add(new SetCardInfo("Balduvian War-Makers", "66a", Rarity.COMMON, mage.cards.b.BalduvianWarMakers.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Balduvian War-Makers", "66b", Rarity.COMMON, mage.cards.b.BalduvianWarMakers.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Bestial Fury", "67a", Rarity.COMMON, mage.cards.b.BestialFury.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Bestial Fury", "67b", Rarity.COMMON, mage.cards.b.BestialFury.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bounty of the Hunt", 85, Rarity.UNCOMMON, mage.cards.b.BountyOfTheHunt.class));
         cards.add(new SetCardInfo("Browse", 25, Rarity.UNCOMMON, mage.cards.b.Browse.class));
         cards.add(new SetCardInfo("Burnout", 68, Rarity.UNCOMMON, mage.cards.b.Burnout.class));
@@ -114,6 +99,8 @@ public class Alliances extends ExpansionSet {
         cards.add(new SetCardInfo("Krovikan Horror", 53, Rarity.RARE, mage.cards.k.KrovikanHorror.class));
         cards.add(new SetCardInfo("Krovikan Plague", 54, Rarity.UNCOMMON, mage.cards.k.KrovikanPlague.class));
         cards.add(new SetCardInfo("Lake of the Dead", 140, Rarity.RARE, mage.cards.l.LakeOfTheDead.class));
+        cards.add(new SetCardInfo("Lat-Nam's Legacy", "30a", Rarity.COMMON, mage.cards.l.LatNamsLegacy.class));
+        cards.add(new SetCardInfo("Lat-Nam's Legacy", "30b", Rarity.COMMON, mage.cards.l.LatNamsLegacy.class));
         cards.add(new SetCardInfo("Library of Lat-Nam", 31, Rarity.RARE, mage.cards.l.LibraryOfLatNam.class));
         cards.add(new SetCardInfo("Lim-Dul's High Guard", "55a", Rarity.COMMON, mage.cards.l.LimDulsHighGuard.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lim-Dul's High Guard", "55b", Rarity.COMMON, mage.cards.l.LimDulsHighGuard.class, NON_FULL_USE_VARIOUS));

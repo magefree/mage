@@ -31,6 +31,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -83,7 +84,8 @@ public class NissaGenesisMage extends CardImpl {
 
         //-10: Look at the top ten cards of your library. You may put any number of creature and/or land cards from among them onto the battlefield. Put the rest on the bottom of your library in a random order.);
         this.addAbility(new LoyaltyAbility(
-                new LookLibraryAndPickControllerEffect(10, 10, filter, false, true, Zone.BATTLEFIELD, false).setBackInRandomOrder(true),
+                new LookLibraryAndPickControllerEffect(new StaticValue(10), false, new StaticValue(10), filter,
+                        Zone.LIBRARY, true, false, true, Zone.BATTLEFIELD, true, true, false).setBackInRandomOrder(true),
                 -10));
     }
 

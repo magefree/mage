@@ -129,7 +129,7 @@ class PriestOfTheWakeningSunEffect extends OneShotEffect {
                         Cards cards = new CardsImpl();
                         cards.addAll(target.getTargets());
                         controller.revealCards(sourceObject.getIdName(), cards, game);
-                        controller.gainLife(2, game);
+                        controller.gainLife(2, game, source);
                         return true;
                     }
                 }

@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class EyesOfTheWisentElementalToken extends Token {
+public class EyesOfTheWisentElementalToken extends TokenImpl {
 
     public EyesOfTheWisentElementalToken() {
         super("Elemental", "4/4 green Elemental creature token");
@@ -48,4 +48,11 @@ public class EyesOfTheWisentElementalToken extends Token {
         setTokenType(1);
     }
 
+    public EyesOfTheWisentElementalToken(final EyesOfTheWisentElementalToken token) {
+        super(token);
+    }
+
+    public EyesOfTheWisentElementalToken copy() {
+        return new EyesOfTheWisentElementalToken(this);
+    }
 }

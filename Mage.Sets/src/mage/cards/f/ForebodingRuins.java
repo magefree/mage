@@ -62,7 +62,7 @@ public class ForebodingRuins extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new RevealTargetFromHandCost(new TargetCardInHand(filter))),
                 "you may reveal a Swamp or Mountain card from your hand. If you don't, {this} enters the battlefield tapped"));
 
-        // {T}: Add {B} or {R} to your mana pool.
+        // {T}: Add {B} or {R}.
         this.addAbility(new BlackManaAbility());
         this.addAbility(new RedManaAbility());
     }

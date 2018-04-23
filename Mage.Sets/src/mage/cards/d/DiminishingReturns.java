@@ -48,7 +48,7 @@ public class DiminishingReturns extends CardImpl {
     public DiminishingReturns(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}{U}");
 
-        // Each player shuffles his or her hand and graveyard into his or her library. You exile the top ten cards of your library. Then each player draws up to seven cards.
+        // Each player shuffles their hand and graveyard into their library. You exile the top ten cards of your library. Then each player draws up to seven cards.
         this.getSpellAbility().addEffect(new DiminishingReturnsEffect());
     }
 
@@ -66,7 +66,7 @@ class DiminishingReturnsEffect extends OneShotEffect {
 
     public DiminishingReturnsEffect() {
         super(Outcome.Neutral);
-        staticText = "Each player shuffles his or her hand and graveyard into his or her library. You exile the top ten cards of your library. Then each player draws up to seven cards.";
+        staticText = "Each player shuffles their hand and graveyard into their library. You exile the top ten cards of your library. Then each player draws up to seven cards.";
     }
 
     public DiminishingReturnsEffect(final DiminishingReturnsEffect effect) {

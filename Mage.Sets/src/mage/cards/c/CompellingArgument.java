@@ -45,7 +45,7 @@ public class CompellingArgument extends CardImpl {
     public CompellingArgument(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{U}");
 
-        // Target player puts the top five cards of his or her library into his or her graveyard.
+        // Target player puts the top five cards of their library into their graveyard.
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new PutLibraryIntoGraveTargetEffect(5));
 

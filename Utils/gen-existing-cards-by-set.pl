@@ -242,33 +242,37 @@ foreach $name_collectorid (sort @setCards)
             my $fn = "..\\Mage.Sets\\src\\mage\\cards\\$setId\\$className.java";
             my $str = "        cards.add(new SetCardInfo(\"$cardName\", $cardNr, Rarity." . getRarity ($cards{$cardName}{$setName}[3], $cardName) . ", mage.cards.$setId.$className.class));\n";
 
+            my $plus_cardName = $cardName;
+            $plus_cardName =~ s/ /+/img;
+            $plus_cardName = "$plus_cardName";
+            my $github_name = $plus_cardName;
+            $github_name =~ s/\W//img;
+            my $github_url = "https://github.com/magefree/mage/search?q=";
+            $github_url .= "$github_name.java"; 
+
             if (@$ds[2] eq "SPLIT") {
                 my $oldCardName = $cardName;
                 $cardName = @$ds[4];
                 $str = "        cards.add(new SetCardInfo(\"$cardName\", $cardNr, Rarity." . getRarity ($cards{$oldCardName}{$setName}[3], $oldCardName) . ", mage.cards.$setId.$className.class));\n";
             }
 
-            my $plus_cardName = $cardName;
-            $plus_cardName =~ s/ /+/img;
-            $plus_cardName =~ s/,/+/img;
-            $plus_cardName = "intext:\"$plus_cardName\"";
 
             if (!exists ($alreadyIn{$cardNr})) {
 # Go Looking for the existing implementation..
                 if (-e $fn) {
                     $implementedButNotInSetYet {$str} = 1;
-                    $githubTask {"- [ ] Implemented but have to add to set -- [$cardName](https://www.google.com.au/search?q=$plus_cardName+$googleSetName+mtg&source=lnms&tbm=isch)\n"} = 1;
+                    $githubTask {"- [ ] Implemented but have to add to set -- [$cardName](https://scryfall.com/search?q=$plus_cardName) -- [Mage code $cardName]($github_url)\n"} = 1;
                 } else {
                     $unimplemented {"$str"} = 1;
-                    $githubTask {"- [ ] Not done -- [$cardName](https://www.google.com.au/search?q=$plus_cardName+$googleSetName+mtg&source=lnms&tbm=isch)\n"} = 1;
+                    $githubTask {"- [ ] Not done -- [$cardName](https://scryfall.com/search?q=$plus_cardName)\n"} = 1;
                 }
             } else {
                 if (-e $fn) {
                     $implemented {$str} = 1;
-                    $githubTask {"- [x] Done -- [$cardName](https://www.google.com.au/search?q=$plus_cardName+$googleSetName+mtg&source=lnms&tbm=isch)\n"} = 1;
+                    $githubTask {"- [x] Done -- [$cardName](https://scryfall.com/search?q=$plus_cardName) -- [Mage code $cardName]($github_url)\n"} = 1;
                 } else {
                     $unimplemented {$str} = 1;
-                    $githubTask {"- [ ] Not done -- [$cardName](https://www.google.com.au/search?q=$plus_cardName+$googleSetName+mtg&source=lnms&tbm=isch)\n"} = 1;
+                    $githubTask {"- [ ] Not done -- [$cardName](https://scryfall.com/search?q=$plus_cardName)\n"} = 1;
                 }
             }
         }

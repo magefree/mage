@@ -46,6 +46,7 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
 
@@ -88,7 +89,7 @@ public class BlinkmothNexus extends CardImpl {
 
 }
 
-class BlinkmothNexusToken extends Token {
+class BlinkmothNexusToken extends TokenImpl {
     public BlinkmothNexusToken() {
         super("Blinkmoth", "1/1 Blinkmoth artifact creature with flying");
         cardType.add(CardType.ARTIFACT);
@@ -97,5 +98,12 @@ class BlinkmothNexusToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());
+    }
+    public BlinkmothNexusToken(final BlinkmothNexusToken token) {
+        super(token);
+    }
+
+    public BlinkmothNexusToken copy() {
+        return new BlinkmothNexusToken(this);
     }
 }

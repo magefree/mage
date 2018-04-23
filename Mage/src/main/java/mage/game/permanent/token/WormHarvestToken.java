@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class WormHarvestToken extends Token {
+public class WormHarvestToken extends TokenImpl {
 
     public WormHarvestToken() {
         super("Worm", "1/1 black and green Worm creature token");
@@ -45,5 +45,13 @@ public class WormHarvestToken extends Token {
         subtype.add(SubType.WORM);
         power = new MageInt(1);
         toughness = new MageInt(1);
+    }
+
+    public WormHarvestToken(final WormHarvestToken token) {
+        super(token);
+    }
+
+    public WormHarvestToken copy() {
+        return new WormHarvestToken(this);
     }
 }

@@ -50,7 +50,7 @@ public class TempleOfAbandon extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
         // When Temple of Abandon enters the battlefield, scry 1.</i>
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ScryEffect(1)));
-        // {T}: Add {R} or {G} to your mana pool.
+        // {T}: Add {R} or {G}.
         this.addAbility(new RedManaAbility());
         this.addAbility(new GreenManaAbility());
     }

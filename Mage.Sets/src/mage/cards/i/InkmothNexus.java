@@ -43,6 +43,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 
 /**
@@ -54,7 +55,7 @@ public class InkmothNexus extends CardImpl {
     public InkmothNexus (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
         
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         
         // {1}: Inkmoth Nexus becomes a 1/1 Blinkmoth artifact creature with flying and infect until end of turn. It's still a land. (It deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)
@@ -73,7 +74,7 @@ public class InkmothNexus extends CardImpl {
     }
 }
 
-class InkmothNexusToken extends Token {
+class InkmothNexusToken extends TokenImpl {
     public InkmothNexusToken() {
         super("Blinkmoth", "1/1 Blinkmoth artifact creature with flying and infect");
         cardType.add(CardType.ARTIFACT);
@@ -83,5 +84,12 @@ class InkmothNexusToken extends Token {
         toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(InfectAbility.getInstance());
+    }
+    public InkmothNexusToken(final InkmothNexusToken token) {
+        super(token);
+    }
+
+    public InkmothNexusToken copy() {
+        return new InkmothNexusToken(this);
     }
 }

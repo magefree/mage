@@ -62,7 +62,7 @@ public class ExileAndGainLifeEqualPowerTargetEffect extends OneShotEffect {
                 int creaturePower = permanent.getPower().getValue();
                 permanent.moveToExile(null, null, source.getSourceId(), game);
                 game.applyEffects();
-                player.gainLife(creaturePower, game);
+                player.gainLife(creaturePower, game, source);
             }
             return true;
         }

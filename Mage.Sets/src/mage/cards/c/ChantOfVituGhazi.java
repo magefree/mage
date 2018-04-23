@@ -89,7 +89,7 @@ class ChantOfVituGhaziPreventEffect extends PreventAllDamageByAllPermanentsEffec
         PreventionEffectData preventionData = preventDamageAction(event, source, game);
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            controller.gainLife(preventionData.getPreventedDamage(), game);
+            controller.gainLife(preventionData.getPreventedDamage(), game, source);
         }
         // damage amount is reduced or set to 0 so complete replacement of damage event is never neccessary
         return false;

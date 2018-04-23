@@ -62,7 +62,7 @@ public class ChokedEstuary extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new RevealTargetFromHandCost(new TargetCardInHand(filter))),
                 "you may reveal an Island or Swamp card from your hand. If you don't, {this} enters the battlefield tapped"));
 
-        // {T}: Add {U} or {B} to your mana pool.
+        // {T}: Add {U} or {B}.
         this.addAbility(new BlueManaAbility());
         this.addAbility(new BlackManaAbility());
     }

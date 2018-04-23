@@ -25,7 +25,7 @@ public class Acquire extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}{U}");
 
         // Search target opponent's library for an artifact card and put that card onto the battlefield under your control.
-        // Then that player shuffles his or her library.
+        // Then that player shuffles their library.
         this.getSpellAbility().addEffect(new AcquireEffect());
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
@@ -50,7 +50,7 @@ class AcquireEffect extends OneShotEffect {
 
     public AcquireEffect() {
         super(Outcome.PutCardInPlay);
-        staticText = "Search target opponent's library for an artifact card and put that card onto the battlefield under your control. Then that player shuffles his or her library";
+        staticText = "Search target opponent's library for an artifact card and put that card onto the battlefield under your control. Then that player shuffles their library";
     }
 
     public AcquireEffect(final AcquireEffect effect) {

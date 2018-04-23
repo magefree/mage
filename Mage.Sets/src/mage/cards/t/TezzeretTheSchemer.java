@@ -61,7 +61,7 @@ public class TezzeretTheSchemer extends CardImpl {
         //Starting Loyalty - 5
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(5));
 
-        // +1: Create a colorless artifact token named Etherium Cell which has "{T}, Sacrifice this artifact: Add one mana of any color to your mana pool."
+        // +1: Create a colorless artifact token named Etherium Cell which has "{T}, Sacrifice this artifact: Add one mana of any color."
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new EtheriumCellToken()), 1));
 
         // -2: Target creature gets +X/-X until end of turn, where X is the number of artifacts you control.

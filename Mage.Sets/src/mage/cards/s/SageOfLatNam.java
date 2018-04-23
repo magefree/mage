@@ -39,8 +39,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -49,15 +48,8 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class SageOfLatNam extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("an Artifact");
-    
-    static
-    {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
-    }
-    
     public SageOfLatNam(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ARTIFICER);
 
@@ -66,7 +58,7 @@ public class SageOfLatNam extends CardImpl {
 
         // {T}, Sacrifice an artifact: Draw a card.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN)));
         this.addAbility(ability);
     }
 

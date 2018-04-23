@@ -23,7 +23,7 @@ public class EndlessSands extends CardImpl {
         
         this.subtype.add(SubType.DESERT);
                 
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         
         // {2}, {T}: Exile target creature you control.

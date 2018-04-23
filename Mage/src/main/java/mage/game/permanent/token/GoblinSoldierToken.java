@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class GoblinSoldierToken extends Token {
+public class GoblinSoldierToken extends TokenImpl {
 
     public GoblinSoldierToken() {
         super("Goblin Soldier", "1/1 red and white Goblin Soldier creature tokens");
@@ -47,4 +47,12 @@ public class GoblinSoldierToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
     }
+    public GoblinSoldierToken(final GoblinSoldierToken token) {
+        super(token);
+    }
+
+    public GoblinSoldierToken copy() {
+        return new GoblinSoldierToken(this);
+    }
+    
 }

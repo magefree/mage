@@ -218,9 +218,9 @@ Saproling, T3, G, 1|1, -, Creature - Saproling, Warren Mahy, -
 
 ROE - Rise of the Eldrazi (2010-04-23)
 
-Eldrazi Spawn, 1a, -, -, -, Creature - Eldrazi Spawn, Aleksi Briclot, Sacrifice this creature: Add {1} to your mana pool.
-Eldrazi Spawn, 1b, -, -, -, Creature - Eldrazi Spawn, Mark Tedin, Sacrifice this creature: Add {1} to your mana pool.
-Eldrazi Spawn, 1c, -, -, -, Creature - Eldrazi Spawn, Veronique Meignaud, Sacrifice this creature: Add {1} to your mana pool.
+Eldrazi Spawn, 1a, -, -, -, Creature - Eldrazi Spawn, Aleksi Briclot, Sacrifice this creature: Add {1}.
+Eldrazi Spawn, 1b, -, -, -, Creature - Eldrazi Spawn, Mark Tedin, Sacrifice this creature: Add {1}.
+Eldrazi Spawn, 1c, -, -, -, Creature - Eldrazi Spawn, Veronique Meignaud, Sacrifice this creature: Add {1}.
 Elemental, 2, R, *|*, -, Creature - Elemental, Jung Park, -
 Hellion, 1, R, 4|4, -, Creature - Hellion, Anthony Francisco, -
 Ooze, 4, G, *|*, -, Creature - Ooze, Daniel Ljunggren, -
@@ -312,7 +312,7 @@ Sorin Emblem, 3, -, -, -, Emblem - Sorin, Michael Komrack, Creatures you control
 
 DDI - Duel Decks: Venser vs. Koth (2012-03-30)
 
-Koth Emblem, E1, -, -, -, Emblem - Koth, Eric Deschamps, Mountains you control have Tap: This land deals 1 damage to target creature or player.'
+Koth Emblem, E1, -, -, -, Emblem - Koth, Eric Deschamps, Mountains you control have Tap: This land deals 1 damage to any target.'
 Venser Emblem, E2, -, -, -, Emblem - Venser, Eric Deschamps, Whenever you cast a spell� exile target permanent.
 
 FNM - Friday Night Magic (2012-04-01)
@@ -348,7 +348,7 @@ Hellion, 1, R, 4|4, -, Creature - Hellion, Anthony Francisco, -
 Beast, 8, G, 3|3, -, Creature - Beast, John Donahue, -
 Saproling, 9, G, 1|1, -, Creature - Saproling, Brad Rigney, -
 Wurm, 10, G, 6|6, -, Creature - Wurm, Anthony Francisco, -
-Liliana Emblem, 11, -, -, -, Emblem - Liliana, D. Alexander Gregory, Swamps you control have Tap: Add {B}{B}{B}{B} to your mana pool.'
+Liliana Emblem, 11, -, -, -, Emblem - Liliana, D. Alexander Gregory, Swamps you control have Tap: Add {B}{B}{B}{B}.'
 
 DDJ - Duel Decks: Izzet vs. Golgari (2012-09-07)
 
@@ -424,7 +424,7 @@ Elemental, 8, R, 1|1, -, Creature - Elemental, Winona Nelson, -
 Beast, 9, G, 3|3, -, Creature - Beast, John Donahue, -
 Saproling, 10, G, 1|1, -, Creature - Saproling, Brad Rigney, -
 Wolf, 11, G, 2|2, -, Creature - Wolf, Lars Grant-West, -
-Liliana Emblem, 12, -, -, -, Emblem - Liliana, D. Alexander Gregory, Swamps you control have Tap: Add {B}{B}{B}{B} to your mana pool.'
+Liliana Emblem, 12, -, -, -, Emblem - Liliana, D. Alexander Gregory, Swamps you control have Tap: Add {B}{B}{B}{B}.'
 Garruk Emblem, 13, -, -, -, Emblem - Garruk, Karl Kopinski, Whenever you cast a creature spell� you may search your library for a creature card� put it onto the battlefield� then shuffle your library.
 Sliver, T1, -, 1|1, League, Creature - Sliver, Vincent Proce, -
 
@@ -461,7 +461,7 @@ Zombie, 6, B, 2|2, -, Enchantment Creature - Zombie, Winona Nelson, -
 Elemental, 7, R, 3|1, -, Enchantment Creature - Elemental, Greg Staples, -
 Centaur, 8, G, 3|3, -, Enchantment Creature - Centaur, Ryan Barger, -
 Wolf, 9, G, 2|2, -, Creature - Wolf, Raoul Vitale, -
-Gold, 10, -, -, -, Artifact, Richard Wright, Sacrifice this artifact: Add one mana of any color to your mana pool.
+Gold, 10, -, -, -, Artifact, Richard Wright, Sacrifice this artifact: Add one mana of any color.
 Kiora Emblem, 11, -, -, -, Emblem - Kiora, Scott M. Fischer, At the beginning of your end step� put a 9/9 blue Kraken creature token onto the battlefield.
 
 DDM - Duel Decks: Jace vs. Vraska (2014-03-14)
@@ -561,7 +561,7 @@ Beast, 019, G, 3|3, -, Creature - Beast, Dave Allsop, -
 Beast, 020, G, 4|4, -, Creature - Beast, Steve Prescott, -
 Elemental, 021, G, 5|3, -, Creature - Elemental, Nils Hamm, -
 Elephant, 022, G, 3|3, -, Creature - Elephant, Lars Grant-West, -
-Elf Druid, 023, G, 1|1, -, Creature - Elf Druid, Raymond Swanland, {T}: Add {G} to your mana pool.
+Elf Druid, 023, G, 1|1, -, Creature - Elf Druid, Raymond Swanland, {T}: Add {G}.
 Elf Warrior, 024, G, 1|1, -, Creature - Elf Warrior, William O'Connor, -
 Treefolk, 025, G, *|*, -, Creature - Treefolk, Filip Burburan, -
 Wolf, 026, G, 2|2, -, Creature - Wolf, Daren Bader, -
@@ -625,9 +625,9 @@ Narset Emblem, 008, -, -, -, Emblem - Narset, Magali Villeneuve, Your opponents 
 
 MM2 - Modern Masters 2015 Edition (2015-05-22)
 
-Eldrazi Spawn, 001, -, -, -, Creature - Eldrazi Spawn, Aleksi Briclot, Sacrifice this creature: Add {1} to your mana pool.
-Eldrazi Spawn, 002, -, -, -, Creature - Eldrazi Spawn, Mark Tedin, Sacrifice this creature: Add {1} to your mana pool.
-Eldrazi Spawn, 003, -, -, -, Creature - Eldrazi Spawn, Veronique Meignaud, Sacrifice this creature: Add {1} to your mana pool.
+Eldrazi Spawn, 001, -, -, -, Creature - Eldrazi Spawn, Aleksi Briclot, Sacrifice this creature: Add {1}.
+Eldrazi Spawn, 002, -, -, -, Creature - Eldrazi Spawn, Mark Tedin, Sacrifice this creature: Add {1}.
+Eldrazi Spawn, 003, -, -, -, Creature - Eldrazi Spawn, Veronique Meignaud, Sacrifice this creature: Add {1}.
 Soldier, 004, W, 1|1, -, Creature - Soldier, Greg Staples, -
 Spirit, 005, W, 1|1, -, Creature - Spirit, Mike Sass, Flying
 Faerie Rogue, 006, B, 1|1, -, Creature - Faerie Rogue, Dave Allsop, Flying
@@ -661,18 +661,18 @@ Chandra Emblem, 014, -, -, -, Emblem - Chandra, Eric Deschamps, At the beginning
 
 DDP - Duel Decks: Zendikar vs. Eldrazi (2015-08-28)
 
-Eldrazi Spawn, 076, -, -, -, Creature - Eldrazi Spawn, Aleksi Briclot, Sacrifice this creature: Add {1} to your mana pool.
-Eldrazi Spawn, 077, -, -, -, Creature - Eldrazi Spawn, Veronique Meignaud, Sacrifice this creature: Add {1} to your mana pool.
-Eldrazi Spawn, 078, -, -, -, Creature - Eldrazi Spawn, Mark Tedin, Sacrifice this creature: Add {1} to your mana pool.
+Eldrazi Spawn, 076, -, -, -, Creature - Eldrazi Spawn, Aleksi Briclot, Sacrifice this creature: Add {1}.
+Eldrazi Spawn, 077, -, -, -, Creature - Eldrazi Spawn, Veronique Meignaud, Sacrifice this creature: Add {1}.
+Eldrazi Spawn, 078, -, -, -, Creature - Eldrazi Spawn, Mark Tedin, Sacrifice this creature: Add {1}.
 Hellion, 1, R, 4|4, -, Creature - Hellion, Anthony Francisco, -
 Plant, 080, G, -, -, Creature - Plant, Daren Bader, -
 
 BFZ - Battle for Zendikar (2015-10-09)
 
 Eldrazi, 001, -, 10|10, -, Creature - Eldrazi, Jack Wang, -
-Eldrazi Scion, 002, -, 1|1, -, Creature - Eldrazi Scion, Izzy, Sacrifice this creature: Add {1} to your mana pool.
-Eldrazi Scion, 003, -, 1|1, -, Creature - Eldrazi Scion, Winona Nelson, Sacrifice this creature: Add {1} to your mana pool.
-Eldrazi Scion, 004, -, 1|1, -, Creature - Eldrazi Scion, Svetlin Velinov, Sacrifice this creature: Add {1} to your mana pool.
+Eldrazi Scion, 002, -, 1|1, -, Creature - Eldrazi Scion, Izzy, Sacrifice this creature: Add {1}.
+Eldrazi Scion, 003, -, 1|1, -, Creature - Eldrazi Scion, Winona Nelson, Sacrifice this creature: Add {1}.
+Eldrazi Scion, 004, -, 1|1, -, Creature - Eldrazi Scion, Svetlin Velinov, Sacrifice this creature: Add {1}.
 Knight Ally, 005, W, 2|2, -, Creature - Knight Ally, Josu Hernaiz, -
 Kor Ally, 006, W, 1|1, -, Creature - Kor Ally, Jeremy Wilson, -
 Octopus, 007, U, 8|8, -, Creature - Octopus, Craig J Spearing, -
@@ -709,16 +709,16 @@ Elemental, 020, U R, 5|5, -, Creature - Elemental, Randy Gallegos, Flying
 Snake, 021, G U, 1|1, -, Creature - Snake, Christopher Moeller, -
 Spirit, 022, W B, 1|1, -, Creature - Spirit, Cliff Childs, Flying
 Spirit, 023, W B, *|*, -, Enchantment Creature - Spirit, Adam Paquette, This creature's power and toughness are each equal to the number of experience counters you have.
-Gold, 024, -, -, -, Artifact, Richard Wright, Sacrifice this artifact: Add one mana of any color to your mana pool.
+Gold, 024, -, -, -, Artifact, Richard Wright, Sacrifice this artifact: Add one mana of any color.
 
 OGW - Oath of the Gatewatch (2016-01-22)
 
-Eldrazi Scion, 001, -, 1|1, -, Creature - Eldrazi Scion, Izzy, Sacrifice this creature: Add {1} to your mana pool.
-Eldrazi Scion, 002, -, 1|1, -, Creature - Eldrazi Scion, Craig J Spearing, Sacrifice this creature: Add {1} to your mana pool.
-Eldrazi Scion, 003, -, 1|1, -, Creature - Eldrazi Scion, Svetlin Velinov, Sacrifice this creature: Add {1} to your mana pool.
-Eldrazi Scion, 004, -, 1|1, -, Creature - Eldrazi Scion, Izzy, Sacrifice this creature: Add {1} to your mana pool.
-Eldrazi Scion, 005, -, 1|1, -, Creature - Eldrazi Scion, Winona Nelson, Sacrifice this creature: Add {1} to your mana pool.
-Eldrazi Scion, 006, -, 1|1, -, Creature - Eldrazi Scion, Svetlin Velinov, Sacrifice this creature: Add {1} to your mana pool.
+Eldrazi Scion, 001, -, 1|1, -, Creature - Eldrazi Scion, Izzy, Sacrifice this creature: Add {1}.
+Eldrazi Scion, 002, -, 1|1, -, Creature - Eldrazi Scion, Craig J Spearing, Sacrifice this creature: Add {1}.
+Eldrazi Scion, 003, -, 1|1, -, Creature - Eldrazi Scion, Svetlin Velinov, Sacrifice this creature: Add {1}.
+Eldrazi Scion, 004, -, 1|1, -, Creature - Eldrazi Scion, Izzy, Sacrifice this creature: Add {1}.
+Eldrazi Scion, 005, -, 1|1, -, Creature - Eldrazi Scion, Winona Nelson, Sacrifice this creature: Add {1}.
+Eldrazi Scion, 006, -, 1|1, -, Creature - Eldrazi Scion, Svetlin Velinov, Sacrifice this creature: Add {1}.
 Angel, 007, W, 3|3, -, Creature - Angel, Anastasia Ovchinnikova, Flying
 Zombie, 008, B, 2|2, -, Creature - Zombie, Kev Walker, -
 Elemental, 009, R, 3|1, -, Creature - Elemental, Raymond Swanland, -
@@ -732,7 +732,7 @@ Human Soldier, 002, W, 1|1, -, Creature - Human Soldier, Deruchenko Alexander, -
 Spirit, 003, W, 1|1, -, Creature - Spirit, Jason A. Engle, Flying
 Vampire Knight, 004, B, 1|1, -, Creature - Vampire Knight, Deruchenko Alexander, Lifelink
 Zombie, 005, B, 2|2, -, Creature - Zombie, Craig J Spearing, -
-Devil, 006, R, 1|1, -, Creature - Devil, Wayne England, When this creature dies� it deals 1 damage to target creature or player.
+Devil, 006, R, 1|1, -, Creature - Devil, Wayne England, When this creature dies� it deals 1 damage to any target.
 Insect, 007, G, 1|1, -, Creature - Insect, Christopher Moeller, -
 Ooze, 008, G, 3|3, -, Creature - Ooze, Nils Hamm, -
 Wolf, 009, G, 2|2, -, Creature - Wolf, Aaron Miller, -
@@ -744,7 +744,7 @@ Clue, 014, -, -, -, Artifact - Clue, Cliff Childs, {2}‚ Sacrifice this Artifac
 Clue, 015, -, -, -, Artifact - Clue, James Paick, {2}‚ Sacrifice this Artifact: Draw a card.
 Clue, 016, -, -, -, Artifact - Clue, Franz Vohwinkel, {2}‚ Sacrifice this Artifact: Draw a card.
 Jace Emblem, 017, -, -, -, Emblem - Jace, Tyler Jacobson, Whenever an opponent casts his or her first spell each turn� counter that spell.
-Arlinn Emblem, 018, -, -, -, Emblem - Arlinn, Winona Nelson, Creatures you control have haste and '{T}: This creature deals damage equal to its power to target creature or player.'
+Arlinn Emblem, 018, -, -, -, Emblem - Arlinn, Winona Nelson, Creatures you control have haste and '{T}: This creature deals damage equal to its power to any target.'
 
 
 SWS - Star Wars Custom set

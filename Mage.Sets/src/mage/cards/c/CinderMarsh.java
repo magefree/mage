@@ -46,9 +46,9 @@ public class CinderMarsh extends CardImpl {
     public CinderMarsh(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
 
-        // {tap}: Add {C} to your mana pool.
+        // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
-        // {tap}: Add {B} or {R} to your mana pool. Cinder Marsh doesn't untap during your next untap step.
+        // {tap}: Add {B} or {R}. Cinder Marsh doesn't untap during your next untap step.
         Ability ability = new BlackManaAbility();
         ability.addEffect(new DontUntapInControllersNextUntapStepSourceEffect());
         this.addAbility(ability);

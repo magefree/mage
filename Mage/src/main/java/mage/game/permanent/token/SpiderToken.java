@@ -17,7 +17,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class SpiderToken extends Token {
+public class SpiderToken extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 
@@ -43,5 +43,13 @@ public class SpiderToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(2);
         addAbility(ReachAbility.getInstance());
+    }
+
+    public SpiderToken(final SpiderToken token) {
+        super(token);
+    }
+
+    public SpiderToken copy() {
+        return new SpiderToken(this);
     }
 }

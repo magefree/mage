@@ -61,10 +61,10 @@ public class VaultOfCatlacan extends CardImpl {
         ability.setRuleAtTheTop(true);
         this.addAbility(ability);
 
-        // {T}: Add one mana of any color to your mana pool.
+        // {T}: Add one mana of any color.
         this.addAbility(new AnyColorManaAbility());
 
-        // {T}: Add {U} to your mana pool for each artifact you control.
+        // {T}: Add {U} for each artifact you control.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD,
                 new DynamicManaEffect(Mana.BlueMana(1), new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT)),
                 new TapSourceCost()));

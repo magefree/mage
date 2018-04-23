@@ -29,6 +29,8 @@ package mage.game;
 
 import java.io.Serializable;
 import java.util.*;
+import java.util.stream.Collectors;
+
 import mage.MageObject;
 import mage.abilities.*;
 import mage.abilities.effects.ContinuousEffect;
@@ -42,6 +44,7 @@ import mage.game.combat.Combat;
 import mage.game.combat.CombatGroup;
 import mage.game.command.Command;
 import mage.game.command.CommandObject;
+import mage.game.command.Plane;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.events.ZoneChangeGroupEvent;
@@ -93,6 +96,8 @@ public class GameState implements Serializable, Copyable<GameState> {
     private UUID monarchId; // player that is the monarch
     private SpellStack stack;
     private Command command;
+    private boolean isPlaneChase;
+    private List<String> seenPlanes = new ArrayList<>();
     private List<Designation> designations = new ArrayList<>();
     private Exile exile;
     private Battlefield battlefield;
@@ -151,6 +156,8 @@ public class GameState implements Serializable, Copyable<GameState> {
 
         this.stack = state.stack.copy();
         this.command = state.command.copy();
+        this.isPlaneChase = state.isPlaneChase;
+        this.seenPlanes.addAll(state.seenPlanes);
         this.designations.addAll(state.designations);
         this.exile = state.exile.copy();
         this.battlefield = state.battlefield.copy();
@@ -170,7 +177,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.watchers = state.watchers.copy();
         for (Map.Entry<String, Object> entry : state.values.entrySet()) {
             if (entry.getValue() instanceof HashSet) {
-                this.values.put(entry.getKey(), (HashSet) ((HashSet) entry.getValue()).clone());
+                this.values.put(entry.getKey(), ((HashSet) entry.getValue()).clone());
             } else {
                 this.values.put(entry.getKey(), entry.getValue());
             }
@@ -201,7 +208,9 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.monarchId = state.monarchId;
         this.stack = state.stack;
         this.command = state.command;
-        this.designations = state.designations;
+        this.isPlaneChase = state.isPlaneChase;
+        this.seenPlanes = state.seenPlanes;
+        this.designations = state.designations;        
         this.exile = state.exile;
         this.battlefield = state.battlefield;
         this.turnNum = state.turnNum;
@@ -446,6 +455,25 @@ public class GameState implements Serializable, Copyable<GameState> {
 
     public List<Designation> getDesignations() {
         return designations;
+    }
+
+    public Plane getCurrentPlane() {
+        if (command != null && command.size() > 0) {
+            for (CommandObject cobject : command) {
+                if (cobject instanceof Plane) {
+                    return (Plane) cobject;
+                }
+            }
+        }
+        return null;
+    }    
+    
+    public List<String> getSeenPlanes() {
+        return seenPlanes;
+    }
+    
+    public boolean isPlaneChase() {
+        return isPlaneChase;
     }
 
     public Command getCommand() {
@@ -853,6 +881,20 @@ public class GameState implements Serializable, Copyable<GameState> {
             addAbility(ability, designation.getId(), null);
         }
     }
+    
+    public void addSeenPlane(Plane plane, Game game, UUID controllerId) {
+        if (plane != null) {
+            getSeenPlanes().add(plane.getName());
+        }
+    }
+    
+    public void resetSeenPlanes() {
+        getSeenPlanes().clear();
+    }
+
+    public void setPlaneChase(Game game, boolean isPlaneChase) {
+        this.isPlaneChase = isPlaneChase;
+    }
 
     public void addCommandObject(CommandObject commandObject) {
         getCommand().add(commandObject);
@@ -882,22 +924,12 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     public void removeDelayedTriggeredAbility(UUID abilityId) {
-        for (DelayedTriggeredAbility ability : delayed) {
-            if (ability.getId().equals(abilityId)) {
-                delayed.remove(ability);
-                break;
-            }
-        }
+        delayed.removeIf(ability -> ability.getId().equals(abilityId));
     }
 
     public List<TriggeredAbility> getTriggered(UUID controllerId) {
-        List<TriggeredAbility> triggereds = new ArrayList<>();
-        for (TriggeredAbility ability : triggered) {
-            if (ability.getControllerId().equals(controllerId)) {
-                triggereds.add(ability);
-            }
-        }
-        return triggereds;
+        return triggered.stream().filter(triggeredAbility -> triggeredAbility.getControllerId().equals(controllerId))
+                .collect(Collectors.toList());
     }
 
     public DelayedTriggeredAbilities getDelayed() {
@@ -1022,6 +1054,8 @@ public class GameState implements Serializable, Copyable<GameState> {
         exile.clear();
         command.clear();
         designations.clear();
+        seenPlanes.clear();
+        isPlaneChase = false;
         revealed.clear();
         lookedAt.clear();
         turnNum = 0;
@@ -1089,10 +1123,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     public int getZoneChangeCounter(UUID objectId) {
-        if (this.zoneChangeCounter.containsKey(objectId)) {
-            return this.zoneChangeCounter.get(objectId);
-        }
-        return 1;
+        return zoneChangeCounter.getOrDefault(objectId, 1);
     }
 
     public void updateZoneChangeCounter(UUID objectId) {

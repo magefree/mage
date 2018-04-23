@@ -46,7 +46,7 @@ public class CastAsInstantTest extends CardTestPlayerBase {
         // Draw a card.
         addCard(Zone.HAND, playerB, "Quicken"); // {U}
         // Devoid (This card has no color.)
-        // Target opponent exiles two cards from his or her hand and loses 2 life.
+        // Target opponent exiles two cards from their hand and loses 2 life.
         addCard(Zone.HAND, playerB, "Witness the End"); // {3}{B}
 
         addCard(Zone.HAND, playerA, "Silvercoat Lion", 2);

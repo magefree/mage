@@ -85,6 +85,24 @@
 |Generate|EMBLEM:M14|Liliana of the Dark Realms||Emblem Liliana|LilianaOfTheDarkRealmsEmblem|
 |Generate|EMBLEM:MMA|Elspeth, Knight Errant||Emblem Elspeth|ElspethKnightErrantEmblem|
 |Generate|EMBLEM:RIX|Huatli, Radiant Champion||Emblem Huatli|HuatliRadiantChampionEmblem|
+|Generate|PLANE:PCA|Plane - Academy At Tolaria West|||AcademyAtTolariaWestPlane|
+|Generate|PLANE:PCA|Plane - Agyrem|||AgyremPlane|
+|Generate|PLANE:PCA|Plane - Akoum|||AkoumPlane|
+|Generate|PLANE:PCA|Plane - Astral Arena|||AstralArenaPlane|
+|Generate|PLANE:PCA|Plane - Bant|||BantPlane|
+|Generate|PLANE:PCA|Plane - Edge Of Malacol|||EdgeOfMalacolPlane|
+|Generate|PLANE:PCA|Plane - Feeding Grounds|||FeedingGroundsPlane|
+|Generate|PLANE:PCA|Plane - Fields of Summer|||FieldsOfSummerPlane|
+|Generate|PLANE:PCA|Plane - Hedron Fields of Agadeem|||HedronFieldsOfAgadeemPlane|
+|Generate|PLANE:PCA|Plane - Lethe Lake|||LetheLakePlane|
+|Generate|PLANE:PCA|Plane - Naya|||NayaPlane|
+|Generate|PLANE:PCA|Plane - Tazeem|||TazeemPlane|
+|Generate|PLANE:PCA|Plane - The Dark Barony|||TheDarkBaronyPlane|
+|Generate|PLANE:PCA|Plane - The Eon Fog|||TheEonFogPlane|
+|Generate|PLANE:PCA|Plane - Truga Jungle|||TrugaJunglePlane|
+|Generate|PLANE:PCA|Plane - Turri Island|||TurriIslandPlane|
+|Generate|PLANE:PCA|Plane - Undercity Reaches|||UndercityReachesPlane|
+|Generate|TOK:PCA|Eldrazi|||EldraziAnnihilatorToken|
 |Generate|TOK:10E|Ape|||PongifyApeToken|
 |Generate|TOK:10E|Dragon|||DragonToken2|
 |Generate|TOK:10E|Goblin|||GoblinToken|

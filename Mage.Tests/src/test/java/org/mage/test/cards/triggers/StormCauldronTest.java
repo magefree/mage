@@ -31,11 +31,11 @@ public class StormCauldronTest extends CardTestPlayerBase {
     @Test
     public void testLandNotReturnedToHand() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
-        // {T}: Add {C} to your mana pool.
-        // {T}, Sacrifice Crystal Vein: Add {C}{C} to your mana pool.
+        // {T}: Add {C}.
+        // {T}, Sacrifice Crystal Vein: Add {C}{C}.
         addCard(Zone.BATTLEFIELD, playerA, "Crystal Vein", 1);
 
-        // Each player may play an additional land during each of his or her turns.
+        // Each player may play an additional land during each of their turns.
         // Whenever a land is tapped for mana, return it to its owner's hand.
         addCard(Zone.BATTLEFIELD, playerB, "Storm Cauldron", 1);
 

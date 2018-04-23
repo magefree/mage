@@ -36,7 +36,7 @@ import mage.constants.SuperType;
  *
  * @author spjspj
  */
-public class KaldraToken extends Token {
+public class KaldraToken extends TokenImpl {
 
     public KaldraToken() {
         super("Kaldra", "legendary 4/4 colorless Avatar creature token named Kaldra");
@@ -45,5 +45,13 @@ public class KaldraToken extends Token {
         subtype.add(SubType.AVATAR);
         power = new MageInt(4);
         toughness = new MageInt(4);
+    }
+
+    public KaldraToken(final KaldraToken token) {
+        super(token);
+    }
+
+    public KaldraToken copy() {
+        return new KaldraToken(this);
     }
 }

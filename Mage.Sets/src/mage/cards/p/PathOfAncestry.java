@@ -61,7 +61,7 @@ public class PathOfAncestry extends CardImpl {
         // Path of Ancestry enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
 
-        // T: Add to your mana pool one mana of any color in your commander's color identity.
+        // T: Add one mana of any color in your commander's color identity.
         Ability ability = new CommanderColorIdentityManaAbility();
         this.addAbility(ability);
 

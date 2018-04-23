@@ -47,6 +47,7 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.target.targetpointer.FixedTarget;
 
@@ -59,7 +60,7 @@ public class PhyrexianTotem extends CardImpl {
     public PhyrexianTotem(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
-        // {tap}: Add {B} to your mana pool.
+        // {tap}: Add {B}.
         this.addAbility(new BlackManaAbility());
         // {2}{B}: {this} becomes a 5/5 black Horror artifact creature with trample until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(
@@ -77,7 +78,7 @@ public class PhyrexianTotem extends CardImpl {
         return new PhyrexianTotem(this);
     }
     
-    private static class PhyrexianTotemToken extends Token {
+    private static class PhyrexianTotemToken extends TokenImpl {
         PhyrexianTotemToken() {
             super("Horror", "5/5 black Horror artifact creature with trample");
             cardType.add(CardType.ARTIFACT);
@@ -87,6 +88,13 @@ public class PhyrexianTotem extends CardImpl {
             power = new MageInt(5);
             toughness = new MageInt(5);
             this.addAbility(TrampleAbility.getInstance());
+        }
+        public PhyrexianTotemToken(final PhyrexianTotemToken token) {
+            super(token);
+        }
+
+        public PhyrexianTotemToken copy() {
+            return new PhyrexianTotemToken(this);
         }
     }
 }

@@ -35,6 +35,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetLandPermanent;
 
@@ -65,7 +66,7 @@ public class VerdantTouch extends CardImpl {
     }
 }
 
-class VerdantTouchLandToken extends Token {
+class VerdantTouchLandToken extends TokenImpl {
 
     public VerdantTouchLandToken() {
         super("", "2/2 creature");
@@ -73,5 +74,12 @@ class VerdantTouchLandToken extends Token {
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
+    }
+    public VerdantTouchLandToken(final VerdantTouchLandToken token) {
+        super(token);
+    }
+
+    public VerdantTouchLandToken copy() {
+        return new VerdantTouchLandToken(this);
     }
 }

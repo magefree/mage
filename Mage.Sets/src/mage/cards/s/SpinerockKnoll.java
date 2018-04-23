@@ -62,7 +62,7 @@ public class SpinerockKnoll extends CardImpl {
         // Hideaway
         this.addAbility(new HideawayAbility());
 
-        // {tap}: Add {R} to your mana pool.
+        // {tap}: Add {R}.
         this.addAbility(new RedManaAbility());
 
         // {R}, {tap}: You may play the exiled card without paying its mana cost if an opponent was dealt 7 or more damage this turn.

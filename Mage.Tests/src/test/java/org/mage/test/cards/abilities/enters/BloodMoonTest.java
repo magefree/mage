@@ -69,7 +69,7 @@ public class BloodMoonTest extends CardTestPlayerBase {
         /**
          * Kabira Crossroads Land Kabira Crossroads enters the battlefield
          * tapped. When Kabira Crossroads enters the battlefield, you gain 2
-         * life. {W}: Add to your mana pool.
+         * life. {W}: Add.
          *
          */
         addCard(Zone.HAND, playerA, "Kabira Crossroads");
@@ -117,8 +117,8 @@ public class BloodMoonTest extends CardTestPlayerBase {
         // Enchanted land is an Island.
         addCard(Zone.HAND, playerA, "Spreading Seas"); // {1}{U}
 
-        // {T}: Add {C} to your mana pool.
-        // {T}: Add {B} or {W} to your mana pool. Caves of Koilos deals 1 damage to you.
+        // {T}: Add {C}.
+        // {T}: Add {B} or {W}. Caves of Koilos deals 1 damage to you.
         addCard(Zone.BATTLEFIELD, playerB, "Steam Vents");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Spreading Seas", "Steam Vents");
@@ -148,8 +148,8 @@ public class BloodMoonTest extends CardTestPlayerBase {
         // Enchanted land is an Island.
         addCard(Zone.HAND, playerA, "Spreading Seas"); // {1}{U}
 
-        // {T}: Add {C} to your mana pool.
-        // {T}: Add {B} or {W} to your mana pool. Caves of Koilos deals 1 damage to you.
+        // {T}: Add {C}.
+        // {T}: Add {B} or {W}. Caves of Koilos deals 1 damage to you.
         addCard(Zone.BATTLEFIELD, playerB, "Steam Vents");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Blood Moon");
@@ -184,8 +184,8 @@ public class BloodMoonTest extends CardTestPlayerBase {
         // Activated abilities of sources with the chosen name can't be activated unless they're mana abilities.
         addCard(Zone.HAND, playerB, "Pithing Needle"); // {1}
         addCard(Zone.HAND, playerB, "Ghost Quarter", 1);
-        // {T}: Add {C} to your mana pool.
-        // {T}, Sacrifice Ghost Quarter: Destroy target land. Its controller may search his or her library for a basic land card, put it onto the battlefield, then shuffle his or her library.
+        // {T}: Add {C}.
+        // {T}, Sacrifice Ghost Quarter: Destroy target land. Its controller may search their library for a basic land card, put it onto the battlefield, then shuffle their library.
         addCard(Zone.BATTLEFIELD, playerB, "Ghost Quarter", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Blood Moon");
@@ -254,7 +254,7 @@ public class BloodMoonTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerA, "Swamp");
 
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         // {1}: Mutavault becomes a 2/2 creature with all creature types until end of turn. It's still a land.
         addCard(Zone.BATTLEFIELD, playerA, "Mutavault", 1);
 
@@ -285,7 +285,7 @@ public class BloodMoonTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerA, "Swamp");
 
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         // {1}: Mutavault becomes a 2/2 creature with all creature types until end of turn. It's still a land.
         addCard(Zone.BATTLEFIELD, playerA, "Mutavault", 1);
 
@@ -320,7 +320,7 @@ public class BloodMoonTest extends CardTestPlayerBase {
      */
     @Test
     public void testBloodMoonFlagstonesOfTrokair() {
-        // {T}: Add {W} to your mana pool.
+        // {T}: Add {W}.
         // When Flagstones of Trokair is put into a graveyard from the battlefield, you may search
         // your library for a Plains card and put it onto the battlefield tapped. If you do, shuffle your library.
         addCard(Zone.HAND, playerA, "Flagstones of Trokair", 1);
@@ -382,7 +382,7 @@ public class BloodMoonTest extends CardTestPlayerBase {
     @Test
     @Ignore
     public void testBloodMoonMadblindMountain() {
-        // {T}: Add {R} to your mana pool.
+        // {T}: Add {R}.
         // Madblind Mountain enters the battlefield tapped.
         // {R}, {tap}: Shuffle your library. Activate this ability only if you control two or more red permanents.
         addCard(Zone.HAND, playerA, "Madblind Mountain", 1);

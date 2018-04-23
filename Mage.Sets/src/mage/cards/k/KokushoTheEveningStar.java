@@ -87,7 +87,7 @@ class KokushoTheEveningStarEffect extends OneShotEffect {
             loseLife += game.getPlayer(opponentId).loseLife(5, game, false);
         }
         if (loseLife > 0)
-            game.getPlayer(source.getControllerId()).gainLife(loseLife, game);
+            game.getPlayer(source.getControllerId()).gainLife(loseLife, game, source);
         return true;
     }
 

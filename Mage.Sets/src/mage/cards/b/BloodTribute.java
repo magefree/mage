@@ -66,7 +66,7 @@ public class BloodTribute extends CardImpl {
         filter.add(Predicates.not(new TappedPredicate()));
         this.addAbility(new KickerAbility(new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, true))));
 
-        // Target opponent loses half his or her life, rounded up.
+        // Target opponent loses half their life, rounded up.
         this.getSpellAbility().addTarget(new TargetOpponent());
         this.getSpellAbility().addEffect(new BloodTributeLoseLifeEffect());
 
@@ -74,7 +74,7 @@ public class BloodTribute extends CardImpl {
         Effect effect = new ConditionalOneShotEffect(
                 new BloodTributeGainLifeEffect(),
                 KickedCondition.instance,
-                "If {this} was kicked, you gain life equal to the life lost this way");
+                "if this spell was kicked, you gain life equal to the life lost this way");
         this.getSpellAbility().addEffect(effect);
     }
 
@@ -92,7 +92,7 @@ class BloodTributeLoseLifeEffect extends OneShotEffect {
 
     public BloodTributeLoseLifeEffect() {
         super(Outcome.Damage);
-        this.staticText = "Target opponent loses half his or her life, rounded up";
+        this.staticText = "Target opponent loses half their life, rounded up";
     }
 
     public BloodTributeLoseLifeEffect(final BloodTributeLoseLifeEffect effect) {
@@ -141,7 +141,7 @@ class BloodTributeGainLifeEffect extends OneShotEffect {
         if (player != null) {
             Integer amount = (Integer) game.getState().getValue(source.getSourceId().toString() + "_BloodTribute");
             if (amount != null && amount > 0) {
-                player.gainLife(amount, game);
+                player.gainLife(amount, game, source);
                 return true;
             }
         }

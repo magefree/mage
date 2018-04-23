@@ -64,7 +64,7 @@ public class ThadaAdelAcquisitor extends CardImpl {
         // Islandwalk
         this.addAbility(new IslandwalkAbility());
 
-        // Whenever Thada Adel, Acquisitor deals combat damage to a player, search that player's library for an artifact card and exile it. Then that player shuffles his or her library. Until end of turn, you may play that card.
+        // Whenever Thada Adel, Acquisitor deals combat damage to a player, search that player's library for an artifact card and exile it. Then that player shuffles their library. Until end of turn, you may play that card.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new ThadaAdelAcquisitorEffect(), false, true));
     }
 
@@ -82,7 +82,7 @@ class ThadaAdelAcquisitorEffect extends OneShotEffect {
 
     ThadaAdelAcquisitorEffect() {
         super(Outcome.Exile);
-        staticText = "search that player's library for an artifact card and exile it. Then that player shuffles his or her library. Until end of turn, you may play that card";
+        staticText = "search that player's library for an artifact card and exile it. Then that player shuffles their library. Until end of turn, you may play that card";
     }
 
     ThadaAdelAcquisitorEffect(final ThadaAdelAcquisitorEffect effect) {

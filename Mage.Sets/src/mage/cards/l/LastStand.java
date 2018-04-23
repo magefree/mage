@@ -54,7 +54,7 @@ public class LastStand extends CardImpl {
     public LastStand(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{W}{U}{B}{R}{G}");
 
-        // Target opponent loses 2 life for each Swamp you control. Last Stand deals damage equal to the number of Mountains you control to target creature. Create a 1/1 green Saproling creature token for each Forest you control. You gain 2 life for each Plains you control. Draw a card for each Island you control, then discard that many cards.
+        // Target opponent loses 2 life for each Swamp you control. Last Stand deals damage to target creature equal to the number of Mountains you control. Create a 1/1 green Saproling creature token for each Forest you control. You gain 2 life for each Plains you control. Draw a card for each Island you control, then discard that many cards.
         this.getSpellAbility().addEffect(new LastStandEffect());
         this.getSpellAbility().addTarget(new TargetOpponent());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
@@ -87,7 +87,7 @@ class LastStandEffect extends OneShotEffect {
 
     public LastStandEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Target opponent loses 2 life for each Swamp you control. Last Stand deals damage equal to the number of Mountains you control to target creature. Create a 1/1 green Saproling creature token for each Forest you control. You gain 2 life for each Plains you control. Draw a card for each Island you control, then discard that many cards";
+        this.staticText = "Target opponent loses 2 life for each Swamp you control. Last Stand deals damage to target creature equal to the number of Mountains you control. Create a 1/1 green Saproling creature token for each Forest you control. You gain 2 life for each Plains you control. Draw a card for each Island you control, then discard that many cards";
     }
 
     public LastStandEffect(final LastStandEffect effect) {
@@ -124,7 +124,7 @@ class LastStandEffect extends OneShotEffect {
             }
             // You gain 2 life for each Plains you control.
             int plains = game.getBattlefield().count(filterPlains, source.getSourceId(), source.getControllerId(), game);
-            controller.gainLife(plains * 2, game);
+            controller.gainLife(plains * 2, game, source);
             // Draw a card for each Island you control, then discard that many cards
             int islands = game.getBattlefield().count(filterIsland, source.getSourceId(), source.getControllerId(), game);
             if (islands > 0) {

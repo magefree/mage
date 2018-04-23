@@ -50,7 +50,7 @@ public class TempleOfPlenty extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
         // When Temple of Plenty enters the battlefield, scry 1.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ScryEffect(1)));
-        // {T}: Add {G} or {W} to your mana pool.
+        // {T}: Add {G} or {W}.
         this.addAbility(new GreenManaAbility());
         this.addAbility(new WhiteManaAbility());
     }

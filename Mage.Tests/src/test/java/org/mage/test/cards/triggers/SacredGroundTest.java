@@ -156,7 +156,7 @@ public class SacredGroundTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Molten Rain");// Instant {1}{R}{R}
         // Choose target card in a graveyard other than a basic land card. Search its owner's graveyard,
         // hand, and library for any number of cards with the same name as that card and exile them.
-        // Then that player shuffles his or her library.
+        // Then that player shuffles their library.
         addCard(Zone.HAND, playerA, "Surgical Extraction"); // Instant {B/P}
 
         addCard(Zone.BATTLEFIELD, playerB, "Caves of Koilos", 1);

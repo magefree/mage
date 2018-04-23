@@ -45,7 +45,7 @@ public class ThoughtScour extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
 
 
-        // Target player puts the top two cards of his or her library into his or her graveyard.
+        // Target player puts the top two cards of their library into their graveyard.
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new PutLibraryIntoGraveTargetEffect(2));
         // Draw a card.

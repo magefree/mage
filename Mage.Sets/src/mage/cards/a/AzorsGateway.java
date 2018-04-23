@@ -119,7 +119,7 @@ class AzorsGatewayEffect extends OneShotEffect {
                     usedCMC.add(card.getConvertedManaCost());
                 }
                 if (usedCMC.size() > 4) {
-                    controller.gainLife(4, game);
+                    controller.gainLife(4, game, source);
                     new UntapSourceEffect().apply(game, source);
                     new TransformSourceEffect(true).apply(game, source);
                 }

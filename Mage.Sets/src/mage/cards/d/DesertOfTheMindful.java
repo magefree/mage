@@ -51,7 +51,7 @@ public class DesertOfTheMindful extends CardImpl {
         // Desert of the Mindful enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
 
-        // {T}: Add {U} to your mana pool.
+        // {T}: Add {U}.
         this.addAbility(new BlueManaAbility());
 
         // Cycling {1}{U}

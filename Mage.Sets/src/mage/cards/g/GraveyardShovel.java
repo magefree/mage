@@ -53,7 +53,7 @@ public class GraveyardShovel extends CardImpl {
     public GraveyardShovel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
-        // {2}, {tap}: Target player exiles a card from his or her graveyard. If it's a creature card, you gain 2 life.
+        // {2}, {tap}: Target player exiles a card from their graveyard. If it's a creature card, you gain 2 life.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GraveyardShovelEffect(), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPlayer());
@@ -74,7 +74,7 @@ class GraveyardShovelEffect extends OneShotEffect {
 
     public GraveyardShovelEffect() {
         super(Outcome.Exile);
-        this.staticText = "Target player exiles a card from his or her graveyard. If it's a creature card, you gain 2 life";
+        this.staticText = "Target player exiles a card from their graveyard. If it's a creature card, you gain 2 life";
     }
 
     public GraveyardShovelEffect(final GraveyardShovelEffect effect) {
@@ -98,7 +98,7 @@ class GraveyardShovelEffect extends OneShotEffect {
                     targetPlayer.getGraveyard().remove(card);
                     card.moveToExile(null, "", source.getSourceId(), game);
                     if (card.isCreature()) {
-                        controller.gainLife(2, game);
+                        controller.gainLife(2, game, source);
                     }
                 }
                 return true;

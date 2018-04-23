@@ -85,7 +85,7 @@ public class SpendManaAsThoughItWereManaOfAnyColorTest extends CardTestPlayerBas
         addCard(Zone.BATTLEFIELD, playerA, "Celestial Dawn", 1);
 
         // Whenever a creature dies, put a charge counter on Black Market.
-        // At the beginning of your precombat main phase, add {B} to your mana pool for each charge counter on Black Market.
+        // At the beginning of your precombat main phase, add {B} for each charge counter on Black Market.
         addCard(Zone.BATTLEFIELD, playerA, "Black Market", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 1);
 

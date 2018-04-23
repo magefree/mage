@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author FenrisulfrX
  */
-public class HornetToken extends Token {
+public class HornetToken extends TokenImpl {
     
     public HornetToken() {
         this("DDE");
@@ -54,5 +54,13 @@ public class HornetToken extends Token {
         toughness = new MageInt(1);
         addAbility(FlyingAbility.getInstance());
         addAbility(HasteAbility.getInstance());
-    }    
+    }
+
+    public HornetToken(final HornetToken token) {
+        super(token);
+    }
+
+    public HornetToken copy() {
+        return new HornetToken(this);
+    }
 }

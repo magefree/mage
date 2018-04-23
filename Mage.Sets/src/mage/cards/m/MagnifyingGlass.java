@@ -48,7 +48,7 @@ public class MagnifyingGlass extends CardImpl {
     public MagnifyingGlass(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
 
         // {4}, {T}: Investigate.

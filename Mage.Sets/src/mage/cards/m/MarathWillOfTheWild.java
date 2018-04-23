@@ -56,9 +56,10 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.MarathWillOfTheWildElementalToken;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -88,10 +89,10 @@ public class MarathWillOfTheWild extends CardImpl {
         ability.addCost(new MarathWillOfTheWildRemoveCountersCost());
         ability.addTarget(new TargetCreaturePermanent());
 
-        // or Marath deals X damage to target creature or player;
+        // or Marath deals X damage to any target;
         Mode mode = new Mode();
         mode.getEffects().add(new DamageTargetEffect(new ManacostVariableValue()));
-        mode.getTargets().add(new TargetCreatureOrPlayer());
+        mode.getTargets().add(new TargetAnyTarget());
         ability.addMode(mode);
 
         // or create an X/X green Elemental creature token.

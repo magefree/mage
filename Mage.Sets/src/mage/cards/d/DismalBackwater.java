@@ -50,7 +50,7 @@ public class DismalBackwater extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
         // When Dismal Backwater enters the battlefield, you gain 1 life.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(1)));
-        // {T}: Add {U} or {B} to your mana pool.
+        // {T}: Add {U} or {B}.
         this.addAbility(new BlueManaAbility());
         this.addAbility(new BlackManaAbility());
     }

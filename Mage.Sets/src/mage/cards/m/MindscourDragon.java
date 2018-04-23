@@ -54,7 +54,7 @@ public class MindscourDragon extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // Whenever Mindscour Dragon deals combat damage to an opponent, target player puts the top four cards of his or her library into his or her graveyard.
+        // Whenever Mindscour Dragon deals combat damage to an opponent, target player puts the top four cards of their library into their graveyard.
         Ability ability = new DealsDamageToOpponentTriggeredAbility(new PutLibraryIntoGraveTargetEffect(4), false, true);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);

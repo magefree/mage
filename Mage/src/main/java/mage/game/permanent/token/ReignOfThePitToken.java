@@ -36,7 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
  *
  * @author spjspj
  */
-public class ReignOfThePitToken extends Token {
+public class ReignOfThePitToken extends TokenImpl {
 
     public ReignOfThePitToken() {
         this(1);
@@ -50,4 +50,12 @@ public class ReignOfThePitToken extends Token {
         cardType.add(CardType.CREATURE);
         this.addAbility(FlyingAbility.getInstance());
     }
+    public ReignOfThePitToken(final ReignOfThePitToken token) {
+        super(token);
+    }
+
+    public ReignOfThePitToken copy() {
+        return new ReignOfThePitToken(this);
+    }
+    
 }

@@ -51,10 +51,10 @@ public class ReflectingPoolTest extends CardTestPlayerBase {
     public void testTriggeredManaAbility() {
         addCard(Zone.HAND, playerA, "Lightning Bolt", 1); // {R}
 
-        // {T}: Add to your mana pool one mana of any type that a land you control could produce.
+        // {T}: Add one mana of any type that a land you control could produce.
         addCard(Zone.BATTLEFIELD, playerA, "Reflecting Pool", 1);
         // Crumbling Vestige enters the battlefield tapped.
-        // When Crumbling Vestige enters the battlefield, add one mana of any color to your mana pool.
+        // When Crumbling Vestige enters the battlefield, add one mana of any color.
         // {T}: Add {C} to you mana pool.
         addCard(Zone.HAND, playerA, "Crumbling Vestige", 1);
 
@@ -80,9 +80,9 @@ public class ReflectingPoolTest extends CardTestPlayerBase {
     public void testWithExoticOrchard() {
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 1);
 
-        // {T}: Add to your mana pool one mana of any type that a land you control could produce.
+        // {T}: Add one mana of any type that a land you control could produce.
         addCard(Zone.BATTLEFIELD, playerA, "Reflecting Pool", 1);
-        // {T}: Add to your mana pool one mana of any color that a land an opponent controls could produce.
+        // {T}: Add one mana of any color that a land an opponent controls could produce.
         addCard(Zone.BATTLEFIELD, playerA, "Exotic Orchard", 1);
 
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
@@ -100,9 +100,9 @@ public class ReflectingPoolTest extends CardTestPlayerBase {
     public void test2WithExoticOrchard() {
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 1);
 
-        // {T}: Add to your mana pool one mana of any type that a land you control could produce.
+        // {T}: Add one mana of any type that a land you control could produce.
         addCard(Zone.BATTLEFIELD, playerA, "Reflecting Pool", 2);
-        // {T}: Add to your mana pool one mana of any color that a land an opponent controls could produce.
+        // {T}: Add one mana of any color that a land an opponent controls could produce.
         addCard(Zone.BATTLEFIELD, playerA, "Exotic Orchard", 1);
 
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
@@ -120,9 +120,9 @@ public class ReflectingPoolTest extends CardTestPlayerBase {
     public void testWith2ExoticOrchard() {
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 1);
 
-        // {T}: Add to your mana pool one mana of any type that a land you control could produce.
+        // {T}: Add one mana of any type that a land you control could produce.
         addCard(Zone.BATTLEFIELD, playerA, "Reflecting Pool", 1);
-        // {T}: Add to your mana pool one mana of any color that a land an opponent controls could produce.
+        // {T}: Add one mana of any color that a land an opponent controls could produce.
         addCard(Zone.BATTLEFIELD, playerA, "Exotic Orchard", 2);
 
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
@@ -141,9 +141,9 @@ public class ReflectingPoolTest extends CardTestPlayerBase {
     public void testWithGaeasCradle() {
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 1);
 
-        // {T}: Add to your mana pool one mana of any type that a land you control could produce.
+        // {T}: Add one mana of any type that a land you control could produce.
         addCard(Zone.BATTLEFIELD, playerA, "Reflecting Pool", 1);
-        // {T}: Add {G} to your mana pool for each creature you control.
+        // {T}: Add {G} for each creature you control.
         addCard(Zone.BATTLEFIELD, playerA, "Gaea's Cradle", 1);
 
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
@@ -162,13 +162,13 @@ public class ReflectingPoolTest extends CardTestPlayerBase {
     public void testWithDifferentLands() {
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 1);
 
-        // {T}: Add to your mana pool one mana of any type that a land you control could produce.
+        // {T}: Add one mana of any type that a land you control could produce.
         addCard(Zone.BATTLEFIELD, playerA, "Reflecting Pool", 1);
-        // {T}: Add to your mana pool one mana of any color that a land an opponent controls could produce.
+        // {T}: Add one mana of any color that a land an opponent controls could produce.
         addCard(Zone.BATTLEFIELD, playerA, "Exotic Orchard", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
 
-        // {T}: Add to your mana pool one mana of any color that a land an opponent controls could produce.
+        // {T}: Add one mana of any color that a land an opponent controls could produce.
         addCard(Zone.BATTLEFIELD, playerB, "Exotic Orchard", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Plains", 1);
 

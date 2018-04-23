@@ -37,7 +37,7 @@ import mage.constants.SubType;
  *
  * @author Styxo
  */
-public class DroidToken extends Token {
+public class DroidToken extends TokenImpl {
 
     public DroidToken() {
         super("Droid", "1/1 colorless Droid creature token");
@@ -49,5 +49,13 @@ public class DroidToken extends Token {
 
         power = new MageInt(1);
         toughness = new MageInt(1);
+    }
+
+    public DroidToken(final DroidToken token) {
+        super(token);
+    }
+
+    public DroidToken copy() {
+        return new DroidToken(this);
     }
 }

@@ -76,7 +76,7 @@ public class NightveilSpecter extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // Whenever Nightveil Specter deals combat damage to a player, that player exiles the top card of his or her library.     
+        // Whenever Nightveil Specter deals combat damage to a player, that player exiles the top card of their library.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new NightveilSpecterExileEffect(), false, true));
 
         // You may play cards exiled with Nightveil Specter.
@@ -97,7 +97,7 @@ class NightveilSpecterExileEffect extends OneShotEffect {
 
     public NightveilSpecterExileEffect() {
         super(Outcome.Discard);
-        staticText = "that player exiles the top card of his or her library";
+        staticText = "that player exiles the top card of their library";
     }
 
     public NightveilSpecterExileEffect(final NightveilSpecterExileEffect effect) {

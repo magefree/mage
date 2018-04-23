@@ -25,8 +25,8 @@
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.game.permanent.token;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -40,7 +40,7 @@ import mage.abilities.mana.GreenManaAbility;
  *
  * @author spjspj
  */
-public class FreyaliseLlanowarsFuryToken extends Token {
+public class FreyaliseLlanowarsFuryToken extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 
@@ -57,7 +57,7 @@ public class FreyaliseLlanowarsFuryToken extends Token {
     }
 
     public FreyaliseLlanowarsFuryToken(String setCode, int tokenType) {
-        super("Elf Druid", "1/1 green Elf Druid creature token with \"{T}: Add {G} to your mana pool.\"");
+        super("Elf Druid", "1/1 green Elf Druid creature token with \"{T}: Add {G}.\"");
         availableImageSetCodes = tokenImageSets;
         setOriginalExpansionSetCode(setCode);
         this.cardType.add(CardType.CREATURE);
@@ -68,7 +68,15 @@ public class FreyaliseLlanowarsFuryToken extends Token {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // {T}: Add {G} to your mana pool.
+        // {T}: Add {G}.
         this.addAbility(new GreenManaAbility());
+    }
+
+    public FreyaliseLlanowarsFuryToken(final FreyaliseLlanowarsFuryToken token) {
+        super(token);
+    }
+
+    public FreyaliseLlanowarsFuryToken copy() {
+        return new FreyaliseLlanowarsFuryToken(this);
     }
 }

@@ -60,7 +60,7 @@ public class LoamDryad extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 
-        // {T}, Tap an untapped creature you control: Add one mana of any color to your mana pool.
+        // {T}, Tap an untapped creature you control: Add one mana of any color.
         Ability ability = new AnyColorManaAbility();
         ability.addCost(new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, false)));
         this.addAbility(ability);

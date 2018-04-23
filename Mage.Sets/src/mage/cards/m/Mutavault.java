@@ -38,6 +38,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 
 /**
@@ -49,7 +50,7 @@ public class Mutavault extends CardImpl {
     public Mutavault(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {tap}: Add {C} to your mana pool.
+        // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         // {1}: Mutavault becomes a 2/2 creature with all creature types until end of turn. It's still a land.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
@@ -67,7 +68,7 @@ public class Mutavault extends CardImpl {
     }
 }
 
-class MutavaultToken extends Token {
+class MutavaultToken extends TokenImpl {
 
     public MutavaultToken() {
         super("", "2/2 creature with all creature types");
@@ -75,5 +76,12 @@ class MutavaultToken extends Token {
         setIsAllCreatureTypes(true);
         power = new MageInt(2);
         toughness = new MageInt(2);
+    }
+    public MutavaultToken(final MutavaultToken token) {
+        super(token);
+    }
+
+    public MutavaultToken copy() {
+        return new MutavaultToken(this);
     }
 }

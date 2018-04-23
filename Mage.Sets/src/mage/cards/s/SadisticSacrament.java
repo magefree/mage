@@ -51,7 +51,7 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class SadisticSacrament extends CardImpl {
 
-    private static final String ruleText = "Search target player's library for up to three cards, exile them, then that player shuffles his or her library. If {this} was kicked, instead search that player's library for up to fifteen cards, exile them, then that player shuffles his or her library";
+    private static final String ruleText = "Search target player's library for up to three cards, exile them, then that player shuffles their library. if this spell was kicked, instead search that player's library for up to fifteen cards, exile them, then that player shuffles their library";
 
     public SadisticSacrament(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}{B}{B}");
@@ -61,8 +61,8 @@ public class SadisticSacrament extends CardImpl {
         // Kicker {7}
         this.addAbility(new KickerAbility("{7}"));
 
-        // Search target player's library for up to three cards, exile them, then that player shuffles his or her library.
-        // If Sadistic Sacrament was kicked, instead search that player's library for up to fifteen cards, exile them, then that player shuffles his or her library.
+        // Search target player's library for up to three cards, exile them, then that player shuffles their library.
+        // If Sadistic Sacrament was kicked, instead search that player's library for up to fifteen cards, exile them, then that player shuffles their library.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new SadisticSacramentEffect(15),
                 new SadisticSacramentEffect(3),

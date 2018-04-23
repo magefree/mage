@@ -34,7 +34,7 @@ import mage.abilities.keyword.SurgeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -46,7 +46,7 @@ public class FallOfTheTitans extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{X}{R}");
 
         // Fall of the Titans deals X damage to each of up to two target creatures and/or players.
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer(0, 2));
+        this.getSpellAbility().addTarget(new TargetAnyTarget(0, 2));
         this.getSpellAbility().addEffect(new DamageTargetEffect(new ManacostVariableValue()));
 
         // Surge {X}{R}

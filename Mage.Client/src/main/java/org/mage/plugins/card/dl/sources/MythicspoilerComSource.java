@@ -40,6 +40,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.prefs.Preferences;
@@ -255,6 +256,7 @@ public enum MythicspoilerComSource implements CardImageSource {
         supportedSets.add("XLN");
         supportedSets.add("UST");
         supportedSets.add("RIX");
+        supportedSets.add("DOM");
 
         sets = new LinkedHashMap<>();
         setsAliases = new HashMap<>();
@@ -317,13 +319,13 @@ public enum MythicspoilerComSource implements CardImageSource {
     private Map<String, String> getSetLinks(String cardSet) {
         Map<String, String> setLinks = new HashMap<>();
         try {
-            String setNames = setsAliases.get(cardSet.toLowerCase());
+            String setNames = setsAliases.get(cardSet.toLowerCase(Locale.ENGLISH));
             Set<String> aliasesStart = new HashSet<>();
             if (cardNameAliasesStart.containsKey(cardSet)) {
                 aliasesStart.addAll(cardNameAliasesStart.get(cardSet));
             }
             if (setNames == null) {
-                setNames = cardSet.toLowerCase();
+                setNames = cardSet.toLowerCase(Locale.ENGLISH);
             }
             Preferences prefs = MageFrame.getPreferences();
             Connection.ProxyType proxyType = Connection.ProxyType.valueByText(prefs.get("proxyType", "None"));
@@ -423,7 +425,7 @@ public enum MythicspoilerComSource implements CardImageSource {
             return null;
         }
         Map<String, String> setLinks = sets.computeIfAbsent(cardSet, k -> getSetLinks(cardSet));
-        String searchName = card.getDownloadName().toLowerCase()
+        String searchName = card.getDownloadName().toLowerCase(Locale.ENGLISH)
                 .replaceAll(" ", "")
                 .replaceAll("\\.", "")
                 .replaceAll("&", "and")

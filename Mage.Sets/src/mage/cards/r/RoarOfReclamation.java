@@ -50,7 +50,7 @@ public class RoarOfReclamation extends CardImpl {
     public RoarOfReclamation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{W}{W}");
 
-        // Each player returns all artifact cards from his or her graveyard to the battlefield.
+        // Each player returns all artifact cards from their graveyard to the battlefield.
         this.getSpellAbility().addEffect(new RoarOfReclamationEffect());
     }
 
@@ -68,7 +68,7 @@ class RoarOfReclamationEffect extends OneShotEffect {
     
     public RoarOfReclamationEffect() {
         super(Outcome.PutCardInPlay);
-        staticText = "Each player returns all artifact cards from his or her graveyard to the battlefield";
+        staticText = "Each player returns all artifact cards from their graveyard to the battlefield";
     }
 
     public RoarOfReclamationEffect(final RoarOfReclamationEffect effect) {

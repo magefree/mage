@@ -48,7 +48,7 @@ public class CoercedConfession extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{U/B}");
 
 
-        // Target player puts the top four cards of his or her library into his or her graveyard. You draw a card for each creature card put into a graveyard this way.
+        // Target player puts the top four cards of their library into their graveyard. You draw a card for each creature card put into a graveyard this way.
         getSpellAbility().addEffect(new CoercedConfessionMillEffect());
         getSpellAbility().addTarget(new TargetPlayer());
     }
@@ -67,7 +67,7 @@ class CoercedConfessionMillEffect extends OneShotEffect {
 
     public CoercedConfessionMillEffect() {
         super(Outcome.DrawCard);
-        this.staticText = "Target player puts the top four cards of his or her library into his or her graveyard. You draw a card for each creature card put into a graveyard this way";
+        this.staticText = "Target player puts the top four cards of their library into their graveyard. You draw a card for each creature card put into a graveyard this way";
     }
 
     public CoercedConfessionMillEffect(final CoercedConfessionMillEffect effect) {

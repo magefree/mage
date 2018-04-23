@@ -89,7 +89,7 @@ class HallowPreventDamageByTargetEffect extends PreventionEffectImpl {
         PreventionEffectData preventionEffectData = preventDamageAction(event, source, game);
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            controller.gainLife(preventionEffectData.getPreventedDamage(), game);
+            controller.gainLife(preventionEffectData.getPreventedDamage(), game, source);
         }
         return true;
     }

@@ -67,7 +67,7 @@ public class HollowSpecter extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever Hollow Specter deals combat damage to a player, you may pay {X}.
-        // If you do, that player reveals X cards from his or her hand and you choose one of them. That player discards that card.
+        // If you do, that player reveals X cards from their hand and you choose one of them. That player discards that card.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new HollowSpecterEffect(), false, true));
     }
 
@@ -85,7 +85,7 @@ class HollowSpecterEffect extends OneShotEffect {
 
     public HollowSpecterEffect() {
         super(Outcome.Discard);
-        staticText = "you may pay {X}. If you do, that player reveals X cards from his or her hand and you choose one of them. That player discards that card";
+        staticText = "you may pay {X}. If you do, that player reveals X cards from their hand and you choose one of them. That player discards that card";
     }
 
     public HollowSpecterEffect(final HollowSpecterEffect effect) {

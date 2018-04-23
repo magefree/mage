@@ -50,7 +50,7 @@ public class TempleOfMalady extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
         // When Temple of Malady enters the battlefield, scry 1.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ScryEffect(1)));
-        // {T}: Add {B} or {G} to your mana pool.
+        // {T}: Add {B} or {G}.
         this.addAbility(new BlackManaAbility());
         this.addAbility(new GreenManaAbility());        
         

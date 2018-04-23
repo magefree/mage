@@ -50,7 +50,7 @@ public class Grindstone extends CardImpl {
     public Grindstone(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
 
-        // {3}, {T}: Target player puts the top two cards of his or her library into his or her graveyard. If both cards share a color, repeat this process.
+        // {3}, {T}: Target player puts the top two cards of their library into their graveyard. If both cards share a color, repeat this process.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GrindstoneEffect(), new ManaCostsImpl("{3}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPlayer());
@@ -72,7 +72,7 @@ class GrindstoneEffect extends OneShotEffect {
 
     public GrindstoneEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Target player puts the top two cards of his or her library into his or her graveyard. If both cards share a color, repeat this process";
+        this.staticText = "Target player puts the top two cards of their library into their graveyard. If both cards share a color, repeat this process";
     }
 
     public GrindstoneEffect(final GrindstoneEffect effect) {

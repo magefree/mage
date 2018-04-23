@@ -56,7 +56,7 @@ public class ConcealedCourtyard extends CardImpl {
         String abilityText = " tapped unless you control two or fewer other lands";
         this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
 
-        // {T}: Add {W} or {B} to your mana pool.this.addAbility(new BlackManaAbility());
+        // {T}: Add {W} or {B}.this.addAbility(new BlackManaAbility());
         this.addAbility(new WhiteManaAbility());
         this.addAbility(new BlackManaAbility());
     }

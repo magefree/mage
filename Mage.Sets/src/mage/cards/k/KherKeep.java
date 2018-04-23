@@ -51,7 +51,7 @@ public class KherKeep extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
         addSuperType(SuperType.LEGENDARY);
 
-        // {tap}: Add {C} to your mana pool.
+        // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         // {1}{R}, {tap}: Create a 0/1 red Kobold creature token named Kobolds of Kher Keep.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new KherKeepKoboldToken()), new ManaCostsImpl("{1}{R}"));

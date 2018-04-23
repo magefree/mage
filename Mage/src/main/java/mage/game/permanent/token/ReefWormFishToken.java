@@ -37,7 +37,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
  *
  * @author spjspj
  */
-public class ReefWormFishToken extends Token {
+public class ReefWormFishToken extends TokenImpl {
 
     public ReefWormFishToken() {
         super("Fish", "3/3 blue Fish creature token with \"When this creature dies, create a 6/6 blue Whale creature token with \"When this creature dies, create a 9/9 blue Kraken creature token.\"\"");
@@ -49,5 +49,13 @@ public class ReefWormFishToken extends Token {
         toughness = new MageInt(3);
 
         addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new ReefWormWhaleToken())));
+    }
+
+    public ReefWormFishToken(final ReefWormFishToken token) {
+        super(token);
+    }
+
+    public ReefWormFishToken copy() {
+        return new ReefWormFishToken(this);
     }
 }

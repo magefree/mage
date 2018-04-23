@@ -94,7 +94,7 @@ class ElderscaleWurmSetLifeEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
 
         if (player != null && player.getLife() < 7) {
-            player.setLife(7, game);
+            player.setLife(7, game, source);
         }
 
         return true;

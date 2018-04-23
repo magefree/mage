@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class WolfToken extends Token {
+public class WolfToken extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 

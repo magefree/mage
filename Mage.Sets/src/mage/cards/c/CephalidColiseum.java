@@ -53,7 +53,7 @@ public class CephalidColiseum extends CardImpl {
     public CephalidColiseum(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {tap}: Add {U} to your mana pool. Cephalid Coliseum deals 1 damage to you.
+        // {tap}: Add {U}. Cephalid Coliseum deals 1 damage to you.
         Ability manaAbility = new BlueManaAbility();
         manaAbility.addEffect(new DamageControllerEffect(1));
         this.addAbility(manaAbility);

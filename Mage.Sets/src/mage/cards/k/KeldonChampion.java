@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.target.TargetPlayer;
+import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
  *
@@ -47,7 +47,7 @@ import mage.target.TargetPlayer;
 public class KeldonChampion extends CardImpl {
 
     public KeldonChampion(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.BARBARIAN);
 
@@ -59,7 +59,7 @@ public class KeldonChampion extends CardImpl {
         this.addAbility(new EchoAbility("{2}{R}{R}"));
         // When Keldon Champion enters the battlefield, it deals 3 damage to target player.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(3, "it"), false);
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayerOrPlaneswalker());
         this.addAbility(ability);
     }
 

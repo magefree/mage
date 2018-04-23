@@ -58,7 +58,7 @@ public class TamiyoTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Gideon, Ally of Zendikar", 1);
 
         // put 2/2 knight ally token on battlefield
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+0: Create a");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "0: Create a");
 
         // next, activate Gideon to make him a 5/5 human soldier ally creature
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "+1: Until end of turn");

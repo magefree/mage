@@ -70,9 +70,9 @@ public class MarkOfSakiko extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
         
-        // Enchanted creature has "Whenever this creature deals combat damage to a player, add that much {G} to your mana pool. Until end of turn, this mana doesn't empty from your mana pool as steps and phases end."
+        // Enchanted creature has "Whenever this creature deals combat damage to a player, add that much {G}. Until end of turn, you don’t lose this mana as steps and phases end."
         Effect effect  = new GainAbilityAttachedEffect(new MarkOfSakikoTriggeredAbility(), AttachmentType.AURA);
-        effect.setText("Enchanted creature has \"Whenever this creature deals combat damage to a player, add that much {G} to your mana pool. Until end of turn, this mana doesn't empty from your mana pool as steps and phases end.\"");
+        effect.setText("Enchanted creature has \"Whenever this creature deals combat damage to a player, add that much {G}. Until end of turn, you don’t lose this mana as steps and phases end.\"");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
         
     }
@@ -114,7 +114,7 @@ class MarkOfSakikoTriggeredAbility extends TriggeredAbilityImpl {
                 this.getEffects().clear();
                 Effect effect = new AddManaToManaPoolTargetControllerEffect(Mana.GreenMana(event.getAmount()), "that player", true);
                 effect.setTargetPointer(new FixedTarget(getControllerId()));
-                effect.setText("add that much {G} to your mana pool. Until end of turn, this mana doesn't empty from your mana pool as steps and phases end");        
+                effect.setText("add that much {G}. Until end of turn, this mana doesn't empty from your mana pool as steps and phases end");        
                 this.addEffect(effect);
                 return true;
             }
@@ -124,7 +124,7 @@ class MarkOfSakikoTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever this creature deals combat damage to a player, add that much {G} to your mana pool. "
-                + "Until end of turn, this mana doesn't empty from your mana pool as steps and phases end.";
+        return "Whenever this creature deals combat damage to a player, add that much {G}. "
+                + "Until end of turn, you don’t lose this mana as steps and phases end.";
     }
 }

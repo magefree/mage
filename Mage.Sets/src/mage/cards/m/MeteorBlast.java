@@ -38,7 +38,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -61,7 +61,7 @@ public class MeteorBlast extends CardImpl {
     public void adjustTargets(Ability ability, Game game) {
         int xValue = ability.getManaCostsToPay().getX();
         if (xValue > 0) {
-            Target target = new TargetCreatureOrPlayer(xValue);
+            Target target = new TargetAnyTarget(xValue);
             ability.addTarget(target);
         }
     }

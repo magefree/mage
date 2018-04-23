@@ -190,6 +190,7 @@ public class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Jungle Troll", 329, Rarity.UNCOMMON, mage.cards.j.JungleTroll.class));
         cards.add(new SetCardInfo("Jungle Wurm", 122, Rarity.COMMON, mage.cards.j.JungleWurm.class));
         cards.add(new SetCardInfo("Kaervek's Hex", 28, Rarity.UNCOMMON, mage.cards.k.KaerveksHex.class));
+        cards.add(new SetCardInfo("Kaervek's Purge", 330, Rarity.UNCOMMON, mage.cards.k.KaerveksPurge.class));
         cards.add(new SetCardInfo("Kaervek's Torch", 185, Rarity.COMMON, mage.cards.k.KaerveksTorch.class));
         cards.add(new SetCardInfo("Karoo Meerkat", 123, Rarity.UNCOMMON, mage.cards.k.KarooMeerkat.class));
         cards.add(new SetCardInfo("Kukemssa Pirates", 71, Rarity.RARE, mage.cards.k.KukemssaPirates.class));
@@ -339,6 +340,7 @@ public class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Zhalfirin Commander", 253, Rarity.UNCOMMON, mage.cards.z.ZhalfirinCommander.class));
         cards.add(new SetCardInfo("Zhalfirin Knight", 254, Rarity.COMMON, mage.cards.z.ZhalfirinKnight.class));
         cards.add(new SetCardInfo("Zirilan of the Claw", 204, Rarity.RARE, mage.cards.z.ZirilanOfTheClaw.class));
+        cards.add(new SetCardInfo("Zombie Mob", 51, Rarity.UNCOMMON, mage.cards.z.ZombieMob.class));
         cards.add(new SetCardInfo("Zuberi, Golden Feather", 255, Rarity.RARE, mage.cards.z.ZuberiGoldenFeather.class));
     }
 }

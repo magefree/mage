@@ -36,7 +36,7 @@ import mage.abilities.keyword.TrampleAbility;
  *
  * @author spjspj
  */
-public class VoiceOfTheWoodsElementalToken extends Token {
+public class VoiceOfTheWoodsElementalToken extends TokenImpl {
 
     public VoiceOfTheWoodsElementalToken() {
         super("Elemental", "7/7 green Elemental creature token with trample");
@@ -49,5 +49,13 @@ public class VoiceOfTheWoodsElementalToken extends Token {
         toughness = new MageInt(7);
 
         addAbility(TrampleAbility.getInstance());
+    }
+
+    public VoiceOfTheWoodsElementalToken(final VoiceOfTheWoodsElementalToken token) {
+        super(token);
+    }
+
+    public VoiceOfTheWoodsElementalToken copy() {
+        return new VoiceOfTheWoodsElementalToken(this);
     }
 }

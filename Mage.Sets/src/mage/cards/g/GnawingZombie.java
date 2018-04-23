@@ -40,6 +40,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -50,7 +51,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public class GnawingZombie extends CardImpl {
 
     public GnawingZombie(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
         this.subtype.add(SubType.ZOMBIE);
 
         this.power = new MageInt(1);
@@ -60,7 +61,7 @@ public class GnawingZombie extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), new ManaCostsImpl("{1}{B}"));
         ability.addEffect(new GainLifeEffect(1));
         ability.addTarget(new TargetPlayer());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
         this.addAbility(ability);
     }
 

@@ -41,7 +41,7 @@ public class UginTest extends CardTestPlayerBase {
 
     @Test
     public void testCard() {
-        // +2: Ugin, the Spirit Dragon deals 3 damage to target creature or player.
+        // +2: Ugin, the Spirit Dragon deals 3 damage to any target.
         // -X: Exile each permanent with converted mana cost X or less that's one or more colors.
         // -10: You gain 7 life, draw 7 cards, then put up to seven permanent cards from your hand onto the battlefield.
         addCard(Zone.BATTLEFIELD, playerA, "Ugin, the Spirit Dragon"); // starts with 7 Loyality counters
@@ -58,7 +58,7 @@ public class UginTest extends CardTestPlayerBase {
         // -7: Untap up to six target lands. They become 6/6 Elemental creatures. They're still lands.
         addCard(Zone.HAND, playerB, "Nissa, Vastwood Seer");
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+2: {source} deals 3 damage to target creature or player.", playerB);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+2: {source} deals 3 damage", playerB);
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Nissa, Vastwood Seer");
         playLand(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Forest");

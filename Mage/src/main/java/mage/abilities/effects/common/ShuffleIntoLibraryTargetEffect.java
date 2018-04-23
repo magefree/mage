@@ -56,7 +56,7 @@ public class ShuffleIntoLibraryTargetEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         } else {
-            return "choose target " + mode.getTargets().get(0).getTargetName() + ". Its owner shuffles it into his or her library";
+            return "choose target " + mode.getTargets().get(0).getTargetName() + ". Its owner shuffles it into their library";
         }
     }
 }

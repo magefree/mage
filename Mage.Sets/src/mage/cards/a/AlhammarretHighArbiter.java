@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.Objects;
 import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
@@ -56,7 +55,7 @@ import mage.util.GameLog;
 public class AlhammarretHighArbiter extends CardImpl {
 
     public AlhammarretHighArbiter(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.SPHINX);
         this.power = new MageInt(5);
@@ -64,7 +63,7 @@ public class AlhammarretHighArbiter extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        // As Alhammarret, High Arbiter enters the battlefield, each opponent reveals his or her hand. You choose the name of a nonland card revealed this way.
+        // As Alhammarret, High Arbiter enters the battlefield, each opponent reveals their hand. You choose the name of a nonland card revealed this way.
         // Your opponents can't cast spells with the chosen name.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EntersBattlefieldEffect(new AlhammarretHighArbiterEffect(), "")));
     }
@@ -83,7 +82,7 @@ class AlhammarretHighArbiterEffect extends OneShotEffect {
 
     public AlhammarretHighArbiterEffect() {
         super(Outcome.Benefit);
-        this.staticText = "As {this} enters the battlefield, each opponent reveals his or her hand. You choose the name of a nonland card revealed this way."
+        this.staticText = "As {this} enters the battlefield, each opponent reveals their hand. You choose the name of a nonland card revealed this way."
                 + "<br>Your opponents can't cast spells with the chosen name";
     }
 
@@ -101,14 +100,12 @@ class AlhammarretHighArbiterEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Cards revealedCards = new CardsImpl();
-            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                if (!Objects.equals(playerId, controller.getId())) {
-                    Player opponent = game.getPlayer(playerId);
-                    if (opponent != null) {
-                        Cards cards = new CardsImpl(opponent.getHand());
-                        opponent.revealCards(opponent.getName() + "'s hand", cards, game);
-                        revealedCards.addAll(cards);
-                    }
+            for (UUID playerId : game.getOpponents(controller.getId())) {
+                Player opponent = game.getPlayer(playerId);
+                if (opponent != null) {
+                    Cards cards = new CardsImpl(opponent.getHand());
+                    opponent.revealCards(opponent.getName() + "'s hand", cards, game);
+                    revealedCards.addAll(cards);
                 }
             }
             TargetCard target = new TargetCard(Zone.HAND, new FilterNonlandCard("nonland card from an opponents hand"));
@@ -116,7 +113,10 @@ class AlhammarretHighArbiterEffect extends OneShotEffect {
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
                 game.informPlayers("The choosen card name is [" + GameLog.getColoredObjectName(card) + ']');
-                Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+                Permanent sourcePermanent = game.getPermanentEntering(source.getSourceId());
+                if (sourcePermanent == null) {
+                    sourcePermanent = game.getPermanentEntering(source.getSourceId());
+                }
                 if (sourcePermanent != null) {
                     sourcePermanent.addInfo("chosen card name", CardUtil.addToolTipMarkTags("Chosen card name: " + card.getName()), game);
                 }
@@ -132,6 +132,7 @@ class AlhammarretHighArbiterEffect extends OneShotEffect {
 class AlhammarretHighArbiterCantCastEffect extends ContinuousRuleModifyingEffectImpl {
 
     String cardName;
+    int zoneChangeCounter;
 
     public AlhammarretHighArbiterCantCastEffect(String cardName) {
         super(Duration.Custom, Outcome.Benefit);
@@ -142,6 +143,13 @@ class AlhammarretHighArbiterCantCastEffect extends ContinuousRuleModifyingEffect
     public AlhammarretHighArbiterCantCastEffect(final AlhammarretHighArbiterCantCastEffect effect) {
         super(effect);
         this.cardName = effect.cardName;
+        this.zoneChangeCounter = effect.zoneChangeCounter;
+    }
+
+    @Override
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+        zoneChangeCounter = game.getState().getZoneChangeCounter(source.getId());
     }
 
     @Override
@@ -151,8 +159,7 @@ class AlhammarretHighArbiterCantCastEffect extends ContinuousRuleModifyingEffect
 
     @Override
     public boolean isInactive(Ability source, Game game) {
-        Permanent sourceObject = game.getPermanent(source.getSourceId());
-        return sourceObject == null || sourceObject.getZoneChangeCounter(game) != source.getSourceObjectZoneChangeCounter();
+        return game.getState().getZoneChangeCounter(source.getId()) != zoneChangeCounter;
     }
 
     @Override

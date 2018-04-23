@@ -122,6 +122,10 @@ public class MonoHybridManaCost extends ManaCostImpl {
         return mana == coloredManaSymbol;
     }
 
+    public ColoredManaSymbol getManaColor() {
+        return mana;
+    }
+
     @Override
     public List<Mana> getManaOptions() {
         List<Mana> manaList = new ArrayList<>();

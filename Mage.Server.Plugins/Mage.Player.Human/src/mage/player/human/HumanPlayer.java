@@ -69,7 +69,7 @@ import mage.target.TargetAmount;
 import mage.target.TargetCard;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetAttackingCreature;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetDefender;
 import mage.util.GameLog;
 import mage.util.ManaUtil;
@@ -156,9 +156,9 @@ public class HumanPlayer extends PlayerImpl {
             numTimesWaiting++;
             if (numTimesWaiting >= 300) {
                 // game freezed -- need to report about error and continue to execute
-                String s = "Game freezed in waitResponseOpen for user " + getName();
-                Throwable th = new IllegalStateException(s);
-                logger.error(s, th);
+                String s = "ERROR - game freezed in waitResponseOpen for user " + getName() + " (connection problem)";
+                //Throwable th = new IllegalStateException(s); stack info
+                logger.error(s);
                 break;
             }
 
@@ -1483,7 +1483,7 @@ public class HumanPlayer extends PlayerImpl {
         updateGameStatePriority("assignDamage", game);
         int remainingDamage = damage;
         while (remainingDamage > 0 && canRespond()) {
-            Target target = new TargetCreatureOrPlayer();
+            Target target = new TargetAnyTarget();
             target.setNotTarget(true);
             if (singleTargetName != null) {
                 target.setTargetName(singleTargetName);

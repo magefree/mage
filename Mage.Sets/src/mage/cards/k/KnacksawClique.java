@@ -70,7 +70,7 @@ public class KnacksawClique extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         
-        // {1}{U}, {untap}: Target opponent exiles the top card of his or her library. Until end of turn, you may play that card.
+        // {1}{U}, {untap}: Target opponent exiles the top card of their library. Until end of turn, you may play that card.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new KnacksawCliqueEffect(), new ManaCostsImpl("{1}{U}"));
         ability.addCost(new UntapSourceCost());
         ability.addTarget(new TargetOpponent());
@@ -92,7 +92,7 @@ class KnacksawCliqueEffect extends OneShotEffect {
 
     public KnacksawCliqueEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Target opponent exiles the top card of his or her library. Until end of turn, you may play that card";
+        this.staticText = "Target opponent exiles the top card of their library. Until end of turn, you may play that card";
     }
 
     public KnacksawCliqueEffect(final KnacksawCliqueEffect effect) {

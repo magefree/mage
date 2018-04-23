@@ -64,7 +64,7 @@ public class GideonTest extends CardTestPlayerBase {
 
         activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "+1: Until your next turn, target creature gains indestructible. Untap that creature.", "Silvercoat Lion");
 
-        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt");
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Silvercoat Lion");
 
         setStopAt(4, PhaseStep.PRECOMBAT_MAIN);
         execute();
@@ -101,11 +101,11 @@ public class GideonTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 2);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Gideon, Champion of Justice");
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+0: Until end of turn");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "0: Until end of turn");
 
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "+1: Put a loyalty counter on", playerB);
 
-        activateAbility(5, PhaseStep.PRECOMBAT_MAIN, playerA, "+0: Until end of turn");
+        activateAbility(5, PhaseStep.PRECOMBAT_MAIN, playerA, "0: Until end of turn");
 
         setStopAt(5, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -146,7 +146,7 @@ public class GideonTest extends CardTestPlayerBase {
         attack(2, playerB, "Silvercoat Lion");
         attack(2, playerB, "Pillarfield Ox");
 
-        activateAbility(4, PhaseStep.PRECOMBAT_MAIN, playerB, "+0: Until ");
+        activateAbility(4, PhaseStep.PRECOMBAT_MAIN, playerB, "0: Until ");
         activateAbility(4, PhaseStep.PRECOMBAT_MAIN, playerB, "Equip {2}", "Gideon, Battle-Forged");
         attack(4, playerB, "Gideon, Battle-Forged"); // 7 damage
 

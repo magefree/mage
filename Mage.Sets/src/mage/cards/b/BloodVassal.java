@@ -52,7 +52,7 @@ public class BloodVassal extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Sacrifice Blood Vassal: Add {B}{B} to your mana pool.
+        // Sacrifice Blood Vassal: Add {B}{B}.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana(2), new SacrificeSourceCost()));
     }
 

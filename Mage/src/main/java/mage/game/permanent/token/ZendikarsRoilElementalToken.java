@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class ZendikarsRoilElementalToken extends Token {
+public class ZendikarsRoilElementalToken extends TokenImpl {
 
     public ZendikarsRoilElementalToken() {
         super("Elemental", "2/2 green Elemental creature token");
@@ -47,4 +47,11 @@ public class ZendikarsRoilElementalToken extends Token {
         toughness = new MageInt(2);
     }
 
+    public ZendikarsRoilElementalToken(final ZendikarsRoilElementalToken token) {
+        super(token);
+    }
+
+    public ZendikarsRoilElementalToken copy() {
+        return new ZendikarsRoilElementalToken(this);
+    }
 }

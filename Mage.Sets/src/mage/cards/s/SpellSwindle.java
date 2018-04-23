@@ -49,7 +49,7 @@ public class SpellSwindle extends CardImpl {
     public SpellSwindle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{U}{U}");
 
-        // Counter target spell. Create X colorless Treasure artifact tokens, where X is that spell's converted mana cost. They have "T, Sacrifice this artifact: Add one mana of any color to your mana pool."
+        // Counter target spell. Create X colorless Treasure artifact tokens, where X is that spell's converted mana cost. They have "T, Sacrifice this artifact: Add one mana of any color."
         this.getSpellAbility().addTarget(new TargetSpell());
         this.getSpellAbility().addEffect(new SpellSwindleEffect());
     }
@@ -69,7 +69,7 @@ class SpellSwindleEffect extends OneShotEffect {
     public SpellSwindleEffect() {
         super(Outcome.Detriment);
         staticText = "Counter target spell. Create X colorless Treasure artifact tokens, where X is that spell's converted mana cost. "
-                + "They have \"{T}, Sacrifice this artifact: Add one mana of any color to your mana pool.\"";
+                + "They have \"{T}, Sacrifice this artifact: Add one mana of any color.\"";
     }
 
     public SpellSwindleEffect(final SpellSwindleEffect effect) {

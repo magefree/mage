@@ -28,9 +28,6 @@
 package mage.cards.d;
 
 import java.util.UUID;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.Costs;
-import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DrawCardTargetEffect;
@@ -48,18 +45,16 @@ import mage.target.TargetPlayer;
 public class DeepAnalysis extends CardImpl {
 
     public DeepAnalysis(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{U}");
 
         // Target player draws two cards.
         this.getSpellAbility().addEffect(new DrawCardTargetEffect(2));
         this.getSpellAbility().addTarget(new TargetPlayer());
 
         // Flashback-{1}{U}, Pay 3 life.
-        Costs<Cost> costs = new CostsImpl<>();
-        costs.add(new ManaCostsImpl("{1}{U}"));
-        costs.add(new PayLifeCost(3));
-        this.addAbility(new FlashbackAbility(costs, TimingRule.SORCERY));
+        FlashbackAbility ability = new FlashbackAbility(new ManaCostsImpl("{1}{U}"), TimingRule.SORCERY);
+        ability.addCost(new PayLifeCost(3));
+        this.addAbility(ability);
     }
 
     public DeepAnalysis(final DeepAnalysis card) {

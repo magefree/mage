@@ -48,7 +48,7 @@ public class UtopiaTree extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(2);
 
-        // {tap}: Add one mana of any color to your mana pool.
+        // {tap}: Add one mana of any color.
         this.addAbility(new AnyColorManaAbility());
     }
 

@@ -41,14 +41,14 @@ import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.command.Emblem;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
  * @author spjspj
  */
 public class ArlinnEmbracedByTheMoonEmblem extends Emblem {
-    // "Creatures you control have haste and '{T}: This creature deals damage equal to its power to target creature or player.'"
+    // "Creatures you control have haste and '{T}: This creature deals damage equal to its power to any target.'"
 
     public ArlinnEmbracedByTheMoonEmblem() {
         this.setName("Emblem Arlinn");
@@ -57,11 +57,11 @@ public class ArlinnEmbracedByTheMoonEmblem extends Emblem {
         effect.setText("Creatures you control have haste");
         Ability ability = new SimpleStaticAbility(Zone.COMMAND, effect);
         Effect effect2 = new DamageTargetEffect(new SourcePermanentPowerCount());
-        effect2.setText("This creature deals damage equal to its power to target creature or player");
+        effect2.setText("This creature deals damage equal to its power to any target");
         Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect2, new TapSourceCost());
-        ability2.addTarget(new TargetCreatureOrPlayer());
+        ability2.addTarget(new TargetAnyTarget());
         effect = new GainAbilityControlledEffect(ability2, Duration.EndOfGame, filter);
-        effect.setText("and '{T}: This creature deals damage equal to its power to target creature or player");
+        effect.setText("and '{T}: This creature deals damage equal to its power to any target");
         ability.addEffect(effect);
         this.getAbilities().add(ability);
     }

@@ -60,16 +60,20 @@ public class TargetPermanentOrPlayer extends TargetImpl {
     }
 
     public TargetPermanentOrPlayer(int minNumTargets, int maxNumTargets) {
-        this.minNumberOfTargets = minNumTargets;
-        this.maxNumberOfTargets = maxNumTargets;
-        this.zone = Zone.ALL;
-        this.filter = new FilterPermanentOrPlayer();
-        this.targetName = filter.getMessage();
-        this.filterPermanent = new FilterPermanent();
+        this(minNumTargets, maxNumTargets, false);
     }
 
     public TargetPermanentOrPlayer(int minNumTargets, int maxNumTargets, boolean notTarget) {
-        this(minNumTargets, maxNumTargets);
+        this(minNumTargets, maxNumTargets, new FilterPermanentOrPlayer(), notTarget);
+    }
+
+    public TargetPermanentOrPlayer(int minNumTargets, int maxNumTargets, FilterPermanentOrPlayer filter, boolean notTarget) {
+        this.minNumberOfTargets = minNumTargets;
+        this.maxNumberOfTargets = maxNumTargets;
+        this.zone = Zone.ALL;
+        this.filter = filter;
+        this.targetName = filter.getMessage();
+        this.filterPermanent = this.filter.getPermanentFilter();
         this.notTarget = notTarget;
     }
 
@@ -159,7 +163,7 @@ public class TargetPermanentOrPlayer extends TargetImpl {
                 }
             }
         }
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, sourceControllerId, game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT, sourceControllerId, game)) {
             if (permanent.canBeTargetedBy(targetSource, sourceControllerId, game) && filter.match(permanent, sourceId, sourceControllerId, game)) {
                 count++;
                 if (count >= this.minNumberOfTargets) {

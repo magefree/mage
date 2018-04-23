@@ -34,7 +34,7 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.target.common.TargetOpponent;
+import mage.target.common.TargetOpponentOrPlaneswalker;
 
 /**
  *
@@ -43,16 +43,16 @@ import mage.target.common.TargetOpponent;
 public class VampiricTouch extends CardImpl {
 
     public VampiricTouch(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}");
 
         // Vampiric Touch deals 2 damage to target opponent and you gain 2 life.
         Effect effect = new DamageTargetEffect(2);
-        effect.setText("{this} deals 2 damage to target opponent");
+        effect.setText("{this} deals 2 damage to target opponent or planeswalker");
         this.getSpellAbility().addEffect(effect);
         effect = new GainLifeEffect(2);
         effect.setText("and you gain 2 life");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetOpponent());
+        this.getSpellAbility().addTarget(new TargetOpponentOrPlaneswalker());
     }
 
     public VampiricTouch(final VampiricTouch card) {

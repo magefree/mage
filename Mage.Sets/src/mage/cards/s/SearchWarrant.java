@@ -48,7 +48,7 @@ public class SearchWarrant extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{W}{U}");
 
 
-        // Target player reveals his or her hand. You gain life equal to the number of cards in that player's hand.
+        // Target player reveals their hand. You gain life equal to the number of cards in that player's hand.
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new SearchWarrantEffect());
 
@@ -68,7 +68,7 @@ class SearchWarrantEffect extends OneShotEffect {
 
     public SearchWarrantEffect() {
         super(Outcome.Exile);
-        this.staticText = "Target player reveals his or her hand. You gain life equal to the number of cards in that player's hand";
+        this.staticText = "Target player reveals their hand. You gain life equal to the number of cards in that player's hand";
     }
 
     public SearchWarrantEffect(final SearchWarrantEffect effect) {
@@ -87,7 +87,7 @@ class SearchWarrantEffect extends OneShotEffect {
         if (player != null && targetPlayer != null) {
             targetPlayer.revealCards("Search Warrant", targetPlayer.getHand(), game);
             int ctd = targetPlayer.getHand().size();
-            player.gainLife(ctd, game);
+            player.gainLife(ctd, game, source);
             return true;
         }
         return false;

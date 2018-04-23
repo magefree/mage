@@ -56,7 +56,7 @@ public class LeylineOfTheVoidTest extends CardTestPlayerBase {
         // If a card would be put into an opponent's graveyard from anywhere, exile it instead.
         addCard(Zone.BATTLEFIELD, playerA, "Leyline of the Void");
 
-        // {X}, {T}: Target opponent puts cards from the top of his or her library into his or her graveyard until a creature card or X cards are put into that graveyard this way, whichever comes first. If a creature card is put into that graveyard this way, sacrifice Helm of Obedience and put that card onto the battlefield under your control. X can't be 0.
+        // {X}, {T}: Target opponent puts cards from the top of their library into their graveyard until a creature card or X cards are put into that graveyard this way, whichever comes first. If a creature card is put into that graveyard this way, sacrifice Helm of Obedience and put that card onto the battlefield under your control. X can't be 0.
         addCard(Zone.BATTLEFIELD, playerA, "Helm of Obedience");
 
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{X}, {T}: Target opponent puts cards", playerB);
@@ -83,8 +83,8 @@ public class LeylineOfTheVoidTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Leyline of the Void");
 
         // Exile Ill-Gotten Gains.
-        // Each player discards his or her hand,
-        // then returns up to three cards from his or her graveyard to his or her hand.
+        // Each player discards their hand,
+        // then returns up to three cards from their graveyard to their hand.
         addCard(Zone.HAND, playerA, "Ill-Gotten Gains"); // Sorcery - {2}{B}{B}
         addCard(Zone.HAND, playerA, "Silvercoat Lion", 4);
         addCard(Zone.HAND, playerB, "Silvercoat Lion", 4);
@@ -134,7 +134,7 @@ public class LeylineOfTheVoidTest extends CardTestPlayerBase {
     @Test
     public void testMorbidAbilityWithAwakeningZoneTokens() {
         // At the beginning of your upkeep, you may put a 0/1 colorless Eldrazi Spawn creature token onto the battlefield. 
-        // It has "Sacrifice this creature: Add mana symbol 1 to your mana pool."
+        // It has "Sacrifice this creature: Add mana symbol 1."
         addCard(Zone.BATTLEFIELD, playerA, "Awakening Zone");
         // If Leyline of the Void is in your opening hand, you may begin the game with it on the battlefield.
         // If a card would be put into an opponent's graveyard from anywhere, exile it instead.

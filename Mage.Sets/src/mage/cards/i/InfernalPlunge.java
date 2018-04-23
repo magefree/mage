@@ -34,6 +34,7 @@ import mage.abilities.effects.common.BasicManaEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -43,12 +44,11 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public class InfernalPlunge extends CardImpl {
 
     public InfernalPlunge(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{R}");
 
         // As an additional cost to cast Infernal Plunge, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
-        // Add {R}{R}{R} to your mana pool.
+        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+        // Add {R}{R}{R}.
         this.getSpellAbility().addEffect(new BasicManaEffect(Mana.RedMana(3)));
     }
 

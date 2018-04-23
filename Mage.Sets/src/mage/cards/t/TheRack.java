@@ -54,7 +54,7 @@ public class TheRack extends CardImpl {
 
         // As The Rack enters the battlefield, choose an opponent.
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseOpponentEffect(Outcome.Detriment)));
-        // At the beginning of the chosen player's upkeep, The Rack deals X damage to that player, where X is 3 minus the number of cards in his or her hand.
+        // At the beginning of the chosen player's upkeep, The Rack deals X damage to that player, where X is 3 minus the number of cards in their hand.
         this.addAbility(new TheRackTriggeredAbility());
     }
 
@@ -104,7 +104,7 @@ class TheRackEffect extends OneShotEffect {
 
     public TheRackEffect() {
         super(Outcome.Benefit);
-        this.staticText = "{this} deals X damage to that player, where X is 3 minus the number of cards in his or her hand";
+        this.staticText = "{this} deals X damage to that player, where X is 3 minus the number of cards in their hand";
     }
 
     public TheRackEffect(final TheRackEffect effect) {

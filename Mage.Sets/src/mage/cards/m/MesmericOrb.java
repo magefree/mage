@@ -50,9 +50,9 @@ public class MesmericOrb extends CardImpl {
     public MesmericOrb(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
-        // Whenever a permanent becomes untapped, that permanent's controller puts the top card of his or her library into his or her graveyard.
+        // Whenever a permanent becomes untapped, that permanent's controller puts the top card of their library into their graveyard.
         Effect effect = new PutTopCardOfLibraryIntoGraveTargetEffect(1);
-        effect.setText("that permanent's controller puts the top card of his or her library into his or her graveyard");
+        effect.setText("that permanent's controller puts the top card of their library into their graveyard");
         this.addAbility(new BecomesUntappedPermanentTriggeredAbility(effect, false));
     }
 

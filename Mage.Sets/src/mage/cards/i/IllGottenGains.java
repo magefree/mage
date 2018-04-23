@@ -56,10 +56,10 @@ public class IllGottenGains extends CardImpl {
         // Exile Ill-Gotten Gains.
         this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
 
-        // Each player discards his or her hand,
+        // Each player discards their hand,
         this.getSpellAbility().addEffect(new DiscardHandAllEffect());
 
-        //then returns up to three cards from his or her graveyard to his or her hand.
+        //then returns up to three cards from their graveyard to their hand.
         this.getSpellAbility().addEffect(new IllGottenGainsEffect());
     }
 
@@ -77,7 +77,7 @@ class IllGottenGainsEffect extends OneShotEffect {
 
     IllGottenGainsEffect() {
         super(Outcome.ReturnToHand);
-        this.staticText = ", then returns up to three cards from his or her graveyard to his or her hand.";
+        this.staticText = ", then returns up to three cards from their graveyard to their hand.";
     }
 
     IllGottenGainsEffect(final IllGottenGainsEffect effect) {

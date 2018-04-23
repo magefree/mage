@@ -87,7 +87,7 @@ class InstigatorEffect extends OneShotEffect {
 
     public InstigatorEffect() {
         super(Outcome.Detriment);
-        staticText = "Creatures target player control attack this turn if able";
+        staticText = "Creatures target player controls attack this turn if able";
     }
 
     public InstigatorEffect(final InstigatorEffect effect) {

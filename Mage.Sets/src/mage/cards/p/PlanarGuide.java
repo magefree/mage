@@ -27,8 +27,10 @@
  */
 package mage.cards.p;
 
+import java.util.HashSet;
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
@@ -39,14 +41,13 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.StaticFilters;
 import mage.game.ExileZone;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.players.Player;
 
 /**
  *
@@ -80,15 +81,9 @@ public class PlanarGuide extends CardImpl {
 
 class PlanarGuideExileEffect extends OneShotEffect {
 
-    private static final FilterPermanent filter = new FilterPermanent("all creatures");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
-    }
-
     public PlanarGuideExileEffect() {
         super(Outcome.Detriment);
-        staticText = "Exile all creatures. At the beginning of the next end step, return those cards to the battlefield under their owners' control.";
+        staticText = "Exile all creatures. At the beginning of the next end step, return those cards to the battlefield under their owners' control";
     }
 
     public PlanarGuideExileEffect(final PlanarGuideExileEffect effect) {
@@ -97,21 +92,22 @@ class PlanarGuideExileEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        boolean creatureExiled = false;
-        for (Permanent creature : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-            if (creature != null) {
-                if (creature.moveToExile(source.getSourceId(), "Planar Guide", source.getSourceId(), game)) {
-                    creatureExiled = true;
-                }
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        Player controller = game.getPlayer(source.getControllerId());
+        if (sourceObject != null && controller != null) {
+            HashSet<Card> toExile = new HashSet<>();
+            toExile.addAll(game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source.getSourceId(), game));
+            controller.moveCardsToExile(toExile, source, game, true, source.getSourceId(), sourceObject.getIdName());
+            ExileZone exile = game.getExile().getExileZone(source.getSourceId());
+            if (exile != null && !exile.isEmpty()) {
+                // Create delayed triggered ability
+                AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new PlanarGuideReturnFromExileEffect());
+                game.addDelayedTriggeredAbility(delayedAbility, source);
+                return true;
             }
-        }
-        if (creatureExiled) {
-            // Create delayed triggered ability
-            AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new PlanarGuideReturnFromExileEffect());
-            game.addDelayedTriggeredAbility(delayedAbility, source);
             return true;
         }
-        return true;
+        return false;
     }
 
     @Override
@@ -124,7 +120,7 @@ class PlanarGuideReturnFromExileEffect extends OneShotEffect {
 
     public PlanarGuideReturnFromExileEffect() {
         super(Outcome.PutCardInPlay);
-        staticText = "At the beginning of the next end step, return those cards to the battlefield under their owners' control.";
+        staticText = "At the beginning of the next end step, return those cards to the battlefield under their owners' control";
     }
 
     public PlanarGuideReturnFromExileEffect(final PlanarGuideReturnFromExileEffect effect) {
@@ -138,14 +134,12 @@ class PlanarGuideReturnFromExileEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        ExileZone exile = game.getExile().getExileZone(source.getSourceId());
-        if (exile != null) {
-            exile = exile.copy();
-            for (UUID cardId : exile) {
-                Card card = game.getCard(cardId);
-                card.moveToZone(Zone.BATTLEFIELD, source.getSourceId(), game, false);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            ExileZone exile = game.getExile().getExileZone(source.getSourceId());
+            if (exile != null) {
+                controller.moveCards(exile.getCards(game), Zone.BATTLEFIELD, source, game, false, false, true, null);
             }
-            game.getExile().getExileZone(source.getSourceId()).clear();
             return true;
         }
         return false;

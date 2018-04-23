@@ -62,7 +62,7 @@ public class FortifiedVillage extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new RevealTargetFromHandCost(new TargetCardInHand(filter))),
                 "you may reveal a Forest or Plains card from your hand. If you don't, {this} enters the battlefield tapped"));
 
-        // {T}: Add {G} or {W} to your mana pool.
+        // {T}: Add {G} or {W}.
         this.addAbility(new GreenManaAbility());
         this.addAbility(new WhiteManaAbility());
     }

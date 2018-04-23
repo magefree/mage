@@ -54,12 +54,12 @@ public class SpendOtherManaTest extends CardTestPlayerBase {
         // {U}: Target noncreature artifact becomes an artifact creature with power and toughness each equal to its converted mana cost until end of turn.
         // {W}{B}: Target artifact creature gains deathtouch and lifelink until end of turn.
         addCard(Zone.BATTLEFIELD, playerA, "Sydri, Galvanic Genius");
-        //{T}: Add {C} to your mana pool. ( represents colorless mana.)
-        // {1}, {T}: Add one mana of any color to your mana pool.
+        //{T}: Add {C}. ( represents colorless mana.)
+        // {1}, {T}: Add one mana of any color.
         addCard(Zone.BATTLEFIELD, playerA, "Unknown Shores");
         addCard(Zone.BATTLEFIELD, playerB, "Mountain");
 
-        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {C} to your mana pool");
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {C}");
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{U}: Target noncreature artifact becomes an artifact creature with power and toughness", "Mountain");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -115,7 +115,7 @@ public class SpendOtherManaTest extends CardTestPlayerBase {
         addCard(Zone.GRAVEYARD, playerA, "Lightning Bolt", 2);
 
         // Search your library for a card and put that card into your hand. Then shuffle your library.
-        // <i>Spell mastery</i> - If there are two or more instant and/or sorcery cards in your graveyard, add {B}{B}{B} to your mana pool.
+        // <i>Spell mastery</i> - If there are two or more instant and/or sorcery cards in your graveyard, add {B}{B}{B}.
         addCard(Zone.HAND, playerA, "Dark Petition"); // {3}{B}{B}
 
         // +1: Create a 0/1 green Plant creature token onto the battlefield.
@@ -150,8 +150,8 @@ public class SpendOtherManaTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Hostage Taker");
         setChoice(playerA, "Silvercoat Lion");
 
-        activateManaAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{T}: Add {R} to your mana pool."); // red mana to pool
-        activateManaAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{T}: Add {R} to your mana pool."); // red mana to pool
+        activateManaAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{T}: Add {R}."); // red mana to pool
+        activateManaAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{T}: Add {R}."); // red mana to pool
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Silvercoat Lion"); // cast it from exile with red mana from pool
 
         setStopAt(1, PhaseStep.END_TURN);

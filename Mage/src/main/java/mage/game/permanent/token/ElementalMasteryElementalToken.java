@@ -36,7 +36,7 @@ import mage.constants.SubType;
  *
  * @author spjspj
  */
-public class ElementalMasteryElementalToken extends Token {
+public class ElementalMasteryElementalToken extends TokenImpl {
 
     public ElementalMasteryElementalToken() {
         super("Elemental", "1/1 red Elemental creature token with haste");
@@ -46,5 +46,12 @@ public class ElementalMasteryElementalToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
         addAbility(HasteAbility.getInstance());
+    }
+    public ElementalMasteryElementalToken(final ElementalMasteryElementalToken token) {
+        super(token);
+    }
+
+    public ElementalMasteryElementalToken copy() {
+        return new ElementalMasteryElementalToken(this);
     }
 }

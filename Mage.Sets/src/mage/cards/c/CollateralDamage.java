@@ -33,9 +33,9 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -44,14 +44,14 @@ import mage.target.common.TargetCreatureOrPlayer;
 public class CollateralDamage extends CardImpl {
 
     public CollateralDamage(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}");
 
         // As an additional cost to cast Collateral Damge, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(new FilterControlledCreaturePermanent("a creature"))));
-        
-        // Collateral Damage deals 3 damage to target creature or player.
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
-        this.getSpellAbility().addEffect(new DamageTargetEffect(3));        
+        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+
+        // Collateral Damage deals 3 damage to any target.
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
+        this.getSpellAbility().addEffect(new DamageTargetEffect(3));
     }
 
     public CollateralDamage(final CollateralDamage card) {

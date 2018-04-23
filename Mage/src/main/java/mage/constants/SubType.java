@@ -30,6 +30,7 @@ public enum SubType {
     AURA("Aura", SubTypeSet.EnchantmentType),
     CARTOUCHE("Cartouche", SubTypeSet.EnchantmentType),
     CURSE("Curse", SubTypeSet.EnchantmentType),
+    SAGA("Saga", SubTypeSet.EnchantmentType),
     SHRINE("Shrine", SubTypeSet.EnchantmentType),
     // 205.3g: Artifacts have their own unique set of subtypes; these subtypes are called artifact types.
     CLUE("Clue", SubTypeSet.ArtifactType),
@@ -122,6 +123,7 @@ public enum SubType {
     ELEMENTAL("Elemental", SubTypeSet.CreatureType),
     ELEPHANT("Elephant", SubTypeSet.CreatureType),
     ELF("Elf", SubTypeSet.CreatureType),
+    ELVES("Elves", SubTypeSet.CreatureType, true), // Un-sets
     ELK("Elk", SubTypeSet.CreatureType),
     EYE("Eye", SubTypeSet.CreatureType),
     EWOK("Ewok", SubTypeSet.CreatureType, true), // Star Wars
@@ -175,6 +177,7 @@ public enum SubType {
     // J
     JACKAL("Jackal", SubTypeSet.CreatureType),
     JAWA("Jawa", SubTypeSet.CreatureType, true),
+    JAYA("Jaya", SubTypeSet.PlaneswalkerType),
     JEDI("Jedi", SubTypeSet.CreatureType, true), // Star Wars
     JELLYFISH("Jellyfish", SubTypeSet.CreatureType),
     JUGGERNAUT("Juggernaut", SubTypeSet.CreatureType),

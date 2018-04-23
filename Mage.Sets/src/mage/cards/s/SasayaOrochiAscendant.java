@@ -51,6 +51,7 @@ import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 
@@ -115,7 +116,7 @@ class SasayaOrochiAscendantFlipEffect extends OneShotEffect {
     }
 }
 
-class SasayasEssence extends Token {
+class SasayasEssence extends TokenImpl {
 
     SasayasEssence() {
         super("Sasaya's Essence", "");
@@ -124,10 +125,17 @@ class SasayasEssence extends Token {
 
         color.setGreen(true);
 
-        // Whenever a land you control is tapped for mana, for each other land you control with the same name, add one mana to your mana pool of any type that land produced.
+        // Whenever a land you control is tapped for mana, for each other land you control with the same name, add one mana of any type that land produced.
         this.addAbility(new TapForManaAllTriggeredManaAbility(
                 new SasayasEssenceManaEffectEffect(),
                 new FilterControlledLandPermanent(), SetTargetPointer.PERMANENT));
+    }
+    public SasayasEssence(final SasayasEssence token) {
+        super(token);
+    }
+
+    public SasayasEssence copy() {
+        return new SasayasEssence(this);
     }
 }
 
@@ -135,7 +143,7 @@ class SasayasEssenceManaEffectEffect extends ManaEffect {
 
     public SasayasEssenceManaEffectEffect() {
         super();
-        this.staticText = "for each other land you control with the same name, add one mana to your mana pool of any type that land produced";
+        this.staticText = "for each other land you control with the same name, add one mana of any type that land produced";
     }
 
     public SasayasEssenceManaEffectEffect(final SasayasEssenceManaEffectEffect effect) {

@@ -58,7 +58,7 @@ public class EbonbladeReaper extends CardImpl {
         //Whenever Ebonblade Reaper attacks, you lose half your life, rounded up.
         this.addAbility(new AttacksTriggeredAbility(new LoseHalfLifeEffect(), false));
 
-        //Whenever Ebonblade Reaper deals combat damage to a player, that player loses half his or her life, rounded up.
+        //Whenever Ebonblade Reaper deals combat damage to a player, that player loses half their life, rounded up.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new LoseHalfLifeTargetEffect(), false, true));
 
         //Morph {3}{B}{B}

@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SerpentGeneratorSnakeToken extends Token {
+public class SerpentGeneratorSnakeToken extends TokenImpl {
 
     public SerpentGeneratorSnakeToken() {
         super("Snake", "1/1 colorless Snake artifact creature token with \"Whenever this creature deals damage to a player, that player gets a poison counter.\"");
@@ -51,6 +51,14 @@ public class SerpentGeneratorSnakeToken extends Token {
         Effect effect = new AddPoisonCounterTargetEffect(1);
         effect.setText("that player gets a poison counter");
         this.addAbility(new DealsDamageToAPlayerTriggeredAbility(effect, false, true));
+    }
+
+    public SerpentGeneratorSnakeToken(final SerpentGeneratorSnakeToken token) {
+        super(token);
+    }
+
+    public SerpentGeneratorSnakeToken copy() {
+        return new SerpentGeneratorSnakeToken(this);
     }
 
 }

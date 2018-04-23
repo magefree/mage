@@ -46,12 +46,13 @@ import mage.filter.predicate.permanent.ControllerPredicate;
 public class MaelstromWanderer extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures you control");
+
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
     public MaelstromWanderer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}{R}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{G}{U}{R}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELEMENTAL);
 

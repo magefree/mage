@@ -36,7 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
  *
  * @author spjspj
  */
-public class ButterflyToken extends Token {
+public class ButterflyToken extends TokenImpl {
 
     public ButterflyToken() {
         super("Butterfly", "1/1 green Insect creature token with flying named Butterfly");
@@ -46,5 +46,13 @@ public class ButterflyToken extends Token {
         power = new MageInt(1);
         toughness = new MageInt(1);
         addAbility(FlyingAbility.getInstance());
+    }
+
+    public ButterflyToken(final ButterflyToken token) {
+        super(token);
+    }
+
+    public ButterflyToken copy() {
+        return new ButterflyToken(this);
     }
 }

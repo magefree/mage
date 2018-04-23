@@ -55,7 +55,7 @@ public class NaturalSelection extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");
 
 
-        // Look at the top three cards of target player's library, then put them back in any order. You may have that player shuffle his or her library.
+        // Look at the top three cards of target player's library, then put them back in any order. You may have that player shuffle their library.
         this.getSpellAbility().addEffect(new NaturalSelectionEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
@@ -74,7 +74,7 @@ class  NaturalSelectionEffect extends OneShotEffect {
 
     public  NaturalSelectionEffect() {
         super(Outcome.DrawCard);
-        this.staticText = "look at the top three cards of target player's library, then put them back in any order. You may have that player shuffle his or her library.";
+        this.staticText = "look at the top three cards of target player's library, then put them back in any order. You may have that player shuffle their library.";
     }
 
     public  NaturalSelectionEffect(final  NaturalSelectionEffect effect) {
@@ -118,7 +118,7 @@ class  NaturalSelectionEffect extends OneShotEffect {
             Card card = cards.get(cards.iterator().next(), game);
             card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
         }
-        if (you.chooseUse(Outcome.Neutral, "You may have that player shuffle his or her library", source, game)){
+        if (you.chooseUse(Outcome.Neutral, "You may have that player shuffle their library", source, game)){
             player.shuffleLibrary(source, game);
         }
         return true;

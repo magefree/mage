@@ -57,7 +57,7 @@ public class Iceberg extends CardImpl {
         // {3}: Put an ice counter on Iceberg.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.ICE.createInstance(1)), new ManaCostsImpl("{3}")));
 
-        // Remove an ice counter from Iceberg: Add {C} to your mana pool.
+        // Remove an ice counter from Iceberg: Add {C}.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(1), new RemoveCountersSourceCost(CounterType.ICE.createInstance(1))));
     }
 

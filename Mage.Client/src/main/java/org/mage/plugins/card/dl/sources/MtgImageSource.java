@@ -24,35 +24,34 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package org.mage.plugins.card.dl.sources;
 
+import java.util.Locale;
 import org.mage.plugins.card.images.CardDownloadData;
 
 /**
  * Site was shutdown by wizards Feb. 2015
- * 
- * 
- * 
- * 
+ *
+ *
+ *
+ *
  * @author LevelX2
  */
+public enum MtgImageSource implements CardImageSource {
 
-public enum  MtgImageSource implements CardImageSource {
-
-   instance;
+    instance;
 
     @Override
     public String getSourceName() {
         return "mtgimage.com";
     }
-    
+
     @Override
     public String getNextHttpImageUrl() {
         return null;
     }
-    
+
     @Override
     public String getFileForHttpImage(String httpImageUrl) {
         return null;
@@ -66,9 +65,9 @@ public enum  MtgImageSource implements CardImageSource {
             throw new Exception("Wrong parameters for image: collector id: " + collectorId + ",card set: " + cardSet);
         }
         StringBuilder url = new StringBuilder("http://mtgimage.com/set/");
-            url.append(cardSet.toUpperCase()).append('/');
+        url.append(cardSet.toUpperCase(Locale.ENGLISH)).append('/');
 
-        if (card.isSplitCard()) {            
+        if (card.isSplitCard()) {
             url.append(card.getDownloadName().replaceAll(" // ", ""));
         } else {
             url.append(card.getDownloadName().replaceAll(" ", "%20"));
@@ -98,12 +97,12 @@ public enum  MtgImageSource implements CardImageSource {
     public float getAverageSize() {
         return 70.0f;
     }
-    
+
     @Override
     public int getTotalImages() {
         return -1;
     }
-    
+
     @Override
     public boolean isTokenSource() {
         return false;

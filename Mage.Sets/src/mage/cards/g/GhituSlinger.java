@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -55,9 +55,9 @@ public class GhituSlinger extends CardImpl {
 
         // Echo {2}{R}
         this.addAbility(new EchoAbility("{2}{R}"));
-        // When Ghitu Slinger enters the battlefield, it deals 2 damage to target creature or player.
+        // When Ghitu Slinger enters the battlefield, it deals 2 damage to any target.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(2, "it"), false);
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }
 

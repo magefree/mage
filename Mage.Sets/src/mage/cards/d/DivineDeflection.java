@@ -39,7 +39,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  * @author noxx
@@ -50,9 +50,9 @@ public class DivineDeflection extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{W}");
 
 
-        // Prevent the next X damage that would be dealt to you and/or permanents you control this turn. If damage is prevented this way, Divine Deflection deals that much damage to target creature or player.
+        // Prevent the next X damage that would be dealt to you and/or permanents you control this turn. If damage is prevented this way, Divine Deflection deals that much damage to any target.
         this.getSpellAbility().addEffect(new DivineDeflectionPreventDamageTargetEffect(Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
     public DivineDeflection(final DivineDeflection card) {
@@ -69,7 +69,7 @@ class DivineDeflectionPreventDamageTargetEffect extends PreventionEffectImpl {
 
     public DivineDeflectionPreventDamageTargetEffect(Duration duration) {
         super(duration, Integer.MIN_VALUE, false, true);
-        staticText = "Prevent the next X damage that would be dealt to you and/or permanents you control this turn. If damage is prevented this way, {this} deals that much damage to target creature or player";
+        staticText = "Prevent the next X damage that would be dealt to you and/or permanents you control this turn. If damage is prevented this way, {this} deals that much damage to any target";
     }
 
     public DivineDeflectionPreventDamageTargetEffect(final DivineDeflectionPreventDamageTargetEffect effect) {

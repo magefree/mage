@@ -66,7 +66,7 @@ public class PersonalIncarnation extends CardImpl {
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PersonalIncarnationRedirectEffect(), new GenericManaCost(0));
         ability.setMayActivate(TargetController.OWNER);
         this.addAbility(ability);
-        // When Personal Incarnation dies, its owner loses half his or her life, rounded up.
+        // When Personal Incarnation dies, its owner loses half their life, rounded up.
         this.addAbility(new DiesTriggeredAbility(new PersonalIncarnationLoseHalfLifeEffect()));
     }
 
@@ -112,7 +112,7 @@ class PersonalIncarnationLoseHalfLifeEffect extends OneShotEffect {
 
     public PersonalIncarnationLoseHalfLifeEffect() {
         super(Outcome.LoseLife);
-        staticText = "its owner lose half his or her life, rounded up";
+        staticText = "its owner lose half their life, rounded up";
     }
 
     public PersonalIncarnationLoseHalfLifeEffect(final PersonalIncarnationLoseHalfLifeEffect effect) {

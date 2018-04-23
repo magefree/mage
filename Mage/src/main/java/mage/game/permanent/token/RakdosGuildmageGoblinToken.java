@@ -36,7 +36,7 @@ import mage.abilities.keyword.HasteAbility;
  *
  * @author spjspj
  */
-public class RakdosGuildmageGoblinToken extends Token {
+public class RakdosGuildmageGoblinToken extends TokenImpl {
 
     public RakdosGuildmageGoblinToken() {
         super("Goblin", "2/1 red Goblin creature token with haste");
@@ -46,5 +46,13 @@ public class RakdosGuildmageGoblinToken extends Token {
         power = new MageInt(2);
         toughness = new MageInt(1);
         this.addAbility(HasteAbility.getInstance());
+    }
+
+    public RakdosGuildmageGoblinToken(final RakdosGuildmageGoblinToken token) {
+        super(token);
+    }
+
+    public RakdosGuildmageGoblinToken copy() {
+        return new RakdosGuildmageGoblinToken(this);
     }
 }

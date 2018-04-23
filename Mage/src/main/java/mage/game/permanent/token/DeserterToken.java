@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class DeserterToken extends Token {
+public class DeserterToken extends TokenImpl {
 
     public DeserterToken() {
         super("Deserter", "0/1 white Deserter creature token");
@@ -44,5 +44,13 @@ public class DeserterToken extends Token {
         subtype.add(SubType.DESERTER);
         power = new MageInt(0);
         toughness = new MageInt(1);
+    }
+
+    public DeserterToken(final DeserterToken token) {
+        super(token);
+    }
+
+    public DeserterToken copy() {
+        return new DeserterToken(this);
     }
 }

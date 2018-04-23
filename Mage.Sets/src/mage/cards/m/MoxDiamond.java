@@ -58,7 +58,7 @@ public class MoxDiamond extends CardImpl {
 
         // If Mox Diamond would enter the battlefield, you may discard a land card instead. If you do, put Mox Diamond onto the battlefield. If you don't, put it into its owner's graveyard.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new MoxDiamondReplacementEffect()));
-        // {tap}: Add one mana of any color to your mana pool.
+        // {tap}: Add one mana of any color.
         this.addAbility(new AnyColorManaAbility());
     }
 

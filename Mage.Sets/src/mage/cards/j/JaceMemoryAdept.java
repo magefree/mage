@@ -56,13 +56,13 @@ public class JaceMemoryAdept extends CardImpl {
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));
 
-        // +1: Draw a card. Target player puts the top card of his or her library into his or her graveyard.
+        // +1: Draw a card. Target player puts the top card of their library into their graveyard.
         LoyaltyAbility ability1 = new LoyaltyAbility(new DrawCardSourceControllerEffect(1), 1);
         ability1.addEffect(new PutLibraryIntoGraveTargetEffect(1));
         ability1.addTarget(new TargetPlayer());
         this.addAbility(ability1);
 
-        // 0: Target player puts the top ten cards of his or her library into his or her graveyard.
+        // 0: Target player puts the top ten cards of their library into their graveyard.
         LoyaltyAbility ability2 = new LoyaltyAbility(new PutLibraryIntoGraveTargetEffect(10), 0);
         ability2.addTarget(new TargetPlayer());
         this.addAbility(ability2);

@@ -53,7 +53,7 @@ public class SharedTrauma extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}");
 
 
-        // Join forces - Starting with you, each player may pay any amount of mana. Each player puts the top X cards of his or her library into his or her graveyard, where X is the total amount of mana paid this way.
+        // Join forces - Starting with you, each player may pay any amount of mana. Each player puts the top X cards of their library into their graveyard, where X is the total amount of mana paid this way.
         this.getSpellAbility().addEffect(new SharedTraumaEffect());
     }
 
@@ -71,7 +71,7 @@ class SharedTraumaEffect extends OneShotEffect {
 
     public SharedTraumaEffect() {
         super(Outcome.Detriment);
-        this.staticText = "<i>Join forces</i> - Starting with you, each player may pay any amount of mana. Each player puts the top X cards of his or her library into his or her graveyard, where X is the total amount of mana paid this way";
+        this.staticText = "<i>Join forces</i> - Starting with you, each player may pay any amount of mana. Each player puts the top X cards of their library into their graveyard, where X is the total amount of mana paid this way";
     }
 
     public SharedTraumaEffect(final SharedTraumaEffect effect) {

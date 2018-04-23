@@ -102,7 +102,7 @@ class ScavengingOozeEffect extends OneShotEffect {
                 if (sourcePermanent != null) {
                     sourcePermanent.addCounters(CounterType.P1P1.createInstance(), source, game);
                 }
-                controller.gainLife(1, game);
+                controller.gainLife(1, game, source);
             }
             return true;
         }

@@ -83,7 +83,7 @@ public class SpellskiteTest extends CardTestPlayerBase {
      */
     @Test
     public void testAfterChangeOfController() {
-        // {T}: Add one mana of any color to your mana pool. Spend this mana only to cast a multicolored spell.
+        // {T}: Add one mana of any color. Spend this mana only to cast a multicolored spell.
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
         // {2}, {tap}: Gain control of target creature with power less than or equal to the number of Islands you control for as long as Vedalken Shackles remains tapped.

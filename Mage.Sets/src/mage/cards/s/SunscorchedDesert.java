@@ -36,7 +36,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.target.TargetPlayer;
+import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
  *
@@ -51,10 +51,10 @@ public class SunscorchedDesert extends CardImpl {
 
         // When Sunscorced Desert enters the battlefield, it deals 1 damage to target player.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(1, "it"));
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayerOrPlaneswalker());
         this.addAbility(ability);
 
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
     }
 

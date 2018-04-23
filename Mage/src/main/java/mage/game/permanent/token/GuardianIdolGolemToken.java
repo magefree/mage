@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class GuardianIdolGolemToken extends Token {
+public class GuardianIdolGolemToken extends TokenImpl {
 
     public GuardianIdolGolemToken() {
         super("Golem", "2/2 Golem artifact creature token");
@@ -44,5 +44,13 @@ public class GuardianIdolGolemToken extends Token {
         subtype.add(SubType.GOLEM);
         power = new MageInt(2);
         toughness = new MageInt(2);
+    }
+
+    public GuardianIdolGolemToken(final GuardianIdolGolemToken token) {
+        super(token);
+    }
+
+    public GuardianIdolGolemToken copy() {
+        return new GuardianIdolGolemToken(this);
     }
 }

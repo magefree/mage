@@ -27,13 +27,13 @@
  */
 package mage.abilities.effects.common.continuous;
 
+import java.util.Locale;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
@@ -126,7 +126,7 @@ public class BoostTargetEffect extends ContinuousEffectImpl {
             }
             sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(" target ").append(target.getTargetName()).append(" get ");
         } else {
-            if (!target.getTargetName().toUpperCase().startsWith("ANOTHER")) {
+            if (!target.getTargetName().toUpperCase(Locale.ENGLISH).startsWith("ANOTHER")) {
                 sb.append("target ");
             }
             sb.append(target.getTargetName()).append(" gets ");

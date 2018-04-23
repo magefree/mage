@@ -38,7 +38,6 @@ import mage.game.events.*;
 import mage.game.events.TableEvent.EventType;
 import mage.game.match.Match;
 import mage.game.match.MatchPlayer;
-import mage.game.result.ResultProtos.*;
 import mage.game.result.ResultProtos.MatchPlayerProto;
 import mage.game.result.ResultProtos.MatchProto;
 import mage.game.result.ResultProtos.MatchQuitStatus;

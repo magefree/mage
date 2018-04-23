@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class DinOfTheFireherdToken extends Token {
+public class DinOfTheFireherdToken extends TokenImpl {
 
     public DinOfTheFireherdToken() {
         super("Elemental", "5/5 black and red Elemental creature");
@@ -45,5 +45,13 @@ public class DinOfTheFireherdToken extends Token {
         color.setRed(true);
         power = new MageInt(5);
         toughness = new MageInt(5);
+    }
+
+    public DinOfTheFireherdToken(final DinOfTheFireherdToken token) {
+        super(token);
+    }
+
+    public DinOfTheFireherdToken copy() {
+        return new DinOfTheFireherdToken(this);
     }
 }

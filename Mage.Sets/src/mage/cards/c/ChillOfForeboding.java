@@ -50,7 +50,7 @@ public class ChillOfForeboding extends CardImpl {
     public ChillOfForeboding(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}");
 
-        // Each player puts the top five cards of his or her library into his or her graveyard.
+        // Each player puts the top five cards of their library into their graveyard.
         this.getSpellAbility().addEffect(new ChillOfForebodingEffect());
         // Flashback {7}{U}
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{7}{U}"), TimingRule.SORCERY));
@@ -70,7 +70,7 @@ class ChillOfForebodingEffect extends OneShotEffect {
 
     public ChillOfForebodingEffect() {
         super(Outcome.Detriment);
-        this.staticText = "Each player puts the top five cards of his or her library into his or her graveyard";
+        this.staticText = "Each player puts the top five cards of their library into their graveyard";
     }
 
     public ChillOfForebodingEffect(final ChillOfForebodingEffect effect) {

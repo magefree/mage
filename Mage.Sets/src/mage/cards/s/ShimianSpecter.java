@@ -68,7 +68,7 @@ public class ShimianSpecter extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // Whenever Shimian Specter deals combat damage to a player, that player reveals his or her hand. You choose a nonland card from it. Search that player's graveyard, hand, and library for all cards with the same name as that card and exile them. Then that player shuffles his or her library.
+        // Whenever Shimian Specter deals combat damage to a player, that player reveals their hand. You choose a nonland card from it. Search that player's graveyard, hand, and library for all cards with the same name as that card and exile them. Then that player shuffles their library.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new ShimianSpecterEffect(), false, true));
     }
 
@@ -92,7 +92,7 @@ class ShimianSpecterEffect extends OneShotEffect {
 
     public ShimianSpecterEffect() {
         super(Outcome.Benefit);
-        staticText = "that player reveals his or her hand. You choose a nonland card from it. Search that player's graveyard, hand, and library for all cards with the same name as that card and exile them. Then that player shuffles his or her library";
+        staticText = "that player reveals their hand. You choose a nonland card from it. Search that player's graveyard, hand, and library for all cards with the same name as that card and exile them. Then that player shuffles their library";
     }
 
     public ShimianSpecterEffect(final ShimianSpecterEffect effect) {
@@ -148,7 +148,7 @@ class ShimianSpecterEffect extends OneShotEffect {
             }
 
             // search cards in Library
-            // If the player has no nonland cards in his or her hand, you can still search that player's library and have him or her shuffle it.
+            // If the player has no nonland cards in their hand, you can still search that player's library and have him or her shuffle it.
             if (chosenCard != null || controller.chooseUse(outcome, "Search library anyway?", source, game)) {
                 TargetCardInLibrary targetCardsLibrary = new TargetCardInLibrary(0, Integer.MAX_VALUE, filterNamedCards);
                 controller.searchLibrary(targetCardsLibrary, game, targetPlayer.getId());

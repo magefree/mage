@@ -58,10 +58,10 @@ public class PossibilityStorm extends CardImpl {
     public PossibilityStorm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}{R}");
 
-        // Whenever a player casts a spell from his or her hand, that player exiles it, then exiles cards from
-        // the top of his or her library until he or she exiles a card that shares a card type with it. That
+        // Whenever a player casts a spell from their hand, that player exiles it, then exiles cards from
+        // the top of their library until he or she exiles a card that shares a card type with it. That
         // player may cast that card without paying its mana cost. Then he or she puts all cards exiled with
-        // Possibility Storm on the bottom of his or her library in a random order.
+        // Possibility Storm on the bottom of their library in a random order.
         this.addAbility(new PossibilityStormTriggeredAbility());
     }
 
@@ -111,7 +111,7 @@ class PossibilityStormTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a player casts a spell from his or her hand, " + super.getRule();
+        return "Whenever a player casts a spell from their hand, " + super.getRule();
     }
 }
 
@@ -119,7 +119,7 @@ class PossibilityStormEffect extends OneShotEffect {
 
     public PossibilityStormEffect() {
         super(Outcome.Neutral);
-        staticText = "that player exiles it, then exiles cards from the top of his or her library until he or she exiles a card that shares a card type with it. That player may cast that card without paying its mana cost. Then he or she puts all cards exiled with {this} on the bottom of his or her library in a random order";
+        staticText = "that player exiles it, then exiles cards from the top of their library until he or she exiles a card that shares a card type with it. That player may cast that card without paying its mana cost. Then he or she puts all cards exiled with {this} on the bottom of their library in a random order";
     }
 
     public PossibilityStormEffect(final PossibilityStormEffect effect) {

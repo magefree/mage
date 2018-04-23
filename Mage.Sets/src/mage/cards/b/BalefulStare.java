@@ -56,7 +56,7 @@ public class BalefulStare extends CardImpl {
     public BalefulStare(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}");
 
-        // Target opponent reveals his or her hand. You draw a card for each Mountain and red card in it.
+        // Target opponent reveals their hand. You draw a card for each Mountain and red card in it.
         this.getSpellAbility().addEffect(new RevealHandTargetEffect());
         this.getSpellAbility().addEffect(new BalefulStareEffect());
         this.getSpellAbility().addTarget(new TargetOpponent());

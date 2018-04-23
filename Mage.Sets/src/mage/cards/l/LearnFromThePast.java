@@ -50,7 +50,7 @@ public class LearnFromThePast extends CardImpl {
     public LearnFromThePast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}");
 
-        // Target player shuffles his or her graveyard into his or her library
+        // Target player shuffles their graveyard into their library
         this.getSpellAbility().addEffect(new LearnFromThePastEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
         
@@ -72,7 +72,7 @@ class LearnFromThePastEffect extends OneShotEffect {
     
     LearnFromThePastEffect() {
         super(Outcome.Neutral);
-        this.staticText = "Target player shuffles his or her graveyard into his or her library";
+        this.staticText = "Target player shuffles their graveyard into their library";
     }
     
     LearnFromThePastEffect(final LearnFromThePastEffect effect) {

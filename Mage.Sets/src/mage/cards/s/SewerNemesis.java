@@ -68,7 +68,7 @@ public class SewerNemesis extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new ChoosePlayerEffect(Outcome.Detriment)));
         // Sewer Nemesis's power and toughness are each equal to the number of cards in the chosen player's graveyard.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new CardsInTargetOpponentsGraveyardCount(), Duration.WhileOnBattlefield)));
-        // Whenever the chosen player casts a spell, that player puts the top card of his or her library into his or her graveyard.
+        // Whenever the chosen player casts a spell, that player puts the top card of their library into their graveyard.
         this.addAbility(new SewerNemesisTriggeredAbility());
 
     }
@@ -140,7 +140,7 @@ class SewerNemesisTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever the chosen player casts a spell, that player puts the top card of his or her library into his or her graveyard.";
+        return "Whenever the chosen player casts a spell, that player puts the top card of their library into their graveyard.";
     }
 
     @Override

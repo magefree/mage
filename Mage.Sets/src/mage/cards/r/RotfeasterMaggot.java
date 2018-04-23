@@ -98,7 +98,7 @@ class RotfeasterMaggotExileEffect extends OneShotEffect {
                 if (game.getState().getZone(targetCard.getId()) == Zone.GRAVEYARD) {
                     controller.moveCardToExileWithInfo(targetCard, null, "", source.getSourceId(), game, Zone.GRAVEYARD, true);
                 }
-                controller.gainLife(targetCard.getToughness().getValue(), game);
+                controller.gainLife(targetCard.getToughness().getValue(), game, source);
                 return true;
             }
         }

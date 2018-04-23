@@ -45,7 +45,7 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -66,11 +66,11 @@ public class PowerOfFire extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
         
-        // Enchanted creature has "{tap}: This creature deals 1 damage to target creature or player."
+        // Enchanted creature has "{tap}: This creature deals 1 damage to any target."
         Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
-        gainedAbility.addTarget(new TargetCreatureOrPlayer());
+        gainedAbility.addTarget(new TargetAnyTarget());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield, 
-        "Enchanted creature has \"{T}: This creature deals 1 damage to target creature or player.\"")));
+        "Enchanted creature has \"{T}: This creature deals 1 damage to any target.\"")));
         
     }
 

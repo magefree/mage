@@ -36,11 +36,12 @@ import mage.abilities.keyword.FlyingAbility;
  *
  * @author spjspj
  */
-public class PromiseOfPowerDemonToken extends Token {
+public class PromiseOfPowerDemonToken extends TokenImpl {
 
     public PromiseOfPowerDemonToken() {
         this(1);
     }
+
     public PromiseOfPowerDemonToken(int xValue) {
         super("Demon", "X/X black Demon creature token with flying");
         setOriginalExpansionSetCode("C14");
@@ -52,5 +53,13 @@ public class PromiseOfPowerDemonToken extends Token {
         toughness = new MageInt(xValue);
 
         addAbility(FlyingAbility.getInstance());
+    }
+
+    public PromiseOfPowerDemonToken(final PromiseOfPowerDemonToken token) {
+        super(token);
+    }
+
+    public PromiseOfPowerDemonToken copy() {
+        return new PromiseOfPowerDemonToken(this);
     }
 }

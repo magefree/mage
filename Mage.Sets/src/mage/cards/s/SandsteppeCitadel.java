@@ -47,7 +47,7 @@ public class SandsteppeCitadel extends CardImpl {
 
         // Sandsteppe Citadel enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
-        // {T}: Add {W}, {B}, or {G} to your mana pool.
+        // {T}: Add {W}, {B}, or {G}.
         this.addAbility(new WhiteManaAbility());
         this.addAbility(new BlackManaAbility());
         this.addAbility(new GreenManaAbility());

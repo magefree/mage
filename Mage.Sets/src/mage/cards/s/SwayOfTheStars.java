@@ -53,7 +53,7 @@ public class SwayOfTheStars extends CardImpl {
     public SwayOfTheStars(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{8}{U}{U}");
 
-        // Each player shuffles his or her hand, graveyard, and permanents he or she owns into his or her library, then draws seven cards. Each player's life total becomes 7.
+        // Each player shuffles their hand, graveyard, and permanents he or she owns into their library, then draws seven cards. Each player's life total becomes 7.
         this.getSpellAbility().addEffect(new SwayOfTheStarsEffect());
         Effect effect = new DrawCardAllEffect(7);
         effect.setText(", then draws seven cards");
@@ -76,7 +76,7 @@ class SwayOfTheStarsEffect extends OneShotEffect {
 
     public SwayOfTheStarsEffect() {
         super(Outcome.Neutral);
-        staticText = "Each player shuffles his or her hand, graveyard, and permanents he or she owns into his or her library, then draws seven cards. Each player's life total becomes 7";
+        staticText = "Each player shuffles their hand, graveyard, and permanents he or she owns into their library, then draws seven cards. Each player's life total becomes 7";
     }
 
     public SwayOfTheStarsEffect(final SwayOfTheStarsEffect effect) {

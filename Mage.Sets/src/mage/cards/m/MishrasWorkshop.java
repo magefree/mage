@@ -45,7 +45,7 @@ public class MishrasWorkshop extends CardImpl {
     public MishrasWorkshop(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {tap}: Add {C}{C}{C} to your mana pool. Spend this mana only to cast artifact spells.
+        // {tap}: Add {C}{C}{C}. Spend this mana only to cast artifact spells.
         this.addAbility(new ConditionalColorlessManaAbility(new TapSourceCost(), 3,
                 new ConditionalSpellManaBuilder(new FilterArtifactSpell("artifact spells"))));
 

@@ -47,6 +47,7 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.target.Target;
@@ -118,7 +119,7 @@ class NezumiGraverobberFlipEffect extends OneShotEffect {
 
 }
 
-class NighteyesTheDesecratorToken extends Token {
+class NighteyesTheDesecratorToken extends TokenImpl {
     
     NighteyesTheDesecratorToken() {            
         super("Nighteyes the Desecrator", "");
@@ -133,5 +134,12 @@ class NighteyesTheDesecratorToken extends Token {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToBattlefieldTargetEffect(), new ManaCostsImpl("{4}{B}"));
         ability.addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card from a graveyard")));
         this.addAbility(ability);
+    }
+    public NighteyesTheDesecratorToken(final NighteyesTheDesecratorToken token) {
+        super(token);
+    }
+
+    public NighteyesTheDesecratorToken copy() {
+        return new NighteyesTheDesecratorToken(this);
     }
 }

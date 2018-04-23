@@ -111,7 +111,7 @@ class IlluminationEffect extends OneShotEffect {
             int cost = spell.getConvertedManaCost();
             Player player = game.getPlayer(spell.getControllerId());
             if (player != null) {
-                player.gainLife(cost, game);
+                player.gainLife(cost, game, source);
             }
             return true;
         }

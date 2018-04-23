@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.g;
 
 import java.util.UUID;
@@ -46,8 +45,8 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.target.TargetPlayer;
 import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
  *
@@ -57,8 +56,8 @@ public class GoblinRazerunners extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("a land");
 
-    public GoblinRazerunners (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
+    public GoblinRazerunners(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
         this.subtype.add(SubType.GOBLIN);
         this.subtype.add(SubType.WARRIOR);
 
@@ -72,11 +71,11 @@ public class GoblinRazerunners extends CardImpl {
 
         // At the beginning of your end step, you may have Goblin Razerunners deal damage equal to the number of +1/+1 counters on it to target player.
         ability = new BeginningOfYourEndStepTriggeredAbility(new DamageTargetEffect(new CountersSourceCount(CounterType.P1P1)), true);
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayerOrPlaneswalker());
         this.addAbility(ability);
     }
 
-    public GoblinRazerunners (final GoblinRazerunners card) {
+    public GoblinRazerunners(final GoblinRazerunners card) {
         super(card);
     }
 

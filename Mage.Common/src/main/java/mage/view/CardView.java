@@ -54,6 +54,7 @@ import mage.target.Targets;
 import mage.util.SubTypeList;
 
 import com.google.gson.annotations.Expose;
+import mage.game.command.Plane;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -520,6 +521,14 @@ public class CardView extends SimpleCardView {
             Emblem emblem = (Emblem) object;
             this.rarity = Rarity.SPECIAL;
             this.rules = emblem.getAbilities().getRules(emblem.getName());
+        } else if (object instanceof Plane) {
+            this.mageObjectType = MageObjectType.PLANE;
+            Plane plane = (Plane) object;
+            this.rarity = Rarity.SPECIAL;
+            this.frameStyle = FrameStyle.M15_NORMAL;
+            // Display in landscape/rotated/on its side
+            this.rotate = true;
+            this.rules = plane.getAbilities().getRules(plane.getName());
         }
         if (this.rarity == null && object instanceof StackAbility) {
             StackAbility stackAbility = (StackAbility) object;
@@ -553,6 +562,21 @@ public class CardView extends SimpleCardView {
         // emblem images are always with common (black) symbol
         this.frameStyle = FrameStyle.M15_NORMAL;
         this.expansionSetCode = emblem.getExpansionSetCode();
+        this.rarity = Rarity.COMMON;
+    }
+
+    public CardView(PlaneView plane) {
+        this(true);
+        this.gameObject = true;
+        this.id = plane.getId();
+        this.mageObjectType = MageObjectType.PLANE;
+        this.name = plane.getName();
+        this.displayName = name;
+        this.rules = plane.getRules();
+        // Display the plane in landscape (similar to Fused cards)
+        this.rotate = true;
+        this.frameStyle = FrameStyle.M15_NORMAL;
+        this.expansionSetCode = plane.getExpansionSetCode();
         this.rarity = Rarity.COMMON;
     }
 
@@ -745,6 +769,9 @@ public class CardView extends SimpleCardView {
 
     @Override
     public String getExpansionSetCode() {
+        if (expansionSetCode == null) { 
+            expansionSetCode = "";
+        }
         return expansionSetCode;
     }
 
@@ -988,7 +1015,7 @@ public class CardView extends SimpleCardView {
     public String getColorText() {
 
         String color = getColor().getDescription();
-        return color.substring(0, 1).toUpperCase() + color.substring(1);
+        return color.substring(0, 1).toUpperCase(Locale.ENGLISH) + color.substring(1);
     }
 
     public String getTypeText() {

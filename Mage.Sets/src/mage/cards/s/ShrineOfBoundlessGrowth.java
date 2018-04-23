@@ -66,7 +66,7 @@ public class ShrineOfBoundlessGrowth extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), TargetController.YOU, false));
         this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), filter, false));
 
-        // {T}, Sacrifice Shrine of Boundless Growth: Add {C} to your mana pool for each charge counter on Shrine of Boundless Growth.
+        // {T}, Sacrifice Shrine of Boundless Growth: Add {C} for each charge counter on Shrine of Boundless Growth.
         Ability ability = new DynamicManaAbility(Mana.ColorlessMana(1), new CountersSourceCount(CounterType.CHARGE), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

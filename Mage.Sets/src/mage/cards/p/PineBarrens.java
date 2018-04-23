@@ -49,9 +49,9 @@ public class PineBarrens extends CardImpl {
 
         // Pine Barrens enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
-        // {tap}: Add {C} to your mana pool.
+        // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
-        // {tap}: Add {B} or {G} to your mana pool. Pine Barrens deals 1 damage to you.
+        // {tap}: Add {B} or {G}. Pine Barrens deals 1 damage to you.
         Ability ability = new BlackManaAbility();
         ability.addEffect(new DamageControllerEffect(1));
         this.addAbility(ability);

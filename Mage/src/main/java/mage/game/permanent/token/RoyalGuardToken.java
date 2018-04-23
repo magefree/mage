@@ -35,7 +35,7 @@ import mage.abilities.keyword.FirstStrikeAbility;
  *
  * @author spjspj
  */
-public class RoyalGuardToken extends Token {
+public class RoyalGuardToken extends TokenImpl {
 
     public RoyalGuardToken() {
         super("Royal Guard", "2/2 red Soldier creature token with first strike named Royal Guard", 2, 2);
@@ -44,5 +44,13 @@ public class RoyalGuardToken extends Token {
         color.setRed(true);
         addAbility(FirstStrikeAbility.getInstance());
         subtype.add(SubType.SOLDIER);
+    }
+
+    public RoyalGuardToken(final RoyalGuardToken token) {
+        super(token);
+    }
+
+    public RoyalGuardToken copy() {
+        return new RoyalGuardToken(this);
     }
 }

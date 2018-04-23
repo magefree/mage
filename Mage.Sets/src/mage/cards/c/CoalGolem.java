@@ -52,7 +52,7 @@ public class CoalGolem extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // {3}, Sacrifice Coal Golem: Add {R}{R}{R} to your mana pool.
+        // {3}, Sacrifice Coal Golem: Add {R}{R}{R}.
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.RedMana(3),new GenericManaCost(3));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

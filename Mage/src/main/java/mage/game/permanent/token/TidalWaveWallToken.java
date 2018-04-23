@@ -36,7 +36,7 @@ import mage.abilities.keyword.DefenderAbility;
  *
  * @author spjspj
  */
-public class TidalWaveWallToken extends Token {
+public class TidalWaveWallToken extends TokenImpl {
 
     public TidalWaveWallToken() {
         super("Wall", "5/5 blue Wall creature token with defender");
@@ -46,5 +46,13 @@ public class TidalWaveWallToken extends Token {
         power = new MageInt(5);
         toughness = new MageInt(5);
         this.addAbility(DefenderAbility.getInstance());
+    }
+
+    public TidalWaveWallToken(final TidalWaveWallToken token) {
+        super(token);
+    }
+
+    public TidalWaveWallToken copy() {
+        return new TidalWaveWallToken(this);
     }
 }

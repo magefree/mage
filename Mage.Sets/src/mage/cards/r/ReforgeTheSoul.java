@@ -46,7 +46,7 @@ public class ReforgeTheSoul extends CardImpl {
     public ReforgeTheSoul(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}{R}");
 
-        // Each player discards his or her hand, then draws seven cards.
+        // Each player discards their hand, then draws seven cards.
         this.getSpellAbility().addEffect(new DiscardHandAllEffect());
         Effect effect = new DrawCardAllEffect(7);
         effect.setText(", then draws seven cards");

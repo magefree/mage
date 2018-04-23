@@ -39,7 +39,7 @@ import mage.constants.TimingRule;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledPermanent;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -56,9 +56,9 @@ public class LavaDart extends CardImpl {
     public LavaDart(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");
 
-        // Lava Dart deals 1 damage to target creature or player.
+        // Lava Dart deals 1 damage to any target.
         this.getSpellAbility().addEffect(new DamageTargetEffect(1));
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
         
         // Flashback-Sacrifice a Mountain.
         this.addAbility(new FlashbackAbility(new SacrificeTargetCost(new TargetControlledPermanent(filter)), TimingRule.INSTANT));

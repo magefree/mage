@@ -66,7 +66,7 @@ public class NayaSoulbeast extends CardImpl {
 
         // Trample
         this.addAbility(TrampleAbility.getInstance());
-        // When you cast Naya Soulbeast, each player reveals the top card of his or her library.
+        // When you cast Naya Soulbeast, each player reveals the top card of their library.
         Ability ability = new CastSourceTriggeredAbility(new NayaSoulbeastCastEffect(), false);
         // Naya Soulbeast enters the battlefield with X +1/+1 counters on it, where X is the total converted mana cost of all cards revealed this way.
         ability.addEffect(new NayaSoulbeastReplacementEffect());
@@ -87,7 +87,7 @@ class NayaSoulbeastCastEffect extends OneShotEffect {
 
     public NayaSoulbeastCastEffect() {
         super(Outcome.Benefit);
-        this.staticText = "each player reveals the top card of his or her library";
+        this.staticText = "each player reveals the top card of their library";
     }
 
     public NayaSoulbeastCastEffect(final NayaSoulbeastCastEffect effect) {

@@ -39,7 +39,7 @@ import mage.ObjectColor;
  *
  * @author spjspj
  */
-public class TitaniaProtectorOfArgothElementalToken extends Token {
+public class TitaniaProtectorOfArgothElementalToken extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 
@@ -48,14 +48,10 @@ public class TitaniaProtectorOfArgothElementalToken extends Token {
     }
 
     public TitaniaProtectorOfArgothElementalToken() {
-        this(null, 0);
+        this((String)null);
     }
 
     public TitaniaProtectorOfArgothElementalToken(String setCode) {
-        this(setCode, 0);
-    }
-
-    public TitaniaProtectorOfArgothElementalToken(String setCode, int tokenType) {
         super("Elemental", "5/3 green Elemental creature token");
         availableImageSetCodes = tokenImageSets;
         this.setOriginalExpansionSetCode(setCode);
@@ -64,5 +60,13 @@ public class TitaniaProtectorOfArgothElementalToken extends Token {
         this.subtype.add(SubType.ELEMENTAL);
         this.power = new MageInt(5);
         this.toughness = new MageInt(3);
+    }
+
+    public TitaniaProtectorOfArgothElementalToken(final TitaniaProtectorOfArgothElementalToken token) {
+        super(token);
+    }
+
+    public TitaniaProtectorOfArgothElementalToken copy() {
+        return new TitaniaProtectorOfArgothElementalToken(this);
     }
 }

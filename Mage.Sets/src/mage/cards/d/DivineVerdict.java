@@ -42,9 +42,9 @@ import mage.target.common.TargetCreaturePermanent;
 public class DivineVerdict extends CardImpl {
 
     public DivineVerdict(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{W}");
 
-
+        // Destroy target attacking or blocking creature.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(new FilterAttackingOrBlockingCreature()));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
     }

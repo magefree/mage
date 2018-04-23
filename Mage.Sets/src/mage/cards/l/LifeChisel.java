@@ -40,7 +40,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -59,7 +59,7 @@ public class LifeChisel extends CardImpl {
                 Zone.BATTLEFIELD,
                 new LifeChiselEffect(),
                 new SacrificeTargetCost(
-                        new TargetControlledCreaturePermanent(1, 1, new FilterControlledCreaturePermanent("a creature"), true)
+                        new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)
                 ),
                 new IsStepCondition(PhaseStep.UPKEEP),
                 null
@@ -101,7 +101,7 @@ class LifeChiselEffect extends OneShotEffect {
                 if (cost instanceof SacrificeTargetCost) {
                     int amount = ((SacrificeTargetCost) cost).getPermanents().get(0).getToughness().getValue();
                     if (amount > 0) {
-                        controller.gainLife(amount, game);
+                        controller.gainLife(amount, game, source);
                     }
                 }
             }

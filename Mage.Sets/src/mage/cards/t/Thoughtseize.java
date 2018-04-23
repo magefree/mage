@@ -55,7 +55,7 @@ public class Thoughtseize extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}");
 
 
-        // Target player reveals his or her hand. You choose a nonland card from it. That player discards that card. You lose 2 life.
+        // Target player reveals their hand. You choose a nonland card from it. That player discards that card. You lose 2 life.
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(filter, TargetController.ANY));
         this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(2));

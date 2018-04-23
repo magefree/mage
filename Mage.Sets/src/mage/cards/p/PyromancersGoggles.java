@@ -57,7 +57,7 @@ public class PyromancersGoggles extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
         addSuperType(SuperType.LEGENDARY);
 
-        // {T}: Add {R} to your mana pool.
+        // {T}: Add {R}.
         Ability ability = new RedManaAbility();
         this.addAbility(ability);
 

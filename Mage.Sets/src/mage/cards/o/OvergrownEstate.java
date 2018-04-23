@@ -47,8 +47,8 @@ public class OvergrownEstate extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("a land");
 
     public OvergrownEstate(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}{G}{W}");
-        
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{W}{B}{G}");
+
         // Sacrifice a land: You gain 3 life.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(3), new SacrificeTargetCost(new TargetControlledPermanent(filter))));
     }

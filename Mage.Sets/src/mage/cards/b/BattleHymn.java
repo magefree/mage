@@ -45,7 +45,7 @@ public class BattleHymn extends CardImpl {
     public BattleHymn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R}");
 
-        // Add {R} to your mana pool for each creature you control.
+        // Add {R} for each creature you control.
         this.getSpellAbility().addEffect(new DynamicManaEffect(Mana.RedMana(1), new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_CREATURE)));
     }
 

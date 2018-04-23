@@ -69,6 +69,7 @@ public class MerfolkSovereign extends CardImpl {
 
         // Other Merfolk creatures you control get +1/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter1, true)));
+
         // {tap}: Target Merfolk creature can't be blocked this turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeBlockedTargetEffect(), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter2));

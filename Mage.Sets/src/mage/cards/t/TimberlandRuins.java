@@ -48,9 +48,9 @@ public class TimberlandRuins extends CardImpl {
 
         // Timberland Ruins enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
-        // {tap}: Add {G} to your mana pool.
+        // {tap}: Add {G}.
         this.addAbility(new GreenManaAbility());
-        // {tap}, Sacrifice Timberland Ruins: Add one mana of any color to your mana pool.
+        // {tap}, Sacrifice Timberland Ruins: Add one mana of any color.
         Ability ability = new AnyColorManaAbility();
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

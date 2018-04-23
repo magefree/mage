@@ -41,6 +41,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 
 /**
@@ -52,7 +53,7 @@ public class SimicKeyrune extends CardImpl {
     public SimicKeyrune(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
-        // {T}: Add {G} or {U} to your mana pool.
+        // {T}: Add {G} or {U}.
         this.addAbility(new GreenManaAbility());
         this.addAbility(new BlueManaAbility());
 
@@ -69,7 +70,7 @@ public class SimicKeyrune extends CardImpl {
         return new SimicKeyrune(this);
     }
 
-    private static class SimicKeyruneToken extends Token {
+    private static class SimicKeyruneToken extends TokenImpl {
         SimicKeyruneToken() {
             super("Crab", "2/3 green and blue Crab artifact creature with hexproof");
             cardType.add(CardType.ARTIFACT);
@@ -80,6 +81,14 @@ public class SimicKeyrune extends CardImpl {
             power = new MageInt(2);
             toughness = new MageInt(3);
             this.addAbility(HexproofAbility.getInstance());
+        }
+
+        public SimicKeyruneToken(final SimicKeyruneToken token) {
+            super(token);
+        }
+
+        public SimicKeyruneToken copy() {
+            return new SimicKeyruneToken(this);
         }
     }
 }

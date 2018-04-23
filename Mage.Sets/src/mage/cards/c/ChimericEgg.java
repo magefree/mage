@@ -46,6 +46,7 @@ import mage.counters.CounterType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 
 
@@ -82,7 +83,7 @@ public class ChimericEgg extends CardImpl {
         return new ChimericEgg(this);
     }
 
-    private static class ChimericEggToken extends Token {
+    private static class ChimericEggToken extends TokenImpl {
         ChimericEggToken() {
             super("", "6/6 Construct artifact creature with trample");
             cardType.add(CardType.ARTIFACT);
@@ -91,6 +92,13 @@ public class ChimericEgg extends CardImpl {
             power = new MageInt(6);
             toughness = new MageInt(6);
             this.addAbility(TrampleAbility.getInstance());
+        }
+        public ChimericEggToken(final ChimericEggToken token) {
+            super(token);
+        }
+
+        public ChimericEggToken copy() {
+            return new ChimericEggToken(this);
         }
     }
 }

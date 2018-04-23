@@ -77,13 +77,13 @@ public class JoragaTreespeaker extends LevelerCard {
 
         // LEVEL 1-4
         // 1/2
-        // {T}: Add {G}{G} to your mana pool.
+        // {T}: Add {G}{G}.
         Abilities<Ability> abilities1 = new AbilitiesImpl<>();
         abilities1.add(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.GreenMana(2), new TapSourceCost()));
 
         // LEVEL 5+
         // 1/4
-        // Elves you control have "{T}: Add {G}{G} to your mana pool."
+        // Elves you control have "{T}: Add {G}{G}."
         Abilities<Ability> abilities2 = new AbilitiesImpl<>();
         abilities2.add(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new GainAbilityControlledEffect(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.GreenMana(2), new TapSourceCost()),

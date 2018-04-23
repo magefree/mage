@@ -53,7 +53,7 @@ public class SettleTheWreckage extends CardImpl {
     public SettleTheWreckage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{W}{W}");
 
-        // Exile all attacking creatures target player controls. That player may search his or her library for that many basic land cards, put those cards onto the battlefield tapped, then shuffle his or her library.
+        // Exile all attacking creatures target player controls. That player may search their library for that many basic land cards, put those cards onto the battlefield tapped, then shuffle their library.
         this.getSpellAbility().addEffect(new SettleTheWreckageEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
@@ -72,7 +72,7 @@ class SettleTheWreckageEffect extends OneShotEffect {
 
     SettleTheWreckageEffect() {
         super(Outcome.Neutral);
-        this.staticText = "Exile all attacking creatures target player controls. That player may search his or her library for that many basic land cards, put those cards onto the battlefield tapped, then shuffle his or her library";
+        this.staticText = "Exile all attacking creatures target player controls. That player may search their library for that many basic land cards, put those cards onto the battlefield tapped, then shuffle their library";
     }
 
     SettleTheWreckageEffect(final SettleTheWreckageEffect effect) {

@@ -103,7 +103,7 @@ class ReverseDamageEffect extends PreventionEffectImpl {
         if (preventionData.getPreventedDamage() > 0) {
             Player player = game.getPlayer(source.getControllerId());
             if (player != null) {
-                player.gainLife(preventionData.getPreventedDamage(), game);
+                player.gainLife(preventionData.getPreventedDamage(), game, source);
             }            
         }        
         return true;

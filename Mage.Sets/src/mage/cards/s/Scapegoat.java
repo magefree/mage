@@ -34,6 +34,7 @@ import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -44,11 +45,11 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public class Scapegoat extends CardImpl {
 
     public Scapegoat(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{W}");
 
         // As an additional cost to cast Scapegoat, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
-        
+        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+
         // Return any number of target creatures you control to their owner's hand.
         Effect effect = new ReturnToHandTargetEffect();
         effect.setText("Return any number of target creatures you control to their owner's hand");

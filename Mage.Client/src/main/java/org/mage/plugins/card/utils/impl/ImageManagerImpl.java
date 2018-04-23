@@ -11,6 +11,7 @@ import java.awt.image.FilteredImageSource;
 import java.awt.image.WritableRaster;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import javax.imageio.ImageIO;
 import mage.client.util.gui.BufferedImageBuilder;
@@ -20,18 +21,17 @@ import org.mage.plugins.card.utils.Transparency;
 public enum ImageManagerImpl implements ImageManager {
     instance;
 
-    
     ImageManagerImpl() {
         init();
     }
 
     public void init() {
         String[] phases = {"Untap", "Upkeep", "Draw", "Main1",
-                "Combat_Start", "Combat_Attack", "Combat_Block", "Combat_Damage", "Combat_End",
-                "Main2", "Cleanup", "Next_Turn"};
+            "Combat_Start", "Combat_Attack", "Combat_Block", "Combat_Damage", "Combat_End",
+            "Main2", "Cleanup", "Next_Turn"};
         phasesImages = new HashMap<>();
         for (String name : phases) {
-            Image image = getImageFromResource("/phases/phase_" + name.toLowerCase() + ".png", new Rectangle(36, 36));
+            Image image = getImageFromResource("/phases/phase_" + name.toLowerCase(Locale.ENGLISH) + ".png", new Rectangle(36, 36));
             phasesImages.put(name, image);
         }
     }
@@ -339,10 +339,10 @@ public enum ImageManagerImpl implements ImageManager {
         }
         return imageSkipYourNextTurnButton;
     }
-    
+
     @Override
     public Image getToggleRecordMacroButtonImage() {
-        if(imageToggleRecordMacroButton == null) {
+        if (imageToggleRecordMacroButton == null) {
             imageToggleRecordMacroButton = getBufferedImageFromResource("/buttons/toggle_macro.png");
         }
         return imageToggleRecordMacroButton;
@@ -414,7 +414,7 @@ public enum ImageManagerImpl implements ImageManager {
     private static BufferedImage triggeredAbilityIcon;
     private static BufferedImage activatedAbilityIcon;
     private static BufferedImage lookedAtIcon;
-    private static BufferedImage revealedIcon;    
+    private static BufferedImage revealedIcon;
     private static BufferedImage exileIcon;
     private static BufferedImage imageCopyIcon;
     private static BufferedImage imageCounterGreen;

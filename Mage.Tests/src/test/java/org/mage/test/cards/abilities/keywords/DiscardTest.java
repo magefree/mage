@@ -110,7 +110,7 @@ public class DiscardTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 5);
         // Whenever an opponent discards a card, that player loses 2 life.
         addCard(Zone.HAND, playerA, "Liliana's Caress", 1); // ENCHANTMENT {1}{B}
-        // Target opponent reveals his or her hand. You choose a card from it. That player discards that card.
+        // Target opponent reveals their hand. You choose a card from it. That player discards that card.
         addCard(Zone.HAND, playerA, "Coercion", 1); // SORCERY {2}{B}
 
         addCard(Zone.HAND, playerB, "Island", 2);

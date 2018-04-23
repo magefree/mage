@@ -61,7 +61,7 @@ public class SanctumOfUgin extends CardImpl {
     public SanctumOfUgin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
 
         // Whenever you cast a colorless spell with converted mana cost 7 or greater, you may sacrifice Sanctum of Ugin.

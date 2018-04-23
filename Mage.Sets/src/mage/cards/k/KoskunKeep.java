@@ -48,13 +48,13 @@ public class KoskunKeep extends CardImpl {
     public KoskunKeep(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {tap}: Add {C} to your mana pool.
+        // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
-        // {1}, {tap}: Add {R} to your mana pool.
+        // {1}, {tap}: Add {R}.
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.RedMana(1), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
-        // {2}, {tap}: Add {B} or {G} to your mana pool.
+        // {2}, {tap}: Add {B} or {G}.
         ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana(1), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

@@ -37,7 +37,7 @@ import mage.constants.SubType;
 /**
  * @author spjspj
  */
-public class GermToken extends Token {
+public class GermToken extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 

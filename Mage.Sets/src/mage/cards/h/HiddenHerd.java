@@ -44,6 +44,7 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 
 /**
@@ -105,7 +106,7 @@ class HiddenHerdAbility extends TriggeredAbilityImpl {
     }
 }
 
-class HiddenHerdBeast extends Token {
+class HiddenHerdBeast extends TokenImpl {
 
     public HiddenHerdBeast() {
         super("Beast", "3/3 Beast creature");
@@ -113,5 +114,12 @@ class HiddenHerdBeast extends Token {
         subtype.add(SubType.BEAST);
         power = new MageInt(3);
         toughness = new MageInt(3);
+    }
+    public HiddenHerdBeast(final HiddenHerdBeast token) {
+        super(token);
+    }
+
+    public HiddenHerdBeast copy() {
+        return new HiddenHerdBeast(this);
     }
 }

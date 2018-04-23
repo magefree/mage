@@ -33,6 +33,7 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.Card;
+import mage.constants.DependencyType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
@@ -75,6 +76,7 @@ public class GainAbilityTargetEffect extends ContinuousEffectImpl {
         this.ability = ability;
         staticText = rule;
         this.onCard = onCard;
+        this.addDependencyType(DependencyType.AddingAbility);
     }
 
     public GainAbilityTargetEffect(final GainAbilityTargetEffect effect) {
@@ -170,7 +172,7 @@ public class GainAbilityTargetEffect extends ContinuousEffectImpl {
             }
             sb.append(target.getMaxNumberOfTargets()).append(" target ").append(target.getTargetName()).append(" gain ");
         } else {
-            if (!target.getTargetName().toUpperCase().startsWith("ANOTHER")) {
+            if (!target.getTargetName().toUpperCase(Locale.ENGLISH).startsWith("ANOTHER")) {
                 sb.append("target ");
             }
             sb.append(target.getTargetName()).append(" gains ");

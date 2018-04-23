@@ -72,6 +72,7 @@ class PreventDamageToSourceByCardTypeEffect extends PreventAllDamageToSourceEffe
 
     public PreventDamageToSourceByCardTypeEffect() {
         super(Duration.WhileOnBattlefield);
+        staticText = "Prevent all damage that would be dealt to {this} by creatures";
     }
 
     public PreventDamageToSourceByCardTypeEffect(final PreventDamageToSourceByCardTypeEffect effect) {

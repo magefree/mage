@@ -72,9 +72,9 @@ public class UlamogTheCeaselessHunger extends CardImpl {
         // Indestructible
         this.addAbility(IndestructibleAbility.getInstance());
 
-        // Whenever Ulamog attacks, defending player exiles the top twenty cards of his or her library.
+        // Whenever Ulamog attacks, defending player exiles the top twenty cards of their library.
         Effect effect = new UlamogExileLibraryEffect();
-        effect.setText("defending player exiles the top twenty cards of his or her library");
+        effect.setText("defending player exiles the top twenty cards of their library");
         this.addAbility(new UlamogAttackTriggeredAbility(effect));
     }
 
@@ -164,7 +164,7 @@ class UlamogExileLibraryEffect extends OneShotEffect {
 
     public UlamogExileLibraryEffect() {
         super(Outcome.Exile);
-        this.staticText = "defending player exiles the top twenty cards of his or her library";
+        this.staticText = "defending player exiles the top twenty cards of their library";
     }
 
     public UlamogExileLibraryEffect(final UlamogExileLibraryEffect effect) {

@@ -44,7 +44,7 @@ public class MindSculpt extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{U}");
 
 
-        // Target opponent puts the top seven cards of his or her library into his or her graveyard.
+        // Target opponent puts the top seven cards of their library into their graveyard.
         this.getSpellAbility().addEffect(new PutLibraryIntoGraveTargetEffect(7));
         this.getSpellAbility().addTarget(new TargetOpponent());
     }

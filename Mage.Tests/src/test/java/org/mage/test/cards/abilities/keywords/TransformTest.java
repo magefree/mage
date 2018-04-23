@@ -193,7 +193,7 @@ public class TransformTest extends CardTestPlayerBase {
      */
     @Test
     public void testStartledAwake() {
-        // Target opponent puts the top thirteen cards of his or her library into his or her graveyard.
+        // Target opponent puts the top thirteen cards of their library into their graveyard.
         // {3}{U}{U}: Put Startled Awake from your graveyard onto the battlefield transformed. Activate this ability only any time you could cast a sorcery.
         addCard(Zone.HAND, playerA, "Startled Awake"); // SORCERY {2}{U}{U}"
         addCard(Zone.BATTLEFIELD, playerA, "Island", 9);

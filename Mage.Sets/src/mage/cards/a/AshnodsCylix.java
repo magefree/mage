@@ -59,7 +59,7 @@ public class AshnodsCylix extends CardImpl {
     public AshnodsCylix(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
-        // {3}, {T}: Target player looks at the top three cards of his or her library, puts one of them back on top of his or her library, then exiles the rest.
+        // {3}, {T}: Target player looks at the top three cards of their library, puts one of them back on top of their library, then exiles the rest.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AshnodsCylixEffect(), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPlayer());
@@ -80,7 +80,7 @@ class AshnodsCylixEffect extends OneShotEffect {
     
     AshnodsCylixEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Target player looks at the top three cards of his or her library, puts one of them back on top of his or her library, then exiles the rest";
+        this.staticText = "Target player looks at the top three cards of their library, puts one of them back on top of their library, then exiles the rest";
     }
     
     AshnodsCylixEffect(final AshnodsCylixEffect effect) {
@@ -113,7 +113,7 @@ class AshnodsCylixEffect extends OneShotEffect {
             if (card != null) {
                 cards.remove(card);
                 player.getLibrary().putOnTop(card, game);
-                game.informPlayers(source.getSourceObject(game).getIdName() + ": " + player.getLogName() + " puts a card on top of his or her library");
+                game.informPlayers(source.getSourceObject(game).getIdName() + ": " + player.getLogName() + " puts a card on top of their library");
             }
         }
         for (UUID cardId : cards) {

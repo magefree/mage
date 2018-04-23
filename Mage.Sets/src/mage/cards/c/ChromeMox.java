@@ -67,7 +67,7 @@ public class ChromeMox extends CardImpl {
 
         // Imprint - When Chrome Mox enters the battlefield, you may exile a nonartifact, nonland card from your hand.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ChromeMoxEffect(), true));
-        // {tap}: Add one mana of any of the exiled card's colors to your mana pool.
+        // {tap}: Add one mana of any of the exiled card's colors.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new ChromeMoxManaEffect(), new TapSourceCost()));
     }
 
@@ -136,7 +136,7 @@ class ChromeMoxManaEffect extends ManaEffect {
 
     ChromeMoxManaEffect() {
         super();
-        staticText = "Add one mana of any of the exiled card's colors to your mana pool";
+        staticText = "Add one mana of any of the exiled card's colors";
     }
 
     ChromeMoxManaEffect(ChromeMoxManaEffect effect) {

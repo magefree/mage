@@ -64,7 +64,7 @@ public class WitchEngine extends CardImpl {
         // Swampwalk
         this.addAbility(new SwampwalkAbility());
 
-        // {T}: Add {B}{B}{B}{B} to your mana pool. Target opponent gains control of Witch Engine. (Activate this ability only any time you could cast an instant.)
+        // {T}: Add {B}{B}{B}{B}. Target opponent gains control of Witch Engine. (Activate this ability only any time you could cast an instant.)
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BasicManaEffect(Mana.BlackMana(4)), new TapSourceCost());
         ability.addEffect(new WitchEngineEffect());
         ability.addTarget(new TargetOpponent());

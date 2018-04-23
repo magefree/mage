@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class TreefolkShamanToken extends Token {
+public class TreefolkShamanToken extends TokenImpl {
 
     public TreefolkShamanToken() {
         super("Treefolk Shaman", "2/5 green Treefolk Shaman creature token");
@@ -45,5 +45,13 @@ public class TreefolkShamanToken extends Token {
         subtype.add(SubType.SHAMAN);
         power = new MageInt(2);
         toughness = new MageInt(5);
+    }
+
+    public TreefolkShamanToken(final TreefolkShamanToken token) {
+        super(token);
+    }
+
+    public TreefolkShamanToken copy() {
+        return new TreefolkShamanToken(this);
     }
 }

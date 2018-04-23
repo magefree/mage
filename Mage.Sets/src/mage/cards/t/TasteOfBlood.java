@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.t;
 
 import java.util.UUID;
@@ -34,7 +33,7 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.target.TargetPlayer;
+import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
  *
@@ -42,15 +41,15 @@ import mage.target.TargetPlayer;
  */
 public class TasteOfBlood extends CardImpl {
 
-    public TasteOfBlood (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}");
+    public TasteOfBlood(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{B}");
 
         this.getSpellAbility().addEffect(new DamageTargetEffect(1));
         this.getSpellAbility().addEffect(new GainLifeEffect(1));
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
     }
 
-    public TasteOfBlood (final TasteOfBlood card) {
+    public TasteOfBlood(final TasteOfBlood card) {
         super(card);
     }
 

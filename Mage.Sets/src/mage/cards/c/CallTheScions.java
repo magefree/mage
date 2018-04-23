@@ -28,7 +28,6 @@
 package mage.cards.c;
 
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.DevoidAbility;
@@ -44,15 +43,14 @@ import mage.game.permanent.token.EldraziScionToken;
 public class CallTheScions extends CardImpl {
 
     public CallTheScions(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{G}");
 
         // Devoid
-        Ability ability = new DevoidAbility(this.color);
-        ability.setRuleAtTheTop(true);
-        this.addAbility(ability);
-        // Create two 1/1 colorless Eldrazi Scion creature tokens. They have "Sacrifice this creature: add {C} to your mana pool."
+        this.addAbility(new DevoidAbility(this.color));
+
+        // Create two 1/1 colorless Eldrazi Scion creature tokens. They have "Sacrifice this creature: add {C}."
         Effect effect = new CreateTokenEffect(new EldraziScionToken(), 2);
-        effect.setText("create two 1/1 colorless Eldrazi Scion creature tokens. They have \"Sacrifice this creature: Add {C} to your mana pool.\"");
+        effect.setText("create two 1/1 colorless Eldrazi Scion creature tokens. They have \"Sacrifice this creature: Add {C}.\"");
         this.getSpellAbility().addEffect(effect);
 
     }

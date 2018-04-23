@@ -84,7 +84,7 @@ public class AnyColorLandsProduceManaAbility extends ActivatedManaAbilityImpl {
 class AnyColorLandsProduceManaEffect extends ManaEffect {
 
     private final FilterPermanent filter;
-    private final boolean onlyColors; // false if mana types can be produced (also Colorless mana), if false only colors can be produced (no Colorless mana).
+    private final boolean onlyColors; // false if mana types can be produced (also Colorless mana), if true only colors can be produced (no Colorless mana).
 
     private boolean inManaTypeCalculation = false;
 
@@ -94,7 +94,7 @@ class AnyColorLandsProduceManaEffect extends ManaEffect {
         this.onlyColors = onlyColors;
         filter.add(new ControllerPredicate(targetController));
         String text = targetController == TargetController.OPPONENT ? "an opponent controls" : "you control";
-        staticText = "Add to your mana pool one mana of any " + (this.onlyColors ? "color" : "type") + " that a land " + text + " could produce";
+        staticText = "Add one mana of any " + (this.onlyColors ? "color" : "type") + " that a land " + text + " could produce";
     }
 
     public AnyColorLandsProduceManaEffect(final AnyColorLandsProduceManaEffect effect) {
@@ -190,7 +190,6 @@ class AnyColorLandsProduceManaEffect extends ManaEffect {
             return types;
         }
         inManaTypeCalculation = true;
-        // Logger.getLogger(this.getClass().getName()).log(Level.WARNING, "needed to identify endless loop causing cards: {0}", source.getSourceObject(game).getName());
         List<Permanent> lands = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);
         for (Permanent land : lands) {
             Abilities<ActivatedManaAbilityImpl> mana = land.getAbilities().getActivatedManaAbilities(Zone.BATTLEFIELD);

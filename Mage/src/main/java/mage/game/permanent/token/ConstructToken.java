@@ -36,7 +36,7 @@ import mage.abilities.keyword.DefenderAbility;
  *
  * @author spjspj
  */
-public class ConstructToken extends Token {
+public class ConstructToken extends TokenImpl {
 
     public ConstructToken() {
         this("CNS");
@@ -52,5 +52,13 @@ public class ConstructToken extends Token {
         toughness = new MageInt(1);
 
         addAbility(DefenderAbility.getInstance());
+    }
+
+    public ConstructToken(final ConstructToken token) {
+        super(token);
+    }
+
+    public ConstructToken copy() {
+        return new ConstructToken(this);
     }
 }

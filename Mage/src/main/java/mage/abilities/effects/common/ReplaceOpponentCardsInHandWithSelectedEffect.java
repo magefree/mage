@@ -47,7 +47,7 @@ public class ReplaceOpponentCardsInHandWithSelectedEffect extends OneShotEffect 
 
     public ReplaceOpponentCardsInHandWithSelectedEffect() {
         super(Outcome.Detriment);
-        this.staticText = "Target opponent puts the cards from his or her hand on top of his or her library. Search that player's library for that many cards. The player puts those cards into his or her hand, then shuffles his or her library.";
+        this.staticText = "Target opponent puts the cards from their hand on top of their library. Search that player's library for that many cards. The player puts those cards into their hand, then shuffles their library.";
     }
 
     public ReplaceOpponentCardsInHandWithSelectedEffect(final ReplaceOpponentCardsInHandWithSelectedEffect effect) {

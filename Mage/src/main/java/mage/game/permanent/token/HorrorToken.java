@@ -27,9 +27,6 @@
  */
 
 package mage.game.permanent.token;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.MageInt;
@@ -38,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class HorrorToken extends Token {
+public class HorrorToken extends TokenImpl {
 
     public HorrorToken() {
         super("Horror", "4/4 black Horror creature token");
@@ -47,5 +44,13 @@ public class HorrorToken extends Token {
         subtype.add(SubType.HORROR);
         power = new MageInt(4);
         toughness = new MageInt(4);
+    }
+
+    public HorrorToken(final HorrorToken token) {
+        super(token);
+    }
+
+    public HorrorToken copy() {
+        return new HorrorToken(this);
     }
 }

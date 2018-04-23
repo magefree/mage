@@ -70,7 +70,7 @@ public class FirewildBorderpost extends CardImpl {
         // Veinfire Firewild enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
 
-        // Tap: Add {R} or {G} to your mana pool.
+        // Tap: Add {R} or {G}.
         this.addAbility(new RedManaAbility());
         this.addAbility(new GreenManaAbility());
     }

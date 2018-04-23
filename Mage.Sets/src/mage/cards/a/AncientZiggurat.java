@@ -45,7 +45,7 @@ public class AncientZiggurat extends CardImpl {
     public AncientZiggurat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {tap}: Add one mana of any color to your mana pool. Spend this mana only to cast a creature spell.
+        // {tap}: Add one mana of any color. Spend this mana only to cast a creature spell.
         this.addAbility(new ConditionalAnyColorManaAbility(1, new AncientZigguratManaBuilder()));
     }
 

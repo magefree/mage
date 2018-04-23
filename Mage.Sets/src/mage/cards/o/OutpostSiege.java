@@ -52,7 +52,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -62,7 +62,7 @@ import mage.target.targetpointer.FixedTarget;
 public class OutpostSiege extends CardImpl {
 
     private final static String ruleTrigger1 = "&bull Khans &mdash; At the beginning of your upkeep, exile the top card of your library. Until end of turn, you may play that card.";
-    private final static String ruleTrigger2 = "&bull Dragons &mdash; Whenever a creature you control leaves the battlefield, {this} deals 1 damage to target creature or player.";
+    private final static String ruleTrigger2 = "&bull Dragons &mdash; Whenever a creature you control leaves the battlefield, {this} deals 1 damage to any target.";
 
     public OutpostSiege(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{R}");
@@ -77,13 +77,13 @@ public class OutpostSiege extends CardImpl {
                 new ModeChoiceSourceCondition("Khans"),
                 ruleTrigger1));
 
-        // * Dragons - Whenever a creature you control leaves the battlefield, Outpost Siege deals 1 damage to target creature or player.
+        // * Dragons - Whenever a creature you control leaves the battlefield, Outpost Siege deals 1 damage to any target.
         Ability ability2 = new ConditionalTriggeredAbility(
                 new ZoneChangeAllTriggeredAbility(Zone.BATTLEFIELD, Zone.BATTLEFIELD, null, new DamageTargetEffect(1),
                         new FilterControlledCreaturePermanent(), "", false),
                 new ModeChoiceSourceCondition("Dragons"),
                 ruleTrigger2);
-        ability2.addTarget(new TargetCreatureOrPlayer());
+        ability2.addTarget(new TargetAnyTarget());
         this.addAbility(ability2);
 
     }

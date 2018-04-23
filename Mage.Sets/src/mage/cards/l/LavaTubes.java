@@ -65,7 +65,7 @@ public class LavaTubes extends CardImpl {
         // At the beginning of your upkeep, remove a depletion counter from Lava Tubes.
         Ability ability2 = new BeginningOfUpkeepTriggeredAbility(new RemoveCounterSourceEffect(CounterType.DEPLETION.createInstance()), TargetController.YOU, false);
         this.addAbility(ability2);
-        // {tap}: Add {B} or {R} to your mana pool. Put a depletion counter on Lava Tubes.
+        // {tap}: Add {B} or {R}. Put a depletion counter on Lava Tubes.
         Ability ability3 = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana(1), new TapSourceCost());
         ability3.addEffect(new AddCountersSourceEffect(CounterType.DEPLETION.createInstance()));
         this.addAbility(ability3);

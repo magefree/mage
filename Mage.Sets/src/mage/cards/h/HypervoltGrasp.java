@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -64,9 +64,9 @@ public class HypervoltGrasp extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
         
-        // Enchanted creature has "Tap: This creature deals 1 damage to target creature or player."
+        // Enchanted creature has "Tap: This creature deals 1 damage to any target."
         Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
-        gainedAbility.addTarget(new TargetCreatureOrPlayer());
+        gainedAbility.addTarget(new TargetAnyTarget());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA)));
         
         // {1}{U}: Return Hypervolt Grasp to its owner's hand.

@@ -40,6 +40,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.GameState;
 import mage.game.command.Emblem;
+import mage.game.command.Plane;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import mage.target.targetpointer.TargetPointer;
@@ -118,6 +119,9 @@ public class CardsView extends LinkedHashMap<UUID, CardView> {
                         abilityView = new AbilityView(ability, sourceObject.getName(), new CardView(new EmblemView((Emblem) sourceObject)));
                         abilityView.setName(((Emblem) sourceObject).getName());
                         // abilityView.setExpansionSetCode(sourceCard.getExpansionSetCode());
+                    } else if (sourceObject instanceof Plane) {
+                        abilityView = new AbilityView(ability, sourceObject.getName(), new CardView(new PlaneView((Plane) sourceObject)));
+                        abilityView.setName(((Plane) sourceObject).getName());
                     }
                     break;
             }

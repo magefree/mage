@@ -57,7 +57,7 @@ public class SlaughterGames extends CardImpl {
         ability.setRuleAtTheTop(true);
         this.addAbility(ability);
 
-        // Name a nonland card. Search target opponent's graveyard, hand, and library for any number of cards with that name and exile them. Then that player shuffles his or her library.
+        // Name a nonland card. Search target opponent's graveyard, hand, and library for any number of cards with that name and exile them. Then that player shuffles their library.
         this.getSpellAbility().addEffect(new NameACardEffect(NameACardEffect.TypeOfName.NON_LAND_NAME));
         this.getSpellAbility().addEffect(new SlaughterGamesEffect());
         this.getSpellAbility().addTarget(new TargetOpponent());

@@ -31,6 +31,8 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
+
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.cards.Cards;
@@ -91,7 +93,7 @@ public class TargetCardInLibrary extends TargetCard {
         } else {
             cards = new ArrayList<>(targetPlayer.getLibrary().getTopCards(game, librarySearchLimit));
         }
-        cards.sort(new CardNameComparator());
+        cards.sort(Comparator.comparing(MageObject::getName));
         Cards cardsId = new CardsImpl();
         for (Card card : cards) {
             cardsId.add(card);
@@ -129,10 +131,3 @@ public class TargetCardInLibrary extends TargetCard {
 
 }
 
-class CardNameComparator implements Comparator<Card> {
-
-    @Override
-    public int compare(Card o1, Card o2) {
-        return o1.getName().compareTo(o2.getName());
-    }
-}

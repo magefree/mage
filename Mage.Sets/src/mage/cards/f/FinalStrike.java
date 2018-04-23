@@ -35,9 +35,9 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetOpponent;
+import mage.target.common.TargetOpponentOrPlaneswalker;
 
 /**
  *
@@ -46,16 +46,16 @@ import mage.target.common.TargetOpponent;
 public class FinalStrike extends CardImpl {
 
     public FinalStrike(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
 
         // As an additional cost to cast Final Strike, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(new FilterControlledCreaturePermanent("a creature"))));
-        
+        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+
         // Final Strike deals damage to target opponent equal to the sacrificed creature's power.
         Effect effect = new DamageTargetEffect(new SacrificeCostCreaturesPower());
-        effect.setText("{this} deals damage to target opponent equal to the sacrificed creature's power");
+        effect.setText("{this} deals damage to target opponent or planeswalker equal to the sacrificed creature's power");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetOpponent());
+        this.getSpellAbility().addTarget(new TargetOpponentOrPlaneswalker());
     }
 
     public FinalStrike(final FinalStrike card) {

@@ -27,6 +27,7 @@
  */
 package mage.server;
 
+import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Optional;
@@ -99,7 +100,8 @@ public class TableController {
         } else {
             controllerName = "System";
         }
-        table = new Table(roomId, options.getGameType(), options.getName(), controllerName, DeckValidatorFactory.instance.createDeckValidator(options.getDeckType()), options.getPlayerTypes(), TableRecorderImpl.instance, match, options.getBannedUsers());
+        table = new Table(roomId, options.getGameType(), options.getName(), controllerName, DeckValidatorFactory.instance.createDeckValidator(options.getDeckType()), 
+                options.getPlayerTypes(), TableRecorderImpl.instance, match, options.getBannedUsers(), options.isPlaneChase());
         chatId = ChatManager.instance.createChatSession("Match Table " + table.getId());
         init();
     }
@@ -118,7 +120,8 @@ public class TableController {
         } else {
             controllerName = "System";
         }
-        table = new Table(roomId, options.getTournamentType(), options.getName(), controllerName, DeckValidatorFactory.instance.createDeckValidator(options.getMatchOptions().getDeckType()), options.getPlayerTypes(), TableRecorderImpl.instance, tournament, options.getMatchOptions().getBannedUsers());
+        table = new Table(roomId, options.getTournamentType(), options.getName(), controllerName, DeckValidatorFactory.instance.createDeckValidator(options.getMatchOptions().getDeckType()), 
+                options.getPlayerTypes(), TableRecorderImpl.instance, tournament, options.getMatchOptions().getBannedUsers(), options.isPlaneChase());
         chatId = ChatManager.instance.createChatSession("Tourn. table " + table.getId());
     }
 
@@ -297,7 +300,7 @@ public class TableController {
 
         // Check power level for table (currently only used for EDH/Commander table)
         int edhPowerLevel = table.getMatch().getOptions().getEdhPowerLevel();
-        if (edhPowerLevel > 0 && table.getValidator().getName().toLowerCase().equals("commander")) {
+        if (edhPowerLevel > 0 && table.getValidator().getName().toLowerCase(Locale.ENGLISH).equals("commander")) {
             int deckEdhPowerLevel = table.getValidator().getEdhPowerLevel(deck);
             if (deckEdhPowerLevel % 100 > edhPowerLevel) {
                 String message = new StringBuilder("Your deck appears to be too powerful for this table.\n\nReduce the number of extra turn cards, infect, counters, fogs, reconsider your commander. ")
@@ -614,6 +617,7 @@ public class TableController {
             GameOptions gameOptions = new GameOptions();
             gameOptions.rollbackTurnsAllowed = match.getOptions().isRollbackTurnsAllowed();
             gameOptions.bannedUsers = match.getOptions().getBannedUsers();
+            gameOptions.planeChase = match.getOptions().isPlaneChase();
             match.getGame().setGameOptions(gameOptions);
             GameManager.instance.createGameSession(match.getGame(), userPlayerMap, table.getId(), choosingPlayerId, gameOptions);
             String creator = null;

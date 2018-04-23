@@ -87,7 +87,7 @@ class PathOfPeaceEffect extends OneShotEffect {
             target.destroy(source.getSourceId(), game, false);
             Player owner = game.getPlayer(target.getOwnerId());
             if (owner != null) {
-                owner.gainLife(4, game);
+                owner.gainLife(4, game, source);
             }
             return true;
         }

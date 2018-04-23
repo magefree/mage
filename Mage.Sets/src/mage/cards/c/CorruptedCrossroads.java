@@ -52,10 +52,10 @@ public class CorruptedCrossroads extends CardImpl {
     public CorruptedCrossroads(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         
-        // {T}, Pay 1 life: Add one mana of any color to your mana pool. Spend this mana only to cast a spell with devoid.
+        // {T}, Pay 1 life: Add one mana of any color. Spend this mana only to cast a spell with devoid.
         Ability ability = new ConditionalAnyColorManaAbility(1, new BlightedCrossroadsManaBuilder());
         ability.addCost(new PayLifeCost(1));
         this.addAbility(ability);

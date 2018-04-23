@@ -27,6 +27,7 @@
  */
 package mage.abilities.effects.common.counter;
 
+import java.util.Locale;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -102,7 +103,7 @@ public class AddCountersTargetEffect extends OneShotEffect {
                     affectedTargets++;
                     if (!game.isSimulation()) {
                         game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " puts "
-                                + numberAdded + ' ' + counter.getName().toLowerCase() + " counter on " + permanent.getLogName());
+                                + numberAdded + ' ' + counter.getName().toLowerCase(Locale.ENGLISH) + " counter on " + permanent.getLogName());
                     }
                 } else if (player != null) {
                     Counter newCounter = counter.copy();
@@ -111,7 +112,7 @@ public class AddCountersTargetEffect extends OneShotEffect {
                     affectedTargets++;
                     if (!game.isSimulation()) {
                         game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " puts "
-                                + counter.getCount() + ' ' + counter.getName().toLowerCase() + " counter on " + player.getLogName());
+                                + counter.getCount() + ' ' + counter.getName().toLowerCase(Locale.ENGLISH) + " counter on " + player.getLogName());
                     }
                 } else if (card != null) {
                     card.addCounters(counter, source, game);
@@ -140,7 +141,7 @@ public class AddCountersTargetEffect extends OneShotEffect {
         } else {
             sb.append("a ");
         }
-        sb.append(counter.getName().toLowerCase()).append(" counter");
+        sb.append(counter.getName().toLowerCase(Locale.ENGLISH)).append(" counter");
         if (counter.getCount() > 1) {
             sb.append('s');
         }
@@ -153,7 +154,8 @@ public class AddCountersTargetEffect extends OneShotEffect {
             }
 
             if (target.getMaxNumberOfTargets() > 1 || target.getNumberOfTargets() == 0) {
-                sb.append(target.getMaxNumberOfTargets()).append(" target ").append(target.getTargetName());
+                sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets()))
+                        .append(" target ").append(target.getTargetName());
             } else {
                 if (!target.getTargetName().startsWith("another")) {
                     sb.append("target ");

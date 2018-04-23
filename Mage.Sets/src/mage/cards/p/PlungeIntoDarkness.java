@@ -117,7 +117,7 @@ class PlungeIntoDarknessLifeEffect extends OneShotEffect {
                 }
             }
             if (numSacrificed > 0) {
-                player.gainLife(3 * numSacrificed, game);
+                player.gainLife(3 * numSacrificed, game, source);
             }
             return true;
         }
@@ -165,7 +165,7 @@ class PlungeIntoDarknessSearchEffect extends OneShotEffect {
                 if (card != null) {
                     cards.remove(card);
                     card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
-                    game.informPlayers("Plunge into Darkness: " + player.getLogName() + " puts a card into his or her hand");
+                    game.informPlayers("Plunge into Darkness: " + player.getLogName() + " puts a card into their hand");
                 }
             }
             for (UUID cardId : cards) {

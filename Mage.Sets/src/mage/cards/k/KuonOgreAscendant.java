@@ -44,6 +44,7 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.watchers.common.CreaturesDiedWatcher;
 
@@ -84,7 +85,7 @@ public class KuonOgreAscendant extends CardImpl {
     }
 }
 
-class KuonsEssenceToken extends Token {
+class KuonsEssenceToken extends TokenImpl {
 
     KuonsEssenceToken() {
         super("Kuon's Essence", "");
@@ -98,6 +99,13 @@ class KuonsEssenceToken extends Token {
                 Zone.BATTLEFIELD,
                 new SacrificeEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, "that player"),
                 TargetController.ANY, false, true));
+    }
+    public KuonsEssenceToken(final KuonsEssenceToken token) {
+        super(token);
+    }
+
+    public KuonsEssenceToken copy() {
+        return new KuonsEssenceToken(this);
     }
 }
 

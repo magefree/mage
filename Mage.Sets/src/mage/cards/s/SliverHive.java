@@ -68,10 +68,10 @@ public class SliverHive extends CardImpl {
     public SliverHive(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {T}: Add {C} to your mana pool.
+        // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
 
-        // {T}: Add one mana of any color to your mana pool. Spend this mana only to cast a Sliver spell.
+        // {T}: Add one mana of any color. Spend this mana only to cast a Sliver spell.
         this.addAbility(new ConditionalAnyColorManaAbility(new TapSourceCost(), 1, new ConditionalSpellManaBuilder(filterSpell), true));
 
         // {5}, {T}: Create a 1/1 colorless Sliver creature token. Activate this ability only if you control a Sliver.

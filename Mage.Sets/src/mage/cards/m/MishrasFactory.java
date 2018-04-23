@@ -43,6 +43,7 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -84,7 +85,7 @@ public class MishrasFactory extends CardImpl {
     }
 }
 
-class AssemblyWorkerToken extends Token {
+class AssemblyWorkerToken extends TokenImpl {
 
     public AssemblyWorkerToken() {
         super("Assembly-Worker", "2/2 Assembly-Worker artifact creature");
@@ -93,5 +94,12 @@ class AssemblyWorkerToken extends Token {
         this.subtype.add(SubType.ASSEMBLY_WORKER);
         power = new MageInt(2);
         toughness = new MageInt(2);
+    }
+    public AssemblyWorkerToken(final AssemblyWorkerToken token) {
+        super(token);
+    }
+
+    public AssemblyWorkerToken copy() {
+        return new AssemblyWorkerToken(this);
     }
 }

@@ -201,7 +201,7 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Angelic Wall");
         // Air Elemental: Creature — Elemental 4/4, 3UU - Flying
         addCard(Zone.BATTLEFIELD, playerA, "Air Elemental");
-        // Llanowar Elves: Creature — Elf Druid 1/1, G - {T}: Add {G} to your mana pool.
+        // Llanowar Elves: Creature — Elf Druid 1/1, G - {T}: Add {G}.
         addCard(Zone.BATTLEFIELD, playerA, "Llanowar Elves");
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Baneslayer Angel");
@@ -437,7 +437,7 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
     	/* Underworld Cerberus {3}{B}{3} 6/6
     	*  Underworld Cerberus can't be blocked except by three or more creatures.
     	*  Cards in graveyards can't be the targets of spells or abilities.
-    	*  When Underworld Cerberus dies, exile it and each player returns all creature cards from his or her graveyard to his or her hand.
+    	*  When Underworld Cerberus dies, exile it and each player returns all creature cards from their graveyard to their hand.
     	*/
         addCard(Zone.BATTLEFIELD, playerA, "Underworld Cerberus");
         addCard(Zone.BATTLEFIELD, playerB, "Memnite"); // 1/1
@@ -461,7 +461,7 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
     	/* Underworld Cerberus {3}{B}{3} 6/6
     	*  Underworld Cerberus can't be blocked except by three or more creatures.
     	*  Cards in graveyards can't be the targets of spells or abilities.
-    	*  When Underworld Cerberus dies, exile it and each player returns all creature cards from his or her graveyard to his or her hand.
+    	*  When Underworld Cerberus dies, exile it and each player returns all creature cards from their graveyard to their hand.
     	*/
         addCard(Zone.BATTLEFIELD, playerA, "Underworld Cerberus");
         addCard(Zone.BATTLEFIELD, playerB, "Memnite", 2); // 1/1
@@ -486,7 +486,7 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
     	/* Underworld Cerberus {3}{B}{3} 6/6
     	*  Underworld Cerberus can't be blocked except by three or more creatures.
     	*  Cards in graveyards can't be the targets of spells or abilities.
-    	*  When Underworld Cerberus dies, exile it and each player returns all creature cards from his or her graveyard to his or her hand.
+    	*  When Underworld Cerberus dies, exile it and each player returns all creature cards from their graveyard to their hand.
     	*/
         addCard(Zone.BATTLEFIELD, playerA, "Underworld Cerberus");
         addCard(Zone.BATTLEFIELD, playerB, "Memnite", 3); // 1/1
@@ -515,7 +515,7 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
     	/* Underworld Cerberus {3}{B}{3} 6/6
     	*  Underworld Cerberus can't be blocked except by three or more creatures.
     	*  Cards in graveyards can't be the targets of spells or abilities.
-    	*  When Underworld Cerberus dies, exile it and each player returns all creature cards from his or her graveyard to his or her hand.
+    	*  When Underworld Cerberus dies, exile it and each player returns all creature cards from their graveyard to their hand.
     	*/
         addCard(Zone.BATTLEFIELD, playerA, "Underworld Cerberus");
         addCard(Zone.BATTLEFIELD, playerB, "Memnite", 10); // 1/1

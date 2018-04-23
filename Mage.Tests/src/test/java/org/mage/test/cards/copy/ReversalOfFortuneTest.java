@@ -43,7 +43,7 @@ public class ReversalOfFortuneTest extends CardTestPlayerBase {
     /**
      * Reversal of Fortune
      * Sorcery, 4RR (6)
-     * Target opponent reveals his or her hand. You may copy an instant or sorcery 
+     * Target opponent reveals their hand. You may copy an instant or sorcery
      * card in it. If you do, you may cast the copy without paying its mana cost.
      * 
     */    

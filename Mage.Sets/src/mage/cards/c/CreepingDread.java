@@ -85,7 +85,7 @@ class CreepingDreadEffect extends OneShotEffect {
     /*
     * When a spell or ability instructs each player to discard a card, 
     starting with the player whose turn it is and proceeding in turn order, 
-    each player selects a card from his or her hand without revealing it, 
+    each player selects a card from their hand without revealing it,
     sets it aside, and then all of those cards are revealed and discarded at once.
     
     http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=409851

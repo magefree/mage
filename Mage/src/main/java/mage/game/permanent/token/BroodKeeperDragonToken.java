@@ -41,7 +41,7 @@ import mage.constants.Zone;
  *
  * @author spjspj
  */
-public class BroodKeeperDragonToken extends Token {
+public class BroodKeeperDragonToken extends TokenImpl {
 
     public BroodKeeperDragonToken() {
         super("Dragon", "2/2 red Dragon creature token with flying. It has \"{R}: This creature gets +1/+0 until end of turn.\"");
@@ -54,5 +54,13 @@ public class BroodKeeperDragonToken extends Token {
 
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
+    }
+
+    public BroodKeeperDragonToken(final BroodKeeperDragonToken token) {
+        super(token);
+    }
+
+    public BroodKeeperDragonToken copy() {
+        return new BroodKeeperDragonToken(this);
     }
 }

@@ -52,7 +52,7 @@ public class DwellOnThePast extends CardImpl {
     public DwellOnThePast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{G}");
 
-        // Target player shuffles up to four target cards from his or her graveyard into his or her library.
+        // Target player shuffles up to four target cards from their graveyard into their library.
         this.getSpellAbility().addEffect(new DwellOnThePastEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addTarget(new DwellOnThePastTarget());
@@ -73,7 +73,7 @@ class DwellOnThePastEffect extends OneShotEffect {
 
     public DwellOnThePastEffect() {
         super(Outcome.Neutral);
-        this.staticText = "Target player shuffles up to four target cards from his or her graveyard into his or her library";
+        this.staticText = "Target player shuffles up to four target cards from their graveyard into their library";
     }
 
     public DwellOnThePastEffect(final DwellOnThePastEffect effect) {

@@ -33,7 +33,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -45,9 +45,9 @@ public class VolcanicGeyser extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{R}{R}");
 
 
-        // Volcanic Geyser deals X damage to target creature or player.
+        // Volcanic Geyser deals X damage to any target.
         this.getSpellAbility().addEffect(new DamageTargetEffect(new ManacostVariableValue()));
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
     public VolcanicGeyser(final VolcanicGeyser card) {

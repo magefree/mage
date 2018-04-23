@@ -56,7 +56,7 @@ public class ShowAndTell extends CardImpl {
     public ShowAndTell(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}");
 
-        // Each player may put an artifact, creature, enchantment, or land card from his or her hand onto the battlefield.
+        // Each player may put an artifact, creature, enchantment, or land card from their hand onto the battlefield.
         this.getSpellAbility().addEffect(new ShowAndTellEffect());
     }
 
@@ -85,7 +85,7 @@ class ShowAndTellEffect extends OneShotEffect {
 
     public ShowAndTellEffect() {
         super(Outcome.PutCardInPlay);
-        this.staticText = "Each player may put an artifact, creature, enchantment, or land card from his or her hand onto the battlefield";
+        this.staticText = "Each player may put an artifact, creature, enchantment, or land card from their hand onto the battlefield";
     }
 
     public ShowAndTellEffect(final ShowAndTellEffect effect) {

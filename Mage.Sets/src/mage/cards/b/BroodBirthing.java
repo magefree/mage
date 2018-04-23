@@ -67,7 +67,7 @@ class BroodBirthingEffect extends OneShotEffect {
 
     public BroodBirthingEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "If you control an Eldrazi Spawn, create three 0/1 colorless Eldrazi Spawn creature tokens. They have \"Sacrifice this creature: Add {C} to your mana pool.\" Otherwise, create one of those tokens";
+        this.staticText = "If you control an Eldrazi Spawn, create three 0/1 colorless Eldrazi Spawn creature tokens. They have \"Sacrifice this creature: Add {C}.\" Otherwise, create one of those tokens";
     }
 
     public BroodBirthingEffect(final BroodBirthingEffect effect) {

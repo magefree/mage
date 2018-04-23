@@ -1,5 +1,7 @@
 package org.mage.card.arcane;
 
+import mage.utils.StreamUtils;
+
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -72,8 +74,8 @@ public final class UI {
     }
 
     public static ImageIcon getImageIcon (String path) {
+        InputStream stream = null;
         try {
-            InputStream stream;
             stream = UI.class.getResourceAsStream(path);
             if (stream == null && new File(path).exists()) {
                 stream = new FileInputStream(path);
@@ -86,6 +88,8 @@ public final class UI {
             return new ImageIcon(data);
         } catch (IOException ex) {
             throw new RuntimeException("Error reading image: " + path);
+        } finally {
+            StreamUtils.closeQuietly(stream);
         }
     }
 

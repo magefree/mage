@@ -58,7 +58,7 @@ public class TectonicEdge extends CardImpl {
     public TectonicEdge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
 
-        // Tap: Add 1 to your mana pool.
+        // Tap: Add 1.
         this.addAbility(new ColorlessManaAbility());
 
         // {1}, {T}, Sacrifice Tectonic Edge: Destroy target nonbasic land. Activate this ability only if an opponent controls four or more lands.

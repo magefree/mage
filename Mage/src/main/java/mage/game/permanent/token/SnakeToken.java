@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SnakeToken extends Token {
+public class SnakeToken extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 
@@ -48,7 +48,7 @@ public class SnakeToken extends Token {
     }
 
     public SnakeToken() {
-        this(null);
+        this((String)null);
     }
 
     public SnakeToken(String setCode) {
@@ -63,5 +63,13 @@ public class SnakeToken extends Token {
         subtype.add(SubType.SNAKE);
         power = new MageInt(1);
         toughness = new MageInt(1);
+    }
+
+    public SnakeToken(final SnakeToken token) {
+        super(token);
+    }
+
+    public SnakeToken copy() {
+        return new SnakeToken(this);
     }
 }

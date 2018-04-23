@@ -37,7 +37,7 @@ import mage.abilities.keyword.FlyingAbility;
  *
  * @author spjspj
  */
-public class WeirdToken extends Token {
+public class WeirdToken extends TokenImpl {
 
     public WeirdToken() {
         super("Weird", "3/3 blue Weird create token with defender and flying");
@@ -48,5 +48,13 @@ public class WeirdToken extends Token {
         toughness = new MageInt(3);
         this.addAbility(DefenderAbility.getInstance());
         this.addAbility(FlyingAbility.getInstance());
+    }
+
+    public WeirdToken(final WeirdToken token) {
+        super(token);
+    }
+
+    public WeirdToken copy() {
+        return new WeirdToken(this);
     }
 }

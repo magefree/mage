@@ -46,7 +46,7 @@ public class StandingStones extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
         
 
-        // {1}, {tap}, Pay 1 life: Add one mana of any color to your mana pool.
+        // {1}, {tap}, Pay 1 life: Add one mana of any color.
         Ability ability = new AnyColorManaAbility();
         ability.addCost(new GenericManaCost(1));
         ability.addCost(new PayLifeCost(1));

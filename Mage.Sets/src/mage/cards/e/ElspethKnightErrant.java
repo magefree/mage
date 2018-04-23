@@ -45,6 +45,7 @@ import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.game.command.emblems.ElspethKnightErrantEmblem;
 import mage.game.permanent.token.SoldierToken;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetCreaturePermanent;
 

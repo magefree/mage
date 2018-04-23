@@ -40,7 +40,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author spjspj
  */
-public class FesteringGoblinToken extends Token {
+public class FesteringGoblinToken extends TokenImpl {
 
     public FesteringGoblinToken() {
         super("Festering Goblin", "1/1 black Zombie Goblin creature token named Festering Goblin with \"When Festering Goblin dies, target creature gets -1/-1 until end of turn.\"");
@@ -55,5 +55,13 @@ public class FesteringGoblinToken extends Token {
         Ability ability = new DiesTriggeredAbility(new BoostTargetEffect(-1, -1, Duration.EndOfTurn), false);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
+    }
+
+    public FesteringGoblinToken(final FesteringGoblinToken token) {
+        super(token);
+    }
+
+    public FesteringGoblinToken copy() {
+        return new FesteringGoblinToken(this);
     }
 }

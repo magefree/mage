@@ -47,7 +47,7 @@ public class NomadOutpost extends CardImpl {
 
         // Nomad Outpost enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
-        // {T}: Add {R}, {W}, or {B} to your mana pool.
+        // {T}: Add {R}, {W}, or {B}.
         this.addAbility(new RedManaAbility());
         this.addAbility(new WhiteManaAbility());
         this.addAbility(new BlackManaAbility());

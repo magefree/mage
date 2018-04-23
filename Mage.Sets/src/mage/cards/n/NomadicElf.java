@@ -50,7 +50,7 @@ public class NomadicElf extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // {1}{G}: Add one mana of any color to your mana pool.
+        // {1}{G}: Add one mana of any color.
         this.addAbility(new AnyColorManaAbility(new ManaCostsImpl("{1}{G}")));
     }
 

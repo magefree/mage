@@ -87,7 +87,7 @@ public class TerashisGrasp extends CardImpl {
                 int cost = targetPermanent.getConvertedManaCost();
                 Player player = game.getPlayer(source.getControllerId());
                 if (player != null) {
-                    player.gainLife(cost, game);
+                    player.gainLife(cost, game, source);
                 }
             }
             return true;

@@ -74,7 +74,7 @@ public class GethLordOfTheVault extends CardImpl {
         // Intimidate
         this.addAbility(IntimidateAbility.getInstance());
         // {X}{B}: Put target artifact or creature card with converted mana cost X from an opponent's graveyard onto the battlefield under your control tapped.
-        // Then that player puts the top X cards of his or her library into his or her graveyard.
+        // Then that player puts the top X cards of their library into their graveyard.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GethLordOfTheVaultEffect(), new ManaCostsImpl("{X}{B}"));
         ability.setTargetAdjustment(TargetAdjustment.X_CMC_EQUAL_GY_CARD);
         ability.addTarget(new TargetCardInOpponentsGraveyard(filter));
@@ -96,7 +96,7 @@ class GethLordOfTheVaultEffect extends OneShotEffect {
 
     public GethLordOfTheVaultEffect() {
         super(Outcome.Benefit);
-        staticText = "Put target artifact or creature card with converted mana cost X from an opponent's graveyard onto the battlefield under your control tapped. Then that player puts the top X cards of his or her library into his or her graveyard";
+        staticText = "Put target artifact or creature card with converted mana cost X from an opponent's graveyard onto the battlefield under your control tapped. Then that player puts the top X cards of their library into their graveyard";
     }
 
     public GethLordOfTheVaultEffect(final GethLordOfTheVaultEffect effect) {

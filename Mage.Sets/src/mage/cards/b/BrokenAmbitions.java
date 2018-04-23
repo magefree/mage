@@ -55,7 +55,7 @@ public class BrokenAmbitions extends CardImpl {
     public BrokenAmbitions(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{U}");
 
-        // Counter target spell unless its controller pays {X}. Clash with an opponent. If you win, that spell's controller puts the top four cards of his or her library into his or her graveyard.
+        // Counter target spell unless its controller pays {X}. Clash with an opponent. If you win, that spell's controller puts the top four cards of their library into their graveyard.
         this.getSpellAbility().addEffect(new BrokenAmbitionsEffect(new ManacostVariableValue()));
         this.getSpellAbility().addTarget(new TargetSpell());
     }
@@ -78,7 +78,7 @@ class BrokenAmbitionsEffect extends OneShotEffect {
     public BrokenAmbitionsEffect(Cost cost) {
         super(Outcome.Benefit);
         this.cost = cost;
-        this.staticText = "Counter target spell unless its controller pays {X}. Clash with an opponent. If you win, that spell's controller puts the top four cards of his or her library into his or her graveyard";
+        this.staticText = "Counter target spell unless its controller pays {X}. Clash with an opponent. If you win, that spell's controller puts the top four cards of their library into their graveyard";
     }
     
     public BrokenAmbitionsEffect(DynamicValue genericMana) {

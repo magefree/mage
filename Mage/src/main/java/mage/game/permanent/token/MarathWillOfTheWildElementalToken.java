@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class MarathWillOfTheWildElementalToken extends Token {
+public class MarathWillOfTheWildElementalToken extends TokenImpl {
 
     public MarathWillOfTheWildElementalToken() {
         super("Elemental", "X/X green Elemental creature token");
@@ -44,5 +44,13 @@ public class MarathWillOfTheWildElementalToken extends Token {
         color.setGreen(true);
         power = new MageInt(0);
         toughness = new MageInt(0);
+    }
+
+    public MarathWillOfTheWildElementalToken(final MarathWillOfTheWildElementalToken token) {
+        super(token);
+    }
+
+    public MarathWillOfTheWildElementalToken copy() {
+        return new MarathWillOfTheWildElementalToken(this);
     }
 }

@@ -51,7 +51,7 @@ public class LammastideWeave extends CardImpl {
     public LammastideWeave(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{G}");
 
-        // Name a card, then target player puts the top card of his or her library into his or her graveyard. If that card is the named card, you gain life equal to its converted mana cost.
+        // Name a card, then target player puts the top card of their library into their graveyard. If that card is the named card, you gain life equal to its converted mana cost.
         this.getSpellAbility().addEffect(new NameACardEffect(NameACardEffect.TypeOfName.ALL));
         this.getSpellAbility().addEffect(new LammastideWeaveEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
@@ -75,7 +75,7 @@ class LammastideWeaveEffect extends OneShotEffect {
 
     public LammastideWeaveEffect() {
         super(Outcome.DrawCard);
-        this.staticText = ", then target player puts the top card of his or her library into his or her graveyard. "
+        this.staticText = ", then target player puts the top card of their library into their graveyard. "
                 + "If that card is the named card, you gain life equal to its converted mana cost.";
     }
 
@@ -98,7 +98,7 @@ class LammastideWeaveEffect extends OneShotEffect {
             if (card != null) {
                 controller.moveCards(card, Zone.GRAVEYARD, source, game);
                 if (card.getName().equals(cardName)) {
-                    controller.gainLife(card.getConvertedManaCost(), game);
+                    controller.gainLife(card.getConvertedManaCost(), game, source);
                 }
             }
             return true;

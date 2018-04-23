@@ -55,7 +55,7 @@ public class TroveOfTemptation extends CardImpl {
         // Each opponent must attack you or a planeswalker you control with at least one creature each combat if able.
         addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TroveOfTemptationForceAttackEffect(Duration.WhileOnBattlefield)));
 
-        // At the beginning of your end step, create a colorless Treasure artifact token with "{t}, Sacrifice this artifact: Add one mana of any color to your mana pool.”
+        // At the beginning of your end step, create a colorless Treasure artifact token with "{t}, Sacrifice this artifact: Add one mana of any color.”
         addAbility(new BeginningOfYourEndStepTriggeredAbility(new CreateTokenEffect(new TreasureToken()), false));
     }
 

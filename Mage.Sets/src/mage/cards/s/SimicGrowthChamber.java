@@ -56,7 +56,7 @@ public class SimicGrowthChamber extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
         // When Simic Growth Chamber enters the battlefield, return a land you control to its owner's hand.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(filter), false));
-        // {tap}: Add {G}{U} to your mana pool.
+        // {tap}: Add {G}{U}.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 1, 1, 0, 0, 0, 0, 0), new TapSourceCost()));
     }
 

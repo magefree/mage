@@ -51,7 +51,7 @@ public class RainbowVale extends CardImpl {
     public RainbowVale(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        // {tap}: Add one mana of any color to your mana pool. An opponent gains control of Rainbow Vale at the beginning of the next end step.
+        // {tap}: Add one mana of any color. An opponent gains control of Rainbow Vale at the beginning of the next end step.
         Ability ability = new AnyColorManaAbility();
         ability.addEffect(new RainbowValeEffect());
         this.addAbility(ability);

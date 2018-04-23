@@ -52,7 +52,7 @@ public class ManaVapors extends CardImpl {
     public ManaVapors(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{U}");
 
-        // Lands target player controls don't untap during his or her next untap step.
+        // Lands target player controls don't untap during their next untap step.
         getSpellAbility().addTarget(new TargetPlayer());
         getSpellAbility().addEffect(new ManaVaporsEffect());
     }
@@ -71,7 +71,7 @@ class ManaVaporsEffect extends OneShotEffect {
 
     ManaVaporsEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Lands target player controls don't untap during his or her next untap step";
+        this.staticText = "Lands target player controls don't untap during their next untap step";
     }
 
     ManaVaporsEffect(final ManaVaporsEffect effect) {

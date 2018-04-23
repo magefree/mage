@@ -54,13 +54,13 @@ public class DreadshipReef extends CardImpl {
     public DreadshipReef(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {tap}: Add {C} to your mana pool.
+        // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         // {1}, {tap}: Put a storage counter on Dreadship Reef.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.STORAGE.createInstance()), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
-        // {1}, Remove X storage counters from Dreadship Reef: Add X mana in any combination of {U} and/or {B} to your mana pool.
+        // {1}, Remove X storage counters from Dreadship Reef: Add X mana in any combination of {U} and/or {B}.
         ability = new SimpleManaAbility(Zone.BATTLEFIELD,
                 new AddManaInAnyCombinationEffect(new RemovedCountersForCostValue(), ColoredManaSymbol.U, ColoredManaSymbol.B),
                 new GenericManaCost(1));

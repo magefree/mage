@@ -58,7 +58,7 @@ public class RiptideLaboratory extends CardImpl {
     public RiptideLaboratory(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {tap}: Add {C} to your mana pool.
+        // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
 
         // {1}{U}, {tap}: Return target Wizard you control to its owner's hand.

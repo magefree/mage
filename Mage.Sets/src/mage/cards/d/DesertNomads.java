@@ -88,6 +88,7 @@ class PreventDamageToSourceBySubtypeEffect extends PreventAllDamageToSourceEffec
     public PreventDamageToSourceBySubtypeEffect(SubType sub){
         super(Duration.WhileOnBattlefield);
         subtype = sub;
+        staticText = "Prevent all damage that would be dealt to {this} by " + subtype.getDescription();
     }
     
     @Override

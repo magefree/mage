@@ -46,14 +46,13 @@ import mage.game.permanent.Permanent;
  *
  * @author spjspj
  */
-public class GutterGrimeToken extends Token {
+public class GutterGrimeToken extends TokenImpl {
 
     public GutterGrimeToken() {
-        this (null);
+        this ((UUID)null);
         power = new MageInt(3);
         toughness = new MageInt(3);
     }
-
 
     public GutterGrimeToken(UUID sourceId) {
         super("Ooze", "green Ooze creature token with \"This creature's power and toughness are each equal to the number of slime counters on Gutter Grime.\"");
@@ -63,6 +62,14 @@ public class GutterGrimeToken extends Token {
         power = new MageInt(0);
         toughness = new MageInt(0);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetPowerToughnessSourceEffect(new GutterGrimeCounters(sourceId), Duration.WhileOnBattlefield)));
+    }
+
+    public GutterGrimeToken(final GutterGrimeToken token) {
+        super(token);
+    }
+
+    public GutterGrimeToken copy() {
+        return new GutterGrimeToken(this);
     }
 
     class GutterGrimeCounters implements DynamicValue {

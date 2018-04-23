@@ -61,7 +61,7 @@ public class RithsGrove extends CardImpl {
 
         // When Rith's Grove enters the battlefield, sacrifice it unless you return a non-Lair land you control to its owner's hand.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(filter)))));
-        // {tap}: Add {R}, {G}, or {W} to your mana pool.
+        // {tap}: Add {R}, {G}, or {W}.
         this.addAbility(new RedManaAbility());
         this.addAbility(new GreenManaAbility());
         this.addAbility(new WhiteManaAbility());

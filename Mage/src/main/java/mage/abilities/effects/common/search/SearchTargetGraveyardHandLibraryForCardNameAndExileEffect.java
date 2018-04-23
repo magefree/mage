@@ -132,7 +132,7 @@ public abstract class SearchTargetGraveyardHandLibraryForCardNameAndExileEffect 
         sb.append("search ").append(this.searchWhatText);
         sb.append(" graveyard, hand, and library for ");
         sb.append(this.searchForText);
-        sb.append(" and exile them. Then that player shuffles his or her library");
+        sb.append(" and exile them. Then that player shuffles their library");
         return sb.toString();
     }
 }

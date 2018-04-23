@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class AssemblyWorkerToken extends Token {
+public class AssemblyWorkerToken extends TokenImpl {
 
     public AssemblyWorkerToken() {
         super("Assembly-Worker", "2/2 Assembly-Worker artifact creature");
@@ -44,5 +44,13 @@ public class AssemblyWorkerToken extends Token {
         this.subtype.add(SubType.ASSEMBLY_WORKER);
         power = new MageInt(2);
         toughness = new MageInt(2);
+    }
+
+    public AssemblyWorkerToken(final AssemblyWorkerToken token) {
+        super(token);
+    }
+
+    public AssemblyWorkerToken copy() {
+        return new AssemblyWorkerToken(this);
     }
 }

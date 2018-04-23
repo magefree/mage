@@ -36,7 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
  *
  * @author spjspj
  */
-public class WasitoraCatDragonToken extends Token {
+public class WasitoraCatDragonToken extends TokenImpl {
 
     public WasitoraCatDragonToken() {
         super("Cat Dragon", "3/3 black, red, and green Cat Dragon creature token with flying");
@@ -50,5 +50,13 @@ public class WasitoraCatDragonToken extends Token {
         power = new MageInt(3);
         toughness = new MageInt(3);
         this.addAbility(FlyingAbility.getInstance());
+    }
+
+    public WasitoraCatDragonToken(final WasitoraCatDragonToken token) {
+        super(token);
+    }
+
+    public WasitoraCatDragonToken copy() {
+        return new WasitoraCatDragonToken(this);
     }
 }

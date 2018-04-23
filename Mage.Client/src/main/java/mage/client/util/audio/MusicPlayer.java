@@ -2,6 +2,7 @@ package mage.client.util.audio;
 
 import java.awt.List;
 import java.io.File;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 import javax.sound.sampled.*;
 import mage.client.constants.Constants;
@@ -38,7 +39,7 @@ public class MusicPlayer {
         }
         String filename;
         for (File f : fileread) {
-            filename = f.getName().toLowerCase();
+            filename = f.getName().toLowerCase(Locale.ENGLISH);
             if (filename.endsWith(".mp3") || filename.endsWith(".wav")) {
                 filelist.add(filename);
             }
