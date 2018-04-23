@@ -1488,8 +1488,16 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         {
             String message=String.format("%s:%d",TEST_MULTI_SET,choiseValue.length);
             
+            
+            
             cbExpansionSet.insertItemAt(message, 0);
             cbExpansionSet.setSelectedIndex(0);
+            
+            if(cbExpansionSet.getItemAt(1).contains(TEST_MULTI_SET))
+            {
+               cbExpansionSet.removeItemAt(1); 
+            }
+            
             
             //listCodeSelected.setChecked(index-1, true);
           //cbExpansionSet.  
