@@ -119,6 +119,6 @@ class HallarTheFirefletcherTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever you cast a spell, if it was kicked," + super.getRule();
+        return "Whenever you cast a spell, if that spell was kicked," + super.getRule();
     }
 }

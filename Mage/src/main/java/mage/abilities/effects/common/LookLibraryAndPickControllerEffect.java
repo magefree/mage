@@ -272,7 +272,7 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
                 if (anyOrder) {
                     sb.append(" in any order");
                 } else {
-                    sb.append(" in random order");
+                    sb.append(" in a random order");
                 }
                 break;
             case HAND:
@@ -342,7 +342,7 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
                 if (anyOrder) {
                     sb.append("any");
                 } else {
-                    sb.append("random");
+                    sb.append("a random");
                 }
                 sb.append(" order");
             } else if (targetZoneLookedCards == Zone.GRAVEYARD) {

@@ -50,7 +50,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  */
 public class RatColony extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("other Rat you control");
 
     static {
         filter.add(new SubtypePredicate(SubType.RAT));
