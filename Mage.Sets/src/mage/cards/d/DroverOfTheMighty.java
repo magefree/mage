@@ -63,7 +63,7 @@ public class DroverOfTheMighty extends CardImpl {
         // Drover of the Mighty gets +2/+2 as long as you control a Dinosaur.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceWhileControlsEffect(filter, 2, 2)));
 
-        // {T}: Add one mana of any color to your mana pool.
+        // {T}: Add one mana of any color.
         this.addAbility(new AnyColorManaAbility());
     }
 

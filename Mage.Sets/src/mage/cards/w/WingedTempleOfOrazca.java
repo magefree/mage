@@ -70,7 +70,7 @@ public class WingedTempleOfOrazca extends CardImpl {
         ability.setRuleAtTheTop(true);
         this.addAbility(ability);
 
-        // {T}: Add one mana of any color to your mana pool.
+        // {T}: Add one mana of any color.
         this.addAbility(new AnyColorManaAbility());
 
         // {1}{G}{U}, {T}: Target creature you control gains flying and gets +X/+X until end of turn, where X is its power.

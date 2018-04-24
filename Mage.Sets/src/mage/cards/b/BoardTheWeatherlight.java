@@ -58,7 +58,7 @@ public class BoardTheWeatherlight extends CardImpl {
                         new StaticValue(5), false, new StaticValue(1), filter,
                         Zone.LIBRARY, false, true, false, Zone.HAND, true, false, false
                 ).setText("Look at the top five cards of your library. You may reveal a historic card from among them"
-                        + " and put it into your hand. Put the rest on the bottom of your library in random order. "
+                        + " and put it into your hand. Put the rest on the bottom of your library in a random order. "
                         + "<i>(Artifacts, legendaries, and Sagas are historic.)</i>")
         );
     }

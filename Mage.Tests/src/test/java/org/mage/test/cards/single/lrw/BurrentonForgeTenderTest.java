@@ -121,7 +121,7 @@ public class BurrentonForgeTenderTest extends CardTestPlayerBase {
     public void testPreventDamageFromToken() {
         addCard(Zone.BATTLEFIELD, playerA, "Burrenton Forge-Tender");
         addCard(Zone.BATTLEFIELD, playerA, "Soldier of the Pantheon");
-        // Sacrifice Mogg Fanatic: Mogg Fanatic deals 1 damage to target creature or player.
+        // Sacrifice Mogg Fanatic: Mogg Fanatic deals 1 damage to any target.
         addCard(Zone.BATTLEFIELD, playerA, "Mogg Fanatic");
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);

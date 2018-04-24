@@ -51,7 +51,7 @@ public class Meteorite extends CardImpl {
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
         
-        // {T}: Add one mana of any color to your mana pool.
+        // {T}: Add one mana of any color.
         this.addAbility(new AnyColorManaAbility());
     }
 

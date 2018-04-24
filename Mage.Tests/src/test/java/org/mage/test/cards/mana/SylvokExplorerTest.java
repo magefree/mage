@@ -62,7 +62,7 @@ public class SylvokExplorerTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Island", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 1);
 
-        // {T}: Add to your mana pool one mana of any color that a land an opponent controls could produce.
+        // {T}: Add one mana of any color that a land an opponent controls could produce.
         addCard(Zone.BATTLEFIELD, playerA, "Sylvok Explorer", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
 
@@ -78,7 +78,7 @@ public class SylvokExplorerTest extends CardTestPlayerBase {
     public void testTwoInstances() {
         addCard(Zone.BATTLEFIELD, playerB, "Exotic Orchard", 2);
 
-        // {T}: Add to your mana pool one mana of any color that a land an opponent controls could produce.
+        // {T}: Add one mana of any color that a land an opponent controls could produce.
         addCard(Zone.BATTLEFIELD, playerA, "Sylvok Explorer", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
 

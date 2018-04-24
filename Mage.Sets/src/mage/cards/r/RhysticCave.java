@@ -55,7 +55,7 @@ public class RhysticCave extends CardImpl {
     public RhysticCave(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        // {T}: Choose a color. Add one mana of that color to your mana pool unless any player pays {1}. Activate this ability only any time you could cast an instant.
+        // {T}: Choose a color. Add one mana of that color unless any player pays {1}. Activate this ability only any time you could cast an instant.
         this.addAbility(new RhysticCaveManaAbility());
     }
 
@@ -113,7 +113,7 @@ class RhysticCaveManaEffect extends ManaEffect {
     public RhysticCaveManaEffect() {
         super();
         chosenMana = new Mana();
-        this.staticText = "Choose a color. Add one mana of that color to your mana pool ";
+        this.staticText = "Choose a color. Add one mana of that color ";
     }
 
     public RhysticCaveManaEffect(final RhysticCaveManaEffect effect) {

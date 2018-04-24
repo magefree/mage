@@ -48,10 +48,10 @@ public class LlanowarWastes extends CardImpl {
     public LlanowarWastes(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // Tap: Add 1 to your mana pool.
+        // Tap: Add 1.
         this.addAbility(new ColorlessManaAbility());
 
-        // Tap: Add Black or Green to your mana pool. Llanowar Wastes deals 1 damage to you.
+        // Tap: Add Black or Green. Llanowar Wastes deals 1 damage to you.
         Ability blackManaAbility = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana(1), new TapSourceCost());
         blackManaAbility.addEffect(new DamageControllerEffect(1));
         this.addAbility(blackManaAbility);

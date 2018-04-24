@@ -59,7 +59,7 @@ public class NykthosShrineToNyx extends CardImpl {
 
         // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
-        // {2}, {T}: Choose a color. Add to your mana pool an amount of mana of that color equal to your devotion to that color.
+        // {2}, {T}: Choose a color. Add an amount of mana of that color equal to your devotion to that color.
         Ability ability = new NykthosShrineToNyxManaAbility();
         this.addAbility(ability);
     }
@@ -109,7 +109,7 @@ class NykthosDynamicManaEffect extends ManaEffect {
     public NykthosDynamicManaEffect() {
         super();
         computedMana = new Mana();
-        this.staticText = "Choose a color. Add to your mana pool an amount of mana of that color equal to your devotion to that color. <i>(Your devotion to a color is the number of mana symbols of that color in the mana costs of permanents you control.)</i>";
+        this.staticText = "Choose a color. Add an amount of mana of that color equal to your devotion to that color. <i>(Your devotion to a color is the number of mana symbols of that color in the mana costs of permanents you control.)</i>";
     }
 
     public NykthosDynamicManaEffect(final NykthosDynamicManaEffect effect) {

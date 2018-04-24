@@ -64,9 +64,9 @@ public class SoldeviAdnate extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 
-        // {T}, Sacrifice a black or artifact creature: Add to your mana pool an amount of {B} equal to the sacrificed creature's converted mana cost.
+        // {T}, Sacrifice a black or artifact creature: Add an amount of {B} equal to the sacrificed creature's converted mana cost.
         Ability ability = new DynamicManaAbility(Mana.BlackMana(1), new SacrificeCostConvertedMana("creature"),
-                "add to your mana pool an amount of {B} equal to the sacrificed creature's converted mana cost");
+                "add an amount of {B} equal to the sacrificed creature's converted mana cost");
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
         this.addAbility(ability);
     }

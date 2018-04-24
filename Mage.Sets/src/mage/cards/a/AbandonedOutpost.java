@@ -54,7 +54,7 @@ public class AbandonedOutpost extends CardImpl {
         // Tap to add {W}
         this.addAbility(new WhiteManaAbility());
 
-        // Tap to add any color mana to your mana pool. Sacrifice Abandoned Outpost.
+        // Tap to add any color mana. Sacrifice Abandoned Outpost.
         Ability ability = new AnyColorManaAbility();
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

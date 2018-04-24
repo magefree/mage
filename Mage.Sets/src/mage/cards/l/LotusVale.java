@@ -62,7 +62,7 @@ public class LotusVale extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new EnterBattlefieldPayCostOrPutGraveyardEffect(
                 new SacrificeTargetCost(new TargetControlledPermanent(2, 2, filter, false)))));
 
-        // {tap}: Add three mana of any one color to your mana pool.
+        // {tap}: Add three mana of any one color.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(3), new TapSourceCost()));
     }
 

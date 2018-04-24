@@ -66,7 +66,7 @@ public class MystifyingMaze extends CardImpl {
     public MystifyingMaze(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, null);
 
-        // {T}: Add Colorless to your mana pool.
+        // {T}: Add Colorless.
         this.addAbility(new ColorlessManaAbility());
 
         // {4}, {T}: Exile target attacking creature an opponent controls. At the beginning of the next end step, return it to the battlefield tapped under its owner's control.

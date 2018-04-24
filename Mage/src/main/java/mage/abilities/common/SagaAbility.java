@@ -53,6 +53,7 @@ public class SagaAbility extends TriggeredAbilityImpl {
 
     public SagaAbility(Card card, SagaChapter maxChapter) {
         super(Zone.ALL, new AddCountersSourceEffect(CounterType.LORE.createInstance()), false);
+        this.usesStack = false;
         this.maxChapter = maxChapter;
         this.setRuleVisible(false);
         ((CardImpl) card).addAbility(new SagaAddCounterAbility(maxChapter));

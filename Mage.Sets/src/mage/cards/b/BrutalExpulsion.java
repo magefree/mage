@@ -51,7 +51,6 @@ import mage.watchers.common.DamagedByWatcher;
 public class BrutalExpulsion extends CardImpl {
 
     private static final FilterSpellOrPermanent filter = new FilterSpellOrPermanent("spell or creature");
-
     static {
         filter.setPermanentFilter(new FilterCreaturePermanent());
     }
@@ -70,8 +69,8 @@ public class BrutalExpulsion extends CardImpl {
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         // or Brutal Expulsion deals 2 damage to target creature or planeswalker. If that permanent would be put into a graveyard this turn, exile it instead.
         Mode mode = new Mode();
-        mode.getEffects().add(new DamageTargetEffect(2));
         mode.getTargets().add(new TargetCreatureOrPlaneswalker());
+        mode.getEffects().add(new DamageTargetEffect(2));
         Effect effect = new DealtDamageToCreatureBySourceDies(this, Duration.EndOfTurn);
         effect.setText("If that permanent would be put into a graveyard this turn, exile it instead");
         mode.getEffects().add(effect);

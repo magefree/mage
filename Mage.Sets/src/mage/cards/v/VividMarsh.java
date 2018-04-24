@@ -55,7 +55,7 @@ public class VividMarsh extends CardImpl {
         this.addAbility(ability);
         // {tap}: Add {B}.
         this.addAbility(new BlackManaAbility());
-        // {tap}, Remove a charge counter from Vivid Marsh: Add one mana of any color to your mana pool.
+        // {tap}, Remove a charge counter from Vivid Marsh: Add one mana of any color.
         ability = new AnyColorManaAbility();
         ability.addCost(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(1)));
         this.addAbility(ability);

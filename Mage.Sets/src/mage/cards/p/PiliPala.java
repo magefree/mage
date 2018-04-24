@@ -54,7 +54,7 @@ public class PiliPala extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        // {2}, {untap}: Add one mana of any color to your mana pool.
+        // {2}, {untap}: Add one mana of any color.
         Ability ability = new AnyColorManaAbility(new ManaCostsImpl("{2}"));
         ability.addCost(new UntapSourceCost());
         this.addAbility(ability);

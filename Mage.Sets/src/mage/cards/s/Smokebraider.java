@@ -57,7 +57,7 @@ public class Smokebraider extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // {tap}: Add two mana in any combination of colors to your mana pool. Spend this mana only to cast Elemental spells or activate abilities of Elementals.
+        // {tap}: Add two mana in any combination of colors. Spend this mana only to cast Elemental spells or activate abilities of Elementals.
         this.addAbility(new ConditionalAnyColorManaAbility(2, new SmokebraiderManaBuilder()));
     }
 

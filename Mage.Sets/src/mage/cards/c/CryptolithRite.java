@@ -47,7 +47,7 @@ public class CryptolithRite extends CardImpl {
     public CryptolithRite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}");
 
-        // Creatures you control have "{T}: Add one mana of any color to your mana pool."
+        // Creatures you control have "{T}: Add one mana of any color."
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(
                 new AnyColorManaAbility(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURES, false)));
     }

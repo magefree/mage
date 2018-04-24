@@ -53,7 +53,7 @@ public class WantedScoundrels extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 
-        // When Wanted Scoundrels dies, target opponent creates two colorless Treasure artifact tokens with "T, Sacrifice this artifact: Add one mana of any color to your mana pool."
+        // When Wanted Scoundrels dies, target opponent creates two colorless Treasure artifact tokens with "T, Sacrifice this artifact: Add one mana of any color."
         Ability ability = new DiesTriggeredAbility(new CreateTokenTargetEffect(new TreasureToken(), 2), false);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);

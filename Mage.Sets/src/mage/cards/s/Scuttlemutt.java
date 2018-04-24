@@ -54,7 +54,7 @@ public class Scuttlemutt extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // {T}: Add one mana of any color to your mana pool.
+        // {T}: Add one mana of any color.
         this.addAbility(new AnyColorManaAbility());
 
         // {T}: Target creature becomes the color or colors of your choice until end of turn.

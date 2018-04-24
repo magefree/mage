@@ -72,9 +72,9 @@ public class FieldsOfSummerPlane extends Plane {
         Effect chaosEffect = new GainLifeEffect(10);
         Target chaosTarget = null;
 
-        List<Effect> chaosEffects = new ArrayList<Effect>();
+        List<Effect> chaosEffects = new ArrayList<>();
         chaosEffects.add(chaosEffect);
-        List<Target> chaosTargets = new ArrayList<Target>();
+        List<Target> chaosTargets = new ArrayList<>();
         chaosTargets.add(chaosTarget);
 
         ActivateIfConditionActivatedAbility chaosAbility = new ActivateIfConditionActivatedAbility(Zone.COMMAND, new RollPlanarDieEffect(chaosEffects, chaosTargets), new GenericManaCost(0), MainPhaseStackEmptyCondition.instance);
@@ -104,15 +104,9 @@ class FieldsOfSummerEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Plane cPlane = game.getState().getCurrentPlane();
-        if (cPlane == null) {
+        if (cPlane == null || !cPlane.getName().equalsIgnoreCase("Plane - Fields of Summer")) {
             return false;
         }
-        if (cPlane != null) {
-            if (!cPlane.getName().equalsIgnoreCase("Plane - Fields of Summer")) {
-                return false;
-            }
-        }
-        Player controller = game.getPlayer(source.getControllerId());
         Player owner = game.getPlayer(this.getTargetPointer().getFirst(game, source));
         if (owner != null && owner.canRespond() && owner.chooseUse(Outcome.Benefit, "Gain 2 life?", source, game)) {
             Effect effect = new GainLifeTargetEffect(2);

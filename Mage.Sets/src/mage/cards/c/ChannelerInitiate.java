@@ -60,7 +60,7 @@ public class ChannelerInitiate extends CardImpl {
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
 
-        // {T}, Remove a -1/-1 counter from Channeler Initiate: Add one mana of any color to your mana pool.
+        // {T}, Remove a -1/-1 counter from Channeler Initiate: Add one mana of any color.
         ability = new AnyColorManaAbility();
         ability.addCost(new RemoveCountersSourceCost(CounterType.M1M1.createInstance(1)));
         this.addAbility(ability);

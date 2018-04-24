@@ -48,7 +48,7 @@ public class ArchaeologicalDig extends CardImpl {
 
         // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
-        // {tap}, Sacrifice Archaeological Dig: Add one mana of any color to your mana pool.
+        // {tap}, Sacrifice Archaeological Dig: Add one mana of any color.
         Ability ability = new AnyColorManaAbility(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

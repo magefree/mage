@@ -49,7 +49,7 @@ public class MirrorworksTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
 
         // If Mox Diamond would enter the battlefield, you may discard a land card instead. If you do, put Mox Diamond onto the battlefield. If you don't, put it into its owner's graveyard.
-        // {T}: Add one mana of any color to your mana pool.
+        // {T}: Add one mana of any color.
         addCard(Zone.HAND, playerA, "Mox Diamond", 1); // Artifact {0}
 
         // Whenever another nontoken artifact enters the battlefield under your control, you may pay {2}.
@@ -74,7 +74,7 @@ public class MirrorworksTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
 
         // If Mox Diamond would enter the battlefield, you may discard a land card instead. If you do, put Mox Diamond onto the battlefield. If you don't, put it into its owner's graveyard.
-        // {T}: Add one mana of any color to your mana pool.
+        // {T}: Add one mana of any color.
         addCard(Zone.HAND, playerA, "Mox Diamond", 1); // Artifact {0}
 
         // Whenever another nontoken artifact enters the battlefield under your control, you may pay {2}.

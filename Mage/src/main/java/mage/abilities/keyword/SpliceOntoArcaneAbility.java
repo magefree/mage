@@ -73,7 +73,7 @@ import java.util.Iterator;
  * on the stack, not the card from which the text was copied.
  *
  * Example: Glacial Ray is a red card with splice onto Arcane that reads, "Glacial
- * Ray deals 2 damage to target creature or player." Suppose Glacial Ray is spliced
+ * Ray deals 2 damage to any target." Suppose Glacial Ray is spliced
  * onto Reach Through Mists, a blue spell. The spell is still blue, and Reach Through
  * Mists deals the damage. This means that the ability can target a creature with
  * protection from red and deal 2 damage to that creature.

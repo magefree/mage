@@ -48,7 +48,7 @@ public class CrumblingVestige extends CardImpl {
         // Crumbling Vestige enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
 
-        // When Crumbling Vestige enters the battlefield, add one mana of any color to your mana pool.
+        // When Crumbling Vestige enters the battlefield, add one mana of any color.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new AddManaOfAnyColorEffect(), false));
 
         // {T}: Add {C} to you mana pool.

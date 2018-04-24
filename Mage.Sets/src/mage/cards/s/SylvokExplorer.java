@@ -50,7 +50,7 @@ public class SylvokExplorer extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // {T}: Add to your mana pool one mana of any color that a land an opponent controls could produce.
+        // {T}: Add one mana of any color that a land an opponent controls could produce.
         this.addAbility(new AnyColorLandsProduceManaAbility(TargetController.OPPONENT));
     }
 

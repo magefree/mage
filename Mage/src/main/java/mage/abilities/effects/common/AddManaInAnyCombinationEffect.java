@@ -139,7 +139,7 @@ public class AddManaInAnyCombinationEffect extends ManaEffect {
                 sb.append('{').append(coloredManaSymbol.toString()).append('}');
             }
         }
-        sb.append(" to your mana pool");
+        sb.append("");
         return sb.toString();
     }
 }

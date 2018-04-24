@@ -55,7 +55,7 @@ public class RuthlessDisposal extends CardImpl {
         // As an additional cost to cast Ruthless Disposal, discard a card and sacrifice a creature.
         this.getSpellAbility().addCost(new DiscardTargetCost(new TargetCardInHand(new FilterCard("a card"))));
         Cost cost = new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
-        cost.setText("As an additional cost to cast {this}, sacrifice a creature");
+        cost.setText("as an additional cost to cast this spell, sacrifice a creature");
         this.getSpellAbility().addCost(cost);
 
         // Two target creatures each get -13/-13 until end of turn.

@@ -110,7 +110,7 @@ public class LiquidFire extends CardImpl {
     static class LiquidFireCost extends VariableCostImpl {
         public LiquidFireCost() {
             super("Choose a Number");
-            this.text = "As an additional cost to cast {source}, choose a number between 0 and 5";
+            this.text = "as an additional cost to cast this spell, choose a number between 0 and 5";
         }
         
         public LiquidFireCost(final LiquidFireCost cost) {

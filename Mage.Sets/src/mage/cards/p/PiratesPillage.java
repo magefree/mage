@@ -48,10 +48,10 @@ public class PiratesPillage extends CardImpl {
         // As an additional cost to cast Pirate's Pillage, discard a card.
         this.getSpellAbility().addCost(new DiscardCardCost(false));
 
-        // Draw two cards and create two colorless Treasure artifacts with "{T}, Sacrifice this artifact: Add one mana of any color to your mana pool."
+        // Draw two cards and create two colorless Treasure artifacts with "{T}, Sacrifice this artifact: Add one mana of any color."
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));
         this.getSpellAbility().addEffect(new CreateTokenEffect(new TreasureToken(), 2)
-                .setText("and create two colorless Treasure artifacts with \"{T}, Sacrifice this artifact: Add one mana of any color to your mana pool"));
+                .setText("and create two colorless Treasure artifacts with \"{T}, Sacrifice this artifact: Add one mana of any color"));
     }
 
     public PiratesPillage(final PiratesPillage card) {

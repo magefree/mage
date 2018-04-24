@@ -56,7 +56,7 @@ public class EnchantingGraveyardCardsTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, SPELLWEAVER_VOLUTE, 1); // Enchantment Aura {3}{U}{U}
         addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
 
-        // Lightning Bolt deals 3 damage to target creature or player.
+        // Lightning Bolt deals 3 damage to any target.
         addCard(Zone.GRAVEYARD, playerB, "Lightning Bolt", 1); // Instant  {R}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, SPELLWEAVER_VOLUTE, LIGHTNING_BOLT);
@@ -95,7 +95,7 @@ public class EnchantingGraveyardCardsTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 6);
         addCard(Zone.GRAVEYARD, playerA, "Aerial Volley", 1); // Instant  {G}
 
-        // Lightning Bolt deals 3 damage to target creature or player.
+        // Lightning Bolt deals 3 damage to any target.
         addCard(Zone.GRAVEYARD, playerB, "Lightning Bolt", 1); // Instant  {R}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, SPELLWEAVER_VOLUTE, LIGHTNING_BOLT);
@@ -141,7 +141,7 @@ public class EnchantingGraveyardCardsTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
         addCard(Zone.BATTLEFIELD, playerA, "Island", 6);
 
-        // Lightning Bolt deals 3 damage to target creature or player.
+        // Lightning Bolt deals 3 damage to any target.
         addCard(Zone.GRAVEYARD, playerB, "Lightning Bolt", 1); // Instant  {R}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, SPELLWEAVER_VOLUTE, LIGHTNING_BOLT);
@@ -187,7 +187,7 @@ public class EnchantingGraveyardCardsTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, SPELLWEAVER_VOLUTE, 1); // Enchantment Aura {3}{U}{U}
         addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
 
-        // Lightning Bolt deals 3 damage to target creature or player.
+        // Lightning Bolt deals 3 damage to any target.
         addCard(Zone.GRAVEYARD, playerB, "Lightning Bolt", 1); // Instant  {R}
 
         // Return target permanent to its owner's hand.

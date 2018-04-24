@@ -45,7 +45,7 @@ public class DepthsOfDesire extends CardImpl {
     public DepthsOfDesire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}");
 
-        // Return target creature to its owner's hand. Create a colorless Treasure token with "{t}, Sacrifice this artifact: Add one mana of any color to your mana pool."
+        // Return target creature to its owner's hand. Create a colorless Treasure token with "{t}, Sacrifice this artifact: Add one mana of any color."
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         this.getSpellAbility().addEffect(new CreateTokenEffect(new TreasureToken()));

@@ -71,7 +71,7 @@ public class WildHolocron extends CardImpl {
         ability.addCost(cost);
         this.addAbility(ability);
 
-        // {T}, Remove two charge counters from Wild Holocron: Add RG or GW to your mana pool.
+        // {T}, Remove two charge counters from Wild Holocron: Add RG or GW.
         cost = new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(2));
 
         ability = new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(1, 1, 0, 0, 0, 0, 0, 0), new TapSourceCost());

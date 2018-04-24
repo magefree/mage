@@ -125,7 +125,7 @@ class SasayasEssence extends TokenImpl {
 
         color.setGreen(true);
 
-        // Whenever a land you control is tapped for mana, for each other land you control with the same name, add one mana to your mana pool of any type that land produced.
+        // Whenever a land you control is tapped for mana, for each other land you control with the same name, add one mana of any type that land produced.
         this.addAbility(new TapForManaAllTriggeredManaAbility(
                 new SasayasEssenceManaEffectEffect(),
                 new FilterControlledLandPermanent(), SetTargetPointer.PERMANENT));
@@ -143,7 +143,7 @@ class SasayasEssenceManaEffectEffect extends ManaEffect {
 
     public SasayasEssenceManaEffectEffect() {
         super();
-        this.staticText = "for each other land you control with the same name, add one mana to your mana pool of any type that land produced";
+        this.staticText = "for each other land you control with the same name, add one mana of any type that land produced";
     }
 
     public SasayasEssenceManaEffectEffect(final SasayasEssenceManaEffectEffect effect) {

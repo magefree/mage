@@ -63,7 +63,7 @@ public class Jilt extends CardImpl {
         Effect effect = new ConditionalOneShotEffect(
                 new DamageTargetEffect(2, "it"),
                 KickedCondition.instance,
-                "If {this} was kicked, it deals 2 damage to another target creature");
+                "if this spell was kicked, it deals 2 damage to another target creature");
         effect.setTargetPointer(new SecondTargetPointer());
         this.getSpellAbility().addEffect(effect);
         Target target = new TargetCreaturePermanent();

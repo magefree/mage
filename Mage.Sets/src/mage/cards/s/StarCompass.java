@@ -63,7 +63,7 @@ public class StarCompass extends CardImpl {
 
         // Star Compass enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
-        // {tap}: Add to your mana pool one mana of any color that a basic land you control could produce.
+        // {tap}: Add one mana of any color that a basic land you control could produce.
         this.addAbility(new StarCompassManaAbility());
     }
 
@@ -108,7 +108,7 @@ class StarCompassManaEffect extends ManaEffect {
 
     public StarCompassManaEffect() {
         super();
-        staticText = "Add to your mana pool one mana of any type that a basic land you control could produce";
+        staticText = "Add one mana of any type that a basic land you control could produce";
     }
 
     public StarCompassManaEffect(final StarCompassManaEffect effect) {

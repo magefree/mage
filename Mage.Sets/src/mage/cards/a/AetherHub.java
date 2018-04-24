@@ -53,7 +53,7 @@ public class AetherHub extends CardImpl {
         // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
 
-        // {T}, Pay {E}: Add one mana of any color to your mana pool.
+        // {T}, Pay {E}: Add one mana of any color.
         Ability ability = new AnyColorManaAbility();
         ability.addCost(new PayEnergyCost(1));
         this.addAbility(ability);

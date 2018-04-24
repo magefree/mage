@@ -44,7 +44,7 @@ public class CrewTest extends CardTestPlayerBase {
 
     @Test
     public void crewBasicTest() {
-        // {T}: Add one mana of any color to your mana pool.
+        // {T}: Add one mana of any color.
         // Crew 3 (Tap any number of creatures you control with total power 3 or more: This Vehicle becomes an artifact creature until end of turn.)";
         addCard(Zone.BATTLEFIELD, playerA, "Cultivator's Caravan", 1);
 

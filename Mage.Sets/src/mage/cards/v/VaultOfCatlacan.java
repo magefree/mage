@@ -61,7 +61,7 @@ public class VaultOfCatlacan extends CardImpl {
         ability.setRuleAtTheTop(true);
         this.addAbility(ability);
 
-        // {T}: Add one mana of any color to your mana pool.
+        // {T}: Add one mana of any color.
         this.addAbility(new AnyColorManaAbility());
 
         // {T}: Add {U} for each artifact you control.

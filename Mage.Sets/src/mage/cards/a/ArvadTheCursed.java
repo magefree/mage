@@ -50,7 +50,7 @@ import mage.filter.predicate.mageobject.SupertypePredicate;
  */
 public class ArvadTheCursed extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("legendary creatures you control");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("legendary creatures");
 
     static {
         filter.add(new SupertypePredicate(SuperType.LEGENDARY));

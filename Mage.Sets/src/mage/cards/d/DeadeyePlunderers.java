@@ -72,7 +72,7 @@ public class DeadeyePlunderers extends CardImpl {
         PermanentsOnBattlefieldCount count = new PermanentsOnBattlefieldCount(filter);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(count, count, Duration.WhileOnBattlefield)));
 
-        // {2}{U}{B}: Create a colorless artifact token named Treasure with "{T}, Sacrifice this artifact: Add one mana of any color to your mana pool."
+        // {2}{U}{B}: Create a colorless artifact token named Treasure with "{T}, Sacrifice this artifact: Add one mana of any color."
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new TreasureToken()), new ManaCostsImpl("{2}{U}{B}")));
     }
 

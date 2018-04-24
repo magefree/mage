@@ -48,7 +48,7 @@ public class NephaliaDrownyard extends CardImpl {
     public NephaliaDrownyard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {T}: Add 1 to your mana pool.
+        // {T}: Add 1.
         this.addAbility(new ColorlessManaAbility());
 
         // {1}{U}{B}, {T}: Target player puts the top three cards of their library into their graveyard.

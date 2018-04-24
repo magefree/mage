@@ -51,7 +51,7 @@ public class DireFleetHoarder extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        // When Dire Fleet Hoarder dies, create a colorless Treasure artifact token with "{t}, Sacrifice this artifact: Add one mana of any color to your mana pool."
+        // When Dire Fleet Hoarder dies, create a colorless Treasure artifact token with "{t}, Sacrifice this artifact: Add one mana of any color."
         this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new TreasureToken())));
     }
 

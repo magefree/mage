@@ -1,5 +1,14 @@
 package org.mage.test.serverside.base;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import mage.cards.Card;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
@@ -22,12 +31,6 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.junit.BeforeClass;
 import org.mage.test.player.TestPlayer;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Base class for all tests.
@@ -158,7 +161,7 @@ public abstract class MageTestPlayerBase {
     protected void parseScenario(String filename) throws FileNotFoundException {
         parserState = ParserState.INIT;
         File f = new File(filename);
-        try(Scanner scanner = new Scanner(f)) {
+        try (Scanner scanner = new Scanner(f)) {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine().trim();
                 if (line == null || line.isEmpty() || line.startsWith("#")) {

@@ -46,7 +46,7 @@ public class GildedLotus extends CardImpl {
     public GildedLotus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
 
-        // {tap}: Add three mana of any one color to your mana pool.
+        // {tap}: Add three mana of any one color.
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(3), new TapSourceCost());
         this.addAbility(ability);
     }

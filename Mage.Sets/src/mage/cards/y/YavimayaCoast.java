@@ -48,10 +48,10 @@ public class YavimayaCoast extends CardImpl {
     public YavimayaCoast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // Tap: Add 1 to your mana pool.
+        // Tap: Add 1.
         this.addAbility(new ColorlessManaAbility());
 
-        // Tap: Add Green or Blue to your mana pool. Yavimaya Coast deals 1 damage to you.
+        // Tap: Add Green or Blue. Yavimaya Coast deals 1 damage to you.
         Ability greenManaAbility = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.GreenMana(1), new TapSourceCost());
         greenManaAbility.addEffect(new DamageControllerEffect(1));
         this.addAbility(greenManaAbility);

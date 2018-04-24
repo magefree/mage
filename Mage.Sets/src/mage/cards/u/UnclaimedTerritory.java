@@ -63,7 +63,7 @@ public class UnclaimedTerritory extends CardImpl {
         // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
 
-        // {T}: Add one mana of any color to your mana pool. Spend this mana only to cast a creature spell of the chosen type.
+        // {T}: Add one mana of any color. Spend this mana only to cast a creature spell of the chosen type.
         this.addAbility(new ConditionalAnyColorManaAbility(new TapSourceCost(), 1, new UnclaimedTerritoryManaBuilder(), true));
     }
 

@@ -58,7 +58,7 @@ public class CabalPaladin extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(
                 new DamagePlayersEffect(Outcome.Damage, new StaticValue(2), TargetController.OPPONENT)
                         .setText("{this} deals 2 damage to each opponent. <i>(Artifacts, legendaries, and Sagas are historic.)</i>"),
-                new FilterHistoricSpell(), true
+                new FilterHistoricSpell(), false
         ));
     }
 

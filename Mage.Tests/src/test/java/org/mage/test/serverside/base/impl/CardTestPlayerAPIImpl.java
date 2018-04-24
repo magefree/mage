@@ -1248,6 +1248,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      *               are copies. For modal spells use a prefix with the mode number:
      *               mode=1Lightning Bolt^mode=2Silvercoat Lion
      */
+    // TODO: mode options doesn't work here (see BrutalExpulsionTest)
     public void addTarget(TestPlayer player, String target) {
         player.addTarget(target);
     }

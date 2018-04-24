@@ -205,7 +205,7 @@ public class PersistTest extends CardTestPlayerBase {
         // Creatures you control can't have -1/-1 counters placed on them.
         // Creatures your opponents control lose infect.
         addCard(Zone.BATTLEFIELD, playerA, "Melira, Sylvok Outcast", 1); // 2/2
-        // When Murderous Redcap enters the battlefield, it deals damage equal to its power to target creature or player.
+        // When Murderous Redcap enters the battlefield, it deals damage equal to its power to any target.
         // Persist
         addCard(Zone.HAND, playerA, "Murderous Redcap", 1); // 2/2
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);

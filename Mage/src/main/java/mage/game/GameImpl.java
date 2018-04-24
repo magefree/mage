@@ -2493,6 +2493,7 @@ public abstract class GameImpl implements Game, Serializable {
             return;
         }
         //20100423 - 800.4a
+        Set<Card> toOutside = new HashSet<>();
         for (Iterator<Permanent> it = getBattlefield().getAllPermanents().iterator(); it.hasNext();) {
             Permanent perm = it.next();
             if (perm.getOwnerId().equals(playerId)) {
@@ -2511,7 +2512,8 @@ public abstract class GameImpl implements Game, Serializable {
                 if (perm.isCreature() && this.getCombat() != null) {
                     perm.removeFromCombat(this, true);
                 }
-                it.remove();
+                toOutside.add(perm);
+//                it.remove();
             } else if (perm.getControllerId().equals(player.getId())) {
                 // and any effects which give that player control of any objects or players end
                 Effects:
@@ -2529,6 +2531,18 @@ public abstract class GameImpl implements Game, Serializable {
                         }
                     }
                 }
+            }
+        }
+        // needed to send event that permanent leaves the battlefield to allow non stack effects to execute
+        player.moveCards(toOutside, Zone.OUTSIDE, null, this);
+        // triggered abilities that don't use the stack have to be executed
+        List<TriggeredAbility> abilities = state.getTriggered(player.getId());
+        for (Iterator<TriggeredAbility> it = abilities.iterator(); it.hasNext();) {
+            TriggeredAbility triggeredAbility = it.next();
+            if (!triggeredAbility.isUsesStack()) {
+                state.removeTriggeredAbility(triggeredAbility);
+                player.triggerAbility(triggeredAbility, this);
+                it.remove();
             }
         }
         // Then, if that player controlled any objects on the stack not represented by cards, those objects cease to exist.

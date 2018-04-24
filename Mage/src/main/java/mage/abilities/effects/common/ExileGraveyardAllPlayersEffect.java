@@ -74,7 +74,7 @@ public class ExileGraveyardAllPlayersEffect extends OneShotEffect {
 
     @Override
     public ExileGraveyardAllPlayersEffect copy() {
-        return new ExileGraveyardAllPlayersEffect();
+        return new ExileGraveyardAllPlayersEffect(this);
     }
 
     @Override

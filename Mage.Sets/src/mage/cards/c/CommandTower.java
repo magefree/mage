@@ -42,7 +42,7 @@ public class CommandTower extends CardImpl {
     public CommandTower(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {tap}: Add to your mana pool one mana of any color in your commander's color identity.
+        // {tap}: Add one mana of any color in your commander's color identity.
         this.addAbility(new CommanderColorIdentityManaAbility());
     }
 

@@ -54,7 +54,7 @@ public class DruidsRepository extends CardImpl {
         // Whenever a creature you control attacks, put a charge counter on Druids' Repository.
         this.addAbility(new AttacksCreatureYouControlTriggeredAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance())));
 
-        // Remove a charge counter from Druids' Repository: Add one mana of any color to your mana pool.
+        // Remove a charge counter from Druids' Repository: Add one mana of any color.
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(), new RemoveCountersSourceCost(CounterType.CHARGE.createInstance()));        
         this.addAbility(ability);
     }

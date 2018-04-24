@@ -49,10 +49,10 @@ public class CavesOfKoilos extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
 
-        // Tap: Add 1 to your mana pool.
+        // Tap: Add 1.
         this.addAbility(new ColorlessManaAbility());
 
-        // Tap: Add White or Black to your mana pool. Caves of Koilos deals 1 damage to you.
+        // Tap: Add White or Black. Caves of Koilos deals 1 damage to you.
         Ability whiteManaAbility = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.WhiteMana(1), new TapSourceCost());
         whiteManaAbility.addEffect(new DamageControllerEffect(1));
         this.addAbility(whiteManaAbility);

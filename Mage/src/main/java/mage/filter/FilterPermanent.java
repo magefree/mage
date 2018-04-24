@@ -29,6 +29,7 @@ package mage.filter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import mage.constants.SubType;
@@ -64,6 +65,13 @@ public class FilterPermanent extends FilterObject<Permanent> implements FilterIn
     public FilterPermanent(SubType subtype, String name) {
         super(name);
         this.add(new SubtypePredicate(subtype));
+    }
+
+    public FilterPermanent(Set<SubType> subtypesList, String name) {
+        super(name);
+        for (SubType subtype: subtypesList) {
+            this.add(new SubtypePredicate(subtype));
+        }
     }
 
     @Override

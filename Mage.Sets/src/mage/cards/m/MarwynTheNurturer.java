@@ -40,7 +40,7 @@ public class MarwynTheNurturer extends CardImpl {
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filter));
 
         // {T}: Add an amount of {G} equal to Marwyn’s power.
-        this.addAbility(new DynamicManaAbility(Mana.GreenMana(1), new SourcePermanentPowerCount(), "Add an amount of {G} equal to {this}’s power"));
+        this.addAbility(new DynamicManaAbility(Mana.GreenMana(1), new SourcePermanentPowerCount(), "Add an amount of {G} equal to {this}'s power"));
     }
 
     public MarwynTheNurturer(final MarwynTheNurturer card) {

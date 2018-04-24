@@ -52,7 +52,7 @@ public class GainControlTargetEffectTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Vedalken Shackles", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
 
-        // Lightning Strike deals 3 damage to target creature or player.
+        // Lightning Strike deals 3 damage to any target.
         addCard(Zone.HAND, playerB, "Lightning Strike", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 2);
         // Flying

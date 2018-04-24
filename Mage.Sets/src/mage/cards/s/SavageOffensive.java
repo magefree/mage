@@ -69,7 +69,7 @@ public class SavageOffensive extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new AddContinuousEffectToGame(new BoostControlledEffect(1, 1, Duration.EndOfTurn)),
                 new LockedInCondition(KickedCondition.instance),
-                "If {this} was kicked, they get +1/+1 until end of turn."));
+                "if this spell was kicked, they get +1/+1 until end of turn."));
     }
 
     public SavageOffensive(final SavageOffensive card) {

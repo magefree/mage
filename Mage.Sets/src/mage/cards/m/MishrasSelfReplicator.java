@@ -62,7 +62,7 @@ public class MishrasSelfReplicator extends CardImpl {
         // Whenever you cast a historic spell, you may pay {1}. If you do, create a token that's a copy of Mishra's Self-Replicator.
         this.addAbility(new SpellCastControllerTriggeredAbility(new DoIfCostPaid(
                 new CreateTokenCopySourceEffect()
-                        .setText("create a token that's a copy of (this). <i>(Artifacts, legendaries, and Sagas are historic.)</i>"),
+                        .setText("create a token that's a copy of {this}. <i>(Artifacts, legendaries, and Sagas are historic.)</i>"),
                 new ManaCostsImpl("{1}")), filter, true));
 
     }

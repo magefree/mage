@@ -55,7 +55,7 @@ public class OasisRitualist extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 
-        // {T}: Add one mana of any color to your mana pool.
+        // {T}: Add one mana of any color.
         this.addAbility(new AnyColorManaAbility());
         // {T}, Exert Oasis Ritualist: Add two mana of any one color to your manna pool.
         SimpleManaAbility ability = new SimpleManaAbility(Zone.BATTLEFIELD,

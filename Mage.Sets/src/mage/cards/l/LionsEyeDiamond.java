@@ -51,7 +51,7 @@ public class LionsEyeDiamond extends CardImpl {
     public LionsEyeDiamond(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{0}");
 
-        // Sacrifice Lion's Eye Diamond, Discard your hand: Add three mana of any one color to your mana pool. Activate this ability only any time you could cast an instant.
+        // Sacrifice Lion's Eye Diamond, Discard your hand: Add three mana of any one color. Activate this ability only any time you could cast an instant.
         this.addAbility(new LionsEyeDiamondAbility());
     }
 

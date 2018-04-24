@@ -50,7 +50,7 @@ public class BrazenFreebooter extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // When Brazen Freebooter enters the battlefield, create a colorless Treasure artifact token with "T, sacrifice this artifact: Add one mana of any color to your mana pool."
+        // When Brazen Freebooter enters the battlefield, create a colorless Treasure artifact token with "T, sacrifice this artifact: Add one mana of any color."
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new TreasureToken()), false));
     }
 

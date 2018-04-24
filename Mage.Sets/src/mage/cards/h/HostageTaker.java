@@ -119,7 +119,7 @@ class HostageTakerExileEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent card = game.getPermanent(getTargetPointer().getFirst(game, source));
-        Permanent permanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null && card != null) {
             Player controller = game.getPlayer(card.getControllerId());
             if (controller != null) {

@@ -31,8 +31,6 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
@@ -47,7 +45,6 @@ import mage.game.Game;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetPlayerOrPlaneswalker;
-import mage.target.targetpointer.SecondTargetPointer;
 
 /**
  *
@@ -64,15 +61,11 @@ public class GoblinBarrage extends CardImpl {
         this.addAbility(new KickerAbility(new SacrificeTargetCost(new TargetControlledPermanent(filter))));
 
         // Goblin Barrage deals 4 damage to target creature. If this spell was kicked, it also deals 4 damage to target player or planeswalker.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(4).setUseOnlyTargetPointer(true));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(4)
+                .setText("{this} deals 4 damage to target creature. If this spell was kicked, "
+                        + "it also deals 4 damage to target player or planeswalker")
+        );
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-
-        ConditionalOneShotEffect effect = new ConditionalOneShotEffect(
-                (OneShotEffect) new DamageTargetEffect(4).setUseOnlyTargetPointer(true), KickedCondition.instance,
-                "If this spell was kicked, it also deals 4 damage to target player or planeswalker.");
-        effect.setTargetPointer(new SecondTargetPointer());
-        this.getSpellAbility().addEffect(effect);
-
     }
 
     @Override

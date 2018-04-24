@@ -44,7 +44,7 @@ public class Manamorphose extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R/G}");
 
 
-        // Add two mana in any combination of colors to your mana pool.
+        // Add two mana in any combination of colors.
         this.getSpellAbility().addEffect(new AddManaInAnyCombinationEffect(2));
 
         // Draw a card.

@@ -65,7 +65,7 @@ public class SquanderedResources extends CardImpl {
     public SquanderedResources(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{B}{G}");
 
-        // Sacrifice a land: Add to your mana pool one mana of any type the sacrificed land could produce.
+        // Sacrifice a land: Add one mana of any type the sacrificed land could produce.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new SquanderedResourcesEffect(), new SacrificeTargetCost(new TargetControlledPermanent(filter))));
     }
 
@@ -89,7 +89,7 @@ class SquanderedResourcesEffect extends ManaEffect {
 
     public SquanderedResourcesEffect() {
         super();
-        staticText = "Add to your mana pool one mana of any type the sacrificed land could produce";
+        staticText = "Add one mana of any type the sacrificed land could produce";
     }
 
     public SquanderedResourcesEffect(final SquanderedResourcesEffect effect) {

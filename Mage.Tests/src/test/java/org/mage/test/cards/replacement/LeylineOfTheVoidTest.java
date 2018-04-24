@@ -134,7 +134,7 @@ public class LeylineOfTheVoidTest extends CardTestPlayerBase {
     @Test
     public void testMorbidAbilityWithAwakeningZoneTokens() {
         // At the beginning of your upkeep, you may put a 0/1 colorless Eldrazi Spawn creature token onto the battlefield. 
-        // It has "Sacrifice this creature: Add mana symbol 1 to your mana pool."
+        // It has "Sacrifice this creature: Add mana symbol 1."
         addCard(Zone.BATTLEFIELD, playerA, "Awakening Zone");
         // If Leyline of the Void is in your opening hand, you may begin the game with it on the battlefield.
         // If a card would be put into an opponent's graveyard from anywhere, exile it instead.

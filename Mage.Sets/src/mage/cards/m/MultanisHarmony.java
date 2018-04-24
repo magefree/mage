@@ -62,9 +62,9 @@ public class MultanisHarmony extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        // Enchanted creature has "{T}: Add one mana of any color to your mana pool."
+        // Enchanted creature has "{T}: Add one mana of any color."
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new AnyColorManaAbility(),
-            AttachmentType.AURA, Duration.WhileOnBattlefield, "Enchanted creature has \"{T}: Add one mana of any color to your mana pool.\"")));
+            AttachmentType.AURA, Duration.WhileOnBattlefield, "Enchanted creature has \"{T}: Add one mana of any color.\"")));
     }
 
     public MultanisHarmony(final MultanisHarmony card) {

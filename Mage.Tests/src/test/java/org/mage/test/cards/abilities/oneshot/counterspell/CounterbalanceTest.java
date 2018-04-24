@@ -51,7 +51,7 @@ public class CounterbalanceTest extends CardTestPlayerBase {
     public void testCommand() {
         addCard(Zone.HAND, playerA, "Death Grasp");
         // Sorcery {X}{W}{B}
-        // Death Grasp deals X damage to target creature or player. You gain X life.
+        // Death Grasp deals X damage to any target. You gain X life.
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
 

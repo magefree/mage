@@ -45,7 +45,7 @@ public class ScorchingLavaTest extends CardTestPlayerBase {
     public void testTargetGetExiled() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
         // Kicker {R}
-        // Scorching Lava deals 2 damage to target creature or player. If Scorching Lava was kicked, that creature can't be regenerated this turn and if it would die this turn, exile it instead.
+        // Scorching Lava deals 2 damage to any target. If Scorching Lava was kicked, that creature can't be regenerated this turn and if it would die this turn, exile it instead.
         addCard(Zone.HAND, playerA, "Scorching Lava"); // Instant {1}{R}
 
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1);

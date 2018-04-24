@@ -52,7 +52,7 @@ public class TendoIceBridge extends CardImpl {
                 new AddCountersSourceEffect(CounterType.CHARGE.createInstance(1)), "with a charge counter on it"));
         // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
-        // {tap}, Remove a charge counter from Tendo Ice Bridge: Add one mana of any color to your mana pool.
+        // {tap}, Remove a charge counter from Tendo Ice Bridge: Add one mana of any color.
         Ability ability = new AnyColorManaAbility();
         ability.addCost(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(1)));
         this.addAbility(ability);

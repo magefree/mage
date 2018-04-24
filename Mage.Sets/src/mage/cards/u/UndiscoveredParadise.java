@@ -52,7 +52,7 @@ public class UndiscoveredParadise extends CardImpl {
     public UndiscoveredParadise(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        // {T}: Add one mana of any color to your mana pool. During your next untap step, as you untap your permanents, return Undiscovered Paradise to its owner's hand.
+        // {T}: Add one mana of any color. During your next untap step, as you untap your permanents, return Undiscovered Paradise to its owner's hand.
         Ability ability = new AnyColorManaAbility();
         ability.addEffect(new UndiscoveredParadiseEffect());
         this.addAbility(ability);

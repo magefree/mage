@@ -120,7 +120,7 @@ public class BecomesCreatureAttachedEffect extends ContinuousEffectImpl {
                                 permanent.getColor(game).setRed(false);
                             }
                             if (token.getColor(game).hasColor()) {
-                                permanent.getColor(game).setColor(token.getColor(game));
+                                permanent.getColor(game).addColor(token.getColor(game));
                             }
                         }
                         break;

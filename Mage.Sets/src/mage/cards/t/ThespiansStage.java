@@ -53,7 +53,7 @@ public class ThespiansStage extends CardImpl {
     public ThespiansStage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {T}: Add 1 to your mana pool.
+        // {T}: Add 1.
         this.addAbility(new ColorlessManaAbility());
 
         // 2, {T}: Thespian's Stage becomes a copy of target land and gains this ability.

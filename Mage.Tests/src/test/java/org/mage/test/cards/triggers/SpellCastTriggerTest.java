@@ -98,7 +98,7 @@ public class SpellCastTriggerTest extends CardTestPlayerBase {
         // Whenever you cast an instant or sorcery spell from your hand, you may cast target card with the same name as that spell from your graveyard.
         addCard(Zone.BATTLEFIELD, playerA, "Harness the Storm", 1);
 
-        // Put two 1/1 red Devil creature tokens onto the battlefield. They have "When this creature dies, it deals 1 damage to target creature or player."
+        // Put two 1/1 red Devil creature tokens onto the battlefield. They have "When this creature dies, it deals 1 damage to any target."
         addCard(Zone.HAND, playerA, "Dance with Devils", 1); // {3}{R}
         addCard(Zone.GRAVEYARD, playerA, "Dance with Devils", 1); // {3}{R}
 
@@ -123,7 +123,7 @@ public class SpellCastTriggerTest extends CardTestPlayerBase {
         // Whenever you cast an instant or sorcery spell from your hand, you may cast target card with the same name as that spell from your graveyard.
         addCard(Zone.BATTLEFIELD, playerA, "Harness the Storm", 1);
 
-        // Put two 1/1 red Devil creature tokens onto the battlefield. They have "When this creature dies, it deals 1 damage to target creature or player."
+        // Put two 1/1 red Devil creature tokens onto the battlefield. They have "When this creature dies, it deals 1 damage to any target."
         addCard(Zone.HAND, playerA, "Dance with Devils", 1); // {3}{R}
         // Scry 2, then draw two cards. You lose 2 life.
         addCard(Zone.HAND, playerA, "Read the Bones", 1); // {2}{B}

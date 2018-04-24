@@ -66,7 +66,7 @@ public class DaringArchaeologist extends CardImpl {
 
         // When Daring Archaeologist enters the battlefield, you may return target artifact card from your graveyard to your hand.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect()
-                .setText("you may return target artifact card from your graveyard to your hand. "), true);
+                .setText("you may return target artifact card from your graveyard to your hand"), true);
         ability.addTarget(new TargetCardInYourGraveyard(new FilterArtifactCard("artifact card from your graveyard")));
         this.addAbility(ability);
 
@@ -74,7 +74,7 @@ public class DaringArchaeologist extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance(1))
                         .setText("put a +1/+1 counter on {this}. <i>(Artifacts, legendaries, and Sagas are historic.)</i>"),
-                filter, true));
+                filter, false));
     }
 
     public DaringArchaeologist(final DaringArchaeologist card) {

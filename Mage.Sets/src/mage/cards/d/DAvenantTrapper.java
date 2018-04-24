@@ -62,8 +62,8 @@ public class DAvenantTrapper extends CardImpl {
 
         // Whenever you cast a historic spell, tap target creature an opponent controls.
         Ability ability = new SpellCastControllerTriggeredAbility(
-                new TapTargetEffect("tap target creature an opponent controls. <i>(Artifacts, legendaries, and Sagas are historic.)</i>"),
-                filter, true);
+                new TapTargetEffect("target creature an opponent controls. <i>(Artifacts, legendaries, and Sagas are historic.)</i>"),
+                filter, false);
         ability.addTarget(new TargetOpponentsCreaturePermanent());
         this.addAbility(ability);
     }

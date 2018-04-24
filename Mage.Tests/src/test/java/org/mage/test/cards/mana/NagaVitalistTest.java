@@ -17,7 +17,7 @@ public class NagaVitalistTest extends CardTestPlayerBase {
     /*
     Naga Vitalist 1G
     Creature - Naga Druid 1/2
-    T: Add to your mana pool one mana of any type that a land you control could produce.
+    T: Add one mana of any type that a land you control could produce.
      */
     private final String nagaVitalist = "Naga Vitalist";
 
@@ -26,7 +26,7 @@ public class NagaVitalistTest extends CardTestPlayerBase {
         Enchantment - Aura
         Enchant - Land
         When Gift of Paradise enters the battlefield, you gain 3 life.
-        Enchanted land has "T: Add two mana of any one color to your mana pool."
+        Enchanted land has "T: Add two mana of any one color."
      */
     private final String giftParadise = "Gift of Paradise";
 
@@ -66,7 +66,7 @@ public class NagaVitalistTest extends CardTestPlayerBase {
         castSpell(giftCastTurn, PhaseStep.PRECOMBAT_MAIN, playerA, giftParadise, "Swamp");
 
         // activate red mana (by any from enchanted land)
-        activateManaAbility(nagaManaTapTurn, PhaseStep.POSTCOMBAT_MAIN, playerA, "{T}: Add to your mana pool one mana of any");
+        activateManaAbility(nagaManaTapTurn, PhaseStep.POSTCOMBAT_MAIN, playerA, "{T}: Add one mana of any");
         setChoice(playerA, nagaManaTapColor);
 
         setStopAt(nagaManaTapTurn, PhaseStep.POSTCOMBAT_MAIN);
@@ -135,7 +135,7 @@ public class NagaVitalistTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, giftParadise, "Forest");
 
-        activateManaAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add to your mana pool one mana of any");
+        activateManaAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add one mana of any");
         setChoice(playerA, "Red");
 
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);

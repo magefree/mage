@@ -5,7 +5,6 @@
  */
 package mage.filter.common;
 
-import mage.filter.FilterPermanent;
 import mage.filter.FilterPlayer;
 
 /**
@@ -19,7 +18,7 @@ public class FilterPlayerOrPlaneswalker extends FilterPermanentOrPlayer {
     }
 
     public FilterPlayerOrPlaneswalker(String name) {
-        super(name, new FilterPermanent(), new FilterPlayer());
+        super(name, new FilterPlaneswalkerPermanent(), new FilterPlayer());
     }
 
     public FilterPlayerOrPlaneswalker(final FilterPlayerOrPlaneswalker filter) {

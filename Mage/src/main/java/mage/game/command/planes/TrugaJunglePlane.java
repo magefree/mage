@@ -55,7 +55,7 @@ import mage.watchers.common.PlanarRollWatcher;
  */
 public class TrugaJunglePlane extends Plane {
 
-    private static final String rule = "All lands have '{t}: Add one mana of any color to your mana pool";
+    private static final String rule = "All lands have '{t}: Add one mana of any color";
 
     public TrugaJunglePlane() {
         this.setName("Plane - Truga Jungle");

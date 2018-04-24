@@ -42,7 +42,7 @@ public class DemonicPactTest extends CardTestPlayerBase {
     public void testModes() {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
         // At the beginning of your upkeep, choose one that hasn't been chosen
-        // (1) - Demonic Pact deals 4 damage to target creature or player and you gain 4 life;
+        // (1) - Demonic Pact deals 4 damage to any target and you gain 4 life;
         // (2) - Target opponent discards two cards
         // (3) - Draw two cards
         // (4) - You lose the game.
@@ -77,7 +77,7 @@ public class DemonicPactTest extends CardTestPlayerBase {
     public void testModeAfterRollback() {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
         // At the beginning of your upkeep, choose one that hasn't been chosen
-        // (1) - Demonic Pact deals 4 damage to target creature or player and you gain 4 life;
+        // (1) - Demonic Pact deals 4 damage to any target and you gain 4 life;
         // (2) - Target opponent discards two cards
         // (3) - Draw two cards
         // (4) - You lose the game.

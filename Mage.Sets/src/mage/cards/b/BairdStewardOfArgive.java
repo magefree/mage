@@ -57,9 +57,9 @@ public class BairdStewardOfArgive extends CardImpl {
         //Vigilance
         this.addAbility(VigilanceAbility.getInstance());
 
-        // Creatures can’t attack you or a planeswalker you control unless their controller pays {1} for each of those creatures.
+        // Creatures can't attack you or a planeswalker you control unless their controller pays {1} for each of those creatures.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackYouUnlessPayManaAllEffect(new ManaCostsImpl("{1}"), true)
-                .setText("Creatures can’t attack you or a planeswalker you control unless their controller pays {1} for each of those creatures")));
+                .setText("Creatures can't attack you or a planeswalker you control unless their controller pays {1} for each of those creatures")));
     }
 
     public BairdStewardOfArgive(final BairdStewardOfArgive card) {

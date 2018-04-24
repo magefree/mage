@@ -58,7 +58,7 @@ public class AstralCornucopia extends CardImpl {
         // Astral Cornucopia enters the battlefield with X charge counters on it.
         this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.CHARGE.createInstance())));
 
-        // {T}: Choose a color. Add one mana of that color to your mana pool for each charge counter on Astral Cornucopia.
+        // {T}: Choose a color. Add one mana of that color for each charge counter on Astral Cornucopia.
         this.addAbility(new AstralCornucopiaManaAbility());
     }
 
@@ -108,7 +108,7 @@ class AstralCornucopiaManaEffect extends ManaEffect {
     public AstralCornucopiaManaEffect() {
         super();
         computedMana = new Mana();
-        this.staticText = "Choose a color. Add one mana of that color to your mana pool for each charge counter on {this}";
+        this.staticText = "Choose a color. Add one mana of that color for each charge counter on {this}";
     }
 
     public AstralCornucopiaManaEffect(final AstralCornucopiaManaEffect effect) {

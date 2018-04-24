@@ -54,7 +54,7 @@ public class GleamingBarrier extends CardImpl {
         // Defender
         this.addAbility(DefenderAbility.getInstance());
 
-        // When Gleaming Barrier dies, create a colorless Treasure artifact token with "{t}, Sacrifice this artifact: Add one mana of any color to your mana pool."
+        // When Gleaming Barrier dies, create a colorless Treasure artifact token with "{t}, Sacrifice this artifact: Add one mana of any color."
         this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new TreasureToken())));
     }
 

@@ -107,7 +107,7 @@ class OrimsChantEffect extends OneShotEffect {
 
     public OrimsChantEffect() {
         super(Outcome.Detriment);
-        this.staticText = "If {this} was kicked, creatures can't attack this turn";
+        this.staticText = "if this spell was kicked, creatures can't attack this turn";
     }
 
     public OrimsChantEffect(final OrimsChantEffect effect) {

@@ -65,7 +65,7 @@ public class AllyEncampment extends CardImpl {
         // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
 
-        // {T} Add one mana of any color to your mana pool. Spend this mana only to cast an Ally spell.
+        // {T} Add one mana of any color. Spend this mana only to cast an Ally spell.
         this.addAbility(new ConditionalAnyColorManaAbility(new TapSourceCost(), 1, new ConditionalSpellManaBuilder(FILTER), true));
 
         // {1}, {T}, Sacrifice Ally Encampment: Return target Ally you control to its owner's hand.

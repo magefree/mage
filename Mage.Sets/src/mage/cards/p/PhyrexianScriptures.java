@@ -86,7 +86,7 @@ public class PhyrexianScriptures extends CardImpl {
         // III — Exile all cards from all opponents' graveyards.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_III,
                 new ExileGraveyardAllPlayersEffect(StaticFilters.FILTER_CARD_CARDS, TargetController.OPPONENT)
-                        .setText("exile all cards from all opponents' graveyards"));
+        );
         this.addAbility(sagaAbility);
     }
 

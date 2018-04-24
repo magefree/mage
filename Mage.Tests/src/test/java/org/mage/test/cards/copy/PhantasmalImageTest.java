@@ -138,7 +138,6 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
      * this creature becomes the target of a spell or ability, sacrifice it"
      */
     @Test
-    @Ignore
     public void testCopyAlreadyTransformed() {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 5);
         addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
