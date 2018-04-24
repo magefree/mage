@@ -30,6 +30,7 @@ package mage.server.util;
 
 import java.io.IOException;
 import java.util.Properties;
+import mage.server.http.util.JwtAuthHelper;
 import org.apache.log4j.Logger;
 
 /**
@@ -53,7 +54,7 @@ public final class Config {
         numAcceptThreads = Integer.parseInt(p.getProperty("numAcceptThreads"));
         maxPoolSize = Integer.parseInt(p.getProperty("numPoolSize"));
         leasePeriod = Integer.parseInt(p.getProperty("leasePeriod"));
-        
+
         remoteServer = p.getProperty("remote-server");
         maxGameThreads = Integer.parseInt(p.getProperty("max-game-threads"));
         maxSecondsIdle = Integer.parseInt(p.getProperty("max-seconds-idle"));
@@ -61,6 +62,7 @@ public final class Config {
         maxUserNameLength = Integer.parseInt(p.getProperty("maxUserNameLength"));
         userNamePattern = p.getProperty("userNamePattern");
         saveGameActivated = Boolean.parseBoolean(p.getProperty("saveGameActivated"));
+        signingKey = p.getProperty("signingKey");
     }
 
     public static final String remoteServer;
@@ -76,5 +78,5 @@ public final class Config {
     public static final int maxUserNameLength;
     public static final String userNamePattern;
     public static final boolean saveGameActivated;
-
+    public static final String signingKey;
 }

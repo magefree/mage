@@ -1,0 +1,183 @@
+#!/usr/bin/env ruby -r json -r pp -r open-uri -r ostruct -r hashie -r stringio -r pry -W0
+
+# Very crud script that you can use to interact with a
+# running game started via the xmage client. It's meant for development only.
+#
+# You'll need the following gems:
+# - pry
+# - hashie
+# - json
+#
+#
+$jwt = ARGV.first
+$jwt = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJob29wdGllNDUifQ.B8kBnOIC_u5R431W1iYx1UgwAC5mrTa2ubgFBmvjUPA" if $jwt.nil?
+
+BASE_CMD = %Q[curl -X GET -s -H "Authorization: Bearer #{$jwt}"]
+
+def with_error_handling
+  begin
+    yield
+  rescue => e
+    binding.pry
+    Hashie::Mash.new({})
+  end
+end
+
+def clear
+  @table = @state = nil
+end
+
+def table
+  with_error_handling do
+    url = 'http://localhost:9000/tables/'
+    resp = `#{[BASE_CMD, url].join(" ")}`
+    Hashie::Mash.new(JSON(resp).first)
+  end
+end
+
+def players
+  Array(table.seats)
+end
+
+def active_player
+  players.detect {|p| p.isActive }
+end
+
+# A UUID, not a player
+def me
+  players.first.playerId
+end
+
+def game_uuid
+  Array(table.games).last
+end
+
+# The Full GameView object
+def state
+  state_url = "http://localhost:9000/games/#{game_uuid}/players/#{me}"
+  cmd = [BASE_CMD, state_url].join(" ")
+  Hashie::Mash.new(JSON(`#{cmd}`))
+end
+
+# These are the cards you can play from your hand.
+def playable
+  state.hand.values.select {|c| Array(state.canPlayInHand).include?(c.id) }
+end
+
+def stack
+  state.stack.values
+end
+
+def lands(hand: false, untapped: false)
+  playerId = me
+  land = state.players.detect {|p| p.playerId == playerId }.battlefield.values.select do |c|
+    c.cardTypes.include?("LAND")
+  end
+  land = land.select {|c| !c.tapped } if untapped
+  land
+end
+
+# :ok and :done are how you progress through the phases.
+# On the xmage client this is the "Done" button. I've got
+# a little autopilot function that I use in my pry session
+# to run this in a loop.
+def ok
+  with_error_handling do
+    put = "-X PUT"
+    state_url = "http://localhost:9000/games/#{game_uuid}/send_boolean/true"
+    cmd = [BASE_CMD, put, state_url].join(" ")
+    Hashie::Mash.new(JSON(`#{cmd}`))
+  end
+  render
+end
+
+def done
+  with_error_handling do
+    put = "-X PUT"
+    state_url = "http://localhost:9000/games/#{game_uuid}/send_boolean/true"
+    cmd = [BASE_CMD, put, state_url].join(" ")
+    Hashie::Mash.new(JSON(`#{cmd}`))
+  end
+end
+
+def click(card)
+  with_error_handling do
+    put = "-X PUT"
+    state_url = "http://localhost:9000/games/#{game_uuid}/send_uuid/#{card.id}"
+    cmd = [BASE_CMD, put, state_url].join(" ")
+    Hashie::Mash.new(JSON(`#{cmd}`))
+  end
+end
+
+# Mostly came as #click, except takes an index so you can pick cards by index.
+def pick(card: nil, index: nil)
+  return unless card || index
+  perm = card || playable[index - 1]
+
+  if perm
+    click perm
+    clear
+  end
+end
+
+# kinda works, but has issues.
+def pay
+  if my_turn? &&  card = stack.first and !card.paid
+    pick card: lands(untapped: true)
+    pay unless card = stack.first and !card.paid
+  end
+end
+
+def my_turn?
+  state.activePlayerName == state.priorityPlayerName
+end
+
+def header(title)
+  return unless title
+  puts "#{title.upcase} ".ljust(50, "=")
+end
+
+def render_card(card, i)
+  types = [card.superTypes, card.cardTypes.compact, card.subTypes.compact].flatten.compact.join(" ")
+  short_type = card.cardTypes.first || ""
+  "[#{short_type[0..3]}]  #{card.name}".ljust(35) << card.manaCost.join.rjust(10)
+end
+
+def render_playables
+  header "SELECT NEXT CARD"
+  playable.map.with_index {|card,i|
+    render_card(card, i)
+  }
+end
+
+def render
+  header "battlefield"
+  Array(state.players).each_with_index do |player,i|
+    puts
+    puts "#{player.name}".ljust(35, "-") << "[#{player.life}]".rjust(10, "-")
+    player.battlefield.values.sort_by { |c| c.cardTypes.first }.each_with_index do |card,i|
+      puts render_card(card, i)
+    end
+  end
+
+  puts
+  header "stack"
+  stack.each_with_index do |card, i|
+    puts render_card(card, i)
+  end
+
+  puts
+  header "hand"
+  state.hand.values.sort_by { |c| c.cardTypes.first }.each_with_index do |card,i|
+    puts render_card(card, i)
+  end
+
+  puts
+  header [state.activePlayerName, state.phase, state.step].join(" ")
+  header active_player&.name
+  puts
+  puts render_playables.map.with_index {|card_disp, i| "#{i + 1}.) #{card_disp}" }
+end
+
+render
+binding.pry

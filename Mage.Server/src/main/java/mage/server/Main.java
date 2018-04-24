@@ -45,6 +45,9 @@ import mage.server.draft.CubeFactory;
 import mage.server.game.DeckValidatorFactory;
 import mage.server.game.GameFactory;
 import mage.server.game.PlayerFactory;
+import mage.server.graphql.HttpMain;
+import mage.server.http.Application;
+import mage.server.http.util.JwtAuthHelper;
 import mage.server.record.UserStatsRepository;
 import mage.server.tournament.TournamentFactory;
 import mage.server.util.ConfigSettings;
@@ -224,8 +227,15 @@ public final class Main {
             if (!isAlreadyRunning(serverLocator)) {
                 server = new MageTransporterServer(serverLocator, new MageServerImpl(adminPassword, testMode), MageServer.class.getName(), new MageServerInvocationHandler());
                 server.start();
+
+                logger.info("Starting MAGE REST Server");
+                System.out.println("JWT for development (username: xmagedev): " + JwtAuthHelper.mintJwt("xmagedev"));
+
+                Application.main(new String[]{});
+
                 logger.info("Started MAGE server - listening on " + connection.toString());
 
+                HttpMain.main(new String[]{});
                 if (testMode) {
                     logger.info("MAGE server running in test mode");
                 }

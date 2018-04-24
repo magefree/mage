@@ -1,0 +1,131 @@
+enum CardType {
+  ARTIFACT
+  CONSPIRACY
+  CREATURE
+  ENCHANTMENT
+  INSTANT
+  LAND
+  PLANESWALKER
+  SORCERY
+  TRIBAL
+}
+
+type Player {
+  name: String!
+  id: ID! @isUnique
+}
+
+type Counter {
+  count: Int!
+  name: String!
+}
+
+type CardView {
+  name: String!
+  id: ID! @isUnique
+  parentId: String
+  setCode: String! # Scryfall Set Code (xln, m15, etc)
+  setNumber: Int! # Scryfall collector/set number.
+  power: Int
+  toughness: Int
+  manaCost: String
+  cardTypes: [CardType!]!
+  subTypes: [String!]!
+  superTypes: [String!]!
+  counters: [Counter!]! @relation(name: "Counter")
+}
+
+type PermanentView {
+  tapped: Boolean
+  damage: Int!
+  copy: Boolean
+  attachedTo: String
+  morphed: Boolean
+  manifested: Boolean
+  original: CardView! @relation(name: "CardView")!
+  summoningSickness: Boolean
+}
+
+ type PlayerView {
+   id: ID!
+   name: String!
+   life: Int!
+   wins: Int!
+   winsNeeded: Int!
+   exciles: [CardView!]!
+   graveyard: [CardView!]!
+   libraryCount: Int!
+   topCard: CardView
+   battlefield: [PermanentView!]!
+   hasPriority: Boolean
+   isActive: Boolean
+ }
+
+ type CombatView {
+   defenderId: ID!
+   attackers: [CardView!]!
+   blockers: [CardView!]!
+ }
+
+ type GameView {
+   players: [PlayerView!]!
+   hand: [CardView]
+   canPlayInHand: [ID] # String's of cards in hand which are playable right now
+   activePlayerId: ID!
+   turn: Int!
+   stack: [CardView!]!
+   combat: [CombatView!]!
+ }
+
+ type TableView {
+   name: Str!
+   id: ID!
+   seats: [Player!]!
+ }
+
+scalar JWT
+
+
+type Query {
+  game(id: ID!): GameView
+  tables: [TableView]
+  players: [Player]
+}
+
+
+type Mutation {
+  # This will get us an authenticated JWT token, which will be used
+  # accross requests for authentication. It'll also establish a session
+  # on the server.
+  login(username: String!, password: String!): JWT
+
+  # Clears the user's session and sets user's state to offline
+  disconnect(): Boolean
+
+  # Fired when you click on a permanent, sends permanent's
+  # String to the server; server decides how that effects the board state
+  sendPlayerUUID(value: ID!): GameView
+
+  # Fired when you click DONE, or respond to question
+  sendPlayerBoolean(value: Boolean!): GameView
+
+  # Fired when you choose a value
+  sendPlayerInteger(value: Int!): GameView
+
+  # Fired when player chooses a String value
+  sendPlayerString(value: String!): GameView
+
+  # Used to make game tables
+  createTable(name: String!, gameType: String!, numSeats: Int!): TableView
+
+  # Join a table
+  joinTable(tableId: String!): TableView
+
+  # Start a Game
+  startGame(tableId: String!): GameView
+}
+
+schema {
+  query: Query
+  mutation: Mutation
+}
