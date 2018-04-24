@@ -53,6 +53,7 @@ import mage.choices.Choice;
 import mage.choices.ChoiceColor;
 import mage.constants.*;
 import mage.counters.CounterType;
+import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.*;
@@ -390,7 +391,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         if (target.getOriginalTarget() instanceof TargetCardInYourGraveyard
                 || target.getOriginalTarget() instanceof TargetCardInASingleGraveyard) {
             List<UUID> alreadyTargetted = target.getTargets();
-            List<Card> cards = new ArrayList<>(game.getPlayer(abilityControllerId).getGraveyard().getCards(game));
+            List<Card> cards = new ArrayList<>(game.getPlayer(abilityControllerId).getGraveyard().getCards((FilterCard) target.getFilter(), game));
             while (!cards.isEmpty()) {
                 Card card = pickTarget(cards, outcome, target, null, game);
                 if (card != null && alreadyTargetted != null && !alreadyTargetted.contains(card.getId())) {
@@ -726,7 +727,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             return false;
         }
         if (target.getOriginalTarget() instanceof TargetCardInYourGraveyard) {
-            List<Card> cards = new ArrayList<>(game.getPlayer(abilityControllerId).getGraveyard().getCards(game));
+            List<Card> cards = new ArrayList<>(game.getPlayer(abilityControllerId).getGraveyard().getCards((FilterCard) target.getFilter(), game));
             while (!target.isChosen() && !cards.isEmpty()) {
                 Card card = pickTarget(cards, outcome, target, source, game);
                 if (card != null) {

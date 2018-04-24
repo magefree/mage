@@ -70,7 +70,7 @@ public final class StaticFilters {
     static {
         FILTER_CARD_CREATURE_YOUR_GRAVEYARD.setLockedFilter(true);
     }
-    public static final FilterCard FILTER_CARD_LAND = new FilterLandCard();
+    public static final FilterLandCard FILTER_CARD_LAND = new FilterLandCard();
 
     static {
         FILTER_CARD_LAND.setLockedFilter(true);
