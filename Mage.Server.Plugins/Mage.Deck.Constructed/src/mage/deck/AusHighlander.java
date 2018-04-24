@@ -131,7 +131,7 @@ public class AusHighlander extends Constructed {
                     || cn.equals("Tinker")
                     || cn.equals("Vampiric Tutor")
                     || cn.equals("Yawgmoth's Will")
-                    || cn.equals("Mox Sapphire.")) {
+                    || cn.equals("Mox Sapphire")) {
                 totalPoints += 3;
                 invalid.put(cn, "3 points");
             }
@@ -143,7 +143,8 @@ public class AusHighlander extends Constructed {
                     || cn.equals("Protean Hulk")
                     || cn.equals("Skullclamp")
                     || cn.equals("Strip Mine")
-                    || cn.equals("Tolarian Academy.")) {
+                    || cn.equals("Tolarian Academy")
+                    || cn.equals("Treasure Cruise")) {
                 totalPoints += 2;
                 invalid.put(cn, "2 points");
             }
@@ -178,7 +179,6 @@ public class AusHighlander extends Constructed {
                     || cn.equals("Tainted Pact")
                     || cn.equals("Time Spiral")
                     || cn.equals("Timetwister")
-                    || cn.equals("Treasure Cruise")
                     || cn.equals("True-Name Nemesis")
                     || cn.equals("Umezawa's Jitte")
                     || cn.equals("Wasteland")
