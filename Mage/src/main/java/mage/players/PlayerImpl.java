@@ -3461,6 +3461,16 @@ public abstract class PlayerImpl implements Player, Serializable {
                     }
                 }
                 break;
+            case OUTSIDE:
+                for (Card card : cards) {
+                    if (card instanceof Permanent) {
+                        game.getBattlefield().removePermanent(((Permanent) card).getId());
+                        ZoneChangeEvent event = new ZoneChangeEvent(card.getId(), (source == null ? null : source.getSourceId()),
+                                byOwner ? card.getOwnerId() : getId(), Zone.BATTLEFIELD, Zone.OUTSIDE, appliedEffects);
+                        game.fireEvent(event);
+                    }
+                }
+                break;
             default:
                 throw new UnsupportedOperationException("to Zone" + toZone.toString() + " not supported yet");
         }

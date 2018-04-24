@@ -44,7 +44,6 @@ import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import static mage.filter.predicate.permanent.ControllerControlsIslandPredicate.filter;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -59,11 +58,11 @@ import mage.util.CardUtil;
 public class GraspOfFate extends CardImpl {
 
     public GraspOfFate(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}{W}");
 
         // When Grasp of Fate enters the battlefield, for each opponent, exile up to one target nonland permanent that player controls until Grasp of Fate leaves the battlefield.
         Ability ability = new EntersBattlefieldTriggeredAbility(new GraspOfFateExileEffect());
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent());
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
         this.addAbility(ability);
     }
@@ -99,7 +98,7 @@ class GraspOfFateExileEffect extends OneShotEffect {
 
     public GraspOfFateExileEffect() {
         super(Outcome.Benefit);
-        this.staticText = "exile up to one target nonland permanent that player controls until {this} leaves the battlefield";
+        this.staticText = "for each opponent, exile up to one target nonland permanent that player controls until {this} leaves the battlefield";
     }
 
     public GraspOfFateExileEffect(final GraspOfFateExileEffect effect) {
@@ -114,7 +113,7 @@ class GraspOfFateExileEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
+        if (permanent != null) { // 11/4/2015: If Grasp of Fate leaves the battlefield before its triggered ability resolves, no nonland permanents will be exiled.
             return new ConditionalOneShotEffect(new ExileTargetEffect(CardUtil.getCardExileZoneId(game, source), permanent.getIdName(), Zone.BATTLEFIELD, true), SourceOnBattlefieldCondition.instance).apply(game, source);
         }
         return false;
