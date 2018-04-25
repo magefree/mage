@@ -32,11 +32,11 @@ import mage.MageInt;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.DamagePlayersEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterHistoricSpell;
 
@@ -58,7 +58,7 @@ public class CabalPaladin extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(
                 new DamagePlayersEffect(Outcome.Damage, new StaticValue(2), TargetController.OPPONENT)
                         .setText("{this} deals 2 damage to each opponent. <i>(Artifacts, legendaries, and Sagas are historic.)</i>"),
-                new FilterHistoricSpell(), false
+                new FilterHistoricSpell("a historic spell"), false
         ));
     }
 
