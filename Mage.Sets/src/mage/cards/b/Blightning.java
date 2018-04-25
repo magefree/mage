@@ -38,7 +38,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetPlayerOrPlaneswalker;
 import mage.target.targetpointer.FixedTarget;
@@ -86,18 +85,12 @@ class BlightningEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getFirstTarget());
-        if (player == null) {
-            Permanent permanent = game.getPermanent(source.getFirstTarget());
-            if (permanent != null) {
-                player = game.getPlayer(permanent.getControllerId());
-            }
-        }
+        Player player = game.getPlayerOrPlaneswalkerController(source.getFirstTarget());
         if (player == null) {
             return false;
         }
         Effect effect = new DiscardTargetEffect(2);
         effect.setTargetPointer(new FixedTarget(player.getId(), game));
-        return true;
+        return effect.apply(game, source);
     }
 }
