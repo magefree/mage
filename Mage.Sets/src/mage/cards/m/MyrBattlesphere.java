@@ -112,7 +112,7 @@ class MyrBattlesphereTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent source = game.getPermanent(event.getSourceId());
-        if (source != null && source.getControllerId().equals(controllerId)) {
+        if (source != null && source.getId() == this.getSourceId()) {
             UUID defenderId = game.getCombat().getDefenderId(event.getSourceId());
             this.getEffects().get(0).setTargetPointer(new FixedTarget(defenderId));
             return true;
@@ -122,7 +122,7 @@ class MyrBattlesphereTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a creature you control attacks, you may tap X untapped Myr you control. If you do, {this} gets +X/+0 until end of turn and deals X damage to the player or planeswalker it’s attacking.";
+        return "Whenever {this} attacks, you may tap X untapped Myr you control. If you do, {this} gets +X/+0 until end of turn and deals X damage to the player or planeswalker it’s attacking.";
     }
 }
 
