@@ -76,7 +76,13 @@
             <version>${project.version}</version>
             <scope>runtime</scope>
         </dependency>
-        <dependency>
+         <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>mage-game-brawlduel</artifactId>
+            <version>${project.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+       <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-compress</artifactId>
             <version>1.16.1</version>
@@ -85,6 +91,12 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>mage-game-commanderfreeforall</artifactId>
+            <version>${project.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>mage-game-brawlfreeforall</artifactId>
             <version>${project.version}</version>
             <scope>runtime</scope>
         </dependency>
