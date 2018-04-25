@@ -18,8 +18,7 @@ import mage.target.TargetPlayer;
 import mage.target.common.TargetNonlandPermanent;
 
 /**
- * @author JRHerlehy
- *         Created on 4/8/18.
+ * @author JRHerlehy Created on 4/8/18.
  */
 public class KarnsTemporalSundering extends CardImpl {
 
@@ -33,7 +32,7 @@ public class KarnsTemporalSundering extends CardImpl {
         // Target player takes an extra turn after this one. Return up to one target nonland permanent to its owner’s hand. Exile Karn’s Temporal Sundering.
         this.getSpellAbility().addEffect(new KarnsTemporalSunderingEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
-        this.getSpellAbility().addTarget(new TargetNonlandPermanent());
+        this.getSpellAbility().addTarget(new TargetNonlandPermanent(0, 1, false));
         this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
     }
 
