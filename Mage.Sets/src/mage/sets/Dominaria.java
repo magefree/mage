@@ -158,7 +158,7 @@ public class Dominaria extends ExpansionSet {
         cards.add(new SetCardInfo("Helm of the Host", 217, Rarity.RARE, mage.cards.h.HelmOfTheHost.class));
         cards.add(new SetCardInfo("Hinterland Harbor", 240, Rarity.RARE, mage.cards.h.HinterlandHarbor.class));
         cards.add(new SetCardInfo("History of Benalia", 21, Rarity.MYTHIC, mage.cards.h.HistoryOfBenalia.class));
-        cards.add(new SetCardInfo("Homarid Explorer", 53, Rarity.UNCOMMON, mage.cards.h.HomaridExplorer.class));
+        cards.add(new SetCardInfo("Homarid Explorer", 53, Rarity.COMMON, mage.cards.h.HomaridExplorer.class));
         cards.add(new SetCardInfo("Howling Golem", 218, Rarity.UNCOMMON, mage.cards.h.HowlingGolem.class));
         cards.add(new SetCardInfo("Icy Manipulator", 219, Rarity.UNCOMMON, mage.cards.i.IcyManipulator.class));
         cards.add(new SetCardInfo("In Bolas's Clutches", 54, Rarity.UNCOMMON, mage.cards.i.InBolassClutches.class));
