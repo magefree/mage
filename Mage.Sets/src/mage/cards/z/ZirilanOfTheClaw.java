@@ -59,7 +59,7 @@ import mage.target.targetpointer.FixedTarget;
 public class ZirilanOfTheClaw extends CardImpl {
 
     public ZirilanOfTheClaw(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.VIASHINO, SubType.SHAMAN);
         this.power = new MageInt(3);
@@ -109,7 +109,7 @@ class ZirilanOfTheClawEffect extends OneShotEffect {
             if (controller.searchLibrary(target, game)) {
                 Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
                 if (card != null) {
-                    card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), source.getControllerId());
+                    controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                     Permanent permanent = game.getPermanent(card.getId());
                     if (permanent != null) {
                         // gains haste
