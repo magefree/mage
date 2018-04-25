@@ -29,7 +29,8 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.Ability;
+import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -42,12 +43,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
 import mage.game.permanent.token.SaprolingToken;
 
 /**
@@ -55,6 +52,12 @@ import mage.game.permanent.token.SaprolingToken;
  * @author TheElk801
  */
 public class SlimefootTheStowaway extends CardImpl {
+
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Saproling you control");
+
+    static {
+        filter.add(new SubtypePredicate(SubType.SAPROLING));
+    }
 
     public SlimefootTheStowaway(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{G}");
@@ -65,7 +68,9 @@ public class SlimefootTheStowaway extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever a Saproling you control dies, Slimefoot, the Stowaway deals 1 damage to each opponent and you gain 1 life.
-        this.addAbility(new SlimefootTheStowawayTriggeredAbility());
+        Ability ability = new DiesCreatureTriggeredAbility(new DamagePlayersEffect(1, TargetController.OPPONENT), false, filter);
+        ability.addEffect(new GainLifeEffect(1));
+        this.addAbility(ability);
 
         // {4}: Create a 1/1 green Saproling creature token.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SaprolingToken()), new ManaCostsImpl("{4}")));
@@ -78,50 +83,5 @@ public class SlimefootTheStowaway extends CardImpl {
     @Override
     public SlimefootTheStowaway copy() {
         return new SlimefootTheStowaway(this);
-    }
-}
-
-class SlimefootTheStowawayTriggeredAbility extends TriggeredAbilityImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Saproling");
-
-    static {
-        filter.add(new SubtypePredicate(SubType.SAPROLING));
-    }
-
-    public SlimefootTheStowawayTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DamagePlayersEffect(1, TargetController.OPPONENT), false);
-        this.addEffect(new GainLifeEffect(1));
-    }
-
-    public SlimefootTheStowawayTriggeredAbility(final SlimefootTheStowawayTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.GRAVEYARD) {
-            Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            if (permanent != null && permanent.getControllerId().equals(this.controllerId) && filter.match(permanent, game)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public SlimefootTheStowawayTriggeredAbility copy() {
-        return new SlimefootTheStowawayTriggeredAbility(this);
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever a Saproling you control dies, {this} deals 1 damage to each opponent and you gain 1 life.";
     }
 }
