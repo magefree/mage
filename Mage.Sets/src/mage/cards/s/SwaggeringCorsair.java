@@ -30,10 +30,8 @@ package mage.cards.s;
 import java.util.UUID;
 
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.common.RaidCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -56,11 +54,11 @@ public class SwaggeringCorsair extends CardImpl {
         this.toughness = new MageInt(2);
 
         // <i>Raid</i> - Swaggering Corsair enters the battlefield with a +1/+1 counter on it if you attacked with a creature this turn.
-        Ability ability = new ConditionalTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false),
+        this.addAbility(new EntersBattlefieldAbility(
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)),
                 RaidCondition.instance,
-                "<i>Raid</i> &mdash; Swaggering Corsair enters the battlefield with a +1/+1 counter on it if you attacked with a creature this turn.");
-        this.addAbility(ability, new PlayerAttackedWatcher());
+                "<i>Raid</i> &mdash; {this} enters the battlefield with a +1/+1 counter on it if you attacked with a creature this turn.", ""
+        ), new PlayerAttackedWatcher());
     }
 
     public SwaggeringCorsair(final SwaggeringCorsair card) {
