@@ -1,24 +1,55 @@
 syntax: glob
+
+# Mage.Client
 Mage.Client/*.dck
 Mage.Client/db
 Mage.Client/gamelogs
-Mage.Client/mageclient.log
+Mage.Client/gamelogsJson
+Mage.Client/*.log
 Mage.Client/plugins/images
 Mage.Client/plugins/plugin.data
 Mage.Client/target
 Mage.Common/target
+/db
+/gamelogs
+/mageclient.log
+
+# Mage.Plugins
 Mage.Plugins/Mage.Card.Plugin/target
 Mage.Plugins/Mage.Counter.Plugin/target
 Mage.Plugins/Mage.Theme.Plugin/target
 Mage.Plugins/Mage.Rating.Plugin/target
+
+# Mage.Server
+Mage.Server/config/init.txt
+Mage.Server/saved
+Mage.Server/target
+Mage.Server/db
+Mage.Server/cache
+Mage.Server/mageserver.log
+Mage.Server/magediag.log
+Mage.Server/extensions
+/saved
+/db
+/cache
+/mageserver.log
+/magediag.log
+/extensions
+
 Mage.Server.Console/target/
 Mage.Server.Console/mageadmin.log
 Mage.Server.Plugins/Mage.Deck.Constructed/target
 Mage.Server.Plugins/Mage.Deck.Limited/target
+Mage.Server.Plugins/Mage.Game.BrawlDuel/target/
+Mage.Server.Plugins/Mage.Game.BrawlFreeForAll/target/
+Mage.Server.Plugins/Mage.Game.CanadianHighlanderDuel/target
 Mage.Server.Plugins/Mage.Game.CommanderDuel/target
 Mage.Server.Plugins/Mage.Game.CommanderFreeForAll/target/
 Mage.Server.Plugins/Mage.Game.FreeForAll/target
 Mage.Server.Plugins/Mage.Game.MomirDuel/target
+Mage.Server.Plugins/Mage.Game.MomirGame/target/
+Mage.Server.Plugins/Mage.Game.PennyDreadfulCommanderFreeForAll/target
+Mage.Server.Plugins/Mage.Game.FreeformCommanderFreeForAll/target/
 Mage.Server.Plugins/Mage.Game.TinyLeadersDuel/target
 Mage.Server.Plugins/Mage.Game.TwoPlayerDuel/target
 Mage.Server.Plugins/Mage.Player.AI.DraftBot/target
@@ -30,25 +61,33 @@ Mage.Server.Plugins/Mage.Player.Human/target
 Mage.Server.Plugins/Mage.Tournament.BoosterDraft/target
 Mage.Server.Plugins/Mage.Tournament.Constructed/target
 Mage.Server.Plugins/Mage.Tournament.Sealed/target
-Mage.Server/config/init.txt
-Mage.Server/saved
-Mage.Server/target
-Mage.Server/db
-Mage.Server/cache
-Mage.Server/mageserver.log
-Mage.Server/magediag.log
+
+# Mage.Sets
 Mage.Sets/target
+
+# Mage.Stats
 Mage.Stats/server.log
 Mage.Stats/mageserver.log
 Mage.Stats/magediag.log
+
+# Mage.Tests
 Mage.Tests/target
 Mage.Tests/cache
 Mage.Tests/db
 Mage.Tests/Mage.log
 Mage.Tests/watchdog.log
+
+# Mage
 Mage/target
+
+# Mage.Updater
 Mage.Updater/target
 mage.updater.client/target
+
+# Mage.Verify
+Mage.Verify/target
+Mage.Verify/AllCards.json.zip
+Mage.Verify/AllSets.json.zip
 
 releases
 Utils/author.txt
@@ -92,8 +131,11 @@ hs_err*.log
 *.txt
 Mage.Client/serverlist.txt
 /bin/
+/out/
 /target/
 
 client_secrets.json
 
 dependency-reduced-pom.xml
+mage-bundle
+/Mage.Client/game-*.json

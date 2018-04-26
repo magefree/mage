@@ -37,7 +37,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.constants.Outcome;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.targetpointer.FirstTargetPointer;
@@ -77,8 +76,7 @@ public class ExileTargetForSourceEffect extends OneShotEffect {
                         }
                     }
                 }
-            }
-            else {
+            } else {
                 for (UUID targetId : targetPointer.getTargets(game, source)) {
                     MageObject mageObject = game.getObject(targetId);
                     if (mageObject != null) {
@@ -100,6 +98,8 @@ public class ExileTargetForSourceEffect extends OneShotEffect {
 
         if (mode.getTargets().isEmpty()) {
             return "exile it";
+        } else if (mode.getTargets().get(0).getTargetName().startsWith("another")) {
+            return "exile " + mode.getTargets().get(0).getTargetName();
         } else {
             return "exile target " + mode.getTargets().get(0).getTargetName();
         }

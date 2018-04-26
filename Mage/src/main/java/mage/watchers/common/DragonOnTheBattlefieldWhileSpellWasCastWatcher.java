@@ -33,6 +33,7 @@ import java.util.UUID;
 
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.RevealTargetFromHandCost;
+import mage.constants.SubType;
 import mage.constants.WatcherScope;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
@@ -46,12 +47,12 @@ import mage.watchers.Watcher;
  */
 public class DragonOnTheBattlefieldWhileSpellWasCastWatcher extends Watcher {
 
-    private static final FilterPermanent filter = new FilterPermanent("Dragon", "Dragons");
+    private static final FilterPermanent filter = new FilterPermanent(SubType.DRAGON, "Dragons");
 
     private final Set<UUID> castWithDragonOnTheBattlefield = new HashSet<>();
 
     public DragonOnTheBattlefieldWhileSpellWasCastWatcher() {
-        super("DragonOnTheBattlefieldWhileSpellWasCastWatcher", WatcherScope.GAME);
+        super(DragonOnTheBattlefieldWhileSpellWasCastWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public DragonOnTheBattlefieldWhileSpellWasCastWatcher(final DragonOnTheBattlefieldWhileSpellWasCastWatcher watcher) {

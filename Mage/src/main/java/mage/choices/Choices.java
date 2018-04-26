@@ -24,16 +24,17 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.choices;
+
+import mage.abilities.Ability;
+import mage.constants.Outcome;
+import mage.game.Game;
+import mage.players.Player;
 
 import java.util.ArrayList;
 import java.util.List;
-import mage.constants.Outcome;
-import mage.abilities.Ability;
-import mage.game.Game;
-import mage.players.Player;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -43,11 +44,12 @@ public class Choices extends ArrayList<Choice> {
 
     protected Outcome outcome;
 
-    public Choices() {}
+    public Choices() {
+    }
 
     public Choices(final Choices choices) {
         this.outcome = choices.outcome;
-        for (Choice choice: choices) {
+        for (Choice choice : choices) {
             this.add(choice.copy());
         }
     }
@@ -57,23 +59,19 @@ public class Choices extends ArrayList<Choice> {
     }
 
     public List<Choice> getUnchosen() {
-        List<Choice> unchosen = new ArrayList<Choice>();
-        for (Choice choice: this) {
-            if (!choice.isChosen()) {
-                unchosen.add(choice);
-            }
-        }
-        return unchosen;
+        return stream()
+                .filter(choice -> !choice.isChosen())
+                .collect(Collectors.toList());
     }
 
     public void clearChosen() {
-        for (Choice choice: this) {
+        for (Choice choice : this) {
             choice.clearChoice();
         }
     }
 
     public boolean isChosen() {
-        for (Choice choice: this) {
+        for (Choice choice : this) {
             if (!choice.isChosen()) {
                 return false;
             }

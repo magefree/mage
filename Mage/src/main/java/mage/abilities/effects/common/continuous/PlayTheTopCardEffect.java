@@ -32,7 +32,6 @@ import mage.abilities.Ability;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.cards.Card;
 import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.filter.FilterCard;
@@ -78,7 +77,7 @@ public class PlayTheTopCardEffect extends AsThoughEffectImpl {
         if (cardOnTop != null
                 && affectedControllerId.equals(source.getControllerId())
                 && cardOnTop.getOwnerId().equals(source.getControllerId())
-                && (!cardOnTop.getManaCost().isEmpty() || cardOnTop.getCardType().contains(CardType.LAND))
+                && (!cardOnTop.getManaCost().isEmpty() || cardOnTop.isLand())
                 && filter.match(cardOnTop, game)) {
             Player player = game.getPlayer(cardOnTop.getOwnerId());
             if (player != null && cardOnTop.equals(player.getLibrary().getFromTop(game))) {

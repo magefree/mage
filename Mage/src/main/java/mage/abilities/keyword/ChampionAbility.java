@@ -28,6 +28,7 @@
 package mage.abilities.keyword;
 
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -39,14 +40,18 @@ import mage.abilities.costs.CostImpl;
 import mage.abilities.effects.common.ReturnFromExileForSourceEffect;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.cards.Card;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
@@ -71,11 +76,15 @@ import mage.util.CardUtil;
  */
 public class ChampionAbility extends StaticAbility {
 
-    protected String[] subtypes;
+    protected EnumSet<SubType> subtypes;
     protected String objectDescription;
 
-    public ChampionAbility(Card card, String subtype) {
-        this(card, new String[]{subtype});
+    public ChampionAbility(Card card, SubType subtype, boolean requiresCreature) {
+        this(card, EnumSet.of(subtype), requiresCreature);
+    }
+
+    public ChampionAbility(Card card, boolean requiresCreature) {
+        this(card, EnumSet.noneOf(SubType.class), requiresCreature);
     }
 
     /**
@@ -85,16 +94,18 @@ public class ChampionAbility extends StaticAbility {
      * @param card
      * @param subtypes subtypes to champion with, if empty all creatures can be
      * used
+     * @param requiresCreature for cards that specifically require championing
+     * another creature
      */
-    public ChampionAbility(Card card, String[] subtypes) {
+    public ChampionAbility(Card card, EnumSet<SubType> subtypes, boolean requiresCreature) {
         super(Zone.BATTLEFIELD, null);
 
         this.subtypes = subtypes;
         StringBuilder sb = new StringBuilder("another ");
         ArrayList<Predicate<MageObject>> subtypesPredicates = new ArrayList<>();
-        if (!subtypes[0].isEmpty()) {
+        if (!subtypes.isEmpty()) {
             int i = 0;
-            for (String subtype : this.subtypes) {
+            for (SubType subtype : this.subtypes) {
                 subtypesPredicates.add(new SubtypePredicate(subtype));
                 if (i == 0) {
                     sb.append(subtype);
@@ -111,11 +122,14 @@ public class ChampionAbility extends StaticAbility {
         if (!subtypesPredicates.isEmpty()) {
             filter.add(Predicates.or(subtypesPredicates));
         }
+        if (requiresCreature) {
+            filter.add(new CardTypePredicate(CardType.CREATURE));
+        }
         filter.add(new AnotherPredicate());
 
         // When this permanent enters the battlefield, sacrifice it unless you exile another [object] you control.
         Ability ability1 = new EntersBattlefieldTriggeredAbility(
-                new SacrificeSourceUnlessPaysEffect(new ChampionExileCost(filter, new StringBuilder(card.getName()).append(" championed permanents").toString())), false);
+                new SacrificeSourceUnlessPaysEffect(new ChampionExileCost(filter, card.getName() + " championed permanents")), false);
         ability1.setRuleVisible(false);
         addSubAbility(ability1);
 
@@ -174,6 +188,9 @@ class ChampionExileCost extends CostImpl {
                         return false;
                     }
                     paid |= controller.moveCardToExileWithInfo(permanent, exileId, sourceObject.getIdName() + " championed permanents", sourceId, game, Zone.BATTLEFIELD, true);
+                    if (paid) {
+                        game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CREATURE_CHAMPIONED, permanent.getId(), sourceId, controllerId));
+                    }
                 }
             }
         }

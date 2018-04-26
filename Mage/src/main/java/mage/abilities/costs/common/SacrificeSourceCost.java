@@ -41,7 +41,7 @@ import mage.game.permanent.Permanent;
 public class SacrificeSourceCost extends CostImpl {
 
     public SacrificeSourceCost() {
-        this.text = "Sacrifice {this}";
+        this.text = "sacrifice {this}";
     }
 
     public SacrificeSourceCost(SacrificeSourceCost cost) {
@@ -59,16 +59,13 @@ public class SacrificeSourceCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
-        if (!game.getPlayer(controllerId).canPaySacrificeCost()) {
-            return false;
-        }
         Permanent permanent = game.getPermanent(sourceId);
-        return permanent != null;
+        
+        return permanent != null && game.getPlayer(controllerId).canPaySacrificeCost(permanent, sourceId, controllerId, game);
     }
 
     @Override
     public SacrificeSourceCost copy() {
         return new SacrificeSourceCost(this);
     }
-
 }

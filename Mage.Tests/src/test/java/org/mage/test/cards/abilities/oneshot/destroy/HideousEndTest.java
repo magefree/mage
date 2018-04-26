@@ -51,10 +51,10 @@ public class HideousEndTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Plains");
         addCard(Zone.BATTLEFIELD, playerB, "Copper Myr");
         // Target artifact or creature you control gains protection from artifacts or from the color of your choice until end of turn.
-        addCard(Zone.HAND, playerB, "Apostle's Blessing");
+        addCard(Zone.HAND, playerB, "Blessed Breath");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Hideous End", "Copper Myr");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Apostle's Blessing", "Copper Myr");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Blessed Breath", "Copper Myr");
         setChoice(playerB, "Black");
         
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

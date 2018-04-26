@@ -31,6 +31,7 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardsImpl;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledLandPermanent;
@@ -47,12 +48,12 @@ import mage.util.CardUtil;
  */
 public class SweepEffect extends OneShotEffect {
 
-    private final String sweepSubtype;
+    private final SubType sweepSubtype;
 
-    public SweepEffect(String sweepSubtype) {
+    public SweepEffect(SubType sweepSubtype) {
         super(Outcome.Benefit);
         this.sweepSubtype = sweepSubtype;
-        this.staticText = "<i>Sweep</i> - Return any number of " + sweepSubtype + (sweepSubtype.endsWith("s") ? "" : "s") + " you control to their owner's hand";
+        this.staticText = "<i>Sweep</i> - Return any number of " + sweepSubtype + (sweepSubtype.getDescription().endsWith("s") ? "" : "s") + " you control to their owner's hand";
     }
 
     public SweepEffect(final SweepEffect effect) {
@@ -69,12 +70,12 @@ public class SweepEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            FilterPermanent filter = new FilterControlledLandPermanent(new StringBuilder("any number of ").append(sweepSubtype).append("s you control").toString());
+            FilterPermanent filter = new FilterControlledLandPermanent("any number of " + sweepSubtype + "s you control");
             filter.add(new SubtypePredicate(sweepSubtype));
             Target target = new TargetPermanent(0, Integer.MAX_VALUE, filter, true);
             if (controller.chooseTarget(outcome, target, source, game)) {
                 game.getState().setValue(CardUtil.getCardZoneString("sweep", source.getSourceId(), game), target.getTargets().size());
-                controller.moveCards(new CardsImpl(target.getTargets()), null, Zone.HAND, source, game);
+                controller.moveCards(new CardsImpl(target.getTargets()), Zone.HAND, source, game);
             }
             return true;
         }

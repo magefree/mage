@@ -53,13 +53,14 @@ public class ExileFromGraveCost extends CostImpl {
     private final List<Card> exiledCards = new ArrayList<>();
 
     public ExileFromGraveCost(TargetCardInYourGraveyard target) {
+        target.setNotTarget(true);
         this.addTarget(target);
         if (target.getMaxNumberOfTargets() > 1) {
             this.text = "Exile "
                     + (target.getNumberOfTargets() == 1 && target.getMaxNumberOfTargets() == Integer.MAX_VALUE ? "one or more"
-                            : ((target.getNumberOfTargets() < target.getMaxNumberOfTargets() ? "up to " : ""))
-                            + CardUtil.numberToText(target.getMaxNumberOfTargets()))
-                    + " " + target.getTargetName();
+                    : ((target.getNumberOfTargets() < target.getMaxNumberOfTargets() ? "up to " : ""))
+                    + CardUtil.numberToText(target.getMaxNumberOfTargets()))
+                    + ' ' + target.getTargetName();
         } else {
             this.text = "Exile " + target.getTargetName();
         }
@@ -69,11 +70,13 @@ public class ExileFromGraveCost extends CostImpl {
     }
 
     public ExileFromGraveCost(TargetCardInYourGraveyard target, String text) {
-        this(target);
+        target.setNotTarget(true);
+        this.addTarget(target);
         this.text = text;
     }
 
     public ExileFromGraveCost(TargetCardInASingleGraveyard target) {
+        target.setNotTarget(true);
         this.addTarget(target);
         this.text = "Exile " + target.getTargetName();
     }
@@ -90,16 +93,16 @@ public class ExileFromGraveCost extends CostImpl {
             if (targets.choose(Outcome.Exile, controllerId, sourceId, game)) {
                 for (UUID targetId : targets.get(0).getTargets()) {
                     Card card = game.getCard(targetId);
-                    if (card == null || !game.getState().getZone(targetId).equals(Zone.GRAVEYARD)) {
+                    if (card == null || game.getState().getZone(targetId) != Zone.GRAVEYARD) {
                         return false;
                     }
                     exiledCards.add(card);
                 }
+                Cards cardsToExile = new CardsImpl();
+                cardsToExile.addAll(exiledCards);
+                controller.moveCards(cardsToExile, Zone.EXILED, ability, game);
+                paid = true;
             }
-            Cards cardsToExile = new CardsImpl();
-            cardsToExile.addAll(exiledCards);
-            controller.moveCards(cardsToExile, Zone.EXILED, ability, game);
-            paid = true;
 
         }
         return paid;

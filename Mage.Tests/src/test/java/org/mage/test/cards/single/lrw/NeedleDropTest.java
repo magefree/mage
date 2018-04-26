@@ -40,7 +40,7 @@ public class NeedleDropTest extends CardTestPlayerBase {
 
     @Test
     public void testTargetShouldBeDamaged() {
-        // Needle Drop deals 1 damage to target creature or player that was dealt damage this turn.
+        // Needle Drop deals 1 damage to any target that was dealt damage this turn.
         addCard(Zone.HAND, playerA, "Needle Drop", 4);
         addCard(Zone.HAND, playerA, "Shock", 4);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 8);
@@ -67,7 +67,7 @@ public class NeedleDropTest extends CardTestPlayerBase {
 
     @Test
     public void testTargetIsNotConsideredDamagedNextTurn() {
-        // Needle Drop deals 1 damage to target creature or player that was dealt damage this turn.
+        // Needle Drop deals 1 damage to any target that was dealt damage this turn.
         addCard(Zone.HAND, playerA, "Needle Drop", 2);
         addCard(Zone.HAND, playerA, "Shock", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);

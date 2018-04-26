@@ -29,25 +29,26 @@
 package mage.game.permanent.token;
 
 import java.util.Arrays;
-import mage.constants.CardType;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
+import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
  * @author LoneFox
  */
-public class DemonToken extends Token {
+public class DemonToken extends TokenImpl {
 
     public DemonToken() {
         super("Demon", "5/5 black Demon creature token with flying");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
-        subtype.add("Demon");
+        subtype.add(SubType.DEMON);
         power = new MageInt(5);
         toughness = new MageInt(5);
         addAbility(FlyingAbility.getInstance());
-        availableImageSetCodes.addAll(Arrays.asList("INN", "AVR", "C14", "ORI"));
+        availableImageSetCodes.addAll(Arrays.asList("ISD", "AVR", "C14", "ORI"));
     }
 
     public DemonToken(final DemonToken token) {

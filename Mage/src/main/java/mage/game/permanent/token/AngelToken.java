@@ -6,17 +6,18 @@ import java.util.List;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
-public class AngelToken extends Token {
+public class AngelToken extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 
     static {
-        tokenImageSets.addAll(Arrays.asList("AVR", "C14", "CFX", "GTC", "ISD", "M14", "ORI", "ZEN"));
+        tokenImageSets.addAll(Arrays.asList("AVR", "C14", "CFX", "GTC", "ISD", "M14", "ORI", "SOI", "ZEN", "C15", "MM3"));
     }
 
     public AngelToken() {
-        this(null);
+        this((String)null);
     }
 
     public AngelToken(String setCode) {
@@ -26,9 +27,17 @@ public class AngelToken extends Token {
 
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
-        subtype.add("Angel");
+        subtype.add(SubType.ANGEL);
         power = new MageInt(4);
         toughness = new MageInt(4);
         addAbility(FlyingAbility.getInstance());
+    }
+
+    public AngelToken(final AngelToken token) {
+        super(token);
+    }
+
+    public AngelToken copy() {
+        return new AngelToken(this);
     }
 }

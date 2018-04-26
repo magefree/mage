@@ -28,6 +28,7 @@
 package mage.abilities.effects.common.continuous;
 
 import java.util.HashSet;
+import java.util.Set;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.choices.ChoiceImpl;
@@ -71,7 +72,7 @@ public class LoseAbilityOrAnotherAbilityTargetEffect extends LoseAbilityTargetEf
             ChoiceImpl chooseAbility = new ChoiceImpl();
             chooseAbility.setMessage("What ability do you wish to remove?");
 
-            HashSet<String> choice = new HashSet<>();
+            Set<String> choice = new HashSet<>();
 
             if (permanent.getAbilities().contains(ability)) {
                 choice.add(ability.getRule());
@@ -86,19 +87,18 @@ public class LoseAbilityOrAnotherAbilityTargetEffect extends LoseAbilityTargetEf
             Player player = game.getPlayer(source.getControllerId());
 
             if (player.choose(outcome, chooseAbility, game)) {
-                
                 String chosenAbility = chooseAbility.getChoice();
-                
                 if (chosenAbility.equals(ability.getRule())) {
                     while (permanent.getAbilities().contains(ability)) {
                         permanent.getAbilities().remove(ability);
                     }
-                }
-                else if (chosenAbility.equals(ability2.getRule())) {
+                } else if (chosenAbility.equals(ability2.getRule())) {
                     while (permanent.getAbilities().contains(ability2)) {
                         permanent.getAbilities().remove(ability2);
                     }
                 }
+            } else {
+                return false;
             }
         }
         return true;
@@ -123,7 +123,7 @@ public class LoseAbilityOrAnotherAbilityTargetEffect extends LoseAbilityTargetEf
         sb.append(" or ");
         sb.append(ability2.getRule());
         if (!duration.toString().isEmpty()) {
-            sb.append(" ").append(duration.toString());
+            sb.append(' ').append(duration.toString());
         }
         return sb.toString();
     }

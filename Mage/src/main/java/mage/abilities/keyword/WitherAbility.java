@@ -24,8 +24,7 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.abilities.keyword;
 
 import mage.constants.Zone;
@@ -37,26 +36,31 @@ import java.io.ObjectStreamException;
 /**
  * 702.77. Wither
  *
- *   702.77a. Wither is a static ability. Damage dealt to a creature by a source with wither isn't marked on that creature. Rather, it causes that many -1/-1 counters to be put on that creature. See rule 119.3.
+ * 702.77a. Wither is a static ability. Damage dealt to a creature by a source
+ * with wither isn't marked on that creature. Rather, it causes that many -1/-1
+ * counters to be put on that creature. See rule 119.3.
  *
- *   702.77b. If a permanent leaves the battlefield before an effect causes it to deal damage, its last known information is used to determine whether it had wither.
+ * 702.77b. If a permanent leaves the battlefield before an effect causes it to
+ * deal damage, its last known information is used to determine whether it had
+ * wither.
  *
- *   702.77c. The wither rules function no matter what zone an object with wither deals damage from.
+ * 702.77c. The wither rules function no matter what zone an object with wither
+ * deals damage from.
  *
- *   702.77d. Multiple instances of wither on the same object are redundant.
+ * 702.77d. Multiple instances of wither on the same object are redundant.
  *
- *  @author nantuko
+ * @author nantuko
  */
 public class WitherAbility extends StaticAbility implements MageSingleton {
 
-    private static final WitherAbility fINSTANCE =  new WitherAbility();
+    private static final WitherAbility instance = new WitherAbility();
 
     private Object readResolve() throws ObjectStreamException {
-        return fINSTANCE;
+        return instance;
     }
 
     public static WitherAbility getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private WitherAbility() {
@@ -65,12 +69,12 @@ public class WitherAbility extends StaticAbility implements MageSingleton {
 
     @Override
     public String getRule() {
-        return "Wither <i>(This deals damage to creatures in the form of -1/-1 counters.)</i>";
+        return "wither <i>(This deals damage to creatures in the form of -1/-1 counters.)</i>";
     }
 
     @Override
     public WitherAbility copy() {
-        return fINSTANCE;
+        return instance;
     }
 
 }

@@ -14,7 +14,7 @@ public class TunnelIgnusTest extends CardTestPlayerBase {
      * Tunnel Ignus
      * Creature — Elemental 2/1, 1R (2)
      * Whenever a land enters the battlefield under an opponent's control, if 
-     * that player had another land enter the battlefield under his or her 
+     * that player had another land enter the battlefield under their
      * control this turn, Tunnel Ignus deals 3 damage to that player.
      *
     */

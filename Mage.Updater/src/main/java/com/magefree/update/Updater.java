@@ -1,6 +1,6 @@
 package com.magefree.update;
 
-import com.magefree.update.helpers.ChechsumHelper;
+import com.magefree.update.helpers.ChecksumHelper;
 import com.magefree.update.helpers.FileHelper;
 
 import java.io.File;
@@ -67,7 +67,7 @@ public class Updater {
     public HashMap<String, String> readLocalData() throws Exception {
         HashMap<String, String> result = new HashMap<>();
         for (File f : findFiles()) {
-            result.put(f.getPath().replaceAll("\\\\", "/"), ChechsumHelper.getSHA1Checksum(f.getPath()));
+            result.put(f.getPath().replaceAll("\\\\", "/"), ChecksumHelper.getSHA1Checksum(f.getPath()));
         }
         return result;
     }

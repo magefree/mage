@@ -35,13 +35,16 @@ package mage.client.dialog;
 
 import java.awt.Dimension;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 import javax.swing.Icon;
 import javax.swing.SwingWorker;
 import javax.swing.table.AbstractTableModel;
 import mage.client.MageFrame;
+import mage.client.SessionHandler;
 import mage.client.chat.ChatPanelBasic;
 import mage.client.components.MageComponents;
 import mage.client.components.tray.MageTray;
@@ -51,13 +54,13 @@ import mage.client.util.GUISizeHelper;
 import mage.client.util.audio.AudioManager;
 import mage.client.util.gui.TableUtil;
 import mage.client.util.gui.countryBox.CountryCellRenderer;
+import mage.players.PlayerType;
 import mage.remote.Session;
 import mage.view.SeatView;
 import mage.view.TableView;
 import org.apache.log4j.Logger;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class TableWaitingDialog extends MageDialog {
@@ -68,7 +71,6 @@ public class TableWaitingDialog extends MageDialog {
     private UUID tableId;
     private UUID roomId;
     private boolean isTournament;
-    private Session session;
     private final TableWaitModel tableWaitModel;
     private UpdateSeatsTask updateTask;
 
@@ -77,7 +79,6 @@ public class TableWaitingDialog extends MageDialog {
      */
     public TableWaitingDialog() {
 
-        session = MageFrame.getSession();
         tableWaitModel = new TableWaitModel();
 
         initComponents();
@@ -150,9 +151,8 @@ public class TableWaitingDialog extends MageDialog {
         this.roomId = roomId;
         this.tableId = tableId;
         this.isTournament = isTournament;
-        session = MageFrame.getSession();
-        updateTask = new UpdateSeatsTask(session, roomId, tableId, this);
-        if (session.isTableOwner(roomId, tableId)) {
+        updateTask = new UpdateSeatsTask(SessionHandler.getSession(), roomId, tableId, this);
+        if (SessionHandler.isTableOwner(roomId, tableId)) {
             this.btnStart.setVisible(true);
             this.btnMoveDown.setVisible(true);
             this.btnMoveUp.setVisible(true);
@@ -161,9 +161,9 @@ public class TableWaitingDialog extends MageDialog {
             this.btnMoveDown.setVisible(false);
             this.btnMoveUp.setVisible(false);
         }
-        UUID chatId = session.getTableChatId(tableId);
-        if (chatId != null) {
-            this.chatPanel.connect(chatId);
+        Optional<UUID> chatId = SessionHandler.getTableChatId(tableId);
+        if (chatId.isPresent()) {
+            this.chatPanel.connect(chatId.get());
             updateTask.execute();
             this.setModal(false);
             this.setLocation(100, 100);
@@ -208,34 +208,18 @@ public class TableWaitingDialog extends MageDialog {
 
         btnMoveUp.setText("Move Up");
         btnMoveUp.setEnabled(false);
-        btnMoveUp.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMoveUpActionPerformed(evt);
-            }
-        });
+        btnMoveUp.addActionListener(evt -> btnMoveUpActionPerformed(evt));
 
         btnMoveDown.setText("Move Down");
         btnMoveDown.setEnabled(false);
-        btnMoveDown.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMoveDownActionPerformed(evt);
-            }
-        });
+        btnMoveDown.addActionListener(evt -> btnMoveDownActionPerformed(evt));
 
         btnCancel.setText("Cancel");
-        btnCancel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelActionPerformed(evt);
-            }
-        });
+        btnCancel.addActionListener(evt -> btnCancelActionPerformed(evt));
 
         btnStart.setText("Start");
         btnStart.setEnabled(false);
-        btnStart.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnStartActionPerformed(evt);
-            }
-        });
+        btnStart.addActionListener(evt -> btnStartActionPerformed(evt));
 
         jSplitPane1.setDividerLocation(300);
         jSplitPane1.setDividerSize(3);
@@ -252,30 +236,30 @@ public class TableWaitingDialog extends MageDialog {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnMoveDown)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnMoveUp)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnStart)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnCancel)
-                .addContainerGap())
-            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(btnMoveDown)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnMoveUp)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnStart)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnCancel)
+                                .addContainerGap())
+                        .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnMoveDown)
-                    .addComponent(btnMoveUp)
-                    .addComponent(btnCancel)
-                    .addComponent(btnStart))
-                .addContainerGap())
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(btnMoveDown)
+                                        .addComponent(btnMoveUp)
+                                        .addComponent(btnCancel)
+                                        .addComponent(btnStart))
+                                .addContainerGap())
         );
 
         pack();
@@ -283,17 +267,17 @@ public class TableWaitingDialog extends MageDialog {
 
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
         if (!isTournament) {
-            if (session.startMatch(roomId, tableId)) {
+            if (SessionHandler.startMatch(roomId, tableId)) {
                 closeDialog();
             }
-        } else if (session.startTournament(roomId, tableId)) {
+        } else if (SessionHandler.startTournament(roomId, tableId)) {
             closeDialog();
         }
     }//GEN-LAST:event_btnStartActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         try {
-            if (!session.leaveTable(roomId, tableId)) {
+            if (!SessionHandler.leaveTable(roomId, tableId)) {
                 return; // already started, so leave no more possible
             }
         } catch (Exception e) {
@@ -306,7 +290,7 @@ public class TableWaitingDialog extends MageDialog {
     private void btnMoveDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveDownActionPerformed
         int row = this.tableSeats.getSelectedRow();
         if (row < this.tableSeats.getRowCount() - 1) {
-            session.swapSeats(roomId, tableId, row, row + 1);
+            SessionHandler.swapSeats(roomId, tableId, row, row + 1);
             this.tableSeats.getSelectionModel().setSelectionInterval(row + 1, row + 1);
         }
 
@@ -315,7 +299,7 @@ public class TableWaitingDialog extends MageDialog {
     private void btnMoveUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveUpActionPerformed
         int row = this.tableSeats.getSelectedRow();
         if (row > 0) {
-            session.swapSeats(roomId, tableId, row, row - 1);
+            SessionHandler.swapSeats(roomId, tableId, row, row - 1);
             this.tableSeats.getSelectionModel().setSelectionInterval(row - 1, row - 1);
         }
     }//GEN-LAST:event_btnMoveUpActionPerformed
@@ -335,11 +319,17 @@ public class TableWaitingDialog extends MageDialog {
 
 class TableWaitModel extends AbstractTableModel {
 
-    private final String[] columnNames = new String[]{"Seat", "Loc", "Player Name", "Player Type", "History"};
+    private final String[] columnNames = new String[]{"Seat", "Loc", "Player Name", "Constructed Rating", "Player Type", "History"};
     private SeatView[] seats = new SeatView[0];
+    private boolean limited;
 
     public void loadData(TableView table) {
         seats = table.getSeats().toArray(new SeatView[0]);
+        if (limited != table.isLimited()) {
+            limited = table.isLimited();
+            columnNames[3] = limited ? "Limited Rating" : "Constructed Rating";
+            this.fireTableStructureChanged();
+        }
         this.fireTableDataChanged();
     }
 
@@ -368,8 +358,10 @@ class TableWaitModel extends AbstractTableModel {
                 case 2:
                     return seats[arg0].getPlayerName();
                 case 3:
-                    return seats[arg0].getPlayerType();
+                    return limited ? seats[arg0].getLimitedRating() : seats[arg0].getConstructedRating();
                 case 4:
+                    return seats[arg0].getPlayerType();
+                case 5:
                     return seats[arg0].getHistory();
             }
         }
@@ -392,6 +384,8 @@ class TableWaitModel extends AbstractTableModel {
         switch (columnIndex) {
             case 1:
                 return Icon.class;
+            case 3:
+                return Integer.class;
             default:
                 return String.class;
         }
@@ -424,8 +418,13 @@ class UpdateSeatsTask extends SwingWorker<Void, TableView> {
     @Override
     protected Void doInBackground() throws Exception {
         while (!isCancelled()) {
-            this.publish(session.getTable(roomId, tableId));
-            Thread.sleep(1000);
+            Optional<TableView> tableView = SessionHandler.getTable(roomId, tableId);
+            if (tableView.isPresent()) {
+                tableView.ifPresent(this::publish);
+            } else {
+                dialog.closeDialog();
+            }
+            TimeUnit.SECONDS.sleep(1);
         }
         return null;
     }
@@ -439,13 +438,17 @@ class UpdateSeatsTask extends SwingWorker<Void, TableView> {
             int current = getPlayersCount(tableView);
             if (current != count) {
                 if (count > 0) {
-                    if (current > count) {
-                        MageTray.getInstance().displayMessage("New player joined your game.");
+                    if (current == tableView.getSeats().size()) {
+                        MageTray.instance.displayMessage("The game can start.");
+                        AudioManager.playGameCanStart();
+                    } else if (current > count) {
+                        MageTray.instance.displayMessage("New player joined your game.");
                         AudioManager.playPlayerJoinedTable();
                     } else {
-                        MageTray.getInstance().displayMessage("A player left your game.");
+                        MageTray.instance.displayMessage("A player left your game.");
+                        AudioManager.playPlayerLeft();
                     }
-                    MageTray.getInstance().blink();
+                    MageTray.instance.blink();
                 }
                 count = current;
             }
@@ -457,7 +460,7 @@ class UpdateSeatsTask extends SwingWorker<Void, TableView> {
         int playerCount = 0;
         if (tableView != null) {
             for (SeatView seatView : tableView.getSeats()) {
-                if (seatView.getPlayerId() != null && seatView.getPlayerType().equals("Human")) {
+                if (seatView.getPlayerId() != null && seatView.getPlayerType() == PlayerType.HUMAN) {
                     playerCount++;
                 }
             }

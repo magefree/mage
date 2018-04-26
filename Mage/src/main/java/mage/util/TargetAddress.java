@@ -28,6 +28,7 @@
 package mage.util;
 
 import java.util.Iterator;
+import java.util.Objects;
 import java.util.UUID;
 import mage.abilities.Mode;
 import mage.abilities.Modes;
@@ -41,9 +42,9 @@ import mage.target.Target;
  */
 public class TargetAddress {
 
-    protected int spellAbilityIndex;
-    protected UUID mode;
-    protected int targetIndex;
+    protected final int spellAbilityIndex;
+    protected final UUID mode;
+    protected final int targetIndex;
 
     public TargetAddress(int spellAbilityIndex, UUID mode, int targetIndex) {
         this.spellAbilityIndex = spellAbilityIndex;
@@ -59,6 +60,7 @@ public class TargetAddress {
             this.card = card;
         }
 
+        @Override
         public Iterator<TargetAddress> iterator() {
             return new TargetAddressIterator(card);
         }
@@ -66,9 +68,9 @@ public class TargetAddress {
 
     protected static class TargetAddressIterator implements Iterator<TargetAddress> {
 
-        protected Iterator<SpellAbility> spellAbilityIterator;
+        protected final Iterator<SpellAbility> spellAbilityIterator;
         protected Integer lastSpellAbilityIndex = null;
-        protected Iterator<Mode> modeIterator = null;
+        protected Iterator<UUID> modeIterator = null;
         protected Modes modes = null;
         protected UUID lastMode = null;
         protected Iterator<Target> targetIterator = null;
@@ -87,10 +89,12 @@ public class TargetAddress {
             calcNext();
         }
 
+        @Override
         public boolean hasNext() {
             return lastTargetIndex != null;
         }
 
+        @Override
         public TargetAddress next() {
             TargetAddress ret = new TargetAddress(lastSpellAbilityIndex,
                     lastMode,
@@ -100,6 +104,7 @@ public class TargetAddress {
 
         }
 
+        @Override
         public void remove() {
             throw new UnsupportedOperationException();
         }
@@ -122,7 +127,7 @@ public class TargetAddress {
                 }
 
                 if (modeIterator != null && modeIterator.hasNext()) {
-                    lastMode = modeIterator.next().getId();
+                    lastMode = modeIterator.next();
                     targetIterator = modes.get(lastMode).getTargets().iterator();
                 } else {
                     lastMode = null;
@@ -187,5 +192,26 @@ public class TargetAddress {
     @Override
     public int hashCode() {
         return spellAbilityIndex ^ mode.hashCode() ^ targetIndex;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final TargetAddress other = (TargetAddress) obj;
+        if (this.spellAbilityIndex != other.spellAbilityIndex) {
+            return false;
+        }
+        if (this.targetIndex != other.targetIndex) {
+            return false;
+        }
+        return Objects.equals(this.mode, other.mode);
     }
 }

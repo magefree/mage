@@ -65,7 +65,7 @@ public class MyComboBoxEditor extends BasicComboBoxEditor {
      
     @Override
     public Object getItem() {
-        return "[" + this.selectedItem.toString() + "]";
+        return '[' + this.selectedItem.toString() + ']';
     }
      
     @Override

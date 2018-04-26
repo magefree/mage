@@ -1,10 +1,9 @@
-    /*
+/*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
 package mage.abilities.decorator;
 
-import java.util.UUID;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
@@ -23,15 +22,14 @@ import mage.game.Game;
 public class ConditionalActivatedAbility extends ActivatedAbilityImpl {
 
     private static final Effects emptyEffects = new Effects();
-    
-    private final Condition condition;
+
     private String ruleText = null;
 
     public ConditionalActivatedAbility(Zone zone, Effect effect, Cost cost, Condition condition) {
         super(zone, effect, cost);
         this.condition = condition;
     }
-    
+
     public ConditionalActivatedAbility(Zone zone, Effect effect, ManaCosts cost, Condition condition, String rule) {
         super(zone, effect, cost);
         this.condition = condition;
@@ -52,7 +50,6 @@ public class ConditionalActivatedAbility extends ActivatedAbilityImpl {
 
     public ConditionalActivatedAbility(final ConditionalActivatedAbility ability) {
         super(ability);
-        this.condition = ability.condition;
         this.ruleText = ability.ruleText;
     }
 
@@ -65,14 +62,6 @@ public class ConditionalActivatedAbility extends ActivatedAbilityImpl {
     }
 
     @Override
-    public boolean canActivate(UUID playerId, Game game) {
-        if (!condition.apply(game, this)) {
-            return false;
-        }
-        return super.canActivate(playerId, game);
-    }
-
-    @Override
     public ConditionalActivatedAbility copy() {
         return new ConditionalActivatedAbility(this);
     }
@@ -82,6 +71,11 @@ public class ConditionalActivatedAbility extends ActivatedAbilityImpl {
         if (ruleText != null && !ruleText.isEmpty()) {
             return ruleText;
         }
-        return new StringBuilder(super.getRule()).append(" Activate this ability only ").append(condition.toString()).append(".").toString();
+        String conditionText = condition.toString();
+        String additionalText = "if ";
+        if (conditionText.startsWith("during")) {
+            additionalText = "";
+        }
+        return super.getRule() + " Activate this ability only " + additionalText + condition.toString() + ".";
     }
 }

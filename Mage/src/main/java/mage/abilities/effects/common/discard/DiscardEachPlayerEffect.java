@@ -12,8 +12,6 @@ import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
-import static mage.constants.TargetController.NOT_YOU;
-import static mage.constants.TargetController.OPPONENT;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -142,10 +140,10 @@ public class DiscardEachPlayerEffect extends OneShotEffect {
         sb.append(CardUtil.numberToText(amount.toString(), "a")).append(" card");
         try {
             if (Integer.parseInt(amount.toString()) > 1) {
-                sb.append("s");
+                sb.append('s');
             }
         } catch (Exception e) {
-            sb.append("s");
+            sb.append('s');
         }
         if (randomDiscard) {
             sb.append(" at random");

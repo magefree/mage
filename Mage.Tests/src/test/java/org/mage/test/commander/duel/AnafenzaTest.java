@@ -73,8 +73,8 @@ public class AnafenzaTest extends CardTestCommanderDuelBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Anafenza, the Foremost");
 
         attack(3, playerA, "Anafenza, the Foremost");
-        block(3, playerB, "Runed Servitor", "Anafenza, the Foremost");
-        block(3, playerB, "Runed Servitor", "Anafenza, the Foremost");
+        block(3, playerB, "Runed Servitor:0", "Anafenza, the Foremost");
+        block(3, playerB, "Runed Servitor:1", "Anafenza, the Foremost");
 
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
         execute();
@@ -104,7 +104,7 @@ public class AnafenzaTest extends CardTestCommanderDuelBase {
 
         addCard(Zone.HAND, playerB, "Forest", 2);
         // <i>Landfall</i> - Whenever a land enters the battlefield under your control, put a 5/5 red and green Elemental creature token onto the battlefield.
-        // Whenever Omnath, Locus of Rage or another Elemental you control dies, Omnath deals 3 damage to target creature or player.
+        // Whenever Omnath, Locus of Rage or another Elemental you control dies, Omnath deals 3 damage to any target.
         addCard(Zone.BATTLEFIELD, playerB, "Omnath, Locus of Rage", 1);
 
         // Whenever Anafenza, the Foremost attacks, put a +1/+1 counter on another target tapped creature you control.
@@ -115,9 +115,9 @@ public class AnafenzaTest extends CardTestCommanderDuelBase {
         playLand(4, PhaseStep.PRECOMBAT_MAIN, playerB, "Forest");
 
         attack(5, playerA, "Acidic Slime");
-        block(5, playerB, "Elemental", "Acidic Slime");
+        block(5, playerB, "Elemental:0", "Acidic Slime");
         attack(5, playerA, "Anafenza, the Foremost");
-        block(5, playerB, "Elemental", "Anafenza, the Foremost");
+        block(5, playerB, "Elemental:1", "Anafenza, the Foremost");
         addTarget(playerB, playerA);
 
         setStopAt(5, PhaseStep.POSTCOMBAT_MAIN);

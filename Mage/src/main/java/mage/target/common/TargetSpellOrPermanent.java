@@ -75,7 +75,6 @@ public class TargetSpellOrPermanent extends TargetImpl {
         this.minNumberOfTargets = minNumTargets;
         this.maxNumberOfTargets = maxNumTargets;
         this.zone = Zone.ALL;
-        this.targetName = filter.getMessage();
         this.notTarget = notTarget;
         this.filter = filter;
         this.targetName = filter.getMessage();
@@ -106,10 +105,7 @@ public class TargetSpellOrPermanent extends TargetImpl {
             return filter.match(permanent, game);
         }
         Spell spell = game.getStack().getSpell(id);
-        if (spell != null) {
-            return filter.match(spell, game);
-        }
-        return false;
+        return spell != null && filter.match(spell, game);
     }
 
     @Override
@@ -125,11 +121,8 @@ public class TargetSpellOrPermanent extends TargetImpl {
             }
         }
         Spell spell = game.getStack().getSpell(id);
-        if (spell != null
-                && !source.getSourceId().equals(id)) { // 114.4. A spell or ability on the stack is an illegal target for itself.
-            return filter.match(spell, game);
-        }
-        return false;
+        // 114.4. A spell or ability on the stack is an illegal target for itself.
+        return spell != null && !source.getSourceId().equals(id) && filter.match(spell, game);
     }
 
     @Override
@@ -252,13 +245,13 @@ public class TargetSpellOrPermanent extends TargetImpl {
         for (UUID targetId : getTargets()) {
             Permanent permanent = game.getPermanent(targetId);
             if (permanent != null) {
-                sb.append(permanent.getLogName()).append(" ");
+                sb.append(permanent.getLogName()).append(' ');
             } else {
                 Spell spell = game.getStack().getSpell(targetId);
                 if (spell.isFaceDown(game)) {
                     sb.append(GameLog.getNeutralColoredText("face down spell"));
                 } else {
-                    sb.append(spell.getLogName()).append(" ");
+                    sb.append(spell.getLogName()).append(' ');
                 }
             }
         }

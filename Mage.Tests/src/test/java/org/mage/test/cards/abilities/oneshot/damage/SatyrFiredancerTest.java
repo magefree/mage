@@ -88,7 +88,7 @@ public class SatyrFiredancerTest extends CardTestPlayerBase {
         // Whenever an instant or sorcery spell you control deals damage to an opponent, Satyr Firedancer deals that much damage to target creature that player controls.        
         addCard(Zone.BATTLEFIELD, playerA, "Satyr Firedancer");
 
-        // {T}: Prodigal Pyromancer deals 1 damage to target creature or player.
+        // {T}: Prodigal Pyromancer deals 1 damage to any target.
         addCard(Zone.BATTLEFIELD, playerA, "Prodigal Pyromancer", 1);
 
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {source} deals", playerB);        

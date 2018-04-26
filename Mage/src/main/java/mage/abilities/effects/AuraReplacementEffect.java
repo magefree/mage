@@ -32,12 +32,9 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.keyword.TransformAbility;
 import mage.cards.Card;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SpellAbilityType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -54,10 +51,10 @@ import mage.target.common.TargetCardInGraveyard;
  * was not cast (so from Zone != Hand), this effect gets the target to whitch to
  * attach it and adds the Aura the the battlefield and attachs it to the target.
  * The "attachTo:" value in game state has to be set therefore.
- *
+ * <p>
  * If no "attachTo:" value is defined, the controlling player has to chose the
  * aura target.
- *
+ * <p>
  * This effect is automatically added to ContinuousEffects at the start of a
  * game
  *
@@ -90,25 +87,36 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
         UUID sourceId = event.getSourceId();
         UUID controllerId = event.getPlayerId();
 
+        if (game.getState().getValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + card.getId()) != null) {
+            card = card.getSecondCardFace();
+            if (!card.isEnchantment() || !card.hasSubtype(SubType.AURA, game)) {
+                return false;
+            }
+        }
+
         // Aura cards that go to battlefield face down (Manifest) don't have to select targets
         if (card.isFaceDown(game)) {
             return false;
         }
         // Aura enters the battlefield attached
         Object object = game.getState().getValue("attachTo:" + card.getId());
-        if (object != null && object instanceof PermanentCard) {
-            return false;
+        if (object != null) {
+            if (object instanceof Permanent) {
+                // Aura is attached to a permanent on the battlefield
+                return false;
+            }
+            if (object instanceof UUID) {
+                Player player = game.getPlayer((UUID) object);
+                if (player != null) {
+                    // Aura is attached to a player
+                    return false;
+                }
+            }
         }
 
         UUID targetId = null;
         MageObject sourceObject = game.getObject(sourceId);
         boolean enchantCardInGraveyard = false;
-//        if (sourceObject instanceof Spell) {
-//            if (fromZone.equals(Zone.EXILED)) {
-//                // cast from exile (e.g. Neightveil Spector) -> no replacement
-//                return false;
-//            }
-//        }
         if (sourceObject instanceof StackAbility) {
             StackAbility stackAbility = (StackAbility) sourceObject;
             if (!stackAbility.getEffects().isEmpty()) {
@@ -116,14 +124,14 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
             }
         }
 
-        game.applyEffects(); // So continuousEffects are removed if previous effect of the same ability did move objects that cuase continuous effects
+        game.applyEffects(); // So continuousEffects are removed if previous effect of the same ability did move objects that cause continuous effects
         Player controllingPlayer = null;
         if (targetId == null) {
             SpellAbility spellAbility = card.getSpellAbility();
             if (spellAbility.getTargets().isEmpty()) {
                 for (Ability ability : card.getAbilities(game)) {
                     if ((ability instanceof SpellAbility)
-                            && SpellAbilityType.BASE_ALTERNATE.equals(((SpellAbility) ability).getSpellAbilityType())
+                            && SpellAbilityType.BASE_ALTERNATE == ((SpellAbility) ability).getSpellAbilityType()
                             && !ability.getTargets().isEmpty()) {
                         spellAbility = (SpellAbility) ability;
                         break;
@@ -167,9 +175,11 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
         }
         Player targetPlayer = game.getPlayer(targetId);
         if (targetCard != null || targetPermanent != null || targetPlayer != null) {
+            card = game.getCard(event.getTargetId());
             card.removeFromZone(game, fromZone, sourceId);
-            card.updateZoneChangeCounter(game);
             PermanentCard permanent = new PermanentCard(card, (controllingPlayer == null ? card.getOwnerId() : controllingPlayer.getId()), game);
+            ZoneChangeEvent zoneChangeEvent = new ZoneChangeEvent(permanent, controllerId, fromZone, Zone.BATTLEFIELD);
+            permanent.updateZoneChangeCounter(game, zoneChangeEvent);
             game.getBattlefield().addPermanent(permanent);
             card.setZone(Zone.BATTLEFIELD, game);
             if (permanent.entersBattlefield(event.getSourceId(), game, fromZone, true)) {
@@ -182,7 +192,7 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
                 }
                 game.applyEffects();
 
-                game.fireEvent(new ZoneChangeEvent(permanent, controllerId, fromZone, Zone.BATTLEFIELD));
+                game.fireEvent(zoneChangeEvent);
                 return true;
             }
 
@@ -197,10 +207,15 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (((ZoneChangeEvent) event).getToZone().equals(Zone.BATTLEFIELD)
-                && !(((ZoneChangeEvent) event).getFromZone().equals(Zone.STACK))) {
+        if (((ZoneChangeEvent) event).getToZone() == Zone.BATTLEFIELD
+                && (((ZoneChangeEvent) event).getFromZone() != Zone.STACK)) {
             Card card = game.getCard(event.getTargetId());
-            if (card != null && card.getCardType().contains(CardType.ENCHANTMENT) && card.hasSubtype("Aura")) {
+            if (card != null && (card.isEnchantment() && card.hasSubtype(SubType.AURA, game)
+                    || // in case of transformable enchantments
+                    (game.getState().getValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + card.getId()) != null
+                    && card.getSecondCardFace() != null
+                    && card.getSecondCardFace().isEnchantment()
+                    && card.getSecondCardFace().hasSubtype(SubType.AURA, game)))) {
                 return true;
             }
         }

@@ -30,6 +30,7 @@ package mage.abilities.keyword;
 import mage.abilities.Ability;
 import mage.abilities.EvasionAbility;
 import mage.abilities.effects.RestrictionEffect;
+import mage.constants.AsThoughEffectType;
 import mage.constants.Duration;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
@@ -86,7 +87,25 @@ class LandwalkEffect extends RestrictionEffect {
 
     @Override
     public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        return !game.getBattlefield().contains(filter, blocker.getControllerId(), 1, game);
+        if (game.getBattlefield().contains(filter, blocker.getControllerId(), 1, game)
+                && null == game.getContinuousEffects().asThough(blocker.getId(), AsThoughEffectType.BLOCK_LANDWALK, source, blocker.getControllerId(), game)) {
+            switch (filter.getMessage()) {
+                case "plains":
+                    return null != game.getContinuousEffects().asThough(blocker.getId(), AsThoughEffectType.BLOCK_PLAINSWALK, source, blocker.getControllerId(), game);
+                case "island":
+                    return null != game.getContinuousEffects().asThough(blocker.getId(), AsThoughEffectType.BLOCK_ISLANDWALK, source, blocker.getControllerId(), game);
+                case "swamp":
+                    return null != game.getContinuousEffects().asThough(blocker.getId(), AsThoughEffectType.BLOCK_SWAMPWALK, source, blocker.getControllerId(), game);
+                case "mountain":
+                    return null != game.getContinuousEffects().asThough(blocker.getId(), AsThoughEffectType.BLOCK_MOUNTAINWALK, source, blocker.getControllerId(), game);
+                case "forest":
+                    return null != game.getContinuousEffects().asThough(blocker.getId(), AsThoughEffectType.BLOCK_FORESTWALK, source, blocker.getControllerId(), game);
+                default:
+                    return false;
+
+            }
+        }
+        return true;
     }
 
     @Override
@@ -104,25 +123,25 @@ class LandwalkEffect extends RestrictionEffect {
         StringBuilder sb = new StringBuilder();
         sb.append(filter.getMessage()).append("walk");
         if (withHintText) {
-            sb.append(" <i>(This creature can't be blocked as long as defending player controls a ");
+            sb.append(" <i>(This creature can't be blocked as long as defending player controls ");
             switch (filter.getMessage()) {
                 case "swamp":
-                    sb.append("Swamp");
+                    sb.append("a Swamp");
                     break;
                 case "plains":
-                    sb.append("Plains");
+                    sb.append("a Plains");
                     break;
                 case "mountain":
-                    sb.append("Mountain");
+                    sb.append("a Mountain");
                     break;
                 case "forest":
-                    sb.append("Forest");
+                    sb.append("a Forest");
                     break;
                 case "island":
-                    sb.append("Island");
+                    sb.append("an Island");
                     break;
                 default:
-                    sb.append(filter.getMessage());
+                    sb.append("a " + filter.getMessage());
 
             }
             sb.append(".)</i>");

@@ -32,7 +32,6 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.AttachmentType;
 import mage.constants.Duration;
 import mage.constants.Layer;
-import static mage.constants.Layer.RulesEffects;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.game.Game;
@@ -55,7 +54,7 @@ public class CantBeBlockedByOneAttachedEffect extends ContinuousEffectImpl {
         super(duration, Outcome.Benefit);
         this.amount = amount;
         this.attachmentType = attachmentType;
-        staticText = (attachmentType.equals(AttachmentType.AURA) ? "Enchanted" : "Equipped") + " creature can't be blocked except by " + amount + " or more creatures";
+        staticText = attachmentType.verb() + " creature can't be blocked except by " + amount + " or more creatures";
     }
 
     public CantBeBlockedByOneAttachedEffect(final CantBeBlockedByOneAttachedEffect effect) {

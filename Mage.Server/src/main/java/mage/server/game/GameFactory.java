@@ -28,24 +28,25 @@
 
 package mage.server.game;
 
-import java.lang.reflect.Constructor;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import mage.game.match.Match;
 import mage.game.match.MatchOptions;
 import mage.game.match.MatchType;
 import mage.view.GameTypeView;
 import org.apache.log4j.Logger;
 
+import java.lang.reflect.Constructor;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class GameFactory {
+public enum GameFactory {
 
-    private static final GameFactory INSTANCE = new GameFactory();
+    instance;
     private static final Logger logger = Logger.getLogger(GameFactory.class);
 
     private final Map<String, Class<Match>> games = new HashMap<>();
@@ -53,19 +54,15 @@ public class GameFactory {
     private final List<GameTypeView> gameTypeViews = new ArrayList<>();
 
 
-    public static GameFactory getInstance() {
-        return INSTANCE;
-    }
 
     private GameFactory() {}
 
     public Match createMatch(String gameType, MatchOptions options) {
 
         Match match;
-        Constructor<Match> con;
         try {
-            con = games.get(gameType).getConstructor(new Class[]{MatchOptions.class});
-            match = con.newInstance(new Object[] {options});
+            Constructor<Match> con = games.get(gameType).getConstructor(MatchOptions.class);
+            match = con.newInstance(options);
         } catch (Exception ex) {
             logger.fatal("Error creating match - " + gameType, ex);
             return null;

@@ -1,6 +1,7 @@
 package org.mage.test.cards.copy;
 
 import mage.abilities.Ability;
+import mage.constants.SubType;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.discard.DiscardControllerEffect;
@@ -43,7 +44,7 @@ public class VolrathsShapshifterTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Assault Griffin", 3, 2);
 
         Permanent shapeshifter = getPermanent("Assault Griffin", playerA.getId());
-        Assert.assertTrue(shapeshifter.getSubtype().contains("Griffin"));
+        Assert.assertTrue(shapeshifter.getSubtype(currentGame).contains(SubType.GRIFFIN));
         Assert.assertTrue("Volrath's Shapeshifter must have flying", shapeshifter.getAbilities().contains(FlyingAbility.getInstance()));
         Assert.assertTrue("Volrath's Shapeshifter must have {2} : Discard a card", hasShapeshiftersOriginalAbility(shapeshifter));
     }
@@ -55,7 +56,7 @@ public class VolrathsShapshifterTest extends CardTestPlayerBase {
 	public void testLosingCopy() {
         addCard(Zone.BATTLEFIELD, playerA, "Volrath's Shapeshifter", 1);
         // Codex Shredder - Artifact
-        // {T}: Target player puts the top card of his or her library into his or her graveyard.
+        // {T}: Target player puts the top card of their library into their graveyard.
         // {5}, {T}, Sacrifice Codex Shredder: Return target card from your graveyard to your hand.
         addCard(Zone.BATTLEFIELD, playerA, "Codex Shredder", 1);
 
@@ -64,7 +65,7 @@ public class VolrathsShapshifterTest extends CardTestPlayerBase {
         addCard(Zone.LIBRARY, playerA, "Forest", 1);
         skipInitShuffling();
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Target player puts the top card of his or her library into his or her graveyard.", playerA);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Target player puts the top card of their library into their graveyard.", playerA);
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -73,7 +74,7 @@ public class VolrathsShapshifterTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Volrath's Shapeshifter", 0, 1);
 
         Permanent shapeshifter = getPermanent("Volrath's Shapeshifter", playerA.getId());
-        Assert.assertTrue(shapeshifter.getSubtype().contains("Shapeshifter"));
+        Assert.assertTrue(shapeshifter.getSubtype(currentGame).contains(SubType.SHAPESHIFTER));
         Assert.assertTrue("Volrath's Shapeshifter must have {2} : Discard a card", hasShapeshiftersOriginalAbility(shapeshifter));
     }
     
@@ -100,7 +101,7 @@ public class VolrathsShapshifterTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Dutiful Thrull", 1, 1);
 
         Permanent shapeshifter = getPermanent("Dutiful Thrull", playerA.getId());
-        Assert.assertTrue(shapeshifter.getSubtype().contains("Thrull"));
+        Assert.assertTrue(shapeshifter.getSubtype(currentGame).contains(SubType.THRULL));
         Assert.assertTrue("Volrath's Shapeshifter must have {2} : Discard a card", hasShapeshiftersOriginalAbility(shapeshifter));
         
         

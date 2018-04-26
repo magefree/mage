@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.effects.common.continuous;
 
 import mage.constants.Duration;
@@ -116,23 +115,26 @@ public class BoostEquippedEffect extends ContinuousEffectImpl {
 
     private void setText() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Equipped creature gets ");
+        sb.append("equipped creature gets ");
         String p = power.toString();
-        if (!p.startsWith("-"))
-            sb.append("+");
-        sb.append(p).append("/");
+        if (!p.startsWith("-")) {
+            sb.append('+');
+        }
+        sb.append(p).append('/');
         String t = toughness.toString();
         if (!t.startsWith("-")) {
-            if (p.startsWith("-"))
-                sb.append("-");
-            else
-                sb.append("+");
+            if (p.startsWith("-")) {
+                sb.append('-');
+            } else {
+                sb.append('+');
+            }
         }
         sb.append(t);
-        if (duration != Duration.WhileOnBattlefield)
-            sb.append(" ").append(duration.toString());
+        if (duration != Duration.WhileOnBattlefield) {
+            sb.append(' ').append(duration.toString());
+        }
         String message = power.getMessage();
-        if (message.length() > 0) {
+        if (!message.isEmpty()) {
             sb.append(" for each ");
         }
         sb.append(message);

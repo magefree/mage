@@ -28,8 +28,6 @@
 
 package mage.client.util;
 
-import javax.swing.JOptionPane;
-import mage.client.MageFrame;
 import org.apache.log4j.Logger;
 
 /**

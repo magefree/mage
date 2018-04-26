@@ -11,10 +11,27 @@ import mage.game.permanent.Permanent;
  */
 public class SourcePermanentPowerCount implements DynamicValue {
 
+    boolean allowNegativeValues;
+
+    public SourcePermanentPowerCount() {
+        this(true);
+    }
+
+    public SourcePermanentPowerCount(boolean allowNegativeValues) {
+        super();
+        this.allowNegativeValues = allowNegativeValues;
+    }
+
+    public SourcePermanentPowerCount(final SourcePermanentPowerCount dynamicValue) {
+        super();
+        this.allowNegativeValues = dynamicValue.allowNegativeValues;
+    }
+
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(sourceAbility.getSourceId());
-        if (sourcePermanent != null) {
+        if (sourcePermanent != null
+                && (allowNegativeValues || sourcePermanent.getPower().getValue() >= 0)) {
             return sourcePermanent.getPower().getValue();
         }
         return 0;
@@ -22,7 +39,7 @@ public class SourcePermanentPowerCount implements DynamicValue {
 
     @Override
     public SourcePermanentPowerCount copy() {
-        return new SourcePermanentPowerCount();
+        return new SourcePermanentPowerCount(this);
     }
 
     @Override

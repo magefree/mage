@@ -36,15 +36,13 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  *
  * @author LevelX2
  */
-
 public class KarmicJusticeTest extends CardTestPlayerBase {
 
     /*
     Karmic Justice
-    Whenever a spell or ability an opponent controls destroys a noncreature permanent you control, 
+    Whenever a spell or ability an opponent controls destroys a noncreature permanent you control,
     you may destroy target permanent that opponent controls.
-    */
-    
+     */
     /**
      * Karmic Justice should triggers for its own destroyment
      */
@@ -73,8 +71,8 @@ public class KarmicJusticeTest extends CardTestPlayerBase {
      */
     @Test
     public void testMultiplePermanentsDestroyedTriggeredAbility() {
-        // At the beginning of each upkeep, if you lost life last turn, put a 1/1 white Soldier creature token onto the battlefield.
-        addCard(Zone.BATTLEFIELD, playerA, "First Response",2);
+        // At the beginning of each upkeep, if you lost life last turn, create a 1/1 white Soldier creature token.
+        addCard(Zone.BATTLEFIELD, playerA, "First Response", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Karmic Justice");
 
         // Planar Cleansing {3}{W}{W}{W}

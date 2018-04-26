@@ -39,7 +39,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 public class FilterArtifactCard extends FilterCard {
 
     public FilterArtifactCard() {
-        this("artifact");
+        this("artifact card");
     }
 
     public FilterArtifactCard(String name) {

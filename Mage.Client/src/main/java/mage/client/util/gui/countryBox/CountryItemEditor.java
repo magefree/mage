@@ -27,45 +27,34 @@
  */
 package mage.client.util.gui.countryBox;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.border.LineBorder;
+import java.awt.*;
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.basic.BasicComboBoxEditor;
 
 
 /**
  * Editor for JComboBox
- * @author wwww.codejava.net
+ * @author wwww.codejava.net, JayDi85
  *
  */
 public class CountryItemEditor extends BasicComboBoxEditor {
     private final JPanel panel = new JPanel();
     private final JLabel labelItem = new JLabel();
-    private String selectedValue;
-    private String selectedImage;
+    private String[] editValue = new String[2];
      
     public CountryItemEditor() {
-        panel.setLayout(new GridBagLayout());
-        GridBagConstraints constraints = new GridBagConstraints();
-        constraints.fill = GridBagConstraints.HORIZONTAL;
-        constraints.weightx = 1.0;
-//        constraints.insets = new Insets(2, 5, 2, 2);
-        constraints.insets = new Insets(0, 5, 0, 0);
-         
+        panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+        panel.setBackground(new Color(0, 100,190, 255));
+
+        panel.add(labelItem);
+        labelItem.setAlignmentX(Component.LEFT_ALIGNMENT);
+        labelItem.setMaximumSize(new Dimension(Short.MAX_VALUE, Short.MAX_VALUE));
+        labelItem.setBorder(new EmptyBorder(0, 5, 0, 0));
         labelItem.setOpaque(false);
-        labelItem.setHorizontalAlignment(JLabel.LEFT);
         labelItem.setForeground(Color.WHITE);
-         
-        panel.add(labelItem, constraints);
-//        panel.setBackground(Color.WHITE);   
-        panel.setBackground(new Color(0, 100,190, 255));   
-        selectedValue = null;
+
+        editValue = null;
     }
      
     @Override
@@ -75,21 +64,26 @@ public class CountryItemEditor extends BasicComboBoxEditor {
      
     @Override
     public Object getItem() {
-        return this.selectedValue;
+        return this.editValue;
     }
      
     public String getImageItem() {
-        return this.selectedImage;
-    }    
+        return this.editValue[1];
+    }
+
     @Override
     public void setItem(Object item) {
         if (item == null || !(item instanceof String[])) {
             return;
         }
-        String[] countryItem = (String[]) item;
-        selectedValue = countryItem[0];
-        selectedImage = countryItem[1];
-        labelItem.setText(selectedValue);
-        labelItem.setIcon(new ImageIcon(getClass().getResource("/flags/"+ countryItem[1] + ".png")));      
+
+        String[] newItem = (String[])item;
+
+        editValue = new String[2];
+        editValue[0] = newItem[0];
+        editValue[1] = newItem[1];
+
+        labelItem.setText(editValue[0]);
+        labelItem.setIcon(new ImageIcon(getClass().getResource("/flags/"+ editValue[1] + ".png")));
     }  
 }

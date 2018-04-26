@@ -27,37 +27,49 @@
 */
 package mage.server.draft;
 
+import mage.cards.decks.Deck;
+import mage.game.draft.DraftCube;
+import org.apache.log4j.Logger;
+
 import java.lang.reflect.Constructor;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
-import mage.game.draft.DraftCube;
-import org.apache.log4j.Logger;
 
 /**
  *
  * @author LevelX2
  */
-public class CubeFactory {
+public enum CubeFactory {
 
-    private static final CubeFactory INSTANCE = new CubeFactory();
+    instance;
     private static final Logger logger = Logger.getLogger(CubeFactory.class);
 
-    private Map<String, Class> draftCubes = new LinkedHashMap<String, Class>();
+    private final Map<String, Class> draftCubes = new LinkedHashMap<>();
 
-    public static CubeFactory getInstance() {
-        return INSTANCE;
-    }
 
-    private CubeFactory() {}
 
     public DraftCube createDraftCube(String draftCubeName) {
 
         DraftCube draftCube;
-        Constructor<?> con;
         try {
-            con = draftCubes.get(draftCubeName).getConstructor(new Class[]{});
-            draftCube = (DraftCube)con.newInstance(new Object[] {});
+            Constructor<?> con = draftCubes.get(draftCubeName).getConstructor();
+            draftCube = (DraftCube)con.newInstance();
+        } catch (Exception ex) {
+            logger.fatal("CubeFactory error", ex);
+            return null;
+        }
+        logger.debug("Draft cube created: " + draftCube.getName());
+
+        return draftCube;
+    }
+
+    public DraftCube createDeckDraftCube(String draftCubeName, Deck cubeFromDeck) {
+
+        DraftCube draftCube;
+        try {
+            Constructor<?> con = draftCubes.get(draftCubeName).getConstructor(Deck.class);
+            draftCube = (DraftCube)con.newInstance(cubeFromDeck);
         } catch (Exception ex) {
             logger.fatal("CubeFactory error", ex);
             return null;

@@ -42,7 +42,7 @@ public class MTGCube extends DraftCube {
         cubeCards.add(new CardIdentity("Academy Ruins", ""));
         cubeCards.add(new CardIdentity("Accorder Paladin", ""));
         cubeCards.add(new CardIdentity("Acidic Slime", ""));
-        cubeCards.add(new CardIdentity("AEtherling", ""));
+        cubeCards.add(new CardIdentity("Aetherling", ""));
         cubeCards.add(new CardIdentity("Ajani Goldmane", ""));
         cubeCards.add(new CardIdentity("Ajani Vengeant", ""));
         cubeCards.add(new CardIdentity("Ancestral Recall", ""));
@@ -172,7 +172,7 @@ public class MTGCube extends DraftCube {
         cubeCards.add(new CardIdentity("Falkenrath Aristocrat", ""));
         cubeCards.add(new CardIdentity("Fauna Shaman", ""));
         cubeCards.add(new CardIdentity("Figure of Destiny", ""));
-        cubeCards.add(new CardIdentity("Fire // Ice ", ""));
+        cubeCards.add(new CardIdentity("Fire // Ice", ""));
         cubeCards.add(new CardIdentity("Fire Imp", ""));
         cubeCards.add(new CardIdentity("Firebolt", ""));
         cubeCards.add(new CardIdentity("Firedrinker Satyr", ""));

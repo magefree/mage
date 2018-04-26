@@ -30,7 +30,6 @@ package mage.abilities.dynamicvalue.common;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
-import mage.cards.Card;
 import mage.game.Game;
 
 /**
@@ -39,37 +38,21 @@ import mage.game.Game;
  */
 public class SweepNumber implements DynamicValue {
 
-    private int zoneChangeCounter = 0;
     private final String sweepSubtype;
-    private final boolean previousZone;
 
-    public SweepNumber(String sweepSubtype, boolean previousZone) {
+    public SweepNumber(String sweepSubtype) {
         this.sweepSubtype = sweepSubtype;
-        this.previousZone = previousZone;
     }
 
     @Override
     public int calculate(Game game, Ability source, Effect effect) {
-        if (zoneChangeCounter == 0) {
-            Card card = game.getCard(source.getSourceId());
-            if (card != null) {
-                zoneChangeCounter = card.getZoneChangeCounter(game);
-                if (previousZone) {
-                    zoneChangeCounter--;
-                }
-            }
-        }
-        int number = 0;
-        Integer sweepNumber = (Integer) game.getState().getValue(new StringBuilder("sweep").append(source.getSourceId()).append(zoneChangeCounter).toString());
-        if (sweepNumber != null) {
-            number = sweepNumber;
-        }
-        return number;
+        Integer sweepNumber = (Integer) game.getState().getValue("sweep" + source.getSourceId() + game.getState().getZoneChangeCounter(source.getSourceId()));
+        return sweepNumber != null ? sweepNumber : 0;
     }
 
     @Override
     public SweepNumber copy() {
-        return new SweepNumber(sweepSubtype, previousZone);
+        return new SweepNumber(sweepSubtype);
     }
 
     @Override
@@ -79,6 +62,6 @@ public class SweepNumber implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return new StringBuilder("the number of ").append(sweepSubtype).append(sweepSubtype.endsWith("s") ? "":"s").append(" returned this way").toString();
+        return "the number of " + sweepSubtype + (sweepSubtype.endsWith("s") ? "" : "s") + " returned this way";
     }
 }

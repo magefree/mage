@@ -27,6 +27,9 @@
  */
 package mage.abilities.effects.common.counter;
 
+import java.util.ArrayList;
+import java.util.Locale;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
@@ -103,11 +106,12 @@ public class AddCountersSourceEffect extends OneShotEffect {
                             countersToAdd--;
                         }
                         newCounter.add(countersToAdd);
-                        card.addCounters(newCounter, game);
+                        ArrayList<UUID> appliedEffects = (ArrayList<UUID>) this.getValue("appliedEffects");
+                        card.addCounters(newCounter, source, game, appliedEffects);
                         if (informPlayers && !game.isSimulation()) {
                             Player player = game.getPlayer(source.getControllerId());
                             if (player != null) {
-                                game.informPlayers(player.getLogName() + " puts " + newCounter.getCount() + " " + newCounter.getName().toLowerCase() + " counter on " + card.getLogName());
+                                game.informPlayers(player.getLogName() + " puts " + newCounter.getCount() + ' ' + newCounter.getName().toLowerCase(Locale.ENGLISH) + " counter on " + card.getLogName());
                             }
                         }
                     }
@@ -115,7 +119,7 @@ public class AddCountersSourceEffect extends OneShotEffect {
                 }
             } else {
                 Permanent permanent = game.getPermanent(source.getSourceId());
-                if (permanent == null && source.getAbilityType().equals(AbilityType.STATIC)) {
+                if (permanent == null && source.getAbilityType() == AbilityType.STATIC) {
                     permanent = game.getPermanentEntering(source.getSourceId());
                 }
                 if (permanent != null) {
@@ -127,13 +131,14 @@ public class AddCountersSourceEffect extends OneShotEffect {
                                 countersToAdd--;
                             }
                             newCounter.add(countersToAdd);
-                            int before = permanent.getCounters().getCount(newCounter.getName());
-                            permanent.addCounters(newCounter, game);
+                            int before = permanent.getCounters(game).getCount(newCounter.getName());
+                            ArrayList<UUID> appliedEffects = (ArrayList<UUID>) this.getValue("appliedEffects");
+                            permanent.addCounters(newCounter, source, game, appliedEffects); // if used from a replacement effect, the basic event determines if an effect was already applied to an event
                             if (informPlayers && !game.isSimulation()) {
-                                int amountAdded = permanent.getCounters().getCount(newCounter.getName()) - before;
+                                int amountAdded = permanent.getCounters(game).getCount(newCounter.getName()) - before;
                                 Player player = game.getPlayer(source.getControllerId());
                                 if (player != null) {
-                                    game.informPlayers(player.getLogName() + " puts " + amountAdded + " " + newCounter.getName().toLowerCase() + " counter on " + permanent.getLogName());
+                                    game.informPlayers(player.getLogName() + " puts " + amountAdded + ' ' + newCounter.getName().toLowerCase(Locale.ENGLISH) + " counter on " + permanent.getLogName());
                                 }
                             }
                         }
@@ -148,16 +153,20 @@ public class AddCountersSourceEffect extends OneShotEffect {
     private void setText() {
         StringBuilder sb = new StringBuilder();
         sb.append("put ");
+        boolean plural = true;
         if (counter.getCount() > 1) {
-            sb.append(CardUtil.numberToText(counter.getCount())).append(" ");
+            sb.append(CardUtil.numberToText(counter.getCount())).append(' ');
+        } else if (amount.toString().equals("X") && amount.getMessage().isEmpty()) {
+            sb.append("X ");
         } else {
-            if (amount.toString().equals("X") && amount.getMessage().isEmpty()) {
-                sb.append("X ");
-            } else {
-                sb.append("a ");
-            }
+            sb.append("a ");
+            plural = false;
         }
-        sb.append(counter.getName().toLowerCase()).append(" counter on {this}");
+        sb.append(counter.getName().toLowerCase(Locale.ENGLISH)).append(" counter");
+        if (plural) {
+            sb.append('s');
+        }
+        sb.append(" on {this}");
         if (!amount.getMessage().isEmpty()) {
             sb.append(" for each ").append(amount.getMessage());
         }

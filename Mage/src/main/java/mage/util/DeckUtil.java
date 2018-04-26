@@ -31,7 +31,7 @@ package mage.util;
  *
  * @author LevelX2
  */
-public class DeckUtil {
+public final class DeckUtil {
 
     public static long fixedHash(String string) {
         long h = 1125899906842597L; // prime

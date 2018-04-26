@@ -1,10 +1,6 @@
 package mage.client.components.ability;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.util.*;
-import java.util.List;
-import javax.swing.*;
+import mage.client.SessionHandler;
 import mage.client.util.ImageHelper;
 import mage.client.util.SettingsManager;
 import mage.client.util.gui.GuiDisplayUtil;
@@ -17,6 +13,12 @@ import org.jdesktop.swingx.JXPanel;
 import org.jsoup.Jsoup;
 import org.mage.card.arcane.ManaSymbols;
 import org.mage.card.arcane.UI;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.*;
+import java.util.List;
 
 /**
  * Dialog for choosing abilities.
@@ -48,7 +50,7 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
     private static final String IMAGE_RIGHT_PATH = "/game/right.png";
     private static final String IMAGE_RIGHT_HOVERED_PATH = "/game/right_hovered.png";
 
-    private static Color SELECTED_COLOR = new Color(64, 147, 208);
+    private static final Color SELECTED_COLOR = new Color(64, 147, 208);
     private static Color BORDER_COLOR = new Color(0, 0, 0, 50);
 
     private boolean selected = false;
@@ -78,8 +80,8 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
         jScrollPane2.getVerticalScrollBar().setUI(new MageScrollbarUI());
     }
 
-    public void init(Session session, UUID gameId) {
-        this.session = session;
+    public void init(UUID gameId) {
+
         this.gameId = gameId;
     }
 
@@ -90,7 +92,7 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
     }
 
     public void show(AbilityPickerView choices, Point p) {
-        this.choices = new ArrayList<Object>();
+        this.choices = new ArrayList<>();
         this.selected = true; // to stop previous modal
 
         for (Map.Entry<UUID, String> choice : choices.getChoices().entrySet()) {
@@ -110,7 +112,7 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
         this.selected = false; // back to false - waiting for selection
         setVisible(true);
 
-        Point centered = SettingsManager.getInstance().getComponentPosition(DIALOG_WIDTH, DIALOG_HEIGHT);
+        Point centered = SettingsManager.instance.getComponentPosition(DIALOG_WIDTH, DIALOG_HEIGHT);
         this.setLocation(centered.x, centered.y);
         GuiDisplayUtil.keepComponentInsideScreen(centered.x, centered.y, this);
 
@@ -232,9 +234,9 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
         action.actionPerformed(null);
     }
 
-    public class ImageRenderer2 extends JEditorPane implements ListCellRenderer {
+    public static class ImageRenderer2 extends JEditorPane implements ListCellRenderer {
 
-        public final Map<String, String> cache = new HashMap<String, String>();
+        public final Map<String, String> cache = new HashMap<>();
 
         @Override
         public Component getListCellRendererComponent(
@@ -295,7 +297,7 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
             text = text.replace("\r\n", "<div style='font-size:5pt'></div>");
             //text += "<br>";
 
-            if (text.length() > 0) {
+            if (!text.isEmpty()) {
                 buffer.append(ManaSymbols.replaceSymbolsWithHTML(text, ManaSymbols.Type.DIALOG));
             }
 
@@ -396,24 +398,24 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
 
         JFrame jframe = new JFrame("Test");
 
-        List<Object> objectList = new ArrayList<Object>();
-        objectList.add("T: add {R} to your mana pool. 111111111111111111111111111");
-        objectList.add("T: add {B} to your mana pool. {source} deals 1 damage to you.");
-        objectList.add("{T}: add {B} to your mana pool");
-        objectList.add("T: add {B} to your mana pool");
-        objectList.add("T: add {B} to your mana pool");
-        objectList.add("T: add {B} to your mana pool");
-        objectList.add("T: add {B} to your mana pool");
-        objectList.add("T: add {B} to your mana pool");
-        objectList.add("T: add {B} to your mana pool");
-        objectList.add("T: add {B} to your mana pool");
-        objectList.add("T: add {B} to your mana pool");
-        objectList.add("T: add {B} to your mana pool");
-        objectList.add("T: add {B} to your mana pool");
-        objectList.add("T: add {B} to your mana pool");
-        objectList.add("T: add {B} to your mana pool");
-        objectList.add("T: add {B} to your mana pool");
-        objectList.add("T: add {B} to your mana pool");
+        List<Object> objectList = new ArrayList<>();
+        objectList.add("T: add {R}. 111111111111111111111111111");
+        objectList.add("T: add {B}. {source} deals 1 damage to you.");
+        objectList.add("{T}: add {B}");
+        objectList.add("T: add {B}");
+        objectList.add("T: add {B}");
+        objectList.add("T: add {B}");
+        objectList.add("T: add {B}");
+        objectList.add("T: add {B}");
+        objectList.add("T: add {B}");
+        objectList.add("T: add {B}");
+        objectList.add("T: add {B}");
+        objectList.add("T: add {B}");
+        objectList.add("T: add {B}");
+        objectList.add("T: add {B}");
+        objectList.add("T: add {B}");
+        objectList.add("T: add {B}");
+        objectList.add("T: add {B}");
         objectList.add("Cancel");
         AbilityPicker panel = new AbilityPicker(objectList, "Choose ability");
         jframe.add(panel);
@@ -424,7 +426,7 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
 
     public class AbilityPickerAction extends AbstractAction {
 
-        private UUID id;
+        private final UUID id;
 
         public AbilityPickerAction(UUID id, String choice) {
             this.id = id;
@@ -436,7 +438,7 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
                 return choice;
             }
             choice = Jsoup.parse(choice).text(); // decode HTML entities and strip tags
-            return choice.substring(0, 1).toUpperCase() + choice.substring(1);
+            return choice.substring(0, 1).toUpperCase(Locale.ENGLISH) + choice.substring(1);
         }
 
         @Override
@@ -445,7 +447,7 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
             if (id == null) {
                 cancel();
             } else {
-                session.sendPlayerUUID(gameId, id);
+                SessionHandler.sendPlayerUUID(gameId, id);
             }
             setVisible(false);
             AbilityPicker.this.selected = true;
@@ -460,7 +462,7 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
 
     private void cancel() {
         try {
-            session.sendPlayerBoolean(gameId, false);
+            SessionHandler.sendPlayerBoolean(gameId, false);
         } catch (Exception e) {
             log.error("Couldn't cancel choose dialog: " + e, e);
         }

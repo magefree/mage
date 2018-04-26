@@ -1,6 +1,7 @@
 package mage.choices;
 
 public class ChoiceColorOrArtifact extends ChoiceColor {
+
     public ChoiceColorOrArtifact() {
         this.choices.add("Artifacts");
         this.message = "Choose protection from";
@@ -16,6 +17,6 @@ public class ChoiceColorOrArtifact extends ChoiceColor {
     }
 
     public boolean isArtifactSelected() {
-        return choice.equals("Artifacts");
+        return "Artifacts".equals(choice);
     }
 }

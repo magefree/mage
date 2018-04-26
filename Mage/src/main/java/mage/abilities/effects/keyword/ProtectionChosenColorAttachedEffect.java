@@ -64,6 +64,7 @@ public class ProtectionChosenColorAttachedEffect extends ContinuousEffectImpl {
         if (effect.protectionAbility != null) {
             this.protectionAbility = effect.protectionAbility.copy();
         }
+        this.notRemoveItself = effect.notRemoveItself;
     }
 
     @Override

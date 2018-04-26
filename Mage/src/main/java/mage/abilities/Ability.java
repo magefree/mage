@@ -31,22 +31,21 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
 import mage.MageObject;
-import mage.abilities.costs.AlternativeCost;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
-import mage.choices.Choice;
-import mage.choices.Choices;
 import mage.constants.AbilityType;
 import mage.constants.AbilityWord;
 import mage.constants.EffectType;
+import mage.constants.TargetAdjustment;
 import mage.constants.Zone;
 import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.Targets;
@@ -170,22 +169,6 @@ public interface Ability extends Controllable, Serializable {
     void addManaCost(ManaCost cost);
 
     /**
-     * Gets all {@link AlternativeCost} associated with this ability.
-     *
-     * @return All {@link AlternativeCost}'s that can be paid instead of the
-     * {@link ManaCosts}
-     */
-    List<AlternativeCost> getAlternativeCosts();
-
-    /**
-     * Adds an {@link AlternativeCost} this ability that may be paid instead of
-     * any other cost.
-     *
-     * @param cost The {@link AlternativeCost} to add.
-     */
-    void addAlternativeCost(AlternativeCost cost);
-
-    /**
      * TODO Method is unused, keep it around?
      *
      * Gets all costs that are optional to this ability. These costs can be paid
@@ -266,20 +249,6 @@ public interface Ability extends Controllable, Serializable {
     void addTarget(Target target);
 
     /**
-     * Choices
-     *
-     * @return
-     */
-    Choices getChoices();
-
-    /**
-     * TODO: Javadoc me
-     *
-     * @param choice
-     */
-    void addChoice(Choice choice);
-
-    /**
      * Retrieves the {@link Zone} that this ability is active within.
      *
      * @return
@@ -323,7 +292,6 @@ public interface Ability extends Controllable, Serializable {
 
     /**
      * Activates this ability prompting the controller to pay any mandatory
-     * {@link Costs} or {@link AlternativeCost} associated with this ability.
      *
      * @param game A reference the {@link Game} for which this ability should be
      * activated within.
@@ -443,8 +411,9 @@ public interface Ability extends Controllable, Serializable {
      * true = show the rule at the top position of the rules
      *
      * @param ruleAtTheTop
+     * @return
      */
-    void setRuleAtTheTop(boolean ruleAtTheTop);
+    Ability setRuleAtTheTop(boolean ruleAtTheTop);
 
     /**
      * Returns true if this ability has to work also with face down object (set
@@ -567,9 +536,24 @@ public interface Ability extends Controllable, Serializable {
      */
     MageObject getSourceObjectIfItStillExists(Game game);
 
+    /**
+     * Returns the permanent that actually existed while the ability triggerd or
+     * an ability was activated only if it has not changed zone meanwhile. If
+     * not set yet, the current permanent if one exists will be retrieved from
+     * the game and returned.
+     *
+     * @param game
+     * @return
+     */
+    Permanent getSourcePermanentIfItStillExists(Game game);
+
     String getTargetDescription(Targets targets, Game game);
 
     void setCanFizzle(boolean canFizzle);
 
     boolean canFizzle();
+
+    void setTargetAdjustment(TargetAdjustment targetAdjustment);
+
+    TargetAdjustment getTargetAdjustment();
 }

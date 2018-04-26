@@ -44,7 +44,7 @@ public class FirstTimeStepWatcher extends Watcher {
     private final EventType eventType;
 
     public FirstTimeStepWatcher(EventType eventType) {
-        super(eventType.toString() + FirstTimeStepWatcher.class.getName(), WatcherScope.GAME);
+        super(eventType.toString() + FirstTimeStepWatcher.class.getSimpleName(), WatcherScope.GAME);
         this.eventType = eventType;
     }
 
@@ -63,10 +63,5 @@ public class FirstTimeStepWatcher extends Watcher {
         if (event.getType() == eventType) {
             condition = true;
         }
-    }
-
-    @Override
-    public void reset() {
-        super.reset();
     }
 }

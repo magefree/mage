@@ -3,14 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package mage.target.common;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 
@@ -21,34 +22,46 @@ import mage.target.TargetPermanent;
 public class TargetOpponentsChoicePermanent extends TargetPermanent {
 
     protected UUID opponentId = null;
+    private boolean dontTargetPlayer = false;
 
     public TargetOpponentsChoicePermanent(FilterPermanent filter) {
         super(1, 1, filter, false);
-        this.targetName = filter.getMessage();
     }
-    
-    public TargetOpponentsChoicePermanent(int minNumTargets, int maxNumTargets, FilterPermanent filter, boolean notTarget) {
+
+    public TargetOpponentsChoicePermanent(int minNumTargets, int maxNumTargets, FilterPermanent filter, boolean notTarget, boolean dontTargetPlayer) {
         super(minNumTargets, maxNumTargets, filter, notTarget);
-        this.targetName = filter.getMessage();
+        this.dontTargetPlayer = dontTargetPlayer;
     }
 
     public TargetOpponentsChoicePermanent(final TargetOpponentsChoicePermanent target) {
         super(target);
         this.opponentId = target.opponentId;
+        this.dontTargetPlayer = target.dontTargetPlayer;
     }
 
     @Override
     public boolean canTarget(UUID controllerId, UUID id, UUID sourceId, Game game, boolean flag) {
-        if (opponentId != null) {
-            return super.canTarget(opponentId, id, sourceId, game, flag);
-        }
-        return false;
+        return opponentId != null && super.canTarget(opponentId, id, sourceId, game, flag);
     }
 
     @Override
     public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
+        Permanent permanent = game.getPermanent(id);
         if (opponentId != null) {
-            return super.canTarget(opponentId, id, source, game);
+            if (permanent != null) {
+                if (source != null) {
+                    boolean canSourceControllerTarget = true;
+                    if (!isNotTarget()) {
+                        if (!permanent.canBeTargetedBy(game.getObject(source.getId()), controllerId, game)
+                                || !permanent.canBeTargetedBy(game.getObject(source.getSourceId()), controllerId, game)) {
+                            canSourceControllerTarget = false;
+                        }
+                    }
+                    canSourceControllerTarget &= super.canTarget(opponentId, id, source, game);
+                    canSourceControllerTarget &= filter.match(permanent, source.getSourceId(), opponentId, game);
+                    return canSourceControllerTarget;
+                }
+            }
         }
         return false;
     }
@@ -59,13 +72,40 @@ public class TargetOpponentsChoicePermanent extends TargetPermanent {
     }
 
     @Override
+    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+        MageObject sourceObject = game.getObject(sourceId);
+        Player player = game.getPlayer(sourceControllerId);
+        if (sourceObject == null || player == null) {
+            return false;
+        }
+        int counter;
+        for (UUID oppId : game.getState().getPlayersInRange(player.getId(), game)) {
+            counter = 0;
+            Player opp = game.getPlayer(oppId);
+            if (opp != null && player.hasOpponent(opp.getId(), game)) {
+                for (Permanent perm : game.getBattlefield().getActivePermanents(opp.getId(), game)) {
+                    if (!targets.containsKey(perm.getId())
+                            && filter.match(perm, sourceId, opp.getId(), game)
+                            && perm.canBeTargetedBy(sourceObject, sourceControllerId, game)) {
+                        counter++;
+                        if (counter >= minNumberOfTargets) {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    @Override
     public TargetOpponentsChoicePermanent copy() {
         return new TargetOpponentsChoicePermanent(this);
     }
 
     private UUID getOpponentId(UUID playerId, Ability source, Game game) {
         if (opponentId == null) {
-            TargetOpponent target = new TargetOpponent();
+            TargetOpponent target = new TargetOpponent(dontTargetPlayer);
             Player player = game.getPlayer(playerId);
             if (player != null) {
                 if (player.chooseTarget(Outcome.Detriment, target, source, game)) {

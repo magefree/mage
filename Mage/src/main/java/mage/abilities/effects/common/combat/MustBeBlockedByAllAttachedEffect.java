@@ -25,19 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.effects.common.combat;
 
+import java.util.Locale;
 import java.util.UUID;
-import mage.constants.AttachmentType;
-import mage.constants.Duration;
 import mage.abilities.Ability;
 import mage.abilities.effects.RequirementEffect;
+import mage.constants.AttachmentType;
+import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author LevelX2
  */
 public class MustBeBlockedByAllAttachedEffect extends RequirementEffect {
@@ -51,7 +50,7 @@ public class MustBeBlockedByAllAttachedEffect extends RequirementEffect {
     public MustBeBlockedByAllAttachedEffect(Duration duration, AttachmentType attachmentType) {
         super(duration);
         this.attachmentType = attachmentType;
-        staticText = "All creatures able to block " + (attachmentType.equals(AttachmentType.AURA) ? "enchanted":"equipped") + " creature do so";
+        staticText = "All creatures able to block " + attachmentType.verb().toLowerCase(Locale.ENGLISH) + " creature do so";
     }
 
     public MustBeBlockedByAllAttachedEffect(final MustBeBlockedByAllAttachedEffect effect) {
@@ -84,7 +83,7 @@ public class MustBeBlockedByAllAttachedEffect extends RequirementEffect {
     public UUID mustBlockAttacker(Ability source, Game game) {
         Permanent attachment = game.getPermanent(source.getSourceId());
         if (attachment != null && attachment.getAttachedTo() != null) {
-            return attachment.getAttachedTo() ;
+            return attachment.getAttachedTo();
         }
         return null;
     }

@@ -38,14 +38,14 @@ import mage.constants.Zone;
  */
 public class FirstStrikeAbility extends StaticAbility implements MageSingleton {
 
-    private static final FirstStrikeAbility fINSTANCE = new FirstStrikeAbility();
+    private static final FirstStrikeAbility instance = new FirstStrikeAbility();
 
     private Object readResolve() throws ObjectStreamException {
-        return fINSTANCE;
+        return instance;
     }
 
     public static FirstStrikeAbility getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private FirstStrikeAbility() {
@@ -59,7 +59,7 @@ public class FirstStrikeAbility extends StaticAbility implements MageSingleton {
 
     @Override
     public FirstStrikeAbility copy() {
-        return fINSTANCE;
+        return instance;
     }
 
 }

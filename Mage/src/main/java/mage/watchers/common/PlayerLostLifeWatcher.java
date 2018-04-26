@@ -38,7 +38,7 @@ import mage.watchers.Watcher;
 
 /*
  * Counts amount of life lost current or last turn by players.
- * This watcher is always added in gameImpl.init
+ * This watcher is automatically started in gameImpl.init for each game
  *
  * @author LevelX2
  */
@@ -48,7 +48,7 @@ public class PlayerLostLifeWatcher extends Watcher {
     private final Map<UUID, Integer> amountOfLifeLostLastTurn = new HashMap<>();
 
     public PlayerLostLifeWatcher() {
-        super("PlayerLostLifeWatcher", WatcherScope.GAME);
+        super(PlayerLostLifeWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public PlayerLostLifeWatcher(final PlayerLostLifeWatcher watcher) {
@@ -75,19 +75,21 @@ public class PlayerLostLifeWatcher extends Watcher {
     }
 
     public int getLiveLost(UUID playerId) {
-        Integer amount = amountOfLifeLostThisTurn.get(playerId);
-        if (amount != null) {
-            return amount;
+        return amountOfLifeLostThisTurn.getOrDefault(playerId, 0);
+    }
+
+    public int getAllOppLifeLost(UUID playerId) {
+        int amount = 0;
+        for (UUID player : this.amountOfLifeLostThisTurn.keySet()) {
+            if (!player.equals(playerId)) {
+                amount += this.amountOfLifeLostThisTurn.get(player);
+            }
         }
-        return 0;
+        return amount;
     }
 
     public int getLiveLostLastTurn(UUID playerId) {
-        Integer amount = amountOfLifeLostLastTurn.get(playerId);
-        if (amount != null) {
-            return amount;
-        }
-        return 0;
+        return amountOfLifeLostLastTurn.getOrDefault(playerId, 0);
     }
 
     @Override

@@ -123,17 +123,14 @@ public class PreventDamageToTargetMultiAmountEffect extends PreventionEffectImpl
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (!used && super.applies(event, source, game) && targetAmountMap.containsKey(event.getTargetId())) {
-            return true;
-        }
-        return false;
+        return !used && super.applies(event, source, game) && targetAmountMap.containsKey(event.getTargetId());
     }
 
     @Override
     public String getText(Mode mode) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Prevent the next ").append(amountToPrevent).append(" damage that would be dealt ");
-        if (duration.equals(Duration.EndOfTurn)) {
+        sb.append("prevent the next ").append(amountToPrevent).append(" damage that would be dealt ");
+        if (duration == Duration.EndOfTurn) {
             sb.append("this turn ");
         }
         sb.append("to any number of target creatures and/or players, divided as you choose");

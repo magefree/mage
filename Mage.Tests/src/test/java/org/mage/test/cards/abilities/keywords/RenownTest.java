@@ -97,7 +97,7 @@ public class RenownTest extends CardTestPlayerBase {
     @Test
     public void testHonoredHierarch() {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
-        // As long as Honored Hierarch is renowned, it has vigilance and "{T}: Add one mana of any color to your mana pool."
+        // As long as Honored Hierarch is renowned, it has vigilance and "{T}: Add one mana of any color."
         addCard(Zone.HAND, playerA, "Honored Hierarch"); // 1/1
 
         addCard(Zone.LIBRARY, playerA, "Veteran's Sidearm");

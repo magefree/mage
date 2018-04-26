@@ -71,16 +71,16 @@ public class SearchLibraryPutInPlayTargetPlayerEffect extends SearchEffect {
         Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player != null) {
             if (player.searchLibrary(target, game)) {
-                if (target.getTargets().size() > 0) {
+                if (!target.getTargets().isEmpty()) {
                     player.moveCards(new CardsImpl(target.getTargets()).getCards(game),
                             Zone.BATTLEFIELD, source, game, tapped, false, ownerIsController, null);
                 }
-                player.shuffleLibrary(game);
+                player.shuffleLibrary(source, game);
                 return true;
             }
 
             if (forceShuffle) {
-                player.shuffleLibrary(game);
+                player.shuffleLibrary(source, game);
             }
         }
 
@@ -89,12 +89,12 @@ public class SearchLibraryPutInPlayTargetPlayerEffect extends SearchEffect {
 
     private void setText() {
         StringBuilder sb = new StringBuilder();
-        sb.append("target player searches his or her library for ");
+        sb.append("target player searches their library for ");
         if (target.getNumberOfTargets() == 0 && target.getMaxNumberOfTargets() > 0) {
             if (target.getMaxNumberOfTargets() == Integer.MAX_VALUE) {
-                sb.append("any number of ").append(" ");
+                sb.append("any number of ").append(' ');
             } else {
-                sb.append("up to ").append(target.getMaxNumberOfTargets()).append(" ");
+                sb.append("up to ").append(target.getMaxNumberOfTargets()).append(' ');
             }
             sb.append(target.getTargetName()).append(" and put them onto the battlefield");
         } else {
@@ -104,9 +104,9 @@ public class SearchLibraryPutInPlayTargetPlayerEffect extends SearchEffect {
             sb.append(" tapped");
         }
         if (forceShuffle) {
-            sb.append(". Then that player shuffles his or her library");
+            sb.append(". Then that player shuffles their library");
         } else {
-            sb.append(". If that player does, he or she shuffles his or her library");
+            sb.append(". If that player does, he or she shuffles their library");
         }
         staticText = sb.toString();
     }

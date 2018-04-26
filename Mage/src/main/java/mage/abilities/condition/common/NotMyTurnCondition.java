@@ -32,13 +32,9 @@ import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.game.Game;
 
-public class NotMyTurnCondition implements Condition {
+public enum NotMyTurnCondition implements Condition {
 
-    private static final NotMyTurnCondition fInstance = new NotMyTurnCondition();
-
-    public static Condition getInstance() {
-        return fInstance;
-    }
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

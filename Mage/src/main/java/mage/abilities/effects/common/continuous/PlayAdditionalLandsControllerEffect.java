@@ -24,21 +24,20 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.abilities.effects.common.continuous;
 
+import mage.abilities.Ability;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
-import mage.abilities.Ability;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 /**
- *
  * @author Viserion
  */
 public class PlayAdditionalLandsControllerEffect extends ContinuousEffectImpl {
@@ -65,10 +64,9 @@ public class PlayAdditionalLandsControllerEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            if(player.getLandsPerTurn() == Integer.MAX_VALUE ||  this.additionalCards == Integer.MAX_VALUE){
+            if (player.getLandsPerTurn() == Integer.MAX_VALUE || this.additionalCards == Integer.MAX_VALUE) {
                 player.setLandsPerTurn(Integer.MAX_VALUE);
-            }
-            else{
+            } else {
                 player.setLandsPerTurn(player.getLandsPerTurn() + this.additionalCards);
             }
             return true;
@@ -79,15 +77,13 @@ public class PlayAdditionalLandsControllerEffect extends ContinuousEffectImpl {
     private void setText() {
         StringBuilder sb = new StringBuilder();
         sb.append("You may play ");
-        if(additionalCards == Integer.MAX_VALUE){
+        if (additionalCards == Integer.MAX_VALUE) {
             sb.append("any number of");
+        } else {
+            sb.append(CardUtil.numberToText(additionalCards, "an"));
         }
-        else
-        {
-        sb.append(Integer.toString(additionalCards));
-                }
-       sb.append(" additional land").append((additionalCards == 1 ? "" : "s"))
-         .append(duration == Duration.EndOfTurn ? " this turn" : " on each of your turns");
+        sb.append(" additional land").append((additionalCards == 1 ? "" : "s"))
+                .append(duration == Duration.EndOfTurn ? " this turn" : " on each of your turns");
         staticText = sb.toString();
     }
 

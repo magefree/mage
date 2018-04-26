@@ -3,7 +3,6 @@ package mage.client.plugins.impl;
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -29,13 +28,13 @@ import net.xeoh.plugins.base.PluginManager;
 import net.xeoh.plugins.base.impl.PluginManagerFactory;
 import org.apache.log4j.Logger;
 import org.mage.plugins.card.CardPluginImpl;
+import static org.mage.plugins.card.utils.CardImageUtils.getImagesDir;
 import org.mage.plugins.theme.ThemePluginImpl;
 
-public class Plugins implements MagePlugins {
+public enum Plugins implements MagePlugins {
+    instance;
+    public static final String PLUGINS_DIRECTORY = "plugins";
 
-    public static final String PLUGINS_DIRECTORY = "plugins/";
-
-    private static final MagePlugins fINSTANCE = new Plugins();
     private static final Logger LOGGER = Logger.getLogger(Plugins.class);
     private static PluginManager pm;
 
@@ -45,15 +44,12 @@ public class Plugins implements MagePlugins {
     private static final MageActionCallback mageActionCallback = new MageActionCallback();
     private final Map<String, String> sortingOptions = new HashMap<>();
 
-    public static MagePlugins getInstance() {
-        return fINSTANCE;
-    }
-
     @Override
     public void loadPlugins() {
+
         LOGGER.info("Loading plugins...");
         pm = PluginManagerFactory.createPluginManager();
-        pm.addPluginsFrom(new File(PLUGINS_DIRECTORY).toURI());
+        pm.addPluginsFrom(new File(PLUGINS_DIRECTORY + File.separator).toURI());
         this.cardPlugin = new CardPluginImpl();
         this.counterPlugin = pm.getPlugin(CounterPlugin.class);
         this.themePlugin = new ThemePluginImpl();
@@ -107,10 +103,12 @@ public class Plugins implements MagePlugins {
     }
 
     @Override
-    public MageCard getMageCard(CardView card, BigCard bigCard, Dimension dimension, UUID gameId, boolean loadImage) {
+    public MageCard getMageCard(CardView card, BigCard bigCard, Dimension dimension, UUID gameId, boolean loadImage, boolean previewable) {
         if (cardPlugin != null) {
-            mageActionCallback.refreshSession();
-            mageActionCallback.setCardPreviewComponent(bigCard);
+            if (previewable) {
+                mageActionCallback.refreshSession();
+                mageActionCallback.setCardPreviewComponent(bigCard);
+            }
             return cardPlugin.getMageCard(card, dimension, gameId, mageActionCallback, false, !MageFrame.isLite() && loadImage);
         } else {
             return new Card(card, bigCard, Config.dimensions, gameId);
@@ -123,20 +121,17 @@ public class Plugins implements MagePlugins {
     }
 
     @Override
-    public int sortPermanents(Map<String, JComponent> ui, Collection<MagePermanent> permanents) {
-        sortingOptions.put("nonLandPermanentsInOnePile", PreferencesDialog.getCachedValue("nonLandPermanentsInOnePile", "false"));
+    public int sortPermanents(Map<String, JComponent> ui, Map<UUID, MagePermanent> permanents, boolean topRow) {
         if (this.cardPlugin != null) {
-            return this.cardPlugin.sortPermanents(ui, permanents, sortingOptions);
+            return this.cardPlugin.sortPermanents(ui, permanents, PreferencesDialog.getCachedValue("nonLandPermanentsInOnePile", "false").equals("true"), topRow);
         }
         return -1;
     }
 
     @Override
     public void downloadSymbols() {
-        String useDefault = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_USE_DEFAULT, "true");
-        String path = useDefault.equals("true") ? null : PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PATH, null);
         if (this.cardPlugin != null) {
-            this.cardPlugin.downloadSymbols(path);
+            this.cardPlugin.downloadSymbols(getImagesDir());
         }
     }
 

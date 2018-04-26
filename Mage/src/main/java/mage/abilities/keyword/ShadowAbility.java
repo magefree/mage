@@ -12,17 +12,19 @@ import mage.game.permanent.Permanent;
 
 /**
  * "Shadow" keyword
+ *
  * @author Loki
  */
 public class ShadowAbility extends EvasionAbility implements MageSingleton {
-    private static final ShadowAbility fINSTANCE =  new ShadowAbility();
+
+    private static final ShadowAbility instance = new ShadowAbility();
 
     private Object readResolve() throws ObjectStreamException {
-        return fINSTANCE;
+        return instance;
     }
 
     public static ShadowAbility getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private ShadowAbility() {
@@ -31,12 +33,12 @@ public class ShadowAbility extends EvasionAbility implements MageSingleton {
 
     @Override
     public String getRule() {
-        return "Shadow <i>(This creature can block or be blocked by only creatures with shadow.)</i>";
+        return "shadow <i>(This creature can block or be blocked by only creatures with shadow.)</i>";
     }
 
     @Override
     public ShadowAbility copy() {
-        return fINSTANCE;
+        return instance;
     }
 
 }
@@ -64,7 +66,7 @@ class ShadowEffect extends RestrictionEffect implements MageSingleton {
     @Override
     public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
         return blocker.getAbilities().containsKey(ShadowAbility.getInstance().getId())
-                || game.getContinuousEffects().asThough(blocker.getId(), AsThoughEffectType.BLOCK_SHADOW, source, blocker.getControllerId(), game);
+                || null != game.getContinuousEffects().asThough(blocker.getId(), AsThoughEffectType.BLOCK_SHADOW, source, blocker.getControllerId(), game);
     }
 
     @Override

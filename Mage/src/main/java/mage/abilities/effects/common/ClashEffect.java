@@ -49,9 +49,9 @@ import mage.target.common.TargetOpponent;
 /**
  * 1. The controller of the spell or ability chooses an opponent. (This doesn't
  * target the opponent.) 2. Each player involved in the clash reveals the top
- * card of his or her library. 3. The converted mana costs of the revealed cards
+ * card of their library. 3. The converted mana costs of the revealed cards
  * are noted. 4. In turn order, each player involved in the clash chooses to put
- * his or her revealed card on either the top or bottom of his or her library.
+ * their revealed card on either the top or bottom of their library.
  * (Note that the player whose turn it is does this first, not necessarily the
  * controller of the clash spell or ability.) When the second player makes this
  * decision, he or she will know what the first player chose. Then all cards are
@@ -83,10 +83,10 @@ import mage.target.common.TargetOpponent;
  */
 public class ClashEffect extends OneShotEffect implements MageSingleton {
 
-    private static final ClashEffect fINSTANCE = new ClashEffect();
+    private static final ClashEffect instance = new ClashEffect();
 
     private Object readResolve() throws ObjectStreamException {
-        return fINSTANCE;
+        return instance;
     }
 
     private ClashEffect() {
@@ -95,7 +95,7 @@ public class ClashEffect extends OneShotEffect implements MageSingleton {
     }
 
     public static ClashEffect getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     public ClashEffect(final ClashEffect effect) {
@@ -128,24 +128,24 @@ public class ClashEffect extends OneShotEffect implements MageSingleton {
                     // Reveal top cards of involved players
                     StringBuilder message = new StringBuilder("Clash: ");
                     message.append(controller.getLogName());
-                    if (controller.getLibrary().size() > 0) {
+                    if (controller.getLibrary().hasCards()) {
                         Cards cards = new CardsImpl();
                         cardController = controller.getLibrary().getFromTop(game);
                         cards.add(cardController);
                         controller.revealCards(sourceObject.getIdName() + ": Clash card of " + controller.getName(), cards, game);
-                        cmcController = cardController.getManaCost().convertedManaCost();
-                        message.append(" (").append(cmcController).append(")");
+                        cmcController = cardController.getConvertedManaCost();
+                        message.append(" (").append(cmcController).append(')');
                     } else {
                         message.append(" no card");
                     }
                     message.append(" vs. ").append(opponent.getLogName());
-                    if (opponent.getLibrary().size() > 0) {
+                    if (opponent.getLibrary().hasCards()) {
                         Cards cards = new CardsImpl();
                         cardOpponent = opponent.getLibrary().getFromTop(game);
                         cards.add(cardOpponent);
                         opponent.revealCards(sourceObject.getIdName() + ": Clash card of " + opponent.getName(), cards, game);
-                        cmcOpponent = cardOpponent.getManaCost().convertedManaCost();
-                        message.append(" (").append(cmcOpponent).append(")");
+                        cmcOpponent = cardOpponent.getConvertedManaCost();
+                        message.append(" (").append(cmcOpponent).append(')');
                     } else {
                         message.append(" no card");
                     }
@@ -165,6 +165,7 @@ public class ClashEffect extends OneShotEffect implements MageSingleton {
                     // decide to put the cards on top or on the buttom of library in turn order beginning with the active player in turn order
                     PlayerList playerList = game.getPlayerList().copy();
                     playerList.setCurrent(game.getActivePlayerId());
+                    Player nextPlayer;
                     do {
                         Player current = playerList.getCurrent(game);
                         if (cardController != null && current.getId().equals(controller.getId())) {
@@ -173,7 +174,8 @@ public class ClashEffect extends OneShotEffect implements MageSingleton {
                         if (cardOpponent != null && current.getId().equals(opponent.getId())) {
                             topOpponent = current.chooseUse(Outcome.Detriment, "Put " + cardOpponent.getLogName() + " back on top of your library? (otherwise it goes to bottom)", source, game);
                         }
-                    } while (!playerList.getNext(game).getId().equals(game.getActivePlayerId()));
+                        nextPlayer = playerList.getNext(game);
+                    } while (nextPlayer != null && !nextPlayer.getId().equals(game.getActivePlayerId()));
                     // put the cards back to library
                     if (cardController != null) {
                         controller.moveCardToLibraryWithInfo(cardController, source.getSourceId(), game, Zone.LIBRARY, topController, true);
@@ -181,7 +183,18 @@ public class ClashEffect extends OneShotEffect implements MageSingleton {
                     if (cardOpponent != null) {
                         opponent.moveCardToLibraryWithInfo(cardOpponent, source.getSourceId(), game, Zone.LIBRARY, topOpponent, true);
                     }
-                    game.fireEvent(new GameEvent(EventType.CLASHED, opponent.getId(), source.getSourceId(), controller.getId(), 0, cmcController > cmcOpponent));
+                    // fire CLASHED event with info about who won
+                    String winner = "draw";
+                    if (cmcController > cmcOpponent) {
+                        winner = "controller";
+                    }
+                    if (cmcOpponent > cmcController) {
+                        winner = "opponent";
+                    }
+                    GameEvent gameEvent = new GameEvent(EventType.CLASHED, opponent.getId(), source.getSourceId(), controller.getId());
+                    gameEvent.setData(winner);
+                    game.fireEvent(gameEvent);
+
                     // set opponent to DoIfClashWonEffect
                     for (Effect effect : source.getEffects()) {
                         if (effect instanceof DoIfClashWonEffect) {

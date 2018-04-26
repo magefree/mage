@@ -2,7 +2,6 @@ package mage.abilities.condition.common;
 
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
-import mage.abilities.costs.OptionalAdditionalCost;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.Card;
 import mage.game.Game;

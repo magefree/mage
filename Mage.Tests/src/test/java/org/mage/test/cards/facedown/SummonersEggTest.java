@@ -3,10 +3,8 @@ package org.mage.test.cards.facedown;
 import mage.cards.Card;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import mage.game.ExileZone;
 import mage.game.permanent.Permanent;
 import org.junit.Assert;
-import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 

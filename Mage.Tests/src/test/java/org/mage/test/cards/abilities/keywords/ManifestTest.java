@@ -30,6 +30,7 @@ package org.mage.test.cards.abilities.keywords;
 import mage.cards.Card;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.game.permanent.Permanent;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
@@ -51,7 +52,7 @@ public class ManifestTest extends CardTestPlayerBase {
 
         // Tranquil Cove enters the battlefield tapped.
         // When Tranquil Cove enters the battlefield, you gain 1 life.
-        // {T}: Add {W} or {U} to your mana pool.
+        // {T}: Add {W} or {U}.
         addCard(Zone.LIBRARY, playerA, "Tranquil Cove");
         skipInitShuffling();
 
@@ -110,7 +111,7 @@ public class ManifestTest extends CardTestPlayerBase {
     @Test
     public void testETBTriggeredAbilities3() {
         addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
-        // Exile target creature. Its controller manifests the top card of his or her library {1}{U}
+        // Exile target creature. Its controller manifests the top card of their library {1}{U}
         addCard(Zone.HAND, playerB, "Reality Shift");
 
         // Constellation - When Doomwake Giant or another enchantment enters the battlefield
@@ -147,7 +148,7 @@ public class ManifestTest extends CardTestPlayerBase {
     @Test
     public void testNylea() {
         addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
-        // Exile target creature. Its controller manifests the top card of his or her library {1}{U}
+        // Exile target creature. Its controller manifests the top card of their library {1}{U}
         addCard(Zone.HAND, playerB, "Reality Shift");
 
         // As long as your devotion to white is less than five, Nylea isn't a creature.
@@ -181,7 +182,7 @@ public class ManifestTest extends CardTestPlayerBase {
     @Test
     public void testColorOfManifestedCardDoesNotCount() {
         addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
-        // Exile target creature. Its controller manifests the top card of his or her library {1}{U}
+        // Exile target creature. Its controller manifests the top card of their library {1}{U}
         addCard(Zone.HAND, playerB, "Reality Shift");
 
         // Gore Swine {2}{R}
@@ -210,15 +211,15 @@ public class ManifestTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Foundry Street Denizen", 1, 1);
 
     }
+
     /*
      I casted a Silence the Believers on a manifested card. It moved to the exile zone face-down.
      */
-
     @Test
     public void testCardGetsExiledFaceUp() {
         addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
         addCard(Zone.BATTLEFIELD, playerB, "Swamp", 4);
-        // Exile target creature. Its controller manifests the top card of his or her library {1}{U}
+        // Exile target creature. Its controller manifests the top card of their library {1}{U}
         addCard(Zone.HAND, playerB, "Reality Shift");
         // Silence the Believers - Instant {2}{B}{B}
         // Strive — Silence the Believers costs more to cast for each target beyond the first.
@@ -272,7 +273,7 @@ public class ManifestTest extends CardTestPlayerBase {
 
         skipInitShuffling();
 
-        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{1}{B},{T}, Sacrifice another creature");
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{1}{B}, {T}, Sacrifice another creature");
         addTarget(playerB, "Silvercoat Lion");
 
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
@@ -308,7 +309,7 @@ public class ManifestTest extends CardTestPlayerBase {
 
         skipInitShuffling();
 
-        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{1}{B},{T}, Sacrifice another creature");
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{1}{B}, {T}, Sacrifice another creature");
         addTarget(playerB, "Silvercoat Lion");
 
         activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "{5}{G}: Turn");
@@ -325,6 +326,8 @@ public class ManifestTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "", 0);
         assertPermanentCount(playerB, "Aerie Bowmasters", 1);
         assertPowerToughness(playerB, "Aerie Bowmasters", 4, 5); // 3/4  and the +1/+1 counter from Megamorph
+        Permanent aerie = getPermanent("Aerie Bowmasters", playerB);
+        Assert.assertTrue("Aerie Bowmasters has to be green", aerie != null && aerie.getColor(currentGame).isGreen());
 
     }
 
@@ -350,7 +353,7 @@ public class ManifestTest extends CardTestPlayerBase {
 
         skipInitShuffling();
 
-        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{1}{B},{T}, Sacrifice another creature");
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{1}{B}, {T}, Sacrifice another creature");
         addTarget(playerB, "Silvercoat Lion");
 
         setStopAt(2, PhaseStep.END_TURN);
@@ -428,7 +431,7 @@ public class ManifestTest extends CardTestPlayerBase {
 
         skipInitShuffling();
 
-        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{1}{B},{T}, Sacrifice another creature");
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{1}{B}, {T}, Sacrifice another creature");
         setChoice(playerB, "Silvercoat Lion");
 
         activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Sacrifice a creature");

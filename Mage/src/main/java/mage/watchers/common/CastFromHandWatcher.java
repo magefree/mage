@@ -1,6 +1,7 @@
 package mage.watchers.common;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 import mage.constants.WatcherScope;
@@ -17,7 +18,7 @@ public class CastFromHandWatcher extends Watcher {
     private Step step;
 
     public CastFromHandWatcher() {
-        super(CastFromHandWatcher.class.getName(), WatcherScope.GAME);
+        super(CastFromHandWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public CastFromHandWatcher(final CastFromHandWatcher watcher) {
@@ -32,16 +33,18 @@ public class CastFromHandWatcher extends Watcher {
          * reset if the game comes to a new step
          */
 
-        if (step != null && game.getTurn().getStep() != step) {
+        if (step != null && !Objects.equals(game.getTurn().getStep(), step)) {
             spellsCastFromHand.clear();
             step = null;
         }
-        if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getZone().equals(Zone.HAND)) {
+        if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getZone() == Zone.HAND) {
             if (step == null) {
                 step = game.getTurn().getStep();
             }
             Spell spell = (Spell) game.getObject(event.getTargetId());
-            spellsCastFromHand.add(spell.getSourceId());
+            if (spell != null) {
+                spellsCastFromHand.add(spell.getSourceId());
+            }
         }
     }
 

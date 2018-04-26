@@ -67,4 +67,8 @@ public abstract class DeckValidator implements Serializable {
             }
         }
     }
+
+    public int getEdhPowerLevel(Deck deck) {
+        return 0;
+    }
 }

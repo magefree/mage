@@ -30,7 +30,6 @@ package mage.abilities.effects.common;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
-import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -66,8 +65,8 @@ public class DamageEachOtherEffect extends OneShotEffect {
         }
 
         if (sourceCreature != null && targetCreature != null
-                && sourceCreature.getCardType().contains(CardType.CREATURE)
-                && targetCreature.getCardType().contains(CardType.CREATURE)) {
+                && sourceCreature.isCreature()
+                && targetCreature.isCreature()) {
             targetCreature.damage(sourceCreature.getPower().getValue(), sourceCreature.getId(), game, false, true);
             if (sourceOnBattlefield) {
                 sourceCreature.damage(targetCreature.getPower().getValue(), targetCreature.getId(), game, false, true);

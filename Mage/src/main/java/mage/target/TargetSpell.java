@@ -27,15 +27,18 @@
  */
 package mage.target;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -43,10 +46,11 @@ import mage.game.stack.StackObject;
  */
 public class TargetSpell extends TargetObject {
 
-    protected FilterSpell filter;
+    protected final FilterSpell filter;
+    private final Set<UUID> sourceIds = new HashSet<>();
 
     public TargetSpell() {
-        this(1, 1, new FilterSpell());
+        this(1, 1, StaticFilters.FILTER_SPELL);
     }
 
     public TargetSpell(FilterSpell filter) {
@@ -68,6 +72,7 @@ public class TargetSpell extends TargetObject {
     public TargetSpell(final TargetSpell target) {
         super(target);
         this.filter = target.filter.copy();
+        this.sourceIds.addAll(target.sourceIds);
     }
 
     @Override
@@ -82,10 +87,7 @@ public class TargetSpell extends TargetObject {
             return false;
         }
         Spell spell = game.getStack().getSpell(id);
-        if (spell != null) {
-            return filter.match(spell, source.getSourceId(), source.getControllerId(), game);
-        }
-        return false;
+        return spell != null && filter.match(spell, source.getSourceId(), source.getControllerId(), game);
     }
 
     @Override
@@ -113,13 +115,10 @@ public class TargetSpell extends TargetObject {
 
     @Override
     public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
-        Set<UUID> possibleTargets = new HashSet<>();
-        for (StackObject stackObject : game.getStack()) {
-            if (canBeChosen(stackObject, sourceId, sourceControllerId, game)) {
-                possibleTargets.add(stackObject.getId());
-            }
-        }
-        return possibleTargets;
+        return game.getStack().stream()
+                .filter(stackObject -> canBeChosen(stackObject, sourceId, sourceControllerId, game))
+                .map(StackObject::getId)
+                .collect(Collectors.toSet());
     }
 
     @Override
@@ -135,6 +134,20 @@ public class TargetSpell extends TargetObject {
     private boolean canBeChosen(StackObject stackObject, UUID sourceID, UUID sourceControllerId, Game game) {
         return stackObject instanceof Spell
                 && game.getState().getPlayersInRange(sourceControllerId, game).contains(stackObject.getControllerId())
-                && filter.match((Spell) stackObject, sourceID, sourceControllerId, game);
+                && filter.match(stackObject, sourceID, sourceControllerId, game);
     }
+
+    @Override
+    public void addTarget(UUID id, Ability source, Game game, boolean skipEvent) {
+        Spell spell = game.getStack().getSpell(id);
+        if (spell != null) { // remember the original sourceID
+            sourceIds.add(spell.getSourceId());
+        }
+        super.addTarget(id, source, game, skipEvent);
+    }
+
+    public Set<UUID> getSourceIds() {
+        return sourceIds;
+    }
+
 }

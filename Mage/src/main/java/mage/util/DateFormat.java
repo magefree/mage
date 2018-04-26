@@ -33,7 +33,7 @@ import java.util.Date;
  *
  * @author LevelX2
  */
-public class DateFormat {
+public final class DateFormat {
 
     /**
      * calculates the duration between two dates and returns a string in the format hhh:mm:ss
@@ -61,13 +61,13 @@ public class DateFormat {
         seconds = seconds % 3600;
         long m = seconds / 60;
         long s = seconds % 60;
-        sb.append(h).append(":");
+        sb.append(h).append(':');
         if (m<10) {
-            sb.append("0");
+            sb.append('0');
         }
-        sb.append(m).append(":");
+        sb.append(m).append(':');
         if (s<10) {
-            sb.append("0");
+            sb.append('0');
         }
         sb.append(s);
         return sb.toString();

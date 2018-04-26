@@ -111,22 +111,25 @@ public class PutTopCardOfLibraryIntoGraveEachPlayerEffect extends OneShotEffect 
         StringBuilder sb = new StringBuilder();
         switch (targetController) {
             case OPPONENT:
-                sb.append("Each opponent ");
+                sb.append("each opponent ");
                 break;
             case ANY:
-                sb.append("Each player ");
+                sb.append("each player ");
                 break;
             case NOT_YOU:
-                sb.append("Each other player ");
+                sb.append("each other player ");
                 break;
             default:
                 throw new UnsupportedOperationException("TargetController type not supported.");
         }
         sb.append("puts the top ");
-        sb.append(CardUtil.numberToText(numberCards.toString(), "a"));
-        sb.append(" card");
-        sb.append(numberCards.toString().equals("1") ? "" : "s");
-        sb.append(" of his or her library into his or her graveyard");
+        if(numberCards.toString().equals("1")) {
+            sb.append("card");
+        } else {
+            sb.append(CardUtil.numberToText(numberCards.toString()));
+            sb.append(" cards");
+        }
+        sb.append(" of their library into their graveyard");
         return sb.toString();
     }
 }

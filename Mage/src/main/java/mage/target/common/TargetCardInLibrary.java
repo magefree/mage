@@ -28,10 +28,11 @@
 package mage.target.common;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
+
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.cards.Cards;
@@ -69,6 +70,7 @@ public class TargetCardInLibrary extends TargetCard {
         // with a certain card type or color, that player isn’t required to find some or all of those cards
         // even if they’re present in that zone.
         this.setRequired(!filter.hasPredicates());
+        this.setNotTarget(true);
         this.librarySearchLimit = Integer.MAX_VALUE;
     }
 
@@ -91,7 +93,7 @@ public class TargetCardInLibrary extends TargetCard {
         } else {
             cards = new ArrayList<>(targetPlayer.getLibrary().getTopCards(game, librarySearchLimit));
         }
-        Collections.sort(cards, new CardNameComparator());
+        cards.sort(Comparator.comparing(MageObject::getName));
         Cards cardsId = new CardsImpl();
         for (Card card : cards) {
             cardsId.add(card);
@@ -110,10 +112,7 @@ public class TargetCardInLibrary extends TargetCard {
     @Override
     public boolean canTarget(UUID id, Ability source, Game game) {
         Card card = game.getPlayer(source.getControllerId()).getLibrary().getCard(id, game);
-        if (card != null) {
-            return filter.match(card, game);
-        }
-        return false;
+        return card != null && filter.match(card, game);
     }
 
     @Override
@@ -132,10 +131,3 @@ public class TargetCardInLibrary extends TargetCard {
 
 }
 
-class CardNameComparator implements Comparator<Card> {
-
-    @Override
-    public int compare(Card o1, Card o2) {
-        return o1.getName().compareTo(o2.getName());
-    }
-}

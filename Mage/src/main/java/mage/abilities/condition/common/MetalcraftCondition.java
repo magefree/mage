@@ -12,19 +12,14 @@ import mage.game.Game;
  *
  * @author nantuko
  */
-public class MetalcraftCondition implements Condition {
-
+public enum MetalcraftCondition implements Condition {
+    instance;
     private static final FilterPermanent filter = new FilterPermanent("artifact");
 
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
-    private static final MetalcraftCondition fInstance = new MetalcraftCondition();
-
-    public static Condition getInstance() {
-        return fInstance;
-    }
 
     @Override
     public boolean apply(Game game, Ability source) {
@@ -35,5 +30,5 @@ public class MetalcraftCondition implements Condition {
     public String toString() {
         return "you control three or more artifacts";
     }
-    
+
 }

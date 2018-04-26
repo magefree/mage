@@ -38,15 +38,12 @@ import mage.game.permanent.Permanent;
  * @author LevelX2
  */
 
-public class FormidableCondition implements Condition {
+public enum FormidableCondition implements Condition {
 
-    private static final FormidableCondition fInstance = new FormidableCondition();
+   instance;
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
-    public static Condition getInstance() {
-        return fInstance;
-    }
 
     @Override
     public boolean apply(Game game, Ability source) {

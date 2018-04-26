@@ -102,7 +102,7 @@ public class DrawCardAllEffect extends OneShotEffect {
     }
 
     private String setText() {
-        StringBuilder sb = new StringBuilder("Each ");
+        StringBuilder sb = new StringBuilder("each ");
         switch (targetController) {
             case ANY:
                 sb.append("player");

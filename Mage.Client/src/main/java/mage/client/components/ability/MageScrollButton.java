@@ -16,10 +16,10 @@ import javax.swing.plaf.metal.MetalScrollButton;
  */
 public class MageScrollButton extends MetalScrollButton {
 
-    private static ImageIcon buttonLeft;
-    private static ImageIcon buttonRight;
-    private static ImageIcon buttonUp;
-    private static ImageIcon buttonDown;
+    private static final ImageIcon buttonLeft;
+    private static final ImageIcon buttonRight;
+    private static final ImageIcon buttonUp;
+    private static final ImageIcon buttonDown;
 
     private int width;
 

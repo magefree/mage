@@ -47,7 +47,7 @@ public class CantAttackBlockUnlessPaysSourceEffect extends PayCostToAttackBlockE
         super(Duration.WhileOnBattlefield, Outcome.Detriment, restrictType, cost);
         staticText = "{this} can't " + restrictType.toString() + " unless you "
                 + cost == null ? "" : cost.getText()
-                        + (restrictType.equals(RestrictType.ATTACK) ? " <i>(This cost is paid as attackers are declared.)</i>" : "");
+                        + (restrictType == RestrictType.ATTACK ? " <i>(This cost is paid as attackers are declared.)</i>" : "");
     }
 
     public CantAttackBlockUnlessPaysSourceEffect(ManaCosts manaCosts, RestrictType restrictType) {
@@ -62,10 +62,10 @@ public class CantAttackBlockUnlessPaysSourceEffect extends PayCostToAttackBlockE
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (!restrictType.equals(RestrictType.BLOCK) && event.getType().equals(EventType.DECLARE_ATTACKER)) {
+        if (!(restrictType == RestrictType.BLOCK) && event.getType() == EventType.DECLARE_ATTACKER) {
             return event.getSourceId().equals(source.getSourceId());
         }
-        if (!restrictType.equals(RestrictType.ATTACK) && event.getType().equals(EventType.DECLARE_BLOCKER)) {
+        if (!(restrictType == RestrictType.ATTACK) && event.getType() == EventType.DECLARE_BLOCKER) {
             return event.getSourceId().equals(source.getSourceId());
         }
         return false;

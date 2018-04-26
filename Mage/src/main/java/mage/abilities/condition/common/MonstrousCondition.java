@@ -39,19 +39,9 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class MonstrousCondition implements Condition {
+public enum MonstrousCondition implements Condition {
 
-    private static MonstrousCondition fInstance = null;
-
-    private MonstrousCondition() {}
-
-    public static Condition getInstance() {
-        if (fInstance == null) {
-            fInstance = new MonstrousCondition();
-        }
-        return fInstance;
-    }
-
+    instance;
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());

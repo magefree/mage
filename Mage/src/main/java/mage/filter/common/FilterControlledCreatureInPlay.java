@@ -41,7 +41,7 @@ import mage.game.permanent.Permanent;
  */
 public class FilterControlledCreatureInPlay extends FilterImpl<Object> implements FilterInPlay<Object> {
 
-    protected FilterCreaturePermanent creatureFilter;
+    protected final FilterCreaturePermanent creatureFilter;
 
     public FilterControlledCreatureInPlay() {
         this("creature");

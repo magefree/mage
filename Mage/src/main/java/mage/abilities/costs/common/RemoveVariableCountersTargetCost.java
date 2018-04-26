@@ -58,7 +58,7 @@ public class RemoveVariableCountersTargetCost extends VariableCostImpl  {
     }
 
     public RemoveVariableCountersTargetCost(FilterPermanent filter, CounterType counterTypeToRemove, String xText, int minValue) {
-        super(xText, new StringBuilder(counterTypeToRemove != null ? counterTypeToRemove.getName() + " ":"").append("counters to remove").toString());
+        super(xText, new StringBuilder(counterTypeToRemove != null ? counterTypeToRemove.getName() + ' ' :"").append("counters to remove").toString());
         this.filter = filter;
         this.counterTypeToRemove = counterTypeToRemove;
         this.text = setText();
@@ -79,7 +79,7 @@ public class RemoveVariableCountersTargetCost extends VariableCostImpl  {
     private String setText() {
         StringBuilder sb = new StringBuilder("Remove ").append(xText);
         if (counterTypeToRemove != null) {
-            sb.append(" ").append(counterTypeToRemove.getName());
+            sb.append(' ').append(counterTypeToRemove.getName());
         }
         sb.append(" counters from among ").append(filter.getMessage());
         return sb.toString();
@@ -95,9 +95,9 @@ public class RemoveVariableCountersTargetCost extends VariableCostImpl  {
         int maxValue = 0;
         for (Permanent permanent :game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
             if (counterTypeToRemove != null) {
-                maxValue += permanent.getCounters().getCount(counterTypeToRemove);
+                maxValue += permanent.getCounters(game).getCount(counterTypeToRemove);
             } else {
-                for(Counter counter :permanent.getCounters().values()){
+                for(Counter counter :permanent.getCounters(game).values()){
                     maxValue += counter.getCount();
                 }
             }

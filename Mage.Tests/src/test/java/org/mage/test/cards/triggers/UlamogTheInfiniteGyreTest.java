@@ -73,7 +73,7 @@ public class UlamogTheInfiniteGyreTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 15);
         // When you cast Kozilek, Butcher of Truth, draw four cards.
         // Annihilator 4 (Whenever this creature attacks, defending player sacrifices four permanents.)
-        // When Kozilek is put into a graveyard from anywhere, its owner shuffles his or her graveyard into his or her library.
+        // When Kozilek is put into a graveyard from anywhere, its owner shuffles their graveyard into their library.
         addCard(Zone.HAND, playerA, "Kozilek, Butcher of Truth"); // {10}
         // Destroy target creature.
         // Spell mastery - If there are two or more instant and/or sorcery cards in your graveyard, you gain 2 life.
@@ -122,7 +122,7 @@ public class UlamogTheInfiniteGyreTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
         // When you cast Kozilek, Butcher of Truth, draw four cards.
         // Annihilator 4 (Whenever this creature attacks, defending player sacrifices four permanents.)
-        // When Kozilek is put into a graveyard from anywhere, its owner shuffles his or her graveyard into his or her library.
+        // When Kozilek is put into a graveyard from anywhere, its owner shuffles their graveyard into their library.
         addCard(Zone.BATTLEFIELD, playerA, "Kozilek, Butcher of Truth"); // {10}
         // As Ixidron enters the battlefield, turn all other nontoken creatures face down.
         // Ixidron's power and toughness are each equal to the number of face-down creatures on the battlefield.

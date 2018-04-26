@@ -35,18 +35,13 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author LevelX2
  */
 public class CantAttackBlockAttachedEffect extends RestrictionEffect {
 
     public CantAttackBlockAttachedEffect(AttachmentType attachmentType) {
         super(Duration.WhileOnBattlefield);
-        if (attachmentType.equals(AttachmentType.AURA)) {
-            this.staticText = "Enchanted creature can't attack or block";
-        } else {
-            this.staticText = "Equipped creature can't attack or block";
-        }
+        this.staticText = attachmentType.verb() + " creature can't attack or block";
     }
 
     public CantAttackBlockAttachedEffect(final CantAttackBlockAttachedEffect effect) {
@@ -56,11 +51,8 @@ public class CantAttackBlockAttachedEffect extends RestrictionEffect {
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
         Permanent attachment = game.getPermanent(source.getSourceId());
-        if (attachment != null && attachment.getAttachedTo() != null
-                && permanent.getId().equals(attachment.getAttachedTo())) {
-            return true;
-        }
-        return false;
+        return attachment != null && attachment.getAttachedTo() != null
+                && permanent.getId().equals(attachment.getAttachedTo());
     }
 
     @Override

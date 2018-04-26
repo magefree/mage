@@ -1,16 +1,16 @@
 /*
  *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- * 
+ *
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
- * 
+ *
  *     1. Redistributions of source code must retain the above copyright notice, this list of
  *        conditions and the following disclaimer.
- * 
+ *
  *     2. Redistributions in binary form must reproduce the above copyright notice, this list
  *        of conditions and the following disclaimer in the documentation and/or other materials
  *        provided with the distribution.
- * 
+ *
  *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
  *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
  *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
@@ -20,30 +20,19 @@
  *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  *  The views and conclusions contained in the software and documentation are those of the
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.game.draft;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import mage.cards.Card;
 import mage.cards.ExpansionSet;
 import mage.game.draft.DraftOptions.TimingOption;
-import mage.game.events.Listener;
-import mage.game.events.PlayerQueryEvent;
-import mage.game.events.PlayerQueryEventSource;
-import mage.game.events.TableEvent;
+import mage.game.events.*;
 import mage.game.events.TableEvent.EventType;
-import mage.game.events.TableEventSource;
 import mage.players.Player;
 import mage.players.PlayerList;
 
@@ -98,9 +87,9 @@ public abstract class DraftImpl implements Draft {
             DraftPlayer newDraftPlayer = new DraftPlayer(newPlayer);
             DraftPlayer oldDraftPlayer = players.get(oldPlayer.getId());
             newDraftPlayer.setBooster(oldDraftPlayer.getBooster());
-            Map<UUID, DraftPlayer> newPlayers = new LinkedHashMap<>();            
+            Map<UUID, DraftPlayer> newPlayers = new LinkedHashMap<>();
             synchronized (players) {
-                for(Map.Entry<UUID, DraftPlayer> entry :players.entrySet()) {
+                for (Map.Entry<UUID, DraftPlayer> entry : players.entrySet()) {
                     if (entry.getKey().equals(oldPlayer.getId())) {
                         newPlayers.put(newPlayer.getId(), newDraftPlayer);
                     } else {
@@ -108,7 +97,7 @@ public abstract class DraftImpl implements Draft {
                     }
                 }
                 players.clear();
-                for (Map.Entry<UUID, DraftPlayer> entry: newPlayers.entrySet()) {
+                for (Map.Entry<UUID, DraftPlayer> entry : newPlayers.entrySet()) {
                     players.put(entry.getKey(), entry.getValue());
                 }
             }
@@ -118,14 +107,17 @@ public abstract class DraftImpl implements Draft {
                     currentId = newPlayer.getId();
                 }
                 table.clear();
-                for(UUID playerId : players.keySet()) {
+                for (UUID playerId : players.keySet()) {
                     table.add(playerId);
                 }
+
                 table.setCurrent(currentId);
             }
             if (oldDraftPlayer.isPicking()) {
                 newDraftPlayer.setPicking();
-                newDraftPlayer.getPlayer().pickCard(newDraftPlayer.getBooster(), newDraftPlayer.getDeck(), this);
+                if (!newDraftPlayer.getBooster().isEmpty()) {
+                    newDraftPlayer.getPlayer().pickCard(newDraftPlayer.getBooster(), newDraftPlayer.getDeck(), this);
+                }
             }
             return true;
         }
@@ -151,14 +143,13 @@ public abstract class DraftImpl implements Draft {
 
     /**
      * Number of boosters that each player gets in this draft
-     * 
+     *
      * @return
      */
     @Override
     public int getNumberBoosters() {
         return numberBoosters;
     }
-
 
     @Override
     public List<ExpansionSet> getSets() {
@@ -196,7 +187,7 @@ public abstract class DraftImpl implements Draft {
             while (true) {
                 List<Card> nextBooster = next.booster;
                 next.setBooster(currentBooster);
-                if (nextId == startId) {
+                if (Objects.equals(nextId, startId)) {
                     break;
                 }
                 currentBooster = nextBooster;
@@ -217,7 +208,7 @@ public abstract class DraftImpl implements Draft {
             while (true) {
                 List<Card> prevBooster = prev.booster;
                 prev.setBooster(currentBooster);
-                if (prevId == startId) {
+                if (Objects.equals(prevId, startId)) {
                     break;
                 }
                 currentBooster = prevBooster;
@@ -227,10 +218,9 @@ public abstract class DraftImpl implements Draft {
         }
     }
 
-
     protected void openBooster() {
         if (boosterNum < numberBoosters) {
-            for (DraftPlayer player: players.values()) {
+            for (DraftPlayer player : players.values()) {
                 if (draftCube != null) {
                     player.setBooster(draftCube.createBooster());
                 } else {
@@ -245,43 +235,38 @@ public abstract class DraftImpl implements Draft {
 
     protected boolean pickCards() {
         cardNum++;
-        for (DraftPlayer player: players.values()) {
+        for (DraftPlayer player : players.values()) {
             if (player.getBooster().isEmpty()) {
                 return false;
             }
             player.setPicking();
             player.getPlayer().pickCard(player.getBooster(), player.getDeck(), this);
         }
-        synchronized(this) {
+        synchronized (this) {
             while (!donePicking()) {
                 try {
                     this.wait();
-                } catch (InterruptedException ex) { }
+                } catch (InterruptedException ex) {
+                }
             }
         }
         return true;
     }
 
     protected boolean donePicking() {
-        if(isAbort()) {
+        if (isAbort()) {
             return true;
         }
-        for (DraftPlayer player: players.values()) {
-            if (player.isPicking()) {
-                return false;
-            }
-        }
-        return true;
+        return players.values()
+                .stream()
+                .noneMatch(DraftPlayer::isPicking);
+
     }
 
     @Override
     public boolean allJoined() {
-        for (DraftPlayer player: this.players.values()) {
-            if (!player.isJoined()) {
-                return false;
-            }
-        }
-        return true;
+        return players.values().stream()
+                .allMatch(DraftPlayer::isJoined);
     }
 
     @Override
@@ -318,14 +303,14 @@ public abstract class DraftImpl implements Draft {
     public boolean addPick(UUID playerId, UUID cardId, Set<UUID> hiddenCards) {
         DraftPlayer player = players.get(playerId);
         if (player.isPicking()) {
-            for (Card card: player.booster) {
+            for (Card card : player.booster) {
                 if (card.getId().equals(cardId)) {
                     player.addPick(card, hiddenCards);
                     player.booster.remove(card);
                     break;
                 }
             }
-            synchronized(this) {
+            synchronized (this) {
                 this.notifyAll();
             }
         }
@@ -354,8 +339,8 @@ public abstract class DraftImpl implements Draft {
 
     @Override
     public void resetBufferedCards() {
-        HashSet<ExpansionSet> setsDone = new HashSet<>();
-        for(ExpansionSet set: sets) {
+        Set<ExpansionSet> setsDone = new HashSet<>();
+        for (ExpansionSet set : sets) {
             if (!setsDone.contains(set)) {
                 set.removeSavedCards();
                 setsDone.add(set);
@@ -363,6 +348,5 @@ public abstract class DraftImpl implements Draft {
         }
 
     }
-
 
 }

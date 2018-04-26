@@ -100,7 +100,7 @@ class StormEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         MageObjectReference spellRef = (MageObjectReference) this.getValue("StormSpellRef");
         if (spellRef != null) {
-            CastSpellLastTurnWatcher watcher = (CastSpellLastTurnWatcher) game.getState().getWatchers().get(CastSpellLastTurnWatcher.class.getName());
+            CastSpellLastTurnWatcher watcher = (CastSpellLastTurnWatcher) game.getState().getWatchers().get(CastSpellLastTurnWatcher.class.getSimpleName());
             int stormCount = watcher.getSpellOrder(spellRef, game) - 1;
             if (stormCount > 0) {
                 Spell spell = (Spell) this.getValue("StormSpell");
@@ -109,9 +109,7 @@ class StormEffect extends OneShotEffect {
                         game.informPlayers("Storm: " + spell.getLogName() + " will be copied " + stormCount + " time" + (stormCount > 1 ? "s" : ""));
                     }
                     for (int i = 0; i < stormCount; i++) {
-                        Spell copy = spell.copySpell(source.getControllerId());
-                        game.getStack().push(copy);
-                        copy.chooseNewTargets(game, source.getControllerId());
+                        spell.createCopyOnStack(game, source, source.getControllerId(), true);
                     }
                 }
             }

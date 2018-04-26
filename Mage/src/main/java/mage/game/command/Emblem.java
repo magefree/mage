@@ -27,10 +27,11 @@
  */
 package mage.game.command;
 
-import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
@@ -38,25 +39,35 @@ import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.text.TextPart;
+import mage.cards.Card;
+import mage.cards.FrameStyle;
 import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.game.Game;
+import mage.game.events.ZoneChangeEvent;
 import mage.util.GameLog;
+import mage.util.SubTypeList;
 
 /**
  * @author nantuko
  */
 public class Emblem implements CommandObject {
 
-    private static List emptyList = new ArrayList();
+    private static EnumSet<CardType> emptySet = EnumSet.noneOf(CardType.class);
     private static ObjectColor emptyColor = new ObjectColor();
     private static ManaCosts emptyCost = new ManaCostsImpl();
 
-    private String name;
+    private String name = "";
     private UUID id;
     private UUID controllerId;
-    private UUID sourceId;
+    private MageObject sourceObject;
+    private FrameStyle frameStyle;
     private Abilities<Ability> abilites = new AbilitiesImpl<>();
-    private String expansionSetCodeForImage = null;
+    private String expansionSetCodeForImage = "";
 
     public Emblem() {
         this.id = UUID.randomUUID();
@@ -65,9 +76,16 @@ public class Emblem implements CommandObject {
     public Emblem(final Emblem emblem) {
         this.id = emblem.id;
         this.name = emblem.name;
+        this.frameStyle = emblem.frameStyle;
         this.controllerId = emblem.controllerId;
-        this.sourceId = emblem.sourceId;
+        this.sourceObject = emblem.sourceObject;
         this.abilites = emblem.abilites.copy();
+        this.expansionSetCodeForImage = emblem.expansionSetCodeForImage;
+    }
+
+    @Override
+    public FrameStyle getFrameStyle() {
+        return frameStyle;
     }
 
     @Override
@@ -75,9 +93,29 @@ public class Emblem implements CommandObject {
         this.id = UUID.randomUUID();
     }
 
+    public void setSourceObject(MageObject sourceObject) {
+        this.sourceObject = sourceObject;
+        if (sourceObject instanceof Card) {
+            if (name.isEmpty()) {
+                name = sourceObject.getSubtype(null).toString();
+            }
+            if (expansionSetCodeForImage.isEmpty()) {
+                expansionSetCodeForImage = ((Card) sourceObject).getExpansionSetCode();
+            }
+        }
+    }
+
+    @Override
+    public MageObject getSourceObject() {
+        return sourceObject;
+    }
+
     @Override
     public UUID getSourceId() {
-        return this.sourceId;
+        if (sourceObject != null) {
+            return sourceObject.getId();
+        }
+        return null;
     }
 
     @Override
@@ -90,10 +128,6 @@ public class Emblem implements CommandObject {
         this.abilites.setControllerId(controllerId);
     }
 
-    public void setSourceId(UUID sourceId) {
-        this.sourceId = sourceId;
-    }
-
     @Override
     public String getName() {
         return name;
@@ -101,7 +135,7 @@ public class Emblem implements CommandObject {
 
     @Override
     public String getIdName() {
-        return getName() + " [" + getId().toString().substring(0, 3) + "]";
+        return getName() + " [" + getId().toString().substring(0, 3) + ']';
     }
 
     @Override
@@ -120,23 +154,23 @@ public class Emblem implements CommandObject {
     }
 
     @Override
-    public List<CardType> getCardType() {
-        return emptyList;
+    public EnumSet<CardType> getCardType() {
+        return emptySet;
     }
 
     @Override
-    public List<String> getSubtype() {
-        return emptyList;
+    public SubTypeList getSubtype(Game game) {
+        return new SubTypeList();
     }
 
     @Override
-    public boolean hasSubtype(String subtype) {
+    public boolean hasSubtype(SubType subtype, Game game) {
         return false;
     }
 
     @Override
-    public List<String> getSupertype() {
-        return emptyList;
+    public EnumSet<SuperType> getSuperType() {
+        return EnumSet.noneOf(SuperType.class);
     }
 
     @Override
@@ -155,8 +189,18 @@ public class Emblem implements CommandObject {
     }
 
     @Override
+    public ObjectColor getFrameColor(Game game) {
+        return emptyColor;
+    }
+
+    @Override
     public ManaCosts<ManaCost> getManaCost() {
         return emptyCost;
+    }
+
+    @Override
+    public int getConvertedManaCost() {
+        return 0;
     }
 
     @Override
@@ -170,7 +214,8 @@ public class Emblem implements CommandObject {
     }
 
     @Override
-    public void adjustChoices(Ability ability, Game game) {
+    public int getStartingLoyalty() {
+        return 0;
     }
 
     @Override
@@ -214,7 +259,7 @@ public class Emblem implements CommandObject {
     }
 
     @Override
-    public void updateZoneChangeCounter(Game game) {
+    public void updateZoneChangeCounter(Game game, ZoneChangeEvent event) {
         throw new UnsupportedOperationException("Unsupported operation");
     }
 
@@ -223,4 +268,34 @@ public class Emblem implements CommandObject {
         throw new UnsupportedOperationException("Unsupported operation");
     }
 
+    public boolean isAllCreatureTypes() {
+        return false;
+    }
+
+    public void setIsAllCreatureTypes(boolean value) {
+    }
+
+    public void discardEffects() {
+        for (Ability ability : abilites) {
+            for (Effect effect : ability.getEffects()) {
+                if (effect instanceof ContinuousEffect) {
+                    ((ContinuousEffect) effect).discard();
+                }
+            }
+        }
+    }
+
+    @Override
+    public List<TextPart> getTextParts() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public TextPart addTextPart(TextPart textPart) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void removePTCDA() {
+    }
 }

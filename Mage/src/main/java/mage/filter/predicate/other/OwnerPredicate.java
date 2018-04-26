@@ -28,8 +28,8 @@
 package mage.filter.predicate.other;
 
 import java.util.UUID;
-import mage.constants.TargetController;
 import mage.cards.Card;
+import mage.constants.TargetController;
 import mage.filter.predicate.ObjectPlayer;
 import mage.filter.predicate.ObjectPlayerPredicate;
 import mage.game.Game;
@@ -61,8 +61,8 @@ public class OwnerPredicate implements ObjectPlayerPredicate<ObjectPlayer<Card>>
                 }
                 break;
             case OPPONENT:
-                if (!card.getOwnerId().equals(playerId) &&
-                        game.getPlayer(playerId).hasOpponent(card.getOwnerId(), game)) {
+                if (!card.getOwnerId().equals(playerId)
+                        && game.getPlayer(playerId).hasOpponent(card.getOwnerId(), game)) {
                     return true;
                 }
                 break;
@@ -71,6 +71,8 @@ public class OwnerPredicate implements ObjectPlayerPredicate<ObjectPlayer<Card>>
                     return true;
                 }
                 break;
+            case ANY:
+                return true;
         }
 
         return false;

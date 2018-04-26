@@ -45,7 +45,7 @@ public class ActivateAbilityOnlyLimitedTimesTest extends CardTestPlayerBase {
      * Creature - Plant Wall
      * 0/5
      * Defender
-     * Put a -0/-1 counter on Wall of Roots: Add {G} to your mana pool. Activate this ability only once each turn.
+     * Put a -0/-1 counter on Wall of Roots: Add {G}. Activate this ability only once each turn.
      *
      */
     @Test

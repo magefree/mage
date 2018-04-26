@@ -28,13 +28,14 @@
 
 package mage.player.ai;
 
+import mage.abilities.Ability;
+import mage.game.Game;
+import mage.game.combat.Combat;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.game.Game;
-import mage.game.combat.Combat;
 
 /**
  *
@@ -48,10 +49,10 @@ public class SimulationNode implements Serializable {
     protected int gameValue;
     protected List<Ability> abilities;
     protected int depth;
-    protected List<SimulationNode> children = new ArrayList<SimulationNode>();
+    protected List<SimulationNode> children = new ArrayList<>();
     protected SimulationNode parent;
-    protected List<UUID> targets = new ArrayList<UUID>();
-    protected List<String> choices = new ArrayList<String>();
+    protected List<UUID> targets = new ArrayList<>();
+    protected List<String> choices = new ArrayList<>();
     protected UUID playerId;
     protected Combat combat;
 
@@ -74,7 +75,7 @@ public class SimulationNode implements Serializable {
 
     public SimulationNode(SimulationNode parent, Game game, Ability ability, UUID playerId) {
         this(parent, game, playerId);
-        this.abilities = new ArrayList<Ability>();
+        this.abilities = new ArrayList<>();
         abilities.add(ability);
     }
 

@@ -27,12 +27,7 @@
  */
 package mage.target.common;
 
-import java.util.UUID;
-import mage.constants.TargetController;
-import mage.abilities.Ability;
-import mage.filter.FilterPlayer;
-import mage.filter.predicate.other.PlayerPredicate;
-import mage.game.Game;
+import mage.filter.FilterOpponent;
 import mage.target.TargetPlayer;
 
 /**
@@ -47,23 +42,15 @@ public class TargetOpponent extends TargetPlayer {
     }
     
     public TargetOpponent(boolean notTarget) {
-        super(1, 1, false, new FilterPlayer("opponent"));
-        this.filter.add(new PlayerPredicate(TargetController.OPPONENT));
-        setNotTarget(notTarget);
+        this(new FilterOpponent(), notTarget);        
+    }
+    
+    public TargetOpponent(FilterOpponent filter, boolean notTarget) {
+        super(1, 1, notTarget, filter);
     }
 
     public TargetOpponent(final TargetOpponent target) {
         super(target);
-    }
-
-    @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
-        return super.canChoose(sourceId, sourceControllerId, game);
-    }
-
-    @Override
-    public boolean canTarget(UUID id, Ability source, Game game) {
-        return super.canTarget(id, source, game);
     }
 
     @Override

@@ -71,7 +71,7 @@ public class SurgeTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Lightning Bolt");
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
 
-        // Put a token onto the battlefield that's a copy of target creature you control.
+        // Create a tokenonto the battlefield that's a copy of target creature you control.
         // Flashback {5}{U}{U}(You may cast this card from your graveyard for its flashback cost. Then exile it.)
         addCard(Zone.HAND, playerB, "Cackling Counterpart");
         addCard(Zone.BATTLEFIELD, playerB, "Island", 3);
@@ -102,7 +102,7 @@ public class SurgeTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 6);
         // Surge {3}{R}{R} (You may cast this spell for its surge cost if you or a teammate has cast another spell this turn)
         // Flying
-        // When Tyrant of Valakut enters the battlefield, if its surge cost was paid, it deals 3 damage to target creature or player.
+        // When Tyrant of Valakut enters the battlefield, if its surge cost was paid, it deals 3 damage to any target.
         addCard(Zone.HAND, playerA, "Tyrant of Valakut"); // {5}{R}{R}
         addCard(Zone.HAND, playerA, "Lightning Bolt");
 

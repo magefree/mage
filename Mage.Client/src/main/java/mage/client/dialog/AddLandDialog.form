@@ -7,6 +7,11 @@
         <Property name="text" type="java.lang.String" value="jButton2"/>
       </Properties>
     </Component>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel1"/>
+      </Properties>
+    </Component>
   </NonVisualComponents>
   <Properties>
     <Property name="title" type="java.lang.String" value="Add Land"/>
@@ -29,53 +34,61 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="lblMountain" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblForest" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblLandSet" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblIsland" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblPains" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblSwamp" alignment="1" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="lblDeckSize" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lblIsland" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblMountain" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblForest" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblLandSet" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="spnMountain" pref="85" max="32767" attributes="0"/>
-                                      <Component id="spnIsland" max="32767" attributes="0"/>
-                                      <Component id="spnForest" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Component id="cbLandSet" min="-2" pref="207" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="lblSwamp" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-                                      <Component id="spnSwamp" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="lblPains" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                                      <Component id="spnPlains" max="32767" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <EmptySpace min="-2" pref="122" max="-2" attributes="0"/>
-                          </Group>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="btnAdd" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="btnCancel" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <Component id="ckbFullArtLands" min="-2" max="-2" attributes="0"/>
+                      <Component id="panelSet" min="-2" pref="219" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Component id="spnForest" min="-2" pref="50" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="lblForestIcon" min="-2" pref="20" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <Component id="spnIsland" min="-2" pref="50" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="lblIslandIcon" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <Component id="spnMountain" min="-2" pref="50" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="lblMountainIcon" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <Component id="spnSwamp" min="-2" pref="50" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="lblSwampIcon" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="spnDeckSize" min="-2" pref="50" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="btnAutoAdd" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="btnCancel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="btnAutoAdd" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="btnAdd" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="spnPlains" min="-2" pref="50" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="lblPlainsIcon" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -85,40 +98,60 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="cbLandSet" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblLandSet" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="lblLandSet" min="-2" max="-2" attributes="0"/>
+                  <Component id="panelSet" min="-2" pref="23" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblForest" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="spnForest" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblForestIcon" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblIsland" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="spnIsland" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="lblIsland" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="spnIsland" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="lblIslandIcon" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblMountain" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="spnMountain" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="lblMountain" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="spnMountain" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="lblMountainIcon" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblPains" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="spnPlains" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="lblPains" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="spnPlains" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="lblPlainsIcon" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblSwamp" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="spnSwamp" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="lblSwamp" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="spnSwamp" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="lblSwampIcon" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="ckbFullArtLands" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnAutoAdd" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblDeckSize" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="spnDeckSize" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnAdd" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnCancel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnAutoAdd" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -128,24 +161,12 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="lblLandSet">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Set"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JComboBox" name="cbLandSet">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Item 1"/>
-            <StringItem index="1" value="Item 2"/>
-            <StringItem index="2" value="Item 3"/>
-            <StringItem index="3" value="Item 4"/>
-          </StringArray>
-        </Property>
+        <Property name="text" type="java.lang.String" value="Set:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblForest">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Forest"/>
+        <Property name="text" type="java.lang.String" value="Forest:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JSpinner" name="spnForest">
@@ -155,9 +176,23 @@
         </Property>
       </Properties>
     </Component>
+    <Component class="javax.swing.JLabel" name="lblForestIcon">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
+        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[22, 20]"/>
+        </Property>
+        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[22, 20]"/>
+        </Property>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[22, 20]"/>
+        </Property>
+      </Properties>
+    </Component>
     <Component class="javax.swing.JLabel" name="lblIsland">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Island"/>
+        <Property name="text" type="java.lang.String" value="Island:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JSpinner" name="spnIsland">
@@ -167,9 +202,22 @@
         </Property>
       </Properties>
     </Component>
+    <Component class="javax.swing.JLabel" name="lblIslandIcon">
+      <Properties>
+        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[22, 20]"/>
+        </Property>
+        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[22, 20]"/>
+        </Property>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[22, 20]"/>
+        </Property>
+      </Properties>
+    </Component>
     <Component class="javax.swing.JLabel" name="lblMountain">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Mountain"/>
+        <Property name="text" type="java.lang.String" value="Mountain:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JSpinner" name="spnMountain">
@@ -179,9 +227,22 @@
         </Property>
       </Properties>
     </Component>
+    <Component class="javax.swing.JLabel" name="lblMountainIcon">
+      <Properties>
+        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[22, 20]"/>
+        </Property>
+        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[22, 20]"/>
+        </Property>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[22, 20]"/>
+        </Property>
+      </Properties>
+    </Component>
     <Component class="javax.swing.JLabel" name="lblPains">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Plains"/>
+        <Property name="text" type="java.lang.String" value="Plains:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JSpinner" name="spnPlains">
@@ -191,9 +252,22 @@
         </Property>
       </Properties>
     </Component>
+    <Component class="javax.swing.JLabel" name="lblPlainsIcon">
+      <Properties>
+        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[22, 20]"/>
+        </Property>
+        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[22, 20]"/>
+        </Property>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[22, 20]"/>
+        </Property>
+      </Properties>
+    </Component>
     <Component class="javax.swing.JLabel" name="lblSwamp">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Swamp"/>
+        <Property name="text" type="java.lang.String" value="Swamp:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JSpinner" name="spnSwamp">
@@ -203,9 +277,44 @@
         </Property>
       </Properties>
     </Component>
+    <Component class="javax.swing.JLabel" name="lblSwampIcon">
+      <Properties>
+        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[22, 20]"/>
+        </Property>
+        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[22, 20]"/>
+        </Property>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[22, 20]"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblDeckSize">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Deck size:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JSpinner" name="spnDeckSize">
+      <Properties>
+        <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+          <SpinnerModel initial="0" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnAutoAdd">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Suggest"/>
+        <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;Propose related to the mana costs of the cards in the deck&lt;br&gt;&#xa;the number of lands to add to get to the set deck size."/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAutoAddActionPerformed"/>
+      </Events>
+    </Component>
     <Component class="javax.swing.JButton" name="btnAdd">
       <Properties>
         <Property name="text" type="java.lang.String" value="Add"/>
+        <Property name="toolTipText" type="java.lang.String" value="Add the selected number of basic lands to the deck."/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddActionPerformed"/>
@@ -219,13 +328,47 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnAutoAdd">
+    <Container class="javax.swing.JPanel" name="panelSet">
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JComboBox" name="cbLandSet">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="4">
+                <StringItem index="0" value="Item 1"/>
+                <StringItem index="1" value="Item 2"/>
+                <StringItem index="2" value="Item 3"/>
+                <StringItem index="3" value="Item 4"/>
+              </StringArray>
+            </Property>
+            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[20, 20]"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnSetFastSearch">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/buttons/search_24.png"/>
+            </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Search for set"/>
+            <Property name="alignmentX" type="float" value="1.0"/>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[23, 23]"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSetFastSearchActionPerformed"/>
+          </Events>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JCheckBox" name="ckbFullArtLands">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Suggest"/>
+        <Property name="text" type="java.lang.String" value="Only use full art lands"/>
+        <Property name="toolTipText" type="java.lang.String" value="For example, lands from ZEN/UST/HOU"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAutoAddActionPerformed"/>
-      </Events>
     </Component>
   </SubComponents>
 </Form>

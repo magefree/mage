@@ -70,10 +70,7 @@ public class TapAllEffect extends OneShotEffect {
     }
 
     private void setText() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Tap all ");
-        sb.append(filter.getMessage());
-        staticText = sb.toString();
+        staticText = "tap all " + filter.getMessage();
     }
 
 }

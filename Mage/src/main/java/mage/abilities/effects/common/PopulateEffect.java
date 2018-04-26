@@ -70,7 +70,7 @@ public class PopulateEffect extends OneShotEffect {
 
     public PopulateEffect(String prefixText) {
         super(Outcome.Copy);
-        this.staticText = (prefixText.length() > 0 ? prefixText + " p" : "P") + "opulate <i>(Put a token onto the battlefield that's a copy of a creature token you control.)</i>";
+        this.staticText = (!prefixText.isEmpty() ? prefixText + " p" : "P") + "opulate <i>(Put a token onto the battlefield that's a copy of a creature token you control.)</i>";
     }
 
     public PopulateEffect(final PopulateEffect effect) {
@@ -82,6 +82,7 @@ public class PopulateEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             Target target = new TargetPermanent(filter);
+            target.setNotTarget(true);
             if (target.canChoose(source.getControllerId(), game)) {
                 player.choose(Outcome.Copy, target, source.getSourceId(), game);
                 Permanent tokenToCopy = game.getPermanent(target.getFirstTarget());
@@ -89,7 +90,7 @@ public class PopulateEffect extends OneShotEffect {
                     if (!game.isSimulation()) {
                         game.informPlayers("Token selected for populate: " + tokenToCopy.getLogName());
                     }
-                    Effect effect = new PutTokenOntoBattlefieldCopyTargetEffect();
+                    Effect effect = new CreateTokenCopyTargetEffect();
                     effect.setTargetPointer(new FixedTarget(target.getFirstTarget()));
                     return effect.apply(game, source);
                 }

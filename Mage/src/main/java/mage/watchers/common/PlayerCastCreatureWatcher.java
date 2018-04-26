@@ -30,7 +30,6 @@ package mage.watchers.common;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
-import mage.constants.CardType;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -43,10 +42,10 @@ import mage.watchers.Watcher;
  */
 public class PlayerCastCreatureWatcher extends Watcher {
 
-    Set<UUID> playerIds = new HashSet<>();
+    final Set<UUID> playerIds = new HashSet<>();
 
     public PlayerCastCreatureWatcher() {
-        super("PlayerCastCreature", WatcherScope.GAME);
+        super(PlayerCastCreatureWatcher.class.getSimpleName(), WatcherScope.GAME);
     }
 
     public PlayerCastCreatureWatcher(final PlayerCastCreatureWatcher watcher) {
@@ -58,7 +57,7 @@ public class PlayerCastCreatureWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST) {
             Spell spell = (Spell) game.getObject(event.getTargetId());
-            if (spell.getCardType().contains(CardType.CREATURE)) {
+            if (spell.isCreature()) {
                 playerIds.add(spell.getControllerId());
             }
         }

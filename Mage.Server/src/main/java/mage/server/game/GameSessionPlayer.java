@@ -28,13 +28,8 @@
 package mage.server.game;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Set;
-import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 import mage.cards.Cards;
 import mage.choices.Choice;
@@ -43,21 +38,15 @@ import mage.constants.PlayerAction;
 import mage.game.Game;
 import mage.game.Table;
 import mage.interfaces.callback.ClientCallback;
+import mage.interfaces.callback.ClientCallbackMethod;
 import mage.players.Player;
 import mage.server.User;
 import mage.server.UserManager;
 import mage.server.util.ThreadExecutor;
-import mage.view.AbilityPickerView;
-import mage.view.CardsView;
-import mage.view.GameClientMessage;
-import mage.view.GameView;
-import mage.view.LookedAtView;
-import mage.view.SimpleCardsView;
-import mage.view.UserRequestMessage;
+import mage.view.*;
 import org.apache.log4j.Logger;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class GameSessionPlayer extends GameSessionWatcher {
@@ -66,7 +55,7 @@ public class GameSessionPlayer extends GameSessionWatcher {
 
     private final UUID playerId;
 
-    private static final ExecutorService callExecutor = ThreadExecutor.getInstance().getCallExecutor();
+    private static final ExecutorService callExecutor = ThreadExecutor.instance.getCallExecutor();
 
     public GameSessionPlayer(Game game, UUID userId, UUID playerId) {
         super(userId, game, true);
@@ -74,105 +63,91 @@ public class GameSessionPlayer extends GameSessionWatcher {
     }
 
     @Override
-    public void CleanUp() {
-        super.CleanUp();
+    public void cleanUp() {
+        super.cleanUp();
     }
 
     public void ask(final String question, final Map<String, Serializable> options) {
         if (!killed) {
-            User user = UserManager.getInstance().getUser(userId);
-            if (user != null) {
-                user.fireCallback(new ClientCallback("gameAsk", game.getId(), new GameClientMessage(getGameView(), question, options)));
-            }
+            UserManager.instance.getUser(userId).ifPresent(user -> user.fireCallback(new ClientCallback(ClientCallbackMethod.GAME_ASK, game.getId(), new GameClientMessage(getGameView(), question, options)))
+            );
         }
     }
 
     public void target(final String question, final CardsView cardView, final Set<UUID> targets, final boolean required, final Map<String, Serializable> options) {
         if (!killed) {
-            User user = UserManager.getInstance().getUser(userId);
-            if (user != null) {
-                user.fireCallback(new ClientCallback("gameTarget", game.getId(), new GameClientMessage(getGameView(), question, cardView, targets, required, options)));
-            }
+            UserManager.instance.getUser(userId).ifPresent(user -> {
+                user.fireCallback(new ClientCallback(ClientCallbackMethod.GAME_TARGET, game.getId(), new GameClientMessage(getGameView(), question, cardView, targets, required, options)));
+            });
+
         }
     }
 
     public void select(final String message, final Map<String, Serializable> options) {
         if (!killed) {
-            User user = UserManager.getInstance().getUser(userId);
-            if (user != null) {
-                user.fireCallback(new ClientCallback("gameSelect", game.getId(), new GameClientMessage(getGameView(), message, options)));
-            }
+            UserManager.instance.getUser(userId).ifPresent(user -> user.fireCallback(new ClientCallback(ClientCallbackMethod.GAME_SELECT, game.getId(), new GameClientMessage(getGameView(), message, options))));
         }
     }
 
     public void chooseAbility(final AbilityPickerView abilities) {
         if (!killed) {
-            User user = UserManager.getInstance().getUser(userId);
-            if (user != null) {
-                user.fireCallback(new ClientCallback("gameChooseAbility", game.getId(), abilities));
-            }
+            UserManager.instance.getUser(userId).ifPresent(user
+                    -> user.fireCallback(new ClientCallback(ClientCallbackMethod.GAME_CHOOSE_ABILITY, game.getId(), abilities)));
         }
+
     }
 
     public void choosePile(final String message, final CardsView pile1, final CardsView pile2) {
         if (!killed) {
-            User user = UserManager.getInstance().getUser(userId);
-            if (user != null) {
-                user.fireCallback(new ClientCallback("gameChoosePile", game.getId(), new GameClientMessage(message, pile1, pile2)));
-            }
+            UserManager.instance.getUser(userId).ifPresent(user
+                    -> user.fireCallback(new ClientCallback(ClientCallbackMethod.GAME_CHOOSE_PILE, game.getId(), new GameClientMessage(message, pile1, pile2))));
         }
+
     }
 
     public void chooseChoice(final Choice choice) {
         if (!killed) {
-            User user = UserManager.getInstance().getUser(userId);
-            if (user != null) {
-                user.fireCallback(new ClientCallback("gameChooseChoice", game.getId(), new GameClientMessage(choice)));
-            }
+            UserManager.instance.getUser(userId).ifPresent(user
+                    -> user.fireCallback(new ClientCallback(ClientCallbackMethod.GAME_CHOOSE_CHOICE, game.getId(), new GameClientMessage(choice))));
         }
+
     }
 
     public void playMana(final String message, final Map<String, Serializable> options) {
         if (!killed) {
-            User user = UserManager.getInstance().getUser(userId);
-            if (user != null) {
-                user.fireCallback(new ClientCallback("gamePlayMana", game.getId(), new GameClientMessage(getGameView(), message, options)));
-            }
+            UserManager.instance.getUser(userId).ifPresent(user
+                    -> user.fireCallback(new ClientCallback(ClientCallbackMethod.GAME_PLAY_MANA, game.getId(), new GameClientMessage(getGameView(), message, options))));
         }
     }
 
     public void playXMana(final String message) {
         if (!killed) {
-            User user = UserManager.getInstance().getUser(userId);
-            if (user != null) {
-                user.fireCallback(new ClientCallback("gamePlayXMana", game.getId(), new GameClientMessage(getGameView(), message)));
-            }
+            UserManager.instance.getUser(userId).ifPresent(user
+                    -> user.fireCallback(new ClientCallback(ClientCallbackMethod.GAME_PLAY_XMANA, game.getId(), new GameClientMessage(getGameView(), message))));
+
         }
     }
 
     public void getAmount(final String message, final int min, final int max) {
         if (!killed) {
-            User user = UserManager.getInstance().getUser(userId);
-            if (user != null) {
-                user.fireCallback(new ClientCallback("gameSelectAmount", game.getId(), new GameClientMessage(message, min, max)));
-            }
+            UserManager.instance.getUser(userId).ifPresent(user -> {
+                user.fireCallback(new ClientCallback(ClientCallbackMethod.GAME_GET_AMOUNT, game.getId(), new GameClientMessage(message, min, max)));
+            });
         }
     }
 
     public void endGameInfo(Table table) {
         if (!killed) {
-            User user = UserManager.getInstance().getUser(userId);
-            if (user != null) {
-                user.fireCallback(new ClientCallback("endGameInfo", game.getId(), getGameEndView(playerId, table)));
-            }
+            UserManager.instance.getUser(userId).ifPresent(user -> user.fireCallback(new ClientCallback(ClientCallbackMethod.END_GAME_INFO, game.getId(), getGameEndView(playerId, table))));
+
         }
     }
 
     public void requestPermissionToRollbackTurn(UUID requestingUserId, int numberTurns) {
         if (!killed) {
-            User requestingUser = UserManager.getInstance().getUser(requestingUserId);
-            User requestedUser = UserManager.getInstance().getUser(userId);
-            if (requestedUser != null && requestingUser != null) {
+            Optional<User> requestingUser = UserManager.instance.getUser(requestingUserId);
+            Optional<User> requestedUser = UserManager.instance.getUser(userId);
+            if (requestedUser.isPresent() && requestingUser.isPresent()) {
                 String message;
                 switch (numberTurns) {
                     case 0:
@@ -185,30 +160,30 @@ public class GameSessionPlayer extends GameSessionWatcher {
                         message = "Allow to rollback " + numberTurns + " turns?";
                 }
                 UserRequestMessage userRequestMessage = new UserRequestMessage(
-                        "Request by " + requestedUser.getName(), message);
-                userRequestMessage.setRelatedUser(requestingUserId, requestingUser.getName());
+                        "Request by " + requestedUser.get().getName(), message);
+                userRequestMessage.setRelatedUser(requestingUserId, requestingUser.get().getName());
                 userRequestMessage.setGameId(game.getId());
                 userRequestMessage.setButton1("Accept", PlayerAction.ADD_PERMISSION_TO_ROLLBACK_TURN);
                 userRequestMessage.setButton2("Deny", PlayerAction.DENY_PERMISSON_TO_ROLLBACK_TURN);
-                requestedUser.fireCallback(new ClientCallback("userRequestDialog", game.getId(), userRequestMessage));
+                requestedUser.get().fireCallback(new ClientCallback(ClientCallbackMethod.USER_REQUEST_DIALOG, game.getId(), userRequestMessage));
             }
         }
     }
 
     public void requestPermissionToSeeHandCards(UUID watcherId) {
         if (!killed) {
-            User watcher = UserManager.getInstance().getUser(watcherId);
-            User user = UserManager.getInstance().getUser(userId);
-            if (user != null && watcher != null) {
+            Optional<User> watcher = UserManager.instance.getUser(watcherId);
+            Optional<User> user = UserManager.instance.getUser(userId);
+            if (user.isPresent() && watcher.isPresent()) {
                 UserRequestMessage userRequestMessage = new UserRequestMessage(
                         "User request",
-                        "Allow user <b>" + watcher.getName() + "</b> for this match to see your hand cards?<br>"
+                        "Allow user <b>" + watcher.get().getName() + "</b> for this match to see your hand cards?<br>"
                         + "(You can revoke this every time using related popup menu item of your battlefield.)");
-                userRequestMessage.setRelatedUser(watcherId, watcher.getName());
+                userRequestMessage.setRelatedUser(watcherId, watcher.get().getName());
                 userRequestMessage.setGameId(game.getId());
                 userRequestMessage.setButton1("Accept", PlayerAction.ADD_PERMISSION_TO_SEE_HAND_CARDS);
                 userRequestMessage.setButton2("Reject", null);
-                user.fireCallback(new ClientCallback("userRequestDialog", game.getId(), userRequestMessage));
+                user.get().fireCallback(new ClientCallback(ClientCallbackMethod.USER_REQUEST_DIALOG, game.getId(), userRequestMessage));
             }
         }
     }
@@ -256,7 +231,7 @@ public class GameSessionPlayer extends GameSessionWatcher {
     }
 
     private void processControlledPlayers(Player player, GameView gameView) {
-        if (player.getPlayersUnderYourControl().size() > 0) {
+        if (!player.getPlayersUnderYourControl().isEmpty()) {
             Map<String, SimpleCardsView> handCards = new HashMap<>();
             for (UUID controlledPlayerId : player.getPlayersUnderYourControl()) {
                 Player opponent = game.getPlayer(controlledPlayerId);
@@ -267,10 +242,8 @@ public class GameSessionPlayer extends GameSessionWatcher {
     }
 
     public void removeGame() {
-        User user = UserManager.getInstance().getUser(userId);
-        if (user != null) {
-            user.removeGame(playerId);
-        }
+        UserManager.instance.getUser(userId).ifPresent(user -> user.removeGame(playerId));
+
     }
 
     public UUID getGameId() {
@@ -282,34 +255,31 @@ public class GameSessionPlayer extends GameSessionWatcher {
             final Player player = game.getPlayer(playerId);
             if (player != null && player.isInGame()) {
                 callExecutor.execute(
-                        new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            if (game.getStartTime() == null) {
-                                // gameController is still waiting to start the game
-                                player.leave();
-                            } else {
-                                // game was already started
-                                player.quit(game);
-                            }
-
-                        } catch (Exception ex) {
-                            if (ex != null) {
-                                // It seems this can happen if two threads try to end the game at the exact same time (one wins and one ends here)
-                                logger.fatal("Game session game quit exception " + (ex.getMessage() == null ? "null" : ex.getMessage()));
-                                logger.debug("- gameId:" + game.getId() + "  playerId: " + playerId);
-                                if (ex.getCause() != null) {
-                                    logger.debug("- Cause: " + (ex.getCause().getMessage() == null ? "null" : ex.getCause().getMessage()), ex);
+                        () -> {
+                            try {
+                                if (game.getStartTime() == null) {
+                                    // gameController is still waiting to start the game
+                                    player.leave();
                                 } else {
-                                    logger.debug("- ex: " + ex.toString(), ex);
+                                    // game was already started
+                                    player.quit(game);
                                 }
-                            } else {
-                                logger.fatal("Game session game quit exception - null  gameId:" + game.getId() + "  playerId: " + playerId);
+
+                            } catch (Exception ex) {
+                                if (ex != null) {
+                                    // It seems this can happen if two threads try to end the game at the exact same time (one wins and one ends here)
+                                    logger.fatal("Game session game quit exception " + (ex.getMessage() == null ? "null" : ex.getMessage()));
+                                    logger.debug("- gameId:" + game.getId() + "  playerId: " + playerId);
+                                    if (ex.getCause() != null) {
+                                        logger.debug("- Cause: " + (ex.getCause().getMessage() == null ? "null" : ex.getCause().getMessage()), ex);
+                                    } else {
+                                        logger.debug("- ex: " + ex.toString(), ex);
+                                    }
+                                } else {
+                                    logger.fatal("Game session game quit exception - null  gameId:" + game.getId() + "  playerId: " + playerId);
+                                }
                             }
                         }
-                    }
-                }
                 );
 
             }

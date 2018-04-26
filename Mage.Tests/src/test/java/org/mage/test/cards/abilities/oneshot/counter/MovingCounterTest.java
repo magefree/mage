@@ -106,4 +106,37 @@ public class MovingCounterTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Ruin Processor", 3, 4);
 
     }
+
+    /**
+     * The card Leech Bonder (or the token mechanic) doesn't seem to work quite
+     * as intended. If moving a -1/-1 counter from the Leech Bonder onto an
+     * enemy creature with 1/1 the creature stays as a 1/1 with the token being
+     * displayed on it. Going by the rules the creature should have 0/0 and thus
+     * be put into the graveyard.
+     */
+    @Test
+    public void testLeechBonder() {
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
+        // Leech Bonder enters the battlefield with two -1/-1 counters on it.
+        // {U}, {untap}: Move a counter from target creature onto another target creature.
+        addCard(Zone.HAND, playerA, "Leech Bonder", 1);// Creature 3/3 - {2}{U}
+
+        addCard(Zone.BATTLEFIELD, playerB, "Ley Druid", 1); // 1/1
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Leech Bonder");
+
+        attack(3, playerA, "Leech Bonder");
+
+        activateAbility(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "{U},", "Leech Bonder");
+        addTarget(playerA, "Ley Druid");
+
+        setStopAt(3, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerB, 19);
+
+        assertGraveyardCount(playerB, "Ley Druid", 1);
+        assertPowerToughness(playerA, "Leech Bonder", 2, 2);
+
+    }
 }

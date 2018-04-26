@@ -7,13 +7,9 @@
 package org.mage.plugins.card.dl.beans.properties;
 
 
-import static java.util.Arrays.*;
+import java.util.*;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import static java.util.Arrays.asList;
 
 
 /**
@@ -23,7 +19,7 @@ import java.util.Set;
  * @author Clemens Koza
  */
 public class CompoundProperties extends AbstractProperties {
-    private List<Properties> delegates;
+    private final List<Properties> delegates;
 
     public CompoundProperties(Properties... delegates) {
         this.delegates = asList(delegates);
@@ -31,7 +27,7 @@ public class CompoundProperties extends AbstractProperties {
     }
 
     public CompoundProperties(List<Properties> delegates) {
-        this.delegates = new ArrayList<Properties>(delegates);
+        this.delegates = new ArrayList<>(delegates);
         Collections.reverse(this.delegates);
     }
 

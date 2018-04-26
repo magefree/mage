@@ -27,10 +27,12 @@
  */
 package mage.game.tournament;
 
+import mage.game.match.MatchOptions;
+import mage.players.PlayerType;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import mage.game.match.MatchOptions;
 
 /**
  *
@@ -40,16 +42,18 @@ public class TournamentOptions implements Serializable {
 
     protected String name;
     protected String tournamentType;
-    protected List<String> playerTypes = new ArrayList<>();
-    protected MatchOptions matchOptions = new MatchOptions("", "Two Player Duel");
+    protected List<PlayerType> playerTypes = new ArrayList<>();
+    protected MatchOptions matchOptions;
     protected LimitedOptions limitedOptions;
     protected boolean watchingAllowed = true;
+    protected boolean planeChase = false;
     protected int numberRounds;
     protected String password;
     protected int quitRatio;
 
-    public TournamentOptions(String name) {
+    public TournamentOptions(String name, String matchType, int numSeats) {
         this.name = name;
+        this.matchOptions = new MatchOptions("", matchType, numSeats > 2, numSeats);
     }
 
     public String getName() {
@@ -64,7 +68,7 @@ public class TournamentOptions implements Serializable {
         this.tournamentType = tournamentType;
     }
 
-    public List<String> getPlayerTypes() {
+    public List<PlayerType> getPlayerTypes() {
         return playerTypes;
     }
 
@@ -87,6 +91,14 @@ public class TournamentOptions implements Serializable {
     public void setWatchingAllowed(boolean watchingAllowed) {
         this.watchingAllowed = watchingAllowed;
     }
+
+    public boolean isPlaneChase() {
+        return planeChase;
+    }
+
+    public void setPlaneChase(boolean planeChase) {
+        this.planeChase = planeChase;
+    }    
 
     public int getNumberRounds() {
         return numberRounds;

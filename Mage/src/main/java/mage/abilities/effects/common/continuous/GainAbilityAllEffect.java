@@ -29,6 +29,7 @@ package mage.abilities.effects.common.continuous;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Locale;
 import java.util.UUID;
 import mage.MageObject;
 import mage.MageObjectReference;
@@ -37,6 +38,7 @@ import mage.abilities.Mode;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.constants.DependencyType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
@@ -79,6 +81,7 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl {
         this.ability.newId();
         this.filter = filter;
         this.excludeSource = excludeSource;
+        this.addDependencyType(DependencyType.AddingAbility);
     }
 
     public GainAbilityAllEffect(final GainAbilityAllEffect effect) {
@@ -92,9 +95,10 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
+        setRuntimeData(source, game);
         if (this.affectedObjectsSet) {
             for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-                if (!(excludeSource && perm.getId().equals(source.getSourceId()))) {
+                if (!(excludeSource && perm.getId().equals(source.getSourceId())) && selectedByRuntimeData(perm, source, game)) {
                     affectedObjectList.add(new MageObjectReference(perm, game));
                 }
             }
@@ -121,8 +125,9 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl {
                 }
             }
         } else {
+            setRuntimeData(source, game);
             for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-                if (!(excludeSource && perm.getId().equals(source.getSourceId()))) {
+                if (!(excludeSource && perm.getId().equals(source.getSourceId())) && selectedByRuntimeData(perm, source, game)) {
                     perm.addAbility(ability, source.getSourceId(), game, false);
                 }
             }
@@ -131,7 +136,7 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl {
             if (LKIBattlefield != null) {
                 for (MageObject mageObject : LKIBattlefield.values()) {
                     Permanent perm = (Permanent) mageObject;
-                    if (!(excludeSource && perm.getId().equals(source.getSourceId()))) {
+                    if (!(excludeSource && perm.getId().equals(source.getSourceId())) && selectedByRuntimeData(perm, source, game)) {
                         if (filter.match(perm, source.getSourceId(), source.getControllerId(), game)) {
                             perm.addAbility(ability, source.getSourceId(), game, false);
                         }
@@ -139,6 +144,28 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl {
                 }
             }
         }
+        return true;
+    }
+
+    /**
+     * Overwrite this in effect that inherits from this
+     *
+     * @param source
+     * @param game
+     */
+    protected void setRuntimeData(Ability source, Game game) {
+
+    }
+
+    /**
+     * Overwrite this in effect that inherits from this
+     *
+     * @param permanent
+     * @param source
+     * @param game
+     * @return
+     */
+    protected boolean selectedByRuntimeData(Permanent permanent, Ability source, Game game) {
         return true;
     }
 
@@ -155,26 +182,26 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl {
             sb.append("Other ");
         }
         sb.append(filter.getMessage());
-        if (duration.equals(Duration.WhileOnBattlefield)) {
-            if (filter.getMessage().toLowerCase().startsWith("each")) {
+        if (duration == Duration.WhileOnBattlefield) {
+            if (filter.getMessage().toLowerCase(Locale.ENGLISH).startsWith("each")) {
                 sb.append(" has ");
             } else {
                 sb.append(" have ");
             }
-        } else if (filter.getMessage().toLowerCase().startsWith("each")) {
+        } else if (filter.getMessage().toLowerCase(Locale.ENGLISH).startsWith("each")) {
             sb.append(" gains ");
         } else {
             sb.append(" gain ");
         }
         if (quotes) {
-            sb.append("\"");
+            sb.append('"');
         }
         sb.append(ability.getRule());
         if (quotes) {
-            sb.append("\"");
+            sb.append('"');
         }
-        if (duration.toString().length() > 0) {
-            sb.append(" ").append(duration.toString());
+        if (!duration.toString().isEmpty()) {
+            sb.append(' ').append(duration.toString());
         }
         return sb.toString();
     }

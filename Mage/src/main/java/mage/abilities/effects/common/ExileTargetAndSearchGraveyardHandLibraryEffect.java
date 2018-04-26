@@ -42,7 +42,7 @@ import mage.target.TargetPermanent;
  */
 public class ExileTargetAndSearchGraveyardHandLibraryEffect extends SearchTargetGraveyardHandLibraryForCardNameAndExileEffect {
 
-    public ExileTargetAndSearchGraveyardHandLibraryEffect(Boolean graveyardExileOptional, String searchWhatText, String searchForText) {
+    public ExileTargetAndSearchGraveyardHandLibraryEffect(boolean graveyardExileOptional, String searchWhatText, String searchForText) {
         super(graveyardExileOptional, searchWhatText, searchForText);
     }
 

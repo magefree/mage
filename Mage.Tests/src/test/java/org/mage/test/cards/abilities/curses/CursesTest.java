@@ -11,6 +11,14 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  */
 public class CursesTest extends CardTestPlayerBase {
 
+    /*
+    Cruel Reality {5}{B}{B}
+    Enchantment - Aura Curse
+    Enchant player
+    At the beginning of enchanted player's upkeep, that player sacrifices a creature or planeswalker. If the player can't, he or she loses 5 life.
+    */
+    private String cReality = "Cruel Reality";
+
     @Test
     public void testCurseOfBloodletting() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 7);
@@ -289,6 +297,169 @@ public class CursesTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, 2);
         
         assertPowerToughness(playerB, "Silvercoat Lion", 1, 1);
-    }   
-    
+    }
+
+
+
+    @Test
+    public void cruelRealityHasBothCreatureAndPwChoosePw() {
+
+        String ugin = "Ugin, the Spirit Dragon";
+        String memnite = "Memnite"; // {0} 1/1
+
+        addCard(Zone.HAND, playerA, cReality);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 7);
+        addCard(Zone.BATTLEFIELD, playerB, ugin);
+        addCard(Zone.BATTLEFIELD, playerB, memnite);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, cReality, playerB);
+        setChoice(playerB, ugin);
+
+        setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertGraveyardCount(playerB, ugin, 1);
+        assertPermanentCount(playerB, memnite, 1);
+        assertPermanentCount(playerA, cReality, 1);
+        assertLife(playerB, 20);
+    }
+
+    @Test
+    public void cruelRealityHasBothCreatureAndPwChooseCreature() {
+
+        String ugin = "Ugin, the Spirit Dragon";
+        String memnite = "Memnite"; // {0} 1/1
+
+        addCard(Zone.HAND, playerA, cReality);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 7);
+        addCard(Zone.BATTLEFIELD, playerB, ugin);
+        addCard(Zone.BATTLEFIELD, playerB, memnite);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, cReality, playerB);
+        setChoice(playerB, memnite);
+
+        setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertGraveyardCount(playerB, memnite, 1);
+        assertPermanentCount(playerB, ugin, 1);
+        assertPermanentCount(playerA, cReality, 1);
+        assertLife(playerB, 20);
+    }
+
+    @Test
+    public void cruelRealityOnlyHasCreatureNoChoiceMade() {
+
+        String memnite = "Memnite"; // {0} 1/1
+
+        addCard(Zone.HAND, playerA, cReality);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 7);
+        addCard(Zone.BATTLEFIELD, playerB, memnite);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, cReality, playerB);
+
+        setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertGraveyardCount(playerB, memnite, 1);
+        assertPermanentCount(playerA, cReality, 1);
+        assertLife(playerB, 20);
+    }
+
+    @Test
+    public void cruelRealityOnlyHasPwNoChoiceMade() {
+
+        String ugin = "Ugin, the Spirit Dragon";
+
+        addCard(Zone.HAND, playerA, cReality);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 7);
+        addCard(Zone.BATTLEFIELD, playerB, ugin);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, cReality, playerB);
+
+        setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertGraveyardCount(playerB, ugin, 1);
+        assertPermanentCount(playerA, cReality, 1);
+        assertLife(playerB, 20);
+    }
+
+    @Test
+    public void cruelRealityOnlyHasCreatureTryToChooseNotToSac() {
+
+        String memnite = "Memnite"; // {0} 1/1
+
+        addCard(Zone.HAND, playerA, cReality);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 7);
+        addCard(Zone.BATTLEFIELD, playerB, memnite);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, cReality, playerB);
+        setChoice(playerB, "No");
+
+        setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertGraveyardCount(playerB, memnite, 1);
+        assertPermanentCount(playerA, cReality, 1);
+        assertLife(playerB, 20);
+    }
+
+    @Test
+    public void cruelRealityNoCreatureOrPwForcesLifeLoss() {
+
+        String gPrison = "Ghostly Prison"; // {2}{W} enchantment - doesnt matter text for this
+
+        addCard(Zone.HAND, playerA, cReality);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 7);
+        addCard(Zone.BATTLEFIELD, playerB, gPrison);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, cReality, playerB);
+        setChoice(playerB, gPrison); // try to set choice to enchantment
+
+        setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerB, gPrison, 1);
+        assertPermanentCount(playerA, cReality, 1);
+        assertLife(playerB, 15);
+    }
+
+    /*
+     * Reported bug issue #3326 (NOTE test is failing due to bug in code)
+     * When {Witchbane Orb} triggers when entering the field and there IS a curse attached to you, an error message (I sadly skipped) appears and your turn is reset.
+        This happened to me in a 4-player Commander game with {Curse of the Shallow Graves} on the field.
+     */
+    @Test
+    public void witchbaneOrbDestroysCursesOnETB() {
+        /*
+        Witchbane Orb {4}
+        Artifact
+        When Witchbane Orb enters the battlefield, destroy all Curses attached to you.
+        You have hexproof.
+         */
+        String wOrb = "Witchbane Orb";
+
+        /*
+        Curse of Shallow Graves {2}{B}
+        Enchantment — Aura Curse
+        Enchant player
+        Whenever a player attacks enchanted player with one or more creatures, that attacking player may create a tapped 2/2 black Zombie creature token.
+         */
+        String curseSG = "Curse of Shallow Graves";
+
+        addCard(Zone.HAND, playerA, curseSG);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
+        addCard(Zone.HAND, playerB, wOrb);
+        addCard(Zone.BATTLEFIELD, playerB, "Wastes", 4);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, curseSG, playerB);
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, wOrb);
+
+        setStopAt(2, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerB, wOrb, 1);
+        assertGraveyardCount(playerA, curseSG, 1);
+    }
 }

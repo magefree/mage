@@ -12,8 +12,6 @@ import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
-import static mage.constants.TargetController.ANY;
-import static mage.constants.TargetController.OPPONENT;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -64,7 +62,7 @@ public class SetPlayerLifeAllEffect extends OneShotEffect {
                 for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {
-                        player.setLife(amount.calculate(game, source, this), game);
+                        player.setLife(amount.calculate(game, source, this), game, source);
                     }
                 }
                 break;
@@ -72,7 +70,7 @@ public class SetPlayerLifeAllEffect extends OneShotEffect {
                 for (UUID playerId : game.getOpponents(controller.getId())) {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {
-                        player.setLife(amount.calculate(game, source, this), game);
+                        player.setLife(amount.calculate(game, source, this), game, source);
                     }
                 }
                 break;

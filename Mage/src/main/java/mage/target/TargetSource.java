@@ -47,7 +47,7 @@ import mage.players.Player;
  */
 public class TargetSource extends TargetObject {
 
-    protected FilterObject filter;
+    protected final FilterObject filter;
 
     public TargetSource() {
         this(1, 1, new FilterObject("source of your choice"));

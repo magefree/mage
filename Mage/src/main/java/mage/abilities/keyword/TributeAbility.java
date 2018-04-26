@@ -66,12 +66,8 @@ public class TributeAbility extends EntersBattlefieldAbility {
 
     @Override
     public String getRule() {
-        StringBuilder sb = new StringBuilder("Tribute ");
-        sb.append(tributeValue);
-        sb.append(" <i>(As this creature enters the battlefield, an opponent of your choice may put ");
-        sb.append(tributeValue);
-        sb.append(" +1/+1 counter on it.)</i>");
-        return sb.toString();
+        return "Tribute " + tributeValue + " <i>(As this creature enters the battlefield, an opponent of your choice may put "
+                + tributeValue + " +1/+1 counter on it.)</i>";
     }
 }
 

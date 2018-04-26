@@ -53,7 +53,6 @@ public class SurgeAbility extends SpellAbility {
         this.getCosts().addAll(card.getSpellAbility().getCosts().copy());
         this.getEffects().addAll(card.getSpellAbility().getEffects().copy());
         this.getTargets().addAll(card.getSpellAbility().getTargets().copy());
-        this.getChoices().addAll(card.getSpellAbility().getChoices().copy());
         this.spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
         this.timing = card.getSpellAbility().getTiming();
         this.setRuleAtTheTop(true);
@@ -69,7 +68,7 @@ public class SurgeAbility extends SpellAbility {
     @Override
     public boolean canActivate(UUID playerId, Game game) {
         // check if controller or teammate has already cast a spell this turn
-        CastSpellLastTurnWatcher watcher = (CastSpellLastTurnWatcher) game.getState().getWatchers().get(CastSpellLastTurnWatcher.class.getName());
+        CastSpellLastTurnWatcher watcher = (CastSpellLastTurnWatcher) game.getState().getWatchers().get(CastSpellLastTurnWatcher.class.getSimpleName());
         if (watcher != null) {
             Player player = game.getPlayer(playerId);
             if (player != null) {

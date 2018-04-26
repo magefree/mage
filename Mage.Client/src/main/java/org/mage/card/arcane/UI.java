@@ -1,5 +1,7 @@
 package org.mage.card.arcane;
 
+import mage.utils.StreamUtils;
+
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -18,6 +20,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Collections;
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -45,7 +48,7 @@ import javax.swing.text.html.ImageView;
 /**
  * UI utility functions.
  */
-public class UI {
+public final class UI {
     private static final ConcurrentMap<URI, Image> imageCache = new ConcurrentHashMap<>();
 
     public static JToggleButton getToggleButton () {
@@ -71,8 +74,8 @@ public class UI {
     }
 
     public static ImageIcon getImageIcon (String path) {
+        InputStream stream = null;
         try {
-            InputStream stream;
             stream = UI.class.getResourceAsStream(path);
             if (stream == null && new File(path).exists()) {
                 stream = new FileInputStream(path);
@@ -85,6 +88,8 @@ public class UI {
             return new ImageIcon(data);
         } catch (IOException ex) {
             throw new RuntimeException("Error reading image: " + path);
+        } finally {
+            StreamUtils.closeQuietly(stream);
         }
     }
 
@@ -102,7 +107,7 @@ public class UI {
                         Object o = elem.getAttributes().getAttribute(StyleConstants.NameAttribute);
                         if (o instanceof HTML.Tag) {
                             HTML.Tag kind = (HTML.Tag) o;
-                            if (kind == HTML.Tag.IMG) {
+                            if (Objects.equals(kind, HTML.Tag.IMG)) {
                                 return new ImageView(elem) {
                                     @Override
                                     public URL getImageURL() {
@@ -147,7 +152,6 @@ public class UI {
     }
 
     public static String getDisplayManaCost (String manaCost) {
-        manaCost = manaCost.replace("/", "");
         // A pipe in the cost means "process left of the pipe as the card color, but display right of the pipe as the cost".
         int pipePosition = manaCost.indexOf("{|}");
         if (pipePosition != -1) {

@@ -33,9 +33,10 @@
  */
 package mage.client.game;
 
+import java.awt.AWTEvent;
 import java.util.UUID;
-import javax.swing.SwingUtilities;
-import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
+import javax.swing.*;
+
 import mage.client.MagePane;
 
 /**
@@ -48,14 +49,10 @@ public class GamePane extends MagePane {
      * Creates new form GamePane
      */
     public GamePane() {
-        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         initComponents();
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                gamePanel.setJLayeredPane(getLayeredPane());
-                gamePanel.installComponents();
-            }
+        SwingUtilities.invokeLater(() -> {
+            gamePanel.setJLayeredPane(this);
+            gamePanel.installComponents();
         });
 
     }
@@ -99,12 +96,13 @@ public class GamePane extends MagePane {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
+        jScrollPane1.setBorder(BorderFactory.createEmptyBorder());
         gamePanel = new mage.client.game.GamePanel();
 
         jScrollPane1.setViewportView(gamePanel);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
@@ -116,7 +114,6 @@ public class GamePane extends MagePane {
                 .addGap(0, 400, Short.MAX_VALUE)
         );
 
-        pack();
     }
 
     public UUID getGameId() {
@@ -133,8 +130,12 @@ public class GamePane extends MagePane {
         gamePanel.activated();
     }
 
+    @Override
+    public void handleEvent(AWTEvent event) {
+        gamePanel.handleEvent(event);
+    }
+
     private mage.client.game.GamePanel gamePanel;
     private javax.swing.JScrollPane jScrollPane1;
     private UUID gameId;
-
 }

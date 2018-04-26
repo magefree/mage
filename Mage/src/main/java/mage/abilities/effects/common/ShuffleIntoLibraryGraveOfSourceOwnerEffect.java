@@ -43,7 +43,7 @@ public class ShuffleIntoLibraryGraveOfSourceOwnerEffect extends OneShotEffect {
 
     public ShuffleIntoLibraryGraveOfSourceOwnerEffect() {
         super(Outcome.Benefit);
-        staticText = "its owner shuffles his or her graveyard into his or her library";
+        staticText = "its owner shuffles their graveyard into their library";
     }
 
     public ShuffleIntoLibraryGraveOfSourceOwnerEffect(final ShuffleIntoLibraryGraveOfSourceOwnerEffect effect) {
@@ -58,8 +58,8 @@ public class ShuffleIntoLibraryGraveOfSourceOwnerEffect extends OneShotEffect {
         }
         Player owner = game.getPlayer(ownerId);
         if (owner != null) {
-            owner.moveCards(owner.getGraveyard(), null, Zone.LIBRARY, source, game);
-            owner.shuffleLibrary(game);
+            owner.moveCards(owner.getGraveyard(), Zone.LIBRARY, source, game);
+            owner.shuffleLibrary(source, game);
             return true;
         }
         return false;

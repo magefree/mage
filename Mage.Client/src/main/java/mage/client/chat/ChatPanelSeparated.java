@@ -28,7 +28,9 @@
 package mage.client.chat;
 
 import java.awt.Font;
-import static mage.client.chat.ChatPanelBasic.TIMESTAMP_COLOR;
+import java.util.Date;
+
+import mage.client.SessionHandler;
 import mage.client.components.ColorPane;
 import mage.client.util.GUISizeHelper;
 import mage.view.ChatMessage;
@@ -53,17 +55,18 @@ public class ChatPanelSeparated extends ChatPanelBasic {
      * @param color Preferred color. Not used.
      */
     @Override
-    public void receiveMessage(String username, String message, String time, ChatMessage.MessageType messageType, ChatMessage.MessageColor color) {
+    public void receiveMessage(String username, String message, Date time, ChatMessage.MessageType messageType, ChatMessage.MessageColor color) {
         switch (messageType) {
             case TALK:
-            case WHISPER:
+            case WHISPER_TO:
+            case WHISPER_FROM:
             case USER_INFO:
                 super.receiveMessage(username, message, time, messageType, color);
                 return;
         }
         StringBuilder text = new StringBuilder();
         if (time != null) {
-            text.append(getColoredText(TIMESTAMP_COLOR, time + ": "));
+            text.append(getColoredText(TIMESTAMP_COLOR, timeFormatter.format(time) + ": "));
         }
         String userColor;
         String textColor;
@@ -79,17 +82,17 @@ public class ChatPanelSeparated extends ChatPanelBasic {
                 break;
             default:
                 if (parentChatRef != null) {
-                    userColor = parentChatRef.session.getUserName().equals(username) ? MY_COLOR : OPPONENT_COLOR;
+                    userColor = SessionHandler.getUserName().equals(username) ? MY_COLOR : OPPONENT_COLOR;
                 } else {
-                    userColor = session.getUserName().equals(username) ? MY_COLOR : OPPONENT_COLOR;
+                    userColor = SessionHandler.getUserName().equals(username) ? MY_COLOR : OPPONENT_COLOR;
                 }
                 textColor = MESSAGE_COLOR;
                 userSeparator = ": ";
         }
-        if (color.equals(ChatMessage.MessageColor.ORANGE)) {
+        if (color == ChatMessage.MessageColor.ORANGE) {
             textColor = "Orange";
         }
-        if (color.equals(ChatMessage.MessageColor.YELLOW)) {
+        if (color == ChatMessage.MessageColor.YELLOW) {
             textColor = "Yellow";
         }
         if (username != null && !username.isEmpty()) {

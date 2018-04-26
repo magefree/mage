@@ -51,6 +51,6 @@ public class CardIdPredicate implements Predicate<MageObject> {
 
     @Override
     public String toString() {
-        return "CardId(" + cardId.toString() + ")";
+        return "CardId(" + cardId.toString() + ')';
     }
 }

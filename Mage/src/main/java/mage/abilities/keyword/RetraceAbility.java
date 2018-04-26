@@ -50,7 +50,6 @@ public class RetraceAbility extends SpellAbility {
         this.addCost(cost);
         this.getEffects().addAll(card.getSpellAbility().getEffects().copy());
         this.getTargets().addAll(card.getSpellAbility().getTargets().copy());
-        this.getChoices().addAll(card.getSpellAbility().getChoices().copy());
         this.spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
         this.timing = card.getSpellAbility().getTiming();
 

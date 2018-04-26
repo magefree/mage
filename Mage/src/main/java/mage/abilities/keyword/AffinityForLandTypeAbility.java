@@ -32,6 +32,7 @@ import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.AdjustingSourceCosts;
 import mage.abilities.effects.common.AffinityEffect;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -48,9 +49,9 @@ public class AffinityForLandTypeAbility extends SimpleStaticAbility implements A
     private final FilterControlledPermanent filter;
 
     String text;
-    String landType;
+    SubType landType;
 
-    public AffinityForLandTypeAbility(String landType, String text) {
+    public AffinityForLandTypeAbility(SubType landType, String text) {
         super(Zone.OUTSIDE, new AffinityEffect(getFilter(landType)));
         this.filter = getFilter(landType);
         setRuleAtTheTop(true);
@@ -58,7 +59,7 @@ public class AffinityForLandTypeAbility extends SimpleStaticAbility implements A
         this.landType = landType;
     }
 
-   private static FilterControlledPermanent getFilter(String landType) {
+   private static FilterControlledPermanent getFilter(SubType landType) {
         FilterControlledPermanent affinityfilter = new FilterControlledPermanent();
         affinityfilter.add(new SubtypePredicate(landType));
         return affinityfilter;

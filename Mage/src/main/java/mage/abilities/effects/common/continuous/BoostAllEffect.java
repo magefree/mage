@@ -58,11 +58,11 @@ public class BoostAllEffect extends ContinuousEffectImpl {
     }
 
     public BoostAllEffect(DynamicValue power, DynamicValue toughness, Duration duration) {
-        this(power, toughness, duration, new FilterCreaturePermanent("All creatures"), false);
+        this(power, toughness, duration, new FilterCreaturePermanent("all creatures"), false);
     }
 
     public BoostAllEffect(int power, int toughness, Duration duration, boolean excludeSource) {
-        this(power, toughness, duration, new FilterCreaturePermanent("All creatures"), excludeSource);
+        this(power, toughness, duration, new FilterCreaturePermanent("all creatures"), excludeSource);
     }
 
     public BoostAllEffect(int power, int toughness, Duration duration, FilterCreaturePermanent filter, boolean excludeSource) {
@@ -109,9 +109,10 @@ public class BoostAllEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
+        setRuntimeData(source, game);
         if (this.affectedObjectsSet) {
             for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-                if (!(excludeSource && perm.getId().equals(source.getSourceId()))) {
+                if (!(excludeSource && perm.getId().equals(source.getSourceId())) && selectedByRuntimeData(perm, source, game)) {
                     affectedObjectList.add(new MageObjectReference(perm, game));
                 }
             }
@@ -135,8 +136,9 @@ public class BoostAllEffect extends ContinuousEffectImpl {
                 }
             }
         } else {
+            setRuntimeData(source, game);
             for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-                if (!(excludeSource && perm.getId().equals(source.getSourceId()))) {
+                if (!(excludeSource && perm.getId().equals(source.getSourceId())) && selectedByRuntimeData(perm, source, game)) {
                     perm.addPower(power.calculate(game, source, this));
                     perm.addToughness(toughness.calculate(game, source, this));
                 }
@@ -146,7 +148,29 @@ public class BoostAllEffect extends ContinuousEffectImpl {
         return true;
     }
 
-    private void setText() {
+    /**
+     * Overwrite this in effect that inherits from this
+     *
+     * @param source
+     * @param game
+     */
+    protected void setRuntimeData(Ability source, Game game) {
+
+    }
+
+    /**
+     * Overwrite this in effect that inherits from this
+     *
+     * @param permanent
+     * @param source
+     * @param game
+     * @return
+     */
+    protected boolean selectedByRuntimeData(Permanent permanent, Ability source, Game game) {
+        return true;
+    }
+
+    protected void setText() {
         StringBuilder sb = new StringBuilder();
         if (excludeSource) {
             sb.append("Other ");
@@ -154,20 +178,39 @@ public class BoostAllEffect extends ContinuousEffectImpl {
         sb.append(filter.getMessage()).append(" get ");
         String p = power.toString();
         if (!p.startsWith("-")) {
-            sb.append("+");
+            sb.append('+');
         }
-        sb.append(p).append("/");
+        sb.append(p).append('/');
         String t = toughness.toString();
         if (!t.startsWith("-")) {
             if (p.startsWith("-")) {
-                sb.append("-");
+                sb.append('-');
             } else {
-                sb.append("+");
+                sb.append('+');
             }
         }
         sb.append(t);
-        sb.append((duration == Duration.EndOfTurn ? " until end of turn" : ""));
-        sb.append(power.getMessage());
+        if (duration == Duration.EndOfTurn) {
+            sb.append(" until end of turn");
+        }
+        String message = null;
+        String fixedPart = null;
+        if (t.contains("X")) {
+            message = toughness.getMessage();
+            fixedPart = ", where X is ";
+        } else if (p.contains("X")) {
+            message = power.getMessage();
+            fixedPart = ", where X is ";
+        } else if (!power.getMessage().isEmpty()) {
+            message = power.getMessage();
+            fixedPart = " for each ";
+        } else if (!toughness.getMessage().isEmpty()) {
+            message = toughness.getMessage();
+            fixedPart = " for each ";
+        }
+        if (message != null && !message.isEmpty() && fixedPart != null) {
+            sb.append(fixedPart).append(message);
+        }
         staticText = sb.toString();
     }
 

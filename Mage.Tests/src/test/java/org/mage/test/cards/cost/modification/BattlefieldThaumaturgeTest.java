@@ -28,7 +28,7 @@ public class BattlefieldThaumaturgeTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerB, "Akroan Skyguard");
 
-        // Lightning Strike - {1}{R} -  Lightning Strike deals 3 damage to target creature or player.
+        // Lightning Strike - {1}{R} -  Lightning Strike deals 3 damage to any target.
         // Because Battlefield Thaumaturge is on the battlefield, and the creature is targeted by the
         // Lightning Strike it will be payable with {R}.
         castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Strike", "Akroan Skyguard");
@@ -201,7 +201,7 @@ public class BattlefieldThaumaturgeTest extends CardTestPlayerBase {
          *  For each creature destroyed this way, its controller puts a 4/4 red Dragon creature token with flying onto the battlefield.
          *  Battlefield Thaumaturge should reduce the cost of the spell when cast, before he is destroyed and replaced with a dragon.
          */
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Descent of the Dragons", createTargetingString(playerACreatures) + "^" + createTargetingString(playerBCreatures));
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Descent of the Dragons", createTargetingString(playerACreatures) + '^' + createTargetingString(playerBCreatures));
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 

@@ -28,7 +28,6 @@
 
 package mage.abilities;
 
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.UUID;
 
@@ -67,11 +66,6 @@ public class SpecialActions extends AbilitiesImpl<SpecialAction> {
     }
 
     public void removeManaActions() {
-        for (Iterator<SpecialAction> iterator = this.iterator(); iterator.hasNext();) {
-            SpecialAction next = iterator.next();
-            if (next.isManaAction()) {
-                iterator.remove();
-            }
-        }
+        this.removeIf(SpecialAction::isManaAction);
     }
 }

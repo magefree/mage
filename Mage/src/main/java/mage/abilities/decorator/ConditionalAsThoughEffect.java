@@ -28,19 +28,18 @@
 package mage.abilities.decorator;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
-import mage.abilities.condition.FixedCondition;
 import mage.abilities.effects.AsThoughEffect;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.constants.Duration;
 import mage.game.Game;
 
 /**
- *
  * @author LevelX2
  */
-public class ConditionalAsThoughEffect extends AsThoughEffectImpl  {
+public class ConditionalAsThoughEffect extends AsThoughEffectImpl {
 
     protected AsThoughEffect effect;
     protected AsThoughEffect otherwiseEffect;
@@ -60,9 +59,9 @@ public class ConditionalAsThoughEffect extends AsThoughEffectImpl  {
 
     public ConditionalAsThoughEffect(final ConditionalAsThoughEffect effect) {
         super(effect);
-        this.effect = (AsThoughEffect) effect.effect.copy();
+        this.effect = effect.effect.copy();
         if (effect.otherwiseEffect != null) {
-            this.otherwiseEffect = (AsThoughEffect) effect.otherwiseEffect.copy();
+            this.otherwiseEffect = effect.otherwiseEffect.copy();
         }
         this.condition = effect.condition;
         this.conditionState = effect.conditionState;

@@ -54,7 +54,7 @@ public class ZoneChangeTriggeredAbility extends TriggeredAbilityImpl {
 
     public ZoneChangeTriggeredAbility(Zone worksInZone, Zone fromZone, Zone toZone, Effect effect, String rule, boolean optional) {
         super(worksInZone, effect, optional);
-        if (fromZone.equals(Zone.BATTLEFIELD)) {
+        if (fromZone == Zone.BATTLEFIELD) {
             setLeavesTheBattlefieldTrigger(true);
         }
         this.fromZone = fromZone;
@@ -94,7 +94,7 @@ public class ZoneChangeTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return new StringBuilder(rule).append(super.getRule()).toString();
+        return rule + super.getRule();
     }
 
     @Override

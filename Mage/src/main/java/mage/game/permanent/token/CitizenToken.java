@@ -30,21 +30,29 @@ package mage.game.permanent.token;
 
 import mage.MageInt;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
  * @author Quercitron
  */
-public class CitizenToken extends Token {
+public class CitizenToken extends TokenImpl {
     
     public CitizenToken() {
         super("Citizen", "1/1 white Citizen creature token");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
         
-        subtype.add("Citizen");
+        subtype.add(SubType.CITIZEN);
         power = new MageInt(1);
         toughness = new MageInt(1);
     }
-    
+
+    public CitizenToken(final CitizenToken token) {
+        super(token);
+    }
+
+    public CitizenToken copy() {
+        return new CitizenToken(this);
+    }
 }

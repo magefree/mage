@@ -84,12 +84,12 @@ public class DiscardHandTargetEffect extends OneShotEffect {
             return staticText;
         }
         StringBuilder sb = new StringBuilder();
-        if (targetDescription.length() > 0) {
+        if (!targetDescription.isEmpty()) {
             sb.append(targetDescription);
         } else {
             sb.append("target ").append(mode.getTargets().get(0).getTargetName());
         }
-        sb.append(" discards his or her hand");
+        sb.append(" discards their hand");
         return sb.toString();
     }    
 }

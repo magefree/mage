@@ -13,14 +13,9 @@ import mage.game.Game;
  *
  * @author LevelX2
  */
-public class BeforeAttackersAreDeclaredCondition implements Condition {
+public enum BeforeAttackersAreDeclaredCondition implements Condition {
 
-    private static final BeforeAttackersAreDeclaredCondition fInstance = new BeforeAttackersAreDeclaredCondition();
-
-    public static Condition getInstance() {
-        return fInstance;
-    }
-
+    instance;
     @Override
     public boolean apply(Game game, Ability source) {
         return !game.getTurn().isDeclareAttackersStepStarted();

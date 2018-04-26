@@ -51,7 +51,6 @@ public class TargetControlledPermanent extends TargetPermanent {
 
     public TargetControlledPermanent(int minNumTargets, int maxNumTargets, FilterControlledPermanent filter, boolean notTarget) {
         super(minNumTargets, maxNumTargets, filter, notTarget);
-        this.targetName = filter.getMessage();
     }
 
     public TargetControlledPermanent(final TargetControlledPermanent target) {

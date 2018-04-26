@@ -29,9 +29,6 @@ package org.mage.test.cards.abilities.keywords;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import mage.game.permanent.Permanent;
-import mage.game.permanent.PermanentToken;
-import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 

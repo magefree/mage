@@ -43,8 +43,7 @@ public class CastAlternateCastingCostsTest extends CardTestPlayerBaseAI {
      * Tests that if a spell has alternate casting costs, this option is also calculated
      */
     @Test
-    @Ignore // AI only gets the cast ability yet, but does always say yes to use evoke
-            // TODO: Get the AI both options to calculate
+    @Ignore // AI only gets the cast ability yet, but does always say yes to use evoke by default
     public void testEvoke() {
         // Flying
         // When Mulldrifter enters the battlefield, draw two cards.

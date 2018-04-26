@@ -19,25 +19,15 @@ import mage.players.Player;
  * @author LevelX2
  */
 
-public class SpellMasteryCondition implements Condition {
+public enum SpellMasteryCondition implements Condition {
 
+    instance;
     private static final FilterCard filter = new FilterCard();
     
     static {
         filter.add(Predicates.or(new CardTypePredicate(CardType.INSTANT), new CardTypePredicate(CardType.SORCERY)));
     }
-    
-    private static SpellMasteryCondition fInstance = null;
 
-    public static SpellMasteryCondition getInstance() {
-        if (fInstance == null) {
-            fInstance = new SpellMasteryCondition();
-        }
-        return fInstance;
-    }
-    
-    private SpellMasteryCondition() {}
-    
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());

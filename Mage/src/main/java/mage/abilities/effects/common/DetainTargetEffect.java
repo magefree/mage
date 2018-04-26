@@ -114,7 +114,7 @@ public class DetainTargetEffect extends OneShotEffect {
         }
         sb.append(" can't attack or block and ");
         sb.append(target.getMaxNumberOfTargets() == 1 ? "its" : "their");
-        sb.append(" activated abilities can't be activated)</i>");
+        sb.append(" activated abilities can't be activated.)</i>");
         return sb.toString();
     }
 }
@@ -136,7 +136,7 @@ class DetainRestrictionEffect extends RestrictionEffect {
         for (UUID targetId : this.getTargetPointer().getTargets(game, source)) {
             Permanent permanent = game.getPermanent(targetId);
             if (permanent != null) {
-                permanent.addInfo(new StringBuilder("detain").append(getId()).toString(), "[Detained]", game);
+                permanent.addInfo("detain" + getId(), CardUtil.addToolTipMarkTags("Detained"), game);
             }
         }
     }
@@ -159,10 +159,7 @@ class DetainRestrictionEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (this.targetPointer.getTargets(game, source).contains(permanent.getId())) {
-            return true;
-        }
-        return false;
+        return this.targetPointer.getTargets(game, source).contains(permanent.getId());
     }
 
     @Override

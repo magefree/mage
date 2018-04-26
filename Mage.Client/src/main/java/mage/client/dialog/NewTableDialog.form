@@ -41,6 +41,11 @@
                               <Component id="lblFreeMulligans" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="spnFreeMulligans" min="-2" pref="50" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="chkSpectatorsAllowed" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+                              <Component id="chkPlaneChase" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Component id="txtName" min="-2" pref="178" max="-2" attributes="0"/>
@@ -52,6 +57,10 @@
                               <Component id="lblPassword" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="txtPassword" min="-2" pref="125" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btnPreviousConfiguration1" min="-2" pref="50" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btnPreviousConfiguration2" min="-2" pref="50" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="cbDeckType" min="-2" pref="332" max="-2" attributes="1"/>
@@ -59,6 +68,10 @@
                               <Component id="lblQuitRatio" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="spnQuitRatio" min="-2" pref="60" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="lblEdhPowerLevel" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="spnEdhPowerLevel" min="-2" pref="60" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -122,6 +135,8 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="txtName" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblName" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnPreviousConfiguration1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnPreviousConfiguration2" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtPassword" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblPassword" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lbTimeLimit" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -133,6 +148,8 @@
                   <Component id="lbDeckType" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblQuitRatio" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="spnQuitRatio" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblEdhPowerLevel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="spnEdhPowerLevel" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -140,6 +157,8 @@
                       <Component id="spnFreeMulligans" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblFreeMulligans" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="chkRollbackTurnsAllowed" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="chkSpectatorsAllowed" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="chkPlaneChase" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="cbGameType" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -221,6 +240,10 @@
     </Component>
     <Component class="javax.swing.JTextField" name="txtPassword">
     </Component>
+    <Component class="javax.swing.JButton" name="btnPreviousConfiguration1">
+    </Component>
+    <Component class="javax.swing.JButton" name="btnPreviousConfiguration2">
+    </Component>
     <Component class="javax.swing.JLabel" name="lbDeckType">
       <Properties>
         <Property name="text" type="java.lang.String" value="Deck Type:"/>
@@ -258,6 +281,19 @@
         <Property name="toolTipText" type="java.lang.String" value="The number of mulligans a player can use without decreasing the number of drawn cards."/>
       </Properties>
     </Component>
+    <Component class="javax.swing.JCheckBox" name="chkSpectatorsAllowed">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Spectators allowed"/>
+        <Property name="toolTipText" type="java.lang.String" value="Allow spectators to view your game."/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="chkPlaneChase">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Use PlaneChase"/>
+        <Property name="toolTipText" type="java.lang.String" value="Use the PlaneChase variant for your game."/>
+      </Properties>
+    </Component>
+
     <Component class="javax.swing.JSpinner" name="spnFreeMulligans">
     </Component>
     <Component class="javax.swing.JLabel" name="lblNumPlayers">
@@ -388,6 +424,13 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JSpinner" name="spnQuitRatio">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblEdhPowerLevel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="EDH power level"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JSpinner" name="spnEdhPowerLevel">
     </Component>
   </SubComponents>
 </Form>

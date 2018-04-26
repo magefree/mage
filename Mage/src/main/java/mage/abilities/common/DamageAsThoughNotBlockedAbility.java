@@ -40,14 +40,14 @@ import mage.constants.Zone;
  */
 public class DamageAsThoughNotBlockedAbility extends StaticAbility implements MageSingleton {
 
-    private static final DamageAsThoughNotBlockedAbility fINSTANCE =  new DamageAsThoughNotBlockedAbility();
+    private static final DamageAsThoughNotBlockedAbility instance =  new DamageAsThoughNotBlockedAbility();
 
     private Object readResolve() throws ObjectStreamException {
-        return fINSTANCE;
+        return instance;
     }
 
     public static DamageAsThoughNotBlockedAbility getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private DamageAsThoughNotBlockedAbility() {
@@ -61,7 +61,7 @@ public class DamageAsThoughNotBlockedAbility extends StaticAbility implements Ma
 
     @Override
     public DamageAsThoughNotBlockedAbility copy() {
-        return fINSTANCE;
+        return instance;
     }
 
 }

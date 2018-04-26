@@ -27,19 +27,17 @@
  */
 package mage.game.permanent;
 
-import java.util.ArrayList;
 import java.util.UUID;
+import mage.MageObject;
+import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.Card;
 import mage.cards.LevelerCard;
-import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.command.Commander;
 import mage.game.events.ZoneChangeEvent;
-import mage.players.Player;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -47,28 +45,35 @@ import mage.players.Player;
 public class PermanentCard extends PermanentImpl {
 
     protected int maxLevelCounters;
+    // A copy of the origin card that was cast (this is not the original card, so it's possible to chnage some attribute to this blueprint to change attributes to the permanent if it enters the battlefield with e.g. a subtype)
     protected Card card;
     // the number this permanent instance had
     protected int zoneChangeCounter;
 
     public PermanentCard(Card card, UUID controllerId, Game game) {
         super(card.getId(), card.getOwnerId(), controllerId, card.getName());
-        // this.card = card.copy();
+
         this.card = card;
         this.zoneChangeCounter = card.getZoneChangeCounter(game); // local value already set to the raised number
         init(card, game);
     }
 
     private void init(Card card, Game game) {
-        copyFromCard(card);
-
+        power = card.getPower().copy();
+        toughness = card.getToughness().copy();
+        copyFromCard(card, game);
+        // if temporary added abilities to the spell/card exist, you need to add it to the permanent derived from that card
+        Abilities<Ability> otherAbilities = game.getState().getAllOtherAbilities(card.getId());
+        if (otherAbilities != null) {
+            abilities.addAll(otherAbilities);
+        }
         /*if (card.getCardType().contains(CardType.PLANESWALKER)) {
          this.loyalty = new MageInt(card.getLoyalty().getValue());
          }*/
         if (card instanceof LevelerCard) {
             maxLevelCounters = ((LevelerCard) card).getMaxLevelCounters();
         }
-        if (canTransform()) {
+        if (isTransformable()) {
             if (game.getState().getValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + getId()) != null) {
                 game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + getId(), null);
                 setTransformed(true);
@@ -88,11 +93,13 @@ public class PermanentCard extends PermanentImpl {
     public void reset(Game game) {
         // when the permanent is reset, copy all original values from the card
         // must copy card each reset so that the original values don't get modified
-        copyFromCard(card);
+        copyFromCard(card, game);
+        power.resetToBaseValue();
+        toughness.resetToBaseValue();
         super.reset(game);
     }
 
-    protected void copyFromCard(final Card card) {
+    protected void copyFromCard(final Card card, final Game game) {
         this.name = card.getName();
         this.abilities.clear();
         if (this.faceDown) {
@@ -109,110 +116,41 @@ public class PermanentCard extends PermanentImpl {
         this.cardType.clear();
         this.cardType.addAll(card.getCardType());
         this.color = card.getColor(null).copy();
+        this.frameColor = card.getFrameColor(game).copy();
+        this.frameStyle = card.getFrameStyle();
         this.manaCost = card.getManaCost().copy();
-        this.power = card.getPower().copy();
-        this.toughness = card.getToughness().copy();
         if (card instanceof PermanentCard) {
             this.maxLevelCounters = ((PermanentCard) card).maxLevelCounters;
         }
         this.subtype.clear();
-        this.subtype.addAll(card.getSubtype());
+        this.subtype.addAll(card.getSubtype(game));
+        this.isAllCreatureTypes = card.isAllCreatureTypes();
         this.supertype.clear();
-        this.supertype.addAll(card.getSupertype());
+        supertype.addAll(card.getSuperType());
         this.expansionSetCode = card.getExpansionSetCode();
         this.rarity = card.getRarity();
         this.cardNumber = card.getCardNumber();
         this.usesVariousArt = card.getUsesVariousArt();
 
-        canTransform = card.canTransform();
-        if (canTransform) {
-            secondSideCard = card.getSecondCardFace();
-            nightCard = card.isNightCard();
+        transformable = card.isTransformable();
+        if (transformable) {
+            this.nightCard = card.isNightCard();
+            if (!this.nightCard) {
+                this.secondSideCard = card.getSecondCardFace();
+                this.secondSideCardClazz = this.secondSideCard.getClass();
+            }
         }
         this.flipCard = card.isFlipCard();
         this.flipCardName = card.getFlipCardName();
     }
 
-    public Card getCard() {
+    @Override
+    public MageObject getBasicMageObject(Game game) {
         return card;
     }
 
-    @Override
-    public boolean moveToZone(Zone toZone, UUID sourceId, Game game, boolean flag) {
-        return moveToZone(toZone, sourceId, game, flag, null);
-    }
-
-    @Override
-    public boolean moveToZone(Zone toZone, UUID sourceId, Game game, boolean flag, ArrayList<UUID> appliedEffects) {
-        Zone fromZone = game.getState().getZone(objectId);
-        Player controller = game.getPlayer(controllerId);
-        if (controller != null) {
-            ZoneChangeEvent event = new ZoneChangeEvent(this, sourceId, controllerId, fromZone, toZone, appliedEffects);
-            if (!game.replaceEvent(event)) {
-                controller.removeFromBattlefield(this, game);
-                Player owner = game.getPlayer(ownerId);
-                game.rememberLKI(objectId, Zone.BATTLEFIELD, this);
-                if (owner != null) {
-                    card.updateZoneChangeCounter(game);
-                    switch (event.getToZone()) {
-                        case GRAVEYARD:
-                            owner.putInGraveyard(card, game, !flag);
-                            break;
-                        case HAND:
-                            owner.getHand().add(card);
-                            break;
-                        case EXILED:
-                            game.getExile().getPermanentExile().add(card);
-                            break;
-                        case COMMAND:
-                            game.addCommander(new Commander(card));
-                            break;
-                        case LIBRARY:
-                            if (flag) {
-                                owner.getLibrary().putOnTop(card, game);
-                            } else {
-                                owner.getLibrary().putOnBottom(card, game);
-                            }
-                            break;
-                        case BATTLEFIELD:
-                            //should never happen
-                            break;
-                    }
-                    game.setZone(objectId, event.getToZone());
-                    game.addSimultaneousEvent(event);
-                    return game.getState().getZone(objectId) == toZone;
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game) {
-        return moveToExile(exileId, name, sourceId, game, null);
-    }
-
-    @Override
-    public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game, ArrayList<UUID> appliedEffects) {
-        Zone fromZone = game.getState().getZone(objectId);
-        Player controller = game.getPlayer(controllerId);
-        if (controller != null && controller.removeFromBattlefield(this, game)) {
-            ZoneChangeEvent event = new ZoneChangeEvent(this, sourceId, ownerId, fromZone, Zone.EXILED, appliedEffects);
-            if (!game.replaceEvent(event)) {
-                game.rememberLKI(objectId, Zone.BATTLEFIELD, this);
-                // update zone change counter of original card
-                card.updateZoneChangeCounter(game);
-                if (exileId == null) {
-                    game.getExile().getPermanentExile().add(card);
-                } else {
-                    game.getExile().createZone(exileId, name).add(card);
-                }
-                game.setZone(objectId, event.getToZone());
-                game.addSimultaneousEvent(event);
-                return true;
-            }
-        }
-        return false;
+    public Card getCard() {
+        return card;
     }
 
     @Override
@@ -227,6 +165,8 @@ public class PermanentCard extends PermanentImpl {
     @Override
     public boolean turnFaceUp(Game game, UUID playerId) {
         if (super.turnFaceUp(game, playerId)) {
+            power.modifyBaseValue(power.getBaseValue());
+            toughness.modifyBaseValue(toughness.getBaseValue());
             setManifested(false);
             setMorphed(false);
             return true;
@@ -236,17 +176,20 @@ public class PermanentCard extends PermanentImpl {
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        card.adjustTargets(ability, game);
+        if (this.isTransformed() && card.getSecondCardFace() != null) {
+            card.getSecondCardFace().adjustTargets(ability, game);
+        } else {
+            card.adjustTargets(ability, game);
+        }
     }
 
     @Override
     public void adjustCosts(Ability ability, Game game) {
-        card.adjustCosts(ability, game);
-    }
-
-    @Override
-    public void adjustChoices(Ability ability, Game game) {
-        card.adjustChoices(ability, game);
+        if (this.isTransformed() && card.getSecondCardFace() != null) {
+            card.getSecondCardFace().adjustCosts(ability, game);
+        } else {
+            card.adjustCosts(ability, game);
+        }
     }
 
     @Override
@@ -259,14 +202,30 @@ public class PermanentCard extends PermanentImpl {
     }
 
     @Override
+    public int getConvertedManaCost() {
+        if (isTransformed()) {
+            // 711.4b While a double-faced permanent’s back face is up, it has only the characteristics of its back face.
+            // However, its converted mana cost is calculated using the mana cost of its front face. This is a change from previous rules.
+            // If a permanent is copying the back face of a double-faced card (even if the card representing that copy
+            // is itself a double-faced card), the converted mana cost of that permanent is 0.
+            return getCard().getConvertedManaCost();
+        }
+        if (faceDown) { // game not neccessary
+            return getManaCost().convertedManaCost();
+        }
+        return super.getConvertedManaCost();
+
+    }
+
+    @Override
     public int getZoneChangeCounter(Game game) {
         // permanent value of zone change counter stays always the same without exception of update during the process of putting the permanent onto the battlefield
         return zoneChangeCounter;
     }
 
     @Override
-    public void updateZoneChangeCounter(Game game) {
-        card.updateZoneChangeCounter(game);
+    public void updateZoneChangeCounter(Game game, ZoneChangeEvent event) {
+        card.updateZoneChangeCounter(game, event);
         zoneChangeCounter = card.getZoneChangeCounter(game);
     }
 

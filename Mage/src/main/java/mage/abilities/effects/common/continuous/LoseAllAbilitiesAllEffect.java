@@ -74,7 +74,7 @@ public class LoseAllAbilitiesAllEffect extends ContinuousEffectImpl {
     @Override
     public String getText(Mode mode) {
         StringBuilder sb = new StringBuilder();
-        if (duration.equals(Duration.EndOfTurn)) {
+        if (duration == Duration.EndOfTurn) {
             sb.append(duration.toString()).append(", ");
         }
         sb.append(filter.getMessage()).append(" lose all abilities.");

@@ -27,14 +27,16 @@
  */
 package mage.abilities.effects.common.combat;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.RestrictionEffect;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -43,20 +45,29 @@ import mage.game.permanent.Permanent;
 public class CantAttackYouAllEffect extends RestrictionEffect {
 
     private final FilterCreaturePermanent filterAttacker;
+    private final boolean alsoPlaneswalker;
 
     public CantAttackYouAllEffect(Duration duration) {
-        this(duration, new FilterCreaturePermanent("creatures"));
+        this(duration, StaticFilters.FILTER_PERMANENT_CREATURES);
     }
 
     public CantAttackYouAllEffect(Duration duration, FilterCreaturePermanent filter) {
+        this(duration, filter, false);
+    }
+
+    public CantAttackYouAllEffect(Duration duration, FilterCreaturePermanent filter, boolean alsoPlaneswalker) {
         super(duration, Outcome.Benefit);
         this.filterAttacker = filter;
-        staticText = filterAttacker.getMessage() + " can't attack you";
+        this.alsoPlaneswalker = alsoPlaneswalker;
+        staticText = filterAttacker.getMessage() + " can't attack you"
+                + (alsoPlaneswalker ? " or a planeswalker you control" : "")
+                + (duration == Duration.UntilYourNextTurn ? " until your next turn" : "");
     }
 
     CantAttackYouAllEffect(final CantAttackYouAllEffect effect) {
         super(effect);
         this.filterAttacker = effect.filterAttacker;
+        this.alsoPlaneswalker = effect.alsoPlaneswalker;
     }
 
     @Override
@@ -66,6 +77,12 @@ public class CantAttackYouAllEffect extends RestrictionEffect {
 
     @Override
     public boolean canAttack(Permanent attacker, UUID defenderId, Ability source, Game game) {
+        if (alsoPlaneswalker) {
+            Permanent planeswalker = game.getPermanent(defenderId);
+            if (planeswalker != null) {
+                defenderId = planeswalker.getControllerId();
+            }
+        }
         return !defenderId.equals(source.getControllerId());
     }
 

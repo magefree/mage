@@ -30,7 +30,6 @@ package mage.cards;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
@@ -40,8 +39,8 @@ public abstract class LevelerCard extends CardImpl {
 
     private int maxLevelCounters;
 
-    public LevelerCard(UUID ownerId, int cardNumber, String name, Rarity rarity, CardType[] cardTypes, String costs) {
-        super(ownerId, cardNumber, name, rarity, cardTypes, costs);
+    public LevelerCard(UUID ownerId, CardSetInfo setInfo, CardType[] cardTypes, String costs) {
+        super(ownerId, setInfo, cardTypes, costs);
     }
 
     public LevelerCard(LevelerCard card) {

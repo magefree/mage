@@ -31,6 +31,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 import mage.Mana;
 import mage.abilities.Ability;
+import mage.abilities.ActivatedAbility;
 import mage.abilities.SpellAbility;
 import mage.cards.Card;
 import mage.choices.ChoiceImpl;
@@ -54,20 +55,20 @@ public class SpellsCostReductionAllEffect extends CostModificationEffectImpl {
     private final boolean upTo;
 
     public SpellsCostReductionAllEffect(int amount) {
-        this(new FilterCard("All Spells "), amount);
+        this(new FilterCard("Spells"), amount);
     }
 
     public SpellsCostReductionAllEffect(FilterCard filter, int amount) {
         this(filter, amount, false);
     }
-    
+
     public SpellsCostReductionAllEffect(FilterCard filter, int amount, boolean upTo) {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
         this.filter = filter;
         this.amount = amount;
         this.upTo = upTo;
-        
-        this.staticText = filter.getMessage() + " cost " + (upTo ?"up to " :"") + "{" +amount + "} less to cast";
+
+        this.staticText = filter.getMessage() + " cost " + (upTo ? "up to " : "") + '{' + amount + "} less to cast";
     }
 
     protected SpellsCostReductionAllEffect(SpellsCostReductionAllEffect effect) {
@@ -78,8 +79,19 @@ public class SpellsCostReductionAllEffect extends CostModificationEffectImpl {
     }
 
     @Override
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+    }
+
+    @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
         if (upTo) {
+            if (abilityToModify instanceof ActivatedAbility) {
+                if (((ActivatedAbility) abilityToModify).isCheckPlayableMode()) {
+                    CardUtil.reduceCost(abilityToModify, this.amount);
+                    return true;
+                }
+            }
             Mana mana = abilityToModify.getManaCostsToPay().getMana();
             int reduceMax = mana.getGeneric();
             if (reduceMax > 2) {
@@ -100,12 +112,25 @@ public class SpellsCostReductionAllEffect extends CostModificationEffectImpl {
                 if (controller.choose(Outcome.Benefit, choice, game)) {
                     int reduce = Integer.parseInt(choice.getChoice());
                     CardUtil.reduceCost(abilityToModify, reduce);
+                } else {
+                    return false;
                 }
             }
         } else {
-
             CardUtil.reduceCost(abilityToModify, this.amount);
         }
+        return true;
+    }
+
+    /**
+     * Overwrite this in effect that inherits from this
+     *
+     * @param card
+     * @param source
+     * @param game
+     * @return
+     */
+    protected boolean selectedByRuntimeData(Card card, Ability source, Game game) {
         return true;
     }
 
@@ -114,11 +139,11 @@ public class SpellsCostReductionAllEffect extends CostModificationEffectImpl {
         if (abilityToModify instanceof SpellAbility) {
             Spell spell = (Spell) game.getStack().getStackObject(abilityToModify.getId());
             if (spell != null) {
-                return this.filter.match(spell, game);
+                return this.filter.match(spell, game) && selectedByRuntimeData(spell, source, game);
             } else {
                 // used at least for flashback ability because Flashback ability doesn't use stack
                 Card sourceCard = game.getCard(abilityToModify.getSourceId());
-                return sourceCard != null && this.filter.match(sourceCard, game);
+                return sourceCard != null && this.filter.match(sourceCard, game) && selectedByRuntimeData(sourceCard, source, game);
             }
         }
         return false;

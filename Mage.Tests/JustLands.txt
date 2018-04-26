@@ -1,0 +1,6 @@
+1 Forest
+1 Plains
+1 Island
+
+1 Swamp
+1 Mountain

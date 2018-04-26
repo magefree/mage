@@ -38,10 +38,10 @@ import mage.game.permanent.Permanent;
  * @author nantuko
  */
 public class AddCardSubtypeAttachedEffect extends ContinuousEffectImpl {
-    private String addedSubtype;
+    private SubType addedSubtype;
     private AttachmentType attachmentType;
 
-    public AddCardSubtypeAttachedEffect(String addedSubtype, Duration duration, AttachmentType attachmentType) {
+    public AddCardSubtypeAttachedEffect(SubType addedSubtype, Duration duration, AttachmentType attachmentType) {
         super(duration, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
         this.addedSubtype = addedSubtype;
         this.attachmentType = attachmentType;
@@ -59,8 +59,8 @@ public class AddCardSubtypeAttachedEffect extends ContinuousEffectImpl {
         Permanent equipment = game.getPermanent(source.getSourceId());
         if (equipment != null && equipment.getAttachedTo() != null) {
             Permanent target = game.getPermanent(equipment.getAttachedTo());
-            if (target != null && !target.getSubtype().contains(addedSubtype))
-                target.getSubtype().add(addedSubtype);
+            if (target != null && !target.hasSubtype(addedSubtype, game))
+                target.getSubtype(game).add(addedSubtype);
         }
         return true;
     }
@@ -72,11 +72,8 @@ public class AddCardSubtypeAttachedEffect extends ContinuousEffectImpl {
 
     private void setText() {
         StringBuilder sb = new StringBuilder();
-        if (attachmentType == AttachmentType.AURA)
-            sb.append("Enchanted");
-        else if (attachmentType == AttachmentType.EQUIPMENT)
-            sb.append("Equipped");
 
+        sb.append(attachmentType.verb());
         sb.append(" creature becomes ").append(addedSubtype).append(" in addition to its other types"); //TODO add attacked card type detection
         staticText = sb.toString();
     }

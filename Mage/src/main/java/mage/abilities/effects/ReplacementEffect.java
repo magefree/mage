@@ -24,8 +24,7 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.abilities.effects;
 
 import mage.abilities.Ability;
@@ -37,21 +36,22 @@ import mage.game.events.GameEvent;
  * @author BetaSteward_at_googlemail.com
  */
 public interface ReplacementEffect extends ContinuousEffect {
-    
+
     boolean replaceEvent(GameEvent event, Ability source, Game game);
 
     /**
-     * This check for the relevant events is called at first to prevent further actions if
-     * the current event is ignored from this effect
+     * This check for the relevant events is called at first to prevent further
+     * actions if the current event is ignored from this effect
+     *
      * @param event
      * @param game
      * @return
      */
     boolean checksEventType(GameEvent event, Game game);
+
     boolean applies(GameEvent event, Ability source, Game game);
 
     boolean hasSelfScope();
-    
 
     @Override
     public ContinuousEffect copy();

@@ -42,8 +42,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import mage.client.MageFrame;
+import mage.client.SessionHandler;
 import mage.client.chat.ChatPanelBasic;
-import mage.client.components.MageTextArea;
 import mage.client.dialog.MageDialog;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.audio.AudioManager;
@@ -52,7 +52,7 @@ import static mage.constants.Constants.Option.ORIGINAL_ID;
 import static mage.constants.Constants.Option.SECOND_MESSAGE;
 import static mage.constants.Constants.Option.SPECIAL_BUTTON;
 import mage.constants.PlayerAction;
-import mage.remote.Session;
+import mage.constants.TurnPhase;
 import org.apache.log4j.Logger;
 
 /**
@@ -64,12 +64,10 @@ public class FeedbackPanel extends javax.swing.JPanel {
     private static final Logger LOGGER = Logger.getLogger(FeedbackPanel.class);
 
     public enum FeedbackMode {
-
         INFORM, QUESTION, CONFIRM, CANCEL, SELECT, END
     }
 
     private UUID gameId;
-    private Session session;
     private FeedbackMode mode;
     private MageDialog connectedDialog;
     private ChatPanelBasic connectedChatPanel;
@@ -87,20 +85,20 @@ public class FeedbackPanel extends javax.swing.JPanel {
 
     public void init(UUID gameId) {
         this.gameId = gameId;
-        session = MageFrame.getSession();
         helper.init(gameId);
         setGUISize();
     }
 
     public void changeGUISize() {
         setGUISize();
-    }
-
-    private void setGUISize() {
         helper.changeGUISize();
     }
 
-    public void getFeedback(FeedbackMode mode, String message, boolean special, Map<String, Serializable> options, int messageId) {
+    private void setGUISize() {
+    }
+
+    public void getFeedback(FeedbackMode mode, String message, boolean special, Map<String, Serializable> options,
+                            int messageId, boolean gameNeedUserFeedback, TurnPhase gameTurnPhase) {
         synchronized (this) {
             if (messageId < this.lastMessageId) {
                 LOGGER.warn("ignoring message from later source: " + messageId + ", text=" + message);
@@ -112,7 +110,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
         this.helper.setOriginalId(null); // reference to the feedback causing ability
         String lblText = addAdditionalText(message, options);
         this.helper.setTextArea(lblText);
-        this.lblMessage.setText(lblText);
+        //this.lblMessage.setText(lblText);
         this.mode = mode;
         switch (this.mode) {
             case INFORM:
@@ -154,6 +152,8 @@ public class FeedbackPanel extends javax.swing.JPanel {
         this.helper.setLinks(btnLeft, btnRight, btnSpecial, btnUndo);
 
         this.helper.setVisible(true);
+        this.helper.setGameNeedFeedback(gameNeedUserFeedback, gameTurnPhase);
+        this.helper.autoSizeButtonsAndFeedbackState();
     }
 
     private void setButtonState(String leftText, String rightText, FeedbackMode mode) {
@@ -186,17 +186,14 @@ public class FeedbackPanel extends javax.swing.JPanel {
      * Close game window by pressing OK button after 8 seconds
      */
     private void endWithTimeout() {
-        Runnable task = new Runnable() {
-            @Override
-            public void run() {
-                LOGGER.info("Ending game...");
-                Component c = MageFrame.getGame(gameId);
-                while (c != null && !(c instanceof GamePane)) {
-                    c = c.getParent();
-                }
-                if (c != null && ((GamePane) c).isVisible()) { // check if GamePanel still visible
-                    FeedbackPanel.this.btnRight.doClick();
-                }
+        Runnable task = () -> {
+            LOGGER.info("Ending game...");
+            Component c = MageFrame.getGame(gameId);
+            while (c != null && !(c instanceof GamePane)) {
+                c = c.getParent();
+            }
+            if (c != null && c.isVisible()) { // check if GamePanel still visible
+                FeedbackPanel.this.btnRight.doClick();
             }
         };
         WORKER.schedule(task, 8, TimeUnit.SECONDS);
@@ -204,13 +201,21 @@ public class FeedbackPanel extends javax.swing.JPanel {
 
     private void handleOptions(Map<String, Serializable> options) {
         if (options != null) {
+            if (options.containsKey("UI.left.btn.text")) {
+                String text = (String) options.get("UI.left.btn.text");
+                this.btnLeft.setText(text);
+                this.helper.setLeft(text, true);
+            }
             if (options.containsKey("UI.right.btn.text")) {
-                this.btnRight.setText((String) options.get("UI.right.btn.text"));
-                this.helper.setRight((String) options.get("UI.right.btn.text"), true);
+                String text = (String) options.get("UI.right.btn.text");
+                this.btnRight.setText(text);
+                this.helper.setRight(text, true);
             }
             if (options.containsKey("dialog")) {
                 connectedDialog = (MageDialog) options.get("dialog");
             }
+
+            this.helper.autoSizeButtonsAndFeedbackState();
         }
     }
 
@@ -239,14 +244,11 @@ public class FeedbackPanel extends javax.swing.JPanel {
         this.btnLeft.setVisible(false);
         this.btnRight.setVisible(false);
         this.btnSpecial.setVisible(false);
-        this.lblMessage.setText("");
     }
 
     private void customInitComponents() {
         btnRight = new javax.swing.JButton();
         btnLeft = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        lblMessage = new MageTextArea();
         btnSpecial = new javax.swing.JButton();
         btnUndo = new javax.swing.JButton();
         btnUndo.setVisible(true);
@@ -254,43 +256,16 @@ public class FeedbackPanel extends javax.swing.JPanel {
         setBackground(new java.awt.Color(0, 0, 0, 80));
 
         btnRight.setText("Cancel");
-        btnRight.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRightActionPerformed(evt);
-            }
-        });
+        btnRight.addActionListener(evt -> btnRightActionPerformed(evt));
 
         btnLeft.setText("OK");
-        btnLeft.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLeftActionPerformed(evt);
-            }
-        });
-
-        jScrollPane1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-
-        lblMessage.setBorder(null);
-        jScrollPane1.setViewportView(lblMessage);
-        jScrollPane1.setBorder(null);
+        btnLeft.addActionListener(evt -> btnLeftActionPerformed(evt));
 
         btnSpecial.setText("Special");
-        btnSpecial.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSpecialActionPerformed(evt);
-            }
-        });
+        btnSpecial.addActionListener(evt -> btnSpecialActionPerformed(evt));
 
         btnUndo.setText("Undo");
-        btnUndo.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUndoActionPerformed(evt);
-            }
-        });
+        btnUndo.addActionListener(evt -> btnUndoActionPerformed(evt));
 
     }
 
@@ -300,29 +275,29 @@ public class FeedbackPanel extends javax.swing.JPanel {
             connectedDialog = null;
         }
         if (mode == FeedbackMode.SELECT && (evt.getModifiers() & ActionEvent.CTRL_MASK) == ActionEvent.CTRL_MASK) {
-            session.sendPlayerInteger(gameId, 0);
+            SessionHandler.sendPlayerInteger(gameId, 0);
         } else if (mode == FeedbackMode.END) {
             GamePanel gamePanel = MageFrame.getGame(gameId);
             if (gamePanel != null) {
                 gamePanel.removeGame();
             }
         } else {
-            session.sendPlayerBoolean(gameId, false);
+            SessionHandler.sendPlayerBoolean(gameId, false);
         }
         //AudioManager.playButtonOk();
     }//GEN-LAST:event_btnRightActionPerformed
 
     private void btnLeftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLeftActionPerformed
-        session.sendPlayerBoolean(gameId, true);
+        SessionHandler.sendPlayerBoolean(gameId, true);
         AudioManager.playButtonCancel();
     }//GEN-LAST:event_btnLeftActionPerformed
 
     private void btnSpecialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSpecialActionPerformed
-        session.sendPlayerString(gameId, "special");
+        SessionHandler.sendPlayerString(gameId, "special");
     }//GEN-LAST:event_btnSpecialActionPerformed
 
     private void btnUndoActionPerformed(java.awt.event.ActionEvent evt) {
-        session.sendPlayerAction(PlayerAction.UNDO, gameId, null);
+        SessionHandler.sendPlayerAction(PlayerAction.UNDO, gameId, null);
     }
 
     public void setHelperPanel(HelperPanel helper) {
@@ -357,7 +332,5 @@ public class FeedbackPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnRight;
     private javax.swing.JButton btnSpecial;
     private javax.swing.JButton btnUndo;
-    private javax.swing.JScrollPane jScrollPane1;
-    private MageTextArea lblMessage;
     private HelperPanel helper;
 }

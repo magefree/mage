@@ -32,12 +32,13 @@ import java.util.Arrays;
 import java.util.List;
 import mage.MageInt;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
  * @author Loki
  */
-public class ElfToken extends Token {
+public class ElfToken extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 
@@ -50,8 +51,8 @@ public class ElfToken extends Token {
         availableImageSetCodes = tokenImageSets;
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
-        subtype.add("Elf");
-        subtype.add("Warrior");
+        subtype.add(SubType.ELF);
+        subtype.add(SubType.WARRIOR);
         power = new MageInt(1);
         toughness = new MageInt(1);
     }

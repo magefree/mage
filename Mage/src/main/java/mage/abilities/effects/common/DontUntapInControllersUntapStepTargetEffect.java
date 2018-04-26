@@ -69,7 +69,7 @@ public class DontUntapInControllersUntapStepTargetEffect extends ContinuousRuleM
         MageObject mageObject = game.getObject(source.getSourceId());
         Permanent permanentToUntap = game.getPermanent((event.getTargetId()));
         if (permanentToUntap != null && mageObject != null) {
-            return permanentToUntap.getLogName() + " doesn't untap (" + mageObject.getLogName() + ")";
+            return permanentToUntap.getLogName() + " doesn't untap (" + mageObject.getLogName() + ')';
         }
         return null;
     }
@@ -81,7 +81,7 @@ public class DontUntapInControllersUntapStepTargetEffect extends ContinuousRuleM
     
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (PhaseStep.UNTAP.equals(game.getTurn().getStepType())) {
+        if (game.getTurn().getStepType() == PhaseStep.UNTAP) {
             for (UUID targetId : targetPointer.getTargets(game, source)) {
                 if (event.getTargetId().equals(targetId)) {
                     Permanent permanent = game.getPermanent(targetId);

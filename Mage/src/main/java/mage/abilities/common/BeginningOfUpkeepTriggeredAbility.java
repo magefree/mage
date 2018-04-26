@@ -25,9 +25,9 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.common;
 
+import java.util.Locale;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.TargetController;
@@ -41,7 +41,6 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Loki
  */
-
 public class BeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImpl {
 
     private TargetController targetController;
@@ -90,7 +89,7 @@ public class BeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImpl {
             case YOU:
                 boolean yours = event.getPlayerId().equals(this.controllerId);
                 if (yours && setTargetPointer) {
-                    if (getTargets().size() == 0) {
+                    if (getTargets().isEmpty()) {
                         for (Effect effect : this.getEffects()) {
                             effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
                         }
@@ -99,7 +98,7 @@ public class BeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImpl {
                 return yours;
             case OPPONENT:
                 if (game.getPlayer(this.controllerId).hasOpponent(event.getPlayerId(), game)) {
-                    if (setTargetPointer && getTargets().size() == 0) {
+                    if (setTargetPointer && getTargets().isEmpty()) {
                         for (Effect effect : this.getEffects()) {
                             effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
                         }
@@ -108,7 +107,7 @@ public class BeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImpl {
                 }
                 break;
             case ANY:
-                if (setTargetPointer && getTargets().size() == 0) {
+                if (setTargetPointer && getTargets().isEmpty()) {
                     for (Effect effect : this.getEffects()) {
                         effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
                     }
@@ -119,7 +118,7 @@ public class BeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImpl {
                 if (attachment != null && attachment.getAttachedTo() != null) {
                     Permanent attachedTo = game.getPermanent(attachment.getAttachedTo());
                     if (attachedTo != null && attachedTo.getControllerId().equals(event.getPlayerId())) {
-                        if (setTargetPointer && getTargets().size() == 0) {
+                        if (setTargetPointer && getTargets().isEmpty()) {
                             for (Effect effect : this.getEffects()) {
                                 effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
                             }
@@ -143,9 +142,9 @@ public class BeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImpl {
         switch (targetController) {
             case YOU:
                 if (this.optional) {
-                    if (sb.substring(0, 6).toLowerCase().equals("target")){
+                    if (sb.substring(0, 6).toLowerCase(Locale.ENGLISH).equals("target")) {
                         sb.insert(0, "you may have ");
-                    } else if (!sb.substring(0, 4).toLowerCase().equals("you ")){
+                    } else if (!sb.substring(0, 4).toLowerCase(Locale.ENGLISH).equals("you ")) {
                         sb.insert(0, "you may ");
                     }
                 }
@@ -153,7 +152,7 @@ public class BeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImpl {
             case OPPONENT:
                 return sb.insert(0, generateZoneString()).insert(0, "At the beginning of each opponent's upkeep, ").toString();
             case ANY:
-                return sb.insert(0, generateZoneString()).insert(0, "At the beginning of each player's upkeep, ").toString();
+                return sb.insert(0, generateZoneString()).insert(0, "At the beginning of each upkeep, ").toString();
             case CONTROLLER_ATTACHED_TO:
                 return sb.insert(0, generateZoneString()).insert(0, "At the beginning of the upkeep of enchanted creature's controller, ").toString();
         }

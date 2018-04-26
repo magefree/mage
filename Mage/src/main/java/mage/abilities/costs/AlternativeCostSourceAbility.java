@@ -121,7 +121,7 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
 
     private AlternativeCost2 convertToAlternativeCost(Cost cost) {
         //return cost != null ? new AlternativeCost2Impl(null, cost.getText(), cost) : null;
-        return cost != null ? new AlternativeCost2Impl(null, "", cost) : null;
+        return cost != null ? new AlternativeCost2Impl(null, "", "", cost) : null;
     }
 
     @Override
@@ -131,15 +131,15 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
 
     @Override
     public boolean isAvailable(Ability source, Game game) {
-        if (condition != null) {
-            return condition.apply(game, source);
-        }
-        return true;
+        boolean conditionApplies = condition == null || condition.apply(game, source);
+        boolean filterApplies = filter == null || filter.match(game.getCard(source.getSourceId()), game);
+
+        return conditionApplies && filterApplies;
     }
 
     @Override
     public boolean askToActivateAlternativeCosts(Ability ability, Game game) {
-        if (ability != null && AbilityType.SPELL.equals(ability.getAbilityType())) {
+        if (ability != null && AbilityType.SPELL == ability.getAbilityType()) {
             if (filter != null) {
                 Card card = game.getCard(ability.getSourceId());
                 if (!filter.match(card, ability.getSourceId(), ability.getControllerId(), game)) {
@@ -160,18 +160,13 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
                 if (dynamicCost != null) {
                     costChoiceText = dynamicCost.getText(ability, game);
                 } else {
-                    costChoiceText = alternativeCostsToCheck.isEmpty() ? "Cast without paying its mana cost?" : "Pay alternative costs? (" + alternativeCostsToCheck.getText() + ")";
+                    costChoiceText = alternativeCostsToCheck.isEmpty() ? "Cast without paying its mana cost?" : "Pay alternative costs? (" + alternativeCostsToCheck.getText() + ')';
                 }
 
                 if (alternativeCostsToCheck.canPay(ability, ability.getSourceId(), ability.getControllerId(), game)
                         && player.chooseUse(Outcome.Benefit, costChoiceText, this, game)) {
                     if (ability instanceof SpellAbility) {
-                        for (Iterator<ManaCost> iterator = ability.getManaCostsToPay().iterator(); iterator.hasNext();) {
-                            ManaCost manaCost = iterator.next();
-                            if (manaCost instanceof VariableCost) {
-                                iterator.remove();
-                            }
-                        }
+                        ability.getManaCostsToPay().removeIf(manaCost -> manaCost instanceof VariableCost);
                         CardUtil.reduceCost((SpellAbility) ability, ability.getManaCosts());
 
                     } else {
@@ -233,7 +228,7 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
         if (condition != null) {
             sb.append(condition.toString());
             if (alternateCosts.size() > 1) {
-                sb.append(", rather than pay {source}'s mana cost, ");
+                sb.append(", rather than pay this spell's mana cost, ");
             } else {
                 sb.append(", you may ");
             }
@@ -259,13 +254,13 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
             ++numberCosts;
         }
         if (condition == null || alternateCosts.size() == 1) {
-            sb.append(" rather than pay {source}'s mana cost");
+            sb.append(" rather than pay this spell's mana cost");
         } else if (alternateCosts.isEmpty()) {
             sb.append("cast {this} without paying its mana cost");
         }
-        sb.append(".");
+        sb.append('.');
         if (numberCosts == 1 && remarkText != null) {
-            sb.append(" ").append(remarkText);
+            sb.append(' ').append(remarkText);
         }
         return sb.toString();
     }

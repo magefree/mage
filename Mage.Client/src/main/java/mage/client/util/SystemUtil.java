@@ -6,7 +6,7 @@ import java.lang.reflect.Method;
 /**
  * @author noxx
  */
-public class SystemUtil {
+public final class SystemUtil {
 
     public static final String OS_NAME = "os.name";
     public static final String MAC_OS_X = "Mac OS X";

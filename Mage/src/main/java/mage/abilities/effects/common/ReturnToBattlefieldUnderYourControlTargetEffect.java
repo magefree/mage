@@ -31,6 +31,9 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
+import mage.cards.MeldCard;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.ExileZone;
@@ -75,20 +78,38 @@ public class ReturnToBattlefieldUnderYourControlTargetEffect extends OneShotEffe
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Card card = null;
+            Cards cardsToBattlefield = new CardsImpl();
             if (fromExileZone) {
-                UUID exilZoneId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
-                if (exilZoneId != null) {
-                    ExileZone exileZone = game.getExile().getExileZone(exilZoneId);
-                    if (exileZone != null && getTargetPointer().getFirst(game, source) != null) {
-                        card = exileZone.get(getTargetPointer().getFirst(game, source), game);
+                UUID exileZoneId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
+                if (exileZoneId != null) {
+                    ExileZone exileZone = game.getExile().getExileZone(exileZoneId);
+                    if (exileZone != null) {
+                        for (UUID targetId : this.getTargetPointer().getTargets(game, source)) {
+                            if (exileZone.contains(targetId)) {
+                                cardsToBattlefield.add(targetId);
+                            }
+                            else {
+                                Card card = game.getCard(targetId);
+                                if (card != null && card instanceof MeldCard) {
+                                    MeldCard meldCard = (MeldCard) card;
+                                    Card topCard = meldCard.getTopHalfCard();
+                                    Card bottomCard = meldCard.getBottomHalfCard();
+                                    if (topCard.getZoneChangeCounter(game) == meldCard.getTopLastZoneChangeCounter() && exileZone.contains(topCard.getId())) {
+                                        cardsToBattlefield.add(topCard);
+                                    }
+                                    if (bottomCard.getZoneChangeCounter(game) == meldCard.getBottomLastZoneChangeCounter() && exileZone.contains(bottomCard.getId())) {
+                                        cardsToBattlefield.add(bottomCard);
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             } else {
-                card = game.getCard(getTargetPointer().getFirst(game, source));
+                cardsToBattlefield.addAll(getTargetPointer().getTargets(game, source));
             }
-            if (card != null) {
-                controller.moveCards(card, Zone.BATTLEFIELD, source, game);
+            if (!cardsToBattlefield.isEmpty()) {
+                controller.moveCards(cardsToBattlefield, Zone.BATTLEFIELD, source, game);
             }
             return true;
         }

@@ -45,9 +45,9 @@ public class IncreasingCardsTest extends CardTestPlayerBase {
     }
     // Increasing Confusion {X}{U}
     // Sorcery
-    // Target player puts the top X cards of his or her library into his or her graveyard.
+    // Target player puts the top X cards of their library into their graveyard.
     // If Increasing Confusion was cast from a graveyard, that player puts twice that many
-    // cards into his or her graveyard instead.
+    // cards into their graveyard instead.
     @Test
     public void testIncreasingConfusion() {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 4);

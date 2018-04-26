@@ -1,8 +1,15 @@
 package org.mage.test.serverside;
 
-import mage.constants.ColoredManaSymbol;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
+import java.util.Random;
 import mage.cards.Card;
+import mage.cards.Sets;
 import mage.cards.decks.Deck;
+import mage.constants.ColoredManaSymbol;
 import mage.constants.MultiplayerAttackOption;
 import mage.constants.RangeOfInfluence;
 import mage.game.Game;
@@ -11,16 +18,9 @@ import mage.game.GameOptions;
 import mage.game.TwoPlayerDuel;
 import mage.player.ai.ComputerPlayer;
 import mage.players.Player;
-import mage.cards.Sets;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.MageTestBase;
-
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
 
 /**
  * @author ayratn
@@ -70,8 +70,8 @@ public class TestPlayRandomGame extends MageTestBase {
     }
 
     private Deck generateRandomDeck() {
-        String selectedColors = colorChoices.get(new Random().nextInt(colorChoices.size())).toUpperCase();
-        List<ColoredManaSymbol> allowedColors = new ArrayList<ColoredManaSymbol>();
+        String selectedColors = colorChoices.get(new Random().nextInt(colorChoices.size())).toUpperCase(Locale.ENGLISH);
+        List<ColoredManaSymbol> allowedColors = new ArrayList<>();
         logger.info("Building deck with colors: " + selectedColors);
         for (int i = 0; i < selectedColors.length(); i++) {
             char c = selectedColors.charAt(i);

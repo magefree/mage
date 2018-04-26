@@ -43,7 +43,7 @@ public class CantBlockSourceEffect extends RestrictionEffect {
     public CantBlockSourceEffect(Duration duration) {
         super(duration);
         this.staticText = "{this} can't block";
-        if (duration.equals(Duration.EndOfTurn)) {
+        if (duration == Duration.EndOfTurn) {
             this.staticText += " this turn";
         }
     }
@@ -54,10 +54,7 @@ public class CantBlockSourceEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (permanent.getId().equals(source.getSourceId())) {
-            return true;
-        }
-        return false;
+        return permanent.getId().equals(source.getSourceId());
     }
 
     @Override

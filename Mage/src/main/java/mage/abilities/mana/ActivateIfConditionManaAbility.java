@@ -27,7 +27,6 @@
  */
 package mage.abilities.mana;
 
-import java.util.UUID;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
 import mage.abilities.effects.common.AddConditionalColorlessManaEffect;
@@ -35,9 +34,7 @@ import mage.abilities.effects.common.BasicManaEffect;
 import mage.constants.Zone;
 import mage.game.Game;
 
-public class ActivateIfConditionManaAbility extends ManaAbility {
-
-    private final Condition condition;
+public class ActivateIfConditionManaAbility extends ActivatedManaAbilityImpl {
 
     public ActivateIfConditionManaAbility(Zone zone, BasicManaEffect effect, Cost cost, Condition condition) {
         super(zone, effect, cost);
@@ -53,28 +50,16 @@ public class ActivateIfConditionManaAbility extends ManaAbility {
 
     public ActivateIfConditionManaAbility(ActivateIfConditionManaAbility ability) {
         super(ability);
-        this.condition = ability.condition;
-    }
-
-    @Override
-    public boolean canActivate(UUID playerId, Game game) {
-        if (condition.apply(game, this)) {
-            return super.canActivate(playerId, game);
-        }
-        return false;
     }
 
     @Override
     public boolean activate(Game game, boolean noMana) {
-        if (canActivate(this.controllerId, game)) {
-            return super.activate(game, noMana);
-        }
-        return false;
+        return super.activate(game, noMana);
     }
 
     @Override
     public String getRule() {
-        return new StringBuilder(super.getRule()).append(" Activate this ability only if ").append(condition.toString()).append(".").toString();
+        return new StringBuilder(super.getRule()).append(" Activate this ability only if ").append(condition.toString()).append('.').toString();
     }
 
     @Override

@@ -97,7 +97,7 @@ public class ReturnToBattlefieldEffectsTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 1);
         addCard(Zone.HAND, playerB, "Lightning Bolt", 1);
 
-        // {T}: Target player exiles a card from his or her graveyard.
+        // {T}: Target player exiles a card from their graveyard.
         // {1}, Exile Relic of Progenitus: Exile all cards from all graveyards. Draw a card.
         addCard(Zone.BATTLEFIELD, playerB, "Relic of Progenitus", 1);
 

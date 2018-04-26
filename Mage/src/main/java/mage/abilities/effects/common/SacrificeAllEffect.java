@@ -109,13 +109,13 @@ public class SacrificeAllEffect extends OneShotEffect {
 
     private void setText() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Each player sacrifices ");
+        sb.append("each player sacrifices ");
         if (amount.toString().equals("X")) {
             sb.append(amount.toString());
         } else {
             sb.append(CardUtil.numberToText(amount.toString(), "a"));
         }
-        sb.append(" ");
+        sb.append(' ');
         sb.append(filter.getMessage());
         staticText = sb.toString();
     }

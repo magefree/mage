@@ -47,7 +47,7 @@ public class TradingPostTest extends CardTestPlayerBase {
     public void testSacrifice() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
         // {1}, {T}, Discard a card: You gain 4 life.
-        // {1}, {T}, Pay 1 life: Put a 0/1 white Goat creature token onto the battlefield.
+        // {1}, {T}, Pay 1 life: Create a 0/1 white Goat creature token onto the battlefield.
         // {1}, {T}, Sacrifice a creature: Return target artifact card from your graveyard to your hand.
         // {1}, {T}, Sacrifice an artifact: Draw a card.
         addCard(Zone.BATTLEFIELD, playerA, "Trading Post", 1);
@@ -59,7 +59,7 @@ public class TradingPostTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Act of Treason", "Savannah Lions");
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1},{T}, Sacrifice a creature", "Helm of Possession", "Act of Treason", StackClause.WHILE_NOT_ON_STACK);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}, {T}, Sacrifice a creature", "Helm of Possession", "Act of Treason", StackClause.WHILE_NOT_ON_STACK);
         setChoice(playerA, "Savannah Lions");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

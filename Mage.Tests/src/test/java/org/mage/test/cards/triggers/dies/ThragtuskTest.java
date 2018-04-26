@@ -43,7 +43,7 @@ public class ThragtuskTest extends CardTestPlayerBase {
 
     /**
      * Test if a Thragtusk is copied by a PhyrexianMetamorph that both triggers
-     * cotrrect work
+     * correct work
      */
     @Test
     public void testPhyrexianMetamorph() {
@@ -69,7 +69,7 @@ public class ThragtuskTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Phyrexian Metamorph", 1);
         assertGraveyardCount(playerB, "Public Execution", 1);
 
-        assertLife(playerA, 25);
+        assertLife(playerA, 23);
         assertLife(playerB, 20); // Thragtusk ETB ability does not trigger if set to battlefield on test game start
 
         assertPermanentCount(playerA, "Beast", 1);
@@ -116,7 +116,7 @@ public class ThragtuskTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Phyrexian Metamorph", 1);
         assertGraveyardCount(playerB, "Public Execution", 1);
 
-        assertLife(playerA, 25);
+        assertLife(playerA, 23);
         assertLife(playerB, 20); // Thragtusk ETB ability does not trigger if set to battlefield on test game start
 
         assertPermanentCount(playerA, "Beast", 0);

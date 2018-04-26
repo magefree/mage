@@ -75,19 +75,21 @@ public class CantBlockTargetEffect extends RestrictionEffect {
         }
         StringBuilder sb = new StringBuilder();
         Target target = mode.getTargets().get(0);
-        if (target.getMaxNumberOfTargets() > 1) {
+        if (target.getMaxNumberOfTargets() == Integer.MAX_VALUE) {
+            sb.append("any number of ");
+        } else if (target.getMaxNumberOfTargets() > 1) {
             if (target.getMaxNumberOfTargets() != target.getNumberOfTargets()) {
                 sb.append("up to ");
             }
-            sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(" ");
+            sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(' ');
         }
         sb.append("target ").append(mode.getTargets().get(0).getTargetName());
         if (target.getMaxNumberOfTargets() > 1) {
-            sb.append("s");
+            sb.append('s');
         }
 
         sb.append(" can't block");
-        if (Duration.EndOfTurn.equals(this.duration)) {
+        if (this.duration == Duration.EndOfTurn) {
             sb.append(" this turn");
         }
 

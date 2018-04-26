@@ -24,15 +24,16 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.abilities.effects.common;
 
-import mage.constants.Outcome;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentCard;
 
 /**
  *
@@ -44,7 +45,8 @@ public class TransformSourceEffect extends OneShotEffect {
     private boolean fromDayToNight;
 
     /**
-     * @param fromDayToNight Defines whether we transform from "day" side to "night" or vice versa.
+     * @param fromDayToNight Defines whether we transform from "day" side to
+     * "night" or vice versa.
      */
     public TransformSourceEffect(boolean fromDayToNight) {
         this(fromDayToNight, false);
@@ -70,28 +72,32 @@ public class TransformSourceEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            if (permanent.canTransform()) {
+        MageObject sourceObject = source.getSourceObjectIfItStillExists(game); // Transform only if it's the same object as the effect was put on the stack
+        if (sourceObject != null && sourceObject instanceof Permanent) {
+            Permanent sourcePermanent = (Permanent) sourceObject;
+            if (sourcePermanent.canTransform(source, game)) {
                 // check not to transform twice the same side
-                if (permanent.isTransformed() != fromDayToNight) {
-                    if (withoutTrigger) {                        
-                        permanent.setTransformed(fromDayToNight);
+                if (sourcePermanent.isTransformed() != fromDayToNight) {
+                    if (withoutTrigger) {
+                        sourcePermanent.setTransformed(fromDayToNight);
                     } else {
-                        permanent.transform(game);
+                        sourcePermanent.transform(game);
                     }
                     if (!game.isSimulation()) {
                         if (fromDayToNight) {
-                            game.informPlayers(new StringBuilder(permanent.getName()).append(" transforms into ").append(permanent.getSecondCardFace().getName()).toString());                    
+                            if (sourcePermanent.getSecondCardFace() != null) {
+                                if (sourcePermanent instanceof PermanentCard) {
+                                    game.informPlayers(((PermanentCard) sourcePermanent).getCard().getLogName() + " transforms into " + sourcePermanent.getSecondCardFace().getLogName());
+                                }
+                            }
                         } else {
-                            game.informPlayers(new StringBuilder(permanent.getSecondCardFace().getName()).append(" transforms into ").append(permanent.getName()).toString());                    
+                            game.informPlayers(sourcePermanent.getSecondCardFace().getLogName() + " transforms into " + sourcePermanent.getLogName());
                         }
                     }
                 }
             }
-            return true;
         }
-        return false;
+        return true;
     }
 
 }

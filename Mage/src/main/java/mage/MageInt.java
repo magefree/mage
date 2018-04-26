@@ -24,16 +24,17 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage;
 
 import java.io.Serializable;
+import java.util.Objects;
+
 import mage.util.Copyable;
 
 public class MageInt implements Serializable, Copyable<MageInt> {
 
-    public static MageInt EmptyMageInt = new MageInt(Integer.MIN_VALUE, null) {
+    public static final MageInt EmptyMageInt = new MageInt(Integer.MIN_VALUE, "") {
 
         private static final String exceptionMessage = "MageInt.EmptyMageInt can't be modified.";
 
@@ -49,41 +50,67 @@ public class MageInt implements Serializable, Copyable<MageInt> {
     };
 
     protected int baseValue;
+    protected int baseValueModified;
+    protected int boostedValue;
     protected String cardValue = "";
 
     public MageInt(int value) {
         this.baseValue = value;
+        this.baseValueModified = baseValue;
+        this.boostedValue = baseValue;
         this.cardValue = Integer.toString(value);
     }
 
     public MageInt(int baseValue, String cardValue) {
         this.baseValue = baseValue;
+        this.baseValueModified = baseValue;
+        this.boostedValue = baseValue;
+        this.cardValue = cardValue;
+    }
+
+    public MageInt(int baseValue, int baseValueModified, int boostedValue, String cardValue) {
+        this.baseValue = baseValue;
+        this.baseValueModified = baseValueModified;
+        this.boostedValue = boostedValue;
         this.cardValue = cardValue;
     }
 
     @Override
     public MageInt copy() {
-        if (this == EmptyMageInt) {
+        if (Objects.equals(this, EmptyMageInt)) {
             return this;
         }
-        return new MageInt(baseValue, cardValue);
+        return new MageInt(baseValue, baseValueModified, boostedValue, cardValue);
     }
 
-    public int getValue() {
+    public int getBaseValue() {
         return baseValue;
     }
 
-    public void initValue(int value) {
-        this.baseValue = value;
+    public int getBaseValueModified() {
+        return baseValueModified;
+    }
+
+    public int getValue() {
+        return boostedValue;
+    }
+
+    public void modifyBaseValue(int value) {
+        this.baseValueModified = value;
+        this.boostedValue = value;
         this.cardValue = Integer.toString(value);
     }
 
     public void setValue(int value) {
-        this.baseValue = value;
+        this.boostedValue = value;
     }
 
     public void boostValue(int amount) {
-        this.baseValue += amount;
+        this.boostedValue += amount;
+    }
+
+    public void resetToBaseValue() {
+        this.boostedValue = this.baseValueModified;
     }
 
     @Override

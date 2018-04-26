@@ -50,9 +50,11 @@ public class NameACardEffect extends OneShotEffect {
     public enum TypeOfName {
 
         ALL,
+        NON_ARTIFACT_AND_NON_LAND_NAME,
         NON_LAND_NAME,
         NON_LAND_AND_NON_CREATURE_NAME,
-        CREATURE_NAME
+        CREATURE_NAME,
+        ARTIFACT_NAME
     }
 
     private final TypeOfName typeOfName;
@@ -80,36 +82,41 @@ public class NameACardEffect extends OneShotEffect {
             switch (typeOfName) {
                 case ALL:
                     cardChoice.setChoices(CardRepository.instance.getNames());
-                    cardChoice.setMessage("Name a card");
+                    cardChoice.setMessage("Choose a card name");
+                    break;
+                case NON_ARTIFACT_AND_NON_LAND_NAME:
+                    cardChoice.setChoices(CardRepository.instance.getNonArtifactAndNonLandNames());
+                    cardChoice.setMessage("Choose a nonartifact, nonland card name");
                     break;
                 case NON_LAND_AND_NON_CREATURE_NAME:
                     cardChoice.setChoices(CardRepository.instance.getNonLandAndNonCreatureNames());
-                    cardChoice.setMessage("Name a non land and non creature card");
+                    cardChoice.setMessage("Choose a nonland and non creature card");
                     break;
                 case NON_LAND_NAME:
                     cardChoice.setChoices(CardRepository.instance.getNonLandNames());
-                    cardChoice.setMessage("Name a non land card");
+                    cardChoice.setMessage("Choose a nonland card name");
                     break;
                 case CREATURE_NAME:
                     cardChoice.setChoices(CardRepository.instance.getCreatureNames());
-                    cardChoice.setMessage("Name a creature card");
+                    cardChoice.setMessage("Choose a creature card name");
+                    break;
+                case ARTIFACT_NAME:
+                    cardChoice.setChoices(CardRepository.instance.getArtifactNames());
+                    cardChoice.setMessage("Choose an artifact card name");
                     break;
             }
             cardChoice.clearChoice();
-            while (!controller.choose(Outcome.Detriment, cardChoice, game)) {
-                if (!controller.canRespond()) {
-                    return false;
+            if (controller.choose(Outcome.Detriment, cardChoice, game)) {
+                String cardName = cardChoice.getChoice();
+                if (!game.isSimulation()) {
+                    game.informPlayers(sourceObject.getLogName() + ", named card: [" + cardName + ']');
                 }
+                game.getState().setValue(source.getSourceId().toString() + INFO_KEY, cardName);
+                if (sourceObject instanceof Permanent) {
+                    ((Permanent) sourceObject).addInfo(INFO_KEY, CardUtil.addToolTipMarkTags("Named card: " + cardName), game);
+                }
+                return true;
             }
-            String cardName = cardChoice.getChoice();
-            if (!game.isSimulation()) {
-                game.informPlayers(sourceObject.getLogName() + ", named card: [" + cardName + "]");
-            }
-            game.getState().setValue(source.getSourceId().toString() + INFO_KEY, cardName);
-            if (sourceObject instanceof Permanent) {
-                ((Permanent) sourceObject).addInfo(INFO_KEY, CardUtil.addToolTipMarkTags("Named card: " + cardName), game);
-            }
-            return true;
         }
         return false;
     }
@@ -120,18 +127,28 @@ public class NameACardEffect extends OneShotEffect {
     }
 
     private String setText() {
-        StringBuilder sb = new StringBuilder("name a ");
+        StringBuilder sb = new StringBuilder("choose a ");
         switch (typeOfName) {
             case ALL:
                 sb.append("card");
                 break;
+            case NON_ARTIFACT_AND_NON_LAND_NAME:
+                sb.append("nonartifact, nonland card");
+                break;
             case NON_LAND_AND_NON_CREATURE_NAME:
-                sb.append("card other than a creature or a land card");
+                sb.append("noncreature, nonland card");
                 break;
             case NON_LAND_NAME:
                 sb.append("nonland card");
                 break;
+            case CREATURE_NAME:
+                sb.append("creature card");
+                break;
+            case ARTIFACT_NAME:
+                sb.append("artifact card");
+                break;
         }
+        sb.append(" name");
         return sb.toString();
     }
 }

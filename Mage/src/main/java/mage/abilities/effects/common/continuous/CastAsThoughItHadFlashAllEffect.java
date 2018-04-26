@@ -94,10 +94,11 @@ public class CastAsThoughItHadFlashAllEffect extends AsThoughEffectImpl {
         sb.append(" may cast ");
         sb.append(filter.getMessage());
         if (!duration.toString().isEmpty()) {
-            if (duration.equals(Duration.EndOfTurn)) {
+            if (duration == Duration.EndOfTurn) {
                 sb.append(" this turn");
             } else {
-                sb.append(" ");
+                sb.append(' ');
+                sb.append(' ');
                 sb.append(duration.toString());
             }
         }

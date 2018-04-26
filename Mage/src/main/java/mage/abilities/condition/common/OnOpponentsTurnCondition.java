@@ -13,13 +13,9 @@ import mage.game.Game;
  *
  * @author LevelX2
  */
-public class OnOpponentsTurnCondition implements Condition {
+public enum OnOpponentsTurnCondition implements Condition {
 
-    private static final OnOpponentsTurnCondition F_INSTANCE = new OnOpponentsTurnCondition();
-
-    public static Condition getInstance() {
-        return F_INSTANCE;
-    }
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

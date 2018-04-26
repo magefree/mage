@@ -30,7 +30,6 @@ package mage.abilities.effects.common.replacement;
 import mage.abilities.Ability;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
-import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -50,7 +49,7 @@ public class DealtDamageToCreatureBySourceDies extends ReplacementEffectImpl {
 
     public DealtDamageToCreatureBySourceDies(Card card, Duration duration) {
         super(duration, Outcome.Exile);
-        if (card.getCardType().contains(CardType.CREATURE)) {
+        if (card.isCreature()) {
             staticText = "If a creature dealt damage by {this} this turn would die, exile it instead";
         } else {
             staticText = "If a creature dealt damage this way would die this turn, exile it instead";
@@ -90,7 +89,7 @@ public class DealtDamageToCreatureBySourceDies extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         ZoneChangeEvent zce = (ZoneChangeEvent) event;
         if (zce.isDiesEvent()) {
-            DamagedByWatcher watcher = (DamagedByWatcher) game.getState().getWatchers().get("DamagedByWatcher", source.getSourceId());
+            DamagedByWatcher watcher = (DamagedByWatcher) game.getState().getWatchers().get(DamagedByWatcher.class.getSimpleName(), source.getSourceId());
             if (watcher != null) {
                 return watcher.wasDamaged(zce.getTarget(), game);
             }

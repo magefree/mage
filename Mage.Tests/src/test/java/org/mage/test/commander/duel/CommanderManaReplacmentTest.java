@@ -60,7 +60,7 @@ public class CommanderManaReplacmentTest extends CardTestCommanderDuelBase {
      *
      * For example, I am playing a mono red deck and control a Mana Flare. You
      * are playing a mono green deck and you tap a Forest for mana. You should
-     * add GG to your mana pool, but instead, Xmage shows you adding 1G to your
+     * add GG, but instead, Xmage shows you adding 1G to your
      * mana pool.
      */
     @Test

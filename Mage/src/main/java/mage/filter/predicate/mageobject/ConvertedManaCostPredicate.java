@@ -28,9 +28,8 @@
 package mage.filter.predicate.mageobject;
 
 import mage.MageObject;
-import mage.filter.Filter;
+import mage.constants.ComparisonType;
 import mage.filter.predicate.IntComparePredicate;
-import mage.game.stack.StackObject;
 
 /**
  *
@@ -38,17 +37,13 @@ import mage.game.stack.StackObject;
  */
 public class ConvertedManaCostPredicate extends IntComparePredicate<MageObject> {
 
-    public ConvertedManaCostPredicate(Filter.ComparisonType type, int value) {
+    public ConvertedManaCostPredicate(ComparisonType type, int value) {
         super(type, value);
     }
 
     @Override
     protected int getInputValue(MageObject input) {
-        if (input instanceof StackObject) {
-            return ((StackObject) input).getConvertedManaCost();
-        } else{
-            return input.getManaCost().convertedManaCost();
-        }
+        return input.getConvertedManaCost();
     }
 
     @Override

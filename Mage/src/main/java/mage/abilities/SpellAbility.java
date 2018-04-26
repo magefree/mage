@@ -29,13 +29,17 @@ package mage.abilities;
 
 import java.util.UUID;
 import mage.MageObject;
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.ManaCost;
+import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.keyword.FlashAbility;
+import mage.cards.Card;
 import mage.cards.SplitCard;
 import mage.constants.AbilityType;
 import mage.constants.AsThoughEffectType;
+import mage.constants.SpellAbilityCastMode;
 import mage.constants.SpellAbilityType;
-import static mage.constants.SpellAbilityType.SPLIT_FUSED;
 import mage.constants.TimingRule;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -43,12 +47,12 @@ import mage.game.events.GameEvent;
 import mage.players.Player;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class SpellAbility extends ActivatedAbilityImpl {
 
     protected SpellAbilityType spellAbilityType;
+    protected SpellAbilityCastMode spellAbilityCastMode;
     protected String cardName;
 
     public SpellAbility(ManaCost cost, String cardName) {
@@ -60,23 +64,22 @@ public class SpellAbility extends ActivatedAbilityImpl {
     }
 
     public SpellAbility(ManaCost cost, String cardName, Zone zone, SpellAbilityType spellAbilityType) {
+        this(cost, cardName, zone, spellAbilityType, SpellAbilityCastMode.NORMAL);
+    }
+
+    public SpellAbility(ManaCost cost, String cardName, Zone zone, SpellAbilityType spellAbilityType, SpellAbilityCastMode spellAbilityCastMode) {
         super(AbilityType.SPELL, zone);
         this.cardName = cardName;
         this.spellAbilityType = spellAbilityType;
+        this.spellAbilityCastMode = spellAbilityCastMode;
         this.addManaCost(cost);
-        switch (spellAbilityType) {
-            case SPLIT_FUSED:
-                this.name = "Cast fused " + cardName;
-                break;
-            default:
-                this.name = "Cast " + cardName;
-        }
-
+        setSpellName();
     }
 
     public SpellAbility(final SpellAbility ability) {
         super(ability);
         this.spellAbilityType = ability.spellAbilityType;
+        this.spellAbilityCastMode = ability.spellAbilityCastMode;
         this.cardName = ability.cardName;
     }
 
@@ -89,15 +92,17 @@ public class SpellAbility extends ActivatedAbilityImpl {
 
     @Override
     public boolean canActivate(UUID playerId, Game game) {
-        if (game.getContinuousEffects().asThough(sourceId, AsThoughEffectType.CAST_AS_INSTANT, this, playerId, game) // check this first to allow Offering in main phase
+        if (null != game.getContinuousEffects().asThough(sourceId, AsThoughEffectType.CAST_AS_INSTANT, this, playerId, game) // check this first to allow Offering in main phase
                 || this.spellCanBeActivatedRegularlyNow(playerId, game)) {
-            if (spellAbilityType.equals(SpellAbilityType.SPLIT)) {
+            if (spellAbilityType == SpellAbilityType.SPLIT || spellAbilityType == SpellAbilityType.SPLIT_AFTERMATH) {
                 return false;
             }
             // fix for Gitaxian Probe and casting opponent's spells
-            if (!game.getContinuousEffects().asThough(getSourceId(), AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, playerId, game)
-                    && !controllerId.equals(playerId)) {
-                return false;
+            if (null == game.getContinuousEffects().asThough(getSourceId(), AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, playerId, game)) {
+                Card card = game.getCard(sourceId);
+                if (!(card != null && card.getOwnerId().equals(playerId))) {
+                    return false;
+                }
             }
             // Check if rule modifying events prevent to cast the spell in check playable mode
             if (this.isCheckPlayableMode()) {
@@ -107,14 +112,14 @@ public class SpellAbility extends ActivatedAbilityImpl {
                 }
             }
             // Alternate spell abilities (Flashback, Overload) can't be cast with no mana to pay option
-            if (getSpellAbilityType().equals(SpellAbilityType.BASE_ALTERNATE)) {
+            if (getSpellAbilityType() == SpellAbilityType.BASE_ALTERNATE) {
                 Player player = game.getPlayer(playerId);
                 if (player != null && getSourceId().equals(player.getCastSourceIdWithAlternateMana())) {
                     return false;
                 }
             }
             if (costs.canPay(this, sourceId, controllerId, game)) {
-                if (getSpellAbilityType().equals(SpellAbilityType.SPLIT_FUSED)) {
+                if (getSpellAbilityType() == SpellAbilityType.SPLIT_FUSED) {
                     SplitCard splitCard = (SplitCard) game.getCard(getSourceId());
                     if (splitCard != null) {
                         return (splitCard.getLeftHalfCard().getSpellAbility().canChooseTarget(game)
@@ -144,7 +149,6 @@ public class SpellAbility extends ActivatedAbilityImpl {
     }
 
     public void clear() {
-        getChoices().clearChosen();
         getTargets().clearChosen();
         this.manaCosts.clearPaid();
         this.costs.clearPaid();
@@ -178,23 +182,59 @@ public class SpellAbility extends ActivatedAbilityImpl {
         return cardName;
     }
 
-    public int getConvertedManaCost() {
-        int cmc = 0;
+    public int getConvertedXManaCost(Card card) {
         int xMultiplier = 0;
-        for (String symbolString : getManaCosts().getSymbols()) {
-            int index = symbolString.indexOf("{X}");
-            while (index != -1) {
-                xMultiplier++;
-                symbolString = symbolString.substring(index + 3);
-                index = symbolString.indexOf("{X}");
+        int amount = 0;
+        if (card == null) {
+            return 0;
+        }
+
+        for (ManaCost manaCost : card.getManaCost()) {
+            if (manaCost instanceof VariableManaCost) {
+                xMultiplier = ((VariableManaCost) manaCost).getMultiplier();
+                break;
             }
         }
-        if (getSpellAbilityType().equals(SpellAbilityType.BASE_ALTERNATE)) {
-            cmc += getManaCostsToPay().getX() * xMultiplier;
-        } else {
-            cmc += getManaCosts().convertedManaCost() + getManaCostsToPay().getX() * xMultiplier;
-        }
-        return cmc;
 
+        boolean hasNonManaXCost = false;
+        for (Cost cost : getCosts()) {
+            if (cost instanceof VariableCost) {
+                hasNonManaXCost = true;
+                amount = ((VariableCost) cost).getAmount();
+                break;
+            }
+        }
+
+        if (!hasNonManaXCost) {
+            amount = getManaCostsToPay().getX();
+        }
+        return amount * xMultiplier;
+    }
+
+    private void setSpellName() {
+        switch (spellAbilityType) {
+            case SPLIT_FUSED:
+                this.name = "Cast fused " + cardName;
+                break;
+            default:
+                this.name = "Cast " + cardName + (this.spellAbilityCastMode != SpellAbilityCastMode.NORMAL ? " using " + spellAbilityCastMode.toString() : "");
+        }
+    }
+
+    public SpellAbilityCastMode getSpellAbilityCastMode() {
+        return spellAbilityCastMode;
+    }
+
+    public void setSpellAbilityCastMode(SpellAbilityCastMode spellAbilityCastMode) {
+        this.spellAbilityCastMode = spellAbilityCastMode;
+        setSpellName();
+    }
+
+    public SpellAbility getSpellAbilityToResolve(Game game) {
+        return this;
+    }
+
+    public void setId(UUID idToUse) {
+        this.id = idToUse;
     }
 }

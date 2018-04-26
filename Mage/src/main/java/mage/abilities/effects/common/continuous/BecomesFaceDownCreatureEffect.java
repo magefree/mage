@@ -41,23 +41,18 @@ import mage.cards.Card;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
-import static mage.constants.Layer.AbilityAddingRemovingEffects_6;
-import static mage.constants.Layer.ColorChangingEffects_5;
-import static mage.constants.Layer.PTChangingEffects_7;
-import static mage.constants.Layer.TypeChangingEffects_4;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- * This effect lets the card be a 2/2 face-down creature, with no text,
- * no name, no subtypes, and no mana cost, if it's face down on the battlefield.
- * And it adds the a TurnFaceUpAbility ability.
- * 
+ * This effect lets the card be a 2/2 face-down creature, with no text, no name,
+ * no subtypes, and no mana cost, if it's face down on the battlefield. And it
+ * adds the a TurnFaceUpAbility ability.
+ *
  * @author LevelX2
  */
-
 public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl implements SourceEffect {
 
     public enum FaceDownType {
@@ -69,15 +64,15 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl implemen
 
     protected int zoneChangeCounter;
     protected Ability turnFaceUpAbility = null;
-    protected MageObjectReference objectReference= null;
+    protected MageObjectReference objectReference = null;
     protected boolean foundPermanent;
     protected FaceDownType faceDownType;
 
-    public BecomesFaceDownCreatureEffect(Duration duration, FaceDownType faceDownType){
+    public BecomesFaceDownCreatureEffect(Duration duration, FaceDownType faceDownType) {
         this(null, null, duration, faceDownType);
     }
 
-    public BecomesFaceDownCreatureEffect(Costs<Cost> turnFaceUpCosts, FaceDownType faceDownType){
+    public BecomesFaceDownCreatureEffect(Costs<Cost> turnFaceUpCosts, FaceDownType faceDownType) {
         this(turnFaceUpCosts, null, faceDownType);
     }
 
@@ -94,13 +89,12 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl implemen
         this.objectReference = objectReference;
         this.zoneChangeCounter = Integer.MIN_VALUE;
         if (turnFaceUpCosts != null) {
-            this.turnFaceUpAbility = new TurnFaceUpAbility(turnFaceUpCosts, faceDownType.equals(FaceDownType.MEGAMORPHED));
+            this.turnFaceUpAbility = new TurnFaceUpAbility(turnFaceUpCosts, faceDownType == FaceDownType.MEGAMORPHED);
         }
         staticText = "{this} becomes a 2/2 face-down creature, with no text, no name, no subtypes, and no mana cost";
         foundPermanent = false;
         this.faceDownType = faceDownType;
     }
-
 
     public BecomesFaceDownCreatureEffect(final BecomesFaceDownCreatureEffect effect) {
         super(effect);
@@ -130,7 +124,7 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl implemen
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        if (faceDownType.equals(FaceDownType.MANUAL)) {
+        if (faceDownType == FaceDownType.MANUAL) {
             Permanent permanent;
             if (objectReference != null) {
                 permanent = objectReference.getPermanent(game);
@@ -151,11 +145,11 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl implemen
         } else {
             permanent = game.getPermanent(source.getSourceId());
         }
-        
+
         if (permanent != null && permanent.isFaceDown(game)) {
             if (!foundPermanent) {
                 foundPermanent = true;
-                switch(faceDownType) {
+                switch (faceDownType) {
                     case MANIFESTED:
                     case MANUAL: // sets manifested image
                         permanent.setManifested(true);
@@ -169,10 +163,10 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl implemen
             switch (layer) {
                 case TypeChangingEffects_4:
                     permanent.setName("");
-                    permanent.getSupertype().clear();
+                    permanent.getSuperType().clear();
                     permanent.getCardType().clear();
-                    permanent.getCardType().add(CardType.CREATURE);
-                    permanent.getSubtype().clear();
+                    permanent.addCardType(CardType.CREATURE);
+                    permanent.getSubtype(game).clear();
                     break;
                 case ColorChangingEffects_5:
                     permanent.getColor(game).setColor(new ObjectColor());
@@ -188,11 +182,9 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl implemen
                         if (ability.getWorksFaceDown()) {
                             ability.setRuleVisible(false);
                             continue;
-                        } else {
-                            if (!ability.getRuleVisible() && !ability.getEffects().isEmpty()) {
-                                if (ability.getEffects().get(0) instanceof BecomesFaceDownCreatureEffect) {
-                                    continue;
-                                }
+                        } else if (!ability.getRuleVisible() && !ability.getEffects().isEmpty()) {
+                            if (ability.getEffects().get(0) instanceof BecomesFaceDownCreatureEffect) {
+                                continue;
                             }
                         }
                         abilitiesToRemove.add(ability);
@@ -208,10 +200,8 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl implemen
                         permanent.getToughness().setValue(2);
                     }
             }
-        } else {
-            if (duration.equals(Duration.Custom) && foundPermanent == true) {
-                discard();
-            }
+        } else if (duration == Duration.Custom && foundPermanent == true) {
+            discard();
         }
         return true;
     }

@@ -1,19 +1,17 @@
 package mage.client.components.tray;
 
+import java.awt.*;
+import java.util.concurrent.TimeUnit;
 import mage.client.MageFrame;
 import org.apache.log4j.Logger;
 import org.mage.plugins.card.utils.impl.ImageManagerImpl;
 
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 /**
  * @author noxx
  */
-public class MageTray {
+public enum MageTray {
 
-    private static final MageTray instance = new MageTray();
+    instance;
 
     private static final Logger log = Logger.getLogger(MageTray.class);
 
@@ -21,11 +19,7 @@ public class MageTray {
     private Image flashedImage;
     private TrayIcon trayIcon;
 
-    private static int state = 0;
-
-    public static MageTray getInstance() {
-        return instance;
-    }
+    private int state = 0;
 
     public void install() {
         if (!SystemTray.isSupported()) {
@@ -34,19 +28,16 @@ public class MageTray {
         }
 
         try {
-            mainImage = ImageManagerImpl.getInstance().getAppSmallImage();
-            flashedImage = ImageManagerImpl.getInstance().getAppFlashedImage();
+            mainImage = ImageManagerImpl.instance.getAppSmallImage();
+            flashedImage = ImageManagerImpl.instance.getAppFlashedImage();
             trayIcon = new TrayIcon(mainImage);
             trayIcon.setImageAutoSize(true);
 
-            trayIcon.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    stopBlink();
-                    MageFrame frame = MageFrame.getInstance();
-                    frame.setVisible(true);
-                    frame.setState(Frame.NORMAL);
-                }
+            trayIcon.addActionListener(e -> {
+                stopBlink();
+                MageFrame frame = MageFrame.getInstance();
+                frame.setVisible(true);
+                frame.setState(Frame.NORMAL);
             });
 
             final SystemTray tray = SystemTray.getSystemTray();
@@ -60,47 +51,17 @@ public class MageTray {
             MenuItem aboutItem = new MenuItem("About Mage");
             MenuItem exitItem = new MenuItem("Exit");
 
-            imagesItem.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    MageFrame.getInstance().btnImagesActionPerformed(null);
-                }
-            });
+            imagesItem.addActionListener(e -> MageFrame.getInstance().downloadImages());
 
-            iconsItem.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    MageFrame.getInstance().btnSymbolsActionPerformed(null);
-                }
-            });
+            iconsItem.addActionListener(e -> MageFrame.getInstance().downloadAdditionalResources());
 
-            stopBlinkItem.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    stopBlink();
-                }
-            });
+            stopBlinkItem.addActionListener(e -> stopBlink());
 
-            preferencesItem.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    MageFrame.getInstance().btnPreferencesActionPerformed(null);
-                }
-            });
+            preferencesItem.addActionListener(e -> MageFrame.getInstance().btnPreferencesActionPerformed(null));
 
-            aboutItem.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    MageFrame.getInstance().btnAboutActionPerformed(null);
-                }
-            });
+            aboutItem.addActionListener(e -> MageFrame.getInstance().btnAboutActionPerformed(null));
 
-            exitItem.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    MageFrame.getInstance().exitApp();
-                }
-            });
+            exitItem.addActionListener(e -> MageFrame.getInstance().exitApp());
 
             popup.add(imagesItem);
             popup.add(iconsItem);
@@ -130,23 +91,20 @@ public class MageTray {
             synchronized (MageTray.class) {
                 if (state == 0) {
                     state = 1;
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
-                                int i = 0;
-                                while (state != 3) {
-                                    trayIcon.setImage(i == 0 ? mainImage : flashedImage);
-                                    Thread.sleep(600);
-                                    i = i == 0 ? 1 : 0;
-                                }
-                                trayIcon.setImage(mainImage);
-                                state = 0;
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
+                    new Thread(() -> {
+                        try {
+                            int i = 0;
+                            while (state != 3) {
+                                trayIcon.setImage(i == 0 ? mainImage : flashedImage);
+                                TimeUnit.MILLISECONDS.sleep(600);
+                                i = i == 0 ? 1 : 0;
                             }
-
+                            trayIcon.setImage(mainImage);
+                            state = 0;
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
                         }
+
                     }).start();
                 }
             }

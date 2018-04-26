@@ -5,8 +5,6 @@
  */
 package mage.abilities.effects.common;
 
-import java.util.ArrayList;
-import java.util.List;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ReplacementEffectImpl;
@@ -14,6 +12,7 @@ import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.Predicates;
@@ -24,6 +23,9 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Effect for the AmplifyAbility
@@ -100,8 +102,8 @@ public class AmplifyEffect extends ReplacementEffectImpl {
         if (controller != null && sourceCreature != null) {
             FilterCreatureCard filter = new FilterCreatureCard("creatures cards to reveal");
             List<SubtypePredicate> filterSubtypes = new ArrayList<>();
-            for (String subtype : sourceCreature.getSubtype()) {
-                filterSubtypes.add(new SubtypePredicate((subtype)));
+            for (SubType subtype : sourceCreature.getSubtype(game)) {
+                filterSubtypes.add(new SubtypePredicate(subtype));
             }
             if (filterSubtypes.size() > 1) {
                 filter.add(Predicates.or(filterSubtypes));
@@ -115,7 +117,7 @@ public class AmplifyEffect extends ReplacementEffectImpl {
                         Cards cards = new CardsImpl();
                         cards.addAll(target.getTargets());
                         int amountCounters = cards.size() * amplifyFactor.getFactor();
-                        sourceCreature.addCounters(CounterType.P1P1.createInstance(amountCounters), game);
+                        sourceCreature.addCounters(CounterType.P1P1.createInstance(amountCounters), source, game);
                         controller.revealCards(sourceCreature.getIdName(), cards, game);
                     }
                 }

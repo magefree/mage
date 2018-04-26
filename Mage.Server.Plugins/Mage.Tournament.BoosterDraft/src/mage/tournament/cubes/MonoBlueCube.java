@@ -29,7 +29,6 @@
 package mage.tournament.cubes;
 
 import mage.game.draft.DraftCube;
-import mage.game.draft.DraftCube.CardIdentity;
 
 /**
  * Cube taken from
@@ -45,9 +44,9 @@ public class MonoBlueCube extends DraftCube {
         cubeCards.add(new CardIdentity("Adaptive Automaton",""));
         cubeCards.add(new CardIdentity("Aeolipile",""));
         cubeCards.add(new CardIdentity("Aeon Chronicler",""));
-        cubeCards.add(new CardIdentity("AEther Spellbomb",""));
-        cubeCards.add(new CardIdentity("AEther Vial",""));
-        cubeCards.add(new CardIdentity("AEtherling",""));
+        cubeCards.add(new CardIdentity("Aether Spellbomb",""));
+        cubeCards.add(new CardIdentity("Aether Vial",""));
+        cubeCards.add(new CardIdentity("Aetherling",""));
         cubeCards.add(new CardIdentity("All Is Dust",""));
         cubeCards.add(new CardIdentity("Ambassador Laquatus",""));
         cubeCards.add(new CardIdentity("Amnesia",""));
@@ -378,7 +377,7 @@ public class MonoBlueCube extends DraftCube {
         cubeCards.add(new CardIdentity("Upheaval",""));
         cubeCards.add(new CardIdentity("Vapor Snag",""));
         cubeCards.add(new CardIdentity("Vaporkin",""));
-        cubeCards.add(new CardIdentity("Vedalken AEthermage",""));
+        cubeCards.add(new CardIdentity("Vedalken Aethermage",""));
         cubeCards.add(new CardIdentity("Vedalken Shackles",""));
         cubeCards.add(new CardIdentity("Veiled Serpent",""));
         cubeCards.add(new CardIdentity("Vendilion Clique",""));

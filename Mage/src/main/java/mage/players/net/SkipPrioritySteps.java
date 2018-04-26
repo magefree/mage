@@ -35,13 +35,14 @@ import mage.constants.PhaseStep;
  * @author LevelX2
  */
 public class SkipPrioritySteps implements Serializable {
-    boolean upkeep;
-    boolean draw;
-    boolean main1;
-    boolean beforeCombat;
-    boolean endOfCombat;
-    boolean main2;
-    boolean endOfTurn;
+
+    boolean upkeep = false;
+    boolean draw = false;
+    boolean main1 = true;
+    boolean beforeCombat = false;
+    boolean endOfCombat = false;
+    boolean main2 = true;
+    boolean endOfTurn = false;
 
     public boolean isUpkeep() {
         return upkeep;
@@ -100,7 +101,7 @@ public class SkipPrioritySteps implements Serializable {
     }
 
     public boolean isPhaseStepSet(PhaseStep phaseStep) {
-        switch(phaseStep) {
+        switch (phaseStep) {
             case UPKEEP:
                 return isUpkeep();
             case DRAW:
@@ -119,5 +120,5 @@ public class SkipPrioritySteps implements Serializable {
                 return true;
         }
     }
-    
+
 }

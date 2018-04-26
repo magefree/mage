@@ -36,7 +36,7 @@ import java.util.UUID;
  */
 public class ObjectSourcePlayer<T> extends ObjectPlayer<T> {
 
-    protected UUID sourceId;
+    protected final UUID sourceId;
 
     public ObjectSourcePlayer(T object, UUID sourceId, UUID playerId) {
         super(object, playerId);

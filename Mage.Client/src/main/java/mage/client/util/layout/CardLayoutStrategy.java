@@ -1,6 +1,6 @@
 package mage.client.util.layout;
 
-import javax.swing.JLayeredPane;
+import mage.client.game.BattlefieldPanel;
 
 /**
  * Interface for operations that modify cards' layout
@@ -11,7 +11,7 @@ public interface CardLayoutStrategy {
 
     int getDefaultZOrder();
 
-    void onAdd(JLayeredPane jLayeredPane);
+    void onAdd(BattlefieldPanel jLayeredPane);
 
-    void doLayout(JLayeredPane jLayeredPane, int battlefieldWidth);
+    void doLayout(BattlefieldPanel jLayeredPane, int battlefieldWidth);
 }

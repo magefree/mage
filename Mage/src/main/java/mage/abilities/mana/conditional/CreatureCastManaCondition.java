@@ -33,7 +33,6 @@ import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
-import mage.constants.CardType;
 import mage.game.Game;
 
 /**
@@ -45,7 +44,7 @@ public class CreatureCastManaCondition extends ManaCondition implements Conditio
     public boolean apply(Game game, Ability source) {
         if (source instanceof SpellAbility) {
             MageObject object = game.getObject(source.getSourceId());
-            if (object != null && object.getCardType().contains(CardType.CREATURE)) {
+            if (object != null && object.isCreature()) {
                 return true;
             }
         }

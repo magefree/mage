@@ -31,9 +31,7 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
-import mage.cards.Cards;
 import mage.cards.CardsImpl;
-import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.ExileZone;
@@ -43,15 +41,14 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class CascadeAbility extends TriggeredAbilityImpl {
     //20091005 - 702.82
 
+    private final static String REMINDERTEXT = " <i>(When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less."
+            + " You may cast it without paying its mana cost. Put the exiled cards on the bottom in a random order.)</i>";
     private boolean withReminder;
-
-    private final static String reminderText = " <i>(When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom in a random order.)</i>";
 
     public CascadeAbility() {
         this(true);
@@ -82,7 +79,7 @@ public class CascadeAbility extends TriggeredAbilityImpl {
     public String getRule() {
         StringBuilder sb = new StringBuilder("Cascade");
         if (withReminder) {
-            sb.append(reminderText);
+            sb.append(REMINDERTEXT);
         }
         return sb.toString();
     }
@@ -107,39 +104,31 @@ class CascadeEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Card card;
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
             return false;
         }
-        ExileZone exile = game.getExile().createZone(source.getSourceId(), player.getName() + " Cascade");
-        int sourceCost = game.getCard(source.getSourceId()).getManaCost().convertedManaCost();
+        ExileZone exile = game.getExile().createZone(source.getSourceId(), controller.getName() + " Cascade");
+        int sourceCost = game.getCard(source.getSourceId()).getConvertedManaCost();
         do {
-            card = player.getLibrary().getFromTop(game);
+            card = controller.getLibrary().getFromTop(game);
             if (card == null) {
                 break;
             }
-            player.moveCardsToExile(card, source, game, true, exile.getId(), exile.getName());
-        } while (player.isInGame() && card.getCardType().contains(CardType.LAND) || card.getManaCost().convertedManaCost() >= sourceCost);
-        player.getLibrary().reset();
+            controller.moveCardsToExile(card, source, game, true, exile.getId(), exile.getName());
+        } while (controller.isInGame()
+                && (card.isLand()
+                || !cardThatCostsLess(sourceCost, card, game)));
+
+        controller.getLibrary().reset(); // set back empty draw state if that caused an empty draw
 
         if (card != null) {
-            if (player.chooseUse(outcome, "Use cascade effect on " + card.getLogName() + "?", source, game)) {
-                if (player.cast(card.getSpellAbility(), game, true)) {
-                    exile.remove(card.getId());
-                }
+            if (controller.chooseUse(outcome, "Use cascade effect on " + card.getLogName() + '?', source, game)) {
+                controller.cast(card.getSpellAbility(), game, true);
             }
         }
         // Move the remaining cards to the buttom of the library in a random order
-        Cards cardsFromExile = new CardsImpl();
-        Cards cardsToLibrary = new CardsImpl();
-        cardsFromExile.addAll(exile);
-        while (cardsFromExile.size() > 0) {
-            card = cardsFromExile.getRandom(game);
-            cardsFromExile.remove(card.getId());
-            cardsToLibrary.add(card);
-        }
-        player.putCardsOnBottomOfLibrary(cardsToLibrary, game, source, false);
-        return true;
+        return controller.putCardsOnBottomOfLibrary(new CardsImpl(exile), game, source, false);
     }
 
     @Override
@@ -147,4 +136,9 @@ class CascadeEffect extends OneShotEffect {
         return new CascadeEffect(this);
     }
 
+    private boolean cardThatCostsLess(int value, Card card, Game game) {
+
+        return card.getConvertedManaCost() < value;
+
+    }
 }

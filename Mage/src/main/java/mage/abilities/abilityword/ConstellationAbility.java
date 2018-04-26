@@ -30,7 +30,6 @@ package mage.abilities.abilityword;
 
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
-import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -71,7 +70,7 @@ public class ConstellationAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getPlayerId().equals(this.getControllerId())) {
             Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && permanent.getCardType().contains(CardType.ENCHANTMENT)) {
+            if (permanent != null && permanent.isEnchantment()) {
                 return true;
             }
         }

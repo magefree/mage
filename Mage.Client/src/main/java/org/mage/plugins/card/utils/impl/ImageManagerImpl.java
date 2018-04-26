@@ -11,31 +11,27 @@ import java.awt.image.FilteredImageSource;
 import java.awt.image.WritableRaster;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import javax.imageio.ImageIO;
 import mage.client.util.gui.BufferedImageBuilder;
 import org.mage.plugins.card.utils.ImageManager;
 import org.mage.plugins.card.utils.Transparency;
 
-public class ImageManagerImpl implements ImageManager {
+public enum ImageManagerImpl implements ImageManager {
+    instance;
 
-    private static final ImageManagerImpl fInstance = new ImageManagerImpl();
-
-    public static ImageManagerImpl getInstance() {
-        return fInstance;
-    }
-    
-    public ImageManagerImpl() {
+    ImageManagerImpl() {
         init();
     }
 
     public void init() {
         String[] phases = {"Untap", "Upkeep", "Draw", "Main1",
-                "Combat_Start", "Combat_Attack", "Combat_Block", "Combat_Damage", "Combat_End",
-                "Main2", "Cleanup", "Next_Turn"};
+            "Combat_Start", "Combat_Attack", "Combat_Block", "Combat_Damage", "Combat_End",
+            "Main2", "Cleanup", "Next_Turn"};
         phasesImages = new HashMap<>();
         for (String name : phases) {
-            Image image = getImageFromResource("/phases/phase_" + name.toLowerCase() + ".png", new Rectangle(36, 36));
+            Image image = getImageFromResource("/phases/phase_" + name.toLowerCase(Locale.ENGLISH) + ".png", new Rectangle(36, 36));
             phasesImages.put(name, image);
         }
     }
@@ -329,11 +325,27 @@ public class ImageManagerImpl implements ImageManager {
     }
 
     @Override
+    public Image getSkipEndStepBeforeYourTurnButtonImage() {
+        if (imageSkipUntilEndStepBeforeYourTurnButton == null) {
+            imageSkipUntilEndStepBeforeYourTurnButton = getBufferedImageFromResource("/buttons/skip_to_previous_end.png");
+        }
+        return imageSkipUntilEndStepBeforeYourTurnButton;
+    }
+
+    @Override
     public Image getSkipYourNextTurnButtonImage() {
         if (imageSkipYourNextTurnButton == null) {
             imageSkipYourNextTurnButton = getBufferedImageFromResource("/buttons/skip_all.png");
         }
         return imageSkipYourNextTurnButton;
+    }
+
+    @Override
+    public Image getToggleRecordMacroButtonImage() {
+        if (imageToggleRecordMacroButton == null) {
+            imageToggleRecordMacroButton = getBufferedImageFromResource("/buttons/toggle_macro.png");
+        }
+        return imageToggleRecordMacroButton;
     }
 
     protected static Image getImageFromResourceTransparent(String path, Color mask, Rectangle rec) {
@@ -402,7 +414,7 @@ public class ImageManagerImpl implements ImageManager {
     private static BufferedImage triggeredAbilityIcon;
     private static BufferedImage activatedAbilityIcon;
     private static BufferedImage lookedAtIcon;
-    private static BufferedImage revealedIcon;    
+    private static BufferedImage revealedIcon;
     private static BufferedImage exileIcon;
     private static BufferedImage imageCopyIcon;
     private static BufferedImage imageCounterGreen;
@@ -427,7 +439,9 @@ public class ImageManagerImpl implements ImageManager {
     private static BufferedImage imageSkipToEndTurnButton;
     private static BufferedImage imageSkipToMainButton;
     private static BufferedImage imageSkipStackButton;
+    private static BufferedImage imageSkipUntilEndStepBeforeYourTurnButton;
     private static BufferedImage imageSkipYourNextTurnButton;
+    private static BufferedImage imageToggleRecordMacroButton;
 
     private static Map<String, Image> phasesImages;
 }

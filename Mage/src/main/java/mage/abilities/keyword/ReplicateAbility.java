@@ -143,7 +143,7 @@ public class ReplicateAbility extends StaticAbility implements OptionalAdditiona
         StringBuilder sb = new StringBuilder();
         if (additionalCost != null) {
             sb.append(additionalCost.getText(false));
-            sb.append(" ").append(additionalCost.getReminderText());
+            sb.append(' ').append(additionalCost.getReminderText());
         }
         return sb.toString();
     }
@@ -247,11 +247,9 @@ class ReplicateCopyEffect extends OneShotEffect {
                 }
                 // create the copies
                 for (int i = 0; i < replicateCount; i++) {
-                    Spell copy = spell.copySpell(source.getControllerId());
-                    game.getStack().push(copy);
-                    copy.chooseNewTargets(game, source.getControllerId());
-                    if (!game.isSimulation()) {
-                        game.informPlayers(controller.getLogName() + copy.getActivatedMessage(game));
+                    StackObject newStackObject = spell.createCopyOnStack(game, source, source.getControllerId(), true);
+                    if (newStackObject != null && newStackObject instanceof Spell && !game.isSimulation()) {
+                        game.informPlayers(controller.getLogName() + ((Spell) newStackObject).getActivatedMessage(game));
                     }
                 }
                 return true;

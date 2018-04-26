@@ -19,8 +19,8 @@ public enum MatchTimeLimit {
     MIN__90(5400, "90 Minutes"),
     MIN_120(7200, "120 Minutes");
 
-    private int matchSeconds;
-    private String name;
+    private final int matchSeconds;
+    private final String name;
 
     MatchTimeLimit(int matchSeconds, String name) {
         this.matchSeconds = matchSeconds;

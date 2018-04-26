@@ -82,11 +82,11 @@ public class VariableManaCost extends ManaCostImpl implements VariableCost {
     @Override
     public String getText() {
         if (multiplier > 1) {
-            String symbol = "";
+            StringBuilder symbol = new StringBuilder(multiplier);
             for (int i = 0; i < multiplier; i++) {
-                symbol += "{X}";
+                symbol.append("{X}");
             }
-            return symbol;
+            return symbol.toString();
         } else {
             return "{X}";
         }

@@ -70,7 +70,7 @@ public class PlayTargetWithoutPayingManaEffect extends OneShotEffect {
     @Override
     public String getText(Mode mode) {
         StringBuilder sb = new StringBuilder();
-        if (mode.getTargets().size() > 0) {
+        if (!mode.getTargets().isEmpty()) {
             Target target = mode.getTargets().get(0);
             if (mode.getTargets().get(0).getZone() == Zone.HAND) {
                 sb.append("you may put ").append(target.getTargetName()).append(" from your hand onto the battlefield");

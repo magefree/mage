@@ -36,19 +36,9 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class RenownedTargetCondition implements Condition {
+public enum RenownedTargetCondition implements Condition {
 
-    private static RenownedTargetCondition fInstance = null;
-
-    private RenownedTargetCondition() {
-    }
-
-    public static RenownedTargetCondition getInstance() {
-        if (fInstance == null) {
-            fInstance = new RenownedTargetCondition();
-        }
-        return fInstance;
-    }
+   instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

@@ -34,6 +34,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.stack.Spell;
+import mage.game.stack.StackObject;
 import mage.players.Player;
 
 /**
@@ -42,31 +43,44 @@ import mage.players.Player;
  */
 public class CopyTargetSpellEffect extends OneShotEffect {
 
+    private boolean useLKI = false;
+
     public CopyTargetSpellEffect() {
         super(Outcome.Copy);
     }
 
+    public CopyTargetSpellEffect(boolean useLKI) {
+        super(Outcome.Copy);
+        this.useLKI = useLKI;
+    }
+
     public CopyTargetSpellEffect(final CopyTargetSpellEffect effect) {
         super(effect);
+        this.useLKI = effect.useLKI;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
+        Spell spell;
+        if (useLKI) {
+            spell = game.getSpellOrLKIStack(targetPointer.getFirst(game, source));
+        } else {
+            spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
+        }
         if (spell == null) {
             spell = (Spell) game.getLastKnownInformation(targetPointer.getFirst(game, source), Zone.STACK);
         }
         if (spell != null) {
-            Spell copy = spell.copySpell(source.getControllerId());;
-            game.getStack().push(copy);
-            copy.chooseNewTargets(game, source.getControllerId());
+            StackObject newStackObject = spell.createCopyOnStack(game, source, source.getControllerId(), true);
             Player player = game.getPlayer(source.getControllerId());
-            String activateMessage = copy.getActivatedMessage(game);
-            if (activateMessage.startsWith(" casts ")) {
-                activateMessage = activateMessage.substring(6);
-            }
-            if (!game.isSimulation()) {
-                game.informPlayers(player.getLogName() + activateMessage);
+            if (player != null && newStackObject != null && newStackObject instanceof Spell) {
+                String activateMessage = ((Spell) newStackObject).getActivatedMessage(game);
+                if (activateMessage.startsWith(" casts ")) {
+                    activateMessage = activateMessage.substring(6);
+                }
+                if (!game.isSimulation()) {
+                    game.informPlayers(player.getLogName() + activateMessage);
+                }
             }
             return true;
         }

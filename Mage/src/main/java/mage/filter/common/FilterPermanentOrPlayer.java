@@ -42,17 +42,21 @@ import mage.players.Player;
  */
 public class FilterPermanentOrPlayer extends FilterImpl<MageItem> implements FilterInPlay<MageItem> {
 
-    protected FilterPermanent permanentFilter;
-    protected FilterPlayer playerFilter;
+    protected final FilterPermanent permanentFilter;
+    protected final FilterPlayer playerFilter;
 
     public FilterPermanentOrPlayer() {
         this("player or permanent");
     }
 
     public FilterPermanentOrPlayer(String name) {
+        this(name, new FilterPermanent(), new FilterPlayer());
+    }
+
+    public FilterPermanentOrPlayer(String name, FilterPermanent permanentFilter, FilterPlayer playerFilter) {
         super(name);
-        permanentFilter = new FilterPermanent();
-        playerFilter = new FilterPlayer();
+        this.permanentFilter = permanentFilter;
+        this.playerFilter = playerFilter;
     }
 
     public FilterPermanentOrPlayer(final FilterPermanentOrPlayer filter) {

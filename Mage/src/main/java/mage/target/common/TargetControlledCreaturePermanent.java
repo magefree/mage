@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.target.common;
 
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -44,13 +43,16 @@ public class TargetControlledCreaturePermanent extends TargetControlledPermanent
         this(numTargets, numTargets, new FilterControlledCreaturePermanent(), false);
     }
 
+    public TargetControlledCreaturePermanent(int minNumTargets, int maxNumTargets) {
+        this(minNumTargets, maxNumTargets, new FilterControlledCreaturePermanent(), false);
+    }
+
     public TargetControlledCreaturePermanent(FilterControlledCreaturePermanent filter) {
         super(1, 1, filter, false);
     }
 
     public TargetControlledCreaturePermanent(int minNumTargets, int maxNumTargets, FilterControlledCreaturePermanent filter, boolean notTarget) {
         super(minNumTargets, maxNumTargets, filter, notTarget);
-        this.targetName = filter.getMessage();
     }
 
     public TargetControlledCreaturePermanent(final TargetControlledCreaturePermanent target) {

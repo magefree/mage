@@ -28,10 +28,7 @@
 
 package mage.abilities.effects.common.continuous;
 
-import java.util.HashSet;
 import java.util.Iterator;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -112,7 +109,7 @@ public class SwitchPowerToughnessAllEffect extends ContinuousEffectImpl {
         StringBuilder sb = new StringBuilder();
         sb.append("Switch each creature's power and toughness");
         if (!duration.toString().isEmpty()) {
-            sb.append(" ");
+            sb.append(' ');
             sb.append(duration.toString());
         }
         return sb.toString();

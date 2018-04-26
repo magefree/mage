@@ -28,19 +28,13 @@
 package mage.game.stack;
 
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.ObjectColor;
-import mage.abilities.Abilities;
-import mage.abilities.AbilitiesImpl;
-import mage.abilities.Ability;
-import mage.abilities.MageSingleton;
-import mage.abilities.Mode;
-import mage.abilities.Modes;
-import mage.abilities.StateTriggeredAbility;
-import mage.abilities.costs.AlternativeCost;
+import mage.abilities.*;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
 import mage.abilities.costs.CostsImpl;
@@ -49,21 +43,19 @@ import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
+import mage.abilities.text.TextPart;
 import mage.cards.Card;
-import mage.choices.Choice;
-import mage.choices.Choices;
-import mage.constants.AbilityType;
-import mage.constants.AbilityWord;
-import mage.constants.CardType;
-import mage.constants.EffectType;
-import mage.constants.Zone;
-import mage.constants.ZoneDetail;
+import mage.cards.FrameStyle;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.ZoneChangeEvent;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.Targets;
 import mage.util.GameLog;
+import mage.util.SubTypeList;
 import mage.watchers.Watcher;
 
 /**
@@ -72,7 +64,7 @@ import mage.watchers.Watcher;
  */
 public class StackAbility extends StackObjImpl implements Ability {
 
-    private static List<CardType> emptyCardType = new ArrayList<>();
+    private static EnumSet<CardType> emptyCardType = EnumSet.noneOf(CardType.class);
     private static List<String> emptyString = new ArrayList<>();
     private static ObjectColor emptyColor = new ObjectColor();
     private static ManaCosts<ManaCost> emptyCost = new ManaCostsImpl<>();
@@ -83,11 +75,12 @@ public class StackAbility extends StackObjImpl implements Ability {
     private UUID controllerId;
     private String name;
     private String expansionSetCode;
+    private TargetAdjustment targetAdjustment = TargetAdjustment.NONE;
 
     public StackAbility(Ability ability, UUID controllerId) {
         this.ability = ability;
         this.controllerId = controllerId;
-        this.name = "stack ability (" + ability.getRule() + ")";
+        this.name = "stack ability (" + ability.getRule() + ')';
     }
 
     public StackAbility(final StackAbility stackAbility) {
@@ -95,6 +88,7 @@ public class StackAbility extends StackObjImpl implements Ability {
         this.controllerId = stackAbility.controllerId;
         this.name = stackAbility.name;
         this.expansionSetCode = stackAbility.expansionSetCode;
+        this.targetAdjustment = stackAbility.targetAdjustment;
     }
 
     @Override
@@ -142,7 +136,7 @@ public class StackAbility extends StackObjImpl implements Ability {
 
     @Override
     public String getIdName() {
-        return getName() + " [" + getId().toString().substring(0, 3) + "]";
+        return getName() + " [" + getId().toString().substring(0, 3) + ']';
     }
 
     @Override
@@ -160,28 +154,30 @@ public class StackAbility extends StackObjImpl implements Ability {
     }
 
     @Override
-    public List<CardType> getCardType() {
+    public EnumSet<CardType> getCardType() {
         return emptyCardType;
     }
 
     @Override
-    public List<String> getSubtype() {
-        return emptyString;
+    public SubTypeList getSubtype(Game game) {
+        return new SubTypeList();
     }
 
     @Override
-    public boolean hasSubtype(String subtype) {
+    public boolean hasSubtype(SubType subtype, Game game) {
         return false;
     }
 
     @Override
-    public List<String> getSupertype() {
-        return emptyString;
+    public EnumSet<SuperType> getSuperType() {
+        return EnumSet.noneOf(SuperType.class);
     }
 
     @Override
     public Abilities<Ability> getAbilities() {
-        return emptyAbilites;
+        Abilities<Ability> abilities = new AbilitiesImpl<>();
+        abilities.add(ability);
+        return abilities;
     }
 
     @Override
@@ -192,6 +188,17 @@ public class StackAbility extends StackObjImpl implements Ability {
     @Override
     public ObjectColor getColor(Game game) {
         return emptyColor;
+    }
+
+    @Override
+    public ObjectColor getFrameColor(Game game) {
+        return ability.getSourceObject(game).getFrameColor(game);
+    }
+
+    @Override
+    public FrameStyle getFrameStyle() {
+        // Abilities all use the same frame
+        return FrameStyle.M15_NORMAL;
     }
 
     @Override
@@ -207,6 +214,11 @@ public class StackAbility extends StackObjImpl implements Ability {
     @Override
     public MageInt getToughness() {
         return MageInt.EmptyMageInt;
+    }
+
+    @Override
+    public int getStartingLoyalty() {
+        return 0;
     }
 
     @Override
@@ -309,24 +321,6 @@ public class StackAbility extends StackObjImpl implements Ability {
     }
 
     @Override
-    public Choices getChoices() {
-        return ability.getChoices();
-    }
-
-    @Override
-    public void addChoice(Choice choice) {
-    }
-
-    @Override
-    public List<AlternativeCost> getAlternativeCosts() {
-        return ability.getAlternativeCosts();
-    }
-
-    @Override
-    public void addAlternativeCost(AlternativeCost cost) {
-    }
-
-    @Override
     public ManaCosts<ManaCost> getManaCosts() {
         return ability.getManaCosts();
     }
@@ -362,14 +356,6 @@ public class StackAbility extends StackObjImpl implements Ability {
 
     public void setExpansionSetCode(String expansionSetCode) {
         this.expansionSetCode = expansionSetCode;
-    }
-
-    @Override
-    public void adjustChoices(Ability ability, Game game) {
-        Card card = game.getCard(ability.getSourceId());
-        if (card != null) {
-            card.adjustChoices(ability, game);
-        }
     }
 
     @Override
@@ -462,8 +448,9 @@ public class StackAbility extends StackObjImpl implements Ability {
     }
 
     @Override
-    public void setRuleAtTheTop(boolean ruleAtTheTop) {
+    public Ability setRuleAtTheTop(boolean ruleAtTheTop) {
         this.ability.setRuleAtTheTop(ruleAtTheTop);
+        return this;
     }
 
     @Override
@@ -543,17 +530,22 @@ public class StackAbility extends StackObjImpl implements Ability {
 
     @Override
     public MageObject getSourceObject(Game game) {
-        return game.getBaseObject(getSourceId());
+        return this.ability.getSourceObject(game);
     }
 
     @Override
     public MageObject getSourceObjectIfItStillExists(Game game) {
-        throw new UnsupportedOperationException("Not supported.");
+        return this.ability.getSourceObjectIfItStillExists(game);
+    }
+
+    @Override
+    public Permanent getSourcePermanentIfItStillExists(Game game) {
+        return this.ability.getSourcePermanentIfItStillExists(game);
     }
 
     @Override
     public int getSourceObjectZoneChangeCounter() {
-        throw new UnsupportedOperationException("Not supported.");
+        return ability.getSourceObjectZoneChangeCounter();
     }
 
     @Override
@@ -567,7 +559,7 @@ public class StackAbility extends StackObjImpl implements Ability {
     }
 
     @Override
-    public void updateZoneChangeCounter(Game game) {
+    public void updateZoneChangeCounter(Game game, ZoneChangeEvent event) {
         throw new UnsupportedOperationException("Not supported.");
     }
 
@@ -589,5 +581,52 @@ public class StackAbility extends StackObjImpl implements Ability {
     @Override
     public void setCanFizzle(boolean canFizzle) {
         throw new UnsupportedOperationException("Not supported.");
+    }
+
+    @Override
+    public StackObject createCopyOnStack(Game game, Ability source, UUID newControllerId, boolean chooseNewTargets) {
+        Ability newAbility = this.copy();
+        newAbility.newId();
+        StackAbility newStackAbility = new StackAbility(newAbility, newControllerId);
+        game.getStack().push(newStackAbility);
+        if (chooseNewTargets && !newAbility.getTargets().isEmpty()) {
+            Player controller = game.getPlayer(newControllerId);
+            Outcome outcome = newAbility.getEffects().isEmpty() ? Outcome.Detriment : newAbility.getEffects().get(0).getOutcome();
+            if (controller.chooseUse(outcome, "Choose new targets?", source, game)) {
+                newAbility.getTargets().clearChosen();
+                newAbility.getTargets().chooseTargets(outcome, newControllerId, newAbility, false, game);
+            }
+        }
+        game.fireEvent(new GameEvent(GameEvent.EventType.COPIED_STACKOBJECT, newStackAbility.getId(), this.getId(), newControllerId));
+        return newStackAbility;
+    }
+
+    @Override
+    public boolean isAllCreatureTypes() {
+        return false;
+    }
+
+    @Override
+    public void setIsAllCreatureTypes(boolean value) {
+    }
+
+    @Override
+    public List<TextPart> getTextParts() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public TextPart addTextPart(TextPart textPart) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void setTargetAdjustment(TargetAdjustment targetAdjustment) {
+        this.targetAdjustment = targetAdjustment;
+    }
+
+    @Override
+    public TargetAdjustment getTargetAdjustment() {
+        return targetAdjustment;
     }
 }

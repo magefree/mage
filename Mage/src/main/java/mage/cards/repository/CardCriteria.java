@@ -44,6 +44,7 @@ import mage.constants.Rarity;
 public class CardCriteria {
 
     private String name;
+    private String nameExact;
     private String rules;
     private final List<String> setCodes;
     private final List<CardType> types;
@@ -126,6 +127,11 @@ public class CardCriteria {
         return this;
     }
 
+    public CardCriteria nameExact(String nameExact) {
+        this.nameExact = nameExact;
+        return this;
+    }
+
     public CardCriteria rules(String rules) {
         this.rules = rules;
         return this;
@@ -205,6 +211,10 @@ public class CardCriteria {
             where.like("name", new SelectArg('%' + name + '%'));
             clausesCount++;
         }
+        if (nameExact != null) {
+            where.like("name", new SelectArg(nameExact));
+            clausesCount++;
+        }
         if (rules != null) {
             where.like("rules", new SelectArg('%' + rules + '%'));
             clausesCount++;
@@ -230,7 +240,6 @@ public class CardCriteria {
             where.or(setCodes.size());
             clausesCount++;
         }
-
 
         if (types.size() != 7) { //if all types selected - no selection needed (Tribal and Conspiracy not selectable yet)
             for (CardType type : types) {
@@ -315,15 +324,13 @@ public class CardCriteria {
             where.eq("cardNumber", new SelectArg(0));
         }
 
-
-
         if (start != null) {
             qb.offset(start);
         }
         if (count != null) {
             qb.limit(count);
         }
-        
+
         if (sortBy != null) {
             qb.orderBy(sortBy, true);
         }

@@ -15,7 +15,7 @@ public class HallOfTheBanditLordTest extends CardTestPlayerBase {
      * Hall of the Bandit Lord
      * Legendary Land
      * Hall of the Bandit Lord enters the battlefield tapped.
-     * {T}, Pay 3 life: Add {C} to your mana pool. If that mana is spent on a
+     * {T}, Pay 3 life: Add {C}. If that mana is spent on a
      * creature spell, it gains haste.
      *
      */
@@ -33,7 +33,6 @@ public class HallOfTheBanditLordTest extends CardTestPlayerBase {
         execute();
 
         this.assertAbility(playerA, "Goblin Roughrider", HasteAbility.getInstance(), true);
-
     }
 
     // test that a creature cast not using Hall of the Bandit Lord mana does not gain haste
@@ -49,7 +48,5 @@ public class HallOfTheBanditLordTest extends CardTestPlayerBase {
         execute();
 
         this.assertAbility(playerA, "Ember Hauler", HasteAbility.getInstance(), false);
-
     }
-
 }

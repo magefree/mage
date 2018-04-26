@@ -27,11 +27,7 @@
  */
 package mage.cards.decks;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
 import mage.cards.Card;
 import mage.cards.repository.CardInfo;
@@ -47,6 +43,10 @@ public class Constructed extends DeckValidator {
 
     private static final Logger logger = Logger.getLogger(DeckValidator.class);
 
+    protected static List<String> anyNumberCardsAllowed = new ArrayList<>(Arrays.asList("Relentless Rats", "Shadowborn Apostle", "Rat Colony"));
+    protected static List<String> basicLandNames = new ArrayList<>(
+            Arrays.asList("Forest", "Island", "Mountain", "Swamp", "Plains", "Wastes", "Snow-Covered Forest",
+                    "Snow-Covered Island", "Snow-Covered Mountain", "Snow-Covered Swamp", "Snow-Covered Plains"));
     protected List<String> banned = new ArrayList<>();
     protected List<String> restricted = new ArrayList<>();
     protected List<String> setCodes = new ArrayList<>();
@@ -60,9 +60,12 @@ public class Constructed extends DeckValidator {
         super(name);
     }
 
+    public List<String> getSetCodes() {
+        return setCodes;
+    }
+
     @Override
     public boolean validate(Deck deck) {
-        logger.debug("DECK validate start: " + name + " deckname: " + deck.getName());
         boolean valid = true;
         //20091005 - 100.2a
         if (deck.getCards().size() < 60) {
@@ -75,14 +78,12 @@ public class Constructed extends DeckValidator {
             valid = false;
         }
 
-        List<String> basicLandNames = new ArrayList<>(Arrays.asList("Forest", "Island", "Mountain", "Swamp", "Plains", "Wastes",
-                "Snow-Covered Forest", "Snow-Covered Island", "Snow-Covered Mountain", "Snow-Covered Swamp", "Snow-Covered Plains"));
         Map<String, Integer> counts = new HashMap<>();
         countCards(counts, deck.getCards());
         countCards(counts, deck.getSideboard());
         for (Entry<String, Integer> entry : counts.entrySet()) {
             if (entry.getValue() > 4) {
-                if (!basicLandNames.contains(entry.getKey()) && !entry.getKey().equals("Relentless Rats") && !entry.getKey().equals("Shadowborn Apostle")) {
+                if (!basicLandNames.contains(entry.getKey()) && !anyNumberCardsAllowed.contains(entry.getKey())) {
                     invalid.put(entry.getKey(), "Too many: " + entry.getValue());
                     valid = false;
                 }
@@ -108,46 +109,44 @@ public class Constructed extends DeckValidator {
         if (!rarities.isEmpty()) {
             for (Card card : deck.getCards()) {
                 if (!rarities.contains(card.getRarity())) {
-                    if( !legalRarity(card) ){
+                    if (!legalRarity(card)) {
                         valid = false;
                     }
                 }
             }
             for (Card card : deck.getSideboard()) {
                 if (!rarities.contains(card.getRarity())) {
-                    if( !legalRarity(card) ){
+                    if (!legalRarity(card)) {
                         valid = false;
                     }
                 }
             }
         }
 
-        if (!setCodes.isEmpty()) {
-            for (Card card : deck.getCards()) {
-                if (!setCodes.contains(card.getExpansionSetCode())) {
-                    if( !legalSets(card) ){
-                        valid = false;
-                    }
-                }
-            }
-            for (Card card : deck.getSideboard()) {
-                if (!setCodes.contains(card.getExpansionSetCode())) {
-                    if( !legalSets(card) ){
-                        valid = false;
-                    }
+        for (Card card : deck.getCards()) {
+            if (!isSetAllowed(card.getExpansionSetCode())) {
+                if (!legalSets(card)) {
+                    valid = false;
                 }
             }
         }
-        logger.debug("DECK validate end: " + name + " deckname: " + deck.getName() + " invalids:" + invalid.size());
+        for (Card card : deck.getSideboard()) {
+            if (!isSetAllowed(card.getExpansionSetCode())) {
+                if (!legalSets(card)) {
+                    valid = false;
+                }
+            }
+        }
         return valid;
     }
-    
+
     /**
      * Checks if the given card is legal in any of the given rarities
+     *
      * @param card - the card to check
      * @return Whether the card was printed at any of the given rarities.
      */
-    protected boolean legalRarity(Card card){
+    protected boolean legalRarity(Card card) {
         // check if card is legal if taken from other set
         boolean legal = false;
         List<CardInfo> cardInfos = CardRepository.instance.findCards(card.getName());
@@ -164,7 +163,18 @@ public class Constructed extends DeckValidator {
     }
 
     /**
+     * Checks if a given set is legal in this format.
+     *
+     * @param code - the set code to check
+     * @return Whether the set is legal in this format.
+     */
+    protected boolean isSetAllowed(String code) {
+        return setCodes.isEmpty() || setCodes.contains(code);
+    }
+
+    /**
      * Checks if the given card is legal in any of the given sets
+     *
      * @param card - the card to check
      * @return Whether the card was printed in any of this format's sets.
      */
@@ -173,7 +183,7 @@ public class Constructed extends DeckValidator {
         boolean legal = false;
         List<CardInfo> cardInfos = CardRepository.instance.findCards(card.getName());
         for (CardInfo cardInfo : cardInfos) {
-            if (setCodes.contains(cardInfo.getSetCode())) {
+            if (isSetAllowed(cardInfo.getSetCode())) {
                 legal = true;
                 break;
             }

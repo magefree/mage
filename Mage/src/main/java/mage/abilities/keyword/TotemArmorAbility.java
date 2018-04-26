@@ -65,7 +65,7 @@ public class TotemArmorAbility extends SimpleStaticAbility {
 
     @Override
     public String getRule() {
-        return "Totem Armor <i>(If enchanted creature would be destroyed, instead remove all damage from it and destroy this Aura.)</i>";
+        return "Totem armor <i>(If enchanted creature would be destroyed, instead remove all damage from it and destroy this Aura.)</i>";
     }
 }
 
@@ -99,10 +99,7 @@ class TotemArmorEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        if (sourcePermanent != null && event.getTargetId().equals(sourcePermanent.getAttachedTo())) {
-            return true;
-        }
-        return false;
+        return sourcePermanent != null && event.getTargetId().equals(sourcePermanent.getAttachedTo());
     }
 
     @Override

@@ -75,7 +75,7 @@ public class KaradorGhostChieftainTest extends CardTestCommanderDuelBase {
         addCard(Zone.GRAVEYARD, playerA, "Silvercoat Lion", 2);
 
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 4);
-        // Lightning Blast deals 4 damage to target creature or player.
+        // Lightning Blast deals 4 damage to any target.
         addCard(Zone.HAND, playerB, "Lightning Blast", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Karador, Ghost Chieftain");
@@ -100,7 +100,7 @@ public class KaradorGhostChieftainTest extends CardTestCommanderDuelBase {
         addCard(Zone.GRAVEYARD, playerA, "Silvercoat Lion", 2);
 
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 4);
-        // Lightning Blast deals 4 damage to target creature or player.
+        // Lightning Blast deals 4 damage to any target.
         addCard(Zone.HAND, playerB, "Lightning Blast", 3);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Karador, Ghost Chieftain");
@@ -131,7 +131,7 @@ public class KaradorGhostChieftainTest extends CardTestCommanderDuelBase {
         addCard(Zone.GRAVEYARD, playerA, "Silvercoat Lion", 15);
 
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 4);
-        // Lightning Blast deals 4 damage to target creature or player.
+        // Lightning Blast deals 4 damage to any target.
         addCard(Zone.HAND, playerB, "Lightning Blast", 3);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Karador, Ghost Chieftain");

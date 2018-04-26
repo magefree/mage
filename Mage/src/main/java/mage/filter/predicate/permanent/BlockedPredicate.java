@@ -29,7 +29,6 @@ package mage.filter.predicate.permanent;
 
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
-import mage.game.combat.CombatGroup;
 import mage.game.permanent.Permanent;
 
 /**
@@ -40,12 +39,7 @@ public class BlockedPredicate implements Predicate<Permanent> {
 
     @Override
     public boolean apply(Permanent input, Game game) {
-        for (CombatGroup combatGroup : game.getCombat().getGroups()) {
-            if (!combatGroup.getBlockers().isEmpty() && combatGroup.getAttackers().contains(input.getId())) {
-                return true;
-            }
-        }
-        return false;
+        return input.isBlocked(game);
     }
 
     @Override

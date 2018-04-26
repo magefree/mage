@@ -28,9 +28,12 @@
 package org.mage.test.cards.abilities.keywords;
 
 import mage.cards.Card;
+import mage.constants.CardType;
 import mage.constants.PhaseStep;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.Filter;
+import mage.game.permanent.Permanent;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
@@ -225,6 +228,8 @@ public class MorphTest extends CardTestPlayerBase {
      */
     @Test
     public void testPineWalkerWithUnboostEffect() {
+        // Morph {4}{G}
+        // Whenever Pine Walker or another creature you control is turned face up, untap that creature.
         addCard(Zone.HAND, playerA, "Pine Walker");
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 8);
 
@@ -598,7 +603,7 @@ public class MorphTest extends CardTestPlayerBase {
 
         // Flying, haste
         // Other creatures you control have haste.
-        // Whenever an opponent casts a creature or planeswalker spell with the same name as a card in his or her graveyard, that player loses 10 life.
+        // Whenever an opponent casts a creature or planeswalker spell with the same name as a card in their graveyard, that player loses 10 life.
         addCard(Zone.BATTLEFIELD, playerB, "Dragonlord Kolaghan", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akroma, Angel of Fury");
@@ -615,7 +620,7 @@ public class MorphTest extends CardTestPlayerBase {
 
     /**
      * Linvala, Keep of Silence is preventing morph creatures from turning face
-     * up Turning face up is a special ability not an active ability. This
+     * up. Turning face up is a special ability not an active ability. This
      * should not be prevented by the loss of active abilities.
      */
     @Test
@@ -623,6 +628,12 @@ public class MorphTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Pine Walker");
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 5);
 
+        /*
+            Linvala, Keeper of Silence {2}{W}{W}
+            Legendary Creature - Angel 3/4
+            Flying
+            Activated abilities of creatures your opponents control can't be activated.
+         */
         addCard(Zone.BATTLEFIELD, playerB, "Linvala, Keeper of Silence", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pine Walker");
@@ -641,90 +652,288 @@ public class MorphTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Pine Walker", 5, 5);
         assertTapped("Pine Walker", false);
     }
-    
+
     /**
-     * Reflector Mage bouncing a creature that can be played as a morph should not prevent the card
-     * from being replayed as a morph. Morph creatures are nameless.
-     * 
-     * Reported bug: 
-     * Face-up morph creatures that are bounced by Reflector Mage should be able to be replayed as morphs 
-     * without the "until the next turn" restriction."
+     * Reflector Mage bouncing a creature that can be played as a morph should
+     * not prevent the card from being replayed as a morph. Morph creatures are
+     * nameless.
+     *
+     * Reported bug: Face-up morph creatures that are bounced by Reflector Mage
+     * should be able to be replayed as morphs without the "until the next turn"
+     * restriction."
      */
     @Test
     public void testReflectorMageBouncesFaceupCreatureReplayAsMorph() {
-        
-        // {1}{W}{U} When Reflector Mage enters the battlefield, return target creature an opponent controls to its owner's hand. 
+
+        // {1}{W}{U} When Reflector Mage enters the battlefield, return target creature an opponent controls to its owner's hand.
         // That creature's owner can't cast spells with the same name as that creature until your next turn.
         addCard(Zone.HAND, playerA, "Reflector Mage"); // 2/3
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
-        
-        //Tap: Add {G}, {U}, or {R} to your mana pool.
+
+        //Tap: Add {G}, {U}, or {R}.
         // Morph 2 (You may cast this card face down as a 2/2 creature for 3. Turn it face up any time for its morph cost.)
-        // When Rattleclaw Mystic is turned face up, add {G}{U}{R} to your mana pool.
+        // When Rattleclaw Mystic is turned face up, add {G}{U}{R}.
         addCard(Zone.BATTLEFIELD, playerB, "Rattleclaw Mystic"); // 2/1
         addCard(Zone.BATTLEFIELD, playerB, "Forest");
         addCard(Zone.BATTLEFIELD, playerB, "Island");
         addCard(Zone.BATTLEFIELD, playerB, "Mountain");
-        
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Reflector Mage");
         addTarget(playerA, "Rattleclaw Mystic");
-        
+
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Rattleclaw Mystic");
         setChoice(playerB, "Yes"); // cast it face down as 2/2 creature
 
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
-        
+
         execute();
-        
-        assertPermanentCount(playerA, "Reflector Mage", 1);        
-        assertPermanentCount(playerB, "Rattleclaw Mystic", 0);  
+
+        assertPermanentCount(playerA, "Reflector Mage", 1);
+        assertPermanentCount(playerB, "Rattleclaw Mystic", 0);
         assertHandCount(playerB, "Rattleclaw Mystic", 0); // should have been replayed
         assertPermanentCount(playerB, "", 1); // Rattleclaw played as a morph
     }
-    
+
     /**
-     * Reflector Mage bouncing a creature that can be played as a morph should not prevent the card
-     * from being replayed as a morph. Morph creatures are nameless.
-     * 
-     * Reported bug: 
-     * Face-up morph creatures that are bounced by Reflector Mage should be able to be replayed as morphs 
-     * without the "until the next turn" restriction."
-     * 
+     * Reflector Mage bouncing a creature that can be played as a morph should
+     * not prevent the card from being replayed as a morph. Morph creatures are
+     * nameless.
+     *
+     * Reported bug: Face-up morph creatures that are bounced by Reflector Mage
+     * should be able to be replayed as morphs without the "until the next turn"
+     * restriction."
+     *
      * Testing bouncing a face-down creature played next turn face-up.
      */
     @Test
     public void testReflectorMageBouncesMorphCreatureReplayAsFaceup() {
-                
-        //Tap: Add {G}, {U}, or {R} to your mana pool.
+
+        //Tap: Add {G}, {U}, or {R}.
         // Morph 2 (You may cast this card face down as a 2/2 creature for 3. Turn it face up any time for its morph cost.)
-        // When Rattleclaw Mystic is turned face up, add {G}{U}{R} to your mana pool.
+        // When Rattleclaw Mystic is turned face up, add {G}{U}{R}.
         addCard(Zone.HAND, playerA, "Rattleclaw Mystic"); // 2/1
         addCard(Zone.BATTLEFIELD, playerA, "Forest");
         addCard(Zone.BATTLEFIELD, playerA, "Island");
         addCard(Zone.BATTLEFIELD, playerA, "Mountain");
-                
-        // {1}{W}{U} When Reflector Mage enters the battlefield, return target creature an opponent controls to its owner's hand. 
+
+        // {1}{W}{U} When Reflector Mage enters the battlefield, return target creature an opponent controls to its owner's hand.
         // That creature's owner can't cast spells with the same name as that creature until your next turn.
-        addCard(Zone.HAND, playerB, "Reflector Mage"); // 2/3   
-        addCard(Zone.BATTLEFIELD, playerB, "Plains", 2); 
-        addCard(Zone.BATTLEFIELD, playerB, "Island", 2);         
-        
+        addCard(Zone.HAND, playerB, "Reflector Mage"); // 2/3
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 2);
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Rattleclaw Mystic");
         setChoice(playerA, "Yes"); // cast it face down as 2/2 creature
-        
+
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Reflector Mage");
         addTarget(playerB, "");
-        
+
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Rattleclaw Mystic");
         setChoice(playerA, "No"); // cast it face down as 2/2 creature
 
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
-        
+
         execute();
-        
-        assertPermanentCount(playerB, "Reflector Mage", 1);      
-        assertPermanentCount(playerA, "Rattleclaw Mystic", 1);  
+
+        assertPermanentCount(playerB, "Reflector Mage", 1);
+        assertPermanentCount(playerA, "Rattleclaw Mystic", 1);
         assertHandCount(playerA, "Rattleclaw Mystic", 0); // should have been replayed faceup
+    }
+
+    /**
+     * The well-known combo with Vesuvan Shapeshifter and Brine Elemental does
+     * not work correctly. When Vesuvan Shapeshifter turns face up and becomes a
+     * copy of the targeted creature, it should still be in the state of
+     * "turning face up", thus triggering the ability of the Brine Elemental.
+     */
+    @Test
+    public void testVesuvanShapeshifter() {
+
+        // Morph {5}{U}{U}
+        // When Brine Elemental is turned face up, each opponent skips their next untap step.
+        addCard(Zone.HAND, playerA, "Brine Elemental"); // Creature {4}{U}{U} 5/4
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 6);
+
+        // As Vesuvan Shapeshifter enters the battlefield or is turned face up, you may choose another creature on the battlefield.
+        // If you do, until Vesuvan Shapeshifter is turned face down, it becomes a copy of that creature
+        // and gains "At the beginning of your upkeep, you may turn this creature face down."
+        // Morph {1}{U} (You may cast this card face down as a 2/2 creature for 3. Turn it face up any time for its morph cost.)
+        addCard(Zone.HAND, playerB, "Vesuvan Shapeshifter"); // Creature 0/0
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 5);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Brine Elemental");
+        setChoice(playerA, "No"); // cast it normally
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Vesuvan Shapeshifter");
+        setChoice(playerB, "Yes");
+
+        activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "{1}{U}: Turn this face-down permanent");
+        setChoice(playerB, "Brine Elemental");
+
+        setStopAt(2, PhaseStep.END_TURN);
+
+        execute();
+
+        assertPermanentCount(playerA, "Brine Elemental", 1);
+
+        assertPermanentCount(playerB, "Brine Elemental", 1);
+
+        Assert.assertTrue("Skip next turn has to be added to TurnMods", currentGame.getState().getTurnMods().size() == 1);
+    }
+
+    /**
+     * Permanents that have been morphed have wrongly the converted mana cost of
+     * their face up side, which makes cards such as Fatal Push of Smother
+     * unable to destroy them if their cmc is greater than the one specified on
+     * said cards. Face-down permanents should have a cmc of 0 as per rule
+     * 707.2.
+     */
+    @Test
+    public void testCMCofFaceDownCreature() {
+        /*
+         Pine Walker
+         Creature - Elemental
+         5/5
+         Morph {4}{G} (You may cast this card face down as a 2/2 creature for . Turn it face up any time for its morph cost.)
+         Whenever Pine Walker or another creature you control is turned face up, untap that creature.
+         */
+        addCard(Zone.HAND, playerA, "Pine Walker");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+
+        // Destroy target creature if it has converted mana cost 2 or less.
+        // Revolt - Destroy that creature if it has converted mana cost 4 or less instead if a permanent you controlled left the battlefield this turn.
+        addCard(Zone.HAND, playerB, "Fatal Push"); // Instant {B}
+        addCard(Zone.BATTLEFIELD, playerB, "Swamp", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pine Walker");
+        setChoice(playerA, "Yes"); // cast it face down as 2/2 creature
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Fatal Push");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertGraveyardCount(playerB, "Fatal Push", 1);
+        assertGraveyardCount(playerA, "Pine Walker", 1);
+        assertPermanentCount(playerA, "", 0);
+
+    }
+
+    /**
+     * The Ur-Dragon reduces cost of face down morph Dragons Simple to reproduce
+     * - Dragons with Morph/Megamorph such as Quicksilver Dragon cost {2} to
+     * play face-down instead of the normal {3}. Other non-Dragon morph costs
+     * are unchanged.
+     */
+    @Test
+    public void testNoCostReductionOfFaceDownCastCreature() {
+        /*
+         Quicksilver Dragon {4}{U}{U}
+         Creature - Dragon
+         5/5
+         Flying
+         {U}: If target spell has only one target and that target is Quicksilver Dragon, change that spell's target to another creature.
+         Morph {4}{U}
+         */
+        addCard(Zone.HAND, playerA, "Quicksilver Dragon");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
+
+        // Eminence - As long as The Ur-Dragon is in the command zone or on the battlefield, other Dragon spells you cast cost {1} less to cast.
+        // Flying
+        // Whenever one or more Dragons you control attack, draw that many cards, then you may put a permanent card from your hand onto the battlefield
+        addCard(Zone.BATTLEFIELD, playerA, "The Ur-Dragon", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Quicksilver Dragon");
+        setChoice(playerA, "Yes"); // cast it face down as 2/2 creature
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "", 1);
+        assertHandCount(playerA, 0);
+
+        assertTappedCount("Island", true, 3);
+
+    }
+
+    /**
+     * If you have Endless Whispers in play and a morph creature dies, it should
+     * be returned to play face up at end of turn under the control of an
+     * opponent.
+     */
+    @Test
+    public void testMorphEndlessWhispers() {
+        /*
+         Quicksilver Dragon {4}{U}{U}
+         Creature - Dragon
+         5/5
+         Flying
+         {U}: If target spell has only one target and that target is Quicksilver Dragon, change that spell's target to another creature.
+         Morph {4}{U}
+         */
+        addCard(Zone.HAND, playerA, "Quicksilver Dragon");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
+
+        // Each creature has "When this creature dies, choose target opponent. That player puts this card from its owner's graveyard
+        // onto the battlefield under their control at the beginning of the next end step."
+        addCard(Zone.BATTLEFIELD, playerA, "Endless Whispers", 1);
+
+        addCard(Zone.HAND, playerB, "Lightning Bolt");
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Quicksilver Dragon");
+        setChoice(playerA, "Yes"); // cast it face down as 2/2 creature
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", "");
+
+        setStopAt(2, PhaseStep.UPKEEP);
+        execute();
+
+        assertGraveyardCount(playerB, "Lightning Bolt", 1);
+        assertGraveyardCount(playerA, "Quicksilver Dragon", 0);
+
+        assertPermanentCount(playerA, "Quicksilver Dragon", 0);
+        assertPermanentCount(playerB, "Quicksilver Dragon", 1);
+
+    }
+
+    /**
+     * A creature with Morph/Megamorph cast normally will properly include its
+     * printed creature subtypes: for example Akroma, Angel of Fury is a
+     * Legendary Creature - Angel. However, if Akroma is cast face down and then
+     * turned face up via its morph ability, it has no subtypes: it's just a
+     * Legendary Creature and creature type-specific effects (Radiant Destiny,
+     * etc) don't apply to it. Haven't tested whether this also applies to
+     * external effects turning the creature face up, like Skirk Alarmist.
+     */
+    @Test
+    public void testSubTypesAfterTurningFaceUp() {
+        /*
+         Akroma, Angel of Fury {5}{R}{R}{R}
+         Creature - Legendary Angel
+         6/6
+        // Akroma, Angel of Fury can't be countered.
+        // Flying
+        // Trample
+        // protection from white and from blue
+        // {R}: Akroma, Angel of Fury gets +1/+0 until end of turn.
+        // Morph {3}{R}{R}{R}
+         */
+        addCard(Zone.HAND, playerA, "Akroma, Angel of Fury");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 6);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akroma, Angel of Fury");
+        setChoice(playerA, "Yes"); // cast it face down as 2/2 creature
+
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}{R}{R}{R}: Turn this face-down permanent face up.");
+
+        setStopAt(3, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Akroma, Angel of Fury", 1);
+        assertType("Akroma, Angel of Fury", CardType.CREATURE, SubType.ANGEL);
+        Permanent akroma = getPermanent("Akroma, Angel of Fury");
+        Assert.assertTrue("Akroma has to be red", akroma.getColor(currentGame).isRed());
     }
 }

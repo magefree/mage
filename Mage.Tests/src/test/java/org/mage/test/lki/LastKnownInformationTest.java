@@ -70,7 +70,7 @@ public class LastKnownInformationTest extends CardTestPlayerBase {
     @Test
     public void testTrostaniSelesnyasVoice1() {
         // Whenever another creature enters the battlefield under your control, you gain life equal to that creature's toughness.
-        // {1}{G}{W}, {T}: Populate. (Put a token onto the battlefield that's a copy of a creature token you control.)
+        // {1}{G}{W}, {T}: Populate. (Create a tokenonto the battlefield that's a copy of a creature token you control.)
         addCard(Zone.BATTLEFIELD, playerA, "Trostani, Selesnya's Voice");
 
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);

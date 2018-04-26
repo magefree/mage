@@ -76,16 +76,16 @@ public class TapTargetEffect extends OneShotEffect {
 
     @Override
     public String getText(Mode mode) {
-        if (staticText.length() > 0) {
+        if (!staticText.isEmpty()) {
             return "tap " + staticText;
         }
 
         Target target = mode.getTargets().get(0);
         if (target.getMaxNumberOfTargets() > 1) {
             if (target.getMaxNumberOfTargets() == target.getNumberOfTargets()) {
-                return "tap " + CardUtil.numberToText(target.getNumberOfTargets()) + " target " + target.getTargetName() + "s";
+                return "tap " + CardUtil.numberToText(target.getNumberOfTargets()) + " target " + target.getTargetName() + 's';
             } else {
-                return "tap up to " + CardUtil.numberToText(target.getMaxNumberOfTargets()) + " target " + target.getTargetName() + "s";
+                return "tap up to " + CardUtil.numberToText(target.getMaxNumberOfTargets()) + " target " + target.getTargetName() + 's';
             }
         } else if (target.getMaxNumberOfTargets() == 0){
             return "tap X target " + mode.getTargets().get(0).getTargetName();

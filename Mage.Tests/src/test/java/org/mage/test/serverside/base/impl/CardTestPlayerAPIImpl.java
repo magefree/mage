@@ -1,8 +1,6 @@
 package org.mage.test.serverside.base.impl;
 
-import java.io.FileNotFoundException;
-import java.util.List;
-import java.util.UUID;
+import mage.Mana;
 import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.cards.decks.Deck;
@@ -10,10 +8,7 @@ import mage.cards.decks.importer.DeckImporterUtil;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.cards.repository.CardScanner;
-import mage.constants.CardType;
-import mage.constants.PhaseStep;
-import mage.constants.RangeOfInfluence;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
@@ -25,13 +20,21 @@ import mage.game.GameOptions;
 import mage.game.command.CommandObject;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
+import mage.players.ManaPool;
 import mage.players.Player;
 import org.junit.Assert;
 import org.junit.Before;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestAPI;
-import org.mage.test.serverside.base.CardTestAPI.GameResult;
 import org.mage.test.serverside.base.MageTestPlayerBase;
+
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 /**
  * API for test initialization and asserting the test results.
@@ -60,9 +63,14 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         UNKNOWN
     }
 
-    static {
-//        CardScanner.scanned = true;
-        CardScanner.scan();
+    public CardTestPlayerAPIImpl(){
+        // load all cards to db from class list
+        ArrayList<String> errorsList = new ArrayList<>();
+        CardScanner.scan(errorsList);
+
+        if (errorsList.size() > 0) {
+            Assert.fail("Found errors on card loading: " + '\n' + errorsList.stream().collect(Collectors.joining("\n")));
+        }
     }
 
     /**
@@ -115,13 +123,11 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         if (currentGame != null) {
             logger.debug("Resetting previous game and creating new one!");
             currentGame = null;
-            System.gc();
         }
 
         currentGame = createNewGameAndPlayers();
 
         activePlayer = playerA;
-
         stopOnTurn = 2;
         stopAtStep = PhaseStep.UNTAP;
 
@@ -132,9 +138,12 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
             getHandCards(testPlayer).clear();
             getBattlefieldCards(testPlayer).clear();
             getGraveCards(testPlayer).clear();
+            // Reset the turn counter for tests
+            ((TestPlayer) player).setInitialTurns(0);
         }
 
         gameOptions = new GameOptions();
+
     }
 
     abstract protected Game createNewGameAndPlayers() throws GameException, FileNotFoundException;
@@ -159,12 +168,6 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         return player;
     }
 
-    /**
-     * Starts testing card by starting current game.
-     *
-     * @throws IllegalStateException In case game wasn't created previously. Use
-     * {@link #load} method to initialize the game.
-     */
     public void execute() throws IllegalStateException {
         if (currentGame == null || activePlayer == null) {
             throw new IllegalStateException("Game is not initialized. Use load method to load a test case and initialize a game.");
@@ -241,8 +244,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * Add a card to specified zone of specified player.
      *
      * @param gameZone {@link mage.constants.Zone} to add cards to.
-     * @param player {@link Player} to add cards for. Use either playerA or
-     * playerB.
+     * @param player   {@link Player} to add cards for. Use either playerA or
+     *                 playerB.
      * @param cardName Card name in string format.
      */
     @Override
@@ -254,10 +257,10 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * Add any amount of cards to specified zone of specified player.
      *
      * @param gameZone {@link mage.constants.Zone} to add cards to.
-     * @param player {@link Player} to add cards for. Use either playerA or
-     * playerB.
+     * @param player   {@link Player} to add cards for. Use either playerA or
+     *                 playerB.
      * @param cardName Card name in string format.
-     * @param count Amount of cards to be added.
+     * @param count    Amount of cards to be added.
      */
     @Override
     public void addCard(Zone gameZone, TestPlayer player, String cardName, int count) {
@@ -268,25 +271,25 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * Add any amount of cards to specified zone of specified player.
      *
      * @param gameZone {@link mage.constants.Zone} to add cards to.
-     * @param player {@link Player} to add cards for. Use either playerA or
-     * playerB.
+     * @param player   {@link Player} to add cards for. Use either playerA or
+     *                 playerB.
      * @param cardName Card name in string format.
-     * @param count Amount of cards to be added.
-     * @param tapped In case gameZone is Battlefield, determines whether
-     * permanent should be tapped. In case gameZone is other than Battlefield,
-     * {@link IllegalArgumentException} is thrown
+     * @param count    Amount of cards to be added.
+     * @param tapped   In case gameZone is Battlefield, determines whether
+     *                 permanent should be tapped. In case gameZone is other than Battlefield,
+     *                 {@link IllegalArgumentException} is thrown
      */
     @Override
     public void addCard(Zone gameZone, TestPlayer player, String cardName, int count, boolean tapped) {
 
-        if (gameZone.equals(Zone.BATTLEFIELD)) {
+        if (gameZone == Zone.BATTLEFIELD) {
             for (int i = 0; i < count; i++) {
                 CardInfo cardInfo = CardRepository.instance.findCard(cardName);
                 Card card = cardInfo != null ? cardInfo.getCard() : null;
                 if (card == null) {
                     throw new IllegalArgumentException("[TEST] Couldn't find a card: " + cardName);
                 }
-                PermanentCard p = new PermanentCard(card, player.getId(), currentGame);
+                PermanentCard p = new PermanentCard(card.copy(), player.getId(), currentGame);
                 p.setTapped(tapped);
                 getBattlefieldCards(player).add(p);
             }
@@ -307,19 +310,22 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     /**
-     * Returns card list containter for specified game zone and player.
+     * Returns card list container for specified game zone and player.
      *
      * @param gameZone
      * @param player
      * @return
      */
     private List<Card> getCardList(Zone gameZone, TestPlayer player) {
-        if (gameZone.equals(Zone.HAND)) {
-            return getHandCards(player);
-        } else if (gameZone.equals(Zone.GRAVEYARD)) {
-            return getGraveCards(player);
-        } else if (gameZone.equals(Zone.LIBRARY)) {
-            return getLibraryCards(player);
+        switch (gameZone) {
+            case HAND:
+                return getHandCards(player);
+            case GRAVEYARD:
+                return getGraveCards(player);
+            case LIBRARY:
+                return getLibraryCards(player);
+            default:
+                break;
         }
 
         throw new AssertionError("Zone is not supported by test framework: " + gameZone);
@@ -329,7 +335,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * Set player's initial life count.
      *
      * @param player {@link Player} to set life count for.
-     * @param life Life count to set.
+     * @param life   Life count to set.
      */
     @Override
     public void setLife(TestPlayer player, int life) {
@@ -406,7 +412,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * Assert player's life count after test execution.
      *
      * @param player {@link Player} to get life for comparison.
-     * @param life Expected player's life to compare with.
+     * @param life   Expected player's life to compare with.
      */
     @Override
     public void assertLife(Player player, int life) throws AssertionError {
@@ -423,14 +429,14 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * params 3b. all: there is at least one creature with the cardName with the
      * different p\t params
      *
-     * @param player {@link Player} to get creatures for comparison.
-     * @param cardName Card name to compare with.
-     * @param power Expected power to compare with.
+     * @param player    {@link Player} to get creatures for comparison.
+     * @param cardName  Card name to compare with.
+     * @param power     Expected power to compare with.
      * @param toughness Expected toughness to compare with.
-     * @param scope {@link mage.filter.Filter.ComparisonScope} Use ANY, if you
-     * want "at least one creature with given name should have specified p\t"
-     * Use ALL, if you want "all creature with gived name should have specified
-     * p\t"
+     * @param scope     {@link mage.filter.Filter.ComparisonScope} Use ANY, if you
+     *                  want "at least one creature with given name should have specified p\t"
+     *                  Use ALL, if you want "all creature with gived name should have specified
+     *                  p\t"
      */
     @Override
     public void assertPowerToughness(Player player, String cardName, int power, int toughness, Filter.ComparisonScope scope)
@@ -441,14 +447,15 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         int foundToughness = 0;
         int found = 0;
         for (Permanent permanent : currentGame.getBattlefield().getAllPermanents()) {
+
             if (permanent.getName().equals(cardName) && permanent.getControllerId().equals(player.getId())) {
                 count++;
-                if (scope.equals(Filter.ComparisonScope.All)) {
-                    Assert.assertEquals("Power is not the same (" + power + " vs. " + permanent.getPower().getValue() + ")",
+                if (scope == Filter.ComparisonScope.All) {
+                    Assert.assertEquals("Power is not the same (" + power + " vs. " + permanent.getPower().getValue() + ')',
                             power, permanent.getPower().getValue());
-                    Assert.assertEquals("Toughness is not the same (" + toughness + " vs. " + permanent.getToughness().getValue() + ")",
+                    Assert.assertEquals("Toughness is not the same (" + toughness + " vs. " + permanent.getToughness().getValue() + ')',
                             toughness, permanent.getToughness().getValue());
-                } else if (scope.equals(Filter.ComparisonScope.Any)) {
+                } else if (scope == Filter.ComparisonScope.Any) {
                     if (power == permanent.getPower().getValue() && toughness == permanent.getToughness().getValue()) {
                         fit++;
                         break;
@@ -463,9 +470,9 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         Assert.assertTrue("There is no such permanent under player's control, player=" + player.getName()
                 + ", cardName=" + cardName, count > 0);
 
-        if (scope.equals(Filter.ComparisonScope.Any)) {
-            Assert.assertTrue("There is no such creature under player's control with specified power&toughness, player=" + player.getName()
-                    + ", cardName=" + cardName + " (found similar: " + found + ", one of them: power=" + foundPower + " toughness=" + foundToughness + ")", fit > 0);
+        if (scope == Filter.ComparisonScope.Any) {
+            Assert.assertTrue("There is no such creature under player's control with specified p/t of " + power + '/' + toughness + ", player=" + player.getName()
+                    + ", cardName=" + cardName + " (found similar: " + found + ", one of them: power=" + foundPower + " toughness=" + foundToughness + ')', fit > 0);
         }
     }
 
@@ -514,13 +521,12 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     /**
-     *
      * @param player
      * @param cardName
      * @param ability
-     * @param flag true if creature should contain ability, false if it should
-     * NOT contain it instead
-     * @param count number of permanents with that ability
+     * @param flag     true if creature should contain ability, false if it should
+     *                 NOT contain it instead
+     * @param count    number of permanents with that ability
      * @throws AssertionError
      */
     public void assertAbility(Player player, String cardName, Ability ability, boolean flag, int count) throws AssertionError {
@@ -552,7 +558,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * Assert permanent count under player's control.
      *
      * @param player {@link Player} which permanents should be counted.
-     * @param count Expected count.
+     * @param count  Expected count.
      */
     @Override
     public void assertPermanentCount(Player player, int count) throws AssertionError {
@@ -568,9 +574,9 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     /**
      * Assert permanent count under player's control.
      *
-     * @param player {@link Player} which permanents should be counted.
+     * @param player   {@link Player} which permanents should be counted.
      * @param cardName Name of the cards that should be counted.
-     * @param count Expected count.
+     * @param count    Expected count.
      */
     @Override
     public void assertPermanentCount(Player player, String cardName, int count) throws AssertionError {
@@ -582,7 +588,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
                 }
             }
         }
-        Assert.assertEquals("(Battlefield) Permanents counts for " + player.getName() + " are not equal (" + cardName + ")", count, actualCount);
+        Assert.assertEquals("(Battlefield) Permanents counts for " + player.getName() + " are not equal (" + cardName + ')', count, actualCount);
     }
 
     @Override
@@ -593,7 +599,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
                 actualCount++;
             }
         }
-        Assert.assertEquals("(Command Zone) Card counts are not equal (" + commandZoneObjectName + ")", count, actualCount);
+        Assert.assertEquals("(Command Zone) Card counts are not equal (" + commandZoneObjectName + ')', count, actualCount);
     }
 
     /**
@@ -618,8 +624,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * Assert counter count on a permanent
      *
      * @param cardName Name of the cards that should be counted.
-     * @param type Type of the counter that should be counted.
-     * @param count Expected count.
+     * @param type     Type of the counter that should be counted.
+     * @param count    Expected count.
      */
     public void assertCounterCount(String cardName, CounterType type, int count) throws AssertionError {
         this.assertCounterCount(null, cardName, type, count);
@@ -634,15 +640,15 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
             }
         }
         Assert.assertNotNull("There is no such permanent " + (player == null ? "" : "for player " + player.getName()) + " on the battlefield, cardName=" + cardName, found);
-        Assert.assertEquals("(Battlefield) Counter counts are not equal (" + cardName + ":" + type + ")", count, found.getCounters().getCount(type));
+        Assert.assertEquals("(Battlefield) Counter counts are not equal (" + cardName + ':' + type + ')', count, found.getCounters(currentGame).getCount(type));
     }
 
     /**
      * Assert counter count on a card in exile
      *
      * @param cardName Name of the cards that should be counted.
-     * @param type Type of the counter that should be counted.
-     * @param count Expected count.
+     * @param type     Type of the counter that should be counted.
+     * @param count    Expected count.
      */
     public void assertCounterOnExiledCardCount(String cardName, CounterType type, int count) throws AssertionError {
         Card found = null;
@@ -657,26 +663,26 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
         }
         Assert.assertNotNull("There is no such card in the exile, cardName=" + cardName, found);
-        Assert.assertEquals("(Exile) Counter counts are not equal (" + cardName + ":" + type + ")", count, found.getCounters(currentGame).getCount(type));
+        Assert.assertEquals("(Exile) Counter counts are not equal (" + cardName + ':' + type + ')', count, found.getCounters(currentGame).getCount(type));
     }
 
     /**
      * Assert counter count on a player
      *
      * @param player The player whos counters should be counted.
-     * @param type Type of the counter that should be counted.
-     * @param count Expected count.
+     * @param type   Type of the counter that should be counted.
+     * @param count  Expected count.
      */
     public void assertCounterCount(Player player, CounterType type, int count) throws AssertionError {
-        Assert.assertEquals("(Battlefield) Counter counts are not equal (" + player.getName() + ":" + type + ")", count, player.getCounters().getCount(type));
+        Assert.assertEquals("(Battlefield) Counter counts are not equal (" + player.getName() + ':' + type + ')', count, player.getCounters().getCount(type));
     }
 
     /**
      * Assert whether a permanent is a specified type or not
      *
      * @param cardName Name of the permanent that should be checked.
-     * @param type A type to test for
-     * @param flag true if creature should have type, false if it should not
+     * @param type     A type to test for
+     * @param flag     true if creature should have type, false if it should not
      */
     public void assertType(String cardName, CardType type, boolean flag) throws AssertionError {
         Permanent found = null;
@@ -689,7 +695,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
         Assert.assertNotNull("There is no such permanent on the battlefield, cardName=" + cardName, found);
 
-        Assert.assertTrue("(Battlefield) card type not found (" + cardName + ":" + type + ")", (found.getCardType().contains(type) == flag));
+        Assert.assertTrue("(Battlefield) card type not found (" + cardName + ':' + type + ')', (found.getCardType().contains(type) == flag));
 
     }
 
@@ -697,30 +703,46 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * Assert whether a permanent is a specified type
      *
      * @param cardName Name of the permanent that should be checked.
-     * @param type A type to test for
-     * @param subType a subtype to test for
+     * @param type     A type to test for
+     * @param subType  a subtype to test for
      */
-    public void assertType(String cardName, CardType type, String subType) throws AssertionError {
-        Permanent found = null;
-        for (Permanent permanent : currentGame.getBattlefield().getAllActivePermanents()) {
-            if (permanent.getName().equals(cardName)) {
-                found = permanent;
-                break;
-            }
+    public void assertType(String cardName, CardType type, SubType subType) throws AssertionError {
+        Permanent found = getPermanent(cardName);
+        Assert.assertTrue("(Battlefield) card type not found (" + cardName + ':' + type + ')', found.getCardType().contains(type));
+        if (subType != null) {
+            Assert.assertTrue("(Battlefield) card sub-type not equal (" + cardName + ':' + subType.getDescription() + ')', found.getSubtype(currentGame).contains(subType));
         }
+    }
 
-        Assert.assertNotNull("There is no such permanent on the battlefield, cardName=" + cardName, found);
+    /**
+     * Assert whether a permanent is not a specified type
+     *
+     * @param cardName Name of the permanent that should be checked.
+     * @param type     A type to test for
+     */
+    public void assertNotType(String cardName, CardType type) throws AssertionError {
+        Permanent found = getPermanent(cardName);
+        Assert.assertFalse("(Battlefield) card type found (" + cardName + ':' + type + ')', found.getCardType().contains(type));
+    }
 
-        Assert.assertTrue("(Battlefield) card type not found (" + cardName + ":" + type + ")", found.getCardType().contains(type));
-
-        Assert.assertTrue("(Battlefield) card sub-type not equal (" + cardName + ":" + subType + ")", found.getSubtype().contains(subType));
+    /**
+     * Assert whether a permanent is not a specified subtype
+     *
+     * @param cardName Name of the permanent that should be checked.
+     * @param subType  a subtype to test for
+     */
+    public void assertNotSubtype(String cardName, SubType subType) throws AssertionError {
+        Permanent found = getPermanent(cardName);
+        if (subType != null) {
+            Assert.assertFalse("(Battlefield) card sub-type equal (" + cardName + ':' + subType.getDescription() + ')', found.getSubtype(currentGame).contains(subType));
+        }
     }
 
     /**
      * Assert whether a permanent is tapped or not
      *
      * @param cardName Name of the permanent that should be checked.
-     * @param tapped Whether the permanent is tapped or not
+     * @param tapped   Whether the permanent is tapped or not
      */
     public void assertTapped(String cardName, boolean tapped) throws AssertionError {
         Permanent found = null;
@@ -737,15 +759,15 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
         Assert.assertNotNull("There is no such permanent on the battlefield, cardName=" + cardName, found);
 
-        Assert.assertEquals("(Battlefield) Tapped state is not equal (" + cardName + ")", tapped, found.isTapped());
+        Assert.assertEquals("(Battlefield) Tapped state is not equal (" + cardName + ')', tapped, found.isTapped());
     }
 
     /**
      * Assert whether X permanents of the same name are tapped or not.
      *
      * @param cardName Name of the permanent that should be checked.
-     * @param tapped Whether the permanent is tapped or not
-     * @param count The amount of this permanents that should be tapped
+     * @param tapped   Whether the permanent is tapped or not
+     * @param count    The amount of this permanents that should be tapped
      */
     public void assertTappedCount(String cardName, boolean tapped, int count) throws AssertionError {
         int tappedAmount = 0;
@@ -765,7 +787,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     /**
      * Assert whether a permanent is attacking or not
      *
-     * @param cardName Name of the permanent that should be checked.
+     * @param cardName  Name of the permanent that should be checked.
      * @param attacking Whether the permanent is attacking or not
      */
     public void assertAttacking(String cardName, boolean attacking) throws AssertionError {
@@ -778,14 +800,14 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
         Assert.assertNotNull("There is no such permanent on the battlefield, cardName=" + cardName, found);
 
-        Assert.assertEquals("(Battlefield) Attacking state is not equal (" + cardName + ")", attacking, found.isAttacking());
+        Assert.assertEquals("(Battlefield) Attacking state is not equal (" + cardName + ')', attacking, found.isAttacking());
     }
 
     /**
      * Assert card count in player's hand.
      *
      * @param player {@link Player} who's hand should be counted.
-     * @param count Expected count.
+     * @param count  Expected count.
      */
     public void assertHandCount(Player player, int count) throws AssertionError {
         int actual = currentGame.getPlayer(player.getId()).getHand().size();
@@ -795,22 +817,57 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     /**
      * Assert card count in player's hand.
      *
-     * @param player {@link Player} who's hand should be counted.
+     * @param player   {@link Player} who's hand should be counted.
      * @param cardName Name of the cards that should be counted.
-     * @param count Expected count.
+     * @param count    Expected count.
      */
     public void assertHandCount(Player player, String cardName, int count) throws AssertionError {
-        FilterCard filter = new FilterCard();
-        filter.add(new NamePredicate(cardName));
-        int actual = currentGame.getPlayer(player.getId()).getHand().count(filter, player.getId(), currentGame);
+        int actual;
+        if (cardName.contains("//")) { // special logic for cheched split cards, because in game logic of card name filtering is different than for test
+            actual = 0;
+            for (Card card : currentGame.getPlayer(player.getId()).getHand().getCards(currentGame)) {
+                if (card.getName().equals(cardName)) {
+                    actual++;
+                }
+            }
+        } else {
+            FilterCard filter = new FilterCard();
+            filter.add(new NamePredicate(cardName));
+            actual = currentGame.getPlayer(player.getId()).getHand().count(filter, player.getId(), currentGame);
+        }
         Assert.assertEquals("(Hand) Card counts for card " + cardName + " for " + player.getName() + " are not equal ", count, actual);
+    }
+
+
+    public void assertManaPool(Player player, ManaType color, int amount){
+        ManaPool manaPool = currentGame.getPlayer(player.getId()).getManaPool();
+        switch (color){
+            case COLORLESS:
+                Assert.assertEquals(amount,manaPool.getColorless() + manaPool.getConditionalMana().stream().mapToInt(Mana::getColorless).sum());
+                break;
+            case RED:
+                Assert.assertEquals(amount,manaPool.getRed() + manaPool.getConditionalMana().stream().mapToInt(Mana::getRed).sum());
+                break;
+            case BLUE:
+                Assert.assertEquals(amount,manaPool.getBlue() + manaPool.getConditionalMana().stream().mapToInt(Mana::getBlue).sum());
+                break;
+            case WHITE:
+                Assert.assertEquals(amount,manaPool.getWhite() + manaPool.getConditionalMana().stream().mapToInt(Mana::getWhite).sum());
+                break;
+            case GREEN:
+                Assert.assertEquals(amount,manaPool.getGreen() + manaPool.getConditionalMana().stream().mapToInt(Mana::getGreen).sum());
+                break;
+            case BLACK:
+                Assert.assertEquals(amount,manaPool.getBlack() + manaPool.getConditionalMana().stream().mapToInt(Mana::getBlack).sum());
+                break;
+        }
     }
 
     /**
      * Assert card count in player's graveyard.
      *
      * @param player {@link Player} who's graveyard should be counted.
-     * @param count Expected count.
+     * @param count  Expected count.
      */
     public void assertGraveyardCount(Player player, int count) throws AssertionError {
         int actual = currentGame.getPlayer(player.getId()).getGraveyard().size();
@@ -821,7 +878,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * Assert card count in exile.
      *
      * @param cardName Name of the cards that should be counted.
-     * @param count Expected count.
+     * @param count    Expected count.
      */
     public void assertExileCount(String cardName, int count) throws AssertionError {
         int actualCount = 0;
@@ -833,7 +890,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
             }
         }
 
-        Assert.assertEquals("(Exile) Card counts are not equal (" + cardName + ")", count, actualCount);
+        Assert.assertEquals("(Exile) Card counts are not equal (" + cardName + ')', count, actualCount);
     }
 
     /**
@@ -856,11 +913,30 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     /**
+     * Assert card count in player's exile.
+     *
+     * @param owner    {@link Player} who's exile should be counted.
+     * @param cardName Name of the cards that should be counted.
+     * @param count    Expected count.
+     */
+    public void assertExileCount(Player owner, String cardName, int count) throws AssertionError {
+        int actualCount = 0;
+        for (ExileZone exile : currentGame.getExile().getExileZones()) {
+            for (Card card : exile.getCards(currentGame)) {
+                if (card.getOwnerId().equals(owner.getId()) && card.getName().equals(cardName)) {
+                    actualCount++;
+                }
+            }
+        }
+        Assert.assertEquals("(Exile " + owner.getName() + ") Card counts are not equal (" + cardName + ')', count, actualCount);
+    }
+
+    /**
      * Assert card count in player's graveyard.
      *
-     * @param player {@link Player} who's graveyard should be counted.
+     * @param player   {@link Player} who's graveyard should be counted.
      * @param cardName Name of the cards that should be counted.
-     * @param count Expected count.
+     * @param count    Expected count.
      */
     public void assertGraveyardCount(Player player, String cardName, int count) throws AssertionError {
         int actualCount = 0;
@@ -870,15 +946,28 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
             }
         }
 
-        Assert.assertEquals("(Graveyard " + player.getName() + ") Card counts are not equal (" + cardName + ")", count, actualCount);
+        Assert.assertEquals("(Graveyard " + player.getName() + ") Card counts are not equal (" + cardName + ')', count, actualCount);
     }
 
     /**
-     * Assert card count in player's library.
+     * Assert library card count.
      *
      * @param player {@link Player} who's library should be counted.
+     * @param count  Expected count.
+     */
+    public void assertLibraryCount(Player player, int count) throws AssertionError {
+
+        List<Card> libraryList = player.getLibrary().getCards(currentGame);
+        int actualCount = libraryList != null && !libraryList.isEmpty() ? libraryList.size() : 0;
+        Assert.assertEquals("(Library " + player.getName() + ") counts are not equal", count, actualCount);
+    }
+
+    /**
+     * Assert specific card count in player's library.
+     *
+     * @param player   {@link Player} who's library should be counted.
      * @param cardName Name of the cards that should be counted.
-     * @param count Expected count.
+     * @param count    Expected count.
      */
     public void assertLibraryCount(Player player, String cardName, int count) throws AssertionError {
         int actualCount = 0;
@@ -888,11 +977,11 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
             }
         }
 
-        Assert.assertEquals("(Library " + player.getName() + ") Card counts are not equal (" + cardName + ")", count, actualCount);
+        Assert.assertEquals("(Library " + player.getName() + ") Card counts are not equal (" + cardName + ')', count, actualCount);
     }
 
     /**
-     * Asserts added actions count. Usefull to make sure that all actions were
+     * Asserts added actions count. Useful to make sure that all actions were
      * executed.
      *
      * @param player
@@ -902,24 +991,41 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         Assert.assertEquals("Actions left are not equal: ", count, player.getActionCount());
     }
 
+    public void assertActivePlayer(TestPlayer player) {
+        Assert.assertEquals("message", currentGame.getState().getActivePlayerId(), player.getId());
+    }
+
+    public Permanent getPermanent(String cardName, UUID controller) {
+        Permanent found = null;
+        Pattern indexedName = Pattern.compile("^([\\w| ]+):(\\d+)$"); // Ends with <:number>
+        Matcher indexedMatcher = indexedName.matcher(cardName);
+        int index = 0;
+        int count = 0;
+        if (indexedMatcher.matches()) {
+            cardName = indexedMatcher.group(1);
+            index = Integer.valueOf(indexedMatcher.group(2));
+        }
+        for (Permanent permanent : currentGame.getBattlefield().getAllActivePermanents()) {
+            if (permanent.getName().equals(cardName)) {
+                if (controller == null || permanent.getControllerId().equals(controller)) {
+                    found = permanent;
+                    if (count != index) {
+                        count++;
+                    }
+                }
+            }
+        }
+        Assert.assertNotNull("Couldn't find a card with specified name: " + cardName, found);
+        Assert.assertEquals("Only " + count + " permanents were found and " + cardName + ":" + index + " was requested", index, count);
+        return found;
+    }
+
     public Permanent getPermanent(String cardName, Player player) {
         return getPermanent(cardName, player.getId());
     }
 
-    public Permanent getPermanent(String cardName, UUID controller) {
-        Permanent permanent0 = null;
-        int count = 0;
-        for (Permanent permanent : currentGame.getBattlefield().getAllPermanents()) {
-            if (permanent.getControllerId().equals(controller)) {
-                if (permanent.getName().equals(cardName)) {
-                    permanent0 = permanent;
-                    count++;
-                }
-            }
-        }
-        Assert.assertNotNull("Couldn't find a card with specified name: " + cardName, permanent0);
-        Assert.assertEquals("More than one permanent was found: " + cardName + "(" + count + ")", 1, count);
-        return permanent0;
+    public Permanent getPermanent(String cardName) {
+        return getPermanent(cardName, (UUID) null);
     }
 
     public void playLand(int turnNum, PhaseStep step, TestPlayer player, String cardName) {
@@ -939,13 +1045,36 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     /**
+     * Rollback the number of given turns: 0 = rollback to the start of the
+     * current turn
      *
+     * @param turnNum
+     * @param step
+     * @param player
+     * @param turns
+     */
+    public void rollbackTurns(int turnNum, PhaseStep step, TestPlayer player, int turns) {
+        player.addAction(turnNum, step, "playerAction:Rollback" + "$turns=" + turns);
+    }
+
+    /**
+     * The player concedes at the given turn and phase
+     *
+     * @param turnNum
+     * @param step
+     * @param player
+     */
+    public void concede(int turnNum, PhaseStep step, TestPlayer player) {
+        player.addAction(turnNum, step, "playerAction:Concede");
+    }
+
+    /**
      * @param turnNum
      * @param step
      * @param player
      * @param cardName
      * @param targetName for modes you can add "mode=3" before target name,
-     * multiple targets can be seperated by ^
+     *                   multiple targets can be seperated by ^
      */
     public void castSpell(int turnNum, PhaseStep step, TestPlayer player, String cardName, String targetName) {
         player.addAction(turnNum, step, "activate:Cast " + cardName + "$target=" + targetName);
@@ -954,7 +1083,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public enum StackClause {
 
         WHILE_ON_STACK,
-        WHILE_NOT_ON_STACK;
+        WHILE_COPY_ON_STACK,
+        WHILE_NOT_ON_STACK
     }
 
     /**
@@ -965,8 +1095,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param step
      * @param player
      * @param cardName
-     * @param targetName for modal spells add the mode to the name e.g.
-     * "mode=2SilvercoatLion^mode3=PillarfieldOx"
+     * @param targetName   for modal spells add the mode to the name e.g.
+     *                     "mode=2SilvercoatLion^mode3=PillarfieldOx"
      * @param spellOnStack
      */
     public void castSpell(int turnNum, PhaseStep step, TestPlayer player, String cardName, String targetName, String spellOnStack) {
@@ -986,10 +1116,14 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param clause
      */
     public void castSpell(int turnNum, PhaseStep step, TestPlayer player, String cardName, String targetName, String spellOnStack, StackClause clause) {
-        if (StackClause.WHILE_ON_STACK.equals(clause)) {
-            player.addAction(turnNum, step, "activate:Cast " + cardName + "$target=" + targetName + "$spellOnStack=" + spellOnStack);
+        if (StackClause.WHILE_ON_STACK == clause) {
+            player.addAction(turnNum, step, "activate:Cast " + cardName
+                    + '$' + (targetName != null && targetName.startsWith("target") ? targetName : "target=" + targetName)
+                    + "$spellOnStack=" + spellOnStack);
         } else {
-            player.addAction(turnNum, step, "activate:Cast " + cardName + "$target=" + targetName + "$!spellOnStack=" + spellOnStack);
+            player.addAction(turnNum, step, "activate:Cast " + cardName
+                    + '$' + (targetName != null && targetName.startsWith("target") ? targetName : "target=" + targetName)
+                    + "$!spellOnStack=" + spellOnStack);
         }
     }
 
@@ -1016,8 +1150,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         player.addAction(turnNum, step, "activate:" + ability + "$targetPlayer=" + target.getName());
     }
 
-    public void activateAbility(int turnNum, PhaseStep step, TestPlayer player, String ability, String targetName) {
-        player.addAction(turnNum, step, "activate:" + ability + "$target=" + targetName);
+    public void activateAbility(int turnNum, PhaseStep step, TestPlayer player, String ability, String... targetNames) {
+        player.addAction(turnNum, step, "activate:" + ability + "$target=" + String.join("^", targetNames));
     }
 
     public void activateAbility(int turnNum, PhaseStep step, TestPlayer player, String ability, String targetName, String spellOnStack) {
@@ -1025,14 +1159,14 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     /**
-     *
      * @param turnNum
      * @param step
      * @param player
      * @param ability
-     * @param targetName if not target has to be defined use the constant
-     * NO_TARGET
+     * @param targetName   if not target has to be defined use the constant
+     *                     NO_TARGET
      * @param spellOnStack
+     * @param clause
      */
     public void activateAbility(int turnNum, PhaseStep step, TestPlayer player, String ability, String targetName, String spellOnStack, StackClause clause) {
         StringBuilder sb = new StringBuilder("activate:").append(ability);
@@ -1040,13 +1174,25 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
             sb.append("$target=").append(targetName);
         }
         if (spellOnStack != null && !spellOnStack.isEmpty()) {
-            sb.append("$").append(StackClause.WHILE_ON_STACK.equals(clause) ? "" : "!").append("spellOnStack=").append(spellOnStack);
+            sb.append('$');
+            switch (clause) {
+                case WHILE_ON_STACK:
+                    sb.append("spellOnStack=");
+                    break;
+                case WHILE_NOT_ON_STACK:
+                    sb.append("!spellOnStack=");
+                    break;
+                case WHILE_COPY_ON_STACK:
+                    sb.append("spellCopyOnStack=");
+                    break;
+            }
+            sb.append(spellOnStack);
         }
         player.addAction(turnNum, step, sb.toString());
     }
 
     public void addCounters(int turnNum, PhaseStep step, TestPlayer player, String cardName, CounterType type, int count) {
-        player.addAction(turnNum, step, "addCounters:" + cardName + "$" + type.getName() + "$" + count);
+        player.addAction(turnNum, step, "addCounters:" + cardName + '$' + type.getName() + '$' + count);
     }
 
     public void attack(int turnNum, TestPlayer player, String attacker) {
@@ -1062,7 +1208,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     public void block(int turnNum, TestPlayer player, String blocker, String attacker) {
-        player.addAction(turnNum, PhaseStep.DECLARE_BLOCKERS, "block:" + blocker + "$" + attacker);
+        player.addAction(turnNum, PhaseStep.DECLARE_BLOCKERS, "block:" + blocker + '$' + attacker);
     }
 
     /**
@@ -1081,7 +1227,10 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      *
      * @param player
      * @param choice starting with "1" for mode 1, "2" for mode 2 and so on (to
-     * set multiple modes call the command multiple times)
+     *               set multiple modes call the command multiple times). If a spell mode can
+     *               be used only once like Demonic Pact, the value has to be set to the
+     *               number of the remaining modes (e.g. if only 2 are left the number need to
+     *               be 1 or 2).
      */
     public void setModeChoice(TestPlayer player, String choice) {
         player.addModeChoice(choice);
@@ -1091,13 +1240,15 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * Set target permanents
      *
      * @param player
-     * @param target you can add multiple targets by seperating them by the "^"
-     * character e.g. "creatureName1^creatureName2" you can qualify the target
-     * additional by setcode e.g. "creatureName-M15" you can add [no copy] to
-     * the end of the target name to prohibite targets that are copied you can
-     * add [only copy] to the end of the target name to allow only targets that
-     * are copies
+     * @param target you can add multiple targets by separating them by the "^"
+     *               character e.g. "creatureName1^creatureName2" you can qualify the target
+     *               additional by setcode e.g. "creatureName-M15" you can add [no copy] to
+     *               the end of the target name to prohibit targets that are copied you can
+     *               add [only copy] to the end of the target name to allow only targets that
+     *               are copies. For modal spells use a prefix with the mode number:
+     *               mode=1Lightning Bolt^mode=2Silvercoat Lion
      */
+    // TODO: mode options doesn't work here (see BrutalExpulsionTest)
     public void addTarget(TestPlayer player, String target) {
         player.addTarget(target);
     }
@@ -1132,38 +1283,11 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         gameOptions.skipInitShuffling = true;
     }
 
-    protected ExpectedType getExpectedType(String line) {
-        if (line.startsWith("turn:")) {
-            return ExpectedType.TURN_NUMBER;
-        }
-        if (line.startsWith("result:")) {
-            return ExpectedType.RESULT;
-        }
-        if (line.startsWith("life:")) {
-            return ExpectedType.LIFE;
-        }
-        if (line.startsWith("battlefield:")) {
-            return ExpectedType.BATTLEFIELD;
-        }
-        if (line.startsWith("graveyard:")) {
-            return ExpectedType.GRAVEYARD;
-        }
-        return ExpectedType.UNKNOWN;
-    }
-
-    protected String getStringParam(String line, int index) {
-        String[] params = line.split(":");
-        if (index > params.length - 1) {
-            throw new IllegalArgumentException("Not correct line: " + line);
-        }
-        return params[index];
-    }
-
     protected void checkPermanentPT(Player player, String cardName, int power, int toughness, Filter.ComparisonScope scope) {
         if (currentGame == null) {
             throw new IllegalStateException("Current game is null");
         }
-        if (scope.equals(Filter.ComparisonScope.All)) {
+        if (scope == Filter.ComparisonScope.All) {
             throw new UnsupportedOperationException("ComparisonScope.All is not implemented.");
         }
 
@@ -1176,12 +1300,10 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         }
     }
 
-    protected int getIntParam(String line, int index) {
-        String[] params = line.split(":");
-        if (index > params.length - 1) {
-            throw new IllegalArgumentException("Not correct line: " + line);
+    public void assertDamageReceived(Player player, String cardName, int expected) {
+        Permanent p = getPermanent(cardName, player.getId());
+        if (p != null) {
+            Assert.assertEquals("Wrong damage received: ", expected, p.getDamage());
         }
-        return Integer.parseInt(params[index]);
     }
-
 }

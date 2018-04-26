@@ -95,7 +95,7 @@ public abstract class Phase implements Serializable {
     }
 
     public boolean play(Game game, UUID activePlayerId) {
-        if (game.isPaused() || game.gameOver(null)) {
+        if (game.isPaused() || game.checkIfGameIsOver()) {
             return false;
         }
 
@@ -104,10 +104,10 @@ public abstract class Phase implements Serializable {
         if (beginPhase(game, activePlayerId)) {
 
             for (Step step : steps) {
-                if (game.isPaused() || game.gameOver(null)) {
+                if (game.isPaused() || game.checkIfGameIsOver()) {
                     return false;
                 }
-                if (game.getTurn().isEndTurnRequested() && !step.getType().equals(PhaseStep.CLEANUP)) {
+                if (game.getTurn().isEndTurnRequested() && step.getType()!=PhaseStep.CLEANUP) {
                     continue;
                 }
                 currentStep = step;
@@ -122,7 +122,7 @@ public abstract class Phase implements Serializable {
                 }
 
             }
-            if (game.isPaused() || game.gameOver(null)) {
+            if (game.isPaused() || game.checkIfGameIsOver()) {
                 return false;
             }
             count++;
@@ -133,17 +133,17 @@ public abstract class Phase implements Serializable {
     }
 
     private boolean checkStopOnStepOption(Game game) {
-        if (game.getOptions().stopOnTurn != null && game.getOptions().stopAtStep == getStep().getType()) {
-            if (game.getOptions().stopOnTurn <= game.getState().getTurnNum()) {
-                game.pause();
-                return true;
-            }
+        if (game.getOptions().stopOnTurn != null
+                && game.getOptions().stopOnTurn <= game.getState().getTurnNum()
+                && game.getOptions().stopAtStep == getStep().getType()) {
+            game.pause();
+            return true;
         }
         return false;
     }
 
     public boolean resumePlay(Game game, PhaseStep stepType, boolean wasPaused) {
-        if (game.isPaused() || game.gameOver(null)) {
+        if (game.isPaused() || game.checkIfGameIsOver()) {
             return false;
         }
 
@@ -157,7 +157,7 @@ public abstract class Phase implements Serializable {
         resumeStep(game, wasPaused);
         while (it.hasNext()) {
             step = it.next();
-            if (game.isPaused() || game.gameOver(null)) {
+            if (game.isPaused() || game.checkIfGameIsOver()) {
                 return false;
             }
             currentStep = step;
@@ -169,7 +169,7 @@ public abstract class Phase implements Serializable {
             }
         }
 
-        if (game.isPaused() || game.gameOver(null)) {
+        if (game.isPaused() || game.checkIfGameIsOver()) {
             return false;
         }
         count++;
@@ -206,13 +206,13 @@ public abstract class Phase implements Serializable {
         if (!currentStep.skipStep(game, activePlayerId)) {
             game.getState().increaseStepNum();
             prePriority(game, activePlayerId);
-            if (!game.isPaused() && !game.gameOver(null) && !game.executingRollback()) {
+            if (!game.isPaused() && !game.checkIfGameIsOver() && !game.executingRollback()) {
                 currentStep.priority(game, activePlayerId, false);
                 if (game.executingRollback()) {
                     return;
                 }
             }
-            if (!game.isPaused() && !game.gameOver(null) && !game.executingRollback()) {
+            if (!game.isPaused() && !game.checkIfGameIsOver() && !game.executingRollback()) {
                 postPriority(game, activePlayerId);
             }
         }
@@ -233,11 +233,11 @@ public abstract class Phase implements Serializable {
                     prePriority(game, activePlayerId);
                 }
             case PRIORITY:
-                if (!game.isPaused() && !game.gameOver(null)) {
+                if (!game.isPaused() && !game.checkIfGameIsOver()) {
                     currentStep.priority(game, activePlayerId, resuming);
                 }
             case POST:
-                if (!game.isPaused() && !game.gameOver(null)) {
+                if (!game.isPaused() && !game.checkIfGameIsOver()) {
                     postPriority(game, activePlayerId);
                 }
         }

@@ -34,9 +34,6 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
-import static mage.game.events.GameEvent.EventType.DAMAGE_CREATURE;
-import static mage.game.events.GameEvent.EventType.DAMAGE_PLANESWALKER;
-import static mage.game.events.GameEvent.EventType.DAMAGE_PLAYER;
 
 /**
  *
@@ -109,8 +106,8 @@ public class AssignNoCombatDamageSourceEffect extends ReplacementEffectImpl {
                 text += " this combat";
                 break;
             default:
-                if (duration.toString().length() > 0) {
-                    text += " " + duration.toString();
+                if (!duration.toString().isEmpty()) {
+                    text += ' ' + duration.toString();
                 }
         }
         return text;

@@ -27,18 +27,19 @@
  */
 package mage.target.common;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.cards.Cards;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.TargetCard;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -59,8 +60,12 @@ public class TargetCardInYourGraveyard extends TargetCard {
     }
 
     public TargetCardInYourGraveyard(int minNumTargets, int maxNumTargets, FilterCard filter) {
-        super(minNumTargets, maxNumTargets, Zone.GRAVEYARD, filter);
-        this.targetName = filter.getMessage();
+        this(minNumTargets, maxNumTargets, filter, false);
+    }
+
+    public TargetCardInYourGraveyard(int minNumTarget, int maxNumTargets, FilterCard filter, boolean notTarget) {
+        super(minNumTarget, maxNumTargets, Zone.GRAVEYARD, filter);
+        this.setNotTarget(notTarget);
     }
 
     public TargetCardInYourGraveyard(final TargetCardInYourGraveyard target) {
@@ -122,10 +127,7 @@ public class TargetCardInYourGraveyard extends TargetCard {
      */
     @Override
     public boolean canChoose(UUID sourceControllerId, Game game) {
-        if (game.getPlayer(sourceControllerId).getGraveyard().count(filter, game) >= this.minNumberOfTargets) {
-            return true;
-        }
-        return false;
+        return game.getPlayer(sourceControllerId).getGraveyard().count(filter, game) >= this.minNumberOfTargets;
     }
 
     @Override

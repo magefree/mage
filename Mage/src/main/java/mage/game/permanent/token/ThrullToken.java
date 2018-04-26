@@ -29,31 +29,40 @@
 package mage.game.permanent.token;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import mage.MageInt;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
  * @author Quercitron
  */
-public class ThrullToken extends Token {
+public class ThrullToken extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 
     static {
-        tokenImageSets.addAll(Arrays.asList("MM2"));
+        tokenImageSets.addAll(Collections.singletonList("MM2"));
     }
 
     public ThrullToken() {
         super("Thrull", "1/1 black Thrull creature token");
         cardType.add(CardType.CREATURE);
-        subtype.add("Thrull");
+        subtype.add(SubType.THRULL);
         color.setBlack(true);
         power = new MageInt(1);
         toughness = new MageInt(1);
 
         availableImageSetCodes = tokenImageSets;
+    }
+
+    public ThrullToken(final ThrullToken token) {
+        super(token);
+    }
+
+    public ThrullToken copy() {
+        return new ThrullToken(this);
     }
 }

@@ -67,7 +67,7 @@ public class DiscardTargetCost extends CostImpl {
     @Override
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
         this.cards.clear();
-        this.targets.clearChosen();;
+        this.targets.clearChosen();
         Player player = game.getPlayer(controllerId);
         if (player == null) {
             return false;
@@ -75,16 +75,14 @@ public class DiscardTargetCost extends CostImpl {
         int amount = this.getTargets().get(0).getNumberOfTargets();
         if (randomDiscard) {
             this.cards.addAll(player.discard(amount, true, ability, game).getCards(game));
-        } else {
-            if (targets.choose(Outcome.Discard, controllerId, sourceId, game)) {
-                for (UUID targetId : targets.get(0).getTargets()) {
-                    Card card = player.getHand().get(targetId, game);
-                    if (card == null) {
-                        return false;
-                    }
-                    player.discard(card, ability, game);
-                    this.cards.add(card);
+        } else if (targets.choose(Outcome.Discard, controllerId, sourceId, game)) {
+            for (UUID targetId : targets.get(0).getTargets()) {
+                Card card = player.getHand().get(targetId, game);
+                if (card == null) {
+                    return false;
                 }
+                player.discard(card, ability, game);
+                this.cards.add(card);
             }
         }
         paid = cards.size() >= amount;

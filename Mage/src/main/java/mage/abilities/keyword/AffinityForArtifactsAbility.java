@@ -32,10 +32,8 @@ import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.AdjustingSourceCosts;
 import mage.abilities.effects.common.AffinityEffect;
-import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.util.CardUtil;
 
@@ -43,14 +41,9 @@ import mage.util.CardUtil;
  * Affinity for artifacts
  */
 public class AffinityForArtifactsAbility extends SimpleStaticAbility implements AdjustingSourceCosts {
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent();
-
-    static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
-    }
 
     public AffinityForArtifactsAbility() {
-        super(Zone.OUTSIDE, new AffinityEffect(filter));
+        super(Zone.OUTSIDE, new AffinityEffect(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT));
         setRuleAtTheTop(true);
     }
 
@@ -71,7 +64,7 @@ public class AffinityForArtifactsAbility extends SimpleStaticAbility implements 
     @Override
     public void adjustCosts(Ability ability, Game game) {
         if (ability instanceof SpellAbility) {
-            int count = game.getBattlefield().getAllActivePermanents(filter, ability.getControllerId(), game).size();
+            int count = game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT, ability.getControllerId(), game).size();
             if (count > 0) {
                 CardUtil.adjustCost((SpellAbility)ability, count);
             }

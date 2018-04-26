@@ -27,6 +27,7 @@
  */
 package mage.abilities.effects.common.continuous;
 
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -38,7 +39,11 @@ import mage.constants.SubLayer;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author LevelX2
@@ -65,29 +70,47 @@ public class BecomesCreatureAllEffect extends ContinuousEffectImpl {
     }
 
     @Override
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+        if (this.affectedObjectsSet) {
+            for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+                affectedObjectList.add(new MageObjectReference(perm, game));
+            }
+        }
+    }
+
+    @Override
     public BecomesCreatureAllEffect copy() {
         return new BecomesCreatureAllEffect(this);
     }
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+        Set<Permanent> affectedPermanents = new HashSet<>();
+        if (this.affectedObjectsSet) {
+            for(MageObjectReference ref : affectedObjectList) {
+                affectedPermanents.add(ref.getPermanent(game));
+            }
+        } else {
+            affectedPermanents = new HashSet<>(game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game));
+        }
+        for(Permanent permanent : affectedPermanents) {
             if (permanent != null) {
                 switch (layer) {
                     case TypeChangingEffects_4:
                         if (sublayer == SubLayer.NA) {
-                            if (token.getCardType().size() > 0) {
+                            if (!token.getCardType().isEmpty()) {
                                 for (CardType t : token.getCardType()) {
                                     if (!permanent.getCardType().contains(t)) {
-                                        permanent.getCardType().add(t);
+                                        permanent.addCardType(t);
                                     }
                                 }
                             }
                             if (type == null) {
-                                permanent.getSubtype().clear();
+                                permanent.getSubtype(game).clear();
                             }
-                            if (token.getSubtype().size() > 0) {
-                                permanent.getSubtype().addAll(token.getSubtype());
+                            if (!token.getSubtype(game).isEmpty()) {
+                                permanent.getSubtype(game).addAll(token.getSubtype(game));
                             }
                         }
                         break;
@@ -100,7 +123,7 @@ public class BecomesCreatureAllEffect extends ContinuousEffectImpl {
                         break;
                     case AbilityAddingRemovingEffects_6:
                         if (sublayer == SubLayer.NA) {
-                            if (token.getAbilities().size() > 0) {
+                            if (!token.getAbilities().isEmpty()) {
                                 for (Ability ability : token.getAbilities()) {
                                     permanent.addAbility(ability, source.getSourceId(), game);
                                 }
@@ -135,13 +158,18 @@ public class BecomesCreatureAllEffect extends ContinuousEffectImpl {
     @Override
     public String getText(Mode mode) {
         StringBuilder sb = new StringBuilder();
-        if (duration.toString() != "") {
+        if (duration.toString() != null && !duration.toString().isEmpty()) {
             sb.append(duration.toString()).append(", ");
         }
         sb.append(filter.getMessage());
-        sb.append(" become a ").append(token.getDescription());
-        if (type != null && type.length() > 0) {
-            sb.append(". They are still ").append(type);
+        if (duration.toString() != null && duration.toString().isEmpty()) {
+            sb.append(" are ");
+        } else {
+            sb.append(" become ");
+        }
+        sb.append(token.getDescription());
+        if (type != null && !type.isEmpty()) {
+            sb.append(". They're still ").append(type);
         }
         return sb.toString();
     }

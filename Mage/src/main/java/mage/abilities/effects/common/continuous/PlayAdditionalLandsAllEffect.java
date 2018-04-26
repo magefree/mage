@@ -24,8 +24,7 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.abilities.effects.common.continuous;
 
 import mage.abilities.Ability;
@@ -38,19 +37,34 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
- * Each player may play an additional land on each of his or her turns.
+ * Each player may play an additional land on each of their turns.
  *
  * @author nantuko
  */
 public class PlayAdditionalLandsAllEffect extends ContinuousEffectImpl {
 
+    private int numExtraLands = 1;
+
     public PlayAdditionalLandsAllEffect() {
         super(Duration.WhileOnBattlefield, Layer.PlayerEffects, SubLayer.NA, Outcome.Benefit);
-        staticText = "Each player may play an additional land on each of his or her turns";
+        staticText = "Each player may play an additional land on each of their turns";
+        numExtraLands = 1;
+    }
+
+    public PlayAdditionalLandsAllEffect(int numExtraLands) {
+        super(Duration.WhileOnBattlefield, Layer.PlayerEffects, SubLayer.NA, Outcome.Benefit);
+        this.numExtraLands = numExtraLands;
+        if (numExtraLands == Integer.MAX_VALUE) {
+            staticText = "Each player may play any number of additional lands on each of their turns";
+        } else {
+            staticText = "Each player may play an additional " + numExtraLands + " lands on each of their turns";
+        }
     }
 
     public PlayAdditionalLandsAllEffect(final PlayAdditionalLandsAllEffect effect) {
         super(effect);
+        this.numExtraLands = effect.numExtraLands;
+        this.staticText = effect.staticText;
     }
 
     @Override
@@ -62,10 +76,13 @@ public class PlayAdditionalLandsAllEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(game.getActivePlayerId());
         if (player != null) {
-            player.setLandsPerTurn(player.getLandsPerTurn() + 1);
+            if (numExtraLands == Integer.MAX_VALUE) {
+                player.setLandsPerTurn(Integer.MAX_VALUE);
+            } else {
+                player.setLandsPerTurn(player.getLandsPerTurn() + numExtraLands);
+            }
             return true;
         }
         return true;
     }
-
 }

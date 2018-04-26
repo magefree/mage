@@ -27,14 +27,6 @@
  */
 package mage.abilities.effects.common;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageItem;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -51,9 +43,11 @@ import mage.target.Target;
 import mage.target.TargetImpl;
 import mage.util.TargetAddress;
 
+import java.util.*;
+
 /**
- * @author duncant
  * @param <T>
+ * @author duncant
  */
 public abstract class CopySpellForEachItCouldTargetEffect<T extends MageItem> extends OneShotEffect {
 
@@ -72,6 +66,8 @@ public abstract class CopySpellForEachItCouldTargetEffect<T extends MageItem> ex
 
     protected abstract Spell getSpell(Game game, Ability source);
 
+    protected abstract Player getPlayer(Game game, Ability source);
+
     protected abstract boolean changeTarget(Target target, Game game, Ability source);
 
     protected abstract void modifyCopy(Spell copy, Game game, Ability source);
@@ -80,10 +76,14 @@ public abstract class CopySpellForEachItCouldTargetEffect<T extends MageItem> ex
         modifyCopy(copy, game, source);
     }
 
+    protected boolean okUUIDToCopyFor(UUID potentialTarget, Game game, Ability source, Spell spell) {
+        return true;
+    }
+
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
+        Player actingPlayer = getPlayer(game, source);
+        if (actingPlayer == null) {
             return false;
         }
         Spell spell = getSpell(game, source);
@@ -111,7 +111,7 @@ public abstract class CopySpellForEachItCouldTargetEffect<T extends MageItem> ex
             sampleTarget.setNotTarget(true);
 
             Map<UUID, Map<UUID, Spell>> playerTargetCopyMap = new HashMap<>();
-            for (UUID objId : sampleTarget.possibleTargets(controller.getId(), game)) {
+            for (UUID objId : sampleTarget.possibleTargets(actingPlayer.getId(), game)) {
                 MageItem obj = game.getObject(objId);
                 if (obj == null) {
                     obj = game.getPlayer(objId);
@@ -120,7 +120,7 @@ public abstract class CopySpellForEachItCouldTargetEffect<T extends MageItem> ex
                     copy = spell.copySpell(source.getControllerId());
                     try {
                         modifyCopy(copy, (T) obj, game, source);
-                        if (!filter.match((T) obj, game)) {
+                        if (!filter.match((T) obj, source.getSourceId(), actingPlayer.getId(), game)) {
                             continue;
                         }
                     } catch (ClassCastException e) {
@@ -131,7 +131,7 @@ public abstract class CopySpellForEachItCouldTargetEffect<T extends MageItem> ex
                     for (TargetAddress addr : targetsToBeChanged) {
                         // potential target must be legal for all targets that we're about to change
                         Target targetInstance = addr.getTarget(copy);
-                        legal &= targetInstance.canTarget(objId, addr.getSpellAbility(copy), game);
+                        legal &= targetInstance.canTarget(actingPlayer.getId(), objId, addr.getSpellAbility(copy), game);
                         if (!legal) {
                             break;
                         }
@@ -144,6 +144,7 @@ public abstract class CopySpellForEachItCouldTargetEffect<T extends MageItem> ex
                         }
                     }
 
+                    legal &= okUUIDToCopyFor(objId, game, source, spell);
                     if (legal) {
                         for (TargetAddress addr : targetsToBeChanged) {
                             Target targetInstance = addr.getTarget(copy);
@@ -151,7 +152,7 @@ public abstract class CopySpellForEachItCouldTargetEffect<T extends MageItem> ex
                             targetInstance.add(objId, game);
                         }
                         if (!playerTargetCopyMap.containsKey(copy.getControllerId())) {
-                            playerTargetCopyMap.put(copy.getControllerId(), new HashMap<UUID, Spell>());
+                            playerTargetCopyMap.put(copy.getControllerId(), new HashMap<>());
                         }
                         playerTargetCopyMap.get(copy.getControllerId()).put(objId, copy);
                     }
@@ -163,7 +164,7 @@ public abstract class CopySpellForEachItCouldTargetEffect<T extends MageItem> ex
                 if (playerTargetCopyMap.containsKey(player.getId())) {
                     Map<UUID, Spell> targetCopyMap = playerTargetCopyMap.get(player.getId());
                     if (targetCopyMap != null) {
-                        while (targetCopyMap.size() > 0) {
+                        while (!targetCopyMap.isEmpty()) {
                             FilterInPlay<T> setFilter = filter.copy();
                             setFilter.add(new FromSetPredicate(targetCopyMap.keySet()));
                             Target target = new TargetWithAdditionalFilter(sampleTarget, setFilter);
@@ -190,10 +191,7 @@ public abstract class CopySpellForEachItCouldTargetEffect<T extends MageItem> ex
                                     madeACopy = true;
                                 }
                             }
-
-                            for (UUID idToDelete : toDelete) {
-                                targetCopyMap.remove(idToDelete);
-                            }
+                            targetCopyMap.keySet().removeAll((toDelete));
                         }
                     }
                 }
@@ -254,9 +252,6 @@ class TargetWithAdditionalFilter<T extends MageItem> extends TargetImpl {
 
     protected final FilterInPlay<T> additionalFilter;
     protected final Target originalTarget;
-    protected static final Integer minNumberOfTargets = null;
-    protected static final Integer maxNumberOfTargets = null;
-    protected static final Zone zone = null;
 
     public TargetWithAdditionalFilter(final TargetWithAdditionalFilter target) {
         this(target.originalTarget, target.additionalFilter, false);
@@ -267,12 +262,16 @@ class TargetWithAdditionalFilter<T extends MageItem> extends TargetImpl {
     }
 
     public TargetWithAdditionalFilter(Target originalTarget, FilterInPlay<T> additionalFilter, boolean notTarget) {
-        originalTarget = originalTarget.copy();
-        originalTarget.clearChosen();
-        this.originalTarget = originalTarget;
+        this.originalTarget = originalTarget.copy();
+        this.originalTarget.clearChosen();
         this.targetName = originalTarget.getFilter().getMessage();
         this.notTarget = notTarget;
         this.additionalFilter = additionalFilter;
+    }
+
+    @Override
+    public Target getOriginalTarget() {
+        return originalTarget;
     }
 
     @Override
@@ -458,11 +457,11 @@ class TargetWithAdditionalFilter<T extends MageItem> extends TargetImpl {
         for (UUID targetId : getTargets()) {
             MageObject object = game.getObject(targetId);
             if (object != null) {
-                sb.append(object.getLogName()).append(" ");
+                sb.append(object.getLogName()).append(' ');
             } else {
                 Player player = game.getPlayer(targetId);
                 if (player != null) {
-                    sb.append(player.getLogName()).append(" ");
+                    sb.append(player.getLogName()).append(' ');
                 }
             }
         }

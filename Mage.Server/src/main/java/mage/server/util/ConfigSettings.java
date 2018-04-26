@@ -24,8 +24,7 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.server.util;
 
 import java.io.File;
@@ -39,21 +38,15 @@ import mage.server.util.config.Plugin;
 import org.apache.log4j.Logger;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
-public class ConfigSettings {
-
-    private static final Logger logger = Logger.getLogger(ConfigSettings.class);
-    private static final ConfigSettings INSTANCE = new ConfigSettings();
+public enum ConfigSettings {
+    instance;
+    private final Logger logger = Logger.getLogger(ConfigSettings.class);
 
     private Config config;
 
-    public static ConfigSettings getInstance() {
-        return INSTANCE;
-    }
-
-    private ConfigSettings() {
+    ConfigSettings() {
         try {
             JAXBContext jaxbContext = JAXBContext.newInstance("mage.server.util.config");
             Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
@@ -81,6 +74,10 @@ public class ConfigSettings {
 
     public int getLeasePeriod() {
         return config.getServer().getLeasePeriod().intValue();
+    }
+
+    public int getSocketWriteTimeout() {
+        return config.getServer().getSocketWriteTimeout().intValue();
     }
 
     public int getMaxPoolSize() {

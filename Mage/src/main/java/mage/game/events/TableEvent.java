@@ -36,6 +36,7 @@ import mage.cards.decks.Deck;
 import mage.game.Game;
 import mage.game.draft.Draft;
 import mage.game.match.MatchOptions;
+import mage.game.tournament.MultiplayerRound;
 import mage.game.tournament.TournamentPairing;
 
 /**
@@ -46,7 +47,7 @@ public class TableEvent extends EventObject implements ExternalEvent, Serializab
 
     public enum EventType {
         UPDATE, INFO, STATUS, START_DRAFT, START_MATCH, SIDEBOARD, CONSTRUCT, SUBMIT_DECK, END, END_GAME_INFO, ERROR,
-        INIT_TIMER, RESUME_TIMER, PAUSE_TIMER, CHECK_STATE_PLAYERS
+        INIT_TIMER, RESUME_TIMER, PAUSE_TIMER, CHECK_STATE_PLAYERS, START_MULTIPLAYER_MATCH
     }
 
     private Game game;
@@ -58,6 +59,7 @@ public class TableEvent extends EventObject implements ExternalEvent, Serializab
     private UUID playerId;
     private Deck deck;
     private TournamentPairing pair;
+    private MultiplayerRound round;
     private MatchOptions options;
     private int timeout;
     private boolean withTime;
@@ -115,6 +117,13 @@ public class TableEvent extends EventObject implements ExternalEvent, Serializab
         this.options = options;
         this.eventType = eventType;
     }
+    
+    public TableEvent(EventType eventType, MultiplayerRound round, MatchOptions options) {
+        super(options);
+        this.round = round;
+        this.options = options;
+        this.eventType = eventType;
+    }
 
     public Game getGame() {
         return game;
@@ -150,6 +159,10 @@ public class TableEvent extends EventObject implements ExternalEvent, Serializab
 
     public TournamentPairing getPair() {
         return pair;
+    }
+    
+    public MultiplayerRound getMultiplayerRound() {
+        return round;
     }
 
     public MatchOptions getMatchOptions() {

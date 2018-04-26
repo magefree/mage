@@ -4,7 +4,6 @@ import mage.abilities.Ability;
 import mage.abilities.EvasionAbility;
 import mage.abilities.MageSingleton;
 import mage.abilities.effects.RestrictionEffect;
-import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -23,10 +22,10 @@ import mage.game.permanent.Permanent;
  *
  */
 public class IntimidateAbility extends EvasionAbility implements MageSingleton  {
-    private static final IntimidateAbility fInstance = new IntimidateAbility();
+    private static final IntimidateAbility instance = new IntimidateAbility();
 
     public static IntimidateAbility getInstance() {
-        return fInstance;
+        return instance;
     }
 
     private IntimidateAbility() {
@@ -40,7 +39,7 @@ public class IntimidateAbility extends EvasionAbility implements MageSingleton  
 
     @Override
     public IntimidateAbility copy() {
-        return fInstance;
+        return instance;
     }
 }
 
@@ -61,7 +60,7 @@ class IntimidateEffect extends RestrictionEffect implements MageSingleton {
     @Override
     public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
         boolean result = false;
-        if (blocker.getCardType().contains(CardType.ARTIFACT) && (blocker.getCardType().contains(CardType.CREATURE))) {
+        if (blocker.isArtifact() && (blocker.isCreature())) {
             result = true;
         }
         if (attacker.getColor(game).shares(blocker.getColor(game))) {

@@ -28,20 +28,21 @@
 
 package mage.abilities;
 
-import java.util.Iterator;
 import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
+import java.util.Iterator;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
- public class DelayedTriggeredAbilities extends AbilitiesImpl<DelayedTriggeredAbility> {
+public class DelayedTriggeredAbilities extends AbilitiesImpl<DelayedTriggeredAbility> {
 
-     public DelayedTriggeredAbilities() {}
+    public DelayedTriggeredAbilities() {
+    }
 
-     public DelayedTriggeredAbilities(final DelayedTriggeredAbilities abilities) {
+    public DelayedTriggeredAbilities(final DelayedTriggeredAbilities abilities) {
         super(abilities);
     }
 
@@ -52,9 +53,9 @@ import mage.game.events.GameEvent;
 
     public void checkTriggers(GameEvent event, Game game) {
         if (this.size() > 0) {
-            for (Iterator<DelayedTriggeredAbility> it = this.iterator();it.hasNext();) {
+            for (Iterator<DelayedTriggeredAbility> it = this.iterator(); it.hasNext(); ) {
                 DelayedTriggeredAbility ability = it.next();
-                if (ability.getDuration().equals(Duration.Custom)){
+                if (ability.getDuration() == Duration.Custom) {
                     if (ability.isInactive(game)) {
                         it.remove();
                         continue;
@@ -74,21 +75,11 @@ import mage.game.events.GameEvent;
     }
 
     public void removeEndOfTurnAbilities() {
-        for (Iterator<DelayedTriggeredAbility> it = this.iterator();it.hasNext();) {
-            DelayedTriggeredAbility ability = it.next();
-            if (ability.getDuration() == Duration.EndOfTurn) {
-                it.remove();
-            }
-        }
+        this.removeIf(ability -> ability.getDuration() == Duration.EndOfTurn);
     }
 
     public void removeEndOfCombatAbilities() {
-        for (Iterator<DelayedTriggeredAbility> it = this.iterator();it.hasNext();) {
-            DelayedTriggeredAbility ability = it.next();
-            if (ability.getDuration() == Duration.EndOfCombat) {
-                it.remove();
-            }
-        }
+        this.removeIf(ability -> ability.getDuration() == Duration.EndOfCombat);
     }
 
 

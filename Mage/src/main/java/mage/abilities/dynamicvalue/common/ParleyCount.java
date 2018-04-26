@@ -36,7 +36,6 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.cards.Card;
 import mage.cards.CardsImpl;
-import mage.constants.CardType;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -47,31 +46,31 @@ import mage.players.Player;
  */
 public class ParleyCount implements DynamicValue, MageSingleton {
 
-    private static final ParleyCount fINSTANCE = new ParleyCount();
+    private static final ParleyCount instance = new ParleyCount();
 
     private Object readResolve() throws ObjectStreamException {
-        return fINSTANCE;
+        return instance;
     }
 
     public static ParleyCount getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        // Each player reveals the top card of his or her library. For each nonland card revealed this way
+        // Each player reveals the top card of their library. For each nonland card revealed this way
         int parleyValue = 0;
         MageObject sourceObject = game.getObject(sourceAbility.getSourceId());
         if (sourceObject != null) {
-            for (UUID playerId : game.getState().getPlayerList(sourceAbility.getControllerId())) {
+            for (UUID playerId : game.getState().getPlayersInRange(sourceAbility.getControllerId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     Card card = player.getLibrary().getFromTop(game);
                     if (card != null) {
-                        if (!card.getCardType().contains(CardType.LAND)) {
+                        if (!card.isLand()) {
                             parleyValue++;
                         }
-                        player.revealCards(sourceObject.getIdName() + " (" + player.getName() + ")", new CardsImpl(card), game);
+                        player.revealCards(sourceObject.getIdName() + " (" + player.getName() + ')', new CardsImpl(card), game);
                     }
                 }
 
@@ -82,7 +81,7 @@ public class ParleyCount implements DynamicValue, MageSingleton {
 
     @Override
     public ParleyCount copy() {
-        return fINSTANCE;
+        return instance;
     }
 
     @Override

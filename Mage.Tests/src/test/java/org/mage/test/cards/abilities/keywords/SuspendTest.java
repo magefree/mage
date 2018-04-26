@@ -82,7 +82,7 @@ public class SuspendTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Silvercoat Lion", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Jhoira of the Ghitu", 1);
 
-        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{2},Exile a nonland card from your hand: Put four time counters on the exiled card. If it doesn't have suspend, it gains suspend");
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}, Exile a nonland card from your hand: Put four time counters on the exiled card. If it doesn't have suspend, it gains suspend");
         setChoice(playerA, "Silvercoat Lion");
 
         setStopAt(11, PhaseStep.PRECOMBAT_MAIN);
@@ -161,6 +161,28 @@ public class SuspendTest extends CardTestPlayerBase {
 
         assertHandCount(playerA, 1);
         assertHandCount(playerA, "Ancestral Vision", 1);
+
+    }
+
+    /**
+     * Suppression Field incorrectly makes suspend cards cost 2 more to suspend.
+     * It made my Rift Bolt cost 2R to suspend instead of R
+     *
+     */
+    @Test
+    public void testCostManipulation() {
+        // Rift Bolt deals 3 damage to any target.
+        // Suspend 1-{R}
+        addCard(Zone.HAND, playerA, "Rift Bolt", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+
+        addCard(Zone.BATTLEFIELD, playerB, "Suppression Field", 1);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Suspend");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertHandCount(playerA, "Rift Bolt", 0);
 
     }
 }

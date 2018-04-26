@@ -24,23 +24,30 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.deck;
 
+import mage.cards.ExpansionSet;
+import mage.cards.Sets;
 import mage.cards.decks.Constructed;
+import mage.constants.SetType;
 
 /**
- * This class implements the new casual format "Eternal", which is legacy with no reserved list cards legal.
- * Banlist taken from <https://www.reddit.com/r/mtgEternal/>
+ * This class implements the new casual format "Eternal", which is legacy with
+ * no reserved list cards legal. Banlist taken from
+ * <https://www.reddit.com/r/mtgEternal/>
  *
  * @author marthinwurer@gmail.com
  */
 public class Eternal extends Constructed {
 
-	public Eternal() {
+    public Eternal() {
         super("Constructed - Eternal");
-       
+        for (ExpansionSet set : Sets.getInstance().values()) {
+            if (set.getSetType() != SetType.CUSTOM_SET) {
+                setCodes.add(set.getCode());
+            }
+        }
         banned.add("Abeyance");
         banned.add("Aboroth");
         banned.add("Academy Rector");

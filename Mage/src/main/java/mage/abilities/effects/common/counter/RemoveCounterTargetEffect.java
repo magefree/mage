@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.effects.common.counter;
 
 import java.util.HashSet;
@@ -47,8 +46,8 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-
 public class RemoveCounterTargetEffect extends OneShotEffect {
+
     private final Counter counter;
 
     public RemoveCounterTargetEffect() {
@@ -69,48 +68,52 @@ public class RemoveCounterTargetEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent p = game.getPermanent(targetPointer.getFirst(game, source));
-        if(p != null) {
+        if (p != null) {
             Counter toRemove = (counter == null ? selectCounterType(game, source, p) : counter);
-            if(toRemove != null && p.getCounters().getCount(toRemove.getName()) >= toRemove.getCount()) {
+            if (toRemove != null && p.getCounters(game).getCount(toRemove.getName()) >= toRemove.getCount()) {
                 p.removeCounters(toRemove.getName(), toRemove.getCount(), game);
-                if(!game.isSimulation())
-                    game.informPlayers("Removed " + toRemove.getCount() + " " + toRemove.getName()
-                        + " counter from " + p.getName());
-                return true;
+                if (!game.isSimulation()) {
+                    game.informPlayers("Removed " + toRemove.getCount() + ' ' + toRemove.getName()
+                            + " counter from " + p.getName());
+                }
+            }
+        } else {
+            Card c = game.getCard(targetPointer.getFirst(game, source));
+            if (c != null && counter != null && c.getCounters(game).getCount(counter.getName()) >= counter.getCount()) {
+                c.removeCounters(counter.getName(), counter.getCount(), game);
+                if (!game.isSimulation()) {
+                    game.informPlayers(new StringBuilder("Removed ").append(counter.getCount()).append(' ').append(counter.getName())
+                            .append(" counter from ").append(c.getName())
+                            .append(" (").append(c.getCounters(game).getCount(counter.getName())).append(" left)").toString());
+                }
             }
         }
-        Card c = game.getCard(targetPointer.getFirst(game, source));
-        if (c != null && counter != null && c.getCounters(game).getCount(counter.getName()) >= counter.getCount()) {
-            c.removeCounters(counter.getName(), counter.getCount(), game);
-            if (!game.isSimulation())
-                game.informPlayers(new StringBuilder("Removed ").append(counter.getCount()).append(" ").append(counter.getName())
-                    .append(" counter from ").append(c.getName())
-                    .append(" (").append(c.getCounters(game).getCount(counter.getName())).append(" left)").toString());
-            return true;
-        }
-        return false;
+        return true;
     }
 
     private Counter selectCounterType(Game game, Ability source, Permanent permanent) {
         Player controller = game.getPlayer(source.getControllerId());
-        if(controller != null && permanent.getCounters().size() > 0) {
+        if (controller != null && !permanent.getCounters(game).isEmpty()) {
             String counterName = null;
-            if(permanent.getCounters().size() > 1) {
+            if (permanent.getCounters(game).size() > 1) {
                 Choice choice = new ChoiceImpl(true);
                 Set<String> choices = new HashSet<>();
-                for(Counter counter : permanent.getCounters().values()) {
-                    if (permanent.getCounters().getCount(counter.getName()) > 0) {
-                        choices.add(counter.getName());
+                for (Counter counterOnPermanent : permanent.getCounters(game).values()) {
+                    if (permanent.getCounters(game).getCount(counterOnPermanent.getName()) > 0) {
+                        choices.add(counterOnPermanent.getName());
                     }
                 }
                 choice.setChoices(choices);
                 choice.setMessage("Choose a counter type to remove from " + permanent.getName());
-                controller.choose(Outcome.Detriment, choice, game);
-                counterName = choice.getChoice();
+                if (controller.choose(Outcome.Detriment, choice, game)) {
+                    counterName = choice.getChoice();
+                } else {
+                    return null;
+                }
             } else {
-                for(Counter counter : permanent.getCounters().values()) {
-                    if(counter.getCount() > 0) {
-                        counterName = counter.getName();
+                for (Counter counterOnPermanent : permanent.getCounters(game).values()) {
+                    if (counterOnPermanent.getCount() > 0) {
+                        counterName = counterOnPermanent.getName();
                     }
                 }
             }
@@ -131,14 +134,13 @@ public class RemoveCounterTargetEffect extends OneShotEffect {
         }
 
         String text = "remove ";
-        if(counter == null) {
+        if (counter == null) {
             text += "a counter";
+        } else {
+            text += CardUtil.numberToText(counter.getCount(), "a") + ' ' + counter.getName();
+            text += counter.getCount() > 1 ? " counters" : " counter";
         }
-        else {
-           text += CardUtil.numberToText(counter.getCount(), "a") + " " + counter.getName();
-           text += counter.getCount() > 1 ? " counters" : " counter";
-        }
-        text += " from target " + mode.getTargets().get(0).getTargetName();
+        text += " from target " + (mode.getTargets().isEmpty() ? " object" : mode.getTargets().get(0).getTargetName());
         return text;
     }
 }

@@ -36,10 +36,10 @@ import mage.client.dialog.PreferencesDialog;
 
 public class SortSettingSideboard extends SortSetting {
 
-    private static final SortSettingSideboard fInstance = new SortSettingSideboard();
+    private static final SortSettingSideboard instance = new SortSettingSideboard();
 
     public static SortSettingSideboard getInstance() {
-        return fInstance;
+        return instance;
     }
 
     private SortSettingSideboard() {

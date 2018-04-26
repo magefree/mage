@@ -87,9 +87,7 @@ public class CardState implements Serializable {
             abilities = new AbilitiesImpl<>();
         }
         abilities.add(ability);
-        for (Ability sub : ability.getSubAbilities()) {
-            abilities.add(sub);
-        }
+        abilities.addAll(ability.getSubAbilities());
     }
 
     public void clearAbilities() {

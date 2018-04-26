@@ -4,13 +4,13 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.io.Closeable;
 /**
  * Helper for file operations.
  *
  * @author noxx
  */
-public class FileHelper {
+public final class FileHelper {
 
     private FileHelper() {
     }
@@ -18,22 +18,12 @@ public class FileHelper {
     /**
      * Filters out dirs.
      */
-    private static final FileFilter anyFileFilter = new FileFilter() {
-        @Override
-        public boolean accept(File f) {
-            return f.isFile();
-        }
-    };
+    private static final FileFilter anyFileFilter = f -> f.isFile();
 
     /**
      * Filters out jars.
      */
-    private static final FilenameFilter jarFileFilter = new FilenameFilter() {
-        @Override
-        public boolean accept(File dir, String name) {
-            return name.endsWith(".jar");
-        }
-    };
+    private static final FilenameFilter jarFileFilter = (dir, name) -> name.endsWith(".jar");
 
     /**
      * Gets .jar files from specified folder.
@@ -42,7 +32,7 @@ public class FileHelper {
      * @return
      */
     public static List<File> findJarsInDir(String dir) {
-        ArrayList<File> result = new ArrayList<File>();
+        ArrayList<File> result = new ArrayList<>();
         File directory = new File(dir);
         if (directory.exists() && directory.isDirectory()) {
             for (File jar : directory.listFiles(jarFileFilter)) {
@@ -59,7 +49,7 @@ public class FileHelper {
      * @return
      */
     public static List<File> findAllFilesInDir(String dir) {
-        ArrayList<File> result = new ArrayList<File>();
+        ArrayList<File> result = new ArrayList<>();
         File directory = new File(dir);
         if (directory.exists() && directory.isDirectory()) {
             for (File jar : directory.listFiles(anyFileFilter)) {
@@ -94,15 +84,17 @@ public class FileHelper {
      */
     public static void downloadFile(String filename, HttpURLConnection urlConnection) {
         System.out.println("Downloading " + filename);
+        InputStream in = null;
+        FileOutputStream out = null;
         try {
-            InputStream in = urlConnection.getInputStream();
+            in = urlConnection.getInputStream();
             File f = new File(filename);
             if (!f.exists() && f.getParentFile() != null) {
                 f.getParentFile().mkdirs();
                 System.out.println("Directories have been created: " + f.getParentFile().getPath());
             }
 
-            FileOutputStream out = new FileOutputStream(filename);
+            out = new FileOutputStream(filename);
             byte[] buf = new byte[4 * 1024];
             int bytesRead;
 
@@ -113,6 +105,19 @@ public class FileHelper {
             System.out.println("File has been updated: " + filename);
         } catch (IOException e) {
             System.out.println("i/o exception - " + e.getMessage());
+        } finally {
+            closeQuietly(in);
+            closeQuietly(out);
+        }
+    }
+
+    public static void closeQuietly(Closeable s) {
+        if(s != null) {
+            try {
+                s.close();
+            } catch (Exception e) {
+                System.out.println("i/o exception - " + e.getMessage());
+            }
         }
     }
 }

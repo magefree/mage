@@ -14,13 +14,21 @@ import mage.counters.CounterType;
  */
 public class PlanswalkerEntersWithLoyalityCountersAbility extends EntersBattlefieldAbility {
 
-    public PlanswalkerEntersWithLoyalityCountersAbility(int loyality) {
-        super(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(loyality)));
+    private final int startingLoyalty; 
+    
+    public PlanswalkerEntersWithLoyalityCountersAbility(int loyalty) {
+        super(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(loyalty)));
+        startingLoyalty = loyalty;
         setRuleVisible(false);
     }
 
     public PlanswalkerEntersWithLoyalityCountersAbility(final PlanswalkerEntersWithLoyalityCountersAbility ability) {
         super(ability);
+        startingLoyalty = ability.startingLoyalty;
+    }
+    
+    public int getStartingLoyalty() {
+        return startingLoyalty;
     }
 
     @Override

@@ -28,15 +28,15 @@
 
 package mage.game;
 
-import java.io.Serializable;
 import java.util.UUID;
+
 import mage.cards.CardsImpl;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ExileZone extends CardsImpl implements Serializable {
+public class ExileZone extends CardsImpl {
 
     private UUID id;
     private String name;

@@ -182,10 +182,10 @@ public class SoulfireGrandMasterTest extends CardTestPlayerBase {
 
         addCard(Zone.HAND, playerA, "Lightning Bolt");
         addCard(Zone.BATTLEFIELD, playerA, "Soulfire Grand Master", 1);
-        // {3}, {T}: Rod of Ruin deals 1 damage to target creature or player.
+        // {3}, {T}: Rod of Ruin deals 1 damage to any target.
         addCard(Zone.BATTLEFIELD, playerA, "Rod of Ruin", 1);
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{3},{T}");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}, {T}");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

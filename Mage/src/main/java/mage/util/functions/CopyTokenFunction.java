@@ -32,8 +32,11 @@ import mage.abilities.Ability;
 import mage.abilities.keyword.MorphAbility;
 import mage.cards.Card;
 import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.game.permanent.PermanentCard;
 import mage.game.permanent.PermanentToken;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 
 /**
@@ -70,7 +73,12 @@ public class CopyTokenFunction implements Function<Token, Card> {
                 MorphAbility.setPermanentToFaceDownCreature(target);
                 return target;
             } else {
-                sourceObj = ((PermanentCard) source).getCard();
+                if (((PermanentCard) source).isTransformed() && source.getSecondCardFace() != null) {
+                    sourceObj = ((PermanentCard) source).getSecondCardFace();
+                } else {
+                    sourceObj = ((PermanentCard) source).getCard();
+                }
+
                 target.setOriginalExpansionSetCode(source.getExpansionSetCode());
                 target.setOriginalCardNumber(source.getCardNumber());
                 target.setCopySourceCard((Card) sourceObj);
@@ -78,9 +86,7 @@ public class CopyTokenFunction implements Function<Token, Card> {
         } else {
             target.setOriginalExpansionSetCode(source.getExpansionSetCode());
             target.setOriginalCardNumber(source.getCardNumber());
-            if (source instanceof Card) {
-                target.setCopySourceCard(source);
-            }
+            target.setCopySourceCard(source);
         }
 
         target.setName(sourceObj.getName());
@@ -89,15 +95,15 @@ public class CopyTokenFunction implements Function<Token, Card> {
         target.getManaCost().add(sourceObj.getManaCost());
         target.getCardType().clear();
         for (CardType type : sourceObj.getCardType()) {
-            target.getCardType().add(type);
+            target.addCardType(type);
         }
-        target.getSubtype().clear();
-        for (String type : sourceObj.getSubtype()) {
-            target.getSubtype().add(type);
+        target.getSubtype(null).clear();
+        for (SubType type : sourceObj.getSubtype(null)) {
+            target.getSubtype(null).add(type);
         }
-        target.getSupertype().clear();
-        for (String type : sourceObj.getSupertype()) {
-            target.getSupertype().add(type);
+        target.getSuperType().clear();
+        for (SuperType type : sourceObj.getSuperType()) {
+            target.addSuperType(type);
         }
 
         target.getAbilities().clear();
@@ -108,9 +114,9 @@ public class CopyTokenFunction implements Function<Token, Card> {
             ability.setSourceId(target.getId());
             target.addAbility(ability);
         }
-        // Needed to do it this way because only the cardValue does not include the increased value from cards like "Intangible Virtue" will be copied.
-        target.getPower().initValue(Integer.parseInt(sourceObj.getPower().toString()));
-        target.getToughness().initValue(Integer.parseInt(sourceObj.getToughness().toString()));
+
+        target.getPower().modifyBaseValue(sourceObj.getPower().getBaseValueModified());
+        target.getToughness().modifyBaseValue(sourceObj.getToughness().getBaseValueModified());
 
         return target;
     }

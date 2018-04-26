@@ -51,7 +51,7 @@ public class RevealTargetFromHandCost extends CostImpl {
 
     public RevealTargetFromHandCost(TargetCardInHand target) {
         this.addTarget(target);
-        this.text = (target.getNumberOfTargets() == 0 ? "you may " : "") + "reveal " + target.getTargetName();
+        this.text = (target.getNumberOfTargets() == 0 ? "You may reveal " : "Reveal ") + target.getTargetName();
         this.revealedCards = new ArrayList<>();
     }
 
@@ -72,7 +72,7 @@ public class RevealTargetFromHandCost extends CostImpl {
             for (UUID targetId : targets.get(0).getTargets()) {
                 Card card = player.getHand().get(targetId, game);
                 if (card != null) {
-                    convertedManaCosts += card.getManaCost().convertedManaCost();
+                    convertedManaCosts += card.getConvertedManaCost();
                     numberCardsRevealed++;
                     cards.add(card);
                     revealedCards.add(card);

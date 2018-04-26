@@ -24,7 +24,7 @@ public class AddConditionalManaEffect extends ManaEffect {
         super();
         this.mana = mana;
         this.manaBuilder = manaBuilder;
-        staticText = "Add " + this.mana.toString() + " to your mana pool. " + manaBuilder.getRule();
+        staticText = "Add " + this.mana.toString() + ". " + manaBuilder.getRule();
     }
 
     public AddConditionalManaEffect(final AddConditionalManaEffect effect) {

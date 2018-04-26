@@ -40,7 +40,7 @@ import java.util.Properties;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Config2 {
+public final class Config2 {
 
     private static final Logger logger = Logger.getLogger(Config2.class);
 

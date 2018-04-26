@@ -36,9 +36,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  *
  * @author LevelX2
  */
-
 public class ArrestTest extends CardTestPlayerBase {
-
 
     @Test
     public void testArrest1() {
@@ -46,7 +44,7 @@ public class ArrestTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
 
         addCard(Zone.BATTLEFIELD, playerB, "Forest", 4);
-        // {3}{G}: Put a 1/1 green Saproling creature token onto the battlefield.
+        // {3}{G}: Create a 1/1 green Saproling creature token.
         // {3}{W}: Creatures you control get +1/+1 until end of turn.
         addCard(Zone.BATTLEFIELD, playerB, "Selesnya Guildmage");
 

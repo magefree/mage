@@ -34,28 +34,24 @@
 
 package mage.client.cards;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Rectangle;
-import java.awt.RenderingHints;
+import mage.cards.CardDimensions;
+import mage.cards.MagePermanent;
+import mage.cards.Sets;
+import mage.client.util.Config;
+import mage.client.util.TransformedImageCache;
+import mage.view.CounterView;
+import mage.view.PermanentView;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import javax.swing.PopupFactory;
-import mage.cards.CardDimensions;
-import mage.cards.MagePermanent;
-import mage.cards.Sets;
+
 import static mage.client.constants.Constants.DAMAGE_MAX_LEFT;
 import static mage.client.constants.Constants.POWBOX_TEXT_MAX_TOP;
-import mage.client.util.Config;
-import mage.client.util.ImageHelper;
-import mage.constants.CardType;
-import mage.view.CounterView;
-import mage.view.PermanentView;
 
 /**
  *
@@ -65,9 +61,9 @@ public class Permanent extends Card {
 
     protected PermanentView permanent;
 
-    protected List<MagePermanent> links = new ArrayList<>();
+    protected final List<MagePermanent> links = new ArrayList<>();
     protected boolean linked;
-    protected BufferedImage tappedImage;
+    protected final BufferedImage tappedImage;
     protected BufferedImage flippedImage;
 
     /** Creates new form Permanent
@@ -106,25 +102,25 @@ public class Permanent extends Card {
         if (permanent.getOriginal() != null) {
         sb.append("\n----- Originally -------\n");
         sb.append(permanent.getOriginal().getName());
-        if (permanent.getOriginal().getManaCost().size() > 0) {
-            sb.append("\n").append(permanent.getOriginal().getManaCost());
+        if (!permanent.getOriginal().getManaCost().isEmpty()) {
+            sb.append('\n').append(permanent.getOriginal().getManaCost());
         }
-        sb.append("\n").append(getType(permanent.getOriginal()));
+        sb.append('\n').append(getType(permanent.getOriginal()));
         if (permanent.getOriginal().getColor().hasColor()) {
-            sb.append("\n").append(permanent.getOriginal().getColor().toString());
+            sb.append('\n').append(permanent.getOriginal().getColor().toString());
         }
-        if (permanent.getOriginal().getCardTypes().contains(CardType.CREATURE)) {
-            sb.append("\n").append(permanent.getOriginal().getPower()).append("/").append(permanent.getOriginal().getToughness());
+        if (permanent.getOriginal().isCreature()) {
+            sb.append('\n').append(permanent.getOriginal().getPower()).append('/').append(permanent.getOriginal().getToughness());
         }
-        else if (permanent.getOriginal().getCardTypes().contains(CardType.PLANESWALKER)) {
-            sb.append("\n").append(permanent.getOriginal().getLoyalty());
+        else if (permanent.getOriginal().isPlanesWalker()) {
+            sb.append('\n').append(permanent.getOriginal().getLoyalty());
         }
         for (String rule: getRules()) {
-            sb.append("\n").append(rule);
+            sb.append('\n').append(rule);
         }
-        if (permanent.getOriginal().getExpansionSetCode().length() > 0) {
-            sb.append("\n").append(permanent.getCardNumber()).append(" - ");
-            sb.append("\n").append(Sets.getInstance().get(permanent.getOriginal().getExpansionSetCode()).getName()).append(" - ");
+        if (!permanent.getOriginal().getExpansionSetCode().isEmpty()) {
+            sb.append('\n').append(permanent.getCardNumber()).append(" - ");
+            sb.append('\n').append(Sets.getInstance().get(permanent.getOriginal().getExpansionSetCode()).getName()).append(" - ");
             sb.append(permanent.getOriginal().getRarity().toString());
         }
 //        sb.append("\n").append(card.getId());
@@ -215,7 +211,7 @@ public class Permanent extends Card {
         Graphics2D g = (Graphics2D) tappedImage.getGraphics();
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        g.drawImage(this.createImage(ImageHelper.rotate(small, dimension)), 0, 0, this);
+        g.drawImage(TransformedImageCache.getRotatedResizedImage(small, dimension.frameWidth, dimension.frameHeight, Math.toRadians(90.0)), 0, 0, this);
 
         g.dispose();
     }

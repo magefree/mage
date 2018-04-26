@@ -41,5 +41,6 @@ public class GoblinTokenWithHaste extends GoblinToken {
     public GoblinTokenWithHaste() {
         super();
         addAbility(HasteAbility.getInstance());
+        this.description = "1/1 red Goblin creature token with haste";
     }
 }

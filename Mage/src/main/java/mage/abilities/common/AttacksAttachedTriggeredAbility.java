@@ -25,9 +25,9 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.common;
 
+import java.util.Locale;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.AttachmentType;
@@ -41,11 +41,10 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-
 public class AttacksAttachedTriggeredAbility extends TriggeredAbilityImpl {
-    
+
     private AttachmentType attachmentType;
-    
+
     public AttacksAttachedTriggeredAbility(Effect effect) {
         this(effect, false);
     }
@@ -58,7 +57,7 @@ public class AttacksAttachedTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, effect, optional);
         this.attachmentType = attachmentType;
     }
-    
+
     public AttacksAttachedTriggeredAbility(final AttacksAttachedTriggeredAbility abiltity) {
         super(abiltity);
         this.attachmentType = abiltity.attachmentType;
@@ -79,6 +78,9 @@ public class AttacksAttachedTriggeredAbility extends TriggeredAbilityImpl {
         Permanent equipment = game.getPermanent(this.sourceId);
         if (equipment != null && equipment.getAttachedTo() != null
                 && event.getSourceId().equals(equipment.getAttachedTo())) {
+            for (Effect effect : this.getEffects()) {
+                effect.setValue("sourceId", event.getSourceId());
+            }
             return true;
         }
         return false;
@@ -87,11 +89,7 @@ public class AttacksAttachedTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         StringBuilder sb = new StringBuilder("Whenever ");
-        if (attachmentType.equals(AttachmentType.EQUIPMENT)) {
-            sb.append("equipped");
-        } else {
-            sb.append("enchanted");
-        }
+        sb.append(attachmentType.verb().toLowerCase(Locale.ENGLISH));
         return sb.append(" creature attacks, ").append(super.getRule()).toString();
     }
 }

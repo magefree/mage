@@ -101,15 +101,15 @@ class ExtortEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (player != null && permanent != null) {
-            if (player.chooseUse(Outcome.Damage, new StringBuilder("Extort opponents? (").append(permanent.getName()).append(")").toString(), source, game)) {
+            if (player.chooseUse(Outcome.Damage, new StringBuilder("Extort opponents? (").append(permanent.getName()).append(')').toString(), source, game)) {
                 Cost cost = new ManaCostsImpl("{W/B}");
                 if (cost.pay(source, game, source.getSourceId(), player.getId(), false, null)) {
                     int loseLife = 0;
                     for (UUID opponentId : game.getOpponents(source.getControllerId())) {
-                        loseLife += game.getPlayer(opponentId).loseLife(1, game);
+                        loseLife += game.getPlayer(opponentId).loseLife(1, game, false);
                     }
                     if (loseLife > 0) {
-                        game.getPlayer(source.getControllerId()).gainLife(loseLife, game);
+                        game.getPlayer(source.getControllerId()).gainLife(loseLife, game, source);
                     }
                     if (!game.isSimulation())
                         game.informPlayers(new StringBuilder(permanent.getName()).append(" extorted opponents ").append(loseLife).append(" life").toString());

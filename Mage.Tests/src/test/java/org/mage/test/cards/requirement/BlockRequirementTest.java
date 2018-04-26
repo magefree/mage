@@ -32,6 +32,9 @@ import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
+import static junit.framework.TestCase.assertEquals;
+import static org.junit.Assert.fail;
+
 /**
  *
  * @author LevelX2, icetc
@@ -66,7 +69,7 @@ public class BlockRequirementTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Oppressive Rays", "Silvercoat Lion");
 
-        // Silvercoat Lion has not to block because it has to pay {3} to block
+        // Silvercoat Lion cannot block because it has to pay {3} to block
         attack(2, playerB, "Prized Unicorn");
 
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
@@ -156,8 +159,9 @@ public class BlockRequirementTest extends CardTestPlayerBase {
         assertLife(playerB, 18);
     }
 
-      /**
-     * Okk is red creature that can't block unless a creature with greater power also blocks.
+    /**
+     * Okk is red creature that can't block unless a creature with greater power
+     * also blocks.
      */
     @Test
     public void testOkkBlocking() {
@@ -166,7 +170,7 @@ public class BlockRequirementTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Hill Giant", 1);
 
         // 4/4 Goblin:
-        // Okk can't attack unless a creature with greater power also attacks.        
+        // Okk can't attack unless a creature with greater power also attacks.
         // Okk can't block unless a creature with greater power also blocks.
         addCard(Zone.BATTLEFIELD, playerB, "Okk", 1); //
 
@@ -178,9 +182,73 @@ public class BlockRequirementTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
-        // Hill giant is still alive and Played B looses 3 lives
+        // Hill giant is still alive and Played B loses 3 lives
         assertPermanentCount(playerA, "Hill Giant", 1);
         assertLife(playerB, 17);
+    }
 
+    /**
+     * Reported bug: When Breaker of Armies is granted Menace and there is only
+     * 1 valid blocker, the game enters a state that cannot be continued. He
+     * must be blocked by all creatures that are able, however, with menace the
+     * only valid blocks would be by more than one creature, so the expected
+     * behavior is no blocks can be made.
+     */
+    @Test
+    public void testBreakerOfArmiesWithMenace() {
+
+        // {8}
+        // All creatures able to block Breaker of Armies do so.
+        addCard(Zone.BATTLEFIELD, playerA, "Breaker of Armies", 1); // 10/8
+
+        // 3/3 Vanilla creature
+        addCard(Zone.BATTLEFIELD, playerB, "Hill Giant", 1);
+
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 8);
+        // {2}{B} Enchanted creature gets +2/+1 and has menace.
+        addCard(Zone.HAND, playerA, "Untamed Hunger", 1);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Untamed Hunger", "Breaker of Armies");
+
+        attack(1, playerA, "Breaker of Armies");
+
+        // not allowed due to Breaker of Armies having menace
+        block(1, playerB, "Hill Giant", "Breaker of Armies");
+
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+
+        try {
+            execute();
+            fail("Expected exception not thrown");
+        } catch (UnsupportedOperationException e) {
+            assertEquals("Breaker of Armies is blocked by 1 creature(s). It has to be blocked by 2 or more.", e.getMessage());
+        }
+    }
+    
+    /*
+    Reported bug: Slayer's Cleaver did not force Wretched Gryff (an eldrazi) to block 
+    */
+    @Test
+    public void testSlayersCleaver() {
+        // Equipped creature gets +3/+1 and must be blocked by an Eldrazi if able.
+        // Equip {4}
+        addCard(Zone.BATTLEFIELD, playerA, "Slayer's Cleaver");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Memnite"); // {1} 1/1
+
+        addCard(Zone.BATTLEFIELD, playerB, "Dimensional Infiltrator"); // 2/1 - Eldrazi
+        addCard(Zone.BATTLEFIELD, playerB, "Llanowar Elves"); // 1/1
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip", "Memnite"); // pumps to 4/2
+        attack(1, playerA, "Memnite"); // must be blocked by Dimensional Infiltrator
+        block(1, playerB, "Llanowar Elves", "Memnite"); // should not be allowed as only blocker
+
+        setStopAt(1, PhaseStep.END_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Slayer's Cleaver", 1);
+        assertLife(playerB, 20);
+        assertGraveyardCount(playerA, "Memnite", 1);
+        assertGraveyardCount(playerB, "Dimensional Infiltrator", 1);
+        assertGraveyardCount(playerB, "Llanowar Elves", 1);
     }
 }

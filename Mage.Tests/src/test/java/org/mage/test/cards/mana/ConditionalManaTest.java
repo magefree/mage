@@ -30,6 +30,7 @@ package org.mage.test.cards.mana;
 import mage.abilities.keyword.FlyingAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -41,7 +42,7 @@ public class ConditionalManaTest extends CardTestPlayerBase {
 
     @Test
     public void testNormalUse() {
-        // {T}: Add one mana of any color to your mana pool. Spend this mana only to cast a multicolored spell.
+        // {T}: Add one mana of any color. Spend this mana only to cast a multicolored spell.
         addCard(Zone.BATTLEFIELD, playerA, "Pillar of the Paruns", 2);
         // Instant {G}{W}
         // Target player gains 7 life.
@@ -59,7 +60,7 @@ public class ConditionalManaTest extends CardTestPlayerBase {
 
     @Test
     public void testNotAllowedUse() {
-        // {T}: Add one mana of any color to your mana pool. Spend this mana only to cast a multicolored spell.
+        // {T}: Add one mana of any color. Spend this mana only to cast a multicolored spell.
         addCard(Zone.BATTLEFIELD, playerA, "Pillar of the Paruns", 2);
         addCard(Zone.HAND, playerA, "Silvercoat Lion", 1);
 
@@ -75,9 +76,10 @@ public class ConditionalManaTest extends CardTestPlayerBase {
 
     @Test
     public void testWorkingWithReflectingPool() {
-        addCard(Zone.BATTLEFIELD, playerA, "Cavern of Souls", 1);
-        addCard(Zone.BATTLEFIELD, playerA, "Reflecting Pool", 1); // can create white mana without restriction from the Cavern
-        addCard(Zone.HAND, playerA, "Silvercoat Lion", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Cavern of Souls", 1); // can give {C] or {any} mana ({any} with restrictions)
+        addCard(Zone.BATTLEFIELD, playerA, "Reflecting Pool", 1); // must give {C} or {any} mana from the Cavern, but without restrictions
+        addCard(Zone.HAND, playerA, "Silvercoat Lion", 1); // white bear
+        addCard(Zone.BATTLEFIELD, playerA, "Upwelling", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
 
@@ -90,11 +92,15 @@ public class ConditionalManaTest extends CardTestPlayerBase {
     @Test
     public void testWorkingWithReflectingPool2() {
         addCard(Zone.BATTLEFIELD, playerA, "Reflecting Pool", 1); // can create white mana without restriction from the Hive
+        // {T}: Add {C}.
+        // {T}: Add one mana of any color. Spend this mana only to cast a Sliver spell.
+        // {5}, {T}: Create a 1/1 colorless Sliver creature token. Activate this ability only if you control a Sliver.
         addCard(Zone.BATTLEFIELD, playerA, "Sliver Hive", 1);
         addCard(Zone.HAND, playerA, "Silvercoat Lion", 1);
 
-        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {C} to your mana pool");
-        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add to your mana pool one mana of any type");
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {C}");
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add one mana of any type");
+
         setChoice(playerA, "White");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
@@ -113,7 +119,7 @@ public class ConditionalManaTest extends CardTestPlayerBase {
     public void testRosheenMeandererUsingAbility() {
         // Flying
         addCard(Zone.HAND, playerB, "Snapping Drake", 2); // {3}{U}
-        // {T}: Add {C}{C}{C}{C} to your mana pool. Spend this mana only on costs that contain {X}.
+        // {T}: Add {C}{C}{C}{C}. Spend this mana only on costs that contain {X}.
         addCard(Zone.BATTLEFIELD, playerB, "Rosheen Meanderer", 1);
         // {X}, {T}: Untap X target lands.
         addCard(Zone.BATTLEFIELD, playerB, "Candelabra of Tawnos", 1);
@@ -124,7 +130,7 @@ public class ConditionalManaTest extends CardTestPlayerBase {
 
         activateManaAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "{T}: Add {C}{C}{C}{C}");
 
-        activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "{X},{T}: Untap");
+        activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "{X}, {T}: Untap");
         setChoice(playerB, "X=4");
         addTarget(playerB, "Island");
         addTarget(playerB, "Island");
@@ -152,8 +158,8 @@ public class ConditionalManaTest extends CardTestPlayerBase {
      */
     @Test
     public void testPayColorlessWithConditionalMana() {
-        // {T}: Add {C} to your mana pool.
-        // {T}: Add {C}{C} to your mana pool. Spend this mana only to cast colorless spells. Activate this ability only if you control seven or more lands.
+        // {T}: Add {C}.
+        // {T}: Add {C}{C}. Spend this mana only to cast colorless spells. Activate this ability only if you control seven or more lands.
         addCard(Zone.BATTLEFIELD, playerA, "Shrine of the Forsaken Gods", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 8);
         // When you cast Kozilek, the Great Distortion, if you have fewer than seven cards in hand, draw cards equal to the difference.
@@ -173,7 +179,7 @@ public class ConditionalManaTest extends CardTestPlayerBase {
     @Test
     public void CultivatorDroneColorlessSpell() {
         // Devoid
-        // {T}: Add {C} to your mana pool. Spend this mana only to cast a colorless spell, activate an ability of a colorless permanent, or pay a cost that contains {C}.
+        // {T}: Add {C}. Spend this mana only to cast a colorless spell, activate an ability of a colorless permanent, or pay a cost that contains {C}.
         addCard(Zone.BATTLEFIELD, playerA, "Cultivator Drone", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
@@ -192,11 +198,11 @@ public class ConditionalManaTest extends CardTestPlayerBase {
     @Test
     public void CultivatorDroneColorlessAbility() {
         // Devoid
-        // {T}: Add {C} to your mana pool. Spend this mana only to cast a colorless spell, activate an ability of a colorless permanent, or pay a cost that contains {C}.
+        // {T}: Add {C}. Spend this mana only to cast a colorless spell, activate an ability of a colorless permanent, or pay a cost that contains {C}.
         addCard(Zone.BATTLEFIELD, playerA, "Cultivator Drone", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Wastes", 1);
         // Untap Endbringer during each other player's untap step.
-        // {T}: Endbringer deals 1 damage to target creature or player.
+        // {T}: Endbringer deals 1 damage to any target.
         // {C}, {T}: Target creature can't attack or block this turn.
         // {C}{C}, {T}: Draw a card.
         addCard(Zone.BATTLEFIELD, playerA, "Endbringer", 1); // {1}{C}
@@ -212,7 +218,7 @@ public class ConditionalManaTest extends CardTestPlayerBase {
     @Test
     public void CultivatorDroneColorlessCost() {
         // Devoid
-        // {T}: Add {C} to your mana pool. Spend this mana only to cast a colorless spell, activate an ability of a colorless permanent, or pay a cost that contains {C}.
+        // {T}: Add {C}. Spend this mana only to cast a colorless spell, activate an ability of a colorless permanent, or pay a cost that contains {C}.
         addCard(Zone.BATTLEFIELD, playerA, "Cultivator Drone", 1);
         // Devoid (This card has no color.)
         // Flying

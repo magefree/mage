@@ -30,10 +30,7 @@ package mage.abilities.effects.common.continuous;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -42,9 +39,9 @@ import mage.game.permanent.Permanent;
  */
 public class AddCardSubTypeTargetEffect extends ContinuousEffectImpl {
 
-    private final String addedSubType;
+    private final SubType addedSubType;
 
-    public AddCardSubTypeTargetEffect(String addedSubType, Duration duration) {
+    public AddCardSubTypeTargetEffect(SubType addedSubType, Duration duration) {
         super(duration, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
         this.addedSubType = addedSubType;
     }
@@ -58,11 +55,11 @@ public class AddCardSubTypeTargetEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         Permanent target = game.getPermanent(targetPointer.getFirst(game, source));
         if (target != null) {
-            if (!target.hasSubtype(addedSubType)) {
-                target.getSubtype().add(addedSubType);
+            if (!target.hasSubtype(addedSubType, game)) {
+                target.getSubtype(game).add(addedSubType);
             }
         } else {
-            if (Duration.Custom.equals(duration)) {
+            if (duration == Duration.Custom) {
                 discard();
             }
         }
@@ -77,7 +74,7 @@ public class AddCardSubTypeTargetEffect extends ContinuousEffectImpl {
     @Override
     public String getText(Mode mode) {
         StringBuilder sb = new StringBuilder();
-        if (mode.getTargets().size() > 0) {
+        if (!mode.getTargets().isEmpty()) {
             sb.append("Target ").append(mode.getTargets().get(0).getTargetName());
         } else {
             sb.append("It ");

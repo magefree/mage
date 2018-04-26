@@ -5,7 +5,6 @@ import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.stmt.DeleteBuilder;
 import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.stmt.SelectArg;
-import com.j256.ormlite.stmt.Where;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 import java.sql.SQLException;
@@ -15,7 +14,7 @@ import java.util.List;
  *
  * @author North
  */
-public class RepositoryUtil {
+public final class RepositoryUtil {
 
     public static boolean isDatabaseObsolete(ConnectionSource connectionSource, String entityName, long version) throws SQLException {
         TableUtils.createTableIfNotExists(connectionSource, DatabaseVersion.class);
@@ -54,6 +53,7 @@ public class RepositoryUtil {
     }
 
     public static long getDatabaseVersion(ConnectionSource connectionSource, String entityName) throws SQLException {
+        TableUtils.createTableIfNotExists(connectionSource, DatabaseVersion.class);
         Dao<DatabaseVersion, Object> dbVersionDao = DaoManager.createDao(connectionSource, DatabaseVersion.class);
 
         QueryBuilder<DatabaseVersion, Object> queryBuilder = dbVersionDao.queryBuilder();
@@ -62,9 +62,8 @@ public class RepositoryUtil {
         if (dbVersions.isEmpty()) {
             return 0;
         } else {
-            return dbVersions.get(0). getVersion();
+            return dbVersions.get(0).getVersion();
         }
     }
-
 
 }

@@ -77,7 +77,7 @@ public class MonoHybridManaCost extends ManaCostImpl {
 
     @Override
     public String getText() {
-        return "{2/" + mana.toString() + "}";
+        return "{2/" + mana.toString() + '}';
     }
 
     @Override
@@ -119,7 +119,11 @@ public class MonoHybridManaCost extends ManaCostImpl {
 
     @Override
     public boolean containsColor(ColoredManaSymbol coloredManaSymbol) {
-        return mana.equals(coloredManaSymbol);
+        return mana == coloredManaSymbol;
+    }
+
+    public ColoredManaSymbol getManaColor() {
+        return mana;
     }
 
     @Override

@@ -39,7 +39,7 @@ import mage.game.permanent.Permanent;
  */
 public class AttachedToPredicate implements Predicate<Permanent> {
 
-    private FilterPermanent filter;
+    private final FilterPermanent filter;
 
     public AttachedToPredicate(FilterPermanent filter) {
         this.filter = filter;

@@ -29,24 +29,32 @@
 package mage.game.permanent.token;
 
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.keyword.InfectAbility;
 
 /**
  *
  * @author nantuko
  */
-public class InsectInfectToken extends Token {
+public class InsectInfectToken extends TokenImpl {
 
     public InsectInfectToken() {
         super("Insect", "1/1 green Insect creature token with infect");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
-        subtype.add("Insect");
+        subtype.add(SubType.INSECT);
         power = new MageInt(1);
         toughness = new MageInt(1);
         addAbility(InfectAbility.getInstance());
         setOriginalExpansionSetCode("SOM");
+    }
+
+    public InsectInfectToken(final InsectInfectToken token) {
+        super(token);
+    }
+
+    public InsectInfectToken copy() {
+        return new InsectInfectToken(this);
     }
 }

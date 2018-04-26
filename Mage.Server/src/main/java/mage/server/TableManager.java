@@ -24,24 +24,21 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.server;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 import mage.MageException;
-import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
 import mage.constants.TableState;
 import mage.game.Game;
@@ -52,7 +49,8 @@ import mage.game.match.Match;
 import mage.game.match.MatchOptions;
 import mage.game.tournament.Tournament;
 import mage.game.tournament.TournamentOptions;
-import mage.players.Player;
+import mage.game.tournament.TournamentPlayer;
+import mage.players.PlayerType;
 import mage.server.game.GameController;
 import mage.server.game.GameManager;
 import mage.server.game.GamesRoomManager;
@@ -60,94 +58,131 @@ import mage.server.util.ThreadExecutor;
 import org.apache.log4j.Logger;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
-public class TableManager {
-
-    protected static ScheduledExecutorService expireExecutor = Executors.newSingleThreadScheduledExecutor();
+public enum TableManager {
+    instance;
+    protected final ScheduledExecutorService expireExecutor = Executors.newSingleThreadScheduledExecutor();
 
     // protected static ScheduledExecutorService expireExecutor = ThreadExecutor.getInstance().getExpireExecutor();
-    
-    private static final TableManager INSTANCE = new TableManager();
-    private static final Logger logger = Logger.getLogger(TableManager.class);
+    private final Logger logger = Logger.getLogger(TableManager.class);
     private static final DateFormat formatter = new SimpleDateFormat("HH:mm:ss");
-    
+
     private final ConcurrentHashMap<UUID, TableController> controllers = new ConcurrentHashMap<>();
+    private final ReadWriteLock controllersLock = new ReentrantReadWriteLock();
+
     private final ConcurrentHashMap<UUID, Table> tables = new ConcurrentHashMap<>();
+    private final ReadWriteLock tablesLock = new ReentrantReadWriteLock();
 
     /**
      * Defines how often checking process should be run on server.
-     *
+     * <p>
      * In minutes.
      */
     private static final int EXPIRE_CHECK_PERIOD = 10;
-    
-    public static TableManager getInstance() {
-        return INSTANCE;
-    }
 
-    private TableManager() {
-        expireExecutor.scheduleAtFixedRate(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    checkTableHealthState();
-                } catch(Exception ex) {
-                    logger.fatal("Check table health state job error:", ex);
-                }
+    TableManager() {
+        expireExecutor.scheduleAtFixedRate(() -> {
+            try {
+                ChatManager.instance.clearUserMessageStorage();
+                checkTableHealthState();
+            } catch (Exception ex) {
+                logger.fatal("Check table health state job error:", ex);
             }
         }, EXPIRE_CHECK_PERIOD, EXPIRE_CHECK_PERIOD, TimeUnit.MINUTES);
     }
 
     public Table createTable(UUID roomId, UUID userId, MatchOptions options) {
         TableController tableController = new TableController(roomId, userId, options);
-        controllers.put(tableController.getTable().getId(), tableController);
-        tables.put(tableController.getTable().getId(), tableController.getTable());
+        putControllers(tableController.getTable().getId(), tableController);
+        putTables(tableController.getTable().getId(), tableController.getTable());
         return tableController.getTable();
     }
 
     public Table createTable(UUID roomId, MatchOptions options) {
         TableController tableController = new TableController(roomId, null, options);
-        controllers.put(tableController.getTable().getId(), tableController);
-        tables.put(tableController.getTable().getId(), tableController.getTable());
+        putControllers(tableController.getTable().getId(), tableController);
+        putTables(tableController.getTable().getId(), tableController.getTable());
         return tableController.getTable();
     }
 
     public Table createTournamentTable(UUID roomId, UUID userId, TournamentOptions options) {
         TableController tableController = new TableController(roomId, userId, options);
-        controllers.put(tableController.getTable().getId(), tableController);
-        tables.put(tableController.getTable().getId(), tableController.getTable());
+        putControllers(tableController.getTable().getId(), tableController);
+        putTables(tableController.getTable().getId(), tableController.getTable());
         return tableController.getTable();
+    }
+
+    private void putTables(UUID tableId, Table table) {
+        final Lock w = tablesLock.writeLock();
+        w.lock();
+        try {
+            tables.put(tableId, table);
+        } finally {
+            w.unlock();
+        }
+    }
+
+    private void putControllers(UUID controllerId, TableController tableController) {
+        final Lock w = controllersLock.writeLock();
+        w.lock();
+        try {
+            controllers.put(controllerId, tableController);
+        } finally {
+            w.unlock();
+        }
     }
 
     public Table getTable(UUID tableId) {
         return tables.get(tableId);
     }
 
-    public Match getMatch(UUID tableId) {
+    public Optional<Match> getMatch(UUID tableId) {
         if (controllers.containsKey(tableId)) {
-            return controllers.get(tableId).getMatch();
+            return Optional.of(controllers.get(tableId).getMatch());
         }
-        return null;
+        return Optional.empty();
     }
 
     public Collection<Table> getTables() {
-        return tables.values();
+        Collection<Table> newTables = new ArrayList<>();
+        final Lock r = tablesLock.readLock();
+        r.lock();
+        try {
+            newTables.addAll(tables.values());
+        } finally {
+            r.unlock();
+        }
+        return newTables;
     }
 
-    public TableController getController(UUID tableId) {
-        return controllers.get(tableId);
+    public Collection<TableController> getControllers() {
+        Collection<TableController> newControllers = new ArrayList<>();
+        final Lock r = controllersLock.readLock();
+        r.lock();
+        try {
+            newControllers.addAll(controllers.values());
+        } finally {
+            r.unlock();
+        }
+        return newControllers;
     }
 
-    public boolean joinTable(UUID userId, UUID tableId, String name, String playerType, int skill, DeckCardLists deckList, String password) throws MageException {
+    public Optional<TableController> getController(UUID tableId) {
+        if (controllers.containsKey(tableId)) {
+            return Optional.of(controllers.get(tableId));
+        }
+        return Optional.empty();
+    }
+
+    public boolean joinTable(UUID userId, UUID tableId, String name, PlayerType playerType, int skill, DeckCardLists deckList, String password) throws MageException {
         if (controllers.containsKey(tableId)) {
             return controllers.get(tableId).joinTable(userId, name, playerType, skill, deckList, password);
         }
         return false;
     }
 
-    public boolean joinTournament(UUID userId, UUID tableId, String name, String playerType, int skill, DeckCardLists deckList, String password) throws GameException {
+    public boolean joinTournament(UUID userId, UUID tableId, String name, PlayerType playerType, int skill, DeckCardLists deckList, String password) throws GameException {
         if (controllers.containsKey(tableId)) {
             return controllers.get(tableId).joinTournament(userId, name, playerType, skill, deckList, password);
         }
@@ -158,11 +193,11 @@ public class TableManager {
         if (controllers.containsKey(tableId)) {
             return controllers.get(tableId).submitDeck(userId, deckList);
         }
-        User user = UserManager.getInstance().getUser(userId);
-        if (user != null) {
+        UserManager.instance.getUser(userId).ifPresent(user -> {
             user.removeSideboarding(tableId);
             user.showUserMessage("Submit deck", "Table no longer active");
-        }
+
+        });
         // return true so the panel closes
         return true;
     }
@@ -173,9 +208,9 @@ public class TableManager {
         }
     }
 
-    // remove user from all tournament sub tables
+    // removeUserFromAllTablesAndChat user from all tournament sub tables
     public void userQuitTournamentSubTables(UUID userId) {
-        for (TableController controller: controllers.values()) {
+        for (TableController controller : getControllers()) {
             if (controller.getTable() != null) {
                 if (controller.getTable().isTournamentSubTable()) {
                     controller.leaveTable(userId);
@@ -186,9 +221,9 @@ public class TableManager {
         }
     }
 
-    // remove user from all sub tables of a tournament
+    // removeUserFromAllTablesAndChat user from all sub tables of a tournament
     public void userQuitTournamentSubTables(UUID tournamentId, UUID userId) {
-        for (TableController controller: controllers.values()) {
+        for (TableController controller : getControllers()) {
             if (controller.getTable().isTournamentSubTable() && controller.getTable().getTournament().getId().equals(tournamentId)) {
                 if (controller.hasPlayer(userId)) {
                     controller.leaveTable(userId);
@@ -205,12 +240,12 @@ public class TableManager {
     }
 
     public boolean removeTable(UUID userId, UUID tableId) {
-        if (isTableOwner(tableId, userId) || UserManager.getInstance().isAdmin(userId)) {
+        if (isTableOwner(tableId, userId) || UserManager.instance.isAdmin(userId)) {
             logger.debug("Table remove request - userId: " + userId + " tableId: " + tableId);
             TableController tableController = controllers.get(tableId);
             if (tableController != null) {
                 tableController.leaveTableAll();
-                ChatManager.getInstance().destroyChatSession(tableController.getChatId());
+                ChatManager.instance.destroyChatSession(tableController.getChatId());
                 removeTable(tableId);
             }
             return true;
@@ -225,11 +260,11 @@ public class TableManager {
         }
     }
 
-    public UUID getChatId(UUID tableId) {
+    public Optional<UUID> getChatId(UUID tableId) {
         if (controllers.containsKey(tableId)) {
-            return controllers.get(tableId).getChatId();
+            return Optional.of(controllers.get(tableId).getChatId());
         }
-        return null;
+        return Optional.empty();
     }
 
     /**
@@ -243,7 +278,7 @@ public class TableManager {
         if (controllers.containsKey(tableId)) {
             controllers.get(tableId).startMatch(userId);
             // chat of start dialog can be killed
-            ChatManager.getInstance().destroyChatSession(controllers.get(tableId).getChatId());            
+            ChatManager.instance.destroyChatSession(controllers.get(tableId).getChatId());
         }
     }
 
@@ -262,9 +297,9 @@ public class TableManager {
     public void startTournament(UUID userId, UUID roomId, UUID tableId) {
         if (controllers.containsKey(tableId)) {
             controllers.get(tableId).startTournament(userId);
-                ChatManager.getInstance().destroyChatSession(controllers.get(tableId).getChatId());
-            }
+            ChatManager.instance.destroyChatSession(controllers.get(tableId).getChatId());
         }
+    }
 
     public void startDraft(UUID tableId, Draft draft) {
         if (controllers.containsKey(tableId)) {
@@ -278,13 +313,6 @@ public class TableManager {
         }
         return false;
     }
-
-//    public boolean replayTable(UUID userId, UUID tableId) {
-//        if (controllers.containsKey(tableId)) {
-//            return controllers.get(tableId).replayTable(userId);
-//        }
-//        return false;
-//    }
 
     public void endGame(UUID tableId) {
         if (controllers.containsKey(tableId)) {
@@ -324,49 +352,62 @@ public class TableManager {
         }
     }
 
-    public void addPlayer(UUID userId, UUID tableId, Player player, String playerType, Deck deck) throws GameException {
+    public void addPlayer(UUID userId, UUID tableId, TournamentPlayer player) throws GameException {
         if (controllers.containsKey(tableId)) {
-            controllers.get(tableId).addPlayer(userId, player, playerType, deck);
+            controllers.get(tableId).addPlayer(userId, player.getPlayer(), player.getPlayerType(), player.getDeck());
         }
     }
 
     public void removeTable(UUID tableId) {
-        TableController tableController = controllers.get(tableId);            
+        TableController tableController = controllers.get(tableId);
         if (tableController != null) {
-            controllers.remove(tableId);
-            tableController.cleanUp();  // deletes the table chat and references to users           
-            
+            Lock w = controllersLock.writeLock();
+            w.lock();
+            try {
+                controllers.remove(tableId);
+            } finally {
+                w.unlock();
+            }
+            tableController.cleanUp();  // deletes the table chat and references to users
+
             Table table = tables.get(tableId);
-            tables.remove(tableId);
+            w = tablesLock.writeLock();
+            w.lock();
+            try {
+                tables.remove(tableId);
+            } finally {
+                w.unlock();
+            }
+
             Match match = table.getMatch();
             Game game = null;
             if (match != null) {
                 game = match.getGame();
                 if (game != null && !game.hasEnded()) {
                     game.end();
-                }                
-            }
-                        
-            // If table is not finished, the table has to be removed completly because it's not a normal state (if finished it will be removed in GamesRoomImpl.Update())
-            if (!table.getState().equals(TableState.FINISHED)) {
-                if (game != null) {
-                    GameManager.getInstance().removeGame(game.getId());
                 }
-                GamesRoomManager.getInstance().removeTable(tableId);
             }
-            
+
+            // If table is not finished, the table has to be removed completly because it's not a normal state (if finished it will be removed in GamesRoomImpl.Update())
+            if (table.getState() != TableState.FINISHED) {
+                if (game != null) {
+                    GameManager.instance.removeGame(game.getId());
+                }
+                GamesRoomManager.instance.removeTable(tableId);
+            }
+
         }
     }
 
     public void debugServerState() {
         logger.debug("--- Server state ----------------------------------------------");
-        Collection<User> users = UserManager.getInstance().getUsers();
+        Collection<User> users = UserManager.instance.getUsers();
         logger.debug("--------User: " + users.size() + " [userId | since | lock | name -----------------------");
-        for (User user :users) {
-            Session session = SessionManager.getInstance().getSession(user.getSessionId());
+        for (User user : users) {
+            Optional<Session> session = SessionManager.instance.getSession(user.getSessionId());
             String sessionState = "N";
-            if (session != null) {
-                if (session.isLocked()) {
+            if (session.isPresent()) {
+                if (session.get().isLocked()) {
                     sessionState = "L";
                 } else {
                     sessionState = "+";
@@ -375,37 +416,35 @@ public class TableManager {
             logger.debug(user.getId()
                     + " | " + formatter.format(user.getConnectionTime())
                     + " | " + sessionState
-                    + " | " + user.getName() +" (" +user.getUserState().toString() + " - " + user.getPingInfo() + ")");
+                    + " | " + user.getName() + " (" + user.getUserState().toString() + " - " + user.getPingInfo() + ')');
         }
-        ArrayList<ChatSession> chatSessions = ChatManager.getInstance().getChatSessions();
+        List<ChatSession> chatSessions = ChatManager.instance.getChatSessions();
         logger.debug("------- ChatSessions: " + chatSessions.size() + " ----------------------------------");
-        for (ChatSession chatSession: chatSessions) {
-            logger.debug(chatSession.getChatId() + " " +formatter.format(chatSession.getCreateTime()) +" " + chatSession.getInfo()+ " "+ chatSession.getClients().values().toString());
+        for (ChatSession chatSession : chatSessions) {
+            logger.debug(chatSession.getChatId() + " " + formatter.format(chatSession.getCreateTime()) + ' ' + chatSession.getInfo() + ' ' + chatSession.getClients().values().toString());
         }
-        logger.debug("------- Games: " + GameManager.getInstance().getNumberActiveGames() + " --------------------------------------------");
-        logger.debug(" Active Game Worker: " + ThreadExecutor.getInstance().getActiveThreads(ThreadExecutor.getInstance().getGameExecutor()));
-        for (Entry<UUID, GameController> entry: GameManager.getInstance().getGameController().entrySet()) {
+        logger.debug("------- Games: " + GameManager.instance.getNumberActiveGames() + " --------------------------------------------");
+        logger.debug(" Active Game Worker: " + ThreadExecutor.instance.getActiveThreads(ThreadExecutor.instance.getGameExecutor()));
+        for (Entry<UUID, GameController> entry : GameManager.instance.getGameController().entrySet()) {
             logger.debug(entry.getKey() + entry.getValue().getPlayerNameList());
         }
         logger.debug("--- Server state END ------------------------------------------");
     }
-    
+
     private void checkTableHealthState() {
         if (logger.isDebugEnabled()) {
             debugServerState();
         }
         logger.debug("TABLE HEALTH CHECK");
-        ArrayList<Table> tableCopy = new ArrayList<>();
-        tableCopy.addAll(tables.values());
-        for (Table table : tableCopy) {
+        for (Table table : getTables()) {
             try {
-                if (!table.getState().equals(TableState.FINISHED)) {
-                    // remove tables and games not valid anymore
-                    logger.debug(table.getId() + " [" + table.getName()+ "] " + formatter.format(table.getStartTime() == null ? table.getCreateTime() : table.getCreateTime()) +" (" + table.getState().toString() + ") " + (table.isTournament() ? "- Tournament":""));
-                    TableController tableController = getController(table.getId());
-                    if (tableController != null) {
-                        if ((table.isTournament() && !tableController.isTournamentStillValid()) ||
-                            (!table.isTournament() &&   !tableController.isMatchTableStillValid())) {
+                if (table.getState() != TableState.FINISHED
+                        && ((System.currentTimeMillis() - table.getStartTime().getTime()) / 1000) > 30) { // removeUserFromAllTablesAndChat only if table started longer than 30 seconds ago
+                    // removeUserFromAllTablesAndChat tables and games not valid anymore
+                    logger.debug(table.getId() + " [" + table.getName() + "] " + formatter.format(table.getStartTime() == null ? table.getCreateTime() : table.getCreateTime()) + " (" + table.getState().toString() + ") " + (table.isTournament() ? "- Tournament" : ""));
+                    getController(table.getId()).ifPresent(tableController -> {
+                        if ((table.isTournament() && !tableController.isTournamentStillValid())
+                                || (!table.isTournament() && !tableController.isMatchTableStillValid())) {
                             try {
                                 logger.warn("Removing unhealthy tableId " + table.getId());
                                 removeTable(table.getId());
@@ -413,7 +452,7 @@ public class TableManager {
                                 logger.error(e);
                             }
                         }
-                    }
+                    });
                 }
             } catch (Exception ex) {
                 logger.debug("Table Health check error tableId: " + table.getId());

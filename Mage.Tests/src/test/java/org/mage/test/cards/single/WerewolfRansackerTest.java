@@ -19,11 +19,11 @@ public class WerewolfRansackerTest extends CardTestPlayerBase {
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertLife(playerA, 20);
-        assertLife(playerB, 17);
         assertPermanentCount(playerB, "Ornithopter", 0);
         assertPermanentCount(playerA, "Afflicted Deserter", 0);
         assertPermanentCount(playerA, "Werewolf Ransacker", 1);
+        assertLife(playerA, 20);
+        assertLife(playerB, 17);
     }
 
     @Test
@@ -69,5 +69,5 @@ public class WerewolfRansackerTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Ornithopter", 0);
         assertPermanentCount(playerA, "Afflicted Deserter", 1);
         assertPermanentCount(playerA, "Werewolf Ransacker", 0);
-    }    
+    }
 }

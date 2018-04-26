@@ -31,7 +31,6 @@ import java.io.Serializable;
 import java.util.Objects;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.ManaType;
-import static mage.constants.ManaType.COLORLESS;
 import mage.filter.FilterMana;
 import mage.util.Copyable;
 import org.apache.log4j.Logger;
@@ -132,6 +131,35 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
         }
     }
 
+    public Mana(final ManaType manaType) {
+        Objects.requireNonNull(manaType, "The passed in ManaType can not be null");
+        switch (manaType) {
+            case GREEN:
+                green = 1;
+                break;
+            case RED:
+                red = 1;
+                break;
+            case BLACK:
+                black = 1;
+                break;
+            case BLUE:
+                blue = 1;
+                break;
+            case WHITE:
+                white = 1;
+                break;
+            case COLORLESS:
+                colorless = 1;
+                break;
+            case GENERIC:
+                generic = 1;
+                break;
+            default:
+                throw new IllegalArgumentException("Unknown manaType: " + manaType);
+        }
+    }
+
     /**
      * Creates a {@link Mana} object with the passed in {@code num} of Red mana.
      * {@code num} can not be a negative value. Negative values will be logged
@@ -223,6 +251,18 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
     }
 
     /**
+     * Creates a {@link Mana} object with the passed in {@code num} of Any mana.
+     * {@code num} can not be a negative value. Negative values will be logged
+     * and set to 0.
+     *
+     * @param num value of Any mana to create.
+     * @return a {@link Mana} object with the passed in {@code num} of Any mana.
+     */
+    public static Mana AnyMana(int num) {
+        return new Mana(0, 0, 0, 0, 0, 0, notNegative(num, "Any"), 0);
+    }
+
+    /**
      * Adds mana from the passed in {@link Mana} object to this object.
      *
      * @param mana mana to add to this object.
@@ -236,6 +276,38 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
         generic += mana.getGeneric();
         colorless += mana.getColorless();
         any += mana.getAny();
+    }
+
+    /**
+     * Increases the given mana by one.
+     *
+     * @param manaType
+     */
+    public void increase(ManaType manaType) {
+        switch (manaType) {
+            case BLACK:
+                black++;
+                break;
+            case BLUE:
+                blue++;
+                break;
+            case COLORLESS:
+                colorless++;
+                break;
+            case GENERIC:
+                generic++;
+                break;
+            case GREEN:
+                green++;
+                break;
+            case RED:
+                red++;
+                break;
+            case WHITE:
+                white++;
+                break;
+        }
+
     }
 
     /**
@@ -444,27 +516,48 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
     public String toString() {
         StringBuilder sbMana = new StringBuilder();
         if (generic > 0) {
-            sbMana.append("{").append(Integer.toString(generic)).append("}");
+            sbMana.append('{').append(Integer.toString(generic)).append('}');
         }
-        for (int i = 0; i < colorless; i++) {
+        if (colorless >= 20) { 
+            sbMana.append(Integer.toString(colorless)).append("{C}");
+        }
+        if (white >= 20) { 
+            sbMana.append(Integer.toString(white)).append("{W}");
+        }
+        if (blue >= 20) { 
+            sbMana.append(Integer.toString(blue)).append("{U}");
+        }
+        if (black >= 20) { 
+            sbMana.append(Integer.toString(black)).append("{B}");
+        }
+        if (red >= 20) { 
+            sbMana.append(Integer.toString(red)).append("{R}");
+        }
+        if (green >= 20) { 
+            sbMana.append(Integer.toString(green)).append("{G}");
+        }
+        if (any >= 20) { 
+            sbMana.append(Integer.toString(any)).append("{Any}");
+        }
+        for (int i = 0; i < colorless && colorless < 20; i++) {
             sbMana.append("{C}");
         }
-        for (int i = 0; i < red; i++) {
-            sbMana.append("{R}");
-        }
-        for (int i = 0; i < green; i++) {
-            sbMana.append("{G}");
-        }
-        for (int i = 0; i < blue; i++) {
-            sbMana.append("{U}");
-        }
-        for (int i = 0; i < white; i++) {
+        for (int i = 0; i < white && white < 20; i++) {
             sbMana.append("{W}");
         }
-        for (int i = 0; i < black; i++) {
+        for (int i = 0; i < blue && blue < 20; i++) {
+            sbMana.append("{U}");
+        }
+        for (int i = 0; i < black && black < 20; i++) {
             sbMana.append("{B}");
         }
-        for (int i = 0; i < any; i++) {
+        for (int i = 0; i < red && red < 20; i++) {
+            sbMana.append("{R}");
+        }
+        for (int i = 0; i < green && green < 20; i++) {
+            sbMana.append("{G}");
+        }
+        for (int i = 0; i < any && any < 20; i++) {
             sbMana.append("{Any}");
         }
         return sbMana.toString();
@@ -815,14 +908,20 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
         return false;
     }
 
+    public boolean containsAny(final Mana mana) {
+        return containsAny(mana, false);
+    }
+
     /**
-     * Returns if this objects mana contains any mana the same as the passed in
-     * {@link Mana}'s mana.
+     * Returns if this objects mana contains any coloured mana the same as the
+     * passed in {@link Mana}'s mana.
      *
      * @param mana the mana to check for
-     * @return true if this contains any of the same type of mana that this has
+     * @param includeColorless also check for colorless
+     * @return true if this contains any of the same type of coloured mana that
+     * this has
      */
-    public boolean containsAny(final Mana mana) {
+    public boolean containsAny(final Mana mana, boolean includeColorless) {
         if (mana.black > 0 && this.black > 0) {
             return true;
         } else if (mana.blue > 0 && this.blue > 0) {
@@ -833,7 +932,9 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
             return true;
         } else if (mana.green > 0 && this.green > 0) {
             return true;
-        } else if (mana.colorless > 0 && this.colorless > 0) {
+        } else if (mana.colorless > 0 && this.colorless > 0 && includeColorless) {
+            return true;
+        } else if (mana.any > 0 && this.count() > 0){
             return true;
         }
 
@@ -849,19 +950,19 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      * in {@link ColoredManaSymbol}.
      */
     public int getColor(final ColoredManaSymbol color) {
-        if (color.equals(ColoredManaSymbol.G)) {
+        if (color == ColoredManaSymbol.G) {
             return green;
         }
-        if (color.equals(ColoredManaSymbol.R)) {
+        if (color == ColoredManaSymbol.R) {
             return red;
         }
-        if (color.equals(ColoredManaSymbol.B)) {
+        if (color == ColoredManaSymbol.B) {
             return black;
         }
-        if (color.equals(ColoredManaSymbol.U)) {
+        if (color == ColoredManaSymbol.U) {
             return blue;
         }
-        if (color.equals(ColoredManaSymbol.W)) {
+        if (color == ColoredManaSymbol.W) {
             return white;
         }
         return 0;

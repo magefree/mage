@@ -40,7 +40,6 @@ import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.PermanentToken;
 import mage.players.Player;
 import mage.util.CardUtil;
 
@@ -49,6 +48,12 @@ import mage.util.CardUtil;
  * Returns the exiled cards/permanents as source leaves battlefield
  *
  * Uses no stack
+ *
+ * 11/4/2015: In a multiplayer game, if Grasp of Fate's owner leaves the game,
+ * the exiled cards will return to the battlefield. Because the one-shot effect
+ * that returns the cards isn't an ability that goes on the stack, it won't
+ * cease to exist along with the leaving player's spells and abilities on the
+ * stack.
  *
  * @author LevelX2
  */
@@ -107,16 +112,29 @@ class ReturnExiledPermanentsEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
         if (sourceObject != null && controller != null) {
-            int zoneChangeCounter = (sourceObject instanceof PermanentToken) ? source.getSourceObjectZoneChangeCounter() : source.getSourceObjectZoneChangeCounter() - 1;
-            UUID exileZone = CardUtil.getExileZoneId(game, source.getSourceId(), zoneChangeCounter);
-            if (exileZone != null) {
-                ExileZone exile = game.getExile().getExileZone(exileZone);
-                if (exile != null) {
-                    controller.moveCards(new LinkedHashSet<>(exile.getCards(game)), Zone.BATTLEFIELD, source, game, false, false, true, null);
-                }
-                return true;
+            ExileZone exile = getExileIfPossible(game, source);
+            if (exile != null) {
+                return controller.moveCards(new LinkedHashSet<>(exile.getCards(game)), Zone.BATTLEFIELD, source, game, false, false, true, null);
             }
         }
         return false;
+    }
+
+    private ExileZone getExileIfPossible(final Game game, final Ability source) {
+        UUID exileZone = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
+
+        if (exileZone != null) {
+            ExileZone exile = game.getExile().getExileZone(exileZone);
+            if (exile == null) {
+                // try without ZoneChangeCounter - that is useful for tokens
+                exileZone = CardUtil.getCardExileZoneId(game, source);
+                if (exileZone != null) {
+                    return game.getExile().getExileZone(exileZone);
+                }
+            }
+            return exile;
+        }
+
+        return null;
     }
 }

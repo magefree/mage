@@ -27,7 +27,6 @@
  */
 package mage.cards;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import mage.MageObject;
@@ -39,20 +38,22 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.counters.Counters;
+import mage.filter.FilterMana;
 import mage.game.Game;
+import mage.game.GameState;
 import mage.game.permanent.Permanent;
 
 public interface Card extends MageObject {
 
     UUID getOwnerId();
 
-    int getCardNumber();
+    String getCardNumber();
 
     Rarity getRarity();
 
     void setOwnerId(UUID ownerId);
 
-    public Abilities<Ability> getAbilities(Game game);
+    Abilities<Ability> getAbilities(Game game);
 
     void setSpellAbility(SpellAbility ability);
 
@@ -65,6 +66,8 @@ public interface Card extends MageObject {
     String getExpansionSetCode();
 
     String getTokenSetCode();
+
+    String getTokenDescriptor();
 
     void checkForCountersToAdd(Permanent permanent, Game game);
 
@@ -82,7 +85,9 @@ public interface Card extends MageObject {
 
     boolean isSplitCard();
 
-    boolean canTransform();
+    boolean isTransformable();
+
+    void setTransformable(boolean transformable);
 
     Card getSecondCardFace();
 
@@ -111,7 +116,7 @@ public interface Card extends MageObject {
      */
     boolean moveToZone(Zone zone, UUID sourceId, Game game, boolean flag);
 
-    boolean moveToZone(Zone zone, UUID sourceId, Game game, boolean flag, ArrayList<UUID> appliedEffects);
+    boolean moveToZone(Zone zone, UUID sourceId, Game game, boolean flag, List<UUID> appliedEffects);
 
     /**
      * Moves the card to an exile zone
@@ -124,7 +129,7 @@ public interface Card extends MageObject {
      */
     boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game);
 
-    boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game, ArrayList<UUID> appliedEffects);
+    boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game, List<UUID> appliedEffects);
 
     boolean cast(Game game, Zone fromZone, SpellAbility ability, UUID controllerId);
 
@@ -136,11 +141,11 @@ public interface Card extends MageObject {
 
     boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId, boolean tapped, boolean facedown);
 
-    boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId, boolean tapped, boolean facedown, ArrayList<UUID> appliedEffects);
+    boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId, boolean tapped, boolean facedown, List<UUID> appliedEffects);
+
+    void setZone(Zone zone, Game game);
 
     List<Mana> getMana();
-
-    void build();
 
     /**
      *
@@ -150,13 +155,11 @@ public interface Card extends MageObject {
 
     Counters getCounters(Game game);
 
-    void addCounters(String name, int amount, Game game);
+    Counters getCounters(GameState state);
 
-    void addCounters(String name, int amount, Game game, ArrayList<UUID> appliedEffects);
+    boolean addCounters(Counter counter, Ability source, Game game);
 
-    void addCounters(Counter counter, Game game);
-
-    void addCounters(Counter counter, Game game, ArrayList<UUID> appliedEffects);
+    boolean addCounters(Counter counter, Ability source, Game game, List<UUID> appliedEffects);
 
     void removeCounters(String name, int amount, Game game);
 
@@ -167,10 +170,22 @@ public interface Card extends MageObject {
 
     /**
      *
-     * @return The main card of a split half card, otherwise thae card itself is
+     * @return The main card of a split half card, otherwise the card itself is
      * returned
      */
     Card getMainCard();
 
-    void setZone(Zone zone, Game game);
+    /**
+     * Gets the colors that are in the casting cost but also in the rules text
+     * as far as not included in reminder text.
+     *
+     * @return
+     */
+    FilterMana getColorIdentity();
+
+    List<UUID> getAttachments();
+
+    boolean addAttachment(UUID permanentId, Game game);
+
+    boolean removeAttachment(UUID permanentId, Game game);
 }

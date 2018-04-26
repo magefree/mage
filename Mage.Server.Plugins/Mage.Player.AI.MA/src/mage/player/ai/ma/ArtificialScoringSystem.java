@@ -7,6 +7,7 @@ import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -14,7 +15,7 @@ import mage.game.permanent.Permanent;
 /**
  * @author ubeefx, nantuko
  */
-public class ArtificialScoringSystem {
+public final class ArtificialScoringSystem {
 
     public static final int WIN_GAME_SCORE = 100000000;
     public static final int LOSE_GAME_SCORE = -WIN_GAME_SCORE;
@@ -27,7 +28,7 @@ public class ArtificialScoringSystem {
 
     public static int getCardDefinitionScore(final Game game, final Card card) {
         int value = 3; //TODO: add new rating system card value
-        if (card.getCardType().contains(CardType.LAND)) {
+        if (card.isLand()) {
             int score = (int) ((value / 2.0f) * 50);
             //TODO: check this for "any color" lands
             //TODO: check this for dual and filter lands
@@ -55,7 +56,7 @@ public class ArtificialScoringSystem {
             //score + =cardDefinition.getActivations().size()*50;
             //score += cardDefinition.getManaActivations().size()*80;
         } else {
-            if (permanent.getSubtype().contains("Equipment")) {
+            if (permanent.getSubtype(game).contains(SubType.EQUIPMENT)) {
                 score += 100;
             }
         }
@@ -64,8 +65,8 @@ public class ArtificialScoringSystem {
 
     public static int getVariablePermanentScore(final Game game, final Permanent permanent) {
 
-        int score = permanent.getCounters().getCount(CounterType.CHARGE) * 30;
-        score += permanent.getCounters().getCount(CounterType.LEVEL) * 30;
+        int score = permanent.getCounters(game).getCount(CounterType.CHARGE) * 30;
+        score += permanent.getCounters(game).getCount(CounterType.LEVEL) * 30;
         score -= permanent.getDamage() * 2;
         if (!canTap(permanent)) {
             score += getTappedScore(permanent);
@@ -91,7 +92,7 @@ public class ArtificialScoringSystem {
                             Outcome outcome = effect.getOutcome();
                             if (outcome.isGood()) {
                                 enchantments++;
-                            } else if (!outcome.equals(Outcome.Detriment)) {
+                            } else if (outcome != Outcome.Detriment) {
                                 enchantments--;
                             }
                         }
@@ -102,7 +103,7 @@ public class ArtificialScoringSystem {
             }
             score += equipments * 50 + enchantments * 100;
 
-            if (!permanent.canAttack(game)) {
+            if (!permanent.canAttack(null, game)) {
                 score -= 100;
             }
 

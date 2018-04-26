@@ -79,10 +79,7 @@ public class Exile implements Serializable, Copyable<Exile> {
     }
 
     private ExileZone createZone(UUID id, String name, boolean hidden) {
-        if (!exileZones.containsKey(id)) {
-            ExileZone exile = new ExileZone(id, name, hidden);
-            exileZones.put(id, exile);
-        }
+        exileZones.putIfAbsent(id, new ExileZone(id, name, hidden));
         return exileZones.get(id);
     }
 
@@ -119,6 +116,15 @@ public class Exile implements Serializable, Copyable<Exile> {
     @Override
     public Exile copy() {
         return new Exile(this);
+    }
+
+    public boolean containsId(UUID cardId, Game game) {
+        for (Card card : getAllCards(game)) {
+            if (card.getId().equals(cardId)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void clear() {

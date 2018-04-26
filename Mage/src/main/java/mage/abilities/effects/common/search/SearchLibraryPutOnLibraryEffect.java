@@ -82,14 +82,14 @@ public class SearchLibraryPutOnLibraryEffect extends SearchEffect {
                 controller.revealCards(sourceObject.getIdName(), foundCards, game);
             }
             if (forceShuffle) {
-                controller.shuffleLibrary(game);
+                controller.shuffleLibrary(source, game);
             }
             controller.putCardsOnTopOfLibrary(foundCards, game, source, reveal);
             return true;
         }
         // shuffle
         if (forceShuffle) {
-            controller.shuffleLibrary(game);
+            controller.shuffleLibrary(source, game);
         }
         return false;
     }

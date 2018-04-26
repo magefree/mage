@@ -44,14 +44,14 @@ import java.io.ObjectStreamException;
 
 public class TargetPermanenToughnessValue implements DynamicValue {
     
-    private static final TargetPermanenToughnessValue fINSTANCE =  new TargetPermanenToughnessValue();
+    private static final TargetPermanenToughnessValue instance =  new TargetPermanenToughnessValue();
     
     private Object readResolve() throws ObjectStreamException {
-        return fINSTANCE;
+        return instance;
     }   
     
     public static TargetPermanenToughnessValue getInstance() {
-        return fINSTANCE;
+        return instance;
     }
     
     @Override

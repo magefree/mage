@@ -41,8 +41,8 @@ public class OathOfLiegesTest extends CardTestPlayerBase {
     @Test
     public void testSearchLandOwner() {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
-        // At the beginning of each player's upkeep, that player chooses target player who controls more lands than he or she does and is his or her opponent.
-        // The first player may search his or her library for a basic land card, put that card onto the battlefield, then shuffle his or her library.
+        // At the beginning of each player's upkeep, that player chooses target player who controls more lands than he or she does and is their opponent.
+        // The first player may search their library for a basic land card, put that card onto the battlefield, then shuffle their library.
         addCard(Zone.HAND, playerA, "Oath of Lieges", 1); // {1}{W}
         addCard(Zone.LIBRARY, playerA, "Plains", 1);
 
@@ -63,8 +63,8 @@ public class OathOfLiegesTest extends CardTestPlayerBase {
     @Test
     public void testSearchLandOpponent() {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
-        // At the beginning of each player's upkeep, that player chooses target player who controls more lands than he or she does and is his or her opponent.
-        // The first player may search his or her library for a basic land card, put that card onto the battlefield, then shuffle his or her library.
+        // At the beginning of each player's upkeep, that player chooses target player who controls more lands than he or she does and is their opponent.
+        // The first player may search their library for a basic land card, put that card onto the battlefield, then shuffle their library.
         addCard(Zone.HAND, playerA, "Oath of Lieges", 1); // {1}{W}
 
         addCard(Zone.BATTLEFIELD, playerB, "Plains", 1);
@@ -85,8 +85,8 @@ public class OathOfLiegesTest extends CardTestPlayerBase {
     @Test
     public void testSearchLandOwnerCopy() {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
-        // At the beginning of each player's upkeep, that player chooses target player who controls more lands than he or she does and is his or her opponent.
-        // The first player may search his or her library for a basic land card, put that card onto the battlefield, then shuffle his or her library.
+        // At the beginning of each player's upkeep, that player chooses target player who controls more lands than he or she does and is their opponent.
+        // The first player may search their library for a basic land card, put that card onto the battlefield, then shuffle their library.
         addCard(Zone.HAND, playerA, "Oath of Lieges", 1); // {1}{W}
         addCard(Zone.LIBRARY, playerA, "Plains", 3);
         addCard(Zone.HAND, playerA, "Plains", 1);

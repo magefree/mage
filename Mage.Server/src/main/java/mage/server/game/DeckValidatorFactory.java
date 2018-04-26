@@ -28,37 +28,35 @@
 
 package mage.server.game;
 
+import mage.cards.decks.DeckValidator;
+import org.apache.log4j.Logger;
+
 import java.lang.reflect.Constructor;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
-import mage.cards.decks.DeckValidator;
-import org.apache.log4j.Logger;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DeckValidatorFactory {
+public enum DeckValidatorFactory {
 
-    private static final DeckValidatorFactory INSTANCE = new DeckValidatorFactory();
+    instance;
     private static final Logger logger = Logger.getLogger(DeckValidatorFactory.class);
 
     private final Map<String, Class> deckTypes = new LinkedHashMap<>();
 
-    public static DeckValidatorFactory getInstance() {
-        return INSTANCE;
-    }
+
 
     private DeckValidatorFactory() {}
 
     public DeckValidator createDeckValidator(String deckType) {
 
         DeckValidator validator;
-        Constructor<?> con;
         try {
-            con = deckTypes.get(deckType).getConstructor(new Class[]{});
-            validator = (DeckValidator)con.newInstance(new Object[] {});
+            Constructor<?> con = deckTypes.get(deckType).getConstructor();
+            validator = (DeckValidator)con.newInstance();
         } catch (Exception ex) {
             logger.fatal("DeckValidatorFactory error", ex);
             return null;

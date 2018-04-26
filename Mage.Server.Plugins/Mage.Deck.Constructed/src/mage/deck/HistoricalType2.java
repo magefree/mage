@@ -51,11 +51,11 @@ public class HistoricalType2 extends Constructed {
         {"TMP", "STH", "EXO", "USG", "ULG", "6ED", "UDS"},
         //  8th Standard: Urza's Saga, Urza's Legacy, 6th, Urza's Destiny,
         //                Mercadian Masques, Nemesis, Prophecy.
-        {"USG", "ULG", "6ED", "UDS", "MMQ", "NMS", "PCY"},
+        {"USG", "ULG", "6ED", "UDS", "MMQ", "NEM", "PCY"},
         //  9th Standard
-        {"6ED", "MMQ", "NMS", "PCY", "INV", "PLS"},
+        {"6ED", "MMQ", "NEM", "PCY", "INV", "PLS"},
         //  10th Standard
-        {"7ED", "MMQ", "NMS", "PCY", "INV", "PLS", "APC"},
+        {"7ED", "MMQ", "NEM", "PCY", "INV", "PLS", "APC"},
         // 11th Standard
         {"7ED", "INV", "APC", "PLS", "ODY", "TOR", "JUD"},
         // 12th Standard
@@ -108,6 +108,15 @@ public class HistoricalType2 extends Constructed {
      */
     @Override
     public boolean validate(Deck deck) {
+
+        // debug code for finding set info
+//        System.out.println();
+//        for (ExpansionSet set : Sets.getInstance().values()) {
+//            if (set.getSetType() == SetType.CORE || set.getSetType() == SetType.EXPANSION) {
+//                System.out.println("Set:\t" + set.getCode() + "\t" + set.getReleaseDate() + "\t" + set.getName() + "\t" + set.getBlockName());
+//            }
+//        }
+
 
         Map<String, String> leastInvalid = null;
 

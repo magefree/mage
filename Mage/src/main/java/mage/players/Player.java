@@ -57,11 +57,15 @@ import mage.choices.Choice;
 import mage.constants.AbilityType;
 import mage.constants.ManaType;
 import mage.constants.Outcome;
+import mage.constants.PlanarDieRoll;
 import mage.constants.PlayerAction;
 import mage.constants.RangeOfInfluence;
 import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.counters.Counters;
+import mage.designations.Designation;
+import mage.designations.DesignationType;
+import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.Graveyard;
 import mage.game.Table;
@@ -77,7 +81,6 @@ import mage.target.TargetAmount;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
 import mage.util.Copyable;
-import mage.util.MessageToClient;
 
 /**
  *
@@ -109,15 +112,26 @@ public interface Player extends MageItem, Copyable<Player> {
 
     void initLife(int life);
 
-    void setLife(int life, Game game);
+    void setLife(int life, Game game, Ability source);
 
-    int loseLife(int amount, Game game);
+    void setLife(int life, Game game, UUID sourceId);
 
-    int gainLife(int amount, Game game);
+    /**
+     *
+     * @param amount amount of life loss
+     * @param game
+     * @param atCombat was the source combat damage
+     * @return
+     */
+    int loseLife(int amount, Game game, boolean atCombat);
+
+    int gainLife(int amount, Game game, Ability source);
+
+    int gainLife(int amount, Game game, UUID sourceId);
 
     int damage(int damage, UUID sourceId, Game game, boolean combatDamage, boolean preventable);
 
-    int damage(int damage, UUID sourceId, Game game, boolean combatDamage, boolean preventable, ArrayList<UUID> appliedEffects);
+    int damage(int damage, UUID sourceId, Game game, boolean combatDamage, boolean preventable, List<UUID> appliedEffects);
 
     // to handle rule changing effects (613.10)
     boolean isCanLoseLife();
@@ -132,9 +146,11 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean canPayLifeCost();
 
-    void setCanPaySacrificeCost(boolean canPaySacrificeCost);
+    void setCanPaySacrificeCostFilter(FilterPermanent filter);
 
-    boolean canPaySacrificeCost();
+    FilterPermanent getSacrificeCostFilter();
+
+    boolean canPaySacrificeCost(Permanent permanent, UUID sourceId, UUID controllerId, Game game);
 
     void setLifeTotalCanChange(boolean lifeTotalCanChange);
 
@@ -193,6 +209,8 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean getPassedUntilStackResolved();
 
+    boolean getPassedUntilEndStepBeforeMyTurn();
+
     boolean getPassedAllTurns();
 
     AbilityType getJustActivatedType();
@@ -200,6 +218,8 @@ public interface Player extends MageItem, Copyable<Player> {
     void setJustActivatedType(AbilityType abilityType);
 
     boolean hasLost();
+
+    boolean hasDrew();
 
     boolean hasWon();
 
@@ -333,11 +353,11 @@ public interface Player extends MageItem, Copyable<Player> {
      */
     void reset();
 
-    void shuffleLibrary(Game game);
+    void shuffleLibrary(Ability source, Game game);
 
     int drawCards(int num, Game game);
 
-    int drawCards(int num, Game game, ArrayList<UUID> appliedEffects);
+    int drawCards(int num, Game game, List<UUID> appliedEffects);
 
     boolean cast(SpellAbility ability, Game game, boolean noMana);
 
@@ -349,7 +369,7 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean removeFromBattlefield(Permanent permanent, Game game);
 
-    boolean putInGraveyard(Card card, Game game, boolean fromBattlefield);
+    boolean putInGraveyard(Card card, Game game);
 
     boolean removeFromGraveyard(Card card, Game game);
 
@@ -404,6 +424,16 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean flipCoin(Game game, ArrayList<UUID> appliedEffects);
 
+    int rollDice(Game game, int numSides);
+
+    int rollDice(Game game, ArrayList<UUID> appliedEffects, int numSides);
+
+    PlanarDieRoll rollPlanarDie(Game game);
+
+    PlanarDieRoll rollPlanarDie(Game game, ArrayList<UUID> appliedEffects);
+
+    PlanarDieRoll rollPlanarDie(Game game, ArrayList<UUID> appliedEffects, int numberChaosSides, int numberPlanarSides);
+
     @Deprecated
     void discard(int amount, Ability source, Game game);
 
@@ -419,6 +449,8 @@ public interface Player extends MageItem, Copyable<Player> {
 
     void lostForced(Game game);
 
+    void drew(Game game);
+
     void won(Game game);
 
     void leave();
@@ -428,6 +460,8 @@ public interface Player extends MageItem, Copyable<Player> {
     void abort();
 
     void abortReset();
+
+    void signalPlayerConcede();
 
     void skip();
 
@@ -481,7 +515,7 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean chooseUse(Outcome outcome, String message, Ability source, Game game);
 
-    boolean chooseUse(Outcome outcome, MessageToClient message, Ability source, Game game);
+    boolean chooseUse(Outcome outcome, String message, String secondMessage, String trueText, String falseText, Ability source, Game game);
 
     boolean choose(Outcome outcome, Choice choice, Game game);
 
@@ -495,6 +529,7 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param cards - list of cards that have to be moved
      * @param game - game
      * @param anyOrder - true if player can determine the order of the cards
+     * else random order
      * @param source - source ability
      * @return
      */
@@ -578,7 +613,9 @@ public interface Player extends MageItem, Copyable<Player> {
 
     LinkedHashMap<UUID, ActivatedAbility> getUseableActivatedAbilities(MageObject object, Zone zone, Game game);
 
-    void addCounters(Counter counter, Game game);
+    boolean addCounters(Counter counter, Game game);
+
+    void removeCounters(String name, int amount, Ability source, Game game);
 
     List<UUID> getAttachments();
 
@@ -634,39 +671,29 @@ public interface Player extends MageItem, Copyable<Player> {
      *
      * @param commanderId
      */
-    void setCommanderId(UUID commanderId);
+    void addCommanderId(UUID commanderId);
 
     /**
-     * Get the commanderId of the player
+     * Get the commanderIds of the player
      *
      * @return
      */
-    UUID getCommanderId();
+    Set<UUID> getCommandersIds();
 
     /**
      * Moves cards from one zone to another
      *
      * @param cards
-     * @param fromZone
      * @param toZone
      * @param source
      * @param game
      * @return
      */
-    @Deprecated
-    boolean moveCards(Cards cards, Zone fromZone, Zone toZone, Ability source, Game game);
-
-    @Deprecated
-    boolean moveCards(Card card, Zone fromZone, Zone toZone, Ability source, Game game);
-
-    @Deprecated
-    boolean moveCards(Set<Card> cards, Zone fromZone, Zone toZone, Ability source, Game game);
+    boolean moveCards(Cards cards, Zone toZone, Ability source, Game game);
 
     boolean moveCards(Card card, Zone toZone, Ability source, Game game);
 
-    boolean moveCards(Card card, Zone toZone, Ability source, Game game, boolean tapped, boolean faceDown, boolean byOwner, ArrayList<UUID> appliedEffects);
-
-    boolean moveCards(Cards cards, Zone toZone, Ability source, Game game);
+    boolean moveCards(Card card, Zone toZone, Ability source, Game game, boolean tapped, boolean faceDown, boolean byOwner, List<UUID> appliedEffects);
 
     boolean moveCards(Set<Card> cards, Zone toZone, Ability source, Game game);
 
@@ -686,7 +713,7 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param appliedEffects
      * @return
      */
-    boolean moveCards(Set<Card> cards, Zone toZone, Ability source, Game game, boolean tapped, boolean faceDown, boolean byOwner, ArrayList<UUID> appliedEffects);
+    boolean moveCards(Set<Card> cards, Zone toZone, Ability source, Game game, boolean tapped, boolean faceDown, boolean byOwner, List<UUID> appliedEffects);
 
     boolean moveCardsToExile(Card card, Ability source, Game game, boolean withName, UUID exileId, String exileZoneName);
 
@@ -715,7 +742,8 @@ public interface Player extends MageItem, Copyable<Player> {
 
     /**
      * Uses card.moveToExile and posts a inform message about moving the card to
-     * exile into the game log
+     * exile into the game log. Don't use this in replacement effects, because
+     * list of applied effects is not saved
      *
      * @param card
      * @param exileId exile zone id (optional)
@@ -753,7 +781,7 @@ public interface Player extends MageItem, Copyable<Player> {
 
     /**
      * Uses card.moveToZone and posts a inform message about moving the card to
-     * graveyard into the game log
+     * library into the game log
      *
      * @param card
      * @param sourceId
@@ -789,11 +817,11 @@ public interface Player extends MageItem, Copyable<Player> {
      * cost
      * @param costs alternate other costs you need to pay
      */
-    void setCastSourceIdWithAlternateMana(UUID sourceId, ManaCosts<ManaCost> manaCosts, mage.abilities.costs.Costs costs);
+    void setCastSourceIdWithAlternateMana(UUID sourceId, ManaCosts<ManaCost> manaCosts, Costs<Cost> costs);
 
     UUID getCastSourceIdWithAlternateMana();
 
-    ManaCosts getCastSourceIdManaCosts();
+    ManaCosts<ManaCost> getCastSourceIdManaCosts();
 
     Costs<Cost> getCastSourceIdCosts();
 
@@ -826,4 +854,11 @@ public interface Player extends MageItem, Copyable<Player> {
     boolean addTargets(Ability ability, Game game);
 
     String getHistory();
+
+    boolean hasDesignation(DesignationType designationName);
+
+    void addDesignation(Designation designation);
+
+    List<Designation> getDesignations();
+
 }

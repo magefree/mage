@@ -27,22 +27,17 @@
  */
 package mage.abilities.effects.common.continuous;
 
-import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.cards.repository.CardRepository;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements SourceEffect {
@@ -50,17 +45,25 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
     protected Token token;
     protected String type;
     protected boolean losePreviousTypes;
+    protected DynamicValue power = null;
+    protected DynamicValue toughness = null;
 
     public BecomesCreatureSourceEffect(Token token, String type, Duration duration) {
         this(token, type, duration, false, false);
     }
 
     public BecomesCreatureSourceEffect(Token token, String type, Duration duration, boolean losePreviousTypes, boolean characterDefining) {
+        this(token, type, duration, losePreviousTypes, characterDefining, null, null);
+    }
+
+    public BecomesCreatureSourceEffect(Token token, String type, Duration duration, boolean losePreviousTypes, boolean characterDefining, DynamicValue power, DynamicValue toughness) {
         super(duration, Outcome.BecomeCreature);
         this.characterDefining = characterDefining;
         this.token = token;
         this.type = type;
         this.losePreviousTypes = losePreviousTypes;
+        this.power = power;
+        this.toughness = toughness;
         setText();
     }
 
@@ -69,6 +72,12 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
         this.token = effect.token.copy();
         this.type = effect.type;
         this.losePreviousTypes = effect.losePreviousTypes;
+        if (effect.power != null) {
+            this.power = effect.power.copy();
+        }
+        if (effect.toughness != null) {
+            this.toughness = effect.toughness.copy();
+        }
     }
 
     @Override
@@ -99,19 +108,16 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
                         if (losePreviousTypes) {
                             permanent.getCardType().clear();
                         }
-                        if (token.getCardType().size() > 0) {
-                            for (CardType t : token.getCardType()) {
-                                if (!permanent.getCardType().contains(t)) {
-                                    permanent.getCardType().add(t);
-                                }
-                            }
+                        for (CardType t : token.getCardType()) {
+                            permanent.addCardType(t);
                         }
-                        if ("".equals(type) || type == null && permanent.getCardType().contains(CardType.LAND)) {
-                            permanent.getSubtype().retainAll(CardRepository.instance.getLandTypes());
+                        if (type != null && type.isEmpty() || type == null && permanent.isLand()) {
+                            permanent.getSubtype(game).retainAll(SubType.getLandTypes(false));
                         }
-                        if (token.getSubtype().size() > 0) {
-                            permanent.getSubtype().addAll(token.getSubtype());
+                        if (!token.getSubtype(game).isEmpty()) {
+                            permanent.getSubtype(game).addAll(token.getSubtype(game));
                         }
+                        permanent.setIsAllCreatureTypes(token.isAllCreatureTypes());
                     }
                     break;
                 case ColorChangingEffects_5:
@@ -123,29 +129,30 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
                     break;
                 case AbilityAddingRemovingEffects_6:
                     if (sublayer == SubLayer.NA) {
-                        if (token.getAbilities().size() > 0) {
-                            for (Ability ability : token.getAbilities()) {
-                                permanent.addAbility(ability, source.getSourceId(), game);
-                            }
+                        for (Ability ability : token.getAbilities()) {
+                            permanent.addAbility(ability, source.getSourceId(), game);
                         }
+
                     }
                     break;
                 case PTChangingEffects_7:
                     if ((sublayer == SubLayer.CharacteristicDefining_7a && isCharacterDefining())
                             || (sublayer == SubLayer.SetPT_7b && !isCharacterDefining())) {
-                        MageInt power = token.getPower();
-                        MageInt toughness = token.getToughness();
-                        if (power != null && toughness != null) {
-                            permanent.getPower().setValue(power.getValue());
-                            permanent.getToughness().setValue(toughness.getValue());
+                        if (power != null) {
+                            permanent.getPower().setValue(power.calculate(game, source, this));
+                        } else if (token.getPower() != null) {
+                            permanent.getPower().setValue(token.getPower().getValue());
+                        }
+                        if (toughness != null) {
+                            permanent.getToughness().setValue(toughness.calculate(game, source, this));
+                        } else if (token.getToughness() != null) {
+                            permanent.getToughness().setValue(token.getToughness().getValue());
                         }
                     }
             }
             return true;
-        } else {
-            if (duration.equals(Duration.Custom)) {
-                this.discard();
-            }
+        } else if (duration == Duration.Custom) {
+            this.discard();
         }
         return false;
     }
@@ -156,7 +163,7 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
     }
 
     private void setText() {
-        if (type != null && type.length() > 0) {
+        if (type != null && !type.isEmpty()) {
             staticText = duration.toString() + " {this} becomes a " + token.getDescription() + " that's still a " + this.type;
         } else {
             staticText = duration.toString() + " {this} becomes a " + token.getDescription();

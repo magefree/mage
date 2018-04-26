@@ -14,7 +14,7 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class ArrowUtil {
+public final class ArrowUtil {
 
     private ArrowUtil() {}
 
@@ -29,6 +29,23 @@ public class ArrowUtil {
                     Point target = permanent.getLocationOnScreen();
                     target.translate(-parentPoint.x, -parentPoint.y);
                     ArrowBuilder.getBuilder().addArrow(data.gameId, (int) me.getX() + 35, (int) me.getY(), (int) target.getX() + 40, (int) target.getY() + 10, Color.green, ArrowBuilder.Type.PAIRED);
+                }
+            }
+        }
+    }
+
+    public static void drawArrowsForBandedCards(TransferData data, Point parentPoint) {
+        if (data.card.getBandedCards() != null && !data.card.getBandedCards().isEmpty()) {
+            Point me = new Point(data.locationOnScreen);
+            me.translate(-parentPoint.x, -parentPoint.y);
+            for (PlayAreaPanel pa : MageFrame.getGame(data.gameId).getPlayers().values()) {
+                for (UUID uuid : data.card.getBandedCards()) {
+                    MagePermanent permanent = pa.getBattlefieldPanel().getPermanents().get(uuid);
+                    if (permanent != null) {
+                        Point target = permanent.getLocationOnScreen();
+                        target.translate(-parentPoint.x, -parentPoint.y);
+                        ArrowBuilder.getBuilder().addArrow(data.gameId, (int) me.getX() + 55, (int) me.getY() + 25, (int) target.getX() + 60, (int) target.getY() + 35, Color.yellow, ArrowBuilder.Type.BANDED);
+                    }
                 }
             }
         }

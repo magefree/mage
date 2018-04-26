@@ -29,6 +29,7 @@ package org.mage.test.cards.rules;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.counters.CounterType;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -75,7 +76,7 @@ public class CantCastTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
 
-        // Blaze deals X damage to target creature or player.
+        // Blaze deals X damage to any target.
         addCard(Zone.HAND, playerA, "Blaze", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Blaze", playerA);
@@ -101,7 +102,7 @@ public class CantCastTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
 
-        // Blaze deals X damage to target creature or player.
+        // Blaze deals X damage to any target.
         addCard(Zone.HAND, playerA, "Blaze", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Blaze", playerB);
@@ -152,7 +153,7 @@ public class CantCastTest extends CardTestPlayerBase {
         // Your opponents can't block with creatures with even converted mana costs.
         addCard(Zone.BATTLEFIELD, playerB, "Void Winnower");
 
-        // Metalcraft - {T}: Add one mana of any color to your mana pool. Activate this ability only if you control three or more artifacts.
+        // Metalcraft - {T}: Add one mana of any color. Activate this ability only if you control three or more artifacts.
         addCard(Zone.HAND, playerA, "Mox Opal", 1); // {0}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mox Opal");
@@ -191,6 +192,75 @@ public class CantCastTest extends CardTestPlayerBase {
         assertHandCount(playerA, "Panic", 3);
         assertHandCount(playerA, 4);
         assertGraveyardCount(playerA, "Panic", 1);
+
+    }
+
+    /**
+     * I "Aether Vialed" (Aether Vial) an Ethersworn Canonist into the
+     * battlefield in response to a colored spell(an Elf). The Canonist entered
+     * the battlefield. Then, my oponente used Abrupt Decay to destroy it and
+     * continue to play spells normaly. Ethersworn Canonist effect should
+     * imediately effect the game as it entered the battlefield, and still count
+     * spells cast earlier in the turn. In other words, my oponent shouldn't be
+     * able to cast anymore colored spells.
+     */
+    @Test
+    public void testEtherswornCanonist() {
+        // Each player who has cast a nonartifact spell this turn can't cast additional nonartifact spells.
+        addCard(Zone.HAND, playerA, "Ethersworn Canonist", 4); // Creaturre - {1}{W}
+
+        // At the beginning of your upkeep, you may put a charge counter on Aether Vial.
+        // {T}: You may put a creature card with converted mana cost equal to the number of charge counters on Aether Vial from your hand onto the battlefield.
+        addCard(Zone.BATTLEFIELD, playerA, "Aether Vial", 1);
+        // addCounters(1, PhaseStep.UPKEEP, playerA, "Aether Vial", CounterType.CHARGE, 1);
+
+        addCard(Zone.HAND, playerB, "Llanowar Elves", 1); // Creature {G}
+        addCard(Zone.BATTLEFIELD, playerB, "Swamp", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Forest", 2);
+        // Abrupt Decay can't be countered by spells or abilities.
+        // Destroy target nonland permanent with converted mana cost 3 or less.
+        addCard(Zone.HAND, playerB, "Abrupt Decay", 1); // {B}{G}
+
+        castSpell(4, PhaseStep.PRECOMBAT_MAIN, playerB, "Llanowar Elves");
+        activateAbility(4, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: You");
+        setChoice(playerB, "Ethersworn Canonist");
+        castSpell(4, PhaseStep.POSTCOMBAT_MAIN, playerB, "Abrupt Decay", "Ethersworn Canonist");
+        setStopAt(4, PhaseStep.END_TURN);
+        execute();
+
+        assertCounterCount(playerA, "Aether Vial", CounterType.CHARGE, 2);
+        assertPermanentCount(playerB, "Llanowar Elves", 1);
+
+        assertPermanentCount(playerA, "Ethersworn Canonist", 1);
+        assertHandCount(playerB, "Abrupt Decay", 1);
+
+    }
+
+    /**
+     * Alhammarret, High Arbiter's ability doesn't work Despite naming the
+     * Damnation in my hand, I was able to cast it next turn without issue.
+     */
+    @Test
+    public void testAlhammarret() {
+        // Flying
+        // As Alhammarret, High Arbiter enters the battlefield, each opponent reveals their hand. You choose the name of a nonland card revealed this way.
+        // Your opponents can't cast spells with the chosen name.
+        addCard(Zone.HAND, playerA, "Alhammarret, High Arbiter", 4); // Creature - {5}{U}{U}
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 7);
+
+        // Destroy all creatures. They can't be regenerated.
+        addCard(Zone.HAND, playerB, "Damnation", 1); // SORCERY {2}{B}{B}
+        addCard(Zone.BATTLEFIELD, playerB, "Swamp", 4);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Alhammarret, High Arbiter");
+        setChoice(playerA, "Damnation");
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Damnation");
+        setStopAt(2, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Alhammarret, High Arbiter", 1);
+        assertHandCount(playerB, "Damnation", 1);
 
     }
 

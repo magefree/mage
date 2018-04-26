@@ -63,7 +63,7 @@ public class RegenerateAllEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
             RegenerateTargetEffect regenEffect = new RegenerateTargetEffect();
-            regenEffect.setTargetPointer(new FixedTarget(permanent.getId()));
+            regenEffect.setTargetPointer(new FixedTarget(permanent, game));
             game.addEffect(regenEffect, source);
         }
         return true;

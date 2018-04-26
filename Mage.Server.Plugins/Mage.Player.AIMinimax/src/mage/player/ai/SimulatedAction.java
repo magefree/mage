@@ -60,7 +60,7 @@ public class SimulatedAction {
     }
 
     public boolean usesStack() {
-        if (abilities != null && abilities.size() > 0) {
+        if (abilities != null && !abilities.isEmpty()) {
             return abilities.get(abilities.size() -1).isUsesStack();
         }
         return true;

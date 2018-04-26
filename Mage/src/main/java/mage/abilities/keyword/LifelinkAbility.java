@@ -40,14 +40,14 @@ import java.io.ObjectStreamException;
  */
 public class LifelinkAbility extends StaticAbility implements MageSingleton {
 
-    private static final LifelinkAbility fINSTANCE =  new LifelinkAbility();
+    private static final LifelinkAbility instance =  new LifelinkAbility();
 
     private Object readResolve() throws ObjectStreamException {
-        return fINSTANCE;
+        return instance;
     }
 
     public static LifelinkAbility getInstance() {
-        return fINSTANCE;
+        return instance;
     }
 
     private LifelinkAbility() {
@@ -56,12 +56,12 @@ public class LifelinkAbility extends StaticAbility implements MageSingleton {
 
     @Override
     public String getRule() {
-        return "Lifelink <i>(Damage dealt by this creature also causes you to gain that much life.)</i>";
+        return "lifelink <i>(Damage dealt by this creature also causes you to gain that much life.)</i>";
     }
 
     @Override
     public LifelinkAbility copy() {
-        return fINSTANCE;
+        return instance;
     }
 
 }

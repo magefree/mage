@@ -61,7 +61,7 @@ public class PreventAllDamageToPlayersEffect extends PreventionEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (super.applies(event, source, game) && event.getType().equals(GameEvent.EventType.DAMAGE_PLAYER)) {
+        if (super.applies(event, source, game) && event.getType() == GameEvent.EventType.DAMAGE_PLAYER) {
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null && game.getState().getPlayersInRange(controller.getId(), game).contains(event.getTargetId())) {
                 return true;
@@ -76,7 +76,7 @@ public class PreventAllDamageToPlayersEffect extends PreventionEffectImpl {
             sb.append("combat ");
         }
         sb.append("damage that would be dealt to players");
-        if (duration.equals(Duration.EndOfTurn)) {
+        if (duration == Duration.EndOfTurn) {
             sb.append("  this turn");
         }
         return sb.toString();

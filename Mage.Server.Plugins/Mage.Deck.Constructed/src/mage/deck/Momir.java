@@ -57,7 +57,7 @@ public class Momir extends DeckValidator {
             valid = false;
         }
 
-        List<String> basicLandNames = new ArrayList<>(Arrays.asList("Forest", "Island", "Mountain", "Swamp", "Plains"));
+        List<String> basicLandNames = new ArrayList<>(Arrays.asList("Forest", "Island", "Mountain", "Swamp", "Plains", "Wastes"));
         for (Card card : deck.getCards()) {
             if (!basicLandNames.contains(card.getName())) {
                 invalid.put(card.getName(), "Only basic lands are allowed");

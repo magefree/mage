@@ -43,7 +43,7 @@ public class TargetConvertedManaCost implements DynamicValue {
     public int calculate(Game game, Ability source, Effect effect) {
         Card card = game.getCard(source.getFirstTarget());
         if (card != null) {
-            return card.getManaCost().convertedManaCost();
+            return card.getConvertedManaCost();
         }
         return 0;
     }

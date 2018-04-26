@@ -47,7 +47,7 @@ public class MageObjectReference implements Comparable<MageObjectReference>, Ser
     private static final Logger logger = Logger.getLogger(MageObjectReference.class);
 
     private final UUID sourceId;
-    private int zoneChangeCounter;
+    private final int zoneChangeCounter;
 
     public MageObjectReference(MageObject mageObject, Game game) {
         this.sourceId = mageObject.getId();
@@ -81,9 +81,9 @@ public class MageObjectReference implements Comparable<MageObjectReference>, Ser
             if (game.getPlayerList().contains(sourceId)) {
                 this.zoneChangeCounter = 0;
             } else {
-                logger.error("The provided sourceId is not connected to an object in the game id:" + sourceId);
+                logger.error("The provided sourceId is not connected to an object in the game id: " + sourceId);
                 for (StackObject stackObject : game.getStack()) {
-                    logger.error("StackObject: " + stackObject.getId() + " sourceId" + stackObject.getSourceId() + " name" + stackObject.getName());
+                    logger.error("StackObject: " + stackObject.getId() + " sourceId " + stackObject.getSourceId() + " name " + stackObject.getName());
                 }
                 mageObject = game.getLastKnownInformation(sourceId, Zone.STACK);
                 if (mageObject != null) {
@@ -166,9 +166,5 @@ public class MageObjectReference implements Comparable<MageObjectReference>, Ser
             return card;
         }
         return null;
-    }
-
-    public void setZoneChangeCounter(int zoneChangeCounter) {
-        this.zoneChangeCounter = zoneChangeCounter;
     }
 }

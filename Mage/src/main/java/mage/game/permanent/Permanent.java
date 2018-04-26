@@ -27,9 +27,8 @@
  */
 package mage.game.permanent;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import mage.MageObject;
 import mage.MageObjectReference;
@@ -37,9 +36,9 @@ import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.counters.Counters;
 import mage.game.Controllable;
 import mage.game.Game;
+import mage.game.GameState;
 
 public interface Permanent extends Card, Controllable {
 
@@ -60,7 +59,6 @@ public interface Permanent extends Card, Controllable {
      * @param tapped
      * @deprecated
      */
-    @Deprecated
     void setTapped(boolean tapped);
 
     boolean canTap();
@@ -79,9 +77,15 @@ public interface Permanent extends Card, Controllable {
 
     boolean isPhasedIn();
 
+    boolean isPhasedOutIndirectly();
+
     boolean phaseIn(Game game);
 
+    boolean phaseIn(Game game, boolean onlyDirect);
+
     boolean phaseOut(Game game);
+
+    boolean phaseOut(Game game, boolean indirectPhase);
 
     boolean isMonstrous();
 
@@ -91,7 +95,7 @@ public interface Permanent extends Card, Controllable {
 
     void setRenowned(boolean value);
 
-    void setCardNumber(int cid);
+    void setCardNumber(String cid);
 
     void setExpansionSetCode(String expansionSetCode);
 
@@ -103,8 +107,6 @@ public interface Permanent extends Card, Controllable {
 
     void setSecondCardFace(Card card);
 
-    Counters getCounters();
-
     List<UUID> getAttachments();
 
     UUID getAttachedTo();
@@ -113,15 +115,16 @@ public interface Permanent extends Card, Controllable {
 
     void attachTo(UUID permanentId, Game game);
 
-    boolean addAttachment(UUID permanentId, Game game);
+    void unattach(Game game);
 
-    boolean removeAttachment(UUID permanentId, Game game);
-
+//    boolean addAttachment(UUID permanentId, Game game);
+//
+//    boolean removeAttachment(UUID permanentId, Game game);
     boolean canBeTargetedBy(MageObject source, UUID controllerId, Game game);
 
     boolean hasProtectionFrom(MageObject source, Game game);
 
-    boolean cantBeEnchantedBy(MageObject source, Game game);
+    boolean cantBeAttachedBy(MageObject source, Game game);
 
     boolean wasControlledFromStartOfControllerTurn();
 
@@ -131,7 +134,7 @@ public interface Permanent extends Card, Controllable {
 
     int damage(int damage, UUID sourceId, Game game, boolean combat, boolean preventable);
 
-    int damage(int damage, UUID sourceId, Game game, boolean combat, boolean preventable, ArrayList<UUID> appliedEffects);
+    int damage(int damage, UUID sourceId, Game game, boolean combat, boolean preventable, List<UUID> appliedEffects);
 
     /**
      * used in combat only to deal damage at the same time
@@ -151,6 +154,8 @@ public interface Permanent extends Card, Controllable {
 
     void reset(Game game);
 
+    MageObject getBasicMageObject(Game game);
+
     boolean destroy(UUID sourceId, Game game, boolean noRegen);
 
     boolean sacrifice(UUID sourceId, Game game);
@@ -161,10 +166,7 @@ public interface Permanent extends Card, Controllable {
 
     boolean entersBattlefield(UUID sourceId, Game game, Zone fromZone, boolean fireEvent);
 
-    String getValue();
-
-    @Deprecated
-    void addAbility(Ability ability);
+    String getValue(GameState state);
 
     @Deprecated
     void addAbility(Ability ability, Game game);
@@ -179,7 +181,7 @@ public interface Permanent extends Card, Controllable {
 
     boolean canLoyaltyBeUsed(Game game);
 
-    public void resetControl();
+    void resetControl();
 
     boolean changeControllerId(UUID controllerId, Game game);
 
@@ -196,6 +198,8 @@ public interface Permanent extends Card, Controllable {
     void addToughness(int toughness);
 
     boolean isAttacking();
+
+    boolean isBlocked(Game game);
 
     int getBlocking();
 
@@ -226,15 +230,23 @@ public interface Permanent extends Card, Controllable {
      */
     void setMaxBlockedBy(int maxBlockedBy);
 
-    boolean canAttack(Game game);
-
     /**
      *
-     * @param defenderId id of planeswalker or player to attack
+     * @param defenderId id of planeswalker or player to attack - can be empty
+     * to check generally
      * @param game
      * @return
      */
     boolean canAttack(UUID defenderId, Game game);
+
+    /**
+     * Checks if a creature can attack (also if it is tapped)
+     *
+     * @param defenderId
+     * @param game
+     * @return
+     */
+    boolean canAttackInPrinciple(UUID defenderId, Game game);
 
     boolean canBlock(UUID attackerId, Game game);
 
@@ -249,6 +261,15 @@ public interface Permanent extends Card, Controllable {
      */
     boolean canUseActivatedAbilities(Game game);
 
+    /**
+     * Checks by restriction effects if the permanent can transform
+     *
+     * @param ability the ability that causes the transform
+     * @param game
+     * @return true - permanent can transform
+     */
+    boolean canTransform(Ability ability, Game game);
+
     boolean removeFromCombat(Game game);
 
     boolean removeFromCombat(Game game, boolean withInfo);
@@ -261,7 +282,7 @@ public interface Permanent extends Card, Controllable {
      *
      * @return
      */
-    HashSet<MageObjectReference> getDealtDamageByThisTurn();
+    Set<MageObjectReference> getDealtDamageByThisTurn();
 
     /**
      * Imprint some other card to this one.
@@ -319,19 +340,27 @@ public interface Permanent extends Card, Controllable {
      *
      * @param pairedCard
      */
-    void setPairedCard(UUID pairedCard);
+    void setPairedCard(MageObjectReference pairedCard);
 
     /**
      * Gets paired card. Can return null.
      *
      * @return
      */
-    UUID getPairedCard();
+    MageObjectReference getPairedCard();
 
     /**
      * Makes permanent paired with no other permanent.
      */
     void clearPairedCard();
+
+    void addBandedCard(UUID bandedCard);
+
+    void removeBandedCard(UUID bandedCard);
+
+    List<UUID> getBandedCards();
+
+    void clearBandedCards();
 
     void setMorphed(boolean value);
 

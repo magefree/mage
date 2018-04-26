@@ -30,8 +30,8 @@ package mage.client.deck.generator;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
-import java.util.Random;
 import java.util.Set;
 import mage.cards.Card;
 import mage.cards.decks.Deck;
@@ -44,6 +44,7 @@ import mage.client.util.sets.ConstructedFormats;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Rarity;
+import mage.util.RandomUtil;
 import mage.util.TournamentUtil;
 
 /**
@@ -52,7 +53,7 @@ import mage.util.TournamentUtil;
  * @author nantuko
  * @author Simown
  */
-public class DeckGenerator {
+public final class DeckGenerator {
 
     public static class DeckGeneratorException extends RuntimeException {
 
@@ -86,7 +87,7 @@ public class DeckGenerator {
 
         String selectedColors = genDialog.getSelectedColors();
         List<ColoredManaSymbol> allowedColors = new ArrayList<>();
-        selectedColors = selectedColors != null ? selectedColors.toUpperCase() : getRandomColors("X");
+        selectedColors = selectedColors != null ? selectedColors.toUpperCase(Locale.ENGLISH) : getRandomColors("X");
         String format = genDialog.getSelectedFormat();
 
         List<String> setsToUse = ConstructedFormats.getSetsByFormat(format);
@@ -120,7 +121,6 @@ public class DeckGenerator {
      */
     private static String getRandomColors(String selectedColors) {
 
-        Random random = new Random();
         List<Character> availableColors = new ArrayList<>();
         for (ColoredManaSymbol cms : ColoredManaSymbol.values()) {
             availableColors.add(cms.toString().charAt(0));
@@ -138,7 +138,7 @@ public class DeckGenerator {
             }
         }
         for (int i = 0; i < randomColors && !availableColors.isEmpty(); i++) {
-            int index = random.nextInt(availableColors.size());
+            int index = RandomUtil.nextInt(availableColors.size());
             generatedColors.append(availableColors.remove(index));
         }
         return generatedColors.toString();
@@ -155,7 +155,10 @@ public class DeckGenerator {
      * @return the final deck to use.
      */
     private static Deck generateDeck(int deckSize, List<ColoredManaSymbol> allowedColors, List<String> setsToUse) {
-        genPool = new DeckGeneratorPool(deckSize, allowedColors, genDialog.isSingleton(), genDialog.isColorless());
+
+        genPool = new DeckGeneratorPool(deckSize, genDialog.getCreaturePercentage(), genDialog.getNonCreaturePercentage(),
+                genDialog.getLandPercentage(), allowedColors, genDialog.isSingleton(), genDialog.isColorless(),
+                genDialog.isAdvanced(), genDialog.getDeckGeneratorCMC());
 
         final String[] sets = setsToUse.toArray(new String[setsToUse.size()]);
 
@@ -210,18 +213,17 @@ public class DeckGenerator {
     private static void generateSpells(CardCriteria criteria, int spellCount) {
         List<CardInfo> cardPool = CardRepository.instance.findCards(criteria);
         int retrievedCount = cardPool.size();
-        List<DeckGeneratorCMC> deckCMCs = genPool.getCMCsForSpellCount(spellCount);
-        Random random = new Random();
+        List<DeckGeneratorCMC.CMC> deckCMCs = genPool.getCMCsForSpellCount(spellCount);
         int count = 0;
         int reservesAdded = 0;
         boolean added;
         if (retrievedCount > 0 && retrievedCount >= spellCount) {
             int tries = 0;
             while (count < spellCount) {
-                Card card = cardPool.get(random.nextInt(retrievedCount)).getMockCard();
+                Card card = cardPool.get(RandomUtil.nextInt(retrievedCount)).getMockCard();
                 if (genPool.isValidSpellCard(card)) {
                     int cardCMC = card.getManaCost().convertedManaCost();
-                    for (DeckGeneratorCMC deckCMC : deckCMCs) {
+                    for (DeckGeneratorCMC.CMC deckCMC : deckCMCs) {
                         if (cardCMC >= deckCMC.min && cardCMC <= deckCMC.max) {
                             int currentAmount = deckCMC.getAmount();
                             if (currentAmount > 0) {
@@ -229,12 +231,10 @@ public class DeckGenerator {
                                 genPool.addCard(card.copy());
                                 count++;
                             }
-                        } else {
-                            if (reservesAdded < (genPool.getDeckSize() / 2)) {
-                                added = genPool.tryAddReserve(card, cardCMC);
-                                if (added) {
-                                    reservesAdded++;
-                                }
+                        } else if (reservesAdded < (genPool.getDeckSize() / 2)) {
+                            added = genPool.tryAddReserve(card, cardCMC);
+                            if (added) {
+                                reservesAdded++;
                             }
                         }
                     }
@@ -277,10 +277,9 @@ public class DeckGenerator {
         if (!genPool.isMonoColoredDeck() && genDialog.useNonBasicLand()) {
             List<Card> landCards = genPool.filterLands(CardRepository.instance.findCards(criteria));
             int allCount = landCards.size();
-            Random random = new Random();
             if (allCount > 0) {
                 while (countNonBasic < landsCount / 2) {
-                    Card card = landCards.get(random.nextInt(allCount));
+                    Card card = landCards.get(RandomUtil.nextInt(allCount));
                     if (genPool.isValidLandCard(card)) {
                         Card addedCard = card.copy();
                         deckLands.add(addedCard);
@@ -323,6 +322,10 @@ public class DeckGenerator {
             String landName = DeckGeneratorPool.getBasicLandName(c.toString());
             criteria.rarities(Rarity.LAND).name(landName);
             List<CardInfo> cards = CardRepository.instance.findCards(criteria);
+            if (cards.isEmpty()) { // Workaround to get basic lands if lands are not available for the given sets
+                criteria.setCodes("ORI");
+                cards = CardRepository.instance.findCards(criteria);
+            }
             basicLandMap.put(landName, cards);
         }
         return basicLandMap;
@@ -339,8 +342,9 @@ public class DeckGenerator {
      * database.
      */
     private static void addBasicLands(int landsNeeded, Map<String, Double> percentage, Map<String, Integer> count, Map<String, List<CardInfo>> basicLands) {
+
         int colorTotal = 0;
-        ColoredManaSymbol colorToAdd = null;
+        ColoredManaSymbol colorToAdd = ColoredManaSymbol.U;
 
         // Add up the totals for all colors, to keep track of the percentage a color is.
         for (Map.Entry<String, Integer> c : count.entrySet()) {
@@ -372,12 +376,10 @@ public class DeckGenerator {
                     minPercentage = (neededPercentage - thisPercentage);
                 }
             }
-            if (colorToAdd != null) {
-                genPool.addCard(getBasicLand(colorToAdd, basicLands));
-                count.put(colorToAdd.toString(), count.get(colorToAdd.toString()) + 1);
-                colorTotal++;
-                landsNeeded--;
-            }
+            genPool.addCard(getBasicLand(colorToAdd, basicLands));
+            count.put(colorToAdd.toString(), count.get(colorToAdd.toString()) + 1);
+            colorTotal++;
+            landsNeeded--;
         }
     }
 
@@ -390,10 +392,9 @@ public class DeckGenerator {
      * @return a single basic land that produces the color needed.
      */
     private static Card getBasicLand(ColoredManaSymbol color, Map<String, List<CardInfo>> basicLands) {
-        Random random = new Random();
         String landName = DeckGeneratorPool.getBasicLandName(color.toString());
         List<CardInfo> basicLandsInfo = basicLands.get(landName);
-        return basicLandsInfo.get(random.nextInt(basicLandsInfo.size() - 1)).getMockCard().copy();
+        return basicLandsInfo.get(RandomUtil.nextInt(basicLandsInfo.size() - 1)).getMockCard().copy();
     }
 
 }

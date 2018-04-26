@@ -33,6 +33,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
+import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -41,20 +42,35 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class DealsCombatDamageToAPlayerTriggeredAbility extends TriggeredAbilityImpl {
 
-    private boolean setTargetPointer;
+    protected boolean setTargetPointer;
+    protected String text;
+    protected boolean onlyOpponents;
 
     public DealsCombatDamageToAPlayerTriggeredAbility(Effect effect, boolean optional) {
         this(effect, optional, false);
     }
 
     public DealsCombatDamageToAPlayerTriggeredAbility(Effect effect, boolean optional, boolean setTargetPointer) {
+        this(effect, optional, setTargetPointer, false);
+    }
+
+    public DealsCombatDamageToAPlayerTriggeredAbility(Effect effect, boolean optional, boolean setTargetPointer, boolean onlyOpponents) {
         super(Zone.BATTLEFIELD, effect, optional);
+        this.setTargetPointer = setTargetPointer;
+        this.onlyOpponents = onlyOpponents;
+    }
+
+    public DealsCombatDamageToAPlayerTriggeredAbility(Effect effect, boolean optional, String text, boolean setTargetPointer) {
+        super(Zone.BATTLEFIELD, effect, optional);
+        this.text = text;
         this.setTargetPointer = setTargetPointer;
     }
 
     public DealsCombatDamageToAPlayerTriggeredAbility(final DealsCombatDamageToAPlayerTriggeredAbility ability) {
         super(ability);
+        this.text = ability.text;
         this.setTargetPointer = ability.setTargetPointer;
+        this.onlyOpponents = ability.onlyOpponents;
     }
 
     @Override
@@ -71,6 +87,12 @@ public class DealsCombatDamageToAPlayerTriggeredAbility extends TriggeredAbility
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getSourceId().equals(getSourceId())
                 && ((DamagedPlayerEvent) event).isCombatDamage()) {
+            if (onlyOpponents) {
+                Player controller = game.getPlayer(getControllerId());
+                if (controller == null || !controller.hasOpponent(event.getPlayerId(), game)) {
+                    return false;
+                }
+            }
             if (setTargetPointer) {
                 for (Effect effect : this.getAllEffects()) {
                     effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
@@ -84,7 +106,10 @@ public class DealsCombatDamageToAPlayerTriggeredAbility extends TriggeredAbility
 
     @Override
     public String getRule() {
-        return "Whenever {this} deals combat damage to a player, " + super.getRule();
+        if (text == null || text.isEmpty()) {
+            return "Whenever {this} deals combat damage to " + (onlyOpponents ? "an opponent, " : "a player, ") + super.getRule();
+        }
+        return text;
     }
 
 }

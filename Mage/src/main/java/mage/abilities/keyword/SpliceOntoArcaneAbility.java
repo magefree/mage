@@ -27,7 +27,6 @@
  */
 package mage.abilities.keyword;
 
-import java.util.Iterator;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -38,13 +37,12 @@ import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.SpliceCardEffectImpl;
 import mage.cards.Card;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SpellAbilityType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.players.Player;
+
+import java.util.Iterator;
 
 
 /**
@@ -75,7 +73,7 @@ import mage.players.Player;
  * on the stack, not the card from which the text was copied.
  *
  * Example: Glacial Ray is a red card with splice onto Arcane that reads, "Glacial
- * Ray deals 2 damage to target creature or player." Suppose Glacial Ray is spliced
+ * Ray deals 2 damage to any target." Suppose Glacial Ray is spliced
  * onto Reach Through Mists, a blue spell. The spell is still blue, and Reach Through
  * Mists deals the damage. This means that the ability can target a creature with
  * protection from red and deal 2 damage to that creature.
@@ -182,7 +180,7 @@ class SpliceOntoArcaneEffect extends SpliceCardEffectImpl {
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         MageObject object = game.getObject(abilityToModify.getSourceId());
-        if (object != null && object.getSubtype().contains("Arcane")) {
+        if (object != null && object.hasSubtype(SubType.ARCANE, game)) {
             return spliceSpellCanBeActivated(source, game);
         }
         return false;

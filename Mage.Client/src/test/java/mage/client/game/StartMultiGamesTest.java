@@ -1,6 +1,7 @@
 package mage.client.game;
 
-import javax.swing.SwingUtilities;
+import java.util.concurrent.TimeUnit;
+import javax.swing.*;
 import mage.client.MageFrame;
 import mage.client.components.MageComponents;
 import mage.client.components.MageUI;
@@ -42,18 +43,12 @@ public class StartMultiGamesTest {
 
     private void startGame() throws Exception {
         frame = null;
-        Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
-            public void uncaughtException(Thread t, Throwable e) {
-                logger.fatal(null, e);
-            }
-        });
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                synchronized (sync) {
-                    frame = new MageFrame();
-                    frame.setVisible(true);
-                    sync.notify();
-                }
+        Thread.setDefaultUncaughtExceptionHandler((t, e) -> logger.fatal(null, e));
+        SwingUtilities.invokeLater(() -> {
+            synchronized (sync) {
+                frame = new MageFrame();
+                frame.setVisible(true);
+                sync.notifyAll();
             }
         });
         synchronized (sync) {
@@ -73,7 +68,7 @@ public class StartMultiGamesTest {
 
     private void sleep(int ms) {
         try {
-            Thread.sleep(ms);
+            TimeUnit.MILLISECONDS.sleep(ms);
         } catch (Exception e) {
             e.printStackTrace();
         }

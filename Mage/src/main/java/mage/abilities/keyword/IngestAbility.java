@@ -31,7 +31,7 @@ public class IngestAbility extends DealsCombatDamageToAPlayerTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "Ingest <i>(Whenever this creature deals combat damage to a player, that player exiles the top card of his or her library.)</i>";
+        return "Ingest <i>(Whenever this creature deals combat damage to a player, that player exiles the top card of their library.)</i>";
     }
 
     @Override
@@ -44,7 +44,7 @@ class IngestEffect extends OneShotEffect {
 
     public IngestEffect() {
         super(Outcome.Exile);
-        this.staticText = "that player exiles the top card of his or her library";
+        this.staticText = "that player exiles the top card of their library";
     }
 
     public IngestEffect(final IngestEffect effect) {
@@ -62,7 +62,7 @@ class IngestEffect extends OneShotEffect {
         if (targetPlayer != null) {
             Card card = targetPlayer.getLibrary().getFromTop(game);
             if (card != null) {
-                targetPlayer.moveCards(card, Zone.LIBRARY, Zone.EXILED, source, game);
+                targetPlayer.moveCards(card, Zone.EXILED, source, game);
             }
             return true;
         }

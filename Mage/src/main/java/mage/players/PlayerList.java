@@ -24,8 +24,7 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.players;
 
 import java.util.UUID;
@@ -38,7 +37,8 @@ import mage.util.CircularList;
  */
 public class PlayerList extends CircularList<UUID> {
 
-    public PlayerList() {}
+    public PlayerList() {
+    }
 
     public PlayerList(final PlayerList list) {
         super(list);
@@ -47,23 +47,25 @@ public class PlayerList extends CircularList<UUID> {
     public Player getCurrent(Game game) {
         return game.getPlayer(this.get());
     }
-    
+
     public Player getNextInRange(Player basePlayer, Game game) {
-        UUID currentPlayerBefore = get();        
+        UUID currentPlayerBefore = get();
         UUID nextPlayerId = super.getNext();
         do {
             if (basePlayer.getInRange().contains(nextPlayerId)) {
-                return game.getPlayer(nextPlayerId);             
+                return game.getPlayer(nextPlayerId);
             }
             nextPlayerId = super.getNext();
-        }        
-        while (!nextPlayerId.equals(currentPlayerBefore));
+        } while (!nextPlayerId.equals(currentPlayerBefore));
         return null;
     }
-    
+
     public Player getNext(Game game) {
-        Player player;
         UUID start = this.get();
+        if (start == null) {
+            return null;
+        }
+        Player player;
         while (true) {
             player = game.getPlayer(super.getNext());
             if (!player.hasLeft() && !player.hasLost()) {

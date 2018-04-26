@@ -7,17 +7,15 @@
 package org.mage.plugins.card.dl.beans.properties.bound;
 
 
-import static org.mage.plugins.card.dl.beans.collections.ListenableCollections.listenableList;
-import static org.mage.plugins.card.dl.beans.collections.ListenableCollections.listenableMap;
-import static org.mage.plugins.card.dl.beans.collections.ListenableCollections.listenableSet;
+import org.mage.plugins.card.dl.beans.PropertyChangeSupport;
+import org.mage.plugins.card.dl.beans.properties.AbstractProperties;
+import org.mage.plugins.card.dl.beans.properties.Property;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.mage.plugins.card.dl.beans.PropertyChangeSupport;
-import org.mage.plugins.card.dl.beans.properties.AbstractProperties;
-import org.mage.plugins.card.dl.beans.properties.Property;
+import static org.mage.plugins.card.dl.beans.collections.ListenableCollections.*;
 
 
 /**
@@ -39,18 +37,18 @@ public class BoundProperties extends AbstractProperties {
     }
 
     public <T> Property<T> property(String name, Property<T> property) {
-        return new BoundProperty<T>(s, name, property);
+        return new BoundProperty<>(s, name, property);
     }
 
     public <E> List<E> list(String name, List<E> list) {
-        return listenableList(list, new PropertyChangeListListener<E>(s, name));
+        return listenableList(list, new PropertyChangeListListener<>(s, name));
     }
 
     public <E> Set<E> set(String name, Set<E> set) {
-        return listenableSet(set, new PropertyChangeSetListener<E>(s, set, name));
+        return listenableSet(set, new PropertyChangeSetListener<>(s, set, name));
     }
 
     public <K, V> Map<K, V> map(String name, Map<K, V> map) {
-        return listenableMap(map, new PropertyChangeMapListener<K, V>(s, map, name));
+        return listenableMap(map, new PropertyChangeMapListener<>(s, map, name));
     }
 }

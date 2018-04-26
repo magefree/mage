@@ -24,11 +24,13 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.deck;
 
+import mage.cards.ExpansionSet;
+import mage.cards.Sets;
 import mage.cards.decks.Constructed;
+import mage.constants.SetType;
 
 /**
  *
@@ -38,7 +40,11 @@ public class Legacy extends Constructed {
 
     public Legacy() {
         super("Constructed - Legacy");
-       
+        for (ExpansionSet set : Sets.getInstance().values()) {
+            if (set.getSetType() != SetType.CUSTOM_SET) {
+                setCodes.add(set.getCode());
+            }
+        }
         banned.add("Advantageous Proclamation");
         banned.add("Amulet of Quoz");
         banned.add("Ancestral Recall");
@@ -91,6 +97,7 @@ public class Legacy extends Constructed {
         banned.add("Rebirth");
         banned.add("Secret Summoning");
         banned.add("Secrets of Paradise");
+        banned.add("Sensei's Divining Top");
         banned.add("Sentinel Dispatch");
         banned.add("Shahrazad");
         banned.add("Skullclamp");
@@ -112,6 +119,6 @@ public class Legacy extends Constructed {
         banned.add("Worldknit");
         banned.add("Yawgmoth's Bargain");
         banned.add("Yawgmoth's Will");
-        
+
     }
 }

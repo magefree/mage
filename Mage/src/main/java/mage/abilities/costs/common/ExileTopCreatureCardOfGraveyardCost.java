@@ -10,7 +10,6 @@ import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.cards.Card;
-import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -48,7 +47,7 @@ public class ExileTopCreatureCardOfGraveyardCost extends CostImpl {
         if(controller != null) {
             Card topCard = null;
             for (Card card :controller.getGraveyard().getCards(game)) {
-                if (card.getCardType().contains(CardType.CREATURE)) {
+                if (card.isCreature()) {
                     topCard = card;
                 }
             }

@@ -83,6 +83,14 @@ public class RevealTargetPlayerLibraryEffect extends OneShotEffect {
     }
 
     private String setText() {
-        return "Reveal the top " + CardUtil.numberToText(amountCards.toString()) + " cards of target player's library.";
+        String number = amountCards.toString();
+        StringBuilder sb = new StringBuilder("Reveal the top ");
+        if ("1".equals(number)) {
+            sb.append("card");
+        } else {
+            sb.append(CardUtil.numberToText(number)).append(" cards");
+        }
+        sb.append(" of target player's library.");
+        return sb.toString();
     }
 }

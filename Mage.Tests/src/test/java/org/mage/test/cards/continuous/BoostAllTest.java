@@ -59,4 +59,27 @@ public class BoostAllTest extends CardTestPlayerBase {
 
     }
 
+    @Test
+    public void testTribalUnity() {
+        // Creatures of the chosen type get +X/+X
+        addCard(Zone.HAND, playerA, "Tribal Unity", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Akki Blizzard-Herder", 1); // 1/1
+        addCard(Zone.BATTLEFIELD, playerA, "Bloom Tender", 1); // 1/1
+        addCard(Zone.BATTLEFIELD, playerB, "Akki Blizzard-Herder", 1); // 1/1
+        addCard(Zone.BATTLEFIELD, playerB, "Bloom Tender", 1); // 1/1
+        
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tribal Unity");
+        setChoice(playerA, "X=2");
+        setChoice(playerA, "Elf");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+        
+        
+        assertPowerToughness(playerA, "Akki Blizzard-Herder", 1, 1);
+        assertPowerToughness(playerA, "Bloom Tender", 3, 3);
+        assertPowerToughness(playerB, "Akki Blizzard-Herder", 1, 1);
+        assertPowerToughness(playerB, "Bloom Tender", 3, 3);
+    }
 }

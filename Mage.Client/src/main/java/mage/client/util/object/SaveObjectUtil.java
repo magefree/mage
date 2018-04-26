@@ -1,5 +1,7 @@
 package mage.client.util.object;
 
+import mage.utils.StreamUtils;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -13,7 +15,7 @@ import java.util.Calendar;
  *
  * @author ayrat
  */
-public class SaveObjectUtil {
+public final class SaveObjectUtil {
 
     /**
      * Defines should data be saved or not.
@@ -53,7 +55,7 @@ public class SaveObjectUtil {
                     }
                 }
                 String time = now(DATE_PATTERN);
-                File f = new File("income" + File.separator + name + "_" + time + ".save");
+                File f = new File("income" + File.separator + name + '_' + time + ".save");
                 if (!f.exists()) {
                     f.createNewFile();
                 }
@@ -61,10 +63,9 @@ public class SaveObjectUtil {
                 oos.writeObject(object);
                 oos.close();
 
-            } catch (FileNotFoundException e) {
-                return;
-            } catch (IOException io) {
-                return;
+            } catch (Exception e) {
+            } finally {
+                StreamUtils.closeQuietly(oos);
             }
         }
     }

@@ -36,10 +36,10 @@ import mage.client.dialog.PreferencesDialog;
 
 public class SortSettingDeck extends SortSetting {
 
-    private final static SortSettingDeck fInstance = new SortSettingDeck();
+    private final static SortSettingDeck instance = new SortSettingDeck();
 
     public static SortSettingDeck getInstance() {
-        return fInstance;
+        return instance;
     }
 
     private SortSettingDeck() {

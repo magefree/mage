@@ -30,9 +30,8 @@ package mage.abilities.costs;
 /**
  *
  * @author LevelX2
- * @param <T>
  */
-public class OptionalAdditionalCostImpl<T extends OptionalAdditionalCostImpl> extends CostsImpl<Cost> implements OptionalAdditionalCost {
+public class OptionalAdditionalCostImpl extends CostsImpl<Cost> implements OptionalAdditionalCost {
 
     protected String name;
     protected String reminderText;
@@ -52,7 +51,7 @@ public class OptionalAdditionalCostImpl<T extends OptionalAdditionalCostImpl> ex
         this.delimiter = delimiter;
         this.reminderText = "<i>(" + reminderText + ")</i>";
         this.activatedCounter = 0;
-        this.add((Cost) cost);
+        this.add(cost);
     }
 
     public OptionalAdditionalCostImpl(final OptionalAdditionalCostImpl cost) {
@@ -130,8 +129,6 @@ public class OptionalAdditionalCostImpl<T extends OptionalAdditionalCostImpl> ex
         ++activatedCounter;
     }
 
-    ;
-
     /**
      * Reset the activate and count information
      *
@@ -162,8 +159,6 @@ public class OptionalAdditionalCostImpl<T extends OptionalAdditionalCostImpl> ex
         return repeatable;
     }
 
-    ;
-
     /**
      * Returns if the cost was activated
      *
@@ -174,8 +169,6 @@ public class OptionalAdditionalCostImpl<T extends OptionalAdditionalCostImpl> ex
         return activated;
     }
 
-    ;
-
     /**
      * Returns the number of times the cost was activated
      * @return
@@ -184,8 +177,6 @@ public class OptionalAdditionalCostImpl<T extends OptionalAdditionalCostImpl> ex
     public int getActivateCount() {
         return activatedCounter;
     }
-
-    ;
 
 
     @Override

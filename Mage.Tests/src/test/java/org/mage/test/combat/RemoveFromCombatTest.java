@@ -51,7 +51,7 @@ public class RemoveFromCombatTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
         addCard(Zone.HAND, playerA, "Lightning Blast", 1);
 
-        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 2);
+        addCard(Zone.BATTLEFIELD, playerB, "Forest", 2);
         addCard(Zone.BATTLEFIELD, playerB, "Elvish Mystic", 1);
 
         // Forests you control are 1/1 green Elf creatures that are still lands.
@@ -60,7 +60,8 @@ public class RemoveFromCombatTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Stomping Ground");
 
         attack(2, playerB, "Stomping Ground");
-        activateAbility(2, PhaseStep.DECLARE_ATTACKERS, playerB, "{1}{G},Sacrifice an Elf: Target creature gets +3/+3", "Stomping Ground");
+        activateAbility(2, PhaseStep.DECLARE_ATTACKERS, playerB, "{1}{G}", "Stomping Ground");
+        setChoice(playerB, "Elvish Mystic");
         castSpell(2, PhaseStep.DECLARE_BLOCKERS, playerA, "Lightning Blast", "Ambush Commander");
         setStopAt(2, PhaseStep.COMBAT_DAMAGE);
         execute();

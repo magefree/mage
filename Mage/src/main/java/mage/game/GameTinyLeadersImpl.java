@@ -38,14 +38,10 @@ import mage.abilities.effects.common.continuous.CommanderReplacementEffect;
 import mage.abilities.effects.common.cost.CommanderCostModification;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
-import mage.constants.CardType;
-import mage.constants.MultiplayerAttackOption;
-import mage.constants.PhaseStep;
-import mage.constants.RangeOfInfluence;
-import mage.constants.Rarity;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.turn.TurnMod;
 import mage.players.Player;
 import mage.watchers.common.CommanderInfoWatcher;
@@ -82,7 +78,7 @@ public abstract class GameTinyLeadersImpl extends GameImpl {
                     Set<Card> cards = new HashSet<>();
                     cards.add(commander);
                     this.loadCards(cards, playerId);
-                    player.setCommanderId(commander.getId());
+                    player.addCommanderId(commander.getId());
                     commander.moveToZone(Zone.COMMAND, null, this, true);
                     ability.addEffect(new CommanderReplacementEffect(commander.getId(), alsoHand, alsoLibrary));
                     ability.addEffect(new CommanderCostModification(commander.getId()));
@@ -93,7 +89,7 @@ public abstract class GameTinyLeadersImpl extends GameImpl {
                     getState().getWatchers().add(watcher);
                     watcher.addCardInfoToCommander(this);
                 } else {
-                    throw new UnknownError("Commander card could not be created. Name: [" + player.getMatchPlayer().getDeck().getName() + "]");
+                    throw new UnknownError("Commander card could not be created. Name: [" + player.getMatchPlayer().getDeck().getName() + ']');
                 }
             }
 
@@ -164,9 +160,8 @@ public abstract class GameTinyLeadersImpl extends GameImpl {
 class DefaultCommander extends CardImpl {
 
     public DefaultCommander(UUID ownerId, String commanderName, String manaString) {
-        super(ownerId, 999, commanderName, Rarity.RARE, new CardType[]{CardType.CREATURE}, manaString);
-        this.expansionSetCode = "";
-        this.supertype.add("Legendary");
+        super(ownerId, new CardSetInfo(commanderName, "", "999", Rarity.RARE), new CardType[]{CardType.CREATURE}, manaString);
+        this.addSuperType(SuperType.LEGENDARY);
 
         if (manaString.contains("{G}")) {
             this.color.setGreen(true);

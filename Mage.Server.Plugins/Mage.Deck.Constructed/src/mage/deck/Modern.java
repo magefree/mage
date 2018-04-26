@@ -24,11 +24,12 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
+ */
 package mage.deck;
 
 import java.util.Date;
 import java.util.GregorianCalendar;
+
 import mage.cards.ExpansionSet;
 import mage.cards.Sets;
 import mage.cards.decks.Constructed;
@@ -38,35 +39,35 @@ import mage.constants.SetType;
  *
  * @author LevelX2
  */
-
 public class Modern extends Constructed {
+
     public Modern() {
         super("Constructed - Modern");
 
-        Date cutoff = new GregorianCalendar(2003, 7, 28).getTime(); // Eight edition release date
-        for (ExpansionSet set: Sets.getInstance().values()) {
-            if ((set.getReleaseDate().after(cutoff) || set.getReleaseDate().equals(cutoff)) &&
-                    (set.getSetType() == SetType.CORE || set.getSetType() == SetType.EXPANSION)) {
+        Date cutoff = new GregorianCalendar(2003, 6, 28).getTime(); // Eight edition release date
+        for (ExpansionSet set : Sets.getInstance().values()) {
+            if ((set.getReleaseDate().after(cutoff) || set.getReleaseDate().equals(cutoff))
+                    && (set.getSetType() == SetType.CORE || set.getSetType() == SetType.EXPANSION)) {
                 setCodes.add(set.getCode());
             }
         }
 
-        banned.add("Ancestral Vision");
         banned.add("Ancient Den");
         banned.add("Birthing Pod");
         banned.add("Blazing Shoal");
-        banned.add("Bloodbraid Elf");
         banned.add("Chrome Mox");
         banned.add("Cloudpost");
         banned.add("Dark Depths");
         banned.add("Deathrite Shaman");
         banned.add("Dig Through Time");
         banned.add("Dread Return");
+        banned.add("Eye of Ugin");
+        banned.add("Gitaxian Probe");
         banned.add("Glimpse of Nature");
+        banned.add("Golgari Grave-Troll");
         banned.add("Great Furnace");
         banned.add("Green Sun's Zenith");
         banned.add("Hypergenesis");
-        banned.add("Jace, the Mind Sculptor");
         banned.add("Mental Misstep");
         banned.add("Ponder");
         banned.add("Preordain");
@@ -80,7 +81,6 @@ public class Modern extends Constructed {
         banned.add("Skullclamp");
         banned.add("Splinter Twin");
         banned.add("Summer Bloom");
-        banned.add("Sword of the Meek");
         banned.add("Treasure Cruise");
         banned.add("Tree of Tales");
         banned.add("Umezawa's Jitte");

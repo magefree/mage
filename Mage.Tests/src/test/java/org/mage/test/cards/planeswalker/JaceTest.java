@@ -43,7 +43,7 @@ public class JaceTest extends CardTestPlayerBase {
     public void TelepathUnboundSecondAbility() {
         // +1: Up to one target creature gets -2/-0 until your next turn.
         // -3: You may cast target instant or sorcery card from your graveyard this turn. If that card would be put into your graveyard this turn, exile it instead.
-        // -9: You get an emblem with "Whenever you cast a spell, target opponent puts the top five cards of his or her library into his or her graveyard".
+        // -9: You get an emblem with "Whenever you cast a spell, target opponent puts the top five cards of their library into their graveyard".
         addCard(Zone.BATTLEFIELD, playerA, "Jace, Telepath Unbound"); // starts with 7 Loyality counters
 
         // As an additional cost to cast Magmatic Insight, discard a land card.
@@ -81,7 +81,7 @@ public class JaceTest extends CardTestPlayerBase {
 
         // {T}: Draw a card, then discard a card. If there are five or more cards in your graveyard,
         // exile Jace, Vryn's Prodigy, then return him to the battefield transformed under his owner's control.
-        addCard(Zone.BATTLEFIELD, playerA, "Jace, Vryn's Prodigy", 1); // {2}{R} - 3/2
+        addCard(Zone.BATTLEFIELD, playerA, "Jace, Vryn's Prodigy", 1); // {U}{1} - 0/2
         addCard(Zone.HAND, playerA, "Pillarfield Ox", 1);
 
         // Flash
@@ -97,6 +97,72 @@ public class JaceTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Pillarfield Ox", 1);
         assertExileCount("Jace, Vryn's Prodigy", 0);
         assertPermanentCount(playerA, "Jace, Telepath Unbound", 1);
+    }
+    
+    @Test
+    public void vrynCannotCastAncestralVisions() {
+                
+        // {T}: Draw a card, then discard a card. If there are five or more cards in your graveyard,
+        // exile Jace, Vryn's Prodigy, then return him to the battefield transformed under his owner's control.
+        String jVryn = "Jace, Vryn's Prodigy"; // {U}{1} 0/2
+        
+        //−3: You may cast target instant or sorcery card from your graveyard this turn. If that card would be put into your graveyard this turn, exile it instead.        
+        String jTelepath = "Jace, Telepath Unbound"; // 5 loyalty
+        
+        // Sorcery, Suspend 4 {U}. Target player draws three cards.
+        String ancestralVision = "Ancestral Vision"; 
+        
+        addCard(Zone.BATTLEFIELD, playerA, "Jace, Vryn's Prodigy", 1); // {U}{1} - 0/2
+        addCard(Zone.BATTLEFIELD, playerA, "Island");
+        addCard(Zone.GRAVEYARD, playerA, "Island", 4);
+        addCard(Zone.GRAVEYARD, playerA, ancestralVision);
+        addCard(Zone.HAND, playerA, "Swamp", 1);
+        
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Draw a card, then discard a card. If there are five or more cards in your graveyard");
+        setChoice(playerA, "Swamp");
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "-3:");
+        addTarget(playerA, ancestralVision);
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, ancestralVision);
+        
+        setStopAt(3, PhaseStep.BEGIN_COMBAT);
+        execute();
+        
+        assertPermanentCount(playerA, jTelepath, 1);
+        assertGraveyardCount(playerA, "Swamp", 1);
+        assertGraveyardCount(playerA, ancestralVision, 1);
+        assertHandCount(playerA, 2); // 1 draw step + jace draw card
+        assertCounterCount(playerA, jTelepath, CounterType.LOYALTY, 2);
+    }
+
+    /**
+     * I know it's been a bit a rules question recently but I believe flip
+     * planeswalkers shouldn't be exiled by Containment priest when flipping as
+     * happens when using xmage (at least with Jace).
+     */
+    @Test
+    public void testJaceUnravelerOfSecretsEmblem() {
+        // +1: Scry 1, then draw a card.
+        // -2: Return target creature to its owner's hand.
+        // -8: You get an emblem with "Whenever an opponent casts their first spell each turn, counter that spell."
+        addCard(Zone.BATTLEFIELD, playerA, "Jace, Unraveler of Secrets", 1); // starts with 5 Loyality counters
+        addCounters(1, PhaseStep.UPKEEP, playerA, "Jace, Unraveler of Secrets", CounterType.LOYALTY, 5);
+
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 2);
+        addCard(Zone.HAND, playerB, "Perimeter Captain", 2);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "-8: You get an emblem");
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Perimeter Captain");
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Perimeter Captain");
+
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+
+        assertEmblemCount(playerA, 1);
+
+        assertPermanentCount(playerB, "Perimeter Captain", 1);
+        assertGraveyardCount(playerB, "Perimeter Captain", 1);
 
     }
+
 }

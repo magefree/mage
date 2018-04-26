@@ -28,10 +28,11 @@
 
 package mage.game.events;
 
-import java.util.ArrayList;
-import java.util.UUID;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -50,7 +51,7 @@ public class ZoneChangeEvent extends GameEvent {
         this.target = target;
     }
 
-    public ZoneChangeEvent(Permanent target, UUID sourceId, UUID playerId, Zone fromZone, Zone toZone, ArrayList<UUID> appliedEffects) {
+    public ZoneChangeEvent(Permanent target, UUID sourceId, UUID playerId, Zone fromZone, Zone toZone, List<UUID> appliedEffects) {
         super(EventType.ZONE_CHANGE, target.getId(), sourceId, playerId);
         this.fromZone = fromZone;
         this.toZone = toZone;
@@ -66,18 +67,13 @@ public class ZoneChangeEvent extends GameEvent {
         this.toZone = toZone;
     }
 
-    public ZoneChangeEvent(UUID targetId, UUID sourceId, UUID playerId, Zone fromZone, Zone toZone, ArrayList<UUID> appliedEffects) {
-        this(targetId, sourceId, playerId, fromZone, toZone, appliedEffects, false);
-    }
-
-    public ZoneChangeEvent(UUID targetId, UUID sourceId, UUID playerId, Zone fromZone, Zone toZone, ArrayList<UUID> appliedEffects, boolean comesIntoPlayTapped) {
+    public ZoneChangeEvent(UUID targetId, UUID sourceId, UUID playerId, Zone fromZone, Zone toZone, List<UUID> appliedEffects) {
         super(EventType.ZONE_CHANGE, targetId, sourceId, playerId);
         this.fromZone = fromZone;
         this.toZone = toZone;
         if (appliedEffects != null) {
             this.appliedEffects = appliedEffects;
         }
-        this.flag = comesIntoPlayTapped;
     }
 
     public ZoneChangeEvent(Permanent target, UUID playerId, Zone fromZone, Zone toZone) {
@@ -111,9 +107,4 @@ public class ZoneChangeEvent extends GameEvent {
     public boolean isDiesEvent() {
        return (toZone == Zone.GRAVEYARD && fromZone == Zone.BATTLEFIELD);
     }
-
-    public boolean comesIntoPlayTapped() {
-       return this.flag;
-    }
-
 }

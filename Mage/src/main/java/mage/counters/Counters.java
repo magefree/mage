@@ -24,26 +24,25 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.counters;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class Counters extends HashMap<String, Counter> implements Serializable {
 
-    public Counters() {}
+    public Counters() {
+    }
 
     public Counters(final Counters counters) {
-        for (Map.Entry<String, Counter> entry: counters.entrySet()) {
+        for (Map.Entry<String, Counter> entry : counters.entrySet()) {
             this.put(entry.getKey(), entry.getValue().copy());
         }
     }
@@ -52,57 +51,55 @@ public class Counters extends HashMap<String, Counter> implements Serializable {
         return new Counters(this);
     }
 
-    public void addCounter(String name) {
-        if (!this.containsKey(name)) {
-            this.put(name, new Counter(name));
-        }
-        this.get(name).increase();
-        }        
-
     public void addCounter(String name, int amount) {
-        if (!this.containsKey(name)) {
-            this.put(name, new Counter(name));
-        }
+        putIfAbsent(name, new Counter(name));
         this.get(name).add(amount);
     }
 
     public void addCounter(Counter counter) {
-        if (!this.containsKey(counter.name)) {
+        if (!containsKey(counter.name)) {
             put(counter.name, counter);
         } else {
+
             get(counter.name).add(counter.getCount());
         }
+
     }
 
-    public void removeCounter(String name) {
-        removeCounter(name, 1);
+    public boolean removeCounter(String name) {
+        return removeCounter(name, 1);
     }
 
-    public void removeCounter(CounterType counterType, int amount) {
+    public boolean removeCounter(CounterType counterType, int amount) {
         if (this.containsKey(counterType.getName())) {
             get(counterType.getName()).remove(amount);
             if (get(counterType.getName()).count == 0) {
                 this.remove(counterType.getName());
-            }              
+            }
+            return true;
         }
+        return false;
     }
 
-    public void removeCounter(String name, int amount) {
+    public boolean removeCounter(String name, int amount) {
         if (this.containsKey(name)) {
             this.get(name).remove(amount);
             if (this.get(name).getCount() == 0) {
                 this.remove(name);
             }
+            return true;
         }
+        return false;
     }
 
-    public void removeAllCounters(CounterType counterType){
+    public void removeAllCounters(CounterType counterType) {
         removeAllCounters(counterType.getName());
     }
 
-    public void removeAllCounters(String name){
-        if (this.containsKey(name)){
+    public void removeAllCounters(String name) {
+        if (this.containsKey(name)) {
             this.remove(name);
+
         }
     }
 
@@ -125,12 +122,9 @@ public class Counters extends HashMap<String, Counter> implements Serializable {
     }
 
     public List<BoostCounter> getBoostCounters() {
-        List<BoostCounter> boosters = new ArrayList<>();
-        for (Counter counter: this.values()) {
-            if (counter instanceof BoostCounter) {
-                boosters.add((BoostCounter)counter);
-            }
-        }
-        return boosters;
+        return values().stream().
+                filter(counter -> counter instanceof BoostCounter).
+                map(counter -> (BoostCounter) counter).
+                collect(Collectors.toList());
     }
 }

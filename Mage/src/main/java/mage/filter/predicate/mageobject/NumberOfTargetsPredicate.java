@@ -27,11 +27,12 @@
  */
 package mage.filter.predicate.mageobject;
 
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Mode;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
-import mage.game.stack.Spell;
+import mage.game.stack.StackObject;
 import mage.target.Target;
 
 /**
@@ -48,10 +49,11 @@ public class NumberOfTargetsPredicate implements Predicate<MageObject> {
 
     @Override
     public boolean apply(MageObject input, Game game) {
-        Spell spell = game.getStack().getSpell(input.getId());
-        if (spell != null) {
+        StackObject stackObject = game.getState().getStack().getStackObject(input.getId());
+        if (stackObject != null) {
             int numberOfTargets = 0;
-            for (Mode mode : spell.getSpellAbility().getModes().getSelectedModes()) {
+            for (UUID modeId : stackObject.getStackAbility().getModes().getSelectedModes()) {
+                Mode mode = stackObject.getStackAbility().getModes().get(modeId);
                 for (Target target : mode.getTargets()) {
                     numberOfTargets += target.getTargets().size();
                 }
@@ -60,6 +62,18 @@ public class NumberOfTargetsPredicate implements Predicate<MageObject> {
                 return true;
             }
         }
+//        Spell spell = game.getStack().getSpell(input.getId());
+//        if (spell != null) {
+//            int numberOfTargets = 0;
+//            for (Mode mode : spell.getSpellAbility().getModes().getSelectedModes()) {
+//                for (Target target : mode.getTargets()) {
+//                    numberOfTargets += target.getTargets().size();
+//                }
+//            }
+//            if (numberOfTargets == targets) {
+//                return true;
+//            }
+//        }
         return false;
     }
 

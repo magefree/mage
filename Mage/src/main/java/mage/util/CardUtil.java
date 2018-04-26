@@ -27,121 +27,32 @@
  */
 package mage.util;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.SpellAbility;
-import mage.abilities.costs.AlternativeCost;
-import mage.abilities.costs.AlternativeCostImpl;
 import mage.abilities.costs.VariableCost;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.costs.mana.HybridManaCost;
-import mage.abilities.costs.mana.ManaCost;
-import mage.abilities.costs.mana.ManaCosts;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.costs.mana.MonoHybridManaCost;
-import mage.abilities.costs.mana.VariableManaCost;
-import mage.abilities.keyword.ChangelingAbility;
+import mage.abilities.costs.mana.*;
 import mage.cards.Card;
-import mage.cards.SplitCard;
-import mage.constants.CardType;
-import mage.filter.FilterMana;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
-import mage.game.stack.Spell;
 import mage.util.functions.CopyTokenFunction;
+
+import java.util.UUID;
 
 /**
  * @author nantuko
  */
-public class CardUtil {
+public final class CardUtil {
 
-    private static final String regexBlack = ".*\\x7b.{0,2}B.{0,2}\\x7d.*";
-    private static final String regexBlue = ".*\\x7b.{0,2}U.{0,2}\\x7d.*";
-    private static final String regexRed = ".*\\x7b.{0,2}R.{0,2}\\x7d.*";
-    private static final String regexGreen = ".*\\x7b.{0,2}G.{0,2}\\x7d.*";
-    private static final String regexWhite = ".*\\x7b.{0,2}W.{0,2}\\x7d.*";
 
     private static final String SOURCE_EXILE_ZONE_TEXT = "SourceExileZone";
 
-    static String numberStrings[] = {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
-        "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "ninteen", "twenty"};
-
-    public static final String[] NON_CHANGELING_SUBTYPES_VALUES = new String[]{
-        // basic lands subtypes
-        "Mountain", "Forest", "Plains", "Swamp", "Island",
-        // Enchantment subtypes
-        "Aura", "Curse", "Shrine",
-        // Artifact subtypes
-        "Equipment", "Fortification", "Contraption",
-        // Land subtypes
-        "Desert", "Gate", "Lair", "Locus", "Urza's", "Mine", "Power-Plant", "Tower",
-        // Planeswalker subtypes
-        "Ajani", "Ashiok", "Bolas", "Chandra", "Dack", "Daretti", "Domri", "Elspeth", "Freyalise", "Garruk", "Gideon", "Jace",
-        "Karn", "Kiora", "Koth", "Liliana", "Nahiri", "Nissa", "Narset", "Nixilis", "Ral", "Sarkhan", "Sorin", "Tamiyo", "Teferi",
-        "Tezzeret", "Tibalt", "Ugin", "Venser", "Vraska", "Xenagos",
-        // Instant sorcery subtypes
-        "Trap", "Arcane"};
-    public static final Set<String> NON_CREATURE_SUBTYPES = new HashSet<>(Arrays.asList(NON_CHANGELING_SUBTYPES_VALUES));
-
-    /**
-     * Checks whether two cards share card types.
-     *
-     * @param card1
-     * @param card2
-     * @return
-     */
-    public static boolean shareTypes(Card card1, Card card2) {
-
-        if (card1 == null || card2 == null) {
-            throw new IllegalArgumentException("Params can't be null");
-        }
-
-        for (CardType type : card1.getCardType()) {
-            if (card2.getCardType().contains(type)) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    /**
-     * Checks whether two cards share card subtypes.
-     *
-     * @param card1
-     * @param card2
-     * @return
-     */
-    public static boolean shareSubtypes(Card card1, Card card2) {
-
-        if (card1 == null || card2 == null) {
-            throw new IllegalArgumentException("Params can't be null");
-        }
-
-        if (card1.getCardType().contains(CardType.CREATURE) && card2.getCardType().contains(CardType.CREATURE)) {
-            if (card1.getAbilities().contains(ChangelingAbility.getInstance())
-                    || card1.getSubtype().contains(ChangelingAbility.ALL_CREATURE_TYPE)
-                    || card2.getAbilities().contains(ChangelingAbility.getInstance())
-                    || card2.getSubtype().contains(ChangelingAbility.ALL_CREATURE_TYPE)) {
-                return true;
-            }
-        }
-        for (String subtype : card1.getSubtype()) {
-            if (card2.getSubtype().contains(subtype)) {
-                return true;
-            }
-        }
-
-        return false;
-    }
+    static final String[] numberStrings = {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
+            "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen", "twenty"};
 
     /**
      * Increase spell or ability cost to be paid.
@@ -151,7 +62,6 @@ public class CardUtil {
      */
     public static void increaseCost(Ability ability, int increaseCount) {
         adjustAbilityCost(ability, -increaseCount);
-        adjustAlternativeCosts(ability, -increaseCount);
     }
 
     /**
@@ -162,7 +72,6 @@ public class CardUtil {
      */
     public static void reduceCost(Ability ability, int reduceCount) {
         adjustAbilityCost(ability, reduceCount);
-        adjustAlternativeCosts(ability, reduceCount);
     }
 
     /**
@@ -173,7 +82,6 @@ public class CardUtil {
      */
     public static void adjustCost(SpellAbility spellAbility, int reduceCount) {
         CardUtil.adjustAbilityCost((Ability) spellAbility, reduceCount);
-        adjustAlternativeCosts(spellAbility, reduceCount);
     }
 
     public static ManaCosts<ManaCost> increaseCost(ManaCosts<ManaCost> manaCosts, int increaseCount) {
@@ -182,40 +90,6 @@ public class CardUtil {
 
     public static ManaCosts<ManaCost> reduceCost(ManaCosts<ManaCost> manaCosts, int reduceCount) {
         return adjustCost(manaCosts, reduceCount);
-    }
-
-    private static void adjustAlternativeCosts(Ability ability, int reduceCount) {
-        for (AlternativeCost alternativeCost : ability.getAlternativeCosts()) {
-            if (alternativeCost instanceof AlternativeCostImpl) {
-                AlternativeCostImpl impl = (AlternativeCostImpl) alternativeCost;
-                ManaCosts<ManaCost> adjustedCost = new ManaCostsImpl<>();
-                boolean updated = false;
-                Iterator it = impl.iterator();
-                while (it.hasNext()) {
-                    Object cost = it.next();
-                    if (cost instanceof ManaCosts) {
-                        for (Object object : ((ManaCosts) cost)) {
-                            if (object instanceof ManaCost) {
-                                ManaCost manaCost = (ManaCost) object;
-                                Mana mana = manaCost.getOptions().get(0);
-                                int colorless = mana != null ? mana.getGeneric() : 0;
-                                if (!updated && colorless > 0) {
-                                    if ((colorless - reduceCount) > 0) {
-                                        int newColorless = colorless - reduceCount;
-                                        it.remove();
-                                        adjustedCost.add(new GenericManaCost(newColorless));
-                                    }
-                                    updated = true;
-                                } else {
-                                    adjustedCost.add(manaCost);
-                                }
-                            }
-                        }
-                    }
-                }
-                impl.add(adjustedCost);
-            }
-        }
     }
 
     /**
@@ -259,15 +133,6 @@ public class CardUtil {
         return adjustedCost;
     }
 
-    public static ManaCosts<ManaCost> removeVariableManaCost(ManaCosts<ManaCost> manaCosts) {
-        ManaCosts<ManaCost> adjustedCost = new ManaCostsImpl<>();
-        for (ManaCost manaCost : manaCosts) {
-            if (!(manaCost instanceof VariableManaCost)) {
-                adjustedCost.add(manaCost);
-            }
-        }
-        return adjustedCost;
-    }
 
     public static void reduceCost(SpellAbility spellAbility, ManaCosts<ManaCost> manaCostsToReduce) {
         adjustCost(spellAbility, manaCostsToReduce, true);
@@ -289,8 +154,8 @@ public class CardUtil {
      *
      * @param spellAbility
      * @param manaCostsToReduce costs to reduce
-     * @param convertToGeneric colored mana does reduce generic mana if no
-     * appropriate colored mana is in the costs included
+     * @param convertToGeneric  colored mana does reduce generic mana if no
+     *                          appropriate colored mana is in the costs included
      */
     public static void adjustCost(SpellAbility spellAbility, ManaCosts<ManaCost> manaCostsToReduce, boolean convertToGeneric) {
         ManaCosts<ManaCost> previousCost = spellAbility.getManaCostsToPay();
@@ -310,12 +175,12 @@ public class CardUtil {
                 reduceMana.add(manaCost.getMana());
             }
         }
-        ManaCosts<ManaCost> manaCostToCheckForColorless = new ManaCostsImpl<>();
-        // subtract colored mana
+        ManaCosts<ManaCost> manaCostToCheckForGeneric = new ManaCostsImpl<>();
+        // subtract non-generic mana
         for (ManaCost newManaCost : previousCost) {
             Mana mana = newManaCost.getMana();
             if (!(newManaCost instanceof MonoHybridManaCost) && mana.getGeneric() > 0) {
-                manaCostToCheckForColorless.add(newManaCost);
+                manaCostToCheckForGeneric.add(newManaCost);
                 continue;
             }
             boolean hybridMana = newManaCost instanceof HybridManaCost;
@@ -379,6 +244,17 @@ public class CardUtil {
                     continue;
                 }
             }
+
+            if (mana.getColorless() > 0 && reduceMana.getColorless() > 0) {
+                if (reduceMana.getColorless() > mana.getColorless()) {
+                    reduceMana.setColorless(reduceMana.getColorless() - mana.getColorless());
+                    mana.setColorless(0);
+                } else {
+                    mana.setColorless(mana.getColorless() - reduceMana.getColorless());
+                    reduceMana.setColorless(0);
+                }
+            }
+
             if (mana.count() > 0) {
                 if (newManaCost instanceof MonoHybridManaCost) {
                     if (mana.count() == 2) {
@@ -386,7 +262,7 @@ public class CardUtil {
                         continue;
                     }
                 }
-                manaCostToCheckForColorless.add(newManaCost);
+                manaCostToCheckForGeneric.add(newManaCost);
             }
 
         }
@@ -399,7 +275,7 @@ public class CardUtil {
             reduceAmount = reduceMana.getGeneric();
         }
         if (reduceAmount > 0) {
-            for (ManaCost newManaCost : manaCostToCheckForColorless) {
+            for (ManaCost newManaCost : manaCostToCheckForGeneric) {
                 Mana mana = newManaCost.getMana();
                 if (mana.getGeneric() == 0 || reduceAmount == 0) {
                     adjustedCost.add(newManaCost);
@@ -426,7 +302,7 @@ public class CardUtil {
                 }
             }
         } else {
-            adjustedCost.addAll(manaCostToCheckForColorless);
+            adjustedCost.addAll(manaCostToCheckForGeneric);
         }
         if (adjustedCost.isEmpty()) {
             adjustedCost.add(new GenericManaCost(0)); // neede to check if cost was reduced to 0
@@ -447,18 +323,6 @@ public class CardUtil {
         return new CopyTokenFunction(target);
     }
 
-    public static boolean isPermanentCard(Card card) {
-        boolean permanent = false;
-
-        permanent |= card.getCardType().contains(CardType.ARTIFACT);
-        permanent |= card.getCardType().contains(CardType.CREATURE);
-        permanent |= card.getCardType().contains(CardType.ENCHANTMENT);
-        permanent |= card.getCardType().contains(CardType.LAND);
-        permanent |= card.getCardType().contains(CardType.PLANESWALKER);
-
-        return permanent;
-    }
-
     /**
      * Converts an integer number to string Numbers > 20 will be returned as
      * digits
@@ -476,7 +340,7 @@ public class CardUtil {
      *
      * @param number number to convert to text
      * @param forOne if the number is 1, this string will be returnedinstead of
-     * "one".
+     *               "one".
      * @return
      */
     public static String numberToText(int number, String forOne) {
@@ -510,6 +374,7 @@ public class CardUtil {
     }
 
     public static boolean checkNumeric(String s) {
+
         for (int i = 0; i < s.length(); i++) {
             if (!Character.isDigit(s.charAt(i))) {
                 return false;
@@ -518,10 +383,29 @@ public class CardUtil {
         return true;
     }
 
+
+    /**
+     * Parse card number as int (support base [123] and alternative numbers [123b]).
+     *
+     * @param cardNumber origin card number
+     * @return int
+     */
+    public static int parseCardNumberAsInt(String cardNumber){
+
+        if (cardNumber.isEmpty()){ throw new IllegalArgumentException("Card number is empty.");}
+
+        if(Character.isDigit(cardNumber.charAt(cardNumber.length() - 1)))
+        {
+            return Integer.parseInt(cardNumber);
+        }else{
+            return Integer.parseInt(cardNumber.substring(0, cardNumber.length() - 1));
+        }
+    }
+
     /**
      * Creates and saves a (card + zoneChangeCounter) specific exileId.
      *
-     * @param game the current game
+     * @param game   the current game
      * @param source source ability
      * @return the specific UUID
      */
@@ -556,9 +440,9 @@ public class CardUtil {
      * be specific to a permanent instance. So they won't match, if a permanent
      * was e.g. exiled and came back immediately.
      *
-     * @param text short value to describe the value
+     * @param text   short value to describe the value
      * @param cardId id of the card
-     * @param game the game
+     * @param game   the game
      * @return
      */
     public static String getCardZoneString(String text, UUID cardId, Game game) {
@@ -618,80 +502,32 @@ public class CardUtil {
         return "<font color = 'blue'>" + text + "</font>";
     }
 
-    public static boolean convertedManaCostsIsEqual(MageObject object1, MageObject object2) {
-        Set<Integer> cmcObject1 = getCMC(object1);
-        Set<Integer> cmcObject2 = getCMC(object2);
-        for (Integer integer : cmcObject1) {
-            if (cmcObject2.contains(integer)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public static Set<Integer> getCMC(MageObject object) {
-        Set<Integer> cmcObject = new HashSet<>();
-        if (object instanceof Spell) {
-            cmcObject.add(((Spell) object).getConvertedManaCost());
-        } else if (object instanceof Card) {
-            Card card = (Card) object;
-            if (card instanceof SplitCard) {
-                SplitCard splitCard = (SplitCard) card;
-                cmcObject.add(splitCard.getLeftHalfCard().getManaCost().convertedManaCost());
-                cmcObject.add(splitCard.getRightHalfCard().getManaCost().convertedManaCost());
-            } else {
-                cmcObject.add(card.getManaCost().convertedManaCost());
-            }
-        }
-        return cmcObject;
-    }
-
-    /**
-     * Gets the colors that are in the casting cost but also in the rules text
-     * as far as not included in reminder text.
-     *
-     * @param card
-     * @return
-     */
-    public static FilterMana getColorIdentity(Card card) {
-        FilterMana mana = new FilterMana();
-        mana.setBlack(card.getManaCost().getText().matches(regexBlack));
-        mana.setBlue(card.getManaCost().getText().matches(regexBlue));
-        mana.setGreen(card.getManaCost().getText().matches(regexGreen));
-        mana.setRed(card.getManaCost().getText().matches(regexRed));
-        mana.setWhite(card.getManaCost().getText().matches(regexWhite));
-
-        for (String rule : card.getRules()) {
-            rule = rule.replaceAll("(?i)<i.*?</i>", ""); // Ignoring reminder text in italic
-            if (rule.matches(regexBlack)) {
-                mana.setBlack(true);
-            }
-            if (rule.matches(regexBlue)) {
-                mana.setBlue(true);
-            }
-            if (rule.matches(regexGreen)) {
-                mana.setGreen(true);
-            }
-            if (rule.matches(regexRed)) {
-                mana.setRed(true);
-            }
-            if (rule.matches(regexWhite)) {
-                mana.setWhite(true);
-            }
-        }
-        return mana;
-    }
-
-    public static boolean isNonCreatureSubtype(String subtype) {
-        return NON_CREATURE_SUBTYPES.contains(subtype);
-    }
-
     public static boolean cardCanBePlayedNow(Card card, UUID playerId, Game game) {
-        if (card.getCardType().contains(CardType.LAND)) {
+        if (card.isLand()) {
             return game.canPlaySorcery(playerId) && game.getPlayer(playerId).canPlayLand();
         } else {
             return card.getSpellAbility() != null && card.getSpellAbility().spellCanBeActivatedRegularlyNow(playerId, game);
         }
+    }
+
+    public static int addWithOverflowCheck(int base, int increment) {
+        long result = ((long) base) + increment;
+        if (result > Integer.MAX_VALUE) {
+             return Integer.MAX_VALUE;
+        } else if (result < Integer.MIN_VALUE) {
+             return Integer.MIN_VALUE;
+        }
+        return base + increment;
+    }
+
+    public static int subtractWithOverflowCheck(int base, int decrement) {
+        long result = ((long) base) - decrement;
+        if (result > Integer.MAX_VALUE) {
+             return Integer.MAX_VALUE;
+        } else if (result < Integer.MIN_VALUE) {
+             return Integer.MIN_VALUE;
+        }
+        return base - decrement;
     }
 
 }

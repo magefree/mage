@@ -42,10 +42,6 @@ import mage.cards.Card;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
-import static mage.constants.Layer.AbilityAddingRemovingEffects_6;
-import static mage.constants.Layer.ColorChangingEffects_5;
-import static mage.constants.Layer.PTChangingEffects_7;
-import static mage.constants.Layer.TypeChangingEffects_4;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.filter.FilterPermanent;
@@ -85,7 +81,7 @@ public class BecomesFaceDownCreatureAllEffect extends ContinuousEffectImpl imple
     public void init(Ability source, Game game) {
         super.init(source, game);
         for (Permanent perm: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-            if (!perm.isFaceDown(game) && !perm.canTransform()) {
+            if (!perm.isFaceDown(game) && !perm.isTransformable()) {
                 affectedObjectList.add(new MageObjectReference(perm, game));
                 perm.setFaceDown(true, game);
                 // check for Morph
@@ -111,10 +107,10 @@ public class BecomesFaceDownCreatureAllEffect extends ContinuousEffectImpl imple
                 switch (layer) {
                     case TypeChangingEffects_4:
                         permanent.setName("");
-                        permanent.getSupertype().clear();
+                        permanent.getSuperType().clear();
                         permanent.getCardType().clear();
-                        permanent.getCardType().add(CardType.CREATURE);
-                        permanent.getSubtype().clear();
+                        permanent.addCardType(CardType.CREATURE);
+                        permanent.getSubtype(game).clear();
                         permanent.getManaCost().clear();
                         break;
                     case ColorChangingEffects_5:

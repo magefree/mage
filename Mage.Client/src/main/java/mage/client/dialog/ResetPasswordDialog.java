@@ -6,18 +6,16 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import javax.swing.SwingWorker;
 import mage.client.MageFrame;
+import mage.client.SessionHandler;
 import mage.client.preference.MagePreferences;
 import mage.remote.Connection;
-import mage.remote.Session;
-import mage.remote.SessionImpl;
 import org.apache.log4j.Logger;
 
 public class ResetPasswordDialog extends MageDialog {
 
     private static final Logger logger = Logger.getLogger(ResetPasswordDialog.class);
-    private ConnectDialog connectDialog;
+    private final ConnectDialog connectDialog;
     private Connection connection;
-    private Session session;
     private GetAuthTokenTask getAuthTokenTask;
     private ResetPasswordTask resetPasswordTask;
 
@@ -90,11 +88,7 @@ public class ResetPasswordDialog extends MageDialog {
         lblPasswordConfirmation.setText("New password:");
 
         btnSubmitNewPassword.setText("Submit a new password");
-        btnSubmitNewPassword.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSubmitNewPasswordActionPerformed(evt);
-            }
-        });
+        btnSubmitNewPassword.addActionListener(evt -> btnSubmitNewPasswordActionPerformed(evt));
 
         lblPasswordConfirmationReasoning.setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
         lblPasswordConfirmationReasoning.setLabelFor(txtPasswordConfirmation);
@@ -159,11 +153,7 @@ public class ResetPasswordDialog extends MageDialog {
         lblEmail.setText("Email:");
 
         btnGetAuthToken.setText("Email an auth token");
-        btnGetAuthToken.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGetAuthTokenActionPerformed(evt);
-            }
-        });
+        btnGetAuthToken.addActionListener(evt -> btnGetAuthTokenActionPerformed(evt));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -198,11 +188,7 @@ public class ResetPasswordDialog extends MageDialog {
         );
 
         btnCancel.setText("Cancel");
-        btnCancel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelActionPerformed(evt);
-            }
-        });
+        btnCancel.addActionListener(evt -> btnCancelActionPerformed(evt));
 
         lblServer.setLabelFor(txtServer);
         lblServer.setText("Server:");
@@ -259,7 +245,7 @@ public class ResetPasswordDialog extends MageDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGetAuthTokenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGetAuthTokenActionPerformed
-        if (this.txtEmail.getText().length() == 0) {
+        if (this.txtEmail.getText().isEmpty()) {
             MageFrame.getInstance().showError("Please enter an email address.");
             return;
         }
@@ -275,15 +261,15 @@ public class ResetPasswordDialog extends MageDialog {
     }//GEN-LAST:event_btnGetAuthTokenActionPerformed
 
     private void btnSubmitNewPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitNewPasswordActionPerformed
-        if (this.txtEmail.getText().length() == 0) {
+        if (this.txtEmail.getText().isEmpty()) {
             MageFrame.getInstance().showError("Please enter an email address.");
             return;
         }
-        if (this.txtAuthToken.getText().length() == 0) {
+        if (this.txtAuthToken.getText().isEmpty()) {
             MageFrame.getInstance().showError("Please enter an auth token.");
             return;
         }
-        if (this.txtPassword.getText().length() == 0) {
+        if (this.txtPassword.getText().isEmpty()) {
             MageFrame.getInstance().showError("Please enter a new password.");
             return;
         }
@@ -328,8 +314,7 @@ public class ResetPasswordDialog extends MageDialog {
         protected Boolean doInBackground() throws Exception {
             lblStatus.setText("Connecting...");
             disableButtons();
-            session = new SessionImpl(MageFrame.getInstance());
-            result = session.emailAuthToken(connection);
+            result = SessionHandler.emailAuthToken(connection);
             return result;
         }
 
@@ -371,8 +356,7 @@ public class ResetPasswordDialog extends MageDialog {
         protected Boolean doInBackground() throws Exception {
             lblStatus.setText("Connecting...");
             disableButtons();
-            session = new SessionImpl(MageFrame.getInstance());
-            result = session.resetPassword(connection);
+            result = SessionHandler.resetPassword(connection);
             return result;
         }
 

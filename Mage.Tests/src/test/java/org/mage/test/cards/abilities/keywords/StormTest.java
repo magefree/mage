@@ -142,7 +142,7 @@ public class StormTest extends CardTestPlayerBase {
     @Test
     public void testStormSpellCountered() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
-        // Grapeshot deals 1 damage to target creature or player.
+        // Grapeshot deals 1 damage to any target.
         // Storm (When you cast this spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)
         addCard(Zone.HAND, playerA, "Grapeshot");
         addCard(Zone.HAND, playerA, "Lightning Bolt");
@@ -174,7 +174,7 @@ public class StormTest extends CardTestPlayerBase {
         // Whenever you cast an instant or sorcery spell that has the same name as a card in your graveyard, you may put a quest counter on Pyromancer Ascension.
         // Whenever you cast an instant or sorcery spell while Pyromancer Ascension has two or more quest counters on it, you may copy that spell. You may choose new targets for the copy.
         addCard(Zone.BATTLEFIELD, playerA, "Pyromancer Ascension", 1);
-        // Grapeshot deals 1 damage to target creature or player. - Sorcery {1}{R}
+        // Grapeshot deals 1 damage to any target. - Sorcery {1}{R}
         // Storm (When you cast this spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)
         addCard(Zone.LIBRARY, playerA, "Grapeshot", 2);
         skipInitShuffling();
@@ -207,7 +207,7 @@ public class StormTest extends CardTestPlayerBase {
     public void testStormAndFlashback() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 8);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
-        // Geistflame deals 1 damage to target creature or player.
+        // Geistflame deals 1 damage to any target.
         // Flashback {3}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
         addCard(Zone.HAND, playerA, "Geistflame", 2); // {R}
         addCard(Zone.LIBRARY, playerA, "Grapeshot", 2);
@@ -249,7 +249,7 @@ public class StormTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 10);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
-        // Each player discards his or her hand,
+        // Each player discards their hand,
         // then draws seven cards.
         addCard(Zone.HAND, playerA, "Wheel of Fortune", 1); // {2}{R}
         addCard(Zone.LIBRARY, playerA, "Mox Emerald", 1);

@@ -31,6 +31,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostsImpl;
+import mage.abilities.costs.OrCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -70,9 +71,11 @@ public class CumulativeUpkeepAbility extends BeginningOfUpkeepTriggeredAbility {
 
     @Override
     public String getRule() {
-        StringBuilder sb = new StringBuilder("Cumulative upkeep ");
-        if (!(cumulativeCost instanceof ManaCost)) {
-            sb.append("&mdash; ");
+        StringBuilder sb = new StringBuilder("Cumulative upkeep");
+        if (!(cumulativeCost instanceof ManaCost || cumulativeCost instanceof OrCost)) {
+            sb.append("&mdash;");
+        } else {
+            sb.append(' ');
         }
         sb.append(cumulativeCost.getText());
         return sb.toString();
@@ -98,13 +101,13 @@ class CumulativeUpkeepEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (player != null && permanent != null) {
-            int ageCounter = permanent.getCounters().getCount(CounterType.AGE);
+            int ageCounter = permanent.getCounters(game).getCount(CounterType.AGE);
             if (cumulativeCost instanceof ManaCost) {
                 ManaCostsImpl totalCost = new ManaCostsImpl<>();
                 for (int i = 0; i < ageCounter; i++) {
                     totalCost.add((ManaCost) cumulativeCost.copy());
                 }
-                if (player.chooseUse(Outcome.Benefit, "Pay " + totalCost.getText() + "?", source, game)) {
+                if (player.chooseUse(Outcome.Benefit, "Pay " + totalCost.getText() + '?', source, game)) {
                     totalCost.clearPaid();
                     if (totalCost.payOrRollback(source, game, source.getSourceId(), source.getControllerId())) {
                         game.fireEvent(new GameEvent(EventType.PAID_CUMULATIVE_UPKEEP, permanent.getId(), permanent.getId(), player.getId(), ageCounter, false));
@@ -119,7 +122,7 @@ class CumulativeUpkeepEffect extends OneShotEffect {
                 for (int i = 0; i < ageCounter; i++) {
                     totalCost.add(cumulativeCost.copy());
                 }
-                if (player.chooseUse(Outcome.Benefit, totalCost.getText() + "?", source, game)) {
+                if (player.chooseUse(Outcome.Benefit, totalCost.getText() + '?', source, game)) {
                     totalCost.clearPaid();
                     int bookmark = game.bookmarkState();
                     if (totalCost.pay(source, game, source.getSourceId(), source.getControllerId(), false, null)) {

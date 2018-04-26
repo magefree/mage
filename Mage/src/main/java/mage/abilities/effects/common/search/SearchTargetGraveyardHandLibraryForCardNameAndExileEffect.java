@@ -57,9 +57,9 @@ public abstract class SearchTargetGraveyardHandLibraryForCardNameAndExileEffect 
      * Sowing Salt
      * 2/1/2005: The copies must be found if they are in publicly viewable zones. Finding copies while searching private zones is optional.
      */
-    protected Boolean graveyardExileOptional;
+    protected boolean graveyardExileOptional;
 
-    public SearchTargetGraveyardHandLibraryForCardNameAndExileEffect(Boolean graveyardExileOptional, String searchWhatText, String searchForText) {
+    public SearchTargetGraveyardHandLibraryForCardNameAndExileEffect(boolean graveyardExileOptional, String searchWhatText, String searchForText) {
         super(Outcome.Exile);
         this.searchWhatText = searchWhatText;
         this.searchForText = searchForText;
@@ -93,7 +93,7 @@ public abstract class SearchTargetGraveyardHandLibraryForCardNameAndExileEffect 
                 // cards in Graveyard
                 int cardsCount = (cardName.isEmpty() ? 0 : targetPlayer.getGraveyard().count(filter, game));
                 if (cardsCount > 0) {
-                    filter.setMessage("card named " + cardName + " in the graveyard of " + targetPlayer.getLogName());
+                    filter.setMessage("card named " + cardName + " in the graveyard of " + targetPlayer.getName());
                     TargetCard target = new TargetCard((graveyardExileOptional ? 0 : cardsCount), cardsCount, Zone.GRAVEYARD, filter);
                     if (controller.choose(Outcome.Exile, targetPlayer.getGraveyard(), target, game)) {
                         controller.moveCards(new CardsImpl(target.getTargets()), Zone.EXILED, source, game);
@@ -102,7 +102,7 @@ public abstract class SearchTargetGraveyardHandLibraryForCardNameAndExileEffect 
 
                 // cards in Hand
                 cardsCount = (cardName.isEmpty() ? 0 : targetPlayer.getHand().count(filter, game));
-                filter.setMessage("card named " + cardName + " in the hand of " + targetPlayer.getLogName());
+                filter.setMessage("card named " + cardName + " in the hand of " + targetPlayer.getName());
                 TargetCard target = new TargetCard(0, cardsCount, Zone.HAND, filter);
                 if (controller.choose(Outcome.Exile, targetPlayer.getHand(), target, game)) {
                     controller.moveCards(new CardsImpl(target.getTargets()), Zone.EXILED, source, game);
@@ -117,7 +117,7 @@ public abstract class SearchTargetGraveyardHandLibraryForCardNameAndExileEffect 
                 if (controller.choose(Outcome.Exile, cardsInLibrary, targetLib, game)) {
                     controller.moveCards(new CardsImpl(targetLib.getTargets()), Zone.EXILED, source, game);
                 }
-                targetPlayer.shuffleLibrary(game);
+                targetPlayer.shuffleLibrary(source, game);
             }
 
             return true;
@@ -129,10 +129,10 @@ public abstract class SearchTargetGraveyardHandLibraryForCardNameAndExileEffect 
     @Override
     public String getText(Mode mode) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Search ").append(this.searchWhatText);
+        sb.append("search ").append(this.searchWhatText);
         sb.append(" graveyard, hand, and library for ");
         sb.append(this.searchForText);
-        sb.append(" and exile them. Then that player shuffles his or her library");
+        sb.append(" and exile them. Then that player shuffles their library");
         return sb.toString();
     }
 }

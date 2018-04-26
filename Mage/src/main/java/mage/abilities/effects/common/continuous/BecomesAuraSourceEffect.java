@@ -34,10 +34,9 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.constants.DependencyType;
 import mage.constants.Duration;
 import mage.constants.Layer;
-import static mage.constants.Layer.AbilityAddingRemovingEffects_6;
-import static mage.constants.Layer.TypeChangingEffects_4;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
@@ -85,8 +84,8 @@ public class BecomesAuraSourceEffect extends ContinuousEffectImpl implements Sou
             switch (layer) {
                 case TypeChangingEffects_4:
                     if (sublayer == SubLayer.NA) {
-                        if (!permanent.getSubtype().contains("Aura")) {
-                            permanent.getSubtype().add("Aura");
+                        if (!permanent.hasSubtype(SubType.AURA, game)) {
+                            permanent.getSubtype(game).add(SubType.AURA);
                         }
                     }
                     break;
@@ -110,7 +109,7 @@ public class BecomesAuraSourceEffect extends ContinuousEffectImpl implements Sou
 
     @Override
     public boolean hasLayer(Layer layer) {
-        return Layer.AbilityAddingRemovingEffects_6.equals(layer) || Layer.TypeChangingEffects_4.equals(layer);
+        return Layer.AbilityAddingRemovingEffects_6 == layer || Layer.TypeChangingEffects_4 == layer;
     }
 
 }

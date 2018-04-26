@@ -29,21 +29,23 @@
 package mage.game.permanent.token;
 
 import java.util.Arrays;
-import java.util.Random;
+
 import mage.MageInt;
 import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.util.RandomUtil;
 
 /**
  *
  * @author LoneFox
  */
-public class WarriorToken extends Token {
+public class WarriorToken extends TokenImpl {
 
     public WarriorToken() {
         super("Warrior", "1/1 white Warrior creature token");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
-        subtype.add("Warrior");
+        subtype.add(SubType.WARRIOR);
         power = new MageInt(1);
         toughness = new MageInt(1);
         availableImageSetCodes.addAll(Arrays.asList("KTK", "DTK"));
@@ -62,7 +64,7 @@ public class WarriorToken extends Token {
     public void setExpansionSetCodeForImage(String code) {
         super.setExpansionSetCodeForImage(code);
         if (getOriginalExpansionSetCode().equals("KTK")) {
-            this.setTokenType(new Random().nextInt(2) + 1);
+            this.setTokenType(RandomUtil.nextInt(2) + 1);
         }
     }
 }

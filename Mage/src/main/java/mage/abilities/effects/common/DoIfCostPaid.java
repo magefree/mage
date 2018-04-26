@@ -1,5 +1,6 @@
 package mage.abilities.effects.common;
 
+import java.util.Locale;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -16,6 +17,7 @@ import mage.util.CardUtil;
 public class DoIfCostPaid extends OneShotEffect {
 
     protected Effects executingEffects = new Effects();
+    protected Effects otherwiseEffects = new Effects(); // used for Imprison
     private final Cost cost;
     private String chooseUseText;
     private boolean optional;
@@ -24,13 +26,20 @@ public class DoIfCostPaid extends OneShotEffect {
         this(effect, cost, null);
     }
 
+    public DoIfCostPaid(Effect effect, Effect effect2, Cost cost) {
+        this(effect, cost, null, true);
+        this.otherwiseEffects.add(effect2);
+    }
+
     public DoIfCostPaid(Effect effect, Cost cost, String chooseUseText) {
         this(effect, cost, chooseUseText, true);
     }
 
     public DoIfCostPaid(Effect effect, Cost cost, String chooseUseText, boolean optional) {
         super(Outcome.Benefit);
-        this.executingEffects.add(effect);
+        if (effect != null) {
+            this.executingEffects.add(effect);
+        }
         this.cost = cost;
         this.chooseUseText = chooseUseText;
         this.optional = optional;
@@ -39,6 +48,7 @@ public class DoIfCostPaid extends OneShotEffect {
     public DoIfCostPaid(final DoIfCostPaid effect) {
         super(effect);
         this.executingEffects = effect.executingEffects.copy();
+        this.otherwiseEffects = effect.otherwiseEffects.copy();
         this.cost = effect.cost.copy();
         this.chooseUseText = effect.chooseUseText;
         this.optional = effect.optional;
@@ -56,10 +66,10 @@ public class DoIfCostPaid extends OneShotEffect {
             String message;
             if (chooseUseText == null) {
                 String effectText = executingEffects.getText(source.getModes().getMode());
-                if (effectText.length() > 0 && effectText.charAt(effectText.length() - 1) == '.') {
+                if (!effectText.isEmpty() && effectText.charAt(effectText.length() - 1) == '.') {
                     effectText = effectText.substring(0, effectText.length() - 1);
                 }
-                message = getCostText() + " and " + effectText + "?";
+                message = getCostText() + " and " + effectText + '?';
                 message = Character.toUpperCase(message.charAt(0)) + message.substring(1);
             } else {
                 message = chooseUseText;
@@ -67,7 +77,7 @@ public class DoIfCostPaid extends OneShotEffect {
             message = CardUtil.replaceSourceName(message, mageObject.getLogName());
             boolean result = true;
             if (cost.canPay(source, source.getSourceId(), player.getId(), game)
-                    && (optional && player.chooseUse(executingEffects.get(0).getOutcome(), message, source, game))) {
+                    && executingEffects.size() > 0 && (!optional || player.chooseUse(executingEffects.get(0).getOutcome(), message, source, game))) {
                 cost.clearPaid();
                 if (cost.pay(source, game, source.getSourceId(), player.getId(), false)) {
                     for (Effect effect : executingEffects) {
@@ -79,6 +89,24 @@ public class DoIfCostPaid extends OneShotEffect {
                         }
                     }
                     player.resetStoredBookmark(game); // otherwise you can e.g. undo card drawn with Mentor of the Meek
+                } else if (!otherwiseEffects.isEmpty()) {
+                    for (Effect effect : otherwiseEffects) {
+                        effect.setTargetPointer(this.targetPointer);
+                        if (effect instanceof OneShotEffect) {
+                            result &= effect.apply(game, source);
+                        } else {
+                            game.addEffect((ContinuousEffect) effect, source);
+                        }
+                    }
+                }
+            } else if (!otherwiseEffects.isEmpty()) {
+                for (Effect effect : otherwiseEffects) {
+                    effect.setTargetPointer(this.targetPointer);
+                    if (effect instanceof OneShotEffect) {
+                        result &= effect.apply(game, source);
+                    } else {
+                        game.addEffect((ContinuousEffect) effect, source);
+                    }
                 }
             }
             return result;
@@ -90,24 +118,28 @@ public class DoIfCostPaid extends OneShotEffect {
         return game.getPlayer(source.getControllerId());
     }
 
+    public Cost getCost() {
+        return cost;
+    }
+
     @Override
     public String getText(Mode mode) {
         if (!staticText.isEmpty()) {
             return staticText;
         }
-        return (optional ? "you may " : "") + getCostText() + ". If you do, " + executingEffects.getText(mode);
+        return (optional ? "you may " : "") + getCostText() + ". If you do, " + executingEffects.getText(mode) + (!otherwiseEffects.isEmpty() ? " If you don't, " + otherwiseEffects.getText(mode) : "");
     }
 
     protected String getCostText() {
         StringBuilder sb = new StringBuilder();
         String costText = cost.getText();
         if (costText != null
-                && !costText.toLowerCase().startsWith("put")
-                && !costText.toLowerCase().startsWith("exile")
-                && !costText.toLowerCase().startsWith("discard")
-                && !costText.toLowerCase().startsWith("sacrifice")
-                && !costText.toLowerCase().startsWith("remove")
-                && !costText.toLowerCase().startsWith("pay")) {
+                && !costText.toLowerCase(Locale.ENGLISH).startsWith("put")
+                && !costText.toLowerCase(Locale.ENGLISH).startsWith("exile")
+                && !costText.toLowerCase(Locale.ENGLISH).startsWith("discard")
+                && !costText.toLowerCase(Locale.ENGLISH).startsWith("sacrifice")
+                && !costText.toLowerCase(Locale.ENGLISH).startsWith("remove")
+                && !costText.toLowerCase(Locale.ENGLISH).startsWith("pay")) {
             sb.append("pay ");
         }
         return sb.append(costText).toString();

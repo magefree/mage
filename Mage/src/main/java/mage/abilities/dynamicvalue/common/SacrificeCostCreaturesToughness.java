@@ -6,7 +6,6 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
  * @author LevelX2
@@ -18,11 +17,7 @@ public class SacrificeCostCreaturesToughness implements DynamicValue {
         for (Cost cost : sourceAbility.getCosts()) {
             if (cost instanceof SacrificeTargetCost) {
                 SacrificeTargetCost sacrificeCost = (SacrificeTargetCost) cost;
-                int toughnessSum = 0;
-                for (Permanent permanent : sacrificeCost.getPermanents()) {
-                    toughnessSum += permanent.getToughness().getValue();
-                }
-                return toughnessSum;
+                return sacrificeCost.getPermanents().stream().mapToInt(p -> p.getToughness().getValue()).sum();
             }
         }
         return 0;

@@ -9,7 +9,7 @@ public enum RangeOfInfluence {
     TWO(2),
     ALL(0);
 
-    private int range;
+    private final int range;
 
     RangeOfInfluence(int range) {
         this.range = range;

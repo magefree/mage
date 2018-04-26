@@ -24,29 +24,50 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.game.permanent.token;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import mage.constants.CardType;
+import java.util.List;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
+import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
  * @author LoneFox
  */
-public class DragonToken2 extends Token {
+public class DragonToken2 extends TokenImpl {
+
+    final static private List<String> tokenImageSets = new ArrayList<>();
+
+    static {
+        tokenImageSets.addAll(Arrays.asList("WWK", "10E", "BFZ", "C15", "CN2", "CMA"));
+    }
 
     public DragonToken2() {
+        this((String)null);
+    }
+
+    public DragonToken2(String setCode) {
         super("Dragon", "5/5 red Dragon creature token with flying");
+        availableImageSetCodes = tokenImageSets;
+        setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.CREATURE);
         color.setRed(true);
-        subtype.add("Dragon");
+        subtype.add(SubType.DRAGON);
         power = new MageInt(5);
         toughness = new MageInt(5);
         addAbility(FlyingAbility.getInstance());
-        availableImageSetCodes.addAll(Arrays.asList("WWK", "10E"));
+    }
+
+    public DragonToken2(final DragonToken2 token) {
+        super(token);
+    }
+
+    public DragonToken2 copy() {
+        return new DragonToken2(this);
     }
 }

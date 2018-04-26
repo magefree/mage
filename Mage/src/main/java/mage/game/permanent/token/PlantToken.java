@@ -33,8 +33,9 @@ import java.util.Arrays;
 import java.util.List;
 import mage.MageInt;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
-public class PlantToken extends Token {
+public class PlantToken extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 
@@ -46,10 +47,18 @@ public class PlantToken extends Token {
         super("Plant", "0/1 green Plant creature");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
-        subtype.add("Plant");
+        subtype.add(SubType.PLANT);
         power = new MageInt(0);
         toughness = new MageInt(1);
 
         availableImageSetCodes = tokenImageSets;
+    }
+
+    public PlantToken(final PlantToken token) {
+        super(token);
+    }
+
+    public PlantToken copy() {
+        return new PlantToken(this);
     }
 }

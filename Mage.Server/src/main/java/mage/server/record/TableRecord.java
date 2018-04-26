@@ -1,10 +1,10 @@
 package mage.server.record;
 
+import com.google.protobuf.InvalidProtocolBufferException;
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import mage.game.result.ResultProtos.TableProto;
-import org.mage.mage.shaded.protobuf.InvalidProtocolBufferException;
 import org.apache.log4j.Logger;
 
 @DatabaseTable(tableName = "table_history")

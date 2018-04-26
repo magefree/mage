@@ -41,10 +41,13 @@ package mage.constants;
 public enum DependencyType {
 
     AuraAddingRemoving,
+    ArtifactAddingRemoving,
+    AddingAbility,
     BecomeForest,
     BecomeIsland,
     BecomeMountain,
     BecomePlains,
     BecomeSwamp,
-    EnchantmentAddingRemoving;
+    EnchantmentAddingRemoving,
+    LooseDefenderEffect
 }

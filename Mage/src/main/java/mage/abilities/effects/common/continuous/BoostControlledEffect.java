@@ -37,6 +37,7 @@ import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -54,15 +55,15 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
     protected boolean lockedIn = false;
 
     public BoostControlledEffect(int power, int toughness, Duration duration) {
-        this(power, toughness, duration, new FilterCreaturePermanent("creatures"), false);
+        this(power, toughness, duration, StaticFilters.FILTER_PERMANENT_CREATURES, false);
     }
 
     public BoostControlledEffect(DynamicValue power, DynamicValue toughness, Duration duration) {
-        this(power, toughness, duration, new FilterCreaturePermanent("creatures"), false);
+        this(power, toughness, duration, StaticFilters.FILTER_PERMANENT_CREATURES, false);
     }
 
     public BoostControlledEffect(int power, int toughness, Duration duration, boolean excludeSource) {
-        this(power, toughness, duration, new FilterCreaturePermanent("creatures"), excludeSource);
+        this(power, toughness, duration, StaticFilters.FILTER_PERMANENT_CREATURES, excludeSource);
     }
 
     public BoostControlledEffect(int power, int toughness, Duration duration, FilterCreaturePermanent filter) {
@@ -91,7 +92,7 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
         super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
         this.power = power;
         this.toughness = toughness;
-        this.filter = filter;
+        this.filter = (filter == null ? StaticFilters.FILTER_PERMANENT_CREATURES : filter);
         this.excludeSource = excludeSource;
         this.lockedIn = lockedIn;
         setText();
@@ -146,7 +147,6 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
                     perm.addToughness(toughness.calculate(game, source, this));
                 }
             }
-
         }
         return true;
     }
@@ -162,15 +162,15 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
 
         String p = power.toString();
         if (!p.startsWith("-")) {
-            sb.append("+");
+            sb.append('+');
         }
-        sb.append(p).append("/");
+        sb.append(p).append('/');
         String t = toughness.toString();
         if (!t.startsWith("-")) {
             if (p.startsWith("-")) {
-                sb.append("-");
+                sb.append('-');
             } else {
-                sb.append("+");
+                sb.append('+');
             }
         }
         sb.append(t);

@@ -30,7 +30,6 @@ package mage.player.ai;
 
 import mage.constants.PhaseStep;
 import mage.constants.RangeOfInfluence;
-import mage.abilities.Ability;
 import mage.game.Game;
 import mage.game.combat.Combat;
 import mage.game.combat.CombatGroup;
@@ -78,7 +77,7 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
                 return false;
             case PRECOMBAT_MAIN:
                 if (game.getActivePlayerId().equals(playerId)) {
-                    if (actions.size() == 0) {
+                    if (actions.isEmpty()) {
                         calculatePreCombatActions(game);
                     }
                     act(game);
@@ -92,7 +91,7 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
                 return false;
             case DECLARE_ATTACKERS:
                 if (!game.getActivePlayerId().equals(playerId)) {
-                    if (actions.size() == 0) {
+                    if (actions.isEmpty()) {
                         calculatePreCombatActions(game);
                     }
                     act(game);
@@ -109,7 +108,7 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
                 return false;
             case POSTCOMBAT_MAIN:
                 if (game.getActivePlayerId().equals(playerId)) {
-                    if (actions.size() == 0) {
+                    if (actions.isEmpty()) {
                         calculatePostCombatActions(game);
                     }
                     act(game);
@@ -139,9 +138,9 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
             else
                 addActions(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
             logger.info(name + " simulated " + nodeCount + " nodes in " + thinkTime/1000000000.0 + "s - average " + nodeCount/(thinkTime/1000000000.0) + " nodes/s");
-            if (root.children.size() > 0) {
+            if (!root.children.isEmpty()) {
                 root = root.children.get(0);
-                actions = new LinkedList<Ability>(root.abilities);
+                actions = new LinkedList<>(root.abilities);
                 combat = root.combat;
                 if (logger.isDebugEnabled())
                     logger.debug("adding pre-combat actions:" + actions);
@@ -163,9 +162,9 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
             else
                 addActions(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
             logger.info(name + " simulated " + nodeCount + " nodes in " + thinkTime/1000000000.0 + "s - average " + nodeCount/(thinkTime/1000000000.0) + " nodes/s");
-            if (root.children.size() > 0) {
+            if (!root.children.isEmpty()) {
                 root = root.children.get(0);
-                actions = new LinkedList<Ability>(root.abilities);
+                actions = new LinkedList<>(root.abilities);
                 combat = root.combat;
                 if (logger.isDebugEnabled())
                     logger.debug("adding post-combat actions:" + actions);
@@ -185,11 +184,11 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
             logger.debug(indent(node.depth) + "interrupted");
             return GameStateEvaluator.evaluate(playerId, game);
         }
-        if (node.depth > maxDepth || game.gameOver(null)) {
+        if (node.depth > maxDepth || game.checkIfGameIsOver()) {
             logger.debug(indent(node.depth) + "simulating -- reached end state");
             val = GameStateEvaluator.evaluate(playerId, game);
         }
-        else if (node.getChildren().size() > 0) {
+        else if (!node.getChildren().isEmpty()) {
             logger.debug(indent(node.depth) + "simulating -- somthing added children:" + node.getChildren().size());
             val = minimaxAB(node, alpha, beta);
         }
@@ -205,7 +204,7 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
                 }
             }
 
-            if (game.gameOver(null)) {
+            if (game.checkIfGameIsOver()) {
                 val = GameStateEvaluator.evaluate(playerId, game);
             }
             else if (stepFinished) {
@@ -238,7 +237,7 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
                         val = GameStateEvaluator.evaluate(playerId, game);
                 }
             }
-            else if (node.getChildren().size() > 0) {
+            else if (!node.getChildren().isEmpty()) {
                 logger.debug(indent(node.depth) + "simulating -- trigger added children:" + node.getChildren().size());
                 val = minimaxAB(node, alpha, beta);
             }
@@ -388,7 +387,7 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
                 }
                 Game sim = game.copy();
                 for (CombatGroup group: engagement.getGroups()) {
-                    if (group.getAttackers().size() > 0) {
+                    if (!group.getAttackers().isEmpty()) {
                         UUID attackerId = group.getAttackers().get(0);
                         for (UUID blockerId: group.getBlockers()) {
                             sim.getPlayer(defenderId).declareBlocker(defenderId, blockerId, attackerId, sim);
@@ -409,7 +408,7 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
                 sim.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARE_BLOCKERS_STEP_POST, sim.getActivePlayerId(), sim.getActivePlayerId()));
                 Combat simCombat = sim.getCombat().copy();
                 finishCombat(sim);
-                if (sim.gameOver(null)) {
+                if (sim.checkIfGameIsOver()) {
                     val = GameStateEvaluator.evaluate(playerId, sim);
                 }
                 else if (!counter) {
@@ -451,7 +450,7 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
             return GameStateEvaluator.evaluate(playerId, game);
         }
         Integer val = null;
-        if (!game.gameOver(null)) {
+        if (!game.checkIfGameIsOver()) {
             logger.debug(indent(node.depth) + "simulating -- ending turn");
             simulateToEnd(game);
             game.getState().setActivePlayerId(game.getState().getPlayerList(game.getActivePlayerId()).getNext());
@@ -479,7 +478,7 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
             logger.debug("interrupted");
             return;
         }
-        if (!game.gameOver(null)) {
+        if (!game.checkIfGameIsOver()) {
             game.getPhase().setStep(step);
             if (!step.skipStep(game, game.getActivePlayerId())) {
                 step.beginStep(game, game.getActivePlayerId());
@@ -527,7 +526,7 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
             logger.debug("interrupted");
             return;
         }
-        if (!game.gameOver(null)) {
+        if (!game.checkIfGameIsOver()) {
             game.getTurn().getPhase().endPhase(game, game.getActivePlayerId());
             game.getTurn().setPhase(new EndPhase());
             if (game.getTurn().getPhase().beginPhase(game, game.getActivePlayerId())) {

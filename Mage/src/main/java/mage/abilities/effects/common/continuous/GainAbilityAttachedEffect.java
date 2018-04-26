@@ -30,6 +30,7 @@ package mage.abilities.effects.common.continuous;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.AttachmentType;
+import mage.constants.DependencyType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
@@ -75,6 +76,7 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl {
         } else {
             this.staticText = rule;
         }
+        this.addDependencyType(DependencyType.AddingAbility);
     }
 
     public GainAbilityAttachedEffect(final GainAbilityAttachedEffect effect) {
@@ -124,11 +126,7 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl {
 
     private void setText() {
         StringBuilder sb = new StringBuilder();
-        if (attachmentType == AttachmentType.AURA) {
-            sb.append("Enchanted");
-        } else if (attachmentType == AttachmentType.EQUIPMENT) {
-            sb.append("Equipped");
-        }
+        sb.append(attachmentType.verb());
         sb.append(" creature ");
         if (duration == Duration.WhileOnBattlefield) {
             sb.append("has ");
@@ -137,7 +135,7 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl {
         }
         sb.append(ability.getRule());
         if (!duration.toString().isEmpty()) {
-            sb.append(" ").append(duration.toString());
+            sb.append(' ').append(duration.toString());
         }
         staticText = sb.toString();
     }

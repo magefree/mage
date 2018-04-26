@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.game.tournament;
 
 import java.io.Serializable;
@@ -45,8 +44,10 @@ public class TournamentType implements Serializable {
     protected boolean limited;      // or construced
     protected boolean elimination;  // or Swiss
     protected boolean isRandom;
+    protected boolean isRichMan = false;    // or Rich Man Draft
 
-    protected TournamentType() {}
+    protected TournamentType() {
+    }
 
     @Override
     public String toString() {
@@ -84,9 +85,13 @@ public class TournamentType implements Serializable {
     public boolean isCubeBooster() {
         return cubeBooster;
     }
-    
-    public boolean isRandom(){
+
+    public boolean isRandom() {
         return this.isRandom;
     }
-    
-}
+
+    public boolean isRichMan() {
+        return this.isRichMan;
+    }
+
+} 

@@ -29,7 +29,10 @@ package mage.filter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
+
+import mage.constants.SubType;
 import mage.filter.predicate.ObjectPlayer;
 import mage.filter.predicate.ObjectPlayerPredicate;
 import mage.filter.predicate.ObjectSourcePlayer;
@@ -59,9 +62,16 @@ public class FilterPermanent extends FilterObject<Permanent> implements FilterIn
         super(name);
     }
 
-    public FilterPermanent(String subtype, String name) {
+    public FilterPermanent(SubType subtype, String name) {
         super(name);
         this.add(new SubtypePredicate(subtype));
+    }
+
+    public FilterPermanent(Set<SubType> subtypesList, String name) {
+        super(name);
+        for (SubType subtype: subtypesList) {
+            this.add(new SubtypePredicate(subtype));
+        }
     }
 
     @Override
@@ -71,7 +81,7 @@ public class FilterPermanent extends FilterObject<Permanent> implements FilterIn
 
     @Override
     public boolean match(Permanent permanent, UUID sourceId, UUID playerId, Game game) {
-        if (!this.match(permanent, game)) {
+        if (!permanent.isPhasedIn() || !this.match(permanent, game)) {
             return false;
         }
 

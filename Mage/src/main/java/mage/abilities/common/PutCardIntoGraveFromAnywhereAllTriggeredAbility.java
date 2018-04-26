@@ -78,7 +78,7 @@ public class PutCardIntoGraveFromAnywhereAllTriggeredAbility extends TriggeredAb
                 sb.append("your");
                 break;
             default:
-                sb.append("a");
+                sb.append('a');
         }
         sb.append(" graveyard, ");
         ruleText = sb.toString();

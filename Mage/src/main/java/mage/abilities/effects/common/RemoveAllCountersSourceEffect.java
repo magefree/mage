@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
@@ -59,15 +58,14 @@ public class RemoveAllCountersSourceEffect extends OneShotEffect {
         return new RemoveAllCountersSourceEffect(this);
     }
 
-    @java.lang.Override
+    @Override
     public boolean apply(Game game, Ability source) {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        if(sourcePermanent != null) {
-            int count = sourcePermanent.getCounters().getCount(counterType);
-            sourcePermanent.getCounters().removeCounter(counterType, count);
+        if (sourcePermanent != null) {
+            int count = sourcePermanent.getCounters(game).getCount(counterType);
+            sourcePermanent.removeCounters(counterType.getName(), count, game);
             return true;
         }
         return false;
     }
 }
-

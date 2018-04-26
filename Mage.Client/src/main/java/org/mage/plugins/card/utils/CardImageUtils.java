@@ -1,8 +1,10 @@
 package org.mage.plugins.card.utils;
 
+import java.io.File;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.prefs.Preferences;
 import mage.client.MageFrame;
 import mage.client.constants.Constants;
@@ -14,7 +16,7 @@ import org.apache.log4j.Logger;
 import org.mage.plugins.card.images.CardDownloadData;
 import org.mage.plugins.card.properties.SettingsManager;
 
-public class CardImageUtils {
+public final class CardImageUtils {
 
     private static final HashMap<CardDownloadData, String> pathCache = new HashMap<>();
     private static final Logger log = Logger.getLogger(CardImageUtils.class);
@@ -26,10 +28,12 @@ public class CardImageUtils {
      */
     public static String generateTokenImagePath(CardDownloadData card) {
         if (card.isToken()) {
-            if (pathCache.containsKey(card)) {
-                return pathCache.get(card);
-            }
             String filePath = getTokenImagePath(card);
+            if (pathCache.containsKey(card)) {
+                if (filePath.equals(pathCache.get(card))) {
+                    return pathCache.get(card);
+                }
+            }
             TFile file = new TFile(filePath);
 
             if (!file.exists() && card.getTokenSetCode() != null) {
@@ -42,27 +46,50 @@ public class CardImageUtils {
                 return filePath;
             }
         }
-        log.warn("Token image file not found: " + card.getTokenSetCode() + " - " + card.getName());            
+        log.warn("Token image file not found: " + card.getSet() + " - " + card.getTokenSetCode() + " - " + card.getName());
         return null;
     }
 
+    /**
+     *
+     * @param card
+     * @return String regardless of whether image exists
+     */
+    public static String generateFullTokenImagePath(CardDownloadData card) {
+        if (card.isToken()) {
+            return getTokenImagePath(card);
+        }
+        return "";
+    }
+
     private static String getTokenImagePath(CardDownloadData card) {
-        String filename = generateImagePath(card);
+        String filename = buildImagePathToCard(card);
 
         TFile file = new TFile(filename);
         if (!file.exists()) {
-            CardDownloadData updated = new CardDownloadData(card);
-            updated.setName(card.getName() + " 1");
-            filename = generateImagePath(updated);
-            file = new TFile(filename);
-            if (!file.exists()) {
-                updated = new CardDownloadData(card);
-                updated.setName(card.getName() + " 2");
-                filename = generateImagePath(updated);
+            String tokenDescriptorfilename = generateTokenDescriptorImagePath(card);
+            if (!tokenDescriptorfilename.isEmpty()) {
+                file = new TFile(filename);
+                if (file.exists()) {
+                    return tokenDescriptorfilename;
+                }
             }
         }
-
         return filename;
+
+// makes no longer sense
+//        file = new TFile(filename);
+//        if (!file.exists()) {
+//            CardDownloadData updated = new CardDownloadData(card);
+//            updated.setName(card.getName() + " 1");
+//            filename = buildImagePathToCard(updated);
+//            file = new TFile(filename);
+//            if (!file.exists()) {
+//                updated = new CardDownloadData(card);
+//                updated.setName(card.getName() + " 2");
+//                filename = buildImagePathToCard(updated);
+//            }
+//        }
     }
 
     private static String searchForCardImage(CardDownloadData card) {
@@ -86,11 +113,11 @@ public class CardImageUtils {
 //                return path;
 //            }
 //        }
-        return "";
+        return generateTokenDescriptorImagePath(card);
     }
 
     public static String updateSet(String cardSet, boolean forUrl) {
-        String set = cardSet.toLowerCase();
+        String set = cardSet.toLowerCase(Locale.ENGLISH);
         if (set.equals("con")) {
             set = "cfx";
         }
@@ -100,67 +127,159 @@ public class CardImageUtils {
         return set;
     }
 
-    private static String getImageDir(CardDownloadData card, String imagesPath) {
+    public static String prepareCardNameForFile(String cardName) {
+        return cardName.replace(":", "").replace("\"", "").replace("//", "-");
+    }
+
+    public static String getImagesDir() {
+        // return real images dir (path without separator)
+
+        String path = null;
+
+        // user path
+        if (!PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_USE_DEFAULT, "true").equals("true")) {
+            path = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PATH, null);
+        }
+
+        // default path
+        if (path == null) {
+            path = Constants.IO.DEFAULT_IMAGES_DIR;
+        }
+
+        while (path.endsWith(File.separator)) {
+            path = path.substring(0, path.length() - 1);
+        }
+
+        return path;
+    }
+
+    public static String buildImagePathToTokens() {
+        String imagesPath = getImagesDir() + File.separator;
+
+        if (PreferencesDialog.isSaveImagesToZip()) {
+            return imagesPath + "TOK.zip" + File.separator;
+        } else {
+            return imagesPath + "TOK" + File.separator;
+        }
+    }
+
+    private static String buildImagePathToTokenDescriptor(CardDownloadData card) {
+        return buildImagePathToTokens() + card.getTokenDescriptor() + ".full.jpg";
+    }
+
+    public static String buildImagePathToSet(CardDownloadData card) {
+
         if (card.getSet() == null) {
-                return "";
-            }
-        String set = updateSet(card.getSet(), false).toUpperCase();
-        String imagesDir = (imagesPath != null ? imagesPath :  Constants.IO.imageBaseDir);
+            throw new IllegalArgumentException("Card " + card.getName() + " have empty set.");
+        }
+
+        String set = updateSet(card.getSet(), false).toUpperCase(Locale.ENGLISH); // TODO: research auto-replace... old code?
+
         if (card.isToken()) {
-            return buildTokenPath(imagesDir, set);
+            return buildImagePathToSetAsToken(set);
         } else {
-            return buildPath(imagesDir, set);
+            return buildImagePathToSetAsCard(set);
         }
     }
-    
-    private static String buildTokenPath(String imagesDir, String set) {
+
+    private static String buildImagePathToSetAsCard(String set) {
+        String imagesPath = getImagesDir() + File.separator;
+
         if (PreferencesDialog.isSaveImagesToZip()) {
-            return imagesDir + TFile.separator + "TOK" + ".zip" + TFile.separator + set;
+            return imagesPath + set + ".zip" + File.separator + set + File.separator;
         } else {
-            return imagesDir + TFile.separator + "TOK" + TFile.separator + set;
+            return imagesPath + set + File.separator;
         }
     }
 
-    private static String buildPath(String imagesDir, String set) {
-        if (PreferencesDialog.isSaveImagesToZip()) {
-            return imagesDir + TFile.separator + set + ".zip" + TFile.separator + set;
-        } else {
-            return imagesDir + TFile.separator + set;
-        }
+    private static String buildImagePathToSetAsToken(String set) {
+        return buildImagePathToTokens() + set + File.separator;
     }
 
-    public static String generateImagePath(CardDownloadData card) {
-        String useDefault = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_USE_DEFAULT, "true");
-        String imagesPath = useDefault.equals("true") ? null : PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PATH, null);
+    public static String buildImagePathToCard(CardDownloadData card) {
 
-        String imageDir = getImageDir(card, imagesPath);
-        String imageName;
+        String setPath = buildImagePathToSet(card);
 
-        String type = card.getType() != 0 ? " " + Integer.toString(card.getType()) : "";
-        String name = card.getName().replace(":", "").replace("//", "-");
+        String prefixType = "";
+        if (card.getType() != 0) {
+            prefixType = " " + Integer.toString(card.getType());
+        }
 
+        String cardName = card.getFileName();
+        if (cardName.isEmpty()) {
+            cardName = prepareCardNameForFile(card.getName());
+        }
+
+        String finalFileName = "";
         if (card.getUsesVariousArt()) {
-            imageName = name + "." + card.getCollectorId() + ".full.jpg";
+            finalFileName = cardName + '.' + card.getCollectorId() + ".full.jpg";
         } else {
-            imageName = name + type + ".full.jpg";
+            if (card.getUsesVariousArt()) {
+                // only various arts can be same name, but different postfixes (a,b,c,d,e)
+                int len = card.getCollectorId().length();
+                if (Character.isLetter(card.getCollectorId().charAt(len - 1))) {
+                    finalFileName = cardName + card.getCollectorId().charAt(len - 1) + ".full.jpg";
+                } else {
+                    finalFileName = cardName + prefixType + ".full.jpg";
+                }
+            } else {
+                // normal cards with same names;
+                finalFileName = cardName + prefixType + ".full.jpg";
+            }
         }
 
-        if (new TFile(imageDir).exists() && !new TFile(imageDir + TFile.separator + imageName).exists()) {
-            for (String fileName : new TFile(imageDir).list()) {
-                if (fileName.toLowerCase().equals(imageName.toLowerCase())) {
-                    imageName = fileName;
-                    break;
+        // if image file exists, correct name (for case sensitive systems)
+        // use TFile for zips
+        TFile dirFile = new TFile(setPath);
+        TFile imageFile = new TFile(setPath + finalFileName);
+        // warning, zip files can be broken
+        try {
+            if (dirFile.exists() && !imageFile.exists()) {
+                // search like names
+                for (String fileName : dirFile.list()) {
+                    if (fileName.toLowerCase(Locale.ENGLISH).equals(finalFileName.toLowerCase(Locale.ENGLISH))) {
+                        finalFileName = fileName;
+                        break;
+                    }
                 }
             }
+        } catch (Exception ex) {
+            log.error("Can't read card name from file, may be it broken: " + setPath);
         }
 
-        return imageDir + TFile.separator + imageName;
+        return setPath + finalFileName;
     }
-    
+
+    public static String generateFaceImagePath(String cardname, String set) {
+        return getImagesDir() + File.separator + "FACE" + File.separator + set + File.separator + prepareCardNameForFile(cardname) + ".jpg";
+    }
+
+    public static String generateTokenDescriptorImagePath(CardDownloadData card) {
+
+        String straightImageFile = buildImagePathToTokenDescriptor(card);
+        TFile file = new TFile(straightImageFile);
+        if (file.exists()) {
+            return straightImageFile;
+        }
+
+        straightImageFile = straightImageFile.replaceFirst("\\.[0-9]+\\.[0-9]+", ".X.X");
+        file = new TFile(straightImageFile);
+        if (file.exists()) {
+            return straightImageFile;
+        }
+
+        straightImageFile = straightImageFile.replaceFirst("\\.X\\.X", ".S.S");
+        file = new TFile(straightImageFile);
+        if (file.exists()) {
+            return straightImageFile;
+        }
+        return "";
+    }
+
     public static Proxy getProxyFromPreferences() {
         Preferences prefs = MageFrame.getPreferences();
         Connection.ProxyType proxyType = Connection.ProxyType.valueByText(prefs.get("proxyType", "None"));
-        if (!proxyType.equals(ProxyType.NONE)) {
+        if (proxyType != ProxyType.NONE) {
             String proxyServer = prefs.get("proxyAddress", "");
             int proxyPort = Integer.parseInt(prefs.get("proxyPort", "0"));
             return new Proxy(Proxy.Type.HTTP, new InetSocketAddress(proxyServer, proxyPort));

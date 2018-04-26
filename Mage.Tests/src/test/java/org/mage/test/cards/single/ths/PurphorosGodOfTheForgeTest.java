@@ -115,4 +115,25 @@ public class PurphorosGodOfTheForgeTest extends CardTestPlayerBase {
         Permanent purphorosGodOfTheForge = getPermanent("Purphoros, God of the Forge", playerA);
         Assert.assertFalse("Purphoros may not be a creature but it is", purphorosGodOfTheForge.getCardType().contains(CardType.CREATURE));
     }    
+    
+    @Test
+    public void testHybridManaCostsForDevotion() {
+        
+        // Indestructible
+        // As long as your devotion to red is less than five, Purphoros isn't a creature.
+        // Whenever another creature enters the battlefield under your control, Purphoros deals 2 damage to each opponent.
+        // {2}{R}: Creatures you control get +1/+0 until end of turn.
+        addCard(Zone.BATTLEFIELD, playerA, "Purphoros, God of the Forge"); // {3}{R}
+        addCard(Zone.BATTLEFIELD, playerA, "Goblin Guide", 1); // {R}        
+        addCard(Zone.HAND, playerA, "Boros Reckoner", 1); // {R/W}{R/W}{R/W}
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Boros Reckoner");
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+        
+        assertLife(playerB, 18);
+        Permanent purphorosGodOfTheForge = getPermanent("Purphoros, God of the Forge", playerA);
+        Assert.assertTrue("Purphoros should be a creature now but is not", purphorosGodOfTheForge.getCardType().contains(CardType.CREATURE));
+    }
 }

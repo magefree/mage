@@ -1,17 +1,13 @@
 package mage.target.targetpointer;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.game.Game;
 
 public class SecondTargetPointer implements TargetPointer {
 
-    private Map<UUID, Integer> zoneChangeCounter = new HashMap<UUID, Integer>();
+    private Map<UUID, Integer> zoneChangeCounter = new HashMap<>();
 
     public static SecondTargetPointer getInstance() {
         return new SecondTargetPointer();
@@ -21,7 +17,7 @@ public class SecondTargetPointer implements TargetPointer {
     }
 
     public SecondTargetPointer(SecondTargetPointer firstTargetPointer) {
-        this.zoneChangeCounter = new HashMap<UUID, Integer>();
+        this.zoneChangeCounter = new HashMap<>();
         for (Map.Entry<UUID, Integer> entry : firstTargetPointer.zoneChangeCounter.entrySet()) {
             this.zoneChangeCounter.put(entry.getKey(), entry.getValue());
         }
@@ -41,7 +37,7 @@ public class SecondTargetPointer implements TargetPointer {
 
     @Override
     public List<UUID> getTargets(Game game, Ability source) {
-        ArrayList<UUID> target = new ArrayList<UUID>();
+        ArrayList<UUID> target = new ArrayList<>();
         if (source.getTargets().size() > 1) {
             for (UUID targetId : source.getTargets().get(1).getTargets()) {
                 Card card = game.getCard(targetId);
@@ -62,7 +58,7 @@ public class SecondTargetPointer implements TargetPointer {
             if (zoneChangeCounter.containsKey(targetId)) {
                 Card card = game.getCard(targetId);
                 if (card != null && zoneChangeCounter.containsKey(targetId)
-                            && card.getZoneChangeCounter(game) != zoneChangeCounter.get(targetId)) {
+                        && card.getZoneChangeCounter(game) != zoneChangeCounter.get(targetId)) {
                     return null;
                 }
             }
@@ -74,5 +70,15 @@ public class SecondTargetPointer implements TargetPointer {
     @Override
     public TargetPointer copy() {
         return new SecondTargetPointer(this);
+    }
+
+    @Override
+    public FixedTarget getFixedTarget(Game game, Ability source) {
+        this.init(game, source);
+        UUID firstId = getFirst(game, source);
+        if (firstId != null) {
+            return new FixedTarget(firstId, game.getState().getZoneChangeCounter(firstId));
+        }
+        return null;
     }
 }

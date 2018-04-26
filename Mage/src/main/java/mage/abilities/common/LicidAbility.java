@@ -27,6 +27,7 @@
  */
 package mage.abilities.common;
 
+import java.util.ArrayList;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
@@ -46,6 +47,7 @@ import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -139,19 +141,21 @@ class LicidContinuousEffect extends ContinuousEffectImpl {
             switch (layer) {
                 case TypeChangingEffects_4:
                     licid.getCardType().clear();
-                    licid.getCardType().add(CardType.ENCHANTMENT);
-                    licid.getSubtype().clear();
-                    licid.getSubtype().add("Aura");
+                    licid.addCardType(CardType.ENCHANTMENT);
+                    licid.getSubtype(game).clear();
+                    licid.getSubtype(game).add(SubType.AURA);
                     break;
                 case AbilityAddingRemovingEffects_6:
+                    ArrayList<Ability> toRemove = new ArrayList<>();
                     for (Ability ability : licid.getAbilities(game)) {
                         for (Effect effect : ability.getEffects()) {
                             if (effect instanceof LicidEffect) {
-                                licid.getAbilities(game).remove(ability);
+                                toRemove.add(ability);
                                 break;
                             }
                         }
                     }
+                    licid.getAbilities(game).removeAll(toRemove);
                     Ability ability = new EnchantAbility("creature");
                     ability.setRuleAtTheTop(true);
                     licid.addAbility(ability, source.getSourceId(), game);

@@ -24,10 +24,11 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.target.common;
 
+import mage.filter.StaticFilters;
+import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURE;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.TargetPermanent;
 
@@ -38,7 +39,7 @@ import mage.target.TargetPermanent;
 public class TargetCreaturePermanent extends TargetPermanent {
 
     public TargetCreaturePermanent() {
-        this(1, 1, new FilterCreaturePermanent(), false);
+        this(1, 1, FILTER_PERMANENT_CREATURE, false);
     }
 
     public TargetCreaturePermanent(FilterCreaturePermanent filter) {
@@ -46,16 +47,15 @@ public class TargetCreaturePermanent extends TargetPermanent {
     }
 
     public TargetCreaturePermanent(int numTargets) {
-        this(numTargets, numTargets, new FilterCreaturePermanent(), false);
+        this(numTargets, numTargets, StaticFilters.FILTER_PERMANENT_CREATURE, false);
     }
 
     public TargetCreaturePermanent(int minNumTargets, int maxNumTargets) {
-        this(minNumTargets, maxNumTargets, new FilterCreaturePermanent(), false);
+        this(minNumTargets, maxNumTargets, StaticFilters.FILTER_PERMANENT_CREATURE, false);
     }
 
     public TargetCreaturePermanent(int minNumTargets, int maxNumTargets, FilterCreaturePermanent filter, boolean notTarget) {
         super(minNumTargets, maxNumTargets, filter, notTarget);
-        this.targetName = filter.getMessage();
     }
 
     public TargetCreaturePermanent(final TargetCreaturePermanent target) {

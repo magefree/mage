@@ -43,18 +43,18 @@ public class BorosReckonerTest extends CardTestPlayerBase {
      * Boros Reckoner
      * {R/W}{R/W}{R/W}
      * Creature — Minotaur Wizard
-     * Whenever Boros Reckoner is dealt damage, it deals that much damage to target creature or player.
+     * Whenever Boros Reckoner is dealt damage, it deals that much damage to any target.
      * {R/W}: Boros Reckoner gains first strike until end of turn..
      */
 
     /**
      * If damage is dealt to Boros Reckoner - Exactly the same amount of damage
-     * can be dealt to target creature or player.
+     * can be dealt to any target.
      *
      */
     @Test
     public void testDamageAmountLikeDamageDealt() {
-        // When Phytotitan dies, return it to the battlefield tapped under its owner's control at the beginning of his or her next upkeep.
+        // When Phytotitan dies, return it to the battlefield tapped under its owner's control at the beginning of their next upkeep.
         addCard(Zone.BATTLEFIELD, playerA, "Phytotitan");
         addCard(Zone.BATTLEFIELD, playerB, "Boros Reckoner");
 

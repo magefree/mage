@@ -9,7 +9,7 @@ import java.util.Map;
 /**
  * @author nantuko
  */
-public class MagicAbility {
+public final class MagicAbility {
 
     private static Map<String, Integer> scores = new HashMap<String, Integer>() {{
         put(DeathtouchAbility.getInstance().getRule(), 60);

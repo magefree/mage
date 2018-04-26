@@ -24,9 +24,10 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
+ */
 package mage.server.util;
 
+import mage.utils.StreamUtils;
 import org.apache.log4j.Logger;
 
 import java.io.File;
@@ -43,18 +44,16 @@ import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
- * Handles server messages (Messages of the Day).
- * Reloads messages every 5 minutes.
+ * Handles server messages (Messages of the Day). Reloads messages every 5
+ * minutes.
  *
  * @author nantuko
  */
-public class ServerMessagesUtil {
-
-    private static final ServerMessagesUtil instance = new ServerMessagesUtil();
-
+public enum ServerMessagesUtil {
+    instance;
     private static final Logger log = Logger.getLogger(ServerMessagesUtil.class);
     private static final String SERVER_MSG_TXT_FILE = "server.msg.txt";
-    private static ScheduledExecutorService updateExecutor;
+    private ScheduledExecutorService updateExecutor;
 
     private final List<String> messages = new ArrayList<>();
     private final ReadWriteLock lock = new ReentrantReadWriteLock();
@@ -66,24 +65,19 @@ public class ServerMessagesUtil {
     private static long startDate;
     private static final AtomicInteger gamesStarted = new AtomicInteger(0);
     private static final AtomicInteger tournamentsStarted = new AtomicInteger(0);
+    private static final AtomicInteger lostConnection = new AtomicInteger(0);
+    private static final AtomicInteger reconnects = new AtomicInteger(0);
 
     static {
         pathToExternalMessages = System.getProperty("messagesPath");
     }
 
-    public ServerMessagesUtil() {
+    ServerMessagesUtil() {
         updateExecutor = Executors.newSingleThreadScheduledExecutor();
-        updateExecutor.scheduleAtFixedRate(new Runnable() {
-            @Override
-            public void run() {
-                reloadMessages();
-            }
-        }, 5, 5 * 60, TimeUnit.SECONDS);
+        updateExecutor.scheduleAtFixedRate(this::reloadMessages, 5, 5 * 60, TimeUnit.SECONDS);
     }
 
-    public static ServerMessagesUtil getInstance() {
-        return instance;
-    }
+
 
     public List<String> getMessages() {
         lock.readLock().lock();
@@ -102,6 +96,7 @@ public class ServerMessagesUtil {
             newMessages.addAll(motdMessages);
         }
         newMessages.add(getServerStatistics());
+        newMessages.add(getServerStatistics2());
 
         lock.writeLock().lock();
         try {
@@ -153,20 +148,29 @@ public class ServerMessagesUtil {
             log.warn("Couldn't find server.msg");
             return null;
         }
-        Scanner scanner = new Scanner(is);
+
+        Scanner scanner = null;
         List<String> newMessages = new ArrayList<>();
-        while (scanner.hasNextLine()) {
-            String message = scanner.nextLine();
-            if (!message.trim().isEmpty()) {
-                newMessages.add(message.trim());
+        try {
+            scanner = new Scanner(is);
+            while (scanner.hasNextLine()) {
+                String message = scanner.nextLine();
+                if (!message.trim().isEmpty()) {
+                    newMessages.add(message.trim());
+                }
             }
+        } catch(Exception e) {
+            log.error(e,e);
+        } finally {
+            StreamUtils.closeQuietly(scanner);
+            StreamUtils.closeQuietly(is);
         }
         return newMessages;
     }
 
     private String getServerStatistics() {
         long current = System.currentTimeMillis();
-        long hours = ((current - startDate)/(1000*60*60));
+        long hours = ((current - startDate) / (1000 * 60 * 60));
         StringBuilder statistics = new StringBuilder("Server uptime: ");
         statistics.append(hours);
         statistics.append(" hour(s), games played: ");
@@ -176,14 +180,27 @@ public class ServerMessagesUtil {
         return statistics.toString();
     }
 
+    private String getServerStatistics2() {
+        long current = System.currentTimeMillis();
+        long minutes = ((current - startDate) / (1000 * 60));
+        if (minutes == 0) {
+            minutes = 1;
+        }
+        StringBuilder statistics = new StringBuilder("Disconnects: ");
+        statistics.append(lostConnection.get());
+        statistics.append(" avg/hour ").append(lostConnection.get() * 60 / minutes);
+        statistics.append(" Reconnects: ").append(reconnects.get());
+        statistics.append(" avg/hour ").append(reconnects.get() * 60 / minutes);
+        return statistics.toString();
+    }
+
 //    private Timer timer = new Timer(1000 * 60, new ActionListener() {
 //        public void actionPerformed(ActionEvent e) {
 //            reloadMessages();
 //        }
 //    });
-
     public void setStartDate(long milliseconds) {
-        this.startDate = milliseconds;
+        startDate = milliseconds;
     }
 
     public void incGamesStarted() {
@@ -200,5 +217,18 @@ public class ServerMessagesUtil {
         } while (!tournamentsStarted.compareAndSet(value, value + 1));
     }
 
+    public void incReconnects() {
+        int value;
+        do {
+            value = reconnects.get();
+        } while (!reconnects.compareAndSet(value, value + 1));
+    }
+
+    public void incLostConnection() {
+        int value;
+        do {
+            value = lostConnection.get();
+        } while (!lostConnection.compareAndSet(value, value + 1));
+    }
 
 }

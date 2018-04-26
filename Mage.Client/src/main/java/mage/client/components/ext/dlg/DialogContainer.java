@@ -22,7 +22,7 @@ public class DialogContainer extends JPanel {
     private Color backgroundColor = new Color(0, 255, 255, 60);
     private int alpha = 50;
 
-    private final boolean isGradient = false;
+    private static final boolean isGradient = false;
     private final TexturePaint tp = null;
     private final Image gradient = null;
     private BufferedImage b;
@@ -39,7 +39,7 @@ public class DialogContainer extends JPanel {
 
         if (dialogType == DialogManager.MTGDialogs.MessageDialog) {
             //backgroundColor = new Color(0, 255, 255, 60);
-            if (params.type.equals(MessageDlg.Types.Warning)) {
+            if (params.type == MessageDlg.Types.Warning) {
                 backgroundColor = new Color(255, 0, 0, 90);
             } else {
                 backgroundColor = new Color(0, 0, 0, 90);
@@ -112,7 +112,7 @@ public class DialogContainer extends JPanel {
             backgroundColor = new Color(0, 0, 50, 110);
 
             alpha = 0;
-            ChoiceDialog dlg = new ChoiceDialog(params, "Command Zone (Commander and Emblems)");
+            ChoiceDialog dlg = new ChoiceDialog(params, "Command Zone (Commander, Emblems and Planes)");
             add(dlg);
             dlg.setLocation(X_OFFSET + 10, Y_OFFSET + 10);
             dlg.updateSize(params.rect.width - 80, params.rect.height - 80);

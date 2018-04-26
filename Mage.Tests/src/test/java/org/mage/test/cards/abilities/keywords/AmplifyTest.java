@@ -46,7 +46,7 @@ public class AmplifyTest extends CardTestPlayerBase {
     public void testAmplifyOneCard() {
         // Creature — Dragon - Dragon   5/5  {5}{R}{R}
         // Amplify 3 (As this creature enters the battlefield, put three +1/+1 counters on it for each Dragon card you reveal in your hand.)
-        // {T}: Kilnmouth Dragon deals damage equal to the number of +1/+1 counters on it to target creature or player
+        // {T}: Kilnmouth Dragon deals damage equal to the number of +1/+1 counters on it to any target
         addCard(Zone.HAND, playerA, "Kilnmouth Dragon", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 7);
 
@@ -67,7 +67,7 @@ public class AmplifyTest extends CardTestPlayerBase {
     public void testAmplifyTwoCards() {
         // Creature — Dragon - Dragon   5/5  {5}{R}{R}
         // Amplify 3 (As this creature enters the battlefield, put three +1/+1 counters on it for each Dragon card you reveal in your hand.)
-        // {T}: Kilnmouth Dragon deals damage equal to the number of +1/+1 counters on it to target creature or player
+        // {T}: Kilnmouth Dragon deals damage equal to the number of +1/+1 counters on it to any target
         addCard(Zone.HAND, playerA, "Kilnmouth Dragon", 2);
         addCard(Zone.HAND, playerA, "Phantasmal Dragon", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 7);
@@ -89,7 +89,7 @@ public class AmplifyTest extends CardTestPlayerBase {
     public void testAmplifyWithClone() {
         // Creature — Dragon - Dragon   5/5  {5}{R}{R}
         // Amplify 3 (As this creature enters the battlefield, put three +1/+1 counters on it for each Dragon card you reveal in your hand.)
-        // {T}: Kilnmouth Dragon deals damage equal to the number of +1/+1 counters on it to target creature or player
+        // {T}: Kilnmouth Dragon deals damage equal to the number of +1/+1 counters on it to any target
         addCard(Zone.HAND, playerA, "Kilnmouth Dragon", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 7);
 

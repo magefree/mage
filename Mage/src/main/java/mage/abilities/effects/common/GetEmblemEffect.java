@@ -24,10 +24,10 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.abilities.effects.common;
 
+import java.util.List;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -37,7 +37,7 @@ import mage.game.command.Emblem;
 
 /**
  *
- * @author  nantuko
+ * @author nantuko
  */
 public class GetEmblemEffect extends OneShotEffect {
 
@@ -46,7 +46,7 @@ public class GetEmblemEffect extends OneShotEffect {
     public GetEmblemEffect(Emblem emblem) {
         super(Outcome.Benefit);
         this.emblem = emblem;
-        this.staticText = "You get an emblem with \"" + emblem.getAbilities().getRules(null) + "\"";
+        this.staticText = getText();
     }
 
     public GetEmblemEffect(final GetEmblemEffect effect) {
@@ -65,8 +65,26 @@ public class GetEmblemEffect extends OneShotEffect {
         if (sourceObject == null) {
             return false;
         }
-        game.addEmblem(emblem, source);
+        game.addEmblem(emblem, sourceObject, source);
         return true;
     }
 
+    public String getText() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("You get an emblem with \"");
+        List<String> rules = emblem.getAbilities().getRules(null);
+        if (rules.size() == 1) {
+            for (String s : rules) {
+                sb.append(s);
+            }
+            sb.append('"');
+        } else if (rules.size() == 2) {
+            for (String s : rules) {
+                sb.append(s);
+                sb.append("\" and \"");
+            }
+            sb.append('"');
+        }
+        return sb.toString();
+    }
 }

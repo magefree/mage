@@ -30,21 +30,22 @@ package mage.game.permanent.token;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
 import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.util.RandomUtil;
 
 /**
  *
  * @author fireshoes
  */
-public class ThopterColorlessToken extends Token {
+public class ThopterColorlessToken extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 
     static {
-        tokenImageSets.addAll(Arrays.asList("MBS", "ORI"));
+        tokenImageSets.addAll(Arrays.asList("MBS", "ORI", "KLD"));
     }
 
     public ThopterColorlessToken() {
@@ -52,7 +53,7 @@ public class ThopterColorlessToken extends Token {
         availableImageSetCodes = tokenImageSets;
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
-        subtype.add("Thopter");
+        subtype.add(SubType.THOPTER);
         power = new MageInt(1);
         toughness = new MageInt(1);
 
@@ -62,8 +63,11 @@ public class ThopterColorlessToken extends Token {
     @Override
     public void setExpansionSetCodeForImage(String code) {
         super.setExpansionSetCodeForImage(code);
-        if (getOriginalExpansionSetCode().equals("ORI")) {
-            this.setTokenType(new Random().nextInt(2) + 1);
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("ORI")) {
+            this.setTokenType(RandomUtil.nextInt(2) + 1);
+        }
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("KLD")) {
+            this.setTokenType(RandomUtil.nextInt(3) + 1);
         }
     }
 

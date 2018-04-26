@@ -22,7 +22,7 @@ public class PutIntoGraveFromBattlefieldSourceTriggeredAbility extends Triggered
         setLeavesTheBattlefieldTrigger(true);
     }
 
-    PutIntoGraveFromBattlefieldSourceTriggeredAbility(PutIntoGraveFromBattlefieldSourceTriggeredAbility ability) {
+    public PutIntoGraveFromBattlefieldSourceTriggeredAbility(final PutIntoGraveFromBattlefieldSourceTriggeredAbility ability) {
         super(ability);
     }
 

@@ -31,6 +31,7 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.Card;
+import mage.constants.DependencyType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
@@ -62,10 +63,8 @@ public class GainAbilitySourceEffect extends ContinuousEffectImpl implements Sou
     }
 
     public GainAbilitySourceEffect(Ability ability, Duration duration, boolean onCard) {
-        super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
-        this.ability = ability;
-        staticText = "{this} gains " + ability.getRule() + " " + duration.toString();
-        this.onCard = onCard;
+        this(ability, duration, onCard, false);
+        staticText = "{this} gains " + ability.getRule() + ' ' + duration.toString();
     }
 
     public GainAbilitySourceEffect(Ability ability, Duration duration, boolean onCard, boolean noStaticText) {
@@ -75,6 +74,7 @@ public class GainAbilitySourceEffect extends ContinuousEffectImpl implements Sou
         if (noStaticText) {
             staticText = null;
         }
+        this.addDependencyType(DependencyType.AddingAbility);
     }
 
     public GainAbilitySourceEffect(final GainAbilitySourceEffect effect) {
@@ -128,7 +128,7 @@ public class GainAbilitySourceEffect extends ContinuousEffectImpl implements Sou
                 return true;
             }
         }
-        if (duration.equals(Duration.Custom)) {
+        if (duration == Duration.Custom) {
             this.discard();
         }
         return true;

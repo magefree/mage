@@ -37,6 +37,10 @@ import mage.counters.Counter;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
  * Use this effect only (I guess) with EntersBattlefieldAbility like abilities
  *
@@ -61,7 +65,7 @@ public class EntersBattlefieldWithXCountersEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent == null) {
-            if (permanent == null && source.getAbilityType().equals(AbilityType.STATIC)) {
+            if (permanent == null && source.getAbilityType() == AbilityType.STATIC) {
                 permanent = game.getPermanentEntering(source.getSourceId());
             }
         }
@@ -75,7 +79,8 @@ public class EntersBattlefieldWithXCountersEffect extends OneShotEffect {
                     if (amount > 0) {
                         Counter counterToAdd = counter.copy();
                         counterToAdd.add(amount - counter.getCount());
-                        permanent.addCounters(counterToAdd, game);
+                        List<UUID> appliedEffects = (ArrayList<UUID>) this.getValue("appliedEffects");
+                        permanent.addCounters(counterToAdd, source, game, appliedEffects);
                     }
                 }
             }

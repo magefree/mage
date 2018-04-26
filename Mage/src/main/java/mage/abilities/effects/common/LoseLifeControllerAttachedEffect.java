@@ -31,7 +31,6 @@ import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.CardImpl;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -77,7 +76,7 @@ public class LoseLifeControllerAttachedEffect extends OneShotEffect {
             if (creature != null) {
                 Player player = game.getPlayer(creature.getControllerId());
                 if (player != null) {
-                    player.loseLife(amount.calculate(game, source, this), game);
+                    player.loseLife(amount.calculate(game, source, this), game, false);
                     return true;
                 }
             }
@@ -87,9 +86,9 @@ public class LoseLifeControllerAttachedEffect extends OneShotEffect {
 
     private void setText() {
         StringBuilder sb = new StringBuilder();
-        sb.append("it's controller loses ").append(amount.toString()).append(" life");
+        sb.append("its controller loses ").append(amount.toString()).append(" life");
         String message = amount.getMessage();
-        if (message.length() > 0) {
+        if (!message.isEmpty()) {
             sb.append(" for each ");
             sb.append(message);
         }

@@ -33,31 +33,36 @@ import java.util.Arrays;
 import java.util.List;
 import mage.MageInt;
 import mage.constants.CardType;
+import mage.constants.SubType;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class WolfToken extends Token {
+public class WolfToken extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 
     static {
-        tokenImageSets.addAll(Arrays.asList("BNG", "C14", "CNS", "FNMP", "ISD", "LRW", "M10", "M14", "MM2", "SHM", "SOM", "ZEN", "SOI"));
+        tokenImageSets.addAll(Arrays.asList("BNG", "C14", "CNS", "FNMP", "ISD", "LRW", "M10", "M14", "MM2", "SHM", "SOM", "ZEN", "SOI", "C15", "M15"));
     }
 
     public WolfToken() {
-        this((String) null);
+        this(null, 0);
     }
 
     public WolfToken(String setCode) {
+        this(setCode, 0);
+    }
+
+    public WolfToken(String setCode, int tokenType) {
         super("Wolf", "2/2 green Wolf creature token");
         availableImageSetCodes = tokenImageSets;
         setOriginalExpansionSetCode(setCode);
 
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
-        subtype.add("Wolf");
+        subtype.add(SubType.WOLF);
         power = new MageInt(2);
         toughness = new MageInt(2);
     }

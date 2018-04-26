@@ -40,7 +40,7 @@ import mage.game.events.ZoneChangeEvent;
 public class LeavesBattlefieldTriggeredAbility extends ZoneChangeTriggeredAbility {
 
     public LeavesBattlefieldTriggeredAbility(Effect effect, boolean optional) {
-        super(Zone.BATTLEFIELD, null, effect, "When {this} leaves the battlefield, ", optional);
+        super(Zone.ALL, Zone.BATTLEFIELD, null, effect, "When {this} leaves the battlefield, ", optional);
     }
 
     public LeavesBattlefieldTriggeredAbility(LeavesBattlefieldTriggeredAbility ability) {

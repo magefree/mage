@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.effects.common.continuous;
 
 import mage.abilities.Ability;
@@ -38,8 +37,9 @@ import mage.game.permanent.Permanent;
  * @author nantuko
  */
 public class AddCardTypeAttachedEffect extends ContinuousEffectImpl {
-    private CardType addedCardType;
-    private AttachmentType attachmentType;
+
+    private final CardType addedCardType;
+    private final AttachmentType attachmentType;
 
     public AddCardTypeAttachedEffect(CardType addedCardType, Duration duration, AttachmentType attachmentType) {
         super(duration, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
@@ -59,8 +59,9 @@ public class AddCardTypeAttachedEffect extends ContinuousEffectImpl {
         Permanent equipment = game.getPermanent(source.getSourceId());
         if (equipment != null && equipment.getAttachedTo() != null) {
             Permanent target = game.getPermanent(equipment.getAttachedTo());
-            if (target != null && !target.getCardType().contains(addedCardType))
-                target.getCardType().add(addedCardType);
+            if (target != null && !target.getCardType().contains(addedCardType)) {
+                target.addCardType(addedCardType);
+            }
         }
         return true;
     }
@@ -72,11 +73,7 @@ public class AddCardTypeAttachedEffect extends ContinuousEffectImpl {
 
     private void setText() {
         StringBuilder sb = new StringBuilder();
-        if (attachmentType == AttachmentType.AURA)
-            sb.append("Enchanted");
-        else if (attachmentType == AttachmentType.EQUIPMENT)
-            sb.append("Equipped");
-
+        sb.append(attachmentType.verb());
         sb.append(" creature becomes ").append(addedCardType.toString()).append(" in addition to its other types"); //TODO add attacked card type detection
         staticText = sb.toString();
     }

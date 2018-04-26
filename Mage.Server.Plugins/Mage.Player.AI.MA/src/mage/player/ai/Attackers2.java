@@ -28,10 +28,11 @@
 
 package mage.player.ai;
 
+import mage.game.permanent.Permanent;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
-import mage.game.permanent.Permanent;
 
 /**
  *
@@ -40,7 +41,7 @@ import mage.game.permanent.Permanent;
 public class Attackers2 extends TreeMap<Integer, List<Permanent>> {
 
     public List<Permanent> getAttackers() {
-        List<Permanent> attackers = new ArrayList<Permanent>();
+        List<Permanent> attackers = new ArrayList<>();
         for (List<Permanent> l: this.values()) {
             for (Permanent permanent: l) {
                 attackers.add(permanent);

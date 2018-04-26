@@ -28,7 +28,6 @@
 package mage.filter.predicate.permanent;
 
 import java.util.UUID;
-import mage.constants.CardType;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -43,7 +42,7 @@ public class EnchantedPredicate implements Predicate<Permanent> {
     public boolean apply(Permanent input, Game game) {
         for (UUID attachmentId : input.getAttachments()) {
             Permanent attachment = game.getPermanent(attachmentId);
-            if (attachment != null && attachment.getCardType().contains(CardType.ENCHANTMENT)) {
+            if (attachment != null && attachment.isEnchantment()) {
                 return true;
             }
         }

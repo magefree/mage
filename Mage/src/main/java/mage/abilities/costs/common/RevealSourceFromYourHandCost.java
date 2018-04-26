@@ -71,7 +71,7 @@ public class RevealSourceFromYourHandCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
-        return game.getState().getZone(sourceId).equals(Zone.HAND);
+        return game.getState().getZone(sourceId) == Zone.HAND;
     }
 
     @Override
