@@ -27,6 +27,7 @@
  */
 package mage.view;
 
+import com.google.gson.annotations.Expose;
 import java.util.*;
 import java.util.stream.Collectors;
 import mage.MageObject;
@@ -44,6 +45,7 @@ import mage.counters.CounterType;
 import mage.designations.Designation;
 import mage.game.Game;
 import mage.game.command.Emblem;
+import mage.game.command.Plane;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.Token;
@@ -52,9 +54,6 @@ import mage.game.stack.StackAbility;
 import mage.target.Target;
 import mage.target.Targets;
 import mage.util.SubTypeList;
-
-import com.google.gson.annotations.Expose;
-import mage.game.command.Plane;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -529,6 +528,13 @@ public class CardView extends SimpleCardView {
             // Display in landscape/rotated/on its side
             this.rotate = true;
             this.rules = plane.getAbilities().getRules(plane.getName());
+        } else if (object instanceof Designation) {
+            this.mageObjectType = MageObjectType.DESIGNATION;
+            Designation designation = (Designation) object;
+            this.rarity = Rarity.SPECIAL;
+            this.frameStyle = FrameStyle.M15_NORMAL;
+            // Display in landscape/rotated/on its side
+            this.rules = designation.getAbilities().getRules(designation.getName());
         }
         if (this.rarity == null && object instanceof StackAbility) {
             StackAbility stackAbility = (StackAbility) object;
@@ -769,7 +775,7 @@ public class CardView extends SimpleCardView {
 
     @Override
     public String getExpansionSetCode() {
-        if (expansionSetCode == null) { 
+        if (expansionSetCode == null) {
             expansionSetCode = "";
         }
         return expansionSetCode;

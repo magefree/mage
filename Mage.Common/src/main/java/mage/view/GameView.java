@@ -149,7 +149,7 @@ public class GameView implements Serializable {
                     } else if (object instanceof Designation) {
                         Designation designation = (Designation) game.getObject(object.getId());
                         if (designation != null) {
-                            stack.put(stackObject.getId(), new CardView(designation, (StackAbility) stackObject));
+                            stack.put(stackObject.getId(), new StackAbilityView(game, (StackAbility) stackObject, designation.getName(), new CardView(designation)));
                         } else {
                             LOGGER.fatal("Designation object not found: " + object.getName() + ' ' + object.toString() + ' ' + object.getClass().toString());
                         }
