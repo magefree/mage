@@ -35,7 +35,6 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -142,24 +141,13 @@ class SynodSanctumEffect2 extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
-        if (exileId == null) {
-            return false;
+        ExileZone exileZone = game.getExile().getExileZone(exileId);
+        if (exileZone == null) {
+            return true;
         }
-        ExileZone exile = game.getExile().getExileZone(exileId);
-        if (exile == null) {
-            return false;
-        }
-
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
-        boolean allReturned = true;
-        if (controller != null && sourceObject != null) {
-            for (Card card : exile.getCards(game)) {
-                if (!card.putOntoBattlefield(game, Zone.EXILED, source.getSourceId(), controller.getId())) {
-                    allReturned = false;
-                }
-            }
-            return allReturned;
+        if (controller != null) {
+            return controller.moveCards(exileZone, Zone.BATTLEFIELD, source, game);
         }
         return false;
     }

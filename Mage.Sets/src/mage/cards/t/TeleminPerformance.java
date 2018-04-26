@@ -28,6 +28,7 @@
 package mage.cards.t;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -48,8 +49,7 @@ import mage.target.common.TargetOpponent;
 public class TeleminPerformance extends CardImpl {
 
     public TeleminPerformance(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}{U}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{U}{U}");
 
         // Target opponent reveals cards from the top of their library until he or she reveals a creature card. That player puts all noncreature cards revealed this way into their graveyard, then you put the creature card onto the battlefield under your control.
         this.getSpellAbility().addEffect(new TeleminPerformanceEffect());
@@ -85,28 +85,36 @@ class TeleminPerformanceEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card creature = null;
-        Player opponent = game.getPlayer(source.getFirstTarget());
-        CardsImpl cards = new CardsImpl();
-        boolean creatureFound = false;
-        while (opponent.getLibrary().hasCards() && !creatureFound) {
-            Card card = opponent.getLibrary().removeFromTop(game);
-            if (card != null) {
-                if (card.isCreature()) {
-                    creature = card;
-                    creatureFound = true;
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (controller != null && sourceObject != null) {
+            Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
+            if (opponent != null) {
+                Card creature = null;
+                CardsImpl cards = new CardsImpl();
+                boolean creatureFound = false;
+                while (opponent.getLibrary().hasCards() && !creatureFound) {
+                    Card card = opponent.getLibrary().removeFromTop(game);
+                    if (card != null) {
+                        if (card.isCreature()) {
+                            creature = card;
+                            creatureFound = true;
+                        }
+                        if (!creatureFound) {
+                            cards.add(card);
+                        }
+                    }
                 }
-                if (!creatureFound) {
-                    cards.add(card);
+                if (!cards.isEmpty()) {
+                    opponent.revealCards(sourceObject.getIdName(), cards, game);
+                    opponent.moveCards(cards, Zone.GRAVEYARD, source, game);
+                }
+                game.applyEffects();
+                if (creature != null) {
+                    controller.moveCards(creature, Zone.BATTLEFIELD, source, game);
                 }
             }
-        }
-        if (!cards.isEmpty()) {            
-            opponent.revealCards("Telemin Performance", cards, game);
-            opponent.moveCards(cards, Zone.GRAVEYARD, source, game);
-        }
-        if (creature != null) {
-            return creature.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), source.getControllerId());
+            return true;
         }
         return false;
     }
