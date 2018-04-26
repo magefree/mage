@@ -1565,14 +1565,14 @@ public abstract class GameImpl implements Game, Serializable {
         }
         state.addCommandObject(newPlane);
         informPlayers("You have planeswalked to " + newPlane.getLogName());
-        
+
         // Fire off the planeswalked event
         GameEvent event = new GameEvent(GameEvent.EventType.PLANESWALK, newPlane.getId(), null, newPlane.getId(), 0, true);
         if (!replaceEvent(event)) {
             GameEvent ge = new GameEvent(GameEvent.EventType.PLANESWALKED, newPlane.getId(), null, newPlane.getId(), 0, true);
             fireEvent(ge);
         }
-        
+
         return true;
     }
 
@@ -2537,12 +2537,32 @@ public abstract class GameImpl implements Game, Serializable {
             }
         }
 
-        //Remove all emblems the player controls
+        //Remove all emblems/plane the player controls
+        boolean addPlaneAgain = false;
         for (Iterator<CommandObject> it = this.getState().getCommand().iterator(); it.hasNext();) {
             CommandObject obj = it.next();
             if ((obj instanceof Emblem || obj instanceof Plane) && obj.getControllerId().equals(playerId)) {
-                ((Emblem) obj).discardEffects();// This may not be the best fix but it works
+                if (obj instanceof Emblem) {
+                    ((Emblem) obj).discardEffects();// This may not be the best fix but it works
+                }
+                if (obj instanceof Plane) {
+                    ((Plane) obj).discardEffects();
+                    // Readd a new one
+                    addPlaneAgain = true;
+                }
                 it.remove();
+            }
+        }
+       
+        if (addPlaneAgain) {
+            boolean addedAgain = false;
+            for (Player aplayer : state.getPlayers().values()) {                
+                if (!aplayer.hasLeft() && !addedAgain) {
+                    addedAgain = true;
+                    Plane plane = Plane.getRandomPlane();
+                    plane.setControllerId(aplayer.getId());
+                    addPlane(plane, null, aplayer.getId());
+                }
             }
         }
 
