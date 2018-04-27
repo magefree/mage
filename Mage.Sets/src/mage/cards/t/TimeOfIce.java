@@ -32,6 +32,7 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SagaAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
+import mage.abilities.effects.Effects;
 import mage.abilities.effects.common.ReturnToHandFromBattlefieldAllEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.constants.SubType;
@@ -75,9 +76,13 @@ public class TimeOfIce extends CardImpl {
         SagaAbility sagaAbility = new SagaAbility(this, SagaChapter.CHAPTER_III);
 
         // I, II — Tap target creature an opponent controls. It doesn't untap during its controller's untap step for as long as you control Time of Ice.
-        Ability ability = sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_I, SagaChapter.CHAPTER_II, new TapTargetEffect());
-        ability.addEffect(new TimeOfIceEffect());
-        ability.addTarget(new TargetCreaturePermanent(FILTER_OPPONENTS_PERMANENT_CREATURE));
+        Effects effects = new Effects();
+        effects.add(new TapTargetEffect());
+        effects.add(new TimeOfIceEffect());
+        sagaAbility.addChapterEffect(
+                this, SagaChapter.CHAPTER_I, SagaChapter.CHAPTER_II, effects,
+                new TargetCreaturePermanent(FILTER_OPPONENTS_PERMANENT_CREATURE)
+        );
 
         // III — Return all tapped creatures to their owners' hands.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_III, new ReturnToHandFromBattlefieldAllEffect(filter));

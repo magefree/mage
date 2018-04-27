@@ -28,7 +28,6 @@
 package mage.cards.t;
 
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.SagaAbility;
 import mage.abilities.effects.common.CopyTargetSpellEffect;
@@ -55,6 +54,14 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class TheMirariConjecture extends CardImpl {
 
+    private static final FilterCard filterInstantCard = new FilterCard("instant card from your graveyard");
+    private static final FilterCard filterSorceryCard = new FilterCard("sorcery card from your graveyard");
+
+    static {
+        filterInstantCard.add(new CardTypePredicate(CardType.INSTANT));
+        filterSorceryCard.add(new CardTypePredicate(CardType.SORCERY));
+    }
+
     public TheMirariConjecture(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}");
 
@@ -62,16 +69,20 @@ public class TheMirariConjecture extends CardImpl {
 
         // <i>(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)</i>
         SagaAbility sagaAbility = new SagaAbility(this, SagaChapter.CHAPTER_III);
-        // I — Return target instant card from your graveyard to your hand.
-        FilterCard filterInstantCard = new FilterCard("instant card from your graveyard");
-        filterInstantCard.add(new CardTypePredicate(CardType.INSTANT));
-        Ability ability = sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_I, new ReturnFromGraveyardToHandTargetEffect());
-        ability.addTarget(new TargetCardInYourGraveyard(filterInstantCard));
-        // II — Return target sorcery card from your graveyard to your hand.
-        FilterCard filterSorceryCard = new FilterCard("sorcery card from your graveyard");
-        filterSorceryCard.add(new CardTypePredicate(CardType.SORCERY));
-        ability = sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_II, new ReturnFromGraveyardToHandTargetEffect());
-        ability.addTarget(new TargetCardInYourGraveyard(filterSorceryCard));
+        // I — Return target instant card from your graveyard to your hand.                
+        sagaAbility.addChapterEffect(
+                this, SagaChapter.CHAPTER_I, SagaChapter.CHAPTER_I,
+                new ReturnFromGraveyardToHandTargetEffect(),
+                new TargetCardInYourGraveyard(filterInstantCard)
+        );
+
+        // II — Return target sorcery card from your graveyard to your hand.               
+        sagaAbility.addChapterEffect(
+                this, SagaChapter.CHAPTER_II, SagaChapter.CHAPTER_II,
+                new ReturnFromGraveyardToHandTargetEffect(),
+                new TargetCardInYourGraveyard(filterSorceryCard)
+        );
+
         // III — Until end of turn, whenever you cast an instant or sorcery spell, copy it. You may choose new targets for the copy.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_III, new CreateDelayedTriggeredAbilityEffect(new TheMirariConjectureDelayedTriggeredAbility()));
         this.addAbility(sagaAbility);

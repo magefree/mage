@@ -46,6 +46,10 @@ public class Targets extends ArrayList<Target> {
     public Targets() {
     }
 
+    public Targets(Target target) {
+        this.add(target);
+    }
+
     public Targets(final Targets targets) {
         for (Target target : targets) {
             this.add(target.copy());
@@ -151,6 +155,7 @@ public class Targets extends ArrayList<Target> {
         }
         return null;
     }
+
     public Targets copy() {
         return new Targets(this);
     }

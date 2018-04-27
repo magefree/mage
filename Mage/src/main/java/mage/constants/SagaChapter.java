@@ -53,4 +53,16 @@ public enum SagaChapter {
         return number;
     }
 
+    public static SagaChapter getChapter(int number) {
+        switch (number) {
+            case 1:
+                return CHAPTER_I;
+            case 2:
+                return CHAPTER_II;
+            case 3:
+                return CHAPTER_III;
+            default:
+                return null;
+        }
+    }
 }

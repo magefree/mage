@@ -30,6 +30,7 @@ package mage.abilities.common;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.Effects;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.Card;
 import mage.constants.SagaChapter;
@@ -41,6 +42,8 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
+import mage.target.Target;
+import mage.target.Targets;
 
 /**
  *
@@ -64,17 +67,44 @@ public class SagaAbility extends SimpleStaticAbility {
         this.maxChapter = ability.maxChapter;
     }
 
-    public Ability addChapterEffect(Card card, SagaChapter chapter, Effect effect) {
-        return addChapterEffect(card, chapter, chapter, effect);
+    public void addChapterEffect(Card card, SagaChapter chapter, Effect effect) {
+        addChapterEffect(card, chapter, chapter, effect);
     }
 
-    public Ability addChapterEffect(Card card, SagaChapter fromChapter, SagaChapter toChapter, Effect effect) {
-        ChapterTriggeredAbility ability = new ChapterTriggeredAbility(effect, fromChapter, toChapter);
-        card.addAbility(ability);
+    public void addChapterEffect(Card card, SagaChapter fromChapter, SagaChapter toChapter, Effect effect) {
+        addChapterEffect(card, fromChapter, toChapter, new Effects(effect), (Target) null);
+    }
+
+    public void addChapterEffect(Card card, SagaChapter fromChapter, SagaChapter toChapter, Effects effects) {
+        addChapterEffect(card, fromChapter, toChapter, effects, (Target) null);
+    }
+
+    public void addChapterEffect(Card card, SagaChapter fromChapter, SagaChapter toChapter, Effect effect, Target target) {
+        addChapterEffect(card, fromChapter, toChapter, new Effects(effect), new Targets(target));
+    }
+
+    public void addChapterEffect(Card card, SagaChapter fromChapter, SagaChapter toChapter, Effects effects, Target target) {
+        addChapterEffect(card, fromChapter, toChapter, effects, new Targets(target));
+    }
+
+    public void addChapterEffect(Card card, SagaChapter fromChapter, SagaChapter toChapter, Effects effects, Targets targets) {
+        ChapterTriggeredAbility ability;
+        for (int i = fromChapter.getNumber(); i <= toChapter.getNumber(); i++) {
+            ability = new ChapterTriggeredAbility(null, SagaChapter.getChapter(i), toChapter);
+            for (Effect effect : effects) {
+                ability.addEffect(effect);
+            }
+            for (Target target : targets) {
+                ability.addTarget(target);
+            }
+            if (i > fromChapter.getNumber()) {
+                ability.setRuleVisible(false);
+            }
+            card.addAbility(ability);
+        }
         if (maxChapter == null || toChapter.getNumber() > maxChapter.getNumber()) {
             maxChapter = toChapter;
         }
-        return ability;
     }
 
     public SagaChapter getMaxChapter() {
@@ -106,7 +136,6 @@ class ChapterTriggeredAbility extends TriggeredAbilityImpl {
     public ChapterTriggeredAbility(Effect effect, SagaChapter chapterFrom, SagaChapter chapterTo) {
         super(Zone.BATTLEFIELD, effect, false);
         this.chapterFrom = chapterFrom;
-        this.chapterTo = chapterTo;
     }
 
     public ChapterTriggeredAbility(final ChapterTriggeredAbility ability) {
@@ -123,11 +152,12 @@ class ChapterTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getTargetId().equals(getSourceId()) && event.getData().equals(CounterType.LORE.getName())) {
+            int amountAdded = event.getAmount();
             Permanent sourceSaga = game.getPermanentOrLKIBattlefield(getSourceId());
             if (sourceSaga != null) {
                 int loreCounters = sourceSaga.getCounters(game).getCount(CounterType.LORE);
-                return chapterFrom.getNumber() <= loreCounters
-                        && chapterTo.getNumber() >= loreCounters;
+                return loreCounters - amountAdded < chapterFrom.getNumber()
+                        && chapterFrom.getNumber() <= loreCounters;
             }
         }
         return false;
