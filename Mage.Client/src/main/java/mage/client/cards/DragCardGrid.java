@@ -1332,7 +1332,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
         repaint();
     }
 
-    private static final Pattern pattern = Pattern.compile(".*Add(.*)(\\{[WUBRGXC]\\})(.*)to your mana pool");
+    private static final Pattern pattern = Pattern.compile(".*Add(.*)(\\{[WUBRGXC]\\})");
 
     public void analyseDeck() {
         HashMap<String, Integer> qtys = new HashMap<>();
@@ -1408,10 +1408,9 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
                     // Adding mana
                     for (String str : card.getRules()) {
                         Matcher m = pattern.matcher(str);
-                        // ".*Add(.*)(\\{[WUBRGXC]\\})(.*)to your mana pool"
+                        // ".*Add(.*)(\\{[WUBRGXC]\\})(.*)"
                         while (m.find()) {
-                            System.out.println("0=" + m.group(0) + ",,,1=" + m.group(1) + ",,,2=" + m.group(2) + ",,,3=" + m.group(3));
-                            str = "Add" + m.group(1) + m.group(3) + "to your mana pool";
+                            str = "Add" + m.group(1);
                             int num = 1;
                             if (manaCounts.get(m.group(2)) != null) {
                                 num = manaCounts.get(m.group(2));
