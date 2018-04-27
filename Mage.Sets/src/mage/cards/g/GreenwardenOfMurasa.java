@@ -29,25 +29,17 @@ package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ExileSourceEffect;
+import mage.abilities.costs.common.ExileSourceFromGraveCost;
+import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.game.Game;
-import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -56,7 +48,7 @@ import mage.target.targetpointer.FixedTarget;
 public class GreenwardenOfMurasa extends CardImpl {
 
     public GreenwardenOfMurasa(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
         this.subtype.add(SubType.ELEMENTAL);
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
@@ -67,7 +59,8 @@ public class GreenwardenOfMurasa extends CardImpl {
         this.addAbility(ability);
 
         // When Greenwarden of  Murasa dies, you may exile it. If you do, return target card from your graveyard to your hand.
-        ability = new DiesTriggeredAbility(new GreenwardenOfMurasaEffect(), false);
+        ability = new DiesTriggeredAbility(new DoIfCostPaid(new ReturnFromGraveyardToHandTargetEffect(), new ExileSourceFromGraveCost(),
+                "Exile {this} and return target card from your graveyard to your hand?", true), false);
         ability.addTarget(new TargetCardInYourGraveyard());
         this.addAbility(ability);
     }
@@ -82,38 +75,38 @@ public class GreenwardenOfMurasa extends CardImpl {
     }
 }
 
-class GreenwardenOfMurasaEffect extends OneShotEffect {
-
-    public GreenwardenOfMurasaEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "you may exile it. If you do, return target card from your graveyard to your hand";
-    }
-
-    public GreenwardenOfMurasaEffect(final GreenwardenOfMurasaEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public GreenwardenOfMurasaEffect copy() {
-        return new GreenwardenOfMurasaEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
-        Card targetCard = game.getCard(getTargetPointer().getFirst(game, source));
-        if (controller != null && sourceObject != null && targetCard != null) {
-            if (controller.chooseUse(outcome, "Exile " + sourceObject.getLogName() + " to return card from your graveyard to your hand?", source, game)) {
-                // Setting the fixed target prevents to return Greenwarden of Murasa itself (becuase it's exiled meanwhile),
-                // but of course you can target it as the ability triggers I guess
-                Effect effect = new ReturnToHandTargetEffect();
-                effect.setTargetPointer(new FixedTarget(targetCard.getId(), targetCard.getZoneChangeCounter(game)));
-                new ExileSourceEffect().apply(game, source);
-                return effect.apply(game, source);
-            }
-            return true;
-        }
-        return false;
-    }
-}
+//class GreenwardenOfMurasaEffect extends OneShotEffect {
+//
+//    public GreenwardenOfMurasaEffect() {
+//        super(Outcome.Benefit);
+//        this.staticText = "you may exile it. If you do, return target card from your graveyard to your hand";
+//    }
+//
+//    public GreenwardenOfMurasaEffect(final GreenwardenOfMurasaEffect effect) {
+//        super(effect);
+//    }
+//
+//    @Override
+//    public GreenwardenOfMurasaEffect copy() {
+//        return new GreenwardenOfMurasaEffect(this);
+//    }
+//
+//    @Override
+//    public boolean apply(Game game, Ability source) {
+//        Player controller = game.getPlayer(source.getControllerId());
+//        MageObject sourceObject = game.getObject(source.getSourceId());
+//        Card targetCard = game.getCard(getTargetPointer().getFirst(game, source));
+//        if (controller != null && sourceObject != null && targetCard != null) {
+//            if (controller.chooseUse(outcome, "Exile " + sourceObject.getLogName() + " to return card from your graveyard to your hand?", source, game)) {
+//                // Setting the fixed target prevents to return Greenwarden of Murasa itself (becuase it's exiled meanwhile),
+//                // but of course you can target it as the ability triggers I guess
+//                Effect effect = new ReturnToHandTargetEffect();
+//                effect.setTargetPointer(new FixedTarget(targetCard.getId(), targetCard.getZoneChangeCounter(game)));
+//                new ExileSourceEffect().apply(game, source);
+//                return effect.apply(game, source);
+//            }
+//            return true;
+//        }
+//        return false;
+//    }
+//}
