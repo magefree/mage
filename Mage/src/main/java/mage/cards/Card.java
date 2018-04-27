@@ -157,6 +157,8 @@ public interface Card extends MageObject {
 
     Counters getCounters(GameState state);
 
+    void addAbility(Ability ability);
+
     boolean addCounters(Counter counter, Ability source, Game game);
 
     boolean addCounters(Counter counter, Ability source, Game game, List<UUID> appliedEffects);
