@@ -71,6 +71,7 @@ public class DoIfCostPaid extends OneShotEffect {
                 }
                 message = getCostText() + " and " + effectText + '?';
                 message = Character.toUpperCase(message.charAt(0)) + message.substring(1);
+                CardUtil.replaceSourceName(message, mageObject.getName());
             } else {
                 message = chooseUseText;
             }
