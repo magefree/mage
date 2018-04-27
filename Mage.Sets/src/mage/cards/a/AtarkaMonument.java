@@ -74,13 +74,13 @@ public class AtarkaMonument extends CardImpl {
     private static class AtarkaMonumentToken extends TokenImpl {
         AtarkaMonumentToken() {
             super("", "4/4 red and green Dragon artifact creature with flying");
-            cardType.add(CardType.ARTIFACT);
-            cardType.add(CardType.CREATURE);
-            color.setRed(true);
-            color.setGreen(true);
+            this.cardType.add(CardType.ARTIFACT);
+            this.cardType.add(CardType.CREATURE);
+            this.color.setRed(true);
+            this.color.setGreen(true);
             this.subtype.add(SubType.DRAGON);
-            power = new MageInt(4);
-            toughness = new MageInt(4);
+            this.power = new MageInt(4);
+            this.toughness = new MageInt(4);
             this.addAbility(FlyingAbility.getInstance());
         }
         public AtarkaMonumentToken(final AtarkaMonumentToken token) {
