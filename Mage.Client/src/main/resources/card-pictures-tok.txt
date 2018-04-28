@@ -84,6 +84,7 @@
 |Generate|EMBLEM:M14|Garruk, Caller of Beasts||Emblem Garruk|GarrukCallerOfBeastsEmblem|
 |Generate|EMBLEM:M14|Liliana of the Dark Realms||Emblem Liliana|LilianaOfTheDarkRealmsEmblem|
 |Generate|EMBLEM:MMA|Elspeth, Knight Errant||Emblem Elspeth|ElspethKnightErrantEmblem|
+|Generate|EMBLEM:SWS|Obi-Wan Kenobi||Emblem Obi-Wan Kenobi|ObiWanKenobiEmblem|
 |Generate|EMBLEM:RIX|Huatli, Radiant Champion||Emblem Huatli|HuatliRadiantChampionEmblem|
 |Generate|PLANE:PCA|Plane - Academy At Tolaria West|||AcademyAtTolariaWestPlane|
 |Generate|PLANE:PCA|Plane - Agyrem|||AgyremPlane|

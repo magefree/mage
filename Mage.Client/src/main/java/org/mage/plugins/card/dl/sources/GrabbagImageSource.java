@@ -384,7 +384,7 @@ public enum GrabbagImageSource implements CardImageSource {
         singleLinks.put("SWS/Y-Wing", "aQQ5zwA.jpg");
         singleLinks.put("SWS/Zam Wesell", "ToG0C1r.jpg");
         // Emblems
-        singleLinks.put("SWS/Obi-Wan Kenobi", "Qyc10aT.png");
+        singleLinks.put("SWS/Emblem Obi-Wan Kenobi", "Qyc10aT.png");
         singleLinks.put("SWS/Aurra Sing", "BLWbVJC.png");
         singleLinks.put("SWS/Yoda", "zH0sYxg.png");
         // Tokens
