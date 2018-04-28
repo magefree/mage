@@ -101,7 +101,7 @@ class DrainPowerEffect extends OneShotEffect {
             List<Permanent> ignorePermanents = new ArrayList<>();
             TargetPermanent target = null;
             
-            do {
+            while (true) {
                 Map<Permanent, List<ActivatedManaAbilityImpl>> manaAbilitiesMap = new HashMap<>();
                 for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, targetPlayer.getId(), game)) {
                     if (!ignorePermanents.contains(permanent)) {
@@ -162,7 +162,7 @@ class DrainPowerEffect extends OneShotEffect {
                         }
                     }
                 }
-            } while (target != null && target.canChoose(targetPlayer.getId(), game));
+            }
             
             // 106.12. One card (Drain Power) causes one player to lose unspent mana and another to add “the mana lost this way.” (Note that these may be the same player.) 
             // This empties the former player’s mana pool and causes the mana emptied this way to be put into the latter player’s mana pool. Which permanents, spells, and/or 
