@@ -38,8 +38,8 @@ import mage.abilities.effects.RedirectionEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -92,14 +92,14 @@ class HazduhrTheAbbotRedirectDamageEffect extends RedirectionEffect {
     private static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
 
     public HazduhrTheAbbotRedirectDamageEffect(Duration duration) {
-        super(duration, 0, true);
+        super(duration, 0, UsageType.ONE_USAGE_ABSOLUTE);
         this.staticText = "The next X damage that would be dealt this turn to target white creature you control is dealt to {this} instead";
     }
 
     public HazduhrTheAbbotRedirectDamageEffect(final HazduhrTheAbbotRedirectDamageEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public void init(Ability source, Game game) {
         amountToRedirect = source.getManaCostsToPay().getX();

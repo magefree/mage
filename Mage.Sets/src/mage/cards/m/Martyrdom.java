@@ -48,8 +48,8 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -154,7 +154,7 @@ class MartyrdomRedirectDamageTargetEffect extends RedirectionEffect {
     private static FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     public MartyrdomRedirectDamageTargetEffect(Duration duration, int amount) {
-        super(duration, amount, true);
+        super(duration, amount, UsageType.ONE_USAGE_ABSOLUTE);
         staticText = "The next " + amount + " damage that would be dealt to target creature, planeswalker, or player this turn is dealt to {this} instead";
     }
 

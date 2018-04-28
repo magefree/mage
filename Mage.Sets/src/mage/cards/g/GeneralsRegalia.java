@@ -41,20 +41,19 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.TargetSource;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
- * 
+ *
  * @author L_J
  */
 public class GeneralsRegalia extends CardImpl {
 
     public GeneralsRegalia(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // {3}: The next time a source of your choice would deal damage to you this turn, that damage is dealt to target creature you control instead.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GeneralsRegaliaEffect(), new GenericManaCost(3));
@@ -77,7 +76,7 @@ class GeneralsRegaliaEffect extends RedirectionEffect {
     private final TargetSource damageSource;
 
     public GeneralsRegaliaEffect() {
-        super(Duration.EndOfTurn, Integer.MAX_VALUE, true);
+        super(Duration.EndOfTurn, Integer.MAX_VALUE, UsageType.ONE_USAGE_ABSOLUTE);
         staticText = "The next time a source of your choice would deal damage to you this turn, that damage is dealt to target creature you control instead";
         this.damageSource = new TargetSource();
     }

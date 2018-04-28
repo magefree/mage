@@ -38,9 +38,9 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -56,7 +56,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class WardOfPiety extends CardImpl {
 
     public WardOfPiety(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
         this.subtype.add(SubType.AURA);
 
         // Enchant creature
@@ -87,12 +87,13 @@ class WardOfPietyPreventDamageTargetEffect extends RedirectionEffect {
     protected MageObjectReference redirectToObject;
 
     public WardOfPietyPreventDamageTargetEffect() {
-        super(Duration.EndOfTurn, 1, true);
+        super(Duration.EndOfTurn, 1, UsageType.ONE_USAGE_ABSOLUTE);
         staticText = "The next 1 damage that would be dealt to enchanted creature this turn is dealt to any target instead";
     }
 
     public WardOfPietyPreventDamageTargetEffect(final WardOfPietyPreventDamageTargetEffect effect) {
         super(effect);
+        this.redirectToObject = effect.redirectToObject;
     }
 
     @Override

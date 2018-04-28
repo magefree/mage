@@ -32,13 +32,14 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
+import static mage.abilities.effects.RedirectionEffect.UsageType.ONE_USAGE_ABSOLUTE;
 import mage.abilities.effects.common.RedirectDamageFromSourceToTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -49,7 +50,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public class SpiritEnKor extends CardImpl {
 
     public SpiritEnKor(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
         this.subtype.add(SubType.KOR);
         this.subtype.add(SubType.SPIRIT);
         this.power = new MageInt(2);
@@ -60,7 +61,7 @@ public class SpiritEnKor extends CardImpl {
 
         // {0}: The next 1 damage that would be dealt to Spirit en-Kor this turn is dealt to target creature you control instead.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new RedirectDamageFromSourceToTargetEffect(Duration.EndOfTurn, 1, true), new GenericManaCost(0));
+                new RedirectDamageFromSourceToTargetEffect(Duration.EndOfTurn, 1, ONE_USAGE_ABSOLUTE), new GenericManaCost(0));
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
     }
