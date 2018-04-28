@@ -97,7 +97,7 @@ class WatchersOfTheDeadEffect extends OneShotEffect {
             for (UUID opponentId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player opponent = game.getPlayer(opponentId);
                 if (opponent != null
-                        && opponent != controller) {
+                        && !opponent.equals(controller)) {
                     TargetCard target = new TargetCardInYourGraveyard(2, 2, new FilterCard());
                     target.setNotTarget(true);
                     Cards cardsInGraveyard = opponent.getGraveyard();

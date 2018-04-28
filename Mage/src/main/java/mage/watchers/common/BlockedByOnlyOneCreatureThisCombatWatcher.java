@@ -27,11 +27,8 @@
  */
 package mage.watchers.common;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
+
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
@@ -67,7 +64,7 @@ public class BlockedByOnlyOneCreatureThisCombatWatcher extends Watcher {
                     if (!blockedByOneCreature.containsKey(combatGroup)) {
                         blockedByOneCreature.put(combatGroup, event.getSourceId());
                     }
-                    else if (blockedByOneCreature.get(combatGroup) != event.getSourceId()) {
+                    else if (!Objects.equals(blockedByOneCreature.get(combatGroup), event.getSourceId())) {
                         blockedByOneCreature.put(combatGroup, null);
                     }
                 }

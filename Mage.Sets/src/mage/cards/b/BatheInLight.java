@@ -112,7 +112,7 @@ class BatheInLightEffect extends OneShotEffect {
                     game.addEffect(effect, source);
                     ObjectColor color = target.getColor(game);
                     for (Permanent permanent : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source.getSourceId(), game)) {
-                        if (permanent != target && permanent.getColor(game).shares(color)) {
+                        if (!permanent.getId().equals(target.getId()) && permanent.getColor(game).shares(color)) {
                             game.getState().setValue(permanent.getId() + "_color", colorChoice.getColor());
                             effect.setTargetPointer(new FixedTarget(permanent, game));
                             game.addEffect(effect, source);

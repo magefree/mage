@@ -28,11 +28,8 @@
 package mage.game.combat;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
+
 import mage.abilities.common.ControllerAssignCombatDamageToBlockersAbility;
 import mage.abilities.common.ControllerDivideCombatDamageAbility;
 import mage.abilities.common.DamageAsThoughNotBlockedAbility;
@@ -286,7 +283,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         if (attacker == null) {
             return;
         }
-        boolean oldRuleDamage = (player.getId() == defendingPlayerId);
+        boolean oldRuleDamage = (Objects.equals(player.getId(), defendingPlayerId));
         int damage = getDamageValueFromPermanent(attacker, game);
         if (canDamage(attacker, first)) {
             // must be set before attacker damage marking because of effects like Test of Faith

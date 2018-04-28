@@ -27,6 +27,7 @@
  */
 package mage.cards.s;
 
+import java.util.Objects;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -95,7 +96,7 @@ class SpiritualFocusTriggeredAbility extends TriggeredAbilityImpl {
             if (game.getOpponents(this.getControllerId()).contains(stackObject.getControllerId())) {
                 Permanent permanent = game.getPermanent(getSourceId());
                 if (permanent != null) {
-                    if (permanent.getControllerId() == event.getPlayerId()) {
+                    if (Objects.equals(permanent.getControllerId(), event.getPlayerId())) {
                         return true;
                     }
                 }

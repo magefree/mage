@@ -84,7 +84,7 @@ public class CardDownloadData {
         if (obj == null) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
+        if (!getClass().equals(obj.getClass())) {
             return false;
         }
         final CardDownloadData other = (CardDownloadData) obj;

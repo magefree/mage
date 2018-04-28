@@ -92,7 +92,7 @@ enum ActivePlayerMostLandsCondition implements Condition {
             return false;
         }
         for (UUID playerId : game.getPlayerList()) {
-            if (playerId != activePlayer.getId()) {
+            if (!playerId.equals(activePlayer.getId())) {
                 if (game.getBattlefield().getAllActivePermanents(filter, playerId, game).size() >= landCount) {
                     return false;
                 }
