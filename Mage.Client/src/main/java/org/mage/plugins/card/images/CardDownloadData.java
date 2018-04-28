@@ -134,6 +134,10 @@ public class CardDownloadData {
         return CardUtil.parseCardNumberAsInt(collectorId);
     }
 
+    public String getCollectorIdPostfix() {
+        return getCollectorId().replaceAll(getCollectorIdAsInt().toString(), "");
+    }
+
     public boolean isCollectorIdWithStr() {
         // card have special numbers like "103a", "180b" (scryfall style)
         return !getCollectorId().equals(getCollectorIdAsInt().toString());
