@@ -66,7 +66,7 @@ public class ManaFlareTest extends CardTestPlayerBase {
      */
     @Test
     public void testWateryGrave() {
-        // {T}: Add one mana of any color to your mana pool. Spend this mana only to cast a multicolored spell.
+        // {T}: Add one mana of any color. Spend this mana only to cast a multicolored spell.
         addCard(Zone.BATTLEFIELD, playerB, "Mana Flare", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Watery Grave", 1);
 

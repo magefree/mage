@@ -50,7 +50,7 @@ public class QuirionSentinel extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        // When Quirion Sentinel enters the battlefield, add one mana of any color to your mana pool.
+        // When Quirion Sentinel enters the battlefield, add one mana of any color.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new AddManaOfAnyColorEffect()));
     }
 

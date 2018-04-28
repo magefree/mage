@@ -36,7 +36,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.target.TargetPlayer;
+import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
  *
@@ -45,7 +45,7 @@ import mage.target.TargetPlayer;
 public class GoretuskFirebeast extends CardImpl {
 
     public GoretuskFirebeast(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{R}");
         this.subtype.add(SubType.ELEMENTAL);
         this.subtype.add(SubType.BOAR);
         this.subtype.add(SubType.BEAST);
@@ -55,7 +55,7 @@ public class GoretuskFirebeast extends CardImpl {
 
         // When Goretusk Firebeast enters the battlefield, it deals 4 damage to target player.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(4, "it"), false);
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayerOrPlaneswalker());
         this.addAbility(ability);
     }
 

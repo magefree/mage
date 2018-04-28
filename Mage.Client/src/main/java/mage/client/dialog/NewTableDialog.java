@@ -495,6 +495,13 @@ public class NewTableDialog extends MageDialog {
                     return false;
                 }
                 break;
+            case "Variant Magic - Brawl":
+            case "Variant Magic - Duel Brawl":
+                if (!options.getGameType().startsWith("Brawl")) {
+                    JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Deck type Brawl needs also a Brawl game type", "Error", JOptionPane.ERROR_MESSAGE);
+                    return false;
+                }
+                break;
             case "Variant Magic - Tiny Leaders":
                 if (!options.getGameType().startsWith("Tiny Leaders")) {
                     JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Deck type Tiny Leaders needs also a Tiny Leaders game type", "Error", JOptionPane.ERROR_MESSAGE);
@@ -515,6 +522,14 @@ public class NewTableDialog extends MageDialog {
                         && !options.getDeckType().equals("Variant Magic - Duel Commander")
                         && !options.getDeckType().equals("Variant Magic - MTGO 1v1 Commander")) {
                     JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Deck type Commander needs also a Commander game type", "Error", JOptionPane.ERROR_MESSAGE);
+                    return false;
+                }
+                break;
+            case "Brawl Two Player Duel":
+            case "Brawl Free For All":
+                if (!options.getDeckType().equals("Variant Magic - Brawl")
+                        && !options.getDeckType().equals("Variant Magic - Duel Brawl")) {
+                    JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Deck type Brawl needs also a Brawl game type", "Error", JOptionPane.ERROR_MESSAGE);
                     return false;
                 }
                 break;

@@ -52,13 +52,13 @@ import mage.target.common.TargetCardInHand;
 public class AbandonHope extends CardImpl {
 
     public AbandonHope(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{1}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{1}{B}");
 
         // As an additional cost to cast Abandon Hope, discard X cards.
         Ability ability = new SimpleStaticAbility(Zone.ALL, new AbandonHopeRuleEffect());
         ability.setRuleAtTheTop(true);
         this.addAbility(ability);
-        
+
         // Look at target opponent's hand and choose X cards from it. That player discards those cards.
         ManacostVariableValue manaX = new ManacostVariableValue();
         this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(manaX, TargetController.ANY));
@@ -68,7 +68,7 @@ public class AbandonHope extends CardImpl {
     public AbandonHope(final AbandonHope card) {
         super(card);
     }
-    
+
     @Override
     public void adjustCosts(Ability ability, Game game) {
         int xValue = ability.getManaCostsToPay().getX();
@@ -87,7 +87,7 @@ class AbandonHopeRuleEffect extends OneShotEffect {
 
     public AbandonHopeRuleEffect() {
         super(Outcome.Benefit);
-        this.staticText = "As an additional cost to cast {this}, discard X cards";
+        this.staticText = "As an additional cost to cast this spell, discard X cards";
     }
 
     public AbandonHopeRuleEffect(final AbandonHopeRuleEffect effect) {

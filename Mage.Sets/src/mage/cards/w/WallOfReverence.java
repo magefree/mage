@@ -90,7 +90,7 @@ class WallOfReverenceTriggeredEffect extends OneShotEffect {
         Permanent target = game.getPermanent(source.getFirstTarget());
         Player player = game.getPlayer(source.getControllerId());
         if (target != null && player != null) {
-            player.gainLife(target.getPower().getValue(), game);
+            player.gainLife(target.getPower().getValue(), game, source);
             return true;
         }
         return false;

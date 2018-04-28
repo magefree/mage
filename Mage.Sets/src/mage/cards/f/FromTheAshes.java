@@ -32,14 +32,13 @@ import java.util.Map;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterBasicLandCard;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -53,8 +52,7 @@ import mage.target.common.TargetCardInLibrary;
 public class FromTheAshes extends CardImpl {
 
     public FromTheAshes(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}");
 
         // Destroy all nonbasic lands. For each land destroyed this way, its controller may search their library for a basic land card and put it onto the battlefield. Then each player who searched their library this way shuffles it.
         this.getSpellAbility().addEffect(new FromTheAshesEffect());
@@ -104,23 +102,26 @@ class FromTheAshesEffect extends OneShotEffect {
                     playerAmount.put(playerId, amount);
                 }
             }
-            for(Map.Entry<UUID, Integer> entry : playerAmount.entrySet()) {
+            game.applyEffects();
+            for (Map.Entry<UUID, Integer> entry : playerAmount.entrySet()) {
                 Player player = game.getPlayer(entry.getKey());
-                if (player != null) {
+                if (player != null && player.chooseUse(outcome, "Search your library for up to " + entry.getValue() + " basic land card(s) to put it onto the battlefield?", source, game)) {
                     TargetCardInLibrary target = new TargetCardInLibrary(0, entry.getValue(), StaticFilters.FILTER_BASIC_LAND_CARD);
                     if (player.searchLibrary(target, game)) {
                         if (!target.getTargets().isEmpty()) {
-                            for (UUID cardId: target.getTargets()) {
-                                Card card = player.getLibrary().getCard(cardId, game);
-                                if (card != null) {
-                                    card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), player.getId(), false);
-                                }
-                            }
+                            player.moveCards(new CardsImpl(target.getTargets()), Zone.BATTLEFIELD, source, game);
                         }
                     }
+                } else {
+                    entry.setValue(0); // no search no shuffling
+                }
+            }
+            game.applyEffects();
+            for (Map.Entry<UUID, Integer> entry : playerAmount.entrySet()) {
+                Player player = game.getPlayer(entry.getKey());
+                if (player != null && entry.getValue() > 0) {
                     player.shuffleLibrary(source, game);
                 }
-
             }
             return true;
         }

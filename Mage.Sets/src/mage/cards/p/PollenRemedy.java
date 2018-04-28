@@ -42,7 +42,7 @@ import mage.constants.Duration;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
 import mage.target.common.TargetControlledPermanent;
-import mage.target.common.TargetCreatureOrPlayerAmount;
+import mage.target.common.TargetAnyTargetAmount;
 
 /**
  *
@@ -61,7 +61,7 @@ public class PollenRemedy extends CardImpl {
         // Prevent the next 3 damage that would be dealt this turn to any number of target creatures and/or players, divided as you choose. If Pollen Remedy was kicked, prevent the next 6 damage this way instead.
         Effect effect = new ConditionalReplacementEffect(new PreventDamageToTargetMultiAmountEffect(Duration.EndOfTurn, 6),
             KickedCondition.instance, new PreventDamageToTargetMultiAmountEffect(Duration.EndOfTurn, 3));
-        effect.setText("Prevent the next 3 damage that would be dealt this turn to any number of target creatures and/or players, divided as you choose. If {this} was kicked, prevent the next 6 damage this way instead.");
+        effect.setText("Prevent the next 3 damage that would be dealt this turn to any number of target creatures and/or players, divided as you choose. if this spell was kicked, prevent the next 6 damage this way instead.");
         this.getSpellAbility().addEffect(effect);
         originalId = this.getSpellAbility().getOriginalId();
     }
@@ -69,7 +69,7 @@ public class PollenRemedy extends CardImpl {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         if(ability.getOriginalId().equals(originalId)) {
-             ability.addTarget(new TargetCreatureOrPlayerAmount(KickedCondition.instance.apply(game, ability) ? 6 : 3));
+             ability.addTarget(new TargetAnyTargetAmount(KickedCondition.instance.apply(game, ability) ? 6 : 3));
         }
     }
 

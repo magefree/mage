@@ -27,6 +27,8 @@
  */
 package mage.cards.d;
 
+import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageControllerEffect;
@@ -38,8 +40,6 @@ import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
-
-import java.util.UUID;
 
 /**
  *
@@ -70,7 +70,7 @@ class DarkBargainEffect extends OneShotEffect {
 
     public DarkBargainEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Look at the top three cards of your library. Put two of them into your hand and the rest into your graveyard.";
+        this.staticText = "Look at the top three cards of your library. Put two of them into your hand and the rest into your graveyard";
     }
 
     public DarkBargainEffect(final DarkBargainEffect effect) {
@@ -85,7 +85,8 @@ class DarkBargainEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
+        MageObject sourceOject = source.getSourceObject(game);
+        if (player != null && sourceOject != null) {
             Cards cards = new CardsImpl();
             int cardsCount = Math.min(3, player.getLibrary().size());
             for (int i = 0; i < cardsCount; i++) {
@@ -96,7 +97,7 @@ class DarkBargainEffect extends OneShotEffect {
             }
             if (!cards.isEmpty()) {
                 Cards cardsToHand = new CardsImpl();
-                player.lookAtCards("Dark Bargain", cards, game);
+                player.lookAtCards(sourceOject.getIdName(), cards, game);
                 TargetCard target = new TargetCard(Math.min(2, cards.size()), Zone.LIBRARY, new FilterCard("two cards to put in your hand"));
                 if (player.choose(Outcome.DrawCard, cards, target, game)) {
                     for (UUID targetId : target.getTargets()) {

@@ -28,6 +28,7 @@
 package mage.cards.s;
 
 import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
@@ -46,8 +47,10 @@ public class SparringConstruct extends CardImpl {
 
     public SparringConstruct(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}");
-
         this.subtype.add(SubType.CONSTRUCT);
+
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
         // When Sparring Construct dies, put a +1/+1 counter on target creature you control.
         Ability ability = new DiesTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()), false);

@@ -76,7 +76,7 @@ public class CastCreaturesTest extends CardTestPlayerBaseAI {
     public void testSimpleCast3() {
         // Affinity for artifacts (This spell costs less to cast for each artifact you control.)
         addCard(Zone.HAND, playerA, "Myr Enforcer");
-        // {T}: Add to your mana pool.
+        // {T}: Add.
         // {T}, {1}, Sacrifice Mind Stone: Draw a card.
         addCard(Zone.BATTLEFIELD, playerA, "Mind Stone", 3);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);

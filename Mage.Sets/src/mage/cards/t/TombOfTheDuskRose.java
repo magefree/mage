@@ -68,7 +68,7 @@ public class TombOfTheDuskRose extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new InfoEffect("<i>(Transforms from Profane Procession.)</i>")).setRuleAtTheTop(true));
 
-        // {T}: Add one mana of any color to your mana pool.
+        // {T}: Add one mana of any color.
         this.addAbility(new AnyColorManaAbility());
 
         // {2}{W}{B}，{T} : Put a creature card exiled with this permanent onto the battlefield under your control.

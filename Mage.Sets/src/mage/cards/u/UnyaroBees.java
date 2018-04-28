@@ -42,7 +42,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -60,10 +60,10 @@ public class UnyaroBees extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // {G}: Unyaro Bees gets +1/+1 until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{G}")));
-        // {3}{G}, Sacrifice Unyaro Bees: Unyaro Bees deals 2 damage to target creature or player.
+        // {3}{G}, Sacrifice Unyaro Bees: Unyaro Bees deals 2 damage to any target.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl("{3}{G}"));
         ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }
 

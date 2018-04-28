@@ -97,7 +97,7 @@ class PurityEffect extends PreventionEffectImpl {
         PreventionEffectData preventionData = preventDamageAction(event, source, game);
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            player.gainLife(preventionData.getPreventedDamage(), game);
+            player.gainLife(preventionData.getPreventedDamage(), game, source);
         }
 
         return true;

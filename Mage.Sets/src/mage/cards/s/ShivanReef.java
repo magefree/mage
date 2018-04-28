@@ -48,10 +48,10 @@ public class ShivanReef extends CardImpl {
     public ShivanReef(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // Tap: Add 1 to your mana pool.
+        // Tap: Add 1.
         this.addAbility(new ColorlessManaAbility());
 
-        //Tap: Add Blue or Red to your mana pool. Shivan Reef deals 1 damage to you.
+        //Tap: Add Blue or Red. Shivan Reef deals 1 damage to you.
         Ability blueManaAbility = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlueMana(1), new TapSourceCost());
         blueManaAbility.addEffect(new DamageControllerEffect(1));
         this.addAbility(blueManaAbility);

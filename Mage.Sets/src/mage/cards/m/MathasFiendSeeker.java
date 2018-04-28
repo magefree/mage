@@ -144,7 +144,7 @@ class OpponentsGainLifeEffect extends OneShotEffect {
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null && game.isOpponent(player, source.getControllerId())) {
-                player.gainLife(2, game);
+                player.gainLife(2, game, source);
             }
         }
         return true;

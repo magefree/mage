@@ -45,7 +45,7 @@ import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.target.TargetPlayer;
+import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
  * @author Loki
@@ -65,16 +65,15 @@ public class BalefireLiege extends CardImpl {
     }
 
     public BalefireLiege(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R/W}{R/W}{R/W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R/W}{R/W}{R/W}");
         this.subtype.add(SubType.SPIRIT, SubType.HORROR);
-
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filterRedCreature, true)));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filterWhiteCreature, true)));
         Ability ability = new SpellCastControllerTriggeredAbility(new DamageTargetEffect(3), filterRedSpell, false);
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayerOrPlaneswalker());
         this.addAbility(ability);
         this.addAbility(new SpellCastControllerTriggeredAbility(new GainLifeEffect(3), filterWhiteSpell, false));
     }

@@ -47,7 +47,7 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -60,7 +60,7 @@ public class ScorchingLava extends CardImpl {
 
         // Kicker {R}
         this.addAbility(new KickerAbility("{R}"));
-        // Scorching Lava deals 2 damage to target creature or player. If Scorching Lava was kicked, that creature can't be regenerated this turn and if it would die this turn, exile it instead.
+        // Scorching Lava deals 2 damage to any target. If Scorching Lava was kicked, that creature can't be regenerated this turn and if it would die this turn, exile it instead.
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));
         this.getSpellAbility().addEffect(new ConditionalContinuousRuleModifyingEffect(
                 new CantRegenerateTargetEffect(Duration.EndOfTurn, "that creature"), new LockedInCondition(KickedCondition.instance)));
@@ -68,7 +68,7 @@ public class ScorchingLava extends CardImpl {
                 new ExileTargetIfDiesEffect(),
                 new LockedInCondition(KickedCondition.instance)
         ).setText("and if it would die this turn, exile it instead"));
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
     public ScorchingLava(final ScorchingLava card) {

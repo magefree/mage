@@ -67,7 +67,7 @@ public class CrucibleOfTheSpiritDragon extends CardImpl {
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 
-        // {T}, Remove X storage counters from Crucible of the Spirit Dragon: Add X mana in any combination of colors to your mana pool. Spend this mana only to cast Dragon spells or activate abilities of Dragons.
+        // {T}, Remove X storage counters from Crucible of the Spirit Dragon: Add X mana in any combination of colors. Spend this mana only to cast Dragon spells or activate abilities of Dragons.
         ability = new ConditionalAnyColorManaAbility(
                 new TapSourceCost(),
                 new RemovedCountersForCostValue(),

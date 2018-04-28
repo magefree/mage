@@ -99,7 +99,7 @@ class EbonyCharmDrainEffect extends OneShotEffect {
         Player controllerPlayer = game.getPlayer(source.getControllerId());
         if (targetPlayer != null && controllerPlayer != null) {
             targetPlayer.damage(1, source.getSourceId(), game, false, true);
-            controllerPlayer.gainLife(1, game);
+            controllerPlayer.gainLife(1, game, source);
         }
         return false;
     }

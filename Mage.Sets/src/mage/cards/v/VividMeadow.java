@@ -54,7 +54,7 @@ public class VividMeadow extends CardImpl {
         this.addAbility(ability);
         // {tap}: Add {W}.
         this.addAbility(new WhiteManaAbility());
-        // {tap}, Remove a charge counter from Vivid Meadow: Add one mana of any color to your mana pool.
+        // {tap}, Remove a charge counter from Vivid Meadow: Add one mana of any color.
         ability = new AnyColorManaAbility();
         ability.addCost(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(1)));
         this.addAbility(ability);

@@ -90,7 +90,7 @@ class MagisterSphinxEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
         if (targetPlayer != null) {
-            targetPlayer.setLife(10, game);
+            targetPlayer.setLife(10, game, source);
             return true;
         }
         return false;

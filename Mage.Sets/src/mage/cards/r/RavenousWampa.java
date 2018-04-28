@@ -104,7 +104,7 @@ class RavenousWampaEffect extends OneShotEffect {
         if (controller != null && sourceObject != null) {
             Integer toughness = (Integer) game.getState().getValue(RAVENOUS_WAMPA_STATE_VALUE_KEY_PREFIX + source.getSourceId() + sourceObject.getZoneChangeCounter(game));
             if (toughness != null) {
-                controller.gainLife(toughness, game);
+                controller.gainLife(toughness, game, source);
             }
             return true;
         }

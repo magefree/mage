@@ -29,6 +29,7 @@ package mage.cards.w;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
@@ -136,35 +137,38 @@ class WarpWorldEffect extends OneShotEffect {
                 cardsRevealed.put(player.getId(), cards);
             }
         }
-
+        game.applyEffects();
         // put artifacts, creaturs and lands onto the battlefield
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
+                Set<Card> toBattlefield = new HashSet<>();
                 CardsImpl cards = cardsRevealed.get(player.getId());
                 for (Card card : cards.getCards(game)) {
                     if (card != null && (card.isArtifact()
                             || card.isCreature()
                             || card.isLand())) {
-                        card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), player.getId());
+                        toBattlefield.add(card);
                         cards.remove(card);
                     }
                 }
-
+                player.moveCards(toBattlefield, Zone.BATTLEFIELD, source, game);
             }
         }
+        game.applyEffects();
         // put enchantments onto the battlefield
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
+                Set<Card> toBattlefield = new HashSet<>();
                 CardsImpl cards = cardsRevealed.get(player.getId());
                 for (Card card : cards.getCards(game)) {
                     if (card != null && card.isEnchantment()) {
-                        card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), player.getId());
+                        toBattlefield.add(card);
                         cards.remove(card);
                     }
                 }
-
+                player.moveCards(toBattlefield, Zone.BATTLEFIELD, source, game);
             }
         }
         // put the rest of the cards on buttom of the library

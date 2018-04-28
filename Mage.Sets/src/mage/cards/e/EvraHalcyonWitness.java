@@ -107,7 +107,7 @@ class EvraHalcyonWitnessEffect extends OneShotEffect {
                 if (life > amount && !player.isCanLoseLife()) {
                     return false;
                 }
-                player.setLife(amount, game);
+                player.setLife(amount, game, source);
                 game.addEffect(new SetPowerToughnessSourceEffect(life, Integer.MIN_VALUE, Duration.Custom, SubLayer.SetPT_7b), source);
                 return true;
             }

@@ -47,7 +47,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -65,11 +65,11 @@ public class HotSprings extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        // Enchanted land has "{tap}: Prevent the next 1 damage that would be dealt to target creature or player this turn."
+        // Enchanted land has "{tap}: Prevent the next 1 damage that would be dealt to any target this turn."
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToTargetEffect(Duration.EndOfTurn, 1), new TapSourceCost());
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         Effect effect = new GainAbilityAttachedEffect(ability, AttachmentType.AURA);
-        effect.setText("Enchanted land has \"{T}: Prevent the next 1 damage that would be dealt to target creature or player this turn.\"");
+        effect.setText("Enchanted land has \"{T}: Prevent the next 1 damage that would be dealt to any target this turn.\"");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 

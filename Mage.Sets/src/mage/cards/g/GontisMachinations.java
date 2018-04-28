@@ -169,7 +169,7 @@ class GontisMachinationsEffect extends OneShotEffect {
         for (UUID opponentId : game.getOpponents(source.getControllerId())) {
             damage += game.getPlayer(opponentId).loseLife(3, game, false);
         }
-        game.getPlayer(source.getControllerId()).gainLife(damage, game);
+        game.getPlayer(source.getControllerId()).gainLife(damage, game, source);
         return true;
     }
 

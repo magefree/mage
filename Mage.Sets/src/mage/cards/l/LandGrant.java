@@ -62,7 +62,7 @@ public class LandGrant extends CardImpl {
 
         // If you have no land cards in hand, you may reveal your hand rather than pay Land Grant's mana cost.
         this.addAbility(new AlternativeCostSourceAbility(new LandGrantReavealCost(), new LandGrantCondition(),
-            "If you have no land cards in hand, you may reveal your hand rather than pay {this}'s mana cost."));
+            "If you have no land cards in hand, you may reveal your hand rather than pay this spell's mana cost."));
 
         // Search your library for a Forest card, reveal that card, and put it into your hand. Then shuffle your library.
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, true));

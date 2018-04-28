@@ -30,15 +30,14 @@ package mage.cards.z;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -51,7 +50,7 @@ import mage.players.Player;
 public class ZombieApocalypse extends CardImpl {
 
     public ZombieApocalypse(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{B}{B}{B}");
 
         // Return all Zombie creature cards from your graveyard to the battlefield tapped, then destroy all Humans.
         this.getSpellAbility().addEffect(new ZombieApocalypseEffect());
@@ -70,11 +69,9 @@ public class ZombieApocalypse extends CardImpl {
 class ZombieApocalypseEffect extends OneShotEffect {
 
     private static final FilterCreatureCard filterZombie = new FilterCreatureCard();
-    private static final FilterCreaturePermanent filterHuman = new FilterCreaturePermanent();
 
     static {
         filterZombie.add(new SubtypePredicate(SubType.ZOMBIE));
-        filterHuman.add(new SubtypePredicate(SubType.HUMAN));
     }
 
     public ZombieApocalypseEffect() {
@@ -93,19 +90,16 @@ class ZombieApocalypseEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-
-        Player player = game.getPlayer(source.getControllerId());
-
-        for (Card card : player.getGraveyard().getCards(filterZombie, game)) {
-            card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), source.getControllerId());
-            Permanent permanent = game.getPermanent(card.getId());
-            if (permanent != null) {
-                permanent.setTapped(true);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            controller.moveCards(controller.getGraveyard().getCards(filterZombie, game), Zone.BATTLEFIELD, source, game, true, false, false, null);
+            game.applyEffects();
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(
+                    new FilterPermanent(SubType.HUMAN, "Humans"), source.getControllerId(), game)) {
+                permanent.destroy(source.getSourceId(), game, false);
             }
+            return true;
         }
-        for (Permanent permanent: game.getBattlefield().getActivePermanents(filterHuman, source.getControllerId(), game)) {
-            permanent.destroy(source.getSourceId(), game, false);
-        }
-        return true;
+        return false;
     }
 }

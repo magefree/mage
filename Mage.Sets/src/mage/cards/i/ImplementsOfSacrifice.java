@@ -47,7 +47,7 @@ public class ImplementsOfSacrifice extends CardImpl {
     public ImplementsOfSacrifice(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
-        // {1}, {tap}, Sacrifice Implements of Sacrifice: Add two mana of any one color to your mana pool.
+        // {1}, {tap}, Sacrifice Implements of Sacrifice: Add two mana of any one color.
         SimpleManaAbility ability = new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(2), new ManaCostsImpl("{1}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());

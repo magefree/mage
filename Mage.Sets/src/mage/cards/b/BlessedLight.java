@@ -44,13 +44,13 @@ import mage.target.TargetPermanent;
 public class BlessedLight extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("creature or enchantment");
+
     static {
         filter.add(Predicates.or(new CardTypePredicate(CardType.CREATURE), new CardTypePredicate(CardType.ENCHANTMENT)));
     }
 
     public BlessedLight(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{W}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{4}{W}");
 
         // Exile target creature or enchantment.
         getSpellAbility().addEffect(new ExileTargetEffect());

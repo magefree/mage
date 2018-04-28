@@ -90,7 +90,7 @@ class DivineCongregationEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getFirstTarget());
         if (controller != null) {
             int critters = game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), player.getId(), game).size();
-            controller.gainLife(2 * critters, game);
+            controller.gainLife(2 * critters, game, source);
         }
         return true;
     }

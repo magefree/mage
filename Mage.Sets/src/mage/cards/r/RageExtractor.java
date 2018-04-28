@@ -41,7 +41,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  * @author Loki
@@ -68,7 +68,7 @@ public class RageExtractor extends CardImpl {
 class RageExtractorTriggeredAbility extends TriggeredAbilityImpl {
     RageExtractorTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(0));
-        this.addTarget(new TargetCreatureOrPlayer());
+        this.addTarget(new TargetAnyTarget());
     }
 
     RageExtractorTriggeredAbility(final RageExtractorTriggeredAbility ability) {
@@ -103,6 +103,6 @@ class RageExtractorTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever you cast a spell with p in its mana cost, {this} deals damage equal to that spell's converted mana cost to target creature or player.";
+        return "Whenever you cast a spell with p in its mana cost, {this} deals damage equal to that spell's converted mana cost to any target.";
     }
 }

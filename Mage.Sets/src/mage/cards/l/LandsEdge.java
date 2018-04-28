@@ -31,8 +31,6 @@ import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.CostImpl;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -48,8 +46,7 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.TargetPlayer;
-
+import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
  * @author L_J
@@ -57,12 +54,12 @@ import mage.target.TargetPlayer;
 public class LandsEdge extends CardImpl {
 
     public LandsEdge(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}{R}");
         addSuperType(SuperType.WORLD);
 
         // Discard a card: If the discarded card was a land card, Land's Edge deals 2 damage to target player. Any player may activate this ability.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LandsEdgeEffect(), new DiscardCardCost(false));
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayerOrPlaneswalker());
         ability.setMayActivate(TargetController.ANY);
         ability.addEffect(new InfoEffect("Any player may activate this ability"));
         this.addAbility(ability);

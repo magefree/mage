@@ -37,8 +37,8 @@ import mage.abilities.effects.RedirectionEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -90,7 +90,7 @@ class DaughterOfAutumnPreventDamageTargetEffect extends RedirectionEffect {
     private static FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     public DaughterOfAutumnPreventDamageTargetEffect(Duration duration, int amount) {
-        super(duration, amount, true);
+        super(duration, amount, UsageType.ONE_USAGE_ABSOLUTE);
         staticText = "The next " + amount + " damage that would be dealt to target white creature this turn is dealt to {this} instead";
     }
 

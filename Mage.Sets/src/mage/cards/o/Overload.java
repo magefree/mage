@@ -31,7 +31,6 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -55,7 +54,7 @@ public class Overload extends CardImpl {
         this.addAbility(new KickerAbility("{2}"));
 
         // Destroy target artifact if its converted mana cost is 2 or less. If Overload was kicked, destroy that artifact if its converted mana cost is 5 or less instead.
-        this.getSpellAbility().addEffect(new DestroyTargetEffect());
+        this.getSpellAbility().addEffect(new OverloadEffect());
         this.getSpellAbility().addTarget(new TargetArtifactPermanent());
     }
 
@@ -73,7 +72,7 @@ class OverloadEffect extends OneShotEffect {
 
     OverloadEffect() {
         super(Outcome.DestroyPermanent);
-        this.staticText = "Destroy target artifact if its converted mana cost is 2 or less. If {this} was kicked, destroy that artifact if its converted mana cost is 5 or less instead.";
+        this.staticText = "Destroy target artifact if its converted mana cost is 2 or less. if this spell was kicked, destroy that artifact if its converted mana cost is 5 or less instead.";
     }
 
     OverloadEffect(final OverloadEffect effect) {

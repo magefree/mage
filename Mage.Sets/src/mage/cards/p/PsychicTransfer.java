@@ -105,8 +105,8 @@ class PsychicTransferEffect extends OneShotEffect
                 return false;
             }
 
-            sourcePlayer.setLife(lifePlayer2, game);
-            targetPlayer.setLife(lifePlayer1, game);
+            sourcePlayer.setLife(lifePlayer2, game, source);
+            targetPlayer.setLife(lifePlayer1, game, source);
             return true;
         }
         return false;

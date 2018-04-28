@@ -110,7 +110,6 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
         this.reminderText = ability.reminderText;
         this.xManaValue = ability.xManaValue;
         this.activations.putAll(ability.activations);
-
     }
 
     @Override
@@ -140,7 +139,6 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
                 activations.put(key, 0);
             }
         }
-
     }
 
     public int getXManaValue() {

@@ -53,7 +53,7 @@ public class RefractionTrapTest extends CardTestPlayerBase {
         // rather than pay Refraction Trap's mana cost.
         // Prevent the next 3 damage that a source of your choice would deal to you and/or 
         // permanents you control this turn. If damage is prevented this way, Refraction Trap
-        // deals that much damage to target creature or player.
+        // deals that much damage to any target.
         addCard(Zone.HAND, playerB, "Refraction Trap");
         addCard(Zone.BATTLEFIELD, playerB, "Plains");
         

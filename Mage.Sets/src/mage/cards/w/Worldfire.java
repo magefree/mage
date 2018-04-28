@@ -101,7 +101,7 @@ class WorldfireEffect extends OneShotEffect {
                         c.moveToExile(null, null, source.getSourceId(), game);
                     }
                 }
-                player.setLife(1, game);
+                player.setLife(1, game, source);
             }
         }
         return true;

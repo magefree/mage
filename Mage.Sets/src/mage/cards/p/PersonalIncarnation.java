@@ -38,9 +38,9 @@ import mage.abilities.effects.RedirectionEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -56,7 +56,7 @@ public class PersonalIncarnation extends CardImpl {
 
     public PersonalIncarnation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{W}{W}");
-        
+
         this.subtype.add(SubType.AVATAR);
         this.subtype.add(SubType.INCARNATION);
         this.power = new MageInt(6);
@@ -83,7 +83,7 @@ public class PersonalIncarnation extends CardImpl {
 class PersonalIncarnationRedirectEffect extends RedirectionEffect {
 
     public PersonalIncarnationRedirectEffect() {
-        super(Duration.EndOfTurn, 1, true);
+        super(Duration.EndOfTurn, 1, UsageType.ONE_USAGE_ABSOLUTE);
         staticText = "The next 1 damage that would be dealt to {this} this turn is dealt to its owner instead.";
     }
 

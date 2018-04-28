@@ -121,7 +121,7 @@ class DaxosOfMeletisEffect extends OneShotEffect {
                     // player gains life
                     int cmc = card.getConvertedManaCost();
                     if (cmc > 0) {
-                        controller.gainLife(cmc, game);
+                        controller.gainLife(cmc, game, source);
                     }
                     // Add effects only if the card has a spellAbility (e.g. not for lands).
                     if (card.getSpellAbility() != null) {

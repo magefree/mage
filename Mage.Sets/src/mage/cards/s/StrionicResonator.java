@@ -52,7 +52,7 @@ import mage.target.common.TargetTriggeredAbility;
 public class StrionicResonator extends CardImpl {
 
     public StrionicResonator(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // {2}, {T}: Copy target triggered ability you control. You may choose new targets for the copy.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new StrionicResonatorEffect(), new ManaCostsImpl("{2}"));
@@ -89,7 +89,7 @@ class StrionicResonatorEffect extends OneShotEffect {
             Permanent sourcePermanent = game.getPermanent(source.getSourceId());
             if (controller != null && sourcePermanent != null) {
                 stackAbility.createCopyOnStack(game, source, source.getControllerId(), true);
-                game.informPlayers(new StringBuilder(sourcePermanent.getName()).append(": ").append(controller.getLogName()).append(" copied triggered ability").toString());
+                game.informPlayers(sourcePermanent.getIdName() + ": " + controller.getLogName() + " copied triggered ability");
                 return true;
             }
         }

@@ -25,17 +25,23 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.r;
 
 import java.util.UUID;
+import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.game.Game;
+import mage.players.Player;
 import mage.target.common.TargetOpponent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -43,23 +49,49 @@ import mage.target.common.TargetOpponent;
  */
 public class RakdossReturn extends CardImpl {
 
-    public RakdossReturn (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{B}{R}");
-
-
+    public RakdossReturn(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{B}{R}");
 
         // Rakdos's Return deals X damage to target opponent. That player discards X cards.
         this.getSpellAbility().addEffect(new DamageTargetEffect(new ManacostVariableValue()));
-        this.getSpellAbility().addEffect(new DiscardTargetEffect(new ManacostVariableValue()));
+        this.getSpellAbility().addEffect(new RakdossReturnEffect());
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public RakdossReturn (final RakdossReturn card) {
+    public RakdossReturn(final RakdossReturn card) {
         super(card);
     }
 
     @Override
     public RakdossReturn copy() {
         return new RakdossReturn(this);
+    }
+}
+
+class RakdossReturnEffect extends OneShotEffect {
+
+    RakdossReturnEffect() {
+        super(Outcome.Benefit);
+        this.staticText = "That player or that planeswalker’s controller discards X cards.";
+    }
+
+    RakdossReturnEffect(final RakdossReturnEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public RakdossReturnEffect copy() {
+        return new RakdossReturnEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayerOrPlaneswalkerController(source.getFirstTarget());
+        if (player == null) {
+            return false;
+        }
+        Effect effect = new DiscardTargetEffect(new ManacostVariableValue());
+        effect.setTargetPointer(new FixedTarget(player.getId(), game));
+        return effect.apply(game, source);
     }
 }

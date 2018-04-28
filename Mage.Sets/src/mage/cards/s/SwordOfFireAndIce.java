@@ -51,7 +51,7 @@ import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  * @author Loki
@@ -65,7 +65,7 @@ public class SwordOfFireAndIce extends CardImpl {
         // Equipped creature gets +2/+2 and has protection from red and from blue.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 2)));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ProtectionAbility.from(ObjectColor.RED, ObjectColor.BLUE), AttachmentType.EQUIPMENT)));
-        // Whenever equipped creature deals combat damage to a player, Sword of Fire and Ice deals 2 damage to target creature or player and you draw a card.
+        // Whenever equipped creature deals combat damage to a player, Sword of Fire and Ice deals 2 damage to any target and you draw a card.
         this.addAbility(new SwordOfFireAndIceAbility());
         // Equip
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
@@ -87,7 +87,7 @@ class SwordOfFireAndIceAbility extends TriggeredAbilityImpl {
     public SwordOfFireAndIceAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(2));
         this.addEffect(new DrawCardSourceControllerEffect(1));
-        this.addTarget(new TargetCreatureOrPlayer());
+        this.addTarget(new TargetAnyTarget());
     }
 
     public SwordOfFireAndIceAbility(final SwordOfFireAndIceAbility ability) {
@@ -113,6 +113,6 @@ class SwordOfFireAndIceAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever equipped creature deals combat damage to a player, {this} deals 2 damage to target creature or player and you draw a card.";
+        return "Whenever equipped creature deals combat damage to a player, {this} deals 2 damage to any target and you draw a card.";
     }
 }

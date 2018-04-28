@@ -134,7 +134,7 @@ class PutridWarriorGainLifeEffect extends OneShotEffect {
         for(UUID playerId: game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
             if(player != null) {
-                player.gainLife(1, game);
+                player.gainLife(1, game, source);
             }
         }
         return true;

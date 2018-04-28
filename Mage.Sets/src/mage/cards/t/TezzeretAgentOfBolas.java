@@ -128,7 +128,7 @@ class TezzeretAgentOfBolasEffect2 extends OneShotEffect {
             }
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null) {
-                controller.gainLife(count, game);
+                controller.gainLife(count, game, source);
             }
         }
         return true;

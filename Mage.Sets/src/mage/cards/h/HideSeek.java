@@ -107,7 +107,7 @@ class SeekEffect extends OneShotEffect {
                         player.moveCardToExileWithInfo(card, null, null, source.getSourceId(), game, Zone.LIBRARY, true);
                         int cmc = card.getConvertedManaCost();
                         if (cmc > 0) {
-                            player.gainLife(cmc, game);
+                            player.gainLife(cmc, game, source);
                         }
                     }
                 }

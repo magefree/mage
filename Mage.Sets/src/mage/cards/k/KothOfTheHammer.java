@@ -83,7 +83,7 @@ public class KothOfTheHammer extends CardImpl {
         // -2: Add {R} for each Mountain you control.
         this.addAbility(new LoyaltyAbility(new DynamicManaEffect(Mana.RedMana(1), new PermanentsOnBattlefieldCount(filterCount)), -2));
 
-        // -5: You get an emblem with "Mountains you control have '{T}: This land deals 1 damage to target creature or player.'
+        // -5: You get an emblem with "Mountains you control have '{T}: This land deals 1 damage to any target.'
         this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new KothOfTheHammerEmblem()), -5));
     }
 

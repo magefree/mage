@@ -50,7 +50,7 @@ public class TapVariableTargetCost extends VariableCostImpl  {
     public TapVariableTargetCost(FilterControlledPermanent filter, boolean additionalCostText, String xText) {
         super(xText, new StringBuilder(filter.getMessage()).append(" to tap").toString());
         this.filter = filter;
-        this.text = new StringBuilder(additionalCostText ? "As an additional cost to cast {source}, tap ":"Tap ")
+        this.text = new StringBuilder(additionalCostText ? "as an additional cost to cast this spell, tap ":"Tap ")
                 .append(this.xText).append(' ').append(filter.getMessage()).toString();
     }
 

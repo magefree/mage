@@ -36,6 +36,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.target.TargetPlayer;
+import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
  *
@@ -48,7 +49,7 @@ public class EnergyBolt extends CardImpl {
 
         // Choose one - Energy Bolt deals X damage to target player; or target player gains X life.
         this.getSpellAbility().addEffect(new DamageTargetEffect(new ManacostVariableValue()));
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
         Mode mode = new Mode();
         mode.getEffects().add(new GainLifeTargetEffect(new ManacostVariableValue()));
         mode.getTargets().add(new TargetPlayer());

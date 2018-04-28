@@ -38,6 +38,7 @@ import mage.abilities.Mode;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.constants.DependencyType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
@@ -80,6 +81,7 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl {
         this.ability.newId();
         this.filter = filter;
         this.excludeSource = excludeSource;
+        this.addDependencyType(DependencyType.AddingAbility);
     }
 
     public GainAbilityAllEffect(final GainAbilityAllEffect effect) {

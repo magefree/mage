@@ -96,7 +96,7 @@ class FracturingGustDestroyEffect extends OneShotEffect {
             }
             game.applyEffects(); // needed in case a destroyed permanent did prevent life gain
             if (destroyedPermanents > 0) {
-                controller.gainLife(2 * destroyedPermanents, game);
+                controller.gainLife(2 * destroyedPermanents, game, source);
             }
             return true;
         }

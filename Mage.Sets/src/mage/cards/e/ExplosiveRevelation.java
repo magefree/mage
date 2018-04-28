@@ -42,7 +42,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Library;
 import mage.players.Player;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -53,9 +53,9 @@ public class ExplosiveRevelation extends CardImpl {
     public ExplosiveRevelation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
 
-        // Choose target creature or player. Reveal cards from the top of your library until you reveal a nonland card. Explosive Revelation deals damage equal to that card's converted mana cost to that creature or player. Put the nonland card into your hand and the rest on the bottom of your library in any order.
+        // Choose any target. Reveal cards from the top of your library until you reveal a nonland card. Explosive Revelation deals damage equal to that card's converted mana cost to that creature or player. Put the nonland card into your hand and the rest on the bottom of your library in any order.
         this.getSpellAbility().addEffect(new ExplosiveRevelationEffect());
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
     public ExplosiveRevelation(final ExplosiveRevelation card) {
@@ -72,7 +72,7 @@ class ExplosiveRevelationEffect extends OneShotEffect {
 
     public ExplosiveRevelationEffect() {
         super(Outcome.DrawCard);
-        this.staticText = "Choose target creature or player. Reveal cards from the top of your library until you reveal a nonland card, {this} deals damage equal to that card's converted mana cost to that creature or player. Put the nonland card into your hand and the rest on the bottom of your library in any order";
+        this.staticText = "Choose any target. Reveal cards from the top of your library until you reveal a nonland card, {this} deals damage equal to that card's converted mana cost to that permanent or player. Put the nonland card into your hand and the rest on the bottom of your library in any order";
     }
 
     public ExplosiveRevelationEffect(final ExplosiveRevelationEffect effect) {

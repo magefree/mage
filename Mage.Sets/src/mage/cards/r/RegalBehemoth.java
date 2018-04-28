@@ -67,9 +67,9 @@ public class RegalBehemoth extends CardImpl {
         // When Regal Behemoth enters the battlefield, you become the monarch.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new BecomesMonarchSourceEffect(), false));
 
-        // Whenever you tap a land for mana while you're the monarch, add one mana of any color to your mana pool.
+        // Whenever you tap a land for mana while you're the monarch, add one mana of any color.
         ManaEffect manaEffect = new AddManaOfAnyColorEffect();
-        manaEffect.setText("add one mana of any color to your mana pool <i>(in addition to the mana the land produces)</i>.");
+        manaEffect.setText("add one mana of any color <i>(in addition to the mana the land produces)</i>.");
         ManaEffect effect = manaEffect;
         this.addAbility(new RegalBehemothTriggeredManaAbility(
                 effect, new FilterControlledLandPermanent("you tap a land")));

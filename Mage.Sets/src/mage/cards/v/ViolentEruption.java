@@ -34,7 +34,7 @@ import mage.abilities.keyword.MadnessAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.target.common.TargetCreatureOrPlayerAmount;
+import mage.target.common.TargetAnyTargetAmount;
 
 /**
  *
@@ -48,7 +48,7 @@ public class ViolentEruption extends CardImpl {
 
         // Violent Eruption deals 4 damage divided as you choose among any number of target creatures and/or players.
         this.getSpellAbility().addEffect(new DamageMultiEffect(4));
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayerAmount(4));
+        this.getSpellAbility().addTarget(new TargetAnyTargetAmount(4));
 
         // Madness {1}{R}{R}
         this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{1}{R}{R}")));

@@ -27,12 +27,8 @@
  */
 package mage.deck;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
 import mage.cards.ExpansionSet;
 import mage.cards.Sets;
 import mage.cards.decks.Constructed;
@@ -97,14 +93,12 @@ public class AusHighlander extends Constructed {
         banned.add("Unexpected Potential");
         banned.add("Worldknit");
 
-        List<String> basicLandNames = new ArrayList<>(Arrays.asList("Forest", "Island", "Mountain", "Swamp", "Plains", "Wastes",
-                "Snow-Covered Forest", "Snow-Covered Island", "Snow-Covered Mountain", "Snow-Covered Swamp", "Snow-Covered Plains"));
         Map<String, Integer> counts = new HashMap<>();
         countCards(counts, deck.getCards());
         countCards(counts, deck.getSideboard());
         for (Map.Entry<String, Integer> entry : counts.entrySet()) {
             if (entry.getValue() > 1) {
-                if (!basicLandNames.contains(entry.getKey()) && !entry.getKey().equals("Relentless Rats") && !entry.getKey().equals("Shadowborn Apostle")) {
+                if (!basicLandNames.contains(entry.getKey()) && !anyNumberCardsAllowed.contains(entry.getKey())) {
                     invalid.put(entry.getKey(), "Too many: " + entry.getValue());
                     valid = false;
                 }
@@ -131,7 +125,7 @@ public class AusHighlander extends Constructed {
                     || cn.equals("Tinker")
                     || cn.equals("Vampiric Tutor")
                     || cn.equals("Yawgmoth's Will")
-                    || cn.equals("Mox Sapphire.")) {
+                    || cn.equals("Mox Sapphire")) {
                 totalPoints += 3;
                 invalid.put(cn, "3 points");
             }
@@ -143,7 +137,8 @@ public class AusHighlander extends Constructed {
                     || cn.equals("Protean Hulk")
                     || cn.equals("Skullclamp")
                     || cn.equals("Strip Mine")
-                    || cn.equals("Tolarian Academy.")) {
+                    || cn.equals("Tolarian Academy")
+                    || cn.equals("Treasure Cruise")) {
                 totalPoints += 2;
                 invalid.put(cn, "2 points");
             }
@@ -178,7 +173,6 @@ public class AusHighlander extends Constructed {
                     || cn.equals("Tainted Pact")
                     || cn.equals("Time Spiral")
                     || cn.equals("Timetwister")
-                    || cn.equals("Treasure Cruise")
                     || cn.equals("True-Name Nemesis")
                     || cn.equals("Umezawa's Jitte")
                     || cn.equals("Wasteland")

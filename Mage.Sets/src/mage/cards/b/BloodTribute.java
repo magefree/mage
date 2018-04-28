@@ -74,7 +74,7 @@ public class BloodTribute extends CardImpl {
         Effect effect = new ConditionalOneShotEffect(
                 new BloodTributeGainLifeEffect(),
                 KickedCondition.instance,
-                "If {this} was kicked, you gain life equal to the life lost this way");
+                "if this spell was kicked, you gain life equal to the life lost this way");
         this.getSpellAbility().addEffect(effect);
     }
 
@@ -141,7 +141,7 @@ class BloodTributeGainLifeEffect extends OneShotEffect {
         if (player != null) {
             Integer amount = (Integer) game.getState().getValue(source.getSourceId().toString() + "_BloodTribute");
             if (amount != null && amount > 0) {
-                player.gainLife(amount, game);
+                player.gainLife(amount, game, source);
                 return true;
             }
         }

@@ -33,7 +33,7 @@ import mage.abilities.effects.common.DamageMultiEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.target.common.TargetCreatureOrPlayerAmount;
+import mage.target.common.TargetAnyTargetAmount;
 
 /**
  *
@@ -46,7 +46,7 @@ public class ArcLightning extends CardImpl {
 
         // Arc Lightning deals 3 damage divided as you choose among one, two, or three target creatures and/or players.
         this.getSpellAbility().addEffect(new DamageMultiEffect(3));
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayerAmount(3));
+        this.getSpellAbility().addTarget(new TargetAnyTargetAmount(3));
     }
 
     public ArcLightning(final ArcLightning card) {

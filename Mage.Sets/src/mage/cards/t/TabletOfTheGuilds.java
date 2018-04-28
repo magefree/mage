@@ -142,7 +142,7 @@ class TabletOfTheGuildsGainLifeEffect extends OneShotEffect {
                     ++amount;
                 }
                 if (amount > 0) {
-                    you.gainLife(amount, game);
+                    you.gainLife(amount, game, source);
                     return true;
                 }
             }

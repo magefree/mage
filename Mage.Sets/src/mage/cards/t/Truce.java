@@ -85,7 +85,7 @@ class TruceEffect extends OneShotEffect {
                 if (player != null) {
                     int cardsToDraw = player.getAmount(0, 2, "Draw how many cards?", game);
                     player.drawCards(cardsToDraw, game);
-                    player.gainLife((2 - cardsToDraw) * 2, game);
+                    player.gainLife((2 - cardsToDraw) * 2, game, source);
                 }
             }
             return true;

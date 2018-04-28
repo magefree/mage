@@ -78,7 +78,7 @@ public class GainLifePlayersCost extends CostImpl {
                 if (!playerId.equals(controllerId)) {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {
-                        player.gainLife(amount, game);
+                        player.gainLife(amount, game, sourceId);
                     }
                 }
             }

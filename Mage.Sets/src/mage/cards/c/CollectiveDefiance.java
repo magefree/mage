@@ -40,14 +40,13 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.filter.FilterPlayer;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.other.PlayerPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetOpponentOrPlaneswalker;
 
 /**
  *
@@ -57,11 +56,6 @@ public class CollectiveDefiance extends CardImpl {
 
     private static final FilterPlayer filterDiscard = new FilterPlayer("player to discard and then draw cards");
     private static final FilterCreaturePermanent filterCreature = new FilterCreaturePermanent("creature to be dealt damage");
-    private static final FilterPlayer filterDamageOpponent = new FilterPlayer("opponent to be dealt damage");
-
-    static {
-        filterDamageOpponent.add(new PlayerPredicate(TargetController.OPPONENT));
-    }
 
     public CollectiveDefiance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{R}{R}");
@@ -88,9 +82,9 @@ public class CollectiveDefiance extends CardImpl {
         // Collective Defiance deals 3 damage to target opponent.
         mode = new Mode();
         effect = new DamageTargetEffect(3);
-        effect.setText("{this} deals 3 damage to target opponent");
+        effect.setText("{this} deals 3 damage to target opponent or planeswalker");
         mode.getEffects().add(effect);
-        mode.getTargets().add(new TargetPlayer(1, 1, false, filterDamageOpponent));
+        mode.getTargets().add(new TargetOpponentOrPlaneswalker());
         this.getSpellAbility().addMode(mode);
     }
 

@@ -47,10 +47,10 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
  *
@@ -59,12 +59,9 @@ import mage.filter.predicate.permanent.AnotherPredicate;
 public class ShalaiVoiceOfPlenty extends CardImpl {
 
     private static final FilterControlledPermanent filter1 = new FilterControlledPermanent("planeswalkers you control");
-    private static final FilterControlledPermanent filter2 = new FilterControlledPermanent("Humans you control");
 
     static {
         filter1.add(new CardTypePredicate(CardType.PLANESWALKER));
-        filter2.add(new CardTypePredicate(CardType.CREATURE));
-        filter2.add(new AnotherPredicate());
     }
 
     public ShalaiVoiceOfPlenty(UUID ownerId, CardSetInfo setInfo) {
@@ -80,13 +77,13 @@ public class ShalaiVoiceOfPlenty extends CardImpl {
 
         // You, planeswalkers you control, and other creatures you control have hexproof.
         Effect effect = new GainAbilityControllerEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield);
-        effect.setText("You,");
+        effect.setText("You");
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
         effect = new GainAbilityControlledEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield, filter1);
-        effect.setText("planeswalkers you control,");
+        effect.setText(", planeswalkers you control");
         ability.addEffect(effect);
-        effect = new GainAbilityControlledEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield, filter2);
-        effect.setText("and other creatures you control have hexproof");
+        effect = new GainAbilityControlledEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURES, true);
+        effect.setText(", and other creatures you control have hexproof");
         ability.addEffect(effect);
         this.addAbility(ability);
 

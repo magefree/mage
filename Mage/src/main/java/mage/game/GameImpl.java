@@ -307,6 +307,20 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     @Override
+    public Player getPlayerOrPlaneswalkerController(UUID playerId) {
+        Player player = getPlayer(playerId);
+        if (player != null) {
+            return player;
+        }
+        Permanent permanent = getPermanent(playerId);
+        if (permanent == null) {
+            return null;
+        }
+        player = getPlayer(permanent.getControllerId());
+        return player;
+    }
+
+    @Override
     public MageObject getObject(UUID objectId) {
         if (objectId == null) {
             return null;
@@ -1078,7 +1092,7 @@ public abstract class GameImpl implements Game, Serializable {
         if (gameOptions.planeChase) {
             Plane plane = Plane.getRandomPlane();
             plane.setControllerId(startingPlayerId);
-            addPlane(plane, null, getActivePlayerId());
+            addPlane(plane, null, startingPlayerId);
             state.setPlaneChase(this, gameOptions.planeChase);
         }
     }
@@ -1565,14 +1579,14 @@ public abstract class GameImpl implements Game, Serializable {
         }
         state.addCommandObject(newPlane);
         informPlayers("You have planeswalked to " + newPlane.getLogName());
-        
+
         // Fire off the planeswalked event
         GameEvent event = new GameEvent(GameEvent.EventType.PLANESWALK, newPlane.getId(), null, newPlane.getId(), 0, true);
         if (!replaceEvent(event)) {
             GameEvent ge = new GameEvent(GameEvent.EventType.PLANESWALKED, newPlane.getId(), null, newPlane.getId(), 0, true);
             fireEvent(ge);
         }
-        
+
         return true;
     }
 
@@ -2479,6 +2493,7 @@ public abstract class GameImpl implements Game, Serializable {
             return;
         }
         //20100423 - 800.4a
+        Set<Card> toOutside = new HashSet<>();
         for (Iterator<Permanent> it = getBattlefield().getAllPermanents().iterator(); it.hasNext();) {
             Permanent perm = it.next();
             if (perm.getOwnerId().equals(playerId)) {
@@ -2497,7 +2512,8 @@ public abstract class GameImpl implements Game, Serializable {
                 if (perm.isCreature() && this.getCombat() != null) {
                     perm.removeFromCombat(this, true);
                 }
-                it.remove();
+                toOutside.add(perm);
+//                it.remove();
             } else if (perm.getControllerId().equals(player.getId())) {
                 // and any effects which give that player control of any objects or players end
                 Effects:
@@ -2515,6 +2531,18 @@ public abstract class GameImpl implements Game, Serializable {
                         }
                     }
                 }
+            }
+        }
+        // needed to send event that permanent leaves the battlefield to allow non stack effects to execute
+        player.moveCards(toOutside, Zone.OUTSIDE, null, this);
+        // triggered abilities that don't use the stack have to be executed
+        List<TriggeredAbility> abilities = state.getTriggered(player.getId());
+        for (Iterator<TriggeredAbility> it = abilities.iterator(); it.hasNext();) {
+            TriggeredAbility triggeredAbility = it.next();
+            if (!triggeredAbility.isUsesStack()) {
+                state.removeTriggeredAbility(triggeredAbility);
+                player.triggerAbility(triggeredAbility, this);
+                it.remove();
             }
         }
         // Then, if that player controlled any objects on the stack not represented by cards, those objects cease to exist.
@@ -2537,12 +2565,32 @@ public abstract class GameImpl implements Game, Serializable {
             }
         }
 
-        //Remove all emblems the player controls
+        //Remove all emblems/plane the player controls
+        boolean addPlaneAgain = false;
         for (Iterator<CommandObject> it = this.getState().getCommand().iterator(); it.hasNext();) {
             CommandObject obj = it.next();
             if ((obj instanceof Emblem || obj instanceof Plane) && obj.getControllerId().equals(playerId)) {
-                ((Emblem) obj).discardEffects();// This may not be the best fix but it works
+                if (obj instanceof Emblem) {
+                    ((Emblem) obj).discardEffects();// This may not be the best fix but it works
+                }
+                if (obj instanceof Plane) {
+                    ((Plane) obj).discardEffects();
+                    // Readd a new one
+                    addPlaneAgain = true;
+                }
                 it.remove();
+            }
+        }
+       
+        if (addPlaneAgain) {
+            boolean addedAgain = false;
+            for (Player aplayer : state.getPlayers().values()) {                
+                if (!aplayer.hasLeft() && !addedAgain) {
+                    addedAgain = true;
+                    Plane plane = Plane.getRandomPlane();
+                    plane.setControllerId(aplayer.getId());
+                    addPlane(plane, null, aplayer.getId());
+                }
             }
         }
 
@@ -2821,7 +2869,7 @@ public abstract class GameImpl implements Game, Serializable {
                                 if (s.length == 2) {
                                     try {
                                         Integer amount = Integer.parseInt(s[1]);
-                                        player.setLife(amount, this);
+                                        player.setLife(amount, this, ownerId);
                                         logger.info("Setting player's life: ");
                                     } catch (NumberFormatException e) {
                                         logger.fatal("error setting life", e);
@@ -3144,5 +3192,23 @@ public abstract class GameImpl implements Game, Serializable {
             informPlayers(newMonarch.getLogName() + " is the monarch");
             fireEvent(new GameEvent(GameEvent.EventType.BECOMES_MONARCH, monarchId, source == null ? null : source.getSourceId(), monarchId));
         }
+    }
+
+    @Override
+    public int damagePlayerOrPlaneswalker(UUID playerOrWalker, int damage, UUID sourceId, Game game, boolean combatDamage, boolean preventable) {
+        return damagePlayerOrPlaneswalker(playerOrWalker, damage, sourceId, game, combatDamage, preventable, null);
+    }
+
+    @Override
+    public int damagePlayerOrPlaneswalker(UUID playerOrWalker, int damage, UUID sourceId, Game game, boolean combatDamage, boolean preventable, List<UUID> appliedEffects) {
+        Player player = getPlayer(playerOrWalker);
+        if (player != null) {
+            return player.damage(damage, sourceId, game, combatDamage, preventable, appliedEffects);
+        }
+        Permanent permanent = getPermanent(playerOrWalker);
+        if (permanent != null) {
+            return permanent.damage(damage, sourceId, game, combatDamage, preventable, appliedEffects);
+        }
+        return 0;
     }
 }

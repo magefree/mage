@@ -26,7 +26,7 @@ public class AddConditionalColorlessManaEffect extends ManaEffect {
         this.manaBuilder = manaBuilder;
 
         staticText = "Add " + String.format(String.format("%%%ds", amount), " ").replace(" ", "{C}")
-                + " to your mana pool. " + manaBuilder.getRule();
+                + ". " + manaBuilder.getRule();
     }
 
     public AddConditionalColorlessManaEffect(final AddConditionalColorlessManaEffect effect) {

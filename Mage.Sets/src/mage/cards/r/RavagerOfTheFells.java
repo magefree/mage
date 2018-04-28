@@ -57,7 +57,7 @@ import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetOpponent;
+import mage.target.common.TargetOpponentOrPlaneswalker;
 
 /**
  *
@@ -85,7 +85,11 @@ public class RavagerOfTheFells extends CardImpl {
 
         // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Ravager of the Fells.
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(false), TargetController.ANY, false);
-        this.addAbility(new ConditionalTriggeredAbility(ability, TwoOrMoreSpellsWereCastLastTurnCondition.instance, TransformAbility.TWO_OR_MORE_SPELLS_TRANSFORM_RULE));
+        this.addAbility(new ConditionalTriggeredAbility(
+                ability,
+                TwoOrMoreSpellsWereCastLastTurnCondition.instance,
+                TransformAbility.TWO_OR_MORE_SPELLS_TRANSFORM_RULE
+        ));
     }
 
     public RavagerOfTheFells(final RavagerOfTheFells card) {
@@ -102,7 +106,7 @@ class RavagerOfTheFellsAbility extends TriggeredAbilityImpl {
 
     public RavagerOfTheFellsAbility() {
         super(Zone.BATTLEFIELD, new RavagerOfTheFellsEffect(), false);
-        Target target1 = new TargetOpponent();
+        Target target1 = new TargetOpponentOrPlaneswalker();
         this.addTarget(target1);
         this.addTarget(new RavagerOfTheFellsTarget());
     }
@@ -134,7 +138,9 @@ class RavagerOfTheFellsAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever this creature transforms into Ravager of the Fells, it deals 2 damage to target opponent and 2 damage to up to one target creature that player controls.";
+        return "Whenever this creature transforms into {this}, "
+                + "it deals 2 damage to target opponent or planeswalker "
+                + "and 2 damage to up to one target creature that player or that planeswalker’s controller controls.";
     }
 
 }
@@ -156,10 +162,7 @@ class RavagerOfTheFellsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getTargets().get(0).getFirstTarget());
-        if (player != null) {
-            player.damage(2, source.getSourceId(), game, false, true);
-        }
+        game.damagePlayerOrPlaneswalker(source.getTargets().get(0).getFirstTarget(), 2, source.getSourceId(), game, false, true);
         Permanent creature = game.getPermanent(source.getTargets().get(1).getFirstTarget());
         if (creature != null) {
             creature.damage(2, source.getSourceId(), game, false, true);
@@ -181,7 +184,11 @@ class RavagerOfTheFellsTarget extends TargetPermanent {
 
     @Override
     public boolean canTarget(UUID id, Ability source, Game game) {
-        UUID firstTarget = source.getFirstTarget();
+        Player player = game.getPlayerOrPlaneswalkerController(source.getFirstTarget());
+        if (player == null) {
+            return false;
+        }
+        UUID firstTarget = player.getId();
         Permanent permanent = game.getPermanent(id);
         if (firstTarget != null && permanent != null && permanent.getControllerId().equals(firstTarget)) {
             return super.canTarget(id, source, game);
@@ -206,10 +213,13 @@ class RavagerOfTheFellsTarget extends TargetPermanent {
 
         if (object instanceof StackObject) {
             UUID playerId = ((StackObject) object).getStackAbility().getFirstTarget();
-            for (UUID targetId : availablePossibleTargets) {
-                Permanent permanent = game.getPermanent(targetId);
-                if (permanent != null && permanent.getControllerId().equals(playerId)) {
-                    possibleTargets.add(targetId);
+            Player player = game.getPlayerOrPlaneswalkerController(playerId);
+            if (player != null) {
+                for (UUID targetId : availablePossibleTargets) {
+                    Permanent permanent = game.getPermanent(targetId);
+                    if (permanent != null && permanent.getControllerId().equals(player.getId())) {
+                        possibleTargets.add(targetId);
+                    }
                 }
             }
         }

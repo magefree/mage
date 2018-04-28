@@ -27,6 +27,8 @@ import java.util.UUID;
  * @author LevelX2
  */
 public abstract class StackObjImpl implements StackObject {
+    
+    private boolean targetChanged; // for Psychic Battle
 
     /**
      * Choose new targets for a stack Object
@@ -72,7 +74,7 @@ public abstract class StackObjImpl implements StackObject {
      * the change is legal.
      *
      * Example: Arc Trail is a sorcery that reads "Arc Trail deals 2 damage to
-     * target creature or player and 1 damage to another target creature or
+     * any target and 1 damage to another target creature or
      * player." The current targets of Arc Trail are Runeclaw Bear and Llanowar
      * Elves, in that order. You cast Redirect, an instant that reads "You may
      * choose new targets for target spell," targeting Arc Trail. You can change
@@ -270,5 +272,15 @@ public abstract class StackObjImpl implements StackObject {
 
     @Override
     public void removePTCDA() {
+    }
+
+    @Override
+    public boolean isTargetChanged() {
+        return targetChanged;
+    }
+
+    @Override
+    public void setTargetChanged(boolean targetChanged) {
+        this.targetChanged = targetChanged;
     }
 }

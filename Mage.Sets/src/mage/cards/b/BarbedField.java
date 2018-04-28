@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetLandPermanent;
 
 /**
@@ -60,11 +60,11 @@ public class BarbedField extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        // Enchanted land has "{tap}: This land deals 1 damage to target creature or player."
+        // Enchanted land has "{tap}: This land deals 1 damage to any target."
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         Effect effect = new GainAbilityAttachedEffect(ability, AttachmentType.AURA);
-        effect.setText("Enchanted land has \"{T}: This land deals 1 damage to target creature or player.\"");
+        effect.setText("Enchanted land has \"{T}: This land deals 1 damage to any target.\"");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 

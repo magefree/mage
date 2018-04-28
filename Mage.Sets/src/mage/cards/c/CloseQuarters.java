@@ -37,7 +37,7 @@ import mage.constants.CardType;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -54,9 +54,9 @@ public class CloseQuarters extends CardImpl {
     public CloseQuarters(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}{R}");
 
-        // Whenever a creature you control becomes blocked, Close Quarters deals 1 damage to target creature or player.
+        // Whenever a creature you control becomes blocked, Close Quarters deals 1 damage to any target.
         Ability ability = new BecomesBlockedAllTriggeredAbility(new DamageTargetEffect(1), false, filter, false);
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }
 

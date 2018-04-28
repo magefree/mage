@@ -99,7 +99,7 @@ class TimelyReinforcementsEffect extends OneShotEffect {
                 }
             }
             if (lessLife) {
-                controller.gainLife(6, game);
+                controller.gainLife(6, game, source);
             }
             if (lessCreatures) {
                 Effect effect = new CreateTokenEffect(new SoldierToken(), 3);

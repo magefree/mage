@@ -18,8 +18,8 @@ import mage.game.permanent.Permanent;
  */
 public class RedirectDamageFromSourceToTargetEffect extends RedirectionEffect {
 
-    public RedirectDamageFromSourceToTargetEffect(Duration duration, int amountToRedirect, boolean oneUsage) {
-        super(duration, amountToRedirect, oneUsage);
+    public RedirectDamageFromSourceToTargetEffect(Duration duration, int amountToRedirect, UsageType usageType) {
+        super(duration, amountToRedirect, usageType);
         staticText = "The next " + amountToRedirect + " damage that would be dealt to {this} this turn is dealt to target creature you control instead.";
     }
 

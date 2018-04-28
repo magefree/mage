@@ -36,8 +36,8 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
@@ -52,7 +52,7 @@ import mage.target.common.TargetCardInYourGraveyard;
 public class YoreTillerNephilim extends CardImpl {
 
     public YoreTillerNephilim(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{U}{B}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{U}{B}{R}");
         this.subtype.add(SubType.NEPHILIM);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
@@ -91,8 +91,9 @@ class YoreTillerNephilimEffect extends OneShotEffect {
         if (controller != null) {
             Card card = game.getCard(getTargetPointer().getFirst(game, source));
             if (card != null) {
-                if (card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), source.getControllerId(), true)) {
-                    Permanent permanent = game.getPermanent(card.getId());
+                controller.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, false, null);
+                Permanent permanent = game.getPermanent(card.getId());
+                if (permanent != null) {
                     game.getCombat().addAttackingCreature(permanent.getId(), game);
                 }
             }

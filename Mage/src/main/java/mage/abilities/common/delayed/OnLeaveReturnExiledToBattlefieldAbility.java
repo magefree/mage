@@ -49,6 +49,12 @@ import mage.util.CardUtil;
  *
  * Uses no stack
  *
+ * 11/4/2015: In a multiplayer game, if Grasp of Fate's owner leaves the game,
+ * the exiled cards will return to the battlefield. Because the one-shot effect
+ * that returns the cards isn't an ability that goes on the stack, it won't
+ * cease to exist along with the leaving player's spells and abilities on the
+ * stack.
+ *
  * @author LevelX2
  */
 public class OnLeaveReturnExiledToBattlefieldAbility extends DelayedTriggeredAbility {

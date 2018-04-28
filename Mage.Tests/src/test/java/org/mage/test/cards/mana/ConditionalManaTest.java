@@ -42,7 +42,7 @@ public class ConditionalManaTest extends CardTestPlayerBase {
 
     @Test
     public void testNormalUse() {
-        // {T}: Add one mana of any color to your mana pool. Spend this mana only to cast a multicolored spell.
+        // {T}: Add one mana of any color. Spend this mana only to cast a multicolored spell.
         addCard(Zone.BATTLEFIELD, playerA, "Pillar of the Paruns", 2);
         // Instant {G}{W}
         // Target player gains 7 life.
@@ -60,7 +60,7 @@ public class ConditionalManaTest extends CardTestPlayerBase {
 
     @Test
     public void testNotAllowedUse() {
-        // {T}: Add one mana of any color to your mana pool. Spend this mana only to cast a multicolored spell.
+        // {T}: Add one mana of any color. Spend this mana only to cast a multicolored spell.
         addCard(Zone.BATTLEFIELD, playerA, "Pillar of the Paruns", 2);
         addCard(Zone.HAND, playerA, "Silvercoat Lion", 1);
 
@@ -93,13 +93,13 @@ public class ConditionalManaTest extends CardTestPlayerBase {
     public void testWorkingWithReflectingPool2() {
         addCard(Zone.BATTLEFIELD, playerA, "Reflecting Pool", 1); // can create white mana without restriction from the Hive
         // {T}: Add {C}.
-        // {T}: Add one mana of any color to your mana pool. Spend this mana only to cast a Sliver spell.
+        // {T}: Add one mana of any color. Spend this mana only to cast a Sliver spell.
         // {5}, {T}: Create a 1/1 colorless Sliver creature token. Activate this ability only if you control a Sliver.
         addCard(Zone.BATTLEFIELD, playerA, "Sliver Hive", 1);
         addCard(Zone.HAND, playerA, "Silvercoat Lion", 1);
 
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {C}");
-        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add to your mana pool one mana of any type");
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add one mana of any type");
 
         setChoice(playerA, "White");
 
@@ -202,7 +202,7 @@ public class ConditionalManaTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Cultivator Drone", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Wastes", 1);
         // Untap Endbringer during each other player's untap step.
-        // {T}: Endbringer deals 1 damage to target creature or player.
+        // {T}: Endbringer deals 1 damage to any target.
         // {C}, {T}: Target creature can't attack or block this turn.
         // {C}{C}, {T}: Draw a card.
         addCard(Zone.BATTLEFIELD, playerA, "Endbringer", 1); // {1}{C}

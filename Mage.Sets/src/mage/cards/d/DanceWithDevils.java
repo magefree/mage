@@ -42,11 +42,11 @@ import mage.game.permanent.token.DevilToken;
 public class DanceWithDevils extends CardImpl {
 
     public DanceWithDevils(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{R}");
 
-        // Create two 1/1 red Devil creature tokens. They have "When this creature dies, it deals 1 damage to target creature or player."
+        // Create two 1/1 red Devil creature tokens. They have "When this creature dies, it deals 1 damage to any target."
         Effect effect = new CreateTokenEffect(new DevilToken(), 2);
-        effect.setText("Create two 1/1 red Devil creature tokens. They have \"When this creature dies, it deals 1 damage to target creature or player.\"");
+        effect.setText("Create two 1/1 red Devil creature tokens. They have \"When this creature dies, it deals 1 damage to any target.\"");
         this.getSpellAbility().addEffect(effect);
     }
 

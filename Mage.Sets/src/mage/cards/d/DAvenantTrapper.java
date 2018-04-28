@@ -32,10 +32,10 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.TapTargetEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.HistoricPredicate;
 import mage.target.common.TargetOpponentsCreaturePermanent;
@@ -61,7 +61,9 @@ public class DAvenantTrapper extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever you cast a historic spell, tap target creature an opponent controls.
-        Ability ability = new SpellCastControllerTriggeredAbility(new TapTargetEffect(), filter, true);
+        Ability ability = new SpellCastControllerTriggeredAbility(
+                new TapTargetEffect("target creature an opponent controls. <i>(Artifacts, legendaries, and Sagas are historic.)</i>"),
+                filter, false);
         ability.addTarget(new TargetOpponentsCreaturePermanent());
         this.addAbility(ability);
     }

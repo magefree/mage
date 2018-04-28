@@ -62,7 +62,7 @@ public class AtzocanSeer extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
-        // {T}: Add one mana of any color to your mana pool.
+        // {T}: Add one mana of any color.
         this.addAbility(new AnyColorManaAbility());
 
         // Sacrifice Atzocan Seer: Return target Dinosaur from your graveyard to your hand.

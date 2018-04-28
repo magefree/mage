@@ -51,7 +51,7 @@ public class BloodCelebrant extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // {B}, Pay 1 life: Add one mana of any color to your mana pool.
+        // {B}, Pay 1 life: Add one mana of any color.
         Ability ability = new AnyColorManaAbility(new ColoredManaCost(ColoredManaSymbol.B));
         ability.addCost(new PayLifeCost(1));
         this.addAbility(ability);

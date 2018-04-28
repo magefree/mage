@@ -46,7 +46,7 @@ import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -61,10 +61,10 @@ public class SunflareShaman extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        // {1}{R}, {tap}: Sunflare Shaman deals X damage to target creature or player and X damage to itself, where X is the number of Elemental cards in your graveyard.
+        // {1}{R}, {tap}: Sunflare Shaman deals X damage to any target and X damage to itself, where X is the number of Elemental cards in your graveyard.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SunflareShamanEffect(), new ManaCostsImpl("{1}{R}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
 
     }
@@ -89,7 +89,7 @@ class SunflareShamanEffect extends OneShotEffect {
 
     public SunflareShamanEffect() {
         super(Outcome.Damage);
-        this.staticText = "{this} deals X damage to target creature or player and X damage to itself, where X is the number of Elemental cards in your graveyard";
+        this.staticText = "{this} deals X damage to any target and X damage to itself, where X is the number of Elemental cards in your graveyard";
     }
 
     public SunflareShamanEffect(final SunflareShamanEffect effect) {

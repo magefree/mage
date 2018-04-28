@@ -57,7 +57,7 @@ public class SolGrail extends CardImpl {
         // As Sol Grail enters the battlefield, choose a color.
         this.addAbility(new EntersBattlefieldAbility(new ChooseColorEffect(Outcome.Neutral)));
 
-        // {tap}: Add one mana of the chosen color to your mana pool.
+        // {tap}: Add one mana of the chosen color.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new SolGrailManaEffect(), new TapSourceCost()));
 
     }
@@ -76,7 +76,7 @@ class SolGrailManaEffect extends ManaEffect {
 
     public SolGrailManaEffect() {
         super();
-        staticText = "Add one mana of the chosen color to your mana pool";
+        staticText = "Add one mana of the chosen color";
     }
 
     public SolGrailManaEffect(final SolGrailManaEffect effect) {

@@ -49,7 +49,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -66,7 +66,7 @@ public class ClockworkHydra extends CardImpl {
 
         // Clockwork Hydra enters the battlefield with four +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(4)), "with four +1/+1 counters on it"));
-        // Whenever Clockwork Hydra attacks or blocks, remove a +1/+1 counter from it. If you do, Clockwork Hydra deals 1 damage to target creature or player.
+        // Whenever Clockwork Hydra attacks or blocks, remove a +1/+1 counter from it. If you do, Clockwork Hydra deals 1 damage to any target.
         this.addAbility(new AttacksOrBlocksTriggeredAbility(new ClockworkHydraEffect(), false));
 
         // {tap}: Put a +1/+1 counter on Clockwork Hydra.
@@ -88,7 +88,7 @@ class ClockworkHydraEffect extends OneShotEffect {
 
     public ClockworkHydraEffect() {
         super(Outcome.Damage);
-        this.staticText = "remove a +1/+1 counter from it. If you do, {this} deals 1 damage to target creature or player";
+        this.staticText = "remove a +1/+1 counter from it. If you do, {this} deals 1 damage to any target";
     }
 
     public ClockworkHydraEffect(final ClockworkHydraEffect effect) {
@@ -106,7 +106,7 @@ class ClockworkHydraEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && permanent != null && permanent.getCounters(game).getCount(CounterType.P1P1) > 0) {
             permanent.removeCounters(CounterType.P1P1.createInstance(), game);
-            Target target = new TargetCreatureOrPlayer();
+            Target target = new TargetAnyTarget();
             if (controller.chooseTarget(outcome, target, source, game)) {
                 Effect effect = new DamageTargetEffect(1);
                 effect.setTargetPointer(new FixedTarget(target.getFirstTarget()));

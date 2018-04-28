@@ -33,13 +33,12 @@ import mage.abilities.common.PayMoreToCastAsThoughtItHadFlashAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -51,7 +50,7 @@ import mage.players.Player;
 public class TwilightsCall extends CardImpl {
 
     public TwilightsCall(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{B}{B}");
 
         Effect effect = new TwilightsCallEffect();
         // You may cast Twilight's Call as though it had flash if you pay {2} more to cast it.
@@ -93,9 +92,7 @@ class TwilightsCallEffect extends OneShotEffect {
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
-                for (Card card : player.getGraveyard().getCards(new FilterCreatureCard(), game)) {
-                    card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), card.getOwnerId());
-                }
+                player.moveCards(player.getGraveyard().getCards(StaticFilters.FILTER_CARD_CREATURE, game), Zone.BATTLEFIELD, source, game);
             }
         }
         return true;

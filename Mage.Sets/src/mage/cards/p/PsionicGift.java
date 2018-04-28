@@ -44,7 +44,7 @@ import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -65,9 +65,9 @@ public class PsionicGift extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
         
-        // Enchanted creature has "{tap}: This creature deals 1 damage to target creature or player."
+        // Enchanted creature has "{tap}: This creature deals 1 damage to any target."
         Ability psiAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
-        psiAbility.addTarget(new TargetCreatureOrPlayer());
+        psiAbility.addTarget(new TargetAnyTarget());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(psiAbility, AttachmentType.AURA)));
     }
 

@@ -54,7 +54,7 @@ public class Glimmervoid extends CardImpl {
         TriggeredAbility triggered = new OnEventTriggeredAbility(GameEvent.EventType.END_TURN_STEP_PRE, "beginning of the end step", true, new SacrificeSourceEffect());
         this.addAbility(new ConditionalTriggeredAbility(triggered, new PermanentsOnTheBattlefieldCondition(new FilterControlledArtifactPermanent(), ComparisonType.FEWER_THAN, 1),
                 "At the beginning of the end step, if you control no artifacts, sacrifice {this}."));
-        // {tap}: Add one mana of any color to your mana pool.
+        // {tap}: Add one mana of any color.
         this.addAbility(new AnyColorManaAbility());
     }
 

@@ -184,7 +184,7 @@ class CurseOfVengeanceDrawLifeEffect extends OneShotEffect {
         if (sourceObject != null && controller != null) {
             if (sourceObject.getCounters(game).containsKey(CounterType.SPITE)) {
                 controller.drawCards(sourceObject.getCounters(game).getCount(CounterType.SPITE), game);
-                controller.gainLife(sourceObject.getCounters(game).getCount(CounterType.SPITE), game);
+                controller.gainLife(sourceObject.getCounters(game).getCount(CounterType.SPITE), game, source);
             }
             return true;
         }

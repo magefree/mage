@@ -54,7 +54,7 @@ public class SylvanCaryatid extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
         // Hexproof
         this.addAbility(HexproofAbility.getInstance());
-        // {T}: Add one mana of any color to your mana pool.
+        // {T}: Add one mana of any color.
         this.addAbility(new AnyColorManaAbility());
 
     }

@@ -105,7 +105,7 @@ class KithkinZealotEffect extends OneShotEffect {
 
         if (you!= null && opponent != null) {
             int amount = game.getBattlefield().countAll(filter, opponent.getId(), game);
-            you.gainLife(amount, game);
+            you.gainLife(amount, game, source);
             return true;            
         }
         return false;

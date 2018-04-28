@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.target.common.TargetCreatureOrPlayerAmount;
+import mage.target.common.TargetAnyTargetAmount;
 
 /**
  *
@@ -57,7 +57,7 @@ public class BogardanHellkite extends CardImpl {
         this.addAbility(FlashAbility.getInstance());
         this.addAbility(FlyingAbility.getInstance());
         Ability ability = new EntersBattlefieldTriggeredAbility(new DamageMultiEffect(5), false);
-        ability.addTarget(new TargetCreatureOrPlayerAmount(5));
+        ability.addTarget(new TargetAnyTargetAmount(5));
         this.addAbility(ability);
     }
 

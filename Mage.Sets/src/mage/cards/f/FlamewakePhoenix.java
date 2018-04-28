@@ -52,7 +52,7 @@ import mage.constants.Zone;
 public class FlamewakePhoenix extends CardImpl {
 
     public FlamewakePhoenix(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
         this.subtype.add(SubType.PHOENIX);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
@@ -68,7 +68,7 @@ public class FlamewakePhoenix extends CardImpl {
         this.addAbility(new ConditionalTriggeredAbility(
                 new BeginningOfCombatTriggeredAbility(
                         Zone.GRAVEYARD,
-                        new DoIfCostPaid(new ReturnToBattlefieldUnderOwnerControlSourceEffect(), new ManaCostsImpl("{R")),
+                        new DoIfCostPaid(new ReturnToBattlefieldUnderOwnerControlSourceEffect(), new ManaCostsImpl("{R}")),
                         TargetController.YOU, false, false),
                 FerociousCondition.instance,
                 "<i>Ferocious</i> &mdash; At the beginning of combat on your turn, if you control a creature with power 4 or greater, you may pay {R}. If you do, return {this} from your graveyard to the battlefield."

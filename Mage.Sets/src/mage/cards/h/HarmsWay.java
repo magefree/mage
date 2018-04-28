@@ -42,7 +42,7 @@ import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.TargetSource;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  * @author noxx
@@ -50,11 +50,11 @@ import mage.target.common.TargetCreatureOrPlayer;
 public class HarmsWay extends CardImpl {
 
     public HarmsWay(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{W}");
 
-        // The next 2 damage that a source of your choice would deal to you and/or permanents you control this turn is dealt to target creature or player instead.
+        // The next 2 damage that a source of your choice would deal to you and/or permanents you control this turn is dealt to any target instead.
         this.getSpellAbility().addEffect(new HarmsWayPreventDamageTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
     public HarmsWay(final HarmsWay card) {
@@ -72,8 +72,8 @@ class HarmsWayPreventDamageTargetEffect extends RedirectionEffect {
     private final TargetSource damageSource;
 
     public HarmsWayPreventDamageTargetEffect() {
-        super(Duration.EndOfTurn, 2, true);
-        staticText = "The next 2 damage that a source of your choice would deal to you and/or permanents you control this turn is dealt to target creature or player instead";
+        super(Duration.EndOfTurn, 2, UsageType.ONE_USAGE_ABSOLUTE);
+        staticText = "The next 2 damage that a source of your choice would deal to you and/or permanents you control this turn is dealt to any target instead";
         this.damageSource = new TargetSource();
     }
 

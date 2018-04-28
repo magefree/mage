@@ -73,7 +73,7 @@ class SickeningDreamsAdditionalCost extends VariableCostImpl {
 
     SickeningDreamsAdditionalCost() {
         super("cards to discard");
-        this.text = "As an additional cost to cast {this}, discard X cards";
+        this.text = "as an additional cost to cast this spell, discard X cards";
     }
 
     SickeningDreamsAdditionalCost(final SickeningDreamsAdditionalCost cost) {

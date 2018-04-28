@@ -96,7 +96,7 @@ class ExileEffect extends OneShotEffect {
         if (permanent != null) {
             Player player = game.getPlayer(source.getControllerId());
             if (player != null) {
-                player.gainLife(permanent.getToughness().getValue(), game);
+                player.gainLife(permanent.getToughness().getValue(), game, source);
             }
         }
         return false;

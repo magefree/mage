@@ -45,7 +45,7 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.target.TargetPlayer;
+import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
  *
@@ -76,10 +76,13 @@ public class WallOfForgottenPharaohs extends CardImpl {
                 Zone.BATTLEFIELD,
                 new DamageTargetEffect(1),
                 new TapSourceCost(),
-                new OrCondition("only if you control a Desert or there is a Desert card in your graveyard",
+                new OrCondition(
+                        "only if you control a Desert or there is a Desert card in your graveyard",
                         new PermanentsOnTheBattlefieldCondition(new FilterControlledPermanent(filterDesertPermanent)),
-                        new CardsInControllerGraveCondition(1, filterDesertCard)));
-        ability.addTarget(new TargetPlayer());
+                        new CardsInControllerGraveCondition(1, filterDesertCard)
+                )
+        );
+        ability.addTarget(new TargetPlayerOrPlaneswalker());
         this.addAbility(ability);
     }
 

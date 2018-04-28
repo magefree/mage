@@ -104,7 +104,7 @@ class TreeOfRedemptionEffect extends OneShotEffect {
                 if (life > amount && !player.isCanLoseLife()) {
                     return false;
                 }
-                player.setLife(amount, game);
+                player.setLife(amount, game, source);
                 game.addEffect(new SetPowerToughnessSourceEffect(Integer.MIN_VALUE, life, Duration.Custom, SubLayer.SetPT_7b), source);
                 return true;
             }

@@ -41,8 +41,8 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -60,7 +60,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class RaziaBorosArchangel extends CardImpl {
 
     public RaziaBorosArchangel(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{R}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{R}{W}{W}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.ANGEL);
 
@@ -107,7 +107,7 @@ class RaziaBorosArchangelEffect extends RedirectionEffect {
     protected MageObjectReference redirectToObject;
 
     public RaziaBorosArchangelEffect(Duration duration, int amount) {
-        super(duration, 3, true);
+        super(duration, 3, UsageType.ONE_USAGE_ABSOLUTE);
         staticText = "The next " + amount + " damage that would be dealt to target creature you control this turn is dealt to another target creature instead";
     }
 

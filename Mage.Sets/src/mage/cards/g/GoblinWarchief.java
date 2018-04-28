@@ -27,6 +27,7 @@
  */
 package mage.cards.g;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
@@ -42,8 +43,6 @@ import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
-import java.util.UUID;
-
 /**
  *
  * @author jonubuu
@@ -51,15 +50,13 @@ import java.util.UUID;
 public class GoblinWarchief extends CardImpl {
 
     private static final FilterCard filterSpells = new FilterCard("Goblin spells");
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Goblin creatures");
 
     static {
         filterSpells.add(new SubtypePredicate(SubType.GOBLIN));
-        filter.add(new SubtypePredicate(SubType.GOBLIN));
     }
 
     public GoblinWarchief(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
         this.subtype.add(SubType.GOBLIN);
         this.subtype.add(SubType.WARRIOR);
 
@@ -68,8 +65,9 @@ public class GoblinWarchief extends CardImpl {
 
         // Goblin spells you cast cost {1} less to cast.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filterSpells, 1)));
-        // Goblin creatures you control have haste.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, filter, false)));
+        // Goblins you control have haste.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(HasteAbility.getInstance(),
+                Duration.WhileOnBattlefield, new FilterCreaturePermanent(SubType.GOBLIN, "Goblins"), false)));
     }
 
     public GoblinWarchief(final GoblinWarchief card) {

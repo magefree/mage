@@ -59,11 +59,11 @@ public class Illuminate extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DamageTargetControllerEffect(new ManacostVariableValue()),
                 new KickedCostCondition("{2}{R}"),
-                "If {this} was kicked with its {2}{R} kicker, it deals X damage to that creature's controller."));
+                "if this spell was kicked with its {2}{R} kicker, it deals X damage to that creature's controller."));
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DrawCardSourceControllerEffect(new ManacostVariableValue()),
                 new KickedCostCondition("{3}{U}"),
-                " If {this} was kicked with its {3}{U} kicker, you draw X cards."));
+                " if this spell was kicked with its {3}{U} kicker, you draw X cards."));
 
     }
 

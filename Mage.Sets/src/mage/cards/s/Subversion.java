@@ -79,7 +79,7 @@ public class Subversion extends CardImpl {
             for (UUID opponentId : game.getOpponents(source.getControllerId())) {
                 damage += game.getPlayer(opponentId).damage(1, source.getSourceId(), game, false, true);
             }
-            game.getPlayer(source.getControllerId()).gainLife(damage, game);
+            game.getPlayer(source.getControllerId()).gainLife(damage, game, source);
             return true;
         }
 

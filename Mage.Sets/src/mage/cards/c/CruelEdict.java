@@ -44,9 +44,9 @@ public class CruelEdict extends CardImpl {
     public CruelEdict(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}");
 
-        this.getSpellAbility().addEffect(new SacrificeEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, "Target opponent sacrifices a creature"));
-        this.getSpellAbility().addTarget(new TargetOpponent());
         // Target opponent sacrifices a creature.
+        this.getSpellAbility().addEffect(new SacrificeEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, "Target opponent"));
+        this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
     public CruelEdict(final CruelEdict card) {

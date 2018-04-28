@@ -40,7 +40,7 @@ import mage.filter.FilterMana;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  * @author Johnny E. Hastings
@@ -58,8 +58,8 @@ public class SoulBurn extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{2}{B}");
 
         // Spend only black or red mana on X.
-        // Soul Burn deals X damage to target creature or player. You gain life equal to the damage dealt for each black mana spent on X; not more life than the player's life total before Soul Burn dealt damage, or the creature's toughness.
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        // Soul Burn deals X damage to any target. You gain life equal to the damage dealt for each black mana spent on X; not more life than the player's life total before Soul Burn dealt damage, or the creature's toughness.
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
         this.getSpellAbility().addEffect(new SoulBurnEffect());
         VariableCost variableCost = this.getSpellAbility().getManaCostsToPay().getVariableCosts().get(0);
         if (variableCost instanceof VariableManaCost) {
@@ -81,7 +81,7 @@ class SoulBurnEffect extends OneShotEffect {
 
     public SoulBurnEffect() {
         super(Outcome.Damage);
-        staticText = "{this} deals X damage to target creature or player for each black or red mana spent on X. You gain life equal to the damage dealt for each black mana spent; not more life than the player's life total before Soul Burn dealt damage, or the creature's toughness.";
+        staticText = "{this} deals X damage to any target for each black or red mana spent on X. You gain life equal to the damage dealt for each black mana spent; not more life than the player's life total before Soul Burn dealt damage, or the creature's toughness.";
     }
 
     public SoulBurnEffect(final SoulBurnEffect effect) {
@@ -168,7 +168,7 @@ class SoulBurnEffect extends OneShotEffect {
             }
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null) {
-                controller.gainLife(lifetogain, game);
+                controller.gainLife(lifetogain, game, source);
             } else {
                 return false;
             }

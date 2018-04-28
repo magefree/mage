@@ -40,7 +40,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.target.common.TargetCreatureOrPlayerAmount;
+import mage.target.common.TargetAnyTargetAmount;
 
 /**
  *
@@ -62,7 +62,7 @@ public class AngelOfSalvation extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // When Angel of Salvation enters the battlefield, prevent the next 5 damage that would be dealt this turn to any number of target creatures and/or players, divided as you choose.
         Ability ability = new EntersBattlefieldTriggeredAbility(new PreventDamageToTargetMultiAmountEffect(Duration.EndOfTurn, 5));
-        ability.addTarget(new TargetCreatureOrPlayerAmount(5));
+        ability.addTarget(new TargetAnyTargetAmount(5));
         this.addAbility(ability);
     }
 

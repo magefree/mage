@@ -47,7 +47,7 @@ public class CityOfBrass extends CardImpl {
         // Whenever City of Brass becomes tapped, it deals 1 damage to you.
         this.addAbility(new BecomesTappedSourceTriggeredAbility(new DamageControllerEffect(1, "it")));
 
-        // {tap}: Add one mana of any color to your mana pool.
+        // {tap}: Add one mana of any color.
         this.addAbility(new AnyColorManaAbility());
     }
 

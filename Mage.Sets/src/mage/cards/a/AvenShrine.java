@@ -130,7 +130,7 @@ class AvenShrineEffect extends OneShotEffect {
                         count += player.getGraveyard().count(filterCardName, game);
                     }
                 }
-                controller.gainLife(count, game);
+                controller.gainLife(count, game, source);
                 return true;
             }
         }

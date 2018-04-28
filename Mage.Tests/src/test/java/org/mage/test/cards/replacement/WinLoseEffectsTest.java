@@ -103,7 +103,7 @@ public class WinLoseEffectsTest extends CardTestPlayerBase {
     @Test
     public void testAngelsGrace() {
         addCard(Zone.HAND, playerA, "Angel's Grace");
-        // Prevent the next 1 damage that would be dealt to target creature or player this turn.
+        // Prevent the next 1 damage that would be dealt to any target this turn.
         // Draw a card.
         addCard(Zone.HAND, playerA, "Bandage");
         

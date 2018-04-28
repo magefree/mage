@@ -39,7 +39,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -57,10 +57,10 @@ public class DarigaazsCharm extends CardImpl {
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard()));
 
-        // or Darigaaz's Charm deals 3 damage to target creature or player;
+        // or Darigaaz's Charm deals 3 damage to any target;
         Mode mode = new Mode();
         mode.getEffects().add(new DamageTargetEffect(3));
-        mode.getTargets().add(new TargetCreatureOrPlayer());
+        mode.getTargets().add(new TargetAnyTarget());
         this.getSpellAbility().addMode(mode);
 
         // or target creature gets +3/+3 until end of turn.

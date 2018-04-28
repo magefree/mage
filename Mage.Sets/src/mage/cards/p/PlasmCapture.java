@@ -54,7 +54,7 @@ public class PlasmCapture extends CardImpl {
     public PlasmCapture(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{G}{G}{U}{U}");
 
-        // Counter target spell. At the beginning of your next precombat main phase, add X mana in any combination of colors to your mana pool, where X is that spell's converted mana cost.
+        // Counter target spell. At the beginning of your next precombat main phase, add X mana in any combination of colors, where X is that spell's converted mana cost.
         this.getSpellAbility().addTarget(new TargetSpell());
         this.getSpellAbility().addEffect(new PlasmCaptureCounterEffect());
     }
@@ -73,7 +73,7 @@ class PlasmCaptureCounterEffect extends OneShotEffect {
 
     public PlasmCaptureCounterEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Counter target spell. At the beginning of your next precombat main phase, add X mana in any combination of colors to your mana pool, where X is that spell's converted mana cost";
+        this.staticText = "Counter target spell. At the beginning of your next precombat main phase, add X mana in any combination of colors, where X is that spell's converted mana cost";
     }
 
     public PlasmCaptureCounterEffect(final PlasmCaptureCounterEffect effect) {
@@ -108,7 +108,7 @@ class PlasmCaptureManaEffect extends ManaEffect {
     public PlasmCaptureManaEffect(int amountOfMana) {
         super();
         this.amountOfMana = amountOfMana;
-        this.staticText = "add X mana in any combination of colors to your mana pool, where X is that spell's converted mana cost";
+        this.staticText = "add X mana in any combination of colors, where X is that spell's converted mana cost";
     }
 
     public PlasmCaptureManaEffect(final PlasmCaptureManaEffect effect) {

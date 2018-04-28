@@ -37,7 +37,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.target.TargetPlayer;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -48,12 +48,12 @@ public class AlabasterPotion extends CardImpl {
     public AlabasterPotion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{W}{W}");
 
-        // Choose one - Target player gains X life; or prevent the next X damage that would be dealt to target creature or player this turn.
+        // Choose one - Target player gains X life; or prevent the next X damage that would be dealt to any target this turn.
         this.getSpellAbility().addEffect(new GainLifeTargetEffect(new ManacostVariableValue()));
         this.getSpellAbility().addTarget(new TargetPlayer());
         Mode mode = new Mode();
         mode.getEffects().add(new PreventDamageToTargetEffect(Duration.EndOfTurn, false, true, new ManacostVariableValue()));
-        mode.getTargets().add(new TargetCreatureOrPlayer());
+        mode.getTargets().add(new TargetAnyTarget());
         this.getSpellAbility().addMode(mode);
     }
 

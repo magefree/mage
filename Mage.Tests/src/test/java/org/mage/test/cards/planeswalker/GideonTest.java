@@ -64,7 +64,7 @@ public class GideonTest extends CardTestPlayerBase {
 
         activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "+1: Until your next turn, target creature gains indestructible. Untap that creature.", "Silvercoat Lion");
 
-        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt");
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Silvercoat Lion");
 
         setStopAt(4, PhaseStep.PRECOMBAT_MAIN);
         execute();

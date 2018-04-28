@@ -113,7 +113,7 @@ class AliFromCairoReplacementEffect extends ReplacementEffectImpl {
         game.fireEvent(event);                 
         
         if (controller != null) {
-            controller.setLife(1, game);
+            controller.setLife(1, game, source);
         }
         
         return true;

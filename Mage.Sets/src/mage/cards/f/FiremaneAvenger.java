@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -57,9 +57,9 @@ public class FiremaneAvenger extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // Battalion - Whenever Firemane Avenger and at least two other creatures attack, Firemane Avenger deals 3 damage to target creature or player and you gain 3 life.
+        // Battalion - Whenever Firemane Avenger and at least two other creatures attack, Firemane Avenger deals 3 damage to any target and you gain 3 life.
         Ability ability = new BattalionAbility(new DamageTargetEffect(3));
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         ability.addEffect(new GainLifeEffect(3));
         this.addAbility(ability);
     }

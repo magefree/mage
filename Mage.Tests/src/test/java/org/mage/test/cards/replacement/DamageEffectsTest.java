@@ -29,6 +29,7 @@ package org.mage.test.cards.replacement;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -96,6 +97,7 @@ public class DamageEffectsTest extends CardTestPlayerBase {
 
     }
 
+    @Ignore
     @Test
     public void vexingDevilFurnaceRathRedirectToPlaneswalker() {
 

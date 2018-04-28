@@ -58,6 +58,7 @@ public enum CounterType {
     DOOM("doom"),
     DREAM("dream"),
     ECHO("echo"),
+    EGG("egg"),
     ELIXIR("elixir"),
     ENERGY("energy"),
     EON("eon"),

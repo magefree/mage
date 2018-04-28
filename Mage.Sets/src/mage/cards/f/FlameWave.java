@@ -34,7 +34,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.target.TargetPlayer;
+import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
  *
@@ -43,12 +43,14 @@ import mage.target.TargetPlayer;
 public class FlameWave extends CardImpl {
 
     public FlameWave(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}{R}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}{R}{R}{R}");
 
         // Flame Wave deals 4 damage to target player and each creature he or she controls.
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));
-        this.getSpellAbility().addTarget(new TargetPlayer());
-        this.getSpellAbility().addEffect(new DamageAllControlledTargetEffect(4, new FilterCreaturePermanent()));
+        this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
+        this.getSpellAbility().addEffect(new DamageAllControlledTargetEffect(4, new FilterCreaturePermanent())
+                .setText("and each creature that player or that planeswalker’s controller controls")
+        );
     }
 
     public FlameWave(final FlameWave card) {

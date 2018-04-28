@@ -55,7 +55,7 @@ import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -70,9 +70,9 @@ public class UginTheSpiritDragon extends CardImpl {
 
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(7));
 
-        // +2: Ugin, the Spirit Dragon deals 3 damage to target creature or player.
+        // +2: Ugin, the Spirit Dragon deals 3 damage to any target.
         LoyaltyAbility ability = new LoyaltyAbility(new DamageTargetEffect(3), 2);
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
 
         // -X: Exile each permanent with converted mana cost X or less that's one or more colors.
@@ -154,7 +154,7 @@ class UginTheSpiritDragonEffect3 extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            controller.gainLife(7, game);
+            controller.gainLife(7, game, source);
             controller.drawCards(7, game);
             TargetCardInHand target = new TargetCardInHand(0, 7, new FilterPermanentCard("permanent cards"));
             if (controller.choose(Outcome.PutCardInPlay, target, source.getSourceId(), game)) {

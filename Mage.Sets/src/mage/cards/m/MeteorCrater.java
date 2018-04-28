@@ -57,7 +57,7 @@ public class MeteorCrater extends CardImpl {
     public MeteorCrater(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        // {tap}: Choose a color of a permanent you control. Add one mana of that color to your mana pool.
+        // {tap}: Choose a color of a permanent you control. Add one mana of that color.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new MeteorCraterEffect(), new TapSourceCost()));
     }
 
@@ -82,7 +82,7 @@ class MeteorCraterEffect extends ManaEffect {
 
     public MeteorCraterEffect() {
         super();
-        staticText = "Choose a color of a permanent you control. Add one mana of that color to your mana pool";
+        staticText = "Choose a color of a permanent you control. Add one mana of that color";
     }
 
     public MeteorCraterEffect(final MeteorCraterEffect effect) {

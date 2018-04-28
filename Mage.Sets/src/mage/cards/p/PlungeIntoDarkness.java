@@ -117,7 +117,7 @@ class PlungeIntoDarknessLifeEffect extends OneShotEffect {
                 }
             }
             if (numSacrificed > 0) {
-                player.gainLife(3 * numSacrificed, game);
+                player.gainLife(3 * numSacrificed, game, source);
             }
             return true;
         }

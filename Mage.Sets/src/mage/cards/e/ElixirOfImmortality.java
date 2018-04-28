@@ -84,7 +84,7 @@ class ElixerOfImmortalityEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (player != null) {
-            player.gainLife(5, game);
+            player.gainLife(5, game, source);
             if (permanent != null) {
                 player.moveCardToLibraryWithInfo(permanent, source.getSourceId(), game, Zone.BATTLEFIELD, true, true);
             }

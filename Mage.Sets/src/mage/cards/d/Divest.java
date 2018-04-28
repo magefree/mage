@@ -46,7 +46,7 @@ import mage.target.TargetPlayer;
  */
 public class Divest extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("an artifact or creature card from it");
+    private static final FilterCard filter = new FilterCard("an artifact or creature card");
 
     static {
         filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT),

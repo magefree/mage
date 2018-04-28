@@ -77,7 +77,7 @@ public class DeathtouchTest extends CardTestPlayerBase {
          it equal to the amount of mana spent to cast it.
          {X}, Remove X +1/+1 counters from Marath: Choose one -
          * Put X +1/+1 counters on target creature
-         * Marath deals X damage to target creature or player
+         * Marath deals X damage to any target
          * Put an X/X green Elemental creature token onto the battlefield. X can't be 0
          */
         addCard(Zone.HAND, playerA, "Marath, Will of the Wild", 1);
@@ -90,7 +90,7 @@ public class DeathtouchTest extends CardTestPlayerBase {
 
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{X}, Remove X +1/+1 counters from Marath", "Archangel of Thune");
         setChoice(playerA, "X=3");
-        setModeChoice(playerA, "2"); // Marath deals X damage to target creature or player
+        setModeChoice(playerA, "2"); // Marath deals X damage to any target
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -118,7 +118,7 @@ public class DeathtouchTest extends CardTestPlayerBase {
          it equal to the amount of mana spent to cast it.
          {X}, Remove X +1/+1 counters from Marath: Choose one -
          * Put X +1/+1 counters on target creature
-         * Marath deals X damage to target creature or player
+         * Marath deals X damage to any target
          * Put an X/X green Elemental creature token onto the battlefield. X can't be 0
          */
         addCard(Zone.HAND, playerA, "Marath, Will of the Wild", 1);
@@ -133,7 +133,7 @@ public class DeathtouchTest extends CardTestPlayerBase {
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip {2}", "Marath, Will of the Wild");
 
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{X}, Remove X +1/+1 counters from Marath", "Elesh Norn, Grand Cenobite");
-        setModeChoice(playerA, "2"); // Marath deals X damage to target creature or player
+        setModeChoice(playerA, "2"); // Marath deals X damage to any target
         setChoice(playerA, "X=1");
 
         setStopAt(1, PhaseStep.END_TURN);

@@ -46,7 +46,7 @@ public class HarvesterDruidTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
 
-        // {T}: Add to your mana pool one mana of any color that a land you control could produce.
+        // {T}: Add one mana of any color that a land you control could produce.
         addCard(Zone.BATTLEFIELD, playerA, "Harvester Druid", 1);
 
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
@@ -64,7 +64,7 @@ public class HarvesterDruidTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
 
-        // {T}: Add to your mana pool one mana of any color that a land you control could produce.
+        // {T}: Add one mana of any color that a land you control could produce.
         addCard(Zone.BATTLEFIELD, playerA, "Harvester Druid", 2);
 
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);

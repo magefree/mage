@@ -99,7 +99,7 @@ public class DeathWatch extends CardImpl {
                 if (opponent != null) {
                     Player controller = game.getPlayer(source.getControllerId());
                     if (controller != null) {
-                        controller.gainLife(creature.getToughness().getValue(), game);
+                        controller.gainLife(creature.getToughness().getValue(), game, source);
                         opponent.loseLife(creature.getPower().getValue(), game, false);
                         return true;
                     }

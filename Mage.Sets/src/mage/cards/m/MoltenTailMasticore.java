@@ -50,7 +50,7 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -66,10 +66,10 @@ public class MoltenTailMasticore extends CardImpl {
 
         // At the beginning of your upkeep, sacrifice Molten-Tail Masticore unless you discard a card.
         this.addAbility(new MoltenTailMasticoreAbility());
-        // {4}, Exile a creature card from your graveyard: Molten-Tail Masticore deals 4 damage to target creature or player.
+        // {4}, Exile a creature card from your graveyard: Molten-Tail Masticore deals 4 damage to any target.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(4), new GenericManaCost(4));
         ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(new FilterCreatureCard("a creature card from your graveyard"))));
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
         // {2}: Regenerate Molten-Tail Masticore.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new GenericManaCost(2)));

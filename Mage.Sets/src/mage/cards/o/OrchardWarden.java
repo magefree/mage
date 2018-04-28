@@ -97,7 +97,7 @@ class OrchardWardenffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
         if (controller != null && permanent != null) {
-            controller.gainLife(permanent.getToughness().getValue(), game);
+            controller.gainLife(permanent.getToughness().getValue(), game, source);
             return true;
         }
         return false;

@@ -53,7 +53,7 @@ public class ParadiseMantle extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{0}");
         this.subtype.add(SubType.EQUIPMENT);
 
-        // Equipped creature has "{tap}: Add one mana of any color to your mana pool."
+        // Equipped creature has "{tap}: Add one mana of any color."
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new GainAbilityAttachedEffect(new AnyColorManaAbility(new TapSourceCost()), AttachmentType.EQUIPMENT, Duration.WhileOnBattlefield)));
         // Equip {1}

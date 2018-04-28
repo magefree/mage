@@ -63,10 +63,10 @@ public class AbundantGrowth extends CardImpl {
         // When Abundant Growth enters the battlefield, draw a card.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1), false));
 
-        // Enchanted land has "{T}: Add one mana of any color to your mana pool."
+        // Enchanted land has "{T}: Add one mana of any color."
         Ability gainedAbility = new AnyColorManaAbility(new TapSourceCost());
         Effect effect = new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA);
-        effect.setText("Enchanted land has \"{T}: Add one mana of any color to your mana pool.\"");
+        effect.setText("Enchanted land has \"{T}: Add one mana of any color.\"");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 

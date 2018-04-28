@@ -105,7 +105,7 @@ class JaddiLifestriderEffect extends OneShotEffect {
             }
         }
         if (tappedAmount > 0) {
-            you.gainLife(tappedAmount * 2, game);
+            you.gainLife(tappedAmount * 2, game, source);
             return true;
         }
         return false;

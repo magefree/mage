@@ -41,7 +41,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
@@ -50,7 +49,7 @@ import mage.target.common.TargetCreatureOrPlayer;
 public class RushingTideZubera extends CardImpl {
 
     public RushingTideZubera(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
         this.subtype.add(SubType.ZUBERA);
         this.subtype.add(SubType.SPIRIT);
 
@@ -58,9 +57,8 @@ public class RushingTideZubera extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Rushing-Tide Zubera dies, if 4 or more damage was dealt to it this turn, draw three cards.
-        Ability ability = new ConditionalTriggeredAbility(new DiesTriggeredAbility(new DrawCardSourceControllerEffect(3)),new RushingTideZuberaCondition(),
+        Ability ability = new ConditionalTriggeredAbility(new DiesTriggeredAbility(new DrawCardSourceControllerEffect(3)), new RushingTideZuberaCondition(),
                 "When {this} dies, if 4 or more damage was dealt to it this turn, draw three cards.");
-        ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
     }
 
@@ -75,12 +73,13 @@ public class RushingTideZubera extends CardImpl {
 }
 
 class RushingTideZuberaCondition implements Condition {
+
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent == null) {
             permanent = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
-    }
+        }
         return permanent.getDamage() > 3;
     }
 }

@@ -44,8 +44,8 @@ import mage.constants.SuperType;
 import mage.game.Game;
 import mage.game.command.emblems.ChandraRoaringFlameEmblem;
 import mage.players.Player;
-import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
  *
@@ -66,7 +66,7 @@ public class ChandraRoaringFlame extends CardImpl {
 
         // +1: Chandra, Roaring Flame deals 2 damage to target player.
         LoyaltyAbility loyaltyAbility = new LoyaltyAbility(new DamageTargetEffect(2), 1);
-        loyaltyAbility.addTarget(new TargetPlayer());
+        loyaltyAbility.addTarget(new TargetPlayerOrPlaneswalker());
         this.addAbility(loyaltyAbility);
 
         //-2: Chandra, Roaring Flame deals 2 damage to target creature.

@@ -66,9 +66,9 @@ public class VorinclexVoiceOfHunger extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
 
-        // Whenever you tap a land for mana, add one mana to your mana pool of any type that land produced.
+        // Whenever you tap a land for mana, add one mana of any type that land produced.
         ManaEffect effect = new AddManaOfAnyTypeProducedEffect();
-        effect.setText("add one mana to your mana pool of any type that land produced");
+        effect.setText("add one mana of any type that land produced");
         this.addAbility(new TapForManaAllTriggeredManaAbility(
                 effect, new FilterControlledLandPermanent("you tap a land"),
                 SetTargetPointer.PERMANENT));

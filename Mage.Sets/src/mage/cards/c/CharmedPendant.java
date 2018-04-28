@@ -65,7 +65,7 @@ public class CharmedPendant extends CardImpl {
     public CharmedPendant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
-        // {T}, Put the top card of your library into your graveyard: For each colored mana symbol in that card's mana cost, add one mana of that color to your mana pool. Activate this ability only any time you could cast an instant.
+        // {T}, Put the top card of your library into your graveyard: For each colored mana symbol in that card's mana cost, add one mana of that color. Activate this ability only any time you could cast an instant.
         this.addAbility(new CharmedPendantAbility());
     }
 
@@ -121,7 +121,7 @@ class CharmedPendantManaEffect extends ManaEffect {
 
     public CharmedPendantManaEffect() {
         super();
-        staticText = "For each colored mana symbol in that card's mana cost, add one mana of that color to your mana pool";
+        staticText = "For each colored mana symbol in that card's mana cost, add one mana of that color";
     }
 
     public CharmedPendantManaEffect(final CharmedPendantManaEffect effect) {

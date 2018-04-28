@@ -40,14 +40,14 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 /**
  *
  * @author Will
  */
 public class WizardsLightning extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Wizard");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("you control a Wizard");
 
     static {
         filter.add(new SubtypePredicate(SubType.WIZARD));
@@ -62,7 +62,7 @@ public class WizardsLightning extends CardImpl {
         this.addAbility(ability);
 
         // Wizard's Lightning deals 3 damage to any target.
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
     }
 

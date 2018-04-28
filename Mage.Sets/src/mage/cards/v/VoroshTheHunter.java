@@ -48,7 +48,7 @@ import mage.counters.CounterType;
 public class VoroshTheHunter extends CardImpl {
 
     public VoroshTheHunter(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{U}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{G}{U}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRAGON);
 

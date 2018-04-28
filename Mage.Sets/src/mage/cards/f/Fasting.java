@@ -118,7 +118,7 @@ class FastingReplacementEffect extends ReplacementEffectImpl {
         if (event.getPlayerId().equals(source.getControllerId())
                 && controller != null
                 && controller.chooseUse(outcome, "Would you like to skip your draw step to gain 2 life?", source, game)) {
-            controller.gainLife(2, game);
+            controller.gainLife(2, game, source);
             return true;
         }
         return false;

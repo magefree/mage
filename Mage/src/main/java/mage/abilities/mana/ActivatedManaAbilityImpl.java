@@ -77,7 +77,7 @@ public abstract class ActivatedManaAbilityImpl extends ActivatedAbilityImpl impl
         }
         if (timing == TimingRule.SORCERY
                 && !game.canPlaySorcery(playerId)
-                && !game.getContinuousEffects().asThough(sourceId, AsThoughEffectType.ACTIVATE_AS_INSTANT, this, controllerId, game)) {
+                && null == game.getContinuousEffects().asThough(sourceId, AsThoughEffectType.ACTIVATE_AS_INSTANT, this, controllerId, game)) {
             return false;
         }
         // check if player is in the process of playing spell costs and he is no longer allowed to use activated mana abilities (e.g. because he started to use improvise)

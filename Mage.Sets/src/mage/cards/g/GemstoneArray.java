@@ -50,7 +50,7 @@ public class GemstoneArray extends CardImpl {
 
         // {2}: Put a charge counter on Gemstone Array.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance(1)), new ManaCostsImpl("{2}")));
-        // Remove a charge counter from Gemstone Array: Add one mana of any color to your mana pool.
+        // Remove a charge counter from Gemstone Array: Add one mana of any color.
         this.addAbility(new AnyColorManaAbility(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(1))));
     }
 

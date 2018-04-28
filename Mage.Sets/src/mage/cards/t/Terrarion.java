@@ -53,7 +53,7 @@ public class Terrarion extends CardImpl {
 
         // Terrarion enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
-        // {2}, {T}, Sacrifice Terrarion: Add two mana in any combination of colors to your mana pool.
+        // {2}, {T}, Sacrifice Terrarion: Add two mana in any combination of colors.
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaInAnyCombinationEffect(2), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());

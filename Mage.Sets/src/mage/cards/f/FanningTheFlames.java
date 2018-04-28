@@ -34,7 +34,7 @@ import mage.abilities.keyword.BuybackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -48,9 +48,9 @@ public class FanningTheFlames extends CardImpl {
         // Buyback {3}
         this.addAbility(new BuybackAbility("{3}"));
         
-        // Fanning the Flames deals X damage to target creature or player.
+        // Fanning the Flames deals X damage to any target.
         this.getSpellAbility().addEffect(new DamageTargetEffect(new ManacostVariableValue()));
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
     public FanningTheFlames(final FanningTheFlames card) {

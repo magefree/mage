@@ -168,7 +168,7 @@ class TranscendenceLoseLifeEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            controller.gainLife(2 * amount, game);
+            controller.gainLife(2 * amount, game, source);
             return true;
         }
         return false;

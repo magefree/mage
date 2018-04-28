@@ -7,7 +7,7 @@ import mage.cards.Card;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Outcome;
 import mage.target.Target;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetCreaturePermanent;
 import org.apache.log4j.Logger;
 
@@ -91,7 +91,7 @@ public final class RateCard {
                             DamageTargetEffect damageEffect = (DamageTargetEffect) effect;
                             if (damageEffect.getAmount() > 1) {
                                 for (Target target : ability.getTargets()) {
-                                    if (target instanceof TargetCreaturePermanent || target instanceof TargetCreatureOrPlayer) {
+                                    if (target instanceof TargetCreaturePermanent || target instanceof TargetAnyTarget) {
                                         log.debug("Found damage dealer: " + card.getName());
                                         return 1;
                                     }

@@ -52,9 +52,9 @@ public class LotusBlossom extends CardImpl {
 
         // At the beginning of your upkeep, you may put a petal counter on Lotus Blossom.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.PETAL.createInstance(), true), TargetController.YOU, true));
-        // {tap}, Sacrifice Lotus Blossom: Add X mana of any one color to your mana pool, where X is the number of petal counters on Lotus Blossom.
+        // {tap}, Sacrifice Lotus Blossom: Add X mana of any one color, where X is the number of petal counters on Lotus Blossom.
         DynamicManaAbility ability = new DynamicManaAbility(new Mana(0, 0, 0, 0, 0, 0, 1, 0), new CountersSourceCount(CounterType.PETAL), new TapSourceCost(),
-                "Add X mana of any one color to your mana pool, where X is the number of petal counters on {this}", true);
+                "Add X mana of any one color, where X is the number of petal counters on {this}", true);
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }

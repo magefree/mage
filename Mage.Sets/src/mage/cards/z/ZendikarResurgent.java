@@ -48,9 +48,9 @@ public class ZendikarResurgent extends CardImpl {
     public ZendikarResurgent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{5}{G}{G}");
 
-        // Whenever you tap a land for mana, add one mana to your mana pool of any type that land produced. (<i>The types of mana are white, blue, black, red, green, and colorless.)</i>
+        // Whenever you tap a land for mana, add one mana of any type that land produced. (<i>The types of mana are white, blue, black, red, green, and colorless.)</i>
         AddManaOfAnyTypeProducedEffect effect = new AddManaOfAnyTypeProducedEffect();
-        effect.setText("add one mana to your mana pool of any type that land produced");
+        effect.setText("add one mana of any type that land produced");
         this.addAbility(new TapForManaAllTriggeredManaAbility(
                 effect,
                 new FilterControlledLandPermanent("you tap a land"),

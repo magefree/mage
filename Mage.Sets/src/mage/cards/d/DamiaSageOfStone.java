@@ -54,7 +54,7 @@ import mage.players.Player;
 public class DamiaSageOfStone extends CardImpl {
 
     public DamiaSageOfStone(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{U}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{G}{U}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.GORGON);
         this.subtype.add(SubType.WIZARD);
@@ -64,10 +64,10 @@ public class DamiaSageOfStone extends CardImpl {
 
         // Deathtouch
         this.addAbility(DeathtouchAbility.getInstance());
-        
+
         // Skip your draw step.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipDrawStepEffect()));
-        
+
         // At the beginning of your upkeep, if you have fewer than seven cards in hand, draw cards equal to the difference.
         this.addAbility(new DamiaSageOfStoneTriggeredAbility());
     }
@@ -83,20 +83,20 @@ public class DamiaSageOfStone extends CardImpl {
 }
 
 class DamiaSageOfStoneTriggeredAbility extends BeginningOfUpkeepTriggeredAbility {
-    
+
     DamiaSageOfStoneTriggeredAbility() {
         super(new DrawCardSourceControllerEffect(new IntPlusDynamicValue(7, new MultipliedValue(new CardsInControllerHandCount(), -1))), TargetController.YOU, false);
     }
-    
+
     DamiaSageOfStoneTriggeredAbility(final DamiaSageOfStoneTriggeredAbility ability) {
         super(ability);
     }
-    
+
     @Override
     public DamiaSageOfStoneTriggeredAbility copy() {
         return new DamiaSageOfStoneTriggeredAbility(this);
     }
-    
+
     @Override
     public boolean checkInterveningIfClause(Game game) {
         Player player = game.getPlayer(this.getControllerId());
@@ -105,7 +105,7 @@ class DamiaSageOfStoneTriggeredAbility extends BeginningOfUpkeepTriggeredAbility
         }
         return false;
     }
-    
+
     @Override
     public String getRule() {
         return "At the beginning of your upkeep, if you have fewer than seven cards in hand, draw cards equal to the difference";

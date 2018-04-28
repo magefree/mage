@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.game.Game;
-import mage.target.common.TargetCreatureOrPlayerAmount;
+import mage.target.common.TargetAnyTargetAmount;
 
 /**
  *
@@ -60,7 +60,7 @@ public class AvacynsJudgment extends CardImpl {
         Effect effect = new DamageMultiEffect(xValue);
         effect.setText("{this} deals 2 damage divided as you choose among any number of target creatures and/or players. If {this}'s madness cost was paid, it deals X damage divided as you choose among those creatures and/or players instead.");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayerAmount(xValue));
+        this.getSpellAbility().addTarget(new TargetAnyTargetAmount(xValue));
     }
 
     public AvacynsJudgment(final AvacynsJudgment card) {

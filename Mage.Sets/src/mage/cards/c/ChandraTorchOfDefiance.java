@@ -78,7 +78,7 @@ public class ChandraTorchOfDefiance extends CardImpl {
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 
-        // -7: You get an emblem with "Whenever you cast a spell, this emblem deals 5 damage to target creature or player."
+        // -7: You get an emblem with "Whenever you cast a spell, this emblem deals 5 damage to any target."
         this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new ChandraTorchOfDefianceEmblem()), -7));
     }
 

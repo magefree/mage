@@ -54,7 +54,7 @@ public class AdantoTheFirstFort extends CardImpl {
 
         this.nightCard = true;
 
-        // T: Add W to your mana pool.
+        // T: Add W.
         this.addAbility(new WhiteManaAbility());
 
         // 2W, T: Create a 1/1 white Vampire creature token with lifelink.

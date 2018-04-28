@@ -61,7 +61,7 @@ public class CloudstoneCurio extends CardImpl {
     }
 
     public CloudstoneCurio(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // Whenever a nonartifact permanent enters the battlefield under your control, you may return another permanent you control that shares a card type with it to its owner's hand.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new CloudstoneCurioEffect(), filter, true, SetTargetPointer.PERMANENT, "", true));
@@ -82,7 +82,7 @@ class CloudstoneCurioEffect extends OneShotEffect {
 
     public CloudstoneCurioEffect() {
         super(Outcome.ReturnToHand);
-        this.staticText = "you may return another permanent you control that shares a card type with it to its owner's hand";
+        this.staticText = "you may return another permanent you control that shares a permanent type with it to its owner's hand";
     }
 
     public CloudstoneCurioEffect(final CloudstoneCurioEffect effect) {
@@ -103,12 +103,14 @@ class CloudstoneCurioEffect extends OneShotEffect {
                 triggeringCreature = (Permanent) game.getLastKnownInformation(getTargetPointer().getFirst(game, source), Zone.BATTLEFIELD);
             }
             if (triggeringCreature != null) {
-                FilterPermanent filter = new FilterPermanent("another permanent you control that shares a card type with " + triggeringCreature.getName());
+                FilterPermanent filter = new FilterPermanent("another permanent you control that shares a permanent type with " + triggeringCreature.getName());
                 filter.add(Predicates.not(new PermanentIdPredicate(triggeringCreature.getId())));
                 filter.add(new ControllerPredicate(TargetController.YOU));
                 Set<CardTypePredicate> cardTypes = new HashSet<>();
                 for (CardType cardType : triggeringCreature.getCardType()) {
-                    cardTypes.add(new CardTypePredicate(cardType));
+                    if (cardType.isPermanentType()) {
+                        cardTypes.add(new CardTypePredicate(cardType));
+                    }
                 }
                 filter.add(Predicates.or(cardTypes));
                 TargetPermanent target = new TargetPermanent(1, 1, filter, true);

@@ -24,8 +24,7 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.cards.b;
 
 import java.util.UUID;
@@ -36,7 +35,7 @@ import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -45,16 +44,15 @@ import mage.target.common.TargetCreatureOrPlayer;
 public class BurstLightning extends CardImpl {
 
     public BurstLightning(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}");
 
         // Kicker {4} (You may pay an additional {4} as you cast this spell.)
         this.addAbility(new KickerAbility("{4}"));
 
-        // Burst Lightning deals 2 damage to target creature or player. If Burst Lightning was kicked, it deals 4 damage to that creature or player instead.
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        // Burst Lightning deals 2 damage to any target. If Burst Lightning was kicked, it deals 4 damage to that creature or player instead.
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new DamageTargetEffect(4),
-                new DamageTargetEffect(2), KickedCondition.instance, "{this} deals 2 damage to target creature or player. If {this} was kicked, it deals 4 damage to that creature or player instead"));
+                new DamageTargetEffect(2), KickedCondition.instance, "{this} deals 2 damage to any target. if this spell was kicked, it deals 4 damage to that permanent or player instead"));
     }
 
     public BurstLightning(final BurstLightning card) {

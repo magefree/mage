@@ -100,7 +100,7 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
                     for (Cost cost : ability.getCosts()) {
                         if (cost.getText() != null && !cost.getText().isEmpty()) {
                             if (!cost.getText().startsWith("As an additional cost")) {
-                                sbRule.append("As an additional cost to cast {this}, ");
+                                sbRule.append("As an additional cost to cast this spell, ");
                             }
                             sbRule.append(cost.getText()).append(".<br>");
                         }

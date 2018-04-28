@@ -59,7 +59,7 @@ public class GoldForgeGarrison extends CardImpl {
         ability.setRuleAtTheTop(true);
         this.addAbility(ability);
 
-        // {T}: Add two mana of any one color to your mana pool.
+        // {T}: Add two mana of any one color.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(2), new TapSourceCost()));
 
         // {4}, {T}: Create a 4/4 colorless Golem artifact creature token.

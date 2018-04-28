@@ -49,8 +49,8 @@ public class MoxAmber extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{0}");
         addSuperType(SuperType.LEGENDARY);
 
-        // {tap}: Add one mana pool of any color among legendary creatures or planeswalkers you control.
-        FilterPermanent filter = new FilterPermanent("legendary creatures or planeswalkers");
+        // {tap}: Add one mana pool of any color among legendary creatures and planeswalkers you control.
+        FilterPermanent filter = new FilterPermanent("legendary creatures and planeswalkers");
         filter.add(Predicates.or(
                 Predicates.and(
                     new CardTypePredicate(CardType.CREATURE),

@@ -50,7 +50,7 @@ public class VinesOfVastwood extends CardImpl {
 
     private static final FilterObject filter = new FilterStackObject("spells or abilities your opponents control");
 
-    private static final String staticText = "If {this} was kicked, that creature gets +4/+4 until end of turn";
+    private static final String staticText = "if this spell was kicked, that creature gets +4/+4 until end of turn";
 
     public VinesOfVastwood(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");

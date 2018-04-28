@@ -184,14 +184,15 @@ public class Visions extends ExpansionSet {
         cards.add(new SetCardInfo("Tempest Drake", 139, Rarity.UNCOMMON, mage.cards.t.TempestDrake.class));
         cards.add(new SetCardInfo("Three Wishes", 45, Rarity.RARE, mage.cards.t.ThreeWishes.class));
         cards.add(new SetCardInfo("Tin-Wing Chimera", 157, Rarity.UNCOMMON, mage.cards.t.TinWingChimera.class));
-        cards.add(new SetCardInfo("Tithe", 123, Rarity.RARE, mage.cards.t.Tithe.class));
+        cards.add(new SetCardInfo("Tithe", 23, Rarity.RARE, mage.cards.t.Tithe.class));
         cards.add(new SetCardInfo("Tremor", 99, Rarity.COMMON, mage.cards.t.Tremor.class));
         cards.add(new SetCardInfo("Triangle of War", 158, Rarity.RARE, mage.cards.t.TriangleOfWar.class));
-        cards.add(new SetCardInfo("Uktabi Orangutan", 73, Rarity.UNCOMMON, mage.cards.u.UktabiOrangutan.class));
+        cards.add(new SetCardInfo("Uktabi Orangutan", 123, Rarity.UNCOMMON, mage.cards.u.UktabiOrangutan.class));
         cards.add(new SetCardInfo("Undiscovered Paradise", 167, Rarity.RARE, mage.cards.u.UndiscoveredParadise.class));
         cards.add(new SetCardInfo("Undo", 47, Rarity.COMMON, mage.cards.u.Undo.class));
         cards.add(new SetCardInfo("Urborg Mindsucker", 21, Rarity.COMMON, mage.cards.u.UrborgMindsucker.class));
         cards.add(new SetCardInfo("Vampiric Tutor", 22, Rarity.RARE, mage.cards.v.VampiricTutor.class));
+        cards.add(new SetCardInfo("Vampirism", 73, Rarity.UNCOMMON, mage.cards.v.Vampirism.class));
         cards.add(new SetCardInfo("Vanishing", 48, Rarity.COMMON, mage.cards.v.Vanishing.class));
         cards.add(new SetCardInfo("Viashino Sandstalker", 100, Rarity.UNCOMMON, mage.cards.v.ViashinoSandstalker.class));
         cards.add(new SetCardInfo("Viashivan Dragon", 140, Rarity.RARE, mage.cards.v.ViashivanDragon.class));

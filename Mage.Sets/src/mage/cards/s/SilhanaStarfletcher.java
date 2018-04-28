@@ -68,7 +68,7 @@ public class SilhanaStarfletcher extends CardImpl {
         // As Silhana Starfletcher enters the battlefield, choose a color.        
         this.addAbility(new EntersBattlefieldAbility(new ChooseColorEffect(Outcome.Neutral)));
         
-        // {tap}: Add one mana of the chosen color to your mana pool.
+        // {tap}: Add one mana of the chosen color.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new SilhanaStarfletcherManaEffect(), new TapSourceCost()));
         
     }
@@ -87,7 +87,7 @@ class SilhanaStarfletcherManaEffect extends ManaEffect {
 
     public SilhanaStarfletcherManaEffect() {
         super();
-        staticText = "Add one mana of the chosen color to your mana pool";
+        staticText = "Add one mana of the chosen color";
     }
 
     public SilhanaStarfletcherManaEffect(final SilhanaStarfletcherManaEffect effect) {

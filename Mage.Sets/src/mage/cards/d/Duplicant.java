@@ -27,6 +27,7 @@
  */
 package mage.cards.d;
 
+import java.util.List;
 import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
@@ -124,7 +125,7 @@ class DuplicantContinuousEffect extends ContinuousEffectImpl {
 
     public DuplicantContinuousEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature);
-        staticText = "As long as the exiled card is a creature card, Duplicant has that card's power, toughness, and creature types. It's still a Shapeshifter";
+        staticText = "As long as a card exiled with {this} is a creature card, {this} has the power, toughness, and creature types of the last creature card exiled with {this}. It's still a Shapeshifter.";
     }
 
     public DuplicantContinuousEffect(final DuplicantContinuousEffect effect) {
@@ -141,7 +142,8 @@ class DuplicantContinuousEffect extends ContinuousEffectImpl {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
             if (!permanent.getImprinted().isEmpty()) {
-                Card card = game.getCard(permanent.getImprinted().get(0));
+                List<UUID> imprinted = permanent.getImprinted();
+                Card card = game.getCard(imprinted.get(imprinted.size() - 1));
                 if (card != null && card.isCreature()) {
                     switch (layer) {
                         case TypeChangingEffects_4:

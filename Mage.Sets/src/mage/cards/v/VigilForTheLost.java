@@ -121,7 +121,7 @@ class VigilForTheLostEffect extends OneShotEffect {
         cost.clearPaid();
         if (cost.payOrRollback(source, game, source.getSourceId(), source.getControllerId())) {
             Player player = game.getPlayer(source.getControllerId());
-            player.gainLife(cost.getX(), game);
+            player.gainLife(cost.getX(), game, source);
             return true;
         } else {
             return false;

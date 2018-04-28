@@ -112,7 +112,9 @@ public interface Player extends MageItem, Copyable<Player> {
 
     void initLife(int life);
 
-    void setLife(int life, Game game);
+    void setLife(int life, Game game, Ability source);
+
+    void setLife(int life, Game game, UUID sourceId);
 
     /**
      *
@@ -123,7 +125,9 @@ public interface Player extends MageItem, Copyable<Player> {
      */
     int loseLife(int amount, Game game, boolean atCombat);
 
-    int gainLife(int amount, Game game);
+    int gainLife(int amount, Game game, Ability source);
+
+    int gainLife(int amount, Game game, UUID sourceId);
 
     int damage(int damage, UUID sourceId, Game game, boolean combatDamage, boolean preventable);
 
@@ -427,6 +431,7 @@ public interface Player extends MageItem, Copyable<Player> {
     PlanarDieRoll rollPlanarDie(Game game);
 
     PlanarDieRoll rollPlanarDie(Game game, ArrayList<UUID> appliedEffects);
+
     PlanarDieRoll rollPlanarDie(Game game, ArrayList<UUID> appliedEffects, int numberChaosSides, int numberPlanarSides);
 
     @Deprecated

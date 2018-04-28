@@ -37,10 +37,10 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -54,7 +54,7 @@ import mage.util.CardUtil;
 public class SummonersEgg extends CardImpl {
 
     public SummonersEgg(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");
         this.subtype.add(SubType.CONSTRUCT);
         this.power = new MageInt(0);
         this.toughness = new MageInt(4);
@@ -90,9 +90,9 @@ class SummonersEggImprintEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (controller != null) {
+        if (controller != null && sourcePermanent != null) {
             if (!controller.getHand().isEmpty()) {
-                TargetCard target = new TargetCard(Zone.HAND, new FilterCard());
+                TargetCard target = new TargetCard(Zone.HAND, StaticFilters.FILTER_CARD);
                 if (target.canChoose(source.getSourceId(), source.getControllerId(), game)
                         && controller.choose(Outcome.Benefit, controller.getHand(), target, game)) {
                     Card card = controller.getHand().get(target.getFirstTarget(), game);
@@ -100,11 +100,8 @@ class SummonersEggImprintEffect extends OneShotEffect {
                         card.setFaceDown(true, game);
                         controller.moveCardsToExile(card, source, game, false, source.getSourceId(), sourcePermanent.getIdName() + " (Imprint)");
                         card.setFaceDown(true, game);
-                        Permanent permanent = game.getPermanent(source.getSourceId());
-                        if (permanent != null) {
-                            permanent.imprint(card.getId(), game);
-                            permanent.addInfo("imprint", CardUtil.addToolTipMarkTags("[Imprinted card]"), game);
-                        }
+                        sourcePermanent.imprint(card.getId(), game);
+                        sourcePermanent.addInfo("imprint", CardUtil.addToolTipMarkTags("[Imprinted card]"), game);
                     }
                 }
             }
@@ -150,7 +147,7 @@ class SummonersEggPutOntoBattlefieldEffect extends OneShotEffect {
                     //If it's a creature card,
                     if (imprintedCard.isCreature()) {
                         //put it onto the battlefield under your control
-                        imprintedCard.putOntoBattlefield(game, Zone.EXILED, source.getSourceId(), source.getControllerId());
+                        controller.moveCards(imprintedCard, Zone.BATTLEFIELD, source, game);
                     }
                 }
             }

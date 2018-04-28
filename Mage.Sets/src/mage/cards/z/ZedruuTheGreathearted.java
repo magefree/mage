@@ -54,7 +54,7 @@ import mage.target.common.TargetOpponent;
 public class ZedruuTheGreathearted extends CardImpl {
 
     public ZedruuTheGreathearted(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{W}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{R}{W}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.MINOTAUR, SubType.MONK);
         this.power = new MageInt(2);
@@ -70,7 +70,7 @@ public class ZedruuTheGreathearted extends CardImpl {
         this.addAbility(ability);
 
         // {R}{W}{U}: Target opponent gains control of target permanent you control.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ZedruuTheGreatheartedEffect(), new ManaCostsImpl("{R}{W}{U}"));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ZedruuTheGreatheartedEffect(), new ManaCostsImpl("{U}{R}{W}"));
         ability.addTarget(new TargetOpponent());
         ability.addTarget(new TargetControlledPermanent());
         this.addAbility(ability);

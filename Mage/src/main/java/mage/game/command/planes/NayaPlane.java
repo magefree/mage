@@ -35,6 +35,7 @@ import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MainPhaseStackEmptyCondition;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.RollPlanarDieEffect;
@@ -43,14 +44,13 @@ import mage.abilities.effects.common.continuous.PlayAdditionalLandsAllEffect;
 import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.command.Plane;
 import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.common.PlanarRollWatcher;
 
 /**
@@ -60,13 +60,10 @@ import mage.watchers.common.PlanarRollWatcher;
 public class NayaPlane extends Plane {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Red, Green or White creature");
-    private static final FilterControlledLandPermanent filter2 = new FilterControlledLandPermanent("lands you control");
 
     static {
         filter.add(Predicates.or(new ColorPredicate(ObjectColor.RED), new ColorPredicate(ObjectColor.GREEN), new ColorPredicate(ObjectColor.WHITE)));
     }
-
-    private static final String rule = "{this} gets +1/+1 until end of of turn for each land you control";
 
     public NayaPlane() {
         this.setName("Plane - Naya");
@@ -76,13 +73,14 @@ public class NayaPlane extends Plane {
         Ability ability = new SimpleStaticAbility(Zone.COMMAND, new PlayAdditionalLandsAllEffect(Integer.MAX_VALUE));
         this.getAbilities().add(ability);
 
-        // Active player can roll the planar die: Whenever you roll {CHAOS}, target red, green or white creature gets +1/+1 until end of turn for each land you control        
-        Effect chaosEffect = new BoostTargetEffect(new PermanentsOnBattlefieldCount(filter2), new PermanentsOnBattlefieldCount(filter2), Duration.EndOfTurn);
+        // Active player can roll the planar die: Whenever you roll {CHAOS}, target red, green or white creature you control gets +1/+1 until end of turn for each land you control
+        DynamicValue dynamicValue = new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_PERMANENT_LANDS);
+        Effect chaosEffect = new BoostTargetEffect(dynamicValue, dynamicValue, Duration.EndOfTurn);
         Target chaosTarget = new TargetControlledCreaturePermanent(1, 1, filter, false);
 
-        List<Effect> chaosEffects = new ArrayList<Effect>();
+        List<Effect> chaosEffects = new ArrayList<>();
         chaosEffects.add(chaosEffect);
-        List<Target> chaosTargets = new ArrayList<Target>();
+        List<Target> chaosTargets = new ArrayList<>();
         chaosTargets.add(chaosTarget);
 
         ActivateIfConditionActivatedAbility chaosAbility = new ActivateIfConditionActivatedAbility(Zone.COMMAND, new RollPlanarDieEffect(chaosEffects, chaosTargets), new GenericManaCost(0), MainPhaseStackEmptyCondition.instance);

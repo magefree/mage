@@ -95,7 +95,7 @@ class HonorTheFallenEffect extends OneShotEffect {
                     }
                 }
             }
-            controller.gainLife(exiledCards, game);
+            controller.gainLife(exiledCards, game, source);
             return true;
         }
         return false;

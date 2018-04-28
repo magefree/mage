@@ -40,33 +40,33 @@ import mage.constants.CardType;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
 import mage.target.common.TargetControlledPermanent;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
  * @author LoneFox
-
+ *
  */
 public class MagmaBurst extends CardImpl {
 
     private final UUID originalId;
 
     public MagmaBurst(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{R}");
 
         // Kicker-Sacrifice two lands.
         this.addAbility(new KickerAbility(new SacrificeTargetCost(new TargetControlledPermanent(2, 2, new FilterControlledLandPermanent("two lands"), true))));
-        // Magma Burst deals 3 damage to target creature or player. If Magma Burst was kicked, it deals 3 damage to another target creature or player.
+        // Magma Burst deals 3 damage to any target. If Magma Burst was kicked, it deals 3 damage to another any target.
         Effect effect = new DamageTargetEffect(3);
-        effect.setText("{this} deals 3 damage to target creature or player. If {this} was kicked, it deals 3 damage to another target creature or player.");
+        effect.setText("{this} deals 3 damage to any target. if this spell was kicked, it deals 3 damage to another target.");
         this.getSpellAbility().addEffect(effect);
         originalId = this.getSpellAbility().getOriginalId();
     }
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        if(ability.getOriginalId().equals(originalId)) {
-             ability.addTarget(new TargetCreatureOrPlayer(KickedCondition.instance.apply(game, ability) ? 2 : 1));
+        if (ability.getOriginalId().equals(originalId)) {
+            ability.addTarget(new TargetAnyTarget(KickedCondition.instance.apply(game, ability) ? 2 : 1));
         }
     }
 

@@ -39,7 +39,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.TargetPlayer;
+import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
  *
@@ -48,15 +48,14 @@ import mage.target.TargetPlayer;
 public class LeylineOfLightning extends CardImpl {
 
     public LeylineOfLightning(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}{R}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{R}");
 
         // If Leyline of Lightning is in your opening hand, you may begin the game with it on the battlefield.
         this.addAbility(LeylineAbility.getInstance());
-        
+
         // Whenever you cast a spell, you may pay {1}. If you do, Leyline of Lightning deals 1 damage to target player.
         Ability ability = new SpellCastControllerTriggeredAbility(new LeylineOfLightningEffect(), true);
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayerOrPlaneswalker());
         this.addAbility(ability);
     }
 
@@ -71,21 +70,21 @@ public class LeylineOfLightning extends CardImpl {
 }
 
 class LeylineOfLightningEffect extends DamageTargetEffect {
-    
+
     LeylineOfLightningEffect() {
         super(1);
         this.staticText = "you may pay {1}. If you do, {this} deals 1 damage to target player.";
     }
-    
+
     LeylineOfLightningEffect(final LeylineOfLightningEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public LeylineOfLightningEffect copy() {
         return new LeylineOfLightningEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());

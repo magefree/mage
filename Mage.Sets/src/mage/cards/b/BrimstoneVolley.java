@@ -37,7 +37,7 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 import mage.watchers.Watcher;
 import mage.watchers.common.MorbidWatcher;
 
@@ -47,13 +47,12 @@ import mage.watchers.common.MorbidWatcher;
 public class BrimstoneVolley extends CardImpl {
 
     public BrimstoneVolley(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{R}");
 
-
-        // Brimstone Volley deals 3 damage to target creature or player.
+        // Brimstone Volley deals 3 damage to any target.
         // Morbid - Brimstone Volley deals 5 damage to that creature or player instead if a creature died this turn.
         this.getSpellAbility().addEffect(new BrimstoneVolleyEffect());
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
     public BrimstoneVolley(final BrimstoneVolley card) {
@@ -70,7 +69,7 @@ class BrimstoneVolleyEffect extends OneShotEffect {
 
     public BrimstoneVolleyEffect() {
         super(Outcome.Damage);
-        staticText = "{this} deals 3 damage to target creature or player.\n Morbid - {this} deals 5 damage to that creature or player instead if a creature died this turn";
+        staticText = "{this} deals 3 damage to any target.\n Morbid - {this} deals 5 damage to that permanent or player instead if a creature died this turn";
     }
 
     public BrimstoneVolleyEffect(final BrimstoneVolleyEffect effect) {
@@ -82,7 +81,7 @@ class BrimstoneVolleyEffect extends OneShotEffect {
         int damage = 3;
         Watcher watcher = game.getState().getWatchers().get(MorbidWatcher.class.getSimpleName());
         if (watcher.conditionMet()) {
-              damage = 5;
+            damage = 5;
         }
         Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
         if (permanent != null) {

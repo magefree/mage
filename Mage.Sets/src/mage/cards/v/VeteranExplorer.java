@@ -34,9 +34,9 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
@@ -119,12 +119,7 @@ class VeteranExplorerEffect extends OneShotEffect {
             TargetCardInLibrary target = new TargetCardInLibrary(0, 2, StaticFilters.FILTER_BASIC_LAND_CARD);
             if (player.searchLibrary(target, game)) {
                 if (!target.getTargets().isEmpty()) {
-                    for (UUID cardId : (List<UUID>) target.getTargets()) {
-                        Card card = player.getLibrary().getCard(cardId, game);
-                        if (card != null) {
-                            card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), player.getId());
-                        }
-                    }
+                    player.moveCards(new CardsImpl(target.getTargets()), Zone.BATTLEFIELD, source, game);
                 }
             }
         }

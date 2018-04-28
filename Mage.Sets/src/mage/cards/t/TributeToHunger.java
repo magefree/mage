@@ -92,7 +92,7 @@ class TributeToHungerEffect extends OneShotEffect {
                 Permanent permanent = game.getPermanent(target.getFirstTarget());
                 if (permanent != null) {
                     permanent.sacrifice(source.getSourceId(), game);
-                    controller.gainLife(permanent.getToughness().getValue(), game);
+                    controller.gainLife(permanent.getToughness().getValue(), game, source);
                 }
             }
             return true;

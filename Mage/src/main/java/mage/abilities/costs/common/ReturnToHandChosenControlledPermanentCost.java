@@ -52,9 +52,14 @@ public class ReturnToHandChosenControlledPermanentCost extends CostImpl {
         target.setNotTarget(true);
         this.addTarget(target);
         if (target.getMaxNumberOfTargets() > 1 && target.getMaxNumberOfTargets() == target.getNumberOfTargets()) {
-            this.text = "return " + CardUtil.numberToText(target.getMaxNumberOfTargets()) + ' ' + target.getTargetName() + " you control to their owner's hand";
+            this.text = "return " + CardUtil.numberToText(target.getMaxNumberOfTargets()) + ' '
+                    + target.getTargetName()
+                    + (target.getTargetName().endsWith(" you control") ? "" : " you control")
+                    + " to their owner's hand";
         } else {
-            this.text = "return " + target.getTargetName() + " you control to its owner's hand";
+            this.text = "return " + target.getTargetName()
+                    + (target.getTargetName().endsWith(" you control") ? "" : " you control")
+                    + " to its owner's hand";
         }
     }
 

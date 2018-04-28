@@ -72,7 +72,7 @@ public class DeathriteShaman extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 
-        // {T}: Exile target land card from a graveyard. Add one mana of any color to your mana pool.
+        // {T}: Exile target land card from a graveyard. Add one mana of any color.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new TapSourceCost());
         ability.addEffect(new AddManaOfAnyColorEffect());
         ability.addTarget(new TargetCardInGraveyard(new FilterLandCard("land card from a graveyard")));

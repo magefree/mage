@@ -34,6 +34,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.MultikickerCount;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.MultikickerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -41,8 +42,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.game.Game;
-import mage.players.Player;
-import mage.target.TargetPlayer;
+import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
  *
@@ -51,7 +51,7 @@ import mage.target.TargetPlayer;
 public class DeathforgeShaman extends CardImpl {
 
     public DeathforgeShaman(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}");
         this.subtype.add(SubType.OGRE);
         this.subtype.add(SubType.SHAMAN);
 
@@ -63,7 +63,7 @@ public class DeathforgeShaman extends CardImpl {
 
         // When Deathforge Shaman enters the battlefield, it deals damage to target player equal to twice the number of times it was kicked.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DeathforgeShamanEffect());
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayerOrPlaneswalker());
         this.addAbility(ability);
     }
 
@@ -81,7 +81,7 @@ class DeathforgeShamanEffect extends OneShotEffect {
 
     public DeathforgeShamanEffect() {
         super(Outcome.Damage);
-        staticText = "it deals damage to target player equal to twice the number of times it was kicked";
+        staticText = "it deals damage to target player or planeswalker equal to twice the number of times it was kicked";
     }
 
     public DeathforgeShamanEffect(final DeathforgeShamanEffect effect) {
@@ -97,13 +97,7 @@ class DeathforgeShamanEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         DynamicValue value = new MultikickerCount();
         int damage = value.calculate(game, source, this) * 2;
-
-        Player player = game.getPlayer(source.getFirstTarget());
-        if (player != null) {
-            player.damage(damage, source.getSourceId(), game, false, true);
-            return true;
-        }
-        return false;
+        return new DamageTargetEffect(damage).apply(game, source);
     }
 
 }

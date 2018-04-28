@@ -35,12 +35,12 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.AuraAttachedCount;
 import mage.abilities.dynamicvalue.common.EquipmentAttachedCount;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.constants.SubType;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 
 /**
@@ -64,7 +64,9 @@ public class ChampionOfTheFlame extends CardImpl {
         DynamicValue auraAmount = new AuraAttachedCount(2);
         DynamicValue equipAmount = new EquipmentAttachedCount(2);
         DynamicValue totalAmount = new AdditiveDynamicValue(auraAmount, equipAmount);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(totalAmount, totalAmount, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new BoostSourceEffect(totalAmount, totalAmount, Duration.WhileOnBattlefield)
+                        .setText("{this} gets +2/+2 for each Aura and Equipment attached to it")));
     }
 
     public ChampionOfTheFlame(final ChampionOfTheFlame card) {

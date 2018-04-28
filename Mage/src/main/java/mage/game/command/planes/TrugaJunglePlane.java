@@ -29,11 +29,12 @@ package mage.game.command.planes;
 
 import java.util.ArrayList;
 import java.util.List;
-import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.common.IsStillOnPlaneCondition;
 import mage.abilities.condition.common.MainPhaseStackEmptyCondition;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.RevealLibraryPutIntoHandEffect;
 import mage.abilities.effects.common.RollPlanarDieEffect;
@@ -54,12 +55,17 @@ import mage.watchers.common.PlanarRollWatcher;
  */
 public class TrugaJunglePlane extends Plane {
 
+    private static final String rule = "All lands have '{t}: Add one mana of any color";
+
     public TrugaJunglePlane() {
         this.setName("Plane - Truga Jungle");
         this.setExpansionSetCodeForImage("PCA");
 
-        // All lands have '{t}: Add one mana of any color to your mana pool"
-        Ability ability = new SimpleStaticAbility(Zone.COMMAND, new GainAbilityAllEffect(new AnyColorManaAbility(), Duration.Custom, StaticFilters.FILTER_LANDS, false));
+        SimpleStaticAbility ability
+                = new SimpleStaticAbility(Zone.COMMAND, new ConditionalContinuousEffect(
+                        new GainAbilityAllEffect(new AnyColorManaAbility(), Duration.Custom, StaticFilters.FILTER_LANDS),
+                        new IsStillOnPlaneCondition(this.getName()),
+                        rule));
         this.getAbilities().add(ability);
 
         // Active player can roll the planar die: Whenever you roll {CHAOS}, reveal the top three cards of your libary.  Put all land cards revealed this way into your hand the rest on the bottom of your library in any order.

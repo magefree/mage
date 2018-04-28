@@ -98,7 +98,7 @@ class FiligreeAngelEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             int life = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game) * 3;
-            player.gainLife(life, game);
+            player.gainLife(life, game, source);
         }
         return true;
     }

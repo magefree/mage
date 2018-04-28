@@ -43,6 +43,10 @@ public class Constructed extends DeckValidator {
 
     private static final Logger logger = Logger.getLogger(DeckValidator.class);
 
+    protected static List<String> anyNumberCardsAllowed = new ArrayList<>(Arrays.asList("Relentless Rats", "Shadowborn Apostle", "Rat Colony"));
+    protected static List<String> basicLandNames = new ArrayList<>(
+            Arrays.asList("Forest", "Island", "Mountain", "Swamp", "Plains", "Wastes", "Snow-Covered Forest",
+                    "Snow-Covered Island", "Snow-Covered Mountain", "Snow-Covered Swamp", "Snow-Covered Plains"));
     protected List<String> banned = new ArrayList<>();
     protected List<String> restricted = new ArrayList<>();
     protected List<String> setCodes = new ArrayList<>();
@@ -74,14 +78,12 @@ public class Constructed extends DeckValidator {
             valid = false;
         }
 
-        List<String> basicLandNames = new ArrayList<>(Arrays.asList("Forest", "Island", "Mountain", "Swamp", "Plains", "Wastes",
-                "Snow-Covered Forest", "Snow-Covered Island", "Snow-Covered Mountain", "Snow-Covered Swamp", "Snow-Covered Plains"));
         Map<String, Integer> counts = new HashMap<>();
         countCards(counts, deck.getCards());
         countCards(counts, deck.getSideboard());
         for (Entry<String, Integer> entry : counts.entrySet()) {
             if (entry.getValue() > 4) {
-                if (!basicLandNames.contains(entry.getKey()) && !entry.getKey().equals("Relentless Rats") && !entry.getKey().equals("Shadowborn Apostle")) {
+                if (!basicLandNames.contains(entry.getKey()) && !anyNumberCardsAllowed.contains(entry.getKey())) {
                     invalid.put(entry.getKey(), "Too many: " + entry.getValue());
                     valid = false;
                 }

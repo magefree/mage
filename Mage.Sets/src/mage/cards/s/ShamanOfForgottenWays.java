@@ -67,7 +67,7 @@ public class ShamanOfForgottenWays extends CardImpl {
         this.power = new MageInt(	2);
         this.toughness = new MageInt(3);
 
-        // {T}:Add two mana in any combination of colors to your mana pool. Spend this mana only to cast creature spells.
+        // {T}:Add two mana in any combination of colors. Spend this mana only to cast creature spells.
         this.addAbility(new ConditionalAnyColorManaAbility(2, new ShamanOfForgottenWaysManaBuilder()));
         
         // <i>Formidable</i> - {9}{G}{G},{T}:Each player's life total becomes the number of creatures he or she controls. Activate the ability only if creatures you control have total power 8 or greater.
@@ -147,7 +147,7 @@ class ShamanOfForgottenWaysEffect extends OneShotEffect {
                 Player player = game.getPlayer(playerId);
                 if (player != null){
                     int numberCreatures = game.getBattlefield().getAllActivePermanents(filter, playerId, game).size();
-                    player.setLife(numberCreatures, game);
+                    player.setLife(numberCreatures, game, source);
                 }
             }
             return true;

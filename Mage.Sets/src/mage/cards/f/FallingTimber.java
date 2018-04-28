@@ -59,7 +59,7 @@ public class FallingTimber extends CardImpl {
         this.addAbility(new KickerAbility(new SacrificeTargetCost(new TargetControlledPermanent(1, 1, new FilterControlledLandPermanent("a land"), true))));
         // Prevent all combat damage target creature would deal this turn. If Falling Timber was kicked, prevent all combat damage another target creature would deal this turn.
         Effect effect = new PreventDamageByTargetEffect(Duration.EndOfTurn, true);
-        effect.setText("Prevent all combat damage target creature would deal this turn. If {this} was kicked, prevent all combat damage another target creature would deal this turn.");
+        effect.setText("Prevent all combat damage target creature would deal this turn. if this spell was kicked, prevent all combat damage another target creature would deal this turn.");
         this.getSpellAbility().addEffect(effect);
         originalId = this.getSpellAbility().getOriginalId();
     }

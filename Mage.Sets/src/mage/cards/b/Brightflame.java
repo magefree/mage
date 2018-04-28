@@ -105,7 +105,7 @@ class BrightflameEffect extends OneShotEffect {
             
             Player you = game.getPlayer(source.getControllerId());
             if (you != null && damageDealt > 0) {
-                you.gainLife(damageDealt, game);
+                you.gainLife(damageDealt, game, source);
             }
             return true;
         }

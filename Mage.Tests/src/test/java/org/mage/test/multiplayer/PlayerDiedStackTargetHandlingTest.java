@@ -48,7 +48,7 @@ public class PlayerDiedStackTargetHandlingTest extends CardTestMultiPlayerBase {
     public void TestDeadPlayerIsNoLongerValidTarget() {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
-        // Lightning Helix deals 3 damage to target creature or player and you gain 3 life.
+        // Lightning Helix deals 3 damage to any target and you gain 3 life.
         addCard(Zone.HAND, playerA, "Lightning Helix", 2); // Instant {R}{W}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Helix", playerD);

@@ -178,7 +178,11 @@ class AgyremRestrictionEffect extends RestrictionEffect {
 
     @Override
     public boolean canAttack(Permanent attacker, UUID defenderId, Ability source, Game game) {
-        return !defenderId.equals(source.getControllerId());
+        Plane cPlane = game.getState().getCurrentPlane();
+        if (cPlane != null && cPlane.getName().equalsIgnoreCase("Plane - Agyrem")) {
+            return !defenderId.equals(source.getControllerId());
+        }
+        return true;
     }
 
     @Override

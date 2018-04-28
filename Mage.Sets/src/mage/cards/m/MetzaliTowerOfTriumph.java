@@ -71,7 +71,7 @@ public class MetzaliTowerOfTriumph extends CardImpl {
         ability.setRuleAtTheTop(true);
         this.addAbility(ability);
 
-        // {t}: Add one mana of any color to your mana pool.
+        // {t}: Add one mana of any color.
         this.addAbility(new AnyColorManaAbility());
 
         // {1}{R}, {T}: Metzali, Tower of Triumph deals 2 damage to each opponent.

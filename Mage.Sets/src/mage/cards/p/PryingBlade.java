@@ -56,7 +56,7 @@ public class PryingBlade extends CardImpl {
         // Equipped creature gets +1/+0.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 0)));
 
-        // Whenever equipped creature deals combat damage to a player, create a colorless Treasure artifact token with "{t}, Sacrifice this artifact: Add one mana of any color to your mana pool."
+        // Whenever equipped creature deals combat damage to a player, create a colorless Treasure artifact token with "{t}, Sacrifice this artifact: Add one mana of any color."
         this.addAbility(new DealsDamageToAPlayerAttachedTriggeredAbility(new CreateTokenEffect(new TreasureToken()), "equipped creature", false));
 
         // Equip {2}

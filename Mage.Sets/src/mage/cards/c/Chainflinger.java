@@ -42,7 +42,7 @@ import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -57,18 +57,18 @@ public class Chainflinger extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // {1}{R}, {tap}: Chainflinger deals 1 damage to target creature or player.
+        // {1}{R}, {tap}: Chainflinger deals 1 damage to any target.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1),new ManaCostsImpl("{1}{R}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
-        // Threshold - {2}{R}, {tap}: Chainflinger deals 2 damage to target creature or player. Activate this ability only if seven or more cards are in your graveyard.
+        // Threshold - {2}{R}, {tap}: Chainflinger deals 2 damage to any target. Activate this ability only if seven or more cards are in your graveyard.
         Ability thresholdAbility = new ConditionalActivatedAbility(Zone.BATTLEFIELD,
             new DamageTargetEffect(2),
             new ManaCostsImpl("{2}{R}"),
             new CardsInControllerGraveCondition(7));
         thresholdAbility.addCost(new TapSourceCost());
-        thresholdAbility.addTarget(new TargetCreatureOrPlayer());
+        thresholdAbility.addTarget(new TargetAnyTarget());
         thresholdAbility.setAbilityWord(AbilityWord.THRESHOLD);
         this.addAbility(thresholdAbility);
     }

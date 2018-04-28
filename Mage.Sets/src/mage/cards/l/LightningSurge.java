@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TimingRule;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -47,17 +47,17 @@ import mage.target.common.TargetCreatureOrPlayer;
 public class LightningSurge extends CardImpl {
 
     public LightningSurge(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
 
-        // Lightning Surge deals 4 damage to target creature or player.
+        // Lightning Surge deals 4 damage to any target.
         // Threshold - If seven or more cards are in your graveyard, instead Lightning Surge deals 6 damage to that creature or player and the damage can't be prevented.
-        Effect effect = new ConditionalOneShotEffect(new DamageTargetEffect(6, false), 
-                                                     new DamageTargetEffect(4), 
-                                                     new CardsInControllerGraveCondition(7),
-                                                     "{this} deals 4 damage to target creature or player.<br/><br/><i>Threshold</i> - {this} deals 6 damage to that creature or player and the damage can't be prevented instead if seven or more cards are in your graveyard.");
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        Effect effect = new ConditionalOneShotEffect(new DamageTargetEffect(6, false),
+                new DamageTargetEffect(4),
+                new CardsInControllerGraveCondition(7),
+                "{this} deals 4 damage to any target.<br/><br/><i>Threshold</i> - {this} deals 6 damage to that permanent or player and the damage can't be prevented instead if seven or more cards are in your graveyard.");
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
         this.getSpellAbility().addEffect(effect);
-        
+
         // Flashback {5}{R}{R}
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{5}{R}{R}"), TimingRule.SORCERY));
     }

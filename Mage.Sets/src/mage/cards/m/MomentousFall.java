@@ -97,7 +97,7 @@ class MomentousFallEffect extends OneShotEffect {
                 controller.drawCards(power, game);
             }
             if (toughness > 0) {
-                controller.gainLife(toughness, game);
+                controller.gainLife(toughness, game, source);
             }
             return true;
         }

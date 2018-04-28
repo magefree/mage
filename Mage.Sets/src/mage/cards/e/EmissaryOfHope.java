@@ -97,7 +97,7 @@ class EmissaryOfHopeEffect extends OneShotEffect {
         if (targetPlayer != null && sourcePlayer != null) {
             int amount = game.getBattlefield().count(filter, source.getSourceId(), targetPlayer.getId(), game);
             if (amount > 0) {
-                sourcePlayer.gainLife(amount, game);
+                sourcePlayer.gainLife(amount, game, source);
             }
             return true;
         }

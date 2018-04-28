@@ -52,8 +52,7 @@ import mage.util.CardUtil;
 public class Flash extends CardImpl {
 
     public Flash(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
 
         // You may put a creature card from your hand onto the battlefield. If you do, sacrifice it unless you pay its mana cost reduced by up to {2}.
         this.getSpellAbility().addEffect(new FlashEffect());
@@ -70,7 +69,7 @@ public class Flash extends CardImpl {
 }
 
 class FlashEffect extends OneShotEffect {
-    
+
     private static final String choiceText = "Put a creature card from your hand onto the battlefield?";
 
     public FlashEffect() {
@@ -89,35 +88,33 @@ class FlashEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null || !player.chooseUse(Outcome.PutCreatureInPlay, choiceText, source, game)) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null || !controller.chooseUse(Outcome.PutCreatureInPlay, choiceText, source, game)) {
             return false;
         }
 
         TargetCardInHand target = new TargetCardInHand(new FilterCreatureCard());
-        if (player.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
+        if (controller.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
-                card.putOntoBattlefield(game, Zone.HAND, source.getSourceId(), source.getControllerId());
-                
+                controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                 ManaCosts<ManaCost> reducedCost = ManaCosts.removeVariableManaCost(CardUtil.reduceCost(card.getManaCost(), 2));
-                StringBuilder sb = new StringBuilder("Pay ").append(reducedCost.getText()).append('?');
-                if (player.chooseUse(Outcome.Benefit, sb.toString(), source, game)) {
+                if (controller.chooseUse(Outcome.Benefit, String.valueOf("Pay " + reducedCost.getText()) + Character.toString('?'), source, game)) {
                     reducedCost.clearPaid();
                     if (reducedCost.pay(source, game, source.getSourceId(), source.getControllerId(), false, null)) {
                         return true;
                     }
                 }
-                
+
                 Permanent permanent = game.getPermanent(card.getId());
                 if (permanent != null) {
                     permanent.sacrifice(source.getSourceId(), game);
                 }
-                
+
                 return true;
             }
         }
         return false;
     }
-    
+
 }

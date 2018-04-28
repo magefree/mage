@@ -32,7 +32,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -44,8 +44,8 @@ public class SearingWind extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{8}{R}");
 
 
-        // Searing Wind deals 10 damage to target creature or player.
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        // Searing Wind deals 10 damage to any target.
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
         this.getSpellAbility().addEffect(new DamageTargetEffect(10));
     }
 

@@ -40,7 +40,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.common.FilterInstantOrSorcerySpell;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -54,10 +54,10 @@ public class DynavoltTower extends CardImpl {
         // Whenever you cast an instant or sorcery spell, you get {E}{E}.
         this.addAbility(new SpellCastControllerTriggeredAbility(new GetEnergyCountersControllerEffect(2), new FilterInstantOrSorcerySpell(), false));
 
-        // {T}, Pay {E}{E}{E}{E}{E}: Dynavolt Tower deals 3 damage to target creature or player.
+        // {T}, Pay {E}{E}{E}{E}{E}: Dynavolt Tower deals 3 damage to any target.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(3), new TapSourceCost());
         ability.addCost(new PayEnergyCost(5));
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }
 

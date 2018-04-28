@@ -44,8 +44,7 @@ import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.players.Player;
-import mage.target.TargetPlayer;
+import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
  *
@@ -65,7 +64,7 @@ public class VengefulArchon extends CardImpl {
 
         // {X}: Prevent the next X damage that would be dealt to you this turn. If damage is prevented this way, Vengeful Archon deals that much damage to target player.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new VengefulArchonEffect(), new ManaCostsImpl("{X}"));
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayerOrPlaneswalker());
         this.addAbility(ability);
     }
 
@@ -84,7 +83,7 @@ class VengefulArchonEffect extends PreventDamageToControllerEffect {
 
     public VengefulArchonEffect() {
         super(Duration.EndOfTurn, false, true, new ManacostVariableValue());
-        staticText = "Prevent the next X damage that would be dealt to you this turn. If damage is prevented this way, {this} deals that much damage to target player";
+        staticText = "Prevent the next X damage that would be dealt to you this turn. If damage is prevented this way, {this} deals that much damage to target player or planeswalker";
     }
 
     public VengefulArchonEffect(final VengefulArchonEffect effect) {
@@ -101,10 +100,7 @@ class VengefulArchonEffect extends PreventDamageToControllerEffect {
         PreventionEffectData preventionEffectData = super.preventDamageAction(event, source, game);
         int damage = preventionEffectData.getPreventedDamage();
         if (damage > 0) {
-            Player player = game.getPlayer(source.getFirstTarget());
-            if (player != null) {
-                player.damage(damage, source.getSourceId(), game, false, true);
-            }
+            game.damagePlayerOrPlaneswalker(source.getFirstTarget(), damage, source.getSourceId(), game, false, true);
         }
         return preventionEffectData;
     }

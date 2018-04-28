@@ -64,10 +64,10 @@ public class ShelteredAerie extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
-        // Enchanted land has "{T}: Add two mana of any one color to your mana pool."
+        // Enchanted land has "{T}: Add two mana of any one color."
         Ability gainedAbility = new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(2), new TapSourceCost());
         Effect effect = new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA);
-        effect.setText("Enchanted land has \"{T}: Add two mana of any one color to your mana pool.\"");
+        effect.setText("Enchanted land has \"{T}: Add two mana of any one color.\"");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
 
     }

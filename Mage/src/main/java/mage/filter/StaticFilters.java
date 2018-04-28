@@ -41,6 +41,17 @@ public final class StaticFilters {
     static {
         FILTER_ENCHANTMENT_PERMANENT.setLockedFilter(true);
     }
+    public static final FilterCard FILTER_CARD = new FilterCard("card");
+
+    static {
+        FILTER_CARD.setLockedFilter(true);
+    }
+
+    public static final FilterCard FILTER_CARD_CARDS = new FilterCard("cards");
+
+    static {
+        FILTER_CARD_CARDS.setLockedFilter(true);
+    }
 
     public static final FilterArtifactCard FILTER_CARD_ARTIFACT = new FilterArtifactCard();
 
@@ -64,7 +75,14 @@ public final class StaticFilters {
     static {
         FILTER_CARD_CREATURE_YOUR_GRAVEYARD.setLockedFilter(true);
     }
-    public static final FilterCard FILTER_CARD_LAND = new FilterLandCard();
+
+    public static final FilterCard FILTER_CARD_FROM_YOUR_GRAVEYARD = new FilterCard("card from your graveyard");
+
+    static {
+        FILTER_CARD_FROM_YOUR_GRAVEYARD.setLockedFilter(true);
+    }
+
+    public static final FilterLandCard FILTER_CARD_LAND = new FilterLandCard();
 
     static {
         FILTER_CARD_LAND.setLockedFilter(true);
@@ -142,6 +160,11 @@ public final class StaticFilters {
     static {
         FILTER_CONTROLLED_PERMANENT_ARTIFACT.setLockedFilter(true);
     }
+    public static final FilterControlledPermanent FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN = new FilterControlledArtifactPermanent("an artifact");
+
+    static {
+        FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN.setLockedFilter(true);
+    }
     public static final FilterControlledPermanent FILTER_CONTROLLED_PERMANENT_ARTIFACT_OR_CREATURE = new FilterControlledPermanent("artifact or creature you control");
 
     static {
@@ -155,6 +178,12 @@ public final class StaticFilters {
 
     static {
         FILTER_CONTROLLED_PERMANENT_LAND.setLockedFilter(true);
+    }
+
+    public static final FilterControlledPermanent FILTER_CONTROLLED_PERMANENT_LANDS = new FilterControlledLandPermanent("lands you control");
+
+    static {
+        FILTER_CONTROLLED_PERMANENT_LANDS.setLockedFilter(true);
     }
 
     public static final FilterPermanent FILTER_OPPONENTS_PERMANENT = new FilterPermanent("permanent an opponent controls");

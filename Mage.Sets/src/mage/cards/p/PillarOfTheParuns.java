@@ -51,7 +51,7 @@ public class PillarOfTheParuns extends CardImpl {
     public PillarOfTheParuns(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
-        // {T}: Add one mana of any color to your mana pool. Spend this mana only to cast a multicolored spell.
+        // {T}: Add one mana of any color. Spend this mana only to cast a multicolored spell.
         this.addAbility(new ConditionalAnyColorManaAbility(1, new ConditionalSpellManaBuilder(filter)));
     }
 

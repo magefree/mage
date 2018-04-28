@@ -35,7 +35,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 import mage.watchers.common.DamagedByWatcher;
 
 /**
@@ -47,9 +47,9 @@ public class IncendiaryFlow extends CardImpl {
     public IncendiaryFlow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}");
 
-        // Incendiary Flow deals 3 damage to target creature or player. If a creature dealt damage this way would die this turn, exile it instead.
+        // Incendiary Flow deals 3 damage to any target. If a creature dealt damage this way would die this turn, exile it instead.
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
         Effect effect = new DealtDamageToCreatureBySourceDies(this, Duration.EndOfTurn);
         effect.setText("If a creature dealt damage this way would die this turn, exile it instead");
         this.getSpellAbility().addEffect(effect);

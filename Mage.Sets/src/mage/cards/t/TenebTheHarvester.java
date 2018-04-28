@@ -51,7 +51,7 @@ import mage.target.common.TargetCardInGraveyard;
 public class TenebTheHarvester extends CardImpl {
 
     public TenebTheHarvester(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{G}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{B}{G}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRAGON);
 

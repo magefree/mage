@@ -36,7 +36,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.TimingRule;
-import mage.target.common.TargetCreatureOrPlayerAmount;
+import mage.target.common.TargetAnyTargetAmount;
 
 /**
  *
@@ -49,7 +49,7 @@ public class Embolden extends CardImpl {
 
         // Prevent the next 4 damage that would be dealt this turn to any number of target creatures and/or players, divided as you choose.
         this.getSpellAbility().addEffect(new PreventDamageToTargetMultiAmountEffect(Duration.EndOfTurn, 4));
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayerAmount(4));
+        this.getSpellAbility().addTarget(new TargetAnyTargetAmount(4));
 
         // Flashback {1}{W}
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{1}{W}"), TimingRule.INSTANT));

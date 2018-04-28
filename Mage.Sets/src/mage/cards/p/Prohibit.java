@@ -72,7 +72,7 @@ class ProhibitEffect extends OneShotEffect {
 
     ProhibitEffect() {
         super(Outcome.DestroyPermanent);
-        this.staticText = "Counter target spell if its converted mana cost is 2 or less. If {this} was kicked, counter that spell if its converted mana cost is 4 or less instead.";
+        this.staticText = "Counter target spell if its converted mana cost is 2 or less. if this spell was kicked, counter that spell if its converted mana cost is 4 or less instead.";
     }
 
     ProhibitEffect(final ProhibitEffect effect) {

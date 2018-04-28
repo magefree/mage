@@ -82,11 +82,16 @@ public class PreventDamageToTargetEffect extends PreventionEffectImpl {
         }
         StringBuilder sb = new StringBuilder();
         if (amountToPrevent == Integer.MAX_VALUE) {
-            sb.append("prevent all damage that would be dealt to target ");
+            sb.append("prevent all damage that would be dealt to ");
         } else {
-            sb.append("prevent the next ").append(amountToPrevent).append(" damage that would be dealt to target ");
+            sb.append("prevent the next ").append(amountToPrevent).append(" damage that would be dealt to ");
         }
-        sb.append(mode.getTargets().get(0).getTargetName());
+        String targetName = mode.getTargets().get(0).getTargetName();
+        if (targetName.contains("any")) {
+            sb.append(targetName);
+        } else {
+            sb.append("target ").append(targetName);
+        }
         if (!duration.toString().isEmpty()) {
             sb.append(' ');
             if (duration == Duration.EndOfTurn) {

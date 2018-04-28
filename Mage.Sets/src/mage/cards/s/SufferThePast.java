@@ -103,7 +103,7 @@ class SufferThePastEffect extends OneShotEffect {
                                 numberExiled ++;
                             }
                         }
-                        you.gainLife(numberExiled, game);
+                        you.gainLife(numberExiled, game, source);
                         targetPlayer.loseLife(numberExiled, game, false);
                     }
                 }

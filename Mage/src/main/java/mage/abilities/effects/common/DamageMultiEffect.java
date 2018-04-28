@@ -97,7 +97,7 @@ public class DamageMultiEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        return this.sourceName + " deals " + amount.toString() + " damage divided as you choose among any number of target " + mode.getTargets().get(0).getTargetName();
+        return this.sourceName + " deals " + amount.toString() + " damage divided as you choose among any number of " + mode.getTargets().get(0).getTargetName();
     }
 
     public String getSourceName() {

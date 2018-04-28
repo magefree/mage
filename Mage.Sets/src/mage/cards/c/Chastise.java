@@ -89,7 +89,7 @@ class ChastiseEffect extends OneShotEffect {
             int power = permanent.getPower().getValue();
             Player player = game.getPlayer(source.getControllerId());
             if (player != null) {
-                player.gainLife(power, game);
+                player.gainLife(power, game, source);
             }
             return true;
         }

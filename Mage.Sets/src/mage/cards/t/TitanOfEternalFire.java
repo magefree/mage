@@ -44,7 +44,7 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -59,12 +59,12 @@ public class TitanOfEternalFire extends CardImpl {
         this.power = new MageInt(5);
         this.toughness = new MageInt(6);
 
-        // Each Human creature you control has "{R}, {T}: This creature deals 1 damage to target creature or player."
+        // Each Human creature you control has "{R}, {T}: This creature deals 1 damage to any target."
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl("{R}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         Effect effect = new GainAbilityControlledEffect(ability, Duration.WhileOnBattlefield, new FilterCreaturePermanent(SubType.HUMAN, "Each Human creature"));
-        effect.setText("Each Human creature you control has \"{R}, {T}: This creature deals 1 damage to target creature or player.\"");
+        effect.setText("Each Human creature you control has \"{R}, {T}: This creature deals 1 damage to any target.\"");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 

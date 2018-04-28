@@ -48,10 +48,10 @@ public class MoxLotus extends CardImpl {
     public MoxLotus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{15}");
 
-        // {t}: Add infinity (or 1*10^9 to account for a potential mana reflection) to your mana pool.        
+        // {t}: Add infinity (or 1*10^9 to account for a potential mana reflection).        
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(1000000000), new TapSourceCost()));
 
-        // {100}: Add one mana of any color to your mana pool.
+        // {100}: Add one mana of any color.
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(1), new ManaCostsImpl("{100}"));
         this.addAbility(ability);
 

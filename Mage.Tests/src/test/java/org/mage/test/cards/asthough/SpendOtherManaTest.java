@@ -55,7 +55,7 @@ public class SpendOtherManaTest extends CardTestPlayerBase {
         // {W}{B}: Target artifact creature gains deathtouch and lifelink until end of turn.
         addCard(Zone.BATTLEFIELD, playerA, "Sydri, Galvanic Genius");
         //{T}: Add {C}. ( represents colorless mana.)
-        // {1}, {T}: Add one mana of any color to your mana pool.
+        // {1}, {T}: Add one mana of any color.
         addCard(Zone.BATTLEFIELD, playerA, "Unknown Shores");
         addCard(Zone.BATTLEFIELD, playerB, "Mountain");
 

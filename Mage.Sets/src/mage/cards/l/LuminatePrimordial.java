@@ -119,7 +119,7 @@ class LuminatePrimordialEffect extends OneShotEffect {
                     Player controller = game.getPlayer(targetCreature.getControllerId());
                     targetCreature.moveToExile(null, null, source.getSourceId(), game);
                     if (controller != null && amountLife != 0) {
-                        controller.gainLife(amountLife, game);
+                        controller.gainLife(amountLife, game, source);
                     }
                 }
             }

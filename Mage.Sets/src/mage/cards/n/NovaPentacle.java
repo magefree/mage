@@ -43,20 +43,19 @@ import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.TargetSource;
 import mage.target.common.TargetOpponentsChoicePermanent;
 
 /**
- * 
+ *
  * @author L_J
  */
 public class NovaPentacle extends CardImpl {
 
     public NovaPentacle(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // {3}, {tap}: The next time a source of your choice would deal damage to you this turn, that damage is dealt to target creature of an opponent's choice instead
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new NovaPentacleEffect(), new GenericManaCost(3));
@@ -80,7 +79,7 @@ class NovaPentacleEffect extends RedirectionEffect {
     private final TargetSource damageSource;
 
     public NovaPentacleEffect() {
-        super(Duration.EndOfTurn, Integer.MAX_VALUE, true);
+        super(Duration.EndOfTurn, Integer.MAX_VALUE, UsageType.ONE_USAGE_ABSOLUTE);
         staticText = "The next time a source of your choice would deal damage to you this turn, that damage is dealt to target creature of an opponent's choice instead";
         this.damageSource = new TargetSource();
     }

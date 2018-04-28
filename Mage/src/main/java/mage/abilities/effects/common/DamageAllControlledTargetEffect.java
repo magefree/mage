@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.effects.common;
 
 import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 
 /**
  *
@@ -41,10 +41,10 @@ import mage.game.permanent.Permanent;
  */
 public class DamageAllControlledTargetEffect extends OneShotEffect {
 
-    private FilterCreaturePermanent filter;
+    private FilterPermanent filter;
     private int amount;
 
-    public DamageAllControlledTargetEffect(int amount, FilterCreaturePermanent filter) {
+    public DamageAllControlledTargetEffect(int amount, FilterPermanent filter) {
         super(Outcome.Damage);
         this.amount = amount;
         this.filter = filter;
@@ -64,7 +64,11 @@ public class DamageAllControlledTargetEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Permanent permanent: game.getBattlefield().getAllActivePermanents(filter, source.getFirstTarget(), game)) {
+        Player player = game.getPlayerOrPlaneswalkerController(source.getFirstTarget());
+        if (player == null) {
+            return false;
+        }
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, player.getId(), game)) {
             permanent.damage(amount, source.getSourceId(), game, false, true);
         }
         return true;

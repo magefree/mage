@@ -69,7 +69,7 @@ public class BloodMoonTest extends CardTestPlayerBase {
         /**
          * Kabira Crossroads Land Kabira Crossroads enters the battlefield
          * tapped. When Kabira Crossroads enters the battlefield, you gain 2
-         * life. {W}: Add to your mana pool.
+         * life. {W}: Add.
          *
          */
         addCard(Zone.HAND, playerA, "Kabira Crossroads");

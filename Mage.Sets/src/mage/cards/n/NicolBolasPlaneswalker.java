@@ -45,8 +45,8 @@ import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPermanent;
-import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
  *
@@ -61,7 +61,7 @@ public class NicolBolasPlaneswalker extends CardImpl {
     }
 
     public NicolBolasPlaneswalker(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{4}{U}{B}{B}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{U}{B}{B}{R}");
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.BOLAS);
 
@@ -77,9 +77,13 @@ public class NicolBolasPlaneswalker extends CardImpl {
         this.addAbility(ability);
         // -9: Nicol Bolas, Planeswalker deals 7 damage to target player. That player discards seven cards, then sacrifices seven permanents.
         ability = new LoyaltyAbility(new DamageTargetEffect(7), -9);
-        ability.addTarget(new TargetPlayer());
-        ability.addEffect(new DiscardTargetEffect(7));
-        ability.addEffect(new SacrificeEffect(new FilterPermanent(), 7, "then"));
+        ability.addTarget(new TargetPlayerOrPlaneswalker());
+        ability.addEffect(new DiscardTargetEffect(7)
+                .setText("That player or that planeswalker’s controller discards seven cards")
+        );
+        ability.addEffect(new SacrificeEffect(new FilterPermanent(), 7, "then")
+                .setText("then sacrifices seven permanents")
+        );
         this.addAbility(ability);
     }
 

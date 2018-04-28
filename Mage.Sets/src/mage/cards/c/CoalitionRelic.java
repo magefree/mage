@@ -57,11 +57,11 @@ public class CoalitionRelic extends CardImpl {
     public CoalitionRelic(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
-        // {tap}: Add one mana of any color to your mana pool.
+        // {tap}: Add one mana of any color.
         this.addAbility(new AnyColorManaAbility());
         // {tap}: Put a charge counter on Coalition Relic.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance(), true), new TapSourceCost()));
-        // At the beginning of your precombat main phase, remove all charge counters from Coalition Relic. Add one mana of any color to your mana pool for each charge counter removed this way.
+        // At the beginning of your precombat main phase, remove all charge counters from Coalition Relic. Add one mana of any color for each charge counter removed this way.
         this.addAbility(new BeginningOfPreCombatMainTriggeredAbility(new CoalitionRelicEffect(), TargetController.YOU, false));
     }
 
@@ -79,7 +79,7 @@ class CoalitionRelicEffect extends OneShotEffect {
 
     public CoalitionRelicEffect() {
         super(Outcome.PutManaInPool);
-        this.staticText = "remove all charge counters from Coalition Relic. Add one mana of any color to your mana pool for each charge counter removed this way";
+        this.staticText = "remove all charge counters from Coalition Relic. Add one mana of any color for each charge counter removed this way";
     }
 
     public CoalitionRelicEffect(final CoalitionRelicEffect effect) {

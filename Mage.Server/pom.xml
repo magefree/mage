@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.mage</groupId>
         <artifactId>mage-root</artifactId>
-        <version>1.4.28</version>
+        <version>1.4.29</version>
     </parent>
 
     <artifactId>mage-server</artifactId>
@@ -76,7 +76,13 @@
             <version>${project.version}</version>
             <scope>runtime</scope>
         </dependency>
-        <dependency>
+         <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>mage-game-brawlduel</artifactId>
+            <version>${project.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+       <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-compress</artifactId>
             <version>1.16.1</version>
@@ -85,6 +91,12 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>mage-game-commanderfreeforall</artifactId>
+            <version>${project.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>mage-game-brawlfreeforall</artifactId>
             <version>${project.version}</version>
             <scope>runtime</scope>
         </dependency>
@@ -290,6 +302,25 @@
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>1.7</version>
+                <executions>
+                    <execution>
+                        <id>add-source</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>add-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>target/generated-sources/xjc</source>
+                            </sources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>            
         </plugins>
 
         <finalName>mage-server</finalName>

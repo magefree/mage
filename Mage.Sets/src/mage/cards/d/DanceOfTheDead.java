@@ -81,7 +81,10 @@ public class DanceOfTheDead extends CardImpl {
         Ability ability = new ConditionalTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new DanceOfTheDeadReAttachEffect(), false),
                 SourceOnBattlefieldCondition.instance,
-                "When {this} enters the battlefield, if it's on the battlefield, it loses \"enchant creature card in a graveyard\" and gains \"enchant creature put onto the battlefield with {this}.\" Return enchanted creature card to the battlefield under your control and attach {this} to it.");
+                "When {this} enters the battlefield, if it's on the battlefield, "
+                + "it loses \"enchant creature card in a graveyard\" and gains "
+                + "\"enchant creature put onto the battlefield with {this}.\" "
+                + "Return enchanted creature card to the battlefield tapped under your control and attach {this} to it.");
         ability.addEffect(new DanceOfTheDeadChangeAbilityEffect());
         this.addAbility(ability);
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new DanceOfTheDeadLeavesBattlefieldTriggeredEffect(), false));

@@ -35,7 +35,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.target.TargetPlayer;
+import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
  *
@@ -44,7 +44,7 @@ import mage.target.TargetPlayer;
 public class HissingIguanar extends CardImpl {
 
     public HissingIguanar(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
         this.subtype.add(SubType.LIZARD);
 
         this.power = new MageInt(3);
@@ -52,7 +52,7 @@ public class HissingIguanar extends CardImpl {
 
         // Whenever another creature dies, you may have Hissing Iguanar deal 1 damage to target player.
         DiesCreatureTriggeredAbility ability = new DiesCreatureTriggeredAbility(new DamageTargetEffect(1), true, true);
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayerOrPlaneswalker());
         this.addAbility(ability);
     }
 

@@ -93,7 +93,7 @@ class WellEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         int life = 2 * game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
         if (player != null) {
-            player.gainLife(life, game);
+            player.gainLife(life, game, source);
         }
         return true;
     }

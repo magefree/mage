@@ -36,7 +36,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -50,9 +50,9 @@ public class PerilousMyr extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // When Perilous Myr dies, it deals 2 damage to target creature or player.
+        // When Perilous Myr dies, it deals 2 damage to any target.
         Ability ability = new DiesTriggeredAbility(new DamageTargetEffect(2, "it"), false);
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }
 

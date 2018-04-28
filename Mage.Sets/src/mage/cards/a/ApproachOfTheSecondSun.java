@@ -71,7 +71,7 @@ class ApproachOfTheSecondSunEffect extends OneShotEffect {
                 controller.won(game);
             } else {
                 // Gain 7 life and put this back into library.
-                controller.gainLife(7, game);
+                controller.gainLife(7, game, source);
 
                 // Put this into the library as the 7th from the top
                 if (spell.isCopiedSpell()) {

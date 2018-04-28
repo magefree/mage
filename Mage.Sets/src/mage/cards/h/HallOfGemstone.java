@@ -119,24 +119,29 @@ class HallOfGemstoneEffect extends ReplacementEffectImpl {
         if (colorChosen != null) {
             ManaEvent manaEvent = (ManaEvent) event;
             Mana mana = manaEvent.getMana();
-            int amount = mana.count();
+            // 8/23/2016 	Colorless mana added to a player’s mana pool isn’t affected.
+            int genericAmount = mana.getGeneric();
+            int colorlessAmount = mana.getColorless();
+            int coloredAmount = mana.countColored();
             switch (colorChosen.getColoredManaSymbol()) {
                 case W:
-                    mana.setToMana(Mana.WhiteMana(amount));
+                    mana.setToMana(Mana.WhiteMana(coloredAmount));
                     break;
                 case U:
-                    mana.setToMana(Mana.BlueMana(amount));
+                    mana.setToMana(Mana.BlueMana(coloredAmount));
                     break;
                 case B:
-                    mana.setToMana(Mana.BlackMana(amount));
+                    mana.setToMana(Mana.BlackMana(coloredAmount));
                     break;
                 case R:
-                    mana.setToMana(Mana.RedMana(amount));
+                    mana.setToMana(Mana.RedMana(coloredAmount));
                     break;
                 case G:
-                    mana.setToMana(Mana.GreenMana(amount));
+                    mana.setToMana(Mana.GreenMana(coloredAmount));
                     break;
             }
+            mana.setGeneric(genericAmount);
+            mana.setColorless(colorlessAmount);
         }
         return false;
     }

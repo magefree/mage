@@ -27,6 +27,7 @@
  */
 package mage.abilities.effects.common.continuous;
 
+import java.util.Locale;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.*;
@@ -74,7 +75,7 @@ public class AddCardSuperTypeAttachedEffect extends ContinuousEffectImpl {
     private void setText() {
         StringBuilder sb = new StringBuilder();
         sb.append(attachmentType.verb());
-        sb.append(" permanent is ").append(addedSuperType.toString()); //TODO add attacked card type detection
+        sb.append(" permanent is ").append(addedSuperType.toString().toLowerCase(Locale.ENGLISH)); //TODO add attacked card type detection
         staticText = sb.toString();
     }
 }

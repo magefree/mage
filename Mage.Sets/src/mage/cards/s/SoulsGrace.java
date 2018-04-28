@@ -87,7 +87,7 @@ class SoulsGraceEffect extends OneShotEffect {
         if (permanent != null && player != null) {
             int amount = permanent.getPower().getValue();
             if (amount > 0) {
-                player.gainLife(amount, game);
+                player.gainLife(amount, game, source);
                 return true;
             }
         }

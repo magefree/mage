@@ -40,8 +40,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.TargetPlayer;
+import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
  * @author nantuko
@@ -49,12 +48,12 @@ import mage.target.TargetPlayer;
 public class ScepterOfEmpires extends CardImpl {
 
     public ScepterOfEmpires(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // {tap}: Scepter of Empires deals 1 damage to target player. It deals 3 damage to that player instead if you control artifacts named Crown of Empires and Throne of Empires.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScepterOfEmpiresEffect(), new GenericManaCost(0));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayerOrPlaneswalker());
         this.addAbility(ability);
     }
 
@@ -72,7 +71,7 @@ class ScepterOfEmpiresEffect extends OneShotEffect {
 
     public ScepterOfEmpiresEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "Scepter of Empires deals 1 damage to target player. It deals 3 damage to that player instead if you control artifacts named Crown of Empires and Throne of Empires";
+        staticText = "Scepter of Empires deals 1 damage to target player or planeswalker. It deals 3 damage to that player or planeswalker instead if you control artifacts named Crown of Empires and Throne of Empires";
     }
 
     public ScepterOfEmpiresEffect(ScepterOfEmpiresEffect effect) {
@@ -89,17 +88,12 @@ class ScepterOfEmpiresEffect extends OneShotEffect {
             } else if (permanent.getName().equals("Crown of Empires")) {
                 crown = true;
             }
-            if (throne && crown) break;
+            if (throne && crown) {
+                break;
+            }
         }
-
         int amount = throne && crown ? 3 : 1;
-
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
-        if (player != null) {
-            player.damage(amount, source.getSourceId(), game, false, true);
-            return true;
-        }
-        return false;
+        return game.damagePlayerOrPlaneswalker(source.getFirstTarget(), amount, source.getSourceId(), game, false, true) > 0;
     }
 
     @Override

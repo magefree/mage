@@ -44,7 +44,7 @@ public class PreventAttachedEffectTest extends CardTestPlayerBase {
      */
     @Test
     public void testDamageToPlayerPrevented() {
-        // Whenever an opponent casts a spell, Kaervek the Merciless deals damage to target creature or player equal to that spell's converted mana cost.
+        // Whenever an opponent casts a spell, Kaervek the Merciless deals damage to any target equal to that spell's converted mana cost.
         addCard(Zone.BATTLEFIELD, playerA, "Kaervek the Merciless");
         // Flash
         // Enchant creature

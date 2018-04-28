@@ -41,7 +41,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.common.TargetOpponent;
+import mage.target.common.TargetOpponentOrPlaneswalker;
 
 /**
  *
@@ -50,8 +50,7 @@ import mage.target.common.TargetOpponent;
 public class JeskaiCharm extends CardImpl {
 
     public JeskaiCharm(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}{R}{W}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}{R}{W}");
 
         // Choose one -
         // - Put target creature on top of its owner's library.
@@ -60,11 +59,11 @@ public class JeskaiCharm extends CardImpl {
         // - Jeskai Charm deals 4 damage to target opponent.
         Mode mode = new Mode();
         mode.getEffects().add(new DamageTargetEffect(4));
-        mode.getTargets().add(new TargetOpponent());
+        mode.getTargets().add(new TargetOpponentOrPlaneswalker());
         this.getSpellAbility().addMode(mode);
         // - Creatures you control get +1/+1 and gain lifelink until end of turn.
         mode = new Mode();
-        Effect effect = new BoostControlledEffect(1,1, Duration.EndOfTurn);
+        Effect effect = new BoostControlledEffect(1, 1, Duration.EndOfTurn);
         effect.setText("Creatures you control get +1/+1");
         mode.getEffects().add(effect);
         effect = new GainAbilityControlledEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent());

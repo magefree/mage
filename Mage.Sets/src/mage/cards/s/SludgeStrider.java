@@ -158,7 +158,7 @@ class SludgeStriderEffect extends OneShotEffect {
             targetPlayer.loseLife(1, game, false);
         }
         if (you != null) {
-            you.gainLife(1, game);
+            you.gainLife(1, game, source);
         }
         return true;
     }

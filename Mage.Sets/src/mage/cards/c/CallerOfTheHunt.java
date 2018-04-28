@@ -93,7 +93,7 @@ class CallerOfTheHuntAdditionalCostEffect extends OneShotEffect {
 
     public CallerOfTheHuntAdditionalCostEffect() {
         super(Outcome.Benefit);
-        this.staticText = "As an additional cost to cast {this}, choose a creature type. \r"
+        this.staticText = "as an additional cost to cast this spell, choose a creature type. \r"
                 + "{this}'s power and toughness are each equal to the number of creatures of the chosen type on the battlefield";
     }
 

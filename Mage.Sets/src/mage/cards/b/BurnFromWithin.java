@@ -43,7 +43,7 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -55,10 +55,10 @@ public class BurnFromWithin extends CardImpl {
     public BurnFromWithin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{R}");
 
-        // Burn from Within deals X damage to target creature or player. If a creature is dealt damage this way, it loses indestructible until end of turn.
+        // Burn from Within deals X damage to any target. If a creature is dealt damage this way, it loses indestructible until end of turn.
         // If that creature would die this turn, exile it instead.
         this.getSpellAbility().addEffect(new BurnFromWithinEffect());
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
 
     }
 
@@ -76,7 +76,7 @@ class BurnFromWithinEffect extends OneShotEffect {
 
     public BurnFromWithinEffect() {
         super(Outcome.Benefit);
-        this.staticText = "{this} deals X damage to target creature or player. If a creature is dealt damage this way, it loses indestructible until end of turn. If that creature would die this turn, exile it instead";
+        this.staticText = "{this} deals X damage to any target. If a creature is dealt damage this way, it loses indestructible until end of turn. If that creature would die this turn, exile it instead";
     }
 
     public BurnFromWithinEffect(final BurnFromWithinEffect effect) {

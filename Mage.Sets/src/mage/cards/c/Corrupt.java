@@ -43,7 +43,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -54,8 +54,8 @@ public class Corrupt extends CardImpl {
     public Corrupt(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{B}");
 
-        // Corrupt deals damage to target creature or player equal to the number of Swamps you control. You gain life equal to the damage dealt this way.
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        // Corrupt deals damage to any target equal to the number of Swamps you control. You gain life equal to the damage dealt this way.
+        this.getSpellAbility().addTarget(new TargetAnyTarget());
         this.getSpellAbility().addEffect(new CorruptEffect());
     }
 
@@ -81,7 +81,7 @@ class CorruptEffect extends OneShotEffect {
 
     public CorruptEffect() {
         super(Outcome.Damage);
-        staticText = "{this} deals damage to target creature or player equal to the number of Swamps you control. You gain life equal to the damage dealt this way";
+        staticText = "{this} deals damage to any target equal to the number of Swamps you control. You gain life equal to the damage dealt this way";
     }
 
     public CorruptEffect(final CorruptEffect effect) {
@@ -107,7 +107,7 @@ class CorruptEffect extends OneShotEffect {
             }
             Player you = game.getPlayer(source.getControllerId());
             if (you != null) {
-                you.gainLife(damageDealt, game);
+                you.gainLife(damageDealt, game, source);
                 return true;
             }
         }

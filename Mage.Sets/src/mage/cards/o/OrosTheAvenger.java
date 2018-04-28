@@ -51,13 +51,13 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 public class OrosTheAvenger extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonwhite creature");
-    
+
     static {
         filter.add(Predicates.not(new ColorPredicate(ObjectColor.WHITE)));
     }
-            
+
     public OrosTheAvenger(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{B}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{W}{B}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.DRAGON);
 
@@ -68,7 +68,7 @@ public class OrosTheAvenger extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // Whenever Oros, the Avenger deals combat damage to a player, you may pay {2}{W}. If you do, Oros deals 3 damage to each nonwhite creature.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
-                new DoIfCostPaid(new DamageAllEffect(3, filter), new ManaCostsImpl("{2}{W}")), false));        
+                new DoIfCostPaid(new DamageAllEffect(3, filter), new ManaCostsImpl("{2}{W}")), false));
     }
 
     public OrosTheAvenger(final OrosTheAvenger card) {

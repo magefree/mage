@@ -40,8 +40,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
-import mage.game.Game;
+import mage.filter.predicate.permanent.DefendingPlayerControlsPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -50,7 +49,11 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class WarkiteMarauder extends CardImpl {
 
-    private final UUID originalId;
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature defending player controls");
+
+    static {
+        filter.add(new DefendingPlayerControlsPredicate());
+    }
 
     public WarkiteMarauder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
@@ -68,27 +71,13 @@ public class WarkiteMarauder extends CardImpl {
                 .setText("target creature defending player controls loses all abilities"), false);
         ability.addEffect(new SetPowerToughnessTargetEffect(0, 1, Duration.EndOfTurn)
                 .setText("and has base power and toughness 0/1 until end of turn"));
-        ability.addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("creature defending player controls")));
+        ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
-        this.originalId = ability.getOriginalId();
 
     }
 
     public WarkiteMarauder(final WarkiteMarauder card) {
         super(card);
-        this.originalId = card.originalId;
-    }
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (ability.getOriginalId().equals(originalId)) {
-            ability.getTargets().clear();
-            FilterCreaturePermanent filter = new FilterCreaturePermanent("creature defending player controls");
-            UUID defenderId = game.getCombat().getDefenderId(ability.getSourceId());
-            filter.add(new ControllerIdPredicate(defenderId));
-            TargetCreaturePermanent target = new TargetCreaturePermanent(1, 1, filter, false);
-            ability.addTarget(target);
-        }
     }
 
     @Override

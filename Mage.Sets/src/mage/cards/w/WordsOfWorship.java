@@ -91,7 +91,7 @@ class WordsOfWorshipEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            controller.gainLife(5, game);
+            controller.gainLife(5, game, source);
 			this.used = true;
             discard();
             return true;

@@ -39,7 +39,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -51,7 +51,7 @@ public class KnowledgeAndPower extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{R}");
 
 
-        // Whenever you scry, you may pay 2. If you do. Knowledge and Power deals 2 damage to target creature or player.
+        // Whenever you scry, you may pay 2. If you do. Knowledge and Power deals 2 damage to any target.
         this.addAbility(new ScryTriggeredAbility() );
 
     }
@@ -70,7 +70,7 @@ class ScryTriggeredAbility extends TriggeredAbilityImpl {
 
     public ScryTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DoIfCostPaid(new DamageTargetEffect(2), new GenericManaCost(2)), false);
-        this.addTarget(new TargetCreatureOrPlayer());
+        this.addTarget(new TargetAnyTarget());
     }
 
     public ScryTriggeredAbility(final ScryTriggeredAbility ability) {

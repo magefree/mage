@@ -51,7 +51,7 @@ public class ProsperousPirates extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 
-        // When Prosperous Pirates enters the battlefield, create two colorless Treasure artifact tokens with "{T}, Sacrifice this artifact: Add one mana of any color to your mana pool."
+        // When Prosperous Pirates enters the battlefield, create two colorless Treasure artifact tokens with "{T}, Sacrifice this artifact: Add one mana of any color."
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new TreasureToken("XLN"), 2)));
     }
 

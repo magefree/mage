@@ -41,6 +41,7 @@ import mage.game.Game;
 public class ReturnToBattlefieldUnderOwnerControlSourceEffect extends OneShotEffect {
 
     private boolean tapped;
+    private boolean attacking;
     private int zoneChangeCounter;
 
     public ReturnToBattlefieldUnderOwnerControlSourceEffect() {
@@ -52,16 +53,25 @@ public class ReturnToBattlefieldUnderOwnerControlSourceEffect extends OneShotEff
     }
 
     public ReturnToBattlefieldUnderOwnerControlSourceEffect(boolean tapped, int zoneChangeCounter) {
+        this(tapped, false, zoneChangeCounter);
+    }
+
+    public ReturnToBattlefieldUnderOwnerControlSourceEffect(boolean tapped, boolean attacking, int zoneChangeCounter) {
         super(Outcome.Benefit);
         this.tapped = tapped;
+        this.attacking = attacking;
         this.zoneChangeCounter = zoneChangeCounter;
-        staticText = new StringBuilder("return that card to the battlefield").append(tapped ? " tapped" : "").append(" under its owner's control").toString();
+        staticText = "return that card to the battlefield"
+                + (tapped ? " tapped" : "")
+                + (attacking ? " attacking" : "")
+                + " under its owner's control";
     }
 
     public ReturnToBattlefieldUnderOwnerControlSourceEffect(final ReturnToBattlefieldUnderOwnerControlSourceEffect effect) {
         super(effect);
         this.tapped = effect.tapped;
         this.zoneChangeCounter = effect.zoneChangeCounter;
+        this.attacking = effect.attacking;
     }
 
     @Override
@@ -80,7 +90,11 @@ public class ReturnToBattlefieldUnderOwnerControlSourceEffect extends OneShotEff
                 case GRAVEYARD:
                     if (zoneChangeCounter < 0 || game.getState().getZoneChangeCounter(card.getId()) == zoneChangeCounter) {
                         Zone currentZone = game.getState().getZone(card.getId());
-                        card.putOntoBattlefield(game, currentZone, source.getSourceId(), card.getOwnerId(), tapped);
+                        if (card.putOntoBattlefield(game, currentZone, source.getSourceId(), card.getOwnerId(), tapped)) {
+                            if (attacking) {
+                                game.getCombat().addAttackingCreature(card.getId(), game);
+                            }
+                        }
                     }
                     break;
             }

@@ -92,7 +92,7 @@ class BeaconOfImmortalityEffect extends OneShotEffect {
                 return true;
             }
             if (amount > 0) {
-                player.gainLife(amount, game);
+                player.gainLife(amount, game, source);
                 return true;
             }
         }

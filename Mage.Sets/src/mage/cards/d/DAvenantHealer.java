@@ -50,7 +50,7 @@ import mage.target.common.TargetCreatureOrPlayer;
 public class DAvenantHealer extends CardImpl {
 
     public DAvenantHealer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.CLERIC);
         this.subtype.add(SubType.ARCHER);
@@ -61,7 +61,7 @@ public class DAvenantHealer extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
         ability.addTarget(new TargetAttackingOrBlockingCreature());
         this.addAbility(ability);
-        // {T}: Prevent the next 1 damage that would be dealt to target creature or player this turn.
+        // {T}: Prevent the next 1 damage that would be dealt to any target this turn.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToTargetEffect(Duration.EndOfTurn, 1), new TapSourceCost());
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);

@@ -35,13 +35,14 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.RedirectionEffect;
+import mage.abilities.effects.RedirectionEffect.UsageType;
 import mage.abilities.effects.common.RedirectDamageFromSourceToTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -61,7 +62,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class ShamanEnKor extends CardImpl {
 
     public ShamanEnKor(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
         this.subtype.add(SubType.KOR);
         this.subtype.add(SubType.CLERIC);
         this.subtype.add(SubType.SHAMAN);
@@ -71,7 +72,7 @@ public class ShamanEnKor extends CardImpl {
 
         // {0}: The next 1 damage that would be dealt to Shaman en-Kor this turn is dealt to target creature you control instead.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new RedirectDamageFromSourceToTargetEffect(Duration.EndOfTurn, 1, true), new GenericManaCost(0));
+                new RedirectDamageFromSourceToTargetEffect(Duration.EndOfTurn, 1, UsageType.ONE_USAGE_ABSOLUTE), new GenericManaCost(0));
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
 
@@ -97,7 +98,7 @@ class ShamanEnKorRedirectFromTargetEffect extends RedirectionEffect {
     protected MageObjectReference sourceObject;
 
     ShamanEnKorRedirectFromTargetEffect() {
-        super(Duration.EndOfTurn, Integer.MAX_VALUE, true);
+        super(Duration.EndOfTurn, Integer.MAX_VALUE, UsageType.ONE_USAGE_ABSOLUTE);
         staticText = "The next time a source of your choice would deal damage to target creature this turn, that damage is dealt to {this} instead";
     }
 

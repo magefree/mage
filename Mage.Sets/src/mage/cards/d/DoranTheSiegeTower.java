@@ -40,13 +40,13 @@ import mage.game.Game;
 
 /**
  *
- * 613.10. Some continuous effects affect game rules rather than objects. For example,
- * effects may modify a player's maximum hand size, or say that a creature must attack
- * this turn if able. These effects are applied after all other continuous effects have
- * been applied. Continuous effects that affect the costs of spells or abilities are
- * applied according to the order specified in rule 601.2e. All other such effects are
- * applied in timestamp order. See also the rules for timestamp order and dependency
- * (rules 613.6 and 613.7)
+ * 613.10. Some continuous effects affect game rules rather than objects. For
+ * example, effects may modify a player's maximum hand size, or say that a
+ * creature must attack this turn if able. These effects are applied after all
+ * other continuous effects have been applied. Continuous effects that affect
+ * the costs of spells or abilities are applied according to the order specified
+ * in rule 601.2e. All other such effects are applied in timestamp order. See
+ * also the rules for timestamp order and dependency (rules 613.6 and 613.7)
  *
  *
  * @author LevelX2
@@ -54,7 +54,7 @@ import mage.game.Game;
 public class DoranTheSiegeTower extends CardImpl {
 
     public DoranTheSiegeTower(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{G}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{B}{G}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.TREEFOLK);
         this.subtype.add(SubType.SHAMAN);
@@ -77,7 +77,6 @@ public class DoranTheSiegeTower extends CardImpl {
 }
 
 class DoranTheSiegeTowerCombatDamageRuleEffect extends ContinuousEffectImpl {
-
 
     public DoranTheSiegeTowerCombatDamageRuleEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);

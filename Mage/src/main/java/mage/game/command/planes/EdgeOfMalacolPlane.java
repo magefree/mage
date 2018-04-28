@@ -122,8 +122,12 @@ class EdgeOfMalacolEffect extends ContinuousRuleModifyingEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         // Prevent untap event of creatures of target player
         if (game.getTurn().getStepType() == PhaseStep.UNTAP) {
-            if (game.getState().getCurrentPlane() != null) {
-                if (!game.getState().getCurrentPlane().getName().equalsIgnoreCase("Plane - Edge of Malacol")) {
+            Plane cPlane = game.getState().getCurrentPlane();
+            if (cPlane == null) {
+                return false;
+            }
+            if (cPlane != null) {
+                if (!cPlane.getName().equalsIgnoreCase("Plane - Edge of Malacol")) {
                     return false;
                 }
             }

@@ -74,7 +74,7 @@ public class HavenOfTheSpiritDragon extends CardImpl {
         // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
 
-        // {T}: add one mana of any color to your mana pool. Spend this mana only to cast a Dragon creature spell.
+        // {T}: add one mana of any color. Spend this mana only to cast a Dragon creature spell.
         this.addAbility(new ConditionalAnyColorManaAbility(new TapSourceCost(), 1, new HavenOfTheSpiritManaBuilder(), true));
 
         // {2}, {T}, Sacrifice Haven of the Spirit Dragon: Return target Dragon creature card or Ugin planeswalker card from your graveyard to your hand.

@@ -44,7 +44,7 @@ public class WardOfPietyTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Mountain");
 
         // Enchant creature
-        // {1}{W}: The next 1 damage that would be dealt to enchanted creature this turn is dealt to target creature or player instead.
+        // {1}{W}: The next 1 damage that would be dealt to enchanted creature this turn is dealt to any target instead.
         addCard(Zone.HAND, playerA, "Ward of Piety"); // {1}{W}
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion"); // 2/2
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 6);

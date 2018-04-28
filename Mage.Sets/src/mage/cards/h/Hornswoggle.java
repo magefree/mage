@@ -46,11 +46,11 @@ public class Hornswoggle extends CardImpl {
     public Hornswoggle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}");
 
-        // Counter target creature spell. You create a colorless Treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color to your mana pool."
+        // Counter target creature spell. You create a colorless Treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color."
         this.getSpellAbility().addEffect(new CounterTargetEffect());
         this.getSpellAbility().addTarget(new TargetSpell(StaticFilters.FILTER_SPELL_CREATURE));
         this.getSpellAbility().addEffect(new CreateTokenEffect(new TreasureToken())
-                .setText("You create a colorless Treasure artifact token with \"{T}, Sacrifice this artifact: Add one mana of any color to your mana pool.\""));
+                .setText("You create a colorless Treasure artifact token with \"{T}, Sacrifice this artifact: Add one mana of any color.\""));
     }
 
     public Hornswoggle(final Hornswoggle card) {

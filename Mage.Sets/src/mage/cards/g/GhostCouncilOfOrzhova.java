@@ -102,7 +102,7 @@ class GhostCouncilOfOrzhovaEffect extends OneShotEffect {
         Player controllerPlayer = game.getPlayer(source.getControllerId());
         if (targetPlayer != null && controllerPlayer != null) {
             targetPlayer.loseLife(1, game, false);
-            controllerPlayer.gainLife(1, game);
+            controllerPlayer.gainLife(1, game, source);
         }
         return false;
     }

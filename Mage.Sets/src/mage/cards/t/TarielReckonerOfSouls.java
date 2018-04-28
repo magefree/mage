@@ -53,7 +53,7 @@ import mage.target.common.TargetOpponent;
 public class TarielReckonerOfSouls extends CardImpl {
 
     public TarielReckonerOfSouls(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{B}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{W}{B}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.ANGEL);
         this.power = new MageInt(4);

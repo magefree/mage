@@ -95,7 +95,7 @@ class RenounceEffect extends OneShotEffect {
                     amount++;
                 }
             }
-            player.gainLife(amount * 2, game);
+            player.gainLife(amount * 2, game, source);
         }
         return true;
     }

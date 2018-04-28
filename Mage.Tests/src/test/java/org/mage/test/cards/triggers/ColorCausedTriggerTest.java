@@ -43,7 +43,7 @@ public class ColorCausedTriggerTest extends CardTestPlayerBase {
         // Whenever a player casts a red spell, you may gain 1 life.
         addCard(Zone.BATTLEFIELD, playerA, "Dragon's Claw", 1);
 
-        // Ghostfire deals 3 damage to target creature or player.
+        // Ghostfire deals 3 damage to any target.
         addCard(Zone.HAND, playerA, "Ghostfire", 1); // {2}{R}
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
 

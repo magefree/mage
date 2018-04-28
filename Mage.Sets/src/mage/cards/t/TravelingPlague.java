@@ -28,8 +28,6 @@
 package mage.cards.t;
 
 import java.util.UUID;
-import mage.constants.SubType;
-import mage.target.common.TargetCreaturePermanent;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -42,14 +40,14 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.constants.Outcome;
-import mage.target.TargetPermanent;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -59,6 +57,8 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
@@ -169,7 +169,7 @@ class TravelingPlagueEffect extends OneShotEffect {
                     Permanent targetPermanent = game.getPermanent(target.getFirstTarget());
                     if (!targetPermanent.cantBeAttachedBy(travelingPlague, game)) {
                         game.getState().setValue("attachTo:" + travelingPlague.getId(), targetPermanent);
-                        travelingPlague.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), controllerOfEnchantedCreature.getId());
+                        controllerOfEnchantedCreature.moveCards(travelingPlague, Zone.BATTLEFIELD, source, game);
                         return targetPermanent.addAttachment(travelingPlague.getId(), game);
                     }
                 }

@@ -98,7 +98,7 @@ class AbattoirGhoulEffect extends OneShotEffect {
             if (creature != null) {
                 int toughness = creature.getToughness().getValue();
                 if (you != null) {
-                    you.gainLife(toughness, game);
+                    you.gainLife(toughness, game, source);
                     return true;
                 }
             }

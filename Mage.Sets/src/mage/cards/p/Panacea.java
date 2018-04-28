@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -49,13 +49,13 @@ public class Panacea extends CardImpl {
     public Panacea(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
-        // {X}{X}, {tap}: Prevent the next X damage that would be dealt to target creature or player this turn.
+        // {X}{X}, {tap}: Prevent the next X damage that would be dealt to any target this turn.
         Ability ability = new SimpleActivatedAbility(
                 new PreventDamageToTargetEffect(Duration.EndOfTurn, false, true, new ManacostVariableValue()),
                 new ManaCostsImpl("{X}{X}")
         );
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }
 

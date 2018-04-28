@@ -48,7 +48,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetAnyTarget;
 import mage.watchers.common.DamagedByWatcher;
 
 /**
@@ -79,9 +79,9 @@ public class JayaBallardTaskMage extends CardImpl {
         ability.addCost(new DiscardCardCost());        
         this.addAbility(ability);
         
-        // {1}{R}, {tap}, Discard a card: Jaya Ballard, Task Mage deals 3 damage to target creature or player. A creature dealt damage this way can't be regenerated this turn.
+        // {1}{R}, {tap}, Discard a card: Jaya Ballard, Task Mage deals 3 damage to any target. A creature dealt damage this way can't be regenerated this turn.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(3), new ManaCostsImpl("{1}{R}"));
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetAnyTarget());
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost()); 
         ability.addEffect(new CantRegenerateEffect());

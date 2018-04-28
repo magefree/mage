@@ -107,7 +107,7 @@ class LoseGainEffect extends OneShotEffect {
             return false;
         }
         if (you != null) {
-            you.gainLife(2, game);
+            you.gainLife(2, game, source);
         }
         if (them != null) {
             them.loseLife(2, game, false);

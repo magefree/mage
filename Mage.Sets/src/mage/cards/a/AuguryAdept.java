@@ -99,7 +99,7 @@ class AuguryAdeptEffect extends OneShotEffect {
 
             int cmc = card.getConvertedManaCost();
             if (cmc > 0) {
-                controller.gainLife(cmc, game);
+                controller.gainLife(cmc, game, source);
             }
             cards.add(card);
             controller.revealCards(sourceObject.getName(), cards, game);

@@ -131,9 +131,9 @@ class BenevolentOfferingEffect2 extends OneShotEffect {
             Player opponent = game.getPlayer(target.getFirstTarget());
             if (opponent != null) {
                 int count = game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_CREATURE, controller.getId(), game) * 2;
-                controller.gainLife(count, game);
+                controller.gainLife(count, game, source);
                 count = game.getBattlefield().countAll(StaticFilters.FILTER_PERMANENT_CREATURE, opponent.getId(), game) * 2;
-                opponent.gainLife(count, game);
+                opponent.gainLife(count, game, source);
                 return true;
             }
         }

@@ -111,7 +111,7 @@ class MalakirBloodwitchEffect extends OneShotEffect {
             }
         }
         if (total > 0) {
-            player.gainLife(total, game);
+            player.gainLife(total, game, source);
         }
 
         return true;

@@ -105,7 +105,7 @@ public class WouldDieExileInsteadTest extends CardTestPlayerBase {
         /*
          Incendiary Flow {1}{R}
         Sorcery
-        Incendiary Flow deals 3 damage to target creature or player. If a creature dealt damage this way would die this turn, exile it instead.
+        Incendiary Flow deals 3 damage to any target. If a creature dealt damage this way would die this turn, exile it instead.
          */
         String iFlow = "Incendiary Flow";
 

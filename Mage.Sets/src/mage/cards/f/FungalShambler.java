@@ -47,7 +47,7 @@ import mage.constants.SubType;
 public class FungalShambler extends CardImpl {
 
     public FungalShambler(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{U}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{G}{U}");
         this.subtype.add(SubType.FUNGUS);
         this.subtype.add(SubType.BEAST);
         this.power = new MageInt(6);

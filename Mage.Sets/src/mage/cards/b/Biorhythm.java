@@ -89,7 +89,7 @@ class BiorhythmEffect extends OneShotEffect {
                     player.loseLife(diff, game, false);
                 }
                 if(diff < 0) {
-                    player.gainLife(-diff, game);
+                    player.gainLife(-diff, game, source);
                 }
             }
         }
