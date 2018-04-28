@@ -236,6 +236,7 @@ public class Invasion extends ExpansionSet {
         cards.add(new SetCardInfo("Probe", 66, Rarity.COMMON, mage.cards.p.Probe.class));
         cards.add(new SetCardInfo("Prohibit", 67, Rarity.COMMON, mage.cards.p.Prohibit.class));
         cards.add(new SetCardInfo("Protective Sphere", 26, Rarity.COMMON, mage.cards.p.ProtectiveSphere.class));
+        cards.add(new SetCardInfo("Psychic Battle", 68, Rarity.RARE, mage.cards.p.PsychicBattle.class));
         cards.add(new SetCardInfo("Pure Reflection", 27, Rarity.RARE, mage.cards.p.PureReflection.class));
         cards.add(new SetCardInfo("Pyre Zombie", 261, Rarity.RARE, mage.cards.p.PyreZombie.class));
         cards.add(new SetCardInfo("Quirion Elves", 203, Rarity.COMMON, mage.cards.q.QuirionElves.class));

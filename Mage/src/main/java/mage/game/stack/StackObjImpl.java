@@ -27,6 +27,8 @@ import java.util.UUID;
  * @author LevelX2
  */
 public abstract class StackObjImpl implements StackObject {
+    
+    private boolean targetChanged; // for Psychic Battle
 
     /**
      * Choose new targets for a stack Object
@@ -270,5 +272,15 @@ public abstract class StackObjImpl implements StackObject {
 
     @Override
     public void removePTCDA() {
+    }
+
+    @Override
+    public boolean isTargetChanged() {
+        return targetChanged;
+    }
+
+    @Override
+    public void setTargetChanged(boolean targetChanged) {
+        this.targetChanged = targetChanged;
     }
 }
