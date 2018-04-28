@@ -91,6 +91,7 @@ public class RevisedEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Dragon Engine", 246, Rarity.RARE, mage.cards.d.DragonEngine.class));
         cards.add(new SetCardInfo("Dragon Whelp", 142, Rarity.UNCOMMON, mage.cards.d.DragonWhelp.class));
         cards.add(new SetCardInfo("Drain Life", 14, Rarity.COMMON, mage.cards.d.DrainLife.class));
+        cards.add(new SetCardInfo("Drain Power", 56, Rarity.RARE, mage.cards.d.DrainPower.class));
         cards.add(new SetCardInfo("Drudge Skeletons", 15, Rarity.COMMON, mage.cards.d.DrudgeSkeletons.class));
         cards.add(new SetCardInfo("Dwarven Warriors", 143, Rarity.COMMON, mage.cards.d.DwarvenWarriors.class));
         cards.add(new SetCardInfo("Dwarven Weaponsmith", 144, Rarity.UNCOMMON, mage.cards.d.DwarvenWeaponsmith.class));
