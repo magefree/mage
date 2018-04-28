@@ -25,85 +25,84 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.w;
+package mage.cards.g;
 
 import java.util.UUID;
+import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.RedirectionEffect;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.keyword.EnchantAbility;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.target.TargetPermanent;
+import mage.game.events.GameEvent.EventType;
 import mage.target.common.TargetAnyTarget;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class WardOfPiety extends CardImpl {
+public class Glarecaster extends CardImpl {
 
-    public WardOfPiety(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
-        this.subtype.add(SubType.AURA);
+    public Glarecaster(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");
 
-        // Enchant creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent();
-        this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.PreventDamage));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
-        this.addAbility(ability);
+        this.subtype.add(SubType.BIRD);
+        this.subtype.add(SubType.CLERIC);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
 
-        // {1}{W}: The next 1 damage that would be dealt to enchanted creature this turn is dealt to any target instead.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new WardOfPietyPreventDamageTargetEffect(), new ManaCostsImpl("{1}{W}"));
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+
+        // {5}{W}: The next time damage would be dealt to Glarecaster and/or you this turn, that damage is dealt to any target instead.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GlarecasterEffect(), new ManaCostsImpl("{5}{W}"));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }
 
-    public WardOfPiety(final WardOfPiety card) {
+    public Glarecaster(final Glarecaster card) {
         super(card);
     }
 
     @Override
-    public WardOfPiety copy() {
-        return new WardOfPiety(this);
+    public Glarecaster copy() {
+        return new Glarecaster(this);
     }
 }
 
-class WardOfPietyPreventDamageTargetEffect extends RedirectionEffect {
+/**
+ * 10/4/2004 If both you and this card would be dealt damage at the same time,
+ * or if either you or this card would be dealt damage from multiple sources at
+ * the same time, the redirection will apply to both chunks of damage.
+ *
+ * @author LevelX2
+ */
+class GlarecasterEffect extends RedirectionEffect {
 
     protected MageObjectReference redirectToObject;
 
-    public WardOfPietyPreventDamageTargetEffect() {
-        super(Duration.EndOfTurn, 1, UsageType.ONE_USAGE_ABSOLUTE);
-        staticText = "The next 1 damage that would be dealt to enchanted creature this turn is dealt to any target instead";
+    public GlarecasterEffect() {
+        super(Duration.EndOfTurn, Integer.MAX_VALUE, UsageType.ONE_USAGE_AT_THE_SAME_TIME);
+        staticText = "The next time damage would be dealt to {this} and/or you this turn, that damage is dealt to any target instead";
     }
 
-    public WardOfPietyPreventDamageTargetEffect(final WardOfPietyPreventDamageTargetEffect effect) {
+    public GlarecasterEffect(final GlarecasterEffect effect) {
         super(effect);
         this.redirectToObject = effect.redirectToObject;
     }
 
     @Override
-    public WardOfPietyPreventDamageTargetEffect copy() {
-        return new WardOfPietyPreventDamageTargetEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
+    public GlarecasterEffect copy() {
+        return new GlarecasterEffect(this);
     }
 
     @Override
@@ -113,15 +112,26 @@ class WardOfPietyPreventDamageTargetEffect extends RedirectionEffect {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DAMAGE_CREATURE || event.getType() == EventType.DAMAGE_PLAYER;
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent enchantment = game.getPermanent(source.getSourceId());
-        if (enchantment != null && event.getTargetId().equals(enchantment.getAttachedTo())) {
+        if (event.getTargetId().equals(source.getSourceId())
+                || event.getTargetId().equals(source.getControllerId())) {
             if (redirectToObject.equals(new MageObjectReference(source.getTargets().get(0).getFirstTarget(), game))) {
                 redirectTarget = source.getTargets().get(0);
                 return true;
             }
         }
         return false;
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source
+    ) {
+        return true;
     }
 
 }

@@ -37,20 +37,19 @@ import mage.abilities.effects.RedirectionEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.TargetSource;
 
 /**
- * 
+ *
  * @author L_J
  */
 public class BeaconOfDestiny extends CardImpl {
@@ -81,7 +80,7 @@ class BeaconOfDestinyEffect extends RedirectionEffect {
     private final TargetSource damageSource;
 
     public BeaconOfDestinyEffect() {
-        super(Duration.EndOfTurn, Integer.MAX_VALUE, true);
+        super(Duration.EndOfTurn, Integer.MAX_VALUE, UsageType.ONE_USAGE_ABSOLUTE);
         staticText = "The next time a source of your choice would deal damage to you this turn, that damage is dealt to {this} instead";
         this.damageSource = new TargetSource();
     }

@@ -58,7 +58,7 @@ public class VassalsDuty extends CardImpl {
     }
 
     public VassalsDuty(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
 
         // {1}: The next 1 damage that would be dealt to target legendary creature you control this turn is dealt to you instead.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new VassalsDutyPreventDamageTargetEffect(Duration.EndOfTurn, 1), new GenericManaCost(1));
@@ -79,7 +79,7 @@ public class VassalsDuty extends CardImpl {
 class VassalsDutyPreventDamageTargetEffect extends RedirectionEffect {
 
     public VassalsDutyPreventDamageTargetEffect(Duration duration, int amount) {
-        super(duration, amount, true);
+        super(duration, amount, UsageType.ONE_USAGE_ABSOLUTE);
         staticText = "The next " + amount + " damage that would be dealt to target legendary creature you control this turn is dealt to you instead";
     }
 

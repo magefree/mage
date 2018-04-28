@@ -50,8 +50,8 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetSource;
-import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCardInHand;
 
 /**
  *
@@ -90,7 +90,7 @@ class ShiningShoalRedirectDamageTargetEffect extends RedirectDamageFromSourceToT
     private final DynamicValue dynamicAmount;
 
     public ShiningShoalRedirectDamageTargetEffect(Duration duration, DynamicValue dynamicAmount) {
-        super(duration, 0, true);
+        super(duration, 0, UsageType.ONE_USAGE_AT_THE_SAME_TIME);
         this.dynamicAmount = dynamicAmount;
         staticText = "The next X damage that a source of your choice would deal to you and/or creatures you control this turn is dealt to any target instead";
     }

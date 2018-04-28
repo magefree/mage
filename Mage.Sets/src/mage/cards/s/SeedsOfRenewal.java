@@ -35,7 +35,7 @@ import mage.abilities.keyword.UndauntedAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -53,7 +53,7 @@ public class SeedsOfRenewal extends CardImpl {
         Effect effect = new ReturnFromGraveyardToHandTargetEffect();
         effect.setText("Return up to two target cards from your graveyard to your hand");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0, 2, new FilterCard("card from your graveyard")));
+        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0, 2, StaticFilters.FILTER_CARD_FROM_YOUR_GRAVEYARD));
         this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
 
     }
