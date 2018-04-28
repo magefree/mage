@@ -146,6 +146,7 @@ public class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Gangrenous Goliath", 150, Rarity.RARE, mage.cards.g.GangrenousGoliath.class));
         cards.add(new SetCardInfo("Ghosthelm Courier", 85, Rarity.UNCOMMON, mage.cards.g.GhosthelmCourier.class));
         cards.add(new SetCardInfo("Gigapede", 264, Rarity.RARE, mage.cards.g.Gigapede.class));
+        cards.add(new SetCardInfo("Glarecaster", 30, Rarity.RARE, mage.cards.g.Glarecaster.class));
         cards.add(new SetCardInfo("Glory Seeker", 31, Rarity.COMMON, mage.cards.g.GlorySeeker.class));
         cards.add(new SetCardInfo("Gluttonous Zombie", 151, Rarity.UNCOMMON, mage.cards.g.GluttonousZombie.class));
         cards.add(new SetCardInfo("Goblin Burrows", 318, Rarity.UNCOMMON, mage.cards.g.GoblinBurrows.class));
