@@ -36,26 +36,16 @@ import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.LoseAbilityTargetEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ProtectionAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.Filter;
 import mage.filter.FilterCard;
-import mage.filter.FilterObject;
-import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
 /**

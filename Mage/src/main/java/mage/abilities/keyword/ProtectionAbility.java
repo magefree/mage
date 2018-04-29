@@ -55,7 +55,7 @@ public class ProtectionAbility extends StaticAbility {
 
     protected Filter filter;
     protected boolean removeAuras;
-    protected static List<ObjectColor> objectColors = new ArrayList<>();
+    protected static List<ObjectColor> colors = new ArrayList<>();
     protected UUID auraIdNotToBeRemoved; // defines an Aura objectId that will not be removed from this protection ability
 
     public ProtectionAbility(Filter filter) {
@@ -75,15 +75,15 @@ public class ProtectionAbility extends StaticAbility {
     public static ProtectionAbility from(ObjectColor color) {
         FilterObject filter = new FilterObject(color.getDescription());
         filter.add(new ColorPredicate(color));
-        objectColors.add(color);
+        colors.add(color);
         return new ProtectionAbility(filter);
     }
 
     public static ProtectionAbility from(ObjectColor color1, ObjectColor color2) {
         FilterObject filter = new FilterObject(color1.getDescription() + " and from " + color2.getDescription());
         filter.add(Predicates.or(new ColorPredicate(color1), new ColorPredicate(color2)));
-        objectColors.add(color1);
-        objectColors.add(color2);
+        colors.add(color1);
+        colors.add(color2);
         return new ProtectionAbility(filter);
     }
 
@@ -146,7 +146,7 @@ public class ProtectionAbility extends StaticAbility {
         return removeAuras;
     }
 
-    public List<ObjectColor> getColors() { return objectColors; }
+    public List<ObjectColor> getColors() { return colors; }
 
     public UUID getAuraIdNotToBeRemoved() {
         return auraIdNotToBeRemoved;
