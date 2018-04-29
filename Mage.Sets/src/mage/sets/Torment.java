@@ -77,6 +77,7 @@ public class Torment extends ExpansionSet {
         cards.add(new SetCardInfo("Cephalid Aristocrat", 27, Rarity.COMMON, mage.cards.c.CephalidAristocrat.class));
         cards.add(new SetCardInfo("Cephalid Illusionist", 28, Rarity.UNCOMMON, mage.cards.c.CephalidIllusionist.class));
         cards.add(new SetCardInfo("Cephalid Sage", 29, Rarity.UNCOMMON, mage.cards.c.CephalidSage.class));
+        cards.add(new SetCardInfo("Cephalid Snitch", 30, Rarity.COMMON, mage.cards.c.CephalidSnitch.class));
         cards.add(new SetCardInfo("Cephalid Vandal", 31, Rarity.RARE, mage.cards.c.CephalidVandal.class));
         cards.add(new SetCardInfo("Chainer, Dementia Master", 56, Rarity.RARE, mage.cards.c.ChainerDementiaMaster.class));
         cards.add(new SetCardInfo("Chainer's Edict", 57, Rarity.UNCOMMON, mage.cards.c.ChainersEdict.class));
