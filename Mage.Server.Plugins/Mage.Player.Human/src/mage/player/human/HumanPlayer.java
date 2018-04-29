@@ -823,7 +823,7 @@ public class HumanPlayer extends PlayerImpl {
                         }
                     }
                 } else if (passedUntilStackResolved) {
-                    if (dateLastAddedToStack == game.getStack().getDateLastAdded()) {
+                    if (Objects.equals(dateLastAddedToStack, game.getStack().getDateLastAdded())) {
                         dateLastAddedToStack = game.getStack().getDateLastAdded();
                         if (passWithManaPoolCheck(game)) {
                             return false;

@@ -123,7 +123,7 @@ class EyeForAnEyeEffect extends ReplacementEffectImpl {
         Player controller = game.getPlayer(source.getControllerId());
         DamageEvent damageEvent = (DamageEvent) event;
         if (controller != null) {
-            if (controller.getId() == damageEvent.getTargetId() && damageEvent.getSourceId().equals(damageSource.getFirstTarget())) {
+            if (controller.getId().equals(damageEvent.getTargetId()) && damageEvent.getSourceId().equals(damageSource.getFirstTarget())) {
                 this.discard();
                 return true;
             }

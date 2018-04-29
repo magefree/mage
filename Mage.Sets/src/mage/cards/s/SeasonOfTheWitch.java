@@ -153,7 +153,7 @@ class CouldAttackThisTurnWatcher extends Watcher {
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(activePlayer.getId())) {
                 if (permanent.isCreature()) {
                     for (UUID defender : game.getCombat().getDefenders()) {
-                        if (defender != activePlayer.getId()) {
+                        if (!defender.equals(activePlayer.getId())) {
                             if (permanent.canAttack(defender, game)) {
                                 // exclude Propaganda style effects
                                 if (!game.getContinuousEffects().checkIfThereArePayCostToAttackBlockEffects(

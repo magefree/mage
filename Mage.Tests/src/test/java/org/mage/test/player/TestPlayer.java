@@ -329,7 +329,7 @@ public class TestPlayer implements Player {
                 }
                 UUID modeId = ability.getModes().getModeId(modeNr);
                 selectedMode = ability.getModes().get(modeId);
-                if (modeId != ability.getModes().getMode().getId()) {
+                if (!Objects.equals(modeId, ability.getModes().getMode().getId())) {
                     ability.getModes().setActiveMode(modeId);
                     index = 0; // reset target index if mode changes
                 }
@@ -2416,4 +2416,21 @@ public class TestPlayer implements Player {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Player obj = (Player) o;
+        if (this.getId() == null || obj.getId() == null) {
+            return false;
+        }
+
+        return this.getId().equals(obj.getId());
+    }
 }

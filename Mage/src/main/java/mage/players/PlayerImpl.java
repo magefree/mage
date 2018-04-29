@@ -3866,7 +3866,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             return false;
         }
 
-        PlayerImpl obj = (PlayerImpl) o;
+        Player obj = (Player) o;
         if (this.getId() == null || obj.getId() == null) {
             return false;
         }

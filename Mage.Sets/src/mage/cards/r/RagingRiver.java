@@ -54,6 +54,7 @@ import mage.target.targetpointer.FixedTarget;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -141,7 +142,7 @@ class RagingRiverEffect extends OneShotEffect {
 
             for (UUID attackers : game.getCombat().getAttackers()) {
                 Permanent attacker = game.getPermanent(attackers);
-                if (attacker != null && attacker.getControllerId() == controller.getId()) {
+                if (attacker != null && Objects.equals(attacker.getControllerId(), controller.getId())) {
                     CombatGroup combatGroup = game.getCombat().findGroup(attacker.getId());
                     if (combatGroup != null) {
                         FilterCreaturePermanent filter = new FilterCreaturePermanent();

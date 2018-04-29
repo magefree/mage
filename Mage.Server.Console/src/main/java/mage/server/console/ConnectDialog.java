@@ -37,10 +37,8 @@ import java.awt.*;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
 import java.util.List;
-import java.util.Locale;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
 import javax.swing.*;
@@ -84,15 +82,15 @@ public class ConnectDialog extends JDialog {
     }
 
     private void showProxySettings() {
-        if (cbProxyType.getSelectedItem() == Connection.ProxyType.SOCKS) {
+        if (Objects.equals(cbProxyType.getSelectedItem(), ProxyType.SOCKS)) {
             this.pnlProxy.setVisible(true);
             this.pnlProxyAuth.setVisible(false);
             this.pnlProxySettings.setVisible(true);
-        } else if (cbProxyType.getSelectedItem() == Connection.ProxyType.HTTP) {
+        } else if (Objects.equals(cbProxyType.getSelectedItem(), ProxyType.HTTP)) {
             this.pnlProxy.setVisible(true);
             this.pnlProxyAuth.setVisible(true);
             this.pnlProxySettings.setVisible(true);
-        } else if (cbProxyType.getSelectedItem() == Connection.ProxyType.NONE) {
+        } else if (Objects.equals(cbProxyType.getSelectedItem(), ProxyType.NONE)) {
             this.pnlProxy.setVisible(false);
             this.pnlProxyAuth.setVisible(false);
             this.pnlProxySettings.setVisible(false);

@@ -28,17 +28,7 @@
 package mage.player.ai;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -528,7 +518,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
                     do {
                         sim.getPlayer(nextPlayerId).pass(game);
                         nextPlayerId = sim.getPlayerList().getNext();
-                    } while (nextPlayerId != this.getId());
+                    } while (!Objects.equals(nextPlayerId, this.getId()));
                 }
                 SimulationNode2 newNode = new SimulationNode2(node, sim, action, depth, currentPlayer.getId());
                 sim.checkStateAndTriggered();
