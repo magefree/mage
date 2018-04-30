@@ -27,6 +27,8 @@
  */
 package mage.cards.s;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
@@ -38,8 +40,8 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
@@ -113,25 +115,25 @@ class SorinLordOfInnistradEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        Set<Card> toBattlefield = new HashSet<>();
         for (UUID targetId : source.getTargets().get(0).getTargets()) {
             Permanent perm = game.getPermanent(targetId);
             if (perm != null) {
                 perm.destroy(source.getSourceId(), game, false);
-            }
-        }
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            for (UUID targetId : source.getTargets().get(0).getTargets()) {
-                if (game.getState().getZone(targetId) == Zone.GRAVEYARD) {
+                if (Zone.GRAVEYARD == game.getState().getZone(targetId)) {
                     Card card = game.getCard(targetId);
                     if (card != null) {
-                        card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), player.getId());
+                        toBattlefield.add(card);
                     }
                 }
             }
         }
-
-        return true;
+        game.applyEffects();
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            return controller.moveCards(toBattlefield, Zone.BATTLEFIELD, source, game);
+        }
+        return false;
     }
 
 }

@@ -58,10 +58,8 @@ import mage.target.targetpointer.FixedTarget;
 public class SovereignsOfLostAlara extends CardImpl {
 
     public SovereignsOfLostAlara(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}{U}");
         this.subtype.add(SubType.SPIRIT);
-
-
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
@@ -133,25 +131,25 @@ class SovereignsOfLostAlaraEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player you = game.getPlayer(source.getControllerId());
+        Player controller = game.getPlayer(source.getControllerId());
         Permanent attackingCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (you != null && attackingCreature != null) {
+        if (controller != null && attackingCreature != null) {
             FilterCard filter = new FilterCard("aura that could enchant the lone attacking creature");
             filter.add(new SubtypePredicate(SubType.AURA));
             filter.add(new AuraCardCanAttachToPermanentId(attackingCreature.getId()));
-            if (you.chooseUse(Outcome.Benefit, "Do you want to search your library?", source, game)) {
+            if (controller.chooseUse(Outcome.Benefit, "Do you want to search your library?", source, game)) {
                 TargetCardInLibrary target = new TargetCardInLibrary(filter);
                 target.setNotTarget(true);
-                if (you.searchLibrary(target, game)) {
+                if (controller.searchLibrary(target, game)) {
                     if (target.getFirstTarget() != null) {
                         Card aura = game.getCard(target.getFirstTarget());
                         game.getState().setValue("attachTo:" + aura.getId(), attackingCreature);
-                        aura.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), you.getId());
+                        controller.moveCards(aura, Zone.BATTLEFIELD, source, game);
                         return attackingCreature.addAttachment(aura.getId(), game);
                     }
                 }
             }
-            you.shuffleLibrary(source, game);
+            controller.shuffleLibrary(source, game);
         }
         return false;
     }
