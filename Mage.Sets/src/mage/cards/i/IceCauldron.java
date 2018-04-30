@@ -242,7 +242,15 @@ class IceCauldronAddManaEffect extends ManaEffect {
             exiledCardMor = (MageObjectReference) game.getState().getValue("IceCauldronCard" + source.getSourceId().toString());
             if (storedMana != null) { // should be adding the mana even if exiled card is null
                 checkToFirePossibleEvents(storedMana, game, source);
-                IceCauldronConditionalMana iceCauldronMana = new IceCauldronConditionalMana(storedMana, exiledCardMor.getCard(game));
+                
+                Card card = exiledCardMor.getCard(game);
+                if (card == null) {
+                    card = game.getCard(exiledCardMor.getSourceId());
+                    if (card != null && !(card.getZoneChangeCounter(game) == exiledCardMor.getZoneChangeCounter() + 1 && game.getState().getZone(card.getId()) == Zone.STACK)) {
+                        card = null;
+                    }
+                }
+                IceCauldronConditionalMana iceCauldronMana = new IceCauldronConditionalMana(storedMana, card);
                 if (iceCauldronMana != null) {
                     controller.getManaPool().addMana(iceCauldronMana, game, source);
                     return true;
