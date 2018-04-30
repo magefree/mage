@@ -154,7 +154,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 && target.getAbilityController() != null) {
             abilityControllerId = target.getAbilityController();
         }
-        UUID randomOpponentId = getRandomOpponent(abilityControllerId, game);
+        UUID randomOpponentId = getRandomOpponent(target.getTargetController() == null ? abilityControllerId : target.getTargetController(), game);
         if (target.getOriginalTarget() instanceof TargetPlayer) {
             return setTargetPlayer(outcome, target, null, sourceId, abilityControllerId, randomOpponentId, game);
         }
@@ -438,7 +438,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         if (target.getAbilityController() != null) {
             abilityControllerId = target.getAbilityController();
         }
-        UUID randomOpponentId = getRandomOpponent(abilityControllerId, game);
+        UUID randomOpponentId = getRandomOpponent(target.getTargetController() == null ? source.getControllerId() : target.getTargetController(), game);
         if (target.getOriginalTarget() instanceof TargetPlayer) {
             return setTargetPlayer(outcome, target, source, source.getSourceId(), abilityControllerId, randomOpponentId, game);
         }
