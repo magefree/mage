@@ -149,6 +149,7 @@ public class Spell extends StackObjImpl implements Card {
         this.resolving = spell.resolving;
 
         this.doneActivatingManaAbilities = spell.doneActivatingManaAbilities;
+        this.targetChanged = spell.targetChanged;
     }
 
     public boolean activate(Game game, boolean noMana) {

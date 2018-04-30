@@ -37,16 +37,13 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.cards.CardsImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
@@ -58,7 +55,7 @@ import mage.target.targetpointer.FixedTarget;
 public class PsychicBattle extends CardImpl {
 
     public PsychicBattle(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}");
 
         // Whenever a player chooses one or more targets, each player reveals the top card of his or her library. The player who reveals the card with the highest converted mana cost may change the target or targets. If two or more cards are tied for highest cost, the target or targets remain unchanged. Changing targets this way doesn't trigger abilities of permanents named Psychic Battle.
         this.addAbility(new PsychicBattleTriggeredAbility());
@@ -75,11 +72,6 @@ public class PsychicBattle extends CardImpl {
 }
 
 class PsychicBattleTriggeredAbility extends TriggeredAbilityImpl {
-    
-    private static final FilterPermanent filter = new FilterPermanent();
-    static {
-        filter.add(new NamePredicate("Psychic Battle"));
-    }
 
     public PsychicBattleTriggeredAbility() {
         super(Zone.BATTLEFIELD, new PsychicBattleEffect(), false);
@@ -103,8 +95,7 @@ class PsychicBattleTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         StackObject stackObject = game.getStack().getStackObject(event.getSourceId());
         if (stackObject != null) {
-            Permanent psychicBattle = game.getPermanentOrLKIBattlefield(getSourceId());
-            if (psychicBattle != null && !(stackObject.isTargetChanged() && filter.match(psychicBattle, game))) {
+            if (!stackObject.isTargetChanged() && !stackObject.getName().equals("Psychic Battle")) {
                 this.getEffects().get(0).setTargetPointer(new FixedTarget(event.getSourceId()));
                 stackObject.setTargetChanged(false); // resets the targetChanged flag
                 return true;
@@ -122,7 +113,7 @@ class PsychicBattleTriggeredAbility extends TriggeredAbilityImpl {
 class PsychicBattleEffect extends OneShotEffect {
 
     public PsychicBattleEffect() {
-        super(Outcome.Neutral);
+        super(Outcome.Benefit);
         this.staticText = "each player reveals the top card of his or her library. The player who reveals the card with the highest converted mana cost may change the target or targets. If two or more cards are tied for highest cost, the target or targets remain unchanged";
     }
 
@@ -148,7 +139,7 @@ class PsychicBattleEffect extends OneShotEffect {
                     manacostMap.put(player, card.getConvertedManaCost());
                 }
             }
-            
+
             Player highestCostPlayer = null;
             int maxValue = Collections.max(manacostMap.values());
             boolean tie = false;
@@ -162,7 +153,7 @@ class PsychicBattleEffect extends OneShotEffect {
                     }
                 }
             }
-            
+
             if (highestCostPlayer != null && !tie) {
                 StackObject stackObject = game.getStack().getStackObject(this.getTargetPointer().getFirst(game, source));
                 if (stackObject != null) {
