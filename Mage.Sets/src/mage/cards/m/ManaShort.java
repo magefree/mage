@@ -33,7 +33,7 @@ import mage.abilities.effects.common.TapAllTargetPlayerControlsEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.StaticFilters;
+import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
@@ -65,7 +65,7 @@ public class ManaShort extends CardImpl {
 class ManaShortEffect extends TapAllTargetPlayerControlsEffect {
 
     public ManaShortEffect() {
-        super(StaticFilters.FILTER_LANDS);
+        super(new FilterLandPermanent());
         staticText = "Tap all lands target player controls and empty their mana pool";
     }
 

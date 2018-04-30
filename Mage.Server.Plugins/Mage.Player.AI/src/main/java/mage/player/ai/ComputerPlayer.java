@@ -148,13 +148,23 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         if (log.isDebugEnabled()) {
             log.debug("chooseTarget: " + outcome.toString() + ':' + target.toString());
         }
+
         // sometimes a target selection can be made from a player that does not control the ability
         UUID abilityControllerId = playerId;
         if (target.getTargetController() != null
                 && target.getAbilityController() != null) {
             abilityControllerId = target.getAbilityController();
         }
-        UUID randomOpponentId = getRandomOpponent(abilityControllerId, game);
+
+        UUID randomOpponentId;
+        if (target.getTargetController() != null) {
+            randomOpponentId = getRandomOpponent(target.getTargetController(), game);;
+        } else if (abilityControllerId != null) {
+            randomOpponentId = getRandomOpponent(abilityControllerId, game);
+        } else {
+            randomOpponentId = getRandomOpponent(playerId, game);
+        }
+
         if (target.getOriginalTarget() instanceof TargetPlayer) {
             return setTargetPlayer(outcome, target, null, sourceId, abilityControllerId, randomOpponentId, game);
         }
@@ -438,7 +448,16 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         if (target.getAbilityController() != null) {
             abilityControllerId = target.getAbilityController();
         }
-        UUID randomOpponentId = getRandomOpponent(abilityControllerId, game);
+
+        UUID randomOpponentId;
+        if (target.getTargetController() != null) {
+            randomOpponentId = getRandomOpponent(target.getTargetController(), game);;
+        } else if (source != null && source.getControllerId() != null) {
+            randomOpponentId = getRandomOpponent(source.getControllerId(), game);
+        } else {
+            randomOpponentId = getRandomOpponent(playerId, game);
+        }
+
         if (target.getOriginalTarget() instanceof TargetPlayer) {
             return setTargetPlayer(outcome, target, source, source.getSourceId(), abilityControllerId, randomOpponentId, game);
         }
@@ -2481,5 +2500,23 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             randomOpponentId = game.getOpponents(abilityControllerId).iterator().next();
         }
         return randomOpponentId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Player obj = (Player) o;
+        if (this.getId() == null || obj.getId() == null) {
+            return false;
+        }
+
+        return this.getId().equals(obj.getId());
     }
 }

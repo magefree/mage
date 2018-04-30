@@ -757,8 +757,8 @@ public class GameState implements Serializable, Copyable<GameState> {
                     ZoneChangeData data = (ZoneChangeData) obj;
                     return this.fromZone == data.fromZone
                             && this.toZone == data.toZone
-                            && this.sourceId == data.sourceId
-                            && this.playerId == data.playerId;
+                            && Objects.equals(this.sourceId, data.sourceId)
+                            && Objects.equals(this.playerId, data.playerId);
                 }
                 return false;
             }

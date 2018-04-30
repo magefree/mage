@@ -6,12 +6,7 @@ import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
@@ -400,10 +395,10 @@ public class MageActionCallback implements ActionCallback {
     private void handlePopup(TransferData transferData) {
         MageCard mageCard = (MageCard) transferData.component;
         if (!popupTextWindowOpen
-                || mageCard.getOriginal().getId() != bigCard.getCardId()) {
+                || !Objects.equals(mageCard.getOriginal().getId(), bigCard.getCardId())) {
             if (bigCard.getWidth() > 0) {
                 synchronized (MageActionCallback.class) {
-                    if (!popupTextWindowOpen || mageCard.getOriginal().getId() != bigCard.getCardId()) {
+                    if (!popupTextWindowOpen || !Objects.equals(mageCard.getOriginal().getId(), bigCard.getCardId())) {
                         if (!popupTextWindowOpen) {
                             bigCard.resetCardId();
                         }

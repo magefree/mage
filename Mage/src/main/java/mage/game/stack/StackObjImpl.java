@@ -5,6 +5,8 @@
  */
 package mage.game.stack;
 
+import java.util.Set;
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
@@ -19,16 +21,13 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetAmount;
 
-import java.util.Set;
-import java.util.UUID;
-
 /**
  *
  * @author LevelX2
  */
 public abstract class StackObjImpl implements StackObject {
-    
-    private boolean targetChanged; // for Psychic Battle
+
+    protected boolean targetChanged; // for Psychic Battle
 
     /**
      * Choose new targets for a stack Object
@@ -74,12 +73,11 @@ public abstract class StackObjImpl implements StackObject {
      * the change is legal.
      *
      * Example: Arc Trail is a sorcery that reads "Arc Trail deals 2 damage to
-     * any target and 1 damage to another target creature or
-     * player." The current targets of Arc Trail are Runeclaw Bear and Llanowar
-     * Elves, in that order. You cast Redirect, an instant that reads "You may
-     * choose new targets for target spell," targeting Arc Trail. You can change
-     * the first target to Llanowar Elves and change the second target to
-     * Runeclaw Bear.
+     * any target and 1 damage to another target creature or player." The
+     * current targets of Arc Trail are Runeclaw Bear and Llanowar Elves, in
+     * that order. You cast Redirect, an instant that reads "You may choose new
+     * targets for target spell," targeting Arc Trail. You can change the first
+     * target to Llanowar Elves and change the second target to Runeclaw Bear.
      *
      * 114.7. Modal spells and abilities may have different targeting
      * requirements for each mode. An effect that allows a player to change the

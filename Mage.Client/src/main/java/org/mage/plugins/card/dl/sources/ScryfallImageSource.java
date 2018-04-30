@@ -195,7 +195,6 @@ public enum ScryfallImageSource implements CardImageSource {
         supportedSets.add("DDS");
         supportedSets.add("W17");
         supportedSets.add("AKH");
-        supportedSets.add("MPS");
         supportedSets.add("CMA");
         supportedSets.add("E01");
         supportedSets.add("HOU");

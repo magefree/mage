@@ -125,7 +125,7 @@ class TreacherousLinkEffect extends ReplacementEffectImpl {
         if (controller != null && enchantment != null) {
             Permanent enchantedCreature = game.getPermanentOrLKIBattlefield(enchantment.getAttachedTo());
             if (enchantedCreature != null) {
-                return enchantedCreature.getId() == damageEvent.getTargetId();
+                return enchantedCreature.getId().equals(damageEvent.getTargetId());
             }
         }
         return false;

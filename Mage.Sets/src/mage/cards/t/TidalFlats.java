@@ -29,6 +29,7 @@ package mage.cards.t;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -128,7 +129,7 @@ class TidalFlatsEffect extends OneShotEffect {
                 if (group != null) {
                     for (UUID blockerId : group.getBlockers()) {
                         Permanent blocker = game.getPermanent(blockerId);
-                        if (blocker != null && blocker.getControllerId() == controller.getId()) {
+                        if (blocker != null && Objects.equals(blocker.getControllerId(), controller.getId())) {
                             ContinuousEffect effect = new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn);
                             effect.setTargetPointer(new FixedTarget(blocker.getId()));
                             game.addEffect(effect, source);

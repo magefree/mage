@@ -89,6 +89,7 @@ public class StackAbility extends StackObjImpl implements Ability {
         this.name = stackAbility.name;
         this.expansionSetCode = stackAbility.expansionSetCode;
         this.targetAdjustment = stackAbility.targetAdjustment;
+        this.targetChanged = stackAbility.targetChanged;
     }
 
     @Override

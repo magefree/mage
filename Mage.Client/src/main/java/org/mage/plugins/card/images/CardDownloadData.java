@@ -84,7 +84,7 @@ public class CardDownloadData {
         if (obj == null) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
+        if (!getClass().equals(obj.getClass())) {
             return false;
         }
         final CardDownloadData other = (CardDownloadData) obj;
@@ -132,6 +132,10 @@ public class CardDownloadData {
 
     public Integer getCollectorIdAsInt() {
         return CardUtil.parseCardNumberAsInt(collectorId);
+    }
+
+    public String getCollectorIdPostfix() {
+        return getCollectorId().replaceAll(getCollectorIdAsInt().toString(), "");
     }
 
     public boolean isCollectorIdWithStr() {

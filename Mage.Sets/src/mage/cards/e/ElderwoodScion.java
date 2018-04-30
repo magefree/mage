@@ -34,7 +34,6 @@ import mage.abilities.Mode;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
-import mage.abilities.keyword.FlashbackAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
@@ -99,7 +98,7 @@ class ElderwoodScionCostReductionEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility) {
+        if (abilityToModify instanceof SpellAbility) {
             if (abilityToModify.getControllerId().equals(source.getControllerId())) {
                 for (UUID modeId : abilityToModify.getModes().getSelectedModes()) {
                     Mode mode = abilityToModify.getModes().get(modeId);
@@ -125,7 +124,7 @@ class ElderwoodScionCostReductionEffect extends CostModificationEffectImpl {
 
 class ElderwoodScionCostReductionEffect2 extends CostModificationEffectImpl {
 
-    private static final String effectText = "Spells your opponents cast that target Elderwood Scion cost {2} more to cast";
+    private static final String effectText = "Spells your opponents cast that target {this} cost {2} more to cast";
 
     ElderwoodScionCostReductionEffect2() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.INCREASE_COST);
@@ -145,7 +144,7 @@ class ElderwoodScionCostReductionEffect2 extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify.getAbilityType() == AbilityType.ACTIVATED) {
+        if (abilityToModify instanceof SpellAbility) {
             if (game.getOpponents(source.getControllerId()).contains(abilityToModify.getControllerId())) {
                 for (Target target : abilityToModify.getTargets()) {
                     for (UUID targetUUID : target.getTargets()) {

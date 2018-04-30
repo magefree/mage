@@ -35,8 +35,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureEffect;
-import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureEffect.FaceDownType;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.MorphAbility;
 import mage.cards.Card;
@@ -104,19 +102,18 @@ class ShorecrasherElementalEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
         Permanent shorecrasherElemental = game.getPermanent(source.getSourceId());
         MageObject sourceObject = source.getSourceObject(game);
-        if (shorecrasherElemental != null
-                && sourceObject != null
+        if (controller != null && shorecrasherElemental != null && sourceObject != null
                 && new MageObjectReference(sourceObject, game).refersTo(shorecrasherElemental, game)) {
-            if (shorecrasherElemental.moveToExile(source.getSourceId(), sourceObject.getName(), source.getSourceId(), game)) {
+            if (controller.moveCards(shorecrasherElemental, Zone.EXILED, source, game)) {
                 Card card = game.getExile().getCard(source.getSourceId(), game);
                 if (card != null) {
-                    game.addEffect(new BecomesFaceDownCreatureEffect(Duration.Custom, FaceDownType.MEGAMORPHED), source);
-                    return card.putOntoBattlefield(game, Zone.EXILED, source.getSourceId(), card.getOwnerId(), false, true);
-
+                    controller.moveCards(card, Zone.BATTLEFIELD, source, game, false, true, true, null);
                 }
             }
+            return true;
         }
         return false;
     }

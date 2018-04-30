@@ -136,6 +136,7 @@ public class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Divine Transformation", 304, Rarity.UNCOMMON, mage.cards.d.DivineTransformation.class));
         cards.add(new SetCardInfo("Dragon Engine", 366, Rarity.RARE, mage.cards.d.DragonEngine.class));
         cards.add(new SetCardInfo("Drain Life", 18, Rarity.COMMON, mage.cards.d.DrainLife.class));
+        cards.add(new SetCardInfo("Drain Power", 82, Rarity.RARE, mage.cards.d.DrainPower.class));
         cards.add(new SetCardInfo("Drudge Skeletons", 19, Rarity.COMMON, mage.cards.d.DrudgeSkeletons.class));
         cards.add(new SetCardInfo("Durkwood Boars", 151, Rarity.COMMON, mage.cards.d.DurkwoodBoars.class));
         cards.add(new SetCardInfo("Dust to Dust", 305, Rarity.UNCOMMON, mage.cards.d.DustToDust.class));

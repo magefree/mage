@@ -130,10 +130,10 @@ public class StarWars extends ExpansionSet {
         cards.add(new SetCardInfo("Force Reflex", 13, Rarity.COMMON, mage.cards.f.ForceReflex.class));
         cards.add(new SetCardInfo("Force Scream", 104, Rarity.UNCOMMON, mage.cards.f.ForceScream.class));
         cards.add(new SetCardInfo("Force Spark", 105, Rarity.COMMON, mage.cards.f.ForceSpark.class));
-        cards.add(new SetCardInfo("Forest", 268, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true)));
-        cards.add(new SetCardInfo("Forest", 269, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true)));
-        cards.add(new SetCardInfo("Forest", 270, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true)));
-        cards.add(new SetCardInfo("Forest", 271, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true)));
+        cards.add(new SetCardInfo("Forest", "268a", Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true)));
+        cards.add(new SetCardInfo("Forest", "268b", Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true)));
+        cards.add(new SetCardInfo("Forest", "268c", Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true)));
+        cards.add(new SetCardInfo("Forest", "268d", Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true)));
         cards.add(new SetCardInfo("Fulfill Contract", 224, Rarity.COMMON, mage.cards.f.FulfillContract.class));
         cards.add(new SetCardInfo("Gamorrean Prison Guard", 106, Rarity.UNCOMMON, mage.cards.g.GamorreanPrisonGuard.class));
         cards.add(new SetCardInfo("General Grievous", 185, Rarity.MYTHIC, mage.cards.g.GeneralGrievous.class));
@@ -160,10 +160,10 @@ public class StarWars extends ExpansionSet {
         cards.add(new SetCardInfo("Interrogation", 81, Rarity.COMMON, mage.cards.i.Interrogation.class));
         cards.add(new SetCardInfo("Ion Cannon", 15, Rarity.COMMON, mage.cards.i.IonCannon.class));
         cards.add(new SetCardInfo("Iron Fist of the Empire", 191, Rarity.RARE, mage.cards.i.IronFistOfTheEmpire.class));
-        cards.add(new SetCardInfo("Island", 256, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true)));
-        cards.add(new SetCardInfo("Island", 257, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true)));
-        cards.add(new SetCardInfo("Island", 258, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true)));
-        cards.add(new SetCardInfo("Island", 259, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true)));
+        cards.add(new SetCardInfo("Island", "256a", Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true)));
+        cards.add(new SetCardInfo("Island", "256b", Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true)));
+        cards.add(new SetCardInfo("Island", "256c", Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true)));
+        cards.add(new SetCardInfo("Island", "256d", Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true)));
         cards.add(new SetCardInfo("Ithorian Initiate", 140, Rarity.COMMON, mage.cards.i.IthorianInitiate.class));
         cards.add(new SetCardInfo("Jabba the Hutt", 192, Rarity.RARE, mage.cards.j.JabbaTheHutt.class));
         cards.add(new SetCardInfo("Jango Fett", 111, Rarity.RARE, mage.cards.j.JangoFett.class));
@@ -205,10 +205,10 @@ public class StarWars extends ExpansionSet {
         cards.add(new SetCardInfo("Moisture Farm", 247, Rarity.UNCOMMON, mage.cards.m.MoistureFarm.class));
         cards.add(new SetCardInfo("Mon Calamari Cruiser", 48, Rarity.UNCOMMON, mage.cards.m.MonCalamariCruiser.class));
         cards.add(new SetCardInfo("Mon Calamari Initiate", 49, Rarity.COMMON, mage.cards.m.MonCalamariInitiate.class));
-        cards.add(new SetCardInfo("Mountain", 264, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true)));
-        cards.add(new SetCardInfo("Mountain", 265, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true)));
-        cards.add(new SetCardInfo("Mountain", 266, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true)));
-        cards.add(new SetCardInfo("Mountain", 267, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true)));
+        cards.add(new SetCardInfo("Mountain", "264a", Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true)));
+        cards.add(new SetCardInfo("Mountain", "264b", Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true)));
+        cards.add(new SetCardInfo("Mountain", "264c", Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true)));
+        cards.add(new SetCardInfo("Mountain", "264d", Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true)));
         cards.add(new SetCardInfo("N-1 Starfighter", 225, Rarity.COMMON, mage.cards.n.N1Starfighter.class));
         cards.add(new SetCardInfo("Nebulon-B Frigate", 25, Rarity.COMMON, mage.cards.n.NebulonBFrigate.class));
         cards.add(new SetCardInfo("Neophyte Hateflayer", 82, Rarity.COMMON, mage.cards.n.NeophyteHateflayer.class));
@@ -226,10 +226,10 @@ public class StarWars extends ExpansionSet {
         cards.add(new SetCardInfo("Outer Rim Slaver", 201, Rarity.COMMON, mage.cards.o.OuterRimSlaver.class));
         cards.add(new SetCardInfo("Outlaw Holocron", 235, Rarity.COMMON, mage.cards.o.OutlawHolocron.class));
         cards.add(new SetCardInfo("Personal Energy Shield", 51, Rarity.COMMON, mage.cards.p.PersonalEnergyShield.class));
-        cards.add(new SetCardInfo("Plains", 252, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true)));
-        cards.add(new SetCardInfo("Plains", 253, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true)));
-        cards.add(new SetCardInfo("Plains", 254, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true)));
-        cards.add(new SetCardInfo("Plains", 255, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true)));
+        cards.add(new SetCardInfo("Plains", "252a", Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true)));
+        cards.add(new SetCardInfo("Plains", "252b", Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true)));
+        cards.add(new SetCardInfo("Plains", "252c", Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true)));
+        cards.add(new SetCardInfo("Plains", "252d", Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true)));
         cards.add(new SetCardInfo("Plo Koon", 27, Rarity.RARE, mage.cards.p.PloKoon.class));
         cards.add(new SetCardInfo("Precipice of Mortis", 202, Rarity.RARE, mage.cards.p.PrecipiceOfMortis.class));
         cards.add(new SetCardInfo("Predator's Strike", 151, Rarity.COMMON, mage.cards.p.PredatorsStrike.class));
@@ -289,10 +289,10 @@ public class StarWars extends ExpansionSet {
         cards.add(new SetCardInfo("Strike Team Commando", 227, Rarity.COMMON, mage.cards.s.StrikeTeamCommando.class));
         cards.add(new SetCardInfo("Super Battle Droid", 59, Rarity.COMMON, mage.cards.s.SuperBattleDroid.class));
         cards.add(new SetCardInfo("Surprise Maneuver", 60, Rarity.COMMON, mage.cards.s.SurpriseManeuver.class));
-        cards.add(new SetCardInfo("Swamp", 260, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true)));
-        cards.add(new SetCardInfo("Swamp", 261, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true)));
-        cards.add(new SetCardInfo("Swamp", 262, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true)));
-        cards.add(new SetCardInfo("Swamp", 263, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true)));
+        cards.add(new SetCardInfo("Swamp", "260a", Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true)));
+        cards.add(new SetCardInfo("Swamp", "260b", Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true)));
+        cards.add(new SetCardInfo("Swamp", "260c", Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true)));
+        cards.add(new SetCardInfo("Swamp", "260d", Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true)));
         cards.add(new SetCardInfo("Swarm the Skies", 92, Rarity.COMMON, mage.cards.s.SwarmTheSkies.class));
         cards.add(new SetCardInfo("Syndicate Enforcer", 124, Rarity.COMMON, mage.cards.s.SyndicateEnforcerSWS.class));
         cards.add(new SetCardInfo("Tank Droid", 218, Rarity.RARE, mage.cards.t.TankDroid.class));
@@ -328,5 +328,4 @@ public class StarWars extends ExpansionSet {
         cards.add(new SetCardInfo("Yoda, Jedi Master", 223, Rarity.MYTHIC, mage.cards.y.YodaJediMaster.class));
         cards.add(new SetCardInfo("Zam Wesell", 64, Rarity.RARE, mage.cards.z.ZamWesell.class));
     }
-
 }

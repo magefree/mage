@@ -133,7 +133,7 @@ class SivvisValorEffect extends ReplacementEffectImpl {
         DamageEvent damageEvent = (DamageEvent) event;
         Permanent targetPermanent = game.getPermanent(source.getFirstTarget());
         if (controller != null && targetPermanent != null) {
-            return targetPermanent.getId() == damageEvent.getTargetId();
+            return targetPermanent.getId().equals(damageEvent.getTargetId());
         }
         return false;
     }
