@@ -176,6 +176,7 @@ public class MastersEditionIV extends ExpansionSet {
         cards.add(new SetCardInfo("Healing Salve", 14, Rarity.COMMON, mage.cards.h.HealingSalve.class));
         cards.add(new SetCardInfo("Horn of Deafening", 205, Rarity.UNCOMMON, mage.cards.h.HornOfDeafening.class));
         cards.add(new SetCardInfo("Howl from Beyond", 87, Rarity.COMMON, mage.cards.h.HowlFromBeyond.class));
+        cards.add(new SetCardInfo("Ice Cauldron", 206, Rarity.RARE, mage.cards.i.IceCauldron.class));
         cards.add(new SetCardInfo("Icy Manipulator", 207, Rarity.UNCOMMON, mage.cards.i.IcyManipulator.class));
         cards.add(new SetCardInfo("In the Eye of Chaos", 51, Rarity.RARE, mage.cards.i.InTheEyeOfChaos.class));
         cards.add(new SetCardInfo("Instill Energy", 157, Rarity.UNCOMMON, mage.cards.i.InstillEnergy.class));

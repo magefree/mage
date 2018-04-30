@@ -176,6 +176,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Hyalopterous Lemure", 21, Rarity.UNCOMMON, mage.cards.h.HyalopterousLemure.class));
         cards.add(new SetCardInfo("Hydroblast", 72, Rarity.COMMON, mage.cards.h.Hydroblast.class));
         cards.add(new SetCardInfo("Hymn of Rebirth", 373, Rarity.UNCOMMON, mage.cards.h.HymnOfRebirth.class));
+        cards.add(new SetCardInfo("Ice Cauldron", 296, Rarity.RARE, mage.cards.i.IceCauldron.class));
         cards.add(new SetCardInfo("Ice Floe", 333, Rarity.UNCOMMON, mage.cards.i.IceFloe.class));
         cards.add(new SetCardInfo("Iceberg", 73, Rarity.UNCOMMON, mage.cards.i.Iceberg.class));
         cards.add(new SetCardInfo("Icequake", 22, Rarity.UNCOMMON, mage.cards.i.Icequake.class));
