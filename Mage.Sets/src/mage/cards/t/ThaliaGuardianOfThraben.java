@@ -34,7 +34,6 @@ import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.keyword.FirstStrikeAbility;
-import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -49,7 +48,7 @@ import mage.util.CardUtil;
 public class ThaliaGuardianOfThraben extends CardImpl {
 
     public ThaliaGuardianOfThraben(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SOLDIER);
@@ -76,7 +75,7 @@ public class ThaliaGuardianOfThraben extends CardImpl {
 
 class ThaliaGuardianOfThrabenCostReductionEffect extends CostModificationEffectImpl {
 
-    ThaliaGuardianOfThrabenCostReductionEffect ( ) {
+    ThaliaGuardianOfThrabenCostReductionEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.INCREASE_COST);
         staticText = "Noncreature spells cost {1} more to cast";
     }
@@ -93,7 +92,7 @@ class ThaliaGuardianOfThrabenCostReductionEffect extends CostModificationEffectI
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility) {
+        if (abilityToModify instanceof SpellAbility) {
             Card card = game.getCard(abilityToModify.getSourceId());
             if (card != null && !card.isCreature()) {
                 return true;

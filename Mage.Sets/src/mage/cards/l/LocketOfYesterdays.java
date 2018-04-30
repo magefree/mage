@@ -33,7 +33,6 @@ import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
-import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -48,7 +47,7 @@ import mage.util.CardUtil;
 public class LocketOfYesterdays extends CardImpl {
 
     public LocketOfYesterdays(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
 
         // Spells you cast cost {1} less to cast for each card with the same name as that spell in your graveyard.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LocketOfYesterdaysCostReductionEffect()));
@@ -80,7 +79,7 @@ class LocketOfYesterdaysCostReductionEffect extends CostModificationEffectImpl {
         MageObject sourceObject = game.getObject(abilityToModify.getSourceId());
         if (sourceObject != null) {
             int amount = 0;
-            for (UUID cardId :game.getPlayer(source.getControllerId()).getGraveyard()) {
+            for (UUID cardId : game.getPlayer(source.getControllerId()).getGraveyard()) {
                 Card card = game.getCard(cardId);
                 if (card != null && card.getName().equals(sourceObject.getName())) {
                     amount++;
@@ -97,9 +96,9 @@ class LocketOfYesterdaysCostReductionEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify.getControllerId().equals(source.getControllerId()) &&
-            (abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility)) {
-                return true;
+        if (abilityToModify.getControllerId().equals(source.getControllerId())
+                && (abilityToModify instanceof SpellAbility)) {
+            return true;
         }
         return false;
     }

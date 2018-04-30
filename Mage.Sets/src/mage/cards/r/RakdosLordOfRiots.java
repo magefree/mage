@@ -35,10 +35,8 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.OpponentsLostLifeCount;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
-import mage.abilities.keyword.FlashbackAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -147,15 +145,11 @@ class RakdosLordOfRiotsCostReductionEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility) {
+        if (abilityToModify instanceof SpellAbility) {
             if (abilityToModify.getControllerId().equals(source.getControllerId())) {
                 Spell spell = (Spell) game.getStack().getStackObject(abilityToModify.getId());
                 if (spell != null) {
                     return spell.isCreature();
-                } else {
-                    // used at least for flashback ability because Flashback ability doesn't use stack or for getPlayables where spell is not cast yet
-                    Card sourceCard = game.getCard(abilityToModify.getSourceId());
-                    return sourceCard != null && sourceCard.isCreature();
                 }
             }
         }
