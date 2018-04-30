@@ -30,6 +30,7 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BecomesTappedAttachedTriggeredAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
@@ -37,8 +38,8 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.game.Game;
@@ -47,6 +48,7 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -65,7 +67,8 @@ public class SteamVines extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
-        // When enchanted land becomes tapped, destroy it and Steam Vines deals 1 damage to that land's controller. That player attaches Steam Vines to a land of their choice.
+        // When enchanted land becomes tapped, destroy it and Steam Vines deals 1 damage to that land's controller.
+        // That player attaches Steam Vines to a land of their choice.
         this.addAbility(new BecomesTappedAttachedTriggeredAbility(new SteamVinesEffect(), "enchanted land"));
 
     }
@@ -98,10 +101,10 @@ class SteamVinesEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent kudzu = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        Card kudzuCard = game.getCard(source.getSourceId());
-        if (kudzu != null) {
-            Permanent enchantedLand = game.getPermanentOrLKIBattlefield(kudzu.getAttachedTo());
+        Permanent steamVines = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        Card steamVinesCard = game.getCard(source.getSourceId());
+        if (steamVines != null) {
+            Permanent enchantedLand = game.getPermanentOrLKIBattlefield(steamVines.getAttachedTo());
             Player controller = game.getPlayer(source.getControllerId());
             if (enchantedLand != null
                     && controller != null) {
@@ -113,20 +116,20 @@ class SteamVinesEffect extends OneShotEffect {
                 if (!game.getBattlefield().getAllActivePermanents(CardType.LAND).isEmpty()) { //lands are available on the battlefield
                     Target target = new TargetLandPermanent();
                     target.setNotTarget(true); //not a target, it is chosen
-                    if (kudzuCard != null
+                    if (steamVinesCard != null
                             && landsController != null) {
-                        if (landsController.choose(Outcome.Detriment, target, source.getId(), game)) {
+                        if (landsController.choose(Outcome.DestroyPermanent, target, source.getId(), game)) {
                             if (target.getFirstTarget() != null) {
                                 Permanent landChosen = game.getPermanent(target.getFirstTarget());
                                 if (landChosen != null) {
-                                    for (Target targetTest : kudzuCard.getSpellAbility().getTargets()) {
+                                    for (Target targetTest : steamVinesCard.getSpellAbility().getTargets()) {
                                         Filter filterTest = targetTest.getFilter();
                                         if (filterTest.match(landChosen, game)) {
                                             if (game.getBattlefield().containsPermanent(landChosen.getId())) { //verify that it is still on the battlefield
-                                                game.getState().setValue("attachTo:" + kudzuCard.getId(), landChosen);
-                                                Zone zone = game.getState().getZone(kudzuCard.getId());
-                                                kudzuCard.putOntoBattlefield(game, zone, source.getSourceId(), controller.getId());
-                                                return landChosen.addAttachment(kudzuCard.getId(), game);
+                                                game.informPlayers(landsController.getLogName() + " attaches " + steamVines.getLogName() + " to " + landChosen.getLogName());
+                                                Effect effect = new AttachEffect(Outcome.Neutral);
+                                                effect.setTargetPointer(new FixedTarget(landChosen, game));
+                                                return effect.apply(game, source);
                                             }
                                         }
                                     }

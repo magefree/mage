@@ -58,7 +58,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public class StonehewerGiant extends CardImpl {
 
     public StonehewerGiant(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
         this.subtype.add(SubType.GIANT);
         this.subtype.add(SubType.WARRIOR);
 
@@ -102,28 +102,27 @@ class StonehewerGiantEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
             return false;
         }
 
         FilterCard filter = new FilterCard("Equipment");
         filter.add(new SubtypePredicate(SubType.EQUIPMENT));
         TargetCardInLibrary target = new TargetCardInLibrary(filter);
-        if (player.searchLibrary(target, game)) {
-            Card card = player.getLibrary().getCard(target.getFirstTarget(), game);
+        if (controller.searchLibrary(target, game)) {
+            Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
             if (card != null) {
-                card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), source.getControllerId());
+                controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                 Permanent equipment = game.getPermanent(card.getId());
-
                 Target targetCreature = new TargetControlledCreaturePermanent();
-                if (equipment != null && player.choose(Outcome.BoostCreature, targetCreature, source.getSourceId(), game)) {
+                if (equipment != null && controller.choose(Outcome.BoostCreature, targetCreature, source.getSourceId(), game)) {
                     Permanent permanent = game.getPermanent(targetCreature.getFirstTarget());
                     permanent.addAttachment(equipment.getId(), game);
                 }
             }
         }
-        player.shuffleLibrary(source, game);
+        controller.shuffleLibrary(source, game);
         return true;
     }
 }
