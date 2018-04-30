@@ -32,7 +32,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.costs.mana.ManaCost;
@@ -42,11 +41,13 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityType;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.permanent.PermanentInListPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.ManaPoolItem;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
@@ -58,7 +59,7 @@ import mage.target.TargetPlayer;
 public class DrainPower extends CardImpl {
 
     public DrainPower(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{U}{U}");
 
         // Target player activates a mana ability of each land they control. Then that player loses all unspent mana and you add the mana lost this way.
         this.getSpellAbility().addEffect(new DrainPowerEffect());
@@ -76,11 +77,11 @@ public class DrainPower extends CardImpl {
 }
 
 class DrainPowerEffect extends OneShotEffect {
-    
+
     private static final FilterLandPermanent filter = new FilterLandPermanent();
 
     public DrainPowerEffect() {
-        super(Outcome.Tap);
+        super(Outcome.PutManaInPool);
         this.staticText = "Target player activates a mana ability of each land they control. Then that player loses all unspent mana and you add the mana lost this way";
     }
 
@@ -100,7 +101,7 @@ class DrainPowerEffect extends OneShotEffect {
         if (targetPlayer != null) {
             List<Permanent> ignorePermanents = new ArrayList<>();
             TargetPermanent target = null;
-            
+
             while (true) {
                 Map<Permanent, List<ActivatedManaAbilityImpl>> manaAbilitiesMap = new HashMap<>();
                 for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, targetPlayer.getId(), game)) {
@@ -131,9 +132,9 @@ class DrainPowerEffect extends OneShotEffect {
                 if (manaAbilitiesMap.isEmpty()) {
                     break;
                 }
-                
-                List<Permanent> permList = new ArrayList<Permanent>(manaAbilitiesMap.keySet());
-                Permanent permanent = null;
+
+                List<Permanent> permList = new ArrayList<>(manaAbilitiesMap.keySet());
+                Permanent permanent;
                 if (permList.size() > 1 || target != null) {
                     FilterLandPermanent filter2 = new FilterLandPermanent("land you control to tap for mana (remaining: " + permList.size() + ')');
                     filter2.add(new PermanentInListPredicate(permList));
@@ -149,9 +150,9 @@ class DrainPowerEffect extends OneShotEffect {
                     int i = 0;
                     for (ActivatedManaAbilityImpl manaAbility : manaAbilitiesMap.get(permanent)) {
                         i++;
-                        if (manaAbilitiesMap.get(permanent).size() <= i 
-                                || targetPlayer.chooseUse(Outcome.Neutral, "Activate mana ability \"" + manaAbility.getRule() + "\" of " + permanent.getLogName() 
-                                + "? (Choose \"no\" to activate next mana ability)", source, game)) {
+                        if (manaAbilitiesMap.get(permanent).size() <= i
+                                || targetPlayer.chooseUse(Outcome.Neutral, "Activate mana ability \"" + manaAbility.getRule() + "\" of " + permanent.getLogName()
+                                        + "? (Choose \"no\" to activate next mana ability)", source, game)) {
                             boolean originalCanUndo = manaAbility.isUndoPossible();
                             manaAbility.setUndoPossible(false); // prevents being able to undo Drain Power
                             if (targetPlayer.activateAbility(manaAbility, game)) {
@@ -163,14 +164,18 @@ class DrainPowerEffect extends OneShotEffect {
                     }
                 }
             }
-            
-            // 106.12. One card (Drain Power) causes one player to lose unspent mana and another to add “the mana lost this way.” (Note that these may be the same player.) 
-            // This empties the former player’s mana pool and causes the mana emptied this way to be put into the latter player’s mana pool. Which permanents, spells, and/or 
+
+            // 106.12. One card (Drain Power) causes one player to lose unspent mana and another to add “the mana lost this way.” (Note that these may be the same player.)
+            // This empties the former player’s mana pool and causes the mana emptied this way to be put into the latter player’s mana pool. Which permanents, spells, and/or
             // abilities produced that mana are unchanged, as are any restrictions or additional effects associated with any of that mana.
             // TODO: retain riders associated with drained mana
-            Mana mana = targetPlayer.getManaPool().getMana();
+            List<ManaPoolItem> manaItems = targetPlayer.getManaPool().getManaItems();
             targetPlayer.getManaPool().emptyPool(game);
-            controller.getManaPool().addMana(mana, game, source);
+            for (ManaPoolItem manaPoolItem : manaItems) {
+                controller.getManaPool().addMana(
+                        manaPoolItem.isConditional() ? manaPoolItem.getConditionalMana() : manaPoolItem.getMana(),
+                        game, source, Duration.EndOfTurn.equals(manaPoolItem.getDuration()));
+            }
             return true;
         }
         return false;
