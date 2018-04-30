@@ -88,6 +88,7 @@ public class LimitedEditionAlpha extends ExpansionSet {
         cards.add(new SetCardInfo("Disrupting Scepter", 242, Rarity.RARE, mage.cards.d.DisruptingScepter.class));
         cards.add(new SetCardInfo("Dragon Whelp", 142, Rarity.UNCOMMON, mage.cards.d.DragonWhelp.class));
         cards.add(new SetCardInfo("Drain Life", 14, Rarity.COMMON, mage.cards.d.DrainLife.class));
+        cards.add(new SetCardInfo("Drain Power", 57, Rarity.RARE, mage.cards.d.DrainPower.class));
         cards.add(new SetCardInfo("Drudge Skeletons", 15, Rarity.COMMON, mage.cards.d.DrudgeSkeletons.class));
         cards.add(new SetCardInfo("Dwarven Demolition Team", 143, Rarity.UNCOMMON, mage.cards.d.DwarvenDemolitionTeam.class));
         cards.add(new SetCardInfo("Dwarven Warriors", 144, Rarity.COMMON, mage.cards.d.DwarvenWarriors.class));
