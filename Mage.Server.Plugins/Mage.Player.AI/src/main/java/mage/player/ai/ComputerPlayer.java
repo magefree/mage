@@ -148,13 +148,23 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         if (log.isDebugEnabled()) {
             log.debug("chooseTarget: " + outcome.toString() + ':' + target.toString());
         }
+
         // sometimes a target selection can be made from a player that does not control the ability
         UUID abilityControllerId = playerId;
         if (target.getTargetController() != null
                 && target.getAbilityController() != null) {
             abilityControllerId = target.getAbilityController();
         }
-        UUID randomOpponentId = getRandomOpponent(target.getTargetController() == null ? abilityControllerId : target.getTargetController(), game);
+
+        UUID randomOpponentId;
+        if (target.getTargetController() != null) {
+            randomOpponentId = getRandomOpponent(target.getTargetController(), game);;
+        } else if (abilityControllerId != null) {
+            randomOpponentId = getRandomOpponent(abilityControllerId, game);
+        } else {
+            randomOpponentId = getRandomOpponent(playerId, game);
+        }
+
         if (target.getOriginalTarget() instanceof TargetPlayer) {
             return setTargetPlayer(outcome, target, null, sourceId, abilityControllerId, randomOpponentId, game);
         }
@@ -438,7 +448,16 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         if (target.getAbilityController() != null) {
             abilityControllerId = target.getAbilityController();
         }
-        UUID randomOpponentId = getRandomOpponent(target.getTargetController() == null ? source.getControllerId() : target.getTargetController(), game);
+
+        UUID randomOpponentId;
+        if (target.getTargetController() != null) {
+            randomOpponentId = getRandomOpponent(target.getTargetController(), game);;
+        } else if (source != null && source.getControllerId() != null) {
+            randomOpponentId = getRandomOpponent(source.getControllerId(), game);
+        } else {
+            randomOpponentId = getRandomOpponent(playerId, game);
+        }
+
         if (target.getOriginalTarget() instanceof TargetPlayer) {
             return setTargetPlayer(outcome, target, source, source.getSourceId(), abilityControllerId, randomOpponentId, game);
         }
