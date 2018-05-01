@@ -212,20 +212,11 @@ public final class CardImageUtils {
 
         String finalFileName = "";
         if (card.getUsesVariousArt()) {
-            finalFileName = cardName + '.' + card.getCollectorId() + ".full.jpg";
+            // different arts uses name + collector id
+            finalFileName = cardName + prefixType + '.' + card.getCollectorId() + ".full.jpg";
         } else {
-            if (card.getUsesVariousArt()) {
-                // only various arts can be same name, but different postfixes (a,b,c,d,e)
-                int len = card.getCollectorId().length();
-                if (Character.isLetter(card.getCollectorId().charAt(len - 1))) {
-                    finalFileName = cardName + card.getCollectorId().charAt(len - 1) + ".full.jpg";
-                } else {
-                    finalFileName = cardName + prefixType + ".full.jpg";
-                }
-            } else {
-                // normal cards with same names;
-                finalFileName = cardName + prefixType + ".full.jpg";
-            }
+            // basic arts uses name
+            finalFileName = cardName + prefixType + ".full.jpg";
         }
 
         // if image file exists, correct name (for case sensitive systems)
