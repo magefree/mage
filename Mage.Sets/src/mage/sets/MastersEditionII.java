@@ -98,6 +98,7 @@ public class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Burnout", 121, Rarity.UNCOMMON, mage.cards.b.Burnout.class));
         cards.add(new SetCardInfo("Carapace", 155, Rarity.COMMON, mage.cards.c.Carapace.class));
         cards.add(new SetCardInfo("Caribou Range", 8, Rarity.RARE, mage.cards.c.CaribouRange.class));
+        cards.add(new SetCardInfo("Clockwork Steed", 205, Rarity.UNCOMMON, mage.cards.c.ClockworkSteed.class));
         cards.add(new SetCardInfo("Combat Medic", 9, Rarity.COMMON, CombatMedic.class));
         cards.add(new SetCardInfo("Conquer", 122, Rarity.UNCOMMON, mage.cards.c.Conquer.class));
         cards.add(new SetCardInfo("Counterspell", 44, Rarity.UNCOMMON, mage.cards.c.Counterspell.class));
@@ -138,6 +139,7 @@ public class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Forgotten Lore", 164, Rarity.UNCOMMON, mage.cards.f.ForgottenLore.class));
         cards.add(new SetCardInfo("Foul Familiar", 90, Rarity.COMMON, mage.cards.f.FoulFamiliar.class));
         cards.add(new SetCardInfo("Fumarole", 194, Rarity.UNCOMMON, mage.cards.f.Fumarole.class));
+        cards.add(new SetCardInfo("Funeral March", 91, Rarity.COMMON, mage.cards.f.FuneralMarch.class));
         cards.add(new SetCardInfo("Fungal Bloom", 165, Rarity.RARE, mage.cards.f.FungalBloom.class));
         cards.add(new SetCardInfo("Fyndhorn Pollen", 166, Rarity.RARE, mage.cards.f.FyndhornPollen.class));
         cards.add(new SetCardInfo("Gangrenous Zombies", 92, Rarity.COMMON, mage.cards.g.GangrenousZombies.class));

@@ -100,10 +100,11 @@ class DrainPowerEffect extends OneShotEffect {
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
         if (targetPlayer != null) {
             List<Permanent> ignorePermanents = new ArrayList<>();
+            Map<Permanent, List<ActivatedManaAbilityImpl>> manaAbilitiesMap = new HashMap<>();
             TargetPermanent target = null;
-
+            
             while (true) {
-                Map<Permanent, List<ActivatedManaAbilityImpl>> manaAbilitiesMap = new HashMap<>();
+                manaAbilitiesMap.clear();
                 for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, targetPlayer.getId(), game)) {
                     if (!ignorePermanents.contains(permanent)) {
                         List<ActivatedManaAbilityImpl> manaAbilities = new ArrayList<>();
@@ -111,7 +112,6 @@ class DrainPowerEffect extends OneShotEffect {
                         for (Ability ability : permanent.getAbilities()) {
                             if (ability instanceof ActivatedAbility && ability.getAbilityType() == AbilityType.MANA) {
                                 ActivatedManaAbilityImpl manaAbility = (ActivatedManaAbilityImpl) ability;
-                                // TODO: make Rhystic Cave untappable due to its instant speed limitation (this is a Rhystic Cave canActivate bug)
                                 if (manaAbility != null && manaAbility.canActivate(targetPlayer.getId(), game)) {
                                     // canActivate can't check for mana abilities that require a mana cost, if the payment isn't possible (Cabal Coffers etc)
                                     // so it's necessary to filter them out manually - might be buggy in some fringe cases
@@ -168,7 +168,6 @@ class DrainPowerEffect extends OneShotEffect {
             // 106.12. One card (Drain Power) causes one player to lose unspent mana and another to add “the mana lost this way.” (Note that these may be the same player.)
             // This empties the former player’s mana pool and causes the mana emptied this way to be put into the latter player’s mana pool. Which permanents, spells, and/or
             // abilities produced that mana are unchanged, as are any restrictions or additional effects associated with any of that mana.
-            // TODO: retain riders associated with drained mana
             List<ManaPoolItem> manaItems = targetPlayer.getManaPool().getManaItems();
             targetPlayer.getManaPool().emptyPool(game);
             for (ManaPoolItem manaPoolItem : manaItems) {

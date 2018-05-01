@@ -66,6 +66,7 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Amrou Kithkin", 172, Rarity.COMMON, mage.cards.a.AmrouKithkin.class));
         cards.add(new SetCardInfo("Angelic Voices", 173, Rarity.RARE, mage.cards.a.AngelicVoices.class));
         cards.add(new SetCardInfo("Angus Mackenzie", 257, Rarity.RARE, mage.cards.a.AngusMackenzie.class));
+        cards.add(new SetCardInfo("Anti-Magic Aura", 45, Rarity.COMMON, mage.cards.a.AntiMagicAura.class));
         cards.add(new SetCardInfo("Arboria", 88, Rarity.UNCOMMON, mage.cards.a.Arboria.class));
         cards.add(new SetCardInfo("Arcades Sabboth", 258, Rarity.RARE, mage.cards.a.ArcadesSabboth.class));
         cards.add(new SetCardInfo("Arena of the Ancients", 215, Rarity.RARE, mage.cards.a.ArenaOfTheAncients.class));
@@ -235,6 +236,7 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Red Mana Battery", 236, Rarity.UNCOMMON, mage.cards.r.RedManaBattery.class));
         cards.add(new SetCardInfo("Reincarnation", 115, Rarity.UNCOMMON, mage.cards.r.Reincarnation.class));
         cards.add(new SetCardInfo("Relic Barrier", 237, Rarity.UNCOMMON, mage.cards.r.RelicBarrier.class));
+        cards.add(new SetCardInfo("Relic Bind", 71, Rarity.UNCOMMON, mage.cards.r.RelicBind.class));
         cards.add(new SetCardInfo("Remove Enchantments", 202, Rarity.COMMON, mage.cards.r.RemoveEnchantments.class));
         cards.add(new SetCardInfo("Remove Soul", 72, Rarity.COMMON, mage.cards.r.RemoveSoul.class));
         cards.add(new SetCardInfo("Reset", 73, Rarity.UNCOMMON, mage.cards.r.Reset.class));
@@ -293,8 +295,10 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Urborg", 255, Rarity.UNCOMMON, mage.cards.u.Urborg.class));
         cards.add(new SetCardInfo("Vaevictis Asmadi", 309, Rarity.RARE, mage.cards.v.VaevictisAsmadi.class));
         cards.add(new SetCardInfo("Vampire Bats", 39, Rarity.COMMON, mage.cards.v.VampireBats.class));
+        cards.add(new SetCardInfo("Visions", 210, Rarity.UNCOMMON, mage.cards.v.Visions.class));
         cards.add(new SetCardInfo("Walking Dead", 40, Rarity.COMMON, mage.cards.w.WalkingDead.class));
         cards.add(new SetCardInfo("Wall of Caltrops", 211, Rarity.COMMON, mage.cards.w.WallOfCaltrops.class));
+        cards.add(new SetCardInfo("Wall of Dust", 165, Rarity.UNCOMMON, mage.cards.w.WallOfDust.class));
         cards.add(new SetCardInfo("Wall of Earth", 166, Rarity.COMMON, mage.cards.w.WallOfEarth.class));
         cards.add(new SetCardInfo("Wall of Heat", 167, Rarity.COMMON, mage.cards.w.WallOfHeat.class));
         cards.add(new SetCardInfo("Wall of Light", 212, Rarity.UNCOMMON, mage.cards.w.WallOfLight.class));
