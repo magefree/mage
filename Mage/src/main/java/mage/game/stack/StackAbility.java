@@ -101,14 +101,14 @@ public class StackAbility extends StackObjImpl implements Ability {
     public boolean resolve(Game game) {
         if (ability.getTargets().stillLegal(ability, game) || !canFizzle()) {
             boolean result = ability.resolve(game);
-            game.getStack().remove(this);
+            game.getStack().remove(this, game);
             return result;
         }
         if (!game.isSimulation()) {
             game.informPlayers("Ability has been fizzled: " + getRule());
         }
         counter(null, game);
-        game.getStack().remove(this);
+        game.getStack().remove(this, game);
         return false;
     }
 

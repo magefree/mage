@@ -157,6 +157,8 @@ public abstract class AbilityImpl implements Ability {
     public void newId() {
         if (!(this instanceof MageSingleton)) {
             this.id = UUID.randomUUID();
+//            this.sourceObject = null;
+//            this.sourceObjectZoneChangeCounter = -1;
         }
         getEffects().newId();
     }
@@ -1211,7 +1213,7 @@ public abstract class AbilityImpl implements Ability {
 
     @Override
     public Permanent getSourcePermanentIfItStillExists(Game game) {
-        if (sourceObject == null) {
+        if (sourceObject == null || !sourceObject.getId().equals(getSourceId())) {
             setSourceObject(game.getObject(getSourceId()), game);
         }
         if (sourceObject instanceof Permanent) {

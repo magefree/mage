@@ -63,10 +63,7 @@ public class TapSourceEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent == null) {
-            permanent = game.getPermanentEntering(source.getSourceId());
-        }
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent != null) {
             if (withoutTrigger) {
                 permanent.setTapped(true);

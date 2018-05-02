@@ -328,12 +328,15 @@ public abstract class GameImpl implements Game, Serializable {
         MageObject object;
         if (state.getBattlefield().containsPermanent(objectId)) {
             object = state.getBattlefield().getPermanent(objectId);
-            state.setZone(objectId, Zone.BATTLEFIELD); // why is this neccessary?
+            // state.setZone(objectId, Zone.BATTLEFIELD); // why is this neccessary?
             return object;
+        }
+        if (getPermanentsEntering().containsKey(objectId)) {
+            return getPermanentEntering(objectId);
         }
         for (StackObject item : state.getStack()) {
             if (item.getId().equals(objectId)) {
-                state.setZone(objectId, Zone.STACK); // why is this neccessary?
+                //  state.setZone(objectId, Zone.STACK); // why is this neccessary?
                 return item;
             }
             if (item.getSourceId().equals(objectId) && item instanceof Spell) {
@@ -1421,7 +1424,7 @@ public abstract class GameImpl implements Game, Serializable {
             top.resolve(this);
         } finally {
             if (top != null) {
-                state.getStack().remove(top); // seems partly redundant because move card from stack to grave is already done and the stack removed
+                state.getStack().remove(top, this); // seems partly redundant because move card from stack to grave is already done and the stack removed
                 rememberLKI(top.getSourceId(), Zone.STACK, top);
                 checkInfiniteLoop(top.getSourceId());
                 if (!getTurn().isEndTurnRequested()) {
@@ -2581,10 +2584,10 @@ public abstract class GameImpl implements Game, Serializable {
                 it.remove();
             }
         }
-       
+
         if (addPlaneAgain) {
             boolean addedAgain = false;
-            for (Player aplayer : state.getPlayers().values()) {                
+            for (Player aplayer : state.getPlayers().values()) {
                 if (!aplayer.hasLeft() && !addedAgain) {
                     addedAgain = true;
                     Plane plane = Plane.getRandomPlane();

@@ -92,6 +92,13 @@ public class GainAbilitySourceEffect extends ContinuousEffectImpl implements Sou
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
+        if (!onCard && Duration.WhileOnBattlefield != duration) {
+            // If source permanent is no longer onto battlefield discard the effect
+            if (source.getSourcePermanentIfItStillExists(game) == null) {
+                discard();
+                return;
+            }
+        }
         if (affectedObjectsSet) {
             Permanent permanent = game.getPermanentEntering(source.getSourceId());
             if (permanent != null) {

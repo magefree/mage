@@ -70,6 +70,17 @@ public class LoseCreatureTypeSourceEffect extends ContinuousEffectImpl implement
     }
 
     @Override
+    public void init(Ability source, Game game) {
+        super.init(source, game); //To change body of generated methods, choose Tools | Templates.
+        if (duration.isOnlyValidIfNoZoneChange()) {
+            // If source permanent is no longer onto battlefield discard the effect
+            if (source.getSourcePermanentIfItStillExists(game) == null) {
+                discard();
+            }
+        }
+    }
+
+    @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         if (dynamicValue.calculate(game, source, this) >= lessThan) {
             return false;

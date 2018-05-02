@@ -33,6 +33,7 @@ import mage.cards.Card;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.players.Player;
 
 /**
  *
@@ -81,16 +82,17 @@ public class ReturnToBattlefieldUnderOwnerControlSourceEffect extends OneShotEff
 
     @Override
     public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
         Card card = game.getCard(source.getSourceId());
-        if (card != null) {
+        if (controller != null && card != null) {
             // return only from public zones
             switch (game.getState().getZone(card.getId())) {
                 case EXILED:
                 case COMMAND:
                 case GRAVEYARD:
                     if (zoneChangeCounter < 0 || game.getState().getZoneChangeCounter(card.getId()) == zoneChangeCounter) {
-                        Zone currentZone = game.getState().getZone(card.getId());
-                        if (card.putOntoBattlefield(game, currentZone, source.getSourceId(), card.getOwnerId(), tapped)) {
+
+                        if (controller.moveCards(card, Zone.BATTLEFIELD, source, game, tapped, false, true, null)) {
                             if (attacking) {
                                 game.getCombat().addAttackingCreature(card.getId(), game);
                             }

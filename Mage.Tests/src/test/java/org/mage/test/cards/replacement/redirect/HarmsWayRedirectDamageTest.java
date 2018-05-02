@@ -7,8 +7,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  * Harm's Way: The next 2 damage that a source of your choice would deal to you
- * and/or permanents you control this turn is dealt to any target
- * instead.
+ * and/or permanents you control this turn is dealt to any target instead.
  *
  * @author noxx
  */
@@ -23,7 +22,7 @@ public class HarmsWayRedirectDamageTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Lightning Bolt");
         addCard(Zone.BATTLEFIELD, playerA, "Mountain");
 
-        addCard(Zone.HAND, playerB, "Harm's Way");
+        addCard(Zone.HAND, playerB, "Harm's Way"); // Instant {W}
         addCard(Zone.BATTLEFIELD, playerB, "Plains");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
@@ -32,6 +31,9 @@ public class HarmsWayRedirectDamageTest extends CardTestPlayerBase {
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
+
+        assertGraveyardCount(playerA, "Lightning Bolt", 1);
+        assertGraveyardCount(playerB, "Harm's Way", 1);
 
         // 2 damage was redirected back
         assertLife(playerA, 18);

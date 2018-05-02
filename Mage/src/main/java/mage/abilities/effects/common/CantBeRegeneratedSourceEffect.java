@@ -27,6 +27,7 @@
  */
 package mage.abilities.effects.common;
 
+import java.util.Objects;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
@@ -35,8 +36,6 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-
-import java.util.Objects;
 
 /**
  *
@@ -65,6 +64,17 @@ public class CantBeRegeneratedSourceEffect extends ContinuousRuleModifyingEffect
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == EventType.REGENERATE;
+    }
+
+    @Override
+    public void init(Ability source, Game game) {
+        super.init(source, game); //To change body of generated methods, choose Tools | Templates.
+        if (duration.isOnlyValidIfNoZoneChange()) {
+            // If source permanent is no longer onto battlefield discard the effect
+            if (source.getSourcePermanentIfItStillExists(game) == null) {
+                discard();
+            }
+        }
     }
 
     @Override

@@ -3687,7 +3687,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     final Spell spell = (Spell) card;
                     if (spell.isCopiedSpell()) {
                         // Copied spell, only remove from stack
-                        game.getStack().remove(spell);
+                        game.getStack().remove(spell, game);
                     }
                 }
                 game.informPlayers(this.getLogName() + " moves " + (withName ? card.getLogName() + (card.isCopy() ? " (Copy)" : "") : "a card face down") + ' '

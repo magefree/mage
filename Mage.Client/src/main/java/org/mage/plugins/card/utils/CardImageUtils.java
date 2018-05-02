@@ -45,8 +45,11 @@ public final class CardImageUtils {
                 pathCache.put(card, filePath);
                 return filePath;
             }
+
+            log.warn("Token image file not found. Set: " + card.getSet() + " Token Set Code: " + card.getTokenSetCode() + " Name: " + card.getName() + " File path: " + filePath);
+        } else {
+            log.warn("Trying to get token path for non token card. Set: " + card.getSet() + " Set Code: " + card.getTokenSetCode() + " Name: " + card.getName());
         }
-        log.warn("Token image file not found: " + card.getSet() + " - " + card.getTokenSetCode() + " - " + card.getName());
         return null;
     }
 

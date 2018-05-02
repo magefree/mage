@@ -67,15 +67,16 @@ public class SpellStack extends ArrayDeque<StackObject> {
             if (top != null) {
                 if (contains(top)) {
                     logger.warn("StackObject was still on the stack after resoving" + top.getName());
-                    this.remove(top);
+                    this.remove(top, game);
                 }
             }
         }
     }
 
-    public boolean remove(StackObject object) {
+    public boolean remove(StackObject object, Game game) {
         for (StackObject spell : this) {
             if (spell.getId().equals(object.getId())) {
+                game.getState().setZone(spell.getId(), null);
                 return super.remove(spell);
             }
         }
@@ -107,7 +108,7 @@ public class SpellStack extends ArrayDeque<StackObject> {
             }
             if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.COUNTER, objectId, sourceId, stackObject.getControllerId()))) {
                 if (!(stackObject instanceof Spell)) { // spells are removed from stack by the card movement
-                    this.remove(stackObject);
+                    this.remove(stackObject, game);
                 }
                 stackObject.counter(sourceId, game, zone, owner, zoneDetail);
                 if (!game.isSimulation()) {
