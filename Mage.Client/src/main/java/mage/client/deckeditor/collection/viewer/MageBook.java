@@ -581,7 +581,7 @@ public class MageBook extends JComponent {
         }
         int start = page * conf.CARDS_PER_PAGE;
         int end = page * conf.CARDS_PER_PAGE + conf.CARDS_PER_PAGE;
-        int ttokens = getTotalNumTokens(set);
+        int ttokens = tokens.size();
         int temblems = getTotalNumEmblems(set);
         int tplanes = getTotalNumPlanes(set);
         int numTokensEmblemsPlanes = ttokens + temblems + tplanes;
