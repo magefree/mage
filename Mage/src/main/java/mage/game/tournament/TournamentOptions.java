@@ -98,6 +98,7 @@ public class TournamentOptions implements Serializable {
 
     public void setPlaneChase(boolean planeChase) {
         this.planeChase = planeChase;
+        this.matchOptions.setPlaneChase(planeChase);
     }    
 
     public int getNumberRounds() {
