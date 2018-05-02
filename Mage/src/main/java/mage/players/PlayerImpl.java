@@ -2226,7 +2226,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     Player opponent = game.getPlayer(opponentId);
                     if (opponent != null && !opponent.hasLost()) {
                         logger.debug("player won -> calling opponent lost: " + this.getName() + "  opponent: " + opponent.getName());
-                        opponent.lost(game);
+                        opponent.lostForced(game);
                     }
                 }
                 // if no more opponents alive, you win and the game ends

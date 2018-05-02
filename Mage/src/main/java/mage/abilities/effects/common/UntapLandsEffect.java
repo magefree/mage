@@ -31,8 +31,6 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
-import mage.filter.FilterPermanent;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
@@ -46,6 +44,11 @@ import mage.util.CardUtil;
  */
 public class UntapLandsEffect extends OneShotEffect {
 
+    private static final FilterLandPermanent filter = new FilterLandPermanent("untapped lands");
+
+    static {
+        filter.add(new TappedPredicate());
+    }
     private final int amount;
     private final boolean upTo;
 
@@ -70,15 +73,12 @@ public class UntapLandsEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            TargetLandPermanent target = new TargetLandPermanent(upTo ? 0 : amount, amount, StaticFilters.FILTER_LAND, true);
+            int tappedLands = game.getBattlefield().getAllActivePermanents(filter, controller.getId(), game).size();
+            TargetLandPermanent target = new TargetLandPermanent(upTo ? 0 : Math.min(tappedLands, amount), amount, filter, true);
             if (target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
 
                 // UI Shortcut: Check if any lands are already tapped.  If there are equal/fewer than amount, give the option to add those in to be untapped now.
-                FilterPermanent filter = new FilterLandPermanent();
-                filter.add(new TappedPredicate());
-                int tappedLands = game.getBattlefield().getAllActivePermanents(filter, controller.getId(), game).size();
-
-                if (tappedLands <= amount) {
+                if (tappedLands <= amount && upTo) {
                     if (controller.chooseUse(outcome, "Include your tapped lands to untap?", source, game)) {
                         for (Permanent land : game.getBattlefield().getAllActivePermanents(filter, controller.getId(), game)) {
                             target.addTarget(land.getId(), source, game);
