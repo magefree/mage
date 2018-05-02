@@ -113,6 +113,7 @@ public class Stronghold extends ExpansionSet {
         cards.add(new SetCardInfo("Leap", 35, Rarity.COMMON, mage.cards.l.Leap.class));
         cards.add(new SetCardInfo("Lowland Basilisk", 59, Rarity.COMMON, mage.cards.l.LowlandBasilisk.class));
         cards.add(new SetCardInfo("Mana Leak", 36, Rarity.COMMON, mage.cards.m.ManaLeak.class));
+        cards.add(new SetCardInfo("Mask of the Mimic", 37, Rarity.UNCOMMON, mage.cards.m.MaskOfTheMimic.class));
         cards.add(new SetCardInfo("Megrim", 12, Rarity.UNCOMMON, mage.cards.m.Megrim.class));
         cards.add(new SetCardInfo("Mind Games", 38, Rarity.COMMON, mage.cards.m.MindGames.class));
         cards.add(new SetCardInfo("Mind Peel", 13, Rarity.UNCOMMON, mage.cards.m.MindPeel.class));
