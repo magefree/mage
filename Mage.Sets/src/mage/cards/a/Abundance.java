@@ -51,7 +51,7 @@ import mage.players.Player;
 public class Abundance extends CardImpl {
 
     public Abundance(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{G}");
 
         // If you would draw a card, you may instead choose land or nonland and reveal cards from the top of your library until you reveal a card of the chosen kind. Put that card into your hand and put all other cards revealed this way on the bottom of your library in any order.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AbundanceReplacementEffect()));
@@ -94,22 +94,30 @@ class AbundanceReplacementEffect extends ReplacementEffectImpl {
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (controller != null && sourceObject != null) {
             FilterCard filter = new FilterCard();
-            if (controller.chooseUse(Outcome.Benefit, "Choose land? (No = nonland)", source, game)) {
+            if (controller.chooseUse(Outcome.Detriment, "Choose card type:",
+                    source.getSourceObject(game).getLogName(), "land", "nonland", source, game)) {
+                game.informPlayers(controller.getLogName() + "chooses land.");
                 filter.add(new CardTypePredicate(CardType.LAND));
             } else {
+                game.informPlayers(controller.getLogName() + "chooses nonland.");
                 filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
             }
-            Cards cards = new CardsImpl();
+            Cards toReveal = new CardsImpl();
+            Card selectedCard = null;
             while (controller.getLibrary().hasCards()) {
                 Card card = controller.getLibrary().removeFromTop(game);
+                toReveal.add(card);
                 if (filter.match(card, source.getSourceId(), source.getControllerId(), game)) {
-                    controller.moveCards(card, Zone.HAND, source, game);
+                    selectedCard = card;
                     break;
                 }
-                cards.add(card);
+
             }
-            controller.revealCards(sourceObject.getIdName(), cards, game);
-            controller.putCardsOnBottomOfLibrary(cards, game, source, true);
+            controller.moveCards(selectedCard, Zone.HAND, source, game);
+            controller.revealCards(sourceObject.getIdName(), toReveal, game);
+            toReveal.remove(selectedCard);
+            controller.putCardsOnBottomOfLibrary(toReveal, game, source, true);
+
         }
         return true;
     }
@@ -124,7 +132,8 @@ class AbundanceReplacementEffect extends ReplacementEffectImpl {
         if (event.getPlayerId().equals(source.getControllerId())) {
             Player player = game.getPlayer(source.getControllerId());
             if (player != null) {
-                return player.chooseUse(Outcome.Benefit, "Choose land or nonland?", source, game);
+                return player.chooseUse(Outcome.Detriment, "Choose:", source.getSourceObject(game).getLogName(),
+                        "land or nonland and reveal cards from the top", "normal card draw", source, game);
             }
         }
         return false;
