@@ -192,6 +192,7 @@ public class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Fyndhorn Elder", 159, Rarity.UNCOMMON, mage.cards.f.FyndhornElder.class));
         cards.add(new SetCardInfo("Game of Chaos", 232, Rarity.RARE, mage.cards.g.GameOfChaos.class));
         cards.add(new SetCardInfo("Gaseous Form", 90, Rarity.COMMON, mage.cards.g.GaseousForm.class));
+        cards.add(new SetCardInfo("Gauntlets of Chaos", 373, Rarity.RARE, mage.cards.g.GauntletsOfChaos.class));
         cards.add(new SetCardInfo("Ghazban Ogre", 160, Rarity.COMMON, mage.cards.g.GhazbanOgre.class));
         cards.add(new SetCardInfo("Giant Growth", 161, Rarity.COMMON, mage.cards.g.GiantGrowth.class));
         cards.add(new SetCardInfo("Giant Spider", 162, Rarity.COMMON, mage.cards.g.GiantSpider.class));

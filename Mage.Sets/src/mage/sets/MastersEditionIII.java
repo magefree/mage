@@ -126,6 +126,7 @@ public class MastersEditionIII extends ExpansionSet {
         cards.add(new SetCardInfo("Frost Giant", 101, Rarity.UNCOMMON, mage.cards.f.FrostGiant.class));
         cards.add(new SetCardInfo("Gabriel Angelfire", 148, Rarity.RARE, mage.cards.g.GabrielAngelfire.class));
         cards.add(new SetCardInfo("Gaea's Touch", 120, Rarity.UNCOMMON, mage.cards.g.GaeasTouch.class));
+        cards.add(new SetCardInfo("Gauntlets of Chaos", 196, Rarity.RARE, mage.cards.g.GauntletsOfChaos.class));
         cards.add(new SetCardInfo("Ghostly Visit", 67, Rarity.COMMON, mage.cards.g.GhostlyVisit.class));
         cards.add(new SetCardInfo("Ghosts of the Damned", 68, Rarity.COMMON, mage.cards.g.GhostsOfTheDamned.class));
         cards.add(new SetCardInfo("Giant Growth", 121, Rarity.COMMON, mage.cards.g.GiantGrowth.class));
