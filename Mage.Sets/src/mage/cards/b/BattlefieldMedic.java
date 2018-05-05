@@ -69,7 +69,7 @@ public class BattlefieldMedic extends CardImpl {
                         Duration.EndOfTurn,
                         false,
                         true,
-                        new PermanentsOnBattlefieldCount()
+                        new PermanentsOnBattlefieldCount(filter)
                 ).setText(
                         "prevent the next X damage "
                         + "that would be dealt to target creature this turn, "
