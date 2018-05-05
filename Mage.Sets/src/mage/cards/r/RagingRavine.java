@@ -30,6 +30,7 @@ package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
@@ -50,6 +51,7 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
+import mage.game.permanent.token.custom.ElementalCreatureToken;
 
 /**
  *
@@ -65,7 +67,9 @@ public class RagingRavine extends CardImpl {
         // Tap: Add Red or Green.
         this.addAbility(new GreenManaAbility());
         this.addAbility(new RedManaAbility());
-        Effect effect = new BecomesCreatureSourceEffect(new RagingRavineToken(), "land", Duration.EndOfTurn);
+        Effect effect = new BecomesCreatureSourceEffect(
+                new ElementalCreatureToken(3, 3, "3/3 red and green Elemental creature", new ObjectColor("RG")),
+                "land", Duration.EndOfTurn);
         effect.setText("Until end of turn, {this} becomes a 3/3 red and green Elemental creature");
         // {2}{R}{G}: Until end of turn, Raging Ravine becomes a 3/3 red and green Elemental creature with "Whenever this creature attacks, put a +1/+1 counter on it." It's still a land.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{2}{R}{G}"));
@@ -84,24 +88,4 @@ public class RagingRavine extends CardImpl {
         return new RagingRavine(this);
     }
 
-}
-
-class RagingRavineToken extends TokenImpl {
-
-    public RagingRavineToken() {
-        super("", "3/3 red and green Elemental creature");
-        cardType.add(CardType.CREATURE);
-        subtype.add(SubType.ELEMENTAL);
-        color.setRed(true);
-        color.setGreen(true);
-        power = new MageInt(3);
-        toughness = new MageInt(3);        
-    }
-    public RagingRavineToken(final RagingRavineToken token) {
-        super(token);
-    }
-
-    public RagingRavineToken copy() {
-        return new RagingRavineToken(this);
-    }
 }

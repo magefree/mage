@@ -29,6 +29,7 @@ package mage.cards.v;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -41,6 +42,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
+import mage.game.permanent.token.custom.ElementalCreatureToken;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
 
@@ -65,7 +67,9 @@ public class VastwoodZendikon extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
         
-        Ability ability2 = new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesCreatureAttachedEffect(new VastwoodElementalToken(), "Enchanted land is a 6/4 green Elemental creature. It's still a land", Duration.WhileOnBattlefield ));
+        Ability ability2 = new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesCreatureAttachedEffect(
+                new ElementalCreatureToken(6, 4, "6/4 green Elemental creature", new ObjectColor("G")),
+                "Enchanted land is a 6/4 green Elemental creature. It's still a land", Duration.WhileOnBattlefield ));
         this.addAbility(ability2);
         
         Ability ability3 = new DiesAttachedTriggeredAbility(new ReturnToHandAttachedEffect(), "enchanted land", false);
@@ -79,23 +83,5 @@ public class VastwoodZendikon extends CardImpl {
     @Override
     public VastwoodZendikon copy() {
         return new VastwoodZendikon(this);
-    }
-}
-
-class VastwoodElementalToken extends TokenImpl {
-    VastwoodElementalToken() {
-        super("", "6/4 green Elemental creature");
-        cardType.add(CardType.CREATURE);
-        color.setGreen(true);
-        subtype.add(SubType.ELEMENTAL);
-        power = new MageInt(6);
-        toughness = new MageInt(4);
-    }
-    public VastwoodElementalToken(final VastwoodElementalToken token) {
-        super(token);
-    }
-
-    public VastwoodElementalToken copy() {
-        return new VastwoodElementalToken(this);
     }
 }
