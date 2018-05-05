@@ -179,7 +179,7 @@ class AnyColorPermanentTypesManaEffect extends ManaEffect {
             else{
                 List<ObjectColor> permanentColors = permanent.getColor(game).getColors();
                 for (ObjectColor color : permanentColors){
-                    types.add(new Mana(color.getColoredManaSymbol()));
+                    types.add(new Mana(color.getOneColoredManaSymbol()));
                 }
             }
         }
