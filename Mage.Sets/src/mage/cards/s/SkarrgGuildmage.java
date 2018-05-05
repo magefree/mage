@@ -45,6 +45,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
+import mage.game.permanent.token.custom.ElementalCreatureToken;
 import mage.target.TargetPermanent;
 
 /**
@@ -66,7 +67,9 @@ public class SkarrgGuildmage extends CardImpl {
                 Zone.BATTLEFIELD, new GainAbilityAllEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent(), "Creatures you control gain trample until end of turn"),
                 new ManaCostsImpl("{R}{G}")));
         // {1}{R}{G}: Target land you control becomes a 4/4 Elemental creature until end of turn. It's still a land.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureTargetEffect(new SkarrgGuildmageToken(), false, true, Duration.EndOfTurn), new ManaCostsImpl("{1}{R}{G}") );
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureTargetEffect(
+                new ElementalCreatureToken(4, 4, "4/4 Elemental creature"),
+                false, true, Duration.EndOfTurn), new ManaCostsImpl("{1}{R}{G}") );
         ability.addTarget(new TargetPermanent(new FilterControlledLandPermanent()));
         this.addAbility(ability);
 
@@ -79,24 +82,5 @@ public class SkarrgGuildmage extends CardImpl {
     @Override
     public SkarrgGuildmage copy() {
         return new SkarrgGuildmage(this);
-    }
-}
-
-class SkarrgGuildmageToken extends TokenImpl {
-
-    public SkarrgGuildmageToken() {
-        super("", "4/4 Elemental creature");
-        this.cardType.add(CardType.CREATURE);
-
-        this.subtype.add(SubType.ELEMENTAL);
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(4);
-    }
-    public SkarrgGuildmageToken(final SkarrgGuildmageToken token) {
-        super(token);
-    }
-
-    public SkarrgGuildmageToken copy() {
-        return new SkarrgGuildmageToken(this);
     }
 }

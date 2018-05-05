@@ -29,6 +29,7 @@ package mage.cards.i;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -50,6 +51,7 @@ import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
+import mage.game.permanent.token.custom.ElementalCreatureToken;
 import mage.target.common.TargetLandPermanent;
 
 /**
@@ -72,7 +74,9 @@ public class IgnitionTeam extends CardImpl {
                 "with X +1/+1 counters on it, where X is the number of tapped lands on the battlefield."));
         
         // {2}{R}, Remove a +1/+1 counter from Ignition Team: Target land becomes a 4/4 red Elemental creature until end of turn. It's still a land.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureTargetEffect(new IgnitionTeamToken(), false, true, Duration.EndOfTurn), new ManaCostsImpl("{2}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureTargetEffect(
+                new ElementalCreatureToken(4, 4, "4/4 red Elemental creature", new ObjectColor("R")),
+                false, true, Duration.EndOfTurn), new ManaCostsImpl("{2}{R}"));
         ability.addCost(new RemoveCountersSourceCost(CounterType.P1P1.createInstance(1)));
         ability.addTarget(new TargetLandPermanent());
         this.addAbility(ability);
@@ -114,25 +118,5 @@ class TappedLandsCount implements DynamicValue {
     @Override
     public String getMessage() {
         return "tapped lands on the battlefield";
-    }
-}
-
-class IgnitionTeamToken extends TokenImpl {
-
-    public IgnitionTeamToken() {
-        super("", "4/4 red Elemental creature");
-        this.cardType.add(CardType.CREATURE);
-        this.getSubtype(null).add(SubType.ELEMENTAL);
-        this.color.setRed(true);
-
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(4);
-    }
-    public IgnitionTeamToken(final IgnitionTeamToken token) {
-        super(token);
-    }
-
-    public IgnitionTeamToken copy() {
-        return new IgnitionTeamToken(this);
     }
 }
