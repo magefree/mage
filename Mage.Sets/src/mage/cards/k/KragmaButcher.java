@@ -52,7 +52,7 @@ public class KragmaButcher extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
-        // <i>Inspired</i> - Whenever Kragma Butcher becomes untapped, it gets +2/+0 until end of turn.
+        // <i>Inspired</i> &mdash; Whenever Kragma Butcher becomes untapped, it gets +2/+0 until end of turn.
         Effect effect = new BoostSourceEffect(2,0, Duration.EndOfTurn);
         effect.setText("it gets +2/+0 until end of turn");
         this.addAbility(new InspiredAbility(effect));

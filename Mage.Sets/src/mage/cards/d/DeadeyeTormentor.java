@@ -57,7 +57,7 @@ public class DeadeyeTormentor extends CardImpl {
 
         // <i>Raid</i> &mdash; When Deadeye Tormentor enters the battlefield, if you attacked with a creature this turn, target opponent discards a card.
         Ability ability = new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(new DiscardTargetEffect(1)), RaidCondition.instance,
-                "<i>Raid</i> - When {this} enters the battlefield, if you attacked with a creature this turn, target opponent discards a card.");
+                "<i>Raid</i> &mdash; When {this} enters the battlefield, if you attacked with a creature this turn, target opponent discards a card.");
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability, new PlayerAttackedWatcher());
     }

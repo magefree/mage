@@ -59,8 +59,8 @@ public class HowlOfTheHorde extends CardImpl {
         effect.setText("When you cast your next instant or sorcery spell this turn, copy that spell. You may choose new targets for the copy.");
         this.getSpellAbility().addEffect(effect);
         
-        // <i>Raid</i> - If you attacked with a creature this turn, when you cast your next instant or sorcery spell this turn, copy that spell an additional time. You may choose new targets for the copy.
-        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new CreateDelayedTriggeredAbilityEffect(new HowlOfTheHordeDelayedTriggeredAbility()), RaidCondition.instance, "<br><br><i>Raid</i> - If you attacked with a creature this turn, when you cast your next instant or sorcery spell this turn, copy that spell an additional time. You may choose new targets for the copy."));
+        // <i>Raid</i> &mdash; If you attacked with a creature this turn, when you cast your next instant or sorcery spell this turn, copy that spell an additional time. You may choose new targets for the copy.
+        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new CreateDelayedTriggeredAbilityEffect(new HowlOfTheHordeDelayedTriggeredAbility()), RaidCondition.instance, "<br><br><i>Raid</i> &mdash; If you attacked with a creature this turn, when you cast your next instant or sorcery spell this turn, copy that spell an additional time. You may choose new targets for the copy."));
         this.getSpellAbility().addWatcher(new PlayerAttackedWatcher());
     }
 

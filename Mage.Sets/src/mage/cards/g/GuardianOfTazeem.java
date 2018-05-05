@@ -69,7 +69,7 @@ public class GuardianOfTazeem extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // <i>Landfall</i> - Whenever a land enters the battlefield under you control, tap target creature an opponent controls. If that land is an Island, that creature doesn't untap during its controller's next untap step.
+        // <i>Landfall</i> &mdash; Whenever a land enters the battlefield under you control, tap target creature an opponent controls. If that land is an Island, that creature doesn't untap during its controller's next untap step.
         Ability ability = new GuardianOfTazeemTriggeredAbility();
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
@@ -124,7 +124,7 @@ class GuardianOfTazeemTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "<i>Landfall</i> - Whenever a land enters the battlefield under your control, " + super.getRule();
+        return "<i>Landfall</i> &mdash; Whenever a land enters the battlefield under your control, " + super.getRule();
     }
 }
 

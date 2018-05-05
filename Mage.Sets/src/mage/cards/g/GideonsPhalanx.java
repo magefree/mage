@@ -54,11 +54,11 @@ public class GideonsPhalanx extends CardImpl {
         // Create four 2/2 white Knight creature tokens with vigilance.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new KnightToken(), 4));
 
-        // <i>Spell mastery</i> - If there are two or more instant and/or sorcery cards in your graveyard, creatures you control gain indestructible until end of turn.
+        // <i>Spell mastery</i> &mdash; If there are two or more instant and/or sorcery cards in your graveyard, creatures you control gain indestructible until end of turn.
         Effect effect = new ConditionalOneShotEffect(
                 new AddContinuousEffectToGame(new GainAbilityAllEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent())),
                 SpellMasteryCondition.instance,
-                "<br><i>Spell mastery</i> - If there are two or more instant and/or sorcery cards in your graveyard, creatures you control gain indestructible until end of turn");
+                "<br><i>Spell mastery</i> &mdash; If there are two or more instant and/or sorcery cards in your graveyard, creatures you control gain indestructible until end of turn");
         this.getSpellAbility().addEffect(effect);
     }
 

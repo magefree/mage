@@ -52,7 +52,7 @@ public class ProteanRaider extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // <i>Raid</i> - If you attacked with a creature this turn, you may have Protean Raider enter the battlefield as a copy of any creature on the battlefield.
+        // <i>Raid</i> &mdash; If you attacked with a creature this turn, you may have Protean Raider enter the battlefield as a copy of any creature on the battlefield.
         Ability ability = new EntersBattlefieldAbility(new CopyPermanentEffect(), true, RaidCondition.instance,
                 "<i>Raid</i> &mdash; If you attacked with a creature this turn, you may have {this} enter the battlefield as a copy of any creature on the battlefield.", "");
         this.addAbility(ability, new PlayerAttackedWatcher());

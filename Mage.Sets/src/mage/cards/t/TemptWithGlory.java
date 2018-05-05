@@ -71,7 +71,7 @@ class TemptWithGloryEffect extends OneShotEffect {
 
     public TemptWithGloryEffect() {
         super(Outcome.PutLandInPlay);
-        this.staticText = "<i>Tempting offer</i> - Put a +1/+1 counter on each creature you control. Each opponent may put a +1/+1 counter on each creature he or she controls. For each opponent who does, put a +1/+1 counter on each creature you control";
+        this.staticText = "<i>Tempting offer</i> &mdash; Put a +1/+1 counter on each creature you control. Each opponent may put a +1/+1 counter on each creature he or she controls. For each opponent who does, put a +1/+1 counter on each creature you control";
     }
 
     public TemptWithGloryEffect(final TemptWithGloryEffect effect) {

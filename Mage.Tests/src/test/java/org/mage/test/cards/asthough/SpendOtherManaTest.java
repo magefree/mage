@@ -115,7 +115,7 @@ public class SpendOtherManaTest extends CardTestPlayerBase {
         addCard(Zone.GRAVEYARD, playerA, "Lightning Bolt", 2);
 
         // Search your library for a card and put that card into your hand. Then shuffle your library.
-        // <i>Spell mastery</i> - If there are two or more instant and/or sorcery cards in your graveyard, add {B}{B}{B}.
+        // <i>Spell mastery</i> &mdash; If there are two or more instant and/or sorcery cards in your graveyard, add {B}{B}{B}.
         addCard(Zone.HAND, playerA, "Dark Petition"); // {3}{B}{B}
 
         // +1: Create a 0/1 green Plant creature token onto the battlefield.

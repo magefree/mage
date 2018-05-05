@@ -85,7 +85,7 @@ public class ArahboRoarOfTheWorld extends CardImpl {
         Ability ability = new ConditionalTriggeredAbility(
                 new BeginningOfCombatTriggeredAbility(Zone.ALL, new BoostTargetEffect(3, 3, Duration.EndOfTurn), TargetController.YOU, false, false),
                 SourceOnBattlefieldOrCommandZoneCondition.instance,
-                "<i>Eminence</i> - At the beginning of combat on your turn, if Arahbo, Roar of the World is in the command zone or on the battlefield, another target Cat you control gets +3/+3 until end of turn.");
+                "<i>Eminence</i> &mdash; At the beginning of combat on your turn, if Arahbo, Roar of the World is in the command zone or on the battlefield, another target Cat you control gets +3/+3 until end of turn.");
         ability.addTarget(new TargetCreaturePermanent(filter));
         ability.setAbilityWord(AbilityWord.EMINENCE);
         this.addAbility(ability);

@@ -57,7 +57,7 @@ public class SeeTheUnwritten extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{G}{G}");
 
         // Reveal the top eight cards of your library. You may put a creature card from among them onto the battlefield. Put the rest into your graveyard.
-        // <i>Ferocious</i> - If you control a creature with power 4 or greater, you may put two creature cards onto the battlefield instead of one.
+        // <i>Ferocious</i> &mdash; If you control a creature with power 4 or greater, you may put two creature cards onto the battlefield instead of one.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new SeeTheUnwrittenEffect(1),
                 new SeeTheUnwrittenEffect(2),

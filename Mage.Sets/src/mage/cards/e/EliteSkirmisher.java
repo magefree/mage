@@ -52,7 +52,7 @@ public class EliteSkirmisher extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
 
-        // <i>Heroic</i> - Whenever you cast a spell that targets Elite Skirmisher, you may tap target creature.
+        // <i>Heroic</i> &mdash; Whenever you cast a spell that targets Elite Skirmisher, you may tap target creature.
         Ability ability = new HeroicAbility(new TapTargetEffect(), true);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

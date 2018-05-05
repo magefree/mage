@@ -53,7 +53,7 @@ public class SweepEffect extends OneShotEffect {
     public SweepEffect(SubType sweepSubtype) {
         super(Outcome.Benefit);
         this.sweepSubtype = sweepSubtype;
-        this.staticText = "<i>Sweep</i> - Return any number of " + sweepSubtype + (sweepSubtype.getDescription().endsWith("s") ? "" : "s") + " you control to their owner's hand";
+        this.staticText = "<i>Sweep</i> &mdash; Return any number of " + sweepSubtype + (sweepSubtype.getDescription().endsWith("s") ? "" : "s") + " you control to their owner's hand";
     }
 
     public SweepEffect(final SweepEffect effect) {

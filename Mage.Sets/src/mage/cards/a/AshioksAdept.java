@@ -51,7 +51,7 @@ public class AshioksAdept extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 
-        // <i>Heroic</i> - Whenever you cast a spell that targets Ashiok's Adept, each opponent discards a card.
+        // <i>Heroic</i> &mdash; Whenever you cast a spell that targets Ashiok's Adept, each opponent discards a card.
         this.addAbility(new HeroicAbility(new DiscardEachPlayerEffect(TargetController.OPPONENT)));
     }
 

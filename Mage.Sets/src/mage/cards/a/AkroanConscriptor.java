@@ -65,7 +65,7 @@ public class AkroanConscriptor extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
-        // <i>Heroic</i> - Whenever you cast a spell that targets Akroan Conscriptor, gain control of another target creature until end of turn. Untap that creature. It gains haste until end of turn.
+        // <i>Heroic</i> &mdash; Whenever you cast a spell that targets Akroan Conscriptor, gain control of another target creature until end of turn. Untap that creature. It gains haste until end of turn.
         Ability ability = new HeroicAbility(new GainControlTargetEffect(Duration.EndOfTurn, true), false);
         Effect effect = new UntapTargetEffect();
         effect.setText("Untap that creature");

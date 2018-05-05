@@ -84,7 +84,7 @@ class MagisterOfWorthVoteEffect extends OneShotEffect {
 
     MagisterOfWorthVoteEffect() {
         super(Outcome.Benefit);
-        this.staticText = "<i>Will of the council</i> - When {this} enters the battlefield, starting with you, each player votes for grace or condemnation. If grace gets more votes, each player returns each creature card from their graveyard to the battlefield. If condemnation gets more votes or the vote is tied, destroy all creatures other than {this}.";
+        this.staticText = "<i>Will of the council</i> &mdash; When {this} enters the battlefield, starting with you, each player votes for grace or condemnation. If grace gets more votes, each player returns each creature card from their graveyard to the battlefield. If condemnation gets more votes or the vote is tied, destroy all creatures other than {this}.";
     }
 
     MagisterOfWorthVoteEffect(final MagisterOfWorthVoteEffect effect) {

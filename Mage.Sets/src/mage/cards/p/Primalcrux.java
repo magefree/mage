@@ -64,7 +64,7 @@ public class Primalcrux extends CardImpl {
 
         // Chroma - Primalcrux's power and toughness are each equal to the number of green mana symbols in the mana costs of permanents you control.
         Effect effect = new SetPowerToughnessSourceEffect(new ChromaPrimalcruxCount(), Duration.WhileOnBattlefield);
-        effect.setText("<i>Chroma</i> - Primalcrux's power and toughness are each equal to the number of green mana symbols in the mana costs of permanents you control.");
+        effect.setText("<i>Chroma</i> &mdash; Primalcrux's power and toughness are each equal to the number of green mana symbols in the mana costs of permanents you control.");
         this.addAbility(new SimpleStaticAbility(Zone.ALL, effect));
     }
 

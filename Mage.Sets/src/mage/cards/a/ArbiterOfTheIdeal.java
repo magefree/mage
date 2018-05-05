@@ -62,7 +62,7 @@ public class ArbiterOfTheIdeal extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        // <i>Inspired</i> - Whenever Arbiter of the Ideal becomes untapped, reveal the top card of your library. If it's an artifact, creature, or land card, you may put it onto the battlefield with a manifestation counter on it. It's an enchantment in addition to its other types.
+        // <i>Inspired</i> &mdash; Whenever Arbiter of the Ideal becomes untapped, reveal the top card of your library. If it's an artifact, creature, or land card, you may put it onto the battlefield with a manifestation counter on it. It's an enchantment in addition to its other types.
         this.addAbility(new InspiredAbility(new ArbiterOfTheIdealEffect()));
 
     }

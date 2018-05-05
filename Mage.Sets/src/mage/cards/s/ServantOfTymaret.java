@@ -56,7 +56,7 @@ public class ServantOfTymaret extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 
-        // <i>Inspired</i> - Whenever Servant of Tymaret becomes untapped, each opponent loses 1 life. You gain life equal to the life lost this way.
+        // <i>Inspired</i> &mdash; Whenever Servant of Tymaret becomes untapped, each opponent loses 1 life. You gain life equal to the life lost this way.
         this.addAbility(new InspiredAbility(new ServantOfTymaretEffect()));
 
         // {2}{B}: Regenerate Servant of Tymaret.

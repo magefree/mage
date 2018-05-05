@@ -68,7 +68,7 @@ class SplitDecisionEffect extends OneShotEffect {
 
     SplitDecisionEffect() {
         super(Outcome.Benefit);
-        this.staticText = "<i>Will of the council</i> - Choose target instant or sorcery spell. Starting with you, each player votes for denial or duplication. If denial gets more votes, counter the spell. If duplication gets more votes or the vote is tied, copy the spell. You may choose new targets for the copy";
+        this.staticText = "<i>Will of the council</i> &mdash; Choose target instant or sorcery spell. Starting with you, each player votes for denial or duplication. If denial gets more votes, counter the spell. If duplication gets more votes or the vote is tied, copy the spell. You may choose new targets for the copy";
     }
 
     SplitDecisionEffect(final SplitDecisionEffect effect) {

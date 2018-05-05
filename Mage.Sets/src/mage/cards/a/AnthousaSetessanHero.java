@@ -59,7 +59,7 @@ public class AnthousaSetessanHero extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
 
-        // <i>Heroic</i> - Whenever you cast a spell that targets Anthousa, Setessan Hero, up to three target lands you control each become 2/2 Warrior creatures until end of turn. They're still lands.
+        // <i>Heroic</i> &mdash; Whenever you cast a spell that targets Anthousa, Setessan Hero, up to three target lands you control each become 2/2 Warrior creatures until end of turn. They're still lands.
         Ability ability = new HeroicAbility(new BecomesCreatureTargetEffect(new CreatureToken(2, 2, "2/2 Warrior creature", SubType.WARRIOR),false,true, Duration.EndOfTurn));
         ability.addTarget(new TargetControlledPermanent(0,3,new FilterControlledLandPermanent("lands"), false));
         this.addAbility(ability);

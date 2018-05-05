@@ -60,7 +60,7 @@ public class AtarkaPummeler extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
 
-        // <i>Formidable</i> - {3}{R}{R}: Creatures you control gain menace until end of turn. Activate this ability only if creature you control have total power 8 or greater.  (They can't be blocked except by two or more creatures.)
+        // <i>Formidable</i> &mdash; {3}{R}{R}: Creatures you control gain menace until end of turn. Activate this ability only if creature you control have total power 8 or greater.  (They can't be blocked except by two or more creatures.)
         Ability ability = new ActivateIfConditionActivatedAbility(
                 Zone.BATTLEFIELD,
                 new GainAbilityAllEffect(new MenaceAbility(), Duration.EndOfTurn, filter),

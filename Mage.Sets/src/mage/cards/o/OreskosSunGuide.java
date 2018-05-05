@@ -50,7 +50,7 @@ public class OreskosSunGuide extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // <i>Inspired</i> - Whenever Oreskos Sun Guide becomes untapped, you gain 2 life.
+        // <i>Inspired</i> &mdash; Whenever Oreskos Sun Guide becomes untapped, you gain 2 life.
         this.addAbility(new InspiredAbility(new GainLifeEffect(2)));
     }
 

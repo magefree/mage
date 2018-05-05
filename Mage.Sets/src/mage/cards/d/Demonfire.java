@@ -69,7 +69,7 @@ public class Demonfire extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DamageTargetEffect(new ManacostVariableValue(), false),
                 HellbentCondition.instance,
-                "<br/><i>Hellbent</i> - If you have no cards in hand, {this} can't be countered by spells or abilities and the damage can't be prevented."));
+                "<br/><i>Hellbent</i> &mdash; If you have no cards in hand, {this} can't be countered by spells or abilities and the damage can't be prevented."));
         // can't be countered
         Effect effect = new CantBeCounteredSourceEffect();
         effect.setText("");

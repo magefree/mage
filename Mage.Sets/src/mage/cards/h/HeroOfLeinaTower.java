@@ -60,7 +60,7 @@ public class HeroOfLeinaTower extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // <i>Heroic</i> - Whenever you cast a spell that targets Hero of Leina Tower, you may pay {X}. If you do, put X +1/+1 counters on Hero of Leina Tower.
+        // <i>Heroic</i> &mdash; Whenever you cast a spell that targets Hero of Leina Tower, you may pay {X}. If you do, put X +1/+1 counters on Hero of Leina Tower.
         this.addAbility(new HeroicAbility(new HeroOfLeinaTowerEffect()));
 
     }

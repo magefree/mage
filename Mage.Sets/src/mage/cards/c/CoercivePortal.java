@@ -69,7 +69,7 @@ class CoercivePortalEffect extends OneShotEffect {
 
     CoercivePortalEffect() {
         super(Outcome.Benefit);
-        this.staticText = "<i>Will of the council</i> - At the beginning of your upkeep, starting with you, each player votes for carnage or homage. If carnage gets more votes, sacrifice Coercive Portal and destroy all nonland permanents. If homage gets more votes or the vote is tied, draw a card";
+        this.staticText = "<i>Will of the council</i> &mdash; At the beginning of your upkeep, starting with you, each player votes for carnage or homage. If carnage gets more votes, sacrifice Coercive Portal and destroy all nonland permanents. If homage gets more votes or the vote is tied, draw a card";
     }
 
     CoercivePortalEffect(final CoercivePortalEffect effect) {

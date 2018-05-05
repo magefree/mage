@@ -78,7 +78,7 @@ public class EdgarMarkov extends CardImpl {
         Ability ability = new ConditionalTriggeredAbility(
                 new SpellCastControllerTriggeredAbility(Zone.ALL, new CreateTokenEffect(new EdgarMarkovToken()), filter2, false, false),
                 SourceOnBattlefieldOrCommandZoneCondition.instance,
-                "<i>Eminence</i> - Whenever you cast another Vampire spell, if {this} is in the command zone or on the battlefield, create a 1/1 black Vampire creature token.");
+                "<i>Eminence</i> &mdash; Whenever you cast another Vampire spell, if {this} is in the command zone or on the battlefield, create a 1/1 black Vampire creature token.");
         ability.setAbilityWord(AbilityWord.EMINENCE);
         this.addAbility(ability);
 

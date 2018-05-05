@@ -50,7 +50,7 @@ public class FrontierMastodon extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
-        // <i>Ferocious</i> - Frontier Mastodon enters the battlefield with a +1/+1 counter on it if you control a creature with power 4 or greater.
+        // <i>Ferocious</i> &mdash; Frontier Mastodon enters the battlefield with a +1/+1 counter on it if you control a creature with power 4 or greater.
         this.addAbility(new EntersBattlefieldAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)),
                 FerociousCondition.instance,

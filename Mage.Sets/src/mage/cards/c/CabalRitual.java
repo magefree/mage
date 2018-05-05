@@ -52,7 +52,7 @@ public class CabalRitual extends CardImpl {
                 new BasicManaEffect(Mana.BlackMana(5)),
                 new BasicManaEffect(Mana.BlackMana(3)),
                 new CardsInControllerGraveCondition(7),
-                "Add {B}{B}{B}.<br/><br/><i>Threshold</i> - Add {B}{B}{B}{B}{B} instead if seven or more cards are in your graveyard"));
+                "Add {B}{B}{B}.<br/><br/><i>Threshold</i> &mdash; Add {B}{B}{B}{B}{B} instead if seven or more cards are in your graveyard"));
     }
 
     public CabalRitual(final CabalRitual card) {

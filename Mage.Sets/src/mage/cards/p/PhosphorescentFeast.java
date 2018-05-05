@@ -56,7 +56,7 @@ public class PhosphorescentFeast extends CardImpl {
 
         // Chroma - Reveal any number of cards in your hand. You gain 2 life for each green mana symbol in those cards' mana costs.
         Effect effect = new PhosphorescentFeastEffect();
-        effect.setText("<i>Chroma</i> - Reveal any number of cards in your hand. You gain 2 life for each green mana symbol in those cards' mana costs.");
+        effect.setText("<i>Chroma</i> &mdash; Reveal any number of cards in your hand. You gain 2 life for each green mana symbol in those cards' mana costs.");
         this.getSpellAbility().addEffect(effect);
 
     }
