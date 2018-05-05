@@ -51,6 +51,7 @@ public class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Barkhide Mauler", 246, Rarity.COMMON, mage.cards.b.BarkhideMauler.class));
         cards.add(new SetCardInfo("Barren Moor", 312, Rarity.COMMON, mage.cards.b.BarrenMoor.class));
         cards.add(new SetCardInfo("Battering Craghorn", 188, Rarity.COMMON, mage.cards.b.BatteringCraghorn.class));
+        cards.add(new SetCardInfo("Battlefield Medic", 9, Rarity.COMMON, mage.cards.b.BattlefieldMedic.class));
         cards.add(new SetCardInfo("Biorhythm", 247, Rarity.RARE, mage.cards.b.Biorhythm.class));
         cards.add(new SetCardInfo("Birchlore Rangers", 248, Rarity.COMMON, mage.cards.b.BirchloreRangers.class));
         cards.add(new SetCardInfo("Blackmail", 127, Rarity.UNCOMMON, mage.cards.b.Blackmail.class));
