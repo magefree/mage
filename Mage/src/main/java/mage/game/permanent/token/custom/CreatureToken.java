@@ -31,9 +31,12 @@ public class CreatureToken  extends TokenImpl {
     public CreatureToken(int power, int toughness, String description, SubTypeList extraSubTypes) {
         super("", description);
         this.cardType.add(CardType.CREATURE);
-        this.subtype.addAll(extraSubTypes);
         this.power = new MageInt(power);
         this.toughness = new MageInt(toughness);
+
+        if (extraSubTypes != null) {
+            this.subtype.addAll(extraSubTypes);
+        }
     }
 
     public CreatureToken(final CreatureToken token) {
