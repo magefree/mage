@@ -286,6 +286,7 @@ public class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Slice and Dice", 232, Rarity.UNCOMMON, mage.cards.s.SliceAndDice.class));
         cards.add(new SetCardInfo("Slipstream Eel", 114, Rarity.COMMON, mage.cards.s.SlipstreamEel.class));
         cards.add(new SetCardInfo("Smother", 170, Rarity.UNCOMMON, mage.cards.s.Smother.class));
+        cards.add(new SetCardInfo("Snapping Thragg", 233, Rarity.UNCOMMON, mage.cards.s.SnappingThragg.class));
         cards.add(new SetCardInfo("Snarling Undorak", 283, Rarity.COMMON, mage.cards.s.SnarlingUndorak.class));
         cards.add(new SetCardInfo("Solar Blast", 234, Rarity.COMMON, mage.cards.s.SolarBlast.class));
         cards.add(new SetCardInfo("Soulless One", 171, Rarity.UNCOMMON, mage.cards.s.SoullessOne.class));
