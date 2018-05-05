@@ -41,6 +41,7 @@ import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.TargetPermanent;
 
 /**
@@ -61,8 +62,9 @@ public class SiegeOfTowers extends CardImpl {
 
         // Replicate {1}{R}
         this.addAbility(new ReplicateAbility(this, "{1}{R}"));
+
         // Target Mountain becomes a 3/1 creature. It's still a land.
-        Effect effect = new BecomesCreatureTargetEffect(new SiegeOfTowersToken(), false, true, Duration.EndOfGame);
+        Effect effect = new BecomesCreatureTargetEffect(new CreatureToken(3, 1), false, true, Duration.EndOfGame);
         effect.setText("Target Mountain becomes a 3/1 creature. It's still a land");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
@@ -76,21 +78,5 @@ public class SiegeOfTowers extends CardImpl {
     @Override
     public SiegeOfTowers copy() {
         return new SiegeOfTowers(this);
-    }
-}
-
-class SiegeOfTowersToken extends TokenImpl {
-    public SiegeOfTowersToken() {
-        super("", "3/1 creature");
-        cardType.add(CardType.CREATURE);
-        power = new MageInt(3);
-        toughness = new MageInt(1);
-    }
-    public SiegeOfTowersToken(final SiegeOfTowersToken token) {
-        super(token);
-    }
-
-    public SiegeOfTowersToken copy() {
-        return new SiegeOfTowersToken(this);
     }
 }
