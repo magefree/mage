@@ -132,6 +132,7 @@ class HuntingWildsToken extends TokenImpl {
         super("", "3/3 green creature with haste");
         this.cardType.add(CardType.CREATURE);
 
+        this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
