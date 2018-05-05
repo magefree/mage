@@ -46,6 +46,7 @@ import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInHand;
@@ -104,26 +105,9 @@ class JolraelEmpressOfBeastsEffect extends OneShotEffect {
         if (targetPlayer != null) {
             FilterPermanent filter = new FilterLandPermanent();
             filter.add(new ControllerIdPredicate(targetPlayer.getId()));
-            game.addEffect(new BecomesCreatureAllEffect(new JolraelLandsToken(), "lands", filter, Duration.EndOfTurn), source);
+            game.addEffect(new BecomesCreatureAllEffect(new CreatureToken(3, 3), "lands", filter, Duration.EndOfTurn), source);
             return true;
         }
         return false;
-    }
-}
-
-class JolraelLandsToken extends TokenImpl {
-
-    public JolraelLandsToken() {
-        super("", "3/3 creature");
-        cardType.add(CardType.CREATURE);
-        power = new MageInt(3);
-        toughness = new MageInt(3);
-    }
-    public JolraelLandsToken(final JolraelLandsToken token) {
-        super(token);
-    }
-
-    public JolraelLandsToken copy() {
-        return new JolraelLandsToken(this);
     }
 }

@@ -41,6 +41,7 @@ import mage.constants.Duration;
 import mage.filter.StaticFilters;
 import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.common.TargetLandPermanent;
 
 /**
@@ -57,7 +58,7 @@ public class Soilshaper extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever you cast a Spirit or Arcane spell, target land becomes a 3/3 creature until end of turn. It's still a land.
-        Ability ability = new SpellCastControllerTriggeredAbility(new BecomesCreatureTargetEffect(new SoilshaperToken(), false, true, Duration.EndOfTurn), StaticFilters.SPIRIT_OR_ARCANE_CARD, false);
+        Ability ability = new SpellCastControllerTriggeredAbility(new BecomesCreatureTargetEffect(new CreatureToken(3, 3), false, true, Duration.EndOfTurn), StaticFilters.SPIRIT_OR_ARCANE_CARD, false);
         ability.addTarget(new TargetLandPermanent());
         this.addAbility(ability);
     }
@@ -71,22 +72,4 @@ public class Soilshaper extends CardImpl {
         return new Soilshaper(this);
     }
 
-}
-
-class SoilshaperToken extends TokenImpl {
-
-    public SoilshaperToken() {
-        super("", "3/3 creature");
-        this.cardType.add(CardType.CREATURE);
-
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
-    }
-    public SoilshaperToken(final SoilshaperToken token) {
-        super(token);
-    }
-
-    public SoilshaperToken copy() {
-        return new SoilshaperToken(this);
-    }
 }
