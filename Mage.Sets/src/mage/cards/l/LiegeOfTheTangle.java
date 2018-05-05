@@ -32,6 +32,7 @@ import java.util.Iterator;
 import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -49,6 +50,7 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
+import mage.game.permanent.token.custom.ElementalCreatureToken;
 import mage.target.Target;
 import mage.target.common.TargetLandPermanent;
 
@@ -115,7 +117,7 @@ class LiegeOfTheTangleTriggeredAbility extends TriggeredAbilityImpl {
 
 class LiegeOfTheTangleEffect extends ContinuousEffectImpl {
 
-    private static AwakeningLandToken token = new AwakeningLandToken();
+    private static ElementalCreatureToken token = new ElementalCreatureToken(8, 8, "8/8 green Elemental creature", new ObjectColor("G"));
 
     public LiegeOfTheTangleEffect() {
         super(Duration.EndOfGame, Outcome.BecomeCreature);
@@ -183,25 +185,6 @@ class LiegeOfTheTangleEffect extends ContinuousEffectImpl {
         return layer == Layer.PTChangingEffects_7 || layer == Layer.ColorChangingEffects_5 || layer == layer.TypeChangingEffects_4;
     }
 
-}
-
-class AwakeningLandToken extends TokenImpl {
-
-    public AwakeningLandToken() {
-        super("", "8/8 green Elemental creature");
-        cardType.add(CardType.CREATURE);
-        color.setGreen(true);
-        subtype.add(SubType.ELEMENTAL);
-        power = new MageInt(8);
-        toughness = new MageInt(8);
-    }
-    public AwakeningLandToken(final AwakeningLandToken token) {
-        super(token);
-    }
-
-    public AwakeningLandToken copy() {
-        return new AwakeningLandToken(this);
-    }
 }
 
 

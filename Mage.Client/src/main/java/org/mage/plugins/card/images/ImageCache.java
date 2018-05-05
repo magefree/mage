@@ -448,14 +448,6 @@ public final class ImageCache {
     }
 
     /**
-     * Returns the Image corresponding to the key only if it already exists in
-     * the cache.
-     */
-    private static BufferedImage tryGetFaceImage(String key) {
-        return FACE_IMAGE_CACHE.containsKey(key) ? FACE_IMAGE_CACHE.get(key) : null;
-    }
-
-    /**
      * Returns the map key for a card, without any suffixes for the image size.
      */
     private static String getKey(CardView card, String name, String suffix) {
