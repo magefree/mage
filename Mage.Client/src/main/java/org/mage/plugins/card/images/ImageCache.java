@@ -3,7 +3,6 @@ package org.mage.plugins.card.images;
 import com.google.common.base.Function;
 import com.google.common.collect.ComputationException;
 import com.google.common.collect.MapMaker;
-
 import java.awt.*;
 import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
@@ -13,6 +12,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.imageio.ImageIO;
+import mage.client.constants.Constants;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.util.TransformedImageCache;
 import mage.view.CardView;
@@ -22,7 +22,6 @@ import net.java.truevfs.access.TFileOutputStream;
 import org.apache.log4j.Logger;
 import org.mage.plugins.card.dl.sources.DirectLinksForDownload;
 import org.mage.plugins.card.utils.CardImageUtils;
-import mage.client.constants.Constants;
 
 /**
  * This class stores ALL card images in a cache with soft values. this means
@@ -54,6 +53,7 @@ public final class ImageCache {
     private static final Pattern KEY_PATTERN = Pattern.compile("(.*)#(.*)#(.*)#(.*)#(.*)#(.*)");
 
     static {
+        // softValues() = Specifies that each value (not key) stored in the map should be wrapped in a SoftReference (by default, strong references are used). Softly-referenced objects will be garbage-collected in a globally least-recently-used manner, in response to memory demand.
         IMAGE_CACHE = new MapMaker().softValues().makeComputingMap(new Function<String, BufferedImage>() {
             @Override
             public BufferedImage apply(String key) {
@@ -130,7 +130,7 @@ public final class ImageCache {
                                     thumbnailImage = makeThumbnailByFile(key, file, thumbnailPath);
                                 }
 
-                                if (cardback){
+                                if (cardback) {
                                     // unknown tokens on opponent desk
                                     thumbnailImage = getRoundCorner(thumbnailImage);
                                 }
@@ -140,12 +140,12 @@ public final class ImageCache {
                                 return makeThumbnailByFile(key, file, thumbnailPath);
                             }
                         } else {
-                            if (cardback){
+                            if (cardback) {
                                 // need cardback image
                                 BufferedImage image = loadImage(file);
                                 image = getRoundCorner(image);
                                 return image;
-                            }else {
+                            } else {
                                 // need normal card image
                                 BufferedImage image = loadImage(file);
                                 image = getWizardsCard(image);
@@ -322,7 +322,7 @@ public final class ImageCache {
         return thumbnailPath;
     }
 
-    public static BufferedImage getRoundCorner(BufferedImage image){
+    public static BufferedImage getRoundCorner(BufferedImage image) {
         if (image != null) {
             BufferedImage cornerImage = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_ARGB);
 
@@ -363,7 +363,7 @@ public final class ImageCache {
     public static boolean isFaceImagePresent(CardView card) {
         String path;
         path = CardImageUtils.generateFaceImagePath(card.getName(), card.getExpansionSetCode());
-        
+
         if (path == null) {
             return false;
         }
@@ -389,10 +389,9 @@ public final class ImageCache {
         return getImage(getKey(card, card.getName(), ""));
     }
 
-    public static BufferedImage getImageFaceOriginal(CardView card) {
-        return getFaceImage(getFaceKey(card, card.getName(), card.getExpansionSetCode()));
-    }
-
+//    public static BufferedImage getImageFaceOriginal(CardView card) {
+//        return getFaceImage(getFaceKey(card, card.getName(), card.getExpansionSetCode()));
+//    }
     public static BufferedImage getImageOriginalAlternateName(CardView card) {
         return getImage(getKey(card, card.getAlternateName(), ""));
     }

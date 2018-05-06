@@ -28,7 +28,6 @@
 package mage.cards.c;
 
 import java.util.UUID;
-
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.KickedCondition;
@@ -66,7 +65,7 @@ public class CaligoSkinWitch extends CardImpl {
                         TargetController.OPPONENT
                 )),
                 KickedCondition.instance,
-                "When {this} enters the battlefield, if it was kicked, each opponent discards two cards"
+                "When {this} enters the battlefield, if it was kicked, each opponent discards two cards."
         ));
     }
 
