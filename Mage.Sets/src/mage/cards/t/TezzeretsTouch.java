@@ -45,6 +45,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetArtifactPermanent;
 
@@ -67,9 +68,8 @@ public class TezzeretsTouch extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted artifact is a creature with base power and toughness 5/5 in addition to its other types.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-            new BecomesCreatureAttachedEffect(new TezzeretsTouchToken(),
-                    "Enchanted artifact is a creature with base power and toughness 5/5 in addition to its other types", Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesCreatureAttachedEffect(
+                new CreatureToken(5, 5, "5/5 creature"),"Enchanted artifact is a creature with base power and toughness 5/5 in addition to its other types", Duration.WhileOnBattlefield)));
 
         // When enchanted artifact is put into a graveyard, return that card to its owner's hand.
         this.addAbility(new DiesAttachedTriggeredAbility(new ReturnToHandAttachedEffect(), "enchanted artifact", false, false));
@@ -82,22 +82,5 @@ public class TezzeretsTouch extends CardImpl {
     @Override
     public TezzeretsTouch copy() {
         return new TezzeretsTouch(this);
-    }
-}
-
-class TezzeretsTouchToken extends TokenImpl {
-
-    TezzeretsTouchToken() {
-        super("", "5/5");
-        cardType.add(CardType.CREATURE);
-        power = new MageInt(5);
-        toughness = new MageInt(5);
-    }
-    public TezzeretsTouchToken(final TezzeretsTouchToken token) {
-        super(token);
-    }
-
-    public TezzeretsTouchToken copy() {
-        return new TezzeretsTouchToken(this);
     }
 }
