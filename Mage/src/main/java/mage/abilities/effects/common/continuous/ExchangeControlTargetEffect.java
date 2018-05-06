@@ -39,6 +39,9 @@ import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
+import mage.constants.SubType;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -50,6 +53,7 @@ public class ExchangeControlTargetEffect extends ContinuousEffectImpl {
     private String rule;
     private boolean withSource;
     private boolean withSecondTarget;
+    private boolean destroyAttachedAuras;
     private Map<UUID, Integer> zoneChangeCounter = new HashMap<>();
     private Map<UUID, UUID> lockedControllers = new HashMap<>();
 
@@ -62,9 +66,14 @@ public class ExchangeControlTargetEffect extends ContinuousEffectImpl {
     }
 
     public ExchangeControlTargetEffect(Duration duration, String rule, boolean withSource, boolean withSecondTarget) {
+        this(duration, rule, withSource, withSecondTarget, false);
+    }
+
+    public ExchangeControlTargetEffect(Duration duration, String rule, boolean withSource, boolean withSecondTarget, boolean destroyAttachedAuras) {
         super(duration, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
         this.withSource = withSource;
         this.withSecondTarget = withSecondTarget;
+        this.destroyAttachedAuras = destroyAttachedAuras;
         this.rule = rule;
     }
 
@@ -73,6 +82,7 @@ public class ExchangeControlTargetEffect extends ContinuousEffectImpl {
         this.rule = effect.rule;
         this.withSource = effect.withSource;
         this.withSecondTarget = effect.withSecondTarget;
+        this.destroyAttachedAuras = effect.destroyAttachedAuras;
         this.lockedControllers = new HashMap<>(effect.lockedControllers);
         this.zoneChangeCounter = new HashMap<>(effect.zoneChangeCounter);
     }
@@ -141,6 +151,16 @@ public class ExchangeControlTargetEffect extends ContinuousEffectImpl {
             }
             permanent.changeControllerId(lockedControllers.get(permanent.getId()), game);
             permanent.getAbilities().setControllerId(lockedControllers.get(permanent.getId()));
+            if (destroyAttachedAuras) {
+                FilterPermanent filter = new FilterPermanent();
+                filter.add(new SubtypePredicate(SubType.AURA));
+                for (UUID attachmentId : new HashSet<>(permanent.getAttachments())) {
+                    Permanent attachment = game.getPermanent(attachmentId);
+                    if (attachment != null && filter.match(attachment, game)) {
+                        attachment.destroy(source.getSourceId(), game, false);
+                    }
+                }
+            }
         }
         if (!toDelete.isEmpty()) {
             for (UUID uuid : toDelete) {

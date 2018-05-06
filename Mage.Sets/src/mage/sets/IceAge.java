@@ -346,6 +346,7 @@ public class IceAge extends ExpansionSet {
         cards.add(new SetCardInfo("Updraft", 105, Rarity.UNCOMMON, mage.cards.u.Updraft.class));
         cards.add(new SetCardInfo("Urza's Bauble", 318, Rarity.UNCOMMON, mage.cards.u.UrzasBauble.class));
         cards.add(new SetCardInfo("Veldt", 358, Rarity.RARE, mage.cards.v.Veldt.class));
+        cards.add(new SetCardInfo("Venomous Breath", 161, Rarity.UNCOMMON, mage.cards.v.VenomousBreath.class));
         cards.add(new SetCardInfo("Vertigo", 222, Rarity.UNCOMMON, mage.cards.v.Vertigo.class));
         cards.add(new SetCardInfo("Vexing Arcanix", 319, Rarity.RARE, mage.cards.v.VexingArcanix.class));
         cards.add(new SetCardInfo("Vibrating Sphere", 320, Rarity.RARE, mage.cards.v.VibratingSphere.class));

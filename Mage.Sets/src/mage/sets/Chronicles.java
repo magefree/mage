@@ -95,6 +95,7 @@ public class Chronicles extends ExpansionSet {
         cards.add(new SetCardInfo("Flash Flood", 21, Rarity.COMMON, mage.cards.f.FlashFlood.class));
         cards.add(new SetCardInfo("Fountain of Youth", 78, Rarity.COMMON, mage.cards.f.FountainOfYouth.class));
         cards.add(new SetCardInfo("Gabriel Angelfire", 111, Rarity.RARE, mage.cards.g.GabrielAngelfire.class));
+        cards.add(new SetCardInfo("Gauntlets of Chaos", 79, Rarity.RARE, mage.cards.g.GauntletsOfChaos.class));
         cards.add(new SetCardInfo("Ghazban Ogre", 37, Rarity.COMMON, mage.cards.g.GhazbanOgre.class));
         cards.add(new SetCardInfo("Goblin Artisans", 48, Rarity.UNCOMMON, mage.cards.g.GoblinArtisans.class));
         cards.add(new SetCardInfo("Goblin Digging Team", 49, Rarity.COMMON, mage.cards.g.GoblinDiggingTeam.class));

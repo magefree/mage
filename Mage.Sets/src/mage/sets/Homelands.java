@@ -103,6 +103,7 @@ public class Homelands extends ExpansionSet {
         cards.add(new SetCardInfo("Chain Stasis", 28, Rarity.RARE, mage.cards.c.ChainStasis.class));
         cards.add(new SetCardInfo("Chandler", 88, Rarity.COMMON, mage.cards.c.Chandler.class));
         cards.add(new SetCardInfo("Clockwork Gnomes", 127, Rarity.COMMON, mage.cards.c.ClockworkGnomes.class));
+        cards.add(new SetCardInfo("Clockwork Steed", 128, Rarity.UNCOMMON, mage.cards.c.ClockworkSteed.class));
         cards.add(new SetCardInfo("Clockwork Swarm", 129, Rarity.COMMON, mage.cards.c.ClockworkSwarm.class));
         cards.add(new SetCardInfo("Coral Reef", 29, Rarity.COMMON, mage.cards.c.CoralReef.class));
         cards.add(new SetCardInfo("Dark Maze", 30, Rarity.COMMON, mage.cards.d.DarkMaze.class, NON_FULL_USE_VARIOUS));
@@ -126,14 +127,17 @@ public class Homelands extends ExpansionSet {
         cards.add(new SetCardInfo("Folk of An-Havva", 58, Rarity.COMMON, FolkOfAnHavva.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Folk of An-Havva", 59, Rarity.COMMON, FolkOfAnHavva.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forget", 32, Rarity.RARE, mage.cards.f.Forget.class));
+        cards.add(new SetCardInfo("Funeral March", 11, Rarity.UNCOMMON, mage.cards.f.FuneralMarch.class));
         cards.add(new SetCardInfo("Ghost Hounds", 12, Rarity.UNCOMMON, mage.cards.g.GhostHounds.class));
         cards.add(new SetCardInfo("Grandmother Sengir", 13, Rarity.RARE, mage.cards.g.GrandmotherSengir.class));
+        cards.add(new SetCardInfo("Greater Werewolf", 14, Rarity.UNCOMMON, mage.cards.g.GreaterWerewolf.class));
         cards.add(new SetCardInfo("Hazduhr the Abbot", 110, Rarity.RARE, mage.cards.h.HazduhrTheAbbot.class));
         cards.add(new SetCardInfo("Headstone", 15, Rarity.COMMON, mage.cards.h.Headstone.class));
         cards.add(new SetCardInfo("Hungry Mist", 60, Rarity.COMMON, mage.cards.h.HungryMist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hungry Mist", 61, Rarity.COMMON, mage.cards.h.HungryMist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ihsan's Shade", 16, Rarity.UNCOMMON, mage.cards.i.IhsansShade.class));
         cards.add(new SetCardInfo("Irini Sengir", 17, Rarity.UNCOMMON, mage.cards.i.IriniSengir.class));
+        cards.add(new SetCardInfo("Ironclaw Curse", 96, Rarity.RARE, mage.cards.i.IronclawCurse.class));
         cards.add(new SetCardInfo("Jinx", 36, Rarity.COMMON, mage.cards.j.Jinx.class));
         cards.add(new SetCardInfo("Joven", 97, Rarity.COMMON, mage.cards.j.Joven.class));
         cards.add(new SetCardInfo("Joven's Tools", 133, Rarity.UNCOMMON, mage.cards.j.JovensTools.class));
@@ -166,6 +170,7 @@ public class Homelands extends ExpansionSet {
         cards.add(new SetCardInfo("Sengir Bats", 20, Rarity.COMMON, SengirBats.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sengir Bats", 21, Rarity.COMMON, SengirBats.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Serra Aviary", 118, Rarity.RARE, mage.cards.s.SerraAviary.class));
+        cards.add(new SetCardInfo("Serra Bestiary", 119, Rarity.UNCOMMON, mage.cards.s.SerraBestiary.class));
         cards.add(new SetCardInfo("Serra Paladin", 121, Rarity.COMMON, mage.cards.s.SerraPaladin.class));
         cards.add(new SetCardInfo("Serrated Arrows", 135, Rarity.COMMON, mage.cards.s.SerratedArrows.class));
         cards.add(new SetCardInfo("Shrink", 70, Rarity.COMMON, mage.cards.s.Shrink.class, NON_FULL_USE_VARIOUS));

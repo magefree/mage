@@ -148,6 +148,7 @@ public class FourthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Prodigal Sorcerer", 94, Rarity.COMMON, mage.cards.p.ProdigalSorcerer.class));
         cards.add(new SetCardInfo("Psionic Entity", 95, Rarity.RARE, mage.cards.p.PsionicEntity.class));
         cards.add(new SetCardInfo("Psychic Venom", 96, Rarity.COMMON, mage.cards.p.PsychicVenom.class));
+        cards.add(new SetCardInfo("Relic Bind", 97, Rarity.RARE, mage.cards.r.RelicBind.class));
         cards.add(new SetCardInfo("Sea Serpent", 98, Rarity.COMMON, mage.cards.s.SeaSerpent.class));
         cards.add(new SetCardInfo("Segovian Leviathan", 99, Rarity.UNCOMMON, mage.cards.s.SegovianLeviathan.class));
         cards.add(new SetCardInfo("Sindbad", 100, Rarity.UNCOMMON, mage.cards.s.Sindbad.class));
@@ -294,6 +295,7 @@ public class FourthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("The Brute", 226, Rarity.COMMON, mage.cards.t.TheBrute.class));
         cards.add(new SetCardInfo("Tunnel", 227, Rarity.UNCOMMON, mage.cards.t.Tunnel.class));
         cards.add(new SetCardInfo("Uthden Troll", 228, Rarity.UNCOMMON, mage.cards.u.UthdenTroll.class));
+        cards.add(new SetCardInfo("Wall of Dust", 229, Rarity.UNCOMMON, mage.cards.w.WallOfDust.class));
         cards.add(new SetCardInfo("Wall of Fire", 230, Rarity.UNCOMMON, mage.cards.w.WallOfFire.class));
         cards.add(new SetCardInfo("Wall of Stone", 231, Rarity.UNCOMMON, mage.cards.w.WallOfStone.class));
         cards.add(new SetCardInfo("Winds of Change", 232, Rarity.RARE, mage.cards.w.WindsOfChange.class));
@@ -350,6 +352,7 @@ public class FourthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Spirit Link", 51, Rarity.UNCOMMON, mage.cards.s.SpiritLink.class));
         cards.add(new SetCardInfo("Swords to Plowshares", 52, Rarity.UNCOMMON, mage.cards.s.SwordsToPlowshares.class));
         cards.add(new SetCardInfo("Tundra Wolves", 53, Rarity.COMMON, mage.cards.t.TundraWolves.class));
+        cards.add(new SetCardInfo("Visions", 54, Rarity.UNCOMMON, mage.cards.v.Visions.class));
         cards.add(new SetCardInfo("Wall of Swords", 55, Rarity.UNCOMMON, mage.cards.w.WallOfSwords.class));
         cards.add(new SetCardInfo("White Knight", 56, Rarity.UNCOMMON, mage.cards.w.WhiteKnight.class));
         cards.add(new SetCardInfo("White Ward", 57, Rarity.UNCOMMON, mage.cards.w.WhiteWard.class));

@@ -254,6 +254,7 @@ public class MastersEditionIV extends ExpansionSet {
         cards.add(new SetCardInfo("Serendib Djinn", 61, Rarity.RARE, mage.cards.s.SerendibDjinn.class));
         cards.add(new SetCardInfo("Serra Angel", 25, Rarity.UNCOMMON, mage.cards.s.SerraAngel.class));
         cards.add(new SetCardInfo("Serra Aviary", 26, Rarity.UNCOMMON, mage.cards.s.SerraAviary.class));
+        cards.add(new SetCardInfo("Serra Bestiary", 27, Rarity.COMMON, mage.cards.s.SerraBestiary.class));
         cards.add(new SetCardInfo("Shapeshifter", 226, Rarity.UNCOMMON, mage.cards.s.Shapeshifter.class));
         cards.add(new SetCardInfo("Shivan Dragon", 136, Rarity.RARE, mage.cards.s.ShivanDragon.class));
         cards.add(new SetCardInfo("Sinkhole", 97, Rarity.RARE, mage.cards.s.Sinkhole.class));
