@@ -93,7 +93,7 @@ class SoulRansomEffect extends OneShotEffect {
 
     SoulRansomEffect() {
         super(Outcome.Benefit);
-        this.staticText = "{this} controller sacrifices it, then draws two cards. Only any opponent may activate this ability";
+        this.staticText = "{this}'s controller sacrifices it, then draws two cards. Only any opponent may activate this ability";
     }
 
     SoulRansomEffect(final SoulRansomEffect effect) {
@@ -107,7 +107,12 @@ class SoulRansomEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
+        if (permanent != null) {
+            permanent.sacrifice(source.getSourceId(), game);
+        } else {
+            permanent = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
+        }
         if (permanent == null) {
             return false;
         }
@@ -116,7 +121,6 @@ class SoulRansomEffect extends OneShotEffect {
             return false;
         }
         controller.drawCards(2, game);
-        permanent.sacrifice(source.getSourceId(), game);
         return true;
     }
 }
