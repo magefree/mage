@@ -33,11 +33,8 @@ import java.util.Locale;
 import java.util.UUID;
 import mage.MageObject;
 import mage.MageObjectImpl;
-import mage.ObjectColor;
-import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.cards.Card;
-import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -47,7 +44,6 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import mage.players.Player;
 import mage.util.RandomUtil;
-import mage.util.SubTypeList;
 
 public abstract class TokenImpl extends MageObjectImpl implements Token {
 

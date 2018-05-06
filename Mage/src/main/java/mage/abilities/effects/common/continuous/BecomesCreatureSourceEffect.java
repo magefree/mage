@@ -34,7 +34,6 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 
 /**
@@ -108,8 +107,8 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
                         if (losePreviousTypes) {
                             permanent.getCardType().clear();
                         }
-                        for (CardType t : token.getCardType()) {
-                            permanent.addCardType(t);
+                        for (CardType cardType : token.getCardType()) {
+                            permanent.addCardType(cardType);
                         }
                         if (type != null && type.isEmpty() || type == null && permanent.isLand()) {
                             permanent.getSubtype(game).retainAll(SubType.getLandTypes(false));
