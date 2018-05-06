@@ -115,7 +115,7 @@ class SummonThePackEffect extends OneShotEffect {
                         message.append(c.getName()).append(" ");
                         if (c != null && c.isCreature()) {
                             message.append(" (creature card) ");
-                            ContinuousEffect effect2 = new BecomesBlackZombieAdditionEffect();
+                            ContinuousEffect effect2 = new BecomesBlackZombieAdditionEffect(false);
                             effect2.setTargetPointer(new FixedTarget(c.getId()));
                             game.addEffect(effect2, source);
                             creatureCards.add(c);
