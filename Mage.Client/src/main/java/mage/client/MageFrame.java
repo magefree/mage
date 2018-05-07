@@ -105,6 +105,10 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private static final String GRAY_MODE_ARG = "-gray";
     private static final String FILL_SCREEN_ARG = "-fullscreen";
     private static final String SKIP_DONE_SYMBOLS = "-skipDoneSymbols";
+    private static final String USER_ARG = "-user";
+    private static final String PASSWORD_ARG = "-pw";
+    private static final String SERVER_ARG = "-server";
+    private static final String PORT_ARG = "-port";
 
     private static final String NOT_CONNECTED_TEXT = "<not connected>";
     private static MageFrame instance;
@@ -123,6 +127,10 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private static boolean grayMode = false;
     private static boolean fullscreenMode = false;
     private static boolean skipSmallSymbolGenerationForExisting = false;
+    private static String startUser = null;
+    private static String startPassword = "";
+    private static String startServer = "localhost";
+    private static int startPort = -1;
 
     private static final Map<UUID, ChatPanelBasic> CHATS = new HashMap<>();
     private static final Map<UUID, GamePanel> GAMES = new HashMap<>();
@@ -1186,8 +1194,10 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
         startTime = System.currentTimeMillis();
         Thread.setDefaultUncaughtExceptionHandler((t, e) -> LOGGER.fatal(null, e));
+        
         SwingUtilities.invokeLater(() -> {
-            for (String arg : args) {
+            for (int i = 0; i < args.length; i++) {
+                String arg = args[i];
                 if (arg.startsWith(LITE_MODE_ARG)) {
                     liteMode = true;
                 }
@@ -1199,6 +1209,22 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 }
                 if (arg.startsWith(SKIP_DONE_SYMBOLS)) {
                     skipSmallSymbolGenerationForExisting = true;
+                }
+                if (arg.startsWith(USER_ARG)){
+                    startUser = args[i+1];
+                    i++;
+                }
+                if (arg.startsWith(PASSWORD_ARG)){
+                    startPassword = args[i+1];
+                    i++;
+                }
+                if (arg.startsWith(SERVER_ARG)){
+                    startServer = args[i+1];
+                    i++;
+                }
+                if (arg.startsWith(PORT_ARG)){
+                    startPort = Integer.valueOf(args[i+1]);
+                    i++;
                 }
             }
             if (!liteMode) {
@@ -1213,6 +1239,25 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             }
             instance = new MageFrame();
             instance.setVisible(true);
+            if( startUser != null){
+                //instance.connectDialog.
+                Connection startConnection = new Connection();
+                startConnection.setUsername(startUser);
+                startConnection.setHost(startServer);
+                if (startPort > 0){
+                    startConnection.setPort(startPort);
+                }else {
+                    startConnection.setPort(MagePreferences.getServerPortWithDefault(Config.port));
+                }
+                PreferencesDialog.setProxyInformation(startConnection);
+                startConnection.setPassword(startPassword);
+                boolean connectSuccess = connect(startConnection);
+                if (connectSuccess){
+                    instance.connectDialog.hideDialog();
+                } else {
+                    
+                }
+            }
 
         });
     }
