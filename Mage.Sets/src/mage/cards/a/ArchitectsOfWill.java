@@ -49,7 +49,7 @@ import mage.target.TargetPlayer;
 public class ArchitectsOfWill extends CardImpl {
 
     public ArchitectsOfWill(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}{U}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}{U}{B}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
 
@@ -95,19 +95,11 @@ class ArchitectsOfWillEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
-        if (targetPlayer == null
-                || controller == null) {
+        if (targetPlayer == null || controller == null) {
             return false;
         }
-        Cards cards = new CardsImpl();
-        int count = Math.min(targetPlayer.getLibrary().size(), 3);
-        for (int i = 0; i < count; i++) {
-            Card card = targetPlayer.getLibrary().removeFromTop(game);
-            if (card != null) {
-                cards.add(card);
-            }
-        }
-        controller.lookAtCards("Architects of Will", cards, game);
+        Cards cards = new CardsImpl(targetPlayer.getLibrary().getTopCards(game, 3));
+        controller.lookAtCards(source, null, cards, game);
         controller.putCardsOnTopOfLibrary(cards, game, source, true);
         return true;
     }

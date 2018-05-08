@@ -45,7 +45,7 @@ import mage.players.Player;
 public class FathomTrawl extends CardImpl {
 
     public FathomTrawl(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{U}{U}");
 
         // Reveal cards from the top of your library until you reveal three nonland cards. Put the nonland cards revealed this way into your hand, then put the rest of the revealed cards on the bottom of your library in any order.
         this.getSpellAbility().addEffect(new FathomTrawlEffect());
@@ -86,8 +86,7 @@ public class FathomTrawl extends CardImpl {
             Cards cards = new CardsImpl();
             Cards nonlandCards = new CardsImpl();
             Cards landCards = new CardsImpl();
-            while (controller.getLibrary().hasCards()) {
-                Card card = controller.getLibrary().removeFromTop(game);
+            for (Card card : controller.getLibrary().getCards(game)) {
                 if (card != null) {
                     cards.add(card);
                     if (!card.isLand()) {

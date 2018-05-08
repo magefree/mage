@@ -114,8 +114,7 @@ public class DiviningWitch extends CardImpl {
                 // then reveal cards from the top of your library until you reveal the named card.
                 Cards cardsToReaveal = new CardsImpl();
                 Card cardToHand = null;
-                while (controller.getLibrary().hasCards()) {
-                    Card card = controller.getLibrary().removeFromTop(game);
+                for (Card card : controller.getLibrary().getCards(game)) {
                     if (card != null) {
                         cardsToReaveal.add(card);
                         // Put that card into your hand

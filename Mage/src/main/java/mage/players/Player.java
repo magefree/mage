@@ -474,13 +474,40 @@ public interface Player extends MageItem, Copyable<Player> {
 
     void resetStoredBookmark(Game game);
 
+    void revealCards(Ability source, Cards cards, Game game);
+
     void revealCards(String name, Cards cards, Game game);
 
+    void revealCards(Ability source, String name, Cards cards, Game game);
+
     void revealCards(String name, Cards cards, Game game, boolean postToLog);
+
+    /**
+     * Adds the cards to the reveal window and adds the source object's id name
+     * to the title bar of the revealed cards window
+     *
+     * @param source
+     * @param name
+     * @param cards
+     * @param game
+     * @param postToLog
+     */
+    void revealCards(Ability source, String name, Cards cards, Game game, boolean postToLog);
 
     void lookAtCards(String name, Card card, Game game);
 
     void lookAtCards(String name, Cards cards, Game game);
+
+    /**
+     * Adds the cards to the look window and adds the source object's id name to
+     * the title bar of the lookedAt window
+     *
+     * @param source
+     * @param name
+     * @param cards
+     * @param game
+     */
+    void lookAtCards(Ability source, String name, Cards cards, Game game);
 
     @Override
     Player copy();

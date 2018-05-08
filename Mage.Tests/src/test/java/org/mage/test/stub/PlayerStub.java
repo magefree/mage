@@ -759,12 +759,27 @@ public class PlayerStub implements Player {
     }
 
     @Override
+    public void revealCards(Ability source, Cards cards, Game game) {
+
+    }
+
+    @Override
     public void revealCards(String name, Cards cards, Game game) {
 
     }
 
     @Override
+    public void revealCards(Ability source, String name, Cards cards, Game game) {
+
+    }
+
+    @Override
     public void revealCards(String name, Cards cards, Game game, boolean postToLog) {
+
+    }
+
+    @Override
+    public void revealCards(Ability source, String name, Cards cards, Game game, boolean postToLog) {
 
     }
 
@@ -775,6 +790,11 @@ public class PlayerStub implements Player {
 
     @Override
     public void lookAtCards(String name, Cards cards, Game game) {
+
+    }
+
+    @Override
+    public void lookAtCards(Ability source, String name, Cards cards, Game game) {
 
     }
 

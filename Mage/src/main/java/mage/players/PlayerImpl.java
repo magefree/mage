@@ -1474,16 +1474,34 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public void revealCards(String name, Cards cards, Game game) {
-        revealCards(name, cards, game, true);
+    public void revealCards(Ability source, Cards cards, Game game) {
+        revealCards(source, null, cards, game, true);
     }
 
     @Override
-    public void revealCards(String name, Cards cards, Game game, boolean postToLog) {
+    public void revealCards(String titleSuffix, Cards cards, Game game) {
+        revealCards(titleSuffix, cards, game, true);
+    }
+
+    @Override
+    public void revealCards(String titleSuffix, Cards cards, Game game, boolean postToLog) {
+        revealCards(null, titleSuffix, cards, game, postToLog);
+    }
+
+    @Override
+    public void revealCards(Ability source, String titleSuffix, Cards cards, Game game) {
+        revealCards(source, titleSuffix, cards, game, true);
+    }
+
+    @Override
+    public void revealCards(Ability source, String titleSuffix, Cards cards, Game game, boolean postToLog) {
+        if (cards == null || cards.isEmpty()) {
+            return;
+        }
         if (postToLog) {
-            game.getState().getRevealed().add(name, cards);
+            game.getState().getRevealed().add(CardUtil.createObjectRealtedWindowTitle(source, game, titleSuffix), cards);
         } else {
-            game.getState().getRevealed().update(name, cards);
+            game.getState().getRevealed().update(CardUtil.createObjectRealtedWindowTitle(source, game, titleSuffix), cards);
         }
         if (postToLog && !game.isSimulation()) {
             StringBuilder sb = new StringBuilder(getLogName()).append(" reveals ");
@@ -1500,14 +1518,19 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public void lookAtCards(String name, Card card, Game game) {
-        game.getState().getLookedAt(this.playerId).add(name, card);
+    public void lookAtCards(String titleSuffix, Card card, Game game) {
+        game.getState().getLookedAt(this.playerId).add(titleSuffix, card);
         game.fireUpdatePlayersEvent();
     }
 
     @Override
-    public void lookAtCards(String name, Cards cards, Game game) {
-        game.getState().getLookedAt(this.playerId).add(name, cards);
+    public void lookAtCards(String titleSuffix, Cards cards, Game game) {
+        this.lookAtCards(null, titleSuffix, cards, game);
+    }
+
+    @Override
+    public void lookAtCards(Ability source, String titleSuffix, Cards cards, Game game) {
+        game.getState().getLookedAt(this.playerId).add(CardUtil.createObjectRealtedWindowTitle(source, game, titleSuffix), cards);
         game.fireUpdatePlayersEvent();
     }
 

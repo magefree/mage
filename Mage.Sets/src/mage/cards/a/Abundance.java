@@ -104,8 +104,7 @@ class AbundanceReplacementEffect extends ReplacementEffectImpl {
             }
             Cards toReveal = new CardsImpl();
             Card selectedCard = null;
-            while (controller.getLibrary().hasCards()) {
-                Card card = controller.getLibrary().removeFromTop(game);
+            for (Card card : controller.getLibrary().getCards(game)) {
                 toReveal.add(card);
                 if (filter.match(card, source.getSourceId(), source.getControllerId(), game)) {
                     selectedCard = card;

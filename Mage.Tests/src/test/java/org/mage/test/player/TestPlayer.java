@@ -1474,7 +1474,17 @@ public class TestPlayer implements Player {
     }
 
     @Override
+    public void revealCards(Ability source, Cards cards, Game game) {
+        computerPlayer.revealCards(source, cards, game);
+    }
+
+    @Override
     public void revealCards(String name, Cards cards, Game game) {
+        computerPlayer.revealCards(name, cards, game);
+    }
+
+    @Override
+    public void revealCards(Ability source, String name, Cards cards, Game game) {
         computerPlayer.revealCards(name, cards, game);
     }
 
@@ -1484,8 +1494,18 @@ public class TestPlayer implements Player {
     }
 
     @Override
+    public void revealCards(Ability source, String name, Cards cards, Game game, boolean postToLog) {
+        computerPlayer.revealCards(name, cards, game, postToLog);
+    }
+
+    @Override
     public void lookAtCards(String name, Cards cards, Game game) {
         computerPlayer.lookAtCards(name, cards, game);
+    }
+
+    @Override
+    public void lookAtCards(Ability source, String name, Cards cards, Game game) {
+        computerPlayer.lookAtCards(source, name, cards, game);
     }
 
     @Override
