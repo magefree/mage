@@ -102,7 +102,7 @@ public class FifthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("City of Brass", 413, Rarity.RARE, mage.cards.c.CityOfBrass.class));
         cards.add(new SetCardInfo("Clay Statue", 355, Rarity.COMMON, mage.cards.c.ClayStatue.class));
         cards.add(new SetCardInfo("Clockwork Beast", 356, Rarity.RARE, mage.cards.c.ClockworkBeast.class));
-        cards.add(new SetCardInfo("Clockwork Steed", 257, Rarity.UNCOMMON, mage.cards.c.ClockworkSteed.class));
+        cards.add(new SetCardInfo("Clockwork Steed", 357, Rarity.UNCOMMON, mage.cards.c.ClockworkSteed.class));
         cards.add(new SetCardInfo("Cockatrice", 146, Rarity.RARE, mage.cards.c.Cockatrice.class));
         cards.add(new SetCardInfo("Colossus of Sardia", 358, Rarity.RARE, mage.cards.c.ColossusOfSardia.class));
         cards.add(new SetCardInfo("Conquer", 216, Rarity.UNCOMMON, mage.cards.c.Conquer.class));
