@@ -740,7 +740,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }
 
     public boolean autoConnect() {
-        boolean autoConnectParamValue = Boolean.parseBoolean(PREFS.get("autoConnect", "false"));
+        boolean autoConnectParamValue = startUser != null || Boolean.parseBoolean(PREFS.get("autoConnect", "false"));
         boolean status = false;
         if (autoConnectParamValue) {
             status = performConnect(false);
@@ -1238,26 +1238,20 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 }
             }
             instance = new MageFrame();
-            instance.setVisible(true);
+            
             if( startUser != null){
-                //instance.connectDialog.
-                Connection startConnection = new Connection();
-                startConnection.setUsername(startUser);
-                startConnection.setHost(startServer);
+                instance.currentConnection = new Connection();
+                instance.currentConnection.setUsername(startUser);
+                instance.currentConnection.setHost(startServer);
                 if (startPort > 0){
-                    startConnection.setPort(startPort);
+                    instance.currentConnection.setPort(startPort);
                 }else {
-                    startConnection.setPort(MagePreferences.getServerPortWithDefault(Config.port));
+                    instance.currentConnection.setPort(MagePreferences.getServerPortWithDefault(Config.port));
                 }
-                PreferencesDialog.setProxyInformation(startConnection);
-                startConnection.setPassword(startPassword);
-                boolean connectSuccess = connect(startConnection);
-                if (connectSuccess){
-                    instance.connectDialog.hideDialog();
-                } else {
-                    
-                }
+                PreferencesDialog.setProxyInformation(instance.currentConnection);
+                instance.currentConnection.setPassword(startPassword);
             }
+            instance.setVisible(true);
 
         });
     }
