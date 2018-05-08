@@ -89,27 +89,15 @@ class DeployTheGatewatchEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-
         Player controller = game.getPlayer(source.getControllerId());
         if (controller == null) {
             return false;
         }
         // Look at the top seven cards of your library.
-        Cards cards = new CardsImpl();
-        boolean planeswalkerIncluded = false;
-        for (int i = 0; i < 7; i++) {
-            Card card = controller.getLibrary().removeFromTop(game);
-            if (card != null) {
-                cards.add(card);
-                if (filter.match(card, game)) {
-                    planeswalkerIncluded = true;
-                }
-            }
-        }
-        controller.lookAtCards("Deploy the Gatewatch", cards, game);
-
+        Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, 7));
+        controller.lookAtCards(source, null, cards, game);
         // Put up to two planeswalker cards from among them onto the battlefield.
-        if (planeswalkerIncluded) {
+        if (cards.count(filter, game) > 0) {
             TargetCard target = new TargetCard(0, 2, Zone.LIBRARY, filter);
             if (controller.choose(Outcome.DrawCard, cards, target, game)) {
                 Cards pickedCards = new CardsImpl(target.getTargets());
@@ -117,7 +105,6 @@ class DeployTheGatewatchEffect extends OneShotEffect {
                 controller.moveCards(pickedCards.getCards(game), Zone.BATTLEFIELD, source, game);
             }
         }
-
         // Put the rest on the bottom of your library in a random order
         controller.putCardsOnBottomOfLibrary(cards, game, source, false);
         return true;

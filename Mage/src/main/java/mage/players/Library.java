@@ -135,26 +135,17 @@ public class Library implements Serializable {
         }
     }
 
-    public void putCardThirdFromTheTop(Card card, Game game) {
-        if (card != null) {
-            if (card.getOwnerId().equals(playerId)) {
-                Card cardTop = null;
-                Card cardSecond = null;
-                if (hasCards()) {
-                    cardTop = removeFromTop(game);
-                }
-                if (hasCards()) {
-                    cardSecond = removeFromTop(game);
-                }
-                putOnTop(card, game);
-                if (cardSecond != null) {
-                    putOnTop(cardSecond, game);
-                }
-                if (cardTop != null) {
-                    putOnTop(cardTop, game);
-                }
-            } else {
-                game.getPlayer(card.getOwnerId()).getLibrary().putCardThirdFromTheTop(card, game);
+    public void putCardToTopXPos(Card card, int pos, Game game) {
+        if (card != null && pos > -1) {
+            LinkedList<Card> save = new LinkedList<>();
+            int idx = 1;
+            while (hasCards() && idx < pos) {
+                idx++;
+                save.add(removeFromTop(game));
+            }
+            putOnTop(card, game);
+            while (!save.isEmpty()) {
+                putOnTop(save.removeLast(), game);
             }
         }
     }

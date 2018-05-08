@@ -909,6 +909,11 @@ public class PlayerStub implements Player {
     }
 
     @Override
+    public boolean putCardOnTopXOfLibrary(Card card, Game game, Ability source, int xFromTheTop) {
+        return true;
+    }
+
+    @Override
     public int announceXMana(int min, int max, String message, Game game, Ability ability) {
         return 0;
     }

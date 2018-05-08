@@ -33,7 +33,6 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardAllEffect;
 import mage.abilities.keyword.AftermathAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.SplitCard;
@@ -107,43 +106,16 @@ class CommitEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getFirstTarget());
-        if (permanent != null) {
-            Player owner = game.getPlayer(permanent.getOwnerId());
-            Player controller = game.getPlayer(permanent.getControllerId());
-            if (owner == null || controller == null) {
-                return false;
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+            if (permanent != null) {
+                return controller.putCardOnTopXOfLibrary(permanent, game, source, 2);
             }
-
-            Card card = null;
-            if (owner.getLibrary().hasCards()) {
-                card = owner.getLibrary().removeFromTop(game);
+            Spell spell = game.getStack().getSpell(source.getFirstTarget());
+            if (spell != null) {
+                return controller.putCardOnTopXOfLibrary(spell, game, source, 2);
             }
-
-            permanent.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-            if (card != null) {
-                owner.getLibrary().putOnTop(card, game);
-            }
-            return true;
-        }
-        Spell spell = game.getStack().getSpell(source.getFirstTarget());
-        if (spell != null) {
-            Player owner = game.getPlayer(spell.getOwnerId());
-            Player controller = game.getPlayer(spell.getControllerId());
-            if (owner == null || controller == null) {
-                return false;
-            }
-
-            Card card = null;
-            if (owner.getLibrary().hasCards()) {
-                card = owner.getLibrary().removeFromTop(game);
-            }
-
-            spell.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-            if (card != null) {
-                owner.getLibrary().putOnTop(card, game);
-            }
-            return true;
         }
         return false;
     }

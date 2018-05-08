@@ -84,6 +84,7 @@ import mage.game.events.ZoneChangeEvent;
 import mage.game.match.MatchPlayer;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
+import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.SquirrelToken;
 import mage.game.stack.Spell;
 import mage.game.stack.StackAbility;
@@ -890,6 +891,26 @@ public abstract class PlayerImpl implements Player, Serializable {
                     moveObjectToLibrary(cards.iterator().next(), source == null ? null : source.getSourceId(), game, false, false);
                 }
             }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean putCardOnTopXOfLibrary(Card card, Game game, Ability source, int xFromTheTop) {
+        if (card.getOwnerId().equals(getId())) {
+            if (library.size() + 1 < xFromTheTop) {
+                putCardsOnBottomOfLibrary(new CardsImpl(card), game, source, true);
+            } else {
+                if (card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true) && !(card instanceof PermanentToken) && !card.isCopy()) {
+                    card = getLibrary().removeFromTop(game);
+                    getLibrary().putCardToTopXPos(card, xFromTheTop, game);
+                    game.informPlayers(card.getLogName() + " is put into " + getLogName() + "'s library " + CardUtil.numberToOrdinalText(xFromTheTop) + " from the top");
+                } else {
+                    return false;
+                }
+            }
+        } else {
+            return game.getPlayer(card.getOwnerId()).putCardOnTopXOfLibrary(card, game, source, xFromTheTop);
         }
         return true;
     }
@@ -1840,6 +1861,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         return gainLife(amount, game, source.getSourceId());
     }
 
+    @Override
     public int gainLife(int amount, Game game, UUID sourceId) {
         if (!canGainLife || amount == 0) {
             return 0;

@@ -27,8 +27,6 @@
  */
 package mage.cards.f;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -37,18 +35,21 @@ import mage.abilities.costs.common.ExileFromGraveCost;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.AsThoughEffectImpl;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.game.Game;
-import mage.players.Library;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
+import mage.target.targetpointer.FixedTargets;
+import mage.util.CardUtil;
 
 /**
  *
@@ -57,7 +58,7 @@ import mage.target.common.TargetCardInYourGraveyard;
 public class FlamesOfRemembrance extends CardImpl {
 
     public FlamesOfRemembrance(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{R}");
 
         // At the beggining of your upkeep, you may exile a card from your graveyard. If you do, put a lore counter on Flames of Remembrance.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DoIfCostPaid(new AddCountersSourceEffect(CounterType.LORE.createInstance()), new ExileFromGraveCost(new TargetCardInYourGraveyard()), null, true), TargetController.YOU, false));
@@ -83,7 +84,7 @@ class FlamesOfRemembranceExileEffect extends OneShotEffect {
     public FlamesOfRemembranceExileEffect(CountersSourceCount amount) {
         super(Outcome.Benefit);
         this.amount = amount;
-        this.staticText = "Exile top X cards of your library, where X is the number of lore counters on Flames of Remembrance. Until end of turn you play cards exile this way";
+        this.staticText = "Exile top X cards of your library, where X is the number of lore counters on {this}. Until end of turn you play cards exile this way";
     }
 
     public FlamesOfRemembranceExileEffect(final FlamesOfRemembranceExileEffect effect) {
@@ -100,23 +101,12 @@ class FlamesOfRemembranceExileEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-
-            Library library = controller.getLibrary();
-            List<Card> cards = new ArrayList<>();
-            int count = Math.min(amount.calculate(game, source, this), library.size());
-            for (int i = 0; i < count; i++) {
-                Card card = library.removeFromTop(game);
-                if (card != null) {
-                    cards.add(card);
-                }
-            }
+            Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, amount.calculate(game, source, this)));
             if (!cards.isEmpty()) {
-                List<UUID> cardsId = new ArrayList<>();
-                for (Card card : cards) {
-                    card.moveToExile(source.getSourceId(), "Flames of Remembrance", source.getSourceId(), game);
-                    cardsId.add(card.getId());
-                }
-                game.addEffect(new FlamesOfRemembranceMayPlayExiledEffect(cardsId), source);
+                controller.moveCardsToExile(cards.getCards(game), source, game, true, source.getSourceId(), CardUtil.createObjectRealtedWindowTitle(source, game, ""));
+                ContinuousEffect effect = new FlamesOfRemembranceMayPlayExiledEffect();
+                effect.setTargetPointer(new FixedTargets(cards, game));
+                game.addEffect(effect, source);
             }
             return true;
         }
@@ -127,16 +117,12 @@ class FlamesOfRemembranceExileEffect extends OneShotEffect {
 
 class FlamesOfRemembranceMayPlayExiledEffect extends AsThoughEffectImpl {
 
-    public List<UUID> cards = new ArrayList<>();
-
-    public FlamesOfRemembranceMayPlayExiledEffect(List<UUID> cards) {
+    public FlamesOfRemembranceMayPlayExiledEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
-        this.cards.addAll(cards);
     }
 
     public FlamesOfRemembranceMayPlayExiledEffect(final FlamesOfRemembranceMayPlayExiledEffect effect) {
         super(effect);
-        this.cards.addAll(effect.cards);
     }
 
     @Override
@@ -150,15 +136,7 @@ class FlamesOfRemembranceMayPlayExiledEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        Card card = game.getCard(sourceId);
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null && card != null && game.getState().getZone(sourceId) == Zone.EXILED) {
-            if (cards.contains(sourceId)) {
-                return true;
-            }
-        }
-        return false;
+    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        return source.getControllerId().equals(affectedControllerId) && this.getTargetPointer().getTargets(game, source).contains(objectId);
     }
-
 }

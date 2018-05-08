@@ -51,6 +51,9 @@ public final class CardUtil {
     static final String[] numberStrings = {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
         "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen", "twenty"};
 
+    static final String[] ordinalStrings = {"first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eightth", "ninth",
+        "tenth", "eleventh", "twelfth", "thirteenth", "fourteenth", "fifteenth", "sixteenth", "seventeenth", "eighteenth", "nineteenth", "twentieth"};
+
     /**
      * Increase spell or ability cost to be paid.
      *
@@ -361,6 +364,13 @@ public final class CardUtil {
             return numberToText(Integer.parseInt(number), forOne);
         }
         return number;
+    }
+
+    public static String numberToOrdinalText(int number) {
+        if (number >= 1 && number < 21) {
+            return ordinalStrings[number - 1];
+        }
+        return Integer.toString(number) + "th";
     }
 
     public static String replaceSourceName(String message, String sourceName) {
