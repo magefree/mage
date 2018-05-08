@@ -46,6 +46,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -107,7 +108,7 @@ class GrabTheReinsEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         UUID controllerId = source.getControllerId();
-        Target target = new TargetCreaturePermanent();
+        Target target = new TargetControlledCreaturePermanent();
         target.setNotTarget(true);
         target.setTargetName("a creature to sacrifice");
         if (!target.canChoose(source.getSourceId(), controllerId, game)) {
