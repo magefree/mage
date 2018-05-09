@@ -1,0 +1,86 @@
+1 [CMD:60] Scattering Stroke
+1 [CMD:61] Skyscribing
+1 [CMD:272] Evolving Wilds
+1 [CMD:194] Dominus of Fealty
+1 [CMD:63] Spell Crumple
+1 [CMD:278] Izzet Boilerworks
+2 [CMD:311] Mountain
+1 [CMD:68] Vow of Flight
+1 [CMD:112] Breath of Darigaaz
+1 [CMD:69] Whirlpool Whelm
+2 [CMD:313] Mountain
+1 [CMD:26] Pollen Lullaby
+2 [CMD:312] Mountain
+1 [CMD:114] Chaos Warp
+1 [CMD:27] Prison Term
+1 [CMD:64] Trade Secrets
+2 [CMD:314] Mountain
+1 [CMD:237] Wall of Denial
+1 [CMD:66] Vedalken Plotter
+1 [CMD:22] Oblation
+1 [CMD:118] Death by Dragons
+1 [CMD:67] Vision Skeins
+1 [CMD:17] Journey to Nowhere
+1 [CMD:19] Martyr's Bond
+1 [CMD:261] Sol Ring
+1 [CMD:183] Azorius Guildmage
+1 [CMD:265] Azorius Chancery
+1 [CMD:221] Ruhan of the Fomori
+1 [CMD:187] Brion Stoutarm
+2 [CMD:300] Plains
+1 [CMD:36] Vow of Duty
+1 [CMD:269] Command Tower
+2 [CMD:302] Plains
+1 [CMD:37] Wall of Omens
+1 [CMD:268] Boros Garrison
+2 [CMD:301] Plains
+1 [CMD:38] Windborn Muse
+3 [CMD:304] Island
+3 [CMD:303] Island
+1 [CMD:32] Soul Snare
+3 [CMD:306] Island
+1 [CMD:33] Spurnmage Advocate
+3 [CMD:305] Island
+1 [CMD:291] Terramorphic Expanse
+1 [CMD:8] Austere Command
+1 [CMD:40] Brainstorm
+1 [CMD:6] Arbiter of Knollridge
+1 [CMD:41] Chromeshell Crab
+1 [CMD:131] Punishing Fire
+1 [CMD:251] Howling Mine
+1 [CMD:133] Rapacious One
+1 [CMD:253] Lightning Greaves
+1 [CMD:46] Flusterstorm
+1 [CMD:256] Prophetic Prism
+2 [CMD:299] Plains
+1 [CMD:47] Fog Bank
+1 [CMD:48] Gomazoa
+1 [CMD:49] Guard Gomazoa
+1 [CMD:213] Nin, the Pain Artist
+1 [CMD:139] Wild Ricochet
+1 [CMD:43] Court Hussar
+1 [CMD:215] Numot, the Devastator
+1 [CMD:138] Vow of Lightning
+1 [CMD:218] Plumeveil
+1 [CMD:242] Armillary Sphere
+1 [CMD:13] False Prophet
+1 [CMD:245] Darksteel Ingot
+1 [CMD:57] Reins of Power
+1 [CMD:123] Flametongue Kavu
+1 [CMD:244] Champion's Helm
+1 [CMD:14] Ghostly Prison
+1 [CMD:58] Repulse
+1 [CMD:247] Dreamstone Hedron
+1 [CMD:126] Insurrection
+1 [CMD:125] Goblin Cadets
+1 [CMD:16] Jotun Grunt
+1 [CMD:205] Izzet Chronarch
+1 [CMD:53] Murmurs from Beyond
+1 [CMD:248] Fellwar Stone
+1 [CMD:127] Lash Out
+1 [CMD:54] Perilous Research
+1 [CMD:55] Propaganda
+1 [CMD:12] Crescendo of War
+SB: 1 [CMD:240] Zedruu the Greathearted
+LAYOUT MAIN:(2,9)(CMC,true,50)|()([CMD:125],[CMD:33])([CMD:183],[CMD:47],[CMD:16],[CMD:213],[CMD:37])([CMD:43],[CMD:48],[CMD:49],[CMD:218],[CMD:66],[CMD:237])([CMD:187],[CMD:13],[CMD:123],[CMD:221],[CMD:38])([CMD:41],[CMD:194],[CMD:205])([CMD:215],[CMD:133])([CMD:6])()([CMD:265],[CMD:268],[CMD:269],[CMD:272],[CMD:303],[CMD:303],[CMD:303],[CMD:304],[CMD:304],[CMD:304],[CMD:305],[CMD:305],[CMD:305],[CMD:306],[CMD:306],[CMD:306],[CMD:278],[CMD:311],[CMD:311],[CMD:312],[CMD:312],[CMD:313],[CMD:313],[CMD:314],[CMD:314],[CMD:299],[CMD:299],[CMD:300],[CMD:300],[CMD:301],[CMD:301],[CMD:302],[CMD:302],[CMD:291])([CMD:40],[CMD:46],[CMD:261],[CMD:32])([CMD:242],[CMD:112],[CMD:248],[CMD:251],[CMD:17],[CMD:127],[CMD:253],[CMD:54],[CMD:26],[CMD:256],[CMD:131],[CMD:61],[CMD:67],[CMD:69])([CMD:244],[CMD:114],[CMD:245],[CMD:14],[CMD:53],[CMD:22],[CMD:27],[CMD:55],[CMD:58],[CMD:63],[CMD:64],[CMD:36],[CMD:68],[CMD:138])([CMD:12],[CMD:57],[CMD:60],[CMD:139])()([CMD:8],[CMD:118],[CMD:247],[CMD:19])()([CMD:126])
+LAYOUT SIDEBOARD:(1,1)(NONE,false,50)|([CMD:240])
