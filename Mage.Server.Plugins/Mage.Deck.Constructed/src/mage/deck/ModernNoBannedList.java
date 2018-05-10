@@ -40,9 +40,9 @@ import mage.constants.SetType;
  *
  * @author LevelX2
  */
-public class Modern extends Constructed {
+public class ModernNoBannedList extends Constructed {
 
-    public Modern() {
+    public ModernNoBannedList() {
         super("Constructed - Modern - No Banned List");
 
         Date cutoff = new GregorianCalendar(2003, 6, 28).getTime(); // Eight edition release date
