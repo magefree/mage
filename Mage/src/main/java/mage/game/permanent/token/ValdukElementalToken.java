@@ -27,6 +27,9 @@
  */
 package mage.game.permanent.token;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.MageInt;
@@ -39,12 +42,18 @@ import mage.abilities.keyword.TrampleAbility;
  */
 public class ValdukElementalToken extends TokenImpl {
 
+    final static private List<String> tokenImageSets = new ArrayList<>();
+    static {
+        tokenImageSets.addAll(Arrays.asList("DOM"));
+    }
+
     public ValdukElementalToken() {
         this("DOM");
     }
 
     public ValdukElementalToken(String setCode) {
         super("Elemental", "3/1 red Elemental creature token with trample and haste");
+        availableImageSetCodes = tokenImageSets;
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         subtype.add(SubType.ELEMENTAL);
