@@ -55,7 +55,8 @@ public class SylvanAwakening extends CardImpl {
                 new SylvanAwakeningToken(),
                 "lands",
                 new FilterControlledLandPermanent("all lands you control"),
-                Duration.UntilYourNextTurn)
+                Duration.UntilYourNextTurn,
+                false)
         );
     }
 

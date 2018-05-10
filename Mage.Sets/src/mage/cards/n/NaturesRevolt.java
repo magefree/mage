@@ -53,7 +53,7 @@ public class NaturesRevolt extends CardImpl {
 
         // All lands are 2/2 creatures that are still lands.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesCreatureAllEffect(new CreatureToken(2, 2),
-                "lands", new FilterLandPermanent(), Duration.WhileOnBattlefield)));
+                "lands", new FilterLandPermanent(), Duration.WhileOnBattlefield, false)));
     }
 
     public NaturesRevolt(final NaturesRevolt card) {
