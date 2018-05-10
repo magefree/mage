@@ -27,6 +27,9 @@
  */
 package mage.game.permanent.token;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -51,9 +54,15 @@ import mage.game.permanent.Permanent;
  */
 public class BelzenlokDemonToken extends TokenImpl {
 
+    final static private List<String> tokenImageSets = new ArrayList<>();
+    static {
+        tokenImageSets.addAll(Arrays.asList("DOM"));
+    }
+
     public BelzenlokDemonToken() {
         super("Demon", "6/6 black Demon creature token with flying, trample, and "
                 + "\"At the beginning of your upkeep, sacrifice another creature.  If you can't, this creature deals 6 damage to you.\"");
+        availableImageSetCodes = tokenImageSets;
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add(SubType.DEMON);
