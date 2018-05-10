@@ -11,9 +11,10 @@
 1 [ALA:140] Mycoloth
 1 [RTR:150] Collective Blessing
 1 [RTR:194] Selesnya Charm
+4 [BFZ:250a] Plains
 1 [M13:170] Farseek
 1 [BNG:148] Karametra, God of Harvests
-7 [BFZ:270] Forest
+7 [BFZ:270a] Forest
 1 [FUT:138] Sprout Swarm
 1 [DKA:76] Tragic Slip
 1 [DGM:149] Golgari Guildgate
@@ -21,6 +22,7 @@
 1 [DGM:93] Putrefy
 1 [GTC:242] Godless Shrine
 1 [AVR:10] Cathars' Crusade
+1 [TMP:142] Living Death
 1 [AVR:171] Champion of Lambholt
 1 [M14:1] Ajani, Caller of the Pride
 1 [THS:153] Bow of Nylea
@@ -38,7 +40,6 @@
 1 [RTR:176] Korozda Guildmage
 1 [VMA:255] Magister of Worth
 1 [ISD:199] Parallel Lives
-4 [BFZ:260] Swamp
 1 [M12:190] Rampant Growth
 1 [KTK:85] Retribution of the Ancients
 1 [DGM:63] Deadbridge Chant
@@ -55,19 +56,18 @@
 1 [THS:227] Temple of Silence
 1 [RTR:174] Jarad, Golgari Lich Lord
 1 [RAV:251] Privileged Position
+4 [BFZ:260a] Swamp
 1 [KTK:3] Ainok Bond-Kin
 1 [NPH:73] Sheoldred, Whispering One
 1 [KTK:2] Abzan Falconer
 1 [GTC:182] Obzedat, Ghost Council
 1 [KTK:241] Sandsteppe Citadel
 1 [RTR:121] Death's Presence
-4 [BFZ:250] Plains
 1 [KTK:161] Abzan Charm
 1 [ISD:242] Isolated Chapel
 1 [RTR:248] Temple Garden
 1 [KTK:160] Abzan Ascendancy
 1 [JOU:65] Dictate of Erebos
-1 [TMP:36] Living Death
 1 [M11:11] Condemn
 1 [ORI:246] Evolving Wilds
 1 [RAV:218] Phytohydra
@@ -86,3 +86,5 @@
 1 [C13:281] Command Tower
 1 [RAV:207] Glare of Subdual
 SB: 1 [KTK:163] Anafenza, the Foremost
+LAYOUT MAIN:(2,8)(CMC,true,5)|()([ZEN:182],[M11:120],[M15:93])([GTC:123],[MOR:72],[RTR:176],[CHK:239],[DGM:114],[KTK:3])([RAV:33],[AVR:171],[M15:177],[KTK:2],[KTK:156])([RTR:152],[RTR:63],[KTK:79],[KTK:1],[RTR:174])([ALA:140],[BNG:148],[KTK:179],[GTC:182],[RAV:218],[CSP:130],[CMD:200],[DIS:95])([RTR:71],[VMA:255])([NPH:73])([FUT:171],[RAV:278],[BFZ:270a],[BFZ:270a],[BFZ:270a],[BFZ:270a],[BFZ:270a],[BFZ:270a],[BFZ:270a],[DGM:149],[GTC:242],[DGM:153],[DGM:155],[BFZ:260a],[BFZ:260a],[BFZ:260a],[BFZ:260a],[ISD:239],[M13:229],[M13:227],[THS:227],[KTK:241],[BFZ:250a],[BFZ:250a],[BFZ:250a],[BFZ:250a],[ISD:242],[RTR:248],[ORI:246],[ISD:249],[WWK:132],[FUT:169],[RAV:281],[DKA:156],[GPT:161],[C13:281])([DKA:76],[KTK:133],[KTK:85],[M11:11])([RTR:194],[M13:170],[FUT:138],[M12:190])([8ED:247],[M11:221],[6ED:274],[DGM:93],[M14:1],[THS:153],[INV:233],[KTK:215],[CHK:225],[SCG:25],[KTK:161],[KTK:160],[GPT:122])([KTK:210],[ISD:199],[VMA:250],[RAV:207])([RAV:158],[AVR:10],[RAV:251],[JOU:65],[TMP:142])([RTR:150],[DGM:63],[RTR:121])()
+LAYOUT SIDEBOARD:(1,1)(COLOR_IDENTITY,true,5)|([KTK:163])
