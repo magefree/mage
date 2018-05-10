@@ -27,6 +27,9 @@
  */
 
 package mage.game.permanent.token;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import mage.constants.CardType;
 import mage.abilities.keyword.ForestwalkAbility;
 import mage.constants.SubType;
@@ -37,8 +40,15 @@ import mage.constants.SubType;
  */
 public class CatWarriorToken extends TokenImpl {
 
+    final static private List<String> tokenImageSets = new ArrayList<>();
+
+    static {
+        tokenImageSets.addAll(Arrays.asList("PLC", "C17"));
+    }
+
     public CatWarriorToken() {
         super("Cat Warrior", "2/2 green Cat Warrior creature token with forestwalk");
+        availableImageSetCodes = tokenImageSets;
         this.setOriginalExpansionSetCode("PLC");
         this.getPower().modifyBaseValue(2);
         this.getToughness().modifyBaseValue(2);
