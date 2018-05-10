@@ -52,21 +52,24 @@ import java.util.Set;
 public class BecomesCreatureAllEffect extends ContinuousEffectImpl {
 
     protected Token token;
-    protected String type;
+    protected String theyAreStillType;
     private final FilterPermanent filter;
+    private boolean loseColor = true;
 
-    public BecomesCreatureAllEffect(Token token, String type, FilterPermanent filter, Duration duration) {
+    public BecomesCreatureAllEffect(Token token, String theyAreStillType, FilterPermanent filter, Duration duration, boolean loseColor) {
         super(duration, Outcome.BecomeCreature);
         this.token = token;
-        this.type = type;
+        this.theyAreStillType = theyAreStillType;
         this.filter = filter;
+        this.loseColor = loseColor;
     }
 
     public BecomesCreatureAllEffect(final BecomesCreatureAllEffect effect) {
         super(effect);
-        token = effect.token.copy();
-        type = effect.type;
+        this.token = effect.token.copy();
+        this.theyAreStillType = effect.theyAreStillType;
         this.filter = effect.filter.copy();
+        this.loseColor = effect.loseColor;
     }
 
     @Override
@@ -94,6 +97,7 @@ public class BecomesCreatureAllEffect extends ContinuousEffectImpl {
         } else {
             affectedPermanents = new HashSet<>(game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game));
         }
+
         for(Permanent permanent : affectedPermanents) {
             if (permanent != null) {
                 switch (layer) {
@@ -106,7 +110,7 @@ public class BecomesCreatureAllEffect extends ContinuousEffectImpl {
                                     }
                                 }
                             }
-                            if (type == null) {
+                            if (theyAreStillType == null) {
                                 permanent.getSubtype(game).clear();
                             }
                             if (!token.getSubtype(game).isEmpty()) {
@@ -114,13 +118,22 @@ public class BecomesCreatureAllEffect extends ContinuousEffectImpl {
                             }
                         }
                         break;
+
                     case ColorChangingEffects_5:
                         if (sublayer == SubLayer.NA) {
+                            if (this.loseColor) {
+                                permanent.getColor(game).setBlack(false);
+                                permanent.getColor(game).setGreen(false);
+                                permanent.getColor(game).setBlue(false);
+                                permanent.getColor(game).setWhite(false);
+                                permanent.getColor(game).setRed(false);
+                            }
                             if (token.getColor(game).hasColor()) {
-                                permanent.getColor(game).setColor(token.getColor(game));
+                                permanent.getColor(game).addColor(token.getColor(game));
                             }
                         }
                         break;
+
                     case AbilityAddingRemovingEffects_6:
                         if (sublayer == SubLayer.NA) {
                             if (!token.getAbilities().isEmpty()) {
@@ -130,6 +143,7 @@ public class BecomesCreatureAllEffect extends ContinuousEffectImpl {
                             }
                         }
                         break;
+
                     case PTChangingEffects_7:
                         if (sublayer == SubLayer.SetPT_7b) {
                             int power = token.getPower().getValue();
@@ -139,6 +153,7 @@ public class BecomesCreatureAllEffect extends ContinuousEffectImpl {
                                 permanent.getToughness().setValue(toughness);
                             }
                         }
+                        break;
                 }
             }
         }
@@ -168,8 +183,8 @@ public class BecomesCreatureAllEffect extends ContinuousEffectImpl {
             sb.append(" become ");
         }
         sb.append(token.getDescription());
-        if (type != null && !type.isEmpty()) {
-            sb.append(". They're still ").append(type);
+        if (theyAreStillType != null && !theyAreStillType.isEmpty()) {
+            sb.append(". They're still ").append(theyAreStillType);
         }
         return sb.toString();
     }

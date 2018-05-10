@@ -105,7 +105,7 @@ class JolraelEmpressOfBeastsEffect extends OneShotEffect {
         if (targetPlayer != null) {
             FilterPermanent filter = new FilterLandPermanent();
             filter.add(new ControllerIdPredicate(targetPlayer.getId()));
-            game.addEffect(new BecomesCreatureAllEffect(new CreatureToken(3, 3), "lands", filter, Duration.EndOfTurn), source);
+            game.addEffect(new BecomesCreatureAllEffect(new CreatureToken(3, 3), "lands", filter, Duration.EndOfTurn, false), source);
             return true;
         }
         return false;
