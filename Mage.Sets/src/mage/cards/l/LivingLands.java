@@ -58,7 +58,9 @@ public class LivingLands extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");
 
         // All Forests are 1/1 creatures that are still lands.
-        ContinuousEffect effect = new BecomesCreatureAllEffect(new CreatureToken(1, 1), "lands", filter, Duration.WhileOnBattlefield, false);
+        ContinuousEffect effect = new BecomesCreatureAllEffect(
+                new CreatureToken(1, 1),
+                "lands", filter, Duration.WhileOnBattlefield, false);
         effect.getDependencyTypes().add(DependencyType.BecomeForest);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }

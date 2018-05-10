@@ -61,8 +61,9 @@ public class LifeDeath extends SplitCard {
 
         // Life
         // All lands you control become 1/1 creatures until end of turn. They're still lands.
-        getLeftHalfCard().getSpellAbility().addEffect(new BecomesCreatureAllEffect(new CreatureToken(1, 1), "lands",
-                new FilterControlledLandPermanent("lands you control"), Duration.EndOfTurn, false));
+        getLeftHalfCard().getSpellAbility().addEffect(new BecomesCreatureAllEffect(
+                new CreatureToken(1, 1),
+                "lands", new FilterControlledLandPermanent("lands you control"), Duration.EndOfTurn, false));
 
         // Death
         // Return target creature card from your graveyard to the battlefield. You lose life equal to its converted mana cost.

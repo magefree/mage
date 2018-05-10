@@ -40,6 +40,7 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 
 /**
  *
@@ -52,7 +53,11 @@ public class SylvanAwakening extends CardImpl {
 
         // Until your next turn, all lands you control become 2/2 Elemental creatures with reach, indestructible, and haste. They're still lands.
         this.getSpellAbility().addEffect(new BecomesCreatureAllEffect(
-                new SylvanAwakeningToken(),
+                new CreatureToken(2, 2, "2/2 Elemental creatures with reach, indestructible, and haste")
+                .withSubType(SubType.ELEMENTAL)
+                .withAbility(ReachAbility.getInstance())
+                .withAbility(IndestructibleAbility.getInstance())
+                .withAbility(HasteAbility.getInstance()),
                 "lands",
                 new FilterControlledLandPermanent("all lands you control"),
                 Duration.UntilYourNextTurn,
@@ -68,27 +73,4 @@ public class SylvanAwakening extends CardImpl {
     public SylvanAwakening copy() {
         return new SylvanAwakening(this);
     }
-}
-
-class SylvanAwakeningToken extends TokenImpl {
-
-    public SylvanAwakeningToken() {
-        super("", "2/2 Elemental creatures with reach, indestructible, and haste");
-        cardType.add(CardType.CREATURE);
-        this.subtype.add(SubType.ELEMENTAL);
-        power = new MageInt(2);
-        toughness = new MageInt(2);
-        this.addAbility(ReachAbility.getInstance());
-        this.addAbility(IndestructibleAbility.getInstance());
-        this.addAbility(HasteAbility.getInstance());
-    }
-
-    public SylvanAwakeningToken(final SylvanAwakeningToken token) {
-        super(token);
-    }
-
-    public SylvanAwakeningToken copy() {
-        return new SylvanAwakeningToken(this);
-    }
-
 }

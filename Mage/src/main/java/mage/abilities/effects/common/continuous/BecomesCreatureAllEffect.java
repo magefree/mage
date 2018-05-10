@@ -52,14 +52,14 @@ import java.util.Set;
 public class BecomesCreatureAllEffect extends ContinuousEffectImpl {
 
     protected Token token;
-    protected String type;
+    protected String theyAreStillType;
     private final FilterPermanent filter;
     private boolean loseColor = true;
 
-    public BecomesCreatureAllEffect(Token token, String type, FilterPermanent filter, Duration duration, boolean loseColor) {
+    public BecomesCreatureAllEffect(Token token, String theyAreStillType, FilterPermanent filter, Duration duration, boolean loseColor) {
         super(duration, Outcome.BecomeCreature);
         this.token = token;
-        this.type = type;
+        this.theyAreStillType = theyAreStillType;
         this.filter = filter;
         this.loseColor = loseColor;
     }
@@ -67,7 +67,7 @@ public class BecomesCreatureAllEffect extends ContinuousEffectImpl {
     public BecomesCreatureAllEffect(final BecomesCreatureAllEffect effect) {
         super(effect);
         this.token = effect.token.copy();
-        this.type = effect.type;
+        this.theyAreStillType = effect.theyAreStillType;
         this.filter = effect.filter.copy();
         this.loseColor = effect.loseColor;
     }
@@ -110,7 +110,7 @@ public class BecomesCreatureAllEffect extends ContinuousEffectImpl {
                                     }
                                 }
                             }
-                            if (type == null) {
+                            if (theyAreStillType == null) {
                                 permanent.getSubtype(game).clear();
                             }
                             if (!token.getSubtype(game).isEmpty()) {
@@ -183,8 +183,8 @@ public class BecomesCreatureAllEffect extends ContinuousEffectImpl {
             sb.append(" become ");
         }
         sb.append(token.getDescription());
-        if (type != null && !type.isEmpty()) {
-            sb.append(". They're still ").append(type);
+        if (theyAreStillType != null && !theyAreStillType.isEmpty()) {
+            sb.append(". They're still ").append(theyAreStillType);
         }
         return sb.toString();
     }

@@ -45,6 +45,7 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -69,9 +70,12 @@ public class AmbushCommander extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Forests you control are 1/1 green Elf creatures that are still lands.
-        ContinuousEffect effect = new BecomesCreatureAllEffect(new AmbushCommanderToken(), "lands", filter2, Duration.WhileOnBattlefield);
+        ContinuousEffect effect = new BecomesCreatureAllEffect(
+                new CreatureToken(1, 1, "1/1 green Elf creature").withColor("G").withSubType(SubType.ELF),
+                "lands", filter2, Duration.WhileOnBattlefield, true);
         effect.getDependencyTypes().add(DependencyType.BecomeForest);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+
         // {1}{G}, Sacrifice an Elf: Target creature gets +3/+3 until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(3, 3, Duration.EndOfTurn),
                 new ManaCostsImpl("{1}{G}"));
@@ -88,24 +92,4 @@ public class AmbushCommander extends CardImpl {
     public AmbushCommander copy() {
         return new AmbushCommander(this);
     }
-}
-
-class AmbushCommanderToken extends TokenImpl {
-
-    public AmbushCommanderToken() {
-        super("Elf", "1/1 green Elf creatures");
-        subtype.add(SubType.ELF);
-        cardType.add(CardType.CREATURE);
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-        color.setGreen(true);
-    }
-    public AmbushCommanderToken(final AmbushCommanderToken token) {
-        super(token);
-    }
-
-    public AmbushCommanderToken copy() {
-        return new AmbushCommanderToken(this);
-    }
-
 }
