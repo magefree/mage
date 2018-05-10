@@ -45,7 +45,6 @@ import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.watchers.common.PlayerAttackedWatcher;
 
@@ -97,16 +96,14 @@ class RuinRaiderEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (controller != null && sourcePermanent != null) {
+        if (controller != null) {
             if (controller.getLibrary().hasCards()) {
-                Card card = controller.getLibrary().removeFromTop(game);
+                Card card = controller.getLibrary().getFromTop(game);
                 if (card != null) {
                     Cards cards = new CardsImpl(card);
-                    controller.revealCards(sourcePermanent.getIdName(), cards, game);
+                    controller.revealCards(source, cards, game);
                     controller.moveCards(card, Zone.HAND, source, game);
                     controller.loseLife(card.getConvertedManaCost(), game, false);
-
                 }
                 return true;
             }

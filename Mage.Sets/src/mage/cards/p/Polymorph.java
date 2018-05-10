@@ -27,7 +27,6 @@
  */
 package mage.cards.p;
 
-import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -53,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class Polymorph extends CardImpl {
 
     public Polymorph(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{U}");
 
         // Destroy target creature. It can't be regenerated.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
@@ -98,22 +97,21 @@ class PolymorphEffect extends OneShotEffect {
                 Library library = player.getLibrary();
                 if (library.hasCards()) {
                     Cards cards = new CardsImpl();
-                    Card card = library.removeFromTop(game);
-                    cards.add(card);
-                    while (!card.isCreature() && library.hasCards()) {
-                        card = library.removeFromTop(game);
+                    Card toBattlefield = null;
+                    for (Card card : library.getCards(game)) {
                         cards.add(card);
+                        if (card.isCreature()) {
+                            toBattlefield = card;
+                            break;
+                        }
                     }
-
-                    if (card.isCreature()) {
-                        card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), player.getId());
+                    if (toBattlefield != null) {
+                        player.moveCards(toBattlefield, Zone.BATTLEFIELD, source, game);
                     }
-
+                    player.revealCards(source, cards, game);
+                    cards.remove(toBattlefield);
                     if (!cards.isEmpty()) {
-                        player.revealCards("Polymorph", cards, game);
-                        Set<Card> cardsToShuffle = cards.getCards(game);
-                        cardsToShuffle.remove(card);
-                        library.addAll(cardsToShuffle, game);
+                        player.shuffleLibrary(source, game);
                     }
                 }
                 return true;

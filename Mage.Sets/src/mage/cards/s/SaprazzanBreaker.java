@@ -42,7 +42,7 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -53,7 +53,7 @@ import mage.players.Player;
 public class SaprazzanBreaker extends CardImpl {
 
     public SaprazzanBreaker(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}");
         this.subtype.add(SubType.BEAST);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
@@ -92,11 +92,11 @@ class SaprazzanBreakerEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            Card card = player.getLibrary().removeFromTop(game);
+            Card card = player.getLibrary().getFromTop(game);
             if (card != null) {
                 player.moveCards(card, Zone.GRAVEYARD, source, game);
                 if (card.isLand()) {
-                    game.addEffect(new CantBeBlockedByAllSourceEffect(new FilterCreaturePermanent(), Duration.EndOfCombat), source);
+                    game.addEffect(new CantBeBlockedByAllSourceEffect(StaticFilters.FILTER_PERMANENT_CREATURES, Duration.EndOfTurn), source);
                 }
             }
             return true;

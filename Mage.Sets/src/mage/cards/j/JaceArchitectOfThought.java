@@ -28,7 +28,6 @@
 package mage.cards.j;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -72,7 +71,7 @@ import mage.util.CardUtil;
 public class JaceArchitectOfThought extends CardImpl {
 
     public JaceArchitectOfThought(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{U}{U}");
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.JACE);
 
@@ -192,16 +191,8 @@ class JaceArchitectOfThoughtEffect2 extends OneShotEffect {
             return false;
         }
 
-        Cards cards = new CardsImpl();
-        int count = Math.min(player.getLibrary().size(), 3);
-        for (int i = 0; i < count; i++) {
-            Card card = player.getLibrary().removeFromTop(game);
-            if (card != null) {
-                cards.add(card);
-            }
-        }
-        player.revealCards("Jace, Architect of Thought", cards, game);
-
+        Cards allCards = new CardsImpl(player.getLibrary().getTopCards(game, 3));
+        player.revealCards(source, allCards, game);
         Set<UUID> opponents = game.getOpponents(source.getControllerId());
         if (!opponents.isEmpty()) {
             Player opponent = null;
@@ -215,50 +206,24 @@ class JaceArchitectOfThoughtEffect2 extends OneShotEffect {
                 opponent = game.getPlayer(opponents.iterator().next());
             }
 
-            TargetCard target = new TargetCard(0, cards.size(), Zone.LIBRARY, new FilterCard("cards to put in the first pile"));
-            target.setRequired(false);
-            Cards pile1 = new CardsImpl();
-            if (opponent.choose(Outcome.Neutral, cards, target, game)) {
-                for (UUID targetId : (List<UUID>) target.getTargets()) {
-                    Card card = cards.get(targetId, game);
-                    if (card != null) {
-                        pile1.add(card);
-                        cards.remove(card);
-                    }
-                }
-            }
-            player.revealCards("Pile 1 (Jace, Architect of Thought)", pile1, game);
-            player.revealCards("Pile 2 (Jace, Architect of Thought)", cards, game);
+            TargetCard target = new TargetCard(0, allCards.size(), Zone.LIBRARY, new FilterCard("cards to put in the first pile"));
+            target.setNotTarget(true);
+            opponent.choose(Outcome.Neutral, allCards, target, game);
+            Cards pile1 = new CardsImpl(target.getTargets());
+            Cards pile2 = new CardsImpl(allCards);
+            pile2.removeAll(pile1);
+            player.revealCards(source, "Pile 1", pile1, game);
+            player.revealCards(source, "Pile 2", pile2, game);
 
             postPileToLog("Pile 1", pile1.getCards(game), game);
-            postPileToLog("Pile 2", cards.getCards(game), game);
+            postPileToLog("Pile 2", pile2.getCards(game), game);
 
-            Cards cardsToHand = cards;
-            Cards cardsToLibrary = pile1;
-            List<Card> cardPile1 = new ArrayList<>();
-            List<Card> cardPile2 = new ArrayList<>();
-            for (UUID cardId : pile1) {
-                cardPile1.add(game.getCard(cardId));
-            }
-            for (UUID cardId : cards) {
-                cardPile2.add(game.getCard(cardId));
-            }
-
-            boolean pileChoice = player.choosePile(Outcome.Neutral, "Choose a pile to to put into your hand.", cardPile1, cardPile2, game);
-            if (pileChoice) {
-                cardsToHand = pile1;
-                cardsToLibrary = cards;
-            }
+            boolean pileChoice = player.choosePile(Outcome.Neutral, "Choose a pile to to put into your hand.",
+                    new ArrayList<>(pile1.getCards(game)),
+                    new ArrayList<>(allCards.getCards(game)), game);
             game.informPlayers(player.getLogName() + " chose pile" + (pileChoice ? "1" : "2"));
-
-            for (UUID cardUuid : cardsToHand) {
-                Card card = cardsToHand.get(cardUuid, game);
-                if (card != null) {
-                    player.moveCards(card, Zone.HAND, source, game);
-                }
-            }
-
-            player.putCardsOnBottomOfLibrary(cardsToLibrary, game, source, true);
+            player.moveCards(pileChoice ? pile1 : pile2, Zone.HAND, source, game);
+            player.putCardsOnBottomOfLibrary(pileChoice ? pile2 : pile1, game, source, true);
             return true;
         }
         return false;

@@ -53,9 +53,10 @@ import mage.target.TargetCard;
 public class PsychicSurgery extends CardImpl {
 
     public PsychicSurgery(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
 
-
+        // Whenever an opponent shuffles his or her library, you may look at the top two cards of that library.
+        // You may exile one of those cards. Then put the rest on top of that library in any order.
         this.addAbility(new PsychicSurgeryTriggeredAbility());
     }
 
@@ -100,7 +101,7 @@ class PsychicSurgeryTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever an opponent shuffles their library, you may look at the top two cards of that library. You may exile one of those cards. Then put the rest on top of that library in any order.";
+        return "Whenever an opponent shuffles their library, " + super.getRule();
     }
 }
 
@@ -108,7 +109,7 @@ class PsychicSurgeryEffect extends OneShotEffect {
 
     public PsychicSurgeryEffect() {
         super(Outcome.Exile);
-        this.staticText = "look at the top two cards of that library. You may exile one of those cards. Then put the rest on top of that library in any order";
+        this.staticText = "you may look at the top two cards of that library. You may exile one of those cards. Then put the rest on top of that library in any order";
     }
 
     public PsychicSurgeryEffect(final PsychicSurgeryEffect effect) {
@@ -123,31 +124,23 @@ class PsychicSurgeryEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         UUID opponentId = (UUID) this.getValue("PsychicSurgeryOpponent");
-        Player player = game.getPlayer(source.getControllerId());
+        Player controller = game.getPlayer(source.getControllerId());
         Player opponent = game.getPlayer(opponentId);
 
-        if (player != null && opponent != null) {
-            Cards cards = new CardsImpl();
-            int count = Math.min(player.getLibrary().size(), 2);
-            for (int i = 0; i < count; i++) {
-                Card card = opponent.getLibrary().removeFromTop(game);
-                if (card != null) {
-                    cards.add(card);
-                }
-            }
-            player.lookAtCards("Psychic Surgery", cards, game);
-
-            if (!cards.isEmpty() && player.chooseUse(Outcome.Exile, "Do you wish to exile a card?", source, game)) {
+        if (controller != null && opponent != null) {
+            Cards cards = new CardsImpl(opponent.getLibrary().getTopCards(game, 2));
+            controller.lookAtCards(source, null, cards, game);
+            if (!cards.isEmpty() && controller.chooseUse(Outcome.Exile, "Do you wish to exile a card?", source, game)) {
                 TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to exile"));
-                if (player.choose(Outcome.Exile, cards, target, game)) {
+                if (controller.choose(Outcome.Exile, cards, target, game)) {
                     Card card = cards.get(target.getFirstTarget(), game);
                     if (card != null) {
+                        controller.moveCards(card, Zone.EXILED, source, game);
                         cards.remove(card);
-                        card.moveToZone(Zone.EXILED, source.getSourceId(), game, false);
                     }
                 }
             }
-            player.putCardsOnBottomOfLibrary(cards, game, source, true);
+            controller.putCardsOnBottomOfLibrary(cards, game, source, true);
             return true;
         }
         return false;

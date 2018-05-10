@@ -41,7 +41,6 @@ import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
@@ -85,29 +84,29 @@ class DuskmarEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent sourceCard = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (sourceCard == null) {
-            return false;
-        }
-        boolean putToPlay = true;
-        Cards cards = new CardsImpl();
-        for (Player player : game.getPlayers().values()) {
-            if (player.getLibrary().hasCards()) {
-                Card card = player.getLibrary().removeFromTop(game);
-                if (card != null) {
-                    cards.add(card);
-                    if (!card.isCreature()) {
-                        putToPlay = false;
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            boolean putToPlay = true;
+            Cards cards = new CardsImpl();
+            for (Player player : game.getPlayers().values()) {
+                if (player.getLibrary().hasCards()) {
+                    Card card = player.getLibrary().removeFromTop(game);
+                    if (card != null) {
+                        cards.add(card);
+                        if (!card.isCreature()) {
+                            putToPlay = false;
+                        }
+                        player.revealCards(source, "- Revealed by " + player.getName(), cards, game);
                     }
-                    player.revealCards(sourceCard.getName() + ": Revealed by " + player.getName(), cards, game);
+                } else {
+                    putToPlay = false;
                 }
-            } else {
-                putToPlay = false;
             }
+            if (putToPlay) {
+                controller.moveCards(cards.getCards(game), Zone.BATTLEFIELD, source, game, false, false, true, null);
+            }
+            return true;
         }
-        if (putToPlay) {
-            game.getPlayers().values().iterator().next().moveCards(cards.getCards(game), Zone.BATTLEFIELD, source, game, false, false, true, null);
-        }
-        return true;
+        return false;
     }
 }

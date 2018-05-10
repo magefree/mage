@@ -37,7 +37,6 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
@@ -62,7 +61,7 @@ import mage.target.TargetCard;
 public class JarOfEyeballs extends CardImpl {
 
     public JarOfEyeballs(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // Whenever a creature you control dies, put two eyeball counters on Jar of Eyeballs.
         this.addAbility(new JarOfEyeballsTriggeredAbility());
@@ -184,37 +183,25 @@ class JarOfEyeballsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
+        }
         int countersRemoved = 0;
         for (Cost cost : source.getCosts()) {
             if (cost instanceof JarOfEyeballsCost) {
                 countersRemoved = ((JarOfEyeballsCost) cost).getRemovedCounters();
             }
         }
-
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
-            return false;
-        }
-
-        Cards cards = new CardsImpl();
-        int count = Math.min(player.getLibrary().size(), countersRemoved);
-        for (int i = 0; i < count; i++) {
-            Card card = player.getLibrary().removeFromTop(game);
-            if (card != null) {
-                cards.add(card);
-            }
-        }
-        player.lookAtCards("Jar of Eyeballs", cards, game);
-
+        Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, countersRemoved));
+        controller.lookAtCards(source, null, cards, game);
         TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to put into your hand"));
-        if (player.choose(Outcome.DrawCard, cards, target, game)) {
-            Card card = cards.get(target.getFirstTarget(), game);
-            if (card != null) {
-                cards.remove(card);
-                card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
-            }
+        if (controller.choose(Outcome.DrawCard, cards, target, game)) {
+            Cards targetCards = new CardsImpl(target.getTargets());
+            controller.moveCards(targetCards, Zone.HAND, source, game);
+            cards.removeAll(targetCards);
         }
-        player.putCardsOnBottomOfLibrary(cards, game, source, true);
+        controller.putCardsOnBottomOfLibrary(cards, game, source, true);
         return true;
     }
 }

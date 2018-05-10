@@ -35,7 +35,6 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.Outcome;
@@ -150,6 +149,7 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
             FilterCard pickFilter, Zone targetZoneLookedCards, boolean putOnTop,
             boolean reveal, boolean upTo, Zone targetZonePickedCards,
             boolean optional) {
+
         this(numberOfCards, mayShuffleAfter, numberToPick, pickFilter,
                 targetZoneLookedCards, putOnTop, reveal, upTo,
                 targetZonePickedCards, optional, true, true);
@@ -207,16 +207,10 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
     }
 
     @Override
-    protected void cardLooked(Card card, Game game, Ability source) {
-        if (numberToPick.calculate(game, source, this) > 0 && filter.match(card, game)) {
-            ++foundCardsToPick;
-        }
-    }
-
-    @Override
-    protected void actionWithSelectedCards(Cards cards, Game game, Ability source, String windowName) {
+    protected void actionWithSelectedCards(Cards cards, Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null && foundCardsToPick > 0) {
+        if (player != null && numberToPick.calculate(game, source, this) > 0
+                && cards.count(filter, source.getSourceId(), source.getControllerId(), game) > 0) {
             if (!optional || player.chooseUse(Outcome.DrawCard, getMayText(), source, game)) {
                 FilterCard pickFilter = filter.copy();
                 pickFilter.setMessage(getPickText());
@@ -231,7 +225,7 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
                         player.moveCards(pickedCards.getCards(game), targetPickedCards, source, game);
                     }
                     if (revealPickedCards) {
-                        player.revealCards(windowName, pickedCards, game);
+                        player.revealCards(source, pickedCards, game);
                     }
 
                 }
@@ -346,7 +340,14 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
                 }
                 sb.append(" order");
             } else if (targetZoneLookedCards == Zone.GRAVEYARD) {
-                sb.append(" and the other into your graveyard");
+                sb.append(" and the");
+                if (numberOfCards instanceof StaticValue && numberToPick instanceof StaticValue
+                        && ((StaticValue) numberToPick).getValue() + 1 == ((StaticValue) numberOfCards).getValue()) {
+                    sb.append(" other");
+                } else {
+                    sb.append(" rest");
+                }
+                sb.append(" into your graveyard");
             }
         }
         // get text frame from super class and inject action text

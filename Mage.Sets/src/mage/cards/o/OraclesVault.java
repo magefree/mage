@@ -52,6 +52,7 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.players.Library;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 /**
  *
@@ -77,7 +78,7 @@ public class OraclesVault extends CardImpl {
         this.addAbility(new ConditionalActivatedAbility(Zone.BATTLEFIELD,
                 new OraclesVaultFreeEffect(), new TapSourceCost(), new SourceHasCounterCondition(CounterType.BRICK, 3, Integer.MAX_VALUE),
                 "{T}: Exile the top card of your library. Until end of turn, you may play that card without paying its mana cost. "
-                        + "Activate this ability only if there are three or more brick counters on {this}"));
+                + "Activate this ability only if there are three or more brick counters on {this}"));
     }
 
     public OraclesVault(final OraclesVault card) {
@@ -108,12 +109,11 @@ class OraclesVaultEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = source.getSourceObject(game);
-        if (controller != null && sourceObject != null && controller.getLibrary().hasCards()) {
-            Library library = controller.getLibrary();
-            Card card = library.removeFromTop(game);
+        if (controller != null) {
+            Card card = controller.getLibrary().getFromTop(game);
             if (card != null) {
-                controller.moveCardToExileWithInfo(card, source.getSourceId(), sourceObject.getIdName() + " <this card may be played the turn it was exiled>", source.getSourceId(), game, Zone.LIBRARY, true);
+                controller.moveCardsToExile(card, source, game, true, source.getSourceId(),
+                        CardUtil.createObjectRealtedWindowTitle(source, game, "<this card may be played the turn it was exiled>"));
                 game.addEffect(new OraclesVaultPlayEffect(new MageObjectReference(card, game)), source);
             }
             return true;
@@ -121,6 +121,7 @@ class OraclesVaultEffect extends OneShotEffect {
         return false;
     }
 }
+
 class OraclesVaultFreeEffect extends OneShotEffect {
 
     public OraclesVaultFreeEffect() {
@@ -142,9 +143,10 @@ class OraclesVaultFreeEffect extends OneShotEffect {
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null && sourceObject != null && controller.getLibrary().hasCards()) {
             Library library = controller.getLibrary();
-            Card card = library.removeFromTop(game);
+            Card card = library.getFromTop(game);
             if (card != null) {
-                controller.moveCardToExileWithInfo(card, source.getSourceId(), sourceObject.getIdName() + " <this card may be played the turn it was exiled>", source.getSourceId(), game, Zone.LIBRARY, true);
+                controller.moveCardsToExile(card, source, game, true, source.getSourceId(),
+                        CardUtil.createObjectRealtedWindowTitle(source, game, " <this card may be played the turn it was exiled>"));
                 game.addEffect(new OraclesVaultPlayForFreeEffect(new MageObjectReference(card, game)), source);
             }
             return true;
@@ -191,6 +193,7 @@ class OraclesVaultPlayEffect extends AsThoughEffectImpl {
         return false;
     }
 }
+
 class OraclesVaultPlayForFreeEffect extends AsThoughEffectImpl {
 
     private final MageObjectReference objectReference;

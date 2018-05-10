@@ -30,13 +30,11 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.SacrificeTargetEffect;
 import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -48,21 +46,14 @@ import mage.target.TargetPermanent;
  */
 public class ShapeAnew extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("an artifact");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
-    }
-
     public ShapeAnew(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{U}");
 
         // The controller of target artifact sacrifices it, then reveals cards from the top
         // of their library until he or she reveals an artifact card. That player puts
         // that card onto the battlefield, then shuffles all other cards revealed this way into their library.
-        this.getSpellAbility().addEffect(new SacrificeTargetEffect("The controller of target artifact sacrifices it"));
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addEffect(new ShapeAnewEffect());
+        this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_AN));
     }
 
     public ShapeAnew(final ShapeAnew card) {
@@ -78,7 +69,7 @@ public class ShapeAnew extends CardImpl {
 
         public ShapeAnewEffect() {
             super(Outcome.PutCardInPlay);
-            staticText = ", then reveals cards from the top of their library until he or she reveals an artifact card. That player puts that card onto the battlefield, then shuffles all other cards revealed this way into their library";
+            staticText = "The controller of target artifact sacrifices it, then reveals cards from the top of their library until he or she reveals an artifact card. That player puts that card onto the battlefield, then shuffles all other cards revealed this way into their library";
         }
 
         public ShapeAnewEffect(ShapeAnewEffect effect) {
@@ -87,32 +78,29 @@ public class ShapeAnew extends CardImpl {
 
         @Override
         public boolean apply(Game game, Ability source) {
-            Permanent sourcePermanent = (Permanent) game.getLastKnownInformation(targetPointer.getFirst(game, source), Zone.BATTLEFIELD);
-            if (sourcePermanent == null) {
+            Permanent targetPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+            if (targetPermanent == null) {
                 return false;
             }
-            Player controller = game.getPlayer(source.getControllerId());
-            if (controller == null) {
+            targetPermanent.sacrifice(source.getSourceId(), game);
+            Player targetController = game.getPlayer(targetPermanent.getControllerId());
+            if (targetController == null) {
                 return false;
             }
             Cards revealed = new CardsImpl();
             Card artifactCard = null;
-            Cards nonArtifactCards = new CardsImpl();
-            Player targetController = game.getPlayer(sourcePermanent.getControllerId());
-            while (artifactCard == null && targetController.getLibrary().hasCards()) {
-                Card card = targetController.getLibrary().removeFromTop(game);
+            for (Card card : targetController.getLibrary().getCards(game)) {
                 revealed.add(card);
                 if (card.isArtifact()) {
                     artifactCard = card;
-                } else {
-                    nonArtifactCards.add(card);
+                    break;
                 }
             }
-            targetController.revealCards(sourcePermanent.getIdName(), revealed, game);
+            targetController.revealCards(source, revealed, game);
             if (artifactCard != null) {
                 targetController.moveCards(artifactCard, Zone.BATTLEFIELD, source, game);
             }
-            targetController.putCardsOnTopOfLibrary(nonArtifactCards, game, source, false);
+            // 1/1/2011: If the first card the player reveals is an artifact card, he or she will still have to shuffle his or her library even though no other cards were revealed this way.
             targetController.shuffleLibrary(source, game);
             return true;
         }

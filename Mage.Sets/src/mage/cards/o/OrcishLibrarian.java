@@ -45,10 +45,8 @@ import mage.constants.ColoredManaSymbol;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.TargetCard;
 
 /**
  *
@@ -83,7 +81,7 @@ class OrcishLibrarianEffect extends OneShotEffect {
 
     public OrcishLibrarianEffect() {
         super(Outcome.Neutral);
-        this.staticText = "Look at the top eight cards of your library. Exile four of them at random, then put the rest on top of your library in any order.";
+        this.staticText = "Look at the top eight cards of your library. Exile four of them at random, then put the rest on top of your library in any order";
     }
 
     public OrcishLibrarianEffect(final OrcishLibrarianEffect effect) {
@@ -100,34 +98,21 @@ class OrcishLibrarianEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null && sourceObject != null) {
-            Cards cards = new CardsImpl();
-            int cardsCount = Math.min(8, controller.getLibrary().size());
-            for (int i = 0; i < cardsCount; i++) {
-                Card card = controller.getLibrary().removeFromTop(game);
-                if (card != null) {
-                    cards.add(card);
-                }
-            }
-
+            Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, 8));
             if (!cards.isEmpty()) {
+                Cards randomExit = new CardsImpl();
                 for (int i = 0; i < 4; i++) {
                     if (!cards.isEmpty()) {
                         Card card = cards.getRandom(game);
-                        controller.moveCardToExileWithInfo(card, null, null, source.getId(), game, Zone.LIBRARY, true);
-                        cards.remove(card);
+                        if (card != null) {
+                            randomExit.add(card);
+                            cards.remove(card);
+                        }
                     }
                 }
-                controller.lookAtCards(sourceObject.getIdName(), cards, game);
-                TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to put on the top of target player's library"));
-                while (controller.canRespond() && !cards.isEmpty()) {
-                    controller.choose(Outcome.Neutral, cards, target, game);
-                    Card card = cards.get(target.getFirstTarget(), game);
-                    if (card != null) {
-                        cards.remove(card);
-                        card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-                    }
-                    target.clearChosen();
-                }
+                controller.moveCards(randomExit, Zone.EXILED, source, game);
+                controller.lookAtCards(source, null, cards, game);
+                controller.putCardsOnTopOfLibrary(cards, game, source, true);
             }
             return true;
         }

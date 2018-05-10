@@ -51,8 +51,7 @@ import mage.target.TargetCard;
 public class WorldlyCounsel extends CardImpl {
 
     public WorldlyCounsel(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
 
         // Domain - Look at the top X cards of your library, where X is the number of basic land types among lands you control. Put one of those cards into your hand and the rest on the bottom of your library in any order.
         this.getSpellAbility().addEffect(new WorldlyCounselEffect());
@@ -86,40 +85,30 @@ class WorldlyCounselEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
             return false;
         }
 
-        Cards cards = new CardsImpl();
-        int count = (new DomainValue()).calculate(game, source, this);
-        count = Math.min(player.getLibrary().size(), count);
-        for (int i = 0; i < count; i++) {
-            Card card = player.getLibrary().removeFromTop(game);
-            if (card != null) {
-                cards.add(card);
-            }
-        }
-        player.lookAtCards("Worldly Counsel", cards, game);
+        Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, (new DomainValue()).calculate(game, source, this)));
+        controller.lookAtCards(source, null, cards, game);
 
         if (!cards.isEmpty()) {
             if (cards.size() == 1) {
-                Card card = cards.getRandom(game);
-                cards.remove(card);
-                card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
-                return true;
+                controller.moveCards(cards, Zone.HAND, source, game);
             } else {
                 TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to put into your hand"));
-                if (player.choose(Outcome.DrawCard, cards, target, game)) {
+                if (controller.choose(Outcome.DrawCard, cards, target, game)) {
                     Card card = cards.get(target.getFirstTarget(), game);
                     if (card != null) {
                         cards.remove(card);
-                        card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
+                        controller.moveCards(card, Zone.HAND, source, game);
                     }
                 }
+                controller.putCardsOnBottomOfLibrary(cards, game, source, true);
             }
         }
-        player.putCardsOnBottomOfLibrary(cards, game, source, true);
+
         return true;
     }
 }

@@ -53,7 +53,7 @@ import mage.target.common.TargetOpponent;
 public class SphinxsTutelage extends CardImpl {
 
     public SphinxsTutelage(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
 
         // Whenever you draw a card, target opponent puts the top two cards of their library into their graveyard. If they're both nonland cards that share a color, repeat this process.
         Ability ability = new DrawCardControllerTriggeredAbility(new SphinxsTutelageEffect(), false);
@@ -108,19 +108,20 @@ class SphinxsTutelageEffect extends OneShotEffect {
                     return true;
                 }
                 colorShared = false;
-                Cards cards = new CardsImpl();
-                cards.addAll(targetPlayer.getLibrary().getTopCards(game, 2));
-                if (!cards.isEmpty()) {
-                    Card card1 = targetPlayer.getLibrary().removeFromTop(game);
-                    if (!card1.isLand() && targetPlayer.getLibrary().hasCards()) {
-                        Card card2 = targetPlayer.getLibrary().removeFromTop(game);
-                        if (!card2.isLand()) {
-                            colorShared = card1.getColor(game).shares(card2.getColor(game));
-                        }
+                Cards cards = new CardsImpl(targetPlayer.getLibrary().getTopCards(game, 2));
+                Card card1 = null;
+                for (Card card : cards.getCards(game)) {
+                    if (card.isLand()) {
+                        break;
+                    }
+                    if (card1 == null) {
+                        card1 = card;
+                    } else {
+                        colorShared = card1.getColor(game).shares(card.getColor(game));
                     }
                 }
                 targetPlayer.moveCards(cards, Zone.GRAVEYARD, source, game);
-            } while (colorShared && targetPlayer.canRespond());
+            } while (colorShared && targetPlayer.isInGame());
             return true;
         }
         return false;

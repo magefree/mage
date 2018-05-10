@@ -29,22 +29,20 @@ package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.Card;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.game.Game;
-import mage.players.Library;
 import mage.players.Player;
 
 /**
@@ -93,27 +91,20 @@ class GoblinMachinistEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = source.getSourceObject(game);
-        if (controller != null && sourceObject != null) {
-            if (controller.getLibrary().hasCards()) {
-
-                CardsImpl cards = new CardsImpl();
-                Library library = controller.getLibrary();
-                Card card = null;
-                do {
-                    card = library.removeFromTop(game);
-                    if (card != null) {
-                        cards.add(card);
-                    }
-                } while (library.hasCards() && card != null && card.isLand());
-                if (!cards.isEmpty()) {
-                    controller.revealCards(sourceObject.getIdName(), cards, game);
-                }
-                boolean retVal = false;
+        if (controller != null) {
+            CardsImpl cards = new CardsImpl();
+            for (Card card : controller.getLibrary().getCards(game)) {
                 if (card != null) {
-                    retVal = new BoostSourceEffect(card.getConvertedManaCost(), 0, Duration.EndOfTurn).apply(game, source);
+                    cards.add(card);
+                    if (!card.isLand()) {
+                        if (card.getConvertedManaCost() > 0) {
+                            game.addEffect(new BoostSourceEffect(card.getConvertedManaCost(), 0, Duration.EndOfTurn), source);
+                        }
+                        break;
+                    }
                 }
-                return controller.putCardsOnBottomOfLibrary(cards, game, source, true) && retVal;
+                controller.revealCards(source, cards, game);
+                controller.putCardsOnBottomOfLibrary(cards, game, source, true);
             }
             return true;
         }

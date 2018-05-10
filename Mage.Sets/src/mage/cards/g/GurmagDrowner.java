@@ -29,20 +29,15 @@ package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
-import mage.abilities.Ability;
 import mage.abilities.common.ExploitCreatureTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.abilities.keyword.ExploitAbility;
 import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.TargetCard;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -51,7 +46,7 @@ import mage.target.TargetCard;
 public class GurmagDrowner extends CardImpl {
 
     public GurmagDrowner(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
         this.subtype.add(SubType.NAGA);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(2);
@@ -59,9 +54,10 @@ public class GurmagDrowner extends CardImpl {
 
         // Exploit
         this.addAbility(new ExploitAbility());
-        
+
         // When Gurmag Drowner exploits a creature, look at the top four cards of your library. Put one of them into your hand and the rest into your graveyard.
-        this.addAbility(new ExploitCreatureTriggeredAbility(new GurmagDrownerEffect(), false));
+        this.addAbility(new ExploitCreatureTriggeredAbility(new LookLibraryAndPickControllerEffect(new StaticValue(4), false, new StaticValue(1),
+                StaticFilters.FILTER_CARD, Zone.GRAVEYARD, false, false, false, Zone.HAND, false), false));
     }
 
     public GurmagDrowner(final GurmagDrowner card) {
@@ -71,46 +67,5 @@ public class GurmagDrowner extends CardImpl {
     @Override
     public GurmagDrowner copy() {
         return new GurmagDrowner(this);
-    }
-}
-
-class GurmagDrownerEffect extends OneShotEffect {
-
-    public GurmagDrownerEffect() {
-        super(Outcome.DrawCard);
-        this.staticText = "look at the top four cards of your library. Put one of them into your hand and the rest into your graveyard";
-    }
-
-    public GurmagDrownerEffect(final GurmagDrownerEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public GurmagDrownerEffect copy() {
-        return new GurmagDrownerEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
-        if (controller != null && sourceObject != null) {
-            Cards cards = new CardsImpl();
-            cards.addAll(controller.getLibrary().getTopCards(game, 4));
-            if (!cards.isEmpty()) {
-                controller.lookAtCards(sourceObject.getName(), cards, game);
-                TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to put in your hand"));
-                if (controller.choose(Outcome.Benefit, cards, target, game)) {
-                    Card card = cards.get(target.getFirstTarget(), game);
-                    if (card != null) {
-                        controller.moveCards(card, Zone.HAND, source, game);
-                        cards.remove(card);
-                    }
-                }
-                controller.moveCards(cards, Zone.GRAVEYARD, source, game);
-            }
-            return true;
-        }
-        return false;
     }
 }

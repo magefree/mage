@@ -29,7 +29,6 @@ package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -38,8 +37,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -85,22 +84,18 @@ class TreasureKeeperEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        CardsImpl toReveal = new CardsImpl();
-        Card nonLandCard = null;
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
-        if (controller != null && sourceObject != null) {
-            while (nonLandCard == null && controller.getLibrary().hasCards()) {
-                Card card = controller.getLibrary().removeFromTop(game);
+        if (controller != null) {
+            CardsImpl toReveal = new CardsImpl();
+            Card nonLandCard = null;
+            for (Card card : controller.getLibrary().getCards(game)) {
                 toReveal.add(card);
                 if (!card.isLand() && card.getConvertedManaCost() < 4) {
                     nonLandCard = card;
+                    break;
                 }
             }
-            // reveal cards
-            if (!toReveal.isEmpty()) {
-                controller.revealCards(sourceObject.getIdName(), toReveal, game);
-            }
+            controller.revealCards(source, toReveal, game);
             if (nonLandCard != null && controller.chooseUse(outcome, "Cast " + nonLandCard.getLogName() + "without paying its mana cost?", source, game)) {
                 controller.cast(nonLandCard.getSpellAbility(), game, true);
                 toReveal.remove(nonLandCard);

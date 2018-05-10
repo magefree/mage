@@ -104,18 +104,14 @@ class UndercityInformerEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-
         Cards cards = new CardsImpl();
-        while (player.getLibrary().hasCards()) {
-            Card card = player.getLibrary().removeFromTop(game);
-            if (card != null) {
-                cards.add(card);
-                if (card.isLand()) {
-                    break;
-                }
+        for (Card card : player.getLibrary().getCards(game)) {
+            cards.add(card);
+            if (card.isLand()) {
+                break;
             }
         }
-        player.revealCards("Undercity Informer", cards, game);
+        player.revealCards(source, cards, game);
         player.moveCards(cards, Zone.GRAVEYARD, source, game);
         return true;
     }

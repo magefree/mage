@@ -28,13 +28,11 @@
 package mage.cards.s;
 
 import java.util.UUID;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.FerociousCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
@@ -42,7 +40,7 @@ import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
@@ -54,7 +52,7 @@ import mage.target.TargetCard;
 public class SeeTheUnwritten extends CardImpl {
 
     public SeeTheUnwritten(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{G}{G}");
 
         // Reveal the top eight cards of your library. You may put a creature card from among them onto the battlefield. Put the rest into your graveyard.
         // <i>Ferocious</i> &mdash; If you control a creature with power 4 or greater, you may put two creature cards onto the battlefield instead of one.
@@ -77,8 +75,6 @@ public class SeeTheUnwritten extends CardImpl {
 }
 
 class SeeTheUnwrittenEffect extends OneShotEffect {
-
-    private static final FilterCreatureCard filter = new FilterCreatureCard("creature card");
 
     private final int numberOfCardsToPutIntoPlay;
 
@@ -103,36 +99,18 @@ class SeeTheUnwrittenEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
-        if (controller != null && sourceObject != null) {
-            Cards cards = new CardsImpl();
-
-            int creatureCardsFound = 0;
-            int count = Math.min(controller.getLibrary().size(), 8);
-            for (int i = 0; i < count; i++) {
-                Card card = controller.getLibrary().removeFromTop(game);
-                if (card != null) {
-                    cards.add(card);
-                    if (filter.match(card, source.getSourceId(), source.getControllerId(), game)) {
-                        creatureCardsFound++;
-                    }
-                }
-            }
-
+        if (controller != null) {
+            Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, 8));
+            int creatureCardsFound = cards.count(StaticFilters.FILTER_CARD_CREATURE, game);
             if (!cards.isEmpty()) {
-                controller.revealCards(sourceObject.getName(), cards, game);
+                controller.revealCards(source, cards, game);
                 if (creatureCardsFound > 0 && controller.chooseUse(outcome, "Put creature(s) into play?", source, game)) {
                     int cardsToChoose = Math.min(numberOfCardsToPutIntoPlay, creatureCardsFound);
-                    TargetCard target = new TargetCard(cardsToChoose, cardsToChoose, Zone.LIBRARY, filter);
+                    TargetCard target = new TargetCard(cardsToChoose, cardsToChoose, Zone.LIBRARY, StaticFilters.FILTER_CARD_CREATURE);
                     if (controller.choose(Outcome.PutCreatureInPlay, cards, target, game)) {
-                        for (UUID creatureId : target.getTargets()) {
-                            Card card = game.getCard(creatureId);
-                            if (card != null) {
-                                cards.remove(card);
-                                controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-                            }
-                        }
-
+                        Cards toBattlefield = new CardsImpl(target.getTargets());
+                        controller.moveCards(toBattlefield, Zone.BATTLEFIELD, source, game);
+                        cards.removeAll(toBattlefield);
                     }
                 }
                 controller.moveCards(cards, Zone.GRAVEYARD, source, game);

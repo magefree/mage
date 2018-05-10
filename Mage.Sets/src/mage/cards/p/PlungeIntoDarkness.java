@@ -58,10 +58,9 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public class PlungeIntoDarkness extends CardImpl {
 
     public PlungeIntoDarkness(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{B}");
 
-
-        // Choose one - 
+        // Choose one -
         this.getSpellAbility().getModes().setMinModes(1);
         this.getSpellAbility().getModes().setMaxModes(1);
         // Sacrifice any number of creatures, then you gain 3 life for each sacrificed creature;
@@ -70,7 +69,7 @@ public class PlungeIntoDarkness extends CardImpl {
         Mode mode = new Mode();
         mode.getEffects().add(new PlungeIntoDarknessSearchEffect());
         this.getSpellAbility().getModes().addMode(mode);
-        
+
         // Entwine {B}
         this.addAbility(new EntwineAbility("{B}"));
     }
@@ -86,21 +85,21 @@ public class PlungeIntoDarkness extends CardImpl {
 }
 
 class PlungeIntoDarknessLifeEffect extends OneShotEffect {
-    
+
     PlungeIntoDarknessLifeEffect() {
         super(Outcome.GainLife);
         this.staticText = "Sacrifice any number of creatures, then you gain 3 life for each sacrificed creature";
     }
-    
+
     PlungeIntoDarknessLifeEffect(final PlungeIntoDarknessLifeEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public PlungeIntoDarknessLifeEffect copy() {
         return new PlungeIntoDarknessLifeEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
@@ -126,52 +125,40 @@ class PlungeIntoDarknessLifeEffect extends OneShotEffect {
 }
 
 class PlungeIntoDarknessSearchEffect extends OneShotEffect {
-    
+
     PlungeIntoDarknessSearchEffect() {
         super(Outcome.Benefit);
         this.staticText = "pay X life, then look at the top X cards of your library, put one of those cards into your hand, and exile the rest.";
     }
-    
+
     PlungeIntoDarknessSearchEffect(final PlungeIntoDarknessSearchEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public PlungeIntoDarknessSearchEffect copy() {
         return new PlungeIntoDarknessSearchEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
             VariableCost cost = new PayVariableLifeCost();
             int xValue = cost.announceXValue(source, game);
             cost.getFixedCostsFromAnnouncedValue(xValue).pay(source, game, source.getSourceId(), source.getControllerId(), false, null);
-            
-            Cards cards = new CardsImpl();
-            int count = Math.min(player.getLibrary().size(), xValue);
-            for (int i = 0; i < count; i++) {
-                Card card = player.getLibrary().removeFromTop(game);
-                if (card != null) {
-                    cards.add(card);
-                }
-            }
-            player.lookAtCards("Plunge into Darkness", cards, game);
+            Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, xValue));
+            controller.lookAtCards(source, null, cards, game);
 
             TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to put into your hand"));
-            if (player.choose(Outcome.DrawCard, cards, target, game)) {
+            if (controller.choose(Outcome.DrawCard, cards, target, game)) {
                 Card card = cards.get(target.getFirstTarget(), game);
                 if (card != null) {
                     cards.remove(card);
-                    card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
-                    game.informPlayers("Plunge into Darkness: " + player.getLogName() + " puts a card into their hand");
+                    controller.moveCards(card, Zone.HAND, source, game);
                 }
             }
-            for (UUID cardId : cards) {
-                Card card = game.getCard(cardId);
-                card.moveToExile(null, "", source.getSourceId(), game);
-            }
+            controller.moveCards(cards, Zone.EXILED, source, game);
             return true;
         }
         return false;

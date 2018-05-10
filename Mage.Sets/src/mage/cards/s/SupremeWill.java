@@ -37,7 +37,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.target.TargetSpell;
 
 /**
@@ -55,7 +55,7 @@ public class SupremeWill extends CardImpl {
 
         // or Look at the top four cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order.
         Mode mode = new Mode();
-        mode.getEffects().add(new LookLibraryAndPickControllerEffect(new StaticValue(4), false, new StaticValue(1), new FilterCard(), Zone.LIBRARY, false, false));
+        mode.getEffects().add(new LookLibraryAndPickControllerEffect(new StaticValue(4), false, new StaticValue(1), StaticFilters.FILTER_CARD, Zone.LIBRARY, false, false));
         this.getSpellAbility().addMode(mode);
     }
 

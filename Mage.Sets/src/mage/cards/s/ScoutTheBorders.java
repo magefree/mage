@@ -28,7 +28,6 @@
 package mage.cards.s;
 
 import java.util.UUID;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -53,11 +52,10 @@ import mage.target.TargetCard;
 public class ScoutTheBorders extends CardImpl {
 
     public ScoutTheBorders(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{G}");
 
         // Reveal the top five cards of your library. You may put a creature or land card from among them into your hand. Put the rest into your graveyard.
-        this.getSpellAbility().addEffect(new  ScoutTheBordersEffect());
+        this.getSpellAbility().addEffect(new ScoutTheBordersEffect());
     }
 
     public ScoutTheBorders(final ScoutTheBorders card) {
@@ -70,48 +68,36 @@ public class ScoutTheBorders extends CardImpl {
     }
 }
 
-class  ScoutTheBordersEffect extends OneShotEffect {
+class ScoutTheBordersEffect extends OneShotEffect {
 
     private static final FilterCard filterPutInHand = new FilterCard("creature or land card to put in hand");
+
     static {
         filterPutInHand.add(Predicates.or(new CardTypePredicate(CardType.CREATURE), new CardTypePredicate(CardType.LAND)));
     }
 
-    public  ScoutTheBordersEffect() {
+    public ScoutTheBordersEffect() {
         super(Outcome.DrawCard);
         this.staticText = "Reveal the top five cards of your library. You may put a creature or land card from among them into your hand. Put the rest into your graveyard";
     }
 
-    public  ScoutTheBordersEffect(final  ScoutTheBordersEffect effect) {
+    public ScoutTheBordersEffect(final ScoutTheBordersEffect effect) {
         super(effect);
     }
 
     @Override
-    public  ScoutTheBordersEffect copy() {
-        return new  ScoutTheBordersEffect(this);
+    public ScoutTheBordersEffect copy() {
+        return new ScoutTheBordersEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
-        if (controller != null && sourceObject != null) {
-            Cards cards = new CardsImpl();
-
-            boolean properCardFound = false;
-            int count = Math.min(controller.getLibrary().size(), 5);
-            for (int i = 0; i < count; i++) {
-                Card card = controller.getLibrary().removeFromTop(game);
-                if (card != null) {
-                    cards.add(card);
-                    if (filterPutInHand.match(card, source.getSourceId(), source.getControllerId(), game)) {
-                        properCardFound = true;
-                    }
-                }
-            }
-
+        if (controller != null) {
+            Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, 5));
+            boolean properCardFound = cards.count(filterPutInHand, game) > 0;
             if (!cards.isEmpty()) {
-                controller.revealCards(sourceObject.getName(), cards, game);
+                controller.revealCards(source, cards, game);
                 TargetCard target = new TargetCard(Zone.LIBRARY, filterPutInHand);
                 if (properCardFound && controller.choose(Outcome.DrawCard, cards, target, game)) {
                     Card card = game.getCard(target.getFirstTarget());

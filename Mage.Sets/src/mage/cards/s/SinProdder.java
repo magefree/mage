@@ -27,7 +27,6 @@
  */
 package mage.cards.s;
 
-import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -37,15 +36,13 @@ import mage.abilities.keyword.MenaceAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
@@ -55,7 +52,7 @@ import mage.players.Player;
 public class SinProdder extends CardImpl {
 
     public SinProdder(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
         this.subtype.add(SubType.DEVIL);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
@@ -98,32 +95,31 @@ class SinProdderEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (controller != null && sourcePermanent != null) {
-            if (controller.getLibrary().hasCards()) {
-                Card card = controller.getLibrary().removeFromTop(game);
-                if (card != null) {
-                    Cards cards = new CardsImpl(card);
-                    controller.revealCards(sourcePermanent.getIdName(), cards, game);
-                    StringBuilder sb = new StringBuilder();
-                    sb.append("Put ").append(card.getName()).append(" in ").append(controller.getLogName()).append("'s graveyard?");
-                    boolean putInGraveyard = false;
-                    Set<UUID> opponents = game.getOpponents(source.getControllerId());
-                    for (UUID opponentUuid : opponents) {
-                        Player opponent = game.getPlayer(opponentUuid);
-                        if (opponent != null && !putInGraveyard && opponent.chooseUse(Outcome.Damage, sb.toString(), source, game)) {
-                            putInGraveyard = true;
-                            opponent.damage(card.getConvertedManaCost(), source.getSourceId(), game, false, true);
-                        }
+        if (controller != null) {
+            Card card = controller.getLibrary().getFromTop(game);
+            if (card != null) {
+                controller.revealCards(source, new CardsImpl(card), game);
+                String message = "Put " + card.getName() + " in " + controller.getName() + "'s graveyard?";
+                boolean putInGraveyard = false;
+                for (UUID opponentUuid : game.getOpponents(source.getControllerId())) {
+                    Player opponent = game.getPlayer(opponentUuid);
+                    if (opponent != null && !putInGraveyard && opponent.chooseUse(Outcome.Damage, message, source, game)) {
+                        putInGraveyard = true;
+                        opponent.damage(card.getConvertedManaCost(), source.getSourceId(), game, false, true);
+                        // 4/8/2016: Each opponent in turn order, starting with the one after you in turn order, may choose to have you put that card into your graveyard.
+                        // Once a player does so, Sin Prodder deals damage equal to that card's converted mana cost to that player immediately
+                        // and Sin Prodder's trigger has no further action.
+                        break;
                     }
-                    if (putInGraveyard) {
-                        controller.moveCards(card, Zone.GRAVEYARD, source, game);
-                    } else {
-                        controller.moveCards(card, Zone.HAND, source, game);
-                    }
-                return true;
+                }
+                if (putInGraveyard) {
+                    controller.moveCards(card, Zone.GRAVEYARD, source, game);
+                } else {
+                    controller.moveCards(card, Zone.HAND, source, game);
                 }
             }
+            return true;
+
         }
         return false;
     }

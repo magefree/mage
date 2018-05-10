@@ -109,6 +109,13 @@ public final class StaticFilters {
     static {
         FILTER_PERMANENT.setLockedFilter(true);
     }
+
+    public static final FilterPermanent FILTER_PERMANENT_ARTIFACT_AN = new FilterArtifactPermanent("an artifact");
+
+    static {
+        FILTER_PERMANENT_ARTIFACT_AN.setLockedFilter(true);
+    }
+
     public static final FilterArtifactOrEnchantmentPermanent FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT = new FilterArtifactOrEnchantmentPermanent();
 
     static {

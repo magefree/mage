@@ -28,17 +28,13 @@
 package mage.cards.b;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.cards.*;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.TargetCard;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -50,7 +46,8 @@ public class BitterRevelation extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{B}");
 
         // Look at the top four cards of your library. Put two of them into your hand and the rest into your graveyard. You lose 2 life.
-        this.getSpellAbility().addEffect(new BitterRevelationEffect());
+        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(new StaticValue(4), false, new StaticValue(2),
+                StaticFilters.FILTER_CARD, Zone.GRAVEYARD, false, false, false, Zone.HAND, false));
         this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(2));
     }
 
@@ -61,42 +58,5 @@ public class BitterRevelation extends CardImpl {
     @Override
     public BitterRevelation copy() {
         return new BitterRevelation(this);
-    }
-}
-
-class BitterRevelationEffect extends OneShotEffect {
-
-    BitterRevelationEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "Look at the top four cards of your library. Put two of them into your hand and the rest into your graveyard";
-    }
-
-    BitterRevelationEffect(final BitterRevelationEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public BitterRevelationEffect copy() {
-        return new BitterRevelationEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, 4));
-            if (!cards.isEmpty()) {
-                controller.lookAtCards(source, null, cards, game);
-                TargetCard target = new TargetCard(Math.min(2, cards.size()), Zone.LIBRARY, new FilterCard("two cards to put in your hand"));
-                if (controller.choose(Outcome.DrawCard, cards, target, game)) {
-                    Cards toHand = new CardsImpl(target.getTargets());
-                    controller.moveCards(toHand, Zone.HAND, source, game);
-                    cards.removeAll(toHand);
-                }
-                controller.moveCards(cards, Zone.GRAVEYARD, source, game);
-            }
-            return true;
-        }
-        return false;
     }
 }

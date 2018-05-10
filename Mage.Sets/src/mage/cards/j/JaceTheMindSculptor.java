@@ -40,8 +40,8 @@ import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -55,7 +55,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class JaceTheMindSculptor extends CardImpl {
 
     public JaceTheMindSculptor(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{U}{U}");
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.JACE);
 
@@ -150,21 +150,12 @@ class JaceTheMindSculptorEffect2 extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getFirstTarget());
-        if (player != null) {
-            while (true) {
-                if (player.getLibrary().getFromTop(game) == null) {
-                    break;
-                }
-                Card card = player.getLibrary().removeFromTop(game);
-                if (card != null) {
-                    card.moveToExile(null, "", source.getSourceId(), game);
-                }
-            }
-            for (Card card : player.getHand().getCards(game)) {
-                card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
-            }
-            player.shuffleLibrary(source, game);
+        Player controller = game.getPlayer(source.getControllerId());
+        Player targetPlayer = game.getPlayer(source.getFirstTarget());
+        if (controller != null && targetPlayer != null) {
+            controller.moveCards(targetPlayer.getLibrary().getTopCards(game, targetPlayer.getLibrary().size()), Zone.EXILED, source, game);
+            targetPlayer.moveCards(targetPlayer.getHand(), Zone.LIBRARY, source, game);
+            targetPlayer.shuffleLibrary(source, game);
             return true;
         }
         return false;

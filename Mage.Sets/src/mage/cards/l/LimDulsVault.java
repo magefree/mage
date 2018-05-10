@@ -30,18 +30,14 @@ package mage.cards.l;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.TargetCard;
 
 /**
  *
@@ -50,8 +46,7 @@ import mage.target.TargetCard;
 public class LimDulsVault extends CardImpl {
 
     public LimDulsVault(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}{B}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}{B}");
 
         // Look at the top five cards of your library. As many times as you choose, you may pay 1 life, put those cards on the bottom of your library in any order, then look at the top five cards of your library. Then shuffle your library and put the last cards you looked at this way on top of it in any order.
         this.getSpellAbility().addEffect(new LimDulsVaultEffect());
@@ -68,12 +63,12 @@ public class LimDulsVault extends CardImpl {
 }
 
 class LimDulsVaultEffect extends OneShotEffect {
-    static final private String textTop = "card to put on your library (last chosen will be on top)";
-    static final private String textBottom = "card to put on bottom of your library (last chosen will be on bottom)";
 
     public LimDulsVaultEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Look at the top five cards of your library. As many times as you choose, you may pay 1 life, put those cards on the bottom of your library in any order, then look at the top five cards of your library. Then shuffle your library and put the last cards you looked at this way on top of it in any order";
+        this.staticText = "Look at the top five cards of your library. As many times as you choose, "
+                + "you may pay 1 life, put those cards on the bottom of your library in any order, then look at the top five cards of your library. "
+                + "Then shuffle your library and put the last cards you looked at this way on top of it in any order";
     }
 
     public LimDulsVaultEffect(final LimDulsVaultEffect effect) {
@@ -93,38 +88,17 @@ class LimDulsVaultEffect extends OneShotEffect {
         }
 
         boolean doAgain;
-        do  {
-            Cards cards = new CardsImpl();
-            int count = Math.min(player.getLibrary().size(), 5);
-            for (int i = 0; i < count; i++) {
-                Card card = player.getLibrary().removeFromTop(game);
-                if (card != null) {
-                    cards.add(card);
-                }
-            }
-            player.lookAtCards("Lim-Dul's Vault", cards, game);
+        do {
+            Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, 5));
+            player.lookAtCards(source, null, cards, game);
             doAgain = player.chooseUse(outcome, "Pay 1 life and look at the next 5 cards?", source, game);
             if (doAgain) {
                 player.loseLife(1, game, false);
+                player.putCardsOnBottomOfLibrary(cards, game, source, true);
             } else {
                 player.shuffleLibrary(source, game);
+                player.putCardsOnTopOfLibrary(cards, game, source, true);
             }
-            
-            TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard(doAgain ? textBottom : textTop));
-            while (player.canRespond() && cards.size() > 1) {
-                player.choose(Outcome.Neutral, cards, target, game);
-                Card card = cards.get(target.getFirstTarget(), game);
-                if (card != null) {
-                    cards.remove(card);
-                    card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, !doAgain);
-                }
-                target.clearChosen();
-            }
-            if (cards.size() == 1) {
-                Card card = cards.get(cards.iterator().next(), game);
-                card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, !doAgain);
-            }
-
         } while (doAgain);
 
         return true;

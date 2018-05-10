@@ -30,30 +30,25 @@ package mage.cards.n;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.TargetCard;
 import mage.target.TargetPlayer;
 
 /**
  *
  * @author KholdFuzion
-
+ *
  */
 public class NaturalSelection extends CardImpl {
 
     public NaturalSelection(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{G}");
 
         // Look at the top three cards of target player's library, then put them back in any order. You may have that player shuffle their library.
         this.getSpellAbility().addEffect(new NaturalSelectionEffect());
@@ -70,56 +65,34 @@ public class NaturalSelection extends CardImpl {
     }
 }
 
-class  NaturalSelectionEffect extends OneShotEffect {
+class NaturalSelectionEffect extends OneShotEffect {
 
-    public  NaturalSelectionEffect() {
+    public NaturalSelectionEffect() {
         super(Outcome.DrawCard);
         this.staticText = "look at the top three cards of target player's library, then put them back in any order. You may have that player shuffle their library.";
     }
 
-    public  NaturalSelectionEffect(final  NaturalSelectionEffect effect) {
+    public NaturalSelectionEffect(final NaturalSelectionEffect effect) {
         super(effect);
     }
 
     @Override
-    public  NaturalSelectionEffect copy() {
-        return new  NaturalSelectionEffect(this);
+    public NaturalSelectionEffect copy() {
+        return new NaturalSelectionEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player you = game.getPlayer(source.getControllerId());
-        Player player = game.getPlayer(source.getFirstTarget());
-        if (player == null || you == null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        Player targetPlayer = game.getPlayer(source.getFirstTarget());
+        if (targetPlayer == null || controller == null) {
             return false;
         }
-        Cards cards = new CardsImpl();
-        int count = Math.min(player.getLibrary().size(), 3);
-        for (int i = 0; i < count; i++) {
-            Card card = player.getLibrary().removeFromTop(game);
-            if (card != null) {
-                cards.add(card);
-            }
-        }
-
-        you.lookAtCards("Natural Selection", cards, game);
-
-        TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to put on the top of target player's library"));
-        while (player.canRespond() && cards.size() > 1) {
-            you.choose(Outcome.Neutral, cards, target, game);
-            Card card = cards.get(target.getFirstTarget(), game);
-            if (card != null) {
-                cards.remove(card);
-                card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-            }
-            target.clearChosen();
-        }
-        if (cards.size() == 1) {
-            Card card = cards.get(cards.iterator().next(), game);
-            card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-        }
-        if (you.chooseUse(Outcome.Neutral, "You may have that player shuffle their library", source, game)){
-            player.shuffleLibrary(source, game);
+        Cards cards = new CardsImpl(targetPlayer.getLibrary().getTopCards(game, 3));
+        controller.lookAtCards(source, null, cards, game);
+        controller.putCardsOnTopOfLibrary(cards, game, source, true);
+        if (controller.chooseUse(Outcome.Neutral, "You may have that player shuffle their library", source, game)) {
+            targetPlayer.shuffleLibrary(source, game);
         }
         return true;
     }

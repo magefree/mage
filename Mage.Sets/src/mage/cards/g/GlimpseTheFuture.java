@@ -28,16 +28,12 @@
 package mage.cards.g;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.cards.*;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.TargetCard;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -46,11 +42,11 @@ import mage.target.TargetCard;
 public class GlimpseTheFuture extends CardImpl {
 
     public GlimpseTheFuture(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{U}");
 
-
-        // Look at the top three cards of your library. Put one of them into your hand and the rest into your graveyard. 
-        this.getSpellAbility().addEffect(new GlimpseTheFutureEffect());
+        // Look at the top three cards of your library. Put one of them into your hand and the rest into your graveyard.
+        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(new StaticValue(3), false, new StaticValue(1),
+                StaticFilters.FILTER_CARD, Zone.GRAVEYARD, false, false, false, Zone.HAND, false));
 
     }
 
@@ -61,53 +57,5 @@ public class GlimpseTheFuture extends CardImpl {
     @Override
     public GlimpseTheFuture copy() {
         return new GlimpseTheFuture(this);
-    }
-}
-class GlimpseTheFutureEffect extends OneShotEffect {
-
-    public GlimpseTheFutureEffect() {
-        super(Outcome.DrawCard);
-        this.staticText = "Look at the top three cards of your library. Put one of them into your hand and the rest into your graveyard";
-    }
-
-    public GlimpseTheFutureEffect(final GlimpseTheFutureEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public GlimpseTheFutureEffect copy() {
-        return new GlimpseTheFutureEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-
-        if (controller != null) {
-            Cards cards = new CardsImpl();
-            int cardsCount = Math.min(3, controller.getLibrary().size());
-            for (int i = 0; i < cardsCount; i++) {
-                Card card = controller.getLibrary().removeFromTop(game);
-                if (card != null) {
-                    cards.add(card);
-                }
-            }
-
-            if (!cards.isEmpty()) {
-                controller.lookAtCards("Glimpse the Future", cards, game);
-
-                TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to put in your hand"));
-                if (controller.choose(Outcome.Benefit, cards, target, game)) {
-                    Card card = cards.get(target.getFirstTarget(), game);
-                    if (card != null) {
-                        card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
-                        cards.remove(card);
-                    }
-                }
-                controller.moveCards(cards, Zone.GRAVEYARD, source, game);
-            }
-            return true;
-        }
-        return false;
     }
 }

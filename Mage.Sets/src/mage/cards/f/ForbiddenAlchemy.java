@@ -28,19 +28,15 @@
 package mage.cards.f;
 
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.*;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.TimingRule;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.TargetCard;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -49,11 +45,12 @@ import mage.target.TargetCard;
 public class ForbiddenAlchemy extends CardImpl {
 
     public ForbiddenAlchemy(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}");
 
         // Look at the top four cards of your library. Put one of them into your hand and the rest into your graveyard.
-        this.getSpellAbility().addEffect(new ForbiddenAlchemyEffect());
+        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(new StaticValue(4), false, new StaticValue(1),
+                StaticFilters.FILTER_CARD, Zone.GRAVEYARD, false, false, false, Zone.HAND, false));
+
         // Flashback {6}{B}
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{6}{B}"), TimingRule.INSTANT));
     }
@@ -65,57 +62,5 @@ public class ForbiddenAlchemy extends CardImpl {
     @Override
     public ForbiddenAlchemy copy() {
         return new ForbiddenAlchemy(this);
-    }
-}
-
-class ForbiddenAlchemyEffect extends OneShotEffect {
-
-    public ForbiddenAlchemyEffect() {
-        super(Outcome.DrawCard);
-        this.staticText = "Look at the top four cards of your library. Put one of them into your hand and the rest into your graveyard";
-    }
-
-    public ForbiddenAlchemyEffect(final ForbiddenAlchemyEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ForbiddenAlchemyEffect copy() {
-        return new ForbiddenAlchemyEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-
-        if (player != null) {
-            Cards cards = new CardsImpl();
-            int cardsCount = Math.min(4, player.getLibrary().size());
-            for (int i = 0; i < cardsCount; i++) {
-                Card card = player.getLibrary().removeFromTop(game);
-                if (card != null) {
-                    cards.add(card);
-                }
-            }
-
-            if (!cards.isEmpty()) {
-                player.lookAtCards("Forbidden Alchemy", cards, game);
-
-                TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to put in your hand"));
-                if (player.choose(Outcome.Benefit, cards, target, game)) {
-                    Card card = cards.get(target.getFirstTarget(), game);
-                    if (card != null) {
-                        card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
-                        cards.remove(card);
-                    }
-                }
-
-                for (Card card : cards.getCards(game)) {
-                    card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, true);
-                }
-            }
-            return true;
-        }
-        return false;
     }
 }

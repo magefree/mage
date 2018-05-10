@@ -38,7 +38,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.players.Library;
 import mage.players.Player;
 
 /**
@@ -48,8 +47,7 @@ import mage.players.Player;
 public class TreasureHunt extends CardImpl {
 
     public TreasureHunt(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{U}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{U}");
 
         // Reveal cards from the top of your library until you reveal a nonland card, then put all cards revealed this way into your hand.
         this.getSpellAbility().addEffect(new TreasureHuntEffect());
@@ -83,22 +81,17 @@ class TreasureHuntEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null && player.getLibrary().hasCards()) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null && controller.getLibrary().hasCards()) {
             CardsImpl cards = new CardsImpl();
-            Library library = player.getLibrary();
-            Card card = null;
-            do {
-                card = library.removeFromTop(game);
-                if (card != null) {
-                    cards.add(card);
-                    card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
+            for (Card card : controller.getLibrary().getCards(game)) {
+                cards.add(card);
+                if (!card.isLand()) {
+                    break;
                 }
-            } while (library.hasCards() && card != null && card.isLand());
-
-            if (!cards.isEmpty()) {
-                player.revealCards("Treasure Hunt", cards, game);
             }
+            controller.revealCards(source, cards, game);
+            controller.moveCards(cards, Zone.HAND, source, game);
             return true;
         }
         return false;

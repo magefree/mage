@@ -37,8 +37,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterArtifactCard;
@@ -55,7 +55,7 @@ import mage.target.TargetCard;
 public class MuzzioVisionaryArchitect extends CardImpl {
 
     public MuzzioVisionaryArchitect(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ARTIFICER);
@@ -97,8 +97,7 @@ class MuzzioVisionaryArchitectEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (controller == null || sourcePermanent == null) {
+        if (controller == null) {
             return false;
         }
 
@@ -113,28 +112,19 @@ class MuzzioVisionaryArchitectEffect extends OneShotEffect {
             }
         }
 
-        Cards cards = new CardsImpl();
-
-        for (int i = 0; i < highCMC; i++) {
-            Card card = controller.getLibrary().removeFromTop(game);
-            if (card != null) {
-                cards.add(card);
-            }
-        }
-        controller.lookAtCards(sourcePermanent.getIdName(), cards, game);
-
+        Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, highCMC));
+        controller.lookAtCards(source, null, cards, game);
         if (!cards.isEmpty()) {
             TargetCard target = new TargetCard(Zone.LIBRARY, new FilterArtifactCard("artifact card to put onto the battlefield"));
             if (target.canChoose(source.getSourceId(), controller.getId(), game) && controller.choose(Outcome.Benefit, cards, target, game)) {
                 Card card = cards.get(target.getFirstTarget(), game);
                 if (card != null) {
-                    controller.revealCards(sourcePermanent.getIdName(), new CardsImpl(card), game);
+                    controller.revealCards(source, new CardsImpl(card), game);
                     cards.remove(card);
                     controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                 }
             }
         }
-
         controller.putCardsOnBottomOfLibrary(cards, game, source, true);
         return true;
     }

@@ -89,32 +89,34 @@ class MirrorMadPhantasmEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent perm = game.getPermanent(source.getSourceId());
+        Permanent perm = source.getSourcePermanentIfItStillExists(game);
         if (perm != null) {
-            Player player = game.getPlayer(perm.getOwnerId());
-            if (player != null) {
+            Player owner = game.getPlayer(perm.getOwnerId());
+            if (owner == null) {
+                return false;
+            }
+            if (owner.moveCards(perm, Zone.LIBRARY, source, game)) {
+                owner.shuffleLibrary(source, game);
                 perm.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-                player.shuffleLibrary(source, game);
+                owner.shuffleLibrary(source, game);
                 Cards cards = new CardsImpl();
-                while (player.getLibrary().hasCards()) {
-                    Card card = player.getLibrary().removeFromTop(game);
-                    if (card == null) {
-                        break;
-                    }
-                    if (card.getName().equals("Mirror-Mad Phantasm")) {
-                        player.moveCards(card, Zone.BATTLEFIELD, source, game);
-                        break;
-                    }
+                Card phantasmCard = null;
+                for (Card card : owner.getLibrary().getCards(game)) {
                     cards.add(card);
+                    if (card.getName().equals("Mirror-Mad Phantasm")) {
+                        phantasmCard = card;
+                        break;
+                    }
                 }
-                if (!cards.isEmpty()) {
-                    player.revealCards("Mirror-Mad Phantasm", cards, game);
-                    player.moveCards(cards, Zone.GRAVEYARD, source, game);
+                owner.revealCards(source, cards, game);
+                if (phantasmCard != null) {
+                    owner.moveCards(phantasmCard, Zone.BATTLEFIELD, source, game);
+                    cards.remove(phantasmCard);
                 }
-                return true;
+                owner.moveCards(cards, Zone.GRAVEYARD, source, game);
             }
         }
-        return false;
+        return true;
     }
 
     @Override
