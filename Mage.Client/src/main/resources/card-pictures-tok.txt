@@ -513,6 +513,20 @@
 |Generate|TOK:DKA|Vampire|||SorinLordOfInnistradVampireToken|
 |Generate|TOK:DKA|Wolf|||WolfToken|
 |Generate|TOK:DKA|Zombie|||ZombieToken|
+|Generate|TOK:DOM|Cleric|||BelzenlokClericToken|
+|Generate|TOK:DOM|Construct|||KarnConstructToken|
+|Generate|TOK:DOM|Demon|||BelzenlokDemonToken|
+|Generate|TOK:DOM|Elemental|||ValdukElementalToken|
+|Gererate|TOK:DOM|Goblin||
+|Generate|TOK:DOM|Karox Bladewing|||KaroxBladewingDragonToken|
+|Generate|TOK:DOM|Knight|1|
+|Generate|TOK:DOM|Knight|2|
+|Generate|TOK:DOM|Nightmare Horror|||ChainersTormentNightmareToken|
+|Generate|TOK:DOM|Saproling|1|
+|Generate|TOK:DOM|Saproling|2|
+|Generate|TOK:DOM|Saproling|3|
+|Generate|TOK:DOM|Soldier||
+|Generate|TOK:DOM|Zombie Knight||
 |Generate|TOK:DRB|Saproling|||SaprolingToken|
 |Generate|TOK:DST|Beast|||BeastToken|
 |Generate|TOK:DST|Elemental|1||WandOfTheElementsFirstToken|
