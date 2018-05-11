@@ -1,15 +1,25 @@
 package mage.verify;
 
+import javassist.bytecode.SignatureAttribute;
 import mage.ObjectColor;
 import mage.cards.*;
 import mage.cards.basiclands.BasicLand;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.SuperType;
+import mage.game.permanent.token.Token;
+import mage.game.permanent.token.TokenImpl;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
+import org.mage.plugins.card.images.CardDownloadData;
+import org.mage.plugins.card.images.DownloadPictures;
+import org.reflections.Reflections;
 
 import java.io.IOException;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Modifier;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
@@ -19,6 +29,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+/**
+ *
+ * @author JayDi85
+ */
 public class VerifyCardDataTest {
 
     // right now this is very noisy, and not useful enough to make any assertions on
@@ -238,6 +252,139 @@ public class VerifyCardDataTest {
         // only warnings
         for (String error: errorsList) {
             System.out.println(error);
+        }
+    }
+
+    private Object createNewObject(Class<?> clazz) {
+        try {
+            Constructor<?> cons = clazz.getConstructor();
+            return cons.newInstance();
+        } catch (InvocationTargetException ex) {
+            Throwable e = ex.getTargetException();
+            e.printStackTrace();
+            return null;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    private void printMessages(Collection<String> list) {
+        for (String mes : list) {
+            System.out.println(mes);
+        }
+    }
+
+    private String extractShortClass(Class<? extends TokenImpl> tokenClass) {
+        String origin = tokenClass.getName();
+        if (origin.contains("$")) {
+            // inner classes, example: mage.cards.f.FigureOfDestiny$FigureOfDestinyToken3
+            return origin.replaceAll(".+\\$(.+)", "$1");
+        } else {
+            // public classes, example: mage.game.permanent.token.FigureOfDestinyToken
+            return origin.replaceAll(".+\\.(.+)", "$1");
+        }
+    }
+
+    @Test
+    @Ignore  // TODO: enable test after massive token fixes
+    public void checkMissingTokenData() {
+
+        Collection<String> errorsList = new ArrayList<>();
+        Collection<String> warningsList = new ArrayList<>();
+
+        // all tokens must be stores in card-pictures-tok.txt (if not then viewer and image downloader are missing token images)
+        // https://github.com/ronmamo/reflections
+        Reflections reflections = new Reflections("mage.");
+        Set<Class<? extends TokenImpl>> tokenClassesList = reflections.getSubTypesOf(TokenImpl.class);
+
+        // xmage tokens
+        Set<Class<? extends TokenImpl>> privateTokens = new HashSet<>();
+        Set<Class<? extends TokenImpl>> publicTokens = new HashSet<>();
+        for (Class<? extends TokenImpl> tokenClass : tokenClassesList) {
+            if (Modifier.isPublic(tokenClass.getModifiers())) {
+                publicTokens.add(tokenClass);
+            } else {
+                privateTokens.add(tokenClass);
+            }
+        }
+
+        // tok file's data
+        ArrayList<CardDownloadData> tokFileTokens = DownloadPictures.getTokenCardUrls();
+        LinkedHashMap<String, String> tokDataClassesIndex = new LinkedHashMap<>();
+        LinkedHashMap<String, String> tokDataNamesIndex = new LinkedHashMap<>();
+        for (CardDownloadData tokData : tokFileTokens) {
+
+            String searchName;
+            String setsList;
+
+            // by class
+            searchName = tokData.getTokenClassName();
+            setsList = tokDataClassesIndex.getOrDefault(searchName, "");
+            if (!setsList.isEmpty()) {
+                setsList += ",";
+            }
+            setsList += tokData.getSet();
+            tokDataClassesIndex.put(searchName, setsList);
+
+            // by name
+            searchName = tokData.getName();
+            setsList = tokDataNamesIndex.getOrDefault(searchName, "");
+            if (!setsList.isEmpty()) {
+                setsList += ",";
+            }
+            setsList += tokData.getSet();
+            tokDataNamesIndex.put(searchName, setsList);
+        }
+
+        // 1. check token name convention
+        for (Class<? extends TokenImpl> tokenClass : tokenClassesList) {
+            if (!tokenClass.getName().endsWith("Token")) {
+                String className = extractShortClass(tokenClass);
+                warningsList.add("warning, token class must ends with Token: " + className + " from " + tokenClass.getName());
+            }
+        }
+
+        // 2. check store file for public
+        for (Class<? extends TokenImpl> tokenClass : publicTokens) {
+            String fullClass = tokenClass.getName();
+            if (!fullClass.startsWith("mage.game.permanent.token.")) {
+                String className = extractShortClass(tokenClass);
+                errorsList.add("error, public token must stores in mage.game.permanent.token package: " + className + " from " + tokenClass.getName());
+            }
+        }
+
+        // 3. check private tokens (they aren't need at all)
+        for (Class<? extends TokenImpl> tokenClass : privateTokens) {
+            String className = extractShortClass(tokenClass);
+            errorsList.add("error, no needs in private tokens, replace it with CreatureToken: " + className + " from " + tokenClass.getName());
+        }
+
+        // 4. all public tokens must have tok-data (private tokens uses for innner abilities -- no need images for it)
+        for (Class<? extends TokenImpl> tokenClass : publicTokens) {
+            String className = extractShortClass(tokenClass);
+            Token token = (Token) createNewObject(tokenClass);
+            //Assert.assertNotNull("Can't create token by default constructor", token);
+            if (token == null) {
+                Assert.fail("Can't create token by default constructor: " + className);
+            }
+
+            if (tokDataNamesIndex.getOrDefault(token.getName(), "").isEmpty()) {
+                errorsList.add("error, can't find data in card-pictures-tok.txt for token: " + tokenClass.getName() + " -> " + token.getName());
+            }
+        }
+
+        // TODO: all sets must have full tokens data in tok file (token in every set)
+        // 1. Download scryfall tokens list: https://api.scryfall.com/cards/search?q=t:token
+        // 2. Proccess each token with all prints: read "prints_search_uri" field from token data and go to link like
+        // https://api.scryfall.com/cards/search?order=set&q=%21%E2%80%9CAngel%E2%80%9D&unique=prints
+        // 3. Collect all strings in "set@name"
+        // 4. Proccess tokens data and find missing strings from "set@name" list
+
+        printMessages(warningsList);
+        printMessages(errorsList);
+        if(errorsList.size() > 0){
+            Assert.fail("Founded token errors: " + errorsList.size());
         }
     }
 
