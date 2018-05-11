@@ -74,13 +74,9 @@ public class Brawl extends Constructed {
                 }
             }
         }
-        banned.add("Attune with Aether"); // since 2018-01-15
-        banned.add("Aetherworks Marvel");
-        banned.add("Felidar Guardian");
-        banned.add("Rampaging Ferocidon"); // since 2018-01-15
-        banned.add("Ramunap Ruins"); // since 2018-01-15
-        banned.add("Rogue Refiner"); // since 2018-01-15
+        banned.add("Baral, Chief of Compliance");
         banned.add("Smuggler's Copter");
+        banned.add("Sorcerers' Spyglass");
     }
 
     private static boolean isFallBlock(ExpansionSet set) {
@@ -155,8 +151,20 @@ public class Brawl extends Constructed {
                 }
             }
         }
+
+        List<String> basicsInDeck = new ArrayList<>();
+        if (colorIdentity.isColorless()) {
+            for (Card card : deck.getCards()) {
+                if (basicLandNames.contains(card.getName())) {
+                    basicsInDeck.add(card.getName());
+                }
+            }
+        }
         for (Card card : deck.getCards()) {
-            if (!cardHasValidColor(colorIdentity, card)) {
+            if (!cardHasValidColor(colorIdentity, card)
+                    && !(colorIdentity.isColorless()
+                    && basicsInDeck.size() == 1
+                    && basicsInDeck.contains(card.getName()))) {
                 invalid.put(card.getName(), "Invalid color (" + colorIdentity.toString() + ')');
                 valid = false;
             }
