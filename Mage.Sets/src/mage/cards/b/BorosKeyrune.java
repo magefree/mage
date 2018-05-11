@@ -28,6 +28,7 @@
 package mage.cards.b;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -43,22 +44,28 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
+import mage.game.permanent.token.custom.CreatureToken;
 
 /**
- *
  * @author LevelX2
  */
 public class BorosKeyrune extends CardImpl {
 
     public BorosKeyrune(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // {T}: Add {R} or {W}.
         this.addAbility(new RedManaAbility());
         this.addAbility(new WhiteManaAbility());
 
         // {R}{W}: Boros Keyrune becomes a 1/1 red and white Soldier artifact creature with double strike until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new BorosKeyruneToken(), "", Duration.EndOfTurn), new ManaCostsImpl("{R}{W}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(
+                new CreatureToken(1, 1, "1/1 red and white Soldier artifact creature with double strike")
+                        .withColor("RW")
+                        .withSubType(SubType.SOLDIER)
+                        .withType(CardType.ARTIFACT)
+                        .withAbility(DoubleStrikeAbility.getInstance()),
+                "", Duration.EndOfTurn), new ManaCostsImpl("{R}{W}")));
     }
 
     public BorosKeyrune(final BorosKeyrune card) {
@@ -68,26 +75,5 @@ public class BorosKeyrune extends CardImpl {
     @Override
     public BorosKeyrune copy() {
         return new BorosKeyrune(this);
-    }
-
-    private static class BorosKeyruneToken extends TokenImpl {
-        BorosKeyruneToken() {
-            super("Soldier", "1/1 red and white Soldier artifact creature with double strike");
-            cardType.add(CardType.ARTIFACT);
-            cardType.add(CardType.CREATURE);
-            color.setRed(true);
-            color.setWhite(true);
-            subtype.add(SubType.SOLDIER);
-            power = new MageInt(1);
-            toughness = new MageInt(1);
-            this.addAbility(DoubleStrikeAbility.getInstance());
-        }
-        public BorosKeyruneToken(final BorosKeyruneToken token) {
-            super(token);
-        }
-
-        public BorosKeyruneToken copy() {
-            return new BorosKeyruneToken(this);
-        }
     }
 }
