@@ -34,7 +34,7 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.AddConditionalColorlessManaEffect;
+import mage.abilities.effects.mana.AddConditionalColorlessManaEffect;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.abilities.mana.conditional.ManaCondition;
 import mage.cards.CardImpl;

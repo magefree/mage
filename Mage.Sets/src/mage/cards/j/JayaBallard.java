@@ -33,7 +33,7 @@ import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.AddConditionalManaEffect;
+import mage.abilities.effects.mana.AddConditionalManaEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.mana.builder.common.InstantOrSorcerySpellManaBuilder;
 import mage.cards.Card;

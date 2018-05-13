@@ -1,29 +1,31 @@
-package mage.abilities.effects.common;
+package mage.abilities.effects.mana;
 
 import mage.ConditionalMana;
 import mage.Mana;
 import mage.abilities.Ability;
+import mage.abilities.effects.common.ManaEffect;
 import mage.game.Game;
 
 public class BasicManaEffect extends ManaEffect {
 
-    protected Mana mana;
+    protected Mana manaTemplate;
 
     public BasicManaEffect(Mana mana) {
         super();
-        this.mana = mana;
+        this.manaTemplate = mana;
         staticText = "add " + mana.toString();
     }
 
     public BasicManaEffect(ConditionalMana conditionalMana) {
         super();
-        this.mana = conditionalMana;
-        staticText = "add " + mana.toString() + " " + conditionalMana.getDescription();
+        this.manaTemplate = conditionalMana;
+        staticText = "add " + manaTemplate.toString() + " " + conditionalMana.getDescription();
     }
 
     public BasicManaEffect(final BasicManaEffect effect) {
         super(effect);
-        this.mana = effect.mana.copy();
+        this.manaTemplate = effect.manaTemplate.copy();
+
     }
 
     @Override
@@ -33,16 +35,17 @@ public class BasicManaEffect extends ManaEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        game.getPlayer(source.getControllerId()).getManaPool().addMana(mana, game, source);
+        game.getPlayer(source.getControllerId()).getManaPool().addMana(getMana(game, source), game, source);
         return true;
     }
 
-    public Mana getMana() {
-        return mana;
+    public Mana getManaTemplate() {
+        return manaTemplate;
     }
 
     @Override
-    public Mana getMana(Game game, Ability source) {
-        return mana;
+    public Mana produceMana(boolean netMana, Game game, Ability source) {
+        return manaTemplate.copy();
     }
+
 }

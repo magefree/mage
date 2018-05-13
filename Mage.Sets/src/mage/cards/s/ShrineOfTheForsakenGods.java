@@ -30,7 +30,7 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.AddConditionalColorlessManaEffect;
+import mage.abilities.effects.mana.AddConditionalColorlessManaEffect;
 import mage.abilities.mana.ActivateIfConditionManaAbility;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.abilities.mana.conditional.ConditionalSpellManaBuilder;

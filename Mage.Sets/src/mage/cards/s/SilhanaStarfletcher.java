@@ -29,24 +29,18 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.Mana;
-import mage.ObjectColor;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.ChooseColorEffect;
-import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.effects.mana.AddManaChosenColorEffect;
 import mage.abilities.keyword.ReachAbility;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.ColoredManaSymbol;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.players.Player;
 
 /**
  *
@@ -55,7 +49,7 @@ import mage.players.Player;
 public class SilhanaStarfletcher extends CardImpl {
 
     public SilhanaStarfletcher(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.DRUID);
         this.subtype.add(SubType.ARCHER);
@@ -64,13 +58,13 @@ public class SilhanaStarfletcher extends CardImpl {
 
         // Reach
         this.addAbility(ReachAbility.getInstance());
-        
-        // As Silhana Starfletcher enters the battlefield, choose a color.        
+
+        // As Silhana Starfletcher enters the battlefield, choose a color.
         this.addAbility(new EntersBattlefieldAbility(new ChooseColorEffect(Outcome.Neutral)));
-        
+
         // {tap}: Add one mana of the chosen color.
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new SilhanaStarfletcherManaEffect(), new TapSourceCost()));
-        
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaChosenColorEffect(), new TapSourceCost()));
+
     }
 
     public SilhanaStarfletcher(final SilhanaStarfletcher card) {
@@ -80,41 +74,5 @@ public class SilhanaStarfletcher extends CardImpl {
     @Override
     public SilhanaStarfletcher copy() {
         return new SilhanaStarfletcher(this);
-    }
-}
-
-class SilhanaStarfletcherManaEffect extends ManaEffect {
-
-    public SilhanaStarfletcherManaEffect() {
-        super();
-        staticText = "Add one mana of the chosen color";
-    }
-
-    public SilhanaStarfletcherManaEffect(final SilhanaStarfletcherManaEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-                player.getManaPool().addMana(getMana(game, source), game, source);
-        }
-        return true;
-    }
-
-    @Override
-    public Mana getMana(Game game, Ability source) {
-        ObjectColor color = (ObjectColor) game.getState().getValue(source.getSourceId() + "_color");
-        if (color != null) {
-            return new Mana(ColoredManaSymbol.lookup(color.toString().charAt(0)));
-        } else {
-            return null;
-        }
-    }
-
-    @Override
-    public SilhanaStarfletcherManaEffect copy() {
-        return new SilhanaStarfletcherManaEffect(this);
     }
 }

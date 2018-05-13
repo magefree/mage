@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.AddManaToManaPoolTargetControllerEffect;
+import mage.abilities.effects.mana.AddManaToManaPoolTargetControllerEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.mana.TriggeredManaAbility;

@@ -25,7 +25,7 @@
  * authors and should not be interpreted as representing official policies, either expressed
  * or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.effects.common;
+package mage.abilities.effects.mana;
 
 import mage.Mana;
 import mage.abilities.Ability;
@@ -64,10 +64,10 @@ public class DynamicManaEffect extends BasicManaEffect {
      * @param mana
      * @param amount
      * @param text
-     * @param oneChoice is all mana from the same colour or if false the player
-     * can choose different colours
+     * @param oneChoice is all manaTemplate from the same colour or if false the
+     * player can choose different colours
      * @param netAmount a dynamic value that calculates the possible available
-     * mana (e.g. if you have to pay by removing counters from source)
+     * manaTemplate (e.g. if you have to pay by removing counters from source)
      */
     public DynamicManaEffect(Mana mana, DynamicValue amount, String text, boolean oneChoice, DynamicValue netAmount) {
         super(mana);
@@ -96,9 +96,8 @@ public class DynamicManaEffect extends BasicManaEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Mana computedMana = computeMana(false, game, source);
-        checkToFirePossibleEvents(computedMana, game, source);
-        game.getPlayer(source.getControllerId()).getManaPool().addMana(computedMana, game, source);
+        checkToFirePossibleEvents(getMana(game, source), game, source);
+        game.getPlayer(source.getControllerId()).getManaPool().addMana(getMana(game, source), game, source);
         return true;
     }
 
@@ -111,33 +110,29 @@ public class DynamicManaEffect extends BasicManaEffect {
     }
 
     @Override
-    public Mana getMana(Game game, Ability source) {
-        return null;
-    }
-
-    public Mana computeMana(boolean netMana, Game game, Ability source) {
+    public Mana produceMana(boolean netMana, Game game, Ability source) {
         Mana computedMana = new Mana();
         int count;
         if (netMana && netAmount != null) {
-            // calculate the maximum available mana
+            // calculate the maximum available manaTemplate
             count = netAmount.calculate(game, source, this);
         } else {
             count = amount.calculate(game, source, this);
         }
 
-        if (mana.getBlack() > 0) {
+        if (manaTemplate.getBlack() > 0) {
             computedMana.setBlack(count);
-        } else if (mana.getBlue() > 0) {
+        } else if (manaTemplate.getBlue() > 0) {
             computedMana.setBlue(count);
-        } else if (mana.getGreen() > 0) {
+        } else if (manaTemplate.getGreen() > 0) {
             computedMana.setGreen(count);
-        } else if (mana.getRed() > 0) {
+        } else if (manaTemplate.getRed() > 0) {
             computedMana.setRed(count);
-        } else if (mana.getWhite() > 0) {
+        } else if (manaTemplate.getWhite() > 0) {
             computedMana.setWhite(count);
-        } else if (mana.getColorless() > 0) {
+        } else if (manaTemplate.getColorless() > 0) {
             computedMana.setColorless(count);
-        } else if (mana.getAny() > 0) {
+        } else if (manaTemplate.getAny() > 0) {
             if (netMana) {
                 computedMana.setAny(count);
             } else {

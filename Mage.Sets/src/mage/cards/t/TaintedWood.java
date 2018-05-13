@@ -30,7 +30,7 @@ package mage.cards.t;
 import mage.Mana;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.BasicManaEffect;
+import mage.abilities.effects.mana.BasicManaEffect;
 import mage.abilities.mana.ActivateIfConditionManaAbility;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;

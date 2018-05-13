@@ -12,6 +12,7 @@ import mage.constants.TargetController;
 import mage.filter.common.*;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.mageobject.MulticoloredPredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -377,10 +378,18 @@ public final class StaticFilters {
     static {
         FILTER_SPELL.setLockedFilter(true);
     }
-    public static final FilterSpell FILTER_A_SPELL = new FilterSpell("a spell");
+
+    public static final FilterSpell FILTER_SPELL_A = new FilterSpell("a spell");
 
     static {
-        FILTER_A_SPELL.setLockedFilter(true);
+        FILTER_SPELL_A.setLockedFilter(true);
+    }
+
+    public static final FilterSpell FILTER_SPELL_A_MULTICOLORED = new FilterSpell("a multicolored spell");
+
+    static {
+        FILTER_SPELL_A_MULTICOLORED.add(new MulticoloredPredicate());
+        FILTER_SPELL_A_MULTICOLORED.setLockedFilter(true);
     }
 
     public static final FilterSpell FILTER_INSTANT_OR_SORCERY_SPELL = new FilterSpell("instant or sorcery spell");

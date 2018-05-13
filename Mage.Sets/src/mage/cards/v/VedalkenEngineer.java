@@ -34,10 +34,9 @@ import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
-import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.ManaEffect;
-import mage.abilities.mana.ActivatedManaAbilityImpl;
+import mage.abilities.mana.SimpleManaAbility;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -64,7 +63,7 @@ public class VedalkenEngineer extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {tap}: Add two mana of any one color. Spend this mana only to cast artifact spells or activate abilities of artifacts.
-        this.addAbility(new VedalkenEngineerAbility(new TapSourceCost(), 2, new VedalkenEngineerManaBuilder()));
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new VedalkenEngineerEffect(2, new VedalkenEngineerManaBuilder()), new TapSourceCost()));
     }
 
     public VedalkenEngineer(final VedalkenEngineer card) {
@@ -110,23 +109,6 @@ class VedalkenEngineerManaCondition implements Condition {
     }
 }
 
-class VedalkenEngineerAbility extends ActivatedManaAbilityImpl {
-
-    public VedalkenEngineerAbility(Cost cost, int amount, ConditionalManaBuilder manaBuilder) {
-        super(Zone.BATTLEFIELD, new VedalkenEngineerEffect(amount, manaBuilder), cost);
-        this.netMana.add(new Mana(0, 0, 0, 0, 0, 0, amount, 0));
-    }
-
-    public VedalkenEngineerAbility(final VedalkenEngineerAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public VedalkenEngineerAbility copy() {
-        return new VedalkenEngineerAbility(this);
-    }
-}
-
 class VedalkenEngineerEffect extends ManaEffect {
 
     private final int amount;
@@ -153,19 +135,23 @@ class VedalkenEngineerEffect extends ManaEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        ChoiceColor choiceColor = new ChoiceColor(true);
-        if (controller != null && controller.choose(Outcome.Benefit, choiceColor, game)) {
-            Mana mana = choiceColor.getMana(amount);
-            Mana condMana = manaBuilder.setMana(mana, source, game).build();
-            checkToFirePossibleEvents(condMana, game, source);
-            controller.getManaPool().addMana(condMana, game, source);
+        if (controller != null) {
+            checkToFirePossibleEvents(getMana(game, source), game, source);
+            controller.getManaPool().addMana(getMana(game, source), game, source);
             return true;
         }
         return false;
     }
 
     @Override
-    public Mana getMana(Game game, Ability source) {
+    public Mana produceMana(boolean netMana, Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        ChoiceColor choiceColor = new ChoiceColor(true);
+        if (controller != null && controller.choose(Outcome.Benefit, choiceColor, game)) {
+
+            Mana condMana = manaBuilder.setMana(choiceColor.getMana(amount), source, game).build();
+            return condMana;
+        }
         return null;
     }
 

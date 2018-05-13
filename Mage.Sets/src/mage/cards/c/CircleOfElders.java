@@ -33,7 +33,7 @@ import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.FormidableCondition;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.BasicManaEffect;
+import mage.abilities.effects.mana.BasicManaEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.abilities.mana.ActivateIfConditionManaAbility;
 import mage.cards.CardImpl;

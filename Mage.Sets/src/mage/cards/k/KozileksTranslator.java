@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.costs.common.PayLifeCost;
-import mage.abilities.effects.common.BasicManaEffect;
+import mage.abilities.effects.mana.BasicManaEffect;
 import mage.abilities.keyword.DevoidAbility;
 import mage.abilities.mana.ActivateOncePerTurnManaAbility;
 import mage.cards.CardImpl;

@@ -42,7 +42,7 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DynamicManaEffect;
+import mage.abilities.effects.mana.DynamicManaEffect;
 import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.Card;

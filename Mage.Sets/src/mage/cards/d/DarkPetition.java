@@ -32,7 +32,7 @@ import mage.Mana;
 import mage.abilities.condition.common.SpellMasteryCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.AddManaToManaPoolSourceControllerEffect;
+import mage.abilities.effects.mana.AddManaToManaPoolSourceControllerEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;

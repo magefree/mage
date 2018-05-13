@@ -30,7 +30,7 @@ package mage.cards.o;
 import java.util.UUID;
 import mage.abilities.common.TapForManaAllTriggeredAbility;
 import mage.abilities.common.TapForManaAllTriggeredManaAbility;
-import mage.abilities.effects.common.AddManaOfAnyTypeProducedEffect;
+import mage.abilities.effects.mana.AddManaOfAnyTypeProducedEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;

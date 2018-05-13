@@ -29,8 +29,8 @@ package mage.abilities.mana;
 
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
-import mage.abilities.effects.common.AddConditionalColorlessManaEffect;
-import mage.abilities.effects.common.BasicManaEffect;
+import mage.abilities.effects.mana.AddConditionalColorlessManaEffect;
+import mage.abilities.effects.mana.BasicManaEffect;
 import mage.constants.Zone;
 import mage.game.Game;
 
@@ -38,7 +38,7 @@ public class ActivateIfConditionManaAbility extends ActivatedManaAbilityImpl {
 
     public ActivateIfConditionManaAbility(Zone zone, BasicManaEffect effect, Cost cost, Condition condition) {
         super(zone, effect, cost);
-        this.netMana.add(effect.getMana());
+        this.netMana.add(effect.getManaTemplate());
         this.condition = condition;
     }
 

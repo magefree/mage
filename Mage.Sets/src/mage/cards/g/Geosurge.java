@@ -33,7 +33,7 @@ import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.effects.common.BasicManaEffect;
+import mage.abilities.effects.mana.BasicManaEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;

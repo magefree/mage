@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.AddManaOfAnyColorEffect;
+import mage.abilities.effects.mana.AddManaOfAnyColorEffect;
 import mage.abilities.effects.common.BecomesMonarchSourceEffect;
 import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.keyword.TrampleAbility;

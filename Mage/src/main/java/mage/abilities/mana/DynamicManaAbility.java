@@ -33,7 +33,7 @@ import mage.Mana;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.common.DynamicManaEffect;
+import mage.abilities.effects.mana.DynamicManaEffect;
 import mage.constants.Zone;
 import mage.game.Game;
 
@@ -111,7 +111,7 @@ public class DynamicManaAbility extends ActivatedManaAbilityImpl {
         if (game != null) {
             // TODO: effects from replacement effects like Mana Reflection are not considered yet
             // TODO: effects that need a X payment (e.g. Mage-Ring Network) return always 0
-            newNetMana.add(manaEffect.computeMana(true, game, this));
+            newNetMana.addAll(manaEffect.getNetMana(game, this));
         }
         return newNetMana;
     }

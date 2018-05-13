@@ -44,9 +44,7 @@ import mage.constants.Outcome;
 import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.FilterSpell;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.MulticoloredPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -60,12 +58,6 @@ import mage.target.common.TargetControlledPermanent;
  * @author LevelX2
  */
 public class BoundDetermined extends SplitCard {
-
-    private static final FilterSpell filter = new FilterSpell("multicolored spell");
-
-    static {
-        filter.add(new MulticoloredPredicate());
-    }
 
     public BoundDetermined(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{B}{G}", "{G}{U}", SpellAbilityType.SPLIT);

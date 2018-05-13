@@ -50,7 +50,7 @@ import mage.players.Player;
 public class BloomTender extends CardImpl {
 
     public BloomTender(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.subtype.add(SubType.ELF, SubType.DRUID);
 
         this.power = new MageInt(1);
@@ -93,38 +93,32 @@ class BloomTenderEffect extends ManaEffect {
         if (controller != null) {
             Mana mana = getMana(game, source);
             checkToFirePossibleEvents(mana, game, source);
-            controller.getManaPool().addMana(mana, game, source);            
+            controller.getManaPool().addMana(mana, game, source);
             return true;
         }
         return false;
     }
 
     @Override
-    public Mana getMana(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Mana mana = new Mana();
-            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(controller.getId())) {
-                if (mana.getBlack() == 0 && permanent.getColor(game).isBlack()) {
-                    mana.increaseBlack();
-                }
-                if (mana.getBlue() == 0 && permanent.getColor(game).isBlue()) {
-                    mana.increaseBlue();
-                }
-                if (mana.getRed() == 0 && permanent.getColor(game).isRed()) {
-                    mana.increaseRed();
-                }
-                if (mana.getGreen() == 0 && permanent.getColor(game).isGreen()) {
-                    mana.increaseGreen();
-                }
-                if (mana.getWhite() == 0 && permanent.getColor(game).isWhite()) {
-                    mana.increaseWhite();
-                }
+    public Mana produceMana(boolean netMana, Game game, Ability source) {
+        Mana mana = new Mana();
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(source.getControllerId())) {
+            if (mana.getBlack() == 0 && permanent.getColor(game).isBlack()) {
+                mana.increaseBlack();
             }
-            return mana;
+            if (mana.getBlue() == 0 && permanent.getColor(game).isBlue()) {
+                mana.increaseBlue();
+            }
+            if (mana.getRed() == 0 && permanent.getColor(game).isRed()) {
+                mana.increaseRed();
+            }
+            if (mana.getGreen() == 0 && permanent.getColor(game).isGreen()) {
+                mana.increaseGreen();
+            }
+            if (mana.getWhite() == 0 && permanent.getColor(game).isWhite()) {
+                mana.increaseWhite();
+            }
         }
-        return null;
+        return mana;
     }
-
-
 }

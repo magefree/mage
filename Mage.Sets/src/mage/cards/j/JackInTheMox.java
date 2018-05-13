@@ -91,44 +91,50 @@ class JackInTheMoxManaEffect extends ManaEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (controller != null && permanent != null) {
-            int amount = controller.rollDice(game, 6);
-            switch (amount) {
-                case 1:
-                    permanent.sacrifice(source.getSourceId(), game);
-                    controller.loseLife(5, game, false);
-                    break;
-                case 2:
-                    controller.getManaPool().addMana(Mana.WhiteMana(1), game, source);
-                    break;
-                case 3:
-                    controller.getManaPool().addMana(Mana.BlueMana(1), game, source);
-                    break;
-                case 4:
-                    controller.getManaPool().addMana(Mana.BlackMana(1), game, source);
-                    break;
-                case 5:
-                    controller.getManaPool().addMana(Mana.RedMana(1), game, source);
-                    break;
-                case 6:
-                    controller.getManaPool().addMana(Mana.GreenMana(1), game, source);
-                    break;
-                default:
-                    break;
-            }
+        if (controller != null) {
+            controller.getManaPool().addMana(getMana(game, source), game, source);
             return true;
         }
         return false;
     }
 
     @Override
-    public JackInTheMoxManaEffect copy() {
-        return new JackInTheMoxManaEffect(this);
+    public Mana produceMana(boolean netMana, Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (controller != null && permanent != null) {
+            int amount = controller.rollDice(game, 6);
+            Mana mana = new Mana();
+            switch (amount) {
+                case 1:
+                    permanent.sacrifice(source.getSourceId(), game);
+                    controller.loseLife(5, game, false);
+                    break;
+                case 2:
+                    mana.add(Mana.WhiteMana(1));
+                    break;
+                case 3:
+                    mana.add(Mana.BlueMana(1));
+                    break;
+                case 4:
+                    mana.add(Mana.BlackMana(1));
+                    break;
+                case 5:
+                    mana.add(Mana.RedMana(1));
+                    break;
+                case 6:
+                    mana.add(Mana.GreenMana(1));
+                    break;
+                default:
+                    break;
+            }
+            return mana;
+        }
+        return null;
     }
 
     @Override
-    public Mana getMana(Game game, Ability source) {
-        return null;
+    public JackInTheMoxManaEffect copy() {
+        return new JackInTheMoxManaEffect(this);
     }
 }

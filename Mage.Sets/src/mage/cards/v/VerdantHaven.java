@@ -30,7 +30,7 @@ package mage.cards.v;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.AddManaAnyColorAttachedControllerEffect;
+import mage.abilities.effects.mana.AddManaAnyColorAttachedControllerEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.EnchantAbility;

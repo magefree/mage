@@ -1386,7 +1386,7 @@ public abstract class GameImpl implements Game, Serializable {
                     } catch (Exception ex) {
                         logger.fatal("Game exception gameId: " + getId(), ex);
                         if ((ex instanceof NullPointerException)
-                                && errorContinueCounter == 1 && ex.getStackTrace() != null) {
+                                && errorContinueCounter == 0 && ex.getStackTrace() != null) {
                             logger.fatal(ex.getStackTrace());
                         }
                         this.fireErrorEvent("Game exception occurred: ", ex);

@@ -32,7 +32,7 @@ import mage.MageInt;
 import mage.Mana;
 import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.AddManaToManaPoolSourceControllerEffect;
+import mage.abilities.effects.mana.AddManaToManaPoolSourceControllerEffect;
 import mage.abilities.keyword.MorphAbility;
 import mage.abilities.mana.BlueManaAbility;
 import mage.abilities.mana.GreenManaAbility;

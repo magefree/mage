@@ -37,6 +37,7 @@ import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
+import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.Choice;
@@ -64,7 +65,7 @@ public class StarCompass extends CardImpl {
         // Star Compass enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
         // {tap}: Add one mana of any color that a basic land you control could produce.
-        this.addAbility(new StarCompassManaAbility());
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new StarCompassManaEffect(), new TapSourceCost()));
     }
 
     public StarCompass(final StarCompass card) {
@@ -74,27 +75,6 @@ public class StarCompass extends CardImpl {
     @Override
     public StarCompass copy() {
         return new StarCompass(this);
-    }
-}
-
-class StarCompassManaAbility extends ActivatedManaAbilityImpl {
-
-    public StarCompassManaAbility() {
-        super(Zone.BATTLEFIELD, new StarCompassManaEffect(), new TapSourceCost());
-    }
-
-    public StarCompassManaAbility(final StarCompassManaAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public StarCompassManaAbility copy() {
-        return new StarCompassManaAbility(this);
-    }
-
-    @Override
-    public List<Mana> getNetMana(Game game) {
-        return ((StarCompassManaEffect) getEffects().get(0)).getNetMana(game, this);
     }
 }
 
@@ -187,6 +167,76 @@ class StarCompassManaEffect extends ManaEffect {
         return true;
     }
 
+    @Override
+    public Mana produceMana(boolean netMana, Game game, Ability source) {
+        Mana types = getManaTypes(game, source);
+        Choice choice = new ChoiceColor(true);
+        choice.getChoices().clear();
+        choice.setMessage("Pick a mana color");
+        if (types.getBlack() > 0) {
+            choice.getChoices().add("Black");
+        }
+        if (types.getRed() > 0) {
+            choice.getChoices().add("Red");
+        }
+        if (types.getBlue() > 0) {
+            choice.getChoices().add("Blue");
+        }
+        if (types.getGreen() > 0) {
+            choice.getChoices().add("Green");
+        }
+        if (types.getWhite() > 0) {
+            choice.getChoices().add("White");
+        }
+        if (types.getColorless() > 0) {
+            choice.getChoices().add("Colorless");
+        }
+        if (types.getAny() > 0) {
+            choice.getChoices().add("Black");
+            choice.getChoices().add("Red");
+            choice.getChoices().add("Blue");
+            choice.getChoices().add("Green");
+            choice.getChoices().add("White");
+            choice.getChoices().add("Colorless");
+        }
+        if (!choice.getChoices().isEmpty()) {
+            Player player = game.getPlayer(source.getControllerId());
+            if (choice.getChoices().size() == 1) {
+                choice.setChoice(choice.getChoices().iterator().next());
+            } else {
+                if (!player.choose(outcome, choice, game)) {
+                    return null;
+                }
+            }
+            if (choice.getChoice() != null) {
+                Mana mana = new Mana();
+                switch (choice.getChoice()) {
+                    case "Black":
+                        mana.setBlack(1);
+                        break;
+                    case "Blue":
+                        mana.setBlue(1);
+                        break;
+                    case "Red":
+                        mana.setRed(1);
+                        break;
+                    case "Green":
+                        mana.setGreen(1);
+                        break;
+                    case "White":
+                        mana.setWhite(1);
+                        break;
+                    case "Colorless":
+                        mana.setColorless(1);
+                        break;
+                }
+                return mana;
+            }
+        }
+        return null;
+    }
+
+    @Override
     public List<Mana> getNetMana(Game game, Ability source) {
         List<Mana> netManas = new ArrayList<>();
         Mana types = getManaTypes(game, source);
@@ -225,11 +275,6 @@ class StarCompassManaEffect extends ManaEffect {
             }
         }
         return types;
-    }
-
-    @Override
-    public Mana getMana(Game game, Ability source) {
-        return null;
     }
 
     @Override

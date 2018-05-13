@@ -34,7 +34,7 @@ import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.SpecialAction;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.BasicManaEffect;
+import mage.abilities.effects.mana.BasicManaEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.CreateSpecialActionEffect;
 import mage.abilities.effects.common.RemoveSpecialActionEffect;

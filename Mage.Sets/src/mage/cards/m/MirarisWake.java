@@ -30,7 +30,7 @@ package mage.cards.m;
 import java.util.UUID;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.TapForManaAllTriggeredManaAbility;
-import mage.abilities.effects.common.AddManaOfAnyTypeProducedEffect;
+import mage.abilities.effects.mana.AddManaOfAnyTypeProducedEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;

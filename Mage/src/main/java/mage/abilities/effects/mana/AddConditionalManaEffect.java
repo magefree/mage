@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mage.abilities.effects.common;
+package mage.abilities.effects.mana;
 
 import mage.Mana;
 import mage.abilities.Ability;
+import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.game.Game;
 import mage.players.Player;
@@ -49,7 +50,8 @@ public class AddConditionalManaEffect extends ManaEffect {
     }
 
     @Override
-    public Mana getMana(Game game, Ability source) {
+    public Mana produceMana(boolean netMana, Game game, Ability source) {
         return manaBuilder.setMana(mana, source, game).build();
     }
+
 }

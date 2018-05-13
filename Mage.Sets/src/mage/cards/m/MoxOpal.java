@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.MetalcraftCondition;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.AddManaOfAnyColorEffect;
+import mage.abilities.effects.mana.AddManaOfAnyColorEffect;
 import mage.abilities.mana.ActivateIfConditionManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;

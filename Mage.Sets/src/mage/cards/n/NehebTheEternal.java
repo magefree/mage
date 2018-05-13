@@ -92,23 +92,19 @@ class NehebTheEternalManaEffect extends ManaEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            OpponentsLostLifeCount dynamicValue = new OpponentsLostLifeCount();
-            int amount = dynamicValue.calculate(game, source, this);
-            if (amount > 0) {
-                controller.getManaPool().addMana(Mana.RedMana(amount), game, source);
-            }
+            controller.getManaPool().addMana(getMana(game, source), game, source);
             return true;
         }
         return false;
     }
 
     @Override
-    public NehebTheEternalManaEffect copy() {
-        return new NehebTheEternalManaEffect(this);
+    public Mana produceMana(boolean netMana, Game game, Ability source) {
+        return Mana.RedMana(new OpponentsLostLifeCount().calculate(game, source, this));
     }
 
     @Override
-    public Mana getMana(Game game, Ability source) {
-        return null;
+    public NehebTheEternalManaEffect copy() {
+        return new NehebTheEternalManaEffect(this);
     }
 }

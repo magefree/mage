@@ -69,6 +69,7 @@ public class VorinclexVoiceOfHungerTest extends CardTestPlayerBase {
     @Test
     // @Ignore // TODO: need to fix Vorinclex, Voice of Hunger -- it's double fireup mana tap event
     public void testVorinclexVoiceofHungerRiverOfTearsManaMultiplier() {
+        // Mana pools don't empty as steps and phases end.
         addCard(Zone.BATTLEFIELD, playerA, "Upwelling", 1);
         addCard(Zone.HAND, playerA, "River of Tears", 1);
         // Trample

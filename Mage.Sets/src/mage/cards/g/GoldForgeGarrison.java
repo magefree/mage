@@ -33,7 +33,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.AddManaOfAnyColorEffect;
+import mage.abilities.effects.mana.AddManaOfAnyColorEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.mana.SimpleManaAbility;

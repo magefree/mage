@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksCreatureYouControlTriggeredAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
-import mage.abilities.effects.common.AddManaOfAnyColorEffect;
+import mage.abilities.effects.mana.AddManaOfAnyColorEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;

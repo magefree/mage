@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.g;
 
 import java.util.UUID;
@@ -35,10 +34,9 @@ import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.MulticoloredPredicate;
+import mage.constants.SubType;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -46,14 +44,8 @@ import mage.filter.predicate.mageobject.MulticoloredPredicate;
  */
 public class GloryscaleViashino extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("a multicolored spell");
-
-    static {
-        filter.add(new MulticoloredPredicate());
-    }
-
-    public GloryscaleViashino (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{G}{W}");
+    public GloryscaleViashino(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{G}{W}");
         this.subtype.add(SubType.VIASHINO);
         this.subtype.add(SubType.SOLDIER);
 
@@ -61,10 +53,10 @@ public class GloryscaleViashino extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever you cast a multicolored spell, Gloryscale Viashino gets +3/+3 until end of turn.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new BoostSourceEffect(3, 3, Duration.EndOfTurn), filter, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new BoostSourceEffect(3, 3, Duration.EndOfTurn), StaticFilters.FILTER_SPELL_A_MULTICOLORED, false));
     }
 
-    public GloryscaleViashino (final GloryscaleViashino card) {
+    public GloryscaleViashino(final GloryscaleViashino card) {
         super(card);
     }
 

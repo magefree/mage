@@ -25,10 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.effects.common;
+package mage.abilities.effects.mana;
 
 import mage.Mana;
 import mage.abilities.Ability;
+import mage.abilities.effects.common.ManaEffect;
 import mage.choices.Choice;
 import mage.choices.ChoiceColor;
 import mage.game.Game;
@@ -58,6 +59,24 @@ public class AddManaOfAnyTypeProducedEffect extends ManaEffect {
             if (targetController == null) {
                 return false;
             }
+            checkToFirePossibleEvents(getMana(game, source), game, source);
+            targetController.getManaPool().addMana(getMana(game, source), game, source);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public Mana produceMana(boolean netMana, Game game, Ability source) {
+        if (netMana) {
+            return null;
+        }
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+        if (permanent != null) {
+            Player targetController = game.getPlayer(permanent.getControllerId());
+            if (targetController == null) {
+                return null;
+            }
             Mana types = (Mana) this.getValue("mana");
             Choice choice = new ChoiceColor(true);
             choice.getChoices().clear();
@@ -80,15 +99,16 @@ public class AddManaOfAnyTypeProducedEffect extends ManaEffect {
             if (types.getColorless() > 0) {
                 choice.getChoices().add("Colorless");
             }
+            Mana newMana = new Mana();
             if (!choice.getChoices().isEmpty()) {
                 if (choice.getChoices().size() == 1) {
                     choice.setChoice(choice.getChoices().iterator().next());
                 } else {
                     if (!targetController.choose(outcome, choice, game)) {
-                        return false;
+                        return null;
                     }
                 }
-                Mana newMana = new Mana();
+
                 switch (choice.getChoice()) {
                     case "Black":
                         newMana.setBlack(1);
@@ -109,13 +129,10 @@ public class AddManaOfAnyTypeProducedEffect extends ManaEffect {
                         newMana.setColorless(1);
                         break;
                 }
-                checkToFirePossibleEvents(newMana, game, source);
-                targetController.getManaPool().addMana(newMana, game, source);
-
             }
-            return true;
+            return newMana;
         }
-        return false;
+        return null;
     }
 
     @Override
@@ -123,8 +140,4 @@ public class AddManaOfAnyTypeProducedEffect extends ManaEffect {
         return new AddManaOfAnyTypeProducedEffect(this);
     }
 
-    @Override
-    public Mana getMana(Game game, Ability source) {
-        return null;
-    }
 }

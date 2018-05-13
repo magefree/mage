@@ -32,7 +32,7 @@ import mage.MageInt;
 import mage.Mana;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.ChancellorAbility;
-import mage.abilities.effects.common.BasicManaEffect;
+import mage.abilities.effects.mana.BasicManaEffect;
 import mage.abilities.keyword.ReachAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;

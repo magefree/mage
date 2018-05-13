@@ -28,7 +28,7 @@
 package mage.cards.m;
 
 import java.util.UUID;
-import mage.abilities.effects.common.AddManaInAnyCombinationEffect;
+import mage.abilities.effects.mana.AddManaInAnyCombinationEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;

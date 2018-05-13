@@ -27,6 +27,7 @@
  */
 package mage.cards.n;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import mage.Mana;
@@ -54,7 +55,7 @@ import mage.players.Player;
 public class NykthosShrineToNyx extends CardImpl {
 
     public NykthosShrineToNyx(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
         addSuperType(SuperType.LEGENDARY);
 
         // {T}: Add {C}.
@@ -94,9 +95,7 @@ class NykthosShrineToNyxManaAbility extends ActivatedManaAbilityImpl {
     public List<Mana> getNetMana(Game game) {
         netMana.clear();
         if (game != null) {
-            for (String colorChoice : ChoiceColor.getBaseColors()) {
-                netMana.add(((NykthosDynamicManaEffect) this.getEffects().get(0)).computeMana(colorChoice, game, this));
-            }
+            netMana.addAll(((ManaEffect) this.getEffects().get(0)).getNetMana(game, this));
         }
         return netMana;
     }
@@ -104,17 +103,13 @@ class NykthosShrineToNyxManaAbility extends ActivatedManaAbilityImpl {
 
 class NykthosDynamicManaEffect extends ManaEffect {
 
-    private final Mana computedMana;
-
     public NykthosDynamicManaEffect() {
         super();
-        computedMana = new Mana();
         this.staticText = "Choose a color. Add an amount of mana of that color equal to your devotion to that color. <i>(Your devotion to a color is the number of mana symbols of that color in the mana costs of permanents you control.)</i>";
     }
 
     public NykthosDynamicManaEffect(final NykthosDynamicManaEffect effect) {
         super(effect);
-        this.computedMana = effect.computedMana.copy();
     }
 
     @Override
@@ -126,45 +121,57 @@ class NykthosDynamicManaEffect extends ManaEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            ChoiceColor choice = new ChoiceColor();
-            choice.setMessage("Choose a color for devotion of Nykthos");
-            if (controller.choose(outcome, choice, game)) {
-                computeMana(choice.getChoice(), game, source);
-                checkToFirePossibleEvents(computedMana, game, source);
-                controller.getManaPool().addMana(computedMana, game, source);
-                return true;
-            }
+            checkToFirePossibleEvents(getMana(game, source), game, source);
+            controller.getManaPool().addMana(getMana(game, source), game, source);
+            return true;
         }
         return false;
 
     }
 
     @Override
-    public Mana getMana(Game game, Ability source) {
+    public List<Mana> getNetMana(Game game, Ability source) {
+        List<Mana> netMana = new ArrayList<>();
+        for (String colorChoice : ChoiceColor.getBaseColors()) {
+            netMana.add(computeMana(colorChoice, game, source));
+        }
+        return netMana;
+    }
+
+    @Override
+    public Mana produceMana(boolean netMana, Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            ChoiceColor choice = new ChoiceColor();
+            choice.setMessage("Choose a color for devotion of Nykthos");
+            if (controller.choose(outcome, choice, game)) {
+                return computeMana(choice.getChoice(), game, source);
+            }
+        }
         return null;
     }
 
     public Mana computeMana(String color, Game game, Ability source) {
-        this.computedMana.clear();
+        Mana mana = new Mana();
         if (color != null && !color.isEmpty()) {
             switch (color) {
                 case "Red":
-                    computedMana.setRed(new DevotionCount(ColoredManaSymbol.R).calculate(game, source, this));
+                    mana.setRed(new DevotionCount(ColoredManaSymbol.R).calculate(game, source, this));
                     break;
                 case "Blue":
-                    computedMana.setBlue(new DevotionCount(ColoredManaSymbol.U).calculate(game, source, this));
+                    mana.setBlue(new DevotionCount(ColoredManaSymbol.U).calculate(game, source, this));
                     break;
                 case "White":
-                    computedMana.setWhite(new DevotionCount(ColoredManaSymbol.W).calculate(game, source, this));
+                    mana.setWhite(new DevotionCount(ColoredManaSymbol.W).calculate(game, source, this));
                     break;
                 case "Black":
-                    computedMana.setBlack(new DevotionCount(ColoredManaSymbol.B).calculate(game, source, this));
+                    mana.setBlack(new DevotionCount(ColoredManaSymbol.B).calculate(game, source, this));
                     break;
                 case "Green":
-                    computedMana.setGreen(new DevotionCount(ColoredManaSymbol.G).calculate(game, source, this));
+                    mana.setGreen(new DevotionCount(ColoredManaSymbol.G).calculate(game, source, this));
                     break;
             }
         }
-        return computedMana.copy();
+        return mana;
     }
 }

@@ -1763,7 +1763,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         }
         //TODO: improve this
         if (min < max && min == 0) {
-            return RandomUtil.nextInt(max);
+            return RandomUtil.nextInt(max + 1);
         }
         return min;
     }

@@ -29,7 +29,7 @@ package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.AddManaOfAnyColorEffect;
+import mage.abilities.effects.mana.AddManaOfAnyColorEffect;
 import mage.abilities.mana.ConditionalAnyColorManaAbility;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.abilities.mana.conditional.ConditionalSpellManaBuilder;

@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mage.abilities.effects.common;
+package mage.abilities.effects.mana;
 
 import mage.Mana;
 import mage.abilities.Ability;
+import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.game.Game;
 import mage.players.Player;
@@ -42,16 +43,16 @@ public class AddConditionalColorlessManaEffect extends ManaEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            player.getManaPool().addMana(getMana(game, source), game, source);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            controller.getManaPool().addMana(getMana(game, source), game, source);
             return true;
         }
         return false;
     }
 
     @Override
-    public Mana getMana(Game game, Ability source) {
+    public Mana produceMana(boolean netMana, Game game, Ability source) {
         return manaBuilder.setMana(Mana.ColorlessMana(amount), source, game).build();
     }
 

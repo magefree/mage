@@ -38,7 +38,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterObject;
-import mage.filter.FilterSpell;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.MulticoloredPredicate;
 
 /**
@@ -47,15 +47,14 @@ import mage.filter.predicate.mageobject.MulticoloredPredicate;
  */
 public class SoldierOfThePantheon extends CardImpl {
 
-    private static final FilterSpell filterSpell = new FilterSpell("multicolored spell");
     private static final FilterObject filter = new FilterObject("multicolored");
+
     static {
         filter.add(new MulticoloredPredicate());
-        filterSpell.add(new MulticoloredPredicate());
     }
 
     public SoldierOfThePantheon(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SOLDIER);
 
@@ -65,7 +64,7 @@ public class SoldierOfThePantheon extends CardImpl {
         // Protection from multicolored
         this.addAbility(new ProtectionAbility(filter));
         // Whenever an opponent casts a multicolored spell, you gain 1 life.
-        this.addAbility(new SpellCastOpponentTriggeredAbility(Zone.BATTLEFIELD, new GainLifeEffect(1), filterSpell, false));
+        this.addAbility(new SpellCastOpponentTriggeredAbility(Zone.BATTLEFIELD, new GainLifeEffect(1), StaticFilters.FILTER_SPELL_A_MULTICOLORED, false));
 
     }
 

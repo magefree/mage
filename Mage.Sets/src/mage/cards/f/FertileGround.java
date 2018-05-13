@@ -29,7 +29,7 @@ package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.effects.common.AddManaAnyColorAttachedControllerEffect;
+import mage.abilities.effects.mana.AddManaAnyColorAttachedControllerEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.mana.TriggeredManaAbility;

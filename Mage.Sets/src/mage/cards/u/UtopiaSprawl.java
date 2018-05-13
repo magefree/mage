@@ -58,7 +58,7 @@ public class UtopiaSprawl extends CardImpl {
     private static final FilterLandPermanent filter = new FilterLandPermanent(SubType.FOREST, "Forest");
 
     public UtopiaSprawl(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{G}");
         this.subtype.add(SubType.AURA);
 
         // Enchant Forest
@@ -143,7 +143,7 @@ class UtopiaSprawlEffect extends ManaEffect {
     }
 
     @Override
-    public Mana getMana(Game game, Ability source) {
+    public Mana produceMana(boolean netMana, Game game, Ability source) {
         ObjectColor color = (ObjectColor) game.getState().getValue(source.getSourceId() + "_color");
         if (color != null) {
             return new Mana(ColoredManaSymbol.lookup(color.toString().charAt(0)));

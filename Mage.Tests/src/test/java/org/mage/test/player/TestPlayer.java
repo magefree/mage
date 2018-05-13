@@ -445,7 +445,7 @@ public class TestPlayer implements Player {
                             } else {
                                 game.restoreState(bookmark, ability.getRule());
                             }
-
+                            groupsForTargetHandling = null;
                         }
                     }
                 } else if (action.getAction().startsWith("manaActivate:")) {
