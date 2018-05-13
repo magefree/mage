@@ -31,6 +31,7 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.keyword.FlyingAbility;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -64,6 +65,8 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
         this.power = power;
         this.toughness = toughness;
         setText();
+
+        this.addDependencyType(DependencyType.BecomeCreature);
     }
 
     public BecomesCreatureSourceEffect(final BecomesCreatureSourceEffect effect) {
@@ -110,6 +113,7 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
                         for (CardType cardType : token.getCardType()) {
                             permanent.addCardType(cardType);
                         }
+
                         if (theyAreStillType != null && theyAreStillType.isEmpty() || theyAreStillType == null && permanent.isLand()) {
                             permanent.getSubtype(game).retainAll(SubType.getLandTypes(false));
                         }
