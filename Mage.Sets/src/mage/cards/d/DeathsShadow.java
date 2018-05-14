@@ -47,14 +47,14 @@ import mage.constants.Zone;
 public class DeathsShadow extends CardImpl {
 
     public DeathsShadow(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}");
         this.subtype.add(SubType.AVATAR);
 
         this.power = new MageInt(13);
         this.toughness = new MageInt(13);
 
         // Death's Shadow gets -X/-X, where X is your life total.
-        SignInversionDynamicValue x = new SignInversionDynamicValue(new ControllerLifeCount());
+        SignInversionDynamicValue x = new SignInversionDynamicValue(new ControllerLifeCount(), false);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(x, x, Duration.WhileOnBattlefield)));
     }
 
