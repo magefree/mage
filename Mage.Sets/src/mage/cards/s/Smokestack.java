@@ -37,7 +37,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
-import mage.counters.Counter;
+import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -52,10 +52,10 @@ import mage.target.common.TargetControlledPermanent;
 public class Smokestack extends CardImpl {
 
     public Smokestack(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // At the beginning of your upkeep, you may put a soot counter on Smokestack.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(new Counter("Soot")), TargetController.YOU, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.SOOT.createInstance()), TargetController.YOU, true));
 
         // At the beginning of each player's upkeep, that player sacrifices a permanent for each soot counter on Smokestack.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SmokestackEffect(), TargetController.ANY, false));
@@ -92,7 +92,7 @@ class SmokestackEffect extends OneShotEffect {
         Player activePlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (activePlayer != null && sourcePermanent != null) {
-            int count = sourcePermanent.getCounters(game).getCount("Soot");
+            int count = sourcePermanent.getCounters(game).getCount(CounterType.SOOT);
             if (count > 0) {
                 int amount = Math.min(count, game.getBattlefield().countAll(new FilterControlledPermanent(), activePlayer.getId(), game));
                 Target target = new TargetControlledPermanent(amount, amount, new FilterControlledPermanent(), true);

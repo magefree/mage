@@ -38,7 +38,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.InspiredAbility;
 import mage.cards.*;
 import mage.constants.*;
-import mage.counters.Counter;
+import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -116,7 +116,7 @@ class ArbiterOfTheIdealEffect extends OneShotEffect {
                 controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                 Permanent permanent = game.getPermanent(card.getId());
                 if (permanent != null) {
-                    permanent.addCounters(new Counter("Manifestation"), source, game);
+                    permanent.addCounters(CounterType.MANIFESTATION.createInstance(), source, game);
                     ContinuousEffect effect = new AddCardTypeTargetEffect(Duration.Custom, CardType.ENCHANTMENT);
                     effect.setTargetPointer(new FixedTarget(permanent, game));
                     game.addEffect(effect, source);

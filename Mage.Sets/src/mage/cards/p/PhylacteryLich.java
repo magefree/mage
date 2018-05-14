@@ -41,7 +41,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.counters.Counter;
+import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
@@ -57,7 +57,7 @@ import mage.target.common.TargetControlledPermanent;
 public class PhylacteryLich extends CardImpl {
 
     public PhylacteryLich(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{B}{B}");
         this.subtype.add(SubType.ZOMBIE);
 
         this.power = new MageInt(5);
@@ -142,7 +142,7 @@ class PhylacteryLichEffect extends OneShotEffect {
                 if (player.choose(Outcome.Neutral, target, source.getSourceId(), game)) {
                     Permanent permanent = game.getPermanent(target.getFirstTarget());
                     if (permanent != null) {
-                        permanent.addCounters(new Counter("phylactery"), source, game);
+                        permanent.addCounters(CounterType.PHYLACTERY.createInstance(), source, game);
                     }
                 }
             }
