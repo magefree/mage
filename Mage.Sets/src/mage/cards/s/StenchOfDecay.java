@@ -34,6 +34,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
@@ -45,7 +46,7 @@ public class StenchOfDecay extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Nonartifact creatures");
 
     static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+        filter.add(Predicates.not(new CardTypePredicate(CardType.ARTIFACT)));
     }
 
     public StenchOfDecay(UUID ownerId, CardSetInfo setInfo) {
