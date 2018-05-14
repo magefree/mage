@@ -37,7 +37,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
@@ -47,8 +46,7 @@ import mage.players.Player;
 public class PrimalSurge extends CardImpl {
 
     public PrimalSurge(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{8}{G}{G}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{8}{G}{G}");
 
         // Exile the top card of your library. If it's a permanent card, you may put it onto the battlefield. If you do, repeat this process.
         this.getSpellAbility().addEffect(new PrimalSurgeEffect());
@@ -82,33 +80,24 @@ class PrimalSurgeEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
             return false;
         }
 
         boolean repeat;
         do {
             repeat = false;
-            if (player.getLibrary().hasCards()) {
-                Card card = player.getLibrary().removeFromTop(game);
-                if (card != null) {
-                    card.moveToExile(null, "", source.getSourceId(), game);
-                    if (card.isPermanent()
-                            && player.chooseUse(Outcome.PutCardInPlay, "Put " + card.getName() + " onto the battlefield?", source, game)) {
-                        card.moveToZone(Zone.BATTLEFIELD, source.getSourceId(), game, false);
-
-                        Permanent permanent = game.getPermanent(card.getId());
-                        if (permanent == null) {
-                            permanent = (Permanent) game.getLastKnownInformation(card.getId(), Zone.BATTLEFIELD);
-                        }
-                        if (permanent != null) {
-                            repeat = true;
-                        }
-                    }
+            Card card = controller.getLibrary().getFromTop(game);
+            if (card != null) {
+                controller.moveCards(card, Zone.EXILED, source, game);
+                if (card.isPermanent()
+                        && controller.chooseUse(Outcome.PutCardInPlay, "Put " + card.getName() + " onto the battlefield?", source, game)) {
+                    controller.moveCards(card, Zone.BATTLEFIELD, source, game);
+                    repeat = true;
                 }
             }
-        } while (player.canRespond() && repeat);
+        } while (controller.canRespond() && repeat);
 
         return true;
     }

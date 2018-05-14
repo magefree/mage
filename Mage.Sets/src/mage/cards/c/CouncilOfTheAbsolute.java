@@ -37,7 +37,6 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.NameACardEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
-import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -54,7 +53,7 @@ import mage.util.CardUtil;
 public class CouncilOfTheAbsolute extends CardImpl {
 
     public CouncilOfTheAbsolute(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{U}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ADVISOR);
 
@@ -147,7 +146,7 @@ class CouncilOfTheAbsoluteCostReductionEffect extends CostModificationEffectImpl
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if ((abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility)
+        if ((abilityToModify instanceof SpellAbility)
                 && abilityToModify.getControllerId().equals(source.getControllerId())) {
             Card card = game.getCard(abilityToModify.getSourceId());
             return card.getName().equals(game.getState().getValue(source.getSourceId().toString() + NameACardEffect.INFO_KEY));

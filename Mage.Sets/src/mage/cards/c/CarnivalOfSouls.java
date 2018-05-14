@@ -32,7 +32,7 @@ import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.AddManaToManaPoolSourceControllerEffect;
+import mage.abilities.effects.mana.AddManaToManaPoolSourceControllerEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;

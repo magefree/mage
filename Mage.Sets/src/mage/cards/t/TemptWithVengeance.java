@@ -67,7 +67,7 @@ class TemptWithVengeanceEffect extends OneShotEffect {
 
     public TemptWithVengeanceEffect() {
         super(Outcome.PutLandInPlay);
-        this.staticText = "<i>Tempting offer</i> - create X 1/1 red Elemental creature tokens with haste. Each opponent may create X 1/1 red Elemental creature tokens with haste. For each player who does, create X 1/1 red Elemental creature tokens with haste";
+        this.staticText = "<i>Tempting offer</i> &mdash; create X 1/1 red Elemental creature tokens with haste. Each opponent may create X 1/1 red Elemental creature tokens with haste. For each player who does, create X 1/1 red Elemental creature tokens with haste";
     }
 
     public TemptWithVengeanceEffect(final TemptWithVengeanceEffect effect) {

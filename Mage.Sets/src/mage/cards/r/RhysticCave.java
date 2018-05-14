@@ -34,9 +34,9 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.BasicManaEffect;
-import mage.abilities.effects.common.DoUnlessAnyPlayerPaysManaEffect;
 import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.effects.mana.BasicManaEffect;
+import mage.abilities.effects.mana.DoUnlessAnyPlayerPaysManaEffect;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -108,29 +108,32 @@ class RhysticCaveManaAbility extends ActivatedManaAbilityImpl {
 
 class RhysticCaveManaEffect extends ManaEffect {
 
-    private final Mana chosenMana;
-
     public RhysticCaveManaEffect() {
         super();
-        chosenMana = new Mana();
         this.staticText = "Choose a color. Add one mana of that color ";
     }
 
     public RhysticCaveManaEffect(final RhysticCaveManaEffect effect) {
         super(effect);
-        this.chosenMana = effect.chosenMana.copy();
-    }
-
-    @Override
-    public Mana getMana(Game game, Ability source) {
-        return null;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            checkToFirePossibleEvents(getMana(game, source), game, source);
+            controller.getManaPool().addMana(getMana(game, source), game, source);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public Mana produceMana(boolean netMana, Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
         ChoiceColor choice = new ChoiceColor(true);
         if (controller != null && controller.choose(outcome, choice, game)) {
+            Mana chosenMana = new Mana();
             switch (choice.getColor().toString()) {
                 case "R":
                     chosenMana.setRed(1);
@@ -148,11 +151,9 @@ class RhysticCaveManaEffect extends ManaEffect {
                     chosenMana.setGreen(1);
                     break;
             }
-            checkToFirePossibleEvents(chosenMana, game, source);
-            controller.getManaPool().addMana(chosenMana, game, source);
-            return true;
+            return chosenMana;
         }
-        return false;
+        return null;
     }
 
     @Override

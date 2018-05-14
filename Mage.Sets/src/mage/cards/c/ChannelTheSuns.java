@@ -30,7 +30,7 @@ package mage.cards.c;
 import java.util.UUID;
 import mage.Mana;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.AddManaToManaPoolSourceControllerEffect;
+import mage.abilities.effects.mana.AddManaToManaPoolSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;

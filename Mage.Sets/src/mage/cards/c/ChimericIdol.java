@@ -28,6 +28,7 @@
 package mage.cards.c;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -43,19 +44,23 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
+import mage.game.permanent.token.custom.CreatureToken;
 
 /**
- *
  * @author LevelX2
  */
 public class ChimericIdol extends CardImpl {
 
     public ChimericIdol(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // {0}: Tap all lands you control. Chimeric Idol becomes a 3/3 Turtle artifact creature until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapAllEffect(new FilterControlledLandPermanent("lands you control")), new ManaCostsImpl("{0}"));
-        ability.addEffect(new BecomesCreatureSourceEffect(new ChimericIdolToken(), "", Duration.EndOfTurn));
+        ability.addEffect(new BecomesCreatureSourceEffect(
+                new CreatureToken(3, 3, "3/3 Turtle artifact creature")
+                        .withSubType(SubType.TURTLE)
+                        .withType(CardType.ARTIFACT),
+                "", Duration.EndOfTurn));
         this.addAbility(ability);
 
     }
@@ -67,24 +72,5 @@ public class ChimericIdol extends CardImpl {
     @Override
     public ChimericIdol copy() {
         return new ChimericIdol(this);
-    }
-}
-
-class ChimericIdolToken extends TokenImpl {
-
-    public ChimericIdolToken() {
-        super("Turtle", "3/3 Turtle artifact creature token");
-        cardType.add(CardType.ARTIFACT);
-        cardType.add(CardType.CREATURE);
-        subtype.add(SubType.TURTLE);
-        power = new MageInt(3);
-        toughness = new MageInt(3);
-    }
-    public ChimericIdolToken(final ChimericIdolToken token) {
-        super(token);
-    }
-
-    public ChimericIdolToken copy() {
-        return new ChimericIdolToken(this);
     }
 }

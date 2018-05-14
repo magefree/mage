@@ -41,6 +41,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TimingRule;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -53,8 +54,7 @@ import mage.target.TargetCard;
 public class TrackersInstincts extends CardImpl {
 
     public TrackersInstincts(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{G}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{G}");
 
         // Reveal the top four cards of your library. Put a creature card from among them into your hand and the rest into your graveyard.
         this.getSpellAbility().addEffect(new TrackersInstinctsEffect());
@@ -92,30 +92,17 @@ class TrackersInstinctsEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Cards cards = new CardsImpl();
-
-            boolean creaturesFound = false;
-            int count = Math.min(controller.getLibrary().size(), 4);
-            for (int i = 0; i < count; i++) {
-                Card card = controller.getLibrary().removeFromTop(game);
-                if (card != null) {
-                    cards.add(card);
-                    if (card.isCreature()) {
-                        creaturesFound = true;
-                    }
-                }
-            }
-
+            Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, 4));
+            boolean creaturesFound = cards.count(StaticFilters.FILTER_CARD_CREATURE, game) > 0;
             if (!cards.isEmpty()) {
-                controller.revealCards("Tracker's Instincts", cards, game);
+                controller.revealCards(source, cards, game);
                 TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCreatureCard("creature card to put in hand"));
                 if (creaturesFound && controller.choose(Outcome.DrawCard, cards, target, game)) {
                     Card card = game.getCard(target.getFirstTarget());
                     if (card != null) {
+                        controller.moveCards(card, Zone.HAND, source, game);
                         cards.remove(card);
-                        card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
                     }
-
                 }
                 controller.moveCards(cards, Zone.GRAVEYARD, source, game);
             }

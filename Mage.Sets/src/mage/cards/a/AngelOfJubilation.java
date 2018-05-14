@@ -38,7 +38,6 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
-import mage.abilities.keyword.FlashbackAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -63,7 +62,7 @@ public class AngelOfJubilation extends CardImpl {
     }
 
     public AngelOfJubilation(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{W}{W}");
         this.subtype.add(SubType.ANGEL);
 
         this.power = new MageInt(3);
@@ -117,36 +116,36 @@ class AngelOfJubilationEffect extends ContinuousEffectImpl {
 
 class AngelOfJubilationSacrificeFilterEffect extends CostModificationEffectImpl {
 
-	public AngelOfJubilationSacrificeFilterEffect() {
+    public AngelOfJubilationSacrificeFilterEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment, CostModificationType.SET_COST);
         staticText = "Players can't pay life or sacrifice creatures to cast spells or activate abilities";
-	}
-	
+    }
+
     protected AngelOfJubilationSacrificeFilterEffect(AngelOfJubilationSacrificeFilterEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
         for (Cost cost : abilityToModify.getCosts()) {
-			if(cost instanceof SacrificeTargetCost) {
-				SacrificeTargetCost sacrificeCost = (SacrificeTargetCost) cost;
-				Filter filter = sacrificeCost.getTargets().get(0).getFilter();
-				filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
-			}
-		}
+            if (cost instanceof SacrificeTargetCost) {
+                SacrificeTargetCost sacrificeCost = (SacrificeTargetCost) cost;
+                Filter filter = sacrificeCost.getTargets().get(0).getFilter();
+                filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
+            }
+        }
         return true;
     }
-    
+
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-    	return abilityToModify.getAbilityType() == AbilityType.ACTIVATED ||
-    			abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility;
+        return abilityToModify.getAbilityType() == AbilityType.ACTIVATED
+                || abilityToModify instanceof SpellAbility;
     }
 
-	@Override
-	public AngelOfJubilationSacrificeFilterEffect copy() {
-		return new AngelOfJubilationSacrificeFilterEffect(this);
-	}
-	
+    @Override
+    public AngelOfJubilationSacrificeFilterEffect copy() {
+        return new AngelOfJubilationSacrificeFilterEffect(this);
+    }
+
 }

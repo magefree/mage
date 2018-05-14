@@ -47,7 +47,7 @@ import mage.target.TargetPlayer;
 public class ElementalAugury extends CardImpl {
 
     public ElementalAugury(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{U}{B}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{U}{B}{R}");
 
         // {3}: Look at the top three cards of target player's library, then put them back in any order.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ElementalAuguryEffect(), new ManaCostsImpl("3"));
@@ -89,15 +89,8 @@ class ElementalAuguryEffect extends OneShotEffect {
                 || controller == null) {
             return false;
         }
-        Cards cards = new CardsImpl();
-        int count = Math.min(targetPlayer.getLibrary().size(), 3);
-        for (int i = 0; i < count; i++) {
-            Card card = targetPlayer.getLibrary().removeFromTop(game);
-            if (card != null) {
-                cards.add(card);
-            }
-        }
-        controller.lookAtCards("Elemental Augury", cards, game);
+        Cards cards = new CardsImpl(targetPlayer.getLibrary().getTopCards(game, 3));
+        controller.lookAtCards(source, null, cards, game);
         controller.putCardsOnTopOfLibrary(cards, game, source, true);
         return true;
     }

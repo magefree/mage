@@ -1083,7 +1083,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
                 && this.red >= mana.red
                 && this.colorless >= mana.colorless
                 && (this.generic >= mana.generic
-                || this.countColored() >= mana.countColored() + mana.generic);
+                || this.countColored() + this.colorless >= mana.count());
 
     }
 

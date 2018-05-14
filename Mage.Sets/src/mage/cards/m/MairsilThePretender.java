@@ -27,6 +27,7 @@
  */
 package mage.cards.m;
 
+import java.util.Objects;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -165,7 +166,7 @@ class MairsilThePretenderGainAbilitiesEffect extends ContinuousEffectImpl {
             return false;
         }
         for (Card card : game.getExile().getAllCards(game)) {
-            if (filter.match(card, game) && card.getOwnerId() == perm.getControllerId()) {
+            if (filter.match(card, game) && Objects.equals(card.getOwnerId(), perm.getControllerId())) {
                 for (Ability ability : card.getAbilities()) {
                     if (ability instanceof ActivatedAbility) {
                         ActivatedAbilityImpl copyAbility = (ActivatedAbilityImpl) ability.copy();

@@ -28,7 +28,6 @@
 package mage.cards.m;
 
 import java.util.UUID;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ContinuousEffect;
@@ -41,10 +40,10 @@ import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
+import mage.target.targetpointer.FixedTargets;
+import mage.util.CardUtil;
 
 /**
  *
@@ -91,17 +90,15 @@ class MindsDesireEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = source.getSourceObject(game);
-        if (controller != null && sourceObject != null) {
+        if (controller != null) {
             controller.shuffleLibrary(source, game);
-            if (controller.getLibrary().hasCards()) {
-                Card card = controller.getLibrary().removeFromTop(game);
-                if (card != null) {
-                    controller.moveCardToExileWithInfo(card, source.getSourceId(), sourceObject.getIdName(), source.getSourceId(), game, Zone.LIBRARY, true);
-                    ContinuousEffect effect = new MindsDesireCastFromExileEffect();
-                    effect.setTargetPointer(new FixedTarget(card.getId()));
-                    game.addEffect(effect, source);
-                }
+            Card card = controller.getLibrary().getFromTop(game);
+            if (card != null) {
+                UUID exileId = UUID.randomUUID();
+                controller.moveCardsToExile(card, source, game, true, exileId, CardUtil.createObjectRealtedWindowTitle(source, game, null));
+                ContinuousEffect effect = new MindsDesireCastFromExileEffect();
+                effect.setTargetPointer(new FixedTargets(game.getExile().getExileZone(exileId).getCards(game), game));
+                game.addEffect(effect, source);
             }
             return true;
         }
@@ -132,19 +129,15 @@ class MindsDesireCastFromExileEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (objectId != null && objectId.equals(getTargetPointer().getFirst(game, source))) {
-            if (affectedControllerId.equals(source.getControllerId())) {
-                Card card = game.getCard(objectId);
-                if (card != null && game.getState().getZone(objectId) == Zone.EXILED) {
-                    if (!card.isLand() && card.getSpellAbility().getCosts() != null) {
-                        Player player = game.getPlayer(affectedControllerId);
-                        if (player != null) {
-                            player.setCastSourceIdWithAlternateMana(objectId, null, card.getSpellAbility().getCosts());
-                        }
-                    }
-                    return true;
+        if (affectedControllerId.equals(source.getControllerId()) && getTargetPointer().getTargets(game, source).contains(objectId)) {
+            Card card = game.getCard(objectId);
+            if (card != null && !card.isLand() && card.getSpellAbility().getCosts() != null) {
+                Player player = game.getPlayer(affectedControllerId);
+                if (player != null) {
+                    player.setCastSourceIdWithAlternateMana(objectId, null, card.getSpellAbility().getCosts());
                 }
             }
+            return true;
         }
         return false;
     }

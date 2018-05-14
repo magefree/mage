@@ -34,8 +34,8 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.game.Game;
 import mage.players.Player;
@@ -80,16 +80,14 @@ class GalvanothEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null && controller.getLibrary().hasCards()) {
+        if (controller != null) {
             Card card = controller.getLibrary().getFromTop(game);
-            Cards cards = new CardsImpl(card);
-            controller.lookAtCards("Galvanoth", cards, game);
-
-            if (card.isInstant() || card.isSorcery()) {
-                StringBuilder message = new StringBuilder("Cast ").append(card.getName()).append(" without paying its mana cost?");
-                if (controller.chooseUse(Outcome.PlayForFree, message.toString(), source, game)) {
-                    controller.getLibrary().removeFromTop(game);
-                    controller.cast(card.getSpellAbility(), game, true);
+            if (card != null) {
+                controller.lookAtCards(source, null, new CardsImpl(card), game);
+                if (card.isInstant() || card.isSorcery()) {
+                    if (controller.chooseUse(Outcome.PlayForFree, "Cast " + card.getName() + " without paying its mana cost?", source, game)) {
+                        controller.cast(card.getSpellAbility(), game, true);
+                    }
                 }
             }
             return true;

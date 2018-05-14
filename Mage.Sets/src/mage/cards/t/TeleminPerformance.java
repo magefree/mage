@@ -28,7 +28,6 @@
 package mage.cards.t;
 
 import java.util.UUID;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -86,31 +85,25 @@ class TeleminPerformanceEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
-        if (controller != null && sourceObject != null) {
+        if (controller != null) {
             Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
             if (opponent != null) {
                 Card creature = null;
-                CardsImpl cards = new CardsImpl();
-                boolean creatureFound = false;
-                while (opponent.getLibrary().hasCards() && !creatureFound) {
-                    Card card = opponent.getLibrary().removeFromTop(game);
-                    if (card != null) {
-                        if (card.isCreature()) {
-                            creature = card;
-                            creatureFound = true;
-                        }
-                        if (!creatureFound) {
-                            cards.add(card);
-                        }
+                CardsImpl nonCreatures = new CardsImpl();
+                CardsImpl reveal = new CardsImpl();
+                for (Card card : opponent.getLibrary().getCards(game)) {
+                    reveal.add(card);
+                    if (card.isCreature()) {
+                        creature = card;
+                        break;
+                    } else {
+                        nonCreatures.add(card);
                     }
                 }
-                if (!cards.isEmpty()) {
-                    opponent.revealCards(sourceObject.getIdName(), cards, game);
-                    opponent.moveCards(cards, Zone.GRAVEYARD, source, game);
-                }
-                game.applyEffects();
+                opponent.revealCards(source, reveal, game);
+                opponent.moveCards(nonCreatures, Zone.GRAVEYARD, source, game);
                 if (creature != null) {
+                    game.applyEffects();
                     controller.moveCards(creature, Zone.BATTLEFIELD, source, game);
                 }
             }

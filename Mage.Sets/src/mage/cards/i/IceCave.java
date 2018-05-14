@@ -55,7 +55,7 @@ public class IceCave extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}");
 
         // Whenever a player casts a spell, any other player may pay that spell's mana cost. If a player does, counter the spell. (Mana cost includes color.)
-        this.addAbility(new SpellCastAllTriggeredAbility(Zone.BATTLEFIELD, new IceCaveEffect(), StaticFilters.FILTER_A_SPELL, false, SetTargetPointer.SPELL));
+        this.addAbility(new SpellCastAllTriggeredAbility(Zone.BATTLEFIELD, new IceCaveEffect(), StaticFilters.FILTER_SPELL_A, false, SetTargetPointer.SPELL));
     }
 
     public IceCave(final IceCave card) {
@@ -95,7 +95,7 @@ class IceCaveEffect extends OneShotEffect {
             if (spellController != null) {
                 for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
                     Player player = game.getPlayer(playerId);
-                    if (player != null && player != spellController) {
+                    if (player != null && !player.equals(spellController)) {
                         cost.clearPaid();
                         if (cost.canPay(source, source.getSourceId(), player.getId(), game)
                                 && player.chooseUse(outcome, "Pay " + cost.getText() + " to counter " + spell.getIdName() + '?', source, game)) {

@@ -39,9 +39,9 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -54,7 +54,7 @@ import mage.target.TargetPlayer;
 public class Mindshrieker extends CardImpl {
 
     public Mindshrieker(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.subtype.add(SubType.SPIRIT);
         this.subtype.add(SubType.BIRD);
 
@@ -95,7 +95,7 @@ class MindshriekerEffect extends OneShotEffect {
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
         if (targetPlayer != null) {
             if (targetPlayer.getLibrary().hasCards()) {
-                Card card = targetPlayer.getLibrary().removeFromTop(game);
+                Card card = targetPlayer.getLibrary().getFromTop(game);
                 if (card != null) {
                     targetPlayer.moveCards(card, Zone.GRAVEYARD, source, game);
                     int amount = card.getConvertedManaCost();

@@ -48,7 +48,7 @@ import mage.game.events.GameEvent.EventType;
 public class NorinTheWary extends CardImpl {
 
     public NorinTheWary(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WARRIOR);
@@ -94,7 +94,7 @@ class NorinTheWaryTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return new StringBuilder("When a player casts a spell or a creature attacks, ").append(super.getRule()).toString();
+        return "When a player casts a spell or a creature attacks, " + super.getRule();
     }
 
     @Override

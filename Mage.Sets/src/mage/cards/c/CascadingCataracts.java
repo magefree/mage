@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.AddManaInAnyCombinationEffect;
+import mage.abilities.effects.mana.AddManaInAnyCombinationEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.abilities.mana.SimpleManaAbility;

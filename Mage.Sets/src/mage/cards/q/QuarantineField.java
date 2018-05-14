@@ -41,7 +41,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
-import mage.counters.Counter;
+import mage.counters.CounterType;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
@@ -56,10 +56,10 @@ import mage.util.CardUtil;
 public class QuarantineField extends CardImpl {
 
     public QuarantineField(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{X}{X}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{X}{X}{W}{W}");
 
         // Quarantine Field enters the battlefield with X isolation counters on it.
-        this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(new Counter("isolation"))));
+        this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.ISOLATION.createInstance())));
 
         // When Quarantine Field enters the battlefield, for each isolation counter on it, exile up to one target nonland permanent an opponenet controls until Quarantine Field leaves the battlefield.
         Ability ability = new EntersBattlefieldTriggeredAbility(new QuarantineFieldEffect(), false);
@@ -77,7 +77,7 @@ public class QuarantineField extends CardImpl {
         if (ability instanceof EntersBattlefieldTriggeredAbility) {
             Permanent sourceObject = game.getPermanent(ability.getSourceId());
             if (sourceObject != null) {
-                int isolationCounters = sourceObject.getCounters(game).getCount("isolation");
+                int isolationCounters = sourceObject.getCounters(game).getCount(CounterType.ISOLATION);
                 FilterNonlandPermanent filter = new FilterNonlandPermanent("up to " + isolationCounters + " nonland permanents controlled by any opponents");
                 filter.add(new ControllerPredicate(TargetController.OPPONENT));
                 ability.addTarget(new TargetPermanent(0, isolationCounters, filter, false));

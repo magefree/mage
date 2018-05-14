@@ -52,7 +52,6 @@ import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.TokenImpl;
-import mage.game.permanent.token.Token;
 import mage.players.Player;
 
 /**
@@ -130,10 +129,12 @@ class SasayasEssence extends TokenImpl {
                 new SasayasEssenceManaEffectEffect(),
                 new FilterControlledLandPermanent(), SetTargetPointer.PERMANENT));
     }
+
     public SasayasEssence(final SasayasEssence token) {
         super(token);
     }
 
+    @Override
     public SasayasEssence copy() {
         return new SasayasEssence(this);
     }
@@ -158,9 +159,22 @@ class SasayasEssenceManaEffectEffect extends ManaEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            controller.getManaPool().addMana(getMana(game, source), game, source);
+            checkToFirePossibleEvents(getMana(game, source), game, source);
+            return true;
+
+        }
+        return false;
+    }
+
+    @Override
+    public Mana produceMana(boolean netMana, Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
         Mana mana = (Mana) this.getValue("mana");
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (controller != null && mana != null && permanent != null) {
+            Mana newMana = new Mana();
             FilterPermanent filter = new FilterLandPermanent();
             filter.add(Predicates.not(new PermanentIdPredicate(permanent.getId())));
             filter.add(new NamePredicate(permanent.getName()));
@@ -189,14 +203,14 @@ class SasayasEssenceManaEffectEffect extends ManaEffect {
                 }
 
                 if (!choice.getChoices().isEmpty()) {
-                    Mana newMana = new Mana();
+
                     for (int i = 0; i < count; i++) {
                         choice.clearChoice();
                         if (choice.getChoices().size() == 1) {
                             choice.setChoice(choice.getChoices().iterator().next());
                         } else {
                             if (!controller.choose(outcome, choice, game)) {
-                                return false;
+                                return null;
                             }
                         }
                         switch (choice.getChoice()) {
@@ -220,17 +234,11 @@ class SasayasEssenceManaEffectEffect extends ManaEffect {
                                 break;
                         }
                     }
-                    controller.getManaPool().addMana(newMana, game, source);
-                    checkToFirePossibleEvents(newMana, game, source);
+
                 }
             }
-            return true;
+            return mana;
         }
-        return false;
-    }
-
-    @Override
-    public Mana getMana(Game game, Ability source) {
         return null;
     }
 

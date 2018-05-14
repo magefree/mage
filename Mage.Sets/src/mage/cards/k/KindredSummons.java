@@ -30,7 +30,6 @@ package mage.cards.k;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ChooseCreatureTypeEffect;
@@ -96,8 +95,7 @@ class KindredSummonsEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = source.getSourceObject(game);
-        if (controller != null && sourceObject != null) {
+        if (controller != null) {
             SubType subType = ChooseCreatureTypeEffect.getChoosenCreatureType(source.getSourceId(), game);
             if (subType == null) {
                 return false;
@@ -110,19 +108,23 @@ class KindredSummonsEffect extends OneShotEffect {
             Cards otherCards = new CardsImpl();
             FilterCreatureCard filterCard = new FilterCreatureCard("creature card of the chosen type");
             filterCard.add(new SubtypePredicate(subType));
-            while (chosenSubtypeCreatureCards.size() < numberOfCards && controller.getLibrary().hasCards()) {
-                Card card = controller.getLibrary().removeFromTop(game);
+            for (Card card : controller.getLibrary().getCards(game)) {
                 revealed.add(card);
                 if (card != null && filterCard.match(card, game)) {
                     chosenSubtypeCreatureCards.add(card);
+                    if (chosenSubtypeCreatureCards.size() == numberOfCards) {
+                        break;
+                    }
                 } else {
                     otherCards.add(card);
                 }
             }
-            controller.revealCards(sourceObject.getIdName(), revealed, game);
+            controller.revealCards(source, revealed, game);
             controller.moveCards(chosenSubtypeCreatureCards, Zone.BATTLEFIELD, source, game);
-            controller.putCardsOnTopOfLibrary(otherCards, game, source, false);
-            controller.shuffleLibrary(source, game);
+            if (!otherCards.isEmpty()) {
+                controller.putCardsOnTopOfLibrary(otherCards, game, source, false);
+                controller.shuffleLibrary(source, game);
+            }
             return true;
         }
         return false;

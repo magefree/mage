@@ -40,6 +40,7 @@ import mage.abilities.effects.common.continuous.PlayWithTheTopCardRevealedEffect
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -138,11 +139,11 @@ class CrownOfConvergenceEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player you = game.getPlayer(source.getControllerId());
-        if (you != null) {
-            Card card = you.getLibrary().removeFromTop(game);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Card card = controller.getLibrary().getFromTop(game);
             if (card != null) {
-                card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
+                controller.putCardsOnBottomOfLibrary(new CardsImpl(card), game, source, true);
             }
             return true;
         }

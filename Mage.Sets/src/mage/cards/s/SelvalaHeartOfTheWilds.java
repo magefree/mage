@@ -37,8 +37,8 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.GreatestPowerAmongControlledCreaturesValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.AddManaInAnyCombinationEffect;
 import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.effects.mana.AddManaInAnyCombinationEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -79,7 +79,9 @@ public class SelvalaHeartOfTheWilds extends CardImpl {
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new SelvalaHeartOfTheWildsEffect(), filter, false, SetTargetPointer.PERMANENT, rule));
 
         // {G}, {T}: Add X mana in any combination of colors, where X is the greatest power among creatures you control.
-        ManaEffect manaEffect = new AddManaInAnyCombinationEffect(new GreatestPowerAmongControlledCreaturesValue(), rule2, ColoredManaSymbol.B, ColoredManaSymbol.U, ColoredManaSymbol.R, ColoredManaSymbol.W, ColoredManaSymbol.G);
+        ManaEffect manaEffect = new AddManaInAnyCombinationEffect(
+                new GreatestPowerAmongControlledCreaturesValue(), rule2,
+                ColoredManaSymbol.B, ColoredManaSymbol.U, ColoredManaSymbol.R, ColoredManaSymbol.W, ColoredManaSymbol.G);
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, manaEffect, new ManaCostsImpl("{G}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

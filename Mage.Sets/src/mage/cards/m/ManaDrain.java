@@ -34,7 +34,7 @@ import mage.abilities.common.delayed.AtTheBeginOfMainPhaseDelayedTriggeredAbilit
 import mage.abilities.common.delayed.AtTheBeginOfMainPhaseDelayedTriggeredAbility.PhaseSelection;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.AddManaToManaPoolTargetControllerEffect;
+import mage.abilities.effects.mana.AddManaToManaPoolTargetControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;

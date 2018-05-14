@@ -37,6 +37,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.common.TargetLandPermanent;
 
 /**
@@ -52,7 +53,7 @@ public class VerdantTouch extends CardImpl {
         this.addAbility(new BuybackAbility("{3}"));
         
         // Target land becomes a 2/2 creature that's still a land.
-        this.getSpellAbility().addEffect(new BecomesCreatureTargetEffect(new VerdantTouchLandToken(), false, true, Duration.Custom));
+        this.getSpellAbility().addEffect(new BecomesCreatureTargetEffect(new CreatureToken(2, 2), false, true, Duration.Custom));
         this.getSpellAbility().addTarget(new TargetLandPermanent());
     }
 
@@ -63,23 +64,5 @@ public class VerdantTouch extends CardImpl {
     @Override
     public VerdantTouch copy() {
         return new VerdantTouch(this);
-    }
-}
-
-class VerdantTouchLandToken extends TokenImpl {
-
-    public VerdantTouchLandToken() {
-        super("", "2/2 creature");
-        this.cardType.add(CardType.CREATURE);
-
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-    }
-    public VerdantTouchLandToken(final VerdantTouchLandToken token) {
-        super(token);
-    }
-
-    public VerdantTouchLandToken copy() {
-        return new VerdantTouchLandToken(this);
     }
 }

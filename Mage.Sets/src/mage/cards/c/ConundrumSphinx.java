@@ -107,10 +107,10 @@ class ConundrumSphinxEffect extends OneShotEffect {
                         }
                         String cardName = cardChoice.getChoice();
                         game.informPlayers(sourceObject.getLogName() + ", player: " + player.getLogName() + ", named: [" + cardName + ']');
-                        Card card = player.getLibrary().removeFromTop(game);
+                        Card card = player.getLibrary().getFromTop(game);
                         if (card != null) {
                             Cards cards = new CardsImpl(card);
-                            player.revealCards(sourceObject.getIdName(), cards, game);
+                            player.revealCards(source, player.getName(), cards, game);
                             if (card.getName().equals(cardName)) {
                                 player.moveCards(cards, Zone.HAND, source, game);
                             } else {

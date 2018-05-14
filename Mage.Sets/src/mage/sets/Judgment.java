@@ -61,6 +61,7 @@ public class Judgment extends ExpansionSet {
         cards.add(new SetCardInfo("Anurid Swarmsnapper", 105, Rarity.UNCOMMON, mage.cards.a.AnuridSwarmsnapper.class));
         cards.add(new SetCardInfo("Arcane Teachings", 78, Rarity.COMMON, mage.cards.a.ArcaneTeachings.class));
         cards.add(new SetCardInfo("Aven Fogbringer", 34, Rarity.COMMON, mage.cards.a.AvenFogbringer.class));
+        cards.add(new SetCardInfo("Aven Warcraft", 2, Rarity.UNCOMMON, mage.cards.a.AvenWarcraft.class));
         cards.add(new SetCardInfo("Balthor the Defiled", 61, Rarity.RARE, mage.cards.b.BalthorTheDefiled.class));
         cards.add(new SetCardInfo("Battle Screech", 3, Rarity.UNCOMMON, mage.cards.b.BattleScreech.class));
         cards.add(new SetCardInfo("Battlefield Scrounger", 106, Rarity.COMMON, mage.cards.b.BattlefieldScrounger.class));

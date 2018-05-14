@@ -72,7 +72,7 @@ public class Mindreaver extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        // <i>Heroic</i> - Whenever you cast a spell that targets Mindreaver, exile the top three cards of target player's library.
+        // <i>Heroic</i> &mdash; Whenever you cast a spell that targets Mindreaver, exile the top three cards of target player's library.
         Ability ability = new HeroicAbility(new MindreaverExileEffect(), false);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);

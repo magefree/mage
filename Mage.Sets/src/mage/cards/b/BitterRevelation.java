@@ -28,17 +28,13 @@
 package mage.cards.b;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.cards.*;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.TargetCard;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -47,11 +43,11 @@ import mage.target.TargetCard;
 public class BitterRevelation extends CardImpl {
 
     public BitterRevelation(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{B}");
 
         // Look at the top four cards of your library. Put two of them into your hand and the rest into your graveyard. You lose 2 life.
-        this.getSpellAbility().addEffect(new BitterRevelationEffect());
+        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(new StaticValue(4), false, new StaticValue(2),
+                StaticFilters.FILTER_CARD, Zone.GRAVEYARD, false, false, false, Zone.HAND, false));
         this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(2));
     }
 
@@ -62,55 +58,5 @@ public class BitterRevelation extends CardImpl {
     @Override
     public BitterRevelation copy() {
         return new BitterRevelation(this);
-    }
-}
-
-class BitterRevelationEffect extends OneShotEffect {
-    
-    BitterRevelationEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "Look at the top four cards of your library. Put two of them into your hand and the rest into your graveyard";
-    }
-    
-    BitterRevelationEffect(final BitterRevelationEffect effect) {
-        super(effect);
-    }
-    
-    @Override
-    public BitterRevelationEffect copy() {
-        return new BitterRevelationEffect(this);
-    }
-    
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            Cards cards = new CardsImpl();
-            int cardsCount = Math.min(4, player.getLibrary().size());
-            for (int i = 0; i < cardsCount; i++) {
-                Card card = player.getLibrary().removeFromTop(game);
-                if (card != null) {
-                    cards.add(card);
-                }
-            }
-            if (!cards.isEmpty()) {
-                Cards cardsToHand = new CardsImpl();
-                player.lookAtCards("Bitter Revelation", cards, game);
-                TargetCard target = new TargetCard(Math.min(2, cards.size()), Zone.LIBRARY, new FilterCard("two cards to put in your hand"));
-                if (player.choose(Outcome.DrawCard, cards, target, game)) {
-                    for (UUID targetId : target.getTargets()) {
-                        Card card = cards.get(targetId, game);
-                        if (card != null) {
-                            cardsToHand.add(card);
-                            cards.remove(card);
-                        }   
-                    }
-                }
-                player.moveCards(cardsToHand, Zone.HAND, source, game);
-                player.moveCards(cards, Zone.GRAVEYARD, source, game);
-            }
-            return true;
-        }
-        return false;
     }
 }

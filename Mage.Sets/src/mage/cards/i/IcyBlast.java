@@ -56,7 +56,7 @@ public class IcyBlast extends CardImpl {
         this.getSpellAbility().addEffect(new TapTargetEffect("X target creatures"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1, StaticFilters.FILTER_PERMANENT_CREATURE, false));
 
-        // <i>Ferocious</i> - If you control a creature with power 4 or greater, those creatures don't untap during their controllers' next untap steps.
+        // <i>Ferocious</i> &mdash; If you control a creature with power 4 or greater, those creatures don't untap during their controllers' next untap steps.
         Effect effect = new ConditionalContinuousRuleModifyingEffect(
                 new DontUntapInControllersNextUntapStepTargetEffect(),
                 new LockedInCondition(FerociousCondition.instance));

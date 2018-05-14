@@ -30,7 +30,7 @@ package mage.cards.b;
 import java.util.UUID;
 import mage.Mana;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.AddManaToManaPoolTargetControllerEffect;
+import mage.abilities.effects.mana.AddManaToManaPoolTargetControllerEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.mana.DelayedTriggeredManaAbility;
 import mage.cards.CardImpl;

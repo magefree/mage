@@ -124,6 +124,18 @@ class CommanderIdentityManaEffect extends ManaEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
+            checkToFirePossibleEvents(getMana(game, source), game, source);
+            controller.getManaPool().addMana(getMana(game, source), game, source);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public Mana produceMana(boolean netMana, Game game, Ability source) {
+        Mana mana = new Mana();
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
             Choice choice = new ChoiceImpl();
             choice.setMessage("Pick a mana color");
             for (UUID commanderId : controller.getCommandersIds()) {
@@ -152,10 +164,10 @@ class CommanderIdentityManaEffect extends ManaEffect {
                     choice.setChoice(choice.getChoices().iterator().next());
                 } else {
                     if (!controller.choose(outcome, choice, game)) {
-                        return false;
+                        return mana;
                     }
                 }
-                Mana mana = new Mana();
+
                 switch (choice.getChoice()) {
                     case "Black":
                         mana.setBlack(1);
@@ -173,16 +185,10 @@ class CommanderIdentityManaEffect extends ManaEffect {
                         mana.setWhite(1);
                         break;
                 }
-                checkToFirePossibleEvents(mana, game, source);
-                controller.getManaPool().addMana(mana, game, source);
-                return true;
+
             }
         }
-        return false;
+        return mana;
     }
 
-    @Override
-    public Mana getMana(Game game, Ability source) {
-        return null;
-    }
 }

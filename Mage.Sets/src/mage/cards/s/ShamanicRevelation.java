@@ -58,7 +58,7 @@ public class ShamanicRevelation extends CardImpl {
         // Draw a card for each creature you control.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent())));
 
-        // <i>Ferocious</i> - You gain 4 life for each creature you control with power 4 or greater.
+        // <i>Ferocious</i> &mdash; You gain 4 life for each creature you control with power 4 or greater.
         DynamicValue amount = new PermanentsOnBattlefieldCount(filter, 4);
         Effect effect = new GainLifeEffect(amount);
         effect.setText("<br><i>Ferocious</i> &mdash; You gain 4 life for each creature you control with power 4 or greater.");

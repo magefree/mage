@@ -77,7 +77,7 @@ class StratadonCostReductionEffect extends CostModificationEffectImpl {
 
     public StratadonCostReductionEffect() {
         super(Duration.WhileOnStack, Outcome.Benefit, CostModificationType.REDUCE_COST);
-        staticText = "<i>Domain</i> - {this} costs {1} less to cast for each basic land type among lands you control.";
+        staticText = "<i>Domain</i> &mdash; {this} costs {1} less to cast for each basic land type among lands you control.";
     }
 
     protected StratadonCostReductionEffect(final StratadonCostReductionEffect effect) {

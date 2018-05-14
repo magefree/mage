@@ -49,7 +49,7 @@ public class EldraziSpawnToken extends TokenImpl {
     final static private List<String> tokenImageSets = new ArrayList<>();
 
     static {
-        tokenImageSets.addAll(Arrays.asList("ROE", "MM2", "DDP"));
+        tokenImageSets.addAll(Arrays.asList("ROE", "MM2", "DDP", "C17"));
     }
 
     public EldraziSpawnToken() {
@@ -62,8 +62,8 @@ public class EldraziSpawnToken extends TokenImpl {
         addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(1), new SacrificeSourceCost()));
 
         availableImageSetCodes = tokenImageSets;
-        // Get one of the three possible token images
-        this.setTokenType(RandomUtil.nextInt(3) + 1);
+        // Get one of the four possible token images
+        this.setTokenType(RandomUtil.nextInt(4) + 1);
     }
 
     public EldraziSpawnToken(final EldraziSpawnToken token) {

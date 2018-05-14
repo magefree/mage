@@ -55,18 +55,17 @@ import mage.target.common.TargetCreaturePermanent;
  * @author Plopman
  */
 public class DimirCharm extends CardImpl {
-    
+
     private static final FilterCreaturePermanent filterCreature = new FilterCreaturePermanent("creature with power 2 or less");
     private static final FilterSpell filterSorcery = new FilterSpell("sorcery spell");
-    
+
     static {
         filterCreature.add(new PowerPredicate(ComparisonType.FEWER_THAN, 3));
         filterSorcery.add(new CardTypePredicate(CardType.SORCERY));
     }
 
-    public DimirCharm (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}{B}");
-
+    public DimirCharm(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}{B}");
 
         //Choose one - Counter target sorcery spell
         this.getSpellAbility().addEffect(new CounterTargetEffect());
@@ -90,47 +89,42 @@ public class DimirCharm extends CardImpl {
     }
 
     @Override
-    public DimirCharm  copy() {
+    public DimirCharm copy() {
         return new DimirCharm(this);
     }
 }
 
 class DimirCharmEffect extends OneShotEffect {
+
     public DimirCharmEffect() {
-            super(Outcome.Benefit);
+        super(Outcome.Benefit);
     }
 
     public DimirCharmEffect(final DimirCharmEffect effect) {
         super(effect);
     }
-   
+
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getFirstTarget());
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
-        if(controller != null && player != null){
-            Cards cards = new CardsImpl();
-            for(int i = 0; i < 3; i++){
-                Card card = player.getLibrary().removeFromTop(game);
-                if(card != null){
-                    cards.add(card);
-                }
-            }
-            if(!cards.isEmpty()){
+        if (controller != null && player != null) {
+            Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, 3));
+            if (!cards.isEmpty()) {
                 TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("Card to put back on top of library"));
-                if(controller.chooseTarget(Outcome.Benefit, cards, target, source, game)){
+                if (controller.chooseTarget(Outcome.Benefit, cards, target, source, game)) {
                     Card card = cards.get(target.getFirstTarget(), game);
-                    if(card != null){
-                        card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
+                    if (card != null) {
                         cards.remove(card);
                     }
-                    controller.moveCards(cards, Zone.GRAVEYARD, source, game);
                 }
+                controller.moveCards(cards, Zone.GRAVEYARD, source, game);
             }
+            return true;
         }
         return false;
     }
-  
+
     @Override
     public DimirCharmEffect copy() {
         return new DimirCharmEffect(this);
@@ -139,5 +133,5 @@ class DimirCharmEffect extends OneShotEffect {
     @Override
     public String getText(Mode mode) {
         return "look at the top three cards of target player's library, then put one back and the rest into that player's graveyard";
-    }    
+    }
 }

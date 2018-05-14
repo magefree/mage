@@ -19,7 +19,11 @@ import mage.game.Game;
 public class SpellsCostReductionAllOfChosenSubtypeEffect extends SpellsCostReductionAllEffect {
 
     public SpellsCostReductionAllOfChosenSubtypeEffect(FilterCard filter, int amount) {
-        super(filter, amount);
+        this(filter, amount, false);
+    }
+
+    public SpellsCostReductionAllOfChosenSubtypeEffect(FilterCard filter, int amount, boolean onlyControlled) {
+        super(filter, amount, false, onlyControlled);
     }
 
     public SpellsCostReductionAllOfChosenSubtypeEffect(final SpellsCostReductionAllOfChosenSubtypeEffect effect) {

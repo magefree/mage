@@ -32,7 +32,6 @@ import java.util.List;
 import mage.Mana;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.DynamicManaEffect;
 import mage.abilities.effects.common.ManaEffect;
 import mage.constants.AbilityType;
 import mage.constants.Zone;
@@ -72,20 +71,14 @@ public abstract class TriggeredManaAbility extends TriggeredAbilityImpl implemen
      */
     @Override
     public List<Mana> getNetMana(Game game) {
-        if (!getEffects().isEmpty()) {
-            Effect effect = getEffects().get(0);
-            if (effect != null && game != null) {
-                ArrayList<Mana> newNetMana = new ArrayList<>();
-                if (effect instanceof DynamicManaEffect) {
-
-                    // TODO: effects from replacement effects like Mana Reflection are not considered yet
-                    // TODO: effects that need a X payment (e.g. Mage-Ring Network) return always 0
-                    newNetMana.add(((DynamicManaEffect) effect).computeMana(true, game, this));
-                } else if (effect instanceof Effect) {
-                    newNetMana.add(((ManaEffect) effect).getMana(game, this));
+        if (game != null) {
+            ArrayList<Mana> newNetMana = new ArrayList<>();
+            for (Effect effect : getEffects()) {
+                if (effect instanceof ManaEffect) {
+                    newNetMana.addAll(((ManaEffect) effect).getNetMana(game, this));
                 }
-                return newNetMana;
             }
+            return newNetMana;
         }
         return netMana;
     }

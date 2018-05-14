@@ -150,6 +150,18 @@ class ChromeMoxManaEffect extends ManaEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        if (player != null) {
+            checkToFirePossibleEvents(getMana(game, source), game, source);
+            player.getManaPool().addMana(getMana(game, source), game, source);
+            return true;
+
+        }
+        return false;
+    }
+
+    @Override
+    public Mana produceMana(boolean netMana, Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         Player player = game.getPlayer(source.getControllerId());
         if (permanent != null && player != null) {
@@ -176,14 +188,14 @@ class ChromeMoxManaEffect extends ManaEffect {
                     if (color.isWhite()) {
                         choice.getChoices().add("White");
                     }
-
+                    Mana mana = new Mana();
                     if (!choice.getChoices().isEmpty()) {
-                        Mana mana = new Mana();
+
                         if (choice.getChoices().size() == 1) {
                             choice.setChoice(choice.getChoices().iterator().next());
                         } else {
                             if (!player.choose(outcome, choice, game)) {
-                                return false;
+                                return null;
                             }
                         }
                         switch (choice.getChoice()) {
@@ -208,17 +220,12 @@ class ChromeMoxManaEffect extends ManaEffect {
                             default:
                                 break;
                         }
-                        checkToFirePossibleEvents(mana, game, source);
-                        player.getManaPool().addMana(mana, game, source);
+
                     }
+                    return mana;
                 }
             }
         }
-        return true;
-    }
-
-    @Override
-    public Mana getMana(Game game, Ability source) {
         return null;
     }
 

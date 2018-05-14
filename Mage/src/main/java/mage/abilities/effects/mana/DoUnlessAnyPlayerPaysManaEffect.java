@@ -3,14 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mage.abilities.effects.common;
+package mage.abilities.effects.mana;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.costs.Cost;
+import mage.abilities.effects.common.ManaEffect;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
@@ -69,6 +72,24 @@ public class DoUnlessAnyPlayerPaysManaEffect extends ManaEffect {
         return false;
     }
 
+    @Override
+    public List<Mana> getNetMana(Game game, Ability source) {
+        if (cost.canPay(source, source.getSourceId(), source.getControllerId(), game)) {
+            return manaEffect.getNetMana(game, source);
+        }
+        return new ArrayList<>();
+    }
+
+    @Override
+    public Mana getMana(Game game, Ability source) {
+        return manaEffect.getMana(game, source);
+    }
+
+    @Override
+    public Mana produceMana(boolean netMana, Game game, Ability source) {
+        return manaEffect.produceMana(netMana, game, source);
+    }
+
     protected Player getPayingPlayer(Game game, Ability source) {
         return game.getPlayer(source.getControllerId());
     }
@@ -79,11 +100,6 @@ public class DoUnlessAnyPlayerPaysManaEffect extends ManaEffect {
             return staticText;
         }
         return manaEffect.getText(mode) + " unless any player pays " + cost.getText();
-    }
-
-    @Override
-    public Mana getMana(Game game, Ability source) {
-        return manaEffect.getMana(game, source);
     }
 
     @Override

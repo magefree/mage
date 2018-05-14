@@ -101,10 +101,10 @@ class SelvalaExplorerReturnedEffect extends ManaEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Mana parley = getMana(game, source);
-            if (parley.getGreen() > 0) {
-                controller.getManaPool().addMana(parley, game, source);
-                controller.gainLife(parley.getGreen(), game, source);
+            Mana mana = getMana(game, source);
+            if (mana.getGreen() > 0) {
+                controller.getManaPool().addMana(mana, game, source);
+                controller.gainLife(mana.getGreen(), game, source);
             }
             return true;
         }
@@ -112,7 +112,11 @@ class SelvalaExplorerReturnedEffect extends ManaEffect {
     }
 
     @Override
-    public Mana getMana(Game game, Ability source) {
+    public Mana produceMana(boolean netMana, Game game, Ability source) {
+        if (netMana) {
+
+        }
         return Mana.GreenMana(ParleyCount.getInstance().calculate(game, source, this));
     }
+
 }

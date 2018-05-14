@@ -45,6 +45,7 @@ import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.common.TargetLandPermanent;
 
 /**
@@ -65,7 +66,7 @@ public class KamahlFistOfKrosa extends CardImpl {
 
         // {G}: Target land becomes a 1/1 creature until end of turn. It's still a land.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new BecomesCreatureTargetEffect(new KamahlFistOfKrosaLandToken(), false, true, Duration.EndOfTurn),
+                new BecomesCreatureTargetEffect(new CreatureToken(1, 1), false, true, Duration.EndOfTurn),
                 new ManaCostsImpl("{G}"));
 		ability.addTarget(new TargetLandPermanent());
 		this.addAbility(ability);
@@ -85,23 +86,5 @@ public class KamahlFistOfKrosa extends CardImpl {
     @Override
     public KamahlFistOfKrosa copy() {
         return new KamahlFistOfKrosa(this);
-    }
-}
-
-class KamahlFistOfKrosaLandToken extends TokenImpl {
-
-    public KamahlFistOfKrosaLandToken() {
-        super("", "1/1 creature");
-        this.cardType.add(CardType.CREATURE);
-
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-    }
-    public KamahlFistOfKrosaLandToken(final KamahlFistOfKrosaLandToken token) {
-        super(token);
-    }
-
-    public KamahlFistOfKrosaLandToken copy() {
-        return new KamahlFistOfKrosaLandToken(this);
     }
 }

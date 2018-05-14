@@ -47,7 +47,7 @@ public class RetreatToEmeria extends CardImpl {
     public RetreatToEmeria(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
 
-        // <i>Landfall</i> - Whenever a land enters the battlefield under you control, choose one - Create a 1/1 white Kor Ally creature token; or Creatures you control get +1/+1 until end of turn.
+        // <i>Landfall</i> &mdash; Whenever a land enters the battlefield under you control, choose one - Create a 1/1 white Kor Ally creature token; or Creatures you control get +1/+1 until end of turn.
         LandfallAbility ability = new LandfallAbility(new CreateTokenEffect(new KorAllyToken()), false);
         Mode mode = new Mode();
         mode.getEffects().add(new BoostControlledEffect(1, 1, Duration.EndOfTurn));

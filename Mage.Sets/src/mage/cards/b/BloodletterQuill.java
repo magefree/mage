@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
-import mage.counters.Counter;
+import mage.counters.CounterType;
 
 /**
  *
@@ -53,17 +53,16 @@ public class BloodletterQuill extends CardImpl {
     public BloodletterQuill(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
-        Counter bloodCounter = new Counter("blood");
         // {2}, {T}, Put a blood counter on Bloodletter Quill: Draw a card, then lose 1 life for each blood counter on Bloodletter Quill.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new GenericManaCost(2));
-        ability.addEffect(new LoseLifeSourceControllerEffect(new CountersSourceCount(bloodCounter.getName()))
+        ability.addEffect(new LoseLifeSourceControllerEffect(new CountersSourceCount(CounterType.BLOOD))
                 .setText(", then lose 1 life for each blood counter on {this}"));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new PutCountersSourceCost(bloodCounter));
+        ability.addCost(new PutCountersSourceCost(CounterType.BLOOD.createInstance()));
         this.addAbility(ability);
         // {U}{B}: Remove a blood counter from Bloodletter Quill.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new RemoveCounterSourceEffect(bloodCounter), new ManaCostsImpl("{U}{B}")));
+                new RemoveCounterSourceEffect(CounterType.BLOOD.createInstance()), new ManaCostsImpl("{U}{B}")));
     }
 
     public BloodletterQuill(final BloodletterQuill card) {

@@ -123,25 +123,33 @@ class PlasmCaptureManaEffect extends ManaEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            controller.getManaPool().addMana(getMana(game, source), game, source);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public Mana produceMana(boolean netMana, Game game, Ability source) {
+        if (netMana) {
+            return new Mana(0, 0, 0, 0, 0, 0, amountOfMana, 0);
+        }
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             Mana mana = new Mana();
             for (int i = 0; i < amountOfMana; i++) {
                 ChoiceColor choiceColor = new ChoiceColor();
                 if (!player.choose(Outcome.Benefit, choiceColor, game)) {
-                    return false;
+                    return null;
                 }
                 choiceColor.increaseMana(mana);
             }
             player.getManaPool().addMana(mana, game, source);
-            return true;
+            return mana;
 
         }
-        return false;
-    }
-
-    @Override
-    public Mana getMana(Game game, Ability source) {
         return null;
     }
 

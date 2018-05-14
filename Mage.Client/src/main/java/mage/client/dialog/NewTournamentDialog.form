@@ -57,6 +57,8 @@
                               <Component id="spnNumRounds" min="-2" pref="50" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="cbAllowSpectators" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="cbPlaneChase" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -186,6 +188,7 @@
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
                           <Group type="103" alignment="1" groupAlignment="3" attributes="0">
                               <Component id="cbAllowSpectators" alignment="3" max="32767" attributes="0"/>
+                              <Component id="cbPlaneChase" alignment="3" max="32767" attributes="0"/>
                               <Component id="spnNumRounds" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="lblNumRounds" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -454,6 +457,13 @@
         <Property name="toolTipText" type="java.lang.String" value="Allow other players to watch the games of this table."/>
       </Properties>
     </Component>
+    <Component class="javax.swing.JCheckBox" name="cbPlaneChase">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Plane Chase"/>
+        <Property name="toolTipText" type="java.lang.String" value="Use Plane Chase for the tournament."/>
+      </Properties>
+    </Component>
+
     <Component class="javax.swing.JLabel" name="lblPlayer1">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">

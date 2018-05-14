@@ -35,7 +35,7 @@ import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.common.SourceHasCounterCondition;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.common.AddManaOfAnyColorEffect;
+import mage.abilities.effects.mana.AddManaOfAnyColorEffect;
 import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.mana.ActivateOncePerTurnManaAbility;

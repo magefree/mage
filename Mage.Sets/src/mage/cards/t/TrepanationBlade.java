@@ -29,26 +29,25 @@ package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.common.AttacksAttachedTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.Layer;
 import mage.constants.Outcome;
-import mage.constants.SubLayer;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -57,14 +56,13 @@ import mage.players.Player;
 public class TrepanationBlade extends CardImpl {
 
     public TrepanationBlade(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
         this.subtype.add(SubType.EQUIPMENT);
 
         // Whenever equipped creature attacks, defending player reveals cards from the top of their library until he or she reveals a land card.
         // The creature gets +1/+0 until end of turn for each card revealed this way. That player puts the revealed cards into their graveyard.
-        Ability ability = new AttacksAttachedTriggeredAbility(new TrepanationBladeDiscardEffect());
-        ability.addEffect(new TrepanationBladeBoostEffect());
-        this.addAbility(ability);
+        this.addAbility(new AttacksAttachedTriggeredAbility(new TrepanationBladeDiscardEffect()));
+
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2)));
     }
@@ -104,69 +102,26 @@ class TrepanationBladeDiscardEffect extends OneShotEffect {
                 return false;
             }
             UUID defenderId = game.getCombat().getDefenderId(creature.getId());
-            Player player = game.getPlayer(defenderId);
-            if (player == null) {
+            Player defendingPlayer = game.getPlayer(defenderId);
+            if (defendingPlayer == null) {
                 return false;
             }
-
             CardsImpl cards = new CardsImpl();
-            boolean landFound = false;
-            while (player.getLibrary().hasCards() && !landFound) {
-                Card card = player.getLibrary().removeFromTop(game);
-                if (card != null) {
-                    cards.add(card);
-                    if (card.isLand()) {
-                        landFound = true;
-                    }
+            for (Card card : defendingPlayer.getLibrary().getCards(game)) {
+                cards.add(card);
+                if (card.isLand()) {
+                    break;
                 }
             }
-            player.moveCards(cards, Zone.GRAVEYARD, source, game);
+            defendingPlayer.revealCards(equipment.getName(), cards, game);
+            defendingPlayer.moveCards(cards, Zone.GRAVEYARD, source, game);
             if (!cards.isEmpty()) {
-                player.revealCards(equipment.getName(), cards, game);
-                game.getState().setValue(source.getSourceId().toString() + "_TrepanationBlade", cards.size());
-                return true;
+                ContinuousEffect effect = new BoostTargetEffect(cards.size(), 0, Duration.EndOfTurn);
+                effect.setTargetPointer(new FixedTarget(creature, game));
+                game.addEffect(effect, source);
             }
+            return true;
         }
-
-        game.getState().setValue(source.getSourceId().toString() + "_TrepanationBlade", null);
-        return false;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return super.getText(mode);    //To change body of overridden methods use File | Settings | File Templates.
-    }
-}
-
-class TrepanationBladeBoostEffect extends ContinuousEffectImpl {
-
-    public TrepanationBladeBoostEffect() {
-        super(Duration.EndOfTurn, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
-        staticText = null;
-    }
-
-    public TrepanationBladeBoostEffect(final TrepanationBladeBoostEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public TrepanationBladeBoostEffect copy() {
-        return new TrepanationBladeBoostEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Integer amount = (Integer) game.getState().getValue(source.getSourceId().toString() + "_TrepanationBlade");
-
-        Permanent equipment = game.getPermanent(source.getSourceId());
-        if (amount != null && amount > 0 && equipment != null && equipment.getAttachedTo() != null) {
-            Permanent creature = game.getPermanent(equipment.getAttachedTo());
-            if (creature != null) {
-                creature.addPower(amount);
-                return true;
-            }
-        }
-
         return false;
     }
 }

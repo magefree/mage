@@ -39,7 +39,7 @@ import mage.game.permanent.Permanent;
  * @author TheElk801
  */
 public class RemoveAllCountersSourceEffect extends OneShotEffect {
-    
+
     private final CounterType counterType;
 
     public RemoveAllCountersSourceEffect(CounterType counterType) {
@@ -55,13 +55,13 @@ public class RemoveAllCountersSourceEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-      Permanent permanent = game.getPermanent(source.getSourceId());
-      if(permanent != null) {
-          int count = permanent.getCounters(game).getCount(counterType);
-          permanent.removeCounters(counterType.getName(), count, game);
-          return true;
-      }
-      return false;
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
+        if (permanent != null) {
+            int count = permanent.getCounters(game).getCount(counterType);
+            permanent.removeCounters(counterType.getName(), count, game);
+            return true;
+        }
+        return false;
     }
 
     @Override

@@ -60,7 +60,7 @@ public class ForceDenial extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new CounterTargetEffect(),
                 HateCondition.instance,
-                "<br><i>Hate</i> - If an opponent lost life from a source other than combat damage this turn, counter that spell instead."));
+                "<br><i>Hate</i> &mdash; If an opponent lost life from a source other than combat damage this turn, counter that spell instead."));
         this.getSpellAbility().addTarget(new TargetSpell());
         this.getSpellAbility().addWatcher(new LifeLossOtherFromCombatWatcher());
 

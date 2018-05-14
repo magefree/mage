@@ -33,18 +33,14 @@ import mage.abilities.common.delayed.AtTheBeginOfNextUpkeepDelayedTriggeredAbili
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.TargetCard;
 import mage.target.TargetPlayer;
 
 /**
@@ -54,7 +50,7 @@ import mage.target.TargetPlayer;
 public class Portent extends CardImpl {
 
     public Portent(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{U}");
 
         // Look at the top three cards of target player's library, then put them back in any order. You may have that player shuffle their library.
         this.getSpellAbility().addEffect(new PortentEffect());
@@ -73,55 +69,33 @@ public class Portent extends CardImpl {
     }
 }
 
-class  PortentEffect extends OneShotEffect {
+class PortentEffect extends OneShotEffect {
 
-    public  PortentEffect() {
+    public PortentEffect() {
         super(Outcome.DrawCard);
         this.staticText = "look at the top three cards of target player's library, then put them back in any order. You may have that player shuffle their library.";
     }
 
-    public  PortentEffect(final  PortentEffect effect) {
+    public PortentEffect(final PortentEffect effect) {
         super(effect);
     }
 
     @Override
-    public  PortentEffect copy() {
-        return new  PortentEffect(this);
+    public PortentEffect copy() {
+        return new PortentEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player you = game.getPlayer(source.getControllerId());
-        Player player = game.getPlayer(source.getFirstTarget());
-        if (player == null || you == null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
+        if (player == null || controller == null) {
             return false;
         }
-        Cards cards = new CardsImpl();
-        int count = Math.min(player.getLibrary().size(), 3);
-        for (int i = 0; i < count; i++) {
-            Card card = player.getLibrary().removeFromTop(game);
-            if (card != null) {
-                cards.add(card);
-            }
-        }
-
-        you.lookAtCards("Portent", cards, game);
-
-        TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to put on the top of target player's library"));
-        while (player.canRespond() && cards.size() > 1) {
-            you.choose(Outcome.Neutral, cards, target, game);
-            Card card = cards.get(target.getFirstTarget(), game);
-            if (card != null) {
-                cards.remove(card);
-                card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-            }
-            target.clearChosen();
-        }
-        if (cards.size() == 1) {
-            Card card = cards.get(cards.iterator().next(), game);
-            card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-        }
-        if (you.chooseUse(Outcome.Neutral, "You may have that player shuffle their library", source, game)){
+        Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, 3));
+        controller.lookAtCards(source, null, cards, game);
+        controller.putCardsOnTopOfLibrary(cards, game, source, true);
+        if (controller.chooseUse(Outcome.Neutral, "You may have that player shuffle their library", source, game)) {
             player.shuffleLibrary(source, game);
         }
         return true;

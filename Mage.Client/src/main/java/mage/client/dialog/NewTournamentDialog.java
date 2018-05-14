@@ -123,6 +123,7 @@ public class NewTournamentDialog extends MageDialog {
                 tournamentPlayerPanel.init(i++);
             }
             cbAllowSpectators.setSelected(true);
+            cbPlaneChase.setSelected(false);
             this.setModal(true);
             this.setLocation(150, 100);
         }
@@ -173,6 +174,7 @@ public class NewTournamentDialog extends MageDialog {
         jLabel6 = new javax.swing.JLabel();
         cbDraftTiming = new javax.swing.JComboBox();
         cbAllowSpectators = new javax.swing.JCheckBox();
+        cbPlaneChase = new javax.swing.JCheckBox();
         lblPlayer1 = new javax.swing.JLabel();
         lblConstructionTime = new javax.swing.JLabel();
         chkRollbackTurnsAllowed = new javax.swing.JCheckBox();
@@ -286,6 +288,9 @@ public class NewTournamentDialog extends MageDialog {
         cbAllowSpectators.setText("Allow spectators");
         cbAllowSpectators.setToolTipText("Allow other players to watch the games of this table.");
 
+        cbPlaneChase.setText("Use Plane Chase");
+        cbPlaneChase.setToolTipText("Use Plane Chase variant for the tournament.");
+
         lblPlayer1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblPlayer1.setText("Player 1 (You)");
 
@@ -379,7 +384,9 @@ public class NewTournamentDialog extends MageDialog {
                                                         .addGroup(layout.createSequentialGroup()
                                                                 .addComponent(spnNumRounds, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                .addComponent(cbAllowSpectators))))
+                                                                .addComponent(cbAllowSpectators)
+                                                                .addComponent(cbPlaneChase)
+                                                                )))
                                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                                 .addGap(0, 0, Short.MAX_VALUE)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -491,6 +498,7 @@ public class NewTournamentDialog extends MageDialog {
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                                                 .addComponent(cbAllowSpectators, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                                .addComponent(cbPlaneChase, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                                 .addComponent(spnNumRounds, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                                 .addComponent(lblNumRounds))
                                                         .addComponent(lblNbrPlayers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -537,6 +545,7 @@ public class NewTournamentDialog extends MageDialog {
         tOptions.setPassword(txtPassword.getText());
         tOptions.getPlayerTypes().add(PlayerType.HUMAN);
         tOptions.setWatchingAllowed(cbAllowSpectators.isSelected());
+        tOptions.setPlaneChase(cbPlaneChase.isSelected());
         tOptions.setQuitRatio((Integer) spnQuitRatio.getValue());
         for (TournamentPlayerPanel player : players) {
             tOptions.getPlayerTypes().add((PlayerType) player.getPlayerType().getSelectedItem());
@@ -1106,6 +1115,7 @@ public class NewTournamentDialog extends MageDialog {
             }
         }
         this.cbAllowSpectators.setSelected(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_ALLOW_SPECTATORS + versionStr, "Yes").equals("Yes"));
+        this.cbPlaneChase.setSelected(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PLANE_CHASE + versionStr, "No").equals("Yes"));
         this.chkRollbackTurnsAllowed.setSelected(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_ALLOW_ROLLBACKS + versionStr, "Yes").equals("Yes"));
         this.chkRated.setSelected(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_RATED + versionStr, "No").equals("Yes"));
     }
@@ -1191,6 +1201,7 @@ public class NewTournamentDialog extends MageDialog {
             }
         }
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_ALLOW_SPECTATORS + versionStr, (tOptions.isWatchingAllowed() ? "Yes" : "No"));
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PLANE_CHASE + versionStr, (tOptions.isPlaneChase() ? "Yes" : "No"));
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_ALLOW_ROLLBACKS + versionStr, (tOptions.getMatchOptions().isRollbackTurnsAllowed() ? "Yes" : "No"));
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_RATED + versionStr, (tOptions.getMatchOptions().isRated() ? "Yes" : "No"));
     }
@@ -1205,6 +1216,7 @@ public class NewTournamentDialog extends MageDialog {
     private javax.swing.JButton btnSavedConfiguration1;
     private javax.swing.JButton btnSavedConfiguration2;
     private javax.swing.JCheckBox cbAllowSpectators;
+    private javax.swing.JCheckBox cbPlaneChase;
     private javax.swing.JComboBox cbDeckType;
     private javax.swing.JComboBox cbDraftCube;
     private javax.swing.JComboBox cbDraftTiming;

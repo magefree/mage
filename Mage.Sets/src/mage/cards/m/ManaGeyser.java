@@ -30,7 +30,7 @@ package mage.cards.m;
 import java.util.UUID;
 import mage.Mana;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.common.DynamicManaEffect;
+import mage.abilities.effects.mana.DynamicManaEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;

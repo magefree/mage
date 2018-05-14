@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -41,7 +40,7 @@ import mage.abilities.keyword.BushidoAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.counters.Counter;
+import mage.counters.CounterType;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -50,8 +49,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class SenseiGoldenTail extends CardImpl {
 
-    public SenseiGoldenTail (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
+    public SenseiGoldenTail(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.FOX);
         this.subtype.add(SubType.SAMURAI);
@@ -61,17 +60,29 @@ public class SenseiGoldenTail extends CardImpl {
 
         // Bushido 1 (When this blocks or becomes blocked, it gets +1/+1 until end of turn.)
         this.addAbility(new BushidoAbility(1));
+
         // {1}{W}, {T}: Put a training counter on target creature. 
-        Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(new Counter("Training")), new ManaCostsImpl("{1}{W}"));
+        // That creature gains bushido 1 and becomes a Samurai in addition to its other creature types. 
+        // Activate this ability only any time you could cast a sorcery.
+        Ability ability = new ActivateAsSorceryActivatedAbility(
+                Zone.BATTLEFIELD,
+                new AddCountersTargetEffect(CounterType.TRAINING.createInstance()),
+                new ManaCostsImpl("{1}{W}")
+        );
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
-        // That creature gains bushido 1 and becomes a Samurai in addition to its other creature types. Activate this ability only any time you could cast a sorcery.
-        ability.addEffect(new GainAbilityTargetEffect(new BushidoAbility(1),Duration.Custom));
-        ability.addEffect(new AddCardSubTypeTargetEffect(SubType.SAMURAI,Duration.Custom));
+        ability.addEffect(new GainAbilityTargetEffect(
+                new BushidoAbility(1), Duration.Custom)
+                .setText("That creature gains bushido 1")
+        );
+        ability.addEffect(
+                new AddCardSubTypeTargetEffect(SubType.SAMURAI, Duration.Custom)
+                        .setText("and becomes a Samurai in addition to its other creature types.")
+        );
         this.addAbility(ability);
     }
 
-    public SenseiGoldenTail (final SenseiGoldenTail card) {
+    public SenseiGoldenTail(final SenseiGoldenTail card) {
         super(card);
     }
 

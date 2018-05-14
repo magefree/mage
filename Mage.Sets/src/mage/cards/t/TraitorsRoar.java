@@ -56,7 +56,7 @@ public class TraitorsRoar extends CardImpl {
     }
 
     public TraitorsRoar(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B/R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{B/R}");
 
         // Tap target untapped creature. It deals damage equal to its power to its controller.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
@@ -101,7 +101,7 @@ class TraitorsRoarEffect extends OneShotEffect {
             applied = targetCreature.tap(game);
             Player controller = game.getPlayer(targetCreature.getControllerId());
             if (controller != null) {
-                controller.damage(targetCreature.getPower().getValue(), source.getSourceId(), game, false, true);
+                controller.damage(targetCreature.getPower().getValue(), targetCreature.getId(), game, false, true);
                 applied = true;
             }
         }

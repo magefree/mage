@@ -32,7 +32,7 @@ import mage.MageInt;
 import mage.Mana;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.BasicManaEffect;
+import mage.abilities.effects.mana.BasicManaEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.mana.TriggeredManaAbility;
 import mage.cards.CardImpl;

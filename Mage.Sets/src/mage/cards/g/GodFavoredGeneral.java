@@ -53,7 +53,7 @@ public class GodFavoredGeneral extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // <i>Inspired</i> - Whenever God-Favored General becomes untapped, you may pay {2}{W}. If you do, create two 1/1 white Soldier enchantment creature tokens.
+        // <i>Inspired</i> &mdash; Whenever God-Favored General becomes untapped, you may pay {2}{W}. If you do, create two 1/1 white Soldier enchantment creature tokens.
         this.addAbility(new InspiredAbility(new DoIfCostPaid(new CreateTokenEffect(new GodFavoredGeneralSoldierToken(), 2), new ManaCostsImpl("{2}{W}"))));
     }
 

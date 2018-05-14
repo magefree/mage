@@ -55,7 +55,7 @@ public class FarWanderings extends CardImpl {
                 new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 3, StaticFilters.FILTER_BASIC_LAND_CARD), true, true),
                 new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 1, StaticFilters.FILTER_BASIC_LAND_CARD), true, true),
                 new CardsInControllerGraveCondition(7),
-                "Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle your library.<br/><br/><i>Threshold</i> - If seven or more cards are in your graveyard, instead search your library for up to three basic land cards, put them onto the battlefield tapped, then shuffle your library.");
+                "Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle your library.<br/><br/><i>Threshold</i> &mdash; If seven or more cards are in your graveyard, instead search your library for up to three basic land cards, put them onto the battlefield tapped, then shuffle your library.");
         this.getSpellAbility().addEffect(effect);
     }
 

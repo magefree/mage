@@ -70,7 +70,7 @@ class BiteOfTheBlackRoseEffect extends OneShotEffect {
 
     BiteOfTheBlackRoseEffect() {
         super(Outcome.Benefit);
-        this.staticText = "<i>Will of the council</i> - Starting with you, each player votes for sickness or psychosis. If sickness gets more votes, creatures your opponents control get -2/-2 until end of turn. If psychosis gets more votes or the vote is tied, each opponent discards two cards";
+        this.staticText = "<i>Will of the council</i> &mdash; Starting with you, each player votes for sickness or psychosis. If sickness gets more votes, creatures your opponents control get -2/-2 until end of turn. If psychosis gets more votes or the vote is tied, each opponent discards two cards";
     }
 
     BiteOfTheBlackRoseEffect(final BiteOfTheBlackRoseEffect effect) {

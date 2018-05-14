@@ -53,6 +53,7 @@ public class SpellsCostReductionAllEffect extends CostModificationEffectImpl {
     private FilterCard filter;
     private int amount;
     private final boolean upTo;
+    private boolean onlyControlled;
 
     public SpellsCostReductionAllEffect(int amount) {
         this(new FilterCard("Spells"), amount);
@@ -63,19 +64,24 @@ public class SpellsCostReductionAllEffect extends CostModificationEffectImpl {
     }
 
     public SpellsCostReductionAllEffect(FilterCard filter, int amount, boolean upTo) {
+        this(filter, amount, upTo, false);
+    }
+
+    public SpellsCostReductionAllEffect(FilterCard filter, int amount, boolean upTo, boolean onlyControlled) {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
         this.filter = filter;
         this.amount = amount;
         this.upTo = upTo;
-
+        this.onlyControlled = onlyControlled;
         this.staticText = filter.getMessage() + " cost " + (upTo ? "up to " : "") + '{' + amount + "} less to cast";
     }
 
-    protected SpellsCostReductionAllEffect(SpellsCostReductionAllEffect effect) {
+    protected SpellsCostReductionAllEffect(final SpellsCostReductionAllEffect effect) {
         super(effect);
         this.filter = effect.filter;
         this.amount = effect.amount;
         this.upTo = effect.upTo;
+        this.onlyControlled = effect.onlyControlled;
     }
 
     @Override
@@ -136,6 +142,9 @@ public class SpellsCostReductionAllEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
+        if (onlyControlled && abilityToModify.getControllerId().equals(source.getControllerId())) {
+            return false;
+        }
         if (abilityToModify instanceof SpellAbility) {
             Spell spell = (Spell) game.getStack().getStackObject(abilityToModify.getId());
             if (spell != null) {

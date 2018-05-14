@@ -148,7 +148,25 @@ class DawnsReflectionManaEffect extends ManaEffect {
     }
 
     @Override
-    public Mana getMana(Game game, Ability source) {
+    public Mana produceMana(boolean netMana, Game game, Ability source) {
+        if (netMana) {
+            return new Mana(0, 0, 0, 0, 0, 0, 2, 0);
+        }
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            int x = 2;
+            Mana mana = new Mana();
+            for (int i = 0; i < x; i++) {
+                ChoiceColor choiceColor = new ChoiceColor();
+                if (!controller.choose(Outcome.Benefit, choiceColor, game)) {
+                    return null;
+                }
+                choiceColor.increaseMana(mana);
+            }
+            controller.getManaPool().addMana(mana, game, source);
+            return mana;
+
+        }
         return null;
     }
 

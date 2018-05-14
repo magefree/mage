@@ -49,15 +49,12 @@ import mage.target.common.TargetOpponent;
 public class MindFuneral extends CardImpl {
 
     public MindFuneral(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{U}{B}");
-
-
-        
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{U}{B}");
 
         // Target opponent reveals cards from the top of their library until four land cards are revealed. That player puts all cards revealed this way into their graveyard.
         this.getSpellAbility().addEffect(new MindFuneralEffect());
         this.getSpellAbility().addTarget(new TargetOpponent());
-        
+
     }
 
     public MindFuneral(final MindFuneral card) {
@@ -92,17 +89,13 @@ class MindFuneralEffect extends OneShotEffect {
         if (opponent != null) {
             Cards cards = new CardsImpl();
             int landsFound = 0;
-            while (landsFound < 4 && opponent.getLibrary().hasCards()) {
-                Card card = opponent.getLibrary().removeFromTop(game);
-                if (card == null) {
+            for (Card card : opponent.getLibrary().getCards(game)) {
+                cards.add(card);
+                if (card.isLand() && ++landsFound == 4) {
                     break;
                 }
-                if (card.isLand()) {
-                    landsFound++;
-                }
-                cards.add(card);
             }
-            opponent.revealCards("Mind Funeral", cards, game);
+            opponent.revealCards(source, cards, game);
             opponent.moveCards(cards, Zone.GRAVEYARD, source, game);
             return true;
         }

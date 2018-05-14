@@ -29,6 +29,7 @@ package mage.game.command.planes;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
@@ -132,7 +133,7 @@ class EdgeOfMalacolEffect extends ContinuousRuleModifyingEffectImpl {
                 }
             }
             Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && filter.match(permanent, game) && permanent.getControllerId() == game.getActivePlayerId()) {
+            if (permanent != null && filter.match(permanent, game) && Objects.equals(permanent.getControllerId(), game.getActivePlayerId())) {
                 UUID oldController = source.getControllerId();
                 source.setControllerId(game.getActivePlayerId());
                 Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance(2));

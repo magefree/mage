@@ -83,26 +83,27 @@ class RiteOfFlameManaEffect extends ManaEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            int count = 0;
-            for (Player player : game.getPlayers().values()) {
-                if (player != null) {
-                    count += player.getGraveyard().count(filter, game);
-                }
-            }
-            controller.getManaPool().addMana(Mana.RedMana(count + 2), game, source);
+            controller.getManaPool().addMana(getMana(game, source), game, source);
             return true;
         }
         return false;
     }
 
     @Override
-    public RiteOfFlameManaEffect copy() {
-        return new RiteOfFlameManaEffect(this);
+    public Mana produceMana(boolean netMana, Game game, Ability source) {
+        int count = 0;
+        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
+            Player player = game.getPlayer(playerId);
+            if (player != null) {
+                count += player.getGraveyard().count(filter, game);
+            }
+        }
+        return Mana.RedMana(count + 2);
     }
 
     @Override
-    public Mana getMana(Game game, Ability source) {
-        return null;
+    public RiteOfFlameManaEffect copy() {
+        return new RiteOfFlameManaEffect(this);
     }
 
 }

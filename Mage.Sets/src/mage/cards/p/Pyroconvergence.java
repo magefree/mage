@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.p;
 
 import java.util.UUID;
@@ -35,8 +34,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.MulticoloredPredicate;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetAnyTarget;
 
 /**
@@ -45,17 +43,12 @@ import mage.target.common.TargetAnyTarget;
  */
 public class Pyroconvergence extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("a multicolored spell");
-
-    static {
-        filter.add(new MulticoloredPredicate());
-    }
-
     public Pyroconvergence(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{R}");
 
         // Whenever you cast a multicolored spell, Pyroconvergence deals 2 damage to any target.
-        Ability ability = new SpellCastControllerTriggeredAbility(new DamageTargetEffect(2), filter, false);
+        Ability ability = new SpellCastControllerTriggeredAbility(
+                new DamageTargetEffect(2), StaticFilters.FILTER_SPELL_A_MULTICOLORED, false);
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

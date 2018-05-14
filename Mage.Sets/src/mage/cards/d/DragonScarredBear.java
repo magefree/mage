@@ -53,7 +53,7 @@ public class DragonScarredBear extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
-        // <i>Formidable</i> - {1}{G}: Regenerate Dragon-Scarred Bear. Activate this only if creatures you control have total power 8 or greater.
+        // <i>Formidable</i> &mdash; {1}{G}: Regenerate Dragon-Scarred Bear. Activate this only if creatures you control have total power 8 or greater.
         Ability ability = new ActivateIfConditionActivatedAbility(
             Zone.BATTLEFIELD,
             new RegenerateSourceEffect(),

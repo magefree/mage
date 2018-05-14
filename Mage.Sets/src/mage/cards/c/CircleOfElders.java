@@ -33,7 +33,7 @@ import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.FormidableCondition;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.BasicManaEffect;
+import mage.abilities.effects.mana.BasicManaEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.abilities.mana.ActivateIfConditionManaAbility;
 import mage.cards.CardImpl;
@@ -59,7 +59,7 @@ public class CircleOfElders extends CardImpl {
         // Vigilance
         this.addAbility(VigilanceAbility.getInstance());
 
-        // <i>Formidable</i> - {T}: Add {C}{C}{C}. Activate this only if creatures you control have total power 8 or greater.
+        // <i>Formidable</i> &mdash; {T}: Add {C}{C}{C}. Activate this only if creatures you control have total power 8 or greater.
         Ability ability = new ActivateIfConditionManaAbility(
                 Zone.BATTLEFIELD,
                 new BasicManaEffect(Mana.ColorlessMana(3)),

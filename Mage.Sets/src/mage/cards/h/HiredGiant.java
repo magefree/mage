@@ -94,7 +94,7 @@ class HiredGiantEffect extends OneShotEffect {
         if (controller != null) {
             Set<Player> playersThatSearched = new HashSet<>(1);
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                if (playerId != controller.getId()) {
+                if (!playerId.equals(controller.getId())) {
                     Player player = game.getPlayer(playerId);
                     if (player != null && player.chooseUse(Outcome.PutCreatureInPlay, "Search your library for a land card and put it onto the battlefield?", source, game)) {
                         TargetCardInLibrary target = new TargetCardInLibrary(new FilterLandCard());

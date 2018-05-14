@@ -27,19 +27,13 @@
  */
 package mage.cards.t;
 
-import java.util.Deque;
-import java.util.LinkedList;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -102,33 +96,14 @@ class TimeOutEffect extends OneShotEffect {
             Permanent permanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
             if (permanent != null) {
                 Player owner = game.getPlayer(permanent.getOwnerId());
-                if (owner != null) {
-                    int amount = controller.rollDice(game, 6);
-                    Cards cards = new CardsImpl();
-                    Deque<UUID> cardIds = new LinkedList<>();
-                    for (int i = 0; i < amount; i++) {
-                        Card card = owner.getLibrary().removeFromTop(game);
-                        cards.add(card);
-                        cardIds.push(card.getId());
-                    }
-                    // return cards back to library
-                    game.informPlayers(new StringBuilder(controller.getLogName())
-                            .append(" puts ").append(permanent.getName())
-                            .append(" beneath the top ").append(amount)
-                            .append(" cards of ").append(owner.getLogName()).append("'s library").toString());
-                    permanent.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-                    while (!cardIds.isEmpty()) {
-                        UUID cardId = cardIds.poll();
-                        Card card = cards.get(cardId, game);
-                        if (card != null) {
-                            card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-                        }
-                    }
-                    return true;
+                if (owner == null) {
+                    return false;
                 }
+                int amount = controller.rollDice(game, 6);
+                controller.putCardOnTopXOfLibrary(permanent, game, source, amount);
+                return true;
             }
         }
-
         return false;
     }
 }

@@ -34,18 +34,14 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.LookLibraryControllerEffect;
 import mage.abilities.keyword.EntwineAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.TargetCard;
 import mage.target.common.TargetOpponent;
 
 /**
@@ -91,7 +87,7 @@ class SecondSightEffect extends OneShotEffect {
 
     public SecondSightEffect() {
         super(Outcome.DrawCard);
-        this.staticText = "look at the top five cards of target opponent's library, then put them back in any order.";
+        this.staticText = "look at the top five cards of target opponent's library, then put them back in any order";
     }
 
     public SecondSightEffect(final SecondSightEffect effect) {
@@ -105,36 +101,14 @@ class SecondSightEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player you = game.getPlayer(source.getControllerId());
+        Player controller = game.getPlayer(source.getControllerId());
         Player player = game.getPlayer(source.getFirstTarget());
-        if (player == null || you == null) {
+        if (player == null || controller == null) {
             return false;
         }
-        Cards cards = new CardsImpl();
-        int count = Math.min(player.getLibrary().size(), 5);
-        for (int i = 0; i < count; i++) {
-            Card card = player.getLibrary().removeFromTop(game);
-            if (card != null) {
-                cards.add(card);
-            }
-        }
-
-        you.lookAtCards("Second Sight", cards, game);
-
-        TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to put on the top of target player's library"));
-        while (player.canRespond() && cards.size() > 1) {
-            you.choose(Outcome.Neutral, cards, target, game);
-            Card card = cards.get(target.getFirstTarget(), game);
-            if (card != null) {
-                cards.remove(card);
-                card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-            }
-            target.clearChosen();
-        }
-        if (cards.size() == 1) {
-            Card card = cards.get(cards.iterator().next(), game);
-            card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-        }
+        Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, 5));
+        controller.lookAtCards(source, null, cards, game);
+        controller.putCardsOnTopOfLibrary(cards, game, source, true);
         return true;
     }
 }

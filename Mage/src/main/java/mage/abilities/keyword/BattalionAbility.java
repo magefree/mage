@@ -72,7 +72,7 @@ public class BattalionAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return new StringBuilder("<i>Battalion</i> - Whenever {this} and at least two other creatures attack, ").append(super.getRule()).toString() ;
+        return new StringBuilder("<i>Battalion</i> &mdash; Whenever {this} and at least two other creatures attack, ").append(super.getRule()).toString() ;
     }
 }
 

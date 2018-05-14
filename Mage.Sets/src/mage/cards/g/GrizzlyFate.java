@@ -55,7 +55,7 @@ public class GrizzlyFate extends CardImpl {
         Effect effect = new ConditionalOneShotEffect(new CreateTokenEffect(new BearToken(), 4),
                                                      new CreateTokenEffect(new BearToken(), 2),
                                                      new CardsInControllerGraveCondition(7),
-                                                     "Create two 2/2 green Bear creature tokens.<br/><br/><i>Threshold</i> - Create four 2/2 green Bear creature tokens instead if seven or more cards are in your graveyard.");
+                                                     "Create two 2/2 green Bear creature tokens.<br/><br/><i>Threshold</i> &mdash; Create four 2/2 green Bear creature tokens instead if seven or more cards are in your graveyard.");
         this.getSpellAbility().addEffect(effect);
 
         // Flashback {5}{G}{G}

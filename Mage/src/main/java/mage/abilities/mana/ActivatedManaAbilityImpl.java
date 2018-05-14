@@ -33,6 +33,7 @@ import java.util.UUID;
 import mage.Mana;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.Cost;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ManaEffect;
 import mage.constants.AbilityType;
 import mage.constants.AsThoughEffectType;
@@ -95,6 +96,13 @@ public abstract class ActivatedManaAbilityImpl extends ActivatedAbilityImpl impl
      */
     @Override
     public List<Mana> getNetMana(Game game) {
+        if (netMana.isEmpty()) {
+            for (Effect effect : getEffects()) {
+                if (effect instanceof ManaEffect) {
+                    netMana.addAll(((ManaEffect) effect).getNetMana(game, this));
+                }
+            }
+        }
         return netMana;
     }
 

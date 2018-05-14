@@ -27,6 +27,7 @@
  */
 package mage.cards.m;
 
+import java.util.ArrayList;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -44,13 +45,19 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.target.common.TargetCardInLibrary;
 import mage.util.SubTypeList;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.UUID;
+import mage.MageObject;
+import mage.constants.SuperType;
+import mage.filter.predicate.Predicate;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.mageobject.SupertypePredicate;
 
 /**
  *
@@ -59,7 +66,7 @@ import java.util.UUID;
 public class MyriadLandscape extends CardImpl {
 
     public MyriadLandscape(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
         // Myriad Landscape enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
@@ -68,13 +75,12 @@ public class MyriadLandscape extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
 
         // {2}, {tap}, Sacrifice Myriad Landscape: Search your library for up to two basic land cards that share a land type, put them onto the battlefield tapped, then shuffle your library.
-        Effect effect = new SearchLibraryPutInPlayEffect(new TargetCardInLibrarySharingLandType(0, 2, StaticFilters.FILTER_BASIC_LAND_CARD), true);
+        Effect effect = new SearchLibraryPutInPlayEffect(new TargetCardInLibrarySharingLandType(0, 2), true);
         effect.setText("Search your library for up to two basic land cards that share a land type, put them onto the battlefield tapped, then shuffle your library");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
-
 
     }
 
@@ -90,7 +96,18 @@ public class MyriadLandscape extends CardImpl {
 
 class TargetCardInLibrarySharingLandType extends TargetCardInLibrary {
 
-    public TargetCardInLibrarySharingLandType(int minNumTargets, int maxNumTargets, FilterCard filter) {
+    private static final FilterCard filter = new FilterCard("basic land card");
+
+    static {
+        List<Predicate<MageObject>> subTypePreds = new ArrayList<>();
+        for (SubType landType : SubType.getLandTypes(false)) {
+            subTypePreds.add(new SubtypePredicate(landType));
+        }
+        filter.add(Predicates.or(subTypePreds));
+        filter.add(new SupertypePredicate(SuperType.BASIC));
+    }
+
+    public TargetCardInLibrarySharingLandType(int minNumTargets, int maxNumTargets) {
         super(minNumTargets, maxNumTargets, filter);
     }
 
@@ -104,7 +121,7 @@ class TargetCardInLibrarySharingLandType extends TargetCardInLibrary {
             if (!getTargets().isEmpty()) {
                 // check if new target shares a Land Type
                 SubTypeList landTypes = new SubTypeList();
-                for (UUID landId: getTargets()) {
+                for (UUID landId : getTargets()) {
                     Card landCard = game.getCard(landId);
                     if (landCard != null) {
                         if (landTypes.isEmpty()) {
@@ -130,7 +147,6 @@ class TargetCardInLibrarySharingLandType extends TargetCardInLibrary {
         }
         return false;
     }
-   
 
     @Override
     public TargetCardInLibrarySharingLandType copy() {

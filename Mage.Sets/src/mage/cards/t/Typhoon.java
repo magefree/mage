@@ -83,7 +83,7 @@ class TyphoonEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
-            if (playerId != source.getControllerId()) {
+            if (!playerId.equals(source.getControllerId())) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     int amount = 0;

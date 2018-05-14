@@ -89,21 +89,19 @@ class CreamOfTheCropEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
+        Player controller = game.getPlayer(source.getControllerId());
         Permanent permanent = ((FixedTarget) getTargetPointer()).getTargetedPermanentOrLKIBattlefield(game);
-        if (player != null && permanent != null) {
-            int numLooked = Math.min(permanent.getPower().getValue(), player.getLibrary().size());
-            if (numLooked > 0) {
-                Cards cards = new CardsImpl();
-                for (int i = 0; i < numLooked; i++) {
-                    cards.add(player.getLibrary().removeFromTop(game));
-                }
+        if (controller != null && permanent != null) {
+            Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, permanent.getPower().getValue()));
+            if (!cards.isEmpty()) {
                 TargetCard target = new TargetCardInHand(new FilterCard("card to put on top of your library"));
-                player.choose(Outcome.Benefit, cards, target, game);
+                controller.choose(Outcome.Benefit, cards, target, game);
                 Card card = cards.get(target.getFirstTarget(), game);
-                cards.remove(card);
-                player.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.LIBRARY, true, false);
-                player.putCardsOnBottomOfLibrary(cards, game, source, true);
+                if (card != null) {
+                    cards.remove(card);
+                    controller.putCardsOnTopOfLibrary(new CardsImpl(card), game, source, true);
+                }
+                controller.putCardsOnBottomOfLibrary(cards, game, source, true);
             }
             return true;
         }

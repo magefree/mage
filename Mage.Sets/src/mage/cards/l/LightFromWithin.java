@@ -68,7 +68,7 @@ public class LightFromWithin extends CardImpl {
 
         // Chroma - Each creature you control gets +1/+1 for each white mana symbol in its mana cost.
         Effect effect = new LightFromWithinEffect();
-        effect.setText("<i>Chroma</i> - Each creature you control gets +1/+1 for each white mana symbol in its mana cost.");
+        effect.setText("<i>Chroma</i> &mdash; Each creature you control gets +1/+1 for each white mana symbol in its mana cost.");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
 
     }

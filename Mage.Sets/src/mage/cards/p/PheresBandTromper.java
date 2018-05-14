@@ -51,7 +51,7 @@ public class PheresBandTromper extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // <i>Inspired</i> - Whenever Pheres-Band Tromper becomes untapped, put a +1/+1 counter on it.
+        // <i>Inspired</i> &mdash; Whenever Pheres-Band Tromper becomes untapped, put a +1/+1 counter on it.
         this.addAbility(new InspiredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance())));
     }
 

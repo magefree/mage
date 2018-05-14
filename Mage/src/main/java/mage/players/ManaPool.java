@@ -395,7 +395,8 @@ public class ManaPool implements Serializable {
         Mana mana = manaToAdd.copy();
         if (!game.replaceEvent(new ManaEvent(EventType.ADD_MANA, source.getId(), source.getSourceId(), playerId, mana))) {
             if (mana instanceof ConditionalMana) {
-                ManaPoolItem item = new ManaPoolItem((ConditionalMana) mana, source.getSourceObject(game), source.getOriginalId());
+                ManaPoolItem item = new ManaPoolItem((ConditionalMana) mana, source.getSourceObject(game),
+                        ((ConditionalMana) mana).getManaProducerOriginalId() != null ? ((ConditionalMana) mana).getManaProducerOriginalId() : source.getOriginalId());
                 if (emptyOnTurnsEnd) {
                     item.setDuration(Duration.EndOfTurn);
                 }
@@ -505,4 +506,13 @@ public class ManaPool implements Serializable {
     public boolean isEmpty() {
         return count() == 0;
     }
+
+    public List<ManaPoolItem> getManaItems() {
+        List<ManaPoolItem> itemsCopy = new ArrayList<>();
+        for (ManaPoolItem manaItem : manaItems) {
+            itemsCopy.add(manaItem.copy());
+        }
+        return itemsCopy;
+    }
+
 }

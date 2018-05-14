@@ -62,7 +62,7 @@ public class Epicenter extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new EpicenterEffect(),
                 new CardsInControllerGraveCondition(7),
-                "<br/><br/><i>Threshold</i> - Each player sacrifices all lands he or she controls instead if seven or more cards are in your graveyard."));
+                "<br/><br/><i>Threshold</i> &mdash; Each player sacrifices all lands he or she controls instead if seven or more cards are in your graveyard."));
 
         this.getSpellAbility().addTarget(new TargetPlayer());
     }

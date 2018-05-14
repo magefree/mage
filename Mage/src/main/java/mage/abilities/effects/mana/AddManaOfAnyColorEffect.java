@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.effects.common;
+package mage.abilities.effects.mana;
 
 import mage.Mana;
 import mage.abilities.Ability;
@@ -91,7 +91,7 @@ public class AddManaOfAnyColorEffect extends BasicManaEffect {
     }
 
     @Override
-    public Mana getMana() {
+    public Mana getManaTemplate() {
         return new Mana(0, 0, 0, 0, 0, 0, amount, 0);
     }
 

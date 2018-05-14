@@ -106,29 +106,17 @@ class EyeOfYawgmothEffect extends OneShotEffect {
             }
         }
         if (power > 0) {
-            Cards cards = new CardsImpl();
-            int count = Math.min(controller.getLibrary().size(), power);
-            for (int i = 0; i < count; i++) {
-                Card card = controller.getLibrary().removeFromTop(game);
-                if (card != null) {
-                    cards.add(card);
-                }
-            }
-            controller.revealCards(source.getSourceObject(game).getIdName(), cards, game);
-
+            Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, power));
+            controller.revealCards(source, cards, game);
             TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to put into your hand"));
             if (controller.choose(Outcome.DrawCard, cards, target, game)) {
                 Card card = cards.get(target.getFirstTarget(), game);
                 if (card != null) {
+                    controller.moveCards(card, Zone.HAND, source, game);
                     cards.remove(card);
-                    card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
-                    game.informPlayers(source.getSourceObject(game).getIdName() + ": " + controller.getLogName() + " puts " + card.getIdName() + " into their hand");
                 }
             }
-            for (UUID cardId : cards) {
-                Card card = game.getCard(cardId);
-                card.moveToExile(null, "", source.getSourceId(), game);
-            }
+            controller.moveCards(cards, Zone.EXILED, source, game);
         }
         return true;
     }

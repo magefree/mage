@@ -11,7 +11,6 @@ import mage.cards.repository.ExpansionRepository;
 import mage.constants.SetType;
 import mage.deck.Standard;
 
-
 /**
  * Utility class for constructed formats (expansions and other editions).
  *
@@ -82,14 +81,16 @@ public final class ConstructedFormats {
                 if (STANDARD_CARDS.getSetCodes().contains(set.getCode())) {
                     underlyingSetCodesPerFormat.get(STANDARD).add(set.getCode());
                 }
-                if (set.getReleaseDate().after(extendedDate)) {
-                    underlyingSetCodesPerFormat.get(EXTENDED).add(set.getCode());
-                }
-                if (set.getReleaseDate().after(frontierDate)) {
-                    underlyingSetCodesPerFormat.get(FRONTIER).add(set.getCode());
-                }
-                if (set.getReleaseDate().after(modernDate)) {
-                    underlyingSetCodesPerFormat.get(MODERN).add(set.getCode());
+                if (set.getType() != SetType.SUPPLEMENTAL_STANDARD_LEGAL) {
+                    if (set.getReleaseDate().after(extendedDate) && (set.getType() == SetType.EXPANSION || set.getType() == SetType.CORE)) {
+                        underlyingSetCodesPerFormat.get(EXTENDED).add(set.getCode());
+                    }
+                    if (set.getReleaseDate().after(frontierDate) && (set.getType() == SetType.EXPANSION || set.getType() == SetType.CORE)) {
+                        underlyingSetCodesPerFormat.get(FRONTIER).add(set.getCode());
+                    }
+                    if (set.getReleaseDate().after(modernDate) && (set.getType() == SetType.EXPANSION || set.getType() == SetType.CORE)) {
+                        underlyingSetCodesPerFormat.get(MODERN).add(set.getCode());
+                    }
                 }
             }
 

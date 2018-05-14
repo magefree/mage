@@ -65,7 +65,7 @@ public class BloodrushAbility extends ActivatedAbilityImpl {
 
     @Override
     public String getRule() {
-        StringBuilder sb = new StringBuilder("<i>Bloodrush</i> - ");
+        StringBuilder sb = new StringBuilder("<i>Bloodrush</i> &mdash; ");
         sb.append(super.getRule());
         return sb.toString();
     }

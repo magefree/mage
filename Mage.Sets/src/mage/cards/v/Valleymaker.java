@@ -34,7 +34,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.AddManaToManaPoolTargetControllerEffect;
+import mage.abilities.effects.mana.AddManaToManaPoolTargetControllerEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;

@@ -37,13 +37,12 @@ import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.counters.Counter;
+import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-
 
 /**
  *
@@ -52,10 +51,9 @@ import mage.players.Player;
 public class AzorsElocutors extends CardImpl {
 
     public AzorsElocutors(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W/U}{W/U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W/U}{W/U}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.ADVISOR);
-
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(5);
@@ -65,7 +63,6 @@ public class AzorsElocutors extends CardImpl {
 
         // Whenever a source deals damage to you, remove a filibuster counter from Azor's Elocutors.
         this.addAbility(new AzorsElocutorsTriggeredAbility());
-
     }
 
     public AzorsElocutors(final AzorsElocutors card) {
@@ -77,10 +74,11 @@ public class AzorsElocutors extends CardImpl {
         return new AzorsElocutors(this);
     }
 }
+
 class AzorsElocutorsTriggeredAbility extends TriggeredAbilityImpl {
 
     public AzorsElocutorsTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new RemoveCounterSourceEffect(new Counter("filibuster")), false);
+        super(Zone.BATTLEFIELD, new RemoveCounterSourceEffect(CounterType.FILIBUSTER.createInstance()), false);
     }
 
     public AzorsElocutorsTriggeredAbility(final AzorsElocutorsTriggeredAbility ability) {
@@ -124,8 +122,8 @@ class AzorsElocutorsEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
-            permanent.addCounters(new Counter("filibuster"), source, game);
-            if (permanent.getCounters(game).getCount("filibuster") > 4) {
+            permanent.addCounters(CounterType.FILIBUSTER.createInstance(), source, game);
+            if (permanent.getCounters(game).getCount(CounterType.FILIBUSTER) > 4) {
                 Player player = game.getPlayer(permanent.getControllerId());
                 if (player != null) {
                     player.won(game);

@@ -250,6 +250,7 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
         return false;
     }
 
+    @Override
     public void setMayActivate(TargetController mayActivate) {
         this.mayActivate = mayActivate;
     }

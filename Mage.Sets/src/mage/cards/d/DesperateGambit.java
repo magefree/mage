@@ -28,6 +28,7 @@
 package mage.cards.d;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 import mage.MageObject;
@@ -158,7 +159,7 @@ class TargetControlledSource extends TargetSource {
         int count = 0;
         for (StackObject stackObject: game.getStack()) {
             if (game.getState().getPlayersInRange(sourceControllerId, game).contains(stackObject.getControllerId()) 
-                && stackObject.getControllerId() == sourceControllerId) {
+                && Objects.equals(stackObject.getControllerId(), sourceControllerId)) {
                 count++;
                 if (count >= this.minNumberOfTargets) {
                     return true;
@@ -166,7 +167,7 @@ class TargetControlledSource extends TargetSource {
             }
         }
         for (Permanent permanent: game.getBattlefield().getActivePermanents(sourceControllerId, game)) {
-            if (permanent.getControllerId() == sourceControllerId) {
+            if (Objects.equals(permanent.getControllerId(), sourceControllerId)) {
                 count++;
                 if (count >= this.minNumberOfTargets) {
                     return true;
@@ -174,7 +175,7 @@ class TargetControlledSource extends TargetSource {
             }
         }
         for (Player player : game.getPlayers().values()) {
-            if (player == game.getPlayer(sourceControllerId)) {
+            if (Objects.equals(player, game.getPlayer(sourceControllerId))) {
                 for (Card card : player.getGraveyard().getCards(game)) {
                     count++;
                     if (count >= this.minNumberOfTargets) {
@@ -183,7 +184,7 @@ class TargetControlledSource extends TargetSource {
                 }
                 // 108.4a If anything asks for the controller of a card that doesn’t have one (because it’s not a permanent or spell), use its owner instead.
                 for (Card card : game.getExile().getAllCards(game)) {
-                    if (card.getOwnerId() == sourceControllerId) {
+                    if (Objects.equals(card.getOwnerId(), sourceControllerId)) {
                         count++;
                         if (count >= this.minNumberOfTargets) {
                             return true;
@@ -200,23 +201,23 @@ class TargetControlledSource extends TargetSource {
         Set<UUID> possibleTargets = new HashSet<>();
         for (StackObject stackObject: game.getStack()) {
             if (game.getState().getPlayersInRange(sourceControllerId, game).contains(stackObject.getControllerId()) 
-                && stackObject.getControllerId() == sourceControllerId) {
+                && Objects.equals(stackObject.getControllerId(), sourceControllerId)) {
                 possibleTargets.add(stackObject.getId());
             }
         }
         for (Permanent permanent: game.getBattlefield().getActivePermanents(sourceControllerId, game)) {
-            if (permanent.getControllerId() == sourceControllerId) {
+            if (Objects.equals(permanent.getControllerId(), sourceControllerId)) {
                 possibleTargets.add(permanent.getId());
             }
         }
         for (Player player : game.getPlayers().values()) {
-            if (player == game.getPlayer(sourceControllerId)) {
+            if (Objects.equals(player, game.getPlayer(sourceControllerId))) {
                 for (Card card : player.getGraveyard().getCards(game)) {
                     possibleTargets.add(card.getId());
                 }
                 // 108.4a If anything asks for the controller of a card that doesn’t have one (because it’s not a permanent or spell), use its owner instead.
                 for (Card card : game.getExile().getAllCards(game)) {
-                    if (card.getOwnerId() == sourceControllerId) {
+                    if (Objects.equals(card.getOwnerId(), sourceControllerId)) {
                         possibleTargets.add(card.getId());
                     }
                 }

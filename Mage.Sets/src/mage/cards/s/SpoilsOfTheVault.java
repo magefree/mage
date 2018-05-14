@@ -50,7 +50,7 @@ import mage.players.Player;
 public class SpoilsOfTheVault extends CardImpl {
 
     public SpoilsOfTheVault(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{B}");
 
         // Name a card. Reveal cards from the top of your library until you reveal the named card, then put that card into your hand. Exile all other cards revealed this way, and you lose 1 life for each of the exiled cards.
         this.getSpellAbility().addEffect(new NameACardEffect(NameACardEffect.TypeOfName.ALL));
@@ -94,8 +94,7 @@ class SpoilsOfTheVaultEffect extends OneShotEffect {
 
         Cards cardsToReveal = new CardsImpl();
         Cards cardsToExile = new CardsImpl();
-        while (controller.getLibrary().hasCards()) {
-            Card card = controller.getLibrary().removeFromTop(game);
+        for (Card card : controller.getLibrary().getCards(game)) {
             if (card != null) {
                 cardsToReveal.add(card);
                 if (card.getName().equals(cardName)) {

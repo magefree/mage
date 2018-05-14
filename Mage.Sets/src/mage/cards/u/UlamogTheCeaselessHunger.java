@@ -35,7 +35,6 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.keyword.IndestructibleAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -60,7 +59,7 @@ import mage.target.targetpointer.FixedTarget;
 public class UlamogTheCeaselessHunger extends CardImpl {
 
     public UlamogTheCeaselessHunger(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{10}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{10}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELDRAZI);
         this.power = new MageInt(10);
@@ -156,7 +155,7 @@ class UlamogAttackTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return new StringBuilder("Whenever {this} attacks, ").append(super.getRule()).toString();
+        return "Whenever {this} attacks, " + super.getRule();
     }
 }
 
@@ -180,13 +179,7 @@ class UlamogExileLibraryEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player defender = game.getPlayer(targetPointer.getFirst(game, source));
         if (defender != null) {
-            int count = Math.min(defender.getLibrary().size(), 20);
-            for (int i = 0; i < count; i++) {
-                Card card = defender.getLibrary().removeFromTop(game);
-                if (card != null) {
-                    card.moveToExile(null, null, source.getSourceId(), game);
-                }
-            }
+            defender.moveCards(defender.getLibrary().getTopCards(game, 20), Zone.EXILED, source, game);
             return true;
         }
         return false;

@@ -55,7 +55,7 @@ public class CacklingFlames extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DamageTargetEffect(5),
                 HellbentCondition.instance,
-                "<br/><br/><i>Hellbent</i> - {this} deals 5 damage to that permanent or player instead if you have no cards in hand."));
+                "<br/><br/><i>Hellbent</i> &mdash; {this} deals 5 damage to that permanent or player instead if you have no cards in hand."));
 
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }

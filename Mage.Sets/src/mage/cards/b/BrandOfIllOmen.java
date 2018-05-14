@@ -44,6 +44,7 @@ import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -122,7 +123,7 @@ class BrandOfIllOmenEffect extends ContinuousRuleModifyingEffectImpl {
         Permanent brand = game.getPermanent(source.getSourceId());
         if (brand != null && brand.getAttachedTo() != null) {
             UUID enchantedController = game.getPermanent(brand.getAttachedTo()).getControllerId();
-            if(enchantedController == event.getPlayerId() && game.getObject(event.getSourceId()).isCreature()) {
+            if(Objects.equals(enchantedController, event.getPlayerId()) && game.getObject(event.getSourceId()).isCreature()) {
                 return true;
             }
         }

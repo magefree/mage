@@ -50,7 +50,7 @@ public class TritonFortuneHunter extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // <i>Heroic</i> - Whenever you cast a spell that targets Triton Fortune Hunter, draw a card.
+        // <i>Heroic</i> &mdash; Whenever you cast a spell that targets Triton Fortune Hunter, draw a card.
         this.addAbility(new HeroicAbility(new DrawCardSourceControllerEffect(1)));
     }
 

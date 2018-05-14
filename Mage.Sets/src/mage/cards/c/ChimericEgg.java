@@ -28,6 +28,7 @@
 package mage.cards.c;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SpellCastOpponentTriggeredAbility;
@@ -48,11 +49,10 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
-
+import mage.game.permanent.token.custom.CreatureToken;
 
 
 /**
- *
  * @author Pete Rossi
  */
 public class ChimericEgg extends CardImpl {
@@ -65,13 +65,17 @@ public class ChimericEgg extends CardImpl {
 
     public ChimericEgg(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
-        
+
         // Whenever an opponent casts a nonartifact spell, put a charge counter on Chimeric Egg.
         this.addAbility(new SpellCastOpponentTriggeredAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), nonArtifactFilter, false));
 
         // Remove three charge counters from Chimeric Egg: Chimeric Egg becomes a 6/6 Construct artifact creature with trample until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect
-                (new ChimericEggToken(), "", Duration.EndOfTurn), new RemoveCountersSourceCost(new Counter(CounterType.CHARGE.getName(), 3))));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(
+                new CreatureToken(6, 6, "6/6 Construct artifact creature with trample")
+                        .withSubType(SubType.CONSTRUCT)
+                        .withType(CardType.ARTIFACT)
+                        .withAbility(TrampleAbility.getInstance()),
+                "", Duration.EndOfTurn), new RemoveCountersSourceCost(new Counter(CounterType.CHARGE.getName(), 3))));
     }
 
     public ChimericEgg(final ChimericEgg card) {
@@ -81,24 +85,5 @@ public class ChimericEgg extends CardImpl {
     @Override
     public ChimericEgg copy() {
         return new ChimericEgg(this);
-    }
-
-    private static class ChimericEggToken extends TokenImpl {
-        ChimericEggToken() {
-            super("", "6/6 Construct artifact creature with trample");
-            cardType.add(CardType.ARTIFACT);
-            cardType.add(CardType.CREATURE);
-            this.subtype.add(SubType.CONSTRUCT);
-            power = new MageInt(6);
-            toughness = new MageInt(6);
-            this.addAbility(TrampleAbility.getInstance());
-        }
-        public ChimericEggToken(final ChimericEggToken token) {
-            super(token);
-        }
-
-        public ChimericEggToken copy() {
-            return new ChimericEggToken(this);
-        }
     }
 }

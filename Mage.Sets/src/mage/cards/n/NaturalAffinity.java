@@ -31,17 +31,17 @@ import java.util.Iterator;
 import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.common.continuous.BecomesCreatureAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
+import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.token.custom.CreatureToken;
 
 /**
  *
@@ -53,7 +53,9 @@ public class NaturalAffinity extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}");
 
         // All lands become 2/2 creatures until end of turn. They're still lands.
-        this.getSpellAbility().addEffect(new BecomesCreatureAllEffect());
+        this.getSpellAbility().addEffect(new BecomesCreatureAllEffect(
+                new CreatureToken(2, 2),
+                "lands", StaticFilters.FILTER_LANDS, Duration.EndOfTurn, false));
     }
 
     public NaturalAffinity(final NaturalAffinity card) {
@@ -64,73 +66,4 @@ public class NaturalAffinity extends CardImpl {
     public NaturalAffinity copy() {
         return new NaturalAffinity(this);
     }
-}
-
-class BecomesCreatureAllEffect extends ContinuousEffectImpl {
-
-    public BecomesCreatureAllEffect() {
-        super(Duration.EndOfTurn, Outcome.BecomeCreature);
-        staticText = "All lands become 2/2 creatures until end of turn. They're still lands";
-    }
-
-    public BecomesCreatureAllEffect(final BecomesCreatureAllEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public BecomesCreatureAllEffect copy() {
-        return new BecomesCreatureAllEffect(this);
-    }
-
-    @Override
-    public void init(Ability source, Game game) {
-        super.init(source, game);
-        this.affectedObjectsSet = true;
-        for (Permanent perm : game.getBattlefield().getActivePermanents(new FilterLandPermanent(), source.getControllerId(), source.getSourceId(), game)) {
-            affectedObjectList.add(new MageObjectReference(perm, game));
-        }
-    }
-
-    @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        switch (layer) {
-            case TypeChangingEffects_4:
-                if (sublayer == SubLayer.NA) {
-                    for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext();) {
-                        Permanent permanent = it.next().getPermanent(game);
-                        if (permanent != null) {
-                            permanent.addCardType(CardType.CREATURE);
-                        } else {
-                            it.remove();
-                        }
-                    }
-                }
-                break;
-
-            case PTChangingEffects_7:
-                if (sublayer == SubLayer.SetPT_7b) {
-                    for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext();) {
-                        Permanent permanent = it.next().getPermanent(game);
-                        if (permanent != null) {
-                            permanent.getPower().setValue(2);
-                            permanent.getToughness().setValue(2);
-                        } else {
-                            it.remove();
-                        }
-                    }
-                }
-        }
-        return true;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.PTChangingEffects_7 || layer == Layer.AbilityAddingRemovingEffects_6 || layer == Layer.ColorChangingEffects_5 || layer == Layer.TypeChangingEffects_4;
-    }
-
 }

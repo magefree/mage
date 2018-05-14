@@ -51,7 +51,7 @@ public class ShowerOfCoals extends CardImpl {
         Effect effect = new ConditionalOneShotEffect(new DamageTargetEffect(4),
                 new DamageTargetEffect(2),
                 new CardsInControllerGraveCondition(7),
-                "{this} deals 2 damage to each of up to three targets.<br/><br/><i>Threshold</i> - {this} deals 4 damage to each of those permanents and/or players instead if seven or more cards are in your graveyard.");
+                "{this} deals 2 damage to each of up to three targets.<br/><br/><i>Threshold</i> &mdash; {this} deals 4 damage to each of those permanents and/or players instead if seven or more cards are in your graveyard.");
         this.getSpellAbility().addTarget(new TargetAnyTarget(0, 3));
         this.getSpellAbility().addEffect(effect);
 

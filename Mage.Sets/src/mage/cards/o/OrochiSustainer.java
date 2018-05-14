@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.o;
 
 import java.util.UUID;
@@ -42,12 +41,14 @@ import mage.constants.SubType;
 public class OrochiSustainer extends CardImpl {
 
     public OrochiSustainer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.subtype.add(SubType.SNAKE);
         this.subtype.add(SubType.SHAMAN);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
+
+        // {T}: Add {G}.
         this.addAbility(new GreenManaAbility());
     }
 

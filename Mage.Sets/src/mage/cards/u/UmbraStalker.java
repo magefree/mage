@@ -60,7 +60,7 @@ public class UmbraStalker extends CardImpl {
 
         // Chroma - Umbra Stalker's power and toughness are each equal to the number of black mana symbols in the mana costs of cards in your graveyard.
         Effect effect = new SetPowerToughnessSourceEffect(new ChromaUmbraStalkerCount(), Duration.WhileOnBattlefield);
-        effect.setText("<i>Chroma</i> - Umbra Stalker's power and toughness are each equal to the number of black mana symbols in the mana costs of cards in your graveyard.");
+        effect.setText("<i>Chroma</i> &mdash; Umbra Stalker's power and toughness are each equal to the number of black mana symbols in the mana costs of cards in your graveyard.");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
 
     }

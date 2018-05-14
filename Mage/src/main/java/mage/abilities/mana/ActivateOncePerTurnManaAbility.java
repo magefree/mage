@@ -29,8 +29,8 @@ package mage.abilities.mana;
 
 import mage.Mana;
 import mage.abilities.costs.Cost;
-import mage.abilities.effects.common.AddManaOfAnyColorEffect;
-import mage.abilities.effects.common.BasicManaEffect;
+import mage.abilities.effects.mana.AddManaOfAnyColorEffect;
+import mage.abilities.effects.mana.BasicManaEffect;
 import mage.constants.Zone;
 import mage.game.Game;
 
@@ -42,7 +42,7 @@ public class ActivateOncePerTurnManaAbility extends ActivatedManaAbilityImpl {
 
     public ActivateOncePerTurnManaAbility(Zone zone, BasicManaEffect effect, Cost cost) {
         super(zone, effect, cost);
-        this.netMana.add(effect.getMana());
+        this.netMana.add(effect.getManaTemplate());
         this.maxActivationsPerTurn = 1;
     }
 

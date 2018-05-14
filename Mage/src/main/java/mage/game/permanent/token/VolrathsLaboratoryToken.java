@@ -42,7 +42,7 @@ public class VolrathsLaboratoryToken extends TokenImpl {
         this(null, null);
     }
     public VolrathsLaboratoryToken(ObjectColor color, SubType type) {
-        super(type.getDescription(), "2/2 creature token of the chosen color and type");
+        super(type != null ? type.getDescription() : "", "2/2 creature token of the chosen color and type");
         cardType.add(CardType.CREATURE);
         if (color != null) {
             this.color.setColor(color);

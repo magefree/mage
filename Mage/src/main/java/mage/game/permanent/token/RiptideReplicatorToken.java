@@ -42,7 +42,7 @@ public class RiptideReplicatorToken extends TokenImpl {
         this(null, null, 1);
     }
     public RiptideReplicatorToken(ObjectColor color, SubType type, int x) {
-        super(type.getDescription(), "X/X creature token of the chosen color and type");
+        super(type != null ? type.getDescription() : "", "X/X creature token of the chosen color and type");
         cardType.add(CardType.CREATURE);
         if (color != null) {
             this.color.setColor(color);

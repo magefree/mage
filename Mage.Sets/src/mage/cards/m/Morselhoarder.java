@@ -33,7 +33,7 @@ import mage.Mana;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
-import mage.abilities.effects.common.AddManaOfAnyColorEffect;
+import mage.abilities.effects.mana.AddManaOfAnyColorEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.CardImpl;

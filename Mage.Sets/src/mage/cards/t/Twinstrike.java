@@ -56,7 +56,7 @@ public class Twinstrike extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DestroyTargetEffect(),
                 HellbentCondition.instance,
-                "<br/><br/><i>Hellbent</i> - Destroy those creatures instead if you have no cards in hand"));
+                "<br/><br/><i>Hellbent</i> &mdash; Destroy those creatures instead if you have no cards in hand"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(2,2));
      
     }

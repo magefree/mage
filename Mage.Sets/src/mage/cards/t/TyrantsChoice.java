@@ -66,7 +66,7 @@ class TyrantsChoiceEffect extends OneShotEffect {
 
     TyrantsChoiceEffect() {
         super(Outcome.Benefit);
-        this.staticText = "<i>Will of the council</i> - Starting with you, each player votes for death or torture. If death gets more votes, each opponent sacrifices a creature. If torture gets more votes or the vote is tied, each opponent loses 4 life";
+        this.staticText = "<i>Will of the council</i> &mdash; Starting with you, each player votes for death or torture. If death gets more votes, each opponent sacrifices a creature. If torture gets more votes or the vote is tied, each opponent loses 4 life";
     }
 
     TyrantsChoiceEffect(final TyrantsChoiceEffect effect) {

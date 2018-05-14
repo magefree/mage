@@ -51,6 +51,7 @@ public class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Barkhide Mauler", 246, Rarity.COMMON, mage.cards.b.BarkhideMauler.class));
         cards.add(new SetCardInfo("Barren Moor", 312, Rarity.COMMON, mage.cards.b.BarrenMoor.class));
         cards.add(new SetCardInfo("Battering Craghorn", 188, Rarity.COMMON, mage.cards.b.BatteringCraghorn.class));
+        cards.add(new SetCardInfo("Battlefield Medic", 9, Rarity.COMMON, mage.cards.b.BattlefieldMedic.class));
         cards.add(new SetCardInfo("Biorhythm", 247, Rarity.RARE, mage.cards.b.Biorhythm.class));
         cards.add(new SetCardInfo("Birchlore Rangers", 248, Rarity.COMMON, mage.cards.b.BirchloreRangers.class));
         cards.add(new SetCardInfo("Blackmail", 127, Rarity.UNCOMMON, mage.cards.b.Blackmail.class));
@@ -146,6 +147,7 @@ public class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Gangrenous Goliath", 150, Rarity.RARE, mage.cards.g.GangrenousGoliath.class));
         cards.add(new SetCardInfo("Ghosthelm Courier", 85, Rarity.UNCOMMON, mage.cards.g.GhosthelmCourier.class));
         cards.add(new SetCardInfo("Gigapede", 264, Rarity.RARE, mage.cards.g.Gigapede.class));
+        cards.add(new SetCardInfo("Glarecaster", 30, Rarity.RARE, mage.cards.g.Glarecaster.class));
         cards.add(new SetCardInfo("Glory Seeker", 31, Rarity.COMMON, mage.cards.g.GlorySeeker.class));
         cards.add(new SetCardInfo("Gluttonous Zombie", 151, Rarity.UNCOMMON, mage.cards.g.GluttonousZombie.class));
         cards.add(new SetCardInfo("Goblin Burrows", 318, Rarity.UNCOMMON, mage.cards.g.GoblinBurrows.class));
@@ -284,6 +286,7 @@ public class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Slice and Dice", 232, Rarity.UNCOMMON, mage.cards.s.SliceAndDice.class));
         cards.add(new SetCardInfo("Slipstream Eel", 114, Rarity.COMMON, mage.cards.s.SlipstreamEel.class));
         cards.add(new SetCardInfo("Smother", 170, Rarity.UNCOMMON, mage.cards.s.Smother.class));
+        cards.add(new SetCardInfo("Snapping Thragg", 233, Rarity.UNCOMMON, mage.cards.s.SnappingThragg.class));
         cards.add(new SetCardInfo("Snarling Undorak", 283, Rarity.COMMON, mage.cards.s.SnarlingUndorak.class));
         cards.add(new SetCardInfo("Solar Blast", 234, Rarity.COMMON, mage.cards.s.SolarBlast.class));
         cards.add(new SetCardInfo("Soulless One", 171, Rarity.UNCOMMON, mage.cards.s.SoullessOne.class));

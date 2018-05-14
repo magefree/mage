@@ -52,7 +52,7 @@ import mage.target.common.TargetOpponent;
 public class HelmOfObedience extends CardImpl {
 
     public HelmOfObedience(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // {X}, {T}: Target opponent puts cards from the top of their library into their graveyard until a creature card or X cards are put into that graveyard this way, whichever comes first. If a creature card is put into that graveyard this way, sacrifice Helm of Obedience and put that card onto the battlefield under your control. X can't be 0.
         VariableManaCost xCosts = new VariableManaCost();
@@ -73,21 +73,18 @@ public class HelmOfObedience extends CardImpl {
     }
 }
 
-
 class HelmOfObedienceEffect extends OneShotEffect {
 
-
     private static final ManacostVariableValue amount = new ManacostVariableValue();
-    
+
     public HelmOfObedienceEffect() {
         super(Outcome.Detriment);
-        staticText = "Target opponent puts cards from the top of their library into their graveyard until a creature card or X cards are put into that graveyard this way, whichever comes first. If a creature card is put into that graveyard this way, sacrifice Helm of Obedience and put that card onto the battlefield under your control. X can't be 0";
+        staticText = "Target opponent puts cards from the top of their library into their graveyard until a creature card or X cards are put into that graveyard this way, whichever comes first. If a creature card is put into that graveyard this way, sacrifice {this} and put that card onto the battlefield under your control. X can't be 0";
     }
 
     public HelmOfObedienceEffect(final HelmOfObedienceEffect effect) {
         super(effect);
     }
-
 
     @Override
     public HelmOfObedienceEffect copy() {
@@ -96,36 +93,29 @@ class HelmOfObedienceEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
         Player targetOpponent = game.getPlayer(targetPointer.getFirst(game, source));
-        if (targetOpponent != null) {
-            int max = amount.calculate(game, source, this);
-            if(max != 0){
-                int numberOfCard = 0;
-
-                while(targetOpponent.getLibrary().hasCards()) {
-                    Card card = targetOpponent.getLibrary().removeFromTop(game);
-                    if (card != null){
-                        if (targetOpponent.moveCards(card, Zone.GRAVEYARD, source, game)) {
-                            if(card.isCreature()){
-                                // If a creature card is put into that graveyard this way, sacrifice Helm of Obedience
-                                // and put that card onto the battlefield under your control.
-                                Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-                                if (sourcePermanent != null) {
-                                    sourcePermanent.sacrifice(source.getSourceId(), game);
-                                }
-                                if (game.getState().getZone(card.getId()) == Zone.GRAVEYARD) {
-                                    card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), source.getControllerId());
-                                }
+        int max = amount.calculate(game, source, this);
+        if (targetOpponent != null && controller != null && max > 0) {
+            int numberOfCard = 0;
+            for (Card card : targetOpponent.getLibrary().getCards(game)) {
+                if (card != null) {
+                    if (targetOpponent.moveCards(card, Zone.GRAVEYARD, source, game)) {
+                        if (card.isCreature()) {
+                            // If a creature card is put into that graveyard this way, sacrifice Helm of Obedience
+                            // and put that card onto the battlefield under your control.
+                            Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
+                            if (sourcePermanent != null) {
+                                sourcePermanent.sacrifice(source.getSourceId(), game);
+                            }
+                            controller.moveCards(card, Zone.BATTLEFIELD, source, game);
+                            break;
+                        } else {
+                            numberOfCard++;
+                            if (numberOfCard >= max) {
                                 break;
-                            } else{
-                                numberOfCard++;
-                                if(numberOfCard >= max){
-                                    break;
-                                }
                             }
                         }
-                    } else{
-                        return false;
                     }
                 }
             }

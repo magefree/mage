@@ -30,7 +30,7 @@ package mage.cards.w;
 import java.util.UUID;
 import mage.Mana;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.common.BasicManaEffect;
+import mage.abilities.effects.mana.BasicManaEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.Card;

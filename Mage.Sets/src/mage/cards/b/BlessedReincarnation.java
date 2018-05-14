@@ -27,11 +27,9 @@
  */
 package mage.cards.b;
 
-import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.keyword.ReboundAbility;
 import mage.cards.*;
 import mage.constants.CardType;
@@ -51,24 +49,22 @@ import mage.target.common.TargetCreaturePermanent;
  * @author fireshoes
  */
 public class BlessedReincarnation extends CardImpl {
-    
+
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
-    
+
     static {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
     public BlessedReincarnation(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{U}");
 
-        // Exile target creature an opponent controls. 
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
-        this.getSpellAbility().addEffect(new ExileTargetEffect());
-        
+        // Exile target creature an opponent controls.
         // That player reveals cards from the top of their library until a creature card is revealed.
         // The player puts that card onto the battlefield, then shuffles the rest into their library.
         this.getSpellAbility().addEffect(new BlessedReincarnationEffect());
-        
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+
         // Rebound
         this.addAbility(new ReboundAbility());
     }
@@ -87,7 +83,7 @@ class BlessedReincarnationEffect extends OneShotEffect {
 
     public BlessedReincarnationEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "That player reveals cards from the top of their library until a creature card is revealed. The player puts that card onto the battlefield, then shuffles the rest into their library";
+        this.staticText = "Exile target creature an opponent controls. That player reveals cards from the top of their library until a creature card is revealed. The player puts that card onto the battlefield, then shuffles the rest into their library";
     }
 
     public BlessedReincarnationEffect(final BlessedReincarnationEffect effect) {
@@ -101,37 +97,31 @@ class BlessedReincarnationEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getFirstTarget());
-        if (permanent == null) {
-            permanent = (Permanent) game.getLastKnownInformation(source.getFirstTarget(), Zone.BATTLEFIELD);
-        }
+        Player controller = game.getPlayer(source.getControllerId());
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+        if (permanent != null && controller != null) {
+            controller.moveCards(permanent, Zone.EXILED, source, game);
+            game.applyEffects();
 
-        if (permanent != null) {
-            Player player = game.getPlayer(permanent.getControllerId());
-            if (player != null) {
-                Library library = player.getLibrary();
+            Player permanentController = game.getPlayer(permanent.getControllerId());
+            if (permanentController != null) {
+                Library library = permanentController.getLibrary();
                 if (library.hasCards()) {
-                    Cards cards = new CardsImpl();
-                    Card card = library.removeFromTop(game);
-                    cards.add(card);
-                    while (!card.isCreature() && library.hasCards()) {
-                        card = library.removeFromTop(game);
-                        cards.add(card);
+                    Cards toReveal = new CardsImpl();
+                    for (Card card : library.getCards(game)) {
+                        toReveal.add(card);
+                        if (card.isCreature()) {
+                            permanentController.moveCards(card, Zone.BATTLEFIELD, source, game);
+                            break;
+                        }
                     }
-
-                    if (card.isCreature()) {
-                        card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), player.getId());
-                    }
-
-                    if (!cards.isEmpty()) {
-                        player.revealCards("BlessedReincarnation", cards, game);
-                        Set<Card> cardsToShuffle = cards.getCards(game);
-                        cardsToShuffle.remove(card);
-                        library.addAll(cardsToShuffle, game);
+                    permanentController.revealCards(source, toReveal, game);
+                    if (toReveal.size() > 1) {
+                        library.shuffle();
                     }
                 }
-                return true;
             }
+            return true;
         }
         return false;
     }

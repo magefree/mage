@@ -34,7 +34,6 @@ import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
-import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -53,7 +52,7 @@ import mage.game.Game;
 public class LodestoneGolem extends CardImpl {
 
     public LodestoneGolem(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");
         this.subtype.add(SubType.GOLEM);
 
         this.power = new MageInt(5);
@@ -75,7 +74,7 @@ public class LodestoneGolem extends CardImpl {
 
 class LodestoneGolemCostReductionEffect extends CostModificationEffectImpl {
 
-    LodestoneGolemCostReductionEffect ( ) {
+    LodestoneGolemCostReductionEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.INCREASE_COST);
         staticText = "Nonartifact spells cost {1} more to cast";
     }
@@ -93,7 +92,7 @@ class LodestoneGolemCostReductionEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility) {
+        if (abilityToModify instanceof SpellAbility) {
             Card card = game.getCard(abilityToModify.getSourceId());
             if (card != null && !card.isArtifact()) {
                 return true;
@@ -108,4 +107,3 @@ class LodestoneGolemCostReductionEffect extends CostModificationEffectImpl {
     }
 
 }
-

@@ -39,6 +39,8 @@ import mage.abilities.effects.common.continuous.CantCastMoreThanOneSpellEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.*;
 import mage.game.ExileZone;
 import mage.game.Game;
@@ -92,13 +94,16 @@ class ColfenorsPlansExileEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
-        if (player != null && sourceObject != null) {
-            for (int i = 0; i < 7; i++) {
-                Card card = player.getLibrary().removeFromTop(game);
-                if (card != null) {
-                    if (player.moveCardToExileWithInfo(card, CardUtil.getCardExileZoneId(game, source), sourceObject.getIdName(), source.getSourceId(), game, Zone.LIBRARY, true)) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Cards toExile = new CardsImpl(controller.getLibrary().getTopCards(game, 7));
+            UUID exileId = CardUtil.getCardExileZoneId(game, source);
+            controller.moveCardsToExile(toExile.getCards(game), source, game, false,
+                    exileId, CardUtil.createObjectRealtedWindowTitle(source, game, null));
+            ExileZone exileZone = game.getExile().getExileZone(exileId);
+            if (exileZone != null) {
+                for (Card card : exileZone.getCards(game)) {
+                    if (card != null) {
                         card.setFaceDown(true, game);
                     }
                 }
@@ -137,10 +142,9 @@ class ColfenorsPlansPlayCardEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        Card card = game.getCard(objectId);
-        if (affectedControllerId.equals(source.getControllerId()) && card != null && game.getState().getZone(card.getId()) == Zone.EXILED) {
+        if (affectedControllerId.equals(source.getControllerId()) && game.getState().getZone(objectId) == Zone.EXILED) {
             ExileZone zone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
-            return zone != null && zone.contains(card.getId());
+            return zone != null && zone.contains(objectId);
         }
         return false;
     }

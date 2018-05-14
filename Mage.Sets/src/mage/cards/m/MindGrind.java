@@ -50,18 +50,17 @@ import mage.players.Player;
 public class MindGrind extends CardImpl {
 
     public MindGrind(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{U}{B}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{U}{B}");
 
         // Each opponent reveals cards from the top of their library until he or she reveals X land cards, then puts all cards revealed this way into their graveyard. X can't be 0.
         this.getSpellAbility().addEffect(new MindGrindEffect());
-        for (VariableCost cost: this.getSpellAbility().getManaCosts().getVariableCosts()) {
+        for (VariableCost cost : this.getSpellAbility().getManaCosts().getVariableCosts()) {
             if (cost instanceof VariableManaCost) {
                 ((VariableManaCost) cost).setMinX(1);
                 break;
-                }
             }
         }
+    }
 
     public MindGrind(final MindGrind card) {
         super(card);
@@ -92,8 +91,7 @@ class MindGrindEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int xValue = source.getManaCostsToPay().getX();
-        Card sourceCard = game.getCard(source.getSourceId());
-        if (xValue < 1 || sourceCard == null) {
+        if (xValue < 1) {
             return false;
         }
         for (UUID opponentId : game.getOpponents(source.getControllerId())) {
@@ -103,19 +101,13 @@ class MindGrindEffect extends OneShotEffect {
             }
             int landsToReveal = xValue;
             Cards cards = new CardsImpl();
-            while(player.getLibrary().hasCards()){
-                Card card = player.getLibrary().removeFromTop(game);
-                if (card != null) {
-                    cards.add(card);
-                    if(card.isLand()){
-                        --landsToReveal;
-                        if (landsToReveal < 1) {
-                            break;
-                        }
-                    }
+            for (Card card : player.getLibrary().getCards(game)) {
+                cards.add(card);
+                if (card.isLand() && --landsToReveal == 0) {
+                    break;
                 }
             }
-            player.revealCards("by " + sourceCard.getName() + " from " + player.getName(), cards, game);
+            player.revealCards(source, "from " + player.getName(), cards, game);
             player.moveCards(cards, Zone.GRAVEYARD, source, game);
         }
         return true;

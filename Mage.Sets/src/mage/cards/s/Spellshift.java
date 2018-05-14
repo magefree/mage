@@ -42,7 +42,6 @@ import mage.constants.Zone;
 import mage.filter.common.FilterInstantOrSorcerySpell;
 import mage.game.Game;
 import mage.game.stack.Spell;
-import mage.players.Library;
 import mage.players.Player;
 import mage.target.TargetSpell;
 
@@ -91,31 +90,22 @@ class SpellshiftEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(((Spell) game.getLastKnownInformation(targetPointer.getFirst(game, source), Zone.STACK)).getControllerId());
-        if (player != null) {
-            Library library = player.getLibrary();
-            if (library.hasCards()) {
-                Cards cards = new CardsImpl();
-                Card card = library.removeFromTop(game);
-                cards.add(card);
-                while (!(card.isSorcery() || card.isInstant()) && library.hasCards()) {
-                    card = library.removeFromTop(game);
-                    cards.add(card);
-                }
-
+        Player spellController = game.getPlayer(((Spell) game.getLastKnownInformation(targetPointer.getFirst(game, source), Zone.STACK)).getControllerId());
+        if (spellController != null) {
+            Cards cardsToReveal = new CardsImpl();
+            Card toCast = null;
+            for (Card card : spellController.getLibrary().getCards(game)) {
+                cardsToReveal.add(card);
                 if (card.isSorcery() || card.isInstant()) {
-                    if (player.chooseUse(outcome, "Cast " + card.getLogName() + " ?", source, game)) {
-                        if (player.cast(card.getSpellAbility(), game, true)) {
-                            cards.remove(card.getId());
-                        }
-                    }
-                }
-
-                if (!cards.isEmpty()) {
-                    library.addAll(cards.getCards(game), game);
+                    toCast = card;
+                    break;
                 }
             }
-            player.shuffleLibrary(source, game);
+            spellController.revealCards(source, cardsToReveal, game);
+            if (toCast != null && spellController.chooseUse(outcome, "Cast " + toCast.getLogName() + " without paying its mana cost?", source, game)) {
+                spellController.cast(toCast.getSpellAbility(), game, true);
+            }
+            spellController.shuffleLibrary(source, game);
             return true;
         }
         return false;

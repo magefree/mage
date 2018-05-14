@@ -117,7 +117,7 @@ public class TalonOfPain extends CardImpl {
                 UUID sourceControllerId = game.getControllerId(event.getSourceId());
                 if (sourceControllerId != null
                         && sourceControllerId.equals(this.getControllerId())
-                        && this.getSourceId() != event.getSourceId()) {
+                        && !this.getSourceId().equals(event.getSourceId())) {
                     // return true so the effect will fire and a charge counter will be added
                     return true;
                 }

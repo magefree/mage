@@ -44,6 +44,7 @@ import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.common.TargetLandPermanent;
 
 /**
@@ -56,7 +57,7 @@ public class LifesparkSpellbomb extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
 
         // {G}, Sacrifice Lifespark Spellbomb: Until end of turn, target land becomes a 3/3 creature that's still a land.
-        Ability firstAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureTargetEffect(new LifesparkSpellbombToken(), false, true, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.G));
+        Ability firstAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureTargetEffect(new CreatureToken(3, 3), false, true, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.G));
         firstAbility.addCost(new SacrificeSourceCost());
         firstAbility.addTarget(new TargetLandPermanent());
         this.addAbility(firstAbility);
@@ -76,22 +77,4 @@ public class LifesparkSpellbomb extends CardImpl {
         return new LifesparkSpellbomb(this);
     }
 
-}
-
-class LifesparkSpellbombToken extends TokenImpl {
-
-    public LifesparkSpellbombToken() {
-        super("", "3/3 creature");
-        this.cardType.add(CardType.CREATURE);
-
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
-    }
-    public LifesparkSpellbombToken(final LifesparkSpellbombToken token) {
-        super(token);
-    }
-
-    public LifesparkSpellbombToken copy() {
-        return new LifesparkSpellbombToken(this);
-    }
 }

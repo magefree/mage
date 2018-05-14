@@ -32,7 +32,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
@@ -42,12 +41,10 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
-import mage.target.TargetCard;
 
 /**
  *
@@ -56,7 +53,7 @@ import mage.target.TargetCard;
 public class SagesOfTheAnima extends CardImpl {
 
     public SagesOfTheAnima(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{U}");
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.WIZARD);
 
@@ -101,47 +98,24 @@ class SagesOfTheAnimaReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        FilterCard filter = new FilterCard();
-        filter.add(new CardTypePredicate(CardType.CREATURE));
         Player player = game.getPlayer(event.getPlayerId());
-        Cards cards = new CardsImpl();
         if (player != null) {
-            for (int i = 0; i < 3; i++) {
-                Card card = player.getLibrary().removeFromTop(game);
-                if (card != null) {
-                    cards.add(card);
-                }
-            }
-            player.revealCards("Top three cards of library revealed", cards, game);
-            for (Card revealedCard : cards.getCards(game)) {
-                if (revealedCard.isCreature()) {
-                    revealedCard.moveToZone(Zone.HAND, source.getSourceId(), game, false);
-                    cards.remove(revealedCard);
-                }
-            }
-            TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard());
-            while (player.canRespond() && cards.size() > 1) {
-                player.choose(Outcome.Neutral, cards, target, game);
-                Card card = cards.get(target.getFirstTarget(), game);
-                if (card != null) {
-                    cards.remove(card);
-                    card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
-                }
-                target.clearChosen();
-            }
-            if (cards.size() == 1) {
-                Card card = cards.get(cards.iterator().next(), game);
-                card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
-            }
+            Cards revealedCards = new CardsImpl(player.getLibrary().getTopCards(game, 3));
+            player.revealCards(source, revealedCards, game);
+            Cards creatures = new CardsImpl(revealedCards.getCards(StaticFilters.FILTER_CARD_CREATURE, game));
+            player.moveCards(creatures, Zone.BATTLEFIELD, source, game);
+            revealedCards.removeAll(creatures);
+            player.putCardsOnBottomOfLibrary(revealedCards, game, source, true);
+            return true;
         }
-        return true;
+        return false;
     }
-    
+
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.DRAW_CARD;
-    } 
-    
+    }
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         return event.getPlayerId().equals(source.getControllerId());

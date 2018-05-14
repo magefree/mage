@@ -38,13 +38,33 @@ import mage.game.permanent.Permanent;
  */
 public class BecomesBlackZombieAdditionEffect extends ContinuousEffectImpl {
 
+    private boolean giveBlackColor = true;
+
     public BecomesBlackZombieAdditionEffect() {
         super(Duration.Custom, Outcome.Neutral);
-        staticText = "That creature is a black Zombie in addition to its other colors and types";
+        this.giveBlackColor = true;
+        updateText();
     }
+
+    public BecomesBlackZombieAdditionEffect(boolean giveBlackColor) {
+        this();
+        this.giveBlackColor = giveBlackColor;
+        updateText();
+    }
+
 
     public BecomesBlackZombieAdditionEffect(final BecomesBlackZombieAdditionEffect effect) {
         super(effect);
+        this.giveBlackColor = effect.giveBlackColor;
+        updateText();
+    }
+
+    private void updateText() {
+        if (this.giveBlackColor) {
+            this.staticText = "That creature is a black Zombie in addition to its other colors and types";
+        } else {
+            this.staticText = "That creature is a Zombie in addition to its other types";
+        }
     }
 
     @Override
@@ -73,7 +93,7 @@ public class BecomesBlackZombieAdditionEffect extends ContinuousEffectImpl {
                     }
                     break;
                 case ColorChangingEffects_5:
-                    if (sublayer == SubLayer.NA) {
+                    if (sublayer == SubLayer.NA && this.giveBlackColor) {
                         creature.getColor(game).setBlack(true);
                     }
                     break;

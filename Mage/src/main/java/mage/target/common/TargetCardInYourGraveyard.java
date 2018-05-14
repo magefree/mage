@@ -27,19 +27,19 @@
  */
 package mage.target.common;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.TargetCard;
-
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 
 /**
  *
@@ -48,7 +48,7 @@ import java.util.UUID;
 public class TargetCardInYourGraveyard extends TargetCard {
 
     public TargetCardInYourGraveyard() {
-        this(1, 1, new FilterCard("card from your graveyard"));
+        this(1, 1, StaticFilters.FILTER_CARD_FROM_YOUR_GRAVEYARD);
     }
 
     public TargetCardInYourGraveyard(FilterCard filter) {

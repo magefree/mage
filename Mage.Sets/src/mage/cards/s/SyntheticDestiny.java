@@ -31,7 +31,6 @@ import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -126,23 +125,20 @@ class SyntheticDestinyDelayedEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = source.getSourceObject(game);
-        if (controller != null && sourceObject != null) {
+        if (controller != null) {
             Cards revealed = new CardsImpl();
             Set<Card> creatureCards = new LinkedHashSet<>();
-            Cards nonCreatureCards = new CardsImpl();
-            while (creatureCards.size() < numberOfCards && controller.getLibrary().hasCards()) {
-                Card card = controller.getLibrary().removeFromTop(game);
+            for (Card card : controller.getLibrary().getCards(game)) {
                 revealed.add(card);
                 if (card.isCreature()) {
                     creatureCards.add(card);
-                } else {
-                    nonCreatureCards.add(card);
+                }
+                if (creatureCards.size() >= numberOfCards) {
+                    break;
                 }
             }
-            controller.revealCards(sourceObject.getIdName(), revealed, game);
-            controller.moveCards(creatureCards, Zone.BATTLEFIELD, source, game, false, false, true, null);
-            controller.putCardsOnTopOfLibrary(nonCreatureCards, game, source, false);
+            controller.revealCards(source, revealed, game);
+            controller.moveCards(creatureCards, Zone.BATTLEFIELD, source, game);
             controller.shuffleLibrary(source, game);
             return true;
         }

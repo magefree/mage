@@ -41,6 +41,8 @@ public final class SystemUtil {
     private static final String COMMAND_CLEAR_BATTLEFIELD = "@clear battlefield";
     private static final String COMMAND_SHOW_OPPONENT_HAND = "@show opponent hand";
     private static final String COMMAND_SHOW_OPPONENT_LIBRARY = "@show opponent library";
+    private static final String COMMAND_SHOW_MY_HAND = "@show my hand";
+    private static final String COMMAND_SHOW_MY_LIBRARY = "@show my library";
     private static final Map<String, String> supportedCommands = new HashMap<>();
 
     static {
@@ -50,6 +52,8 @@ public final class SystemUtil {
         supportedCommands.put(COMMAND_CLEAR_BATTLEFIELD, "CLAR BATTLEFIELD");
         supportedCommands.put(COMMAND_SHOW_OPPONENT_HAND, "SHOW OPPONENT HAND");
         supportedCommands.put(COMMAND_SHOW_OPPONENT_LIBRARY, "SHOW OPPONENT LIBRARY");
+        supportedCommands.put(COMMAND_SHOW_MY_HAND, "SHOW MY HAND");
+        supportedCommands.put(COMMAND_SHOW_MY_LIBRARY, "SHOW MY LIBRARY");
     }
 
     private static final Pattern patternGroup = Pattern.compile("\\[(.+)\\]"); // [test new card]
@@ -57,7 +61,8 @@ public final class SystemUtil {
     private static final Pattern patternCardInfo = Pattern.compile("([\\S ]+):([\\S ]+)"); // Island:XLN
 
     // show ext info for special commands
-    private static final String PARAM_COLOR = "color";
+    private static final String PARAM_COLOR_COST = "color cost";
+    private static final String PARAM_COLOR_COMMANDER = "color commander";
     private static final String PARAM_PT = "pt"; // power toughness
     private static final String PARAM_ABILITIES_COUNT = "abilities count";
     private static final String PARAM_ABILITIES_LIST = "abilities list";
@@ -114,7 +119,10 @@ public final class SystemUtil {
             ArrayList<String> resInfo = new ArrayList<>();
             for (String param : commandParams) {
                 switch (param) {
-                    case PARAM_COLOR:
+                    case PARAM_COLOR_COST:
+                        resInfo.add(card.getColor(game).toString());
+                        break;
+                    case PARAM_COLOR_COMMANDER:
                         resInfo.add(card.getColorIdentity().toString());
                         break;
                     case PARAM_PT:
@@ -356,6 +364,20 @@ public final class SystemUtil {
                     case COMMAND_SHOW_OPPONENT_LIBRARY:
                         if (opponent != null) {
                             String info = getCardsListForSpecialInform(game, opponent.getLibrary().getCardList(), runGroup.commands);
+                            game.informPlayer(feedbackPlayer, info);
+                        }
+                        break;
+
+                    case COMMAND_SHOW_MY_HAND:
+                        if (feedbackPlayer != null) {
+                            String info = getCardsListForSpecialInform(game, feedbackPlayer.getHand(), runGroup.commands);
+                            game.informPlayer(feedbackPlayer, info);
+                        }
+                        break;
+
+                    case COMMAND_SHOW_MY_LIBRARY:
+                        if (feedbackPlayer != null) {
+                            String info = getCardsListForSpecialInform(game, feedbackPlayer.getLibrary().getCardList(), runGroup.commands);
                             game.informPlayer(feedbackPlayer, info);
                         }
                         break;

@@ -42,7 +42,6 @@ import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.permanent.token.TokenImpl;
-import mage.game.permanent.token.Token;
 
 import java.util.UUID;
 
@@ -63,7 +62,7 @@ public class HiddenAncients extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}");
 
         // When an opponent casts an enchantment spell, if Hidden Ancients is an enchantment, Hidden Ancients becomes a 5/5 Treefolk creature.
-        TriggeredAbility ability = new SpellCastOpponentTriggeredAbility(new BecomesCreatureSourceEffect(new HiddenAncientsTreefolk(), "", Duration.WhileOnBattlefield, true, false),
+        TriggeredAbility ability = new SpellCastOpponentTriggeredAbility(new BecomesCreatureSourceEffect(new HiddenAncientsTreefolkToken(), "", Duration.WhileOnBattlefield, true, false),
                 filter, false);
         this.addAbility(new ConditionalTriggeredAbility(ability, new SourceMatchesFilterCondition(StaticFilters.FILTER_ENCHANTMENT_PERMANENT),
                 "When an opponent casts an enchantment spell, if {this} is an enchantment, {this} becomes a 5/5 Treefolk creature."));
@@ -79,20 +78,20 @@ public class HiddenAncients extends CardImpl {
     }
 }
 
-class HiddenAncientsTreefolk extends TokenImpl {
+class HiddenAncientsTreefolkToken extends TokenImpl {
 
-    public HiddenAncientsTreefolk() {
+    public HiddenAncientsTreefolkToken() {
         super("Treefolk", "5/5 Treefolk creature");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.TREEFOLK);
         power = new MageInt(5);
         toughness = new MageInt(5);
     }
-    public HiddenAncientsTreefolk(final HiddenAncientsTreefolk token) {
+    public HiddenAncientsTreefolkToken(final HiddenAncientsTreefolkToken token) {
         super(token);
     }
 
-    public HiddenAncientsTreefolk copy() {
-        return new HiddenAncientsTreefolk(this);
+    public HiddenAncientsTreefolkToken copy() {
+        return new HiddenAncientsTreefolkToken(this);
     }
 }

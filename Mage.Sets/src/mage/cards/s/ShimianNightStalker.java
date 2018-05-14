@@ -37,8 +37,8 @@ import mage.abilities.effects.RedirectionEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AttackingPredicate;
@@ -88,7 +88,7 @@ class ShimianNightStalkerRedirectDamageEffect extends RedirectionEffect {
     private static FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     public ShimianNightStalkerRedirectDamageEffect() {
-        super(Duration.EndOfTurn, Integer.MAX_VALUE, true);
+        super(Duration.EndOfTurn, Integer.MAX_VALUE, UsageType.ONE_USAGE_ABSOLUTE);
         this.staticText = "All damage that would be dealt to you this turn by target attacking creature is dealt to {this} instead";
     }
 
@@ -107,7 +107,7 @@ class ShimianNightStalkerRedirectDamageEffect extends RedirectionEffect {
         if (permanent != null) {
             if (filter.match(permanent, permanent.getId(), permanent.getControllerId(), game)) {
                 if (event.getSourceId() != null && event.getTargetId() != null) {
-                    if (event.getSourceId().equals(getTargetPointer().getFirst(game, source)) 
+                    if (event.getSourceId().equals(getTargetPointer().getFirst(game, source))
                             && event.getTargetId().equals(source.getControllerId())) {
                         TargetPermanent target = new TargetPermanent();
                         target.add(source.getSourceId(), game);

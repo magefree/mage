@@ -130,6 +130,7 @@ public class MastersEditionIV extends ExpansionSet {
         cards.add(new SetCardInfo("Diabolic Machine", 196, Rarity.UNCOMMON, mage.cards.d.DiabolicMachine.class));
         cards.add(new SetCardInfo("Divine Offering", 10, Rarity.COMMON, mage.cards.d.DivineOffering.class));
         cards.add(new SetCardInfo("Dragon Engine", 197, Rarity.COMMON, mage.cards.d.DragonEngine.class));
+        cards.add(new SetCardInfo("Drain Power", 46, Rarity.RARE, mage.cards.d.DrainPower.class));
         cards.add(new SetCardInfo("Dread Reaper", 78, Rarity.RARE, mage.cards.d.DreadReaper.class));
         cards.add(new SetCardInfo("Drop of Honey", 150, Rarity.RARE, mage.cards.d.DropOfHoney.class));
         cards.add(new SetCardInfo("Drowned", 47, Rarity.COMMON, mage.cards.d.Drowned.class));
@@ -175,6 +176,7 @@ public class MastersEditionIV extends ExpansionSet {
         cards.add(new SetCardInfo("Healing Salve", 14, Rarity.COMMON, mage.cards.h.HealingSalve.class));
         cards.add(new SetCardInfo("Horn of Deafening", 205, Rarity.UNCOMMON, mage.cards.h.HornOfDeafening.class));
         cards.add(new SetCardInfo("Howl from Beyond", 87, Rarity.COMMON, mage.cards.h.HowlFromBeyond.class));
+        cards.add(new SetCardInfo("Ice Cauldron", 206, Rarity.RARE, mage.cards.i.IceCauldron.class));
         cards.add(new SetCardInfo("Icy Manipulator", 207, Rarity.UNCOMMON, mage.cards.i.IcyManipulator.class));
         cards.add(new SetCardInfo("In the Eye of Chaos", 51, Rarity.RARE, mage.cards.i.InTheEyeOfChaos.class));
         cards.add(new SetCardInfo("Instill Energy", 157, Rarity.UNCOMMON, mage.cards.i.InstillEnergy.class));
@@ -252,6 +254,7 @@ public class MastersEditionIV extends ExpansionSet {
         cards.add(new SetCardInfo("Serendib Djinn", 61, Rarity.RARE, mage.cards.s.SerendibDjinn.class));
         cards.add(new SetCardInfo("Serra Angel", 25, Rarity.UNCOMMON, mage.cards.s.SerraAngel.class));
         cards.add(new SetCardInfo("Serra Aviary", 26, Rarity.UNCOMMON, mage.cards.s.SerraAviary.class));
+        cards.add(new SetCardInfo("Serra Bestiary", 27, Rarity.COMMON, mage.cards.s.SerraBestiary.class));
         cards.add(new SetCardInfo("Shapeshifter", 226, Rarity.UNCOMMON, mage.cards.s.Shapeshifter.class));
         cards.add(new SetCardInfo("Shivan Dragon", 136, Rarity.RARE, mage.cards.s.ShivanDragon.class));
         cards.add(new SetCardInfo("Sinkhole", 97, Rarity.RARE, mage.cards.s.Sinkhole.class));

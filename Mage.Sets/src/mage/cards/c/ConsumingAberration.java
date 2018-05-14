@@ -38,9 +38,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.cards.*;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -52,11 +52,10 @@ import mage.players.Player;
 public class ConsumingAberration extends CardImpl {
 
     public ConsumingAberration(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{B}");
-        
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{B}");
+
         this.subtype.add(SubType.HORROR);
 
-        
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 
@@ -75,7 +74,6 @@ public class ConsumingAberration extends CardImpl {
         return new ConsumingAberration(this);
     }
 }
-
 
 class ConsumingAberrationEffect extends OneShotEffect {
 
@@ -100,33 +98,32 @@ class ConsumingAberrationEffect extends OneShotEffect {
             if (player == null) {
                 continue;
             }
-
             Cards cards = new CardsImpl();
-            while(player.getLibrary().hasCards()){
-                Card card = player.getLibrary().removeFromTop(game);
+            for (Card card : player.getLibrary().getCards(game)) {
                 if (card != null) {
                     cards.add(card);
-                    if(card.isLand()){
+                    if (card.isLand()) {
                         break;
                     }
                 }
             }
-            player.revealCards("Consuming Aberrtion", cards, game);
+            player.revealCards(source, cards, game);
             player.moveCards(cards, Zone.GRAVEYARD, source, game);
         }
         return true;
     }
 }
 
-
 class CardsInOpponentsGraveyardsCount implements DynamicValue {
 
-    public CardsInOpponentsGraveyardsCount(){
+    public CardsInOpponentsGraveyardsCount() {
         super();
     }
-    public CardsInOpponentsGraveyardsCount(DynamicValue count){
+
+    public CardsInOpponentsGraveyardsCount(DynamicValue count) {
         super();
     }
+
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         int amount = 0;

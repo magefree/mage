@@ -86,29 +86,25 @@ class VexingArcanixEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         MageObject sourceObject = source.getSourceObject(game);
-        Player controller = game.getPlayer(source.getControllerId());
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
-        if (controller != null && sourceObject != null && player != null) {
-
-            if (player.getLibrary().hasCards()) {
-                Choice cardChoice = new ChoiceImpl();
-                cardChoice.setChoices(CardRepository.instance.getNames());
-                cardChoice.setMessage("Name a card");
-                if (!player.choose(Outcome.DrawCard, cardChoice, game)) {
-                    return false;
-                }
-                String cardName = cardChoice.getChoice();
-                game.informPlayers(sourceObject.getLogName() + ", player: " + player.getLogName() + ", named: [" + cardName + ']');
-                Card card = player.getLibrary().removeFromTop(game);
-                if (card != null) {
-                    Cards cards = new CardsImpl(card);
-                    player.revealCards(sourceObject.getIdName(), cards, game);
-                    if (card.getName().equals(cardName)) {
-                        player.moveCards(cards, Zone.HAND, source, game);
-                    } else {
-                        player.moveCards(cards, Zone.GRAVEYARD, source, game);
-                        player.damage(2, source.getSourceId(), game, false, true);
-                    }
+        if (sourceObject != null && player != null) {
+            Choice cardChoice = new ChoiceImpl();
+            cardChoice.setChoices(CardRepository.instance.getNames());
+            cardChoice.setMessage("Name a card");
+            if (!player.choose(Outcome.DrawCard, cardChoice, game)) {
+                return false;
+            }
+            String cardName = cardChoice.getChoice();
+            game.informPlayers(sourceObject.getLogName() + ", player: " + player.getLogName() + ", named: [" + cardName + ']');
+            Card card = player.getLibrary().getFromTop(game);
+            if (card != null) {
+                Cards cards = new CardsImpl(card);
+                player.revealCards(sourceObject.getIdName(), cards, game);
+                if (card.getName().equals(cardName)) {
+                    player.moveCards(cards, Zone.HAND, source, game);
+                } else {
+                    player.moveCards(cards, Zone.GRAVEYARD, source, game);
+                    player.damage(2, source.getSourceId(), game, false, true);
                 }
             }
             return true;

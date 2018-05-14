@@ -47,11 +47,13 @@ public class LookLibraryTopCardTargetPlayerEffect extends OneShotEffect {
 
     protected int amount;
     protected boolean putToGraveyard;
+    protected boolean mayShuffleAfter; // for Visions
 
     public LookLibraryTopCardTargetPlayerEffect(int amount) {
         super(Outcome.Benefit);
         this.amount = amount;
         this.putToGraveyard = false;
+        this.mayShuffleAfter = false;
         setText();
     }
 
@@ -59,6 +61,15 @@ public class LookLibraryTopCardTargetPlayerEffect extends OneShotEffect {
         super(Outcome.Benefit);
         this.amount = amount;
         this.putToGraveyard = putToGraveyard;
+        this.mayShuffleAfter = false;
+        setText();
+    }
+
+    public LookLibraryTopCardTargetPlayerEffect(int amount, boolean putToGraveyard, boolean mayShuffleAfter) {
+        super(Outcome.Benefit);
+        this.amount = amount;
+        this.putToGraveyard = putToGraveyard;
+        this.mayShuffleAfter = mayShuffleAfter;
         setText();
     }
 
@@ -70,6 +81,7 @@ public class LookLibraryTopCardTargetPlayerEffect extends OneShotEffect {
         super(effect);
         amount = effect.amount;
         putToGraveyard = effect.putToGraveyard;
+        mayShuffleAfter = effect.mayShuffleAfter;
     }
 
     @Override
@@ -95,6 +107,11 @@ public class LookLibraryTopCardTargetPlayerEffect extends OneShotEffect {
                     }
                 }
             }
+            if (mayShuffleAfter) {
+                if (player.chooseUse(Outcome.Benefit, (player == targetPlayer ? "Shuffle your library?" : "Do you want the chosen player to shuffle his or her library?"), source, game)) {
+                    targetPlayer.shuffleLibrary(source, game);
+                }
+            }
             return true;
         }
         return false;
@@ -117,6 +134,9 @@ public class LookLibraryTopCardTargetPlayerEffect extends OneShotEffect {
                 sb.append("that card");
             }
             sb.append(" into that player's graveyard");
+        }
+        if (mayShuffleAfter) {
+            sb.append(". You may then have that player shuffle that library");
         }
         this.staticText = sb.toString();
     }

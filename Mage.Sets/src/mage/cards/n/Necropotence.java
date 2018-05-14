@@ -51,6 +51,7 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 /**
  *
@@ -59,7 +60,7 @@ import mage.target.targetpointer.FixedTarget;
 public class Necropotence extends CardImpl {
 
     public Necropotence(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{B}{B}{B}");
 
         // Skip your draw step.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipDrawStepEffect()));
@@ -137,17 +138,16 @@ class NecropotenceEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            if (controller.getLibrary().hasCards()) {
-                Card card = controller.getLibrary().removeFromTop(game);
-                if (controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.LIBRARY, false)) {
-                    card.setFaceDown(true, game);
-                    Effect returnToHandEffect = new ReturnToHandTargetEffect();
-                    returnToHandEffect.setText("put that face down card into your hand");
-                    returnToHandEffect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game)));
-                    game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(returnToHandEffect, TargetController.YOU), source);
-                    return true;
-                }
-                return false;
+            Card card = controller.getLibrary().getFromTop(game);
+            if (card != null && controller.moveCardsToExile(card, source, game, false,
+                    CardUtil.getCardExileZoneId(game, source),
+                    CardUtil.createObjectRealtedWindowTitle(source, game, null))) {
+                card.setFaceDown(true, game);
+                Effect returnToHandEffect = new ReturnToHandTargetEffect();
+                returnToHandEffect.setText("put that face down card into your hand");
+                returnToHandEffect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game)));
+                game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(returnToHandEffect, TargetController.YOU), source);
+                return true;
             }
             return true;
         }

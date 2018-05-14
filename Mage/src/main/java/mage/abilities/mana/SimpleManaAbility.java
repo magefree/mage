@@ -30,9 +30,8 @@ package mage.abilities.mana;
 import java.util.List;
 import mage.Mana;
 import mage.abilities.costs.Cost;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.effects.mana.BasicManaEffect;
 import mage.constants.Zone;
 import mage.game.Game;
 
@@ -79,15 +78,8 @@ public class SimpleManaAbility extends ActivatedManaAbilityImpl {
 
     @Override
     public List<Mana> getNetMana(Game game) {
-        if (netMana.isEmpty() && predictable) {
-            for (Effect effect : getEffects()) {
-                if (effect instanceof ManaEffect) {
-                    Mana effectMana = ((ManaEffect) effect).getMana(game, this);
-                    if (effectMana != null) {
-                        netMana.add(effectMana);
-                    }
-                }
-            }
+        if (predictable) {
+            return super.getNetMana(game);
         }
         return netMana;
     }

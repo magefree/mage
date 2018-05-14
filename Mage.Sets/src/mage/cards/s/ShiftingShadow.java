@@ -73,8 +73,8 @@ public class ShiftingShadow extends CardImpl {
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
-        
-        // Enchanted creature has haste and “At the beginning of your upkeep, destroy this creature. Reveal cards from the top of your library until you reveal a creature card. 
+
+        // Enchanted creature has haste and “At the beginning of your upkeep, destroy this creature. Reveal cards from the top of your library until you reveal a creature card.
         // Put that card onto the battlefield and attach Shifting Shadow to it, then put all other cards revealed this way on the bottom of your library in a random order.”
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(HasteAbility.getInstance(), AttachmentType.AURA));
         Effect effect = new GainAbilityAttachedEffect(new BeginningOfUpkeepTriggeredAbility(
@@ -135,11 +135,10 @@ class ShiftingShadowEffect extends OneShotEffect {
                 enchanted.destroy(source.getSourceId(), game, false);
                 Cards revealed = new CardsImpl();
                 Cards otherCards = new CardsImpl();
-                while (controller.getLibrary().hasCards()) {
-                    Card card = controller.getLibrary().removeFromTop(game);
+                for (Card card : controller.getLibrary().getCards(game)) {
                     revealed.add(card);
                     if (card != null && card.isCreature()) {
-                        card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), controller.getId());
+                        controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                         Permanent newEnchanted = game.getPermanent(card.getId());
                         FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
                         filter.add(new PermanentIdPredicate(card.getId()));

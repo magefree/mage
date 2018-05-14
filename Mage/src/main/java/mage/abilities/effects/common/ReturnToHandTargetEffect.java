@@ -103,7 +103,7 @@ public class ReturnToHandTargetEffect extends OneShotEffect {
             }
         }
         for (UUID copyId : copyIds) {
-            game.getStack().remove(game.getSpell(copyId));
+            game.getStack().remove(game.getSpell(copyId), game);
         }
         return controller.moveCards(cards, Zone.HAND, source, game);
     }

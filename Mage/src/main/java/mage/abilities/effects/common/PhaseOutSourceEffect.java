@@ -5,7 +5,6 @@
  */
 package mage.abilities.effects.common;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
@@ -34,9 +33,8 @@ public class PhaseOutSourceEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        MageObject sourceObject = source.getSourceObjectIfItStillExists(game);
-        if (sourceObject instanceof Permanent) {
-            Permanent permanent = (Permanent) sourceObject;
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
+        if (permanent != null) {
             return permanent.phaseOut(game);
         }
         return false;

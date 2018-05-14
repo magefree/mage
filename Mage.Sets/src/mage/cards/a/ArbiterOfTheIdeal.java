@@ -38,7 +38,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.InspiredAbility;
 import mage.cards.*;
 import mage.constants.*;
-import mage.counters.Counter;
+import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -62,7 +62,7 @@ public class ArbiterOfTheIdeal extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        // <i>Inspired</i> - Whenever Arbiter of the Ideal becomes untapped, reveal the top card of your library. If it's an artifact, creature, or land card, you may put it onto the battlefield with a manifestation counter on it. It's an enchantment in addition to its other types.
+        // <i>Inspired</i> &mdash; Whenever Arbiter of the Ideal becomes untapped, reveal the top card of your library. If it's an artifact, creature, or land card, you may put it onto the battlefield with a manifestation counter on it. It's an enchantment in addition to its other types.
         this.addAbility(new InspiredAbility(new ArbiterOfTheIdealEffect()));
 
     }
@@ -116,7 +116,7 @@ class ArbiterOfTheIdealEffect extends OneShotEffect {
                 controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                 Permanent permanent = game.getPermanent(card.getId());
                 if (permanent != null) {
-                    permanent.addCounters(new Counter("Manifestation"), source, game);
+                    permanent.addCounters(CounterType.MANIFESTATION.createInstance(), source, game);
                     ContinuousEffect effect = new AddCardTypeTargetEffect(Duration.Custom, CardType.ENCHANTMENT);
                     effect.setTargetPointer(new FixedTarget(permanent, game));
                     game.addEffect(effect, source);

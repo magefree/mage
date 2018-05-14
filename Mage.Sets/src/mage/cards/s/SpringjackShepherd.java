@@ -60,7 +60,7 @@ public class SpringjackShepherd extends CardImpl {
 
         // Chroma - When Springjack Shepherd enters the battlefield, create a 0/1 white Goat creature token for each white mana symbol in the mana costs of permanents you control.
         Effect effect = new CreateTokenEffect(new GoatToken(), new ChromaSpringjackShepherdCount());
-        effect.setText("<i>Chroma</i> - When Springjack Shepherd enters the battlefield, create a 0/1 white Goat creature token for each white mana symbol in the mana costs of permanents you control.");
+        effect.setText("<i>Chroma</i> &mdash; When Springjack Shepherd enters the battlefield, create a 0/1 white Goat creature token for each white mana symbol in the mana costs of permanents you control.");
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect, false, true));
 
     }

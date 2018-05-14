@@ -90,56 +90,6 @@ public class TorgaarFamineIncarnate extends CardImpl {
     }
 }
 
-//class TorgaarFamineIncarnateSacrificeCost extends CostImpl {
-//
-//    int numbSacrificed = 0;
-//
-//    public TorgaarFamineIncarnateSacrificeCost() {
-//        this.text = "sacrifice any number of creatures";
-//
-//    }
-//
-//    public TorgaarFamineIncarnateSacrificeCost(final TorgaarFamineIncarnateSacrificeCost cost) {
-//        super(cost);
-//        this.numbSacrificed = cost.numbSacrificed;
-//    }
-//
-//    @Override
-//    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
-//        TargetControlledCreaturePermanent target
-//                = new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE,
-//                        new FilterControlledCreaturePermanent("select any number of creatures to sacrifice. "
-//                                + "This spell costs {2} less to cast for each creature sacrificed this way"), true);
-//        Player player = game.getPlayer(controllerId);
-//        if (player != null) {
-//            player.chooseTarget(Outcome.Benefit, target, ability, game);
-//            for (UUID creatureId : target.getTargets()) {
-//                Permanent creature = game.getPermanent(creatureId);
-//                if (creature != null) {
-//                    if (creature.sacrifice(sourceId, game)) {
-//                        numbSacrificed++;
-//                    }
-//                }
-//            }
-//        }
-//        this.paid = true;
-//        return paid;
-//    }
-//
-//    public int getNumbSacrificed() {
-//        return numbSacrificed;
-//    }
-//
-//    @Override
-//    public TorgaarFamineIncarnateSacrificeCost copy() {
-//        return new TorgaarFamineIncarnateSacrificeCost(this);
-//    }
-//}
 class TorgaarFamineIncarnateEffect extends OneShotEffect {
 
     public TorgaarFamineIncarnateEffect() {

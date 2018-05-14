@@ -87,14 +87,7 @@ class DarkBargainEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         MageObject sourceOject = source.getSourceObject(game);
         if (player != null && sourceOject != null) {
-            Cards cards = new CardsImpl();
-            int cardsCount = Math.min(3, player.getLibrary().size());
-            for (int i = 0; i < cardsCount; i++) {
-                Card card = player.getLibrary().removeFromTop(game);
-                if (card != null) {
-                    cards.add(card);
-                }
-            }
+            Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, 3));
             if (!cards.isEmpty()) {
                 Cards cardsToHand = new CardsImpl();
                 player.lookAtCards(sourceOject.getIdName(), cards, game);

@@ -37,7 +37,7 @@ import mage.abilities.common.TapForManaAllTriggeredManaAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.AddManaToManaPoolTargetControllerEffect;
+import mage.abilities.effects.mana.AddManaToManaPoolTargetControllerEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;

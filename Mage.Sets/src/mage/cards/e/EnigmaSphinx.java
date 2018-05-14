@@ -47,7 +47,6 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
-import mage.players.Library;
 import mage.players.Player;
 
 /**
@@ -147,22 +146,14 @@ class EnigmaSphinxEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(source.getSourceId());
-        if (card != null && game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD) {
-            Player owner = game.getPlayer(card.getOwnerId());
-            if (owner != null && card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true)) {
-                // Move Sphinx to third position
-                game.informPlayers(card.getLogName() + " is put into " + owner.getLogName() + "'s library third from the top");
-                Library lib = owner.getLibrary();
-                if (lib != null) {
-                    Card card1 = lib.removeFromTop(game);
-                    if (card1 != null && card1.getId().equals(source.getSourceId())) {
-                        lib.putCardThirdFromTheTop(card1, game);
-                        return true;
-                    }
-                }
-            }
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
         }
-        return false;
+        Card card = (Card) source.getSourceObjectIfItStillExists(game);
+        if (card != null) {
+            controller.putCardOnTopXOfLibrary(card, game, source, 3);
+        }
+        return true;
     }
 }

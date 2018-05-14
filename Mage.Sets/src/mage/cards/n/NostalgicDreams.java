@@ -29,6 +29,7 @@ package mage.cards.n;
 
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.costs.common.DiscardXTargetCost;
 import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.Effect;
@@ -38,6 +39,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -49,16 +51,15 @@ import mage.target.common.TargetCardInYourGraveyard;
 public class NostalgicDreams extends CardImpl {
 
     public NostalgicDreams(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{G}{G}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{G}{G}");
 
         // As an additional cost to cast Nostalgic Dreams, discard X cards.
         this.getSpellAbility().addCost(new DiscardXTargetCost(new FilterCard("cards"), true));
-        // Return X target cards from your graveyard to your hand. Exile Nostalgic Dreams.
+        // Return X target cards from your graveyard to your hand.
         Effect effect = new ReturnFromGraveyardToHandTargetEffect();
         effect.setText("Return X target cards from your graveyard to your hand");
-        this.getSpellAbility().addEffect(effect);        
-        
+        this.getSpellAbility().addEffect(effect);
+        // Exile Nostalgic Dreams.
         this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
 
     }
@@ -69,11 +70,12 @@ public class NostalgicDreams extends CardImpl {
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        int xValue = new GetXValue().calculate(game, ability, null);
-//        if (xValue > 0) {
-            Target target = new TargetCardInYourGraveyard(xValue, new FilterCard("card from your graveyard"));
+        if (ability instanceof SpellAbility) {
+            int xValue = new GetXValue().calculate(game, ability, null);
+            Target target = new TargetCardInYourGraveyard(xValue, StaticFilters.FILTER_CARD_FROM_YOUR_GRAVEYARD);
             ability.addTarget(target);
-//        }
+        }
+
     }
 
     @Override

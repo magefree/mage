@@ -59,7 +59,7 @@ public class SwirlingSandstorm extends CardImpl {
         Effect effect = new ConditionalOneShotEffect(
                 new DamageAllEffect(5, filter),
                 new CardsInControllerGraveCondition(7),
-                "<i>Threshold</i> - {this} deals 5 damage to each creature without flying if seven or more cards are in your graveyard.");
+                "<i>Threshold</i> &mdash; {this} deals 5 damage to each creature without flying if seven or more cards are in your graveyard.");
         this.getSpellAbility().addEffect(effect);
     }
 

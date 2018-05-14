@@ -27,8 +27,8 @@
  */
 package mage.cards.s;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -38,9 +38,12 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -51,7 +54,7 @@ import mage.players.Player;
 public class Scalpelexis extends CardImpl {
 
     public Scalpelexis(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}");
         this.subtype.add(SubType.BEAST);
 
         this.power = new MageInt(1);
@@ -92,38 +95,26 @@ class ScalpelexisEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
-        List<String> namesFiltered = new ArrayList<>();
-        boolean doneOnce = false;
-
-        while (checkDuplicatedNames(namesFiltered) || !doneOnce) {
-            doneOnce = true;
-            namesFiltered.clear();
-            int count = Math.min(player.getLibrary().size(), 4);
-            for (int i = 0; i < count; i++) {
-                Card card = player.getLibrary().removeFromTop(game);
-                if (card != null) {
-                    namesFiltered.add(card.getName());
-                    card.moveToExile(id, "Moved these cards to exile", source.getSourceId(), game);
+        Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
+        if (targetPlayer == null) {
+            return false;
+        }
+        Set<String> cardNames = new HashSet<>();
+        boolean doubleName;
+        do {
+            doubleName = false;
+            Cards toExile = new CardsImpl(targetPlayer.getLibrary().getTopCards(game, 4));
+            cardNames.clear();
+            for (Card card : toExile.getCards(game)) {
+                if (cardNames.contains(card.getName())) {
+                    doubleName = true;
+                    break;
+                } else {
+                    cardNames.add(card.getName());
                 }
             }
-        }
+            targetPlayer.moveCards(toExile, Zone.EXILED, source, game);
+        } while (doubleName);
         return true;
-    }
-
-    public boolean checkDuplicatedNames(List<String> string) {
-        for (int i = 0; i < string.size() - 1; i++) {
-            String stringToCheck = string.get(i);
-            if (stringToCheck == null) {
-                continue; //empty ignore
-            }
-            for (int j = i + 1; j < string.size(); j++) {
-                String stringToCompare = string.get(j);
-                if (stringToCheck.equals(stringToCompare)) {
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 }

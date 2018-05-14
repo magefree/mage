@@ -78,7 +78,7 @@ class FaithsShieldEffect extends OneShotEffect {
     public FaithsShieldEffect() {
         super(Outcome.Protect);
         staticText = "Target permanent you control gains protection from the color of your choice until end of turn."
-                + "<br/><br/><i>Fateful hour</i> - If you have 5 or less life, instead you and each permanent you control gain protection from the color of your choice until end of turn";
+                + "<br/><br/><i>Fateful hour</i> &mdash; If you have 5 or less life, instead you and each permanent you control gain protection from the color of your choice until end of turn";
     }
 
     public FaithsShieldEffect(final FaithsShieldEffect effect) {

@@ -30,7 +30,6 @@ package mage.game;
 import java.io.Serializable;
 import java.util.*;
 import java.util.stream.Collectors;
-
 import mage.MageObject;
 import mage.abilities.*;
 import mage.abilities.effects.ContinuousEffect;
@@ -121,6 +120,8 @@ public class GameState implements Serializable, Copyable<GameState> {
     private Map<UUID, Card> copiedCards = new HashMap<>();
     private int permanentOrderNumber;
 
+    private int applyEffectsCounter; // Upcounting number of each applyEffects execution
+
     public GameState() {
         players = new Players();
         playerList = new PlayerList();
@@ -137,6 +138,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         combat = new Combat();
         turnMods = new TurnMods();
         watchers = new Watchers();
+        applyEffectsCounter = 0;
     }
 
     public GameState(final GameState state) {
@@ -193,6 +195,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.zoneChangeCounter.putAll(state.zoneChangeCounter);
         this.copiedCards.putAll(state.copiedCards);
         this.permanentOrderNumber = state.permanentOrderNumber;
+        this.applyEffectsCounter = state.applyEffectsCounter;
     }
 
     public void restoreForRollBack(GameState state) {
@@ -210,7 +213,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.command = state.command;
         this.isPlaneChase = state.isPlaneChase;
         this.seenPlanes = state.seenPlanes;
-        this.designations = state.designations;        
+        this.designations = state.designations;
         this.exile = state.exile;
         this.battlefield = state.battlefield;
         this.turnNum = state.turnNum;
@@ -237,6 +240,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.zoneChangeCounter = state.zoneChangeCounter;
         this.copiedCards = state.copiedCards;
         this.permanentOrderNumber = state.permanentOrderNumber;
+        this.applyEffectsCounter = state.applyEffectsCounter;
     }
 
     @Override
@@ -466,12 +470,12 @@ public class GameState implements Serializable, Copyable<GameState> {
             }
         }
         return null;
-    }    
-    
+    }
+
     public List<String> getSeenPlanes() {
         return seenPlanes;
     }
-    
+
     public boolean isPlaneChase() {
         return isPlaneChase;
     }
@@ -574,6 +578,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     public void applyEffects(Game game) {
+        applyEffectsCounter++;
         for (Player player : players.values()) {
             player.reset();
         }
@@ -680,7 +685,11 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     public void setZone(UUID id, Zone zone) {
-        zones.put(id, zone);
+        if (zone == null) {
+            zones.remove(id);
+        } else {
+            zones.put(id, zone);
+        }
     }
 
     public void addSimultaneousEvent(GameEvent event, Game game) {
@@ -752,8 +761,8 @@ public class GameState implements Serializable, Copyable<GameState> {
                     ZoneChangeData data = (ZoneChangeData) obj;
                     return this.fromZone == data.fromZone
                             && this.toZone == data.toZone
-                            && this.sourceId == data.sourceId
-                            && this.playerId == data.playerId;
+                            && Objects.equals(this.sourceId, data.sourceId)
+                            && Objects.equals(this.playerId, data.playerId);
                 }
                 return false;
             }
@@ -881,13 +890,13 @@ public class GameState implements Serializable, Copyable<GameState> {
             addAbility(ability, designation.getId(), null);
         }
     }
-    
+
     public void addSeenPlane(Plane plane, Game game, UUID controllerId) {
         if (plane != null) {
             getSeenPlanes().add(plane.getName());
         }
     }
-    
+
     public void resetSeenPlanes() {
         getSeenPlanes().clear();
     }
@@ -1169,4 +1178,9 @@ public class GameState implements Serializable, Copyable<GameState> {
     public int getNextPermanentOrderNumber() {
         return permanentOrderNumber++;
     }
+
+    public int getApplyEffectsCounter() {
+        return applyEffectsCounter;
+    }
+
 }

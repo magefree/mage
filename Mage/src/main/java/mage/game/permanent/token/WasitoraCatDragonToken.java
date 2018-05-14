@@ -27,6 +27,9 @@
  */
 package mage.game.permanent.token;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.MageInt;
@@ -38,8 +41,17 @@ import mage.abilities.keyword.FlyingAbility;
  */
 public class WasitoraCatDragonToken extends TokenImpl {
 
+    final static private List<String> tokenImageSets = new ArrayList<>();
+
+    static {
+        tokenImageSets.addAll(Arrays.asList("C17"));
+    }
+    
     public WasitoraCatDragonToken() {
         super("Cat Dragon", "3/3 black, red, and green Cat Dragon creature token with flying");
+        
+        availableImageSetCodes = tokenImageSets;
+        setOriginalExpansionSetCode("C17");
 
         cardType.add(CardType.CREATURE);
         this.subtype.add(SubType.CAT);

@@ -27,7 +27,9 @@
  */
 package mage.cards.n;
 
-import mage.MageObject;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
@@ -46,14 +48,10 @@ import mage.game.Game;
 import mage.players.Library;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetAnyTarget;
+import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetOpponent;
 import mage.target.targetpointer.FixedTarget;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 
 /**
  *
@@ -172,22 +170,21 @@ class NicolBolasGodPharaohPlusTwoEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player opponent = game.getPlayer(targetPointer.getFirst(game, source));
-        MageObject sourceObject = source.getSourceObject(game);
-        if (opponent != null && opponent.getLibrary().hasCards() && sourceObject != null) {
+        if (opponent != null) {
             Library library = opponent.getLibrary();
             Card card;
             do {
-                card = library.removeFromTop(game);
+                card = library.getFromTop(game);
                 if (card != null) {
                     opponent.moveCards(card, Zone.EXILED, source, game);
+                    if (!card.isLand()) {
+                        ContinuousEffect effect = new NicolBolasGodPharaohFromExileEffect();
+                        effect.setTargetPointer(new FixedTarget(card.getId(), game.getState().getZoneChangeCounter(card.getId())));
+                        game.addEffect(effect, source);
+                        break;
+                    }
                 }
-            } while (library.hasCards() && card != null && card.isLand());
-
-            if (card != null) {
-                ContinuousEffect effect = new NicolBolasGodPharaohFromExileEffect();
-                effect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game)));
-                game.addEffect(effect, source);
-            }
+            } while (library.hasCards() && card != null);
             return true;
         }
         return false;

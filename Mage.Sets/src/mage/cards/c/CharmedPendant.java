@@ -27,6 +27,7 @@
  */
 package mage.cards.c;
 
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import mage.Mana;
@@ -42,8 +43,8 @@ import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.costs.mana.MonoHybridManaCost;
 import mage.abilities.costs.mana.VariableManaCost;
-import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.effects.mana.BasicManaEffect;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.abilities.mana.ManaOptions;
 import mage.cards.Card;
@@ -84,8 +85,7 @@ class CharmedPendantAbility extends ActivatedManaAbilityImpl {
     public CharmedPendantAbility() {
         super(Zone.BATTLEFIELD, new CharmedPendantManaEffect(), new TapSourceCost());
         this.addCost(new PutTopCardOfYourLibraryToGraveyardCost());
-        this.netMana.add(new Mana(0, 0, 0, 0, 0, 0, 0, 0));
-        this.setUndoPossible(false); // Otherwise you could retunrn the card from graveyard
+        this.setUndoPossible(false); // Otherwise you could return the card from graveyard
     }
 
     public CharmedPendantAbility(Zone zone, Mana mana, Cost cost) {
@@ -137,6 +137,18 @@ class CharmedPendantManaEffect extends ManaEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
+            checkToFirePossibleEvents(getMana(game, source), game, source);
+            controller.getManaPool().addMana(getMana(game, source), game, source);
+            return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public Mana produceMana(boolean netMana, Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
             Mana mana = new Mana();
             for (Cost cost : source.getCosts()) {
                 if (cost instanceof PutTopCardOfYourLibraryToGraveyardCost) {
@@ -178,29 +190,28 @@ class CharmedPendantManaEffect extends ManaEffect {
                 }
 
             }
-            checkToFirePossibleEvents(mana, game, source);
-            controller.getManaPool().addMana(mana, game, source);
-            return true;
+            return mana;
         }
 
-        return false;
+        return null;
     }
 
     @Override
-    public Mana getMana(Game game, Ability source) {
+    public List<Mana> getNetMana(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             if (controller.isTopCardRevealed()) {
                 Card card = controller.getLibrary().getFromTop(game);
                 if (card != null) {
-                    Mana mana = card.getManaCost().getMana().copy();
-                    mana.setColorless(0);
-                    mana.setGeneric(0);
-                    return mana;
+                    List<Mana> netMana = card.getManaCost().getManaOptions();
+                    for (Mana mana : netMana) {
+                        mana.setColorless(0);
+                        mana.setGeneric(0);
+                    }
+                    return netMana;
                 }
             }
         }
-        return null; // You don't know if and which amount or color of mana you get
+        return null;
     }
-
 }

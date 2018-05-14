@@ -51,19 +51,19 @@ import mage.target.common.TargetCardInGraveyard;
 
 /**
  *
- * @author jonubuu 
+ * @author jonubuu
  */
 public class RelicOfProgenitus extends CardImpl {
 
     public RelicOfProgenitus(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
 
         // {tap}: Target player exiles a card from their graveyard.
         Ability firstAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RelicOfProgenitusEffect(), new TapSourceCost());
         firstAbility.addTarget(new TargetPlayer());
         this.addAbility(firstAbility);
         // {1}, Exile Relic of Progenitus: Exile all cards from all graveyards. Draw a card.
-        Ability secondAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileGraveyardAllPlayersEffect(),new GenericManaCost(1));
+        Ability secondAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileGraveyardAllPlayersEffect(), new GenericManaCost(1));
         secondAbility.addCost(new ExileSourceCost());
         secondAbility.addEffect(new DrawCardSourceControllerEffect(1));
         this.addAbility(secondAbility);

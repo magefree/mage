@@ -42,8 +42,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.MulticoloredPredicate;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetAnyTarget;
 
 /**
@@ -52,14 +51,8 @@ import mage.target.common.TargetAnyTarget;
  */
 public class AuroraEidolon extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("a multicolored spell");
-
-    static {
-        filter.add(new MulticoloredPredicate());
-    }
-
     public AuroraEidolon(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
         this.subtype.add(SubType.SPIRIT);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
@@ -70,7 +63,7 @@ public class AuroraEidolon extends CardImpl {
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
         // Whenever you cast a multicolored spell, you may return Aurora Eidolon from your graveyard to your hand.
-        this.addAbility(new SpellCastControllerTriggeredAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), filter, true, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), StaticFilters.FILTER_SPELL_A_MULTICOLORED, true, false));
     }
 
     public AuroraEidolon(final AuroraEidolon card) {

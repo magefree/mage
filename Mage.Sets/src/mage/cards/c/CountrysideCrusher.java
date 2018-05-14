@@ -36,8 +36,8 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.*;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -53,7 +53,7 @@ import mage.players.Player;
 public class CountrysideCrusher extends CardImpl {
 
     public CountrysideCrusher(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
         this.subtype.add(SubType.GIANT);
         this.subtype.add(SubType.WARRIOR);
 
@@ -102,8 +102,7 @@ class CountrysideCrusherEffect extends OneShotEffect {
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (controller != null && sourcePermanent != null) {
             Cards cards = new CardsImpl();
-            while (controller.getLibrary().hasCards()) {
-                Card card = controller.getLibrary().getFromTop(game);
+            for (Card card : controller.getLibrary().getCards(game)) {
                 cards.add(card);
                 if (card.isLand()) {
                     controller.moveCards(card, Zone.GRAVEYARD, source, game);

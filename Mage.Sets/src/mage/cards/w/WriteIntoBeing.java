@@ -52,7 +52,7 @@ import mage.target.TargetCard;
 public class WriteIntoBeing extends CardImpl {
 
     public WriteIntoBeing(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{U}");
 
         // Look at the top two cards of your library. Manifest one of those cards, then put the other on the top or bottom of your library.
         this.getSpellAbility().addEffect(new WriteIntoBeingEffect());
@@ -72,7 +72,8 @@ class WriteIntoBeingEffect extends OneShotEffect {
 
     public WriteIntoBeingEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "Look at the top two cards of your library. Manifest one of those cards, then put the other on the top or bottom of your library. <i>(To manifest a card, put it onto the battlefield face down as a 2/2 creature. Turn it face up any time for its mana cost if it's a creature card.)</i>";
+        this.staticText = "Look at the top two cards of your library. Manifest one of those cards, then put the other on the top or bottom of your library. "
+                + "<i>(To manifest a card, put it onto the battlefield face down as a 2/2 creature. Turn it face up any time for its mana cost if it's a creature card.)</i>";
     }
 
     public WriteIntoBeingEffect(final WriteIntoBeingEffect effect) {
@@ -89,9 +90,8 @@ class WriteIntoBeingEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (sourceObject != null && controller != null) {
-            Cards cards = new CardsImpl();
-            cards.addAll(controller.getLibrary().getTopCards(game, 2));
-            controller.lookAtCards(sourceObject.getName(), cards, game);
+            Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, 2));
+            controller.lookAtCards(source, null, cards, game);
             Card cardToManifest = null;
             if (cards.size() > 1) {
                 TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to manifest"));

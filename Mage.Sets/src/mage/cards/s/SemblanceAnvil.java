@@ -35,7 +35,6 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
-import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -54,7 +53,7 @@ import mage.util.CardUtil;
 public class SemblanceAnvil extends CardImpl {
 
     public SemblanceAnvil(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // Imprint - When Semblance Anvil enters the battlefield, you may exile a nonland card from your hand.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SemblanceAnvilEffect(), true));
@@ -134,7 +133,7 @@ class SemblanceAnvilCostReductionEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility) {
+        if (abilityToModify instanceof SpellAbility) {
             Card sourceCard = game.getCard(abilityToModify.getSourceId());
             if (sourceCard != null && sourceCard.getOwnerId().equals(source.getControllerId())) {
                 Permanent permanent = game.getPermanent(source.getSourceId());

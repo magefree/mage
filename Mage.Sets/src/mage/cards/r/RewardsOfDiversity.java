@@ -55,7 +55,8 @@ public class RewardsOfDiversity extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
 
         // Whenever an opponent casts a multicolored spell, you gain 4 life.
-        this.addAbility(new SpellCastOpponentTriggeredAbility(new GainLifeEffect(4), filter, false));
+        this.addAbility(new SpellCastOpponentTriggeredAbility(
+                new GainLifeEffect(4), filter, false));
     }
 
     public RewardsOfDiversity(final RewardsOfDiversity card) {

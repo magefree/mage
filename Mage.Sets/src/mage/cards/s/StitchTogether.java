@@ -54,7 +54,7 @@ public class StitchTogether extends CardImpl {
                 new ReturnFromGraveyardToBattlefieldTargetEffect(),
                 new ReturnFromGraveyardToHandTargetEffect(),
                 new CardsInControllerGraveCondition(7),
-                "Return target creature card from your graveyard to your hand. <br/><br/><i>Threshold</i> - Return that card from your graveyard to the battlefield instead if seven or more cards are in your graveyard.");
+                "Return target creature card from your graveyard to your hand. <br/><br/><i>Threshold</i> &mdash; Return that card from your graveyard to the battlefield instead if seven or more cards are in your graveyard.");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
     }

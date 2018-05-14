@@ -89,51 +89,30 @@ class CruelFateEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Card sourceCard = game.getCard(source.getSourceId());
         if (sourceCard != null) {
-            Player you = game.getPlayer(source.getControllerId());
-            Player player = game.getPlayer(source.getFirstTarget());
-            if (player != null && you != null) {
-                Cards cards = new CardsImpl();
-                int count = Math.min(player.getLibrary().size(), 5);
-                for (int i = 0; i < count; i++) {
-                    Card card = player.getLibrary().removeFromTop(game);
-                    if (card != null) {
-                        cards.add(card);
-                    }
-                }
-
-                you.lookAtCards(sourceCard.getIdName(), cards, game);
+            Player controller = game.getPlayer(source.getControllerId());
+            Player targetOpponent = game.getPlayer(getTargetPointer().getFirst(game, source));
+            if (targetOpponent != null && controller != null) {
+                Cards cards = new CardsImpl(targetOpponent.getLibrary().getTopCards(game, 5));
+                controller.lookAtCards(source, null, cards, game);
 
                 // card to put into opponent's graveyard
                 TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to put into target opponent's graveyard"));
-                if (player.canRespond()) {
+                if (targetOpponent.isInGame()) {
                     if (cards.size() > 1) {
-                        you.choose(Outcome.Detriment, cards, target, game);
+                        controller.choose(Outcome.Detriment, cards, target, game);
                         Card card = cards.get(target.getFirstTarget(), game);
                         if (card != null) {
                             cards.remove(card);
-                            card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, true);
+                            controller.moveCards(card, Zone.GRAVEYARD, source, game);
                         }
-                    }
-                    else if (cards.size() == 1) {
+                    } else if (cards.size() == 1) {
                         Card card = cards.get(cards.iterator().next(), game);
+                        controller.moveCards(card, Zone.GRAVEYARD, source, game);
                         card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, true);
+                        cards.clear();
                     }
                 }
-                // cards to put on the top of opponent's library
-                TargetCard target2 = new TargetCard(Zone.LIBRARY, new FilterCard("card to put on the top of target opponent's library"));
-                while (player.canRespond() && cards.size() > 1) {
-                    you.choose(Outcome.Neutral, cards, target2, game);
-                    Card card = cards.get(target2.getFirstTarget(), game);
-                    if (card != null) {
-                        cards.remove(card);
-                        card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-                    }
-                    target2.clearChosen();
-                }
-                if (cards.size() == 1) {
-                    Card card = cards.get(cards.iterator().next(), game);
-                    card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-                }
+                controller.putCardsOnTopOfLibrary(cards, game, source, true);
                 return true;
             }
         }

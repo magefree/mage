@@ -27,10 +27,7 @@
  */
 package mage.cards.t;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.NameACardEffect;
@@ -91,41 +88,29 @@ class TunnelVisionEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        MageObject sourceObject = game.getObject(source.getSourceId());
         Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         String cardName = (String) game.getState().getValue(source.getSourceId().toString() + NameACardEffect.INFO_KEY);
-        if (sourceObject == null || targetPlayer == null || cardName == null || cardName.isEmpty()) {
+        if (targetPlayer == null || cardName == null || cardName.isEmpty()) {
             return false;
         }
 
         Cards cardsToReveal = new CardsImpl();
-        Set<Card> cardsToBury = new HashSet<>();
         Card namedCard = null;
 
-        // reveal until named card found
-        // if named card found, put all revealed cards in grave and put named card on top of library
-        // if named card not found, shuffle library
-        boolean namedCardFound = false;
-        while (targetPlayer.getLibrary().hasCards()) {
-            Card card = targetPlayer.getLibrary().removeFromTop(game);
-            if (card != null) {
-                cardsToReveal.add(card);
-                if (card.getName().equals(cardName)) {
-                    namedCardFound = true;
-                    namedCard = card;
-                    break;
-                } else {
-                    cardsToBury.add(card);
-                }
+        for (Card card : targetPlayer.getLibrary().getCards(game)) {
+            cardsToReveal.add(card);
+            if (card.getName().equals(cardName)) {
+                namedCard = card;
+                break;
             }
         }
 
-        targetPlayer.revealCards(sourceObject.getIdName(), cardsToReveal, game);
-        if (namedCardFound) {
-            targetPlayer.moveCards(cardsToBury, Zone.GRAVEYARD, source, game);
-            targetPlayer.moveCards(namedCard, Zone.LIBRARY, source, game);
+        targetPlayer.revealCards(source, cardsToReveal, game);
+        if (namedCard != null) {
+            cardsToReveal.remove(namedCard);
+            targetPlayer.moveCards(cardsToReveal, Zone.GRAVEYARD, source, game);
+            targetPlayer.putCardsOnTopOfLibrary(new CardsImpl(namedCard), game, source, true);
         } else {
-            targetPlayer.getLibrary().addAll(cardsToBury, game);
             targetPlayer.shuffleLibrary(source, game);
         }
         return true;

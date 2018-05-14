@@ -35,8 +35,9 @@ import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -51,6 +52,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
 /**
@@ -85,9 +87,9 @@ public class DauntlessBodyguard extends CardImpl {
 }
 
 class DauntlessBodyguardChooseCreatureEffect extends OneShotEffect {
-    
+
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another creature you control");
-    
+
     static {
         filter.add(new AnotherPredicate());
     }
@@ -127,12 +129,10 @@ class DauntlessBodyguardChooseCreatureEffect extends OneShotEffect {
     }
 }
 
-class DauntlessBodyguardGainAbilityEffect extends GainAbilityTargetEffect {
-    
-    private MageObjectReference mor;
+class DauntlessBodyguardGainAbilityEffect extends OneShotEffect {
 
     public DauntlessBodyguardGainAbilityEffect() {
-        super(IndestructibleAbility.getInstance(), Duration.EndOfTurn);
+        super(Outcome.AddAbility);
         this.staticText = "The chosen creature gains indestructible until end of turn";
     }
 
@@ -147,17 +147,17 @@ class DauntlessBodyguardGainAbilityEffect extends GainAbilityTargetEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (mor == null) {
-            Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-            if (sourcePermanent != null) {
-                mor = (MageObjectReference) game.getState().getValue(sourcePermanent.getId() + "_chosenCreature");
-            }
+        MageObjectReference mor;
+        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        if (sourcePermanent == null) {
+            return false;
         }
-        if (mor != null) {
-            Permanent permanent = mor.getPermanent(game);
-            if (permanent != null) {
-                permanent.addAbility(ability, source.getSourceId(), game, false);
-            }
+        mor = (MageObjectReference) game.getState().getValue(sourcePermanent.getId() + "_chosenCreature");
+        Permanent chosenPermanent = mor.getPermanent(game);
+        if (chosenPermanent != null) {
+            ContinuousEffect effect = new GainAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn);
+            effect.setTargetPointer(new FixedTarget(chosenPermanent, game));
+            game.addEffect(effect, source);
         }
         return true;
     }

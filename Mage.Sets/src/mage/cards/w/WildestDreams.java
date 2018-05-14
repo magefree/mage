@@ -36,7 +36,7 @@ import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInYourGraveyard;
 public class WildestDreams extends CardImpl {
 
     public WildestDreams(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{X}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{X}{G}");
 
         // Return X target cards from your graveyard to your hand.
         // Exile Wildest Dreams.
@@ -63,7 +63,7 @@ public class WildestDreams extends CardImpl {
         if (ability instanceof SpellAbility) {
             int xValue = ability.getManaCostsToPay().getX();
             ability.getTargets().clear();
-            ability.addTarget(new TargetCardInYourGraveyard(xValue, new FilterCard("card from your graveyard")));
+            ability.addTarget(new TargetCardInYourGraveyard(xValue, StaticFilters.FILTER_CARD_FROM_YOUR_GRAVEYARD));
         }
     }
 

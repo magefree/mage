@@ -48,6 +48,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -64,16 +65,25 @@ public class Dragonshift extends CardImpl {
     public Dragonshift(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}{R}");
 
-
         // Until end of turn, target creature you control becomes a blue and red Dragon with base power and toughness 4/4, loses all abilities, and gains flying.
-        Effect effect = new BecomesCreatureTargetEffect(new DragonToken(), true, false, Duration.EndOfTurn);
+        Effect effect = new BecomesCreatureTargetEffect(
+                new CreatureToken(4, 4, "blue and red Dragon with base power and toughness 4/4")
+                .withSubType(SubType.DRAGON)
+                .withColor("UR")
+                .withAbility(FlyingAbility.getInstance()),
+                true, false, Duration.EndOfTurn);
         effect.setText("Until end of turn, target creature you control becomes a blue and red Dragon with base power and toughness 4/4, loses all abilities, and gains flying.");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
 
         // Overload {3}{U}{U}{R}{R}
         Ability ability = new OverloadAbility(this, new LoseAllAbilitiesAllEffect(new FilterControlledCreaturePermanent(""), Duration.EndOfTurn), new ManaCostsImpl("{3}{U}{U}{R}{R}"));
-        ability.addEffect(new BecomesCreatureAllEffect(new DragonToken(), null, filter, Duration.EndOfTurn));
+        ability.addEffect(new BecomesCreatureAllEffect(
+                new CreatureToken(4, 4, "blue and red Dragon with base power and toughness 4/4 and with flying")
+                        .withColor("UR")
+                        .withSubType(SubType.DRAGON)
+                        .withAbility(FlyingAbility.getInstance()),
+                null, filter, Duration.EndOfTurn, true));
         this.addAbility(ability);
     }
 
@@ -84,27 +94,5 @@ public class Dragonshift extends CardImpl {
     @Override
     public Dragonshift copy() {
         return new Dragonshift(this);
-    }
-
-    private class DragonToken extends TokenImpl {
-
-        public DragonToken() {
-            super("Dragon", "blue and red Dragon with base power and toughness 4/4 and with flying");
-            cardType.add(CardType.CREATURE);
-            color.setBlue(true);
-            color.setRed(true);
-            subtype.add(SubType.DRAGON);
-            power = new MageInt(4);
-            toughness = new MageInt(4);
-            this.addAbility(FlyingAbility.getInstance());
-        }
-        public DragonToken(final DragonToken token) {
-            super(token);
-        }
-
-        public DragonToken copy() {
-            return new DragonToken(this);
-        }
-
     }
 }

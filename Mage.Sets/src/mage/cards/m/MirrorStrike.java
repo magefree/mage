@@ -27,6 +27,7 @@
  */
 package mage.cards.m;
 
+import java.util.Objects;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.ReplacementEffectImpl;
@@ -124,7 +125,9 @@ class MirrorStrikeEffect extends ReplacementEffectImpl {
         DamageEvent damageEvent = (DamageEvent) event;
         Permanent targetPermanent = game.getPermanent(source.getFirstTarget());
         if (controller != null && targetPermanent != null) {
-            return (damageEvent.isCombatDamage() && controller.getId() == damageEvent.getTargetId() && targetPermanent.getId() == damageEvent.getSourceId());
+            return (damageEvent.isCombatDamage()
+                    && Objects.equals(controller.getId(), damageEvent.getTargetId())
+                    && Objects.equals(targetPermanent.getId(), damageEvent.getSourceId()));
         }
         return false;
     }
