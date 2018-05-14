@@ -54,4 +54,7 @@ public class AddConditionalManaEffect extends ManaEffect {
         return manaBuilder.setMana(mana, source, game).build();
     }
 
+    public Mana getMana() {
+        return mana;
+    }
 }
