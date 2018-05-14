@@ -2031,21 +2031,30 @@ public abstract class GameImpl implements Game, Serializable {
                     }
                 }
             }
-            // Remove Saga enchantment if last chapter is reached and chapter ability has left the stack
+            // 704.5s If the number of lore counters on a Saga permanent is greater than or equal to its final chapter number 
+            // and it isn’t the source of a chapter ability that has triggered but not yet left the stack, that Saga’s controller sacrifices it.
             if (perm.hasSubtype(SubType.SAGA, this)) {
                 for (Ability sagaAbility : perm.getAbilities()) {
                     if (sagaAbility instanceof SagaAbility) {
                         int maxChapter = ((SagaAbility) sagaAbility).getMaxChapter().getNumber();
                         if (maxChapter <= perm.getCounters(this).getCount(CounterType.LORE)) {
-                            boolean noChapterAbilityOnStack = true;
+                            boolean noChapterAbilityTriggeredOrOnStack = true;
                             // Check chapter abilities on stack
                             for (StackObject stackObject : getStack()) {
                                 if (stackObject.getSourceId().equals(perm.getId()) && SagaAbility.isChapterAbility(stackObject)) {
-                                    noChapterAbilityOnStack = false;
+                                    noChapterAbilityTriggeredOrOnStack = false;
                                     break;
                                 }
                             }
-                            if (noChapterAbilityOnStack) {
+                            if (noChapterAbilityTriggeredOrOnStack) {
+                                for (TriggeredAbility trigger : state.getTriggered(perm.getControllerId())) {
+                                    if (SagaAbility.isChapterAbility(trigger) && trigger.getSourceId().equals(perm.getId())) {
+                                        noChapterAbilityTriggeredOrOnStack = false;
+                                        break;
+                                    }
+                                }
+                            }
+                            if (noChapterAbilityTriggeredOrOnStack) {
                                 // After the last chapter ability has left the stack, you'll sacrifice the Saga
                                 perm.sacrifice(perm.getId(), this);
                                 somethingHappened = true;

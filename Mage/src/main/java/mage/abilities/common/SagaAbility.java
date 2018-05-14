@@ -28,6 +28,7 @@
 package mage.abilities.common;
 
 import mage.abilities.Ability;
+import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
@@ -127,6 +128,10 @@ public class SagaAbility extends SimpleStaticAbility {
         }
         return false;
     }
+
+    public static boolean isChapterAbility(TriggeredAbility ability) {
+        return ability instanceof ChapterTriggeredAbility;
+    }
 }
 
 class ChapterTriggeredAbility extends TriggeredAbilityImpl {
@@ -134,8 +139,9 @@ class ChapterTriggeredAbility extends TriggeredAbilityImpl {
     SagaChapter chapterFrom, chapterTo;
 
     public ChapterTriggeredAbility(Effect effect, SagaChapter chapterFrom, SagaChapter chapterTo) {
-        super(Zone.BATTLEFIELD, effect, false);
+        super(Zone.ALL, effect, false);
         this.chapterFrom = chapterFrom;
+        this.chapterTo = chapterTo;
     }
 
     public ChapterTriggeredAbility(final ChapterTriggeredAbility ability) {
@@ -153,12 +159,13 @@ class ChapterTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getTargetId().equals(getSourceId()) && event.getData().equals(CounterType.LORE.getName())) {
             int amountAdded = event.getAmount();
+            int loreCounters = amountAdded;
             Permanent sourceSaga = game.getPermanentOrLKIBattlefield(getSourceId());
-            if (sourceSaga != null) {
-                int loreCounters = sourceSaga.getCounters(game).getCount(CounterType.LORE);
-                return loreCounters - amountAdded < chapterFrom.getNumber()
-                        && chapterFrom.getNumber() <= loreCounters;
+            if (sourceSaga != null) { // If it's entering the battlefield, it won't be found so we assume it had no counters
+                loreCounters = sourceSaga.getCounters(game).getCount(CounterType.LORE);
             }
+            return loreCounters - amountAdded < chapterFrom.getNumber()
+                    && chapterFrom.getNumber() <= loreCounters;
         }
         return false;
     }
