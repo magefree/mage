@@ -28,36 +28,41 @@
 package mage.cards.b;
 
 import java.util.UUID;
-import mage.abilities.TriggeredAbility;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.condition.Condition;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.condition.CompoundCondition;
 import mage.abilities.condition.common.CardsInHandCondition;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.WinGameSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
-import mage.constants.Zone;
-import mage.filter.FilterPermanent;
+import mage.constants.TargetController;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 
 /**
  * @author fireshoes
  */
 public class BarrenGlory extends CardImpl {
 
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent();
+
+    static {
+        filter.add(new AnotherPredicate());
+    }
+
     public BarrenGlory(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{W}{W}");
 
         // At the beginning of your upkeep, if you control no permanents other than Barren Glory and have no cards in hand, you win the game.
-        Condition condition = new CardsInHandCondition(ComparisonType.EQUAL_TO, 0);
-        TriggeredAbility ability = new BarrenGloryTriggeredAbility();
-        this.addAbility(new ConditionalTriggeredAbility(ability,
-                condition,
+        this.addAbility(new ConditionalTriggeredAbility(
+                new BeginningOfUpkeepTriggeredAbility(new WinGameSourceControllerEffect(), TargetController.YOU, false),
+                new CompoundCondition(
+                        new CardsInHandCondition(ComparisonType.EQUAL_TO, 0),
+                        new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.EQUAL_TO, 0)
+                ),
                 "At the beginning of your upkeep, if you control no permanents other than {this} and have no cards in hand, you win the game"));
     }
 
@@ -68,47 +73,5 @@ public class BarrenGlory extends CardImpl {
     @Override
     public BarrenGlory copy() {
         return new BarrenGlory(this);
-    }
-}
-
-class BarrenGloryTriggeredAbility extends TriggeredAbilityImpl {
-
-    private static final FilterPermanent filter = new FilterPermanent();
-
-    static {
-        filter.add(new AnotherPredicate());
-    }
-
-    BarrenGloryTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new WinGameSourceControllerEffect());
-    }
-
-    BarrenGloryTriggeredAbility(final BarrenGloryTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public BarrenGloryTriggeredAbility copy() {
-        return new BarrenGloryTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.UPKEEP_STEP_PRE;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getPlayerId().equals(this.controllerId)) {
-            if (game.getBattlefield().count(filter, this.getSourceId(), this.getControllerId(), game) == 0) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "At the beginning of your upkeep, if you control no permanents other than {this} and have no cards in hand, you win the game";
     }
 }
