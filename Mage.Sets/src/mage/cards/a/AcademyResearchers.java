@@ -54,7 +54,7 @@ import mage.target.common.TargetCardInHand;
 public class AcademyResearchers extends CardImpl {
 
     public AcademyResearchers(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
 
@@ -104,7 +104,7 @@ class AcademyResearchersEffect extends OneShotEffect {
                 Card auraInHand = game.getCard(target.getFirstTarget());
                 if (auraInHand != null) {
                     game.getState().setValue("attachTo:" + auraInHand.getId(), academyResearchers);
-                    auraInHand.putOntoBattlefield(game, Zone.HAND, source.getSourceId(), controller.getId());
+                    controller.moveCards(auraInHand, Zone.BATTLEFIELD, source, game);
                     if (academyResearchers.addAttachment(auraInHand.getId(), game)) {
                         game.informPlayers(controller.getLogName() + " put " + auraInHand.getLogName() + " on the battlefield attached to " + academyResearchers.getLogName() + '.');
                         return true;

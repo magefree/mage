@@ -69,7 +69,7 @@ public class ArachnusSpinner extends CardImpl {
     }
 
     public ArachnusSpinner(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{G}");
         this.subtype.add(SubType.SPIDER);
 
         this.power = new MageInt(5);
@@ -98,8 +98,10 @@ public class ArachnusSpinner extends CardImpl {
 class ArachnusSpinnerEffect extends OneShotEffect {
 
     public ArachnusSpinnerEffect() {
-        super(Outcome.UnboostCreature);
-        this.staticText = "Search your graveyard and/or library for a card named Arachnus Web and put it onto the battlefield attached to target creature. If you search your library this way, shuffle it";
+        super(Outcome.PutCardInPlay);
+        this.staticText = "Search your graveyard and/or library for a card named Arachnus Web "
+                + "and put it onto the battlefield attached to target creature. "
+                + "If you search your library this way, shuffle it";
     }
 
     public ArachnusSpinnerEffect(final ArachnusSpinnerEffect effect) {
@@ -113,8 +115,8 @@ class ArachnusSpinnerEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
             return false;
         }
 
@@ -122,34 +124,28 @@ class ArachnusSpinnerEffect extends OneShotEffect {
         filter.add(new NamePredicate("Arachnus Web"));
 
         Card card = null;
-        Zone zone = null;
-        if (player.chooseUse(Outcome.Neutral, "Search your graveyard for Arachnus Web?", source, game)) {
+        if (controller.chooseUse(Outcome.Neutral, "Search your graveyard for Arachnus Web?", source, game)) {
             TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(filter);
-            if (player.choose(Outcome.PutCardInPlay, player.getGraveyard(), target, game)) {
+            if (controller.choose(Outcome.PutCardInPlay, controller.getGraveyard(), target, game)) {
                 card = game.getCard(target.getFirstTarget());
-                if (card != null) {
-                    zone = Zone.GRAVEYARD;
-                }
             }
         }
         if (card == null) {
             TargetCardInLibrary target = new TargetCardInLibrary(filter);
-            if (player.searchLibrary(target, game)) {
+            if (controller.searchLibrary(target, game)) {
                 card = game.getCard(target.getFirstTarget());
-                if (card != null) {
-                    zone = Zone.LIBRARY;
-                }
             }
-            player.shuffleLibrary(source, game);
+            controller.shuffleLibrary(source, game);
         }
         if (card != null) {
             Permanent permanent = game.getPermanent(source.getFirstTarget());
             if (permanent != null) {
                 game.getState().setValue("attachTo:" + card.getId(), permanent.getId());
-                card.putOntoBattlefield(game, zone, source.getSourceId(), source.getControllerId());
-                return permanent.addAttachment(card.getId(), game);
+                if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
+                    permanent.addAttachment(card.getId(), game); // shouldn't this be done automatically by the logic using the "attachTo:" calue?
+                }
             }
         }
-        return false;
+        return true;
     }
 }
