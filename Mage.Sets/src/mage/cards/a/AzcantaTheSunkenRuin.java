@@ -71,8 +71,13 @@ public class AzcantaTheSunkenRuin extends CardImpl {
         this.addAbility(new BlueManaAbility());
 
         // {2}{U} , {T} : Look at the top four cards of your library. You may reveal a noncreature, nonland card from among them and put it into your hand. Put the rest on the bottom of your library in any order.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new LookLibraryAndPickControllerEffect(new StaticValue(4), false, new StaticValue(1), filter, false), new ManaCostsImpl<>("{2}{U}"));
+        Ability ability = new SimpleActivatedAbility(
+                Zone.BATTLEFIELD,
+                new LookLibraryAndPickControllerEffect(
+                        new StaticValue(4), false, new StaticValue(1),
+                        filter, Zone.LIBRARY, false, true, true
+                ), new ManaCostsImpl<>("{2}{U}")
+        );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
