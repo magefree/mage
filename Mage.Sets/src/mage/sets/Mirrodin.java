@@ -92,6 +92,7 @@ public class Mirrodin extends ExpansionSet {
         cards.add(new SetCardInfo("Fiery Gambit", 90, Rarity.RARE, mage.cards.f.FieryGambit.class));
         cards.add(new SetCardInfo("Fireshrieker", 171, Rarity.UNCOMMON, mage.cards.f.Fireshrieker.class));
         cards.add(new SetCardInfo("Fists of the Anvil", 91, Rarity.COMMON, mage.cards.f.FistsOfTheAnvil.class));
+        cards.add(new SetCardInfo("Flayed Nim", 65, Rarity.UNCOMMON, mage.cards.f.FlayedNim.class));
         cards.add(new SetCardInfo("Forest", 303, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 304, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 305, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
