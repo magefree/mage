@@ -39,8 +39,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.token.SaprolingToken;
-import mage.game.permanent.token.TokenImpl;
-import mage.game.permanent.token.Token;
 import mage.players.Player;
 
 /**
@@ -80,27 +78,24 @@ class DruidicSatchelEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        Card card = player.getLibrary().getFromTop(game);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
+        }
+        Card card = controller.getLibrary().getFromTop(game);
         if (card != null) {
+            controller.revealCards(source, new CardsImpl(card), game);
             if (card.isCreature()) {
-                Token token = new SaprolingToken();
-                token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
+                new SaprolingToken().putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
             }
             if (card.isLand()) {
-                player.getLibrary().getCard(card.getId(), game);
-                card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), source.getControllerId());
+                controller.moveCards(card, Zone.BATTLEFIELD, source, game);
             }
             if (!card.isCreature() && !card.isLand()) {
-                player.gainLife(2, game, source);
+                controller.gainLife(2, game, source);
             }
-
-            Cards cards = new CardsImpl();
-            cards.add(card);
-            player.revealCards("Druidic Satchel", cards, game);
-            return true;
         }
-        return false;
+        return true;
     }
 
     @Override

@@ -27,6 +27,8 @@
  */
 package mage.cards.a;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -44,7 +46,6 @@ import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
@@ -54,7 +55,7 @@ import mage.players.Player;
 public class AngelOfGlorysRise extends CardImpl {
 
     public AngelOfGlorysRise(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{W}{W}");
         this.subtype.add(SubType.ANGEL);
 
         this.power = new MageInt(4);
@@ -79,14 +80,6 @@ public class AngelOfGlorysRise extends CardImpl {
 
 class AngelOfGlorysRiseEffect extends OneShotEffect {
 
-    private static final FilterCreatureCard filterHuman = new FilterCreatureCard();
-    private static final FilterCreaturePermanent filterZombie = new FilterCreaturePermanent();
-
-    static {
-        filterZombie.add(new SubtypePredicate(SubType.ZOMBIE));
-        filterHuman.add(new SubtypePredicate(SubType.HUMAN));
-    }
-
     public AngelOfGlorysRiseEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "Exile all Zombies, then return all Human creature cards from your graveyard to the battlefield";
@@ -103,14 +96,14 @@ class AngelOfGlorysRiseEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            for (Permanent zombie : game.getBattlefield().getActivePermanents(filterZombie, source.getControllerId(), source.getSourceId(), game)) {
-                zombie.moveToExile(source.getSourceId(), zombie.getName(), source.getSourceId(), game);
-            }
-            for (Card human : player.getGraveyard().getCards(filterHuman, game)) {
-                human.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), source.getControllerId());
-            }
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Set<Card> toExile = new HashSet<>(game.getBattlefield()
+                    .getActivePermanents(new FilterCreaturePermanent(SubType.ZOMBIE, "Zombie"), source.getControllerId(), source.getSourceId(), game));
+            controller.moveCards(toExile, Zone.EXILED, source, game);
+            FilterCreatureCard filterHuman = new FilterCreatureCard();
+            filterHuman.add(new SubtypePredicate(SubType.HUMAN));
+            controller.moveCards(controller.getGraveyard().getCards(filterHuman, game), Zone.GRAVEYARD, source, game);
         }
         return true;
     }

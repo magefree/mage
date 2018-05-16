@@ -150,6 +150,7 @@
         <deckType name="Constructed - Australian Highlander" jar="mage-deck-constructed.jar" className="mage.deck.AusHighlander"/>
         <deckType name="Constructed - Canadian Highlander" jar="mage-deck-constructed.jar" className="mage.deck.CanadianHighlander"/>
         <deckType name="Constructed - Freeform" jar="mage-deck-constructed.jar" className="mage.deck.Freeform"/>
+        <deckType name="Constructed - Constructed - Modern - No Banned List" jar="mage-deck-constructed.jar" className="mage.deck.ModernNoBannedList"/>
         <deckType name="Variant Magic - Commander" jar="mage-deck-constructed.jar" className="mage.deck.Commander"/>
         <deckType name="Variant Magic - Duel Commander" jar="mage-deck-constructed.jar" className="mage.deck.DuelCommander"/>
         <deckType name="Variant Magic - MTGO 1v1 Commander" jar="mage-deck-constructed.jar" className="mage.deck.MTGO1v1Commander"/>

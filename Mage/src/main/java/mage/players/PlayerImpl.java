@@ -655,6 +655,15 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
     }
 
+    /**
+     * Don't use this in normal card code, it's for more internal use. Always
+     * use the [Player].moveCards methods if possible for card movement of card
+     * code.
+     *
+     * @param card
+     * @param game
+     * @return
+     */
     @Override
     public boolean putInHand(Card card, Game game) {
         if (card.getOwnerId().equals(playerId)) {

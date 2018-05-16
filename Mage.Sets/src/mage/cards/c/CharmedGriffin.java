@@ -37,8 +37,8 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterArtifactOrEnchantmentCard;
 import mage.game.Game;
@@ -105,7 +105,7 @@ class CharmedGriffinEffect extends OneShotEffect {
                                 && player.choose(Outcome.PutCardInPlay, target, source.getSourceId(), game)) {
                             Card card = game.getCard(target.getFirstTarget());
                             if (card != null) {
-                                card.putOntoBattlefield(game, Zone.HAND, source.getSourceId(), player.getId());
+                                controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                             }
                         }
                     }

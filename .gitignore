@@ -86,6 +86,7 @@ mage.updater.client/target
 
 # Mage.Verify
 Mage.Verify/target
+Mage.Verify/mageclient.log
 Mage.Verify/AllCards.json.zip
 Mage.Verify/AllSets.json.zip
 

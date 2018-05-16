@@ -88,28 +88,32 @@ class AuratouchedMageEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent auratouchedMage = game.getPermanentOrLKIBattlefield(source.getSourceId()); //must be LKI to resolve
-        if (controller != null && auratouchedMage != null) {
-            FilterCard filter = new FilterCard("aura that could enchant " + auratouchedMage.getName());
+
+        if (controller != null) {
+            FilterCard filter = new FilterCard("aura that could enchant " + source.getSourceObject(game).getName());
             filter.add(new SubtypePredicate(SubType.AURA));
-            filter.add(new AuraCardCanAttachToLKIPermanentId(auratouchedMage.getId()));
+            filter.add(new AuraCardCanAttachToLKIPermanentId(source.getSourceId()));
             TargetCardInLibrary target = new TargetCardInLibrary(filter);
             target.setNotTarget(true);
             if (controller.searchLibrary(target, game)) {
                 if (target.getFirstTarget() != null) {
                     Card aura = game.getCard(target.getFirstTarget());
-                    if (game.getBattlefield().containsPermanent(auratouchedMage.getId())) { //verify that it is still on the battlefield
+                    Permanent auratouchedMage = source.getSourcePermanentIfItStillExists(game);
+                    if (aura != null && auratouchedMage != null
+                            && game.getState().getZoneChangeCounter(source.getSourceId()) == source.getSourceObjectZoneChangeCounter()) {
                         game.getState().setValue("attachTo:" + aura.getId(), auratouchedMage);
-                        aura.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), controller.getId());
-                        return auratouchedMage.addAttachment(aura.getId(), game);
+                        if (controller.moveCards(aura, Zone.BATTLEFIELD, source, game)) {
+                            auratouchedMage.addAttachment(aura.getId(), game);
+                        }
+                    } else {
+                        Cards auraRevealed = new CardsImpl(aura);
+                        controller.revealCards(source, auraRevealed, game);
+                        controller.moveCards(aura, Zone.HAND, source, game);
                     }
-                    Cards auraRevealed = new CardsImpl();
-                    auraRevealed.add(aura);
-                    controller.revealCards(auratouchedMage.getName(), auraRevealed, game);
-                    controller.putInHand(aura, game);
                 }
             }
             controller.shuffleLibrary(source, game);
+            return true;
         }
         return false;
     }

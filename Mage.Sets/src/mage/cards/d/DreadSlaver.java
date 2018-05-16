@@ -39,9 +39,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
+import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
-
-
 
 /**
  * @author noxx
@@ -49,7 +48,7 @@ import mage.target.targetpointer.FixedTarget;
 public class DreadSlaver extends CardImpl {
 
     public DreadSlaver(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.HORROR);
 
@@ -88,10 +87,13 @@ class DreadSlaverEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
+        }
         Card card = game.getCard(targetPointer.getFirst(game, source));
         if (card != null) {
-            Zone currentZone = game.getState().getZone(card.getId());
-            if (card.putOntoBattlefield(game, currentZone, source.getSourceId(), source.getControllerId())) {
+            if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
                 ContinuousEffect effect = new BecomesBlackZombieAdditionEffect();
                 effect.setTargetPointer(new FixedTarget(card.getId()));
                 game.addEffect(effect, source);
