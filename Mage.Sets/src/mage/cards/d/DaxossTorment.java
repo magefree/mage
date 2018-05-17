@@ -28,6 +28,7 @@
 package mage.cards.d;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.abilityword.ConstellationAbility;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
@@ -40,18 +41,23 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
+import mage.game.permanent.token.custom.CreatureToken;
 
 /**
- *
  * @author fireshoes
  */
 public class DaxossTorment extends CardImpl {
 
     public DaxossTorment(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}");
 
         // Constellation - Whenever Daxos's Torment or another enchantment enters the battlefield under your control, Daxos's Torment becomes a 5/5 Demon creature with flying and haste until end of turn in addition to its other types.
-        this.addAbility(new ConstellationAbility(new BecomesCreatureSourceEffect(new DaxossTormentToken(), "", Duration.EndOfTurn)));
+        this.addAbility(new ConstellationAbility(new BecomesCreatureSourceEffect(
+                new CreatureToken(5, 5, "5/5 Demon creature with flying and haste")
+                        .withSubType(SubType.DEMON)
+                        .withAbility(FlyingAbility.getInstance())
+                        .withAbility(HasteAbility.getInstance()),
+                "previous types", Duration.EndOfTurn)));
     }
 
     public DaxossTorment(final DaxossTorment card) {
@@ -61,26 +67,5 @@ public class DaxossTorment extends CardImpl {
     @Override
     public DaxossTorment copy() {
         return new DaxossTorment(this);
-    }
-}
-
-class DaxossTormentToken extends TokenImpl {
-
-    public DaxossTormentToken() {
-        super("", "5/5 Demon creature with flying and haste");
-        cardType.add(CardType.CREATURE);
-        
-        subtype.add(SubType.DEMON);
-        power = new MageInt(5);
-        toughness = new MageInt(5);
-        addAbility(FlyingAbility.getInstance());
-        addAbility(HasteAbility.getInstance());
-    }
-    public DaxossTormentToken(final DaxossTormentToken token) {
-        super(token);
-    }
-
-    public DaxossTormentToken copy() {
-        return new DaxossTormentToken(this);
     }
 }

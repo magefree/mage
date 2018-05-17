@@ -28,6 +28,7 @@
 package mage.cards.c;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -37,24 +38,33 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.CreatureToken;
 
 /**
- *
  * @author LoneFox
  */
 public class ChimericSphere extends CardImpl {
 
     public ChimericSphere(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // {2}: Until end of turn, Chimeric Sphere becomes a 2/1 Construct artifact creature with flying.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new ChimericSphereFlyingToken(),
-            "", Duration.EndOfTurn), new ManaCostsImpl("{2}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(
+                new CreatureToken(2, 1, "2/1 Construct artifact creature with flying")
+                        .withSubType(SubType.CONSTRUCT)
+                        .withType(CardType.ARTIFACT)
+                        .withAbility(FlyingAbility.getInstance()),
+                "", Duration.EndOfTurn), new ManaCostsImpl("{2}")));
+
         // {2}: Until end of turn, Chimeric Sphere becomes a 3/2 Construct artifact creature without flying.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new ChimericSphereNotFlyingToken(),
-            "", Duration.EndOfTurn), new ManaCostsImpl("{2}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(
+                new CreatureToken(3, 2, "3/2 Construct artifact creature without flying")
+                        .withSubType(SubType.CONSTRUCT)
+                        .withType(CardType.ARTIFACT),
+                "", Duration.EndOfTurn), new ManaCostsImpl("{2}")));
     }
 
     public ChimericSphere(final ChimericSphere card) {
@@ -64,44 +74,6 @@ public class ChimericSphere extends CardImpl {
     @Override
     public ChimericSphere copy() {
         return new ChimericSphere(this);
-    }
-}
-
-class ChimericSphereFlyingToken extends TokenImpl {
-
-    public ChimericSphereFlyingToken() {
-        super("Chimeric Sphere", "2/1 Construct artifact creature with flying");
-        cardType.add(CardType.ARTIFACT);
-        cardType.add(CardType.CREATURE);
-        power = new MageInt(2);
-        toughness = new MageInt(1);
-
-        this.addAbility(FlyingAbility.getInstance());
-    }
-    public ChimericSphereFlyingToken(final ChimericSphereFlyingToken token) {
-        super(token);
-    }
-
-    public ChimericSphereFlyingToken copy() {
-        return new ChimericSphereFlyingToken(this);
-    }
-}
-
-class ChimericSphereNotFlyingToken extends TokenImpl {
-
-    public ChimericSphereNotFlyingToken() {
-        super("Chimeric Sphere", "3/2 Construct artifact creature without flying");
-        cardType.add(CardType.ARTIFACT);
-        cardType.add(CardType.CREATURE);
-        power = new MageInt(3);
-        toughness = new MageInt(2);
-    }
-    public ChimericSphereNotFlyingToken(final ChimericSphereNotFlyingToken token) {
-        super(token);
-    }
-
-    public ChimericSphereNotFlyingToken copy() {
-        return new ChimericSphereNotFlyingToken(this);
     }
 }
 

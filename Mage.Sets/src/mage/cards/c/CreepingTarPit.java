@@ -29,6 +29,7 @@
 package mage.cards.c;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -45,15 +46,15 @@ import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
+import mage.game.permanent.token.custom.CreatureToken;
 
 /**
- *
  * @author Loki
  */
 public class CreepingTarPit extends CardImpl {
 
-    public CreepingTarPit (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
+    public CreepingTarPit(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, null);
 
         // Creeping Tar Pit enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
@@ -61,12 +62,17 @@ public class CreepingTarPit extends CardImpl {
         // {T}: Add {U} or {B}.
         this.addAbility(new BlueManaAbility());
         this.addAbility(new BlackManaAbility());
-        
+
         // {1}{U}{B}: Until end of turn, Creeping Tar Pit becomes a 3/2 blue and black Elemental creature and can't be blocked. It's still a land.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new CreepingTarPitToken(), "land", Duration.EndOfTurn), new ManaCostsImpl("{1}{U}{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(
+                new CreatureToken(3, 2, "3/2 blue and black Elemental creature and can't be blocked")
+                        .withColor("BU")
+                        .withSubType(SubType.ELEMENTAL)
+                        .withAbility(new CantBeBlockedSourceAbility()),
+                "land", Duration.EndOfTurn), new ManaCostsImpl("{1}{U}{B}")));
     }
 
-    public CreepingTarPit (final CreepingTarPit card) {
+    public CreepingTarPit(final CreepingTarPit card) {
         super(card);
     }
 
@@ -75,24 +81,4 @@ public class CreepingTarPit extends CardImpl {
         return new CreepingTarPit(this);
     }
 
-}
-
-class CreepingTarPitToken extends TokenImpl {
-    public CreepingTarPitToken() {
-        super("", "3/2 blue and black Elemental creature and can't be blocked");
-        cardType.add(CardType.CREATURE);
-        subtype.add(SubType.ELEMENTAL);
-        color.setBlue(true);
-        color.setBlack(true);
-        power = new MageInt(3);
-        toughness = new MageInt(2);
-        this.addAbility(new CantBeBlockedSourceAbility());
-    }
-    public CreepingTarPitToken(final CreepingTarPitToken token) {
-        super(token);
-    }
-
-    public CreepingTarPitToken copy() {
-        return new CreepingTarPitToken(this);
-    }
 }
