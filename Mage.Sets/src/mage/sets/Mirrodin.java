@@ -116,6 +116,7 @@ public class Mirrodin extends ExpansionSet {
         cards.add(new SetCardInfo("Granite Shard", 182, Rarity.UNCOMMON, mage.cards.g.GraniteShard.class));
         cards.add(new SetCardInfo("Great Furnace", 282, Rarity.COMMON, mage.cards.g.GreatFurnace.class));
         cards.add(new SetCardInfo("Grid Monitor", 183, Rarity.RARE, mage.cards.g.GridMonitor.class));
+        cards.add(new SetCardInfo("Grim Reminder", 66, Rarity.RARE, mage.cards.g.GrimReminder.class));
         cards.add(new SetCardInfo("Groffskithur", 121, Rarity.COMMON, mage.cards.g.Groffskithur.class));
         cards.add(new SetCardInfo("Heartwood Shard", 184, Rarity.UNCOMMON, mage.cards.h.HeartwoodShard.class));
         cards.add(new SetCardInfo("Hematite Golem", 185, Rarity.COMMON, mage.cards.h.HematiteGolem.class));
