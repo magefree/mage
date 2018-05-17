@@ -59,6 +59,7 @@ public class Darksteel extends ExpansionSet {
         cards.add(new SetCardInfo("Darksteel Pendant", 113, Rarity.COMMON, mage.cards.d.DarksteelPendant.class));
         cards.add(new SetCardInfo("Darksteel Reactor", 114, Rarity.RARE, mage.cards.d.DarksteelReactor.class));
         cards.add(new SetCardInfo("Death Cloud", 40, Rarity.RARE, mage.cards.d.DeathCloud.class));
+        cards.add(new SetCardInfo("Death-Mask Duplicant", 115, Rarity.UNCOMMON, mage.cards.d.DeathMaskDuplicant.class));
         cards.add(new SetCardInfo("Demon's Horn", 116, Rarity.UNCOMMON, mage.cards.d.DemonsHorn.class));
         cards.add(new SetCardInfo("Dismantle", 57, Rarity.UNCOMMON, mage.cards.d.Dismantle.class));
         cards.add(new SetCardInfo("Dragon's Claw", 117, Rarity.UNCOMMON, mage.cards.d.DragonsClaw.class));
