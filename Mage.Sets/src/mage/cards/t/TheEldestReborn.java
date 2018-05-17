@@ -28,7 +28,6 @@
 package mage.cards.t;
 
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.common.SagaAbility;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.effects.common.SacrificeOpponentsEffect;
@@ -51,6 +50,15 @@ import mage.target.common.TargetCardInGraveyard;
  */
 public class TheEldestReborn extends CardImpl {
 
+    private static final FilterCard filter = new FilterCard("creature or planeswalker card from a graveyard");
+
+    static {
+        filter.add(Predicates.or(
+                new CardTypePredicate(CardType.CREATURE),
+                new CardTypePredicate(CardType.PLANESWALKER)
+        ));
+    }
+
     public TheEldestReborn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{B}");
 
@@ -60,19 +68,21 @@ public class TheEldestReborn extends CardImpl {
         SagaAbility sagaAbility = new SagaAbility(this, SagaChapter.CHAPTER_III);
         // I — Each opponent sacrifices a creature or planeswalker.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_I,
-                new SacrificeOpponentsEffect(StaticFilters.FILTER_PERMANENT_CREATURE_OR_PLANESWALKER_A));
+                new SacrificeOpponentsEffect(StaticFilters.FILTER_PERMANENT_CREATURE_OR_PLANESWALKER_A)
+        );
 
         // II — Each opponent discards a card.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_II,
-                new DiscardEachPlayerEffect(TargetController.OPPONENT));
+                new DiscardEachPlayerEffect(TargetController.OPPONENT)
+        );
 
         // III — Put target creature or planeswalker card from a graveyard onto the battlefield under your control.
-        Ability ability = sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_III,
+        sagaAbility.addChapterEffect(
+                this, SagaChapter.CHAPTER_III, SagaChapter.CHAPTER_III,
                 new ReturnFromGraveyardToBattlefieldTargetEffect()
-                        .setText("Put target creature or planeswalker card from a graveyard onto the battlefield under your control"));
-        FilterCard filter = new FilterCard("creature or planeswalker card from a graveyard");
-        filter.add(Predicates.or(new CardTypePredicate(CardType.CREATURE), new CardTypePredicate(CardType.PLANESWALKER)));
-        ability.addTarget(new TargetCardInGraveyard(filter));
+                        .setText("Put target creature or planeswalker card from a graveyard onto the battlefield under your control"),
+                new TargetCardInGraveyard(filter)
+        );
         this.addAbility(sagaAbility);
 
     }

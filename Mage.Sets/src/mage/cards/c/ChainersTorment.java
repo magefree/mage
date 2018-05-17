@@ -30,6 +30,7 @@ package mage.cards.c;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SagaAbility;
+import mage.abilities.effects.Effects;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DamagePlayersEffect;
@@ -61,8 +62,10 @@ public class ChainersTorment extends CardImpl {
         SagaAbility sagaAbility = new SagaAbility(this, SagaChapter.CHAPTER_III);
 
         // I, II — Chainer's Torment deals 2 damage to each opponent and you gain 2 life.
-        Ability ability = sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_I, SagaChapter.CHAPTER_II, new DamagePlayersEffect(2, TargetController.OPPONENT));
-        ability.addEffect(new GainLifeEffect(2).setText("and you gain 2 life"));
+        Effects effects = new Effects();
+        effects.add(new DamagePlayersEffect(2, TargetController.OPPONENT));
+        effects.add(new GainLifeEffect(2).setText("and you gain 2 life"));
+        sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_I, SagaChapter.CHAPTER_II, effects);
 
         // III — Create an X/X black Nightmare Horror creature token, where X is half your life total, rounded up. It deals X damage to you.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_III, new ChainersTormentEffect());

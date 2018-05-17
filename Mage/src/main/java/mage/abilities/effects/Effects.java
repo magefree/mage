@@ -44,6 +44,10 @@ public class Effects extends ArrayList<Effect> {
     public Effects() {
     }
 
+    public Effects(Effect effect) {
+        this.add(effect);
+    }
+
     public Effects(final Effects effects) {
         for (Effect effect : effects) {
             this.add(effect.copy());
