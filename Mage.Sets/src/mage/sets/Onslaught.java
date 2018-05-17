@@ -97,6 +97,7 @@ public class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Dawning Purist", 22, Rarity.UNCOMMON, mage.cards.d.DawningPurist.class));
         cards.add(new SetCardInfo("Death Match", 136, Rarity.RARE, mage.cards.d.DeathMatch.class));
         cards.add(new SetCardInfo("Death Pulse", 137, Rarity.UNCOMMON, mage.cards.d.DeathPulse.class));
+        cards.add(new SetCardInfo("Defensive Maneuvers", 23, Rarity.COMMON, mage.cards.d.DefensiveManeuvers.class));
         cards.add(new SetCardInfo("Demystify", 24, Rarity.COMMON, mage.cards.d.Demystify.class));
         cards.add(new SetCardInfo("Dirge of Dread", 138, Rarity.COMMON, mage.cards.d.DirgeOfDread.class));
         cards.add(new SetCardInfo("Disciple of Grace", 25, Rarity.COMMON, mage.cards.d.DiscipleOfGrace.class));
