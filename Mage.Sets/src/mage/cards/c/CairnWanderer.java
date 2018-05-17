@@ -75,6 +75,7 @@ public class CairnWanderer extends CardImpl {
 
         public CairnWandererEffect() {
             super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
+            this.addDependedToType(DependencyType.AddingAbility);
             staticText = "As long as a creature card with flying is in a graveyard, {this} has flying. The same is true for fear, first strike, double strike, deathtouch, haste, landwalk, lifelink, protection, reach, trample, shroud, and vigilance.";
         }
 
@@ -109,11 +110,11 @@ public class CairnWanderer extends CardImpl {
                                             || ability instanceof TrampleAbility
                                             || ability instanceof ShroudAbility
                                             || ability instanceof VigilanceAbility) {
-                                        sourcePermanent.addAbility(ability, game);
+                                        sourcePermanent.addAbility(ability, source.getSourceId(), game);
                                     }
                                 } else if (ability instanceof ProtectionAbility
                                         || ability instanceof LandwalkAbility) {
-                                    sourcePermanent.addAbility(ability, game);
+                                    sourcePermanent.addAbility(ability, source.getSourceId(), game);
                                 }
                             }
                         }
