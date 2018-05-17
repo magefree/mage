@@ -74,7 +74,7 @@ public class LoseAbilityAllEffect extends ContinuousEffectImpl {
     }
 
     public LoseAbilityAllEffect(CompoundAbility ability, Duration duration, FilterPermanent filter, boolean excludeSource) {
-        super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
+        super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.LoseAbility);
         this.ability = ability;
         this.filter = filter;
         this.excludeSource = excludeSource;
@@ -123,6 +123,7 @@ public class LoseAbilityAllEffect extends ContinuousEffectImpl {
         } else {
             for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
                 if (!(excludeSource && perm.getId().equals(source.getSourceId()))) {
+                    System.out.println(game.getTurn() + ", " + game.getPhase() + ": " + "remove from size " + perm.getAbilities().size());
                     for (Ability ability : ability) {
                         perm.getAbilities().removeIf(entry -> entry.getId().equals(ability.getId()));
                     }
