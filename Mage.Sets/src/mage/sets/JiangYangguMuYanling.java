@@ -25,6 +25,7 @@ public class JiangYangguMuYanling extends ExpansionSet {
         super("Global Series: Jiang Yanggu & Mu Yanling", "GS1", ExpansionSet.buildDate(2018, 6, 22), SetType.SUPPLEMENTAL);
         this.blockName = "Global Series";
         this.hasBasicLands = false;
+        cards.add(new SetCardInfo("Jiang Yanggu", 22, Rarity.MYTHIC, mage.cards.j.JiangYanggu.class));
         cards.add(new SetCardInfo("Mu Yanling", 1, Rarity.MYTHIC, mage.cards.m.MuYanling.class));
     }
 }
