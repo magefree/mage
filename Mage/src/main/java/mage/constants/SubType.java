@@ -402,6 +402,8 @@ public enum SubType {
     VENSER("Venser", SubTypeSet.PlaneswalkerType),
     VRASKA("Vraska", SubTypeSet.PlaneswalkerType),
     XENAGOS("Xenagos", SubTypeSet.PlaneswalkerType),
+    YANGGU("Yanggu", SubTypeSet.PlaneswalkerType),
+    YANLING("Yanling", SubTypeSet.PlaneswalkerType),
     YODA("Yoda", SubTypeSet.PlaneswalkerType, true);  // Star Wars
 
     private final SubTypeSet subTypeSet;
