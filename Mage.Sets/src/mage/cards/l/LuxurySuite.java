@@ -29,7 +29,7 @@ package mage.cards.l;
 
 import java.util.UUID;
 import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.condition.common.TwoOrMoreOpponentsCondition;
+import mage.abilities.condition.common.OneOpponentCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.TapSourceEffect;
 import mage.abilities.mana.BlackManaAbility;
@@ -51,7 +51,7 @@ public class LuxurySuite extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(
                 new ConditionalOneShotEffect(
                         new TapSourceEffect(),
-                        TwoOrMoreOpponentsCondition.instance,
+                        OneOpponentCondition.instance,
                         "tapped unless you have two or more opponents"
                 ), "tapped unless you have two or more opponents"
         ));

@@ -36,9 +36,9 @@ import java.util.UUID;
 
 /**
  *
- * @author fireshoes
+ * @author TheElk801
  */
-public enum TwoOrMoreOpponentsCondition implements Condition {
+public enum OneOpponentCondition implements Condition {
 
     instance;
 
@@ -52,16 +52,16 @@ public enum TwoOrMoreOpponentsCondition implements Condition {
                 if (opponent != null) {
                     opponentCount++;
                     if (opponentCount > 1) {
-                        return true;
+                        return false;
                     }
                 }
             }
         }
-        return false;
+        return true;
     }
 
     @Override
     public String toString() {
-        return "you have two or more opponents";
+        return "you have one opponent";
     }
 }
