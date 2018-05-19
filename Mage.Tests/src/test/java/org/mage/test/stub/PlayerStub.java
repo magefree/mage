@@ -994,6 +994,11 @@ public class PlayerStub implements Player {
     }
 
     @Override
+    public void declareBlocker(UUID defenderId, UUID blockerId, UUID attackerId, Game game, boolean allowUndo) {
+
+    }
+
+    @Override
     public List<Permanent> getAvailableAttackers(Game game) {
         return null;
     }
