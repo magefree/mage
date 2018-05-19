@@ -32,7 +32,6 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
-import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -169,9 +168,9 @@ class MairsilThePretenderGainAbilitiesEffect extends ContinuousEffectImpl {
             if (filter.match(card, game) && Objects.equals(card.getOwnerId(), perm.getControllerId())) {
                 for (Ability ability : card.getAbilities()) {
                     if (ability instanceof ActivatedAbility) {
-                        ActivatedAbilityImpl copyAbility = (ActivatedAbilityImpl) ability.copy();
+                        ActivatedAbility copyAbility = (ActivatedAbility) ability.copy();
                         copyAbility.setMaxActivationsPerTurn(1);
-                        perm.addAbility(copyAbility, card.getId(), game);
+                        perm.addAbility(copyAbility, source.getSourceId(), game);
                     }
                 }
             }

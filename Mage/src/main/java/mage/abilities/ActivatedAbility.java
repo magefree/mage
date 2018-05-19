@@ -67,4 +67,8 @@ public interface ActivatedAbility extends Ability {
     void setCheckPlayableMode();
 
     boolean isCheckPlayableMode();
+
+    void setMaxActivationsPerTurn(int maxActivationsPerTurn);
+
+    int getMaxActivationsPerTurn(Game game);
 }
