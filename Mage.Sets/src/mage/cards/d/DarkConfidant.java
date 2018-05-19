@@ -34,8 +34,8 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -49,7 +49,7 @@ import mage.players.Player;
 public class DarkConfidant extends CardImpl {
 
     public DarkConfidant(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
 
@@ -87,7 +87,7 @@ class DarkConfidantEffect extends OneShotEffect {
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (controller != null && sourcePermanent != null) {
             if (controller.getLibrary().hasCards()) {
-                Card card = controller.getLibrary().removeFromTop(game);
+                Card card = controller.getLibrary().getFromTop(game);
                 if (card != null) {
                     Cards cards = new CardsImpl(card);
                     controller.revealCards(sourcePermanent.getIdName(), cards, game);

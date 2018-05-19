@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author nigelzor
  */
-public class MomirGame extends FreeForAll {
+public class MomirGame extends GameImpl {
     
     private int numPlayers;
 
@@ -95,6 +95,11 @@ public class MomirGame extends FreeForAll {
             }
         }
         return opponents;
+    }
+    
+    @Override
+    public boolean isOpponent(Player player, UUID playerToCheck) {
+        return !player.getId().equals(playerToCheck) && player.getInRange().contains(playerToCheck);
     }
 
     @Override

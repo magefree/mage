@@ -64,7 +64,7 @@ public class FlamewakePhoenix extends CardImpl {
         // Flamewake Phoenix attacks each turn if able.
         this.addAbility(new AttacksEachCombatStaticAbility());
 
-        // <i>Ferocious</i> - At the beginning of combat on your turn, if you control a creature with power 4 or greater, you may pay {R}. If you do, return Flamewake Phoenix from your graveyard to the battlefield.
+        // <i>Ferocious</i> &mdash; At the beginning of combat on your turn, if you control a creature with power 4 or greater, you may pay {R}. If you do, return Flamewake Phoenix from your graveyard to the battlefield.
         this.addAbility(new ConditionalTriggeredAbility(
                 new BeginningOfCombatTriggeredAbility(
                         Zone.GRAVEYARD,

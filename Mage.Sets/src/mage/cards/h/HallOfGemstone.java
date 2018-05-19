@@ -123,7 +123,7 @@ class HallOfGemstoneEffect extends ReplacementEffectImpl {
             int genericAmount = mana.getGeneric();
             int colorlessAmount = mana.getColorless();
             int coloredAmount = mana.countColored();
-            switch (colorChosen.getColoredManaSymbol()) {
+            switch (colorChosen.getOneColoredManaSymbol()) {
                 case W:
                     mana.setToMana(Mana.WhiteMana(coloredAmount));
                     break;

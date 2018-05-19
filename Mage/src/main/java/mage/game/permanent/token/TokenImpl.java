@@ -33,11 +33,8 @@ import java.util.Locale;
 import java.util.UUID;
 import mage.MageObject;
 import mage.MageObjectImpl;
-import mage.ObjectColor;
-import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.cards.Card;
-import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -47,7 +44,6 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import mage.players.Player;
 import mage.util.RandomUtil;
-import mage.util.SubTypeList;
 
 public abstract class TokenImpl extends MageObjectImpl implements Token {
 
@@ -112,49 +108,56 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         this.tokenDescriptor = tokenDescriptor();
     }
 
+    @Override
     public String getTokenDescriptor() {
         this.tokenDescriptor = tokenDescriptor();
         return tokenDescriptor;
     }
 
     private String tokenDescriptor() {
-        String name = this.name.replaceAll("[^a-zA-Z0-9]", "");
-        String color = this.color.toString().replaceAll("[^a-zA-Z0-9]", "");
-        String subtype = this.subtype.toString().replaceAll("[^a-zA-Z0-9]", "");
-        String cardType = this.cardType.toString().replaceAll("[^a-zA-Z0-9]", "");
-        String originalset = this.getOriginalExpansionSetCode();
-        String descriptor = name + '.' + color + '.' + subtype + '.' + cardType + '.' + this.power + '.' + this.toughness;
+        String strName = this.name.replaceAll("[^a-zA-Z0-9]", "");
+        String strColor = this.color.toString().replaceAll("[^a-zA-Z0-9]", "");
+        String strSubtype = this.subtype.toString().replaceAll("[^a-zA-Z0-9]", "");
+        String strCardType = this.cardType.toString().replaceAll("[^a-zA-Z0-9]", "");
+        String descriptor = strName + '.' + strColor + '.' + strSubtype + '.' + strCardType + '.' + this.power + '.' + this.toughness;
         descriptor = descriptor.toUpperCase(Locale.ENGLISH);
         return descriptor;
     }
 
+    @Override
     public String getDescription() {
         return description;
     }
 
+    @Override
     public UUID getLastAddedToken() {
         return lastAddedTokenId;
     }
 
+    @Override
     public ArrayList<UUID> getLastAddedTokenIds() {
         ArrayList<UUID> ids = new ArrayList<>();
         ids.addAll(lastAddedTokenIds);
         return ids;
     }
 
+    @Override
     public void addAbility(Ability ability) {
         ability.setSourceId(this.getId());
         abilities.add(ability);
     }
 
+    @Override
     public boolean putOntoBattlefield(int amount, Game game, UUID sourceId, UUID controllerId) {
         return this.putOntoBattlefield(amount, game, sourceId, controllerId, false, false);
     }
 
+    @Override
     public boolean putOntoBattlefield(int amount, Game game, UUID sourceId, UUID controllerId, boolean tapped, boolean attacking) {
         return putOntoBattlefield(amount, game, sourceId, controllerId, tapped, attacking, null);
     }
 
+    @Override
     public boolean putOntoBattlefield(int amount, Game game, UUID sourceId, UUID controllerId, boolean tapped, boolean attacking, UUID attackedPlayer) {
         Player controller = game.getPlayer(controllerId);
         if (controller == null) {
@@ -228,49 +231,60 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         return false;
     }
 
+    @Override
     public void setPower(int power) {
         this.power.setValue(power);
     }
 
+    @Override
     public void setToughness(int toughness) {
         this.toughness.setValue(toughness);
     }
 
+    @Override
     public int getTokenType() {
         return tokenType;
     }
 
+    @Override
     public void setTokenType(int tokenType) {
         this.tokenType = tokenType;
     }
 
+    @Override
     public String getOriginalCardNumber() {
         return originalCardNumber;
     }
 
+    @Override
     public void setOriginalCardNumber(String originalCardNumber) {
         this.originalCardNumber = originalCardNumber;
     }
 
+    @Override
     public String getOriginalExpansionSetCode() {
         return originalExpansionSetCode;
     }
 
+    @Override
     public void setOriginalExpansionSetCode(String originalExpansionSetCode) {
         this.originalExpansionSetCode = originalExpansionSetCode;
         setTokenDescriptor();
     }
 
+    @Override
     public Card getCopySourceCard() {
         return copySourceCard;
     }
 
+    @Override
     public void setCopySourceCard(Card copySourceCard) {
         if (copySourceCard != null) {
             this.copySourceCard = copySourceCard.copy();
         }
     }
 
+    @Override
     public void setExpansionSetCodeForImage(String code) {
         if (!availableImageSetCodes.isEmpty()) {
             if (availableImageSetCodes.contains(code)) {
@@ -288,6 +302,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         setTokenDescriptor();
     }
 
+    @Override
     public boolean updateExpansionSetCode(String setCode) {
         if (setCode == null || setCode.isEmpty()) {
             return false;

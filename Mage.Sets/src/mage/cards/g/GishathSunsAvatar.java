@@ -27,18 +27,14 @@
  */
 package mage.cards.g;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.abilities.keyword.HasteAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
@@ -94,12 +90,6 @@ public class GishathSunsAvatar extends CardImpl {
 
 class GishathSunsAvatarEffect extends OneShotEffect {
 
-    private static final FilterCreatureCard filter = new FilterCreatureCard("Dinosaur creature cards");
-
-    static {
-        filter.add(new SubtypePredicate(SubType.DINOSAUR));
-    }
-
     GishathSunsAvatarEffect() {
         super(Outcome.Benefit);
         this.staticText = "reveal that many cards from the top of your library. Put any number of Dinosaur creature cards from among them onto the battlefield and the rest on the bottom of your library in a random order";
@@ -117,31 +107,21 @@ class GishathSunsAvatarEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
-        if (controller == null || sourceObject == null) {
+        if (controller == null) {
             return false;
         }
-        Cards cards = new CardsImpl();
         int xValue = (Integer) getValue("damage");
-        int numberCards = Math.min(controller.getLibrary().size(), xValue);
-        for (int i = 0; i < numberCards; i++) {
-            Card card = controller.getLibrary().removeFromTop(game);
-            cards.add(card);
-        }
+        Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, xValue));
         if (!cards.isEmpty()) {
-            controller.revealCards(sourceObject.getIdName(), cards, game);
+            controller.revealCards(source, cards, game);
+            FilterCreatureCard filter = new FilterCreatureCard("Dinosaur creature cards");
+            filter.add(new SubtypePredicate(SubType.DINOSAUR));
             TargetCard target1 = new TargetCard(0, Integer.MAX_VALUE, Zone.LIBRARY, filter);
-            target1.setRequired(false);
+            target1.setNotTarget(true);
             controller.choose(Outcome.PutCardInPlay, cards, target1, game);
-            Set<Card> toBattlefield = new LinkedHashSet<>();
-            for (UUID cardId : target1.getTargets()) {
-                Card card = cards.get(cardId, game);
-                if (card != null) {
-                    cards.remove(card);
-                    toBattlefield.add(card);
-                }
-            }
-            controller.moveCards(toBattlefield, Zone.BATTLEFIELD, source, game, false, false, false, null);
+            Cards toBattlefield = new CardsImpl(target1.getTargets());
+            cards.removeAll(toBattlefield);
+            controller.moveCards(toBattlefield.getCards(game), Zone.BATTLEFIELD, source, game, false, false, false, null);
             controller.putCardsOnBottomOfLibrary(cards, game, source, false);
         }
         return true;

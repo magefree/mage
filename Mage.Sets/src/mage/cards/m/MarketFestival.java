@@ -132,6 +132,17 @@ class MarketFestivalManaEffect extends ManaEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            checkToFirePossibleEvents(getMana(game, source), game, source);
+            controller.getManaPool().addMana(getMana(game, source), game, source);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public Mana produceMana(boolean netMana, Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (controller != null && sourceObject != null) {
             int x = 2;
@@ -145,22 +156,15 @@ class MarketFestivalManaEffect extends ManaEffect {
                     choiceColor.setMessage("Second mana color for " + sourceObject.getLogName());
                 }
                 if (!controller.choose(Outcome.Benefit, choiceColor, game)) {
-                    return false;
+                    return null;
                 }
                 if (choiceColor.getChoice() == null) { // Possible after reconnect?
-                    return false;
+                    return null;
                 }
                 choiceColor.increaseMana(mana);
             }
-            checkToFirePossibleEvents(mana, game, source);
-            controller.getManaPool().addMana(mana, game, source);
-            return true;
+            return mana;
         }
-        return false;
-    }
-
-    @Override
-    public Mana getMana(Game game, Ability source) {
         return null;
     }
 

@@ -41,6 +41,17 @@
             <type>jar</type>
         </dependency>
 
+        <dependency>
+            <groupId>org.reflections</groupId>
+            <artifactId>reflections</artifactId>
+            <version>0.9.11</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mage</groupId>
+            <artifactId>mage-client</artifactId>
+            <version>1.4.29</version>
+        </dependency>
+
     </dependencies>
 
     <build>

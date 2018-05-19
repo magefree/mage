@@ -57,7 +57,7 @@ public class SirenOfTheSilentSong extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        // <i>Inspired</i> - Whenever Siren of the Silent Song becomes untapped, each opponent discards a card, then puts the top card of their library into their graveyard.
+        // <i>Inspired</i> &mdash; Whenever Siren of the Silent Song becomes untapped, each opponent discards a card, then puts the top card of their library into their graveyard.
         Ability ability = new InspiredAbility(new DiscardEachPlayerEffect(TargetController.OPPONENT));
         Effect effect = new PutTopCardOfLibraryIntoGraveEachPlayerEffect(1, TargetController.OPPONENT);
         effect.setText(", then puts the top card of their library into their graveyard");

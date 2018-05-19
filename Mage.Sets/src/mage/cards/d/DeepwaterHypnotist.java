@@ -63,7 +63,7 @@ public class DeepwaterHypnotist extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        // <i>Inspired</i> - Whenever Deepwater Hypnotist becomes untapped, target creature an opponent controls gets -3/-0 until end of turn.
+        // <i>Inspired</i> &mdash; Whenever Deepwater Hypnotist becomes untapped, target creature an opponent controls gets -3/-0 until end of turn.
         Ability ability = new InspiredAbility(new BoostTargetEffect(-3,0,Duration.EndOfTurn));
         ability.addTarget(new TargetCreaturePermanent(filter));        
         this.addAbility(ability);        

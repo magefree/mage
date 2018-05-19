@@ -29,7 +29,6 @@ package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -53,7 +52,7 @@ import mage.target.TargetPlayer;
 public class BalustradeSpy extends CardImpl {
 
     public BalustradeSpy(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
         this.subtype.add(SubType.VAMPIRE, SubType.ROGUE);
 
         this.power = new MageInt(2);
@@ -97,26 +96,20 @@ class BalustradeSpyEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(getTargetPointer().getFirst(game, source));
-        MageObject sourceObject = source.getSourceObject(game);
-        if (controller == null || sourceObject == null) {
+        if (controller == null) {
             return false;
         }
-        CardsImpl cards = new CardsImpl();
-        boolean landFound = false;
-        while (controller.getLibrary().hasCards() && !landFound) {
-            Card card = controller.getLibrary().removeFromTop(game);
+        CardsImpl toGraveyard = new CardsImpl();
+        for (Card card : controller.getLibrary().getCards(game)) {
             if (card != null) {
-                cards.add(card);
+                toGraveyard.add(card);
                 if (card.isLand()) {
-                    landFound = true;
+                    break;
                 }
             }
         }
-        if (!cards.isEmpty()) {
-            controller.revealCards(sourceObject.getName(), cards, game);
-            controller.moveCards(cards, Zone.GRAVEYARD, source, game);
-            return true;
-        }
+        controller.revealCards(source, toGraveyard, game);
+        controller.moveCards(toGraveyard, Zone.GRAVEYARD, source, game);
         return true;
     }
 }

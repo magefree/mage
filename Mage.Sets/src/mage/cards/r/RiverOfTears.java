@@ -32,7 +32,7 @@ import mage.Mana;
 import mage.abilities.condition.common.PlayLandCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.decorator.ConditionalManaEffect;
-import mage.abilities.effects.common.BasicManaEffect;
+import mage.abilities.effects.mana.BasicManaEffect;
 import mage.abilities.mana.ConditionalManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;

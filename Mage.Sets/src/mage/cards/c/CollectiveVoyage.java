@@ -33,9 +33,9 @@ import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -71,7 +71,7 @@ class CollectiveVoyageEffect extends OneShotEffect {
 
     public CollectiveVoyageEffect() {
         super(Outcome.Detriment);
-        this.staticText = "<i>Join forces</i> - Starting with you, each player may pay any amount of mana. Each player searches their library for up to X basic land cards, where X is the total amount of mana paid this way, puts them onto the battlefield tapped, then shuffles their library";
+        this.staticText = "<i>Join forces</i> &mdash; Starting with you, each player may pay any amount of mana. Each player searches their library for up to X basic land cards, where X is the total amount of mana paid this way, puts them onto the battlefield tapped, then shuffles their library";
     }
 
     public CollectiveVoyageEffect(final CollectiveVoyageEffect effect) {
@@ -103,13 +103,7 @@ class CollectiveVoyageEffect extends OneShotEffect {
                 if (player != null) {
                     TargetCardInLibrary target = new TargetCardInLibrary(0, xSum, StaticFilters.FILTER_BASIC_LAND_CARD);
                     if (player.searchLibrary(target, game)) {
-                        for (UUID cardId : target.getTargets()) {
-                            Card card = player.getLibrary().getCard(cardId, game);
-                            if (card != null) {
-                                card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), player.getId(), true);
-                            }
-
-                        }
+                        player.moveCards(new CardsImpl(target.getTargets()).getCards(game), Zone.BATTLEFIELD, source, game, true, false, true, null);
                         player.shuffleLibrary(source, game);
                     }
 

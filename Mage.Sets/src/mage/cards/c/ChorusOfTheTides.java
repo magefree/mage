@@ -52,7 +52,7 @@ public class ChorusOfTheTides extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        // <i>Heroic</i> - Whenever you cast a spell that targets Chorus of the Tides, scry 1.
+        // <i>Heroic</i> &mdash; Whenever you cast a spell that targets Chorus of the Tides, scry 1.
         this.addAbility(new HeroicAbility(new ScryEffect(1)));
     }
 

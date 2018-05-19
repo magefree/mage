@@ -29,7 +29,6 @@ package mage.cards.p;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -45,6 +44,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
+import mage.util.CardUtil;
 
 /**
  *
@@ -89,11 +89,9 @@ class PetraSphinxEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        MageObject sourceObject = source.getSourceObject(game);
         Player controller = game.getPlayer(source.getControllerId());
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
-        if (controller != null && sourceObject != null && player != null) {
-
+        if (controller != null && player != null) {
             if (player.getLibrary().hasCards()) {
                 Choice cardChoice = new ChoiceImpl();
                 cardChoice.setChoices(CardRepository.instance.getNames());
@@ -102,11 +100,11 @@ class PetraSphinxEffect extends OneShotEffect {
                     return false;
                 }
                 String cardName = cardChoice.getChoice();
-                game.informPlayers(sourceObject.getLogName() + ", player: " + player.getLogName() + ", named: [" + cardName + ']');
-                Card card = player.getLibrary().removeFromTop(game);
+                game.informPlayers(CardUtil.createObjectRealtedWindowTitle(source, game, null) + ", player: " + player.getLogName() + ", named: [" + cardName + ']');
+                Card card = player.getLibrary().getFromTop(game);
                 if (card != null) {
                     Cards cards = new CardsImpl(card);
-                    player.revealCards(sourceObject.getIdName(), cards, game);
+                    player.revealCards(source, cards, game);
                     if (card.getName().equals(cardName)) {
                         player.moveCards(cards, Zone.HAND, source, game);
                     } else {

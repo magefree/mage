@@ -33,7 +33,6 @@ import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
-import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -48,7 +47,7 @@ import mage.util.CardUtil;
 public class Glowrider extends CardImpl {
 
     public Glowrider(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.CLERIC);
         this.power = new MageInt(2);
@@ -70,7 +69,7 @@ public class Glowrider extends CardImpl {
 
 class GlowriderCostReductionEffect extends CostModificationEffectImpl {
 
-    GlowriderCostReductionEffect ( ) {
+    GlowriderCostReductionEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.INCREASE_COST);
         staticText = "Noncreature spells cost {1} more to cast";
     }
@@ -87,7 +86,7 @@ class GlowriderCostReductionEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility) {
+        if (abilityToModify instanceof SpellAbility) {
             Card card = game.getCard(abilityToModify.getSourceId());
             if (card != null && !card.isCreature()) {
                 return true;

@@ -410,7 +410,7 @@ public class Spell extends StackObjImpl implements Card {
             }
         } else {
             // Copied spell, only remove from stack
-            game.getStack().remove(this);
+            game.getStack().remove(this, game);
         }
     }
 
@@ -772,7 +772,7 @@ public class Spell extends StackObjImpl implements Card {
     @Override
     public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game, List<UUID> appliedEffects) {
         if (this.isCopiedSpell()) {
-            game.getStack().remove(this);
+            game.getStack().remove(this, game);
             return true;
         }
         return this.card.moveToExile(exileId, name, sourceId, game, appliedEffects);

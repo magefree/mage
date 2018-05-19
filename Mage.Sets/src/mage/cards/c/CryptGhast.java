@@ -31,7 +31,7 @@ package mage.cards.c;
 import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
-import mage.abilities.effects.common.BasicManaEffect;
+import mage.abilities.effects.mana.BasicManaEffect;
 import mage.abilities.keyword.ExtortAbility;
 import mage.abilities.mana.TriggeredManaAbility;
 import mage.cards.CardImpl;

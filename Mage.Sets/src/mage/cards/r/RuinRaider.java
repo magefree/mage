@@ -45,7 +45,6 @@ import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.watchers.common.PlayerAttackedWatcher;
 
@@ -67,7 +66,7 @@ public class RuinRaider extends CardImpl {
         Ability ability = new ConditionalTriggeredAbility(
                 new BeginningOfEndStepTriggeredAbility(new RuinRaiderEffect(), TargetController.YOU, false),
                 RaidCondition.instance,
-                "<i>Raid</i> - At the beginning of your end step, if you attacked with a creature this turn, "
+                "<i>Raid</i> &mdash; At the beginning of your end step, if you attacked with a creature this turn, "
                 + "reveal the top card of your library and put that card into your hand. "
                 + "You lose life equal to the card's converted mana cost.");
         this.addAbility(ability, new PlayerAttackedWatcher());
@@ -97,16 +96,14 @@ class RuinRaiderEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (controller != null && sourcePermanent != null) {
+        if (controller != null) {
             if (controller.getLibrary().hasCards()) {
-                Card card = controller.getLibrary().removeFromTop(game);
+                Card card = controller.getLibrary().getFromTop(game);
                 if (card != null) {
                     Cards cards = new CardsImpl(card);
-                    controller.revealCards(sourcePermanent.getIdName(), cards, game);
+                    controller.revealCards(source, cards, game);
                     controller.moveCards(card, Zone.HAND, source, game);
                     controller.loseLife(card.getConvertedManaCost(), game, false);
-
                 }
                 return true;
             }

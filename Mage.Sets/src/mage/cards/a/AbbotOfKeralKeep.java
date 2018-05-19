@@ -52,7 +52,7 @@ import mage.target.targetpointer.FixedTarget;
 public class AbbotOfKeralKeep extends CardImpl {
 
     public AbbotOfKeralKeep(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.MONK);
         this.power = new MageInt(2);
@@ -97,7 +97,7 @@ class AbbotOfKeralKeepExileEffect extends OneShotEffect {
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (sourcePermanent != null && controller != null && controller.getLibrary().hasCards()) {
             Library library = controller.getLibrary();
-            Card card = library.removeFromTop(game);
+            Card card = library.getFromTop(game);
             if (card != null) {
                 String exileName = sourcePermanent.getIdName() + " <this card may be played the turn it was exiled>";
                 controller.moveCardsToExile(card, source, game, true, source.getSourceId(), exileName);

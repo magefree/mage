@@ -27,7 +27,6 @@
  */
 package mage.cards.a;
 
-import java.util.List;
 import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -35,7 +34,7 @@ import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
 import mage.abilities.effects.common.ManaEffect;
-import mage.abilities.mana.ActivatedManaAbilityImpl;
+import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.ChoiceColor;
@@ -53,13 +52,13 @@ import mage.players.Player;
 public class AstralCornucopia extends CardImpl {
 
     public AstralCornucopia(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{X}{X}{X}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{X}{X}{X}");
 
         // Astral Cornucopia enters the battlefield with X charge counters on it.
         this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.CHARGE.createInstance())));
 
         // {T}: Choose a color. Add one mana of that color for each charge counter on Astral Cornucopia.
-        this.addAbility(new AstralCornucopiaManaAbility());
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new AstralCornucopiaManaEffect(), new TapSourceCost()));
     }
 
     public AstralCornucopia(final AstralCornucopia card) {
@@ -69,35 +68,6 @@ public class AstralCornucopia extends CardImpl {
     @Override
     public AstralCornucopia copy() {
         return new AstralCornucopia(this);
-    }
-}
-
-class AstralCornucopiaManaAbility extends ActivatedManaAbilityImpl {
-
-    public AstralCornucopiaManaAbility() {
-        super(Zone.BATTLEFIELD, new AstralCornucopiaManaEffect(), new TapSourceCost());
-    }
-
-    public AstralCornucopiaManaAbility(final AstralCornucopiaManaAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public AstralCornucopiaManaAbility copy() {
-        return new AstralCornucopiaManaAbility(this);
-    }
-
-    @Override
-    public List<Mana> getNetMana(Game game) {
-        netMana.clear();
-        Permanent sourcePermanent = game.getPermanent(getSourceId());
-        if (sourcePermanent != null) {
-            int counters = sourcePermanent.getCounters(game).getCount(CounterType.CHARGE.getName());
-            if (counters > 0) {
-                netMana.add(new Mana(0, 0, 0, 0, 0, 0, counters, 0));
-            }
-        }
-        return netMana;
     }
 }
 
@@ -125,42 +95,55 @@ class AstralCornucopiaManaEffect extends ManaEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            ChoiceColor choice = new ChoiceColor();
-            choice.setMessage("Choose a color to add mana of that color");
-            if (controller.choose(outcome, choice, game)) {
-                Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-                if (choice.getChoice() != null) {
-                    String color = choice.getChoice();
-                    int counters = sourcePermanent.getCounters(game).getCount(CounterType.CHARGE.getName());
-                    switch (color) {
-                        case "Red":
-                            computedMana.setRed(counters);
-                            break;
-                        case "Blue":
-                            computedMana.setBlue(counters);
-                            break;
-                        case "White":
-                            computedMana.setWhite(counters);
-                            break;
-                        case "Black":
-                            computedMana.setBlack(counters);
-                            break;
-                        case "Green":
-                            computedMana.setGreen(counters);
-                            break;
-                    }
-                }
-                checkToFirePossibleEvents(computedMana, game, source);
-                controller.getManaPool().addMana(computedMana, game, source);
-                return true;
-            }
+            checkToFirePossibleEvents(getMana(game, source), game, source);
+            controller.getManaPool().addMana(getMana(game, source), game, source);
+            return true;
+
         }
         return false;
     }
 
     @Override
-    public Mana getMana(Game game, Ability source) {
-        return null;
+    public Mana produceMana(boolean netMana, Game game, Ability source) {
+        Mana mana = new Mana();
+        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        if (sourcePermanent != null) {
+            int counters = sourcePermanent.getCounters(game).getCount(CounterType.CHARGE.getName());
+            if (counters > 0) {
+                if (netMana) {
+                    return new Mana(0, 0, 0, 0, 0, 0, counters, 0);
+                }
+                Player controller = game.getPlayer(source.getControllerId());
+                if (controller != null) {
+                    ChoiceColor choice = new ChoiceColor();
+                    choice.setMessage("Choose a color to add mana of that color");
+                    if (controller.choose(outcome, choice, game)) {
+                        if (choice.getChoice() != null) {
+                            String color = choice.getChoice();
+                            switch (color) {
+                                case "Red":
+                                    mana.setRed(counters);
+                                    break;
+                                case "Blue":
+                                    mana.setBlue(counters);
+                                    break;
+                                case "White":
+                                    mana.setWhite(counters);
+                                    break;
+                                case "Black":
+                                    mana.setBlack(counters);
+                                    break;
+                                case "Green":
+                                    mana.setGreen(counters);
+                                    break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return mana;
     }
 
 }

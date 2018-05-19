@@ -55,7 +55,7 @@ import mage.util.CardUtil;
  * @author jeffwadsworth
  */
 public class JeweledAmulet extends CardImpl {
-    
+
     private static final String rule = "{1}, {T}: Put a charge counter on {this}. Note the type of mana spent to pay this activation cost. Activate this ability only if there are no charge counters on {this}";
 
     public JeweledAmulet(UUID ownerId, CardSetInfo setInfo) {
@@ -85,7 +85,7 @@ public class JeweledAmulet extends CardImpl {
 }
 
 class JeweledAmuletAddCounterEffect extends OneShotEffect {
-    
+
     private static String manaUsedString;
 
     public JeweledAmuletAddCounterEffect() {
@@ -118,7 +118,7 @@ class JeweledAmuletAddCounterEffect extends OneShotEffect {
 }
 
 class JeweledAmuletAddManaEffect extends ManaEffect {
-    
+
     private static Mana storedMana;
 
     JeweledAmuletAddManaEffect() {
@@ -137,22 +137,25 @@ class JeweledAmuletAddManaEffect extends ManaEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent jeweledAmulet = game.getPermanent(source.getSourceId());
         Player controller = game.getPlayer(source.getControllerId());
-        if (jeweledAmulet != null
-                && controller != null) {
-            storedMana = (Mana) game.getState().getValue("JeweledAmulet" + source.getSourceId().toString());
-            if (storedMana != null) {
-                checkToFirePossibleEvents(storedMana, game, source);
-                controller.getManaPool().addMana(storedMana, game, source);
-                return true;
-            }
+        if (controller != null) {
+            checkToFirePossibleEvents(getMana(game, source), game, source);
+            controller.getManaPool().addMana(getMana(game, source), game, source);
+            return true;
         }
         return false;
     }
 
     @Override
-    public Mana getMana(Game game, Ability source) {
+    public Mana produceMana(boolean netMana, Game game, Ability source) {
+        Permanent jeweledAmulet = game.getPermanent(source.getSourceId());
+        Player controller = game.getPlayer(source.getControllerId());
+        if (jeweledAmulet != null && controller != null) {
+            storedMana = (Mana) game.getState().getValue("JeweledAmulet" + source.getSourceId().toString());
+            if (storedMana != null) {
+                return storedMana.copy();
+            }
+        }
         return null;
     }
 

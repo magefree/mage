@@ -58,7 +58,7 @@ public class CantBeBlockedByAllSourceEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return source.getSourceId().equals(permanent.getId());
+        return permanent.equals(source.getSourcePermanentIfItStillExists(game));
     }
 
     @Override

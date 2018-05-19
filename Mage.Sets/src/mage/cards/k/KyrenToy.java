@@ -44,6 +44,7 @@ import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
@@ -104,8 +105,25 @@ public class KyrenToy extends CardImpl {
 
         @Override
         public boolean apply(Game game, Ability source) {
-            Player player = game.getPlayer(source.getControllerId());
+            Player controller = game.getPlayer(source.getControllerId());
+            if (controller != null) {
+                checkToFirePossibleEvents(getMana(game, source), game, source);
+                controller.getManaPool().addMana(getMana(game, source), game, source);
+                return true;
+            }
+            return false;
+        }
 
+        @Override
+        public Mana produceMana(boolean netMana, Game game, Ability source) {
+            if (netMana) {
+                Permanent sourceObject = game.getPermanent(source.getSourceId());
+                if (sourceObject != null) {
+                    return new Mana(0, 0, 0, 0, 0, 0, 0, sourceObject.getCounters(game).getCount(CounterType.CHARGE) + 1);
+                }
+                return null;
+            }
+            Player player = game.getPlayer(source.getControllerId());
             if (player != null) {
                 int numberOfMana = 0;
                 for (Cost cost : source.getCosts()) {
@@ -113,16 +131,8 @@ public class KyrenToy extends CardImpl {
                         numberOfMana = ((RemoveVariableCountersSourceCost) cost).getAmount();
                     }
                 }
-                Mana mana = new Mana(0, 0, 0, 0, 0, 0, 0, numberOfMana + 1);
-                checkToFirePossibleEvents(mana, game, source);
-                player.getManaPool().addMana(mana, game, source);
-                return true;
+                return new Mana(0, 0, 0, 0, 0, 0, 0, numberOfMana + 1);
             }
-            return false;
-        }
-
-        @Override
-        public Mana getMana(Game game, Ability source) {
             return null;
         }
 

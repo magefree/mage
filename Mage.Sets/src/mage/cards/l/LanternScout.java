@@ -64,7 +64,7 @@ public class LanternScout extends CardImpl {
                 new CardIdPredicate(this.getId()),
                 new SubtypePredicate(SubType.ALLY)));
 
-        // <i>Rally</i> - Whenever Lantern Scout or another Ally enters the battlefield under your control, creatures you control gain lifelink until end of turn.
+        // <i>Rally</i> &mdash; Whenever Lantern Scout or another Ally enters the battlefield under your control, creatures you control gain lifelink until end of turn.
         Effect effect = new GainAbilityAllEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent());
         effect.setText("creatures you control gain lifelink until end of turn");
         Ability ability = new AllyEntersBattlefieldTriggeredAbility(

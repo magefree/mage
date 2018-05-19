@@ -126,6 +126,8 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
         newColor.black = black && other.black;
         newColor.red = red && other.red;
         newColor.green = green && other.green;
+
+        newColor.gold = gold && other.gold;
         return newColor;
     }
 
@@ -157,6 +159,7 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
         List<ObjectColor> colors = new ArrayList<>();
         int firstColor = 5000;
         int secondColor = -1;
+
         if (this.isWhite()) {
             firstColor = 1;
             secondColor = 1;
@@ -177,6 +180,7 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
             firstColor = Math.min(firstColor, 5);
             secondColor = Math.max(secondColor, 5);
         }
+
         if (this.isWhite()) {
             colors.add(ObjectColor.WHITE);
         }
@@ -192,6 +196,7 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
         if (this.isGreen()) {
             colors.add(ObjectColor.GREEN);
         }
+
         if (colors.size() >= 2 && secondColor - firstColor >= 3) {
             Collections.swap(colors, 0, 1);
         }
@@ -391,7 +396,11 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
         if (test.green != this.green) {
             return false;
         }
-        return test.gold == this.gold;
+        if (test.gold != this.gold) {
+            return false;
+        }
+
+        return true;
     }
 
     @Override
@@ -465,10 +474,10 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
             o1 = 4;
         } else if (this.isWhite()) {
             o1 = 5;
-
         } else if (this.isGold()) {
             o1 = 6;
         }
+
         if (o.isMulticolored()) {
             o2 = 7;
         } else if (o.isColorless()) {
@@ -483,10 +492,10 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
             o2 = 4;
         } else if (o.isWhite()) {
             o2 = 5;
-
         } else if (o.isGold()) {
             o2 = 6;
         }
+
         return o1 - o2;
     }
 
@@ -496,7 +505,12 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
      *
      * @return null or
      */
-    public ColoredManaSymbol getColoredManaSymbol() {
+    public ColoredManaSymbol getOneColoredManaSymbol() {
+
+        if (isMulticolored()) {
+            throw new IllegalStateException("Founded multicolored object, but it's must call with single mana color.");
+        }
+
         if (isBlack()) {
             return ColoredManaSymbol.B;
         }

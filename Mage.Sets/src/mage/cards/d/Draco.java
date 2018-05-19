@@ -81,7 +81,7 @@ class DracoCostReductionEffect extends CostModificationEffectImpl {
 
     public DracoCostReductionEffect() {
         super(Duration.WhileOnStack, Outcome.Benefit, CostModificationType.REDUCE_COST);
-        staticText = "<i>Domain</i> - {this} costs {2} less to cast for each basic land type among lands you control.";
+        staticText = "<i>Domain</i> &mdash; {this} costs {2} less to cast for each basic land type among lands you control.";
     }
 
     protected DracoCostReductionEffect(final DracoCostReductionEffect effect) {

@@ -27,7 +27,6 @@
  */
 package mage.cards.g;
 
-import java.util.Collection;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -49,9 +48,9 @@ import mage.players.Player;
 public class GhoulcallersBell extends CardImpl {
 
     public GhoulcallersBell(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
 
-        // {tap}: Each player puts the top card of their library into their graveyard.
+        // {T}: Each player puts the top card of their library into their graveyard.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GhoulcallersBellEffect(), new TapSourceCost()));
     }
 
@@ -83,10 +82,10 @@ class GhoulcallersBellEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Collection<Player> players = game.getPlayers().values();
-        for (Player player : players) {
-            if (player.getLibrary().hasCards()) {
-                Card card = player.getLibrary().removeFromTop(game);
+        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
+            Player player = game.getPlayer(playerId);
+            if (player != null) {
+                Card card = player.getLibrary().getFromTop(game);
                 if (card != null) {
                     player.moveCards(card, Zone.GRAVEYARD, source, game);
                 }

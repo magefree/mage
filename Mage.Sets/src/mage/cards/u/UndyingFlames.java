@@ -30,6 +30,7 @@ package mage.cards.u;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.EpicEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -38,7 +39,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
 
@@ -50,8 +50,7 @@ import mage.target.common.TargetAnyTarget;
 public class UndyingFlames extends CardImpl {
 
     public UndyingFlames(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{R}{R}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{R}{R}");
 
         // Exile cards from the top of your library until you exile a nonland card. Undying Flames deals damage to any target equal to that card's converted mana cost.
         this.getSpellAbility().addEffect(new UndyingFlamesEffect());
@@ -85,36 +84,22 @@ class UndyingFlamesEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        boolean applied = false;
-        Player you = game.getPlayer(source.getControllerId());
-        Card sourceCard = game.getCard(source.getSourceId());
-        while (you != null && sourceCard != null
-                && you.getLibrary().hasCards() && you.canRespond()) {
-            Card card = you.getLibrary().removeFromTop(game);
-            if (card != null) {
-                you.moveCardToExileWithInfo(card, null, null, source.getSourceId(), game, Zone.LIBRARY, true);
-                if (!card.isLand()) {
-                    int damage = card.getConvertedManaCost();
-                    if (damage > 0) {
-                        Permanent creature = game.getPermanent(this.getTargetPointer().getFirst(game, source));
-                        if (creature != null) {
-                            creature.damage(damage, source.getSourceId(), game, false, true);
-                            game.informPlayers(new StringBuilder(sourceCard.getName()).append(" deals ").append(damage).append(" damage to ").append(creature.getName()).toString());
-                            applied = true;
-                            break;
-                        }
-                        Player player = game.getPlayer(this.getTargetPointer().getFirst(game, source));
-                        if (player != null) {
-                            player.damage(card.getConvertedManaCost(), source.getSourceId(), game, false, true);
-                            game.informPlayers(new StringBuilder(sourceCard.getName()).append(" deals ").append(damage).append(" damage to ").append(player.getLogName()).toString());
-                            applied = true;
-                            break;
-                        }
+
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            while (controller.getLibrary().hasCards() && controller.isInGame()) {
+                Card card = controller.getLibrary().getFromTop(game);
+                if (card != null) {
+                    controller.moveCards(card, Zone.LIBRARY, source, game);
+                    if (!card.isLand()) {
+                        new DamageTargetEffect(card.getConvertedManaCost()).apply(game, source);
+                        break;
                     }
                 }
             }
+            return true;
         }
-        return applied;
+        return false;
     }
 
     @Override

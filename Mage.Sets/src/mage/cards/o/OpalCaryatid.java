@@ -41,7 +41,6 @@ import mage.constants.Duration;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureSpell;
 import mage.game.permanent.token.TokenImpl;
-import mage.game.permanent.token.Token;
 
 import java.util.UUID;
 
@@ -56,7 +55,7 @@ public class OpalCaryatid extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}");
 
         // When an opponent casts a creature spell, if Opal Caryatid is an enchantment, Opal Caryatid becomes a 2/2 Soldier creature.
-        TriggeredAbility ability = new SpellCastOpponentTriggeredAbility(new BecomesCreatureSourceEffect(new OpalCaryatidSoldier(), "", Duration.WhileOnBattlefield, true, false),
+        TriggeredAbility ability = new SpellCastOpponentTriggeredAbility(new BecomesCreatureSourceEffect(new OpalCaryatidSoldierToken(), "", Duration.WhileOnBattlefield, true, false),
                 new FilterCreatureSpell(), false);
         this.addAbility(new ConditionalTriggeredAbility(ability, new SourceMatchesFilterCondition(StaticFilters.FILTER_ENCHANTMENT_PERMANENT),
                 "When an opponent casts a creature spell, if {this} is an enchantment, {this} becomes a 2/2 Soldier creature."));
@@ -72,20 +71,21 @@ public class OpalCaryatid extends CardImpl {
     }
 }
 
-class OpalCaryatidSoldier extends TokenImpl {
+class OpalCaryatidSoldierToken extends TokenImpl {
 
-    public OpalCaryatidSoldier() {
+    public OpalCaryatidSoldierToken() {
         super("Soldier", "2/2 Soldier creature");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.SOLDIER);
         power = new MageInt(2);
         toughness = new MageInt(2);
     }
-    public OpalCaryatidSoldier(final OpalCaryatidSoldier token) {
+
+    public OpalCaryatidSoldierToken(final OpalCaryatidSoldierToken token) {
         super(token);
     }
 
-    public OpalCaryatidSoldier copy() {
-        return new OpalCaryatidSoldier(this);
+    public OpalCaryatidSoldierToken copy() {
+        return new OpalCaryatidSoldierToken(this);
     }
 }

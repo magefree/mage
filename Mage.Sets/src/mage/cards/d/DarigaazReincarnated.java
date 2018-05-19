@@ -29,6 +29,7 @@ package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -181,14 +182,18 @@ class DarigaazReincarnatedReturnEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        Card card = game.getCard(source.getSourceId());
-        if (player == null || card == null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
             return false;
         }
-        new RemoveCounterSourceEffect(CounterType.EGG.createInstance()).apply(game, source);
-        if (card.getCounters(game).getCount(CounterType.EGG) == 0) {
-            return card.putOntoBattlefield(game, Zone.EXILED, source.getSourceId(), player.getId());
+        MageObject sourceObject = source.getSourceObjectIfItStillExists(game);
+        if (sourceObject != null && sourceObject instanceof Card) {
+            Card card = (Card) sourceObject;
+            new RemoveCounterSourceEffect(CounterType.EGG.createInstance()).apply(game, source);
+            if (card.getCounters(game).getCount(CounterType.EGG) == 0) {
+                controller.moveCards(card, Zone.BATTLEFIELD, source, game);
+            }
+            return true;
         }
         return false;
     }

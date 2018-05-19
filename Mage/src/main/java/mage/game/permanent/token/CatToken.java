@@ -44,7 +44,7 @@ public class CatToken extends TokenImpl {
     final static private List<String> tokenImageSets = new ArrayList<>();
 
     static {
-        tokenImageSets.addAll(Arrays.asList("SOM", "M13", "M14", "C14", "C15"));
+        tokenImageSets.addAll(Arrays.asList("SOM", "M13", "M14", "C14", "C15", "C17"));
     }
 
     public CatToken() {

@@ -27,7 +27,6 @@
  */
 package mage.cards.i;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -104,8 +103,7 @@ class IndomitableCreativityEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = source.getSourceObject(game);
-        if (controller != null && sourceObject != null) {
+        if (controller != null) {
             List<Permanent> destroyedPermanents = new ArrayList<>();
             for (UUID targetId : getTargetPointer().getTargets(game, source)) {
                 Permanent target = game.getPermanent(targetId);
@@ -115,46 +113,24 @@ class IndomitableCreativityEffect extends OneShotEffect {
                     }
                 }
             }
-            Map<Player, Cards> cardsToReveal = new HashMap<>();
-
             for (Permanent permanent : destroyedPermanents) {
                 Player controllerOfDestroyedCreature = game.getPlayer(permanent.getControllerId());
                 if (controllerOfDestroyedCreature != null) {
                     Library library = controllerOfDestroyedCreature.getLibrary();
                     if (library.hasCards()) {
-                        Cards cards = new CardsImpl();
-                        Cards revealCards;
-                        if (cardsToReveal.containsKey(controllerOfDestroyedCreature)) {
-                            revealCards = cardsToReveal.get(controllerOfDestroyedCreature);
-                        } else {
-                            revealCards = new CardsImpl();
-                            cardsToReveal.put(controllerOfDestroyedCreature, revealCards);
-                        }
-                        Card card = library.removeFromTop(game);
-                        cards.add(card);
-                        while (!card.isCreature() && !card.isArtifact() && library.hasCards()) {
-                            card = library.removeFromTop(game);
-                            cards.add(card);
-                        }
-
-                        if (!cards.isEmpty()) {
-                            revealCards.addAll(cards);
+                        Cards cardsToReaveal = new CardsImpl();
+                        for (Card card : library.getCards(game)) {
+                            cardsToReaveal.add(card);
                             if (card.isCreature() || card.isArtifact()) {
                                 controllerOfDestroyedCreature.moveCards(card, Zone.EXILED, source, game);
                                 controllerOfDestroyedCreature.moveCards(card, Zone.BATTLEFIELD, source, game);
+                                break;
                             }
-                            Set<Card> cardsToShuffle = cards.getCards(game);
-                            cardsToShuffle.remove(card);
-                            library.addAll(cardsToShuffle, game);
-
                         }
+                        controllerOfDestroyedCreature.revealCards(source, " for destroyed " + permanent.getIdName(), cardsToReaveal, game);
                         controllerOfDestroyedCreature.shuffleLibrary(source, game);
                     }
                 }
-            }
-            // reveal cards at the end (because a player can have x permanents to be destroyed
-            for (Player player : cardsToReveal.keySet()) {
-                player.revealCards(sourceObject.getIdName(), cardsToReveal.get(player), game);
             }
             return true;
         }

@@ -124,7 +124,7 @@ class ProtectiveSphereEffect extends PreventionEffectImpl {
             if (event.getTargetId().equals(source.getControllerId())
                     && event.getSourceId().equals(target.getFirstTarget())) {
                 colorsOfChosenSource = game.getObject(target.getFirstTarget()).getColor(game).getColors();
-                if (colorsOfChosenSource.stream().anyMatch((c) -> (manaUsed.getColor(c.getColoredManaSymbol()) > 0))) {
+                if (colorsOfChosenSource.stream().anyMatch((c) -> (manaUsed.getColor(c.getOneColoredManaSymbol()) > 0))) {
                     return true;
                 }
             }

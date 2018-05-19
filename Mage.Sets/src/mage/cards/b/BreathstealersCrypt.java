@@ -36,7 +36,6 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -93,25 +92,27 @@ class BreathstealersCryptEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player player = game.getPlayer(event.getPlayerId());
-        PayLifeCost cost = new PayLifeCost(3);
         if (player != null) {
-            Card cardDrawn = player.getLibrary().removeFromTop(game);
-            if (cardDrawn != null) {
-                player.moveCardToHandWithInfo(cardDrawn, source.getSourceId(), game);
-                Cards cards = new CardsImpl();
-                cards.add(cardDrawn);
-                player.revealCards("The card drawn from " + player.getName() + "'s library", cards, game);
-                if (cardDrawn.isCreature()) {
-                    game.informPlayers("The card drawn by " + player.getName() + " is a creature card.  He/she must pay 3 life or that card gets discarded.");
-                    if (cost.canPay(source, source.getSourceId(), player.getId(), game)
-                            && player.chooseUse(outcome, "Do you wish to pay 3 life to keep the drawn creature card?  If not, you discard it.", source, game)) {
-                        return cost.pay(source, game, source.getSourceId(), player.getId(), true, cost);
-                    } else {
-                        game.informPlayers("The cost of 3 life was not paid by " + player.getName() + ", so the creature card will be discarded.");
-                        return player.discard(cardDrawn, source, game);
+            Cards oldHand = player.getHand().copy();
+            if (player.drawCards(1, game, event.getAppliedEffects()) > 0) {
+                Cards drawnCards = player.getHand().copy();
+                drawnCards.removeAll(oldHand);
+                player.revealCards(source, "The card drawn from " + player.getName() + "'s library.", drawnCards, game);
+                for (Card cardDrawn : drawnCards.getCards(game)) {
+                    if (cardDrawn.isCreature()) {
+                        game.informPlayers("The card drawn by " + player.getName() + " is a creature card.  He/she must pay 3 life or that card gets discarded.");
+                        PayLifeCost cost = new PayLifeCost(3);
+                        if (cost.canPay(source, source.getSourceId(), player.getId(), game)
+                                && player.chooseUse(outcome, "Do you wish to pay 3 life to keep the card " + cardDrawn.getIdName() + "?  If not, you discard it.", source, game)) {
+                            cost.pay(source, game, source.getSourceId(), player.getId(), true, cost);
+                        } else {
+                            game.informPlayers("The cost of 3 life was not paid by " + player.getName() + ", so " + cardDrawn.getIdName() + " will be discarded.");
+                            player.discard(cardDrawn, source, game);
+                        }
                     }
                 }
             }
+            return true;
         }
         return false;
     }

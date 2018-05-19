@@ -29,10 +29,8 @@ package mage.cards.m;
 
 import java.util.HashSet;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.UUID;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -45,7 +43,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
@@ -86,31 +83,25 @@ class MassPolymorphEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = source.getSourceObject(game);
-        if (controller != null && sourceObject != null) {
-            int count;
+        if (controller != null) {
             // Cards creatures = new CardsImpl();
-            List<Permanent> creatures = game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game);
-            Set<Card> creaturesToExile = new HashSet<>();
-            creaturesToExile.addAll(creatures);
-            count = creatures.size();
+            Set<Card> creaturesToExile = new HashSet<>(game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game));
+            int count = creaturesToExile.size();
             controller.moveCards(creaturesToExile, Zone.EXILED, source, game);
 
             Cards revealed = new CardsImpl();
             Set<Card> creatureCards = new LinkedHashSet<>();
-            Cards nonCreatureCards = new CardsImpl();
-            while (creatureCards.size() < count && controller.getLibrary().hasCards()) {
-                Card card = controller.getLibrary().removeFromTop(game);
+            for (Card card : controller.getLibrary().getCards(game)) {
                 revealed.add(card);
                 if (card.isCreature()) {
                     creatureCards.add(card);
-                } else {
-                    nonCreatureCards.add(card);
+                    if (creatureCards.size() == count) {
+                        break;
+                    }
                 }
             }
-            controller.revealCards(sourceObject.getIdName(), revealed, game);
+            controller.revealCards(source, revealed, game);
             controller.moveCards(creatureCards, Zone.BATTLEFIELD, source, game, false, false, true, null);
-            controller.putCardsOnTopOfLibrary(nonCreatureCards, game, source, false);
             controller.shuffleLibrary(source, game);
             return true;
         }

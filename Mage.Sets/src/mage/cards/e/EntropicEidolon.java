@@ -43,8 +43,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.MulticoloredPredicate;
+import mage.filter.StaticFilters;
 import mage.target.TargetPlayer;
 
 /**
@@ -53,14 +52,8 @@ import mage.target.TargetPlayer;
  */
 public class EntropicEidolon extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("a multicolored spell");
-
-    static {
-        filter.add(new MulticoloredPredicate());
-    }
-
     public EntropicEidolon(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
         this.subtype.add(SubType.SPIRIT);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
@@ -74,7 +67,8 @@ public class EntropicEidolon extends CardImpl {
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
         // Whenever you cast a multicolored spell, you may return Entropic Eidolon from your graveyard to your hand.
-        this.addAbility(new SpellCastControllerTriggeredAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), filter, true, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(Zone.GRAVEYARD,
+                new ReturnSourceFromGraveyardToHandEffect(), StaticFilters.FILTER_SPELL_A_MULTICOLORED, true, false));
     }
 
     public EntropicEidolon(final EntropicEidolon card) {

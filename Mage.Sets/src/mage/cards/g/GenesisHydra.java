@@ -37,9 +37,9 @@ import mage.abilities.effects.common.CastSourceTriggeredAbility;
 import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
 import mage.cards.*;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
@@ -58,7 +58,7 @@ import mage.target.TargetCard;
 public class GenesisHydra extends CardImpl {
 
     public GenesisHydra(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{X}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{X}{G}{G}");
         this.subtype.add(SubType.PLANT);
         this.subtype.add(SubType.HYDRA);
 
@@ -96,49 +96,39 @@ class GenesisHydraPutOntoBattlefieldEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
-            return false;
-        }
-        Cards cards = new CardsImpl();
-
         Object obj = getValue(CastSourceTriggeredAbility.SOURCE_CAST_SPELL_ABILITY);
-        int count = 0;
-        if (obj != null && obj instanceof SpellAbility) {
-            count = ((SpellAbility) obj).getManaCostsToPay().getX();
-            // using other var because of tooltip
-            int size = Math.min(controller.getLibrary().size(), count);
-            for (int i = 0; i < size; i++) {
-                Card card = controller.getLibrary().removeFromTop(game);
-                cards.add(card);
-            }
-        }
-
-        if (!cards.isEmpty()) {
-            controller.revealCards("Genesis Hydra", cards, game);
-        }
-
-        FilterCard filter = new FilterPermanentCard("a nonland permanent card with converted mana cost " + count + " or less to put onto the battlefield");
-        filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, count + 1));
-        TargetCard target1 = new TargetCard(Zone.LIBRARY, filter);
-        target1.setRequired(false);
-        if (cards.count(filter, controller.getId(), source.getSourceId(), game) > 0) {
-            if (controller.choose(Outcome.PutCardInPlay, cards, target1, game)) {
-                Card card = cards.get(target1.getFirstTarget(), game);
-                if (card != null) {
-                    cards.remove(card);
-                    controller.moveCards(card, Zone.BATTLEFIELD, source, game);
+        if (controller != null && obj != null && obj instanceof SpellAbility) {
+            int count = ((SpellAbility) obj).getManaCostsToPay().getX();
+            if (count > 0) {
+                Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, count));
+                controller.revealCards(source, cards, game);
+                FilterCard filter = new FilterPermanentCard("a nonland permanent card with converted mana cost " + count + " or less to put onto the battlefield");
+                filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
+                filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, count + 1));
+                TargetCard target1 = new TargetCard(Zone.LIBRARY, filter);
+                target1.setRequired(false);
+                if (cards.count(filter, controller.getId(), source.getSourceId(), game) > 0) {
+                    if (controller.choose(Outcome.PutCardInPlay, cards, target1, game)) {
+                        Card card = cards.get(target1.getFirstTarget(), game);
+                        if (card != null) {
+                            cards.remove(card);
+                            controller.moveCards(card, Zone.BATTLEFIELD, source, game);
+                        }
+                        target1.clearChosen();
+                    } else {
+                        game.informPlayers(controller.getLogName() + " didn't choose anything");
+                    }
+                } else {
+                    game.informPlayers("No nonland permanent card with converted mana cost " + count + " or less to choose.");
                 }
-                target1.clearChosen();
-            } else {
-                game.informPlayers(controller.getLogName() + " didn't choose anything");
+                if (!cards.isEmpty()) {
+                    controller.moveCards(cards, Zone.LIBRARY, source, game);
+                    controller.shuffleLibrary(source, game);
+                }
             }
-        } else {
-            game.informPlayers("No nonland permanent card with converted mana cost " + count + " or less to choose.");
+            return true;
         }
-        controller.moveCards(cards, Zone.LIBRARY, source, game);
-        controller.shuffleLibrary(source, game);
-        return true;
+        return false;
     }
 
     @Override

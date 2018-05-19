@@ -27,6 +27,7 @@
  */
 package mage.cards.r;
 
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -44,8 +45,6 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 
-import java.util.UUID;
-
 /**
  *
  * @author LevelX2
@@ -53,7 +52,7 @@ import java.util.UUID;
 public class Reweave extends CardImpl {
 
     public Reweave(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{5}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{5}{U}");
         this.subtype.add(SubType.ARCANE);
 
         // Target permanent's controller sacrifices it. If he or she does, that player reveals cards from the top of their library until he or she reveals a permanent card that shares a card type with the sacrificed permanent, puts that card onto the battlefield, then shuffles their library.
@@ -104,33 +103,24 @@ class ReweaveEffect extends OneShotEffect {
                     Library library = permanentController.getLibrary();
                     if (library.hasCards()) {
                         Cards cards = new CardsImpl();
-                        Card card = null;
-                        boolean cardFound = false;
-                        if (library.hasCards()) {
-                            do {
-                                card = library.removeFromTop(game);
-                                cards.add(card);
-                                if (filter.match(card, game)) {
-                                    for (CardType cardType : permanent.getCardType()) {
-                                        if (card.getCardType().contains(cardType)) {
-                                            // a permanent card
-                                            cardFound = true;
-                                            break;
-                                        }
+                        Card permanentCard = null;
+                        for (Card card : permanentController.getLibrary().getCards(game)) {
+                            cards.add(card);
+                            if (card.isPermanent()) {
+                                for (CardType cardType : permanent.getCardType()) {
+                                    if (card.getCardType().contains(cardType)) {
+                                        permanentCard = card;
+                                        break;
                                     }
                                 }
-                            } while (!cardFound && library.hasCards());
-                            permanentController.moveCards(card, Zone.BATTLEFIELD, source, game);
-                        }
-
-                        if (!cards.isEmpty()) {
-                            permanentController.revealCards(sourceObject.getIdName(), cards, game);
-                            if (cardFound && card != null) {
-                                cards.remove(card);
                             }
-                            library.addAll(cards.getCards(game), game);
-                            permanentController.shuffleLibrary(source, game);
                         }
+                        permanentController.revealCards(source, cards, game);
+                        if (permanentCard != null) {
+                            permanentController.moveCards(permanentCard, Zone.BATTLEFIELD, source, game);
+                        }
+                        permanentController.shuffleLibrary(source, game);
+
                     }
                     return true;
                 }

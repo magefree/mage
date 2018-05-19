@@ -39,11 +39,10 @@ import mage.abilities.effects.common.combat.CantBlockTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.MulticoloredPredicate;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -52,14 +51,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class SandstormEidolon extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("a multicolored spell");
-
-    static {
-        filter.add(new MulticoloredPredicate());
-    }
-
     public SandstormEidolon(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
         this.subtype.add(SubType.SPIRIT);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
@@ -70,7 +63,8 @@ public class SandstormEidolon extends CardImpl {
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
         // Whenever you cast a multicolored spell, you may return Sandstorm Eidolon from your graveyard to your hand.
-        this.addAbility(new SpellCastControllerTriggeredAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), filter, true, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(Zone.GRAVEYARD,
+                new ReturnSourceFromGraveyardToHandEffect(), StaticFilters.FILTER_SPELL_A_MULTICOLORED, true, false));
     }
 
     public SandstormEidolon(final SandstormEidolon card) {

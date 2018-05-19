@@ -37,7 +37,6 @@ import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
@@ -47,7 +46,7 @@ import mage.players.Player;
 public class ForceMastery extends CardImpl {
 
     public ForceMastery(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{G}{U}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}{U}{W}");
 
         // At the beggining of your upkeep, reveal the top card of your library and put that card into your hand. You gain life equal to its converted mana cost.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ForceMasteryEffect(), TargetController.YOU, false));
@@ -78,18 +77,14 @@ class ForceMasteryEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (controller != null && sourcePermanent != null) {
-            if (controller.getLibrary().hasCards()) {
-                Card card = controller.getLibrary().removeFromTop(game);
-                if (card != null) {
-                    Cards cards = new CardsImpl(card);
-                    controller.revealCards(sourcePermanent.getIdName(), cards, game);
-                    controller.moveCards(card, Zone.HAND, source, game);
-                    controller.gainLife(card.getConvertedManaCost(), game, source);
-                }
-                return true;
+        if (controller != null) {
+            Card card = controller.getLibrary().getFromTop(game);
+            if (card != null) {
+                controller.revealCards(source, new CardsImpl(card), game);
+                controller.moveCards(card, Zone.HAND, source, game);
+                controller.gainLife(card.getConvertedManaCost(), game, source);
             }
+            return true;
         }
         return false;
     }

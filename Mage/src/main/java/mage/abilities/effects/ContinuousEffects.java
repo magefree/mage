@@ -926,6 +926,14 @@ public class ContinuousEffects implements Serializable {
         while (!done) { // loop needed if a added effect adds again an effect (e.g. Level 5- of Joraga Treespeaker)
             done = true;
             layer = filterLayeredEffects(activeLayerEffects, Layer.AbilityAddingRemovingEffects_6);
+
+            // debug
+            /*
+            System.out.println(game.getTurn() + ", " + game.getPhase() + ": " + "need apply " + layer.stream()
+                    .map((eff) -> {return eff.getClass().getName().replaceAll(".+\\.(.+)", "$1");})
+                    .collect(Collectors.joining(", ")));
+            */
+
             for (ContinuousEffect effect : layer) {
                 if (activeLayerEffects.contains(effect) && !appliedEffects.contains(effect.getId())) { // Effect does still exist and was not applied yet
                     Set<UUID> dependentTo = effect.isDependentTo(layer);

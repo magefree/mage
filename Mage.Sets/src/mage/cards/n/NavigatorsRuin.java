@@ -53,7 +53,7 @@ public class NavigatorsRuin extends CardImpl {
         Ability ability = new ConditionalTriggeredAbility(
                 new BeginningOfEndStepTriggeredAbility(new PutLibraryIntoGraveTargetEffect(4), TargetController.YOU, false),
                 RaidCondition.instance,
-                "<i>Raid</i> - At the beginning of your end step, if you attacked with a creature this turn, target opponent puts the top four cards of their library into their graveyard.");
+                "<i>Raid</i> &mdash; At the beginning of your end step, if you attacked with a creature this turn, target opponent puts the top four cards of their library into their graveyard.");
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability, new PlayerAttackedWatcher());
     }

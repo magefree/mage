@@ -48,6 +48,7 @@ import mage.game.Game;
 import mage.players.Library;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 /**
  *
@@ -56,11 +57,11 @@ import mage.target.targetpointer.FixedTarget;
 public class NivixAerieOfTheFiremind extends CardImpl {
 
     public NivixAerieOfTheFiremind(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
         // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
-        
+
         // {2}{U}{R}, {tap}: Exile the top card of your library. Until your next turn, you may cast that card if it's an instant or sorcery card.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new NivixAerieOfTheFiremindEffect(), new ManaCostsImpl<>("{2}{U}{R}"));
         ability.addCost(new TapSourceCost());
@@ -78,30 +79,30 @@ public class NivixAerieOfTheFiremind extends CardImpl {
 }
 
 class NivixAerieOfTheFiremindEffect extends OneShotEffect {
-    
+
     NivixAerieOfTheFiremindEffect() {
         super(Outcome.Benefit);
         this.staticText = "Exile the top card of your library. Until your next turn, you may cast that card if it's an instant or sorcery card";
     }
-    
+
     NivixAerieOfTheFiremindEffect(final NivixAerieOfTheFiremindEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public NivixAerieOfTheFiremindEffect copy() {
         return new NivixAerieOfTheFiremindEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Library library = controller.getLibrary();
             if (library.hasCards()) {
-                Card card = library.removeFromTop(game);
+                Card card = library.getFromTop(game);
                 if (card != null
-                        && controller.moveCardsToExile(card, source, game, true, source.getSourceId(), "Nivix, Aerie of the Firemind")
+                        && controller.moveCardsToExile(card, source, game, true, source.getSourceId(), CardUtil.createObjectRealtedWindowTitle(source, game, null))
                         && (card.isInstant() || card.isSorcery())) {
                     ContinuousEffect effect = new NivixAerieOfTheFiremindCanCastEffect();
                     effect.setTargetPointer(new FixedTarget(card.getId()));
@@ -136,10 +137,8 @@ class NivixAerieOfTheFiremindCanCastEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        return this.getTargetPointer().getFirst(game, source) != null
-                && this.getTargetPointer().getFirst(game, source).equals(sourceId)
-                && source.getControllerId().equals(affectedControllerId)
-                && game.getState().getZone(sourceId) == Zone.EXILED;
+    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        return source.getControllerId().equals(affectedControllerId)
+                && objectId.equals(this.getTargetPointer().getFirst(game, source));
     }
 }

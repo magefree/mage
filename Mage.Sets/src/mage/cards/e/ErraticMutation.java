@@ -52,7 +52,7 @@ import mage.target.targetpointer.FixedTarget;
 public class ErraticMutation extends CardImpl {
 
     public ErraticMutation(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}");
 
         // Choose target creature. Reveal cards from the top of your library until you reveal a nonland card. That creature gets +X/-X until end of turn, where X is that card's converted mana cost. Put all cards revealed this way on the bottom of your library in any order.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
@@ -93,18 +93,16 @@ class ErraticMutationEffect extends OneShotEffect {
         if (controller != null && sourceObject != null) {
             CardsImpl toReveal = new CardsImpl();
             Card nonLandCard = null;
-
-            while (nonLandCard == null && controller.getLibrary().hasCards()) {
-                Card card = controller.getLibrary().removeFromTop(game);
+            for (Card card : controller.getLibrary().getCards(game)) {
                 toReveal.add(card);
                 if (!card.isLand()) {
                     nonLandCard = card;
+                    break;
                 }
             }
             // reveal cards
-            if (!toReveal.isEmpty()) {
-                controller.revealCards(sourceObject.getIdName(), toReveal, game);
-            }
+            controller.revealCards(sourceObject.getIdName(), toReveal, game);
+
             // the nonland card
             if (nonLandCard != null) {
                 int boostValue = nonLandCard.getConvertedManaCost();

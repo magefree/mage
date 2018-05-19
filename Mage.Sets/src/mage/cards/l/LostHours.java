@@ -33,13 +33,11 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
@@ -52,7 +50,7 @@ import mage.target.TargetPlayer;
 public class LostHours extends CardImpl {
 
     public LostHours(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}");
 
         // Target player reveals their hand. You choose a nonland card from it. That player puts that card into their library third from the top.
         this.getSpellAbility().addEffect(new LostHoursEffect());
@@ -71,17 +69,11 @@ public class LostHours extends CardImpl {
 
 class LostHoursEffect extends OneShotEffect {
 
-    private static final FilterCard filter = new FilterCard("nonland card");
-
-    static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
-    }
-
     public LostHoursEffect() {
         super(Outcome.Discard);
-        this.staticText = "Target player reveals their hand. You choose a nonland card from it. That player puts that card into their library third from the top.";
+        this.staticText = "Target player reveals their hand. You choose a nonland card from it. That player puts that card into their library third from the top";
     }
-    
+
     public LostHoursEffect(final LostHoursEffect effect) {
         super(effect);
     }
@@ -90,38 +82,19 @@ class LostHoursEffect extends OneShotEffect {
     public LostHoursEffect copy() {
         return new LostHoursEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
-        if (player != null && controller != null) {
-            player.revealCards("Lost Hours", player.getHand(), game);
-            
-            if (player.getHand().size() > 0) {
-                TargetCard target = new TargetCard(Zone.HAND, new FilterCard(filter));
-                if (controller.choose(Outcome.Discard, player.getHand(), target, game)) {
+        if (targetPlayer != null && controller != null) {
+            targetPlayer.revealCards(source, targetPlayer.getHand(), game);
+            if (targetPlayer.getHand().size() > 0) {
+                TargetCard target = new TargetCard(Zone.HAND, new FilterCard(StaticFilters.FILTER_CARD_A_NON_LAND));
+                if (controller.choose(Outcome.Discard, targetPlayer.getHand(), target, game)) {
                     Card card = game.getCard(target.getFirstTarget());
                     if (card != null) {
-                    // Move card to third position
-                        CardsImpl cards = new CardsImpl();
-                        cards.add(card);
-                        Card cardTop = null;
-                        Card cardSecond = null;
-                        if (player.getLibrary().hasCards()) {
-                            cardTop = player.getLibrary().removeFromTop(game);
-                        }
-                        if (player.getLibrary().hasCards()) {
-                            cardSecond = player.getLibrary().removeFromTop(game);
-                        }
-                        player.putCardsOnTopOfLibrary(cards, game, source, true);
-                        if (cardSecond != null) {
-                            player.getLibrary().putOnTop(cardSecond, game);
-                        }
-                        if (cardTop != null) {
-                            player.getLibrary().putOnTop(cardTop, game);
-                        }
-                        game.informPlayers(card.getLogName() + " is put into " + player.getLogName() +"'s library " + (cardTop != null ? (cardSecond != null ? "third" : "second") : "first") + " from the top");
+                        targetPlayer.putCardOnTopXOfLibrary(card, game, source, 3);
                     }
                 }
             }
@@ -129,5 +102,5 @@ class LostHoursEffect extends OneShotEffect {
         }
         return false;
     }
-    
+
 }

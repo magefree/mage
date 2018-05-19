@@ -47,8 +47,7 @@ import mage.target.targetpointer.FixedTarget;
 public class DissipationField extends CardImpl {
 
     public DissipationField(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}{U}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{U}");
 
         // Whenever a permanent deals damage to you, return it to its owner's hand.
         this.addAbility(new DissipationFieldAbility());
@@ -89,7 +88,7 @@ class DissipationFieldAbility extends TriggeredAbilityImpl {
         if (event.getTargetId().equals(this.controllerId)) {
             Permanent permanent = game.getPermanent(event.getSourceId());
             if (permanent != null) {
-                this.getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getId()));
+                this.getEffects().get(0).setTargetPointer(new FixedTarget(permanent, game));
                 return true;
             }
         }

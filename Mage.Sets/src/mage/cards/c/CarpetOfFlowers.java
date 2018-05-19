@@ -124,7 +124,7 @@ class CarpetOfFlowersTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        StringBuilder sb = new StringBuilder("At the beginning of each of your main phases, if you haven't added mana with this ability this turn");
+        StringBuilder sb = new StringBuilder("At the beginning of each of your main phases, if you haven't added mana with this ability this turn, ");
         return sb.append(super.getRule()).toString();
     }
 
@@ -151,11 +151,22 @@ class CarpetOfFlowersEffect extends ManaEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            checkToFirePossibleEvents(getMana(game, source), game, source);
+            controller.getManaPool().addMana(getMana(game, source), game, source);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public Mana produceMana(boolean netMana, Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
         ChoiceColor choice = new ChoiceColor();
         if (controller != null && controller.choose(Outcome.Benefit, choice, game)) {
+            Mana mana = new Mana();
             int count = game.getBattlefield().count(filter, source.getSourceId(), source.getTargets().getFirstTarget(), game);
             if (count > 0) {
-                Mana mana = new Mana();
                 switch (choice.getChoice()) {
                     case "Black":
                         mana.setBlack(count);
@@ -175,16 +186,9 @@ class CarpetOfFlowersEffect extends ManaEffect {
                     default:
                         break;
                 }
-                checkToFirePossibleEvents(mana, game, source);
-                controller.getManaPool().addMana(mana, game, source);
             }
-            return true;
+            return mana;
         }
-        return false;
-    }
-
-    @Override
-    public Mana getMana(Game game, Ability source) {
         return null;
     }
 

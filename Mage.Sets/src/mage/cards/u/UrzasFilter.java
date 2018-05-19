@@ -42,17 +42,18 @@ import mage.filter.predicate.mageobject.MulticoloredPredicate;
  * @author LevelX2
  */
 public class UrzasFilter extends CardImpl {
+
     private static final FilterCard filter = new FilterCard("multicolored spells");
-    
+
     static {
-        filter.add(new MulticoloredPredicate());                
+        filter.add(new MulticoloredPredicate());
     }
-    
+
     public UrzasFilter(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // Multicolored spells cost up to {2} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionAllEffect(filter, 2, true))); 
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionAllEffect(filter, 2, true)));
     }
 
     public UrzasFilter(final UrzasFilter card) {

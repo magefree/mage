@@ -58,7 +58,7 @@ public class MeletisAstronomer extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 
-        // <i>Heroic</i> - Whenever you cast a spell that targets Meletis Astronomer, look at the top three cards of your library. You may reveal an enchantment card from among them and put it into your hand. Put the rest on the bottom of your library in any order.
+        // <i>Heroic</i> &mdash; Whenever you cast a spell that targets Meletis Astronomer, look at the top three cards of your library. You may reveal an enchantment card from among them and put it into your hand. Put the rest on the bottom of your library in any order.
         this.addAbility(new HeroicAbility(new LookLibraryAndPickControllerEffect(3, 1, filter, true, false, Zone.HAND, true), false));
     }
 

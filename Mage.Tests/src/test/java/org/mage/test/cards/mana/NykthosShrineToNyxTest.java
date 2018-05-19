@@ -125,6 +125,8 @@ public class NykthosShrineToNyxTest extends CardTestPlayerBase {
     public void testNormalUseWithTokens() {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
+        // {T}: Add {C}.
+        // {2}, {T}: Choose a color. Add an amount of mana of that color equal to your devotion to that color.
         addCard(Zone.BATTLEFIELD, playerA, "Nykthos, Shrine to Nyx", 1);
         // Green mana doesn't empty from your mana pool as steps and phases end.
         // Omnath, Locus of Mana gets +1/+1 for each green mana in your mana pool.
@@ -150,7 +152,7 @@ public class NykthosShrineToNyxTest extends CardTestPlayerBase {
         execute();
 
         assertPermanentCount(playerA, "Simic Guildmage", 2);
-        Assert.assertEquals("amount of green mana", 5, playerA.getManaPool().getGreen()); // 6 green mana
+        Assert.assertEquals("amount of green mana", 5, playerA.getManaPool().getGreen()); // 5 green mana
         assertPowerToughness(playerA, "Omnath, Locus of Mana", 6, 6);
     }
 

@@ -54,7 +54,7 @@ public class LightningSurge extends CardImpl {
         Effect effect = new ConditionalOneShotEffect(new DamageTargetEffect(6, false),
                 new DamageTargetEffect(4),
                 new CardsInControllerGraveCondition(7),
-                "{this} deals 4 damage to any target.<br/><br/><i>Threshold</i> - {this} deals 6 damage to that permanent or player and the damage can't be prevented instead if seven or more cards are in your graveyard.");
+                "{this} deals 4 damage to any target.<br/><br/><i>Threshold</i> &mdash; {this} deals 6 damage to that permanent or player and the damage can't be prevented instead if seven or more cards are in your graveyard.");
         this.getSpellAbility().addTarget(new TargetAnyTarget());
         this.getSpellAbility().addEffect(effect);
 

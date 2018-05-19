@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.u;
 
 import java.util.UUID;
@@ -37,8 +36,8 @@ import mage.abilities.keyword.UnearthAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 
 /**
@@ -47,21 +46,22 @@ import mage.constants.Zone;
  */
 public class UndeadLeotau extends CardImpl {
 
-    public UndeadLeotau (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}");
+    public UndeadLeotau(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}");
         this.subtype.add(SubType.ZOMBIE);
         this.subtype.add(SubType.CAT);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
-        
+
         // {R}: Undead Leotau gets +1/-1 until end of turn.
-        // Unearth {2}{B} 
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(+1, -1, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
+
+        // Unearth {2}{B}
         this.addAbility(new UnearthAbility(new ManaCostsImpl("{2}{B}")));
     }
 
-    public UndeadLeotau (final UndeadLeotau card) {
+    public UndeadLeotau(final UndeadLeotau card) {
         super(card);
     }
 

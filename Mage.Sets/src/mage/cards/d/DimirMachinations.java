@@ -31,9 +31,9 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.TransmuteAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -51,15 +51,15 @@ import mage.target.TargetPlayer;
 public class DimirMachinations extends CardImpl {
 
     public DimirMachinations(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}");
 
         // Look at the top three cards of target player's library. Exile any number of those cards, then put the rest back in any order.
         this.getSpellAbility().addEffect(new DimirMachinationsEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
-        
+
         // Transmute {1}{B}{B}
         this.addAbility(new TransmuteAbility("{1}{B}{B}"));
-        
+
     }
 
     public DimirMachinations(final DimirMachinations card) {
@@ -73,57 +73,36 @@ public class DimirMachinations extends CardImpl {
 }
 
 class DimirMachinationsEffect extends OneShotEffect {
-    
+
     DimirMachinationsEffect() {
         super(Outcome.Neutral);
         this.staticText = "Look at the top three cards of target player's library. Exile any number of those cards, then put the rest back in any order";
     }
-    
+
     DimirMachinationsEffect(final DimirMachinationsEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public DimirMachinationsEffect copy() {
         return new DimirMachinationsEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Player targetPlayer = game.getPlayer(this.getTargetPointer().getFirst(game, source));
         if (controller != null && targetPlayer != null) {
-            int numCardsToLookAt = Math.min(3, targetPlayer.getLibrary().size());
-            if (numCardsToLookAt > 0) {
-                CardsImpl cards = new CardsImpl();
-                for (int i = 0; i < numCardsToLookAt; i++) {
-                    cards.add(targetPlayer.getLibrary().removeFromTop(game));
-                }
-                TargetCard targetExile = new TargetCard(0, numCardsToLookAt, Zone.LIBRARY, new FilterCard("card to exile"));
+            CardsImpl cards = new CardsImpl(targetPlayer.getLibrary().getTopCards(game, 3));
+            if (!cards.isEmpty()) {
+                controller.lookAtCards(source, null, cards, game);
+                TargetCard targetExile = new TargetCard(0, Integer.MAX_VALUE, Zone.LIBRARY, new FilterCard("cards to exile"));
                 if (controller.choose(Outcome.Exile, cards, targetExile, game)) {
-                    for (UUID cardId : targetExile.getTargets()) {
-                        Card card = cards.get(cardId, game);
-                        if (card != null) {
-                            controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.LIBRARY, true);
-                            cards.remove(card);
-                        }
-                    }
-                    while (!cards.isEmpty()) {
-                        if (cards.size() == 1) {
-                            Card card = cards.get(cards.iterator().next(), game);
-                            controller.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.LIBRARY, true, false);
-                            cards.remove(card);
-                        }
-                        else {
-                            TargetCard targetTop = new TargetCard(Zone.LIBRARY, new FilterCard("card to put on top of library"));
-                            if (controller.choose(Outcome.Neutral, cards, targetTop, game)) {
-                                Card card = cards.get(targetTop.getFirstTarget(), game);
-                                controller.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.LIBRARY, true, false);
-                                cards.remove(card);
-                            }
-                        }
-                    }
+                    Cards toExile = new CardsImpl(targetExile.getTargets());
+                    controller.moveCards(toExile, Zone.EXILED, source, game);
+                    cards.removeAll(toExile);
                 }
+                controller.putCardsOnTopOfLibrary(cards, game, source, true);
             }
             return true;
         }

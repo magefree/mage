@@ -105,23 +105,18 @@ class DivergentTransformationsEffect extends OneShotEffect {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     if (player.getLibrary().hasCards()) {
-                        Cards cards = new CardsImpl();
-                        Card card = player.getLibrary().removeFromTop(game);
-                        cards.add(card);
-                        while (!card.isCreature() && player.getLibrary().hasCards()) {
-                            card = player.getLibrary().removeFromTop(game);
-                            cards.add(card);
+                        Cards toReveal = new CardsImpl();
+                        for (Card card : player.getLibrary().getCards(game)) {
+                            toReveal.add(card);
+                            if (card.isCreature()) {
+                                player.revealCards(source, toReveal, game);
+                                player.moveCards(card, Zone.BATTLEFIELD, source, game);
+                                toReveal.remove(card);
+                                break;
+                            }
                         }
-
-                        if (card.isCreature()) {
-                            card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), player.getId());
-                        }
-
-                        if (!cards.isEmpty()) {
-                            player.revealCards(sourceObject.getIdName(), cards, game);
-                            Set<Card> cardsToShuffle = cards.getCards(game);
-                            cardsToShuffle.remove(card);
-                            player.getLibrary().addAll(cardsToShuffle, game);
+                        if (!toReveal.isEmpty()) {
+                            player.shuffleLibrary(source, game);
                         }
                     }
                 }

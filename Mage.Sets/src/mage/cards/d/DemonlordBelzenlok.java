@@ -32,8 +32,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.constants.SubType;
-import mage.constants.SuperType;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.Card;
@@ -41,6 +39,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -103,15 +103,15 @@ class DemonlordBelzenlokEffect extends OneShotEffect {
         }
         boolean cont = true;
         int addedToHand = 0;
-        while (controller.getLibrary().hasCards() && controller.canRespond() && cont) {
-            Card card = controller.getLibrary().removeFromTop(game);
+        while (controller.getLibrary().hasCards() && cont) {
+            Card card = controller.getLibrary().getFromTop(game);
             if (card != null) {
-                controller.moveCardToExileWithInfo(card, null, null, source.getSourceId(), game, Zone.LIBRARY, true);
+                controller.moveCards(card, Zone.EXILED, source, game);
                 if (!card.isLand()) {
                     if (card.getConvertedManaCost() < 4) {
                         cont = false;
                     }
-                    card.moveToZone(Zone.HAND, source.getSourceId(), game, true);
+                    controller.moveCards(card, Zone.HAND, source, game);
                     addedToHand++;
                 }
             }

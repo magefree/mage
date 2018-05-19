@@ -39,6 +39,7 @@ import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -63,7 +64,7 @@ public class BalduvianConjurer extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {tap}: Target snow land becomes a 2/2 creature until end of turn. It's still a land.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureTargetEffect(new AnimatedLand(), false, true, Duration.EndOfTurn), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureTargetEffect(new CreatureToken(2, 2), false, true, Duration.EndOfTurn), new TapSourceCost());
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
@@ -75,22 +76,5 @@ public class BalduvianConjurer extends CardImpl {
     @Override
     public BalduvianConjurer copy() {
         return new BalduvianConjurer(this);
-    }
-}
-
-class AnimatedLand extends TokenImpl {
-
-    public AnimatedLand() {
-        super("", "2/2 creature");
-        this.cardType.add(CardType.CREATURE);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-    }
-    public AnimatedLand(final AnimatedLand token) {
-        super(token);
-    }
-
-    public AnimatedLand copy() {
-        return new AnimatedLand(this);
     }
 }

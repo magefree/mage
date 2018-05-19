@@ -46,6 +46,7 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetLandPermanent;
 
@@ -72,7 +73,7 @@ public class SpikeTiller extends CardImpl {
         this.addAbility(ability);
 
         // {2}, Remove a +1/+1 counter from Spike Tiller: Target land becomes a 2/2 creature that's still a land. Put a +1/+1 counter on it.
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureTargetEffect(new SpikeTillerToken(), false, true, Duration.EndOfGame).setText("Target land becomes a 2/2 creature that's still a land. "), new GenericManaCost(2));
+        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureTargetEffect(new CreatureToken(2, 2), false, true, Duration.EndOfGame).setText("Target land becomes a 2/2 creature that's still a land. "), new GenericManaCost(2));
         ability2.addCost(new RemoveCountersSourceCost(CounterType.P1P1.createInstance()));
         ability2.addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance()).setText("Put a +1/+1 counter on it."));
         ability2.addTarget(new TargetLandPermanent());
@@ -86,22 +87,5 @@ public class SpikeTiller extends CardImpl {
     @Override
     public SpikeTiller copy() {
         return new SpikeTiller(this);
-    }
-}
-
-class SpikeTillerToken extends TokenImpl {
-
-    public SpikeTillerToken() {
-        super("", "2/2 creature");
-        cardType.add(CardType.CREATURE);
-        power = new MageInt(2);
-        toughness = new MageInt(2);
-    }
-    public SpikeTillerToken(final SpikeTillerToken token) {
-        super(token);
-    }
-
-    public SpikeTillerToken copy() {
-        return new SpikeTillerToken(this);
     }
 }

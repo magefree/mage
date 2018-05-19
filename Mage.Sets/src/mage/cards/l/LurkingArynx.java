@@ -56,7 +56,7 @@ public class LurkingArynx extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(5);
 
-        // <i>Formidable</i> - {2}{G}: Target creature blocks Lurking Arynx this turn if able. Activate this ability only if creatures you control have total power 8 or greater.
+        // <i>Formidable</i> &mdash; {2}{G}: Target creature blocks Lurking Arynx this turn if able. Activate this ability only if creatures you control have total power 8 or greater.
         Ability ability = new ActivateIfConditionActivatedAbility(
                 Zone.BATTLEFIELD,
                 new MustBeBlockedByTargetSourceEffect(Duration.EndOfTurn),

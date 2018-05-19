@@ -135,25 +135,18 @@ public class Library implements Serializable {
         }
     }
 
-    public void putCardThirdFromTheTop(Card card, Game game) {
-        if (card != null && card.getOwnerId().equals(playerId)) {
-            Card cardTop = null;
-            Card cardSecond = null;
-            if (hasCards()) {
-                cardTop = removeFromTop(game);
-            }
-            if (hasCards()) {
-                cardSecond = removeFromTop(game);
+    public void putCardToTopXPos(Card card, int pos, Game game) {
+        if (card != null && pos > -1) {
+            LinkedList<Card> save = new LinkedList<>();
+            int idx = 1;
+            while (hasCards() && idx < pos) {
+                idx++;
+                save.add(removeFromTop(game));
             }
             putOnTop(card, game);
-            if (cardSecond != null) {
-                putOnTop(cardSecond, game);
+            while (!save.isEmpty()) {
+                putOnTop(save.removeLast(), game);
             }
-            if (cardTop != null) {
-                putOnTop(cardTop, game);
-            }
-        } else {
-            game.getPlayer(card.getOwnerId()).getLibrary().putCardThirdFromTheTop(card, game);
         }
     }
 
@@ -190,6 +183,12 @@ public class Library implements Serializable {
         return new ArrayList<>(library);
     }
 
+    /**
+     * Returns the cards of the library in a list ordered from top to buttom
+     *
+     * @param game
+     * @return
+     */
     public List<Card> getCards(Game game) {
         return library.stream().map(game::getCard).collect(Collectors.toList());
     }

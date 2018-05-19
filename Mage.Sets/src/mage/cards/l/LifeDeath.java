@@ -45,6 +45,7 @@ import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -60,8 +61,9 @@ public class LifeDeath extends SplitCard {
 
         // Life
         // All lands you control become 1/1 creatures until end of turn. They're still lands.
-        getLeftHalfCard().getSpellAbility().addEffect(new BecomesCreatureAllEffect(new LifeLandToken(), "lands",
-                new FilterControlledLandPermanent("lands you control"), Duration.EndOfTurn));
+        getLeftHalfCard().getSpellAbility().addEffect(new BecomesCreatureAllEffect(
+                new CreatureToken(1, 1),
+                "lands", new FilterControlledLandPermanent("lands you control"), Duration.EndOfTurn, false));
 
         // Death
         // Return target creature card from your graveyard to the battlefield. You lose life equal to its converted mana cost.
@@ -79,24 +81,6 @@ public class LifeDeath extends SplitCard {
     public LifeDeath copy() {
         return new LifeDeath(this);
     }
-}
-
-class LifeLandToken extends TokenImpl {
-
-    public LifeLandToken() {
-        super("", "1/1 creatures");
-        cardType.add(CardType.CREATURE);
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-    }
-    public LifeLandToken(final LifeLandToken token) {
-        super(token);
-    }
-
-    public LifeLandToken copy() {
-        return new LifeLandToken(this);
-    }
-
 }
 
 class DeathEffect extends OneShotEffect {

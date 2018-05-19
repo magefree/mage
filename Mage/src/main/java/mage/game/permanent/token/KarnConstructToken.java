@@ -27,6 +27,9 @@
  */
 package mage.game.permanent.token;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import static javax.management.Query.value;
 import mage.constants.CardType;
 import mage.constants.SubType;
@@ -52,12 +55,18 @@ public class KarnConstructToken extends TokenImpl {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
+    final static private List<String> tokenImageSets = new ArrayList<>();
+    static {
+        tokenImageSets.addAll(Arrays.asList("DOM"));
+    }
+
     public KarnConstructToken() {
         this("DOM");
     }
 
     public KarnConstructToken(String setCode) {
         super("Construct", "0/0 colorless Construct artifact creature token with \"This creature gets +1/+1 for each artifact you control.\"");
+        availableImageSetCodes = tokenImageSets;
         this.setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);

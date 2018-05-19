@@ -41,6 +41,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -49,7 +50,7 @@ import mage.constants.Duration;
 public class GoblinBushwhacker extends CardImpl {
 
     public GoblinBushwhacker(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}");
         this.subtype.add(SubType.GOBLIN);
         this.subtype.add(SubType.WARRIOR);
 
@@ -61,8 +62,18 @@ public class GoblinBushwhacker extends CardImpl {
 
         // When Goblin Bushwhacker enters the battlefield, if it was kicked, creatures you control get +1/+0 and gain haste until end of turn.
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new BoostControlledEffect(1, 0, Duration.EndOfTurn), false);
-        ability.addEffect(new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
-        this.addAbility(new ConditionalTriggeredAbility(ability, KickedCondition.instance, "When {this} enters the battlefield, if it was kicked, creatures you control get +1/+0 and gain haste until end of turn."));
+        ability.addEffect(new GainAbilityControlledEffect(
+                HasteAbility.getInstance(), 
+                Duration.EndOfTurn,
+                StaticFilters.FILTER_CONTROLLED_CREATURES
+        ));
+        this.addAbility(new ConditionalTriggeredAbility(
+                ability,
+                KickedCondition.instance,
+                "When {this} enters the battlefield, "
+                + "if it was kicked, "
+                + "creatures you control get +1/+0 and gain haste until end of turn."
+        ));
     }
 
     public GoblinBushwhacker(final GoblinBushwhacker card) {

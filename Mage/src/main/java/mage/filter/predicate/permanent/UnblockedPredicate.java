@@ -35,8 +35,7 @@ import mage.game.permanent.Permanent;
 import mage.game.turn.Step;
 
 /**
- * Checks if an attacking creature is unblocked after the
- * declare blockers step.
+ * Checks if an attacking creature is unblocked after the declare blockers step.
  *
  * @author LevelX2
  */
@@ -52,7 +51,7 @@ public class UnblockedPredicate implements Predicate<Permanent> {
                     || game.getPhase().getStep().getType() == PhaseStep.END_COMBAT) {
                 CombatGroup combatGroup = game.getCombat().findGroup(input.getId());
                 if (combatGroup != null) {
-                    return combatGroup.getBlockers().isEmpty();
+                    return !combatGroup.getBlocked();
                 }
             }
         }

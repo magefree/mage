@@ -25,14 +25,10 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.g;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
 import java.util.UUID;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
@@ -86,35 +82,21 @@ class GenesisWaveEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
-        if (controller == null || sourceObject == null) {
+        if (controller == null) {
             return false;
         }
-        Cards cards = new CardsImpl();
         int xValue = source.getManaCostsToPay().getX();
-        int numberCards = Math.min(controller.getLibrary().size(), xValue);
-        for (int i = 0; i < numberCards; i++) {
-            Card card = controller.getLibrary().removeFromTop(game);
-            cards.add(card);
-        }
+        Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, xValue));
         if (!cards.isEmpty()) {
-            controller.revealCards(sourceObject.getIdName(), cards, game);
+            controller.revealCards(source, cards, game);
             FilterCard filter = new FilterPermanentCard("cards with converted mana cost " + xValue + " or less to put onto the battlefield");
             filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, xValue + 1));
-
             TargetCard target1 = new TargetCard(0, Integer.MAX_VALUE, Zone.LIBRARY, filter);
-            target1.setRequired(false);
-
+            target1.setNotTarget(true);
             controller.choose(Outcome.PutCardInPlay, cards, target1, game);
-            Set<Card> toBattlefield = new LinkedHashSet<>();
-            for (UUID cardId : target1.getTargets()) {
-                Card card = cards.get(cardId, game);
-                if (card != null) {
-                    cards.remove(card);
-                    toBattlefield.add(card);
-                }
-            }
-            controller.moveCards(toBattlefield, Zone.BATTLEFIELD, source, game, false, false, false, null);
+            Cards toBattlefield = new CardsImpl(target1.getTargets());
+            cards.removeAll(toBattlefield);
+            controller.moveCards(toBattlefield.getCards(game), Zone.BATTLEFIELD, source, game, false, false, false, null);
             controller.moveCards(cards, Zone.GRAVEYARD, source, game);
         }
         return true;

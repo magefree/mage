@@ -60,8 +60,8 @@ public class HeirloomBlade extends CardImpl {
 
         // Equipped creature gets +3/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(3, 1)));
-        
-        // Whenever equipped creature dies, you may reveal cards from the top of your library until you reveal a creature card that shares a creature type with it. 
+
+        // Whenever equipped creature dies, you may reveal cards from the top of your library until you reveal a creature card that shares a creature type with it.
         // Put that card into your hand and the rest on the bottom of your library in a random order.
         this.addAbility(new DiesAttachedTriggeredAbility(new HeirloomBladeEffect(), "equipped creature", true));
 
@@ -106,8 +106,7 @@ class HeirloomBladeEffect extends OneShotEffect {
             if (equipped != null) {
                 Cards revealed = new CardsImpl();
                 Cards otherCards = new CardsImpl();
-                while (controller.getLibrary().hasCards()) {
-                    Card card = controller.getLibrary().removeFromTop(game);
+                for (Card card : controller.getLibrary().getCards(game)) {
                     revealed.add(card);
                     if (card != null && card.isCreature() && equipped.shareSubtypes(card, game)) {
                         controller.moveCardToHandWithInfo(card, source.getSourceId(), game, true);

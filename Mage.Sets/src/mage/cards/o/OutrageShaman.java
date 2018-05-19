@@ -57,7 +57,7 @@ public class OutrageShaman extends CardImpl {
 
         // Chroma - When Outrage Shaman enters the battlefield, it deals damage to target creature equal to the number of red mana symbols in the mana costs of permanents you control.
         Effect effect = new DamageTargetEffect(new ChromaOutrageShamanCount());
-        effect.setText("<i>Chroma</i> - When Outrage Shaman enters the battlefield, it deals damage to target creature equal to the number of red mana symbols in the mana costs of permanents you control.");
+        effect.setText("<i>Chroma</i> &mdash; When Outrage Shaman enters the battlefield, it deals damage to target creature equal to the number of red mana symbols in the mana costs of permanents you control.");
         Ability ability = new EntersBattlefieldTriggeredAbility(effect, false, true);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

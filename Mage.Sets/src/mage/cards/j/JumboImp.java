@@ -67,7 +67,7 @@ public class JumboImp extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // As Jumbo Imp enters the battlefield, roll a six-sided die. Jumbo Imp enters the battlefield with a number of +1/+1 counters on it equal to the result.
-        this.addAbility(new EntersBattlefieldAbility(new JumboImpEffect(new Counter("P1P1"))));
+        this.addAbility(new EntersBattlefieldAbility(new JumboImpEffect(CounterType.P1P1.createInstance())));
 
         // At the beginning of your upkeep, roll a six-sided die and put a number of +1/+1 counters on Jumbo Imp equal to the result. 
         Ability ability2 = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new JumboImpAddCountersEffect(), TargetController.YOU, false);

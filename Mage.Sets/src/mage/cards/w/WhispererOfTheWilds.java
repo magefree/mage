@@ -33,7 +33,7 @@ import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.FerociousCondition;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.BasicManaEffect;
+import mage.abilities.effects.mana.BasicManaEffect;
 import mage.abilities.mana.ActivateIfConditionManaAbility;
 import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;

@@ -72,7 +72,7 @@ class AllianceOfArmsEffect extends OneShotEffect {
 
     public AllianceOfArmsEffect() {
         super(Outcome.Detriment);
-        this.staticText = "<i>Join forces</i> - Starting with you, each player may pay any amount of mana. Each player creates X 1/1 white Soldier creature tokens, where X is the total amount of mana paid this way";
+        this.staticText = "<i>Join forces</i> &mdash; Starting with you, each player may pay any amount of mana. Each player creates X 1/1 white Soldier creature tokens, where X is the total amount of mana paid this way";
     }
 
     public AllianceOfArmsEffect(final AllianceOfArmsEffect effect) {

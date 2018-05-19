@@ -120,9 +120,9 @@ class OmenMachineEffect2 extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
         if (player != null) {
-            Card card = player.getLibrary().removeFromTop(game);
+            Card card = player.getLibrary().getFromTop(game);
             if (card != null) {
-                player.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.LIBRARY, true);
+                player.moveCards(card, Zone.EXILED, source, game);
                 if (card.isLand()) {
                     player.moveCards(card, Zone.BATTLEFIELD, source, game);
                 } else {

@@ -48,7 +48,7 @@ import mage.target.TargetCard;
 public class Browse extends CardImpl {
 
     public Browse(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{U}");
 
         // {2}{U}{U}: Look at the top five cards of your library, put one of them into your hand, and exile the rest.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BrowseEffect(), new ManaCostsImpl("{2}{U}{U}"));
@@ -83,33 +83,20 @@ class BrowseEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-
-        if (player != null) {
-            Cards cards = new CardsImpl();
-            int cardsCount = Math.min(5, player.getLibrary().size());
-            for (int i = 0; i < cardsCount; i++) {
-                Card card = player.getLibrary().removeFromTop(game);
-                if (card != null) {
-                    cards.add(card);
-                }
-            }
-
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, 5));
             if (!cards.isEmpty()) {
-                player.lookAtCards("Browse", cards, game);
-
+                controller.lookAtCards(source, null, cards, game);
                 TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to put in your hand"));
-                if (player.choose(Outcome.Benefit, cards, target, game)) {
+                if (controller.choose(Outcome.Benefit, cards, target, game)) {
                     Card card = cards.get(target.getFirstTarget(), game);
                     if (card != null) {
-                        card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
+                        controller.moveCards(card, Zone.HAND, source, game);
                         cards.remove(card);
                     }
                 }
-
-                for (Card card : cards.getCards(game)) {
-                    card.moveToExile(null, null, source.getSourceId(), game);
-                }
+                controller.moveCards(cards, Zone.EXILED, source, game);
             }
             return true;
         }

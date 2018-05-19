@@ -33,8 +33,7 @@ import mage.abilities.mana.conditional.ConditionalSpellManaBuilder;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.MulticoloredPredicate;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -42,17 +41,11 @@ import mage.filter.predicate.mageobject.MulticoloredPredicate;
  */
 public class PillarOfTheParuns extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("a multicolored spell");
-
-    static {
-        filter.add(new MulticoloredPredicate());
-    }
-
     public PillarOfTheParuns(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
         // {T}: Add one mana of any color. Spend this mana only to cast a multicolored spell.
-        this.addAbility(new ConditionalAnyColorManaAbility(1, new ConditionalSpellManaBuilder(filter)));
+        this.addAbility(new ConditionalAnyColorManaAbility(1, new ConditionalSpellManaBuilder(StaticFilters.FILTER_SPELL_A_MULTICOLORED)));
     }
 
     public PillarOfTheParuns(final PillarOfTheParuns card) {

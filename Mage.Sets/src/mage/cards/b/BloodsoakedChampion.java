@@ -58,7 +58,7 @@ public class BloodsoakedChampion extends CardImpl {
         // Bloodstained Brave can't block.
         this.addAbility(new CantBlockAbility());
 
-        // <i>Raid</i> - {1}{B}: Return Bloodstained Brave from your graveyard to the battlefield. Activate this ability only if you attacked with a creature this turn.
+        // <i>Raid</i> &mdash; {1}{B}: Return Bloodstained Brave from your graveyard to the battlefield. Activate this ability only if you attacked with a creature this turn.
         Ability ability = new ConditionalActivatedAbility(
                 Zone.GRAVEYARD,
                 new ReturnSourceFromGraveyardToBattlefieldEffect(),

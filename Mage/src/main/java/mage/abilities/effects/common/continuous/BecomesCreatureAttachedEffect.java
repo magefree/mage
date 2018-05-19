@@ -40,7 +40,7 @@ import mage.game.permanent.token.Token;
 public class BecomesCreatureAttachedEffect extends ContinuousEffectImpl {
 
     public enum LoseType {
-        NONE, ALL, ALL_BUT_COLOR, ABILITIES, ABILITIES_SUBTYPE_AND_PT, ABILITIES_AND_PT
+        NONE, ALL, ALL_BUT_COLOR, ABILITIES, ABILITIES_SUBTYPE, COLOR
     }
 
     protected Token token;
@@ -98,7 +98,7 @@ public class BecomesCreatureAttachedEffect extends ContinuousEffectImpl {
                             switch (loseType) {
                                 case ALL:
                                 case ALL_BUT_COLOR:
-                                case ABILITIES_SUBTYPE_AND_PT:
+                                case ABILITIES_SUBTYPE:
                                     permanent.getSubtype(game).retainAll(SubType.getLandTypes(false));
                                     break;
                             }
@@ -107,12 +107,12 @@ public class BecomesCreatureAttachedEffect extends ContinuousEffectImpl {
                                     permanent.getSubtype(game).add(t);
                                 }
                             }
-
                         }
                         break;
+
                     case ColorChangingEffects_5:
                         if (sublayer == SubLayer.NA) {
-                            if (loseType == LoseType.ALL) {
+                            if (loseType == LoseType.ALL || loseType == LoseType.COLOR) {
                                 permanent.getColor(game).setBlack(false);
                                 permanent.getColor(game).setGreen(false);
                                 permanent.getColor(game).setBlue(false);
@@ -124,29 +124,29 @@ public class BecomesCreatureAttachedEffect extends ContinuousEffectImpl {
                             }
                         }
                         break;
+
                     case AbilityAddingRemovingEffects_6:
                         if (sublayer == SubLayer.NA) {
                             switch (loseType) {
                                 case ALL:
                                 case ALL_BUT_COLOR:
                                 case ABILITIES:
-                                case ABILITIES_AND_PT:
-                                case ABILITIES_SUBTYPE_AND_PT:
+                                case ABILITIES_SUBTYPE:
                                     permanent.removeAllAbilities(source.getSourceId(), game);
                                     break;
                             }
                             for (Ability ability : token.getAbilities()) {
                                 permanent.addAbility(ability, source.getSourceId(), game);
                             }
-
                         }
                         break;
+
                     case PTChangingEffects_7:
                         if (sublayer == SubLayer.SetPT_7b) {
                             permanent.getPower().setValue(token.getPower().getValue());
                             permanent.getToughness().setValue(token.getToughness().getValue());
-                            break;
                         }
+                        break;
                 }
             }
             return true;

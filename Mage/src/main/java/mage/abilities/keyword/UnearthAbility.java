@@ -35,7 +35,6 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.ExileSourceEffect;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
-import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.TimingRule;
@@ -63,9 +62,8 @@ import mage.game.events.ZoneChangeEvent;
 public class UnearthAbility extends ActivatedAbilityImpl {
 
     public UnearthAbility(ManaCosts costs) {
-        super(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(), costs);
+        super(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(false, true, true), costs);
         this.timing = TimingRule.SORCERY;
-        this.addEffect(new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.Custom));
         this.addEffect(new CreateDelayedTriggeredAbilityEffect(new UnearthDelayedTriggeredAbility()));
         this.addEffect(new UnearthLeavesBattlefieldEffect());
     }

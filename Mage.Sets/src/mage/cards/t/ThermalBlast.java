@@ -52,7 +52,7 @@ public class ThermalBlast extends CardImpl {
         Effect effect = new ConditionalOneShotEffect(new DamageTargetEffect(5), 
                                                      new DamageTargetEffect(3), 
                                                      new CardsInControllerGraveCondition(7),
-                                                     "{this} deals 3 damage to target creature.<br/><br/><i>Threshold</i> - {this} deals 5 damage to that creature instead if seven or more cards are in your graveyard.");
+                                                     "{this} deals 3 damage to target creature.<br/><br/><i>Threshold</i> &mdash; {this} deals 5 damage to that creature instead if seven or more cards are in your graveyard.");
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(effect);
     }

@@ -59,7 +59,7 @@ public class Demoralize extends CardImpl {
                 new ConditionalOneShotEffect(
                     new AddContinuousEffectToGame(new CantBlockAllEffect(StaticFilters.FILTER_PERMANENT_CREATURES, Duration.EndOfTurn)),
                     new CardsInControllerGraveCondition(7),
-                    "<br/><br/><i>Threshold</i> - If seven or more cards are in your graveyard, creatures can't block this turn"
+                    "<br/><br/><i>Threshold</i> &mdash; If seven or more cards are in your graveyard, creatures can't block this turn"
                 ));
     }
 

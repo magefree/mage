@@ -27,7 +27,9 @@
  */
 package mage.cards.o;
 
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
@@ -89,9 +91,15 @@ public class OrcishLumberjack extends CardImpl {
 
 class OrcishLumberjackManaEffect extends ManaEffect {
 
+    private List<Mana> netMana = new ArrayList<Mana>();
+
     public OrcishLumberjackManaEffect() {
         super();
         this.staticText = "Add three mana in any combination of {R} and/or {G}";
+        netMana.add(new Mana(0, 3, 0, 0, 0, 0, 0, 0));
+        netMana.add(new Mana(1, 2, 0, 0, 0, 0, 0, 0));
+        netMana.add(new Mana(2, 1, 0, 0, 0, 0, 0, 0));
+        netMana.add(new Mana(3, 0, 0, 0, 0, 0, 0, 0));
     }
 
     public OrcishLumberjackManaEffect(final OrcishLumberjackManaEffect effect) {
@@ -105,6 +113,22 @@ class OrcishLumberjackManaEffect extends ManaEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            checkToFirePossibleEvents(getMana(game, source), game, source);
+            controller.getManaPool().addMana(getMana(game, source), game, source);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public List<Mana> getNetMana(Game game, Ability source) {
+        return netMana;
+    }
+
+    @Override
+    public Mana produceMana(boolean netMana, Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             Choice manaChoice = new ChoiceImpl();
@@ -117,7 +141,7 @@ class OrcishLumberjackManaEffect extends ManaEffect {
             Mana mana = new Mana();
             for (int i = 0; i < 3; i++) {
                 if (!player.choose(Outcome.Benefit, manaChoice, game)) {
-                    return false;
+                    return null;
                 }
                 switch (manaChoice.getChoice()) {
                     case "Green":
@@ -127,17 +151,9 @@ class OrcishLumberjackManaEffect extends ManaEffect {
                         mana.increaseRed();
                         break;
                 }
-
             }
-            checkToFirePossibleEvents(mana, game, source);
-            player.getManaPool().addMana(mana, game, source);
-            return true;
+            return mana;
         }
-        return false;
-    }
-
-    @Override
-    public Mana getMana(Game game, Ability source) {
         return null;
     }
 

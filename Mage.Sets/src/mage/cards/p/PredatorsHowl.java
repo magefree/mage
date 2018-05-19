@@ -52,7 +52,7 @@ public class PredatorsHowl extends CardImpl {
                 new CreateTokenEffect(new WolfToken(), 3),
                 new CreateTokenEffect(new WolfToken(), 1),
                 MorbidCondition.instance,
-                "Create a 2/2 green Wolf creature token. <br/><br/><i>Morbid</i> - Create three 2/2 green Wolf creature tokens instead if a creature died this turn.");
+                "Create a 2/2 green Wolf creature token. <br/><br/><i>Morbid</i> &mdash; Create three 2/2 green Wolf creature tokens instead if a creature died this turn.");
         this.getSpellAbility().addEffect(effect);
     }
 

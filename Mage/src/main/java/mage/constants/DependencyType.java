@@ -39,7 +39,6 @@ package mage.constants;
  * @author LevelX2
  */
 public enum DependencyType {
-
     AuraAddingRemoving,
     ArtifactAddingRemoving,
     AddingAbility,
@@ -48,6 +47,7 @@ public enum DependencyType {
     BecomeMountain,
     BecomePlains,
     BecomeSwamp,
+    BecomeCreature,
     EnchantmentAddingRemoving,
     LooseDefenderEffect
 }

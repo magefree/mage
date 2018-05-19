@@ -29,22 +29,16 @@ package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.abilities.keyword.EchoAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.TargetCard;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -53,7 +47,7 @@ import mage.target.TargetCard;
 public class RavenFamiliar extends CardImpl {
 
     public RavenFamiliar(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
         this.subtype.add(SubType.BIRD);
 
         this.power = new MageInt(1);
@@ -65,7 +59,7 @@ public class RavenFamiliar extends CardImpl {
         this.addAbility(new EchoAbility("{2}{U}"));
         // When Raven Familiar enters the battlefield, look at the top three cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new LookLibraryAndPickControllerEffect(new StaticValue(3), false, new StaticValue(1), new FilterCard(), Zone.LIBRARY, false, false),
+                new LookLibraryAndPickControllerEffect(new StaticValue(3), false, new StaticValue(1), StaticFilters.FILTER_CARD, Zone.LIBRARY, false, false),
                 false));
     }
 
@@ -76,48 +70,5 @@ public class RavenFamiliar extends CardImpl {
     @Override
     public RavenFamiliar copy() {
         return new RavenFamiliar(this);
-    }
-    
-    
-    static class RavenFamiliarEffect extends OneShotEffect {
-
-        public RavenFamiliarEffect() {
-            super(Outcome.DrawCard);
-            this.staticText = "look at the top three cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order";
-        }
-
-        public RavenFamiliarEffect(final RavenFamiliarEffect effect) {
-            super(effect);
-        }
-
-        @Override
-        public RavenFamiliarEffect copy() {
-            return new RavenFamiliarEffect(this);
-        }
-
-        @Override
-        public boolean apply(Game game, Ability source) {
-            Player player = game.getPlayer(source.getControllerId());
-            Cards cards = new CardsImpl();
-            int count = Math.min(player.getLibrary().size(), 3);
-            for (int i = 0; i < count; i++) {
-                Card card = player.getLibrary().removeFromTop(game);
-                if (card != null) {
-                    cards.add(card);
-                }
-            }
-            player.lookAtCards("Raven Familiar", cards, game);
-
-            TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to put into your hand"));
-            if (player.choose(Outcome.DrawCard, cards, target, game)) {
-                Card card = cards.get(target.getFirstTarget(), game);
-                if (card != null) {
-                    cards.remove(card);
-                    card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
-                }
-            }
-            player.putCardsOnBottomOfLibrary(cards, game, source, true);
-            return true;
-        }
     }
 }

@@ -64,7 +64,9 @@ public class SaprolingToken extends TokenImpl {
                 "CMA",
                 "VMA", // 2 different token, one with DIFFERENT stats, "Saproling Burst" create different token, see https://scryfall.com/card/tvma/12
                 "E02",
-                "RIX"));
+                "RIX",
+                "DOM" // 3 different token images
+        ));
     }
 
     public SaprolingToken() {
@@ -81,6 +83,9 @@ public class SaprolingToken extends TokenImpl {
         setOriginalExpansionSetCode(setCode);
         if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("C16")) {
             this.setTokenType(RandomUtil.nextInt(2) + 1);
+        }
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("DOM")) {
+            this.setTokenType(RandomUtil.nextInt(3) + 1);
         }
         cardType.add(CardType.CREATURE);
         color.setGreen(true);

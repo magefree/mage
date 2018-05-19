@@ -27,11 +27,7 @@
  */
 package mage.cards.j;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.HashSet;
 import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
@@ -51,13 +47,13 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
+import mage.game.ExileZone;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
@@ -67,7 +63,7 @@ import mage.players.Player;
 public class JeskaiInfiltrator extends CardImpl {
 
     public JeskaiInfiltrator(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.MONK);
         this.power = new MageInt(2);
@@ -112,23 +108,21 @@ class JeskaiInfiltratorEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            List<Card> cardsToManifest = new ArrayList<>(2);
-            Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-            Card sourceCard = game.getCard(source.getSourceId());
-            if (sourcePermanent != null && sourceCard != null) {
-                controller.moveCardToExileWithInfo(sourcePermanent, sourcePermanent.getId(), sourcePermanent.getIdName(), source.getSourceId(), game, Zone.BATTLEFIELD, true);
-                cardsToManifest.add(sourceCard);
+            HashSet<Card> cardsToManifest = new HashSet<>();
+            cardsToManifest.add(source.getSourcePermanentIfItStillExists(game));
+            cardsToManifest.add(controller.getLibrary().getFromTop(game));
+            UUID exileId = UUID.randomUUID();
+            controller.moveCardsToExile(cardsToManifest, source, game, false, exileId, "");
+            ExileZone exileZone = game.getExile().getExileZone(exileId);
+            for (Card card : exileZone.getCards(game)) {
+                card.setFaceDown(true, game);
             }
-            if (sourcePermanent != null && controller.getLibrary().hasCards()) {
-                Card cardFromLibrary = controller.getLibrary().removeFromTop(game);
-                controller.moveCardToExileWithInfo(cardFromLibrary, sourcePermanent.getId(), sourcePermanent.getIdName(), source.getSourceId(), game, Zone.LIBRARY, true);
-                cardsToManifest.add(cardFromLibrary);
-            }
-            Collections.shuffle(cardsToManifest);
             game.fireUpdatePlayersEvent(); // removes Jeskai from Battlefield, so he returns as a fresh permanent to the battlefield with new position
+
             Ability newSource = source.copy();
             newSource.setWorksFaceDown(true);
-            for (Card card : cardsToManifest) {
+            while (!exileZone.isEmpty()) {
+                Card card = exileZone.getRandom(game);
                 ManaCosts manaCosts = null;
                 if (card.isCreature()) {
                     manaCosts = card.getSpellAbility().getManaCosts();
@@ -139,9 +133,7 @@ class JeskaiInfiltratorEffect extends OneShotEffect {
                 MageObjectReference objectReference = new MageObjectReference(card.getId(), card.getZoneChangeCounter(game) + 1, game);
                 game.addEffect(new BecomesFaceDownCreatureEffect(manaCosts, objectReference, Duration.Custom, FaceDownType.MANIFESTED), newSource);
             }
-            Set<Card> toBattlefield = new LinkedHashSet();
-            toBattlefield.addAll(cardsToManifest);
-            controller.moveCards(toBattlefield, Zone.BATTLEFIELD, source, game, false, true, false, null);
+            controller.moveCards(exileZone.getCards(game), Zone.BATTLEFIELD, source, game, false, true, false, null);
             return true;
         }
         return false;

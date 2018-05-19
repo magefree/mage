@@ -44,11 +44,9 @@ import mage.choices.Choice;
 import mage.choices.ChoiceColor;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
-import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -81,12 +79,6 @@ public class SquanderedResources extends CardImpl {
 
 class SquanderedResourcesEffect extends ManaEffect {
 
-    private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
-
-    static {
-        filter.add(new SupertypePredicate(SuperType.BASIC));
-    }
-
     public SquanderedResourcesEffect() {
         super();
         staticText = "Add one mana of any type the sacrificed land could produce";
@@ -98,7 +90,17 @@ class SquanderedResourcesEffect extends ManaEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            checkToFirePossibleEvents(getMana(game, source), game, source);
+            controller.getManaPool().addMana(getMana(game, source), game, source);
+            return true;
+        }
+        return false;
+    }
 
+    @Override
+    public Mana produceMana(boolean netMana, Game game, Ability source) {
         Mana types = getManaTypes(game, source);
         Choice choice = new ChoiceColor(true);
         choice.getChoices().clear();
@@ -129,16 +131,16 @@ class SquanderedResourcesEffect extends ManaEffect {
             choice.getChoices().add("White");
             choice.getChoices().add("Colorless");
         }
+        Mana mana = new Mana();
         if (!choice.getChoices().isEmpty()) {
             Player player = game.getPlayer(source.getControllerId());
             if (choice.getChoices().size() == 1) {
                 choice.setChoice(choice.getChoices().iterator().next());
             } else {
                 if (!player.choose(outcome, choice, game)) {
-                    return false;
+                    return null;
                 }
             }
-            Mana mana = new Mana();
             switch (choice.getChoice()) {
                 case "Black":
                     mana.setBlack(1);
@@ -159,13 +161,12 @@ class SquanderedResourcesEffect extends ManaEffect {
                     mana.setColorless(1);
                     break;
             }
-            checkToFirePossibleEvents(mana, game, source);
-            player.getManaPool().addMana(mana, game, source);
 
         }
-        return true;
+        return mana;
     }
 
+    @Override
     public List<Mana> getNetMana(Game game, Ability source) {
         List<Mana> netManas = new ArrayList<>();
         Mana types = getManaTypes(game, source);
@@ -209,11 +210,6 @@ class SquanderedResourcesEffect extends ManaEffect {
             }
         }
         return types;
-    }
-
-    @Override
-    public Mana getMana(Game game, Ability source) {
-        return null;
     }
 
     @Override

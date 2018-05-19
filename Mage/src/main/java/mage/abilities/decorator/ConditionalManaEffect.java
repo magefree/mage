@@ -30,8 +30,8 @@ package mage.abilities.decorator;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
-import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.effects.mana.BasicManaEffect;
 import mage.choices.ChoiceColor;
 import mage.game.Game;
 import mage.players.Player;
@@ -73,31 +73,7 @@ public class ConditionalManaEffect extends ManaEffect {
         if (controller == null) {
             return false;
         }
-        if (condition.apply(game, source)) {
-            effect.setTargetPointer(this.targetPointer);
-        } else if (otherwiseEffect != null) {
-            otherwiseEffect.setTargetPointer(this.targetPointer);
-        }
-        Mana mana = getMana(game, source);
-        if (mana == null) {
-            return false;
-        }
-        if (mana.getAny() > 0) {
-            int amount = mana.getAny();
-
-            ChoiceColor choice = new ChoiceColor(true);
-            Mana createdMana = null;
-            if (controller.choose(outcome, choice, game)) {
-                createdMana = choice.getMana(amount);
-            }
-            if (createdMana == null) {
-                return false;
-            }
-            mana = createdMana;
-            // because the mana type is now choosen, fire the event with the mana information
-            checkToFirePossibleEvents(mana, game, source);
-        }
-        controller.getManaPool().addMana(mana, game, source);
+        controller.getManaPool().addMana(getMana(game, source), game, source);
         return true;
     }
 
@@ -107,12 +83,25 @@ public class ConditionalManaEffect extends ManaEffect {
     }
 
     @Override
-    public Mana getMana(Game game, Ability source) {
-        Mana mana = null;
+    public Mana produceMana(boolean netMana, Game game, Ability source) {
+        Mana mana = new Mana();
         if (condition.apply(game, source)) {
-            mana = effect.getMana();
+            mana = effect.getManaTemplate().copy();
         } else if (otherwiseEffect != null) {
-            mana = otherwiseEffect.getMana();
+            mana = otherwiseEffect.getManaTemplate().copy();
+        }
+        if (mana.getAny() > 0) {
+            int amount = mana.getAny();
+            Player controller = game.getPlayer(source.getControllerId());
+            if (controller == null) {
+                return mana;
+            }
+            ChoiceColor choice = new ChoiceColor(true);
+            if (controller.choose(outcome, choice, game)) {
+                mana.setAny(0);
+                mana.add(choice.getMana(amount));
+            }
+            checkToFirePossibleEvents(mana, game, source);
         }
         return mana;
     }

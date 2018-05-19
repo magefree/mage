@@ -40,6 +40,7 @@ import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
+import mage.game.permanent.token.custom.CreatureToken;
 
 /**
  *
@@ -52,7 +53,9 @@ public class LivingPlane extends CardImpl {
         this.addSuperType(SuperType.WORLD);
 
         // All lands are 1/1 creatures that are still lands.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesCreatureAllEffect(new LivingPlaneToken(), "lands", StaticFilters.FILTER_LANDS, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesCreatureAllEffect(
+                new CreatureToken(1, 1),
+                "lands", StaticFilters.FILTER_LANDS, Duration.WhileOnBattlefield, false)));
     }
 
     public LivingPlane(final LivingPlane card) {
@@ -62,22 +65,5 @@ public class LivingPlane extends CardImpl {
     @Override
     public LivingPlane copy() {
         return new LivingPlane(this);
-    }
-}
-
-class LivingPlaneToken extends TokenImpl {
-
-    public LivingPlaneToken() {
-        super("Land", "1/1 creatures");
-        cardType.add(CardType.CREATURE);
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-    }
-    public LivingPlaneToken(final LivingPlaneToken token) {
-        super(token);
-    }
-
-    public LivingPlaneToken copy() {
-        return new LivingPlaneToken(this);
     }
 }

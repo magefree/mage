@@ -47,6 +47,7 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
+import mage.game.permanent.token.custom.CreatureToken;
 
 /**
  *
@@ -68,9 +69,11 @@ public class NaturalEmergence extends CardImpl {
         Effect effect = new ReturnToHandChosenControlledPermanentEffect(filter);
         effect.setText("return a red or green enchantment you control to its owner's hand");
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect, false));
+
         // Lands you control are 2/2 creatures with first strike. They're still lands.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesCreatureAllEffect(new NaturalEmergenceToken(),
-                "lands", new FilterControlledLandPermanent("lands you control"), Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesCreatureAllEffect(
+                new CreatureToken(2, 2, "2/2 creatures with first strike").withAbility(FirstStrikeAbility.getInstance()),
+                "lands", new FilterControlledLandPermanent("lands you control"), Duration.WhileOnBattlefield, false)));
     }
 
     public NaturalEmergence(final NaturalEmergence card) {
@@ -80,23 +83,5 @@ public class NaturalEmergence extends CardImpl {
     @Override
     public NaturalEmergence copy() {
         return new NaturalEmergence(this);
-    }
-}
-
-class NaturalEmergenceToken extends TokenImpl {
-
-    public NaturalEmergenceToken() {
-        super("Land", "2/2 creatures with first strike");
-        cardType.add(CardType.CREATURE);
-        power = new MageInt(2);
-        toughness = new MageInt(2);
-        this.addAbility(FirstStrikeAbility.getInstance());
-    }
-    public NaturalEmergenceToken(final NaturalEmergenceToken token) {
-        super(token);
-    }
-
-    public NaturalEmergenceToken copy() {
-        return new NaturalEmergenceToken(this);
     }
 }

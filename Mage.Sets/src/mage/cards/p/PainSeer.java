@@ -58,7 +58,7 @@ public class PainSeer extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // <i>Inspired</i> - Whenever Pain Seer becomes untapped, reveal the top card of your library and put that card into your hand. You lose life equal to that card's converted mana cost.
+        // <i>Inspired</i> &mdash; Whenever Pain Seer becomes untapped, reveal the top card of your library and put that card into your hand. You lose life equal to that card's converted mana cost.
         this.addAbility(new InspiredAbility(new PainSeerEffect()));
     }
 

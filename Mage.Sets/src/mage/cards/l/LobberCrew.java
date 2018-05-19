@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.l;
 
 import java.util.UUID;
@@ -42,8 +41,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.MulticoloredPredicate;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -51,14 +49,8 @@ import mage.filter.predicate.mageobject.MulticoloredPredicate;
  */
 public class LobberCrew extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("a multicolored spell");
-
-    static {
-        filter.add(new MulticoloredPredicate());
-    }
-
-    public LobberCrew (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
+    public LobberCrew(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
         this.subtype.add(SubType.GOBLIN);
         this.subtype.add(SubType.WARRIOR);
 
@@ -70,10 +62,11 @@ public class LobberCrew extends CardImpl {
         // {T}: Lobber Crew deals 1 damage to each opponent.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamagePlayersEffect(1, TargetController.OPPONENT), new TapSourceCost()));
         // Whenever you cast a multicolored spell, untap Lobber Crew.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new UntapSourceEffect(), filter, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(
+                new UntapSourceEffect(), StaticFilters.FILTER_SPELL_A_MULTICOLORED, false));
     }
 
-    public LobberCrew (final LobberCrew card) {
+    public LobberCrew(final LobberCrew card) {
         super(card);
     }
 

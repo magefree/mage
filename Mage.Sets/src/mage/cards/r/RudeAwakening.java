@@ -40,6 +40,7 @@ import mage.constants.Duration;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
+import mage.game.permanent.token.custom.CreatureToken;
 
 /**
  *
@@ -57,7 +58,9 @@ public class RudeAwakening extends CardImpl {
         this.getSpellAbility().addEffect(new UntapAllLandsControllerEffect());
         // or until end of turn, lands you control become 2/2 creatures that are still lands.
         Mode mode = new Mode();
-        mode.getEffects().add(new BecomesCreatureAllEffect(new RudeAwakeningToken(), "lands", new FilterControlledLandPermanent("lands you control"), Duration.EndOfTurn));
+        mode.getEffects().add(new BecomesCreatureAllEffect(
+                new CreatureToken(2, 2),
+                "lands", new FilterControlledLandPermanent("lands you control"), Duration.EndOfTurn, false));
         this.getSpellAbility().getModes().addMode(mode);
 
         // Entwine {2}{G}
@@ -72,22 +75,4 @@ public class RudeAwakening extends CardImpl {
     public RudeAwakening copy() {
         return new RudeAwakening(this);
     }
-}
-
-class RudeAwakeningToken extends TokenImpl {
-
-    public RudeAwakeningToken() {
-        super("", "2/2 creatures");
-        cardType.add(CardType.CREATURE);
-        power = new MageInt(2);
-        toughness = new MageInt(2);
-    }
-    public RudeAwakeningToken(final RudeAwakeningToken token) {
-        super(token);
-    }
-
-    public RudeAwakeningToken copy() {
-        return new RudeAwakeningToken(this);
-    }
-
 }

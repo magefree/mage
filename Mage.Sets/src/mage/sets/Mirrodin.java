@@ -92,6 +92,7 @@ public class Mirrodin extends ExpansionSet {
         cards.add(new SetCardInfo("Fiery Gambit", 90, Rarity.RARE, mage.cards.f.FieryGambit.class));
         cards.add(new SetCardInfo("Fireshrieker", 171, Rarity.UNCOMMON, mage.cards.f.Fireshrieker.class));
         cards.add(new SetCardInfo("Fists of the Anvil", 91, Rarity.COMMON, mage.cards.f.FistsOfTheAnvil.class));
+        cards.add(new SetCardInfo("Flayed Nim", 65, Rarity.UNCOMMON, mage.cards.f.FlayedNim.class));
         cards.add(new SetCardInfo("Forest", 303, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 304, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 305, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
@@ -115,6 +116,7 @@ public class Mirrodin extends ExpansionSet {
         cards.add(new SetCardInfo("Granite Shard", 182, Rarity.UNCOMMON, mage.cards.g.GraniteShard.class));
         cards.add(new SetCardInfo("Great Furnace", 282, Rarity.COMMON, mage.cards.g.GreatFurnace.class));
         cards.add(new SetCardInfo("Grid Monitor", 183, Rarity.RARE, mage.cards.g.GridMonitor.class));
+        cards.add(new SetCardInfo("Grim Reminder", 66, Rarity.RARE, mage.cards.g.GrimReminder.class));
         cards.add(new SetCardInfo("Groffskithur", 121, Rarity.COMMON, mage.cards.g.Groffskithur.class));
         cards.add(new SetCardInfo("Heartwood Shard", 184, Rarity.UNCOMMON, mage.cards.h.HeartwoodShard.class));
         cards.add(new SetCardInfo("Hematite Golem", 185, Rarity.COMMON, mage.cards.h.HematiteGolem.class));

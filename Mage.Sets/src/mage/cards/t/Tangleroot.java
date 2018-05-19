@@ -30,7 +30,7 @@ package mage.cards.t;
 import java.util.UUID;
 import mage.Mana;
 import mage.abilities.common.SpellCastAllTriggeredAbility;
-import mage.abilities.effects.common.AddManaToManaPoolTargetControllerEffect;
+import mage.abilities.effects.mana.AddManaToManaPoolTargetControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;

@@ -30,12 +30,10 @@ package mage.cards.o;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -48,8 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class Oust extends CardImpl {
 
     public Oust(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{W}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{W}");
 
         // Put target creature into its owner's library second from the top. Its controller gains 3 life.
         this.getSpellAbility().addEffect(new OustEffect());
@@ -84,27 +81,16 @@ class OustEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getFirstTarget());
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (permanent != null) {
             Player owner = game.getPlayer(permanent.getOwnerId());
             Player controller = game.getPlayer(permanent.getControllerId());
             if (owner == null || controller == null) {
                 return false;
             }
-
-            Card card = null;
-            if (owner.getLibrary().hasCards()) {
-                card = owner.getLibrary().removeFromTop(game);
-            }
-
-            permanent.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-            if (card != null) {
-                owner.getLibrary().putOnTop(card, game);
-            }
+            owner.getLibrary().putCardToTopXPos(permanent, 2, game);
             controller.gainLife(3, game, source);
-
-            return true;
         }
-        return false;
+        return true;
     }
 }

@@ -36,14 +36,15 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
+import mage.util.CardUtil;
 
 /**
  * @author nantuko
@@ -51,7 +52,7 @@ import mage.target.TargetCard;
 public class CloneShell extends CardImpl {
 
     public CloneShell(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{5}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");
         this.subtype.add(SubType.SHAPESHIFTER);
 
         this.power = new MageInt(2);
@@ -90,48 +91,28 @@ class CloneShellEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        Cards cards = new CardsImpl();
-        int count = Math.min(player.getLibrary().size(), 4);
-        for (int i = 0; i < count; i++) {
-            Card card = player.getLibrary().removeFromTop(game);
-            cards.add(card);
-        }
-
-        if (cards.isEmpty()) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
             return false;
-
         }
-        TargetCard target1 = new TargetCard(Zone.LIBRARY, filter1);
-        if (player.choose(Outcome.Detriment, cards, target1, game)) {
-            Card card = cards.get(target1.getFirstTarget(), game);
-            if (card != null) {
-                cards.remove(card);
-                card.moveToExile(getId(), "Clone Shell (Imprint)", source.getSourceId(), game);
-                card.setFaceDown(true, game);
-                Permanent permanent = game.getPermanent(source.getSourceId());
-                if (permanent != null) {
-                    permanent.imprint(card.getId(), game);
-                }
-            }
-            target1.clearChosen();
-        }
-
+        Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, 4));
         if (!cards.isEmpty()) {
-            TargetCard target2 = new TargetCard(Zone.LIBRARY, filter2);
-            while (player.canRespond() && cards.size() > 1) {
-                player.choose(Outcome.Benefit, cards, target2, game);
-                Card card = cards.get(target2.getFirstTarget(), game);
+            TargetCard target1 = new TargetCard(Zone.LIBRARY, filter1);
+            if (controller.choose(Outcome.Detriment, cards, target1, game)) {
+                Card card = cards.get(target1.getFirstTarget(), game);
                 if (card != null) {
                     cards.remove(card);
-                    card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
+                    controller.moveCardsToExile(card, source, game, false, CardUtil.getCardExileZoneId(game, source), CardUtil.createObjectRealtedWindowTitle(source, game, "(Imprint)"));
+                    card.setFaceDown(true, game);
+                    Permanent permanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
+                    if (permanent != null) {
+                        permanent.imprint(card.getId(), game);
+                    }
                 }
-                target2.clearChosen();
+                target1.clearChosen();
             }
-            Card card = cards.get(cards.iterator().next(), game);
-            card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
+            controller.putCardsOnBottomOfLibrary(cards, game, source, true);
         }
-
         return true;
     }
 

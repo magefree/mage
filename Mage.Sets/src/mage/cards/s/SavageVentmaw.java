@@ -49,7 +49,7 @@ import mage.players.Player;
 public class SavageVentmaw extends CardImpl {
 
     public SavageVentmaw(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{G}");
         this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
@@ -75,15 +75,15 @@ public class SavageVentmaw extends CardImpl {
 }
 
 class SavageVentmawManaEffect extends ManaEffect {
-    
+
     protected Mana mana;
     protected boolean emptyOnlyOnTurnsEnd;
-    
+
     public SavageVentmawManaEffect(Mana mana, String textManaPoolOwner, boolean emptyOnTurnsEnd) {
         super();
         this.mana = mana;
         this.emptyOnlyOnTurnsEnd = emptyOnTurnsEnd;
-        this.staticText = (textManaPoolOwner.equals("their")?"that player adds ":"add ") + mana.toString() + " to " + textManaPoolOwner + " mana pool";
+        this.staticText = (textManaPoolOwner.equals("their") ? "that player adds " : "add ") + mana.toString() + " to " + textManaPoolOwner + " mana pool";
     }
 
     public SavageVentmawManaEffect(final SavageVentmawManaEffect effect) {
@@ -101,15 +101,15 @@ class SavageVentmawManaEffect extends ManaEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            controller.getManaPool().addMana(mana, game, source, emptyOnlyOnTurnsEnd);
+            controller.getManaPool().addMana(getMana(game, source), game, source, emptyOnlyOnTurnsEnd);
             return true;
         }
         return false;
     }
 
     @Override
-    public Mana getMana(Game game, Ability source) {
-        return mana;
+    public Mana produceMana(boolean netMana, Game game, Ability source) {
+        return mana.copy();
     }
 
 }

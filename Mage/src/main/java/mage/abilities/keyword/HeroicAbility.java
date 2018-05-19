@@ -103,6 +103,6 @@ public class HeroicAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return new StringBuilder("<i>Heroic</i> - Whenever you cast a spell that targets {this}, ").append(super.getRule()).toString();
+        return new StringBuilder("<i>Heroic</i> &mdash; Whenever you cast a spell that targets {this}, ").append(super.getRule()).toString();
     }
 }

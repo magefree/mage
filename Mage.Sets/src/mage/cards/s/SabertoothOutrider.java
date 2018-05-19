@@ -57,7 +57,7 @@ public class SabertoothOutrider extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
 
-        // <i>Formidable</i> - Whenever Sabertooth Outrider attacks, if creatures you control have total power 8 or greater, Sabertooth Outrider gains first strike until end of turn.
+        // <i>Formidable</i> &mdash; Whenever Sabertooth Outrider attacks, if creatures you control have total power 8 or greater, Sabertooth Outrider gains first strike until end of turn.
         this.addAbility(new ConditionalTriggeredAbility(
                 new AttacksTriggeredAbility(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), false),
                 FormidableCondition.instance,

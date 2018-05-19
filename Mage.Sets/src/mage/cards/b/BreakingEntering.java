@@ -94,15 +94,15 @@ class EnteringReturnFromGraveyardToBattlefieldEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
             Target target = new TargetCardInGraveyard(new FilterCreatureCard());
             target.setNotTarget(true);
             if (target.canChoose(source.getSourceId(), source.getControllerId(), game)
-                    && player.chooseTarget(outcome, target, source, game)) {
+                    && controller.chooseTarget(outcome, target, source, game)) {
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {
-                    if (card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), source.getControllerId())) {
+                    if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
                         ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
                         effect.setTargetPointer(new FixedTarget(card.getId()));
                         game.addEffect(effect, source);

@@ -28,20 +28,13 @@
 package mage.cards.s;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
+import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.TargetCard;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -50,11 +43,11 @@ import mage.target.TargetCard;
 public class StrategicPlanning extends CardImpl {
 
     public StrategicPlanning(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{U}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{U}");
 
         // Look at the top three cards of your library. Put one of them into your hand and the rest into your graveyard.
-        this.getSpellAbility().addEffect(new StrategicPlanningEffect());
+        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(new StaticValue(3), false, new StaticValue(1),
+                StaticFilters.FILTER_CARD, Zone.GRAVEYARD, false, false, false, Zone.HAND, false));
     }
 
     public StrategicPlanning(final StrategicPlanning card) {
@@ -64,46 +57,5 @@ public class StrategicPlanning extends CardImpl {
     @Override
     public StrategicPlanning copy() {
         return new StrategicPlanning(this);
-    }
-}
-
-class StrategicPlanningEffect extends OneShotEffect {
-
-    public StrategicPlanningEffect() {
-        super(Outcome.DrawCard);
-        this.staticText = "Look at the top three cards of your library. Put one of them into your hand and the rest into your graveyard";
-    }
-
-    public StrategicPlanningEffect(final StrategicPlanningEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public StrategicPlanningEffect copy() {
-        return new StrategicPlanningEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-
-        if (controller != null) {
-            Cards cards = new CardsImpl();
-            cards.addAll(controller.getLibrary().getTopCards(game, 3));
-            if (!cards.isEmpty()) {
-                controller.lookAtCards("Strategic Planning", cards, game);
-                TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to put in your hand"));
-                if (controller.choose(Outcome.Benefit, cards, target, game)) {
-                    Card card = cards.get(target.getFirstTarget(), game);
-                    if (card != null) {
-                        controller.moveCards(card, Zone.HAND, source, game);
-                        cards.remove(card);
-                    }
-                }
-                controller.moveCards(cards, Zone.GRAVEYARD, source, game);
-            }
-            return true;
-        }
-        return false;
     }
 }

@@ -28,6 +28,7 @@
 package mage.cards.c;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
@@ -52,9 +53,9 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
+import mage.game.permanent.token.custom.CreatureToken;
 
 /**
- *
  * @author emerald000
  */
 public class ChronatogTotem extends CardImpl {
@@ -66,7 +67,12 @@ public class ChronatogTotem extends CardImpl {
         this.addAbility(new BlueManaAbility());
 
         // {1}{U}: Chronatog Totem becomes a 1/2 blue Atog artifact creature until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new ChronatogTotemToken(), "", Duration.EndOfTurn), new ManaCostsImpl<>("{1}{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(
+                new CreatureToken(1, 2, "1/2 blue Atog artifact creature")
+                        .withColor("U")
+                        .withSubType(SubType.ATOG)
+                        .withType(CardType.ARTIFACT),
+                "", Duration.EndOfTurn), new ManaCostsImpl<>("{1}{U}")));
 
         // {0}: Chronatog Totem gets +3/+3 until end of turn. You skip your next turn. Activate this ability only once each turn and only if Chronatog Totem is a creature.
         Ability ability = new ChronatogTotemAbility(
@@ -120,26 +126,6 @@ class ChronatogTotemAbility extends LimitedTimesPerTurnActivatedAbility {
         sb.deleteCharAt(sb.length() - 1); // remove last '.'
         sb.append(" and only if ").append(condition.toString()).append('.');
         return sb.toString();
-    }
-}
-
-class ChronatogTotemToken extends TokenImpl {
-
-    ChronatogTotemToken() {
-        super("Atog", "1/2 blue Atog artifact creature");
-        cardType.add(CardType.ARTIFACT);
-        cardType.add(CardType.CREATURE);
-        subtype.add(SubType.ATOG);
-        power = new MageInt(1);
-        toughness = new MageInt(2);
-        color.setBlue(true);
-    }
-    public ChronatogTotemToken(final ChronatogTotemToken token) {
-        super(token);
-    }
-
-    public ChronatogTotemToken copy() {
-        return new ChronatogTotemToken(this);
     }
 }
 

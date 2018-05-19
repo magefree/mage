@@ -82,7 +82,7 @@ public class AkoumHellkite extends CardImpl {
 
 class AkoumHellkiteTriggeredAbility extends TriggeredAbilityImpl {
 
-    private static final String text = "<i>Landfall</i> - Whenever a land enters the battlefield under your control, {this} deals 1 damage to any target. "
+    private static final String text = "<i>Landfall</i> &mdash; Whenever a land enters the battlefield under your control, {this} deals 1 damage to any target. "
             + "If that land is a Mountain, Akoum Hellkite deals 2 damage to that permanent or player instead.";
 
     public AkoumHellkiteTriggeredAbility() {

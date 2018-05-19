@@ -32,7 +32,7 @@ import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.ManaEffect;
-import mage.abilities.mana.ActivatedManaAbilityImpl;
+import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.ChoiceColor;
@@ -40,7 +40,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
@@ -53,7 +52,7 @@ public class MadScienceFairProject extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // {tap}: Roll a six-sided die. On a 3 or lower, target player adds {C} to their mana pool. Otherwise, that player adds one mana of any color he or she chooses to their mana pool.
-        this.addAbility(new MadScienceFairProjectManaAbility());
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new MadScienceFairManaEffect(), new TapSourceCost()));
     }
 
     public MadScienceFairProject(final MadScienceFairProject card) {
@@ -63,22 +62,6 @@ public class MadScienceFairProject extends CardImpl {
     @Override
     public MadScienceFairProject copy() {
         return new MadScienceFairProject(this);
-    }
-}
-
-class MadScienceFairProjectManaAbility extends ActivatedManaAbilityImpl {
-
-    public MadScienceFairProjectManaAbility() {
-        super(Zone.BATTLEFIELD, new MadScienceFairManaEffect(), new TapSourceCost());
-    }
-
-    public MadScienceFairProjectManaAbility(final MadScienceFairProjectManaAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public MadScienceFairProjectManaAbility copy() {
-        return new MadScienceFairProjectManaAbility(this);
     }
 }
 
@@ -101,28 +84,33 @@ class MadScienceFairManaEffect extends ManaEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (controller != null && permanent != null) {
-            int amount = controller.rollDice(game, 6);
-            if (amount <= 3) {
-                controller.getManaPool().addMana(Mana.ColorlessMana(1), game, source);
-            } else {
-                ChoiceColor choice = new ChoiceColor();
-                if (controller.choose(Outcome.PutManaInPool, choice, game)) {
-                    Mana chosen = choice.getMana(1);
-                    checkToFirePossibleEvents(chosen, game, source);
-                    controller.getManaPool().addMana(chosen, game, source);
-                } else {
-                    return false;
-                }
-            }
-            return true;
+        if (controller != null) {
+            checkToFirePossibleEvents(getMana(game, source), game, source);
+            controller.getManaPool().addMana(getMana(game, source), game, source);
         }
         return false;
     }
 
     @Override
-    public Mana getMana(Game game, Ability source) {
+    public Mana produceMana(boolean netMana, Game game, Ability source) {
+        if (netMana) {
+            return null;
+        }
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            int amount = controller.rollDice(game, 6);
+            if (amount <= 3) {
+                return Mana.ColorlessMana(1);
+            } else {
+                ChoiceColor choice = new ChoiceColor();
+                if (controller.choose(Outcome.PutManaInPool, choice, game)) {
+                    Mana chosen = choice.getMana(1);
+                    checkToFirePossibleEvents(chosen, game, source);
+                    return chosen;
+                }
+            }
+        }
         return null;
     }
+
 }

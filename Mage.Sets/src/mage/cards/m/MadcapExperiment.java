@@ -28,7 +28,6 @@
 package mage.cards.m;
 
 import java.util.UUID;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -39,7 +38,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.players.Library;
 import mage.players.Player;
 
 /**
@@ -84,31 +82,25 @@ class MadcapExperimentEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
-        if (controller != null && controller.getLibrary().hasCards()) {
-            CardsImpl cards = new CardsImpl();
-            Library library = controller.getLibrary();
-            Card card = null;
-            do {
-                card = library.removeFromTop(game);
-                if (card != null) {
-                    cards.add(card);
+        if (controller != null) {
+            CardsImpl toReveal = new CardsImpl();
+            Card toBattlefield = null;
+            for (Card card : controller.getLibrary().getCards(game)) {
+                toReveal.add(card);
+                game.fireUpdatePlayersEvent();
+                if (card.isArtifact()) {
+                    toBattlefield = card;
+
+                    break;
                 }
-            } while (library.hasCards() && card != null && !card.isArtifact());
-            // reveal cards
-            if (!cards.isEmpty()) {
-                controller.revealCards(sourceObject.getIdName(), cards, game);
             }
-            int revealed = cards.size();
-            if (card != null && card.isArtifact()) {
-                // put artifact card to battlefield
-                controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-                // remove it from revealed card list
-                cards.remove(card);
-            }
-            // Put the rest on the bottom of your library in a random order
-            controller.putCardsOnBottomOfLibrary(cards, game, source, false);
-            controller.damage(revealed, source.getSourceId(), game, false, true);
+            controller.revealCards(source, toReveal, game);
+            controller.moveCards(toBattlefield, Zone.BATTLEFIELD, source, game);
+            int damage = toReveal.size();
+            toReveal.remove(toBattlefield);
+            controller.putCardsOnBottomOfLibrary(toReveal, game, source, false);
+            controller.damage(damage, source.getSourceId(), game, false, true);
+
             return true;
         }
         return false;

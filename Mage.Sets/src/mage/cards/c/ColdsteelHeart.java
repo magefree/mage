@@ -28,20 +28,15 @@
 package mage.cards.c;
 
 import java.util.UUID;
-import mage.Mana;
-import mage.ObjectColor;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.ChooseColorEffect;
-import mage.abilities.effects.common.ManaEffect;
+import mage.abilities.effects.mana.AddManaChosenColorEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.game.Game;
-import mage.players.Player;
 
 /**
  *
@@ -50,7 +45,7 @@ import mage.players.Player;
 public class ColdsteelHeart extends CardImpl {
 
     public ColdsteelHeart(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.addSuperType(SuperType.SNOW);
 
         // Coldsteel Heart enters the battlefield tapped.
@@ -58,7 +53,8 @@ public class ColdsteelHeart extends CardImpl {
         // As Coldsteel Heart enters the battlefield, choose a color.
         this.addAbility(new EntersBattlefieldAbility(new ChooseColorEffect(Outcome.Neutral), null, "As {this} enters the battlefield, choose a color.", null));
         // {T}: Add one mana of the chosen color.
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new ColdsteelHeartManaEffect(), new TapSourceCost()));
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaChosenColorEffect(), new TapSourceCost()));
+
     }
 
     public ColdsteelHeart(final ColdsteelHeart card) {
@@ -68,41 +64,5 @@ public class ColdsteelHeart extends CardImpl {
     @Override
     public ColdsteelHeart copy() {
         return new ColdsteelHeart(this);
-    }
-}
-
-class ColdsteelHeartManaEffect extends ManaEffect {
-
-    public ColdsteelHeartManaEffect() {
-        super();
-        staticText = "Add one mana of the chosen color";
-    }
-
-    public ColdsteelHeartManaEffect(final ColdsteelHeartManaEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            player.getManaPool().addMana(getMana(game, source), game, source);
-        }
-        return true;
-    }
-
-    @Override
-    public Mana getMana(Game game, Ability source) {
-        ObjectColor color = (ObjectColor) game.getState().getValue(source.getSourceId() + "_color");
-        if (color != null) {
-            return new Mana(ColoredManaSymbol.lookup(color.toString().charAt(0)));
-        } else {
-            return null;
-        }
-    }
-
-    @Override
-    public ColdsteelHeartManaEffect copy() {
-        return new ColdsteelHeartManaEffect(this);
     }
 }

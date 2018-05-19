@@ -685,7 +685,11 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     public void setZone(UUID id, Zone zone) {
-        zones.put(id, zone);
+        if (zone == null) {
+            zones.remove(id);
+        } else {
+            zones.put(id, zone);
+        }
     }
 
     public void addSimultaneousEvent(GameEvent event, Game game) {

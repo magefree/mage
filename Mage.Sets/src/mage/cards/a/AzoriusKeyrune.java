@@ -28,6 +28,7 @@
 package mage.cards.a;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -43,6 +44,7 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
+import mage.game.permanent.token.custom.CreatureToken;
 
 /**
  * @author LevelX2
@@ -50,14 +52,20 @@ import mage.game.permanent.token.Token;
 public class AzoriusKeyrune extends CardImpl {
 
     public AzoriusKeyrune(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // {T}: Add {W} or {U}.
         this.addAbility(new WhiteManaAbility());
         this.addAbility(new BlueManaAbility());
 
         // {W}{U}: Azorius Keyrune becomes a 2/2 white and blue Bird artifact creature with flying until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new AzoriusKeyruneToken(), "", Duration.EndOfTurn), new ManaCostsImpl("{W}{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(
+                new CreatureToken(2, 2, "2/2 white and blue Bird artifact creature with flying")
+                        .withColor("WU")
+                        .withSubType(SubType.BIRD)
+                        .withType(CardType.ARTIFACT)
+                        .withAbility(FlyingAbility.getInstance()),
+                "", Duration.EndOfTurn), new ManaCostsImpl("{W}{U}")));
     }
 
     public AzoriusKeyrune(final AzoriusKeyrune card) {
@@ -67,26 +75,5 @@ public class AzoriusKeyrune extends CardImpl {
     @Override
     public AzoriusKeyrune copy() {
         return new AzoriusKeyrune(this);
-    }
-
-    private static class AzoriusKeyruneToken extends TokenImpl {
-        AzoriusKeyruneToken() {
-            super("", "2/2 white and blue Bird artifact creature with flying");
-            cardType.add(CardType.ARTIFACT);
-            cardType.add(CardType.CREATURE);
-            color.setWhite(true);
-            color.setBlue(true);
-            this.subtype.add(SubType.BIRD);
-            power = new MageInt(2);
-            toughness = new MageInt(2);
-            this.addAbility(FlyingAbility.getInstance());
-        }
-        public AzoriusKeyruneToken(final AzoriusKeyruneToken token) {
-            super(token);
-        }
-
-        public AzoriusKeyruneToken copy() {
-            return new AzoriusKeyruneToken(this);
-        }
     }
 }

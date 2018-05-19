@@ -51,7 +51,7 @@ public class SetessanOathsworn extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // <i>Heroic</i> - Whenever you cast a spell that targets Setessan Oathsworn, put two +1/+1 counters on Setessan Oathsworn.
+        // <i>Heroic</i> &mdash; Whenever you cast a spell that targets Setessan Oathsworn, put two +1/+1 counters on Setessan Oathsworn.
         this.addAbility(new HeroicAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2), true)));
     }
 

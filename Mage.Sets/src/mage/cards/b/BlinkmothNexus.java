@@ -29,6 +29,7 @@
 package mage.cards.b;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -48,6 +49,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.TargetPermanent;
 
 /**
@@ -62,14 +64,19 @@ public class BlinkmothNexus extends CardImpl {
     }
 
     public BlinkmothNexus(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
-        
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, null);
+
         // {T}: Add {C}to your mana pool.
         this.addAbility(new ColorlessManaAbility());
-        
+
         // {1}: Blinkmoth Nexus becomes a 1/1 Blinkmoth artifact creature with flying until end of turn. It's still a land.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new BlinkmothNexusToken(), "land", Duration.EndOfTurn), new GenericManaCost(1)));
-        
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(
+                new CreatureToken(1, 1, "1/1 Blinkmoth artifact creature with flying")
+                        .withSubType(SubType.BLINKMOTH)
+                        .withType(CardType.ARTIFACT)
+                        .withAbility(FlyingAbility.getInstance()),
+                "land", Duration.EndOfTurn), new GenericManaCost(1)));
+
         // {1}, {T}: Target Blinkmoth creature gets +1/+1 until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(1, 1, Duration.EndOfTurn), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
@@ -87,23 +94,4 @@ public class BlinkmothNexus extends CardImpl {
         return new BlinkmothNexus(this);
     }
 
-}
-
-class BlinkmothNexusToken extends TokenImpl {
-    public BlinkmothNexusToken() {
-        super("Blinkmoth", "1/1 Blinkmoth artifact creature with flying");
-        cardType.add(CardType.ARTIFACT);
-        cardType.add(CardType.CREATURE);
-        this.subtype.add(SubType.BLINKMOTH);
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-        this.addAbility(FlyingAbility.getInstance());
-    }
-    public BlinkmothNexusToken(final BlinkmothNexusToken token) {
-        super(token);
-    }
-
-    public BlinkmothNexusToken copy() {
-        return new BlinkmothNexusToken(this);
-    }
 }

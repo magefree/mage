@@ -58,7 +58,7 @@ public class ShipwreckLooter extends CardImpl {
         Ability ability = new ConditionalTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new DrawDiscardControllerEffect(1, 1, true)),
                 RaidCondition.instance,
-                "<i>Raid</i> - When {this} enters the battlefield, if you attacked with a creature this turn, you may draw a card. If you do, discard a card.");
+                "<i>Raid</i> &mdash; When {this} enters the battlefield, if you attacked with a creature this turn, you may draw a card. If you do, discard a card.");
         this.addAbility(ability, new PlayerAttackedWatcher());
     }
 

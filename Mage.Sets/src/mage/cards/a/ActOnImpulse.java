@@ -27,19 +27,21 @@
  */
 package mage.cards.a;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.AsThoughEffectImpl;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
-import mage.players.Library;
 import mage.players.Player;
+import mage.target.targetpointer.FixedTargets;
 
 /**
  *
@@ -48,8 +50,7 @@ import mage.players.Player;
 public class ActOnImpulse extends CardImpl {
 
     public ActOnImpulse(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{R}");
 
         // Exile the top three cards of your library. Until end of turn, you may play cards exiled this way.
         this.getSpellAbility().addEffect(new ActOnImpulseExileEffect());
@@ -66,12 +67,12 @@ public class ActOnImpulse extends CardImpl {
 }
 
 class ActOnImpulseExileEffect extends OneShotEffect {
-    
+
     public ActOnImpulseExileEffect() {
         super(Outcome.Benefit);
         this.staticText = "Exile the top three cards of your library. Until end of turn, you may play cards exiled this way.";
     }
-    
+
     public ActOnImpulseExileEffect(final ActOnImpulseExileEffect effect) {
         super(effect);
     }
@@ -80,69 +81,58 @@ class ActOnImpulseExileEffect extends OneShotEffect {
     public ActOnImpulseExileEffect copy() {
         return new ActOnImpulseExileEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Library library = controller.getLibrary();
-            List<Card> cards = new ArrayList<>();
-            int count = Math.min(3, library.size());
-            for (int i = 0; i < count; i++) {
-                Card card = library.removeFromTop(game);
-                if (card != null) {
-                    cards.add(card);
-                }
-            }
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (controller != null && sourceObject != null) {
+            Set<Card> cards = new HashSet<>(controller.getLibrary().getTopCards(game, 3));
             if (!cards.isEmpty()) {
-                List<UUID> cardsId = new ArrayList<>();
+                controller.moveCardsToExile(cards, source, game, true, source.getSourceId(), sourceObject.getIdName());
+                // remove cards that could not be moved to exile
                 for (Card card : cards) {
-                    card.moveToExile(source.getSourceId(), "Act on Impulse", source.getSourceId(), game);
-                    cardsId.add(card.getId());                   
+                    if (!Zone.EXILED.equals(game.getState().getZone(card.getId()))) {
+                        cards.remove(card);
+                    }
                 }
-                game.addEffect(new ActOnImpulseMayPlayExiledEffect(cardsId), source);
+                if (!cards.isEmpty()) {
+                    ContinuousEffect effect = new ActOnImpulseMayPlayExiledEffect();
+                    effect.setTargetPointer(new FixedTargets(cards, game));
+                    game.addEffect(effect, source);
+                }
             }
             return true;
         }
         return false;
     }
-    
+
 }
 
 class ActOnImpulseMayPlayExiledEffect extends AsThoughEffectImpl {
 
-    public List<UUID> cards = new ArrayList<>();
-    
-    public ActOnImpulseMayPlayExiledEffect(List<UUID> cards) {
+    public ActOnImpulseMayPlayExiledEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
-        this.cards.addAll(cards);
     }
-    
+
     public ActOnImpulseMayPlayExiledEffect(final ActOnImpulseMayPlayExiledEffect effect) {
         super(effect);
-        this.cards.addAll(effect.cards);
     }
 
     @Override
     public ActOnImpulseMayPlayExiledEffect copy() {
         return new ActOnImpulseMayPlayExiledEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         return true;
     }
 
     @Override
-    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        Card card = game.getCard(sourceId);
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null && card != null && game.getState().getZone(sourceId) == Zone.EXILED) {
-            if (cards.contains(sourceId)) {
-                return true;
-            }
-        }
-        return false;
+    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        return affectedControllerId.equals(source.getControllerId())
+                && getTargetPointer().getTargets(game, source).contains(objectId);
     }
-    
+
 }

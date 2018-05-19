@@ -41,7 +41,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.counters.Counter;
+import mage.counters.CounterType;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -51,15 +51,15 @@ import mage.target.common.TargetCreaturePermanent;
 public class BribersPurse extends CardImpl {
 
     public BribersPurse(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{X}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{X}");
 
         // Briber's Purse enters the battlefield with X gem counters on it.
-        this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(new Counter("gem"))));
+        this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.GEM.createInstance())));
 
         // {1}, {T}, Remove a gem counter from Briber's Purse: Target creature can't attack or block this turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantAttackBlockTargetEffect(Duration.EndOfTurn), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new RemoveCountersSourceCost(new Counter("gem")));
+        ability.addCost(new RemoveCountersSourceCost(CounterType.GEM.createInstance()));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

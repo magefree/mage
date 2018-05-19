@@ -40,13 +40,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.Permanent;
-import mage.game.turn.Step;
-import mage.players.Library;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 /**
  *
@@ -55,7 +51,7 @@ import mage.target.targetpointer.FixedTarget;
 public class ElkinBottle extends CardImpl {
 
     public ElkinBottle(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // {3}, {tap}, Exile the top card of your library. Until the beginning of your next upkeep, you may play that card.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ElkinBottleExileEffect(), new GenericManaCost(3));
@@ -92,13 +88,10 @@ class ElkinBottleExileEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (sourcePermanent != null && controller != null && controller.getLibrary().hasCards()) {
-            Library library = controller.getLibrary();
-            Card card = library.removeFromTop(game);
+        if (controller != null) {
+            Card card = controller.getLibrary().getFromTop(game);
             if (card != null) {
-                String exileName = new StringBuilder(sourcePermanent.getIdName()).append(" <this card may be played until the beginning of your next upkeep>").toString();
-                controller.moveCardToExileWithInfo(card, source.getSourceId(), exileName, source.getSourceId(), game, Zone.LIBRARY, true);
+                controller.moveCardsToExile(card, source, game, true, source.getSourceId(), CardUtil.createObjectRealtedWindowTitle(source, game, null));
                 ContinuousEffect effect = new ElkinBottleCastFromExileEffect();
                 effect.setTargetPointer(new FixedTarget(card.getId()));
                 game.addEffect(effect, source);
@@ -110,14 +103,14 @@ class ElkinBottleExileEffect extends OneShotEffect {
 }
 
 class ElkinBottleCastFromExileEffect extends AsThoughEffectImpl {
-    
+
     private boolean sameStep = true;
 
     public ElkinBottleCastFromExileEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
         this.staticText = "Until the beginning of your next upkeep, you may play that card.";
     }
-    
+
     public ElkinBottleCastFromExileEffect(final ElkinBottleCastFromExileEffect effect) {
         super(effect);
     }
@@ -149,5 +142,5 @@ class ElkinBottleCastFromExileEffect extends AsThoughEffectImpl {
         return source.getControllerId().equals(affectedControllerId)
                 && sourceId.equals(getTargetPointer().getFirst(game, source));
     }
-    
+
 }

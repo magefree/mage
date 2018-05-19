@@ -105,6 +105,21 @@ class FoodChainManaEffect extends ManaEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
+            checkToFirePossibleEvents(getMana(game, source), game, source);
+            controller.getManaPool().addMana(getMana(game, source), game, source);
+            return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public Mana produceMana(boolean netMana, Game game, Ability source) {
+        if (netMana) {
+            return null;
+        }
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
             int manaCostExiled = 0;
             for (Cost cost : source.getCosts()) {
                 if (cost.isPaid() && cost instanceof ExileTargetCost) {
@@ -115,22 +130,12 @@ class FoodChainManaEffect extends ManaEffect {
             }
             ChoiceColor choice = new ChoiceColor();
             if (!controller.choose(Outcome.PutManaInPool, choice, game)) {
-                return false;
+                return null;
             }
             Mana chosen = choice.getMana(manaCostExiled + 1);
-            Mana mana = new FoodChainManaBuilder().setMana(chosen, source, game).build();
-            if (mana != null) {
-                checkToFirePossibleEvents(mana, game, source);
-                controller.getManaPool().addMana(mana, game, source);
-                return true;
-            }
+            return new FoodChainManaBuilder().setMana(chosen, source, game).build();
         }
 
-        return false;
-    }
-
-    @Override
-    public Mana getMana(Game game, Ability source) {
         return null;
     }
 

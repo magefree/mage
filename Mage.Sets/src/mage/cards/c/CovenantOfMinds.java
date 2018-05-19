@@ -30,7 +30,6 @@ package mage.cards.c;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
@@ -48,8 +47,7 @@ import mage.target.common.TargetOpponent;
 public class CovenantOfMinds extends CardImpl {
 
     public CovenantOfMinds(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{U}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{U}");
 
         // Reveal the top three cards of your library. Target opponent may choose to put those cards into your hand.
         // If he or she doesn't, put those cards into your graveyard and draw five cards.
@@ -91,33 +89,22 @@ class CovenantOfMindsEffect extends OneShotEffect {
             return false;
         }
 
-        CardsImpl cards = new CardsImpl();
-        int count = Math.min(player.getLibrary().size(), 3);
-        for (int i = 0; i < count; i++) {
-            cards.add(player.getLibrary().removeFromTop(game));
-        }
-
+        CardsImpl cards = new CardsImpl(player.getLibrary().getTopCards(game, 3));
         if (!cards.isEmpty()) {
-            player.revealCards("Covenant of Minds", cards, game);
-
+            player.revealCards(source, cards, game);
             StringBuilder sb = new StringBuilder();
             sb.append("Put the revealed cards into ").append(player.getLogName()).append("'s hand?");
             sb.append(" If you don't, those cards are put into his graveyard and he will draw five cards.");
 
-            Zone zone = Zone.GRAVEYARD;
             if (opponent.chooseUse(Outcome.Neutral, sb.toString(), source, game)) {
-                zone = Zone.HAND;
+                player.moveCards(cards, Zone.HAND, source, game);
             } else {
+                player.moveCards(cards, Zone.GRAVEYARD, source, game);
                 player.drawCards(5, game);
             }
 
-            for (Card card : cards.getCards(game)) {
-                card.moveToZone(zone, source.getSourceId(), game, true);
-            }
         } else {
-            StringBuilder sb = new StringBuilder();
-            sb.append(player.getLogName()).append("'s library is empty? Do you want him to draw five cards?");
-            if (!opponent.chooseUse(Outcome.Benefit, sb.toString(), source, game)) {
+            if (!opponent.chooseUse(Outcome.Benefit, player.getLogName() + "'s library is empty? Do you want him to draw five cards?", source, game)) {
                 player.drawCards(5, game);
             }
         }

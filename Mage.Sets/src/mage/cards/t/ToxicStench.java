@@ -75,7 +75,7 @@ public class ToxicStench extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DestroyTargetEffect(true),
                 new CardsInControllerGraveCondition(7),
-                "<br/><br/><i>Threshold</i> - If seven or more cards are in your graveyard, instead destroy that creature. It can't be regenerated."));
+                "<br/><br/><i>Threshold</i> &mdash; If seven or more cards are in your graveyard, instead destroy that creature. It can't be regenerated."));
 
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }

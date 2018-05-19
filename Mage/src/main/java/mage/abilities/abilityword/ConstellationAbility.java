@@ -79,6 +79,6 @@ public class ConstellationAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return new StringBuilder("<i>Constellation</i> - Whenever {this} or another enchantment enters the battlefield under your control, ").append(super.getRule()).toString();
+        return new StringBuilder("<i>Constellation</i> &mdash; Whenever {this} or another enchantment enters the battlefield under your control, ").append(super.getRule()).toString();
     }
 }

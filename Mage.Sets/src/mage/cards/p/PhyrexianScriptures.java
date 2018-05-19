@@ -28,9 +28,8 @@
 package mage.cards.p;
 
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.common.SagaAbility;
-import mage.abilities.effects.Effect;
+import mage.abilities.effects.Effects;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.effects.common.ExileGraveyardAllPlayersEffect;
 import mage.abilities.effects.common.continuous.AddCardTypeTargetEffect;
@@ -74,11 +73,12 @@ public class PhyrexianScriptures extends CardImpl {
         SagaAbility sagaAbility = new SagaAbility(this, SagaChapter.CHAPTER_III);
 
         // I — Put a +1/+1 counter on up to one target creature. That creature becomes an artifact in addition to its other types.
-        Ability ability = sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_I, new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
-        ability.addTarget(new TargetCreaturePermanent(0, 1));
-        Effect effect = new AddCardTypeTargetEffect(Duration.WhileOnBattlefield, CardType.ARTIFACT);
-        effect.setText("That creature becomes an artifact in addition to its other types");
-        ability.addEffect(effect);
+        Effects effects = new Effects();
+        effects.add(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
+        effects.add(new AddCardTypeTargetEffect(Duration.WhileOnBattlefield, CardType.ARTIFACT)
+                .setText("That creature becomes an artifact in addition to its other types")
+        );
+        sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_I, SagaChapter.CHAPTER_I, effects, new TargetCreaturePermanent(0, 1));
 
         // II — Destroy all nonartifact creatures.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_II, new DestroyAllEffect(filter));

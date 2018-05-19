@@ -38,14 +38,12 @@ import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.UntapLandsEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.command.emblems.TeferiHeroOfDominariaEmblem;
 import mage.game.permanent.Permanent;
@@ -114,16 +112,7 @@ class TeferiHeroOfDominariaSecondEffect extends OneShotEffect {
         if (controller != null) {
             Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (permanent != null) {
-                Player owner = game.getPlayer(permanent.getOwnerId());
-                if (owner == null) {
-                    return false;
-                }
-                permanent.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-                Card card = owner.getLibrary().remove(permanent.getId(), game);
-                if (card != null) {
-                    owner.getLibrary().putCardThirdFromTheTop(card, game);
-                    game.informPlayers(card.getLogName() + " is put into " + owner.getLogName() + "'s library third from the top");
-                }
+                controller.putCardOnTopXOfLibrary(permanent, game, source, 3);
             }
             return true;
         }

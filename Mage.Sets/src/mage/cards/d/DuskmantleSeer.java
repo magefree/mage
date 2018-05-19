@@ -35,8 +35,8 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.*;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -98,13 +98,11 @@ class DuskmantleSeerEffect extends OneShotEffect {
         }
         for (Player player : game.getPlayers().values()) {
             if (player.getLibrary().hasCards()) {
-                Card card = player.getLibrary().removeFromTop(game);
+                Card card = player.getLibrary().getFromTop(game);
                 if (card != null) {
-                    Cards cards = new CardsImpl();
-                    cards.add(card);
-                    player.revealCards(sourceCard.getName() + ": Revealed by " + player.getName(), cards, game);
+                    player.revealCards(source, ": Revealed by " + player.getName(), new CardsImpl(card), game);
                     player.loseLife(card.getConvertedManaCost(), game, false);
-                    card.moveToZone(Zone.HAND, source.getSourceId(), game, true);
+                    player.moveCards(card, Zone.HAND, source, game);
                 }
             }
         }

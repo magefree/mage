@@ -91,8 +91,12 @@ class WoodwraithCorrupterToken extends TokenImpl {
     public WoodwraithCorrupterToken() {
         super("", "4/4 black and green Elemental Horror creature");
         cardType.add(CardType.CREATURE);
+
+        color.setBlack(true);
+        color.setGreen(true);
         subtype.add(SubType.ELEMENTAL);
         subtype.add(SubType.HORROR);
+
         power = new MageInt(4);
         toughness = new MageInt(4);
     }

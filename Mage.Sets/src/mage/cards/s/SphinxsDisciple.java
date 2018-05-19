@@ -53,7 +53,7 @@ public class SphinxsDisciple extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        // <i>Inspired</i> - Whenever Sphinx's Disciple becomes untapped, draw a card.
+        // <i>Inspired</i> &mdash; Whenever Sphinx's Disciple becomes untapped, draw a card.
         this.addAbility(new InspiredAbility(new DrawCardSourceControllerEffect(1)));
     }
 

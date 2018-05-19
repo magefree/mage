@@ -430,7 +430,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
         }
         stackObject.resolve(game);
         if (stackObject instanceof StackAbility) {
-            game.getStack().remove(stackObject);
+            game.getStack().remove(stackObject, game);
         }
         game.applyEffects();
         game.getPlayers().resetPassed();
@@ -968,7 +968,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
             // swallow
             e.printStackTrace();
         } finally {
-            if(scanner != null) {
+            if (scanner != null) {
                 scanner.close();
             }
         }

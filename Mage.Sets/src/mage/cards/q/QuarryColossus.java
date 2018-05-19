@@ -27,22 +27,16 @@
  */
 package mage.cards.q;
 
-import java.util.Deque;
-import java.util.LinkedList;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -56,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class QuarryColossus extends CardImpl {
 
     public QuarryColossus(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{W}{W}");
         this.subtype.add(SubType.GIANT);
 
         this.power = new MageInt(5);
@@ -102,27 +96,7 @@ class QuarryColossusReturnLibraryEffect extends OneShotEffect {
             Player owner = game.getPlayer(permanent.getOwnerId());
             if (owner != null) {
                 int plains = game.getBattlefield().countAll(new FilterPermanent(SubType.PLAINS, "Plains you control"), source.getControllerId(), game);
-                int xValue = Math.min(plains, owner.getLibrary().size());
-                Cards cards = new CardsImpl();
-                Deque<UUID> cardIds = new LinkedList<>();
-                for (int i = 0; i < xValue; i++) {
-                    Card card = owner.getLibrary().removeFromTop(game);
-                    cards.add(card);
-                    cardIds.push(card.getId());
-                }
-                // return cards back to library
-                permanent.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-                game.informPlayers(new StringBuilder(controller.getLogName())
-                        .append(" puts ").append(permanent.getName())
-                        .append(" beneath the top ").append(xValue)
-                        .append(" cards of ").append(owner.getLogName()).append("'s library").toString());
-                while(!cardIds.isEmpty()) {
-                    UUID cardId = cardIds.poll();
-                    Card card = cards.get(cardId, game);
-                    if (card != null) {
-                        card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-                    }
-                }
+                controller.putCardOnTopXOfLibrary(permanent, game, source, plains);
                 return true;
             }
         }

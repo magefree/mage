@@ -41,7 +41,7 @@ import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -101,17 +101,11 @@ class AllHallowsEveEffect extends OneShotEffect {
             allHallowsEve.getCounters(game).removeCounter(CounterType.SCREAM, 1);
             if (allHallowsEve.getCounters(game).getCount(CounterType.SCREAM) == 0) {
                 allHallowsEve.moveToZone(Zone.GRAVEYARD, source.getId(), game, false);
-                Cards creatures = new CardsImpl();
                 for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {
-                        for (Card creatureCard : player.getGraveyard().getCards(new FilterCreatureCard(), game)) {
-                            creatures.add(creatureCard);
-                        }
+                        player.moveCards(player.getGraveyard().getCards(StaticFilters.FILTER_CARD_CREATURE, game), Zone.BATTLEFIELD, source, game);
                     }
-                }
-                for (Card card : creatures.getCards(game)) {
-                    card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getId(), card.getOwnerId());
                 }
             }
             return true;

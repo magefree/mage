@@ -54,7 +54,7 @@ public class ExquisiteFirecraft extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));
         
-        // <i>Spell mastery</i> - If there are two or more instant and/or sorcery cards in your graveyard, Exquisite Firecraft can't be countered by spells or abilities.
+        // <i>Spell mastery</i> &mdash; If there are two or more instant and/or sorcery cards in your graveyard, Exquisite Firecraft can't be countered by spells or abilities.
         ContinuousRuleModifyingEffect cantBeCountered = new CantBeCounteredSourceEffect();
         ConditionalContinuousRuleModifyingEffect conditionalCantBeCountered = new ConditionalContinuousRuleModifyingEffect(cantBeCountered, SpellMasteryCondition.instance);
         conditionalCantBeCountered.setText("<br/>If there are two or more instant and/or sorcery cards in your graveyard, {this} can't be countered by spells or abilities");

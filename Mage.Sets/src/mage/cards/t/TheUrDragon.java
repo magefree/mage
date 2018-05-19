@@ -72,7 +72,7 @@ public class TheUrDragon extends CardImpl {
         this.power = new MageInt(10);
         this.toughness = new MageInt(10);
 
-        // <i>Eminence</i> - As long as The Ur-Dragon is in the command zone or on the battlefield, other Dragon spells you cast cost {1} less to cast.
+        // <i>Eminence</i> &mdash; As long as The Ur-Dragon is in the command zone or on the battlefield, other Dragon spells you cast cost {1} less to cast.
         Effect effect = new SpellsCostReductionControllerEffect(filter, 1);
         effect.setText("As long as {this} is in the command zone or on the battlefield, other Dragon spells you cast cost {1} less to cast");
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);

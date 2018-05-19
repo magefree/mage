@@ -57,7 +57,7 @@ public class GladeWatcher extends CardImpl {
 
         // Defender
         this.addAbility(DefenderAbility.getInstance());
-        // <i>Formidable</i> - {G}: Glade Watcher can attack this turn as though it didn't have defender. Activate this ability only if creatures you control have total power 8 or greater.
+        // <i>Formidable</i> &mdash; {G}: Glade Watcher can attack this turn as though it didn't have defender. Activate this ability only if creatures you control have total power 8 or greater.
         Ability ability = new ActivateIfConditionActivatedAbility(
                 Zone.BATTLEFIELD,
                 new CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration.EndOfTurn),

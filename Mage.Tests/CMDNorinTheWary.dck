@@ -19,7 +19,6 @@
 1 [M12:160] Warstorm Surge
 1 [AVR:126] Archwing Dragon
 1 [M15:149] Hoarding Dragon
-1 [4ED:189] Strip Mine
 1 [ORI:145] Fiery Impulse
 1 [CSP:149] Scrying Sheets
 1 [ORI:142] Enthralling Victor
@@ -35,6 +34,7 @@
 1 [ORI:134] Call of the Full Moon
 1 [ORI:136] Chandra's Fury
 26 [CSP:154] Snow-Covered Mountain
+1 [5ED:268] Smoke
 1 [ONS:212] Gratuitous Violence
 1 [ORI:133] Boggart Brute
 1 [ONS:213] Insurrection
@@ -47,10 +47,10 @@
 1 [9ED:312] Teferi's Puzzle Box
 1 [M14:162] Wild Ricochet
 1 [3ED:274] Sol Ring
-1 [3ED:152] Fork
+1 [3ED:153] Fork
 1 [DGM:34] Possibility Storm
+1 [4ED:363] Strip Mine
 1 [USG:188] Gamble
-1 [5ED:64] Smoke
 1 [STH:93] Mogg Infestation
 1 [ULG:80] Goblin Welder
 1 [ALA:119] Vicious Shadows
@@ -60,7 +60,7 @@
 1 [7ED:307] Meekstone
 1 [TSB:68] Pandemonium
 1 [GTC:248] Thespian's Stage
-1 [3ED:184] Wheel of Fortune
+1 [3ED:185] Wheel of Fortune
 1 [M15:242] Darksteel Citadel
 1 [M11:160] Wild Evocation
 1 [RTR:111] Vandalblast
@@ -73,3 +73,5 @@
 1 [JOU:93] Dictate of the Twin Gods
 1 [5ED:249] Mana Flare
 SB: 1 [TSP:171] Norin the Wary
+LAYOUT MAIN:(2,10)(CMC,true,5)|()([ULG:80])()([ORI:149],[ORI:133])([AVR:126],[ORI:142],[THS:135],[M14:148])([M15:149])()()([JOU:89])()([ONS:317],[MRD:282],[EVE:179],[ZEN:228],[4ED:363],[CSP:149],[MMQ:320],[M12:224],[TSP:275],[CSP:154],[CSP:154],[CSP:154],[CSP:154],[CSP:154],[CSP:154],[CSP:154],[CSP:154],[CSP:154],[CSP:154],[CSP:154],[CSP:154],[CSP:154],[CSP:154],[CSP:154],[CSP:154],[CSP:154],[CSP:154],[CSP:154],[CSP:154],[CSP:154],[CSP:154],[CSP:154],[CSP:154],[CSP:154],[CSP:154],[GTC:248],[M15:242])([ORI:145],[3ED:274],[USG:188],[7ED:307],[RTR:111],[ORI:156])([VIS:141],[M10:212],[ORI:144],[DST:122],[ORI:134],[M13:145],[EXO:102],[3ED:153],[5ED:268],[ORI:163])([7ED:319],[ALA:101],[ODY:214],[9ED:176],[CMD:114],[ORI:129],[3ED:185],[TSP:175],[ULG:123],[5ED:249])([10E:204],[ORI:139],[TMP:210],[CMD:136],[9ED:312],[M14:162],[CON:136],[TSB:68])([BOK:108],[TOR:113],[TSP:188],[ORI:136],[ONS:212],[DGM:34],[STH:93],[MIR:183],[JOU:93])([M12:160],[M11:160],[5ED:246])([BOK:120],[ALA:119])([8ED:204],[M12:153],[M10:163],[ONS:213])([SCG:85])
+LAYOUT SIDEBOARD:(1,1)(COLOR_IDENTITY,true,5)|([TSP:171])

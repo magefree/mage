@@ -29,6 +29,7 @@
 package mage.cards.d;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -38,23 +39,32 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
+import mage.game.permanent.token.custom.CreatureToken;
 
 /**
- *
  * @author Loki
  */
 public class DarksteelBrute extends CardImpl {
 
-    public DarksteelBrute (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
+    public DarksteelBrute(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
+
+        // Indestructible
         this.addAbility(IndestructibleAbility.getInstance());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new DarksteelBruteToken(), "", Duration.EndOfTurn), new GenericManaCost(3)));
+
+        // {3}: Darksteel Brute becomes a 2/2 Beast artifact creature until end of turn.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(
+                new CreatureToken(2, 2, "2/2 Beast artifact creature")
+                        .withSubType(SubType.BEAST)
+                        .withType(CardType.ARTIFACT),
+                "", Duration.EndOfTurn), new GenericManaCost(3)));
     }
 
-    public DarksteelBrute (final DarksteelBrute card) {
+    public DarksteelBrute(final DarksteelBrute card) {
         super(card);
     }
 
@@ -63,21 +73,4 @@ public class DarksteelBrute extends CardImpl {
         return new DarksteelBrute(this);
     }
 
-}
-
-class DarksteelBruteToken extends TokenImpl {
-    public DarksteelBruteToken() {
-        super("", "2/2 Beast artifact creature");
-        cardType.add(CardType.ARTIFACT);
-        cardType.add(CardType.CREATURE);
-        power = new MageInt(2);
-        toughness = new MageInt(2);
-    }
-    public DarksteelBruteToken(final DarksteelBruteToken token) {
-        super(token);
-    }
-
-    public DarksteelBruteToken copy() {
-        return new DarksteelBruteToken(this);
-    }
 }

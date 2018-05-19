@@ -33,7 +33,7 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.effects.common.AddConditionalManaOfAnyColorEffect;
+import mage.abilities.effects.mana.AddConditionalManaOfAnyColorEffect;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.constants.Zone;
 import mage.game.Game;

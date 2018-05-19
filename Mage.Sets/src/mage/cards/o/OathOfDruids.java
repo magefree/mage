@@ -28,7 +28,6 @@
 package mage.cards.o;
 
 import java.util.UUID;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -65,7 +64,9 @@ public class OathOfDruids extends CardImpl {
     public OathOfDruids(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
 
-        // At the beginning of each player's upkeep, that player chooses target player who controls more creatures than he or she does and is their opponent. The first player may reveal cards from the top of their library until he or she reveals a creature card. If he or she does, that player puts that card onto the battlefield and all other cards revealed this way into their graveyard.
+        // At the beginning of each player's upkeep, that player chooses target player who controls more creatures than he or she does and is their opponent.
+        // The first player may reveal cards from the top of their library until he or she reveals a creature card.
+        // If he or she does, that player puts that card onto the battlefield and all other cards revealed this way into their graveyard.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new OathOfDruidsEffect(), TargetController.ANY, false);
         ability.addTarget(new TargetPlayer(1, 1, false, filter));
         originalId = ability.getOriginalId();
@@ -78,8 +79,6 @@ public class OathOfDruids extends CardImpl {
             Player activePlayer = game.getPlayer(game.getActivePlayerId());
             if (activePlayer != null) {
                 ability.getTargets().clear();
-//                FilterPlayer filter = new FilterPlayer();
-//                filter.add(new OathOfDruidsPredicate());
                 TargetPlayer target = new TargetPlayer(1, 1, false, filter);
                 target.setTargetController(activePlayer.getId());
                 ability.getTargets().add(target);
@@ -140,36 +139,35 @@ class OathOfDruidsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        MageObject sourceObject = game.getObject(source.getSourceId());
-        Player player = game.getPlayer(game.getActivePlayerId());
-        if (player == null || sourceObject == null) {
+        Player controller = game.getPlayer(game.getActivePlayerId());
+        if (controller == null) {
             return false;
         }
         Cards revealed = new CardsImpl();
-        Card creatureCard = null;
-        Cards nonCreatureCards = new CardsImpl();
-        if (!player.chooseUse(Outcome.Benefit, "Use this ability?", source, game)) {
+        Card selectedCard = null;
+        Cards notSelectedCards = new CardsImpl();
+        if (!controller.chooseUse(Outcome.Benefit, "Use this ability?", source, game)) {
             return true;
         }
         //The first player may reveal cards from the top of their library
-        while (creatureCard == null && player.getLibrary().hasCards()) {
-            Card card = player.getLibrary().removeFromTop(game);
+        for (Card card : controller.getLibrary().getCards(game)) {
             revealed.add(card);
             // until he or she reveals a creature card.
             if (card.isCreature()) {
-                creatureCard = card;
+                selectedCard = card;
+                break;
             } else {
-                nonCreatureCards.add(card);
+                notSelectedCards.add(card);
             }
         }
-        player.revealCards(sourceObject.getIdName(), revealed, game);
+        controller.revealCards(source, revealed, game);
 
         //If he or she does, that player puts that card onto the battlefield
-        if (creatureCard != null) {
-            player.moveCards(creatureCard, Zone.BATTLEFIELD, source, game);
+        if (selectedCard != null) {
+            controller.moveCards(selectedCard, Zone.BATTLEFIELD, source, game);
         }
         // and all other cards revealed this way into their graveyard
-        player.moveCards(nonCreatureCards, Zone.GRAVEYARD, source, game);
+        controller.moveCards(notSelectedCards, Zone.GRAVEYARD, source, game);
         return true;
     }
 

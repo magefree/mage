@@ -28,7 +28,6 @@
 package mage.cards.s;
 
 import java.util.UUID;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ContinuousEffect;
@@ -42,10 +41,10 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.players.Library;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 /**
  *
@@ -54,7 +53,7 @@ import mage.target.targetpointer.FixedTarget;
 public class StolenGoods extends CardImpl {
 
     public StolenGoods(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{U}");
 
         // Target opponent exiles cards from the top of their library until he or she exiles a nonland card. Until end of turn, you may cast that card without paying its mana cost.
         this.getSpellAbility().addEffect(new StolenGoodsEffect());
@@ -90,16 +89,14 @@ class StolenGoodsEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player opponent = game.getPlayer(targetPointer.getFirst(game, source));
-        MageObject sourceObject = source.getSourceObject(game);
-        if (opponent != null && opponent.getLibrary().hasCards() && sourceObject != null) {
-            Library library = opponent.getLibrary();
+        if (opponent != null) {
             Card card;
             do {
-                card = library.removeFromTop(game);
+                card = opponent.getLibrary().getFromTop(game);
                 if (card != null) {
-                    opponent.moveCardsToExile(card, source, game, true, source.getSourceId(), sourceObject.getIdName());
+                    opponent.moveCardsToExile(card, source, game, true, source.getSourceId(), CardUtil.createObjectRealtedWindowTitle(source, game, null));
                 }
-            } while (library.hasCards() && card != null && card.isLand());
+            } while (card != null && card.isLand());
 
             if (card != null) {
                 ContinuousEffect effect = new StolenGoodsCastFromExileEffect();

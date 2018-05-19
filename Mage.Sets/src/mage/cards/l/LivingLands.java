@@ -38,6 +38,7 @@ import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
+import mage.game.permanent.token.custom.CreatureToken;
 
 import java.util.UUID;
 
@@ -57,7 +58,9 @@ public class LivingLands extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");
 
         // All Forests are 1/1 creatures that are still lands.
-        ContinuousEffect effect = new BecomesCreatureAllEffect(new LivingLandsToken(), "lands", filter, Duration.WhileOnBattlefield);
+        ContinuousEffect effect = new BecomesCreatureAllEffect(
+                new CreatureToken(1, 1),
+                "lands", filter, Duration.WhileOnBattlefield, false);
         effect.getDependencyTypes().add(DependencyType.BecomeForest);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
@@ -69,22 +72,5 @@ public class LivingLands extends CardImpl {
     @Override
     public LivingLands copy() {
         return new LivingLands(this);
-    }
-}
-
-class LivingLandsToken extends TokenImpl {
-
-    public LivingLandsToken() {
-        super("", "1/1 creatures");
-        cardType.add(CardType.CREATURE);
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-    }
-    public LivingLandsToken(final LivingLandsToken token) {
-        super(token);
-    }
-
-    public LivingLandsToken copy() {
-        return new LivingLandsToken(this);
     }
 }

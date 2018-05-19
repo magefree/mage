@@ -57,7 +57,7 @@ public class DeadeyeRigHauler extends CardImpl {
 
         // <i>Raid</i>— When Deadeye Rig-Hauler enters the battlefield, if you attacked with a creature this turn, you may return target creature to its owner's hand.
         Ability ability = new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), true), RaidCondition.instance,
-                "<i>Raid</i> - When {this} enters the battlefield, if you attacked with a creature this turn, you may return target creature to its owner's hand.");
+                "<i>Raid</i> &mdash; When {this} enters the battlefield, if you attacked with a creature this turn, you may return target creature to its owner's hand.");
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability, new PlayerAttackedWatcher());
     }

@@ -27,6 +27,7 @@
  */
 package mage.abilities.effects.common;
 
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
@@ -50,21 +51,19 @@ public class FightTargetSourceEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent originalPermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (originalPermanent != null) {
-            Permanent sourcePermanent  = game.getPermanent(source.getSourceId());
-            // only if target is legal the effect will be applied
-            if (source.getTargets().get(0).isLegal(source, game)) {
-                Permanent creature1 = game.getPermanent(source.getTargets().get(0).getFirstTarget());
-                // 20110930 - 701.10
-                if (creature1 != null && sourcePermanent != null) {
-                    if (creature1.isCreature() && sourcePermanent.isCreature()) {
-                        return sourcePermanent.fight(creature1, source, game);
-                    }
+        MageObject sourceObject = source.getSourceObject(game);
+        if (sourceObject != null) {
+            Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
+            Permanent creature1 = game.getPermanent(getTargetPointer().getFirst(game, source));
+            // 20110930 - 701.10
+            if (creature1 != null && sourcePermanent != null) {
+                if (creature1.isCreature() && sourcePermanent.isCreature()) {
+                    return sourcePermanent.fight(creature1, source, game);
                 }
             }
-            if (!game.isSimulation())
-                game.informPlayers(originalPermanent.getLogName() + ": Fighting effect has been fizzled.");
+            if (!game.isSimulation()) {
+                game.informPlayers(sourceObject.getLogName() + ": Fighting effect has been fizzled.");
+            }
         }
         return false;
     }
@@ -83,4 +82,3 @@ public class FightTargetSourceEffect extends OneShotEffect {
     }
 
 }
-

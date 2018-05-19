@@ -66,7 +66,7 @@ public class JaggedPoppet extends CardImpl {
         Ability hellbentAbility = new ConditionalTriggeredAbility(
                 new DealsCombatDamageToAPlayerTriggeredAbility(new JaggedPoppetDealsDamageEffect(), false, true),
                 HellbentCondition.instance,
-                "<i>Hellbent</i> - Whenever {this} deals combat damage to a player, if you have no cards in hand, that player discards cards equal to the damage.");
+                "<i>Hellbent</i> &mdash; Whenever {this} deals combat damage to a player, if you have no cards in hand, that player discards cards equal to the damage.");
         hellbentAbility.setAbilityWord(AbilityWord.HELLBENT);
         this.addAbility(hellbentAbility);
 

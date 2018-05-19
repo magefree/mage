@@ -28,8 +28,8 @@
 package mage.cards.s;
 
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.common.SagaAbility;
+import mage.abilities.effects.Effects;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.abilities.keyword.IndestructibleAbility;
@@ -66,13 +66,15 @@ public class SongOfFreyalise extends CardImpl {
         );
 
         // III — Put a +1/+1 counter on each creature you control. Those creatures gain vigilance, trample, and indestructible until end of turn.
-        Ability ability = sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_III, new AddCountersAllEffect(CounterType.P1P1.createInstance(), FILTER_CONTROLLED_CREATURES));
-        ability.addEffect(new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn, FILTER_CONTROLLED_CREATURES)
+        Effects effects = new Effects();
+        effects.add(new AddCountersAllEffect(CounterType.P1P1.createInstance(), FILTER_CONTROLLED_CREATURES));
+        effects.add(new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn, FILTER_CONTROLLED_CREATURES)
                 .setText("Those creatures gain vigilance"));
-        ability.addEffect(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, FILTER_CONTROLLED_CREATURES)
+        effects.add(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, FILTER_CONTROLLED_CREATURES)
                 .setText(", trample"));
-        ability.addEffect(new GainAbilityControlledEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn, FILTER_CONTROLLED_CREATURES)
+        effects.add(new GainAbilityControlledEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn, FILTER_CONTROLLED_CREATURES)
                 .setText("and indestructible until end of turn"));
+        sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_III, SagaChapter.CHAPTER_III, effects);
         this.addAbility(sagaAbility);
     }
 

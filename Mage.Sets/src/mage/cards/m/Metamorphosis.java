@@ -33,7 +33,7 @@ import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.AddConditionalManaOfAnyColorEffect;
+import mage.abilities.effects.mana.AddConditionalManaOfAnyColorEffect;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.abilities.mana.conditional.CreatureCastConditionalMana;
 import mage.cards.CardImpl;
@@ -90,8 +90,7 @@ class MetamorphosisEffect extends OneShotEffect {
             }
         }
         if (amount > 0) {
-            AddConditionalManaOfAnyColorEffect anyMana = new AddConditionalManaOfAnyColorEffect(amount, new MetamorphosisManaBuilder());
-            anyMana.apply(game, source); //There probably is a more elegant way of doing this but.. I'm still learning :p
+            new AddConditionalManaOfAnyColorEffect(amount, new MetamorphosisManaBuilder()).apply(game, source);
         }
         return false;
     }

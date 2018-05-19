@@ -44,6 +44,7 @@ import mage.constants.Zone;
 import mage.filter.common.FilterLandCard;
 import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
+import mage.game.permanent.token.custom.ElementalCreatureToken;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -60,7 +61,9 @@ public class HostileDesert extends CardImpl {
         // {T}: Add {C}.
         addAbility(new ColorlessManaAbility());
         // {2}, Exile a land card from your graveyard: Hostile Desert becomes a 3/4 Elemental creature until end of turn. It's still a land.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new HostileDesertToken(), "land", Duration.EndOfTurn), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(
+                new ElementalCreatureToken(3, 4, "3/4 Elemental creature"),
+                "land", Duration.EndOfTurn), new GenericManaCost(2));
         ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(new FilterLandCard("land card from your graveyard"))));
         addAbility(ability);
     }
@@ -72,23 +75,5 @@ public class HostileDesert extends CardImpl {
     @Override
     public HostileDesert copy() {
         return new HostileDesert(this);
-    }
-}
-
-class HostileDesertToken extends TokenImpl {
-
-    public HostileDesertToken() {
-        super("", "3/4 elemental creature");
-        cardType.add(CardType.CREATURE);
-        subtype.add(SubType.ELEMENTAL);
-        power = new MageInt(3);
-        toughness = new MageInt(4);
-    }
-    public HostileDesertToken(final HostileDesertToken token) {
-        super(token);
-    }
-
-    public HostileDesertToken copy() {
-        return new HostileDesertToken(this);
     }
 }

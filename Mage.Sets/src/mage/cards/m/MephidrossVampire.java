@@ -46,14 +46,12 @@ import mage.game.permanent.Permanent;
 import java.util.UUID;
 
 /**
- *
  * @author jeffwadsworth
- *
  */
 public class MephidrossVampire extends CardImpl {
 
     public MephidrossVampire(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
         this.subtype.add(SubType.VAMPIRE);
 
         this.power = new MageInt(3);
@@ -88,6 +86,9 @@ class MephidrossVampireEffect extends ContinuousEffectImpl {
     MephidrossVampireEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         this.staticText = "Each creature you control is a Vampire in addition to its other creature types and has \"Whenever this creature deals damage to a creature, put a +1/+1 counter on this creature.\"";
+
+        // wait become creature effects first then apply own
+        this.addDependedToType(DependencyType.BecomeCreature);
     }
 
     MephidrossVampireEffect(final MephidrossVampireEffect effect) {

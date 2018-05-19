@@ -44,6 +44,7 @@ import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -67,7 +68,9 @@ public class TheloniteDruid extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {1}{G}, {tap}, Sacrifice a creature: Forests you control become 2/3 creatures until end of turn. They're still lands.
-        ContinuousEffect effect = new BecomesCreatureAllEffect(new TheloniteDruidLandToken(), "Forests", filter, Duration.EndOfTurn);
+        ContinuousEffect effect = new BecomesCreatureAllEffect(
+                new CreatureToken(2, 3),
+                "Forests", filter, Duration.EndOfTurn, false);
         effect.getDependencyTypes().add(DependencyType.BecomeForest);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 effect,

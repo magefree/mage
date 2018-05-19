@@ -51,7 +51,7 @@ public class ForceAway extends CardImpl {
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
-        // <i>Ferocious</i> - If you control a creature with power 4 or greater, you may draw a card. If you do, discard a card.
+        // <i>Ferocious</i> &mdash; If you control a creature with power 4 or greater, you may draw a card. If you do, discard a card.
         Effect effect = new ConditionalOneShotEffect(new DrawDiscardControllerEffect(1,1, true),
                 FerociousCondition.instance , "<br><i>Ferocious</i> &mdash; If you control a creature with power 4 or greater, you may draw a card. If you do, discard a card");
         this.getSpellAbility().addEffect(effect);

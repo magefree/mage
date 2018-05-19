@@ -34,6 +34,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureAttachedEffect;
 import mage.constants.Outcome;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.TargetPermanent;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
@@ -43,7 +44,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.permanent.token.TokenImpl;
-import mage.game.permanent.token.Token;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -66,9 +66,9 @@ public class FowlPlay extends CardImpl {
 
         // Enchanted creature is a Chicken with base power and toughness 1/1 and loses all abilities.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new BecomesCreatureAttachedEffect(new FowlPlayToken(),
+                new BecomesCreatureAttachedEffect(new CreatureToken(1, 1, "1/1 Chicken creature", SubType.CHICKEN),
                         "Enchanted creature is a Chicken with base power and toughness 1/1 and loses all abilities",
-                        Duration.WhileOnBattlefield, BecomesCreatureAttachedEffect.LoseType.ABILITIES_SUBTYPE_AND_PT)));
+                        Duration.WhileOnBattlefield, BecomesCreatureAttachedEffect.LoseType.ABILITIES_SUBTYPE)));
     }
 
     public FowlPlay(final FowlPlay card) {
@@ -78,23 +78,5 @@ public class FowlPlay extends CardImpl {
     @Override
     public FowlPlay copy() {
         return new FowlPlay(this);
-    }
-}
-
-class FowlPlayToken extends TokenImpl {
-
-    public FowlPlayToken() {
-        super("Chicken", "a Chicken with base power and toughness 1/1 with no abilities");
-        cardType.add(CardType.CREATURE);
-        subtype.add(SubType.CHICKEN);
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-    }
-    public FowlPlayToken(final FowlPlayToken token) {
-        super(token);
-    }
-
-    public FowlPlayToken copy() {
-        return new FowlPlayToken(this);
     }
 }

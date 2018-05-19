@@ -328,12 +328,15 @@ public abstract class GameImpl implements Game, Serializable {
         MageObject object;
         if (state.getBattlefield().containsPermanent(objectId)) {
             object = state.getBattlefield().getPermanent(objectId);
-            state.setZone(objectId, Zone.BATTLEFIELD); // why is this neccessary?
+            // state.setZone(objectId, Zone.BATTLEFIELD); // why is this neccessary?
             return object;
+        }
+        if (getPermanentsEntering().containsKey(objectId)) {
+            return getPermanentEntering(objectId);
         }
         for (StackObject item : state.getStack()) {
             if (item.getId().equals(objectId)) {
-                state.setZone(objectId, Zone.STACK); // why is this neccessary?
+                //  state.setZone(objectId, Zone.STACK); // why is this neccessary?
                 return item;
             }
             if (item.getSourceId().equals(objectId) && item instanceof Spell) {
@@ -1383,7 +1386,7 @@ public abstract class GameImpl implements Game, Serializable {
                     } catch (Exception ex) {
                         logger.fatal("Game exception gameId: " + getId(), ex);
                         if ((ex instanceof NullPointerException)
-                                && errorContinueCounter == 1 && ex.getStackTrace() != null) {
+                                && errorContinueCounter == 0 && ex.getStackTrace() != null) {
                             logger.fatal(ex.getStackTrace());
                         }
                         this.fireErrorEvent("Game exception occurred: ", ex);
@@ -1421,7 +1424,7 @@ public abstract class GameImpl implements Game, Serializable {
             top.resolve(this);
         } finally {
             if (top != null) {
-                state.getStack().remove(top); // seems partly redundant because move card from stack to grave is already done and the stack removed
+                state.getStack().remove(top, this); // seems partly redundant because move card from stack to grave is already done and the stack removed
                 rememberLKI(top.getSourceId(), Zone.STACK, top);
                 checkInfiniteLoop(top.getSourceId());
                 if (!getTurn().isEndTurnRequested()) {
@@ -2028,21 +2031,30 @@ public abstract class GameImpl implements Game, Serializable {
                     }
                 }
             }
-            // Remove Saga enchantment if last chapter is reached and chapter ability has left the stack
+            // 704.5s If the number of lore counters on a Saga permanent is greater than or equal to its final chapter number 
+            // and it isn’t the source of a chapter ability that has triggered but not yet left the stack, that Saga’s controller sacrifices it.
             if (perm.hasSubtype(SubType.SAGA, this)) {
                 for (Ability sagaAbility : perm.getAbilities()) {
                     if (sagaAbility instanceof SagaAbility) {
                         int maxChapter = ((SagaAbility) sagaAbility).getMaxChapter().getNumber();
                         if (maxChapter <= perm.getCounters(this).getCount(CounterType.LORE)) {
-                            boolean noChapterAbilityOnStack = true;
+                            boolean noChapterAbilityTriggeredOrOnStack = true;
                             // Check chapter abilities on stack
                             for (StackObject stackObject : getStack()) {
                                 if (stackObject.getSourceId().equals(perm.getId()) && SagaAbility.isChapterAbility(stackObject)) {
-                                    noChapterAbilityOnStack = false;
+                                    noChapterAbilityTriggeredOrOnStack = false;
                                     break;
                                 }
                             }
-                            if (noChapterAbilityOnStack) {
+                            if (noChapterAbilityTriggeredOrOnStack) {
+                                for (TriggeredAbility trigger : state.getTriggered(perm.getControllerId())) {
+                                    if (SagaAbility.isChapterAbility(trigger) && trigger.getSourceId().equals(perm.getId())) {
+                                        noChapterAbilityTriggeredOrOnStack = false;
+                                        break;
+                                    }
+                                }
+                            }
+                            if (noChapterAbilityTriggeredOrOnStack) {
                                 // After the last chapter ability has left the stack, you'll sacrifice the Saga
                                 perm.sacrifice(perm.getId(), this);
                                 somethingHappened = true;
@@ -2581,10 +2593,10 @@ public abstract class GameImpl implements Game, Serializable {
                 it.remove();
             }
         }
-       
+
         if (addPlaneAgain) {
             boolean addedAgain = false;
-            for (Player aplayer : state.getPlayers().values()) {                
+            for (Player aplayer : state.getPlayers().values()) {
                 if (!aplayer.hasLeft() && !addedAgain) {
                     addedAgain = true;
                     Plane plane = Plane.getRandomPlane();

@@ -55,6 +55,7 @@ import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.game.*;
+import mage.game.command.CommandObject;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
@@ -618,14 +619,18 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                     stackObject = game.getStack().getSpell(getId());
                 }
                 if (stackObject != null) {
-                    removed = game.getStack().remove(stackObject);
+                    removed = game.getStack().remove(stackObject, game);
                     lkiObject = stackObject;
                 }
                 break;
             case COMMAND:
-                lkiObject = game.getObject(objectId);
+                for (CommandObject commandObject : game.getState().getCommand()) {
+                    if (commandObject.getId().equals(objectId)) {
+                        lkiObject = commandObject;
+                    }
+                }
                 if (lkiObject != null) {
-                    removed = game.getState().getCommand().remove(game.getObject(objectId));
+                    removed = game.getState().getCommand().remove((CommandObject) lkiObject);
                 }
                 break;
             case OUTSIDE:

@@ -22,6 +22,7 @@ Anthologies|ATH|
 Antiquities|ATQ|
 Avacyn Restored|AVR|
 Battle for Zendikar|BFZ|
+Battlebond|BBD|
 Born of the Gods|BNG|
 Betrayers of Kamigawa|BOK|
 Battle Royale Box Set|BRB|
@@ -86,6 +87,7 @@ Fallen Empires|FEM|
 Friday Night Magic|FNMP|
 Fate Reforged|FRF|
 Future Sight|FUT|
+Global Series: Jiang Yanggu & Mu Yanling|GS1|
 Guildpact|GPT|
 Grand Prix|GPX|
 WPN Gateway|GRC|

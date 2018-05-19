@@ -30,12 +30,10 @@ package mage.cards.c;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -48,8 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class Chronostutter extends CardImpl {
 
     public Chronostutter(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{5}{U}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{5}{U}");
 
         // Put target creature into its owner's library second from the top.
         this.getSpellAbility().addEffect(new ChronostutterEffect());
@@ -85,22 +82,11 @@ class ChronostutterEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getFirstTarget());
-        if (permanent != null) {
-            Player owner = game.getPlayer(permanent.getOwnerId());
-            Player controller = game.getPlayer(permanent.getControllerId());
-            if (owner == null || controller == null) {
-                return false;
-            }
-
-            Card card = null;
-            if (owner.getLibrary().hasCards()) {
-                card = owner.getLibrary().removeFromTop(game);
-            }
-
-            permanent.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-            if (card != null) {
-                owner.getLibrary().putOnTop(card, game);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+            if (permanent != null) {
+                controller.putCardOnTopXOfLibrary(permanent, game, source, 2);
             }
             return true;
         }

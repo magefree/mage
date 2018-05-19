@@ -66,7 +66,9 @@ public class WindZendikon extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
         
-        Ability ability2 = new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesCreatureAttachedEffect(new ElementalToken(), "Enchanted land is a 2/2 blue Elemental creature with flying.  It's still a land", Duration.WhileOnBattlefield));
+        Ability ability2 = new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesCreatureAttachedEffect(
+                new WindZendikonElementalToken(), "Enchanted land is a 2/2 blue Elemental creature with flying.  It's still a land",
+                Duration.WhileOnBattlefield, BecomesCreatureAttachedEffect.LoseType.COLOR));
         this.addAbility(ability2);
         
         Ability ability3 = new DiesAttachedTriggeredAbility(new ReturnToHandAttachedEffect(), "enchanted land", false);
@@ -82,8 +84,8 @@ public class WindZendikon extends CardImpl {
         return new WindZendikon(this);
     }
 
-    class ElementalToken extends TokenImpl {
-        ElementalToken() {
+    class WindZendikonElementalToken extends TokenImpl {
+        WindZendikonElementalToken() {
             super("", "2/2 blue Elemental creature with flying");
             cardType.add(CardType.CREATURE);
             color.setBlue(true);
@@ -92,12 +94,12 @@ public class WindZendikon extends CardImpl {
             toughness = new MageInt(2);
             addAbility(FlyingAbility.getInstance());
         }
-        public ElementalToken(final ElementalToken token) {
+        public WindZendikonElementalToken(final WindZendikonElementalToken token) {
             super(token);
         }
 
-        public ElementalToken copy() {
-            return new ElementalToken(this);
+        public WindZendikonElementalToken copy() {
+            return new WindZendikonElementalToken(this);
         }
     }
 }

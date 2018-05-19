@@ -31,10 +31,10 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.keyword.FlyingAbility;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 
 /**
@@ -43,34 +43,36 @@ import mage.game.permanent.token.Token;
 public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements SourceEffect {
 
     protected Token token;
-    protected String type;
+    protected String theyAreStillType;
     protected boolean losePreviousTypes;
     protected DynamicValue power = null;
     protected DynamicValue toughness = null;
 
-    public BecomesCreatureSourceEffect(Token token, String type, Duration duration) {
-        this(token, type, duration, false, false);
+    public BecomesCreatureSourceEffect(Token token, String theyAreStillType, Duration duration) {
+        this(token, theyAreStillType, duration, false, false);
     }
 
-    public BecomesCreatureSourceEffect(Token token, String type, Duration duration, boolean losePreviousTypes, boolean characterDefining) {
-        this(token, type, duration, losePreviousTypes, characterDefining, null, null);
+    public BecomesCreatureSourceEffect(Token token, String theyAreStillType, Duration duration, boolean losePreviousTypes, boolean characterDefining) {
+        this(token, theyAreStillType, duration, losePreviousTypes, characterDefining, null, null);
     }
 
-    public BecomesCreatureSourceEffect(Token token, String type, Duration duration, boolean losePreviousTypes, boolean characterDefining, DynamicValue power, DynamicValue toughness) {
+    public BecomesCreatureSourceEffect(Token token, String theyAreStillType, Duration duration, boolean losePreviousTypes, boolean characterDefining, DynamicValue power, DynamicValue toughness) {
         super(duration, Outcome.BecomeCreature);
         this.characterDefining = characterDefining;
         this.token = token;
-        this.type = type;
+        this.theyAreStillType = theyAreStillType;
         this.losePreviousTypes = losePreviousTypes;
         this.power = power;
         this.toughness = toughness;
         setText();
+
+        this.addDependencyType(DependencyType.BecomeCreature);
     }
 
     public BecomesCreatureSourceEffect(final BecomesCreatureSourceEffect effect) {
         super(effect);
         this.token = effect.token.copy();
-        this.type = effect.type;
+        this.theyAreStillType = effect.theyAreStillType;
         this.losePreviousTypes = effect.losePreviousTypes;
         if (effect.power != null) {
             this.power = effect.power.copy();
@@ -108,10 +110,11 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
                         if (losePreviousTypes) {
                             permanent.getCardType().clear();
                         }
-                        for (CardType t : token.getCardType()) {
-                            permanent.addCardType(t);
+                        for (CardType cardType : token.getCardType()) {
+                            permanent.addCardType(cardType);
                         }
-                        if (type != null && type.isEmpty() || type == null && permanent.isLand()) {
+
+                        if (theyAreStillType != null && theyAreStillType.isEmpty() || theyAreStillType == null && permanent.isLand()) {
                             permanent.getSubtype(game).retainAll(SubType.getLandTypes(false));
                         }
                         if (!token.getSubtype(game).isEmpty()) {
@@ -120,6 +123,7 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
                         permanent.setIsAllCreatureTypes(token.isAllCreatureTypes());
                     }
                     break;
+
                 case ColorChangingEffects_5:
                     if (sublayer == SubLayer.NA) {
                         if (token.getColor(game).hasColor()) {
@@ -127,19 +131,20 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
                         }
                     }
                     break;
+
                 case AbilityAddingRemovingEffects_6:
                     if (sublayer == SubLayer.NA) {
                         for (Ability ability : token.getAbilities()) {
                             permanent.addAbility(ability, source.getSourceId(), game);
                         }
-
                     }
                     break;
+
                 case PTChangingEffects_7:
                     if ((sublayer == SubLayer.CharacteristicDefining_7a && isCharacterDefining())
                             || (sublayer == SubLayer.SetPT_7b && !isCharacterDefining())) {
                         if (power != null) {
-                            permanent.getPower().setValue(power.calculate(game, source, this));
+                            permanent.getPower().setValue(power.calculate(game, source, this)); // check all other becomes to use calculate?
                         } else if (token.getPower() != null) {
                             permanent.getPower().setValue(token.getPower().getValue());
                         }
@@ -149,11 +154,15 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
                             permanent.getToughness().setValue(token.getToughness().getValue());
                         }
                     }
+                    break;
             }
+
             return true;
+
         } else if (duration == Duration.Custom) {
             this.discard();
         }
+
         return false;
     }
 
@@ -163,8 +172,8 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
     }
 
     private void setText() {
-        if (type != null && !type.isEmpty()) {
-            staticText = duration.toString() + " {this} becomes a " + token.getDescription() + " that's still a " + this.type;
+        if (theyAreStillType != null && !theyAreStillType.isEmpty()) {
+            staticText = duration.toString() + " {this} becomes a " + token.getDescription() + " that's still a " + this.theyAreStillType;
         } else {
             staticText = duration.toString() + " {this} becomes a " + token.getDescription();
         }

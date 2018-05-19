@@ -28,6 +28,7 @@
 package mage.cards.a;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -43,23 +44,28 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
+import mage.game.permanent.token.custom.CreatureToken;
 
 /**
- *
  * @author fireshoes
  */
 public class AtarkaMonument extends CardImpl {
 
     public AtarkaMonument(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // {T}: Add {R} or {G}.
         this.addAbility(new RedManaAbility());
         this.addAbility(new GreenManaAbility());
-        
+
         // {4}{R}{G}: Atarka Monument becomes a 4/4 red and green Dragon artifact creature with flying until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect
-            (new AtarkaMonumentToken(), "", Duration.EndOfTurn), new ManaCostsImpl("{4}{R}{G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(
+                new CreatureToken(4, 4, "4/4 red and green Dragon artifact creature with flying")
+                        .withColor("RG")
+                        .withSubType(SubType.DRAGON)
+                        .withType(CardType.ARTIFACT)
+                        .withAbility(FlyingAbility.getInstance()),
+                "", Duration.EndOfTurn), new ManaCostsImpl("{4}{R}{G}")));
     }
 
     public AtarkaMonument(final AtarkaMonument card) {
@@ -69,26 +75,5 @@ public class AtarkaMonument extends CardImpl {
     @Override
     public AtarkaMonument copy() {
         return new AtarkaMonument(this);
-    }
-
-    private static class AtarkaMonumentToken extends TokenImpl {
-        AtarkaMonumentToken() {
-            super("", "4/4 red and green Dragon artifact creature with flying");
-            this.cardType.add(CardType.ARTIFACT);
-            this.cardType.add(CardType.CREATURE);
-            this.color.setRed(true);
-            this.color.setGreen(true);
-            this.subtype.add(SubType.DRAGON);
-            this.power = new MageInt(4);
-            this.toughness = new MageInt(4);
-            this.addAbility(FlyingAbility.getInstance());
-        }
-        public AtarkaMonumentToken(final AtarkaMonumentToken token) {
-            super(token);
-        }
-
-        public AtarkaMonumentToken copy() {
-            return new AtarkaMonumentToken(this);
-        }
     }
 }

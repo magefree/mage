@@ -25,12 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.effects.common;
+package mage.abilities.effects.mana;
 
+import mage.ConditionalMana;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.choices.ChoiceColor;
 import mage.game.Game;
@@ -84,39 +86,44 @@ public class AddConditionalManaOfAnyColorEffect extends ManaEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
-            return false;
+        if (controller != null) {
+            checkToFirePossibleEvents(getMana(game, source), game, source);
+            controller.getManaPool().addMana(getMana(game, source), game, source);
+            return true;
         }
+        return false;
+    }
 
+    @Override
+    public Mana produceMana(boolean netMana, Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return null;
+        }
+        ConditionalMana mana = null;
         int value = amount.calculate(game, source, this);
-        boolean result = false;
         ChoiceColor choice = new ChoiceColor(true);
-
         for (int i = 0; i < value; i++) {
-            controller.choose(outcome, choice, game);
             if (choice.getChoice() == null) {
-                return false;
+                controller.choose(outcome, choice, game);
             }
-            Mana mana = choice.getMana(1);
-            if (mana != null) {
-                mana = manaBuilder.setMana(mana, source, game).build();
+            if (choice.getChoice() == null) {
+                return null;
             }
-            if (mana != null) {
-                checkToFirePossibleEvents(mana, game, source);
-                controller.getManaPool().addMana(mana, game, source);
-                result = true;
-            }
-            if (!oneChoice) {
+            if (oneChoice) {
+                mana = new ConditionalMana(manaBuilder.setMana(choice.getMana(value), source, game).build());
+                break;
+            } else {
+                if (mana == null) {
+                    mana = new ConditionalMana(manaBuilder.setMana(choice.getMana(1), source, game).build());
+                } else {
+                    mana.add(choice.getMana(1));
+                }
                 choice.clearChoice();
             }
         }
 
-        return result;
-    }
+        return mana;
 
-    @Override
-    public Mana getMana(Game game, Ability source) {
-        //TODO: TAP_FOR_MANA Event does not support currently to get an amount > 1 of conditional mana
-        return null;
     }
 }

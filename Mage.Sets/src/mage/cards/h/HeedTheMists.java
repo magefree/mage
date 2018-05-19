@@ -34,8 +34,8 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -47,9 +47,8 @@ import mage.players.Player;
 public class HeedTheMists extends CardImpl {
 
     public HeedTheMists(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{U}{U}");
         this.subtype.add(SubType.ARCANE);
-
 
         // Put the top card of your library into your graveyard, then draw cards equal to that card's converted mana cost.
         this.getSpellAbility().addEffect(new HeedTheMistsEffect());
@@ -80,7 +79,7 @@ public class HeedTheMists extends CardImpl {
             boolean result = false;
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null) {
-                Card card = controller.getLibrary().removeFromTop(game);
+                Card card = controller.getLibrary().getFromTop(game);
                 if (card != null) {
                     int cmc = card.getConvertedManaCost();
                     controller.moveCards(card, Zone.GRAVEYARD, source, game);

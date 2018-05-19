@@ -34,6 +34,7 @@ import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SagaAbility;
+import mage.abilities.effects.Effects;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
@@ -48,6 +49,7 @@ import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.Targets;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -64,14 +66,25 @@ public class TriumphOfGerrard extends CardImpl {
         // <i>(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)</i>
         SagaAbility sagaAbility = new SagaAbility(this, SagaChapter.CHAPTER_III);
         // I, II — Put a +1/+1 counter on target creature you control with the greatest power.
-        Ability ability = sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_I, SagaChapter.CHAPTER_II, new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
-        ability.addTarget(new TriumphOfGerrardTargetCreature());
+        sagaAbility.addChapterEffect(
+                this,
+                SagaChapter.CHAPTER_I,
+                SagaChapter.CHAPTER_II,
+                new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
+                new TriumphOfGerrardTargetCreature()
+        );
         // III — Target creature you control with the greatest power gains flying, first strike, and lifelink until end of turn.
-        ability = sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_III,
-                new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn).setText("Target creature you control with the greatest power gains flying"));
-        ability.addEffect(new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn).setText(", first strike"));
-        ability.addEffect(new GainAbilityTargetEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn).setText(", and lifelink until end of turn"));
-        ability.addTarget(new TriumphOfGerrardTargetCreature());
+        Effects effects = new Effects();
+        effects.add(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn)
+                .setText("Target creature you control with the greatest power gains flying"));
+        effects.add(new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn)
+                .setText(", first strike"));
+        effects.add(new GainAbilityTargetEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn)
+                .setText(", and lifelink until end of turn"));
+        sagaAbility.addChapterEffect(
+                this, SagaChapter.CHAPTER_III, SagaChapter.CHAPTER_III,
+                effects, new Targets(new TriumphOfGerrardTargetCreature())
+        );
         this.addAbility(sagaAbility);
 
     }

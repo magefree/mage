@@ -25,14 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.effects.common;
+package mage.abilities.effects.mana;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.abilities.effects.common.ManaEffect;
 import mage.constants.ColoredManaSymbol;
 import mage.game.Game;
 import mage.players.Player;
@@ -92,6 +94,17 @@ public class AddManaInAnyCombinationEffect extends ManaEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
+            checkToFirePossibleEvents(getMana(game, source), game, source);
+            player.getManaPool().addMana(getMana(game, source), game, source);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public Mana produceMana(boolean netMana, Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        if (player != null) {
             Mana mana = new Mana();
             int amountOfManaLeft = amount.calculate(game, source, this);
             int maxAmount = amountOfManaLeft;
@@ -111,16 +124,17 @@ public class AddManaInAnyCombinationEffect extends ManaEffect {
                     }
                 }
             }
-            checkToFirePossibleEvents(mana, game, source);
-            player.getManaPool().addMana(mana, game, source);
-            return true;
+
+            return mana;
         }
-        return false;
+        return null;
     }
 
     @Override
-    public Mana getMana(Game game, Ability source) {
-        return null;
+    public List<Mana> getNetMana(Game game, Ability source) {
+        ArrayList<Mana> netMana = new ArrayList<>();
+        netMana.add(new Mana(0, 0, 0, 0, 0, 0, amount.calculate(game, source, this), 0));
+        return netMana;
     }
 
     private String setText() {

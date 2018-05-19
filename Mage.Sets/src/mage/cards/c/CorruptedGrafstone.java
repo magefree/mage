@@ -117,6 +117,17 @@ class CorruptedGrafstoneManaEffect extends ManaEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        if (player != null) {
+            checkToFirePossibleEvents(getMana(game, source), game, source);
+            player.getManaPool().addMana(getMana(game, source), game, source);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public Mana produceMana(boolean netMana, Game game, Ability source) {
         Mana types = getManaTypesInGraveyard(game, source);
         Choice choice = new ChoiceColor(true);
         choice.getChoices().clear();
@@ -143,7 +154,7 @@ class CorruptedGrafstoneManaEffect extends ManaEffect {
                     choice.setChoice(choice.getChoices().iterator().next());
                 } else {
                     if (!player.choose(outcome, choice, game)) {
-                        return false;
+                        return null;
                     }
                 }
                 Mana computedManaHere = new Mana();
@@ -164,18 +175,13 @@ class CorruptedGrafstoneManaEffect extends ManaEffect {
                         computedManaHere.setWhite(1);
                         break;
                 }
-                checkToFirePossibleEvents(computedManaHere, game, source);
-                player.getManaPool().addMana(computedManaHere, game, source);
+                return computedManaHere;
             }
         }
-        return true;
-    }
-
-    @Override
-    public Mana getMana(Game game, Ability source) {
         return null;
     }
 
+    @Override
     public List<Mana> getNetMana(Game game, Ability source) {
         List<Mana> netManas = new ArrayList<>();
         Mana types = getManaTypesInGraveyard(game, source);

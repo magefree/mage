@@ -56,7 +56,7 @@ public class RemoveCounterSourceEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent != null) {
             int toRemove = Math.min(counter.getCount(), permanent.getCounters(game).getCount(counter.getName()));
             if (toRemove > 0) {
@@ -67,18 +67,20 @@ public class RemoveCounterSourceEffect extends OneShotEffect {
             }
             return true;
         }
-        Card card = game.getCard(source.getSourceId());
-        if (card != null) {
-            int toRemove = Math.min(counter.getCount(), card.getCounters(game).getCount(counter.getName()));
-            if (toRemove > 0) {
-                card.removeCounters(counter.getName(), toRemove, game);
-                if (!game.isSimulation()) {
-                    game.informPlayers("Removed " + toRemove + ' ' + counter.getName()
-                            + " counter from " + card.getLogName()
-                            + " (" + card.getCounters(game).getCount(counter.getName()) + " left)");
+        if (!(source.getSourceObject(game) instanceof Permanent)) {
+            Card card = game.getCard(source.getSourceId());
+            if (card != null) {
+                int toRemove = Math.min(counter.getCount(), card.getCounters(game).getCount(counter.getName()));
+                if (toRemove > 0) {
+                    card.removeCounters(counter.getName(), toRemove, game);
+                    if (!game.isSimulation()) {
+                        game.informPlayers("Removed " + toRemove + ' ' + counter.getName()
+                                + " counter from " + card.getLogName()
+                                + " (" + card.getCounters(game).getCount(counter.getName()) + " left)");
+                    }
                 }
+                return true;
             }
-            return true;
         }
         return false;
     }

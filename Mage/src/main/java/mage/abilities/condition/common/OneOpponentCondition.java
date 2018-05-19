@@ -25,74 +25,43 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.effects.common;
+package mage.abilities.condition.common;
 
-import mage.Mana;
 import mage.abilities.Ability;
-import mage.choices.ChoiceColor;
+import mage.abilities.condition.Condition;
 import mage.game.Game;
 import mage.players.Player;
-import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
- * @author BetaSteward_at_googlemail.com
+ *
+ * @author TheElk801
  */
-public class AddManaOfAnyColorEffect extends BasicManaEffect {
+public enum OneOpponentCondition implements Condition {
 
-    protected int amount;
-
-    public AddManaOfAnyColorEffect() {
-        this(1);
-    }
-
-    public AddManaOfAnyColorEffect(final int amount) {
-        super(new Mana(0, 0, 0, 0, 0, 0, amount, 0));
-        this.amount = amount;
-        this.staticText = new StringBuilder("add ")
-                .append(CardUtil.numberToText(amount))
-                .append(" mana of any ")
-                .append(amount > 1 ? "one " : "")
-                .append("color").toString();
-    }
-
-    public AddManaOfAnyColorEffect(final AddManaOfAnyColorEffect effect) {
-        super(effect);
-        this.amount = effect.amount;
-    }
-
-    @Override
-    public AddManaOfAnyColorEffect copy() {
-        return new AddManaOfAnyColorEffect(this);
-    }
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
+        int opponentCount = 0;
         if (controller != null) {
-            String mes = String.format("Select color of %d mana to add it", this.amount);
-            ChoiceColor choice = new ChoiceColor(true, mes, game.getObject(source.getSourceId()));
-            if (controller.choose(outcome, choice, game)) {
-                if (choice.getColor() == null) {
-                    return false;
+            for (UUID uuid : game.getOpponents(controller.getId())) {
+                Player opponent = game.getPlayer(uuid);
+                if (opponent != null) {
+                    opponentCount++;
+                    if (opponentCount > 1) {
+                        return false;
+                    }
                 }
-                Mana createdMana = choice.getMana(amount);
-                if (createdMana != null) {
-                    checkToFirePossibleEvents(createdMana, game, source);
-                    controller.getManaPool().addMana(createdMana, game, source);
-                }
-                return true;
             }
         }
-        return false;
-    }
-
-    public int getAmount() {
-        return amount;
+        return true;
     }
 
     @Override
-    public Mana getMana() {
-        return new Mana(0, 0, 0, 0, 0, 0, amount, 0);
+    public String toString() {
+        return "you have one opponent";
     }
-
 }

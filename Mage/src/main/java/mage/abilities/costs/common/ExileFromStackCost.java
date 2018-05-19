@@ -63,7 +63,7 @@ public class ExileFromStackCost extends CostImpl {
                 }
                 String spellName = spellToExile.getName();
                 if (spellToExile.isCopy()) {
-                    game.getStack().remove(spellToExile);
+                    game.getStack().remove(spellToExile, game);
                 } else {
                     spellToExile.moveToExile(null, "", ability.getSourceId(), game);
                 }

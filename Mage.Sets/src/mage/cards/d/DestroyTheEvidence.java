@@ -28,7 +28,6 @@
 package mage.cards.d;
 
 import java.util.UUID;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -48,7 +47,7 @@ import mage.target.common.TargetLandPermanent;
 public class DestroyTheEvidence extends CardImpl {
 
     public DestroyTheEvidence(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{B}");
 
         // Destroy target land. Its controller reveals cards from the top of his
         // or her library until he or she reveals a land card, then puts those cards into their graveyard.
@@ -87,27 +86,21 @@ class DestroyTheEvidenceEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent landPermanent = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
-        MageObject sourceObject = source.getSourceObject(game);
-        if (sourceObject != null && landPermanent != null) {
+        if (landPermanent != null) {
             Player player = game.getPlayer(landPermanent.getControllerId());
             if (player == null) {
                 return false;
             }
-            boolean landFound = false;
-            Cards cards = new CardsImpl();            
-            while (player.getLibrary().hasCards() && !landFound) {
-                if (!player.canRespond()) {
-                    return false;
-                }
-                Card card = player.getLibrary().removeFromTop(game);
+            Cards cards = new CardsImpl();
+            for (Card card : player.getLibrary().getCards(game)) {
                 if (card != null) {
                     cards.add(card);
                     if (card.isLand()) {
-                        landFound = true;
+                        break;
                     }
                 }
             }
-            player.revealCards(sourceObject.getName(), cards, game, true);
+            player.revealCards(source, cards, game);
             player.moveCards(cards, Zone.GRAVEYARD, source, game);
             return true;
         }

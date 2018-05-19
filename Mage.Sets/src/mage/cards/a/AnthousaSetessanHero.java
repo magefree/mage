@@ -41,6 +41,7 @@ import mage.constants.SuperType;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
+import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -58,8 +59,8 @@ public class AnthousaSetessanHero extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
 
-        // <i>Heroic</i> - Whenever you cast a spell that targets Anthousa, Setessan Hero, up to three target lands you control each become 2/2 Warrior creatures until end of turn. They're still lands.
-        Ability ability = new HeroicAbility(new BecomesCreatureTargetEffect(new AnthousaWarriorToken(), false, true, Duration.EndOfTurn));
+        // <i>Heroic</i> &mdash; Whenever you cast a spell that targets Anthousa, Setessan Hero, up to three target lands you control each become 2/2 Warrior creatures until end of turn. They're still lands.
+        Ability ability = new HeroicAbility(new BecomesCreatureTargetEffect(new CreatureToken(2, 2, "2/2 Warrior creature", SubType.WARRIOR),false,true, Duration.EndOfTurn));
         ability.addTarget(new TargetControlledPermanent(0,3,new FilterControlledLandPermanent("lands"), false));
         this.addAbility(ability);
     }
@@ -72,23 +73,4 @@ public class AnthousaSetessanHero extends CardImpl {
     public AnthousaSetessanHero copy() {
         return new AnthousaSetessanHero(this);
     }
-}
-
-class AnthousaWarriorToken extends TokenImpl {
-
-    public AnthousaWarriorToken() {
-        super("", "2/2 Warrior creatures");
-        cardType.add(CardType.CREATURE);
-        subtype.add(SubType.WARRIOR);
-        power = new MageInt(2);
-        toughness = new MageInt(2);
-    }
-    public AnthousaWarriorToken(final AnthousaWarriorToken token) {
-        super(token);
-    }
-
-    public AnthousaWarriorToken copy() {
-        return new AnthousaWarriorToken(this);
-    }
-
 }

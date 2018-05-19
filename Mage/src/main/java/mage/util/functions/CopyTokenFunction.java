@@ -36,7 +36,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.game.permanent.PermanentCard;
 import mage.game.permanent.PermanentToken;
-import mage.game.permanent.token.TokenImpl;
 import mage.game.permanent.token.Token;
 
 /**
@@ -110,8 +109,8 @@ public class CopyTokenFunction implements Function<Token, Card> {
 
         for (Ability ability0 : sourceObj.getAbilities()) {
             Ability ability = ability0.copy();
-            ability.newId();
-            ability.setSourceId(target.getId());
+            ability.newOriginalId(); // The token is independant from the copy from object so it need a new original Id, otherwise there are problems to check for created continuous effects to check if the source (the Token) has still this ability
+
             target.addAbility(ability);
         }
 

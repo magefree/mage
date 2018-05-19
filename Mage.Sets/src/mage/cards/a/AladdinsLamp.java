@@ -51,15 +51,14 @@ import mage.target.TargetCard;
 public class AladdinsLamp extends CardImpl {
 
     public AladdinsLamp(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{10}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{10}");
 
-        // {X}, {tap}: The next time you would draw a card this turn, instead look at the top X cards of your library, put all but one of them on the bottom of your library in a random order, then draw a card. X can't be 0.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AladdinsLampEffect(), new ManaCostsImpl("{X}"));        
+        // {X}, {T}: The next time you would draw a card this turn, instead look at the top X cards of your library, put all but one of them on the bottom of your library in a random order, then draw a card. X can't be 0.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AladdinsLampEffect(), new ManaCostsImpl("{X}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
-        
+
     }
-    
 
     public AladdinsLamp(final AladdinsLamp card) {
         super(card);
@@ -88,51 +87,30 @@ class AladdinsLampEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {        
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
             return false;
         }
 
-        Cards cards = new CardsImpl();
-        int count = source.getManaCostsToPay().getX();
-        count = Math.min(player.getLibrary().size(), count);
-        for (int i = 0; i < count; i++) {
-            Card card = player.getLibrary().removeFromTop(game);// I'd like to use .getTopCards(game, count), but it returns a set which I dunno how to work with and would break the copied code adding to effort/time;
-            if (card != null) {
-                cards.add(card);                
-            }
+        Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, source.getManaCostsToPay().getX()));
+        controller.lookAtCards(source, null, cards, game);
+        TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to stay at the top of library"));
+        if (controller.choose(outcome, cards, target, game)) {
+            cards.remove(target.getFirstTarget());
         }
-        player.lookAtCards("Aladdin's Lamp", cards, game);
-
-        TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard());
-
-        if (player.choose(outcome, cards, target, game)) {
-            Card card = cards.get(target.getFirstTarget(), game);
-            if (card != null) {
-                cards.remove(card);
-                card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
-            }
-        }
-    
-        
-        // Put the rest on the bottom of your library in a random order
-        while (!cards.isEmpty()) {
-            Card card = cards.getRandom(game);
-            if (card != null) {
-                cards.remove(card);
-                card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
-            }
-        }
-        //player.drawCards(1, game); // Technically I should move it to the top and then draw but, I cant confirm that flag above refers to bottom of library
+        controller.putCardsOnBottomOfLibrary(cards, game, source, false);
+        game.applyEffects();
+        controller.drawCards(1, game, event.getAppliedEffects());
+        discard();
         return true;
     }
-    
+
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.DRAW_CARD;
-    }   
-    
+    }
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         return source.getControllerId().equals(event.getPlayerId());

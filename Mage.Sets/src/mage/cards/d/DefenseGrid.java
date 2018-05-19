@@ -33,7 +33,6 @@ import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
-import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -46,7 +45,7 @@ import mage.game.Game;
 public class DefenseGrid extends CardImpl {
 
     public DefenseGrid(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // Each spell costs {3} more to cast except during its controller's turn.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DefenseGridCostModificationEffect()));
@@ -65,7 +64,7 @@ public class DefenseGrid extends CardImpl {
 
 class DefenseGridCostModificationEffect extends CostModificationEffectImpl {
 
-    DefenseGridCostModificationEffect ( ) {
+    DefenseGridCostModificationEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.INCREASE_COST);
         staticText = "Each spell costs {3} more to cast except during its controller's turn";
     }
@@ -83,8 +82,8 @@ class DefenseGridCostModificationEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility) {
-            if(!abilityToModify.getControllerId().equals(game.getActivePlayerId())) {
+        if (abilityToModify instanceof SpellAbility) {
+            if (!abilityToModify.getControllerId().equals(game.getActivePlayerId())) {
                 return true;
             }
         }

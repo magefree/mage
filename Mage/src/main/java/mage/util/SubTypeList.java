@@ -10,7 +10,15 @@ import java.util.stream.Collectors;
 
 public class SubTypeList extends ArrayList<SubType> {
 
+    public SubTypeList(SubType firstSubType) {
+        super();
+        this.add(firstSubType);
+    }
 
+    public SubTypeList(SubType... subTypesList) {
+        super();
+        Collections.addAll(this, subTypesList);
+    }
 
     @Deprecated
     public boolean addAll(List<String> subtypes) {

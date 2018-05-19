@@ -68,7 +68,7 @@ public class ShrineOfPiercingVision extends CardImpl {
     }
 
     public ShrineOfPiercingVision(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // At the beginning of your upkeep or whenever you cast a blue spell, put a charge counter on Shrine of Piercing Vision.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), TargetController.YOU, false));
@@ -113,30 +113,19 @@ class ShrineOfPiercingVisionEffect extends OneShotEffect {
         if (player == null || permanent == null) {
             return false;
         }
-        int count = permanent.getCounters(game).getCount(CounterType.CHARGE);
-
-        Cards cards = new CardsImpl();
-        count = Math.min(player.getLibrary().size(), count);
-        for (int i = 0; i < count; i++) {
-            Card card = player.getLibrary().removeFromTop(game);
-            if (card != null) {
-                cards.add(card);
-            }
-        }
-        player.lookAtCards("Shrine of Piercing Vision", cards, game);
-
+        Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, permanent.getCounters(game).getCount(CounterType.CHARGE)));
         if (!cards.isEmpty()) {
+            player.lookAtCards(source, null, cards, game);
             TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to put into your hand"));
-
             if (player.choose(Outcome.DrawCard, cards, target, game)) {
                 Card card = cards.get(target.getFirstTarget(), game);
                 if (card != null) {
                     cards.remove(card);
-                    card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
+                    player.moveCards(card, Zone.HAND, source, game);
                 }
             }
+            player.putCardsOnBottomOfLibrary(cards, game, source, true);
         }
-        player.putCardsOnBottomOfLibrary(cards, game, source, true);
         return true;
     }
 }

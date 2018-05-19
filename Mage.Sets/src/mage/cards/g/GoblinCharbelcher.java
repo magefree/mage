@@ -27,6 +27,7 @@
  */
 package mage.cards.g;
 
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -43,8 +44,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
 
-import java.util.UUID;
-
 /**
  *
  * @author Plopman
@@ -52,7 +51,7 @@ import java.util.UUID;
 public class GoblinCharbelcher extends CardImpl {
 
     public GoblinCharbelcher(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // {3}, {tap}: Reveal cards from the top of your library until you reveal a land card. Goblin Charbelcher deals damage equal to the number of nonland cards revealed this way to any target. If the revealed land card was a Mountain, Goblin Charbelcher deals double that damage instead. Put the revealed cards on the bottom of your library in any order.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GoblinCharbelcherEffect(), new ManaCostsImpl("{3}"));
@@ -97,13 +96,12 @@ class GoblinCharbelcherEffect extends OneShotEffect {
         }
         Cards cards = new CardsImpl();
         boolean landFound = false;
-        while (controller.getLibrary().hasCards()) {
-            Card card = controller.getLibrary().removeFromTop(game);
+        for (Card card : controller.getLibrary().getCards(game)) {
             if (card != null) {
                 cards.add(card);
-                if (card.isLand()){
+                if (card.isLand()) {
                     landFound = true;
-                    if(card.hasSubtype(SubType.MOUNTAIN, game)){
+                    if (card.hasSubtype(SubType.MOUNTAIN, game)) {
                         isMountain = true;
                     }
                     break;
@@ -118,20 +116,19 @@ class GoblinCharbelcherEffect extends OneShotEffect {
         if (landFound) {
             damage--;
         }
-        if(isMountain){
+        if (isMountain) {
             damage *= 2;
         }
-        
+
         Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
         if (permanent != null) {
             permanent.damage(damage, source.getSourceId(), game, false, true);
-        }
-        else{
+        } else {
             Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
             if (targetPlayer != null) {
                 targetPlayer.damage(damage, source.getSourceId(), game, false, true);
             }
-        }        
+        }
         controller.putCardsOnBottomOfLibrary(cards, game, source, true);
         return true;
     }

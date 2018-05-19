@@ -48,7 +48,7 @@ import mage.target.TargetPlayer;
 public class Grindstone extends CardImpl {
 
     public Grindstone(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
 
         // {3}, {T}: Target player puts the top two cards of their library into their graveyard. If both cards share a color, repeat this process.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GrindstoneEffect(), new ManaCostsImpl("{3}"));
@@ -87,10 +87,11 @@ class GrindstoneEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player targetPlayer = game.getPlayer(this.getTargetPointer().getFirst(game, source));
-        boolean colorShared;
+
         if (targetPlayer != null) {
             int possibleIterations = targetPlayer.getLibrary().size() / 2;
             int iteration = 0;
+            boolean colorShared;
             do {
                 iteration++;
                 if (iteration > possibleIterations + 20) {
@@ -102,16 +103,19 @@ class GrindstoneEffect extends OneShotEffect {
                     return true;
                 }
                 colorShared = false;
-                Cards cards = new CardsImpl();
-                cards.addAll(targetPlayer.getLibrary().getTopCards(game, 2));
-                if (!cards.isEmpty()) {
-                    Card card1 = targetPlayer.getLibrary().removeFromTop(game);
-                    if (targetPlayer.getLibrary().hasCards()) {
-                        colorShared = card1.getColor(game).shares(targetPlayer.getLibrary().removeFromTop(game).getColor(game));
+                Card card1 = null;
+                Cards toGraveyard = new CardsImpl();
+                for (Card card : targetPlayer.getLibrary().getCards(game)) {
+                    toGraveyard.add(card);
+                    if (card1 == null) {
+                        card1 = card;
+                    } else {
+                        colorShared = card1.getColor(game).shares(card.getColor(game));
+                        break;
                     }
                 }
-                targetPlayer.moveCards(cards, Zone.GRAVEYARD, source, game);
-            } while (colorShared && targetPlayer.canRespond());
+                targetPlayer.moveCards(toGraveyard, Zone.GRAVEYARD, source, game);
+            } while (colorShared);
             return true;
         }
         return false;
