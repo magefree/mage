@@ -627,6 +627,8 @@ public interface Player extends MageItem, Copyable<Player> {
 
     void declareBlocker(UUID defenderId, UUID blockerId, UUID attackerId, Game game);
 
+    void declareBlocker(UUID defenderId, UUID blockerId, UUID attackerId, Game game, boolean allowUndo);
+
     List<Permanent> getAvailableAttackers(Game game);
 
     List<Permanent> getAvailableAttackers(UUID defenderId, Game game);
