@@ -970,7 +970,7 @@ public class Combat implements Serializable, Copyable<Combat> {
         // check if creatures are forced to block but do not block at all or block creatures they are not forced to block
         StringBuilder sb = new StringBuilder();
         for (Map.Entry<UUID, Set<UUID>> entry : creatureMustBlockAttackers.entrySet()) {
-            boolean blockIsValid;
+            boolean blockIsValid = true;
             Permanent creatureForcedToBlock = game.getPermanent(entry.getKey());
             if (creatureForcedToBlock == null) {
                 break;
@@ -980,29 +980,6 @@ public class Combat implements Serializable, Copyable<Combat> {
                 continue;
             }
 
-            // Check if blocker is really able to block one or more attackers (maybe not if the attacker has menace) - if not continue with the next forced blocker
-            // TODO: Probably there is some potential to abuse the check if forced blockers are assigned to differnt attackers with e.g. menace.
-            // While if assigned all to one the block is possible
-//            if (creatureForcedToBlock.getBlocking() = 0) {
-//                boolean validBlockPossible = false;
-//                for (UUID possibleAttackerId : entry.getValue()) {
-//                    CombatGroup attackersGroup = findGroup(possibleAttackerId);
-//                    if (attackersGroup.getBlockers().contains(creatureForcedToBlock.getId())) {
-//                        // forcedBlocker blocks a valid blocker, so no problem break check if valid block option exists
-//                        validBlockPossible = true;
-//                        break;
-//                    }
-//                    Permanent attackingCreature = game.getPermanent(possibleAttackerId);
-//                    if (attackingCreature.getMinBlockedBy() > 1) { // e.g. Menace
-//                        if (attackersGroup.getBlockers().size() + 1 >= attackingCreature.getMinBlockedBy()) {
-//                            validBlockPossible = true;
-//                        }
-//                    }
-//                }
-//                if (!validBlockPossible) {
-//                    continue;
-//                }
-//            }
 
 //            // check if creature has to pay a cost to block so it's not mandatory to block
 //            boolean removedAttacker = false;
@@ -1019,8 +996,24 @@ public class Combat implements Serializable, Copyable<Combat> {
 //                continue;
 //            }
             // creature does not block -> not allowed
+
+            // Check if blocker is really able to block one or more attackers (maybe not if the attacker has menace) - if not continue with the next forced blocker
+            // TODO: Probably there is some potential to abuse the check if forced blockers are assigned to differnt attackers with e.g. menace.
+            // While if assigned all to one the block is possible
             if (creatureForcedToBlock.getBlocking() == 0) {
-                blockIsValid = false;
+                blockIsValid = entry.getValue().isEmpty();
+                for (UUID possibleAttackerId : entry.getValue()) {
+                    CombatGroup attackersGroup = game.getCombat().findGroup(possibleAttackerId);
+                    Permanent attackingCreature = game.getPermanent(possibleAttackerId);
+                    if (attackersGroup == null || attackingCreature == null) {
+                        continue;
+                    }
+                    if (attackingCreature.getMinBlockedBy() > 1) { // e.g. Menace
+                        if (attackersGroup.getBlockers().size() + 1 < attackingCreature.getMinBlockedBy()) {
+                            blockIsValid = true;
+                        }
+                    }
+                }
             } else {
                 blockIsValid = false;
                 // which attacker is he blocking
