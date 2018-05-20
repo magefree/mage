@@ -140,3 +140,7 @@ client_secrets.json
 dependency-reduced-pom.xml
 mage-bundle
 /Mage.Client/game-*.json
+
+# build-tools config and log files when building client/server with Atom
+.build-tools.cson
+build-output.log
