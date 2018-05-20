@@ -40,6 +40,7 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.common.FilterBlockingCreature;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
 /**
@@ -49,15 +50,14 @@ import mage.game.permanent.Permanent;
 public class Electryte extends CardImpl {
 
     public Electryte(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
         this.subtype.add(SubType.BEAST);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // Whenever Electryte successfully deals combat damage to defending player, 
-        // Electryte deals damage equal to its power to each blocking creature.
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new ElectryteEffect(), false));
+        // Whenever Electryte deals combat damage to defending player, it deals damage equal to its power to each blocking creature.
+        this.addAbility(new ElectryteTriggeredAbility());
     }
 
     public Electryte(final Electryte card) {
@@ -70,19 +70,49 @@ public class Electryte extends CardImpl {
     }
 }
 
+class ElectryteTriggeredAbility extends DealsCombatDamageToAPlayerTriggeredAbility {
+
+    ElectryteTriggeredAbility() {
+        super(new ElectryteEffect(), false);
+    }
+
+    ElectryteTriggeredAbility(final ElectryteTriggeredAbility effect) {
+        super(effect);
+    }
+
+    @Override
+    public ElectryteTriggeredAbility copy() {
+        return new ElectryteTriggeredAbility(this);
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (super.checkTrigger(event, game)) {
+            return game.getCombat().getDefenderId(getSourceId()).equals(event.getPlayerId());
+        }
+        return false;
+    }
+
+    @Override
+    public String getRule() {
+        return "Whenever {this} deals combat damage to defending player, "
+                + "it deals damage equal to its power to each blocking creature";
+    }
+}
+
 class ElectryteEffect extends OneShotEffect {
-    
+
     static private FilterBlockingCreature filter = new FilterBlockingCreature();
-    
+
     public ElectryteEffect() {
         super(Outcome.Damage);
-        staticText = "it deals damage equal to its power to each blocking creature";        
+        staticText = "it deals damage equal to its power to each blocking creature";
     }
-    
+
     public ElectryteEffect(final ElectryteEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent thisCreature = game.getPermanent(source.getSourceId());
@@ -93,9 +123,9 @@ class ElectryteEffect extends OneShotEffect {
         }
         return true;
     }
-    
+
     @Override
-    public ElectryteEffect copy () {
+    public ElectryteEffect copy() {
         return new ElectryteEffect(this);
     }
 }
