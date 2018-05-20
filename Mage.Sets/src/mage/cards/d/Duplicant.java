@@ -68,7 +68,7 @@ public class Duplicant extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Imprint - When Duplicant enters the battlefield, you may exile target nontoken creature.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DuplicantExileTargetEffect(), true, "<i>Imprint - </i>");
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DuplicantExileTargetEffect(), true, "<i>Imprint</i> &mdash; ");
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
         // As long as the exiled card is a creature card, Duplicant has that card's power, toughness, and creature types. It's still a Shapeshifter.

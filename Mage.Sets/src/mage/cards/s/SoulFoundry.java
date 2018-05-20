@@ -63,7 +63,7 @@ public class SoulFoundry extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // Imprint - When Soul Foundry enters the battlefield, you may exile a creature card from your hand.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SoulFoundryImprintEffect(), true, "<i>Imprint - </i>"));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SoulFoundryImprintEffect(), true, "<i>Imprint</i> &mdash; "));
 
         // {X}, {T}: Create a token that's a copy of the exiled card. X is the converted mana cost of that card.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SoulFoundryEffect(), new ManaCostsImpl("{X}"));

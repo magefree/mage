@@ -60,7 +60,7 @@ public class SummonersEgg extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Imprint - When Summoner's Egg enters the battlefield, you may exile a card from your hand face down.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SummonersEggImprintEffect(), true, "<i>Imprint - </i>"));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SummonersEggImprintEffect(), true, "<i>Imprint</i> &mdash; "));
         // When Summoner's Egg dies, turn the exiled card face up. If it's a creature card, put it onto the battlefield under your control.
         this.addAbility(new DiesTriggeredAbility(new SummonersEggPutOntoBattlefieldEffect()));
     }
