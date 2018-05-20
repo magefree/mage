@@ -185,7 +185,6 @@ public class TableWaitingDialog extends MageDialog {
         MageFrame.getUI().removeButton(MageComponents.TABLE_WAITING_START_BUTTON);
         this.removeDialog();
         TableUtil.saveColumnWidthAndOrderToPrefs(jTableSeats, KEY_TABLE_WAITING_COLUMNS_WIDTH, KEY_TABLE_WAITING_COLUMNS_ORDER);
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_TABLE_WAITING_COLUMNS_WIDTH, Integer.toString(getWidth()));
     }
 
     /**
