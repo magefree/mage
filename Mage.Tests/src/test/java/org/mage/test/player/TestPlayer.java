@@ -2008,6 +2008,11 @@ public class TestPlayer implements Player {
     }
 
     @Override
+    public void declareBlocker(UUID defenderId, UUID blockerId, UUID attackerId, Game game, boolean allowUndo) {
+        computerPlayer.declareBlocker(defenderId, blockerId, attackerId, game, allowUndo);
+    }
+
+    @Override
     public boolean searchLibrary(TargetCardInLibrary target, Game game) {
         return computerPlayer.searchLibrary(target, game);
     }
