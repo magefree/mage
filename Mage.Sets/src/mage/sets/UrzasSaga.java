@@ -134,6 +134,7 @@ public class UrzasSaga extends ExpansionSet {
         cards.add(new SetCardInfo("Dromosaur", 182, Rarity.COMMON, mage.cards.d.Dromosaur.class));
         cards.add(new SetCardInfo("Duress", 132, Rarity.COMMON, mage.cards.d.Duress.class));
         cards.add(new SetCardInfo("Eastern Paladin", 133, Rarity.RARE, mage.cards.e.EasternPaladin.class));
+        cards.add(new SetCardInfo("Electryte", 183, Rarity.RARE, mage.cards.e.Electryte.class));
         cards.add(new SetCardInfo("Elite Archers", 13, Rarity.RARE, mage.cards.e.EliteArchers.class));
         cards.add(new SetCardInfo("Elvish Herder", 247, Rarity.COMMON, mage.cards.e.ElvishHerder.class));
         cards.add(new SetCardInfo("Elvish Lyrist", 248, Rarity.COMMON, mage.cards.e.ElvishLyrist.class));
