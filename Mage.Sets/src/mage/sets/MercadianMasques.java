@@ -142,6 +142,7 @@ public class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Dust Bowl", 316, Rarity.RARE, mage.cards.d.DustBowl.class));
         cards.add(new SetCardInfo("Embargo", 77, Rarity.RARE, mage.cards.e.Embargo.class));
         cards.add(new SetCardInfo("Energy Flux", 78, Rarity.UNCOMMON, mage.cards.e.EnergyFlux.class));
+        cards.add(new SetCardInfo("Enslaved Horror", 134, Rarity.UNCOMMON, mage.cards.e.EnslavedHorror.class));
         cards.add(new SetCardInfo("Extortion", 135, Rarity.RARE, mage.cards.e.Extortion.class));
         cards.add(new SetCardInfo("Eye of Ramos", 294, Rarity.RARE, mage.cards.e.EyeOfRamos.class));
         cards.add(new SetCardInfo("False Demise", 80, Rarity.UNCOMMON, mage.cards.f.FalseDemise.class));
