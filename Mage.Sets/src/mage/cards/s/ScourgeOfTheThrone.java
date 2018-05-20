@@ -30,8 +30,10 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.Effect;
+import mage.abilities.TriggeredAbility;
+import mage.abilities.common.AttacksFirstTimeTriggeredAbility;
+import mage.abilities.condition.Condition;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.AdditionalCombatPhaseEffect;
 import mage.abilities.effects.common.UntapAllControllerEffect;
 import mage.abilities.keyword.DethroneAbility;
@@ -40,13 +42,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.filter.common.FilterAttackingCreature;
+import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
-import mage.util.CardUtil;
 
 /**
  *
@@ -66,9 +64,21 @@ public class ScourgeOfTheThrone extends CardImpl {
         // Dethrone (Whenever this creature attacks the player with the most life or tied for most life, put a +1/+1 counter on it.)
         this.addAbility(new DethroneAbility());
         // Whenever Scourge of the Throne attacks for the first time each turn, if it's attacking the player with the most life or tied for most life, untap all attacking creatures. After this phase, there is an additional combat phase.
-        Ability ability = new ScourgeOfTheThroneAttacksTriggeredAbility(new UntapAllControllerEffect(new FilterAttackingCreature(), "untap all attacking creatures"), false);
+        TriggeredAbility ability = new AttacksFirstTimeTriggeredAbility(
+                new UntapAllControllerEffect(
+                        StaticFilters.FILTER_ATTACKING_CREATURES,
+                        "untap all attacking creatures"
+                ), false
+        );
         ability.addEffect(new AdditionalCombatPhaseEffect());
-        this.addAbility(ability);
+        this.addAbility(new ConditionalTriggeredAbility(
+                ability,
+                ScourgeOfTheThroneCondition.instance,
+                "Whenever {this} attacks for the first time each turn, "
+                + "if it's attacking the player with the most life or tied for most life, "
+                + "untap all attacking creatures. After this phase, "
+                + "there is an additional combat phase."
+        ));
     }
 
     public ScourgeOfTheThrone(final ScourgeOfTheThrone card) {
@@ -81,35 +91,22 @@ public class ScourgeOfTheThrone extends CardImpl {
     }
 }
 
-class ScourgeOfTheThroneAttacksTriggeredAbility extends TriggeredAbilityImpl {
+enum ScourgeOfTheThroneCondition implements Condition {
 
-    public ScourgeOfTheThroneAttacksTriggeredAbility(Effect effect, boolean optional) {
-        super(Zone.BATTLEFIELD, effect, optional);
-    }
-
-    public ScourgeOfTheThroneAttacksTriggeredAbility(final ScourgeOfTheThroneAttacksTriggeredAbility ability) {
-        super(ability);
-    }
+    instance;
 
     @Override
-    public void reset(Game game) {
-        game.getState().setValue(CardUtil.getCardZoneString("amountAttacks", getSourceId(), game), new Integer(0));
-    }
-
-    @Override
-    public boolean checkInterveningIfClause(Game game) {
-        UUID defenderId = game.getCombat().getDefenderId(getSourceId());
+    public boolean apply(Game game, Ability source) {
+        UUID defenderId = game.getCombat().getDefenderId(source.getSourceId());
         if (defenderId != null) {
             Player attackedPlayer = game.getPlayer(defenderId);
-            Player controller = game.getPlayer(getControllerId());
+            Player controller = game.getPlayer(source.getControllerId());
             if (attackedPlayer != null && controller != null) {
                 int mostLife = Integer.MIN_VALUE;
                 for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                     Player player = game.getPlayer(playerId);
-                    if (player != null) {
-                        if (player.getLife() > mostLife) {
-                            mostLife = player.getLife();
-                        }
+                    if (player != null && player.getLife() > mostLife) {
+                        mostLife = player.getLife();
                     }
                 }
                 return attackedPlayer.getLife() == mostLife;
@@ -119,34 +116,8 @@ class ScourgeOfTheThroneAttacksTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.ATTACKER_DECLARED;
+    public String toString() {
+        return "{this} is attacking the player with the most life or tied for most life";
     }
 
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getSourceId().equals(this.getSourceId())) {
-            Integer amountAttacks = (Integer) game.getState().getValue(CardUtil.getCardZoneString("amountAttacks", getSourceId(), game));
-            if (amountAttacks == null || amountAttacks.intValue() < 1) {
-                if (amountAttacks == null) {
-                    amountAttacks = new Integer(1);
-                } else {
-                    ++amountAttacks;
-                }
-                game.getState().setValue(CardUtil.getCardZoneString("amountAttacks", getSourceId(), game), amountAttacks);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever {this} attacks for the first time each turn, if it's attacking the player with the most life or tied for most life, " + super.getRule();
-    }
-
-    @Override
-    public ScourgeOfTheThroneAttacksTriggeredAbility copy() {
-        return new ScourgeOfTheThroneAttacksTriggeredAbility(this);
-    }
 }
