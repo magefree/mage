@@ -202,6 +202,7 @@ public class MercadianMasques extends ExpansionSet {
         cards.add(new SetCardInfo("Jhovall Rider", 26, Rarity.UNCOMMON, mage.cards.j.JhovallRider.class));
         cards.add(new SetCardInfo("Karn's Touch", 86, Rarity.RARE, mage.cards.k.KarnsTouch.class));
         cards.add(new SetCardInfo("Kris Mage", 195, Rarity.COMMON, mage.cards.k.KrisMage.class));
+        cards.add(new SetCardInfo("Kyren Archive", 302, Rarity.RARE, mage.cards.k.KyrenArchive.class));
         cards.add(new SetCardInfo("Kyren Glider", 196, Rarity.COMMON, mage.cards.k.KyrenGlider.class));
         cards.add(new SetCardInfo("Kyren Legate", 197, Rarity.UNCOMMON, mage.cards.k.KyrenLegate.class));
         cards.add(new SetCardInfo("Kyren Negotiations", 198, Rarity.UNCOMMON, mage.cards.k.KyrenNegotiations.class));
