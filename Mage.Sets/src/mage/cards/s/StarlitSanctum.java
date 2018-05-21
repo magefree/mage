@@ -45,6 +45,7 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.TargetPlayer;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -52,21 +53,21 @@ import mage.target.common.TargetControlledCreaturePermanent;
  * @author anonymous
  */
 public class StarlitSanctum extends CardImpl {
-    
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent(SubType.CLERIC, "a Cleric creature");
 
     public StarlitSanctum(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-        // {tap}: Add {C}.
+        FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent(SubType.CLERIC, "a Cleric creature");
+        // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
-        // {W}, {tap}, Sacrifice a Cleric creature: You gain life equal to the sacrificed creature's toughness.
+        // {W}, {T}, Sacrifice a Cleric creature: You gain life equal to the sacrificed creature's toughness.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new StarlitSanctumWhiteEffect(), new ManaCostsImpl<>("{W}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(filter)));
         this.addAbility(ability);
-        // {B}, {tap}, Sacrifice a Cleric creature: Target player loses life equal to the sacrificed creature's power.
+        // {B}, {T}, Sacrifice a Cleric creature: Target player loses life equal to the sacrificed creature's power.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new StarlitSanctumBlackEffect(), new ManaCostsImpl<>("{B}"));
+        ability.addTarget(new TargetPlayer());
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(filter)));
         this.addAbility(ability);
