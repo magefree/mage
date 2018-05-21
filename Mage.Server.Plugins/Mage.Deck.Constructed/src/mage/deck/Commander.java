@@ -33,6 +33,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.CanBeYourCommanderAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.keyword.PartnerAbility;
+import mage.abilities.keyword.PartnersWithAbility;
 import mage.cards.Card;
 import mage.cards.ExpansionSet;
 import mage.cards.Sets;
@@ -133,6 +134,10 @@ public class Commander extends Constructed {
             invalid.put("Commander", "Sideboard must contain only the commander(s)");
             valid = false;
         } else {
+            Set<String> commanderNames = new HashSet<>();
+            for (Card commander : deck.getSideboard()) {
+                commanderNames.add(commander.getName());
+            }
             for (Card commander : deck.getSideboard()) {
                 if (bannedCommander.contains(commander.getName())) {
                     invalid.put("Commander", "Commander banned (" + commander.getName() + ')');
@@ -144,8 +149,18 @@ public class Commander extends Constructed {
                     valid = false;
                 }
                 if (deck.getSideboard().size() == 2 && !commander.getAbilities().contains(PartnerAbility.getInstance())) {
-                    invalid.put("Commander", "Commander without Partner (" + commander.getName() + ')');
-                    valid = false;
+                    boolean partnersWith = false;
+                    for (Ability ability : commander.getAbilities()) {
+                        if (ability instanceof PartnersWithAbility
+                                && commanderNames.contains(((PartnersWithAbility) ability).getPartnerName())) {
+                            partnersWith = true;
+                            break;
+                        }
+                    }
+                    if (!partnersWith) {
+                        invalid.put("Commander", "Commander without Partner (" + commander.getName() + ')');
+                        valid = false;
+                    }
                 }
                 FilterMana commanderColor = commander.getColorIdentity();
                 if (commanderColor.isWhite()) {
