@@ -50,15 +50,21 @@ public class PartnerWithAbility extends EntersBattlefieldTriggeredAbility {
 
     private final String partnerName;
     private final String shortName;
+    private final boolean hasReminderText;
 
     public PartnerWithAbility(String partnerName) {
         this(partnerName, false);
     }
 
     public PartnerWithAbility(String partnerName, boolean isLegendary) {
+        this(partnerName, isLegendary, true);
+    }
+
+    public PartnerWithAbility(String partnerName, boolean isLegendary, boolean hasReminderText) {
         super(new PartnersWithSearchEffect(partnerName), false);
         this.addTarget(new TargetPlayer());
         this.partnerName = partnerName;
+        this.hasReminderText = hasReminderText;
         if (isLegendary) {
             this.shortName = shortenName(partnerName);
         } else {
@@ -70,6 +76,7 @@ public class PartnerWithAbility extends EntersBattlefieldTriggeredAbility {
         super(ability);
         this.partnerName = ability.partnerName;
         this.shortName = ability.shortName;
+        this.hasReminderText = ability.hasReminderText;
     }
 
     @Override
@@ -79,9 +86,13 @@ public class PartnerWithAbility extends EntersBattlefieldTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "Partner with " + partnerName
-                + " <i>(When this creature enters the battlefield, target player may put " + shortName
-                + " into their hand from their library, then shuffle.)</i>";
+        if (hasReminderText) {
+            return "Partner with " + partnerName
+                    + " <i>(When this creature enters the battlefield, target player may put " + shortName
+                    + " into their hand from their library, then shuffle.)</i>";
+        } else {
+            return "Partner with " + partnerName;
+        }
     }
 
     public String getPartnerName() {
