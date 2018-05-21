@@ -103,7 +103,11 @@ public abstract class ActivatedManaAbilityImpl extends ActivatedAbilityImpl impl
                 }
             }
         }
-        return netMana;
+        ArrayList<Mana> netManaCopy = new ArrayList<>();
+        for (Mana mana : netMana) {
+            netManaCopy.add(mana.copy());
+        }
+        return netManaCopy;
     }
 
     /**
