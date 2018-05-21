@@ -33,6 +33,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -148,7 +149,10 @@ class DesolationWatcher extends Watcher {
         if (event.getType() == GameEvent.EventType.TAPPED_FOR_MANA) {
             UUID playerId = event.getPlayerId();
             if (playerId != null) {
-                tappedForManaThisTurnPlayers.add(playerId);
+                Card card = game.getCard(event.getSourceId());
+                if (card != null && card.isLand()) {
+                    tappedForManaThisTurnPlayers.add(playerId);
+                }
             }
         }
     }
