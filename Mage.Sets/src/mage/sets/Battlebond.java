@@ -71,5 +71,6 @@ public class Battlebond extends ExpansionSet {
         cards.add(new SetCardInfo("Sea of Clouds", 84, Rarity.RARE, mage.cards.s.SeaOfClouds.class));
         cards.add(new SetCardInfo("Soaring Show-Off", 40, Rarity.COMMON, mage.cards.s.SoaringShowOff.class));
         cards.add(new SetCardInfo("Spire Garden", 85, Rarity.RARE, mage.cards.s.SpireGarden.class));
+        cards.add(new SetCardInfo("Toothy, Imaginary Friend", 12, Rarity.RARE, mage.cards.t.ToothyImaginaryFriend.class));
     }
 }
