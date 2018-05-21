@@ -38,10 +38,9 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.PhaseStep;
+import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -50,7 +49,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
-import mage.game.turn.Step;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -67,7 +65,7 @@ public class ReflectorMage extends CardImpl {
     }
 
     public ReflectorMage(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{U}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(2);
@@ -128,7 +126,7 @@ class ExclusionRitualReplacementEffect extends ContinuousRuleModifyingEffectImpl
     private final UUID ownerId;
 
     ExclusionRitualReplacementEffect(String creatureName, UUID ownerId) {
-        super(Duration.Custom, Outcome.Detriment);
+        super(Duration.UntilYourNextTurn, Outcome.Detriment);
         staticText = "That creature's owner can't cast spells with the same name as that creature until your next turn";
         this.creatureName = creatureName;
         this.ownerId = ownerId;
@@ -154,16 +152,6 @@ class ExclusionRitualReplacementEffect extends ContinuousRuleModifyingEffectImpl
                 return false; // Face Down cast spell (Morph creature) has no name
             }
             return card.getName().equals(creatureName) && Objects.equals(ownerId, card.getOwnerId());
-        }
-        return false;
-    }
-
-    @Override
-    public boolean isInactive(Ability source, Game game) {
-        if (game.getPhase().getStep().getType() == PhaseStep.UNTAP && game.getStep().getStepPart() == Step.StepPart.PRE) {
-            if (game.getActivePlayerId().equals(source.getControllerId()) || game.getPlayer(source.getControllerId()).hasReachedNextTurnAfterLeaving()) {
-                return true;
-            }
         }
         return false;
     }
