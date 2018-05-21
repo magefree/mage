@@ -36,7 +36,7 @@ import mage.abilities.keyword.TrampleAbility;
  *
  * @author spjspj
  */
-public class StoneTrapIdolToken extends TokenImpl {
+public final class StoneTrapIdolToken extends TokenImpl {
 
     public StoneTrapIdolToken() {
         super("Construct", "6/12  colorless Construct artifact creature token with trample");

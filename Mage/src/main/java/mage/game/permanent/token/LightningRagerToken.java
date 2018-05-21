@@ -40,7 +40,7 @@ import mage.constants.TargetController;
  *
  * @author spjspj
  */
-public class LightningRagerToken extends TokenImpl {
+public final class LightningRagerToken extends TokenImpl {
 
     public LightningRagerToken() {
         super("Lightning Rager", "5/1 red Elemental creature token named Lightning Rager."

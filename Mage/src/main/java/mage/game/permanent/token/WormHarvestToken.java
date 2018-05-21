@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class WormHarvestToken extends TokenImpl {
+public final class WormHarvestToken extends TokenImpl {
 
     public WormHarvestToken() {
         super("Worm", "1/1 black and green Worm creature token");

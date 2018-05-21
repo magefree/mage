@@ -38,7 +38,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class ChainersTormentNightmareToken extends TokenImpl {
+public final class ChainersTormentNightmareToken extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
     static {

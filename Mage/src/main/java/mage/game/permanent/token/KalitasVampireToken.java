@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class KalitasVampireToken extends TokenImpl {
+public final class KalitasVampireToken extends TokenImpl {
 
     public KalitasVampireToken() {
         this(1,1);

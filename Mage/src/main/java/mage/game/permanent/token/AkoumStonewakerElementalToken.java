@@ -38,7 +38,7 @@ import mage.abilities.keyword.TrampleAbility;
  *
  * @author spjspj
  */
-public class AkoumStonewakerElementalToken extends TokenImpl {
+public final class AkoumStonewakerElementalToken extends TokenImpl {
 
     public AkoumStonewakerElementalToken() {
         super("Elemental", "3/1 red Elemental creature token with trample and haste");

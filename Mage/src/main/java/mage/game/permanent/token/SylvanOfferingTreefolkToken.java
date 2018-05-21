@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class SylvanOfferingTreefolkToken extends TokenImpl {
+public final class SylvanOfferingTreefolkToken extends TokenImpl {
 
     public SylvanOfferingTreefolkToken() {
         this(1);

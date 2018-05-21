@@ -36,7 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
  *
  * @author spjspj
  */
-public class HauntedAngelToken extends TokenImpl {
+public final class HauntedAngelToken extends TokenImpl {
 
     public HauntedAngelToken() {
         super("Angel", "3/3 black Angel creature token with flying");

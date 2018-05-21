@@ -36,7 +36,7 @@ import mage.constants.SubType;
  *
  * @author TheElk801
  */
-public class DinosaurToken extends TokenImpl {
+public final class DinosaurToken extends TokenImpl {
 
     public DinosaurToken() {
         super("Dinosaur", "3/3 green Dinosaur creature token with trample");

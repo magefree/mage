@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class CrestedSunmareToken extends TokenImpl {
+public final class CrestedSunmareToken extends TokenImpl {
 
     public CrestedSunmareToken() {
         super("Horse", "5/5 white Horse creature token");

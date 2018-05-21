@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SerpentGeneratorSnakeToken extends TokenImpl {
+public final class SerpentGeneratorSnakeToken extends TokenImpl {
 
     public SerpentGeneratorSnakeToken() {
         super("Snake", "1/1 colorless Snake artifact creature token with \"Whenever this creature deals damage to a player, that player gets a poison counter.\"");

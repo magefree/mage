@@ -36,7 +36,7 @@ import mage.abilities.mana.GreenManaAbility;
  *
  * @author spjspj
  */
-public class LlanowarElvesToken extends TokenImpl {
+public final class LlanowarElvesToken extends TokenImpl {
 
     public LlanowarElvesToken() {
         super("Llanowar Elves", "1/1 green Elf Druid creature token named Llanowar Elves with \"{T}: Add {G}.\"");

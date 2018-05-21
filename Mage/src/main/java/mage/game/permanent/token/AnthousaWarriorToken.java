@@ -36,7 +36,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class AnthousaWarriorToken extends TokenImpl {
+public final class AnthousaWarriorToken extends TokenImpl {
 
     public AnthousaWarriorToken() {
         super("", "2/2 Warrior creatures");

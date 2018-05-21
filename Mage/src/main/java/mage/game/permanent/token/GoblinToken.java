@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import mage.MageInt;
+import mage.abilities.keyword.HasteAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
@@ -38,14 +39,22 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class GoblinToken extends TokenImpl {
+public final class GoblinToken extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 
     static {
         tokenImageSets.addAll(Arrays.asList("10E", "ALA", "SOM", "M10", "NPH", "M13", "RTR",
-            "MMA", "M15", "C14", "KTK", "EVG", "DTK", "ORI", "DDG", "DDN", "DD3EVG", "MM2", 
-            "MM3", "EMA", "C16", "DOM"));
+                "MMA", "M15", "C14", "KTK", "EVG", "DTK", "ORI", "DDG", "DDN", "DD3EVG", "MM2",
+                "MM3", "EMA", "C16", "DOM"));
+    }
+
+    public GoblinToken(boolean withHaste) {
+        this();
+        if (withHaste) {
+            addAbility(HasteAbility.getInstance());
+            this.description = "1/1 red Goblin creature token with haste";
+        }
     }
 
     public GoblinToken() {

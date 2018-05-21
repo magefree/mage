@@ -35,7 +35,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class CentaurEnchantmentCreatureToken extends TokenImpl {
+public final class CentaurEnchantmentCreatureToken extends TokenImpl {
 
     public CentaurEnchantmentCreatureToken() {
         super("Centaur", "3/3 green Centaur enchantment creature token");

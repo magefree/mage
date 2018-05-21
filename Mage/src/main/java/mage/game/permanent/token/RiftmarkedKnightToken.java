@@ -39,7 +39,7 @@ import mage.abilities.keyword.ProtectionAbility;
  *
  * @author spjspj
  */
-public class RiftmarkedKnightToken extends TokenImpl {
+public final class RiftmarkedKnightToken extends TokenImpl {
 
     public RiftmarkedKnightToken() {
         super("Knight", "2/2 black Knight creature token with flanking, protection from white, and haste");

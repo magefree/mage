@@ -36,7 +36,7 @@ import mage.abilities.keyword.DeathtouchAbility;
  *
  * @author spjspj
  */
-public class OphiomancerSnakeToken extends TokenImpl {
+public final class OphiomancerSnakeToken extends TokenImpl {
 
     public OphiomancerSnakeToken() {
         super("Snake", "1/1 black Snake creature token with deathtouch");

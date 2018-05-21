@@ -25,12 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.game.permanent.token;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import mage.MageInt;
+import mage.abilities.keyword.HasteAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
@@ -38,12 +39,20 @@ import mage.constants.SubType;
  *
  * @author Styxo
  */
-public class ElementalShamanToken extends TokenImpl {
+public final class ElementalShamanToken extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 
     static {
         tokenImageSets.addAll(Arrays.asList("C15", "DD3JVC", "DD2", "LRW"));
+    }
+
+    public ElementalShamanToken(boolean withHaste) {
+        this("DD2");
+        if (withHaste) {
+            addAbility(HasteAbility.getInstance());
+            description = description + " with haste";
+        }
     }
 
     public ElementalShamanToken() {

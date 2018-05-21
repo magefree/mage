@@ -36,7 +36,7 @@ import mage.constants.SubType;
  *
  * @author Quercitron
  */
-public class CitizenToken extends TokenImpl {
+public final class CitizenToken extends TokenImpl {
     
     public CitizenToken() {
         super("Citizen", "1/1 white Citizen creature token");

@@ -36,7 +36,7 @@ import mage.abilities.keyword.DeathtouchAbility;
  *
  * @author spjspj
  */
-public class Wurm1Token extends TokenImpl {
+public final class Wurm1Token extends TokenImpl {
 
     public Wurm1Token() {
         this("MBS");

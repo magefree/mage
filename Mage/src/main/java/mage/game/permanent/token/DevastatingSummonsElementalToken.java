@@ -34,7 +34,7 @@ import mage.constants.SubType;
  *
  * @author spjspj
  */
-public class DevastatingSummonsElementalToken extends TokenImpl {
+public final class DevastatingSummonsElementalToken extends TokenImpl {
 
     public DevastatingSummonsElementalToken() {
         super("Elemental", "X/X red Elemental creature");

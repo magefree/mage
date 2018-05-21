@@ -36,7 +36,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class ForlornPseudammaZombieToken extends TokenImpl {
+public final class ForlornPseudammaZombieToken extends TokenImpl {
 
     public ForlornPseudammaZombieToken() {
         super("Zombie", "2/2 black Zombie enchantment creature token");

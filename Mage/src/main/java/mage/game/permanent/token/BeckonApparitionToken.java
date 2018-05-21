@@ -36,7 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
  *
  * @author spjspj
  */
-public class BeckonApparitionToken extends TokenImpl {
+public final class BeckonApparitionToken extends TokenImpl {
 
     public BeckonApparitionToken() {
         super("Spirit", "1/1 white and black Spirit creature token with flying");

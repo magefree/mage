@@ -36,7 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
  *
  * @author spjspj
  */
-public class RocEggToken extends TokenImpl {
+public final class RocEggToken extends TokenImpl {
 
     public RocEggToken() {
         super("Bird", "3/3 white Bird creature token with flying");

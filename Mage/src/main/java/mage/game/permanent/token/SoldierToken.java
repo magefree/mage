@@ -39,7 +39,7 @@ import mage.util.RandomUtil;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SoldierToken extends TokenImpl {
+public final class SoldierToken extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 

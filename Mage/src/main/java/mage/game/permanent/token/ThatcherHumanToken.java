@@ -37,7 +37,7 @@ import mage.constants.SubType;
  *
  * @author spjspj
  */
-public class ThatcherHumanToken extends TokenImpl {
+public final class ThatcherHumanToken extends TokenImpl {
 
     public ThatcherHumanToken() {
         super("Human", "1/1 red Human creature token with haste");

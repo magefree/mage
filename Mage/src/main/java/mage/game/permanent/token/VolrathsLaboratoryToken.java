@@ -36,7 +36,7 @@ import mage.constants.SubType;
  *
  * @author spjspj
  */
-public class VolrathsLaboratoryToken extends TokenImpl {
+public final class VolrathsLaboratoryToken extends TokenImpl {
 
     public VolrathsLaboratoryToken() {
         this(null, null);

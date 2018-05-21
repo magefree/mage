@@ -36,7 +36,7 @@ import mage.abilities.keyword.TrampleAbility;
  *
  * @author spjspj
  */
-public class PenumbraWurmToken extends TokenImpl {
+public final class PenumbraWurmToken extends TokenImpl {
 
     public PenumbraWurmToken() {
         super("Wurm", "6/6 black Wurm creature token with trample");

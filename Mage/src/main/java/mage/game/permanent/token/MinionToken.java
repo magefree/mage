@@ -36,7 +36,7 @@ import mage.constants.SubType;
  *
  * @author FenrisulfrX
  */
-public class MinionToken extends TokenImpl {
+public final class MinionToken extends TokenImpl {
     
     public MinionToken() {
         this("DDE");

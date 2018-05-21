@@ -40,7 +40,7 @@ import mage.util.RandomUtil;
  *
  * @author LevelX2
  */
-public class CentaurToken extends TokenImpl {
+public final class CentaurToken extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 

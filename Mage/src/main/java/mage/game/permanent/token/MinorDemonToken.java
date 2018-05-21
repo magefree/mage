@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class MinorDemonToken extends TokenImpl {
+public final class MinorDemonToken extends TokenImpl {
 
     public MinorDemonToken() {
         super("Minor Demon", "1/1 black and red Demon creature token named Minor Demon");

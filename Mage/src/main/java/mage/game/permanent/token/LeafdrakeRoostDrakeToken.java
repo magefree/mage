@@ -39,7 +39,7 @@ import mage.abilities.keyword.FlyingAbility;
  *
  * @author spjspj
  */
-public class LeafdrakeRoostDrakeToken extends TokenImpl {
+public final class LeafdrakeRoostDrakeToken extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 

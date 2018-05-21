@@ -36,7 +36,7 @@ import mage.abilities.keyword.TrampleAbility;
  *
  * @author spjspj
  */
-public class RhinoToken extends TokenImpl {
+public final class RhinoToken extends TokenImpl {
 
     public RhinoToken() {
         super("Rhino", "4/4 green Rhino creature token with trample");

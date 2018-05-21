@@ -36,7 +36,7 @@ import mage.constants.SubType;
  *
  * @author TheElk801
  */
-public class DefenderPlantToken extends TokenImpl {
+public final class DefenderPlantToken extends TokenImpl {
 
     public DefenderPlantToken() {
         this(null, 0);

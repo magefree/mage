@@ -36,7 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
  *
  * @author spjspj
  */
-public class WaspToken extends TokenImpl {
+public final class WaspToken extends TokenImpl {
 
     public WaspToken() {
         super("Wasp", "1/1 colorless Insect artifact creature token with flying named Wasp");

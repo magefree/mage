@@ -36,7 +36,7 @@ import mage.abilities.keyword.HasteAbility;
  *
  * @author spjspj
  */
-public class XenagosSatyrToken extends TokenImpl {
+public final class XenagosSatyrToken extends TokenImpl {
 
     public XenagosSatyrToken() {
         super("Satyr", "2/2 red and green Satyr creature token with haste");

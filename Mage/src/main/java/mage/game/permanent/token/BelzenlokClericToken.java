@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author spjspj
  */
-public class BelzenlokClericToken extends TokenImpl {
+public final class BelzenlokClericToken extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
     static {

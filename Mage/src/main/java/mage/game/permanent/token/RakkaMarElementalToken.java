@@ -36,7 +36,7 @@ import mage.constants.SubType;
  *
  * @author spjspj
  */
-public class RakkaMarElementalToken extends TokenImpl {
+public final class RakkaMarElementalToken extends TokenImpl {
 
     public RakkaMarElementalToken () {
         super("Elemental", "3/1 red Elemental creature with Haste");

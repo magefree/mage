@@ -13,7 +13,7 @@ import mage.util.RandomUtil;
  *
  * @author LevelX2
  */
-public class KnightToken extends TokenImpl {
+public final class KnightToken extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 

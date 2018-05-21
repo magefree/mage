@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class MarathWillOfTheWildElementalToken extends TokenImpl {
+public final class MarathWillOfTheWildElementalToken extends TokenImpl {
 
     public MarathWillOfTheWildElementalToken() {
         super("Elemental", "X/X green Elemental creature token");

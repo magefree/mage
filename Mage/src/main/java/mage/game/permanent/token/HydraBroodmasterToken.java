@@ -36,7 +36,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class HydraBroodmasterToken extends TokenImpl {
+public final class HydraBroodmasterToken extends TokenImpl {
 
     public HydraBroodmasterToken() {
         this(1,1);

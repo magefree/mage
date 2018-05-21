@@ -36,7 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
  *
  * @author spjspj
  */
-public class BirdSoldierToken extends TokenImpl {
+public final class BirdSoldierToken extends TokenImpl {
 
     public BirdSoldierToken() {
         super("Bird Soldier", "1/1 white Bird Soldier creature with flying");

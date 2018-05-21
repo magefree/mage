@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class DuneBroodNephilimToken extends TokenImpl {
+public final class DuneBroodNephilimToken extends TokenImpl {
 
     public DuneBroodNephilimToken() {
         super("Sand", "1/1 colorless Sand creature token");

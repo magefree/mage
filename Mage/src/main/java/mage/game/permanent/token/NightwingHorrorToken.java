@@ -36,7 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
  *
  * @author spjspj
  */
-public class NightwingHorrorToken extends TokenImpl {
+public final class NightwingHorrorToken extends TokenImpl {
 
     public NightwingHorrorToken() {
         super("Horror", "1/1 blue and black Horror creature token with flying");

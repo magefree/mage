@@ -37,7 +37,7 @@ import mage.abilities.keyword.HasteAbility;
  *
  * @author spjspj
  */
-public class QueenMarchesaAssassinToken extends TokenImpl {
+public final class QueenMarchesaAssassinToken extends TokenImpl {
 
     public QueenMarchesaAssassinToken() {
         super("Assassin", "1/1 black Assassin creature tokens with deathtouch and haste");

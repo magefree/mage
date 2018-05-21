@@ -43,7 +43,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author spjspj
  */
-public class NighteyesTheDesecratorToken extends TokenImpl {
+public final class NighteyesTheDesecratorToken extends TokenImpl {
 
     public NighteyesTheDesecratorToken() {
         super("Nighteyes the Desecrator", "");

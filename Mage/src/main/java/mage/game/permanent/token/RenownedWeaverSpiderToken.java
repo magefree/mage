@@ -37,7 +37,7 @@ import mage.abilities.keyword.ReachAbility;
  *
  * @author spjspj
  */
-public class RenownedWeaverSpiderToken extends TokenImpl {
+public final class RenownedWeaverSpiderToken extends TokenImpl {
 
     public RenownedWeaverSpiderToken() {
         super("Spider", "1/3 green Spider enchantment creature token with reach");

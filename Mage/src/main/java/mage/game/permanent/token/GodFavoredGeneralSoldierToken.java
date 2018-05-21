@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class GodFavoredGeneralSoldierToken extends TokenImpl {
+public final class GodFavoredGeneralSoldierToken extends TokenImpl {
 
     public GodFavoredGeneralSoldierToken() {
         super("Soldier", "1/1 white Soldier enchantment creature token");

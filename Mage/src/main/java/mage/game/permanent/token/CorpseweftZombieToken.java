@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class CorpseweftZombieToken extends TokenImpl {
+public final class CorpseweftZombieToken extends TokenImpl {
 
     public CorpseweftZombieToken() {
         this(2,2);

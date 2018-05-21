@@ -36,7 +36,7 @@ import mage.util.RandomUtil;
  *
  * @author spjspj
  */
-public class YoungPyromancerElementalToken extends TokenImpl {
+public final class YoungPyromancerElementalToken extends TokenImpl {
 
     public YoungPyromancerElementalToken() {
         super("Elemental", "1/1 red Elemental creature");

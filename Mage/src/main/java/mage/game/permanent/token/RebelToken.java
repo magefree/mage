@@ -34,7 +34,7 @@ import mage.constants.SubType;
  *
  * @author spjspj
  */
-public class RebelToken extends TokenImpl {
+public final class RebelToken extends TokenImpl {
 
     public RebelToken() {
         super("Rebel", "1/1 white Rebel creature token", 1, 1);

@@ -46,7 +46,7 @@ import mage.game.permanent.Permanent;
  *
  * @author spjspj
  */
-public class SaprolingBurstToken extends TokenImpl {
+public final class SaprolingBurstToken extends TokenImpl {
 
     public SaprolingBurstToken() {
         this((MageObjectReference)null);

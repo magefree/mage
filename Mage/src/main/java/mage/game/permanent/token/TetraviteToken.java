@@ -40,7 +40,7 @@ import mage.game.Game;
  *
  * @author spjspj
  */
-public class TetraviteToken extends TokenImpl {
+public final class TetraviteToken extends TokenImpl {
 
     public TetraviteToken() {
         super("Tetravite", "1/1 colorless Tetravite artifact creature token");

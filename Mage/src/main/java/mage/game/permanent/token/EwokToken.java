@@ -36,7 +36,7 @@ import mage.constants.SubType;
  *
  * @author Styxo
  */
-public class EwokToken extends TokenImpl {
+public final class EwokToken extends TokenImpl {
 
     public EwokToken() {
         super("Ewok", "1/1 green Ewok creature tokens", 1, 1);

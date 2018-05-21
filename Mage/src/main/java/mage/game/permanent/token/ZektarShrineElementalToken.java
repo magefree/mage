@@ -37,7 +37,7 @@ import mage.constants.SubType;
  *
  * @author spjspj
  */
-public class ZektarShrineElementalToken extends TokenImpl {
+public final class ZektarShrineElementalToken extends TokenImpl {
 
     public ZektarShrineElementalToken() {
         super("Elemental", "7/1 red Elemental creature token with trample and haste");

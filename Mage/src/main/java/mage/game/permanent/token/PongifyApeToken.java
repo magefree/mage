@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class PongifyApeToken extends TokenImpl {
+public final class PongifyApeToken extends TokenImpl {
 
     public PongifyApeToken() {
         super("Ape", "3/3 green Ape creature token");

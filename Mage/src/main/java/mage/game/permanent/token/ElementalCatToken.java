@@ -36,7 +36,7 @@ import mage.abilities.keyword.HasteAbility;
  *
  * @author spjspj
  */
-public class ElementalCatToken extends TokenImpl {
+public final class ElementalCatToken extends TokenImpl {
 
     public ElementalCatToken() {
         super("Elemental Cat", "1/1 red Elemental Cat creature token");

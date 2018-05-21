@@ -51,7 +51,7 @@ import mage.target.common.TargetCardInExile;
  *
  * @author spjspj
  */
-public class SengirNosferatuBatToken extends TokenImpl {
+public final class SengirNosferatuBatToken extends TokenImpl {
 
     public SengirNosferatuBatToken() {
         super("Bat", "1/2 black Bat creature token with flying");

@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class PestToken extends TokenImpl {
+public final class PestToken extends TokenImpl {
 
     public PestToken() {
         super("Pest", "0/1 colorless Pest artifact creature token");

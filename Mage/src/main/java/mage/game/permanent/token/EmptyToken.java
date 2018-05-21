@@ -30,7 +30,7 @@ package mage.game.permanent.token;
 /**
  * @author nantuko
  */
-public class EmptyToken extends TokenImpl {
+public final class EmptyToken extends TokenImpl {
 
     public EmptyToken() {
         super("", "");

@@ -35,7 +35,7 @@ import mage.constants.SubType;
  *
  * @author spjspj
  */
-public class WireflyToken extends TokenImpl {
+public final class WireflyToken extends TokenImpl {
 
     public WireflyToken() {
         super("Wirefly", "2/2 colorless Insect artifact creature token with flying named Wirefly");

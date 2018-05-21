@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class CrushOfTentaclesToken extends TokenImpl {
+public final class CrushOfTentaclesToken extends TokenImpl {
 
     public CrushOfTentaclesToken() {
         super("Octopus", "8/8 blue Octopus creature");

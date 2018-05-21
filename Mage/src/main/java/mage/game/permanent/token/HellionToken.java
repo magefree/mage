@@ -35,7 +35,7 @@ import mage.constants.SubType;
  *
  * @author spjspj
  */
-public class HellionToken extends TokenImpl {
+public final class HellionToken extends TokenImpl {
 
     public HellionToken() {
         super("Hellion", "4/4 red Hellion creature token");

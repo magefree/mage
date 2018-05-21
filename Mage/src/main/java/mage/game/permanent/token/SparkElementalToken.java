@@ -40,7 +40,7 @@ import mage.constants.TargetController;
  *
  * @author spjspj
  */
-public class SparkElementalToken extends TokenImpl {
+public final class SparkElementalToken extends TokenImpl {
 
     public SparkElementalToken() {
         super("Spark Elemental", "3/1 red Elemental creature token named Spark Elemental with trample, haste, and \"At the beginning of the end step, sacrifice Spark Elemental.\"");

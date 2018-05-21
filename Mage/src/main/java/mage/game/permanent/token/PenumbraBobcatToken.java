@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class PenumbraBobcatToken extends TokenImpl {
+public final class PenumbraBobcatToken extends TokenImpl {
 
     public PenumbraBobcatToken() {
         super("Cat", "2/1 black Cat creature token");

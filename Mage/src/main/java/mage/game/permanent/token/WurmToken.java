@@ -34,7 +34,7 @@ import mage.constants.SubType;
 /**
  * @author magenoxx_at_gmail.com
  */
-public class WurmToken extends TokenImpl {
+public final class WurmToken extends TokenImpl {
 
     public WurmToken() {
         super("Wurm", "6/6 green Wurm creature token");

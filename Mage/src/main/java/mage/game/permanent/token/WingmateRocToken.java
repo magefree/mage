@@ -36,7 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
  *
  * @author spjspj
  */
-public class WingmateRocToken extends TokenImpl {
+public final class WingmateRocToken extends TokenImpl {
 
     public WingmateRocToken() {
         super("Bird", "3/4 white Bird creature token with flying");

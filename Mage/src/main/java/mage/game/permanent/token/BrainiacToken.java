@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class BrainiacToken extends TokenImpl {
+public final class BrainiacToken extends TokenImpl {
 
     public BrainiacToken() {
         super("Brainiac", "1/1 red Brainiac creature token");

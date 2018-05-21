@@ -36,7 +36,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class ArchitectOfTheUntamedBeastToken extends TokenImpl {
+public final class ArchitectOfTheUntamedBeastToken extends TokenImpl {
 
     public ArchitectOfTheUntamedBeastToken() {
         super("Beast", "6/6 colorless Beast artifact creature token");

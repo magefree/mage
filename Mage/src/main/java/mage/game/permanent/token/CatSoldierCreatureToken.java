@@ -36,7 +36,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class CatSoldierCreatureToken extends TokenImpl {
+public final class CatSoldierCreatureToken extends TokenImpl {
 
     public CatSoldierCreatureToken() {
         super("Cat Soldier", "1/1 white Cat Soldier creature token with vigilance");

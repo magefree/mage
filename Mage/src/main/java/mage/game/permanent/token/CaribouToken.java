@@ -35,7 +35,7 @@ import mage.MageInt;
  *
  * @author spjspj
  */
-public class CaribouToken extends TokenImpl {
+public final class CaribouToken extends TokenImpl {
 
     public CaribouToken() {
         super("Caribou", "0/1 white Caribou creature token");

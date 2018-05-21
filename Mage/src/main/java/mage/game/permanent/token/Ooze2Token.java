@@ -37,7 +37,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
  *
  * @author spjspj
  */
-public class Ooze2Token extends TokenImpl {
+public final class Ooze2Token extends TokenImpl {
 
     public Ooze2Token() {
         super("Ooze", "2/2 green Ooze creature tokens with \"When this creature is put into a graveyard, create two 1/1 green Ooze creature tokens.\"");

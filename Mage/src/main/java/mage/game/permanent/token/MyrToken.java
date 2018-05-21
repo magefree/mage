@@ -8,7 +8,7 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-public class MyrToken extends TokenImpl {
+public final class MyrToken extends TokenImpl {
 
     final static private List<String> tokenImageSets = new ArrayList<>();
 

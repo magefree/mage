@@ -37,7 +37,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class CatToken2 extends TokenImpl {
+public final class CatToken2 extends TokenImpl {
 
     public CatToken2() {
         this((String)null);
