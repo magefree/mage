@@ -34,7 +34,7 @@ import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.keyword.PartnersWithAbility;
+import mage.abilities.keyword.PartnerWithAbility;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.cards.CardImpl;
@@ -57,7 +57,7 @@ public class ToothyImaginaryFriend extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Partner with Pir, Imaginative Rascal (When this creature enters the battlefield, target player may put Pir into their hand from their library, then shuffle.)
-        this.addAbility(new PartnersWithAbility("Pir, Imaginative Rascal"));
+        this.addAbility(new PartnerWithAbility("Pir, Imaginative Rascal", true));
 
         // Whenever you draw a card, put a +1/+1 counter on Toothy, Imaginary Friend.
         this.addAbility(new DrawCardControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), true));

@@ -46,32 +46,40 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author TheElk801
  */
-public class PartnersWithAbility extends EntersBattlefieldTriggeredAbility {
+public class PartnerWithAbility extends EntersBattlefieldTriggeredAbility {
 
     private final String partnerName;
     private final String shortName;
 
-    public PartnersWithAbility(String partnerName) {
+    public PartnerWithAbility(String partnerName) {
+        this(partnerName, false);
+    }
+
+    public PartnerWithAbility(String partnerName, boolean isLegendary) {
         super(new PartnersWithSearchEffect(partnerName), false);
         this.addTarget(new TargetPlayer());
         this.partnerName = partnerName;
-        this.shortName = shortenName(partnerName);
+        if (isLegendary) {
+            this.shortName = shortenName(partnerName);
+        } else {
+            this.shortName = partnerName;
+        }
     }
 
-    public PartnersWithAbility(final PartnersWithAbility ability) {
+    public PartnerWithAbility(final PartnerWithAbility ability) {
         super(ability);
         this.partnerName = ability.partnerName;
         this.shortName = ability.shortName;
     }
 
     @Override
-    public PartnersWithAbility copy() {
-        return new PartnersWithAbility(this);
+    public PartnerWithAbility copy() {
+        return new PartnerWithAbility(this);
     }
 
     @Override
     public String getRule() {
-        return "Partners with" + partnerName
+        return "Partner with " + partnerName
                 + " <i>(When this creature enters the battlefield, target player may put " + shortName
                 + " into their hand from their library, then shuffle.)</i>";
     }
@@ -122,7 +130,7 @@ class PartnersWithSearchEffect extends OneShotEffect {
                 FilterCard filter = new FilterCard("card named " + partnerName);
                 filter.add(new NamePredicate(partnerName));
                 TargetCardInLibrary target = new TargetCardInLibrary(filter);
-                if (player.chooseUse(Outcome.Benefit, "Search your library for a card named" + partnerName + " and put it into your hand?", source, game)) {
+                if (player.chooseUse(Outcome.Benefit, "Search your library for a card named " + partnerName + " and put it into your hand?", source, game)) {
                     player.searchLibrary(target, game);
                     for (UUID cardId : target.getTargets()) {
                         Card card = player.getLibrary().getCard(cardId, game);

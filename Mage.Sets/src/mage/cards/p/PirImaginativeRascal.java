@@ -32,7 +32,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.keyword.PartnersWithAbility;
+import mage.abilities.keyword.PartnerWithAbility;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.cards.CardImpl;
@@ -61,7 +61,7 @@ public class PirImaginativeRascal extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Partner with Toothy, Imaginary Friend (When this creature enters the battlefield, target player may put Toothy into their hand from their library, then shuffle.)
-        this.addAbility(new PartnersWithAbility("Toothy, Imaginary Friend"));
+        this.addAbility(new PartnerWithAbility("Toothy, Imaginary Friend", true));
 
         // If one or more counters would be put on a permanent your team controls, that many plus one of each of those kinds of counters are put on that permanent instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PirImaginativeRascalEffect()));

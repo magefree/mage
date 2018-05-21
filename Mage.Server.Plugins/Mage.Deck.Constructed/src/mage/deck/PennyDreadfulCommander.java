@@ -32,7 +32,7 @@ import java.util.Map.Entry;
 import mage.abilities.Ability;
 import mage.abilities.common.CanBeYourCommanderAbility;
 import mage.abilities.keyword.PartnerAbility;
-import mage.abilities.keyword.PartnersWithAbility;
+import mage.abilities.keyword.PartnerWithAbility;
 import mage.cards.Card;
 import mage.cards.ExpansionSet;
 import mage.cards.Sets;
@@ -113,8 +113,8 @@ public class PennyDreadfulCommander extends Constructed {
                 if (deck.getSideboard().size() == 2 && !commander.getAbilities().contains(PartnerAbility.getInstance())) {
                     boolean partnersWith = false;
                     for (Ability ability : commander.getAbilities()) {
-                        if (ability instanceof PartnersWithAbility
-                                && commanderNames.contains(((PartnersWithAbility) ability).getPartnerName())) {
+                        if (ability instanceof PartnerWithAbility
+                                && commanderNames.contains(((PartnerWithAbility) ability).getPartnerName())) {
                             partnersWith = true;
                             break;
                         }
