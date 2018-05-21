@@ -70,6 +70,7 @@ public class Battlebond extends ExpansionSet {
         cards.add(new SetCardInfo("Morphic Pool", 83, Rarity.RARE, mage.cards.m.MorphicPool.class));
         cards.add(new SetCardInfo("Sea of Clouds", 84, Rarity.RARE, mage.cards.s.SeaOfClouds.class));
         cards.add(new SetCardInfo("Soaring Show-Off", 40, Rarity.COMMON, mage.cards.s.SoaringShowOff.class));
+        cards.add(new SetCardInfo("Soulblade Corrupter", 17, Rarity.UNCOMMON, mage.cards.s.SoulbladeCorrupter.class));
         cards.add(new SetCardInfo("Soulblade Renewer", 18, Rarity.UNCOMMON, mage.cards.s.SoulbladeRenewer.class));
         cards.add(new SetCardInfo("Spire Garden", 85, Rarity.RARE, mage.cards.s.SpireGarden.class));
         cards.add(new SetCardInfo("Toothy, Imaginary Friend", 12, Rarity.RARE, mage.cards.t.ToothyImaginaryFriend.class));
