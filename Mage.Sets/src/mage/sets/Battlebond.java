@@ -53,6 +53,17 @@ public class Battlebond extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
+        cards.add(new SetCardInfo("Doomed Traveler", 91, Rarity.COMMON, mage.cards.d.DoomedTraveler.class));
+        cards.add(new SetCardInfo("Expedition Raptor", 92, Rarity.COMMON, mage.cards.e.ExpeditionRaptor.class));
+        cards.add(new SetCardInfo("Shoulder to Shoulder", 105, Rarity.COMMON, mage.cards.s.ShoulderToShoulder.class));
+        cards.add(new SetCardInfo("Peregrine Drake", 128, Rarity.UNCOMMON, mage.cards.p.PeregrineDrake.class));
+        cards.add(new SetCardInfo("Daggerdrome Imp", 140, Rarity.COMMON, mage.cards.d.DaggerdromeImp.class));
+        cards.add(new SetCardInfo("Doomed Dissenter", 142, Rarity.COMMON, mage.cards.d.DoomedDissenter.class));
+        cards.add(new SetCardInfo("Doubling Season", 195, Rarity.MYTHIC, mage.cards.d.DoublingSeason.class));
+        cards.add(new SetCardInfo("Fertile Ground", 198, Rarity.COMMON, mage.cards.f.FertileGround.class));
+        cards.add(new SetCardInfo("Auger Spree", 218, Rarity.COMMON, mage.cards.a.AugerSpree.class));
+        cards.add(new SetCardInfo("Centaur Healer", 219, Rarity.COMMON, mage.cards.c.CentaurHealer.class));
+        cards.add(new SetCardInfo("Eager Construct", 234, Rarity.COMMON, mage.cards.e.EagerConstruct.class));
         cards.add(new SetCardInfo("Bountiful Promenade", 81, Rarity.RARE, mage.cards.b.BountifulPromenade.class));
         cards.add(new SetCardInfo("Luxury Suite", 82, Rarity.RARE, mage.cards.l.LuxurySuite.class));
         cards.add(new SetCardInfo("Morphic Pool", 83, Rarity.RARE, mage.cards.m.MorphicPool.class));
