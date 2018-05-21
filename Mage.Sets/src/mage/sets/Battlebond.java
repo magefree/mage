@@ -55,6 +55,7 @@ public class Battlebond extends ExpansionSet {
         this.ratioBoosterMythic = 8;
         cards.add(new SetCardInfo("Doomed Traveler", 91, Rarity.COMMON, mage.cards.d.DoomedTraveler.class));
         cards.add(new SetCardInfo("Expedition Raptor", 92, Rarity.COMMON, mage.cards.e.ExpeditionRaptor.class));
+        cards.add(new SetCardInfo("Impetuous Protege", 19, Rarity.UNCOMMON, mage.cards.i.ImpetuousProtege.class));
         cards.add(new SetCardInfo("Pir, Imaginative Rascal", 11, Rarity.RARE, mage.cards.p.PirImaginativeRascal.class));
         cards.add(new SetCardInfo("Proud Mentor", 20, Rarity.UNCOMMON, mage.cards.p.ProudMentor.class));
         cards.add(new SetCardInfo("Shoulder to Shoulder", 105, Rarity.COMMON, mage.cards.s.ShoulderToShoulder.class));
@@ -67,6 +68,7 @@ public class Battlebond extends ExpansionSet {
         cards.add(new SetCardInfo("Centaur Healer", 219, Rarity.COMMON, mage.cards.c.CentaurHealer.class));
         cards.add(new SetCardInfo("Eager Construct", 234, Rarity.COMMON, mage.cards.e.EagerConstruct.class));
         cards.add(new SetCardInfo("Bountiful Promenade", 81, Rarity.RARE, mage.cards.b.BountifulPromenade.class));
+        cards.add(new SetCardInfo("Impetuous Protege", 19, Rarity.UNCOMMON, mage.cards.i.ImpetuousProtege.class));
         cards.add(new SetCardInfo("Luxury Suite", 82, Rarity.RARE, mage.cards.l.LuxurySuite.class));
         cards.add(new SetCardInfo("Morphic Pool", 83, Rarity.RARE, mage.cards.m.MorphicPool.class));
         cards.add(new SetCardInfo("Proud Mentor", 20, Rarity.UNCOMMON, mage.cards.p.ProudMentor.class));
