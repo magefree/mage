@@ -44,7 +44,7 @@ import mage.constants.CardType;
  *
  * @author TheElk801
  */
-public class Windscouter extends CardImpl {
+public final class Windscouter extends CardImpl {
 
     public Windscouter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");

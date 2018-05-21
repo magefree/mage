@@ -52,7 +52,7 @@ import mage.target.common.TargetControlledPermanent;
 /**
  * @author Markedagain
  */
-public class GlobalRuin extends CardImpl {
+public final class GlobalRuin extends CardImpl {
 
     public GlobalRuin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{W}");

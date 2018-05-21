@@ -42,7 +42,7 @@ import mage.constants.*;
  *
  * @author LevelX2
  */
-public class AtarkaBeastbreaker extends CardImpl {
+public final class AtarkaBeastbreaker extends CardImpl {
 
     public AtarkaBeastbreaker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

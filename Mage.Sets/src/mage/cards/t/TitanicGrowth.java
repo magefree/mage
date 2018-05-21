@@ -39,7 +39,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author Loki
  */
-public class TitanicGrowth extends CardImpl {
+public final class TitanicGrowth extends CardImpl {
 
     public TitanicGrowth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}");

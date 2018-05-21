@@ -45,7 +45,7 @@ import java.util.UUID;
  *
  * @author brikr
  */
-public class DralnusCrusade extends CardImpl {
+public final class DralnusCrusade extends CardImpl {
 
     public DralnusCrusade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}{R}");

@@ -46,7 +46,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class ConsumeStrength extends CardImpl {
+public final class ConsumeStrength extends CardImpl {
 
     public ConsumeStrength(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{B}{G}");

@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author Quercitron
  */
-public class LeadGolem extends CardImpl {
+public final class LeadGolem extends CardImpl {
 
     public LeadGolem(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{5}");

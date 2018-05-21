@@ -48,7 +48,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author jeffwadsworth
  */
-public class NoxiousGhoul extends CardImpl {
+public final class NoxiousGhoul extends CardImpl {
 
     final FilterPermanent filter = new FilterPermanent("Noxious Ghoul or another Zombie");
     final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("non-Zombie");

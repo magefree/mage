@@ -57,7 +57,7 @@ import mage.target.common.TargetNonlandPermanent;
  *
  * @author fireshoes
  */
-public class AyliEternalPilgrim extends CardImpl {
+public final class AyliEternalPilgrim extends CardImpl {
 
     public AyliEternalPilgrim(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{B}");

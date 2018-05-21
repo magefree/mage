@@ -50,7 +50,7 @@ import java.util.UUID;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class HauntingEchoes extends CardImpl {
+public final class HauntingEchoes extends CardImpl {
 
     public HauntingEchoes(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");

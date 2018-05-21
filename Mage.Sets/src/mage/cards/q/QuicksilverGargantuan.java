@@ -44,7 +44,7 @@ import mage.util.functions.ApplyToPermanent;
 /**
  * @author ayratn
  */
-public class QuicksilverGargantuan extends CardImpl {
+public final class QuicksilverGargantuan extends CardImpl {
 
     public QuicksilverGargantuan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");

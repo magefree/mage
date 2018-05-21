@@ -60,7 +60,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author jeffwadsworth
  */
-public class MinionOfLeshrac extends CardImpl {
+public final class MinionOfLeshrac extends CardImpl {
     
     private static final FilterPermanent filterCreatureOrLand = new FilterPermanent("creature or land");
     

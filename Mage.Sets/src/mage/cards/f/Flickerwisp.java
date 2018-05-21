@@ -54,7 +54,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Plopman
  */
-public class Flickerwisp extends CardImpl {
+public final class Flickerwisp extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("another target permanent");
 

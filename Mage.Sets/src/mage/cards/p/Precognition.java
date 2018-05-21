@@ -48,7 +48,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author fireshoes
  */
-public class Precognition extends CardImpl {
+public final class Precognition extends CardImpl {
     
     private static final String rule = "At the beginning of your upkeep, you may look at the top card of target opponent's library. You may put that card on the bottom of that player's library.";
 

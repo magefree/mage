@@ -48,7 +48,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author Loki
  */
-public class BellowingTanglewurm extends CardImpl {
+public final class BellowingTanglewurm extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("green creatures");
 
     static {

@@ -39,7 +39,7 @@ import mage.constants.Duration;
 *
 * @author LevelX2
 */
-public class Overwhelm extends CardImpl {
+public final class Overwhelm extends CardImpl {
 
     public Overwhelm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{G}{G}");      

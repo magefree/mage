@@ -51,7 +51,7 @@ import mage.players.Player;
  *
  * @author North
  */
-public class SoulsOfTheFaultless extends CardImpl {
+public final class SoulsOfTheFaultless extends CardImpl {
 
     public SoulsOfTheFaultless(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{B}{B}");

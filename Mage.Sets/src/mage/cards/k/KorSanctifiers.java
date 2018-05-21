@@ -46,7 +46,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class KorSanctifiers extends CardImpl {
+public final class KorSanctifiers extends CardImpl {
 
     public KorSanctifiers (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

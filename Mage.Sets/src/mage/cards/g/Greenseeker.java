@@ -48,7 +48,7 @@ import java.util.UUID;
  *
  * @author fireshoes
  */
-public class Greenseeker extends CardImpl {
+public final class Greenseeker extends CardImpl {
 
     public Greenseeker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}");

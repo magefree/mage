@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class CerodonYearling extends CardImpl {
+public final class CerodonYearling extends CardImpl {
 
     public CerodonYearling(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{W}");

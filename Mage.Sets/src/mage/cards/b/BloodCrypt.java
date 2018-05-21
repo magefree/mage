@@ -43,7 +43,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class BloodCrypt extends CardImpl {
+public final class BloodCrypt extends CardImpl {
 
     public BloodCrypt(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, null);

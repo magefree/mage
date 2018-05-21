@@ -51,7 +51,7 @@ import mage.counters.CounterType;
  *
  * @author Luna Skyrise
  */
-public class LavaTubes extends CardImpl {
+public final class LavaTubes extends CardImpl {
 
     public LavaTubes(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

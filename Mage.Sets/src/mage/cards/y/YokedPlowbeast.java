@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class YokedPlowbeast extends CardImpl {
+public final class YokedPlowbeast extends CardImpl {
 
     public YokedPlowbeast (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}{W}");

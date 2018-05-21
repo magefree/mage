@@ -40,7 +40,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author emerald000
  */
-public class EndlessObedience extends CardImpl {
+public final class EndlessObedience extends CardImpl {
 
     public EndlessObedience(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B}{B}");

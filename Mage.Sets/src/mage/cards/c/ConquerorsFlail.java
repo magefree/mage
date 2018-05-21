@@ -53,7 +53,7 @@ import mage.players.Player;
  *
  * @author spjspj
  */
-public class ConquerorsFlail extends CardImpl {
+public final class ConquerorsFlail extends CardImpl {
 
     public ConquerorsFlail(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");

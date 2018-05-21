@@ -52,7 +52,7 @@ import mage.util.CardUtil;
  * @author LoneFox
  *
  */
-public class KaerveksTorch extends CardImpl {
+public final class KaerveksTorch extends CardImpl {
 
     public KaerveksTorch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{R}");

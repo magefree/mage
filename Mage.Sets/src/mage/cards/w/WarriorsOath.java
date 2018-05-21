@@ -37,7 +37,7 @@ import mage.constants.CardType;
  *
  * @author LoneFox
  */
-public class WarriorsOath extends CardImpl {
+public final class WarriorsOath extends CardImpl {
 
     public WarriorsOath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}{R}");

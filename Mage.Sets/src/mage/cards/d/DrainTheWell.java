@@ -39,7 +39,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author Loki
  */
-public class DrainTheWell extends CardImpl {
+public final class DrainTheWell extends CardImpl {
 
     public DrainTheWell(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B/G}{B/G}");

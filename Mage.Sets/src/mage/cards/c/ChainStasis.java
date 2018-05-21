@@ -52,7 +52,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author TheElk801
  */
-public class ChainStasis extends CardImpl {
+public final class ChainStasis extends CardImpl {
 
     public ChainStasis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}");

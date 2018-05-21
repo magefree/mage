@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author Plopman
  */
-public class UrborgSyphonMage extends CardImpl {
+public final class UrborgSyphonMage extends CardImpl {
 
     public UrborgSyphonMage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

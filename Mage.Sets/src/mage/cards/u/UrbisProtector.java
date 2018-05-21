@@ -41,7 +41,7 @@ import mage.game.permanent.token.AngelToken;
  *
  * @author LevelX2
  */
-public class UrbisProtector extends CardImpl {
+public final class UrbisProtector extends CardImpl {
 
     public UrbisProtector(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{W}");

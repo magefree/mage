@@ -40,7 +40,7 @@ import mage.constants.CardType;
  *
  * @author Backfir3
  */
-public class Rejuvenate extends CardImpl {
+public final class Rejuvenate extends CardImpl {
 
     public Rejuvenate (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}");

@@ -56,7 +56,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class MogisGodOfSlaughter extends CardImpl {
+public final class MogisGodOfSlaughter extends CardImpl {
 
     public MogisGodOfSlaughter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{2}{B}{R}");

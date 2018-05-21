@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class LucentLiminid extends CardImpl {
+public final class LucentLiminid extends CardImpl {
 
     public LucentLiminid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{3}{W}{W}");

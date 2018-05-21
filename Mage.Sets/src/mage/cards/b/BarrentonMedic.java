@@ -49,7 +49,7 @@ import mage.target.common.TargetAnyTarget;
  * @author jeffwadsworth
 
  */
-public class BarrentonMedic extends CardImpl {
+public final class BarrentonMedic extends CardImpl {
 
     public BarrentonMedic(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");

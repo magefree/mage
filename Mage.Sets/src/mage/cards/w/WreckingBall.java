@@ -43,7 +43,7 @@ import mage.target.TargetPermanent;
  * @author JotaPeRL
 
  */
-public class WreckingBall extends CardImpl {
+public final class WreckingBall extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent("creature or land");
     static {

@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author emerald000
  */
-public class YawgmothsBargain extends CardImpl {
+public final class YawgmothsBargain extends CardImpl {
 
     public YawgmothsBargain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{B}{B}");

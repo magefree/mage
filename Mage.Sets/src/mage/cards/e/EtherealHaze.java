@@ -42,7 +42,7 @@ import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
  *
  * @author LevelX
  */
-public class EtherealHaze extends CardImpl {
+public final class EtherealHaze extends CardImpl {
 
     public EtherealHaze(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{W}");

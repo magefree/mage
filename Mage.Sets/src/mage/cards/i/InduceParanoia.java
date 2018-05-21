@@ -48,7 +48,7 @@ import mage.target.TargetSpell;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class InduceParanoia extends CardImpl {
+public final class InduceParanoia extends CardImpl {
 
     public InduceParanoia(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}{U}");

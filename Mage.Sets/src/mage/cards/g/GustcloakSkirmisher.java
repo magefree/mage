@@ -44,7 +44,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class GustcloakSkirmisher extends CardImpl {
+public final class GustcloakSkirmisher extends CardImpl {
 
     public GustcloakSkirmisher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

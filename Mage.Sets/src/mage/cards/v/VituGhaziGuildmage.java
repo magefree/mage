@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class VituGhaziGuildmage extends CardImpl {
+public final class VituGhaziGuildmage extends CardImpl {
 
     public VituGhaziGuildmage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{W}");

@@ -47,7 +47,7 @@ import mage.constants.*;
  *
  * @author LoneFox
  */
-public class BoneshardSlasher extends CardImpl {
+public final class BoneshardSlasher extends CardImpl {
 
     public BoneshardSlasher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

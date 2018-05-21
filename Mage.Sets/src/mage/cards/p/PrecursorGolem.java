@@ -54,7 +54,7 @@ import mage.util.TargetAddress;
 /**
  * @author duncant
  */
-public class PrecursorGolem extends CardImpl {
+public final class PrecursorGolem extends CardImpl {
 
     public PrecursorGolem(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{5}");

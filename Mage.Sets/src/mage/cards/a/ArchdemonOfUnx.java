@@ -49,7 +49,7 @@ import mage.game.permanent.token.ZombieToken;
  *
  * @author Plopman
  */
-public class ArchdemonOfUnx extends CardImpl {
+public final class ArchdemonOfUnx extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Zombie creature");
 

@@ -47,7 +47,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  *
  * @author fireshoes
  */
-public class HarbingerOfTheHunt extends CardImpl {
+public final class HarbingerOfTheHunt extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature without flying");
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("other creature with flying");

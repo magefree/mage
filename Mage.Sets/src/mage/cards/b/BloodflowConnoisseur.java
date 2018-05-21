@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author noxx
  */
-public class BloodflowConnoisseur extends CardImpl {
+public final class BloodflowConnoisseur extends CardImpl {
 
     public BloodflowConnoisseur(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");

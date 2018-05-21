@@ -51,7 +51,7 @@ import mage.watchers.common.CastSpellLastTurnWatcher;
  *
  * @author L_J
  */
-public class DampingSphere extends CardImpl {
+public final class DampingSphere extends CardImpl {
 
     public DampingSphere(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");

@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author emerald000
  */
-public class Breakthrough extends CardImpl {
+public final class Breakthrough extends CardImpl {
 
     public Breakthrough(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{U}");

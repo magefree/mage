@@ -51,7 +51,7 @@ import mage.game.permanent.Permanent;
  *
  * @author fireshoes
  */
-public class VulshokGauntlets extends CardImpl {
+public final class VulshokGauntlets extends CardImpl {
 
     public VulshokGauntlets(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

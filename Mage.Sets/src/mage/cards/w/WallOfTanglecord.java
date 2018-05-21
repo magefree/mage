@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class WallOfTanglecord extends CardImpl {
+public final class WallOfTanglecord extends CardImpl {
 
     public WallOfTanglecord (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}");

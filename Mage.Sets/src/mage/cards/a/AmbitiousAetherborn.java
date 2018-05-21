@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class AmbitiousAetherborn extends CardImpl {
+public final class AmbitiousAetherborn extends CardImpl {
 
     public AmbitiousAetherborn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");

@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author JayDi85
  */
-public class ForerunnerOfTheHeralds extends CardImpl {
+public final class ForerunnerOfTheHeralds extends CardImpl {
 
     private static final FilterPermanent filterAnotherMerfolk = new FilterPermanent(SubType.MERFOLK, "another " + SubType.MERFOLK.toString());
     static {

@@ -45,7 +45,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  *
  * @author LevelX2
  */
-public class AuriokChampion extends CardImpl {
+public final class AuriokChampion extends CardImpl {
 
     private static FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
 

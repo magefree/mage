@@ -48,7 +48,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class OnduRising extends CardImpl {
+public final class OnduRising extends CardImpl {
 
     public OnduRising(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{W}");

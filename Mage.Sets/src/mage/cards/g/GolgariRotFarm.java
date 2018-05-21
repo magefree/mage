@@ -45,7 +45,7 @@ import mage.filter.common.FilterControlledPermanent;
  *
  * @author Loki
  */
-public class GolgariRotFarm extends CardImpl {
+public final class GolgariRotFarm extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
 

@@ -55,7 +55,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class PrismaticStrands extends CardImpl {
+public final class PrismaticStrands extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped white creature you control");
 

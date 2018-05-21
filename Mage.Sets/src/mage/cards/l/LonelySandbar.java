@@ -40,7 +40,7 @@ import mage.constants.CardType;
  *
  * @author Plopman
  */
-public class LonelySandbar extends CardImpl {
+public final class LonelySandbar extends CardImpl {
 
     public LonelySandbar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

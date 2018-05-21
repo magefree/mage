@@ -44,7 +44,7 @@ import mage.target.TargetSpell;
  *
  * @author fireshoes
  */
-public class Rethink extends CardImpl {
+public final class Rethink extends CardImpl {
 
     public Rethink(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");

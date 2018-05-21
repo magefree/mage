@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class GlistenerElf extends CardImpl {
+public final class GlistenerElf extends CardImpl {
 
     public GlistenerElf(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");

@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author Quercitron
  */
-public class FlameSpirit extends CardImpl {
+public final class FlameSpirit extends CardImpl {
 
     public FlameSpirit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");

@@ -47,7 +47,7 @@ import mage.game.events.GameEvent;
  *
  * @author fireshoes
  */
-public class GridMonitor extends CardImpl {
+public final class GridMonitor extends CardImpl {
 
     public GridMonitor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}");

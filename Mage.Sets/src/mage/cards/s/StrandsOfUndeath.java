@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author lopho
  */
-public class StrandsOfUndeath extends CardImpl {
+public final class StrandsOfUndeath extends CardImpl {
 
     public StrandsOfUndeath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{B}");

@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class WastelandScorpion extends CardImpl {
+public final class WastelandScorpion extends CardImpl {
 
     public WastelandScorpion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");

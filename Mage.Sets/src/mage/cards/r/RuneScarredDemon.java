@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Loki
  */
-public class RuneScarredDemon extends CardImpl {
+public final class RuneScarredDemon extends CardImpl {
 
     public RuneScarredDemon (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}{B}");

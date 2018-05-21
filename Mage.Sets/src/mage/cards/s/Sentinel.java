@@ -57,7 +57,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class Sentinel extends CardImpl {
+public final class Sentinel extends CardImpl {
 
     public Sentinel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");

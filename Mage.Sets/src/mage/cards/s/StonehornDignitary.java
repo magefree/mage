@@ -42,7 +42,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author nantuko
  */
-public class StonehornDignitary extends CardImpl {
+public final class StonehornDignitary extends CardImpl {
 
     public StonehornDignitary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

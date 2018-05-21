@@ -49,7 +49,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author LevelX2
  */
-public class CavernHarpy extends CardImpl {
+public final class CavernHarpy extends CardImpl {
 
     static final private FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("blue or black creature you control");
 

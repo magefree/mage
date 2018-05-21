@@ -43,7 +43,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author djbrez
  */
-public class Abjure extends CardImpl {
+public final class Abjure extends CardImpl {
     
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a blue permanent");
 

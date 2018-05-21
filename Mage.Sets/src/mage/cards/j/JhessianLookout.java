@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class JhessianLookout extends CardImpl {
+public final class JhessianLookout extends CardImpl {
 
     public JhessianLookout (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

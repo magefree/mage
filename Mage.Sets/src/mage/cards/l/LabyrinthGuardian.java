@@ -49,7 +49,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author fireshoes
  */
-public class LabyrinthGuardian extends CardImpl {
+public final class LabyrinthGuardian extends CardImpl {
 
     public LabyrinthGuardian(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");

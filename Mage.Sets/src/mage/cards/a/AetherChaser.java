@@ -46,7 +46,7 @@ import mage.game.permanent.token.ServoToken;
  *
  * @author fireshoes
  */
-public class AetherChaser extends CardImpl {
+public final class AetherChaser extends CardImpl {
 
     public AetherChaser(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");

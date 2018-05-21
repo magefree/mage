@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class TwistedJustice extends CardImpl {
+public final class TwistedJustice extends CardImpl {
 
     public TwistedJustice(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{U}{B}");

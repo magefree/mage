@@ -45,7 +45,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author jeffwadsworth
  */
-public class TeleminPerformance extends CardImpl {
+public final class TeleminPerformance extends CardImpl {
 
     public TeleminPerformance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{U}{U}");

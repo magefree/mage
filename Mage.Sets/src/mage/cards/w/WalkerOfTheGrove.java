@@ -42,7 +42,7 @@ import mage.game.permanent.token.WalkerOfTheGroveToken;
  *
  * @author LevelX2
  */
-public class WalkerOfTheGrove extends CardImpl {
+public final class WalkerOfTheGrove extends CardImpl {
 
     public WalkerOfTheGrove(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{G}{G}");

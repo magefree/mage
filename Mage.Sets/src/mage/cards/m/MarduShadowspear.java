@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class MarduShadowspear extends CardImpl {
+public final class MarduShadowspear extends CardImpl {
 
     public MarduShadowspear(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");

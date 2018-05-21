@@ -43,7 +43,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class GustcloakRunner extends CardImpl {
+public final class GustcloakRunner extends CardImpl {
 
     public GustcloakRunner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");

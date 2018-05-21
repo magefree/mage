@@ -43,7 +43,7 @@ import mage.game.permanent.token.SoldierToken;
  *
  * @author TheElk801
  */
-public class SecurityDetail extends CardImpl {
+public final class SecurityDetail extends CardImpl {
 
     public SecurityDetail(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");

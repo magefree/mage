@@ -44,7 +44,7 @@ import mage.target.common.TargetAttackingCreature;
  *
  * @author spjspj
  */
-public class BuiltToSmash extends CardImpl {
+public final class BuiltToSmash extends CardImpl {
 
     public BuiltToSmash(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");

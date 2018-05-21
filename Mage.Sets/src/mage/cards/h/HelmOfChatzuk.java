@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author L_J
  */
-public class HelmOfChatzuk extends CardImpl {
+public final class HelmOfChatzuk extends CardImpl {
 
     public HelmOfChatzuk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");

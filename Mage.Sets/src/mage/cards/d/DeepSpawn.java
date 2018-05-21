@@ -53,7 +53,7 @@ import mage.constants.Zone;
  *
  * @author LoneFox
  */
-public class DeepSpawn extends CardImpl {
+public final class DeepSpawn extends CardImpl {
 
     public DeepSpawn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}{U}{U}");

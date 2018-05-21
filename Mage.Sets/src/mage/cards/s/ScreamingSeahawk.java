@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInLibrary;
  * @author fireshoes
  */
 
-public class ScreamingSeahawk extends CardImpl {
+public final class ScreamingSeahawk extends CardImpl {
     
     private static final FilterCard filter = new FilterCard("card named Screaming Seahawk");
 

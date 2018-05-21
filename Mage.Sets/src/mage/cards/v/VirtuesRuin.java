@@ -40,7 +40,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author dustinconrad
  */
-public class VirtuesRuin extends CardImpl {
+public final class VirtuesRuin extends CardImpl {
 
     private static FilterCreaturePermanent filter = new FilterCreaturePermanent("white creatures");
 

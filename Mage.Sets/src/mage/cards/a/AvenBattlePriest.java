@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author Wehk
  */
-public class AvenBattlePriest extends CardImpl {
+public final class AvenBattlePriest extends CardImpl {
 
     public AvenBattlePriest(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}");

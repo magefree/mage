@@ -39,7 +39,7 @@ import mage.constants.SubType;
 /**
  * @author LevelX2
  */
-public class AzoriusGuildgate extends CardImpl {
+public final class AzoriusGuildgate extends CardImpl {
 
     public AzoriusGuildgate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

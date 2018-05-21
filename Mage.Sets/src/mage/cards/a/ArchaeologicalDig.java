@@ -41,7 +41,7 @@ import mage.constants.CardType;
  *
  * @author Plopman
  */
-public class ArchaeologicalDig extends CardImpl {
+public final class ArchaeologicalDig extends CardImpl {
 
     public ArchaeologicalDig(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

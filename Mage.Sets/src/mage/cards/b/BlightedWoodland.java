@@ -47,7 +47,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class BlightedWoodland extends CardImpl {
+public final class BlightedWoodland extends CardImpl {
 
     public BlightedWoodland(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

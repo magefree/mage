@@ -57,7 +57,7 @@ import mage.util.CardUtil;
  *
  * @author TheElk801
  */
-public class KheruMindEater extends CardImpl {
+public final class KheruMindEater extends CardImpl {
 
     public KheruMindEater(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");

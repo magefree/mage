@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class ExpeditionEnvoy extends CardImpl {
+public final class ExpeditionEnvoy extends CardImpl {
 
     public ExpeditionEnvoy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");

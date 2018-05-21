@@ -43,7 +43,7 @@ import mage.constants.SubType;
  *
  * @author LoneFox
  */
-public class LiegeOfTheAxe extends CardImpl {
+public final class LiegeOfTheAxe extends CardImpl {
 
     public LiegeOfTheAxe(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

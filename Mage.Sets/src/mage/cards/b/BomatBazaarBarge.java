@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author emerald000
  */
-public class BomatBazaarBarge extends CardImpl {
+public final class BomatBazaarBarge extends CardImpl {
 
     public BomatBazaarBarge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");

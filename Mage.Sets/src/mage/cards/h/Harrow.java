@@ -45,7 +45,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Viserion
  */
-public class Harrow extends CardImpl {
+public final class Harrow extends CardImpl {
 
     public Harrow(UUID ownerId, CardSetInfo setInfo){
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}");

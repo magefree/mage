@@ -56,7 +56,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class SneakAttack extends CardImpl {
+public final class SneakAttack extends CardImpl {
 
     public SneakAttack(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{R}");

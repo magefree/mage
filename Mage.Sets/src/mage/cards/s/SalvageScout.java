@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInYourGraveyard;
 /**
  * @author nantuko
  */
-public class SalvageScout extends CardImpl {
+public final class SalvageScout extends CardImpl {
 
     public SalvageScout(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");

@@ -48,7 +48,7 @@ import mage.filter.predicate.mageobject.ColorlessPredicate;
  *
  * @author LevelX2
  */
-public class NettleDrone extends CardImpl {
+public final class NettleDrone extends CardImpl {
 
     private static final FilterSpell filterSpell = new FilterSpell("a colorless spell");
 

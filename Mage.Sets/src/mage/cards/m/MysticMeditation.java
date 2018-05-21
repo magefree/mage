@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author LevelX2
  */
-public class MysticMeditation extends CardImpl {
+public final class MysticMeditation extends CardImpl {
 
     public MysticMeditation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}");

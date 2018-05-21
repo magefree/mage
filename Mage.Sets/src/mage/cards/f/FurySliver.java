@@ -44,7 +44,7 @@ import mage.filter.StaticFilters;
  *
  * @author Sir-Speshkitty
  */
-public class FurySliver extends CardImpl {
+public final class FurySliver extends CardImpl {
 
     public FurySliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{R}");

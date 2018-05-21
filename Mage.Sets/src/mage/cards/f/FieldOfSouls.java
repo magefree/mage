@@ -44,7 +44,7 @@ import mage.game.permanent.token.SpiritWhiteToken;
  *
  * @author fireshoes
  */
-public class FieldOfSouls extends CardImpl {
+public final class FieldOfSouls extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creature");
     static{

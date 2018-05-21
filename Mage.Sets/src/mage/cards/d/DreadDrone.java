@@ -42,7 +42,7 @@ import mage.game.permanent.token.EldraziSpawnToken;
  *
  * @author Loki
  */
-public class DreadDrone extends CardImpl {
+public final class DreadDrone extends CardImpl {
 
     public DreadDrone (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");

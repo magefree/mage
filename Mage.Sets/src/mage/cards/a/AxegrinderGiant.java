@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class AxegrinderGiant extends CardImpl {
+public final class AxegrinderGiant extends CardImpl {
 
     public AxegrinderGiant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{R}");

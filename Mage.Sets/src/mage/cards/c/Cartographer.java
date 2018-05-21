@@ -43,7 +43,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author cbt33
  */
-public class Cartographer extends CardImpl {
+public final class Cartographer extends CardImpl {
 
     public Cartographer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

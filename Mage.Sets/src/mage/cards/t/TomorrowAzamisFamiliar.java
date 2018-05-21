@@ -45,7 +45,7 @@ import mage.game.events.GameEvent;
  *
  * @author LevelX2
  */
-public class TomorrowAzamisFamiliar extends CardImpl {
+public final class TomorrowAzamisFamiliar extends CardImpl {
 
     public TomorrowAzamisFamiliar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}");

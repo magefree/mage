@@ -42,7 +42,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ManicVandal extends CardImpl {
+public final class ManicVandal extends CardImpl {
 
     public ManicVandal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

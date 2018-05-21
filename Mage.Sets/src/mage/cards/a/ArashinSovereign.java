@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class ArashinSovereign extends CardImpl {
+public final class ArashinSovereign extends CardImpl {
 
     public ArashinSovereign(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}{W}");

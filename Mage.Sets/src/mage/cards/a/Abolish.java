@@ -46,7 +46,7 @@ import java.util.UUID;
  *
  * @author Backfir3
  */
-public class Abolish extends CardImpl {
+public final class Abolish extends CardImpl {
 
     private static final FilterCard filterCost = new FilterCard("Plains card");
 

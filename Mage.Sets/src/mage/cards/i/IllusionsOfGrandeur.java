@@ -42,7 +42,7 @@ import mage.constants.CardType;
  *
  * @author emerald000
  */
-public class IllusionsOfGrandeur extends CardImpl {
+public final class IllusionsOfGrandeur extends CardImpl {
 
     public IllusionsOfGrandeur(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{U}");

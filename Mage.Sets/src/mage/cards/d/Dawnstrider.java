@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author Plopman
  */
-public class Dawnstrider extends CardImpl {
+public final class Dawnstrider extends CardImpl {
 
     public Dawnstrider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

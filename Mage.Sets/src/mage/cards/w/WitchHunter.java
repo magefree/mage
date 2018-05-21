@@ -50,7 +50,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  *
  * @author fireshoes
  */
-public class WitchHunter extends CardImpl {
+public final class WitchHunter extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
 

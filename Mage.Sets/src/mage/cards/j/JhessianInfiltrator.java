@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class JhessianInfiltrator extends CardImpl {
+public final class JhessianInfiltrator extends CardImpl {
 
     public JhessianInfiltrator (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{U}");

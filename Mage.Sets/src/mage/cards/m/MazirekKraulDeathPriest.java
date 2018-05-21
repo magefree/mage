@@ -50,7 +50,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author fireshoes
  */
-public class MazirekKraulDeathPriest extends CardImpl {
+public final class MazirekKraulDeathPriest extends CardImpl {
 
     public MazirekKraulDeathPriest(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{G}");

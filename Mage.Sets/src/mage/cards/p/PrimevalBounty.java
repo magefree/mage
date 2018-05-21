@@ -51,7 +51,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class PrimevalBounty extends CardImpl {
+public final class PrimevalBounty extends CardImpl {
 
     private static final FilterSpell filterNonCreature = new FilterSpell("a noncreature spell");
 

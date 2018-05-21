@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author LoneFox
  */
-public class YoungWeiRecruits extends CardImpl {
+public final class YoungWeiRecruits extends CardImpl {
 
     public YoungWeiRecruits(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

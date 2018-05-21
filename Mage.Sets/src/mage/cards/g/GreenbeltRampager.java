@@ -47,7 +47,7 @@ import mage.players.Player;
 /**
  * @author JRHerlehy
  */
-public class GreenbeltRampager extends CardImpl {
+public final class GreenbeltRampager extends CardImpl {
 
     public GreenbeltRampager(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}");

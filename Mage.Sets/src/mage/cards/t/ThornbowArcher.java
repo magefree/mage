@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class ThornbowArcher extends CardImpl {
+public final class ThornbowArcher extends CardImpl {
 
     public ThornbowArcher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");

@@ -50,7 +50,7 @@ import mage.filter.common.FilterControlledArtifactPermanent;
  *
  * @author Quercitron
  */
-public class ScrapyardMongrel extends CardImpl {
+public final class ScrapyardMongrel extends CardImpl {
 
     public ScrapyardMongrel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

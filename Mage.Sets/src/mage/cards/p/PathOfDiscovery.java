@@ -41,7 +41,7 @@ import mage.filter.StaticFilters;
  *
  * @author LevelX2
  */
-public class PathOfDiscovery extends CardImpl {
+public final class PathOfDiscovery extends CardImpl {
 
     public PathOfDiscovery(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");

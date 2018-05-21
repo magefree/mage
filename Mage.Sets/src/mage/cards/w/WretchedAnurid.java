@@ -43,7 +43,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  *
  * @author fireshoes
  */
-public class WretchedAnurid extends CardImpl {
+public final class WretchedAnurid extends CardImpl {
     
     private static final FilterPermanent filter = new FilterCreaturePermanent("another creature");
     

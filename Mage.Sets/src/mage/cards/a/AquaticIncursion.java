@@ -49,7 +49,7 @@ import mage.target.TargetPermanent;
  *
  * @author L_J
  */
-public class AquaticIncursion extends CardImpl {
+public final class AquaticIncursion extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent("Merfolk");
 

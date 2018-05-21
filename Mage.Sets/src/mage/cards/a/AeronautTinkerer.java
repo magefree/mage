@@ -46,7 +46,7 @@ import mage.filter.common.FilterControlledArtifactPermanent;
  *
  * @author LevelX2
  */
-public class AeronautTinkerer extends CardImpl {
+public final class AeronautTinkerer extends CardImpl {
     
     final static private String rule = "{this} has flying as long as you control an artifact";
 

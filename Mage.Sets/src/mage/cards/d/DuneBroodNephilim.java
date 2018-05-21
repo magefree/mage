@@ -43,7 +43,7 @@ import mage.game.permanent.token.DuneBroodNephilimToken;
 /**
  * @author Loki
  */
-public class DuneBroodNephilim extends CardImpl {
+public final class DuneBroodNephilim extends CardImpl {
 
     final static FilterControlledPermanent filterLands = new FilterControlledLandPermanent();
 

@@ -44,7 +44,7 @@ import mage.target.TargetPermanent;
  *
  * @author Loki
  */
-public class Pestermite extends CardImpl {
+public final class Pestermite extends CardImpl {
 
     public Pestermite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

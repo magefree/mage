@@ -40,7 +40,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class Smite extends CardImpl {
+public final class Smite extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("blocked creature");
 

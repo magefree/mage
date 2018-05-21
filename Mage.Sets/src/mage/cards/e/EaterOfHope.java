@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Quercitron
  */
-public class EaterOfHope extends CardImpl {
+public final class EaterOfHope extends CardImpl {
 
     private static final FilterControlledCreaturePermanent destroyFilter = new FilterControlledCreaturePermanent("two other creatures");
 

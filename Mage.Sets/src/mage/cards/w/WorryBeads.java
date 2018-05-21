@@ -40,7 +40,7 @@ import mage.constants.Zone;
  *
  * @author TheElk801
  */
-public class WorryBeads extends CardImpl {
+public final class WorryBeads extends CardImpl {
 
     public WorryBeads(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");

@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class RobeOfMirrors extends CardImpl {
+public final class RobeOfMirrors extends CardImpl {
 
     public RobeOfMirrors(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{U}");

@@ -41,7 +41,7 @@ import mage.constants.TargetController;
  *
  * @author emerald000
  */
-public class Fascination extends CardImpl {
+public final class Fascination extends CardImpl {
 
     public Fascination(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{U}{U}");

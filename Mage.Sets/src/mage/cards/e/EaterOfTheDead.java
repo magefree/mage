@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author fireshoes
  */
-public class EaterOfTheDead extends CardImpl {
+public final class EaterOfTheDead extends CardImpl {
 
     public EaterOfTheDead(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");

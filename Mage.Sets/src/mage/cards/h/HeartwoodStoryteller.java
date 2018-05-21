@@ -50,7 +50,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author emerald000
  */
-public class HeartwoodStoryteller extends CardImpl {
+public final class HeartwoodStoryteller extends CardImpl {
 
     public HeartwoodStoryteller(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");

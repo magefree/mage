@@ -50,7 +50,7 @@ import mage.target.TargetPlayer;
  *
  * @author North
  */
-public class GruesomeDiscovery extends CardImpl {
+public final class GruesomeDiscovery extends CardImpl {
 
     public GruesomeDiscovery(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}{B}");

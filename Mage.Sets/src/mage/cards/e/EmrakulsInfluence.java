@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author fireshoes
  */
-public class EmrakulsInfluence extends CardImpl {
+public final class EmrakulsInfluence extends CardImpl {
 
     private static final FilterSpell filterSpell = new FilterSpell("Eldrazi creature spell with converted mana cost 7 or greater");
 

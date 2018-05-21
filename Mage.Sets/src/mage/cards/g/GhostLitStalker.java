@@ -47,7 +47,7 @@ import mage.target.TargetPlayer;
  *
  * @author Plopman
  */
-public class GhostLitStalker extends CardImpl {
+public final class GhostLitStalker extends CardImpl {
 
     public GhostLitStalker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");

@@ -40,7 +40,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class BarkshellBlessing extends CardImpl {
+public final class BarkshellBlessing extends CardImpl {
 
     public BarkshellBlessing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G/W}");

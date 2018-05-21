@@ -67,7 +67,7 @@ import mage.util.CardUtil;
  *
  * @author TheElk801
  */
-public class DeathMaskDuplicant extends CardImpl {
+public final class DeathMaskDuplicant extends CardImpl {
 
     public DeathMaskDuplicant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{7}");

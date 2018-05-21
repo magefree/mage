@@ -52,7 +52,7 @@ import mage.target.TargetPlayer;
  *
  * @author fireshoes & L_J
  */
-public class WandOfIth extends CardImpl {
+public final class WandOfIth extends CardImpl {
 
     public WandOfIth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");

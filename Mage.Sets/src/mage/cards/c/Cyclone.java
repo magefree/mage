@@ -51,7 +51,7 @@ import mage.players.Player;
  *
  * @author MarcoMarin
  */
-public class Cyclone extends CardImpl {
+public final class Cyclone extends CardImpl {
     
     public Cyclone(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}{G}");

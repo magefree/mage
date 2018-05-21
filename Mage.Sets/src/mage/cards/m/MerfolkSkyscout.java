@@ -42,7 +42,7 @@ import mage.target.TargetPermanent;
  *
  * @author North
  */
-public class MerfolkSkyscout extends CardImpl {
+public final class MerfolkSkyscout extends CardImpl {
 
     public MerfolkSkyscout(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");

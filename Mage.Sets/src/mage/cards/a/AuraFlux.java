@@ -46,7 +46,7 @@ import mage.filter.common.FilterEnchantmentPermanent;
  *
  * @author Plopman
  */
-public class AuraFlux extends CardImpl {
+public final class AuraFlux extends CardImpl {
 
     public AuraFlux(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");

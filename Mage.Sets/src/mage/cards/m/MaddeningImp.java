@@ -58,7 +58,7 @@ import mage.watchers.common.AttackedThisTurnWatcher;
  *
  * @author L_J
  */
-public class MaddeningImp extends CardImpl {
+public final class MaddeningImp extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Wall creatures");
 

@@ -62,7 +62,7 @@ import mage.watchers.common.BlockedByOnlyOneCreatureThisCombatWatcher;
  *
  * @author L_J
  */
-public class BalduvianWarlord extends CardImpl {
+public final class BalduvianWarlord extends CardImpl {
 
     public BalduvianWarlord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");

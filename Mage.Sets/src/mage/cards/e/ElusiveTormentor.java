@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class ElusiveTormentor extends CardImpl {
+public final class ElusiveTormentor extends CardImpl {
 
     public ElusiveTormentor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");

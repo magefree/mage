@@ -60,7 +60,7 @@ import mage.game.permanent.Permanent;
  *
  * @author TheElk801
  */
-public class WritOfPassage extends CardImpl {
+public final class WritOfPassage extends CardImpl {
 
     public WritOfPassage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{U}");

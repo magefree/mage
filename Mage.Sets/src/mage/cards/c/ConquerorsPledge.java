@@ -41,7 +41,7 @@ import mage.game.permanent.token.KorSoldierToken;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ConquerorsPledge extends CardImpl {
+public final class ConquerorsPledge extends CardImpl {
 
     public ConquerorsPledge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{W}{W}{W}");

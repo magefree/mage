@@ -51,7 +51,7 @@ import java.util.UUID;
 /**
  * @author LevelX2
  */
-public class BriarbridgePatrol extends CardImpl {
+public final class BriarbridgePatrol extends CardImpl {
 
     public BriarbridgePatrol(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");

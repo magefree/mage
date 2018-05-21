@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Styxo
  */
-public class N1Starfighter extends CardImpl {
+public final class N1Starfighter extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another creature you control");
 

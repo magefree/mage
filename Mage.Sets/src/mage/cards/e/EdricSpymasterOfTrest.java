@@ -47,7 +47,7 @@ import mage.target.targetpointer.FixedTarget;
 /**
  * @author mluds
  */
-public class EdricSpymasterOfTrest extends CardImpl {
+public final class EdricSpymasterOfTrest extends CardImpl {
 
     public EdricSpymasterOfTrest(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{U}");

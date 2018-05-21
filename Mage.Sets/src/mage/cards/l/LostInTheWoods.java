@@ -44,7 +44,7 @@ import java.util.UUID;
  *
  * @author BetaSteward
  */
-public class LostInTheWoods extends CardImpl {
+public final class LostInTheWoods extends CardImpl {
 
     public LostInTheWoods(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}{G}");

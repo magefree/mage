@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class LoyalSentry extends CardImpl {
+public final class LoyalSentry extends CardImpl {
 
     public LoyalSentry(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}");

@@ -38,7 +38,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author Loki
  */
-public class Shatter extends CardImpl {
+public final class Shatter extends CardImpl {
     public Shatter (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");
 

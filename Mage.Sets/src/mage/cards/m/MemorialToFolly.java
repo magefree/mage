@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInYourGraveyard;
 /**
  * @author Rystan
  */
-public class MemorialToFolly extends CardImpl {
+public final class MemorialToFolly extends CardImpl {
 
     public MemorialToFolly(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

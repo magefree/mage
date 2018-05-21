@@ -46,7 +46,7 @@ import mage.target.common.TargetAnyTarget;
 /**
  * @author Loki
  */
-public class RageExtractor extends CardImpl {
+public final class RageExtractor extends CardImpl {
 
     public RageExtractor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}{R/P}");

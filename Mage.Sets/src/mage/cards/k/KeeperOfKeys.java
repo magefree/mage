@@ -48,7 +48,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class KeeperOfKeys extends CardImpl {
+public final class KeeperOfKeys extends CardImpl {
 
     public KeeperOfKeys(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");

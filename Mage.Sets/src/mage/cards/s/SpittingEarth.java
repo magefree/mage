@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class SpittingEarth extends CardImpl {
+public final class SpittingEarth extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Mountain you control");
 

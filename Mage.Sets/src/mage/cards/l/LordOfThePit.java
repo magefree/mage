@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author dustinconrad
  */
-public class LordOfThePit extends CardImpl {
+public final class LordOfThePit extends CardImpl {
 
     public LordOfThePit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}{B}");

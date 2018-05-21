@@ -40,7 +40,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
 /**
  * @author LevelX2
  */
-public class GrowingRanks extends CardImpl {
+public final class GrowingRanks extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
 

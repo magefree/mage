@@ -39,7 +39,7 @@ import mage.target.TargetSpell;
  *
  * @author Loki
  */
-public class Absorb extends CardImpl {
+public final class Absorb extends CardImpl {
 
     public Absorb(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}{U}{U}");

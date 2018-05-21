@@ -48,7 +48,7 @@ import java.util.UUID;
  *
  * @author Plopman
  */
-public class AjanisChosen extends CardImpl {
+public final class AjanisChosen extends CardImpl {
 
     public AjanisChosen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");

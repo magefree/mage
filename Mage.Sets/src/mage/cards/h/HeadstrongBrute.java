@@ -49,7 +49,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  *
  * @author TheElk801
  */
-public class HeadstrongBrute extends CardImpl {
+public final class HeadstrongBrute extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("another Pirate");
 

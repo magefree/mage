@@ -47,7 +47,7 @@ import mage.target.TargetPermanent;
  *
  * @author jeffwadsworth
  */
-public class RuinGhost extends CardImpl {
+public final class RuinGhost extends CardImpl {
 
     public RuinGhost(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

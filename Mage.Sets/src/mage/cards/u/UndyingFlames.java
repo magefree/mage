@@ -47,7 +47,7 @@ import mage.target.common.TargetAnyTarget;
  * @author jeffwadsworth
  *
  */
-public class UndyingFlames extends CardImpl {
+public final class UndyingFlames extends CardImpl {
 
     public UndyingFlames(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{R}{R}");

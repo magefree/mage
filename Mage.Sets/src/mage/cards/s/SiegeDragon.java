@@ -54,7 +54,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Quercitron
  */
-public class SiegeDragon extends CardImpl {
+public final class SiegeDragon extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Walls your opponents control");
     

@@ -42,7 +42,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BraveTheElements extends CardImpl {
+public final class BraveTheElements extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("White creatures you control");
 

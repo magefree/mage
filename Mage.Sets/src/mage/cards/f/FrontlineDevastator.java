@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author ciaccona007
  */
-public class FrontlineDevastator extends CardImpl {
+public final class FrontlineDevastator extends CardImpl {
 
     public FrontlineDevastator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");

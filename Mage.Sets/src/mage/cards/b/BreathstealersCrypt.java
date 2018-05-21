@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class BreathstealersCrypt extends CardImpl {
+public final class BreathstealersCrypt extends CardImpl {
 
     public BreathstealersCrypt(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{B}");

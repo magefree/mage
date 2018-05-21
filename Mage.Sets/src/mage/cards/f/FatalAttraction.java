@@ -47,7 +47,7 @@ import mage.constants.TargetController;
  *
  * @author TheElk801
  */
-public class FatalAttraction extends CardImpl {
+public final class FatalAttraction extends CardImpl {
 
     public FatalAttraction(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");

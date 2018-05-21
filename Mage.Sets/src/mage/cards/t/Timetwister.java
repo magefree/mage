@@ -44,7 +44,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class Timetwister extends CardImpl {
+public final class Timetwister extends CardImpl {
 
     public Timetwister(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}");

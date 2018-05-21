@@ -42,7 +42,7 @@ import mage.filter.common.FilterAttackingCreature;
  *
  * @author LevelX2
  */
-public class VolcanicRush extends CardImpl {
+public final class VolcanicRush extends CardImpl {
 
     public VolcanicRush(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{R}");

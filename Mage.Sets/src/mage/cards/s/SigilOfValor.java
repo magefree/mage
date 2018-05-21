@@ -56,7 +56,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class SigilOfValor extends CardImpl {
+public final class SigilOfValor extends CardImpl {
 
     public SigilOfValor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

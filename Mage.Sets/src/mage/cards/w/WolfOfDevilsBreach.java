@@ -52,7 +52,7 @@ import mage.target.common.TargetCreatureOrPlaneswalker;
  *
  * @author fireshoes
  */
-public class WolfOfDevilsBreach extends CardImpl {
+public final class WolfOfDevilsBreach extends CardImpl {
 
     public WolfOfDevilsBreach(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");

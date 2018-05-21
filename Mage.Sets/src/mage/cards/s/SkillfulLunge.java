@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class SkillfulLunge extends CardImpl {
+public final class SkillfulLunge extends CardImpl {
 
     public SkillfulLunge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");

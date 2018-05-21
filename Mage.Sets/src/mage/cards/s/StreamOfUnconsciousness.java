@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class StreamOfUnconsciousness extends CardImpl {
+public final class StreamOfUnconsciousness extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent("Wizard");
 

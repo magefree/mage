@@ -55,7 +55,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author fireshoes
  */
-public class RealityAcid extends CardImpl {
+public final class RealityAcid extends CardImpl {
 
     public RealityAcid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");

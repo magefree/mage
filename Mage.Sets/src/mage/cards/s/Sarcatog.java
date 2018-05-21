@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class Sarcatog extends CardImpl {
+public final class Sarcatog extends CardImpl {
 
     public Sarcatog(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{R}");

@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  *
  * @author FenrisulfrX
  */
-public class BreathOfDarigaaz extends CardImpl {
+public final class BreathOfDarigaaz extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature without flying");
 

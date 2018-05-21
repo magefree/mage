@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class KnightOfTheWhiteOrchid extends CardImpl {
+public final class KnightOfTheWhiteOrchid extends CardImpl {
 
     public KnightOfTheWhiteOrchid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{W}");

@@ -46,7 +46,7 @@ import mage.target.TargetPlayer;
  *
  * @author TheElk801
  */
-public class Extortion extends CardImpl {
+public final class Extortion extends CardImpl {
 
     public Extortion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");

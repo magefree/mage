@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author MTGfan
  */
-public class CreatureBond extends CardImpl {
+public final class CreatureBond extends CardImpl {
 
     public CreatureBond(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");

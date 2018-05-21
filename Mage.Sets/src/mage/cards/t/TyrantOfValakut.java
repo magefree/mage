@@ -45,7 +45,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author fireshoes
  */
-public class TyrantOfValakut extends CardImpl {
+public final class TyrantOfValakut extends CardImpl {
 
     public TyrantOfValakut(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}{R}");

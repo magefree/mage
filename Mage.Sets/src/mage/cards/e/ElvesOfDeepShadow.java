@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class ElvesOfDeepShadow extends CardImpl {
+public final class ElvesOfDeepShadow extends CardImpl {
 
     public ElvesOfDeepShadow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");

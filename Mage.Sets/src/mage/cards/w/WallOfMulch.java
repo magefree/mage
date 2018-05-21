@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class WallOfMulch extends CardImpl {
+public final class WallOfMulch extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Wall");
     

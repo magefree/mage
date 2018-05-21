@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  * @author jeffwadsworth
  *
  */
-public class ApothecaryInitiate extends CardImpl {
+public final class ApothecaryInitiate extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("a white spell");
 

@@ -39,7 +39,7 @@ import mage.constants.CardType;
  *
  * @author magenoxx_at_gmail.com
  */
-public class ObsessiveSearch extends CardImpl {
+public final class ObsessiveSearch extends CardImpl {
 
     public ObsessiveSearch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");

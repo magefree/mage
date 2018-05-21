@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Eirkei
  */
-public class AlphaStatus extends CardImpl {
+public final class AlphaStatus extends CardImpl {
 
     public AlphaStatus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");

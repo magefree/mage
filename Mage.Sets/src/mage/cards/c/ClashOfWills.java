@@ -39,7 +39,7 @@ import mage.target.TargetSpell;
  *
  * @author fireshoes
  */
-public class ClashOfWills extends CardImpl {
+public final class ClashOfWills extends CardImpl {
 
     public ClashOfWills(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{U}");

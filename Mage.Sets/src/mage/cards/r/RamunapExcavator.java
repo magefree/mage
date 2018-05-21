@@ -40,7 +40,7 @@ import mage.constants.Zone;
 /**
  * @author fireshoes
  */
-public class RamunapExcavator extends CardImpl {
+public final class RamunapExcavator extends CardImpl {
 
     public RamunapExcavator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");

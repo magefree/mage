@@ -41,7 +41,7 @@ import mage.filter.StaticFilters;
  *
  * @author Quercitron
  */
-public class AetherFlash extends CardImpl {
+public final class AetherFlash extends CardImpl {
 
     public AetherFlash(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{R}");

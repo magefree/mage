@@ -41,7 +41,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author LevelX2
  */
-public class FieryCannonade extends CardImpl {
+public final class FieryCannonade extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Pirate creature");
 

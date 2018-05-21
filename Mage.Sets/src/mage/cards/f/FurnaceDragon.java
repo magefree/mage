@@ -47,7 +47,7 @@ import mage.watchers.common.CastFromHandWatcher;
  *
  * @author fireshoes
  */
-public class FurnaceDragon extends CardImpl {
+public final class FurnaceDragon extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifacts");
 

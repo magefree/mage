@@ -22,7 +22,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 
 import java.util.UUID;
 
-public class KnightOfGrace extends CardImpl {
+public final class KnightOfGrace extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("black permanent");
 

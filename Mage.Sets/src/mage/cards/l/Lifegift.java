@@ -40,7 +40,7 @@ import mage.filter.common.FilterLandPermanent;
  *
  * @author LevelX2
  */
-public class Lifegift extends CardImpl {
+public final class Lifegift extends CardImpl {
 
     public Lifegift(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}");

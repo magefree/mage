@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class RighteousAvengers extends CardImpl {
+public final class RighteousAvengers extends CardImpl {
 
     public RighteousAvengers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");

@@ -48,7 +48,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author LevelX2
  */
-public class TheEldestReborn extends CardImpl {
+public final class TheEldestReborn extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("creature or planeswalker card from a graveyard");
 

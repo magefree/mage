@@ -43,7 +43,7 @@ import mage.target.common.TargetOpponentsCreaturePermanent;
  *
  * @author anonymous
  */
-public class WarfireJavelineer extends CardImpl {
+public final class WarfireJavelineer extends CardImpl {
 
     public WarfireJavelineer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");

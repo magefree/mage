@@ -48,7 +48,7 @@ import java.util.UUID;
  *
  * @author FenrisulfrX
  */
-public class TemporaryInsanity extends CardImpl {
+public final class TemporaryInsanity extends CardImpl {
 
     public TemporaryInsanity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{R}");

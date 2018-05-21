@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author L_J
  */
-public class VolunteerReserves extends CardImpl {
+public final class VolunteerReserves extends CardImpl {
 
     public VolunteerReserves (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

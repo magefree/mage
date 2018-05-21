@@ -42,7 +42,7 @@ import mage.filter.common.FilterControlledPermanent;
  *
  * @author Loki
  */
-public class CacheRaiders extends CardImpl {
+public final class CacheRaiders extends CardImpl {
 
     public CacheRaiders(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");

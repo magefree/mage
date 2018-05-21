@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class FumeSpitter extends CardImpl {
+public final class FumeSpitter extends CardImpl {
 
     public FumeSpitter (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");

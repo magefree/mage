@@ -46,7 +46,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class StensiaInnkeeper extends CardImpl {
+public final class StensiaInnkeeper extends CardImpl {
 
     private final static FilterLandPermanent filter = new FilterLandPermanent("land an opponent controls");
 

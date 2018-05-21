@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class GoblinBalloonBrigade extends CardImpl {
+public final class GoblinBalloonBrigade extends CardImpl {
 
     public GoblinBalloonBrigade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");

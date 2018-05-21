@@ -46,7 +46,7 @@ import mage.target.TargetPlayer;
  *
  * @author nantuko
  */
-public class Monomania extends CardImpl {
+public final class Monomania extends CardImpl {
 
     public Monomania(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}{B}");

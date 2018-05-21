@@ -45,7 +45,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  *
  * @author fireshoes
  */
-public class MorkrutNecropod extends CardImpl {
+public final class MorkrutNecropod extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("another creature or land");
 

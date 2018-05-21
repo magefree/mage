@@ -56,7 +56,7 @@ import mage.target.common.TargetOpponentsChoicePermanent;
  *
  * @author spjspj
  */
-public class Preacher extends CardImpl {
+public final class Preacher extends CardImpl {
 
     public Preacher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");

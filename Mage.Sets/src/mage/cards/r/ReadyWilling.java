@@ -47,7 +47,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class ReadyWilling extends SplitCard {
+public final class ReadyWilling extends SplitCard {
 
     public ReadyWilling(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{G}{W}", "{1}{W}{B}", SpellAbilityType.SPLIT_FUSED);

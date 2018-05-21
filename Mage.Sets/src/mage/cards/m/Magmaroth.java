@@ -16,7 +16,7 @@ import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 
-public class Magmaroth extends CardImpl{
+public final class Magmaroth extends CardImpl{
 
     private static final FilterSpell filterNonCreature = new FilterSpell("a noncreature spell");
 

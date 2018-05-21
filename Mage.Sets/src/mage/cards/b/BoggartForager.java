@@ -45,7 +45,7 @@ import mage.target.TargetPlayer;
  *
  * @author Wehk
  */
-public class BoggartForager extends CardImpl {
+public final class BoggartForager extends CardImpl {
 
     public BoggartForager(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");

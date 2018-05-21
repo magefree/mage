@@ -40,7 +40,7 @@ import mage.target.common.TargetOpponentOrPlaneswalker;
  *
  * @author fireshoes
  */
-public class VampiricTouch extends CardImpl {
+public final class VampiricTouch extends CardImpl {
 
     public VampiricTouch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}");

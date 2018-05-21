@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class EnatuGolem extends CardImpl {
+public final class EnatuGolem extends CardImpl {
 
     public EnatuGolem(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{6}");

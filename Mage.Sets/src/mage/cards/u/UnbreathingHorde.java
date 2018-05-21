@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author BetaSteward
  */
-public class UnbreathingHorde extends CardImpl {
+public final class UnbreathingHorde extends CardImpl {
 
     public UnbreathingHorde(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

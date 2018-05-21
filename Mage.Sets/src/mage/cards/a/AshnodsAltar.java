@@ -42,7 +42,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Quercitron
  */
-public class AshnodsAltar extends CardImpl {
+public final class AshnodsAltar extends CardImpl {
 
     public AshnodsAltar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");

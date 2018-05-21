@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class SkitteringHeartstopper extends CardImpl {
+public final class SkitteringHeartstopper extends CardImpl {
 
     public SkitteringHeartstopper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}");

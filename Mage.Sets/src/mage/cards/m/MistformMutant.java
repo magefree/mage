@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author EvilGeek
  */
-public class MistformMutant extends CardImpl {
+public final class MistformMutant extends CardImpl {
 
     public MistformMutant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{U}");

@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author emerald000
  */
-public class GateToTheAether extends CardImpl {
+public final class GateToTheAether extends CardImpl {
 
     public GateToTheAether(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{6}");

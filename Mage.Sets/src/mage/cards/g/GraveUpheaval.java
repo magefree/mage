@@ -50,7 +50,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author fireshoes
  */
-public class GraveUpheaval extends CardImpl {
+public final class GraveUpheaval extends CardImpl {
 
     public GraveUpheaval(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{B}{R}");

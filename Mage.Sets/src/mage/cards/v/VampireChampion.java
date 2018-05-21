@@ -39,7 +39,7 @@ import mage.constants.CardType;
  *
  * @author LevelX2
  */
-public class VampireChampion extends CardImpl {
+public final class VampireChampion extends CardImpl {
 
     public VampireChampion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");

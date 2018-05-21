@@ -42,7 +42,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author Styxo
  */
-public class Order66 extends CardImpl {
+public final class Order66 extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you don't control");
 

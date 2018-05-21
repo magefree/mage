@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class ShamblingGhoul extends CardImpl {
+public final class ShamblingGhoul extends CardImpl {
     
     private static final String staticText = "{this} enters the battlefield tapped";
 

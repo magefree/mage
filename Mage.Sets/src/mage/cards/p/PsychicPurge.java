@@ -48,7 +48,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author L_J
  */
-public class PsychicPurge extends CardImpl {
+public final class PsychicPurge extends CardImpl {
 
     public PsychicPurge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{U}");

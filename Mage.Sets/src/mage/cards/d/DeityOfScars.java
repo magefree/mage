@@ -47,7 +47,7 @@ import mage.counters.CounterType;
 /**
  * @author Loki
  */
-public class DeityOfScars extends CardImpl {
+public final class DeityOfScars extends CardImpl {
 
     public DeityOfScars(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B/G}{B/G}{B/G}{B/G}{B/G}");

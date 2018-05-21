@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TimeReversal extends CardImpl {
+public final class TimeReversal extends CardImpl {
 
     public TimeReversal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}{U}");

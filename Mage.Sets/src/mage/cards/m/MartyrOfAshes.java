@@ -55,7 +55,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author emerald000
  */
-public class MartyrOfAshes extends CardImpl {
+public final class MartyrOfAshes extends CardImpl {
     
     private static final FilterCard filterHand = new FilterCard("X red cards from your hand");
     private static final FilterCreaturePermanent filterCreature = new FilterCreaturePermanent("creatures without flying");

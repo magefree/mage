@@ -41,7 +41,7 @@ import mage.target.targetpointer.SecondTargetPointer;
 /**
  * @author JayDi85
  */
-public class RecklessRage extends CardImpl {
+public final class RecklessRage extends CardImpl {
 
     public RecklessRage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}");

@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class ToriiWatchward extends CardImpl {
+public final class ToriiWatchward extends CardImpl {
 
     public ToriiWatchward(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");

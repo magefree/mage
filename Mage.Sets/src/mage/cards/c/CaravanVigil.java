@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author North
  */
-public class CaravanVigil extends CardImpl {
+public final class CaravanVigil extends CardImpl {
 
     public CaravanVigil(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{G}");

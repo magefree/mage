@@ -41,7 +41,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author jonubuu
  */
-public class Reshape extends CardImpl {
+public final class Reshape extends CardImpl {
 
     public Reshape(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{U}{U}");

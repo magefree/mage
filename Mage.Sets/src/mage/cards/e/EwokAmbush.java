@@ -49,7 +49,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Styxo
  */
-public class EwokAmbush extends CardImpl {
+public final class EwokAmbush extends CardImpl {
 
     public EwokAmbush(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}");

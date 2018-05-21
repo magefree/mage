@@ -52,7 +52,7 @@ import java.util.UUID;
  *
  * @author tcontis
  */
-public class Vampirism extends CardImpl {
+public final class Vampirism extends CardImpl {
 
     public Vampirism(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}");

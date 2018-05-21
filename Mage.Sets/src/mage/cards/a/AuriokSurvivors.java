@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author Loki
  */
-public class AuriokSurvivors extends CardImpl {
+public final class AuriokSurvivors extends CardImpl {
     private static final FilterCard filter = new FilterCard("Equipment card from your graveyard");
 
     static {

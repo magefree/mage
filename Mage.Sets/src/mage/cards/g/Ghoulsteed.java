@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author fireshoes
  */
-public class Ghoulsteed extends CardImpl {
+public final class Ghoulsteed extends CardImpl {
 
     public Ghoulsteed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");

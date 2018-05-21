@@ -51,7 +51,7 @@ import mage.players.Player;
  *
  * @author Styxo
  */
-public class CouncilGuardian extends CardImpl {
+public final class CouncilGuardian extends CardImpl {
 
     public CouncilGuardian(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{W}");

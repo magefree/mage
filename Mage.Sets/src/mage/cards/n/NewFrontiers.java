@@ -46,7 +46,7 @@ import java.util.UUID;
  *
  * @author spjspj
  */
-public class NewFrontiers extends CardImpl {
+public final class NewFrontiers extends CardImpl {
 
     public NewFrontiers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{G}");

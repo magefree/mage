@@ -51,7 +51,7 @@ import mage.counters.CounterType;
  *
  * @author Luna Skyrise
  */
-public class TimberlineRidge extends CardImpl {
+public final class TimberlineRidge extends CardImpl {
 
     public TimberlineRidge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

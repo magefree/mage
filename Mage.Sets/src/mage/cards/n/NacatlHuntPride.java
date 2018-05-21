@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class NacatlHuntPride extends CardImpl {
+public final class NacatlHuntPride extends CardImpl {
 
     public NacatlHuntPride(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}");

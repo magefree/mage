@@ -47,7 +47,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward
  */
-public class Moonmist extends CardImpl {
+public final class Moonmist extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures other than Werewolves and Wolves");
 

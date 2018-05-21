@@ -37,7 +37,7 @@ import mage.constants.CardType;
  *
  * @author LevelX2
  */
-public class Famine extends CardImpl {
+public final class Famine extends CardImpl {
 
     public Famine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}{B}");

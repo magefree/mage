@@ -40,7 +40,7 @@ import java.util.UUID;
 /**
  * @author Loki
  */
-public class QuietPurity extends CardImpl {
+public final class QuietPurity extends CardImpl {
 
     public QuietPurity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");

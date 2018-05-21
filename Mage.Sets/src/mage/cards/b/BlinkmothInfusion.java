@@ -44,7 +44,7 @@ import mage.players.Player;
  *
  * @author Plopman
  */
-public class BlinkmothInfusion extends CardImpl {
+public final class BlinkmothInfusion extends CardImpl {
 
     public BlinkmothInfusion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{12}{U}{U}");

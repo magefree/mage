@@ -46,7 +46,7 @@ import mage.target.TargetPermanent;
  *
  * @author fireshoes
  */
-public class MishrasHelix extends CardImpl {
+public final class MishrasHelix extends CardImpl {
 
     public MishrasHelix(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");

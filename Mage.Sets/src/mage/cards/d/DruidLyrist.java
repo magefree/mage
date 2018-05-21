@@ -46,7 +46,7 @@ import mage.target.common.TargetEnchantmentPermanent;
  *
  * @author LevelX2
  */
-public class DruidLyrist extends CardImpl {
+public final class DruidLyrist extends CardImpl {
 
     public DruidLyrist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");

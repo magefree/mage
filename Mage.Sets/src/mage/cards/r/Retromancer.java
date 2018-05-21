@@ -47,7 +47,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author L_J
  */
-public class Retromancer extends CardImpl {
+public final class Retromancer extends CardImpl {
 
     public Retromancer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");

@@ -55,7 +55,7 @@ import mage.game.events.GameEvent;
  *
  * @author LoneFox
  */
-public class Homarid extends CardImpl {
+public final class Homarid extends CardImpl {
 
     public Homarid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

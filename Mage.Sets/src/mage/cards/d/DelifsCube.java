@@ -53,7 +53,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author MarcoMarin
  */
-public class DelifsCube extends CardImpl {
+public final class DelifsCube extends CardImpl {
 
     public DelifsCube(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");

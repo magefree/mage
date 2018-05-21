@@ -59,7 +59,7 @@ import mage.target.common.TargetControlledPermanent;
 /**
  * @author nantuko
  */
-public class GarrukTheVeilCursed extends CardImpl {
+public final class GarrukTheVeilCursed extends CardImpl {
 
     public GarrukTheVeilCursed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "");

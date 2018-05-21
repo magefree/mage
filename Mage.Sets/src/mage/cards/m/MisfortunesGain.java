@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Scott-Crawford
  */
-public class MisfortunesGain extends CardImpl {
+public final class MisfortunesGain extends CardImpl {
 
     public MisfortunesGain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{W}");

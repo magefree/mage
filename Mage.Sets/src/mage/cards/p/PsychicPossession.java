@@ -53,7 +53,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author spjspj
  */
-public class PsychicPossession extends CardImpl {
+public final class PsychicPossession extends CardImpl {
 
     public PsychicPossession(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}{U}");

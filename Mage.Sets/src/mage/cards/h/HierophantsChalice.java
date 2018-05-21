@@ -43,7 +43,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author TheElk801
  */
-public class HierophantsChalice extends CardImpl {
+public final class HierophantsChalice extends CardImpl {
 
     public HierophantsChalice(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");

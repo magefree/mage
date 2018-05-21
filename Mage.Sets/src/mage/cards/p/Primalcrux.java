@@ -50,7 +50,7 @@ import mage.game.Game;
  * @author jeffwadsworth
  *
  */
-public class Primalcrux extends CardImpl {
+public final class Primalcrux extends CardImpl {
 
     public Primalcrux(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{G}{G}{G}{G}{G}");

@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LoneFox
  */
-public class SeedlingCharm extends CardImpl {
+public final class SeedlingCharm extends CardImpl {
 
     private static final FilterPermanent filter1 = new FilterPermanent("Aura attached to a creature");
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("green creature");

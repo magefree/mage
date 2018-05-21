@@ -50,7 +50,7 @@ import mage.target.common.TargetLandPermanent;
  * @author LoneFox
 
  */
-public class ManaBreach extends CardImpl {
+public final class ManaBreach extends CardImpl {
 
     public ManaBreach(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");

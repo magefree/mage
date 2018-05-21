@@ -49,7 +49,7 @@ import mage.watchers.common.RevoltWatcher;
  *
  * @author fireshoes
  */
-public class RenegadeRallier extends CardImpl {
+public final class RenegadeRallier extends CardImpl {
 
     private static final FilterPermanentCard filter = new FilterPermanentCard("permanent card with converted mana cost 2 or less from your graveyard");
 

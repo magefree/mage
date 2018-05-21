@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class TemptWithReflections extends CardImpl {
+public final class TemptWithReflections extends CardImpl {
 
     public TemptWithReflections(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{U}");

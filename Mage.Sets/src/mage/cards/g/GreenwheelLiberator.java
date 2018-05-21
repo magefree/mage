@@ -43,7 +43,7 @@ import mage.watchers.common.RevoltWatcher;
 /**
  * @author JRHerlehy
  */
-public class GreenwheelLiberator extends CardImpl {
+public final class GreenwheelLiberator extends CardImpl {
 
     public GreenwheelLiberator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");

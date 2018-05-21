@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class JungleCreeper extends CardImpl {
+public final class JungleCreeper extends CardImpl {
 
     public JungleCreeper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{G}");

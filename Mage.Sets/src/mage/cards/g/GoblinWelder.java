@@ -52,7 +52,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author Plopman
  */
-public class GoblinWelder extends CardImpl {
+public final class GoblinWelder extends CardImpl {
 
     public GoblinWelder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");

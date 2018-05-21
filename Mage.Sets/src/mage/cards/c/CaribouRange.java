@@ -55,7 +55,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LoneFox
  */
-public class CaribouRange extends CardImpl {
+public final class CaribouRange extends CardImpl {
 
     static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a Caribou token");
 

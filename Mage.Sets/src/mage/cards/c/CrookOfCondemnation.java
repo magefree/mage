@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author jeffwadsworth
  */
-public class CrookOfCondemnation extends CardImpl {
+public final class CrookOfCondemnation extends CardImpl {
     
     private UUID exileId = UUID.randomUUID();
 

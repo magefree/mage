@@ -44,7 +44,7 @@ import mage.watchers.common.PlayLandWatcher;
  *
  * @author TheElk801
  */
-public class MercadianAtlas extends CardImpl {
+public final class MercadianAtlas extends CardImpl {
 
     public MercadianAtlas(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");

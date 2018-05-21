@@ -53,7 +53,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LevelX2
  */
-public class ThornbiteStaff extends CardImpl {
+public final class ThornbiteStaff extends CardImpl {
 
     private static final FilterPermanent filter = new FilterCreaturePermanent("a Shaman creature");
     static {

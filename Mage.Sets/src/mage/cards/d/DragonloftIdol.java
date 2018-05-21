@@ -49,7 +49,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author LevelX2
  */
-public class DragonloftIdol extends CardImpl {
+public final class DragonloftIdol extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Dragon");
 

@@ -47,7 +47,7 @@ import mage.players.Player;
  * @author LoneFox
 
  */
-public class Disorder extends CardImpl {
+public final class Disorder extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("white creature");
 

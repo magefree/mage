@@ -42,7 +42,7 @@ import mage.constants.SubType;
  * @author LoneFox
 
  */
-public class AlloyGolem extends CardImpl {
+public final class AlloyGolem extends CardImpl {
 
     public AlloyGolem(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{6}");

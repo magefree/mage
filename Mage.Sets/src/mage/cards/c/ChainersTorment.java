@@ -51,7 +51,7 @@ import mage.players.Player;
  *
  * @author TheElk801
  */
-public class ChainersTorment extends CardImpl {
+public final class ChainersTorment extends CardImpl {
 
     public ChainersTorment(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}");

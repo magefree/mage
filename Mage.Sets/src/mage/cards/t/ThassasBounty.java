@@ -39,7 +39,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class ThassasBounty extends CardImpl {
+public final class ThassasBounty extends CardImpl {
 
     public ThassasBounty(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{U}");

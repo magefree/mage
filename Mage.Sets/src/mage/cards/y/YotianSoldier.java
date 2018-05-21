@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class YotianSoldier extends CardImpl {
+public final class YotianSoldier extends CardImpl {
 
     public YotianSoldier(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");

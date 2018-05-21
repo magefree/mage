@@ -41,7 +41,7 @@ import mage.constants.CardType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SavageLands extends CardImpl {
+public final class SavageLands extends CardImpl {
 
     public SavageLands(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);

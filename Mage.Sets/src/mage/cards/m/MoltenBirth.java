@@ -44,7 +44,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class MoltenBirth extends CardImpl {
+public final class MoltenBirth extends CardImpl {
 
     public MoltenBirth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{R}{R}");

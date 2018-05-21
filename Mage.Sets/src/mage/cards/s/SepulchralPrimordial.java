@@ -54,7 +54,7 @@ import mage.target.common.TargetCardInOpponentsGraveyard;
  *
  * @author LevelX2
  */
-public class SepulchralPrimordial extends CardImpl {
+public final class SepulchralPrimordial extends CardImpl {
 
     public SepulchralPrimordial(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}{B}");

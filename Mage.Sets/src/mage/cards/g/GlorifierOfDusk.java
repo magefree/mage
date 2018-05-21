@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author TheElk801
  */
-public class GlorifierOfDusk extends CardImpl {
+public final class GlorifierOfDusk extends CardImpl {
 
     public GlorifierOfDusk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");

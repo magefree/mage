@@ -52,7 +52,7 @@ import mage.players.Player;
  *
  * @author Saga
  */
-public class CurseOfVitality extends CardImpl {
+public final class CurseOfVitality extends CardImpl {
 
     public CurseOfVitality(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");

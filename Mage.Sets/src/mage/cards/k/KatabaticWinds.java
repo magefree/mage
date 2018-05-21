@@ -54,7 +54,7 @@ import java.util.UUID;
  *
  * @author jeffwadsworth
  */
-public class KatabaticWinds extends CardImpl {
+public final class KatabaticWinds extends CardImpl {
 
     public KatabaticWinds(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");

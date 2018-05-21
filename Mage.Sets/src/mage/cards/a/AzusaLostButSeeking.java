@@ -40,7 +40,7 @@ import mage.constants.*;
  *
  * @author Loki
  */
-public class AzusaLostButSeeking extends CardImpl {
+public final class AzusaLostButSeeking extends CardImpl {
 
     public AzusaLostButSeeking (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Derpthemeus
  */
-public class Disarm extends CardImpl {
+public final class Disarm extends CardImpl {
 
     public Disarm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");

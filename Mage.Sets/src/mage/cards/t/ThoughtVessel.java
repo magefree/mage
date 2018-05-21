@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class ThoughtVessel extends CardImpl {
+public final class ThoughtVessel extends CardImpl {
 
     public ThoughtVessel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

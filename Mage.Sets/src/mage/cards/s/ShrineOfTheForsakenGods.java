@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.ColorlessPredicate;
 /**
  * @author LevelX2
  */
-public class ShrineOfTheForsakenGods extends CardImpl {
+public final class ShrineOfTheForsakenGods extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("colorless spells");
 

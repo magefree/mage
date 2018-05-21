@@ -45,7 +45,7 @@ import mage.constants.TargetController;
  *
  * @author LoneFox
  */
-public class ImaginaryPet extends CardImpl {
+public final class ImaginaryPet extends CardImpl {
 
     public ImaginaryPet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author emerald000
  */
-public class KurkeshOnakkeAncient extends CardImpl {
+public final class KurkeshOnakkeAncient extends CardImpl {
 
     public KurkeshOnakkeAncient(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");

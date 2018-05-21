@@ -57,7 +57,7 @@ import java.util.UUID;
 /**
  * @author LevelX2
  */
-public class VileRedeemer extends CardImpl {
+public final class VileRedeemer extends CardImpl {
 
     public VileRedeemer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");

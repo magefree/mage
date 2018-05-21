@@ -51,7 +51,7 @@ import java.util.UUID;
  *
  * @author TheElk801
  */
-public class IronHeartChimera extends CardImpl {
+public final class IronHeartChimera extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Chimera creature you control");
 

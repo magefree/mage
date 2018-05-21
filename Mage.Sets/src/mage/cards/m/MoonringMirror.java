@@ -52,7 +52,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class MoonringMirror extends CardImpl {
+public final class MoonringMirror extends CardImpl {
 
     protected static final String VALUE_PREFIX = "ExileZones";
 

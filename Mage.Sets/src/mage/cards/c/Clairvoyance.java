@@ -42,7 +42,7 @@ import mage.target.TargetPlayer;
  *
  * @author fireshoes
  */
-public class Clairvoyance extends CardImpl {
+public final class Clairvoyance extends CardImpl {
 
     public Clairvoyance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");

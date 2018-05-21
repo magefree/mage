@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author noxx
  */
-public class Rancor extends CardImpl {
+public final class Rancor extends CardImpl {
 
     public Rancor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}");

@@ -47,7 +47,7 @@ import mage.target.TargetPermanent;
  *
  * @author fireshoes
  */
-public class BindingMummy extends CardImpl {
+public final class BindingMummy extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("another Zombie");
 

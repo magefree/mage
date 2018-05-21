@@ -42,7 +42,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author daagar
  */
-public class HolyLight extends CardImpl {
+public final class HolyLight extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Nonwhite creatures");
 

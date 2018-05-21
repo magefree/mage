@@ -50,7 +50,7 @@ import mage.target.TargetSpell;
  *
  * @author fireshoes
  */
-public class MischievousQuanar extends CardImpl {
+public final class MischievousQuanar extends CardImpl {
 
     public MischievousQuanar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}");

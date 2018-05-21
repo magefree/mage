@@ -46,7 +46,7 @@ import mage.target.TargetPlayer;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class AcolyteOfXathrid extends CardImpl {
+public final class AcolyteOfXathrid extends CardImpl {
 
     public AcolyteOfXathrid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");

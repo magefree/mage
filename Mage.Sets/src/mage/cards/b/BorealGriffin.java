@@ -42,7 +42,7 @@ import mage.constants.*;
  *
  * @author LoneFox
  */
-public class BorealGriffin extends CardImpl {
+public final class BorealGriffin extends CardImpl {
 
     public BorealGriffin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");

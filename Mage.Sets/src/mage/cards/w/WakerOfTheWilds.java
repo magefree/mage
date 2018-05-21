@@ -51,7 +51,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author spjspj
  */
-public class WakerOfTheWilds extends CardImpl {
+public final class WakerOfTheWilds extends CardImpl {
 
     public WakerOfTheWilds(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");

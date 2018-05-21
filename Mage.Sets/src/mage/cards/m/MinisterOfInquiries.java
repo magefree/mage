@@ -47,7 +47,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class MinisterOfInquiries extends CardImpl {
+public final class MinisterOfInquiries extends CardImpl {
 
     public MinisterOfInquiries(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");

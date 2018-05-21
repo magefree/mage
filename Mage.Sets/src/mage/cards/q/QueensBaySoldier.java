@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author TheElk801
  */
-public class QueensBaySoldier extends CardImpl {
+public final class QueensBaySoldier extends CardImpl {
 
     public QueensBaySoldier(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");

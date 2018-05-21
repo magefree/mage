@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class OutriderOfJhess extends CardImpl {
+public final class OutriderOfJhess extends CardImpl {
 
     public OutriderOfJhess (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");

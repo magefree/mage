@@ -46,7 +46,7 @@ import mage.target.TargetPlayer;
  *
  * @author North
  */
-public class TrapfindersTrick extends CardImpl {
+public final class TrapfindersTrick extends CardImpl {
 
     public TrapfindersTrick(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{U}");

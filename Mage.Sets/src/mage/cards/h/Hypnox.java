@@ -54,7 +54,7 @@ import mage.watchers.common.CastFromHandWatcher;
  *
  * @author L_J
  */
-public class Hypnox extends CardImpl {
+public final class Hypnox extends CardImpl {
 
     public Hypnox(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{8}{B}{B}{B}");

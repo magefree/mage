@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author TheElk801
  */
-public class CharmedGriffin extends CardImpl {
+public final class CharmedGriffin extends CardImpl {
 
     public CharmedGriffin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");

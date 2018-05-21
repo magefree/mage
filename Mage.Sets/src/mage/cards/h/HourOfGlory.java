@@ -50,7 +50,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class HourOfGlory extends CardImpl {
+public final class HourOfGlory extends CardImpl {
 
     public HourOfGlory(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{B}");

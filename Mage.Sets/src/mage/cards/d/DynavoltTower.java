@@ -46,7 +46,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author emerald000
  */
-public class DynavoltTower extends CardImpl {
+public final class DynavoltTower extends CardImpl {
 
     public DynavoltTower(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

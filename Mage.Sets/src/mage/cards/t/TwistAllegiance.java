@@ -50,7 +50,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class TwistAllegiance extends CardImpl {
+public final class TwistAllegiance extends CardImpl {
 
     public TwistAllegiance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{6}{R}");

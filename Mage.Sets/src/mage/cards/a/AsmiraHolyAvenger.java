@@ -49,7 +49,7 @@ import mage.watchers.Watcher;
 /**
  * @author Plopman
  */
-public class AsmiraHolyAvenger extends CardImpl {
+public final class AsmiraHolyAvenger extends CardImpl {
 
     public AsmiraHolyAvenger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{W}");

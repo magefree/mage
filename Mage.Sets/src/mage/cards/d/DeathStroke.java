@@ -40,7 +40,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class DeathStroke extends CardImpl {
+public final class DeathStroke extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creature");
 

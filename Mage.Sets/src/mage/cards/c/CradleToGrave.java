@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author bieno002
  */
-public class CradleToGrave extends CardImpl {
+public final class CradleToGrave extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack creature that entered the battlefield this turn");
 

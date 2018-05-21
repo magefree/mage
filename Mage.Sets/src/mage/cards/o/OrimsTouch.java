@@ -44,7 +44,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author fireshoes
  */
-public class OrimsTouch extends CardImpl {
+public final class OrimsTouch extends CardImpl {
 
     public OrimsTouch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{W}");

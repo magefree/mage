@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 /**
  * @author MarcoMarin
  */
-public class SoulExchange extends CardImpl {
+public final class SoulExchange extends CardImpl {
 
     public SoulExchange(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{B}{B}");

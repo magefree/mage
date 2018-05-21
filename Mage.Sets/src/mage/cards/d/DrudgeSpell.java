@@ -52,7 +52,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author fireshoes
  */
-public class DrudgeSpell extends CardImpl {
+public final class DrudgeSpell extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Skeleton tokens");
 

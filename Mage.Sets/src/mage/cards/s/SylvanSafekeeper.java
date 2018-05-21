@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class SylvanSafekeeper extends CardImpl {
+public final class SylvanSafekeeper extends CardImpl {
 
     public SylvanSafekeeper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");

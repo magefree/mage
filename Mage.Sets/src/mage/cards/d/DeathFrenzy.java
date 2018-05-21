@@ -46,7 +46,7 @@ import mage.game.events.ZoneChangeEvent;
  *
  * @author LevelX2
  */
-public class DeathFrenzy extends CardImpl {
+public final class DeathFrenzy extends CardImpl {
 
     public DeathFrenzy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}{G}");

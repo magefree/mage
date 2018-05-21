@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author fireshoes
  */
-public class HauntedDead extends CardImpl {
+public final class HauntedDead extends CardImpl {
 
     public HauntedDead(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

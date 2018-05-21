@@ -44,7 +44,7 @@ import mage.filter.common.FilterHistoricSpell;
  *
  * @author TheElk801
  */
-public class CabalPaladin extends CardImpl {
+public final class CabalPaladin extends CardImpl {
 
     public CabalPaladin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");

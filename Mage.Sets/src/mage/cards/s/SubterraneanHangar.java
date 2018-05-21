@@ -48,7 +48,7 @@ import mage.counters.CounterType;
  *
  * @author anonymous
  */
-public class SubterraneanHangar extends CardImpl {
+public final class SubterraneanHangar extends CardImpl {
 
     public SubterraneanHangar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

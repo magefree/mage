@@ -51,7 +51,7 @@ import mage.game.permanent.token.MyrToken;
  *
  * @author Plopman
  */
-public class GenesisChamber extends CardImpl {
+public final class GenesisChamber extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creature");
 

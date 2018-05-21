@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.NamePredicate;
  *
  * @author spjspj
  */
-public class ScissorsLizard extends CardImpl {
+public final class ScissorsLizard extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures named Paper Tiger");
 

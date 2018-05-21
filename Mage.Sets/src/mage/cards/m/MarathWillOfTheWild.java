@@ -66,7 +66,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class MarathWillOfTheWild extends CardImpl {
+public final class MarathWillOfTheWild extends CardImpl {
 
     public MarathWillOfTheWild(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{G}{W}");

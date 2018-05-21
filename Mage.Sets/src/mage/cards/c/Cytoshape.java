@@ -49,7 +49,7 @@ import mage.util.functions.EmptyApplyToPermanent;
  *
  * @author jeffwadsworth
  */
-public class Cytoshape extends CardImpl {
+public final class Cytoshape extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonlegendary creature");
 

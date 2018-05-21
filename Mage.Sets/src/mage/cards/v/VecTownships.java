@@ -41,7 +41,7 @@ import mage.constants.CardType;
  *
  * @author Loki
  */
-public class VecTownships extends CardImpl {
+public final class VecTownships extends CardImpl {
 
     public VecTownships(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);

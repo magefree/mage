@@ -52,7 +52,7 @@ import mage.target.common.TargetSpellOrPermanent;
  *
  * @author fireshoes
  */
-public class CommitMemory extends SplitCard {
+public final class CommitMemory extends SplitCard {
 
     private static final FilterSpellOrPermanent filter = new FilterSpellOrPermanent("spell or nonland permanent");
 

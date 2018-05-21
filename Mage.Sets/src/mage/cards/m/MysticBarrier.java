@@ -55,7 +55,7 @@ import mage.players.PlayerList;
  *
  * @author LevelX2
  */
-public class MysticBarrier extends CardImpl {
+public final class MysticBarrier extends CardImpl {
 
     static final String ALLOW_ATTACKING_LEFT = "Allow attacking left";
     static final String ALLOW_ATTACKING_RIGHT = "Allow attacking right";

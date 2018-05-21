@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class GrizzledAngler extends CardImpl {
+public final class GrizzledAngler extends CardImpl {
 
     public GrizzledAngler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

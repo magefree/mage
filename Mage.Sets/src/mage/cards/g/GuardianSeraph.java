@@ -46,7 +46,7 @@ import mage.game.events.GameEvent;
  *
  * @author North
  */
-public class GuardianSeraph extends CardImpl {
+public final class GuardianSeraph extends CardImpl {
 
     public GuardianSeraph(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");

@@ -44,7 +44,7 @@ import mage.constants.Zone;
 /**
  * @author JayDi85
  */
-public class SunCollaredRaptor extends CardImpl {
+public final class SunCollaredRaptor extends CardImpl {
 
     public SunCollaredRaptor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");

@@ -43,7 +43,7 @@ import mage.constants.Duration;
 import mage.constants.SpellAbilityType;
 import mage.target.common.TargetCreaturePermanent;
 
-public class OnwardVictory extends SplitCard {
+public final class OnwardVictory extends SplitCard {
 
     public OnwardVictory(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, new CardType[]{CardType.SORCERY}, "{2}{R}", "{2}{W}", SpellAbilityType.SPLIT_AFTERMATH);

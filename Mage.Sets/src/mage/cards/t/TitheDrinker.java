@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class TitheDrinker extends CardImpl {
+public final class TitheDrinker extends CardImpl {
 
     public TitheDrinker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{B}");

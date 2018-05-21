@@ -43,7 +43,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ArcRunner extends CardImpl {
+public final class ArcRunner extends CardImpl {
 
     public ArcRunner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

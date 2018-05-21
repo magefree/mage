@@ -38,7 +38,7 @@ import mage.constants.CardType;
  *
  * @author Quercitron
  */
-public class FireDiamond extends CardImpl {
+public final class FireDiamond extends CardImpl {
 
     public FireDiamond(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

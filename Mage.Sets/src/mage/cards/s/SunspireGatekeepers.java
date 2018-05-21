@@ -50,7 +50,7 @@ import java.util.UUID;
  */
 
 
-public class SunspireGatekeepers extends CardImpl {
+public final class SunspireGatekeepers extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent();
     static {

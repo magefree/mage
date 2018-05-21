@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author LoneFox
  */
-public class FirestormHellkite extends CardImpl {
+public final class FirestormHellkite extends CardImpl {
 
     public FirestormHellkite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{R}");

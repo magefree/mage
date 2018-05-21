@@ -43,7 +43,7 @@ import mage.constants.SubType;
  */
 
 
-public class AscendedLawmage extends CardImpl {
+public final class AscendedLawmage extends CardImpl {
 
     public AscendedLawmage (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{U}");

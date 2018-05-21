@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author tcontis
  */
-public class AdamantWill extends CardImpl {
+public final class AdamantWill extends CardImpl {
 
     public AdamantWill(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");

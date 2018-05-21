@@ -50,7 +50,7 @@ import mage.game.stack.Spell;
  *
  * @author Plopman
  */
-public class DoorOfDestinies extends CardImpl {
+public final class DoorOfDestinies extends CardImpl {
 
     public DoorOfDestinies(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");

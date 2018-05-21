@@ -40,7 +40,7 @@ import mage.target.common.TargetArtifactPermanent;
 /**
  * @author nantuko
  */
-public class AncientGrudge extends CardImpl {
+public final class AncientGrudge extends CardImpl {
     public AncientGrudge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");
 

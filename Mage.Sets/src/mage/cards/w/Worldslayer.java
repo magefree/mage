@@ -51,7 +51,7 @@ import mage.game.permanent.Permanent;
  *
  * @author North
  */
-public class Worldslayer extends CardImpl {
+public final class Worldslayer extends CardImpl {
 
     public Worldslayer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");

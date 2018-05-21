@@ -44,7 +44,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Loki
  */
-public class RootwaterHunter extends CardImpl {
+public final class RootwaterHunter extends CardImpl {
 
     public RootwaterHunter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

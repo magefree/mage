@@ -42,7 +42,7 @@ import mage.constants.Zone;
 /**
  * @author Loki
  */
-public class Bonesplitter extends CardImpl {
+public final class Bonesplitter extends CardImpl {
 
     public Bonesplitter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");

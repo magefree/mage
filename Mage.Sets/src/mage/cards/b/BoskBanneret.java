@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author North
  */
-public class BoskBanneret extends CardImpl {
+public final class BoskBanneret extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Treefolk spells and Shaman spells");
 

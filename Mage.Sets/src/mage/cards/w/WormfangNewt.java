@@ -47,7 +47,7 @@ import mage.target.TargetPermanent;
 /**
  * @author tcontis
  */
-public class WormfangNewt extends CardImpl {
+public final class WormfangNewt extends CardImpl {
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent();
 
     static {

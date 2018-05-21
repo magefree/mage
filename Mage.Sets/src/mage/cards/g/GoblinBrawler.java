@@ -48,7 +48,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Plopman
  */
-public class GoblinBrawler extends CardImpl {
+public final class GoblinBrawler extends CardImpl {
 
     public GoblinBrawler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

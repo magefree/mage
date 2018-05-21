@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class TriangleOfWar extends CardImpl {
+public final class TriangleOfWar extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
 

@@ -42,7 +42,7 @@ import mage.constants.TargetController;
  *
  * @author LevelX2
  */
-public class RuhanOfTheFomori extends CardImpl {
+public final class RuhanOfTheFomori extends CardImpl {
 
     public RuhanOfTheFomori(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{R}{W}");

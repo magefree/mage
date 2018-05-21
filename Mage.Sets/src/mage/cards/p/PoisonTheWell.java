@@ -40,7 +40,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author jeffwadsworth
  */
-public class PoisonTheWell extends CardImpl {
+public final class PoisonTheWell extends CardImpl {
 
     public PoisonTheWell(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B/R}{B/R}");

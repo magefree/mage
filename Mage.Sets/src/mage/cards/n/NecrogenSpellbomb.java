@@ -46,7 +46,7 @@ import mage.target.TargetPlayer;
  *
  * @author Loki
  */
-public class NecrogenSpellbomb extends CardImpl {
+public final class NecrogenSpellbomb extends CardImpl {
 
     public NecrogenSpellbomb(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");

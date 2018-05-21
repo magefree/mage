@@ -42,7 +42,7 @@ import mage.game.permanent.token.EldraziSpawnToken;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class NestInvader extends CardImpl {
+public final class NestInvader extends CardImpl {
 
     public NestInvader(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

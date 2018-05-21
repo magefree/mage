@@ -37,7 +37,7 @@ import mage.constants.SubType;
 /**
  * @author nantuko
  */
-public class WalkingCorpse extends CardImpl {
+public final class WalkingCorpse extends CardImpl {
 
     public WalkingCorpse(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

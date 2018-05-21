@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Ornithopter extends CardImpl {
+public final class Ornithopter extends CardImpl {
 
     public Ornithopter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE,CardType.ARTIFACT},"{0}");

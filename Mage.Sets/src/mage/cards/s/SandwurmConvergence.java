@@ -48,7 +48,7 @@ import mage.game.permanent.token.WurmToken3;
  *
  * @author fireshoes
  */
-public class SandwurmConvergence extends CardImpl {
+public final class SandwurmConvergence extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures with flying");
 

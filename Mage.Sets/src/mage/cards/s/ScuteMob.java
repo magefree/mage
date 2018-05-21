@@ -47,7 +47,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ScuteMob extends CardImpl {
+public final class ScuteMob extends CardImpl {
 
     public ScuteMob(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");

@@ -63,7 +63,7 @@ import mage.watchers.common.BlockedByOnlyOneCreatureThisCombatWatcher;
  *
  * @author L_J
  */
-public class Imprison extends CardImpl {
+public final class Imprison extends CardImpl {
 
     public Imprison(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{B}");

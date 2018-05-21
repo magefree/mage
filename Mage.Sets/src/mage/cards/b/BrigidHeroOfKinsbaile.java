@@ -47,7 +47,7 @@ import mage.target.TargetPlayer;
  *
  * @author jeffwadsworth
  */
-public class BrigidHeroOfKinsbaile extends CardImpl {
+public final class BrigidHeroOfKinsbaile extends CardImpl {
 
     public BrigidHeroOfKinsbaile(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");

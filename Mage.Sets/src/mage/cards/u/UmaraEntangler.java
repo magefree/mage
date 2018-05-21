@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class UmaraEntangler extends CardImpl {
+public final class UmaraEntangler extends CardImpl {
 
     public UmaraEntangler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

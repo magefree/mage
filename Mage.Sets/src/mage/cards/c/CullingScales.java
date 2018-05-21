@@ -48,7 +48,7 @@ import mage.target.TargetPermanent;
  *
  * @author cg5
  */
-public class CullingScales extends CardImpl {
+public final class CullingScales extends CardImpl {
 
     private static final FilterPermanent filterNonlandPermanentWithLowestCmc = new FilterNonlandPermanent(
         "nonland permanent with the lowest converted mana cost (<i>If two or more permanents are tied for lowest cost, target any one of them.</i>)"

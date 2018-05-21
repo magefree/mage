@@ -42,7 +42,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author LoneFox
  */
-public class BattleFrenzy extends CardImpl {
+public final class BattleFrenzy extends CardImpl {
 
     private static final FilterCreaturePermanent filter1 = new FilterCreaturePermanent("green creatures");
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("nongreen creatures");

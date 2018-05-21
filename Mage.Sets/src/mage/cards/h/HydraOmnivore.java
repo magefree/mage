@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class HydraOmnivore extends CardImpl {
+public final class HydraOmnivore extends CardImpl {
 
     public HydraOmnivore(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");

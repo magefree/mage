@@ -41,7 +41,7 @@ import mage.constants.SuperType;
  *
  * @author Loki
  */
-public class AkromaAngelOfWrath extends CardImpl {
+public final class AkromaAngelOfWrath extends CardImpl {
 
     public AkromaAngelOfWrath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}{W}{W}");

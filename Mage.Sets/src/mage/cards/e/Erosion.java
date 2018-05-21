@@ -51,7 +51,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LoneFox & L_J
  */
-public class Erosion extends CardImpl {
+public final class Erosion extends CardImpl {
 
     public Erosion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{U}{U}{U}");

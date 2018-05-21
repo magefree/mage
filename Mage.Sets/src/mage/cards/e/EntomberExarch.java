@@ -55,7 +55,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author Loki
  */
-public class EntomberExarch extends CardImpl {
+public final class EntomberExarch extends CardImpl {
 
     public EntomberExarch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");

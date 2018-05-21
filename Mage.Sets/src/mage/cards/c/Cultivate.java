@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Cultivate extends CardImpl {
+public final class Cultivate extends CardImpl {
 
     public Cultivate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{G}");

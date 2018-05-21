@@ -43,7 +43,7 @@ import mage.filter.common.FilterLandPermanent;
  * @author LoneFox
 
  */
-public class TectonicInstability extends CardImpl {
+public final class TectonicInstability extends CardImpl {
 
     public TectonicInstability(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");

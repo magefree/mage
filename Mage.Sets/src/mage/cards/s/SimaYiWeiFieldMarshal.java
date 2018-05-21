@@ -42,7 +42,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author LoneFox
  */
-public class SimaYiWeiFieldMarshal extends CardImpl {
+public final class SimaYiWeiFieldMarshal extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Swamps you control");
 

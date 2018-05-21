@@ -51,7 +51,7 @@ import mage.game.permanent.token.custom.CreatureToken;
 /**
  * @author Loki
  */
-public class CreepingTarPit extends CardImpl {
+public final class CreepingTarPit extends CardImpl {
 
     public CreepingTarPit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, null);

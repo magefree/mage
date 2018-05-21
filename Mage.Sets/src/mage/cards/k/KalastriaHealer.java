@@ -43,7 +43,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class KalastriaHealer extends CardImpl {
+public final class KalastriaHealer extends CardImpl {
 
     public KalastriaHealer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

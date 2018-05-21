@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class SanitariumSkeleton extends CardImpl {
+public final class SanitariumSkeleton extends CardImpl {
 
     public SanitariumSkeleton(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");

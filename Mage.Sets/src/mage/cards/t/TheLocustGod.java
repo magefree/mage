@@ -57,7 +57,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author spjspj
  */
-public class TheLocustGod extends CardImpl {
+public final class TheLocustGod extends CardImpl {
 
     public TheLocustGod(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}{R}");

@@ -42,7 +42,7 @@ import mage.filter.StaticFilters;
  *
  * @author Galatolol
  */
-public class Intimidation extends CardImpl {
+public final class Intimidation extends CardImpl {
 
     public Intimidation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}{B}");

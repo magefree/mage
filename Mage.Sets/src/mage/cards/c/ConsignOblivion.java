@@ -43,7 +43,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class ConsignOblivion extends SplitCard {
+public final class ConsignOblivion extends SplitCard {
 
     public ConsignOblivion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, new CardType[]{CardType.SORCERY}, "{1}{U}", "{4}{B}", SpellAbilityType.SPLIT_AFTERMATH);

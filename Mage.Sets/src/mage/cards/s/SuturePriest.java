@@ -51,7 +51,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Loki
  */
-public class SuturePriest extends CardImpl {
+public final class SuturePriest extends CardImpl {
 
     public SuturePriest(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");

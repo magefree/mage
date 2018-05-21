@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author JRHerlehy
  */
-public class ClutchOfUndeath extends CardImpl {
+public final class ClutchOfUndeath extends CardImpl {
 
     public ClutchOfUndeath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{B}");

@@ -45,7 +45,7 @@ import mage.target.TargetPermanent;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class LapisLazuliTalisman extends CardImpl {
+public final class LapisLazuliTalisman extends CardImpl {
     
     private final static FilterSpell filter = new FilterSpell("a blue spell");
 

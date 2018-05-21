@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class PredatoryUrge extends CardImpl {
+public final class PredatoryUrge extends CardImpl {
 
     public PredatoryUrge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{G}");

@@ -51,7 +51,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class RafiqOfTheMany extends CardImpl {
+public final class RafiqOfTheMany extends CardImpl {
 
     public RafiqOfTheMany(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{W}{U}");

@@ -38,7 +38,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author Eirkei
  */
-public class HeadGames extends CardImpl {
+public final class HeadGames extends CardImpl {
 
     public HeadGames(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}{B}");

@@ -53,7 +53,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author emerald000
  */
-public class NissaVastwoodSeer extends CardImpl {
+public final class NissaVastwoodSeer extends CardImpl {
     
     private static final FilterCard filter = new FilterCard("basic Forest card");
     static {

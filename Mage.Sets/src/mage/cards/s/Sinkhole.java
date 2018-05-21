@@ -38,7 +38,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author jeffwadsworth
  */
-public class Sinkhole extends CardImpl {
+public final class Sinkhole extends CardImpl {
 
     public Sinkhole(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}{B}");

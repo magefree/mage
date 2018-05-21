@@ -43,7 +43,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class SwallowingPlague extends CardImpl {
+public final class SwallowingPlague extends CardImpl {
 
     public SwallowingPlague (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{B}{B}");

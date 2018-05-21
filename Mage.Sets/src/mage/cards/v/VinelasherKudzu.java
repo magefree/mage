@@ -43,7 +43,7 @@ import mage.filter.common.FilterControlledLandPermanent;
  *
  * @author Loki
  */
-public class VinelasherKudzu extends CardImpl {
+public final class VinelasherKudzu extends CardImpl {
 
     public VinelasherKudzu(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

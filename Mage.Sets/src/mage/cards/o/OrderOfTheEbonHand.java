@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author LoneFox
  */
-public class OrderOfTheEbonHand extends CardImpl {
+public final class OrderOfTheEbonHand extends CardImpl {
 
     public OrderOfTheEbonHand(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{B}");

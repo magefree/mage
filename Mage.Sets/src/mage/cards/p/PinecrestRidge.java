@@ -41,7 +41,7 @@ import mage.constants.CardType;
  *
  * @author Loki
  */
-public class PinecrestRidge extends CardImpl {
+public final class PinecrestRidge extends CardImpl {
 
     public PinecrestRidge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

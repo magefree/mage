@@ -43,7 +43,7 @@ import mage.filter.common.FilterCreatureCard;
 /**
  * @author nantuko
  */
-public class BoneyardWurm extends CardImpl {
+public final class BoneyardWurm extends CardImpl {
 
     public BoneyardWurm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

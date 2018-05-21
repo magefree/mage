@@ -49,7 +49,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class Meadowboon extends CardImpl {
+public final class Meadowboon extends CardImpl {
 
     public Meadowboon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");

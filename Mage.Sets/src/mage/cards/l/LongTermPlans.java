@@ -43,7 +43,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author emerald000
  */
-public class LongTermPlans extends CardImpl {
+public final class LongTermPlans extends CardImpl {
 
     public LongTermPlans(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}");

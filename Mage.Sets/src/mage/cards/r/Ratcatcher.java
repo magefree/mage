@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author jeffwadsworth
  */
-public class Ratcatcher extends CardImpl {
+public final class Ratcatcher extends CardImpl {
     
     private static final FilterCard filter = new FilterCard("Rat card");
     

@@ -60,7 +60,7 @@ import mage.util.CardUtil;
  *
  * @author L_J
  */
-public class CallousOppressor extends CardImpl {
+public final class CallousOppressor extends CardImpl {
 
     public CallousOppressor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");

@@ -52,7 +52,7 @@ import mage.target.TargetSpell;
  *
  * @author LoneFox
  */
-public class DecreeOfSilence extends CardImpl {
+public final class DecreeOfSilence extends CardImpl {
 
     public DecreeOfSilence(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{6}{U}{U}");

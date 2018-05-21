@@ -47,7 +47,7 @@ import mage.game.permanent.token.Token;
 /**
  * @author LevelX2
  */
-public class GolgariKeyrune extends CardImpl {
+public final class GolgariKeyrune extends CardImpl {
 
     public GolgariKeyrune(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

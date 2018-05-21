@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class WoodlotCrawler extends CardImpl {
+public final class WoodlotCrawler extends CardImpl {
 
     public WoodlotCrawler (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{B}");

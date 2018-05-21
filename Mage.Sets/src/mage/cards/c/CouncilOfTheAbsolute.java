@@ -50,7 +50,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class CouncilOfTheAbsolute extends CardImpl {
+public final class CouncilOfTheAbsolute extends CardImpl {
 
     public CouncilOfTheAbsolute(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{U}");

@@ -42,7 +42,7 @@ import mage.filter.StaticFilters;
  *
  * @author fireshoes
  */
-public class MakeAStand extends CardImpl {
+public final class MakeAStand extends CardImpl {
 
     public MakeAStand(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");

@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class StarlightInvoker extends CardImpl {
+public final class StarlightInvoker extends CardImpl {
 
     public StarlightInvoker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class SakuraTribeScout extends CardImpl {
+public final class SakuraTribeScout extends CardImpl {
 
     public SakuraTribeScout(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");

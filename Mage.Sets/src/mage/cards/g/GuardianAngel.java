@@ -54,7 +54,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author MTGfan
  */
-public class GuardianAngel extends CardImpl {
+public final class GuardianAngel extends CardImpl {
 
     public GuardianAngel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{W}");

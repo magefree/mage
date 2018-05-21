@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class RamsesOverdark extends CardImpl {
+public final class RamsesOverdark extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("enchanted creature");
 

@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class GuardianOfTheGateless extends CardImpl {
+public final class GuardianOfTheGateless extends CardImpl {
 
     public GuardianOfTheGateless(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");

@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author wetterlicht
  */
-public class PulseOfTheTangle extends CardImpl {
+public final class PulseOfTheTangle extends CardImpl {
 
     public PulseOfTheTangle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{G}{G}");

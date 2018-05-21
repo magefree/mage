@@ -45,7 +45,7 @@ import mage.filter.common.FilterControlledArtifactPermanent;
  *
  * @author cg5
  */
-public class InventorsApprentice extends CardImpl {
+public final class InventorsApprentice extends CardImpl {
     
     private static final String rule = "{this} gets +1/+1 as long as you control an artifact";
     

@@ -63,7 +63,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author TheElk801
  */
-public class MairsilThePretender extends CardImpl {
+public final class MairsilThePretender extends CardImpl {
 
     public MairsilThePretender(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{B}{R}");

@@ -42,7 +42,7 @@ import mage.counters.CounterType;
  *
  * @author jeffwadsworth
  */
-public class TaureanMauler extends CardImpl {
+public final class TaureanMauler extends CardImpl {
 
     public TaureanMauler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

@@ -45,7 +45,7 @@ import mage.watchers.common.RevoltWatcher;
  *
  * @author emerald000
  */
-public class FatalPush extends CardImpl {
+public final class FatalPush extends CardImpl {
 
     public FatalPush(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{B}");

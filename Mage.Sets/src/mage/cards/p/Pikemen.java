@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author L_J
  */
-public class Pikemen extends CardImpl {
+public final class Pikemen extends CardImpl {
 
     public Pikemen (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

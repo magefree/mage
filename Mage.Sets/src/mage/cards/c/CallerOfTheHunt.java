@@ -51,7 +51,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class CallerOfTheHunt extends CardImpl {
+public final class CallerOfTheHunt extends CardImpl {
 
     public CallerOfTheHunt(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");

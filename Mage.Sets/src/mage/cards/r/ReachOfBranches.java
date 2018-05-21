@@ -46,7 +46,7 @@ import mage.game.permanent.token.TreefolkShamanToken;
  *
  * @author LevelX2
  */
-public class ReachOfBranches extends CardImpl {
+public final class ReachOfBranches extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("a Forest");
 

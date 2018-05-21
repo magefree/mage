@@ -44,7 +44,7 @@ import mage.filter.StaticFilters;
  *
  * @author LoneFox
  */
-public class ZhangHeWeiGeneral extends CardImpl {
+public final class ZhangHeWeiGeneral extends CardImpl {
 
     public ZhangHeWeiGeneral(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");

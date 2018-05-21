@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class ElvishLookout extends CardImpl {
+public final class ElvishLookout extends CardImpl {
 
     public ElvishLookout(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");

@@ -42,7 +42,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Backfir3
  */
-public class ChimericStaff extends CardImpl {
+public final class ChimericStaff extends CardImpl {
 
     public ChimericStaff(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");

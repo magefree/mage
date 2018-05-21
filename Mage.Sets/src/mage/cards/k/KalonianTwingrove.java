@@ -50,7 +50,7 @@ import mage.game.permanent.token.KalonianTwingroveTreefolkWarriorToken;
  *
  * @author LevelX2
  */
-public class KalonianTwingrove extends CardImpl {
+public final class KalonianTwingrove extends CardImpl {
 
     final static FilterControlledPermanent filterLands = new FilterControlledPermanent("Forests you control");
 

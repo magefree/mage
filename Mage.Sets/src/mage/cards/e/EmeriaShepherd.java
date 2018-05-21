@@ -53,7 +53,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class EmeriaShepherd extends CardImpl {
+public final class EmeriaShepherd extends CardImpl {
 
     private static final FilterPermanentCard filter = new FilterPermanentCard("nonland permanent card from your graveyard");
 

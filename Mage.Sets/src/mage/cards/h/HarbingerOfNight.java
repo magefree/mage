@@ -44,7 +44,7 @@ import mage.filter.common.FilterCreaturePermanent;
  * @author LoneFox
 
  */
-public class HarbingerOfNight extends CardImpl {
+public final class HarbingerOfNight extends CardImpl {
 
     public HarbingerOfNight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");

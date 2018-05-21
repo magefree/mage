@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class EngulfTheShore extends CardImpl {
+public final class EngulfTheShore extends CardImpl {
 
     public EngulfTheShore(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}");

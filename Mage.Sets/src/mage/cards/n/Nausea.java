@@ -38,7 +38,7 @@ import mage.constants.Duration;
  *
  * @author Plopman
  */
-public class Nausea extends CardImpl {
+public final class Nausea extends CardImpl {
 
     public Nausea(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}");

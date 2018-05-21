@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanentAmount;
  *
  * @author LevelX2
  */
-public class ArmamentCorps extends CardImpl {
+public final class ArmamentCorps extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 

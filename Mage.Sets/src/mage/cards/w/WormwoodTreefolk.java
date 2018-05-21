@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class WormwoodTreefolk extends CardImpl {
+public final class WormwoodTreefolk extends CardImpl {
 
     public WormwoodTreefolk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");

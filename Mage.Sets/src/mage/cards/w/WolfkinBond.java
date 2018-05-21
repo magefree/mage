@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class WolfkinBond extends CardImpl {
+public final class WolfkinBond extends CardImpl {
 
     public WolfkinBond(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{G}");

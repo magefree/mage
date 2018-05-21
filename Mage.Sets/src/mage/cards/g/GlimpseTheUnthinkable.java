@@ -38,7 +38,7 @@ import mage.target.TargetPlayer;
  *
  * @author Loki
  */
-public class GlimpseTheUnthinkable extends CardImpl {
+public final class GlimpseTheUnthinkable extends CardImpl {
 
     public GlimpseTheUnthinkable(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{U}{B}");

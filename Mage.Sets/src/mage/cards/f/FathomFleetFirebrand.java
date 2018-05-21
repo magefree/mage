@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author TheElk801
  */
-public class FathomFleetFirebrand extends CardImpl {
+public final class FathomFleetFirebrand extends CardImpl {
 
     public FathomFleetFirebrand(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");

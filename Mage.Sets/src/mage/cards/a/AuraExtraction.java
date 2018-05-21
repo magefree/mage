@@ -40,7 +40,7 @@ import mage.target.common.TargetEnchantmentPermanent;
  *
  * @author Galatolol
  */
-public class AuraExtraction extends CardImpl {
+public final class AuraExtraction extends CardImpl {
 
     public AuraExtraction(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}");

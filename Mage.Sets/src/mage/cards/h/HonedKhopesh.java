@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author Styxo
  */
-public class HonedKhopesh extends CardImpl {
+public final class HonedKhopesh extends CardImpl {
 
     public HonedKhopesh(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");

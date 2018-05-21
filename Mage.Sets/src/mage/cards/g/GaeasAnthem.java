@@ -41,7 +41,7 @@ import mage.filter.StaticFilters;
  *
  * @author dustinconrad
  */
-public class GaeasAnthem extends CardImpl {
+public final class GaeasAnthem extends CardImpl {
 
     public GaeasAnthem(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}{G}");

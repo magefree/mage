@@ -45,7 +45,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LevelX2
  */
-public class AtarkaEfreet extends CardImpl {
+public final class AtarkaEfreet extends CardImpl {
 
     public AtarkaEfreet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

@@ -43,7 +43,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author TheElk801
  */
-public class SkyshroudSentinel extends CardImpl {
+public final class SkyshroudSentinel extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("cards named Skyshroud Sentinel");
 

@@ -42,7 +42,7 @@ import mage.target.TargetPlayer;
  *
  * @author Quercitron
  */
-public class Forget extends CardImpl {
+public final class Forget extends CardImpl {
 
     public Forget(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{U}{U}");

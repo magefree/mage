@@ -39,7 +39,7 @@ import mage.constants.TargetController;
  *
  * @author fireshoes
  */
-public class Unnerve extends CardImpl {
+public final class Unnerve extends CardImpl {
 
     public Unnerve(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}");

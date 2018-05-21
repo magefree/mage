@@ -53,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class TrialError extends SplitCard {
+public final class TrialError extends SplitCard {
 
     private static final FilterSpell filter = new FilterSpell("multicolored spell");
 

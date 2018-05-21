@@ -44,7 +44,7 @@ import mage.target.common.TargetEnchantmentPermanent;
  *
  * @author LoneFox
  */
-public class DaruSanctifier extends CardImpl {
+public final class DaruSanctifier extends CardImpl {
 
     public DaruSanctifier(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

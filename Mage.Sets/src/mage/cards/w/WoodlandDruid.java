@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class WoodlandDruid extends CardImpl {
+public final class WoodlandDruid extends CardImpl {
 
     public WoodlandDruid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");

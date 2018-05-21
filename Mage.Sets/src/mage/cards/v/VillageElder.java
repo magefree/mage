@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class VillageElder extends CardImpl {
+public final class VillageElder extends CardImpl {
     
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("a Forest");
     static{

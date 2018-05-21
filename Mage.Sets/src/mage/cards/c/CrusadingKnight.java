@@ -45,7 +45,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author anonymous
  */
-public class CrusadingKnight extends CardImpl {
+public final class CrusadingKnight extends CardImpl {
 
     private static final FilterLandPermanent swampFilter = new FilterLandPermanent("Swamp your opponent controls");
     static {

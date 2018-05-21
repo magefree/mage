@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class HorrorOfTheDim extends CardImpl {
+public final class HorrorOfTheDim extends CardImpl {
 
     public HorrorOfTheDim(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");

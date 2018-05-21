@@ -58,7 +58,7 @@ import mage.game.events.GameEvent;
  *
  * @author MarcoMarin
  */
-public class Jihad extends CardImpl {
+public final class Jihad extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("White creatures");
 

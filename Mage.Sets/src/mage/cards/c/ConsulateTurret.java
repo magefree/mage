@@ -44,7 +44,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  *
  * @author Styxo
  */
-public class ConsulateTurret extends CardImpl {
+public final class ConsulateTurret extends CardImpl {
 
     public ConsulateTurret(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");

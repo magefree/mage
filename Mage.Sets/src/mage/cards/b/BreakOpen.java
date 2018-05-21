@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author TheElk801
  */
-public class BreakOpen extends CardImpl {
+public final class BreakOpen extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Face-down creature an opponent controls");
 

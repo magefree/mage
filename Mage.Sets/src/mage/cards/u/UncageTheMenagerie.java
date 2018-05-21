@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author spjspj
  */
-public class UncageTheMenagerie extends CardImpl {
+public final class UncageTheMenagerie extends CardImpl {
 
     public UncageTheMenagerie(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{G}{G}");

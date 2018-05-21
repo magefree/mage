@@ -42,7 +42,7 @@ import mage.filter.common.FilterLandPermanent;
  *
  * @author fireshoes
  */
-public class SteamFrigate extends CardImpl {
+public final class SteamFrigate extends CardImpl {
 
     public SteamFrigate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

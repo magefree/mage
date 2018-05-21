@@ -48,7 +48,7 @@ import mage.game.permanent.token.SquirrelToken;
  *
  * @author Plopman
  */
-public class DerangedHermit extends CardImpl {
+public final class DerangedHermit extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Squirrel creatures");
 

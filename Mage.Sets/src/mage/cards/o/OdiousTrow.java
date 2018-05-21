@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class OdiousTrow extends CardImpl {
+public final class OdiousTrow extends CardImpl {
 
     public OdiousTrow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B/G}");

@@ -59,7 +59,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author fireshoes
  */
-public class StarfieldOfNyx extends CardImpl {
+public final class StarfieldOfNyx extends CardImpl {
 
     private static final String rule1 = "As long as you control five or more enchantments, each other non-Aura enchantment you control is a creature in addition to its other types and has base power and base toughness each equal to its converted mana cost.";
 

@@ -50,7 +50,7 @@ import mage.target.TargetSpell;
  *
  * @author jeffwadsworth
  */
-public class SpellSyphon extends CardImpl {
+public final class SpellSyphon extends CardImpl {
 
     public SpellSyphon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");

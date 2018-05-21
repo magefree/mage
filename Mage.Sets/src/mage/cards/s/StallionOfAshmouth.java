@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class StallionOfAshmouth extends CardImpl {
+public final class StallionOfAshmouth extends CardImpl {
 
     public StallionOfAshmouth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

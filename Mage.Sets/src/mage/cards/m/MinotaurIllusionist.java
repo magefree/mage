@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author LoneFox
 
  */
-public class MinotaurIllusionist extends CardImpl {
+public final class MinotaurIllusionist extends CardImpl {
 
     public MinotaurIllusionist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{R}");

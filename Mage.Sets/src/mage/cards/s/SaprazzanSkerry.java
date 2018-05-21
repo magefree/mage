@@ -49,7 +49,7 @@ import mage.counters.CounterType;
  *
  * @author Plopman
  */
-public class SaprazzanSkerry extends CardImpl {
+public final class SaprazzanSkerry extends CardImpl {
 
     public SaprazzanSkerry(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

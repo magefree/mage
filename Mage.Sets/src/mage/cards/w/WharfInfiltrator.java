@@ -52,7 +52,7 @@ import mage.game.permanent.token.EldraziHorrorToken;
  *
  * @author fireshoes
  */
-public class WharfInfiltrator extends CardImpl {
+public final class WharfInfiltrator extends CardImpl {
 
     public WharfInfiltrator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

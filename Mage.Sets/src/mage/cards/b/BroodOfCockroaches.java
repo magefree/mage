@@ -50,7 +50,7 @@ import static mage.constants.Outcome.Benefit;
  *
  * @author mpouedras
  */
-public class BroodOfCockroaches extends CardImpl {
+public final class BroodOfCockroaches extends CardImpl {
 
     public BroodOfCockroaches(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");

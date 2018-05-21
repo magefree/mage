@@ -43,7 +43,7 @@ import mage.constants.TargetController;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class LilianasSpecter extends CardImpl {
+public final class LilianasSpecter extends CardImpl {
 
     public LilianasSpecter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");

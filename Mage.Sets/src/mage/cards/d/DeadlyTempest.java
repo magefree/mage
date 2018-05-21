@@ -46,7 +46,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class DeadlyTempest extends CardImpl {
+public final class DeadlyTempest extends CardImpl {
 
     public DeadlyTempest(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{B}{B}");

@@ -39,7 +39,7 @@ import mage.game.permanent.token.WarriorToken;
  *
  * @author fireshoes
  */
-public class SecureTheWastes extends CardImpl {
+public final class SecureTheWastes extends CardImpl {
 
     public SecureTheWastes(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{W}");

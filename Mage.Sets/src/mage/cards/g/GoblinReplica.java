@@ -47,7 +47,7 @@ import mage.target.TargetPermanent;
  *
  * @author Loki
  */
-public class GoblinReplica extends CardImpl {
+public final class GoblinReplica extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact");
 

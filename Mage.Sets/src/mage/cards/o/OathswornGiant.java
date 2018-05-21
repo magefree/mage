@@ -46,7 +46,7 @@ import mage.filter.StaticFilters;
  *
  * @author Loki
  */
-public class OathswornGiant extends CardImpl {
+public final class OathswornGiant extends CardImpl {
 
     public OathswornGiant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");

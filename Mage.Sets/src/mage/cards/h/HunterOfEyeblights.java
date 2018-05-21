@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Styxo
  */
-public class HunterOfEyeblights extends CardImpl {
+public final class HunterOfEyeblights extends CardImpl {
 
     private static final FilterCreaturePermanent filter1 = new FilterCreaturePermanent("creature you don't control");
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creature with a counter on it");

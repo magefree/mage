@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class Counterbalance extends CardImpl {
+public final class Counterbalance extends CardImpl {
 
     public Counterbalance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{U}{U}");

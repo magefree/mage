@@ -45,7 +45,7 @@ import mage.constants.Duration;
  *
  * @author fireshoes
  */
-public class BarbedSextant extends CardImpl {
+public final class BarbedSextant extends CardImpl {
 
     public BarbedSextant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");

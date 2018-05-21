@@ -51,7 +51,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class InciteHysteria extends CardImpl {
+public final class InciteHysteria extends CardImpl {
 
     public InciteHysteria(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{R}");

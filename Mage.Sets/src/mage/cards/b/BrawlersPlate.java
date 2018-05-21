@@ -43,7 +43,7 @@ import mage.constants.*;
  *
  * @author emerald000
  */
-public class BrawlersPlate extends CardImpl {
+public final class BrawlersPlate extends CardImpl {
 
     public BrawlersPlate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

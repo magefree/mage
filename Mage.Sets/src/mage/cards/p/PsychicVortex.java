@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author fireshoes
  */
-public class PsychicVortex extends CardImpl {
+public final class PsychicVortex extends CardImpl {
 
     public PsychicVortex(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}{U}");

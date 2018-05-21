@@ -59,7 +59,7 @@ import mage.game.stack.StackObject;
  *
  * @author LevelX2
  */
-public class TrueNameNemesis extends CardImpl {
+public final class TrueNameNemesis extends CardImpl {
 
     public TrueNameNemesis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");

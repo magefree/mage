@@ -49,7 +49,7 @@ import mage.target.TargetSpell;
  *
  * @author LevelX2
  */
-public class ScatteringStroke extends CardImpl {
+public final class ScatteringStroke extends CardImpl {
 
     public ScatteringStroke(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}{U}");

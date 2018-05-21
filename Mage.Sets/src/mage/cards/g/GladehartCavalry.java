@@ -48,7 +48,7 @@ import mage.game.permanent.Permanent;
  *
  * @author fireshoes
  */
-public class GladehartCavalry extends CardImpl {
+public final class GladehartCavalry extends CardImpl {
 
     public GladehartCavalry(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}{G}");

@@ -40,7 +40,7 @@ import mage.filter.StaticFilters;
  *
  * @author Loki
  */
-public class PathOfAngersFlame extends CardImpl {
+public final class PathOfAngersFlame extends CardImpl {
 
     public PathOfAngersFlame(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{R}");

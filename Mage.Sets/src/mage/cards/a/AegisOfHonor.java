@@ -50,7 +50,7 @@ import mage.target.TargetPlayer;
 /**
  * @author cbt33 / LevelX2
  */
-public class AegisOfHonor extends CardImpl {
+public final class AegisOfHonor extends CardImpl {
 
     public AegisOfHonor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}");

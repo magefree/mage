@@ -39,7 +39,7 @@ import mage.constants.Zone;
 /**
  * @author Loki
  */
-public class NornsAnnex extends CardImpl {
+public final class NornsAnnex extends CardImpl {
 
     public NornsAnnex(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}{W/P}{W/P}");

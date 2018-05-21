@@ -40,7 +40,7 @@ import mage.constants.CardType;
  *
  * @author TheElk801
  */
-public class DegaSanctuary extends CardImpl {
+public final class DegaSanctuary extends CardImpl {
 
     public DegaSanctuary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");

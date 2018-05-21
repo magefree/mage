@@ -40,7 +40,7 @@ import java.util.UUID;
  *
  * @author Styxo
  */
-public class IrontreadCrusher extends CardImpl {
+public final class IrontreadCrusher extends CardImpl {
 
     public IrontreadCrusher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");

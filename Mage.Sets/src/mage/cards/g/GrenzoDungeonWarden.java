@@ -52,7 +52,7 @@ import mage.players.Player;
  *
  * @author emerald000
  */
-public class GrenzoDungeonWarden extends CardImpl {
+public final class GrenzoDungeonWarden extends CardImpl {
 
     public GrenzoDungeonWarden(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{X}{B}{R}");

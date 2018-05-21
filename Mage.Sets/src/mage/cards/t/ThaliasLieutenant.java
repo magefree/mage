@@ -46,7 +46,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  *
  * @author fireshoes
  */
-public class ThaliasLieutenant extends CardImpl {
+public final class ThaliasLieutenant extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("each other Human you control");
 

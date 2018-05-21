@@ -40,7 +40,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class EarthenArms extends CardImpl {
+public final class EarthenArms extends CardImpl {
 
     public EarthenArms(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{G}");

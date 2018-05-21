@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class DakraMystic extends CardImpl {
+public final class DakraMystic extends CardImpl {
 
     public DakraMystic(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}");

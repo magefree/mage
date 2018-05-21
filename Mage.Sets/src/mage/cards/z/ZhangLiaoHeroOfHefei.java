@@ -41,7 +41,7 @@ import mage.constants.SuperType;
  *
  * @author LoneFox
  */
-public class ZhangLiaoHeroOfHefei extends CardImpl {
+public final class ZhangLiaoHeroOfHefei extends CardImpl {
 
     public ZhangLiaoHeroOfHefei(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}");

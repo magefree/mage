@@ -47,7 +47,7 @@ import mage.game.permanent.token.SpiritWhiteToken;
  *
  * @author LoneFox
  */
-public class Transluminant extends CardImpl {
+public final class Transluminant extends CardImpl {
 
     public Transluminant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

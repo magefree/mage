@@ -39,7 +39,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Loki
  */
-public class DiabolicTutor extends CardImpl {
+public final class DiabolicTutor extends CardImpl {
 
     public DiabolicTutor(UUID ownerId, CardSetInfo setInfo){
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}{B}");

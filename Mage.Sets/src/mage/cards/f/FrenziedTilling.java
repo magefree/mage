@@ -42,7 +42,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class FrenziedTilling extends CardImpl {
+public final class FrenziedTilling extends CardImpl {
 
     public FrenziedTilling(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}{G}");

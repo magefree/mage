@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class LeoninSkyhunter extends CardImpl {
+public final class LeoninSkyhunter extends CardImpl {
 
     public LeoninSkyhunter (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{W}");

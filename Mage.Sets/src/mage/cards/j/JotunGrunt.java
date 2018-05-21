@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInASingleGraveyard;
  *
  * @author emerald000
  */
-public class JotunGrunt extends CardImpl {
+public final class JotunGrunt extends CardImpl {
 
     public JotunGrunt(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

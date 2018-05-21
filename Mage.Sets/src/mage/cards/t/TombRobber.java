@@ -46,7 +46,7 @@ import mage.constants.Zone;
 /**
  * @author JayDi85
  */
-public class TombRobber extends CardImpl {
+public final class TombRobber extends CardImpl {
 
     public TombRobber(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");

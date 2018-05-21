@@ -45,7 +45,7 @@ import mage.target.TargetPlayer;
  * @author KholdFuzion
  *
  */
-public class Conservator extends CardImpl {
+public final class Conservator extends CardImpl {
 
     public Conservator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");

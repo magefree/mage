@@ -51,7 +51,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 /**
  * @author Loki
  */
-public class SturdyHatchling extends CardImpl {
+public final class SturdyHatchling extends CardImpl {
 
     private static final FilterSpell filterGreenSpell = new FilterSpell("a green spell");
     private static final FilterSpell filterBlueSpell = new FilterSpell("a blue spell");

@@ -41,7 +41,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author JotaPeRL
  */
-public class CacklingFlames extends CardImpl {
+public final class CacklingFlames extends CardImpl {
 
     public CacklingFlames(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{R}");

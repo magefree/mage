@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author emerald000
  */
-public class AvenReedstalker extends CardImpl {
+public final class AvenReedstalker extends CardImpl {
 
     public AvenReedstalker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");

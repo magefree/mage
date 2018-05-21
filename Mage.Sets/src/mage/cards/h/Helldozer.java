@@ -48,7 +48,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author jeffwadsworth
  */
-public class Helldozer extends CardImpl {
+public final class Helldozer extends CardImpl {
 
     public Helldozer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}{B}");

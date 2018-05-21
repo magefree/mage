@@ -50,7 +50,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class CoralAtoll extends CardImpl {
+public final class CoralAtoll extends CardImpl {
 
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("an untapped Island");
 

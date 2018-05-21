@@ -44,7 +44,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author LevelX2
  */
-public class GrafMole extends CardImpl {
+public final class GrafMole extends CardImpl {
 
     public GrafMole(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

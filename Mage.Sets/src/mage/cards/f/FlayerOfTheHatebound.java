@@ -52,7 +52,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author BetaSteward
  */
-public class FlayerOfTheHatebound extends CardImpl {
+public final class FlayerOfTheHatebound extends CardImpl {
 
     public FlayerOfTheHatebound(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}");

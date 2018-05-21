@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInYourGraveyard;
 /**
  * @author LevelX2
  */
-public class CodexShredder extends CardImpl {
+public final class CodexShredder extends CardImpl {
 
     public CodexShredder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");

@@ -47,7 +47,7 @@ import mage.players.Player;
  * @author LoneFox
  *
  */
-public class TwilightsCall extends CardImpl {
+public final class TwilightsCall extends CardImpl {
 
     public TwilightsCall(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{B}{B}");

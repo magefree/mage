@@ -45,7 +45,7 @@ import mage.target.TargetPlayer;
  *
  * @author North
  */
-public class DawnglareInvoker extends CardImpl {
+public final class DawnglareInvoker extends CardImpl {
 
     public DawnglareInvoker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");

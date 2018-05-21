@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.PowerPredicate;
  *
  * @author fireshoes
  */
-public class Crackdown extends CardImpl {
+public final class Crackdown extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonwhite creatures with power 3 or greater");
 

@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FaunaShaman extends CardImpl {
+public final class FaunaShaman extends CardImpl {
 
     public FaunaShaman(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

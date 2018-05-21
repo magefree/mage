@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class SoratamiCloudChariot extends CardImpl {
+public final class SoratamiCloudChariot extends CardImpl {
 
     public SoratamiCloudChariot(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");

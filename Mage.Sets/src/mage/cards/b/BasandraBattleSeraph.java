@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class BasandraBattleSeraph extends CardImpl {
+public final class BasandraBattleSeraph extends CardImpl {
 
     public BasandraBattleSeraph(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{W}");

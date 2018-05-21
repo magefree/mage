@@ -50,7 +50,7 @@ import mage.filter.FilterSpell;
  *
  * @author LevelX2
  */
-public class HermitOfTheNatterknolls extends CardImpl {
+public final class HermitOfTheNatterknolls extends CardImpl {
 
     public HermitOfTheNatterknolls(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author LevelX
  */
-public class DescendantOfSoramaro extends CardImpl {
+public final class DescendantOfSoramaro extends CardImpl {
 
     public DescendantOfSoramaro(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");

@@ -46,7 +46,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class FontOfFertility extends CardImpl {
+public final class FontOfFertility extends CardImpl {
 
     public FontOfFertility(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}");

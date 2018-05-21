@@ -57,7 +57,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class RaziaBorosArchangel extends CardImpl {
+public final class RaziaBorosArchangel extends CardImpl {
 
     public RaziaBorosArchangel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{R}{W}{W}");

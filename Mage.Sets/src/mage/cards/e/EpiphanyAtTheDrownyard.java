@@ -50,7 +50,7 @@ import mage.util.GameLog;
  *
  * @author LevelX2
  */
-public class EpiphanyAtTheDrownyard extends CardImpl {
+public final class EpiphanyAtTheDrownyard extends CardImpl {
 
     public EpiphanyAtTheDrownyard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{U}");

@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class BlightedAgent extends CardImpl {
+public final class BlightedAgent extends CardImpl {
 
     public BlightedAgent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

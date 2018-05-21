@@ -42,7 +42,7 @@ import mage.counters.CounterType;
  *
  * @author LevelX2
  */
-public class WarWingSiren extends CardImpl {
+public final class WarWingSiren extends CardImpl {
 
     public WarWingSiren(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

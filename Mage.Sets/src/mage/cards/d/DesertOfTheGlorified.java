@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class DesertOfTheGlorified extends CardImpl {
+public final class DesertOfTheGlorified extends CardImpl {
 
     public DesertOfTheGlorified(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

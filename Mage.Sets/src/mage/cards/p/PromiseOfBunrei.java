@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class PromiseOfBunrei extends CardImpl {
+public final class PromiseOfBunrei extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature you control");
     

@@ -50,7 +50,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Loki
  */
-public class EmpyrialArchangel extends CardImpl {
+public final class EmpyrialArchangel extends CardImpl {
 
     public EmpyrialArchangel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{W}{W}{U}");

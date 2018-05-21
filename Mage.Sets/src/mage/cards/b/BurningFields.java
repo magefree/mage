@@ -38,7 +38,7 @@ import mage.target.common.TargetOpponentOrPlaneswalker;
  *
  * @author LoneFox
  */
-public class BurningFields extends CardImpl {
+public final class BurningFields extends CardImpl {
 
     public BurningFields(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{R}");

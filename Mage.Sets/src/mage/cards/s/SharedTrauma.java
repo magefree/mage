@@ -47,7 +47,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class SharedTrauma extends CardImpl {
+public final class SharedTrauma extends CardImpl {
 
     public SharedTrauma(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}");

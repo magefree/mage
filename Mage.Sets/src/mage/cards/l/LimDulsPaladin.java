@@ -56,7 +56,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author LoneFox
  */
-public class LimDulsPaladin extends CardImpl {
+public final class LimDulsPaladin extends CardImpl {
 
     public LimDulsPaladin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{R}");

@@ -54,7 +54,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Plopman
  */
-public class MoltenHydra extends CardImpl {
+public final class MoltenHydra extends CardImpl {
 
 
 

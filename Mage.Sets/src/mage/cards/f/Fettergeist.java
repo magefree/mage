@@ -51,7 +51,7 @@ import mage.players.Player;
  *
  * @author noxx
  */
-public class Fettergeist extends CardImpl {
+public final class Fettergeist extends CardImpl {
 
     public Fettergeist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

@@ -41,7 +41,7 @@ import mage.filter.predicate.mageobject.ColorlessPredicate;
 /**
  * @author LevelX
  */
-public class AncientStirrings extends CardImpl {
+public final class AncientStirrings extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("a colorless card");
 

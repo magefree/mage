@@ -45,7 +45,7 @@ import mage.players.PlayerList;
  *
  * @author fireshoes
  */
-public class Triskaidekaphobia extends CardImpl {
+public final class Triskaidekaphobia extends CardImpl {
 
     public Triskaidekaphobia(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{B}");

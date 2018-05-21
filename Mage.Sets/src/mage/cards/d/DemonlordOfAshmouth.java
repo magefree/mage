@@ -45,7 +45,7 @@ import mage.target.common.TargetControlledPermanent;
 /**
  * @author noxx
  */
-public class DemonlordOfAshmouth extends CardImpl {
+public final class DemonlordOfAshmouth extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent(" another creature");
 

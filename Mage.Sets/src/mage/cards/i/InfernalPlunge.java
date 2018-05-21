@@ -41,7 +41,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author North
  */
-public class InfernalPlunge extends CardImpl {
+public final class InfernalPlunge extends CardImpl {
 
     public InfernalPlunge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{R}");

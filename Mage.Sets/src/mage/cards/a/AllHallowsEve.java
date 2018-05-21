@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class AllHallowsEve extends CardImpl {
+public final class AllHallowsEve extends CardImpl {
 
     public AllHallowsEve(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");

@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author michael.napoleon@gmail.com
  */
-public class CrimsonAcolyte extends CardImpl {
+public final class CrimsonAcolyte extends CardImpl {
 
     public CrimsonAcolyte(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

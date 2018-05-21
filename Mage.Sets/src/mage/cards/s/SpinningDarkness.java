@@ -56,7 +56,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author emerald000
  */
-public class SpinningDarkness extends CardImpl {
+public final class SpinningDarkness extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack creature");
     static {

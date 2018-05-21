@@ -44,7 +44,7 @@ import mage.watchers.common.AmountOfDamageAPlayerReceivedThisTurnWatcher;
  *
  * @author MTGfan
  */
-public class Simulacrum extends CardImpl {
+public final class Simulacrum extends CardImpl {
 
     public Simulacrum(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{B}");

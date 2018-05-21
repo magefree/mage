@@ -43,7 +43,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author ciaccona007
  */
-public class QuarryBeetle extends CardImpl {
+public final class QuarryBeetle extends CardImpl {
 
     public QuarryBeetle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}");

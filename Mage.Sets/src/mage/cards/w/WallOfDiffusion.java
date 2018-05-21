@@ -47,7 +47,7 @@ import mage.game.Game;
  *
  * @author LevelX2
  */
-public class WallOfDiffusion extends CardImpl {
+public final class WallOfDiffusion extends CardImpl {
 
     public WallOfDiffusion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

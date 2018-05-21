@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class AetherMutation extends CardImpl {
+public final class AetherMutation extends CardImpl {
 
     public AetherMutation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}{U}");

@@ -45,7 +45,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author fireshoes
  */
-public class RenewingDawn extends CardImpl {
+public final class RenewingDawn extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent("Mountain");
     

@@ -49,7 +49,7 @@ import mage.constants.Zone;
  *
  * @author TheElk801
  */
-public class DemonicVigor extends CardImpl {
+public final class DemonicVigor extends CardImpl {
 
     public DemonicVigor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{B}");

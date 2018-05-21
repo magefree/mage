@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author L_J
  */
-public class TowerOfCoireall extends CardImpl {
+public final class TowerOfCoireall extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Walls");
     static {

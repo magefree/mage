@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fenhl
  */
-public class CleansingBeam extends CardImpl {
+public final class CleansingBeam extends CardImpl {
 
     public CleansingBeam(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{R}");

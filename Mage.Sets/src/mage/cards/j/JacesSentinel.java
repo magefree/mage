@@ -51,7 +51,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author TheElk801
  */
-public class JacesSentinel extends CardImpl {
+public final class JacesSentinel extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("a Jace planeswalker");
 

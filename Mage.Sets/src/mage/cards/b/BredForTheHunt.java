@@ -43,7 +43,7 @@ import mage.game.permanent.Permanent;
 
 
 
-public class BredForTheHunt extends CardImpl {
+public final class BredForTheHunt extends CardImpl {
 
     public BredForTheHunt(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}{U}");

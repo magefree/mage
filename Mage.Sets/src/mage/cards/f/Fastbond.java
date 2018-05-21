@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author Plopman
  */
-public class Fastbond extends CardImpl {
+public final class Fastbond extends CardImpl {
 
     public Fastbond(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}");

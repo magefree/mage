@@ -50,7 +50,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class MysticEnforcer extends CardImpl {
+public final class MysticEnforcer extends CardImpl {
 
     public MysticEnforcer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{W}");

@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Backfir3
  */
-public class PrimevalShambler extends CardImpl {
+public final class PrimevalShambler extends CardImpl {
 
     public PrimevalShambler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");

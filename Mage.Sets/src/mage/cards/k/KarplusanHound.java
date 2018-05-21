@@ -46,7 +46,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LevelX2
  */
-public class KarplusanHound extends CardImpl {
+public final class KarplusanHound extends CardImpl {
 
     public KarplusanHound(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");

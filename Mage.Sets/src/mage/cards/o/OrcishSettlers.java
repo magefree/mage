@@ -53,7 +53,7 @@ import mage.target.common.TargetLandPermanent;
  * @author jeffwadsworth
  *
  */
-public class OrcishSettlers extends CardImpl {
+public final class OrcishSettlers extends CardImpl {
 
     public OrcishSettlers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");

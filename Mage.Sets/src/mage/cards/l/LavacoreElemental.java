@@ -48,7 +48,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author fireshoes
  */
-public class LavacoreElemental extends CardImpl {
+public final class LavacoreElemental extends CardImpl {
 
     public LavacoreElemental(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

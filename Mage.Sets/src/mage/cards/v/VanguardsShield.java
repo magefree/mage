@@ -50,7 +50,7 @@ import mage.game.permanent.Permanent;
 /**
  * @author noxx
  */
-public class VanguardsShield extends CardImpl {
+public final class VanguardsShield extends CardImpl {
 
     public VanguardsShield(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

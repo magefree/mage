@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class ThrabenInspector extends CardImpl {
+public final class ThrabenInspector extends CardImpl {
 
     public ThrabenInspector(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");

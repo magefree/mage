@@ -52,7 +52,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class CustodiSquire extends CardImpl {
+public final class CustodiSquire extends CardImpl {
 
     public CustodiSquire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");

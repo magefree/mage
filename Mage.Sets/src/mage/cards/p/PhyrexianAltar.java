@@ -40,7 +40,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Plopman
  */
-public class PhyrexianAltar extends CardImpl {
+public final class PhyrexianAltar extends CardImpl {
 
     public PhyrexianAltar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");

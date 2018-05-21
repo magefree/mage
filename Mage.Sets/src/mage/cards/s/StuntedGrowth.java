@@ -48,7 +48,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author LevelX2
  */
-public class StuntedGrowth extends CardImpl {
+public final class StuntedGrowth extends CardImpl {
 
     public StuntedGrowth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}{G}");

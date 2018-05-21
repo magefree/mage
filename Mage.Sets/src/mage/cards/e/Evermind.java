@@ -44,7 +44,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class Evermind extends CardImpl {
+public final class Evermind extends CardImpl {
 
     public Evermind(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"");

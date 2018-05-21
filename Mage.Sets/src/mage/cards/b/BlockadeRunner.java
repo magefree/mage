@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author djbrez
  */
-public class BlockadeRunner extends CardImpl {
+public final class BlockadeRunner extends CardImpl {
 
     public BlockadeRunner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");

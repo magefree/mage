@@ -42,7 +42,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author LoneFox
  */
-public class FugitiveDruid extends CardImpl {
+public final class FugitiveDruid extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("an Aura spell");
 

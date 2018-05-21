@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author Styxo
  */
-public class Avizoa extends CardImpl {
+public final class Avizoa extends CardImpl {
 
     public Avizoa(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");

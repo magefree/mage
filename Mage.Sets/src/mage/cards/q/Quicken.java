@@ -49,7 +49,7 @@ import mage.watchers.Watcher;
 /**
  * @author LevelX2
  */
-public class Quicken extends CardImpl {
+public final class Quicken extends CardImpl {
 
     public Quicken(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}");

@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author LoneFox
  */
-public class AnabaSpiritCrafter extends CardImpl {
+public final class AnabaSpiritCrafter extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Minotaur creatures");
 

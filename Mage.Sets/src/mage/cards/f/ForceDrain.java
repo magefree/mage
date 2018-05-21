@@ -44,7 +44,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Styxo
  */
-public class ForceDrain extends CardImpl {
+public final class ForceDrain extends CardImpl {
 
     public ForceDrain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}");

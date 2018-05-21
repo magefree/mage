@@ -38,7 +38,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author fireshoes
  */
-public class OpenFire extends CardImpl {
+public final class OpenFire extends CardImpl {
 
     public OpenFire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{R}");

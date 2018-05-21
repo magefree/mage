@@ -54,7 +54,7 @@ import mage.sets.Commander;
  *
  * @author LevelX2
  */
-public class CelestialDawn extends CardImpl {
+public final class CelestialDawn extends CardImpl {
 
     public CelestialDawn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}{W}");

@@ -44,7 +44,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author fireshoes
  */
-public class EbonDragon extends CardImpl {
+public final class EbonDragon extends CardImpl {
 
     public EbonDragon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}{B}");

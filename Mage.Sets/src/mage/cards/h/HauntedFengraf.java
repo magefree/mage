@@ -50,7 +50,7 @@ import mage.util.RandomUtil;
  *
  * @author North
  */
-public class HauntedFengraf extends CardImpl {
+public final class HauntedFengraf extends CardImpl {
 
     public HauntedFengraf(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

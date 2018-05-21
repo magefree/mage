@@ -42,7 +42,7 @@ import mage.constants.Duration;
  *
  * @author Loki
  */
-public class HedronRover extends CardImpl {
+public final class HedronRover extends CardImpl {
 
     public HedronRover (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}");

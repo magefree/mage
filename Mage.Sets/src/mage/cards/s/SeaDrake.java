@@ -45,7 +45,7 @@ import mage.target.TargetPermanent;
  * @author LoneFox
 
  */
-public class SeaDrake extends CardImpl {
+public final class SeaDrake extends CardImpl {
 
     public SeaDrake(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

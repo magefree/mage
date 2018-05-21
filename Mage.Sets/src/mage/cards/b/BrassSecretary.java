@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Backfir3
  */
-public class BrassSecretary extends CardImpl {
+public final class BrassSecretary extends CardImpl {
 
     public BrassSecretary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");

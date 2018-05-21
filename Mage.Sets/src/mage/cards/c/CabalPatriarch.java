@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author cbt33, LevelX2
  */
-public class CabalPatriarch extends CardImpl {
+public final class CabalPatriarch extends CardImpl {
 
     public CabalPatriarch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}{B}");

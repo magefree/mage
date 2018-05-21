@@ -48,7 +48,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author jeffwadsworth
  */
-public class RingOfXathrid extends CardImpl {
+public final class RingOfXathrid extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
     

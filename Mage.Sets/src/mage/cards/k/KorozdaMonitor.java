@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class KorozdaMonitor extends CardImpl {
+public final class KorozdaMonitor extends CardImpl {
 
     public KorozdaMonitor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");

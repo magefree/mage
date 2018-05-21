@@ -49,7 +49,7 @@ import java.util.UUID;
  *
  * @author fireshoes
  */
-public class CompanionOfTheTrials extends CardImpl {
+public final class CompanionOfTheTrials extends CardImpl {
 
     private static final FilterPlaneswalkerPermanent filter = new FilterPlaneswalkerPermanent("you control a Gideon planeswalker");
     static {

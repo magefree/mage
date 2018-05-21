@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class UnderhandedDesigns extends CardImpl {
+public final class UnderhandedDesigns extends CardImpl {
 
     public UnderhandedDesigns(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}");

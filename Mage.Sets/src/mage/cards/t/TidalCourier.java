@@ -48,7 +48,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author LoneFox
  */
-public class TidalCourier extends CardImpl {
+public final class TidalCourier extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Merfolk cards");
 

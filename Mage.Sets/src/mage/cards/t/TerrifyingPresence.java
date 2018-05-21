@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class TerrifyingPresence extends CardImpl {
+public final class TerrifyingPresence extends CardImpl {
 
     public TerrifyingPresence(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}");

@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author emerald000
  */
-public class PropellerPioneer extends CardImpl {
+public final class PropellerPioneer extends CardImpl {
 
     public PropellerPioneer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

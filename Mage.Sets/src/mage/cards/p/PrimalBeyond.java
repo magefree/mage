@@ -53,7 +53,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author TGower
  */
-public class PrimalBeyond extends CardImpl {
+public final class PrimalBeyond extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("a Elemental card from your hand");
 

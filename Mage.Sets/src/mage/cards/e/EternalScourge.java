@@ -46,7 +46,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author fireshoes
  */
-public class EternalScourge extends CardImpl {
+public final class EternalScourge extends CardImpl {
 
     public EternalScourge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}");

@@ -39,7 +39,7 @@ import mage.game.permanent.token.StormCrowToken;
  *
  * @author spjspj
  */
-public class CrowStorm extends CardImpl {
+public final class CrowStorm extends CardImpl {
 
     public CrowStorm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{U}");

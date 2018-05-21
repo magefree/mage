@@ -51,7 +51,7 @@ import mage.game.permanent.token.Token;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class LavaclawReaches extends CardImpl {
+public final class LavaclawReaches extends CardImpl {
 
     public LavaclawReaches(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);

@@ -50,7 +50,7 @@ import mage.counters.CounterType;
  *
  * @author LoneFox
  */
-public class MaelstromDjinn extends CardImpl {
+public final class MaelstromDjinn extends CardImpl {
 
     public MaelstromDjinn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{7}{U}");

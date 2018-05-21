@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class TritonFortuneHunter extends CardImpl {
+public final class TritonFortuneHunter extends CardImpl {
 
     public TritonFortuneHunter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

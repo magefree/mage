@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class AliveWell extends SplitCard {
+public final class AliveWell extends SplitCard {
 
     public AliveWell(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{G}", "{W}", SpellAbilityType.SPLIT_FUSED);

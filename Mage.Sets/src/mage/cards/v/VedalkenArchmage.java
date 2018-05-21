@@ -41,7 +41,7 @@ import mage.filter.common.FilterArtifactSpell;
  *
  * @author LevelX2
  */
-public class VedalkenArchmage extends CardImpl {
+public final class VedalkenArchmage extends CardImpl {
     public VedalkenArchmage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");
         this.subtype.add(SubType.VEDALKEN);

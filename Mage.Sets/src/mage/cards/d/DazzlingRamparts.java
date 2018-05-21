@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author emerald000
  */
-public class DazzlingRamparts extends CardImpl {
+public final class DazzlingRamparts extends CardImpl {
 
     public DazzlingRamparts(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");

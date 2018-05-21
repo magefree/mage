@@ -52,7 +52,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  *
  * @author Loki
  */
-public class GoblinRazerunners extends CardImpl {
+public final class GoblinRazerunners extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("a land");
 

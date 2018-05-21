@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanentAmount;
  *
  * @author LevelX2 & L_J
  */
-public class LivingInferno extends CardImpl {
+public final class LivingInferno extends CardImpl {
 
     private final UUID originalId;
 

@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class TreeMonkey extends CardImpl {
+public final class TreeMonkey extends CardImpl {
 
     public TreeMonkey(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");

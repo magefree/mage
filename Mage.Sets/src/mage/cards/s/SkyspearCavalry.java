@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class SkyspearCavalry extends CardImpl {
+public final class SkyspearCavalry extends CardImpl {
 
     public SkyspearCavalry(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");

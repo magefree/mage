@@ -49,7 +49,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class SwiftWarden extends CardImpl {
+public final class SwiftWarden extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Merfolk you control");
 

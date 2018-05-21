@@ -49,7 +49,7 @@ import mage.target.common.TargetAnyTargetAmount;
  * @author LoneFox
 
  */
-public class PollenRemedy extends CardImpl {
+public final class PollenRemedy extends CardImpl {
 
     private final UUID originalId;
 

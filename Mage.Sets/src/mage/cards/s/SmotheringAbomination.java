@@ -50,7 +50,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author fireshoes
  */
-public class SmotheringAbomination extends CardImpl {
+public final class SmotheringAbomination extends CardImpl {
 
     public SmotheringAbomination(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");

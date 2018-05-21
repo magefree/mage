@@ -51,7 +51,7 @@ import mage.target.TargetCard;
  *
  * @author North
  */
-public class MitoticManipulation extends CardImpl {
+public final class MitoticManipulation extends CardImpl {
 
     public MitoticManipulation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{U}{U}");

@@ -54,7 +54,7 @@ import mage.target.TargetPermanent;
  *
  * @author fireshoes
  */
-public class WillowPriestess extends CardImpl {
+public final class WillowPriestess extends CardImpl {
     
     private static final FilterPermanentCard filter = new FilterPermanentCard("Faerie");
     private static final FilterCreaturePermanent greenCreature = new FilterCreaturePermanent("green creature");

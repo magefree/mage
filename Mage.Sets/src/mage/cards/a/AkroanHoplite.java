@@ -47,7 +47,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author LevelX2
  */
-public class AkroanHoplite extends CardImpl {
+public final class AkroanHoplite extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("attacking creatures you control");
 

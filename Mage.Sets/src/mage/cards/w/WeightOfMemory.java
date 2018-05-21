@@ -40,7 +40,7 @@ import java.util.UUID;
  *
  * @author rscoates
  */
-public class WeightOfMemory extends CardImpl {
+public final class WeightOfMemory extends CardImpl {
 
     public WeightOfMemory(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}{U}");

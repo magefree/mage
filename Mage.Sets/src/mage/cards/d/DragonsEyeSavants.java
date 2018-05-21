@@ -49,7 +49,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author emerald000
  */
-public class DragonsEyeSavants extends CardImpl {
+public final class DragonsEyeSavants extends CardImpl {
     
     private final static FilterCard filter = new FilterCard("a blue card in your hand");
     static {

@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class SelvalasCharge extends CardImpl {
+public final class SelvalasCharge extends CardImpl {
 
     public SelvalasCharge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{G}");

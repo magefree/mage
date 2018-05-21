@@ -50,7 +50,7 @@ import mage.util.CardUtil;
  *
  * @author jeffwadsworth
  */
-public class WatchersOfTheDead extends CardImpl {
+public final class WatchersOfTheDead extends CardImpl {
 
     public WatchersOfTheDead(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");

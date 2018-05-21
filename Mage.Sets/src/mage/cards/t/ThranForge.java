@@ -47,7 +47,7 @@ import mage.target.TargetPermanent;
  *
  * @author TheElk801
  */
-public class ThranForge extends CardImpl {
+public final class ThranForge extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 

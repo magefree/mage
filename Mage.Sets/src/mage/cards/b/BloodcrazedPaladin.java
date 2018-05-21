@@ -45,7 +45,7 @@ import mage.watchers.common.CreaturesDiedWatcher;
  *
  * @author TheElk801
  */
-public class BloodcrazedPaladin extends CardImpl {
+public final class BloodcrazedPaladin extends CardImpl {
 
     public BloodcrazedPaladin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");

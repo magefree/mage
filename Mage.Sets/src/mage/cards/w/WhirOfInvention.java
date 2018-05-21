@@ -39,7 +39,7 @@ import mage.filter.common.FilterArtifactCard;
  *
  * @author fireshoes
  */
-public class WhirOfInvention extends CardImpl {
+public final class WhirOfInvention extends CardImpl {
 
     public WhirOfInvention(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{U}{U}{U}");

@@ -38,7 +38,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author fireshoes
  */
-public class Mobilize extends CardImpl {
+public final class Mobilize extends CardImpl {
     
     private static final String rule = "untap all creatures you control";
 

@@ -51,7 +51,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class ArchfiendOfDepravity extends CardImpl {
+public final class ArchfiendOfDepravity extends CardImpl {
 
     public ArchfiendOfDepravity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");

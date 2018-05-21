@@ -44,7 +44,7 @@ import mage.players.Player;
  *
  * @author Plopman
  */
-public class IronMaiden extends CardImpl {
+public final class IronMaiden extends CardImpl {
 
     public IronMaiden(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

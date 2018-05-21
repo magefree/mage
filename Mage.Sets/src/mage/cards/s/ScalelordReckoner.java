@@ -52,7 +52,7 @@ import mage.target.TargetPermanent;
  *
  * @author spjspj
  */
-public class ScalelordReckoner extends CardImpl {
+public final class ScalelordReckoner extends CardImpl {
 
     public ScalelordReckoner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");

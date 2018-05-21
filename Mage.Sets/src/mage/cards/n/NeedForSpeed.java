@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author cbt33
  */
-public class NeedForSpeed extends CardImpl {
+public final class NeedForSpeed extends CardImpl {
    
 
 

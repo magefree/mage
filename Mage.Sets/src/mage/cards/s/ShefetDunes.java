@@ -51,7 +51,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author spjspj
  */
-public class ShefetDunes extends CardImpl {
+public final class ShefetDunes extends CardImpl {
 
     private static final FilterControlledPermanent filterDesertPermanent = new FilterControlledPermanent("Desert");
 

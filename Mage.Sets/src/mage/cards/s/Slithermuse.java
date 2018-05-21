@@ -48,7 +48,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class Slithermuse extends CardImpl {
+public final class Slithermuse extends CardImpl {
 
     public Slithermuse(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");

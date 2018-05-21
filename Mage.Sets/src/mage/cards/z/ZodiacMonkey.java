@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class ZodiacMonkey extends CardImpl {
+public final class ZodiacMonkey extends CardImpl {
 
     public ZodiacMonkey(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

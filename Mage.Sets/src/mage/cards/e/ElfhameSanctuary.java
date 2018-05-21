@@ -48,7 +48,7 @@ import java.util.UUID;
  *
  * @author Markedagain
  */
-public class ElfhameSanctuary extends CardImpl {
+public final class ElfhameSanctuary extends CardImpl {
 
     public ElfhameSanctuary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}");

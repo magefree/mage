@@ -49,7 +49,7 @@ import mage.target.common.TargetOpponent;
  * @author jeffwadsworth
  *
  */
-public class NathOfTheGiltLeaf extends CardImpl {
+public final class NathOfTheGiltLeaf extends CardImpl {
 
     public NathOfTheGiltLeaf(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{G}");

@@ -46,7 +46,7 @@ import mage.filter.common.FilterHistoricSpell;
  *
  * @author TheElk801
  */
-public class TraxosScourgeOfKroog extends CardImpl {
+public final class TraxosScourgeOfKroog extends CardImpl {
 
     public TraxosScourgeOfKroog(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");

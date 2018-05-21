@@ -60,7 +60,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author spjspj
  */
-public class QuicksilverElemental extends CardImpl {
+public final class QuicksilverElemental extends CardImpl {
 
     public QuicksilverElemental(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");

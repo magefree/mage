@@ -42,7 +42,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author TheElk801
  */
-public class CostlyPlunder extends CardImpl {
+public final class CostlyPlunder extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("an artifact or creature");
 

@@ -42,7 +42,7 @@ import mage.constants.SuperType;
  *
  * @author LoneFox
  */
-public class CaoRenWeiCommander extends CardImpl {
+public final class CaoRenWeiCommander extends CardImpl {
 
     public CaoRenWeiCommander(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");

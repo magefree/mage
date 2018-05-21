@@ -47,7 +47,7 @@ import mage.game.events.GameEvent;
  *
  * @author Mainiack11
  */
-public class HaakonStromgaldScourge extends CardImpl {
+public final class HaakonStromgaldScourge extends CardImpl {
 
     public HaakonStromgaldScourge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");

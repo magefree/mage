@@ -46,7 +46,7 @@ import mage.game.permanent.token.EldraziSpawnToken;
 /**
  * @author magenoxx_at_gmail.com
  */
-public class SpawnsireOfUlamog extends CardImpl {
+public final class SpawnsireOfUlamog extends CardImpl {
     
     private static final String ruleText = "Cast any number of Eldrazi cards you own from outside the game without paying their mana costs";
 

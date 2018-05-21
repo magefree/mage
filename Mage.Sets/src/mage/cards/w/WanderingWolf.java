@@ -41,7 +41,7 @@ import mage.constants.Zone;
  *
  * @author North
  */
-public class WanderingWolf extends CardImpl {
+public final class WanderingWolf extends CardImpl {
 
     public WanderingWolf(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  *
  * @author LoneFox
  */
-public class ParallaxInhibitor extends CardImpl {
+public final class ParallaxInhibitor extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("permanent with fading you control");
 

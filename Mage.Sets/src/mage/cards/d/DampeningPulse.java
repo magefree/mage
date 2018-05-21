@@ -43,7 +43,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author LevelX2
  */
-public class DampeningPulse extends CardImpl {
+public final class DampeningPulse extends CardImpl {
 
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures your opponents control");
 

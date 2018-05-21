@@ -53,7 +53,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author North
  */
-public class RealmsUncharted extends CardImpl {
+public final class RealmsUncharted extends CardImpl {
 
     public RealmsUncharted(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}");

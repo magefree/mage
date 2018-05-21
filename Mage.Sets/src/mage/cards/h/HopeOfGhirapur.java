@@ -60,7 +60,7 @@ import mage.watchers.Watcher;
  *
  * @author LevelX2
  */
-public class HopeOfGhirapur extends CardImpl {
+public final class HopeOfGhirapur extends CardImpl {
 
     private static final FilterPlayer filter = new FilterPlayer("player who was dealt combat damage by {this} this turn");
 

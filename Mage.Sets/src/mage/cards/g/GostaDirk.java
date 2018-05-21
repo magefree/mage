@@ -44,7 +44,7 @@ import mage.game.permanent.Permanent;
  *
  * @author L_J
  */
-public class GostaDirk extends CardImpl {
+public final class GostaDirk extends CardImpl {
 
     public GostaDirk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{W}{U}{U}");

@@ -64,7 +64,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author spjspj
  */
-public class PatronOfTheVein extends CardImpl {
+public final class PatronOfTheVein extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
 

@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class GrayMerchantOfAsphodel extends CardImpl {
+public final class GrayMerchantOfAsphodel extends CardImpl {
 
     public GrayMerchantOfAsphodel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");

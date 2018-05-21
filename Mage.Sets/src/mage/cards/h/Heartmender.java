@@ -49,7 +49,7 @@ import mage.game.permanent.Permanent;
  *
  * @author jeffwadsworth
  */
-public class Heartmender extends CardImpl {
+public final class Heartmender extends CardImpl {
 
     public Heartmender(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G/W}{G/W}");

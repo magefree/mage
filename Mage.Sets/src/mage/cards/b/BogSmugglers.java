@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class BogSmugglers extends CardImpl {
+public final class BogSmugglers extends CardImpl {
 
     public BogSmugglers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");

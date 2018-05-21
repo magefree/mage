@@ -45,7 +45,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author LevelX2
  */
-public class RuinousGremlin extends CardImpl {
+public final class RuinousGremlin extends CardImpl {
 
     public RuinousGremlin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");

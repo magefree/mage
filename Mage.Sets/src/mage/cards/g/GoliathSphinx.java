@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class GoliathSphinx extends CardImpl {
+public final class GoliathSphinx extends CardImpl {
 
     public GoliathSphinx (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}{U}");

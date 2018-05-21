@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class RelicSeeker extends CardImpl {
+public final class RelicSeeker extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("an Equipment card");
 

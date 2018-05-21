@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author jeffwadsworth
  *
  */
-public class Woeleecher extends CardImpl {
+public final class Woeleecher extends CardImpl {
 
     public Woeleecher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}");

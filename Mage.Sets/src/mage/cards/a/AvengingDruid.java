@@ -42,7 +42,7 @@ import mage.filter.common.FilterLandCard;
  *
  * @author Styxo
  */
-public class AvengingDruid extends CardImpl {
+public final class AvengingDruid extends CardImpl {
 
     public AvengingDruid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");

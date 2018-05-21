@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author fireshoes
  */
-public class CourageousOutrider extends CardImpl {
+public final class CourageousOutrider extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("a Human card");
 

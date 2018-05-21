@@ -39,7 +39,7 @@ import mage.constants.Duration;
  *
  * @author Viserion
  */
-public class Explore extends CardImpl {
+public final class Explore extends CardImpl {
 
     public Explore(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{G}");

@@ -41,7 +41,7 @@ import mage.constants.Duration;
  *
  * @author Plopman
  */
-public class Scorchwalker extends CardImpl {
+public final class Scorchwalker extends CardImpl {
 
     public Scorchwalker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

@@ -41,7 +41,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author North
  */
-public class VileRebirth extends CardImpl {
+public final class VileRebirth extends CardImpl {
 
     public VileRebirth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}");

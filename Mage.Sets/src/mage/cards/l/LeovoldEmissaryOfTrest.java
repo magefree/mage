@@ -47,7 +47,7 @@ import mage.watchers.common.CardsAmountDrawnThisTurnWatcher;
  *
  * @author maxlebedev
  */
-public class LeovoldEmissaryOfTrest extends CardImpl {
+public final class LeovoldEmissaryOfTrest extends CardImpl {
 
     public LeovoldEmissaryOfTrest(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{G}{U}");

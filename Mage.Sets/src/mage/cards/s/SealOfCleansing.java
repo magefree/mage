@@ -44,7 +44,7 @@ import java.util.UUID;
  *
  * @author Plopman
  */
-public class SealOfCleansing extends CardImpl {
+public final class SealOfCleansing extends CardImpl {
     
     public SealOfCleansing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");

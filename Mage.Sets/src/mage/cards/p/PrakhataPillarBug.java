@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class PrakhataPillarBug extends CardImpl {
+public final class PrakhataPillarBug extends CardImpl {
 
     public PrakhataPillarBug(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");

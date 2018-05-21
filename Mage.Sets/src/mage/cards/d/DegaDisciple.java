@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class DegaDisciple extends CardImpl {
+public final class DegaDisciple extends CardImpl {
 
     public DegaDisciple(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");

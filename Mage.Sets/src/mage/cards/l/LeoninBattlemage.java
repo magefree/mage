@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LoneFox
  */
-public class LeoninBattlemage extends CardImpl {
+public final class LeoninBattlemage extends CardImpl {
 
     public LeoninBattlemage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

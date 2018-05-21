@@ -56,7 +56,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Plopman
  */
-public class MinionReflector extends CardImpl {
+public final class MinionReflector extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creature");
 

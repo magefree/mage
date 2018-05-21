@@ -38,7 +38,7 @@ import mage.target.common.TargetAnyTarget;
 /**
  * @author Loki
  */
-public class PunctureBlast extends CardImpl {
+public final class PunctureBlast extends CardImpl {
 
     public PunctureBlast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{R}");

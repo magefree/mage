@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author North
  */
-public class DefyDeath extends CardImpl {
+public final class DefyDeath extends CardImpl {
 
     public DefyDeath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{W}{W}");

@@ -57,7 +57,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author TheElk801
  */
-public class OathOfTeferi extends CardImpl {
+public final class OathOfTeferi extends CardImpl {
 
     private final static FilterControlledPermanent filter = new FilterControlledPermanent("another target permanent you control");
 

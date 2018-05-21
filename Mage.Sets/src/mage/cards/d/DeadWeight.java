@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Alvin
  */
-public class DeadWeight extends CardImpl {
+public final class DeadWeight extends CardImpl {
 
     public DeadWeight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}");

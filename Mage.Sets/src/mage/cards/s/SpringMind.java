@@ -43,7 +43,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author fireshoes
  */
-public class SpringMind extends SplitCard {
+public final class SpringMind extends SplitCard {
 
     public SpringMind(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, new CardType[]{CardType.INSTANT}, "{2}{G}", "{4}{U}{U}", SpellAbilityType.SPLIT_AFTERMATH);

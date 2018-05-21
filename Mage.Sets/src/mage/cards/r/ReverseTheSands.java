@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class ReverseTheSands extends CardImpl {
+public final class ReverseTheSands extends CardImpl {
 
     public ReverseTheSands(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{6}{W}{W}");

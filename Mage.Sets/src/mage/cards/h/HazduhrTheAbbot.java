@@ -54,7 +54,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author TheElk801 & L_J
  */
-public class HazduhrTheAbbot extends CardImpl {
+public final class HazduhrTheAbbot extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("white creature you control");
 

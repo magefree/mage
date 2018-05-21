@@ -52,7 +52,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class SlipperyScoundrel extends CardImpl {
+public final class SlipperyScoundrel extends CardImpl {
 
     public SlipperyScoundrel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");

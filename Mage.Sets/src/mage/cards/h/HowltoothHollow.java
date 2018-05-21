@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class HowltoothHollow extends CardImpl {
+public final class HowltoothHollow extends CardImpl {
 
     public HowltoothHollow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

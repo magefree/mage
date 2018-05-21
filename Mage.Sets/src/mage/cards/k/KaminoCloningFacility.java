@@ -49,7 +49,7 @@ import mage.game.permanent.token.TrooperToken;
  *
  * @author Styxo
  */
-public class KaminoCloningFacility extends CardImpl {
+public final class KaminoCloningFacility extends CardImpl {
 
     private static final FilterSpell FILTER = new FilterSpell("a Trooper spell");
 

@@ -49,7 +49,7 @@ import mage.target.TargetPlayer;
 /**
  * @author mluds
  */
-public class ParasiticStrix extends CardImpl {
+public final class ParasiticStrix extends CardImpl {
 
     public ParasiticStrix(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}{U}");

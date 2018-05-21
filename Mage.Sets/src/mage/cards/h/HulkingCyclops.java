@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author Plopman
  */
-public class HulkingCyclops extends CardImpl {
+public final class HulkingCyclops extends CardImpl {
 
     public HulkingCyclops(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");

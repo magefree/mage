@@ -46,7 +46,7 @@ import mage.filter.common.FilterAttackingCreature;
  *
  * @author LevelX2
  */
-public class ConsulsLieutenant extends CardImpl {
+public final class ConsulsLieutenant extends CardImpl {
 
     public ConsulsLieutenant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{W}");

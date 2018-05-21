@@ -42,7 +42,7 @@ import mage.counters.CounterType;
  *
  * @author fireshoes
  */
-public class ManagorgerHydra extends CardImpl {
+public final class ManagorgerHydra extends CardImpl {
 
     public ManagorgerHydra(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

@@ -45,7 +45,7 @@ import mage.game.Game;
  *
  * @author LevelX2
  */
-public class OgreJailbreaker extends CardImpl {
+public final class OgreJailbreaker extends CardImpl {
 
     public OgreJailbreaker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

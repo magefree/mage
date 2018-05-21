@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class SoullessOne extends CardImpl {
+public final class SoullessOne extends CardImpl {
 
     public SoullessOne(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

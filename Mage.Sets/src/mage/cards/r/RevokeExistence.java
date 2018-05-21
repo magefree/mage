@@ -40,7 +40,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class RevokeExistence extends CardImpl {
+public final class RevokeExistence extends CardImpl {
 
     public RevokeExistence(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{W}");

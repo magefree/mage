@@ -48,7 +48,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class SwiftfootBoots extends CardImpl {
+public final class SwiftfootBoots extends CardImpl {
 
     public SwiftfootBoots(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

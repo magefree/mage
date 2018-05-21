@@ -44,7 +44,7 @@ import mage.constants.TargetController;
  *
  * @author fireshoes
  */
-public class MindRaker extends CardImpl {
+public final class MindRaker extends CardImpl {
 
     public MindRaker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

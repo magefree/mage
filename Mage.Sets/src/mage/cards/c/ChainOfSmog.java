@@ -46,7 +46,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author TheElk801
  */
-public class ChainOfSmog extends CardImpl {
+public final class ChainOfSmog extends CardImpl {
 
     public ChainOfSmog(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}");

@@ -51,7 +51,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class PutridCyclops extends CardImpl {
+public final class PutridCyclops extends CardImpl {
 
     public PutridCyclops(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");

@@ -42,7 +42,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LevelX2
  */
-public class GoblinSettler extends CardImpl {
+public final class GoblinSettler extends CardImpl {
 
     public GoblinSettler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

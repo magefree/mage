@@ -48,7 +48,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author fireshoes
  */
-public class GontisAetherHeart extends CardImpl {
+public final class GontisAetherHeart extends CardImpl {
 
     private static final FilterArtifactPermanent filter = new FilterArtifactPermanent("{this} or another artifact");
 

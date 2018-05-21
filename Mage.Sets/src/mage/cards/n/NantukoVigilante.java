@@ -46,7 +46,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class NantukoVigilante extends CardImpl {
+public final class NantukoVigilante extends CardImpl {
 
     public NantukoVigilante(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

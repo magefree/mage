@@ -44,7 +44,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author fireshoes
  */
-public class LilianasInfluence extends CardImpl {
+public final class LilianasInfluence extends CardImpl {
 
     private final static FilterCard filter = new FilterCard("Liliana, Death Wielder");
     private final static FilterCreaturePermanent filterCreatures = new FilterCreaturePermanent("creature you don't control");

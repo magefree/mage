@@ -47,7 +47,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author emerald000
  */
-public class Tithe extends CardImpl {
+public final class Tithe extends CardImpl {
 
     public Tithe(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");

@@ -47,7 +47,7 @@ import mage.util.CardUtil;
  *
  * @author jeffwadsworth
  */
-public class FuneralPyre extends CardImpl {
+public final class FuneralPyre extends CardImpl {
 
     public FuneralPyre(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{W}");

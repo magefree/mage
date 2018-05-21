@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class EzurisPredation extends CardImpl {
+public final class EzurisPredation extends CardImpl {
 
     public EzurisPredation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{G}{G}{G}");

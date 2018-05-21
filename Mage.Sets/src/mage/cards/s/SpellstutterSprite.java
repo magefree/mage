@@ -51,7 +51,7 @@ import mage.target.TargetSpell;
  *
  * @author LevelX2
  */
-public class SpellstutterSprite extends CardImpl {
+public final class SpellstutterSprite extends CardImpl {
     
     static final FilterPermanent filter = new FilterPermanent("number of Faeries you control");
     static {

@@ -42,7 +42,7 @@ import mage.constants.SuperType;
  *
  * @author LoneFox
  */
-public class Gallowbraid extends CardImpl {
+public final class Gallowbraid extends CardImpl {
 
     public Gallowbraid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");

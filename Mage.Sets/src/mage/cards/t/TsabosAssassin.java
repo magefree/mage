@@ -52,7 +52,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author TheElk801
  */
-public class TsabosAssassin extends CardImpl {
+public final class TsabosAssassin extends CardImpl {
 
     public TsabosAssassin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");

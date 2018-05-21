@@ -50,7 +50,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author jeffwadsworth
  */
-public class Voidwalk extends CardImpl {
+public final class Voidwalk extends CardImpl {
 
     public Voidwalk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{U}");

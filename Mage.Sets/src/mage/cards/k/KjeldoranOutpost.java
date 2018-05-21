@@ -51,7 +51,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class KjeldoranOutpost extends CardImpl {
+public final class KjeldoranOutpost extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Plains");
 

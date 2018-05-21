@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class AleshasVanguard extends CardImpl {
+public final class AleshasVanguard extends CardImpl {
 
     public AleshasVanguard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

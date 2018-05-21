@@ -46,7 +46,7 @@ import mage.game.permanent.token.GoblinToken;
  *
  * @author LevelX2
  */
-public class KathariBomber extends CardImpl {
+public final class KathariBomber extends CardImpl {
 
     public KathariBomber(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{R}");

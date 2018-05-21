@@ -45,7 +45,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Markedagain
  */
-public class GlenElendraPranksters extends CardImpl {
+public final class GlenElendraPranksters extends CardImpl {
 
     public GlenElendraPranksters(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");

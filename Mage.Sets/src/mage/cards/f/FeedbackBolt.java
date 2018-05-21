@@ -41,7 +41,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  *
  * @author Plopman
  */
-public class FeedbackBolt extends CardImpl {
+public final class FeedbackBolt extends CardImpl {
 
     public FeedbackBolt(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{4}{R}");

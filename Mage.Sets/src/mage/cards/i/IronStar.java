@@ -45,7 +45,7 @@ import mage.game.stack.Spell;
  *
  * @author KholdFuzion
  */
-public class IronStar extends CardImpl {
+public final class IronStar extends CardImpl {
 
     public IronStar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");

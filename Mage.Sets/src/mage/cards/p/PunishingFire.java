@@ -46,7 +46,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author North
  */
-public class PunishingFire extends CardImpl {
+public final class PunishingFire extends CardImpl {
 
     public PunishingFire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");

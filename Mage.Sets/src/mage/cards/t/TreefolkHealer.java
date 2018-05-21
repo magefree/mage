@@ -46,7 +46,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author fireshoes
  */
-public class TreefolkHealer extends CardImpl {
+public final class TreefolkHealer extends CardImpl {
 
     public TreefolkHealer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");

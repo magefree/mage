@@ -58,7 +58,7 @@ import java.util.UUID;
  *
  * @author Blinke
  */
-public class ForgottenAncient extends CardImpl {
+public final class ForgottenAncient extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
     static {
         filter.add(new AnotherPredicate());

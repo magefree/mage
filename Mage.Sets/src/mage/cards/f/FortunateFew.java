@@ -50,7 +50,7 @@ import mage.target.common.TargetNonlandPermanent;
  *
  * @author spjspj
  */
-public class FortunateFew extends CardImpl {
+public final class FortunateFew extends CardImpl {
 
     public FortunateFew(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{W}{W}");

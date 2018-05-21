@@ -41,7 +41,7 @@ import mage.constants.CardType;
  *
  * @author LevelX2
  */
-public class TempleOfEnlightenment extends CardImpl {
+public final class TempleOfEnlightenment extends CardImpl {
 
     public TempleOfEnlightenment(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

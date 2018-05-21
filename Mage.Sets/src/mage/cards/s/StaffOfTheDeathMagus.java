@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author Plopman
  */
-public class StaffOfTheDeathMagus extends CardImpl {
+public final class StaffOfTheDeathMagus extends CardImpl {
 
     private static final FilterSpell filterSpell = new FilterSpell("a black spell");
     private static final FilterLandPermanent filterLand = new FilterLandPermanent("a Swamp");

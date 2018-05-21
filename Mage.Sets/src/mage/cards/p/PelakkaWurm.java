@@ -43,7 +43,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class PelakkaWurm extends CardImpl {
+public final class PelakkaWurm extends CardImpl {
 
     public PelakkaWurm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}{G}");

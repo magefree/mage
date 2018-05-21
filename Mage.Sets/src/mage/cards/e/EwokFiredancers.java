@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Styxo
  */
-public class EwokFiredancers extends CardImpl {
+public final class EwokFiredancers extends CardImpl {
 
     public EwokFiredancers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

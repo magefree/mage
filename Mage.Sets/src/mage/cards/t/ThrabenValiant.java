@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class ThrabenValiant extends CardImpl {
+public final class ThrabenValiant extends CardImpl {
 
     public ThrabenValiant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

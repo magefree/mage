@@ -52,7 +52,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class CapriciousEfreet extends CardImpl {
+public final class CapriciousEfreet extends CardImpl {
 
     private static final FilterNonlandPermanent filterControlled = new FilterNonlandPermanent("nonland permanent you control");
     private static final FilterNonlandPermanent filterNotControlled = new FilterNonlandPermanent("nonland permanent you don't control");

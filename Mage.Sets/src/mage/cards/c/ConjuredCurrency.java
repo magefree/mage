@@ -44,7 +44,7 @@ import mage.target.TargetPermanent;
 /**
  * @author LevelX2
  */
-public class ConjuredCurrency extends CardImpl {
+public final class ConjuredCurrency extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("permanent you neither own nor control");
 

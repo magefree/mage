@@ -59,7 +59,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author L_J (based on jeffwadsworth)
  */
-public class SerraBestiary extends CardImpl {
+public final class SerraBestiary extends CardImpl {
 
     public SerraBestiary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{W}{W}");

@@ -41,7 +41,7 @@ import mage.target.common.TargetOpponentsCreaturePermanent;
  *
  * @author Styxo
  */
-public class HeadHunting extends CardImpl {
+public final class HeadHunting extends CardImpl {
 
     public HeadHunting(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{B}");

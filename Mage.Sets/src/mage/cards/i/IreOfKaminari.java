@@ -43,7 +43,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class IreOfKaminari extends CardImpl {
+public final class IreOfKaminari extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Arcane");
 

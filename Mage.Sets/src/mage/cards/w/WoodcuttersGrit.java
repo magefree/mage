@@ -42,7 +42,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class WoodcuttersGrit extends CardImpl {
+public final class WoodcuttersGrit extends CardImpl {
 
     public WoodcuttersGrit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}");

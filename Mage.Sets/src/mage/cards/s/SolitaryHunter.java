@@ -46,7 +46,7 @@ import mage.constants.TargetController;
  *
  * @author LevelX2
  */
-public class SolitaryHunter extends CardImpl {
+public final class SolitaryHunter extends CardImpl {
 
     public SolitaryHunter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

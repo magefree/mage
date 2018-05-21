@@ -46,7 +46,7 @@ import mage.watchers.common.ManaSpentToCastWatcher;
  *
  * @author emerald000
  */
-public class PatagiaViper extends CardImpl {
+public final class PatagiaViper extends CardImpl {
 
     public PatagiaViper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");

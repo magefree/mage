@@ -47,7 +47,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  *
  * @author emerald000
  */
-public class JuniperOrderRanger extends CardImpl {
+public final class JuniperOrderRanger extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
     static {

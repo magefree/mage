@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author LevelX2
  */
-public class SadisticAugermage extends CardImpl {
+public final class SadisticAugermage extends CardImpl {
 
     public SadisticAugermage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

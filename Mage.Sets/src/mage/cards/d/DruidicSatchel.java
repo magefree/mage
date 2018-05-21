@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author North
  */
-public class DruidicSatchel extends CardImpl {
+public final class DruidicSatchel extends CardImpl {
 
     public DruidicSatchel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");

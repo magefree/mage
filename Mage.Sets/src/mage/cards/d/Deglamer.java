@@ -40,7 +40,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class Deglamer extends CardImpl {
+public final class Deglamer extends CardImpl {
 
     public Deglamer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}");

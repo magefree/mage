@@ -52,7 +52,7 @@ import mage.watchers.common.CardsAmountDrawnThisTurnWatcher;
  *
  * @author jeffwadsworth
  */
-public class ArchmageAscension extends CardImpl {
+public final class ArchmageAscension extends CardImpl {
 
     public ArchmageAscension(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");

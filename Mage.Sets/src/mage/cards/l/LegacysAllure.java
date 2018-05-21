@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author LevelX2
  */
-public class LegacysAllure extends CardImpl {
+public final class LegacysAllure extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power less than or equal to the number of treasure counters on {this}");
 

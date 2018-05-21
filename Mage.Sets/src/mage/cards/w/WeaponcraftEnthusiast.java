@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class WeaponcraftEnthusiast extends CardImpl {
+public final class WeaponcraftEnthusiast extends CardImpl {
 
     public WeaponcraftEnthusiast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

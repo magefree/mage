@@ -42,7 +42,7 @@ import mage.game.Game;
  *
  * @author Styxo
  */
-public class BenedictionOfMoons extends CardImpl {
+public final class BenedictionOfMoons extends CardImpl {
 
     public BenedictionOfMoons(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{W}");

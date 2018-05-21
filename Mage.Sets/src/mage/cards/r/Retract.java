@@ -39,7 +39,7 @@ import mage.filter.common.FilterControlledArtifactPermanent;
  *
  * @author LevelX2
  */
-public class Retract extends CardImpl {
+public final class Retract extends CardImpl {
 
     public Retract(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");

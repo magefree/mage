@@ -49,7 +49,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LoneFox
  */
-public class PoolingVenom extends CardImpl {
+public final class PoolingVenom extends CardImpl {
 
     public PoolingVenom(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}");

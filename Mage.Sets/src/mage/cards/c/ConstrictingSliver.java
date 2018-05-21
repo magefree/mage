@@ -52,7 +52,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class ConstrictingSliver extends CardImpl {
+public final class ConstrictingSliver extends CardImpl {
 
     private static final FilterCreaturePermanent filterTarget = new FilterCreaturePermanent("creature an opponent controls");
 

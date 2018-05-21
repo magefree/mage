@@ -39,7 +39,7 @@ import mage.constants.CardType;
  *
  * @author LevelX2
  */
-public class InnerFire extends CardImpl {
+public final class InnerFire extends CardImpl {
 
     public InnerFire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}");

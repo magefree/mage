@@ -39,7 +39,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  *
  * @author Loki
  */
-public class TasteOfBlood extends CardImpl {
+public final class TasteOfBlood extends CardImpl {
 
     public TasteOfBlood(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{B}");

@@ -57,7 +57,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author L_J
  */
-public class HarvestMage extends CardImpl {
+public final class HarvestMage extends CardImpl {
 
     public HarvestMage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}");

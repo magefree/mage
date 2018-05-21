@@ -50,7 +50,7 @@ import mage.game.permanent.token.KithkinToken;
  *
  * @author Styxo
  */
-public class MilitiasPride extends CardImpl {
+public final class MilitiasPride extends CardImpl {
 
     public MilitiasPride(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.ENCHANTMENT},"{1}{W}");

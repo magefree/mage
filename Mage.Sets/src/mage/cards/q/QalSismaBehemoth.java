@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class QalSismaBehemoth extends CardImpl {
+public final class QalSismaBehemoth extends CardImpl {
 
     public QalSismaBehemoth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

@@ -45,7 +45,7 @@ import mage.players.Player;
 /**
  * @author nantuko
  */
-public class TimelyReinforcements extends CardImpl {
+public final class TimelyReinforcements extends CardImpl {
 
     public TimelyReinforcements(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{W}");

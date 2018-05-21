@@ -40,7 +40,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class SlipThroughSpace extends CardImpl {
+public final class SlipThroughSpace extends CardImpl {
 
     public SlipThroughSpace(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{U}");

@@ -42,7 +42,7 @@ import mage.constants.*;
  *
  * @author North
  */
-public class BlightSickle extends CardImpl {
+public final class BlightSickle extends CardImpl {
 
     public BlightSickle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

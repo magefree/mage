@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class WingedCoatl extends CardImpl {
+public final class WingedCoatl extends CardImpl {
 
     public WingedCoatl (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{U}");

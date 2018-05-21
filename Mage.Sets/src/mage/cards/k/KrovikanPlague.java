@@ -61,7 +61,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author L_J
  */
-public class KrovikanPlague extends CardImpl {
+public final class KrovikanPlague extends CardImpl {
     
     private static final FilterControlledCreaturePermanent filterNonWall = new FilterControlledCreaturePermanent("non-Wall creature you control");
 

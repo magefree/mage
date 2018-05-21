@@ -42,7 +42,7 @@ import mage.constants.CardType;
  *
  * @author Loki
  */
-public class ChromaticSphere extends CardImpl {
+public final class ChromaticSphere extends CardImpl {
 
     public ChromaticSphere(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");

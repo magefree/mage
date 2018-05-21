@@ -40,7 +40,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LoneFox
  */
-public class ChangeOfHeart extends CardImpl {
+public final class ChangeOfHeart extends CardImpl {
 
     public ChangeOfHeart(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");

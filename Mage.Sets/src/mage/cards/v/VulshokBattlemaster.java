@@ -47,7 +47,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Derpthemeus
  */
-public class VulshokBattlemaster extends CardImpl {
+public final class VulshokBattlemaster extends CardImpl {
 
     public VulshokBattlemaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");

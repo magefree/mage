@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author ciaccona007
  */
-public class FrilledSandwalla extends CardImpl {
+public final class FrilledSandwalla extends CardImpl {
 
     public FrilledSandwalla(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}");

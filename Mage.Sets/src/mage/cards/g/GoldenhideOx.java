@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class GoldenhideOx extends CardImpl {
+public final class GoldenhideOx extends CardImpl {
 
     public GoldenhideOx(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{5}{G}");

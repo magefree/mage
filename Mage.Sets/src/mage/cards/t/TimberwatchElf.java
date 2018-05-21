@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class TimberwatchElf extends CardImpl {
+public final class TimberwatchElf extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Elves");
 

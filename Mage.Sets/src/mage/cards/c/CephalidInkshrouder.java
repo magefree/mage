@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author TheElk801
  */
-public class CephalidInkshrouder extends CardImpl {
+public final class CephalidInkshrouder extends CardImpl {
 
     public CephalidInkshrouder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");

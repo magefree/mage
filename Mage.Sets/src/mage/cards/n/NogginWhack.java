@@ -51,7 +51,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class NogginWhack extends CardImpl {
+public final class NogginWhack extends CardImpl {
 
     public NogginWhack(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.SORCERY},"{2}{B}{B}");

@@ -46,7 +46,7 @@ import mage.players.Player;
 /**
  * @author noxx
  */
-public class OtherworldAtlas extends CardImpl {
+public final class OtherworldAtlas extends CardImpl {
 
     public OtherworldAtlas(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");

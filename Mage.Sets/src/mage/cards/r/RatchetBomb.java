@@ -48,7 +48,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Loki
  */
-public class RatchetBomb extends CardImpl {
+public final class RatchetBomb extends CardImpl {
 
     public RatchetBomb (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

@@ -44,7 +44,7 @@ import mage.filter.common.FilterCreatureCard;
  *
  * @author fireshoes
  */
-public class NightstalkerEngine extends CardImpl {
+public final class NightstalkerEngine extends CardImpl {
 
     public NightstalkerEngine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");

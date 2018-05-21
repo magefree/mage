@@ -41,7 +41,7 @@ import mage.constants.CardType;
  *
  * @author LevelX2
  */
-public class TempleOfAbandon extends CardImpl {
+public final class TempleOfAbandon extends CardImpl {
 
     public TempleOfAbandon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

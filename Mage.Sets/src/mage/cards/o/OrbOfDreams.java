@@ -46,7 +46,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class OrbOfDreams extends CardImpl {
+public final class OrbOfDreams extends CardImpl {
 
     public OrbOfDreams(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

@@ -42,7 +42,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author TheElk801
  */
-public class SkitteringSurveyor extends CardImpl {
+public final class SkitteringSurveyor extends CardImpl {
 
     public SkitteringSurveyor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");

@@ -47,7 +47,7 @@ import mage.constants.SubType;
  *
  * @author Loki, noxx
  */
-public class NirkanaCutthroat extends LevelerCard {
+public final class NirkanaCutthroat extends LevelerCard {
 
     public NirkanaCutthroat (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

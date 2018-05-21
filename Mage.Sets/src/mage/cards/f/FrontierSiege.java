@@ -54,7 +54,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class FrontierSiege extends CardImpl {
+public final class FrontierSiege extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature with flying");
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("a creature you don't control");

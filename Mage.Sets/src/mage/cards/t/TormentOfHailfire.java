@@ -45,7 +45,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class TormentOfHailfire extends CardImpl {
+public final class TormentOfHailfire extends CardImpl {
 
     public TormentOfHailfire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{B}{B}");

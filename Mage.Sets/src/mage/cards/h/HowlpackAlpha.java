@@ -54,7 +54,7 @@ import mage.game.permanent.token.WolfToken;
  *
  * @author North, noxx
  */
-public class HowlpackAlpha extends CardImpl {
+public final class HowlpackAlpha extends CardImpl {
 
     private static final String ruleText = "At the beginning of your end step, create a 2/2 green Wolf creature token";
 

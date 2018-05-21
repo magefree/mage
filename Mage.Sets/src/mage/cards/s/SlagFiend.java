@@ -44,7 +44,7 @@ import mage.filter.common.FilterArtifactCard;
  *
  * @author North
  */
-public class SlagFiend extends CardImpl {
+public final class SlagFiend extends CardImpl {
 
     public SlagFiend(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");

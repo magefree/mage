@@ -49,7 +49,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward
  */
-public class Immerwolf extends CardImpl {
+public final class Immerwolf extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Wolf and Werewolf creatures");
 

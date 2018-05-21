@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class PricklyBoggart extends CardImpl {
+public final class PricklyBoggart extends CardImpl {
 
     public PricklyBoggart(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");

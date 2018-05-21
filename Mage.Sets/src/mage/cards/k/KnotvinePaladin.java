@@ -45,7 +45,7 @@ import mage.filter.predicate.permanent.TappedPredicate;
  *
  * @author Loki
  */
-public class KnotvinePaladin extends CardImpl {
+public final class KnotvinePaladin extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creature you control");
 
     static {

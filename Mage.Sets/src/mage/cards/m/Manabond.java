@@ -48,7 +48,7 @@ import java.util.UUID;
  *
  * @author Plopman
  */
-public class Manabond extends CardImpl {
+public final class Manabond extends CardImpl {
 
     public Manabond(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}");

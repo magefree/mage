@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class SlaughterDrone extends CardImpl {
+public final class SlaughterDrone extends CardImpl {
 
     public SlaughterDrone(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

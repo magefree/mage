@@ -40,7 +40,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class SpeciesGorger extends CardImpl {
+public final class SpeciesGorger extends CardImpl {
 
     public SpeciesGorger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{U}");

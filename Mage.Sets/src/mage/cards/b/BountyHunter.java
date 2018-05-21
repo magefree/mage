@@ -52,7 +52,7 @@ import java.util.UUID;
  *
  * @author LoneFox
  */
-public class BountyHunter extends CardImpl {
+public final class BountyHunter extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack creature");
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creature with a bounty counter on it");

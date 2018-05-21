@@ -46,7 +46,7 @@ import mage.watchers.common.RevoltWatcher;
  *
  * @author Styxo
  */
-public class AirdropAeronauts extends CardImpl {
+public final class AirdropAeronauts extends CardImpl {
 
     public AirdropAeronauts(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");

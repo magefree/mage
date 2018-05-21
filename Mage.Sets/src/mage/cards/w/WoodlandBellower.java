@@ -56,7 +56,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author fireshoes
  */
-public class WoodlandBellower extends CardImpl {
+public final class WoodlandBellower extends CardImpl {
 
     public WoodlandBellower(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");

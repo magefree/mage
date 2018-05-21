@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author jonubuu
  */
-public class GeothermalCrevice extends CardImpl {
+public final class GeothermalCrevice extends CardImpl {
 
     public GeothermalCrevice(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

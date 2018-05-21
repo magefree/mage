@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Loki
  */
-public class SeedguideAsh extends CardImpl {
+public final class SeedguideAsh extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Forest");
 

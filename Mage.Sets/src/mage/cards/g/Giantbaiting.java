@@ -43,7 +43,7 @@ import mage.game.permanent.token.GiantBaitingGiantWarriorToken;
  *
  * @author jeffwadsworth
  */
-public class Giantbaiting extends CardImpl {
+public final class Giantbaiting extends CardImpl {
 
     public Giantbaiting(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{R/G}");

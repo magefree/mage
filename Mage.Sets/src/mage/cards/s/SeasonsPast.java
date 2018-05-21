@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author LevelX2
  */
-public class SeasonsPast extends CardImpl {
+public final class SeasonsPast extends CardImpl {
 
     public SeasonsPast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{G}{G}");

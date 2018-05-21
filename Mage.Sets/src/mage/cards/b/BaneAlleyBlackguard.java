@@ -41,7 +41,7 @@ import mage.constants.SubType;
  */
 
 
-public class BaneAlleyBlackguard extends CardImpl {
+public final class BaneAlleyBlackguard extends CardImpl {
 
     public BaneAlleyBlackguard (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

@@ -40,7 +40,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author L_J
  */
-public class MomentOfCraving extends CardImpl {
+public final class MomentOfCraving extends CardImpl {
 
     public MomentOfCraving(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{B}");

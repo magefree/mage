@@ -39,7 +39,7 @@ import mage.filter.common.FilterCreatureCard;
  *
  * @author North
  */
-public class GrimFlowering extends CardImpl {
+public final class GrimFlowering extends CardImpl {
 
     public GrimFlowering(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{G}");

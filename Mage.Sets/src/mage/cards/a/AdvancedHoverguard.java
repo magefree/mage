@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class AdvancedHoverguard extends CardImpl {
+public final class AdvancedHoverguard extends CardImpl {
 
     public AdvancedHoverguard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");

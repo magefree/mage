@@ -46,7 +46,7 @@ import mage.game.events.GameEvent;
 /**
  * @author Plopman
  */
-public class EnergyField extends CardImpl {
+public final class EnergyField extends CardImpl {
 
     public EnergyField(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");

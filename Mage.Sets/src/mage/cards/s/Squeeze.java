@@ -42,7 +42,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author fireshoes
  */
-public class Squeeze extends CardImpl {
+public final class Squeeze extends CardImpl {
     
     private static final FilterCard filter = new FilterCard("Sorcery spells");
     

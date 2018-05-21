@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class VensersSliver extends CardImpl {
+public final class VensersSliver extends CardImpl {
 
     public VensersSliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{5}");

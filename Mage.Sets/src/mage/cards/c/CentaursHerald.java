@@ -45,7 +45,7 @@ import mage.game.permanent.token.CentaurToken;
  *
  * @author LevelX2
  */
-public class CentaursHerald extends CardImpl {
+public final class CentaursHerald extends CardImpl {
 
     public CentaursHerald(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");

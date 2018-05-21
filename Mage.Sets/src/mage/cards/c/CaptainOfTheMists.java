@@ -52,7 +52,7 @@ import mage.target.TargetPermanent;
  *
  * @author noxx
  */
-public class CaptainOfTheMists extends CardImpl {
+public final class CaptainOfTheMists extends CardImpl {
 
     private static final FilterPermanent filter = new FilterControlledCreaturePermanent("another Human");
 

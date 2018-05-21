@@ -49,7 +49,7 @@ import mage.target.TargetCard;
  *
  * @author LevelX2
  */
-public class WriteIntoBeing extends CardImpl {
+public final class WriteIntoBeing extends CardImpl {
 
     public WriteIntoBeing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{U}");

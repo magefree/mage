@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class StormfrontPegasus extends CardImpl {
+public final class StormfrontPegasus extends CardImpl {
 
     public StormfrontPegasus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

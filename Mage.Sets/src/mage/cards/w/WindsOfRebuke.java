@@ -40,7 +40,7 @@ import mage.target.common.TargetNonlandPermanent;
  *
  * @author anonymous
  */
-public class WindsOfRebuke extends CardImpl {
+public final class WindsOfRebuke extends CardImpl {
 
     public WindsOfRebuke(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");

@@ -45,7 +45,7 @@ import mage.counters.CounterType;
  * @author LoneFox
 
  */
-public class PhyrexianScuta extends CardImpl {
+public final class PhyrexianScuta extends CardImpl {
 
     public PhyrexianScuta(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

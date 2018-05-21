@@ -60,7 +60,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author jeffwadsworth
  */
-public class ImpromptuRaid extends CardImpl {
+public final class ImpromptuRaid extends CardImpl {
 
     public ImpromptuRaid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{R/G}");

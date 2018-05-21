@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class ChorusOfTheTides extends CardImpl {
+public final class ChorusOfTheTides extends CardImpl {
 
     public ChorusOfTheTides(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");

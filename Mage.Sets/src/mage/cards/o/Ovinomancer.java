@@ -57,7 +57,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author L_J
  */
-public class Ovinomancer extends CardImpl {
+public final class Ovinomancer extends CardImpl {
     
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("basic lands");
 

@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author emerald000
  */
-public class NinThePainArtist extends CardImpl {
+public final class NinThePainArtist extends CardImpl {
 
     public NinThePainArtist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{R}");

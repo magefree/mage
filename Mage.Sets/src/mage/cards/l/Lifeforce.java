@@ -44,7 +44,7 @@ import mage.target.TargetSpell;
  *
  * @author anonymous
  */
-public class Lifeforce extends CardImpl {
+public final class Lifeforce extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("black spell");
 

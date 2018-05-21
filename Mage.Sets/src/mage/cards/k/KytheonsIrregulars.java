@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class KytheonsIrregulars extends CardImpl {
+public final class KytheonsIrregulars extends CardImpl {
 
     public KytheonsIrregulars(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");

@@ -43,7 +43,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  *
  * @author LevelX2
  */
-public class FontOfIre extends CardImpl {
+public final class FontOfIre extends CardImpl {
 
     public FontOfIre(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");

@@ -43,7 +43,7 @@ import mage.filter.FilterPermanent;
  *
  * @author fireshoes
  */
-public class UnblinkingBleb extends CardImpl {
+public final class UnblinkingBleb extends CardImpl {
 
     public UnblinkingBleb(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");

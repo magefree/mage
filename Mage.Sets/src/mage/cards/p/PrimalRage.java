@@ -42,7 +42,7 @@ import mage.filter.StaticFilters;
  *
  * @author Loki
  */
-public class PrimalRage extends CardImpl {
+public final class PrimalRage extends CardImpl {
 
     public PrimalRage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");

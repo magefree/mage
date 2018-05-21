@@ -54,7 +54,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class AkroanHorse extends CardImpl {
+public final class AkroanHorse extends CardImpl {
 
     public AkroanHorse(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");

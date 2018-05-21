@@ -54,7 +54,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author L_J
  */
-public class SpikeTiller extends CardImpl {
+public final class SpikeTiller extends CardImpl {
 
     public SpikeTiller(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");

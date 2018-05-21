@@ -47,7 +47,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class Smokebraider extends CardImpl {
+public final class Smokebraider extends CardImpl {
 
     public Smokebraider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

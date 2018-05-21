@@ -46,7 +46,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Quercitron
  */
-public class SkullCatapult extends CardImpl {
+public final class SkullCatapult extends CardImpl {
 
     public SkullCatapult(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");

@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class AngelicWall extends CardImpl {
+public final class AngelicWall extends CardImpl {
 
     public AngelicWall(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

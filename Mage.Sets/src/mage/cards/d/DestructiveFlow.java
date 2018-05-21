@@ -40,7 +40,7 @@ import mage.filter.common.FilterLandPermanent;
  *
  * @author LoneFox
  */
-public class DestructiveFlow extends CardImpl {
+public final class DestructiveFlow extends CardImpl {
 
     public DestructiveFlow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}{R}{G}");

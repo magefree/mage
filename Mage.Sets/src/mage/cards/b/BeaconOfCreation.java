@@ -43,7 +43,7 @@ import mage.game.permanent.token.InsectToken;
  *
  * @author North
  */
-public class BeaconOfCreation extends CardImpl {
+public final class BeaconOfCreation extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Forest you control");
 

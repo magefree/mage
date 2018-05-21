@@ -42,7 +42,7 @@ import mage.target.TargetPermanent;
  *
  * @author jeffwadsworth
  */
-public class TelekineticBonds extends CardImpl {
+public final class TelekineticBonds extends CardImpl {
 
     public TelekineticBonds(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{U}{U}");

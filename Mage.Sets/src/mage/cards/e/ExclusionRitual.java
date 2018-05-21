@@ -52,7 +52,7 @@ import mage.target.TargetPermanent;
 /**
  * @author Loki
  */
-public class ExclusionRitual extends CardImpl {
+public final class ExclusionRitual extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("nonland permanent");
 

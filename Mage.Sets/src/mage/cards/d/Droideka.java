@@ -45,7 +45,7 @@ import mage.target.TargetStackObject;
  *
  * @author Styxo
  */
-public class Droideka extends CardImpl {
+public final class Droideka extends CardImpl {
 
     public Droideka(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}{W}");

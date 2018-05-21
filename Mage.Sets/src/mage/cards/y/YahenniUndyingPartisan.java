@@ -52,7 +52,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author fireshoes
  */
-public class YahenniUndyingPartisan extends CardImpl {
+public final class YahenniUndyingPartisan extends CardImpl {
 
     public YahenniUndyingPartisan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");

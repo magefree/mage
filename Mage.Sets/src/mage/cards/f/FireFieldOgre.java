@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class FireFieldOgre extends CardImpl {
+public final class FireFieldOgre extends CardImpl {
 
     public FireFieldOgre(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{B}{R}");

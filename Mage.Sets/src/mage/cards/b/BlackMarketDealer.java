@@ -54,7 +54,7 @@ import java.util.UUID;
  *
  * @author Styxo
  */
-public class BlackMarketDealer extends CardImpl {
+public final class BlackMarketDealer extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a Rogue or Hunter creature you control");
 

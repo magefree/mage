@@ -40,7 +40,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class Uproot extends CardImpl {
+public final class Uproot extends CardImpl {
 
     public Uproot(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}");

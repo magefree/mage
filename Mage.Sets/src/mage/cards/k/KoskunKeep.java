@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author anonymous
  */
-public class KoskunKeep extends CardImpl {
+public final class KoskunKeep extends CardImpl {
 
     public KoskunKeep(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

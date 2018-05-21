@@ -41,7 +41,7 @@ import mage.constants.CardType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CrumblingNecropolis extends CardImpl {
+public final class CrumblingNecropolis extends CardImpl {
 
     public CrumblingNecropolis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);

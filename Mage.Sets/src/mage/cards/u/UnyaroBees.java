@@ -48,7 +48,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LoneFox
  */
-public class UnyaroBees extends CardImpl {
+public final class UnyaroBees extends CardImpl {
 
     public UnyaroBees(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{G}{G}");

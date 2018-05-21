@@ -57,7 +57,7 @@ import mage.players.Player;
  *
  * @author L_J
  */
-public class ManaCache extends CardImpl {
+public final class ManaCache extends CardImpl {
 
     public ManaCache(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}{R}");

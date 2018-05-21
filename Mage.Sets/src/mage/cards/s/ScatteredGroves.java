@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class ScatteredGroves extends CardImpl {
+public final class ScatteredGroves extends CardImpl {
 
     public ScatteredGroves(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

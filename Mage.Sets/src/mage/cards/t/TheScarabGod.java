@@ -62,7 +62,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author spjspj
  */
-public class TheScarabGod extends CardImpl {
+public final class TheScarabGod extends CardImpl {
 
     public TheScarabGod(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{B}");

@@ -44,7 +44,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author LevelX2
  */
-public class FelhidePetrifier extends CardImpl {
+public final class FelhidePetrifier extends CardImpl {
 
     public FelhidePetrifier(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

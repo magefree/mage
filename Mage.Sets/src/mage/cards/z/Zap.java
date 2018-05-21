@@ -39,7 +39,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Loki
  */
-public class Zap extends CardImpl {
+public final class Zap extends CardImpl {
 
     public Zap(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");

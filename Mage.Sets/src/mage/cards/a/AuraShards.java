@@ -43,7 +43,7 @@ import java.util.UUID;
  *
  * @author emerald000
  */
-public class AuraShards extends CardImpl {
+public final class AuraShards extends CardImpl {
 
     public AuraShards(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}{W}");

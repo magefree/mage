@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author TheElk801 & L_J
  */
-public class ShimianNightStalker extends CardImpl {
+public final class ShimianNightStalker extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("attacking creature");
 

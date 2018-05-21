@@ -48,7 +48,7 @@ import mage.constants.Zone;
  *
  * @author North
  */
-public class GuulDrazVampire extends CardImpl {
+public final class GuulDrazVampire extends CardImpl {
 
     private static final String rule1 = "As long as an opponent has 10 or less life, {this} gets +2/+1";
     private static final String rule2 = "and has intimidate. <i>(It can't be blocked except by artifact creatures and/or creatures that share a color with it.)</i>";

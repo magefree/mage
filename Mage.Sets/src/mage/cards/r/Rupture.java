@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author L_J
  */
-public class Rupture extends CardImpl {
+public final class Rupture extends CardImpl {
 
     public Rupture(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");

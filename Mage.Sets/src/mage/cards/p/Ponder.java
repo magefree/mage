@@ -37,7 +37,7 @@ import mage.constants.CardType;
 /**
  * @author nantuko
  */
-public class Ponder extends CardImpl {
+public final class Ponder extends CardImpl {
 
     public Ponder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{U}");

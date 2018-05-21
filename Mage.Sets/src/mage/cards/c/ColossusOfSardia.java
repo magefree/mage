@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author jeffwadsworth
  */
-public class ColossusOfSardia extends CardImpl {
+public final class ColossusOfSardia extends CardImpl {
 
     public ColossusOfSardia(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{9}");

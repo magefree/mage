@@ -53,7 +53,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class KalonianHydra extends CardImpl {
+public final class KalonianHydra extends CardImpl {
 
     public KalonianHydra(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");

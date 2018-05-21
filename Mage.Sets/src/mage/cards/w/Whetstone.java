@@ -44,7 +44,7 @@ import mage.players.Player;
  *
  * @author Backfir3
  */
-public class Whetstone extends CardImpl {
+public final class Whetstone extends CardImpl {
 
     public Whetstone(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

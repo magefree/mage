@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class Purge extends CardImpl {
+public final class Purge extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("artifact creature or black creature");
 

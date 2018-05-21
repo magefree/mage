@@ -51,7 +51,7 @@ import mage.target.common.TargetAttackingOrBlockingCreature;
  *
  * @author LoneFox
  */
-public class VigilantSentry extends CardImpl {
+public final class VigilantSentry extends CardImpl {
 
     public VigilantSentry(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");

@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class StuntDouble extends CardImpl {
+public final class StuntDouble extends CardImpl {
 
     public StuntDouble(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");

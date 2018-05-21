@@ -38,7 +38,7 @@ import mage.constants.CardType;
  *
  * @author Loki
  */
-public class WhitesunsPassage extends CardImpl {
+public final class WhitesunsPassage extends CardImpl {
 
     public WhitesunsPassage (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");

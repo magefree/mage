@@ -45,7 +45,7 @@ import mage.filter.predicate.permanent.EquippedPredicate;
  *
  * @author rscoates
  */
-public class CorrosiveOoze extends CardImpl {
+public final class CorrosiveOoze extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("equipped creature");
 

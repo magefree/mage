@@ -56,7 +56,7 @@ import mage.target.TargetPermanent;
  *
  * @author jeffwadsworth
  */
-public class HivisOfTheScale extends CardImpl {
+public final class HivisOfTheScale extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent();
     private static final FilterPermanent filterDragon = new FilterPermanent();

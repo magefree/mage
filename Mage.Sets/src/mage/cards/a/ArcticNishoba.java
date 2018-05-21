@@ -48,7 +48,7 @@ import mage.counters.CounterType;
  *
  * @author TheElk801
  */
-public class ArcticNishoba extends CardImpl {
+public final class ArcticNishoba extends CardImpl {
 
     public ArcticNishoba(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{G}");

@@ -56,7 +56,7 @@ import mage.players.Player;
  *
  * @author TheElk801
  */
-public class MirriWeatherlightDuelist extends CardImpl {
+public final class MirriWeatherlightDuelist extends CardImpl {
 
     public MirriWeatherlightDuelist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{W}");

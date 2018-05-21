@@ -44,7 +44,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LoneFox
  */
-public class Vivify extends CardImpl {
+public final class Vivify extends CardImpl {
 
     public Vivify(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}");

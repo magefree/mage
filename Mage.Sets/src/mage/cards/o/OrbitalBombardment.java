@@ -41,7 +41,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author Styxo
  */
-public class OrbitalBombardment extends CardImpl {
+public final class OrbitalBombardment extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Starship creatures");
 

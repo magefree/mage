@@ -56,7 +56,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class ParagonOfEternalWilds extends CardImpl {
+public final class ParagonOfEternalWilds extends CardImpl {
     
     private static final FilterCreaturePermanent filterGreen = new FilterCreaturePermanent("green creatures you control");
     private static final FilterControlledCreaturePermanent filterGreen2 = new FilterControlledCreaturePermanent("another target green creature you control");

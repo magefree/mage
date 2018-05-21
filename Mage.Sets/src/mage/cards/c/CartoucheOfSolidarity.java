@@ -50,7 +50,7 @@ import java.util.UUID;
  *
  * @author fireshoes
  */
-public class CartoucheOfSolidarity extends CardImpl {
+public final class CartoucheOfSolidarity extends CardImpl {
 
     public CartoucheOfSolidarity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{W}");

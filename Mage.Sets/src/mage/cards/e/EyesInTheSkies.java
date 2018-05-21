@@ -39,7 +39,7 @@ import mage.game.permanent.token.BirdToken;
  *
  * @author LevleX2
  */
-public class EyesInTheSkies extends CardImpl {
+public final class EyesInTheSkies extends CardImpl {
 
     public EyesInTheSkies(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{W}");

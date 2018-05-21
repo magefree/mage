@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author jeffwadsworth
  */
-public class VolrathsStronghold extends CardImpl {
+public final class VolrathsStronghold extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("creature card from your graveyard");
 

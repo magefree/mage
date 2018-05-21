@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class AnimistsAwakening extends CardImpl {
+public final class AnimistsAwakening extends CardImpl {
 
     public AnimistsAwakening(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{G}");

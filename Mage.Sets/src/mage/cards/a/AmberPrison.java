@@ -48,7 +48,7 @@ import mage.target.TargetPermanent;
  *
  * @author Quercitron
  */
-public class AmberPrison extends CardImpl {
+public final class AmberPrison extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact, creature, or land");
 

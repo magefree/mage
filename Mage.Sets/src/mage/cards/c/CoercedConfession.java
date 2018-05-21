@@ -42,7 +42,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class CoercedConfession extends CardImpl {
+public final class CoercedConfession extends CardImpl {
 
     public CoercedConfession(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{U/B}");

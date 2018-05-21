@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class SokenzanBruiser extends CardImpl {
+public final class SokenzanBruiser extends CardImpl {
 
     public SokenzanBruiser (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");

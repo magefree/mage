@@ -38,7 +38,7 @@ import mage.game.permanent.token.WarriorToken;
  *
  * @author emerald000
  */
-public class TakeUpArms extends CardImpl {
+public final class TakeUpArms extends CardImpl {
 
     public TakeUpArms(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{W}");

@@ -39,7 +39,7 @@ import mage.constants.CardType;
  *
  * @author spjspj
  */
-public class AshBarrens extends CardImpl {
+public final class AshBarrens extends CardImpl {
 
     public AshBarrens(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

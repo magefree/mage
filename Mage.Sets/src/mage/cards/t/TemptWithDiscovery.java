@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class TemptWithDiscovery extends CardImpl {
+public final class TemptWithDiscovery extends CardImpl {
 
     public TemptWithDiscovery(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}");

@@ -57,7 +57,7 @@ import mage.target.common.TargetCreaturePermanentSameController;
  *
  * @author L_J
  */
-public class SorrowsPath extends CardImpl {
+public final class SorrowsPath extends CardImpl {
     
     private static final FilterOpponentsCreaturePermanent filter = new FilterOpponentsCreaturePermanent("blocking creatures an opponent controls");
     

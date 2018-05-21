@@ -38,7 +38,7 @@ import mage.filter.common.FilterOpponentsCreaturePermanent;
  *
  * @author fireshoes
  */
-public class BlazingVolley extends CardImpl {
+public final class BlazingVolley extends CardImpl {
 
     public BlazingVolley(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{R}");

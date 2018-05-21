@@ -50,7 +50,7 @@ import mage.target.TargetPermanent;
  *
  * @author BetaSteward
  */
-public class HexParasite extends CardImpl {
+public final class HexParasite extends CardImpl {
 
     public HexParasite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{1}");

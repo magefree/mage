@@ -39,7 +39,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author LevelX2
  */
-public class DustToDust extends CardImpl {
+public final class DustToDust extends CardImpl {
 
     public DustToDust(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{W}{W}");

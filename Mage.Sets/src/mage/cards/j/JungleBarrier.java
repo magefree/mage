@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class JungleBarrier extends CardImpl {
+public final class JungleBarrier extends CardImpl {
 
     public JungleBarrier(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{U}");

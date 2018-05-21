@@ -57,7 +57,7 @@ import mage.util.CardUtil;
  *
  * @author fireshoes
  */
-public class WispweaverAngel extends CardImpl {
+public final class WispweaverAngel extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another target creature you control");
 

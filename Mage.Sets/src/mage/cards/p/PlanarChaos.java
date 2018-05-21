@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class PlanarChaos extends CardImpl {
+public final class PlanarChaos extends CardImpl {
 
     public PlanarChaos(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");

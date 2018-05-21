@@ -50,7 +50,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LevelX2
  */
-public class GenjuOfTheRealm extends CardImpl {
+public final class GenjuOfTheRealm extends CardImpl {
 
     public GenjuOfTheRealm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}{U}{B}{R}{G}");

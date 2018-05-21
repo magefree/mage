@@ -48,7 +48,7 @@ import mage.watchers.common.SpellsCastWatcher;
  *
  * @author LevelX2
  */
-public class SilburlindSnapper extends CardImpl {
+public final class SilburlindSnapper extends CardImpl {
 
     public SilburlindSnapper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}");

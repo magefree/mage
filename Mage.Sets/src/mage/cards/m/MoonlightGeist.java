@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author jeffwadsworth
  */
-public class MoonlightGeist extends CardImpl {
+public final class MoonlightGeist extends CardImpl {
 
     public MoonlightGeist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

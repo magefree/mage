@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class AngelicDestiny extends CardImpl {
+public final class AngelicDestiny extends CardImpl {
 
     public AngelicDestiny(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}{W}");

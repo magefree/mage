@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Styxo
  */
-public class WookieeBountyHunter extends CardImpl {
+public final class WookieeBountyHunter extends CardImpl {
 
     public WookieeBountyHunter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");

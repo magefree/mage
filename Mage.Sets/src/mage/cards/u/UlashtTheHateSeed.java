@@ -61,7 +61,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author emerald000
  */
-public class UlashtTheHateSeed extends CardImpl {
+public final class UlashtTheHateSeed extends CardImpl {
 
     public UlashtTheHateSeed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{G}");

@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author fireshoes
  */
-public class ThunderOfHooves extends CardImpl {
+public final class ThunderOfHooves extends CardImpl {
     
     private static final FilterCreaturePermanent filterNotFlying = new FilterCreaturePermanent();
     private static final FilterPermanent filterBeasts = new FilterPermanent();

@@ -43,7 +43,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class ReturnToTheEarth extends CardImpl {
+public final class ReturnToTheEarth extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact, enchantment, or creature with flying");
 

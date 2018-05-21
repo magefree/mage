@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author North
  */
-public class Broodwarden extends CardImpl {
+public final class Broodwarden extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Eldrazi Spawn creatures");
 

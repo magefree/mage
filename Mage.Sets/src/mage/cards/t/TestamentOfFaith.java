@@ -54,7 +54,7 @@ import mage.game.permanent.token.Token;
  *
  * @author cbt33
  */
-public class TestamentOfFaith extends CardImpl {
+public final class TestamentOfFaith extends CardImpl {
 
     public TestamentOfFaith(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}");

@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author Quercitron
  */
-public class ManaPrism extends CardImpl {
+public final class ManaPrism extends CardImpl {
 
     public ManaPrism(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

@@ -42,7 +42,7 @@ import mage.constants.Zone;
 /**
  * @author LevelX2
  */
-public class LibraryOfAlexandria extends CardImpl {
+public final class LibraryOfAlexandria extends CardImpl {
 
     public LibraryOfAlexandria(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

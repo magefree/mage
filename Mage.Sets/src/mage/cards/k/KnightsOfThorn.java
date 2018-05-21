@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author L_J
  */
-public class KnightsOfThorn extends CardImpl {
+public final class KnightsOfThorn extends CardImpl {
 
     public KnightsOfThorn (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

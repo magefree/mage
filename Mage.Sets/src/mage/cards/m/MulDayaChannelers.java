@@ -49,7 +49,7 @@ import mage.constants.Zone;
  *
  * @author jeffwadsworth
  */
-public class MulDayaChannelers extends CardImpl {
+public final class MulDayaChannelers extends CardImpl {
 
     private static final String rule1 = "As long as the top card of your library is a creature card, {this} gets +3/+3";
 

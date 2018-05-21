@@ -15,7 +15,7 @@ import mage.constants.Zone;
  *
  * @author Jgod
  */
-public class ClayStatue extends CardImpl {
+public final class ClayStatue extends CardImpl {
 
     public ClayStatue(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}");

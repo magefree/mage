@@ -46,7 +46,7 @@ import mage.constants.Zone;
  * @author LoneFox
 
  */
-public class KavuChameleon extends CardImpl {
+public final class KavuChameleon extends CardImpl {
 
     public KavuChameleon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");

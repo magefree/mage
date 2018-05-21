@@ -48,7 +48,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author TheElk801 & L_J
  */
-public class CruelFate extends CardImpl {
+public final class CruelFate extends CardImpl {
 
     public CruelFate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{U}");

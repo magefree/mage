@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class JwariScuttler extends CardImpl {
+public final class JwariScuttler extends CardImpl {
 
     public JwariScuttler (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

@@ -49,7 +49,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class HallOfGemstone extends CardImpl {
+public final class HallOfGemstone extends CardImpl {
 
     public HallOfGemstone(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}{G}");

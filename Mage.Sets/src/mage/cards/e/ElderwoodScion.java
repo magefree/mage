@@ -47,7 +47,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class ElderwoodScion extends CardImpl {
+public final class ElderwoodScion extends CardImpl {
 
     public ElderwoodScion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{W}");

@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class CurseOfTheSwine extends CardImpl {
+public final class CurseOfTheSwine extends CardImpl {
 
     public CurseOfTheSwine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{U}{U}");

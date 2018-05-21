@@ -43,7 +43,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class Fumigate extends CardImpl {
+public final class Fumigate extends CardImpl {
 
     public Fumigate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{W}{W}");

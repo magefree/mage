@@ -45,7 +45,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author fireshoes
  */
-public class ExquisiteFirecraft extends CardImpl {
+public final class ExquisiteFirecraft extends CardImpl {
 
     public ExquisiteFirecraft(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}{R}");

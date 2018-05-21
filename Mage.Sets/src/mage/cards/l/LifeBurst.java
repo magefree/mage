@@ -43,7 +43,7 @@ import mage.target.TargetPlayer;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class LifeBurst extends CardImpl {
+public final class LifeBurst extends CardImpl {
     
     private static final FilterCard filter = new FilterCard("card named Life Burst");
 

@@ -55,7 +55,7 @@ import mage.util.RandomUtil;
  *
  * @author North
  */
-public class CharmbreakerDevils extends CardImpl {
+public final class CharmbreakerDevils extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("instant or sorcery card");
 

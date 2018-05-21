@@ -53,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author L_J
  */
-public class LaccolithRig extends CardImpl {
+public final class LaccolithRig extends CardImpl {
 
     public LaccolithRig(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{R}");

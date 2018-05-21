@@ -48,7 +48,7 @@ import mage.util.CardUtil;
  *
  * @author Plopman
  */
-public class PyromancersGauntlet extends CardImpl {
+public final class PyromancersGauntlet extends CardImpl {
 
     public PyromancersGauntlet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");

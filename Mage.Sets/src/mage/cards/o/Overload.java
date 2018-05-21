@@ -45,7 +45,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author LoneFox
  */
-public class Overload extends CardImpl {
+public final class Overload extends CardImpl {
 
     public Overload(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}");

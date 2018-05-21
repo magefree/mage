@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author Loki
  */
-public class Enfeeblement extends CardImpl {
+public final class Enfeeblement extends CardImpl {
 
     public Enfeeblement(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}{B}");

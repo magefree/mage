@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class CultbrandCinder extends CardImpl {
+public final class CultbrandCinder extends CardImpl {
 
     public CultbrandCinder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B/R}");

@@ -54,7 +54,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author emerald000 & L_J
  */
-public class WhipgrassEntangler extends CardImpl {
+public final class WhipgrassEntangler extends CardImpl {
 
     public WhipgrassEntangler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

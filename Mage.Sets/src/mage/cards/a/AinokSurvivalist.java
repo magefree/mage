@@ -48,7 +48,7 @@ import mage.target.TargetPermanent;
  *
  * @author fireshoes
  */
-public class AinokSurvivalist extends CardImpl {
+public final class AinokSurvivalist extends CardImpl {
     
      private static final FilterArtifactOrEnchantmentPermanent filter = new FilterArtifactOrEnchantmentPermanent("artifact or enchantment an opponent controls");
 

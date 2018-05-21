@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  * @author Jason E. Wall
  *
  */
-public class TreetopRangers extends CardImpl {
+public final class TreetopRangers extends CardImpl {
 
     private final static FilterCreaturePermanent onlyFlyingCreatures = new FilterCreaturePermanent("except by creatures with flying");
 

@@ -40,7 +40,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author TheElk801
  */
-public class StarOfExtinction extends CardImpl {
+public final class StarOfExtinction extends CardImpl {
 
     public StarOfExtinction(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{R}{R}");

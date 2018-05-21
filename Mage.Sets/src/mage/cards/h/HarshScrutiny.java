@@ -40,7 +40,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class HarshScrutiny extends CardImpl {
+public final class HarshScrutiny extends CardImpl {
 
     public HarshScrutiny(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}");

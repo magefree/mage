@@ -50,7 +50,7 @@ import mage.players.Player;
 /**
  * @author noxx
  */
-public class Malignus extends CardImpl {
+public final class Malignus extends CardImpl {
 
     public Malignus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");

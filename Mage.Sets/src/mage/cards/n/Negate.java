@@ -40,7 +40,7 @@ import mage.target.TargetSpell;
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class Negate extends CardImpl {
+public final class Negate extends CardImpl {
 
     public Negate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");

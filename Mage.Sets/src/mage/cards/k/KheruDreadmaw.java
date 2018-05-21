@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author emerald000
  */
-public class KheruDreadmaw extends CardImpl {
+public final class KheruDreadmaw extends CardImpl {
 
     public KheruDreadmaw(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}");

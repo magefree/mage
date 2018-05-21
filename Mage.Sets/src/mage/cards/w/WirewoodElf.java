@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author Melkhior
  */
-public class WirewoodElf extends CardImpl {
+public final class WirewoodElf extends CardImpl {
     public WirewoodElf(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
         this.subtype.add(SubType.ELF);

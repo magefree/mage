@@ -44,7 +44,7 @@ import mage.target.common.TargetNonBasicLandPermanent;
  *
  * @author Loki
  */
-public class Wasteland extends CardImpl {
+public final class Wasteland extends CardImpl {
 
     public Wasteland(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);

@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author ciaccona007
  */
-public class ReverentMantra extends CardImpl {
+public final class ReverentMantra extends CardImpl {
 
     public ReverentMantra(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{W}");

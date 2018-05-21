@@ -48,7 +48,7 @@ import mage.target.TargetSpell;
  *
  * @author emerald000
  */
-public class DrainingWhelk extends CardImpl {
+public final class DrainingWhelk extends CardImpl {
 
     public DrainingWhelk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{U}");

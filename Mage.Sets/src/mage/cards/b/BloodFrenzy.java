@@ -44,7 +44,7 @@ import mage.target.common.TargetAttackingOrBlockingCreature;
  *
  * @author LoneFox
  */
-public class BloodFrenzy extends CardImpl {
+public final class BloodFrenzy extends CardImpl {
 
     public BloodFrenzy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");

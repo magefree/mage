@@ -44,7 +44,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class Tenacity extends CardImpl {
+public final class Tenacity extends CardImpl {
 
     public Tenacity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{W}");

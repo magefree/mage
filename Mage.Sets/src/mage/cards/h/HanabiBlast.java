@@ -41,7 +41,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Loki
  */
-public class HanabiBlast extends CardImpl {
+public final class HanabiBlast extends CardImpl {
 
     public HanabiBlast (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}{R}");

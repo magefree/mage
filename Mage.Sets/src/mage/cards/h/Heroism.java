@@ -58,7 +58,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author L_J
  */
-public class Heroism extends CardImpl {
+public final class Heroism extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a white creature");
     static {

@@ -39,7 +39,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class HelmOfAwakening extends CardImpl {
+public final class HelmOfAwakening extends CardImpl {
 
     
     public HelmOfAwakening(UUID ownerId, CardSetInfo setInfo) {

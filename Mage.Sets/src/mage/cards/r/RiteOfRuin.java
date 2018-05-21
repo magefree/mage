@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author North
  */
-public class RiteOfRuin extends CardImpl {
+public final class RiteOfRuin extends CardImpl {
 
     public RiteOfRuin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{R}{R}");

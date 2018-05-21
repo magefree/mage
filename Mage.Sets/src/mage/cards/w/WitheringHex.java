@@ -53,7 +53,7 @@ import mage.counters.CounterType;
  *
  * @author TheElk801
  */
-public class WitheringHex extends CardImpl {
+public final class WitheringHex extends CardImpl {
 
     public WitheringHex(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{B}");

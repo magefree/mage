@@ -52,7 +52,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Quercitron
  */
-public class Hecatomb extends CardImpl {
+public final class Hecatomb extends CardImpl {
 
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("an untapped Swamp you control");
     

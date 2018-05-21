@@ -45,7 +45,7 @@ import mage.constants.Duration;
  *
  * @author fireshoes
  */
-public class OrderOfTheGoldenCricket extends CardImpl {
+public final class OrderOfTheGoldenCricket extends CardImpl {
 
     public OrderOfTheGoldenCricket(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

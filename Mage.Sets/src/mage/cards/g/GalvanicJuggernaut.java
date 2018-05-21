@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author North
  */
-public class GalvanicJuggernaut extends CardImpl {
+public final class GalvanicJuggernaut extends CardImpl {
 
     public GalvanicJuggernaut(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}");

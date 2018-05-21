@@ -45,7 +45,7 @@ import mage.constants.TargetController;
 /**
  * @author nantuko
  */
-public class RecklessWaif extends CardImpl {
+public final class RecklessWaif extends CardImpl {
 
     public RecklessWaif(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");

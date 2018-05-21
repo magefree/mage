@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author Loki
  */
-public class SepticRats extends CardImpl {
+public final class SepticRats extends CardImpl {
 
     public SepticRats(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");

@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class DragonsEyeSentry extends CardImpl {
+public final class DragonsEyeSentry extends CardImpl {
 
     public DragonsEyeSentry(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");

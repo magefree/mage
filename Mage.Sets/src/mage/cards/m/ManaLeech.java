@@ -46,7 +46,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LoneFox
  */
-public class ManaLeech extends CardImpl {
+public final class ManaLeech extends CardImpl {
 
     public ManaLeech(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

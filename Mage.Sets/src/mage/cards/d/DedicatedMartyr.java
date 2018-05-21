@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author cbt33
  */
-public class DedicatedMartyr extends CardImpl {
+public final class DedicatedMartyr extends CardImpl {
 
     public DedicatedMartyr(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");

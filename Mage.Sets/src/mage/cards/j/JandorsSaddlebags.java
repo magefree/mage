@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author KholdFuzion
  */
-public class JandorsSaddlebags extends CardImpl {
+public final class JandorsSaddlebags extends CardImpl {
 
     public JandorsSaddlebags(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

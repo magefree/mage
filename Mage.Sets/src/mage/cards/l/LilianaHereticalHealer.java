@@ -52,7 +52,7 @@ import mage.game.permanent.token.ZombieToken;
  *
  * @author LevelX2
  */
-public class LilianaHereticalHealer extends CardImpl {
+public final class LilianaHereticalHealer extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another nontoken creature you control");
 

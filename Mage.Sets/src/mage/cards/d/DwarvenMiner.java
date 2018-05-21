@@ -23,7 +23,7 @@ import mage.target.common.TargetNonBasicLandPermanent;
  *
  * @author nick.myers
  */
-public class DwarvenMiner extends CardImpl {
+public final class DwarvenMiner extends CardImpl {
     
     public DwarvenMiner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

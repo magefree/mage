@@ -48,7 +48,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  *
  * @author North
  */
-public class ObeliskOfAlara extends CardImpl {
+public final class ObeliskOfAlara extends CardImpl {
 
     public ObeliskOfAlara(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{6}");

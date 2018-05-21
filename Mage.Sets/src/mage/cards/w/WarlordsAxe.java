@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class WarlordsAxe extends CardImpl {
+public final class WarlordsAxe extends CardImpl {
 
     public WarlordsAxe(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

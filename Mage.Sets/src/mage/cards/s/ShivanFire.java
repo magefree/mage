@@ -43,7 +43,7 @@ import java.util.UUID;
  *
  * @author rscoates
  */
-public class ShivanFire extends CardImpl {
+public final class ShivanFire extends CardImpl {
 
     public ShivanFire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");

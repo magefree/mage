@@ -45,7 +45,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  *
  * @author LevelX2
  */
-public class BlindSpotGiant extends CardImpl {
+public final class BlindSpotGiant extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("you control another Giant");
 

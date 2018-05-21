@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author LoneFox
  */
-public class FlowstoneCrusher extends CardImpl {
+public final class FlowstoneCrusher extends CardImpl {
 
     public FlowstoneCrusher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");

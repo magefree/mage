@@ -40,7 +40,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author TheElk801
  */
-public class DepthsOfDesire extends CardImpl {
+public final class DepthsOfDesire extends CardImpl {
 
     public DepthsOfDesire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}");

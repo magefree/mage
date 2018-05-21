@@ -54,7 +54,7 @@ import mage.counters.CounterType;
  *
  * @author anonymous
  */
-public class BottomlessVault extends CardImpl {
+public final class BottomlessVault extends CardImpl {
 
     public BottomlessVault(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

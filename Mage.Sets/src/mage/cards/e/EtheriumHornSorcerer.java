@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class EtheriumHornSorcerer extends CardImpl {
+public final class EtheriumHornSorcerer extends CardImpl {
 
     public EtheriumHornSorcerer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}{U}{R}");

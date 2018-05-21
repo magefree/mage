@@ -44,7 +44,7 @@ import mage.game.stack.StackObject;
  *
  * @author LevelX2
  */
-public class SummaryDismissal extends CardImpl {
+public final class SummaryDismissal extends CardImpl {
 
     public SummaryDismissal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}{U}");

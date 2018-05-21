@@ -43,7 +43,7 @@ import mage.target.TargetSpell;
  *
  * @author fireshoes
  */
-public class ForceVoid extends CardImpl {
+public final class ForceVoid extends CardImpl {
 
     public ForceVoid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");

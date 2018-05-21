@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class ReachOfShadows extends CardImpl {
+public final class ReachOfShadows extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature that's one or more colors");
 

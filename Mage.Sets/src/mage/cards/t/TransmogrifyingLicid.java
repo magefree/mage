@@ -48,7 +48,7 @@ import mage.constants.Zone;
  *
  * @author emerald000
  */
-public class TransmogrifyingLicid extends CardImpl {
+public final class TransmogrifyingLicid extends CardImpl {
 
     public TransmogrifyingLicid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");

@@ -41,7 +41,7 @@ import mage.constants.Duration;
  *
  * @author LevelX2
  */
-public class BorrowedGrace extends CardImpl {
+public final class BorrowedGrace extends CardImpl {
 
     public BorrowedGrace(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");

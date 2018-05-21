@@ -42,7 +42,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author spjspj
  */
-public class WithoutWeakness extends CardImpl {
+public final class WithoutWeakness extends CardImpl {
 
     public WithoutWeakness(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{B}");

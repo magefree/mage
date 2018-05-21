@@ -44,7 +44,7 @@ import mage.game.permanent.token.UtvaraHellkiteDragonToken;
  *
  * @author LevelX2
  */
-public class UtvaraHellkite extends CardImpl {
+public final class UtvaraHellkite extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Dragon you control");
 

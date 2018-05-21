@@ -42,7 +42,7 @@ import mage.filter.common.FilterArtifactCard;
  *
  * @author ayratn
  */
-public class TelJiladFallen extends CardImpl {
+public final class TelJiladFallen extends CardImpl {
 
     public TelJiladFallen (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");

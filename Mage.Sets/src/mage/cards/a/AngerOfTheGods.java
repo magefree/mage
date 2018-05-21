@@ -41,7 +41,7 @@ import mage.watchers.common.DamagedByWatcher;
  *
  * @author Plopman
  */
-public class AngerOfTheGods extends CardImpl {
+public final class AngerOfTheGods extends CardImpl {
 
     public AngerOfTheGods(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}{R}");

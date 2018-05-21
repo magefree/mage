@@ -51,7 +51,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class AvacynsCollar extends CardImpl {
+public final class AvacynsCollar extends CardImpl {
 
     public AvacynsCollar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");

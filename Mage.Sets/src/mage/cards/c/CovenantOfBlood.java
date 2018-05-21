@@ -41,7 +41,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author emerald000
  */
-public class CovenantOfBlood extends CardImpl {
+public final class CovenantOfBlood extends CardImpl {
 
     public CovenantOfBlood(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{6}{B}");

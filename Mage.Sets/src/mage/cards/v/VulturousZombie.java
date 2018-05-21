@@ -44,7 +44,7 @@ import mage.counters.CounterType;
  * @author jeffwadsworth
  *
  */
-public class VulturousZombie extends CardImpl {
+public final class VulturousZombie extends CardImpl {
 
     public VulturousZombie(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{G}");

@@ -44,7 +44,7 @@ import mage.players.Player;
  *
  * @author Plopman
  */
-public class WheelOfTorture extends CardImpl {
+public final class WheelOfTorture extends CardImpl {
 
     public WheelOfTorture(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

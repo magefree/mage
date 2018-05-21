@@ -51,7 +51,7 @@ import mage.target.common.TargetOpponent;
  * @author LoneFox
 
  */
-public class WitheringGaze extends CardImpl {
+public final class WitheringGaze extends CardImpl {
 
     public WitheringGaze(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}");

@@ -60,7 +60,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Loki
  */
-public class SwordOfBodyAndMind extends CardImpl {
+public final class SwordOfBodyAndMind extends CardImpl {
 
     public SwordOfBodyAndMind(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

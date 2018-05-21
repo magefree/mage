@@ -56,7 +56,7 @@ import mage.game.Game;
  *
  * @author emerald000
  */
-public class KangeeAerieKeeper extends CardImpl {
+public final class KangeeAerieKeeper extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Bird creatures");
 

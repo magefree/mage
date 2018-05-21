@@ -54,7 +54,7 @@ import mage.target.targetpointer.FixedTarget;
 /**
  * @author Backfir3
  */
-public class Venom extends CardImpl {
+public final class Venom extends CardImpl {
 
     public Venom(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}{G}");

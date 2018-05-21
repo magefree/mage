@@ -45,7 +45,7 @@ import mage.target.common.TargetCreatureOrPlaneswalker;
  *
  * @author fireshoes
  */
-public class NeverReturn extends SplitCard {
+public final class NeverReturn extends SplitCard {
 
     public NeverReturn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, new CardType[]{CardType.SORCERY}, "{1}{B}{B}", "{3}{B}", SpellAbilityType.SPLIT_AFTERMATH);

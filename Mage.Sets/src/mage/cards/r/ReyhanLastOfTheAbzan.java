@@ -54,7 +54,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class ReyhanLastOfTheAbzan extends CardImpl {
+public final class ReyhanLastOfTheAbzan extends CardImpl {
 
     public ReyhanLastOfTheAbzan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{G}");

@@ -46,7 +46,7 @@ import mage.filter.predicate.permanent.AttackingPredicate;
  *
  * @author TheElk801
  */
-public class TelimTor extends CardImpl {
+public final class TelimTor extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("all attacking creatures with flanking");
 

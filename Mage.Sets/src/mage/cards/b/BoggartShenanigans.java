@@ -45,7 +45,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  *
  * @author LevelX2
  */
-public class BoggartShenanigans extends CardImpl {
+public final class BoggartShenanigans extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another Goblin you control");
 

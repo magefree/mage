@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class SavannahLions extends CardImpl {
+public final class SavannahLions extends CardImpl {
 
     public SavannahLions(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");

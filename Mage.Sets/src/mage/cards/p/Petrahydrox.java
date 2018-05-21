@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class Petrahydrox extends CardImpl {
+public final class Petrahydrox extends CardImpl {
 
     public Petrahydrox(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U/R}");

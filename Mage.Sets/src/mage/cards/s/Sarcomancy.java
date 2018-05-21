@@ -44,7 +44,7 @@ import mage.game.permanent.token.ZombieToken;
  *
  * @author LevelX2
  */
-public class Sarcomancy extends CardImpl {
+public final class Sarcomancy extends CardImpl {
    
     public Sarcomancy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}");

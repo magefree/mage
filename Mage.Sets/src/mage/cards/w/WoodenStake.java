@@ -50,7 +50,7 @@ import mage.target.targetpointer.FixedTarget;
 /**
  * @author nantuko
  */
-public class WoodenStake extends CardImpl {
+public final class WoodenStake extends CardImpl {
 
     public WoodenStake(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

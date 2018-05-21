@@ -42,7 +42,7 @@ import mage.counters.CounterType;
  *
  * @author North
  */
-public class AlgaeGharial extends CardImpl {
+public final class AlgaeGharial extends CardImpl {
 
     public AlgaeGharial(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

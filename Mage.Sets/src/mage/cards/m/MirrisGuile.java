@@ -39,7 +39,7 @@ import mage.constants.TargetController;
  *
  * @author emerald000
  */
-public class MirrisGuile extends CardImpl {
+public final class MirrisGuile extends CardImpl {
 
     public MirrisGuile(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}");

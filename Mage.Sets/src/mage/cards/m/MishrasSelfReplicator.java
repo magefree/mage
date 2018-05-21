@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.HistoricPredicate;
  *
  * @author TheElk801
  */
-public class MishrasSelfReplicator extends CardImpl {
+public final class MishrasSelfReplicator extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("a historic spell");
 

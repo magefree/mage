@@ -45,7 +45,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author fireshoes
  */
-public class RainOfDaggers extends CardImpl {
+public final class RainOfDaggers extends CardImpl {
 
     public RainOfDaggers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{B}{B}");

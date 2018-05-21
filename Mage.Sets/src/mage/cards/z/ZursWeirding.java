@@ -51,7 +51,7 @@ import mage.players.Player;
  *
  * @author Quercitron
  */
-public class ZursWeirding extends CardImpl {
+public final class ZursWeirding extends CardImpl {
 
     public ZursWeirding(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");

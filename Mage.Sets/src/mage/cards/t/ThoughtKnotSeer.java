@@ -45,7 +45,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author fireshoes
  */
-public class ThoughtKnotSeer extends CardImpl {
+public final class ThoughtKnotSeer extends CardImpl {
 
     public ThoughtKnotSeer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{C}");

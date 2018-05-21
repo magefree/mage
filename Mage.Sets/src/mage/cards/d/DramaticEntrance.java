@@ -40,7 +40,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author jeffwadsworth
  */
-public class DramaticEntrance extends CardImpl {
+public final class DramaticEntrance extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("a green creature card");
 

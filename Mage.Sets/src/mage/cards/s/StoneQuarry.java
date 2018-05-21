@@ -39,7 +39,7 @@ import mage.constants.CardType;
  *
  * @author fireshoes
  */
-public class StoneQuarry extends CardImpl {
+public final class StoneQuarry extends CardImpl {
 
     public StoneQuarry(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

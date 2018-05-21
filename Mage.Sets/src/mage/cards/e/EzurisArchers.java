@@ -48,7 +48,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author North
  */
-public class EzurisArchers extends CardImpl {
+public final class EzurisArchers extends CardImpl {
 
     public EzurisArchers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");

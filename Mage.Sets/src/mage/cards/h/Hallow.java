@@ -46,7 +46,7 @@ import mage.target.TargetSpell;
  *
  * @author LevelX2
  */
-public class Hallow extends CardImpl {
+public final class Hallow extends CardImpl {
 
     public Hallow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");

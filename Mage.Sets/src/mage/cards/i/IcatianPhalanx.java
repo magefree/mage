@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author L_J
  */
-public class IcatianPhalanx extends CardImpl {
+public final class IcatianPhalanx extends CardImpl {
 
     public IcatianPhalanx (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");

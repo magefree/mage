@@ -41,7 +41,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author LevelX2
  */
-public class Dredge extends CardImpl {
+public final class Dredge extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("creature or land");
 

@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class RetreatToCoralhelm extends CardImpl {
+public final class RetreatToCoralhelm extends CardImpl {
 
     public RetreatToCoralhelm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");

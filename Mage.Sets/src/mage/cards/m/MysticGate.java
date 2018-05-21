@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author jonubuu
  */
-public class MysticGate extends CardImpl {
+public final class MysticGate extends CardImpl {
 
     public MysticGate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

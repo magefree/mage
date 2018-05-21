@@ -48,7 +48,7 @@ import mage.constants.Zone;
  *
  * @author LevelX
  */
-public class MatsuTribeBirdstalker extends CardImpl {
+public final class MatsuTribeBirdstalker extends CardImpl {
 
     public MatsuTribeBirdstalker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");

@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author fireshoes
  */
-public class TezzeretsAmbition extends CardImpl {
+public final class TezzeretsAmbition extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("you control no artifacts");
 

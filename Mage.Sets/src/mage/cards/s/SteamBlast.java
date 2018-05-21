@@ -37,7 +37,7 @@ import mage.constants.CardType;
  *
  * @author fireshoes
  */
-public class SteamBlast extends CardImpl {
+public final class SteamBlast extends CardImpl {
 
     public SteamBlast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");

@@ -50,7 +50,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 /**
  * @author fireshoes
  */
-public class SylvanAdvocate extends CardImpl {
+public final class SylvanAdvocate extends CardImpl {
 
     private static final String rule1 = "As long as you control six or more lands, {this}";
     private static final String rule2 = "and land creatures you control get +2/+2.";

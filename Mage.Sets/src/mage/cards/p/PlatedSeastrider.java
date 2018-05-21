@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class PlatedSeastrider extends CardImpl {
+public final class PlatedSeastrider extends CardImpl {
 
     public PlatedSeastrider (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{U}");

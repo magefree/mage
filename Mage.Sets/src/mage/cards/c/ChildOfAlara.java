@@ -43,7 +43,7 @@ import mage.filter.common.FilterNonlandPermanent;
  *
  * @author jeffwadsworth
  */
-public class ChildOfAlara extends CardImpl {
+public final class ChildOfAlara extends CardImpl {
 
     public ChildOfAlara(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{U}{B}{R}{G}");

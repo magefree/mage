@@ -44,7 +44,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  *
  * @author LoneFox
  */
-public class ElvishVanguard extends CardImpl {
+public final class ElvishVanguard extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("another Elf");
 

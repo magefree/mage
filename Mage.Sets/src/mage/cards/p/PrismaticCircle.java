@@ -50,7 +50,7 @@ import mage.game.Game;
  *
  * @author TheElk801
  */
-public class PrismaticCircle extends CardImpl {
+public final class PrismaticCircle extends CardImpl {
 
     public PrismaticCircle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");

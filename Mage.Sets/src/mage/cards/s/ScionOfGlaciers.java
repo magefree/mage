@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class ScionOfGlaciers extends CardImpl {
+public final class ScionOfGlaciers extends CardImpl {
 
     public ScionOfGlaciers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");

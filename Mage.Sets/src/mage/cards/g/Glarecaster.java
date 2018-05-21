@@ -50,7 +50,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LevelX2
  */
-public class Glarecaster extends CardImpl {
+public final class Glarecaster extends CardImpl {
 
     public Glarecaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");

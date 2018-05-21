@@ -43,7 +43,7 @@ import mage.target.TargetPermanent;
  *
  * @author Loki, North
  */
-public class OxiddaScrapmelter extends CardImpl {
+public final class OxiddaScrapmelter extends CardImpl {
 
     public OxiddaScrapmelter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");

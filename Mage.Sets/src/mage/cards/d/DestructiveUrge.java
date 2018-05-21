@@ -46,7 +46,7 @@ import mage.filter.common.FilterLandPermanent;
  *
  * @author TheElk801
  */
-public class DestructiveUrge extends CardImpl {
+public final class DestructiveUrge extends CardImpl {
 
     public DestructiveUrge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}{R}");

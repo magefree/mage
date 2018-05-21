@@ -51,7 +51,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Quercitron
  */
-public class Tephraderm extends CardImpl {
+public final class Tephraderm extends CardImpl {
 
     public Tephraderm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");

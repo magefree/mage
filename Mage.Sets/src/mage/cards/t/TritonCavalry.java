@@ -42,7 +42,7 @@ import mage.target.common.TargetEnchantmentPermanent;
  *
  * @author LevelX2
  */
-public class TritonCavalry extends CardImpl {
+public final class TritonCavalry extends CardImpl {
 
     public TritonCavalry(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");

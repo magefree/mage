@@ -41,7 +41,7 @@ import mage.constants.SuperType;
 /**
  * @author LevelX2
  */
-public class PatronOfTheKitsune extends CardImpl {
+public final class PatronOfTheKitsune extends CardImpl {
 
     public PatronOfTheKitsune(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{W}");

@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class HandOfSilumgar extends CardImpl {
+public final class HandOfSilumgar extends CardImpl {
 
     public HandOfSilumgar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

@@ -47,7 +47,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class DeathsCaress extends CardImpl {
+public final class DeathsCaress extends CardImpl {
 
     public DeathsCaress(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}{B}");

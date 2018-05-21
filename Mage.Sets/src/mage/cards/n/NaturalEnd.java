@@ -41,7 +41,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class NaturalEnd extends CardImpl {
+public final class NaturalEnd extends CardImpl {
 
     public NaturalEnd(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}");

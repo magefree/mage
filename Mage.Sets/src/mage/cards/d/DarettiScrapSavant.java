@@ -63,7 +63,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class DarettiScrapSavant extends CardImpl {
+public final class DarettiScrapSavant extends CardImpl {
 
     public DarettiScrapSavant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{R}");

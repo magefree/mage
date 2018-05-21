@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Fenhl
  */
-public class Umbilicus extends CardImpl {
+public final class Umbilicus extends CardImpl {
 
     public Umbilicus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");

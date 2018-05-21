@@ -47,7 +47,7 @@ import mage.game.permanent.Permanent;
  *
  * @author North
  */
-public class CentaurOmenreader extends CardImpl {
+public final class CentaurOmenreader extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("creature spells");
 

@@ -45,7 +45,7 @@ import mage.filter.common.FilterAttackingCreature;
  *
  * @author Loki
  */
-public class AkkiCoalflinger extends CardImpl {
+public final class AkkiCoalflinger extends CardImpl {
 
     public AkkiCoalflinger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");

@@ -39,7 +39,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Loki
  */
-public class MendingHands extends CardImpl {
+public final class MendingHands extends CardImpl {
 
     public MendingHands(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");

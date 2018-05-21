@@ -49,7 +49,7 @@ import mage.players.Player;
  * @author LoneFox
 
  */
-public class BellowingFiend extends CardImpl {
+public final class BellowingFiend extends CardImpl {
 
     public BellowingFiend(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");

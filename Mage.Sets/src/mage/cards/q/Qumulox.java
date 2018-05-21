@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class Qumulox extends CardImpl {
+public final class Qumulox extends CardImpl {
 
     public Qumulox(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{U}{U}");

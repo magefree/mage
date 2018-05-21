@@ -53,7 +53,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  * @author jeffwadsworth
 
  */
-public class MindwrackLiege extends CardImpl {
+public final class MindwrackLiege extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("blue creatures you control");
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("red creatures you control");

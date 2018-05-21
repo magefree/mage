@@ -50,7 +50,7 @@ import mage.target.common.TargetDiscard;
  *
  * @author jeffwadsworth
  */
-public class SpellboundDragon extends CardImpl {
+public final class SpellboundDragon extends CardImpl {
 
     public SpellboundDragon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{R}");

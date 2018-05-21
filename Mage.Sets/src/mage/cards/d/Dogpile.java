@@ -42,7 +42,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LevelX2
  */
-public class Dogpile extends CardImpl {
+public final class Dogpile extends CardImpl {
 
     private static final FilterAttackingCreature filter = new FilterAttackingCreature("attacking creatures you control");
 

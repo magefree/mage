@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Backfir3
  */
-public class ThranWarMachine extends CardImpl {
+public final class ThranWarMachine extends CardImpl {
 
     public ThranWarMachine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}");

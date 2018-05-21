@@ -41,7 +41,7 @@ import mage.target.TargetSpell;
  *
  * @author emerald000
  */
-public class DisdainfulStroke extends CardImpl {
+public final class DisdainfulStroke extends CardImpl {
     
     private static final FilterSpell filter = new FilterSpell("spell with converted mana cost 4 or greater");
     static {

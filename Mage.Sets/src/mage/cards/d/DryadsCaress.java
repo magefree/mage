@@ -44,7 +44,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author Wehk
  */
-public class DryadsCaress extends CardImpl {
+public final class DryadsCaress extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature on the battlefield");
     private static final String rule = "untap all creatures you control";

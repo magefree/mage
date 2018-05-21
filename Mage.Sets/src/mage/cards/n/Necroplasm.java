@@ -53,7 +53,7 @@ import mage.players.Player;
  *
  * @author emerald000
  */
-public class Necroplasm extends CardImpl {
+public final class Necroplasm extends CardImpl {
 
     public Necroplasm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");

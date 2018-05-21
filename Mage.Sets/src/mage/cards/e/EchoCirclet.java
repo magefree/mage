@@ -43,7 +43,7 @@ import mage.game.permanent.Permanent;
 /**
  * @author nantuko
  */
-public class EchoCirclet extends CardImpl {
+public final class EchoCirclet extends CardImpl {
 
     public EchoCirclet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 /**
  * @author nantuko
  */
-public class SpareFromEvil extends CardImpl {
+public final class SpareFromEvil extends CardImpl {
 
     private static final FilterCreatureCard filterNonHuman = new FilterCreatureCard("non-Human creatures");
 

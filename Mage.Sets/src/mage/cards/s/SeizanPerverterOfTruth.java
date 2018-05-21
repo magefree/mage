@@ -46,7 +46,7 @@ import mage.constants.TargetController;
  *
  * @author Loki
  */
-public class SeizanPerverterOfTruth extends CardImpl {
+public final class SeizanPerverterOfTruth extends CardImpl {
 
     public SeizanPerverterOfTruth (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");

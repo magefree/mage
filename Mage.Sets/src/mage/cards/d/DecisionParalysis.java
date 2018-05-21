@@ -39,7 +39,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class DecisionParalysis extends CardImpl {
+public final class DecisionParalysis extends CardImpl {
 
     public DecisionParalysis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{U}");

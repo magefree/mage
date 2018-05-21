@@ -48,7 +48,7 @@ import mage.game.Game;
  *
  * @author TheElk801
  */
-public class SqueeTheImmortal extends CardImpl {
+public final class SqueeTheImmortal extends CardImpl {
 
     public SqueeTheImmortal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");

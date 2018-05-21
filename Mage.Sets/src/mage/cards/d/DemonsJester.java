@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author daagar
  */
-public class DemonsJester extends CardImpl {
+public final class DemonsJester extends CardImpl {
 
     public DemonsJester(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

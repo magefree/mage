@@ -48,7 +48,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author emerald000
  */
-public class SavageBeating extends CardImpl {
+public final class SavageBeating extends CardImpl {
 
     public SavageBeating(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{R}{R}");

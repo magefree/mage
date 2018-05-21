@@ -51,7 +51,7 @@ import mage.util.RandomUtil;
  *
  * @author North
  */
-public class WoodlandSleuth extends CardImpl {
+public final class WoodlandSleuth extends CardImpl {
 
     private static final String staticText = "Morbid - When {this} enters the battlefield, if a creature died this turn, return a creature card at random from your graveyard to your hand.";
 

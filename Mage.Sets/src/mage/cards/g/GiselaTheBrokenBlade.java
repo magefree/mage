@@ -49,7 +49,7 @@ import mage.constants.TargetController;
  *
  * @author LevelX2
  */
-public class GiselaTheBrokenBlade extends CardImpl {
+public final class GiselaTheBrokenBlade extends CardImpl {
 
     public GiselaTheBrokenBlade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");

@@ -59,7 +59,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class ArachnusSpinner extends CardImpl {
+public final class ArachnusSpinner extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Spider you control");
 

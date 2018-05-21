@@ -48,7 +48,7 @@ import mage.target.TargetPermanent;
  *
  * @author TheElk801
  */
-public class MiracleWorker extends CardImpl {
+public final class MiracleWorker extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Aura attached to a creature you control");
 

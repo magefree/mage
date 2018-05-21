@@ -46,7 +46,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Plopman
  */
-public class MarchOfTheMachines extends CardImpl {
+public final class MarchOfTheMachines extends CardImpl {
 
     public MarchOfTheMachines(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");

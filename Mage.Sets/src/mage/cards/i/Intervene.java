@@ -41,7 +41,7 @@ import mage.target.TargetSpell;
  *
  * @author Plopman
  */
-public class Intervene extends CardImpl {
+public final class Intervene extends CardImpl {
 
     private final static FilterSpell filter = new FilterSpell("spell that targets a creature");
 

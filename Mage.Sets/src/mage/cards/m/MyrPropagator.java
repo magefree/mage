@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author nantuko
  */
-public class MyrPropagator extends CardImpl {
+public final class MyrPropagator extends CardImpl {
 
     public MyrPropagator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");

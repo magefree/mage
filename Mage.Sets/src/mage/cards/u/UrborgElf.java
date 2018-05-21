@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author EvilGeek
  */
-public class UrborgElf extends CardImpl {
+public final class UrborgElf extends CardImpl {
 
     public UrborgElf(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

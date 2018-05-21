@@ -42,7 +42,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class PriceOfProgress extends CardImpl {
+public final class PriceOfProgress extends CardImpl {
 
     public PriceOfProgress(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");

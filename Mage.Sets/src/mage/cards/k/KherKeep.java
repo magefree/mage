@@ -45,7 +45,7 @@ import mage.game.permanent.token.KherKeepKoboldToken;
  *
  * @author LevelX2
  */
-public class KherKeep extends CardImpl {
+public final class KherKeep extends CardImpl {
 
     public KherKeep(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

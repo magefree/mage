@@ -44,7 +44,7 @@ import mage.target.TargetPlayer;
  *
  * @author Skyler Sell
  */
-public class Plagiarize extends CardImpl {
+public final class Plagiarize extends CardImpl {
 
     public Plagiarize(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}");

@@ -54,7 +54,7 @@ import mage.players.Player;
  *
  * @author spjspj
  */
-public class UrzasScienceFairProject extends CardImpl {
+public final class UrzasScienceFairProject extends CardImpl {
 
     public UrzasScienceFairProject(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");

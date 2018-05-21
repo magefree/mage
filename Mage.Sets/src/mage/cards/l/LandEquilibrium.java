@@ -44,7 +44,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author spjspj
  */
-public class LandEquilibrium extends CardImpl {
+public final class LandEquilibrium extends CardImpl {
 
     public LandEquilibrium(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{U}");

@@ -44,7 +44,7 @@ import mage.target.TargetSpell;
  *
  * @author fireshoes
  */
-public class VoidmageApprentice extends CardImpl {
+public final class VoidmageApprentice extends CardImpl {
 
     public VoidmageApprentice(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

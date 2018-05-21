@@ -51,7 +51,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class SurgeOfZeal extends CardImpl {
+public final class SurgeOfZeal extends CardImpl {
 
     public SurgeOfZeal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}");

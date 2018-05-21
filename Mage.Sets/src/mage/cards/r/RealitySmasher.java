@@ -50,7 +50,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class RealitySmasher extends CardImpl {
+public final class RealitySmasher extends CardImpl {
 
     public RealitySmasher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{C}");

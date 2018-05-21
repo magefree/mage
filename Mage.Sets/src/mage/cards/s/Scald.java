@@ -42,7 +42,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author LevelX2
  */
-public class Scald extends CardImpl {
+public final class Scald extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("a player taps an Island");
 

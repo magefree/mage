@@ -45,7 +45,7 @@ import mage.target.common.TargetLandPermanent;
  * @author KholdFuzion
 
  */
-public class LeyDruid extends CardImpl {
+public final class LeyDruid extends CardImpl {
 
     public LeyDruid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

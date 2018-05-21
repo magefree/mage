@@ -53,7 +53,7 @@ import mage.players.Player;
  *
  * @author escplan9 - Derek Monturo
  */
-public class LightningCoils extends CardImpl {
+public final class LightningCoils extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a nontoken creature you control");
     static {

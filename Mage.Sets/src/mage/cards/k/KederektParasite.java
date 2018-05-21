@@ -50,7 +50,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author jeffwadsworth
  */
-public class KederektParasite extends CardImpl {
+public final class KederektParasite extends CardImpl {
 
     public KederektParasite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}");

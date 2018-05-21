@@ -48,7 +48,7 @@ import mage.constants.Zone;
  *
  * @author nantuko
  */
-public class GraftedExoskeleton extends CardImpl {
+public final class GraftedExoskeleton extends CardImpl {
 
     public GraftedExoskeleton(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");

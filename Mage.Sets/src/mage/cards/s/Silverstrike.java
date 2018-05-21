@@ -39,7 +39,7 @@ import mage.target.common.TargetAttackingCreature;
  *
  * @author fireshoes
  */
-public class Silverstrike extends CardImpl {
+public final class Silverstrike extends CardImpl {
 
     public Silverstrike(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{W}");

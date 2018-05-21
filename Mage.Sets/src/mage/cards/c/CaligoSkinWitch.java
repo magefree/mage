@@ -45,7 +45,7 @@ import mage.constants.TargetController;
  *
  * @author JRHerlehy
  */
-public class CaligoSkinWitch extends CardImpl {
+public final class CaligoSkinWitch extends CardImpl {
 
     public CaligoSkinWitch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");

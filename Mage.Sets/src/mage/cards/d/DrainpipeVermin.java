@@ -45,7 +45,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class DrainpipeVermin extends CardImpl {
+public final class DrainpipeVermin extends CardImpl {
 
     public DrainpipeVermin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");

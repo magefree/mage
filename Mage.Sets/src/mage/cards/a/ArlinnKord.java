@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class ArlinnKord extends CardImpl {
+public final class ArlinnKord extends CardImpl {
 
     public ArlinnKord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{R}{G}");

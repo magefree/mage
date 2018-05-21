@@ -40,7 +40,7 @@ import mage.target.common.TargetEnchantmentPermanent;
  *
  * @author magenoxx_at_gmail.com
  */
-public class FranticPurification extends CardImpl {
+public final class FranticPurification extends CardImpl {
 
     public FranticPurification(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");

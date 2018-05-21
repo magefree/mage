@@ -58,7 +58,7 @@ import mage.game.permanent.token.custom.CreatureToken;
 /**
  * @author emerald000
  */
-public class ChronatogTotem extends CardImpl {
+public final class ChronatogTotem extends CardImpl {
 
     public ChronatogTotem(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");

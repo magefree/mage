@@ -49,7 +49,7 @@ import mage.game.permanent.Permanent;
  *
  * @author TheElk801
  */
-public class CommonCause extends CardImpl {
+public final class CommonCause extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Nonartifact creatures");
 

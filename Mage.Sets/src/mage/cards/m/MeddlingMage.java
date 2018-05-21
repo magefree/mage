@@ -50,7 +50,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author Plopman
  */
-public class MeddlingMage extends CardImpl {
+public final class MeddlingMage extends CardImpl {
 
     public MeddlingMage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{U}");

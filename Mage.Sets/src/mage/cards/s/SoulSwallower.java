@@ -46,7 +46,7 @@ import mage.counters.CounterType;
  *
  * @author fireshoes
  */
-public class SoulSwallower extends CardImpl {
+public final class SoulSwallower extends CardImpl {
 
     public SoulSwallower(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");

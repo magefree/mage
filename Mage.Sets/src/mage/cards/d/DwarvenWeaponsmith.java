@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LoneFox
  */
-public class DwarvenWeaponsmith extends CardImpl {
+public final class DwarvenWeaponsmith extends CardImpl {
 
     public DwarvenWeaponsmith(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

@@ -41,7 +41,7 @@ import mage.filter.FilterSpell;
 /**
  * @author klayhamn
  */
-public class ThrummingStone extends CardImpl {
+public final class ThrummingStone extends CardImpl {
 
     public ThrummingStone(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");

@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author stravant
  */
-public class PrepareFight extends SplitCard {
+public final class PrepareFight extends SplitCard {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you don't control");
 

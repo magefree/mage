@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author Styxo
  */
-public class WellOfKnowledge extends CardImpl {
+public final class WellOfKnowledge extends CardImpl {
 
     public WellOfKnowledge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");

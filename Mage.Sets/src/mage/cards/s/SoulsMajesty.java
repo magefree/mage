@@ -44,7 +44,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Loki
  */
-public class SoulsMajesty extends CardImpl {
+public final class SoulsMajesty extends CardImpl {
 
     public SoulsMajesty(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{G}");

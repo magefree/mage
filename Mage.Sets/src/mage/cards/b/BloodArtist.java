@@ -44,7 +44,7 @@ import mage.target.TargetPlayer;
  *
  * @author noxx
  */
-public class BloodArtist extends CardImpl {
+public final class BloodArtist extends CardImpl {
 
     public BloodArtist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

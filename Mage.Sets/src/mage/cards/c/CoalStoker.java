@@ -44,7 +44,7 @@ import mage.watchers.common.CastFromHandWatcher;
  *
  * @author ilcartographer
  */
-public class CoalStoker extends CardImpl {
+public final class CoalStoker extends CardImpl {
 
     public CoalStoker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author LevelX2
  */
-public class AngrathsAmbusher extends CardImpl {
+public final class AngrathsAmbusher extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent();
 

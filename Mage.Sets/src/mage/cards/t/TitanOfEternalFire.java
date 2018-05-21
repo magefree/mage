@@ -50,7 +50,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Plopman
  */
-public class TitanOfEternalFire extends CardImpl {
+public final class TitanOfEternalFire extends CardImpl {
 
     public TitanOfEternalFire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}");

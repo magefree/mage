@@ -49,7 +49,7 @@ import mage.watchers.common.PlayerAttackedStepWatcher;
  *
  * @author TheElk801
  */
-public class AssassinsBlade extends CardImpl {
+public final class AssassinsBlade extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack attacking creature");
 

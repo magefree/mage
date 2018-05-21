@@ -42,7 +42,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class ReturnedCentaur extends CardImpl {
+public final class ReturnedCentaur extends CardImpl {
 
     public ReturnedCentaur(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

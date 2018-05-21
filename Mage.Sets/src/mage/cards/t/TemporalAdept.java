@@ -45,7 +45,7 @@ import mage.target.TargetPermanent;
  *
  * @author Plopman
  */
-public class TemporalAdept extends CardImpl {
+public final class TemporalAdept extends CardImpl {
 
     public TemporalAdept(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");

@@ -52,7 +52,7 @@ import mage.game.permanent.Permanent;
  *
  * @author L_J
  */
-public class RashkaTheSlayer extends CardImpl {
+public final class RashkaTheSlayer extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("black creature");
 

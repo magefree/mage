@@ -53,7 +53,7 @@ import mage.target.TargetPermanent;
  *
  * @author Saga
  */
-public class KindredBoon extends CardImpl {
+public final class KindredBoon extends CardImpl {
     
     private static final FilterControlledCreaturePermanent filterDivinity = new FilterControlledCreaturePermanent("Each creature you control with a divinity counter on it");
     static {

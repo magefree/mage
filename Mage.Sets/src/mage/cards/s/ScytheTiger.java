@@ -44,7 +44,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Rafbill
  */
-public class ScytheTiger extends CardImpl {
+public final class ScytheTiger extends CardImpl {
 
     public ScytheTiger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");

@@ -46,7 +46,7 @@ import mage.target.targetpointer.FirstTargetPointer;
  * @author LoneFox
  *
  */
-public class DeathMatch extends CardImpl {
+public final class DeathMatch extends CardImpl {
 
     private final UUID originalId;
 

@@ -42,7 +42,7 @@ import mage.filter.common.FilterAttackingCreature;
  * @author LoneFox
 
  */
-public class WarHorn extends CardImpl {
+public final class WarHorn extends CardImpl {
 
     public WarHorn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

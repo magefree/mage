@@ -55,7 +55,7 @@ import mage.watchers.Watcher;
  *
  * @author LevelX2
  */
-public class KumanosBlessing extends CardImpl {
+public final class KumanosBlessing extends CardImpl {
 
     public KumanosBlessing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");

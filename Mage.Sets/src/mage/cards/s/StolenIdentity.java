@@ -42,7 +42,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class StolenIdentity extends CardImpl {
+public final class StolenIdentity extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact or creature");
 

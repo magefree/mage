@@ -48,7 +48,7 @@ import mage.target.TargetSpell;
  *
  * @author TheElk801
  */
-public class PsychicTrance extends CardImpl {
+public final class PsychicTrance extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Wizards you control");
 

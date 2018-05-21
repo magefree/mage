@@ -52,7 +52,7 @@ import mage.players.Player;
  *
  * @author spjspj
  */
-public class UnclaimedTerritory extends CardImpl {
+public final class UnclaimedTerritory extends CardImpl {
 
     public UnclaimedTerritory(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

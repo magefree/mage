@@ -45,7 +45,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author TheElk801
  */
-public class HauntingWind extends CardImpl {
+public final class HauntingWind extends CardImpl {
 
     public HauntingWind(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}");

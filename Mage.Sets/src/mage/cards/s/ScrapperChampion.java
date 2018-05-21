@@ -46,7 +46,7 @@ import mage.counters.CounterType;
  *
  * @author fireshoes
  */
-public class ScrapperChampion extends CardImpl {
+public final class ScrapperChampion extends CardImpl {
 
     public ScrapperChampion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");

@@ -40,7 +40,7 @@ import mage.constants.CardType;
  *
  * @author TheElk801
  */
-public class WindStrider extends CardImpl {
+public final class WindStrider extends CardImpl {
 
     public WindStrider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}");

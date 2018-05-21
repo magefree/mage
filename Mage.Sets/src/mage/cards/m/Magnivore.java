@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author LevelX2
  */
-public class Magnivore extends CardImpl {
+public final class Magnivore extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("sorcery cards");
     static {

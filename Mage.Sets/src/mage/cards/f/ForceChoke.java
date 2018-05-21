@@ -48,7 +48,7 @@ import mage.target.TargetSpell;
  *
  * @author Styxo
  */
-public class ForceChoke extends CardImpl {
+public final class ForceChoke extends CardImpl {
 
     public ForceChoke(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}{B}");

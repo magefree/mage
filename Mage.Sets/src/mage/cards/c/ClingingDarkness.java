@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author anonymous
  */
-public class ClingingDarkness extends CardImpl {
+public final class ClingingDarkness extends CardImpl {
 
     public ClingingDarkness(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}");

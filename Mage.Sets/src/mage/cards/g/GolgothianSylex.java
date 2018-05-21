@@ -49,7 +49,7 @@ import mage.game.permanent.Permanent;
  *
  * @author MarcoMarin
  */
-public class GolgothianSylex extends CardImpl {
+public final class GolgothianSylex extends CardImpl {
 
     public GolgothianSylex(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");

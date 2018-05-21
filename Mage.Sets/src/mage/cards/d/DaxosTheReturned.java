@@ -48,7 +48,7 @@ import mage.game.permanent.token.DaxosSpiritToken;
  *
  * @author fireshoes
  */
-public class DaxosTheReturned extends CardImpl {
+public final class DaxosTheReturned extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("an enchantment spell");
 

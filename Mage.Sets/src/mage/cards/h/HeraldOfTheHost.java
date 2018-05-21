@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class HeraldOfTheHost extends CardImpl {
+public final class HeraldOfTheHost extends CardImpl {
 
     public HeraldOfTheHost(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");

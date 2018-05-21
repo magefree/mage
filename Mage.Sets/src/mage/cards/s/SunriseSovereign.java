@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author Loki
  */
-public class SunriseSovereign extends CardImpl {
+public final class SunriseSovereign extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Giant");
 

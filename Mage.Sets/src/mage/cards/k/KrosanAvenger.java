@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class KrosanAvenger extends CardImpl {
+public final class KrosanAvenger extends CardImpl {
 
     public KrosanAvenger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

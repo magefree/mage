@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author cbt33
  */
-public class SacredRites extends CardImpl {
+public final class SacredRites extends CardImpl {
 
     public SacredRites(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{W}");

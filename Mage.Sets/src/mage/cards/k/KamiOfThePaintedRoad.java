@@ -42,7 +42,7 @@ import mage.filter.StaticFilters;
  *
  * @author LevelX2
  */
-public class KamiOfThePaintedRoad extends CardImpl {
+public final class KamiOfThePaintedRoad extends CardImpl {
 
     public KamiOfThePaintedRoad(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");

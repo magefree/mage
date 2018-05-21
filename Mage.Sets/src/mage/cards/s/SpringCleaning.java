@@ -43,7 +43,7 @@ import mage.target.common.TargetEnchantmentPermanent;
  *
  * @author Styxo
  */
-public class SpringCleaning extends CardImpl {
+public final class SpringCleaning extends CardImpl {
 
     private static final FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent("enchantments your opponents control");
 

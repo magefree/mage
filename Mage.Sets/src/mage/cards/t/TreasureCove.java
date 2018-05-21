@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author TheElk801
  */
-public class TreasureCove extends CardImpl {
+public final class TreasureCove extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Treasure");
 

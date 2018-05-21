@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author TheElk801
  */
-public class SuleimansLegacy extends CardImpl {
+public final class SuleimansLegacy extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Djinns and Efreets");
 

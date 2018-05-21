@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author LoneFox
 
  */
-public class GuidedStrike extends CardImpl {
+public final class GuidedStrike extends CardImpl {
 
     public GuidedStrike(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");

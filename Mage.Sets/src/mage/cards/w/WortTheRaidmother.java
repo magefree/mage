@@ -51,7 +51,7 @@ import mage.game.stack.StackObject;
  *
  * @author LevelX2
  */
-public class WortTheRaidmother extends CardImpl {
+public final class WortTheRaidmother extends CardImpl {
 
     public WortTheRaidmother(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R/G}{R/G}");

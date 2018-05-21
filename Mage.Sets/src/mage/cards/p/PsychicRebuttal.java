@@ -52,7 +52,7 @@ import mage.target.TargetSpell;
  *
  * @author LevelX2
  */
-public class PsychicRebuttal extends CardImpl {
+public final class PsychicRebuttal extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("instant or sorcery spell that targets you");
 

@@ -49,7 +49,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class FalkenrathGorger extends CardImpl {
+public final class FalkenrathGorger extends CardImpl {
 
     public FalkenrathGorger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");

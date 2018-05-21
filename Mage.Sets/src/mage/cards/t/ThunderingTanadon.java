@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class ThunderingTanadon extends CardImpl {
+public final class ThunderingTanadon extends CardImpl {
 
     public ThunderingTanadon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}{G/P}{G/P}");

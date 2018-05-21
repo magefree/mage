@@ -43,7 +43,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author fireshoes
  */
-public class KarplusanWolverine extends CardImpl {
+public final class KarplusanWolverine extends CardImpl {
 
     public KarplusanWolverine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");

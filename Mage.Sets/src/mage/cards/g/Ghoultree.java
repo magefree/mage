@@ -42,7 +42,7 @@ import mage.filter.common.FilterCreatureCard;
  *
  * @author North
  */
-public class Ghoultree extends CardImpl {
+public final class Ghoultree extends CardImpl {
 
     public Ghoultree(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{7}{G}");

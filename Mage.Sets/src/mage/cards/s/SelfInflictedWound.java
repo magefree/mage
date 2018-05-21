@@ -51,7 +51,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class SelfInflictedWound extends CardImpl {
+public final class SelfInflictedWound extends CardImpl {
 
     public SelfInflictedWound(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}");

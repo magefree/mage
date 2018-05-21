@@ -54,7 +54,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author TheElk801
  */
-public class BoneyardParley extends CardImpl {
+public final class BoneyardParley extends CardImpl {
 
     public BoneyardParley(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{B}{B}");

@@ -41,7 +41,7 @@ import mage.constants.CardType;
  *
  * @author Loki
  */
-public class SeasideCitadel extends CardImpl {
+public final class SeasideCitadel extends CardImpl {
 
     public SeasideCitadel (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);

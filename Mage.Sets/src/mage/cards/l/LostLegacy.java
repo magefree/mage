@@ -45,7 +45,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class LostLegacy extends CardImpl {
+public final class LostLegacy extends CardImpl {
 
     public LostLegacy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}{B}");

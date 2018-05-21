@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.MulticoloredPredicate;
  *
  * @author jeffwadsworth
  */
-public class ClovenCasting extends CardImpl {
+public final class ClovenCasting extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("a multicolored instant or sorcery spell");
 

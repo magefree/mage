@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class LingeringTormentor extends CardImpl {
+public final class LingeringTormentor extends CardImpl {
 
     public LingeringTormentor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

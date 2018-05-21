@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author Styxo
  */
-public class BanthaHerd extends CardImpl {
+public final class BanthaHerd extends CardImpl {
 
     public BanthaHerd(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");

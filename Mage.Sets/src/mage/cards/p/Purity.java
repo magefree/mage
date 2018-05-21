@@ -51,7 +51,7 @@ import mage.players.Player;
  *
  * @author Pete Rossi
  */
-public class Purity extends CardImpl {
+public final class Purity extends CardImpl {
 
     public Purity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{W}{W}");

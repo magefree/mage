@@ -44,7 +44,7 @@ import mage.game.events.GameEvent;
  *
  * @author fireshoes
  */
-public class HandToHand extends CardImpl {
+public final class HandToHand extends CardImpl {
 
     public HandToHand(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");

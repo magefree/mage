@@ -59,7 +59,7 @@ import java.util.UUID;
  *
  * @author jeffwadsworth
  */
-public class HavenOfTheSpiritDragon extends CardImpl {
+public final class HavenOfTheSpiritDragon extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Dragon creature card or Ugin planeswalker card from your graveyard");
 

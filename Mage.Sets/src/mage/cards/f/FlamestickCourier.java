@@ -53,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LoneFox
  */
-public class FlamestickCourier extends CardImpl {
+public final class FlamestickCourier extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Goblin creature");
 

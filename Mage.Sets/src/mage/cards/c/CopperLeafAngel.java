@@ -48,7 +48,7 @@ import mage.filter.common.FilterControlledLandPermanent;
  *
  * @author Rene - bugisemail at gmail.com
  */
-public class CopperLeafAngel extends CardImpl {
+public final class CopperLeafAngel extends CardImpl {
 
     public CopperLeafAngel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");

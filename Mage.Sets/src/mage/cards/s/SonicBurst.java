@@ -39,7 +39,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author markedagain
  */
-public class SonicBurst extends CardImpl {
+public final class SonicBurst extends CardImpl {
 
     public SonicBurst(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");

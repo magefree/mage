@@ -39,7 +39,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author nigelzor
  */
-public class TorrentOfFire extends CardImpl {
+public final class TorrentOfFire extends CardImpl {
 
     public TorrentOfFire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");

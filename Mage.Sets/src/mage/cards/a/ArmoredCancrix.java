@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ArmoredCancrix extends CardImpl {
+public final class ArmoredCancrix extends CardImpl {
 
     public ArmoredCancrix(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");

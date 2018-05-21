@@ -38,7 +38,7 @@ import mage.constants.Duration;
  *
  * @author fireshoes
  */
-public class ChorusOfWoe extends CardImpl {
+public final class ChorusOfWoe extends CardImpl {
 
     public ChorusOfWoe(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}");

@@ -41,7 +41,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class AcrobaticManeuver extends CardImpl {
+public final class AcrobaticManeuver extends CardImpl {
 
     public AcrobaticManeuver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{W}");

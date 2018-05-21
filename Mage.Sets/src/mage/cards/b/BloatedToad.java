@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author Backfir3
  */
-public class BloatedToad extends CardImpl {
+public final class BloatedToad extends CardImpl {
 
     public BloatedToad(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author TheElk801
  */
-public class GaeasProtector extends CardImpl {
+public final class GaeasProtector extends CardImpl {
 
     public GaeasProtector(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");

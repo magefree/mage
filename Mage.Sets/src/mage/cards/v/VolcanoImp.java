@@ -46,7 +46,7 @@ import mage.constants.Zone;
  * @author LoneFox
 
  */
-public class VolcanoImp extends CardImpl {
+public final class VolcanoImp extends CardImpl {
 
     public VolcanoImp(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

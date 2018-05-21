@@ -45,7 +45,7 @@ import mage.players.Player;
  * @author LoneFox
 
  */
-public class CrumblingSanctuary extends CardImpl {
+public final class CrumblingSanctuary extends CardImpl {
 
     public CrumblingSanctuary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");

@@ -46,7 +46,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author FenrisulfrX
  */
-public class UrzasRage extends CardImpl {
+public final class UrzasRage extends CardImpl {
 
     public UrzasRage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{R}");

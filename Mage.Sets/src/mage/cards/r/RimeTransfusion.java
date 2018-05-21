@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class RimeTransfusion extends CardImpl {
+public final class RimeTransfusion extends CardImpl {
 
     static final String rule = "and has \"{S}: This creature can't be blocked this turn except by snow creatures.\"";
 

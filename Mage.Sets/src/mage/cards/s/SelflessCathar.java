@@ -44,7 +44,7 @@ import mage.constants.Zone;
 /**
  * @author nantuko
  */
-public class SelflessCathar extends CardImpl {
+public final class SelflessCathar extends CardImpl {
 
     public SelflessCathar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");

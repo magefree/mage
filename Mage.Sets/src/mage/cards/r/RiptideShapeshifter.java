@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author emerald000
  */
-public class RiptideShapeshifter extends CardImpl {
+public final class RiptideShapeshifter extends CardImpl {
 
     public RiptideShapeshifter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");

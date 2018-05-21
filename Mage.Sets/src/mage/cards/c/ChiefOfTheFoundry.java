@@ -46,7 +46,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author fireshoes
  */
-public class ChiefOfTheFoundry extends CardImpl {
+public final class ChiefOfTheFoundry extends CardImpl {
 
     private static final FilterCreaturePermanent filterBoosted = new FilterCreaturePermanent("Other artifact creatures you control");
 

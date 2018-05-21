@@ -42,7 +42,7 @@ import mage.constants.CardType;
  *
  * @author Backfir3
  */
-public class DriftingMeadow extends CardImpl {
+public final class DriftingMeadow extends CardImpl {
 
     public DriftingMeadow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

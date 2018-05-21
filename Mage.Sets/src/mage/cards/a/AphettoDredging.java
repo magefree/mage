@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author Quercitron
  */
-public class AphettoDredging extends CardImpl {
+public final class AphettoDredging extends CardImpl {
 
     public AphettoDredging(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{B}");

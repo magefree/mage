@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author Plopman
  */
-public class ConsumingAberration extends CardImpl {
+public final class ConsumingAberration extends CardImpl {
 
     public ConsumingAberration(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{B}");

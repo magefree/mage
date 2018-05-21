@@ -50,7 +50,7 @@ import mage.watchers.common.DamagedByWatcher;
  *
  * @author JotaPeRL
  */
-public class Demonfire extends CardImpl {
+public final class Demonfire extends CardImpl {
 
     public Demonfire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{R}");

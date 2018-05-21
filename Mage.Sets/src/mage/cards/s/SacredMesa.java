@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author emerald000
  */
-public class SacredMesa extends CardImpl {
+public final class SacredMesa extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Pegasus");
     static {

@@ -51,7 +51,7 @@ import mage.game.stack.StackObject;
  *
  * @author anonymous
  */
-public class OpalineSliver extends CardImpl {
+public final class OpalineSliver extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("All Slivers");
 

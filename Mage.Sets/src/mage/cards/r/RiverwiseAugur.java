@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class RiverwiseAugur extends CardImpl {
+public final class RiverwiseAugur extends CardImpl {
 
     public RiverwiseAugur(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");

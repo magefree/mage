@@ -45,7 +45,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 
-public class RenegadeKrasis extends CardImpl {
+public final class RenegadeKrasis extends CardImpl {
 
     public RenegadeKrasis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");

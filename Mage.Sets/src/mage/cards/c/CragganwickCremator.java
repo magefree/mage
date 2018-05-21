@@ -47,7 +47,7 @@ import mage.target.TargetPlayer;
  *
  * @author jeffwadsworth
  */
-public class CragganwickCremator extends CardImpl {
+public final class CragganwickCremator extends CardImpl {
 
     public CragganwickCremator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");

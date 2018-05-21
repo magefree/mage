@@ -42,7 +42,7 @@ import mage.filter.StaticFilters;
  *
  * @author Loki
  */
-public class GerrardsBattleCry extends CardImpl {
+public final class GerrardsBattleCry extends CardImpl {
 
     public GerrardsBattleCry(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{W}");

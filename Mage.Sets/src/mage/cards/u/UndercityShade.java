@@ -41,7 +41,7 @@ import mage.constants.*;
  *
  * @author Loki
  */
-public class UndercityShade extends CardImpl {
+public final class UndercityShade extends CardImpl {
 
     public UndercityShade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");

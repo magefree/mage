@@ -41,7 +41,7 @@ import mage.target.common.TargetCardInYourGraveyard;
 /**
  * @author nantuko
  */
-public class StitchedDrake extends CardImpl {
+public final class StitchedDrake extends CardImpl {
 
     public StitchedDrake(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");

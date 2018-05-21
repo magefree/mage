@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class HaplessResearcher extends CardImpl {
+public final class HaplessResearcher extends CardImpl {
 
     public HaplessResearcher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");

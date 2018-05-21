@@ -45,7 +45,7 @@ import mage.target.TargetPlayer;
  *
  * @author Loki
  */
-public class KemuriOnna extends CardImpl {
+public final class KemuriOnna extends CardImpl {
 
     public KemuriOnna(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");

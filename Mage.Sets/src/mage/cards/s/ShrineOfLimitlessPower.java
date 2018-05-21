@@ -53,7 +53,7 @@ import mage.target.TargetPlayer;
  *
  * @author North
  */
-public class ShrineOfLimitlessPower extends CardImpl {
+public final class ShrineOfLimitlessPower extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("a black spell");
 

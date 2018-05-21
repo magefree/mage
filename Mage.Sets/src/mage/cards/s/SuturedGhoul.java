@@ -56,7 +56,7 @@ import mage.target.common.TargetCardInYourGraveyard;
 /**
  * @author nantuko
  */
-public class SuturedGhoul extends CardImpl {
+public final class SuturedGhoul extends CardImpl {
 
     private static final String staticText = "exile any number of creature cards from your graveyard";
     private static final String staticText2 = "Sutured Ghoul's power is equal to the total power of the exiled cards and its toughness is equal to their total toughness";

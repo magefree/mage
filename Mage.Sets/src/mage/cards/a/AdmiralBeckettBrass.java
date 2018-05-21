@@ -53,7 +53,7 @@ import mage.watchers.Watcher;
  *
  * @author TheElk801
  */
-public class AdmiralBeckettBrass extends CardImpl {
+public final class AdmiralBeckettBrass extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Pirates you control");
     private static final FilterNonlandPermanent filter2 = new FilterNonlandPermanent("nonland permanent controlled by a player who was dealt combat damage by three or more Pirates this turn");

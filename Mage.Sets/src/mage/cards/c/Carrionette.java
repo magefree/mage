@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author L_J
  */
-public class Carrionette extends CardImpl {
+public final class Carrionette extends CardImpl {
 
     public Carrionette(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

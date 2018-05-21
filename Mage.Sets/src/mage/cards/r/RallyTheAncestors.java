@@ -57,7 +57,7 @@ import java.util.UUID;
  *
  * @author emerald000
  */
-public class RallyTheAncestors extends CardImpl {
+public final class RallyTheAncestors extends CardImpl {
 
     public RallyTheAncestors(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{W}{W}");

@@ -40,7 +40,7 @@ import mage.target.TargetSpell;
  *
  * @author emerald000
  */
-public class RakshasasDisdain extends CardImpl {
+public final class RakshasasDisdain extends CardImpl {
 
     public RakshasasDisdain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");

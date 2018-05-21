@@ -48,7 +48,7 @@ import mage.game.events.GameEvent;
  *
  * @author LevelX2
  */
-public class IonaShieldOfEmeria extends CardImpl {
+public final class IonaShieldOfEmeria extends CardImpl {
 
     public IonaShieldOfEmeria(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{W}{W}{W}");

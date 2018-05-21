@@ -51,7 +51,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author L_J
  */
-public class LiarsPendulum extends CardImpl {
+public final class LiarsPendulum extends CardImpl {
 
     public LiarsPendulum(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");

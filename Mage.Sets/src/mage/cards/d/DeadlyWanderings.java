@@ -49,7 +49,7 @@ import mage.filter.StaticFilters;
 /**
  * @author LevelX2
  */
-public class DeadlyWanderings extends CardImpl {
+public final class DeadlyWanderings extends CardImpl {
 
     public DeadlyWanderings(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{B}");

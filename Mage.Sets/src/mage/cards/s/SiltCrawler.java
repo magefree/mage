@@ -41,7 +41,7 @@ import mage.filter.common.FilterControlledLandPermanent;
  *
  * @author LoneFox
  */
-public class SiltCrawler extends CardImpl {
+public final class SiltCrawler extends CardImpl {
 
     public SiltCrawler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

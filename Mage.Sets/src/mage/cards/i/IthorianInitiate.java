@@ -45,7 +45,7 @@ import java.util.UUID;
  *
  * @author Styxo
  */
-public class IthorianInitiate extends CardImpl {
+public final class IthorianInitiate extends CardImpl {
 
     public IthorianInitiate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

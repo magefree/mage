@@ -51,7 +51,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author emerald000
  */
-public class Hypergenesis extends CardImpl {
+public final class Hypergenesis extends CardImpl {
 
     public Hypergenesis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"");

@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LoneFox
  */
-public class RockslideAmbush extends CardImpl {
+public final class RockslideAmbush extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Mountain you control");
 

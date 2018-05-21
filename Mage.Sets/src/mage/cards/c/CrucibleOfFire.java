@@ -41,7 +41,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author Plopman
  */
-public class CrucibleOfFire extends CardImpl {
+public final class CrucibleOfFire extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Dragon creatures");
     static {

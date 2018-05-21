@@ -46,7 +46,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Loki
  */
-public class CorruptedHarvester extends CardImpl {
+public final class CorruptedHarvester extends CardImpl {
 
     public CorruptedHarvester(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");

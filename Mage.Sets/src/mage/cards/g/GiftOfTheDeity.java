@@ -55,7 +55,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class GiftOfTheDeity extends CardImpl {
+public final class GiftOfTheDeity extends CardImpl {
 
     public GiftOfTheDeity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{B/G}");

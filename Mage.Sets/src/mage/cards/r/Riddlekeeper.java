@@ -43,7 +43,7 @@ import mage.filter.StaticFilters;
  *
  * @author Styxo
  */
-public class Riddlekeeper extends CardImpl {
+public final class Riddlekeeper extends CardImpl {
 
     public Riddlekeeper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");

@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author MarcoMarin
  */
-public class TawnossWand extends CardImpl {
+public final class TawnossWand extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 2 or less");
 

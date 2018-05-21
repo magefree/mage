@@ -55,7 +55,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  *
  * @author LevelX2
  */
-public class ChandraFireOfKaladesh extends CardImpl {
+public final class ChandraFireOfKaladesh extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("a red spell");
 

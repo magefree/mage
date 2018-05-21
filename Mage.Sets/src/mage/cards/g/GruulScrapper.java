@@ -46,7 +46,7 @@ import mage.watchers.common.ManaSpentToCastWatcher;
  *
  * @author Styxo
  */
-public class GruulScrapper extends CardImpl {
+public final class GruulScrapper extends CardImpl {
 
     public GruulScrapper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

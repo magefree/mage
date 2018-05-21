@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author L_J
  */
-public class Liability extends CardImpl {
+public final class Liability extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("a nontoken permanent");
     

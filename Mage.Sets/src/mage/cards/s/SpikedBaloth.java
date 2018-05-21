@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class SpikedBaloth extends CardImpl {
+public final class SpikedBaloth extends CardImpl {
 
     public SpikedBaloth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

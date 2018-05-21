@@ -40,7 +40,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author fireshoes
  */
-public class DisturbedBurial extends CardImpl {
+public final class DisturbedBurial extends CardImpl {
 
     public DisturbedBurial(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}");

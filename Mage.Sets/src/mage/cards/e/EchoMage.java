@@ -54,7 +54,7 @@ import mage.target.TargetSpell;
  *
  * @author North
  */
-public class EchoMage extends LevelerCard {
+public final class EchoMage extends LevelerCard {
 
     public EchoMage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");

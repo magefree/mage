@@ -51,7 +51,7 @@ import java.util.UUID;
  *
  * @author spjspj
  */
-public class DaredevilDragster extends CardImpl {
+public final class DaredevilDragster extends CardImpl {
 
     public DaredevilDragster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");

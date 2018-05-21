@@ -46,7 +46,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author fireshoes
  */
-public class RavenousIntruder extends CardImpl {
+public final class RavenousIntruder extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("an artifact");
 

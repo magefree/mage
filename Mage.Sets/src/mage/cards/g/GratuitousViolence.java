@@ -46,7 +46,7 @@ import mage.util.CardUtil;
  *
  * @author emerald000
  */
-public class GratuitousViolence extends CardImpl {
+public final class GratuitousViolence extends CardImpl {
 
     public GratuitousViolence(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{R}{R}");

@@ -47,7 +47,7 @@ import mage.target.TargetSpell;
  *
  * @author jeffwadsworth
  */
-public class StratusDancer extends CardImpl {
+public final class StratusDancer extends CardImpl {
 
     public StratusDancer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

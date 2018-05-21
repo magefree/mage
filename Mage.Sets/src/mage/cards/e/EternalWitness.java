@@ -42,7 +42,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author jonubuu
  */
-public class EternalWitness extends CardImpl {
+public final class EternalWitness extends CardImpl {
 
     public EternalWitness(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");

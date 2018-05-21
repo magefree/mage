@@ -42,7 +42,7 @@ import mage.target.TargetPlayer;
  *
  * @author Loki
  */
-public class InfectiousHost extends CardImpl {
+public final class InfectiousHost extends CardImpl {
 
     public InfectiousHost(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

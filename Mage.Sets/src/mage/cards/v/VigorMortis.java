@@ -51,7 +51,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author emerald000
  */
-public class VigorMortis extends CardImpl {
+public final class VigorMortis extends CardImpl {
 
     public VigorMortis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");

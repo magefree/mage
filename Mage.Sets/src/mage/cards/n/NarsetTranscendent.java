@@ -62,7 +62,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class NarsetTranscendent extends CardImpl {
+public final class NarsetTranscendent extends CardImpl {
 
     public NarsetTranscendent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{W}{U}");

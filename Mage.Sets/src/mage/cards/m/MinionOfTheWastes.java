@@ -52,7 +52,7 @@ import mage.players.Player;
  *
  * @author L_J
  */
-public class MinionOfTheWastes extends CardImpl {
+public final class MinionOfTheWastes extends CardImpl {
 
     public MinionOfTheWastes(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}{B}");

@@ -49,7 +49,7 @@ import mage.target.TargetStackObject;
  *
  * @author LoneFox
  */
-public class DiplomaticEscort extends CardImpl {
+public final class DiplomaticEscort extends CardImpl {
 
     private final static FilterStackObject filter = new FilterStackObject("spell or ability that targets a creature");
 

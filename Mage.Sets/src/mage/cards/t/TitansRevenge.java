@@ -40,7 +40,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LevelX2
  */
-public class TitansRevenge extends CardImpl {
+public final class TitansRevenge extends CardImpl {
 
     public TitansRevenge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{R}{R}");

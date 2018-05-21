@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class SoulShred extends CardImpl {
+public final class SoulShred extends CardImpl {
     
     static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack creature");
 

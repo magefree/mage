@@ -45,7 +45,7 @@ import mage.filter.common.FilterArtifactCard;
  *
  * @author fireshoes
  */
-public class CopperGnomes extends CardImpl {
+public final class CopperGnomes extends CardImpl {
 
     public CopperGnomes(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");

@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author L_J
  */
-public class FamishedPaladin extends CardImpl {
+public final class FamishedPaladin extends CardImpl {
 
     public FamishedPaladin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author Backfir3
  */
-public class AngelicChorus extends CardImpl {
+public final class AngelicChorus extends CardImpl {
 
     public AngelicChorus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}{W}");

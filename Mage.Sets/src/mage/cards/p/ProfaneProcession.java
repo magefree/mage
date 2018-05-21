@@ -53,7 +53,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class ProfaneProcession extends CardImpl {
+public final class ProfaneProcession extends CardImpl {
 
     public ProfaneProcession(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}{B}");

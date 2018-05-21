@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author TheElk801
  */
-public class DireFleetRavager extends CardImpl {
+public final class DireFleetRavager extends CardImpl {
 
     public DireFleetRavager(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");

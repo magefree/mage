@@ -41,7 +41,7 @@ import mage.constants.Duration;
  *
  * @author Loki
  */
-public class HollowDogs extends CardImpl {
+public final class HollowDogs extends CardImpl {
 
     public HollowDogs(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");

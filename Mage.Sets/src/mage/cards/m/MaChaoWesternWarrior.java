@@ -44,7 +44,7 @@ import mage.constants.SuperType;
  *
  * @author LoneFox
  */
-public class MaChaoWesternWarrior extends CardImpl {
+public final class MaChaoWesternWarrior extends CardImpl {
 
     public MaChaoWesternWarrior(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");

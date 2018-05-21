@@ -61,7 +61,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author L_J
  */
-public class Leviathan extends CardImpl {
+public final class Leviathan extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("two Islands");
     static {

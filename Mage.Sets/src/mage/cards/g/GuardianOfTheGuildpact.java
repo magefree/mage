@@ -41,7 +41,7 @@ import mage.filter.predicate.mageobject.MonocoloredPredicate;
  *
  * @author LevelX2
  */
-public class GuardianOfTheGuildpact extends CardImpl {
+public final class GuardianOfTheGuildpact extends CardImpl {
     
     private static final FilterCard filter = new FilterCard("monocolored");
 

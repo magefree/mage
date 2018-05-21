@@ -46,7 +46,7 @@ import mage.game.permanent.token.SpiritWhiteToken;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class NearheathChaplain extends CardImpl {
+public final class NearheathChaplain extends CardImpl {
 
     public NearheathChaplain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

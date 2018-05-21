@@ -52,7 +52,7 @@ import mage.watchers.common.AttackedThisTurnWatcher;
  *
  * @author Quercitron
  */
-public class GoblinRabblemaster extends CardImpl {
+public final class GoblinRabblemaster extends CardImpl {
 
     private static final FilterCreaturePermanent otherGoblinFilter = new FilterCreaturePermanent(SubType.GOBLIN, "Other Goblin creatures you control");
     private static final FilterCreaturePermanent attackingFilter = new FilterCreaturePermanent(SubType.GOBLIN, "other attacking Goblin");

@@ -39,7 +39,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LevelX2
  */
-public class LightningJavelin extends CardImpl {
+public final class LightningJavelin extends CardImpl {
 
     public LightningJavelin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}");

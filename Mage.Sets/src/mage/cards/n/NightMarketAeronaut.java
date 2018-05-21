@@ -45,7 +45,7 @@ import mage.watchers.common.RevoltWatcher;
 /**
  * @author JRHerlehy
  */
-public class NightMarketAeronaut extends CardImpl {
+public final class NightMarketAeronaut extends CardImpl {
 
     public NightMarketAeronaut(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");

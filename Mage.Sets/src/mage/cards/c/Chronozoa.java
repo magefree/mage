@@ -51,7 +51,7 @@ import mage.counters.CounterType;
  * @author Gal Lerman
  *
  */
-public class Chronozoa extends CardImpl {
+public final class Chronozoa extends CardImpl {
 
     public Chronozoa(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");

@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class ViashinoSlaughtermaster extends CardImpl {
+public final class ViashinoSlaughtermaster extends CardImpl {
 
     public ViashinoSlaughtermaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

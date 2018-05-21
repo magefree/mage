@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author JRHerlehy
  */
-public class OrchardElemental extends CardImpl {
+public final class OrchardElemental extends CardImpl {
 
     public OrchardElemental(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{G}");

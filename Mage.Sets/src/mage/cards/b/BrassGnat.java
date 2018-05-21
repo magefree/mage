@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author nigelzor
  */
-public class BrassGnat extends CardImpl {
+public final class BrassGnat extends CardImpl {
 
     public BrassGnat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{1}");

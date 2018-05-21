@@ -52,7 +52,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class AngelOfGlorysRise extends CardImpl {
+public final class AngelOfGlorysRise extends CardImpl {
 
     public AngelOfGlorysRise(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{W}{W}");

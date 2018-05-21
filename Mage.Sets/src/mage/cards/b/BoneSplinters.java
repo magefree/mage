@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class BoneSplinters extends CardImpl {
+public final class BoneSplinters extends CardImpl {
 
     public BoneSplinters(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{B}");

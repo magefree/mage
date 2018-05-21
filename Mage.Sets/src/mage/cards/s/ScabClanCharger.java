@@ -41,7 +41,7 @@ import mage.constants.Duration;
  *
  * @author Plopman
  */
-public class ScabClanCharger extends CardImpl {
+public final class ScabClanCharger extends CardImpl {
 
     public ScabClanCharger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

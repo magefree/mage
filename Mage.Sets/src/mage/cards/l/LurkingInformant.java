@@ -45,7 +45,7 @@ import mage.target.TargetPlayer;
  *
  * @author fireshoes
  */
-public class LurkingInformant extends CardImpl {
+public final class LurkingInformant extends CardImpl {
 
     public LurkingInformant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U/B}");

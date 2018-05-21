@@ -43,7 +43,7 @@ import mage.filter.common.FilterControlledLandPermanent;
  *
  * @author fireshoes
  */
-public class ZendikarResurgent extends CardImpl {
+public final class ZendikarResurgent extends CardImpl {
 
     public ZendikarResurgent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{5}{G}{G}");

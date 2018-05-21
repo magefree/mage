@@ -40,7 +40,7 @@ import mage.game.permanent.token.SaprolingToken;
  *
  * @author fireshoes
  */
-public class SproutSwarm extends CardImpl {
+public final class SproutSwarm extends CardImpl {
 
     public SproutSwarm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}");

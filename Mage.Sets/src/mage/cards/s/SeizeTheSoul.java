@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author TheElk801
  */
-public class SeizeTheSoul extends CardImpl {
+public final class SeizeTheSoul extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonwhite, nonblack creature");
 

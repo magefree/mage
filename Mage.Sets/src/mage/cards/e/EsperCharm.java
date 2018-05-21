@@ -42,7 +42,7 @@ import mage.target.common.TargetEnchantmentPermanent;
  *
  * @author North
  */
-public class EsperCharm extends CardImpl {
+public final class EsperCharm extends CardImpl {
 
     public EsperCharm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}{U}{B}");

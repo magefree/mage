@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class GorgerWurm extends CardImpl {
+public final class GorgerWurm extends CardImpl {
 
     public GorgerWurm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{G}");

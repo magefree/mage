@@ -50,7 +50,7 @@ import mage.target.common.TargetCreatureOrPlaneswalker;
  *
  * @author spjspj
  */
-public class DeadlockTrap extends CardImpl {
+public final class DeadlockTrap extends CardImpl {
 
     public DeadlockTrap(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

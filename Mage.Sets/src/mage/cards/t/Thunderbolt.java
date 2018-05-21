@@ -43,7 +43,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  *
  * @author North
  */
-public class Thunderbolt extends CardImpl {
+public final class Thunderbolt extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with flying");
 

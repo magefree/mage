@@ -45,7 +45,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author anonymous
  */
-public class KeldonMegaliths extends CardImpl {
+public final class KeldonMegaliths extends CardImpl {
 
     public KeldonMegaliths(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

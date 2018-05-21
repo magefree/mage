@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.ColorlessPredicate;
  *
  * @author LevelX2
  */
-public class SwarmSurge extends CardImpl {
+public final class SwarmSurge extends CardImpl {
 
     private static final FilterCreaturePermanent FILTER = new FilterCreaturePermanent("Colorless creatures you control");
 

@@ -43,7 +43,7 @@ import mage.game.permanent.token.InsectToken;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class ItOfTheHorridSwarm extends CardImpl {
+public final class ItOfTheHorridSwarm extends CardImpl {
 
     public ItOfTheHorridSwarm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{8}");

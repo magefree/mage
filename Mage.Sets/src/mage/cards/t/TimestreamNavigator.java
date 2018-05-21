@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class TimestreamNavigator extends CardImpl {
+public final class TimestreamNavigator extends CardImpl {
 
     public TimestreamNavigator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");

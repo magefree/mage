@@ -54,7 +54,7 @@ import mage.target.targetpointer.FixedTarget;
 /**
  * @author nomage
  */
-public class CauldronDance extends CardImpl {
+public final class CauldronDance extends CardImpl {
 
     public CauldronDance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{4}{B}{R}");

@@ -44,7 +44,7 @@ import mage.target.common.TargetOpponentOrPlaneswalker;
 /**
  * @author fireshoes
  */
-public class ScaldingTongs extends CardImpl {
+public final class ScaldingTongs extends CardImpl {
 
     public ScaldingTongs(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");

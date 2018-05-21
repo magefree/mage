@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class SqueesEmbrace extends CardImpl {
+public final class SqueesEmbrace extends CardImpl {
 
     public SqueesEmbrace(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{R}{W}");

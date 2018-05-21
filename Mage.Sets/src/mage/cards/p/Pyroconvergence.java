@@ -41,7 +41,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LevelX2
  */
-public class Pyroconvergence extends CardImpl {
+public final class Pyroconvergence extends CardImpl {
 
     public Pyroconvergence(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{R}");

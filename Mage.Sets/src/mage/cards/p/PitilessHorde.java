@@ -42,7 +42,7 @@ import mage.constants.TargetController;
  *
  * @author fireshoes
  */
-public class PitilessHorde extends CardImpl {
+public final class PitilessHorde extends CardImpl {
 
     public PitilessHorde(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

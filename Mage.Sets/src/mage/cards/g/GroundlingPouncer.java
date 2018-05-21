@@ -56,7 +56,7 @@ import mage.game.Game;
  * @author jeffwadsworth
  *
  */
-public class GroundlingPouncer extends CardImpl {
+public final class GroundlingPouncer extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 

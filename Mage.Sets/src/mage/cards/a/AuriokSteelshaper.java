@@ -50,7 +50,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  * @author Jason E. Wall
  *
  */
-public class AuriokSteelshaper extends CardImpl {
+public final class AuriokSteelshaper extends CardImpl {
 
     private static final FilterCreaturePermanent soldiersOrKnights = new FilterCreaturePermanent();
 

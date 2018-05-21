@@ -46,7 +46,7 @@ import mage.target.TargetPlayer;
  *
  * @author emerald000 & L_J
  */
-public class PulseOfTheDross extends CardImpl {
+public final class PulseOfTheDross extends CardImpl {
 
     public PulseOfTheDross(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}{B}");

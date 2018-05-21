@@ -45,7 +45,7 @@ import mage.constants.Zone;
  * @author LoneFox
 
  */
-public class SpectralLynx extends CardImpl {
+public final class SpectralLynx extends CardImpl {
 
     public SpectralLynx(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

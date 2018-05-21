@@ -48,7 +48,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class SenTriplets extends CardImpl {
+public final class SenTriplets extends CardImpl {
 
     public SenTriplets(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}{W}{U}{B}");

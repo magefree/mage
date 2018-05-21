@@ -43,7 +43,7 @@ import mage.counters.CounterType;
  *
  * @author Loki
  */
-public class TendoIceBridge extends CardImpl {
+public final class TendoIceBridge extends CardImpl {
 
     public TendoIceBridge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

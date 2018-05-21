@@ -44,7 +44,7 @@ import mage.players.Player;
  *
  * @author emerald000
  */
-public class YixlidJailer extends CardImpl {
+public final class YixlidJailer extends CardImpl {
 
     public YixlidJailer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

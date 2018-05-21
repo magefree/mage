@@ -50,7 +50,7 @@ import mage.target.common.TargetOpponentsCreaturePermanent;
  *
  * @author Styxo
  */
-public class UnrulySureshot extends CardImpl {
+public final class UnrulySureshot extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with a bounty counter on it");
 

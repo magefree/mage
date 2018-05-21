@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author Loki
  */
-public class DreadOfNight extends CardImpl {
+public final class DreadOfNight extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("White creatures");
 

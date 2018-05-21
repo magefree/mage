@@ -44,7 +44,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class NefaroxOverlordOfGrixis extends CardImpl {
+public final class NefaroxOverlordOfGrixis extends CardImpl {
 
     public NefaroxOverlordOfGrixis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}");

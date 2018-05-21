@@ -42,7 +42,7 @@ import mage.filter.FilterPermanent;
  *
  * @author TheElk801
  */
-public class DrinkerOfSorrow extends CardImpl {
+public final class DrinkerOfSorrow extends CardImpl {
 
     public DrinkerOfSorrow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");

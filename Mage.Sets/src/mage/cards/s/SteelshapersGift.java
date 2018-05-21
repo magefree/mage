@@ -42,7 +42,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author jonubuu
  */
-public class SteelshapersGift extends CardImpl {
+public final class SteelshapersGift extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Equipment card");
 

@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author ilcartographer
  */
-public class BreakingPoint extends CardImpl {
+public final class BreakingPoint extends CardImpl {
 
     public BreakingPoint(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{R}{R}");

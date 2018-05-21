@@ -46,7 +46,7 @@ import mage.game.stack.Spell;
  *
  * @author LevelX2
  */
-public class PrismRing extends CardImpl {
+public final class PrismRing extends CardImpl {
 
     public PrismRing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");

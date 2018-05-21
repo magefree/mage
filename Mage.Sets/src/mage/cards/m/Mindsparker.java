@@ -52,7 +52,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class Mindsparker extends CardImpl {
+public final class Mindsparker extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("white or blue instant or sorcery spell");
 

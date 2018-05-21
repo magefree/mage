@@ -12,7 +12,7 @@ import mage.constants.Zone;
 
 import java.util.UUID;
 
-public class BenalishMarshal extends CardImpl {
+public final class BenalishMarshal extends CardImpl {
 
     public BenalishMarshal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{W}{W}");

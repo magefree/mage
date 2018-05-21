@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class DefiantSalvager extends CardImpl {
+public final class DefiantSalvager extends CardImpl {
 
     private final static FilterControlledPermanent filter = new FilterControlledPermanent("an artifact or creature");
 

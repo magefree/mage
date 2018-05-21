@@ -45,7 +45,7 @@ import mage.constants.Duration;
  *
  * @author LevelX2
  */
-public class RabidElephant extends CardImpl {
+public final class RabidElephant extends CardImpl {
 
     public RabidElephant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");

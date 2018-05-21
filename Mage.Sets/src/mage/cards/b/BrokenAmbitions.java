@@ -50,7 +50,7 @@ import mage.target.TargetSpell;
  *
  * @author fireshoes
  */
-public class BrokenAmbitions extends CardImpl {
+public final class BrokenAmbitions extends CardImpl {
 
     public BrokenAmbitions(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{U}");

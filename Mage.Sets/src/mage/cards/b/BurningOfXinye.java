@@ -48,7 +48,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author Plopman
  */
-public class BurningOfXinye extends CardImpl {
+public final class BurningOfXinye extends CardImpl {
 
     public BurningOfXinye(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{R}{R}");

@@ -39,7 +39,7 @@ import mage.filter.predicate.permanent.TappedPredicate;
  *
  * @author LoneFox
  */
-public class GuanYus1000LiMarch extends CardImpl {
+public final class GuanYus1000LiMarch extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creatures");
 

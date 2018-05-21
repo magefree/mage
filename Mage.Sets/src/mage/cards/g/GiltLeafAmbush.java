@@ -51,7 +51,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Styxo
  */
-public class GiltLeafAmbush extends CardImpl {
+public final class GiltLeafAmbush extends CardImpl {
 
     public GiltLeafAmbush(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.INSTANT},"{2}{G}");

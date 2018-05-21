@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class InsolentNeonate extends CardImpl {
+public final class InsolentNeonate extends CardImpl {
 
     public InsolentNeonate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");

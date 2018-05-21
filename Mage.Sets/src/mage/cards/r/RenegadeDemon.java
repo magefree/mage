@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class RenegadeDemon extends CardImpl {
+public final class RenegadeDemon extends CardImpl {
 
     public RenegadeDemon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");

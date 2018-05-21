@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class Chromanticore extends CardImpl {
+public final class Chromanticore extends CardImpl {
 
     public Chromanticore(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{W}{U}{B}{R}{G}");

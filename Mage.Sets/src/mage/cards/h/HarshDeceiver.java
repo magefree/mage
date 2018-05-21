@@ -56,7 +56,7 @@ import mage.players.Player;
  *
  * @author LevelX
  */
-public class HarshDeceiver extends CardImpl {
+public final class HarshDeceiver extends CardImpl {
 
     public HarshDeceiver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");

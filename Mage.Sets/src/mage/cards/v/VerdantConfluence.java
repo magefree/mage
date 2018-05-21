@@ -47,7 +47,7 @@ import java.util.UUID;
  *
  * @author fireshoes
  */
-public class VerdantConfluence extends CardImpl {
+public final class VerdantConfluence extends CardImpl {
 
     public VerdantConfluence(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{G}{G}");

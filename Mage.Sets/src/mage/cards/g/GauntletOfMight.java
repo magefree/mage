@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author LevelX2
  */
-public class GauntletOfMight extends CardImpl {
+public final class GauntletOfMight extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Red creatures");
     private static final FilterLandPermanent filterMountain = new FilterLandPermanent("a Mountain is tapped");

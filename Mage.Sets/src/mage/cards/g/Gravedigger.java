@@ -43,7 +43,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Gravedigger extends CardImpl {
+public final class Gravedigger extends CardImpl {
 
     public Gravedigger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");

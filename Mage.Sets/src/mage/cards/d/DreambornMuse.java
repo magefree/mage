@@ -42,7 +42,7 @@ import mage.constants.TargetController;
  *
  * @author cbrianhill
  */
-public class DreambornMuse extends CardImpl {
+public final class DreambornMuse extends CardImpl {
 
     public DreambornMuse(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");

@@ -51,7 +51,7 @@ import mage.target.common.TargetAttackingCreature;
  *
  * @author fireshoes
  */
-public class AvengerEnDal extends CardImpl {
+public final class AvengerEnDal extends CardImpl {
 
     public AvengerEnDal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

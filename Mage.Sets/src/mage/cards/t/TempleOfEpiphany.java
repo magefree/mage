@@ -41,7 +41,7 @@ import mage.constants.CardType;
  *
  * @author LevelX2
  */
-public class TempleOfEpiphany extends CardImpl {
+public final class TempleOfEpiphany extends CardImpl {
 
     public TempleOfEpiphany(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

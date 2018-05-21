@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author TheElk801
  */
-public class RavenousDaggertooth extends CardImpl {
+public final class RavenousDaggertooth extends CardImpl {
 
     public RavenousDaggertooth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");

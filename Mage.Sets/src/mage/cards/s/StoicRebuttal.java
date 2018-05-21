@@ -44,7 +44,7 @@ import mage.target.TargetSpell;
 /**
  * @author ayrat
  */
-public class StoicRebuttal extends CardImpl {
+public final class StoicRebuttal extends CardImpl {
 
     public StoicRebuttal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}{U}");

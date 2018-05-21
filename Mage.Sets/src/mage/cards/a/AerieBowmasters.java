@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class AerieBowmasters extends CardImpl {
+public final class AerieBowmasters extends CardImpl {
 
     public AerieBowmasters(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");

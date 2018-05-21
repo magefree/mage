@@ -43,7 +43,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Backfir3
  */
-public class GhituSlinger extends CardImpl {
+public final class GhituSlinger extends CardImpl {
 
     public GhituSlinger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

@@ -43,7 +43,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class CrumblingColossus extends CardImpl {
+public final class CrumblingColossus extends CardImpl {
 
     public CrumblingColossus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{5}");

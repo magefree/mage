@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class CoastalWizard extends CardImpl {
+public final class CoastalWizard extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature");
     static {

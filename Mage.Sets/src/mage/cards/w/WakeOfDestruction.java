@@ -38,7 +38,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author Styxo
  */
-public class WakeOfDestruction extends CardImpl {
+public final class WakeOfDestruction extends CardImpl {
 
     public WakeOfDestruction(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}{R}{R}");

@@ -50,7 +50,7 @@ import mage.watchers.common.PlayerGainedLifeWatcher;
  *
  * @author fireshoes
  */
-public class LoneRider extends CardImpl {
+public final class LoneRider extends CardImpl {
 
     private static final String ruleText = "At the beginning of the end step, if you gained 3 or more life this turn, transform {this}";
 

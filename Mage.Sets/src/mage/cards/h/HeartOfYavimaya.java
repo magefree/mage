@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class HeartOfYavimaya extends CardImpl {
+public final class HeartOfYavimaya extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Forest");
 

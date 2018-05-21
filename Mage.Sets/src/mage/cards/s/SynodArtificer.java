@@ -51,7 +51,7 @@ import mage.target.TargetPermanent;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class SynodArtificer extends CardImpl {
+public final class SynodArtificer extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("noncreature artifacts");
 

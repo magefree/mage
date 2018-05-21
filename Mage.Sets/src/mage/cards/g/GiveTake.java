@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class GiveTake extends SplitCard {
+public final class GiveTake extends SplitCard {
 
     public GiveTake(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{G}", "{2}{U}", SpellAbilityType.SPLIT_FUSED);

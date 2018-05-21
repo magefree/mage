@@ -66,7 +66,7 @@ import mage.players.Player;
 //    first ability) can find that card in exile.
 //
 
-public class RestInPeace extends CardImpl {
+public final class RestInPeace extends CardImpl {
 
     public RestInPeace(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");

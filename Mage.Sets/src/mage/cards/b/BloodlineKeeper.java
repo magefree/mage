@@ -54,7 +54,7 @@ import mage.game.permanent.token.VampireToken;
  *
  * @author Loki
  */
-public class BloodlineKeeper extends CardImpl {
+public final class BloodlineKeeper extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("you control five or more Vampires");
 

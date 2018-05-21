@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class StaunchDefenders extends CardImpl {
+public final class StaunchDefenders extends CardImpl {
 
     public StaunchDefenders(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");

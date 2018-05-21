@@ -55,7 +55,7 @@ import mage.players.Player;
  * @author Gal Lerman
  *
  */
-public class DustOfMoments extends CardImpl {
+public final class DustOfMoments extends CardImpl {
 
     public DustOfMoments(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{W}");

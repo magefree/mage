@@ -51,7 +51,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Loki
  */
-public class GuardianOfCloverdell extends CardImpl {
+public final class GuardianOfCloverdell extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Kithkin");
 

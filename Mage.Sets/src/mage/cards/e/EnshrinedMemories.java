@@ -40,7 +40,7 @@ import mage.filter.common.FilterCreatureCard;
  *
  * @author LevelX2
  */
-public class EnshrinedMemories extends CardImpl {
+public final class EnshrinedMemories extends CardImpl {
 
     public EnshrinedMemories(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{G}");

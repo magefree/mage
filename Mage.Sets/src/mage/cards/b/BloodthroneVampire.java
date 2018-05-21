@@ -45,7 +45,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BloodthroneVampire extends CardImpl {
+public final class BloodthroneVampire extends CardImpl {
 
     public BloodthroneVampire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");

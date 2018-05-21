@@ -46,7 +46,7 @@ import mage.game.permanent.token.ZombieToken;
  *
  * @author fireshoes
  */
-public class LilianasMastery extends CardImpl {
+public final class LilianasMastery extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Zombie creatures");
 

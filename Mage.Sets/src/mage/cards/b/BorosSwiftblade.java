@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class BorosSwiftblade extends CardImpl {
+public final class BorosSwiftblade extends CardImpl {
 
     public BorosSwiftblade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{W}");

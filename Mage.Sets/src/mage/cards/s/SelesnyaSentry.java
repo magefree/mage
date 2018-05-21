@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class SelesnyaSentry extends CardImpl {
+public final class SelesnyaSentry extends CardImpl {
 
     public SelesnyaSentry(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

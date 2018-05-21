@@ -43,7 +43,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class DeepReconnaissance extends CardImpl {
+public final class DeepReconnaissance extends CardImpl {
 
     public DeepReconnaissance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}");

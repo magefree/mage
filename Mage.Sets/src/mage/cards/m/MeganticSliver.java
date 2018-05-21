@@ -43,7 +43,7 @@ import mage.filter.StaticFilters;
  *
  * @author LevelX2
  */
-public class MeganticSliver extends CardImpl {
+public final class MeganticSliver extends CardImpl {
 
     public MeganticSliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{G}");

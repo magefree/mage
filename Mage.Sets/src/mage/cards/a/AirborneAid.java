@@ -41,7 +41,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author LoneFox
  */
-public class AirborneAid extends CardImpl {
+public final class AirborneAid extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Bird on the battlefield");
 

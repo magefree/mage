@@ -39,7 +39,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author emerald000
  */
-public class ImperialSeal extends CardImpl {
+public final class ImperialSeal extends CardImpl {
 
     public ImperialSeal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}");

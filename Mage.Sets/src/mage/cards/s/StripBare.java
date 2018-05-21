@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author jeffwadsworth
  *
  */
-public class StripBare extends CardImpl {
+public final class StripBare extends CardImpl {
 
     public StripBare(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");

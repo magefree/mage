@@ -41,7 +41,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author TheElk801
  */
-public class StenchOfDecay extends CardImpl {
+public final class StenchOfDecay extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Nonartifact creatures");
 

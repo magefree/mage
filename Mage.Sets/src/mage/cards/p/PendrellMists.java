@@ -46,7 +46,7 @@ import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
  *
  * @author LevelX2
  */
-public class PendrellMists extends CardImpl {
+public final class PendrellMists extends CardImpl {
 
     public PendrellMists(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");

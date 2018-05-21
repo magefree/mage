@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class ScaledBehemoth extends CardImpl {
+public final class ScaledBehemoth extends CardImpl {
 
     public ScaledBehemoth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");

@@ -45,7 +45,7 @@ import mage.filter.common.FilterControlledPermanent;
  *
  * @author LevelX2
  */
-public class MasteryOfTheUnseen extends CardImpl {
+public final class MasteryOfTheUnseen extends CardImpl {
 
     public MasteryOfTheUnseen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");

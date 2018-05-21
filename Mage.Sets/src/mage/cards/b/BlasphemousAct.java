@@ -45,7 +45,7 @@ import mage.util.CardUtil;
 /**
  * @author nantuko
  */
-public class BlasphemousAct extends CardImpl {
+public final class BlasphemousAct extends CardImpl {
 
     public BlasphemousAct(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{8}{R}");

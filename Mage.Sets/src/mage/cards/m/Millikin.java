@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class Millikin extends CardImpl {
+public final class Millikin extends CardImpl {
 
     public Millikin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}");

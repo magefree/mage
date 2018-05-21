@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author ciaccona007
  */
-public class DevoteeOfStrength extends CardImpl {
+public final class DevoteeOfStrength extends CardImpl {
 
     public DevoteeOfStrength(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");

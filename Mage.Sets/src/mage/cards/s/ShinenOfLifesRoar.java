@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class ShinenOfLifesRoar extends CardImpl {
+public final class ShinenOfLifesRoar extends CardImpl {
 
     public ShinenOfLifesRoar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

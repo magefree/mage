@@ -43,7 +43,7 @@ import mage.watchers.common.AttackedThisTurnWatcher;
  *
  * @author fenhl
  */
-public class GrandMelee extends CardImpl {
+public final class GrandMelee extends CardImpl {
 
     public GrandMelee(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");

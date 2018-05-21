@@ -41,7 +41,7 @@ import mage.game.permanent.token.PenumbraKavuToken;
  *
  * @author Loki
  */
-public class PenumbraKavu extends CardImpl {
+public final class PenumbraKavu extends CardImpl {
 
     public PenumbraKavu(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}");

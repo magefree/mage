@@ -52,7 +52,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class InfernalKirin extends CardImpl {
+public final class InfernalKirin extends CardImpl {
 
     public InfernalKirin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");

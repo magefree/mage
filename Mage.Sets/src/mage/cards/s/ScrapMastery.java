@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class ScrapMastery extends CardImpl {
+public final class ScrapMastery extends CardImpl {
 
     public ScrapMastery(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}{R}");

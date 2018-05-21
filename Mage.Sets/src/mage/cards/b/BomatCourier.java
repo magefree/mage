@@ -51,7 +51,7 @@ import mage.util.CardUtil;
  *
  * @author emerald000
  */
-public class BomatCourier extends CardImpl {
+public final class BomatCourier extends CardImpl {
 
     public BomatCourier(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}");

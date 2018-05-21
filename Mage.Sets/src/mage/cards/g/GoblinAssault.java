@@ -46,7 +46,7 @@ import mage.watchers.common.AttackedThisTurnWatcher;
  *
  * @author Plopman
  */
-public class GoblinAssault extends CardImpl {
+public final class GoblinAssault extends CardImpl {
 
     public GoblinAssault(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");

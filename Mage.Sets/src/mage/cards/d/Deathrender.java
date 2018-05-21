@@ -53,7 +53,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author Blinke
  */
-public class Deathrender extends CardImpl {
+public final class Deathrender extends CardImpl {
 
     public Deathrender(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");

@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class DukharaPeafowl extends CardImpl {
+public final class DukharaPeafowl extends CardImpl {
 
     public DukharaPeafowl(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}");

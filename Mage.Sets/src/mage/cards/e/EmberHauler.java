@@ -46,7 +46,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class EmberHauler extends CardImpl {
+public final class EmberHauler extends CardImpl {
 
     public EmberHauler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{R}");

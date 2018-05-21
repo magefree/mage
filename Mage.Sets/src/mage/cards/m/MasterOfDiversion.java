@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class MasterOfDiversion extends CardImpl {
+public final class MasterOfDiversion extends CardImpl {
 
     private final UUID originalId;
 

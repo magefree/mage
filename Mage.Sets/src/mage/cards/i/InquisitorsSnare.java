@@ -48,7 +48,7 @@ import mage.target.common.TargetAttackingOrBlockingCreature;
  * @author jeffwadsworth
  *
  */
-public class InquisitorsSnare extends CardImpl {
+public final class InquisitorsSnare extends CardImpl {
 
     public InquisitorsSnare(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");

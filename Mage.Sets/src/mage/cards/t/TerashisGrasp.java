@@ -47,7 +47,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class TerashisGrasp extends CardImpl {
+public final class TerashisGrasp extends CardImpl {
 
     public TerashisGrasp(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{W}");

@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author anonymous
  */
-public class TrueBeliever extends CardImpl {
+public final class TrueBeliever extends CardImpl {
 
     public TrueBeliever(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{W}");

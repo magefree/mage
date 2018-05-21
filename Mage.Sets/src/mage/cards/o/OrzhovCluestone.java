@@ -48,7 +48,7 @@ import mage.constants.Zone;
  */
 
 
-public class OrzhovCluestone extends CardImpl {
+public final class OrzhovCluestone extends CardImpl {
 
     public OrzhovCluestone(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

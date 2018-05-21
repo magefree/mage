@@ -48,7 +48,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  *
  * @author LevelX2
  */
-public class SabertoothAlleyCat extends CardImpl {
+public final class SabertoothAlleyCat extends CardImpl {
 
     public SabertoothAlleyCat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");

@@ -58,7 +58,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author L_J
  */
-public class Earthlore extends CardImpl {
+public final class Earthlore extends CardImpl {
 
     private static final FilterControlledPermanent filterLand = new FilterControlledPermanent("land you control");
 

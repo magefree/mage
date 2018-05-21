@@ -55,7 +55,7 @@ import mage.util.CardUtil;
  *
  * @author jeffwadsworth
  */
-public class GrimoireThief extends CardImpl {
+public final class GrimoireThief extends CardImpl {
 
     protected static final String VALUE_PREFIX = "ExileZones";
 

@@ -38,7 +38,7 @@ import mage.constants.CardType;
  *
  * @author Loki
  */
-public class AncientDen extends CardImpl {
+public final class AncientDen extends CardImpl {
 
     public AncientDen (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.LAND},null);

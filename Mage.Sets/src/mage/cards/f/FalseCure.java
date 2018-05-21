@@ -45,7 +45,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author emerald000
  */
-public class FalseCure extends CardImpl {
+public final class FalseCure extends CardImpl {
 
     public FalseCure(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}{B}");

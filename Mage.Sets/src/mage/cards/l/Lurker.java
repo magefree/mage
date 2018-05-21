@@ -52,7 +52,7 @@ import mage.watchers.common.BlockedThisTurnWatcher;
  *
  * @author L_J
  */
-public class Lurker extends CardImpl {
+public final class Lurker extends CardImpl {
 
     public Lurker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

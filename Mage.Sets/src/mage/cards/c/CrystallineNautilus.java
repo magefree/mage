@@ -49,7 +49,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class CrystallineNautilus extends CardImpl {
+public final class CrystallineNautilus extends CardImpl {
 
     public CrystallineNautilus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{2}{U}");

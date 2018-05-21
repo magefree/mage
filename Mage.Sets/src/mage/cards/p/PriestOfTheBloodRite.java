@@ -44,7 +44,7 @@ import mage.game.permanent.token.DemonToken;
  *
  * @author fireshoes
  */
-public class PriestOfTheBloodRite extends CardImpl {
+public final class PriestOfTheBloodRite extends CardImpl {
 
     public PriestOfTheBloodRite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");

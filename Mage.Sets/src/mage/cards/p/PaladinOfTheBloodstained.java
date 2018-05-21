@@ -41,7 +41,7 @@ import mage.game.permanent.token.IxalanVampireToken;
  *
  * @author TheElk801
  */
-public class PaladinOfTheBloodstained extends CardImpl {
+public final class PaladinOfTheBloodstained extends CardImpl {
 
     public PaladinOfTheBloodstained(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");

@@ -54,7 +54,7 @@ import mage.util.CardUtil;
  *
  * @author fireshoes
  */
-public class VorracBattlehorns extends CardImpl {
+public final class VorracBattlehorns extends CardImpl {
 
     public VorracBattlehorns(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

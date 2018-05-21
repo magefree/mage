@@ -40,7 +40,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class NaturalConnection extends CardImpl {
+public final class NaturalConnection extends CardImpl {
 
     public NaturalConnection(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}");

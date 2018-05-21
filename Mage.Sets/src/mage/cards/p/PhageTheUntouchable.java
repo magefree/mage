@@ -49,7 +49,7 @@ import mage.watchers.common.CastFromHandWatcher;
  *
  * @author LevelX2
  */
-public class PhageTheUntouchable extends CardImpl {
+public final class PhageTheUntouchable extends CardImpl {
 
     public PhageTheUntouchable(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}{B}{B}");

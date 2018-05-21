@@ -43,7 +43,7 @@ import mage.filter.common.FilterAttackingCreature;
  *
  * @author Loki
  */
-public class RallyTheForces extends CardImpl {
+public final class RallyTheForces extends CardImpl {
 
     public RallyTheForces (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");

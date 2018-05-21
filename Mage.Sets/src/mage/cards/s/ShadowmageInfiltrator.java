@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class ShadowmageInfiltrator extends CardImpl {
+public final class ShadowmageInfiltrator extends CardImpl {
 
     public ShadowmageInfiltrator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{B}");

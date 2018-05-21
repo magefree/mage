@@ -66,7 +66,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class KheruLichLord extends CardImpl {
+public final class KheruLichLord extends CardImpl {
 
     public KheruLichLord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{G}{U}");

@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author jeffwadsworth
  */
-public class InescapableBrute extends CardImpl {
+public final class InescapableBrute extends CardImpl {
 
     public InescapableBrute(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}");

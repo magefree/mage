@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class SwordOfTheChosen extends CardImpl {
+public final class SwordOfTheChosen extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("legendary creature");
 

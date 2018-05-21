@@ -39,7 +39,7 @@ import mage.target.common.TargetAnyTarget;
  * @author LoneFox
 
  */
-public class FireAmbush extends CardImpl {
+public final class FireAmbush extends CardImpl {
 
     public FireAmbush(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}");

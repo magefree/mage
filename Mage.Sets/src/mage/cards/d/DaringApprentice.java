@@ -45,7 +45,7 @@ import mage.target.TargetSpell;
  *
  * @author Plopman
  */
-public class DaringApprentice extends CardImpl {
+public final class DaringApprentice extends CardImpl {
 
     public DaringApprentice(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");

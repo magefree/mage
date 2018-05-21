@@ -51,7 +51,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class NullmageAdvocate extends CardImpl {
+public final class NullmageAdvocate extends CardImpl {
 
     public NullmageAdvocate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");

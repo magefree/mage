@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class Terror extends CardImpl {
+public final class Terror extends CardImpl {
 
     private static final FilterCreaturePermanent FILTER = new FilterCreaturePermanent("nonartifact, nonblack creature");
 

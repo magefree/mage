@@ -41,7 +41,7 @@ import mage.constants.Duration;
  *
  * @author daagar
  */
-public class ChargingPaladin extends CardImpl {
+public final class ChargingPaladin extends CardImpl {
 
     public ChargingPaladin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

@@ -40,7 +40,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Loki
  */
-public class LightningHelix extends CardImpl {
+public final class LightningHelix extends CardImpl {
 
     public LightningHelix (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}{W}");

@@ -39,7 +39,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class WorstFears extends CardImpl {
+public final class WorstFears extends CardImpl {
 
     public WorstFears(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{7}{B}");

@@ -50,7 +50,7 @@ import mage.game.Game;
  *
  * @author LevelX2
  */
-public class MarshmistTitan extends CardImpl {
+public final class MarshmistTitan extends CardImpl {
 
     public MarshmistTitan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{B}");

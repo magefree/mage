@@ -45,7 +45,7 @@ import mage.target.TargetPermanent;
  *
  * @author fireshoes
  */
-public class RealityStrobe extends CardImpl {
+public final class RealityStrobe extends CardImpl {
 
     public RealityStrobe(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{U}{U}");

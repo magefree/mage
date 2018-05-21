@@ -38,7 +38,7 @@ import mage.constants.CardType;
  *
  * @author Plopman
  */
-public class TrollHornCameo extends CardImpl {
+public final class TrollHornCameo extends CardImpl {
 
     public TrollHornCameo(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

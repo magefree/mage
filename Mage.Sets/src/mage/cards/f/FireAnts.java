@@ -47,7 +47,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  *
  * @author fireshoes
  */
-public class FireAnts extends CardImpl {
+public final class FireAnts extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("each other creature without flying");
 

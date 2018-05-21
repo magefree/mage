@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class GhorClanSavage extends CardImpl {
+public final class GhorClanSavage extends CardImpl {
 
     public GhorClanSavage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");

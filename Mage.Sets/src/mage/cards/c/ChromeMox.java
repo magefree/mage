@@ -60,7 +60,7 @@ import mage.util.GameLog;
  *
  * @author Plopman
  */
-public class ChromeMox extends CardImpl {
+public final class ChromeMox extends CardImpl {
 
     public ChromeMox(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{0}");

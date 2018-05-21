@@ -56,7 +56,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class GoblinVandal extends CardImpl {
+public final class GoblinVandal extends CardImpl {
 
     public GoblinVandal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");

@@ -48,7 +48,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Styxo
  */
-public class Exogorth extends CardImpl {
+public final class Exogorth extends CardImpl {
 
     public Exogorth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");

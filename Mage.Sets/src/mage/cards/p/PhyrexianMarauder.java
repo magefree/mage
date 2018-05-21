@@ -51,7 +51,7 @@ import mage.game.permanent.Permanent;
  *
  * @author emerald000
  */
-public class PhyrexianMarauder extends CardImpl {
+public final class PhyrexianMarauder extends CardImpl {
 
     public PhyrexianMarauder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{X}");

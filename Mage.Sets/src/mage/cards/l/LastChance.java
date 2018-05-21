@@ -37,7 +37,7 @@ import mage.constants.CardType;
  *
  * @author LoneFox
  */
-public class LastChance extends CardImpl {
+public final class LastChance extends CardImpl {
 
     public LastChance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}{R}");

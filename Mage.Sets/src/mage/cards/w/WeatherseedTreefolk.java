@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author Plopman
  */
-public class WeatherseedTreefolk extends CardImpl {
+public final class WeatherseedTreefolk extends CardImpl {
 
     public WeatherseedTreefolk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}{G}");

@@ -44,7 +44,7 @@ import mage.players.Player;
  *
  * @author jonubuu
  */
-public class GroveOfTheBurnwillows extends CardImpl {
+public final class GroveOfTheBurnwillows extends CardImpl {
 
     public GroveOfTheBurnwillows(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

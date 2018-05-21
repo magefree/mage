@@ -51,7 +51,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
 /**
  * @author JayDi85
  */
-public class SunCrestedPterodon extends CardImpl {
+public final class SunCrestedPterodon extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filterAnotherDino = new FilterControlledCreaturePermanent();
     static {

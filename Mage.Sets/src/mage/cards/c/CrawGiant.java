@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author LoneFox
  */
-public class CrawGiant extends CardImpl {
+public final class CrawGiant extends CardImpl {
 
     public CrawGiant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}{G}{G}");

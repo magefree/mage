@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class JukaiMessenger extends CardImpl {
+public final class JukaiMessenger extends CardImpl {
 
     public JukaiMessenger (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");

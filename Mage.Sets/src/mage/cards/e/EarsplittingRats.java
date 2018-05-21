@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class EarsplittingRats extends CardImpl {
+public final class EarsplittingRats extends CardImpl {
 
     public EarsplittingRats(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

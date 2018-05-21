@@ -41,7 +41,7 @@ import mage.filter.predicate.mageobject.NamePredicate;
  *
  * @author fireshoes
  */
-public class TakeInventory extends CardImpl {
+public final class TakeInventory extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("card named Take Inventory");
 

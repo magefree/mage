@@ -38,7 +38,7 @@ import mage.target.TargetPlayer;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class MomentOfSilence extends CardImpl {
+public final class MomentOfSilence extends CardImpl {
 
     public MomentOfSilence(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");

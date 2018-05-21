@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class Scytheclaw extends CardImpl {
+public final class Scytheclaw extends CardImpl {
 
     public Scytheclaw(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");

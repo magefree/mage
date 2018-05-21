@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author North
  */
-public class BattleOfWits extends CardImpl {
+public final class BattleOfWits extends CardImpl {
 
     public BattleOfWits(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{U}{U}");

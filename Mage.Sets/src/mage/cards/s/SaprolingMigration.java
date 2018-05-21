@@ -41,7 +41,7 @@ import mage.game.permanent.token.SaprolingToken;
  *
  * @author TheElk801
  */
-public class SaprolingMigration extends CardImpl {
+public final class SaprolingMigration extends CardImpl {
 
     public SaprolingMigration(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{G}");

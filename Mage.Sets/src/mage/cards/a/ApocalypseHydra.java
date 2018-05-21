@@ -53,7 +53,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Loki
  */
-public class ApocalypseHydra extends CardImpl {
+public final class ApocalypseHydra extends CardImpl {
 
     public ApocalypseHydra(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{X}{R}{G}");

@@ -54,7 +54,7 @@ import mage.target.targetpointer.SecondTargetPointer;
  *
  * @author LevelX2
  */
-public class DomineeringWill extends CardImpl {
+public final class DomineeringWill extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonattacking creatures");
 

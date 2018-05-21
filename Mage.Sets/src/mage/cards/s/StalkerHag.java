@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class StalkerHag extends CardImpl {
+public final class StalkerHag extends CardImpl {
 
     public StalkerHag(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B/G}{B/G}{B/G}");

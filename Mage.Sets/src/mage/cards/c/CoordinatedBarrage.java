@@ -49,7 +49,7 @@ import java.util.UUID;
  *
  * @author emerald000
  */
-public class CoordinatedBarrage extends CardImpl {
+public final class CoordinatedBarrage extends CardImpl {
 
     public CoordinatedBarrage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");

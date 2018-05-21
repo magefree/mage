@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanentAmount;
  *
  * @author fireshoes
  */
-public class Flameshot extends CardImpl {
+public final class Flameshot extends CardImpl {
     
     private static final FilterCard filter = new FilterCard("a Mountain card");
     

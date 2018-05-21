@@ -45,7 +45,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author fireshoes
  */
-public class EvolutionaryLeap extends CardImpl {
+public final class EvolutionaryLeap extends CardImpl {
 
     public EvolutionaryLeap(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");

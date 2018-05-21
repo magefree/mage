@@ -65,7 +65,7 @@ import mage.constants.SuperType;
  *
  * @author LevelX2
  */
-public class TamiyoFieldResearcher extends CardImpl {
+public final class TamiyoFieldResearcher extends CardImpl {
 
     private final static FilterPermanent filter = new FilterPermanent("nonland permanent");
 

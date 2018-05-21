@@ -43,7 +43,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class FemerefEnchantress extends CardImpl {
+public final class FemerefEnchantress extends CardImpl {
 
     public FemerefEnchantress(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{W}");

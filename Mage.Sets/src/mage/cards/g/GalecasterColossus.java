@@ -52,7 +52,7 @@ import mage.target.common.TargetNonlandPermanent;
  *
  * @author TheElk801
  */
-public class GalecasterColossus extends CardImpl {
+public final class GalecasterColossus extends CardImpl {
 
     private static final FilterNonlandPermanent filter = new FilterNonlandPermanent("nonland permanent you don't control");
     private static final FilterControlledPermanent filter2 = new FilterControlledPermanent("untapped Wizard you control");

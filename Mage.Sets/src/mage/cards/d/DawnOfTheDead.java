@@ -53,7 +53,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author fireshoes
  */
-public class DawnOfTheDead extends CardImpl {
+public final class DawnOfTheDead extends CardImpl {
 
     public DawnOfTheDead(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}{B}");

@@ -43,7 +43,7 @@ import mage.counters.CounterType;
 /**
  * @author Temba
  */
-public class PhantomTiger extends CardImpl {
+public final class PhantomTiger extends CardImpl {
 
     public PhantomTiger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");

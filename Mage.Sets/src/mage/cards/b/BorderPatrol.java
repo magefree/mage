@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class BorderPatrol extends CardImpl {
+public final class BorderPatrol extends CardImpl {
 
     public BorderPatrol(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");

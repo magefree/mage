@@ -45,7 +45,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LoneFox
  */
-public class RootwaterAlligator extends CardImpl {
+public final class RootwaterAlligator extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Forest");
 

@@ -44,7 +44,7 @@ import mage.filter.common.FilterLandCard;
  *
  * @author LevelX2
  */
-public class ElderPineOfJukai extends CardImpl {
+public final class ElderPineOfJukai extends CardImpl {
 
     public ElderPineOfJukai(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");

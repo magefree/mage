@@ -47,7 +47,7 @@ import mage.game.stack.Spell;
  *
  * @author emerald000
  */
-public class LeylineOfLifeforce extends CardImpl {
+public final class LeylineOfLifeforce extends CardImpl {
 
     public LeylineOfLifeforce(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}{G}");

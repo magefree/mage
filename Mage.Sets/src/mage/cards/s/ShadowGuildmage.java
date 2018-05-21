@@ -48,7 +48,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author fireshoes
  */
-public class ShadowGuildmage extends CardImpl {
+public final class ShadowGuildmage extends CardImpl {
 
     public ShadowGuildmage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");

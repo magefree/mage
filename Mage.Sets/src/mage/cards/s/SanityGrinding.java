@@ -50,7 +50,7 @@ import mage.target.common.TargetOpponent;
  * @author jeffwadsworth
  *
  */
-public class SanityGrinding extends CardImpl {
+public final class SanityGrinding extends CardImpl {
 
     public SanityGrinding(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{U}{U}{U}");

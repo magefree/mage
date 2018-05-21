@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author TheElk801
  */
-public class LegionConquistador extends CardImpl {
+public final class LegionConquistador extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("cards named Legion Conquistador");
 

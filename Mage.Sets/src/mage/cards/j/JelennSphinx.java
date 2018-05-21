@@ -44,7 +44,7 @@ import java.util.UUID;
 /**
  * @author LevelX2
  */
-public class JelennSphinx extends CardImpl {
+public final class JelennSphinx extends CardImpl {
 
     public JelennSphinx(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{U}");

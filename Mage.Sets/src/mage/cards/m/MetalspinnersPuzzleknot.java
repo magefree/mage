@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author emerald000
  */
-public class MetalspinnersPuzzleknot extends CardImpl {
+public final class MetalspinnersPuzzleknot extends CardImpl {
 
     public MetalspinnersPuzzleknot(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

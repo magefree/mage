@@ -53,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class KefnetsMonument extends CardImpl {
+public final class KefnetsMonument extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Blue creature spells");
     private static final FilterSpell filter2 = new FilterSpell("a creature spell");

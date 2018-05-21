@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class KeepersOfTheFaith extends CardImpl {
+public final class KeepersOfTheFaith extends CardImpl {
 
     public KeepersOfTheFaith(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");

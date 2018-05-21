@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author FenrisulfrX
  */
-public class AlabornCavalier extends CardImpl {
+public final class AlabornCavalier extends CardImpl {
 
     public AlabornCavalier(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");

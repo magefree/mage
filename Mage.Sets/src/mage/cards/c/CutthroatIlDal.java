@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author LoneFox
  */
-public class CutthroatIlDal extends CardImpl {
+public final class CutthroatIlDal extends CardImpl {
 
     public CutthroatIlDal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

@@ -39,7 +39,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author Plopman
  */
-public class Zombify extends CardImpl {
+public final class Zombify extends CardImpl {
 
     public Zombify(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{B}");

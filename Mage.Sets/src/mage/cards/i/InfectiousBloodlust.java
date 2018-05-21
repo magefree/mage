@@ -57,7 +57,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class InfectiousBloodlust extends CardImpl {
+public final class InfectiousBloodlust extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("card named Infectious Bloodlust");
 

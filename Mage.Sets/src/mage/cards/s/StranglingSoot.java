@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author ilcartographer
  */
-public class StranglingSoot extends CardImpl {
+public final class StranglingSoot extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with toughness 3 or less");
 

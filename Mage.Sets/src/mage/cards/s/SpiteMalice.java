@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author FenrisulfrX
  */
-public class SpiteMalice extends SplitCard {
+public final class SpiteMalice extends SplitCard {
 
     private static final FilterSpell filterNonCreatureSpell = new FilterSpell("noncreature spell");
 

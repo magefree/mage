@@ -50,7 +50,7 @@ import mage.watchers.Watcher;
  *
  * @author Styxo
  */
-public class InsatiableRakghoul extends CardImpl {
+public final class InsatiableRakghoul extends CardImpl {
 
     public InsatiableRakghoul(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}");

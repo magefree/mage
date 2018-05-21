@@ -43,7 +43,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class SplendidReclamation extends CardImpl {
+public final class SplendidReclamation extends CardImpl {
 
     public SplendidReclamation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}");

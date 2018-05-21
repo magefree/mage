@@ -39,7 +39,7 @@ import mage.constants.CardType;
  *
  * @author Rystan
  */
-public class ZhalfirinVoid extends CardImpl {
+public final class ZhalfirinVoid extends CardImpl {
 
     public ZhalfirinVoid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

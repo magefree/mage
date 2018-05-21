@@ -41,7 +41,7 @@ import mage.constants.CardType;
  *
  * @author Plopman
  */
-public class Inheritance extends CardImpl {
+public final class Inheritance extends CardImpl {
 
     public Inheritance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}");

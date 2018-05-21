@@ -46,7 +46,7 @@ import mage.target.TargetPermanent;
  *
  * @author LoneFox
  */
-public class SpinalParasite extends CardImpl {
+public final class SpinalParasite extends CardImpl {
 
     public SpinalParasite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{5}");

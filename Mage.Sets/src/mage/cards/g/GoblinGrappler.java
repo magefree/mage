@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class GoblinGrappler extends CardImpl {
+public final class GoblinGrappler extends CardImpl {
 
     public GoblinGrappler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");

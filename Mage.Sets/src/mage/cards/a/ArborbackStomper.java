@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class ArborbackStomper extends CardImpl {
+public final class ArborbackStomper extends CardImpl {
 
     public ArborbackStomper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");

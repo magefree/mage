@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author Plopman
  */
-public class WrathOfMaritLage extends CardImpl {
+public final class WrathOfMaritLage extends CardImpl {
 
     static final FilterCreaturePermanent filter = new FilterCreaturePermanent("red creatures");
     

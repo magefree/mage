@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class GeistOfTheLonelyVigil extends CardImpl {
+public final class GeistOfTheLonelyVigil extends CardImpl {
 
     public GeistOfTheLonelyVigil(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

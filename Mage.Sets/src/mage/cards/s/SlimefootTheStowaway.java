@@ -51,7 +51,7 @@ import mage.game.permanent.token.SaprolingToken;
  *
  * @author TheElk801
  */
-public class SlimefootTheStowaway extends CardImpl {
+public final class SlimefootTheStowaway extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Saproling you control");
 

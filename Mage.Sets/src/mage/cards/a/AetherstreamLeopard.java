@@ -46,7 +46,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class AetherstreamLeopard extends CardImpl {
+public final class AetherstreamLeopard extends CardImpl {
 
     public AetherstreamLeopard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");

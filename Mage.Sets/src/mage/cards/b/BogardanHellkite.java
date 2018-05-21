@@ -45,7 +45,7 @@ import mage.target.common.TargetAnyTargetAmount;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BogardanHellkite extends CardImpl {
+public final class BogardanHellkite extends CardImpl {
 
     public BogardanHellkite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{R}{R}");

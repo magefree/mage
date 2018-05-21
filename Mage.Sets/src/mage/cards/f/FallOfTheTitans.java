@@ -40,7 +40,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author fireshoes
  */
-public class FallOfTheTitans extends CardImpl {
+public final class FallOfTheTitans extends CardImpl {
 
     public FallOfTheTitans(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{X}{R}");

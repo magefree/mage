@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author Plopman
  */
-public class EyesOfTheWatcher extends CardImpl {
+public final class EyesOfTheWatcher extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("an instant or sorcery spell");
     static{

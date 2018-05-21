@@ -38,7 +38,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author noxx
  */
-public class IntoTheVoid extends CardImpl {
+public final class IntoTheVoid extends CardImpl {
 
     public IntoTheVoid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}");

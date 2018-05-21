@@ -44,7 +44,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Loki
  */
-public class FlameFusillade extends CardImpl {
+public final class FlameFusillade extends CardImpl {
 
     public FlameFusillade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}");

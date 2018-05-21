@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class DireFleetPoisoner extends CardImpl {
+public final class DireFleetPoisoner extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.PIRATE, "attacking Pirate");
 

@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki, North
  */
-public class ClawsOfValakut extends CardImpl {
+public final class ClawsOfValakut extends CardImpl {
 
      private static final FilterLandPermanent filter = new FilterLandPermanent("Mountain you control");
 

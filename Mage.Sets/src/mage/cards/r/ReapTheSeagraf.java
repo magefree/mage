@@ -13,7 +13,7 @@ import mage.game.permanent.token.ZombieToken;
 /**
  * @author Loki
  */
-public class ReapTheSeagraf extends CardImpl {
+public final class ReapTheSeagraf extends CardImpl {
 
     public ReapTheSeagraf(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");

@@ -43,7 +43,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author Plopman
  */
-public class TowerDefense extends CardImpl {
+public final class TowerDefense extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures you control");
     static {

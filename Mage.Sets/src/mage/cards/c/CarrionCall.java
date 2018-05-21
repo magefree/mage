@@ -39,7 +39,7 @@ import mage.game.permanent.token.InsectInfectToken;
  *
  * @author Loki
  */
-public class CarrionCall extends CardImpl {
+public final class CarrionCall extends CardImpl {
 
     public CarrionCall (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{G}");

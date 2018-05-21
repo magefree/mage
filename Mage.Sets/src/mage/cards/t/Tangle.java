@@ -51,7 +51,7 @@ import mage.target.targetpointer.FixedTargets;
  *
  * @author LevelX2
  */
-public class Tangle extends CardImpl {
+public final class Tangle extends CardImpl {
 
     public Tangle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}");

@@ -50,7 +50,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class ZulaportChainmage extends CardImpl {
+public final class ZulaportChainmage extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Ally you control");
 

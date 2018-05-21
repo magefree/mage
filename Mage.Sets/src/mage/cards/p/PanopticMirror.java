@@ -54,7 +54,7 @@ import mage.util.CardUtil;
  *
  * @author Plopman
  */
-public class PanopticMirror extends CardImpl {
+public final class PanopticMirror extends CardImpl {
 
     public PanopticMirror(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");

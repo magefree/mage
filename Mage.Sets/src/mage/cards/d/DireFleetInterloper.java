@@ -41,7 +41,7 @@ import mage.constants.CardType;
  *
  * @author TheElk801
  */
-public class DireFleetInterloper extends CardImpl {
+public final class DireFleetInterloper extends CardImpl {
 
     public DireFleetInterloper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");

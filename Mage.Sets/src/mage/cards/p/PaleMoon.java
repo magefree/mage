@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author L_J
  */
-public class PaleMoon extends CardImpl {
+public final class PaleMoon extends CardImpl {
 
     public PaleMoon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");

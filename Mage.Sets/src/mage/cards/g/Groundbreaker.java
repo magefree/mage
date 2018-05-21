@@ -43,7 +43,7 @@ import mage.constants.TargetController;
  *
  * @author Plopman
  */
-public class Groundbreaker extends CardImpl {
+public final class Groundbreaker extends CardImpl {
 
     public Groundbreaker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{G}{G}");

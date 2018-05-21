@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class SafeholdElite extends CardImpl {
+public final class SafeholdElite extends CardImpl {
 
     public SafeholdElite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G/W}");

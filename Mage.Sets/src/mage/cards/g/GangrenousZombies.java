@@ -51,7 +51,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class GangrenousZombies extends CardImpl {
+public final class GangrenousZombies extends CardImpl {
 
     private final static FilterLandPermanent filter = new FilterLandPermanent();
 

@@ -53,7 +53,7 @@ import mage.watchers.common.BlockedAttackerWatcher;
  *
  * @author jeffwadsworth & L_J
  */
-public class RimehornAurochs extends CardImpl {
+public final class RimehornAurochs extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.AUROCHS, "other attacking Aurochs");
 

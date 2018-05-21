@@ -56,7 +56,7 @@ import mage.util.TargetAddress;
  * 
  * @author L_J
  */
-public class MuckDrubb extends CardImpl {
+public final class MuckDrubb extends CardImpl {
 
     protected static final FilterSpell filter = new FilterSpell("spell that targets only a single creature");
 

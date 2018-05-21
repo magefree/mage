@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author L_J
  */
-public class LaccolithGrunt extends CardImpl {
+public final class LaccolithGrunt extends CardImpl {
 
     public LaccolithGrunt(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");

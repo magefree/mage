@@ -53,7 +53,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author fireshoes
  */
-public class GiftOfParadise extends CardImpl {
+public final class GiftOfParadise extends CardImpl {
 
     public GiftOfParadise(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");

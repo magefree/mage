@@ -53,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class AjaniCallerOfThePride extends CardImpl {
+public final class AjaniCallerOfThePride extends CardImpl {
 
     public AjaniCallerOfThePride(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{1}{W}{W}");

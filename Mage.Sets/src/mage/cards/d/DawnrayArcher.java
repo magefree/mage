@@ -46,7 +46,7 @@ import mage.target.common.TargetAttackingOrBlockingCreature;
  *
  * @author Plopman
  */
-public class DawnrayArcher extends CardImpl {
+public final class DawnrayArcher extends CardImpl {
 
     public DawnrayArcher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

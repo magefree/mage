@@ -46,7 +46,7 @@ import mage.game.permanent.token.ServoToken;
  *
  * @author fireshoes
  */
-public class AetherPoisoner extends CardImpl {
+public final class AetherPoisoner extends CardImpl {
 
     public AetherPoisoner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");

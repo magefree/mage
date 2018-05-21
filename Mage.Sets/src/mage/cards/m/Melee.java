@@ -58,7 +58,7 @@ import mage.watchers.common.ChooseBlockersRedundancyWatcher;
  *
  * @author L_J
  */
-public class Melee extends CardImpl {
+public final class Melee extends CardImpl {
 
     public Melee(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{4}{R}");

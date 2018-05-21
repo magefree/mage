@@ -58,7 +58,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class GideonJura extends CardImpl {
+public final class GideonJura extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creature");
 

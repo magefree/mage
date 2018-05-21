@@ -44,7 +44,7 @@ import mage.target.TargetPermanent;
  *
  * @author North, Loki
  */
-public class BeastWithin extends CardImpl {
+public final class BeastWithin extends CardImpl {
 
     public BeastWithin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{G}");

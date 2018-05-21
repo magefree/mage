@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.SupertypePredicate;
  *
  * @author LoneFox
  */
-public class RonomHulk extends CardImpl {
+public final class RonomHulk extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("snow");
 

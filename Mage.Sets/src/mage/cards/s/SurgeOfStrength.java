@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author L_J
  */
-public class SurgeOfStrength extends CardImpl {
+public final class SurgeOfStrength extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("a red or green card");
     static{

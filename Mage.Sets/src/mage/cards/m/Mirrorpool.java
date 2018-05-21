@@ -53,7 +53,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author fireshoes
  */
-public class Mirrorpool extends CardImpl {
+public final class Mirrorpool extends CardImpl {
     
     private static final FilterSpell filter = new FilterSpell("instant or sorcery spell you control");
 

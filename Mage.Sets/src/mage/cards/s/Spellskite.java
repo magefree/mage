@@ -54,7 +54,7 @@ import mage.target.Targets;
  *
  * @author BetaSteward
  */
-public class Spellskite extends CardImpl {
+public final class Spellskite extends CardImpl {
 
     public Spellskite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");

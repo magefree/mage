@@ -48,7 +48,7 @@ import mage.target.TargetPermanent;
  *
  * @author North
  */
-public class Indestructibility extends CardImpl {
+public final class Indestructibility extends CardImpl {
 
     public Indestructibility(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}");

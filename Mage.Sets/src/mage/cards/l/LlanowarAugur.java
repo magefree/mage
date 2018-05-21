@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class LlanowarAugur extends CardImpl {
+public final class LlanowarAugur extends CardImpl {
 
     public LlanowarAugur(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");

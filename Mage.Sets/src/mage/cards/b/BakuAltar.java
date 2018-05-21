@@ -48,7 +48,7 @@ import mage.game.permanent.token.SpiritToken;
  *
  * @author Loki
  */
-public class BakuAltar extends CardImpl {
+public final class BakuAltar extends CardImpl {
 
     public BakuAltar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

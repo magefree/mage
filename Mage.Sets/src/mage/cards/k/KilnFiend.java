@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author North
  */
-public class KilnFiend extends CardImpl {
+public final class KilnFiend extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("an instant or sorcery spell");
     static {

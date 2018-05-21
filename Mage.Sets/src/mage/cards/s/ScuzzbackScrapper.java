@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class ScuzzbackScrapper extends CardImpl {
+public final class ScuzzbackScrapper extends CardImpl {
 
     public ScuzzbackScrapper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R/G}");

@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author duncant
  */
-public class RallyTheRighteous extends CardImpl {
+public final class RallyTheRighteous extends CardImpl {
 
     public RallyTheRighteous(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R}{W}");

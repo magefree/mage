@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author LoneFox
  */
-public class DuskriderFalcon extends CardImpl {
+public final class DuskriderFalcon extends CardImpl {
 
     public DuskriderFalcon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

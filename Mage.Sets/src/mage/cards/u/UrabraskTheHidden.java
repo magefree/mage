@@ -48,7 +48,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Loki
  */
-public class UrabraskTheHidden extends CardImpl {
+public final class UrabraskTheHidden extends CardImpl {
 
     public UrabraskTheHidden(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");

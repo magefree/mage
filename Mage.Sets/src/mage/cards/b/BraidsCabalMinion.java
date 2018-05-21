@@ -43,7 +43,7 @@ import java.util.UUID;
  *
  * @author cbt33, North (Karma)
  */
-public class BraidsCabalMinion extends CardImpl {
+public final class BraidsCabalMinion extends CardImpl {
 
     static final FilterPermanent filter = new FilterPermanent("an artifact, creature, or land");
 

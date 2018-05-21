@@ -41,7 +41,7 @@ import mage.game.permanent.token.InsectToken;
  *
  * @author LevelX2
  */
-public class SymbioticWurm extends CardImpl {
+public final class SymbioticWurm extends CardImpl {
 
     public SymbioticWurm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{G}{G}{G}");

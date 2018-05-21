@@ -41,7 +41,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author fireshoes
  */
-public class WhispersOfEmrakul extends CardImpl {
+public final class WhispersOfEmrakul extends CardImpl {
 
     public WhispersOfEmrakul(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}");

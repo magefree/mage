@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author nantuko
  */
-public class PlatinumEmperion extends CardImpl {
+public final class PlatinumEmperion extends CardImpl {
 
     public PlatinumEmperion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{8}");

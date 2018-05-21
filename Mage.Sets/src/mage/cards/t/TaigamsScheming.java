@@ -40,7 +40,7 @@ import mage.filter.FilterCard;
  *
  * @author LevelX2
  */
-public class TaigamsScheming extends CardImpl {
+public final class TaigamsScheming extends CardImpl {
 
     public TaigamsScheming(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{U}");

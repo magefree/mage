@@ -41,7 +41,7 @@ import mage.game.permanent.token.ThopterColorlessToken;
  *
  * @author Styxo
  */
-public class FiligreeCrawler extends CardImpl {
+public final class FiligreeCrawler extends CardImpl {
 
     public FiligreeCrawler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");

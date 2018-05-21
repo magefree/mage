@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author LoneFox
  */
-public class ArcticWolves extends CardImpl {
+public final class ArcticWolves extends CardImpl {
 
     public ArcticWolves(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");

@@ -44,7 +44,7 @@ import mage.target.common.TargetAttackingCreature;
  *
  * @author TheElk801
  */
-public class Disharmony extends CardImpl {
+public final class Disharmony extends CardImpl {
 
     public Disharmony(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{R}");

@@ -43,7 +43,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
 /**
  * @author Loki
  */
-public class GoblinFireslinger extends CardImpl {
+public final class GoblinFireslinger extends CardImpl {
 
     public GoblinFireslinger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}");

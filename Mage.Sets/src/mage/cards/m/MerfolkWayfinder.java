@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author North
  */
-public class MerfolkWayfinder extends CardImpl {
+public final class MerfolkWayfinder extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("all Island cards");
 

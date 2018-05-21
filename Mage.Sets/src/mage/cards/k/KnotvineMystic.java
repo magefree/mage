@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class KnotvineMystic extends CardImpl {
+public final class KnotvineMystic extends CardImpl {
 
     public KnotvineMystic(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{G}{W}");

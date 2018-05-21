@@ -51,7 +51,7 @@ import mage.target.common.TargetControlledPermanent;
 /**
  * @author jpgunter
  */
-public class MultaniYavimayasAvatar extends CardImpl {
+public final class MultaniYavimayasAvatar extends CardImpl {
 
     private static final FilterControlledLandPermanent LANDS_YOU_CONTROL_FILTER = new FilterControlledLandPermanent();
     private static final FilterLandCard LAND_FILTER = new FilterLandCard();

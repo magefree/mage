@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author Galatolol
  */
-public class FlowstoneThopter extends CardImpl {
+public final class FlowstoneThopter extends CardImpl {
 
     public FlowstoneThopter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{7}");

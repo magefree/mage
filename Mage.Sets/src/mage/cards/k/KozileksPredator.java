@@ -42,7 +42,7 @@ import mage.game.permanent.token.EldraziSpawnToken;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class KozileksPredator extends CardImpl {
+public final class KozileksPredator extends CardImpl {
 
     public KozileksPredator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

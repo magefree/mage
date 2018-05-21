@@ -39,7 +39,7 @@ import mage.target.common.TargetOpponentOrPlaneswalker;
  *
  * @author LoneFox
  */
-public class StolenGrain extends CardImpl {
+public final class StolenGrain extends CardImpl {
 
     public StolenGrain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{B}{B}");

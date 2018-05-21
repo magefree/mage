@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class TempleAcolyte extends CardImpl {
+public final class TempleAcolyte extends CardImpl {
 
     public TempleAcolyte (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

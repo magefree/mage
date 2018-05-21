@@ -42,7 +42,7 @@ import mage.target.TargetPermanent;
  *
  * @author Jgod
  */
-public class Fissure extends CardImpl {
+public final class Fissure extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("creature or land");
     static {
         filter.add(Predicates.or(new CardTypePredicate(CardType.CREATURE), new CardTypePredicate(CardType.LAND)));

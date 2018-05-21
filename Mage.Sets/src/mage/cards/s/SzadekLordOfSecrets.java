@@ -48,7 +48,7 @@ import mage.players.Player;
  * @author jeffwadsworth
  *
  */
-public class SzadekLordOfSecrets extends CardImpl {
+public final class SzadekLordOfSecrets extends CardImpl {
 
     public SzadekLordOfSecrets(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}{B}{B}");

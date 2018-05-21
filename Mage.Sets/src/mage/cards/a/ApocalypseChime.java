@@ -47,7 +47,7 @@ import mage.filter.predicate.permanent.TokenPredicate;
  *
  * @author L_J
  */
-public class ApocalypseChime extends CardImpl {
+public final class ApocalypseChime extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("nontoken permanents with a name originally printed in the Homelands expansion");
 

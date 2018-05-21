@@ -43,7 +43,7 @@ import mage.constants.Duration;
  *
  * @author LoneFox
  */
-public class Ophidian extends CardImpl {
+public final class Ophidian extends CardImpl {
 
     public Ophidian(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

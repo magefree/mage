@@ -42,7 +42,7 @@ import mage.target.TargetSpell;
  *
  * @author magenoxx_at_gmail.com
  */
-public class CircularLogic extends CardImpl {
+public final class CircularLogic extends CardImpl {
 
     public CircularLogic(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");

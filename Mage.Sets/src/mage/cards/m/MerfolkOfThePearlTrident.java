@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class MerfolkOfThePearlTrident extends CardImpl {
+public final class MerfolkOfThePearlTrident extends CardImpl {
 
     public MerfolkOfThePearlTrident(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");

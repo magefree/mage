@@ -39,7 +39,7 @@ import mage.target.common.TargetCreaturePermanentAmount;
  *
  * @author LevelX2
  */
-public class RoilsRetribution extends CardImpl {
+public final class RoilsRetribution extends CardImpl {
 
     public RoilsRetribution(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{W}{W}");

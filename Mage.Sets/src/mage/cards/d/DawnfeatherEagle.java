@@ -47,7 +47,7 @@ import mage.filter.StaticFilters;
  *
  * @author Styxo
  */
-public class DawnfeatherEagle extends CardImpl {
+public final class DawnfeatherEagle extends CardImpl {
 
     public DawnfeatherEagle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}");

@@ -46,7 +46,7 @@ import mage.counters.CounterType;
  *
  * @author LevelX2
  */
-public class NathsElite extends CardImpl {
+public final class NathsElite extends CardImpl {
 
     public NathsElite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");

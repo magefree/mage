@@ -49,7 +49,7 @@ import mage.game.permanent.Permanent;
  *
  * @author jeffwadsworth
  */
-public class Scrapbasket extends CardImpl {
+public final class Scrapbasket extends CardImpl {
 
     public Scrapbasket(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}");

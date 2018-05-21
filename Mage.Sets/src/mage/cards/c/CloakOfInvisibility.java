@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class CloakOfInvisibility extends CardImpl {
+public final class CloakOfInvisibility extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("except by Walls");
     static {
         filter.add(Predicates.not(new SubtypePredicate(SubType.WALL)));

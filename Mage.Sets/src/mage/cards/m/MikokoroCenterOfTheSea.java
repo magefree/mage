@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class MikokoroCenterOfTheSea extends CardImpl {
+public final class MikokoroCenterOfTheSea extends CardImpl {
 
     public MikokoroCenterOfTheSea(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

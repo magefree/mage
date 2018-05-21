@@ -44,7 +44,7 @@ import mage.target.common.TargetAnyTarget;
 /**
  * @author noxx
  */
-public class DivineDeflection extends CardImpl {
+public final class DivineDeflection extends CardImpl {
 
     public DivineDeflection(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{W}");

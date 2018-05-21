@@ -51,7 +51,7 @@ import mage.counters.CounterType;
  *
  * @author Loki
  */
-public class Degavolver extends CardImpl {
+public final class Degavolver extends CardImpl {
 
     public Degavolver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

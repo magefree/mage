@@ -46,7 +46,7 @@ import mage.filter.common.FilterControlledArtifactPermanent;
  *
  * @author Loki
  */
-public class DarksteelJuggernaut extends CardImpl {
+public final class DarksteelJuggernaut extends CardImpl {
 
     public DarksteelJuggernaut(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");

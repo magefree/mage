@@ -41,7 +41,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author LevelX2
  */
-public class SliceAndDice extends CardImpl {
+public final class SliceAndDice extends CardImpl {
 
     public SliceAndDice(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{R}{R}");

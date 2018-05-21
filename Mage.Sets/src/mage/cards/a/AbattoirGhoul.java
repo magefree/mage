@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author Alvin
  */
-public class AbattoirGhoul extends CardImpl {
+public final class AbattoirGhoul extends CardImpl {
 
     public AbattoirGhoul(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

@@ -48,7 +48,7 @@ import mage.target.common.TargetAttackingOrBlockingCreature;
  *
  * @author LoneFox
  */
-public class DaruStinger extends CardImpl {
+public final class DaruStinger extends CardImpl {
 
     public DaruStinger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

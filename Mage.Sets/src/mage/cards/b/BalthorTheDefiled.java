@@ -53,7 +53,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class BalthorTheDefiled extends CardImpl {
+public final class BalthorTheDefiled extends CardImpl {
 
     public BalthorTheDefiled(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");

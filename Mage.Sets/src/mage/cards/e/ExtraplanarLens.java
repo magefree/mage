@@ -57,7 +57,7 @@ import mage.util.CardUtil;
  *
  * @author jeffwadsworth
  */
-public class ExtraplanarLens extends CardImpl {
+public final class ExtraplanarLens extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("land you control");
 

@@ -49,7 +49,7 @@ import mage.game.permanent.token.custom.CreatureToken;
 /**
  * @author LevelX2
  */
-public class AzoriusKeyrune extends CardImpl {
+public final class AzoriusKeyrune extends CardImpl {
 
     public AzoriusKeyrune(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");

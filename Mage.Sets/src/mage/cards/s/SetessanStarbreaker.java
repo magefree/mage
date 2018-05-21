@@ -44,7 +44,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class SetessanStarbreaker extends CardImpl {
+public final class SetessanStarbreaker extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Aura");
 

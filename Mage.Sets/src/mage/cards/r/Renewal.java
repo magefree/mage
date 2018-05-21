@@ -46,7 +46,7 @@ import java.util.UUID;
  *
  * @author fireshoes
  */
-public class Renewal extends CardImpl {
+public final class Renewal extends CardImpl {
 
     public Renewal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}");

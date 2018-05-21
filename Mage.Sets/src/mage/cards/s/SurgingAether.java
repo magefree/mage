@@ -39,7 +39,7 @@ import mage.target.TargetPermanent;
  *
  * @author LoneFox
  */
-public class SurgingAether extends CardImpl {
+public final class SurgingAether extends CardImpl {
 
     public SurgingAether(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{U}");

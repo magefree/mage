@@ -52,7 +52,7 @@ import mage.watchers.common.PlayerGainedLifeWatcher;
  *
  * @author LevelX2
  */
-public class OathswornVampire extends CardImpl {
+public final class OathswornVampire extends CardImpl {
 
     public OathswornVampire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");

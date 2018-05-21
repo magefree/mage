@@ -57,7 +57,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author TheElk801
  */
-public class MindSwords extends CardImpl {
+public final class MindSwords extends CardImpl {
 
     private static final FilterLandPermanent filterSwamp = new FilterLandPermanent("If you control a Swamp");
 

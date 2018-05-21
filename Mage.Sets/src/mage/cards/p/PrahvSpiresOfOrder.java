@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class PrahvSpiresOfOrder extends CardImpl {
+public final class PrahvSpiresOfOrder extends CardImpl {
 
     public PrahvSpiresOfOrder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

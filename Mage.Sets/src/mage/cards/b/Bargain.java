@@ -39,7 +39,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author fireshoes
  */
-public class Bargain extends CardImpl {
+public final class Bargain extends CardImpl {
 
     public Bargain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{W}");

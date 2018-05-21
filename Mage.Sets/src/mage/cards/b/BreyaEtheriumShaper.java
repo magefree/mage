@@ -52,7 +52,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  *
  * @author fireshoes
  */
-public class BreyaEtheriumShaper extends CardImpl {
+public final class BreyaEtheriumShaper extends CardImpl {
 
     public BreyaEtheriumShaper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{W}{U}{B}{R}");

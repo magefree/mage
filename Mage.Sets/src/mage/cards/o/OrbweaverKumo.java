@@ -44,7 +44,7 @@ import mage.filter.StaticFilters;
 /**
  * @author Loki
  */
-public class OrbweaverKumo extends CardImpl {
+public final class OrbweaverKumo extends CardImpl {
 
     public OrbweaverKumo(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");

@@ -39,7 +39,7 @@ import mage.target.common.TargetNonlandPermanent;
  *
  * @author fireshoes
  */
-public class AnguishedUnmaking extends CardImpl {
+public final class AnguishedUnmaking extends CardImpl {
 
     public AnguishedUnmaking(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}{B}");

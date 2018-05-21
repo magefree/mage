@@ -44,7 +44,7 @@ import mage.game.permanent.token.SatyrNyxSmithElementalToken;
  *
  * @author LevelX2
  */
-public class SatyrNyxSmith extends CardImpl {
+public final class SatyrNyxSmith extends CardImpl {
 
     public SatyrNyxSmith(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");

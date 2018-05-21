@@ -52,7 +52,7 @@ import mage.target.common.TargetCardInHand;
 /**
  * @author noxx
  */
-public class NecromancersStockpile extends CardImpl {
+public final class NecromancersStockpile extends CardImpl {
 
     public NecromancersStockpile(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}");

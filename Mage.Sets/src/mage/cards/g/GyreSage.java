@@ -44,7 +44,7 @@ import mage.constants.SubType;
  *
  * @author Plopman
  */
-public class GyreSage extends CardImpl {
+public final class GyreSage extends CardImpl {
 
     public GyreSage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

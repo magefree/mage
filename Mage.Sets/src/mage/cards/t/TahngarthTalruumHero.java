@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LoneFox
  */
-public class TahngarthTalruumHero extends CardImpl {
+public final class TahngarthTalruumHero extends CardImpl {
 
     public TahngarthTalruumHero(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");

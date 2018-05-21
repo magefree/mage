@@ -48,7 +48,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class MoggInfestation extends CardImpl {
+public final class MoggInfestation extends CardImpl {
 
     public MoggInfestation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");

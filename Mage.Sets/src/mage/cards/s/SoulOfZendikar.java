@@ -46,7 +46,7 @@ import mage.game.permanent.token.BeastToken;
  *
  * @author LevelX2
  */
-public class SoulOfZendikar extends CardImpl {
+public final class SoulOfZendikar extends CardImpl {
 
     public SoulOfZendikar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");

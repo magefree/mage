@@ -59,7 +59,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author spjspj
  */
-public class ThoughtPrison extends CardImpl {
+public final class ThoughtPrison extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("spell cast");
 

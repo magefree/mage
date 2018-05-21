@@ -45,7 +45,7 @@ import mage.target.TargetPlayer;
  *
  * @author TheElk801
  */
-public class RiversRebuke extends CardImpl {
+public final class RiversRebuke extends CardImpl {
 
     public RiversRebuke(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{U}{U}");

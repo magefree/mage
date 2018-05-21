@@ -56,7 +56,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class SageOfAncientLore extends CardImpl {
+public final class SageOfAncientLore extends CardImpl {
 
     public SageOfAncientLore(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");

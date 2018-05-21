@@ -53,7 +53,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author North
  */
-public class StitchersApprentice extends CardImpl {
+public final class StitchersApprentice extends CardImpl {
 
     public StitchersApprentice(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");

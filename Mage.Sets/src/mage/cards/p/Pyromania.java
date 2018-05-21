@@ -44,7 +44,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LoneFox
  */
-public class Pyromania extends CardImpl {
+public final class Pyromania extends CardImpl {
 
     public Pyromania(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");

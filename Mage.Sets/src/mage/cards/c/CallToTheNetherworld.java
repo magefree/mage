@@ -43,7 +43,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author nigelzor
  */
-public class CallToTheNetherworld extends CardImpl {
+public final class CallToTheNetherworld extends CardImpl {
 
     private static FilterCreatureCard filter = new FilterCreatureCard("black creature card from your graveyard");
 

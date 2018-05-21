@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class NayaCharm extends CardImpl {
+public final class NayaCharm extends CardImpl {
 
     public NayaCharm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}{G}{W}");

@@ -49,7 +49,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class ErraticMutation extends CardImpl {
+public final class ErraticMutation extends CardImpl {
 
     public ErraticMutation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}");

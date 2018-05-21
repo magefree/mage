@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author LoneFox
  */
-public class YavimayaBarbarian extends CardImpl {
+public final class YavimayaBarbarian extends CardImpl {
 
     public YavimayaBarbarian(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{G}");

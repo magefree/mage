@@ -44,7 +44,7 @@ import mage.watchers.common.CastSpellLastTurnWatcher;
  *
  * @author noxx
  */
-public class SecondGuess extends CardImpl {
+public final class SecondGuess extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("spell that's the second spell cast this turn");
 

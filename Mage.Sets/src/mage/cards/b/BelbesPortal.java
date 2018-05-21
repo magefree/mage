@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.ChosenSubtypePredicate;
  *
  * @author andyfries
  */
-public class BelbesPortal extends CardImpl {
+public final class BelbesPortal extends CardImpl {
 
     public BelbesPortal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");

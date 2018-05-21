@@ -44,7 +44,7 @@ import mage.filter.StaticFilters;
  *
  * @author LevelX2
  */
-public class SyphonSliver extends CardImpl {
+public final class SyphonSliver extends CardImpl {
 
     public SyphonSliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");

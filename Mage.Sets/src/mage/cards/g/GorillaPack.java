@@ -45,7 +45,7 @@ import mage.filter.common.FilterLandPermanent;
  *
  * @author fireshoes
  */
-public class GorillaPack extends CardImpl {
+public final class GorillaPack extends CardImpl {
 
     public GorillaPack(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

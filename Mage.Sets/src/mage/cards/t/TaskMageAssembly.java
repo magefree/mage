@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author L_J
  */
-public class TaskMageAssembly extends CardImpl {
+public final class TaskMageAssembly extends CardImpl {
 
     public TaskMageAssembly(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");

@@ -50,7 +50,7 @@ import mage.watchers.Watcher;
 /**
  * @author fireshoes
  */
-public class OathOfLiliana extends CardImpl {
+public final class OathOfLiliana extends CardImpl {
 
     public OathOfLiliana(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");

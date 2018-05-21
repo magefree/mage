@@ -45,7 +45,7 @@ import mage.target.TargetPermanent;
  *
  * @author fireshoes
  */
-public class FloodwaterDam extends CardImpl {
+public final class FloodwaterDam extends CardImpl {
 
     public FloodwaterDam(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");

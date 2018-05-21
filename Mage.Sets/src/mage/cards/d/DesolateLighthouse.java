@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author North
  */
-public class DesolateLighthouse extends CardImpl {
+public final class DesolateLighthouse extends CardImpl {
 
     public DesolateLighthouse(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

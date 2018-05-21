@@ -45,7 +45,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author anonymous
  */
-public class FlailingDrake extends CardImpl {
+public final class FlailingDrake extends CardImpl {
 
     public FlailingDrake(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");

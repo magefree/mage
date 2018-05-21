@@ -40,7 +40,7 @@ import mage.constants.SuperType;
  *
  * @author Loki
  */
-public class IsamaruHoundofKonda extends CardImpl {
+public final class IsamaruHoundofKonda extends CardImpl {
 
     public IsamaruHoundofKonda (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");

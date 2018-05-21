@@ -54,7 +54,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class VolatileRig extends CardImpl {
+public final class VolatileRig extends CardImpl {
 
     public VolatileRig(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");

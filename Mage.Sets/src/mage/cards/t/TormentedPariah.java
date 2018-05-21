@@ -45,7 +45,7 @@ import mage.constants.TargetController;
 /**
  * @author nantuko
  */
-public class TormentedPariah extends CardImpl {
+public final class TormentedPariah extends CardImpl {
 
     public TormentedPariah(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

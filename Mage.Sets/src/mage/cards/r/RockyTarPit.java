@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class RockyTarPit extends CardImpl {
+public final class RockyTarPit extends CardImpl {
 
     public RockyTarPit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

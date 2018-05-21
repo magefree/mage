@@ -42,7 +42,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class StitchInTime extends CardImpl {
+public final class StitchInTime extends CardImpl {
 
     public StitchInTime(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{U}{R}");

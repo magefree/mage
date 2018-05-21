@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author FenrisulfrX
  */
-public class ThornscapeApprentice extends CardImpl {
+public final class ThornscapeApprentice extends CardImpl {
 
     public ThornscapeApprentice(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");

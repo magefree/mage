@@ -47,7 +47,7 @@ import mage.util.RandomUtil;
  *
  * @author spjspj
  */
-public class SeasonsBeatings extends CardImpl {
+public final class SeasonsBeatings extends CardImpl {
 
     public SeasonsBeatings(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{R}{R}{R}{R}");

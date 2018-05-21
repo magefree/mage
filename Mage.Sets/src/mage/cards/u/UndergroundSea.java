@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author Plopman
  */
-public class UndergroundSea extends CardImpl {
+public final class UndergroundSea extends CardImpl {
 
     public UndergroundSea(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

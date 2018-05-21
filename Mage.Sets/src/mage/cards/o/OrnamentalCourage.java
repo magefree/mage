@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class OrnamentalCourage extends CardImpl {
+public final class OrnamentalCourage extends CardImpl {
 
     public OrnamentalCourage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");

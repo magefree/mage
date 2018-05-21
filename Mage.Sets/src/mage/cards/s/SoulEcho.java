@@ -56,7 +56,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author L_J
  */
-public class SoulEcho extends CardImpl {
+public final class SoulEcho extends CardImpl {
 
     public SoulEcho(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{X}{W}{W}");

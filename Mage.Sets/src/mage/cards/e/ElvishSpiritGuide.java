@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author Plopman
  */
-public class ElvishSpiritGuide extends CardImpl {
+public final class ElvishSpiritGuide extends CardImpl {
 
     public ElvishSpiritGuide(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

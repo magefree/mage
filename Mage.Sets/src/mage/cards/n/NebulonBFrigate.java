@@ -46,7 +46,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  *
  * @author Styxo
  */
-public class NebulonBFrigate extends CardImpl {
+public final class NebulonBFrigate extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another creature you control");
 

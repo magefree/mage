@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class HighbornGhoul extends CardImpl {
+public final class HighbornGhoul extends CardImpl {
 
     public HighbornGhoul(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{B}");

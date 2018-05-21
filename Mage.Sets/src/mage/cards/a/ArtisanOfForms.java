@@ -48,7 +48,7 @@ import mage.util.functions.ApplyToPermanent;
  *
  * @author LevelX2
  */
-public class ArtisanOfForms extends CardImpl {
+public final class ArtisanOfForms extends CardImpl {
 
     public ArtisanOfForms(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");

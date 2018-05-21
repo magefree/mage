@@ -46,7 +46,7 @@ import mage.target.TargetPermanent;
  *
  * @author Plopman
  */
-public class MangaraOfCorondor extends CardImpl {
+public final class MangaraOfCorondor extends CardImpl {
 
     public MangaraOfCorondor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");

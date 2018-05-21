@@ -56,7 +56,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author TheElk801
  */
-public class Remembrance extends CardImpl {
+public final class Remembrance extends CardImpl {
 
     public Remembrance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");

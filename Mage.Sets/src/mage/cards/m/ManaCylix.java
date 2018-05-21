@@ -40,7 +40,7 @@ import mage.constants.CardType;
  *
  * @author North, Loki
  */
-public class ManaCylix extends CardImpl {
+public final class ManaCylix extends CardImpl {
 
     public ManaCylix(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");

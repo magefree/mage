@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author LevelX2
  */
-public class BladewingTheRisen extends CardImpl {
+public final class BladewingTheRisen extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Dragon creatures");
     private static final FilterPermanentCard filterCard = new FilterPermanentCard("Dragon permanent card from your graveyard");

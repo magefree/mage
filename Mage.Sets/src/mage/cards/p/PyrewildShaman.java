@@ -42,7 +42,7 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 
-public class PyrewildShaman extends CardImpl {
+public final class PyrewildShaman extends CardImpl {
 
     public PyrewildShaman(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");

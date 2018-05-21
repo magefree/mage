@@ -51,7 +51,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Backfir3
  */
-public class RathiFiend extends CardImpl {
+public final class RathiFiend extends CardImpl {
 
     private static final FilterPermanentCard filter = new FilterPermanentCard("Mercenary permanent card with converted mana cost 3 or less");
 

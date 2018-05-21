@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class UlamogsCrusher extends CardImpl {
+public final class UlamogsCrusher extends CardImpl {
 
     public UlamogsCrusher (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{8}");

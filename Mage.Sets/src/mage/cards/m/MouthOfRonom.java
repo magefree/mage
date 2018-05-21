@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class MouthOfRonom extends CardImpl {
+public final class MouthOfRonom extends CardImpl {
 
     public MouthOfRonom(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

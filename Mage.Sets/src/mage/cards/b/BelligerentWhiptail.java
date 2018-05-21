@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class BelligerentWhiptail extends CardImpl {
+public final class BelligerentWhiptail extends CardImpl {
 
     public BelligerentWhiptail(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

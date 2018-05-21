@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class MoriokReaver extends CardImpl {
+public final class MoriokReaver extends CardImpl {
 
     public MoriokReaver (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

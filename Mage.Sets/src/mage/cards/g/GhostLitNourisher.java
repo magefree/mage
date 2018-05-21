@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class GhostLitNourisher extends CardImpl {
+public final class GhostLitNourisher extends CardImpl {
 
     public GhostLitNourisher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

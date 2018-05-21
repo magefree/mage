@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class SewnEyeDrake extends CardImpl {
+public final class SewnEyeDrake extends CardImpl {
 
     public SewnEyeDrake (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U/R}{B}");

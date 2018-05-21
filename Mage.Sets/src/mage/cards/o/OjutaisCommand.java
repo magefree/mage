@@ -48,7 +48,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author fireshoes
  */
-public class OjutaisCommand extends CardImpl {
+public final class OjutaisCommand extends CardImpl {
 
     private static final FilterCard filter = new FilterCreatureCard("creature card with converted mana cost 2 or less from your graveyard");
 

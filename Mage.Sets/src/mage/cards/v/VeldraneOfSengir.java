@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class VeldraneOfSengir extends CardImpl {
+public final class VeldraneOfSengir extends CardImpl {
 
     public VeldraneOfSengir(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}{B}");

@@ -52,7 +52,7 @@ import java.util.UUID;
  *
  * @author jeffwadsworth
  */
-public class BriarberryCohort extends CardImpl {
+public final class BriarberryCohort extends CardImpl {
     
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
     

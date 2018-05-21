@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author LoneFox
  */
-public class WizenedSnitches extends CardImpl {
+public final class WizenedSnitches extends CardImpl {
 
     public WizenedSnitches(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");

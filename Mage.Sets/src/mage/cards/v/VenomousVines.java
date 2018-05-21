@@ -40,7 +40,7 @@ import mage.target.TargetPermanent;
  *
  * @author LoneFox
  */
-public class VenomousVines extends CardImpl {
+public final class VenomousVines extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("enchanted permanent");
 

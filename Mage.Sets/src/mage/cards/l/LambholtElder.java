@@ -46,7 +46,7 @@ import mage.constants.TargetController;
  *
  * @author Loki
  */
-public class LambholtElder extends CardImpl {
+public final class LambholtElder extends CardImpl {
 
     public LambholtElder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

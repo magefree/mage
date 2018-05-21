@@ -42,7 +42,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
 /**
  * @author BursegSardaukar
  */
-public class KyrenSniper extends CardImpl {
+public final class KyrenSniper extends CardImpl {
 
     public KyrenSniper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");

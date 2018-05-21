@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class ScreechingHarpy extends CardImpl {
+public final class ScreechingHarpy extends CardImpl {
 
     public ScreechingHarpy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");

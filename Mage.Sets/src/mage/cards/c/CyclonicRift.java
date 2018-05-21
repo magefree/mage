@@ -45,7 +45,7 @@ import mage.target.common.TargetNonlandPermanent;
  *
  * @author LevelX2
  */
-public class CyclonicRift extends CardImpl {
+public final class CyclonicRift extends CardImpl {
 
     private static final FilterNonlandPermanent filter = new FilterNonlandPermanent("nonland permanent you don't control");
 

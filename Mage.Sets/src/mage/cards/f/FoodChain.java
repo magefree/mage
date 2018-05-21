@@ -53,7 +53,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author emerald000
  */
-public class FoodChain extends CardImpl {
+public final class FoodChain extends CardImpl {
 
     public FoodChain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");

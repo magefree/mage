@@ -57,7 +57,7 @@ import mage.target.common.TargetCardInExile;
  *
  * @author fireshoes
  */
-public class UlamogsNullifier extends CardImpl {
+public final class UlamogsNullifier extends CardImpl {
 
     public UlamogsNullifier(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{B}");

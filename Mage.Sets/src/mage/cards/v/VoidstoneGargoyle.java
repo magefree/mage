@@ -51,7 +51,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author Plopman
  */
-public class VoidstoneGargoyle extends CardImpl {
+public final class VoidstoneGargoyle extends CardImpl {
 
     public VoidstoneGargoyle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");

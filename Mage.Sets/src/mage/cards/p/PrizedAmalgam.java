@@ -53,7 +53,7 @@ import mage.watchers.common.CastFromGraveyardWatcher;
  *
  * @author LevelX2
  */
-public class PrizedAmalgam extends CardImpl {
+public final class PrizedAmalgam extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature");
 

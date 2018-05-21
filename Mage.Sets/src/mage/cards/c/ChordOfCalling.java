@@ -39,7 +39,7 @@ import mage.filter.common.FilterCreatureCard;
  *
  * @author jonubuu
  */
-public class ChordOfCalling extends CardImpl {
+public final class ChordOfCalling extends CardImpl {
 
     public ChordOfCalling(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{G}{G}{G}");

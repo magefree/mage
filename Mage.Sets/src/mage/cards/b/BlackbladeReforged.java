@@ -26,7 +26,7 @@ import mage.constants.Zone;
  *
  * @author Rystan
  */
-public class BlackbladeReforged extends CardImpl {
+public final class BlackbladeReforged extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
 

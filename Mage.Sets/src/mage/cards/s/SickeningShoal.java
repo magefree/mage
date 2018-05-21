@@ -52,7 +52,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class SickeningShoal extends CardImpl {
+public final class SickeningShoal extends CardImpl {
 
     public SickeningShoal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{B}{B}");

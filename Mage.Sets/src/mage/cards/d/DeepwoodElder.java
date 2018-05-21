@@ -55,7 +55,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author TheElk801
  */
-public class DeepwoodElder extends CardImpl {
+public final class DeepwoodElder extends CardImpl {
 
     public DeepwoodElder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{G}");

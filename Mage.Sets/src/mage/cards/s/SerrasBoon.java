@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author daagar
  */
-public class SerrasBoon extends CardImpl {
+public final class SerrasBoon extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("White creatures");
     

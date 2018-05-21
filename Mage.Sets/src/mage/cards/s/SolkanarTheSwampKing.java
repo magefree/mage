@@ -47,7 +47,7 @@ import mage.game.stack.Spell;
  *
  * @author Loki
  */
-public class SolkanarTheSwampKing extends CardImpl {
+public final class SolkanarTheSwampKing extends CardImpl {
 
     public SolkanarTheSwampKing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{B}{R}");

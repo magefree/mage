@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author Loki
  */
-public class SoulOfMagma extends CardImpl {
+public final class SoulOfMagma extends CardImpl {
 
     public SoulOfMagma(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");

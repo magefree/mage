@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author ayratn
  */
-public class MirranCrusader extends CardImpl {
+public final class MirranCrusader extends CardImpl {
 
     public MirranCrusader(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");

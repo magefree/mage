@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author nigelzor
  */
-public class CoralHelm extends CardImpl {
+public final class CoralHelm extends CardImpl {
 
     public CoralHelm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

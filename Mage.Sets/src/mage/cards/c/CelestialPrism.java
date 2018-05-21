@@ -40,7 +40,7 @@ import mage.constants.CardType;
  *
  * @author icetc
  */
-public class CelestialPrism extends CardImpl {
+public final class CelestialPrism extends CardImpl {
 
     public CelestialPrism(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

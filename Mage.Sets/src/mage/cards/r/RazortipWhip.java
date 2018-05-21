@@ -43,7 +43,7 @@ import mage.target.common.TargetOpponentOrPlaneswalker;
  *
  * @author LevelX2
  */
-public class RazortipWhip extends CardImpl {
+public final class RazortipWhip extends CardImpl {
 
     public RazortipWhip(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");

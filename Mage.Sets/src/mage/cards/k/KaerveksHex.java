@@ -41,7 +41,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author TheElk801
  */
-public class KaerveksHex extends CardImpl {
+public final class KaerveksHex extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack creature");
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("green creature");

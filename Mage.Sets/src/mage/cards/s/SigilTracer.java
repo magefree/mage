@@ -50,7 +50,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 /**
  * @author Loki
  */
-public class SigilTracer extends CardImpl {
+public final class SigilTracer extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Wizards you control");
 

@@ -44,7 +44,7 @@ import mage.constants.CardType;
  *
  * @author LevelX2
  */
-public class DeadeyeBrawler extends CardImpl {
+public final class DeadeyeBrawler extends CardImpl {
 
     public DeadeyeBrawler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{B}");

@@ -39,7 +39,7 @@ import mage.target.common.TargetAttackingCreature;
  *
  * @author TheElk801
  */
-public class BrightReprisal extends CardImpl {
+public final class BrightReprisal extends CardImpl {
 
     public BrightReprisal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{4}{W}");

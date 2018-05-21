@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author Plopman
  */
-public class VernalBloom extends CardImpl {
+public final class VernalBloom extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("a Forest");
 

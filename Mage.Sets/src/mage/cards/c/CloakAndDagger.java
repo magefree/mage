@@ -48,7 +48,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author LevelX2
  */
-public class CloakAndDagger extends CardImpl {
+public final class CloakAndDagger extends CardImpl {
 
     private static final FilterPermanent filter = new FilterCreaturePermanent("a Rogue creature");
 

@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class OrchardWarden extends CardImpl {
+public final class OrchardWarden extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another Treefolk creature");
     

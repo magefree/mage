@@ -40,7 +40,7 @@ import mage.game.permanent.token.ZombieToken;
 /**
  * @author nantuko
  */
-public class ArmyOfTheDamned extends CardImpl {
+public final class ArmyOfTheDamned extends CardImpl {
 
     public ArmyOfTheDamned(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{B}{B}{B}");

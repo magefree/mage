@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class ToweringIndrik extends CardImpl {
+public final class ToweringIndrik extends CardImpl {
 
     public ToweringIndrik(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

@@ -41,7 +41,7 @@ import mage.game.permanent.token.DrakeToken;
  *
  * @author fireshoes
  */
-public class DrakeHaven extends CardImpl {
+public final class DrakeHaven extends CardImpl {
 
     public DrakeHaven(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");

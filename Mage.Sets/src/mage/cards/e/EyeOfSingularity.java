@@ -55,7 +55,7 @@ import java.util.UUID;
  *
  * @author spjspj
  */
-public class EyeOfSingularity extends CardImpl {
+public final class EyeOfSingularity extends CardImpl {
 
     public EyeOfSingularity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");

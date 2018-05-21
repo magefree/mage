@@ -41,7 +41,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author Backfir3
  */
-public class GaeasCradle extends CardImpl {
+public final class GaeasCradle extends CardImpl {
 
     public GaeasCradle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

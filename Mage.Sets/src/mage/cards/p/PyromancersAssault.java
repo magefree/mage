@@ -45,7 +45,7 @@ import mage.watchers.common.CastSpellLastTurnWatcher;
  *
  * @author fireshoes
  */
-public class PyromancersAssault extends CardImpl {
+public final class PyromancersAssault extends CardImpl {
 
     public PyromancersAssault(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{R}");

@@ -38,7 +38,7 @@ import mage.constants.CardType;
  *
  * @author jonubuu
  */
-public class NightsWhisper extends CardImpl {
+public final class NightsWhisper extends CardImpl {
 
     public NightsWhisper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}");

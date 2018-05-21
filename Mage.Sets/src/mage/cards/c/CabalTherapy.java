@@ -49,7 +49,7 @@ import java.util.UUID;
  *
  * @author jonubuu
  */
-public class CabalTherapy extends CardImpl {
+public final class CabalTherapy extends CardImpl {
 
     public CabalTherapy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}");

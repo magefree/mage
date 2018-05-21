@@ -41,7 +41,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class UrzasBlueprints extends CardImpl {
+public final class UrzasBlueprints extends CardImpl {
 
     public UrzasBlueprints(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{6}");

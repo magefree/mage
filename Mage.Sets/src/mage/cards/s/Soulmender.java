@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author jeffwadsworth
  */
-public class Soulmender extends CardImpl {
+public final class Soulmender extends CardImpl {
 
     public Soulmender(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");

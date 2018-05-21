@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author North
  */
-public class OversoulOfDusk extends CardImpl {
+public final class OversoulOfDusk extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("blue, from black, and from red");
 

@@ -37,7 +37,7 @@ import mage.constants.CardType;
  *
  * @author LevelX2
  */
-public class MoxSapphire extends CardImpl {
+public final class MoxSapphire extends CardImpl {
 
     public MoxSapphire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{0}");

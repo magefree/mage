@@ -50,7 +50,7 @@ import mage.target.TargetPermanent;
  *
  * @author fireshoes
  */
-public class HarmonyOfNature extends CardImpl {
+public final class HarmonyOfNature extends CardImpl {
 
     public HarmonyOfNature(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}");

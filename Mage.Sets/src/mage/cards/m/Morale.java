@@ -39,7 +39,7 @@ import mage.filter.common.FilterAttackingCreature;
  *
  * @author Galatolol
  */
-public class Morale extends CardImpl {
+public final class Morale extends CardImpl {
 
     public Morale(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}{W}");

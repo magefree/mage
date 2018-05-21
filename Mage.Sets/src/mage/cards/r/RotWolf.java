@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class RotWolf extends CardImpl {
+public final class RotWolf extends CardImpl {
 
     public RotWolf(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

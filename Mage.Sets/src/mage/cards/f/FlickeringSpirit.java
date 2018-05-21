@@ -48,7 +48,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class FlickeringSpirit extends CardImpl {
+public final class FlickeringSpirit extends CardImpl {
 
     public FlickeringSpirit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");

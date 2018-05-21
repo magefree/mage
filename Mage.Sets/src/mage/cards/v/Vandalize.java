@@ -40,7 +40,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LevelX2
  */
-public class Vandalize extends CardImpl {
+public final class Vandalize extends CardImpl {
 
     public Vandalize(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{R}");

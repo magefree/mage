@@ -40,7 +40,7 @@ import mage.filter.StaticFilters;
  *
  * @author Loki
  */
-public class BurstOfSpeed extends CardImpl {
+public final class BurstOfSpeed extends CardImpl {
 
     public BurstOfSpeed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{R}");

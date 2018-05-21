@@ -50,7 +50,7 @@ import mage.watchers.common.CastFromHandWatcher;
  *
  * @author jeffwadsworth
  */
-public class DeathbringerRegent extends CardImpl {
+public final class DeathbringerRegent extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("other creatures");
 

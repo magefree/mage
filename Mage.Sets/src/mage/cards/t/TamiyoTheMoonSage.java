@@ -54,7 +54,7 @@ import mage.target.TargetPlayer;
  *
  * @author North, noxx
  */
-public class TamiyoTheMoonSage extends CardImpl {
+public final class TamiyoTheMoonSage extends CardImpl {
 
     public TamiyoTheMoonSage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{U}{U}");

@@ -36,7 +36,7 @@ import mage.constants.CardType;
 /**
  * @author LevelX2
  */
-public class Thoughtflare extends CardImpl {
+public final class Thoughtflare extends CardImpl {
 
     public Thoughtflare(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}{R}");

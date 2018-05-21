@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class CrawWurm extends CardImpl {
+public final class CrawWurm extends CardImpl {
 
     public CrawWurm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");

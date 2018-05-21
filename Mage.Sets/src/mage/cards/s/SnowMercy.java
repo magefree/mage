@@ -54,7 +54,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author spjspj
  */
-public class SnowMercy extends CardImpl {
+public final class SnowMercy extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with globe counters on them");
 

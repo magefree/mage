@@ -40,7 +40,7 @@ import mage.constants.SubType;
 /**
  * @author Loki
  */
-public class GriffinSentinel extends CardImpl {
+public final class GriffinSentinel extends CardImpl {
 
     public GriffinSentinel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

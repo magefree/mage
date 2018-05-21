@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class SomberHoverguard extends CardImpl {
+public final class SomberHoverguard extends CardImpl {
 
     public SomberHoverguard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}");

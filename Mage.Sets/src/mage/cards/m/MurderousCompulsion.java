@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class MurderousCompulsion extends CardImpl {
+public final class MurderousCompulsion extends CardImpl {
 
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creature");
 

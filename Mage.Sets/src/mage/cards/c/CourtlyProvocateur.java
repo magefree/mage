@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author magenoxx_at_gmail.com
  */
-public class CourtlyProvocateur extends CardImpl {
+public final class CourtlyProvocateur extends CardImpl {
 
     public CourtlyProvocateur(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

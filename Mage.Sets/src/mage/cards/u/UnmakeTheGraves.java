@@ -40,7 +40,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author emerald000
  */
-public class UnmakeTheGraves extends CardImpl {
+public final class UnmakeTheGraves extends CardImpl {
 
     public UnmakeTheGraves(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{B}");

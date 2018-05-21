@@ -47,7 +47,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LevelX2
  */
-public class BurningEyeZubera extends CardImpl {
+public final class BurningEyeZubera extends CardImpl {
 
     public BurningEyeZubera(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");

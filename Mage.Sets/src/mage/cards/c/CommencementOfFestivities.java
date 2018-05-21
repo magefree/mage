@@ -38,7 +38,7 @@ import mage.constants.Duration;
  *
  * @author spjspj
  */
-public class CommencementOfFestivities extends CardImpl {
+public final class CommencementOfFestivities extends CardImpl {
 
     public CommencementOfFestivities(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}");

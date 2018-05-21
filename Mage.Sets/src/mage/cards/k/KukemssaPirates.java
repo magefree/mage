@@ -47,7 +47,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author TheElk801
  */
-public class KukemssaPirates extends CardImpl {
+public final class KukemssaPirates extends CardImpl {
 
     private final UUID originalId;
 

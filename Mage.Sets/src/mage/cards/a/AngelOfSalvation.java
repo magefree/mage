@@ -46,7 +46,7 @@ import mage.target.common.TargetAnyTargetAmount;
  *
  * @author LevelX2
  */
-public class AngelOfSalvation extends CardImpl {
+public final class AngelOfSalvation extends CardImpl {
 
     public AngelOfSalvation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{W}{W}");

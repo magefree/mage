@@ -42,7 +42,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author North
  */
-public class SafewrightQuest extends CardImpl {
+public final class SafewrightQuest extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Forest or Plains card");
 

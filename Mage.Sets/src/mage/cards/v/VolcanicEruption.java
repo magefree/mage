@@ -49,7 +49,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class VolcanicEruption extends CardImpl {
+public final class VolcanicEruption extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent(SubType.MOUNTAIN, "Mountain");
 

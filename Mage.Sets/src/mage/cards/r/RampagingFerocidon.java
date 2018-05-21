@@ -55,7 +55,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class RampagingFerocidon extends CardImpl {
+public final class RampagingFerocidon extends CardImpl {
 
     private static final FilterPermanent filter = new FilterCreaturePermanent("another creature");
 

@@ -57,7 +57,7 @@ import mage.watchers.common.PlayerAttackedStepWatcher;
  *
  * @author LevelX2 & L_J
  */
-public class HarshJustice extends CardImpl {
+public final class HarshJustice extends CardImpl {
 
     public HarshJustice(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{W}");

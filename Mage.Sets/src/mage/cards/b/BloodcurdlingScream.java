@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class BloodcurdlingScream extends CardImpl {
+public final class BloodcurdlingScream extends CardImpl {
 
     public BloodcurdlingScream(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{B}");

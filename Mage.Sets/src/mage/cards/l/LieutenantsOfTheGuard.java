@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author JRHerlehy
  */
-public class LieutenantsOfTheGuard extends CardImpl {
+public final class LieutenantsOfTheGuard extends CardImpl {
 
     public LieutenantsOfTheGuard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}");

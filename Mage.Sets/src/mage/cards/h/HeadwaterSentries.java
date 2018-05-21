@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author TheElk801
  */
-public class HeadwaterSentries extends CardImpl {
+public final class HeadwaterSentries extends CardImpl {
 
     public HeadwaterSentries(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");

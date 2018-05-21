@@ -50,7 +50,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author jeffwadsworth
  */
-public class SapseepForest extends CardImpl {
+public final class SapseepForest extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("if you control two or more green permanents");
 

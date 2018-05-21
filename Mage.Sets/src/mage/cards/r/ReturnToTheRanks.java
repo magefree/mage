@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author LevelX2
  */
-public class ReturnToTheRanks extends CardImpl {
+public final class ReturnToTheRanks extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("creature cards with converted mana cost 2 or less from your graveyard");
 

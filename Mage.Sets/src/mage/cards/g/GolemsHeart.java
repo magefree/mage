@@ -43,7 +43,7 @@ import mage.game.stack.Spell;
  *
  * @author Loki
  */
-public class GolemsHeart extends CardImpl {
+public final class GolemsHeart extends CardImpl {
 
     public GolemsHeart(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

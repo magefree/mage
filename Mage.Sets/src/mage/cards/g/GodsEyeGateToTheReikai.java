@@ -41,7 +41,7 @@ import mage.game.permanent.token.SpiritToken;
  *
  * @author Loki
  */
-public class GodsEyeGateToTheReikai extends CardImpl {
+public final class GodsEyeGateToTheReikai extends CardImpl {
 
     public GodsEyeGateToTheReikai(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

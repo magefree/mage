@@ -54,7 +54,7 @@ import mage.watchers.common.ManaSpentToCastWatcher;
  *
  * @author jeffwadsworth
  */
-public class RiversGrasp extends CardImpl {
+public final class RiversGrasp extends CardImpl {
 
     public RiversGrasp(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{U/B}");

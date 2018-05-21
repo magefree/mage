@@ -49,7 +49,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author spjspj
  */
-public class HammerHelper extends CardImpl {
+public final class HammerHelper extends CardImpl {
 
     public HammerHelper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}");

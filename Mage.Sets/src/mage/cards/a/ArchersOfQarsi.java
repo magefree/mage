@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class ArchersOfQarsi extends CardImpl {
+public final class ArchersOfQarsi extends CardImpl {
 
     public ArchersOfQarsi(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

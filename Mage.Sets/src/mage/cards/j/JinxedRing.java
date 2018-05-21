@@ -55,7 +55,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author fireshoes
  */
-public class JinxedRing extends CardImpl {
+public final class JinxedRing extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("a nontoken permanent");
 

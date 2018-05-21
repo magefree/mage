@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class GrizzledLeotau extends CardImpl {
+public final class GrizzledLeotau extends CardImpl {
 
     public GrizzledLeotau(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{W}");

@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author maurer.it_at_gmail.com
  */
-public class VampireNighthawk extends CardImpl {
+public final class VampireNighthawk extends CardImpl {
 
     public VampireNighthawk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");

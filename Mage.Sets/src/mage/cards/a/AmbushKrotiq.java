@@ -43,7 +43,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  *
  * @author LevelX2
  */
-public class AmbushKrotiq extends CardImpl {
+public final class AmbushKrotiq extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another creature you control");
 

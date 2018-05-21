@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class CitadelSiege extends CardImpl {
+public final class CitadelSiege extends CardImpl {
 
     private final static String ruleTrigger1 = "&bull Khans &mdash; At the beginning of combat on your turn, put two +1/+1 counters on target creature you control.";
     private final static String ruleTrigger2 = "&bull Dragons &mdash; At the beginning of combat on each opponent's turn, tap target creature that player controls.";

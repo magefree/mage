@@ -44,7 +44,7 @@ import mage.target.targetpointer.SecondTargetPointer;
  *
  * @author LevelX2
  */
-public class TrapEssence extends CardImpl {
+public final class TrapEssence extends CardImpl {
 
     public TrapEssence(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{G}{U}{R}");

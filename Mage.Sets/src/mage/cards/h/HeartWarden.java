@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class HeartWarden extends CardImpl {
+public final class HeartWarden extends CardImpl {
 
     public HeartWarden(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

@@ -51,7 +51,7 @@ import mage.watchers.common.DamagedByWatcher;
 /**
  * @author LevelX
  */
-public class KumanoMasterYamabushi extends CardImpl {
+public final class KumanoMasterYamabushi extends CardImpl {
 
     public KumanoMasterYamabushi(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");

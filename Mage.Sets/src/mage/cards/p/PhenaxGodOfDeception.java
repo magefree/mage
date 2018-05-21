@@ -50,7 +50,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class PhenaxGodOfDeception extends CardImpl {
+public final class PhenaxGodOfDeception extends CardImpl {
 
     public PhenaxGodOfDeception(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{3}{U}{B}");

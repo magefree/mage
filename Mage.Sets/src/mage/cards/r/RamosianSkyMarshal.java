@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Backfir3
  */
-public class RamosianSkyMarshal extends CardImpl {
+public final class RamosianSkyMarshal extends CardImpl {
 
     private static final FilterPermanentCard filter = new FilterPermanentCard("Rebel permanent card with converted mana cost 6 or less");
 

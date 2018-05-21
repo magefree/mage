@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class FootSoldiers extends CardImpl {
+public final class FootSoldiers extends CardImpl {
 
     public FootSoldiers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

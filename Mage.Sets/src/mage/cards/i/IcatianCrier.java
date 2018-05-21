@@ -46,7 +46,7 @@ import mage.game.permanent.token.CitizenToken;
  *
  * @author fireshoes
  */
-public class IcatianCrier extends CardImpl {
+public final class IcatianCrier extends CardImpl {
 
     public IcatianCrier(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

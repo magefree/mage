@@ -51,7 +51,7 @@ import mage.util.CardUtil;
  *
  * @author fireshoes
  */
-public class GoldnightCastigator extends CardImpl {
+public final class GoldnightCastigator extends CardImpl {
 
     public GoldnightCastigator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");

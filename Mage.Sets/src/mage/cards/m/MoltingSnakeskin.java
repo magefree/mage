@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author emerald000
  */
-public class MoltingSnakeskin extends CardImpl {
+public final class MoltingSnakeskin extends CardImpl {
 
     public MoltingSnakeskin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}");

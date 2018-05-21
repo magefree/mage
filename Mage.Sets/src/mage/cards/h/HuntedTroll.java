@@ -49,7 +49,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author Loki
  */
-public class HuntedTroll extends CardImpl {
+public final class HuntedTroll extends CardImpl {
 
     public HuntedTroll(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");

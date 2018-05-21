@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author LoneFox
  */
-public class UnfulfilledDesires extends CardImpl {
+public final class UnfulfilledDesires extends CardImpl {
 
     public UnfulfilledDesires(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}{B}");

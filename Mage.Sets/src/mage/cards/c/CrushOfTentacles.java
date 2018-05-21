@@ -44,7 +44,7 @@ import mage.game.permanent.token.CrushOfTentaclesToken;
  *
  * @author LevelX2
  */
-public class CrushOfTentacles extends CardImpl {
+public final class CrushOfTentacles extends CardImpl {
 
     public CrushOfTentacles(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{U}{U}");

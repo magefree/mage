@@ -41,7 +41,7 @@ import mage.target.TargetSpell;
  *
  * @author Plopman
  */
-public class PactOfNegation extends CardImpl {
+public final class PactOfNegation extends CardImpl {
 
     public PactOfNegation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{0}");

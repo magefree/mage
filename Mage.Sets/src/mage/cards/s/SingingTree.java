@@ -50,7 +50,7 @@ import mage.target.common.TargetAttackingCreature;
  *
  * @author MarcoMarin
  */
-public class SingingTree extends CardImpl {
+public final class SingingTree extends CardImpl {
 
     public SingingTree(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");

@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author fireshoes
  */
-public class FaultRiders extends CardImpl {
+public final class FaultRiders extends CardImpl {
 
     public FaultRiders(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

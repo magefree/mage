@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author fireshoes
  */
-public class SkyshroudVampire extends CardImpl {
+public final class SkyshroudVampire extends CardImpl {
 
     public SkyshroudVampire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");

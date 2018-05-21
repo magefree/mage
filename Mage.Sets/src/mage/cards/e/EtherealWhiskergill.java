@@ -43,7 +43,7 @@ import mage.filter.common.FilterLandPermanent;
  *
  * @author fireshoes
  */
-public class EtherealWhiskergill extends CardImpl {
+public final class EtherealWhiskergill extends CardImpl {
 
     public EtherealWhiskergill(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");

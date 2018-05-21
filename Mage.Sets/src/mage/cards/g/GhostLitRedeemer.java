@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class GhostLitRedeemer extends CardImpl {
+public final class GhostLitRedeemer extends CardImpl {
 
     public GhostLitRedeemer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");

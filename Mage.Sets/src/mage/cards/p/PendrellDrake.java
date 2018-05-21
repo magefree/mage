@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class PendrellDrake extends CardImpl {
+public final class PendrellDrake extends CardImpl {
 
     public PendrellDrake(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");

@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LoneFox
  */
-public class PhyrexianBloodstock extends CardImpl {
+public final class PhyrexianBloodstock extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("white creature");
 

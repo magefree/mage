@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author Plopman
  */
-public class FaerieMacabre extends CardImpl {
+public final class FaerieMacabre extends CardImpl {
 
     public FaerieMacabre(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");

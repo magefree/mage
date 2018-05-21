@@ -50,7 +50,7 @@ import mage.game.permanent.Permanent;
  *
  * @author jeffwadsworth
  */
-public class Chaosphere extends CardImpl {
+public final class Chaosphere extends CardImpl {
 
     static final private FilterCreaturePermanent filterCreature = new FilterCreaturePermanent();
     static final private String rule = "Creatures without flying have reach.";

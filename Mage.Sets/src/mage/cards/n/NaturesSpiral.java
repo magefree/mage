@@ -40,7 +40,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class NaturesSpiral extends CardImpl {
+public final class NaturesSpiral extends CardImpl {
 
     public NaturesSpiral(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{G}");

@@ -52,7 +52,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class MirrorMockery extends CardImpl {
+public final class MirrorMockery extends CardImpl {
 
     public MirrorMockery(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");

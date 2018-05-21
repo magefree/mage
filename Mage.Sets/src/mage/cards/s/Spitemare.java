@@ -49,7 +49,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author jeffwadsworth
  */
-public class Spitemare extends CardImpl {
+public final class Spitemare extends CardImpl {
 
     public Spitemare(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R/W}{R/W}");

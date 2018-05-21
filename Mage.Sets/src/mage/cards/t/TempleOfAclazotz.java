@@ -50,7 +50,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author TheElk801
  */
-public class TempleOfAclazotz extends CardImpl {
+public final class TempleOfAclazotz extends CardImpl {
 
     public TempleOfAclazotz(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

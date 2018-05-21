@@ -55,7 +55,7 @@ import mage.util.CardUtil;
 /**
  * @author jeffwadsworth & L_J
  */
-public class VoidMaw extends CardImpl {
+public final class VoidMaw extends CardImpl {
 
     public VoidMaw(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");

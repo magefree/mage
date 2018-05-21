@@ -57,7 +57,7 @@ import mage.target.targetpointer.FixedTarget;
 /**
  * @author jeffwadsworth
  */
-public class ChandraPyromaster extends CardImpl {
+public final class ChandraPyromaster extends CardImpl {
 
     public ChandraPyromaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{R}{R}");

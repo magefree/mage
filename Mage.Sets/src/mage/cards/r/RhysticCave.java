@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author jerekwilson
  */
-public class RhysticCave extends CardImpl {
+public final class RhysticCave extends CardImpl {
 
     public RhysticCave(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

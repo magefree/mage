@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class KingCrab extends CardImpl {
+public final class KingCrab extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("green creature");
 

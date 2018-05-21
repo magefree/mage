@@ -41,7 +41,7 @@ import mage.constants.Zone;
  *
  * @author Derpthemeus
  */
-public class DromadPurebred extends CardImpl {
+public final class DromadPurebred extends CardImpl {
 
     public DromadPurebred(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");

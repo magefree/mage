@@ -45,7 +45,7 @@ import mage.filter.FilterPermanent;
  *
  * @author KholdFuzion
  */
-public class GemhideSliver extends CardImpl {
+public final class GemhideSliver extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent(SubType.SLIVER, "All Slivers");
 

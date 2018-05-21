@@ -39,7 +39,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author LevelX2
  */
-public class MarchOfTheReturned extends CardImpl {
+public final class MarchOfTheReturned extends CardImpl {
 
     public MarchOfTheReturned(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}");

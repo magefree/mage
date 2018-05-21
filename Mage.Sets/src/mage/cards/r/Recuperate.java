@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author LoneFox
  * @author DimitarK
  */
-public class Recuperate extends CardImpl {
+public final class Recuperate extends CardImpl {
 
     public Recuperate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{W}");

@@ -52,7 +52,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author emerald000
  */
-public class Withdraw extends CardImpl {
+public final class Withdraw extends CardImpl {
 
     public Withdraw(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}{U}");

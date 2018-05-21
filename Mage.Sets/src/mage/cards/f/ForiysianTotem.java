@@ -52,7 +52,7 @@ import mage.game.permanent.token.Token;
  *
  * @author klayhamn
  */
-public class ForiysianTotem extends CardImpl {
+public final class ForiysianTotem extends CardImpl {
 
     private final static String ruleText = "As long as {this} is a creature, it can block an additional creature each combat.";
 

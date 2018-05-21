@@ -56,7 +56,7 @@ import java.util.UUID;
 /**
  * @author jeffwadsworth
  */
-public class RefractionTrap extends CardImpl {
+public final class RefractionTrap extends CardImpl {
 
     public RefractionTrap(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{W}");

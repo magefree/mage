@@ -43,7 +43,7 @@ import mage.constants.*;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BasiliskCollar extends CardImpl {
+public final class BasiliskCollar extends CardImpl {
 
     public BasiliskCollar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");

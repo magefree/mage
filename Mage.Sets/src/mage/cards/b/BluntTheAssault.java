@@ -42,7 +42,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author Loki
  */
-public class BluntTheAssault extends CardImpl {
+public final class BluntTheAssault extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature on the battlefield");
 

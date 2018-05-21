@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author djbrez
  */
-public class WirewoodPride extends CardImpl {
+public final class WirewoodPride extends CardImpl {
 
     private static final FilterCreaturePermanent elfCount = new FilterCreaturePermanent("Elves");
     static {

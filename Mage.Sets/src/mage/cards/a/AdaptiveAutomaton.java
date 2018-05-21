@@ -47,7 +47,7 @@ import mage.game.permanent.Permanent;
 /**
  * @author nantuko
  */
-public class AdaptiveAutomaton extends CardImpl {
+public final class AdaptiveAutomaton extends CardImpl {
 
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures you control of the chosen type");
 

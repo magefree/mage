@@ -37,7 +37,7 @@ import mage.constants.CardType;
  *
  * @author Plopman
  */
-public class TemporalManipulation extends CardImpl {
+public final class TemporalManipulation extends CardImpl {
 
     public TemporalManipulation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}{U}");

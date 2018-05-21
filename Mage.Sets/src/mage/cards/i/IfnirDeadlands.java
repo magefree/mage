@@ -52,7 +52,7 @@ import mage.target.common.TargetOpponentsCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class IfnirDeadlands extends CardImpl {
+public final class IfnirDeadlands extends CardImpl {
     
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Desert");
 

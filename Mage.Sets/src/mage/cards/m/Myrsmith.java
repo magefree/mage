@@ -46,7 +46,7 @@ import mage.game.permanent.token.MyrToken;
  *
  * @author Loki, North
  */
-public class Myrsmith extends CardImpl {
+public final class Myrsmith extends CardImpl {
 
     public Myrsmith(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");

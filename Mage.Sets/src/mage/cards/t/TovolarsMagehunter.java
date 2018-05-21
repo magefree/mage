@@ -52,7 +52,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author North
  */
-public class TovolarsMagehunter extends CardImpl {
+public final class TovolarsMagehunter extends CardImpl {
 
     public TovolarsMagehunter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");

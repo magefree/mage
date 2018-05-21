@@ -39,7 +39,7 @@ import mage.filter.StaticFilters;
  *
  * @author Loki
  */
-public class GloriousCharge extends CardImpl {
+public final class GloriousCharge extends CardImpl {
 
     public GloriousCharge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}");

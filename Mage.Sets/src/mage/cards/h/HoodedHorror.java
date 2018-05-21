@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class HoodedHorror extends CardImpl {
+public final class HoodedHorror extends CardImpl {
 
     public HoodedHorror(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");

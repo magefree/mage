@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author Jgod
  */
-public class GoblinBrigand extends CardImpl {
+public final class GoblinBrigand extends CardImpl {
 
     public GoblinBrigand(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

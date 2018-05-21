@@ -43,7 +43,7 @@ import mage.target.common.TargetEnchantmentPermanent;
  *
  * @author Loki
  */
-public class AvenCloudchaser extends CardImpl {
+public final class AvenCloudchaser extends CardImpl {
 
     public AvenCloudchaser(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

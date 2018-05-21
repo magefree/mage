@@ -52,7 +52,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author emerald000
  */
-public class PossessedPortal extends CardImpl {
+public final class PossessedPortal extends CardImpl {
 
     public PossessedPortal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{8}");

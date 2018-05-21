@@ -39,7 +39,7 @@ import mage.constants.CardType;
 /**
  * @author Backfir3
  */
-public class DelusionsOfMediocrity extends CardImpl {
+public final class DelusionsOfMediocrity extends CardImpl {
 
     public DelusionsOfMediocrity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{U}");

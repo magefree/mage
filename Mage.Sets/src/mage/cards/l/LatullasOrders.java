@@ -55,7 +55,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author L_J
  */
-public class LatullasOrders extends CardImpl {
+public final class LatullasOrders extends CardImpl {
 
     public LatullasOrders(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{R}");

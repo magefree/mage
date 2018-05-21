@@ -41,7 +41,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class BlessedLight extends CardImpl {
+public final class BlessedLight extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("creature or enchantment");
 

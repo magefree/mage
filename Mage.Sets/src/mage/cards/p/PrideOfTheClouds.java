@@ -52,7 +52,7 @@ import mage.game.permanent.token.Token;
  *
  * @author fireshoes
  */
-public class PrideOfTheClouds extends CardImpl {
+public final class PrideOfTheClouds extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("other creature with flying on the battlefield");
 

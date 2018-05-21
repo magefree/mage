@@ -41,7 +41,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author noxx
  */
-public class MassAppeal extends CardImpl {
+public final class MassAppeal extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Human you control");
 

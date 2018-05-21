@@ -52,7 +52,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class DesecrationDemon extends CardImpl {
+public final class DesecrationDemon extends CardImpl {
 
     public DesecrationDemon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");

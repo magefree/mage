@@ -58,7 +58,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Viserion
  */
-public class SwordOfFeastAndFamine extends CardImpl {
+public final class SwordOfFeastAndFamine extends CardImpl {
 
     public SwordOfFeastAndFamine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

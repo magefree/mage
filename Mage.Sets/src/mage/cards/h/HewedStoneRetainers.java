@@ -41,7 +41,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class HewedStoneRetainers extends CardImpl {
+public final class HewedStoneRetainers extends CardImpl {
 
     public HewedStoneRetainers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");

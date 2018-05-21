@@ -37,7 +37,7 @@ import mage.constants.CardType;
  *
  * @author LoneFox
  */
-public class SpringOfEternalPeace extends CardImpl {
+public final class SpringOfEternalPeace extends CardImpl {
 
     public SpringOfEternalPeace(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}{G}");

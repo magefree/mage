@@ -49,7 +49,7 @@ import mage.players.Player;
 /**
  * @author fenhl
  */
-public class GlintEyeNephilim extends CardImpl {
+public final class GlintEyeNephilim extends CardImpl {
 
     public GlintEyeNephilim(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{B}{R}{G}");

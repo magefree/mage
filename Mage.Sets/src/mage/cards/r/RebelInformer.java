@@ -55,7 +55,7 @@ import mage.target.TargetPermanent;
  *
  * @author fireshoes
  */
-public class RebelInformer extends CardImpl {
+public final class RebelInformer extends CardImpl {
     
     private static final FilterObject filterWhite = new FilterStackObject("white spells or abilities from white sources");
     private static final FilterPermanent filterRebel = new FilterPermanent("nontoken Rebel");

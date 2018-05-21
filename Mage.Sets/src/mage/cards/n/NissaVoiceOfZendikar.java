@@ -52,7 +52,7 @@ import mage.game.permanent.token.PlantToken;
  *
  * @author fireshoes
  */
-public class NissaVoiceOfZendikar extends CardImpl {
+public final class NissaVoiceOfZendikar extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("lands you control");
 

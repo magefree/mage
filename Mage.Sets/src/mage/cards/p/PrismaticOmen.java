@@ -47,7 +47,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class PrismaticOmen extends CardImpl {
+public final class PrismaticOmen extends CardImpl {
 
     public PrismaticOmen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}");

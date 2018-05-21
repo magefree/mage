@@ -48,7 +48,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author TheElk801
  */
-public class SpiritualAsylum extends CardImpl {
+public final class SpiritualAsylum extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Creatures and lands you control");
 

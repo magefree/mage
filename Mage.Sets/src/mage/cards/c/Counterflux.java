@@ -56,7 +56,7 @@ import mage.target.TargetSpell;
  *
  * @author LevelX2
  */
-public class Counterflux extends CardImpl {
+public final class Counterflux extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("spell you don't control");
 

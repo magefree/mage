@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.MulticoloredPredicate;
  *
  * @author Styxo
  */
-public class AncientHolocron extends CardImpl {
+public final class AncientHolocron extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("multicolored spells");
 

@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CudgelTroll extends CardImpl {
+public final class CudgelTroll extends CardImpl {
 
     public CudgelTroll(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");

@@ -40,7 +40,7 @@ import mage.game.permanent.token.EldraziSpawnToken;
  *
  * @author Loki
  */
-public class SkitteringInvasion extends CardImpl {
+public final class SkitteringInvasion extends CardImpl {
 
     public SkitteringInvasion (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.SORCERY},"{7}");

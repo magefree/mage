@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class BaronSengir extends CardImpl {
+public final class BaronSengir extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target Vampire");
 

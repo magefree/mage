@@ -49,7 +49,7 @@ import mage.target.TargetPlayer;
  *
  * @author fireshoes
  */
-public class AugurOfSkulls extends CardImpl {
+public final class AugurOfSkulls extends CardImpl {
 
     public AugurOfSkulls(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

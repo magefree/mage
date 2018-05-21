@@ -44,7 +44,7 @@ import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
  *
  * @author Backfir3
  */
-public class AbsoluteLaw extends CardImpl {
+public final class AbsoluteLaw extends CardImpl {
 
     public AbsoluteLaw(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");

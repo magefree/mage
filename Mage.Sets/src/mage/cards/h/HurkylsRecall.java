@@ -45,7 +45,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class HurkylsRecall extends CardImpl {
+public final class HurkylsRecall extends CardImpl {
 
     public HurkylsRecall(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");

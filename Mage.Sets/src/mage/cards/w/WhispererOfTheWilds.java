@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class WhispererOfTheWilds extends CardImpl {
+public final class WhispererOfTheWilds extends CardImpl {
 
     public WhispererOfTheWilds(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

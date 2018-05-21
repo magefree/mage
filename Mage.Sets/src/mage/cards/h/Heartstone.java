@@ -51,7 +51,7 @@ import mage.util.CardUtil;
  *
  * @author pcasaretto_at_gmail.com
  */
-public class Heartstone extends CardImpl {
+public final class Heartstone extends CardImpl {
 
     public Heartstone(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

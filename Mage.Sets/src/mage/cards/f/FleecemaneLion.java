@@ -49,7 +49,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class FleecemaneLion extends CardImpl {
+public final class FleecemaneLion extends CardImpl {
 
     public FleecemaneLion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{W}");

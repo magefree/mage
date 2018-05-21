@@ -48,7 +48,7 @@ import mage.game.permanent.token.LinvalaAngelToken;
  *
  * @author fireshoes
  */
-public class LinvalaThePreserver extends CardImpl {
+public final class LinvalaThePreserver extends CardImpl {
 
     public LinvalaThePreserver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");

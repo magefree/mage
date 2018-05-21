@@ -39,7 +39,7 @@ import mage.filter.common.FilterControlledPermanent;
  *
  * @author LevelX
  */
-public class CrackTheEarth extends CardImpl {
+public final class CrackTheEarth extends CardImpl {
 
     public CrackTheEarth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}");

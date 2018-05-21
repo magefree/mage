@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class JhovallQueen extends CardImpl {
+public final class JhovallQueen extends CardImpl {
 
     public JhovallQueen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{W}");

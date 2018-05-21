@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class HallowedFountain extends CardImpl {
+public final class HallowedFountain extends CardImpl {
 
     public HallowedFountain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, null);

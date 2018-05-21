@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class PharikasDisciple extends CardImpl {
+public final class PharikasDisciple extends CardImpl {
 
     public PharikasDisciple(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

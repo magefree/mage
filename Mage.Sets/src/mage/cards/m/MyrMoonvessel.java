@@ -40,7 +40,7 @@ import mage.constants.SubType;
 /**
  * @author Loki
  */
-public class MyrMoonvessel extends CardImpl {
+public final class MyrMoonvessel extends CardImpl {
 
     public MyrMoonvessel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{1}");

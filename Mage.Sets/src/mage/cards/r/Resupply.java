@@ -38,7 +38,7 @@ import mage.constants.CardType;
  *
  * @author fireshoes
  */
-public class Resupply extends CardImpl {
+public final class Resupply extends CardImpl {
 
     public Resupply(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{5}{W}");

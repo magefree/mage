@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author Backfir3
  */
-public class Archivist extends CardImpl {
+public final class Archivist extends CardImpl {
 
     public Archivist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{U}");

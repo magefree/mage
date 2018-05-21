@@ -49,7 +49,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author MTGfan
  */
-public class ConsecrateLand extends CardImpl {
+public final class ConsecrateLand extends CardImpl {
 
     public ConsecrateLand(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{W}");

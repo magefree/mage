@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class ViashinoRacketeer extends CardImpl {
+public final class ViashinoRacketeer extends CardImpl {
 
     public ViashinoRacketeer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

@@ -43,7 +43,7 @@ import mage.filter.predicate.permanent.TokenPredicate;
  *
  * @author emerald000
  */
-public class LeylineOfTheMeek extends CardImpl {
+public final class LeylineOfTheMeek extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creature tokens");
     static {

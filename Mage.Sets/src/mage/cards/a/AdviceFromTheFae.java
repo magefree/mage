@@ -49,7 +49,7 @@ import mage.target.TargetCard;
  *
  * @author jeffwadsworth
  */
-public class AdviceFromTheFae extends CardImpl {
+public final class AdviceFromTheFae extends CardImpl {
 
     public AdviceFromTheFae(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2/U}{2/U}{2/U}");

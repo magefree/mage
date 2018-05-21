@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.PowerPredicate;
  *
  * @author LoneFox
  */
-public class JuntuStakes extends CardImpl {
+public final class JuntuStakes extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures with power 1 or less");
 

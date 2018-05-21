@@ -43,7 +43,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author L_J
  */
-public class OrimsPrayer extends CardImpl {
+public final class OrimsPrayer extends CardImpl {
 
     public OrimsPrayer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}{W}");

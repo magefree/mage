@@ -41,7 +41,7 @@ import mage.target.TargetSpell;
  *
  * @author LoneFox
  */
-public class MysticDenial extends CardImpl {
+public final class MysticDenial extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("creature or sorcery spell");
 

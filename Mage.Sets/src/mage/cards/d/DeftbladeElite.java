@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class DeftbladeElite extends CardImpl {
+public final class DeftbladeElite extends CardImpl {
 
     public DeftbladeElite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");

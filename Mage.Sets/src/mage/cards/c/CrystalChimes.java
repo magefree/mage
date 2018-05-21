@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class CrystalChimes extends CardImpl {
+public final class CrystalChimes extends CardImpl {
 
     public CrystalChimes(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

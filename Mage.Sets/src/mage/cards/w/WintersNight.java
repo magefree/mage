@@ -47,7 +47,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author L_J
  */
-public class WintersNight extends CardImpl {
+public final class WintersNight extends CardImpl {
     
     private static final FilterLandPermanent filter = new FilterLandPermanent("a player taps a snow land");
     {

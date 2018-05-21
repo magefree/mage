@@ -54,7 +54,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  * @author noxx
  *
  */
-public class RestorationAngel extends CardImpl {
+public final class RestorationAngel extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("non-Angel creature you control");
 

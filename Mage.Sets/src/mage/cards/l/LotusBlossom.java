@@ -44,7 +44,7 @@ import mage.counters.CounterType;
 /**
  * @author JRHerlehy
  */
-public class LotusBlossom extends CardImpl {
+public final class LotusBlossom extends CardImpl {
 
     public LotusBlossom(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");

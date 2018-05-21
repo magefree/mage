@@ -49,7 +49,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class MinamoSightbender extends CardImpl {
+public final class MinamoSightbender extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("creature with power X or less");
 

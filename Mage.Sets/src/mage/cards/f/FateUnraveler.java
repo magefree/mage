@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Quercitron
  */
-public class FateUnraveler extends CardImpl {
+public final class FateUnraveler extends CardImpl {
 
     public FateUnraveler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{3}{B}");

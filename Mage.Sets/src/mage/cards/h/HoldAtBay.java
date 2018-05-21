@@ -39,7 +39,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LevelX2
  */
-public class HoldAtBay extends CardImpl {
+public final class HoldAtBay extends CardImpl {
 
     public HoldAtBay(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");

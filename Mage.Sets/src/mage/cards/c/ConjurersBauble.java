@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author jeffwadsworth
  */
-public class ConjurersBauble extends CardImpl {
+public final class ConjurersBauble extends CardImpl {
 
     static final String rule = "Put up to one target card from your graveyard on the bottom of your library";
 

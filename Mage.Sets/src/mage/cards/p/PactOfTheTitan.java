@@ -41,7 +41,7 @@ import mage.game.permanent.token.GiantToken;
  *
  * @author Plopman
  */
-public class PactOfTheTitan extends CardImpl {
+public final class PactOfTheTitan extends CardImpl {
 
     public PactOfTheTitan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{0}");

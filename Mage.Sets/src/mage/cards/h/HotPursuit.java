@@ -47,7 +47,7 @@ import mage.target.common.TargetOpponentsCreaturePermanent;
  *
  * @author Styxo
  */
-public class HotPursuit extends CardImpl {
+public final class HotPursuit extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Each creature with a bounty counter on it");
 

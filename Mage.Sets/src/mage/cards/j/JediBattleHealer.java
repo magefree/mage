@@ -43,7 +43,7 @@ import mage.constants.SubType;
  *
  * @author Styxo
  */
-public class JediBattleHealer extends CardImpl {
+public final class JediBattleHealer extends CardImpl {
 
     public JediBattleHealer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

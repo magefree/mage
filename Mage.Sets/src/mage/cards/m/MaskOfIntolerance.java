@@ -47,7 +47,7 @@ import mage.game.Game;
  *
  * @author LoneFox
  */
-public class MaskOfIntolerance extends CardImpl {
+public final class MaskOfIntolerance extends CardImpl {
 
     public MaskOfIntolerance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

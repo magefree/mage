@@ -49,7 +49,7 @@ import mage.filter.predicate.permanent.TappedPredicate;
 /**
  * @author fireshoes
  */
-public class ArcadesSabboth extends CardImpl {
+public final class ArcadesSabboth extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("untapped nonattacking creatures you control");
 

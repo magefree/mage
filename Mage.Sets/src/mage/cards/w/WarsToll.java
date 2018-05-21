@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class WarsToll extends CardImpl {
+public final class WarsToll extends CardImpl {
 
     private final static FilterCreaturePermanent filterOpponentCreature = new FilterCreaturePermanent("creature an opponent controls");
     private final static FilterLandPermanent filterOpponentLand = new FilterLandPermanent("an opponent taps a land");

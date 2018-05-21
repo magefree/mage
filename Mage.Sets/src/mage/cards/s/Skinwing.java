@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author North
  */
-public class Skinwing extends CardImpl {
+public final class Skinwing extends CardImpl {
 
     public Skinwing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");

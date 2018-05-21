@@ -46,7 +46,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Plopman
  */
-public class TreefolkMystic extends CardImpl {
+public final class TreefolkMystic extends CardImpl {
 
     public TreefolkMystic(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");

@@ -39,7 +39,7 @@ import mage.constants.SuperType;
  *
  * @author LevelX2
  */
-public class SnowCoveredPlains extends CardImpl {
+public final class SnowCoveredPlains extends CardImpl {
 
     public SnowCoveredPlains(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

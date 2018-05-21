@@ -52,7 +52,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Topher
  */
-public class BurntOffering extends CardImpl {
+public final class BurntOffering extends CardImpl {
 
     public BurntOffering(UUID ownerID, CardSetInfo setInfo) {
         super(ownerID, setInfo, new CardType[]{CardType.INSTANT}, "{B}");

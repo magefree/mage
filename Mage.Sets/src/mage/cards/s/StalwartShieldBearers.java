@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  *
  * @author North
  */
-public class StalwartShieldBearers extends CardImpl {
+public final class StalwartShieldBearers extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with defender");
 

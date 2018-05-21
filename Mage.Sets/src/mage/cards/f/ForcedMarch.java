@@ -19,7 +19,7 @@ import mage.game.permanent.Permanent;
 /**
  * @author nick.myers
  */
-public class ForcedMarch extends CardImpl {
+public final class ForcedMarch extends CardImpl {
 
     public ForcedMarch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{B}{B}{B}");

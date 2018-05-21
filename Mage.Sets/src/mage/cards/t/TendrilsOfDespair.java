@@ -41,7 +41,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author fireshoes
  */
-public class TendrilsOfDespair extends CardImpl {
+public final class TendrilsOfDespair extends CardImpl {
 
     public TendrilsOfDespair(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{B}");

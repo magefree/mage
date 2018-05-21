@@ -53,7 +53,7 @@ import mage.target.TargetSpell;
  *
  * @author L_J
  */
-public class TidalControl extends CardImpl {
+public final class TidalControl extends CardImpl {
     private static final FilterSpell filter = new FilterSpell("red or green spell");
     static{
         filter.add(Predicates.or(new ColorPredicate(ObjectColor.RED), new ColorPredicate(ObjectColor.GREEN)));

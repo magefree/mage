@@ -40,7 +40,7 @@ import mage.filter.common.FilterArtifactCard;
  *
  * @author michael.napoleon@gmail.com
  */
-public class TelJiladChosen extends CardImpl {
+public final class TelJiladChosen extends CardImpl {
 
     public TelJiladChosen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

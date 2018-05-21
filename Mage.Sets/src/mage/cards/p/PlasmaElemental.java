@@ -41,7 +41,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class PlasmaElemental extends CardImpl {
+public final class PlasmaElemental extends CardImpl {
 
     public PlasmaElemental(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}");

@@ -53,7 +53,7 @@ import mage.filter.predicate.mageobject.NamePredicate;
  *
  * @author anonymous
  */
-public class ShelteredValley extends CardImpl {
+public final class ShelteredValley extends CardImpl {
 
     private static final FilterPermanent filterShelteredValley = new FilterPermanent("permanent named Sheltered Valley");
     

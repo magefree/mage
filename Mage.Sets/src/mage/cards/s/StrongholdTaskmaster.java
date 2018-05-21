@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  * @author LoneFox
 
  */
-public class StrongholdTaskmaster extends CardImpl {
+public final class StrongholdTaskmaster extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("black creatures");
 

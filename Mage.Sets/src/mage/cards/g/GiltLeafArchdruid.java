@@ -55,7 +55,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Plopman
  */
-public class GiltLeafArchdruid extends CardImpl {
+public final class GiltLeafArchdruid extends CardImpl {
 
     private static final FilterSpell filterSpell = new FilterSpell("a Druid spell");
 

@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author KholdFuzion
  */
-public class BottleOfSuleiman extends CardImpl {
+public final class BottleOfSuleiman extends CardImpl {
 
     public BottleOfSuleiman(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");

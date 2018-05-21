@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class WayOfTheThief extends CardImpl {
+public final class WayOfTheThief extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Gate");
 

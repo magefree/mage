@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class WoodlandPatrol extends CardImpl {
+public final class WoodlandPatrol extends CardImpl {
 
     public WoodlandPatrol(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

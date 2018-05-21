@@ -46,7 +46,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author TheElk801
  */
-public class EndlessWurm extends CardImpl {
+public final class EndlessWurm extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledEnchantmentPermanent();
 

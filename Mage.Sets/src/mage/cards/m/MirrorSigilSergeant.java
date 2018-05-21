@@ -50,7 +50,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author jeffwadsworth
  */
-public class MirrorSigilSergeant extends CardImpl {
+public final class MirrorSigilSergeant extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("blue permanent");
 

@@ -45,7 +45,7 @@ import mage.game.permanent.Permanent;
  *
  * @author emerald000
  */
-public class SilentArbiter extends CardImpl {
+public final class SilentArbiter extends CardImpl {
 
     public SilentArbiter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}");

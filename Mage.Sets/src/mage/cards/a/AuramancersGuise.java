@@ -51,7 +51,7 @@ import java.util.UUID;
  *
  * @author spjspj
  */
-public class AuramancersGuise extends CardImpl {
+public final class AuramancersGuise extends CardImpl {
 
     public AuramancersGuise(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{U}");

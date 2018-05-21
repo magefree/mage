@@ -42,7 +42,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class OrcishOriflamme extends CardImpl {
+public final class OrcishOriflamme extends CardImpl {
 
     public OrcishOriflamme(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{R}");

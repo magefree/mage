@@ -50,7 +50,7 @@ import mage.constants.Zone;
  *
  * @author TheElk801
  */
-public class RebornHero extends CardImpl {
+public final class RebornHero extends CardImpl {
 
     public RebornHero(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");

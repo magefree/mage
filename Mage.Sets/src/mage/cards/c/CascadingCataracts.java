@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author spjspj
  */
-public class CascadingCataracts extends CardImpl {
+public final class CascadingCataracts extends CardImpl {
 
     public CascadingCataracts(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

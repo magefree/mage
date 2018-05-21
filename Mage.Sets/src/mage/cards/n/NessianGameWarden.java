@@ -54,7 +54,7 @@ import mage.target.TargetCard;
  *
  * @author LevelX2
  */
-public class NessianGameWarden extends CardImpl {
+public final class NessianGameWarden extends CardImpl {
 
     public NessianGameWarden(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");

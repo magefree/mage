@@ -42,7 +42,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author Plopman
  */
-public class KeymasterRogue extends CardImpl {
+public final class KeymasterRogue extends CardImpl {
 
     public KeymasterRogue(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");

@@ -39,7 +39,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class Scar extends CardImpl {
+public final class Scar extends CardImpl {
 
     public Scar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B/R}");

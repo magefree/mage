@@ -47,7 +47,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Styxo
  */
-public class EscapePod extends CardImpl {
+public final class EscapePod extends CardImpl {
 
     public EscapePod(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{W}");

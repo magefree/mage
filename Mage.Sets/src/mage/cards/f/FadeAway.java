@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Quercitron
  */
-public class FadeAway extends CardImpl {
+public final class FadeAway extends CardImpl {
 
     public FadeAway(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}");

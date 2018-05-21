@@ -46,7 +46,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class NaturesClaim extends CardImpl {
+public final class NaturesClaim extends CardImpl {
 
     public NaturesClaim(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");

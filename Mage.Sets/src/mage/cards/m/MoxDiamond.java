@@ -51,7 +51,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author Plopman
  */
-public class MoxDiamond extends CardImpl {
+public final class MoxDiamond extends CardImpl {
 
     public MoxDiamond(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{0}");

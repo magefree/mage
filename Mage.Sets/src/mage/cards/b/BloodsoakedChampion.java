@@ -46,7 +46,7 @@ import mage.watchers.common.PlayerAttackedWatcher;
  *
  * @author emerald000
  */
-public class BloodsoakedChampion extends CardImpl {
+public final class BloodsoakedChampion extends CardImpl {
 
     public BloodsoakedChampion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}");

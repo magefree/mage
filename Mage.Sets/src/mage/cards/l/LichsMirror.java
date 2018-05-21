@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author Plopman
  */
-public class LichsMirror extends CardImpl {
+public final class LichsMirror extends CardImpl {
 
     public LichsMirror(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");

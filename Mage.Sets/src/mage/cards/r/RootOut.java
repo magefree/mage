@@ -42,7 +42,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class RootOut extends CardImpl {
+public final class RootOut extends CardImpl {
 
     public RootOut(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}");

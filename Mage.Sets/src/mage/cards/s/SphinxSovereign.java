@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author North
  */
-public class SphinxSovereign extends CardImpl {
+public final class SphinxSovereign extends CardImpl {
 
     public SphinxSovereign(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}{W}{U}{U}{B}");

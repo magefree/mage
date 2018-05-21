@@ -50,7 +50,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward
  */
-public class LoyalCathar extends CardImpl {
+public final class LoyalCathar extends CardImpl {
 
     public LoyalCathar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{W}");

@@ -52,7 +52,7 @@ import mage.game.events.ZoneChangeEvent;
  *
  * @author anonymous
  */
-public class SkullbriarTheWalkingGrave extends CardImpl {
+public final class SkullbriarTheWalkingGrave extends CardImpl {
     private Counters counters;
 
     public SkullbriarTheWalkingGrave(UUID ownerId, CardSetInfo setInfo) {

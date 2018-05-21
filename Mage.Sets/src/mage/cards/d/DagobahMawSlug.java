@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author Styxo
  */
-public class DagobahMawSlug extends CardImpl {
+public final class DagobahMawSlug extends CardImpl {
 
     public DagobahMawSlug(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{G}{W}");

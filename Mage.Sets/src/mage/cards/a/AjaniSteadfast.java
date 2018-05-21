@@ -57,7 +57,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class AjaniSteadfast extends CardImpl {
+public final class AjaniSteadfast extends CardImpl {
 
     private static final FilterPlaneswalkerPermanent filter = new FilterPlaneswalkerPermanent("other planeswalker you control");
 

@@ -59,7 +59,7 @@ import mage.watchers.Watcher;
  *
  * @author TheElk801
  */
-public class TimeOfIce extends CardImpl {
+public final class TimeOfIce extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creatures");
 

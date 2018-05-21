@@ -52,7 +52,7 @@ import mage.filter.common.FilterControlledArtifactPermanent;
  *
  * @author fireshoes
  */
-public class ToolcraftExemplar extends CardImpl {
+public final class ToolcraftExemplar extends CardImpl {
 
     public ToolcraftExemplar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");

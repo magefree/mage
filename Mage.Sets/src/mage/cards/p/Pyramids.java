@@ -53,7 +53,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author MarcoMarin
  */
-public class Pyramids extends CardImpl {
+public final class Pyramids extends CardImpl {
     
     private static final FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent("Auras attached to a land");
     

@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class StasisSnare extends CardImpl {
+public final class StasisSnare extends CardImpl {
 
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent();
 

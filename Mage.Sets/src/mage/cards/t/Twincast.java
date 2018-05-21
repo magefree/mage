@@ -39,7 +39,7 @@ import mage.target.TargetSpell;
  *
  * @author Loki
  */
-public class Twincast extends CardImpl {
+public final class Twincast extends CardImpl {
 
     public Twincast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}{U}");

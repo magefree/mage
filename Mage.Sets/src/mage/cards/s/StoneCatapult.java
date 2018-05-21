@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class StoneCatapult extends CardImpl {
+public final class StoneCatapult extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped nonblack creature");
 

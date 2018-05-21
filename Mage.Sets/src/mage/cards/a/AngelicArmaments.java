@@ -44,7 +44,7 @@ import mage.constants.*;
 /**
  * @author noxx
  */
-public class AngelicArmaments extends CardImpl {
+public final class AngelicArmaments extends CardImpl {
 
     public AngelicArmaments(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

@@ -41,7 +41,7 @@ import mage.constants.Zone;
  *
  * @author michael.napoleon@gmail.com
  */
-public class GoblinSpy extends CardImpl {
+public final class GoblinSpy extends CardImpl {
 
     public GoblinSpy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");

@@ -51,7 +51,7 @@ import mage.target.common.TargetOpponentsCreaturePermanent;
  * 
  * @author L_J
  */
-public class MoggAssassin extends CardImpl {
+public final class MoggAssassin extends CardImpl {
 
     private final UUID originalId;
 

@@ -42,7 +42,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LevelX2
  */
-public class LightningRift extends CardImpl {
+public final class LightningRift extends CardImpl {
 
     public LightningRift(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{R}");

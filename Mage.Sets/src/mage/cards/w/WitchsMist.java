@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class WitchsMist extends CardImpl {
+public final class WitchsMist extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature that was dealt damage this turn");
 

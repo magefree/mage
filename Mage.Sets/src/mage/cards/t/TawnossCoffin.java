@@ -63,7 +63,7 @@ import mage.util.CardUtil;
  *
  * @author MarcoMarin
  */
-public class TawnossCoffin extends CardImpl {
+public final class TawnossCoffin extends CardImpl {
 
     public TawnossCoffin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");

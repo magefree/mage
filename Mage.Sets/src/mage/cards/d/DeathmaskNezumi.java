@@ -49,7 +49,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class DeathmaskNezumi extends CardImpl {
+public final class DeathmaskNezumi extends CardImpl {
 
     public DeathmaskNezumi(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

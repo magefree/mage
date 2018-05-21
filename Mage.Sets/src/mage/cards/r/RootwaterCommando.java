@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class RootwaterCommando extends CardImpl {
+public final class RootwaterCommando extends CardImpl {
 
     public RootwaterCommando(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

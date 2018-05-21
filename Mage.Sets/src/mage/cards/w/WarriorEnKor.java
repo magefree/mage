@@ -46,7 +46,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author fireshoes
  */
-public class WarriorEnKor extends CardImpl {
+public final class WarriorEnKor extends CardImpl {
 
     public WarriorEnKor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{W}");

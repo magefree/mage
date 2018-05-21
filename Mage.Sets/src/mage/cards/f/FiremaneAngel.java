@@ -53,7 +53,7 @@ import mage.game.Game;
  *
  * @author Loki
  */
-public class FiremaneAngel extends CardImpl {
+public final class FiremaneAngel extends CardImpl {
 
     public FiremaneAngel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{W}{W}");

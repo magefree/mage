@@ -41,7 +41,7 @@ import mage.target.TargetPermanent;
  *
  * @author fireshoes
  */
-public class Fragmentize extends CardImpl {
+public final class Fragmentize extends CardImpl {
 
     private static final FilterArtifactOrEnchantmentPermanent filter = new FilterArtifactOrEnchantmentPermanent("artifact or enchantment with converted mana cost 4 or less");
 

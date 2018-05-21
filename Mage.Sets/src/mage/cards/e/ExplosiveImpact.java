@@ -39,7 +39,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LevelX2
  */
-public class ExplosiveImpact extends CardImpl {
+public final class ExplosiveImpact extends CardImpl {
 
     public ExplosiveImpact(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{5}{R}");

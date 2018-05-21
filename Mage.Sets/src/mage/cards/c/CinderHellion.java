@@ -43,7 +43,7 @@ import mage.target.common.TargetOpponentOrPlaneswalker;
  *
  * @author fireshoes
  */
-public class CinderHellion extends CardImpl {
+public final class CinderHellion extends CardImpl {
 
     public CinderHellion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}");

@@ -50,7 +50,7 @@ import mage.game.permanent.Permanent;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class ClergyOfTheHolyNimbus extends CardImpl {
+public final class ClergyOfTheHolyNimbus extends CardImpl {
 
     public ClergyOfTheHolyNimbus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}");

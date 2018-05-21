@@ -41,7 +41,7 @@ import mage.constants.TargetController;
  *
  * @author fireshoes
  */
-public class SibsigHost extends CardImpl {
+public final class SibsigHost extends CardImpl {
 
     public SibsigHost(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");

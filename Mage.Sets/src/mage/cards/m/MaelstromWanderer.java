@@ -43,7 +43,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author LevelX2
  */
-public class MaelstromWanderer extends CardImpl {
+public final class MaelstromWanderer extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures you control");
 

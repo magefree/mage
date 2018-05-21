@@ -43,7 +43,7 @@ import mage.watchers.common.DamagedByWatcher;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class RedSunsZenith extends CardImpl {
+public final class RedSunsZenith extends CardImpl {
 
     public RedSunsZenith(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{R}");

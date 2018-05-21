@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Styxo
  */
-public class FulfillContract extends CardImpl {
+public final class FulfillContract extends CardImpl {
 
     private static final FilterCreaturePermanent filterBountyCreature = new FilterCreaturePermanent("creature with a bounty counter on it");
     private static final FilterControlledCreaturePermanent filterRogueOrHunter = new FilterControlledCreaturePermanent("Rogue or Hunter you control");

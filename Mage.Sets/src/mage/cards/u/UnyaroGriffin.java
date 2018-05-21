@@ -49,7 +49,7 @@ import mage.target.TargetSpell;
  *
  * @author Quercitron
  */
-public class UnyaroGriffin extends CardImpl {
+public final class UnyaroGriffin extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("red instant or sorcery spell");
 

@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class HenchfiendOfUkor extends CardImpl {
+public final class HenchfiendOfUkor extends CardImpl {
 
     public HenchfiendOfUkor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

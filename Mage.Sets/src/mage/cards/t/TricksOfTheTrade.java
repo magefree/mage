@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class TricksOfTheTrade extends CardImpl {
+public final class TricksOfTheTrade extends CardImpl {
 
     public TricksOfTheTrade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{U}");

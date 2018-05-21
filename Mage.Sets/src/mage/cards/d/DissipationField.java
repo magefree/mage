@@ -44,7 +44,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author ayratn
  */
-public class DissipationField extends CardImpl {
+public final class DissipationField extends CardImpl {
 
     public DissipationField(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{U}");

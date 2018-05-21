@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class MawOfKozilek extends CardImpl {
+public final class MawOfKozilek extends CardImpl {
 
     public MawOfKozilek(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

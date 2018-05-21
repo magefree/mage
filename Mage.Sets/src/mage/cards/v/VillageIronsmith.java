@@ -46,7 +46,7 @@ import mage.constants.TargetController;
 /**
  * @author nantuko
  */
-public class VillageIronsmith extends CardImpl {
+public final class VillageIronsmith extends CardImpl {
 
     public VillageIronsmith(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

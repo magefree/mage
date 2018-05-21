@@ -45,7 +45,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class KembasLegion extends CardImpl {
+public final class KembasLegion extends CardImpl {
 
     public KembasLegion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}{W}");

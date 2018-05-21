@@ -20,7 +20,7 @@ import mage.filter.predicate.permanent.CounterPredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
-public class BanewhipPunisher extends CardImpl {
+public final class BanewhipPunisher extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with a -1/-1 counter on it");    
     

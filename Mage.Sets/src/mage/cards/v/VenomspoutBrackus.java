@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Galatolol
  */
-public class VenomspoutBrackus extends CardImpl {
+public final class VenomspoutBrackus extends CardImpl {
 
     private static final FilterAttackingOrBlockingCreature filter = new FilterAttackingOrBlockingCreature(
             "attacking or blocking creature with flying");

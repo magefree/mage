@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author TheElk801
  */
-public class RowdyCrew extends CardImpl {
+public final class RowdyCrew extends CardImpl {
 
     public RowdyCrew(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");

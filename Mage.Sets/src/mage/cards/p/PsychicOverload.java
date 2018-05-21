@@ -56,7 +56,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author wetterlicht
  */
-public class PsychicOverload extends CardImpl {
+public final class PsychicOverload extends CardImpl {
 
     public PsychicOverload(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{U}");

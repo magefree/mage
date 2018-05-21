@@ -40,7 +40,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author LevelX2
  */
-public class Anarchy extends CardImpl {
+public final class Anarchy extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("white permanents");
 

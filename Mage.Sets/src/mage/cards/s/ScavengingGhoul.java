@@ -48,7 +48,7 @@ import mage.watchers.common.CreaturesDiedWatcher;
  *
  * @author LoneFox
  */
-public class ScavengingGhoul extends CardImpl {
+public final class ScavengingGhoul extends CardImpl {
 
     public ScavengingGhoul(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

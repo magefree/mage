@@ -53,7 +53,7 @@ import mage.game.permanent.token.ElementalAppealElementalToken;
  *
  * @author North
  */
-public class ElementalAppeal extends CardImpl {
+public final class ElementalAppeal extends CardImpl {
 
     public ElementalAppeal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{R}{R}{R}{R}");

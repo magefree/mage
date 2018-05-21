@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author North
  */
-public class RakdosRingleader extends CardImpl {
+public final class RakdosRingleader extends CardImpl {
 
     public RakdosRingleader(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{R}");

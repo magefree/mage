@@ -41,7 +41,7 @@ import mage.game.permanent.token.BeastToken2;
  *
  * @author cbt33
  */
-public class BeastAttack extends CardImpl {
+public final class BeastAttack extends CardImpl {
 
     public BeastAttack(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}{G}{G}");

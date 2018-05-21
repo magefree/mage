@@ -53,7 +53,7 @@ import mage.target.common.TargetCardInOpponentsGraveyard;
 /**
  * @author nantuko
  */
-public class GethLordOfTheVault extends CardImpl {
+public final class GethLordOfTheVault extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("artifact or creature card with converted mana cost X from an opponent's graveyard");
 

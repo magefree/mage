@@ -53,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author Loki
  */
-public class UmezawasJitte extends CardImpl {
+public final class UmezawasJitte extends CardImpl {
 
     public UmezawasJitte(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

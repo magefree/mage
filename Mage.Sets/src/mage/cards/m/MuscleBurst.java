@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LoneFox
  */
-public class MuscleBurst extends CardImpl {
+public final class MuscleBurst extends CardImpl {
 
     private static final FilterCard filter = new FilterCard();
 

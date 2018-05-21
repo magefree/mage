@@ -39,7 +39,7 @@ import mage.constants.SubType;
 /**
  * @author Loki
  */
-public class GladecoverScout extends CardImpl {
+public final class GladecoverScout extends CardImpl {
 
     public GladecoverScout(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");

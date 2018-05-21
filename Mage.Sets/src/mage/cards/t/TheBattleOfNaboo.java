@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Styxo
  */
-public class TheBattleOfNaboo extends CardImpl {
+public final class TheBattleOfNaboo extends CardImpl {
 
     public TheBattleOfNaboo(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{X}{U}{U}");

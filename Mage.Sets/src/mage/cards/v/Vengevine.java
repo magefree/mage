@@ -49,7 +49,7 @@ import mage.watchers.Watcher;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Vengevine extends CardImpl {
+public final class Vengevine extends CardImpl {
 
     public Vengevine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");

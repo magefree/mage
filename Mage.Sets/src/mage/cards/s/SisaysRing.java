@@ -40,7 +40,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class SisaysRing extends CardImpl {
+public final class SisaysRing extends CardImpl {
 
     public SisaysRing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");

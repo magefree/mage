@@ -44,7 +44,7 @@ import mage.constants.*;
  *
  * @author Loki
  */
-public class PeregrineMask extends CardImpl {
+public final class PeregrineMask extends CardImpl {
 
     public PeregrineMask(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");

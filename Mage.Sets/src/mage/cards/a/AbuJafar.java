@@ -44,7 +44,7 @@ import mage.filter.predicate.permanent.BlockingAttackerIdPredicate;
  *
  * @author MarcoMarin
  */
-public class AbuJafar extends CardImpl {
+public final class AbuJafar extends CardImpl {
 
     public AbuJafar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");

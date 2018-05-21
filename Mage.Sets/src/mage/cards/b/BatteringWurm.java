@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author North
  */
-public class BatteringWurm extends CardImpl {
+public final class BatteringWurm extends CardImpl {
 
     public BatteringWurm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{G}");

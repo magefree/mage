@@ -46,7 +46,7 @@ import mage.target.TargetPermanent;
  *
  * @author duncant
  */
-public class CandelabraOfTawnos extends CardImpl {
+public final class CandelabraOfTawnos extends CardImpl {
 
     public CandelabraOfTawnos(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");

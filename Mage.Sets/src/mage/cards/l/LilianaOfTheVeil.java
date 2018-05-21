@@ -54,7 +54,7 @@ import mage.target.TargetPlayer;
  *
  * @author North
  */
-public class LilianaOfTheVeil extends CardImpl {
+public final class LilianaOfTheVeil extends CardImpl {
 
     public LilianaOfTheVeil(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{B}{B}");

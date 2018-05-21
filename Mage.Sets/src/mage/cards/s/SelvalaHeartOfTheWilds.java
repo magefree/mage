@@ -56,7 +56,7 @@ import mage.players.Player;
  *
  * @author maxlebedev
  */
-public class SelvalaHeartOfTheWilds extends CardImpl {
+public final class SelvalaHeartOfTheWilds extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
 

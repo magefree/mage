@@ -50,7 +50,7 @@ import mage.target.targetpointer.FixedTargets;
  *
  * @author LevelX2
  */
-public class MirrorMatch extends CardImpl {
+public final class MirrorMatch extends CardImpl {
 
     public MirrorMatch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{U}{U}");

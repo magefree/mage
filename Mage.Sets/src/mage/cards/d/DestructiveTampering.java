@@ -45,7 +45,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author spjspj
  */
-public class DestructiveTampering extends CardImpl {
+public final class DestructiveTampering extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures without flying");
     

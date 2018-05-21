@@ -47,7 +47,7 @@ import java.util.UUID;
 /**
  * @author jeffwadsworth
  */
-public class DescentOfTheDragons extends CardImpl {
+public final class DescentOfTheDragons extends CardImpl {
 
     public DescentOfTheDragons(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{R}{R}");

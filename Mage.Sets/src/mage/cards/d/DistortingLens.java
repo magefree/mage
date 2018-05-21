@@ -50,7 +50,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author anonymous
  */
-public class DistortingLens extends CardImpl {
+public final class DistortingLens extends CardImpl {
 
     public DistortingLens(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

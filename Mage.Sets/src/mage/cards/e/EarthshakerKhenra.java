@@ -55,7 +55,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author jeffwadsworth
  */
-public class EarthshakerKhenra extends CardImpl {
+public final class EarthshakerKhenra extends CardImpl {
 
     private final UUID originalId;
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power less than or equal to {this}'s power");

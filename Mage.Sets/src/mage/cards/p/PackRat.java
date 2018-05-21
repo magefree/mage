@@ -65,7 +65,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author LevelX2
  */
-public class PackRat extends CardImpl {
+public final class PackRat extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Rats you control");
 

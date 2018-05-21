@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author North
  */
-public class SkeletalWurm extends CardImpl {
+public final class SkeletalWurm extends CardImpl {
 
     public SkeletalWurm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{7}{B}");

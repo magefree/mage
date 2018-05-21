@@ -41,7 +41,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class DictateOfHeliod extends CardImpl {
+public final class DictateOfHeliod extends CardImpl {
 
     public DictateOfHeliod(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}{W}");

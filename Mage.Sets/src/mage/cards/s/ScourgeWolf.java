@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class ScourgeWolf extends CardImpl {
+public final class ScourgeWolf extends CardImpl {
 
     public ScourgeWolf(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{R}");

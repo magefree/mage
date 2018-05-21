@@ -53,7 +53,7 @@ import java.util.UUID;
  *
  * @author jeffwadsworth
  */
-public class ScytheSpecter extends CardImpl {
+public final class ScytheSpecter extends CardImpl {
 
     public ScytheSpecter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");

@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author Loki
  */
-public class InnocenceKami extends CardImpl {
+public final class InnocenceKami extends CardImpl {
 
     public InnocenceKami(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");

@@ -39,7 +39,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LevelX2
  */
-public class PinnacleOfRage extends CardImpl {
+public final class PinnacleOfRage extends CardImpl {
 
     public PinnacleOfRage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{R}{R}");

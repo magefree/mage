@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author TheElk801
  */
-public class ImperialLancer extends CardImpl {
+public final class ImperialLancer extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Dinosaur");
 

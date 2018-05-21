@@ -51,7 +51,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author jeffwadsworth
  */
-public class VastwoodAnimist extends CardImpl {
+public final class VastwoodAnimist extends CardImpl {
 
     public VastwoodAnimist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

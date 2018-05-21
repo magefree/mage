@@ -44,7 +44,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class WindsOfChange extends CardImpl {
+public final class WindsOfChange extends CardImpl {
 
     public WindsOfChange(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}");

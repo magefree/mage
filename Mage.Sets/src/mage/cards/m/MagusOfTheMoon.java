@@ -46,7 +46,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class MagusOfTheMoon extends CardImpl {
+public final class MagusOfTheMoon extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent();
 

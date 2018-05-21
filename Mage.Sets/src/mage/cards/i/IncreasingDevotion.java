@@ -46,7 +46,7 @@ import mage.game.stack.Spell;
  *
  * @author BetaSteward
  */
-public class IncreasingDevotion extends CardImpl {
+public final class IncreasingDevotion extends CardImpl {
 
     public IncreasingDevotion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{W}{W}");

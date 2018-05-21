@@ -42,7 +42,7 @@ import mage.filter.StaticFilters;
  *
  * @author LevelX2
  */
-public class WildOnslaught extends CardImpl {
+public final class WildOnslaught extends CardImpl {
 
     public WildOnslaught(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{G}");

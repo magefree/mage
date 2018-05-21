@@ -44,7 +44,7 @@ import mage.game.permanent.Permanent;
  *
  * @author anonymous
  */
-public class GhostflameSliver extends CardImpl {
+public final class GhostflameSliver extends CardImpl {
 
     public GhostflameSliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{R}");

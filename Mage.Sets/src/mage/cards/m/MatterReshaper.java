@@ -51,7 +51,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class MatterReshaper extends CardImpl {
+public final class MatterReshaper extends CardImpl {
 
     public MatterReshaper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{C}");

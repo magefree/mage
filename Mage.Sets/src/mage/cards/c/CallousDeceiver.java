@@ -53,7 +53,7 @@ import mage.players.Player;
  *
  * @author LevelX
  */
-public class CallousDeceiver extends CardImpl {
+public final class CallousDeceiver extends CardImpl {
 
     public CallousDeceiver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");

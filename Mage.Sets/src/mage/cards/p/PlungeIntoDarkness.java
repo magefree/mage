@@ -55,7 +55,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author emerald000
  */
-public class PlungeIntoDarkness extends CardImpl {
+public final class PlungeIntoDarkness extends CardImpl {
 
     public PlungeIntoDarkness(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{B}");

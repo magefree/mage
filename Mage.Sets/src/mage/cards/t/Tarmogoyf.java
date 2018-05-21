@@ -47,7 +47,7 @@ import java.util.UUID;
  *
  * @author Plopman
  */
-public class Tarmogoyf extends CardImpl {
+public final class Tarmogoyf extends CardImpl {
 
     public Tarmogoyf(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

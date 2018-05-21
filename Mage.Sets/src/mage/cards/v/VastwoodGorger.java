@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class VastwoodGorger extends CardImpl {
+public final class VastwoodGorger extends CardImpl {
 
     public VastwoodGorger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}");

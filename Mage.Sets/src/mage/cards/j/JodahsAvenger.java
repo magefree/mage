@@ -54,7 +54,7 @@ import mage.players.Player;
  *
  * @author Styxo
  */
-public class JodahsAvenger extends CardImpl {
+public final class JodahsAvenger extends CardImpl {
 
     public JodahsAvenger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{U}");

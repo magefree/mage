@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North, Loki
  */
-public class VictimOfNight extends CardImpl {
+public final class VictimOfNight extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Vampire, non-Werewolf, non-Zombie creature");
 

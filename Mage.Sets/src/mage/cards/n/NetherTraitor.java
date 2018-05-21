@@ -49,7 +49,7 @@ import mage.game.events.ZoneChangeEvent;
  *
  * @author emerald000
  */
-public class NetherTraitor extends CardImpl {
+public final class NetherTraitor extends CardImpl {
 
     public NetherTraitor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{B}");

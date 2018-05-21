@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author North, nantuko
  */
-public class SejiriMerfolk extends CardImpl {
+public final class SejiriMerfolk extends CardImpl {
 
     private static final String rule1 = "As long as you control a Plains, {this} has first strike.";
     private static final String rule2 = "As long as you control a Plains, {this} has lifelink.";

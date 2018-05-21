@@ -41,7 +41,7 @@ import mage.constants.CardType;
  *
  * @author Plopman
  */
-public class BogWreckage extends CardImpl {
+public final class BogWreckage extends CardImpl {
 
     public BogWreckage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

@@ -57,7 +57,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class ThroughTheBreach extends CardImpl {
+public final class ThroughTheBreach extends CardImpl {
 
     public ThroughTheBreach(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{R}");

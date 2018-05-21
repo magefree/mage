@@ -52,7 +52,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Styxo
  */
-public class DarkDecision extends CardImpl {
+public final class DarkDecision extends CardImpl {
 
     public DarkDecision(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{B}{R}");

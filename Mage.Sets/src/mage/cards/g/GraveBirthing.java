@@ -51,7 +51,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class GraveBirthing extends CardImpl {
+public final class GraveBirthing extends CardImpl {
 
     public GraveBirthing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{B}");

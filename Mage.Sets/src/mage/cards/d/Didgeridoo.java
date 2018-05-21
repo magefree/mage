@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author LoneFox
  */
-public class Didgeridoo extends CardImpl {
+public final class Didgeridoo extends CardImpl {
 
     private static final FilterPermanentCard filter = new FilterPermanentCard("a Minotaur permanent card");
 

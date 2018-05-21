@@ -43,7 +43,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class FarhavenElf extends CardImpl {
+public final class FarhavenElf extends CardImpl {
 
     public FarhavenElf(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

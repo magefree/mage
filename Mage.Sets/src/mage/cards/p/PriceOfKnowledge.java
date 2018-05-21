@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class PriceOfKnowledge extends CardImpl {
+public final class PriceOfKnowledge extends CardImpl {
 
     public PriceOfKnowledge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{6}{B}");

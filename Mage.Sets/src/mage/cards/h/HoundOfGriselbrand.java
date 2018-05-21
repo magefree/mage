@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class HoundOfGriselbrand extends CardImpl {
+public final class HoundOfGriselbrand extends CardImpl {
 
     public HoundOfGriselbrand(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");

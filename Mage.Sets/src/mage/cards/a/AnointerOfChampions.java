@@ -45,7 +45,7 @@ import mage.target.common.TargetAttackingCreature;
  *
  * @author fireshoes
  */
-public class AnointerOfChampions extends CardImpl {
+public final class AnointerOfChampions extends CardImpl {
 
     public AnointerOfChampions(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");

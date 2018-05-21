@@ -44,7 +44,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author Styxo
  */
-public class EMPBlast extends CardImpl {
+public final class EMPBlast extends CardImpl {
 
     public EMPBlast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");

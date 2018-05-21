@@ -39,7 +39,7 @@ import mage.target.TargetSpell;
  *
  * @author Jgod
  */
-public class ArtifactBlast extends CardImpl {
+public final class ArtifactBlast extends CardImpl {
     public ArtifactBlast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");
 

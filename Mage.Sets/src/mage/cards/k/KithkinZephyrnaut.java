@@ -45,7 +45,7 @@ import mage.constants.Duration;
  *
  * @author LevelX2
  */
-public class KithkinZephyrnaut extends CardImpl {
+public final class KithkinZephyrnaut extends CardImpl {
 
     public KithkinZephyrnaut(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

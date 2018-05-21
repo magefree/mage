@@ -55,7 +55,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LoneFox
  */
-public class TrapDigger extends CardImpl {
+public final class TrapDigger extends CardImpl {
 
     private static final FilterControlledLandPermanent filter1 = new FilterControlledLandPermanent("a land with a trap counter on it");
     private static final FilterAttackingCreature filter2 = new FilterAttackingCreature("attacking creature without flying");

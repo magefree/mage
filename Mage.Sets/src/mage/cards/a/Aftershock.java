@@ -42,7 +42,7 @@ import mage.target.TargetPermanent;
  *
  * @author Loki
  */
-public class Aftershock extends CardImpl {
+public final class Aftershock extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact, creature, or land");
 

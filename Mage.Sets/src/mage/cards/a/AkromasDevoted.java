@@ -44,7 +44,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author LoneFox
  */
-public class AkromasDevoted extends CardImpl {
+public final class AkromasDevoted extends CardImpl {
 
     public AkromasDevoted(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

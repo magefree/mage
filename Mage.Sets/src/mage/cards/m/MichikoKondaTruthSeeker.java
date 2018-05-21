@@ -46,7 +46,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author North
  */
-public class MichikoKondaTruthSeeker extends CardImpl {
+public final class MichikoKondaTruthSeeker extends CardImpl {
 
     public MichikoKondaTruthSeeker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

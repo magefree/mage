@@ -51,7 +51,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author North
  */
-public class SpitefulShadows extends CardImpl {
+public final class SpitefulShadows extends CardImpl {
 
     public SpitefulShadows(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}");

@@ -50,7 +50,7 @@ import mage.target.TargetPermanent;
  *
  * @author fireshoes
  */
-public class VizierOfTumblingSands extends CardImpl {
+public final class VizierOfTumblingSands extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("another target permanent");
 

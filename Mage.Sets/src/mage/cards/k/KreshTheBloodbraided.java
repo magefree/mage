@@ -47,7 +47,7 @@ import mage.game.permanent.Permanent;
  *
  * @author jeffwadsworth
  */
-public class KreshTheBloodbraided extends CardImpl {
+public final class KreshTheBloodbraided extends CardImpl {
 
     public KreshTheBloodbraided(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{R}{G}");

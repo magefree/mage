@@ -39,7 +39,7 @@ import mage.target.TargetPermanent;
  *
  * @author L_J
  */
-public class PrismaticLace extends CardImpl {
+public final class PrismaticLace extends CardImpl {
 
     public PrismaticLace(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");

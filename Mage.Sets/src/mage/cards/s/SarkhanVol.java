@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SarkhanVol extends CardImpl {
+public final class SarkhanVol extends CardImpl {
 
     private static DragonToken dragonToken = new DragonToken();
 

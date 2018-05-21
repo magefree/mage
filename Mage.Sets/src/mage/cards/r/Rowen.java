@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author Quercitron
  */
-public class Rowen extends CardImpl {
+public final class Rowen extends CardImpl {
 
     public Rowen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}{G}");

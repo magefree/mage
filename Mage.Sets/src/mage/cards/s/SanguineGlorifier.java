@@ -46,7 +46,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class SanguineGlorifier extends CardImpl {
+public final class SanguineGlorifier extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("another target Vampire you control");
 

@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author TheElk801
  */
-public class RangingRaptors extends CardImpl {
+public final class RangingRaptors extends CardImpl {
 
     public RangingRaptors(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");

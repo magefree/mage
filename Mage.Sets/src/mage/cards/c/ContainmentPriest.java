@@ -52,7 +52,7 @@ import mage.watchers.common.CreatureWasCastWatcher;
  *
  * @author LevelX2
  */
-public class ContainmentPriest extends CardImpl {
+public final class ContainmentPriest extends CardImpl {
 
     public ContainmentPriest(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

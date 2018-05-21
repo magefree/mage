@@ -49,7 +49,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward
  */
-public class MeliraSylvokOutcast extends CardImpl {
+public final class MeliraSylvokOutcast extends CardImpl {
 
     public MeliraSylvokOutcast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

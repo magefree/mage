@@ -48,7 +48,7 @@ import mage.target.TargetCard;
  *
  * @author LevelX2
  */
-public class EpicExperiment extends CardImpl {
+public final class EpicExperiment extends CardImpl {
 
     public EpicExperiment(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{U}{R}");

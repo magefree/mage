@@ -42,7 +42,7 @@ import mage.constants.*;
  *
  * @author Loki
  */
-public class Kitesail extends CardImpl {
+public final class Kitesail extends CardImpl {
 
     public Kitesail(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

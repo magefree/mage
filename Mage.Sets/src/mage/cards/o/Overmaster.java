@@ -48,7 +48,7 @@ import mage.watchers.Watcher;
  *
  * @author emerald000
  */
-public class Overmaster extends CardImpl {
+public final class Overmaster extends CardImpl {
 
     public Overmaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}");

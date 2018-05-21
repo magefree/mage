@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class Slitherhead extends CardImpl {
+public final class Slitherhead extends CardImpl {
 
     public Slitherhead(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B/G}");

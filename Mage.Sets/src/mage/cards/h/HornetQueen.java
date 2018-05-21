@@ -43,7 +43,7 @@ import mage.game.permanent.token.HornetQueenInsectToken;
  *
  * @author LevelX2
  */
-public class HornetQueen extends CardImpl {
+public final class HornetQueen extends CardImpl {
 
     public HornetQueen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{G}{G}");

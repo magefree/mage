@@ -42,7 +42,7 @@ import mage.target.TargetSpell;
  *
  * @author North
  */
-public class PunishIgnorance extends CardImpl {
+public final class PunishIgnorance extends CardImpl {
 
     public PunishIgnorance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}{U}{U}{B}");

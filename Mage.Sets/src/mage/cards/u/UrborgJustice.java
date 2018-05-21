@@ -44,7 +44,7 @@ import mage.watchers.common.CreaturesDiedWatcher;
  *
  * @author andyfries
  */
-public class UrborgJustice extends CardImpl {
+public final class UrborgJustice extends CardImpl {
 
     public UrborgJustice(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{B}{B}");

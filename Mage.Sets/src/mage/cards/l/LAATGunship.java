@@ -47,7 +47,7 @@ import mage.game.permanent.token.TrooperToken;
  *
  * @author Styxo
  */
-public class LAATGunship extends CardImpl {
+public final class LAATGunship extends CardImpl {
 
     public LAATGunship(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}{W}");

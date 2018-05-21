@@ -42,7 +42,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  *
  * @author LevelX2
  */
-public class RollingEarthquake extends CardImpl {
+public final class RollingEarthquake extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature without horsemanship");
 

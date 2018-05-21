@@ -42,7 +42,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author LevelX2
  */
-public class MasterworkOfIngenuity extends CardImpl {
+public final class MasterworkOfIngenuity extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("equipment");
 

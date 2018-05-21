@@ -38,7 +38,7 @@ import mage.constants.CardType;
  *
  * @author Plopman
  */
-public class LastThoughts extends CardImpl {
+public final class LastThoughts extends CardImpl {
 
     public LastThoughts(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}");

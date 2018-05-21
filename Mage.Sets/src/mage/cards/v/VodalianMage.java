@@ -45,7 +45,7 @@ import mage.target.TargetSpell;
  *
  * @author LoneFox
  */
-public class VodalianMage extends CardImpl {
+public final class VodalianMage extends CardImpl {
 
     public VodalianMage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

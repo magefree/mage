@@ -39,7 +39,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author fireshoes
  */
-public class InspiringRoar extends CardImpl {
+public final class InspiringRoar extends CardImpl {
 
     public InspiringRoar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{W}");

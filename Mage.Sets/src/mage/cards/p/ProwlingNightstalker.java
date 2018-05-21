@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author fireshoes
  */
-public class ProwlingNightstalker extends CardImpl {
+public final class ProwlingNightstalker extends CardImpl {
 
     private final static FilterCreaturePermanent notBlackCreatures = new FilterCreaturePermanent("except by black creatures");
 

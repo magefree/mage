@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class TurnBurn extends SplitCard {
+public final class TurnBurn extends SplitCard {
 
     public TurnBurn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}", "{1}{R}", SpellAbilityType.SPLIT_FUSED);

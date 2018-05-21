@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class FiligreeFamiliar extends CardImpl {
+public final class FiligreeFamiliar extends CardImpl {
 
     public FiligreeFamiliar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");

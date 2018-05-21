@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author LoneFox
  */
-public class BraidsConjurerAdept extends CardImpl {
+public final class BraidsConjurerAdept extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("an artifact, creature, or land card");
 

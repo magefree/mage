@@ -47,7 +47,7 @@ import java.util.UUID;
  *
  * @author anonymous
  */
-public class TerminalMoraine extends CardImpl {
+public final class TerminalMoraine extends CardImpl {
 
     public TerminalMoraine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

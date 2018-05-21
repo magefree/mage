@@ -46,7 +46,7 @@ import mage.target.common.TargetEnchantmentPermanent;
  *
  * @author LevelX2
  */
-public class Deicide extends CardImpl {
+public final class Deicide extends CardImpl {
     
     
 

@@ -42,7 +42,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Plopman
  */
-public class ResoundingThunder extends CardImpl {
+public final class ResoundingThunder extends CardImpl {
 
     public ResoundingThunder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");

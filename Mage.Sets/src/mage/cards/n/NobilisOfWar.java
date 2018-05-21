@@ -44,7 +44,7 @@ import mage.filter.common.FilterAttackingCreature;
  *
  * @author North
  */
-public class NobilisOfWar extends CardImpl {
+public final class NobilisOfWar extends CardImpl {
 
     public NobilisOfWar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R/W}{R/W}{R/W}{R/W}{R/W}");

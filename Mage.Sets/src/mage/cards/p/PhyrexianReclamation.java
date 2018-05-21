@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author Plopman
  */
-public class PhyrexianReclamation extends CardImpl {
+public final class PhyrexianReclamation extends CardImpl {
 
     public PhyrexianReclamation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{B}");

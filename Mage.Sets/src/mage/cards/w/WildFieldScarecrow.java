@@ -48,7 +48,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author fireshoes
  */
-public class WildFieldScarecrow extends CardImpl {
+public final class WildFieldScarecrow extends CardImpl {
 
     public WildFieldScarecrow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");

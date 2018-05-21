@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class BodyOfJukai extends CardImpl {
+public final class BodyOfJukai extends CardImpl {
 
     public BodyOfJukai(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{7}{G}{G}");

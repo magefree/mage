@@ -44,7 +44,7 @@ import mage.game.permanent.Permanent;
  *
  * @author anonymous
  */
-public class EmperorCrocodile extends CardImpl {
+public final class EmperorCrocodile extends CardImpl {
 
     public EmperorCrocodile(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

@@ -43,7 +43,7 @@ import mage.target.TargetPlayer;
  *
  * @author Plopman
  */
-public class MindeyeDrake extends CardImpl {
+public final class MindeyeDrake extends CardImpl {
 
     public MindeyeDrake(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");

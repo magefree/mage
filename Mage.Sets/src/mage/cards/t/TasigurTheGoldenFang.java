@@ -55,7 +55,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class TasigurTheGoldenFang extends CardImpl {
+public final class TasigurTheGoldenFang extends CardImpl {
 
     public TasigurTheGoldenFang(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}");

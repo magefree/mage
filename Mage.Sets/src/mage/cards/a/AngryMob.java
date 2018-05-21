@@ -46,7 +46,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author Styxo
  */
-public class AngryMob extends CardImpl {
+public final class AngryMob extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Swamps you opponents control");
 

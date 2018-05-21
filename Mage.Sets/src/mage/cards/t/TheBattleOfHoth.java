@@ -39,7 +39,7 @@ import mage.game.permanent.token.ATATToken;
  *
  * @author Styxo
  */
-public class TheBattleOfHoth extends CardImpl {
+public final class TheBattleOfHoth extends CardImpl {
 
     public TheBattleOfHoth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{X}{W}{W}{W}");

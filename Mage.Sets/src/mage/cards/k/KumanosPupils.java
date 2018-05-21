@@ -43,7 +43,7 @@ import mage.watchers.common.DamagedByWatcher;
 /**
  * @author LevelX
  */
-public class KumanosPupils extends CardImpl {
+public final class KumanosPupils extends CardImpl {
 
     public KumanosPupils(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");

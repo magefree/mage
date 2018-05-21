@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class UlvenwaldTracker extends CardImpl {
+public final class UlvenwaldTracker extends CardImpl {
 
     public UlvenwaldTracker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}");

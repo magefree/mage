@@ -49,7 +49,7 @@ import mage.game.permanent.Permanent;
  *
  * @author emerald000
  */
-public class RaidersSpoils extends CardImpl {
+public final class RaidersSpoils extends CardImpl {
 
     public RaidersSpoils(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{B}");

@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author ilcartographer
  */
-public class StaffOfZegon extends CardImpl {
+public final class StaffOfZegon extends CardImpl {
 
     public StaffOfZegon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");

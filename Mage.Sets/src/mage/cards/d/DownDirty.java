@@ -37,7 +37,7 @@ import mage.constants.SpellAbilityType;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInYourGraveyard;
 
-public class DownDirty extends SplitCard {
+public final class DownDirty extends SplitCard {
 
     public DownDirty(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{B}", "{2}{G}", SpellAbilityType.SPLIT_FUSED);

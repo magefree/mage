@@ -45,7 +45,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LoneFox
  */
-public class Hypochondria extends CardImpl {
+public final class Hypochondria extends CardImpl {
 
     public Hypochondria(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");

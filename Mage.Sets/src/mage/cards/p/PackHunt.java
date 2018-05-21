@@ -48,7 +48,7 @@ import java.util.UUID;
  *
  * @author ciaccona007
  */
-public class PackHunt extends CardImpl {
+public final class PackHunt extends CardImpl {
 
     public PackHunt(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{G}");

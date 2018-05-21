@@ -44,7 +44,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author Loki
  */
-public class GeralfsMessenger extends CardImpl {
+public final class GeralfsMessenger extends CardImpl {
 
     public GeralfsMessenger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{B}{B}");

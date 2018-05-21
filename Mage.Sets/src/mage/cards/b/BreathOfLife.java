@@ -39,7 +39,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author dustinconrad
  */
-public class BreathOfLife extends CardImpl {
+public final class BreathOfLife extends CardImpl {
 
     public BreathOfLife(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{W}");

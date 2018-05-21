@@ -40,7 +40,7 @@ import mage.target.common.TargetCreaturePermanentAmount;
  *
  * @author LevelX2
  */
-public class HailOfArrows extends CardImpl {
+public final class HailOfArrows extends CardImpl {
 
     public HailOfArrows(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{W}");

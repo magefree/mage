@@ -45,7 +45,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author Styxo
  */
-public class MirrorUniverse extends CardImpl {
+public final class MirrorUniverse extends CardImpl {
 
     public MirrorUniverse(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{6}");

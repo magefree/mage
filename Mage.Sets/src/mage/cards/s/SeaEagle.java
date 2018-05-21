@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author Quercitron
  */
-public class SeaEagle extends CardImpl {
+public final class SeaEagle extends CardImpl {
 
     public SeaEagle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

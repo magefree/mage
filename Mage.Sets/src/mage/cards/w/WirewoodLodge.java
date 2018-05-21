@@ -47,7 +47,7 @@ import mage.target.TargetPermanent;
  *
  * @author Melkhior
  */
-public class WirewoodLodge extends CardImpl {
+public final class WirewoodLodge extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Elf");
 

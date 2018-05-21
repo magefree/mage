@@ -41,7 +41,7 @@ import mage.constants.Duration;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Angelsong extends CardImpl {
+public final class Angelsong extends CardImpl {
 
     public Angelsong(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");

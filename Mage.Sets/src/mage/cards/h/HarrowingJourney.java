@@ -39,7 +39,7 @@ import mage.target.TargetPlayer;
  *
  * @author Loki
  */
-public class HarrowingJourney extends CardImpl {
+public final class HarrowingJourney extends CardImpl {
 
     public HarrowingJourney(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B}");

@@ -38,7 +38,7 @@ import mage.constants.CardType;
  *
  * @author LevelX2
  */
-public class TreasureCruise extends CardImpl {
+public final class TreasureCruise extends CardImpl {
 
     public TreasureCruise(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{7}{U}");

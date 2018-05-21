@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class SeagrafSkaab extends CardImpl {
+public final class SeagrafSkaab extends CardImpl {
 
     public SeagrafSkaab(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

@@ -46,7 +46,7 @@ import mage.game.events.ZoneChangeEvent;
  *
  * @author LevelX2 & L_J
  */
-public class PedanticLearning extends CardImpl {
+public final class PedanticLearning extends CardImpl {
 
     public PedanticLearning(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{U}{U}");

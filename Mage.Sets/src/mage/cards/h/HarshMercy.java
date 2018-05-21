@@ -52,7 +52,7 @@ import mage.players.Player;
  *
  * @author pcasaretto
  */
-public class HarshMercy extends CardImpl {
+public final class HarshMercy extends CardImpl {
 
     public HarshMercy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{W}");

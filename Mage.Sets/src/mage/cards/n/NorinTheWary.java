@@ -45,7 +45,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author LevelX2
  */
-public class NorinTheWary extends CardImpl {
+public final class NorinTheWary extends CardImpl {
 
     public NorinTheWary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}");

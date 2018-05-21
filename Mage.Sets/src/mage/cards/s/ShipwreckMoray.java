@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author JRHerlehy
  */
-public class ShipwreckMoray extends CardImpl {
+public final class ShipwreckMoray extends CardImpl {
 
     public ShipwreckMoray(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");

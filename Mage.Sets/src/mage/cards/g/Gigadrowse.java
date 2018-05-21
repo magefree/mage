@@ -39,7 +39,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class Gigadrowse extends CardImpl {
+public final class Gigadrowse extends CardImpl {
 
     public Gigadrowse(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");

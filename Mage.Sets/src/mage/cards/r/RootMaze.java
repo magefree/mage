@@ -47,7 +47,7 @@ import mage.game.permanent.Permanent;
  *
  * @author emerald000
  */
-public class RootMaze extends CardImpl {
+public final class RootMaze extends CardImpl {
 
     public RootMaze(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}");

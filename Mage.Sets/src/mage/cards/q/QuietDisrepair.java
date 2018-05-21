@@ -49,7 +49,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class QuietDisrepair extends CardImpl {
+public final class QuietDisrepair extends CardImpl {
 
     public QuietDisrepair(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}");

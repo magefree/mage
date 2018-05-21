@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author maxlebedev
  */
-public class SylvanParadise extends CardImpl {
+public final class SylvanParadise extends CardImpl {
 
     public SylvanParadise(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{G}");

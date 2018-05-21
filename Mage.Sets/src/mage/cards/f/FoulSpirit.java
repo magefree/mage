@@ -42,7 +42,7 @@ import mage.filter.StaticFilters;
  *
  * @author fireshoes
  */
-public class FoulSpirit extends CardImpl {
+public final class FoulSpirit extends CardImpl {
 
     public FoulSpirit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

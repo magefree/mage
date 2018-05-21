@@ -51,7 +51,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author LoneFox
  */
-public class Tidewalker extends CardImpl {
+public final class Tidewalker extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Island you control");
 

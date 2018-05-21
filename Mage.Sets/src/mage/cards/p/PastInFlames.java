@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author BetaSteward
  */
-public class PastInFlames extends CardImpl {
+public final class PastInFlames extends CardImpl {
 
     public PastInFlames(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}");

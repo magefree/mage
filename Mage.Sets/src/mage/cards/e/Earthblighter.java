@@ -49,7 +49,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author fireshoes
  */
-public class Earthblighter extends CardImpl {
+public final class Earthblighter extends CardImpl {
     
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Goblin");
     static {

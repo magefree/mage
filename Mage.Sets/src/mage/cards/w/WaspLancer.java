@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class WaspLancer extends CardImpl {
+public final class WaspLancer extends CardImpl {
 
     public WaspLancer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U/B}{U/B}{U/B}");

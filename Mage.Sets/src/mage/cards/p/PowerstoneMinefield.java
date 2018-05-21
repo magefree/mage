@@ -46,7 +46,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author vereena42
  */
-public class PowerstoneMinefield extends CardImpl {
+public final class PowerstoneMinefield extends CardImpl {
 
     public PowerstoneMinefield(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{W}");

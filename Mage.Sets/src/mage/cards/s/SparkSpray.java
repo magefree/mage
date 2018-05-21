@@ -40,7 +40,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LevelX2
  */
-public class SparkSpray extends CardImpl {
+public final class SparkSpray extends CardImpl {
 
     public SparkSpray(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");

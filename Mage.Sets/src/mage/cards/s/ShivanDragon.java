@@ -41,7 +41,7 @@ import mage.constants.*;
  *
  * @author Loki
  */
-public class ShivanDragon extends CardImpl {
+public final class ShivanDragon extends CardImpl {
 
     public ShivanDragon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{R}");

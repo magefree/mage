@@ -42,7 +42,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class ShiftingBorders extends CardImpl {
+public final class ShiftingBorders extends CardImpl {
 
     public ShiftingBorders(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}");

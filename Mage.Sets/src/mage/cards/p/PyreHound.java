@@ -43,7 +43,7 @@ import mage.filter.common.FilterInstantOrSorcerySpell;
  *
  * @author LevelX2
  */
-public class PyreHound extends CardImpl {
+public final class PyreHound extends CardImpl {
 
     public PyreHound(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class OvergrownTomb extends CardImpl {
+public final class OvergrownTomb extends CardImpl {
 
     public OvergrownTomb(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, null);

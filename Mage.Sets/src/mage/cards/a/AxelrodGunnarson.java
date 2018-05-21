@@ -48,7 +48,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  *
  * @author TheElk801
  */
-public class AxelrodGunnarson extends CardImpl {
+public final class AxelrodGunnarson extends CardImpl {
 
     public AxelrodGunnarson(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}{R}{R}");

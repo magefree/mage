@@ -41,7 +41,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author anonymous
  */
-public class WanderInDeath extends CardImpl {
+public final class WanderInDeath extends CardImpl {
 
     public WanderInDeath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}");

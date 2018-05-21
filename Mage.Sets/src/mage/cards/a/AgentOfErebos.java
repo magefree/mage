@@ -42,7 +42,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class AgentOfErebos extends CardImpl {
+public final class AgentOfErebos extends CardImpl {
 
     public AgentOfErebos(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{3}{B}");

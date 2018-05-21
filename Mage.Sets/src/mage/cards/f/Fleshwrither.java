@@ -55,7 +55,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class Fleshwrither extends CardImpl {
+public final class Fleshwrither extends CardImpl {
 
     public Fleshwrither(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");

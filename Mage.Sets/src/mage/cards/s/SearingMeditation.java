@@ -44,7 +44,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Loki
  */
-public class SearingMeditation extends CardImpl {
+public final class SearingMeditation extends CardImpl {
 
     public SearingMeditation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{R}{W}");

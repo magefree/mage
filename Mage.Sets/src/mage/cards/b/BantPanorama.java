@@ -48,7 +48,7 @@ import mage.target.common.TargetCardInLibrary;
 /**
  * @author North
  */
-public class BantPanorama extends CardImpl {
+public final class BantPanorama extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("a basic Forest, Plains, or Island card");
 

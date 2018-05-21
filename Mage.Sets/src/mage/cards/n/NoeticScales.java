@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class NoeticScales extends CardImpl {
+public final class NoeticScales extends CardImpl {
 
     public NoeticScales(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");

@@ -41,7 +41,7 @@ import mage.game.permanent.token.ZombieToken;
  *
  * @author Styxo
  */
-public class DoomedDissenter extends CardImpl {
+public final class DoomedDissenter extends CardImpl {
 
     public DoomedDissenter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");

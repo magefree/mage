@@ -46,7 +46,7 @@ import mage.filter.common.FilterAttackingCreature;
  *
  * @author Loki
  */
-public class VictorysHerald extends CardImpl {
+public final class VictorysHerald extends CardImpl {
 
     public VictorysHerald (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}{W}");

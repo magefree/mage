@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author nantuko
  */
-public class VinesOfVastwood extends CardImpl {
+public final class VinesOfVastwood extends CardImpl {
 
     private static final FilterObject filter = new FilterStackObject("spells or abilities your opponents control");
 

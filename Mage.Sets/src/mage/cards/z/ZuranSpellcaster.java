@@ -43,7 +43,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LoneFox
  */
-public class ZuranSpellcaster extends CardImpl {
+public final class ZuranSpellcaster extends CardImpl {
 
     public ZuranSpellcaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

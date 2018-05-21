@@ -47,7 +47,7 @@ import mage.game.permanent.token.EldraziScionToken;
  *
  * @author LevelX2
  */
-public class VoidAttendant extends CardImpl {
+public final class VoidAttendant extends CardImpl {
 
     public VoidAttendant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

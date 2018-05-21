@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author North
  */
-public class CrowdOfCinders extends CardImpl {
+public final class CrowdOfCinders extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("black permanents you control");
 

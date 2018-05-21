@@ -53,7 +53,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author spjspj
  */
-public class StitchersGraft extends CardImpl {
+public final class StitchersGraft extends CardImpl {
 
     public StitchersGraft(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");

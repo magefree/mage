@@ -41,7 +41,7 @@ import mage.target.TargetPermanent;
  *
  * @author Styxo
  */
-public class Regression extends CardImpl {
+public final class Regression extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
 

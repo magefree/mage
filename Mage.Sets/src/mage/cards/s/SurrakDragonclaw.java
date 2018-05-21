@@ -50,7 +50,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author LevelX2
  */
-public class SurrakDragonclaw extends CardImpl {
+public final class SurrakDragonclaw extends CardImpl {
 
     private static final FilterSpell filterTarget = new FilterSpell("Creature spells you control");
 

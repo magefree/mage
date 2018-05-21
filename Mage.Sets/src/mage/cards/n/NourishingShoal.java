@@ -48,7 +48,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class NourishingShoal extends CardImpl {
+public final class NourishingShoal extends CardImpl {
 
     public NourishingShoal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{G}{G}");

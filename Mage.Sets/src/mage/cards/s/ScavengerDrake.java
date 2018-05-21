@@ -42,7 +42,7 @@ import mage.counters.CounterType;
  *
  * @author North
  */
-public class ScavengerDrake extends CardImpl {
+public final class ScavengerDrake extends CardImpl {
 
     public ScavengerDrake(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

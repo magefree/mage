@@ -56,7 +56,7 @@ import mage.target.TargetPlayer;
  *
  * @author L_J
  */
-public class DrainPower extends CardImpl {
+public final class DrainPower extends CardImpl {
 
     public DrainPower(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{U}{U}");

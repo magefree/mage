@@ -48,7 +48,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  *
  * @author fireshoes
  */
-public class AethersquallAncient extends CardImpl {
+public final class AethersquallAncient extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("other creatures");
 

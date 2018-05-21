@@ -53,7 +53,7 @@ import mage.target.TargetPermanent;
  *
  * @author North
  */
-public class LightwielderPaladin extends CardImpl {
+public final class LightwielderPaladin extends CardImpl {
 
     public LightwielderPaladin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");

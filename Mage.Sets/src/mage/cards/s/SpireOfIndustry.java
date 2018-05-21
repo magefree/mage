@@ -45,7 +45,7 @@ import mage.filter.common.FilterControlledArtifactPermanent;
  *
  * @author Styxo
  */
-public class SpireOfIndustry extends CardImpl {
+public final class SpireOfIndustry extends CardImpl {
 
     public SpireOfIndustry(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

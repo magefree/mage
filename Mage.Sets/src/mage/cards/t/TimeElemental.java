@@ -55,7 +55,7 @@ import mage.target.TargetPermanent;
  *
  * @author L_J
  */
-public class TimeElemental extends CardImpl {
+public final class TimeElemental extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("permanent that isn't enchanted");
 

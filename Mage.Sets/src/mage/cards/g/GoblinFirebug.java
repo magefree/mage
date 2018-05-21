@@ -41,7 +41,7 @@ import mage.filter.StaticFilters;
  *
  * @author fireshoes
  */
-public class GoblinFirebug extends CardImpl {
+public final class GoblinFirebug extends CardImpl {
 
     public GoblinFirebug(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

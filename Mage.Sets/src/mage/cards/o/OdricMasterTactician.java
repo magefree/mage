@@ -46,7 +46,7 @@ import mage.watchers.common.ChooseBlockersRedundancyWatcher;
 /**
  * @author noxx
  */
-public class OdricMasterTactician extends CardImpl {
+public final class OdricMasterTactician extends CardImpl {
 
     public OdricMasterTactician(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");

@@ -55,7 +55,7 @@ import mage.target.TargetPermanent;
  *
  * @author BetaSteward
  */
-public class CurseOfThePiercedHeart extends CardImpl {
+public final class CurseOfThePiercedHeart extends CardImpl {
 
     public CurseOfThePiercedHeart(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");

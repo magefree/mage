@@ -50,7 +50,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class OloroAgelessAscetic extends CardImpl {
+public final class OloroAgelessAscetic extends CardImpl {
 
     public OloroAgelessAscetic(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{U}{B}");

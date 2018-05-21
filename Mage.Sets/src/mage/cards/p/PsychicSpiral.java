@@ -44,7 +44,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class PsychicSpiral extends CardImpl {
+public final class PsychicSpiral extends CardImpl {
 
     public PsychicSpiral(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{U}");

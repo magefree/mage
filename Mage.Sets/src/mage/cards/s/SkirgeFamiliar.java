@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class SkirgeFamiliar extends CardImpl {
+public final class SkirgeFamiliar extends CardImpl {
 
     public SkirgeFamiliar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");

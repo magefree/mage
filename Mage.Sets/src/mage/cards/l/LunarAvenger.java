@@ -57,7 +57,7 @@ import mage.players.Player;
  *
  * @author LoneFox
  */
-public class LunarAvenger extends CardImpl {
+public final class LunarAvenger extends CardImpl {
 
     public LunarAvenger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{7}");

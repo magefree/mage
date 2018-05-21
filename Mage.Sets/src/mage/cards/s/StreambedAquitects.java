@@ -53,7 +53,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class StreambedAquitects extends CardImpl {
+public final class StreambedAquitects extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Merfolk creature");
     static {

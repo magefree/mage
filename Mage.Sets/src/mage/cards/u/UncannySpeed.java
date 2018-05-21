@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class UncannySpeed extends CardImpl {
+public final class UncannySpeed extends CardImpl {
 
     public UncannySpeed(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");

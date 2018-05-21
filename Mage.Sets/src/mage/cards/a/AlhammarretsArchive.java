@@ -43,7 +43,7 @@ import mage.watchers.common.CardsDrawnDuringDrawStepWatcher;
  *
  * @author fireshoes
  */
-public class AlhammarretsArchive extends CardImpl {
+public final class AlhammarretsArchive extends CardImpl {
 
     public AlhammarretsArchive(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");

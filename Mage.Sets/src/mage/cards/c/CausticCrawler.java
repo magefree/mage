@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class CausticCrawler extends CardImpl {
+public final class CausticCrawler extends CardImpl {
 
     public CausticCrawler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");

@@ -45,7 +45,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author emerald000
  */
-public class ReadTheRunes extends CardImpl {
+public final class ReadTheRunes extends CardImpl {
 
     public ReadTheRunes(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{U}");

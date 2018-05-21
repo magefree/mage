@@ -40,7 +40,7 @@ import mage.filter.common.FilterEnchantmentPermanent;
  *
  * @author Backfir3
  */
-public class Hush extends CardImpl {
+public final class Hush extends CardImpl {
 
     public Hush(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}");

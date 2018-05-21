@@ -45,7 +45,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author Plopman
  */
-public class IntruderAlarm extends CardImpl {
+public final class IntruderAlarm extends CardImpl {
 
     public IntruderAlarm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");

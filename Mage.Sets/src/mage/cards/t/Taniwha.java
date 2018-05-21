@@ -54,7 +54,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class Taniwha extends CardImpl {
+public final class Taniwha extends CardImpl {
 
     public Taniwha(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");

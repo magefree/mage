@@ -43,7 +43,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class DuskriderPeregrine extends CardImpl {
+public final class DuskriderPeregrine extends CardImpl {
 
     public DuskriderPeregrine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}");

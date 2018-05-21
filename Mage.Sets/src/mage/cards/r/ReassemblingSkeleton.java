@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ReassemblingSkeleton extends CardImpl {
+public final class ReassemblingSkeleton extends CardImpl {
 
     public ReassemblingSkeleton(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

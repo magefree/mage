@@ -50,7 +50,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class SoulOfTheros extends CardImpl {
+public final class SoulOfTheros extends CardImpl {
 
     public SoulOfTheros(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{W}");

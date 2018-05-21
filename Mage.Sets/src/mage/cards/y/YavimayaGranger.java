@@ -44,7 +44,7 @@ import java.util.UUID;
  *
  * @author Backfir3
  */
-public class YavimayaGranger extends CardImpl {
+public final class YavimayaGranger extends CardImpl {
 
 
     public YavimayaGranger(UUID ownerId, CardSetInfo setInfo) {

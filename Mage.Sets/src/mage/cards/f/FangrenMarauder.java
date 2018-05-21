@@ -42,7 +42,7 @@ import mage.filter.common.FilterArtifactPermanent;
  *
  * @author North
  */
-public class FangrenMarauder extends CardImpl {
+public final class FangrenMarauder extends CardImpl {
 
     public FangrenMarauder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}");

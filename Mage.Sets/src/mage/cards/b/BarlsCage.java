@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author Backfir3
  */
-public class BarlsCage extends CardImpl {
+public final class BarlsCage extends CardImpl {
 
     public BarlsCage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");

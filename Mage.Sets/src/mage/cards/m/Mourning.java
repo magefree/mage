@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author michael.napoleon@gmail.com
  */
-public class Mourning extends CardImpl {
+public final class Mourning extends CardImpl {
 
     public Mourning(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}");

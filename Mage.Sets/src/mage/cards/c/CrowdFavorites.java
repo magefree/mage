@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LoneFox
  */
-public class CrowdFavorites extends CardImpl {
+public final class CrowdFavorites extends CardImpl {
 
     public CrowdFavorites(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{W}");

@@ -47,7 +47,7 @@ import java.util.UUID;
  *
  * @author TheElk801
  */
-public class AetherStorm extends CardImpl {
+public final class AetherStorm extends CardImpl {
 
     public AetherStorm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");

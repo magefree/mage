@@ -41,7 +41,7 @@ import mage.constants.Zone;
  *
  * @author Jgod
  */
-public class HeartOfRamos extends CardImpl {
+public final class HeartOfRamos extends CardImpl {
 
     public HeartOfRamos(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

@@ -54,7 +54,7 @@ import mage.target.targetpointer.FixedTargets;
  *
  * @author L_J
  */
-public class SporeCloud extends CardImpl {
+public final class SporeCloud extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("blocking creatures");
     static {

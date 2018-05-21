@@ -55,7 +55,7 @@ import mage.game.permanent.token.Token;
  *
  * @author LevelX2
  */
-public class WardenOfTheFirstTree extends CardImpl {
+public final class WardenOfTheFirstTree extends CardImpl {
 
     private static final FilterCreaturePermanent FILTER = new FilterCreaturePermanent();
     private static final FilterCreaturePermanent FILTER2 = new FilterCreaturePermanent();

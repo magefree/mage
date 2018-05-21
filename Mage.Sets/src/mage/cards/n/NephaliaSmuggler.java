@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 /**
  * @author noxx
  */
-public class NephaliaSmuggler extends CardImpl {
+public final class NephaliaSmuggler extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another target creature you control");
     static {

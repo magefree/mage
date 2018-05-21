@@ -41,7 +41,7 @@ import mage.filter.FilterCard;
  *
  * @author emerald000
  */
-public class DigThroughTime extends CardImpl {
+public final class DigThroughTime extends CardImpl {
 
     public DigThroughTime(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{6}{U}{U}");

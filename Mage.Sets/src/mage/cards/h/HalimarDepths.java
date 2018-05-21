@@ -41,7 +41,7 @@ import mage.constants.CardType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class HalimarDepths extends CardImpl {
+public final class HalimarDepths extends CardImpl {
 
     public HalimarDepths(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);

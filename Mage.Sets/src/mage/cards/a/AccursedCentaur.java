@@ -41,7 +41,7 @@ import mage.filter.StaticFilters;
  *
  * @author Sir-Speshkitty
  */
-public class AccursedCentaur extends CardImpl {
+public final class AccursedCentaur extends CardImpl {
 
     public AccursedCentaur(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}");

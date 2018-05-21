@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author fireshoes
  */
-public class WorkshopAssistant extends CardImpl {
+public final class WorkshopAssistant extends CardImpl {
 
     private static final FilterArtifactCard filter = new FilterArtifactCard("another target artifact card from your graveyard");
 

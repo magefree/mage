@@ -72,7 +72,7 @@ import mage.target.common.TargetControlledPermanent;
  * 
  * @author noxx
  */
-public class DescentIntoMadness extends CardImpl {
+public final class DescentIntoMadness extends CardImpl {
 
     public DescentIntoMadness(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{B}{B}");

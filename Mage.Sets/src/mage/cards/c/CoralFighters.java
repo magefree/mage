@@ -44,7 +44,7 @@ import mage.players.Player;
  *
  * @author LoneFox
  */
-public class CoralFighters extends CardImpl {
+public final class CoralFighters extends CardImpl {
 
     public CoralFighters(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

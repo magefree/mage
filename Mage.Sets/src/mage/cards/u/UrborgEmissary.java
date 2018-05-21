@@ -46,7 +46,7 @@ import mage.target.TargetPermanent;
  * @author LoneFox
 
  */
-public class UrborgEmissary extends CardImpl {
+public final class UrborgEmissary extends CardImpl {
 
     public UrborgEmissary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author Pete Rossi
  */
-public class SpectersShroud extends CardImpl {
+public final class SpectersShroud extends CardImpl {
 
     public SpectersShroud(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");

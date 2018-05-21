@@ -45,7 +45,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  *
  * @author fireshoes
  */
-public class PulseOfTheForge extends CardImpl {
+public final class PulseOfTheForge extends CardImpl {
 
     public PulseOfTheForge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R}{R}");

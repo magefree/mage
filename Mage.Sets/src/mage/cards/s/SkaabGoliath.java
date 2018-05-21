@@ -42,7 +42,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author Alvin
  */
-public class SkaabGoliath extends CardImpl {
+public final class SkaabGoliath extends CardImpl {
 
     public SkaabGoliath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{U}");

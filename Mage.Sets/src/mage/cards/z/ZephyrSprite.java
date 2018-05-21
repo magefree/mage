@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class ZephyrSprite extends CardImpl {
+public final class ZephyrSprite extends CardImpl {
 
     public ZephyrSprite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");

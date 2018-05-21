@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class EleshNornGrandCenobite extends CardImpl {
+public final class EleshNornGrandCenobite extends CardImpl {
     
     public EleshNornGrandCenobite (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}{W}");

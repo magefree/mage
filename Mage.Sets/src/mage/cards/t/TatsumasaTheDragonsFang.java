@@ -55,7 +55,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class TatsumasaTheDragonsFang extends CardImpl {
+public final class TatsumasaTheDragonsFang extends CardImpl {
 
     public TatsumasaTheDragonsFang(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{6}");

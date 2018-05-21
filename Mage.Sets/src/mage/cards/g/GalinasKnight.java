@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author michael.napoleon@gmail.com
  */
-public class GalinasKnight extends CardImpl {
+public final class GalinasKnight extends CardImpl {
 
     public GalinasKnight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{U}");

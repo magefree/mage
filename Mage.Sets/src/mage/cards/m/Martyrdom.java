@@ -55,7 +55,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author L_J
  */
-public class Martyrdom extends CardImpl {
+public final class Martyrdom extends CardImpl {
 
     public Martyrdom(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}{W}");

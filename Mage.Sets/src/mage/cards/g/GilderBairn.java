@@ -49,7 +49,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class GilderBairn extends CardImpl {
+public final class GilderBairn extends CardImpl {
 
     public GilderBairn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G/U}{G/U}");

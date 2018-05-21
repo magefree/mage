@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author Loki
  */
-public class FiligreeAngel extends CardImpl {
+public final class FiligreeAngel extends CardImpl {
 
     public FiligreeAngel (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{5}{W}{W}{U}");

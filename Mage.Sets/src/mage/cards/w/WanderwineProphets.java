@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Plopman
  */
-public class WanderwineProphets extends CardImpl {
+public final class WanderwineProphets extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Merfolk");
 

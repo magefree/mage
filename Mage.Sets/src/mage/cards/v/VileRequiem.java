@@ -54,7 +54,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class VileRequiem extends CardImpl {
+public final class VileRequiem extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("up to X target nonblack creatures, where X is the number of verse counters on {this}");
 

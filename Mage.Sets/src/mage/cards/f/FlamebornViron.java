@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class FlamebornViron extends CardImpl {
+public final class FlamebornViron extends CardImpl {
 
     public FlamebornViron(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{R}");

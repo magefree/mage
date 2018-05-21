@@ -39,7 +39,7 @@ import mage.constants.SubType;
 /**
  * @author Loki
  */
-public class RustedSentinel extends CardImpl {
+public final class RustedSentinel extends CardImpl {
 
     public RustedSentinel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}");

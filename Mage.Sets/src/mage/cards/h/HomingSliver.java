@@ -49,7 +49,7 @@ import mage.players.Player;
  * @author Luna Skyrise
  */
 
-public class HomingSliver extends CardImpl {
+public final class HomingSliver extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Sliver card");
 

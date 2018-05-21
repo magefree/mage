@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class CloudfinRaptor extends CardImpl {
+public final class CloudfinRaptor extends CardImpl {
 
     public CloudfinRaptor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");

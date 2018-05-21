@@ -49,7 +49,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author LevelX2
  */
-public class AbzanKinGuard extends CardImpl {
+public final class AbzanKinGuard extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("as long as you control a white or black permanent");
 

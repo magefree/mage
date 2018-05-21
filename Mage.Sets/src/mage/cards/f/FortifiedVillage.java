@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author fireshoes
  */
-public class FortifiedVillage extends CardImpl {
+public final class FortifiedVillage extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("a Forest or Plains card from your hand");
 

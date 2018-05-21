@@ -41,7 +41,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class ShieldOfTheAges extends CardImpl {
+public final class ShieldOfTheAges extends CardImpl {
 
     public ShieldOfTheAges(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");

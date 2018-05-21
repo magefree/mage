@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author L_J
  */
-public class BreathOfDreams extends CardImpl {
+public final class BreathOfDreams extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Green creatures");
 

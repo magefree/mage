@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class ResearchAssistant extends CardImpl {
+public final class ResearchAssistant extends CardImpl {
 
     public ResearchAssistant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

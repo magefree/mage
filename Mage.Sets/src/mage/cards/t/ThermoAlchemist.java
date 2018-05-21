@@ -48,7 +48,7 @@ import mage.filter.common.FilterInstantOrSorcerySpell;
  *
  * @author LevelX2
  */
-public class ThermoAlchemist extends CardImpl {
+public final class ThermoAlchemist extends CardImpl {
 
     public ThermoAlchemist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

@@ -46,7 +46,7 @@ import java.util.UUID;
 /**
  * @author Loki
  */
-public class ViridianZealot extends CardImpl {
+public final class ViridianZealot extends CardImpl {
 
     public ViridianZealot(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{G}");

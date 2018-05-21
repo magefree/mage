@@ -50,7 +50,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class AetherMeltdown extends CardImpl {
+public final class AetherMeltdown extends CardImpl {
 
     private final static FilterPermanent filter = new FilterPermanent("creature or vehicle");
 

@@ -47,7 +47,7 @@ import java.util.UUID;
  *
  * @author jeffwadsworth
  */
-public class LethargyTrap extends CardImpl {
+public final class LethargyTrap extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("attacking creatures");
 

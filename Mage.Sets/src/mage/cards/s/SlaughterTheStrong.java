@@ -52,7 +52,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class SlaughterTheStrong extends CardImpl {
+public final class SlaughterTheStrong extends CardImpl {
 
     public SlaughterTheStrong(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{W}{W}");

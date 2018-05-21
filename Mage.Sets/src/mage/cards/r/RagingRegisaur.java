@@ -42,7 +42,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author L_J
  */
-public class RagingRegisaur extends CardImpl {
+public final class RagingRegisaur extends CardImpl {
 
     public RagingRegisaur(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{G}");

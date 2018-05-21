@@ -47,7 +47,7 @@ import mage.target.TargetSpell;
  *
  * @author TheElk801
  */
-public class LookoutsDispersal extends CardImpl {
+public final class LookoutsDispersal extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Pirate");
 

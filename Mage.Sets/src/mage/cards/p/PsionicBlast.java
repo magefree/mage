@@ -43,7 +43,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Loki
  */
-public class PsionicBlast extends CardImpl {
+public final class PsionicBlast extends CardImpl {
 
     public PsionicBlast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");

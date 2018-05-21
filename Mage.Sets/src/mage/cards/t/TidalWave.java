@@ -47,7 +47,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author nigelzor
  */
-public class TidalWave extends CardImpl {
+public final class TidalWave extends CardImpl {
 
     public TidalWave(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}");

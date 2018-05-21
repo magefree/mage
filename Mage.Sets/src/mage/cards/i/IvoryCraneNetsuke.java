@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class IvoryCraneNetsuke extends CardImpl {
+public final class IvoryCraneNetsuke extends CardImpl {
 
     public IvoryCraneNetsuke(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

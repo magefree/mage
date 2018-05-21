@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author TheElk801
  */
-public class CoilingWoodworm extends CardImpl {
+public final class CoilingWoodworm extends CardImpl {
 
     final static FilterPermanent filterLands = new FilterPermanent("Forests you control");
 

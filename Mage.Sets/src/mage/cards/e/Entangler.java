@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Rene bugisemail at gmail dot com
  */
-public class Entangler extends CardImpl {
+public final class Entangler extends CardImpl {
 
     public Entangler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");

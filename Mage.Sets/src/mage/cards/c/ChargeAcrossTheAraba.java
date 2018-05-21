@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class ChargeAcrossTheAraba extends CardImpl {
+public final class ChargeAcrossTheAraba extends CardImpl {
 
     public ChargeAcrossTheAraba(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{4}{W}");

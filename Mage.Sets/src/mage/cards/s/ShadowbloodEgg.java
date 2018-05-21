@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class ShadowbloodEgg extends CardImpl {
+public final class ShadowbloodEgg extends CardImpl {
 
     public ShadowbloodEgg(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");

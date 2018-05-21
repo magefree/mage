@@ -54,7 +54,7 @@ import mage.players.Player;
  *
  * @author spjspj
  */
-public class InfernalDarkness extends CardImpl {
+public final class InfernalDarkness extends CardImpl {
 
     public InfernalDarkness(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");

@@ -43,7 +43,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class JoyousRespite extends CardImpl {
+public final class JoyousRespite extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
 

@@ -41,7 +41,7 @@ import mage.constants.TargetController;
  *
  * @author LoneFox
  */
-public class HeightenedAwareness extends CardImpl {
+public final class HeightenedAwareness extends CardImpl {
 
     public HeightenedAwareness(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{U}{U}");

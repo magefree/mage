@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class UndergroundRiver extends CardImpl {
+public final class UndergroundRiver extends CardImpl {
 
     public UndergroundRiver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

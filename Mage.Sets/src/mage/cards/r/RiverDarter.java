@@ -42,7 +42,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author LevelX2
  */
-public class RiverDarter extends CardImpl {
+public final class RiverDarter extends CardImpl {
 
     public RiverDarter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");

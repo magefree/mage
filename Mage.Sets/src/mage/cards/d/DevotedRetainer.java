@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class DevotedRetainer extends CardImpl {
+public final class DevotedRetainer extends CardImpl {
 
     public DevotedRetainer (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");

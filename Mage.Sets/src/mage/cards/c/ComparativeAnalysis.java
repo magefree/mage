@@ -39,7 +39,7 @@ import mage.target.TargetPlayer;
  *
  * @author fireshoes
  */
-public class ComparativeAnalysis extends CardImpl {
+public final class ComparativeAnalysis extends CardImpl {
 
     public ComparativeAnalysis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}");

@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class WardenOfTheBeyond extends CardImpl {
+public final class WardenOfTheBeyond extends CardImpl {
 
     public WardenOfTheBeyond(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

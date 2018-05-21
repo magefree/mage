@@ -42,7 +42,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author cbt33
  */
-public class Confessor extends CardImpl {
+public final class Confessor extends CardImpl {
 
     public Confessor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");

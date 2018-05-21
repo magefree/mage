@@ -45,7 +45,7 @@ import mage.target.TargetSpell;
  *
  * @author Plopman
  */
-public class Pyroblast extends CardImpl {
+public final class Pyroblast extends CardImpl {
     
     public Pyroblast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");

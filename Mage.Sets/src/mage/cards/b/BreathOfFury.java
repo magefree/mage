@@ -53,7 +53,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 /**
  * @author duncant
  */
-public class BreathOfFury extends CardImpl {
+public final class BreathOfFury extends CardImpl {
 
     public BreathOfFury(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{R}");

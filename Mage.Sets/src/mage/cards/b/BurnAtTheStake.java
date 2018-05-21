@@ -48,7 +48,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author North
  */
-public class BurnAtTheStake extends CardImpl {
+public final class BurnAtTheStake extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creatures you control");
 

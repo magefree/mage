@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author L_J
  */
-public class GreaterRealmOfPreservation extends CardImpl {
+public final class GreaterRealmOfPreservation extends CardImpl {
 
     private static final FilterObject filter = new FilterObject("black or red source");
     static{

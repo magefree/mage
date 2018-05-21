@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class SetessanBattlePriest extends CardImpl {
+public final class SetessanBattlePriest extends CardImpl {
 
     public SetessanBattlePriest(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

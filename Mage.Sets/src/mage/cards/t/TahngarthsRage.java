@@ -50,7 +50,7 @@ import mage.filter.common.FilterAttackingCreature;
  *
  * @author TheElk801
  */
-public class TahngarthsRage extends CardImpl {
+public final class TahngarthsRage extends CardImpl {
 
     public TahngarthsRage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{R}");

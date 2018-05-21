@@ -54,7 +54,7 @@ import mage.util.TargetAddress;
 /**
  * @author duncant
  */
-public class AuraGraft extends CardImpl {
+public final class AuraGraft extends CardImpl {
 
     public AuraGraft(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");

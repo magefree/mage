@@ -48,7 +48,7 @@ import mage.target.TargetCard;
  *
  * @author LevelX2
  */
-public class RevivingVapors extends CardImpl {
+public final class RevivingVapors extends CardImpl {
 
     public RevivingVapors(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}{U}");

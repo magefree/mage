@@ -50,7 +50,7 @@ import mage.watchers.Watcher;
  *
  * @author jeffwadsworth
  */
-public class ManaMaze extends CardImpl {
+public final class ManaMaze extends CardImpl {
 
     public ManaMaze(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");

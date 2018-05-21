@@ -44,7 +44,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class PetalsOfInsight extends CardImpl {
+public final class PetalsOfInsight extends CardImpl {
 
     public PetalsOfInsight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{U}");

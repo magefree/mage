@@ -52,7 +52,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class ServantOfTheScale extends CardImpl {
+public final class ServantOfTheScale extends CardImpl {
 
     public ServantOfTheScale(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}");

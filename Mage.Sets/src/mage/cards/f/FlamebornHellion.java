@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class FlamebornHellion extends CardImpl {
+public final class FlamebornHellion extends CardImpl {
 
     public FlamebornHellion (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}");

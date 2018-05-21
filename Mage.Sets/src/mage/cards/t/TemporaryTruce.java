@@ -41,7 +41,7 @@ import mage.players.Player;
  *
  * @author L_J
  */
-public class TemporaryTruce extends CardImpl {
+public final class TemporaryTruce extends CardImpl {
 
     public TemporaryTruce(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{W}");

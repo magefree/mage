@@ -39,7 +39,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Loki
  */
-public class Tarfire extends CardImpl {
+public final class Tarfire extends CardImpl {
 
     public Tarfire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.INSTANT},"{R}");

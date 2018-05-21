@@ -43,7 +43,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LoneFox
  */
-public class SunfireBalm extends CardImpl {
+public final class SunfireBalm extends CardImpl {
 
     public SunfireBalm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");

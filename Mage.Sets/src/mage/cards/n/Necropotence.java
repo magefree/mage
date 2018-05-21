@@ -57,7 +57,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class Necropotence extends CardImpl {
+public final class Necropotence extends CardImpl {
 
     public Necropotence(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{B}{B}{B}");

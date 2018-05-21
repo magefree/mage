@@ -54,7 +54,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Plopman
  */
-public class WildGrowth extends CardImpl {
+public final class WildGrowth extends CardImpl {
 
     public WildGrowth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}");

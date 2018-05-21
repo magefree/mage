@@ -49,7 +49,7 @@ import mage.target.common.TargetAnyTarget;
  * @author cbt33
  */
 
-public class HallowedHealer extends CardImpl {
+public final class HallowedHealer extends CardImpl {
 
     public HallowedHealer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

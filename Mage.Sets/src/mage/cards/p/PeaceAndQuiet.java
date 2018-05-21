@@ -40,7 +40,7 @@ import java.util.UUID;
  *
  * @author Plopman
  */
-public class PeaceAndQuiet extends CardImpl {
+public final class PeaceAndQuiet extends CardImpl {
 
     public PeaceAndQuiet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");

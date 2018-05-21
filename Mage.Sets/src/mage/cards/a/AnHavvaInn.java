@@ -44,7 +44,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class AnHavvaInn extends CardImpl {
+public final class AnHavvaInn extends CardImpl {
 
     public AnHavvaInn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{G}{G}");

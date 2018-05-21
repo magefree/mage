@@ -39,7 +39,7 @@ import mage.target.TargetPermanent;
 /**
  * @author Loki
  */
-public class ClutchOfTheUndercity extends CardImpl {
+public final class ClutchOfTheUndercity extends CardImpl {
 
     public ClutchOfTheUndercity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}{U}{B}");

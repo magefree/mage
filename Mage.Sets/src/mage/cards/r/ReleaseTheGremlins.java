@@ -44,7 +44,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author Styxo
  */
-public class ReleaseTheGremlins extends CardImpl {
+public final class ReleaseTheGremlins extends CardImpl {
 
     public ReleaseTheGremlins(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{X}{R}");

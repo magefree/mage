@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author ilcartographer
  */
-public class LavabornMuse extends CardImpl {
+public final class LavabornMuse extends CardImpl {
 
     public LavabornMuse(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

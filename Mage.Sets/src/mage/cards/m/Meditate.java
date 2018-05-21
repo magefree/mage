@@ -42,7 +42,7 @@ import mage.game.turn.TurnMod;
  *
  * @author Plopman
  */
-public class Meditate extends CardImpl {
+public final class Meditate extends CardImpl {
 
     public Meditate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");

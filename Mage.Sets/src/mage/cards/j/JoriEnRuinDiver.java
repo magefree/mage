@@ -46,7 +46,7 @@ import mage.watchers.common.CastSpellLastTurnWatcher;
  *
  * @author fireshoes
  */
-public class JoriEnRuinDiver extends CardImpl {
+public final class JoriEnRuinDiver extends CardImpl {
 
     public JoriEnRuinDiver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{R}");

@@ -54,7 +54,7 @@ import mage.util.CardUtil;
  *
  * @author emerald000
  */
-public class MangarasTome extends CardImpl {
+public final class MangarasTome extends CardImpl {
 
     public MangarasTome(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");

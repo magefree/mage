@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author emerald000
  */
-public class CaveIn extends CardImpl {
+public final class CaveIn extends CardImpl {
 
     public CaveIn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}{R}");

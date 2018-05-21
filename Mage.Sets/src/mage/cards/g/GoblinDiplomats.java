@@ -46,7 +46,7 @@ import mage.game.permanent.Permanent;
  *
  * @author jeffwadsworth
  */
-public class GoblinDiplomats extends CardImpl {
+public final class GoblinDiplomats extends CardImpl {
 
     public GoblinDiplomats(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

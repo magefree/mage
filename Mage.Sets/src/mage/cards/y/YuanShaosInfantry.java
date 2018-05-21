@@ -42,7 +42,7 @@ import mage.constants.Duration;
  *
  * @author LoneFox
  */
-public class YuanShaosInfantry extends CardImpl {
+public final class YuanShaosInfantry extends CardImpl {
 
     public YuanShaosInfantry(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

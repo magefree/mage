@@ -43,7 +43,7 @@ import mage.target.TargetPermanent;
  *
  * @author Loki
  */
-public class TurnToDust extends CardImpl {
+public final class TurnToDust extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Equipment");
 

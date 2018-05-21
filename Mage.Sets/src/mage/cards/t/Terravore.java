@@ -45,7 +45,7 @@ import mage.filter.common.FilterLandCard;
  *
  * @author LevelX2
  */
-public class Terravore extends CardImpl {
+public final class Terravore extends CardImpl {
 
     public Terravore(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");

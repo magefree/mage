@@ -52,7 +52,7 @@ import mage.players.Player;
  *
  * @author North
  */
-public class WarpWorld extends CardImpl {
+public final class WarpWorld extends CardImpl {
 
     public WarpWorld(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{R}{R}{R}");

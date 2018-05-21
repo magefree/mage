@@ -46,7 +46,7 @@ import mage.constants.*;
  *
  * @author Loki
  */
-public class KrallenhordeKiller extends CardImpl {
+public final class KrallenhordeKiller extends CardImpl {
 
     public KrallenhordeKiller(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");

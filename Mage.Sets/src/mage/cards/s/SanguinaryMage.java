@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class SanguinaryMage extends CardImpl {
+public final class SanguinaryMage extends CardImpl {
 
     public SanguinaryMage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

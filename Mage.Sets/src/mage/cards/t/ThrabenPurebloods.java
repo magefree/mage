@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class ThrabenPurebloods extends CardImpl {
+public final class ThrabenPurebloods extends CardImpl {
 
     public ThrabenPurebloods(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");

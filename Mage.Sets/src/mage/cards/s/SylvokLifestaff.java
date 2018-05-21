@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author North, Loki
  */
-public class SylvokLifestaff extends CardImpl {
+public final class SylvokLifestaff extends CardImpl {
 
     public SylvokLifestaff(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");

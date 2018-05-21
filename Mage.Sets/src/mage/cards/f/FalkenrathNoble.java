@@ -49,7 +49,7 @@ import mage.target.TargetPlayer;
  *
  * @author North
  */
-public class FalkenrathNoble extends CardImpl {
+public final class FalkenrathNoble extends CardImpl {
 
     public FalkenrathNoble(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

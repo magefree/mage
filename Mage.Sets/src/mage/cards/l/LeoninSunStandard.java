@@ -42,7 +42,7 @@ import mage.filter.StaticFilters;
  *
  * @author Loki
  */
-public class LeoninSunStandard extends CardImpl {
+public final class LeoninSunStandard extends CardImpl {
 
     public LeoninSunStandard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");

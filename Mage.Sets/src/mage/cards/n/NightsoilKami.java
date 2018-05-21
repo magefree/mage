@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class NightsoilKami extends CardImpl {
+public final class NightsoilKami extends CardImpl {
 
     public NightsoilKami(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");

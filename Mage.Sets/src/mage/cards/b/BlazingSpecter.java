@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class BlazingSpecter extends CardImpl {
+public final class BlazingSpecter extends CardImpl {
 
     public BlazingSpecter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{R}");

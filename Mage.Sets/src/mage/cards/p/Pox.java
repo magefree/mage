@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author emerald000
  */
-public class Pox extends CardImpl {
+public final class Pox extends CardImpl {
 
     public Pox(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}{B}{B}");

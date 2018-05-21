@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class ScreamreachBrawler extends CardImpl {
+public final class ScreamreachBrawler extends CardImpl {
 
     public ScreamreachBrawler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

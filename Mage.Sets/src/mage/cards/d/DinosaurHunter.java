@@ -42,7 +42,7 @@ import mage.target.targetpointer.FixedTarget;
 /**
  * @author JayDi85
  */
-public class DinosaurHunter extends CardImpl {
+public final class DinosaurHunter extends CardImpl {
 
     public DinosaurHunter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");

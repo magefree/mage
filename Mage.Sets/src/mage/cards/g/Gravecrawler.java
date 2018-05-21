@@ -45,7 +45,7 @@ import mage.game.Game;
  *
  * @author BetaSteward
  */
-public class Gravecrawler extends CardImpl {
+public final class Gravecrawler extends CardImpl {
 
     public Gravecrawler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");

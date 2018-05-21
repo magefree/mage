@@ -44,7 +44,7 @@ import mage.target.TargetPlayer;
  *
  * @author Backfir3
  */
-public class AbyssalHorror extends CardImpl {
+public final class AbyssalHorror extends CardImpl {
 
     public AbyssalHorror (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}");

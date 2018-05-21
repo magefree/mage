@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author LoneFox
  *
  */
-public class Humble extends CardImpl {
+public final class Humble extends CardImpl {
 
     public Humble(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}");

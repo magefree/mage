@@ -51,7 +51,7 @@ import mage.players.Player;
  *
  * @author emerald000
  */
-public class DamiaSageOfStone extends CardImpl {
+public final class DamiaSageOfStone extends CardImpl {
 
     public DamiaSageOfStone(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{G}{U}");

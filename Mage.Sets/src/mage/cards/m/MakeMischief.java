@@ -40,7 +40,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author fireshoes
  */
-public class MakeMischief extends CardImpl {
+public final class MakeMischief extends CardImpl {
 
     public MakeMischief(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");

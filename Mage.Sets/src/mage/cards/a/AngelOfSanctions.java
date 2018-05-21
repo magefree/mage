@@ -50,7 +50,7 @@ import mage.target.TargetPermanent;
  *
  * @author fireshoes
  */
-public class AngelOfSanctions extends CardImpl {
+public final class AngelOfSanctions extends CardImpl {
 
     private final static FilterNonlandPermanent filter = new FilterNonlandPermanent();
 

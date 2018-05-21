@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.PowerPredicate;
  *
  * @author fireshoes
  */
-public class GreaterSandwurm extends CardImpl {
+public final class GreaterSandwurm extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with power 2 or less");
 

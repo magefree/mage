@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author fireshoes
  */
-public class ChoArrimLegate extends CardImpl {
+public final class ChoArrimLegate extends CardImpl {
     
     private static final FilterPermanent filterPlains = new FilterPermanent();
     private static final FilterPermanent filterSwamp = new FilterPermanent();

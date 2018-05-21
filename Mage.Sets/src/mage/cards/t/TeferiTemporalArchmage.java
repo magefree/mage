@@ -50,7 +50,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class TeferiTemporalArchmage extends CardImpl {
+public final class TeferiTemporalArchmage extends CardImpl {
 
     public TeferiTemporalArchmage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{U}{U}");

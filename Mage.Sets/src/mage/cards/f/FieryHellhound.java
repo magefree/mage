@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FieryHellhound extends CardImpl {
+public final class FieryHellhound extends CardImpl {
 
     public FieryHellhound(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");

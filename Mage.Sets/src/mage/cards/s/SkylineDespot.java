@@ -48,7 +48,7 @@ import mage.game.permanent.token.DragonToken2;
  *
  * @author LevelX2
  */
-public class SkylineDespot extends CardImpl {
+public final class SkylineDespot extends CardImpl {
 
     public SkylineDespot(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{R}{R}");

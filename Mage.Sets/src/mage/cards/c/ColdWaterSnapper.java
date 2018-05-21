@@ -39,7 +39,7 @@ import mage.constants.CardType;
  *
  * @author TheElk801
  */
-public class ColdWaterSnapper extends CardImpl {
+public final class ColdWaterSnapper extends CardImpl {
 
     public ColdWaterSnapper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{U}");

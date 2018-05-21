@@ -48,7 +48,7 @@ import mage.util.RandomUtil;
  *
  * @author nantuko
  */
-public class Scrambleverse extends CardImpl {
+public final class Scrambleverse extends CardImpl {
 
     public Scrambleverse(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{6}{R}{R}");

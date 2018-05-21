@@ -42,7 +42,7 @@ import mage.counters.CounterType;
  *
  * @author North
  */
-public class GraypeltHunter extends CardImpl {
+public final class GraypeltHunter extends CardImpl {
 
     public GraypeltHunter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

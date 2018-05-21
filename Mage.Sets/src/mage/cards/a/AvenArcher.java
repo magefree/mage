@@ -46,7 +46,7 @@ import mage.target.common.TargetAttackingOrBlockingCreature;
  *
  * @author cbt33
  */
-public class AvenArcher extends CardImpl {
+public final class AvenArcher extends CardImpl {
 
     public AvenArcher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");

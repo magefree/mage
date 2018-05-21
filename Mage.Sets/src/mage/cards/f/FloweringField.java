@@ -48,7 +48,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LoneFox
  */
-public class FloweringField extends CardImpl {
+public final class FloweringField extends CardImpl {
 
     public FloweringField(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");

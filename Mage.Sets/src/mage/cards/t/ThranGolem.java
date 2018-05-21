@@ -49,7 +49,7 @@ import mage.constants.Zone;
  *
  * @author North
  */
-public class ThranGolem extends CardImpl {
+public final class ThranGolem extends CardImpl {
 
     public ThranGolem(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{5}");

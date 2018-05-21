@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author anonymous
  */
-public class FreewindFalcon extends CardImpl {
+public final class FreewindFalcon extends CardImpl {
 
     public FreewindFalcon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

@@ -39,7 +39,7 @@ import mage.constants.Duration;
  * @author LoneFox
 
  */
-public class ShieldWall extends CardImpl {
+public final class ShieldWall extends CardImpl {
 
     public ShieldWall(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");

@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class ColdEyedSelkie extends CardImpl {
+public final class ColdEyedSelkie extends CardImpl {
 
     public ColdEyedSelkie(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G/U}{G/U}");

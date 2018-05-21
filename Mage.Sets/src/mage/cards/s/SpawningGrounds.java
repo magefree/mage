@@ -52,7 +52,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LevelX2
  */
-public class SpawningGrounds extends CardImpl {
+public final class SpawningGrounds extends CardImpl {
 
     public SpawningGrounds(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{6}{G}{G}");

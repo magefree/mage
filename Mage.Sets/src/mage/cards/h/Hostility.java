@@ -52,7 +52,7 @@ import mage.game.stack.Spell;
  *
  * @author LevelX2
  */
-public class Hostility extends CardImpl {
+public final class Hostility extends CardImpl {
 
     public Hostility(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}{R}");

@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class BlightedCataract extends CardImpl {
+public final class BlightedCataract extends CardImpl {
 
     public BlightedCataract(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class RocOfKherRidges extends CardImpl {
+public final class RocOfKherRidges extends CardImpl {
 
     public RocOfKherRidges(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

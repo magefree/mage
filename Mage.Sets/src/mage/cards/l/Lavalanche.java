@@ -49,7 +49,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  *
  * @author jeffwadsworth
  */
-public class Lavalanche extends CardImpl {
+public final class Lavalanche extends CardImpl {
 
     public Lavalanche(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{B}{R}{G}");

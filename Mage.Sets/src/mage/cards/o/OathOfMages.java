@@ -48,7 +48,7 @@ import mage.target.TargetPlayer;
  *
  * @author TheElk801
  */
-public class OathOfMages extends CardImpl {
+public final class OathOfMages extends CardImpl {
 
     private final UUID originalId;
     private static final FilterPlayer filter = new FilterPlayer();

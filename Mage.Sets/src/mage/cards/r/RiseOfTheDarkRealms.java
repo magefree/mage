@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class RiseOfTheDarkRealms extends CardImpl {
+public final class RiseOfTheDarkRealms extends CardImpl {
 
     public RiseOfTheDarkRealms(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{7}{B}{B}");

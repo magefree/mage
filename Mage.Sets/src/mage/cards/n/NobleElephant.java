@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author L_J
  */
-public class NobleElephant extends CardImpl {
+public final class NobleElephant extends CardImpl {
 
     public NobleElephant (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

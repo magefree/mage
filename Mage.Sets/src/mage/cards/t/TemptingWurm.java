@@ -54,7 +54,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author Eirkei
  */
-public class TemptingWurm extends CardImpl {
+public final class TemptingWurm extends CardImpl {
 
     public TemptingWurm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

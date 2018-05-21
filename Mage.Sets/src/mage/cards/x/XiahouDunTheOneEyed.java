@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author fireshoes
  */
-public class XiahouDunTheOneEyed extends CardImpl {
+public final class XiahouDunTheOneEyed extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("a black card");
 

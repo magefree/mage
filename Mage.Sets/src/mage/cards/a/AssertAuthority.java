@@ -40,7 +40,7 @@ import mage.target.TargetSpell;
  *
  * @author North
  */
-public class AssertAuthority extends CardImpl {
+public final class AssertAuthority extends CardImpl {
 
     public AssertAuthority(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{5}{U}{U}");

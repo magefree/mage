@@ -43,7 +43,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Deprive extends CardImpl {
+public final class Deprive extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("land");
 

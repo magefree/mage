@@ -44,7 +44,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class MadcapExperiment extends CardImpl {
+public final class MadcapExperiment extends CardImpl {
 
     public MadcapExperiment(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}");

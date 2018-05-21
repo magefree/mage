@@ -45,7 +45,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author North
  */
-public class SoulsFire extends CardImpl {
+public final class SoulsFire extends CardImpl {
 
     public SoulsFire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");

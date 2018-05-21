@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author LoneFox
  */
-public class MagusOfTheBazaar extends CardImpl {
+public final class MagusOfTheBazaar extends CardImpl {
 
     public MagusOfTheBazaar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author Quercitron
  */
-public class RollingStones extends CardImpl {
+public final class RollingStones extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Wall creatures");
     

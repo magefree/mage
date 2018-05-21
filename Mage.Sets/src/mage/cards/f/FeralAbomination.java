@@ -39,7 +39,7 @@ import mage.constants.CardType;
  *
  * @author TheElk801
  */
-public class FeralAbomination extends CardImpl {
+public final class FeralAbomination extends CardImpl {
 
     public FeralAbomination(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}");

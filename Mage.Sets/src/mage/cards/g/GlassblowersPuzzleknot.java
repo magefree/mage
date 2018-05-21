@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author emerald000
  */
-public class GlassblowersPuzzleknot extends CardImpl {
+public final class GlassblowersPuzzleknot extends CardImpl {
 
     public GlassblowersPuzzleknot(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

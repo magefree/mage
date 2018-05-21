@@ -54,7 +54,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class TemurSabertooth extends CardImpl {
+public final class TemurSabertooth extends CardImpl {
 
     public TemurSabertooth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");

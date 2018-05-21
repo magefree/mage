@@ -46,7 +46,7 @@ import mage.counters.CounterType;
  *
  * @author michael.napoleon@gmail.com
  */
-public class PincerSpider extends CardImpl {
+public final class PincerSpider extends CardImpl {
 
     public PincerSpider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

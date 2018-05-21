@@ -39,7 +39,7 @@ import mage.constants.Duration;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Fog extends CardImpl {
+public final class Fog extends CardImpl {
 
     public Fog(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");

@@ -51,7 +51,7 @@ import mage.players.Player;
  *
  * @author BetaSteward
  */
-public class MirrorMadPhantasm extends CardImpl {
+public final class MirrorMadPhantasm extends CardImpl {
 
     public MirrorMadPhantasm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");

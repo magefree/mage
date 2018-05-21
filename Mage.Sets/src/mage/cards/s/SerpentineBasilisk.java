@@ -44,7 +44,7 @@ import mage.constants.SubType;
  *
  * @author Wehk
  */
-public class SerpentineBasilisk extends CardImpl {
+public final class SerpentineBasilisk extends CardImpl {
 
     public SerpentineBasilisk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");

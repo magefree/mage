@@ -53,7 +53,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class SoulOfRavnica extends CardImpl {
+public final class SoulOfRavnica extends CardImpl {
 
     public SoulOfRavnica(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{U}");

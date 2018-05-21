@@ -42,7 +42,7 @@ import mage.filter.common.FilterControlledLandPermanent;
  *
  * @author LevelX2
  */
-public class EmberSwallower extends CardImpl {
+public final class EmberSwallower extends CardImpl {
 
     public EmberSwallower(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");

@@ -42,7 +42,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LoneFox
  */
-public class HealingLeaves extends CardImpl {
+public final class HealingLeaves extends CardImpl {
 
     public HealingLeaves(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");

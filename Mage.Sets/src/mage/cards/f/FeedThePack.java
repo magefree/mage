@@ -49,7 +49,7 @@ import mage.target.TargetPermanent;
  *
  * @author BetaSteward
  */
-public class FeedThePack extends CardImpl {
+public final class FeedThePack extends CardImpl {
 
     public FeedThePack(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{5}{G}");

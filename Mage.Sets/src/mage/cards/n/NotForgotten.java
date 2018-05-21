@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class NotForgotten extends CardImpl {
+public final class NotForgotten extends CardImpl {
 
     public NotForgotten(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{W}");

@@ -39,7 +39,7 @@ import mage.constants.CardType;
 /**
  * @author noxx
  */
-public class TemporalMastery extends CardImpl {
+public final class TemporalMastery extends CardImpl {
 
     public TemporalMastery(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{U}{U}");

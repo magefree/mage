@@ -39,7 +39,7 @@ import mage.constants.SubType;
 /**
  * @author nantuko
  */
-public class AvacynsPilgrim extends CardImpl {
+public final class AvacynsPilgrim extends CardImpl {
 
     public AvacynsPilgrim(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");

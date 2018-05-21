@@ -52,7 +52,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Saga
  */
-public class KindredCharge extends CardImpl {
+public final class KindredCharge extends CardImpl {
 
     public KindredCharge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{R}{R}");

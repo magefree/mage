@@ -48,7 +48,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class RitesOfSpring extends CardImpl {
+public final class RitesOfSpring extends CardImpl {
 
     public RitesOfSpring(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{G}");

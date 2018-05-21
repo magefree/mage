@@ -47,7 +47,7 @@ import java.util.UUID;
  *
  * @author L_J
  */
-public class ChampionOfDusk extends CardImpl {
+public final class ChampionOfDusk extends CardImpl {
 
     private final static FilterControlledPermanent filter = new FilterControlledPermanent("Vampires you control");
 

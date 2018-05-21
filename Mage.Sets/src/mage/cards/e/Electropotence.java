@@ -49,7 +49,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author North
  */
-public class Electropotence extends CardImpl {
+public final class Electropotence extends CardImpl {
 
     public Electropotence(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");

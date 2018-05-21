@@ -41,7 +41,7 @@ import mage.game.permanent.token.ElfToken;
  *
  * @author Loki
  */
-public class AmbassadorOak extends CardImpl {
+public final class AmbassadorOak extends CardImpl {
 
     public AmbassadorOak(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author Loki
  */
-public class ViridianRevel extends CardImpl {
+public final class ViridianRevel extends CardImpl {
 
     public ViridianRevel (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}{G}");

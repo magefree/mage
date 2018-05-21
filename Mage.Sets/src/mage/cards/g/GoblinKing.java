@@ -46,7 +46,7 @@ import mage.filter.StaticFilters;
 /**
  * @author Loki
  */
-public class GoblinKing extends CardImpl {
+public final class GoblinKing extends CardImpl {
 
     public GoblinKing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");

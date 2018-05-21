@@ -56,7 +56,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class CorpsejackMenace extends CardImpl {
+public final class CorpsejackMenace extends CardImpl {
 
     public CorpsejackMenace(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{G}");

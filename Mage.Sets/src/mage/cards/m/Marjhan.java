@@ -60,7 +60,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class Marjhan extends CardImpl {
+public final class Marjhan extends CardImpl {
 
     private static final FilterAttackingCreature filter = new FilterAttackingCreature("attacking creature without flying");
 

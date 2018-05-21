@@ -39,7 +39,7 @@ import mage.target.TargetPlayer;
  *
  * @author nigelzor
  */
-public class CabalConditioning extends CardImpl {
+public final class CabalConditioning extends CardImpl {
 
     public CabalConditioning(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{6}{B}");

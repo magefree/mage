@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class SparkOfCreativity extends CardImpl {
+public final class SparkOfCreativity extends CardImpl {
 
     public SparkOfCreativity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}");

@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author fireshoes
  */
-public class GameTrail extends CardImpl {
+public final class GameTrail extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("a Mountain or Forest card from your hand");
 

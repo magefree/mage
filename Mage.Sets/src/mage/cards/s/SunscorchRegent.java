@@ -44,7 +44,7 @@ import mage.counters.CounterType;
  *
  * @author fireshoes
  */
-public class SunscorchRegent extends CardImpl {
+public final class SunscorchRegent extends CardImpl {
 
     public SunscorchRegent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");

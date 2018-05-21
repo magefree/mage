@@ -40,7 +40,7 @@ import mage.target.TargetSpell;
  *
  * @author magenoxx_at_gmail.com
  */
-public class MemoryLapse extends CardImpl {
+public final class MemoryLapse extends CardImpl {
 
     public MemoryLapse(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");

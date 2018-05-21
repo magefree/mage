@@ -41,7 +41,7 @@ import mage.target.common.TargetSpellOrPermanent;
  *
  * @author AlumiuN
  */
-public class Chaoslace extends CardImpl {
+public final class Chaoslace extends CardImpl {
 
     public Chaoslace(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");

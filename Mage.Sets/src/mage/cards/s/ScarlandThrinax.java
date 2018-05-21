@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Loki
  */
-public class ScarlandThrinax extends CardImpl {
+public final class ScarlandThrinax extends CardImpl {
 
     public ScarlandThrinax(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{R}{G}");

@@ -42,7 +42,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author fireshoes
  */
-public class ConstantMists extends CardImpl {
+public final class ConstantMists extends CardImpl {
 
     public ConstantMists(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}");

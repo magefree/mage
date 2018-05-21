@@ -38,7 +38,7 @@ import mage.constants.Duration;
  *
  * @author fireshoes
  */
-public class Languish extends CardImpl {
+public final class Languish extends CardImpl {
 
     public Languish(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}{B}");

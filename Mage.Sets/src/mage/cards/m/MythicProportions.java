@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Jgod
  */
-public class MythicProportions extends CardImpl {
+public final class MythicProportions extends CardImpl {
 
     public MythicProportions(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{G}{G}{G}");

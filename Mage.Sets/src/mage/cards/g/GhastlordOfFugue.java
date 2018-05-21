@@ -52,7 +52,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author jeffwadsworth
  */
-public class GhastlordOfFugue extends CardImpl {
+public final class GhastlordOfFugue extends CardImpl {
 
     public GhastlordOfFugue(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U/B}{U/B}{U/B}{U/B}{U/B}");

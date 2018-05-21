@@ -47,7 +47,7 @@ import mage.game.events.GameEvent;
  *
  * @author LevelX2
  */
-public class SulfuricVortex extends CardImpl {
+public final class SulfuricVortex extends CardImpl {
 
     public SulfuricVortex(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{R}{R}");

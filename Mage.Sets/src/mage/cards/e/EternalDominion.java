@@ -50,7 +50,7 @@ import mage.target.common.TargetOpponent;
  * @author jeffwadsworth
  *
  */
-public class EternalDominion extends CardImpl {
+public final class EternalDominion extends CardImpl {
 
     public EternalDominion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{7}{U}{U}{U}");

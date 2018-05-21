@@ -48,7 +48,7 @@ import mage.target.TargetPlayer;
  *
  * @author Plopman
  */
-public class Repopulate extends CardImpl {
+public final class Repopulate extends CardImpl {
 
     public Repopulate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}");

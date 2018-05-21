@@ -62,7 +62,7 @@ import mage.target.TargetPermanent;
  *
  * @author TheElk801
  */
-public class RimefeatherOwl extends CardImpl {
+public final class RimefeatherOwl extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Permanents with ice counters on them");
     private static final FilterPermanent filter2 = new FilterPermanent("snow permanents on the battlefield");

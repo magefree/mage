@@ -47,7 +47,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BeastmasterAscension extends CardImpl {
+public final class BeastmasterAscension extends CardImpl {
 
     public BeastmasterAscension(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}");

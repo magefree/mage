@@ -39,7 +39,7 @@ import mage.target.common.TargetAttackingCreature;
  *
  * @author LoneFox
  */
-public class Warning extends CardImpl {
+public final class Warning extends CardImpl {
 
     public Warning(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");

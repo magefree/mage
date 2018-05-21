@@ -41,7 +41,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class JudgeOfCurrents extends CardImpl {
+public final class JudgeOfCurrents extends CardImpl {
 
     public JudgeOfCurrents(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

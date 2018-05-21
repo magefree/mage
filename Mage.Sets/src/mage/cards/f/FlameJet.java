@@ -40,7 +40,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  *
  * @author LoneFox
  */
-public class FlameJet extends CardImpl {
+public final class FlameJet extends CardImpl {
 
     public FlameJet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{R}");

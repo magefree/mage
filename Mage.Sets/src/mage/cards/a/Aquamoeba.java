@@ -44,7 +44,7 @@ import mage.constants.Zone;
  * @author magenoxx_at_gmail.com
 
  */
-public class Aquamoeba extends CardImpl {
+public final class Aquamoeba extends CardImpl {
 
     public Aquamoeba(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

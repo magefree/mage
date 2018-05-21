@@ -55,7 +55,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class OrderOfSuccession extends CardImpl {
+public final class OrderOfSuccession extends CardImpl {
 
     public OrderOfSuccession(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{U}");

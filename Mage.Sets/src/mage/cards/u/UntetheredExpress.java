@@ -43,7 +43,7 @@ import java.util.UUID;
 /**
  * @author JRHerlehy
  */
-public class UntetheredExpress extends CardImpl {
+public final class UntetheredExpress extends CardImpl {
 
     public UntetheredExpress(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");

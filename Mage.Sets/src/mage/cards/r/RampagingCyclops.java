@@ -48,7 +48,7 @@ import mage.game.permanent.Permanent;
  *
  * @author TheElk801
  */
-public class RampagingCyclops extends CardImpl {
+public final class RampagingCyclops extends CardImpl {
 
     public RampagingCyclops(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");

@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class TsaboTavoc extends CardImpl {
+public final class TsaboTavoc extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("legendary creatures");  
     private static final FilterCreaturePermanent filterDestroy = new FilterCreaturePermanent("legendary creature");

@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class OldGhastbark extends CardImpl {
+public final class OldGhastbark extends CardImpl {
 
     public OldGhastbark(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G/W}{G/W}");

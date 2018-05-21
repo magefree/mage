@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author Plopman
  */
-public class CircleOfProtectionBlack extends CardImpl {
+public final class CircleOfProtectionBlack extends CardImpl {
 
     private static final FilterObject filter = new FilterObject("black source");
 

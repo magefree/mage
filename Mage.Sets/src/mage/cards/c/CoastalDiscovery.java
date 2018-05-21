@@ -38,7 +38,7 @@ import mage.constants.CardType;
  *
  * @author fireshoes
  */
-public class CoastalDiscovery extends CardImpl {
+public final class CoastalDiscovery extends CardImpl {
 
     public CoastalDiscovery(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}");

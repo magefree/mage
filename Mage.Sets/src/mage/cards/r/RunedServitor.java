@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class RunedServitor extends CardImpl {
+public final class RunedServitor extends CardImpl {
 
     public RunedServitor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}");

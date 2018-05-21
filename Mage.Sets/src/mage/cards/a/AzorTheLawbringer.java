@@ -56,7 +56,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2 & L_J
  */
-public class AzorTheLawbringer extends CardImpl {
+public final class AzorTheLawbringer extends CardImpl {
 
     public AzorTheLawbringer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{W}{U}{U}");

@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author LoneFox
  */
-public class OrderOfLeitbur extends CardImpl {
+public final class OrderOfLeitbur extends CardImpl {
 
     public OrderOfLeitbur(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{W}");

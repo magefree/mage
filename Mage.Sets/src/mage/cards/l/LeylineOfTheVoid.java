@@ -50,7 +50,7 @@ import mage.players.Player;
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class LeylineOfTheVoid extends CardImpl {
+public final class LeylineOfTheVoid extends CardImpl {
 
     public LeylineOfTheVoid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");

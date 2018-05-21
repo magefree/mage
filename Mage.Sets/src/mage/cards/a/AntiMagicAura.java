@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author MTGfan & L_J
  */
-public class AntiMagicAura extends CardImpl {
+public final class AntiMagicAura extends CardImpl {
 
     public AntiMagicAura(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");

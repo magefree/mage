@@ -50,7 +50,7 @@ import mage.target.common.TargetAnyTarget;
  * @author fireshoes
  */
 
-public class EmbermageGoblin extends CardImpl {
+public final class EmbermageGoblin extends CardImpl {
     
     private static final FilterCard filter = new FilterCard("card named Embermage Goblin");
 

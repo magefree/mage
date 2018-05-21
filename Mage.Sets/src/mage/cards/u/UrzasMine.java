@@ -42,7 +42,7 @@ import java.util.UUID;
  *
  * @author Melkhior
  */
-public class UrzasMine extends CardImpl {
+public final class UrzasMine extends CardImpl {
     public UrzasMine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
         this.subtype.add(SubType.URZAS, SubType.MINE);

@@ -57,7 +57,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class GauntletOfPower extends CardImpl {
+public final class GauntletOfPower extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("a basic land");
 

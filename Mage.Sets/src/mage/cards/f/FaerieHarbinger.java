@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInLibrary;
 /**
  * @author fireshoes
  */
-public class FaerieHarbinger extends CardImpl {
+public final class FaerieHarbinger extends CardImpl {
 
     static final FilterCard filter = new FilterCard("Faerie card");
 

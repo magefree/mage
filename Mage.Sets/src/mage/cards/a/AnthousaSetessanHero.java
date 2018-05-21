@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class AnthousaSetessanHero extends CardImpl {
+public final class AnthousaSetessanHero extends CardImpl {
 
     public AnthousaSetessanHero(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");

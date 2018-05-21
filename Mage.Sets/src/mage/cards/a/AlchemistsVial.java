@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author LoneFox
 
  */
-public class AlchemistsVial extends CardImpl {
+public final class AlchemistsVial extends CardImpl {
 
     public AlchemistsVial(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

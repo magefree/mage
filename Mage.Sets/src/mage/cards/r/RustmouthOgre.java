@@ -48,7 +48,7 @@ import mage.target.TargetPermanent;
  *
  * @author dustinconrad
  */
-public class RustmouthOgre extends CardImpl {
+public final class RustmouthOgre extends CardImpl {
 
     public RustmouthOgre(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{R}");

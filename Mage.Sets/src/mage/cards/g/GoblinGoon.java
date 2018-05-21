@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author emerald000
  */
-public class GoblinGoon extends CardImpl {
+public final class GoblinGoon extends CardImpl {
 
     public GoblinGoon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

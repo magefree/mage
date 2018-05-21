@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class IndomitableAncients extends CardImpl {
+public final class IndomitableAncients extends CardImpl {
 
     public IndomitableAncients(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}{W}");

@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class TitansPresence extends CardImpl {
+public final class TitansPresence extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("a colorless creature card from your hand");
 

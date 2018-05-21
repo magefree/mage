@@ -51,7 +51,7 @@ import mage.players.Player;
  * @author LoneFox
  *
  */
-public class LlanowarEmpath extends CardImpl {
+public final class LlanowarEmpath extends CardImpl {
 
     public LlanowarEmpath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

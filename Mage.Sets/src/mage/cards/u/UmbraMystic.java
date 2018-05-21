@@ -46,7 +46,7 @@ import mage.filter.predicate.permanent.AttachedToControlledPermanentPredicate;
  *
  * @author North & L_J
  */
-public class UmbraMystic extends CardImpl {
+public final class UmbraMystic extends CardImpl {
 
     private static final FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent("Auras attached to permanents you control");
 

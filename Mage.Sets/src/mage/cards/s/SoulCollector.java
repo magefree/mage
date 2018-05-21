@@ -43,7 +43,7 @@ import mage.constants.SubType;
  *
  * @author markedagain
  */
-public class SoulCollector extends CardImpl {
+public final class SoulCollector extends CardImpl {
 
     public SoulCollector(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");

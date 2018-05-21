@@ -44,7 +44,7 @@ import mage.watchers.common.PlayerAttackedWatcher;
  *
  * @author TheElk801
  */
-public class ChartACourse extends CardImpl {
+public final class ChartACourse extends CardImpl {
 
     public ChartACourse(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{U}");

@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class HurloonMinotaur extends CardImpl {
+public final class HurloonMinotaur extends CardImpl {
 
     public HurloonMinotaur(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");

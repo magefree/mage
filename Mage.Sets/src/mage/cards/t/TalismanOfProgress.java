@@ -41,7 +41,7 @@ import mage.constants.CardType;
  *
  * @author jonubuu
  */
-public class TalismanOfProgress extends CardImpl {
+public final class TalismanOfProgress extends CardImpl {
 
     public TalismanOfProgress(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

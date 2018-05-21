@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class EntourageOfTrest extends CardImpl {
+public final class EntourageOfTrest extends CardImpl {
 
     public EntourageOfTrest(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}");

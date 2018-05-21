@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author fireshoes
  */
-public class BogElemental extends CardImpl {
+public final class BogElemental extends CardImpl {
     
     public BogElemental(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");

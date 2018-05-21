@@ -49,7 +49,7 @@ import mage.game.permanent.token.SpiderToken;
  *
  * @author fireshoes
  */
-public class Arachnogenesis extends CardImpl {
+public final class Arachnogenesis extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Spider creatures");
 

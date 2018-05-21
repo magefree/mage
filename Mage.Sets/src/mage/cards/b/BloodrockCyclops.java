@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class BloodrockCyclops extends CardImpl {
+public final class BloodrockCyclops extends CardImpl {
 
     public BloodrockCyclops(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

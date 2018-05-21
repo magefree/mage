@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PutridLeech extends CardImpl {
+public final class PutridLeech extends CardImpl {
 
     public PutridLeech(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{G}");

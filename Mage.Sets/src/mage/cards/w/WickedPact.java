@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class WickedPact extends CardImpl {
+public final class WickedPact extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack creature");
 

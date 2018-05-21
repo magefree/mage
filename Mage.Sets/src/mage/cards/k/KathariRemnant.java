@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class KathariRemnant extends CardImpl {
+public final class KathariRemnant extends CardImpl {
 
     public KathariRemnant (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{B}");

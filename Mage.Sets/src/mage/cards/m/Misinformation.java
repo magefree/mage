@@ -43,7 +43,7 @@ import mage.target.common.TargetCardInOpponentsGraveyard;
  *
  * @author L_J
  */
-public class Misinformation extends CardImpl {
+public final class Misinformation extends CardImpl {
 
     public Misinformation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}");

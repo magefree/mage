@@ -46,7 +46,7 @@ import mage.game.permanent.Permanent;
  *
  * @author TheElk801
  */
-public class DesperateCastaways extends CardImpl {
+public final class DesperateCastaways extends CardImpl {
 
     public DesperateCastaways(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");

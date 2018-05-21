@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author Quercitron
  */
-public class BalduvianHorde extends CardImpl {
+public final class BalduvianHorde extends CardImpl {
 
     public BalduvianHorde(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");

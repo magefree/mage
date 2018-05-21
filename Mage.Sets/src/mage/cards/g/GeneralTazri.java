@@ -52,7 +52,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class GeneralTazri extends CardImpl {
+public final class GeneralTazri extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("an Ally creature card");
 

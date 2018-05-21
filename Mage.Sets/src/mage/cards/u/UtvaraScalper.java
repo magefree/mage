@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author LoneFox
  */
-public class UtvaraScalper extends CardImpl {
+public final class UtvaraScalper extends CardImpl {
 
     public UtvaraScalper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

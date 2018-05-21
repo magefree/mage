@@ -9,7 +9,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-public class ProvenCombatant extends CardImpl {
+public final class ProvenCombatant extends CardImpl {
 
     public ProvenCombatant(UUID ownerId, CardSetInfo cardSetInfo){
         super(ownerId, cardSetInfo, new CardType[]{CardType.CREATURE}, "{U}");

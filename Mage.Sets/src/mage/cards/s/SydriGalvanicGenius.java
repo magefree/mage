@@ -52,7 +52,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class SydriGalvanicGenius extends CardImpl {
+public final class SydriGalvanicGenius extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact creature");
     private static final FilterArtifactPermanent filterNonCreature = new FilterArtifactPermanent("noncreature artifact");

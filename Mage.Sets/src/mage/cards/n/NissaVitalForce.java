@@ -56,7 +56,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author fireshoes
  */
-public class NissaVitalForce extends CardImpl {
+public final class NissaVitalForce extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("land you control");
 

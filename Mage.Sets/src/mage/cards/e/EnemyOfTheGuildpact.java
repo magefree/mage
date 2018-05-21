@@ -41,7 +41,7 @@ import mage.filter.predicate.mageobject.MulticoloredPredicate;
  *
  * @author Wehk
  */
-public class EnemyOfTheGuildpact extends CardImpl {
+public final class EnemyOfTheGuildpact extends CardImpl {
 
     private static final FilterObject filter = new FilterObject("multicolored");
     

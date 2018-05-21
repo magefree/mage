@@ -49,7 +49,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class AetherRift extends CardImpl {
+public final class AetherRift extends CardImpl {
 
     public AetherRift(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{R}{G}");

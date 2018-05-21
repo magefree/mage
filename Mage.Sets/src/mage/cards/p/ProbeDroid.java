@@ -43,7 +43,7 @@ import mage.target.TargetPlayer;
  *
  * @author Styxo
  */
-public class ProbeDroid extends CardImpl {
+public final class ProbeDroid extends CardImpl {
 
     public ProbeDroid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{1}{U}");

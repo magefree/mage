@@ -47,7 +47,7 @@ import mage.watchers.common.CastSpellLastTurnWatcher;
  *
  * @author jeffwadsworth
  */
-public class IncursionSpecialist extends CardImpl {
+public final class IncursionSpecialist extends CardImpl {
 
     public IncursionSpecialist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

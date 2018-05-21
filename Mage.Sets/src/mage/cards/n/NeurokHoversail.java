@@ -41,7 +41,7 @@ import mage.constants.*;
  *
  * @author Loki
  */
-public class NeurokHoversail extends CardImpl {
+public final class NeurokHoversail extends CardImpl {
 
     public NeurokHoversail(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");

@@ -46,7 +46,7 @@ import mage.filter.common.FilterCreatureCard;
  *
  * @author fireshoes
  */
-public class ThicketElemental extends CardImpl {
+public final class ThicketElemental extends CardImpl {
 
     public ThicketElemental(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");

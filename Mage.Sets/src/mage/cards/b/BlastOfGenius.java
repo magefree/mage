@@ -45,7 +45,7 @@ import mage.target.common.TargetDiscard;
  *
  * @author LevelX2
  */
-public class BlastOfGenius extends CardImpl {
+public final class BlastOfGenius extends CardImpl {
 
     public BlastOfGenius(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{U}{R}");

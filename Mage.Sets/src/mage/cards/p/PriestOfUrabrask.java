@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class PriestOfUrabrask extends CardImpl {
+public final class PriestOfUrabrask extends CardImpl {
 
     public PriestOfUrabrask(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

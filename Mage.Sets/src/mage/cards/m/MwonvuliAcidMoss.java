@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author markedagain
  */
-public class MwonvuliAcidMoss extends CardImpl {
+public final class MwonvuliAcidMoss extends CardImpl {
 
     private static final FilterLandCard filterForest = new FilterLandCard("Forest card");
 

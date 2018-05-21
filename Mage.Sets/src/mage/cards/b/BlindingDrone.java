@@ -47,7 +47,7 @@ import java.util.UUID;
  *
  * @author fireshoes
  */
-public class BlindingDrone extends CardImpl {
+public final class BlindingDrone extends CardImpl {
 
     public BlindingDrone(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

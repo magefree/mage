@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class ScrybSprites extends CardImpl {
+public final class ScrybSprites extends CardImpl {
 
     public ScrybSprites(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");

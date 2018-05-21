@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author emerald000
  */
-public class KrovikanSorcerer extends CardImpl {
+public final class KrovikanSorcerer extends CardImpl {
     
     private static final FilterCard filterNonBlack = new FilterCard("a nonblack card");
     private static final FilterCard filterBlack = new FilterCard("a black card");

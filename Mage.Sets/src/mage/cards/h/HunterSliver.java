@@ -44,7 +44,7 @@ import mage.filter.StaticFilters;
  *
  * @author cbt33
  */
-public class HunterSliver extends CardImpl {
+public final class HunterSliver extends CardImpl {
 
     public HunterSliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");

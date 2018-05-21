@@ -48,7 +48,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author jeffwadsworth
  */
-public class AwakenTheAncient extends CardImpl {
+public final class AwakenTheAncient extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent(SubType.MOUNTAIN, "Mountain");
 

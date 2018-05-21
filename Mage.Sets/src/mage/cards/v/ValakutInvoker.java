@@ -44,7 +44,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LevelX2
  */
-public class ValakutInvoker extends CardImpl {
+public final class ValakutInvoker extends CardImpl {
 
     public ValakutInvoker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class PhyrexianPlaguelord extends CardImpl {
+public final class PhyrexianPlaguelord extends CardImpl {
 
     public PhyrexianPlaguelord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");

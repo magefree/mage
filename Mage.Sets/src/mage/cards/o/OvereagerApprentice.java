@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author cbt33, Loki (Dark Ritual)
  */
-public class OvereagerApprentice extends CardImpl {
+public final class OvereagerApprentice extends CardImpl {
 
     public OvereagerApprentice(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

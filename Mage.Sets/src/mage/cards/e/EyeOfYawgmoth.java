@@ -54,7 +54,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author L_J
  */
-public class EyeOfYawgmoth extends CardImpl {
+public final class EyeOfYawgmoth extends CardImpl {
 
     public EyeOfYawgmoth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");

@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author cbt33
  */
-public class CryptSliver extends CardImpl {
+public final class CryptSliver extends CardImpl {
 
     public CryptSliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");

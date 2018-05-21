@@ -41,7 +41,7 @@ import mage.counters.CounterType;
  *
  * @author North
  */
-public class NimanaSellSword extends CardImpl {
+public final class NimanaSellSword extends CardImpl {
 
     public NimanaSellSword(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

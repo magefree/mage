@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class RagingBull extends CardImpl {
+public final class RagingBull extends CardImpl {
 
     public RagingBull(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

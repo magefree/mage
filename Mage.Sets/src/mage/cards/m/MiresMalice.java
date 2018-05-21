@@ -39,7 +39,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class MiresMalice extends CardImpl {
+public final class MiresMalice extends CardImpl {
 
     public MiresMalice(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}");

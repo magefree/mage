@@ -48,7 +48,7 @@ import mage.game.permanent.token.ThopterColorlessToken;
  *
  * @author Wehk
  */
-public class ThopterEngineer extends CardImpl {
+public final class ThopterEngineer extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Artifact creatures you control");
 

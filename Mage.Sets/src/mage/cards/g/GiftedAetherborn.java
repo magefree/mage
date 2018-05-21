@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Styxo
  */
-public class GiftedAetherborn extends CardImpl {
+public final class GiftedAetherborn extends CardImpl {
 
     public GiftedAetherborn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{B}");

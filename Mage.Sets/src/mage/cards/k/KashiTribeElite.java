@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.SupertypePredicate;
  *
  * @author LevelX
  */
-public class KashiTribeElite extends CardImpl {
+public final class KashiTribeElite extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Legendary Snakes");
 

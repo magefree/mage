@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class FugitiveWizard extends CardImpl {
+public final class FugitiveWizard extends CardImpl {
 
     public FugitiveWizard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");

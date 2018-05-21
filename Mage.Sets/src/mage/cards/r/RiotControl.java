@@ -46,7 +46,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  */
 
 
-public class RiotControl extends CardImpl {
+public final class RiotControl extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature your opponents control");
     static {

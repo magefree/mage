@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class InquisitorsOx extends CardImpl {
+public final class InquisitorsOx extends CardImpl {
 
     public InquisitorsOx(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

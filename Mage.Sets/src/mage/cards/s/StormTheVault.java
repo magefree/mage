@@ -49,7 +49,7 @@ import mage.game.permanent.token.TreasureToken;
  *
  * @author LevelX2
  */
-public class StormTheVault extends CardImpl {
+public final class StormTheVault extends CardImpl {
 
     public StormTheVault(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{R}");

@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class Invisibility extends CardImpl {
+public final class Invisibility extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("except by Walls");
     static {

@@ -53,7 +53,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LoneFox
  */
-public class ShroudedLore extends CardImpl {
+public final class ShroudedLore extends CardImpl {
 
     public ShroudedLore(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}");

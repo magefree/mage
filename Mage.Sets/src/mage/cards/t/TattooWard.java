@@ -56,7 +56,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author jeffwadsworth
  */
-public class TattooWard extends CardImpl {
+public final class TattooWard extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("enchantments");
 

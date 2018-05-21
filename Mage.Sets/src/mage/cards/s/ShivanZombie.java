@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Jgod
  */
-public class ShivanZombie extends CardImpl {
+public final class ShivanZombie extends CardImpl {
 
     public ShivanZombie(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{R}");

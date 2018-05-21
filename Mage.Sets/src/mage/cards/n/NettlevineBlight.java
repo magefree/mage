@@ -56,7 +56,7 @@ import mage.target.TargetPermanent;
  *
  * @author jeffwadsworth
  */
-public class NettlevineBlight extends CardImpl {
+public final class NettlevineBlight extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("creature or land permanent");
 

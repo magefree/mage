@@ -42,7 +42,7 @@ import mage.constants.TargetController;
  *
  * @author fireshoes
  */
-public class BarrowGhoul extends CardImpl {
+public final class BarrowGhoul extends CardImpl {
 
     public BarrowGhoul(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

@@ -44,7 +44,7 @@ import mage.counters.CounterType;
  *
  * @author Loki
  */
-public class VividCreek extends CardImpl {
+public final class VividCreek extends CardImpl {
 
     public VividCreek(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

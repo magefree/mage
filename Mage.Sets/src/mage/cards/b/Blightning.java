@@ -46,7 +46,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Blightning extends CardImpl {
+public final class Blightning extends CardImpl {
 
     public Blightning(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}{R}");

@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.ColorlessPredicate;
  *
  * @author LevelX2
  */
-public class UginsConstruct extends CardImpl {
+public final class UginsConstruct extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("permanent that's one or more colors");
 

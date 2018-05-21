@@ -48,7 +48,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class TeferiTimebender extends CardImpl {
+public final class TeferiTimebender extends CardImpl {
 
     public TeferiTimebender(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{W}{U}");

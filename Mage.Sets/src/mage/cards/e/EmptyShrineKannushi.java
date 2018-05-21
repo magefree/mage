@@ -52,7 +52,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class EmptyShrineKannushi extends CardImpl {
+public final class EmptyShrineKannushi extends CardImpl {
 
     public EmptyShrineKannushi(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");

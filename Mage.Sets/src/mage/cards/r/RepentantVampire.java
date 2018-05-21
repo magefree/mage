@@ -58,7 +58,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author cbt33, Nantuko (Sengir Vampire)
  */
-public class RepentantVampire extends CardImpl {
+public final class RepentantVampire extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("black creature");
     static {

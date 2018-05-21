@@ -44,7 +44,7 @@ import mage.constants.SubType;
  *
  * @author spjspj
  */
-public class ResoluteSurvivors extends CardImpl {
+public final class ResoluteSurvivors extends CardImpl {
 
     public ResoluteSurvivors(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{W}");

@@ -53,7 +53,7 @@ import mage.players.Player;
  *
  * @author Luna Skyrise
  */
-public class ShiftingSky extends CardImpl {
+public final class ShiftingSky extends CardImpl {
 
     public ShiftingSky(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");

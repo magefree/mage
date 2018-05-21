@@ -49,7 +49,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
 /**
  * @author Loki
  */
-public class MentorOfTheMeek extends CardImpl {
+public final class MentorOfTheMeek extends CardImpl {
 
     private static final FilterPermanent filter = new FilterControlledCreaturePermanent("another creature with power 2 or less");
 

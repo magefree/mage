@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author jeffwadsworth
  */
-public class SummitApes extends CardImpl {
+public final class SummitApes extends CardImpl {
 
     private static final String rule = "As long as you control a Mountain, {this} has menace. (It can't be blocked except by two or more creatures.)";
     private static final FilterLandPermanent filter = new FilterLandPermanent("a Mountain");

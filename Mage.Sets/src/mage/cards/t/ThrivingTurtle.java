@@ -45,7 +45,7 @@ import mage.counters.CounterType;
  *
  * @author fireshoes
  */
-public class ThrivingTurtle extends CardImpl {
+public final class ThrivingTurtle extends CardImpl {
 
     public ThrivingTurtle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");

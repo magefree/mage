@@ -46,7 +46,7 @@ import mage.game.events.GameEvent;
  * @author LoneFox
 
  */
-public class CallousGiant extends CardImpl {
+public final class CallousGiant extends CardImpl {
 
     public CallousGiant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{R}");

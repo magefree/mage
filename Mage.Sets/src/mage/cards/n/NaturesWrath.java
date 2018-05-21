@@ -52,7 +52,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author L_J
  */
-public class NaturesWrath extends CardImpl {
+public final class NaturesWrath extends CardImpl {
     private static final FilterPermanent filterBlue = new FilterPermanent("an Island or blue permanent");
     static{
         filterBlue.add(Predicates.or(new ColorPredicate(ObjectColor.BLUE), new SubtypePredicate(SubType.ISLAND)));

@@ -38,7 +38,7 @@ import mage.game.permanent.token.KnightAllyToken;
  *
  * @author fireshoes
  */
-public class AlliedReinforcements extends CardImpl {
+public final class AlliedReinforcements extends CardImpl {
 
     public AlliedReinforcements(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{W}");

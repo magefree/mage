@@ -48,7 +48,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class JoragaInvocation extends CardImpl {
+public final class JoragaInvocation extends CardImpl {
 
     public JoragaInvocation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{G}{G}");

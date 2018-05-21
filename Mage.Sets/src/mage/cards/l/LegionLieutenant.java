@@ -46,7 +46,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author LevelX2
  */
-public class LegionLieutenant extends CardImpl {
+public final class LegionLieutenant extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Vampires you control");
 

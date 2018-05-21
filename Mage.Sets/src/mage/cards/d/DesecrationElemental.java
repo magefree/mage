@@ -42,7 +42,7 @@ import mage.filter.StaticFilters;
  *
  * @author Plopman
  */
-public class DesecrationElemental extends CardImpl {
+public final class DesecrationElemental extends CardImpl {
 
     public DesecrationElemental(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");

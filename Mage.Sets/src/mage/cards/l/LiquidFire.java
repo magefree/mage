@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Dilnu
  */
-public class LiquidFire extends CardImpl {
+public final class LiquidFire extends CardImpl {
 
     public LiquidFire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{R}{R}");

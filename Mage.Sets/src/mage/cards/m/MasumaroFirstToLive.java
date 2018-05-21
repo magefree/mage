@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class MasumaroFirstToLive extends CardImpl {
+public final class MasumaroFirstToLive extends CardImpl {
 
     public MasumaroFirstToLive(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}{G}");

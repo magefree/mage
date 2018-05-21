@@ -43,7 +43,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  *
  * @author Loki
  */
-public class ExplodingBorders extends CardImpl {
+public final class ExplodingBorders extends CardImpl {
 
     public ExplodingBorders(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{R}{G}");

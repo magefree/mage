@@ -42,7 +42,7 @@ import mage.counters.CounterType;
  *
  * @author North
  */
-public class BloodcrazedNeonate extends CardImpl {
+public final class BloodcrazedNeonate extends CardImpl {
 
     public BloodcrazedNeonate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

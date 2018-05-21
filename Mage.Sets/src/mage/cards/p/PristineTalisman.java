@@ -38,7 +38,7 @@ import mage.constants.CardType;
  *
  * @author North
  */
-public class PristineTalisman extends CardImpl {
+public final class PristineTalisman extends CardImpl {
 
     public PristineTalisman(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

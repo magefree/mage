@@ -44,7 +44,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  *
  * @author LevelX2
  */
-public class VolcanicRambler extends CardImpl {
+public final class VolcanicRambler extends CardImpl {
 
     public VolcanicRambler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{R}");

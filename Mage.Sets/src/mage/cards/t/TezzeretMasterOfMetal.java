@@ -62,7 +62,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Styxo
  */
-public class TezzeretMasterOfMetal extends CardImpl {
+public final class TezzeretMasterOfMetal extends CardImpl {
 
     public TezzeretMasterOfMetal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{U}{B}");

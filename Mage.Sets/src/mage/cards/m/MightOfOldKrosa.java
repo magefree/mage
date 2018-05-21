@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class MightOfOldKrosa extends CardImpl {
+public final class MightOfOldKrosa extends CardImpl {
 
     public MightOfOldKrosa(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");

@@ -53,7 +53,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author jeffwadsworth
  */
-public class GuardianZendikon extends CardImpl {
+public final class GuardianZendikon extends CardImpl {
 
     public GuardianZendikon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}");

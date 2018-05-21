@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author emerald000
  */
-public class SterlingGrove extends CardImpl {
+public final class SterlingGrove extends CardImpl {
     
     public SterlingGrove(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}{W}");

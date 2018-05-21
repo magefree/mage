@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LoneFox & L_J
  */
-public class EssenceFlare extends CardImpl {
+public final class EssenceFlare extends CardImpl {
 
     public EssenceFlare(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{U}");

@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author TheElk801
  */
-public class CrookclawElder extends CardImpl {
+public final class CrookclawElder extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Bird you control");
     private static final FilterControlledCreaturePermanent filter2 = new FilterControlledCreaturePermanent("untapped Wizards you control");

@@ -44,7 +44,7 @@ import mage.game.permanent.token.BreedingPitThrullToken;
  *
  * @author jeffwadsworth
  */
-public class BreedingPit extends CardImpl {
+public final class BreedingPit extends CardImpl {
 
     public BreedingPit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}");

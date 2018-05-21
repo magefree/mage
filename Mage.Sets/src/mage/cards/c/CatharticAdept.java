@@ -43,7 +43,7 @@ import mage.target.TargetPlayer;
  *
  * @author North
  */
-public class CatharticAdept extends CardImpl {
+public final class CatharticAdept extends CardImpl {
 
     public CatharticAdept(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");

@@ -47,7 +47,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author LoneFox
  */
-public class Detonate extends CardImpl {
+public final class Detonate extends CardImpl {
 
     public Detonate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{R}");

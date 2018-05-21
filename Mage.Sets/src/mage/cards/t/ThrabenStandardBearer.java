@@ -46,7 +46,7 @@ import mage.game.permanent.token.HumanSoldierToken;
  *
  * @author LevelX2
  */
-public class ThrabenStandardBearer extends CardImpl {
+public final class ThrabenStandardBearer extends CardImpl {
 
     public ThrabenStandardBearer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");

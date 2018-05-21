@@ -44,7 +44,7 @@ import mage.filter.StaticFilters;
  *
  * @author LevelX2
  */
-public class GaleriderSliver extends CardImpl {
+public final class GaleriderSliver extends CardImpl {
 
     public GaleriderSliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}");

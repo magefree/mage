@@ -42,7 +42,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author Loki
  */
-public class VithianRenegades extends CardImpl {
+public final class VithianRenegades extends CardImpl {
 
     public VithianRenegades (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{G}");

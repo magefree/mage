@@ -42,7 +42,7 @@ import mage.game.permanent.token.DinosaurToken;
  *
  * @author LevelX2
  */
-public class CrestedHerdcaller extends CardImpl {
+public final class CrestedHerdcaller extends CardImpl {
 
     public CrestedHerdcaller(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");

@@ -45,7 +45,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author fireshoes
  */
-public class ClericOfTheForwardOrder extends CardImpl {
+public final class ClericOfTheForwardOrder extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("each creature you control named Cleric of the Forward Order");
 

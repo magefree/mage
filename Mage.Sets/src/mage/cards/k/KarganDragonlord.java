@@ -51,7 +51,7 @@ import mage.constants.Zone;
  *
  * @author BetaSteward_at_googlemail.com, noxx
  */
-public class KarganDragonlord extends LevelerCard {
+public final class KarganDragonlord extends LevelerCard {
 
     public KarganDragonlord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{R}");

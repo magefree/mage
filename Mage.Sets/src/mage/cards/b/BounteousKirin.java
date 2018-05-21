@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class BounteousKirin extends CardImpl {
+public final class BounteousKirin extends CardImpl {
 
     public BounteousKirin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");

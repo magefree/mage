@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author michael.napoleon@gmail.com
  */
-public class VodalianMerchant extends CardImpl {
+public final class VodalianMerchant extends CardImpl {
 
     public VodalianMerchant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");

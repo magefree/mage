@@ -41,7 +41,7 @@ import mage.game.permanent.token.BoarToken;
  *
  * @author LevelX2
  */
-public class BrindleShoat extends CardImpl {
+public final class BrindleShoat extends CardImpl {
 
     public BrindleShoat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");

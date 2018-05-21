@@ -47,7 +47,7 @@ import mage.target.common.TargetEnchantmentPermanent;
  *
  * @author FenrisulfrX
  */
-public class ThunderscapeBattlemage extends CardImpl {
+public final class ThunderscapeBattlemage extends CardImpl {
 
     public ThunderscapeBattlemage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

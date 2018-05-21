@@ -48,7 +48,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Loki
  */
-public class NivMizzetTheFiremind extends CardImpl {
+public final class NivMizzetTheFiremind extends CardImpl {
 
     public NivMizzetTheFiremind(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{U}{R}{R}");

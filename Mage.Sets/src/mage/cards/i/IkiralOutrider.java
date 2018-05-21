@@ -46,7 +46,7 @@ import mage.constants.SubType;
  *
  * @author Loki, noxx
  */
-public class IkiralOutrider extends LevelerCard {
+public final class IkiralOutrider extends LevelerCard {
 
     public IkiralOutrider (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

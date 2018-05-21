@@ -44,7 +44,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author TheElk801
  */
-public class BlossomDryad extends CardImpl {
+public final class BlossomDryad extends CardImpl {
 
     public BlossomDryad(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");

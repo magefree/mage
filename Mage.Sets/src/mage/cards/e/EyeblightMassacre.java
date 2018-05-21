@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  * @author LoneFox
 
  */
-public class EyeblightMassacre extends CardImpl {
+public final class EyeblightMassacre extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Non-Elf creatures");
 

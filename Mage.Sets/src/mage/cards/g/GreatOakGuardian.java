@@ -51,7 +51,7 @@ import mage.target.TargetPlayer;
  *
  * @author fireshoes
  */
-public class GreatOakGuardian extends CardImpl {
+public final class GreatOakGuardian extends CardImpl {
 
     public GreatOakGuardian(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{G}");

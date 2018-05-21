@@ -41,7 +41,7 @@ import mage.filter.predicate.permanent.CounterPredicate;
  *
  * @author spjspj
  */
-public class HazardousConditions extends CardImpl {
+public final class HazardousConditions extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with no counter");
 

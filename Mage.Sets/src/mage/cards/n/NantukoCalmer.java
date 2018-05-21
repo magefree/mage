@@ -52,7 +52,7 @@ import mage.target.common.TargetEnchantmentPermanent;
  *
  * @author LoneFox
  */
-public class NantukoCalmer extends CardImpl {
+public final class NantukoCalmer extends CardImpl {
 
     public NantukoCalmer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");

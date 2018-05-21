@@ -41,7 +41,7 @@ import mage.filter.predicate.permanent.TokenPredicate;
  *
  * @author Wehk
  */
-public class HourOfReckoning extends CardImpl {
+public final class HourOfReckoning extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creatures");
     

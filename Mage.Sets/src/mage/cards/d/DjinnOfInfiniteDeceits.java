@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class DjinnOfInfiniteDeceits extends CardImpl {
+public final class DjinnOfInfiniteDeceits extends CardImpl {
 
     private static final String rule = "Exchange control of two target nonlegendary creatures";
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonlegendary creature");

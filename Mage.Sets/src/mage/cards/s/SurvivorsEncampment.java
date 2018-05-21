@@ -45,7 +45,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author spjspj
  */
-public class SurvivorsEncampment extends CardImpl {
+public final class SurvivorsEncampment extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("an untapped creature you control");
 

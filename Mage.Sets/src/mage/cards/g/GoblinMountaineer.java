@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class GoblinMountaineer extends CardImpl {
+public final class GoblinMountaineer extends CardImpl {
 
     public GoblinMountaineer (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");

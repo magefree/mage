@@ -44,7 +44,7 @@ import mage.filter.predicate.permanent.TappedPredicate;
  *
  * @author fireshoes
  */
-public class StoneshakerShaman extends CardImpl {
+public final class StoneshakerShaman extends CardImpl {
     
     private static final FilterLandPermanent filter = new FilterLandPermanent("untapped land");
 

@@ -46,7 +46,7 @@ import java.util.UUID;
  *
  * @author fireshoes
  */
-public class RenegadeMap extends CardImpl {
+public final class RenegadeMap extends CardImpl {
 
     public RenegadeMap(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");

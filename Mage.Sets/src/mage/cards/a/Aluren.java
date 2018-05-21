@@ -56,7 +56,7 @@ import mage.players.Player;
  * 
  * @author emerald000
  */
-public class Aluren extends CardImpl {
+public final class Aluren extends CardImpl {
     
     private static final FilterCreatureCard filter = new FilterCreatureCard("creature cards with converted mana cost 3 or less");
     

@@ -46,7 +46,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author L_J
  */
-public class HonorablePassage extends CardImpl {
+public final class HonorablePassage extends CardImpl {
 
     public HonorablePassage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");

@@ -56,7 +56,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author TheElk801
  */
-public class TreacherousVampire extends CardImpl {
+public final class TreacherousVampire extends CardImpl {
 
     public TreacherousVampire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}");

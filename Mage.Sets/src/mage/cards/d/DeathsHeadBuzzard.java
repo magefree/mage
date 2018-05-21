@@ -42,7 +42,7 @@ import mage.constants.Duration;
  *
  * @author fireshoes
  */
-public class DeathsHeadBuzzard extends CardImpl {
+public final class DeathsHeadBuzzard extends CardImpl {
 
     public DeathsHeadBuzzard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");

@@ -41,7 +41,7 @@ import mage.constants.CardType;
  *
  * @author Loki
  */
-public class RootwaterDepths extends CardImpl {
+public final class RootwaterDepths extends CardImpl {
 
     public RootwaterDepths(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);

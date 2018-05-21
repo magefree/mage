@@ -58,7 +58,7 @@ import mage.util.CardUtil;
  *
  * @author jeffwadsworth
  */
-public class GodPharaohsGift extends CardImpl {
+public final class GodPharaohsGift extends CardImpl {
 
     public GodPharaohsGift(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{7}");

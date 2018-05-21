@@ -44,7 +44,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author fireshoes
  */
-public class DrossScorpion extends CardImpl {
+public final class DrossScorpion extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("artifact creature");
     

@@ -39,7 +39,7 @@ import mage.constants.CardType;
  *
  * @author North
  */
-public class DakmorSalvage extends CardImpl {
+public final class DakmorSalvage extends CardImpl {
 
     public DakmorSalvage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

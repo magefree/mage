@@ -49,7 +49,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author MTGfan
  */
-public class AnimateArtifact extends CardImpl {
+public final class AnimateArtifact extends CardImpl {
 
     private static final FilterPermanent filter = new FilterArtifactPermanent("noncreature artifact");
 

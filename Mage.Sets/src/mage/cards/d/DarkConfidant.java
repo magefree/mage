@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author Loki
  */
-public class DarkConfidant extends CardImpl {
+public final class DarkConfidant extends CardImpl {
 
     public DarkConfidant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");

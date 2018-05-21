@@ -51,7 +51,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author fireshoes
  */
-public class TemmetVizierOfNaktamun extends CardImpl {
+public final class TemmetVizierOfNaktamun extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature token you control");
 

@@ -49,7 +49,7 @@ import mage.target.TargetPermanent;
  *
  * @author JotaPeRL
  */
-public class NovijenSages extends CardImpl {
+public final class NovijenSages extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creatures you control with a +1/+1 counter on it");
 

@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class PlatedCrusher extends CardImpl {
+public final class PlatedCrusher extends CardImpl {
 
     public PlatedCrusher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}{G}");

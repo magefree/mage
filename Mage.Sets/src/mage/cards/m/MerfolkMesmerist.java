@@ -46,7 +46,7 @@ import mage.target.TargetPlayer;
 /**
  * @author Loki
  */
-public class MerfolkMesmerist extends CardImpl {
+public final class MerfolkMesmerist extends CardImpl {
 
     public MerfolkMesmerist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

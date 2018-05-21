@@ -51,7 +51,7 @@ import mage.target.common.TargetControlledPermanent;
 /**
  * @author nantuko
  */
-public class DivineReckoning extends CardImpl {
+public final class DivineReckoning extends CardImpl {
 
     public DivineReckoning(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{W}{W}");

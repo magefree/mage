@@ -48,7 +48,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author LoneFox
  */
-public class CryptAngel extends CardImpl {
+public final class CryptAngel extends CardImpl {
 
     private static final FilterCreatureCard filter2 = new FilterCreatureCard("blue or red creature card from your graveyard");
 

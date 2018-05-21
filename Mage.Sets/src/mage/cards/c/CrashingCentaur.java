@@ -53,7 +53,7 @@ import mage.constants.Zone;
  *
  * @author cbt33
  */
-public class CrashingCentaur extends CardImpl {
+public final class CrashingCentaur extends CardImpl {
 
     public CrashingCentaur(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");

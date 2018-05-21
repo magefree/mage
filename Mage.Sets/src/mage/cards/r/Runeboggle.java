@@ -40,7 +40,7 @@ import mage.target.TargetSpell;
  *
  * @author Loki
  */
-public class Runeboggle extends CardImpl {
+public final class Runeboggle extends CardImpl {
 
     public Runeboggle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");

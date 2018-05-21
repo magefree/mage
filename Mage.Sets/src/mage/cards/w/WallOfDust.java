@@ -47,7 +47,7 @@ import mage.game.permanent.Permanent;
  *
  * @author L_J (based on LevelX2)
  */
-public class WallOfDust extends CardImpl {
+public final class WallOfDust extends CardImpl {
 
     public WallOfDust(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");

@@ -47,7 +47,7 @@ import mage.game.permanent.token.KorAllyToken;
  *
  * @author LevelX2
  */
-public class OathOfGideon extends CardImpl {
+public final class OathOfGideon extends CardImpl {
 
     public OathOfGideon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}");

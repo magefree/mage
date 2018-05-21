@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author North
  */
-public class GorgonFlail extends CardImpl {
+public final class GorgonFlail extends CardImpl {
 
     public GorgonFlail(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

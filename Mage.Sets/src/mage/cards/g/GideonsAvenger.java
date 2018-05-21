@@ -44,7 +44,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author Loki
  */
-public class GideonsAvenger extends CardImpl {
+public final class GideonsAvenger extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature an opponent controls");
 

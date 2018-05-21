@@ -50,7 +50,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author fireshoes
  */
-public class CabalExecutioner extends CardImpl {
+public final class CabalExecutioner extends CardImpl {
 
     public CabalExecutioner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");

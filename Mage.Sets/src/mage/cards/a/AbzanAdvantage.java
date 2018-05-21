@@ -41,7 +41,7 @@ import java.util.UUID;
  *
  * @author emerald000
  */
-public class AbzanAdvantage extends CardImpl {
+public final class AbzanAdvantage extends CardImpl {
 
     public AbzanAdvantage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");

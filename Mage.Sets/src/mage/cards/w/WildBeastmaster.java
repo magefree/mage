@@ -44,7 +44,7 @@ import mage.filter.StaticFilters;
  *
  * @author LevelX2
  */
-public class WildBeastmaster extends CardImpl {
+public final class WildBeastmaster extends CardImpl {
 
     private static final String EFFECT_TEXT = "each other creature you control gets +X/+X until end of turn, where X is {this}'s power";
 

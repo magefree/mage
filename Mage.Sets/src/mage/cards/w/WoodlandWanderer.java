@@ -44,7 +44,7 @@ import mage.counters.CounterType;
  *
  * @author LevelX2
  */
-public class WoodlandWanderer extends CardImpl {
+public final class WoodlandWanderer extends CardImpl {
 
     public WoodlandWanderer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ScaldingTarn extends CardImpl {
+public final class ScaldingTarn extends CardImpl {
 
     public ScaldingTarn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);

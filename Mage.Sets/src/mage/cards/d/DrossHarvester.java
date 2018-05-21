@@ -45,7 +45,7 @@ import mage.constants.TargetController;
  *
  * @author LoneFox
  */
-public class DrossHarvester extends CardImpl {
+public final class DrossHarvester extends CardImpl {
 
     public DrossHarvester(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");

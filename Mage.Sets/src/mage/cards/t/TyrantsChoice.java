@@ -43,7 +43,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class TyrantsChoice extends CardImpl {
+public final class TyrantsChoice extends CardImpl {
 
     public TyrantsChoice(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}");

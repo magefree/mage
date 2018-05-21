@@ -44,7 +44,7 @@ import mage.game.events.GameEvent;
  *
  * @author LoneFox
  */
-public class DivinePresence extends CardImpl {
+public final class DivinePresence extends CardImpl {
 
     public DivinePresence(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");

@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class SimicSkySwallower extends CardImpl {
+public final class SimicSkySwallower extends CardImpl {
 
     public SimicSkySwallower(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}{U}");

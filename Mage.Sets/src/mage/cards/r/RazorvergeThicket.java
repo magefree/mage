@@ -46,7 +46,7 @@ import mage.filter.StaticFilters;
  *
  * @author maurer.it_at_gmail.com
  */
-public class RazorvergeThicket extends CardImpl {
+public final class RazorvergeThicket extends CardImpl {
 
     public RazorvergeThicket(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, null);

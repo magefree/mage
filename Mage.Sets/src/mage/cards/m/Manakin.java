@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author loki
  */
-public class Manakin extends CardImpl {
+public final class Manakin extends CardImpl {
 
     public Manakin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}");

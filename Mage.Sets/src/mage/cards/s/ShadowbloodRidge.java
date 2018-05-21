@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class ShadowbloodRidge extends CardImpl {
+public final class ShadowbloodRidge extends CardImpl {
 
     public ShadowbloodRidge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

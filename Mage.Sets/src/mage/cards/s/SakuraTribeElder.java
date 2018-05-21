@@ -46,7 +46,7 @@ import java.util.UUID;
 /**
  * @author Loki
  */
-public class SakuraTribeElder extends CardImpl {
+public final class SakuraTribeElder extends CardImpl {
 
     public SakuraTribeElder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class DeftDuelist extends CardImpl {
+public final class DeftDuelist extends CardImpl {
 
     public DeftDuelist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{U}");

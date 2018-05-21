@@ -40,7 +40,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author Quercitron
  */
-public class Jokulhaups extends CardImpl {
+public final class Jokulhaups extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifacts, creatures, and lands");
 

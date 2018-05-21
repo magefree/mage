@@ -49,7 +49,7 @@ import mage.target.targetpointer.FixedTargets;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Sleep extends CardImpl {
+public final class Sleep extends CardImpl {
 
     public Sleep(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{U}{U}");

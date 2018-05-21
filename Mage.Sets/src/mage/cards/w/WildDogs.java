@@ -52,7 +52,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class WildDogs extends CardImpl {
+public final class WildDogs extends CardImpl {
 
     public WildDogs(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");

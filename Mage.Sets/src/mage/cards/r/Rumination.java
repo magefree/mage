@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author Styxo
  */
-public class Rumination extends CardImpl {
+public final class Rumination extends CardImpl {
 
     public Rumination(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}");

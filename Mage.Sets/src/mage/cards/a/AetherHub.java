@@ -42,7 +42,7 @@ import mage.constants.CardType;
  *
  * @author emerald000
  */
-public class AetherHub extends CardImpl {
+public final class AetherHub extends CardImpl {
 
     public AetherHub(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

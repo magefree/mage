@@ -44,7 +44,7 @@ import mage.players.Player;
  *
  * @author Plopman
  */
-public class EnsnaringBridge extends CardImpl {
+public final class EnsnaringBridge extends CardImpl {
 
     public EnsnaringBridge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");

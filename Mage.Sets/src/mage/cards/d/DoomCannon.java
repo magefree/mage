@@ -52,7 +52,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author L_J
  */
-public class DoomCannon extends CardImpl {
+public final class DoomCannon extends CardImpl {
 
     public DoomCannon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{6}");

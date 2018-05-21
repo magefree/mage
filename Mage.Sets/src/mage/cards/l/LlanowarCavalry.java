@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author michael.napoleon@gmail.com
  */
-public class LlanowarCavalry extends CardImpl {
+public final class LlanowarCavalry extends CardImpl {
 
     public LlanowarCavalry(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

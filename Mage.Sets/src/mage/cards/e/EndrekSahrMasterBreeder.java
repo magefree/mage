@@ -47,7 +47,7 @@ import mage.game.stack.Spell;
 /**
  * @author LevelX2
  */
-public class EndrekSahrMasterBreeder extends CardImpl {
+public final class EndrekSahrMasterBreeder extends CardImpl {
 
     public EndrekSahrMasterBreeder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}");

@@ -52,7 +52,7 @@ import mage.players.Player;
  *
  * @author emerald000
  */
-public class DelayingShield extends CardImpl {
+public final class DelayingShield extends CardImpl {
 
     public DelayingShield(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}");

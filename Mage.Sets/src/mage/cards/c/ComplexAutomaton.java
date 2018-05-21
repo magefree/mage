@@ -46,7 +46,7 @@ import mage.filter.common.FilterControlledPermanent;
  *
  * @author TheElk801
  */
-public class ComplexAutomaton extends CardImpl {
+public final class ComplexAutomaton extends CardImpl {
 
     public ComplexAutomaton(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");

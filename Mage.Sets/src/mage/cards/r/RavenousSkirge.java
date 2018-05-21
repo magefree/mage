@@ -42,7 +42,7 @@ import mage.constants.Duration;
  *
  * @author Loki
  */
-public class RavenousSkirge extends CardImpl {
+public final class RavenousSkirge extends CardImpl {
 
     public RavenousSkirge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

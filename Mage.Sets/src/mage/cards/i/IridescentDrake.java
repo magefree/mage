@@ -51,7 +51,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author TheElk801
  */
-public class IridescentDrake extends CardImpl {
+public final class IridescentDrake extends CardImpl {
 
     public IridescentDrake(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");

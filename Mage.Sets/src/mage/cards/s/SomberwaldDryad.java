@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class SomberwaldDryad extends CardImpl {
+public final class SomberwaldDryad extends CardImpl {
 
     public SomberwaldDryad(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

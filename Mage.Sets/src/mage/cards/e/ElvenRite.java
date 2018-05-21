@@ -39,7 +39,7 @@ import mage.target.common.TargetCreaturePermanentAmount;
  *
  * @author fireshoes
  */
-public class ElvenRite extends CardImpl {
+public final class ElvenRite extends CardImpl {
 
     public ElvenRite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{G}");

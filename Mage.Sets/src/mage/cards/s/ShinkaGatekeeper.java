@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class ShinkaGatekeeper extends CardImpl {
+public final class ShinkaGatekeeper extends CardImpl {
 
     public ShinkaGatekeeper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");

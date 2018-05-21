@@ -46,7 +46,7 @@ import mage.game.permanent.token.LlanowarElvesToken;
  *
  * @author LoneFox
  */
-public class LlanowarMentor extends CardImpl {
+public final class LlanowarMentor extends CardImpl {
 
     public LlanowarMentor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}");

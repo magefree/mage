@@ -47,7 +47,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author TheElk801
  */
-public class DinosaurStampede extends CardImpl {
+public final class DinosaurStampede extends CardImpl {
 
     private static final FilterAttackingCreature filter = new FilterAttackingCreature("Attacking creatures");
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("Dinosaurs you control");

@@ -42,7 +42,7 @@ import mage.constants.*;
  *
  * @author Loki
  */
-public class GeneralsKabuto extends CardImpl {
+public final class GeneralsKabuto extends CardImpl {
 
     public GeneralsKabuto(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");

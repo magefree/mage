@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.SupertypePredicate;
  *
  * @author LoneFox
  */
-public class DiamondFaerie extends CardImpl {
+public final class DiamondFaerie extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Snow creatures");
 

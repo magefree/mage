@@ -52,7 +52,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class TemporalAperture extends CardImpl {
+public final class TemporalAperture extends CardImpl {
 
     public TemporalAperture(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");

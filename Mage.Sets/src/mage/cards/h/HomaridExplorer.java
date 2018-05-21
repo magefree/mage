@@ -11,7 +11,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.target.TargetPlayer;
 
-public class HomaridExplorer extends CardImpl {
+public final class HomaridExplorer extends CardImpl {
 
     public HomaridExplorer(UUID ownerId, CardSetInfo cardSetInfo) {
         super(ownerId, cardSetInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");

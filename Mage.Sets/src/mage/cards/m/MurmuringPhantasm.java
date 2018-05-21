@@ -42,7 +42,7 @@ import mage.constants.SubType;
  */
 
 
-public class MurmuringPhantasm extends CardImpl {
+public final class MurmuringPhantasm extends CardImpl {
 
     public MurmuringPhantasm (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

@@ -48,7 +48,7 @@ import mage.watchers.common.CastSpellLastTurnWatcher;
  *
  * @author LevelX2
  */
-public class HardenedBerserker extends CardImpl {
+public final class HardenedBerserker extends CardImpl {
 
     public HardenedBerserker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

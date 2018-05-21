@@ -38,7 +38,7 @@ import mage.constants.CardType;
  *
  * @author magenoxx
  */
-public class CruelBargain extends CardImpl {
+public final class CruelBargain extends CardImpl {
 
     public CruelBargain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}{B}{B}");

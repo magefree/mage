@@ -49,7 +49,7 @@ import mage.players.Player;
 /**
  * @author LevelX2
  */
-public class KentaroTheSmilingCat extends CardImpl {
+public final class KentaroTheSmilingCat extends CardImpl {
 
     public KentaroTheSmilingCat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

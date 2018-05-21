@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author North
  */
-public class PyreCharger extends CardImpl {
+public final class PyreCharger extends CardImpl {
 
     public PyreCharger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{R}");

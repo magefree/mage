@@ -59,7 +59,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class BishopOfBinding extends CardImpl {
+public final class BishopOfBinding extends CardImpl {
 
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
 

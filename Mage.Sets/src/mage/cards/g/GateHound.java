@@ -46,7 +46,7 @@ import mage.filter.StaticFilters;
  *
  * @author North
  */
-public class GateHound extends CardImpl {
+public final class GateHound extends CardImpl {
 
     public GateHound(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

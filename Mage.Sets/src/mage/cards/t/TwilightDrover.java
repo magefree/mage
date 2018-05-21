@@ -50,7 +50,7 @@ import mage.game.permanent.token.SpiritWhiteToken;
  *
  * @author emerald000
  */
-public class TwilightDrover extends CardImpl {
+public final class TwilightDrover extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature token");
 

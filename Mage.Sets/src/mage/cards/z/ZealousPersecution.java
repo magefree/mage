@@ -39,7 +39,7 @@ import mage.constants.Duration;
  *
  * @author North
  */
-public class ZealousPersecution extends CardImpl {
+public final class ZealousPersecution extends CardImpl {
 
     public ZealousPersecution(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}{B}");

@@ -48,7 +48,7 @@ import mage.target.TargetPlayer;
  *
  * @author Loki
  */
-public class JundBattlemage extends CardImpl {
+public final class JundBattlemage extends CardImpl {
 
     public JundBattlemage (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

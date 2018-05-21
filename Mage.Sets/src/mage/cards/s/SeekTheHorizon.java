@@ -40,7 +40,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class SeekTheHorizon extends CardImpl {
+public final class SeekTheHorizon extends CardImpl {
 
     public SeekTheHorizon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}");

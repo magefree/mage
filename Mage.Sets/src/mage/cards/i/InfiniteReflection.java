@@ -59,7 +59,7 @@ import mage.util.functions.EmptyApplyToPermanent;
  *
  * @author noxx
  */
-public class InfiniteReflection extends CardImpl {
+public final class InfiniteReflection extends CardImpl {
 
     public InfiniteReflection(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{5}{U}");

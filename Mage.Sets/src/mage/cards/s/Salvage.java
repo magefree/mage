@@ -38,7 +38,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author fireshoes
  */
-public class Salvage extends CardImpl {
+public final class Salvage extends CardImpl {
 
     public Salvage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{G}");

@@ -42,7 +42,7 @@ import mage.target.common.TargetEnchantmentPermanent;
  *
  * @author FenrisulfrX
  */
-public class TrevasCharm extends CardImpl {
+public final class TrevasCharm extends CardImpl {
 
     public TrevasCharm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}{W}{U}");

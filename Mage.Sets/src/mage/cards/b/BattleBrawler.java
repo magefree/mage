@@ -51,7 +51,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author LevelX2
  */
-public class BattleBrawler extends CardImpl {
+public final class BattleBrawler extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("As long as you control a red or white permanent");
 

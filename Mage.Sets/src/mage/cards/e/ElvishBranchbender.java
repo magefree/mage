@@ -51,7 +51,7 @@ import mage.target.TargetPermanent;
  *
  * @author emerald000
  */
-public class ElvishBranchbender extends CardImpl {
+public final class ElvishBranchbender extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent("Forest");
     static {

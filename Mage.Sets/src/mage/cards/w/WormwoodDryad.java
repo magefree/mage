@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class WormwoodDryad extends CardImpl {
+public final class WormwoodDryad extends CardImpl {
 
     public WormwoodDryad(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");

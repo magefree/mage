@@ -48,7 +48,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author fireshoes
  */
-public class KolaghansCommand extends CardImpl {
+public final class KolaghansCommand extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact");
 

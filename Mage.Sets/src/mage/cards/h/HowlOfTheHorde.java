@@ -48,7 +48,7 @@ import mage.watchers.common.PlayerAttackedWatcher;
  *
  * @author emerald000
  */
-public class HowlOfTheHorde extends CardImpl {
+public final class HowlOfTheHorde extends CardImpl {
 
     public HowlOfTheHorde(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");

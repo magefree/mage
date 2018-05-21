@@ -63,7 +63,7 @@ import mage.target.common.TargetOpponentOrPlaneswalker;
  *
  * @author BetaSteward
  */
-public class RavagerOfTheFells extends CardImpl {
+public final class RavagerOfTheFells extends CardImpl {
 
     public RavagerOfTheFells(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "");

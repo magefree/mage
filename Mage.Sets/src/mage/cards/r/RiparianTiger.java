@@ -47,7 +47,7 @@ import mage.constants.Duration;
  *
  * @author LevelX2
  */
-public class RiparianTiger extends CardImpl {
+public final class RiparianTiger extends CardImpl {
 
     public RiparianTiger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");

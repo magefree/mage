@@ -50,7 +50,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author North
  */
-public class CraterhoofBehemoth extends CardImpl {
+public final class CraterhoofBehemoth extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 

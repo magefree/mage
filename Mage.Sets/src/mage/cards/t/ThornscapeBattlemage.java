@@ -47,7 +47,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author FenrisulfrX
  */
-public class ThornscapeBattlemage extends CardImpl {
+public final class ThornscapeBattlemage extends CardImpl {
 
     public ThornscapeBattlemage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

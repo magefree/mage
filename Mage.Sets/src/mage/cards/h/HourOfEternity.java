@@ -53,7 +53,7 @@ import mage.util.CardUtil;
  *
  * @author emerald000
  */
-public class HourOfEternity extends CardImpl {
+public final class HourOfEternity extends CardImpl {
 
     public HourOfEternity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{X}{U}{U}{U}");

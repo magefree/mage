@@ -54,7 +54,7 @@ import mage.util.CardUtil;
  *
  * @author halljared
  */
-public class InfectiousCurse extends CardImpl {
+public final class InfectiousCurse extends CardImpl {
 
     public InfectiousCurse(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"");

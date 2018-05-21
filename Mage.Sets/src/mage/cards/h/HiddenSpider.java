@@ -53,7 +53,7 @@ import java.util.UUID;
  * @author LoneFox
  *
  */
-public class HiddenSpider extends CardImpl {
+public final class HiddenSpider extends CardImpl {
 
     private static final FilterCreatureSpell filter = new FilterCreatureSpell("creature spell with flying");
 

@@ -48,7 +48,7 @@ import mage.filter.StaticFilters;
  *
  * @author KholdFuzion
  */
-public class VictualSliver extends CardImpl {
+public final class VictualSliver extends CardImpl {
 
     public VictualSliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{W}");

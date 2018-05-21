@@ -41,7 +41,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author North
  */
-public class RememberTheFallen extends CardImpl {
+public final class RememberTheFallen extends CardImpl {
 
     private static final FilterArtifactCard filterArtifact = new FilterArtifactCard("artifact card from your graveyard");
 

@@ -52,7 +52,7 @@ import mage.target.common.TargetCardInHand;
 /**
  * @author fireshoes
  */
-public class Outbreak extends CardImpl {
+public final class Outbreak extends CardImpl {
 
     private static final FilterCard filterLand = new FilterCard("a Swamp card");
 

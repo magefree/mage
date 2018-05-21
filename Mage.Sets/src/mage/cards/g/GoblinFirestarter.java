@@ -45,7 +45,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author fireshoes
  */
-public class GoblinFirestarter extends CardImpl {
+public final class GoblinFirestarter extends CardImpl {
 
     public GoblinFirestarter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");

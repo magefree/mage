@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Jgod
  */
-public class VodalianZombie extends CardImpl {
+public final class VodalianZombie extends CardImpl {
 
     public VodalianZombie(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{B}");

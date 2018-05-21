@@ -56,7 +56,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author L_J
  */
-public class SpittingSlug extends CardImpl {
+public final class SpittingSlug extends CardImpl {
 
     public SpittingSlug(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");

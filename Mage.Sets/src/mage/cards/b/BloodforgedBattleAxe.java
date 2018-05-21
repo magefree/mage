@@ -50,7 +50,7 @@ import java.util.UUID;
  *
  * @author TheElk801
  */
-public class BloodforgedBattleAxe extends CardImpl {
+public final class BloodforgedBattleAxe extends CardImpl {
 
     public BloodforgedBattleAxe(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");

@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author KholdFuzion
  */
-public class MightSliver extends CardImpl {
+public final class MightSliver extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("All Sliver creatures");
 

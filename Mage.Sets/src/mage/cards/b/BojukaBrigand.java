@@ -42,7 +42,7 @@ import mage.counters.CounterType;
  *
  * @author North
  */
-public class BojukaBrigand extends CardImpl {
+public final class BojukaBrigand extends CardImpl {
 
     public BojukaBrigand(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

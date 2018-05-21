@@ -41,7 +41,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author LoneFox
  */
-public class AngelicRenewal extends CardImpl {
+public final class AngelicRenewal extends CardImpl {
 
     public AngelicRenewal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");

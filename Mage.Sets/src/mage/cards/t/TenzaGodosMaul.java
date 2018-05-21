@@ -51,7 +51,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  * @author LevelX
  */
 
-public class TenzaGodosMaul extends CardImpl {
+public final class TenzaGodosMaul extends CardImpl {
 
     private static final String rule1 = "As long as it's legendary, it gets an additional +2/+2";
     private static final String rule2 = "As long as it's red, it has trample.";

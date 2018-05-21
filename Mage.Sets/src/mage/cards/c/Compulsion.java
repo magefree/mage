@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author Jgod
  */
-public class Compulsion extends CardImpl {
+public final class Compulsion extends CardImpl {
 
     public Compulsion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}");

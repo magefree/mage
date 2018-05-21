@@ -41,7 +41,7 @@ import mage.constants.Duration;
  *
  * @author LevelX2
  */
-public class PrideOfConquerors extends CardImpl {
+public final class PrideOfConquerors extends CardImpl {
 
     public PrideOfConquerors(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}");

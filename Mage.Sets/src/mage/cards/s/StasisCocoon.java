@@ -47,7 +47,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author Plopman
  */
-public class StasisCocoon extends CardImpl {
+public final class StasisCocoon extends CardImpl {
 
     public StasisCocoon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");

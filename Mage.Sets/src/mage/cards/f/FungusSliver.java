@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author emerald000
  */
-public class FungusSliver extends CardImpl {
+public final class FungusSliver extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
     static {

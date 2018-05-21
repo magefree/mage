@@ -41,7 +41,7 @@ import mage.target.common.TargetEnchantmentPermanent;
  *
  * @author North
  */
-public class AuraMutation extends CardImpl {
+public final class AuraMutation extends CardImpl {
 
     public AuraMutation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}{W}");

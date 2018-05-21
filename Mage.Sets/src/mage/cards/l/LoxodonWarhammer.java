@@ -45,7 +45,7 @@ import mage.constants.*;
  *
  * @author anonymous
  */
-public class LoxodonWarhammer extends CardImpl {
+public final class LoxodonWarhammer extends CardImpl {
 
     public LoxodonWarhammer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

@@ -55,7 +55,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author jeffwadsworth
  */
-public class DragonlordsPrerogative extends CardImpl {
+public final class DragonlordsPrerogative extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("a Dragon card from your hand");
 

@@ -51,7 +51,7 @@ import mage.game.permanent.token.TreasureToken;
  *
  * @author TheElk801
  */
-public class RevelInRiches extends CardImpl {
+public final class RevelInRiches extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature an opponent controls");
     private static final FilterPermanent filter2 = new FilterPermanent("Treasures");

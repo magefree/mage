@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author LoneFox
  */
-public class WindreaperFalcon extends CardImpl {
+public final class WindreaperFalcon extends CardImpl {
 
     public WindreaperFalcon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{G}");

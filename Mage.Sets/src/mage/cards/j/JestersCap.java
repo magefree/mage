@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author fireshoes
  */
-public class JestersCap extends CardImpl {
+public final class JestersCap extends CardImpl {
 
     public JestersCap(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");

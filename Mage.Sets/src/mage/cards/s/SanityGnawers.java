@@ -42,7 +42,7 @@ import mage.target.TargetPlayer;
  *
  * @author jeffwadsworth
  */
-public class SanityGnawers extends CardImpl {
+public final class SanityGnawers extends CardImpl {
 
     public SanityGnawers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{R}");

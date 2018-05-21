@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author North
  */
-public class DeathHoodCobra extends CardImpl {
+public final class DeathHoodCobra extends CardImpl {
 
     public DeathHoodCobra(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

@@ -54,7 +54,7 @@ import mage.players.Player;
  *
  * @author spjspj
  */
-public class JumboImp extends CardImpl {
+public final class JumboImp extends CardImpl {
 
     public JumboImp(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");

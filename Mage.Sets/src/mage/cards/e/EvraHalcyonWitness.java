@@ -52,7 +52,7 @@ import mage.players.Player;
  *
  * @author TheElk801
  */
-public class EvraHalcyonWitness extends CardImpl {
+public final class EvraHalcyonWitness extends CardImpl {
 
     public EvraHalcyonWitness(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");

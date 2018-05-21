@@ -63,7 +63,7 @@ import mage.filter.predicate.mageobject.SupertypePredicate;
  *
  * @author LevelX2
  */
-public class MyriadLandscape extends CardImpl {
+public final class MyriadLandscape extends CardImpl {
 
     public MyriadLandscape(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

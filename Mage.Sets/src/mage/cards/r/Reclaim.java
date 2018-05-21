@@ -38,7 +38,7 @@ import mage.target.common.TargetCardInYourGraveyard;
 /**
  * @author Loki
  */
-public class Reclaim extends CardImpl {
+public final class Reclaim extends CardImpl {
 
     public Reclaim(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");

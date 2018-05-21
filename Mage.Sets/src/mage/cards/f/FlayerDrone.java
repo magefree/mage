@@ -48,7 +48,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author fireshoes
  */
-public class FlayerDrone extends CardImpl {
+public final class FlayerDrone extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another colorless creature");
     

@@ -48,7 +48,7 @@ import mage.target.common.TargetOpponent;
 /**
  * @author North
  */
-public class FactOrFiction extends CardImpl {
+public final class FactOrFiction extends CardImpl {
 
     public FactOrFiction(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{U}");

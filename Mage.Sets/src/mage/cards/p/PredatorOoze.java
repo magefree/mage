@@ -43,7 +43,7 @@ import mage.counters.CounterType;
  *
  * @author BetaSteward
  */
-public class PredatorOoze extends CardImpl {
+public final class PredatorOoze extends CardImpl {
 
     public PredatorOoze(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{G}{G}");

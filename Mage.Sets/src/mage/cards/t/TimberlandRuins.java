@@ -41,7 +41,7 @@ import mage.constants.CardType;
  *
  * @author Plopman
  */
-public class TimberlandRuins extends CardImpl {
+public final class TimberlandRuins extends CardImpl {
 
     public TimberlandRuins(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

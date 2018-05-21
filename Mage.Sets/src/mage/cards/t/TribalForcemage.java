@@ -50,7 +50,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author Styxo
  */
-public class TribalForcemage extends CardImpl {
+public final class TribalForcemage extends CardImpl {
 
     public TribalForcemage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");

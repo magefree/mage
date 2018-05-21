@@ -42,7 +42,7 @@ import mage.target.TargetPermanent;
  *
  * @author TheElk801
  */
-public class Avalanche extends CardImpl {
+public final class Avalanche extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("snow lands");
 

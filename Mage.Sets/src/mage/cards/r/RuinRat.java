@@ -43,7 +43,7 @@ import mage.target.common.TargetCardInOpponentsGraveyard;
  *
  * @author nickymikail
  */
-public class RuinRat extends CardImpl {
+public final class RuinRat extends CardImpl {
 
     public RuinRat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");

@@ -47,7 +47,7 @@ import mage.players.Player;
 /**
  * @author Loki
  */
-public class GeistOfSaintTraft extends CardImpl {
+public final class GeistOfSaintTraft extends CardImpl {
 
     public GeistOfSaintTraft(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{U}");

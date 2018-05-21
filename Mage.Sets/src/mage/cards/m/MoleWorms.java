@@ -46,7 +46,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LoneFox
  */
-public class MoleWorms extends CardImpl {
+public final class MoleWorms extends CardImpl {
 
     public MoleWorms(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

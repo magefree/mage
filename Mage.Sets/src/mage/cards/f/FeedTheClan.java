@@ -39,7 +39,7 @@ import mage.constants.CardType;
  *
  * @author LevelX2
  */
-public class FeedTheClan extends CardImpl {
+public final class FeedTheClan extends CardImpl {
 
     public FeedTheClan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}");

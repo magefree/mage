@@ -44,7 +44,7 @@ import mage.target.common.TargetNonlandPermanent;
  *
  * @author LevelX2
  */
-public class Aethersnipe extends CardImpl {
+public final class Aethersnipe extends CardImpl {
 
     public Aethersnipe(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}");

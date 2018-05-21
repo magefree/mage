@@ -41,7 +41,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author North
  */
-public class ArtifactMutation extends CardImpl {
+public final class ArtifactMutation extends CardImpl {
 
     public ArtifactMutation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}{G}");

@@ -42,7 +42,7 @@ import mage.filter.StaticFilters;
 /**
  * @author Loki
  */
-public class KamiOfTheHunt extends CardImpl {
+public final class KamiOfTheHunt extends CardImpl {
 
     public KamiOfTheHunt(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

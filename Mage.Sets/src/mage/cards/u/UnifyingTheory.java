@@ -47,7 +47,7 @@ import mage.players.Player;
  * @author cbt33, Level_X2 (Horn of Plenty)
  */
 
-public class UnifyingTheory extends CardImpl {
+public final class UnifyingTheory extends CardImpl {
 
     public UnifyingTheory(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}");

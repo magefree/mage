@@ -51,7 +51,7 @@ import mage.target.TargetSpell;
  *
  * @author LevelX2
  */
-public class MausoleumWanderer extends CardImpl {
+public final class MausoleumWanderer extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("another Spirit");
 

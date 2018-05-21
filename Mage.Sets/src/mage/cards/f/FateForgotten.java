@@ -40,7 +40,7 @@ import java.util.UUID;
  *
  * @author fireshoes
  */
-public class FateForgotten extends CardImpl {
+public final class FateForgotten extends CardImpl {
 
     public FateForgotten(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");

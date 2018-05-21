@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LoneFox
  */
-public class GossamerChains extends CardImpl {
+public final class GossamerChains extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("unblocked creature");
 

@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 /**
  * @author Styxo
  */
-public class NoContest extends CardImpl {
+public final class NoContest extends CardImpl {
 
     public NoContest(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{G}");

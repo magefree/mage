@@ -51,7 +51,7 @@ import mage.target.common.TargetPermanentOrPlayer;
  *
  * @author Styxo
  */
-public class SkyshipPlunderer extends CardImpl {
+public final class SkyshipPlunderer extends CardImpl {
 
     public SkyshipPlunderer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");

@@ -54,7 +54,7 @@ import mage.players.Player;
  *
  * @author spjspj
  */
-public class SidewinderNaga extends CardImpl {
+public final class SidewinderNaga extends CardImpl {
 
     public SidewinderNaga(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");

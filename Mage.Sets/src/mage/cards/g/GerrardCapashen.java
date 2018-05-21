@@ -48,7 +48,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author FenrisulfrX
  */
-public class GerrardCapashen extends CardImpl {
+public final class GerrardCapashen extends CardImpl {
 
     public GerrardCapashen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");

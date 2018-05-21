@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author LevelX2 & L_J
  */
-public class Cryptwailing extends CardImpl {
+public final class Cryptwailing extends CardImpl {
 
     public Cryptwailing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{B}");

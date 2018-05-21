@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author Backfir3
  */
-public class KarmicGuide extends CardImpl {
+public final class KarmicGuide extends CardImpl {
 
     public KarmicGuide(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");

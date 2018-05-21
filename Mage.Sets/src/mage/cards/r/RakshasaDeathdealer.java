@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class RakshasaDeathdealer extends CardImpl {
+public final class RakshasaDeathdealer extends CardImpl {
 
     public RakshasaDeathdealer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{G}");

@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 /**
  * @author Loki
  */
-public class BogGnarr extends CardImpl {
+public final class BogGnarr extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("a black spell");
 

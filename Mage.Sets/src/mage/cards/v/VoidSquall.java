@@ -39,7 +39,7 @@ import mage.target.common.TargetNonlandPermanent;
  *
  * @author LevelX2
  */
-public class VoidSquall extends CardImpl {
+public final class VoidSquall extends CardImpl {
 
     public VoidSquall(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{U}");

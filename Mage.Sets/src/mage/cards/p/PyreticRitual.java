@@ -38,7 +38,7 @@ import mage.constants.CardType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PyreticRitual extends CardImpl {
+public final class PyreticRitual extends CardImpl {
 
     public PyreticRitual(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");

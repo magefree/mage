@@ -56,7 +56,7 @@ import mage.util.CardUtil;
  *
  * @author emerald000
  */
-public class EmrakulThePromisedEnd extends CardImpl {
+public final class EmrakulThePromisedEnd extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("instants");
 

@@ -47,7 +47,7 @@ import mage.counters.CounterType;
  *
  * @author dustinconrad
  */
-public class AvenRiftwatcher extends CardImpl {
+public final class AvenRiftwatcher extends CardImpl {
 
     public AvenRiftwatcher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

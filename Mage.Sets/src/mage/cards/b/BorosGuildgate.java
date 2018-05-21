@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class BorosGuildgate extends CardImpl {
+public final class BorosGuildgate extends CardImpl {
 
     public BorosGuildgate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

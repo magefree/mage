@@ -44,7 +44,7 @@ import mage.players.Player;
  *
  * @author North
  */
-public class TreasureHunt extends CardImpl {
+public final class TreasureHunt extends CardImpl {
 
     public TreasureHunt(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{U}");

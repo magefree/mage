@@ -46,7 +46,7 @@ import mage.filter.common.FilterCreatureCard;
  *
  * @author North
  */
-public class Bonehoard extends CardImpl {
+public final class Bonehoard extends CardImpl {
 
     public Bonehoard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");

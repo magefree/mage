@@ -39,7 +39,7 @@ import mage.constants.CardType;
  *
  * @author emerald000
  */
-public class RadiantFountain extends CardImpl {
+public final class RadiantFountain extends CardImpl {
 
     public RadiantFountain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class UrgeToFeed extends CardImpl {
+public final class UrgeToFeed extends CardImpl {
 
 
     public UrgeToFeed(UUID ownerId, CardSetInfo setInfo) {

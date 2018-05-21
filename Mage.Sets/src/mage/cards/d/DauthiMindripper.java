@@ -44,7 +44,7 @@ import mage.constants.SubType;
  *
  * @author LoneFox
  */
-public class DauthiMindripper extends CardImpl {
+public final class DauthiMindripper extends CardImpl {
 
     public DauthiMindripper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

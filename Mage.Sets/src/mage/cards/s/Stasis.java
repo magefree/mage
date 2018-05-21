@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author jeffwadsworth, edited by L_J
  */
-public class Stasis extends CardImpl {
+public final class Stasis extends CardImpl {
 
     public Stasis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}");

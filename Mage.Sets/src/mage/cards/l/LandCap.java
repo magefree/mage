@@ -51,7 +51,7 @@ import mage.counters.CounterType;
  *
  * @author Luna Skyrise
  */
-public class LandCap extends CardImpl {
+public final class LandCap extends CardImpl {
 
     public LandCap(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

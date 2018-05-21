@@ -52,7 +52,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class MikaeusTheUnhallowed extends CardImpl {
+public final class MikaeusTheUnhallowed extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Human creatures");
 

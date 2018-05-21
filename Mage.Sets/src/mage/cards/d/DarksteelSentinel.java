@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class DarksteelSentinel extends CardImpl {
+public final class DarksteelSentinel extends CardImpl {
 
     public DarksteelSentinel (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{6}");

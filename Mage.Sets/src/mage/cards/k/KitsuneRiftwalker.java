@@ -42,7 +42,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author LevelX
  */
-public class KitsuneRiftwalker extends CardImpl {
+public final class KitsuneRiftwalker extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Spirits and from Arcane");
 

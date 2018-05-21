@@ -53,7 +53,7 @@ import java.util.UUID;
  *
  * @author fireshoes
  */
-public class Floodchaser extends CardImpl {
+public final class Floodchaser extends CardImpl {
 
     public Floodchaser(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}");

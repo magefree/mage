@@ -47,7 +47,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author Backfir3
  */
-public class JovialEvil extends CardImpl {
+public final class JovialEvil extends CardImpl {
 
     public JovialEvil(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");

@@ -42,7 +42,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author LevelX2
  */
-public class SeedsOfRenewal extends CardImpl {
+public final class SeedsOfRenewal extends CardImpl {
 
     public SeedsOfRenewal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{6}{G}");

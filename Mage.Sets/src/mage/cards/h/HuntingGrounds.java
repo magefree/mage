@@ -47,7 +47,7 @@ import mage.filter.common.FilterCreatureCard;
  *
  * @author LoneFox
  */
-public class HuntingGrounds extends CardImpl {
+public final class HuntingGrounds extends CardImpl {
 
     public HuntingGrounds(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}{W}");

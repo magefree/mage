@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author TheElk801
  */
-public class DuskLegionDreadnought extends CardImpl {
+public final class DuskLegionDreadnought extends CardImpl {
 
     public DuskLegionDreadnought(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");

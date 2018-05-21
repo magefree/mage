@@ -55,7 +55,7 @@ import mage.watchers.common.CreaturesDiedWatcher;
  *
  * @author jeffwadsworth
  */
-public class BontuTheGlorified extends CardImpl {
+public final class BontuTheGlorified extends CardImpl {
 
     public BontuTheGlorified(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");

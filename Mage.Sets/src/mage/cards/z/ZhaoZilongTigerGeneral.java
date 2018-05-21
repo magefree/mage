@@ -43,7 +43,7 @@ import mage.constants.SuperType;
  *
  * @author LoneFox
  */
-public class ZhaoZilongTigerGeneral extends CardImpl {
+public final class ZhaoZilongTigerGeneral extends CardImpl {
 
     public ZhaoZilongTigerGeneral(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");

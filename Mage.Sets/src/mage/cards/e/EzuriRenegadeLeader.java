@@ -50,7 +50,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author maurer.it_at_gmail.com
  */
-public class EzuriRenegadeLeader extends CardImpl {
+public final class EzuriRenegadeLeader extends CardImpl {
 
     private static final FilterCreaturePermanent elfFilter = new FilterCreaturePermanent("Elf creatures");
     private static final FilterControlledCreaturePermanent notEzuri = new FilterControlledCreaturePermanent();

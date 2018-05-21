@@ -57,7 +57,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Styxo
  */
-public class ShowOfDominance extends CardImpl {
+public final class ShowOfDominance extends CardImpl {
 
     public ShowOfDominance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{G}");

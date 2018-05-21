@@ -52,7 +52,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 
 
-public class WeaponSurge extends CardImpl {
+public final class WeaponSurge extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("All creature you control");
     static {

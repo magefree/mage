@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author jeffwadsworth
  */
-public class Conflux extends CardImpl {
+public final class Conflux extends CardImpl {
 
     public Conflux(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{W}{U}{B}{R}{G}");

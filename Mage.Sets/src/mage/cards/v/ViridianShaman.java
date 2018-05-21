@@ -44,7 +44,7 @@ import mage.target.TargetPermanent;
  *
  * @author Loki
  */
-public class ViridianShaman extends CardImpl {
+public final class ViridianShaman extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact");
 

@@ -84,7 +84,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class BaneAlleyBroker extends CardImpl {
+public final class BaneAlleyBroker extends CardImpl {
 
     public BaneAlleyBroker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{B}");

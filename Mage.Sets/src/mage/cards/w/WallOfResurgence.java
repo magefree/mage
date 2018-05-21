@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class WallOfResurgence extends CardImpl {
+public final class WallOfResurgence extends CardImpl {
 
     public WallOfResurgence(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

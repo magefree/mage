@@ -61,7 +61,7 @@ import java.util.UUID;
  *
  * @author jeffwadsworth, TheElk801
  */
-public class HakimLoreweaver extends CardImpl {
+public final class HakimLoreweaver extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("target Aura card from your graveyard");
 

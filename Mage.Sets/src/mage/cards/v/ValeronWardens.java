@@ -46,7 +46,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class ValeronWardens extends CardImpl {
+public final class ValeronWardens extends CardImpl {
 
     public ValeronWardens(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

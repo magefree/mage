@@ -40,7 +40,7 @@ import mage.target.TargetPlayer;
  *
  * @author Loki
  */
-public class GethsVerdict extends CardImpl {
+public final class GethsVerdict extends CardImpl {
 
     public GethsVerdict(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{B}{B}");

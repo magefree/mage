@@ -50,7 +50,7 @@ import mage.target.TargetPlayer;
  *
  * @author jeffwadsworth
  */
-public class MerrowBonegnawer extends CardImpl {
+public final class MerrowBonegnawer extends CardImpl {
 
     private UUID exileId = UUID.randomUUID();
 

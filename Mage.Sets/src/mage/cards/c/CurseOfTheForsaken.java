@@ -52,7 +52,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class CurseOfTheForsaken extends CardImpl {
+public final class CurseOfTheForsaken extends CardImpl {
 
     public CurseOfTheForsaken(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}");

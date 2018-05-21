@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.ChosenSubtypePredicate;
  *
  * @author Saga
  */
-public class KindredDiscovery extends CardImpl {
+public final class KindredDiscovery extends CardImpl {
 
     public KindredDiscovery(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{U}{U}");

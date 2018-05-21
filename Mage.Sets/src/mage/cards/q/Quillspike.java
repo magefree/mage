@@ -49,7 +49,7 @@ import mage.target.TargetPermanent;
  * @author jeffwadsworth
 
  */
-public class Quillspike extends CardImpl {
+public final class Quillspike extends CardImpl {
 
     public Quillspike(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B/G}");

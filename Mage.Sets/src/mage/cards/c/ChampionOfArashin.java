@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class ChampionOfArashin extends CardImpl {
+public final class ChampionOfArashin extends CardImpl {
 
     public ChampionOfArashin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

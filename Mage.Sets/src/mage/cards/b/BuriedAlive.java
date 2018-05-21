@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author cbt33, plopman (Entomb)
  */
-public class BuriedAlive extends CardImpl {
+public final class BuriedAlive extends CardImpl {
 
     
     public BuriedAlive(UUID ownerId, CardSetInfo setInfo) {

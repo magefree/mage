@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author FenrisulfrX
  */
-public class DarigaazsCharm extends CardImpl {
+public final class DarigaazsCharm extends CardImpl {
 
     public DarigaazsCharm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}{R}{G}");

@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author L_J
  */
-public class ReaverAmbush extends CardImpl {
+public final class ReaverAmbush extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 3 or less");
 

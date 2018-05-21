@@ -38,7 +38,7 @@ import mage.target.common.TargetAttackingOrBlockingCreature;
  *
  * @author fireshoes
  */
-public class GideonsReproach extends CardImpl {
+public final class GideonsReproach extends CardImpl {
 
     public GideonsReproach(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");

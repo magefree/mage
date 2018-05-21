@@ -47,7 +47,7 @@ import mage.watchers.Watcher;
  *
  * @author TheElk801
  */
-public class MultanisPresence extends CardImpl {
+public final class MultanisPresence extends CardImpl {
 
     public MultanisPresence(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{G}");

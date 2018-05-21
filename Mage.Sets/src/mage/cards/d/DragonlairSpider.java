@@ -42,7 +42,7 @@ import mage.game.permanent.token.InsectToken;
  *
  * @author LevelX2
  */
-public class DragonlairSpider extends CardImpl {
+public final class DragonlairSpider extends CardImpl {
 
     public DragonlairSpider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}{G}{G}");

@@ -55,7 +55,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author jeffwadsworth & L_J
  */
-public class Stangg extends CardImpl {
+public final class Stangg extends CardImpl {
 
     public Stangg(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{G}");

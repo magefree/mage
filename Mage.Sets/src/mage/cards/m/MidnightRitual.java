@@ -48,7 +48,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author Skyler Sell
  */
-public class MidnightRitual extends CardImpl {
+public final class MidnightRitual extends CardImpl {
 
     public MidnightRitual(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{2}{B}");

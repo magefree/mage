@@ -50,7 +50,7 @@ import java.util.UUID;
  * @author LoneFox
 
  */
-public class SwordOfTheAnimist extends CardImpl {
+public final class SwordOfTheAnimist extends CardImpl {
 
     public SwordOfTheAnimist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

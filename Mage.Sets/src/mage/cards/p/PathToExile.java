@@ -48,7 +48,7 @@ import java.util.UUID;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PathToExile extends CardImpl {
+public final class PathToExile extends CardImpl {
 
     public PathToExile(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");

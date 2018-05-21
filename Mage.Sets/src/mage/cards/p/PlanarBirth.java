@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author emerald000
  */
-public class PlanarBirth extends CardImpl {
+public final class PlanarBirth extends CardImpl {
 
     public PlanarBirth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{W}");

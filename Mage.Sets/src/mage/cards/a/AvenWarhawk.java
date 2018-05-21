@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author LoneFox
  */
-public class AvenWarhawk extends CardImpl {
+public final class AvenWarhawk extends CardImpl {
 
     public AvenWarhawk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");

@@ -42,7 +42,7 @@ import mage.constants.TargetController;
  *
  * @author LevelX2
  */
-public class Sangrophage extends CardImpl {
+public final class Sangrophage extends CardImpl {
 
     public Sangrophage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{B}");

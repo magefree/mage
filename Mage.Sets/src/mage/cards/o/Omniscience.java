@@ -39,7 +39,7 @@ import mage.constants.Zone;
  *
  * @author North
  */
-public class Omniscience extends CardImpl {
+public final class Omniscience extends CardImpl {
 
     public Omniscience(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{7}{U}{U}{U}");

@@ -54,7 +54,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Quercitron
  */
-public class KirdChieftain extends CardImpl {
+public final class KirdChieftain extends CardImpl {
     
     private static final String rule = "{this} gets +1/+1 as long as you control a Forest";
     private static final FilterLandPermanent filter = new FilterLandPermanent("a Forest");

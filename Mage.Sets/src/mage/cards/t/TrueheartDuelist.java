@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class TrueheartDuelist extends CardImpl {
+public final class TrueheartDuelist extends CardImpl {
 
     public TrueheartDuelist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");

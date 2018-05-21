@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author North
  */
-public class DaruWarchief extends CardImpl {
+public final class DaruWarchief extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Soldier spells");
     private static final FilterCreaturePermanent filterCreatures = new FilterCreaturePermanent("Soldier creatures");

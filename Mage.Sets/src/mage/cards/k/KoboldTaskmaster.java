@@ -42,7 +42,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author jeffwadsworth
  */
-public class KoboldTaskmaster extends CardImpl {
+public final class KoboldTaskmaster extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Kobold creatures you control");
     

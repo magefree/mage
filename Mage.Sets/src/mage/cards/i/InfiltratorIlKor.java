@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author LoneFox
  */
-public class InfiltratorIlKor extends CardImpl {
+public final class InfiltratorIlKor extends CardImpl {
 
     public InfiltratorIlKor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");

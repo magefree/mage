@@ -52,7 +52,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author fireshoes
  */
-public class SigardaHeronsGrace extends CardImpl {
+public final class SigardaHeronsGrace extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Humans you control");
 

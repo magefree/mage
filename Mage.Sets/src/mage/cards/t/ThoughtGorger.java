@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class ThoughtGorger extends CardImpl {
+public final class ThoughtGorger extends CardImpl {
 
     public ThoughtGorger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");

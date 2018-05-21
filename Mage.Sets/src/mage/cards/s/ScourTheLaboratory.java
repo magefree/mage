@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class ScourTheLaboratory extends CardImpl {
+public final class ScourTheLaboratory extends CardImpl {
 
     public ScourTheLaboratory(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{U}{U}");

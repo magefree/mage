@@ -41,7 +41,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class NorwoodRiders extends CardImpl {
+public final class NorwoodRiders extends CardImpl {
 
     public NorwoodRiders(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

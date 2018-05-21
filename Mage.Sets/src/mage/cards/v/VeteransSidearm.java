@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author emerald000
  */
-public class VeteransSidearm extends CardImpl {
+public final class VeteransSidearm extends CardImpl {
 
     public VeteransSidearm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

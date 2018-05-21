@@ -52,7 +52,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author fireshoes
  */
-public class SanctifierOfSouls extends CardImpl {
+public final class SanctifierOfSouls extends CardImpl {
 
     private static final FilterPermanent filter = new FilterCreaturePermanent("another creature");
 

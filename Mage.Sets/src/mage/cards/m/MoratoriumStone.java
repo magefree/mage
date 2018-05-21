@@ -55,7 +55,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author TheElk801
  */
-public class MoratoriumStone extends CardImpl {
+public final class MoratoriumStone extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("nonland card from a graveyard");
 

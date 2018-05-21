@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author Backfir3
  */
-public class UnworthyDead extends CardImpl {
+public final class UnworthyDead extends CardImpl {
 
     public UnworthyDead(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

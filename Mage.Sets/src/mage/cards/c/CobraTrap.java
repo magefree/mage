@@ -52,7 +52,7 @@ import java.util.UUID;
 /**
  * @author Rafbill
  */
-public class CobraTrap extends CardImpl {
+public final class CobraTrap extends CardImpl {
 
     public CobraTrap(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{4}{G}{G}");

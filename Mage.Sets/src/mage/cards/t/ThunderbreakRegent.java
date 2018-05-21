@@ -50,7 +50,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class ThunderbreakRegent extends CardImpl {
+public final class ThunderbreakRegent extends CardImpl {
 
     public ThunderbreakRegent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");

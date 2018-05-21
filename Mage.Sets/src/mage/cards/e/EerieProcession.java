@@ -42,7 +42,7 @@ import java.util.UUID;
 /**
  * @author Loki
  */
-public class EerieProcession extends CardImpl {
+public final class EerieProcession extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Arcane card");
 

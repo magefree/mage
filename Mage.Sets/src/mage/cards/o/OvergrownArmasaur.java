@@ -43,7 +43,7 @@ import mage.game.permanent.token.SaprolingToken;
  *
  * @author JayDi85
  */
-public class OvergrownArmasaur extends CardImpl {
+public final class OvergrownArmasaur extends CardImpl {
 
     public OvergrownArmasaur(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");

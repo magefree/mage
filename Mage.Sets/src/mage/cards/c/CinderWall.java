@@ -43,7 +43,7 @@ import mage.constants.SubType;
  *
  * @author dustinconrad
  */
-public class CinderWall extends CardImpl {
+public final class CinderWall extends CardImpl {
 
     public CinderWall(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}");

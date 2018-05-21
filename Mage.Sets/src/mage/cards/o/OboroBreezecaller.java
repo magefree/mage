@@ -49,7 +49,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author Loki
  */
-public class OboroBreezecaller extends CardImpl {
+public final class OboroBreezecaller extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("land");
 

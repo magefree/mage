@@ -45,7 +45,7 @@ import mage.constants.Zone;
  * @author LoneFox
 
  */
-public class CeruleanSphinx extends CardImpl {
+public final class CeruleanSphinx extends CardImpl {
 
     public CeruleanSphinx(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{U}");

@@ -42,7 +42,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author LoneFox
  */
-public class CadaverousBloom extends CardImpl {
+public final class CadaverousBloom extends CardImpl {
 
     public CadaverousBloom(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{B}{G}");

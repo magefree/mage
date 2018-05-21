@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class AlphaTyrranax extends CardImpl {
+public final class AlphaTyrranax extends CardImpl {
 
     public AlphaTyrranax(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");

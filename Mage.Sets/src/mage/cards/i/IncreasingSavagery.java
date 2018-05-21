@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author BetaSteward
  */
-public class IncreasingSavagery extends CardImpl {
+public final class IncreasingSavagery extends CardImpl {
 
     public IncreasingSavagery(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}{G}");

@@ -42,7 +42,7 @@ import mage.filter.common.FilterLandPermanent;
  *
  * @author fireshoes
  */
-public class WuWarship extends CardImpl {
+public final class WuWarship extends CardImpl {
 
     public WuWarship(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

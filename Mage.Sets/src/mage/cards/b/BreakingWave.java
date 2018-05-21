@@ -47,7 +47,7 @@ import mage.game.permanent.Permanent;
  * @author LoneFox
  *
  */
-public class BreakingWave extends CardImpl {
+public final class BreakingWave extends CardImpl {
 
     public BreakingWave(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{U}{U}");

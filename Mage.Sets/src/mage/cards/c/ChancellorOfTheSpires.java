@@ -55,7 +55,7 @@ import mage.target.common.TargetCardInOpponentsGraveyard;
  *
  * @author BetaSteward
  */
-public class ChancellorOfTheSpires extends CardImpl {
+public final class ChancellorOfTheSpires extends CardImpl {
 
     private static final String abilityText = "at the beginning of the first upkeep, each opponent puts the top seven cards of their library into their graveyard";
 

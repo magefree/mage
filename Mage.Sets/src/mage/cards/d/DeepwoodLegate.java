@@ -50,7 +50,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author fireshoes
  */
-public class DeepwoodLegate extends CardImpl {
+public final class DeepwoodLegate extends CardImpl {
 
     private static final FilterPermanent filterForest = new FilterPermanent();
     private static final FilterPermanent filterSwamp = new FilterPermanent();

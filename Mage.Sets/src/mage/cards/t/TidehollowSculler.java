@@ -55,7 +55,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class TidehollowSculler extends CardImpl {
+public final class TidehollowSculler extends CardImpl {
 
     public TidehollowSculler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{W}{B}");

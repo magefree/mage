@@ -50,7 +50,7 @@ import mage.filter.common.FilterAttackingCreature;
  *
  * @author BursegSardaukar
  */
-public class RabbleRouser extends CardImpl {
+public final class RabbleRouser extends CardImpl {
 
     public RabbleRouser(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");

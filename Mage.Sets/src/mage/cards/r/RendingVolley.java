@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class RendingVolley extends CardImpl {
+public final class RendingVolley extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("white or blue creature");
 

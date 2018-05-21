@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class MassPolymorph extends CardImpl {
+public final class MassPolymorph extends CardImpl {
 
     public MassPolymorph(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{U}");

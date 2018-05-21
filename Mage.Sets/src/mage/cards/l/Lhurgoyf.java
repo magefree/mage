@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author Plopman
  */
-public class Lhurgoyf extends CardImpl {
+public final class Lhurgoyf extends CardImpl {
 
     public Lhurgoyf(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");

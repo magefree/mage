@@ -43,7 +43,7 @@ import mage.game.permanent.token.EldraziScionToken;
  *
  * @author fireshoes
  */
-public class IncubatorDrone extends CardImpl {
+public final class IncubatorDrone extends CardImpl {
 
     public IncubatorDrone(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");

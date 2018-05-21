@@ -47,7 +47,7 @@ import mage.game.permanent.Permanent;
  *
  * @author jeffwadsworth
  */
-public class HazeFrog extends CardImpl {
+public final class HazeFrog extends CardImpl {
 
     public HazeFrog(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");

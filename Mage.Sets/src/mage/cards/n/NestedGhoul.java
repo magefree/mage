@@ -45,7 +45,7 @@ import mage.game.permanent.token.ZombieToken;
  *
  * @author Loki
  */
-public class NestedGhoul extends CardImpl {
+public final class NestedGhoul extends CardImpl {
 
     public NestedGhoul(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");

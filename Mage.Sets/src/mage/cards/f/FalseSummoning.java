@@ -39,7 +39,7 @@ import mage.target.TargetSpell;
  *
  * @author Jgod
  */
-public class FalseSummoning extends CardImpl {
+public final class FalseSummoning extends CardImpl {
 
     public FalseSummoning(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");

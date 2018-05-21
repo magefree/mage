@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author Loki
  */
-public class ElspethTirel extends CardImpl {
+public final class ElspethTirel extends CardImpl {
 
     public ElspethTirel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{W}{W}");

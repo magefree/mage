@@ -46,7 +46,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class UnstableFrontier extends CardImpl {
+public final class UnstableFrontier extends CardImpl {
 
     public UnstableFrontier(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

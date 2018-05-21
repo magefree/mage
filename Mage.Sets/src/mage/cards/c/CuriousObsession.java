@@ -57,7 +57,7 @@ import mage.watchers.common.AttackedThisTurnWatcher;
  *
  * @author LevelX2
  */
-public class CuriousObsession extends CardImpl {
+public final class CuriousObsession extends CardImpl {
 
     public CuriousObsession(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{U}");

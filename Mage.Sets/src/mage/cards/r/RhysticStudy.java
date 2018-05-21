@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author Quercitron
  */
-public class RhysticStudy extends CardImpl {
+public final class RhysticStudy extends CardImpl {
 
     public RhysticStudy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");

@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author markedagain
  */
-public class TidalBore extends CardImpl {
+public final class TidalBore extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("an Island");
 

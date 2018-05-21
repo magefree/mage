@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class WydwenTheBitingGale extends CardImpl {
+public final class WydwenTheBitingGale extends CardImpl {
 
     public WydwenTheBitingGale(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{B}");

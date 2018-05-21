@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author North
  */
-public class ScarredVinebreeder extends CardImpl {
+public final class ScarredVinebreeder extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Elf card from your graveyard");
 

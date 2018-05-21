@@ -48,7 +48,7 @@ import mage.target.common.TargetOpponentsCreaturePermanent;
  *
  * @author Styxo
  */
-public class ImpulsiveWager extends CardImpl {
+public final class ImpulsiveWager extends CardImpl {
 
     public ImpulsiveWager(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{R}");

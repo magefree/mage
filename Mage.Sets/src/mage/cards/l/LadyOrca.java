@@ -39,7 +39,7 @@ import mage.constants.SuperType;
  *
  * @author North
  */
-public class LadyOrca extends CardImpl {
+public final class LadyOrca extends CardImpl {
 
     public LadyOrca(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}{R}");

@@ -41,7 +41,7 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
 
-public class GlimpseOfNature extends CardImpl {
+public final class GlimpseOfNature extends CardImpl {
 
     public GlimpseOfNature (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{G}");

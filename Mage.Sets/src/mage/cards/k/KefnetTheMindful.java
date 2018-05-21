@@ -57,7 +57,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class KefnetTheMindful extends CardImpl {
+public final class KefnetTheMindful extends CardImpl {
 
     public KefnetTheMindful(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");

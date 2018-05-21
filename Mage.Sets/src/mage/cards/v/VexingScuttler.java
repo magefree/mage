@@ -48,7 +48,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class VexingScuttler extends CardImpl {
+public final class VexingScuttler extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("instant or sorcery card from your graveyard");
 

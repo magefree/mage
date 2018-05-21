@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author LoneFox
  */
-public class WeiNightRaiders extends CardImpl {
+public final class WeiNightRaiders extends CardImpl {
 
     public WeiNightRaiders(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");

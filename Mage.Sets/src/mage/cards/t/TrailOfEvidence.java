@@ -41,7 +41,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author fireshoes
  */
-public class TrailOfEvidence extends CardImpl {
+public final class TrailOfEvidence extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("an instant or sorcery spell");
 

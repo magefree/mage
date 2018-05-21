@@ -41,7 +41,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class Crawlspace extends CardImpl {
+public final class Crawlspace extends CardImpl {
 
     public Crawlspace(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

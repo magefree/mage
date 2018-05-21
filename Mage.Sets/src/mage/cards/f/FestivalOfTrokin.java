@@ -40,7 +40,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author fireshoes
  */
-public class FestivalOfTrokin extends CardImpl {
+public final class FestivalOfTrokin extends CardImpl {
 
     public FestivalOfTrokin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{W}");

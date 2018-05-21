@@ -49,7 +49,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author L_J
  */
-public class Reap extends CardImpl {
+public final class Reap extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent("black permanents");
     

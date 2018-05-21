@@ -42,7 +42,7 @@ import mage.counters.CounterType;
  *
  * @author fireshoes
  */
-public class SengirBats extends CardImpl {
+public final class SengirBats extends CardImpl {
 
     public SengirBats(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");

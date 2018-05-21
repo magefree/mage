@@ -46,7 +46,7 @@ import mage.target.TargetSpell;
  *
  * @author LevelX2
  */
-public class OppressiveWill extends CardImpl {
+public final class OppressiveWill extends CardImpl {
 
     public OppressiveWill(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");

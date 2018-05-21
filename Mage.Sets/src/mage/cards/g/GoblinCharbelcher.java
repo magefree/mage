@@ -48,7 +48,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Plopman
  */
-public class GoblinCharbelcher extends CardImpl {
+public final class GoblinCharbelcher extends CardImpl {
 
     public GoblinCharbelcher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");

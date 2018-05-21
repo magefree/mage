@@ -46,7 +46,7 @@ import mage.game.events.GameEvent;
  *
  * @author LoneFox
  */
-public class LightningSerpent extends CardImpl {
+public final class LightningSerpent extends CardImpl {
 
     public LightningSerpent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{X}{R}");

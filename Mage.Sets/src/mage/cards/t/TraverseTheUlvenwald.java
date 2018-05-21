@@ -46,7 +46,7 @@ import java.util.UUID;
  *
  * @author fireshoes
  */
-public class TraverseTheUlvenwald extends CardImpl {
+public final class TraverseTheUlvenwald extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("a creature or land card");
 

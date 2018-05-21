@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author jonubuu
  */
-public class StinkweedImp extends CardImpl {
+public final class StinkweedImp extends CardImpl {
 
     public StinkweedImp(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

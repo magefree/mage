@@ -47,7 +47,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author emerald000
  */
-public class SandstoneOracle extends CardImpl {
+public final class SandstoneOracle extends CardImpl {
 
     public SandstoneOracle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{7}");

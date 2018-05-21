@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInOpponentsGraveyard;
  *
  * @author jeffwadsworth
  */
-public class SufferThePast extends CardImpl {
+public final class SufferThePast extends CardImpl {
 
     public SufferThePast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{B}");

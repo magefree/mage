@@ -42,7 +42,7 @@ import mage.game.permanent.token.ZombieToken;
  *
  * @author LevelX2
  */
-public class RakshasaGravecaller extends CardImpl {
+public final class RakshasaGravecaller extends CardImpl {
 
     public RakshasaGravecaller(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");

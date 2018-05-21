@@ -46,7 +46,7 @@ import mage.util.functions.EmptyApplyToPermanent;
  *
  * @author fireshoes
  */
-public class PermeatingMass extends CardImpl {
+public final class PermeatingMass extends CardImpl {
 
     public PermeatingMass(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");

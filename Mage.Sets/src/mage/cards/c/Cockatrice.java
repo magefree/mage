@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author Backfir3
  */
-public class Cockatrice extends CardImpl {
+public final class Cockatrice extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Wall creature");
 

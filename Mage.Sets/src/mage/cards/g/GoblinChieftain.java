@@ -47,7 +47,7 @@ import mage.filter.StaticFilters;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class GoblinChieftain extends CardImpl {
+public final class GoblinChieftain extends CardImpl {
 
     public GoblinChieftain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");

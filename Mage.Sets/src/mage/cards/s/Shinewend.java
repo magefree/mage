@@ -49,7 +49,7 @@ import mage.target.common.TargetEnchantmentPermanent;
  *
  * @author Loki
  */
-public class Shinewend extends CardImpl {
+public final class Shinewend extends CardImpl {
 
     public Shinewend(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

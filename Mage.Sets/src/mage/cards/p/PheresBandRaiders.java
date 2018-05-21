@@ -43,7 +43,7 @@ import mage.game.permanent.token.CentaurEnchantmentCreatureToken;
  *
  * @author LevelX2
  */
-public class PheresBandRaiders extends CardImpl {
+public final class PheresBandRaiders extends CardImpl {
 
     public PheresBandRaiders(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}");

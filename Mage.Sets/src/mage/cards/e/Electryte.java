@@ -47,7 +47,7 @@ import mage.game.permanent.Permanent;
  *
  * @author rystan
  */
-public class Electryte extends CardImpl {
+public final class Electryte extends CardImpl {
 
     public Electryte(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");

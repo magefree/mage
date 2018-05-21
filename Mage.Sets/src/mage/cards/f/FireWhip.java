@@ -48,7 +48,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Plopman
  */
-public class FireWhip extends CardImpl {
+public final class FireWhip extends CardImpl {
 
     public FireWhip(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{R}");

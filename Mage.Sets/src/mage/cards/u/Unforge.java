@@ -47,7 +47,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author wetterlicht
  */
-public class Unforge extends CardImpl {
+public final class Unforge extends CardImpl {
     
     private static FilterArtifactPermanent filter = new FilterArtifactPermanent("equipment");
     

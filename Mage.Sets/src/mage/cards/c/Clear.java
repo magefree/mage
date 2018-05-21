@@ -41,7 +41,7 @@ import mage.target.common.TargetEnchantmentPermanent;
  *
  * @author Backfir3
  */
-public class Clear extends CardImpl {
+public final class Clear extends CardImpl {
 
     public Clear(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");

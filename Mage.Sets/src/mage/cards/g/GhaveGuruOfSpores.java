@@ -56,7 +56,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Backfir3
  */
-public class GhaveGuruOfSpores extends CardImpl {
+public final class GhaveGuruOfSpores extends CardImpl {
 
     public GhaveGuruOfSpores(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{B}{G}");

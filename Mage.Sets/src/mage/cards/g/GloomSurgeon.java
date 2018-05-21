@@ -47,7 +47,7 @@ import mage.players.Player;
 /**
  * @author noxx
  */
-public class GloomSurgeon extends CardImpl {
+public final class GloomSurgeon extends CardImpl {
 
     public GloomSurgeon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

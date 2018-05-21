@@ -48,7 +48,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author TheElk801
  */
-public class SecondSight extends CardImpl {
+public final class SecondSight extends CardImpl {
 
     public SecondSight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}");

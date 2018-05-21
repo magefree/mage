@@ -47,7 +47,7 @@ import mage.filter.common.FilterOpponentsCreaturePermanent;
  *
  * @author Styxo
  */
-public class TheBattleOfGeonosis extends CardImpl {
+public final class TheBattleOfGeonosis extends CardImpl {
 
     public TheBattleOfGeonosis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{X}{R}{R}");

@@ -51,7 +51,7 @@ import mage.watchers.Watcher;
  *
  * @author LevelX2
  */
-public class TapestryOfTheAges extends CardImpl {
+public final class TapestryOfTheAges extends CardImpl {
 
     public TapestryOfTheAges(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");

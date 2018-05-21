@@ -41,7 +41,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class MarbleChalice extends CardImpl {
+public final class MarbleChalice extends CardImpl {
 
     public MarbleChalice (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}{W}");

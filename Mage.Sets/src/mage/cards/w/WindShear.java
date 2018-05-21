@@ -42,7 +42,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  *
  * @author L_J
  */
-public class WindShear extends CardImpl {
+public final class WindShear extends CardImpl {
     
     private static final FilterAttackingCreature filter = new FilterAttackingCreature("Attacking creatures with flying");
     

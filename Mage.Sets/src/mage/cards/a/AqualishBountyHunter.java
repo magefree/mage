@@ -42,7 +42,7 @@ import mage.target.TargetPlayer;
  *
  * @author Styxo
  */
-public class AqualishBountyHunter extends CardImpl {
+public final class AqualishBountyHunter extends CardImpl {
 
     public AqualishBountyHunter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");

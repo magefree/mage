@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class PegasusCharger extends CardImpl {
+public final class PegasusCharger extends CardImpl {
 
     public PegasusCharger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

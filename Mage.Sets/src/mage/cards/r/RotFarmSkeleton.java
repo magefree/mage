@@ -47,7 +47,7 @@ import mage.constants.Zone;
  */
 
 
-public class RotFarmSkeleton extends CardImpl {
+public final class RotFarmSkeleton extends CardImpl {
 
     public RotFarmSkeleton (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{G}");

@@ -45,7 +45,7 @@ import mage.filter.StaticFilters;
  *
  * @author caldover
  */
-public class GoringCeratops extends CardImpl {
+public final class GoringCeratops extends CardImpl {
 
     public GoringCeratops(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{W}{W}");

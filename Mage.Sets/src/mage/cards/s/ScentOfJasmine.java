@@ -48,7 +48,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author TheElk801
  */
-public class ScentOfJasmine extends CardImpl {
+public final class ScentOfJasmine extends CardImpl {
 
     public ScentOfJasmine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{W}");

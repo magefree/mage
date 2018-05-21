@@ -51,7 +51,7 @@ import mage.game.stack.Spell;
  *
  * @author LevelX2
  */
-public class Witchstalker extends CardImpl {
+public final class Witchstalker extends CardImpl {
 
     public Witchstalker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");

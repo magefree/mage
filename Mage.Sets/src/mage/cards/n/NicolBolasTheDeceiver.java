@@ -54,7 +54,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class NicolBolasTheDeceiver extends CardImpl {
+public final class NicolBolasTheDeceiver extends CardImpl {
 
     public NicolBolasTheDeceiver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{5}{U}{B}{R}");

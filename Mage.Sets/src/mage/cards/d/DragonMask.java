@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Quercitron
  */
-public class DragonMask extends CardImpl {
+public final class DragonMask extends CardImpl {
 
     public DragonMask(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

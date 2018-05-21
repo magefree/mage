@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class WoollyThoctar extends CardImpl {
+public final class WoollyThoctar extends CardImpl {
 
     public WoollyThoctar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{G}{W}");

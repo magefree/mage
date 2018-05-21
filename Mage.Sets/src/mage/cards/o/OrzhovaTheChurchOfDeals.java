@@ -45,7 +45,7 @@ import mage.target.TargetPlayer;
  *
  * @author Loki
  */
-public class OrzhovaTheChurchOfDeals extends CardImpl {
+public final class OrzhovaTheChurchOfDeals extends CardImpl {
 
     public OrzhovaTheChurchOfDeals(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

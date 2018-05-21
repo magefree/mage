@@ -43,7 +43,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author TheElk801
  */
-public class SpitefulBully extends CardImpl {
+public final class SpitefulBully extends CardImpl {
 
     public SpitefulBully(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");

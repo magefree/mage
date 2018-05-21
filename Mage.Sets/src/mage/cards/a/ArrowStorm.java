@@ -42,7 +42,7 @@ import mage.watchers.common.PlayerAttackedWatcher;
  *
  * @author LevelX2
  */
-public class ArrowStorm extends CardImpl {
+public final class ArrowStorm extends CardImpl {
 
     public ArrowStorm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");

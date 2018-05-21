@@ -39,7 +39,7 @@ import mage.target.TargetPlayer;
  *
  * @author klayhamn
  */
-public class SurgingDementia extends CardImpl {
+public final class SurgingDementia extends CardImpl {
 
     public SurgingDementia(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}");

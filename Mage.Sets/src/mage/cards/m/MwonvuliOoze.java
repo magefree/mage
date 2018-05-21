@@ -49,7 +49,7 @@ import mage.game.Game;
  *
  * @author LoneFox
  */
-public class MwonvuliOoze extends CardImpl {
+public final class MwonvuliOoze extends CardImpl {
 
     public MwonvuliOoze(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");

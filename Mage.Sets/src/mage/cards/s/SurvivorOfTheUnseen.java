@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author TheElk801
  */
-public class SurvivorOfTheUnseen extends CardImpl {
+public final class SurvivorOfTheUnseen extends CardImpl {
 
     public SurvivorOfTheUnseen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");

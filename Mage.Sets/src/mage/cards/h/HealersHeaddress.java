@@ -55,7 +55,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Plopman
  */
-public class HealersHeaddress extends CardImpl {
+public final class HealersHeaddress extends CardImpl {
 
     public HealersHeaddress(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

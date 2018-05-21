@@ -56,7 +56,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class StalkingLeonin extends CardImpl {
+public final class StalkingLeonin extends CardImpl {
 
     static final String SECRET_OPPONENT = "_secOpp";
     static final String SECRET_OWNER = "_secOwn";

@@ -46,7 +46,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author intimidatingant
  */
-public class PyreheartWolf extends CardImpl {
+public final class PyreheartWolf extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures you control");
 

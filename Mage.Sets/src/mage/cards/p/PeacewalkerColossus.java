@@ -50,7 +50,7 @@ import java.util.UUID;
 /**
  * @author JRHerlehy
  */
-public class PeacewalkerColossus extends CardImpl {
+public final class PeacewalkerColossus extends CardImpl {
 
     private static final FilterControlledArtifactPermanent filter = new FilterControlledArtifactPermanent("another target vehicle");
 

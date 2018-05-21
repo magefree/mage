@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class Gloomwidow extends CardImpl {
+public final class Gloomwidow extends CardImpl {
 
     public Gloomwidow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

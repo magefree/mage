@@ -41,7 +41,7 @@ import mage.watchers.common.LifeLossOtherFromCombatWatcher;
  *
  * @author Styxo
  */
-public class BatheInBacta extends CardImpl {
+public final class BatheInBacta extends CardImpl {
 
     public BatheInBacta(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}");

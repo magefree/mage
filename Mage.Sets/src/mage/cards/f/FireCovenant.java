@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanentAmount;
  *
  * @author magenoxx
  */
-public class FireCovenant extends CardImpl {
+public final class FireCovenant extends CardImpl {
 
     public FireCovenant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{B}{R}");

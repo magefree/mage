@@ -43,7 +43,7 @@ import mage.players.Player;
  *
  * @author spjspj
  */
-public class BoxOfFreerangeGoblins extends CardImpl {
+public final class BoxOfFreerangeGoblins extends CardImpl {
 
     public BoxOfFreerangeGoblins(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{R}{R}");

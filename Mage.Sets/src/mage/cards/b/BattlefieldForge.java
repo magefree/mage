@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class BattlefieldForge extends CardImpl {
+public final class BattlefieldForge extends CardImpl {
 
     public BattlefieldForge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

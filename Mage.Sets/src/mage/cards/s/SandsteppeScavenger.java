@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class SandsteppeScavenger extends CardImpl {
+public final class SandsteppeScavenger extends CardImpl {
 
     public SandsteppeScavenger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");

@@ -39,7 +39,7 @@ import mage.game.permanent.token.CallTheSkyBreakerElementalToken;
  *
  * @author jeffwadsworth
  */
-public class CallTheSkybreaker extends CardImpl {
+public final class CallTheSkybreaker extends CardImpl {
 
     public CallTheSkybreaker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{U/R}{U/R}");

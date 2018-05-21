@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class GrindingStation extends CardImpl {
+public final class GrindingStation extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("an artifact");
     static {

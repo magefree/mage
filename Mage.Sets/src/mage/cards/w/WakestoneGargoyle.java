@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  *
  * @author LevelX2
  */
-public class WakestoneGargoyle extends CardImpl {
+public final class WakestoneGargoyle extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Creatures you control with defender");
     

@@ -50,7 +50,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class BragoKingEternal extends CardImpl {
+public final class BragoKingEternal extends CardImpl {
 
     public BragoKingEternal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{U}");

@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class IllusionaryServant extends CardImpl {
+public final class IllusionaryServant extends CardImpl {
 
     public IllusionaryServant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{U}");

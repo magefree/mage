@@ -44,7 +44,7 @@ import mage.counters.CounterType;
  *
  * @author Loki
  */
-public class VividGrove extends CardImpl {
+public final class VividGrove extends CardImpl {
 
     public VividGrove(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

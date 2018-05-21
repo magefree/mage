@@ -54,7 +54,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author TheElk801
  */
-public class KrovikanHorror extends CardImpl {
+public final class KrovikanHorror extends CardImpl {
 
     public KrovikanHorror(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");

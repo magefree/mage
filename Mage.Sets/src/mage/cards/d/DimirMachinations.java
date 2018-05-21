@@ -48,7 +48,7 @@ import mage.target.TargetPlayer;
  *
  * @author emerald000
  */
-public class DimirMachinations extends CardImpl {
+public final class DimirMachinations extends CardImpl {
 
     public DimirMachinations(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}");

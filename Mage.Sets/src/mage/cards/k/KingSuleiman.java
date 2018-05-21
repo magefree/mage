@@ -47,7 +47,7 @@ import mage.target.TargetPermanent;
  *
  * @author KholdFuzion
  */
-public class KingSuleiman extends CardImpl {
+public final class KingSuleiman extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Djinn or Efreet");
 

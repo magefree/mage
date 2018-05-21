@@ -51,7 +51,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward
  */
-public class ElbrusTheBindingBlade extends CardImpl {
+public final class ElbrusTheBindingBlade extends CardImpl {
 
     public ElbrusTheBindingBlade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{7}");

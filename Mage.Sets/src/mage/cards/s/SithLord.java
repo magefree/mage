@@ -47,7 +47,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Styxo
  */
-public class SithLord extends CardImpl {
+public final class SithLord extends CardImpl {
 
     private static final String rule = "with X +1/+1 counters on it, where X is the total life lost by your opponents this turn";
 

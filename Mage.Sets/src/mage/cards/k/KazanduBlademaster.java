@@ -43,7 +43,7 @@ import mage.counters.CounterType;
  *
  * @author North
  */
-public class KazanduBlademaster extends CardImpl {
+public final class KazanduBlademaster extends CardImpl {
 
     public KazanduBlademaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{W}");

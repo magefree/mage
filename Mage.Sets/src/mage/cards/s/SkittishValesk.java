@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class SkittishValesk extends CardImpl {
+public final class SkittishValesk extends CardImpl {
 
     public SkittishValesk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{R}");

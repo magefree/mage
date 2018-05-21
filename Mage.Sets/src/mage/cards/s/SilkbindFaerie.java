@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class SilkbindFaerie extends CardImpl {
+public final class SilkbindFaerie extends CardImpl {
 
     public SilkbindFaerie(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W/U}");

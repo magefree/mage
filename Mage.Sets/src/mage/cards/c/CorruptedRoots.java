@@ -47,7 +47,7 @@ import mage.target.TargetPermanent;
  *
  * @author jeffwadsworth
  */
-public class CorruptedRoots extends CardImpl {
+public final class CorruptedRoots extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Forest or Plains");
 

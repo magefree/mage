@@ -54,7 +54,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author fireshoes
  */
-public class IshkanahGrafwidow extends CardImpl {
+public final class IshkanahGrafwidow extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Spider you control");
 

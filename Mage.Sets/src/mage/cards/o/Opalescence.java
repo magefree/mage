@@ -50,7 +50,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Mitchel Stein
  */
-public class Opalescence extends CardImpl {
+public final class Opalescence extends CardImpl {
 
     public Opalescence(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}{W}");

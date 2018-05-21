@@ -41,7 +41,7 @@ import mage.target.TargetPermanent;
  *
  * @author fireshoes
  */
-public class RealityRipple extends CardImpl {
+public final class RealityRipple extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent("artifact, creature, or land");
     

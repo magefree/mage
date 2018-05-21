@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki, noxx
  */
-public class GuulDrazAssassin extends LevelerCard {
+public final class GuulDrazAssassin extends LevelerCard {
 
     public GuulDrazAssassin (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");

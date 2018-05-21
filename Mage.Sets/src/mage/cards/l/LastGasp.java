@@ -39,7 +39,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class LastGasp extends CardImpl {
+public final class LastGasp extends CardImpl {
 
     public LastGasp(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{B}");

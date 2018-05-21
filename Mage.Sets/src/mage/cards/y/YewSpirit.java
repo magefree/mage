@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author North
  */
-public class YewSpirit extends CardImpl {
+public final class YewSpirit extends CardImpl {
 
     public YewSpirit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");

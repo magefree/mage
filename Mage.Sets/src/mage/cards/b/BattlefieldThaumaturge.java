@@ -52,7 +52,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class BattlefieldThaumaturge extends CardImpl {
+public final class BattlefieldThaumaturge extends CardImpl {
 
     public BattlefieldThaumaturge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");

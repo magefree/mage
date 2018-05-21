@@ -48,7 +48,7 @@ import mage.target.TargetPlayer;
  *
  * @author emerald000
  */
-public class ThranFoundry extends CardImpl {
+public final class ThranFoundry extends CardImpl {
 
     public ThranFoundry(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");

@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Quercitron
  */
-public class SpittingDrake extends CardImpl {
+public final class SpittingDrake extends CardImpl {
 
     public SpittingDrake(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

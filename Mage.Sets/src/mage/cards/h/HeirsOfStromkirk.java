@@ -42,7 +42,7 @@ import mage.counters.CounterType;
  *
  * @author Loki
  */
-public class HeirsOfStromkirk extends CardImpl {
+public final class HeirsOfStromkirk extends CardImpl {
 
     public HeirsOfStromkirk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");

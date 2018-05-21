@@ -46,7 +46,7 @@ import mage.target.TargetPermanent;
  *
  * @author Loki
  */
-public class LuxCannon extends CardImpl {
+public final class LuxCannon extends CardImpl {
 
     public LuxCannon (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");

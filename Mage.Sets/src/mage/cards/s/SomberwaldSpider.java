@@ -44,7 +44,7 @@ import mage.counters.CounterType;
  *
  * @author Loki
  */
-public class SomberwaldSpider extends CardImpl {
+public final class SomberwaldSpider extends CardImpl {
 
     public SomberwaldSpider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");

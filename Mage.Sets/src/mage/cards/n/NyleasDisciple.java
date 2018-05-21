@@ -43,7 +43,7 @@ import mage.constants.ColoredManaSymbol;
  *
  * @author LevelX2
  */
-public class NyleasDisciple extends CardImpl {
+public final class NyleasDisciple extends CardImpl {
 
     public NyleasDisciple(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");

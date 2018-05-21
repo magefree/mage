@@ -41,7 +41,7 @@ import mage.game.permanent.token.WolfToken;
  *
  * @author fireshoes
  */
-public class PredatorsHowl extends CardImpl {
+public final class PredatorsHowl extends CardImpl {
 
     public PredatorsHowl(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{G}");

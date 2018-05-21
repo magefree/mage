@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class Reparations extends CardImpl {
+public final class Reparations extends CardImpl {
 
     public Reparations(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}{U}");

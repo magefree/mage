@@ -60,7 +60,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author emerald000
  */
-public class LinessaZephyrMage extends CardImpl {
+public final class LinessaZephyrMage extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("creature with converted mana cost X");
 

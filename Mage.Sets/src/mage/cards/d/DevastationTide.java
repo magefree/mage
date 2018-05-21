@@ -40,7 +40,7 @@ import mage.filter.common.FilterNonlandPermanent;
  *
  * @author noxx
  */
-public class DevastationTide extends CardImpl {
+public final class DevastationTide extends CardImpl {
 
     public DevastationTide(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{U}{U}");

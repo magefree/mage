@@ -44,7 +44,7 @@ import mage.game.Game;
  *
  * @author fireshoes
  */
-public class TestOfEndurance extends CardImpl {
+public final class TestOfEndurance extends CardImpl {
 
     public TestOfEndurance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}{W}");

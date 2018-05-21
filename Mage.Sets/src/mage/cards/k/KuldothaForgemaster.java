@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author North
  */
-public class KuldothaForgemaster extends CardImpl {
+public final class KuldothaForgemaster extends CardImpl {
 
     public KuldothaForgemaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");

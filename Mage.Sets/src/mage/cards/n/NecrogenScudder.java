@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class NecrogenScudder extends CardImpl {
+public final class NecrogenScudder extends CardImpl {
 
     public NecrogenScudder (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

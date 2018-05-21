@@ -40,7 +40,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Loki
  */
-public class NarrowEscape extends CardImpl {
+public final class NarrowEscape extends CardImpl {
 
     public NarrowEscape (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");

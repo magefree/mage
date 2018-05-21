@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author nigelzor
  */
-public class PlatedRootwalla extends CardImpl {
+public final class PlatedRootwalla extends CardImpl {
 
     public PlatedRootwalla(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");

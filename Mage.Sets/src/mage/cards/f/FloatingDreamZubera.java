@@ -42,7 +42,7 @@ import mage.watchers.common.ZuberasDiedWatcher;
 /**
  * @author Loki
  */
-public class FloatingDreamZubera extends CardImpl {
+public final class FloatingDreamZubera extends CardImpl {
 
     public FloatingDreamZubera(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

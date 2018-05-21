@@ -52,7 +52,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class AvatarOfFury extends CardImpl {
+public final class AvatarOfFury extends CardImpl {
 
     public AvatarOfFury(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{R}{R}");

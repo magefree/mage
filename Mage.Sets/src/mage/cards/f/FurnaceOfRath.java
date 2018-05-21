@@ -46,7 +46,7 @@ import mage.util.CardUtil;
  * @author jeffwadsworth
  *
  */
-public class FurnaceOfRath extends CardImpl {
+public final class FurnaceOfRath extends CardImpl {
 
     public FurnaceOfRath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}{R}{R}");

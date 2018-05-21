@@ -56,7 +56,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author TheElk801
  */
-public class ShalaiVoiceOfPlenty extends CardImpl {
+public final class ShalaiVoiceOfPlenty extends CardImpl {
 
     private static final FilterControlledPermanent filter1 = new FilterControlledPermanent("planeswalkers you control");
 

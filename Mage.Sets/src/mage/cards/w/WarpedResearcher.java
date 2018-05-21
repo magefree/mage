@@ -45,7 +45,7 @@ import mage.constants.Duration;
  *
  * @author TheElk801
  */
-public class WarpedResearcher extends CardImpl {
+public final class WarpedResearcher extends CardImpl {
 
     public WarpedResearcher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}");

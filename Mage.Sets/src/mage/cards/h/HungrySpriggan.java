@@ -42,7 +42,7 @@ import mage.constants.Duration;
  *
  * @author North
  */
-public class HungrySpriggan extends CardImpl {
+public final class HungrySpriggan extends CardImpl {
 
     public HungrySpriggan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

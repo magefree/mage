@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author Styxo
  */
-public class TreacherousTerrain extends CardImpl {
+public final class TreacherousTerrain extends CardImpl {
 
     public TreacherousTerrain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{6}{R}{G}");

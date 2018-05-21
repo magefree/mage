@@ -45,7 +45,7 @@ import mage.constants.Duration;
  *
  * @author Styxo
  */
-public class GustWalker extends CardImpl {
+public final class GustWalker extends CardImpl {
 
     public GustWalker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");

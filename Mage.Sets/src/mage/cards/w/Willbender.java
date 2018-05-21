@@ -46,7 +46,7 @@ import mage.target.TargetStackObject;
  *
  * @author LevelX2
  */
-public class Willbender extends CardImpl {
+public final class Willbender extends CardImpl {
 
     private static final FilterStackObject FILTER = new FilterStackObject("spell or ability with a single target");
 

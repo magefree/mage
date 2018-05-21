@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author stravant
  */
-public class PathmakerInitiate extends CardImpl {
+public final class PathmakerInitiate extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 2 or less");
 

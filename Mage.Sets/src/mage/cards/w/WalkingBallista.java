@@ -50,7 +50,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author fireshoes
  */
-public class WalkingBallista extends CardImpl {
+public final class WalkingBallista extends CardImpl {
 
     public WalkingBallista(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{X}{X}");

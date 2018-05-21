@@ -52,7 +52,7 @@ import mage.players.Player;
  *
  * @author anonymous
  */
-public class MeteorCrater extends CardImpl {
+public final class MeteorCrater extends CardImpl {
 
     public MeteorCrater(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

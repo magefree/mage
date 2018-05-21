@@ -48,7 +48,7 @@ import mage.constants.Zone;
  *
  * @author cbt33
  */
-public class MysticZealot extends CardImpl {
+public final class MysticZealot extends CardImpl {
 
     public MysticZealot(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

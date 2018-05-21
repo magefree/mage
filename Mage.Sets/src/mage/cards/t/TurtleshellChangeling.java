@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Styxo
  */
-public class TurtleshellChangeling extends CardImpl {
+public final class TurtleshellChangeling extends CardImpl {
 
     public TurtleshellChangeling(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");

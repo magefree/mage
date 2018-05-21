@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class PillarOfLight extends CardImpl {
+public final class PillarOfLight extends CardImpl {
 
     static private final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with toughness 4 or greater");
 

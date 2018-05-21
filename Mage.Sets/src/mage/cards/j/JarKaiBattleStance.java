@@ -46,7 +46,7 @@ import mage.util.SubTypeList;
  *
  * @author Styxo
  */
-public class JarKaiBattleStance extends CardImpl {
+public final class JarKaiBattleStance extends CardImpl {
 
     public JarKaiBattleStance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");

@@ -48,7 +48,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author LoneFox
  */
-public class SoulcatchersAerie extends CardImpl {
+public final class SoulcatchersAerie extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("a Bird");
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("Bird creatures");

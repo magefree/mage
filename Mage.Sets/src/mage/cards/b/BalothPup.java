@@ -46,7 +46,7 @@ import mage.counters.CounterType;
  *
  * @author LevelX2
  */
-public class BalothPup extends CardImpl {
+public final class BalothPup extends CardImpl {
 
     private static final String rule = "{this} has trample as long as it has a +1/+1 counter on it";
 

@@ -55,7 +55,7 @@ import java.util.UUID;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class LilianaVess extends CardImpl {
+public final class LilianaVess extends CardImpl {
 
     public LilianaVess(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{B}{B}");

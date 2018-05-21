@@ -46,7 +46,7 @@ import mage.counters.CounterType;
  *
  * @author Loki
  */
-public class MirrodinsCore extends CardImpl {
+public final class MirrodinsCore extends CardImpl {
 
     public MirrodinsCore (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

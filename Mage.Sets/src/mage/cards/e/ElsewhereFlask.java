@@ -53,7 +53,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class ElsewhereFlask extends CardImpl {
+public final class ElsewhereFlask extends CardImpl {
 
     public ElsewhereFlask(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");

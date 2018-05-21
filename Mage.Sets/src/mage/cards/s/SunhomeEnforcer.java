@@ -49,7 +49,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author fireshoes
  */
-public class SunhomeEnforcer extends CardImpl {
+public final class SunhomeEnforcer extends CardImpl {
 
     public SunhomeEnforcer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{W}");

@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class DryadMilitant extends CardImpl {
+public final class DryadMilitant extends CardImpl {
 
     public DryadMilitant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G/W}");

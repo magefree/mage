@@ -49,7 +49,7 @@ import mage.constants.Zone;
  *
  * @author maurer.it_at_gmail.com
  */
-public class Bloodghast extends CardImpl {
+public final class Bloodghast extends CardImpl {
 
     public Bloodghast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{B}");

@@ -41,7 +41,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author jonubuu
  */
-public class FleshbagMarauder extends CardImpl {
+public final class FleshbagMarauder extends CardImpl {
 
     public FleshbagMarauder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

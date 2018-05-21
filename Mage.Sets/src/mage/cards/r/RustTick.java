@@ -46,7 +46,7 @@ import mage.target.common.TargetArtifactPermanent;
 /**
  * @author nantuko
  */
-public class RustTick extends CardImpl {
+public final class RustTick extends CardImpl {
 
     public RustTick(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");

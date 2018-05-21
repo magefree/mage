@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class GrinningIgnus extends CardImpl {
+public final class GrinningIgnus extends CardImpl {
 
     public GrinningIgnus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

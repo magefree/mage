@@ -16,7 +16,7 @@ import mage.constants.SubType;
 import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInGraveyard;
 
-public class GraveScrabbler extends CardImpl {
+public final class GraveScrabbler extends CardImpl {
 
     public GraveScrabbler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");

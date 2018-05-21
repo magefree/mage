@@ -45,7 +45,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author dustinconrad
  */
-public class SacredGround extends CardImpl {
+public final class SacredGround extends CardImpl {
 
     public SacredGround(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");

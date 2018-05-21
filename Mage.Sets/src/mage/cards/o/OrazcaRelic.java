@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class OrazcaRelic extends CardImpl {
+public final class OrazcaRelic extends CardImpl {
 
     public OrazcaRelic(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");

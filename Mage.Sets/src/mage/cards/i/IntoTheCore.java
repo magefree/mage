@@ -40,7 +40,7 @@ import mage.target.TargetPermanent;
  *
  * @author North
  */
-public class IntoTheCore extends CardImpl {
+public final class IntoTheCore extends CardImpl {
 
     public IntoTheCore(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}{R}");

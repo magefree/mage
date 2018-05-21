@@ -39,7 +39,7 @@ import mage.target.TargetSpell;
  *
  * @author North
  */
-public class RemoveSoul extends CardImpl {
+public final class RemoveSoul extends CardImpl {
 
     public RemoveSoul(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");

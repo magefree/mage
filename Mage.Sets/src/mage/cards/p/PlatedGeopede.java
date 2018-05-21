@@ -43,7 +43,7 @@ import mage.constants.Duration;
  *
  * @author Loki
  */
-public class PlatedGeopede extends CardImpl {
+public final class PlatedGeopede extends CardImpl {
 
     public PlatedGeopede (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

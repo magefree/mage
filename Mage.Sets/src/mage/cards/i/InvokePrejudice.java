@@ -50,7 +50,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author spjspj
  */
-public class InvokePrejudice extends CardImpl {
+public final class InvokePrejudice extends CardImpl {
 
     public InvokePrejudice(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{U}{U}{U}{U}");

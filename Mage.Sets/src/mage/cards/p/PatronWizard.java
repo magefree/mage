@@ -50,7 +50,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author jeffwadsworth
  */
-public class PatronWizard extends CardImpl {
+public final class PatronWizard extends CardImpl {
 
     static final private FilterControlledPermanent filter = new FilterControlledPermanent("untapped Wizard you control");
 

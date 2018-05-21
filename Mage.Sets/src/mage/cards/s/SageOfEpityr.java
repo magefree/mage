@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Plopman
  */
-public class SageOfEpityr extends CardImpl {
+public final class SageOfEpityr extends CardImpl {
 
     public SageOfEpityr(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");

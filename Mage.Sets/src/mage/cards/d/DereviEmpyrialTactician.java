@@ -57,7 +57,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class DereviEmpyrialTactician extends CardImpl {
+public final class DereviEmpyrialTactician extends CardImpl {
 
     public DereviEmpyrialTactician(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{W}{U}");

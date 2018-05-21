@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class MagefireWings extends CardImpl {
+public final class MagefireWings extends CardImpl {
 
     public MagefireWings (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{U}{R}");

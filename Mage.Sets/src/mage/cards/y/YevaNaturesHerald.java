@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author North
  */
-public class YevaNaturesHerald extends CardImpl {
+public final class YevaNaturesHerald extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("green creature spells");
 

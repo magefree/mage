@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author emerald000
  */
-public class ConvulsingLicid extends CardImpl {
+public final class ConvulsingLicid extends CardImpl {
 
     public ConvulsingLicid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

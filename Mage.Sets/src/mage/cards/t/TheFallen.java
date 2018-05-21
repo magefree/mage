@@ -48,7 +48,7 @@ import mage.watchers.Watcher;
  *
  * @author L_J
  */
-public class TheFallen extends CardImpl {
+public final class TheFallen extends CardImpl {
 
     public TheFallen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{B}{B}");

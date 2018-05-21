@@ -45,7 +45,7 @@ import mage.target.TargetPlayer;
  *
  * @author TheElk801
  */
-public class DivineCongregation extends CardImpl {
+public final class DivineCongregation extends CardImpl {
 
     public DivineCongregation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{W}");

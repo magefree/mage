@@ -46,7 +46,7 @@ import mage.game.permanent.token.Token;
  *
  * @author Loki
  */
-public class HalcyonGlaze extends CardImpl {
+public final class HalcyonGlaze extends CardImpl {
 
     public HalcyonGlaze(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}{U}");

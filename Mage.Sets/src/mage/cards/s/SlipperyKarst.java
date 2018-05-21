@@ -41,7 +41,7 @@ import mage.constants.CardType;
  *
  * @author Backfir3
  */
-public class SlipperyKarst extends CardImpl {
+public final class SlipperyKarst extends CardImpl {
 
     public SlipperyKarst(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

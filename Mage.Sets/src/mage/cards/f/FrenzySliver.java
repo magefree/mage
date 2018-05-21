@@ -51,7 +51,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class FrenzySliver extends CardImpl {
+public final class FrenzySliver extends CardImpl {
 
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("All sliver creatures");

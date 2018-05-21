@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class KorEntanglers extends CardImpl {
+public final class KorEntanglers extends CardImpl {
 
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
 

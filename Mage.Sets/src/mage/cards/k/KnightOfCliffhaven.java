@@ -46,7 +46,7 @@ import mage.constants.SubType;
  *
  * @author North, noxx
  */
-public class KnightOfCliffhaven extends LevelerCard {
+public final class KnightOfCliffhaven extends LevelerCard {
 
     public KnightOfCliffhaven(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

@@ -51,7 +51,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author TheElk801
  */
-public class RuthlessKnave extends CardImpl {
+public final class RuthlessKnave extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("three Treasures");
 

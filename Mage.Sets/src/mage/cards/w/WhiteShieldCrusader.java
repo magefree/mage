@@ -48,7 +48,7 @@ import mage.constants.Zone;
  * @author LoneFox
 
  */
-public class WhiteShieldCrusader extends CardImpl {
+public final class WhiteShieldCrusader extends CardImpl {
 
     public WhiteShieldCrusader(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{W}");

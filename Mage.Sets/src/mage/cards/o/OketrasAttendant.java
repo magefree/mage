@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author Styxo
  */
-public class OketrasAttendant extends CardImpl {
+public final class OketrasAttendant extends CardImpl {
 
     public OketrasAttendant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");

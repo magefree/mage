@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author Styxo & L_J
  */
-public class GabrielAngelfire extends CardImpl {
+public final class GabrielAngelfire extends CardImpl {
 
     public GabrielAngelfire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}{W}{W}");

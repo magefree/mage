@@ -45,7 +45,7 @@ import mage.game.permanent.token.RukhEggBirdToken;
  *
  * @author anonymous
  */
-public class RukhEgg extends CardImpl {
+public final class RukhEgg extends CardImpl {
 
     public RukhEgg(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");

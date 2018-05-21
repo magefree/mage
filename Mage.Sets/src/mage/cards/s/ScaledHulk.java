@@ -42,7 +42,7 @@ import mage.filter.StaticFilters;
  *
  * @author Loki
  */
-public class ScaledHulk extends CardImpl {
+public final class ScaledHulk extends CardImpl {
 
     public ScaledHulk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}");

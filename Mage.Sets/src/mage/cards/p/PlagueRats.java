@@ -47,7 +47,7 @@ import java.util.UUID;
  *
  * @author lopho
  */
-public class PlagueRats extends CardImpl {
+public final class PlagueRats extends CardImpl {
 
     private static final FilterCreaturePermanent plagueRatsFilter = new FilterCreaturePermanent("creatures named Plague Rats on the battlefield");
     static {

@@ -51,7 +51,7 @@ import mage.util.functions.ApplyToPermanent;
  *
  * @author jeffwadsworth
  */
-public class LazavDimirMastermind extends CardImpl {
+public final class LazavDimirMastermind extends CardImpl {
 
     public LazavDimirMastermind(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}{U}{B}{B}");

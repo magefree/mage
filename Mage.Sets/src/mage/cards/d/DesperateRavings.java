@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author North
  */
-public class DesperateRavings extends CardImpl {
+public final class DesperateRavings extends CardImpl {
 
     public DesperateRavings(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");

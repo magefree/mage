@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class Arachnoid extends CardImpl {
+public final class Arachnoid extends CardImpl {
 
     public Arachnoid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{6}");

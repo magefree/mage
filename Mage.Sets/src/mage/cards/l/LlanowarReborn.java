@@ -39,7 +39,7 @@ import mage.constants.CardType;
  *
  * @author LevelX2
  */
-public class LlanowarReborn extends CardImpl {
+public final class LlanowarReborn extends CardImpl {
 
     public LlanowarReborn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

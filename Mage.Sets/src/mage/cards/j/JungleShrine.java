@@ -41,7 +41,7 @@ import mage.constants.CardType;
  *
  * @author Loki
  */
-public class JungleShrine extends CardImpl {
+public final class JungleShrine extends CardImpl {
 
     public JungleShrine (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);

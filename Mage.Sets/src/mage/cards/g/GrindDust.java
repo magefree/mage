@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class GrindDust extends SplitCard {
+public final class GrindDust extends SplitCard {
 
     public GrindDust(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, new CardType[]{CardType.SORCERY}, "{1}{B}", "{3}{W}", SpellAbilityType.SPLIT_AFTERMATH);

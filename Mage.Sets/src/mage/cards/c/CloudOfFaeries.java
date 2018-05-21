@@ -43,7 +43,7 @@ import mage.constants.SubType;
  *
  * @author Plopman
  */
-public class CloudOfFaeries extends CardImpl {
+public final class CloudOfFaeries extends CardImpl {
 
     public CloudOfFaeries(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

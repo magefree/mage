@@ -59,7 +59,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author nantuko
  */
-public class GolemArtisan extends CardImpl {
+public final class GolemArtisan extends CardImpl {
 
     public GolemArtisan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");

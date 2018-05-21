@@ -52,7 +52,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Saga
  */
-public class CurseOfVerbosity extends CardImpl {
+public final class CurseOfVerbosity extends CardImpl {
 
     public CurseOfVerbosity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");

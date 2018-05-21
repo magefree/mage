@@ -52,7 +52,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Styxo
  */
-public class RavenousWampa extends CardImpl {
+public final class RavenousWampa extends CardImpl {
 
     static final String RAVENOUS_WAMPA_STATE_VALUE_KEY_PREFIX = "TOU_SAC_CRE";
 

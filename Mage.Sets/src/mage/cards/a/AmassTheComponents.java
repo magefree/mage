@@ -45,7 +45,7 @@ import mage.target.TargetCard;
  *
  * @author North
  */
-public class AmassTheComponents extends CardImpl {
+public final class AmassTheComponents extends CardImpl {
 
     public AmassTheComponents(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}");

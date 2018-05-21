@@ -47,7 +47,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author North
  */
-public class Hellrider extends CardImpl {
+public final class Hellrider extends CardImpl {
 
     public Hellrider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");

@@ -48,7 +48,7 @@ import mage.target.common.TargetDiscard;
  *
  * @author TheElk801
  */
-public class StrongarmTactics extends CardImpl {
+public final class StrongarmTactics extends CardImpl {
 
     public StrongarmTactics(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}");

@@ -50,7 +50,7 @@ import mage.game.permanent.Permanent;
  *
  * @author spjspj
  */
-public class SpikeCannibal extends CardImpl {
+public final class SpikeCannibal extends CardImpl {
 
     public SpikeCannibal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");

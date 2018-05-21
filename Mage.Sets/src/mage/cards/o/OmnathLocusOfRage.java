@@ -50,7 +50,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author fireshoes
  */
-public class OmnathLocusOfRage extends CardImpl {
+public final class OmnathLocusOfRage extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Elemental you control");
 

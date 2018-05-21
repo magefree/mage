@@ -47,7 +47,7 @@ import java.util.UUID;
  *
  * @author fireshoes
  */
-public class LamplighterOfSelhoff extends CardImpl {
+public final class LamplighterOfSelhoff extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("another Zombie");
 

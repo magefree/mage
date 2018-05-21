@@ -42,7 +42,7 @@ import java.util.UUID;
  *
  * @author fireshoes
  */
-public class ForsakeTheWorldly extends CardImpl {
+public final class ForsakeTheWorldly extends CardImpl {
 
     public ForsakeTheWorldly(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{W}");

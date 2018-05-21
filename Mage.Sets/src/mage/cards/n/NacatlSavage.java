@@ -40,7 +40,7 @@ import mage.filter.common.FilterArtifactCard;
  *
  * @author jonubuu
  */
-public class NacatlSavage extends CardImpl {
+public final class NacatlSavage extends CardImpl {
 
     public NacatlSavage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

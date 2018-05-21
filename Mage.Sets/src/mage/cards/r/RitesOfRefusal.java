@@ -45,7 +45,7 @@ import mage.target.TargetSpell;
  *
  * @author jeffwadsworth
  */
-public class RitesOfRefusal extends CardImpl {
+public final class RitesOfRefusal extends CardImpl {
 
     public RitesOfRefusal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");

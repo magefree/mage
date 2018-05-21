@@ -43,7 +43,7 @@ import mage.game.permanent.token.EldraziScionToken;
  *
  * @author LevelX2
  */
-public class Blisterpod extends CardImpl {
+public final class Blisterpod extends CardImpl {
 
     public Blisterpod(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}");

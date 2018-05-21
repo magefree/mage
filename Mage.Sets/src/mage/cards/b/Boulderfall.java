@@ -38,7 +38,7 @@ import mage.target.common.TargetAnyTargetAmount;
  *
  * @author Plopman
  */
-public class Boulderfall extends CardImpl {
+public final class Boulderfall extends CardImpl {
 
     public Boulderfall(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{6}{R}{R}");

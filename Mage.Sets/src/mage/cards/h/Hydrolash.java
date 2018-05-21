@@ -40,7 +40,7 @@ import mage.filter.common.FilterAttackingCreature;
  *
  * @author LevelX2
  */
-public class Hydrolash extends CardImpl {
+public final class Hydrolash extends CardImpl {
 
     public Hydrolash(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");

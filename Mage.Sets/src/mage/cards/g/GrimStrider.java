@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author Darkside-
  */
-public class GrimStrider extends CardImpl {
+public final class GrimStrider extends CardImpl {
 
     public GrimStrider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");

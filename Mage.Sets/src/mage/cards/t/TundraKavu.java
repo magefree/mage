@@ -50,7 +50,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LoneFox
  */
-public class TundraKavu extends CardImpl {
+public final class TundraKavu extends CardImpl {
 
     public TundraKavu(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");

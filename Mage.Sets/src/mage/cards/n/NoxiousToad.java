@@ -41,7 +41,7 @@ import mage.constants.TargetController;
  *
  * @author fireshoes
  */
-public class NoxiousToad extends CardImpl {
+public final class NoxiousToad extends CardImpl {
 
     public NoxiousToad(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

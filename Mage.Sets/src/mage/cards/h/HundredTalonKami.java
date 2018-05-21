@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class HundredTalonKami extends CardImpl {
+public final class HundredTalonKami extends CardImpl {
 
     public HundredTalonKami (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");

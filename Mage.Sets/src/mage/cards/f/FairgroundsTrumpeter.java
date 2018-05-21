@@ -51,7 +51,7 @@ import mage.watchers.Watcher;
 /**
  * @author spjspj
  */
-public class FairgroundsTrumpeter extends CardImpl {
+public final class FairgroundsTrumpeter extends CardImpl {
 
     public FairgroundsTrumpeter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");

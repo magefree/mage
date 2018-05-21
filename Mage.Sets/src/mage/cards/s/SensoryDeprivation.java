@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class SensoryDeprivation extends CardImpl {
+public final class SensoryDeprivation extends CardImpl {
 
     public SensoryDeprivation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{U}");

@@ -38,7 +38,7 @@ import mage.filter.common.FilterArtifactPermanent;
  *
  * @author djbrez
  */
-public class MetalFatigue extends CardImpl {
+public final class MetalFatigue extends CardImpl {
     
 
     public MetalFatigue(UUID ownerId, CardSetInfo setInfo) {

@@ -47,7 +47,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author jeffwadsworth
  */
-public class RekindledFlame extends CardImpl {
+public final class RekindledFlame extends CardImpl {
 
     static final String rule = "if an opponent has no cards in hand, you may return Rekindled Flame from your graveyard to your hand";
 

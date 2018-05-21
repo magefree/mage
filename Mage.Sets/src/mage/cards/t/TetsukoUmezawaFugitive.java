@@ -51,7 +51,7 @@ import mage.filter.predicate.mageobject.ToughnessPredicate;
  * @author JRHerlehy
  *         Created on 4/7/18.
  */
-public class TetsukoUmezawaFugitive extends CardImpl {
+public final class TetsukoUmezawaFugitive extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
 

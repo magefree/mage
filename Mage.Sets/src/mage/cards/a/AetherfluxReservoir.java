@@ -48,7 +48,7 @@ import mage.watchers.common.CastSpellLastTurnWatcher;
  *
  * @author emerald000
  */
-public class AetherfluxReservoir extends CardImpl {
+public final class AetherfluxReservoir extends CardImpl {
 
     public AetherfluxReservoir(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");

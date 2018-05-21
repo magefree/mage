@@ -50,7 +50,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author fireshoes
  */
-public class SoultetherGolem extends CardImpl {
+public final class SoultetherGolem extends CardImpl {
 
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
 

@@ -48,7 +48,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class HellkiteOverlord extends CardImpl {
+public final class HellkiteOverlord extends CardImpl {
 
     public HellkiteOverlord (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{R}{R}{G}");

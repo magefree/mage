@@ -51,7 +51,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class GahijiHonoredOne extends CardImpl {
+public final class GahijiHonoredOne extends CardImpl {
 
     public GahijiHonoredOne(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{G}{W}");

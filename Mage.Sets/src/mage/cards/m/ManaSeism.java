@@ -45,7 +45,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class ManaSeism extends CardImpl {
+public final class ManaSeism extends CardImpl {
 
     public ManaSeism(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}");

@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Styxo
  */
-public class IllusoryWrappings extends CardImpl {
+public final class IllusoryWrappings extends CardImpl {
 
     public IllusoryWrappings(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");

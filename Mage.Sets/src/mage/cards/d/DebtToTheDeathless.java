@@ -41,7 +41,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class DebtToTheDeathless extends CardImpl {
+public final class DebtToTheDeathless extends CardImpl {
 
     public DebtToTheDeathless(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{W}{W}{B}{B}");

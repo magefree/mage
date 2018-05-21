@@ -45,7 +45,7 @@ import mage.constants.SubType;
  *
  * @author North, noxx
  */
-public class SkywatcherAdept extends LevelerCard {
+public final class SkywatcherAdept extends LevelerCard {
 
     public SkywatcherAdept(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");

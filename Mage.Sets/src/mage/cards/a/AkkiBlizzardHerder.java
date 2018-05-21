@@ -42,7 +42,7 @@ import mage.filter.common.FilterControlledPermanent;
  *
  * @author Loki
  */
-public class AkkiBlizzardHerder extends CardImpl {
+public final class AkkiBlizzardHerder extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("land");
 

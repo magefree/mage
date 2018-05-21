@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  * @author jeffwadsworth
 
  */
-public class NevinyrralsDisk extends CardImpl {
+public final class NevinyrralsDisk extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent("artifacts, creatures, and enchantments");
     

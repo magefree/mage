@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author anonymous
  */
-public class ExecutionersHood extends CardImpl {
+public final class ExecutionersHood extends CardImpl {
 
     public ExecutionersHood(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

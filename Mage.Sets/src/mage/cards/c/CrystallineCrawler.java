@@ -47,7 +47,7 @@ import mage.counters.CounterType;
  *
  * @author fireshoes
  */
-public class CrystallineCrawler extends CardImpl {
+public final class CrystallineCrawler extends CardImpl {
 
     public CrystallineCrawler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");

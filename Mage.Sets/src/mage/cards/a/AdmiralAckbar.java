@@ -50,7 +50,7 @@ import mage.game.permanent.token.RebelStarshipToken;
  *
  * @author Styxo
  */
-public class AdmiralAckbar extends CardImpl {
+public final class AdmiralAckbar extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Starship creatures");
 

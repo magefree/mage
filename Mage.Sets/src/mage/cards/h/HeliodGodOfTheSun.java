@@ -49,7 +49,7 @@ import mage.game.permanent.token.HeliodGodOfTheSunToken;
  *
  * @author LevelX2
  */
-public class HeliodGodOfTheSun extends CardImpl {
+public final class HeliodGodOfTheSun extends CardImpl {
 
     public HeliodGodOfTheSun(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{3}{W}");

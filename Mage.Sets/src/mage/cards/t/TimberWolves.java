@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author L_J
  */
-public class TimberWolves extends CardImpl {
+public final class TimberWolves extends CardImpl {
 
     public TimberWolves (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");

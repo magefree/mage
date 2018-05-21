@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class TorrentOfStone extends CardImpl {
+public final class TorrentOfStone extends CardImpl {
     private static final FilterControlledLandPermanent filterSacrifice = new FilterControlledLandPermanent("two Mountains");
 
     static {

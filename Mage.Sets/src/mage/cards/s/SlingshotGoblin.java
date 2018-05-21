@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author LoneFox
 
  */
-public class SlingshotGoblin extends CardImpl {
+public final class SlingshotGoblin extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("blue creature");
 

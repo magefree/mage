@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class FieldCreeper extends CardImpl {
+public final class FieldCreeper extends CardImpl {
 
     public FieldCreeper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}");

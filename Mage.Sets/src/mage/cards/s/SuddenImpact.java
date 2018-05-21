@@ -40,7 +40,7 @@ import mage.target.TargetPlayer;
  *
  * @author emerald000
  */
-public class SuddenImpact extends CardImpl {
+public final class SuddenImpact extends CardImpl {
 
     public SuddenImpact(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{R}");

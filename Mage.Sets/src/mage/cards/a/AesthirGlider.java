@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Sir-Speshkitty
  */
-public class AesthirGlider extends CardImpl {
+public final class AesthirGlider extends CardImpl {
 
     public AesthirGlider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");

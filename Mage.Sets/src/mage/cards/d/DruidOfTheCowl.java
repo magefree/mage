@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class DruidOfTheCowl extends CardImpl {
+public final class DruidOfTheCowl extends CardImpl {
 
     public DruidOfTheCowl(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");

@@ -42,7 +42,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author LevelX2
  */
-public class CruxOfFate extends CardImpl {
+public final class CruxOfFate extends CardImpl {
 
     private static final FilterCreaturePermanent filterNonDragon = new FilterCreaturePermanent("non-Dragon creatures");
 

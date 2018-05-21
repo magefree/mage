@@ -53,7 +53,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author LevelX2
  */
-public class TragicArrogance extends CardImpl {
+public final class TragicArrogance extends CardImpl {
 
     public TragicArrogance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{W}{W}");

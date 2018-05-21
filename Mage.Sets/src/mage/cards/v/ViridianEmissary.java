@@ -43,7 +43,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class ViridianEmissary extends CardImpl {
+public final class ViridianEmissary extends CardImpl {
 
     public ViridianEmissary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

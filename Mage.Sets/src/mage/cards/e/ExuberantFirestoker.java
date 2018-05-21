@@ -48,7 +48,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
 /**
  * @author North
  */
-public class ExuberantFirestoker extends CardImpl {
+public final class ExuberantFirestoker extends CardImpl {
 
     public ExuberantFirestoker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");

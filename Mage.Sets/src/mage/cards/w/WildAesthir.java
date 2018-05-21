@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author nigelzor
  */
-public class WildAesthir extends CardImpl {
+public final class WildAesthir extends CardImpl {
 
     public WildAesthir(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

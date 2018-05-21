@@ -48,7 +48,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author fireshoes
  */
-public class MantaRay extends CardImpl {
+public final class MantaRay extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("except by blue creatures");
 

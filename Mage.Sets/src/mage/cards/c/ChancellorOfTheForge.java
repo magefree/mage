@@ -51,7 +51,7 @@ import mage.game.permanent.token.GoblinTokenWithHaste;
  *
  * @author BetaSteward
  */
-public class ChancellorOfTheForge extends CardImpl {
+public final class ChancellorOfTheForge extends CardImpl {
 
     private static String abilityText = "at the beginning of the first upkeep, create a 1/1 red Goblin creature token with haste";
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures you control");

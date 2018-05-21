@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class FireDragon extends CardImpl {
+public final class FireDragon extends CardImpl {
     
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("for each Mountain you control");
 

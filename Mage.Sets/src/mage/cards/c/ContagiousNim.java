@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class ContagiousNim extends CardImpl {
+public final class ContagiousNim extends CardImpl {
 
     public ContagiousNim (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

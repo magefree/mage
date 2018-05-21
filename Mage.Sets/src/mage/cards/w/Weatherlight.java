@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.HistoricPredicate;
  *
  * @author TheElk801
  */
-public class Weatherlight extends CardImpl {
+public final class Weatherlight extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("a historic card");
 

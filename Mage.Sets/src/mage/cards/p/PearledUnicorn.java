@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class PearledUnicorn extends CardImpl {
+public final class PearledUnicorn extends CardImpl {
 
     public PearledUnicorn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

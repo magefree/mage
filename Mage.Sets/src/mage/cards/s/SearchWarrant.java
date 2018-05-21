@@ -42,7 +42,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class SearchWarrant extends CardImpl {
+public final class SearchWarrant extends CardImpl {
 
     public SearchWarrant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{W}{U}");

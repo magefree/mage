@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author TheElk801
  */
-public class GoblinRimerunner extends CardImpl {
+public final class GoblinRimerunner extends CardImpl {
 
     public GoblinRimerunner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");

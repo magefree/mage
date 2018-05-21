@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author ayratn
  */
-public class TelJiladDefiance extends CardImpl {
+public final class TelJiladDefiance extends CardImpl {
 
     public TelJiladDefiance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}");

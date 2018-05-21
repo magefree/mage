@@ -40,7 +40,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author TheElk801
  */
-public class RallyingRoar extends CardImpl {
+public final class RallyingRoar extends CardImpl {
 
     public RallyingRoar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{W}");

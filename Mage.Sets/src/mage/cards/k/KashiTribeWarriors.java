@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author LevelX
  */
-public class KashiTribeWarriors extends CardImpl {
+public final class KashiTribeWarriors extends CardImpl {
 
     public KashiTribeWarriors(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");

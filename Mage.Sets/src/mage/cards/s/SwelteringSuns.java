@@ -40,7 +40,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author Darkside-
  */
-public class SwelteringSuns extends CardImpl {
+public final class SwelteringSuns extends CardImpl {
 
     public SwelteringSuns(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}{R}");

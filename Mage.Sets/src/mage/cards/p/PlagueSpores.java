@@ -45,7 +45,7 @@ import mage.target.common.TargetLandPermanent;
  * @author LoneFox
  *
  */
-public class PlagueSpores extends CardImpl {
+public final class PlagueSpores extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack creature");
 

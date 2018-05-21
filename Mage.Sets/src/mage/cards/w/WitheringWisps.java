@@ -54,7 +54,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author L_J
  */
-public class WitheringWisps extends CardImpl {
+public final class WitheringWisps extends CardImpl {
 
     private static final String ruleText = "At the beginning of the end step, if no creatures are on the battlefield, sacrifice {this}.";
 

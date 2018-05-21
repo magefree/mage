@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author LevelX2
  */
-public class TheGreatAurora extends CardImpl {
+public final class TheGreatAurora extends CardImpl {
 
     public TheGreatAurora(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{6}{G}{G}{G}");

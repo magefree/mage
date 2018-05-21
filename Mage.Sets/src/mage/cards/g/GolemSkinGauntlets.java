@@ -51,7 +51,7 @@ import mage.game.permanent.Permanent;
  *
  * @author North
  */
-public class GolemSkinGauntlets extends CardImpl {
+public final class GolemSkinGauntlets extends CardImpl {
 
     public GolemSkinGauntlets(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");

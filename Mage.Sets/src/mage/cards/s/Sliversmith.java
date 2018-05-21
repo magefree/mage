@@ -46,7 +46,7 @@ import mage.game.permanent.token.SliversmithToken;
  *
  * @author Luna Skyrise
  */
-public class Sliversmith extends CardImpl {
+public final class Sliversmith extends CardImpl {
 
     public Sliversmith(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");

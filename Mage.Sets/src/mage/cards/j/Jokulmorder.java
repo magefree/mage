@@ -56,7 +56,7 @@ import java.util.UUID;
  *
  * @author fireshoes
  */
-public class Jokulmorder extends CardImpl {
+public final class Jokulmorder extends CardImpl {
 
     public Jokulmorder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}{U}{U}");

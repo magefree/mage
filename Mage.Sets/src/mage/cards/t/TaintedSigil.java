@@ -46,7 +46,7 @@ import mage.watchers.common.PlayerLostLifeWatcher;
  *
  * @author jeffwadsworth
  */
-public class TaintedSigil extends CardImpl {
+public final class TaintedSigil extends CardImpl {
     
     String rule = "You gain life equal to the total life lost by all players this turn";
 

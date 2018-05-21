@@ -51,7 +51,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class JaliraMasterPolymorphist extends CardImpl {
+public final class JaliraMasterPolymorphist extends CardImpl {
 
     private static final FilterCreatureCard filterCard = new FilterCreatureCard("nonlegendary creature card");
 

@@ -42,7 +42,7 @@ import mage.constants.*;
  *
  * @author Loki
  */
-public class KavuGlider extends CardImpl {
+public final class KavuGlider extends CardImpl {
 
     public KavuGlider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

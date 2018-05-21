@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author LevelX2
  */
-public class Anarchist extends CardImpl {
+public final class Anarchist extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("sorcery card");
     static {

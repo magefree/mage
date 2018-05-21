@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class PangTongYoungPhoenix extends CardImpl {
+public final class PangTongYoungPhoenix extends CardImpl {
 
     public PangTongYoungPhoenix(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");

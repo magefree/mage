@@ -51,7 +51,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author North
  */
-public class FalkenrathAristocrat extends CardImpl {
+public final class FalkenrathAristocrat extends CardImpl {
 
     public FalkenrathAristocrat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{R}");

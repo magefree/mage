@@ -43,7 +43,7 @@ import mage.target.TargetPermanent;
  *
  * @author North, Loki
  */
-public class ArchonOfJustice extends CardImpl {
+public final class ArchonOfJustice extends CardImpl {
 
     public ArchonOfJustice(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");

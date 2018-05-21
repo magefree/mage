@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author LoneFox
  */
-public class MetathranSoldier extends CardImpl {
+public final class MetathranSoldier extends CardImpl {
 
     public MetathranSoldier(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

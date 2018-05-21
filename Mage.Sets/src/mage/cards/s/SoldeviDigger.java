@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class SoldeviDigger extends CardImpl {
+public final class SoldeviDigger extends CardImpl {
 
     public SoldeviDigger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

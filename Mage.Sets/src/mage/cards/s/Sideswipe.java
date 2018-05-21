@@ -42,7 +42,7 @@ import mage.target.TargetSpell;
  *
  * @author LevelX2
  */
-public class Sideswipe extends CardImpl {
+public final class Sideswipe extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("Arcane spell");
     static {

@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author LevelX2
  */
-public class GoldmeadowStalwart extends CardImpl {
+public final class GoldmeadowStalwart extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("a Kithkin card from your hand");
     static {

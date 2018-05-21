@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author emerald000
  */
-public class GhirapurOrrery extends CardImpl {
+public final class GhirapurOrrery extends CardImpl {
 
     public GhirapurOrrery(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");

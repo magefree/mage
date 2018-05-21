@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class ChangelingBerserker extends CardImpl {
+public final class ChangelingBerserker extends CardImpl {
 
     public ChangelingBerserker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

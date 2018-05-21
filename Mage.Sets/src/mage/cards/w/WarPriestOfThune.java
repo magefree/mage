@@ -43,7 +43,7 @@ import mage.target.common.TargetEnchantmentPermanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class WarPriestOfThune extends CardImpl {
+public final class WarPriestOfThune extends CardImpl {
 
     public WarPriestOfThune(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

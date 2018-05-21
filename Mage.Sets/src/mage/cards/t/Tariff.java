@@ -54,7 +54,7 @@ import mage.target.TargetCard;
  *
  * @author Quercitron
  */
-public class Tariff extends CardImpl {
+public final class Tariff extends CardImpl {
 
     public Tariff(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{W}");

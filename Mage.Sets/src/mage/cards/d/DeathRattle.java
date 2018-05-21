@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class DeathRattle extends CardImpl {
+public final class DeathRattle extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nongreen creature");
 

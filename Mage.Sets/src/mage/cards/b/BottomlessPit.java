@@ -39,7 +39,7 @@ import mage.constants.TargetController;
  *
  * @author dustinconrad
  */
-public class BottomlessPit extends CardImpl {
+public final class BottomlessPit extends CardImpl {
 
     public BottomlessPit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}{B}");

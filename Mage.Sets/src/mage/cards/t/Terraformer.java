@@ -62,7 +62,7 @@ import mage.players.Player;
  *
  * @author emerald000
  */
-public class Terraformer extends CardImpl {
+public final class Terraformer extends CardImpl {
 
     public Terraformer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");

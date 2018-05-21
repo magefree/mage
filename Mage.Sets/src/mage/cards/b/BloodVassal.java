@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author Backfir3
  */
-public class BloodVassal extends CardImpl {
+public final class BloodVassal extends CardImpl {
 
     public BloodVassal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

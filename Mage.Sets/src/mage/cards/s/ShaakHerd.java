@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author Styxo
  */
-public class ShaakHerd extends CardImpl {
+public final class ShaakHerd extends CardImpl {
 
     private final static FilterCard filter = new FilterCard("another target creature card");
 

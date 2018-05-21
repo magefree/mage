@@ -49,7 +49,7 @@ import mage.target.TargetPermanent;
  *
  * @author spjspj
  */
-public class ArmoryAutomaton extends CardImpl {
+public final class ArmoryAutomaton extends CardImpl {
 
     public ArmoryAutomaton(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");

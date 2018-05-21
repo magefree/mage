@@ -44,7 +44,7 @@ import mage.game.permanent.token.SerpentGeneratorSnakeToken;
  *
  * @author LoneFox
  */
-public class SerpentGenerator extends CardImpl {
+public final class SerpentGenerator extends CardImpl {
 
     public SerpentGenerator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{6}");

@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author LoneFox
  */
-public class LovisaColdeyes extends CardImpl {
+public final class LovisaColdeyes extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature that's a Barbarian, a Warrior, or a Berserker");
 

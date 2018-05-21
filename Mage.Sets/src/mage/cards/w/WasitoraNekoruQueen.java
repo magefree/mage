@@ -53,7 +53,7 @@ import mage.target.TargetPermanent;
  *
  * @author spjspj
  */
-public class WasitoraNekoruQueen extends CardImpl {
+public final class WasitoraNekoruQueen extends CardImpl {
 
     public WasitoraNekoruQueen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{R}{G}");

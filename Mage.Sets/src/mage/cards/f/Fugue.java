@@ -38,7 +38,7 @@ import mage.target.TargetPlayer;
  *
  * @author fireshoes
  */
-public class Fugue extends CardImpl {
+public final class Fugue extends CardImpl {
 
     public Fugue(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}{B}");

@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Styxo
  */
-public class UnityOfTheDroids extends CardImpl {
+public final class UnityOfTheDroids extends CardImpl {
 
     private static final FilterCreaturePermanent artifactCreatureFilter = new FilterCreaturePermanent("artifact creature");
     private static final FilterCreaturePermanent nonArtifactCreatureFilter = new FilterCreaturePermanent("nonartifact creature");

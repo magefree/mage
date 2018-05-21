@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class GrayscaledGharial extends CardImpl {
+public final class GrayscaledGharial extends CardImpl {
 
     public GrayscaledGharial (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");

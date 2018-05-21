@@ -52,7 +52,7 @@ import mage.target.targetpointer.FixedTarget;
 /**
  * @author nantuko
  */
-public class FullMoonsRise extends CardImpl {
+public final class FullMoonsRise extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Werewolf creatures");
 

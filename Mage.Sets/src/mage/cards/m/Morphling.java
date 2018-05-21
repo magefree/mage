@@ -45,7 +45,7 @@ import mage.constants.*;
  *
  * @author Loki
  */
-public class Morphling extends CardImpl {
+public final class Morphling extends CardImpl {
 
     public Morphling(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");

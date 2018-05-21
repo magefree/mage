@@ -51,7 +51,7 @@ import mage.players.Player;
  *
  * @author MarcoMarin
  */
-public class YawgmothDemon extends CardImpl {
+public final class YawgmothDemon extends CardImpl {
 
     public YawgmothDemon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}");

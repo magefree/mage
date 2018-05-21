@@ -48,7 +48,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author anonymous
  */
-public class RathsEdge extends CardImpl {
+public final class RathsEdge extends CardImpl {
     
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("a land");
 

@@ -50,7 +50,7 @@ import mage.game.permanent.Permanent;
  *
  * @author fireshoes
  */
-public class PathbreakerIbex extends CardImpl {
+public final class PathbreakerIbex extends CardImpl {
 
     public PathbreakerIbex(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");

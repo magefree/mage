@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class SabertoothWyvern extends CardImpl {
+public final class SabertoothWyvern extends CardImpl {
 
     public SabertoothWyvern(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");

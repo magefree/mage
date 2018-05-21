@@ -52,7 +52,7 @@ import mage.filter.predicate.permanent.TokenPredicate;
  *
  * @author jeffwadsworth
  */
-public class IvoryGuardians extends CardImpl {
+public final class IvoryGuardians extends CardImpl {
 
     private static final FilterPermanent controlFilter = new FilterPermanent("nontoken red permanent");
     private static final FilterCreaturePermanent boostFilter = new FilterCreaturePermanent();

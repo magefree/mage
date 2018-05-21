@@ -37,7 +37,7 @@ import mage.constants.CardType;
  *
  * @author Loki
  */
-public class RainOfEmbers extends CardImpl {
+public final class RainOfEmbers extends CardImpl {
 
     public RainOfEmbers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}");

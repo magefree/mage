@@ -45,7 +45,7 @@ import mage.game.permanent.token.ThopterColorlessToken;
  *
  * @author emerald000
  */
-public class WhirlerVirtuoso extends CardImpl {
+public final class WhirlerVirtuoso extends CardImpl {
 
     public WhirlerVirtuoso(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{R}");

@@ -39,7 +39,7 @@ import mage.constants.SuperType;
  *
  * @author North
  */
-public class TheLadyOfTheMountain extends CardImpl {
+public final class TheLadyOfTheMountain extends CardImpl {
 
     public TheLadyOfTheMountain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{G}");

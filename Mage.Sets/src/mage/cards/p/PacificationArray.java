@@ -45,7 +45,7 @@ import mage.target.TargetPermanent;
 /**
  * @author JRHerlehy
  */
-public class PacificationArray extends CardImpl {
+public final class PacificationArray extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact or creature");
 

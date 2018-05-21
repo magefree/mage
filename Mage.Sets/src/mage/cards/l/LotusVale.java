@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Luna Skyrise
  */
-public class LotusVale extends CardImpl {
+public final class LotusVale extends CardImpl {
 
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("two untapped lands");
 

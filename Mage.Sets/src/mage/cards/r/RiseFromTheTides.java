@@ -40,7 +40,7 @@ import mage.game.permanent.token.ZombieToken;
  *
  * @author fireshoes
  */
-public class RiseFromTheTides extends CardImpl {
+public final class RiseFromTheTides extends CardImpl {
 
     public RiseFromTheTides(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{U}");

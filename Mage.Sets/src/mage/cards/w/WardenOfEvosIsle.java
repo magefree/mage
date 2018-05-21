@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author LevelX2
  */
-public class WardenOfEvosIsle extends CardImpl {
+public final class WardenOfEvosIsle extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Creature spells with flying");
     static {

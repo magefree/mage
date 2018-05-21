@@ -48,7 +48,7 @@ import mage.target.TargetPermanent;
  *
  * @author spjspj
  */
-public class DeepglowSkate extends CardImpl {
+public final class DeepglowSkate extends CardImpl {
 
     public DeepglowSkate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}");

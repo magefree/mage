@@ -41,7 +41,7 @@ import mage.constants.Duration;
  *
  * @author LevelX2
  */
-public class SwellOfCourage extends CardImpl {
+public final class SwellOfCourage extends CardImpl {
 
     public SwellOfCourage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{W}{W}");

@@ -42,7 +42,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LoneFox
  */
-public class CorruptCourtOfficial extends CardImpl {
+public final class CorruptCourtOfficial extends CardImpl {
 
     public CorruptCourtOfficial(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

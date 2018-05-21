@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class NimbleInnovator extends CardImpl {
+public final class NimbleInnovator extends CardImpl {
 
     public NimbleInnovator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");

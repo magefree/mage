@@ -48,7 +48,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  * @author LoneFox
  *
  */
-public class DwarvenPatrol extends CardImpl {
+public final class DwarvenPatrol extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("a nonred spell");
 

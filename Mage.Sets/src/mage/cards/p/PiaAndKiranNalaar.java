@@ -52,7 +52,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LevelX2
  */
-public class PiaAndKiranNalaar extends CardImpl {
+public final class PiaAndKiranNalaar extends CardImpl {
 
     public PiaAndKiranNalaar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");

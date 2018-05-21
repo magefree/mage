@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class TalonTrooper extends CardImpl {
+public final class TalonTrooper extends CardImpl {
 
     public TalonTrooper (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{U}");

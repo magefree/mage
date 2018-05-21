@@ -43,7 +43,7 @@ import mage.target.TargetPlayer;
  *
  * @author fireshoes
  */
-public class GulfSquid extends CardImpl {
+public final class GulfSquid extends CardImpl {
 
     public GulfSquid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");

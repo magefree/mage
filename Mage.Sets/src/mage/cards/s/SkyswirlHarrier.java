@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class SkyswirlHarrier extends CardImpl {
+public final class SkyswirlHarrier extends CardImpl {
 
     public SkyswirlHarrier(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");

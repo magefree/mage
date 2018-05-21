@@ -49,7 +49,7 @@ import mage.target.TargetPermanent;
 /**
  * @author jeffwadsworth
  */
-public class SelkieHedgeMage extends CardImpl {
+public final class SelkieHedgeMage extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("Forests");
     private static final FilterLandPermanent filter2 = new FilterLandPermanent("Islands");

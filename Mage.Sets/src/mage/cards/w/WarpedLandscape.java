@@ -47,7 +47,7 @@ import java.util.UUID;
  *
  * @author fireshoes
  */
-public class WarpedLandscape extends CardImpl {
+public final class WarpedLandscape extends CardImpl {
 
     public WarpedLandscape(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

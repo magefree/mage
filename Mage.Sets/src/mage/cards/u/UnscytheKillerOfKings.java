@@ -57,7 +57,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author jeffwadsworth
  */
-public class UnscytheKillerOfKings extends CardImpl {
+public final class UnscytheKillerOfKings extends CardImpl {
 
     public UnscytheKillerOfKings(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{U}{B}{B}{R}");

@@ -41,7 +41,7 @@ import mage.game.permanent.token.WurmToken;
  *
  * @author magenoxx_at_gmail.com
  */
-public class RoarOfTheWurm extends CardImpl {
+public final class RoarOfTheWurm extends CardImpl {
 
     public RoarOfTheWurm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{6}{G}");

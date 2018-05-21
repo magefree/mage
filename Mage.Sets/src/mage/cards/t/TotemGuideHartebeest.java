@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author jeffwadsworth
  */
-public class TotemGuideHartebeest extends CardImpl {
+public final class TotemGuideHartebeest extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Aura card");
 

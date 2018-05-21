@@ -42,7 +42,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author North
  */
-public class MetallicMastery extends CardImpl {
+public final class MetallicMastery extends CardImpl {
 
     public MetallicMastery(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{R}");

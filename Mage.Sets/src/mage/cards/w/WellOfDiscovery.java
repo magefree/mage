@@ -45,7 +45,7 @@ import mage.filter.predicate.permanent.TappedPredicate;
  *
  * @author LoneFox
  */
-public class WellOfDiscovery extends CardImpl {
+public final class WellOfDiscovery extends CardImpl {
 
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent();
 

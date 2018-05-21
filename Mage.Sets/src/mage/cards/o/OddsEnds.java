@@ -44,7 +44,7 @@ import mage.target.TargetSpell;
 
 import java.util.UUID;
 
-public class OddsEnds extends SplitCard {
+public final class OddsEnds extends SplitCard {
 
     public OddsEnds(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}{R}", "{3}{R}{W}", SpellAbilityType.SPLIT);

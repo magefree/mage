@@ -42,7 +42,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  * @author LoneFox
 
  */
-public class ShorelineRaider extends CardImpl {
+public final class ShorelineRaider extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Kavu");
 

@@ -54,7 +54,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author North
  */
-public class XathridDemon extends CardImpl {
+public final class XathridDemon extends CardImpl {
 
     public XathridDemon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}{B}");

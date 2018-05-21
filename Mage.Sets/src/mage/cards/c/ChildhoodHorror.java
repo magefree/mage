@@ -50,7 +50,7 @@ import mage.constants.Zone;
  *
  * @author cbt33
  */
-public class ChildhoodHorror extends CardImpl {
+public final class ChildhoodHorror extends CardImpl {
 
     public ChildhoodHorror(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

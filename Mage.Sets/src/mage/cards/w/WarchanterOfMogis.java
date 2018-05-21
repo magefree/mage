@@ -44,7 +44,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class WarchanterOfMogis extends CardImpl {
+public final class WarchanterOfMogis extends CardImpl {
 
     public WarchanterOfMogis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");

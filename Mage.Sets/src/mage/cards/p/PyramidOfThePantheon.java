@@ -46,7 +46,7 @@ import mage.counters.CounterType;
  *
  * @author spjspj
  */
-public class PyramidOfThePantheon extends CardImpl {
+public final class PyramidOfThePantheon extends CardImpl {
 
     public PyramidOfThePantheon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");

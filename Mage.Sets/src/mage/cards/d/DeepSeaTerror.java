@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class DeepSeaTerror extends CardImpl {
+public final class DeepSeaTerror extends CardImpl {
 
     public DeepSeaTerror(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{U}");

@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class ShadeOfTrokair extends CardImpl {
+public final class ShadeOfTrokair extends CardImpl {
 
     public ShadeOfTrokair(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

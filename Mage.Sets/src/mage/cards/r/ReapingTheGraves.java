@@ -40,7 +40,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author Plopman
  */
-public class ReapingTheGraves extends CardImpl {
+public final class ReapingTheGraves extends CardImpl {
 
     public ReapingTheGraves(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{B}");

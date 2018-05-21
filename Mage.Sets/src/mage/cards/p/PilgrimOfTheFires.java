@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class PilgrimOfTheFires extends CardImpl {
+public final class PilgrimOfTheFires extends CardImpl {
 
     public PilgrimOfTheFires(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{7}");

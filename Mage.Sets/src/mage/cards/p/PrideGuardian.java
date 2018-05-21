@@ -41,7 +41,7 @@ import mage.constants.SubType;
 /**
  * @author Loki
  */
-public class PrideGuardian extends CardImpl {
+public final class PrideGuardian extends CardImpl {
 
     public PrideGuardian(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");

@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  * @author cbt33, BetaSteward (GraveDigger)
  */
  
-public class Scrivener extends CardImpl {
+public final class Scrivener extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("instant card from your graveyard");
     

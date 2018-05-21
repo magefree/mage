@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class DaruEncampment extends CardImpl {
+public final class DaruEncampment extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Soldier creature");
 

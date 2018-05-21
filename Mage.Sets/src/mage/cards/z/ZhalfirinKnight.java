@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class ZhalfirinKnight extends CardImpl {
+public final class ZhalfirinKnight extends CardImpl {
 
     public ZhalfirinKnight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

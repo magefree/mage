@@ -45,7 +45,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LoneFox
  */
-public class SeaSnidd extends CardImpl {
+public final class SeaSnidd extends CardImpl {
 
     public SeaSnidd(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");

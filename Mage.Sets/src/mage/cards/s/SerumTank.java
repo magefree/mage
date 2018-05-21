@@ -51,7 +51,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author CountAndromalius
  */
-public class SerumTank extends CardImpl {
+public final class SerumTank extends CardImpl {
 
     public SerumTank(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

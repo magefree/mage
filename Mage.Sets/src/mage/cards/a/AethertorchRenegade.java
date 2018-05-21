@@ -48,7 +48,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  *
  * @author LevelX2
  */
-public class AethertorchRenegade extends CardImpl {
+public final class AethertorchRenegade extends CardImpl {
 
     public AethertorchRenegade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");

@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class DarksteelPendant extends CardImpl {
+public final class DarksteelPendant extends CardImpl {
 
     public DarksteelPendant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

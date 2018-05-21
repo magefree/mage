@@ -55,7 +55,7 @@ import mage.target.TargetPermanent;
  *
  * @author L_J
  */
-public class TradeCaravan extends CardImpl {
+public final class TradeCaravan extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("basic land");
 

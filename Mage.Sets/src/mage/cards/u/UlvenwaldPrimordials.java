@@ -48,7 +48,7 @@ import mage.constants.Zone;
 /**
  * @author nantuko
  */
-public class UlvenwaldPrimordials extends CardImpl {
+public final class UlvenwaldPrimordials extends CardImpl {
 
     public UlvenwaldPrimordials(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");

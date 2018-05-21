@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author LevelX2
  */
-public class FlamekinBladewhirl extends CardImpl {
+public final class FlamekinBladewhirl extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("an Elemental card from your hand");
     static {

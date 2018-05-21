@@ -42,7 +42,7 @@ import mage.filter.common.FilterLandPermanent;
  *
  * @author elliott-king
  */
-public class Overabundance extends CardImpl {
+public final class Overabundance extends CardImpl {
 
     public Overabundance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}{G}");

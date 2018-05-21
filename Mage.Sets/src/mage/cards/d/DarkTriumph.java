@@ -46,7 +46,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author TheElk801
  */
-public class DarkTriumph extends CardImpl {
+public final class DarkTriumph extends CardImpl {
 
     private static final FilterLandPermanent filterSwamp = new FilterLandPermanent("If you control a Swamp");
 

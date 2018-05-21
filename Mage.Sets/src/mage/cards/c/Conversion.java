@@ -51,7 +51,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class Conversion extends CardImpl {
+public final class Conversion extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent(SubType.MOUNTAIN, "Mountains");
 

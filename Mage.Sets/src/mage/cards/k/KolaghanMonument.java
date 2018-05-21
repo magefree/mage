@@ -48,7 +48,7 @@ import mage.game.permanent.token.Token;
  *
  * @author fireshoes
  */
-public class KolaghanMonument extends CardImpl {
+public final class KolaghanMonument extends CardImpl {
 
     public KolaghanMonument(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

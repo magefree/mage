@@ -40,7 +40,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LoneFox
  */
-public class ChurningEddy extends CardImpl {
+public final class ChurningEddy extends CardImpl {
 
     public ChurningEddy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}");

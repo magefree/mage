@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author nigelzor
  */
-public class AzimaetDrake extends CardImpl {
+public final class AzimaetDrake extends CardImpl {
 
     public AzimaetDrake(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

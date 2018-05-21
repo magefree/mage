@@ -46,7 +46,7 @@ import mage.game.permanent.token.TitanForgeGolemToken;
  *
  * @author Loki
  */
-public class TitanForge extends CardImpl {
+public final class TitanForge extends CardImpl {
 
     public TitanForge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");

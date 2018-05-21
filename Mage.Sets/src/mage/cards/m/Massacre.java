@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author Plopman
  */
-public class Massacre extends CardImpl {
+public final class Massacre extends CardImpl {
 
     private static final FilterPermanent filterPlains = new FilterPermanent();
     private static final FilterPermanent filterSwamp = new FilterPermanent();

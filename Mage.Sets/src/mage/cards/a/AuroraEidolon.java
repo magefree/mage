@@ -49,7 +49,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LoneFox
  */
-public class AuroraEidolon extends CardImpl {
+public final class AuroraEidolon extends CardImpl {
 
     public AuroraEidolon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");

@@ -49,7 +49,7 @@ import mage.filter.common.FilterBlockingCreature;
  *
  * @author fireshoes
  */
-public class CrescendoOfWar extends CardImpl {
+public final class CrescendoOfWar extends CardImpl {
 
     public CrescendoOfWar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");

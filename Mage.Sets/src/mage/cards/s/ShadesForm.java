@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Temba21
  */
-public class ShadesForm extends CardImpl {
+public final class ShadesForm extends CardImpl {
 
     public ShadesForm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}{B}");

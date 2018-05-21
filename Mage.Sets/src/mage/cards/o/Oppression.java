@@ -42,7 +42,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author dustinconrad
  */
-public class Oppression extends CardImpl {
+public final class Oppression extends CardImpl {
 
     public Oppression(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}{B}");

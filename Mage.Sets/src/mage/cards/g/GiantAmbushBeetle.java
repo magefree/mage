@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class GiantAmbushBeetle extends CardImpl {
+public final class GiantAmbushBeetle extends CardImpl {
 
     public GiantAmbushBeetle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B/G}{R}");

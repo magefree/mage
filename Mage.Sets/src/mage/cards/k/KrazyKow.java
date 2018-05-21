@@ -49,7 +49,7 @@ import java.util.UUID;
  * @author ciaccona007
  */
 
-public class KrazyKow extends CardImpl {
+public final class KrazyKow extends CardImpl {
 
     public KrazyKow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");

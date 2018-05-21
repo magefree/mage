@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class KamiOfOldStone extends CardImpl {
+public final class KamiOfOldStone extends CardImpl {
 
     public KamiOfOldStone (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

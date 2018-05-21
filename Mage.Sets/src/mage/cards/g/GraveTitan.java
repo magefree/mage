@@ -42,7 +42,7 @@ import mage.game.permanent.token.ZombieToken;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class GraveTitan extends CardImpl {
+public final class GraveTitan extends CardImpl {
 
     public GraveTitan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");

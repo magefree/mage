@@ -47,7 +47,7 @@ import mage.target.TargetPlayer;
  *
  * @author Loki
  */
-public class Shriekhorn extends CardImpl {
+public final class Shriekhorn extends CardImpl {
 
     public Shriekhorn (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");

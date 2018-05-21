@@ -40,7 +40,7 @@ import mage.constants.CardType;
  *
  * @author LevelX2
  */
-public class SphinxsRevelation extends CardImpl {
+public final class SphinxsRevelation extends CardImpl {
 
     public SphinxsRevelation (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{W}{U}{U}");

@@ -49,7 +49,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class QasaliPridemage extends CardImpl {
+public final class QasaliPridemage extends CardImpl {
 
     public QasaliPridemage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{W}");

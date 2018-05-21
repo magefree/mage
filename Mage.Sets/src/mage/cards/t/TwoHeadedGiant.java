@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author TheElk801
  */
-public class TwoHeadedGiant extends CardImpl {
+public final class TwoHeadedGiant extends CardImpl {
 
     public TwoHeadedGiant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");

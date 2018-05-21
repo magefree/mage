@@ -50,7 +50,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class PerilousPredicament extends CardImpl {
+public final class PerilousPredicament extends CardImpl {
 
     public PerilousPredicament(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{4}{B}");

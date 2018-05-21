@@ -51,7 +51,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Loki
  */
-public class ClockworkBeetle extends CardImpl {
+public final class ClockworkBeetle extends CardImpl {
 
     public ClockworkBeetle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{1}");

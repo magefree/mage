@@ -41,7 +41,7 @@ import mage.constants.Duration;
  *
  * @author LevelX2
  */
-public class StoicChampion extends CardImpl {
+public final class StoicChampion extends CardImpl {
 
     public StoicChampion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{W}");

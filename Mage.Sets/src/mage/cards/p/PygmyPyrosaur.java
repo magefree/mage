@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class PygmyPyrosaur extends CardImpl {
+public final class PygmyPyrosaur extends CardImpl {
 
     public PygmyPyrosaur(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

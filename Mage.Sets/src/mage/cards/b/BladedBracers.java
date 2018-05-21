@@ -45,7 +45,7 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class BladedBracers extends CardImpl {
+public final class BladedBracers extends CardImpl {
 
     private static final String ruleText = "As long as equipped creature is a Human or an Angel, it has vigilance";
 

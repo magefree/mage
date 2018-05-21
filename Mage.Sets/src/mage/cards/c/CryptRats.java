@@ -48,7 +48,7 @@ import mage.filter.FilterMana;
  *
  * @author LevelX2
  */
-public class CryptRats extends CardImpl {
+public final class CryptRats extends CardImpl {
 
     static final FilterMana filterBlack = new FilterMana();
 

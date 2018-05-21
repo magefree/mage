@@ -45,7 +45,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class SolemnSimulacrum extends CardImpl {
+public final class SolemnSimulacrum extends CardImpl {
     public SolemnSimulacrum(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}");
         this.subtype.add(SubType.GOLEM);

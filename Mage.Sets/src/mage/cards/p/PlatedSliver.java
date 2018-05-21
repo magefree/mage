@@ -43,7 +43,7 @@ import mage.filter.StaticFilters;
  *
  * @author cbt33
  */
-public class PlatedSliver extends CardImpl {
+public final class PlatedSliver extends CardImpl {
 
     public PlatedSliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}");

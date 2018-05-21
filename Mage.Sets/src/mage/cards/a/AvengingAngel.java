@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class AvengingAngel extends CardImpl {
+public final class AvengingAngel extends CardImpl {
 
     public AvengingAngel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");

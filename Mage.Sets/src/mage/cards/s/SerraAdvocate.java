@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author daagar
  */
-public class SerraAdvocate extends CardImpl {
+public final class SerraAdvocate extends CardImpl {
 
     public SerraAdvocate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

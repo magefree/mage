@@ -49,7 +49,7 @@ import mage.target.common.TargetAnyTarget;
 /**
  * @author KholdFuzion
  */
-public class PirateShip extends CardImpl {
+public final class PirateShip extends CardImpl {
 
     public PirateShip(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}");

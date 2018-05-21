@@ -44,7 +44,7 @@ import mage.target.TargetPlayer;
  *
  * @author LoneFox
  */
-public class InsidiousBookworms extends CardImpl {
+public final class InsidiousBookworms extends CardImpl {
 
     public InsidiousBookworms(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");

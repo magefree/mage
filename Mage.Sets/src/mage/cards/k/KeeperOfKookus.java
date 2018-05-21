@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author BursegSardaukar
  */
-public class KeeperOfKookus extends CardImpl {
+public final class KeeperOfKookus extends CardImpl {
 
     public KeeperOfKookus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");

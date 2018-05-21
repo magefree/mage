@@ -44,7 +44,7 @@ import mage.target.TargetPlayer;
  *
  * @author TheElk801
  */
-public class AxisOfMortality extends CardImpl {
+public final class AxisOfMortality extends CardImpl {
 
     public AxisOfMortality(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{W}{W}");

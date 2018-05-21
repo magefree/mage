@@ -52,7 +52,7 @@ import java.util.UUID;
  *
  * @author Styxo
  */
-public class SithRuins extends CardImpl {
+public final class SithRuins extends CardImpl {
 
     public SithRuins(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author LevelX2
  */
-public class RiptideChimera extends CardImpl {
+public final class RiptideChimera extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("an enchantment you control");
 

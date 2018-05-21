@@ -50,7 +50,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author jeffwadsworth
  */
-public class Necroskitter extends CardImpl {
+public final class Necroskitter extends CardImpl {
 
     public Necroskitter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");

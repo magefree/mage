@@ -57,7 +57,7 @@ import mage.watchers.common.CastSpellLastTurnWatcher;
  *
  * @author TheElk801
  */
-public class MagusOfTheMind extends CardImpl {
+public final class MagusOfTheMind extends CardImpl {
 
     public MagusOfTheMind(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");

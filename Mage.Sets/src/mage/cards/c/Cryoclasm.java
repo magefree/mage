@@ -44,7 +44,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author dustinconrad
  */
-public class Cryoclasm extends CardImpl {
+public final class Cryoclasm extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("Plains or Island");
 

@@ -44,7 +44,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author North
  */
-public class TectonicRift extends CardImpl {
+public final class TectonicRift extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures without flying");
 

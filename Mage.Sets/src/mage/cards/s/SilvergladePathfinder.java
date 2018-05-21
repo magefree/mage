@@ -48,7 +48,7 @@ import java.util.UUID;
  *
  * @author fireshoes
  */
-public class SilvergladePathfinder extends CardImpl {
+public final class SilvergladePathfinder extends CardImpl {
 
     public SilvergladePathfinder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

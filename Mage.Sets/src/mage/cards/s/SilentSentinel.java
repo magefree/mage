@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author LevelX2
  */
-public class SilentSentinel extends CardImpl {
+public final class SilentSentinel extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("enchantment card from your graveyard");
     static {

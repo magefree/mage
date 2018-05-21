@@ -43,7 +43,7 @@ import mage.game.permanent.token.PhyrexianRebirthHorrorToken;
  *
  * @author ayratn
  */
-public class PhyrexianRebirth extends CardImpl {
+public final class PhyrexianRebirth extends CardImpl {
 
     public PhyrexianRebirth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{W}{W}");

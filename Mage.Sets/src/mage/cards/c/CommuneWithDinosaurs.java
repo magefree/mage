@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author TheElk801
  */
-public class CommuneWithDinosaurs extends CardImpl {
+public final class CommuneWithDinosaurs extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("a Dinosaur or land card");
 

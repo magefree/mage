@@ -43,7 +43,7 @@ import mage.constants.Zone;
 /**
  * @author nantuko
  */
-public class FeralRidgewolf extends CardImpl {
+public final class FeralRidgewolf extends CardImpl {
 
     public FeralRidgewolf(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

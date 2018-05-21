@@ -47,7 +47,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class StormriderRig extends CardImpl {
+public final class StormriderRig extends CardImpl {
 
     public StormriderRig(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");

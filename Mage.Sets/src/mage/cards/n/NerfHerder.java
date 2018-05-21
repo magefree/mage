@@ -48,7 +48,7 @@ import mage.filter.predicate.permanent.CounterPredicate;
  *
  * @author Styxo
  */
-public class NerfHerder extends CardImpl {
+public final class NerfHerder extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Each creature with a +1/+1 counter on it");
 

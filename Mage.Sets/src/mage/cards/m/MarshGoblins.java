@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class MarshGoblins extends CardImpl {
+public final class MarshGoblins extends CardImpl {
 
     public MarshGoblins(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{R}");

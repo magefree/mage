@@ -51,7 +51,7 @@ import mage.game.permanent.Permanent;
  *
  * @author L_J
  */
-public class TresserhornSkyknight extends CardImpl {
+public final class TresserhornSkyknight extends CardImpl {
 
     public TresserhornSkyknight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{B}{B}");

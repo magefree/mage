@@ -46,7 +46,7 @@ import mage.watchers.common.CastSpellLastTurnWatcher;
  * @author LoneFox
 
  */
-public class Impatience extends CardImpl {
+public final class Impatience extends CardImpl {
 
     public Impatience(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");

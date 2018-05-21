@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author magenoxx_at_gmail.com
  */
-public class IchorSlick extends CardImpl {
+public final class IchorSlick extends CardImpl {
 
     public IchorSlick(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");

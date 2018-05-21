@@ -42,7 +42,7 @@ import mage.constants.ColoredManaSymbol;
  *
  * @author LevelX2
  */
-public class Sanguimancy extends CardImpl {
+public final class Sanguimancy extends CardImpl {
 
     public Sanguimancy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B}");

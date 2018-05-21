@@ -48,7 +48,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author Styxo
  */
-public class KiAdiMundi extends CardImpl {
+public final class KiAdiMundi extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("other creature you control");
 

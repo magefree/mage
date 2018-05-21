@@ -45,7 +45,7 @@ import mage.game.permanent.token.IxalanVampireToken;
  *
  * @author TheElk801
  */
-public class AdantoTheFirstFort extends CardImpl {
+public final class AdantoTheFirstFort extends CardImpl {
 
     public AdantoTheFirstFort(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author LevelX2
  */
-public class ProphetOfKruphix extends CardImpl {
+public final class ProphetOfKruphix extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("creatures and lands you control");
 

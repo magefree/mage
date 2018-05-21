@@ -41,7 +41,7 @@ import mage.filter.FilterPermanent;
  *
  * @author LevelX2
  */
-public class Dragonstalker extends CardImpl {
+public final class Dragonstalker extends CardImpl {
 
     public Dragonstalker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");

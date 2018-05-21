@@ -42,7 +42,7 @@ import mage.constants.CardType;
  *
  * @author Loki
  */
-public class Scabland extends CardImpl {
+public final class Scabland extends CardImpl {
 
     public Scabland(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);

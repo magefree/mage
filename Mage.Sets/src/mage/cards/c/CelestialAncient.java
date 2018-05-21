@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author LevelX2
  */
-public class CelestialAncient extends CardImpl {
+public final class CelestialAncient extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("an enchantment spell");
     static {

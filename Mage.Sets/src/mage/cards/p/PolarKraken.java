@@ -44,7 +44,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Plopman
  */
-public class PolarKraken extends CardImpl {
+public final class PolarKraken extends CardImpl {
 
     public PolarKraken(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{8}{U}{U}{U}");

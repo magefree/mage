@@ -51,7 +51,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author TheElk801
  */
-public class MistformMask extends CardImpl {
+public final class MistformMask extends CardImpl {
 
     public MistformMask(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");

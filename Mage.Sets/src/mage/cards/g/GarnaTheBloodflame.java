@@ -59,7 +59,7 @@ import mage.watchers.Watcher;
  *
  * @author LevelX2
  */
-public class GarnaTheBloodflame extends CardImpl {
+public final class GarnaTheBloodflame extends CardImpl {
 
     public GarnaTheBloodflame(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{R}");

@@ -53,7 +53,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class CracklingDoom extends CardImpl {
+public final class CracklingDoom extends CardImpl {
 
     public CracklingDoom(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}{W}{B}");

@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInHand;
  * @author LoneFox
 
  */
-public class Drekavac extends CardImpl {
+public final class Drekavac extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("noncreature card");
 

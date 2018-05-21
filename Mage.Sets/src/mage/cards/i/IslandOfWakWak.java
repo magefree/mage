@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author anonymous
  */
-public class IslandOfWakWak extends CardImpl {
+public final class IslandOfWakWak extends CardImpl {
 
     private static final FilterCreaturePermanent filterWithFlying = new FilterCreaturePermanent("creature with flying");
 

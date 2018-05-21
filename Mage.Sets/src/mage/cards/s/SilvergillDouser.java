@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Styxo
  */
-public class SilvergillDouser extends CardImpl {
+public final class SilvergillDouser extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Merfolk and/or Faeries you control");
 

@@ -47,7 +47,7 @@ import mage.game.events.GameEvent;
  *
  * @author TheElk801
  */
-public class AshesOfTheAbhorrent extends CardImpl {
+public final class AshesOfTheAbhorrent extends CardImpl {
 
     public AshesOfTheAbhorrent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");

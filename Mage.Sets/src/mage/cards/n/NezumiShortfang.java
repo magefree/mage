@@ -51,7 +51,7 @@ import mage.target.common.TargetOpponent;
 /**
  * @author LevelX2
  */
-public class NezumiShortfang extends CardImpl {
+public final class NezumiShortfang extends CardImpl {
 
     public NezumiShortfang(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");

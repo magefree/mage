@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author emerald000
  */
-public class NakedSingularity extends CardImpl {
+public final class NakedSingularity extends CardImpl {
 
     public NakedSingularity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");

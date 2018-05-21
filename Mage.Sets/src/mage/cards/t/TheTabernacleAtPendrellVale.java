@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author Plopman
  */
-public class TheTabernacleAtPendrellVale extends CardImpl {
+public final class TheTabernacleAtPendrellVale extends CardImpl {
 
     public TheTabernacleAtPendrellVale(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

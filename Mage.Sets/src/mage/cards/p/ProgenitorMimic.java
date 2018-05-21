@@ -50,7 +50,7 @@ import mage.util.functions.AbilityApplier;
  *
  * @author LevelX2
  */
-public class ProgenitorMimic extends CardImpl {
+public final class ProgenitorMimic extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("no Token");
 

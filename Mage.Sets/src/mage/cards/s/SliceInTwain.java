@@ -40,7 +40,7 @@ import mage.target.TargetPermanent;
  *
  * @author Loki
  */
-public class SliceInTwain extends CardImpl {
+public final class SliceInTwain extends CardImpl {
 
     public SliceInTwain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{G}{G}");

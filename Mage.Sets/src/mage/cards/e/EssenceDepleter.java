@@ -47,7 +47,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class EssenceDepleter extends CardImpl {
+public final class EssenceDepleter extends CardImpl {
 
     public EssenceDepleter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

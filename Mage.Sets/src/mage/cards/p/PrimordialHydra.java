@@ -54,7 +54,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Loki
  */
-public class PrimordialHydra extends CardImpl {
+public final class PrimordialHydra extends CardImpl {
 
     private static final String staticText = "{this} has trample as long as it has ten or more +1/+1 counters on it";
 

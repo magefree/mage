@@ -47,7 +47,7 @@ import mage.watchers.common.LifeLossOtherFromCombatWatcher;
  *
  * @author Styxo
  */
-public class SithManipulator extends CardImpl {
+public final class SithManipulator extends CardImpl {
 
     public SithManipulator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");

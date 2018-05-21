@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class InkwellLeviathan extends CardImpl {
+public final class InkwellLeviathan extends CardImpl {
 
     public InkwellLeviathan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{7}{U}{U}");

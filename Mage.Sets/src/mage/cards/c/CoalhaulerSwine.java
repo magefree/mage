@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author vereena42
  */
-public class CoalhaulerSwine extends CardImpl {
+public final class CoalhaulerSwine extends CardImpl {
 
     public CoalhaulerSwine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");

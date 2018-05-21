@@ -46,7 +46,7 @@ import mage.counters.CounterType;
  *
  * @author LoneFox
  */
-public class RavagingRiftwurm extends CardImpl {
+public final class RavagingRiftwurm extends CardImpl {
 
     public RavagingRiftwurm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");

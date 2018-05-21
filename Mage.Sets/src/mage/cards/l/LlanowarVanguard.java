@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author LoneFox
  */
-public class LlanowarVanguard extends CardImpl {
+public final class LlanowarVanguard extends CardImpl {
 
     public LlanowarVanguard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

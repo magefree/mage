@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Plopman
  */
-public class PhyrexianBroodlings extends CardImpl {
+public final class PhyrexianBroodlings extends CardImpl {
 
     public PhyrexianBroodlings(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");

@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author jonubuu
  */
-public class GoblinWarchief extends CardImpl {
+public final class GoblinWarchief extends CardImpl {
 
     private static final FilterCard filterSpells = new FilterCard("Goblin spells");
 

@@ -53,7 +53,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author TheElk801
  */
-public class Dermoplasm extends CardImpl {
+public final class Dermoplasm extends CardImpl {
 
     public Dermoplasm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");

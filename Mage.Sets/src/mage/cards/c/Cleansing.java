@@ -44,7 +44,7 @@ import mage.players.Player;
  *
  * @author TheElk801
  */
-public class Cleansing extends CardImpl {
+public final class Cleansing extends CardImpl {
 
     public Cleansing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{W}{W}{W}");

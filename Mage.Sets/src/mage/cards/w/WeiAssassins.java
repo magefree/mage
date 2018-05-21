@@ -50,7 +50,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author TheElk801
  */
-public class WeiAssassins extends CardImpl {
+public final class WeiAssassins extends CardImpl {
 
     public WeiAssassins(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");

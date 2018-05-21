@@ -45,7 +45,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author fireshoes
  */
-public class BattleSquadron extends CardImpl {
+public final class BattleSquadron extends CardImpl {
 
     public BattleSquadron(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");

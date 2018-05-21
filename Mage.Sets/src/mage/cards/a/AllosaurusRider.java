@@ -52,7 +52,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author LevelX2
  */
-public class AllosaurusRider extends CardImpl {
+public final class AllosaurusRider extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("two green cards");
 

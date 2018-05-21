@@ -43,7 +43,7 @@ import java.util.UUID;
  *
  * @author cbt33
  */
-public class RayOfDistortion extends CardImpl {
+public final class RayOfDistortion extends CardImpl {
     
     public RayOfDistortion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{W}");

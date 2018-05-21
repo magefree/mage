@@ -45,7 +45,7 @@ import mage.game.permanent.Permanent;
  *
  * @author emerald000
  */
-public class ObeliskOfUrd extends CardImpl {
+public final class ObeliskOfUrd extends CardImpl {
 
     public ObeliskOfUrd(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{6}");

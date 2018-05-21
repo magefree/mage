@@ -40,7 +40,7 @@ import mage.target.TargetPlayer;
  *
  * @author fireshoes
  */
-public class PainfulLesson extends CardImpl {
+public final class PainfulLesson extends CardImpl {
 
     public PainfulLesson(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}");

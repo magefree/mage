@@ -48,7 +48,7 @@ import mage.game.permanent.Permanent;
  *
  * @author jeffwadsworth
  */
-public class ImposingSovereign extends CardImpl {
+public final class ImposingSovereign extends CardImpl {
 
     public ImposingSovereign(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

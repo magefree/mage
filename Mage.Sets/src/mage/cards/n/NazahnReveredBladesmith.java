@@ -59,7 +59,7 @@ import java.util.UUID;
  *
  * @author spjspj
  */
-public class NazahnReveredBladesmith extends CardImpl {
+public final class NazahnReveredBladesmith extends CardImpl {
 
     private static final FilterControlledCreaturePermanent equippedFilter = new FilterControlledCreaturePermanent("equipped creature you control");
 

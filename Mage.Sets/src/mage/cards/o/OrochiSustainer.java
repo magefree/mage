@@ -38,7 +38,7 @@ import mage.constants.SubType;
 /**
  * @author Loki
  */
-public class OrochiSustainer extends CardImpl {
+public final class OrochiSustainer extends CardImpl {
 
     public OrochiSustainer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");

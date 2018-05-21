@@ -62,7 +62,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author spjspj
  */
-public class KarnScionOfUrza extends CardImpl {
+public final class KarnScionOfUrza extends CardImpl {
 
     public KarnScionOfUrza(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}");

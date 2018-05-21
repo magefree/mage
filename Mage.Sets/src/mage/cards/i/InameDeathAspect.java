@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Loki
  */
-public class InameDeathAspect extends CardImpl {
+public final class InameDeathAspect extends CardImpl {
 
     public InameDeathAspect(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}");

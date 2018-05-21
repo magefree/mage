@@ -45,7 +45,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author fireshoes
  */
-public class SolarTide extends CardImpl {
+public final class SolarTide extends CardImpl {
     
     private static final FilterCreaturePermanent filter1 = new FilterCreaturePermanent("creatures with power 2 or less");
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creatures with power 3 or greater");

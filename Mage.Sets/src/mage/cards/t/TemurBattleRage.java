@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class TemurBattleRage extends CardImpl {
+public final class TemurBattleRage extends CardImpl {
     
     private final static String rule = "<br><i>Ferocious</i> &mdash; That creature also gains trample until end of turn if you control a creature with power 4 or greater";
 

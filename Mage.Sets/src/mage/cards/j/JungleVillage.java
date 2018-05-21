@@ -52,7 +52,7 @@ import java.util.UUID;
  *
  * @author Styxo
  */
-public class JungleVillage extends CardImpl {
+public final class JungleVillage extends CardImpl {
 
     public JungleVillage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
@@ -74,7 +74,7 @@ public class JungleVillage extends CardImpl {
         return new JungleVillage(this);
     }
 
-    public class JungleVillageAbility extends ActivatedAbilityImpl {
+    public final class JungleVillageAbility extends ActivatedAbilityImpl {
 
         public JungleVillageAbility(JungleVillageAbility ability) {
             super(ability);

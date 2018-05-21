@@ -53,7 +53,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class Pallimud extends CardImpl {
+public final class Pallimud extends CardImpl {
 
     public Pallimud(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

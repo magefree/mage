@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Alvin, noxx
  */
-public class Curiosity extends CardImpl {
+public final class Curiosity extends CardImpl {
 
     public Curiosity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{U}");

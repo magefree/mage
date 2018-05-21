@@ -56,7 +56,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class DaringThief extends CardImpl {
+public final class DaringThief extends CardImpl {
 
     public DaringThief(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

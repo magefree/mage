@@ -60,7 +60,7 @@ import java.util.UUID;
  *
  * @author anonymous
  */
-public class GaeasLiege extends CardImpl {
+public final class GaeasLiege extends CardImpl {
     
     final static FilterControlledPermanent filterLands = new FilterControlledPermanent("Forests you control");
 

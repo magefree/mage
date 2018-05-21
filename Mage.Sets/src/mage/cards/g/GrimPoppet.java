@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class GrimPoppet extends CardImpl {
+public final class GrimPoppet extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature");
     

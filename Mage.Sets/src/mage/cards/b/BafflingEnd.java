@@ -50,7 +50,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class BafflingEnd extends CardImpl {
+public final class BafflingEnd extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with converted mana cost 3 or less an opponent controls");
 

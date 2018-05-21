@@ -44,7 +44,7 @@ import mage.target.common.TargetNonBasicLandPermanent;
  *
  * @author North
  */
-public class FulminatorMage extends CardImpl {
+public final class FulminatorMage extends CardImpl {
 
     public FulminatorMage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B/R}{B/R}");

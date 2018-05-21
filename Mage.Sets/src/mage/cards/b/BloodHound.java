@@ -46,7 +46,7 @@ import mage.game.permanent.Permanent;
  *
  * @author TheElk801
  */
-public class BloodHound extends CardImpl {
+public final class BloodHound extends CardImpl {
 
     public BloodHound(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");

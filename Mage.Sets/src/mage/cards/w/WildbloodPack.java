@@ -46,7 +46,7 @@ import mage.filter.common.FilterAttackingCreature;
 /**
  * @author nantuko
  */
-public class WildbloodPack extends CardImpl {
+public final class WildbloodPack extends CardImpl {
 
     public WildbloodPack(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");

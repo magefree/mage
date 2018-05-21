@@ -55,7 +55,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class OrnateKanzashi extends CardImpl {
+public final class OrnateKanzashi extends CardImpl {
 
 
     public OrnateKanzashi(UUID ownerId, CardSetInfo setInfo) {

@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.ColorlessPredicate;
  *
  * @author LevelX2
  */
-public class TideDrifter extends CardImpl {
+public final class TideDrifter extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("colorless creatures");
 

@@ -11,7 +11,7 @@ import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
-public class WickedReward extends CardImpl {
+public final class WickedReward extends CardImpl {
 
     public WickedReward(UUID cardId, CardSetInfo cardSetInfo) {
         super(cardId, cardSetInfo, new CardType[]{CardType.INSTANT}, "{1}{B}");

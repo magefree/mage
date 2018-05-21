@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class FloodedShoreline extends CardImpl {
+public final class FloodedShoreline extends CardImpl {
     
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Islands");
 

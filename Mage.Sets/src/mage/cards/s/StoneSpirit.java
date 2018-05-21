@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  *
  * @author LoneFox
  */
-public class StoneSpirit extends CardImpl {
+public final class StoneSpirit extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with flying");
 

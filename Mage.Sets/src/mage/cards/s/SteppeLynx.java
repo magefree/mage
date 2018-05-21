@@ -42,7 +42,7 @@ import mage.constants.Duration;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SteppeLynx extends CardImpl {
+public final class SteppeLynx extends CardImpl {
 
     public SteppeLynx(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");

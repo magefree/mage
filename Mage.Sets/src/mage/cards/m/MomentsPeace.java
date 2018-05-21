@@ -41,7 +41,7 @@ import mage.constants.TimingRule;
  *
  * @author Plopman
  */
-public class MomentsPeace extends CardImpl {
+public final class MomentsPeace extends CardImpl {
 
     public MomentsPeace(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}");

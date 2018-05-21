@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class NightshadeStinger extends CardImpl {
+public final class NightshadeStinger extends CardImpl {
 
     public NightshadeStinger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");

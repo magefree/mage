@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class ElvishWarrior extends CardImpl {
+public final class ElvishWarrior extends CardImpl {
 
     public ElvishWarrior(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{G}");

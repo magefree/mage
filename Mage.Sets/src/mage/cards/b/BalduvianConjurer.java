@@ -48,7 +48,7 @@ import java.util.UUID;
  *
  * @author TheElk801
  */
-public class BalduvianConjurer extends CardImpl {
+public final class BalduvianConjurer extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("snow land");
 

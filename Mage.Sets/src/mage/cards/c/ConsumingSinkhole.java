@@ -45,7 +45,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  *
  * @author fireshoes
  */
-public class ConsumingSinkhole extends CardImpl {
+public final class ConsumingSinkhole extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("land creature");
 

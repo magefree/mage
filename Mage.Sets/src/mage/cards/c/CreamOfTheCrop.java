@@ -49,7 +49,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author emerald000
  */
-public class CreamOfTheCrop extends CardImpl {
+public final class CreamOfTheCrop extends CardImpl {
 
     public CreamOfTheCrop(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");

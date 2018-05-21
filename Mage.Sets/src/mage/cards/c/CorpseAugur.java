@@ -46,7 +46,7 @@ import mage.target.TargetPlayer;
  *
  * @author fireshoes
  */
-public class CorpseAugur extends CardImpl {
+public final class CorpseAugur extends CardImpl {
 
     public CorpseAugur(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

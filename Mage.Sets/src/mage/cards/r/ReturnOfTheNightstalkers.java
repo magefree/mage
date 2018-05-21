@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author TheElk801
  */
-public class ReturnOfTheNightstalkers extends CardImpl {
+public final class ReturnOfTheNightstalkers extends CardImpl {
 
     public ReturnOfTheNightstalkers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{B}{B}");

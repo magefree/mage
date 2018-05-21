@@ -56,7 +56,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Styxo
  */
-public class ChiefChirpa extends CardImpl {
+public final class ChiefChirpa extends CardImpl {
 
     private static final FilterCreaturePermanent diedFilter = new FilterCreaturePermanent("a green creature you control");
     private static final FilterControlledCreaturePermanent ewokFilter = new FilterControlledCreaturePermanent("another target Ewok creature you control");

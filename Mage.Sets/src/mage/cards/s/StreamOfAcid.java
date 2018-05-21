@@ -43,7 +43,7 @@ import mage.target.TargetPermanent;
  *
  * @author fireshoes
  */
-public class StreamOfAcid extends CardImpl {
+public final class StreamOfAcid extends CardImpl {
     
     static final FilterPermanent filter = new FilterPermanent("land or nonblack creature");
 

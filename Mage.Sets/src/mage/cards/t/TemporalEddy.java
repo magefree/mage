@@ -41,7 +41,7 @@ import mage.target.TargetPermanent;
  *
  * @author nigelzor
  */
-public class TemporalEddy extends CardImpl {
+public final class TemporalEddy extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("creature or land");
 

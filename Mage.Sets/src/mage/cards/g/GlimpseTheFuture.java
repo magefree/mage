@@ -39,7 +39,7 @@ import mage.filter.StaticFilters;
  *
  * @author LevelX2
  */
-public class GlimpseTheFuture extends CardImpl {
+public final class GlimpseTheFuture extends CardImpl {
 
     public GlimpseTheFuture(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{U}");

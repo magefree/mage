@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author fireshoes
  */
-public class SickeningDreams extends CardImpl {
+public final class SickeningDreams extends CardImpl {
 
     public SickeningDreams(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}");

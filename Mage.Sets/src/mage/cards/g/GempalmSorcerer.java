@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author TheElk801
  */
-public class GempalmSorcerer extends CardImpl {
+public final class GempalmSorcerer extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Wizard creatures");
 

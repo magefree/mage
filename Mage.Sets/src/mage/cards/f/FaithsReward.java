@@ -49,7 +49,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class FaithsReward extends CardImpl {
+public final class FaithsReward extends CardImpl {
 
     public FaithsReward(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{W}");

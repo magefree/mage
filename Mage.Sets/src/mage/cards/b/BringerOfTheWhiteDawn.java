@@ -48,7 +48,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author Plopman
  */
-public class BringerOfTheWhiteDawn extends CardImpl {
+public final class BringerOfTheWhiteDawn extends CardImpl {
 
     public BringerOfTheWhiteDawn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{7}{W}{W}");

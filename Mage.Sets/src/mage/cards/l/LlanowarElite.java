@@ -46,7 +46,7 @@ import mage.counters.CounterType;
  *
  * @author michael.napoleon@gmail.com
  */
-public class LlanowarElite extends CardImpl {
+public final class LlanowarElite extends CardImpl {
 
     public LlanowarElite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");

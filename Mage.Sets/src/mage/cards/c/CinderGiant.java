@@ -43,7 +43,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  *
  * @author fireshoes
  */
-public class CinderGiant extends CardImpl {
+public final class CinderGiant extends CardImpl {
     
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("each other creature you control");
     static {

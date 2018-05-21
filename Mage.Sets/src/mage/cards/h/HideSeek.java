@@ -50,7 +50,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class HideSeek extends SplitCard {
+public final class HideSeek extends SplitCard {
 
     public HideSeek(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}{W}", "{W}{B}", SpellAbilityType.SPLIT);

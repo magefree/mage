@@ -49,7 +49,7 @@ import mage.game.stack.Spell;
  *
  * @author TheElk801
  */
-public class BloodstoneGoblin extends CardImpl {
+public final class BloodstoneGoblin extends CardImpl {
 
     public BloodstoneGoblin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");

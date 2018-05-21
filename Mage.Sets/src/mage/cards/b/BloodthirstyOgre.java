@@ -54,7 +54,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX
  */
-public class BloodthirstyOgre extends CardImpl {
+public final class BloodthirstyOgre extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("you control a Demon");
     

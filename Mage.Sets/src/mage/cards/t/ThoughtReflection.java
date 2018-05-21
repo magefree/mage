@@ -46,7 +46,7 @@ import mage.players.Player;
  * @author jeffwadsworth
  *
  */
-public class ThoughtReflection extends CardImpl {
+public final class ThoughtReflection extends CardImpl {
 
     public ThoughtReflection(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}{U}{U}");

@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author LoneFox
  */
-public class TitanicBulvox extends CardImpl {
+public final class TitanicBulvox extends CardImpl {
 
     public TitanicBulvox(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{G}{G}");

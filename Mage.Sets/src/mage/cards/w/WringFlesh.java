@@ -39,7 +39,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author Loki
  */
-public class WringFlesh extends CardImpl {
+public final class WringFlesh extends CardImpl {
 
     public WringFlesh(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}");

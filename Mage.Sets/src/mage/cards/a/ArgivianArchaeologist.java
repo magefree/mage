@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author fireshoes
  */
-public class ArgivianArchaeologist extends CardImpl {
+public final class ArgivianArchaeologist extends CardImpl {
     
     private static final FilterArtifactCard filter = new FilterArtifactCard("artifact card from your graveyard");
 

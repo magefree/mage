@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author LoneFox
  */
-public class MiseryCharm extends CardImpl {
+public final class MiseryCharm extends CardImpl {
 
     private static final FilterPermanent filter1 = new FilterPermanent("Cleric");
     private static final FilterCard filter2 = new FilterCard("Cleric card from your graveyard");

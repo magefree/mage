@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class YavimayaHollow extends CardImpl {
+public final class YavimayaHollow extends CardImpl {
 
     public YavimayaHollow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

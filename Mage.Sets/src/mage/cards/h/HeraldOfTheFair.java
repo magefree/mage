@@ -43,7 +43,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class HeraldOfTheFair extends CardImpl {
+public final class HeraldOfTheFair extends CardImpl {
 
     public HeraldOfTheFair(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author KholdFuzion
  */
-public class StormFront extends CardImpl {
+public final class StormFront extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with flying");
 

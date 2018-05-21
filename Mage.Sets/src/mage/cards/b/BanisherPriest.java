@@ -52,7 +52,7 @@ import mage.util.CardUtil;
  *
  * @author jeffwadsworth using LevelX2 tech
  */
-public class BanisherPriest extends CardImpl {
+public final class BanisherPriest extends CardImpl {
 
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
 

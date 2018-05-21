@@ -50,7 +50,7 @@ import mage.target.common.TargetEnchantmentPermanent;
  * @author LoneFox
 
  */
-public class TeferisCare extends CardImpl {
+public final class TeferisCare extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("an enchantment");
     private static final FilterSpell filter2 = new FilterSpell("enchantment spell");

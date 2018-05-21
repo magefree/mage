@@ -53,7 +53,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class KumenaTyrantOfOrazca extends CardImpl {
+public final class KumenaTyrantOfOrazca extends CardImpl {
 
     private static final FilterControlledPermanent filterAnotherNotTapped = new FilterControlledPermanent("another untapped Merfolk you control");
     private static final FilterControlledPermanent filterNotTapped = new FilterControlledPermanent("untapped Merfolk you control");

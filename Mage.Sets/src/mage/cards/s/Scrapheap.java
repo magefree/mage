@@ -46,7 +46,7 @@ import java.util.UUID;
  *
  * @author Plopman
  */
-public class Scrapheap extends CardImpl {
+public final class Scrapheap extends CardImpl {
 
     public Scrapheap(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

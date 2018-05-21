@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class BiteOfTheBlackRose extends CardImpl {
+public final class BiteOfTheBlackRose extends CardImpl {
 
     public BiteOfTheBlackRose(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}");

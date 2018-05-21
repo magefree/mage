@@ -42,7 +42,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author fireshoes
  */
-public class PegasusStampede extends CardImpl {
+public final class PegasusStampede extends CardImpl {
 
     public PegasusStampede(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{W}");

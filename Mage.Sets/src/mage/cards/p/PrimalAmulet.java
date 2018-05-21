@@ -53,7 +53,7 @@ import mage.players.Player;
  *
  * @author TheElk801
  */
-public class PrimalAmulet extends CardImpl {
+public final class PrimalAmulet extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Instant and sorcery spells");
 

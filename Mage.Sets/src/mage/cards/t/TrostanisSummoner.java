@@ -44,7 +44,7 @@ import mage.game.permanent.token.RhinoToken;
  *
  * @author LevelX2
  */
-public class TrostanisSummoner extends CardImpl {
+public final class TrostanisSummoner extends CardImpl {
 
     public TrostanisSummoner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{G}{W}");

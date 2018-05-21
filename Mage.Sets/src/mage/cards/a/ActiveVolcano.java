@@ -45,7 +45,7 @@ import mage.target.TargetPermanent;
  *
  * @author emerald000
  */
-public class ActiveVolcano extends CardImpl {
+public final class ActiveVolcano extends CardImpl {
 
     private static final FilterPermanent filterBlue = new FilterPermanent("blue permanent");
     private static final FilterPermanent filterIsland = new FilterPermanent("Island");

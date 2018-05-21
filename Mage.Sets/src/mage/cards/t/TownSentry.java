@@ -41,7 +41,7 @@ import mage.constants.Duration;
  *
  * @author fireshoes
  */
-public class TownSentry extends CardImpl {
+public final class TownSentry extends CardImpl {
 
     public TownSentry(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

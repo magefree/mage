@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author LevelX
  */
-public class CrystalSeer extends CardImpl {
+public final class CrystalSeer extends CardImpl {
 
     public CrystalSeer (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");

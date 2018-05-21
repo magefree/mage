@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class AcademyRector extends CardImpl {
+public final class AcademyRector extends CardImpl {
 
     public AcademyRector(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");

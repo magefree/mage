@@ -52,7 +52,7 @@ import mage.target.TargetCard;
  *
  * @author fireshoes
  */
-public class MuzzioVisionaryArchitect extends CardImpl {
+public final class MuzzioVisionaryArchitect extends CardImpl {
 
     public MuzzioVisionaryArchitect(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");

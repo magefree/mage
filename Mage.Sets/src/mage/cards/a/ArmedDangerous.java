@@ -39,7 +39,7 @@ import mage.constants.Duration;
 import mage.constants.SpellAbilityType;
 import mage.target.common.TargetCreaturePermanent;
 
-public class ArmedDangerous extends SplitCard {
+public final class ArmedDangerous extends SplitCard {
 
     public ArmedDangerous(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{R}", "{3}{G}", SpellAbilityType.SPLIT_FUSED);

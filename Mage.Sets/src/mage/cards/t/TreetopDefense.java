@@ -45,7 +45,7 @@ import mage.watchers.common.PlayerAttackedStepWatcher;
  *
  * @author TheElk801
  */
-public class TreetopDefense extends CardImpl {
+public final class TreetopDefense extends CardImpl {
 
     public TreetopDefense(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{G}");

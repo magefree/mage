@@ -51,7 +51,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author TheElk801
  */
-public class MindHarness extends CardImpl {
+public final class MindHarness extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("red or green creature");
 

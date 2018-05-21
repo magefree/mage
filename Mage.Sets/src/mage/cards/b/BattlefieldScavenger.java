@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author anonymous
  */
-public class BattlefieldScavenger extends CardImpl {
+public final class BattlefieldScavenger extends CardImpl {
 
     public BattlefieldScavenger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");

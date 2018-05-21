@@ -57,7 +57,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class StormtideLeviathan extends CardImpl {
+public final class StormtideLeviathan extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures without flying or islandwalk");
 

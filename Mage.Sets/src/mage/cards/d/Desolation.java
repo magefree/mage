@@ -56,7 +56,7 @@ import mage.watchers.Watcher;
  *
  * @author L_J
  */
-public class Desolation extends CardImpl {
+public final class Desolation extends CardImpl {
 
     public Desolation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}{B}");

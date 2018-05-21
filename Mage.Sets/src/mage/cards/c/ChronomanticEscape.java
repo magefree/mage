@@ -46,7 +46,7 @@ import mage.filter.StaticFilters;
  *
  * @author spjspj
  */
-public class ChronomanticEscape extends CardImpl {
+public final class ChronomanticEscape extends CardImpl {
 
 
     public ChronomanticEscape(UUID ownerId, CardSetInfo setInfo) {

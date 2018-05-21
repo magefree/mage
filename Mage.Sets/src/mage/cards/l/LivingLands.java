@@ -46,7 +46,7 @@ import java.util.UUID;
  *
  * @author Quercitron
  */
-public class LivingLands extends CardImpl {
+public final class LivingLands extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("Forests");
 

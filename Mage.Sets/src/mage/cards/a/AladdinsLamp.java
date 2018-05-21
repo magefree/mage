@@ -48,7 +48,7 @@ import mage.target.TargetCard;
  *
  * @author MarcoMarin
  */
-public class AladdinsLamp extends CardImpl {
+public final class AladdinsLamp extends CardImpl {
 
     public AladdinsLamp(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{10}");

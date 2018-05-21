@@ -51,7 +51,7 @@ import java.util.UUID;
  *
  * @author fireshoes
  */
-public class CartoucheOfAmbition extends CardImpl {
+public final class CartoucheOfAmbition extends CardImpl {
 
     public CartoucheOfAmbition(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");

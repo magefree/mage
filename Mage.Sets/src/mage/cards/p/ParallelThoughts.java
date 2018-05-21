@@ -57,7 +57,7 @@ import mage.util.RandomUtil;
  *
  * @author jeffwadsworth
  */
-public class ParallelThoughts extends CardImpl {
+public final class ParallelThoughts extends CardImpl {
 
     public ParallelThoughts(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}");

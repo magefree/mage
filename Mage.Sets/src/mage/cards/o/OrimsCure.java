@@ -50,7 +50,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author L_J
  */
-public class OrimsCure extends CardImpl {
+public final class OrimsCure extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("If you control a Plains");
     private static final FilterControlledCreaturePermanent filterCreature = new FilterControlledCreaturePermanent("untapped creature you control");

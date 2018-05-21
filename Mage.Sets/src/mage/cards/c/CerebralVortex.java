@@ -50,7 +50,7 @@ import mage.watchers.Watcher;
  *
  * @author emerald000
  */
-public class CerebralVortex extends CardImpl {
+public final class CerebralVortex extends CardImpl {
 
     public CerebralVortex(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}{R}");

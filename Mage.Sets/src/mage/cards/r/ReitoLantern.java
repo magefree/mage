@@ -42,7 +42,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author LevelX2
  */
-public class ReitoLantern extends CardImpl {
+public final class ReitoLantern extends CardImpl {
 
     public ReitoLantern(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

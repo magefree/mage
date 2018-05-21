@@ -49,7 +49,7 @@ import mage.target.TargetPlayer;
  *
  * @author Styxo
  */
-public class VenarianGlimmer extends CardImpl {
+public final class VenarianGlimmer extends CardImpl {
 
     public VenarianGlimmer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{U}");

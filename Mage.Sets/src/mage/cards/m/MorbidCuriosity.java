@@ -43,7 +43,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author fireshoes
  */
-public class MorbidCuriosity extends CardImpl {
+public final class MorbidCuriosity extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("an artifact or creature");
 

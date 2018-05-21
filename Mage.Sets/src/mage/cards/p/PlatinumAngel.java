@@ -49,7 +49,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PlatinumAngel extends CardImpl {
+public final class PlatinumAngel extends CardImpl {
 
     public PlatinumAngel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{7}");

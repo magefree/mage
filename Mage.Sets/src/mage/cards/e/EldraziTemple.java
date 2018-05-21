@@ -47,7 +47,7 @@ import mage.game.Game;
  *
  * @author Loki, nantuko
  */
-public class EldraziTemple extends CardImpl {
+public final class EldraziTemple extends CardImpl {
 
     public EldraziTemple(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);

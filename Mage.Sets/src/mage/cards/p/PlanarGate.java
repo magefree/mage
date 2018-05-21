@@ -40,7 +40,7 @@ import mage.filter.common.FilterCreatureCard;
  *
  * @author LevelX2
  */
-public class PlanarGate extends CardImpl {
+public final class PlanarGate extends CardImpl {
 
     public PlanarGate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{6}");

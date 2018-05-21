@@ -42,7 +42,7 @@ import mage.watchers.common.DamagedByWatcher;
  *
  * @author fireshoes
  */
-public class IncendiaryFlow extends CardImpl {
+public final class IncendiaryFlow extends CardImpl {
 
     public IncendiaryFlow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}");

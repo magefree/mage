@@ -45,7 +45,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Styxo
  */
-public class Aboroth extends CardImpl {
+public final class Aboroth extends CardImpl {
 
     public Aboroth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");

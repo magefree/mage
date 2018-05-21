@@ -51,7 +51,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author spjspj
  */
-public class HungryHungryHeifer extends CardImpl {
+public final class HungryHungryHeifer extends CardImpl {
 
     public HungryHungryHeifer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");

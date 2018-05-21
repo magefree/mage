@@ -38,7 +38,7 @@ import mage.constants.CardType;
  *
  * @author Plopman
  */
-public class TigereyeCameo extends CardImpl {
+public final class TigereyeCameo extends CardImpl {
 
     public TigereyeCameo(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

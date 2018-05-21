@@ -41,7 +41,7 @@ import java.util.UUID;
  *
  * @author jonubuu
  */
-public class KrosanGrip extends CardImpl {
+public final class KrosanGrip extends CardImpl {
 
     public KrosanGrip(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}");

@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author North
  */
-public class CopperCarapace extends CardImpl {
+public final class CopperCarapace extends CardImpl {
 
     public CopperCarapace(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");

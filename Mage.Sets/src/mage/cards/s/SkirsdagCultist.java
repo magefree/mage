@@ -47,7 +47,7 @@ import mage.target.common.TargetAnyTarget;
 /**
  * @author nantuko
  */
-public class SkirsdagCultist extends CardImpl {
+public final class SkirsdagCultist extends CardImpl {
 
     public SkirsdagCultist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");

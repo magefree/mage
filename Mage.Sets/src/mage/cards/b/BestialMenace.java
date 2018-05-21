@@ -41,7 +41,7 @@ import mage.game.permanent.token.WolfToken;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BestialMenace extends CardImpl {
+public final class BestialMenace extends CardImpl {
 
     public BestialMenace(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}{G}");

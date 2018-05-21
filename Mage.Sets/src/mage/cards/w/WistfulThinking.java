@@ -40,7 +40,7 @@ import mage.target.TargetPlayer;
  *
  * @author daagar
  */
-public class WistfulThinking extends CardImpl {
+public final class WistfulThinking extends CardImpl {
 
     public WistfulThinking(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}");

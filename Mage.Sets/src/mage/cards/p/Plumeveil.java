@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class Plumeveil extends CardImpl {
+public final class Plumeveil extends CardImpl {
 
     public Plumeveil(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W/U}{W/U}{W/U}");

@@ -53,7 +53,7 @@ import java.util.UUID;
  *
  * @author BetaSteward
  */
-public class UndeadAlchemist extends CardImpl {
+public final class UndeadAlchemist extends CardImpl {
 
     public UndeadAlchemist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");

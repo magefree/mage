@@ -49,7 +49,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author Algid
  */
-public class Memnarch extends CardImpl {
+public final class Memnarch extends CardImpl {
 
     public Memnarch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{7}");

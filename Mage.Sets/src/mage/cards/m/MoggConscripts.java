@@ -46,7 +46,7 @@ import mage.watchers.common.PlayerCastCreatureWatcher;
  *
  * @author fireshoes
  */
-public class MoggConscripts extends CardImpl {
+public final class MoggConscripts extends CardImpl {
 
     public MoggConscripts(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");

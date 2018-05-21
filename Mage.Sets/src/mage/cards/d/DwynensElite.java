@@ -48,7 +48,7 @@ import java.util.UUID;
  *
  * @author fireshoes
  */
-public class DwynensElite extends CardImpl {
+public final class DwynensElite extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("another Elf");
 

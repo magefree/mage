@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author fireshoes
  */
-public class SibsigMuckdraggers extends CardImpl {
+public final class SibsigMuckdraggers extends CardImpl {
 
     public SibsigMuckdraggers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{8}{B}");

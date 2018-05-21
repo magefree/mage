@@ -44,7 +44,7 @@ import mage.target.TargetPlayer;
  *
  * @author anonymous
  */
-public class OrcishSpy extends CardImpl {
+public final class OrcishSpy extends CardImpl {
 
     public OrcishSpy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");

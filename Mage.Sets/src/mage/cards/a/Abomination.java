@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author jeffwadsworth
  */
-public class Abomination extends CardImpl {
+public final class Abomination extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("green or white creature");
 

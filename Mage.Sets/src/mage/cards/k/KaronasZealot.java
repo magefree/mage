@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author L_J
  */
-public class KaronasZealot extends CardImpl {
+public final class KaronasZealot extends CardImpl {
 
     public KaronasZealot(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}");

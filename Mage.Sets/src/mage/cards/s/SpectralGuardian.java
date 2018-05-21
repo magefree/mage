@@ -49,7 +49,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author TheElk801
  */
-public class SpectralGuardian extends CardImpl {
+public final class SpectralGuardian extends CardImpl {
 
     private static final FilterArtifactPermanent filter = new FilterArtifactPermanent();
 

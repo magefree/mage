@@ -44,7 +44,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author L_J
  */
-public class DreadCharge extends CardImpl {
+public final class DreadCharge extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Black creatures you control");
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("except by black creatures");

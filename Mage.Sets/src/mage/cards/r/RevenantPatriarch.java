@@ -47,7 +47,7 @@ import mage.watchers.common.ManaSpentToCastWatcher;
  *
  * @author ilcartographer
  */
-public class RevenantPatriarch extends CardImpl {
+public final class RevenantPatriarch extends CardImpl {
 
     public RevenantPatriarch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");

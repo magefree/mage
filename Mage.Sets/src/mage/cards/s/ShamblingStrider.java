@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author hanasu
  */
-public class ShamblingStrider extends CardImpl {
+public final class ShamblingStrider extends CardImpl {
 
     public ShamblingStrider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");

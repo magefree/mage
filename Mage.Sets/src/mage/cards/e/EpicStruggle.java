@@ -43,7 +43,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class EpicStruggle extends CardImpl {
+public final class EpicStruggle extends CardImpl {
     
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("if you control twenty or more creatures");
 

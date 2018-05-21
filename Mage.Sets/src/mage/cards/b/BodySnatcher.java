@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author fireshoes
  */
-public class BodySnatcher extends CardImpl {
+public final class BodySnatcher extends CardImpl {
 
     public BodySnatcher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");

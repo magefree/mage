@@ -57,7 +57,7 @@ import mage.watchers.common.AttackedLastTurnWatcher;
  *
  * @author L_J
  */
-public class TangleKelp extends CardImpl {
+public final class TangleKelp extends CardImpl {
 
     public TangleKelp(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{U}");

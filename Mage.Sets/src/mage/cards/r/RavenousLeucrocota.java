@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class RavenousLeucrocota extends CardImpl {
+public final class RavenousLeucrocota extends CardImpl {
 
     public RavenousLeucrocota(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

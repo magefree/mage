@@ -39,7 +39,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Styxo
  */
-public class ForceSpark extends CardImpl {
+public final class ForceSpark extends CardImpl {
 
     public ForceSpark(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");

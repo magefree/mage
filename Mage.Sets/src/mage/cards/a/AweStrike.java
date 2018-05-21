@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author brikr
  */
-public class AweStrike extends CardImpl {
+public final class AweStrike extends CardImpl {
 
     public AweStrike(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{W}");

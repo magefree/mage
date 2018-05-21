@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author ciaccona007
  */
-public class BitterbowSharpshooters extends CardImpl {
+public final class BitterbowSharpshooters extends CardImpl {
 
     public BitterbowSharpshooters(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}");

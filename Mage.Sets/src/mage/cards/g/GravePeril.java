@@ -50,7 +50,7 @@ import mage.game.permanent.Permanent;
  *
  * @author emerald000
  */
-public class GravePeril extends CardImpl {
+public final class GravePeril extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a nonblack creature");
     static {

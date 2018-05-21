@@ -40,7 +40,7 @@ import mage.target.TargetSpell;
  *
  * @author North
  */
-public class OfferingToAsha extends CardImpl {
+public final class OfferingToAsha extends CardImpl {
 
     public OfferingToAsha(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}{U}");

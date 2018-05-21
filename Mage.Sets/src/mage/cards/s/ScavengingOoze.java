@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author LevelX2
  */
-public class ScavengingOoze extends CardImpl {
+public final class ScavengingOoze extends CardImpl {
 
     public ScavengingOoze(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

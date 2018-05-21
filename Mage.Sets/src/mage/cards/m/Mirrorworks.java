@@ -47,7 +47,7 @@ import mage.filter.predicate.permanent.TokenPredicate;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Mirrorworks extends CardImpl {
+public final class Mirrorworks extends CardImpl {
 
     private final static FilterArtifactPermanent filter = new FilterArtifactPermanent("another nontoken artifact");
 

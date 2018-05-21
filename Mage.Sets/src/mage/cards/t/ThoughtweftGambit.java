@@ -44,7 +44,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class ThoughtweftGambit extends CardImpl {
+public final class ThoughtweftGambit extends CardImpl {
 
     public ThoughtweftGambit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{W/U}{W/U}");

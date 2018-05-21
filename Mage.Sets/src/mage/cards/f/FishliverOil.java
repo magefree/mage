@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author Laxika
  */
-public class FishliverOil extends CardImpl {
+public final class FishliverOil extends CardImpl {
 
     public FishliverOil(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}");

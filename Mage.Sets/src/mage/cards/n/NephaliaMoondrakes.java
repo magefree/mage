@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class NephaliaMoondrakes extends CardImpl {
+public final class NephaliaMoondrakes extends CardImpl {
 
     public NephaliaMoondrakes(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");

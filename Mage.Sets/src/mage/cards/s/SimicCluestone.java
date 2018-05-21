@@ -48,7 +48,7 @@ import mage.constants.Zone;
  */
 
 
-public class SimicCluestone extends CardImpl {
+public final class SimicCluestone extends CardImpl {
 
     public SimicCluestone(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

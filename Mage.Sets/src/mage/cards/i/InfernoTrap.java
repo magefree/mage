@@ -49,7 +49,7 @@ import java.util.*;
 /**
  * @author jeffwadsworth
  */
-public class InfernoTrap extends CardImpl {
+public final class InfernoTrap extends CardImpl {
 
     public InfernoTrap(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{R}");

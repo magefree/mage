@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author Styxo
  */
-public class BastionEnforcer extends CardImpl {
+public final class BastionEnforcer extends CardImpl {
 
     public BastionEnforcer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");

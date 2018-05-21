@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class ElvishVisionary extends CardImpl {
+public final class ElvishVisionary extends CardImpl {
 
     public ElvishVisionary (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

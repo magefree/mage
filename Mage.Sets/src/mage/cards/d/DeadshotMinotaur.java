@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jonubuu
  */
-public class DeadshotMinotaur extends CardImpl {
+public final class DeadshotMinotaur extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with flying");
 

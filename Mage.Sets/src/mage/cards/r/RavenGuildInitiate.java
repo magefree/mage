@@ -43,7 +43,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author TheElk801
  */
-public class RavenGuildInitiate extends CardImpl {
+public final class RavenGuildInitiate extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Bird");
 

@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class PromisedKannushi extends CardImpl {
+public final class PromisedKannushi extends CardImpl {
 
     public PromisedKannushi(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");

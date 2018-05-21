@@ -53,7 +53,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author North
  */
-public class TrepanationBlade extends CardImpl {
+public final class TrepanationBlade extends CardImpl {
 
     public TrepanationBlade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");

@@ -45,7 +45,7 @@ import mage.target.TargetPlayer;
  *
  * @author maurer.it_at_gmail.com
  */
-public class DispenseJustice extends CardImpl {
+public final class DispenseJustice extends CardImpl {
 
     public DispenseJustice (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");

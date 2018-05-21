@@ -51,7 +51,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author emerald000
  */
-public class BoldwyrHeavyweights extends CardImpl {
+public final class BoldwyrHeavyweights extends CardImpl {
 
     public BoldwyrHeavyweights(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");

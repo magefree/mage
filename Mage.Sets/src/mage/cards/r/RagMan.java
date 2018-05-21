@@ -54,7 +54,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author Quercitron
  */
-public class RagMan extends CardImpl {
+public final class RagMan extends CardImpl {
 
     public RagMan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");

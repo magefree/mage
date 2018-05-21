@@ -44,7 +44,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class LandTax extends CardImpl {
+public final class LandTax extends CardImpl {
 
     public LandTax(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}");

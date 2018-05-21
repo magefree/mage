@@ -41,7 +41,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class ReclaimingVines extends CardImpl {
+public final class ReclaimingVines extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact, enchantment, or land");
 

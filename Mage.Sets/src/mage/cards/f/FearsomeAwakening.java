@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author fireshoes
  */
-public class FearsomeAwakening extends CardImpl {
+public final class FearsomeAwakening extends CardImpl {
 
     public FearsomeAwakening(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{B}");

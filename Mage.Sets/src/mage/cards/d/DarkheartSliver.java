@@ -47,7 +47,7 @@ import mage.filter.StaticFilters;
  *
  * @author KholdFuzion
  */
-public class DarkheartSliver extends CardImpl {
+public final class DarkheartSliver extends CardImpl {
 
     public DarkheartSliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{G}");

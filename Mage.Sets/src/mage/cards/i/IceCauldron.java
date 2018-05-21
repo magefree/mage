@@ -68,7 +68,7 @@ import mage.util.CardUtil;
  *
  * @author L_J (based on jeffwadsworth)
  */
-public class IceCauldron extends CardImpl {
+public final class IceCauldron extends CardImpl {
 
     public IceCauldron(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");

@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author LoneFox
 
  */
-public class FireImp extends CardImpl {
+public final class FireImp extends CardImpl {
 
     public FireImp(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

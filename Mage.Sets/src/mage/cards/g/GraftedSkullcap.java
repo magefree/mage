@@ -42,7 +42,7 @@ import mage.constants.TargetController;
  * @author LoneFox
 
  */
-public class GraftedSkullcap extends CardImpl {
+public final class GraftedSkullcap extends CardImpl {
 
     public GraftedSkullcap(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");

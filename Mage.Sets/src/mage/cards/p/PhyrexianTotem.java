@@ -55,7 +55,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author FenrisulfrX
  */
-public class PhyrexianTotem extends CardImpl {
+public final class PhyrexianTotem extends CardImpl {
 
     public PhyrexianTotem(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

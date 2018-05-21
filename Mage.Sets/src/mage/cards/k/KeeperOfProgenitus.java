@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author Plopman
  */
-public class KeeperOfProgenitus extends CardImpl {
+public final class KeeperOfProgenitus extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("a player taps a Mountain, Forest, or Plains");
 

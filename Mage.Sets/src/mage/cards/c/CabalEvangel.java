@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author Rystan
  */
-public class CabalEvangel extends CardImpl {
+public final class CabalEvangel extends CardImpl {
 
     public CabalEvangel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

@@ -40,7 +40,7 @@ import mage.constants.TargetController;
  *
  * @author LoneFox
  */
-public class HarvesterDruid extends CardImpl {
+public final class HarvesterDruid extends CardImpl {
 
     public HarvesterDruid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

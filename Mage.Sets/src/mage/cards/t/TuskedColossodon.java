@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class TuskedColossodon extends CardImpl {
+public final class TuskedColossodon extends CardImpl {
 
     public TuskedColossodon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");

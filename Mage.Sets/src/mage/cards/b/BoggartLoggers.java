@@ -49,7 +49,7 @@ import mage.target.TargetPermanent;
  *
  * @author fireshoes
  */
-public class BoggartLoggers extends CardImpl {
+public final class BoggartLoggers extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent("Treefolk or Forest");
 

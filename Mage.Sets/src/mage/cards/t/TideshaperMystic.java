@@ -46,7 +46,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author fireshoes
  */
-public class TideshaperMystic extends CardImpl {
+public final class TideshaperMystic extends CardImpl {
 
     public TideshaperMystic(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");

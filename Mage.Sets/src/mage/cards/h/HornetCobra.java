@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class HornetCobra extends CardImpl {
+public final class HornetCobra extends CardImpl {
 
     public HornetCobra(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");

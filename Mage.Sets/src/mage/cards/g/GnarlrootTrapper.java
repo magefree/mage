@@ -59,7 +59,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class GnarlrootTrapper extends CardImpl {
+public final class GnarlrootTrapper extends CardImpl {
 
     private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("attacking ELf you control");
 

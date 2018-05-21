@@ -40,7 +40,7 @@ import java.util.UUID;
 /**
  * @author LevelX2
  */
-public class SelesnyaGuildgate extends CardImpl {
+public final class SelesnyaGuildgate extends CardImpl {
 
     public SelesnyaGuildgate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

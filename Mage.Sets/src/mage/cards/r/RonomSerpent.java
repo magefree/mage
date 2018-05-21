@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.SupertypePredicate;
  *
  * @author TheElk801
  */
-public class RonomSerpent extends CardImpl {
+public final class RonomSerpent extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("a snow land");
     private static final FilterLandPermanent filter2 = new FilterLandPermanent("no snow lands");

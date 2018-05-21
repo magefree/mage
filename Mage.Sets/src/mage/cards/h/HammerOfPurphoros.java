@@ -52,7 +52,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class HammerOfPurphoros extends CardImpl {
+public final class HammerOfPurphoros extends CardImpl {
 
     public HammerOfPurphoros(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.ARTIFACT}, "{1}{R}{R}");

@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author LoneFox
  */
-public class RadiantEssence extends CardImpl {
+public final class RadiantEssence extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("a black permanent");
 

@@ -52,7 +52,7 @@ import mage.players.Player;
  *
  * @author spjspj
  */
-public class Hydradoodle extends CardImpl {
+public final class Hydradoodle extends CardImpl {
 
     public Hydradoodle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{X}{X}{G}{G}");

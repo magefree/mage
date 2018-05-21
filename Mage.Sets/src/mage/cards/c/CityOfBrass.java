@@ -39,7 +39,7 @@ import mage.constants.CardType;
  *
  * @author jeffwadsworth
  */
-public class CityOfBrass extends CardImpl {
+public final class CityOfBrass extends CardImpl {
 
     public CityOfBrass(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

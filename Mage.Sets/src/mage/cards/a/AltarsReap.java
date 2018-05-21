@@ -40,7 +40,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author North
  */
-public class AltarsReap extends CardImpl {
+public final class AltarsReap extends CardImpl {
 
     public AltarsReap(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{B}");

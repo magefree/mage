@@ -39,7 +39,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author spjspj
  */
-public class PuncturingBlow extends CardImpl {
+public final class PuncturingBlow extends CardImpl {
 
     public PuncturingBlow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{R}{R}");

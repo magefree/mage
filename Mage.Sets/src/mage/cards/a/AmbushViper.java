@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class AmbushViper extends CardImpl {
+public final class AmbushViper extends CardImpl {
 
     public AmbushViper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

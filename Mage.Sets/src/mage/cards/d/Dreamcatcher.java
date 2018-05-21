@@ -43,7 +43,7 @@ import mage.filter.StaticFilters;
  *
  * @author LevelX2
  */
-public class Dreamcatcher extends CardImpl {
+public final class Dreamcatcher extends CardImpl {
 
     public Dreamcatcher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}");

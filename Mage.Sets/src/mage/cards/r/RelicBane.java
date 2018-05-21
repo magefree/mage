@@ -49,7 +49,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author LoneFox
  */
-public class RelicBane extends CardImpl {
+public final class RelicBane extends CardImpl {
 
     public RelicBane(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}{B}");

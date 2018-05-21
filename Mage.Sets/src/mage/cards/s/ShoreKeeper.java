@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author TheElk801
  */
-public class ShoreKeeper extends CardImpl {
+public final class ShoreKeeper extends CardImpl {
 
     public ShoreKeeper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}");

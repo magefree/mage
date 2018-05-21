@@ -41,7 +41,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author fireshoes
  */
-public class Fruition extends CardImpl {
+public final class Fruition extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent("for each Forest on the battlefield");
 

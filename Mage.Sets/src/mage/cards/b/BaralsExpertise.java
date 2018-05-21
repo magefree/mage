@@ -42,7 +42,7 @@ import mage.target.TargetPermanent;
  *
  * @author fireshoes
  */
-public class BaralsExpertise extends CardImpl {
+public final class BaralsExpertise extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifacts and/or creatures");
 

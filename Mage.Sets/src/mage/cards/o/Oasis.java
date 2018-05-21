@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author daagar
  */
-public class Oasis extends CardImpl {
+public final class Oasis extends CardImpl {
 
     public Oasis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

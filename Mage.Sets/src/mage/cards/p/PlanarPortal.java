@@ -43,7 +43,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author Plopman
  */
-public class PlanarPortal extends CardImpl {
+public final class PlanarPortal extends CardImpl {
 
     public PlanarPortal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{6}");

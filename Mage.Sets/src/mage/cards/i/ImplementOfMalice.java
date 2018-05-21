@@ -45,7 +45,7 @@ import mage.target.TargetPlayer;
  *
  * @author fireshoes
  */
-public class ImplementOfMalice extends CardImpl {
+public final class ImplementOfMalice extends CardImpl {
 
     public ImplementOfMalice(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");

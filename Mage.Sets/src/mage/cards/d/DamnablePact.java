@@ -42,7 +42,7 @@ import mage.target.TargetPlayer;
  *
  * @author jeffwadsworth
  */
-public class DamnablePact extends CardImpl {
+public final class DamnablePact extends CardImpl {
 
     public DamnablePact(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{B}{B}");

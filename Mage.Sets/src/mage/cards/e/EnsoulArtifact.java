@@ -51,7 +51,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author LevelX2
  */
-public class EnsoulArtifact extends CardImpl {
+public final class EnsoulArtifact extends CardImpl {
 
     public EnsoulArtifact(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}");

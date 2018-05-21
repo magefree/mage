@@ -38,7 +38,7 @@ import mage.filter.common.FilterAttackingCreature;
  *
  * @author North
  */
-public class RainOfBlades extends CardImpl {
+public final class RainOfBlades extends CardImpl {
 
     public RainOfBlades(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");

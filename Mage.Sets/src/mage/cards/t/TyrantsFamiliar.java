@@ -50,7 +50,7 @@ import mage.target.TargetPermanent;
  *
  * @author emerald000
  */
-public class TyrantsFamiliar extends CardImpl {
+public final class TyrantsFamiliar extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("creature defending player controls");
 

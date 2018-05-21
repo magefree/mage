@@ -48,7 +48,7 @@ import mage.game.permanent.token.WolfToken;
  *
  * @author LevelX2
  */
-public class CultOfTheWaxingMoon extends CardImpl {
+public final class CultOfTheWaxingMoon extends CardImpl {
 
     public CultOfTheWaxingMoon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");

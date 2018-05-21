@@ -40,7 +40,7 @@ import mage.constants.CardType;
  *
  * @author LevelX2
  */
-public class RenewedFaith extends CardImpl {
+public final class RenewedFaith extends CardImpl {
 
     public RenewedFaith(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");

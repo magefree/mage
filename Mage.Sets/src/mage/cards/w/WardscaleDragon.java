@@ -48,7 +48,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class WardscaleDragon extends CardImpl {
+public final class WardscaleDragon extends CardImpl {
 
     public WardscaleDragon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{W}");

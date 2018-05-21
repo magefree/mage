@@ -45,7 +45,7 @@ import mage.constants.TargetController;
  *
  * @author LevelX2
  */
-public class ConduitOfEmrakul extends CardImpl {
+public final class ConduitOfEmrakul extends CardImpl {
 
     public ConduitOfEmrakul(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");

@@ -51,7 +51,7 @@ import mage.util.CardUtil;
  *
  * @author Styxo
  */
-public class CunningAbduction extends CardImpl {
+public final class CunningAbduction extends CardImpl {
 
     public CunningAbduction(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{U}{B}");

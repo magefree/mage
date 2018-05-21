@@ -51,7 +51,7 @@ import java.util.UUID;
  * @author LoneFox
  *
  */
-public class HiddenGuerrillas extends CardImpl {
+public final class HiddenGuerrillas extends CardImpl {
 
     public HiddenGuerrillas(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}");

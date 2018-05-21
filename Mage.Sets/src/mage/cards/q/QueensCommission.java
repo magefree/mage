@@ -38,7 +38,7 @@ import mage.game.permanent.token.IxalanVampireToken;
  *
  * @author TheElk801
  */
-public class QueensCommission extends CardImpl {
+public final class QueensCommission extends CardImpl {
 
     public QueensCommission(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{W}");

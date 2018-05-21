@@ -56,7 +56,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author L_J
  */
-public class SurpriseDeployment extends CardImpl {
+public final class SurpriseDeployment extends CardImpl {
 
     public SurpriseDeployment(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{W}");

@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author TheElk801
  */
-public class DemonlordBelzenlok extends CardImpl {
+public final class DemonlordBelzenlok extends CardImpl {
 
     public DemonlordBelzenlok(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");

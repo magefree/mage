@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class NurturerInitiate extends CardImpl {
+public final class NurturerInitiate extends CardImpl {
     
     private static final FilterSpell filter = new FilterSpell("a green spell");
     

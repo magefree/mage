@@ -46,7 +46,7 @@ import mage.watchers.common.PlayerAttackedWatcher;
  *
  * @author TheElk801
  */
-public class RepeatingBarrage extends CardImpl {
+public final class RepeatingBarrage extends CardImpl {
 
     public RepeatingBarrage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{R}{R}");

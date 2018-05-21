@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author LevelX2
  */
-public class GaeasBlessing extends CardImpl {
+public final class GaeasBlessing extends CardImpl {
 
     public GaeasBlessing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{G}");

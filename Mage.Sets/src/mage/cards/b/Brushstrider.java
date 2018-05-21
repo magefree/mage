@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class Brushstrider extends CardImpl {
+public final class Brushstrider extends CardImpl {
 
     public Brushstrider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class StoneforgeMystic extends CardImpl {
+public final class StoneforgeMystic extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("an Equipment card");
 

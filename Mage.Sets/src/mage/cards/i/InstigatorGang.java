@@ -48,7 +48,7 @@ import mage.filter.common.FilterAttackingCreature;
 /**
  * @author nantuko
  */
-public class InstigatorGang extends CardImpl {
+public final class InstigatorGang extends CardImpl {
 
     public InstigatorGang(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

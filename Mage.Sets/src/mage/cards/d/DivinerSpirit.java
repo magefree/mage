@@ -44,7 +44,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class DivinerSpirit extends CardImpl {
+public final class DivinerSpirit extends CardImpl {
 
     public DivinerSpirit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}");

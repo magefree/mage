@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author Loki
  */
-public class Lifesmith extends CardImpl {
+public final class Lifesmith extends CardImpl {
     public Lifesmith (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
         this.subtype.add(SubType.HUMAN);

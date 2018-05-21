@@ -41,7 +41,7 @@ import mage.target.common.TargetEnchantmentPermanent;
  *
  * @author LevelX2
  */
-public class WearTear extends SplitCard {
+public final class WearTear extends SplitCard {
 
     public WearTear(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R}", "{W}", SpellAbilityType.SPLIT_FUSED);

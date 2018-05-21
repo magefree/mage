@@ -47,7 +47,7 @@ import mage.game.combat.CombatGroup;
  *
  * @author KholdFuzion
  */
-public class SpinedSliver extends CardImpl {
+public final class SpinedSliver extends CardImpl {
 
     public SpinedSliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}{G}");

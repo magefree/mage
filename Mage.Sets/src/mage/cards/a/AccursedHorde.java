@@ -48,7 +48,7 @@ import mage.target.common.TargetAttackingCreature;
  *
  * @author fireshoes
  */
-public class AccursedHorde extends CardImpl {
+public final class AccursedHorde extends CardImpl {
 
     private final static FilterAttackingCreature filter = new FilterAttackingCreature("attacking Zombie");
 

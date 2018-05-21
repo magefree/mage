@@ -70,7 +70,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author L_J
  */
-public class TourachsGate extends CardImpl {
+public final class TourachsGate extends CardImpl {
 
     private static final FilterControlledPermanent filterLand = new FilterControlledPermanent("land you control");
     static {

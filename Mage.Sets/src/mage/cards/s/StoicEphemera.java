@@ -44,7 +44,7 @@ import mage.constants.SubType;
  *
  * @author LoneFox
  */
-public class StoicEphemera extends CardImpl {
+public final class StoicEphemera extends CardImpl {
 
     public StoicEphemera(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");

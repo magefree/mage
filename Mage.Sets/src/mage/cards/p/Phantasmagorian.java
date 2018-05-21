@@ -53,7 +53,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author Plopman
  */
-public class Phantasmagorian extends CardImpl {
+public final class Phantasmagorian extends CardImpl {
 
     public Phantasmagorian(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}{B}");

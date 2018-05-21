@@ -49,7 +49,7 @@ import static mage.filter.StaticFilters.FILTER_CONTROLLED_CREATURES;
  *
  * @author TheElk801
  */
-public class SongOfFreyalise extends CardImpl {
+public final class SongOfFreyalise extends CardImpl {
 
     public SongOfFreyalise(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");

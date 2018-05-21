@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class SilentSkimmer extends CardImpl {
+public final class SilentSkimmer extends CardImpl {
 
     public SilentSkimmer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");

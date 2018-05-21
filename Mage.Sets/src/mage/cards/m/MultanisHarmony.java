@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author LoneFox
 
  */
-public class MultanisHarmony extends CardImpl {
+public final class MultanisHarmony extends CardImpl {
 
     public MultanisHarmony(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}");

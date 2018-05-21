@@ -39,7 +39,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author Plopman
  */
-public class EarlyFrost extends CardImpl {
+public final class EarlyFrost extends CardImpl {
 
     public EarlyFrost(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");

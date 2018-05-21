@@ -44,7 +44,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author jeffwadsworth
  */
-public class DragonAppeasement extends CardImpl {
+public final class DragonAppeasement extends CardImpl {
 
     public DragonAppeasement(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{B}{R}{G}");

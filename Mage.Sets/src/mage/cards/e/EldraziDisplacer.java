@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class EldraziDisplacer extends CardImpl {
+public final class EldraziDisplacer extends CardImpl {
 
     private static final FilterCreaturePermanent FILTER = new FilterCreaturePermanent("another target creature");
 

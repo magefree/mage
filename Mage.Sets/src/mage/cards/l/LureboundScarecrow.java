@@ -48,7 +48,7 @@ import mage.game.permanent.Permanent;
  *
  * @author jeffwadsworth
  */
-public class LureboundScarecrow extends CardImpl {
+public final class LureboundScarecrow extends CardImpl {
 
     public LureboundScarecrow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");

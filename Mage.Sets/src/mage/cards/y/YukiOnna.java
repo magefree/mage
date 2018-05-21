@@ -44,7 +44,7 @@ import mage.target.common.TargetArtifactPermanent;
 /**
  * @author Loki
  */
-public class YukiOnna extends CardImpl {
+public final class YukiOnna extends CardImpl {
 
     public YukiOnna(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

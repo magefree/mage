@@ -49,7 +49,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author Plopman
  */
-public class HelmOfObedience extends CardImpl {
+public final class HelmOfObedience extends CardImpl {
 
     public HelmOfObedience(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");

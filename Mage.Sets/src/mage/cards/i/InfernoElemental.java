@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class InfernoElemental extends CardImpl {
+public final class InfernoElemental extends CardImpl {
 
     public InfernoElemental(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");

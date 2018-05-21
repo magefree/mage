@@ -58,7 +58,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LoneFox
  */
-public class PossessedBarbarian extends CardImpl {
+public final class PossessedBarbarian extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("red creature");
 

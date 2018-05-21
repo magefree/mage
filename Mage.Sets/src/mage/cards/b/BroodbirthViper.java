@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class BroodbirthViper extends CardImpl {
+public final class BroodbirthViper extends CardImpl {
 
     public BroodbirthViper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");

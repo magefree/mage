@@ -43,7 +43,7 @@ import mage.filter.common.FilterControlledArtifactPermanent;
  *
  * @author fireshoes
  */
-public class WeldfastWingsmith extends CardImpl {
+public final class WeldfastWingsmith extends CardImpl {
 
     public WeldfastWingsmith(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");

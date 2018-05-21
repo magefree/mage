@@ -40,7 +40,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class UnravelTheAether extends CardImpl {
+public final class UnravelTheAether extends CardImpl {
 
     public UnravelTheAether(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}");

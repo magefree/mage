@@ -43,7 +43,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author LoneFox
  */
-public class Lifetap extends CardImpl {
+public final class Lifetap extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("a Forest an opponent controls");
 

@@ -47,7 +47,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class FrenziedGoblin extends CardImpl {
+public final class FrenziedGoblin extends CardImpl {
 
     public FrenziedGoblin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");

@@ -42,7 +42,7 @@ import mage.players.Player;
 /**
  * @author magenoxx_at_gmail.com
  */
-public class Worship extends CardImpl {
+public final class Worship extends CardImpl {
 
     public Worship(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}");

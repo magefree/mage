@@ -50,7 +50,7 @@ import mage.filter.predicate.permanent.CounterPredicate;
  *
  * @author spjspj
  */
-public class TenaciousHunter extends CardImpl {
+public final class TenaciousHunter extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature has a -1/-1 counter on it");
 

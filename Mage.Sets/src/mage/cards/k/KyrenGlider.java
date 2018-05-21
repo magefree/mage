@@ -40,7 +40,7 @@ import mage.constants.SubType;
 /**
  * @author BursegSardaukar
  */
-public class KyrenGlider extends CardImpl {
+public final class KyrenGlider extends CardImpl {
 
     public KyrenGlider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

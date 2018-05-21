@@ -63,7 +63,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author anonymous
  */
-public class SimicGuildmage extends CardImpl {
+public final class SimicGuildmage extends CardImpl {
 
     private static final FilterEnchantmentPermanent auraFilter = new FilterEnchantmentPermanent("Aura");
 

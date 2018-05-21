@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author LoneFox
  */
-public class VileDeacon extends CardImpl {
+public final class VileDeacon extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Clerics");
 

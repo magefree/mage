@@ -52,7 +52,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author L_J
  */
-public class WildMammoth extends CardImpl {
+public final class WildMammoth extends CardImpl {
 
     public WildMammoth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

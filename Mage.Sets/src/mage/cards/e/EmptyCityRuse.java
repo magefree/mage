@@ -38,7 +38,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class EmptyCityRuse extends CardImpl {
+public final class EmptyCityRuse extends CardImpl {
 
     public EmptyCityRuse(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{W}");

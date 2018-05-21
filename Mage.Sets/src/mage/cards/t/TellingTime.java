@@ -48,7 +48,7 @@ import mage.target.TargetCard;
  *
  * @author North
  */
-public class TellingTime extends CardImpl {
+public final class TellingTime extends CardImpl {
 
     public TellingTime(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");

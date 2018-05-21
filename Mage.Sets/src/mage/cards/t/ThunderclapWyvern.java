@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  *
  * @author LevelX2
  */
-public class ThunderclapWyvern extends CardImpl {
+public final class ThunderclapWyvern extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures you control with flying");
 

@@ -38,7 +38,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author AlumiuN
  */
-public class Infiltrate extends CardImpl {
+public final class Infiltrate extends CardImpl {
 
     public Infiltrate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");

@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author fireshoes
  */
-public class ExtractFromDarkness extends CardImpl {
+public final class ExtractFromDarkness extends CardImpl {
 
     public ExtractFromDarkness(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}{B}");

@@ -47,7 +47,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LevelX2
  */
-public class SkarrganSkybreaker extends CardImpl {
+public final class SkarrganSkybreaker extends CardImpl {
 
     public SkarrganSkybreaker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{R}{G}");

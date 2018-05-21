@@ -38,7 +38,7 @@ import mage.constants.CardType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class AngelsMercy extends CardImpl {
+public final class AngelsMercy extends CardImpl {
 
     public AngelsMercy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}{W}");

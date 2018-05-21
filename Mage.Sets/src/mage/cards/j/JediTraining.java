@@ -49,7 +49,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author Styxo
  */
-public class JediTraining extends CardImpl {
+public final class JediTraining extends CardImpl {
 
     protected static final FilterCard filter = new FilterCard("Jedi spells");
 

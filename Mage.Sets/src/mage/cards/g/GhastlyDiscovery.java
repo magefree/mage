@@ -42,7 +42,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class GhastlyDiscovery extends CardImpl {
+public final class GhastlyDiscovery extends CardImpl {
 
     public GhastlyDiscovery(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}");

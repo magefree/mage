@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class AberrantResearcher extends CardImpl {
+public final class AberrantResearcher extends CardImpl {
 
     public AberrantResearcher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");

@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Plopman
  */
-public class VineTrellis extends CardImpl {
+public final class VineTrellis extends CardImpl {
 
     public VineTrellis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

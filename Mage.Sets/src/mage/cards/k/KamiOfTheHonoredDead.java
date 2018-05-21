@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author LevelX
  */
-public class KamiOfTheHonoredDead extends CardImpl {
+public final class KamiOfTheHonoredDead extends CardImpl {
 
     public KamiOfTheHonoredDead(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}{W}");

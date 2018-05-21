@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class PrimalHuntbeast extends CardImpl {
+public final class PrimalHuntbeast extends CardImpl {
 
     public PrimalHuntbeast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

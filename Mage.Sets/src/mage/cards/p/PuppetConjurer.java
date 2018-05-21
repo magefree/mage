@@ -50,7 +50,7 @@ import mage.game.permanent.token.HomunculusToken;
  *
  * @author Plopman
  */
-public class PuppetConjurer extends CardImpl {
+public final class PuppetConjurer extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Homunculus");
 

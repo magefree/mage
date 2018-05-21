@@ -56,7 +56,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class SquanderedResources extends CardImpl {
+public final class SquanderedResources extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("a land");
 

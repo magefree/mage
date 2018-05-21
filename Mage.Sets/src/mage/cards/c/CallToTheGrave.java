@@ -51,7 +51,7 @@ import java.util.UUID;
  *
  * @author nantuko
  */
-public class CallToTheGrave extends CardImpl {
+public final class CallToTheGrave extends CardImpl {
 
     private static final String ruleText = "At the beginning of the end step, if no creatures are on the battlefield, sacrifice {this}.";
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Zombie creature");

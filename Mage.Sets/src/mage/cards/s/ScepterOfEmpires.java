@@ -45,7 +45,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
 /**
  * @author nantuko
  */
-public class ScepterOfEmpires extends CardImpl {
+public final class ScepterOfEmpires extends CardImpl {
 
     public ScepterOfEmpires(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");

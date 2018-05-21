@@ -43,7 +43,7 @@ import mage.filter.common.FilterNonlandPermanent;
  *
  * @author fireshoes
  */
-public class HourOfRevelation extends CardImpl {
+public final class HourOfRevelation extends CardImpl {
 
     public HourOfRevelation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{W}{W}{W}");

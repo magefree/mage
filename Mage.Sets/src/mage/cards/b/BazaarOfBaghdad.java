@@ -40,7 +40,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class BazaarOfBaghdad extends CardImpl {
+public final class BazaarOfBaghdad extends CardImpl {
 
     public BazaarOfBaghdad(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

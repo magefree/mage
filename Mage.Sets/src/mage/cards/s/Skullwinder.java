@@ -52,7 +52,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class Skullwinder extends CardImpl {
+public final class Skullwinder extends CardImpl {
 
     public Skullwinder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

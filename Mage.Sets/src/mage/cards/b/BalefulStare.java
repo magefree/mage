@@ -51,7 +51,7 @@ import mage.target.common.TargetOpponent;
  * @author LoneFox
 
  */
-public class BalefulStare extends CardImpl {
+public final class BalefulStare extends CardImpl {
 
     public BalefulStare(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}");

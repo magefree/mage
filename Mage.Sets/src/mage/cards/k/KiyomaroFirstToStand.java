@@ -59,7 +59,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author LevelX2
  */
-public class KiyomaroFirstToStand extends CardImpl {
+public final class KiyomaroFirstToStand extends CardImpl {
 
     public KiyomaroFirstToStand(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");

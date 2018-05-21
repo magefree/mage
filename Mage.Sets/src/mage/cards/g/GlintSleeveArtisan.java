@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author emerald000
  */
-public class GlintSleeveArtisan extends CardImpl {
+public final class GlintSleeveArtisan extends CardImpl {
 
     public GlintSleeveArtisan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

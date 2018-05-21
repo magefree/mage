@@ -50,7 +50,7 @@ import mage.target.TargetPermanent;
  *
  * @author Quercitron
  */
-public class Tornado extends CardImpl {
+public final class Tornado extends CardImpl {
 
     public Tornado(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{G}");

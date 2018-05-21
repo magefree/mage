@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author Styxo
  */
-public class ImagesOfThePast extends CardImpl {
+public final class ImagesOfThePast extends CardImpl {
 
     public ImagesOfThePast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}{W}");

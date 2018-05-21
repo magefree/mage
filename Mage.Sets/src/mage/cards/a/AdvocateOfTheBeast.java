@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class AdvocateOfTheBeast extends CardImpl {
+public final class AdvocateOfTheBeast extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Beast creature you control");
     static {

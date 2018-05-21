@@ -40,7 +40,7 @@ import mage.game.permanent.token.TreasureToken;
  *
  * @author LevelX2
  */
-public class BrasssBounty extends CardImpl {
+public final class BrasssBounty extends CardImpl {
 
     public BrasssBounty(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{6}{R}");

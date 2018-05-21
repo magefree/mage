@@ -46,7 +46,7 @@ import mage.filter.common.FilterCreaturePermanent;
  * @author Alvin
  * @author ayratn
  */
-public class StromkirkNoble extends CardImpl {
+public final class StromkirkNoble extends CardImpl {
 
     public StromkirkNoble(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}");

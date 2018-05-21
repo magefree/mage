@@ -42,7 +42,7 @@ import mage.constants.CardType;
  *
  * @author Loki, North
  */
-public class RuptureSpire extends CardImpl {
+public final class RuptureSpire extends CardImpl {
 
     public RuptureSpire (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);

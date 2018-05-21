@@ -39,7 +39,7 @@ import mage.constants.CardType;
  *
  * @author Loki, North
  */
-public class InexorableTide extends CardImpl {
+public final class InexorableTide extends CardImpl {
 
     public InexorableTide (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{U}{U}");

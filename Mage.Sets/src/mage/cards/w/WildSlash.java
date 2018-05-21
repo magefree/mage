@@ -44,7 +44,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author jeffwadsworth
  */
-public class WildSlash extends CardImpl {
+public final class WildSlash extends CardImpl {
 
     public WildSlash(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");

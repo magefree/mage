@@ -43,7 +43,7 @@ import mage.game.permanent.token.BatToken;
  *
  * @author LevelX2
  */
-public class BelfrySpirit extends CardImpl {
+public final class BelfrySpirit extends CardImpl {
 
     public BelfrySpirit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");

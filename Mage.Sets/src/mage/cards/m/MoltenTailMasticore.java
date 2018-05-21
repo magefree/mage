@@ -56,7 +56,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Loki
  */
-public class MoltenTailMasticore extends CardImpl {
+public final class MoltenTailMasticore extends CardImpl {
 
     public MoltenTailMasticore (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}");

@@ -42,7 +42,7 @@ import mage.filter.StaticFilters;
  *
  * @author hanasu
  */
-public class SkitteringSkirge extends CardImpl {
+public final class SkitteringSkirge extends CardImpl {
 
     public SkitteringSkirge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{B}");

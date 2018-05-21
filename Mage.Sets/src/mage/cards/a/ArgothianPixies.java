@@ -49,7 +49,7 @@ import mage.game.events.GameEvent;
  *
  * @author MarcoMarin
  */
-public class ArgothianPixies extends CardImpl {
+public final class ArgothianPixies extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("artifact creatures");
 

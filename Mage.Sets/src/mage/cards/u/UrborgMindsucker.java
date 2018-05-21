@@ -45,7 +45,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author fireshoes
  */
-public class UrborgMindsucker extends CardImpl {
+public final class UrborgMindsucker extends CardImpl {
 
     public UrborgMindsucker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

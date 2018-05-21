@@ -52,7 +52,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author Plopman
  */
-public class BrinkOfMadness extends CardImpl {
+public final class BrinkOfMadness extends CardImpl {
 
     public BrinkOfMadness(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}{B}");

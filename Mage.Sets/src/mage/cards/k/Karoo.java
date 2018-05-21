@@ -50,7 +50,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class Karoo extends CardImpl {
+public final class Karoo extends CardImpl {
 
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("an untapped Plains");
 

@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author North
  */
-public class RuneCervinRider extends CardImpl {
+public final class RuneCervinRider extends CardImpl {
 
     public RuneCervinRider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

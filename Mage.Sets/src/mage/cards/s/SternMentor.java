@@ -46,7 +46,7 @@ import mage.target.TargetPlayer;
 /**
  * @author noxx
  */
-public class SternMentor extends CardImpl {
+public final class SternMentor extends CardImpl {
 
     private static final String ruleText = "As long as {this} is paired with another creature, each of those creatures has \"{T}: Target player puts the top two cards of their library into their graveyard.\"";
 

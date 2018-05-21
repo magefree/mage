@@ -42,7 +42,7 @@ import mage.target.TargetPermanent;
  *
  * @author jgreene40
  */
-public class RadiantPurge extends CardImpl {
+public final class RadiantPurge extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent("multicolored creature or multicolored enchantment");
     static {

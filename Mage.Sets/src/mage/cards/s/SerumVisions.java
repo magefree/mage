@@ -38,7 +38,7 @@ import mage.constants.CardType;
  *
  * @author North
  */
-public class SerumVisions extends CardImpl {
+public final class SerumVisions extends CardImpl {
 
     public SerumVisions(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{U}");

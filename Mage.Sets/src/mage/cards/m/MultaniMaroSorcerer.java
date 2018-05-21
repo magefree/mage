@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author Plopman
  */
-public class MultaniMaroSorcerer extends CardImpl {
+public final class MultaniMaroSorcerer extends CardImpl {
 
     public MultaniMaroSorcerer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");

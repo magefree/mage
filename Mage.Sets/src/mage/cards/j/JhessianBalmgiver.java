@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class JhessianBalmgiver extends CardImpl {
+public final class JhessianBalmgiver extends CardImpl {
 
     public JhessianBalmgiver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{U}");

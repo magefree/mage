@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class LilianaOfTheDarkRealms extends CardImpl {
+public final class LilianaOfTheDarkRealms extends CardImpl {
 
     private static final FilterLandCard filter = new FilterLandCard("Swamp card");
 

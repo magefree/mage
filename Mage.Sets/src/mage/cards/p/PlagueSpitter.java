@@ -43,7 +43,7 @@ import mage.constants.TargetController;
  * @author LoneFox
 
  */
-public class PlagueSpitter extends CardImpl {
+public final class PlagueSpitter extends CardImpl {
 
     public PlagueSpitter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

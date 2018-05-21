@@ -44,7 +44,7 @@ import mage.target.TargetSpell;
  *
  * @author fireshoes
  */
-public class SupremeWill extends CardImpl {
+public final class SupremeWill extends CardImpl {
 
     public SupremeWill(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}");

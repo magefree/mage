@@ -45,7 +45,7 @@ import mage.game.permanent.token.SpiritWhiteToken;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class DauntlessCathar extends CardImpl {
+public final class DauntlessCathar extends CardImpl {
 
     public DauntlessCathar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

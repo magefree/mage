@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author spjspj
  */
-public class AkiriLineSlinger extends CardImpl {
+public final class AkiriLineSlinger extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifact you control");
 

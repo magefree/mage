@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author Styxo
  */
-public class DarkTrooper extends CardImpl {
+public final class DarkTrooper extends CardImpl {
 
     public DarkTrooper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");

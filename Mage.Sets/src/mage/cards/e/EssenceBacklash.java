@@ -44,7 +44,7 @@ import mage.target.TargetSpell;
  *
  * @author LevelX2
  */
-public class EssenceBacklash extends CardImpl {
+public final class EssenceBacklash extends CardImpl {
 
     public EssenceBacklash(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}{R}");

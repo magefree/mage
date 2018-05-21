@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author emerald000
  */
-public class LeoninShikari extends CardImpl {
+public final class LeoninShikari extends CardImpl {
 
     public LeoninShikari(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

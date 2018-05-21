@@ -55,7 +55,7 @@ import mage.players.Player;
  *
  * @author Loki
  */
-public class PrimalClay extends CardImpl {
+public final class PrimalClay extends CardImpl {
 
     public PrimalClay(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");

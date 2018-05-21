@@ -47,7 +47,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Plopman
  */
-public class CinderElemental extends CardImpl {
+public final class CinderElemental extends CardImpl {
 
     public CinderElemental(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

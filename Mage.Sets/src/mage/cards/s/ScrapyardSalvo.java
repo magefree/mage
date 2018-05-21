@@ -40,7 +40,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  *
  * @author North
  */
-public class ScrapyardSalvo extends CardImpl {
+public final class ScrapyardSalvo extends CardImpl {
 
     public ScrapyardSalvo(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{R}{R}");

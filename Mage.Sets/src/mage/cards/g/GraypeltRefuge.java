@@ -41,7 +41,7 @@ import mage.constants.CardType;
  *
  * @author North
  */
-public class GraypeltRefuge extends CardImpl {
+public final class GraypeltRefuge extends CardImpl {
 
     public GraypeltRefuge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

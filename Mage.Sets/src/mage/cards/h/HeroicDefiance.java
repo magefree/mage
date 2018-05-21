@@ -52,7 +52,7 @@ import mage.game.permanent.Permanent;
  *
  * @author TheElk801
  */
-public class HeroicDefiance extends CardImpl {
+public final class HeroicDefiance extends CardImpl {
 
     public HeroicDefiance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");

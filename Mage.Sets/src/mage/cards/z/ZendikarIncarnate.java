@@ -46,7 +46,7 @@ import mage.filter.common.FilterControlledPermanent;
  *
  * @author fireshoes
  */
-public class ZendikarIncarnate extends CardImpl {
+public final class ZendikarIncarnate extends CardImpl {
     
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("lands you control");
 

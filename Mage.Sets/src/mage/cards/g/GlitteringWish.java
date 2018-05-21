@@ -40,7 +40,7 @@ import mage.filter.predicate.mageobject.MulticoloredPredicate;
  *
  * @author Plopman
  */
-public class GlitteringWish extends CardImpl {
+public final class GlitteringWish extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("a multicolored card");
 

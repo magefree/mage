@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class Halberdier extends CardImpl {
+public final class Halberdier extends CardImpl {
 
     public Halberdier(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class TatteredHaunter extends CardImpl {
+public final class TatteredHaunter extends CardImpl {
 
     public TatteredHaunter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

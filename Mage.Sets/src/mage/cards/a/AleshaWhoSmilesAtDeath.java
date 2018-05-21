@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author LevelX2
  */
-public class AleshaWhoSmilesAtDeath extends CardImpl {
+public final class AleshaWhoSmilesAtDeath extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("creature card with power 2 or less");
 

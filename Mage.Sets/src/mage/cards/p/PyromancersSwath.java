@@ -45,7 +45,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class PyromancersSwath extends CardImpl {
+public final class PyromancersSwath extends CardImpl {
 
     public PyromancersSwath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");

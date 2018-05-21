@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author caldover
  */
-public class DeathlessAncient extends CardImpl {
+public final class DeathlessAncient extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped Vampires you control");
 

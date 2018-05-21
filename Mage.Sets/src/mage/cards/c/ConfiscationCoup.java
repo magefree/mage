@@ -53,7 +53,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class ConfiscationCoup extends CardImpl {
+public final class ConfiscationCoup extends CardImpl {
 
     private final static FilterPermanent filter = new FilterPermanent("creature or artifact");
 

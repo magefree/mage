@@ -50,7 +50,7 @@ import mage.target.TargetPermanent;
  *
  * @author spjspj
  */
-public class ChandrasDefeat extends CardImpl {
+public final class ChandrasDefeat extends CardImpl {
 
     private final static FilterPermanent filter = new FilterPermanent("creature or planeswalker");
 

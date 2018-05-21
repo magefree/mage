@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author jeffwadsworth
  */
-public class SpikeJester extends CardImpl {
+public final class SpikeJester extends CardImpl {
 
     public SpikeJester(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{R}");

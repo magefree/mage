@@ -57,7 +57,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author L_J
  */
-public class PowerLeak extends CardImpl {
+public final class PowerLeak extends CardImpl {
 
     public PowerLeak(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}");

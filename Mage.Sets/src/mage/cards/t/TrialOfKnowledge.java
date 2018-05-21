@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author fireshoes
  */
-public class TrialOfKnowledge extends CardImpl {
+public final class TrialOfKnowledge extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Cartouche");
 

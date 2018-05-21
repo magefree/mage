@@ -43,7 +43,7 @@ import mage.filter.common.FilterLandPermanent;
  *
  * @author fireshoes
  */
-public class ZhouYuChiefCommander extends CardImpl {
+public final class ZhouYuChiefCommander extends CardImpl {
 
     public ZhouYuChiefCommander(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}{U}");

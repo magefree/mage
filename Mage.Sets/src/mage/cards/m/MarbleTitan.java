@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.PowerPredicate;
  *
  * @author LoneFox
  */
-public class MarbleTitan extends CardImpl {
+public final class MarbleTitan extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures with power 3 or greater");
 

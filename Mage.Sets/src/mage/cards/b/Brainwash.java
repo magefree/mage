@@ -45,7 +45,7 @@ import java.util.UUID;
  *
  * @author Galatolol
  */
-public class Brainwash extends CardImpl {
+public final class Brainwash extends CardImpl {
 
     public Brainwash(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{W}");

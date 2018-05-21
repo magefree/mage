@@ -41,7 +41,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author daagar
  */
-public class AbyssalGatekeeper extends CardImpl {
+public final class AbyssalGatekeeper extends CardImpl {
 
     public AbyssalGatekeeper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

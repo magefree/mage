@@ -53,7 +53,7 @@ import mage.target.TargetPermanent;
  *
  * @author keelahnkhan
  */
-public class CuratorsWard extends CardImpl {
+public final class CuratorsWard extends CardImpl {
 
     public CuratorsWard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");

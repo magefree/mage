@@ -45,7 +45,7 @@ import mage.target.TargetPlayer;
  *
  * @author Backfir3
  */
-public class SoldierOfFortune extends CardImpl {
+public final class SoldierOfFortune extends CardImpl {
 
     public SoldierOfFortune(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");

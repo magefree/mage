@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Styxo
  */
-public class RenegadeWheelsmith extends CardImpl {
+public final class RenegadeWheelsmith extends CardImpl {
 
     public RenegadeWheelsmith(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{W}");

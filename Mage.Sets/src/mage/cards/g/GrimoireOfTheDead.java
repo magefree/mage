@@ -54,7 +54,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author BetaSteward
  */
-public class GrimoireOfTheDead extends CardImpl {
+public final class GrimoireOfTheDead extends CardImpl {
 
     public GrimoireOfTheDead(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");

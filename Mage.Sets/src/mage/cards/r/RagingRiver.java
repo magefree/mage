@@ -62,7 +62,7 @@ import java.util.stream.Collectors;
  *
  * @author L_J
  */
-public class RagingRiver extends CardImpl {
+public final class RagingRiver extends CardImpl {
 
     public RagingRiver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{R}{R}");

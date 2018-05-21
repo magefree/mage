@@ -55,7 +55,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Styxo
  */
-public class LowlandOaf extends CardImpl {
+public final class LowlandOaf extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Goblin creature you control");
 

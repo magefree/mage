@@ -37,7 +37,7 @@ import mage.target.common.TargetAttackingOrBlockingCreature;
 /**
  * @author noxx
  */
-public class RighteousBlow extends CardImpl {
+public final class RighteousBlow extends CardImpl {
 
     public RighteousBlow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");

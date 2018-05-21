@@ -54,7 +54,7 @@ import mage.util.CardUtil;
  *
  * @author emerald000
  */
-public class SpellweaverHelix extends CardImpl {
+public final class SpellweaverHelix extends CardImpl {
     
     private static final FilterCard filter = new FilterCard("sorcery cards from a single graveyard");
     static {

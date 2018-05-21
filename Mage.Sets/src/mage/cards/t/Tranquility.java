@@ -38,7 +38,7 @@ import mage.filter.common.FilterEnchantmentPermanent;
  *
  * @author Loki
  */
-public class Tranquility extends CardImpl {
+public final class Tranquility extends CardImpl {
 
     public Tranquility(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}");

@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author LevelX2
  */
-public class AdvancedStitchwing extends CardImpl {
+public final class AdvancedStitchwing extends CardImpl {
 
     public AdvancedStitchwing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");

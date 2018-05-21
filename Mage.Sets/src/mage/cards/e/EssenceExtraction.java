@@ -40,7 +40,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class EssenceExtraction extends CardImpl {
+public final class EssenceExtraction extends CardImpl {
 
     public EssenceExtraction(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{B}{B}");

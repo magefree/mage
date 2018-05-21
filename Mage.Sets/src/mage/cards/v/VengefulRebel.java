@@ -47,7 +47,7 @@ import mage.watchers.common.RevoltWatcher;
  *
  * @author fireshoes
  */
-public class VengefulRebel extends CardImpl {
+public final class VengefulRebel extends CardImpl {
 
     public VengefulRebel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");

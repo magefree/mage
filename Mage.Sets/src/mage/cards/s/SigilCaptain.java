@@ -48,7 +48,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author jeffwadsworth
  */
-public class SigilCaptain extends CardImpl {
+public final class SigilCaptain extends CardImpl {
 
     public SigilCaptain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{W}{W}");

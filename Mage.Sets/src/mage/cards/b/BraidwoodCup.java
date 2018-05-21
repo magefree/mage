@@ -41,7 +41,7 @@ import mage.constants.Zone;
  *
  * @author Backfir3
  */
-public class BraidwoodCup extends CardImpl {
+public final class BraidwoodCup extends CardImpl {
 
     public BraidwoodCup(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

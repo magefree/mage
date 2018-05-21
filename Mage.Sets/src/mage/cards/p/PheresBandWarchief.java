@@ -47,7 +47,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author LevelX2
  */
-public class PheresBandWarchief extends CardImpl {
+public final class PheresBandWarchief extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Other Centaur creatures you control");
 

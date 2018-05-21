@@ -51,7 +51,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author jeffwadsworth
  */
-public class SkyclawThrash extends CardImpl {
+public final class SkyclawThrash extends CardImpl {
 
     public SkyclawThrash(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}{U}{R}");

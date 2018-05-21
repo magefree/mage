@@ -42,7 +42,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author fireshoes
  */
-public class InOketrasName extends CardImpl {
+public final class InOketrasName extends CardImpl {
 
     private static final FilterCreaturePermanent filterNotZombies = new FilterCreaturePermanent("Other creatures");
 

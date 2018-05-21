@@ -47,7 +47,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class AssemblyWorker extends CardImpl {
+public final class AssemblyWorker extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Assembly-Worker creature");
 

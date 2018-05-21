@@ -54,7 +54,7 @@ import mage.players.Player;
  *
  * @author spjspj
  */
-public class GroundPounder extends CardImpl {
+public final class GroundPounder extends CardImpl {
 
     public GroundPounder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");

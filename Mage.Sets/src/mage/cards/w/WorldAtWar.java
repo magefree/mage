@@ -50,7 +50,7 @@ import mage.watchers.common.AttackedThisTurnWatcher;
 /**
  * @author magenoxx_at_gmail.com
  */
-public class WorldAtWar extends CardImpl {
+public final class WorldAtWar extends CardImpl {
 
     public WorldAtWar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");

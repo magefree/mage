@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class SkitteringCrustacean extends CardImpl {
+public final class SkitteringCrustacean extends CardImpl {
 
     public SkitteringCrustacean(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

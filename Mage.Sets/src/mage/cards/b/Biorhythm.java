@@ -42,7 +42,7 @@ import mage.players.Player;
  *
  * @author LoneFox
  */
-public class Biorhythm extends CardImpl {
+public final class Biorhythm extends CardImpl {
 
     public Biorhythm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{6}{G}{G}");

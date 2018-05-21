@@ -43,7 +43,7 @@ import mage.filter.StaticFilters;
  *
  * @author LevelX2
  */
-public class MarchesasDecree extends CardImpl {
+public final class MarchesasDecree extends CardImpl {
 
     public MarchesasDecree(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}");

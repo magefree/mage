@@ -51,7 +51,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class VonasHunger extends CardImpl {
+public final class VonasHunger extends CardImpl {
 
     public VonasHunger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{B}");

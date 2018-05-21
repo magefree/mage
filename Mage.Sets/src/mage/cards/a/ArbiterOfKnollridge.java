@@ -46,7 +46,7 @@ import mage.players.PlayerList;
  *
  * @author anonymous
  */
-public class ArbiterOfKnollridge extends CardImpl {
+public final class ArbiterOfKnollridge extends CardImpl {
 
     public ArbiterOfKnollridge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{W}");

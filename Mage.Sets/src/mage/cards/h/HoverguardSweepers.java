@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class HoverguardSweepers extends CardImpl {
+public final class HoverguardSweepers extends CardImpl {
 
     public HoverguardSweepers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{6}{U}{U}");

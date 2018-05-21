@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class PeemaAetherSeer extends CardImpl {
+public final class PeemaAetherSeer extends CardImpl {
 
     public PeemaAetherSeer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");

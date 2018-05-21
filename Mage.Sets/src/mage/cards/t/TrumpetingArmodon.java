@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Sir-Speshkitty
  */
-public class TrumpetingArmodon extends CardImpl {
+public final class TrumpetingArmodon extends CardImpl {
 
     public TrumpetingArmodon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

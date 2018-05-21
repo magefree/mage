@@ -41,7 +41,7 @@ import mage.game.permanent.token.TreasureToken;
  *
  * @author TheElk801
  */
-public class SailorOfMeans extends CardImpl {
+public final class SailorOfMeans extends CardImpl {
 
     public SailorOfMeans(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");

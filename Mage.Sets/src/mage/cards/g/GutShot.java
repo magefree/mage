@@ -38,7 +38,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author North
  */
-public class GutShot extends CardImpl {
+public final class GutShot extends CardImpl {
 
     public GutShot(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R/P}");

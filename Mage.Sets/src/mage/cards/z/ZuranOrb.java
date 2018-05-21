@@ -42,7 +42,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Plopman
  */
-public class ZuranOrb extends CardImpl {
+public final class ZuranOrb extends CardImpl {
 
     public ZuranOrb(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{0}");

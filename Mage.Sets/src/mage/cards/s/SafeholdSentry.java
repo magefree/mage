@@ -46,7 +46,7 @@ import mage.constants.Zone;
  * @author jeffwadsworth
 
  */
-public class SafeholdSentry extends CardImpl {
+public final class SafeholdSentry extends CardImpl {
 
     public SafeholdSentry(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

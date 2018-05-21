@@ -48,7 +48,7 @@ import mage.watchers.common.DamagedByWatcher;
 /**
  * @author LevelX
  */
-public class Frostwielder extends CardImpl {
+public final class Frostwielder extends CardImpl {
 
     public Frostwielder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");

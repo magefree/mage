@@ -44,7 +44,7 @@ import mage.game.permanent.Permanent;
  *
  * @author North
  */
-public class ProperBurial extends CardImpl {
+public final class ProperBurial extends CardImpl {
 
     public ProperBurial(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}");

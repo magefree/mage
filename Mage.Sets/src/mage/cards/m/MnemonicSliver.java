@@ -47,7 +47,7 @@ import mage.filter.StaticFilters;
 /**
  * @author Loki
  */
-public class MnemonicSliver extends CardImpl {
+public final class MnemonicSliver extends CardImpl {
 
     public MnemonicSliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");

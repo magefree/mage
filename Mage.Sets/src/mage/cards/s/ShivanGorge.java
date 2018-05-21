@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class ShivanGorge extends CardImpl {
+public final class ShivanGorge extends CardImpl {
 
     public ShivanGorge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

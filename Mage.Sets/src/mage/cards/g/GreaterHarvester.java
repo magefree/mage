@@ -30,7 +30,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author wanderer120
  */
-public class GreaterHarvester extends CardImpl {
+public final class GreaterHarvester extends CardImpl {
 
     static final FilterPermanent filter = new FilterPermanent("a permanent");
 

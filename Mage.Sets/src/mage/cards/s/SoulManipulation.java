@@ -42,7 +42,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author jeffwadsworth
  */
-public class SoulManipulation extends CardImpl {
+public final class SoulManipulation extends CardImpl {
 
     public SoulManipulation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}{B}");

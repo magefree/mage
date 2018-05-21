@@ -48,7 +48,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author jeffwadsworth
  */
-public class LoyalGyrfalcon extends CardImpl {
+public final class LoyalGyrfalcon extends CardImpl {
     
     private static final FilterSpell filter = new FilterSpell("white spell");
     

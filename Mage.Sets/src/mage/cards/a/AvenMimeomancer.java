@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class AvenMimeomancer extends CardImpl {
+public final class AvenMimeomancer extends CardImpl {
 
     public AvenMimeomancer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{U}");

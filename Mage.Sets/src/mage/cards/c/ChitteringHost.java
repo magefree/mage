@@ -47,7 +47,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class ChitteringHost extends MeldCard {
+public final class ChitteringHost extends MeldCard {
     public ChitteringHost(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "");
         this.subtype.add(SubType.ELDRAZI);

@@ -44,7 +44,7 @@ import mage.game.Game;
  *
  * @author L_J
  */
-public class Undertow extends CardImpl {
+public final class Undertow extends CardImpl {
 
     public Undertow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");

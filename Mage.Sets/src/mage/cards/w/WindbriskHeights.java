@@ -47,7 +47,7 @@ import mage.watchers.common.PlayerAttackedWatcher;
  *
  * @author LevelX2
  */
-public class WindbriskHeights extends CardImpl {
+public final class WindbriskHeights extends CardImpl {
 
     public WindbriskHeights(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

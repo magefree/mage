@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class KnightOfThePilgrimsRoad extends CardImpl {
+public final class KnightOfThePilgrimsRoad extends CardImpl {
 
     public KnightOfThePilgrimsRoad(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class GolgariBrownscale extends CardImpl {
+public final class GolgariBrownscale extends CardImpl {
 
     public GolgariBrownscale(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");

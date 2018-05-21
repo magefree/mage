@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class UlvenwaldAbomination extends CardImpl {
+public final class UlvenwaldAbomination extends CardImpl {
 
     public UlvenwaldAbomination(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");

@@ -44,7 +44,7 @@ import mage.constants.CardType;
  *
  * @author TheElk801
  */
-public class MistformSeaswift extends CardImpl {
+public final class MistformSeaswift extends CardImpl {
 
     public MistformSeaswift(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");

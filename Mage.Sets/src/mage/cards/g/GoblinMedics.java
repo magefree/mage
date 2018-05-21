@@ -42,7 +42,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Plopman
  */
-public class GoblinMedics extends CardImpl {
+public final class GoblinMedics extends CardImpl {
 
     public GoblinMedics(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

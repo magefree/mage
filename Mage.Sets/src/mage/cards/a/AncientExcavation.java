@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author spjspj
  */
-public class AncientExcavation extends CardImpl {
+public final class AncientExcavation extends CardImpl {
 
     public AncientExcavation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}{B}");

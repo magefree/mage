@@ -46,7 +46,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author daagar
  */
-public class MyrLandshaper extends CardImpl {
+public final class MyrLandshaper extends CardImpl {
 
     public MyrLandshaper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");

@@ -41,7 +41,7 @@ import mage.constants.Duration;
  *
  * @author hanasu
  */
-public class ViashinoWeaponsmith extends CardImpl {
+public final class ViashinoWeaponsmith extends CardImpl {
 
     public ViashinoWeaponsmith(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

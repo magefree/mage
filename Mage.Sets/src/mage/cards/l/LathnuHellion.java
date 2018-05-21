@@ -47,7 +47,7 @@ import mage.constants.TargetController;
  *
  * @author cg5
  */
-public class LathnuHellion extends CardImpl {
+public final class LathnuHellion extends CardImpl {
 
     public LathnuHellion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

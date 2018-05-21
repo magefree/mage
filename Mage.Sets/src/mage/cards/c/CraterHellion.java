@@ -47,7 +47,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Backfir3
  */
-public class CraterHellion extends CardImpl {
+public final class CraterHellion extends CardImpl {
 
     public CraterHellion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");

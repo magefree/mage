@@ -46,7 +46,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author fireshoes
  */
-public class ThoughtHarvester extends CardImpl {
+public final class ThoughtHarvester extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("a colorless spell");
 

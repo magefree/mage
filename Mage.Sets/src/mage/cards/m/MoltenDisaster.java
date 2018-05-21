@@ -55,7 +55,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class MoltenDisaster extends CardImpl {
+public final class MoltenDisaster extends CardImpl {
 
     public MoltenDisaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{R}{R}");

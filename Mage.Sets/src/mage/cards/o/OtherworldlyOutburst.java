@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class OtherworldlyOutburst extends CardImpl {
+public final class OtherworldlyOutburst extends CardImpl {
 
     public OtherworldlyOutburst(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");

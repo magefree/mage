@@ -46,7 +46,7 @@ import mage.target.TargetPlayer;
  *
  * @author Loki
  */
-public class VedalkenEntrancer extends CardImpl {
+public final class VedalkenEntrancer extends CardImpl {
 
     public VedalkenEntrancer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");

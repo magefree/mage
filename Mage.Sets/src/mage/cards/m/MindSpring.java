@@ -39,7 +39,7 @@ import mage.constants.CardType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class MindSpring extends CardImpl {
+public final class MindSpring extends CardImpl {
 
     public MindSpring(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{U}{U}");

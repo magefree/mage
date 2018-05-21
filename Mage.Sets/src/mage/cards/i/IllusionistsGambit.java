@@ -53,7 +53,7 @@ import mage.game.turn.TurnMod;
  *
  * @author LevelX2
  */
-public class IllusionistsGambit extends CardImpl {
+public final class IllusionistsGambit extends CardImpl {
 
     public IllusionistsGambit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}{U}");

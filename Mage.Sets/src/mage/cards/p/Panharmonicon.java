@@ -47,7 +47,7 @@ import mage.game.events.NumberOfTriggersEvent;
  *
  * @author emerald000
  */
-public class Panharmonicon extends CardImpl {
+public final class Panharmonicon extends CardImpl {
 
     public Panharmonicon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");

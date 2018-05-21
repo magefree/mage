@@ -44,7 +44,7 @@ import java.util.UUID;
  *
  * @author emerald000
  */
-public class Decommission extends CardImpl {
+public final class Decommission extends CardImpl {
 
     public Decommission(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{W}");

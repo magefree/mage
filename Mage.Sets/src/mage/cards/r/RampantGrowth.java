@@ -41,7 +41,7 @@ import java.util.UUID;
  *
  * @author LokiX
  */
-public class RampantGrowth extends CardImpl {
+public final class RampantGrowth extends CardImpl {
 
     public RampantGrowth(UUID ownerId, CardSetInfo setInfo){
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{G}");

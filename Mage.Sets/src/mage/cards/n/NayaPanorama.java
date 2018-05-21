@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInLibrary;
  * @author North
  */
 @SuppressWarnings("unchecked")
-public class NayaPanorama extends CardImpl {
+public final class NayaPanorama extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("a basic Mountain, Forest, or Plains card");
 

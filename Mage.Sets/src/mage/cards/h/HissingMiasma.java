@@ -39,7 +39,7 @@ import mage.constants.SetTargetPointer;
  *
  * @author lopho
  */
-public class HissingMiasma extends CardImpl {
+public final class HissingMiasma extends CardImpl {
 
     private static final String RULE = "Whenever a creature attacks you, its controller loses 1 life.";
     

@@ -49,7 +49,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class CustodiLich extends CardImpl {
+public final class CustodiLich extends CardImpl {
 
     public CustodiLich(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");

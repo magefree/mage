@@ -54,7 +54,7 @@ import mage.players.Player;
  *
  * @author HCrescent
  */
-public class MagusOfTheJar extends CardImpl {
+public final class MagusOfTheJar extends CardImpl {
 
     public MagusOfTheJar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");

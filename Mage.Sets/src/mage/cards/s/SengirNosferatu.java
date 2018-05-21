@@ -57,7 +57,7 @@ import mage.target.common.TargetCardInExile;
  * @author LoneFox
  *
  */
-public class SengirNosferatu extends CardImpl {
+public final class SengirNosferatu extends CardImpl {
 
     public SengirNosferatu(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");

@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author LoneFox
  */
-public class SkulkingGhost extends CardImpl {
+public final class SkulkingGhost extends CardImpl {
 
     public SkulkingGhost(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

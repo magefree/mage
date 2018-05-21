@@ -39,7 +39,7 @@ import mage.target.TargetPlayer;
  *
  * @author Plopman
  */
-public class RavensCrime extends CardImpl {
+public final class RavensCrime extends CardImpl {
 
     public RavensCrime(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}");

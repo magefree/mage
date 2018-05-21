@@ -54,7 +54,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author jeffwadsworth
  */
-public class TowerAbove extends CardImpl {
+public final class TowerAbove extends CardImpl {
 
     public TowerAbove(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2/G}{2/G}{2/G}");

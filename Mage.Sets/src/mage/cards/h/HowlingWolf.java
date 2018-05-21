@@ -43,7 +43,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author fireshoes
  */
-public class HowlingWolf extends CardImpl {
+public final class HowlingWolf extends CardImpl {
     
     private static final FilterCard filter = new FilterCard("cards named Howling Wolf");
 

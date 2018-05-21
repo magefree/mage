@@ -56,7 +56,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author jeffwadsworth
  */
-public class VerdantSuccession extends CardImpl {
+public final class VerdantSuccession extends CardImpl {
 
     public VerdantSuccession(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{G}");

@@ -45,7 +45,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author Loki
  */
-public class MadrushCyclops extends CardImpl {
+public final class MadrushCyclops extends CardImpl {
 
     public MadrushCyclops (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{R}{G}");

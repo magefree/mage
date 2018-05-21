@@ -41,7 +41,7 @@ import mage.target.TargetPlayer;
  *
  * @author LoneFox
  */
-public class PsychicDrain extends CardImpl {
+public final class PsychicDrain extends CardImpl {
 
     public PsychicDrain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{U}{B}");

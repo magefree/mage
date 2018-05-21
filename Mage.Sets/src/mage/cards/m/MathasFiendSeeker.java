@@ -58,7 +58,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author TheElk801
  */
-public class MathasFiendSeeker extends CardImpl {
+public final class MathasFiendSeeker extends CardImpl {
 
     private static final String rule = "For as long as that creature has a bounty counter on it, it has \"When this creature dies, each opponent draws a card and gains 2 life.\"";
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");

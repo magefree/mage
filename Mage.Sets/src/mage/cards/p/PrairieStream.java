@@ -49,7 +49,7 @@ import mage.filter.predicate.mageobject.SupertypePredicate;
  *
  * @author fireshoes
  */
-public class PrairieStream extends CardImpl {
+public final class PrairieStream extends CardImpl {
     
     private static final FilterLandPermanent filter = new FilterLandPermanent();
     

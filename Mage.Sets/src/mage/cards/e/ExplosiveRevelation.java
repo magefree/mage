@@ -48,7 +48,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author jeffwadsworth
  */
-public class ExplosiveRevelation extends CardImpl {
+public final class ExplosiveRevelation extends CardImpl {
 
     public ExplosiveRevelation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");

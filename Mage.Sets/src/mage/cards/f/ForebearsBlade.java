@@ -30,7 +30,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Rystan
  */
-public class ForebearsBlade extends CardImpl {
+public final class ForebearsBlade extends CardImpl {
 
     public ForebearsBlade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");

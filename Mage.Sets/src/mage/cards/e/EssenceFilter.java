@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author LevelX2 & L_J
  */
-public class EssenceFilter extends CardImpl {
+public final class EssenceFilter extends CardImpl {
 
     public EssenceFilter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{G}{G}");

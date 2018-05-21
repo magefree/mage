@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class AngelOfInvention extends CardImpl {
+public final class AngelOfInvention extends CardImpl {
 
     public AngelOfInvention(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");

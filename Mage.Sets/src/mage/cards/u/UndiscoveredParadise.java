@@ -47,7 +47,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author jeffwadsworth
  */
-public class UndiscoveredParadise extends CardImpl {
+public final class UndiscoveredParadise extends CardImpl {
 
     public UndiscoveredParadise(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

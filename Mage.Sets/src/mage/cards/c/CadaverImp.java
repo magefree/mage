@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author North
  */
-public class CadaverImp extends CardImpl {
+public final class CadaverImp extends CardImpl {
 
     public CadaverImp(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");

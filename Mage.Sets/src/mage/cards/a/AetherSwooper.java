@@ -46,7 +46,7 @@ import mage.game.permanent.token.ServoToken;
  *
  * @author fireshoes
  */
-public class AetherSwooper extends CardImpl {
+public final class AetherSwooper extends CardImpl {
 
     public AetherSwooper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");

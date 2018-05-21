@@ -54,7 +54,7 @@ import mage.target.TargetPermanent;
  *
  * @author MarcoMarin, but I mostly copied from LevelX2's PorphyryNodes :)
  */
-public class DropOfHoney extends CardImpl {
+public final class DropOfHoney extends CardImpl {
 
     public DropOfHoney(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}");

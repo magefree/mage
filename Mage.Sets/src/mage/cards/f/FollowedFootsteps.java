@@ -52,7 +52,7 @@ import mage.target.targetpointer.FixedTarget;
  * @author LoneFox
  *
  */
-public class FollowedFootsteps extends CardImpl {
+public final class FollowedFootsteps extends CardImpl {
 
     public FollowedFootsteps(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{U}{U}");

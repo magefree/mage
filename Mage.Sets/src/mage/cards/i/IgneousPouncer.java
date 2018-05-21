@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author Plopman
  */
-public class IgneousPouncer extends CardImpl {
+public final class IgneousPouncer extends CardImpl {
 
     public IgneousPouncer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{R}");

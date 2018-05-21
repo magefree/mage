@@ -56,7 +56,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author L_J
  */
-public class VeteransVoice extends CardImpl {
+public final class VeteransVoice extends CardImpl {
 
     private static final FilterCreaturePermanent filterUntapped = new FilterCreaturePermanent("enchanted creature is untapped");
     

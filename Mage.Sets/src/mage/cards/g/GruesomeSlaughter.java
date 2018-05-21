@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class GruesomeSlaughter extends CardImpl {
+public final class GruesomeSlaughter extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("colorless creatures you control");
 

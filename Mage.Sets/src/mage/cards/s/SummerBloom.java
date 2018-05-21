@@ -38,7 +38,7 @@ import mage.constants.Duration;
  *
  * @author Plopman
  */
-public class SummerBloom extends CardImpl {
+public final class SummerBloom extends CardImpl {
 
     public SummerBloom(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{G}");

@@ -49,7 +49,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author fenhl
  */
-public class ParallelEvolution extends CardImpl {
+public final class ParallelEvolution extends CardImpl {
 
     public ParallelEvolution(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}{G}");

@@ -48,7 +48,7 @@ import java.util.UUID;
  *
  * @author Plopman
  */
-public class DiligentFarmhand extends CardImpl {
+public final class DiligentFarmhand extends CardImpl {
 
     public DiligentFarmhand(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");

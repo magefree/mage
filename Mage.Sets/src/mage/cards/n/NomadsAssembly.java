@@ -41,7 +41,7 @@ import mage.game.permanent.token.KorSoldierToken;
  *
  * @author North
  */
-public class NomadsAssembly extends CardImpl {
+public final class NomadsAssembly extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
 

@@ -39,7 +39,7 @@ import mage.target.TargetPlayer;
  *
  * @author Plopman
  */
-public class OonasGrace extends CardImpl {
+public final class OonasGrace extends CardImpl {
 
     public OonasGrace(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");

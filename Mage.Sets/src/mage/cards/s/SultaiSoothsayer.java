@@ -43,7 +43,7 @@ import mage.filter.StaticFilters;
  *
  * @author LevelX2
  */
-public class SultaiSoothsayer extends CardImpl {
+public final class SultaiSoothsayer extends CardImpl {
 
     public SultaiSoothsayer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{G}{U}");

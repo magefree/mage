@@ -51,7 +51,7 @@ import mage.players.Player;
  *
  * @author BetaSteward
  */
-public class CagedSun extends CardImpl {
+public final class CagedSun extends CardImpl {
 
     public CagedSun(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{6}");

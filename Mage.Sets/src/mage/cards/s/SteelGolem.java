@@ -43,7 +43,7 @@ import mage.game.events.GameEvent;
  *
  * @author jeffwadsworth
  */
-public class SteelGolem extends CardImpl {
+public final class SteelGolem extends CardImpl {
 
     public SteelGolem(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");

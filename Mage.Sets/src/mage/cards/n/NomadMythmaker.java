@@ -55,7 +55,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author jeffwadsworth
  */
-public class NomadMythmaker extends CardImpl {
+public final class NomadMythmaker extends CardImpl {
 
     private static final FilterCard FILTER = new FilterCard("Aura card from a graveyard");
 

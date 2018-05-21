@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class MysticOfTheHiddenWay extends CardImpl {
+public final class MysticOfTheHiddenWay extends CardImpl {
 
     public MysticOfTheHiddenWay(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");

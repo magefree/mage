@@ -53,7 +53,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author jeffwadsworth
  */
-public class ThoughtHemorrhage extends CardImpl {
+public final class ThoughtHemorrhage extends CardImpl {
 
     public ThoughtHemorrhage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}{R}");

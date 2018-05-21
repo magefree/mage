@@ -49,7 +49,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class BenevolentOffering extends CardImpl {
+public final class BenevolentOffering extends CardImpl {
 
     public BenevolentOffering(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{W}");

@@ -58,7 +58,7 @@ import mage.watchers.common.ManaSpentToCastWatcher;
  *
  * @author jeffwadsworth
  */
-public class TorrentOfSouls extends CardImpl {
+public final class TorrentOfSouls extends CardImpl {
 
     public TorrentOfSouls(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B/R}");

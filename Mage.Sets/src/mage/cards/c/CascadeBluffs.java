@@ -42,7 +42,7 @@ import mage.constants.Zone;
 /**
  * @author Loki
  */
-public class CascadeBluffs extends CardImpl {
+public final class CascadeBluffs extends CardImpl {
 
     public CascadeBluffs(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);

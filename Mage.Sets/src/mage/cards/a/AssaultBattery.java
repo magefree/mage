@@ -38,7 +38,7 @@ import mage.constants.SpellAbilityType;
 import mage.game.permanent.token.ElephantToken;
 import mage.target.common.TargetAnyTarget;
 
-public class AssaultBattery extends SplitCard {
+public final class AssaultBattery extends SplitCard {
 
     public AssaultBattery(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{R}", "{3}{G}", SpellAbilityType.SPLIT);

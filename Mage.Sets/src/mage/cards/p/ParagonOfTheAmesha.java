@@ -49,7 +49,7 @@ import mage.game.permanent.Permanent;
  *
  * @author jeffwadsworth
  */
-public class ParagonOfTheAmesha extends CardImpl {
+public final class ParagonOfTheAmesha extends CardImpl {
 
     public ParagonOfTheAmesha(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

@@ -47,7 +47,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author BetaSteward
  */
-public class ChancellorOfTheTangle extends CardImpl {
+public final class ChancellorOfTheTangle extends CardImpl {
 
     private static String abilityText = "at the beginning of your first main phase, add {G}";
 

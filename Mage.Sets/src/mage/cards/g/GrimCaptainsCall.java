@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author LevelX2
  */
-public class GrimCaptainsCall extends CardImpl {
+public final class GrimCaptainsCall extends CardImpl {
 
     public GrimCaptainsCall(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}");

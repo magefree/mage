@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author fireshoes
  */
-public class XunYuWeiAdvisor extends CardImpl {
+public final class XunYuWeiAdvisor extends CardImpl {
 
     public XunYuWeiAdvisor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");

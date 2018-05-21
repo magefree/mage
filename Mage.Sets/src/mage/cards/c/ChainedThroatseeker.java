@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author North
  */
-public class ChainedThroatseeker extends CardImpl {
+public final class ChainedThroatseeker extends CardImpl {
 
     public ChainedThroatseeker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}");

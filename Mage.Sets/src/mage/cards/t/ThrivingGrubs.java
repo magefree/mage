@@ -45,7 +45,7 @@ import mage.counters.CounterType;
  *
  * @author LevelX2
  */
-public class ThrivingGrubs extends CardImpl {
+public final class ThrivingGrubs extends CardImpl {
 
     public ThrivingGrubs(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

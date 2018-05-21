@@ -49,7 +49,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class YukoraThePrisoner extends CardImpl {
+public final class YukoraThePrisoner extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("non-Ogre creatures");
 

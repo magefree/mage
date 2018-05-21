@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class KozileksTranslator extends CardImpl {
+public final class KozileksTranslator extends CardImpl {
 
     public KozileksTranslator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");

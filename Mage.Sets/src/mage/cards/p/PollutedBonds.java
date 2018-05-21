@@ -47,7 +47,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  * @author jeffwadsworth
  *
  */
-public class PollutedBonds extends CardImpl {
+public final class PollutedBonds extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("a land");
 

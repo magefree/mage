@@ -48,7 +48,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  *
  * @author Loki
  */
-public class HeartwoodGiant extends CardImpl {
+public final class HeartwoodGiant extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Forest");
 

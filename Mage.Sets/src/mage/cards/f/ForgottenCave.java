@@ -40,7 +40,7 @@ import mage.constants.CardType;
  *
  * @author Plopman
  */
-public class ForgottenCave extends CardImpl {
+public final class ForgottenCave extends CardImpl {
 
     public ForgottenCave(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

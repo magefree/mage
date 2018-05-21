@@ -53,7 +53,7 @@ import mage.util.CardUtil;
  *
  * @author fireshoes
  */
-public class IntetTheDreamer extends CardImpl {
+public final class IntetTheDreamer extends CardImpl {
 
     protected static final String VALUE_PREFIX = "ExileZones";
 

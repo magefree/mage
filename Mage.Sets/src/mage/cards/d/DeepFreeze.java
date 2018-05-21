@@ -51,7 +51,7 @@ import mage.game.permanent.token.TokenImpl;
  *
  * @author TheElk801
  */
-public class DeepFreeze extends CardImpl {
+public final class DeepFreeze extends CardImpl {
 
     public DeepFreeze(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");

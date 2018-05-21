@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class MarangRiverSkeleton extends CardImpl {
+public final class MarangRiverSkeleton extends CardImpl {
 
     public MarangRiverSkeleton(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

@@ -54,7 +54,7 @@ import mage.game.permanent.Permanent;
  *
  * @author North
  */
-public class MagebaneArmor extends CardImpl {
+public final class MagebaneArmor extends CardImpl {
 
     public MagebaneArmor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

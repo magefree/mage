@@ -59,7 +59,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class PalaceJailer extends CardImpl {
+public final class PalaceJailer extends CardImpl {
 
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
 

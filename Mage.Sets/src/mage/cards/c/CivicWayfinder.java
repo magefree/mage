@@ -43,7 +43,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class CivicWayfinder extends CardImpl {
+public final class CivicWayfinder extends CardImpl {
 
     public CivicWayfinder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

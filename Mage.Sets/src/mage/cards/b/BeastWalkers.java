@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author L_J
  */
-public class BeastWalkers extends CardImpl {
+public final class BeastWalkers extends CardImpl {
 
     public BeastWalkers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");

@@ -43,7 +43,7 @@ import mage.filter.StaticFilters;
  * @author jeffwadsworth
  *
  */
-public class RageReflection extends CardImpl {
+public final class RageReflection extends CardImpl {
 
     public RageReflection(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{R}{R}");

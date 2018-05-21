@@ -55,7 +55,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class ToothCollector extends CardImpl {
+public final class ToothCollector extends CardImpl {
 
     private static final FilterCreaturePermanent FILTER = new FilterCreaturePermanent("creature an opponent controls");
 

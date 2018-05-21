@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Plopman (Restore Balance), cbt33
  */
-public class BalancingAct extends CardImpl {
+public final class BalancingAct extends CardImpl {
 
     public BalancingAct(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{W}{W}");

@@ -38,7 +38,7 @@ import mage.constants.CardType;
  *
  * @author LevelX2
  */
-public class WhispersOfTheMuse extends CardImpl {
+public final class WhispersOfTheMuse extends CardImpl {
 
     public WhispersOfTheMuse(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");

@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author emerald000
  */
-public class DevastatingDreams extends CardImpl {
+public final class DevastatingDreams extends CardImpl {
 
     public DevastatingDreams(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}{R}");

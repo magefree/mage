@@ -42,7 +42,7 @@ import mage.counters.CounterType;
  *
  * @author LoneFox
  */
-public class ShiftingWall extends CardImpl {
+public final class ShiftingWall extends CardImpl {
 
     public ShiftingWall(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{X}");

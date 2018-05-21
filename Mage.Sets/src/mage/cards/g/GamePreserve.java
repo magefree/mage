@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author TheElk801
  */
-public class GamePreserve extends CardImpl {
+public final class GamePreserve extends CardImpl {
 
     public GamePreserve(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");

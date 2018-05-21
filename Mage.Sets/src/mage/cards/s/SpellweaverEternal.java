@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author spjspj
  */
-public class SpellweaverEternal extends CardImpl {
+public final class SpellweaverEternal extends CardImpl {
 
     public SpellweaverEternal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");

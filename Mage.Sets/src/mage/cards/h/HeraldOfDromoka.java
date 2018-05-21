@@ -47,7 +47,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  *
  * @author fireshoes
  */
-public class HeraldOfDromoka extends CardImpl {
+public final class HeraldOfDromoka extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent("other Warrior creatures");
 

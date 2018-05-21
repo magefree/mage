@@ -45,7 +45,7 @@ import mage.counters.CounterType;
  * @author LoneFox
 
  */
-public class ArdentSoldier extends CardImpl {
+public final class ArdentSoldier extends CardImpl {
 
     public ArdentSoldier(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

@@ -46,7 +46,7 @@ import mage.target.common.TargetAnyTarget;
  * @author LoneFox
 
  */
-public class ArcSlogger extends CardImpl {
+public final class ArcSlogger extends CardImpl {
 
     public ArcSlogger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");

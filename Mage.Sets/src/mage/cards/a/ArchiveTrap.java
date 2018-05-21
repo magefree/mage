@@ -50,7 +50,7 @@ import mage.watchers.Watcher;
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class ArchiveTrap extends CardImpl {
+public final class ArchiveTrap extends CardImpl {
 
     public ArchiveTrap(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{U}{U}");

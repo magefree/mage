@@ -43,7 +43,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author Plopman
  */
-public class SinewSliver extends CardImpl {
+public final class SinewSliver extends CardImpl {
 
     public SinewSliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

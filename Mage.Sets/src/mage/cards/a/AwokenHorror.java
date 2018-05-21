@@ -47,7 +47,7 @@ import mage.game.permanent.Permanent;
  *
  * @author fireshoes
  */
-public class AwokenHorror extends CardImpl {
+public final class AwokenHorror extends CardImpl {
 
     public AwokenHorror(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");

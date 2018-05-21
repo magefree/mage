@@ -56,7 +56,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author fireshoes
  */
-public class SavraQueenOfTheGolgari extends CardImpl {
+public final class SavraQueenOfTheGolgari extends CardImpl {
 
     public SavraQueenOfTheGolgari(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{G}");

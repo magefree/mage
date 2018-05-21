@@ -59,7 +59,7 @@ import mage.target.targetpointer.FixedTargets;
  *
  * @author anonymous
  */
-public class HuntingWilds extends CardImpl {
+public final class HuntingWilds extends CardImpl {
 
     public HuntingWilds(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}");

@@ -42,7 +42,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class WallOfDenial extends CardImpl {
+public final class WallOfDenial extends CardImpl {
 
     public WallOfDenial (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{U}");

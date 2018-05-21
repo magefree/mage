@@ -44,7 +44,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author fireshoes
  */
-public class RogueElephant extends CardImpl {
+public final class RogueElephant extends CardImpl {
     
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("a Forest");
     

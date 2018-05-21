@@ -49,7 +49,7 @@ import mage.constants.Zone;
  */
 
 
-public class BeetleformMage extends CardImpl {
+public final class BeetleformMage extends CardImpl {
 
     public BeetleformMage (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{U}");

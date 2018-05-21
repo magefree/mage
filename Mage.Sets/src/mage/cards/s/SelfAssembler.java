@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author fireshoes
  */
-public class SelfAssembler extends CardImpl {
+public final class SelfAssembler extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("an Assembly-Worker card");
 

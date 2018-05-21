@@ -39,7 +39,7 @@ import mage.constants.SuperType;
  *
  * @author vereena42 & L_J
  */
-public class DrJuliusJumblemorph extends CardImpl {
+public final class DrJuliusJumblemorph extends CardImpl {
 
     public DrJuliusJumblemorph(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{W}");

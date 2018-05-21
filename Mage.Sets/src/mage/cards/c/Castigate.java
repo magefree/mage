@@ -39,7 +39,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author dustinconrad
  */
-public class Castigate extends CardImpl {
+public final class Castigate extends CardImpl {
 
     public Castigate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{W}{B}");

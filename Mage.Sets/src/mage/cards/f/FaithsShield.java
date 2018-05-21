@@ -52,7 +52,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author BetaSteward
  */
-public class FaithsShield extends CardImpl {
+public final class FaithsShield extends CardImpl {
 
     public FaithsShield(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{W}");

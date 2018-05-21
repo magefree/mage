@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class ZealousGuardian extends CardImpl {
+public final class ZealousGuardian extends CardImpl {
 
     public ZealousGuardian(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W/U}");

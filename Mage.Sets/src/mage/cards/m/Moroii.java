@@ -42,7 +42,7 @@ import mage.constants.TargetController;
  *
  * @author Loki
  */
-public class Moroii extends CardImpl {
+public final class Moroii extends CardImpl {
 
     public Moroii(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{B}");

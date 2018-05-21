@@ -48,7 +48,7 @@ import mage.target.TargetPermanent;
  *
  * @author Loki
  */
-public class NectarFaerie extends CardImpl {
+public final class NectarFaerie extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Faerie or Elf");
 

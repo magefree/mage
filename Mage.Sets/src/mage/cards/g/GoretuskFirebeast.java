@@ -42,7 +42,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  *
  * @author Backfir3
  */
-public class GoretuskFirebeast extends CardImpl {
+public final class GoretuskFirebeast extends CardImpl {
 
     public GoretuskFirebeast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{R}");

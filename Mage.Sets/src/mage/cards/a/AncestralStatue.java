@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author LevelX2
  */
-public class AncestralStatue extends CardImpl {
+public final class AncestralStatue extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("nonland permanent you control");
 

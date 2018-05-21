@@ -46,7 +46,7 @@ import mage.target.TargetPlayer;
  *
  * @author North
  */
-public class KeeningStone extends CardImpl {
+public final class KeeningStone extends CardImpl {
 
     public KeeningStone(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{6}");

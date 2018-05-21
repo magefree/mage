@@ -49,7 +49,7 @@ import mage.target.common.TargetNonlandPermanent;
  *
  * @author TheElk801
  */
-public class VonaButcherOfMagan extends CardImpl {
+public final class VonaButcherOfMagan extends CardImpl {
 
     public VonaButcherOfMagan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}{B}");

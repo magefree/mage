@@ -58,7 +58,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class DocentOfPerfection extends CardImpl {
+public final class DocentOfPerfection extends CardImpl {
 
     private static final FilterSpell filterSpell = new FilterSpell("an instant or sorcery spell");
 

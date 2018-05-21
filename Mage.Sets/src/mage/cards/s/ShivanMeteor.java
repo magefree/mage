@@ -40,7 +40,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author dustinconrad
  */
-public class ShivanMeteor extends CardImpl {
+public final class ShivanMeteor extends CardImpl {
 
     public ShivanMeteor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}{R}");

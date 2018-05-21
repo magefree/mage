@@ -48,7 +48,7 @@ import mage.filter.StaticFilters;
  *
  * @author LevelX2
  */
-public class VaultOfCatlacan extends CardImpl {
+public final class VaultOfCatlacan extends CardImpl {
 
     public VaultOfCatlacan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

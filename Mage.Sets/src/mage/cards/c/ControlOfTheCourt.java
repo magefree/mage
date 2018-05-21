@@ -39,7 +39,7 @@ import mage.constants.CardType;
  *
  * @author fireshoes
  */
-public class ControlOfTheCourt extends CardImpl {
+public final class ControlOfTheCourt extends CardImpl {
 
     public ControlOfTheCourt(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}");

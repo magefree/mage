@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class OjutaiInterceptor extends CardImpl {
+public final class OjutaiInterceptor extends CardImpl {
 
     public OjutaiInterceptor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");

@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author LevelX2
  */
-public class SadisticSkymarcher extends CardImpl {
+public final class SadisticSkymarcher extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("a Vampire card from your hand");
 

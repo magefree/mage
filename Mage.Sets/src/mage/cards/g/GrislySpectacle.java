@@ -50,7 +50,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class GrislySpectacle extends CardImpl {
+public final class GrislySpectacle extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonartifact creature");
 

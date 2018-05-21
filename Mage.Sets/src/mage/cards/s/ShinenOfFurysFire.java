@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class ShinenOfFurysFire extends CardImpl {
+public final class ShinenOfFurysFire extends CardImpl {
 
     public ShinenOfFurysFire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author ciaccona007
  */
-public class HourOfDevastation extends CardImpl {
+public final class HourOfDevastation extends CardImpl {
 
     private static FilterPermanent filter = new FilterPermanent("creature and each non-Bolas planeswalker");
 

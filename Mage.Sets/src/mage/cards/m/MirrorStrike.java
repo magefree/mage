@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author L_J
  */
-public class MirrorStrike extends CardImpl {
+public final class MirrorStrike extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("unblocked creature");
 

@@ -43,7 +43,7 @@ import mage.watchers.common.DamagedByWatcher;
  *
  * @author LevelX2
  */
-public class AnnihilatingFire extends CardImpl {
+public final class AnnihilatingFire extends CardImpl {
 
     public AnnihilatingFire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}{R}");

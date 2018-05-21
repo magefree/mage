@@ -45,7 +45,7 @@ import mage.constants.SubType;
 /**
  * @author North, noxx
  */
-public class TranscendentMaster extends LevelerCard {
+public final class TranscendentMaster extends LevelerCard {
 
     public TranscendentMaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");

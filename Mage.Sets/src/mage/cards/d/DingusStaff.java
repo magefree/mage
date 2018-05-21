@@ -44,7 +44,7 @@ import mage.players.Player;
  *
  * @author ciaccona007
  */
-public class DingusStaff extends CardImpl {
+public final class DingusStaff extends CardImpl {
 
     public DingusStaff(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");

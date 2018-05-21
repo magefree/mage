@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author Plopman
  */
-public class BarbtoothWurm extends CardImpl {
+public final class BarbtoothWurm extends CardImpl {
 
     public BarbtoothWurm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}");

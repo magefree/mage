@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class DeviantGlee extends CardImpl {
+public final class DeviantGlee extends CardImpl {
 
     static final String rule = "and has \"{R}: This creature gains trample until end of turn.\"";
 

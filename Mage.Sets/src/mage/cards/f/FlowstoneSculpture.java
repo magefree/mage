@@ -58,7 +58,7 @@ import mage.players.Player;
  *
  * @author LoneFox
  */
-public class FlowstoneSculpture extends CardImpl {
+public final class FlowstoneSculpture extends CardImpl {
 
     public FlowstoneSculpture(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");

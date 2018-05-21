@@ -46,7 +46,7 @@ import mage.game.permanent.token.TreasureToken;
  *
  * @author TheElk801
  */
-public class PryingBlade extends CardImpl {
+public final class PryingBlade extends CardImpl {
 
     public PryingBlade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");

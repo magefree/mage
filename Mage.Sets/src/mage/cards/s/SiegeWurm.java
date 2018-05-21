@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author jonubuu
  */
-public class SiegeWurm extends CardImpl {
+public final class SiegeWurm extends CardImpl {
 
     public SiegeWurm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}{G}");

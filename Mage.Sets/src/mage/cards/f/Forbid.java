@@ -42,7 +42,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author dustinconrad
  */
-public class Forbid extends CardImpl {
+public final class Forbid extends CardImpl {
 
     public Forbid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}{U}");

@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author fireshoes
  */
-public class PristineSkywise extends CardImpl {
+public final class PristineSkywise extends CardImpl {
     
     private static final FilterSpell filter = new FilterSpell("a noncreature spell");
 

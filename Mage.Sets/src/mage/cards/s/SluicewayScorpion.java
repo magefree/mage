@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author magenoxx_at_gmail.com
  */
-public class SluicewayScorpion extends CardImpl {
+public final class SluicewayScorpion extends CardImpl {
 
     public SluicewayScorpion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{G}");

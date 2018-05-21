@@ -40,7 +40,7 @@ import mage.counters.CounterType;
  *
  * @author Plopman
  */
-public class PentadPrism extends CardImpl {
+public final class PentadPrism extends CardImpl {
 
     public PentadPrism(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

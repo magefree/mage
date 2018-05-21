@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author LevelX2
  */
-public class RazorjawOni extends CardImpl {
+public final class RazorjawOni extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("black creatures");
 

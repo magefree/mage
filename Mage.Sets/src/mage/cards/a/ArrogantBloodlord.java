@@ -50,7 +50,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author jeffwadsworth
  */
-public class ArrogantBloodlord extends CardImpl {
+public final class ArrogantBloodlord extends CardImpl {
 
     public ArrogantBloodlord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");

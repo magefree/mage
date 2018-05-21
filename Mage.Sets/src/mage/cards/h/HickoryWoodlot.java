@@ -49,7 +49,7 @@ import mage.counters.CounterType;
  *
  * @author Plopman
  */
-public class HickoryWoodlot extends CardImpl {
+public final class HickoryWoodlot extends CardImpl {
 
     public HickoryWoodlot(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

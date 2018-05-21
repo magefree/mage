@@ -53,7 +53,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class JourneyToEternity extends CardImpl {
+public final class JourneyToEternity extends CardImpl {
 
     public JourneyToEternity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}{G}");

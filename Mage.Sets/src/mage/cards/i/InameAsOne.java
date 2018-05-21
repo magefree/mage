@@ -60,7 +60,7 @@ import mage.watchers.common.CastFromHandWatcher;
  *
  * @author LevelX2
  */
-public class InameAsOne extends CardImpl {
+public final class InameAsOne extends CardImpl {
 
     private static final FilterPermanentCard filter = new FilterPermanentCard("Spirit permanent card");
 

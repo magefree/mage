@@ -43,7 +43,7 @@ import mage.target.common.TargetOpponentOrPlaneswalker;
  *
  * @author fireshoes
  */
-public class FinalStrike extends CardImpl {
+public final class FinalStrike extends CardImpl {
 
     public FinalStrike(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");

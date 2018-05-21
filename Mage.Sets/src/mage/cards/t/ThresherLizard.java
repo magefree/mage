@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author stravant
  */
-public class ThresherLizard extends CardImpl {
+public final class ThresherLizard extends CardImpl {
 
     public ThresherLizard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");

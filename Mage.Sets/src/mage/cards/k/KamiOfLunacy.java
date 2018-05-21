@@ -40,7 +40,7 @@ import mage.constants.SubType;
 /**
  * @author Loki
  */
-public class KamiOfLunacy extends CardImpl {
+public final class KamiOfLunacy extends CardImpl {
 
     public KamiOfLunacy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}");

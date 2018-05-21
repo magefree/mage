@@ -57,7 +57,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author Saga
  */
-public class HammerOfNazahn extends CardImpl {
+public final class HammerOfNazahn extends CardImpl {
     
     private final static FilterEquipmentPermanent filter = new FilterEquipmentPermanent("{this} or another Equipment");
 

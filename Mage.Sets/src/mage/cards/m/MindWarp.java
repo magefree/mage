@@ -48,7 +48,7 @@ import mage.target.TargetPlayer;
  *
  * @author Quercitron
  */
-public class MindWarp extends CardImpl {
+public final class MindWarp extends CardImpl {
 
     public MindWarp(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{3}{B}");

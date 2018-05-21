@@ -42,7 +42,7 @@ import mage.constants.TargetController;
  *
  * @author LevelX2
  */
-public class Glitterfang extends CardImpl {
+public final class Glitterfang extends CardImpl {
 
     public Glitterfang(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");

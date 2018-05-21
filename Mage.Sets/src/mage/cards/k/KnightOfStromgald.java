@@ -48,7 +48,7 @@ import mage.constants.Zone;
  * @author LoneFox
 
  */
-public class KnightOfStromgald extends CardImpl {
+public final class KnightOfStromgald extends CardImpl {
 
     public KnightOfStromgald(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{B}");

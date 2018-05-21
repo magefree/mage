@@ -52,7 +52,7 @@ import mage.util.GameLog;
  *
  * @author LevelX2
  */
-public class AlhammarretHighArbiter extends CardImpl {
+public final class AlhammarretHighArbiter extends CardImpl {
 
     public AlhammarretHighArbiter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");

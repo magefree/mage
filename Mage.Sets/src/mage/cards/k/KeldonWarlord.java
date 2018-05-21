@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author TGower
  */
-public class KeldonWarlord extends CardImpl {
+public final class KeldonWarlord extends CardImpl {
     
     
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("non-Wall creatures you control.");

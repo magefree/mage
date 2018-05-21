@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author North
  */
-public class GraveExchange extends CardImpl {
+public final class GraveExchange extends CardImpl {
 
     public GraveExchange(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{B}{B}");

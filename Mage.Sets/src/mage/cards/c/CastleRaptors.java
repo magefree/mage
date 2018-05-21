@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author LoneFox
  */
-public class CastleRaptors extends CardImpl {
+public final class CastleRaptors extends CardImpl {
 
     public CastleRaptors(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");

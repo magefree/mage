@@ -14,7 +14,7 @@ import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
-public class BullElephant extends CardImpl {
+public final class BullElephant extends CardImpl {
 
     private static FilterControlledLandPermanent controlledForest = new FilterControlledLandPermanent("Forests");
 

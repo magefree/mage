@@ -48,7 +48,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LevelX2
  */
-public class NightfireGiant extends CardImpl {
+public final class NightfireGiant extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("a Mountain");
 

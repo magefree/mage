@@ -44,7 +44,7 @@ import mage.game.permanent.token.GoblinTokenWithHaste;
  *
  * @author emerald000
  */
-public class Goblinslide extends CardImpl {
+public final class Goblinslide extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("noncreature spell");
 

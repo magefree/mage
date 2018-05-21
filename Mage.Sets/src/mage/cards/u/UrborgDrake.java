@@ -41,7 +41,7 @@ import mage.constants.SubType;
  * @author LoneFox
 
  */
-public class UrborgDrake extends CardImpl {
+public final class UrborgDrake extends CardImpl {
 
     public UrborgDrake(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}{B}");

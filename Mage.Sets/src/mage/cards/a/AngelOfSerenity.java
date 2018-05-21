@@ -60,7 +60,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class AngelOfSerenity extends CardImpl {
+public final class AngelOfSerenity extends CardImpl {
 
     public AngelOfSerenity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{W}{W}");

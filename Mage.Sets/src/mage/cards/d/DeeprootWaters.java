@@ -42,7 +42,7 @@ import mage.game.permanent.token.MerfolkHexproofToken;
  *
  * @author TacomenX
  */
-public class DeeprootWaters extends CardImpl {
+public final class DeeprootWaters extends CardImpl {
     
     private static final FilterSpell filter = new FilterSpell("a Merfolk spell");
 

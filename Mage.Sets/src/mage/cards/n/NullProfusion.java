@@ -49,7 +49,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author emerald000
  */
-public class NullProfusion extends CardImpl {
+public final class NullProfusion extends CardImpl {
 
     public NullProfusion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{B}{B}");

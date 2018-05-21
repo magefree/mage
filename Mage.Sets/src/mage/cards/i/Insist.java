@@ -47,7 +47,7 @@ import mage.watchers.Watcher;
 /**
  * @author fireshoes
  */
-public class Insist extends CardImpl {
+public final class Insist extends CardImpl {
 
     public Insist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{G}");

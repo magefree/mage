@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Plopman
  */
-public class SalvageTitan extends CardImpl {
+public final class SalvageTitan extends CardImpl {
 
     public SalvageTitan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}{B}{B}");

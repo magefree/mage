@@ -55,7 +55,7 @@ import mage.target.Targets;
  *
  * @author LevelX
  */
-public class YoseiTheMorningStar extends CardImpl {
+public final class YoseiTheMorningStar extends CardImpl {
 
     public YoseiTheMorningStar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");

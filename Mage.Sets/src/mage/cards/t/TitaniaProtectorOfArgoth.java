@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author LevelX2
  */
-public class TitaniaProtectorOfArgoth extends CardImpl {
+public final class TitaniaProtectorOfArgoth extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("a land you control");
 

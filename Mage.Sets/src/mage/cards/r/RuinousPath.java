@@ -39,7 +39,7 @@ import mage.target.common.TargetCreatureOrPlaneswalker;
  *
  * @author LevelX2
  */
-public class RuinousPath extends CardImpl {
+public final class RuinousPath extends CardImpl {
 
     public RuinousPath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}{B}");

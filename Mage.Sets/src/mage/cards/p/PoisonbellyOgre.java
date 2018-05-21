@@ -44,7 +44,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  *
  * @author lopho
  */
-public class PoisonbellyOgre extends CardImpl {
+public final class PoisonbellyOgre extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
     static {

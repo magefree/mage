@@ -48,7 +48,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author North
  */
-public class Mindcrank extends CardImpl {
+public final class Mindcrank extends CardImpl {
 
     public Mindcrank(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

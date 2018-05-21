@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Alvin
  */
-public class GruesomeDeformity extends CardImpl {
+public final class GruesomeDeformity extends CardImpl {
 
     public GruesomeDeformity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}");

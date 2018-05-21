@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class BasilicaGuards extends CardImpl {
+public final class BasilicaGuards extends CardImpl {
 
     public BasilicaGuards(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

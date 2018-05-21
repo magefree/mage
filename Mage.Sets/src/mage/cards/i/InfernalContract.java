@@ -38,7 +38,7 @@ import mage.constants.CardType;
  *
  * @author Plopman
  */
-public class InfernalContract extends CardImpl {
+public final class InfernalContract extends CardImpl {
 
     public InfernalContract(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}{B}{B}");

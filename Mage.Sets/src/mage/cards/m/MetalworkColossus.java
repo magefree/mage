@@ -57,7 +57,7 @@ import mage.util.CardUtil;
  *
  * @author emerald000
  */
-public class MetalworkColossus extends CardImpl {
+public final class MetalworkColossus extends CardImpl {
 
     public MetalworkColossus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{11}");

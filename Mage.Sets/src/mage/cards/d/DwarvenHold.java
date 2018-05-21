@@ -54,7 +54,7 @@ import mage.counters.CounterType;
  *
  * @author anonymous
  */
-public class DwarvenHold extends CardImpl {
+public final class DwarvenHold extends CardImpl {
 
     public DwarvenHold(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

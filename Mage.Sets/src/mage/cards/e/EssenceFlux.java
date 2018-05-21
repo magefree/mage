@@ -51,7 +51,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class EssenceFlux extends CardImpl {
+public final class EssenceFlux extends CardImpl {
 
     public EssenceFlux(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}");

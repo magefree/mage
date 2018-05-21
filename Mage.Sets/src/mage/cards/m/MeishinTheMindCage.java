@@ -45,7 +45,7 @@ import mage.filter.StaticFilters;
  *
  * @author emerald000
  */
-public class MeishinTheMindCage extends CardImpl {
+public final class MeishinTheMindCage extends CardImpl {
 
     public MeishinTheMindCage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}{U}{U}");

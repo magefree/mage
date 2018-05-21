@@ -42,7 +42,7 @@ import mage.game.permanent.token.CatSoldierCreatureToken;
  *
  * @author LevelX2
  */
-public class VanguardOfBrimaz extends CardImpl {
+public final class VanguardOfBrimaz extends CardImpl {
 
     public VanguardOfBrimaz(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{W}");

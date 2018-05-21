@@ -51,7 +51,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class ObNixilisOfTheBlackOath extends CardImpl {
+public final class ObNixilisOfTheBlackOath extends CardImpl {
 
     public ObNixilisOfTheBlackOath(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{B}{B}");

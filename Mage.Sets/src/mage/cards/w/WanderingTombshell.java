@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class WanderingTombshell extends CardImpl {
+public final class WanderingTombshell extends CardImpl {
 
     public WanderingTombshell(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

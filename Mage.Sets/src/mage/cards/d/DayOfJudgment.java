@@ -38,7 +38,7 @@ import mage.filter.StaticFilters;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DayOfJudgment extends CardImpl {
+public final class DayOfJudgment extends CardImpl {
 
     public DayOfJudgment(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{W}{W}");

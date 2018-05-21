@@ -42,7 +42,7 @@ import mage.filter.FilterPermanent;
  *
  * @author L_J
  */
-public class SilvercladFerocidons extends CardImpl {
+public final class SilvercladFerocidons extends CardImpl {
 
     public SilvercladFerocidons(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{R}{R}");

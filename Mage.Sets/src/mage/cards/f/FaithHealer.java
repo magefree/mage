@@ -45,7 +45,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LoneFox
  */
-public class FaithHealer extends CardImpl {
+public final class FaithHealer extends CardImpl {
 
     public FaithHealer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

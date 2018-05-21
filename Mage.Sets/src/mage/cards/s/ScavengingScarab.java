@@ -39,7 +39,7 @@ import mage.constants.SubType;
 /**
  * @author Loki
  */
-public class ScavengingScarab extends CardImpl {
+public final class ScavengingScarab extends CardImpl {
 
     public ScavengingScarab(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

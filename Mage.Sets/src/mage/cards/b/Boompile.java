@@ -42,7 +42,7 @@ import mage.filter.common.FilterNonlandPermanent;
  *
  * @author LevelX2
  */
-public class Boompile extends CardImpl {
+public final class Boompile extends CardImpl {
 
     public Boompile(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");

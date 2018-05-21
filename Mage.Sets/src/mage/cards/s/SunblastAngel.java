@@ -45,7 +45,7 @@ import mage.filter.predicate.permanent.TappedPredicate;
  *
  * @author nantuko
  */
-public class SunblastAngel extends CardImpl {
+public final class SunblastAngel extends CardImpl {
 
     private static final FilterPermanent tappedFilter = new FilterCreaturePermanent("tapped creatures");
 

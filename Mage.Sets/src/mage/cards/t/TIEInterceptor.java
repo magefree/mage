@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author Styxo
  */
-public class TIEInterceptor extends CardImpl {
+public final class TIEInterceptor extends CardImpl {
 
     public TIEInterceptor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}{B}");

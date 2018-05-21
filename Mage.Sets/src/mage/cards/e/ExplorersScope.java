@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author North
  */
-public class ExplorersScope extends CardImpl {
+public final class ExplorersScope extends CardImpl {
 
     public ExplorersScope(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");

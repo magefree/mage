@@ -45,7 +45,7 @@ import mage.watchers.common.AttackedThisTurnWatcher;
  *
  * @author LevelX2
  */
-public class FuryOfTheHorde extends CardImpl {
+public final class FuryOfTheHorde extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("two red cards");
 

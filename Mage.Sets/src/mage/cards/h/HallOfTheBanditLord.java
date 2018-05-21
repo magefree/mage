@@ -57,7 +57,7 @@ import mage.watchers.Watcher;
  *
  * @author emerald000
  */
-public class HallOfTheBanditLord extends CardImpl {
+public final class HallOfTheBanditLord extends CardImpl {
 
     public HallOfTheBanditLord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

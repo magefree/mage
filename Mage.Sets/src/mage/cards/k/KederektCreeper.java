@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class KederektCreeper extends CardImpl {
+public final class KederektCreeper extends CardImpl {
 
     public KederektCreeper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{B}{R}");

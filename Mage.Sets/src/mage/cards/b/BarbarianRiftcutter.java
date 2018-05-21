@@ -46,7 +46,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author Loki
  */
-public class BarbarianRiftcutter extends CardImpl {
+public final class BarbarianRiftcutter extends CardImpl {
 
     public BarbarianRiftcutter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");

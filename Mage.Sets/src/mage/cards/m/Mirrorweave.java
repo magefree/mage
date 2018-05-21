@@ -50,7 +50,7 @@ import mage.util.functions.EmptyApplyToPermanent;
  *
  * @author jeffwadsworth
  */
-public class Mirrorweave extends CardImpl {
+public final class Mirrorweave extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonlegendary creature");
 

@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author spjspj
  */
-public class WilyBandar extends CardImpl {
+public final class WilyBandar extends CardImpl {
 
     public WilyBandar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");

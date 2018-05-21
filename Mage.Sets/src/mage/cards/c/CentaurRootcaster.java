@@ -43,7 +43,7 @@ import java.util.UUID;
  *
  * @author fireshoes
  */
-public class CentaurRootcaster extends CardImpl {
+public final class CentaurRootcaster extends CardImpl {
 
     public CentaurRootcaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

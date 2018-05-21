@@ -40,7 +40,7 @@ import mage.constants.CardType;
  *
  * @author TheElk801
  */
-public class IxallisDiviner extends CardImpl {
+public final class IxallisDiviner extends CardImpl {
 
     public IxallisDiviner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");

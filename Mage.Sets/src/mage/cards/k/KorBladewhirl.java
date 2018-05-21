@@ -43,7 +43,7 @@ import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
  *
  * @author LevelX2
  */
-public class KorBladewhirl extends CardImpl {
+public final class KorBladewhirl extends CardImpl {
 
     public KorBladewhirl(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");

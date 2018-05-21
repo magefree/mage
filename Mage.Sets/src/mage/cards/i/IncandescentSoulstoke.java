@@ -59,7 +59,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class IncandescentSoulstoke extends CardImpl {
+public final class IncandescentSoulstoke extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Elemental creatures");
 

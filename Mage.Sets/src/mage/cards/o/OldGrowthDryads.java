@@ -51,7 +51,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author TheElk801
  */
-public class OldGrowthDryads extends CardImpl {
+public final class OldGrowthDryads extends CardImpl {
 
     public OldGrowthDryads(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}");

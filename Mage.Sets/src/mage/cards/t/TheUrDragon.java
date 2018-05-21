@@ -55,7 +55,7 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public class TheUrDragon extends CardImpl {
+public final class TheUrDragon extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Dragon spells");
 

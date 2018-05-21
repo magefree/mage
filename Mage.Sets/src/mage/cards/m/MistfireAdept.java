@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author emerald000
  */
-public class MistfireAdept extends CardImpl {
+public final class MistfireAdept extends CardImpl {
     
     private static final FilterSpell filter = new FilterSpell("a noncreature spell");
     static {

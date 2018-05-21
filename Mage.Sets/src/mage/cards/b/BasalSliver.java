@@ -48,7 +48,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author anonymous
  */
-public class BasalSliver extends CardImpl {
+public final class BasalSliver extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent("All Slivers");
 

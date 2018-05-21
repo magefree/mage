@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class TattermungeManiac extends CardImpl {
+public final class TattermungeManiac extends CardImpl {
 
     public TattermungeManiac(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R/G}");

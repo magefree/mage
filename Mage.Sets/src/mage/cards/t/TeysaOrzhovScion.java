@@ -56,7 +56,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author emerald000
  */
-public class TeysaOrzhovScion extends CardImpl {
+public final class TeysaOrzhovScion extends CardImpl {
     
     private final static FilterControlledCreaturePermanent filterWhite = new FilterControlledCreaturePermanent("three white creatures");
     private final static FilterCreaturePermanent filterBlack = new FilterCreaturePermanent("another black creature you control");

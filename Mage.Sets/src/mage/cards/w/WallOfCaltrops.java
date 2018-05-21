@@ -49,7 +49,7 @@ import mage.game.permanent.Permanent;
  *
  * @author L_J
  */
-public class WallOfCaltrops extends CardImpl {
+public final class WallOfCaltrops extends CardImpl {
 
     public WallOfCaltrops(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");

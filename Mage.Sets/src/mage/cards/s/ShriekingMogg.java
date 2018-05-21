@@ -44,7 +44,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  *
  * @author BursegSardaukar
  */
-public class ShriekingMogg extends CardImpl {
+public final class ShriekingMogg extends CardImpl {
 
     static final FilterCreaturePermanent filter = new FilterCreaturePermanent("all other creatures");
 

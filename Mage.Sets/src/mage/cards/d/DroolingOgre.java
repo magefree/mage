@@ -53,7 +53,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author wetterlicht
  */
-public class DroolingOgre extends CardImpl {
+public final class DroolingOgre extends CardImpl {
 
     public DroolingOgre(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

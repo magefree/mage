@@ -48,7 +48,7 @@ import mage.game.permanent.token.Token;
  *
  * @author fireshoes
  */
-public class SilumgarMonument extends CardImpl {
+public final class SilumgarMonument extends CardImpl {
 
     public SilumgarMonument(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

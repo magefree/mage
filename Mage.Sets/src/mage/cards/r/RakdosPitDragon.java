@@ -50,7 +50,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class RakdosPitDragon extends CardImpl {
+public final class RakdosPitDragon extends CardImpl {
 
     public RakdosPitDragon (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");

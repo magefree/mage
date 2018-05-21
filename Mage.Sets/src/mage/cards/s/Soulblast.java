@@ -46,7 +46,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LevelX2
  */
-public class Soulblast extends CardImpl {
+public final class Soulblast extends CardImpl {
 
     public Soulblast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{R}{R}{R}");

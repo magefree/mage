@@ -45,7 +45,7 @@ import mage.target.TargetSpell;
  *
  * @author LevelX2
  */
-public class SilumgarSpellEater extends CardImpl {
+public final class SilumgarSpellEater extends CardImpl {
 
     public SilumgarSpellEater(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

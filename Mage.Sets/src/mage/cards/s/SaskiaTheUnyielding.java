@@ -51,7 +51,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class SaskiaTheUnyielding extends CardImpl {
+public final class SaskiaTheUnyielding extends CardImpl {
 
     public SaskiaTheUnyielding(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{R}{G}{W}");

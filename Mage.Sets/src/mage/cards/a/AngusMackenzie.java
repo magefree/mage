@@ -45,7 +45,7 @@ import mage.game.Game;
  *
  * @author shieldal
  */
-public class AngusMackenzie extends CardImpl {
+public final class AngusMackenzie extends CardImpl {
 
     public AngusMackenzie(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}{W}{U}");

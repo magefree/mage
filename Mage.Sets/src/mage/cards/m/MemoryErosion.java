@@ -44,7 +44,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Plopman
  */
-public class MemoryErosion extends CardImpl {
+public final class MemoryErosion extends CardImpl {
 
     public MemoryErosion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}{U}");

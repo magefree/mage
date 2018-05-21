@@ -57,7 +57,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author TheElk801
  */
-public class TheFirstEruption extends CardImpl {
+public final class TheFirstEruption extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("each creature without flying");
 

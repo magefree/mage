@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author fireshoes
  */
-public class DeathcapCultivator extends CardImpl {
+public final class DeathcapCultivator extends CardImpl {
 
     public DeathcapCultivator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

@@ -48,7 +48,7 @@ import mage.target.TargetPermanent;
 /**
  * @author Loki
  */
-public class Coretapper extends CardImpl {
+public final class Coretapper extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact");
 

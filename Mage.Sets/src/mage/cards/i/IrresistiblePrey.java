@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class IrresistiblePrey extends CardImpl {
+public final class IrresistiblePrey extends CardImpl {
 
     public IrresistiblePrey(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{G}");

@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class WordsOfWorship extends CardImpl {
+public final class WordsOfWorship extends CardImpl {
 
     public WordsOfWorship(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}");

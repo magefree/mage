@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author rollergo11
  */
-public class NeurokFamiliar extends CardImpl {
+public final class NeurokFamiliar extends CardImpl {
 
     public NeurokFamiliar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}");

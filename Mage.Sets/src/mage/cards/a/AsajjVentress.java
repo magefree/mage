@@ -51,7 +51,7 @@ import mage.watchers.common.LifeLossOtherFromCombatWatcher;
 /**
  * @author Styxo
  */
-public class AsajjVentress extends CardImpl {
+public final class AsajjVentress extends CardImpl {
 
     public AsajjVentress(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{B}{R}");

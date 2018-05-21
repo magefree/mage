@@ -49,7 +49,7 @@ import mage.counters.CounterType;
  * @author LoneFox
 
  */
-public class Rakavolver extends CardImpl {
+public final class Rakavolver extends CardImpl {
 
     public Rakavolver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

@@ -56,7 +56,7 @@ import java.util.UUID;
  *
  * @author spjspj
  */
-public class MartyrsBond extends CardImpl {
+public final class MartyrsBond extends CardImpl {
 
     public MartyrsBond(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{W}{W}");

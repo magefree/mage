@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class FarbogBoneflinger extends CardImpl {
+public final class FarbogBoneflinger extends CardImpl {
 
     public FarbogBoneflinger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");

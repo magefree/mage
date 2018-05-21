@@ -45,7 +45,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author cbt33
  */
-public class FilthyCur extends CardImpl {
+public final class FilthyCur extends CardImpl {
 
     public FilthyCur(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

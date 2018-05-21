@@ -42,7 +42,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class Flicker extends CardImpl {
+public final class Flicker extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent("nontoken permanent");
     

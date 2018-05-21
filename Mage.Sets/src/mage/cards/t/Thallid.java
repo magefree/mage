@@ -47,7 +47,7 @@ import mage.game.permanent.token.SaprolingToken;
  *
  * @author Loki
  */
-public class Thallid extends CardImpl {
+public final class Thallid extends CardImpl {
 
     public Thallid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");

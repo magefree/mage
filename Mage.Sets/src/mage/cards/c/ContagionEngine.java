@@ -51,7 +51,7 @@ import mage.target.TargetPlayer;
  *
  * @author Loki
  */
-public class ContagionEngine extends CardImpl {
+public final class ContagionEngine extends CardImpl {
 
     public ContagionEngine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{6}");

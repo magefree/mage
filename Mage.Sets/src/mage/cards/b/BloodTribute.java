@@ -54,7 +54,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author North
  */
-public class BloodTribute extends CardImpl {
+public final class BloodTribute extends CardImpl {
 
     public BloodTribute(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{B}{B}");

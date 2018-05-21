@@ -45,7 +45,7 @@ import mage.filter.StaticFilters;
  *
  * @author Loki
  */
-public class KruinStriker extends CardImpl {
+public final class KruinStriker extends CardImpl {
 
     public KruinStriker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");

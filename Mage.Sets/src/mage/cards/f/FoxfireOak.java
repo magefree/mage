@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author North
  */
-public class FoxfireOak extends CardImpl {
+public final class FoxfireOak extends CardImpl {
 
     public FoxfireOak(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}");

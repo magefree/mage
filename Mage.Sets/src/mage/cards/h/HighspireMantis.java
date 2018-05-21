@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class HighspireMantis extends CardImpl {
+public final class HighspireMantis extends CardImpl {
 
     public HighspireMantis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{W}");

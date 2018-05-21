@@ -45,7 +45,7 @@ import mage.target.common.TargetOpponentOrPlaneswalker;
  *
  * @author fireshoes
  */
-public class Thumbscrews extends CardImpl {
+public final class Thumbscrews extends CardImpl {
 
     public Thumbscrews(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");

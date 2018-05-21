@@ -45,7 +45,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author Eirkei
  */
-public class JestersMask extends CardImpl {
+public final class JestersMask extends CardImpl {
 
     public JestersMask(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");

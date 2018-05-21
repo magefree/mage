@@ -40,7 +40,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author LoneFox
  */
-public class CrossbowAmbush extends CardImpl {
+public final class CrossbowAmbush extends CardImpl {
 
     public CrossbowAmbush(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}");

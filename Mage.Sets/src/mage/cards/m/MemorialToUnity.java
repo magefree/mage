@@ -47,7 +47,7 @@ import mage.filter.common.FilterCreatureCard;
 /**
  * @author Rystan
  */
-public class MemorialToUnity extends CardImpl {
+public final class MemorialToUnity extends CardImpl {
 
     public MemorialToUnity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

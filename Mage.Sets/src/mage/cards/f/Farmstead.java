@@ -48,7 +48,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author fireshoes
  */
-public class Farmstead extends CardImpl {
+public final class Farmstead extends CardImpl {
 
     public Farmstead(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}{W}{W}");

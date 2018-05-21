@@ -45,7 +45,7 @@ import mage.target.TargetPermanent;
  *
  * @author fireshoes
  */
-public class EchoingRuin extends CardImpl {
+public final class EchoingRuin extends CardImpl {
         private static final FilterPermanent filter = new FilterPermanent("artifact");
 
     

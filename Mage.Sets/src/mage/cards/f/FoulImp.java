@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author daagar
  */
-public class FoulImp extends CardImpl {
+public final class FoulImp extends CardImpl {
 
     public FoulImp(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}{B}");

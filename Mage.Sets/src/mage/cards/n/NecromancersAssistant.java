@@ -39,7 +39,7 @@ import mage.constants.SubType;
 /**
  * @author noxx
  */
-public class NecromancersAssistant extends CardImpl {
+public final class NecromancersAssistant extends CardImpl {
 
     public NecromancersAssistant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

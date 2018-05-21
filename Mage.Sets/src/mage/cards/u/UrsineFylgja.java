@@ -48,7 +48,7 @@ import mage.counters.CounterType;
  *
  * @author LoneFox
  */
-public class UrsineFylgja extends CardImpl {
+public final class UrsineFylgja extends CardImpl {
 
     public UrsineFylgja(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}");

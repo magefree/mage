@@ -50,7 +50,7 @@ import mage.watchers.common.PermanentsEnteredBattlefieldWatcher;
  *
  * @author LevelX2
  */
-public class EpharaGodOfThePolis extends CardImpl {
+public final class EpharaGodOfThePolis extends CardImpl {
 
     public EpharaGodOfThePolis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{2}{W}{U}");

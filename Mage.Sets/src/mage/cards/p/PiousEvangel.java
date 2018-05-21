@@ -54,7 +54,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author fireshoes
  */
-public class PiousEvangel extends CardImpl {
+public final class PiousEvangel extends CardImpl {
 
     private static final FilterPermanent filter = new FilterCreaturePermanent("{this} or another creature");
     private static final FilterControlledPermanent filter2 = new FilterControlledPermanent("another permanent");

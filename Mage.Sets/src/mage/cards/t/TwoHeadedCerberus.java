@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author Plopman
  */
-public class TwoHeadedCerberus extends CardImpl {
+public final class TwoHeadedCerberus extends CardImpl {
 
     public TwoHeadedCerberus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");

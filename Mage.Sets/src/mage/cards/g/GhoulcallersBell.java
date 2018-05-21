@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author North
  */
-public class GhoulcallersBell extends CardImpl {
+public final class GhoulcallersBell extends CardImpl {
 
     public GhoulcallersBell(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");

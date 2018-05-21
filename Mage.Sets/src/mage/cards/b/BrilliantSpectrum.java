@@ -41,7 +41,7 @@ import mage.constants.CardType;
  *
  * @author LevelX2
  */
-public class BrilliantSpectrum extends CardImpl {
+public final class BrilliantSpectrum extends CardImpl {
 
     public BrilliantSpectrum(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}");

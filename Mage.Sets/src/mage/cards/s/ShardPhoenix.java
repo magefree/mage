@@ -51,7 +51,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  *
  * @author fireshoes
  */
-public class ShardPhoenix extends CardImpl {
+public final class ShardPhoenix extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature without flying");
 

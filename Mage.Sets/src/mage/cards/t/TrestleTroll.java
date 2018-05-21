@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class TrestleTroll extends CardImpl {
+public final class TrestleTroll extends CardImpl {
 
     public TrestleTroll(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{G}");

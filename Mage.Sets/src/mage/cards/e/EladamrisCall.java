@@ -40,7 +40,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class EladamrisCall extends CardImpl {
+public final class EladamrisCall extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("creature card");
     

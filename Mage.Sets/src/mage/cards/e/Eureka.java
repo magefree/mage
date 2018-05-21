@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author LevelX2
  */
-public class Eureka extends CardImpl {
+public final class Eureka extends CardImpl {
 
     public Eureka(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}{G}");

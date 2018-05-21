@@ -50,7 +50,7 @@ import mage.game.Game;
  *
  * @author TheElk801
  */
-public class DroningBureaucrats extends CardImpl {
+public final class DroningBureaucrats extends CardImpl {
 
     public DroningBureaucrats(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");

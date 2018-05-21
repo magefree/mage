@@ -53,7 +53,7 @@ import mage.players.Player;
  *
  * @author L_J
  */
-public class RitualOfSubdual extends CardImpl {
+public final class RitualOfSubdual extends CardImpl {
 
     public RitualOfSubdual(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{G}{G}");

@@ -53,7 +53,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author stravant
  */
-public class SoulScarMage extends CardImpl {
+public final class SoulScarMage extends CardImpl {
 
     public SoulScarMage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}");

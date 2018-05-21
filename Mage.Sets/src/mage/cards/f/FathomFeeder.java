@@ -52,7 +52,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class FathomFeeder extends CardImpl {
+public final class FathomFeeder extends CardImpl {
 
     public FathomFeeder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{B}");

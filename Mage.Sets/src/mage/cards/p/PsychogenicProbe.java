@@ -44,7 +44,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author emerald000
  */
-public class PsychogenicProbe extends CardImpl {
+public final class PsychogenicProbe extends CardImpl {
 
     public PsychogenicProbe(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

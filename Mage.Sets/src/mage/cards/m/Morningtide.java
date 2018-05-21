@@ -37,7 +37,7 @@ import mage.constants.CardType;
  *
  * @author Jgod
  */
-public class Morningtide extends CardImpl {
+public final class Morningtide extends CardImpl {
 
     public Morningtide(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{W}");

@@ -44,7 +44,7 @@ import mage.filter.common.FilterControlledArtifactPermanent;
  *
  * @author MarcoMarin
  */
-public class TabletOfEpityr extends CardImpl {
+public final class TabletOfEpityr extends CardImpl {
 
     
     public TabletOfEpityr(UUID ownerId, CardSetInfo setInfo) {

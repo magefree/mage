@@ -42,7 +42,7 @@ import mage.constants.Duration;
  *
  * @author fireshoes
  */
-public class GroveRumbler extends CardImpl {
+public final class GroveRumbler extends CardImpl {
 
     public GroveRumbler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{G}");

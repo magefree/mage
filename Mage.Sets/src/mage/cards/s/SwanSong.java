@@ -48,7 +48,7 @@ import mage.target.TargetSpell;
  *
  * @author LevelX2
  */
-public class SwanSong extends CardImpl {
+public final class SwanSong extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("enchantment, instant or sorcery spell");
 

@@ -52,7 +52,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author TheElk801
  */
-public class GeminiEngine extends CardImpl {
+public final class GeminiEngine extends CardImpl {
 
     public GeminiEngine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");

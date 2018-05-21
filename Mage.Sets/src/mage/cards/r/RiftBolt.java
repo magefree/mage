@@ -40,7 +40,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LevelX2
  */
-public class RiftBolt extends CardImpl {
+public final class RiftBolt extends CardImpl {
 
     public RiftBolt(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");

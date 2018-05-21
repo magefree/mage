@@ -45,7 +45,7 @@ import mage.filter.predicate.permanent.TappedPredicate;
  *
  * @author LevelX2
  */
-public class DragonscaleGeneral extends CardImpl {
+public final class DragonscaleGeneral extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creatures you control");
 

@@ -52,7 +52,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class AetherbornMarauder extends CardImpl {
+public final class AetherbornMarauder extends CardImpl {
 
     public AetherbornMarauder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

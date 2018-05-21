@@ -43,7 +43,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author North
  */
-public class SanguineBond extends CardImpl {
+public final class SanguineBond extends CardImpl {
 
     public SanguineBond(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{B}{B}");

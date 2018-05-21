@@ -49,7 +49,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author emerald000
  */
-public class KambalConsulOfAllocation extends CardImpl {
+public final class KambalConsulOfAllocation extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("a noncreature spell");
     static {

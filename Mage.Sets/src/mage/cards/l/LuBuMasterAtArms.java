@@ -41,7 +41,7 @@ import mage.constants.SuperType;
  *
  * @author ilcartographer
  */
-public class LuBuMasterAtArms extends CardImpl {
+public final class LuBuMasterAtArms extends CardImpl {
 
     public LuBuMasterAtArms(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}");

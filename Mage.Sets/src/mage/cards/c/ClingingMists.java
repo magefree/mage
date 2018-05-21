@@ -51,7 +51,7 @@ import mage.target.targetpointer.FixedTargets;
  *
  * @author BetaSteward
  */
-public class ClingingMists extends CardImpl {
+public final class ClingingMists extends CardImpl {
 
     public ClingingMists(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}");

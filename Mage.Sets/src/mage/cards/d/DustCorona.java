@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author emerald000
  */
-public class DustCorona extends CardImpl {
+public final class DustCorona extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with flying");
     static {

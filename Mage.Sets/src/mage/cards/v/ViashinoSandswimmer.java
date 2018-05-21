@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class ViashinoSandswimmer extends CardImpl {
+public final class ViashinoSandswimmer extends CardImpl {
 
     public ViashinoSandswimmer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");

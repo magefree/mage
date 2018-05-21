@@ -57,7 +57,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author spjspj & L_J
  */
-public class DreamTides extends CardImpl {
+public final class DreamTides extends CardImpl {
 
     public DreamTides(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{U}");

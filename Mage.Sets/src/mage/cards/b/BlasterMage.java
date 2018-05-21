@@ -48,7 +48,7 @@ import mage.target.TargetPermanent;
  *
  * @author LoneFox
  */
-public class BlasterMage extends CardImpl {
+public final class BlasterMage extends CardImpl {
 
    private static final FilterPermanent filter = new FilterPermanent("Wall");
 

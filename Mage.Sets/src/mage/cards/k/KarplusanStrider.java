@@ -48,7 +48,7 @@ import mage.game.stack.Spell;
  *
  * @author emerald000
  */
-public class KarplusanStrider extends CardImpl {
+public final class KarplusanStrider extends CardImpl {
 
     public KarplusanStrider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

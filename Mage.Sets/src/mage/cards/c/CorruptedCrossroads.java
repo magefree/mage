@@ -47,7 +47,7 @@ import mage.game.Game;
  *
  * @author fireshoes
  */
-public class CorruptedCrossroads extends CardImpl {
+public final class CorruptedCrossroads extends CardImpl {
 
     public CorruptedCrossroads(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

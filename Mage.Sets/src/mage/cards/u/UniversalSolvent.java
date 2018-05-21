@@ -44,7 +44,7 @@ import mage.target.TargetPermanent;
  *
  * @author fireshoes
  */
-public class UniversalSolvent extends CardImpl {
+public final class UniversalSolvent extends CardImpl {
 
     public UniversalSolvent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");

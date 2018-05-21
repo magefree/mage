@@ -46,7 +46,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author emerald000
  */
-public class DackFayden extends CardImpl {
+public final class DackFayden extends CardImpl {
 
     public DackFayden(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{U}{R}");

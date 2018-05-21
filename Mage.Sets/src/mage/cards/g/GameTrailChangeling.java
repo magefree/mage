@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class GameTrailChangeling extends CardImpl {
+public final class GameTrailChangeling extends CardImpl {
 
     public GameTrailChangeling(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");

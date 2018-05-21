@@ -49,7 +49,7 @@ import java.util.UUID;
  *
  * @author  ciaccona007
  */
-public class GrowthSpurt extends CardImpl {
+public final class GrowthSpurt extends CardImpl {
 
     public GrowthSpurt(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{G}");

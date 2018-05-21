@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class MadAuntie extends CardImpl {
+public final class MadAuntie extends CardImpl {
 
     private static final FilterCreaturePermanent filter1 = new FilterCreaturePermanent("another target Goblin");
 

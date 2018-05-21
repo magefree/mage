@@ -49,7 +49,7 @@ import mage.counters.CounterType;
 /**
  * @author nantuko
  */
-public class TrigonOfThought extends CardImpl {
+public final class TrigonOfThought extends CardImpl {
 
     public TrigonOfThought(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");

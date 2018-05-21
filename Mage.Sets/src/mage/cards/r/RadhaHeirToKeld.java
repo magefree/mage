@@ -44,7 +44,7 @@ import mage.constants.SuperType;
  *
  * @author fireshoes
  */
-public class RadhaHeirToKeld extends CardImpl {
+public final class RadhaHeirToKeld extends CardImpl {
 
     public RadhaHeirToKeld(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}{G}");

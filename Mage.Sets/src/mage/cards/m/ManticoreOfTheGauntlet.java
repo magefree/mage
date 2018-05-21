@@ -49,7 +49,7 @@ import mage.target.targetpointer.SecondTargetPointer;
  *
  * @author stravant
  */
-public class ManticoreOfTheGauntlet extends CardImpl {
+public final class ManticoreOfTheGauntlet extends CardImpl {
 
     public ManticoreOfTheGauntlet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}");

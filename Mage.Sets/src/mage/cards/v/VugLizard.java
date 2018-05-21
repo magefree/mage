@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author Backfir3
  */
-public class VugLizard extends CardImpl {
+public final class VugLizard extends CardImpl {
 
     public VugLizard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");

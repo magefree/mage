@@ -42,7 +42,7 @@ import mage.filter.StaticFilters;
  *
  * @author Loki
  */
-public class GloryscaleViashino extends CardImpl {
+public final class GloryscaleViashino extends CardImpl {
 
     public GloryscaleViashino(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{G}{W}");

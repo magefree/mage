@@ -50,7 +50,7 @@ import mage.constants.Zone;
  *
  * @author Quercitron
  */
-public class HeraldOfTorment extends CardImpl {
+public final class HeraldOfTorment extends CardImpl {
 
     public HeraldOfTorment(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{1}{B}{B}");

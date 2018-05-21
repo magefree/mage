@@ -41,7 +41,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author nigelzor
  */
-public class ZuberiGoldenFeather extends CardImpl {
+public final class ZuberiGoldenFeather extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.GRIFFIN, "Griffin creatures");
 

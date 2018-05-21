@@ -41,7 +41,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class NissasExpedition extends CardImpl {
+public final class NissasExpedition extends CardImpl {
 
     public NissasExpedition(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{G}");

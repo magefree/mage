@@ -53,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class HigureTheStillWind extends CardImpl {
+public final class HigureTheStillWind extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Ninja card");
     private static final FilterCreaturePermanent filterCreature = new FilterCreaturePermanent("Ninja creature");

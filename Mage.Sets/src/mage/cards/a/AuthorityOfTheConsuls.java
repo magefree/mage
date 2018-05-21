@@ -47,7 +47,7 @@ import mage.game.permanent.Permanent;
  *
  * @author fireshoes
  */
-public class AuthorityOfTheConsuls extends CardImpl {
+public final class AuthorityOfTheConsuls extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature");
 

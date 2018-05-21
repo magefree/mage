@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author fireshoes
  */
-public class WoodwraithStrangler extends CardImpl {
+public final class WoodwraithStrangler extends CardImpl {
 
     public WoodwraithStrangler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{G}");

@@ -44,7 +44,7 @@ import mage.filter.StaticFilters;
  *
  * @author Loki
  */
-public class HikariTwilightGuardian extends CardImpl {
+public final class HikariTwilightGuardian extends CardImpl {
 
     public HikariTwilightGuardian(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{W}");

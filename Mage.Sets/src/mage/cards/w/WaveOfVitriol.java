@@ -52,7 +52,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class WaveOfVitriol extends CardImpl {
+public final class WaveOfVitriol extends CardImpl {
 
     public WaveOfVitriol(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{G}{G}");

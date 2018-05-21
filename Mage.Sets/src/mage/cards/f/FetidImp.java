@@ -46,7 +46,7 @@ import mage.constants.Zone;
  * @author LoneFox
 
  */
-public class FetidImp extends CardImpl {
+public final class FetidImp extends CardImpl {
 
     public FetidImp(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

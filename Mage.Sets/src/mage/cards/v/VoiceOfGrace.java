@@ -43,7 +43,7 @@ import mage.constants.SubType;
  *
  * @author Backfir3
  */
-public class VoiceOfGrace extends CardImpl {
+public final class VoiceOfGrace extends CardImpl {
 
     public VoiceOfGrace(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

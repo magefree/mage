@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInHand;
  * @author LoneFox
 
  */
-public class MercenaryKnight extends CardImpl {
+public final class MercenaryKnight extends CardImpl {
 
     public MercenaryKnight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");

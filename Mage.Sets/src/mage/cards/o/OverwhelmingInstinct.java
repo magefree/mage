@@ -43,7 +43,7 @@ import mage.game.events.GameEvent;
  *
  * @author Wehk
  */
-public class OverwhelmingInstinct extends CardImpl {
+public final class OverwhelmingInstinct extends CardImpl {
 
     public OverwhelmingInstinct(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");

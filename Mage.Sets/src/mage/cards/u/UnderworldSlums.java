@@ -52,7 +52,7 @@ import java.util.UUID;
  *
  * @author Styxo
  */
-public class UnderworldSlums extends CardImpl {
+public final class UnderworldSlums extends CardImpl {
 
     public UnderworldSlums(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

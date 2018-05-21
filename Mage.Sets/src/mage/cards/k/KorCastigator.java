@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author LevelX2
  */
-public class KorCastigator extends CardImpl {
+public final class KorCastigator extends CardImpl {
 
     private static final FilterCreaturePermanent FILTER = new FilterCreaturePermanent("Eldrazi Scions");
 

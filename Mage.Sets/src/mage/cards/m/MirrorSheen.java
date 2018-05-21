@@ -51,7 +51,7 @@ import mage.target.TargetSpell;
  * @author jeffwadsworth
  *
  */
-public class MirrorSheen extends CardImpl {
+public final class MirrorSheen extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("instant or sorcery spell that targets you");
 

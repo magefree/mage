@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author TheElk801
  */
-public class AphettoVulture extends CardImpl {
+public final class AphettoVulture extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Zombie card from your graveyard");
 

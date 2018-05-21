@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInOpponentsGraveyard;
  *
  * @author Archer262
  */
-public class DisposalMummy extends CardImpl {
+public final class DisposalMummy extends CardImpl {
 
     public DisposalMummy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");

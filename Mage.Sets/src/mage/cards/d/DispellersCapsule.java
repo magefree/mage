@@ -46,7 +46,7 @@ import mage.abilities.costs.common.TapSourceCost;
  *
  * @author Loki
  */
-public class DispellersCapsule extends CardImpl {
+public final class DispellersCapsule extends CardImpl {
     
     public DispellersCapsule (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{W}");

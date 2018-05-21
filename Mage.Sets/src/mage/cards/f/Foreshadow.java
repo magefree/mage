@@ -48,7 +48,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author Quercitron & L_J
  */
-public class Foreshadow extends CardImpl {
+public final class Foreshadow extends CardImpl {
 
     public Foreshadow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");

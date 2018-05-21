@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  * @author LoneFox
 
  */
-public class ArmoredGuardian extends CardImpl {
+public final class ArmoredGuardian extends CardImpl {
 
     public ArmoredGuardian(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}{U}");

@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author LevelX2
  */
-public class HythoniaTheCruel extends CardImpl {
+public final class HythoniaTheCruel extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Gorgon creatures");
     static {

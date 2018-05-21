@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author MarcoMarin
  */
-public class GoblinKites extends CardImpl {
+public final class GoblinKites extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("controlled creature with power 2 or less");
 

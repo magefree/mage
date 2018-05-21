@@ -39,7 +39,7 @@ import mage.filter.predicate.permanent.WasDealtDamageThisTurnPredicate;
  *
  * @author Quercitron
  */
-public class Inflame extends CardImpl {
+public final class Inflame extends CardImpl {
 
     private static final FilterCreaturePermanent FILTER = new FilterCreaturePermanent("creature dealt damage this turn");
 

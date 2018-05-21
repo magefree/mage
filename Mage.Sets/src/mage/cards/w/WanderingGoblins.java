@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class WanderingGoblins extends CardImpl {
+public final class WanderingGoblins extends CardImpl {
 
     public WanderingGoblins(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

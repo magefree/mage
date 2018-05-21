@@ -49,7 +49,7 @@ import mage.game.permanent.token.custom.CreatureToken;
 /**
  * @author fireshoes
  */
-public class AtarkaMonument extends CardImpl {
+public final class AtarkaMonument extends CardImpl {
 
     public AtarkaMonument(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");

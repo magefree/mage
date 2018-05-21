@@ -49,7 +49,7 @@ import mage.watchers.common.MorbidWatcher;
  *
  * @author stravant
  */
-public class BonePicker extends CardImpl {
+public final class BonePicker extends CardImpl {
 
     public BonePicker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");

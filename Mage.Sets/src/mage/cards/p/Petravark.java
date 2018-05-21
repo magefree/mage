@@ -45,7 +45,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author LoneFox
  */
-public class Petravark extends CardImpl {
+public final class Petravark extends CardImpl {
 
     public Petravark(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

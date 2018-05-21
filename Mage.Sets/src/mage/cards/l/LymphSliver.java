@@ -47,7 +47,7 @@ import mage.game.events.GameEvent;
  *
  * @author Luna Skyrise
  */
-public class LymphSliver extends CardImpl {
+public final class LymphSliver extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.SLIVER, "All Sliver creatures");
 

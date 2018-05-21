@@ -51,7 +51,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Plopman
  */
-public class SaffiEriksdotter extends CardImpl {
+public final class SaffiEriksdotter extends CardImpl {
 
     public SaffiEriksdotter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{W}");

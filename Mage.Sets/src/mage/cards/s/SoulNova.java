@@ -44,7 +44,7 @@ import mage.target.common.TargetAttackingCreature;
  *
  * @author TheElk801
  */
-public class SoulNova extends CardImpl {
+public final class SoulNova extends CardImpl {
 
     public SoulNova(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{W}{W}");

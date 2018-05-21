@@ -42,7 +42,7 @@ import mage.target.common.TargetEnchantmentPermanent;
  *
  * @author Wehk
  */
-public class EnlightenedAscetic extends CardImpl {
+public final class EnlightenedAscetic extends CardImpl {
 
     public EnlightenedAscetic(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

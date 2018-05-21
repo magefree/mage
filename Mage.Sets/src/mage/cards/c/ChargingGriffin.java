@@ -42,7 +42,7 @@ import mage.constants.Duration;
  *
  * @author jeffwadsworth
  */
-public class ChargingGriffin extends CardImpl {
+public final class ChargingGriffin extends CardImpl {
 
     public ChargingGriffin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");

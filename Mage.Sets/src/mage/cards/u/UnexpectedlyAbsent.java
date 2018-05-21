@@ -44,7 +44,7 @@ import mage.target.TargetPermanent;
  *
  * @author LevelX2
  */
-public class UnexpectedlyAbsent extends CardImpl {
+public final class UnexpectedlyAbsent extends CardImpl {
 
     public UnexpectedlyAbsent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{W}{W}");

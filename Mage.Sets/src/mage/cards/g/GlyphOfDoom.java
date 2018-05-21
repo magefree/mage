@@ -53,7 +53,7 @@ import mage.watchers.common.BlockedAttackerWatcher;
  *
  * @author LevelX2 & L_J
  */
-public class GlyphOfDoom extends CardImpl {
+public final class GlyphOfDoom extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Wall creature");
 

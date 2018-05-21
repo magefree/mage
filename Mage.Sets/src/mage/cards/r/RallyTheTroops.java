@@ -44,7 +44,7 @@ import mage.watchers.common.PlayerAttackedStepWatcher;
  *
  * @author TheElk801
  */
-public class RallyTheTroops extends CardImpl {
+public final class RallyTheTroops extends CardImpl {
 
     public RallyTheTroops(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{W}");

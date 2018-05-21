@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author LoneFox
  */
-public class MireKavu extends CardImpl {
+public final class MireKavu extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Swamp");
 

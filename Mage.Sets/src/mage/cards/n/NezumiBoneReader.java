@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LevelX
  */
-public class NezumiBoneReader extends CardImpl {
+public final class NezumiBoneReader extends CardImpl {
 
     public NezumiBoneReader(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}");

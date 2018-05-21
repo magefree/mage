@@ -38,7 +38,7 @@ import mage.filter.common.FilterEnchantmentPermanent;
  *
  * @author Loki
  */
-public class TempestOfLight extends CardImpl {
+public final class TempestOfLight extends CardImpl {
 
     public TempestOfLight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");

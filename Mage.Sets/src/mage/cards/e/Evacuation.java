@@ -38,7 +38,7 @@ import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
  *
  * @author Plopman
  */
-public class Evacuation extends CardImpl {
+public final class Evacuation extends CardImpl {
 
     public Evacuation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{U}{U}");

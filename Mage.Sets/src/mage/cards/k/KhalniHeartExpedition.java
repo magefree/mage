@@ -49,7 +49,7 @@ import java.util.UUID;
  *
  * @author Viserion
  */
-public class KhalniHeartExpedition extends CardImpl {
+public final class KhalniHeartExpedition extends CardImpl {
 
     public KhalniHeartExpedition(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}");

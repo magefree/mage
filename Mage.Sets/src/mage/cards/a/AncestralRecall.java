@@ -38,7 +38,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class AncestralRecall extends CardImpl {
+public final class AncestralRecall extends CardImpl {
 
     public AncestralRecall(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");

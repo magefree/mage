@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author North
  */
-public class ToxicNim extends CardImpl {
+public final class ToxicNim extends CardImpl {
 
     public ToxicNim(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}{B}");

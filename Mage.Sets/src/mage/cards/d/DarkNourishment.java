@@ -39,7 +39,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author TheElk801
  */
-public class DarkNourishment extends CardImpl {
+public final class DarkNourishment extends CardImpl {
 
     public DarkNourishment(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{4}{B}");

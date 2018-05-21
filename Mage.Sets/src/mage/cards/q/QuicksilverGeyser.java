@@ -38,7 +38,7 @@ import mage.target.common.TargetNonlandPermanent;
  *
  * @author anonymous
  */
-public class QuicksilverGeyser extends CardImpl {
+public final class QuicksilverGeyser extends CardImpl {
 
     public QuicksilverGeyser(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{U}");

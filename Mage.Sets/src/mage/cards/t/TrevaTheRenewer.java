@@ -52,7 +52,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class TrevaTheRenewer extends CardImpl {
+public final class TrevaTheRenewer extends CardImpl {
 
     public TrevaTheRenewer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{W}{U}");

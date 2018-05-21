@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class RakdosGuildmage extends CardImpl {
+public final class RakdosGuildmage extends CardImpl {
 
     public RakdosGuildmage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B/R}{B/R}");

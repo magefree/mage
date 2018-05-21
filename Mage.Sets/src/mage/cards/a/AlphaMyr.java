@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class AlphaMyr extends CardImpl {
+public final class AlphaMyr extends CardImpl {
 
     public AlphaMyr(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{2}");

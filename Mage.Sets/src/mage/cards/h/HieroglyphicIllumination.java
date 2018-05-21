@@ -39,7 +39,7 @@ import mage.constants.CardType;
  *
  * @author fireshoes
  */
-public class HieroglyphicIllumination extends CardImpl {
+public final class HieroglyphicIllumination extends CardImpl {
 
     public HieroglyphicIllumination(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{U}");

@@ -43,7 +43,7 @@ import mage.constants.*;
  *
  * @author Loki
  */
-public class JinGitaxiasCoreAugur extends CardImpl {
+public final class JinGitaxiasCoreAugur extends CardImpl {
 
     public JinGitaxiasCoreAugur(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{8}{U}{U}");

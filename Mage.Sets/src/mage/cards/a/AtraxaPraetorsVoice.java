@@ -46,7 +46,7 @@ import mage.constants.TargetController;
  *
  * @author fireshoes
  */
-public class AtraxaPraetorsVoice extends CardImpl {
+public final class AtraxaPraetorsVoice extends CardImpl {
 
     public AtraxaPraetorsVoice(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{W}{U}{B}");

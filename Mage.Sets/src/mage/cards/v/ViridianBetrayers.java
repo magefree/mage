@@ -48,7 +48,7 @@ import mage.players.Player;
 /**
  * @author North
  */
-public class ViridianBetrayers extends CardImpl {
+public final class ViridianBetrayers extends CardImpl {
 
     private static final String rule = "{this} has infect as long as an opponent is poisoned.";
 

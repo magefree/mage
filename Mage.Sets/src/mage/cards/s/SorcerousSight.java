@@ -40,7 +40,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author fireshoes
  */
-public class SorcerousSight extends CardImpl {
+public final class SorcerousSight extends CardImpl {
 
     public SorcerousSight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{U}");

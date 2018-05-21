@@ -45,7 +45,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author Loki
  */
-public class AbyssalPersecutor extends CardImpl {
+public final class AbyssalPersecutor extends CardImpl {
 
     public AbyssalPersecutor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");

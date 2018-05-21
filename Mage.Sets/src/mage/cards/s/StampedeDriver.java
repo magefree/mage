@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author Backfir3
  */
-public class StampedeDriver extends CardImpl {
+public final class StampedeDriver extends CardImpl {
 
     public StampedeDriver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");

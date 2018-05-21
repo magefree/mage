@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author dustinconrad
  */
-public class KnightOfDusk extends CardImpl {
+public final class KnightOfDusk extends CardImpl {
 
     public KnightOfDusk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");

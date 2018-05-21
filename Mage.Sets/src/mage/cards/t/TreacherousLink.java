@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author L_J
  */
-public class TreacherousLink extends CardImpl {
+public final class TreacherousLink extends CardImpl {
 
     public TreacherousLink(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}");

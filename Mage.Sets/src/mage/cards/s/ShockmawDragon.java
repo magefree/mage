@@ -48,7 +48,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class ShockmawDragon extends CardImpl {
+public final class ShockmawDragon extends CardImpl {
 
     public ShockmawDragon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");

@@ -46,7 +46,7 @@ import mage.watchers.common.CardsDrawnDuringDrawStepWatcher;
  *
  * @author LevelX2
  */
-public class ChainsOfMephistopheles extends CardImpl {
+public final class ChainsOfMephistopheles extends CardImpl {
 
     public ChainsOfMephistopheles(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}");

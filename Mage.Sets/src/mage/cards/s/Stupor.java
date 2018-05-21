@@ -38,7 +38,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author Loki
  */
-public class Stupor extends CardImpl {
+public final class Stupor extends CardImpl {
 
     public Stupor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");

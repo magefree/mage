@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class EncaseInIce extends CardImpl {
+public final class EncaseInIce extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("red or green creature");
 

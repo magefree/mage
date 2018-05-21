@@ -38,7 +38,7 @@ import mage.constants.CardType;
  *
  * @author LevelX2
  */
-public class Prosperity extends CardImpl {
+public final class Prosperity extends CardImpl {
 
     public Prosperity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{U}");

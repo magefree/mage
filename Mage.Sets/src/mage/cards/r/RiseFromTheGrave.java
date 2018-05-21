@@ -40,7 +40,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class RiseFromTheGrave extends CardImpl {
+public final class RiseFromTheGrave extends CardImpl {
 
     public RiseFromTheGrave(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B}");

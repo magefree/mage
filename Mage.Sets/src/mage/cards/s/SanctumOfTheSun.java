@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class SanctumOfTheSun extends CardImpl {
+public final class SanctumOfTheSun extends CardImpl {
 
     public SanctumOfTheSun(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

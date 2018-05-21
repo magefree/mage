@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author Loki
  */
-public class ArtisanOfKozilek extends CardImpl {
+public final class ArtisanOfKozilek extends CardImpl {
 
     public ArtisanOfKozilek(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{9}");

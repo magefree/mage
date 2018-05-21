@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author jeffwadsworth
  */
-public class DenProtector extends CardImpl {
+public final class DenProtector extends CardImpl {
 
     public DenProtector(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");

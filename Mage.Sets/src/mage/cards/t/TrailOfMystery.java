@@ -48,7 +48,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class TrailOfMystery extends CardImpl {
+public final class TrailOfMystery extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a face-down creature");
 

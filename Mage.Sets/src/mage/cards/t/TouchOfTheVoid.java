@@ -43,7 +43,7 @@ import mage.watchers.common.DamagedByWatcher;
  *
  * @author LevelX2
  */
-public class TouchOfTheVoid extends CardImpl {
+public final class TouchOfTheVoid extends CardImpl {
 
     public TouchOfTheVoid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{R}");

@@ -38,7 +38,7 @@ import mage.target.common.TargetCreaturePermanentAmount;
  *
  * @author LevelX2
  */
-public class SpreadingFlames extends CardImpl {
+public final class SpreadingFlames extends CardImpl {
 
     public SpreadingFlames(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{6}{R}");

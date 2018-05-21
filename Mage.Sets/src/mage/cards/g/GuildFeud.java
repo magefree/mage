@@ -49,7 +49,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class GuildFeud extends CardImpl {
+public final class GuildFeud extends CardImpl {
 
     public GuildFeud(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{5}{R}");

@@ -47,7 +47,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LoneFox
  */
-public class AncientHydra extends CardImpl {
+public final class AncientHydra extends CardImpl {
 
     public AncientHydra(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");

@@ -49,7 +49,7 @@ import mage.constants.Zone;
  *
  * @author cbt33
  */
-public class MysticPenitent extends CardImpl {
+public final class MysticPenitent extends CardImpl {
 
     public MysticPenitent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");

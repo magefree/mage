@@ -39,7 +39,7 @@ import mage.game.permanent.token.ServoToken;
  *
  * @author LevelX2
  */
-public class ServoExhibition extends CardImpl {
+public final class ServoExhibition extends CardImpl {
 
     public ServoExhibition(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{W}");

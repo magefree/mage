@@ -49,7 +49,7 @@ import mage.target.TargetPermanent;
 /**
  * @author nantuko
  */
-public class VolitionReins extends CardImpl {
+public final class VolitionReins extends CardImpl {
 
     public VolitionReins(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{U}{U}{U}");

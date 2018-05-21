@@ -44,7 +44,7 @@ import mage.filter.common.FilterLandCard;
  *
  * @author fireshoes
  */
-public class TerrainGenerator extends CardImpl {
+public final class TerrainGenerator extends CardImpl {
 
     public TerrainGenerator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

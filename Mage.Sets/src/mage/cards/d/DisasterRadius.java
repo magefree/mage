@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author jeffwadsworth
  */
-public class DisasterRadius extends CardImpl {
+public final class DisasterRadius extends CardImpl {
 
     public DisasterRadius(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{R}{R}");

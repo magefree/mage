@@ -38,7 +38,7 @@ import mage.filter.common.FilterPermanentCard;
  *
  * @author Plopman
  */
-public class Wargate extends CardImpl {
+public final class Wargate extends CardImpl {
 
     public Wargate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{G}{W}{U}");

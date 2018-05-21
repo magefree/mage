@@ -40,7 +40,7 @@ import mage.constants.CardType;
  *
  * @author Plopman
  */
-public class CabalRitual extends CardImpl {
+public final class CabalRitual extends CardImpl {
 
     public CabalRitual(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{B}");

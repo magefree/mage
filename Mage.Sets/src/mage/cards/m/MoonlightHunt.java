@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class MoonlightHunt extends CardImpl {
+public final class MoonlightHunt extends CardImpl {
 
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you don't control");
 

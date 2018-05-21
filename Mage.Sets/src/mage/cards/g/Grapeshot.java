@@ -39,7 +39,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Plopman
  */
-public class Grapeshot extends CardImpl {
+public final class Grapeshot extends CardImpl {
 
     public Grapeshot(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{R}");

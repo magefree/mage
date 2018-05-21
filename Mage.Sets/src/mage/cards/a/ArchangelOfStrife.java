@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author Eirkei
  */
-public class ArchangelOfStrife extends CardImpl {
+public final class ArchangelOfStrife extends CardImpl {
 
     public ArchangelOfStrife(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{W}{W}");

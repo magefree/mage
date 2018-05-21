@@ -38,7 +38,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author noxx
  */
-public class Switcheroo extends CardImpl {
+public final class Switcheroo extends CardImpl {
 
     private static final String rule = "Exchange control of two target creatures";
 

@@ -41,7 +41,7 @@ import mage.target.TargetPlayer;
  *
  * @author Plopman
  */
-public class ViciousShadows extends CardImpl {
+public final class ViciousShadows extends CardImpl {
 
     public ViciousShadows(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{6}{R}");

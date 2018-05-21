@@ -42,7 +42,7 @@ import mage.util.CardUtil;
 /**
  * @author noxx
  */
-public class ArcaneMelee extends CardImpl {
+public final class ArcaneMelee extends CardImpl {
 
     public ArcaneMelee(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}");

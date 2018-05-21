@@ -50,7 +50,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class BoundlessRealms extends CardImpl {
+public final class BoundlessRealms extends CardImpl {
 
     public BoundlessRealms(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{6}{G}");

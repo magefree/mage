@@ -44,7 +44,7 @@ import mage.constants.SubType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class AdventuringGear extends CardImpl {
+public final class AdventuringGear extends CardImpl {
 
     public AdventuringGear(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");

@@ -43,7 +43,7 @@ import mage.filter.common.FilterLandPermanent;
  *
  * @author Loki
  */
-public class AkkiRaider extends CardImpl {
+public final class AkkiRaider extends CardImpl {
 
     public AkkiRaider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

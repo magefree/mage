@@ -55,7 +55,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author fireshoes
  */
-public class SavageThallid extends CardImpl {
+public final class SavageThallid extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent("Fungus");
     

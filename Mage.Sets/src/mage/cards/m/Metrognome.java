@@ -44,7 +44,7 @@ import mage.game.permanent.token.GnomeToken;
  *
  * @author LoneFox
  */
-public class Metrognome extends CardImpl {
+public final class Metrognome extends CardImpl {
 
     public Metrognome(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");

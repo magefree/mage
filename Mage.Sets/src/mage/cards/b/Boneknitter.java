@@ -47,7 +47,7 @@ import mage.target.TargetPermanent;
  *
  * @author LoneFox
  */
-public class Boneknitter extends CardImpl {
+public final class Boneknitter extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Zombie");
 

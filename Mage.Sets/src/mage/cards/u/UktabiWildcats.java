@@ -51,7 +51,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Quercitron
  */
-public class UktabiWildcats extends CardImpl {
+public final class UktabiWildcats extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Forests you control");
     private static final FilterControlledPermanent sacrificeFilter = new FilterControlledPermanent("a Forest");

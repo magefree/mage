@@ -46,7 +46,7 @@ import mage.target.common.TargetNonlandPermanent;
 *
 * @author LevelX2
 */
-public class ThrullParasite extends CardImpl {
+public final class ThrullParasite extends CardImpl {
 
     public ThrullParasite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");

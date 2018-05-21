@@ -52,7 +52,7 @@ import mage.util.CardUtil;
  *
  * @author fireshoes
  */
-public class FairgroundsWarden extends CardImpl {
+public final class FairgroundsWarden extends CardImpl {
 
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
 

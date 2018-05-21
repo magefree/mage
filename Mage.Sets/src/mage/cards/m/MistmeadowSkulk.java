@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
  *
  * @author North
  */
-public class MistmeadowSkulk extends CardImpl {
+public final class MistmeadowSkulk extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("converted mana cost 3 or greater");
 

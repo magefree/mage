@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class GoblinTaskmaster extends CardImpl {
+public final class GoblinTaskmaster extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Goblin creature");
 

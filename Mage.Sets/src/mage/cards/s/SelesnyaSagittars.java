@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author nigelzor
  */
-public class SelesnyaSagittars extends CardImpl {
+public final class SelesnyaSagittars extends CardImpl {
 
     public SelesnyaSagittars(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{W}");

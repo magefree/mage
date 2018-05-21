@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class IntimidatorInitiate extends CardImpl {
+public final class IntimidatorInitiate extends CardImpl {
     
     private static final FilterSpell filter = new FilterSpell("red spell");
     

@@ -45,7 +45,7 @@ import mage.constants.Duration;
  *
  * @author LevelX2
  */
-public class StormsurgeKraken extends CardImpl {
+public final class StormsurgeKraken extends CardImpl {
 
     public StormsurgeKraken(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}{U}");

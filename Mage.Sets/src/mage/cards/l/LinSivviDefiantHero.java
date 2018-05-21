@@ -54,7 +54,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author fireshoes
  */
-public class LinSivviDefiantHero extends CardImpl {
+public final class LinSivviDefiantHero extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Rebel card from your graveyard");
 

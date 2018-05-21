@@ -39,7 +39,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX2
  */
-public class DarkInquiry extends CardImpl {
+public final class DarkInquiry extends CardImpl {
 
     public DarkInquiry(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}");

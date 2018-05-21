@@ -46,7 +46,7 @@ import mage.target.common.TargetNonBasicLandPermanent;
  *
  * @author fireshoes
  */
-public class DwarvenBlastminer extends CardImpl {
+public final class DwarvenBlastminer extends CardImpl {
     public DwarvenBlastminer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");
         this.subtype.add(SubType.DWARF);

@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class TatteredDrake extends CardImpl {
+public final class TatteredDrake extends CardImpl {
 
     public TatteredDrake (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}");

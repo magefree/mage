@@ -54,7 +54,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author North
  */
-public class AetherVial extends CardImpl {
+public final class AetherVial extends CardImpl {
 
     public AetherVial(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");

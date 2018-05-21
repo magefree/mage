@@ -52,7 +52,7 @@ import mage.target.TargetSource;
  *
  * @author L_J
  */
-public class BeaconOfDestiny extends CardImpl {
+public final class BeaconOfDestiny extends CardImpl {
 
     public BeaconOfDestiny(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");

@@ -56,7 +56,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author jeffwadsworth
  */
-public class MeriekeRiBerit extends CardImpl {
+public final class MeriekeRiBerit extends CardImpl {
 
     public MeriekeRiBerit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{U}{B}");

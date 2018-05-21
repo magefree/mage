@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author nantuko
  */
-public class GraspOfPhantoms extends CardImpl {
+public final class GraspOfPhantoms extends CardImpl {
 
     public GraspOfPhantoms(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}");

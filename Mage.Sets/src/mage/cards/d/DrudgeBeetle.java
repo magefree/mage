@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class DrudgeBeetle extends CardImpl {
+public final class DrudgeBeetle extends CardImpl {
 
     public DrudgeBeetle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");

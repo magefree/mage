@@ -42,7 +42,7 @@ import mage.target.TargetPermanent;
  *
  * @author ilcartographer
  */
-public class LavaFlow extends CardImpl {
+public final class LavaFlow extends CardImpl {
     private static final FilterPermanent filter = new FilterPermanent("creature or land");
     static {
         filter.add(Predicates.or(new CardTypePredicate(CardType.CREATURE), new CardTypePredicate(CardType.LAND)));

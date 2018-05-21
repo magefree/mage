@@ -49,7 +49,7 @@ import mage.filter.FilterSpell;
  *
  * @author LevelX2
  */
-public class LoneWolfOfTheNatterknolls extends CardImpl {
+public final class LoneWolfOfTheNatterknolls extends CardImpl {
 
     public LoneWolfOfTheNatterknolls(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");

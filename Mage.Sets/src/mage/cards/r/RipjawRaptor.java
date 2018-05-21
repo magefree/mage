@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author TheElk801
  */
-public class RipjawRaptor extends CardImpl {
+public final class RipjawRaptor extends CardImpl {
 
     public RipjawRaptor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");

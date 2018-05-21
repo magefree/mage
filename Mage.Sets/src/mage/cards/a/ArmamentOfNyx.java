@@ -53,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class ArmamentOfNyx extends CardImpl {
+public final class ArmamentOfNyx extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("enchantment");
 

@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class CongregationAtDawn extends CardImpl {
+public final class CongregationAtDawn extends CardImpl {
 
     public CongregationAtDawn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G}{G}{W}");

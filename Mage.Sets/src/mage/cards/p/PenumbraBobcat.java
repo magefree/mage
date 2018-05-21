@@ -41,7 +41,7 @@ import mage.game.permanent.token.PenumbraBobcatToken;
  *
  * @author Loki
  */
-public class PenumbraBobcat extends CardImpl {
+public final class PenumbraBobcat extends CardImpl {
 
     public PenumbraBobcat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");

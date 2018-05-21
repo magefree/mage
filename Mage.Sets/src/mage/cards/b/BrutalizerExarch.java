@@ -54,7 +54,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author North
  */
-public class BrutalizerExarch extends CardImpl {
+public final class BrutalizerExarch extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("noncreature permanent");
 

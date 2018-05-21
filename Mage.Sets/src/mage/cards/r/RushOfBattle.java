@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author emerald000
  */
-public class RushOfBattle extends CardImpl {
+public final class RushOfBattle extends CardImpl {
     
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
     static {

@@ -43,7 +43,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class FeralLightning extends CardImpl {
+public final class FeralLightning extends CardImpl {
 
     public FeralLightning(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}{R}{R}");

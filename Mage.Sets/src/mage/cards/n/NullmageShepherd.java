@@ -50,7 +50,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class NullmageShepherd extends CardImpl {
+public final class NullmageShepherd extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filterCost = new FilterControlledCreaturePermanent("untapped creatures you control");
     static {

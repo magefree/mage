@@ -42,7 +42,7 @@ import mage.constants.Duration;
  *
  * @author LevelX2
  */
-public class DaringSkyjek extends CardImpl {
+public final class DaringSkyjek extends CardImpl {
 
     public DaringSkyjek(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

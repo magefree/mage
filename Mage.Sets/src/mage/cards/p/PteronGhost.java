@@ -46,7 +46,7 @@ import mage.target.TargetPermanent;
 /**
  * @author Loki
  */
-public class PteronGhost extends CardImpl {
+public final class PteronGhost extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact");
 

@@ -48,7 +48,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class RuinInTheirWake extends CardImpl {
+public final class RuinInTheirWake extends CardImpl {
 
     public RuinInTheirWake(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{G}");

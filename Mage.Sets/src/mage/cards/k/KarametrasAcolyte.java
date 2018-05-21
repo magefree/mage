@@ -42,7 +42,7 @@ import mage.constants.ColoredManaSymbol;
  *
  * @author LevelX2
  */
-public class KarametrasAcolyte extends CardImpl {
+public final class KarametrasAcolyte extends CardImpl {
 
     public KarametrasAcolyte(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

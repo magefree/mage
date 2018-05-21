@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class PhyrexianDigester extends CardImpl {
+public final class PhyrexianDigester extends CardImpl {
 
     public PhyrexianDigester (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");

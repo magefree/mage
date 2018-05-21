@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author jeffwadsworth
  */
-public class BlitzHellion extends CardImpl {
+public final class BlitzHellion extends CardImpl {
 
     public BlitzHellion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{G}");

@@ -53,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author emerald000
  */
-public class MartyrOfSpores extends CardImpl {
+public final class MartyrOfSpores extends CardImpl {
     
     private static final FilterCard filter = new FilterCard("X green cards from your hand");
     static {

@@ -51,7 +51,7 @@ import mage.game.turn.Step;
  *
  * @author fireshoes
  */
-public class UndergrowthChampion extends CardImpl {
+public final class UndergrowthChampion extends CardImpl {
 
     public UndergrowthChampion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");

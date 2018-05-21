@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class NumaiOutcast extends CardImpl {
+public final class NumaiOutcast extends CardImpl {
 
     public NumaiOutcast (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

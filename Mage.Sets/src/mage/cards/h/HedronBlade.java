@@ -54,7 +54,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class HedronBlade extends CardImpl {
+public final class HedronBlade extends CardImpl {
 
     public HedronBlade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");

@@ -45,7 +45,7 @@ import mage.constants.TargetController;
  *
  * @author LevelX2
  */
-public class FanaticOfMogis extends CardImpl {
+public final class FanaticOfMogis extends CardImpl {
 
     public FanaticOfMogis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

@@ -48,7 +48,7 @@ import mage.watchers.common.CreatureWasCastWatcher;
  *
  * @author LevelX2
  */
-public class HallowedMoonlight extends CardImpl {
+public final class HallowedMoonlight extends CardImpl {
 
     public HallowedMoonlight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");

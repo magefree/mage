@@ -49,7 +49,7 @@ import mage.counters.CounterType;
  *
  * @author Plopman
  */
-public class SandstoneNeedle extends CardImpl {
+public final class SandstoneNeedle extends CardImpl {
 
     public SandstoneNeedle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

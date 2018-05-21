@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class ConfrontTheUnknown extends CardImpl {
+public final class ConfrontTheUnknown extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("each Clue you control");
 

@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author North
  */
-public class ImmaculateMagistrate extends CardImpl {
+public final class ImmaculateMagistrate extends CardImpl {
 
     public ImmaculateMagistrate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author wetterlicht
  */
-public class TelJiladWolf extends CardImpl {
+public final class TelJiladWolf extends CardImpl {
 
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("artifact creature");
 

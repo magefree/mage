@@ -47,7 +47,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author sinsedrix
  */
-public class BuildersBane extends CardImpl {
+public final class BuildersBane extends CardImpl {
 
     public BuildersBane(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{X}{R}");

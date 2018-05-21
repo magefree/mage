@@ -51,7 +51,7 @@ import mage.util.CardUtil;
 /**
  * @author JRHerlehy
  */
-public class ConsulateCrackdown extends CardImpl {
+public final class ConsulateCrackdown extends CardImpl {
 
     public ConsulateCrackdown(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}{W}");

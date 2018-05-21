@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author LevelX2
  */
-public class TemptWithImmortality extends CardImpl {
+public final class TemptWithImmortality extends CardImpl {
 
     public TemptWithImmortality(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B}");

@@ -41,7 +41,7 @@ import mage.target.TargetPermanent;
  *
  * @author TheElk801
  */
-public class LegionsJudgment extends CardImpl {
+public final class LegionsJudgment extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 4 or greater");
 

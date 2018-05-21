@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author KholdFuzion
  */
-public class VampiricSliver extends CardImpl {
+public final class VampiricSliver extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 

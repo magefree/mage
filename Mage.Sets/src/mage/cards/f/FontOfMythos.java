@@ -44,7 +44,7 @@ import mage.target.TargetPlayer;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class FontOfMythos extends CardImpl {
+public final class FontOfMythos extends CardImpl {
 
     public FontOfMythos(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");

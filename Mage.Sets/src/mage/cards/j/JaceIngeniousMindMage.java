@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author TheElk801
  */
-public class JaceIngeniousMindMage extends CardImpl {
+public final class JaceIngeniousMindMage extends CardImpl {
 
     public JaceIngeniousMindMage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{U}{U}");

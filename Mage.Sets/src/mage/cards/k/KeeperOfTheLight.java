@@ -51,7 +51,7 @@ import mage.target.TargetPlayer;
  *
  * @author stevemarkham81
  */
-public class KeeperOfTheLight extends CardImpl {
+public final class KeeperOfTheLight extends CardImpl {
 
     public KeeperOfTheLight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{W}");

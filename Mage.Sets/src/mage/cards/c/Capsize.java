@@ -39,7 +39,7 @@ import mage.target.TargetPermanent;
  *
  * @author jeffwadsworth
  */
-public class Capsize extends CardImpl {
+public final class Capsize extends CardImpl {
 
     public Capsize(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}{U}");

@@ -43,7 +43,7 @@ import mage.counters.CounterType;
 /**
  * @author CountAndromalius
  */
-public class BalothGorger extends CardImpl {
+public final class BalothGorger extends CardImpl {
 
     public BalothGorger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");

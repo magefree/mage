@@ -42,7 +42,7 @@ import mage.constants.CardType;
  *
  * @author TheElk801
  */
-public class AlabornZealot extends CardImpl {
+public final class AlabornZealot extends CardImpl {
 
     public AlabornZealot(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}");

@@ -49,7 +49,7 @@ import java.util.UUID;
 /**
  * @author Loki
  */
-public class SeshiroTheAnointed extends CardImpl {
+public final class SeshiroTheAnointed extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Snake creatures");
 

@@ -47,7 +47,7 @@ import mage.target.TargetPermanent;
  *
  * @author Loki
  */
-public class HaazdaExonerator extends CardImpl {
+public final class HaazdaExonerator extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Aura");
 

@@ -38,7 +38,7 @@ import mage.constants.Duration;
  *
  * @author LevelX2
  */
-public class RighteousCharge extends CardImpl {
+public final class RighteousCharge extends CardImpl {
 
     public RighteousCharge (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{W}{W}");

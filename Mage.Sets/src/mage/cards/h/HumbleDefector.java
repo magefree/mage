@@ -54,7 +54,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author jeffwadsworth
  */
-public class HumbleDefector extends CardImpl {
+public final class HumbleDefector extends CardImpl {
 
     public HumbleDefector(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

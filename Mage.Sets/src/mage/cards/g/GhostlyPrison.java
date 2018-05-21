@@ -40,7 +40,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class GhostlyPrison extends CardImpl {
+public final class GhostlyPrison extends CardImpl {
 
     public GhostlyPrison(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}");

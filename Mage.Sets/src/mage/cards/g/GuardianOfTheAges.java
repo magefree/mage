@@ -51,7 +51,7 @@ import mage.game.permanent.Permanent;
  *
  * @author Noahsark
  */
-public class GuardianOfTheAges extends CardImpl {
+public final class GuardianOfTheAges extends CardImpl {
     public GuardianOfTheAges(UUID ownerId, CardSetInfo setInfo){
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE,CardType.ARTIFACT},"{7}");
         this.subtype.add(SubType.GOLEM);

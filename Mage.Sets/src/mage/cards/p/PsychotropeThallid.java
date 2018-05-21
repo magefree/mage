@@ -54,7 +54,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author fireshoes
  */
-public class PsychotropeThallid extends CardImpl {
+public final class PsychotropeThallid extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a Saproling");
     static {

@@ -41,7 +41,7 @@ import mage.target.TargetSpell;
  *
  * @author cbt33
  */
-public class FerventDenial extends CardImpl {
+public final class FerventDenial extends CardImpl {
 
     public FerventDenial(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}{U}");

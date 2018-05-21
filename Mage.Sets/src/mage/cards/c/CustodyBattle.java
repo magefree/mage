@@ -66,7 +66,7 @@ import mage.util.CardUtil;
  *
  * @author TheElk801
  */
-public class CustodyBattle extends CardImpl {
+public final class CustodyBattle extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
 

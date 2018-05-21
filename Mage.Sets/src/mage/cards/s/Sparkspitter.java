@@ -46,7 +46,7 @@ import mage.game.permanent.token.SparkElementalToken;
  *
  * @author LoneFox
  */
-public class Sparkspitter extends CardImpl {
+public final class Sparkspitter extends CardImpl {
 
     public Sparkspitter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");

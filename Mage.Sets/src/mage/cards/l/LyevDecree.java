@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 
 
-public class LyevDecree extends CardImpl {
+public final class LyevDecree extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures your opponents control");
     static {

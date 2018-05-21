@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author emerald000
  */
-public class TorchGauntlet extends CardImpl {
+public final class TorchGauntlet extends CardImpl {
 
     public TorchGauntlet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

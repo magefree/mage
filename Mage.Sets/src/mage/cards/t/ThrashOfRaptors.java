@@ -50,7 +50,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  *
  * @author LevelX2
  */
-public class ThrashOfRaptors extends CardImpl {
+public final class ThrashOfRaptors extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another Dinosaur");
 

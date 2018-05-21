@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class VestigeOfEmrakul extends CardImpl {
+public final class VestigeOfEmrakul extends CardImpl {
 
     public VestigeOfEmrakul(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author TheElk801
  */
-public class DeeprootChampion extends CardImpl {
+public final class DeeprootChampion extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("a noncreature spell");
 

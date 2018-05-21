@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class ThroneOfTheHighCity extends CardImpl {
+public final class ThroneOfTheHighCity extends CardImpl {
 
     public ThroneOfTheHighCity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

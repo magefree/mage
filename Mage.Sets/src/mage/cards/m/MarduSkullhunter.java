@@ -46,7 +46,7 @@ import mage.watchers.common.PlayerAttackedWatcher;
  *
  * @author LevelX2
  */
-public class MarduSkullhunter extends CardImpl {
+public final class MarduSkullhunter extends CardImpl {
 
     public MarduSkullhunter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}");

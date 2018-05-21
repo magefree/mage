@@ -55,7 +55,7 @@ import mage.filter.predicate.permanent.WasDealtDamageThisTurnPredicate;
  * @author KholdFuzion & L_J
  *
  */
-public class GiantShark extends CardImpl {
+public final class GiantShark extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("an Island");
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creature that has been dealt damage this turn");

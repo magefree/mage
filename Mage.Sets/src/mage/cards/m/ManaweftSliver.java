@@ -44,7 +44,7 @@ import mage.filter.common.FilterCreaturePermanent;
  *
  * @author LevelX2
  */
-public class ManaweftSliver extends CardImpl {
+public final class ManaweftSliver extends CardImpl {
 
     public static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.SLIVER, "Sliver creatures");
 

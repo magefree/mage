@@ -49,7 +49,7 @@ import mage.target.TargetPermanent;
  *
  * @author anonymous
  */
-public class PoulticeSliver extends CardImpl {
+public final class PoulticeSliver extends CardImpl {
 
     public PoulticeSliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");

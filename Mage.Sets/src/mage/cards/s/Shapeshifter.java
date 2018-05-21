@@ -52,7 +52,7 @@ import mage.util.CardUtil;
  *
  * @author MarcoMarin / HCrescent
  */
-public class Shapeshifter extends CardImpl {
+public final class Shapeshifter extends CardImpl {
 
     public Shapeshifter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");

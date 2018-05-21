@@ -46,7 +46,7 @@ import mage.game.permanent.Permanent;
  *
  * @author TheElk801
  */
-public class AnZerrinRuins extends CardImpl {
+public final class AnZerrinRuins extends CardImpl {
 
     public AnZerrinRuins(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{R}");

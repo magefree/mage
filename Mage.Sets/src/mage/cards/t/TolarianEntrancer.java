@@ -46,7 +46,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author fireshoes
  */
-public class TolarianEntrancer extends CardImpl {
+public final class TolarianEntrancer extends CardImpl {
 
     public TolarianEntrancer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

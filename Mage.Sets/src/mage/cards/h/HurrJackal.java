@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author MarcoMarin
  */
-public class HurrJackal extends CardImpl {
+public final class HurrJackal extends CardImpl {
 
     public HurrJackal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");

@@ -47,7 +47,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class TaintedField extends CardImpl {
+public final class TaintedField extends CardImpl {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("you control a swamp");
     static {

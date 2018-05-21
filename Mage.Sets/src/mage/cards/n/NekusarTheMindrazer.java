@@ -45,7 +45,7 @@ import mage.constants.TargetController;
  *
  * @author LevelX2
  */
-public class NekusarTheMindrazer extends CardImpl {
+public final class NekusarTheMindrazer extends CardImpl {
 
     public NekusarTheMindrazer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}{B}{R}");

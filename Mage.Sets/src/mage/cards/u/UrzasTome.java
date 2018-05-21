@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author TheElk801
  */
-public class UrzasTome extends CardImpl {
+public final class UrzasTome extends CardImpl {
 
     public UrzasTome(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");

@@ -44,7 +44,7 @@ import mage.constants.Duration;
  *
  * @author LoneFox
  */
-public class KeeperOfTresserhorn extends CardImpl {
+public final class KeeperOfTresserhorn extends CardImpl {
 
     public KeeperOfTresserhorn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}");

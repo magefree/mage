@@ -43,7 +43,7 @@ import mage.filter.common.FilterCreatureCard;
  *
  * @author LoneFox
  */
-public class UrzasIncubator extends CardImpl {
+public final class UrzasIncubator extends CardImpl {
 
     public UrzasIncubator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

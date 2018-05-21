@@ -50,7 +50,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author TheElk801
  */
-public class NihilisticGlee extends CardImpl {
+public final class NihilisticGlee extends CardImpl {
 
     public NihilisticGlee(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");

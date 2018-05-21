@@ -46,7 +46,7 @@ import mage.target.TargetPlayer;
  *
  * @author North
  */
-public class MagneticMine extends CardImpl {
+public final class MagneticMine extends CardImpl {
 
     public MagneticMine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");

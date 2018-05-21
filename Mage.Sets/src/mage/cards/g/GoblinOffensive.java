@@ -39,7 +39,7 @@ import mage.game.permanent.token.GoblinToken;
  *
  * @author jonubuu
  */
-public class GoblinOffensive extends CardImpl {
+public final class GoblinOffensive extends CardImpl {
 
     public GoblinOffensive(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{1}{R}{R}");

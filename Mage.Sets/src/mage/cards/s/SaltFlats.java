@@ -42,7 +42,7 @@ import mage.constants.CardType;
  *
  * @author Loki
  */
-public class SaltFlats extends CardImpl {
+public final class SaltFlats extends CardImpl {
 
     public SaltFlats(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);

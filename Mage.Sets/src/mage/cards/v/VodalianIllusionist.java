@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class VodalianIllusionist extends CardImpl {
+public final class VodalianIllusionist extends CardImpl {
 
     public VodalianIllusionist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

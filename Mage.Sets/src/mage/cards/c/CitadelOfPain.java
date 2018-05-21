@@ -50,7 +50,7 @@ import mage.players.Player;
  *
  * @author Alexsandr0x
  */
-public class CitadelOfPain extends CardImpl {
+public final class CitadelOfPain extends CardImpl {
 
     public CitadelOfPain(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");

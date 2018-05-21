@@ -49,7 +49,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class HonoredHierarch extends CardImpl {
+public final class HonoredHierarch extends CardImpl {
 
     public HonoredHierarch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");

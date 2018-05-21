@@ -46,7 +46,7 @@ import mage.game.events.GameEvent;
  *
  * @author MarcoMarin
  */
-public class UncleIstvan extends CardImpl {
+public final class UncleIstvan extends CardImpl {
 
     public UncleIstvan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{B}{B}");

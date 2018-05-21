@@ -62,7 +62,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author emerald000
  */
-public class NahiriTheLithomancer extends CardImpl {
+public final class NahiriTheLithomancer extends CardImpl {
 
     public NahiriTheLithomancer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{W}{W}");

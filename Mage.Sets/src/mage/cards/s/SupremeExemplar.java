@@ -42,7 +42,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author fireshoes
  */
-public class SupremeExemplar extends CardImpl {
+public final class SupremeExemplar extends CardImpl {
     
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Elemental");
 

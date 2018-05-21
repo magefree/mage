@@ -46,7 +46,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class DeathDenied extends CardImpl {
+public final class DeathDenied extends CardImpl {
 
     public DeathDenied(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{B}{B}");

@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Leathios
  */
-public class AegisOfTheMeek extends CardImpl {
+public final class AegisOfTheMeek extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("1/1 creature");
 

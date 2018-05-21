@@ -48,7 +48,7 @@ import mage.watchers.common.ManaSpentToCastWatcher;
  * @author LoneFox
 
  */
-public class ShriekingGrotesque extends CardImpl {
+public final class ShriekingGrotesque extends CardImpl {
 
     public ShriekingGrotesque(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");

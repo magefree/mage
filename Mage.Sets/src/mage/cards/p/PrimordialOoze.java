@@ -52,7 +52,7 @@ import mage.players.Player;
  *
  * @author L_J
  */
-public class PrimordialOoze extends CardImpl {
+public final class PrimordialOoze extends CardImpl {
 
     public PrimordialOoze(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");

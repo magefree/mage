@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class ScuzzbackMarauders extends CardImpl {
+public final class ScuzzbackMarauders extends CardImpl {
 
     public ScuzzbackMarauders(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R/G}");

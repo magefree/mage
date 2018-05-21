@@ -53,7 +53,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author jonubuu
  */
-public class RelicOfProgenitus extends CardImpl {
+public final class RelicOfProgenitus extends CardImpl {
 
     public RelicOfProgenitus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");

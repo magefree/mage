@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author L_J
  */
-public class BakisCurse extends CardImpl {
+public final class BakisCurse extends CardImpl {
 
     public BakisCurse(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}{U}");

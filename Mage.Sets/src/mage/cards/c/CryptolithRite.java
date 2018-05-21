@@ -42,7 +42,7 @@ import mage.filter.StaticFilters;
  *
  * @author LevelX2
  */
-public class CryptolithRite extends CardImpl {
+public final class CryptolithRite extends CardImpl {
 
     public CryptolithRite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}");

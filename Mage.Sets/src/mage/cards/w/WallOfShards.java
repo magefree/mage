@@ -43,7 +43,7 @@ import mage.constants.SuperType;
  *
  * @author klayhamn
  */
-public class WallOfShards extends CardImpl {
+public final class WallOfShards extends CardImpl {
 
     public WallOfShards(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

@@ -41,7 +41,7 @@ import mage.constants.CardType;
  *
  * @author North
  */
-public class AkoumRefuge extends CardImpl {
+public final class AkoumRefuge extends CardImpl {
 
     public AkoumRefuge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

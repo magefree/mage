@@ -40,7 +40,7 @@ import mage.constants.Duration;
  *
  * @author Backfir3
  */
-public class Lull extends CardImpl {
+public final class Lull extends CardImpl {
 
     public Lull(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}");

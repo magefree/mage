@@ -41,7 +41,7 @@ import mage.target.common.TargetCreaturePermanentAmount;
  *
  * @author Styxo
  */
-public class MonstrousOnslaught extends CardImpl {
+public final class MonstrousOnslaught extends CardImpl {
 
     public MonstrousOnslaught(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{G}{G}");

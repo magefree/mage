@@ -51,7 +51,7 @@ import java.util.UUID;
  *
  * @author fireshoes
  */
-public class BoldwyrIntimidator extends CardImpl {
+public final class BoldwyrIntimidator extends CardImpl {
 
     public BoldwyrIntimidator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}{R}");

@@ -39,7 +39,7 @@ import mage.constants.CardType;
  *
  * @author jeffwadsworth
  */
-public class CathedralOfWar extends CardImpl {
+public final class CathedralOfWar extends CardImpl {
 
     public CathedralOfWar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

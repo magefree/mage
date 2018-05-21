@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author TheElk801
  */
-public class Rouse extends CardImpl {
+public final class Rouse extends CardImpl {
 
     private static final FilterLandPermanent filterSwamp = new FilterLandPermanent("If you control a Swamp");
 

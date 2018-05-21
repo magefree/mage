@@ -43,7 +43,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LevelX2
  */
-public class HarshSustenance extends CardImpl {
+public final class HarshSustenance extends CardImpl {
 
     public HarshSustenance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}{B}");

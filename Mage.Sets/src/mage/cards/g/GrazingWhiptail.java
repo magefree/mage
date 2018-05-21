@@ -39,7 +39,7 @@ import mage.constants.CardType;
  *
  * @author TheElk801
  */
-public class GrazingWhiptail extends CardImpl {
+public final class GrazingWhiptail extends CardImpl {
 
     public GrazingWhiptail(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");

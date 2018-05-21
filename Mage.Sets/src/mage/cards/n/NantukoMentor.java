@@ -52,7 +52,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author cbt33
  */
-public class NantukoMentor extends CardImpl {
+public final class NantukoMentor extends CardImpl {
 
     public NantukoMentor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

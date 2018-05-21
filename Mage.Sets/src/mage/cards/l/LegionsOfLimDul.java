@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.SupertypePredicate;
  *
  * @author fireshoes
  */
-public class LegionsOfLimDul extends CardImpl {
+public final class LegionsOfLimDul extends CardImpl {
     
     private static final FilterLandPermanent filter = new FilterLandPermanent("snow swamp");
     

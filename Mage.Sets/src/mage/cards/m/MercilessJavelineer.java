@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author anonymous
  */
-public class MercilessJavelineer extends CardImpl {
+public final class MercilessJavelineer extends CardImpl {
 
     public MercilessJavelineer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{R}");

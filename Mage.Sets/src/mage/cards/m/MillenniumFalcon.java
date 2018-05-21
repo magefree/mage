@@ -46,7 +46,7 @@ import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
  *
  * @author Styxo
  */
-public class MillenniumFalcon extends CardImpl {
+public final class MillenniumFalcon extends CardImpl {
 
     public MillenniumFalcon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}{G}{G}");

@@ -52,7 +52,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author Styxo
  */
-public class JarJarBinks extends CardImpl {
+public final class JarJarBinks extends CardImpl {
 
     public JarJarBinks(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");

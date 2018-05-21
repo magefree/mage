@@ -40,7 +40,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class CurtainsCall extends CardImpl {
+public final class CurtainsCall extends CardImpl {
 
     public CurtainsCall(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{5}{B}");

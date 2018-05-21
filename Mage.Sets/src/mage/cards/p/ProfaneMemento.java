@@ -44,7 +44,7 @@ import mage.game.events.ZoneChangeEvent;
  *
  * @author emerald000
  */
-public class ProfaneMemento extends CardImpl {
+public final class ProfaneMemento extends CardImpl {
 
     public ProfaneMemento(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");

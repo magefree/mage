@@ -54,7 +54,7 @@ import mage.game.Game;
  *
  * @author LevelX2
  */
-public class CrucibleOfTheSpiritDragon extends CardImpl {
+public final class CrucibleOfTheSpiritDragon extends CardImpl {
 
     public CrucibleOfTheSpiritDragon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

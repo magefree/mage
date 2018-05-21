@@ -50,7 +50,7 @@ import mage.target.TargetSpell;
  *
  * @author LoneFox
  */
-public class RingOfImmortals extends CardImpl {
+public final class RingOfImmortals extends CardImpl {
 
     private final static FilterSpell filter = new FilterSpell("instant or Aura spell that targets a permanent you control");
 

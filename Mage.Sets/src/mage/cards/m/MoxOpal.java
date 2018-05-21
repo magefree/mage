@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author BetaSteward_at_googlemail.com, Loki
  */
-public class MoxOpal extends CardImpl {
+public final class MoxOpal extends CardImpl {
 
     public MoxOpal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{0}");

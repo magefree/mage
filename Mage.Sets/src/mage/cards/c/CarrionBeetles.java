@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInASingleGraveyard;
  *
  * @author fireshoes
  */
-public class CarrionBeetles extends CardImpl {
+public final class CarrionBeetles extends CardImpl {
 
     public CarrionBeetles(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");

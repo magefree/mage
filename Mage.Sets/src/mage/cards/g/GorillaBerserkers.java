@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author LoneFox
  */
-public class GorillaBerserkers extends CardImpl {
+public final class GorillaBerserkers extends CardImpl {
 
     public GorillaBerserkers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");

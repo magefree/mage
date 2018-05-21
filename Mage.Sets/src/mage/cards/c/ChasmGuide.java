@@ -43,7 +43,7 @@ import static mage.filter.StaticFilters.FILTER_PERMANENT_CREATURES;
  *
  * @author LevelX2
  */
-public class ChasmGuide extends CardImpl {
+public final class ChasmGuide extends CardImpl {
 
     public ChasmGuide(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");

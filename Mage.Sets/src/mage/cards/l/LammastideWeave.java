@@ -46,7 +46,7 @@ import mage.target.TargetPlayer;
  *
  * @author Styxo
  */
-public class LammastideWeave extends CardImpl {
+public final class LammastideWeave extends CardImpl {
 
     public LammastideWeave(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{G}");

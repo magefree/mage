@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author JotaPeRL
  */
-public class CytospawnShambler extends CardImpl {
+public final class CytospawnShambler extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature with a +1/+1 counter on it");
     static {

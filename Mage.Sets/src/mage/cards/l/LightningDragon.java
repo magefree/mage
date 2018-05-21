@@ -47,7 +47,7 @@ import mage.constants.Zone;
  *
  * @author Backfir3
  */
-public class LightningDragon extends CardImpl {
+public final class LightningDragon extends CardImpl {
 
     public LightningDragon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");

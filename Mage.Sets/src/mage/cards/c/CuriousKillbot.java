@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author spjspj
  */
-public class CuriousKillbot extends CardImpl {
+public final class CuriousKillbot extends CardImpl {
 
     public CuriousKillbot(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");

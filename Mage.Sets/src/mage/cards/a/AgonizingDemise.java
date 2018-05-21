@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author FenrisulfrX
  */
-public class AgonizingDemise extends CardImpl {
+public final class AgonizingDemise extends CardImpl {
     
     private static final FilterCreaturePermanent filterNonBlackCreature = new FilterCreaturePermanent("nonblack creature");
     static {

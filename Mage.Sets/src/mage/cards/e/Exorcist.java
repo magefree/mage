@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author ilcartographer
  */
-public class Exorcist extends CardImpl {
+public final class Exorcist extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("black creature");
     static {

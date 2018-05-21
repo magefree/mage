@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BrindleBoar extends CardImpl {
+public final class BrindleBoar extends CardImpl {
 
     public BrindleBoar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author fireshoes
  */
-public class FurtiveHomunculus extends CardImpl {
+public final class FurtiveHomunculus extends CardImpl {
 
     public FurtiveHomunculus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

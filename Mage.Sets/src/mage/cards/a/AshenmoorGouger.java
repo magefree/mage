@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class AshenmoorGouger extends CardImpl {
+public final class AshenmoorGouger extends CardImpl {
 
     public AshenmoorGouger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B/R}{B/R}{B/R}");

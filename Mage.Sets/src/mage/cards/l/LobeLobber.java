@@ -54,7 +54,7 @@ import mage.target.TargetPlayer;
  *
  * @author spjspj
  */
-public class LobeLobber extends CardImpl {
+public final class LobeLobber extends CardImpl {
 
     public LobeLobber(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");

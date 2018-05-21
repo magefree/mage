@@ -45,7 +45,7 @@ import mage.game.permanent.token.SpiritWhiteToken;
  *
  * @author LevelX2
  */
-public class HallowedSpiritkeeper extends CardImpl {
+public final class HallowedSpiritkeeper extends CardImpl {
 
     public HallowedSpiritkeeper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");

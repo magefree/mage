@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class ViashinoSpearhunter extends CardImpl {
+public final class ViashinoSpearhunter extends CardImpl {
 
     public ViashinoSpearhunter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

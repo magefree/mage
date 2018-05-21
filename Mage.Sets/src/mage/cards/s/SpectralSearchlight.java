@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author Galatolol
  */
-public class SpectralSearchlight extends CardImpl {
+public final class SpectralSearchlight extends CardImpl {
 
     public SpectralSearchlight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");

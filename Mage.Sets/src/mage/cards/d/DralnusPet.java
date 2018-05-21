@@ -62,7 +62,7 @@ import mage.players.Player;
  * @author LoneFox
  * @author LevelX
  */
-public class DralnusPet extends CardImpl {
+public final class DralnusPet extends CardImpl {
 
     public DralnusPet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");

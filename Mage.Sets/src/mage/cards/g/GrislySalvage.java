@@ -45,7 +45,7 @@ import mage.target.TargetCard;
  *
  * @author LevelX2
  */
-public class GrislySalvage extends CardImpl {
+public final class GrislySalvage extends CardImpl {
 
     public GrislySalvage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{B}{G}");

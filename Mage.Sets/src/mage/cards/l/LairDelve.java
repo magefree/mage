@@ -41,7 +41,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author North
  */
-public class LairDelve extends CardImpl {
+public final class LairDelve extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("all creature and land cards");
 

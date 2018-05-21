@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author KholdFuzion
  */
-public class ReflexSliver extends CardImpl {
+public final class ReflexSliver extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 

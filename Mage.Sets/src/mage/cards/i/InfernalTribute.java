@@ -46,7 +46,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Styxo
  */
-public class InfernalTribute extends CardImpl {
+public final class InfernalTribute extends CardImpl {
 
     private final static FilterControlledPermanent filter = new FilterControlledPermanent("a nontoken permanent");
 

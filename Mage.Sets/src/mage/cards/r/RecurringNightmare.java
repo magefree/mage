@@ -47,7 +47,7 @@ import java.util.UUID;
  *
  * @author jeffwadsworth
  */
-public class RecurringNightmare extends CardImpl {
+public final class RecurringNightmare extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("creature card");
     private static final FilterControlledCreaturePermanent filter2 = new FilterControlledCreaturePermanent("creature");

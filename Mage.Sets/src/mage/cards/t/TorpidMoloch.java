@@ -46,7 +46,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author fireshoes
  */
-public class TorpidMoloch extends CardImpl {
+public final class TorpidMoloch extends CardImpl {
 
     public TorpidMoloch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{R}");

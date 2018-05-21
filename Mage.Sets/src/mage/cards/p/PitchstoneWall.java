@@ -48,7 +48,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author L_J
  */
-public class PitchstoneWall extends CardImpl {
+public final class PitchstoneWall extends CardImpl {
 
     public PitchstoneWall(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");

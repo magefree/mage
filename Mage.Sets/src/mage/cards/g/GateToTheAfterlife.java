@@ -62,7 +62,7 @@ import mage.target.common.TargetCardInYourGraveyard;
 /**
  * @author LevelX2
  */
-public class GateToTheAfterlife extends CardImpl {
+public final class GateToTheAfterlife extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a nontoken creature you control");
 

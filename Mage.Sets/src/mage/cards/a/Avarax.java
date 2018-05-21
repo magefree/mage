@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author fireshoes
  */
-public class Avarax extends CardImpl {
+public final class Avarax extends CardImpl {
     
     private static final FilterCard filter = new FilterCard("card named Avarax");
 

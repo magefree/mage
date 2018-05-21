@@ -46,7 +46,7 @@ import mage.target.TargetPermanent;
  *
  * @author Styxo
  */
-public class IceOver extends CardImpl {
+public final class IceOver extends CardImpl {
 
     public IceOver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");

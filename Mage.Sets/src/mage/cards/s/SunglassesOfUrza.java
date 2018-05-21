@@ -47,7 +47,7 @@ import mage.players.ManaPoolItem;
  *
  * @author LevelX2
  */
-public class SunglassesOfUrza extends CardImpl {
+public final class SunglassesOfUrza extends CardImpl {
 
     public SunglassesOfUrza(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

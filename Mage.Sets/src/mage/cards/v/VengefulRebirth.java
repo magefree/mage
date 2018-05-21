@@ -48,7 +48,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class VengefulRebirth extends CardImpl {
+public final class VengefulRebirth extends CardImpl {
 
     public VengefulRebirth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{R}{G}");

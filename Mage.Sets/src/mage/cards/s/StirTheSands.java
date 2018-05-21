@@ -41,7 +41,7 @@ import mage.game.permanent.token.ZombieToken;
  *
  * @author fireshoes
  */
-public class StirTheSands extends CardImpl {
+public final class StirTheSands extends CardImpl {
 
     public StirTheSands(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{B}{B}");

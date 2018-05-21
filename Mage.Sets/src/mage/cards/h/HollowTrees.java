@@ -54,7 +54,7 @@ import mage.counters.CounterType;
  *
  * @author anonymous
  */
-public class HollowTrees extends CardImpl {
+public final class HollowTrees extends CardImpl {
 
     public HollowTrees(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

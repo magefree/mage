@@ -50,7 +50,7 @@ import mage.target.TargetSpell;
  *
  * @author fireshoes
  */
-public class JacesDefeat extends CardImpl {
+public final class JacesDefeat extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("blue spell");
 

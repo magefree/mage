@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class RiseFall extends SplitCard {
+public final class RiseFall extends SplitCard {
 
     public RiseFall(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{U}{B}", "{B}{R}", SpellAbilityType.SPLIT);

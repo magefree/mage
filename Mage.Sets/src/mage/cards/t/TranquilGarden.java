@@ -41,7 +41,7 @@ import mage.constants.CardType;
  *
  * @author Loki
  */
-public class TranquilGarden extends CardImpl {
+public final class TranquilGarden extends CardImpl {
 
     public TranquilGarden(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

@@ -43,7 +43,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author Loki
  */
-public class SplitTailMiko extends CardImpl {
+public final class SplitTailMiko extends CardImpl {
 
     public SplitTailMiko(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

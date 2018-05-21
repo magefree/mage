@@ -50,7 +50,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class JaceVrynsProdigy extends CardImpl {
+public final class JaceVrynsProdigy extends CardImpl {
 
     public JaceVrynsProdigy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");

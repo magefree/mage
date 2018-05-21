@@ -51,7 +51,7 @@ import mage.target.TargetPermanent;
  *
  * @author TheElk801
  */
-public class RumblingCrescendo extends CardImpl {
+public final class RumblingCrescendo extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("up to X target lands, where X is the number of verse counters on {this}");
 

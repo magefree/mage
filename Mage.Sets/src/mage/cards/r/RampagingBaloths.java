@@ -43,7 +43,7 @@ import mage.game.permanent.token.BeastToken2;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class RampagingBaloths extends CardImpl {
+public final class RampagingBaloths extends CardImpl {
 
     public RampagingBaloths(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");

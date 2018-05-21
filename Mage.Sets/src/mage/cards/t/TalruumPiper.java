@@ -46,7 +46,7 @@ import mage.game.permanent.Permanent;
  *
  * @author nigelzor
  */
-public class TalruumPiper extends CardImpl {
+public final class TalruumPiper extends CardImpl {
 
     public TalruumPiper(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");

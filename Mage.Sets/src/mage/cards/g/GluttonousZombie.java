@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class GluttonousZombie extends CardImpl {
+public final class GluttonousZombie extends CardImpl {
 
     public GluttonousZombie(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");

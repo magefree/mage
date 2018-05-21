@@ -49,7 +49,7 @@ import mage.target.TargetCard;
  *
  * @author cbt33, noxx (DiscardCardYouChooseTargetOpponentEffect)
  */
-public class BalshanBeguiler extends CardImpl {
+public final class BalshanBeguiler extends CardImpl {
 
     public BalshanBeguiler(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

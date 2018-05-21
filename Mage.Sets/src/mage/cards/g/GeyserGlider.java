@@ -42,7 +42,7 @@ import mage.constants.Duration;
  *
  * @author North
  */
-public class GeyserGlider extends CardImpl {
+public final class GeyserGlider extends CardImpl {
 
     public GeyserGlider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");

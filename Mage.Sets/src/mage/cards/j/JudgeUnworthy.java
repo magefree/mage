@@ -47,7 +47,7 @@ import mage.target.common.TargetAttackingOrBlockingCreature;
  *
  * @author fireshoes
  */
-public class JudgeUnworthy extends CardImpl {
+public final class JudgeUnworthy extends CardImpl {
 
     public JudgeUnworthy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");

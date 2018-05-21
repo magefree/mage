@@ -43,7 +43,7 @@ import mage.target.TargetPermanent;
  *
  * @author fireshoes
  */
-public class Icefall extends CardImpl {
+public final class Icefall extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent("artifact or land");
 

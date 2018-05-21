@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LoneFox
  */
-public class SerendibSorcerer extends CardImpl {
+public final class SerendibSorcerer extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature other than {this}");
 

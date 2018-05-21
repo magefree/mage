@@ -39,7 +39,7 @@ import mage.constants.SubType;
  *
  * @author JayDi85
  */
-public class OrazcaFrillback extends CardImpl {
+public final class OrazcaFrillback extends CardImpl {
 
     public OrazcaFrillback(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");

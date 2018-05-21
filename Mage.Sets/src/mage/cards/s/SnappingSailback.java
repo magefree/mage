@@ -43,7 +43,7 @@ import mage.counters.CounterType;
  *
  * @author TheElk801
  */
-public class SnappingSailback extends CardImpl {
+public final class SnappingSailback extends CardImpl {
 
     public SnappingSailback(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}");

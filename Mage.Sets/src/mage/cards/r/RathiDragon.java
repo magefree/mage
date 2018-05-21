@@ -45,7 +45,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author fireshoes
  */
-public class RathiDragon extends CardImpl {
+public final class RathiDragon extends CardImpl {
     
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("two Mountains");
     

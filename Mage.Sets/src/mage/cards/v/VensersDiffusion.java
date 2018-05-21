@@ -42,7 +42,7 @@ import mage.target.common.TargetPermanentOrSuspendedCard;
  *
  * @author L_J
  */
-public class VensersDiffusion extends CardImpl {
+public final class VensersDiffusion extends CardImpl {
     
     private static final FilterPermanentOrSuspendedCard filter = new FilterPermanentOrSuspendedCard("nonland permanent or suspended card");
     

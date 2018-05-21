@@ -43,7 +43,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class SearchForTomorrow extends CardImpl {
+public final class SearchForTomorrow extends CardImpl {
 
     public SearchForTomorrow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}");

@@ -39,7 +39,7 @@ import mage.constants.CardType;
  *
  * @author Plopman
  */
-public class CoastalTower extends CardImpl {
+public final class CoastalTower extends CardImpl {
 
     public CoastalTower(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

@@ -42,7 +42,7 @@ import mage.constants.CardType;
  *
  * @author Styxo
  */
-public class DroidFoundry extends CardImpl {
+public final class DroidFoundry extends CardImpl {
 
     public DroidFoundry(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

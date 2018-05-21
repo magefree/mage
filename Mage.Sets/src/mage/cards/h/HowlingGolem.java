@@ -18,7 +18,7 @@ import mage.constants.SubType;
  *
  * @author Rystan
  */
-public class HowlingGolem extends CardImpl {
+public final class HowlingGolem extends CardImpl {
     
     public HowlingGolem(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");

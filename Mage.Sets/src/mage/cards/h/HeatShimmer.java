@@ -48,7 +48,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Styxo
  */
-public class HeatShimmer extends CardImpl {
+public final class HeatShimmer extends CardImpl {
 
     public HeatShimmer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{R}");

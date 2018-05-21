@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class SnowhornRider extends CardImpl {
+public final class SnowhornRider extends CardImpl {
 
     public SnowhornRider(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{U}{R}");

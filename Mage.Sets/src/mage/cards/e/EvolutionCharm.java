@@ -47,7 +47,7 @@ import java.util.UUID;
  *
  * @author fireshoes
  */
-public class EvolutionCharm extends CardImpl {
+public final class EvolutionCharm extends CardImpl {
 
     public EvolutionCharm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{G}");

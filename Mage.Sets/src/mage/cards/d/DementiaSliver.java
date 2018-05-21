@@ -50,7 +50,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author fireshoes
  */
-public class DementiaSliver extends CardImpl {
+public final class DementiaSliver extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("All Slivers");
 

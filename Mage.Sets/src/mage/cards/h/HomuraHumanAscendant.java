@@ -60,7 +60,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class HomuraHumanAscendant extends CardImpl {
+public final class HomuraHumanAscendant extends CardImpl {
 
     public HomuraHumanAscendant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}{R}");

@@ -43,7 +43,7 @@ import mage.constants.Zone;
  * @author noxx
 
  */
-public class DruidsFamiliar extends CardImpl {
+public final class DruidsFamiliar extends CardImpl {
 
     private static final String ruleText = "As long as {this} is paired with another creature, each of those creatures gets +2/+2";
 

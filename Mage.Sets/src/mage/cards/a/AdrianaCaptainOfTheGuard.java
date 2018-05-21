@@ -41,7 +41,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author Styxo
  */
-public class AdrianaCaptainOfTheGuard extends CardImpl {
+public final class AdrianaCaptainOfTheGuard extends CardImpl {
 
     public AdrianaCaptainOfTheGuard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{W}");

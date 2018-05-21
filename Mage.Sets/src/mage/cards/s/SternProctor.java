@@ -44,7 +44,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class SternProctor extends CardImpl {
+public final class SternProctor extends CardImpl {
 
     public SternProctor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{U}");

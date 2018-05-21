@@ -41,7 +41,7 @@ import mage.target.common.TargetCardInGraveyard;
  *
  * @author fireshoes
  */
-public class Headstone extends CardImpl {
+public final class Headstone extends CardImpl {
 
     public Headstone(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{B}");

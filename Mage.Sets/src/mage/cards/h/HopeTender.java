@@ -46,7 +46,7 @@ import mage.target.common.TargetLandPermanent;
  *
  * @author ciaccona007
  */
-public class HopeTender extends CardImpl {
+public final class HopeTender extends CardImpl {
 
     public HopeTender(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");

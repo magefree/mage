@@ -42,7 +42,7 @@ import java.util.UUID;
  *
  * @author Jgod
  */
-public class BreakAsunder extends CardImpl {
+public final class BreakAsunder extends CardImpl {
 
     public BreakAsunder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{G}{G}");

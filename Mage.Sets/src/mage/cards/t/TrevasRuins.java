@@ -48,7 +48,7 @@ import java.util.UUID;
  *
  * @author Plopman
  */
-public class TrevasRuins extends CardImpl {
+public final class TrevasRuins extends CardImpl {
 
     private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("non-Lair land");
     static{

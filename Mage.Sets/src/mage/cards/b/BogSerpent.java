@@ -45,7 +45,7 @@ import mage.filter.common.FilterLandPermanent;
  *
  * @author fireshoes
  */
-public class BogSerpent extends CardImpl {
+public final class BogSerpent extends CardImpl {
 
     public BogSerpent(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{B}");

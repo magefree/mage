@@ -47,7 +47,7 @@ import mage.counters.CounterType;
  *
  * @author TheElk801
  */
-public class Vebulid extends CardImpl {
+public final class Vebulid extends CardImpl {
 
     public Vebulid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}");

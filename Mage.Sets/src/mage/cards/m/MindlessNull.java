@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author North
  */
-public class MindlessNull extends CardImpl {
+public final class MindlessNull extends CardImpl {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Vampire");
 
     static {

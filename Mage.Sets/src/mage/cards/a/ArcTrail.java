@@ -48,7 +48,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author maurer.it_at_gmail.com
  */
-public class ArcTrail extends CardImpl {
+public final class ArcTrail extends CardImpl {
 
     public ArcTrail(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{R}");

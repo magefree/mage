@@ -54,7 +54,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class SpectraWard extends CardImpl {
+public final class SpectraWard extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("all colors");
 

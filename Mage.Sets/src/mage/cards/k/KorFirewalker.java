@@ -48,7 +48,7 @@ import mage.game.stack.Spell;
  *
  * @author Loki
  */
-public class KorFirewalker extends CardImpl {
+public final class KorFirewalker extends CardImpl {
 
     public KorFirewalker (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{W}");

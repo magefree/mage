@@ -44,7 +44,7 @@ import mage.target.common.TargetOpponentsCreaturePermanent;
  *
  * @author Styxo
  */
-public class JediBattleMage extends CardImpl {
+public final class JediBattleMage extends CardImpl {
 
     public JediBattleMage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");

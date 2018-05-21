@@ -41,7 +41,7 @@ import mage.target.TargetPermanent;
  *
  * @author JRHerlehy
  */
-public class BrokenBond extends CardImpl {
+public final class BrokenBond extends CardImpl {
 
     public BrokenBond(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{G}");

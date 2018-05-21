@@ -54,7 +54,7 @@ import java.util.UUID;
  *
  * @author BetaSteward
  */
-public class CurseOfThirst extends CardImpl {
+public final class CurseOfThirst extends CardImpl {
 
     public CurseOfThirst(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{B}");

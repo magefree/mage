@@ -48,7 +48,7 @@ import mage.target.TargetSpell;
  *
  * @author LevelX2
  */
-public class Mindswipe extends CardImpl {
+public final class Mindswipe extends CardImpl {
 
     public Mindswipe(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{U}{R}");

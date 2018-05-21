@@ -42,7 +42,7 @@ import mage.filter.predicate.permanent.TokenPredicate;
  *
  * @author LevelX2
  */
-public class VirulentPlague extends CardImpl {
+public final class VirulentPlague extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creature tokens");
     static {

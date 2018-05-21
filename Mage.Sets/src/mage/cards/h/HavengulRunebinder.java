@@ -51,7 +51,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author North
  */
-public class HavengulRunebinder extends CardImpl {
+public final class HavengulRunebinder extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("a creature card from your graveyard");
     private static final FilterControlledCreaturePermanent filterPermanent = new FilterControlledCreaturePermanent("Zombie creature you control");

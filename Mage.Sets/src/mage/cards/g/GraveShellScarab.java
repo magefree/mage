@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author jonubuu
  */
-public class GraveShellScarab extends CardImpl {
+public final class GraveShellScarab extends CardImpl {
 
     public GraveShellScarab(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{G}{G}");

@@ -42,7 +42,7 @@ import mage.target.TargetPlayer;
  *
  * @author magenoxx_at_gmail.com
  */
-public class DeepAnalysis extends CardImpl {
+public final class DeepAnalysis extends CardImpl {
 
     public DeepAnalysis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{U}");

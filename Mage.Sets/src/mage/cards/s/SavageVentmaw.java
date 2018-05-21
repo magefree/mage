@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author jeffwadsworth
  */
-public class SavageVentmaw extends CardImpl {
+public final class SavageVentmaw extends CardImpl {
 
     public SavageVentmaw(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{G}");

@@ -46,7 +46,7 @@ import mage.constants.Zone;
  *
  * @author BursegSardaukar
  */
-public class GoblinFireFiend extends CardImpl {
+public final class GoblinFireFiend extends CardImpl {
 
     public GoblinFireFiend(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

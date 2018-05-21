@@ -48,7 +48,7 @@ import mage.counters.CounterType;
  *
  * @author Backfir3
  */
-public class BarrinsCodex extends CardImpl {
+public final class BarrinsCodex extends CardImpl {
 
     public BarrinsCodex(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");

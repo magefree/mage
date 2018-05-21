@@ -50,7 +50,7 @@ import mage.target.common.TargetAttackingCreature;
  *
  * @author emerald000
  */
-public class MazeOfShadows extends CardImpl {
+public final class MazeOfShadows extends CardImpl {
     
     private static final FilterAttackingCreature filter = new FilterAttackingCreature("attacking creature with shadow");
     static {

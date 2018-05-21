@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author BetaSteward_at_googlemail.com & L_J
  */
-public class LuminousBonds extends CardImpl {
+public final class LuminousBonds extends CardImpl {
 
     public LuminousBonds(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}");

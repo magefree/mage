@@ -46,7 +46,7 @@ import mage.game.permanent.Permanent;
  *
  * @author fireshoes
  */
-public class GrislyAnglerfish extends CardImpl {
+public final class GrislyAnglerfish extends CardImpl {
 
     public GrislyAnglerfish(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");

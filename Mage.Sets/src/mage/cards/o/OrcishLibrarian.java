@@ -52,7 +52,7 @@ import mage.players.Player;
  *
  * @author Mitchel Stein
  */
-public class OrcishLibrarian extends CardImpl {
+public final class OrcishLibrarian extends CardImpl {
 
     public OrcishLibrarian(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");

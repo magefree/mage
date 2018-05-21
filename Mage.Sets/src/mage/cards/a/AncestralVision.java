@@ -40,7 +40,7 @@ import mage.target.TargetPlayer;
  *
  * @author Plopman
  */
-public class AncestralVision extends CardImpl {
+public final class AncestralVision extends CardImpl {
 
     public AncestralVision(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"");

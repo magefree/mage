@@ -47,7 +47,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author LoneFox
  */
-public class OrcishMechanics extends CardImpl {
+public final class OrcishMechanics extends CardImpl {
 
     public OrcishMechanics(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

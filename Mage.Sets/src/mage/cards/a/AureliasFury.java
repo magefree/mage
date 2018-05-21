@@ -77,7 +77,7 @@ import mage.watchers.Watcher;
  *
  * @author LevelX2
  */
-public class AureliasFury extends CardImpl {
+public final class AureliasFury extends CardImpl {
 
     public AureliasFury(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{R}{W}");

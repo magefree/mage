@@ -48,7 +48,7 @@ import mage.filter.FilterPermanent;
  *
  * @author Plopman
  */
-public class HibernationSliver extends CardImpl {
+public final class HibernationSliver extends CardImpl {
 
     public HibernationSliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{B}");

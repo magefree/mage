@@ -45,7 +45,7 @@ import mage.target.TargetPlayer;
  *
  * @author TheElk801
  */
-public class LimestoneGolem extends CardImpl {
+public final class LimestoneGolem extends CardImpl {
 
     public LimestoneGolem(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");

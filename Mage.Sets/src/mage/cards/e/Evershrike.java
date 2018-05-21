@@ -54,7 +54,7 @@ import mage.target.TargetCard;
 /**
  * @author jeffwadsworth
  */
-public class Evershrike extends CardImpl {
+public final class Evershrike extends CardImpl {
 
     public Evershrike(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W/B}{W/B}");

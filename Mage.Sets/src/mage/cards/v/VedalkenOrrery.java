@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  *
  * @author emerald000
  */
-public class VedalkenOrrery extends CardImpl {
+public final class VedalkenOrrery extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("spells");
 

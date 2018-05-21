@@ -50,7 +50,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class SurveyorsScope extends CardImpl {
+public final class SurveyorsScope extends CardImpl {
 
     public SurveyorsScope(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

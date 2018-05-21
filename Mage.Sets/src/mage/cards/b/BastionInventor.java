@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author spjspj
  */
-public class BastionInventor extends CardImpl {
+public final class BastionInventor extends CardImpl {
 
     public BastionInventor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{U}");

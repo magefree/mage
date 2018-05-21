@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class BriarpackAlpha extends CardImpl {
+public final class BriarpackAlpha extends CardImpl {
 
     public BriarpackAlpha(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

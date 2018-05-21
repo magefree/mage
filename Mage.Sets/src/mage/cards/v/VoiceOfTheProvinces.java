@@ -42,7 +42,7 @@ import mage.game.permanent.token.HumanToken;
  *
  * @author Loki
  */
-public class VoiceOfTheProvinces extends CardImpl {
+public final class VoiceOfTheProvinces extends CardImpl {
 
     public VoiceOfTheProvinces(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{W}{W}");

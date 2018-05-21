@@ -49,7 +49,7 @@ import mage.target.TargetPermanent;
  *
  * @author fireshoes
  */
-public class TivadarOfThorn extends CardImpl {
+public final class TivadarOfThorn extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent("Goblin");
     

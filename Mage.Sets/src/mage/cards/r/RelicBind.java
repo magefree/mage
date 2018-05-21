@@ -50,7 +50,7 @@ import mage.target.TargetPlayer;
  *
  * @author L_J
  */
-public class RelicBind extends CardImpl {
+public final class RelicBind extends CardImpl {
 
     private static final FilterArtifactPermanent filter = new FilterArtifactPermanent("artifact an opponent controls");
 

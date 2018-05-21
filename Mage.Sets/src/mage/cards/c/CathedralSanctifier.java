@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class CathedralSanctifier extends CardImpl {
+public final class CathedralSanctifier extends CardImpl {
 
     public CathedralSanctifier(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}");

@@ -53,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class FistsOfTheDemigod extends CardImpl {
+public final class FistsOfTheDemigod extends CardImpl {
 
     public FistsOfTheDemigod(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B/R}");

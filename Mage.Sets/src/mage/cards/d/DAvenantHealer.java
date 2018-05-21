@@ -47,7 +47,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  *
  * @author LoneFox
  */
-public class DAvenantHealer extends CardImpl {
+public final class DAvenantHealer extends CardImpl {
 
     public DAvenantHealer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");

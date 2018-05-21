@@ -48,7 +48,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  *
  * @author North
  */
-public class ToxicIguanar extends CardImpl {
+public final class ToxicIguanar extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("green");
 

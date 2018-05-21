@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author LevelX2
  */
-public class JunkDiver extends CardImpl {
+public final class JunkDiver extends CardImpl {
 
     private static final FilterArtifactCard filter = new FilterArtifactCard("another target artifact card from your graveyard");
 

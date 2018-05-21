@@ -43,7 +43,7 @@ import mage.filter.common.FilterControlledArtifactPermanent;
  *
  * @author fireshoes
  */
-public class ContrabandKingpin extends CardImpl {
+public final class ContrabandKingpin extends CardImpl {
 
     public ContrabandKingpin(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{B}");

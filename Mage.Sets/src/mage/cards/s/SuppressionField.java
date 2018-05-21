@@ -46,7 +46,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class SuppressionField extends CardImpl {
+public final class SuppressionField extends CardImpl {
 
     public SuppressionField(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");

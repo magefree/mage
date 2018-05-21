@@ -38,7 +38,7 @@ import mage.target.common.TargetAttackingOrBlockingCreature;
  *
  * @author LevelX2
  */
-public class ArrowsOfJustice extends CardImpl {
+public final class ArrowsOfJustice extends CardImpl {
 
     public ArrowsOfJustice(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R/W}");

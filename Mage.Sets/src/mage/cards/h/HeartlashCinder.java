@@ -52,7 +52,7 @@ import mage.game.Game;
  * @author jeffwadsworth
  *
  */
-public class HeartlashCinder extends CardImpl {
+public final class HeartlashCinder extends CardImpl {
 
     public HeartlashCinder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");

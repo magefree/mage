@@ -45,7 +45,7 @@ import mage.target.TargetPlayer;
  *
  * @author nantuko
  */
-public class Mindslaver extends CardImpl {
+public final class Mindslaver extends CardImpl {
 
     public Mindslaver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{6}");

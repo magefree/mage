@@ -43,7 +43,7 @@ import mage.target.common.TargetArtifactPermanent;
  *
  * @author Loki
  */
-public class WeldingJar extends CardImpl {
+public final class WeldingJar extends CardImpl {
 
     public WeldingJar (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{0}");

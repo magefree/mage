@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author jeffwadsworth
  */
-public class LivingWall extends CardImpl {
+public final class LivingWall extends CardImpl {
 
     public LivingWall(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}");

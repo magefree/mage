@@ -45,7 +45,7 @@ import mage.counters.CounterType;
  *
  * @author L_J
  */
-public class PhyrexianEtchings extends CardImpl {
+public final class PhyrexianEtchings extends CardImpl {
 
     public PhyrexianEtchings(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{B}{B}{B}");

@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author L_J
  */
-public class KjeldoranKnight extends CardImpl {
+public final class KjeldoranKnight extends CardImpl {
 
     public KjeldoranKnight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{W}");

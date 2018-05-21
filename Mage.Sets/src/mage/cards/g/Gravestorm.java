@@ -49,7 +49,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
  */
-public class Gravestorm extends CardImpl {
+public final class Gravestorm extends CardImpl {
 
     public Gravestorm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}{B}{B}");

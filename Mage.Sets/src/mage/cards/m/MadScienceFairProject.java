@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author spjspj
  */
-public class MadScienceFairProject extends CardImpl {
+public final class MadScienceFairProject extends CardImpl {
 
     public MadScienceFairProject(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");

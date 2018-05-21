@@ -49,7 +49,7 @@ import mage.target.TargetPermanent;
  *
  * @author Loki
  */
-public class UndeadSlayer extends CardImpl {
+public final class UndeadSlayer extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Skeleton, Vampire, or Zombie");
 

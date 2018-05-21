@@ -55,7 +55,7 @@ import mage.game.permanent.token.KaldraToken;
  *
  * @author LevelX2
  */
-public class HelmOfKaldra extends CardImpl {
+public final class HelmOfKaldra extends CardImpl {
 
     static final FilterControlledArtifactPermanent filterHelm = new FilterControlledArtifactPermanent();
     static final FilterControlledArtifactPermanent filterShield = new FilterControlledArtifactPermanent();

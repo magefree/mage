@@ -41,7 +41,7 @@ import mage.target.common.TargetAnyTarget;
 /**
  * @author anonymous
  */
-public class ShrapnelBlast extends CardImpl {
+public final class ShrapnelBlast extends CardImpl {
 
     private static final FilterControlledArtifactPermanent filter = new FilterControlledArtifactPermanent("an artifact");
 

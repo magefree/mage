@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class HavocFestival extends CardImpl {
+public final class HavocFestival extends CardImpl {
 
     public HavocFestival(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{B}{R}");

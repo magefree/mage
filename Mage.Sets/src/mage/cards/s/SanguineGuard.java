@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Backfir3
  */
-public class SanguineGuard extends CardImpl {
+public final class SanguineGuard extends CardImpl {
 
     public SanguineGuard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");

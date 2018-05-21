@@ -44,7 +44,7 @@ import mage.target.common.TargetPlayerOrPlaneswalker;
  *
  * @author Loki
  */
-public class FlamewaveInvoker extends CardImpl {
+public final class FlamewaveInvoker extends CardImpl {
 
     public FlamewaveInvoker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");

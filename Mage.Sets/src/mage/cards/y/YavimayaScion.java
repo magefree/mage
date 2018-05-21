@@ -40,7 +40,7 @@ import mage.filter.common.FilterArtifactCard;
  *
  * @author Plopman
  */
-public class YavimayaScion extends CardImpl {
+public final class YavimayaScion extends CardImpl {
 
     public YavimayaScion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");

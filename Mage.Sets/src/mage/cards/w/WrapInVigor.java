@@ -38,7 +38,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
  *
  * @author fireshoes
  */
-public class WrapInVigor extends CardImpl {
+public final class WrapInVigor extends CardImpl {
     
     public WrapInVigor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}");

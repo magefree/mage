@@ -46,7 +46,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Plopman
  */
-public class ThermalNavigator extends CardImpl {
+public final class ThermalNavigator extends CardImpl {
 
     public ThermalNavigator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{3}");

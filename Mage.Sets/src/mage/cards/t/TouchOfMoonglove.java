@@ -55,7 +55,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-public class TouchOfMoonglove extends CardImpl {
+public final class TouchOfMoonglove extends CardImpl {
 
     public TouchOfMoonglove(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{B}");

@@ -41,7 +41,7 @@ import mage.constants.Duration;
  *
  * @author ciaccona007
  */
-public class GrislySurvivor extends CardImpl {
+public final class GrislySurvivor extends CardImpl {
 
     public GrislySurvivor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");

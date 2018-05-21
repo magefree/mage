@@ -49,7 +49,7 @@ import mage.target.common.TargetEnchantmentPermanent;
  *
  * @author fireshoes
  */
-public class EmeraldCharm extends CardImpl {
+public final class EmeraldCharm extends CardImpl {
     
     private static final FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent("non-Aura enchantment");
     

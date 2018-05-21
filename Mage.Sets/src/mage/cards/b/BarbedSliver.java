@@ -46,7 +46,7 @@ import mage.filter.StaticFilters;
  *
  * @author Loki
  */
-public class BarbedSliver extends CardImpl {
+public final class BarbedSliver extends CardImpl {
 
     public BarbedSliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");

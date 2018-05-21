@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author Loki
  */
-public class SkyknightLegionnaire extends CardImpl {
+public final class SkyknightLegionnaire extends CardImpl {
 
     public SkyknightLegionnaire (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{W}");

@@ -39,7 +39,7 @@ import mage.target.TargetPlayer;
  *
  * @author Wehk
  */
-public class HealingHands extends CardImpl {
+public final class HealingHands extends CardImpl {
 
     public HealingHands(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{W}");

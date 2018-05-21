@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author Quercitron
  */
-public class SilverbackApe extends CardImpl {
+public final class SilverbackApe extends CardImpl {
 
     public SilverbackApe(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");

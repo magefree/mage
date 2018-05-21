@@ -56,7 +56,7 @@ import mage.target.TargetCard;
  *
  * @author jeffwadsworth & L_J
  */
-public class HellcarverDemon extends CardImpl {
+public final class HellcarverDemon extends CardImpl {
 
     public HellcarverDemon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}{B}");

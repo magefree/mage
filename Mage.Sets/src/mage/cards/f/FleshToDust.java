@@ -37,7 +37,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author noxx
  */
-public class FleshToDust extends CardImpl {
+public final class FleshToDust extends CardImpl {
 
     public FleshToDust(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{B}{B}");

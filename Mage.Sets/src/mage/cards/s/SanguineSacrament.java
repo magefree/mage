@@ -42,7 +42,7 @@ import mage.game.Game;
  *
  * @author spjspj
  */
-public class SanguineSacrament extends CardImpl {
+public final class SanguineSacrament extends CardImpl {
 
     public SanguineSacrament(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{W}{W}");

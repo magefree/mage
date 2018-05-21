@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author duncant
  */
-public class BalduvianRage extends CardImpl {
+public final class BalduvianRage extends CardImpl {
 
     public BalduvianRage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{R}");

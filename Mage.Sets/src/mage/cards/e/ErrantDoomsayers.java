@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author fireshoes
  */
-public class ErrantDoomsayers extends CardImpl {
+public final class ErrantDoomsayers extends CardImpl {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with toughness 2 or less");
     static {

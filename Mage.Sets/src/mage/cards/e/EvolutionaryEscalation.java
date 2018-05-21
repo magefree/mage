@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author spjspj
  */
-public class EvolutionaryEscalation extends CardImpl {
+public final class EvolutionaryEscalation extends CardImpl {
     private static final FilterCreaturePermanent filterOpponentCreature = new FilterCreaturePermanent("creature an opponent controls");
     
     static {

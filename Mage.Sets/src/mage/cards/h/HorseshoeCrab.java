@@ -43,7 +43,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class HorseshoeCrab extends CardImpl {
+public final class HorseshoeCrab extends CardImpl {
 
     public HorseshoeCrab(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");

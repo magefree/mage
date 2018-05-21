@@ -53,7 +53,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class SoramaroFirstToDream extends CardImpl {
+public final class SoramaroFirstToDream extends CardImpl {
 
     public SoramaroFirstToDream(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{U}{U}");

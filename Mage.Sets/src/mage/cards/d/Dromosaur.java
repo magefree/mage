@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author Backfir3
  */
-public class Dromosaur extends CardImpl {
+public final class Dromosaur extends CardImpl {
 
     public Dromosaur(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");

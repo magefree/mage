@@ -51,7 +51,7 @@ import mage.game.permanent.token.custom.CreatureToken;
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class CelestialColonnade extends CardImpl {
+public final class CelestialColonnade extends CardImpl {
 
     public CelestialColonnade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, null);

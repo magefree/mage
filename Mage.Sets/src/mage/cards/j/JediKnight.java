@@ -47,7 +47,7 @@ import mage.target.common.TargetNonlandPermanent;
  *
  * @author Styxo
  */
-public class JediKnight extends CardImpl {
+public final class JediKnight extends CardImpl {
 
     private static final FilterNonlandPermanent filter = new FilterNonlandPermanent("nonland permanent you don't control");
 

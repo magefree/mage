@@ -54,7 +54,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class TormentOfScarabs extends CardImpl {
+public final class TormentOfScarabs extends CardImpl {
 
     public TormentOfScarabs(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}");

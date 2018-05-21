@@ -47,7 +47,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class MagaTraitorToMortals extends CardImpl {
+public final class MagaTraitorToMortals extends CardImpl {
 
     public MagaTraitorToMortals(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{X}{B}{B}{B}");

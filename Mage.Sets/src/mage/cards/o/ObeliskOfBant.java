@@ -40,7 +40,7 @@ import mage.constants.CardType;
  *
  * @author Loki
  */
-public class ObeliskOfBant extends CardImpl {
+public final class ObeliskOfBant extends CardImpl {
 
     public ObeliskOfBant (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

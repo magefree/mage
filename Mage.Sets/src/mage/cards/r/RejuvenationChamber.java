@@ -41,7 +41,7 @@ import mage.constants.Zone;
  *
  * @author LoneFox
  */
-public class RejuvenationChamber extends CardImpl {
+public final class RejuvenationChamber extends CardImpl {
 
     public RejuvenationChamber(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");

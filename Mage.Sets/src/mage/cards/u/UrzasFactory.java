@@ -46,7 +46,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class UrzasFactory extends CardImpl {
+public final class UrzasFactory extends CardImpl {
 
     public UrzasFactory(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

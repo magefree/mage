@@ -43,7 +43,7 @@ import mage.constants.Zone;
 /**
  * @author noxx
  */
-public class EvernightShade extends CardImpl {
+public final class EvernightShade extends CardImpl {
 
     public EvernightShade(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

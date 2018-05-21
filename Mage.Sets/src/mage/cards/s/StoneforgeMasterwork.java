@@ -49,7 +49,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class StoneforgeMasterwork extends CardImpl {
+public final class StoneforgeMasterwork extends CardImpl {
 
     public StoneforgeMasterwork(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");

@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 /**
  * @author Loki
  */
-public class MolderSlug extends CardImpl {
+public final class MolderSlug extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact");
 

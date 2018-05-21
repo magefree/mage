@@ -49,7 +49,7 @@ import mage.players.Player;
  *
  * @author spjspj
  */
-public class TanaTheBloodsower extends CardImpl {
+public final class TanaTheBloodsower extends CardImpl {
 
     public TanaTheBloodsower(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{G}");

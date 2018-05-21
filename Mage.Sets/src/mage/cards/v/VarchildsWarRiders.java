@@ -53,7 +53,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author TheElk801
  */
-public class VarchildsWarRiders extends CardImpl {
+public final class VarchildsWarRiders extends CardImpl {
 
     public VarchildsWarRiders(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");

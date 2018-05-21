@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class LightningAngel extends CardImpl {
+public final class LightningAngel extends CardImpl {
 
     public LightningAngel(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{R}{W}");

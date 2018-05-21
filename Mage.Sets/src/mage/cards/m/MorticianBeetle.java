@@ -47,7 +47,7 @@ import mage.game.events.GameEvent.EventType;
  *
  * @author North
  */
-public class MorticianBeetle extends CardImpl {
+public final class MorticianBeetle extends CardImpl {
 
     public MorticianBeetle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");

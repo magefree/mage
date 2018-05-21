@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author LevelX2
  */
-public class SilasRennSeekerAdept extends CardImpl {
+public final class SilasRennSeekerAdept extends CardImpl {
 
     private static final FilterCard filter = new FilterArtifactCard("artifact card in your graveyard");
 

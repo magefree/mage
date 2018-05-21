@@ -46,7 +46,7 @@ import mage.game.permanent.Permanent;
  *
  * @author jeffwadsworth
  */
-public class Meglonoth extends CardImpl {
+public final class Meglonoth extends CardImpl {
 
     public Meglonoth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{G}{W}");

@@ -49,7 +49,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author jeffwadsworth
  */
-public class MobRule extends CardImpl {
+public final class MobRule extends CardImpl {
 
     public MobRule(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{R}{R}");

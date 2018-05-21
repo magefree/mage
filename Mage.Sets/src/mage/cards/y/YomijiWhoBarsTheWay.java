@@ -45,7 +45,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  *
  * @author LevelX2
  */
-public class YomijiWhoBarsTheWay extends CardImpl {
+public final class YomijiWhoBarsTheWay extends CardImpl {
 
     public YomijiWhoBarsTheWay(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}{W}");

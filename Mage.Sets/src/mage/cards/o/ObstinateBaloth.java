@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ObstinateBaloth extends CardImpl {
+public final class ObstinateBaloth extends CardImpl {
 
     public ObstinateBaloth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");

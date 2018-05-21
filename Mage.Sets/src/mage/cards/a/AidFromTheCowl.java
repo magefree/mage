@@ -48,7 +48,7 @@ import mage.watchers.common.RevoltWatcher;
  *
  * @author fireshoes
  */
-public class AidFromTheCowl extends CardImpl {
+public final class AidFromTheCowl extends CardImpl {
 
     private static final String ruleText = "<i>Revolt</i> &mdash; At the beginning of your end step, if a permanent you controlled left the battlefield this turn, "
             + "you may reveal the top card of your library. If it's a permanent card, you may put it onto the battlefield. Otherwise, put it on the bottom of your library.";

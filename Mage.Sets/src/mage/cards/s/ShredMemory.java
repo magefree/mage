@@ -40,7 +40,7 @@ import mage.target.common.TargetCardInASingleGraveyard;
  *
  * @author LevelX2
  */
-public class ShredMemory extends CardImpl {
+public final class ShredMemory extends CardImpl {
 
     public ShredMemory(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{B}");

@@ -60,7 +60,7 @@ import java.util.UUID;
  *
  * @author spjspj
  */
-public class CrypticGateway extends CardImpl {
+public final class CrypticGateway extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creatures you control");
 

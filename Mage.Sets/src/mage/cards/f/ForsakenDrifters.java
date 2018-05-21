@@ -40,7 +40,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class ForsakenDrifters extends CardImpl {
+public final class ForsakenDrifters extends CardImpl {
 
     public ForsakenDrifters(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}");

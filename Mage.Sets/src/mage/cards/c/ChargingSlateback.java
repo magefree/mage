@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author LoneFox
  */
-public class ChargingSlateback extends CardImpl {
+public final class ChargingSlateback extends CardImpl {
 
     public ChargingSlateback(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");

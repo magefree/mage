@@ -49,7 +49,7 @@ import mage.game.stack.StackObject;
  *
  * @author anonymous
  */
-public class ChandrasPhoenix extends CardImpl {
+public final class ChandrasPhoenix extends CardImpl {
 
     public ChandrasPhoenix(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}{R}");

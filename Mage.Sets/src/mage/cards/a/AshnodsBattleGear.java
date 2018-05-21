@@ -46,7 +46,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 /**
  * @author LoneFox
  */
-public class AshnodsBattleGear extends CardImpl {
+public final class AshnodsBattleGear extends CardImpl {
 
     public AshnodsBattleGear(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");

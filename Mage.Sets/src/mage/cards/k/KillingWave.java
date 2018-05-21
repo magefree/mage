@@ -45,7 +45,7 @@ import java.util.*;
  *
  * @author North
  */
-public class KillingWave extends CardImpl {
+public final class KillingWave extends CardImpl {
 
     public KillingWave(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{B}");

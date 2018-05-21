@@ -40,7 +40,7 @@ import mage.constants.SuperType;
  *
  * @author LevelX2
  */
-public class BorealDruid extends CardImpl {
+public final class BorealDruid extends CardImpl {
 
     public BorealDruid(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");

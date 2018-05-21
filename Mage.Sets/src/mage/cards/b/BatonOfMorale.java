@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author L_J
  */
-public class BatonOfMorale extends CardImpl {
+public final class BatonOfMorale extends CardImpl {
 
     public BatonOfMorale(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");

@@ -50,7 +50,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author Plopman
  */
-public class Intuition extends CardImpl {
+public final class Intuition extends CardImpl {
 
     public Intuition(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");

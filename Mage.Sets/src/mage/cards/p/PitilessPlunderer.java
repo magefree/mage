@@ -45,7 +45,7 @@ import mage.game.permanent.token.TreasureToken;
  *
  * @author LevelX2
  */
-public class PitilessPlunderer extends CardImpl {
+public final class PitilessPlunderer extends CardImpl {
 
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature you control");
 

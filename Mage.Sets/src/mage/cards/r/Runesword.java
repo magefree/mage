@@ -60,7 +60,7 @@ import mage.watchers.common.DamagedByWatcher;
  *
  * @author L_J
  */
-public class Runesword extends CardImpl {
+public final class Runesword extends CardImpl {
 
     public Runesword(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{6}");

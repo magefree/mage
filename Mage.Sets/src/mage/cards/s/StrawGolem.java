@@ -41,7 +41,7 @@ import mage.filter.StaticFilters;
  *
  * @author Derpthemeus
  */
-public class StrawGolem extends CardImpl {
+public final class StrawGolem extends CardImpl {
 
     public StrawGolem(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}");

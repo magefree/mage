@@ -46,7 +46,7 @@ import mage.game.permanent.token.SoldierToken;
 /**
  * @author Rystan
  */
-public class MemorialToGlory extends CardImpl {
+public final class MemorialToGlory extends CardImpl {
 
     public MemorialToGlory(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");

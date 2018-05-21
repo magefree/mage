@@ -43,7 +43,7 @@ import mage.filter.common.FilterArtifactPermanent;
  *
  * @author fireshoes
  */
-public class CovetousDragon extends CardImpl {
+public final class CovetousDragon extends CardImpl {
 
     public CovetousDragon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R}");

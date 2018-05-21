@@ -54,7 +54,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author emerald000
  */
-public class CytoplastRootKin extends CardImpl {
+public final class CytoplastRootKin extends CardImpl {
     
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("other creature you control that has a +1/+1 counter on it");
     static {

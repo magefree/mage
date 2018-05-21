@@ -52,7 +52,7 @@ import mage.constants.SuperType;
  *
  * @author LevelX2
  */
-public class FreyaliseLlanowarsFury extends CardImpl {
+public final class FreyaliseLlanowarsFury extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filterGreen = new FilterControlledCreaturePermanent("green creature you control");
 

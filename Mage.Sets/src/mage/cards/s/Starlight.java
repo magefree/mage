@@ -43,7 +43,7 @@ import mage.target.common.TargetOpponent;
  * @author LoneFox
 
  */
-public class Starlight extends CardImpl {
+public final class Starlight extends CardImpl {
 
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("black creature");

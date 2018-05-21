@@ -52,7 +52,7 @@ import mage.util.CardUtil;
  *
  * @author jeffwadsworth
  */
-public class Silkwrap extends CardImpl {
+public final class Silkwrap extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with converted mana cost 3 or less an opponent controls");
 

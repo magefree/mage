@@ -40,7 +40,7 @@ import mage.constants.CardType;
  *
  * @author Loki
  */
-public class SteadyProgress extends CardImpl {
+public final class SteadyProgress extends CardImpl {
 
     public SteadyProgress (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");

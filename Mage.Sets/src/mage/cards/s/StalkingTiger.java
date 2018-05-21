@@ -41,7 +41,7 @@ import mage.constants.Zone;
  *
  * @author Quercitron
  */
-public class StalkingTiger extends CardImpl {
+public final class StalkingTiger extends CardImpl {
 
     public StalkingTiger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

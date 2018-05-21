@@ -51,7 +51,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class KrosanVerge extends CardImpl {
+public final class KrosanVerge extends CardImpl {
 
     private static final FilterCard filterForest = new FilterCard("a Forest");
     private static final FilterCard filterPlains = new FilterCard("a Plains");

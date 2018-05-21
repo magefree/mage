@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author LevelX2
  */
-public class ProwlersHelm extends CardImpl {
+public final class ProwlersHelm extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("except by Walls");
     static {

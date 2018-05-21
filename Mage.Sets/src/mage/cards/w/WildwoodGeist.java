@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author North
  */
-public class WildwoodGeist extends CardImpl {
+public final class WildwoodGeist extends CardImpl {
 
     public WildwoodGeist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");

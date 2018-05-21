@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class LoamdraggerGiant extends CardImpl {
+public final class LoamdraggerGiant extends CardImpl {
 
     public LoamdraggerGiant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{R/G}{R/G}{R/G}");

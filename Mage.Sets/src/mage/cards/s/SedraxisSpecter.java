@@ -43,7 +43,7 @@ import mage.constants.SubType;
  *
  * @author Plopman
  */
-public class SedraxisSpecter extends CardImpl {
+public final class SedraxisSpecter extends CardImpl {
 
     public SedraxisSpecter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{B}{R}");

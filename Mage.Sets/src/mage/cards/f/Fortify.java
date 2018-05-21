@@ -39,7 +39,7 @@ import mage.constants.Duration;
  *
  * @author Loki
  */
-public class Fortify extends CardImpl {
+public final class Fortify extends CardImpl {
 
     public Fortify(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{W}");

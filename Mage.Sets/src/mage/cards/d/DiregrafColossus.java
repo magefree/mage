@@ -52,7 +52,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class DiregrafColossus extends CardImpl {
+public final class DiregrafColossus extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("a Zombie spell");
 

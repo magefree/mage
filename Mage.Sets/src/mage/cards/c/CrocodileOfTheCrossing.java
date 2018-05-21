@@ -44,7 +44,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author fireshoes
  */
-public class CrocodileOfTheCrossing extends CardImpl {
+public final class CrocodileOfTheCrossing extends CardImpl {
 
     public CrocodileOfTheCrossing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");

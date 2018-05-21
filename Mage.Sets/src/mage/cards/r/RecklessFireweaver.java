@@ -43,7 +43,7 @@ import mage.filter.common.FilterControlledArtifactPermanent;
  *
  * @author fireshoes
  */
-public class RecklessFireweaver extends CardImpl {
+public final class RecklessFireweaver extends CardImpl {
 
     public RecklessFireweaver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{R}");

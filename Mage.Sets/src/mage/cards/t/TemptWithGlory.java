@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class TemptWithGlory extends CardImpl {
+public final class TemptWithGlory extends CardImpl {
 
     public TemptWithGlory(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{W}");

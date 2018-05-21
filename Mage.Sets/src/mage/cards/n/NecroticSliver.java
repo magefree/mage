@@ -49,7 +49,7 @@ import mage.target.TargetPermanent;
  *
  * @author KholdFuzion
  */
-public class NecroticSliver extends CardImpl {
+public final class NecroticSliver extends CardImpl {
 
     public NecroticSliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{B}");

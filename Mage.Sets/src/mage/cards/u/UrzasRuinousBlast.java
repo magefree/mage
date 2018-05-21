@@ -17,7 +17,7 @@ import mage.filter.predicate.mageobject.SupertypePredicate;
  * @author JRHerlehy
  *         Created on 4/8/18.
  */
-public class UrzasRuinousBlast extends CardImpl {
+public final class UrzasRuinousBlast extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("nonland permanents that aren’t legendary");
 

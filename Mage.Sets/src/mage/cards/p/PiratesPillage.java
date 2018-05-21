@@ -40,7 +40,7 @@ import mage.game.permanent.token.TreasureToken;
  *
  * @author LevelX2
  */
-public class PiratesPillage extends CardImpl {
+public final class PiratesPillage extends CardImpl {
 
     public PiratesPillage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}");

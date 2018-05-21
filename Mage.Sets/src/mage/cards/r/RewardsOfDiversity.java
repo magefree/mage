@@ -42,7 +42,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  *
  * @author LoneFox
  */
-public class RewardsOfDiversity extends CardImpl {
+public final class RewardsOfDiversity extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("a multicolored spell");
 

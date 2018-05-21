@@ -51,7 +51,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author TheElk801
  */
-public class SorcerousSpyglass extends CardImpl {
+public final class SorcerousSpyglass extends CardImpl {
 
     public SorcerousSpyglass(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");

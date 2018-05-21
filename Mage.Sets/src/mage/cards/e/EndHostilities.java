@@ -45,7 +45,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class EndHostilities extends CardImpl {
+public final class EndHostilities extends CardImpl {
 
     public EndHostilities(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{W}{W}");

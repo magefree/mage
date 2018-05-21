@@ -57,7 +57,7 @@ import mage.util.GameLog;
  *
  * @author jeffwadsworth
  */
-public class DragonlordSilumgar extends CardImpl {
+public final class DragonlordSilumgar extends CardImpl {
 
     public DragonlordSilumgar(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{U}{B}");

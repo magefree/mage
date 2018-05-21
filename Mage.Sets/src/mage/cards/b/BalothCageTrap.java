@@ -47,7 +47,7 @@ import java.util.UUID;
 /**
  * @author jeffwadsworth
  */
-public class BalothCageTrap extends CardImpl {
+public final class BalothCageTrap extends CardImpl {
 
     public BalothCageTrap(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{G}{G}");

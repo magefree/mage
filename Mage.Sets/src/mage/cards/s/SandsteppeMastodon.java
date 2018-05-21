@@ -41,7 +41,7 @@ import mage.constants.SubType;
  *
  * @author LevelX2
  */
-public class SandsteppeMastodon extends CardImpl {
+public final class SandsteppeMastodon extends CardImpl {
 
     public SandsteppeMastodon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}{G}");

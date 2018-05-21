@@ -39,7 +39,7 @@ import mage.constants.Duration;
  *
  * @author North
  */
-public class ViolentOutburst extends CardImpl {
+public final class ViolentOutburst extends CardImpl {
 
     public ViolentOutburst(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}{G}");

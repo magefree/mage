@@ -41,7 +41,7 @@ import mage.constants.CardType;
  *
  * @author Plopman
  */
-public class SeafloorDebris extends CardImpl {
+public final class SeafloorDebris extends CardImpl {
 
     public SeafloorDebris(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");

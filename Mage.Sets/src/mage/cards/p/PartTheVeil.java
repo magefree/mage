@@ -40,7 +40,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 /**
  * @author Loki
  */
-public class PartTheVeil extends CardImpl {
+public final class PartTheVeil extends CardImpl {
 
     public PartTheVeil(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}");

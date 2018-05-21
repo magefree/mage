@@ -46,7 +46,7 @@ import mage.players.Player;
  *
  * @author fireshoes
  */
-public class AnHavvaConstable extends CardImpl {
+public final class AnHavvaConstable extends CardImpl {
 
     public AnHavvaConstable(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{G}");

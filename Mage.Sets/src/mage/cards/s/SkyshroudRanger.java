@@ -42,7 +42,7 @@ import mage.constants.Zone;
  *
  * @author jeffwadsworth
  */
-public class SkyshroudRanger extends CardImpl {
+public final class SkyshroudRanger extends CardImpl {
 
     public SkyshroudRanger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{G}");

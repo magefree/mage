@@ -39,7 +39,7 @@ import mage.target.TargetPlayer;
  *
  * @author LevelX2
  */
-public class Blackmail extends CardImpl {
+public final class Blackmail extends CardImpl {
 
     public Blackmail(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{B}");

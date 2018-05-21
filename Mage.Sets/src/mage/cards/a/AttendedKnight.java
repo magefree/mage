@@ -42,7 +42,7 @@ import mage.game.permanent.token.SoldierToken;
  *
  * @author Loki
  */
-public class AttendedKnight extends CardImpl {
+public final class AttendedKnight extends CardImpl {
 
     public AttendedKnight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");

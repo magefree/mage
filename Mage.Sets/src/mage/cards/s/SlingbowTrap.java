@@ -48,7 +48,7 @@ import java.util.UUID;
 /**
  * @author jeffwadsworth
  */
-public class SlingbowTrap extends CardImpl {
+public final class SlingbowTrap extends CardImpl {
 
     private static final FilterAttackingCreature filter = new FilterAttackingCreature("attacking creature with flying");
 

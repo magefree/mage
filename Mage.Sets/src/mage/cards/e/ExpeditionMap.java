@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author North
  */
-public class ExpeditionMap extends CardImpl {
+public final class ExpeditionMap extends CardImpl {
 
     public ExpeditionMap(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");

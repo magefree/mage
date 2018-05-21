@@ -46,7 +46,7 @@ import mage.constants.TargetController;
 /**
  * @author nantuko
  */
-public class HanweirWatchkeep extends CardImpl {
+public final class HanweirWatchkeep extends CardImpl {
 
     public HanweirWatchkeep(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");

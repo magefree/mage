@@ -56,7 +56,7 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author jeffwadsworth
  */
-public class SupremeInquisitor extends CardImpl {
+public final class SupremeInquisitor extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped Wizards you control");
 

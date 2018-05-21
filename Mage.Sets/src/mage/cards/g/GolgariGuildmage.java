@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Loki
  */
-public class GolgariGuildmage extends CardImpl {
+public final class GolgariGuildmage extends CardImpl {
 
     public GolgariGuildmage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B/G}{B/G}");

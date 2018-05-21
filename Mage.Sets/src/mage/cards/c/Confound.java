@@ -42,7 +42,7 @@ import mage.target.TargetSpell;
  *
  * @author LoneFox
  */
-public class Confound extends CardImpl {
+public final class Confound extends CardImpl {
 
     private final static FilterSpell filter = new FilterSpell("spell that targets a creature");
 

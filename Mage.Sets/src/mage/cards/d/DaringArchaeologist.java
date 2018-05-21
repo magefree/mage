@@ -48,7 +48,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  *
  * @author TheElk801
  */
-public class DaringArchaeologist extends CardImpl {
+public final class DaringArchaeologist extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("a historic spell");
 

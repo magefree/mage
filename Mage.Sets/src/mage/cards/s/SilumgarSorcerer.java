@@ -46,7 +46,7 @@ import mage.target.TargetSpell;
  *
  * @author LevelX2
  */
-public class SilumgarSorcerer extends CardImpl {
+public final class SilumgarSorcerer extends CardImpl {
 
     public SilumgarSorcerer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");

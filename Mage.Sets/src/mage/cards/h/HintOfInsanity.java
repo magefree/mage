@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInHand;
  *
  * @author jeffwadsworth
  */
-public class HintOfInsanity extends CardImpl {
+public final class HintOfInsanity extends CardImpl {
 
     public HintOfInsanity(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}");

@@ -45,7 +45,7 @@ import mage.constants.SubType;
  */
 
 
-public class BorosMastiff extends CardImpl {
+public final class BorosMastiff extends CardImpl {
 
     public BorosMastiff (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");

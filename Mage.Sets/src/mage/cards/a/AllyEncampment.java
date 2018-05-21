@@ -51,7 +51,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  *
  * @author LevelX2
  */
-public class AllyEncampment extends CardImpl {
+public final class AllyEncampment extends CardImpl {
 
     private static final FilterSpell FILTER = new FilterSpell("an Ally spell");
 

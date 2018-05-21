@@ -49,7 +49,7 @@ import mage.target.common.TargetOpponent;
  *
  * @author TheElk801 & L_J
  */
-public class GoblinWarCry extends CardImpl {
+public final class GoblinWarCry extends CardImpl {
 
     public GoblinWarCry(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{R}");

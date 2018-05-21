@@ -45,7 +45,7 @@ import mage.players.Player;
  *
  * @author L_J
  */
-public class RhysticScrying extends CardImpl {
+public final class RhysticScrying extends CardImpl {
 
     public RhysticScrying(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{U}{U}");

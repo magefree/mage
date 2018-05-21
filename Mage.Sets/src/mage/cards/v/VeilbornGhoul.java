@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author jeffwadsworth
  */
-public class VeilbornGhoul extends CardImpl {
+public final class VeilbornGhoul extends CardImpl {
 
     private static final FilterPermanent filter = new FilterControlledLandPermanent("a Swamp");
     static {

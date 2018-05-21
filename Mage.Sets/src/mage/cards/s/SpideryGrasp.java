@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  * @author nantuko
  */
-public class SpideryGrasp extends CardImpl {
+public final class SpideryGrasp extends CardImpl {
 
     public SpideryGrasp(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{G}");

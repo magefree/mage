@@ -46,7 +46,7 @@ import mage.constants.Zone;
 /**
  * @author noxx
  */
-public class Stonewright extends CardImpl {
+public final class Stonewright extends CardImpl {
 
     private static final String ruleText = "As long as {this} is paired with another creature, each of those creatures has \"{R}: This creature gets +1/+0 until end of turn.\"";
 

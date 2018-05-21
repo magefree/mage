@@ -54,7 +54,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Quercitron
  */
-public class FelhideSpiritbinder extends CardImpl {
+public final class FelhideSpiritbinder extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
 

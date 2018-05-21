@@ -47,7 +47,7 @@ import mage.players.Player;
  *
  * @author L_J
  */
-public class ElvishImpersonators extends CardImpl {
+public final class ElvishImpersonators extends CardImpl {
 
     public ElvishImpersonators(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");

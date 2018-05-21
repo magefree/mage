@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class GildedCerodon extends CardImpl {
+public final class GildedCerodon extends CardImpl {
     
     private static final String rule = "Whenever {this} attacks, if you control a Desert or there is a Desert card in your graveyard, target creature can't block this turn.";
 

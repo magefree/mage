@@ -43,7 +43,7 @@ import mage.target.common.TargetNonlandPermanent;
  *
  * @author JRHerlehy
  */
-public class BlinkOfAnEye extends CardImpl {
+public final class BlinkOfAnEye extends CardImpl {
 
     public BlinkOfAnEye(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");

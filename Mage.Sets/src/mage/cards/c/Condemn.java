@@ -46,7 +46,7 @@ import mage.target.common.TargetAttackingCreature;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Condemn extends CardImpl {
+public final class Condemn extends CardImpl {
 
     public Condemn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{W}");

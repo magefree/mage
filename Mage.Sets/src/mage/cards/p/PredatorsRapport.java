@@ -44,7 +44,7 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class PredatorsRapport extends CardImpl {
+public final class PredatorsRapport extends CardImpl {
 
     public PredatorsRapport(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{G}");

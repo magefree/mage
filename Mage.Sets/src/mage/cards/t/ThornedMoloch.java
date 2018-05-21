@@ -45,7 +45,7 @@ import mage.constants.Zone;
  *
  * @author spjspj
  */
-public class ThornedMoloch extends CardImpl {
+public final class ThornedMoloch extends CardImpl {
 
     public ThornedMoloch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");

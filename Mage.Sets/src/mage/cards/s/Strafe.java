@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author LoneFox
 
  */
-public class Strafe extends CardImpl {
+public final class Strafe extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonred creature");
 

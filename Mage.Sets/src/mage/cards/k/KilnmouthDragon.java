@@ -49,7 +49,7 @@ import mage.target.common.TargetAnyTarget;
  *
  * @author FenrisulfrX
  */
-public class KilnmouthDragon extends CardImpl {
+public final class KilnmouthDragon extends CardImpl {
 
     public KilnmouthDragon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{R}{R}");

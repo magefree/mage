@@ -46,7 +46,7 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author Plopman
  */
-public class MagneticTheft extends CardImpl {
+public final class MagneticTheft extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent("Equipment");
 

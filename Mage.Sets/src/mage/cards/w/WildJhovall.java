@@ -38,7 +38,7 @@ import mage.constants.SubType;
  *
  * @author North
  */
-public class WildJhovall extends CardImpl {
+public final class WildJhovall extends CardImpl {
 
     public WildJhovall(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");

@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author LoneFox
 
  */
-public class ThornscapeMaster extends CardImpl {
+public final class ThornscapeMaster extends CardImpl {
 
     public ThornscapeMaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");

@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author Loki
  */
-public class CavernThoctar extends CardImpl {
+public final class CavernThoctar extends CardImpl {
 
     public CavernThoctar (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{G}");

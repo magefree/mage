@@ -44,7 +44,7 @@ import mage.constants.Zone;
  *
  * @author spjspj
  */
-public class DawnElemental extends CardImpl {
+public final class DawnElemental extends CardImpl {
 
     public DawnElemental(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{W}{W}{W}");

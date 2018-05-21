@@ -53,7 +53,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author North
  */
-public class SphinxAmbassador extends CardImpl {
+public final class SphinxAmbassador extends CardImpl {
 
     public SphinxAmbassador(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");

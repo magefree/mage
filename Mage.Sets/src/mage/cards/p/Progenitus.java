@@ -45,7 +45,7 @@ import mage.game.Game;
  *
  * @author North
  */
-public class Progenitus extends CardImpl {
+public final class Progenitus extends CardImpl {
 
     public Progenitus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{W}{U}{U}{B}{B}{R}{R}{G}{G}");

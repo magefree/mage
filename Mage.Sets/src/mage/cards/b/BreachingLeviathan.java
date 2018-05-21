@@ -56,7 +56,7 @@ import mage.watchers.common.CastFromHandWatcher;
  *
  * @author LevelX2
  */
-public class BreachingLeviathan extends CardImpl {
+public final class BreachingLeviathan extends CardImpl {
 
     public BreachingLeviathan(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{7}{U}{U}");
