@@ -8,7 +8,7 @@ import mage.constants.SetType;
  *
  * @author North
  */
-public class LimitedEditionAlpha extends ExpansionSet {
+public final class LimitedEditionAlpha extends ExpansionSet {
 
     private static final LimitedEditionAlpha instance = new LimitedEditionAlpha();
 

@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author North
  */
-public class IceAge extends ExpansionSet {
+public final class IceAge extends ExpansionSet {
 
     private static final IceAge instance = new IceAge();
 

@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author LevelX2
  */
-public class SorinVsTibalt extends ExpansionSet {
+public final class SorinVsTibalt extends ExpansionSet {
 
     private static final SorinVsTibalt instance = new SorinVsTibalt();
 

@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author MajorLazar
  */
-public class IconicMasters extends ExpansionSet {
+public final class IconicMasters extends ExpansionSet {
 
     private static final IconicMasters instance = new IconicMasters();
 

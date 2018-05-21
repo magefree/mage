@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author loki
  */
-public class RavnicaCityOfGuilds extends ExpansionSet {
+public final class RavnicaCityOfGuilds extends ExpansionSet {
 
     private static final RavnicaCityOfGuilds instance = new RavnicaCityOfGuilds();
 

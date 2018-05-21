@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class AlaraReborn extends ExpansionSet {
+public final class AlaraReborn extends ExpansionSet {
 
     private static final AlaraReborn instance = new AlaraReborn();
 

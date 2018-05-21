@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author North
  */
-public class Coldsnap extends ExpansionSet {
+public final class Coldsnap extends ExpansionSet {
 
     private static final Coldsnap instance = new Coldsnap();
 

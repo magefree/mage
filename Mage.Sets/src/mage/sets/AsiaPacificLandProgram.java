@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author fireshoes
  */
-public class AsiaPacificLandProgram extends ExpansionSet {
+public final class AsiaPacificLandProgram extends ExpansionSet {
 
     private static final AsiaPacificLandProgram instance = new AsiaPacificLandProgram();
 

@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author North
  */
-public class Nemesis extends ExpansionSet {
+public final class Nemesis extends ExpansionSet {
 
     private static final Nemesis instance = new Nemesis();
 

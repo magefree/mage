@@ -48,7 +48,7 @@ import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.ManaPoolItem;
 import mage.players.Player;
-import mage.sets.Commander;
+import mage.game.command.Commander;
 
 /**
  *

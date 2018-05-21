@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author LevelX2
  */
-public class KnightsVsDragons extends ExpansionSet {
+public final class KnightsVsDragons extends ExpansionSet {
 
     private static final KnightsVsDragons instance = new KnightsVsDragons();
 

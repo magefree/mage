@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author Shootbot
  */
-public class DuelsOfThePlaneswalkers extends ExpansionSet {
+public final class DuelsOfThePlaneswalkers extends ExpansionSet {
 
     private static final DuelsOfThePlaneswalkers instance = new DuelsOfThePlaneswalkers();
 

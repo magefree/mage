@@ -47,7 +47,7 @@ import mage.constants.SetType;
  *
  * @author LevelX2
  */
-public class MastersEdition extends ExpansionSet {
+public final class MastersEdition extends ExpansionSet {
 
     private static final MastersEdition instance = new MastersEdition();
 

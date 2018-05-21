@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author LevelX2
  */
-public class DivineVsDemonic extends ExpansionSet {
+public final class DivineVsDemonic extends ExpansionSet {
 
     private static final DivineVsDemonic instance = new DivineVsDemonic();
 

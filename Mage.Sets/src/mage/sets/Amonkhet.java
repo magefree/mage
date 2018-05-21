@@ -41,7 +41,7 @@ import java.util.List;
  *
  * @author fireshoes
  */
-public class Amonkhet extends ExpansionSet {
+public final class Amonkhet extends ExpansionSet {
 
     private static final Amonkhet instance = new Amonkhet();
 

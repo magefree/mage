@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author North
  */
-public class FifthDawn extends ExpansionSet {
+public final class FifthDawn extends ExpansionSet {
 
     private static final FifthDawn instance = new FifthDawn();
 

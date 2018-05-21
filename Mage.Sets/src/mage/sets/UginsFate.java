@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author fireshoes
  */
-public class UginsFate extends ExpansionSet {
+public final class UginsFate extends ExpansionSet {
 
     private static final UginsFate instance = new UginsFate();
 

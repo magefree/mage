@@ -51,7 +51,7 @@ import mage.game.command.CommandObject;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
-import mage.sets.Commander;
+import mage.game.command.Commander;
 
 /**
  *

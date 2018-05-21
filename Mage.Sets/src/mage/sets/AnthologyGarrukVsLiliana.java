@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author fireshoes
  */
-public class AnthologyGarrukVsLiliana extends ExpansionSet {
+public final class AnthologyGarrukVsLiliana extends ExpansionSet {
 
     private static final AnthologyGarrukVsLiliana instance = new AnthologyGarrukVsLiliana();
 

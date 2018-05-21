@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author North
  */
-public class BetrayersOfKamigawa extends ExpansionSet {
+public final class BetrayersOfKamigawa extends ExpansionSet {
 
     private static final BetrayersOfKamigawa instance = new BetrayersOfKamigawa();
 

@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author LevelX2
  */
-public class ClashPack extends ExpansionSet {
+public final class ClashPack extends ExpansionSet {
 
     private static final ClashPack instance = new ClashPack();
 

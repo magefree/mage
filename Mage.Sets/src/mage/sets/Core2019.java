@@ -34,7 +34,7 @@ import mage.constants.SetType;
  *
  * @author fireshoes
  */
-public class Core2019 extends ExpansionSet {
+public final class Core2019 extends ExpansionSet {
 
     private static final Core2019 instance = new Core2019();
 

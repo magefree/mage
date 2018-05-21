@@ -34,7 +34,7 @@ import mage.constants.SetType;
 /**
  * Created by IntelliJ IDEA. User: Loki Date: 20.12.10 Time: 21:40
  */
-public class Dissension extends ExpansionSet {
+public final class Dissension extends ExpansionSet {
 
     private static final Dissension instance = new Dissension();
 

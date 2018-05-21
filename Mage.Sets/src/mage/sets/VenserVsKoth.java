@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author LevelX2
  */
-public class VenserVsKoth extends ExpansionSet {
+public final class VenserVsKoth extends ExpansionSet {
 
     private static final VenserVsKoth instance = new VenserVsKoth();
 

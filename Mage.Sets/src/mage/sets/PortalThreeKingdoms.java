@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author LevelX2
  */
-public class PortalThreeKingdoms extends ExpansionSet {
+public final class PortalThreeKingdoms extends ExpansionSet {
 
     private static final PortalThreeKingdoms instance = new PortalThreeKingdoms();
 

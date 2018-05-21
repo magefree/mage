@@ -34,7 +34,7 @@ import mage.constants.SetType;
 /**
  * @author North
  */
-public class MercadianMasques extends ExpansionSet {
+public final class MercadianMasques extends ExpansionSet {
 
     private static final MercadianMasques instance = new MercadianMasques();
 

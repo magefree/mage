@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author fireshoes
  */
-public class TempestRemastered extends ExpansionSet {
+public final class TempestRemastered extends ExpansionSet {
 
     private static final TempestRemastered instance = new TempestRemastered();
 

@@ -38,7 +38,7 @@ import mage.constants.SetType;
  *
  * @author North
  */
-public class Planeshift extends ExpansionSet {
+public final class Planeshift extends ExpansionSet {
 
     private static final Planeshift instance = new Planeshift();
 

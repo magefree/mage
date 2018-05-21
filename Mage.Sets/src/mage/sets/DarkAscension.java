@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author North
  */
-public class DarkAscension extends ExpansionSet {
+public final class DarkAscension extends ExpansionSet {
 
     private static final DarkAscension instance = new DarkAscension();
 

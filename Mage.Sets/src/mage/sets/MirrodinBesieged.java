@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author nantuko84
  */
-public class MirrodinBesieged extends ExpansionSet {
+public final class MirrodinBesieged extends ExpansionSet {
 
     private static final MirrodinBesieged instance = new MirrodinBesieged();
 

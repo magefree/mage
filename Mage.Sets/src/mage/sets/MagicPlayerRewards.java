@@ -33,7 +33,7 @@ import mage.cards.FrameStyle;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
-public class MagicPlayerRewards extends ExpansionSet {
+public final class MagicPlayerRewards extends ExpansionSet {
 
     private static final MagicPlayerRewards instance = new MagicPlayerRewards();
 

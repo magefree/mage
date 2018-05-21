@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author North
  */
-public class PlanarChaos extends ExpansionSet {
+public final class PlanarChaos extends ExpansionSet {
 
     private static final PlanarChaos instance = new PlanarChaos();
 

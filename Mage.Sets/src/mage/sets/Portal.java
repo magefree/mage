@@ -38,7 +38,7 @@ import mage.constants.SetType;
  *
  * @author Plopman
  */
-public class Portal extends ExpansionSet {
+public final class Portal extends ExpansionSet {
 
     private static final Portal instance = new Portal();
 

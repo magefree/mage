@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author Backfir3
  */
-public class UrzasSaga extends ExpansionSet {
+public final class UrzasSaga extends ExpansionSet {
 
     private static final UrzasSaga instance = new UrzasSaga();
 

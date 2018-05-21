@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author JayDi85
  */
-public class ProTourPromos extends ExpansionSet {
+public final class ProTourPromos extends ExpansionSet {
 
     private static final ProTourPromos instance = new ProTourPromos();
 

@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author noxx
  */
-public class UrzasLegacy extends ExpansionSet {
+public final class UrzasLegacy extends ExpansionSet {
 
     private static final UrzasLegacy instance = new UrzasLegacy();
 

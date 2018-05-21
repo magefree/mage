@@ -34,7 +34,7 @@ import mage.constants.SetType;
 /**
  * @author North
  */
-public class Stronghold extends ExpansionSet {
+public final class Stronghold extends ExpansionSet {
 
     private static final Stronghold instance = new Stronghold();
 

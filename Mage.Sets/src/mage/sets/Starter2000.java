@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author LevelX2
  */
-public class Starter2000 extends ExpansionSet {
+public final class Starter2000 extends ExpansionSet {
 
     private static final Starter2000 instance = new Starter2000();
 

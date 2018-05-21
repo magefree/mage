@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author TheElk801
  */
-public class ElvesVsInventors extends ExpansionSet {
+public final class ElvesVsInventors extends ExpansionSet {
 
     private static final ElvesVsInventors instance = new ElvesVsInventors();
 

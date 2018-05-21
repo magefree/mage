@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author LevelX2
  */
-public class KhansOfTarkir extends ExpansionSet {
+public final class KhansOfTarkir extends ExpansionSet {
 
     private static final KhansOfTarkir instance = new KhansOfTarkir();
 

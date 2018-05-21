@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author fireshoes
  */
-public class ModernMasters2015 extends ExpansionSet {
+public final class ModernMasters2015 extends ExpansionSet {
 
     private static final ModernMasters2015 instance = new ModernMasters2015();
 

@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author fireshoes
  */
-public class ConspiracyTakeTheCrown extends ExpansionSet {
+public final class ConspiracyTakeTheCrown extends ExpansionSet {
 
     private static final ConspiracyTakeTheCrown instance = new ConspiracyTakeTheCrown();
 

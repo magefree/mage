@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author North
  */
-public class Exodus extends ExpansionSet {
+public final class Exodus extends ExpansionSet {
 
     private static final Exodus instance = new Exodus();
 

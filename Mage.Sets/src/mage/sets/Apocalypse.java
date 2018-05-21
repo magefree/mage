@@ -4,7 +4,7 @@ import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
-public class Apocalypse extends ExpansionSet {
+public final class Apocalypse extends ExpansionSet {
 
     private static final Apocalypse instance = new Apocalypse();
 

@@ -35,7 +35,7 @@ import mage.constants.SetType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Worldwake extends ExpansionSet {
+public final class Worldwake extends ExpansionSet {
 
     private static final Worldwake instance = new Worldwake();
 
