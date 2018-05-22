@@ -61,6 +61,7 @@ public enum SubType {
     AUROCHS("Aurochs", SubTypeSet.CreatureType),
     AUTOBOT("Autobot", SubTypeSet.CreatureType, true), // H17, Grimlock
     AVATAR("Avatar", SubTypeSet.CreatureType),
+    AZRA("Azra", SubTypeSet.CreatureType),
     // B
     BADGER("Badger", SubTypeSet.CreatureType),
     BARBARIAN("Barbarian", SubTypeSet.CreatureType),

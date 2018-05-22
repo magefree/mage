@@ -71,6 +71,7 @@ public class Battlebond extends ExpansionSet {
         cards.add(new SetCardInfo("Pir, Imaginative Rascal", 11, Rarity.RARE, mage.cards.p.PirImaginativeRascal.class));
         cards.add(new SetCardInfo("Proud Mentor", 20, Rarity.UNCOMMON, mage.cards.p.ProudMentor.class));
         cards.add(new SetCardInfo("Rowan Kenrith", 2, Rarity.MYTHIC, mage.cards.r.RowanKenrith.class));
+        cards.add(new SetCardInfo("Rushblade Commander", 77, Rarity.UNCOMMON, mage.cards.r.RushbladeCommander.class));
         cards.add(new SetCardInfo("Sea of Clouds", 84, Rarity.RARE, mage.cards.s.SeaOfClouds.class));
         cards.add(new SetCardInfo("Shoulder to Shoulder", 105, Rarity.COMMON, mage.cards.s.ShoulderToShoulder.class));
         cards.add(new SetCardInfo("Soaring Show-Off", 40, Rarity.COMMON, mage.cards.s.SoaringShowOff.class));
