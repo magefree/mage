@@ -56,6 +56,11 @@ import mage.client.components.MageComponents;
 import mage.client.dialog.*;
 import static mage.client.dialog.PreferencesDialog.KEY_TABLES_COLUMNS_ORDER;
 import static mage.client.dialog.PreferencesDialog.KEY_TABLES_COLUMNS_WIDTH;
+import static mage.client.dialog.PreferencesDialog.KEY_TABLES_FILTER_SETTINGS;
+import static mage.client.dialog.PreferencesDialog.KEY_TABLES_DIVIDER_LOCATION_1;
+import static mage.client.dialog.PreferencesDialog.KEY_TABLES_DIVIDER_LOCATION_2;
+import static mage.client.dialog.PreferencesDialog.KEY_TABLES_DIVIDER_LOCATION_3;
+import static mage.client.dialog.PreferencesDialog.KEY_MAGE_PANEL_LAST_SIZE;
 import mage.client.util.ButtonColumn;
 import mage.client.util.GUISizeHelper;
 import mage.client.util.IgnoreList;
@@ -227,8 +232,7 @@ public class TablesPanel extends javax.swing.JPanel {
         jScrollPaneTablesActive.getViewport().setBackground(new Color(255, 255, 255, 50));
         jScrollPaneTablesFinished.getViewport().setBackground(new Color(255, 255, 255, 50));
 
-        restoreSettings();
-
+        saveActiveFiltersToPrefs();
         setGUISize();
 
         Action openTableAction;
@@ -343,7 +347,7 @@ public class TablesPanel extends javax.swing.JPanel {
     }
 
     public void cleanUp() {
-        saveSettings();
+        saveGuiSettings();
         chatPanelMain.cleanUp();
     }
 
@@ -406,66 +410,35 @@ public class TablesPanel extends javax.swing.JPanel {
     }
 
     private void saveDividerLocations() {
-        // save panel sizes and divider locations.
+        // save desktop bounds and divider locations
         Rectangle rec = MageFrame.getDesktop().getBounds();
-        String sb = Double.toString(rec.getWidth()) + 'x' + Double.toString(rec.getHeight());
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_MAGE_PANEL_LAST_SIZE, sb);
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_TABLES_DIVIDER_LOCATION_1, Integer.toString(this.jSplitPane1.getDividerLocation()));
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_TABLES_DIVIDER_LOCATION_2, Integer.toString(this.jSplitPaneTables.getDividerLocation()));
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_TABLES_DIVIDER_LOCATION_3, Integer.toString(chatPanelMain.getSplitDividerLocation()));
+        String currentBounds = Double.toString(rec.getWidth()) + 'x' + Double.toString(rec.getHeight());
+        PreferencesDialog.saveValue(KEY_MAGE_PANEL_LAST_SIZE, currentBounds);
+        GuiDisplayUtil.setDividerLocation(KEY_TABLES_DIVIDER_LOCATION_1, this.jSplitPane1.getDividerLocation());
+        GuiDisplayUtil.setDividerLocation(KEY_TABLES_DIVIDER_LOCATION_2, this.jSplitPaneTables.getDividerLocation());
+        GuiDisplayUtil.setDividerLocation(KEY_TABLES_DIVIDER_LOCATION_3, chatPanelMain.getSplitDividerLocation());
     }
 
-    private void restoreSettings() {
-        // filter settings
-        String formatSettings = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_TABLES_FILTER_SETTINGS, "");
-        int i = 0;
-        for (JToggleButton component : filterButtons) {
-            if (formatSettings.length() > i) {
-                component.setSelected(formatSettings.substring(i, i + 1).equals("x"));
-            } else {
-                component.setSelected(true);
-            }
-            i++;
-        }
+    private void saveActiveFiltersToPrefs() {
+        TableUtil.setActiveFilters(KEY_TABLES_FILTER_SETTINGS, filterButtons);
         setTableFilter();
     }
 
-    private void saveSettings() {
-        // Filters
-        StringBuilder formatSettings = new StringBuilder();
-        for (JToggleButton component : filterButtons) {
-            formatSettings.append(component.isSelected() ? "x" : "-");
-        }
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_TABLES_FILTER_SETTINGS, formatSettings.toString());
-
+    private void saveGuiSettings() {
+        TableUtil.saveActiveFiltersToPrefs(KEY_TABLES_FILTER_SETTINGS, filterButtons);
         TableUtil.saveColumnWidthAndOrderToPrefs(tableTables, KEY_TABLES_COLUMNS_WIDTH, KEY_TABLES_COLUMNS_ORDER);
     }
 
-    private void restoreDividerLocations() {
-        Rectangle rec = MageFrame.getDesktop().getBounds();
-        if (rec != null) {
-            String size = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_MAGE_PANEL_LAST_SIZE, null);
-            String sb = Double.toString(rec.getWidth()) + 'x' + Double.toString(rec.getHeight());
-            // use divider positions only if screen size is the same as it was the time the settings were saved
-            if (size != null && size.equals(sb)) {
-                String location = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_TABLES_DIVIDER_LOCATION_1, null);
-                if (location != null && jSplitPane1 != null) {
-                    jSplitPane1.setDividerLocation(Integer.parseInt(location));
-                }
-                if (this.btnStateFinished.isSelected()) {
-                    this.jSplitPaneTables.setDividerLocation(-1);
-                } else {
-                    location = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_TABLES_DIVIDER_LOCATION_2, null);
-                    if (location != null && jSplitPaneTables != null) {
-                        jSplitPaneTables.setDividerLocation(Integer.parseInt(location));
-                    }
-                }
-                location = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_TABLES_DIVIDER_LOCATION_3, null);
-                if (location != null && chatPanelMain != null) {
-                    chatPanelMain.setSplitDividerLocation(Integer.parseInt(location));
-                }
-            }
-        }
+    private void restoreDividers() {
+      Rectangle currentBounds = MageFrame.getDesktop().getBounds();
+      if (currentBounds != null) {
+        String firstDivider = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_TABLES_DIVIDER_LOCATION_1, null);
+        String tableDivider = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_TABLES_DIVIDER_LOCATION_2, null);
+        String chatDivider = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_TABLES_DIVIDER_LOCATION_3, null);
+        GuiDisplayUtil.restoreDividerLocations(currentBounds, firstDivider, jSplitPane1);
+        GuiDisplayUtil.restoreDividerLocations(currentBounds, tableDivider, jSplitPaneTables);
+        GuiDisplayUtil.restoreDividerLocations(currentBounds, chatDivider, chatPanelMain);
+      }
     }
 
     public Map<String, JComponent> getUIComponents() {
@@ -565,7 +538,7 @@ public class TablesPanel extends javax.swing.JPanel {
         MageFrame.getUI().addButton(MageComponents.NEW_GAME_BUTTON, btnNewTable);
 
         // divider locations have to be set with delay else values set are overwritten with system defaults
-        Executors.newSingleThreadScheduledExecutor().schedule(() -> restoreDividerLocations(), 300, TimeUnit.MILLISECONDS);
+        Executors.newSingleThreadScheduledExecutor().schedule(() -> restoreDividers(), 300, TimeUnit.MILLISECONDS);
 
     }
 
@@ -1284,7 +1257,7 @@ public class TablesPanel extends javax.swing.JPanel {
                 if (currentMessage >= messages.size()) {
                     currentMessage = 0;
                 }
-                
+
                 URLHandler.RemoveMouseAdapter(jLabelFooterText);
                 URLHandler.handleMessage(messages.get(currentMessage), this.jLabelFooterText);
             }
@@ -1447,7 +1420,7 @@ class TableTableModel extends AbstractTableModel {
                         if (tables[arg0].isTournament()) {
                             return "Show";
                         } else {
-                            owner = tables[arg0].getControllerName();                            
+                            owner = tables[arg0].getControllerName();
                             if (SessionHandler.getSession() != null && owner.equals(SessionHandler.getUserName())) {
                                 return "";
                             }
