@@ -33,43 +33,43 @@ import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.costs.common.ExileSourceFromGraveCost;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
+import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.filter.common.FilterEnchantmentCard;
+import mage.filter.common.FilterPlaneswalkerCard;
 import mage.target.common.TargetCardInLibrary;
 
 /**
  *
- * @author LevelX2
+ * @author TheElk801
  */
-public class AcademyRector extends CardImpl {
+public class ArenaRector extends CardImpl {
 
-    public AcademyRector(UUID ownerId, CardSetInfo setInfo) {
+    public ArenaRector(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
+
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.CLERIC);
-
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 
-        // When Academy Rector dies, you may exile it. If you do, search your library for an enchantment card, put that card onto the battlefield, then shuffle your library.
+        // When Arena Rector dies, you may exile it. If you do, search your library for a planeswalker card, put it onto the battlefield, then shuffle your library.
         this.addAbility(new DiesTriggeredAbility(
                 new DoIfCostPaid(
-                        new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterEnchantmentCard())),
+                        new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterPlaneswalkerCard())),
                         new ExileSourceFromGraveCost(),
-                        "Exile to search for an enchantment?"
+                        "Exile to search for a planeswalker?"
                 ), false
         ));
     }
 
-    public AcademyRector(final AcademyRector card) {
+    public ArenaRector(final ArenaRector card) {
         super(card);
     }
 
     @Override
-    public AcademyRector copy() {
-        return new AcademyRector(this);
+    public ArenaRector copy() {
+        return new ArenaRector(this);
     }
 }

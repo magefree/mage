@@ -54,6 +54,7 @@ public class Battlebond extends ExpansionSet {
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
         cards.add(new SetCardInfo("Archfiend of Despair", 44, Rarity.MYTHIC, mage.cards.a.ArchfiendOfDespair.class));
+        cards.add(new SetCardInfo("Arena Rector", 23, Rarity.MYTHIC, mage.cards.a.ArenaRector.class));
         cards.add(new SetCardInfo("Auger Spree", 218, Rarity.COMMON, mage.cards.a.AugerSpree.class));
         cards.add(new SetCardInfo("Boldwyr Intimidator", 169, Rarity.UNCOMMON, mage.cards.b.BoldwyrIntimidator.class));
         cards.add(new SetCardInfo("Bountiful Promenade", 81, Rarity.RARE, mage.cards.b.BountifulPromenade.class));
