@@ -34,6 +34,7 @@
 package mage.client.dialog;
 
 import java.awt.Dimension;
+import java.awt.Rectangle;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -54,6 +55,7 @@ import mage.client.util.GUISizeHelper;
 import mage.client.util.audio.AudioManager;
 import mage.client.util.gui.TableUtil;
 import mage.client.util.gui.countryBox.CountryCellRenderer;
+import mage.client.util.gui.GuiDisplayUtil;
 import mage.players.PlayerType;
 import mage.remote.Session;
 import mage.view.SeatView;
@@ -61,6 +63,7 @@ import mage.view.TableView;
 
 import static mage.client.dialog.PreferencesDialog.KEY_TABLE_WAITING_COLUMNS_ORDER;
 import static mage.client.dialog.PreferencesDialog.KEY_TABLE_WAITING_COLUMNS_WIDTH;
+import static mage.client.dialog.PreferencesDialog.KEY_TABLES_DIVIDER_LOCATION_4;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -154,6 +157,9 @@ public class TableWaitingDialog extends MageDialog {
         this.roomId = roomId;
         this.tableId = tableId;
         this.isTournament = isTournament;
+
+        Rectangle currentBounds = MageFrame.getDesktop().getBounds();
+
         updateTask = new UpdateSeatsTask(SessionHandler.getSession(), roomId, tableId, this);
         if (SessionHandler.isTableOwner(roomId, tableId)) {
             this.btnStart.setVisible(true);
@@ -171,6 +177,8 @@ public class TableWaitingDialog extends MageDialog {
             this.setModal(false);
             this.setLocation(100, 100);
             this.setVisible(true);
+            String tournamentChatDivider = PreferencesDialog.getCachedValue(KEY_TABLES_DIVIDER_LOCATION_4, null);
+            GuiDisplayUtil.restoreDividerLocations(currentBounds, tournamentChatDivider, jSplitPane1);
         } else {
             closeDialog();
         }
@@ -185,6 +193,8 @@ public class TableWaitingDialog extends MageDialog {
         MageFrame.getUI().removeButton(MageComponents.TABLE_WAITING_START_BUTTON);
         this.removeDialog();
         TableUtil.saveColumnWidthAndOrderToPrefs(jTableSeats, KEY_TABLE_WAITING_COLUMNS_WIDTH, KEY_TABLE_WAITING_COLUMNS_ORDER);
+        GuiDisplayUtil.saveCurrentBoundsToPrefs();
+        GuiDisplayUtil.setDividerLocation(KEY_TABLES_DIVIDER_LOCATION_4, this.jSplitPane1.getDividerLocation());
     }
 
     /**

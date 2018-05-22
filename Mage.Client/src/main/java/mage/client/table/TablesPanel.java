@@ -410,10 +410,8 @@ public class TablesPanel extends javax.swing.JPanel {
     }
 
     private void saveDividerLocations() {
-        // save desktop bounds and divider locations
-        Rectangle rec = MageFrame.getDesktop().getBounds();
-        String currentBounds = Double.toString(rec.getWidth()) + 'x' + Double.toString(rec.getHeight());
-        PreferencesDialog.saveValue(KEY_MAGE_PANEL_LAST_SIZE, currentBounds);
+        // save divider locations and divider saveDividerLocations
+        GuiDisplayUtil.saveCurrentBoundsToPrefs();
         GuiDisplayUtil.setDividerLocation(KEY_TABLES_DIVIDER_LOCATION_1, this.jSplitPane1.getDividerLocation());
         GuiDisplayUtil.setDividerLocation(KEY_TABLES_DIVIDER_LOCATION_2, this.jSplitPaneTables.getDividerLocation());
         GuiDisplayUtil.setDividerLocation(KEY_TABLES_DIVIDER_LOCATION_3, chatPanelMain.getSplitDividerLocation());
@@ -432,9 +430,9 @@ public class TablesPanel extends javax.swing.JPanel {
     private void restoreDividers() {
       Rectangle currentBounds = MageFrame.getDesktop().getBounds();
       if (currentBounds != null) {
-        String firstDivider = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_TABLES_DIVIDER_LOCATION_1, null);
-        String tableDivider = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_TABLES_DIVIDER_LOCATION_2, null);
-        String chatDivider = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_TABLES_DIVIDER_LOCATION_3, null);
+        String firstDivider = PreferencesDialog.getCachedValue(KEY_TABLES_DIVIDER_LOCATION_1, null);
+        String tableDivider = PreferencesDialog.getCachedValue(KEY_TABLES_DIVIDER_LOCATION_2, null);
+        String chatDivider = PreferencesDialog.getCachedValue(KEY_TABLES_DIVIDER_LOCATION_3, null);
         GuiDisplayUtil.restoreDividerLocations(currentBounds, firstDivider, jSplitPane1);
         GuiDisplayUtil.restoreDividerLocations(currentBounds, tableDivider, jSplitPaneTables);
         GuiDisplayUtil.restoreDividerLocations(currentBounds, chatDivider, chatPanelMain);

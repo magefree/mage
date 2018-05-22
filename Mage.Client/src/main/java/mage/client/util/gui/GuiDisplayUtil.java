@@ -48,6 +48,12 @@ public final class GuiDisplayUtil {
       }
     }
 
+    public static void saveCurrentBoundsToPrefs() {
+      Rectangle rec = MageFrame.getDesktop().getBounds();
+      String currentBounds = Double.toString(rec.getWidth()) + 'x' + Double.toString(rec.getHeight());
+      PreferencesDialog.saveValue(KEY_MAGE_PANEL_LAST_SIZE, currentBounds);
+    }
+
     public static void setDividerLocation(String dividerPrefKey, int position) {
       PreferencesDialog.saveValue(dividerPrefKey, Integer.toString(position));
     }
