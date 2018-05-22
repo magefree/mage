@@ -35,16 +35,14 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.DevotionCount;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.continuous.CantGainLifeAllEffect;
 import mage.abilities.effects.common.continuous.LoseCreatureTypeSourceEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.game.Game;
-import mage.players.Player;
 
 /**
  *
@@ -53,7 +51,7 @@ import mage.players.Player;
 public class ErebosGodOfTheDead extends CardImpl {
 
     public ErebosGodOfTheDead(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{3}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{3}{B}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOD);
 
@@ -62,13 +60,20 @@ public class ErebosGodOfTheDead extends CardImpl {
 
         // Indestructible
         this.addAbility(IndestructibleAbility.getInstance());
+
         // As long as your devotion to black is less than five, Erebos isn't a creature.
         Effect effect = new LoseCreatureTypeSourceEffect(new DevotionCount(ColoredManaSymbol.B), 5);
         effect.setText("As long as your devotion to black is less than five, Erebos isn't a creature.<i>(Each {B} in the mana costs of permanents you control counts towards your devotion to black.)</i>");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
 
         // Your opponents can't gain life.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OpponentsCantGainLifeEffect()));
+        this.addAbility(new SimpleStaticAbility(
+                Zone.BATTLEFIELD,
+                new CantGainLifeAllEffect(
+                        Duration.WhileOnBattlefield,
+                        TargetController.OPPONENT
+                )
+        ));
 
         // {1}{B}, Pay 2 life: Draw a card.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{1}{B}"));
@@ -85,34 +90,4 @@ public class ErebosGodOfTheDead extends CardImpl {
     public ErebosGodOfTheDead copy() {
         return new ErebosGodOfTheDead(this);
     }
-}
-
-class OpponentsCantGainLifeEffect extends ContinuousEffectImpl {
-
-    public OpponentsCantGainLifeEffect() {
-        super(Duration.WhileOnBattlefield, Layer.PlayerEffects, SubLayer.NA, Outcome.Benefit);
-        staticText = "Your opponents can't gain life";
-    }
-
-    public OpponentsCantGainLifeEffect(final OpponentsCantGainLifeEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public OpponentsCantGainLifeEffect copy() {
-        return new OpponentsCantGainLifeEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        for (UUID playerId: game.getOpponents(source.getControllerId())) {
-            Player player = game.getPlayer(playerId);
-            if (player != null)
-            {
-                player.setCanGainLife(false);
-            }
-        }
-        return true;
-    }
-
 }
