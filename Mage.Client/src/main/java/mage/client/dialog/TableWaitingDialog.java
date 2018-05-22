@@ -95,12 +95,10 @@ public class TableWaitingDialog extends MageDialog {
         }
 
         setGUISize();
-
-        chatPanel.useExtendedView(ChatPanelBasic.VIEW_MODE.NONE);
         jTableSeats.createDefaultColumnsFromModel();
-        TableUtil.setColumnWidthAndOrder(jTableSeats, DEFAULT_COLUMNS_WIDTH, KEY_TABLE_WAITING_COLUMNS_WIDTH, KEY_TABLE_WAITING_COLUMNS_ORDER);
         jTableSeats.setDefaultRenderer(Icon.class, new CountryCellRenderer());
-
+        TableUtil.setColumnWidthAndOrder(jTableSeats, DEFAULT_COLUMNS_WIDTH, KEY_TABLE_WAITING_COLUMNS_WIDTH, KEY_TABLE_WAITING_COLUMNS_ORDER);
+        chatPanel.useExtendedView(ChatPanelBasic.VIEW_MODE.NONE);
         MageFrame.getUI().addButton(MageComponents.TABLE_WAITING_START_BUTTON, btnStart);
     }
 
@@ -154,13 +152,14 @@ public class TableWaitingDialog extends MageDialog {
     }
 
     public void showDialog(UUID roomId, UUID tableId, boolean isTournament) {
+        Rectangle currentBounds = MageFrame.getDesktop().getBounds();
+        Optional<UUID> chatId = SessionHandler.getTableChatId(tableId);
+        updateTask = new UpdateSeatsTask(SessionHandler.getSession(), roomId, tableId, this);
+
         this.roomId = roomId;
         this.tableId = tableId;
         this.isTournament = isTournament;
 
-        Rectangle currentBounds = MageFrame.getDesktop().getBounds();
-
-        updateTask = new UpdateSeatsTask(SessionHandler.getSession(), roomId, tableId, this);
         if (SessionHandler.isTableOwner(roomId, tableId)) {
             this.btnStart.setVisible(true);
             this.btnMoveDown.setVisible(true);
@@ -170,7 +169,7 @@ public class TableWaitingDialog extends MageDialog {
             this.btnMoveDown.setVisible(false);
             this.btnMoveUp.setVisible(false);
         }
-        Optional<UUID> chatId = SessionHandler.getTableChatId(tableId);
+
         if (chatId.isPresent()) {
             this.chatPanel.connect(chatId.get());
             updateTask.execute();

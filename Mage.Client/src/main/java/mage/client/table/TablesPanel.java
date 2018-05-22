@@ -196,8 +196,7 @@ public class TablesPanel extends javax.swing.JPanel {
         list.add(new RowSorter.SortKey(TableTableModel.COLUMN_CREATED, SortOrder.DESCENDING));
         activeTablesSorter.setSortKeys(list);
 
-        TableUtil.setColumnWidthAndOrder(tableTables, DEFAULT_COLUMNS_WIDTH,
-                PreferencesDialog.KEY_TABLES_COLUMNS_WIDTH, PreferencesDialog.KEY_TABLES_COLUMNS_ORDER);
+        TableUtil.setColumnWidthAndOrder(tableTables, DEFAULT_COLUMNS_WIDTH, KEY_TABLES_COLUMNS_WIDTH, KEY_TABLES_COLUMNS_ORDER);
 
         // 2. TABLE COMPLETED
         completedTablesSorter = new MageTableRowSorter(matchesModel);
