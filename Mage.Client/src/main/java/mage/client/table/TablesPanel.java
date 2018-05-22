@@ -192,7 +192,7 @@ public class TablesPanel extends javax.swing.JPanel {
         activeTablesSorter.setSortKeys(list);
 
         TableUtil.setColumnWidthAndOrder(tableTables, DEFAULT_COLUMNS_WIDTH,
-                PreferencesDialog.KEY_TABLES_COLUMNS_WIDTH, PreferencesDialog.KEY_TABLES_COLUMNS_ORDER); // TODO: is sort order save and restore after app restart/window open?
+                PreferencesDialog.KEY_TABLES_COLUMNS_WIDTH, PreferencesDialog.KEY_TABLES_COLUMNS_ORDER);
 
         // 2. TABLE COMPLETED
         completedTablesSorter = new MageTableRowSorter(matchesModel);

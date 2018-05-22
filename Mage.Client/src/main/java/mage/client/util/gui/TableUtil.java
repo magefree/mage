@@ -5,8 +5,10 @@
  */
 package mage.client.util.gui;
 
+import java.util.Arrays;
 import javax.swing.JTable;
 import javax.swing.table.TableColumn;
+import org.apache.log4j.Logger;
 import mage.client.dialog.PreferencesDialog;
 
 /**
@@ -22,11 +24,15 @@ public final class TableUtil {
      * @param widthPrefKey
      * @param orderPrefKey
      */
+
+    private static final Logger LOGGER = Logger.getLogger(TableUtil.class);
+
     static public void setColumnWidthAndOrder(JTable table, int[] defaultColumnsWidth, String widthPrefKey, String orderPrefKey) {
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
         // set the column width from saved value or defaults
         int[] widths = getIntArrayFromString(PreferencesDialog.getCachedValue(widthPrefKey, null));
+        LOGGER.info("loading stored widths: " + Arrays.toString(widths));
         int i = 0;
         for (int width : defaultColumnsWidth) {
             if (widths != null && widths.length > i) {
@@ -43,6 +49,7 @@ public final class TableUtil {
 
         // set the column order
         int[] order = getIntArrayFromString(PreferencesDialog.getCachedValue(orderPrefKey, null));
+        LOGGER.info("loading column order: " + Arrays.toString(order));
         if (order != null && order.length == table.getColumnCount()) {
             for (int j = 0; j < table.getColumnCount(); j++) {
                 table.moveColumn(table.convertColumnIndexToView(order[j]), j);
@@ -70,6 +77,8 @@ public final class TableUtil {
         PreferencesDialog.saveValue(widthPrefKey, columnWidthSettings.toString());
         PreferencesDialog.saveValue(orderPrefKey, columnOrderSettings.toString());
 
+        LOGGER.info("saving column widths: " + columnWidthSettings.toString());
+        LOGGER.info("saving column order: " + columnOrderSettings.toString());
     }
 
     public static int[] getIntArrayFromString(String stringData) {
