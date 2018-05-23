@@ -96,6 +96,7 @@ public class TableWaitingDialog extends MageDialog {
 
         setGUISize();
         jTableSeats.createDefaultColumnsFromModel();
+        jTableSeats.setAutoCreateColumnsFromModel(false);
         jTableSeats.setDefaultRenderer(Icon.class, new CountryCellRenderer());
         TableUtil.setColumnWidthAndOrder(jTableSeats, DEFAULT_COLUMNS_WIDTH, KEY_TABLE_WAITING_COLUMNS_WIDTH, KEY_TABLE_WAITING_COLUMNS_ORDER);
         chatPanel.useExtendedView(ChatPanelBasic.VIEW_MODE.NONE);
