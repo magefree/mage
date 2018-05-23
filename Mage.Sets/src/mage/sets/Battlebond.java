@@ -88,6 +88,7 @@ public class Battlebond extends ExpansionSet {
         cards.add(new SetCardInfo("Ley Weaver", 21, Rarity.UNCOMMON, mage.cards.l.LeyWeaver.class));
         cards.add(new SetCardInfo("Lore Weaver", 22, Rarity.UNCOMMON, mage.cards.l.LoreWeaver.class));
         cards.add(new SetCardInfo("Luxury Suite", 82, Rarity.RARE, mage.cards.l.LuxurySuite.class));
+        cards.add(new SetCardInfo("Magus of the Candelabra", 206, Rarity.RARE, mage.cards.m.MagusOfTheCandelabra.class));
         cards.add(new SetCardInfo("Mindblade Render", 49, Rarity.RARE, mage.cards.m.MindbladeRender.class));
         cards.add(new SetCardInfo("Morphic Pool", 83, Rarity.RARE, mage.cards.m.MorphicPool.class));
         cards.add(new SetCardInfo("Mountain", 253, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
@@ -105,6 +106,7 @@ public class Battlebond extends ExpansionSet {
         cards.add(new SetCardInfo("Seedborn Muse", 212, Rarity.RARE, mage.cards.s.SeedbornMuse.class));
         cards.add(new SetCardInfo("Shoulder to Shoulder", 105, Rarity.COMMON, mage.cards.s.ShoulderToShoulder.class));
         cards.add(new SetCardInfo("Sickle Dancer", 50, Rarity.COMMON, mage.cards.s.SickleDancer.class));
+        cards.add(new SetCardInfo("Skyshroud Claim", 213, Rarity.COMMON, mage.cards.s.SkyshroudClaim.class));
         cards.add(new SetCardInfo("Soaring Show-Off", 40, Rarity.COMMON, mage.cards.s.SoaringShowOff.class));
         cards.add(new SetCardInfo("Soulblade Corrupter", 17, Rarity.UNCOMMON, mage.cards.s.SoulbladeCorrupter.class));
         cards.add(new SetCardInfo("Soulblade Renewer", 18, Rarity.UNCOMMON, mage.cards.s.SoulbladeRenewer.class));
