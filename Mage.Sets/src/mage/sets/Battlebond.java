@@ -100,6 +100,7 @@ public class Battlebond extends ExpansionSet {
         cards.add(new SetCardInfo("True-Name Nemesis", 136, Rarity.MYTHIC, mage.cards.t.TrueNameNemesis.class));
         cards.add(new SetCardInfo("Veteran Explorer", 214, Rarity.UNCOMMON, mage.cards.v.VeteranExplorer.class));
         cards.add(new SetCardInfo("Vigor", 215, Rarity.RARE, mage.cards.v.Vigor.class));
+        cards.add(new SetCardInfo("Virtus the Veiled", 7, Rarity.RARE, mage.cards.v.VirtusTheVeiled.class));
         cards.add(new SetCardInfo("Will Kenrith", 1, Rarity.MYTHIC, mage.cards.w.WillKenrith.class));
     }
 }
