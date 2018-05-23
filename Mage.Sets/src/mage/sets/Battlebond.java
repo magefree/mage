@@ -75,6 +75,7 @@ public class Battlebond extends ExpansionSet {
         cards.add(new SetCardInfo("Impetuous Protege", 19, Rarity.UNCOMMON, mage.cards.i.ImpetuousProtege.class));
         cards.add(new SetCardInfo("Impulse", 119, Rarity.COMMON, mage.cards.i.Impulse.class));
         cards.add(new SetCardInfo("Island", 251, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Khorvath Brightflame", 9, Rarity.RARE, mage.cards.k.KhorvathBrightflame.class));
         cards.add(new SetCardInfo("Kor Spiritdancer", 93, Rarity.RARE, mage.cards.k.KorSpiritdancer.class));
         cards.add(new SetCardInfo("Kraken Hatchling", 121, Rarity.COMMON, mage.cards.k.KrakenHatchling.class));
         cards.add(new SetCardInfo("Krav, the Unredeemed", 4, Rarity.RARE, mage.cards.k.KravTheUnredeemed.class));
