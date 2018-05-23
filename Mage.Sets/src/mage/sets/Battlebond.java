@@ -81,6 +81,7 @@ public class Battlebond extends ExpansionSet {
         cards.add(new SetCardInfo("Land Tax", 94, Rarity.MYTHIC, mage.cards.l.LandTax.class));
         cards.add(new SetCardInfo("Last One Standing", 76, Rarity.RARE, mage.cards.l.LastOneStanding.class));
         cards.add(new SetCardInfo("Ley Weaver", 21, Rarity.UNCOMMON, mage.cards.l.LeyWeaver.class));
+        cards.add(new SetCardInfo("Lore Weaver", 22, Rarity.UNCOMMON, mage.cards.l.LoreWeaver.class));
         cards.add(new SetCardInfo("Luxury Suite", 82, Rarity.RARE, mage.cards.l.LuxurySuite.class));
         cards.add(new SetCardInfo("Mindblade Render", 49, Rarity.RARE, mage.cards.m.MindbladeRender.class));
         cards.add(new SetCardInfo("Morphic Pool", 83, Rarity.RARE, mage.cards.m.MorphicPool.class));
