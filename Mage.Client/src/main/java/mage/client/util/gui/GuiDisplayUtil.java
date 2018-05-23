@@ -54,7 +54,7 @@ public final class GuiDisplayUtil {
       PreferencesDialog.saveValue(KEY_MAGE_PANEL_LAST_SIZE, currentBounds);
     }
 
-    public static void setDividerLocation(String dividerPrefKey, int position) {
+    public static void saveDividerLocationToPrefs(String dividerPrefKey, int position) {
       PreferencesDialog.saveValue(dividerPrefKey, Integer.toString(position));
     }
 

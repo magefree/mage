@@ -154,6 +154,7 @@ public class TableWaitingDialog extends MageDialog {
     public void showDialog(UUID roomId, UUID tableId, boolean isTournament) {
         Rectangle currentBounds = MageFrame.getDesktop().getBounds();
         Optional<UUID> chatId = SessionHandler.getTableChatId(tableId);
+        String tournamentChatDivider = PreferencesDialog.getCachedValue(KEY_TABLES_DIVIDER_LOCATION_4, null);
         updateTask = new UpdateSeatsTask(SessionHandler.getSession(), roomId, tableId, this);
 
         this.roomId = roomId;
@@ -176,7 +177,7 @@ public class TableWaitingDialog extends MageDialog {
             this.setModal(false);
             this.setLocation(100, 100);
             this.setVisible(true);
-            String tournamentChatDivider = PreferencesDialog.getCachedValue(KEY_TABLES_DIVIDER_LOCATION_4, null);
+
             GuiDisplayUtil.restoreDividerLocations(currentBounds, tournamentChatDivider, jSplitPane1);
         } else {
             closeDialog();
@@ -193,7 +194,7 @@ public class TableWaitingDialog extends MageDialog {
         this.removeDialog();
         TableUtil.saveColumnWidthAndOrderToPrefs(jTableSeats, KEY_TABLE_WAITING_COLUMNS_WIDTH, KEY_TABLE_WAITING_COLUMNS_ORDER);
         GuiDisplayUtil.saveCurrentBoundsToPrefs();
-        GuiDisplayUtil.setDividerLocation(KEY_TABLES_DIVIDER_LOCATION_4, this.jSplitPane1.getDividerLocation());
+        GuiDisplayUtil.saveDividerLocationToPrefs(KEY_TABLES_DIVIDER_LOCATION_4, this.jSplitPane1.getDividerLocation());
     }
 
     /**

@@ -231,7 +231,7 @@ public class TablesPanel extends javax.swing.JPanel {
         jScrollPaneTablesActive.getViewport().setBackground(new Color(255, 255, 255, 50));
         jScrollPaneTablesFinished.getViewport().setBackground(new Color(255, 255, 255, 50));
 
-        saveActiveFiltersToPrefs();
+        restoreFilters();
         setGUISize();
 
         Action openTableAction;
@@ -411,12 +411,12 @@ public class TablesPanel extends javax.swing.JPanel {
     private void saveDividerLocations() {
         // save divider locations and divider saveDividerLocations
         GuiDisplayUtil.saveCurrentBoundsToPrefs();
-        GuiDisplayUtil.setDividerLocation(KEY_TABLES_DIVIDER_LOCATION_1, this.jSplitPane1.getDividerLocation());
-        GuiDisplayUtil.setDividerLocation(KEY_TABLES_DIVIDER_LOCATION_2, this.jSplitPaneTables.getDividerLocation());
-        GuiDisplayUtil.setDividerLocation(KEY_TABLES_DIVIDER_LOCATION_3, chatPanelMain.getSplitDividerLocation());
+        GuiDisplayUtil.saveDividerLocationToPrefs(KEY_TABLES_DIVIDER_LOCATION_1, this.jSplitPane1.getDividerLocation());
+        GuiDisplayUtil.saveDividerLocationToPrefs(KEY_TABLES_DIVIDER_LOCATION_2, this.jSplitPaneTables.getDividerLocation());
+        GuiDisplayUtil.saveDividerLocationToPrefs(KEY_TABLES_DIVIDER_LOCATION_3, chatPanelMain.getSplitDividerLocation());
     }
 
-    private void saveActiveFiltersToPrefs() {
+    private void restoreFilters() {
         TableUtil.setActiveFilters(KEY_TABLES_FILTER_SETTINGS, filterButtons);
         setTableFilter();
     }
