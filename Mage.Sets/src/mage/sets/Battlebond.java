@@ -95,6 +95,7 @@ public class Battlebond extends ExpansionSet {
         cards.add(new SetCardInfo("Soulblade Renewer", 18, Rarity.UNCOMMON, mage.cards.s.SoulbladeRenewer.class));
         cards.add(new SetCardInfo("Sower of Temptation", 131, Rarity.RARE, mage.cards.s.SowerOfTemptation.class));
         cards.add(new SetCardInfo("Spire Garden", 85, Rarity.RARE, mage.cards.s.SpireGarden.class));
+        cards.add(new SetCardInfo("Stunning Reversal", 51, Rarity.MYTHIC, mage.cards.s.StunningReversal.class));
         cards.add(new SetCardInfo("Swamp", 252, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swords to Plowshares", 110, Rarity.UNCOMMON, mage.cards.s.SwordsToPlowshares.class));
         cards.add(new SetCardInfo("Thrasher Brute", 52, Rarity.UNCOMMON, mage.cards.t.ThrasherBrute.class));
