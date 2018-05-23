@@ -71,7 +71,7 @@ import static mage.client.dialog.PreferencesDialog.KEY_TABLES_DIVIDER_LOCATION_4
 public class TableWaitingDialog extends MageDialog {
 
     private static final Logger LOGGER = Logger.getLogger(TableWaitingDialog.class);
-    private static final int[] DEFAULT_COLUMNS_WIDTH = {20, 50, 100, 100, 100};
+    private static final int[] DEFAULT_COLUMNS_WIDTH = {20, 50, 100, 100, 100, 100};
 
     private UUID tableId;
     private UUID roomId;
