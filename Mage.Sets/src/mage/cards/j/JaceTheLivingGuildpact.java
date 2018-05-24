@@ -28,28 +28,24 @@
 package mage.cards.j;
 
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
-import mage.cards.Card;
+import mage.abilities.effects.common.ShuffleHandGraveyardAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.game.Game;
-import mage.players.Player;
 import mage.target.TargetPermanent;
 
 /**
@@ -65,7 +61,7 @@ public class JaceTheLivingGuildpact extends CardImpl {
     }
 
     public JaceTheLivingGuildpact(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{U}{U}");
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.JACE);
 
@@ -83,7 +79,8 @@ public class JaceTheLivingGuildpact extends CardImpl {
         this.addAbility(ability);
 
         // -8: Each player shuffles their hand and graveyard into their library. You draw seven cards.
-        this.addAbility(new LoyaltyAbility(new JaceTheLivingGuildpactEffect(), -8));
+        ability = new LoyaltyAbility(new ShuffleHandGraveyardAllEffect(), -8);
+        ability.addEffect(new DrawCardSourceControllerEffect(7).setText("You draw seven cards"));
 
     }
 
@@ -95,46 +92,4 @@ public class JaceTheLivingGuildpact extends CardImpl {
     public JaceTheLivingGuildpact copy() {
         return new JaceTheLivingGuildpact(this);
     }
-}
-
-class JaceTheLivingGuildpactEffect extends OneShotEffect {
-
-    public JaceTheLivingGuildpactEffect() {
-        super(Outcome.Neutral);
-        staticText = "Each player shuffles their hand and graveyard into their library. You draw seven cards";
-    }
-
-    public JaceTheLivingGuildpactEffect(final JaceTheLivingGuildpactEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                Player player = game.getPlayer(playerId);
-                if (player != null) {
-                    for (Card card : player.getHand().getCards(game)) {
-                        card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-                    }
-                    for (Card card : player.getGraveyard().getCards(game)) {
-                        card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-                    }
-                    player.shuffleLibrary(source, game);
-                }
-            }
-            controller.drawCards(7, game);
-            return true;
-
-        }
-        return false;
-
-    }
-
-    @Override
-    public JaceTheLivingGuildpactEffect copy() {
-        return new JaceTheLivingGuildpactEffect(this);
-    }
-
 }

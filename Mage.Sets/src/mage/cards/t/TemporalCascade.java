@@ -31,13 +31,12 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ShuffleHandGraveyardAllEffect;
 import mage.abilities.keyword.EntwineAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -48,16 +47,16 @@ import mage.players.Player;
 public class TemporalCascade extends CardImpl {
 
     public TemporalCascade(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{5}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{U}{U}");
 
         // Choose one - Each player shuffles their hand and graveyard into their library;
-        this.getSpellAbility().addEffect(new TemporalCascadeShuffleEffect());
-        
+        this.getSpellAbility().addEffect(new ShuffleHandGraveyardAllEffect());
+
         // or each player draws seven cards.
         Mode mode = new Mode();
         mode.getEffects().add(new TemporalCascadeDrawEffect());
         this.getSpellAbility().getModes().addMode(mode);
-        
+
         // Entwine {2}
         this.addAbility(new EntwineAbility("{2}"));
     }
@@ -69,42 +68,6 @@ public class TemporalCascade extends CardImpl {
     @Override
     public TemporalCascade copy() {
         return new TemporalCascade(this);
-    }
-}
-
-class TemporalCascadeShuffleEffect extends OneShotEffect {
-
-    public TemporalCascadeShuffleEffect() {
-        super(Outcome.Neutral);
-        staticText = "Each player shuffles their hand and graveyard into their library";
-    }
-
-    public TemporalCascadeShuffleEffect(final TemporalCascadeShuffleEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player sourcePlayer = game.getPlayer(source.getControllerId());
-        for (UUID playerId: game.getState().getPlayersInRange(sourcePlayer.getId(), game)) {
-            Player player = game.getPlayer(playerId);
-            if (player != null) {
-                for (Card card: player.getHand().getCards(game)) {
-                    card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-                }
-                for (Card card: player.getGraveyard().getCards(game)) {
-                    card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-                }
-                player.shuffleLibrary(source, game);
-                
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public TemporalCascadeShuffleEffect copy() {
-        return new TemporalCascadeShuffleEffect(this);
     }
 }
 
@@ -123,11 +86,11 @@ class TemporalCascadeDrawEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player sourcePlayer = game.getPlayer(source.getControllerId());
         game.getState().handleSimultaneousEvent(game); // needed here so state based triggered effects 
-        for (UUID playerId: game.getState().getPlayersInRange(sourcePlayer.getId(), game)) {
+        for (UUID playerId : game.getState().getPlayersInRange(sourcePlayer.getId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
                 player.drawCards(7, game);
-            }            
+            }
         }
         return true;
     }

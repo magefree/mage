@@ -80,6 +80,7 @@ public class Battlebond extends ExpansionSet {
         cards.add(new SetCardInfo("Fan Favorite", 46, Rarity.COMMON, mage.cards.f.FanFavorite.class));
         cards.add(new SetCardInfo("Fertile Ground", 198, Rarity.COMMON, mage.cards.f.FertileGround.class));
         cards.add(new SetCardInfo("Forest", 254, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Game Plan", 35, Rarity.RARE, mage.cards.g.GamePlan.class));
         cards.add(new SetCardInfo("Generous Patron", 70, Rarity.RARE, mage.cards.g.GenerousPatron.class));
         cards.add(new SetCardInfo("Greater Good", 201, Rarity.RARE, mage.cards.g.GreaterGood.class));
         cards.add(new SetCardInfo("Impetuous Protege", 19, Rarity.UNCOMMON, mage.cards.i.ImpetuousProtege.class));

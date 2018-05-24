@@ -32,6 +32,7 @@ import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardAllEffect;
+import mage.abilities.effects.common.ShuffleHandGraveyardAllEffect;
 import mage.abilities.keyword.AftermathAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -39,7 +40,6 @@ import mage.cards.SplitCard;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SpellAbilityType;
-import mage.constants.Zone;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.common.FilterSpellOrPermanent;
 import mage.game.Game;
@@ -72,7 +72,7 @@ public class CommitMemory extends SplitCard {
         // Aftermath
         // Each player shuffles their hand and graveyard into their library, then draws seven cards.
         ((CardImpl) (getRightHalfCard())).addAbility(new AftermathAbility().setRuleAtTheTop(true));
-        getRightHalfCard().getSpellAbility().addEffect(new MemoryEffect());
+        getRightHalfCard().getSpellAbility().addEffect(new ShuffleHandGraveyardAllEffect());
         Effect effect = new DrawCardAllEffect(7);
         effect.setText(", then draws seven cards");
         getRightHalfCard().getSpellAbility().addEffect(effect);
@@ -119,35 +119,4 @@ class CommitEffect extends OneShotEffect {
         }
         return false;
     }
-}
-
-class MemoryEffect extends OneShotEffect {
-
-    public MemoryEffect() {
-        super(Outcome.Neutral);
-        staticText = "Each player shuffles their hand and graveyard into their library";
-    }
-
-    public MemoryEffect(final MemoryEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
-            Player player = game.getPlayer(playerId);
-            if (player != null) {
-                player.moveCards(player.getHand(), Zone.LIBRARY, source, game);
-                player.moveCards(player.getGraveyard(), Zone.LIBRARY, source, game);
-                player.shuffleLibrary(source, game);
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public MemoryEffect copy() {
-        return new MemoryEffect(this);
-    }
-
 }

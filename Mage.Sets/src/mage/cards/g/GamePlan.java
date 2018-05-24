@@ -25,42 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.d;
+package mage.cards.g;
 
 import java.util.UUID;
-import mage.abilities.condition.common.MyTurnCondition;
-import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardAllEffect;
-import mage.abilities.effects.common.EndTurnEffect;
+import mage.abilities.effects.common.ExileSpellEffect;
 import mage.abilities.effects.common.ShuffleHandGraveyardAllEffect;
+import mage.abilities.keyword.AssistAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 
 /**
  *
- * @author fireshoes
+ * @author TheElk801
  */
-public class DaysUndoing extends CardImpl {
+public class GamePlan extends CardImpl {
 
-    public DaysUndoing(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{U}");
+    public GamePlan(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{U}");
 
-        // Each player shuffles their hand and graveyard into their library, then draws seven cards. If it's your turn, end the turn.
+        // Assist
+        this.addAbility(new AssistAbility());
+
+        // Each player shuffles their hand and graveyard into their library, then draws seven cards. Exile Game Plan.
         this.getSpellAbility().addEffect(new ShuffleHandGraveyardAllEffect());
         Effect effect = new DrawCardAllEffect(7);
         effect.setText(", then draws seven cards");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new EndTurnEffect(), MyTurnCondition.instance, "If it's your turn, end the turn"));
+        this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
     }
 
-    public DaysUndoing(final DaysUndoing card) {
+    public GamePlan(final GamePlan card) {
         super(card);
     }
 
     @Override
-    public DaysUndoing copy() {
-        return new DaysUndoing(this);
+    public GamePlan copy() {
+        return new GamePlan(this);
     }
 }

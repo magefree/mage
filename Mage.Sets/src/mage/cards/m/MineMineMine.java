@@ -34,6 +34,7 @@ import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.ShuffleHandGraveyardAllEffect;
 import mage.abilities.effects.common.continuous.CantCastMoreThanOneSpellEffect;
 import mage.abilities.effects.common.continuous.MaximumHandSizeControllerEffect;
 import mage.abilities.effects.common.continuous.MaximumHandSizeControllerEffect.HandSizeModification;
@@ -56,22 +57,22 @@ import mage.players.Player;
 public class MineMineMine extends CardImpl {
 
     public MineMineMine(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{G}{G}");
 
         // When Mine, Mine, Mine enters the battlefield, each player puts his or her library into his or her hand.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new MineMineMineDrawEffect()));
 
         // Players have no maximum hand size and don't lose the game for drawing from an empty library.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new MaximumHandSizeControllerEffect(Integer.MAX_VALUE, Duration.WhileOnBattlefield, HandSizeModification.SET, TargetController.ANY)
-                .setText("Players have no maximum hand size and don't lose the game for drawing from an empty library")));
+                        .setText("Players have no maximum hand size and don't lose the game for drawing from an empty library")));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MineMineMineDontLoseEffect()));
 
         // Each player can't cast more than one spell each turn.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantCastMoreThanOneSpellEffect(TargetController.ANY)));
-        
+
         // When Mine, Mine, Mine leaves the battlefield, each player shuffles his or her hand and graveyard into his or her library.
-        this.addAbility(new LeavesBattlefieldTriggeredAbility(new MineMineMineShuffleEffect(), false));
+        this.addAbility(new LeavesBattlefieldTriggeredAbility(new ShuffleHandGraveyardAllEffect(), false));
     }
 
     public MineMineMine(final MineMineMine card) {
@@ -133,7 +134,7 @@ class MineMineMineDontLoseEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         return true;
     }
-    
+
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.DRAW_CARD;
@@ -146,35 +147,5 @@ class MineMineMineDontLoseEffect extends ReplacementEffectImpl {
             return true;
         }
         return false;
-    }
-}
-
-class MineMineMineShuffleEffect extends OneShotEffect {
-
-    public MineMineMineShuffleEffect() {
-        super(Outcome.Neutral);
-        staticText = "each player shuffles his or her hand and graveyard into his or her library";
-    }
-
-    public MineMineMineShuffleEffect(final MineMineMineShuffleEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
-            Player player = game.getPlayer(playerId);
-            if (player != null) {
-                player.moveCards(player.getHand(), Zone.LIBRARY, source, game);
-                player.moveCards(player.getGraveyard(), Zone.LIBRARY, source, game);
-                player.shuffleLibrary(source, game);
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public MineMineMineShuffleEffect copy() {
-        return new MineMineMineShuffleEffect(this);
     }
 }

@@ -28,18 +28,13 @@
 package mage.cards.t;
 
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardAllEffect;
 import mage.abilities.effects.common.ExileSpellEffect;
+import mage.abilities.effects.common.ShuffleHandGraveyardAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.players.Player;
 
 /**
  *
@@ -48,10 +43,10 @@ import mage.players.Player;
 public class TimeReversal extends CardImpl {
 
     public TimeReversal(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{U}{U}");
 
         // Each player shuffles their hand and graveyard into their library, then draws seven cards
-        this.getSpellAbility().addEffect(new TimeReversalEffect());
+        this.getSpellAbility().addEffect(new ShuffleHandGraveyardAllEffect());
         Effect effect = new DrawCardAllEffect(7);
         effect.setText(", then draws seven cards");
         this.getSpellAbility().addEffect(effect);
@@ -66,36 +61,4 @@ public class TimeReversal extends CardImpl {
     public TimeReversal copy() {
         return new TimeReversal(this);
     }
-}
-
-class TimeReversalEffect extends OneShotEffect {
-
-    public TimeReversalEffect() {
-        super(Outcome.Neutral);
-        staticText = "Each player shuffles their hand and graveyard into their library, then draws seven cards";
-    }
-
-    public TimeReversalEffect(final TimeReversalEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-            Player player = game.getPlayer(playerId);
-            if (player != null) {
-                player.moveCards(player.getHand(), Zone.LIBRARY, source, game);
-                player.moveCards(player.getGraveyard(), Zone.LIBRARY, source, game);
-                player.shuffleLibrary(source, game);
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public TimeReversalEffect copy() {
-        return new TimeReversalEffect(this);
-    }
-
 }

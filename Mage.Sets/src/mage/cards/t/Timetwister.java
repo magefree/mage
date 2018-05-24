@@ -28,17 +28,12 @@
 package mage.cards.t;
 
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardAllEffect;
+import mage.abilities.effects.common.ShuffleHandGraveyardAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.players.Player;
 
 /**
  *
@@ -47,10 +42,10 @@ import mage.players.Player;
 public class Timetwister extends CardImpl {
 
     public Timetwister(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{U}");
 
         // Each player shuffles their hand and graveyard into their library, then draws seven cards.
-        this.getSpellAbility().addEffect(new TimetwisterEffect());
+        this.getSpellAbility().addEffect(new ShuffleHandGraveyardAllEffect());
         Effect effect = new DrawCardAllEffect(7);
         effect.setText(", then draws seven cards");
         this.getSpellAbility().addEffect(effect);
@@ -65,35 +60,4 @@ public class Timetwister extends CardImpl {
     public Timetwister copy() {
         return new Timetwister(this);
     }
-}
-
-class TimetwisterEffect extends OneShotEffect {
-
-    public TimetwisterEffect() {
-        super(Outcome.Neutral);
-        staticText = "Each player shuffles their hand and graveyard into their library";
-    }
-
-    public TimetwisterEffect(final TimetwisterEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
-            Player player = game.getPlayer(playerId);
-            if (player != null) {
-                player.moveCards(player.getHand(), Zone.LIBRARY, source, game);
-                player.moveCards(player.getGraveyard(), Zone.LIBRARY, source, game);
-                player.shuffleLibrary(source, game);
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public TimetwisterEffect copy() {
-        return new TimetwisterEffect(this);
-    }
-
 }
