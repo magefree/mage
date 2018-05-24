@@ -127,6 +127,7 @@ public class Battlebond extends ExpansionSet {
         cards.add(new SetCardInfo("Saltwater Stalwart", 39, Rarity.COMMON, mage.cards.s.SaltwaterStalwart.class));
         cards.add(new SetCardInfo("Sea of Clouds", 84, Rarity.RARE, mage.cards.s.SeaOfClouds.class));
         cards.add(new SetCardInfo("Seedborn Muse", 212, Rarity.RARE, mage.cards.s.SeedbornMuse.class));
+        cards.add(new SetCardInfo("Sentinel Tower", 79, Rarity.RARE, mage.cards.s.SentinelTower.class));
         cards.add(new SetCardInfo("Shoulder to Shoulder", 105, Rarity.COMMON, mage.cards.s.ShoulderToShoulder.class));
         cards.add(new SetCardInfo("Sickle Dancer", 50, Rarity.COMMON, mage.cards.s.SickleDancer.class));
         cards.add(new SetCardInfo("Skyshroud Claim", 213, Rarity.COMMON, mage.cards.s.SkyshroudClaim.class));
