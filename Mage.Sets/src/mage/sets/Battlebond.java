@@ -104,6 +104,7 @@ public class Battlebond extends ExpansionSet {
         cards.add(new SetCardInfo("Luxury Suite", 82, Rarity.RARE, mage.cards.l.LuxurySuite.class));
         cards.add(new SetCardInfo("Magus of the Candelabra", 206, Rarity.RARE, mage.cards.m.MagusOfTheCandelabra.class));
         cards.add(new SetCardInfo("Mangara of Corondor", 98, Rarity.RARE, mage.cards.m.MangaraOfCorondor.class));
+        cards.add(new SetCardInfo("Mind's Eye", 240, Rarity.RARE, mage.cards.m.MindsEye.class));
         cards.add(new SetCardInfo("Mindblade Render", 49, Rarity.RARE, mage.cards.m.MindbladeRender.class));
         cards.add(new SetCardInfo("Morphic Pool", 83, Rarity.RARE, mage.cards.m.MorphicPool.class));
         cards.add(new SetCardInfo("Mountain", 253, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
