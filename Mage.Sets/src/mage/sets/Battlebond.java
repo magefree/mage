@@ -58,6 +58,7 @@ public class Battlebond extends ExpansionSet {
         cards.add(new SetCardInfo("Arena Rector", 23, Rarity.MYTHIC, mage.cards.a.ArenaRector.class));
         cards.add(new SetCardInfo("Auger Spree", 218, Rarity.COMMON, mage.cards.a.AugerSpree.class));
         cards.add(new SetCardInfo("Beast Within", 190, Rarity.UNCOMMON, mage.cards.b.BeastWithin.class));
+        cards.add(new SetCardInfo("Blaring Captain", 14, Rarity.UNCOMMON, mage.cards.b.BlaringCaptain.class));
         cards.add(new SetCardInfo("Boldwyr Intimidator", 169, Rarity.UNCOMMON, mage.cards.b.BoldwyrIntimidator.class));
         cards.add(new SetCardInfo("Bountiful Promenade", 81, Rarity.RARE, mage.cards.b.BountifulPromenade.class));
         cards.add(new SetCardInfo("Bramble Sovereign", 65, Rarity.MYTHIC, mage.cards.b.BrambleSovereign.class));
