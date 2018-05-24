@@ -1,7 +1,7 @@
 Afflict|number|
 Annihilator|number|
 Ascend|new|
-Assist|instance|
+Assist|new|
 Basic landcycling|cost|
 Battle cry|new|
 Bestow|card, manaString|
