@@ -53,9 +53,11 @@ public class Battlebond extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
+        cards.add(new SetCardInfo("Angelic Chorus", 87, Rarity.RARE, mage.cards.a.AngelicChorus.class));
         cards.add(new SetCardInfo("Archfiend of Despair", 44, Rarity.MYTHIC, mage.cards.a.ArchfiendOfDespair.class));
         cards.add(new SetCardInfo("Arena Rector", 23, Rarity.MYTHIC, mage.cards.a.ArenaRector.class));
         cards.add(new SetCardInfo("Auger Spree", 218, Rarity.COMMON, mage.cards.a.AugerSpree.class));
+        cards.add(new SetCardInfo("Beast Within", 190, Rarity.UNCOMMON, mage.cards.b.BeastWithin.class));
         cards.add(new SetCardInfo("Boldwyr Intimidator", 169, Rarity.UNCOMMON, mage.cards.b.BoldwyrIntimidator.class));
         cards.add(new SetCardInfo("Bountiful Promenade", 81, Rarity.RARE, mage.cards.b.BountifulPromenade.class));
         cards.add(new SetCardInfo("Bramble Sovereign", 65, Rarity.MYTHIC, mage.cards.b.BrambleSovereign.class));
@@ -115,6 +117,7 @@ public class Battlebond extends ExpansionSet {
         cards.add(new SetCardInfo("Soulblade Corrupter", 17, Rarity.UNCOMMON, mage.cards.s.SoulbladeCorrupter.class));
         cards.add(new SetCardInfo("Soulblade Renewer", 18, Rarity.UNCOMMON, mage.cards.s.SoulbladeRenewer.class));
         cards.add(new SetCardInfo("Sower of Temptation", 131, Rarity.RARE, mage.cards.s.SowerOfTemptation.class));
+        cards.add(new SetCardInfo("Spell Snare", 132, Rarity.UNCOMMON, mage.cards.s.SpellSnare.class));
         cards.add(new SetCardInfo("Spellseeker", 41, Rarity.RARE, mage.cards.s.Spellseeker.class));
         cards.add(new SetCardInfo("Spire Garden", 85, Rarity.RARE, mage.cards.s.SpireGarden.class));
         cards.add(new SetCardInfo("Stunning Reversal", 51, Rarity.MYTHIC, mage.cards.s.StunningReversal.class));
