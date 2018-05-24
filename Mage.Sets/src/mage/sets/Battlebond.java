@@ -77,6 +77,7 @@ public class Battlebond extends ExpansionSet {
         cards.add(new SetCardInfo("Dwarven Lightsmith", 27, Rarity.COMMON, mage.cards.d.DwarvenLightsmith.class));
         cards.add(new SetCardInfo("Eager Construct", 234, Rarity.COMMON, mage.cards.e.EagerConstruct.class));
         cards.add(new SetCardInfo("Expedition Raptor", 92, Rarity.COMMON, mage.cards.e.ExpeditionRaptor.class));
+        cards.add(new SetCardInfo("Fan Favorite", 46, Rarity.COMMON, mage.cards.f.FanFavorite.class));
         cards.add(new SetCardInfo("Fertile Ground", 198, Rarity.COMMON, mage.cards.f.FertileGround.class));
         cards.add(new SetCardInfo("Forest", 254, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Generous Patron", 70, Rarity.RARE, mage.cards.g.GenerousPatron.class));
