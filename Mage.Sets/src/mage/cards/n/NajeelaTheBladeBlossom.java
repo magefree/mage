@@ -36,7 +36,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.AdditionalCombatPhaseEffect;
-import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.CreateTokenTargetEffect;
 import mage.abilities.effects.common.UntapAllEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.HasteAbility;
@@ -74,7 +74,7 @@ public class NajeelaTheBladeBlossom extends CardImpl {
 
         // Whenever a Warrior attacks, you may have its controller create a 1/1 white Warrior creature token that's tapped and attacking.
         this.addAbility(new AttacksAllTriggeredAbility(
-                new CreateTokenEffect(new WarriorToken(), new StaticValue(1), true, true)
+                new CreateTokenTargetEffect(new WarriorToken(), new StaticValue(1), true, true)
                         .setText("you may have its controller create a 1/1 white Warrior creature token that's tapped and attacking"),
                 true, filter, SetTargetPointer.PLAYER, false, true
         ));
