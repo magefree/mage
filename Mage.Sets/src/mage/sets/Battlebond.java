@@ -102,6 +102,7 @@ public class Battlebond extends ExpansionSet {
         cards.add(new SetCardInfo("Lore Weaver", 22, Rarity.UNCOMMON, mage.cards.l.LoreWeaver.class));
         cards.add(new SetCardInfo("Luxury Suite", 82, Rarity.RARE, mage.cards.l.LuxurySuite.class));
         cards.add(new SetCardInfo("Magus of the Candelabra", 206, Rarity.RARE, mage.cards.m.MagusOfTheCandelabra.class));
+        cards.add(new SetCardInfo("Mangara of Corondor", 98, Rarity.RARE, mage.cards.m.MangaraOfCorondor.class));
         cards.add(new SetCardInfo("Mindblade Render", 49, Rarity.RARE, mage.cards.m.MindbladeRender.class));
         cards.add(new SetCardInfo("Morphic Pool", 83, Rarity.RARE, mage.cards.m.MorphicPool.class));
         cards.add(new SetCardInfo("Mountain", 253, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
@@ -117,6 +118,7 @@ public class Battlebond extends ExpansionSet {
         cards.add(new SetCardInfo("Regna, the Redeemer", 3, Rarity.RARE, mage.cards.r.RegnaTheRedeemer.class));
         cards.add(new SetCardInfo("Rowan Kenrith", 2, Rarity.MYTHIC, mage.cards.r.RowanKenrith.class));
         cards.add(new SetCardInfo("Rushblade Commander", 77, Rarity.UNCOMMON, mage.cards.r.RushbladeCommander.class));
+        cards.add(new SetCardInfo("Saddleback Lagac", 211, Rarity.COMMON, mage.cards.s.SaddlebackLagac.class));
         cards.add(new SetCardInfo("Saltwater Stalwart", 39, Rarity.COMMON, mage.cards.s.SaltwaterStalwart.class));
         cards.add(new SetCardInfo("Sea of Clouds", 84, Rarity.RARE, mage.cards.s.SeaOfClouds.class));
         cards.add(new SetCardInfo("Seedborn Muse", 212, Rarity.RARE, mage.cards.s.SeedbornMuse.class));
