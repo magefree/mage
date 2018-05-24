@@ -79,6 +79,7 @@ public class Battlebond extends ExpansionSet {
         cards.add(new SetCardInfo("Inner Demon", 48, Rarity.UNCOMMON, mage.cards.i.InnerDemon.class));
         cards.add(new SetCardInfo("Island", 251, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jubilant Mascot", 28, Rarity.UNCOMMON, mage.cards.j.JubilantMascot.class));
+        cards.add(new SetCardInfo("Jungle Wayfinder", 72, Rarity.COMMON, mage.cards.j.JungleWayfinder.class));
         cards.add(new SetCardInfo("Khorvath Brightflame", 9, Rarity.RARE, mage.cards.k.KhorvathBrightflame.class));
         cards.add(new SetCardInfo("Kor Spiritdancer", 93, Rarity.RARE, mage.cards.k.KorSpiritdancer.class));
         cards.add(new SetCardInfo("Kraken Hatchling", 121, Rarity.COMMON, mage.cards.k.KrakenHatchling.class));
