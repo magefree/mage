@@ -34,6 +34,7 @@
 package mage.client.dialog;
 
 import java.awt.Dimension;
+import java.awt.Rectangle;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -54,6 +55,7 @@ import mage.client.util.GUISizeHelper;
 import mage.client.util.audio.AudioManager;
 import mage.client.util.gui.TableUtil;
 import mage.client.util.gui.countryBox.CountryCellRenderer;
+import mage.client.util.gui.GuiDisplayUtil;
 import mage.players.PlayerType;
 import mage.remote.Session;
 import mage.view.SeatView;
@@ -61,6 +63,7 @@ import mage.view.TableView;
 
 import static mage.client.dialog.PreferencesDialog.KEY_TABLE_WAITING_COLUMNS_ORDER;
 import static mage.client.dialog.PreferencesDialog.KEY_TABLE_WAITING_COLUMNS_WIDTH;
+import static mage.client.dialog.PreferencesDialog.KEY_TABLES_DIVIDER_LOCATION_4;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -68,7 +71,7 @@ import static mage.client.dialog.PreferencesDialog.KEY_TABLE_WAITING_COLUMNS_WID
 public class TableWaitingDialog extends MageDialog {
 
     private static final Logger LOGGER = Logger.getLogger(TableWaitingDialog.class);
-    private static final int[] DEFAULT_COLUMNS_WIDTH = {20, 50, 100, 100, 100};
+    private static final int[] DEFAULT_COLUMNS_WIDTH = {20, 50, 100, 100, 100, 100};
 
     private UUID tableId;
     private UUID roomId;
@@ -92,12 +95,11 @@ public class TableWaitingDialog extends MageDialog {
         }
 
         setGUISize();
-
-        chatPanel.useExtendedView(ChatPanelBasic.VIEW_MODE.NONE);
         jTableSeats.createDefaultColumnsFromModel();
-        TableUtil.setColumnWidthAndOrder(jTableSeats, DEFAULT_COLUMNS_WIDTH, KEY_TABLE_WAITING_COLUMNS_WIDTH, KEY_TABLE_WAITING_COLUMNS_ORDER);
+        jTableSeats.setAutoCreateColumnsFromModel(false);
         jTableSeats.setDefaultRenderer(Icon.class, new CountryCellRenderer());
-
+        TableUtil.setColumnWidthAndOrder(jTableSeats, DEFAULT_COLUMNS_WIDTH, KEY_TABLE_WAITING_COLUMNS_WIDTH, KEY_TABLE_WAITING_COLUMNS_ORDER);
+        chatPanel.useExtendedView(ChatPanelBasic.VIEW_MODE.NONE);
         MageFrame.getUI().addButton(MageComponents.TABLE_WAITING_START_BUTTON, btnStart);
     }
 
@@ -151,10 +153,15 @@ public class TableWaitingDialog extends MageDialog {
     }
 
     public void showDialog(UUID roomId, UUID tableId, boolean isTournament) {
+        Rectangle currentBounds = MageFrame.getDesktop().getBounds();
+        Optional<UUID> chatId = SessionHandler.getTableChatId(tableId);
+        String tournamentChatDivider = PreferencesDialog.getCachedValue(KEY_TABLES_DIVIDER_LOCATION_4, null);
+        updateTask = new UpdateSeatsTask(SessionHandler.getSession(), roomId, tableId, this);
+
         this.roomId = roomId;
         this.tableId = tableId;
         this.isTournament = isTournament;
-        updateTask = new UpdateSeatsTask(SessionHandler.getSession(), roomId, tableId, this);
+
         if (SessionHandler.isTableOwner(roomId, tableId)) {
             this.btnStart.setVisible(true);
             this.btnMoveDown.setVisible(true);
@@ -164,13 +171,15 @@ public class TableWaitingDialog extends MageDialog {
             this.btnMoveDown.setVisible(false);
             this.btnMoveUp.setVisible(false);
         }
-        Optional<UUID> chatId = SessionHandler.getTableChatId(tableId);
+
         if (chatId.isPresent()) {
             this.chatPanel.connect(chatId.get());
             updateTask.execute();
             this.setModal(false);
             this.setLocation(100, 100);
             this.setVisible(true);
+
+            GuiDisplayUtil.restoreDividerLocations(currentBounds, tournamentChatDivider, jSplitPane1);
         } else {
             closeDialog();
         }
@@ -185,6 +194,8 @@ public class TableWaitingDialog extends MageDialog {
         MageFrame.getUI().removeButton(MageComponents.TABLE_WAITING_START_BUTTON);
         this.removeDialog();
         TableUtil.saveColumnWidthAndOrderToPrefs(jTableSeats, KEY_TABLE_WAITING_COLUMNS_WIDTH, KEY_TABLE_WAITING_COLUMNS_ORDER);
+        GuiDisplayUtil.saveCurrentBoundsToPrefs();
+        GuiDisplayUtil.saveDividerLocationToPrefs(KEY_TABLES_DIVIDER_LOCATION_4, this.jSplitPane1.getDividerLocation());
     }
 
     /**

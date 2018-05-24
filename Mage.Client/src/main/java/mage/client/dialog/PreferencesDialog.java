@@ -203,6 +203,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_TABLES_DIVIDER_LOCATION_1 = "tablePanelDividerLocation1";
     public static final String KEY_TABLES_DIVIDER_LOCATION_2 = "tablePanelDividerLocation2";
     public static final String KEY_TABLES_DIVIDER_LOCATION_3 = "tablePanelDividerLocation3";
+    public static final String KEY_TABLES_DIVIDER_LOCATION_4 = "tablePanelDividerLocation4";
 
     // Positions of deck editor divider bars
     public static final String KEY_EDITOR_HORIZONTAL_DIVIDER_LOCATION = "editorHorizontalDividerLocation";
