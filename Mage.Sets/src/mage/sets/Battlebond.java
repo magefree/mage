@@ -93,6 +93,7 @@ public class Battlebond extends ExpansionSet {
         cards.add(new SetCardInfo("Morphic Pool", 83, Rarity.RARE, mage.cards.m.MorphicPool.class));
         cards.add(new SetCardInfo("Mountain", 253, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nirkana Revenant", 150, Rarity.MYTHIC, mage.cards.n.NirkanaRevenant.class));
+        cards.add(new SetCardInfo("Okaun, Eye of Chaos", 6, Rarity.RARE, mage.cards.o.OkaunEyeOfChaos.class));
         cards.add(new SetCardInfo("Peregrine Drake", 128, Rarity.UNCOMMON, mage.cards.p.PeregrineDrake.class));
         cards.add(new SetCardInfo("Pir's Whim", 73, Rarity.RARE, mage.cards.p.PirsWhim.class));
         cards.add(new SetCardInfo("Pir, Imaginative Rascal", 11, Rarity.RARE, mage.cards.p.PirImaginativeRascal.class));
