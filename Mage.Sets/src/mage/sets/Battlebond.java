@@ -74,6 +74,7 @@ public class Battlebond extends ExpansionSet {
         cards.add(new SetCardInfo("Doomed Dissenter", 142, Rarity.COMMON, mage.cards.d.DoomedDissenter.class));
         cards.add(new SetCardInfo("Doomed Traveler", 91, Rarity.COMMON, mage.cards.d.DoomedTraveler.class));
         cards.add(new SetCardInfo("Doubling Season", 195, Rarity.MYTHIC, mage.cards.d.DoublingSeason.class));
+        cards.add(new SetCardInfo("Dwarven Lightsmith", 27, Rarity.COMMON, mage.cards.d.DwarvenLightsmith.class));
         cards.add(new SetCardInfo("Eager Construct", 234, Rarity.COMMON, mage.cards.e.EagerConstruct.class));
         cards.add(new SetCardInfo("Expedition Raptor", 92, Rarity.COMMON, mage.cards.e.ExpeditionRaptor.class));
         cards.add(new SetCardInfo("Fertile Ground", 198, Rarity.COMMON, mage.cards.f.FertileGround.class));
