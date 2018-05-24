@@ -63,6 +63,7 @@ public class Battlebond extends ExpansionSet {
         cards.add(new SetCardInfo("Chain Lightning", 171, Rarity.UNCOMMON, mage.cards.c.ChainLightning.class));
         cards.add(new SetCardInfo("Chakram Retriever", 15, Rarity.UNCOMMON, mage.cards.c.ChakramRetriever.class));
         cards.add(new SetCardInfo("Chakram Slinger", 16, Rarity.UNCOMMON, mage.cards.c.ChakramSlinger.class));
+        cards.add(new SetCardInfo("Charging Binox", 66, Rarity.COMMON, mage.cards.c.ChargingBinox.class));
         cards.add(new SetCardInfo("Cheering Fanatic", 58, Rarity.UNCOMMON, mage.cards.c.CheeringFanatic.class));
         cards.add(new SetCardInfo("Daggerdrome Imp", 140, Rarity.COMMON, mage.cards.d.DaggerdromeImp.class));
         cards.add(new SetCardInfo("Diabolic Intent", 141, Rarity.RARE, mage.cards.d.DiabolicIntent.class));
