@@ -28,44 +28,35 @@
 package mage.cards.p;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.ExileSourceCost;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.ExileAllEffect;
+import mage.abilities.keyword.AssistAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
 
 /**
  *
- * @author emerald000
+ * @author TheElk801
  */
-public class PerilousVault extends CardImpl {
+public class PlayOfTheGame extends CardImpl {
 
-    public PerilousVault(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
+    public PlayOfTheGame(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{6}{W}{W}");
 
-        // {5}, {T}, Exile Perilous Vault: Exile all nonland permanents.
-        Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
-                new ExileAllEffect(StaticFilters.FILTER_PERMANENTS_NON_LAND),
-                new GenericManaCost(5)
-        );
-        ability.addCost(new TapSourceCost());
-        ability.addCost(new ExileSourceCost());
-        this.addAbility(ability);
+        // Assist
+        this.addAbility(new AssistAbility());
+
+        // Exile all nonland permanents.
+        this.getSpellAbility().addEffect(new ExileAllEffect(StaticFilters.FILTER_PERMANENTS_NON_LAND));
     }
 
-    public PerilousVault(final PerilousVault card) {
+    public PlayOfTheGame(final PlayOfTheGame card) {
         super(card);
     }
 
     @Override
-    public PerilousVault copy() {
-        return new PerilousVault(this);
+    public PlayOfTheGame copy() {
+        return new PlayOfTheGame(this);
     }
 }

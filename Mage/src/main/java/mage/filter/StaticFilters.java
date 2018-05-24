@@ -357,6 +357,12 @@ public final class StaticFilters {
         FILTER_PERMANENT_NON_LAND.setLockedFilter(true);
     }
 
+    public static final FilterPermanent FILTER_PERMANENTS_NON_LAND = new FilterNonlandPermanent("nonland permanents");
+
+    static {
+        FILTER_PERMANENTS_NON_LAND.setLockedFilter(true);
+    }
+
     public static final FilterCreatureSpell FILTER_SPELL_A_CREATURE = new FilterCreatureSpell("a creature spell");
 
     static {
