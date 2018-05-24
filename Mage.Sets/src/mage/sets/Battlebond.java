@@ -84,6 +84,7 @@ public class Battlebond extends ExpansionSet {
         cards.add(new SetCardInfo("Gang Up", 47, Rarity.UNCOMMON, mage.cards.g.GangUp.class));
         cards.add(new SetCardInfo("Generous Patron", 70, Rarity.RARE, mage.cards.g.GenerousPatron.class));
         cards.add(new SetCardInfo("Greater Good", 201, Rarity.RARE, mage.cards.g.GreaterGood.class));
+        cards.add(new SetCardInfo("Huddle Up", 36, Rarity.COMMON, mage.cards.h.HuddleUp.class));
         cards.add(new SetCardInfo("Impetuous Protege", 19, Rarity.UNCOMMON, mage.cards.i.ImpetuousProtege.class));
         cards.add(new SetCardInfo("Impulse", 119, Rarity.COMMON, mage.cards.i.Impulse.class));
         cards.add(new SetCardInfo("Inner Demon", 48, Rarity.UNCOMMON, mage.cards.i.InnerDemon.class));
