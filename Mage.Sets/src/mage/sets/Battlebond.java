@@ -107,6 +107,7 @@ public class Battlebond extends ExpansionSet {
         cards.add(new SetCardInfo("Mindblade Render", 49, Rarity.RARE, mage.cards.m.MindbladeRender.class));
         cards.add(new SetCardInfo("Morphic Pool", 83, Rarity.RARE, mage.cards.m.MorphicPool.class));
         cards.add(new SetCardInfo("Mountain", 253, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mystic Confluence", 122, Rarity.RARE, mage.cards.m.MysticConfluence.class));
         cards.add(new SetCardInfo("Nirkana Revenant", 150, Rarity.MYTHIC, mage.cards.n.NirkanaRevenant.class));
         cards.add(new SetCardInfo("Okaun, Eye of Chaos", 6, Rarity.RARE, mage.cards.o.OkaunEyeOfChaos.class));
         cards.add(new SetCardInfo("Out of Bounds", 38, Rarity.COMMON, mage.cards.o.OutOfBounds.class));
@@ -138,6 +139,7 @@ public class Battlebond extends ExpansionSet {
         cards.add(new SetCardInfo("Swamp", 252, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swords to Plowshares", 110, Rarity.UNCOMMON, mage.cards.s.SwordsToPlowshares.class));
         cards.add(new SetCardInfo("Sylvia Brightspear", 10, Rarity.RARE, mage.cards.s.SylviaBrightspear.class));
+        cards.add(new SetCardInfo("Tandem Tactics", 112, Rarity.COMMON, mage.cards.t.TandemTactics.class));
         cards.add(new SetCardInfo("The Crowd Goes Wild", 68, Rarity.UNCOMMON, mage.cards.t.TheCrowdGoesWild.class));
         cards.add(new SetCardInfo("Thrasher Brute", 52, Rarity.UNCOMMON, mage.cards.t.ThrasherBrute.class));
         cards.add(new SetCardInfo("Tidespout Tyrant", 134, Rarity.RARE, mage.cards.t.TidespoutTyrant.class));
