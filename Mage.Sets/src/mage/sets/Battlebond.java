@@ -108,6 +108,7 @@ public class Battlebond extends ExpansionSet {
         cards.add(new SetCardInfo("Morphic Pool", 83, Rarity.RARE, mage.cards.m.MorphicPool.class));
         cards.add(new SetCardInfo("Mountain", 253, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mystic Confluence", 122, Rarity.RARE, mage.cards.m.MysticConfluence.class));
+        cards.add(new SetCardInfo("Najeela, the Blade-Blossom", 62, Rarity.MYTHIC, mage.cards.n.NajeelaTheBladeBlossom.class));
         cards.add(new SetCardInfo("Nirkana Revenant", 150, Rarity.MYTHIC, mage.cards.n.NirkanaRevenant.class));
         cards.add(new SetCardInfo("Okaun, Eye of Chaos", 6, Rarity.RARE, mage.cards.o.OkaunEyeOfChaos.class));
         cards.add(new SetCardInfo("Out of Bounds", 38, Rarity.COMMON, mage.cards.o.OutOfBounds.class));
