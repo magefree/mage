@@ -28,8 +28,12 @@
 package mage.cards.s;
 
 import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
-import mage.abilities.effects.keyword.ScryEffect;
+import mage.constants.SubType;
+import mage.abilities.keyword.AssistAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -39,9 +43,9 @@ import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author LevelX2
+ * @author TheElk801
  */
-public class SelectForInspection extends CardImpl {
+public class SpellweaverDuo extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creature");
 
@@ -49,22 +53,29 @@ public class SelectForInspection extends CardImpl {
         filter.add(new TappedPredicate());
     }
 
-    public SelectForInspection(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}");
+    public SpellweaverDuo(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{U}");
 
-        // Return target tapped creature to its owner's hand.  Scry 1.
-        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
-        this.getSpellAbility().addEffect(new ScryEffect(1));
+        this.subtype.add(SubType.HUMAN);
+        this.subtype.add(SubType.WIZARD);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
 
+        // Assist
+        this.addAbility(new AssistAbility());
+
+        // When Spellweaver Duo enters the battlefield, you may return target tapped creature to its owner's hand.
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), true);
+        ability.addTarget(new TargetCreaturePermanent(filter));
+        this.addAbility(ability);
     }
 
-    public SelectForInspection(final SelectForInspection card) {
+    public SpellweaverDuo(final SpellweaverDuo card) {
         super(card);
     }
 
     @Override
-    public SelectForInspection copy() {
-        return new SelectForInspection(this);
+    public SpellweaverDuo copy() {
+        return new SpellweaverDuo(this);
     }
 }
