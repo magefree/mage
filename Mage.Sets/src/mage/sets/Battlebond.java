@@ -81,6 +81,7 @@ public class Battlebond extends ExpansionSet {
         cards.add(new SetCardInfo("Bountiful Promenade", 81, Rarity.RARE, mage.cards.b.BountifulPromenade.class));
         cards.add(new SetCardInfo("Bramble Sovereign", 65, Rarity.MYTHIC, mage.cards.b.BrambleSovereign.class));
         cards.add(new SetCardInfo("Brightling", 25, Rarity.MYTHIC, mage.cards.b.Brightling.class));
+        cards.add(new SetCardInfo("Bring Down", 26, Rarity.UNCOMMON, mage.cards.b.BringDown.class));
         cards.add(new SetCardInfo("Call to Heel", 114, Rarity.COMMON, mage.cards.c.CallToHeel.class));
         cards.add(new SetCardInfo("Canopy Spider", 191, Rarity.COMMON, mage.cards.c.CanopySpider.class));
         cards.add(new SetCardInfo("Centaur Healer", 219, Rarity.COMMON, mage.cards.c.CentaurHealer.class));
