@@ -100,6 +100,7 @@ public class Battlebond extends ExpansionSet {
         cards.add(new SetCardInfo("Culling Dais", 233, Rarity.UNCOMMON, mage.cards.c.CullingDais.class));
         cards.add(new SetCardInfo("Daggerback Basilisk", 194, Rarity.COMMON, mage.cards.d.DaggerbackBasilisk.class));
         cards.add(new SetCardInfo("Daggerdrome Imp", 140, Rarity.COMMON, mage.cards.d.DaggerdromeImp.class));
+        cards.add(new SetCardInfo("Decorated Champion", 69, Rarity.UNCOMMON, mage.cards.d.DecoratedChampion.class));
         cards.add(new SetCardInfo("Diabolic Intent", 141, Rarity.RARE, mage.cards.d.DiabolicIntent.class));
         cards.add(new SetCardInfo("Dinrova Horror", 220, Rarity.UNCOMMON, mage.cards.d.DinrovaHorror.class));
         cards.add(new SetCardInfo("Doomed Dissenter", 142, Rarity.COMMON, mage.cards.d.DoomedDissenter.class));
