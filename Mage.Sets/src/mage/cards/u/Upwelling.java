@@ -51,8 +51,7 @@ import mage.players.Player;
 public class Upwelling extends CardImpl {
 
     public Upwelling(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{G}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");
 
         // Mana pools don't empty as steps and phases end.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new UpwellingRuleEffect()));
@@ -73,7 +72,7 @@ class UpwellingRuleEffect extends ContinuousEffectImpl {
 
     public UpwellingRuleEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "Mana pools don't empty as steps and phases end";
+        staticText = "Players don’t lose unspent mana as steps and phases end";
     }
 
     public UpwellingRuleEffect(final UpwellingRuleEffect effect) {
@@ -89,9 +88,9 @@ class UpwellingRuleEffect extends ContinuousEffectImpl {
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            for (UUID playerId: game.getState().getPlayersInRange(controller.getId(), game)) {
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
-                if (player != null){
+                if (player != null) {
                     ManaPool pool = player.getManaPool();
                     pool.addDoNotEmptyManaType(ManaType.WHITE);
                     pool.addDoNotEmptyManaType(ManaType.GREEN);
@@ -99,11 +98,11 @@ class UpwellingRuleEffect extends ContinuousEffectImpl {
                     pool.addDoNotEmptyManaType(ManaType.RED);
                     pool.addDoNotEmptyManaType(ManaType.BLACK);
                     pool.addDoNotEmptyManaType(ManaType.COLORLESS);
-                }                
+                }
             }
             return true;
         }
-        return false;    
+        return false;
     }
 
     @Override

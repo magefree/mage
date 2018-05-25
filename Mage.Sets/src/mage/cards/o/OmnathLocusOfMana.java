@@ -48,7 +48,7 @@ import mage.players.Player;
 public class OmnathLocusOfMana extends CardImpl {
 
     public OmnathLocusOfMana(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELEMENTAL);
 
@@ -78,7 +78,7 @@ class OmnathRuleEffect extends ContinuousEffectImpl {
 
     public OmnathRuleEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "Green mana doesn't empty from your mana pool as steps and phases end";
+        staticText = "You don’t lose unspent green mana as steps and phases end";
     }
 
     public OmnathRuleEffect(final OmnathRuleEffect effect) {
@@ -93,10 +93,11 @@ class OmnathRuleEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null){
+        if (player != null) {
             player.getManaPool().addDoNotEmptyManaType(ManaType.GREEN);
         }
-        return false;    }
+        return false;
+    }
 
     @Override
     public boolean apply(Game game, Ability source) {
