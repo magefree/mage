@@ -279,6 +279,7 @@ public class Battlebond extends ExpansionSet {
         cards.add(new SetCardInfo("Tyrant's Machine", 248, Rarity.COMMON, mage.cards.t.TyrantsMachine.class));
         cards.add(new SetCardInfo("Unflinching Courage", 230, Rarity.UNCOMMON, mage.cards.u.UnflinchingCourage.class));
         cards.add(new SetCardInfo("Urborg Drake", 231, Rarity.COMMON, mage.cards.u.UrborgDrake.class));
+        cards.add(new SetCardInfo("Vampire Charmseeker", 78, Rarity.UNCOMMON, mage.cards.v.VampireCharmseeker.class));
         cards.add(new SetCardInfo("Veteran Explorer", 214, Rarity.UNCOMMON, mage.cards.v.VeteranExplorer.class));
         cards.add(new SetCardInfo("Vigor", 215, Rarity.RARE, mage.cards.v.Vigor.class));
         cards.add(new SetCardInfo("Virtus the Veiled", 7, Rarity.RARE, mage.cards.v.VirtusTheVeiled.class));
