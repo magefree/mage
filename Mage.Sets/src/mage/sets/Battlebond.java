@@ -272,6 +272,7 @@ public class Battlebond extends ExpansionSet {
         cards.add(new SetCardInfo("Thrasher Brute", 52, Rarity.UNCOMMON, mage.cards.t.ThrasherBrute.class));
         cards.add(new SetCardInfo("Thunder Strike", 185, Rarity.COMMON, mage.cards.t.ThunderStrike.class));
         cards.add(new SetCardInfo("Tidespout Tyrant", 134, Rarity.RARE, mage.cards.t.TidespoutTyrant.class));
+        cards.add(new SetCardInfo("Together Forever", 32, Rarity.RARE, mage.cards.t.TogetherForever.class));
         cards.add(new SetCardInfo("Toothy, Imaginary Friend", 12, Rarity.RARE, mage.cards.t.ToothyImaginaryFriend.class));
         cards.add(new SetCardInfo("Totally Lost", 135, Rarity.COMMON, mage.cards.t.TotallyLost.class));
         cards.add(new SetCardInfo("True-Name Nemesis", 136, Rarity.MYTHIC, mage.cards.t.TrueNameNemesis.class));
