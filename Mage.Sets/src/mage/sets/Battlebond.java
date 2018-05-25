@@ -171,6 +171,7 @@ public class Battlebond extends ExpansionSet {
         cards.add(new SetCardInfo("Lore Weaver", 22, Rarity.UNCOMMON, mage.cards.l.LoreWeaver.class));
         cards.add(new SetCardInfo("Loyal Pegasus", 97, Rarity.UNCOMMON, mage.cards.l.LoyalPegasus.class));
         cards.add(new SetCardInfo("Luxury Suite", 82, Rarity.RARE, mage.cards.l.LuxurySuite.class));
+        cards.add(new SetCardInfo("Magma Hellion", 61, Rarity.COMMON, mage.cards.m.MagmaHellion.class));
         cards.add(new SetCardInfo("Magmatic Force", 181, Rarity.RARE, mage.cards.m.MagmaticForce.class));
         cards.add(new SetCardInfo("Magus of the Candelabra", 206, Rarity.RARE, mage.cards.m.MagusOfTheCandelabra.class));
         cards.add(new SetCardInfo("Mangara of Corondor", 98, Rarity.RARE, mage.cards.m.MangaraOfCorondor.class));
