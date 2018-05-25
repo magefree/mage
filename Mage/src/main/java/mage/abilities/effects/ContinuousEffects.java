@@ -347,7 +347,8 @@ public class ContinuousEffects implements Serializable {
         }
         // boolean checkLKI = event.getType().equals(EventType.ZONE_CHANGE) || event.getType().equals(EventType.DESTROYED_PERMANENT);
         //get all applicable transient Replacement effects
-        for (ReplacementEffect effect : replacementEffects) {
+        for (Iterator<ReplacementEffect> iterator = replacementEffects.iterator(); iterator.hasNext();) {
+            ReplacementEffect effect = iterator.next();
             if (!effect.checksEventType(event, game)) {
                 continue;
             }
@@ -378,7 +379,8 @@ public class ContinuousEffects implements Serializable {
                 replaceEffects.put(effect, applicableAbilities);
             }
         }
-        for (PreventionEffect effect : preventionEffects) {
+        for (Iterator<PreventionEffect> iterator = preventionEffects.iterator(); iterator.hasNext();) {
+            PreventionEffect effect = iterator.next();
             if (!effect.checksEventType(event, game)) {
                 continue;
             }
@@ -932,8 +934,7 @@ public class ContinuousEffects implements Serializable {
             System.out.println(game.getTurn() + ", " + game.getPhase() + ": " + "need apply " + layer.stream()
                     .map((eff) -> {return eff.getClass().getName().replaceAll(".+\\.(.+)", "$1");})
                     .collect(Collectors.joining(", ")));
-            */
-
+             */
             for (ContinuousEffect effect : layer) {
                 if (activeLayerEffects.contains(effect) && !appliedEffects.contains(effect.getId())) { // Effect does still exist and was not applied yet
                     Set<UUID> dependentTo = effect.isDependentTo(layer);
