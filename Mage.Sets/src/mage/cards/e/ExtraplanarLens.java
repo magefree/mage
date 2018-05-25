@@ -74,7 +74,7 @@ public class ExtraplanarLens extends CardImpl {
         ability.addTarget(new TargetLandPermanent(filter));
         this.addAbility(ability);
 
-        // Whenever a land with the same name as the exiled card is tapped for mana, its controller adds one mana to their mana pool of any type that land produced.
+        // Whenever a land with the same name as the exiled card is tapped for mana, its controller adds one mana of any type that land produced.
         this.addAbility(new ExtraplanarLensTriggeredAbility());
 
     }

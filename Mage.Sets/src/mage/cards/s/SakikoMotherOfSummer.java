@@ -53,7 +53,7 @@ import mage.target.targetpointer.FixedTarget;
 public class SakikoMotherOfSummer extends CardImpl {
 
     public SakikoMotherOfSummer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.SNAKE);
         this.subtype.add(SubType.SHAMAN);
@@ -63,7 +63,7 @@ public class SakikoMotherOfSummer extends CardImpl {
 
         // Whenever a creature you control deals combat damage to a player, add that much {G}. Until end of turn, you don’t lose this mana as steps and phases end.
         this.addAbility(new SakikoMotherOfSummerTriggeredAbility());
-        
+
     }
 
     public SakikoMotherOfSummer(final SakikoMotherOfSummer card) {
@@ -104,7 +104,7 @@ class SakikoMotherOfSummerTriggeredAbility extends TriggeredAbilityImpl {
                 this.getEffects().clear();
                 Effect effect = new AddManaToManaPoolTargetControllerEffect(Mana.GreenMana(event.getAmount()), "that player", true);
                 effect.setTargetPointer(new FixedTarget(creature.getControllerId()));
-                effect.setText("add that much {G}. Until end of turn, this mana doesn't empty from your mana pool as steps and phases end");        
+                effect.setText("add that much {G}. Until end of turn, you don’t lose this mana as steps and phases end");
                 this.addEffect(effect);
                 return true;
             }

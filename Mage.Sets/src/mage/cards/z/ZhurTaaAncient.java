@@ -51,7 +51,7 @@ public class ZhurTaaAncient extends CardImpl {
         this.power = new MageInt(7);
         this.toughness = new MageInt(5);
 
-        // Whenever a player taps a land for mana, that player adds one mana to their mana pool of any type that land produced.
+        // Whenever a player taps a land for mana, that player adds one mana of any type that land produced.
         this.addAbility(new TapForManaAllTriggeredManaAbility(
                 new AddManaOfAnyTypeProducedEffect(),
                 new FilterLandPermanent("a player taps a land"),

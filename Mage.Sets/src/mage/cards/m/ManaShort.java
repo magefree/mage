@@ -45,7 +45,7 @@ import mage.target.TargetPlayer;
 public class ManaShort extends CardImpl {
 
     public ManaShort(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}");
 
         // Tap all lands target player controls and empty their mana pool.
         this.getSpellAbility().addEffect(new ManaShortEffect());
@@ -66,7 +66,7 @@ class ManaShortEffect extends TapAllTargetPlayerControlsEffect {
 
     public ManaShortEffect() {
         super(new FilterLandPermanent());
-        staticText = "Tap all lands target player controls and empty their mana pool";
+        staticText = "Tap all lands target player controls and that player loses all unspent mana";
     }
 
     public ManaShortEffect(final ManaShortEffect effect) {
@@ -81,7 +81,7 @@ class ManaShortEffect extends TapAllTargetPlayerControlsEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
-        if(targetPlayer != null) {
+        if (targetPlayer != null) {
             super.apply(game, source);
             targetPlayer.getManaPool().emptyPool(game);
             return true;

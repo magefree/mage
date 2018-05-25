@@ -73,7 +73,7 @@ public class TraceOfAbundance extends CardImpl {
         // Enchanted land has shroud.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ShroudAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield, rule)));
 
-        // Whenever enchanted land is tapped for mana, its controller adds one mana of any color to their mana pool.
+        // Whenever enchanted land is tapped for mana, its controller adds one mana of any color.
         this.addAbility(new TraceOfAbundanceTriggeredAbility());
     }
 
@@ -115,6 +115,6 @@ class TraceOfAbundanceTriggeredAbility extends TriggeredManaAbility {
 
     @Override
     public String getRule() {
-        return "Whenever enchanted land is tapped for mana, its controller adds one mana of any color to their mana pool.";
+        return "Whenever enchanted land is tapped for mana, its controller adds one mana of any color.";
     }
 }

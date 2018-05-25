@@ -54,9 +54,8 @@ import mage.target.targetpointer.FixedTarget;
 public class FertileGround extends CardImpl {
 
     public FertileGround(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
         this.subtype.add(SubType.AURA);
-
 
         // Enchant land
         TargetPermanent auraTarget = new TargetLandPermanent();
@@ -64,7 +63,7 @@ public class FertileGround extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        // Whenever enchanted land is tapped for mana, its controller adds one mana of any color to their mana pool.
+        // Whenever enchanted land is tapped for mana, its controller adds one mana of any color.
         this.addAbility(new FertileGroundTriggeredAbility());
     }
 
@@ -80,7 +79,6 @@ public class FertileGround extends CardImpl {
 
 class FertileGroundTriggeredAbility extends TriggeredManaAbility {
 
-   
     public FertileGroundTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddManaAnyColorAttachedControllerEffect());
     }
@@ -96,14 +94,14 @@ class FertileGroundTriggeredAbility extends TriggeredManaAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-            Permanent enchantment = game.getPermanent(this.getSourceId());
-            if (enchantment != null && event.getSourceId().equals(enchantment.getAttachedTo())) {
-                Permanent enchanted = game.getPermanent(enchantment.getAttachedTo());
-                if (enchanted != null) {
-                    getEffects().get(0).setTargetPointer(new FixedTarget(enchanted.getControllerId()));
-                    return true;
-                }
+        Permanent enchantment = game.getPermanent(this.getSourceId());
+        if (enchantment != null && event.getSourceId().equals(enchantment.getAttachedTo())) {
+            Permanent enchanted = game.getPermanent(enchantment.getAttachedTo());
+            if (enchanted != null) {
+                getEffects().get(0).setTargetPointer(new FixedTarget(enchanted.getControllerId()));
+                return true;
             }
+        }
         return false;
     }
 
@@ -114,6 +112,6 @@ class FertileGroundTriggeredAbility extends TriggeredManaAbility {
 
     @Override
     public String getRule() {
-        return "Whenever enchanted land is tapped for mana, its controller adds one mana of any color to their mana pool";
+        return "Whenever enchanted land is tapped for mana, its controller adds one mana of any color";
     }
 }

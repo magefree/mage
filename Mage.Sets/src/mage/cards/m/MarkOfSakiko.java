@@ -59,9 +59,8 @@ import mage.target.targetpointer.FixedTarget;
 public class MarkOfSakiko extends CardImpl {
 
     public MarkOfSakiko(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
         this.subtype.add(SubType.AURA);
-
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
@@ -69,12 +68,12 @@ public class MarkOfSakiko extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        
+
         // Enchanted creature has "Whenever this creature deals combat damage to a player, add that much {G}. Until end of turn, you don’t lose this mana as steps and phases end."
-        Effect effect  = new GainAbilityAttachedEffect(new MarkOfSakikoTriggeredAbility(), AttachmentType.AURA);
+        Effect effect = new GainAbilityAttachedEffect(new MarkOfSakikoTriggeredAbility(), AttachmentType.AURA);
         effect.setText("Enchanted creature has \"Whenever this creature deals combat damage to a player, add that much {G}. Until end of turn, you don’t lose this mana as steps and phases end.\"");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
-        
+
     }
 
     public MarkOfSakiko(final MarkOfSakiko card) {
@@ -114,7 +113,7 @@ class MarkOfSakikoTriggeredAbility extends TriggeredAbilityImpl {
                 this.getEffects().clear();
                 Effect effect = new AddManaToManaPoolTargetControllerEffect(Mana.GreenMana(event.getAmount()), "that player", true);
                 effect.setTargetPointer(new FixedTarget(getControllerId()));
-                effect.setText("add that much {G}. Until end of turn, this mana doesn't empty from your mana pool as steps and phases end");        
+                effect.setText("add that much {G}. Until end of turn, you don’t lose this mana as steps and phases end");
                 this.addEffect(effect);
                 return true;
             }

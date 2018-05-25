@@ -33,13 +33,10 @@ import mage.Mana;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.common.TapForManaAllTriggeredManaAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.mana.AddManaToManaPoolTargetControllerEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
-import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
@@ -47,7 +44,6 @@ import mage.abilities.mana.DelayedTriggeredManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -67,10 +63,9 @@ import mage.target.targetpointer.FixedTarget;
 public class ChaosMoon extends CardImpl {
 
     public ChaosMoon(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");
 
-
-        // At the beginning of each upkeep, count the number of permanents. If the number is odd, until end of turn, red creatures get +1/+1 and whenever a player taps a Mountain for mana, that player adds {R} to their mana pool (in addition to the mana the land produces). If the number is even, until end of turn, red creatures get -1/-1 and if a player taps a Mountain for mana, that Mountain produces colorless mana instead of any other type.
+        // At the beginning of each upkeep, count the number of permanents. If the number is odd, until end of turn, red creatures get +1/+1 and whenever a player taps a Mountain for mana, that player adds {R} (in addition to the mana the land produces). If the number is even, until end of turn, red creatures get -1/-1 and if a player taps a Mountain for mana, that Mountain produces colorless mana instead of any other type.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new ChaosMoonEffect(), TargetController.ANY, false));
     }
 
@@ -94,7 +89,7 @@ class ChaosMoonEffect extends OneShotEffect {
 
     public ChaosMoonEffect() {
         super(Outcome.Neutral);
-        this.staticText = "count the number of permanents. If the number is odd, until end of turn, red creatures get +1/+1 and whenever a player taps a Mountain for mana, that player adds {R} to their mana pool (in addition to the mana the land produces). If the number is even, until end of turn, red creatures get -1/-1 and if a player taps a Mountain for mana, that Mountain produces colorless mana instead of any other type";
+        this.staticText = "count the number of permanents. If the number is odd, until end of turn, red creatures get +1/+1 and whenever a player taps a Mountain for mana, that player adds {R} (in addition to the mana the land produces). If the number is even, until end of turn, red creatures get -1/-1 and if a player taps a Mountain for mana, that Mountain produces colorless mana instead of any other type";
     }
 
     public ChaosMoonEffect(final ChaosMoonEffect effect) {
@@ -115,8 +110,7 @@ class ChaosMoonEffect extends OneShotEffect {
             if (permanentsInPlay % 2 != 0) {
                 game.addEffect(new BoostAllEffect(1, 1, Duration.EndOfTurn, filter, false), source);
                 new CreateDelayedTriggeredAbilityEffect(new ChaosMoonOddTriggeredAbility()).apply(game, source);
-            }
-            // Even
+            } // Even
             else {
                 game.addEffect(new BoostAllEffect(-1, -1, Duration.EndOfTurn, filter, false), source);
                 game.addEffect(new ChaosMoonEvenReplacementEffect(), source);
@@ -168,7 +162,7 @@ class ChaosMoonOddTriggeredAbility extends DelayedTriggeredManaAbility {
 
     @Override
     public String getRule() {
-        return "Until end of turn, whenever a player taps a Mountain for mana, that player adds {R} to their mana pool";
+        return "Until end of turn, whenever a player taps a Mountain for mana, that player adds {R}";
     }
 }
 

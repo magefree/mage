@@ -47,7 +47,7 @@ import mage.constants.Zone;
 public class SakuraTribeSpringcaller extends CardImpl {
 
     public SakuraTribeSpringcaller(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
         this.subtype.add(SubType.SNAKE);
         this.subtype.add(SubType.SHAMAN);
 
@@ -56,7 +56,7 @@ public class SakuraTribeSpringcaller extends CardImpl {
 
         // At the beginning of your upkeep, add {G}. Until end of turn, you don’t lose this mana as steps and phases end.
         Effect effect = new AddManaToManaPoolTargetControllerEffect(new Mana(Mana.GreenMana(1)), "your", true);
-        effect.setText("add {G}. Until end of turn, this mana doesn't empty from your mana pool as steps and phases end");        
+        effect.setText("add {G}. Until end of turn, you don’t lose this mana as steps and phases end");
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.YOU, false));
     }
 

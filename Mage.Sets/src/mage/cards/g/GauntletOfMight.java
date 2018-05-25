@@ -63,9 +63,9 @@ public class GauntletOfMight extends CardImpl {
         // Red creatures get +1/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, false)));  
         
-        // Whenever a Mountain is tapped for mana, its controller adds {R} to their mana pool.
+        // Whenever a Mountain is tapped for mana, its controller adds {R}.
         ManaEffect effect = new AddManaToManaPoolTargetControllerEffect(new Mana(ColoredManaSymbol.R), "their");
-        effect.setText("its controller adds {R} to their mana pool");
+        effect.setText("its controller adds {R}");
         this.addAbility(new TapForManaAllTriggeredManaAbility(
                 effect, filterMountain, SetTargetPointer.PLAYER));        
     }

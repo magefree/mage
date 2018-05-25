@@ -54,9 +54,9 @@ import mage.target.common.TargetCardInHand;
 public class Worldpurge extends CardImpl {
 
     public Worldpurge(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{W/U}{W/U}{W/U}{W/U}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{W/U}{W/U}{W/U}{W/U}");
 
-        // Return all permanents to their owners' hands. Each player chooses up to seven cards in their hand, then shuffles the rest into their library. Empty all mana pools.
+        // Return all permanents to their owners’ hands. Each player chooses up to seven cards in their hand, then shuffles the rest into their library. Each player loses all unspent mana.
         this.getSpellAbility().addEffect(new WorldpurgeEffect());
 
     }
@@ -75,7 +75,7 @@ class WorldpurgeEffect extends OneShotEffect {
 
     public WorldpurgeEffect() {
         super(Outcome.Discard);
-        this.staticText = "Return all permanents to their owners' hands. Each player chooses up to seven cards in their hand, then shuffles the rest into their library. Empty all mana pools.";
+        this.staticText = "Return all permanents to their owners’ hands. Each player chooses up to seven cards in their hand, then shuffles the rest into their library. Each player loses all unspent mana";
     }
 
     public WorldpurgeEffect(final WorldpurgeEffect effect) {
@@ -117,7 +117,7 @@ class WorldpurgeEffect extends OneShotEffect {
                 }
             }
             game.emptyManaPools();
-            game.informPlayers(sourceObject.getLogName() + " - All mana pools have been emptied");
+            game.informPlayers(sourceObject.getLogName() + " - All players have lost all unspent mana");
             return true;
         }
         return false;

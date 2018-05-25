@@ -54,7 +54,7 @@ import mage.target.common.TargetArtifactPermanent;
 public class GlissaSunseeker extends CardImpl {
 
     public GlissaSunseeker(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELF);
         this.power = new MageInt(3);
@@ -62,7 +62,7 @@ public class GlissaSunseeker extends CardImpl {
 
         // First strike
         this.addAbility(FirstStrikeAbility.getInstance());
-        
+
         // {tap}: Destroy target artifact if its converted mana cost is equal to the amount of mana in your mana pool.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GlissaSunseekerEffect(), new TapSourceCost());
         ability.addTarget(new TargetArtifactPermanent());
@@ -83,7 +83,7 @@ class GlissaSunseekerEffect extends OneShotEffect {
 
     public GlissaSunseekerEffect() {
         super(Outcome.DestroyPermanent);
-        this.staticText = "Destroy target artifact if its converted mana cost is equal to the amount of mana in your mana pool";
+        this.staticText = "Destroy target artifact if its converted mana cost is equal to the amount of unspent mana you have";
     }
 
     public GlissaSunseekerEffect(final GlissaSunseekerEffect effect) {

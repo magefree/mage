@@ -55,7 +55,7 @@ import mage.target.common.TargetLandPermanent;
 public class ElvishGuidance extends CardImpl {
 
     public ElvishGuidance(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
         this.subtype.add(SubType.AURA);
 
         // Enchant land
@@ -65,7 +65,7 @@ public class ElvishGuidance extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
-        // Whenever enchanted land is tapped for mana, its controller adds {G} to their mana pool for each Elf on the battlefield.
+        // Whenever enchanted land is tapped for mana, its controller adds {G} for each Elf on the battlefield.
         this.addAbility(new ElvishGuidanceTriggeredAbility());
     }
 
@@ -107,6 +107,6 @@ class ElvishGuidanceTriggeredAbility extends TriggeredManaAbility {
 
     @Override
     public String getRule() {
-        return "Whenever enchanted land is tapped for mana, its controller adds {G} to their mana pool for each Elf on the battlefield.";
+        return "Whenever enchanted land is tapped for mana, its controller adds {G} for each Elf on the battlefield.";
     }
 }

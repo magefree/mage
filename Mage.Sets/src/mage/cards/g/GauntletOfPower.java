@@ -73,7 +73,7 @@ public class GauntletOfPower extends CardImpl {
         // Creatures of the chosen color get +1/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GauntletOfPowerEffect1()));
 
-        // Whenever a basic land is tapped for mana of the chosen color, its controller adds one mana of that color to their mana pool.
+        // Whenever a basic land is tapped for mana of the chosen color, its controller adds one mana of that color.
         this.addAbility(new TapForManaAllTriggeredAbility(new GauntletOfPowerEffectEffect2(), filter, SetTargetPointer.PERMANENT));
     }
 
@@ -198,7 +198,7 @@ class GauntletOfPowerEffectEffect2 extends ManaEffect {
 
     public GauntletOfPowerEffectEffect2() {
         super();
-        staticText = "its controller adds one mana of that color to their mana pool";
+        staticText = "its controller adds one mana of that color";
     }
 
     public GauntletOfPowerEffectEffect2(final GauntletOfPowerEffectEffect2 effect) {

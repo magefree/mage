@@ -73,7 +73,7 @@ class DoublingCubeEffect extends ManaEffect {
 
     DoublingCubeEffect() {
         super();
-        staticText = "Double the amount of each type of mana in your mana pool";
+        staticText = "Double the amount of each type of unspent mana you have";
     }
 
     DoublingCubeEffect(final DoublingCubeEffect effect) {

@@ -53,10 +53,9 @@ import mage.target.TargetSpell;
 public class PowerSink extends CardImpl {
 
     public PowerSink(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{X}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{U}");
 
-
-        // Counter target spell unless its controller pays {X}. If he or she doesn't, that player taps all lands with mana abilities he or she controls and empties their mana pool.
+        // Counter target spell unless its controller pays {X}. If that player doesn’t, they tap all lands with mana abilities they control and lose all unspent mana.
         this.getSpellAbility().addEffect(new PowerSinkCounterUnlessPaysEffect());
         this.getSpellAbility().addTarget(new TargetSpell());
     }
@@ -75,7 +74,7 @@ class PowerSinkCounterUnlessPaysEffect extends OneShotEffect {
 
     public PowerSinkCounterUnlessPaysEffect() {
         super(Outcome.Detriment);
-        this.staticText = "Counter target spell unless its controller pays {X}. If he or she doesn't, that player taps all lands with mana abilities he or she controls and empties their mana pool.";
+        this.staticText = "Counter target spell unless its controller pays {X}. If that player doesn’t, they tap all lands with mana abilities they control and lose all unspent mana";
     }
 
     public PowerSinkCounterUnlessPaysEffect(final PowerSinkCounterUnlessPaysEffect effect) {
@@ -98,19 +97,19 @@ class PowerSinkCounterUnlessPaysEffect extends OneShotEffect {
                 int amount = source.getManaCostsToPay().getX();
                 if (amount > 0) {
                     GenericManaCost cost = new GenericManaCost(amount);
-                    StringBuilder sb = new StringBuilder("Pay ").append(cost.getText()).append('?');
-                    if (player.chooseUse(Outcome.Benefit, sb.toString(), source, game)) {
+                    String sb = String.valueOf("Pay " + cost.getText()) + Character.toString('?');
+                    if (player.chooseUse(Outcome.Benefit, sb, source, game)) {
                         if (cost.pay(source, game, source.getSourceId(), player.getId(), false)) {
                             game.informPlayers(new StringBuilder(sourceObject.getName()).append(": additional cost was paid").toString());
                             return true;
                         }
                     }
-                    
+
                     // Counter target spell unless its controller pays {X}
                     if (game.getStack().counter(source.getFirstTarget(), source.getSourceId(), game)) {
                         game.informPlayers(new StringBuilder(sourceObject.getName()).append(": additional cost wasn't paid - countering ").append(spell.getName()).toString());
                     }
-                    
+
                     // that player taps all lands with mana abilities he or she controls...
                     List<Permanent> lands = game.getBattlefield().getAllActivePermanents(new FilterLandPermanent(), player.getId(), game);
                     for (Permanent land : lands) {
@@ -131,5 +130,5 @@ class PowerSinkCounterUnlessPaysEffect extends OneShotEffect {
         }
         return false;
     }
-    
+
 }

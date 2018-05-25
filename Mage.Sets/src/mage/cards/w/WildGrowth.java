@@ -67,7 +67,7 @@ public class WildGrowth extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        // Whenever enchanted land is tapped for mana, its controller adds {G} to their mana pool.
+        // Whenever enchanted land is tapped for mana, its controller adds {G}.
         this.addAbility(new WildGrowthTriggeredAbility());
     }
 
@@ -120,6 +120,6 @@ class WildGrowthTriggeredAbility extends TriggeredManaAbility {
 
     @Override
     public String getRule() {
-        return "Whenever enchanted land is tapped for mana, its controller adds {G} to their mana pool";
+        return "Whenever enchanted land is tapped for mana, its controller adds {G}";
     }
 }
