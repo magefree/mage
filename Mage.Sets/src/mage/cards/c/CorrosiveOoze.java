@@ -182,7 +182,7 @@ class CorrosiveOozeCombatWatcher extends Watcher {
         if (event.getType() == GameEvent.EventType.BLOCKER_DECLARED) {
             Permanent attacker = game.getPermanent(event.getTargetId());
             Permanent blocker = game.getPermanent(event.getSourceId());
-            if (attacker != null && attacker.getName().equals("Corrosive Ooze")) {
+            if (attacker != null && attacker.getName().equals("Corrosive Ooze")) { // To check for name is not working if Ooze is copied but name changed
                 if (blocker != null && hasAttachedEquipment(game, blocker)) {
                     MageObjectReference oozeMor = new MageObjectReference(attacker, game);
                     HashSet<MageObjectReference> relatedCreatures = oozeBlocksOrBlocked.getOrDefault(oozeMor, new HashSet<>());

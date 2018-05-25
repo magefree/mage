@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.cards.m;
 
 import java.util.UUID;
@@ -42,14 +41,16 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class MutagenicGrowth extends CardImpl {
 
-    public MutagenicGrowth (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{G/P}");
+    public MutagenicGrowth(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{G/P}");
 
+        // ({GP} can be paid with either {G} or 2 life.)
+        // Target creature gets +2/+2 until end of turn.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn));
     }
 
-    public MutagenicGrowth (final MutagenicGrowth card) {
+    public MutagenicGrowth(final MutagenicGrowth card) {
         super(card);
     }
 

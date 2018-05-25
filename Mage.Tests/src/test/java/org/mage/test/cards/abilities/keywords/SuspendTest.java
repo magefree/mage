@@ -185,4 +185,44 @@ public class SuspendTest extends CardTestPlayerBase {
         assertHandCount(playerA, "Rift Bolt", 0);
 
     }
+
+    /**
+     * Cards cast from other zones that aren't the hand should not trigger
+     * Knowledge Pool, as it states that only cards cast from the hand should be
+     * exiled afterwards.
+     *
+     * Example: cards coming off suspend shouldn't trigger Knowledge Pool.
+     *
+     */
+    @Test
+    public void testThatNotCastFromHand() {
+
+        // Rift Bolt deals 3 damage to any target.
+        // Suspend 1-{R}
+        addCard(Zone.HAND, playerA, "Rift Bolt", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        addCard(Zone.LIBRARY, playerA, "Silvercoat Lion", 3);
+        // Imprint - When Knowledge Pool enters the battlefield, each player exiles the top three cards of their library
+        // Whenever a player casts a spell from their hand, that player exiles it. If the player does, he or she may cast another nonland card
+        // exiled with Knowledge Pool without paying that card's mana cost.
+        addCard(Zone.HAND, playerB, "Knowledge Pool", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 6);
+        addCard(Zone.LIBRARY, playerB, "Silvercoat Lion", 3);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Suspend");
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Knowledge Pool");
+
+        addTarget(playerA, playerB);
+
+        setStopAt(3, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerB, "Knowledge Pool", 1);
+        assertHandCount(playerA, "Rift Bolt", 0);
+        assertGraveyardCount(playerA, "Rift Bolt", 1);
+        assertLife(playerB, 17);
+        assertPermanentCount(playerA, "Silvercoat Lion", 0);
+
+    }
 }

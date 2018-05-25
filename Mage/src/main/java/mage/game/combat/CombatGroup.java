@@ -29,7 +29,6 @@ package mage.game.combat;
 
 import java.io.Serializable;
 import java.util.*;
-
 import mage.abilities.common.ControllerAssignCombatDamageToBlockersAbility;
 import mage.abilities.common.ControllerDivideCombatDamageAbility;
 import mage.abilities.common.DamageAsThoughNotBlockedAbility;
@@ -178,7 +177,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
             }
             if (attackers.size() != 1) {
                 multiAttackerDamage(first, game);
-            // } else {
+                // } else {
                 // singleAttackerDamage(first, game);
             }
         }
@@ -334,7 +333,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                     defenderDamage(attacker, damage, game);
                 } else if (!blockerOrder.isEmpty()) {
                     // Assign the damage left to first blocker
-                    assigned.put(blockerOrder.get(0), assigned.get(blockerOrder.get(0)) + damage);
+                    assigned.put(blockerOrder.get(0), assigned.get(blockerOrder.get(0)) == null ? 0 : assigned.get(blockerOrder.get(0)) + damage);
                 }
             }
             for (UUID blockerId : blockerOrder) {
@@ -430,7 +429,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         }
     }
 
-    public boolean checkSoleBlockerAfter (Permanent blocker, Game game) {
+    public boolean checkSoleBlockerAfter(Permanent blocker, Game game) {
         // this solves some corner cases (involving banding) when finding out whether a blocker is blocking alone or not
         if (blocker.getBlocking() == 1) {
             if (game.getCombat().blockingGroups.get(blocker.getId()) == null) {
@@ -454,9 +453,9 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
      * {@link #singleBlockerDamage}.
      *
      * Handles abilities like "{this} an block any number of creatures.".
-     * 
-     * Blocker damage for blockers blocking single creatures is handled in 
-     * the single/multi blocker methods, so this shouldn't be used anymore.
+     *
+     * Blocker damage for blockers blocking single creatures is handled in the
+     * single/multi blocker methods, so this shouldn't be used anymore.
      *
      * @param first
      * @param game
@@ -782,7 +781,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
     /**
      * There are effects, that set an attacker to be blocked. Therefore this
      * setter can be used.
-     * 
+     *
      * This method lacks a band check, use setBlocked(blocked, game) instead.
      *
      * @param blocked
@@ -870,8 +869,8 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
     }
 
     /**
-     * Decides damage distribution for blocking creatures with banding or
-     * if defending player controls the Defensive Formation enchantment.
+     * Decides damage distribution for blocking creatures with banding or if
+     * defending player controls the Defensive Formation enchantment.
      *
      * @param game
      */
