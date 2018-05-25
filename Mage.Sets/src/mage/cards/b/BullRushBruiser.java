@@ -25,15 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.a;
+package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.common.TapTargetEffect;
+import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.abilities.keyword.FirstStrikeAbility;
 import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -43,13 +43,12 @@ import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author TheElk801
  */
-public class AuroraChampion extends CardImpl {
+public class BullRushBruiser extends CardImpl {
 
     private static final FilterPermanent filter = new FilterPermanent(SubType.WARRIOR, "another Warrior");
 
@@ -58,30 +57,29 @@ public class AuroraChampion extends CardImpl {
         filter.add(Predicates.not(new ControllerPredicate(TargetController.OPPONENT)));
     }
 
-    public AuroraChampion(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
+    public BullRushBruiser(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
 
-        this.subtype.add(SubType.ELF);
+        this.subtype.add(SubType.MINOTAUR);
         this.subtype.add(SubType.WARRIOR);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(2);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(3);
 
-        // Whenever Aurora Champion attacks, if your team controls another Warrior, tap target creature.
-        Ability ability = new ConditionalTriggeredAbility(
-                new AttacksTriggeredAbility(new TapTargetEffect(), false),
+        // Whenever Bull-Rush Bruiser attacks, if your team controls another Warrior, Bull-Rush Bruiser gains first strike until end of turn.
+        this.addAbility(new ConditionalTriggeredAbility(
+                new AttacksTriggeredAbility(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance()), false),
                 new PermanentsOnTheBattlefieldCondition(filter),
-                "Whenever {this} attacks, if your team controls another Warrior, tap target creature."
-        );
-        ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability);
+                "Whenever {this} attacks, if your team controls another Warrior, "
+                + "{this} gains first strike until end of turn."
+        ));
     }
 
-    public AuroraChampion(final AuroraChampion card) {
+    public BullRushBruiser(final BullRushBruiser card) {
         super(card);
     }
 
     @Override
-    public AuroraChampion copy() {
-        return new AuroraChampion(this);
+    public BullRushBruiser copy() {
+        return new BullRushBruiser(this);
     }
 }
