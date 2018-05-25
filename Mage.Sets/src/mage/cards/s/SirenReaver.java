@@ -40,6 +40,7 @@ import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.watchers.common.PlayerAttackedWatcher;
 
 /**
  *
@@ -59,7 +60,7 @@ public class SirenReaver extends CardImpl {
         Ability ability = new SimpleStaticAbility(Zone.STACK, new SpellCostReductionSourceEffect(1, RaidCondition.instance));
         ability.setAbilityWord(AbilityWord.RAID);
         ability.setRuleAtTheTop(true);
-        this.addAbility(ability);
+        this.addAbility(ability, new PlayerAttackedWatcher());
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
