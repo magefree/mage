@@ -187,6 +187,7 @@ public class Battlebond extends ExpansionSet {
         cards.add(new SetCardInfo("Najeela, the Blade-Blossom", 62, Rarity.MYTHIC, mage.cards.n.NajeelaTheBladeBlossom.class));
         cards.add(new SetCardInfo("Negate", 123, Rarity.COMMON, mage.cards.n.Negate.class));
         cards.add(new SetCardInfo("Night Market Guard", 242, Rarity.COMMON, mage.cards.n.NightMarketGuard.class));
+        cards.add(new SetCardInfo("Nimbus Champion", 37, Rarity.UNCOMMON, mage.cards.n.NimbusChampion.class));
         cards.add(new SetCardInfo("Nimbus of the Isles", 124, Rarity.COMMON, mage.cards.n.NimbusOfTheIsles.class));
         cards.add(new SetCardInfo("Nirkana Revenant", 150, Rarity.MYTHIC, mage.cards.n.NirkanaRevenant.class));
         cards.add(new SetCardInfo("Noosegraf Mob", 151, Rarity.RARE, mage.cards.n.NoosegrafMob.class));
