@@ -50,7 +50,7 @@ import mage.game.events.GameEvent;
 public class KruphixGodOfHorizons extends CardImpl {
 
     public KruphixGodOfHorizons(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT,CardType.CREATURE},"{3}{G}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{3}{G}{U}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.GOD);
 
@@ -86,7 +86,7 @@ class KruphixGodOfHorizonsEffect extends ReplacementEffectImpl {
 
     public KruphixGodOfHorizonsEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "If unused mana would empty from your mana pool, that mana becomes colorless instead";
+        staticText = "If you would lose unspent mana, that mana becomes colorless instead.";
     }
 
     public KruphixGodOfHorizonsEffect(final KruphixGodOfHorizonsEffect effect) {
@@ -108,11 +108,11 @@ class KruphixGodOfHorizonsEffect extends ReplacementEffectImpl {
         return true;
     }
 
-    @Override    
+    @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.EMPTY_MANA_POOL;
     }
-        
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         return event.getPlayerId().equals(source.getControllerId());
