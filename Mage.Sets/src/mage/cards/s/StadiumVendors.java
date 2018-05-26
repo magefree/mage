@@ -25,86 +25,87 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.m;
+package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.SacrificeOpponentsEffect;
-import mage.abilities.effects.common.discard.DiscardHandControllerEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.effects.mana.AddManaToManaPoolTargetControllerEffect;
+import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.choices.ChoiceColor;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.constants.SuperType;
-import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.TargetPlayer;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
- * @author jeffwadsworth
+ * @author TheElk801
  */
-public class Malfegor extends CardImpl {
+public class StadiumVendors extends CardImpl {
 
-    public Malfegor(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}{R}{R}");
+    public StadiumVendors(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
 
-        addSuperType(SuperType.LEGENDARY);
-        this.subtype.add(SubType.DEMON);
-        this.subtype.add(SubType.DRAGON);
-        this.power = new MageInt(6);
-        this.toughness = new MageInt(6);
+        this.subtype.add(SubType.GOBLIN);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
 
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-
-        // When Malfegor enters the battlefield, discard your hand. Each opponent sacrifices a creature for each card discarded this way.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new MalfegorEffect(), false));
-
+        // When Stadium Vendors enters the battlefield, choose a player. That player adds two mana of any one color they choose.
+        Ability ability = new EntersBattlefieldTriggeredAbility(new StadiumVendorsEffect(), false);
+        this.addAbility(ability);
     }
 
-    public Malfegor(final Malfegor card) {
+    public StadiumVendors(final StadiumVendors card) {
         super(card);
     }
 
     @Override
-    public Malfegor copy() {
-        return new Malfegor(this);
+    public StadiumVendors copy() {
+        return new StadiumVendors(this);
     }
 }
 
-class MalfegorEffect extends OneShotEffect {
+class StadiumVendorsEffect extends OneShotEffect {
 
-    public MalfegorEffect() {
-        super(Outcome.Neutral);
-        staticText = "discard your hand. Each opponent sacrifices a creature for each card discarded this way";
+    StadiumVendorsEffect() {
+        super(Outcome.Benefit);
+        this.staticText = "choose a player. That player adds two mana of any one color they choose";
     }
 
-    public MalfegorEffect(final MalfegorEffect effect) {
+    StadiumVendorsEffect(final StadiumVendorsEffect effect) {
         super(effect);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
-            return false;
-        }
-        int sacrificeNumber = controller.getHand().size();
-        if (sacrificeNumber == 0) {
-            return true;
-        }
-        new DiscardHandControllerEffect().apply(game, source);
-        return new SacrificeOpponentsEffect(sacrificeNumber, StaticFilters.FILTER_PERMANENT_CREATURE).apply(game, source);
+    public StadiumVendorsEffect copy() {
+        return new StadiumVendorsEffect(this);
     }
 
     @Override
-    public MalfegorEffect copy() {
-        return new MalfegorEffect(this);
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getSourceId());
+        if (controller == null) {
+            return false;
+        }
+        TargetPlayer target = new TargetPlayer(1, 1, true);
+        if (!controller.choose(Outcome.Benefit, target, source.getSourceId(), game)) {
+            return false;
+        }
+        Player player = game.getPlayer(target.getFirstTarget());
+        ChoiceColor colorChoice = new ChoiceColor(true);
+        if (player == null || !player.choose(Outcome.Benefit, colorChoice, game)) {
+            return false;
+        }
+        Effect effect = new AddManaToManaPoolTargetControllerEffect(colorChoice.getMana(2), "that player's");
+        effect.setTargetPointer(new FixedTarget(player.getId(), game));
+        return effect.apply(game, source);
     }
 }
